@@ -1,0 +1,68 @@
+{
+  "name": "shanta-asset-management",
+  "version": "1.0.0",
+  "description": "A blank template to get started with Payload 3.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
+  },
+  "dependencies": {
+    "@payloadcms/db-mongodb": "3.33.0",
+    "@payloadcms/next": "3.33.0",
+    "@payloadcms/payload-cloud": "3.33.0",
+    "@payloadcms/richtext-lexical": "3.33.0",
+    "@radix-ui/react-label": "^2.1.6",
+    "@radix-ui/react-navigation-menu": "^1.2.12",
+    "@radix-ui/react-select": "^2.2.4",
+    "@radix-ui/react-slot": "^1.2.2",
+    "@radix-ui/react-toggle": "^1.1.8",
+    "@radix-ui/react-toggle-group": "^1.1.9",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cross-env": "^7.0.3",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
+    "graphql": "^16.8.1",
+    "lucide-react": "^0.509.0",
+    "next": "15.3.0",
+    "payload": "3.33.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-icons": "^5.5.0",
+    "sharp": "0.32.6",
+    "swiper": "^11.2.6",
+    "tailwind-merge": "^3.2.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@types/node": "^22.5.4",
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.2",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.16.0",
+    "eslint-config-next": "15.3.0",
+    "install": "^0.13.0",
+    "postcss": "^8.5.3",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": "5.7.3"
+  },
+  "engines": {
+    "node": "^18.20.2 || >=20.9.0",
+    "pnpm": "^9 || ^10"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
+  }
+}
