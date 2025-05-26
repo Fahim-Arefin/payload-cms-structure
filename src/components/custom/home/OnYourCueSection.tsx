@@ -99,7 +99,7 @@ function OnYourCueSection() {
       <div className="flex justify-center mt-6 2xl:mt-12 font-avenir">
         <Button
           variant="primary"
-          className="p-4 lg xl:p-5 2xl:p-6 text-xs xl:text-sm 2xl:text-lg rounded-full"
+          className="p-4 lg xl:p-5 2xl:p-6 text-xs xl:text-sm 2xl:text-lg rounded-lg"
         >
           Let's Find More
         </Button>
