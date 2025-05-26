@@ -206,7 +206,7 @@ function WhyChooseUsSection() {
             <div className="hidden lg:flex justify-center absolute inset-x-0 bottom-0  ">
               <Button
                 variant="primary"
-                className="rounded-full text-white px-6 py-4 lg:h-8 xl:h-10 lg:ml-24 xl:ml-0"
+                className="rounded-lg text-white px-6 py-4 lg:h-8 xl:h-10 lg:ml-24 xl:ml-0"
               >
                 Discover More
               </Button>

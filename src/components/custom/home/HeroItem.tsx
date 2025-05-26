@@ -19,6 +19,7 @@ const HeroItem = ({ slide }: Props) => {
       {/* Background image */}
       <Image src={slide.image} alt={slide.title} fill className="object-cover" priority />
       {/* Overlay */}
+      
       <div className="absolute inset-0 bg-black/25 z-10" />
 
       {/* Content */}
