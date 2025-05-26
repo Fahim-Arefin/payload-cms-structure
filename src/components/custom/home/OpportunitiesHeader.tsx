@@ -23,7 +23,7 @@ function OpportunitiesHeader() {
             Search your career opportunities through available jobs
           </p>
         </div>
-        <Button variant="primary" className="rounded-full p-8 2xl:p-12">
+        <Button variant="primary" className="rounded-lg p-8 2xl:p-12">
           <div className="flex flex-col">
             <div className="font-bold text-xl 2xl:text-3xl tracking-wide">Explore</div>
             <div className="font-light text-xl 2xl:text-2xl tracking-wide">the opportunities</div>

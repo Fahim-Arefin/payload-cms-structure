@@ -37,7 +37,7 @@ function VideoSection() {
               <Button
                 variant="primary"
                 className="px-4 md:px-6 py-1 md:py-2 2xl:px-10 2xl:py-6 w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-xl
-                rounded-full"
+                rounded-lg"
               >
                 Level up Now
               </Button>

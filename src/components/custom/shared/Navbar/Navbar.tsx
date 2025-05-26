@@ -591,7 +591,7 @@ function Navbar({ className }: Props) {
       }}
     >
       {/* Background Image Layer */}
-      <div className="absolute inset-0 bg-[url('/assets/navbarimg.jpg')] bg-cover bg-center opacity-75 z-0 lg:rounded-[82px]" />
+      <div className="absolute inset-0 bg-white shadow-custom-black bg-cover bg-center opacity-75 z-0 lg:rounded-[82px]" />
 
       {/* lOGO */}
       <div className="z-10 w-[80px] h-[70px] md:w-[100px] md:h-[80px] 2xl:w-[150px] 2xl:h-[100px] flex items-center justify-center">
