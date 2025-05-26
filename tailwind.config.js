@@ -61,6 +61,9 @@ export default {
           5: 'hsl(var(--chart-5))',
         },
       },
+      boxShadow: {
+        'custom-black': '0px 0px 10px 0px #00000082',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
