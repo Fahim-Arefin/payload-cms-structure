@@ -97,7 +97,7 @@
     @apply my-[200px];
   }
   .shantaLifeIntroSection-h1 {
-    @apply text-[16px] md:text-[24px] lg:text-[32px] xl:text-[45px] 2xl:text-[56px];
+    @apply text-[20px] md:text-[24px] lg:text-[32px] xl:text-[45px] 2xl:text-[56px];
   }
 }
 
