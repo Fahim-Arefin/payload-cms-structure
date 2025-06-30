@@ -1,8 +1,11 @@
+import { AllAboutCardDataType } from '@/types'
 import AllAboutCardList from './AllAboutCardList'
 
-type Props = {}
+type Props = {
+  allAboutData: AllAboutCardDataType[]
+}
 
-function AllAboutSection({}: Props) {
+function AllAboutSection({ allAboutData }: Props) {
   return (
     <div className="margin-bottom lg:px-2 relative">
       <div>
@@ -37,11 +40,11 @@ function AllAboutSection({}: Props) {
         {/* right-side */}
         <div
           className="absolute z-50
-        top-[70%] md:top-[62%] lg:top-[22%] xl:top-[23%] 2xl:top-1/4 
+        top-[60%] md:top-[61%] lg:top-[22%] xl:top-[23%] 2xl:top-1/4 
         left-[2%] md:left-[5%] lg:left-[200px] xl:left-[220px] 2xl:left-[400px] 
         w-[95%] md:w-[90%] lg:w-[800px] xl:w-[1200px] 2xl:w-[1500px]"
         >
-          <AllAboutCardList />
+          <AllAboutCardList allAboutData={allAboutData} />
         </div>
       </div>
     </div>

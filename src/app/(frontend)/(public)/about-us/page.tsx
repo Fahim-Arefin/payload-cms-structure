@@ -1,4 +1,6 @@
 import AllAboutSection from '@/components/custom/about-us/AllAboutSection'
+import DirectorCard from '@/components/custom/about-us/DirectorCard'
+import LiscensedInfo from '@/components/custom/about-us/LiscensedInfo'
 import ShantaLifeIntroSection from '@/components/custom/about-us/ShantaLifeIntroSection'
 import VisionMissionSection from '@/components/custom/about-us/VisionMissionSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
@@ -43,12 +45,73 @@ function page() {
       'To promote the desired quality of life through innovation, digitalization and customer centricity.',
   }
 
+  const allAboutData = [
+    {
+      image: '/assets/allAboutIcon1.png',
+      title: 'Trust',
+      description:
+        'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
+    },
+    {
+      image: '/assets/allAboutIcon3.png',
+      title: 'Simplicity',
+      description:
+        'With easy-to-understand plans and hassle-free service, we empower our customers to make confident decisions about their future.',
+    },
+    {
+      image: '/assets/allAboutIcon2.png',
+      title: 'Ownership',
+      description:
+        'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
+    },
+    {
+      image: '/assets/allAboutIcon1.png',
+      title: 'Trust',
+      description:
+        'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
+    },
+    {
+      image: '/assets/allAboutIcon3.png',
+      title: 'Simplicity',
+      description:
+        'With easy-to-understand plans and hassle-free service, we empower our customers to make confident decisions about their future.',
+    },
+    {
+      image: '/assets/allAboutIcon2.png',
+      title: 'Ownership',
+      description:
+        'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
+    },
+  ]
+  const directorCardData = [
+    {
+      image: '/assets/director2.png',
+      title: 'FUELING ',
+      subtitle: 'THE NEXT CHAPTER',
+      description:
+        'At Shanta, we proudly uphold a legacy of integrity, innovation, and excellence. As we embark on our journey in the insurance sector, we remain focused on our goal to offer unmatched life insurance solutions that ensure peace of mind and long-term financial security for our customers. Our determination to establish trust will remain unshakeable, and so will our commitment to setting a new standard in the quality of life insurance services provided. The initiative of enhancing financial literacy among individuals and boosting confidence in them with services that bring stability is the cornerstone that carries the name of our organization, not only over the financial future of our customers but also over our community as a whole. At Shanta Life, we will continue our four-decade-long legacy of excellence and commitment with utmost sincerity, and I welcome you to explore planning your familys financial security with our trusted team.',
+      link: '/',
+    },
+    {
+      image: '/assets/director1.png',
+      title: 'Leading  ',
+      subtitle: 'Redefinition',
+      description:
+        'At Shanta Life, we envision a future where financial security and peace of mind are accessible to everyone. Our mission is to promote the desired quality of life through customer-centric solutions, cutting-edge digitalization, and a steadfast adherence to corporate good governance. Every product we design, every service we deliver, and every interaction we have is guided by our core values of trust, simplicity, ownership, transparency and customer centricity. At the heart of Shanta Life is a passionate and dedicated team who believe that insurance is not just about securing lives—it’s about enabling you to take control of your life. As we continue our journey, we remain committed to forging lasting relationships with our clients, partners, and communities. Together, let’s build a legacy of trust and ignite the power of possibilities for a brighter tomorrow.',
+      link: '/',
+    },
+  ]
+
   return (
     <div className="font-avenir">
       <HeroSection heroSlides={heroSlides} />
       <ShantaLifeIntroSection shantaIntroContent={shantaIntroContent} />
       <VisionMissionSection vissionMissionContent={vissionMissionContent} />
-      <AllAboutSection />
+      <AllAboutSection allAboutData={allAboutData} />
+      <LiscensedInfo />
+      {directorCardData?.map((data, index) => {
+        return <DirectorCard data={data} index={index} key={index} />
+      })}
     </div>
   )
 }

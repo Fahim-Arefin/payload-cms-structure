@@ -16,3 +16,17 @@ export type VissionMissionContentType = {
   visionDescription: string
   missionDescription: string
 }
+
+export type AllAboutCardDataType = {
+  image: string
+  title: string
+  description: string
+}
+
+export type DirectorCardDataType = {
+  image: string
+  title: string
+  subtitle: string
+  description: string
+  link: string
+}

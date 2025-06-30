@@ -8,10 +8,13 @@ import {
 } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import AllAboutCard from './AllAboutCard'
+import { AllAboutCardDataType } from '@/types'
 
-type Props = {}
+type Props = {
+  allAboutData: AllAboutCardDataType[]
+}
 
-function AllAboutCardList({}: Props) {
+function AllAboutCardList({ allAboutData }: Props) {
   return (
     <Carousel
       className="w-full"
@@ -26,15 +29,15 @@ function AllAboutCardList({}: Props) {
     >
       {/* Carousel Content */}
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {allAboutData?.map((data, index) => (
           <CarouselItem key={index} className="basis-1/3">
-            <AllAboutCard />
+            <AllAboutCard data={data} index={index} />
           </CarouselItem>
         ))}
       </CarouselContent>
       {/* Carousel Navigation */}
       <div
-        className="hidden lg:flex z-40 gap-3 absolute 
+        className="hidden lg:flex gap-3 absolute 
       lg:-bottom-[60px] xl:-bottom-20  2xl:-bottom-24 
       lg:left-[210px] xl:left-[360px] 2xl:left-[310px]"
       >
