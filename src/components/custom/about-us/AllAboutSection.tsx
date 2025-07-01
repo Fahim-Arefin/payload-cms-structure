@@ -7,7 +7,7 @@ type Props = {
 
 function AllAboutSection({ allAboutData }: Props) {
   return (
-    <div className="margin-bottom lg:px-2 relative">
+    <div className="margin-bottom lg:px-2 relative lg:overflow-hidden">
       <div>
         {/* left side */}
         <div className="lg:flex lg:gap-12 xl:gap-20 2xl:gap-x-24">
@@ -39,7 +39,7 @@ function AllAboutSection({ allAboutData }: Props) {
         </div>
         {/* right-side */}
         <div
-          className="absolute z-50
+          className="absolute z-50 
         top-[60%] md:top-[61%] lg:top-[22%] xl:top-[23%] 2xl:top-1/4 
         left-[2%] md:left-[5%] lg:left-[200px] xl:left-[220px] 2xl:left-[400px] 
         w-[95%] md:w-[90%] lg:w-[800px] xl:w-[1200px] 2xl:w-[1500px]"
