@@ -70,7 +70,7 @@ function VisionMissionSection({ vissionMissionContent }: Props) {
         px-6 md:px-10 lg:px-[100px] 2xl:px-[200px]
         py-12 md:py-24 lg:py-[100px] 2xl:py-[200px]
         flex items-center text-white
-        h-[150px] md:h-[250px] xl:h-[400px] 2xl:h-[600px]
+        h-[150px] md:h-[250px] lg:h-[350px] xl:h-[400px] 2xl:h-[600px]
       "
       style={{
         backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/assets/vision.png')`,

@@ -1,5 +1,7 @@
 import AllAboutSection from '@/components/custom/about-us/AllAboutSection'
+import AllOfThemSection from '@/components/custom/about-us/AllOfThemSection'
 import DirectorCard from '@/components/custom/about-us/DirectorCard'
+import DirectorListSection from '@/components/custom/about-us/DirectorListSection'
 import LiscensedInfo from '@/components/custom/about-us/LiscensedInfo'
 import ShantaLifeIntroSection from '@/components/custom/about-us/ShantaLifeIntroSection'
 import VisionMissionSection from '@/components/custom/about-us/VisionMissionSection'
@@ -102,6 +104,72 @@ function page() {
     },
   ]
 
+  const directorProfileData = [
+    {
+      image: '/assets/profile1.png',
+      name: 'Khondoker Monir Uddin',
+      title: 'Chairman',
+    },
+    {
+      image: '/assets/profile2.png',
+      name: 'Jasmine Sultana',
+      title: 'Director',
+    },
+    {
+      image: '/assets/profile3.png',
+      name: 'Saif Khondoker',
+      title: 'Director',
+    },
+    {
+      image: '/assets/profile4.png',
+      name: 'Mayesha Khondoker',
+      title: 'Chairman',
+    },
+    {
+      image: '/assets/profile5.png',
+      name: 'Farzana Hasan',
+      title: 'Director',
+    },
+    {
+      image: '/assets/profile6.png',
+      name: 'Raiven Hasan',
+      title: 'Chairman',
+    },
+  ]
+
+  const allOfThemData = [
+    {
+      image: '/assets/allOfThem1.png',
+      name: 'Nasif A Ahmed',
+      title: 'Chief Executive Officer',
+    },
+    {
+      image: '/assets/allOfThem2.png',
+      name: 'M Khurshed Kaisar',
+      title: 'Chief Distribution Officer',
+    },
+    {
+      image: '/assets/allOfThem3.png',
+      name: 'Mohammad Maksud Hossain',
+      title: 'Chief IT Officer',
+    },
+    {
+      image: '/assets/allOfThem1.png',
+      name: 'Nasif A Ahmed',
+      title: 'Chief Executive Officer',
+    },
+    {
+      image: '/assets/allOfThem2.png',
+      name: 'M Khurshed Kaisar',
+      title: 'Chief Distribution Officer',
+    },
+    {
+      image: '/assets/allOfThem3.png',
+      name: 'Mohammad Maksud Hossain',
+      title: 'Chief IT Officer',
+    },
+  ]
+
   return (
     <div className="font-avenir">
       <HeroSection heroSlides={heroSlides} />
@@ -112,6 +180,8 @@ function page() {
       {directorCardData?.map((data, index) => {
         return <DirectorCard data={data} index={index} key={index} />
       })}
+      <DirectorListSection directorProfileData={directorProfileData} />
+      <AllOfThemSection allOfThemData={allOfThemData} />
     </div>
   )
 }

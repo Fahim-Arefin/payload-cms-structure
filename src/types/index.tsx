@@ -30,3 +30,13 @@ export type DirectorCardDataType = {
   description: string
   link: string
 }
+export type DirectorProfileDataType = {
+  image: string
+  name: string
+  title: string
+}
+export type AllOfThemDataType = {
+  image: string
+  name: string
+  title: string
+}
