@@ -10,13 +10,13 @@ function DirectorProfile({ data }: Props) {
   return (
     <div
       className="
-    2xl:px-12 2xl:py-6 "
+     2xl:px-12 2xl:py-6 "
     >
       {/* prfile card */}
       <div
         className="relative mx-auto
-      w-[220px] xl:w-[240px] 2xl:w32280px] 
-      h-[220px] xl:h-[240px] 2xl:h32280px] "
+      w-[220px] xl:w-[240px] 2xl:w-[280px] 
+      h-[220px] xl:h-[240px] 2xl:h-[280px] "
       >
         {/* Inner Circle with Image and Beige Background */}
         {/* <div className="relative w-full h-full rounded-full bg-[#D3C59D] overflow-hidden z-10">
