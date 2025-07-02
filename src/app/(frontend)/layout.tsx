@@ -18,7 +18,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en">
       <body>
         <main className="bg-[#F6EDDD] min-h-screen">
-          <TopHeader className="fixed top-0 left-0 right-0 z-50 hidden lg:flex" />
+          <TopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" />
           {/* <Navbar className="absolute top-0 lg:top-[80px] 2xl:top-[115px] left-0 right-0 z-50 " /> */}
           {/* <Navbar className="top-[0px] lg:top-[80px] 2xl:top-[115px] left-0 right-0 z-50" /> */}
           <Navbar className="" />
