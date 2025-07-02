@@ -111,6 +111,13 @@
   .shantaLifeIntroSection-p {
     @apply text-[10px] md:text-sm lg:text-lg 2xl:text-[26px];
   }
+  .container-padding {
+    @apply px-4 py-12 
+           md:p-24 
+           lg:py-[110px] lg:px-[130px]  
+           xl:py-[100px] xl:px-[200px] 
+           2xl:py-[150px] 2xl:px-[300px];
+  }
 }
 
 @layer components {

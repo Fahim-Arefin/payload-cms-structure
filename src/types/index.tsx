@@ -40,3 +40,9 @@ export type AllOfThemDataType = {
   name: string
   title: string
 }
+
+export type FootPrintDataType = {
+  image: string
+  title: string
+  description: string
+}

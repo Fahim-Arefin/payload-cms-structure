@@ -16,10 +16,7 @@ type Props = {
 function AllOfThemSection({ allOfThemData }: Props) {
   return (
     <div className="bg-[#F6EDDD] pb-12 lg:pb-0">
-      <div
-        className="
-px-4 py-12 md:p-24 lg:p-30 xl:p-40 2xl:p-[200px]"
-      >
+      <div className="container-padding">
         {/* top section */}
         <div className="lg:w-[50%] space-y-6 2xl:space-y-12 ">
           <h2 className="shantaLifeIntroSection-h2 font-semibold text-[#4A4A4A] text-center lg:text-start">

@@ -1,7 +1,9 @@
 import AllAboutSection from '@/components/custom/about-us/AllAboutSection'
 import AllOfThemSection from '@/components/custom/about-us/AllOfThemSection'
+import AwardSection from '@/components/custom/about-us/AwardSection'
 import DirectorCard from '@/components/custom/about-us/DirectorCard'
 import DirectorListSection from '@/components/custom/about-us/DirectorListSection'
+import FootPrintSection from '@/components/custom/about-us/FootPrintSection'
 import LiscensedInfo from '@/components/custom/about-us/LiscensedInfo'
 import ShantaLifeIntroSection from '@/components/custom/about-us/ShantaLifeIntroSection'
 import VisionMissionSection from '@/components/custom/about-us/VisionMissionSection'
@@ -170,6 +172,69 @@ function page() {
     },
   ]
 
+  const footPrintData = [
+    {
+      image: '/assets/footprint1.jpg',
+      title: 'Shanta Holdings',
+      description:
+        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+    },
+    {
+      image: '/assets/footprint2.jpg',
+      title: 'Shanta Holdings',
+      description:
+        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+    },
+    {
+      image: '/assets/footprint3.png',
+      title: 'Shanta Holdings',
+      description:
+        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+    },
+    {
+      image: '/assets/footprint4.jpg',
+      title: 'Shanta Holdings',
+      description:
+        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+    },
+    {
+      image: '/assets/footprint5.jpg',
+      title: 'Shanta Holdings',
+      description:
+        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+    },
+    {
+      image: '/assets/footprint1.jpg',
+      title: 'Shanta Holdings',
+      description:
+        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+    },
+    {
+      image: '/assets/footprint2.jpg',
+      title: 'Shanta Holdings',
+      description:
+        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+    },
+    {
+      image: '/assets/footprint3.png',
+      title: 'Shanta Holdings',
+      description:
+        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+    },
+    {
+      image: '/assets/footprint4.jpg',
+      title: 'Shanta Holdings',
+      description:
+        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+    },
+    {
+      image: '/assets/footprint5.jpg',
+      title: 'Shanta Holdings',
+      description:
+        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+    },
+  ]
+
   return (
     <div className="font-avenir">
       <HeroSection heroSlides={heroSlides} />
@@ -182,6 +247,8 @@ function page() {
       })}
       <DirectorListSection directorProfileData={directorProfileData} />
       <AllOfThemSection allOfThemData={allOfThemData} />
+      <AwardSection />
+      <FootPrintSection footPrintData={footPrintData} />
     </div>
   )
 }
