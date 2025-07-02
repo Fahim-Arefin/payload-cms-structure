@@ -8,8 +8,8 @@ function LiscensedInfo({}: Props) {
       <div
         className="flex justify-evenly md:justify-between items-center mx-auto text-white 
       font-light md:font-medium lg:font-bold
-      h-[60px] lg:h-[100px]  
-      w-[95%] md:w-[80%]"
+      h-[50px] lg:h-[80px] xl:h-[90px] 2xl:h-[100px]  
+      w-[98%] md:w-[80%]"
       >
         <div className="flex items-center space-x-1 md:space-x-4">
           <div>
@@ -46,7 +46,7 @@ function LiscensedInfo({}: Props) {
               />
             </svg>
           </div>
-          <div className="uppercase text-[10px] md:text-[12px] lg:text-[16px] 2xl:text-[22px]">
+          <div className="uppercase global-h4">
             <span className="">Licensed : </span> <span> November 7, 2023</span>
           </div>
         </div>
@@ -137,7 +137,7 @@ function LiscensedInfo({}: Props) {
               />
             </svg>
           </div>
-          <div className="uppercase text-[10px] md:text-[12px] lg:text-[16px] 2xl:text-[22px]">
+          <div className="uppercase global-h4">
             <span className="">Launched : </span> <span> December 1st, 2024</span>
           </div>
         </div>

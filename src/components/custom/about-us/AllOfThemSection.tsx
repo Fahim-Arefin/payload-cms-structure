@@ -19,10 +19,10 @@ function AllOfThemSection({ allOfThemData }: Props) {
       <div className="container-padding">
         {/* top section */}
         <div className="lg:w-[50%] space-y-6 2xl:space-y-12 ">
-          <h2 className="shantaLifeIntroSection-h2 font-semibold text-[#4A4A4A] text-center lg:text-start">
+          <h2 className="global-h3 font-semibold text-[#4A4A4A] text-center lg:text-start">
             AT THE HELM
           </h2>
-          <p className="shantaLifeIntroSection-p text-[#4A4A4A] text-center lg:text-justify ">
+          <p className="global-p1 text-[#4A4A4A] text-center lg:text-justify ">
             Guided by Visionaries, Driven by Purpose. Meet Our Leadership Team, creating a new
             future of Life Insurance in Bangladesh
           </p>

@@ -14,25 +14,22 @@ type Props = {
 
 function DirectorListSection({ directorProfileData }: Props) {
   return (
-    <div className="bg-white  pb-12 lg:pb-0">
-      <div
-        className="
-    px-4 py-12 md:p-24 lg:p-30 xl:p-40 2xl:p-[200px]"
-      >
+    <div className="bg-white pb-12 lg:pb-0">
+      <div className="container-padding">
         {/* top section */}
         <div className="lg:w-[50%] space-y-6 2xl:space-y-12 ">
           <div
-            className="shantaLifeIntroSection-h1 font-semibold text-[#4A4A4A] 
+            className="global-h1 font-semibold text-[#4A4A4A] 
           flex space-x-2 justify-center lg:block lg:space-x-0 lg:justify-start"
           >
             <h1>The Power of One</h1>
             <h1 className="text-[#ED7125]">Connected Vision</h1>
           </div>
-          <p className="shantaLifeIntroSection-p text-[#4A4A4A] text-center lg:text-justify ">
+          <p className="global-p1 text-[#4A4A4A] text-center lg:text-justify">
             Shaping tomorrow, today. Our board is all about steering Shanta Life into the future.
             Lets get to know them.
           </p>
-          <h2 className="hidden lg:block shantaLifeIntroSection-h2 font-semibold text-[#4A4A4A] text-center lg:text-start">
+          <h2 className="hidden lg:block global-h3 font-semibold text-[#4A4A4A] text-center lg:text-start">
             Board of directors
           </h2>
         </div>

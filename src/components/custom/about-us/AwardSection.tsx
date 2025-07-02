@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 
 function AwardSection() {
   return (
-    <div className="bg-white py-12 md:py-24 lg:py-[100px]">
+    <div className="bg-white py-12 md:py-24 lg:py-[110px] 2xl:py-[150px]">
       <div className="relative">
         {/* linear linear-gradient */}
         <div className="md:hidden absolute top-[135px] w-full h-[4px]">
@@ -122,10 +122,10 @@ function AwardSection() {
               "
               >
                 <div>
-                  <h1 className="shantaLifeIntroSection-h1 font-bold">Grand Launch Announcement</h1>
-                  <h5 className="shantaLifeIntroSection-h5 font-light">December 1, 2024</h5>
+                  <h1 className="global-h2 font-bold">Grand Launch Announcement</h1>
+                  <h5 className="global-h4 font-light">December 1, 2024</h5>
                 </div>
-                <p className="shantaLifeIntroSection-h5 font-light">
+                <p className="global-p2 font-light">
                   The ceremony was graced by key leaders including CEO Nafis A. Ahmed and directors
                   Saif Khondoker, Arif Khan, Raiven Hasan, Anisul Haque, along with other senior
                   officials

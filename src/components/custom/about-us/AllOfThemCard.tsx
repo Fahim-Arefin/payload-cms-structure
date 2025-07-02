@@ -87,12 +87,8 @@ function AllOfThemCard({ data }: Props) {
 
       {/* Name & Title */}
       <div className="mt-6 text-center">
-        <p className="text-[#434342] font-light lg:font-medium shantaLifeIntroSection-h3">
-          {data?.name}
-        </p>
-        <p className="text-[#9C8639] font-light lg:font-medium shantaLifeIntroSection-h5">
-          {data?.title}
-        </p>
+        <p className="text-[#434342] font-light lg:font-medium global-h4">{data?.name}</p>
+        <p className="text-[#9C8639] font-light lg:font-medium global-h4">{data?.title}</p>
       </div>
     </div>
   )

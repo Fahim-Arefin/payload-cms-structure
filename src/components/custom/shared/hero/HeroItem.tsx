@@ -21,7 +21,7 @@ const HeroItem = ({ slide }: Props) => {
       {/* Content */}
       <div
         className="absolute
-       top-[130px] md:top-[170px] lg:top-[40%] inset-x-0 lg:left-[120px] 2xl:left-[230px] lg:right-auto 
+       top-[130px] md:top-[170px] lg:top-[40%] inset-x-0 lg:left-[120px] xl:left-[200px] 2xl:left-[270px] lg:right-auto 
        space-y-4 md:space-y-6 lg:space-y-16 2xl:space-y-20
        z-20
        lg:w-[920px] xl:w-[1205px] 2xl:w-[1405px] 
@@ -29,7 +29,7 @@ const HeroItem = ({ slide }: Props) => {
       >
         {/* Title & subtitle */}
         <div
-          className="text-left 
+          className="text-left
         hero-content-width
         tracking-[3%] lg:tracking-[0%] 
         font-bold text-white
@@ -42,25 +42,6 @@ const HeroItem = ({ slide }: Props) => {
         {/* description */}
         {slide?.description && (
           <>
-            {/* <div
-              //   className="bg-gradient-to-r from-[rgba(2,2,2,0.5)] to-[rgba(2,2,2,0.5)] lg:to-[rgba(115,115,115,0)]
-              // border-l-[2px] lg:border-l-[4px] 2xl:border-l-[6px] border-[#9C8639]
-              // w-[70%] md:w-[60%] lg:w-[80%] 2xl:w-[933px] mx-auto lg:mx-0
-              // p-2 md:p-3 lg:p-4 2xl:p-5 2xl:font-semibold
-              // text-[10px] md:text-[16px] lg:text-[20px] 2xl:text-3xl"
-              className="
-          hero-description-bg-sm 
-          font-[350]
-          w-[70%] md:w-[60%] lg:w-[100%] mx-auto lg:mx-0
-          p-2 md:p-3 lg:p-4 
-          hero-h5"
-            >
-              <div className="text-white">
-                {slide?.description?.split('. ')?.map((line, i) => <h5 key={i}>{line.trim()}</h5>)}
-              </div>
-            </div> */}
-
-            {/* description style til lg screen */}
             <div
               className="
               block lg:hidden

@@ -33,7 +33,7 @@ function AllAboutSection({ allAboutData }: Props) {
             </h1>
           </div>
           {/* heading */}
-          <h1 className="shantaLifeIntroSection-h1 uppercase hidden lg:block mt-6">
+          <h1 className="global-h1 font-semibold text-[#434342] uppercase hidden lg:block mt-6">
             WE Are All <span className="text-[#ED7125]">About</span>
           </h1>
         </div>

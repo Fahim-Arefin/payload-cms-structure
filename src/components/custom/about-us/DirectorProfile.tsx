@@ -51,12 +51,8 @@ function DirectorProfile({ data }: Props) {
         />
       </div>
       <div className="mt-6">
-        <p className="shantaLifeIntroSection-h3 text-[#434342] font-medium text-center">
-          {data?.name}
-        </p>
-        <p className="shantaLifeIntroSection-h5 text-[#9C8639] font-medium text-center">
-          {data?.title}
-        </p>
+        <p className="global-h4 text-[#434342] font-medium text-center">{data?.name}</p>
+        <p className="global-h4 text-[#9C8639] font-medium text-center">{data?.title}</p>
       </div>
     </div>
   )
