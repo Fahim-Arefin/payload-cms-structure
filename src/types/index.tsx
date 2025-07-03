@@ -46,3 +46,4 @@ export type FootPrintDataType = {
   title: string
   description: string
 }
+
