@@ -98,7 +98,7 @@ function VisionMissionSection({ vissionMissionContent }: Props) {
             Our <span className="text-[#ED7125]">Mission</span>
           </h1>
           <p
-            className="global-p2 max-w-[550px]
+            className="global-p1 max-w-[550px]
           font-light text-justify"
           >
             {vissionMissionContent?.missionDescription}

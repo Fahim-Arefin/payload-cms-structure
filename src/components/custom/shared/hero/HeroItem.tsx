@@ -32,8 +32,8 @@ const HeroItem = ({ slide }: Props) => {
           className="text-left
         hero-content-width
         tracking-[3%] lg:tracking-[0%] 
-        font-bold text-white
-        hero-h1"
+        font-semibold text-white
+        hero-h1 uppercase"
         >
           <h1>{slide.title ? slide.title : ''}</h1>
           <h1 className="lg:mt-2">{slide.subtitle ? slide.subtitle : ''}</h1>
