@@ -1,0 +1,62 @@
+import { Button } from '@/components/ui/button'
+import { AllPlantDataType } from '@/types'
+import { ArrowUpRight } from 'lucide-react'
+import Link from 'next/link'
+
+type Props = {
+  data: AllPlantDataType
+  blur?: boolean
+}
+
+function AllPlanCard({ data, blur }: Props) {
+  return (
+    <div
+      className="group relative overflow-hidden w-full   
+    h-[330px] md:h-[280px] xl:h-[330px] 2xl:h-[370px] 
+    rounded-[12.5px] cursor-pointer"
+    >
+      {/* Background image only */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 scale-100 group-hover:scale-105"
+        style={{
+          backgroundImage: `url('${data?.image}')`,
+          backgroundColor: 'lightgray',
+        }}
+      />
+
+      {/* Gradient overlay with hover effect */}
+      <div className="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition-all duration-300 z-10" />
+
+      {/* Content */}
+      <div
+        className="relative z-20 text-white
+      flex flex-col justify-between h-full
+       px-8 py-12  md:px-5 md:py-8 lg:px-4 lg:py-8 xl:px-6 xl:py-10"
+      >
+        <div className="h-[50%] flex items-end md:items-start">
+          <h3 className="global-h3 font-semibold">{data?.title}</h3>
+        </div>
+        <div
+          className={`${blur && 'md:bg-black/20 md:backdrop-blur-[16.666666px] md:p-4 md:rounded-md'} 
+        h-[50%] flex flex-col justify-evenly`}
+        >
+          <p className="global-p2 truncate lg:whitespace-normal lg:overflow-visible lg:text-clip">
+            {data?.description}
+          </p>
+          <Button
+            variant="link"
+            className="text-[#ED7125] hover:underline w-fit 
+           text-[16px] md:text-[12px] xl:text-[14px] 2xl:text-[16px] p-0"
+          >
+            <Link href={data?.link} className="flex space-x-1 items-center">
+              <span>Explore</span>
+              <ArrowUpRight />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default AllPlanCard
