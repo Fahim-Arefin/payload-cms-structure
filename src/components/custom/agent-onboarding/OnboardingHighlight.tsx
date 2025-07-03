@@ -1,4 +1,16 @@
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  useCarousel,
+} from '@/components/ui/carousel'
+import { ArrowRight } from 'lucide-react'
 import React from 'react'
+import { CarouselNextButton } from '../shared/CarouselNextButton'
 
 type Props = {
   highlightSlides: {
@@ -10,81 +22,55 @@ type Props = {
   }
 }
 
-const OnboardingHighlight = (highlightSlides: Props) => {
+const OnboardingHighlight = ({ highlightSlides }: Props) => {
   return (
-    <div className="">
-      <div className="px-5 py-12 lg:px-[130px]  lg:py-[110px] 2xl:px-[300px] 2xl:py-[150px]  ">
-        <p className="global-h3 text-gray-800  text-center">
-          {highlightSlides.highlightSlides.mainDescription}
-        </p>
+    <div className=" bg-[#F6EDDD]">
+      {/* Half-white background */}
+
+      <div className="relative z-10 px-5 py-12 lg:px-[130px] lg:py-[110px] 2xl:px-[300px] 2xl:py-[150px]">
+        <p className="global-h3 text-gray-800 text-center">{highlightSlides?.mainDescription}</p>
       </div>
 
-      {/* White section with icons */}
-      <div className=" bg-white px-5 lg:px-[130px]  2xl:px-[300px] py-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-center">
-          {/* Card 1 */}
-          <div className="flex flex-col gap-4 items-center">
-            <div className=" w-[256px] h-[326px]">
+      <div className="block xl:hidden px-5 lg:px-[130px]">
+        <Carousel className="w-full">
+          <CarouselContent>
+            {highlightSlides.images.map((item, idx) => (
+              <CarouselItem
+                key={idx}
+                className="w-[170px] basis-1/2 md:basis-1/3  "
+              >
+                <div className="h-[260px] rounded-lg shadow-md">
+                  <img
+                    src={item?.src}
+                    alt={`highlight-${idx}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="w-full text-center global-p1">{item?.title}</div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselNextButton />
+        </Carousel>
+      </div>
+      {/* Cards Section */}
+      <div className="px-5 lg:px-[130px] 2xl:px-[300px] xl:mt-28 bg-white">
+        <div className="hidden xl:grid lg:grid-cols-4 gap-4 text-center">
+          {highlightSlides.images.map((item, idx) => (
+            <div
+              key={idx}
+              className="relative xl:-top-44 w-[256px] h-[326px] mx-auto rounded-lg overflow-hidden shadow-md"
+            >
               <img
-                src="/assets/onboarding1.png"
-                alt="Earning Potential"
-                className="w-full h-auto object-cover"
+                src={item?.src}
+                alt={`highlight-${idx}`}
+                className="w-full h-full object-cover"
               />
+              <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-30 text-white text-sm p-3 leading-snug">
+                {item?.title}
+              </div>
             </div>
-            <p className=" text-gray-700">
-              Attractive Earning Potential
-              <br />
-              Based on Performance
-            </p>
-          </div>
-
-          {/* Card 2 */}
-          <div className="flex flex-col items-center">
-            <div className=" w-[256px] h-[326px]">
-              <img
-                src="/assets/onboarding2.png"
-                alt="Learning"
-                className="w-full h-auto object-cover rounded"
-              />
-            </div>
-            <p className="mt-4 text-sm text-gray-700">
-              Learning from the top-tier
-              <br />
-              Industry insider in BD
-            </p>
-          </div>
-
-          {/* Card 3 */}
-          <div className="flex flex-col items-center">
-            <div className=" w-[256px] h-[326px]">
-              <img
-                src="/assets/onboarding3.png"
-                alt="Applicable"
-                className="w-full h-auto object-cover rounded"
-              />
-            </div>
-            <p className="mt-4 text-sm text-gray-700">
-              Applicable for professionals,
-              <br />
-              Freshers & Undergraduates
-            </p>
-          </div>
-
-          {/* Card 4 */}
-          <div className="flex flex-col items-center">
-            <div className=" w-[256px] h-[326px]">
-              <img
-                src="/assets/onboarding4.png"
-                alt="Flexible Hours"
-                className="w-full h-auto object-cover rounded"
-              />
-            </div>
-            <p className="mt-4 text-sm text-gray-700">
-              Completely Flexible Work
-              <br />
-              Hours
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </div>
