@@ -442,8 +442,9 @@ function Navbar({ className }: Props) {
       label: 'Solutions',
       href: '/plans',
       children: [
-        { href: '/solutions/individual', label: 'Individual Plans' },
-        { href: '/solutions/group', label: 'Group Insurance' },
+        { href: '/plans/individual', label: 'Individual Plan' },
+        { href: '/solutions/corporate', label: 'Corporate Plan' },
+        { href: '/solutions/bancassurance', label: 'Bancassurance Plan' },
       ],
     },
     { href: '/pay-premium', label: 'Pay Premium' },

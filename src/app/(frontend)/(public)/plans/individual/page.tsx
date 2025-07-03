@@ -1,4 +1,6 @@
 import AllPlanSection from '@/components/custom/plans/AllPlanSection'
+import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
+
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import React from 'react'
 
@@ -46,7 +48,7 @@ function PlanPage() {
   ]
 
   return (
-    <div className="font-avenir">
+    <div className="font-avenir bg-white ">
       <HeroSection heroSlides={heroSlides} />
       <AllPlanSection plantData={indivisualPlantData} blur>
         <div>
@@ -55,6 +57,7 @@ function PlanPage() {
           <span className="text-[#ED7125]">It's POSSIBILITIES </span>
         </div>
       </AllPlanSection>
+      <ContactUsSection />
     </div>
   )
 }
