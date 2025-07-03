@@ -47,3 +47,9 @@ export type FootPrintDataType = {
   description: string
 }
 
+export type AllPlantDataType = {
+  title: string
+  description: string
+  link: string
+  image: string
+}

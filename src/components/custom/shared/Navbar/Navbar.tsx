@@ -422,6 +422,7 @@
 // export default Navbar
 
 // update navbar
+
 'use client'
 
 import { cn } from '@/lib/utils'
@@ -439,9 +440,11 @@ function Navbar({ className }: Props) {
     { href: '/about-us', label: 'About Us' },
     {
       label: 'Solutions',
+      href: '/plans',
       children: [
-        { href: '/solutions/individual', label: 'Individual Plans' },
-        { href: '/solutions/group', label: 'Group Insurance' },
+        { href: '/plans/individual', label: 'Individual Plan' },
+        { href: '/solutions/corporate', label: 'Corporate Plan' },
+        { href: '/solutions/bancassurance', label: 'Bancassurance Plan' },
       ],
     },
     { href: '/pay-premium', label: 'Pay Premium' },
@@ -564,22 +567,6 @@ function Navbar({ className }: Props) {
 
   return (
     <div
-      // className={cn(
-      //   `fixed left-0 right-0 transition-transform duration-500 ease-in-out z-50`,
-      //   forceTopZero ? 'top-[60px]' : 'top-0 lg:top-[80px] 2xl:top-[115px]',
-      //   showNavbar ? 'translate-y-0' : '-translate-y-[220px]',
-      //   `font-avenir h-[60px] md:h-[80px] 2xl:h-[105px] lg:w-[95%] 2xl:w-[90%] mx-auto rounded-[82px] px-4 lg:px-[72px] flex justify-between items-center gap-4`,
-      //   className,
-      // )}
-      // className={cn(
-      //   `fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out`,
-      //   showNavbar ? 'translate-y-0' : '-translate-y-[220px]',
-      //   `font-avenir h-[60px] md:h-[80px] 2xl:h-[105px] lg:w-[95%] 2xl:w-[90%] mx-auto rounded-[82px] px-4 lg:px-[72px] flex justify-between items-center gap-4`,
-      //   className,
-      // )}
-      // style={{
-      //   top: forceTopZero ? 60 : windowWidth >= 1536 ? 115 : windowWidth >= 1024 ? 80 : 0,
-      // }}
       className={cn(
         `fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out`,
         showNavbar ? 'translate-y-0' : '-translate-y-[220px]',
@@ -633,7 +620,7 @@ function Navbar({ className }: Props) {
             <li key={item.label} className="relative group">
               {item.children ? (
                 <div className="relative group">
-                  <button className="bg-transparent font-medium text-[#1E1E1E] hover:text-orange-500 focus:outline-none">
+                  {/* <button className="bg-transparent font-medium text-[#1E1E1E] hover:text-orange-500 focus:outline-none">
                     <span className="flex items-center gap-1">
                       {item.label}
                       <svg
@@ -646,7 +633,22 @@ function Navbar({ className }: Props) {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                       </svg>
                     </span>
-                  </button>
+                  </button> */}
+                  <Link
+                    href={item.href || '#'}
+                    className="flex items-center gap-1 bg-transparent font-medium text-[#1E1E1E] hover:text-orange-500 focus:outline-none"
+                  >
+                    {item.label}
+                    <svg
+                      className="w-4 h-4 text-gray-500 group-hover:text-orange-500 transition-transform duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </Link>
 
                   {/* Dropdown wrapper must be inside the same group */}
                   <div className="absolute top-full left-0 mt-2 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 bg-white shadow-md rounded-md z-50">
