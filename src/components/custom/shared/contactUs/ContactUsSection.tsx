@@ -1,12 +1,9 @@
 'use client'
 
-import { useState } from 'react'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogOverlay,
-  DialogPortal,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
@@ -17,7 +14,7 @@ import { Input } from '@/components/ui/input'
 function ContactUsSection() {
   return (
     <div
-      className="bg-[#F6EDDD] relative
+      className="bg-[#F6EDDD] relative 
       mt-[80px] md:mt-[100px] lg:mt-[120px] xl:mt-[200px]
       lg:px-[130px] xl:px-[200px] 2xl:px-[300px] 
       h-[200px] md:h-[330px] lg:h-[430px] xl:h-[500px] 2xl:h-[600px]"
