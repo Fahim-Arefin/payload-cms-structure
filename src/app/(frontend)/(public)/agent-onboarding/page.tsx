@@ -1,4 +1,6 @@
+import OnboardingForm from '@/components/custom/agent-onboarding/OnboardingForm'
 import OnboardingHighlight from '@/components/custom/agent-onboarding/OnboardingHighlight'
+import OnboardingOpportunity from '@/components/custom/agent-onboarding/OnboardingOpportunity'
 import OnboardingRoles from '@/components/custom/agent-onboarding/OnboardingRoles'
 import OnboardingWay from '@/components/custom/agent-onboarding/OnboardingWay'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
@@ -41,22 +43,22 @@ const highlightSlides = [
   },
 ]
 
- const rolesData = [
+const rolesData = [
   {
-    icon: '/icons/earning.svg',
-    title: 'Unlimited Earning Potential',
+    icon: '/assets/roles1.png',
+    text: 'Attractive Earning Potential\nBased on Performance',
   },
   {
-    icon: '/icons/rewards.svg',
-    title: 'Rewards & Recognition',
+    icon: '/assets/roles2.png',
+    text: 'Learning from the top-tier\nIndustry insider in BD',
   },
   {
-    icon: '/icons/career.svg',
-    title: 'Growing Career',
+    icon: '/assets/roles3.png',
+    text: 'Applicable for professionals,\nFreshers & Undergraduates',
   },
   {
-    icon: '/icons/security.svg',
-    title: 'Help secure lives',
+    icon: '/assets/roles4.png',
+    text: 'Completely Flexible Work Hours',
   },
 ]
 
@@ -100,12 +102,56 @@ const highlightSlides = [
     
   ]
 
+const opportunityData = {
+  title: 'INCLUSIVE CAREER',
+  items: [
+    { text: 'Seasoned Professionals', src: '/assets/onboardingOpportunity1.jpg' },
+    { text: 'Fresh Graduates', src: '/assets/onboardingOpportunity2.jpg' },
+    { text: 'Self-Motivated Undergrad Students', src: '/assets/onboardingOpportunity3.jpg' },
+  ],
+}
+
+const expectedData = {
+  title: 'WE EXPECTED YOU TO',
+  sectionLeft: [
+    {
+      icon: '/assets/opportunityIcon1.svg',
+      text: 'Introduce a Wide Range of People to Shanta Life Insurance',
+    },
+    {
+      icon: '/assets/opportunityIcon2.svg',
+      text: 'Educate Prospects About the Significance of Financial Planning',
+    },
+    {
+      icon: '/assets/opportunityIcon3.svg',
+      text: 'Onboarding New Policy holder, Agents,\nand Driving Exceptional Agent Experience',
+    },
+    {
+      icon: '/assets/opportunityIcon4.svg',
+      text: 'Staying Ahead of Market Trends and Regulations',
+    },
+    {
+      icon: '/assets/opportunityIcon5.svg',
+      text: 'Continuously Upskill With Our Help',
+    },
+  ],
+  sectionRight: {
+    avatar: '/assets/opportunityAvatar.jpg',
+    name: 'Khondoker Khalil Ahamed',
+    quote:
+      'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Asset Management.',
+  },
+}
+
+
   return (
     <div className="font-avenir">
       <HeroSection heroSlides={heroSlides} />
       <OnboardingHighlight highlightSlides={highlightSlides[0]}/>
-      {/* <OnboardingRoles rolesData={rolesData} /> */}
+      <OnboardingRoles rolesData={rolesData} />
+      <OnboardingOpportunity expectedData={expectedData} opportunityData={opportunityData}/>
       <OnboardingWay wayWeAreData={wayWeAreData}/>
+      <OnboardingForm />
     </div>
   )
 }

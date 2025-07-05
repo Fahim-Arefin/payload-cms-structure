@@ -28,10 +28,20 @@ const OnboardingHighlight = ({ highlightSlides }: Props) => {
       {/* Half-white background */}
 
       <div className="relative z-10 px-5 py-12 lg:px-[130px] lg:py-[110px] 2xl:px-[300px] 2xl:py-[150px]">
+        <img
+          src="/assets/leftquote.png" // replace with actual path
+          alt="Opening Quote"
+          className="hidden lg:block w-12 2xl:w-20 absolute right-20 2xl:right-48 2xl:top-28"
+        />
+        <img
+          src="/assets/rightquote.png" // replace with actual path
+          alt="Closing Quote"
+          className="hidden lg:block w-12 2xl:w-20 absolute left-20 2xl:left-48 2xl:top-28"
+        />
         <p className="global-h3 text-gray-800 text-center">{highlightSlides?.mainDescription}</p>
       </div>
 
-      <div className="block xl:hidden px-5 lg:px-[130px]">
+      {/* <div className="block xl:hidden px-5 lg:px-[130px]">
         <Carousel className="w-full">
           <CarouselContent>
             {highlightSlides.images.map((item, idx) => (
@@ -54,7 +64,7 @@ const OnboardingHighlight = ({ highlightSlides }: Props) => {
         </Carousel>
       </div>
       {/* Cards Section */}
-      <div className="px-5 lg:px-[130px] 2xl:px-[300px] xl:mt-28 bg-white">
+      {/* <div className="px-5 lg:px-[130px] 2xl:px-[300px] xl:mt-28 bg-white">
         <div className="hidden xl:grid lg:grid-cols-4 gap-4 text-center">
           {highlightSlides.images.map((item, idx) => (
             <div
@@ -72,7 +82,7 @@ const OnboardingHighlight = ({ highlightSlides }: Props) => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
