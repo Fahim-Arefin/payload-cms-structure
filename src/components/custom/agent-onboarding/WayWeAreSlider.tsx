@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import FootPrintCard from '../about-us/FootPrintCard'
+import OnboardingCard from './OnboardingCard'
 
 type wayWeAreData = {
   image: string;  
@@ -58,7 +59,7 @@ export function WayWeAreSlider({ wayWeAreData }: Props) {
   return (
     <div className="relative">
       <div className="overflow-hidden px-[10vw]" ref={emblaRef}>
-        <div className="flex gap-x-4 transition-transform duration-500 ease-in-out will-change-transform">
+        <div className="flex gap-x-6 transition-transform duration-500 ease-in-out will-change-transform">
           {wayWeAreData.map((data, index) => (
             <div
               key={index}
@@ -66,19 +67,19 @@ export function WayWeAreSlider({ wayWeAreData }: Props) {
                 flex-shrink-0 transition-all duration-500 ease-in-out
                 ${
                   index === selectedIndex
-                    ? 'basis-[200px] md:basis-[350px] xl:basis-[600px] 2xl:basis-[666px]'
-                    : 'basis-[120px] md:basis-[180px] xl:basis-[320px] 2xl:basis-[380px]'
+                    ? 'basis-[200px] md:basis-[350px] xl:basis-[600px] 2xl:basis-[800px]'
+                    : 'basis-[120px] md:basis-[180px] xl:basis-[320px] 2xl:basis-[480px]'
                 }
               `}
             >
-              <FootPrintCard data={data} isActive={index === selectedIndex} />
+              <OnboardingCard data={data} isActive={index === selectedIndex} />
             </div>
           ))}
         </div>
       </div>
 
       {/* Controls */}
-      <div
+      {/* <div
         //   className="absolute top-0 flex justify-center gap-4 mt-6 bg-red-300">
         className="flex gap-4 absolute z-20
              inset-x-0 justify-center lg:justify-end -bottom-16 md:-bottom-20 lg:-top-10 xl:-top-12 lg:right-24"
@@ -102,7 +103,7 @@ export function WayWeAreSlider({ wayWeAreData }: Props) {
         >
           →
         </button>
-      </div>
+      </div> */}
     </div>
   )
 }
