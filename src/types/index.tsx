@@ -70,3 +70,8 @@ export type EndowmentDataType = {
     image: string
   }[]
 }
+
+export type OnboardingRoleType = {
+  image: string
+  title: string
+}

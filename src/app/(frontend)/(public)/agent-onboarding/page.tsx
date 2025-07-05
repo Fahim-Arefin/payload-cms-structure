@@ -3,6 +3,7 @@ import OnboardingHighlight from '@/components/custom/agent-onboarding/Onboarding
 import OnboardingOpportunity from '@/components/custom/agent-onboarding/OnboardingOpportunity'
 import OnboardingRoles from '@/components/custom/agent-onboarding/OnboardingRoles'
 import OnboardingWay from '@/components/custom/agent-onboarding/OnboardingWay'
+import RolesSection from '@/components/custom/agent-onboarding/RolesSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import React from 'react'
 
@@ -18,139 +19,157 @@ function page({}: Props) {
     },
   ]
 
-const highlightSlides = [
-  {
-    mainDescription:
-      'As a Relationship Officer at Shanta Life, you’ll be part of a dynamic industry with endless potential. Enjoy attractive earnings, continuous professional development, and the rewarding experience of helping individuals and families secure their financial futures. This isn’t just a role—it’s your gateway to a successful future.',
-    images: [
-      {
-        src: '/assets/onboarding1.png',
-        title: 'Attractive Earning Potential Based on Performance',
-      },
-      {
-        src: '/assets/onboarding2.png',
-        title: 'Learning from the top-tier Industry insider in BD',
-      },
-      {
-        src: '/assets/onboarding3.png',
-        title: 'Applicable for professionals, Freshers & Undergraduates',
-      },
-      {
-        src: '/assets/onboarding4.png',
-        title: 'Completely Flexible Work Hours',
-      },
-    ],
-  },
-]
-
-const rolesData = [
-  {
-    icon: '/assets/roles1.png',
-    text: 'Attractive Earning Potential\nBased on Performance',
-  },
-  {
-    icon: '/assets/roles2.png',
-    text: 'Learning from the top-tier\nIndustry insider in BD',
-  },
-  {
-    icon: '/assets/roles3.png',
-    text: 'Applicable for professionals,\nFreshers & Undergraduates',
-  },
-  {
-    icon: '/assets/roles4.png',
-    text: 'Completely Flexible Work Hours',
-  },
-]
-
- const wayWeAreData = [
+  const highlightSlides = [
     {
-      image: '/assets/onboardingWay1.png',
-      title: '',
-      description:
-        '',
+      mainDescription:
+        'As a Relationship Officer at Shanta Life, you’ll be part of a dynamic industry with endless potential. Enjoy attractive earnings, continuous professional development, and the rewarding experience of helping individuals and families secure their financial futures. This isn’t just a role—it’s your gateway to a successful future.',
+      images: [
+        {
+          src: '/assets/onboarding1.png',
+          title: 'Attractive Earning Potential Based on Performance',
+        },
+        {
+          src: '/assets/onboarding2.png',
+          title: 'Learning from the top-tier Industry insider in BD',
+        },
+        {
+          src: '/assets/onboarding3.png',
+          title: 'Applicable for professionals, Freshers & Undergraduates',
+        },
+        {
+          src: '/assets/onboarding4.png',
+          title: 'Completely Flexible Work Hours',
+        },
+      ],
     },
-    {
-      image: '/assets/onboardingWay2.png',
-      title: '',
-      description:
-        '',
-    },
-    {
-      image: '/assets/onboardingWay3.png',
-      title: '',
-      description:
-        '',
-    },
-    {
-      image: '/assets/onboardingWay1.png',
-      title: '',
-      description:
-        '',
-    },
-    {
-      image: '/assets/onboardingWay2.png',
-      title: '',
-      description:
-        '',
-    },
-    {
-      image: '/assets/onboardingWay3.png',
-      title: '',
-      description:
-        '',
-    },
-    
   ]
 
-const opportunityData = {
-  title: 'INCLUSIVE CAREER',
-  items: [
-    { text: 'Seasoned Professionals', src: '/assets/onboardingOpportunity1.jpg' },
-    { text: 'Fresh Graduates', src: '/assets/onboardingOpportunity2.jpg' },
-    { text: 'Self-Motivated Undergrad Students', src: '/assets/onboardingOpportunity3.jpg' },
-  ],
-}
+  const rolesData = [
+    {
+      icon: '/assets/roles1.png',
+      text: 'Attractive Earning Potential\nBased on Performance',
+    },
+    {
+      icon: '/assets/roles2.png',
+      text: 'Learning from the top-tier\nIndustry insider in BD',
+    },
+    {
+      icon: '/assets/roles3.png',
+      text: 'Applicable for professionals,\nFreshers & Undergraduates',
+    },
+    {
+      icon: '/assets/roles4.png',
+      text: 'Completely Flexible Work Hours',
+    },
+  ]
 
-const expectedData = {
-  title: 'WE EXPECTED YOU TO',
-  sectionLeft: [
+  const wayWeAreData = [
     {
-      icon: '/assets/opportunityIcon1.svg',
-      text: 'Introduce a Wide Range of People to Shanta Life Insurance',
+      image: '/assets/onboardingWay1.png',
+      title: '',
+      description: '',
     },
     {
-      icon: '/assets/opportunityIcon2.svg',
-      text: 'Educate Prospects About the Significance of Financial Planning',
+      image: '/assets/onboardingWay2.png',
+      title: '',
+      description: '',
     },
     {
-      icon: '/assets/opportunityIcon3.svg',
-      text: 'Onboarding New Policy holder, Agents,\nand Driving Exceptional Agent Experience',
+      image: '/assets/onboardingWay3.png',
+      title: '',
+      description: '',
     },
     {
-      icon: '/assets/opportunityIcon4.svg',
-      text: 'Staying Ahead of Market Trends and Regulations',
+      image: '/assets/onboardingWay1.png',
+      title: '',
+      description: '',
     },
     {
-      icon: '/assets/opportunityIcon5.svg',
-      text: 'Continuously Upskill With Our Help',
+      image: '/assets/onboardingWay2.png',
+      title: '',
+      description: '',
     },
-  ],
-  sectionRight: {
-    avatar: '/assets/opportunityAvatar.jpg',
-    name: 'Khondoker Khalil Ahamed',
-    quote:
-      'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Asset Management.',
-  },
-}
+    {
+      image: '/assets/onboardingWay3.png',
+      title: '',
+      description: '',
+    },
+  ]
 
+  const opportunityData = {
+    title: 'INCLUSIVE CAREER',
+    items: [
+      { text: 'Seasoned Professionals', src: '/assets/onboardingOpportunity1.jpg' },
+      { text: 'Fresh Graduates', src: '/assets/onboardingOpportunity2.jpg' },
+      { text: 'Self-Motivated Undergrad Students', src: '/assets/onboardingOpportunity3.jpg' },
+    ],
+  }
+
+  const expectedData = {
+    title: 'WE EXPECTED YOU TO',
+    sectionLeft: [
+      {
+        icon: '/assets/opportunityIcon1.svg',
+        text: 'Introduce a Wide Range of People to Shanta Life Insurance',
+      },
+      {
+        icon: '/assets/opportunityIcon2.svg',
+        text: 'Educate Prospects About the Significance of Financial Planning',
+      },
+      {
+        icon: '/assets/opportunityIcon3.svg',
+        text: 'Onboarding New Policy holder, Agents,\nand Driving Exceptional Agent Experience',
+      },
+      {
+        icon: '/assets/opportunityIcon4.svg',
+        text: 'Staying Ahead of Market Trends and Regulations',
+      },
+      {
+        icon: '/assets/opportunityIcon5.svg',
+        text: 'Continuously Upskill With Our Help',
+      },
+    ],
+    sectionRight: {
+      avatar: '/assets/opportunityAvatar.jpg',
+      name: 'Khondoker Khalil Ahamed',
+      quote:
+        'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Asset Management.',
+    },
+  }
+
+  const onboardingRolesData = [
+    {
+      image: '/assets/role1.svg',
+      title: 'Unlimited Earning Potential',
+      description:
+        'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
+    },
+    {
+      image: '/assets/role2.svg',
+      title: 'Rewards & Recognition',
+    },
+    {
+      image: '/assets/role3.svg',
+      title: 'Growing Career',
+    },
+    {
+      image: '/assets/role4.svg',
+      title: 'Help secure lives',
+    },
+    {
+      image: '/assets/role4.svg',
+      title: 'Help secure lives',
+    },
+  ]
 
   return (
     <div className="font-avenir">
       <HeroSection heroSlides={heroSlides} />
-      <OnboardingHighlight highlightSlides={highlightSlides[0]}/>
+      <OnboardingHighlight highlightSlides={highlightSlides[0]} />
+      <RolesSection onboardingRoleData={onboardingRolesData}/>
       <OnboardingRoles rolesData={rolesData} />
-      <OnboardingOpportunity expectedData={expectedData} opportunityData={opportunityData}/>
-      <OnboardingWay wayWeAreData={wayWeAreData}/>
+      <OnboardingOpportunity expectedData={expectedData} opportunityData={opportunityData} />
+      <OnboardingWay wayWeAreData={wayWeAreData} />
       <OnboardingForm />
     </div>
   )
