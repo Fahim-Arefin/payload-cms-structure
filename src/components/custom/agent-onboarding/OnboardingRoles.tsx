@@ -1,9 +1,8 @@
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import React, { FC } from 'react'
 
 type Role = {
   icon: string
-  title: string
+  text: string
 }
 
 type OnboardingRolesProps = {
@@ -12,44 +11,55 @@ type OnboardingRolesProps = {
 
 const OnboardingRoles: FC<OnboardingRolesProps> = ({ rolesData }: OnboardingRolesProps) => {
   return (
-    <div className="bg-white container-padding">
-      <div className="flex flex-col lg:flex-row items-start gap-8">
-        {/* Left Image */}
-        <div className="flex-shrink-0 w-full lg:w-[375px]">
+    <div className="w-full ">
+      {/* Desktop / Laptop */}
+      <div className="hidden lg:grid lg:grid-cols-2 items-center bg-white">
+        {/* Left image */}
+        <div className="">
           <img
-            src="/assets/onboardingRoles1.jpg"
-            alt="Roles Hero"
-            className="w-full h-auto rounded-lg object-cover"
+            src="/assets/onboardingRoles1.png"
+            alt="Roles Image"
+            className="h-[180px] md:h-full lg:max-h-[640px] xl:max-h-[720px] 2xl:max-h-[800px] object-cover
+          w-full md:w-[90%] lg:w-[90%] 2xl:w-[85%]"
           />
         </div>
 
-        {/* Right Carousel */}
-        <div className="flex-1 w-full overflow-hidden">
-          <Carousel
-            opts={{
-              align: 'start',
-              slidesToScroll: 1,
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="flex gap-4">
-              {rolesData.map((role, idx) => (
-                <CarouselItem key={idx} className="basis-[250px] lg:basis-[240px] flex-shrink-0">
-                  <div
-                    className={`
-                      rounded-lg p-6 h-full 
-                      flex flex-col items-center justify-center text-center
-                      bg-[#FDF5EE] hover:bg-[#B7A46D] 
-                      transition-colors duration-200 ease-in-out
-                    `}
-                  >
-                    <img src={role.icon} alt={role.title} className="w-10 h-10 mb-4" />
-                    <p className="text-sm font-medium text-black">{role.title}</p>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
+        {/* Right content */}
+        <div className="flex flex-col justify-evenly bg-white h-full p-2 lg:p-4">
+          {rolesData.map((item: any, idx: number) => (
+            <div key={idx} className="flex items-center lg:gap-2 xl:gap-4">
+              <div className="md:w-[150px] md:h-[140px] 2xl:h-[160px]">
+                <img src={item.icon} alt={`icon-${idx}`} className="w-full h-auto " />
+              </div>
+              <p className="whitespace-pre-line global-h3 text-['#434343']">{item?.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile */}
+      <div className="relative block lg:hidden w-full ">
+        {/* Mobile background image full height */}
+        <div className="">
+          <img
+            src="/assets/onboardingRoles1.png"
+            alt="Mobile Background"
+            className="w-full h-[540px] object-cover"
+          />
+        </div>
+
+        {/* Overlay content inside the image, not overflowing */}
+        <div className="absolute bottom-0 left-0 right-0 px-4 pb-6 ">
+          <div className="bg-[#FCF4EB] rounded-md px-5 py-6 flex flex-col gap-5">
+            {rolesData.map((item, idx) => (
+              <div key={idx} className="flex items-center gap-4">
+                <div className="w-[50px] h-[50px]">
+                  <img src={item.icon} alt={`icon-${idx}`} className="w-full h-auto mt-1" />
+                </div>
+                <p className="whitespace-pre-line text-sm text-gray-800">{item.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

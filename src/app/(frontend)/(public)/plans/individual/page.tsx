@@ -1,4 +1,4 @@
-import AllPlanSection from '@/components/custom/plans/AllPlanSection'
+import AllPlanSection from '@/components/custom/shared/plans/AllPlanSection'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
 
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
@@ -18,7 +18,7 @@ function PlanPage() {
     {
       title: 'Saving and Investments',
       description: 'Turn today\u2019s choices into tomorrow\u2019s freedom.',
-      link: '/',
+      link: '/plans/individual/saving-and-investment',
       image: '/assets/plan4.jpg',
     },
     {

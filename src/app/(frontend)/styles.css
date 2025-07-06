@@ -122,7 +122,7 @@
   }
   .global-h1 {
     /* @apply text-[18px] md:text-[24px] lg:text-[32px] xl:text-[45px] 2xl:text-[56px]; */
-    @apply text-[16px] md:text-[24px] lg:text-[32px] xl:text-[38px] 2xl:text-[46px]
+    @apply text-[17px] md:text-[24px] lg:text-[32px] xl:text-[38px] 2xl:text-[46px]
     leading-6 md:leading-7 lg:leading-10 xl:leading-[50px] 2xl:leading-[55px];
   }
   .global-h2 {
@@ -132,7 +132,7 @@
   }
   .global-h3 {
     /* @apply text-[18px] md:text-[20px] lg:text-[26px] xl:text-[30px] 2xl:text-[38px]; */
-    @apply text-[18px] md:text-[20px] lg:text-[22px] xl:text-[24px] 2xl:text-[32px]
+    @apply text-[15px] md:text-[20px] lg:text-[22px] xl:text-[24px] 2xl:text-[32px]
     leading-6 md:leading-7 lg:leading-10 xl:leading-[35px] 2xl:leading-[45px];
   }
   .global-h4 {
@@ -155,4 +155,11 @@
     @apply rounded-md lg:rounded-xl 2xl:rounded-[15px] backdrop-blur-[7.5px];
     background: linear-gradient(90deg, rgba(156, 134, 57, 0.3), rgba(153, 153, 153, 0));
   }
+}
+
+/* FORCE REMOVE SHADCn MODAL OVERLAY BACKGROUND */
+body > div[data-state='open'].fixed.inset-0.z-50 {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
 }

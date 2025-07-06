@@ -53,3 +53,36 @@ export type AllPlantDataType = {
   link: string
   image: string
 }
+
+export type PlanInfoDataType = {
+  image: string
+  description: string
+}
+
+export type EndowmentDataType = {
+  title: string
+  subtitle: string
+  description: string
+  image: string
+  link: string
+  feature: {
+    name: string
+    image: string
+  }[]
+}
+
+export type OnboardingRoleType = {
+  image: string
+  title: string
+}
+
+export type SuitabilityCardType = {
+  img: string
+  title: string
+  description: string
+}
+
+export type PartnerType = {
+  img: string
+  title: string
+}
