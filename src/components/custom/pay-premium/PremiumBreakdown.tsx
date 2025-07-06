@@ -134,9 +134,12 @@ export default function PremiumBreakdown() {
               <div className="flex items-center gap-2">
                 <CiSquarePlus className="text-[#9C8639]" size={20} />
                 <img className="w-5 h-5" src="/assets/hospital-bed.png" />
-                <span className="text-[12px]">
-                  Add <strong>255</strong> taka to cover{' '}
-                  <u className="text-[#3A3A3C]">25 critical illness</u>.
+                <span className="text-[12px] font-light text-[#434343]">
+                  Add <span className="font-bold">255</span> taka to cover{' '}
+                  <u className="">
+                    <span className="font-bold">25</span> critical illness
+                  </u>
+                  .
                 </span>
                 <TbAlertCircleFilled color="#ED7125" className="text-white" size={20} />
               </div>
@@ -152,9 +155,9 @@ export default function PremiumBreakdown() {
               <div className="flex items-center gap-2">
                 <CiSquareMinus className="text-[#9C8639]" size={20} />
                 <img className="w-5 h-5" src="/assets/hospital.png" />
-                <span className="text-[12px]">
-                  Add <strong>1000</strong> taka for{' '}
-                  <u className="text-[#3A3A3C]">accidental coverage</u>.
+                <span className="text-[12px] font-light text-[#434343]">
+                  Add <span className="font-bold">1000</span> taka for{' '}
+                  <u className="">accidental coverage</u>.
                 </span>
                 <TbAlertCircleFilled color="#ED7125" className="text-white" size={20} />
               </div>
