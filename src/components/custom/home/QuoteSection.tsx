@@ -4,7 +4,7 @@ import React from 'react'
 function QuoteSection() {
   return (
     // <div className="relative w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 my-24 xl:my-44 font-avenir">
-    <div className="relative font-avenir w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 2xl:mt-[200px]">
+    <div className="relative font-avenir w-full lg:w-[85%] xl:lg:w-[80%] 2xl:w-[70%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 2xl:mt-[200px]">
       <div className="grid grid-cols-1 lg:grid-cols-2 z-10">
         {/* Left Side */}
         <div className="p-4 lg:pl-0 space-y-8 xl:space-y-11 z-10">

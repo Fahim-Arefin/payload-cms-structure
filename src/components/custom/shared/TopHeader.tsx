@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { Search } from 'lucide-react'
-import { PiFacebookLogo } from 'react-icons/pi'
 
 function TopHeader({ className }: { className?: string }) {
   return (
@@ -12,7 +11,8 @@ function TopHeader({ className }: { className?: string }) {
     >
       {/* Left: Social icon */}
 
-      <PiFacebookLogo className="text-3xl" />
+      {/* <PiFacebookLogo className="text-3xl" /> */}
+      <div></div>
       {/* Right: Agent + Language Switch + Search */}
       <div className="flex items-center gap-4">
         <Button variant="link" className="text-white px-3 py-1 font-medium underline">
