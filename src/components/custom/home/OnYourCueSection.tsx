@@ -57,7 +57,7 @@ const cards = [
 function OnYourCueSection() {
   return (
     // <div className="w-full max-w-screen-xl mx-auto px-4 my-24 2xl:my-44">
-    <div className="w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 2xl:mt-44">
+    <div className="w-full lg:w-[85%] xl:w-[70%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 xl:mt-[200px]">
       <CueHeader />
 
       {/* Mobile View: Grid */}

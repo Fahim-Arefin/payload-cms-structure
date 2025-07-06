@@ -120,6 +120,13 @@
            xl:px-[200px]  xl:py-[100px] 
            2xl:px-[300px] 2xl:py-[150px];
   }
+  .container-margin {
+    @apply mx-5 my-12 
+           md:p-24 
+           lg:mx-[130px]  lg:my-[110px] 
+           xl:mx-[200px]  xl:my-[100px] 
+           2xl:mx-[300px] 2xl:my-[150px];
+  }
   .global-h1 {
     /* @apply text-[18px] md:text-[24px] lg:text-[32px] xl:text-[45px] 2xl:text-[56px]; */
     @apply text-[17px] md:text-[24px] lg:text-[32px] xl:text-[38px] 2xl:text-[46px]

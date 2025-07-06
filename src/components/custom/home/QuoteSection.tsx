@@ -4,19 +4,19 @@ import React from 'react'
 function QuoteSection() {
   return (
     // <div className="relative w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 my-24 xl:my-44 font-avenir">
-    <div className="relative font-avenir w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 2xl:mt-44">
+    <div className="relative font-avenir w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 2xl:mt-[200px]">
       <div className="grid grid-cols-1 lg:grid-cols-2 z-10">
         {/* Left Side */}
         <div className="p-4 lg:pl-0 space-y-8 xl:space-y-11 z-10">
           {/* Text Container */}
           <div className="space-y-2 text-center lg:text-left">
-            <div className="text-[#1E1E1E] text-[16px] md:text-[18px] 2xl:text-2xl font-light">
+            <div className="text-[#1E1E1E] text-[16px] md:text-[18px] 2xl:text-2xl font-light uppercase">
               Secure Your
             </div>
-            <div className="text-[#1E1E1E] text-[21px] md:text-[28px] lg:text-[34px] 2xl:text-[44px] font-bold">
+            <div className="text-[#1E1E1E] global-h1 font-semibold uppercase">
               Tomorrow, <span className="md:text-[#FF6600]">Today!</span>
             </div>
-            <p className="text-[#1E1E1E] text-xs md:text-sm lg:text-[16px] font-medium">
+            <p className="global-p1 text-[#1E1E1E] font-light">
               Get a personalized quote from Shanta Life Insurance and take the first step toward a
               protected and worry-free future.
             </p>

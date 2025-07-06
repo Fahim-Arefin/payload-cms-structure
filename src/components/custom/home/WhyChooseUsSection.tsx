@@ -23,7 +23,7 @@ function WhyChooseUsSection() {
         <div className="w-full h-[4px] bg-gradient-to-r from-transparent via-white to-transparent mx-auto" />
       </div>
 
-      <div className="z-20 relative w-full lg:w-[85%] 2xl:w-[70%] mx-auto min-h-[500px] grid grid-cols-1 lg:grid-cols-2">
+      <div className="z-20 relative w-full lg:w-[85%] xl:w-[72%] 2xl:w-[70%] mx-auto min-h-[500px] grid grid-cols-1 lg:grid-cols-2">
         {/* Image Section aligned to right */}
         <div className="hidden lg:flex justify-end items-center rounded-t-[24px]">
           <div className="w-full rounded-t-[24px] lg:h-[600px] xl:h-[650px] 2xl:h-[700px]">
@@ -38,15 +38,20 @@ function WhyChooseUsSection() {
         {/* Text Section */}
         <div className="flex flex-col font-avenir ">
           {/* top section */}
-          <div className="h-[50%] flex flex-col justify-center p-12 lg:pr-0 lg:pt-0 lg:pb-0 lg:pl-12 text-center lg:text-left">
-            <div className=" md:text-[26px] 2xl:text-[26px] text-white lg:text-[#1E1E1E]  font-light">
+          <div className="lg:space-y-4 h-[50%] flex flex-col justify-center p-12 lg:pr-0 lg:pt-0 lg:pb-0 lg:pl-12 text-center lg:text-left">
+            <div className="global-h4 text-white lg:text-[#1E1E1E] uppercase font-light">
               Why Choose us?
             </div>
-            <div className="text-[23px] md:text-[26px] lg:text-[22px] 2xl:text-[26px] font-bold lg:font-semibold text-white lg:text-[#1E1E1E] mt-3 lg:mt-0">
-              We&apos;re <span className="text-white lg:text-[#ED7125]">Providing Best</span>
-            </div>
-            <div className="text-[21px] md:text-[28px] lg:text-[34px] 2xl:text-[44px] font-bold text-white lg:text-[#1E1E1E]">
-              Insurance Policy&apos;s
+            <div className="flex items-center justify-center space-x-2 lg:flex-col lg:justify-start lg:items-start lg:space-x-0">
+              <div className="global-h1 font-bold  lg:font-medium text-white lg:text-[#1E1E1E] uppercase">
+                Built on Trust
+              </div>
+              <div
+                className="global-h1 uppercase
+            font-bold lg:font-medium text-white lg:text-[#1E1E1E]"
+              >
+                Backed by <span className="text-white lg:text-[#ED7125]"> Legacy</span>
+              </div>
             </div>
             <div className="text-white lg:text-[#1E1E1E] text-[12px] md:text-[16px] lg:text-[14px] 2xl:text-[17px] mt-3 lg:mt-0 font-normal">
               We offers reliable financial protection with tailored plans to suit your needs. It
@@ -194,7 +199,7 @@ function WhyChooseUsSection() {
             </div>
             {/* vertical grid */}
             <div className="hidden lg:block absolute top-0 left-0 bg-[#A87648] lg:pl-3 lg:pt-3 2xl:pl-6 2xl:pt-6 rounded-tl-2xl rounded-br-2xl">
-              <div className="lg:h-[350px] xl:h-[370px] 2xl:h-[420px] lg:w-[235px] xl:w-[305px] 2xl:w-[300px] z-[50] rounded-2xl">
+              <div className="lg:h-[350px] xl:h-[370px] 2xl:h-[420px] lg:w-[235px]  xl:w-[250px] 2xl:w-[300px] z-[50] rounded-2xl">
                 <img
                   className="h-full w-full z-[50] rounded-2xl"
                   src="/assets/whychooseus2.png"

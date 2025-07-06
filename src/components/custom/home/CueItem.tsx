@@ -67,17 +67,17 @@ function CueItem({ card, index }: Props) {
     <div className="relative flex flex-col w-full max-w-md mx-auto shadow-md font-avenir">
       {/* Top Card */}
       <div
-        className={`h-[400px] lg:h-[300px] xl:h-[350px] z-20 lg:bg-white text-white lg:text-[#404041] absolute inset-0 bottom-0 flex flex-col justify-end lg:inset-auto lg:relative 
+        className={` h-[400px] lg:h-[300px] xl:h-[330px] 2xl:h-[350px] z-20 lg:bg-white text-white lg:text-[#404041] absolute inset-0 bottom-0 flex flex-col justify-end lg:inset-auto lg:relative 
           p-6 sm:p-8 md:p-10 lg:p-6 xl:p-8 ${
             index % 2 === 0 ? 'order-1 rounded-t-2xl' : 'order-2 rounded-b-2xl'
           }`}
       >
-        <div className="h-[80px] w-[80px]">
+        <div className="h-[80px] w-[80px] lg:h-[60px] lg:w-[60px] xl:h-[80px] xl:w-[80px]">
           <img className="h-full w-full" src={card.icon} alt={card.title} />
         </div>
         <h1 className="text-xl lg:text-xl xl:text-2xl mt-4 font-bold">{card.title}</h1>
         <h2 className="text-lg lg:text-xl xl:text-2xl font-bold">{card.subtitle}</h2>
-        <p className="text-sm lg:text-xs xl:text-sm mt-2 text-white lg:text-[#404041] font-light leading-relaxed">
+        <p className="global-p2 mt-2 text-white lg:text-[#404041] font-light ">
           {card.description}
         </p>
         <Button
