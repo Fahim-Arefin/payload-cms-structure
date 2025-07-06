@@ -20,19 +20,19 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }: CorporateCh
         <div
           className="flex flex-col gap-4 justify-evenly bg-white h-full container-padding"
         >
-          <h1 className="global-h1 font-semibold text-[#434342] uppercase lg:block mb-12">
+          <h1 className="global-h1 font-semibold text-[#434342] uppercase mb-10">
             <span className="text-[#ED7125] font-semibold">Choose </span> Us For
           </h1>
           {benefitsData.map((item: any, idx: number) => (
             <div key={idx} className="flex items-center lg:gap-4 xl:gap-8">
-              <div className="w-[60px] lg:w-[130px] lg:h-[100px] xl:h-[140px]">
+              <div className="max-w-[60px] max-h-[60px] lg:max-w-[80px] lg:max-h-[80px] xl:max-w-[100px] xl:max-h-[100px] ">
                 <img src={item.icon} alt={`icon-${idx}`} className="w-full h-auto object-cover" />
               </div>
               <div className="flex flex-col gap-2">
-                <p className="whitespace-pre-line global-p1 uppercase text-[#9C8639]">
+                <p className=" global-p1 uppercase text-[#9C8639]">
                   {item?.text}
                 </p>
-                <p className="whitespace-pre-line global-p2 text-[#434342]">{item?.description}</p>
+                <p className=" global-p2 text-[#434342]">{item?.description}</p>
               </div>
             </div>
           ))}
