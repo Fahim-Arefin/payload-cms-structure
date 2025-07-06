@@ -19,15 +19,16 @@ const OnboardingRoles: FC<OnboardingRolesProps> = ({ rolesData }: OnboardingRole
           <img
             src="/assets/onboardingRoles1.png"
             alt="Roles Image"
-            className="w-full h-auto object-cover"
+            className="h-[180px] md:h-full lg:max-h-[640px] xl:max-h-[720px] 2xl:max-h-[800px] object-cover
+          w-full md:w-[90%] lg:w-[90%] 2xl:w-[85%]"
           />
         </div>
 
         {/* Right content */}
         <div className="flex flex-col justify-evenly bg-white h-full p-2 lg:p-4">
           {rolesData.map((item: any, idx: number) => (
-            <div key={idx} className="flex items-center lg:gap-2 xl:gap-6">
-              <div className="md:w-[150px] md:h-[150px] xl:w-[210px] xl:h-[210px]">
+            <div key={idx} className="flex items-center lg:gap-2 xl:gap-4">
+              <div className="md:w-[150px] md:h-[140px] 2xl:h-[160px]">
                 <img src={item.icon} alt={`icon-${idx}`} className="w-full h-auto " />
               </div>
               <p className="whitespace-pre-line global-h3 text-['#434343']">{item?.text}</p>
@@ -51,7 +52,7 @@ const OnboardingRoles: FC<OnboardingRolesProps> = ({ rolesData }: OnboardingRole
         <div className="absolute bottom-0 left-0 right-0 px-4 pb-6 ">
           <div className="bg-[#FCF4EB] rounded-md px-5 py-6 flex flex-col gap-5">
             {rolesData.map((item, idx) => (
-              <div key={idx} className="flex items-start gap-4">
+              <div key={idx} className="flex items-center gap-4">
                 <div className="w-[50px] h-[50px]">
                   <img src={item.icon} alt={`icon-${idx}`} className="w-full h-auto mt-1" />
                 </div>

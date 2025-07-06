@@ -70,3 +70,19 @@ export type EndowmentDataType = {
     image: string
   }[]
 }
+
+export type OnboardingRoleType = {
+  image: string
+  title: string
+}
+
+export type SuitabilityCardType = {
+  img: string
+  title: string
+  description: string
+}
+
+export type PartnerType = {
+  img: string
+  title: string
+}
