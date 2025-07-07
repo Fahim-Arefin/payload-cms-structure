@@ -239,14 +239,7 @@ function WhyChooseUsSection() {
         {/* <div className="absolute inset-0 bg-[#1E1E1E7A] z-30" /> */}
       </div>
 
-      {/* <SearchBarSection /> */}
-
-      {/* linear linear-gradient */}
-      {/* <div className="md:hidden absolute top-[135px] w-full h-[4px]">
-        <div className="w-full h-[4px] bg-gradient-to-r from-transparent via-white to-transparent mx-auto" />
-      </div> */}
-
-      <div className="z-20 relative w-full lg:w-[85%] xl:lg:w-[80%] 2xl:w-[70%] mx-auto min-h-[550px] grid grid-cols-1 lg:grid-cols-2">
+      <div className="container-width z-20 relative w-full min-h-[550px] md:min-h-[600px] lg:min-h-[550px] grid grid-cols-1 lg:grid-cols-2">
         {/* Image Section aligned to right */}
         <div className="hidden lg:flex justify-end items-center rounded-t-[24px]">
           <div className="w-full rounded-t-[24px] lg:h-[600px] xl:h-[650px] 2xl:h-[700px]">
@@ -261,7 +254,7 @@ function WhyChooseUsSection() {
         {/* Text Section */}
         <div className="flex flex-col font-avenir ">
           {/* top section */}
-          <div className="lg:space-y-4 h-[50%] flex flex-col justify-center p-12 lg:pr-0 lg:pt-0 lg:pb-0 lg:pl-12 text-center lg:text-left">
+          <div className="lg:space-y-4 h-[50%] flex flex-col justify-start lg:justify-center p-12 lg:pr-0 lg:pt-0 lg:pb-0 lg:pl-12 text-center lg:text-left">
             <div className="global-h4  text-[#1E1E1E] uppercase font-light">Why Choose us?</div>
             <div className="flex items-center justify-center space-x-2 lg:flex-col lg:justify-start lg:items-start lg:space-x-0">
               <div className="global-h1 font-bold  lg:font-medium  text-[#1E1E1E] uppercase">
@@ -281,10 +274,10 @@ function WhyChooseUsSection() {
           </div>
 
           {/* bottom section */}
-          <div className="h-[50%] absolute bottom-0 right-0 w-full lg:w-[78%] xl:w-[73%] 2xl:w-[1000px]">
+          <div className="h-[50%] absolute bottom-0 right-0 w-full lg:w-[80%] xl:w-[75%] 2xl:w-[1000px]">
             {/* horizontal grid */}
             <div className=" h-[250px] 2xl:h-[300px] lg:bg-[#FCF4EB] flex justify-center lg:justify-end items-center rounded-tl-2xl">
-              <div className="flex justify-center lg:justify-end items-center flex-wrap w-full lg:w-[63%] xl:w-[70%] 2xl:w-[69%]">
+              <div className="flex justify-center lg:justify-end items-center flex-wrap w-full lg:w-[60%] xl:w-[67%] 2xl:w-[69%]">
                 {/* each info section */}
                 <div className="w-[42%] md:w-[40%] lg:w-[45%] flex ">
                   {/* img */}

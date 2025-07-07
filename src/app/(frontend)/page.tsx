@@ -15,6 +15,8 @@ import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import { Button } from '@/components/ui/button'
 import { BsPlay } from 'react-icons/bs'
 import SearchBarSection from '@/components/custom/home/SearchBarSection'
+import InsuranceSimplifiedLargeSection from '@/components/custom/home/InsuranceSimplifiedLargeSection'
+import { InsuranceDataType } from '@/types'
 export default async function HomePage() {
   const headers = await getHeaders()
   const payloadConfig = await config
@@ -43,6 +45,90 @@ export default async function HomePage() {
       subtitle: 'Impactful Living',
       description: "Harness innovation to redefine your future. Together, let's make a difference.",
       image: '/assets/banner3.png',
+    },
+  ]
+
+  const insuranceData: InsuranceDataType[] = [
+    {
+      sectionHeading: 'Insurance Simplified',
+      content: 'left',
+      title: 'Expert Knows - How',
+      subtitle: 'Skip the Jagron, Unlock',
+      mainImage: '/assets/is1.jpg',
+      insuranceCardData: [
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is2.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is3.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is4.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+      ],
+    },
+    {
+      sectionHeading: '',
+      content: 'right',
+      title: 'Decode Life Insurance',
+      subtitle: 'Get a gasp on the basis of life insurance',
+      mainImage: '/assets/is5.jpg',
+      insuranceCardData: [
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is6.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is7.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is8.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+      ],
+    },
+    {
+      sectionHeading: '',
+      content: 'left',
+      title: 'Zero-Hassle protection',
+      subtitle: 'Get your life covered fast, simple and smart',
+      mainImage: '/assets/is9.jpg',
+      insuranceCardData: [
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is10.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is11.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is12.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+      ],
     },
   ]
 
@@ -80,7 +166,13 @@ export default async function HomePage() {
       <WhyChooseUsSection />
       <OnYourCueSection />
       <QuoteSection />
-      {/* <InsuranceSimplifiedSection /> */}
+      <InsuranceSimplifiedSection />
+      <div className="container-wpm hidden md:block md:space-y-[30px] lg:space-y-[40px] xl:space-y-[80px]">
+        {insuranceData?.map((data, i) => (
+          <InsuranceSimplifiedLargeSection key={i} data={data} content={data?.content} />
+        ))}
+      </div>
+
       <VideoSection />
       <OpportunitiesSection />
       <NewsSection />

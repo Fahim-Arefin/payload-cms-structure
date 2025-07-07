@@ -14,8 +14,8 @@ const opportunitiesData = [
 
 export default function OpportunitiesSection() {
   return (
-    // <div className="w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4">
-    <div className="w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 lg:px-0 mt-12">
+    // <div className="w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 lg:px-0 mt-12">
+    <div className="container-wpm">
       <OpportunitiesHeader />
 
       <div className="">
