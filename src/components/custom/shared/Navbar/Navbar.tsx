@@ -671,11 +671,11 @@
 // V3 WITH BEHAVIOUR
 'use client'
 
-import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { RiArrowDownSLine } from 'react-icons/ri'
-import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx'
+import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
 
 export default function Navbar() {
   const pathname = usePathname()

@@ -1,8 +1,5 @@
 import Image from 'next/image'
-import React from 'react'
 
-import { Button } from '@/components/ui/button'
-import { BsPlay } from 'react-icons/bs'
 import { HeroContentType } from '@/types'
 
 type Props = {

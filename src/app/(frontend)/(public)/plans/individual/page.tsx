@@ -1,10 +1,8 @@
-import AllPlanSection from '@/components/custom/shared/plans/AllPlanSection'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
+import AllPlanSection from '@/components/custom/shared/plans/AllPlanSection'
 
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import React from 'react'
 import { Button } from '@/components/ui/button'
-import { BsPlay } from 'react-icons/bs'
 
 function PlanPage() {
   const heroSlides = [
