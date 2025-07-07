@@ -210,17 +210,15 @@
 
 // export default QuoteSection
 
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogClose,
+  DialogTrigger,
 } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
 import QuoteForm from './QuoteForm'
-import React from 'react'
 
 function QuoteSection() {
   return (
