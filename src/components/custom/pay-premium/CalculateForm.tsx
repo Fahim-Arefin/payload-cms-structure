@@ -89,6 +89,8 @@ function CalculateForm({ plan, onPlanChange }: Props) {
         <Input
           type="number"
           placeholder="Age"
+          min={1}
+          onWheel={(e) => e.currentTarget.blur()}
           className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
@@ -113,8 +115,15 @@ function CalculateForm({ plan, onPlanChange }: Props) {
       {/* phone number input */}
       <div className="col-span-2 md:col-span-1">
         <Input
-          type="number"
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder="Phone Number"
+          onKeyDown={(e) => {
+            if (!/^[0-9]$/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Tab') {
+              e.preventDefault()
+            }
+          }}
           className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
@@ -123,6 +132,8 @@ function CalculateForm({ plan, onPlanChange }: Props) {
         <Input
           type="number"
           placeholder="Annual Income"
+          min={0}
+          onWheel={(e) => e.currentTarget.blur()}
           className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
@@ -130,6 +141,8 @@ function CalculateForm({ plan, onPlanChange }: Props) {
       <div className="relative col-span-2 md:col-span-1">
         <Input
           type="number"
+          min={0}
+          onWheel={(e) => e.currentTarget.blur()}
           placeholder="Sum Assumed"
           className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />

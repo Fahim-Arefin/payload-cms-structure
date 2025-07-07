@@ -2,7 +2,6 @@ import { headers as getHeaders } from 'next/headers.js'
 import { getPayload } from 'payload'
 import { fileURLToPath } from 'url'
 
-import HeroSection from '@/components/custom/home/HeroSection'
 import WhyChooseUsSection from '@/components/custom/home/WhyChooseUsSection'
 import config from '@/payload.config'
 import './styles.css'
@@ -12,6 +11,12 @@ import VideoSection from '@/components/custom/home/VideoSection'
 import QuoteSection from '@/components/custom/home/QuoteSection'
 import OpportunitiesSection from '@/components/custom/home/OpportunitiesSection'
 import NewsSection from '@/components/custom/home/NewsSection'
+import HeroSection from '@/components/custom/shared/hero/HeroSection'
+import { Button } from '@/components/ui/button'
+import { BsPlay } from 'react-icons/bs'
+import SearchBarSection from '@/components/custom/home/SearchBarSection'
+import InsuranceSimplifiedLargeSection from '@/components/custom/home/InsuranceSimplifiedLargeSection'
+import { InsuranceDataType } from '@/types'
 export default async function HomePage() {
   const headers = await getHeaders()
   const payloadConfig = await config
@@ -20,13 +25,154 @@ export default async function HomePage() {
 
   const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 
+  const heroSlides = [
+    {
+      title: 'Driven by Purpose,',
+      subtitle: 'Designed for Life ',
+      description:
+        'Empower yourself to live on your terms. Enjoy the confidence of your potential and let us take the risk. ',
+      image: '/assets/banner1.jpg',
+    },
+    {
+      title: 'Building Better Futures',
+      subtitle: 'One Step at a Time',
+      description:
+        'We walk with you on your journey, providing the tools you need to succeed and grow.',
+      image: '/assets/banner2.jpg',
+    },
+    {
+      title: 'Innovative Thinking',
+      subtitle: 'Impactful Living',
+      description: "Harness innovation to redefine your future. Together, let's make a difference.",
+      image: '/assets/banner3.png',
+    },
+  ]
+
+  const insuranceData: InsuranceDataType[] = [
+    {
+      sectionHeading: 'Insurance Simplified',
+      content: 'left',
+      title: 'Expert Knows - How',
+      subtitle: 'Skip the Jagron, Unlock',
+      mainImage: '/assets/is1.jpg',
+      insuranceCardData: [
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is2.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is3.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is4.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+      ],
+    },
+    {
+      sectionHeading: '',
+      content: 'right',
+      title: 'Decode Life Insurance',
+      subtitle: 'Get a gasp on the basis of life insurance',
+      mainImage: '/assets/is5.jpg',
+      insuranceCardData: [
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is6.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is7.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is8.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+      ],
+    },
+    {
+      sectionHeading: '',
+      content: 'left',
+      title: 'Zero-Hassle protection',
+      subtitle: 'Get your life covered fast, simple and smart',
+      mainImage: '/assets/is9.jpg',
+      insuranceCardData: [
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is10.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is11.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+        {
+          title: 'Lorem ipsum dolor sit amet consectetur.',
+          image: '/assets/is12.jpg',
+          description:
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+        },
+      ],
+    },
+  ]
+
   return (
     <div className="font-avenir">
-      <HeroSection />
+      {/* <HeroSection /> */}
+      <HeroSection heroSlides={heroSlides}>
+        <div
+          className="absolute top-[245px] md:top-[355px] lg:top-[470px] xl:top-[490px]  2xl:top-[730px] 
+          inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
+       hero-content-width
+        flex justify-left space-x-4 md:space-x-6 lg:justify-start
+        "
+        >
+          <Button
+            variant="primary"
+            className="
+            px-2 md:px-6 2xl:px-10
+            py-1 md:py-2 2xl:py-6 
+            rounded-[4px] lg:rounded-[8px] 
+            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
+            global-h4 font-normal"
+          >
+            Explore Now
+          </Button>
+          <div className="flex items-center space-x-2 text-white 2xl:space-x-4">
+            <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
+              <BsPlay />
+            </div>
+            <div className="global-h4 font-normal ">From the Expert</div>
+          </div>
+        </div>
+      </HeroSection>
+      <SearchBarSection />
       <WhyChooseUsSection />
       <OnYourCueSection />
       <QuoteSection />
       <InsuranceSimplifiedSection />
+      <div className="container-wpm hidden md:block md:space-y-[30px] lg:space-y-[40px] xl:space-y-[80px]">
+        {insuranceData?.map((data, i) => (
+          <InsuranceSimplifiedLargeSection key={i} data={data} content={data?.content} />
+        ))}
+      </div>
+
       <VideoSection />
       <OpportunitiesSection />
       <NewsSection />

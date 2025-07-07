@@ -19,8 +19,8 @@ const OnboardingRoles: FC<OnboardingRolesProps> = ({ rolesData }: OnboardingRole
           <img
             src="/assets/onboardingRoles1.png"
             alt="Roles Image"
-            className="h-[180px] md:h-full lg:max-h-[640px] xl:max-h-[720px] 2xl:max-h-[800px] object-cover
-          w-full md:w-[90%] lg:w-[90%] 2xl:w-[85%]"
+            className="h-[180px] md:h-full lg:max-h-[640px] xl:max-h-[720px] 2xl:max-h-[720px] object-cover
+          w-full md:w-[90%] lg:w-[90%] 2xl:w-[75%]"
           />
         </div>
 
@@ -28,7 +28,7 @@ const OnboardingRoles: FC<OnboardingRolesProps> = ({ rolesData }: OnboardingRole
         <div className="flex flex-col justify-evenly bg-white h-full p-2 lg:p-4">
           {rolesData.map((item: any, idx: number) => (
             <div key={idx} className="flex items-center lg:gap-2 xl:gap-4">
-              <div className="md:w-[150px] md:h-[140px] 2xl:h-[160px]">
+              <div className="md:w-[150px] md:h-[140px] 2xl:h-[140px]">
                 <img src={item.icon} alt={`icon-${idx}`} className="w-full h-auto " />
               </div>
               <p className="whitespace-pre-line global-h3 text-['#434343']">{item?.text}</p>

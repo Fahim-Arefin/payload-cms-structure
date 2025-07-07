@@ -5,7 +5,7 @@ import { BsPlay } from 'react-icons/bs'
 function VideoSection() {
   return (
     <div className="mt-[200px] lg:mt-[250px] 2xl:mt-[400px]">
-      <div className="relative w-full font-avenir h-[300px] md:h-[400px] lg:h-[450px] xl:h-[550px] 2xl:h-[700px]">
+      <div className="relative w-full font-avenir h-[230px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px]">
         {/* Background GIF */}
         <img
           src="/assets/bg.gif"
@@ -20,20 +20,29 @@ function VideoSection() {
         <div
           className="relative z-20 text-white bg-[#3A3A3A] 
           p-4 2xl:p-10 
-          w-[85%] 2xl:w-[75%] 
-          h-[300px] md:h-[400px] lg:h-[450px] xl:h-[550px] 2xl:h-[700px]
+          w-[85%] md:w-[70%] lg:w-[65%] 2xl:w-[52%] 
+          h-[250px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px]
           rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px] mx-auto
           -top-[100px] lg:-top-[120px] xl:-top-[160px] 2xl:-top-[200px]"
         >
-          <div className=" flex justify-between items-center w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]">
-            <img
+          <div
+            className=" flex justify-between items-center w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]"
+            style={{
+              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/assets/host.jpg')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: 'lightgray',
+            }}
+          >
+            {/* <img
               src="/assets/host.jpg"
               alt="logo"
               className="w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]"
-            />
+            /> */}
           </div>
           <div className=" -mt-14 lg:-mt-16 2xl:-mt-20">
-            <div className="flex items-center justify-between w-[80%] mx-auto bg-red-400">
+            <div className="flex items-center justify-between w-[80%] mx-auto">
               <Button
                 variant="primary"
                 className="px-4 md:px-6 py-1 md:py-2 2xl:px-10 2xl:py-6 w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-xl
@@ -54,9 +63,9 @@ function VideoSection() {
           className="z-20 absolute inset-x-0 
           text-center text-white 
           bottom-10 lg:bottom-12 xl:bottom-16 2xl:bottom-20 
-          text-xl md:text-2xl lg:text-3xl 2xl:text-5xl md:font-bold"
+          global-h1 md:font-semibold"
         >
-          Level up With Our <span className="text-[#ED7125]">Experts</span>
+          Stay Ahead With Our <span className="text-[#ED7125]">Experts </span>
         </div>
       </div>
     </div>

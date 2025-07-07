@@ -12,7 +12,7 @@ const insuranceItems = [
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
-        <circle cx="90" cy="90" r="90" fill="#978900" />
+        <circle cx="90" cy="90" r="90" fill="#254525" />
         <rect x="45" y="45" width="90" height="90" fill="url(#pattern0_491_113)" />
         <defs>
           <pattern
@@ -46,7 +46,7 @@ const insuranceItems = [
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
-        <circle cx="90" cy="90" r="90" fill="#978900" />
+        <circle cx="90" cy="90" r="90" fill="#254525" />
         <rect x="33" y="33" width="115" height="115" fill="url(#pattern0_491_118)" />
         <defs>
           <pattern
@@ -80,7 +80,7 @@ const insuranceItems = [
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
-        <circle cx="90" cy="90" r="90" fill="#978900" />
+        <circle cx="90" cy="90" r="90" fill="#254525" />
         <rect x="45" y="45" width="90" height="90" fill="url(#pattern0_491_123)" />
         <defs>
           <pattern
@@ -107,18 +107,18 @@ const insuranceItems = [
 
 function InsuranceSimplifiedSection() {
   return (
-    <div className="font-avenir w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 2xl:mt-44">
-      <h1 className="text-[21px] md:text-[28px] lg:text-[34px] 2xl:text-[44px] font-bold text-center lg:text-start mb-5 md:mb-12">
-        Insurance <span className="text-black md:text-[#FF6600]">Simplified</span>
+    <div className="md:hidden font-avenir w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 2xl:mt-44">
+      <h1 className="text-[21px] md:text-[28px] lg:text-[34px] 2xl:text-[44px] font-semibold text-center lg:text-start mb-7 md:mb-12 uppercase">
+        Insurance <span className="text-[#FF6600]">Simplified</span>
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="grid grid-cols-3 md:grid-cols-1 xl:space-y-4 2xl:space-x-0 ">
           {insuranceItems.map((item) => (
             <div
               key={item.id}
-              className="flex flex-col md:flex-row justify-center md:justify-start items-center gap-y-2 md:gap-y-0 md:gap-x-8 md:px-4"
+              className="flex flex-col md:flex-row justify-center md:justify-start items-center gap-y-4 md:gap-y-0 md:gap-x-8 md:px-4"
             >
-              <div className="w-[80px] h-[80px] md:w-[130px] md:h-[130px]">{item.svg}</div>
+              <div className="w-[50px] h-[50px] md:w-[130px] md:h-[130px]">{item.svg}</div>
               <div className="text-[11px] text-center md:text-start md:text-xl 2xl:text-2xl text-[#7A4E46] xl:w-[250px] md:font-semibold">
                 {item.text}
               </div>
