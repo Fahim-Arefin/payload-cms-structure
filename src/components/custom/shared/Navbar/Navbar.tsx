@@ -744,7 +744,7 @@ export default function Navbar() {
         { href: '#', label: 'Bancassurance Plan' },
       ],
     },
-    { href: '#', label: 'Pay Premium' },
+    { href: '/pay-premium', label: 'Pay Premium' },
     {
       label: 'Claims',
       href: '#',
