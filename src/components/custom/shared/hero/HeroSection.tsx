@@ -7,15 +7,16 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
+import { HeroContentType } from '@/types'
 import Autoplay from 'embla-carousel-autoplay'
 import HeroItem from './HeroItem'
-import { HeroContentType } from '@/types'
 
 type Props = {
   heroSlides: HeroContentType[]
+  children?: React.ReactNode
 }
 
-function HeroSection({ heroSlides }: Props) {
+function HeroSection({ heroSlides, children }: Props) {
   return (
     <>
       <Carousel
@@ -48,6 +49,8 @@ function HeroSection({ heroSlides }: Props) {
             <CarouselNext className="static w-8 h-8 border border-white rounded-md bg-transparent text-white hover:bg-white/20 transition-colors flex items-center justify-center" />
           </div>
         )}
+        {/* static buttons */}
+        {children}
       </Carousel>
     </>
   )

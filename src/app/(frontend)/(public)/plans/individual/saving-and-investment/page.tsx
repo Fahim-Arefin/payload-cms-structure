@@ -10,7 +10,7 @@ function SavingAndInvestment() {
       title: '',
       subtitle: '',
       description:
-        'The right life insurance doesn’t just wait around for the what-ifs—it walks beside you through the what\u2019s next.',
+        'The right life insurance doesn\u2019t just wait around for the what-ifs—it walks beside you through the what\u2019s next.',
       image: '/assets/banner5.jpg',
     },
   ]
@@ -53,7 +53,7 @@ function SavingAndInvestment() {
       },
     ],
     image: '/assets/endowment1.jpg',
-    link: '/',
+    link: '/plans/individual/saving-and-investment/endowment',
   }
 
   const multiStagePlanData = {
