@@ -8,7 +8,7 @@ import Navbar from '@/components/custom/shared/Navbar/Navbar'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  title: 'Shanta Life',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -16,6 +16,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" type="image/png" href="/assets/mainlogo.png" />
+      </head>
       <body>
         <main className="bg-[#F6EDDD] min-h-screen relative">
           <TopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" />
