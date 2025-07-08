@@ -773,7 +773,7 @@ export default function Navbar() {
         w-full lg:w-[81%] xl:w-[76%] 2xl:w-[75%] mx-auto
         bg-white/60 backdrop-blur-[16.666666px]
         lg:rounded-[12px] xl:rounded-[14px] 2xl:rounded-[16px]
-        flex items-center justify-between ${showNavbar ? 'translate-y-0 lg:translate-y-[40px] xl:translate-y-[38px] 2xl:-translate-y-[40px]' : '-translate-y-[220px]'}`}
+        flex items-center justify-between ${showNavbar ? 'translate-y-0 lg:translate-y-[40px] xl:translate-y-[-52px] 2xl:-translate-y-[40px]' : '-translate-y-[220px]'}`}
         // style={{
         //   top: windowWidth < 1024 ? 0 : forceTopZero ? 0 : windowWidth >= 1536 ? 115 : 80,
         // }}
