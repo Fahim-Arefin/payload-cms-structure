@@ -82,6 +82,7 @@ function QuoteForm() {
       {/* age input */}
       <div className="col-span-2 md:col-span-1">
         <Input
+          min={0}
           type="number"
           placeholder="Age"
           className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
@@ -108,6 +109,7 @@ function QuoteForm() {
       {/* phone number input */}
       <div className="col-span-2 md:col-span-1">
         <Input
+          min={0}
           type="number"
           placeholder="Phone Number"
           className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
@@ -116,6 +118,7 @@ function QuoteForm() {
       {/* annual income input */}
       <div className="col-span-2 md:col-span-1">
         <Input
+          min={0}
           type="number"
           placeholder="Annual Income"
           className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
@@ -124,6 +127,7 @@ function QuoteForm() {
       {/* sum assumed input */}
       <div className="relative col-span-2 md:col-span-1">
         <Input
+          min={0}
           type="number"
           placeholder="Sum Assumed"
           className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"

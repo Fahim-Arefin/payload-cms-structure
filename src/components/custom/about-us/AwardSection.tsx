@@ -12,6 +12,13 @@ function AwardSection() {
           <div className="w-full h-[4px] bg-gradient-to-r from-transparent via-white to-transparent mx-auto" />
         </div>
 
+        <h1
+          className="global-h1 w-full lg:w-[85%] 2xl:w-[70%] mx-auto  font-semibold text-[#4A4A4A]
+        text-center lg:text-start
+        mb-5 md:mb-8 lg:mb-16  2xl:mb-24"
+        >
+          AWARDS & <span className="text-[#ED7125]">ACHEIVEMENTS</span>
+        </h1>
         <div className="z-20 relative w-full lg:w-[85%] 2xl:w-[70%] mx-auto lg:min-h-[500px] grid grid-cols-1 lg:grid-cols-2">
           {/* Image Section aligned to right */}
           <div className="flex justify-end items-center rounded-t-[14px] lg:rounded-t-[24px]">

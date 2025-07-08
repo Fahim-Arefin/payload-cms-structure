@@ -112,8 +112,10 @@ function DirectorCard({ data, index }: Props) {
         {/* Text Content */}
         <div className="z-50 space-y-2 md:space-y-6 lg:space-y-10 2xl:space-y-12">
           <div>
-            <h1 className="global-h1 font-normal lg:font-semibold text-[#ED7125] ">{data.title}</h1>
-            <h1 className="global-h1 font-normal lg:font-semibold">{data.subtitle}</h1>
+            <h1 className="global-h1 font-normal lg:font-semibold text-[#ED7125] uppercase">
+              {data.title}
+            </h1>
+            <h1 className="global-h1 font-normal lg:font-semibold uppercase">{data.subtitle}</h1>
           </div>
           <p className="text-[#434343] global-p2 font-light ">
             {data?.description?.slice(0, 130) + (data?.description?.length > 130 ? '...' : '')}
