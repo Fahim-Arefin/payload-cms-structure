@@ -31,7 +31,7 @@ function Footer() {
           <div className="lg:hidden w-full h-[1px] bg-white"></div>
           <div className="grid grid-cols-3 lg:grid-cols-1 gap-x-2 lg:space-y-3 md:px-4 md:py-2 lg:p-0">
             {/* social media 1*/}
-            <div className="flex space-x-2">
+            <div className="flex items-center space-x-2">
               <div className="hidden md:block w-[20px] lg:w-[30px] 2xl:w-[40px] h-[20px] lg:h-[30px] 2xl:h-[40px]">
                 <svg
                   // width="40"
@@ -48,8 +48,7 @@ function Footer() {
                 </svg>
               </div>
               <div className="text-white text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
-                <div className="underline">info@shantalife.com</div>
-                <div className="underline">www.website.com</div>
+                <div className="">info@shantalife.com</div>
               </div>
             </div>
             {/* social media 2*/}
@@ -149,7 +148,6 @@ function Footer() {
 
             {/* --------------------------------------------------------------------------------------------------------- */}
 
-            <div className="hidden lg:block w-full h-[1px] bg-white"></div>
             {/* social media 3*/}
             <div className="flex space-x-2 ">
               <div className="hidden md:block w-[20px] lg:w-[30px] 2xl:w-[40px] h-[20px] lg:h-[30px] 2xl:h-[40px]">
@@ -168,8 +166,8 @@ function Footer() {
                 </svg>
               </div>
               <div className="text-white text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
-                <div className="underline">+88 09610889900</div>
-                <div className="underline">(10 am-6 pm, Sunday-Thursday)</div>
+                <div className="">+88 09610889900</div>
+                <div className="">(10 am-6 pm, Sunday-Thursday)</div>
               </div>
             </div>
           </div>

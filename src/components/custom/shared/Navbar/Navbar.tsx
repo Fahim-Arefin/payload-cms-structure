@@ -767,16 +767,16 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed left-0 right-0 transition-all duration-500 ease-in-out font-avenir top-0 lg:top-24 z-50 inset-x-0 container-width 
-        px-4 py-2 md:px-8 md:py-3 
+        className={`fixed left-0 right-0 transition-all duration-500 ease-in-out font-avenir top-0 lg:top-24 z-50 inset-x-0 container-width
+        px-4 py-2 md:px-8 md:py-3
         h-[60px] xl:h-[70px] 2xl:h-[80px]
         w-full lg:w-[81%] xl:w-[76%] 2xl:w-[75%] mx-auto
         bg-white/60 backdrop-blur-[16.666666px]
-        lg:rounded-[12px] xl:rounded-[14px] 2xl:rounded-[16px] 
-        flex items-center justify-between ${showNavbar ? 'translate-y-0 lg:translate-y-[40px] xl:translate-y-[38px] 2xl:translate-y-[60px]' : '-translate-y-[220px]'}`}
-        style={{
-          top: windowWidth < 1024 ? 0 : forceTopZero ? 0 : windowWidth >= 1536 ? 115 : 80,
-        }}
+        lg:rounded-[12px] xl:rounded-[14px] 2xl:rounded-[16px]
+        flex items-center justify-between ${showNavbar ? 'translate-y-0 lg:translate-y-[40px] xl:translate-y-[38px] 2xl:-translate-y-[40px]' : '-translate-y-[220px]'}`}
+        // style={{
+        //   top: windowWidth < 1024 ? 0 : forceTopZero ? 0 : windowWidth >= 1536 ? 115 : 80,
+        // }}
       >
         {/* Logo + Burger */}
         <div className="flex items-center justify-between w-full lg:w-auto">

@@ -12,7 +12,9 @@ function SearchBarSection() {
         <Input
           type="text"
           placeholder="Try shanta multi-stage maturity plan"
-          className="w-full rounded-md bg-white text-[#00000040] placeholder:text-[#00000040] placeholder:text-xs sm:placeholder:text-sm tracking-[0.03em] py-4 px-5 sm:py-5 sm:px-12"
+          className="w-full rounded-md bg-white text-[#000000] placeholder:text-[#00000040] 
+          placeholder:text-xs sm:placeholder:text-sm tracking-[0.03em] py-4 px-5 sm:py-5 sm:px-12
+          h-[83.33333587646484] "
         />
 
         <div className="absolute right-5 sm:right-10 top-1/2 -translate-y-1/2">
