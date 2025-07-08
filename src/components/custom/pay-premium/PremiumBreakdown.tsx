@@ -26,7 +26,7 @@ export default function PremiumBreakdown() {
         <h3 className="global-h3 font-bold text-[#1D3C1E] mb-2">Living Benefits:</h3>
         <div className="border-t border-black mb-6" />
 
-        <div className="flex flex-col md:flex-row gap-6">
+        <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row gap-6">
           <div className="w-full 2xl:w-[300px]">
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
@@ -53,18 +53,18 @@ export default function PremiumBreakdown() {
 
           <div className="text-sm text-[#3A3A3C] grid grid-cols-[1.2fr,0.8fr] gap-2">
             {/* 15% + 55% Section with Line Image */}
-            <div className="flex items-start gap-4">
+            <div className="flex gap-1">
               {/* vertical image line */}
-              <img src="/assets/straightLine.png" alt="line" className="w-[10px] h-[150px] mt-1" />
+              <img src="/assets/straightLine.svg" alt="line" className="w-[10px] h-[135px] mt-1" />
 
               {/* label block */}
               <div className="space-y-8">
                 {/* 15% label */}
-                <div className="flex gap-2 items-start">
-                  <FaCircle size={10} color="#F79646" className="mt-[6px]" />
+                <div className="flex gap-2 items-baseline">
+                  <FaCircle size={6} color="#F79646" className="" />
                   <div>
-                    <p className="font-semibold">15% of the Face Amount paid at the end of:</p>
-                    <ul className="ml-2 space-y-1 text-xs">
+                    <p className="font-semibold text-[12px]">15% of the Face Amount paid at the end of:</p>
+                    <ul className="space-y-1 p-1 text-xs">
                       <li className="before:content-['--'] before:mr-1">¼ of the policy term</li>
                       <li className="before:content-['--'] before:mr-1">½ of the policy term</li>
                       <li className="before:content-['--'] before:mr-1">¾ of the policy</li>
@@ -76,7 +76,7 @@ export default function PremiumBreakdown() {
                 <div className="flex gap-2 ">
                   <FaCircle size={8} color="#4F6228" className="mt-[6px]" />
                   <div>
-                    <p className="font-semibold">Final 55% paid at full maturity!</p>
+                    <p className="font-semibold text-[12px]">Final 55% paid at full maturity!</p>
                   </div>
                 </div>
               </div>
@@ -85,13 +85,13 @@ export default function PremiumBreakdown() {
             {/* Death Coverage Section */}
             <div className="flex gap-2">
               {/* line image again */}
-              <img src="/assets/straightLine.png" alt="line" className="w-[10px] h-[150px] mt-1" />
+              <img src="/assets/straightLine.svg" alt="line2" className="w-[10px] h-[135px] mt-1" />
 
               {/* label */}
               <div className="space-y-1">
-                <ul className="list-disc list-inside ml-2">
+                <ul className="list-disc list-inside ml-2 text-[12px]">
                   <li>Death Coverage</li>
-                  <li className="">
+                  <li className="mt-2">
                     100% of the Face Amount- regardless of any partial maturity benefits
                   </li>
                 </ul>
@@ -114,7 +114,7 @@ export default function PremiumBreakdown() {
           </div>
           <div className="border-r-2 border-l-2 border-l-[#88888880] border-r-[#88888880]">
             <p className="global-p1 text-[#ED7125]">Quarterly</p>
-            <p className="font-bold global-h3 text-[#ED7125]">20,000.00</p>
+            <p className="font-bold global-h3 lg:global-p1 xl:global-h3 text-[#ED7125]">20,000.00</p>
           </div>
           <div>
             <p className="global-p2 text-[#3A3A3C]">Yearly</p>
