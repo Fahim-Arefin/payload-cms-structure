@@ -44,7 +44,7 @@ function HeroSection({ heroSlides, children }: Props) {
         </CarouselContent>
         {/* Carousel Navigation */}
         {heroSlides?.length > 1 && (
-          <div className="hidden md:flex absolute bottom-5 right-6 z-30 gap-3">
+          <div className="hidden md:flex absolute bottom-5 inset-x-0 justify-center z-30 gap-3 ">
             <CarouselPrevious className="static w-8 h-8 border border-white rounded-md bg-transparent text-white hover:bg-white/20 transition-colors flex items-center justify-center" />
             <CarouselNext className="static w-8 h-8 border border-white rounded-md bg-transparent text-white hover:bg-white/20 transition-colors flex items-center justify-center" />
           </div>
