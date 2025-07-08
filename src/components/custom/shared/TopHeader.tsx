@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { Search } from 'lucide-react'
+import Link from 'next/link'
 
 function TopHeader({ className }: { className?: string }) {
   return (
@@ -15,9 +16,11 @@ function TopHeader({ className }: { className?: string }) {
       <div></div>
       {/* Right: Agent + Language Switch + Search */}
       <div className="flex items-center gap-4">
-        <Button variant="link" className="text-white px-3 py-1 font-medium underline">
+        <Link href="/agent-onboarding">
+          <Button variant="link" className="text-white px-3 py-1 font-medium underline">
           I’m an Agent
-        </Button>
+          </Button>
+        </Link>
 
         <div className="flex items-center bg-[rgba(217,217,217,1)] rounded-full h-[30px] w-[100px] px-2">
           <ToggleGroup type="single" defaultValue="en" className="text-[#535353] text-[14px]">
