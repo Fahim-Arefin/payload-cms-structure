@@ -669,6 +669,7 @@
 // ------------------------------------------------------------------------------------------------------------------
 
 // V3 WITH BEHAVIOUR
+
 'use client'
 
 import Link from 'next/link'
@@ -684,6 +685,7 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0)
   const [forceTopZero, setForceTopZero] = useState(false)
   const [windowWidth, setWindowWidth] = useState<number>(0)
+  const [mobileDropdowns, setMobileDropdowns] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout
@@ -741,7 +743,7 @@ export default function Navbar() {
       children: [
         { href: '/plans/individual', label: 'Individual Plan' },
         { href: '/plans/corporate', label: 'Corporate Plan' },
-        { href: '#', label: 'Bancassurance Plan' },
+        { href: '/plans/bancassurance', label: 'Bancassurance Plan' },
       ],
     },
     { href: '/pay-premium', label: 'Pay Premium' },
@@ -803,17 +805,17 @@ export default function Navbar() {
                 <>
                   <Link
                     href={item.href}
-                    className={`flex items-center space-x-1 cursor-pointer relative ${
+                    className={`flex items-center space-x-1 relative ${
                       isActive(item.href)
                         ? 'text-[#ED7125] after:absolute after:left-0 after:w-full after:h-[4px] after:xl:h-[7px] after:bg-[#ED7125] after:rounded-full after:lg:bottom-[-17px] after:xl:bottom-[-17px] after:2xl:bottom-[-23px]'
                         : ''
-                    }`}
+                    } ${item.href === '#' ? ' cursor-not-allowed ' : ' cursor-pointer '}`}
                   >
                     <span>{item.label}</span>
                     <RiArrowDownSLine
                       className={`mt-0.5 w-[20px] h-[20px] ${
                         isActive(item.href) ? 'text-[#ED7125]' : ''
-                      }`}
+                      } `}
                     />
                   </Link>
 
@@ -828,7 +830,7 @@ export default function Navbar() {
                           href={child.href}
                           className={`block lg:px-2 xl:px-4 lg:py-1 xl:py-2 hover:bg-[#ED7125] hover:text-white rounded ${
                             isActive(child.href) ? 'text-[#ED7125] font-semibold' : ''
-                          }`}
+                          } ${item.href === '#' ? ' cursor-not-allowed ' : ' cursor-pointer '}`}
                         >
                           {child.label}
                         </Link>
@@ -839,11 +841,11 @@ export default function Navbar() {
               ) : (
                 <Link
                   href={item.href}
-                  className={`cursor-pointer relative ${
+                  className={`relative ${
                     isActive(item.href)
                       ? 'text-[#ED7125] after:absolute after:left-0 after:w-full after:h-[4px] after:xl:h-[7px] after:bg-[#ED7125] after:rounded-full after:lg:bottom-[-21px] after:xl:bottom-[-23px] after:2xl:bottom-[-28px]'
                       : ''
-                  }`}
+                  } ${item.href === '#' ? ' cursor-not-allowed ' : ' cursor-pointer '}`}
                 >
                   {item.label}
                 </Link>
@@ -892,7 +894,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Slide-In Menu */}
-      <div
+      {/* <div
         className={`fixed top-0 right-0 h-full w-[60%] bg-white/60 backdrop-blur-[16.666666px] z-[999] shadow-lg transform transition-transform duration-300 ease-in-out 
         ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
@@ -932,6 +934,74 @@ export default function Navbar() {
               )}
             </li>
           ))}
+        </ul>
+      </div> */}
+
+      {/* Mobile Slide-In Menu */}
+      <div
+        className={`fixed top-0 right-0 h-full w-[60%] bg-white/60 backdrop-blur-[16.666666px] z-[999] shadow-lg transform transition-transform duration-300 ease-in-out 
+  ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+      >
+        <div className="flex justify-between items-center px-4 py-4 border-b">
+          <img src="/assets/mainlogo.png" alt="logo" className="h-[40px]" />
+          <button onClick={() => setIsMobileMenuOpen(false)} className="text-2xl text-[#1F1F1F]">
+            <RxCross2 />
+          </button>
+        </div>
+
+        <ul className="flex flex-col space-y-1 px-4 text-[#1E1E1E]">
+          {NAV_ITEMS.map((item, index) => {
+            const hasChildren = item.children && item.children.length > 0
+            const isDisabled = item.href === '#'
+
+            return (
+              <li key={index} className="border-b py-2">
+                <div
+                  className={`flex items-center justify-between cursor-pointer ${
+                    isActive(item.href) ? 'text-[#ED7125] font-semibold' : ''
+                  } ${isDisabled ? 'cursor-not-allowed text-gray-400' : ''}`}
+                  onClick={() => {
+                    if (isDisabled) return
+                    if (hasChildren) {
+                      setMobileDropdowns((prev) => ({
+                        ...prev,
+                        [item.label]: !prev[item.label],
+                      }))
+                    } else {
+                      setIsMobileMenuOpen(false)
+                    }
+                  }}
+                >
+                  <Link href={isDisabled ? '#' : item.href} className="w-full">
+                    {item.label}
+                  </Link>
+                  {hasChildren && (
+                    <RiArrowDownSLine
+                      className={`ml-1 transition-transform duration-300 ${
+                        mobileDropdowns[item.label] ? 'rotate-180' : ''
+                      }`}
+                    />
+                  )}
+                </div>
+
+                {hasChildren && mobileDropdowns[item.label] && (
+                  <ul className="ml-4 mt-2 space-y-2 text-sm">
+                    {item.children.map((child, i) => (
+                      <li key={i}>
+                        <Link
+                          href={child.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={`block py-1 ${isActive(child.href) ? 'text-[#ED7125]' : ''}`}
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            )
+          })}
         </ul>
       </div>
     </>
