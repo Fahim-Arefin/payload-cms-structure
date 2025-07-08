@@ -4,12 +4,15 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogOverlay,
+  DialogPortal,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import './ContactUsSection.css'
 
 function ContactUsSection() {
   return (
@@ -176,59 +179,60 @@ function ContactUsSection() {
             </DialogTrigger>
             {/* bg-[#F6EDDD]/70 backdrop-blur-xl  */}
 
-            <DialogContent
-              className="
-             bg-[#3A3A3A]/10 
-        backdrop-blur-xl
+            <DialogPortal>
+              {/* <DialogOverlay className="bg-transparent backdrop-filter-none shadow-none fixed inset-0 z-50" /> */}
+              <DialogContent
+                className="bg-[#3A3A3A]/10 backdrop-blur-xl
             border-none p-4 md:p-6 rounded-md max-w-[90vw] md:max-w-[80%]"
-            >
-              <DialogHeader>
-                <DialogTitle></DialogTitle>
-              </DialogHeader>
-              {/* FORM CONTENT */}
-              <form className="space-y-3 ">
-                {/* Name Fields */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex flex-col">
-                    <label className="global-p2">First Name</label>
-                    <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px] global-p2 " />
+              >
+                <DialogHeader>
+                  <DialogTitle></DialogTitle>
+                </DialogHeader>
+                {/* FORM CONTENT */}
+                <form className="space-y-3 ">
+                  {/* Name Fields */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-col">
+                      <label className="global-p2">First Name</label>
+                      <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px] global-p2 " />
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="global-p2">Last Name</label>
+                      <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px] global-p2 " />
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <label className="global-p2">Last Name</label>
-                    <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px] global-p2 " />
-                  </div>
-                </div>
 
-                {/* Contact Fields */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex flex-col">
-                    <label className="global-p2">Email</label>
-                    <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px] global-p2 " />
+                  {/* Contact Fields */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-col">
+                      <label className="global-p2">Email</label>
+                      <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px] global-p2 " />
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="global-p2">Phone</label>
+                      <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px] global-p2 " />
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <label className="global-p2">Phone</label>
-                    <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px] global-p2 " />
-                  </div>
-                </div>
 
-                {/* Message Field */}
-                <div className="flex flex-col">
-                  <label className="global-p2">Message</label>
-                  <Input
-                    placeholder="Write your message..."
-                    className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 global-p2 placeholder:text-black
+                  {/* Message Field */}
+                  <div className="flex flex-col">
+                    <label className="global-p2">Message</label>
+                    <Input
+                      placeholder="Write your message..."
+                      className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 global-p2 placeholder:text-black
                     h-[28px] lg:h-[28px] xl:h-[30px] 2xl:h-[32px]"
-                  />
-                </div>
+                    />
+                  </div>
 
-                {/* Submit */}
-                <div className="pt-4 flex justify-end">
-                  <Button size="sm" variant="primary" className="text-white shadow-md ">
-                    Send Message
-                  </Button>
-                </div>
-              </form>
-            </DialogContent>
+                  {/* Submit */}
+                  <div className="pt-4 flex justify-end">
+                    <Button size="sm" variant="primary" className="text-white shadow-md ">
+                      Send Message
+                    </Button>
+                  </div>
+                </form>
+              </DialogContent>
+            </DialogPortal>
           </Dialog>
         </div>
       </div>
