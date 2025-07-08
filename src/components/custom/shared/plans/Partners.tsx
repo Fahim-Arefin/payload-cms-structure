@@ -8,22 +8,21 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import { BankingFacilitiesDataType } from '@/types'
-import BankingCard from './BankingCard'
+import PartnersCard from './PartnersCard'
 
 type Props = { data: BankingFacilitiesDataType[] }
 
-function BankingFacilities({ data }: Props) {
+function Partners({ data }: Props) {
   return (
     <div
-      className="container-padding bg-[#FCF4EB] min-h-[350px] md:min-h-[500px]
+      className="container-padding bg-white 
     space-y-6 md:space-y-12 lg:space-y-20 xl:space-y-24"
     >
       {/* heading */}
       <div>
-        <h3 className="global-h3 uppercase font-medium text-[#434343]">Banking Facilities</h3>
-        <div className="flex space-x-2">
-          <h3 className="global-h3 uppercase font-medium text-[#434343]">Protected under </h3>
-          <h3 className="global-h3 uppercase font-medium text-[#ED7125]">Life Insurance</h3>
+        <div className="flex space-x-2 uppercase">
+          <h3 className="global-h3 uppercase font-medium text-[#434343]">oUR Valued </h3>
+          <h3 className="global-h3 uppercase font-medium text-[#ED7125]"> partners</h3>
         </div>
       </div>
       {/* carousal */}
@@ -36,7 +35,7 @@ function BankingFacilities({ data }: Props) {
                basis-1/2 md:basis-1/3 lg:basis-1/4
               pr-1 lg:pr-2 xl:pr-6 2xl::pr-10"
             >
-              <BankingCard data={item} />
+              <PartnersCard data={item} />
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -63,4 +62,4 @@ function BankingFacilities({ data }: Props) {
   )
 }
 
-export default BankingFacilities
+export default Partners

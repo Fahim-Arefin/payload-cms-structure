@@ -2,6 +2,8 @@ import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSect
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
 import BankingFacilities from '@/components/custom/shared/plans/BankingFacilities'
+import Offers from '@/components/custom/shared/plans/Offers'
+import Partners from '@/components/custom/shared/plans/Partners'
 import React from 'react'
 
 function Bancassurance() {
@@ -66,12 +68,91 @@ function Bancassurance() {
       description: 'Monthly Deposit Scheme (DPS)',
     },
   ]
+  const offersData = [
+    {
+      image: '/assets/offer1.png',
+      description: 'Life insurance',
+      bgImage: '/assets/offerbg1.jpg',
+    },
+    {
+      image: '/assets/offer2.png',
+      description: 'Total permanent disability',
+      bgImage: '/assets/offerbg2.jpg',
+    },
+    {
+      image: '/assets/offer3.png',
+      description: 'In-Patient Health Coverage',
+      bgImage: '/assets/offerbg3.jpg',
+    },
+    {
+      image: '/assets/offer4.png',
+      description: 'Critical Illness Benefit',
+      bgImage: '/assets/offerbg4.jpg',
+    },
+    {
+      image: '/assets/offer1.png',
+      description: 'Life insurance',
+      bgImage: '/assets/offerbg1.jpg',
+    },
+    {
+      image: '/assets/offer2.png',
+      description: 'Total permanent disability',
+      bgImage: '/assets/offerbg2.jpg',
+    },
+    {
+      image: '/assets/offer3.png',
+      description: 'In-Patient Health Coverage',
+      bgImage: '/assets/offerbg3.jpg',
+    },
+    {
+      image: '/assets/offer4.png',
+      description: 'Critical Illness Benefit',
+      bgImage: '/assets/offerbg4.jpg',
+    },
+  ]
+
+  const partnersData = [
+    {
+      image: '/assets/bank1.png',
+      description: 'CITY BANK PLC LIMITED',
+    },
+    {
+      image: '/assets/bank2.png',
+      description: 'DHAKA BANK PLC LIMITED',
+    },
+    {
+      image: '/assets/bank3.png',
+      description: 'EASTERN BANK PLC LIMITED',
+    },
+    {
+      image: '/assets/bank4.png',
+      description: 'STANDARD BANK PLC LIMITED',
+    },
+    {
+      image: '/assets/bank1.png',
+      description: 'CITY BANK PLC LIMITED',
+    },
+    {
+      image: '/assets/bank2.png',
+      description: 'DHAKA BANK PLC LIMITED',
+    },
+    {
+      image: '/assets/bank3.png',
+      description: 'EASTERN BANK PLC LIMITED',
+    },
+    {
+      image: '/assets/bank4.png',
+      description: 'STANDARD BANK PLC LIMITED',
+    },
+  ]
 
   return (
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides} />
       <PlanInfoSection data={planInfoData} />
       <BankingFacilities data={bankingFacilitiesData} />
+      <Offers data={offersData} />
+      <Partners data={partnersData} />
       <ContactUsSection />
     </div>
   )
