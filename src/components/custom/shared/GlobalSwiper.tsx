@@ -38,7 +38,8 @@ export default function GlobalSwiper({ slidesData }: GlobalSwiperProps) {
         modules={[EffectCoverflow]}
         effect="coverflow"
         centeredSlides
-        loop
+        // loop
+        loop={slidesData.length > 6}
         ref={swiperRef}
         breakpoints={{
           0: {

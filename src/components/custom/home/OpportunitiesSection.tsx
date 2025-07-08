@@ -9,7 +9,12 @@ const opportunitiesData = [
   { src: '/assets/swiper3.jpg', alt: 'Slide 3' },
   { src: '/assets/swiper4.jpg', alt: 'Slide 4' },
   { src: '/assets/swiper5.jpg', alt: 'Slide 5' },
-  { src: '/assets/cue6.jpg', alt: 'Slide 6 ' },
+  { src: '/assets/swiper1.jpg', alt: 'Slide 6' },
+  { src: '/assets/swiper2.jpg', alt: 'Slide 7' },
+  { src: '/assets/swiper3.jpg', alt: 'Slide 8' },
+  { src: '/assets/swiper4.jpg', alt: 'Slide 9' },
+  { src: '/assets/swiper5.jpg', alt: 'Slide 10' },
+  { src: '/assets/cue6.jpg', alt: 'Slide 11' },
 ]
 
 export default function OpportunitiesSection() {
