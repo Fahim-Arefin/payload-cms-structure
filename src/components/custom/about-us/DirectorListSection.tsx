@@ -29,7 +29,7 @@ function DirectorListSection({ directorProfileData }: Props) {
             Shaping tomorrow, today. Our board is all about steering Shanta Life into the future.
             Lets get to know them.
           </p>
-          <h2 className="hidden lg:block global-h3 font-semibold text-[#4A4A4A] text-center lg:text-start">
+          <h2 className="hidden lg:block global-h3 font-semibold text-[#4A4A4A] text-center lg:text-start uppercase">
             Board of directors
           </h2>
         </div>

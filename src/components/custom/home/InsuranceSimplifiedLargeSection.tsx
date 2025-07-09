@@ -22,7 +22,7 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
         {data?.sectionHeading && (
           <div className="">
             <h1
-              className="global-h1 uppercase font-semibold space-x-4 text-center 
+              className="global-h1 uppercase font-semibold space-x-4 
             md:mb-[30px] lg:mb-[40px] xl:mb-[80px]"
             >
               <span>{restWords}</span>
@@ -37,7 +37,9 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
             <div
               className={cn(
                 `text-[#434343] global-h4 p-4 flex flex-col justify-center`,
-                content === 'left' ? 'order-1' : 'order-2 items-center',
+                content === 'left'
+                  ? 'order-1'
+                  : 'order-2 md:ml-[16%] lg:ml-[20%] xl:ml-[30%] 2xl:ml-[40%]',
               )}
             >
               <h4 className="font-semibold uppercase">

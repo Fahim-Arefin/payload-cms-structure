@@ -222,16 +222,16 @@ import QuoteForm from './QuoteForm'
 
 function QuoteSection() {
   return (
-    <div className="relative font-avenir container-wpm">
+    <div className="relative font-avenir container-wpm pb-44">
       <div className="grid grid-cols-1 lg:grid-cols-2 z-10">
         {/* Left Side */}
         <div className="p-4 lg:pl-0 space-y-8 xl:space-y-11 z-10">
           {/* Text Container */}
           <div className="space-y-2 text-center lg:text-left">
-            <div className="text-[#1E1E1E] text-[16px] md:text-[18px] 2xl:text-2xl font-light ">
+            <div className="uppercase text-[#1E1E1E] text-[16px] md:text-[18px] 2xl:text-2xl font-light ">
               Secure Your
             </div>
-            <div className="text-[#1E1E1E] global-h1 font-semibold ">
+            <div className="uppercase text-[#1E1E1E] global-h1 font-semibold ">
               Tomorrow, <span className="md:text-[#FF6600]">Today!</span>
             </div>
             <p className="global-p1 text-[#1E1E1E] font-light">

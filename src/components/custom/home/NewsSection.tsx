@@ -318,9 +318,9 @@ function NewsSection() {
   return (
     <div className="w-full xl:w-[90%] mx-auto px-2 md:px-3 2xl:px-16 my-24 xl:mt-44 font-avenir">
       {/* News Section Title */}
-      <div className="text-center">
+      <div className="text-center uppercase">
         <h1 className="text-[16px] md:text-[18px] 2xl:text-2xl font-light lg:font-medium">
-          News & Media{' '}
+          News & Media
         </h1>
         <h1 className="text-[21px] md:text-[28px] lg:text-[34px] 2xl:text-[44px] font-bold">
           Explore the <span className="md:text-[#ED7125]">latest Affairs</span>

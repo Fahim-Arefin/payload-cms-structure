@@ -4,7 +4,7 @@ import React from 'react'
 function OpportunitiesHeader() {
   return (
     <div
-      className="relative text-center w-[95%] md:w-[60%] lg:w-[50%] mx-auto font-avenir 
+      className="font-avenir relative text-center w-[95%] md:w-[60%] lg:w-[50%] mx-auto font-avenir 
     space-y-2 2xl:space-y-6
     2xl:px-24 pb-5 
     lg:pt-28 mt-32 lg:mt-0"
@@ -15,8 +15,8 @@ function OpportunitiesHeader() {
       {/* Foreground content */}
       <div className="relative z-10 space-y-6">
         <div className="space-y-2">
-          <h1 className="text-xl md:text-2xl font-medium">Life at</h1>
-          <h1 className="text-3xl md:text-5xl font-bold">
+          <h1 className="text-xl md:text-2xl font-medium uppercase">Life at</h1>
+          <h1 className="text-3xl md:text-5xl font-bold uppercase">
             Shanta <span className="md:text-[#FF6600]">Life</span>
           </h1>
           <p className="text-lg 2xl:text-[22px] font-light text-[#1F1F1F]">
