@@ -91,7 +91,7 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-4 pb-12 md:pb-24 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]">
+      <div className="flex justify-center items-center gap-4 pb-12 pt-10 lg:pt-0 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]">
         <Button
           variant="primary"
           className="

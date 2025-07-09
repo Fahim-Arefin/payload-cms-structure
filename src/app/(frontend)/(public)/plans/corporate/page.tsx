@@ -59,14 +59,14 @@ function page({}: Props) {
 
   const suitabilityData = [
     {
-      img: '/assets/suitability1.png',
+      img: '/assets/standard1.svg',
       title: 'FOR LIFE COVERAGE',
       description:
         'All regular and healthy eligible employees aged 18 to 64 are qualified for coverage. New hires shall get immediate protection under the scheme from day one seamless and stress-free security from the beginning of their journey with your company.',
     },
     {
-      img: '/assets/suitability2.png',
-      title: 'FOR LIFE COVERAGE',
+      img: '/assets/standard2.svg',
+      title: 'FOR HEALH COVERAGE',
       description:
         'All eligible employees are suitable for this coverage. Expanding this coverage to employees’ dependents provides an additional level of support. It reflects a deep commitment not only to the employee but also to their family, promoting a sense of security, care and well-being for their entire household.',
     },
