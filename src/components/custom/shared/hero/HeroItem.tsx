@@ -53,7 +53,7 @@ const HeroItem = ({ slide }: Props) => {
               </div>
             </div>
 
-            {/* description style after lg screen*/}
+            {/* description style after lg screen */}
             <div
               className="
               hidden lg:block
@@ -61,7 +61,8 @@ const HeroItem = ({ slide }: Props) => {
           font-[350]
          hero-content-width
           p-2 md:p-3 lg:p-4 
-          hero-h5"
+          hero-h5
+          "
             >
               <div className="text-white">
                 {slide?.description?.split('. ')?.map((line, i) => <h5 key={i}>{line.trim()}</h5>)}

@@ -158,8 +158,7 @@
 
 @layer components {
   .hero-description-bg-lg {
-    @apply rounded-md lg:rounded-xl 2xl:rounded-[15px] backdrop-blur-[7.5px];
-    background: linear-gradient(90deg, rgba(156, 134, 57, 0.3), rgba(153, 153, 153, 0));
+    @apply rounded-md lg:rounded-xl 2xl:rounded-[15px] backdrop-blur-sm bg-gradient-to-r from-[rgba(156,134,57,0.3)] to-[rgba(153,153,153,0)];
   }
 }
 

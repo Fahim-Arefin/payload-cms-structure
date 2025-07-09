@@ -23,7 +23,7 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
           <div className="">
             <h1
               className="global-h1 uppercase font-semibold space-x-4 
-            md:mb-[30px] lg:mb-[40px] xl:mb-[80px]"
+             md:mb-[30px] lg:mb-[40px] xl:mb-[80px]"
             >
               <span>{restWords}</span>
               <span className="text-[#ED7125]">{lastWord}</span>

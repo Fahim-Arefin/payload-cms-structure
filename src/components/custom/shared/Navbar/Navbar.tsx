@@ -677,6 +677,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { RiArrowDownSLine } from 'react-icons/ri'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
+import ToolTip from '../ToolTip'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -825,15 +826,13 @@ export default function Navbar() {
                             className={`mt-0.5 w-[20px] h-[20px] ${isActive(item.href) ? '' : ''} `}
                           />
                         </TooltipTrigger>
-                        {item.href === '#' && (
-                          <TooltipContent>Currently working on this link</TooltipContent>
-                        )}
+                        {item.href === '#' && <TooltipContent>working on this link</TooltipContent>}
                       </Tooltip>
                     </TooltipProvider>
                   </Link>
 
                   <ul
-                    className="absolute top-[55px] left-0 bg-white/60 backdrop-blur-[16.666666px] shadow-md rounded-md mt-2 
+                    className="absolute lg:top-[45px] xl:top-[55px] 2xl:top-[60px] left-0 bg-white/70 backdrop-blur-[16.666666px] shadow-md rounded-md 
                     w-48 space-y-1 p-2 z-50 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all 
                     lg:text-[12px] xl:text-sm"
                   >
@@ -868,9 +867,7 @@ export default function Navbar() {
                       >
                         {item.label}
                       </TooltipTrigger>
-                      {item.href === '#' && (
-                        <TooltipContent>Currently working on this link</TooltipContent>
-                      )}
+                      {item.href === '#' && <TooltipContent>working on this link</TooltipContent>}
                     </Tooltip>
                   </TooltipProvider>
                 </Link>
@@ -880,49 +877,45 @@ export default function Navbar() {
         </ul>
 
         {/* Desktop Right Icons */}
-        <div>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger className="hidden lg:flex items-center space-x-2 xl:space-x-4 2xl:space-x-8 text-[#1F1F1F]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="cursor-not-allowed"
-                >
-                  <path
-                    d="M12 15C15.3137 15 18 12.3137 18 9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9C6 12.3137 8.68629 15 12 15Z"
-                    stroke="#061C3D"
-                    strokeWidth="1.5"
-                    strokeMiterlimit="10"
-                  />
-                  <path
-                    d="M2.90527 20.2491C3.82736 18.6531 5.15322 17.3278 6.74966 16.4064C8.34611 15.485 10.1569 15 12.0002 15C13.8434 15 15.6542 15.4851 17.2506 16.4065C18.8471 17.3279 20.1729 18.6533 21.0949 20.2493"
-                    stroke="#061C3D"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <svg
-                  width="22"
-                  height="22"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  viewBox="0 0 24 24"
-                  className="cursor-not-allowed"
-                >
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
-              </TooltipTrigger>
-              <TooltipContent>Currently working on this link</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
+
+        <ToolTip className="hidden lg:flex items-center space-x-2 xl:space-x-4 2xl:space-x-8 text-[#1F1F1F]">
+          {/* <div className="hidden lg:flex items-center space-x-2 xl:space-x-4 2xl:space-x-8 text-[#1F1F1F]"> */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="cursor-not-allowed"
+          >
+            <path
+              d="M12 15C15.3137 15 18 12.3137 18 9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9C6 12.3137 8.68629 15 12 15Z"
+              stroke="#061C3D"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
+            />
+            <path
+              d="M2.90527 20.2491C3.82736 18.6531 5.15322 17.3278 6.74966 16.4064C8.34611 15.485 10.1569 15 12.0002 15C13.8434 15 15.6542 15.4851 17.2506 16.4065C18.8471 17.3279 20.1729 18.6533 21.0949 20.2493"
+              stroke="#061C3D"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <svg
+            width="22"
+            height="22"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            viewBox="0 0 24 24"
+            className="cursor-not-allowed"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          {/* </div> */}
+        </ToolTip>
       </nav>
 
       {/* Mobile Slide-In Menu */}

@@ -75,8 +75,8 @@ function CueItem({ card, index }: Props) {
         <div className="h-[80px] w-[80px] lg:h-[60px] lg:w-[60px] xl:h-[80px] xl:w-[80px]">
           <img className="h-full w-full" src={card.icon} alt={card.title} />
         </div>
-        <h1 className="text-xl lg:text-xl xl:text-2xl mt-4 font-bold">{card.title}</h1>
-        <h2 className="text-lg lg:text-xl xl:text-2xl font-bold">{card.subtitle}</h2>
+        <h1 className="text-xl lg:text-xl xl:text-2xl mt-4 font-semibold ">{card.title}</h1>
+        <h2 className="text-lg lg:text-xl xl:text-2xl font-semibold ">{card.subtitle}</h2>
         <p className="global-p2 mt-2 text-white lg:text-[#404041] font-light ">
           {card.description}
         </p>
