@@ -1,3 +1,4 @@
+import CorporateAddons from '@/components/custom/corporate/CorporateAddons'
 import CorporateChoose from '@/components/custom/corporate/CorporateChoose'
 import CorporateHighlight from '@/components/custom/corporate/CorporateHighlights'
 import CorporateSuitability from '@/components/custom/corporate/CorporateSuitability'
@@ -91,6 +92,49 @@ function page({}: Props) {
     },
   ]
 
+  const addOnsData = [
+    {
+      image: '/assets/addonIcon1.svg',
+      description: 'Integrated Healthcare and Diagnostic Network',
+      bgImage: '/assets/addons1.jpg',
+    },
+    {
+      image: '/assets/addonIcon2.svg',
+      description: 'Exclusive Discounts on Lifestyle Amenities ',
+      bgImage: '/assets/addons2.jpg',
+    },
+    {
+      image: '/assets/addonIcon3.svg',
+      description: 'Digital Loyalty Card ',
+      bgImage: '/assets/addons3.jpg',
+    },
+    {
+      image: '/assets/addonIcon4.svg',
+      description: 'Telemedicine Service',
+      bgImage: '/assets/addons4.jpg',
+    },
+    {
+      image: '/assets/addonIcon1.svg',
+      description: 'Integrated Healthcare and Diagnostic Network',
+      bgImage: '/assets/addons1.jpg',
+    },
+    {
+      image: '/assets/addonIcon2.svg',
+      description: 'Exclusive Discounts on Lifestyle Amenities ',
+      bgImage: '/assets/addons2.jpg',
+    },
+    {
+      image: '/assets/addonIcon3.svg',
+      description: 'Digital Loyalty Card ',
+      bgImage: '/assets/addons3.jpg',
+    },
+    {
+      image: '/assets/addonIcon4.svg',
+      description: 'Telemedicine Service',
+      bgImage: '/assets/addons4.jpg',
+    },
+  ]
+
   return (
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides}>
@@ -139,6 +183,7 @@ function page({}: Props) {
       <CorporateChoose benefitsData={benefitsData} />
       <CorporateSuitability data={suitabilityData} />
       <PartnerCarousel data={partnerData} />
+      <CorporateAddons data={addOnsData} />
       <ContactUsSection />
     </div>
   )
