@@ -222,7 +222,7 @@ import QuoteForm from './QuoteForm'
 
 function QuoteSection() {
   return (
-    <div className="relative font-avenir container-wpm pb-44">
+    <div className="relative font-avenir container-wpm md:pb-[70px] lg:pb-[90px] xl:pb-[80px] 2xl:pb-40">
       <div className="grid grid-cols-1 lg:grid-cols-2 z-10">
         {/* Left Side */}
         <div className="p-4 lg:pl-0 space-y-8 xl:space-y-11 z-10">
