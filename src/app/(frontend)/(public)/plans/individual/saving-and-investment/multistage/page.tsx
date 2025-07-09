@@ -1,0 +1,85 @@
+import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
+import HeroSection from '@/components/custom/shared/hero/HeroSection'
+import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
+import StagePlanTitle from '@/components/custom/multistage/StagePlanTitle'
+import { Button } from '@/components/ui/button'
+import React, { FC } from 'react'
+import MultiPlansSection from '@/components/custom/multistage/MultiPlansSection'
+import FourStagePlan from '@/components/custom/multistage/FourStagePlan'
+import FiveStagePlan from '@/components/custom/multistage/FiveStagePlan'
+
+type Props = {}
+
+const page: FC<Props> = ({}) => {
+  const heroSlides = [
+    {
+      title: 'Shanta Multi-Stage Maturity Plans',
+      subtitle: '',
+      description: 'Because Life Has More Than One Milestone. We’re With You at Every One.',
+      image: '/assets/multistageBanner.png',
+    },
+  ]
+
+  const planInfoData = {
+    image: '/assets/multistagePlan.png',
+    description:
+      'Some dreams can’t wait. Whether it’s funding your child’s education, celebrating a life event, or building a safety net for the future—Shanta Life’s Multi-Stage Maturity Plan is your financial partner through it all. With guaranteed payouts at key stages and full protection throughout, it’s the smart way to stay prepared for what’s next!!',
+  }
+
+  const threeStageData = [
+    { name: '1/3 of the policy term', value: 25 },
+    { name: '2/3 of the policy term', value: 25 },
+    { name: 'Remaining Sum Assured', value: 50 },
+  ]
+
+  const planData = [
+    { image: '/assets/time.png', timeline: '12 YEARS' },
+    { image: '/assets/time.png', timeline: '15 YEARS' },
+    { image: '/assets/time.png', timeline: '18 YEARS' },
+    { image: '/assets/time.png', timeline: '21 YEARS' },
+    { image: '/assets/time.png', timeline: '24 YEARS' },
+    { image: '/assets/time.png', timeline: '27 YEARS' },
+  ]
+
+  return (
+    <div className="font-avenir bg-white">
+      <HeroSection heroSlides={heroSlides}>
+        <div
+          className="absolute top-[205px] md:top-[305px] lg:top-[400px] xl:top-[420px]  2xl:top-[630px] 
+          inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
+       hero-content-width
+        flex justify-left space-x-4 md:space-x-6 lg:justify-start
+        "
+        >
+          <Button
+            variant="primary"
+            className="
+            px-2 md:px-6 2xl:px-10
+            py-1 md:py-2 2xl:py-6 
+            rounded-[4px] lg:rounded-[8px] 
+            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
+            global-h4 font-normal"
+          >
+            Purchase Now
+          </Button>
+          <Button
+            className=" px-2 md:px-6 2xl:px-10
+            py-1 md:py-2 2xl:py-6 w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] rounded border border-white text-white bg-white/20 backdrop-blur-md
+             hover:bg-white/30 hover:border-white transition-colors duration-300"
+          >
+            Call Now
+          </Button>
+        </div>
+      </HeroSection>
+      <PlanInfoSection bgColor="#F6EDDD" data={planInfoData} />
+      <StagePlanTitle />
+      <MultiPlansSection data={threeStageData} planData={planData} />
+      <FourStagePlan />
+      <FiveStagePlan />
+
+      <ContactUsSection />
+    </div>
+  )
+}
+
+export default page

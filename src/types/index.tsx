@@ -96,3 +96,9 @@ export type PartnerType = {
   img: string
   title: string
 }
+
+export type PlanData = {
+  image: string
+  timeline: string
+}
+
