@@ -56,7 +56,7 @@ const cards = [
 
 function OnYourCueSection() {
   return (
-    <div className="container-wpm">
+    <div className="container-wpm md:mt-[70px] lg:mt-[90px] xl:mt-[80px] 2xl:mt-40">
       <CueHeader />
 
       {/* Mobile View: Grid */}

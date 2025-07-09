@@ -10,7 +10,8 @@ function Footer() {
       py-5 2xl:py-6 
       global-p2 md:font-medium"
       >
-        Copyright © 2025 <span className="text-[#FF6600]">Shanta Life.</span> All Rights Reserved
+        Copyright © 2025 <span className="text-[#FF6600]">Shanta Life Ltd.</span> All Rights
+        Reserved
       </div>
 
       <div

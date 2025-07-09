@@ -17,6 +17,7 @@ import { BsPlay } from 'react-icons/bs'
 import SearchBarSection from '@/components/custom/home/SearchBarSection'
 import InsuranceSimplifiedLargeSection from '@/components/custom/home/InsuranceSimplifiedLargeSection'
 import { InsuranceDataType } from '@/types'
+import ToolTip from '@/components/custom/shared/ToolTip'
 export default async function HomePage() {
   const headers = await getHeaders()
   const payloadConfig = await config
@@ -140,27 +141,33 @@ export default async function HomePage() {
           className="absolute top-[245px] md:top-[355px] lg:top-[470px] xl:top-[490px]  2xl:top-[730px] 
           inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
        hero-content-width
-        flex justify-left space-x-4 md:space-x-6 lg:justify-start
+        flex justify-left space-x-4 md:space-x-6 lg:justify-start cursor-not-allowed
         "
         >
-          <Button
-            variant="primary"
-            className="
+          <ToolTip>
+            <Button
+              variant="primary"
+              className="
+            cursor-not-allowed
             px-2 md:px-6 2xl:px-10
             py-1 md:py-2 2xl:py-6
             h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
             rounded-[4px] lg:rounded-[8px] 
             w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
             global-h4 font-normal"
-          >
-            Explore Now
-          </Button>
-          <div className="flex items-center space-x-2 text-white 2xl:space-x-4">
+            >
+              Explore Now
+            </Button>
+          </ToolTip>
+
+          <ToolTip className="flex items-center space-x-2 text-white 2xl:space-x-4">
+            {/* <div className="flex items-center space-x-2 text-white 2xl:space-x-4"> */}
             <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
               <BsPlay />
             </div>
             <div className="global-h4 font-normal ">From the Expert</div>
-          </div>
+            {/* </div> */}
+          </ToolTip>
         </div>
       </HeroSection>
       <SearchBarSection />

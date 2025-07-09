@@ -4,7 +4,7 @@ import { BsPlay } from 'react-icons/bs'
 
 function VideoSection() {
   return (
-    <div className="pt-[200px] lg:pt-[250px] 2xl:pt-[400px] bg-white">
+    <div className="pt-[150px] md:pt-[100px] lg:pt-[150px] xl:pt-[200px] bg-white">
       <div className="relative w-full font-avenir h-[230px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px]">
         {/* Background GIF */}
         <img
@@ -19,9 +19,9 @@ function VideoSection() {
         {/* Foreground content */}
         <div
           className="relative z-20 text-white bg-[#3A3A3A] 
-          p-4 2xl:p-10 
-          w-[85%] md:w-[70%] lg:w-[65%] 2xl:w-[52%] 
-          h-[250px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px]
+          p-4 lg:p-6 
+          w-[85%] md:w-[70%] lg:w-[65%] xl:w-[60%]  2xl:w-[52%] 
+          h-[250px] md:h-[300px] lg:h-[400px] xl:h-[500px] 2xl:h-[560px]
           rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px] mx-auto
           -top-[100px] lg:-top-[120px] xl:-top-[160px] 2xl:-top-[200px]"
         >
@@ -56,7 +56,7 @@ function VideoSection() {
           className="z-20 absolute inset-x-0 
           text-center text-white 
           bottom-10 lg:bottom-12 xl:bottom-16 2xl:bottom-20 
-          global-h1 md:font-semibold uppercase"
+          global-h1 md:font-medium uppercase"
         >
           Stay Ahead With Our <span className="text-[#ED7125]">Experts </span>
         </div>

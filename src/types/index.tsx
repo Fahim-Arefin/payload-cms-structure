@@ -102,3 +102,9 @@ export type BankingFacilitiesDataType = Pick<AllPlantDataType, 'description' | '
 export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
 }
+
+export type PlanData = {
+  image: string
+  timeline: string
+}
+

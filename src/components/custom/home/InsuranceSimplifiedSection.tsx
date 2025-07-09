@@ -107,7 +107,10 @@ const insuranceItems = [
 
 function InsuranceSimplifiedSection() {
   return (
-    <div className="md:hidden font-avenir w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 2xl:mt-44">
+    <div
+      className="md:hidden font-avenir w-full lg:w-[85%] 2xl:w-[70%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 2xl:mt-44 bg-white
+    pt-12"
+    >
       <h1 className="text-[21px] md:text-[28px] lg:text-[34px] 2xl:text-[44px] font-semibold text-center lg:text-start mb-7 md:mb-12 uppercase">
         Insurance <span className="text-[#FF6600]">Simplified</span>
       </h1>
