@@ -176,7 +176,7 @@ function Footer() {
         {/* grid 2 */}
         <div className="flex flex-col space-y-3 p-2 lg:p-5 items-center -mt-16 md:-mt-12 lg:mt-0">
           <div>
-            <h1 className="text-sm lg:text-xl 2xl:text-2xl font-medium mb-2 lg:mb-6 md:px-12 lg:px-0">
+            <h1 className="text-sm lg:text-xl 2xl:text-2xl font-medium mb-2 lg:mb-6 md:px-12 lg:px-0 text-white/50">
               Explore
             </h1>
             <div>
@@ -207,7 +207,9 @@ function Footer() {
         {/* grid 3 */}
         <div className="flex flex-col space-y-3 p-2 lg:p-5 items-center -mt-16 md:-mt-12 lg:mt-0">
           <div>
-            <h1 className=" text-sm lg:text-xl 2xl:text-2xl font-medium mb-6">Legal</h1>
+            <h1 className=" text-sm lg:text-xl 2xl:text-2xl font-medium mb-6 text-white/50">
+              Legal
+            </h1>
             <div>
               <ul className="flex flex-col space-y-2 text-xs 2xl:text-lg">
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
@@ -221,9 +223,11 @@ function Footer() {
           </div>
         </div>
         {/* grid 4 */}
-        <div className="flex flex-col space-y-3 p-2 lg:p-5 items-center -mt-16 md:-mt-12 lg:mt-0">
+        <div className="flex flex-col space-y-3 p-2 lg:p-5 items-center -mt-16 md:-mt-12 lg:mt-0 ">
           <div>
-            <h1 className=" text-sm lg:text-xl 2xl:text-2xl font-medium mb-6">Find us on</h1>
+            <h1 className=" text-sm lg:text-xl 2xl:text-2xl font-medium mb-6 text-white/50">
+              Find us on
+            </h1>
             <div className="flex space-x-2">
               <div className="w-[20px] h-[20px] lg:w-[30px] lg:h-[30px] 2xl:w-[40px] 2xl:h-[40px]">
                 <svg

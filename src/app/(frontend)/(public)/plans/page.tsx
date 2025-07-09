@@ -66,7 +66,7 @@ function PlanPage() {
           </Button>
         </div>
       </HeroSection>
-      <AllPlanSection plantData={allPlantData}>
+      <AllPlanSection plantData={allPlantData} blur>
         <div>
           Protect what <span className="text-[#ED7125]">brings you joy</span>
         </div>
