@@ -29,29 +29,29 @@ function page({}: Props) {
 
   const benefitsData = [
     {
-      icon: '/assets/corporatebenefits1.png',
+      icon: '/assets/choose1.svg',
       text: 'Comprehensive Coverage',
       description:
         'Protection against natural and accidental deaths, disabilities, and critical illnesses.',
     },
     {
-      icon: '/assets/corporatebenefits2.png',
+      icon: '/assets/choose2.svg',
       text: 'HEALTH BENEFITS',
       description:
         'In-patient, outpatient, maternity, dental, and optical care for total well-being.',
     },
     {
-      icon: '/assets/corporatebenefits3.png',
+      icon: '/assets/choose3.svg',
       text: 'EFFORTLESS CLAIMS',
       description: 'Cashless hospitalization and a smooth claims process.',
     },
     {
-      icon: '/assets/corporatebenefits4.png',
+      icon: '/assets/choose4.svg',
       text: 'GLOBAL CARE ACCESS',
       description: 'Trusted medical support locally and worldwide.',
     },
     {
-      icon: '/assets/corporatebenefits5.png',
+      icon: '/assets/choose5.svg',
       text: 'STRONG TOGETHER',
       description: 'Foster loyalty and belonging by investing in your team’s well-being.',
     },
