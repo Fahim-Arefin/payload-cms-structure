@@ -7,9 +7,9 @@ type Props = {
 
 function RolesSection({ onboardingRoleData }: Props) {
   return (
-    <div className="container-padding relative overflow-hidden bg-white">
+    <div className="container-padding bg-[#FCF4EBCC] relative overflow-hidden bg-white">
       <h1 className="global-h1 font-semibold text-[#434342] uppercase">
-        Why This Role <span className="text-[#ED7125]">Works for You</span>
+        Where Freedom Meets   <span className="text-[#ED7125]">Opportunity</span>
       </h1>
       <div className="mt-10">
         {/* left side */}

@@ -92,6 +92,12 @@ export type SuitabilityCardType = {
   description: string
 }
 
+export type VisionCardType = {
+  img: string
+  title: string
+  points: Array<string>
+}
+
 export type PartnerType = {
   img: string
   title: string
