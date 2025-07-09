@@ -27,7 +27,7 @@ function ContactUsSection() {
         className="
       z-20 absolute bottom-0 
       lg:left-[2%] xl:left-[4%] 2xl:left-[70px] 
-      h-[140%] 2xl:h-[850.667px] 2xl:w-[800px]"
+      h-[140%] 2xl:h-[150%]"
       >
         <img src="/assets/contactUsImage.png" alt="" className="h-full w-full" />
       </div>
