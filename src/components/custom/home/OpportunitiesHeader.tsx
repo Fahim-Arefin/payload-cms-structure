@@ -4,13 +4,13 @@ import React from 'react'
 function OpportunitiesHeader() {
   return (
     <div
-      className="font-avenir relative text-center w-[95%] md:w-[60%] lg:w-[50%] mx-auto font-avenir 
+      className="font-avenir relative text-center w-[95%] md:w-[60%] lg:w-[50%] mx-auto 
     space-y-2 2xl:space-y-6
     2xl:px-24 pb-5 
-    lg:pt-28 mt-32 lg:mt-0"
+    mt-28 lg:mt-0"
     >
       {/* Background overlay */}
-      <div className="absolute inset-0 -top-1/2 lg:top-0 bg-[url('/assets/opportunities.png')] bg-cover bg-center bg-no-repeat opacity-45 z-0" />
+      <div className="absolute inset-0 -top-1/2 lg:-top-16 bg-[url('/assets/opportunities.png')] bg-cover bg-center bg-no-repeat opacity-45 z-0" />
 
       {/* Foreground content */}
       <div className="relative z-10 space-y-6">

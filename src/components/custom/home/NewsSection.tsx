@@ -308,10 +308,12 @@
 // export default NewsSection
 
 'use client'
+import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Image from 'next/image'
 import { useState } from 'react'
+import ToolTip from '../shared/ToolTip'
 
 function NewsSection() {
   const [open, setOpen] = useState(false)
@@ -570,6 +572,24 @@ function NewsSection() {
             </div>
           </div>
         </div>
+      </div>
+      {/* Let’s Find More button */}
+      <div className="flex justify-center font-avenir">
+        <ToolTip>
+          <Button
+            variant="primary"
+            className="
+          cursor-not-allowed
+          px-2 md:px-6 2xl:px-10
+          py-1 md:py-2 2xl:py-6
+          h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
+          rounded-[4px] lg:rounded-[8px] 
+          w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
+          global-h4 font-normal"
+          >
+            Explore Now
+          </Button>
+        </ToolTip>
       </div>
     </div>
   )
