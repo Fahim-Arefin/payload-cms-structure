@@ -123,23 +123,23 @@ function page({}: Props) {
     sectionLeft: [
       {
         icon: '/assets/opportunityIcon1.svg',
-        text: 'Introduce a Wide Range of People to Shanta Life Insurance',
+        text: 'Be a Brand Ambassador',
       },
       {
         icon: '/assets/opportunityIcon2.svg',
-        text: 'Educate Prospects About the Significance of Financial Planning',
+        text: 'Own your Numbers',
       },
       {
         icon: '/assets/opportunityIcon3.svg',
-        text: 'Onboarding New Policy holder, Agents,\nand Driving Exceptional Agent Experience',
+        text: 'Master the product,own the pitch',
       },
       {
         icon: '/assets/opportunityIcon4.svg',
-        text: 'Staying Ahead of Market Trends and Regulations',
+        text: 'Follow up, follow through- build genunie connections',
       },
       {
         icon: '/assets/opportunityIcon5.svg',
-        text: 'Continuously Upskill With Our Help',
+        text: 'Learn, Evolve & Excel',
       },
     ],
     sectionRight: {

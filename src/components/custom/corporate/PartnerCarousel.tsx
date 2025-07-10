@@ -21,7 +21,7 @@ type Props = {
            xl:px-[200px]  xl:pt-[100px] 
            2xl:px-[300px] 2xl:pt-[100px]">
         <span className="text-[#ED7125]">OUR VALUED</span>{' '}
-        PARTNERS
+        CLIENTS
       </h2>
 
       <Carousel
