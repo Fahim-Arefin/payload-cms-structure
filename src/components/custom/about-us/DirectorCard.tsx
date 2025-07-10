@@ -110,7 +110,7 @@ function DirectorCard({ data, index }: Props) {
         />
 
         {/* Text Content */}
-        <div className="z-50 space-y-2 md:space-y-6 lg:space-y-10 2xl:space-y-12">
+        <div className="z-40 space-y-2 md:space-y-6 lg:space-y-10 2xl:space-y-12">
           <div>
             <h1 className="global-h1 font-normal lg:font-semibold text-[#ED7125] uppercase">
               {data.title}

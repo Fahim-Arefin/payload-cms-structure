@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
+import ToolTip from '../shared/ToolTip'
 
 function QuoteForm() {
   const plans = [
@@ -24,8 +25,16 @@ function QuoteForm() {
   const genders = ['Male', 'Female']
   const tenures = ['10 years', '20 years', '30 years']
   const paymentMethods = ['Monthly', 'Quarterly', 'Yearly']
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle form submission logic here
+    console.log('Form submitted')
+  }
+
   return (
     <form
+      onSubmit={handleSubmit}
       action=""
       className="border-2 border-[#9C8639] rounded-2xl bg-[#FFFFFFCC]
   grid grid-cols-2 gap-x-4 gap-y-8 md:gap-7 xl:gap-8 
@@ -155,11 +164,11 @@ function QuoteForm() {
         </Select>
       </div>
       {/* submit button */}
-      <div className="col-span-2">
-        <Button className="bg-[#9C8639] text-white rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 w-full">
+      <ToolTip className="col-span-2">
+        <Button className="cursor-not-allowed bg-[#9C8639] text-white rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 w-full">
           Get A Quote Now
         </Button>
-      </div>
+      </ToolTip>
     </form>
   )
 }

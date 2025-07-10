@@ -13,12 +13,18 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import './ContactUsSection.css'
+import ToolTip from '../ToolTip'
 
 function ContactUsSection() {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle form submission logic here
+    console.log('Form submitted')
+  }
   return (
     <div
       className="bg-[#F6EDDD] relative 
-      mt-[80px] md:mt-[100px] lg:mt-[120px] xl:mt-[200px]
+      mt-[80px] md:mt-[100px] lg:mt-[120px] xl:mt-[250px]
       lg:px-[130px] xl:px-[200px] 2xl:px-[300px] 
       h-[200px] md:h-[330px] lg:h-[430px] xl:h-[500px] 2xl:h-[600px]"
     >
@@ -89,7 +95,7 @@ function ContactUsSection() {
             Ask Us!
           </h1>
 
-          <form className="lg:space-y-3 xl:space-y-4 2xl:space-y-6">
+          <form className="lg:space-y-3 xl:space-y-4 2xl:space-y-6" onSubmit={handleSubmit}>
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col">
@@ -144,14 +150,16 @@ function ContactUsSection() {
 
             {/* Button */}
             <div className="pt-4 flex justify-end">
-              <Button
-                variant="primary"
-                className=" text-white shadow-md  
-               
-              text-[10px] md:text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[14px]"
-              >
-                Send Message
-              </Button>
+              <ToolTip>
+                <Button
+                  variant="primary"
+                  className=" text-white shadow-md cursor-not-allowed
+                
+                text-[10px] md:text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[14px]"
+                >
+                  Send Message
+                </Button>
+              </ToolTip>
             </div>
           </form>
         </div>

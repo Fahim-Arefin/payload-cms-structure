@@ -1,8 +1,13 @@
+'use client'
 import { Button } from '@/components/ui/button'
-import React from 'react'
+import React, { useState } from 'react'
 import { BsPlay } from 'react-icons/bs'
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import ToolTip from '../shared/ToolTip'
 
 function VideoSection() {
+  const [open, setOpen] = useState(false)
   return (
     <div className="pt-[150px] md:pt-[100px] lg:pt-[150px] xl:pt-[200px] bg-white">
       <div className="relative w-full font-avenir h-[230px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px]">
@@ -35,20 +40,58 @@ function VideoSection() {
               backgroundColor: 'lightgray',
             }}
           ></div>
-          <div className=" -mt-14 lg:-mt-16 2xl:-mt-20">
-            <div className="flex items-center justify-between w-[80%] mx-auto">
-              <Button
-                className="bg-[#9A4E46] px-4 md:px-6 py-1 md:py-2 2xl:px-10 2xl:py-6 w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-xl
+          <div className=" -mt-14 lg:-mt-16 xl:-mt-20">
+            <div className="flex items-center justify-between w-[85%] mx-auto">
+              <ToolTip>
+                <Button
+                  className="bg-[#9A4E46] cursor-not-allowed
+                px-4 md:px-6 py-1 md:py-2 lg:px-8 lg:py-5 xl:px-10 xl:py-6 
+                w-[100px] md:w-[120px] lg:w-[140px] xl:w-[160px] 2xl:w-[200px]
+                global-p2
                 rounded-lg"
-              >
-                Level up Now
-              </Button>
-              <div className="flex space-x-2 2xl:space-x-4 text-white items-center">
+                >
+                  Level up Now
+                </Button>
+              </ToolTip>
+              {/* <div className="flex space-x-2 2xl:space-x-4 text-white items-center">
                 <div className="border-2 border-white rounded-full p-1 2xl:p-2">
                   <BsPlay />
                 </div>
-                <div className="text-white text-sm lg:text-xl">From the Expert</div>
-              </div>
+                <div className="text-white/70 global-p2">From the Expert</div>
+              </div> */}
+              {/* Play Button Dialog Trigger */}
+              <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                  <div className="flex space-x-2 2xl:space-x-4 text-white items-center cursor-pointer">
+                    <div className="border-2 border-white rounded-full p-1 2xl:p-2">
+                      <BsPlay />
+                    </div>
+                    <div className="text-white/70 global-p2">From the Expert</div>
+                  </div>
+                </DialogTrigger>
+
+                <DialogContent
+                  className="max-w-5xl w-full aspect-video p-0 bg-black 
+                  [&>button.absolute]:top-3 [&>button.absolute]:right-3 
+                  [&>button.absolute]:bg-black/50 
+                  [&>button.absolute]:text-white 
+                  [&>button.absolute]:hover:bg-black/80"
+                >
+                  <VisuallyHidden>
+                    <DialogTitle>Expert Video</DialogTitle>
+                  </VisuallyHidden>
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/Dwr1V4cgZ0o?si=Ov6TKtgNY-oI6XTL"
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  ></iframe>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
@@ -56,7 +99,7 @@ function VideoSection() {
           className="z-20 absolute inset-x-0 
           text-center text-white 
           bottom-10 lg:bottom-12 xl:bottom-16 2xl:bottom-20 
-          global-h1 md:font-medium uppercase"
+          global-h2 md:font-medium uppercase"
         >
           Stay Ahead With Our <span className="text-[#ED7125]">Experts </span>
         </div>
