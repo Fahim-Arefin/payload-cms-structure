@@ -14,7 +14,7 @@ type Props = {
 
  function PartnerCarousel({ data }: Props) {
   return (
-    <section className="w-full md:py-10 lg:py-16">
+    <section className="w-full md:py-10 lg:py-16 bg-[#FCF4EB]">
       <h2 className="global-h2 font-semibold text-[#3A3A3C] mb-6 px-5 py-5  
            md:px-24 
            lg:px-[130px]  lg:pt-[100px] 

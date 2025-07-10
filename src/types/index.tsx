@@ -92,6 +92,12 @@ export type SuitabilityCardType = {
   description: string
 }
 
+export type VisionCardType = {
+  img: string
+  title: string
+  points: Array<string>
+}
+
 export type PartnerType = {
   img: string
   title: string
@@ -102,6 +108,7 @@ export type BankingFacilitiesDataType = Pick<AllPlantDataType, 'description' | '
 export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
 }
+
 
 export type PlanData = {
   image: string
