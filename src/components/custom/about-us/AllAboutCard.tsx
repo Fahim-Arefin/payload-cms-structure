@@ -19,40 +19,21 @@ function AllAboutCard({ data, index }: Props) {
     transition-all duration-300 ease-in-out 
     `}
     >
-      <div
-        className="space-y-1 md:space-y-2 xl:space-y-3 
-      2xl:w-[70%] mx-auto"
-      >
+      <div className="space-y-1 md:space-y-2">
         <div
-          className="transform translate-x-28 group-hover:translate-x-0
-          transition-all duration-300 ease-in-out 
+          className="mx-auto
          w-[40px] md:w-[70px] xl:w-[100px] 
          h-[40px] md:h-[70px] xl:h-[100px]"
         >
           <img src={data?.image} alt={data?.title} className="w-full h-full" />
         </div>
-        {/* <div
-          className="global-h2 text-center group-hover:text-start
-        font-semibold lg:font-medium uppercase
-      "
-        >
-          {data?.title}
-        </div> */}
-        <div
-          className={`
-    global-h2 text-center group-hover:text-start
-    font-semibold lg:font-medium uppercase
-    transition-all duration-300 ease-in-out
-  `}
-        >
-          {data?.title}
-        </div>
-
+        <div className="global-h2 text-center font-semibold lg:font-medium">{data?.title}</div>
         <div
           className="global-p2
-          font-light mx-auto"
+          font-light mx-auto text-center
+         max-w-[96%] md:max-w-[90%] xl:max-w-[80%] 2xl:max-w-[70%] "
         >
-          {data?.description?.split(' ').slice(0, 14).join(' ') + '...'}
+          {data?.description}
         </div>
       </div>
     </div>
