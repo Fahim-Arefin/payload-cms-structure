@@ -63,8 +63,7 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
         <section className="bg-[#FCF4EB] block md:hidden px-4 py-4">
           {/* Section Title */}
           <h1 className="text-[18px] font-semibold text-[#434342] uppercase mb-6 text-center">
-            {opportunityData.title}{' '}
-            <span className="text-[#ED7125] font-semibold">OPPORTUNITY FOR</span>
+            {opportunityData.title}
           </h1>
 
           {/* Carousel */}
@@ -101,9 +100,7 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
           {/* Left list */}
           <div>
             <h1 className="global-h1 font-semibold text-[#434342] uppercase lg:block mb-12">
-              {expectedData.title.split('YOU')[0]}
-              <span className="text-[#ED7125]">YOU TO</span>
-              {expectedData.title.split('YOU TO')[1]}
+              {expectedData.title}
             </h1>
             <div className="flex flex-col gap-4 md:gap-6 lg:gap-10 py-4">
               {expectedData.sectionLeft.map((item, idx) => (
