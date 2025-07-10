@@ -2,6 +2,7 @@
 
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -9,10 +10,31 @@ import {
 } from '@/components/ui/carousel'
 import { BankingFacilitiesDataType } from '@/types'
 import PartnersCard from './PartnersCard'
+import { useEffect, useState } from 'react'
+import CarouselNavButtons from '../CarousalNavButtons'
 
 type Props = { data: BankingFacilitiesDataType[] }
 
 function Partners({ data }: Props) {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
+
+  useEffect(() => {
+    if (!carouselApi) return
+
+    const updateScrollButtons = () => {
+      setCanScrollPrev(carouselApi.canScrollPrev())
+      setCanScrollNext(carouselApi.canScrollNext())
+    }
+
+    updateScrollButtons()
+    carouselApi.on('select', updateScrollButtons)
+
+    return () => {
+      carouselApi.off('select', updateScrollButtons)
+    }
+  }, [carouselApi])
   return (
     <div
       className="container-padding bg-white 
@@ -26,7 +48,7 @@ function Partners({ data }: Props) {
         </div>
       </div>
       {/* carousal */}
-      <Carousel className="w-full">
+      <Carousel className="w-full" setApi={setCarouselApi}>
         <CarouselContent className="-ml-1">
           {data?.map((item, index) => (
             <CarouselItem
@@ -44,17 +66,11 @@ function Partners({ data }: Props) {
           className="flex gap-2 absolute h-fit
             inset-x-0 justify-center lg:justify-end -bottom-16 md:-bottom-20 lg:-top-8 xl:-top-10 2xl:-top-12 lg:right-0"
         >
-          <CarouselPrevious
-            className="
-         w-6 xl:w-8 
-         h-6 xl:h-8 
-        static rounded-full border border-gray-400 bg-white text-gray-700 flex items-center justify-center hover:bg-gray-100 transition"
-          />
-          <CarouselNext
-            className="
-         px-6 xl:px-9 
-         h-6 xl:h-8
-        static rounded-full bg-orange-500 text-white flex items-center justify-center hover:bg-orange-600 transition"
+          <CarouselNavButtons
+            onPrev={() => carouselApi?.scrollPrev()}
+            onNext={() => carouselApi?.scrollNext()}
+            hasPrev={canScrollPrev}
+            hasNext={canScrollNext}
           />
         </div>
       </Carousel>

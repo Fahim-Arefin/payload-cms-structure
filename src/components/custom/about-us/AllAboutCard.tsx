@@ -9,13 +9,14 @@ type Props = {
 function AllAboutCard({ data, index }: Props) {
   return (
     <div
-      className={`
-    rounded-md lg:rounded-[15px] 
+      className={`group
+    rounded-md lg:rounded-[15px] cursor-pointer
      shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)]
     h-[180px] md:h-[220px] lg:h-[300px] xl:h-[400px] 2xl:h-[450px]
     w-full lg:w-[260px] xl:w-[380px] 2xl:w-[480px]
-    flex justify-center items-center
-    ${index % 2 === 0 ? ' bg-[rgba(252,242,236,0.8)] text-[#434]' : ' bg-[rgba(156,134,57,0.8)] text-white'} 
+    flex justify-center items-center bg-[rgba(252,242,236,0.8)] text-[#434]
+    hover:bg-[rgba(156,134,57,0.8)] hover:text-white 
+    transition-all duration-300 ease-in-out 
     `}
     >
       <div className="space-y-1 md:space-y-2">

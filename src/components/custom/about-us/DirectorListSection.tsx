@@ -1,18 +1,35 @@
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
+'use client'
+
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { DirectorProfileDataType } from '@/types'
+import CarouselNavButtons from '../shared/CarousalNavButtons'
 import DirectorProfile from './DirectorProfile'
+import { useEffect, useState } from 'react'
 
 type Props = {
   directorProfileData: DirectorProfileDataType[]
 }
 
 function DirectorListSection({ directorProfileData }: Props) {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
+
+  useEffect(() => {
+    if (!carouselApi) return
+
+    const updateScrollButtons = () => {
+      setCanScrollPrev(carouselApi.canScrollPrev())
+      setCanScrollNext(carouselApi.canScrollNext())
+    }
+
+    updateScrollButtons()
+    carouselApi.on('select', updateScrollButtons)
+
+    return () => {
+      carouselApi.off('select', updateScrollButtons)
+    }
+  }, [carouselApi])
   return (
     <div className="bg-white pb-12 lg:pb-0">
       <div className="container-padding">
@@ -20,7 +37,7 @@ function DirectorListSection({ directorProfileData }: Props) {
         <div className="lg:w-[50%] space-y-6 2xl:space-y-12 ">
           <div
             className="global-h1 font-semibold text-[#4A4A4A] 
-          flex space-x-2 justify-center lg:block lg:space-x-0 lg:justify-start"
+          flex space-x-1 justify-center lg:block lg:space-x-0 lg:justify-start flex-wrap"
           >
             <h1>The Power of One</h1>
             <h1 className="text-[#ED7125]">Connected Vision</h1>
@@ -35,7 +52,7 @@ function DirectorListSection({ directorProfileData }: Props) {
         </div>
 
         {/* profile card list */}
-        <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-12">
+        <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-3 xl:gap-12 2xl:gap-2 mt-12">
           {directorProfileData?.map((data, index) => <DirectorProfile key={index} data={data} />)}
         </div>
 
@@ -46,6 +63,7 @@ function DirectorListSection({ directorProfileData }: Props) {
               align: 'start',
             }}
             className="w-full max-w-[95%] mx-auto"
+            setApi={setCarouselApi}
           >
             <CarouselContent>
               {directorProfileData?.map((data, index) => (
@@ -59,17 +77,11 @@ function DirectorListSection({ directorProfileData }: Props) {
               className="flex gap-2 absolute
             inset-x-0 justify-center lg:justify-end -bottom-16 md:-bottom-20 lg:-top-8 2xl:-top-12 lg:right-0"
             >
-              <CarouselPrevious
-                className="
-         w-6 xl:w-8 
-         h-6 xl:h-8 
-        static rounded-full border border-gray-400 bg-white text-gray-700 flex items-center justify-center hover:bg-gray-100 transition"
-              />
-              <CarouselNext
-                className="
-         px-6 xl:px-9 
-         h-6 xl:h-8
-        static rounded-full bg-orange-500 text-white flex items-center justify-center hover:bg-orange-600 transition"
+              <CarouselNavButtons
+                onPrev={() => carouselApi?.scrollPrev()}
+                onNext={() => carouselApi?.scrollNext()}
+                hasPrev={canScrollPrev}
+                hasNext={canScrollNext}
               />
             </div>
           </Carousel>
