@@ -41,7 +41,7 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
     <div className="bg-[#FCF4EB] container-padding">
       <div className="flex flex-col gap-10 ">
         {/* Opportunity Section */}
-        <div className='hidden md:block'>
+        {/* <div className='hidden md:block'>
           <h1 className="global-h1 font-semibold text-[#434342] uppercase lg:block mb-12">
             {opportunityData.title}{' '}
             <span className="text-[#ED7125] font-semibold">OPPORTUNITY FOR</span>
@@ -59,7 +59,7 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
         <section className="bg-[#FCF4EB] block md:hidden px-4 py-4">
           {/* Section Title */}
           <h1 className="text-[18px] font-semibold text-[#434342] uppercase mb-6 text-center">
