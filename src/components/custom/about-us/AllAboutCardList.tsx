@@ -1,6 +1,7 @@
 'use client'
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -9,12 +10,33 @@ import {
 import Autoplay from 'embla-carousel-autoplay'
 import AllAboutCard from './AllAboutCard'
 import { AllAboutCardDataType } from '@/types'
+import { useEffect, useState } from 'react'
+import CarouselNavButtons from '../shared/CarousalNavButtons'
 
 type Props = {
   allAboutData: AllAboutCardDataType[]
 }
 
 function AllAboutCardList({ allAboutData }: Props) {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
+
+  useEffect(() => {
+    if (!carouselApi) return
+
+    const updateScrollButtons = () => {
+      setCanScrollPrev(carouselApi.canScrollPrev())
+      setCanScrollNext(carouselApi.canScrollNext())
+    }
+
+    updateScrollButtons()
+    carouselApi.on('select', updateScrollButtons)
+
+    return () => {
+      carouselApi.off('select', updateScrollButtons)
+    }
+  }, [carouselApi])
   return (
     <Carousel
       className="w-full"
@@ -26,6 +48,7 @@ function AllAboutCardList({ allAboutData }: Props) {
           delay: 5000,
         }),
       ]}
+      setApi={setCarouselApi} // 👈 capture carousel API
     >
       {/* Carousel Content */}
       <CarouselContent>
@@ -41,17 +64,11 @@ function AllAboutCardList({ allAboutData }: Props) {
       lg:-bottom-[60px] xl:-bottom-20  2xl:-bottom-24 
       lg:left-[210px] xl:left-[360px] 2xl:left-[310px]"
       >
-        <CarouselPrevious
-          className="
-        lg:w-6 xl:w-8 
-        lg:h-6 xl:h-8 
-        static rounded-full border border-gray-400 bg-white text-gray-700 flex items-center justify-center hover:bg-gray-100 transition"
-        />
-        <CarouselNext
-          className="
-        lg:px-6 xl:px-9 
-        lg:h-6 xl:h-8
-        static rounded-full bg-orange-500 text-white flex items-center justify-center hover:bg-orange-600 transition"
+        <CarouselNavButtons
+          onPrev={() => carouselApi?.scrollPrev()}
+          onNext={() => carouselApi?.scrollNext()}
+          hasPrev={canScrollPrev}
+          hasNext={canScrollNext}
         />
       </div>
     </Carousel>

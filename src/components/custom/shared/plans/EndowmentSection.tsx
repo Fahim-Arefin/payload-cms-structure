@@ -117,14 +117,14 @@ function EndowmentSection({ data, content, bgColor }: Props) {
           </h4>
           <div
             className="
-           md:ml-8 xl:ml-12
+            md:ml-7 xl:ml-10
            space-y-1 xl:space-y-4
            "
           >
             {data?.feature?.map((value, index) => (
               <div
                 key={index}
-                className="flex items-center justify-start space-x-1 lg:space-x-2 xl:space-x-3 ml-[20%] md:ml-0"
+                className="flex items-center justify-start space-x-1 lg:space-x-2 xl:space-x-3 ml-[20%] md:ml-0 "
               >
                 <div className="w-[20px] lg:w-[25px] xl:w-[30px] h-[20px] lg:h-[25px] xl:h-[30px]">
                   <img src={value?.image} alt={value?.name} className="h-full w-full" />
