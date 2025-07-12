@@ -17,12 +17,12 @@ const OnboardingWay: FC<OnboardingWayProps> = ({ wayWeAreData }: OnboardingWayPr
     <div className="relative">
       <div
         className="relative
-            h-[230px] md:h-[330px] lg:h-[430px] xl:h-[530px] 2xl:h-[550px] bg-white overflow-hidden "
+            h-[230px] md:h-[330px] lg:h-[430px] xl:h-[530px] 2xl:h-[550px] bg-white overflow-hidden bg-[url('/assets/wayBgBanner.png')] bg-cover bg-no-repeat"
       >
         {/* Content */}
         <div className="container-padding uppercase relative z-10">
           <div className="text-center lg:text-start">
-            <h1 className="global-h1 lg:font-semibold">THE WAY WE ARE</h1>
+            <h1 className="global-h1 lg:font-normal">More than a Workplace- <span className='text-[#ED7125]'>A Movement</span> </h1>
           </div>
         </div>
       </div>

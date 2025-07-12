@@ -14,7 +14,7 @@ const CalculatorSection = (props: Props) => {
            md:px-24 md:pt-24
            lg:px-[130px]  lg:pt-[110px] 
            xl:px-[200px]  xl:pt-[100px] 
-           2xl:px-[300px] 2xl:pt-[150px] lg:py-10"
+           2xl:px-[300px] 2xl:pt-[150px] lg:py-10 mb-4 lg:mb-10 xl:mb-20"
     >
       <div className="flex flex-col items-center px-2 xl:px-[274px] justify-center ">
         <h1 className="global-h1 font-semibold text-[#4A4A4A] text-center uppercase mb-4 lg:mb-10">
