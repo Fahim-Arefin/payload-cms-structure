@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
+import { BenefitsTabSection } from './BenefitsTabSection'
+import EligibilityTabSection from './EligibilityTabSection'
 
 export function ArrowIcon() {
   return (
@@ -33,17 +35,12 @@ export function ChildEducationTabs({ config, data }: Props) {
 
   return (
     <div className="container-padding">
-      <Tabs
-        defaultValue={config[0].value}
-        value={activeTab}
-        onValueChange={setActiveTab}
-        className=""
-      >
+      <Tabs defaultValue={config[0].value} value={activeTab} onValueChange={setActiveTab}>
+        {/* Tab Headers */}
         <div
-          className="relative w-full border-b border-[#434343] md:py-[12px]  bg-white
+          className="relative w-full border-b border-[#434343] md:py-[12px] bg-white
          md:mb-[30px] lg:mb-[50px] xl:mb-[100px]"
         >
-          {/* Tabs */}
           <TabsList
             className={`w-full flex overflow-x-auto md:overflow-x-visible ${config?.length === 2 ? ' justify-start ' : ' justify-between'} bg-transparent border-none p-0`}
           >
@@ -78,7 +75,7 @@ export function ChildEducationTabs({ config, data }: Props) {
             ))}
           </TabsList>
 
-          {/* Dynamic Arrows between Tabs */}
+          {/* Dynamic Arrows */}
           {config.length > 1 &&
             config.slice(1).map((_, i) => {
               const percent = ((i + 1) / config.length) * 100
@@ -95,74 +92,126 @@ export function ChildEducationTabs({ config, data }: Props) {
         </div>
 
         {/* Tab Content */}
-        {(() => {
-          const activeTabIndex = config.findIndex((tab) => tab.value === activeTab)
-          const item = data[activeTabIndex]
+        {activeTab === 'eligibility' ? (
+          // --- PLAN ELIGIBILITY CUSTOM UI ---
+          <EligibilityTabSection value="eligibility" />
+        ) : activeTab === 'benefits' ? (
+          <BenefitsTabSection />
+        ) : (
+          // Default Content Rendering (use your previous logic)
+          (() => {
+            const activeTabIndex = config.findIndex((tab) => tab.value === activeTab)
+            const item = data[activeTabIndex]
 
-          return (
-            <>
-              <TabsContent
-                key={activeTab}
-                value={activeTab}
-                className="py-8 md:py-0 grid grid-cols-1 md:grid-cols-2 md:gap-4"
-              >
-                {item?.content?.map((content: any, i: number) => (
-                  <div
-                    key={content?.title + i}
-                    className={cn(
-                      'flex flex-col items-center md:items-start justify-center md:justify-start space-y-4 md:space-y-0 w-[65%] md:w-full mx-auto lg:mx-0 md:flex-row md:space-x-2 2xl:space-x-4 xl:w-[80%] p-4',
-                      i % 2 === 0 ? '' : ' lg:ml-auto',
-                    )}
-                  >
-                    <div className="h-[40px] w-[40px] ">
-                      <img
-                        src={content?.image}
-                        alt={content.title}
-                        className="h-full w-full object-contain"
-                      />
-                    </div>
-                    <div
-                      className="text-[#434342] 
-                   2xl:max-w-[400px]"
-                    >
-                      <h3 className="global-h4 font-semibold uppercase text-center md:text-start">
-                        {content.title}
-                      </h3>
-                      <p className="global-p2 font-light lg:leading-6 text-center md:text-start">
-                        {content.description}
-                      </p>
-                    </div>
+            return (
+              <>
+                <TabsContent
+                  key={activeTab}
+                  value={activeTab}
+                  className="
+    py-8 md:py-0
+    grid grid-cols-1 md:grid-cols-2
+    gap-x-20 gap-y-6 md:gap-y-12
+    
+  "
+                >
+                  {/* Left column: First 4 */}
+                  <div className="flex flex-col gap-8 xl:gap-12">
+                    {item?.content?.slice(0, 4).map((content: any, idx: number) => (
+                      <div key={content?.title + idx} className="flex items-start gap-4">
+                        <div className="flex-shrink-0 h-[38px] w-[38px] md:h-[48px] md:w-[48px] flex items-center justify-center">
+                          <img
+                            src={content?.image}
+                            alt={content.title}
+                            className="h-full w-full object-contain"
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1 md:gap-2">
+                          <h3 className="text-[#434342] text-base md:text-lg font-semibold uppercase">
+                            {content.title}
+                          </h3>
+                          <p className="text-[#434342] text-[15px] md:text-base leading-normal font-normal">
+                            {content.description}
+                          </p>
+                          {content.listItems && Array.isArray(content.listItems) && (
+                            <ul className="list-disc pl-4 mt-2 space-y-1 text-[#434342] text-[15px] md:text-base">
+                              {content.listItems.map((item: string, liIdx: number) => (
+                                <li key={liIdx} className="leading-snug">
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </TabsContent>
-              <div
-                className="flex flex-col md:flex-row w-fit gap-2 mx-auto 
-              md:mt-[30px] lg:mt-[50px] xl:mt-[100px]"
-              >
-                <Button variant="primary" className="cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6
-            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[6px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-            global-h4 font-normal">
-                  Download Brochure
-                </Button>
-                <Button variant="outline" className="cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
-            text-[#9C8639]
-            border-[#9C8639] 
-            py-1 md:py-2 2xl:py-6
-            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[6px] 
-            
-            global-h4 font-normal">
-                  Calculate Premium
-                </Button>
-              </div>
-            </>
-          )
-        })()}
+                  {/* Right column: Last 2 */}
+                  <div className="flex flex-col gap-8">
+                    {item?.content?.slice(4).map((content: any, idx: number) => (
+                      <div key={content?.title + idx} className="flex items-start gap-4">
+                        <div className="flex-shrink-0 h-[38px] w-[38px] md:h-[48px] md:w-[48px] flex items-center justify-center">
+                          <img
+                            src={content?.image}
+                            alt={content.title}
+                            className="h-full w-full object-contain"
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1 md:gap-2 max-w-[370px]">
+                          <h3 className="text-[#434342] text-base md:text-lg font-semibold uppercase">
+                            {content.title}
+                          </h3>
+                          <p className="text-[#434342] text-[15px] md:text-base leading-normal font-normal">
+                            {content.description}
+                          </p>
+                          {content.listItems && Array.isArray(content.listItems) && (
+                            <ul className="list-disc pl-4 mt-2 space-y-1 text-[#434342] text-[15px] md:text-base">
+                              {content.listItems.map((item: string, liIdx: number) => (
+                                <li key={liIdx} className="leading-snug">
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </TabsContent>
+
+                <div className="flex justify-center items-center gap-4 mt-4 md:mt-10 lg:mt-20">
+                  <Button
+                    variant="primary"
+                    className="
+                            cursor-not-allowed
+                            px-2 md:px-6 2xl:px-10
+                            py-1 md:py-2 2xl:py-6
+                            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
+                            rounded-[4px] lg:rounded-[6px] 
+                            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
+                            global-h4 font-normal"
+                  >
+                    Download Brochure
+                  </Button>
+                  <Button
+                    variant="primary"
+                    className="
+                            cursor-not-allowed
+                            px-2 md:px-6 2xl:px-10
+                            bg-[#9C8639]
+                            py-1 md:py-2 2xl:py-6
+                            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
+                            rounded-[4px] lg:rounded-[6px] 
+                            
+                            global-h4 font-normal"
+                  >
+                    Calculate Premium
+                  </Button>
+                </div>
+              </>
+            )
+          })()
+        )}
       </Tabs>
     </div>
   )
