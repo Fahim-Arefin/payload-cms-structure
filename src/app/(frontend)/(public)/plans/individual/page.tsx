@@ -31,7 +31,7 @@ function PlanPage() {
     {
       title: 'Health & Protection',
       description: 'Life happens. We make sure you\u2019re ready.',
-      link: '/',
+      link: '/plans/individual/health-and-protection',
       image: '/assets/plan6.jpg',
     },
     {
