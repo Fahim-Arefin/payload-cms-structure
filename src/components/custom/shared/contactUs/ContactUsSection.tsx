@@ -24,25 +24,27 @@ function ContactUsSection() {
   return (
     <div
       className="bg-[#F6EDDD] relative 
-      mt-[80px] md:mt-[100px] lg:mt-[120px] xl:mt-[250px]
-      lg:px-[130px] xl:px-[200px] 2xl:px-[300px] 
-      h-[200px] md:h-[330px] lg:h-[430px] xl:h-[500px] 2xl:h-[600px]"
+
+      h-[200px] md:h-[330px] lg:h-[430px] xl:h-[550px] 2xl:h-[700px]
+      "
     >
       {/* main img */}
       <div
         className="
-      z-20 absolute bottom-0 
-      lg:left-[2%] xl:left-[4%] 2xl:left-[70px] 
-      h-[140%] 2xl:h-[150%]"
+      z-20 absolute -bottom-1 left-5
+      lg:left-12
+      xl:left-20
+      2xl:left-28
+      h-[70%] xl:h-[70%] 2xl:h-[489px] 2xl:w-[929px]"
       >
-        <img src="/assets/contactUsImage.png" alt="" className="h-full w-full" />
+        <img src="/assets/askUsImage.png" alt="" className="h-full w-full" />
       </div>
 
       {/* message arrow img  */}
       <div
-        className="hidden lg:block absolute bottom-6 inset-x-0 left-[35%] 
-             w-[200px] md:w-[250px] lg:w-[250px] xl:w-[300px] 2xl:w-[400px]
-             rotate-[10.397deg] z-10"
+        className="hidden lg:block absolute lg:bottom-20 xl:bottom-28 2xl:bottom-32 inset-x-0 left-[36%] 
+             w-[200px] md:w-[250px] lg:w-[250px] xl:w-[300px] 2xl:w-[460px]
+             rotate-[14.397deg] z-10"
       >
         <img src="/assets/contactUs3.png" alt="" className="w-full h-auto" />
       </div>
@@ -50,36 +52,36 @@ function ContactUsSection() {
       {/* hanging phone  */}
       <div
         className="z-10 absolute top-0 right-[85%]
-                    h-1/2"
+                    h-1/3"
       >
-        <img src="/assets/contactUs2.png" alt="" className="h-full" />
+        <img src="/assets/contactUs4.png" alt="" className="h-full" />
       </div>
       {/* hanging phone  */}
       <div
         className="z-10 absolute top-0 right-[75%]
-                    h-1/2"
+                    h-[40%]"
       >
-        <img src="/assets/contactUs1.png" alt="" className="h-full" />
+        <img src="/assets/contactUs5.png" alt="" className="h-full" />
       </div>
       {/* hanging phone  */}
       <div
         className="z-10 absolute top-0 right-[65%]
-                    h-1/2"
+                    h-1/3"
       >
-        <img src="/assets/contactUs2.png" alt="" className="h-full" />
+        <img src="/assets/contactUs4.png" alt="" className="h-full" />
       </div>
       {/* hanging phone  */}
       <div
         className="z-10 absolute top-0 right-[55%]
-                    h-1/2"
+                    h-1/3"
       >
-        <img src="/assets/contactUs1.png" alt="" className="h-full" />
+        <img src="/assets/contactUs5.png" alt="" className="h-full" />
       </div>
 
       {/* form */}
       <div
         className="hidden 
-        lg:grid grid-cols-2 h-full gap-2"
+        lg:grid grid-cols-2 h-full items-center gap-2"
       >
         <div></div>
         <div
@@ -87,7 +89,7 @@ function ContactUsSection() {
           lg:py-8 lg:px-4
           xl:py-12 2xl:px-6 "
         >
-          <h3 className="global-h3">Have a Question?</h3>
+          <h3 className="global-h2">Have a Question?</h3>
           <h1
             className="global-h1 font-medium
           lg:mb-6 xl:mb-6 2xl:mb-8"
@@ -95,7 +97,7 @@ function ContactUsSection() {
             Ask Us!
           </h1>
 
-          <form className="lg:space-y-3 xl:space-y-4 2xl:space-y-6" onSubmit={handleSubmit}>
+          <form className="lg:space-y-3 xl:space-y-4 2xl:space-y-8" onSubmit={handleSubmit}>
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col">
