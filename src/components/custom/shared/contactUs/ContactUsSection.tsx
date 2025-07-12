@@ -35,7 +35,7 @@ function ContactUsSection() {
       lg:left-12
       xl:left-20
       2xl:left-28
-      h-[70%] xl:h-[70%] 2xl:h-[489px] 2xl:w-[929px]"
+      h-[70%] xl:h-[70%] 2xl:h-[489px] 2xl:w-[950px]"
       >
         <img src="/assets/askUsImage.png" alt="" className="h-full w-full" />
       </div>
@@ -44,7 +44,7 @@ function ContactUsSection() {
       <div
         className="hidden lg:block absolute lg:bottom-20 xl:bottom-28 2xl:bottom-32 inset-x-0 left-[36%] 
              w-[200px] md:w-[250px] lg:w-[250px] xl:w-[300px] 2xl:w-[460px]
-             rotate-[14.397deg] z-10"
+             rotate-[20.397deg] z-10"
       >
         <img src="/assets/contactUs3.png" alt="" className="w-full h-auto" />
       </div>
@@ -97,7 +97,7 @@ function ContactUsSection() {
             Ask Us!
           </h1>
 
-          <form className="lg:space-y-3 xl:space-y-4 2xl:space-y-8" onSubmit={handleSubmit}>
+          <form className="lg:space-y-3 xl:space-y-4 2xl:space-y-12" onSubmit={handleSubmit}>
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col">
