@@ -16,7 +16,8 @@ function CorporateAddons({ data }: Props) {
   return (
     <div
       className=" min-h-[410px] md:min-h-[550px]
-    space-y-6 md:space-y-12 lg:space-y-20 xl:space-y-24] 
+    space-y-6 md:space-y-12 lg:space-y-20 xl:space-y-24]
+    mb-0 lg:mb-10 xl:mb-20
     "
     >
       {/* heading */}
