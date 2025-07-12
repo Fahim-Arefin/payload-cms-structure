@@ -13,8 +13,17 @@ export function BenefitsTabSection() {
   return (
     <div>
       <div className="w-full flex flex-col lg:flex-row md:items-start gap-8 mt-8">
+        {/* Right Image - top on mobile/tablet, right on desktop */}
+        <div className="w-full h-fit order-1 lg:order-2">
+          <img
+            src="/assets/benefitsBanner.png"
+            alt="Insurance Protection"
+            className="rounded-2xl w-full lg:h-[500px] 2xl:h-[600px] object-cover"
+          />
+        </div>
+
         {/* Left Content */}
-        <div className="">
+        <div className="order-2 lg:order-1">
           <h2 className="global-h3 font-medium mb-2 lg:mb-10 text-[#434343]">
             BOOST YOUR COVERAGE
             <br />
@@ -46,44 +55,33 @@ export function BenefitsTabSection() {
             </ul>
           </div>
         </div>
-
-        {/* Right Image */}
-        <div className="w-full h-fit">
-          {/* Use next/image for optimization or img for static assets */}
-          <img
-            src="/assets/benefitsBanner.png"
-            alt="Insurance Protection"
-            className="rounded-2xl w-full xl:h-[500px] 2xl:h-[600px] object-cover"
-          />
-        </div>
       </div>
       {/* Buttons */}
       <div className="flex justify-center items-center gap-4 mt-4 md:mt-10 lg:mt-20">
         <Button
           variant="primary"
           className="
-                       cursor-not-allowed
-                       px-2 md:px-6 2xl:px-10
-                       py-1 md:py-2 2xl:py-6
-                       h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-                       rounded-[4px] lg:rounded-[6px] 
-                       w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-                       global-h4 font-normal"
+            cursor-not-allowed
+            px-2 md:px-6 2xl:px-10
+            py-1 md:py-2 2xl:py-6
+            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
+            rounded-[4px] lg:rounded-[6px] 
+            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
+            global-h4 font-normal"
         >
           Download Brochure
         </Button>
         <Button
           variant="outline"
           className="
-                       cursor-not-allowed
-                       px-2 md:px-6 2xl:px-10
-                       text-[#9C8639]
-                       border-[#9C8639]
-                       py-1 md:py-2 2xl:py-6
-                       h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-                       rounded-[4px] lg:rounded-[6px] 
-                       
-                       global-h4 font-normal"
+            cursor-not-allowed
+            px-2 md:px-6 2xl:px-10
+            text-[#9C8639]
+            border-[#9C8639]
+            py-1 md:py-2 2xl:py-6
+            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
+            rounded-[4px] lg:rounded-[6px] 
+            global-h4 font-normal"
         >
           Calculate Premium
         </Button>

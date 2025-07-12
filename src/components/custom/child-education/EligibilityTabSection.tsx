@@ -10,11 +10,11 @@ type EligibilityTabSectionProps = {
 const EligibilityTabSection: FC<EligibilityTabSectionProps> = ({ value }) => {
   return (
     <TabsContent value={value} className="flex flex-col">
-      <div className="mb-4 md:mb-10">
+      <div className="">
         <span className="global-h1 md:global-h3 font-bold text-[#434342]">METRICS THAT MATTER</span>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-6 pt-4 lg:pt-10 justify-center items-center mb-10 lg:mb-20">
+      <div className="flex flex-col md:flex-row gap-6 pt-4 lg:pt-10 justify-center items-center">
         {/* CHILD CARD */}
 
         <div className="flex flex-col md:flex-row gap-4 lg:gap-10 xl:gap-16 2xl:gap-20 justify-center items-center mb-10">
