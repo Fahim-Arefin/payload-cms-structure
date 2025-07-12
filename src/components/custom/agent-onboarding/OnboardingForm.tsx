@@ -12,7 +12,7 @@ const OnboardingForm: FC<OnboardingFormProps> = ({}) => {
           {/* Text Container */}
           <div className="text-center lg:text-left px-10 lg:px-0">
             <h1 className="global-h2 uppercase text-[#1E1E1E] font-normal">
-              Explore the possibilities. Embrace the challenge. Build your future.
+              Explore new horizons. Own the challenge. Build the future you deserve.
             </h1>
             <p className="text-[#1E1E1E] uppercase global-p2 font-light mt-10">
               Unlock the Perks of Powering Financial Futures
@@ -25,7 +25,6 @@ const OnboardingForm: FC<OnboardingFormProps> = ({}) => {
           <OnboardingJoinForm />
         </div>
       </div>
-
     </div>
   )
 }

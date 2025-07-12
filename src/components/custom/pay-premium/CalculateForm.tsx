@@ -146,7 +146,7 @@ function CalculateForm({ plan, onPlanChange }: Props) {
           placeholder="Sum Assumed"
           className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
-        <p className="text-[10px] py-2 absolute inset-x-0">
+        <p className="text-[10px] py-2 absolute right-1">
           Suggested BDT <span className="text-[#FF6600]">10,00000</span>
         </p>
       </div>
@@ -169,11 +169,11 @@ function CalculateForm({ plan, onPlanChange }: Props) {
         </Select>
       </div>
       {/* submit button */}
-      <div className="col-span-2 items-center px-4  flex flex-col gap-4 justify-center">
+      <div className="col-span-2 items-center px-4 flex flex-col gap-4 lg:gap-6 justify-center">
         <Button className="bg-[#978900] w-fit global-h4 text-white rounded-[10px] px-5 py-5 xl:px-8 xl:py-8">
           Calculate Now
         </Button>
-        <p className="text-[10px] text-[#00000099] w-2/3 font-light">
+        <p className="text-[10px] text-[#00000099] w-[80%] font-light capitalize">
           Our expert advisors are ready to help you choose the best plan based on your age, income,
           and future goals. Whether you're just starting your career or planning for retirement, we
           are with you at every step.

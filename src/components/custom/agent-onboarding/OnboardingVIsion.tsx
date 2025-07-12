@@ -12,11 +12,7 @@ function OnboardingVision({ data }: Props) {
     <div
       className="container-padding text-white"
       style={{
-        background: `
-    linear-gradient(0deg, #00000085, #00000085),
-    url('/assets/visionBanner.jpg') #00000085 50% / cover no-repeat,
-    #F6EDDD
-  `,
+        background: `linear-gradient(0deg, #00000085, #00000085), url('/assets/visionBanner.jpg') #00000085 50% / cover no-repeat`,
       }}
     >
       {/* Title */}
@@ -25,7 +21,7 @@ function OnboardingVision({ data }: Props) {
       </h1>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-40">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-40 bg-[#9C86394D]">
         {data.map((item: VisionCardType, index: number) => (
           <div
             key={index}

@@ -90,7 +90,7 @@ function SavingAndInvestment() {
       },
     ],
     image: '/assets/endowment2.png',
-    link: '/',
+    link: '/plans/individual/saving-and-investment/multistage',
   }
 
   return (

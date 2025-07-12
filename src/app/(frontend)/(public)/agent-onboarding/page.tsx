@@ -1,3 +1,4 @@
+import FreedomOpportunity from '@/components/custom/agent-onboarding/FreedomOpportunity'
 import OnboardingForm from '@/components/custom/agent-onboarding/OnboardingForm'
 import OnboardingHighlight from '@/components/custom/agent-onboarding/OnboardingHighlight'
 import OnboardingIntro from '@/components/custom/agent-onboarding/OnboardingIntro'
@@ -135,7 +136,11 @@ function page({}: Props) {
       },
       {
         icon: '/assets/opportunityIcon4.svg',
-        text: 'Follow up, follow through- build genunie connections',
+        text: 'Be Digitally Savy',
+      },
+      {
+        icon: '/assets/opportunityIcon5.svg',
+        text: 'Follow up, follow through- build genuine connections',
       },
       {
         icon: '/assets/opportunityIcon5.svg',
@@ -225,7 +230,9 @@ function page({}: Props) {
       {/* <OnboardingHighlight highlightSlides={highlightSlides[0]} /> */}
       <OnboardingIntro onboardingIntroContent={onBoardingIntroContent} />
 
+
       <RolesSection onboardingRoleData={onboardingRolesData} />
+      {/* <FreedomOpportunity /> */}
       {/* <OnboardingRoles rolesData={rolesData} /> */}
       <OnboardingVision data={visionData} />
       <OnboardingOpportunity expectedData={expectedData} opportunityData={opportunityData} />
