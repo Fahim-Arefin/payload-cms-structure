@@ -38,7 +38,7 @@ function Partners({ data }: Props) {
   return (
     <div
       className="container-padding bg-white 
-    space-y-6 md:space-y-12 lg:space-y-20 xl:space-y-24"
+    space-y-6 md:space-y-12 lg:space-y-20 xl:space-y-24 mb-10 lg:mb-0"
     >
       {/* heading */}
       <div>
