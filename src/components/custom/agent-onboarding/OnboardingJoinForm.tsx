@@ -31,8 +31,6 @@ function OnboardingJoinForm() {
   grid grid-cols-2 gap-x-4 gap-y-8 md:gap-7 xl:gap-8 
   p-6 xl:p-12 z-10"
     >
-
-
       {/* name input */}
       <div className="col-span-2 ">
         <Input
@@ -41,11 +39,18 @@ function OnboardingJoinForm() {
           className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
-       {/* phone number input */}
+      {/* phone number input */}
       <div className="col-span-2">
         <Input
-          type="number"
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder="Phone Number"
+          onKeyDown={(e) => {
+            if (!/^[0-9]$/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Tab') {
+              e.preventDefault()
+            }
+          }}
           className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
@@ -69,15 +74,17 @@ function OnboardingJoinForm() {
         </Select>
       </div>
 
-            {/* age input */}
+      {/* age input */}
       <div className="col-span-1 md:col-span-1">
         <Input
           type="number"
           placeholder="Age"
+          min={1}
+          onWheel={(e) => e.currentTarget.blur()}
           className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
-     
+
       {/* annual income input */}
       <div className="col-span-1 md:col-span-1">
         <Input
@@ -95,9 +102,43 @@ function OnboardingJoinForm() {
         />
       </div>
 
+      {/* CV Upload Field */}
+      <div className="col-span-1">
+        <Input
+          type="text"
+          placeholder="CV"
+          readOnly
+          className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 cursor-pointer"
+          onClick={() => document.getElementById('cvUpload')?.click()}
+        />
+        <input
+          type="file"
+          id="cvUpload"
+          accept=".pdf,.doc,.docx"
+          className="hidden"
+          onChange={(e) => {
+            const fileName = e.target.files?.[0]?.name
+            if (fileName) {
+              const input = document.querySelector('input[placeholder="CV"]') as HTMLInputElement
+              if (input) input.value = fileName
+            }
+          }}
+        />
+      </div>
+
+      <div className="col-span-1 flex items-center">
+        <Button
+          type="button"
+          onClick={() => document.getElementById('cvUpload')?.click()}
+          className="bg-[#9C8639] text-white global-p2 font-light rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 w-full"
+        >
+          Upload
+        </Button>
+      </div>
+
       {/* submit button */}
       <div className="col-span-2">
-        <Button className="bg-[#9C8639] text-white rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 w-full">
+        <Button className="bg-[#9C8639] text-white uppercase font-semibold rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 w-full">
           Join Us
         </Button>
       </div>
