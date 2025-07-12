@@ -12,10 +12,10 @@ const CorporateHighlight: FC<CorporateHighlightProps> = ({
   highlightsData,
 }: CorporateHighlightProps) => {
   return (
-    <section className="relative bg-[#8A4F4F] container-padding text-white overflow-hidden">
+    <section className="relative bg-[#9A4E46] container-padding text-white overflow-hidden">
       {/* Background Text */}
       <div className="absolute inset-0 xl:bottom-20 flex justify-center items-center pointer-events-none">
-        <h1 className="text-[4.5rem] md:text-[5.5rem] lg:text-[8rem] font-bold opacity-10 text-center lg:leading-relaxed tracking-wide uppercase whitespace-pre-line">
+        <h1 className="text-[4.5rem] md:text-[5.5rem] lg:text-[8rem] font-bold opacity-10 text-center lg:leading-relaxed tracking-wide uppercase whitespace-pre-line animate-fadeSlideLeft md:animate-fadeSlideRight">
           SHANTA LIFE{'\n'}INSURANCE PLC
         </h1>
       </div>
@@ -32,17 +32,17 @@ const CorporateHighlight: FC<CorporateHighlightProps> = ({
             At a Glance
           </h2>
           <div className="flex justify-between text-center px-10">
-            <div className='text-start'>
+            <div className="text-start">
               <p className="text-[54px] font-bold">100+</p>
               <p className="mt-2 text-[1rem]  lg:text-[1.5rem]">Claims</p>
             </div>
-            <div className='text-start'>
+            <div className="text-start">
               <p className="text-[60px] font-bold">
                 3<span className="global-h3 font-semibold">Days</span>
               </p>
               <p className="mt-2 text-[1rem] lg:text-[1.5rem]">Settlement</p>
             </div>
-            <div className='text-start'>
+            <div className="text-start">
               <p className="text-[60px] font-bold">92%</p>
               <p className="mt-2 text-[1rem]  lg:text-[1.5rem]">Success ratio</p>
             </div>
