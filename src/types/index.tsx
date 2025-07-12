@@ -49,6 +49,7 @@ export type FootPrintDataType = {
 
 export type AllPlantDataType = {
   title: string
+  biggerTitle?: string
   description: string
   link: string
   image: string
