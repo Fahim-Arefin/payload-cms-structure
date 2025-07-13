@@ -28,9 +28,9 @@ const CalculatorSection = (props: Props) => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[1.3fr,1fr] gap-4 lg:gap-10 justify-center mt-6 lg:mt-10 xl:mt-20">
+      <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-[1.3fr,1fr] gap-4 lg:gap-10 justify-center mt-6 lg:mt-10 xl:mt-20">
         {/* left side box */}
-        <div className=" w-full">
+        <div className=" w-full order-2 lg:order-1">
           {selectedPlan ? (
             <PremiumBreakdown />
           ) : (
@@ -63,7 +63,7 @@ const CalculatorSection = (props: Props) => {
         </div>
 
         {/* right form */}
-        <div>
+        <div className='order-1 lg:order-2'>
           <CalculateForm plan={selectedPlan ?? undefined} onPlanChange={setSelectedPlan} />
         </div>
       </div>

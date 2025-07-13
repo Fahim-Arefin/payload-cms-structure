@@ -26,12 +26,12 @@ const page: FC<pageProps> = ({}) => {
       'We’re building a movement of purpose-driven people who believe in smarter protection, stronger communities, and a world where possibilities outpace uncertainties. Together, we push boundaries — in work, in life, and in everything in between.',
   }
 
-  const insuranceData: InsuranceDataType[] = [
+  const careerStoryData: InsuranceDataType[] = [
     {
-      sectionHeading: 'Insurance Simplified',
+      sectionHeading: '',
       content: 'left',
-      title: 'Expert Knows - How',
-      subtitle: 'Skip the Jagron, Unlock',
+      title: 'SNAPSHOTs of',
+      subtitle: 'Our Story',
       mainImage: '/assets/is1.jpg',
       insuranceCardData: [
         {
@@ -102,11 +102,11 @@ const page: FC<pageProps> = ({}) => {
         </div>
       </HeroSection>
       <CareerIntro data={introData} />
-      <div className="container-padding block md:space-y-[30px] lg:space-y-[40px] xl:space-y-[80px] bg-gradient-to-r from-[#FBFFD3] to-[#F8E4C6]">
-        {insuranceData?.map((data, i) => (
+      {/* <div className="container-padding block md:space-y-[30px] lg:space-y-[40px] xl:space-y-[80px] bg-gradient-to-r from-[#FBFFD3] to-[#F8E4C6]">
+        {careerStoryData?.map((data, i) => (
           <CareerOurStoryLg key={i} data={data} content={data?.content} />
         ))}
-      </div>
+      </div> */}
     </div>
   )
 }
