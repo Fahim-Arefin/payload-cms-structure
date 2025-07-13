@@ -1,4 +1,5 @@
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
+import CatchTheBuzzSection from '@/components/custom/support/CatchTheBuzzSection'
 import GeneralFaq from '@/components/custom/support/GeneralFaq'
 import React from 'react'
 
@@ -15,6 +16,8 @@ function SupportPage() {
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides} />
       <GeneralFaq />
+      <CatchTheBuzzSection />
+      {/* Add more sections as needed */}
     </div>
   )
 }
