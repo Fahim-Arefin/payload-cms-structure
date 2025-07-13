@@ -16,11 +16,11 @@ const CalculatorSection = (props: Props) => {
            xl:px-[200px]  xl:pt-[100px] 
            2xl:px-[300px] 2xl:pt-[150px] lg:py-10 mb-4 lg:mb-10 xl:mb-20"
     >
-      <div className="flex flex-col items-center px-2 xl:px-[274px] justify-center ">
-        <h1 className="global-h1 font-semibold text-[#4A4A4A] text-center uppercase mb-4 lg:mb-10">
+      <div className="flex flex-col items-start justify-start">
+        <h1 className="global-h1 font-semibold text-[#4A4A4A] text-start uppercase mb-4 lg:mb-10">
           Let’s calculate <span className="text-[#ED7125] font-semibold">the premium</span>
         </h1>
-        <p className="global-p1 text-center text-[#434343] line-clamp-2">
+        <p className="text-[12px] md:global-p1 text-start w-full xl:w-[80%] text-[#434343] line-clamp-4 md:line-clamp-2">
           Our policies provide more than just life coverage. Many plans include savings and
           investment options, helping you grow your wealth over time while ensuring your loved ones
           are protected. With affordable premiums, flexible terms, and guaranteed returns, Shanta
@@ -63,7 +63,7 @@ const CalculatorSection = (props: Props) => {
         </div>
 
         {/* right form */}
-        <div >
+        <div>
           <CalculateForm plan={selectedPlan ?? undefined} onPlanChange={setSelectedPlan} />
         </div>
       </div>

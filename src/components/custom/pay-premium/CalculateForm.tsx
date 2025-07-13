@@ -56,7 +56,9 @@ function CalculateForm({ plan, onPlanChange }: Props) {
           </SelectContent>
         </Select>
         {/* below a text saying watch video */}
-        <p className="text-[10px] py-2 absolute inset-x-0 text-[#FF6600] underline">Watch Video</p>
+        <p className="text-[8px] md:text-[10px] py-2 absolute inset-x-0 text-[#FF6600] underline">
+          Watch Video
+        </p>
       </div>
       {/* select yopur tenure */}
       <div className="col-span-1 md:col-span-1">
@@ -178,7 +180,7 @@ function CalculateForm({ plan, onPlanChange }: Props) {
           and future goals. Whether you're just starting your career or planning for retirement, we
           are with you at every step.
         </p>
-        <p className="text-[12px] text-[#434343] underline">Have Questions? Ask Us! </p>
+        <p className="text-[10.5px] md:text-[12px] text-[#434343] underline">Have Questions? Ask Us! </p>
       </div>
     </form>
   )
