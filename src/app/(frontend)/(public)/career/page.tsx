@@ -4,7 +4,7 @@ import { CareerResourceSection } from '@/components/custom/career/CareerResource
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
-import {  OurStoryDataType } from '@/types'
+import { OurStoryDataType } from '@/types'
 import React, { FC } from 'react'
 
 type pageProps = {}
@@ -35,39 +35,38 @@ const page: FC<pageProps> = ({}) => {
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
           image: '/assets/is2.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
+          description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
           image: '/assets/is3.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
+          description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
           image: '/assets/is4.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
+          description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
       ],
     },
   ]
 
   const resourceData = [
-  {
-    title: 'Mantaka Faruqui Aurthi',
-    image: '/assets/mantaka.jpg',
-    description: "Shanta Life isn’t just a workplace—it’s a dynamic space where ideas thrive, creativity is celebrated, and every voice matters. As a woman in the Marketing department, I’ve experienced firsthand how empowering and inclusive the culture is. Here,",
-    designation: 'Marketing',
-  },
-  {
-    title: 'Surab Barua',
-    image: '/assets/surab.jpg',
-    description: "At Shanta Life, innovation is in our DNA, and every challenge is an opportunity to grow. As a member of the IT department, I’ve had the chance to work on...",
-    designation: 'Information Technology.',
-  },
-]
+    {
+      title: 'Mantaka Faruqui Aurthi',
+      image: '/assets/avatar1.jpg',
+      description:
+        'Shanta Life isn’t just a workplace—it’s a dynamic space where ideas thrive, creativity is celebrated, and every voice matters. As a woman in the Marketing department, I’ve experienced firsthand how empowering and inclusive the culture is. Here,',
+      designation: 'Marketing',
+    },
+    {
+      title: 'Surab Barua',
+      image: '/assets/avatar2.jpg',
+      description:
+        'At Shanta Life, innovation is in our DNA, and every challenge is an opportunity to grow. As a member of the IT department, I’ve had the chance to work on...',
+      designation: 'Information Technology.',
+    },
+  ]
 
   return (
     <div className="font-avenir">
@@ -116,11 +115,9 @@ const page: FC<pageProps> = ({}) => {
       </HeroSection>
       <CareerIntro data={introData} />
       <div className="container-padding block bg-gradient-to-r from-[#FBFFD3] to-[#F8E4C6]">
-        {careerStoryData?.map((data, i) => (
-          <CareerOurStoryLg key={i} data={data}  />
-        ))}
+        {careerStoryData?.map((data, i) => <CareerOurStoryLg key={i} data={data} />)}
       </div>
-      <CareerResourceSection />
+      {/* <CareerResourceSection data={resourceData}/> */}
     </div>
   )
 }

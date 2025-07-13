@@ -90,6 +90,12 @@ export type OurStoryDataType = {
   insuranceCardData: InsuranceCardDataType[]
 }
 
+export type CareerResourceDataType = {
+  title: string
+  image: string
+  description: string
+  designation: string
+}
 
 export type OnboardingRoleType = {
   image: string
@@ -119,9 +125,7 @@ export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
 }
 
-
 export type PlanData = {
   image: string
   timeline: string
 }
-
