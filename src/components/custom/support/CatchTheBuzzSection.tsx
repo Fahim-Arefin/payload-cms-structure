@@ -15,10 +15,9 @@ function CatchTheBuzzSection({}: Props) {
       <div
         className="container-width flex flex-col md:flex-row md:justify-between md:items-center space-y-2 md:space-y-0
           py-12 
-           md:py-24 
-             lg:py-[110px] 
-             xl:py-[100px] 
-           2xl:py-[150px]
+           md:py-[50px]
+             lg:py-[70px] 
+             xl:py-[100px]
            px-8"
       >
         <div>
@@ -71,7 +70,7 @@ function CatchTheBuzzSection({}: Props) {
         </Tabs>
 
         {/* Outside Tab Content */}
-        <div className="py-12">
+        <div className="pt-12">
           {activeTab === 'all' && <AllNewsContainer />}
           {activeTab === 'news' && (
             <p>
