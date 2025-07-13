@@ -10,8 +10,10 @@ type EligibilityTabSectionProps = {
 const EligibilityTabSection: FC<EligibilityTabSectionProps> = ({ value }) => {
   return (
     <TabsContent value={value} className="flex flex-col">
-      <div className="">
-        <span className="global-h1 md:global-h3 font-bold text-[#434342]">METRICS THAT MATTER</span>
+      <div>
+        <span className="global-h1 md:global-span font-bold text-[#434342]">
+          METRICS THAT MATTER
+        </span>
       </div>
 
       <div className="flex flex-col md:flex-row gap-6 pt-4 lg:pt-10 justify-center items-center">
@@ -49,34 +51,34 @@ const EligibilityTabSection: FC<EligibilityTabSectionProps> = ({ value }) => {
 
       {/* Bottom Buttons */}
       <div className="flex justify-center items-center gap-4 mt-4 md:mt-10 lg:mt-20">
-              <Button
-                variant="primary"
-                className="
+        <Button
+          variant="primary"
+          className="
                   cursor-not-allowed
-                  px-2 md:px-6 2xl:px-10
+                  px-4 md:px-6 2xl:px-10
                   py-1 md:py-2 2xl:py-6
                   h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-                  rounded-[4px] lg:rounded-[6px] 
-                  w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-                  global-h4 font-normal"
-              >
-                Download Brochure
-              </Button>
-              <Button
-                variant="primary"
-                className="
+                  rounded-[4px] lg:rounded-[6px]
+                  global-p1 font-normal"
+        >
+          Download Brochure
+        </Button>
+        <Button
+          variant="outline"
+          className="
                   cursor-not-allowed
-                  px-2 md:px-6 2xl:px-10
-                  bg-[#9C8639]
-                  py-1 md:py-2 2xl:py-6
-                  h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-                  rounded-[4px] lg:rounded-[6px] 
-                  
-                  global-h4 font-normal"
-              >
-                Calculate Premium
-              </Button>
-            </div>
+            px-4 md:px-6 2xl:px-10
+            text-[#9C8639]
+            border-2
+            border-[#9C8639]
+            py-1 md:py-2 2xl:py-6
+            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
+            rounded-[4px] lg:rounded-[6px] 
+            global-p1 font-normal"
+        >
+          Calculate Premium
+        </Button>
+      </div>
     </TabsContent>
   )
 }
