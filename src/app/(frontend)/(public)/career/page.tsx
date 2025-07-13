@@ -1,10 +1,10 @@
 import CareerIntro from '@/components/custom/career/CareerIntro'
-import CareerOurStory from '@/components/custom/career/CareerOurStory'
 import CareerOurStoryLg from '@/components/custom/career/CareerOurStoryLg'
+import { CareerResourceSection } from '@/components/custom/career/CareerResources'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
-import { InsuranceDataType } from '@/types'
+import {  OurStoryDataType } from '@/types'
 import React, { FC } from 'react'
 
 type pageProps = {}
@@ -26,10 +26,8 @@ const page: FC<pageProps> = ({}) => {
       'We’re building a movement of purpose-driven people who believe in smarter protection, stronger communities, and a world where possibilities outpace uncertainties. Together, we push boundaries — in work, in life, and in everything in between.',
   }
 
-  const careerStoryData: InsuranceDataType[] = [
+  const careerStoryData: OurStoryDataType[] = [
     {
-      sectionHeading: '',
-      content: 'left',
       title: 'SNAPSHOTs of',
       subtitle: 'Our Story',
       mainImage: '/assets/is1.jpg',
@@ -38,23 +36,38 @@ const page: FC<pageProps> = ({}) => {
           title: 'Lorem ipsum dolor sit amet consectetur.',
           image: '/assets/is2.jpg',
           description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
           image: '/assets/is3.jpg',
           description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
           image: '/assets/is4.jpg',
           description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
       ],
     },
   ]
+
+  const resourceData = [
+  {
+    title: 'Mantaka Faruqui Aurthi',
+    image: '/assets/mantaka.jpg',
+    description: "Shanta Life isn’t just a workplace—it’s a dynamic space where ideas thrive, creativity is celebrated, and every voice matters. As a woman in the Marketing department, I’ve experienced firsthand how empowering and inclusive the culture is. Here,",
+    designation: 'Marketing',
+  },
+  {
+    title: 'Surab Barua',
+    image: '/assets/surab.jpg',
+    description: "At Shanta Life, innovation is in our DNA, and every challenge is an opportunity to grow. As a member of the IT department, I’ve had the chance to work on...",
+    designation: 'Information Technology.',
+  },
+]
 
   return (
     <div className="font-avenir">
@@ -102,11 +115,12 @@ const page: FC<pageProps> = ({}) => {
         </div>
       </HeroSection>
       <CareerIntro data={introData} />
-      {/* <div className="container-padding block md:space-y-[30px] lg:space-y-[40px] xl:space-y-[80px] bg-gradient-to-r from-[#FBFFD3] to-[#F8E4C6]">
+      <div className="container-padding block bg-gradient-to-r from-[#FBFFD3] to-[#F8E4C6]">
         {careerStoryData?.map((data, i) => (
-          <CareerOurStoryLg key={i} data={data} content={data?.content} />
+          <CareerOurStoryLg key={i} data={data}  />
         ))}
-      </div> */}
+      </div>
+      <CareerResourceSection />
     </div>
   )
 }
