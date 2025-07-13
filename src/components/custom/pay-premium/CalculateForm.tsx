@@ -39,7 +39,7 @@ function CalculateForm({ plan, onPlanChange }: Props) {
       {/* plans */}
       <div className="relative col-span-1 md:col-span-1">
         <Select onValueChange={onPlanChange}>
-          <SelectTrigger className="bg-white shadow-[0px_0px_5px_0px_#00000040] data-[placeholder]:text-[8px] md:data-[placeholder]:text-[10px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
+          <SelectTrigger className="bg-white shadow-[0px_0px_5px_0px_#00000040] data-[placeholder]:text-[12px] md:data-[placeholder]:text-[12px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
             <SelectValue placeholder="Select Your Plan" />
           </SelectTrigger>
           <SelectContent>
@@ -56,14 +56,14 @@ function CalculateForm({ plan, onPlanChange }: Props) {
           </SelectContent>
         </Select>
         {/* below a text saying watch video */}
-        <p className="text-[8px] md:text-[10px] py-2 absolute inset-x-0 text-[#FF6600] underline">
+        <p className="text-[8px] md:text-[10px] py-1 pl-1 absolute inset-x-0 text-[#FF6600] underline">
           Watch Video
         </p>
       </div>
       {/* select yopur tenure */}
       <div className="col-span-1 md:col-span-1">
         <Select>
-          <SelectTrigger className="bg-white shadow-[0px_0px_5px_0px_#00000040] data-[placeholder]:text-[8px] md:data-[placeholder]:text-[10px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
+          <SelectTrigger className="bg-white shadow-[0px_0px_5px_0px_#00000040] data-[placeholder]:text-[12px] md:data-[placeholder]:text-[12px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
             <SelectValue placeholder="Select Your Tenure" />
           </SelectTrigger>
           <SelectContent>
@@ -83,7 +83,7 @@ function CalculateForm({ plan, onPlanChange }: Props) {
         <Input
           type="text"
           placeholder="Name"
-          className="bg-white shadow-[0px_0px_5px_0px_#00000040] placeholder:text-[8px] md:placeholder:text-[10px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+          className="bg-white shadow-[0px_0px_5px_0px_#00000040] placeholder:text-[12px] md:placeholder:text-[12px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
       {/* age input */}
@@ -93,13 +93,13 @@ function CalculateForm({ plan, onPlanChange }: Props) {
           placeholder="Age"
           min={1}
           onWheel={(e) => e.currentTarget.blur()}
-          className="bg-white shadow-[0px_0px_5px_0px_#00000040] placeholder:text-[8px] md:placeholder:text-[10px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+          className="bg-white shadow-[0px_0px_5px_0px_#00000040] placeholder:text-[12px] md:placeholder:text-[12px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
       {/* gender select  */}
       <div className="col-span-1">
         <Select>
-          <SelectTrigger className="bg-white shadow-[0px_0px_5px_0px_#00000040] data-[placeholder]:text-[8px] md:data-[placeholder]:text-[10px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
+          <SelectTrigger className="bg-white shadow-[0px_0px_5px_0px_#00000040] data-[placeholder]:text-[12px] md:data-[placeholder]:text-[12px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
             <SelectValue placeholder="Gender" />
           </SelectTrigger>
           <SelectContent>
@@ -126,7 +126,7 @@ function CalculateForm({ plan, onPlanChange }: Props) {
               e.preventDefault()
             }
           }}
-          className="bg-white shadow-[0px_0px_5px_0px_#00000040] placeholder:text-[8px] md:placeholder:text-[10px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+          className="bg-white shadow-[0px_0px_5px_0px_#00000040] placeholder:text-[12px] md:placeholder:text-[12px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
       {/* annual income input */}
@@ -136,7 +136,7 @@ function CalculateForm({ plan, onPlanChange }: Props) {
           placeholder="Annual Income"
           min={0}
           onWheel={(e) => e.currentTarget.blur()}
-          className="bg-white shadow-[0px_0px_5px_0px_#00000040] placeholder:text-[8px] md:placeholder:text-[10px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+          className="bg-white shadow-[0px_0px_5px_0px_#00000040] placeholder:text-[12px] md:placeholder:text-[12px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
       {/* sum assumed input */}
@@ -146,7 +146,7 @@ function CalculateForm({ plan, onPlanChange }: Props) {
           min={0}
           onWheel={(e) => e.currentTarget.blur()}
           placeholder="Sum Assumed"
-          className="bg-white shadow-[0px_0px_5px_0px_#00000040] placeholder:text-[8px] md:placeholder:text-[10px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+          className="bg-white shadow-[0px_0px_5px_0px_#00000040] placeholder:text-[12px] md:placeholder:text-[12px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
         <p className="text-[8px] md:text-[10px] py-2 absolute right-1">
           Suggested BDT <span className="text-[#FF6600]">10,00000</span>
@@ -155,7 +155,7 @@ function CalculateForm({ plan, onPlanChange }: Props) {
       {/* payment method select  */}
       <div className="col-span-1">
         <Select>
-          <SelectTrigger className="bg-white shadow-[0px_0px_5px_0px_#00000040] data-[placeholder]:text-[8px] md:data-[placeholder]:text-[10px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
+          <SelectTrigger className="bg-white shadow-[0px_0px_5px_0px_#00000040] data-[placeholder]:text-[12px] md:data-[placeholder]:text-[12px] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
             <SelectValue className="" placeholder="Payment Method" />
           </SelectTrigger>
           <SelectContent>

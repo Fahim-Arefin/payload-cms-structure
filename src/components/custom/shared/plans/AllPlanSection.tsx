@@ -13,7 +13,7 @@ function AllPlanSection({ plantData, children, blur }: Props) {
     <div className="container-padding">
       <h1
         className="global-h2 uppercase font-semibold text-[#434343] 
-      text-center md:text-start
+      text-start
       mb-9 md:mb-[40px] lg:mb-[54px] xl:mb-[74px]"
       >
         {children}
