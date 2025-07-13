@@ -756,7 +756,7 @@ export default function Navbar() {
         { href: '#', label: 'Track Claim' },
       ],
     },
-    { href: '#', label: 'Support' },
+    { href: '/support', label: 'Support' },
     { href: '#', label: 'Purchase Now' },
   ]
 

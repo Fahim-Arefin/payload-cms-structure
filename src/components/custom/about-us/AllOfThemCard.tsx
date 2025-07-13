@@ -13,7 +13,7 @@ function AllOfThemCard({ data }: Props) {
     max-w-[200px] md:max-w-[250px] lg:max-w-[200px] xl:max-w-[250px] 2xl:max-w-[300px]"
     >
       {/* Image Container with background gradients */}
-      <div className="relative w-full aspect-[254/250] sm:aspect-[254/265] md:aspect-[254/280] lg:aspect-[254/295] xl:aspect-[254/310]">
+      <div className="relative w-full aspect-[233/260] sm:aspect-[254/265] md:aspect-[254/280] lg:aspect-[254/295] xl:aspect-[254/310]">
         {/* Gradient Backgrounds */}
         <div className="absolute inset-0 z-0">
           <svg
@@ -74,14 +74,8 @@ function AllOfThemCard({ data }: Props) {
         </div>
 
         {/* Profile Image */}
-        <div className="relative z-10 w-full h-full">
-          <Image
-            src={data?.image}
-            alt={data?.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 300px"
-          />
+        <div className="absolute z-10 w-full h-full bottom-0">
+          <Image src={data?.image} alt={data?.title} fill className="object-cover" />
         </div>
       </div>
 
