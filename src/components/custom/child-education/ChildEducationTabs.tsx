@@ -39,7 +39,7 @@ export function ChildEducationTabs({ config, data }: Props) {
         {/* Tab Headers */}
         <div
           className="relative w-full border-b border-[#434343] md:py-[12px] bg-white
-         md:mb-[30px] lg:mb-[50px] xl:mb-[100px]"
+         md:mb-[30px] lg:mb-[50px] xl:mb-[80px]"
         >
           <TabsList
             className={`w-full flex overflow-x-auto md:overflow-x-visible ${config?.length === 2 ? ' justify-start ' : ' justify-between'} bg-transparent border-none p-0`}
@@ -49,7 +49,7 @@ export function ChildEducationTabs({ config, data }: Props) {
                 key={tab.value}
                 value={tab.value}
                 className={cn(
-                  'global-p1 font-medium px-2 py-2.5 md:py-6 relative flex justify-start uppercase ',
+                  'global-p1 xl:text-[28px] font-medium px-2 py-2.5 md:py-6 relative flex justify-start uppercase ',
                   index === 0 ? 'text-left pl-0' : 'text-left',
                   config?.length === 2 && 'w-[30%]',
                   activeTab === tab.value
@@ -83,7 +83,7 @@ export function ChildEducationTabs({ config, data }: Props) {
                 <div
                   key={`arrow-${i}`}
                   className="hidden md:block absolute -bottom-2.5 z-10"
-                  style={{ left: `${percent}%`, transform: 'translateX(-50%)' }}
+                  style={{ left: `${percent}%`, transform: 'translateX(-150%)' }}
                 >
                   <ArrowIcon />
                 </div>
@@ -108,12 +108,7 @@ export function ChildEducationTabs({ config, data }: Props) {
                 <TabsContent
                   key={activeTab}
                   value={activeTab}
-                  className="
-    py-8 md:py-0
-    grid grid-cols-1 md:grid-cols-2
-    gap-x-20 gap-y-6 md:gap-y-12
-    
-  "
+                  className="py-8 md:py-0 grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-6 md:gap-y-12"
                 >
                   {/* Left column: First 4 */}
                   <div className="flex flex-col gap-8 xl:gap-12">
@@ -184,26 +179,26 @@ export function ChildEducationTabs({ config, data }: Props) {
                     variant="primary"
                     className="
                             cursor-not-allowed
-                            px-2 md:px-6 2xl:px-10
+                            px-4 md:px-6 2xl:px-10
                             py-1 md:py-2 2xl:py-6
                             h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
                             rounded-[4px] lg:rounded-[6px] 
-                            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-                            global-h4 font-normal"
+                            global-p1 font-normal"
                   >
                     Download Brochure
                   </Button>
                   <Button
-                    variant="primary"
+                    variant="outline"
                     className="
                             cursor-not-allowed
-                            px-2 md:px-6 2xl:px-10
-                            bg-[#9C8639]
-                            py-1 md:py-2 2xl:py-6
-                            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-                            rounded-[4px] lg:rounded-[6px] 
-                            
-                            global-h4 font-normal"
+            px-4 md:px-6 2xl:px-10
+            text-[#9C8639]
+            border-[#9C8639]
+            py-1 md:py-2 2xl:py-6
+            border-2
+            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
+            rounded-[4px] lg:rounded-[6px] 
+            global-p1 font-normal"
                   >
                     Calculate Premium
                   </Button>

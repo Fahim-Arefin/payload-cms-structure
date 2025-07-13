@@ -45,11 +45,11 @@ export function BenefitsTabSection() {
             </p>
             <ul className="flex flex-col gap-4 justify-center text-center px-8 lg:px-16 xl:px-36">
               {riders.map((rider, idx) => (
-                <li key={rider} className="flex items-start gap-2">
-                  <span className="w-6 h-6 rounded bg-[#ED7125] text-white font-bold flex items-center justify-center text-base mr-2">
+                <li key={rider} className="flex items-center gap-2">
+                  <span className="w-5 h-5 md:w-6 md:h-6 xl:h-8  rounded bg-[#ED7125] text-white font-light flex items-center justify-center text-[12px] md:text-base mr-2">
                     {idx + 1}.
                   </span>
-                  <span className="global-p2">{rider}</span>
+                  <span className="text-[12px] md:global-p2">{rider}</span>
                 </li>
               ))}
             </ul>
@@ -57,17 +57,17 @@ export function BenefitsTabSection() {
         </div>
       </div>
       {/* Buttons */}
-      <div className="flex justify-center items-center gap-4 mt-4 md:mt-10 lg:mt-20">
+      <div className="flex justify-center items-center gap-4 mt-10 md:mt-10 lg:mt-20">
         <Button
           variant="primary"
           className="
             cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
+            px-4 md:px-6 2xl:px-10
             py-1 md:py-2 2xl:py-6
             h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
             rounded-[4px] lg:rounded-[6px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-            global-h4 font-normal"
+            
+            global-p1 font-normal"
         >
           Download Brochure
         </Button>
@@ -75,13 +75,14 @@ export function BenefitsTabSection() {
           variant="outline"
           className="
             cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
+            px-4 md:px-6 2xl:px-10
             text-[#9C8639]
             border-[#9C8639]
+            border-2
             py-1 md:py-2 2xl:py-6
             h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
             rounded-[4px] lg:rounded-[6px] 
-            global-h4 font-normal"
+            global-p1 font-normal"
         >
           Calculate Premium
         </Button>
