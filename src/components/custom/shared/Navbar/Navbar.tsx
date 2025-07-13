@@ -810,16 +810,16 @@ export default function Navbar() {
                 <>
                   <Link
                     href={item.href}
-                    className={`flex items-center space-x-1 relative ${
+                    className={`flex items-center space-x-1 relative h-[60px] xl:h-[70px] 2xl:h-[80px]  ${
                       isActive(item.href)
-                        ? ' after:absolute after:left-0 after:w-full after:h-[4px] after:xl:h-[7px] after:bg-[#ED7125] after:rounded-full after:lg:bottom-[-17px] after:xl:bottom-[-17px] after:2xl:bottom-[-23px]'
+                        ? ' after:absolute after:left-0 after:w-full after:h-[4px] after:xl:h-[7px] after:bg-[#ED7125] after:rounded-full after:lg:bottom-[1px]'
                         : ''
                     } `}
                   >
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger
-                          className={`flex items-center space-x-1  ${item.href === '#' ? ' cursor-not-allowed ' : ' cursor-pointer '}`}
+                          className={`flex items-center space-x-1 ${item.href === '#' ? ' cursor-not-allowed ' : ' cursor-pointer '}`}
                         >
                           <span>{item.label}</span>
                           <RiArrowDownSLine
@@ -832,7 +832,7 @@ export default function Navbar() {
                   </Link>
 
                   <ul
-                    className="absolute lg:top-[45px] xl:top-[55px] 2xl:top-[60px] left-0 bg-white/70 backdrop-blur-[16.666666px] shadow-md rounded-md 
+                    className="absolute lg:top-[62px] xl:top-[74px] 2xl:top-[84px] left-0 bg-white/70 backdrop-blur-[16.666666px] shadow-md rounded-md 
                     w-48 space-y-1 p-2 z-50 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all 
                     lg:text-[12px] xl:text-sm"
                   >
