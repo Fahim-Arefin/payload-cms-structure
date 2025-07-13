@@ -25,7 +25,7 @@ function PlanPage() {
     {
       title: 'Child Education',
       description: 'From crayons to cap and gown — we\u2019ve got you covered',
-      link: '/',
+      link: '/plans/individual/child-education',
       image: '/assets/plan5.jpg',
     },
     {
