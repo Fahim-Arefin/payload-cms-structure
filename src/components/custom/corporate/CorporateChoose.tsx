@@ -13,12 +13,18 @@ type CorporateChooseProps = {
 
 const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
   return (
-    <div className="w-full">
+    <div
+      className="w-full px-5 py-12 
+           md:px-24 
+           lg:px-[130px]  lg:py-[110px] 
+           xl:px-[200px]  xl:py-[100px] 
+           2xl:px-[250px] 2xl:py-[150px]"
+    >
       {/* Desktop / Laptop */}
-      <div className="hidden lg:flex justify-between items-center bg-white">
+      <div className="hidden lg:flex items-center bg-white">
         {/* Right content */}
-        <div className="flex flex-col gap-4 justify-between bg-white container-padding">
-          <h1 className="global-h1 font-bold text-[#434342] mb-10">
+        <div className="flex flex-col justify-center gap-4 lg:gap-10 2xl:gap-16 bg-white">
+          <h1 className="global-h1 font-bold text-[#434342] mb-2">
             Designed to <span className="text-[#ED7125]">Deliver More</span>
           </h1>
 
@@ -39,22 +45,21 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
 
               {/* TEXT */}
               <div className="flex flex-col gap-2 px-4">
-                <p className="lg:text-[1.1rem] whitespace-nowrap xl:text-[1.5rem] uppercase text-[#434342]">
+                <p className="lg:text-[1.1rem] font-bold whitespace-nowrap xl:text-[1.5rem] text-[#434342]">
                   {item.text}
                 </p>
-                <p className="lg:global-p2 xl:global-p1 text-[#434342]">{item.description}</p>
+                <p className="lg:global-p2 xl:text-[21px] text-[#434342]">{item.description}</p>
               </div>
             </div>
           ))}
         </div>
 
         {/* Left image */}
-        <div>
+        <div className="">
           <img
             src="/assets/corporateChooseBanner.png"
             alt="benefits Image"
-            className="h-[180px] md:h-full lg:max-h-[720px] 2xl:max-h-[800px]
-            w-full md:w-[100%] lg:w-[800px] 2xl:w-[800px] object-cover rounded-l-md"
+            className="w-full h-fit object-cover rounded-md rounded-r-xl"
           />
         </div>
       </div>
@@ -82,8 +87,8 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
 
                 {/* TEXT */}
                 <div className="flex flex-col gap-2">
-                  <p className="uppercase text-left global-p1 text-[#434342]">{item.text}</p>
-                  <p className="uppercase global-p2 text-[#434342]">{item.description}</p>
+                  <p className="uppercase text-left global-p1 text-[#434342]">{item?.text}</p>
+                  <p className="uppercase global-p2 text-[#434342]">{item?.description}</p>
                 </div>
               </div>
             ))}
@@ -91,16 +96,18 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-4 pb-12 pt-10 lg:pt-0 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]">
+      <div
+        className="flex justify-center items-center md:justify-start md:items-left gap-4 pb-12 pt-10 lg:pt-10 xl:pt-16 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]"
+      >
         <Button
           variant="primary"
           className="
             cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6
-            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
+            px-4 md:px-6 2xl:px-10
+            py-2 md:py-2 2xl:py-6
+            
             rounded-[4px] lg:rounded-[6px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
+            
             global-h4 font-normal"
         >
           Download Brochure
@@ -109,10 +116,10 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
           variant="primary"
           className="
             cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
+            px-4 md:px-6 2xl:px-10
             bg-[#9C8639]
-            py-1 md:py-2 2xl:py-6
-            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
+            py-2 md:py-2 2xl:py-6
+            
             rounded-[4px] lg:rounded-[6px] 
             
             global-h4 font-normal"

@@ -33,28 +33,28 @@ function page({}: Props) {
       icon: '/assets/choose1.svg',
       text: 'Comprehensive Coverage',
       description:
-        'Protection that spans natural demise, accidental fatalities, disabilities, and major health conditions.',
+        'Protection against natural and accidental deaths, disabilities, and critical illnesses.',
     },
     {
       icon: '/assets/choose2.svg',
       text: 'Simplified Holistic Healthcare',
       description:
-        'All-around healthcare support—covering hospitalization, maternity, dental, optical, and more.',
+        'In-patient, outpatient, maternity, dental, and optical care for total well-being.',
     },
     {
       icon: '/assets/choose3.svg',
       text: 'Effortless Claims Settlement',
-      description: 'Smart and seamless claims support system with instant cashless access.',
+      description: 'Cashless hospitalization and a smooth claims process.',
     },
     {
       icon: '/assets/choose4.svg',
       text: 'GLOBAL CARE ACCESS',
-      description: 'Intelligent healthcare coverage—seamlessly bridging local and global support.',
+      description: 'Trusted medical support locally and worldwide.',
     },
     {
       icon: '/assets/choose5.svg',
       text: 'Dedicated Account Management',
-      description: 'Enhance retention with data-backed care solutions, managed by a team of dedicated experts. ',
+      description: 'Foster loyalty and belonging by investing in your team’s well-being.',
     },
   ]
 
