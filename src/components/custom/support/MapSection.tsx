@@ -29,7 +29,7 @@ function MapSection({ data }: Props) {
       className="bg-white lg:bg-[#FFF8F2] w-full grid grid-cols-1 lg:grid-cols-7 
     gap-4 lg:gap-6 xl:gap-12
     lg:h-[550px] xl:h-[600px] 2xl:h-[650px] 
-    pb-12 md:pb-24 lg:pb-0"
+    pb-6 md:pb-12 lg:pb-0"
     >
       {/* Left Column - Contact Info */}
       <div

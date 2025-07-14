@@ -11,6 +11,8 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import MapSection from './MapSection'
+import { Button } from '@/components/ui/button'
+import ToolTip from '../shared/ToolTip'
 
 type TabConfig = {
   value: string
@@ -125,6 +127,33 @@ export function MapTabSection({ config, data }: Props) {
             </Select>
           </div>
           <MapSection data={data[0]} />
+          <div
+            className="lg:hidden  pl-5 
+    pb-12 md:pb-24 lg:pb-0
+           md:pl-24 md:pt-4 space-y-5"
+          >
+            <div className=" flex space-x-2">
+              <ToolTip>
+                <Button
+                  variant="secondary"
+                  className="cursor-not-allowed font-normal w-[130px] md:w-[150px] h-[34px] md:h-[40px] text-[11px] md:text-[13px]"
+                >
+                  Download Brochure
+                </Button>
+              </ToolTip>
+              <ToolTip>
+                <Button
+                  variant="outline"
+                  className="cursor-not-allowed font-normal w-[130px] md:w-[150px] h-[34px] md:h-[40px] text-[11px] md:text-[13px]"
+                >
+                  Calculate Premium
+                </Button>
+              </ToolTip>
+            </div>
+            <div className="cursor-not-allowed text-[#434343] text-[11px] md:text-[13px] border-b w-fit px-2 border-b-[#434343]">
+              Have a Question? Ask Us!
+            </div>
+          </div>
         </div>
       ) : (
         <div className="text-center py-16 text-[#434343] font-medium text-lg">

@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
+import ToolTip from '../shared/ToolTip'
 
 type Props = {}
 
@@ -155,19 +156,21 @@ function GeneralFaq({}: Props) {
 
         {/* load more btn */}
         <div className="flex justify-center ">
-          <Button
-            variant="outline"
-            className="
-    text-[#3A3A3A] bg-[#F6EDDD] hover:bg-[#F6EEEE]
-    global-p1 
-    w-[90px] sm:w-[110px] md:w-[130px] lg:w-[140px] 2xl:w-[160px]
-    h-[28px] sm:h-[34px] md:h-[40px] lg:h-[44px] 2xl:h-[47px]
-    text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] 2xl:text-[16px]
-    font-medium rounded-md transition-all duration-200
-  "
-          >
-            Load more
-          </Button>
+          <ToolTip>
+            <Button
+              variant="outline"
+              className="cursor-not-allowed
+            text-[#3A3A3A] bg-[#F6EDDD] hover:bg-[#F6EEEE]
+            global-p1 
+            w-[90px] sm:w-[110px] md:w-[130px] lg:w-[140px] 2xl:w-[160px]
+            h-[28px] sm:h-[34px] md:h-[40px] lg:h-[44px] 2xl:h-[47px]
+            text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] 2xl:text-[16px]
+            font-medium rounded-md transition-all duration-200
+            "
+            >
+              Load more
+            </Button>
+          </ToolTip>
         </div>
       </div>
     </div>
