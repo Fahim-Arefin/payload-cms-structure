@@ -2,6 +2,7 @@ import CareerIntro from '@/components/custom/career/CareerIntro'
 import CareerOpening from '@/components/custom/career/CareerOpening'
 import CareerOpeningPrograms from '@/components/custom/career/CareerOpeningPrograms'
 import CareerOurStoryLg from '@/components/custom/career/CareerOurStoryLg'
+import CareerProcessingFlow from '@/components/custom/career/CareerProcessingFlow'
 import { CareerResourceSection } from '@/components/custom/career/CareerResources'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
@@ -68,40 +69,38 @@ const page: FC<pageProps> = ({}) => {
         'At Shanta Life, innovation is in our DNA, and every challenge is an opportunity to grow. As a member of the IT department, I’ve had the chance to work on...',
       designation: 'Information Technology.',
     },
- 
   ]
 
   const openingData = [
-  {
-    type: "Internship",
-    title: "RELATIONSHIP OFFICER",
-    description:
-      "At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture...",
-    btnText: "Apply Now",
-  },
-  {
-    type: "Part-time",
-    title: "CAMPUS AMBASSADOR",
-    description:
-      "At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture...",
-    btnText: "Apply Now",
-  },
-  {
-    type: "Full time",
-    title: "MANAGEMENT TRAINEE",
-    description:
-      "At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture...",
-    btnText: "Apply Now",
-  },
-  {
-    type: "Full time",
-    title: "RELATIONSHIP OFFICER",
-    description:
-      "At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture...",
-    btnText: "Apply Now",
-  },
-];
-
+    {
+      type: 'Internship',
+      title: 'RELATIONSHIP OFFICER',
+      description:
+        'At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture where every voice is heard and every idea is valued, regardless of your background. ',
+      btnText: 'Apply Now',
+    },
+    {
+      type: 'Part-time',
+      title: 'CAMPUS AMBASSADOR',
+      description:
+        'At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture where every voice is heard and every idea is valued, regardless of your background. ',
+      btnText: 'Apply Now',
+    },
+    {
+      type: 'Full time',
+      title: 'MANAGEMENT TRAINEE',
+      description:
+        'At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture where every voice is heard and every idea is valued, regardless of your background. ',
+      btnText: 'Apply Now',
+    },
+    {
+      type: 'Full time',
+      title: 'RELATIONSHIP OFFICER',
+      description:
+        'At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture where every voice is heard and every idea is valued, regardless of your background. ',
+      btnText: 'Apply Now',
+    },
+  ]
 
   return (
     <div className="font-avenir">
@@ -152,9 +151,10 @@ const page: FC<pageProps> = ({}) => {
       <div className="container-padding block bg-gradient-to-r from-[#FBFFD3] to-[#F8E4C6]">
         {careerStoryData?.map((data, i) => <CareerOurStoryLg key={i} data={data} />)}
       </div>
-      {/* <CareerResourceSection data={resourceData}/>
-      <CareerOpening openingData={openingData}/>
-      <CareerOpeningPrograms /> */}
+      <CareerResourceSection data={resourceData} />
+      <CareerOpening openingData={openingData} />
+      <CareerOpeningPrograms />
+      <CareerProcessingFlow />
     </div>
   )
 }

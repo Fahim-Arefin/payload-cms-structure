@@ -38,7 +38,11 @@ const CareerOurStoryLg: FC<CareerOurStoryLgProps> = ({ data }) => {
               <DialogTrigger asChild>
                 <div
                   className={cn(
-                    `relative group cursor-pointer h-[200px] lg:h-[250px] xl:h-[300px] w-full bg-no-repeat bg-[length:100%_212.5%] bg-[position:0px_-180.566px] md:rounded-[5.333px_5.333px_53.333px_5.333px] lg:rounded-[8.333px_8.333px_53.333px_8.333px] overflow-hidden transition-all`,
+                    `relative group cursor-pointer 
+        md:h-[200px] lg:h-[250px] xl:h-[300px] w-full  
+        bg-no-repeat bg-[length:100%_212.5%] bg-[position:0px_-180.566px] 
+   md:rounded-[5.333px_5.333px_53.333px_5.333px] lg:rounded-[8.333px_8.333px_53.333px_8.333px]
+        overflow-hidden transition-all`,
                     'order-1',
                   )}
                   style={{

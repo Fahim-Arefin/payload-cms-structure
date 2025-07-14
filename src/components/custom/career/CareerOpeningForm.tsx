@@ -29,23 +29,23 @@ function CareerOpeningForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-[#F9F4EE] rounded-[12px] shadow px-5 py-6 flex flex-col gap-4 w-full"
+      className="bg-white md:bg-[#FCF4EB] rounded-[12px] h-full px-5 py-6 flex flex-col gap-4 w-full"
     >
       <span className="font-bold text-[#343434] text-lg mb-1 tracking-tight">JOIN OUR TEAM</span>
       <Input
         placeholder="Name"
-        className="bg-white rounded-md px-4 py-2 shadow-sm border-none placeholder:text-[#B0B0B0] text-[15px]"
+        className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
       />
       <Input
         placeholder="Phone"
-        className="bg-white rounded-md px-4 py-2 shadow-sm border-none placeholder:text-[#B0B0B0] text-[15px]"
+        className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
       />
       <Input
         placeholder="Email"
-        className="bg-white rounded-md px-4 py-2 shadow-sm border-none placeholder:text-[#B0B0B0] text-[15px]"
+        className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
       />
       <Select>
-        <SelectTrigger className="bg-white rounded-md px-4 py-2 shadow-sm border-none text-[15px]">
+        <SelectTrigger className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none text-[15px]">
           <SelectValue placeholder="IT Executive" />
         </SelectTrigger>
         <SelectContent>
@@ -60,23 +60,25 @@ function CareerOpeningForm() {
         </SelectContent>
       </Select>
       {/* File upload */}
-      <div className="flex items-center gap-2">
+      <div className="flex w-full rounded-[6px] overflow-hidden bg-[#FCF4EB] md:bg-white">
+        <label htmlFor="resume" className="flex flex-1 items-center cursor-pointer">
+          <span className="block w-full text-[#B0B0B0] text-[13px] px-3 py-2 select-none">
+            Upload your resume
+          </span>
+          <input type="file" id="resume" className="hidden" />
+        </label>
         <label
           htmlFor="resume"
-          className="bg-[#B09B67] rounded px-4 py-2 text-white font-semibold text-[13px] cursor-pointer"
+          className="bg-[#B09B67] text-white font-semibold text-[13px] px-4 py-2 cursor-pointer transition-colors hover:bg-[#a29050] select-none"
+          style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
         >
           Browse File
-          <input
-            type="file"
-            id="resume"
-            className="hidden"
-          />
         </label>
-        <span className="text-[#B0B0B0] text-[13px]">Upload your resume</span>
       </div>
+
       <Textarea
         placeholder="Your message"
-        className="bg-white rounded-md px-4 py-2 shadow-sm border-none placeholder:text-[#B0B0B0] text-[15px] min-h-[65px]"
+        className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px] lg:min-h-[105px] xl:min-h-[70px]"
         rows={2}
       />
       <Button
