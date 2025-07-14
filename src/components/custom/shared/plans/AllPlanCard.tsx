@@ -12,9 +12,9 @@ function AllPlanCard({ data, blur }: Props) {
   return (
     <Link
       href={data?.link}
-      className="group relative overflow-hidden w-[70%] mx-auto md:w-full 
+      className="group relative overflow-hidden w-full mx-auto md:w-full 
     h-[250px] md:h-[250px] xl:h-[300px] 2xl:h-[330px] 
-    rounded-[12.5px] cursor-pointer "
+    rounded-[12.5px] cursor-pointer"
     >
       {/* Background image only */}
       <div

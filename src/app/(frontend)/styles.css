@@ -138,7 +138,7 @@
   }
   .global-h3 {
     /* @apply text-[18px] md:text-[20px] lg:text-[26px] xl:text-[30px] 2xl:text-[38px]; */
-    @apply text-[15px] md:text-[20px] lg:text-[22px] xl:text-[24px] 2xl:text-[32px]
+    @apply text-[14px] md:text-[20px] lg:text-[22px] xl:text-[24px] 2xl:text-[32px]
     leading-6 md:leading-7 xl:leading-[35px] 2xl:leading-[45px];
   }
   .global-h4 {

@@ -82,6 +82,21 @@ export type InsuranceDataType = {
   mainImage: string
   insuranceCardData: InsuranceCardDataType[]
 }
+
+export type OurStoryDataType = {
+  title: string
+  subtitle: string
+  mainImage: string
+  insuranceCardData: InsuranceCardDataType[]
+}
+
+export type CareerResourceDataType = {
+  title: string
+  image: string
+  description: string
+  designation: string
+}
+
 export type OnboardingRoleType = {
   image: string
   title: string
