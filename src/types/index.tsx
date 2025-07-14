@@ -130,3 +130,9 @@ export type PlanData = {
   image: string
   timeline: string
 }
+
+// types.ts
+export type CareerCard = {
+  title: string
+  description: string
+}
