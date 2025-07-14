@@ -36,23 +36,22 @@ function NewsSliderSection({ data }: Props) {
 
   return (
     <div
-      className="w-[95%] lg:w-[85%] xl:w-[72%] mx-auto
+      className="w-full lg:w-[85%] xl:w-[72%] mx-auto
            py-[70px]
              lg:py-[70px] 
-             xl:py-[100px]
-             ml-[40px] md:ml-[70px] lg:mx-auto
+             xl:py-[100px] 
              pb-24"
     >
       <Carousel
         opts={{
           align: 'start',
         }}
-        className=""
+        className="px-2"
         setApi={setCarouselApi}
       >
         <CarouselContent className="">
           {data?.map((item, index) => (
-            <CarouselItem key={index} className="basis-1/2 lg:basis-1/3  md:pl-0 -ml-2 md:ml-2">
+            <CarouselItem key={index} className="basis-1/2 lg:basis-1/3 lg:pl-0 ">
               <NewsSliderCard item={item} />
             </CarouselItem>
           ))}
@@ -60,7 +59,7 @@ function NewsSliderSection({ data }: Props) {
         {/* Carousel Navigation */}
         <div
           className="lg:hidden flex gap-2 absolute h-fit
-                          inset-x-0 justify-start lg:justify-end -bottom-10 md:-bottom-12 lg:-top-8 2xl:-top-12 lg:right-0"
+                          inset-x-0 justify-center lg:justify-end -bottom-10 md:-bottom-12 lg:-top-8 2xl:-top-12 lg:right-0"
         >
           <CarouselNavButtons
             onPrev={() => carouselApi?.scrollPrev()}

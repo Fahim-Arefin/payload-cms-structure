@@ -155,8 +155,8 @@ function AllNewsContainer() {
           <div key={item.id} className="flex items-center space-x-4 lg:space-x-6 h-fit">
             <div
               className=" rounded-[6px] 
-            min-w-[100px] max-w-[100px] xl:min-w-[125px] xl:max-w-[125px] 
-            h-[100px] xl:h-[120px]"
+            min-w-[110px] max-w-[110px] xl:min-w-[140px] xl:max-w-[140px] 
+            h-[110px] xl:h-[140px]"
             >
               <img
                 src={item.image}
@@ -167,11 +167,11 @@ function AllNewsContainer() {
             <div className="space-y-2 xl:space-y-3">
               <div className="flex items-center space-x-2">
                 <Image src="/assets/calender2.png" alt="calendar" width={16} height={16} />
-                <p className="text-[10px]">{item.date}</p>
+                <p className="text-[11px]">{item.date}</p>
               </div>
-              <h3 className="text-[#ED7125]  text-[11px] md:text-[13px]">{item.title}</h3>
+              <h3 className="text-[#ED7125]  text-[11px] md:text-[15px]">{item.title}</h3>
               {/* description 2xl */}
-              <p className="hidden 2xl:block text-[10px] md:text-[12px] leading-relaxed text-[#E5E5E5]">
+              <p className="hidden 2xl:block text-[10px] md:text-[13px] leading-relaxed text-[#E5E5E5]">
                 {item.description.split(' ').slice(0, 40).join(' ')}
                 {item.description.split(' ').length > 40 && (
                   <span className="ml-1 text-[#ED7125] font-medium cursor-pointer hover:underline hover:text-[#c45d1f] transition-all">
@@ -180,27 +180,36 @@ function AllNewsContainer() {
                 )}
               </p>
               {/* description xl */}
-              <p className="hidden xl:block 2xl:hidden text-[10px] md:text-[12px] leading-relaxed text-[#E5E5E5]">
-                {item.description.split(' ').slice(0, 20).join(' ')}
-                {item.description.split(' ').length > 20 && (
+              <p className="hidden xl:block 2xl:hidden text-[10px] md:text-[13px] leading-relaxed text-[#E5E5E5]">
+                {item.description.split(' ').slice(0, 28).join(' ')}
+                {item.description.split(' ').length > 28 && (
                   <span className="ml-1 text-[#ED7125] font-medium cursor-pointer hover:underline hover:text-[#c45d1f] transition-all">
                     ... see more
                   </span>
                 )}
               </p>
               {/* description lg */}
-              <p className="hidden lg:block xl:hidden text-[10px] md:text-[12px] leading-relaxed text-[#E5E5E5]">
-                {item.description.split(' ').slice(0, 15).join(' ')}
-                {item.description.split(' ').length > 15 && (
+              <p className="hidden lg:block xl:hidden text-[10px] md:text-[13px] leading-relaxed text-[#E5E5E5]">
+                {item.description.split(' ').slice(0, 13).join(' ')}
+                {item.description.split(' ').length > 13 && (
                   <span className="ml-1 text-[#ED7125] font-medium cursor-pointer hover:underline hover:text-[#c45d1f] transition-all">
                     ... see more
                   </span>
                 )}
               </p>
-              {/* description lg */}
-              <p className="lg:hidden text-[10px] md:text-[12px] leading-relaxed text-[#E5E5E5]">
-                {item.description.split(' ').slice(0, 12).join(' ')}
-                {item.description.split(' ').length > 12 && (
+              {/* description md */}
+              <p className="hidden md:block lg:hidden text-[10px] md:text-[13px] leading-relaxed text-[#E5E5E5]">
+                {item.description.split(' ').slice(0, 18).join(' ')}
+                {item.description.split(' ').length > 18 && (
+                  <span className="ml-1 text-[#ED7125] font-medium cursor-pointer hover:underline hover:text-[#c45d1f] transition-all">
+                    ... see more
+                  </span>
+                )}
+              </p>
+              {/* description sm */}
+              <p className="md:hidden text-[10px] md:text-[13px] leading-relaxed text-[#E5E5E5]">
+                {item.description.split(' ').slice(0, 10).join(' ')}
+                {item.description.split(' ').length > 10 && (
                   <span className="ml-1 text-[#ED7125] font-medium cursor-pointer hover:underline hover:text-[#c45d1f] transition-all">
                     ... see more
                   </span>
