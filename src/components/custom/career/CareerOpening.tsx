@@ -6,6 +6,7 @@ import CareerOpeningForm from './CareerOpeningForm'
 import { useEffect, useState } from 'react'
 import CareerOpeningCard from './CareerOpeningCard'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
+import { JoinOurTeamMobile } from './JoinOurTeamMobile'
 
 type CareerOpeningDataProps = {
   openingData: any
@@ -34,21 +35,21 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
 
   return (
     <section className="container-padding w-full bg-[#F6EDDD] py-12">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-        {/* Left: Section Title */}
-        <div className="mb-8 md:mb-0 md:col-span-1">
-          <div>
-            <span className="block text-[#343434] font-light text-[20px] md:text-[22px] xl:text-[24px]">
-              CURRENTLY OPENING
-            </span>
-            <span className="block text-[#ED7125] font-bold text-[28px] md:text-[34px] xl:text-[36px] tracking-tight -mt-1">
-              POSITIONS
-            </span>
-          </div>
+      <div className="mb-8 lg:mb-10">
+        <div>
+          <span className="block text-[#343434] font-light text-[18px] md:text-[22px] xl:text-[24px]">
+            CURRENTLY OPENING
+          </span>
+          <span className="block text-[#ED7125] font-bold text-[18px] md:text-[34px] xl:text-[50px] -mt-1">
+            POSITIONS
+          </span>
         </div>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6 items-stretch">
+        {/* Left: Section Title */}
 
         {/* Center: Cards (Grid for desktop, Carousel for mobile) */}
-        <div className="md:col-span-1 flex flex-col items-center w-full">
+        <div className="flex flex-col items-center w-full">
           {/* Desktop: Grid */}
           <div className="hidden md:grid grid-cols-2 gap-5 w-full">
             {openingData.map((card: any, idx: number) => (
@@ -56,7 +57,7 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
             ))}
           </div>
           {/* Mobile: Carousel */}
-          <div className="md:hidden w-full relative">
+          <div className="md:hidden w-full relative mb-8">
             <Carousel opts={{ loop: true, align: 'center' }} setApi={setCarouselApi}>
               <CarouselContent className="flex items-stretch">
                 {openingData.map((card: any, idx: number) => (
@@ -81,8 +82,11 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
         </div>
 
         {/* Right: Form */}
-        <div className="md:col-span-1 mt-10 md:mt-0">
-          <CareerOpeningForm />
+        <div className="mt-10 md:mt-0 h-full">
+          <JoinOurTeamMobile />
+          <div className="hidden md:block h-full">
+            <CareerOpeningForm />
+          </div>
         </div>
       </div>
     </section>
