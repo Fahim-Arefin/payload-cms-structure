@@ -1,109 +1,60 @@
 import React, { FC } from 'react'
-import { InsuranceDataType } from '@/types'
+import { OurStoryDataType } from '@/types'
 import { cn } from '@/lib/utils'
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import InsuranceCard from '../home/InsuranceCard'
+import CareerStoryCard from './CareerStoryCard'
 
 type CareerOurStoryLgProps = {
-  data: InsuranceDataType
-  content: 'left' | 'right'
+  data: OurStoryDataType
 }
 
-const CareerOurStoryLg: FC<CareerOurStoryLgProps> = ({ data, content }) => {
-  const [titleFirstWord, ...titleRestWords] = data?.title?.split(' ') || []
-  const words = data?.sectionHeading?.split(' ') || []
-  const lastWord = words.at(-1) || ''
-  const restWords = words.slice(0, -1).join(' ')
-
+const CareerOurStoryLg: FC<CareerOurStoryLgProps> = ({ data }) => {
   return (
     <div className="">
       <div className="">
         {/* headline */}
-        {data?.sectionHeading && (
-          <div className="">
-            <h1
-              className="global-h1 uppercase font-semibold space-x-4 
-             md:mb-[30px] lg:mb-[40px] xl:mb-[80px]"
-            >
-              <span>{restWords}</span>
-              <span className="text-[#ED7125]">{lastWord}</span>
-            </h1>
-          </div>
-        )}
-        <div className={cn(` space-y-6`)}>
+
+        <div className={cn(`space-y-6`)}>
           {/* 1st row */}
-          <div className={cn(`grid grid-cols-1 md:grid-cols-2`)}>
+          <div className={cn(`grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0`)}>
             {/* Left Text Section */}
-            <div
-              className={cn(
-                `text-[#434343] global-h4 p-4 flex flex-col justify-center`,
-                content === 'left'
-                  ? 'order-1'
-                  : 'order-2 md:ml-[16%] lg:ml-[20%] xl:ml-[30%] 2xl:ml-[40%]',
-              )}
-            >
-              <h4 className="font-semibold uppercase">
-                <span className="text-[#ED7125] ">{titleFirstWord}</span> {titleRestWords.join(' ')}
+            <div className={cn(`text-[#434343] flex flex-col justify-center`, 'order-1')}>
+              <h4 className="font-light hidden md:block global-h3 uppercase">{data?.title}</h4>
+              <h4 className="text-[#ED7125] hidden md:block font-semibold global-h1">
+                {data?.subtitle}
               </h4>
-              <h4 className="">{data?.subtitle}</h4>
+              <h4 className="block md:hidden text-base uppercase">
+                Shanta Life <span className="text-[#ED7125]">Unveiled</span>
+              </h4>
             </div>
-
-            {/* Right Background Image Section */}
-            {/* <div
-              className={cn(
-                `relative md:h-[200px] lg:h-[250px] xl:h-[300px] w-full  
-    bg-no-repeat bg-[length:100%_212.5%] bg-[position:0px_-180.566px] 
-    rounded-[8.333px_8.333px_53.333px_8.333px]`,
-                content === 'left' ? 'order-2' : 'order-1',
-              )}
-              style={{
-                backgroundImage: `url(${data.mainImage})`,
-              }}
-            >
-              <div
-                className="absolute 
-              md:-bottom-1 lg:-bottom-2 xl:-bottom-4 
-              md:-right-1 lg:-right-2 xl:-right-4"
-              >
-                <img
-                  src="/assets/play.svg"
-                  alt=""
-                  className=" md:w-[60px] lg:w-[80px] xl:w-[100px]  
-                  md:h-[60px] lg:h-[80px] xl:h-[100px]"
-                />
-              </div>
+            {/* <div>
+              <h4 className="block md:hidden text-[16px] uppercase">
+                Shanta Life <span className="text-[#ED7125]">Unveiled</span>
+              </h4>
             </div> */}
-
             <Dialog>
               <DialogTrigger asChild>
                 <div
                   className={cn(
-                    `relative group cursor-pointer 
-        md:h-[200px] lg:h-[250px] xl:h-[300px] w-full  
-        bg-no-repeat bg-[length:100%_212.5%] bg-[position:0px_-180.566px] 
-   md:rounded-[5.333px_5.333px_53.333px_5.333px] lg:rounded-[8.333px_8.333px_53.333px_8.333px]
-        overflow-hidden transition-all`,
-                    content === 'left' ? 'order-2' : 'order-1',
+                    `relative group cursor-pointer h-[200px] lg:h-[250px] xl:h-[300px] w-full bg-no-repeat bg-[length:100%_212.5%] bg-[position:0px_-180.566px] md:rounded-[5.333px_5.333px_53.333px_5.333px] lg:rounded-[8.333px_8.333px_53.333px_8.333px] overflow-hidden transition-all`,
+                    'order-1',
                   )}
                   style={{
                     backgroundImage: `url(${data.mainImage})`,
                   }}
                 >
                   {/* Hover dark overlay */}
-                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300 rounded-[8.333px_8.333px_53.333px_8.333px]" />
+                  {/* <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300 rounded-[8.333px_8.333px_53.333px_8.333px]" /> */}
 
                   {/* Play Button */}
-                  <div
-                    className="absolute 
-              md:-bottom-0 lg:-bottom-0.5 xl:-bottom-2 
-              md:-right-0 lg:-right-1 xl:-right-1 "
-                  >
+                  <div className="absolute -bottom-0 lg:-bottom-0.5 xl:-bottom-2 -right-0 lg:-right-1 xl:-right-1">
                     <img
-                      src="/assets/play.svg"
+                      src="/assets/play2.svg"
                       alt=""
-                      className=" md:w-[60px] lg:w-[80px] xl:w-[100px]  
-                  md:h-[60px] lg:h-[80px] xl:h-[100px]"
+                      className="w-[65px] lg:w-[80px] xl:w-[100px]  
+                  h-[65px] lg:h-[80px] xl:h-[100px]"
                     />
                   </div>
                 </div>
@@ -116,10 +67,7 @@ const CareerOurStoryLg: FC<CareerOurStoryLgProps> = ({ data, content }) => {
       [&>button.absolute]:text-white 
       [&>button.absolute]:hover:bg-black/80"
               >
-                <VisuallyHidden>
-                  <DialogTitle>Insurance Video</DialogTitle>
-                </VisuallyHidden>
-
+                <DialogTitle>Story Video</DialogTitle>
                 <iframe
                   width="100%"
                   height="100%"
@@ -135,7 +83,7 @@ const CareerOurStoryLg: FC<CareerOurStoryLgProps> = ({ data, content }) => {
           </div>
           {/* second row */}
           <div className="grid grid-cols-3 gap-6">
-            {data?.insuranceCardData?.map((item, i) => <InsuranceCard data={item} key={i} />)}
+            {data?.insuranceCardData?.map((item, i) => <CareerStoryCard data={item} key={i} />)}
           </div>
         </div>
       </div>

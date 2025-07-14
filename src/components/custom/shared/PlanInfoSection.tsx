@@ -10,7 +10,7 @@ type Props = {
 function PlanInfoSection({ bgColor, data }: Props) {
   return (
     <div style={{ backgroundColor: bgColor }} className="container-padding">
-      <div className="grid grid-cols-1 items-center justify-items-center md:justify-items-start md:grid-cols-2 gap-4 md:gap-2">
+      <div className="grid grid-cols-1 items-center justify-items-center md:justify-items-start md:grid-cols-2 gap-10 md:gap-2">
         <div className="max-w-[135px] md:max-w-full max-h-[124px] md:max-h-[360px] w-fit">
           <img src={data?.image} alt="info image" className="h-full w-full" />
         </div>
