@@ -12,6 +12,7 @@ function PlanPage() {
       subtitle: '',
       description: '',
       image: '/assets/healthandprotection1.jpg',
+      titleTop: '60%',
     },
   ]
 

@@ -17,12 +17,12 @@ const HeroItem = ({ slide }: Props) => {
 
       {/* Content */}
       <div
-        className="absolute
-       top-[100px] md:top-[150px] lg:top-[35%] inset-x-0 lg:left-[120px] xl:left-[200px] 2xl:left-[270px] lg:right-auto 
+        className={`absolute
+       top-[100px] md:top-[150px] lg:top-[${slide.titleTop ? slide.titleTop : '35%'}] inset-x-0 lg:left-[120px] xl:left-[200px] 2xl:left-[270px] lg:right-auto 
        space-y-4 md:space-y-6 xl:space-y-10 2xl:space-y-20
        z-20
        lg:w-[920px] xl:w-[1205px] 2xl:w-[1405px] 
-       "
+       `}
       >
         {/* Title & subtitle */}
         <div
