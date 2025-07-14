@@ -30,8 +30,8 @@ function ContactUsSection() {
     >
       {/* main img */}
       <div
-        className="
-      z-20 absolute -bottom-1 left-5
+        className=" 
+      z-20 absolute -bottom-1 left-5 
       lg:left-12
       xl:left-20
       2xl:left-28
@@ -80,7 +80,7 @@ function ContactUsSection() {
 
       {/* form */}
       <div
-        className="hidden 
+        className="hidden  
         lg:grid grid-cols-2 h-full items-center gap-2"
       >
         <div></div>
@@ -97,7 +97,7 @@ function ContactUsSection() {
             Ask Us!
           </h1>
 
-          <form className="lg:space-y-3 xl:space-y-4 2xl:space-y-12" onSubmit={handleSubmit}>
+          <form className=" lg:space-y-3 xl:space-y-4 2xl:space-y-12" onSubmit={handleSubmit}>
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col">
@@ -199,7 +199,7 @@ function ContactUsSection() {
                   <DialogTitle></DialogTitle>
                 </DialogHeader>
                 {/* FORM CONTENT */}
-                <form className="space-y-3 ">
+                <form className="space-y-3">
                   {/* Name Fields */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col">
