@@ -21,12 +21,24 @@ function AllAboutCard({ data, index }: Props) {
     >
       <div className="space-y-1 md:space-y-2">
         <div
-          className="mx-auto
-         w-[40px] md:w-[70px] xl:w-[100px] 
-         h-[40px] md:h-[70px] xl:h-[100px]"
-        >
-          <img src={data?.image} alt={data?.title} className="w-full h-full" />
-        </div>
+  className="mx-auto
+    w-[40px] md:w-[70px] xl:w-[100px] 
+    h-[40px] md:h-[70px] xl:h-[100px]
+    relative group"
+>
+  {/* Main image (shown by default, fades out on hover) */}
+  <img
+    src={data?.image}
+    alt={data?.title}
+    className="w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 z-10"
+  />
+  {/* Hover image (hidden by default, fades in on hover) */}
+  <img
+    src={data?.hoverImage}
+    alt="Trust"
+    className="w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
+  />
+</div>
         <div className="global-h2 text-center font-semibold lg:font-medium">{data?.title}</div>
         <div
           className="global-p2

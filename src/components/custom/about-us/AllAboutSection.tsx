@@ -16,7 +16,7 @@ function AllAboutSection({ allAboutData }: Props) {
             className="flex flex-col items-center gap-4 relative overflow-hidden
            w-full lg:w-[350px] xl:w-[500px] 2xl:w-[600px] 
            h-[150px] md:h-[250px] lg:h-[500px] xl:h-[650px] 2xl:h-[820px]
-           lg:rounded-[10px] xl:rounded-[13px] 2xl:rounded-[15px] "
+           lg:rounded-[10px] xl:rounded-[13px] 2xl:rounded-[15px]"
           >
             {/* Image */}
             <img
