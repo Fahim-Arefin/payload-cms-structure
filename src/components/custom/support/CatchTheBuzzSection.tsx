@@ -73,17 +73,17 @@ function CatchTheBuzzSection({}: Props) {
         <div className="pt-12">
           {activeTab === 'all' && <AllNewsContainer />}
           {activeTab === 'news' && (
-            <p>
+            <p className="text-center">
               Showing content for <strong>NEWS</strong>
             </p>
           )}
           {activeTab === 'blogs' && (
-            <p>
+            <p className="text-center">
               Showing content for <strong>BLOGS</strong>
             </p>
           )}
           {activeTab === 'ovc' && (
-            <p>
+            <p className="text-center">
               Showing content for <strong>OVC/TVC</strong>
             </p>
           )}
