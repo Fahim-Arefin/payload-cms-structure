@@ -27,7 +27,7 @@ function MapSection({ data }: Props) {
   return (
     <div
       className="bg-white lg:bg-[#FFF8F2] w-full grid grid-cols-1 lg:grid-cols-7 
-    gap-4 lg:gap-6 xl:gap-12
+    gap-4 lg:gap-6 2xl:gap-12
     lg:h-[550px] xl:h-[600px] 2xl:h-[650px] 
     pb-6 md:pb-12 lg:pb-0"
     >
@@ -42,16 +42,18 @@ function MapSection({ data }: Props) {
            space-y-1 lg:space-y-4
            "
       >
-        <h2 className="text-[#ED7125] text-[14px] md:text-[16px] font-semibold">
+        <h2 className="text-[#ED7125] text-[14px] md:text-[20px] lg:text-[22px] xl:text-[24px] font-semibold">
           Shanta Life Insurance PLC
         </h2>
-        <p className="text-[10px] lg:text-[13px] text-[#6E6E6E]">{data?.content?.office_address}</p>
+        <p className="text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#6E6E6E]">
+          {data?.content?.office_address}
+        </p>
 
-        <div className="flex items-center space-x-2 text-[10px] lg:text-[11px] text-[#434343]">
+        <div className="flex items-center space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
           <img src="/assets/phone.png" alt="" />
           <p>{data?.content?.office_phone}</p>
         </div>
-        <div className="flex items-center space-x-2 text-[10px] lg:text-[11px] text-[#434343]">
+        <div className="flex items-center space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
           <img src="/assets/phone.png" alt="" />
           <p>{data?.content?.office_email}</p>
         </div>

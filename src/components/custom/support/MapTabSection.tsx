@@ -41,10 +41,10 @@ export function MapTabSection({ config, data }: Props) {
     <>
       <div
         className="px-5 pt-12 
-           md:px-24 md:pt-24 
-           lg:px-[130px]  lg:pt-[110px] 
-           xl:px-[200px]  xl:pt-[100px] 
-           2xl:px-[300px] 2xl:pt-[150px]"
+           md:px-24 md:pt-[40px] 
+           lg:px-[130px]  lg:pt-[50px] 
+           xl:px-[200px]  xl:pt-[70px] 
+           2xl:px-[300px] 2xl:pt-[100px]"
       >
         <Tabs defaultValue={config[0].value} value={activeTab} onValueChange={setActiveTab}>
           <div
@@ -156,7 +156,7 @@ export function MapTabSection({ config, data }: Props) {
           </div>
         </div>
       ) : (
-        <div className="text-center py-16 text-[#434343] font-medium text-lg">
+        <div className="text-center text-[#434343] font-medium my-4 text-xs lg:text-lg">
           Panel Hospital information will be available soon.
         </div>
       )}
