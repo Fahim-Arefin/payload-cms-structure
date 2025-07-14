@@ -23,7 +23,7 @@ export default function PremiumBreakdown() {
     <div className="w-full space-y-10">
       {/* ===== LIVING BENEFITS ===== */}
       <div>
-        <h3 className="global-h3 font-bold text-[#1D3C1E] -mt-10 mb-2">Living Benefits:</h3>
+        <h3 className="global-h3 font-bold text-[#1D3C1E] mt-4 xl:-mt-10 mb-2">Living Benefits:</h3>
         <div className="border-t border-black mb-6" />
 
         <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row  gap-6">
@@ -61,7 +61,7 @@ export default function PremiumBreakdown() {
               <div className="space-y-8">
                 {/* 15% label */}
                 <div className="flex gap-2 items-baseline">
-                  <FaCircle size={6} color="#F79646" className="" />
+                  <FaCircle size={10} color="#F79646" className="" />
                   <div>
                     <p className="font-semibold text-[13px]">15% of the Face Amount paid at the end of:</p>
                     <ul className="space-y-1 p-1 text-xs">
@@ -74,7 +74,7 @@ export default function PremiumBreakdown() {
 
                 {/* 55% label */}
                 <div className="flex gap-2 ">
-                  <FaCircle size={8} color="#4F6228" className="mt-[6px]" />
+                  <FaCircle size={10} color="#4F6228" className="mt-[6px]" />
                   <div>
                     <p className="font-semibold text-[13px]">Final 55% paid at full maturity!</p>
                   </div>

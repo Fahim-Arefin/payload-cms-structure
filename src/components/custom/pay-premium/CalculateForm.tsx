@@ -56,7 +56,7 @@ function CalculateForm({ plan, onPlanChange }: Props) {
           </SelectContent>
         </Select>
         {/* below a text saying watch video */}
-        <p className="text-[8px] md:text-[10px] py-1 pl-1 absolute inset-x-0 text-[#FF6600] underline">
+        <p className="text-[12px] md:text-[12px] py-1 pl-1 absolute inset-x-0 text-[#FF6600] underline">
           Watch Video
         </p>
       </div>
