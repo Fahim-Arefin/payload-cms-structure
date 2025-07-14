@@ -57,19 +57,25 @@ const page: FC<pageProps> = ({}) => {
 
   const resourceData = [
     {
-      title: 'Mantaka Faruqui Aurthi',
+      title: 'Rabeya Dihan',
       image: '/assets/avatar1.jpg',
-      description:
-        'Shanta Life isn’t just a workplace—it’s a dynamic space where ideas thrive, creativity is celebrated, and every voice matters. As a woman in the Marketing department, I’ve experienced firsthand how empowering and inclusive the culture is. Here,',
-      designation: 'Marketing',
+      description: `Working at Shanta Life Insurance PLC has been a rewarding and professionally enriching journey.As part of the Customers Experience Team.I've had the opportunity to enagage directy with our valued custromers ensuring they recived timely support ,clear communication &  a seamless service experience.Everyday at Shanta Life brings new opportunity tio grow,learn & make a sure meaningful impact. `,
+      designation: 'Customer Service',
     },
     {
-      title: 'Surab Barua',
+      title: 'Md. Arif Hossain',
       image: '/assets/avatar2.jpg',
-      description:
-        'At Shanta Life, innovation is in our DNA, and every challenge is an opportunity to grow. As a member of the IT department, I’ve had the chance to work on...',
-      designation: 'Information Technology.',
+      description: `Working at Shanta Life has been a truly rewarding experience. The team is supportive, the environment is positive, and there’s a strong focus on growth and innovation. I’ve learned a lot and felt valued every step of the way.  `,
+      designation: 'Corporate Sales',
     },
+    //     {
+    //       title: 'Rafiqul Ahsan Mohin',
+    //       image: '/assets/avatar2.jpg',
+    //       description: `Shanta Life is more than just a workplace - it's a movement built on purpose, passion, and people. From the very first day, I felt the pulse of something extraordinary: a culture rooted in trust, driven by values and fueled by a collective dream to redefine life insurance in Bangladesh.
+    // Here, every role matters, every voice is heard, and every idea has the power to inspire change. As a young HR professional, I’ve been fortunate to be part of an environment that doesn’t just talk about transformation - it lives it. From nurturing talent to shaping culture, from building systems to unlocking human potential, I’ve seen firsthand how a clear vision, aligned values and courageous leadership can create something truly exceptional.
+    // At Shanta Life, we don’t just offer protection - we ignite possibility. I am proud—honored—to be part of this inspiring journey, alongside brilliant minds and warm hearts who are committed to making a difference. `,
+    //       designation: 'Human Resources',
+    //     },
   ]
 
   const openingData = [
@@ -112,17 +118,21 @@ const page: FC<pageProps> = ({}) => {
     },
     {
       title: 'We Co-sign your Success',
-      description:
-        'We spotlight wins, reward outcomes, and champion the people behind the progress.',
+      description: 'We cheer your hustle, amplify your milestones, and move forward—together.',
     },
     {
       title: 'We Drive Knowledge',
       description:
-        'We spotlight wins, reward outcomes, and champion the people behind the progress.',
+        'We support your quest for knowledge with our curated training programs. We\u2019re committed to nurturing expertise.  ',
     },
     {
-      title: 'We-Center Collaboration',
-      description: 'We foster stronger synergy and support collective success.',
+      title: 'We-Centric Culture',
+      description:
+        'We foster a culture where "we"is stonger than "I". Thrive with synergy and get the support without limits. ',
+    },
+    {
+      title: 'We Ignite Journeys',
+      description: 'We build each other up, every day, Let\u2019s ignite possibilities together.',
     },
   ]
 
