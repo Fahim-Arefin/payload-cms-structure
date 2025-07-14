@@ -187,19 +187,31 @@ function Footer() {
               md:gap-2 md:px-12 lg:px-0 lg:gap-0"
               >
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  About
+                  <Link href={'/about-us'}>
+                    About
+                  </Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  Solutions
+                  <Link href={'/plans'}>
+                    Solutions
+                  </Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  Career
+                  <Link href={'/career'}>
+                    Career
+                  </Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  Media & Blogs
+                  
+                  <Link href={'/news-and-media'}>
+                    Media & Blogs
+                  </Link>
                 </li>
+                
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  Support
+                  <Link href={'/support'}>
+                    Support
+                  </Link>
                 </li>
               </ul>
             </div>
