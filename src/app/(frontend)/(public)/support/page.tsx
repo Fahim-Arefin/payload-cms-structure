@@ -3,8 +3,9 @@ import CatchTheBuzzSection from '@/components/custom/support/CatchTheBuzzSection
 import FeedBackSection from '@/components/custom/support/FeedBackSection'
 import GeneralFaq from '@/components/custom/support/GeneralFaq'
 import LevelUpSection from '@/components/custom/support/LevelUpSection'
+import { MapTabSection } from '@/components/custom/support/MapTabSection'
+
 import NewsSliderSection from '@/components/custom/support/NewsSliderSection'
-import React from 'react'
 
 function SupportPage() {
   const heroSlides = [
@@ -75,9 +76,40 @@ function SupportPage() {
     },
   ]
 
+  const tabItems = [
+    {
+      value: 'branches',
+      label: 'OUR BRANCHES',
+    },
+    {
+      value: 'hospitals',
+      label: 'PANEL HOSPITALS',
+    },
+  ]
+
+  const tabContent = [
+    {
+      content: {
+        office_location: 'Shanta Life Insurance PLC, Dhaka',
+        office_address: 'Shanta Western Tower, 186 Bir Uttam Mir Shawkat Sarak, Dhaka 1208',
+        office_email: 'info@shantalife.com',
+        office_phone: '09610889900 (10 am to 6 pm, Sunday to Thursday)',
+      },
+    },
+    {
+      content: {
+        office_location: 'Shanta Life Insurance PLC, Dhaka',
+        office_address: 'Shanta Western Tower, 186 Bir Uttam Mir Shawkat Sarak, Dhaka 1208',
+        office_email: 'info@shantalife.com',
+        office_phone: '09610889900 (10 am to 6 pm, Sunday to Thursday)',
+      },
+    },
+  ]
+
   return (
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides} />
+      <MapTabSection config={tabItems} data={tabContent} />
       <GeneralFaq />
       <CatchTheBuzzSection />
       <NewsSliderSection data={newsSliderData} />
