@@ -90,7 +90,13 @@ function GeneralFaq({}: Props) {
   const accordionItems = faqData[selectedKey]
 
   return (
-    <div className="container-padding bg-[#F6EDDD] ">
+    <div
+      className="px-5 py-12 
+           md:px-24 md:py-[40px] 
+           lg:px-[130px]  lg:py-[50px] 
+           xl:px-[200px]  xl:py-[70px] 
+           2xl:px-[300px] 2xl:py-[100px] bg-[#F6EDDD] "
+    >
       <div className="text-[#434343] space-y-8 lg:space-y-12">
         {/* header */}
         <div className="flex items-center justify-between">

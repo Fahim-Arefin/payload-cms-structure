@@ -96,7 +96,7 @@ function NewsSliderCard({ item }: Props) {
             <div className="w-4 h-4 md:w-6 md:h-6">
               <img src="/assets/calender.png" alt={item?.title} className="w-full h-full" />
             </div>
-            <p className="text-white text-sm md:mt-1">{item.date}</p>
+            <p className="text-white text-[12px] lg:text-sm md:mt-1">{item.date}</p>
           </div>
           <h3 className="text-white global-p2 font-semibold leading-4 md:leading-6">
             {item.title}
