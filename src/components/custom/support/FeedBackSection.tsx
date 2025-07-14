@@ -12,7 +12,7 @@ function FeedBackSection({}: Props) {
   return (
     <div
       className="
-        relative overflow-hidden rounded-[8px] h-auto  mb-12
+        relative overflow-hidden rounded-[8px] h-auto 
         py-[50px] lg:py-[70px] xl:py-[100px] 2xl:py-[120px]
         xl:h-[700px] 2xl:h-[820px]
       "
@@ -27,7 +27,7 @@ function FeedBackSection({}: Props) {
       />
 
       {/* Foreground content */}
-      <div className="relative z-10 text-white w-[80%] md:w-[85%] lg:w-[85%] xl:w-[72%] mx-auto">
+      <div className="relative z-10 text-white w-[80%] lg:w-[85%] xl:w-[72%] mx-auto">
         <h1
           className="text-[18px] md:text-[22px] lg:text-[28px] xl:text-[33px] 2xl:text-[40px] uppercase font-semibold lg:font-normal
         mb-6 lg:mb-8 xl:mb-12 2xl:mb-20 "
@@ -43,10 +43,12 @@ function FeedBackSection({}: Props) {
               className="bg-white text-black w-[80%] md:w-[70%] lg:w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
             />
             <Input
+              type="email"
               placeholder="Email"
               className="bg-white text-black w-[80%] md:w-[70%] lg:w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
             />
             <Input
+              type="number"
               placeholder="Phone"
               className="bg-white text-black w-[80%] md:w-[70%] lg:w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
             />

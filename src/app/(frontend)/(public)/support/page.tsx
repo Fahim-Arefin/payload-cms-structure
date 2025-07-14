@@ -2,6 +2,7 @@ import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import CatchTheBuzzSection from '@/components/custom/support/CatchTheBuzzSection'
 import FeedBackSection from '@/components/custom/support/FeedBackSection'
 import GeneralFaq from '@/components/custom/support/GeneralFaq'
+import LevelUpSection from '@/components/custom/support/LevelUpSection'
 import NewsSliderSection from '@/components/custom/support/NewsSliderSection'
 import React from 'react'
 
@@ -47,6 +48,32 @@ function SupportPage() {
       date: '6th March, 2025',
     },
   ]
+  const levelUpData = [
+    {
+      title: 'Vlog',
+      image: '/assets/levelup1.jpg',
+    },
+    {
+      title: 'Blog',
+      image: '/assets/levelup2.jpg',
+    },
+    {
+      title: 'News',
+      image: '/assets/levelup3.jpg',
+    },
+    {
+      title: 'Vlog',
+      image: '/assets/levelup1.jpg',
+    },
+    {
+      title: 'Blog',
+      image: '/assets/levelup2.jpg',
+    },
+    {
+      title: 'News',
+      image: '/assets/levelup3.jpg',
+    },
+  ]
 
   return (
     <div className="font-avenir bg-white">
@@ -55,6 +82,7 @@ function SupportPage() {
       <CatchTheBuzzSection />
       <NewsSliderSection data={newsSliderData} />
       <FeedBackSection />
+      <LevelUpSection data={levelUpData} />
     </div>
   )
 }

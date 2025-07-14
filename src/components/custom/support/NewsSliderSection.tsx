@@ -39,7 +39,9 @@ function NewsSliderSection({ data }: Props) {
       className="w-[95%] lg:w-[85%] xl:w-[72%] mx-auto
            py-[70px]
              lg:py-[70px] 
-             xl:py-[100px]"
+             xl:py-[100px]
+             ml-[40px] md:ml-[70px] lg:mx-auto
+             pb-24"
     >
       <Carousel
         opts={{
@@ -58,7 +60,7 @@ function NewsSliderSection({ data }: Props) {
         {/* Carousel Navigation */}
         <div
           className="lg:hidden flex gap-2 absolute h-fit
-                  inset-x-0 justify-start px-1 md:px-0 lg:justify-end -bottom-8 md:-bottom-9 lg:-top-8 2xl:-top-12 lg:right-0"
+                          inset-x-0 justify-start lg:justify-end -bottom-10 md:-bottom-12 lg:-top-8 2xl:-top-12 lg:right-0"
         >
           <CarouselNavButtons
             onPrev={() => carouselApi?.scrollPrev()}
