@@ -9,12 +9,12 @@ type ResourceData = {
 
 function ResourceCard({ data }: { data: ResourceData }) {
   return (
-    <div className="relative bg-[#F9F4EE] rounded-[18px] px-4 py-6 md:py-8 md:px-7 xl:px-8 w-full max-w-[500px] min-h-[250px] flex flex-col justify-between shadow-[0_2px_8px_0_rgba(51,51,51,0.04)] overflow-visible">
+    <div className="relative bg-[#F9F4EE] rounded-[18px] px-4 py-6 md:py-8 md:px-7 xl:px-8 w-[300px] md:w-[500px]  flex flex-col justify-between shadow-[0_2px_8px_0_rgba(51,51,51,0.04)] overflow-visible">
       {/* 4 Ellipse Overlays */}
       <EllipseDecoration />
       {/* Description */}
       <div className="mb-8">
-        <p className="text-[#343434] font-light text-[15px] md:text-[17px] xl:text-[18px] leading-relaxed">
+        <p className="text-[#434342] text-[12px] md:text-[14px] xl:text-[16px] line-clamp-2">
           {data.description}
         </p>
         <button className="group flex items-center gap-1 mt-4 text-[#ED7125] font-bold text-[13px] md:text-[14px] uppercase tracking-tight transition-colors hover:text-[#d76420]">
@@ -32,8 +32,8 @@ function ResourceCard({ data }: { data: ResourceData }) {
           </div>
         </div>
         <div className="flex flex-col ml-10">
-          <span className="text-[#343434] font-semibold text-[17px] md:text-[19px] xl:text-[20px]">{data.title}</span>
-          <span className="text-[#343434] font-light uppercase text-[14px] md:text-[15px] xl:text-[16px]">{data.designation}</span>
+          <span className="text-[#434342] font-semibold text-[12px] md:text-[14px] xl:text-[16px]">{data.title}</span>
+          <span className="text-[#434342] font-light uppercase text-[12px] md:text-[15px] xl:text-[16px]">{data.designation}</span>
         </div>
       </div>
     </div>

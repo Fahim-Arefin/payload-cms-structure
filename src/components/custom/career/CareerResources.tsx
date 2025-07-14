@@ -43,7 +43,7 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
       <img
         src="/assets/humanresource.png"
         alt="Human Resource"
-        className="hidden lg:block absolute right-8 top-8 z-0 pointer-events-none select-none w-[400px] h-auto"
+        className="hidden lg:block absolute right-4 md:right-8 xl:right-60 top-8 z-0 pointer-events-none select-none md:w-[400px] md:h-[250px] xl:w-[584px] xl:h-[336px]"
         draggable={false}
         style={{ userSelect: 'none' }}
       />
@@ -58,30 +58,26 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
         style={{ userSelect: 'none' }}
       />
       {/* Section Title */}
-      <div className="mb-7 sm:mb-10 relative z-10 w-full max-w-[1250px] px-3 md:px-6 2xl:px-0">
-        <h3 className="text-[#343434] font-light text-[20px] md:text-[25px] xl:text-[30px] 2xl:text-[32px] tracking-tight">
+      <div className="mb-7 sm:mb-10 relative z-10 w-full max-w-[1250px]">
+        <h3 className="text-[#434342] font-light text-[16px] md:text-[20px] xl:text-[24px]">
           HEAR FROM
         </h3>
         <div className="flex items-center gap-2 mt-[-4px]">
-          <span className="text-[#343434] font-bold text-[32px] md:text-[42px] xl:text-[50px] 2xl:text-[56px] tracking-tight leading-tight">
-            OUR
-          </span>
-          <span className="text-[#ED7125] font-bold text-[32px] md:text-[42px] xl:text-[50px] 2xl:text-[56px] tracking-tight leading-tight ml-2">
-            RESOURCES
-          </span>
+          <span className="text-[#434342] font-semibold global-h1">OUR</span>
+          <span className="text-[#ED7125] font-semibold global-h1">RESOURCES</span>
         </div>
       </div>
 
       {/* Desktop: 2 Cards, Mobile: Carousel 1 Card */}
-      <div className="relative w-full flex justify-center">
-        <div className="hidden lg:flex w-full gap-8 z-10">
+      <div className="w-full flex justify-center pl-4 xl:pl-20">
+        <div className="hidden lg:flex justify-between w-full z-10">
           {data.map((item, idx) => (
             <ResourceCard key={idx} data={item} />
           ))}
         </div>
         {/* Shadcn Carousel for Mobile/Tablet */}
         <div className="block lg:hidden w-full z-10 mb-10">
-          <Carousel opts={{ loop: true }}>
+          <Carousel opts={{ loop: true }} setApi={setCarouselApi}>
             <CarouselContent>
               {data.map((item, idx) => (
                 <CarouselItem key={idx} className="px-2">
@@ -92,7 +88,7 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
             {/* Carousel navigation at bottom center */}
             <div
               className="flex md:hidden gap-2 absolute
-                        inset-x-0 justify-center -bottom-16 "
+                        inset-x-0 justify-center -bottom-16"
             >
               <CarouselNavButtons
                 onPrev={() => carouselApi?.scrollPrev()}
