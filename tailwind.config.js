@@ -109,7 +109,10 @@ export default {
   			'accordion-up': 'accordion-up 0.2s ease-out',
   			fadeSlideLeft: 'fadeSlideLeft 1.2s ease-out forwards',
   			fadeSlideRight: 'fadeSlideRight 1.2s ease-out forwards'
-  		}
+  		},
+			backdropBlur: {
+      '15': '15px',
+    }
   	}
   },
   plugins: [require('tailwindcss-animate')],

@@ -4,10 +4,11 @@ import CareerOpeningPrograms from '@/components/custom/career/CareerOpeningProgr
 import CareerOurStoryLg from '@/components/custom/career/CareerOurStoryLg'
 import CareerProcessingFlow from '@/components/custom/career/CareerProcessingFlow'
 import { CareerResourceSection } from '@/components/custom/career/CareerResources'
+import CareerSwiper from '@/components/custom/career/CareerSwiper'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
-import { OurStoryDataType } from '@/types'
+import { CareerCard, OurStoryDataType } from '@/types'
 import React, { FC } from 'react'
 
 type pageProps = {}
@@ -102,6 +103,29 @@ const page: FC<pageProps> = ({}) => {
     },
   ]
 
+  // data.ts
+  const careerCards: CareerCard[] = [
+    {
+      title: 'We Celebrate Impact',
+      description:
+        'We spotlight wins, reward outcomes, and champion the people behind the progress.',
+    },
+    {
+      title: 'We Co-sign your Success',
+      description:
+        'We spotlight wins, reward outcomes, and champion the people behind the progress.',
+    },
+    {
+      title: 'We Drive Knowledge',
+      description:
+        'We spotlight wins, reward outcomes, and champion the people behind the progress.',
+    },
+    {
+      title: 'We-Center Collaboration',
+      description: 'We foster stronger synergy and support collective success.',
+    },
+  ]
+
   return (
     <div className="font-avenir">
       <HeroSection heroSlides={heroSlides}>
@@ -151,6 +175,7 @@ const page: FC<pageProps> = ({}) => {
       <div className="container-padding block bg-gradient-to-r from-[#FBFFD3] to-[#F8E4C6]">
         {careerStoryData?.map((data, i) => <CareerOurStoryLg key={i} data={data} />)}
       </div>
+      <CareerSwiper careerCards={careerCards} />
       <CareerResourceSection data={resourceData} />
       <CareerOpening openingData={openingData} />
       <CareerOpeningPrograms />
