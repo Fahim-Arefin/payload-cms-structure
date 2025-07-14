@@ -1,6 +1,8 @@
 'use client'
 import Image from 'next/image'
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import { useEffect, useState } from 'react'
+import CarouselNavButtons from '../shared/CarousalNavButtons'
 // import your navigation buttons if you have
 
 const processData = [
@@ -27,6 +29,25 @@ const processData = [
 ]
 
 export default function CareerProcessingFlow() {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
+
+  useEffect(() => {
+    if (!carouselApi) return
+
+    const updateScrollButtons = () => {
+      setCanScrollPrev(carouselApi.canScrollPrev())
+      setCanScrollNext(carouselApi.canScrollNext())
+    }
+
+    updateScrollButtons()
+    carouselApi.on('select', updateScrollButtons)
+
+    return () => {
+      carouselApi.off('select', updateScrollButtons)
+    }
+  }, [carouselApi])
   return (
     <section className="container-padding w-full py-12 flex flex-col bg-white">
       {/* Header */}
@@ -38,8 +59,8 @@ export default function CareerProcessingFlow() {
       </div>
 
       {/* Always Carousel: For ALL screens! */}
-      <div className="w-full max-w-[1200px] relative overflow-hidden">
-        <Carousel opts={{ align: 'start', loop: false }}>
+      <div className="w-full  relative overflow-hidden">
+        <Carousel opts={{ align: 'start', loop: false }} setApi={setCarouselApi}>
           <CarouselContent className="flex items-stretch">
             {processData.map((item, i) => (
               <CarouselItem
@@ -47,16 +68,21 @@ export default function CareerProcessingFlow() {
                 className={`
                   flex flex-col items-center justify-start px-2
                   w-[85vw] sm:w-[56vw] md:w-[39vw] xl:w-[260px] 2xl:w-[230px]
-                  max-w-[330px] md:max-w-[320px] xl:max-w-[260px]
+                  max-w-[250px] md:max-w-[320px] xl:max-w-[220px] 2xl:max-w-[270px]
                 `}
               >
                 {/* Top line & numbers */}
                 <div className="relative w-full flex items-center mb-6" style={{ height: 44 }}>
                   {/* Line */}
-                  <div className="absolute top-1/2 left-0 right-0 h-1 border-t border-[red] z-0" />
+                  <div
+                    className={`absolute top-1/2 right-0 h-1 border-t border-[#000000] z-0 ${i == processData.length - 1 ? 'right-1/2' : 'right-0'} ${i == 0 ? 'left-1/2' : 'left-0'}`}
+                  />
                   <div className="relative flex flex-row items-center justify-center w-full z-10">
                     {/* Step number */}
-                    <div className="w-[38px] h-[38px] bg-white border border-[#E0E0E0] rounded-[10px] flex items-center justify-center text-[19px] font-bold text-[#343434] shadow-md z-10 relative">
+                    <div
+                      style={{ boxShadow: '0px 4px 6px 0px #00000033 inset' }}
+                      className="w-[38px] h-[38px] xl:w-[40px] xl:h-[40px] bg-white border border-[#E0E0E0] rounded-[10px] flex items-center justify-center text-[19px] font-bold text-[#343434] z-10 relative"
+                    >
                       {i + 1}
                     </div>
                     {/* Arrow if not last */}
@@ -65,7 +91,6 @@ export default function CareerProcessingFlow() {
                         <img
                           src="/assets/process-arrow.png"
                           alt="Arrow"
-                          
                           className="w-[26px] h-[16px] select-none"
                         />
                       </div>
@@ -77,11 +102,10 @@ export default function CareerProcessingFlow() {
                   <img
                     src={item.img}
                     alt={item.title}
-                    
-                    className="rounded-[12px] mb-2 w-[110px] h-[80px] object-contain"
+                    className="rounded-[12px] mb-2 w-[125px] h-[106px] md:w-[186px] md:h-[157px] object-contain"
                     draggable={false}
                   />
-                  <span className="mt-2 text-[#343434] text-[12px] font-medium tracking-wide uppercase">
+                  <span className="mt-2 text-[#343434] text-center text-[12px] font-medium uppercase max-w-[145px] mx-auto leading-tight break-words">
                     {item.title}
                   </span>
                 </div>
@@ -89,8 +113,13 @@ export default function CareerProcessingFlow() {
             ))}
           </CarouselContent>
           {/* Navigation buttons */}
-          <div className="flex justify-center mt-6 gap-3">
-            {/* Place your CarouselNavButtons here */}
+          <div className="flex md:hidden gap-2 justify-center mt-10">
+            <CarouselNavButtons
+              onPrev={() => carouselApi?.scrollPrev()}
+              onNext={() => carouselApi?.scrollNext()}
+              hasPrev={canScrollPrev}
+              hasNext={canScrollNext}
+            />
           </div>
         </Carousel>
       </div>
