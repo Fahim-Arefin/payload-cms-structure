@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  // DialogOverlay,
   DialogPortal,
   DialogTitle,
   DialogTrigger,
@@ -88,7 +87,8 @@ function ContactUsSection() {
         <div
           className="col-span-1 
           lg:py-8 lg:px-4
-          xl:py-12 2xl:px-6 "
+          xl:py-12 2xl:px-6 
+          "
         >
           <h3 className="global-h2">Have a Question?</h3>
           <h1
@@ -98,7 +98,10 @@ function ContactUsSection() {
             Ask Us!
           </h1>
 
-          <form className=" lg:space-y-3 xl:space-y-4 2xl:space-y-12" onSubmit={handleSubmit}>
+          <form
+            className="relative z-30 lg:space-y-3 xl:space-y-4 2xl:space-y-12"
+            onSubmit={handleSubmit}
+          >
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col">
