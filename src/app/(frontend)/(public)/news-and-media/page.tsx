@@ -1,5 +1,6 @@
 import AllNewsSection from '@/components/custom/news-and-media/AllNewsSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
+import CatchTheBuzzSection from '@/components/custom/support/CatchTheBuzzSection'
 
 export default async function NewsAndMedia() {
   const heroSlides = [
@@ -13,56 +14,20 @@ export default async function NewsAndMedia() {
 
   const newsData = [
     {
-      image: 'dummy image',
-      title: 'dummy title',
+      image: '/assets/allNews1.jpg',
+      title: 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
     },
     {
-      image: 'dummy image',
-      title: 'dummy title',
+      image: '/assets/allNews2.jpg',
+      title: 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
     },
     {
-      image: 'dummy image',
-      title: 'dummy title',
+      image: '/assets/allNews1.jpg',
+      title: 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
     },
     {
-      image: 'dummy image',
-      title: 'dummy title',
-    },
-    {
-      image: 'dummy image',
-      title: 'dummy title',
-    },
-    {
-      image: 'dummy image',
-      title: 'dummy title',
-    },
-    {
-      image: 'dummy image',
-      title: 'dummy title',
-    },
-    {
-      image: 'dummy image',
-      title: 'dummy title',
-    },
-    {
-      image: 'dummy image',
-      title: 'dummy title',
-    },
-    {
-      image: 'dummy image',
-      title: 'dummy title',
-    },
-    {
-      image: 'dummy image',
-      title: 'dummy title',
-    },
-    {
-      image: 'dummy image',
-      title: 'dummy title',
-    },
-    {
-      image: 'dummy image',
-      title: 'dummy title',
+      image: '/assets/allNews2.jpg',
+      title: 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
     },
   ]
 
@@ -70,6 +35,8 @@ export default async function NewsAndMedia() {
     <div className="font-avenir">
       {/* <HeroSection /> */}
       <HeroSection heroSlides={heroSlides}></HeroSection>
+      <CatchTheBuzzSection />
+      <AllNewsSection newsData={newsData}>Blogs</AllNewsSection>
       <AllNewsSection newsData={newsData}>News</AllNewsSection>
     </div>
   )
