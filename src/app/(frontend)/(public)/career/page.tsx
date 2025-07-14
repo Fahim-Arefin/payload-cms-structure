@@ -58,13 +58,13 @@ const page: FC<pageProps> = ({}) => {
   const resourceData = [
     {
       title: 'Rabeya Dihan',
-      image: '/assets/avatar1.jpg',
-      description: `Working at Shanta Life Insurance PLC has been a rewarding and professionally enriching journey.As part of the Customers Experience Team.I've had the opportunity to enagage directy with our valued custromers ensuring they recived timely support ,clear communication &  a seamless service experience.Everyday at Shanta Life brings new opportunity tio grow,learn & make a sure meaningful impact. `,
+      image: '/assets/Dihan.jpg',
+      description: `Working at Shanta Life Insurance PLC has been a rewarding and professionally enriching journey.As part of the Customers Experience Team.I've had the opportunity to enagage directy with our valued custromers ensuring they recived timely support ,clear communication &  a seamless service experience.Everyday at Shanta Life brings new opportunity to grow, learn & make a sure meaningful impact. `,
       designation: 'Customer Service',
     },
     {
       title: 'Md. Arif Hossain',
-      image: '/assets/avatar2.jpg',
+      image: '/assets/Arif.jpg',
       description: `Working at Shanta Life has been a truly rewarding experience. The team is supportive, the environment is positive, and there’s a strong focus on growth and innovation. I’ve learned a lot and felt valued every step of the way.  `,
       designation: 'Corporate Sales',
     },
