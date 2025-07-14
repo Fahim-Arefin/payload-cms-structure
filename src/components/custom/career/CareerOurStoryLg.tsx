@@ -38,11 +38,7 @@ const CareerOurStoryLg: FC<CareerOurStoryLgProps> = ({ data }) => {
               <DialogTrigger asChild>
                 <div
                   className={cn(
-                    `relative group cursor-pointer 
-        md:h-[200px] lg:h-[250px] xl:h-[300px] w-full  
-        bg-no-repeat bg-[length:100%_212.5%] bg-[position:0px_-180.566px] 
-   md:rounded-[5.333px_5.333px_53.333px_5.333px] lg:rounded-[8.333px_8.333px_53.333px_8.333px]
-        overflow-hidden transition-all`,
+                    `relative group cursor-pointer h-[200px] lg:h-[250px] xl:h-[300px] w-full bg-no-repeat bg-[length:100%_212.5%] bg-[position:0px_-180.566px] md:rounded-[5.333px_5.333px_53.333px_5.333px] lg:rounded-[8.333px_8.333px_53.333px_8.333px] overflow-hidden transition-all`,
                     'order-1',
                   )}
                   style={{
@@ -65,13 +61,15 @@ const CareerOurStoryLg: FC<CareerOurStoryLgProps> = ({ data }) => {
               </DialogTrigger>
 
               <DialogContent
-                className="max-w-5xl w-full aspect-video p-0 bg-black 
-      [&>button.absolute]:top-3 [&>button.absolute]:right-3 
-      [&>button.absolute]:bg-black/50 
-      [&>button.absolute]:text-white 
-      [&>button.absolute]:hover:bg-black/80"
+                className="max-w-5xl w-full p-0 bg-black aspect-video
+    [&>button.absolute]:top-3 [&>button.absolute]:right-3
+    [&>button.absolute]:bg-black/50
+    [&>button.absolute]:text-white
+    [&>button.absolute]:hover:bg-black/80"
               >
-                <DialogTitle>Story Video</DialogTitle>
+                <VisuallyHidden>
+                  <DialogTitle>Story Video</DialogTitle>
+                </VisuallyHidden>
                 <iframe
                   width="100%"
                   height="100%"
@@ -81,7 +79,8 @@ const CareerOurStoryLg: FC<CareerOurStoryLgProps> = ({ data }) => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
-                ></iframe>
+                  className="w-full h-full"
+                />
               </DialogContent>
             </Dialog>
           </div>
