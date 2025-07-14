@@ -336,7 +336,7 @@ function NewsSection() {
           <div className="relative h-[140px] xl:h-[225px] 2xl:h-[350px] w-full rounded-md 2xl:rounded-xl">
             {/* main img */}
             <img
-              src="/assets/news1.jpg"
+              src="/assets/news11.jpg"
               alt="news-1"
               className="w-full h-full object-cover rounded-md 2xl:rounded-xl"
             />
