@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 function Footer() {
   return (
@@ -213,7 +214,10 @@ function Footer() {
             <div>
               <ul className="flex flex-col space-y-2 text-xs 2xl:text-lg">
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  Privacy Policy
+                  <Link href={'/privacy-policy'}>
+                    Privacy Policy
+                
+                  </Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
                   Terms & Conditions

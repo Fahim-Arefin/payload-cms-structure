@@ -3,6 +3,7 @@ export type HeroContentType = {
   title: string
   subtitle: string
   description: string
+  titleTop?: string
 }
 
 export type ShantaIntroContentType = {
