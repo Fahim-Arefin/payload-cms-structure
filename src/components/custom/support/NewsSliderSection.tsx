@@ -37,7 +37,6 @@ function NewsSliderSection({ data }: Props) {
   return (
     <div
       className="w-[95%] lg:w-[85%] xl:w-[72%] mx-auto
-            
            py-[70px]
              lg:py-[70px] 
              xl:py-[100px]"

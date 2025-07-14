@@ -1,5 +1,6 @@
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import CatchTheBuzzSection from '@/components/custom/support/CatchTheBuzzSection'
+import FeedBackSection from '@/components/custom/support/FeedBackSection'
 import GeneralFaq from '@/components/custom/support/GeneralFaq'
 import NewsSliderSection from '@/components/custom/support/NewsSliderSection'
 import React from 'react'
@@ -53,6 +54,7 @@ function SupportPage() {
       <GeneralFaq />
       <CatchTheBuzzSection />
       <NewsSliderSection data={newsSliderData} />
+      <FeedBackSection />
     </div>
   )
 }
