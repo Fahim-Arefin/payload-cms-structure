@@ -154,7 +154,7 @@ const page: FC<pageProps> = ({}) => {
       <CareerResourceSection data={resourceData} />
       <CareerOpening openingData={openingData} />
       <CareerOpeningPrograms />
-      {/* <CareerProcessingFlow /> */}
+      <CareerProcessingFlow />
     </div>
   )
 }

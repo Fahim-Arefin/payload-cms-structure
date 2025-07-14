@@ -28,11 +28,11 @@ const processData = [
 
 export default function CareerProcessingFlow() {
   return (
-    <section className="container-padding w-full py-12 flex flex-col items-center bg-white">
+    <section className="container-padding w-full py-12 flex flex-col bg-white">
       {/* Header */}
       <div className="mb-10">
         <span className="global-h3 text-[#343434] font-light block mb-0">OUR SELECTION</span>
-        <h2 className="global-h1 font-bold tracking-tight">
+        <h2 className="global-h1 font-bold">
           <span className="text-[#ED7125]">PROCESS</span>
         </h2>
       </div>
@@ -53,20 +53,19 @@ export default function CareerProcessingFlow() {
                 {/* Top line & numbers */}
                 <div className="relative w-full flex items-center mb-6" style={{ height: 44 }}>
                   {/* Line */}
-                  <div className="absolute top-1/2 left-0 right-0 h-1 border-t border-[#C3C3C3] z-0" />
+                  <div className="absolute top-1/2 left-0 right-0 h-1 border-t border-[red] z-0" />
                   <div className="relative flex flex-row items-center justify-center w-full z-10">
                     {/* Step number */}
-                    <div className="w-[38px] h-[38px] bg-white border border-[#E0E0E0] rounded-[10px] flex items-center justify-center text-[19px] font-bold text-[#343434] shadow-sm z-10 relative">
+                    <div className="w-[38px] h-[38px] bg-white border border-[#E0E0E0] rounded-[10px] flex items-center justify-center text-[19px] font-bold text-[#343434] shadow-md z-10 relative">
                       {i + 1}
                     </div>
                     {/* Arrow if not last */}
                     {i < processData.length - 1 && (
-                      <div className="absolute right-[-32px] top-1/2 -translate-y-1/2 z-10">
-                        <Image
+                      <div className="absolute right-[-26px] top-1/2 -translate-y-1/2 z-10">
+                        <img
                           src="/assets/process-arrow.png"
                           alt="Arrow"
-                          width={26}
-                          height={16}
+                          
                           className="w-[26px] h-[16px] select-none"
                         />
                       </div>
@@ -75,11 +74,10 @@ export default function CareerProcessingFlow() {
                 </div>
                 {/* Card */}
                 <div className="flex flex-col items-center text-center w-full">
-                  <Image
+                  <img
                     src={item.img}
                     alt={item.title}
-                    width={110}
-                    height={80}
+                    
                     className="rounded-[12px] mb-2 w-[110px] h-[80px] object-contain"
                     draggable={false}
                   />
