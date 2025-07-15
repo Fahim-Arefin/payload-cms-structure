@@ -587,7 +587,7 @@ function NewsSection() {
           w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
           global-h4 font-normal"
           >
-            Explore Now
+            Explore
           </Button>
         </ToolTip>
       </div>

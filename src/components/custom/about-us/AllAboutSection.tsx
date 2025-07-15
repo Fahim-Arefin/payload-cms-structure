@@ -29,12 +29,12 @@ function AllAboutSection({ allAboutData }: Props) {
             <div className="absolute inset-0 bg-black/25 rounded-[15px] z-10"></div>
 
             <h1 className="shantaLifeIntroSection-h1 uppercase absolute inset-x-0 top-1/4 text-center z-20 text-white lg:hidden">
-              WE Are All <span className="text-[#ED7125]">About</span>
+              Values That <span className="text-[#ED7125]">Shape Us</span>
             </h1>
           </div>
           {/* heading */}
           <h1 className="global-h1 font-semibold text-[#434342] uppercase hidden lg:block mt-6">
-            WE Are All <span className="text-[#ED7125]">About</span>
+            Values That <span className="text-[#ED7125]">Shape Us</span>
           </h1>
         </div>
         {/* right-side */}
