@@ -28,10 +28,10 @@ export default async function HomePage() {
 
   const heroSlides = [
     {
-      title: 'Driven by Purpose,',
-      subtitle: 'Designed for Life ',
+      title: 'Empower yourself',
+      subtitle: 'to live on your terms',
       description:
-        'Empower yourself to live on your terms. Enjoy the confidence of your potential and let us take the risk. ',
+        'Your life evolves, and so should your protection. Shanta Life Insurance  will make sure you stay ahead',
       image: '/assets/banner1.jpg',
     },
     {
@@ -51,10 +51,11 @@ export default async function HomePage() {
 
   const insuranceData: InsuranceDataType[] = [
     {
-      sectionHeading: 'Insurance Simplified',
+      sectionHeading: 'Life Insurance Simplified',
       content: 'left',
       title: 'Expert Knows - How',
-      subtitle: 'Skip the Jagron, Unlock',
+      subtitle:
+        'Life can be messy but your insurance doesn’t have to be. Learn how with our Experts',
       mainImage: '/assets/is1.jpg',
       insuranceCardData: [
         {
@@ -81,7 +82,7 @@ export default async function HomePage() {
       sectionHeading: '',
       content: 'right',
       title: 'Decode Life Insurance',
-      subtitle: 'Get a gasp on the basis of life insurance',
+      subtitle: 'Detangle the basics of Life Insurace',
       mainImage: '/assets/is5.jpg',
       insuranceCardData: [
         {
