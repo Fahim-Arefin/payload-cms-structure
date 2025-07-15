@@ -34,21 +34,21 @@ const page: FC<pageProps> = ({}) => {
     {
       title: 'SNAPSHOTs of',
       subtitle: 'Our Story',
-      mainImage: '/assets/is1.jpg',
+      mainImage: '/assets/careerVideoMain.png',
       insuranceCardData: [
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is2.jpg',
+          image: '/assets/careerVideo1.jpg',
           description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is3.jpg',
+          image: '/assets/careerVideo2.jpg',
           description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is4.jpg',
+          image: '/assets/careerVideo3.jpg',
           description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
       ],
