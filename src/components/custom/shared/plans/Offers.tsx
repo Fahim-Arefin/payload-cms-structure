@@ -44,8 +44,8 @@ function Offers({ data }: Props) {
       {/* heading */}
       <div>
         <div className="flex space-x-2">
-          <h3 className="global-h3 uppercase font-medium text-[#434343]">We </h3>
-          <h3 className="global-h3 uppercase font-medium text-[#ED7125]">Offer</h3>
+          <h3 className="global-h3 uppercase font-medium text-[#434343]">Our </h3>
+          <h3 className="global-h3 uppercase font-medium text-[#ED7125]">Solutions</h3>
         </div>
       </div>
       {/* carousal */}

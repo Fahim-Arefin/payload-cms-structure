@@ -9,9 +9,10 @@ import React from 'react'
 function Bancassurance() {
   const heroSlides = [
     {
-      title: 'Shanta Bancassurance',
+      title: 'Shanta Life Bancassurance',
       subtitle: '',
-      description: 'When you go further for your people, they go further for you.',
+      description:
+        'Where banking meets protection. Tailored for individuals. Delivered through trust',
       image: '/assets/banner6.jpg',
     },
     // {
@@ -30,8 +31,8 @@ function Bancassurance() {
   ]
   const planInfoData = {
     image: '/assets/planInfo3.png',
-    description:
-      'Behind every savings or loan lies a dream worth protecting. At Shanta Life, we partner with leading banks and NBFIs to offer clear, affordable life insurance solutions that safeguard your financial journey. Our customized coverage options are designed to meet the distinct needs of different banking segments—ensuring protection that truly fits.',
+    description: `At Shanta Life, we partner with leading banks and NBFIs to offer clear, affordable life insurance solutions that safeguard your financial journey.
+Our customized coverage options are designed to meet the distinct needs of different banking segments—ensuring protection that truly fits.`,
   }
 
   const bankingFacilitiesData = [
