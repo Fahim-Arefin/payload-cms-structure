@@ -2,6 +2,7 @@ import ChildEducationPlan from '@/components/custom/child-education/ChildEducati
 import { ChildEducationTabs } from '@/components/custom/child-education/ChildEducationTabs'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
+import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
 import React, { FC } from 'react'
 
 type pageProps = {}
@@ -84,7 +85,8 @@ const page: FC<pageProps> = ({}) => {
   return (
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides} />
-      <ChildEducationPlan bgColor="#FCF4EB" data={childInfoData} />
+      {/* <ChildEducationPlan bgColor="#FCF4EB" data={childInfoData} /> */}
+      <PlanInfoSection bgColor="#FCF4EB" data={childInfoData} />
       <ChildEducationTabs data={tabContent} config={tabItems} />
       <ContactUsSection />
     </div>
