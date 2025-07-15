@@ -82,6 +82,7 @@ export type InsuranceDataType = {
   title: string
   subtitle: string
   mainImage: string
+  mainVIdeoLink: string
   insuranceCardData: InsuranceCardDataType[]
 }
 
