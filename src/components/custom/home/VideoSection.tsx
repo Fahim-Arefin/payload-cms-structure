@@ -42,17 +42,17 @@ function VideoSection() {
           ></div>
           <div className=" -mt-14 lg:-mt-16 xl:-mt-20">
             <div className="flex items-center justify-between w-[85%] mx-auto">
-              <ToolTip>
-                <Button
-                  className="bg-[#9A4E46] cursor-not-allowed
-                px-4 md:px-6 py-1 md:py-2 lg:px-8 lg:py-5 xl:px-10 xl:py-6 
-                w-[100px] md:w-[120px] lg:w-[140px] xl:w-[160px] 2xl:w-[200px]
-                global-p2
-                rounded-lg"
-                >
-                  Level up Now
-                </Button>
-              </ToolTip>
+              {/* <ToolTip> */}
+              {/*   <Button */}
+              {/*     className="bg-[#9A4E46] cursor-not-allowed */}
+              {/*   px-4 md:px-6 py-1 md:py-2 lg:px-8 lg:py-5 xl:px-10 xl:py-6  */}
+              {/*   w-[100px] md:w-[120px] lg:w-[140px] xl:w-[160px] 2xl:w-[200px] */}
+              {/*   global-p2 */}
+              {/*   rounded-lg" */}
+              {/*   > */}
+              {/*     Level up Now */}
+              {/*   </Button> */}
+              {/* </ToolTip> */}
               {/* <div className="flex space-x-2 2xl:space-x-4 text-white items-center">
                 <div className="border-2 border-white rounded-full p-1 2xl:p-2">
                   <BsPlay />
@@ -83,7 +83,7 @@ function VideoSection() {
                   <iframe
                     width="100%"
                     height="100%"
-                    src="https://www.youtube.com/embed/Dwr1V4cgZ0o?si=Ov6TKtgNY-oI6XTL"
+                    src="https://www.youtube.com/embed/YbnlDrexiGE"
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
