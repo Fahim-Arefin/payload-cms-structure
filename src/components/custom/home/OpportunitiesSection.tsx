@@ -4,17 +4,13 @@ import OpportunitiesHeader from './OpportunitiesHeader'
 import GlobalSwiper from '../shared/GlobalSwiper'
 
 const opportunitiesData = [
-  { src: '/assets/swiper1.jpg', alt: 'Slide 1' },
-  { src: '/assets/swiper2.jpg', alt: 'Slide 2' },
-  { src: '/assets/swiper3.jpg', alt: 'Slide 3' },
-  { src: '/assets/swiper4.jpg', alt: 'Slide 4' },
-  { src: '/assets/swiper5.jpg', alt: 'Slide 5' },
-  { src: '/assets/swiper1.jpg', alt: 'Slide 6' },
-  { src: '/assets/swiper2.jpg', alt: 'Slide 7' },
-  { src: '/assets/swiper3.jpg', alt: 'Slide 8' },
-  { src: '/assets/swiper4.jpg', alt: 'Slide 9' },
-  { src: '/assets/swiper5.jpg', alt: 'Slide 10' },
-  { src: '/assets/cue6.jpg', alt: 'Slide 11' },
+  { src: '/assets/life-at-shanta/swiper11.jpg', alt: 'Slide 1' },
+  { src: '/assets/life-at-shanta/swiper22.jpg', alt: 'Slide 2' },
+  { src: '/assets/life-at-shanta/swiper33.jpg', alt: 'Slide 3' },
+  { src: '/assets/life-at-shanta/swiper44.jpg', alt: 'Slide 4' },
+  { src: '/assets/life-at-shanta/swiper55.jpg', alt: 'Slide 5' },
+  { src: '/assets/life-at-shanta/swiper66.jpg', alt: 'Slide 6' },
+  { src: '/assets/life-at-shanta/swiper77.jpg', alt: 'Slide 7' },
 ]
 
 export default function OpportunitiesSection() {
