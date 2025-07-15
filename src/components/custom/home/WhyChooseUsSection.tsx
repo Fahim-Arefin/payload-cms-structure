@@ -43,8 +43,8 @@ function WhyChooseUsSection() {
               </div>
             </div>
             <div className="text-[#434342] text-[12px] md:text-[16px] lg:text-[14px] 2xl:text-[17px] mt-3 lg:mt-0 font-normal">
-              There are many variations of passages of Lorem Ipsum available, but the majority have
-              suffered alteration in some form, by injected humor.
+              Born from a vision to redefine life insurance in Bangladesh, Shanta Life Insurance is
+              backed by a powerful consortium, including Shanta Holdings.
             </div>
           </div>
 
