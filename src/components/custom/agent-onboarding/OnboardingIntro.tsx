@@ -47,14 +47,10 @@ function OnboardingIntro({ onboardingIntroContent }: Props) {
             {onboardingIntroContent?.paragraphTitle}
           </h5>
           <p
-            className="
-            text-center lg:text-justify 
+            className="text-center lg:text-justify 
             text-[#434343] font-light 
             lg:leading-[30px] xl:leading-[40px]
-            global-p1
-            line-clamp-4
-            
-            "
+            global-p1"
           >
             {onboardingIntroContent?.paragraph}
           </p>
