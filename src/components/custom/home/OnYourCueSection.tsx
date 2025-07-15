@@ -17,42 +17,53 @@ const cards = [
     icon: '/assets/cue2.png',
     title: 'Shanta',
     subtitle: 'Child Education Plan',
-    description:
-      "They're building castles in the sky — we're here to anchor the ground. A promise to your child's future, wrapped in today's care.",
+    description: 'They’re building castles in the sky — we’re here to anchor the ground.',
     image: '/assets/cue4.jpg',
   },
   {
     icon: '/assets/cue1.png',
     title: 'Shanta',
-    subtitle: 'Retirement Plan',
-    description:
-      "Secure your golden years with confidence. Start saving today, relax tomorrow — we'll handle the rest.",
+    subtitle: '3 Payment Plan',
+    description: 'Multiple payouts, 1 powerful plan - because your future is in your hands.  ',
     image: '/assets/cue5.jpg',
   },
   {
     icon: '/assets/cue3.png',
     title: 'Shanta',
-    subtitle: 'Health Insurance',
-    description:
-      'Your health is your wealth. Protect it with a flexible plan tailored for peace of mind and family care.',
+    subtitle: 'Endowment Plan',
+    description: 'For the life you’re building and the ones you’re building it for.',
     image: '/assets/cue6.jpg',
   },
   {
     icon: '/assets/cue1.png',
     title: 'Shanta',
-    subtitle: 'Test Insurance',
-    description:
-      'Your health is your wealth. Protect it with a flexible plan tailored for peace of mind and family care.',
+    subtitle: '3 Payment Plan',
+    description: 'Multiple payouts, 1 powerful plan - because your future is in your hands.  ',
     image: '/assets/cue5.jpg',
   },
   {
     icon: '/assets/cue3.png',
-    title: 'Fahim',
-    subtitle: 'Test Insurance',
-    description:
-      'Your health is your wealth. Protect it with a flexible plan tailored for peace of mind and family care.',
+    title: 'Shanta',
+    subtitle: 'Endowment Plan',
+    description: 'For the life you’re building and the ones you’re building it for.',
     image: '/assets/cue6.jpg',
   },
+  // {
+  //   icon: '/assets/cue1.png',
+  //   title: 'Shanta',
+  //   subtitle: 'Test Insurance',
+  //   description:
+  //     'Your health is your wealth. Protect it with a flexible plan tailored for peace of mind and family care.',
+  //   image: '/assets/cue5.jpg',
+  // },
+  // {
+  //   icon: '/assets/cue3.png',
+  //   title: 'Fahim',
+  //   subtitle: 'Test Insurance',
+  //   description:
+  //     'Your health is your wealth. Protect it with a flexible plan tailored for peace of mind and family care.',
+  //   image: '/assets/cue6.jpg',
+  // },
 ]
 
 function OnYourCueSection() {

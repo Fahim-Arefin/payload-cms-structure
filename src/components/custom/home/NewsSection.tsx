@@ -325,7 +325,7 @@ function NewsSection() {
           News & Media
         </h1>
         <h1 className="text-[21px] md:text-[28px] lg:text-[34px] 2xl:text-[44px] font-bold">
-          Explore the <span className="md:text-[#ED7125]">latest Affairs</span>
+          Explore what's making <span className="md:text-[#ED7125]">headlines</span>
         </h1>
       </div>
       {/* News Section Grid */}

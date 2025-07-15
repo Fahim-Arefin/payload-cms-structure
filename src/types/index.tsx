@@ -132,7 +132,11 @@ export type PlanData = {
   timeline: string
 }
 
-// types.ts
+export type AllNewsDataType = {
+  image: string
+  title: string
+}
+
 export type CareerCard = {
   title: string
   description: string
