@@ -158,25 +158,21 @@ function page({}: Props) {
   const onboardingRolesData = [
     {
       image: '/assets/role1.svg',
-      title: 'Unlimited Earning Potential',
+      title: 'Earn Without Limits',
       description:
         'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
     },
     {
       image: '/assets/role2.svg',
-      title: 'Rewards & Recognition',
+      title: 'Get Recognized, Get Rewarded',
     },
     {
       image: '/assets/role3.svg',
-      title: 'Growing Career',
+      title: 'Freedom to Work On Your Time ',
     },
     {
       image: '/assets/role4.svg',
-      title: 'Help secure lives',
-    },
-    {
-      image: '/assets/role4.svg',
-      title: 'Help secure lives',
+      title: 'Train. Grow. Lead.',
     },
   ]
   const visionData = [
@@ -195,7 +191,7 @@ function page({}: Props) {
       points: [
         'Excellent communications and networking skills',
         'Self motivated to build a future in sales',
-        'Preferably completed undergrad from business or related field',
+        'Preferebly compeleted undergrad from any UCG apporved university ',
       ],
     },
   ]
@@ -229,7 +225,6 @@ function page({}: Props) {
       </HeroSection>
       {/* <OnboardingHighlight highlightSlides={highlightSlides[0]} /> */}
       <OnboardingIntro onboardingIntroContent={onBoardingIntroContent} />
-
 
       <RolesSection onboardingRoleData={onboardingRolesData} />
       {/* <FreedomOpportunity /> */}
