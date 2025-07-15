@@ -28,7 +28,7 @@ const CalculatorSection = (props: Props) => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-[1.3fr,1fr] gap-4 lg:gap-10 justify-center mt-6 lg:mt-10 xl:mt-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.3fr,1fr] gap-4 lg:gap-10 justify-center mt-6 lg:mt-10 xl:mt-20">
         {/* left side box */}
         <div className=" w-full order-2 lg:order-1">
           {selectedPlan ? (
