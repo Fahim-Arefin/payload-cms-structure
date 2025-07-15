@@ -2,9 +2,8 @@ import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSect
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
 import BankingFacilities from '@/components/custom/shared/plans/BankingFacilities'
-import Offers from '@/components/custom/shared/plans/Offers'
+import OffersClientWrapper from '@/components/custom/shared/plans/OffersClientWrapper'
 import Partners from '@/components/custom/shared/plans/Partners'
-import React from 'react'
 
 function Bancassurance() {
   const heroSlides = [
@@ -152,7 +151,13 @@ Our customized coverage options are designed to meet the distinct needs of diffe
       <HeroSection heroSlides={heroSlides} />
       <PlanInfoSection data={planInfoData} />
       <BankingFacilities data={bankingFacilitiesData} />
-      <Offers data={offersData} />
+
+      <OffersClientWrapper
+        data={offersData}
+        subheading="Four types of protection to keep you and your loved ones financially secure"
+        card={1}
+      />
+
       <Partners data={partnersData} />
       <ContactUsSection />
     </div>
