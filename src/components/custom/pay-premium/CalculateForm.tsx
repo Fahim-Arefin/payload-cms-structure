@@ -33,8 +33,8 @@ function CalculateForm({ plan, onPlanChange }: Props) {
     <form
       action=""
       className=" rounded-2xl bg-[#9C863940]
-  grid grid-cols-2 gap-x-4 gap-y-8 md:gap-7 xl:gap-8 
-  p-6 xl:p-12 z-10"
+  grid grid-cols-2 gap-x-4 gap-y-8 md:gap-7 lg:gap-x-2 xl:gap-x-4 
+  py-6 px-2 md:px-4 md:py-8 xl:py-12 xl:px-6 z-10"
     >
       {/* plans */}
       <div className="relative col-span-1 md:col-span-1">
@@ -180,7 +180,9 @@ function CalculateForm({ plan, onPlanChange }: Props) {
           and future goals. Whether you're just starting your career or planning for retirement, we
           are with you at every step.
         </p>
-        <p className="text-[10.5px] md:text-[12px] text-[#434343] underline">Have Questions? Ask Us! </p>
+        <p className="text-[10.5px] md:text-[12px] text-[#434343] underline">
+          Have Questions? Ask Us! 
+        </p>
       </div>
     </form>
   )
