@@ -28,7 +28,7 @@ function PlanPage() {
       title: 'Shanta',
       biggerTitle: 'Critical Illness Coverage',
       description: 'Why blend in when your coverage can stand out?',
-      link: '/',
+      link: '/plans/individual/health-and-protection/critical-illness-coverage',
       image: '/assets/healthandprotection3.jpg',
     },
   ]

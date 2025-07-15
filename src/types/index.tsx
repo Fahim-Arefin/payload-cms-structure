@@ -147,3 +147,11 @@ export type CareerCard = {
   title: string
   description: string
 }
+
+export type ProtectionDataType = {
+  bgImage: string
+  item: {
+    image: string
+    description: string
+  }[]
+}
