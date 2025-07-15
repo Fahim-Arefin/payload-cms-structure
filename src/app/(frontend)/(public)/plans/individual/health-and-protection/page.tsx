@@ -1,9 +1,7 @@
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
-import AllPlanIndividualSection from '@/components/custom/shared/plans/AllPlanIndividualSection'
 
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-// import { Button } from '@/components/ui/button'
-// import ToolTip from '@/components/custom/shared/ToolTip'
+import AllPlanSection from '@/components/custom/shared/plans/AllPlanSection'
 
 function PlanPage() {
   const heroSlides = [
@@ -36,13 +34,13 @@ function PlanPage() {
   return (
     <div className="font-avenir bg-white ">
       <HeroSection heroSlides={heroSlides} top=" top-[250px] md:top-[300px] lg:top-[63%] " />
-      <AllPlanIndividualSection plantData={indivisualPlantData} blur>
-        <div>
+      <AllPlanSection plantData={indivisualPlantData} blur>
+        <div className="uppercase global-h2 font-medium">
           <span>A healthy outside </span>
           {/* <br /> */}
           <span className="text-[#ED7125]">starts from the inside </span>
         </div>
-      </AllPlanIndividualSection>
+      </AllPlanSection>
       <ContactUsSection />
     </div>
   )

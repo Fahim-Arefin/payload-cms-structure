@@ -8,8 +8,10 @@ function PlanPage() {
     {
       title: 'The right insurance stands with you.',
       subtitle: 'Every step. Every Turn.',
+      // description:
+      //   'Life\u2019s full of surprises. We\u2019re here to help you navigate them. Let\u2019s build a confident future together.',
       description:
-        'Life\u2019s full of surprises. We\u2019re here to help you navigate them. Let\u2019s build a confident future together.',
+        'Life\u2019s full of surprises, We\u2019re here to help you navigate them. Let\u2019s build a confident future together.',
       image: '/assets/banner4.jpg',
     },
   ]
@@ -80,10 +82,10 @@ function PlanPage() {
         </div>
       </HeroSection>
       <AllPlanSection plantData={allPlantData} blur>
-        <div className='uppercase'>
+        <div className="uppercase global-h2 font-medium">
           Choose <span className="text-[#ED7125]">your fit</span>
         </div>
-        <div className='text-[18px] uppercase text-[#3A3A3A] font-[350]'>
+        <div className="global-span text-[#3A3A3A] font-[350]">
           Explore plans built for your need
         </div>
       </AllPlanSection>

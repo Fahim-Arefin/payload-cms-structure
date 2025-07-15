@@ -92,10 +92,18 @@ function PlanPage() {
         </div>
       </HeroSection>
       <AllPlanSection plantData={indivisualPlantData} blur>
-        <div>
-          <span>Not Just Policies,</span>
+        <div className="uppercase global-h2 font-medium">
+          <span>
+            Not Just <span className="text-[#ED7125]">policies</span>,
+          </span>
           <br />
-          <span className="text-[#ED7125]">It's POSSIBILITIES </span>
+          <span className="text-[#ED7125]">It's POSSIBILITIES</span>
+        </div>
+        <div className="hidden lg:block global-span text-[#3A3A3A] font-[350] mt-4 xl:mt-6 2xl:mt-12">
+          From wealth-building solutions to education-focused coverage,
+        </div>
+        <div className="hidden lg:block global-span text-[#3A3A3A] font-[350]">
+          we bring you tailored plans that meet your ambitions.
         </div>
       </AllPlanSection>
       <ContactUsSection />
