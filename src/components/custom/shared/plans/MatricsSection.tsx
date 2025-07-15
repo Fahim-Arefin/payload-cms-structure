@@ -77,28 +77,35 @@ function MatricsSection({}: Props) {
             </div>
 
             {/* Top Left */}
-            <div className=" absolute top-0 left-0 text-center p-4 z-10">
+            <div
+              className=" absolute text-center p-4 z-10
+              top-4 md:left-8 lg:top-4 lg:left-3 xl:top-4 xl:left-4 2xl:top-4 2xl:left-7"
+            >
               <p className="global-p2 font-light capitalize">Age At Entry</p>
               <p className="global-p1 font-semibold">18 - 60 Years</p>
             </div>
 
             {/* Top Right */}
             <div
-              className=" absolute top-0 text-center p-4 z-10
-            right-7 lg:right-8 2xl:right-12 "
+              className=" absolute text-center p-4 z-10
+              top-4
+            right-7 md:right-16 lg:right-8 2xl:right-12 "
             >
               <p className="global-p2 font-light capitalize">Policy Term</p>
               <p className="global-p1 font-semibold">As Your Plan</p>
             </div>
 
             {/* Bottom Left */}
-            <div className=" absolute bottom-0 left-0 text-center p-4 z-10">
+            <div
+              className=" absolute text-center p-4 z-10
+              bottom-4 md:left-8 lg:bottom-4 lg:left-3  xl:bottom-4 xl:left-4 2xl:bottom-4 2xl:left-7"
+            >
               <p className="global-p2 font-light capitalize">Maximum Coverage</p>
               <p className="global-p1 font-semibold">BDT 5,000,000</p>
             </div>
 
             {/* Bottom Right */}
-            <div className=" absolute bottom-0 right-0 text-center p-4 z-10">
+            <div className=" absolute bottom-4 right-0 md:right-8 lg:right-0 text-center p-4 z-10">
               <p className="global-p2 font-light capitalize">Premium Rate</p>
               <p className="global-p1 font-semibold">Affordable </p>
               <p className="global-p1 leading-3 font-semibold">Extensive Protection!</p>
