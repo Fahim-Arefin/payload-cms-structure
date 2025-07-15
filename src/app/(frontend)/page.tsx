@@ -57,6 +57,7 @@ export default async function HomePage() {
       subtitle:
         'Life can be messy but your insurance doesn’t have to be. Learn how with our Experts',
       mainImage: '/assets/is1.jpg',
+      mainVIdeoLink: 'https://www.youtube.com/embed/rcduE_ff314',
       insuranceCardData: [
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
@@ -84,6 +85,7 @@ export default async function HomePage() {
       title: 'Decode Life Insurance',
       subtitle: 'Detangle the basics of Life Insurace',
       mainImage: '/assets/is5.jpg',
+      mainVIdeoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
       insuranceCardData: [
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
@@ -111,6 +113,7 @@ export default async function HomePage() {
       title: 'Zero-Hassle protection',
       subtitle: 'Get your life covered fast, simple and smart',
       mainImage: '/assets/is9.jpg',
+      mainVIdeoLink: 'https://www.youtube.com/embed/n9fFhLkJwLg',
       insuranceCardData: [
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
