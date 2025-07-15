@@ -21,7 +21,8 @@ export type VissionMissionContentType = {
 export type AllAboutCardDataType = {
   image: string
   title: string
-  description: string
+  hoverImage: string
+  description: { __html: string }
 }
 
 export type DirectorCardDataType = {
@@ -81,6 +82,7 @@ export type InsuranceDataType = {
   title: string
   subtitle: string
   mainImage: string
+  mainVIdeoLink: string
   insuranceCardData: InsuranceCardDataType[]
 }
 
@@ -134,4 +136,14 @@ export type OfferDataType2 = Pick<AllPlantDataType, 'description' | 'image'> & {
 export type PlanData = {
   image: string
   timeline: string
+}
+
+export type AllNewsDataType = {
+  image: string
+  title: string
+}
+
+export type CareerCard = {
+  title: string
+  description: string
 }

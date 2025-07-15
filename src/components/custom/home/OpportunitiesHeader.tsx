@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import React from 'react'
 import ToolTip from '../shared/ToolTip'
+import Link from 'next/link'
 
 function OpportunitiesHeader() {
   return (
@@ -21,16 +22,20 @@ function OpportunitiesHeader() {
             Shanta <span className="md:text-[#FF6600]">Life</span>
           </h1>
           <p className="text-lg 2xl:text-[22px] font-light text-[#1F1F1F]">
-            Search your career opportunities through available jobs
+            Make a difference everyday- your next chapter starts here
           </p>
         </div>
         <ToolTip>
-          <Button variant="primary" className="cursor-not-allowed rounded-lg p-8 2xl:p-12">
-            <div className="flex flex-col">
-              <div className="font-bold text-xl 2xl:text-3xl tracking-wide">Explore</div>
-              <div className="font-light text-xl 2xl:text-2xl tracking-wide">the opportunities</div>
-            </div>
-          </Button>
+          <Link href="/career">
+            <Button variant="primary" className="rounded-lg p-8 2xl:p-8">
+              <div className="flex flex-col">
+                <div className="font-bold text-xl 2xl:text-3xl tracking-wide">Careers</div>
+                {/* <div className="font-light text-xl 2xl:text-2xl tracking-wide"> */}
+                {/*   the opportunities */}
+                {/* </div> */}
+              </div>
+            </Button>
+          </Link>
         </ToolTip>
       </div>
     </div>

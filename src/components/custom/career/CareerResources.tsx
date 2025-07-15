@@ -53,7 +53,7 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
         alt="Human Resource"
         width={350}
         height={220}
-        className="block lg:hidden absolute right-1 top-32 w-[88vw] max-w-[370px] z-0 pointer-events-none select-none"
+        className="block lg:hidden absolute -right-5 top-8 w-[88vw] max-w-[370px] z-0 pointer-events-none select-none"
         draggable={false}
         style={{ userSelect: 'none' }}
       />
@@ -70,7 +70,7 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
 
       {/* Desktop: 2 Cards, Mobile: Carousel 1 Card */}
       <div className="w-full flex justify-center pl-4 xl:pl-20">
-        <div className="hidden lg:flex justify-between w-full z-10">
+        <div className="hidden lg:flex justify-evenly gap-16 xl:gap-20 2xl:gap-28 w-full z-10">
           {data.map((item, idx) => (
             <ResourceCard key={idx} data={item} />
           ))}
@@ -80,15 +80,15 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
           <Carousel opts={{ loop: true }} setApi={setCarouselApi}>
             <CarouselContent>
               {data.map((item, idx) => (
-                <CarouselItem key={idx} className="px-2">
+                <CarouselItem key={idx} className="px-16 h-[265px]">
                   <ResourceCard data={item} />
                 </CarouselItem>
               ))}
             </CarouselContent>
             {/* Carousel navigation at bottom center */}
             <div
-              className="flex md:hidden gap-2 absolute
-                        inset-x-0 justify-center -bottom-16"
+              className="flex lg:hidden gap-2 absolute
+                        inset-x-0 justify-center -bottom-10"
             >
               <CarouselNavButtons
                 onPrev={() => carouselApi?.scrollPrev()}

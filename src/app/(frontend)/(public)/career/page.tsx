@@ -4,10 +4,11 @@ import CareerOpeningPrograms from '@/components/custom/career/CareerOpeningProgr
 import CareerOurStoryLg from '@/components/custom/career/CareerOurStoryLg'
 import CareerProcessingFlow from '@/components/custom/career/CareerProcessingFlow'
 import { CareerResourceSection } from '@/components/custom/career/CareerResources'
+import CareerSwiper from '@/components/custom/career/CareerSwiper'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
-import { OurStoryDataType } from '@/types'
+import { CareerCard, OurStoryDataType } from '@/types'
 import React, { FC } from 'react'
 
 type pageProps = {}
@@ -33,21 +34,21 @@ const page: FC<pageProps> = ({}) => {
     {
       title: 'SNAPSHOTs of',
       subtitle: 'Our Story',
-      mainImage: '/assets/is1.jpg',
+      mainImage: '/assets/careerVideoMain.png',
       insuranceCardData: [
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is2.jpg',
+          image: '/assets/careerVideo1.jpg',
           description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is3.jpg',
+          image: '/assets/careerVideo2.jpg',
           description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
         {
           title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is4.jpg',
+          image: '/assets/careerVideo3.jpg',
           description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
         },
       ],
@@ -56,19 +57,25 @@ const page: FC<pageProps> = ({}) => {
 
   const resourceData = [
     {
-      title: 'Mantaka Faruqui Aurthi',
-      image: '/assets/avatar1.jpg',
-      description:
-        'Shanta Life isn’t just a workplace—it’s a dynamic space where ideas thrive, creativity is celebrated, and every voice matters. As a woman in the Marketing department, I’ve experienced firsthand how empowering and inclusive the culture is. Here,',
-      designation: 'Marketing',
+      title: 'Rabeya Dihan',
+      image: '/assets/Dihan.jpg',
+      description: `Working at Shanta Life Insurance PLC has been a rewarding and professionally enriching journey.As part of the Customers Experience Team.I've had the opportunity to enagage directy with our valued custromers ensuring they recived timely support ,clear communication &  a seamless service experience.Everyday at Shanta Life brings new opportunity to grow, learn & make a sure meaningful impact. `,
+      designation: 'Customer Service',
     },
     {
-      title: 'Surab Barua',
-      image: '/assets/avatar2.jpg',
-      description:
-        'At Shanta Life, innovation is in our DNA, and every challenge is an opportunity to grow. As a member of the IT department, I’ve had the chance to work on...',
-      designation: 'Information Technology.',
+      title: 'Md. Arif Hossain',
+      image: '/assets/Arif.jpg',
+      description: `Working at Shanta Life has been a truly rewarding experience. The team is supportive, the environment is positive, and there’s a strong focus on growth and innovation. I’ve learned a lot and felt valued every step of the way.  `,
+      designation: 'Corporate Sales',
     },
+    //     {
+    //       title: 'Rafiqul Ahsan Mohin',
+    //       image: '/assets/avatar2.jpg',
+    //       description: `Shanta Life is more than just a workplace - it's a movement built on purpose, passion, and people. From the very first day, I felt the pulse of something extraordinary: a culture rooted in trust, driven by values and fueled by a collective dream to redefine life insurance in Bangladesh.
+    // Here, every role matters, every voice is heard, and every idea has the power to inspire change. As a young HR professional, I’ve been fortunate to be part of an environment that doesn’t just talk about transformation - it lives it. From nurturing talent to shaping culture, from building systems to unlocking human potential, I’ve seen firsthand how a clear vision, aligned values and courageous leadership can create something truly exceptional.
+    // At Shanta Life, we don’t just offer protection - we ignite possibility. I am proud—honored—to be part of this inspiring journey, alongside brilliant minds and warm hearts who are committed to making a difference. `,
+    //       designation: 'Human Resources',
+    //     },
   ]
 
   const openingData = [
@@ -99,6 +106,33 @@ const page: FC<pageProps> = ({}) => {
       description:
         'At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture where every voice is heard and every idea is valued, regardless of your background. ',
       btnText: 'Apply Now',
+    },
+  ]
+
+  // data.ts
+  const careerCards: CareerCard[] = [
+    {
+      title: 'We Celebrate Impact',
+      description:
+        'We spotlight wins, reward outcomes, and champion the people behind the progress.',
+    },
+    {
+      title: 'We Co-sign your Success',
+      description: 'We cheer your hustle, amplify your milestones, and move forward—together.',
+    },
+    {
+      title: 'We Drive Knowledge',
+      description:
+        'We support your quest for knowledge with our curated training programs. We\u2019re committed to nurturing expertise.  ',
+    },
+    {
+      title: 'We-Centric Culture',
+      description:
+        'We foster a culture where "we"is stonger than "I". Thrive with synergy and get the support without limits. ',
+    },
+    {
+      title: 'We Ignite Journeys',
+      description: 'We build each other up, every day, Let\u2019s ignite possibilities together.',
     },
   ]
 
@@ -151,6 +185,7 @@ const page: FC<pageProps> = ({}) => {
       <div className="container-padding block bg-gradient-to-r from-[#FBFFD3] to-[#F8E4C6]">
         {careerStoryData?.map((data, i) => <CareerOurStoryLg key={i} data={data} />)}
       </div>
+      <CareerSwiper careerCards={careerCards} />
       <CareerResourceSection data={resourceData} />
       <CareerOpening openingData={openingData} />
       <CareerOpeningPrograms />

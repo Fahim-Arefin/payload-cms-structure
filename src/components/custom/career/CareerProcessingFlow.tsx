@@ -68,7 +68,7 @@ export default function CareerProcessingFlow() {
                 className={`
                   flex flex-col items-center justify-start px-2
                   w-[85vw] sm:w-[56vw] md:w-[39vw] xl:w-[260px] 2xl:w-[230px]
-                  max-w-[250px] md:max-w-[320px] xl:max-w-[220px] 2xl:max-w-[270px]
+                  max-w-[340px] md:max-w-[320px] xl:max-w-[220px] 2xl:max-w-[270px]
                 `}
               >
                 {/* Top line & numbers */}
@@ -102,7 +102,7 @@ export default function CareerProcessingFlow() {
                   <img
                     src={item.img}
                     alt={item.title}
-                    className="rounded-[12px] mb-2 w-[125px] h-[106px] md:w-[186px] md:h-[157px] object-contain"
+                    className="rounded-[12px] mb-2 w-[186px] h-[157px] object-contain"
                     draggable={false}
                   />
                   <span className="mt-2 text-[#343434] text-center text-[12px] font-medium uppercase max-w-[145px] mx-auto leading-tight break-words">

@@ -39,12 +39,12 @@ function DirectorListSection({ directorProfileData }: Props) {
             className="global-h1 font-semibold text-[#4A4A4A] 
           flex space-x-1 justify-center lg:block lg:space-x-0 lg:justify-start flex-wrap"
           >
-            <h1>The Power of One</h1>
-            <h1 className="text-[#ED7125]">Connected Vision</h1>
+            <h1>The Power of</h1>
+            <h1 className="text-[#ED7125]">One Connected Vision</h1>
           </div>
           <p className="global-p1 text-[#4A4A4A] text-center lg:text-justify">
-            Shaping tomorrow, today. Our board is all about steering Shanta Life into the future.
-            Lets get to know them.
+            Spearheaded by dynamic leadership team and a visionary board, Shanta Life is ready to
+            power progress today, for a better tommorow.
           </p>
           <h2 className="hidden lg:block global-h3 font-semibold text-[#4A4A4A] text-center lg:text-start uppercase">
             Board of directors

@@ -121,6 +121,7 @@ function DirectorCard({ data, index }: Props) {
             {data?.description?.slice(0, 130) + (data?.description?.length > 130 ? '...' : '')}
           </p>
           <Link
+            target="_blank"
             href={data?.link}
             className="uppercase  
              text-[10px] md:text-sm lg:text-lg flex"

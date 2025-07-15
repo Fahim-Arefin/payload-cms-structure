@@ -112,7 +112,7 @@ function InsuranceSimplifiedSection() {
     pt-12"
     >
       <h1 className="text-[21px] md:text-[28px] lg:text-[34px] 2xl:text-[44px] font-semibold text-center lg:text-start mb-7 md:mb-12 uppercase">
-        Insurance <span className="text-[#FF6600]">Simplified</span>
+        Life Insurance <span className="text-[#FF6600]">Simplified</span>
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="grid grid-cols-3 md:grid-cols-1 xl:space-y-4 2xl:space-x-0 ">

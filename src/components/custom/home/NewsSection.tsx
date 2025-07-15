@@ -325,7 +325,7 @@ function NewsSection() {
           News & Media
         </h1>
         <h1 className="text-[21px] md:text-[28px] lg:text-[34px] 2xl:text-[44px] font-bold">
-          Explore the <span className="md:text-[#ED7125]">latest Affairs</span>
+          Explore what's making <span className="md:text-[#ED7125]">headlines</span>
         </h1>
       </div>
       {/* News Section Grid */}
@@ -333,7 +333,12 @@ function NewsSection() {
         {/* First grid */}
         <div className="flex flex-col gap-4  col-span-1 md:col-span-2 ">
           {/* First News Item */}
-          <div className="relative h-[140px] xl:h-[225px] 2xl:h-[350px] w-full rounded-md 2xl:rounded-xl">
+          <div
+            onClick={() =>
+              window.open('https://www.bonikbarta.com/magazine/budget_2025-26/1hkeLgIpXFuVnfZa')
+            }
+            className="relative h-[140px] xl:h-[225px] 2xl:h-[350px] w-full rounded-md 2xl:rounded-xl cursor-pointer"
+          >
             {/* main img */}
             <img
               src="/assets/news11.jpg"
@@ -379,7 +384,10 @@ function NewsSection() {
             </div>
           </div>
           {/* second News Item */}
-          <div className="w-full  rounded-b-md 2xl:rounded-b-lg rounded-md 2xl:rounded-xl">
+          <div
+            onClick={() => window.open('https://www.shantalife.com/media-blogs.php')}
+            className="w-full  rounded-b-md 2xl:rounded-b-lg rounded-md 2xl:rounded-xl cursor-pointer"
+          >
             <div className="relative">
               {/* img */}
               <img
@@ -451,7 +459,7 @@ function NewsSection() {
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/Dwr1V4cgZ0o?si=Ov6TKtgNY-oI6XTL"
+                src="https://www.youtube.com/embed/Dwr1V4cgZ0o"
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -587,7 +595,7 @@ function NewsSection() {
           w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
           global-h4 font-normal"
           >
-            Explore Now
+            Explore
           </Button>
         </ToolTip>
       </div>

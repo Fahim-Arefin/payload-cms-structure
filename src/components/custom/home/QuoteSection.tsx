@@ -235,8 +235,8 @@ function QuoteSection() {
               Tomorrow, <span className="md:text-[#FF6600]">Today!</span>
             </div>
             <p className="global-p1 text-[#1E1E1E] font-light">
-              Get a personalized quote from Shanta Life Insurance and take the first step toward a
-              protected and worry-free future.
+              Curious about your premium? Calculate your life insurance premium in just a few clicks
+              and get a personalized quote.
             </p>
           </div>
           {/* Info Container */}

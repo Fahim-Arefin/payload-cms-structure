@@ -17,7 +17,7 @@ function AwardSection() {
         text-center lg:text-start
         mb-5 md:mb-8 lg:mb-16  2xl:mb-24"
         >
-          AWARDS & <span className="text-[#ED7125]">ACHEIVEMENTS</span>
+          Milestones <span className="text-[#ED7125]">Unlocked</span>
         </h1>
         <div className="z-20 relative w-full lg:w-[85%] 2xl:w-[70%] mx-auto lg:min-h-[500px] grid grid-cols-1 lg:grid-cols-2">
           {/* Image Section aligned to right */}
