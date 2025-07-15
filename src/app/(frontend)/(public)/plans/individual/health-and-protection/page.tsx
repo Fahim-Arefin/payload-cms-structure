@@ -21,7 +21,7 @@ function PlanPage() {
       title: 'Shanta',
       biggerTitle: 'Accidental Coverage',
       description: 'Why blend in when your coverage can stand out?',
-      link: '/plans/individual/saving-and-investment',
+      link: '/plans/individual/health-and-protection/accidental-coverage',
       image: '/assets/healthandprotection2.jpg',
     },
     {

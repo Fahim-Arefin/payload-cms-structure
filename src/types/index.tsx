@@ -126,6 +126,11 @@ export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
 }
 
+export type OfferDataType2 = Pick<AllPlantDataType, 'description' | 'image'> & {
+  bgImage: string
+  title: string
+}
+
 export type PlanData = {
   image: string
   timeline: string

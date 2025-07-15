@@ -42,10 +42,10 @@ function BankingFacilities({ data }: Props) {
     >
       {/* heading */}
       <div>
-        <h3 className="global-h3 uppercase font-medium text-[#434343]">Banking Facilities</h3>
+        <h3 className="global-h1 uppercase font-medium text-[#434343]">Banking Facilities</h3>
         <div className="flex space-x-2">
-          <h3 className="global-h3 uppercase font-medium text-[#434343]">Protected under </h3>
-          <h3 className="global-h3 uppercase font-medium text-[#ED7125]">Life Insurance</h3>
+          <h3 className="global-h1 uppercase font-medium text-[#434343]">Protected under </h3>
+          <h3 className="global-h1 uppercase font-medium text-[#ED7125]">Life Insurance</h3>
         </div>
       </div>
       {/* carousal */}
@@ -65,7 +65,7 @@ function BankingFacilities({ data }: Props) {
         {/* Carousel Navigation */}
         <div
           className="flex gap-2 absolute h-fit
-            inset-x-0 justify-center lg:justify-end -bottom-16 md:-bottom-20 lg:-top-8 xl:-top-10 2xl:-top-12 lg:right-0"
+            inset-x-0 justify-center lg:justify-end -bottom-16 md:-bottom-20 lg:-top-10 xl:-top-12 2xl:-top-14 lg:right-0"
         >
           <CarouselNavButtons
             onPrev={() => carouselApi?.scrollPrev()}

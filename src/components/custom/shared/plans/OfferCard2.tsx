@@ -1,10 +1,10 @@
-import { OfferDataType } from '@/types'
+import { OfferDataType2 } from '@/types'
 
 type Props = {
-  data: OfferDataType
+  data: OfferDataType2
 }
 
-function OfferCard({ data }: Props) {
+function OfferCard2({ data }: Props) {
   return (
     <div
       className="relative z-30 bg-cover bg-no-repeat bg-center overflow-hidden
@@ -20,9 +20,9 @@ function OfferCard({ data }: Props) {
       <div
         className="relative z-10 cursor-pointer
         h-[220px] md:h-[240px] lg:h-[280px] xl:h-[340px] 2xl:h-[400px] 
-        py-7 lg:py-9 xl:py-12 
-        px-2 xl:px-5 
-        flex flex-col items-center justify-center
+        py-7 lg:py-4 xl:py-8 2xl:py-12 
+        px-4 lg:px-3 xl:px-5 2xl:px-8 
+        flex flex-col 
         space-y-2 lg:space-y-4 xl:space-y-6 2xl:space-y-6
         group transition-all duration-300 ease-linear
         hover:bg-[#9C8639]/60
@@ -36,19 +36,25 @@ function OfferCard({ data }: Props) {
           <img src={data?.image} alt={data?.description} className="h-full w-full object-contain" />
         </div>
 
-        <p className="text-white group-hover:text-white global-p1 font-medium text-center transition-colors duration-500 uppercase">
+        <p className="text-white group-hover:text-white  global-h4 transition-colors duration-500 uppercase">
+          {data?.title}
+        </p>
+        <p
+          className="text-white group-hover:text-white  transition-colors duration-500 
+        text-[10px] md:text-[12px] lg:text-[14px]"
+        >
           {data?.description}
         </p>
-        <span
-          className="text-[12px] text-white underline underline-offset-4 opacity-0
+        <div
+          className="text-[10px] md:text-[12px] text-white underline underline-offset-4 opacity-0
              group-hover:opacity-100
-             transition-all duration-500 ease-in font-medium mx-auto"
+             transition-all duration-500 ease-in font-medium "
         >
           <span>Explore Now</span>
-        </span>
+        </div>
       </div>
     </div>
   )
 }
 
-export default OfferCard
+export default OfferCard2
