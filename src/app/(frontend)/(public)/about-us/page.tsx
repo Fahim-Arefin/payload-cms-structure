@@ -155,6 +155,21 @@ The initiative of enhancing financial literacy among individuals and boosting co
       name: 'Raiven Hasan',
       title: 'Chairman',
     },
+    {
+      image: '/assets/profile7.png',
+      name: 'M. Anisul Haque',
+      title: 'Chairman',
+    },
+    {
+      image: '/assets/profile8.png',
+      name: 'Arif Khan',
+      title: 'Director',
+    },
+    {
+      image: '/assets/profile9.png',
+      name: 'Abrar Anwar',
+      title: 'Chairman',
+    },
   ]
 
   const allOfThemData = [
