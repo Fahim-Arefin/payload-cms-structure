@@ -12,6 +12,7 @@ function PlanPage() {
       subtitle: '',
       description: '',
       image: '/assets/healthandprotection1.jpg',
+      titleTop: '60%',
     },
   ]
 
@@ -29,12 +30,12 @@ function PlanPage() {
       description: 'Why blend in when your coverage can stand out?',
       link: '/',
       image: '/assets/healthandprotection3.jpg',
-    }
+    },
   ]
 
   return (
     <div className="font-avenir bg-white ">
-      <HeroSection heroSlides={heroSlides}/>
+      <HeroSection heroSlides={heroSlides} top=" top-[250px] md:top-[300px] lg:top-[63%] " />
       <AllPlanIndividualSection plantData={indivisualPlantData} blur>
         <div>
           <span>A healthy outside </span>

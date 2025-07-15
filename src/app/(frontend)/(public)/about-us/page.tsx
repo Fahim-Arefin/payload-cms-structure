@@ -52,41 +52,48 @@ function page() {
   const allAboutData = [
     {
       image: '/assets/allAboutIcon1.png',
+      hoverImage: '/assets/trustWhite.png',
       title: 'Trust',
       description:
         'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
     },
     {
-      image: '/assets/allAboutIcon3.png',
+      image: '/assets/simplicity.png',
+      hoverImage: '/assets/allAboutIcon3.png',
       title: 'Simplicity',
       description:
         'With easy-to-understand plans and hassle-free service, we empower our customers to make confident decisions about their future.',
     },
     {
       image: '/assets/allAboutIcon2.png',
+      hoverImage: '/assets/ownershipWhite.png',
       title: 'Ownership',
       description:
         'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
     },
     {
       image: '/assets/allAboutIcon1.png',
+      hoverImage: '/assets/trustWhite.png',
       title: 'Trust',
       description:
         'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
     },
     {
-      image: '/assets/allAboutIcon3.png',
+      image: '/assets/simplicity.png',
+      hoverImage: '/assets/allAboutIcon3.png',
       title: 'Simplicity',
       description:
         'With easy-to-understand plans and hassle-free service, we empower our customers to make confident decisions about their future.',
     },
     {
       image: '/assets/allAboutIcon2.png',
+      hoverImage: '/assets/ownershipWhite.png',
       title: 'Ownership',
       description:
         'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
     },
   ]
+  
   const directorCardData = [
     {
       image: '/assets/director2.png',

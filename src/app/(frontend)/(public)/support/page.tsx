@@ -108,7 +108,11 @@ function SupportPage() {
 
   return (
     <div className="font-avenir bg-white">
-      <HeroSection heroSlides={heroSlides} />
+      <HeroSection
+        heroSlides={heroSlides}
+        height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[578px] "
+        top=" top-[150px] md:top-[200px] lg:top-[63%]"
+      />
       <MapTabSection config={tabItems} data={tabContent} />
       <GeneralFaq />
       <CatchTheBuzzSection />

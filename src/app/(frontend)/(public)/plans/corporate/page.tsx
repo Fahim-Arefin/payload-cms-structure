@@ -33,7 +33,7 @@ function page({}: Props) {
       icon: '/assets/choose1.svg',
       text: 'Comprehensive Coverage',
       description:
-        'Protection that spans natural demise, accidental fatalities, disabilities, and major health conditions.',
+        'Protection that spans natural demise, accidental fatalities, disabilities, and major health conditions. ',
     },
     {
       icon: '/assets/choose2.svg',
@@ -48,13 +48,13 @@ function page({}: Props) {
     },
     {
       icon: '/assets/choose4.svg',
-      text: 'GLOBAL CARE ACCESS',
+      text: 'Global Care Access',
       description: 'Intelligent healthcare coverage—seamlessly bridging local and global support.',
     },
     {
       icon: '/assets/choose5.svg',
       text: 'Dedicated Account Management',
-      description: 'Enhance retention with data-backed care solutions, managed by a team of dedicated experts. ',
+      description: 'Enhance retention with data-backed care solutions, managed by a team of dedicated experts.',
     },
   ]
 
@@ -63,13 +63,13 @@ function page({}: Props) {
       img: '/assets/standard1.svg',
       title: 'FOR LIFE COVERAGE',
       description:
-        'All regular and healthy eligible employees aged 18 to 64 are qualified for coverage. New hires shall get immediate protection under the scheme from day one seamless and stress-free security from the beginning of their journey with your company.',
+        'All regular, healthy employees aged 18 to 64 are eligible for coverage. New hires receive instant protection from day one, ensuring seamless and hassle-free security from the very start of their journey with your company.',
     },
     {
       img: '/assets/standard2.svg',
       title: 'FOR HEALH COVERAGE',
       description:
-        'All eligible employees are suitable for this coverage. Expanding this coverage to employees’ dependents provides an additional level of support. It reflects a deep commitment not only to the employee but also to their family, promoting a sense of security, care and well-being for their entire household.',
+        'All eligible employees qualify for this coverage. Extending it to their dependents adds another layer of support, demonstrating a strong commitment not only to the employee but also to their family—fostering security, care, and well-being for the entire household.',
     },
   ]
 

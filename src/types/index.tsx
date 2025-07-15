@@ -3,6 +3,7 @@ export type HeroContentType = {
   title: string
   subtitle: string
   description: string
+  titleTop?: string
 }
 
 export type ShantaIntroContentType = {
@@ -20,6 +21,7 @@ export type VissionMissionContentType = {
 export type AllAboutCardDataType = {
   image: string
   title: string
+  hoverImage: string
   description: string
 }
 
@@ -133,4 +135,9 @@ export type PlanData = {
 export type AllNewsDataType = {
   image: string
   title: string
+}
+
+export type CareerCard = {
+  title: string
+  description: string
 }

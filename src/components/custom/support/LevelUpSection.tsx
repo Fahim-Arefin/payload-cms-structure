@@ -35,7 +35,7 @@ function LevelUpSection({ data }: Props) {
   return (
     <div className="pb-24">
       <div
-        className="w-[80%] md:w-[85%] lg:w-[85%] xl:w-[72%] mx-auto
+        className="w-[80%] lg:w-[85%] xl:w-[72%] mx-auto
    py-[50px] lg:py-[70px] xl:py-[100px] 2xl:py-[120px] space-y-2"
       >
         <h1 className="global-h1 uppercase font-semibold text-[#1E1E1E]">
@@ -45,7 +45,7 @@ function LevelUpSection({ data }: Props) {
           Level up your financial literacy game with our Industry Experts 
         </p>
       </div>
-      <div className="ml-[40px] md:ml-[70px] lg:ml-0">
+      <div className="px-2">
         <Carousel
           opts={{
             align: 'start',
@@ -63,7 +63,7 @@ function LevelUpSection({ data }: Props) {
           {/* Carousel Navigation */}
           <div
             className="lg:hidden flex gap-2 absolute h-fit
-                  inset-x-0 justify-start lg:justify-end -bottom-10 md:-bottom-12 lg:-top-8 2xl:-top-12 lg:right-0"
+                  inset-x-0 justify-center lg:justify-end -bottom-10 md:-bottom-12 lg:-top-8 2xl:-top-12 lg:right-0"
           >
             <CarouselNavButtons
               onPrev={() => carouselApi?.scrollPrev()}
