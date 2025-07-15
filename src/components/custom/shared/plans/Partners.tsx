@@ -43,8 +43,8 @@ function Partners({ data }: Props) {
       {/* heading */}
       <div>
         <div className="flex space-x-2 uppercase">
-          <h3 className="global-h3 uppercase font-medium text-[#434343]">oUR Valued </h3>
-          <h3 className="global-h3 uppercase font-medium text-[#ED7125]"> partners</h3>
+          <h3 className="global-h3 uppercase font-medium text-[#434343]">Bond with</h3>
+          <h3 className="global-h3 uppercase font-medium text-[#ED7125]"> Trust</h3>
         </div>
       </div>
       {/* carousal */}
