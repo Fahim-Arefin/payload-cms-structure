@@ -33,6 +33,7 @@ export type DirectorCardDataType = {
   link: string
 }
 export type DirectorProfileDataType = {
+  id?: number
   image: string
   name: string
   title: string

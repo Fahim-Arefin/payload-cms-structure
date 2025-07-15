@@ -1,8 +1,7 @@
 import { ProfileSection } from '@/components/custom/all-bods/ProfileSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import { directors } from '@/lib/data'
-import { Directors } from '@/types'
-import React, { FC, useEffect } from 'react'
+import { leaders } from '@/lib/data'
+import React, { FC } from 'react'
 
 type pageProps = {}
 
@@ -10,9 +9,9 @@ const page: FC<pageProps> = ({}) => {
   const heroSlides = [
     {
       title: '',
-      subtitle: 'Board of Directors',
+      subtitle: 'Leadership Team',
       description: '',
-      image: '/assets/all-bod-Banner.jpg',
+      image: '/assets/leadersBanner.jpg',
     },
   ]
 
@@ -24,9 +23,9 @@ const page: FC<pageProps> = ({}) => {
         top=" top-[150px] md:top-[200px] lg:top-[63%]"
       />
       <div className="">
-        {directors.map((director, i) => (
-          <div key={director.id} className={`${i % 2 === 0 ? 'bg-white' : 'bg-[#F6EDDD]'} py-10`}>
-            <ProfileSection titleColor='#ED7125' data={director} reverse={i % 2 === 1} />
+        {leaders.map((leader, i) => (
+          <div key={leader.id} className={`${i % 2 === 0 ? 'bg-white' : 'bg-[#F6EDDD]'} py-10`}>
+            <ProfileSection data={leader} titleColor='#9C8639' reverse={i % 2 === 1} />
           </div>
         ))}
       </div>

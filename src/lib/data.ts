@@ -1,4 +1,4 @@
-import { Directors } from '@/types'
+import { Directors, Leaders } from '@/types'
 
 export const directors: Directors[] = [
   {
@@ -71,5 +71,50 @@ Mr. Rahman has nurtured a lifelong passion for cricket, beginning as a youth pla
     designation: 'DIRECTOR',
     image: '/assets/board-of-directors/anisul-haque.jpg',
     description: `Mr. M. Anisul Haque is a highly respected and result-oriented finance professional with over 30+ years of progressive and diverse accomplishments in renowned local and multinational organizations. He is currently practicing as a Cost and Management Accountant and Consultant and is a Fellow Member (FCMA) of The Institute of Cost and Management Accountants of Bangladesh (ICMAB). He is the Executive Director – Group Finance for the entire Shanta Holdings group and its subsidiaries.`,
+  },
+]
+
+export const leaders: Leaders[] = [
+  {
+    id: 1,
+    title: 'Nafis A Ahmed',
+    designation: 'Chief Executive Officer',
+    image: '/assets/leaders/CEO.jpg',
+    description: `Prior to stepping into the role of Chief Executive Officer at Shanta Life Insurance, Nafis Akhter Ahmed embarked on his career journey with MetLife in July 2001, serving as a Sales Manager for Agency Operations in Bangladesh. His dedication and performance led to promotions within the company, as he was elevated to the position of Deputy Agency Director in February 2006, and subsequently as Agency Director in June 2013. In these capacities, Nafis was entrusted with the pivotal responsibilities of steering the leadership and fostering the growth of career Agency Channels for MetLife Bangladesh, while also spearheading efforts to achieve profitability targets for the Bangladesh Agency Operation.
+
+With a wealth of experience exceeding 20 years in the Life Insurance industry, Nafis commenced his professional odyssey as a sales counselor in New York, USA in 1995. Possessing a remarkable track record, he has proven himself as a successful and talented executive proficient in Sales, Customer Service, Sales Management, Business Development, Distribution, Face-to-Face interactions, Corporate Sales, Key Account Management, Market Expansion, Strategic Planning, and Team Building. His expertise spans across diverse industries including Insurance, Electronics, Education, and Yarn & Fabrics, both in the US and Bangladesh.
+
+Prior to his tenure at MetLife, Nafis held significant roles as the Network (Distribution) Head at Axiom Technologies Limited., and as the Sales & Marketing Manager at Integra Communications Limited. (the sole distributor of Motorola GSM).
+
+Nafis's academic credentials include a Bachelor of Business Administration with a major in Accounting from Kansas State University in the USA. Additionally, he holds the Fellow, Life Management Institute (FLMI) qualification from LOMA financial services education.`,
+  },
+
+  {
+    id: 2,
+    title: 'M Khurshed Kaisar',
+    designation: 'Chief Distribution Officer',
+    image: '/assets/leaders/CDO.jpg',
+    description: `Khurshed Kaisar is the Deputy Managing Director and Chief Distribution Officer at Shanta Life Insurance PLC. He brings nearly 18 years of experience from MetLife Bangladesh, where he held roles such as Area Head, Zonal Head, and Regional Head. Additionally, he served as an Adjunct Faculty member at several reputed private universities in Bangladesh. Mr. Kaisar holds an MBA in Strategic Management and Finance from Newport Business School, UK.`,
+  },
+  {
+    id: 3,
+    title: 'Mohammad Maksud Hossain',
+    designation: 'Chief Information & Technology Officer',
+    image: '/assets/leaders/CITO.jpg',
+    description: `Mohammad Maksud Hossain has been appointed AMD and Chief Information & Technology Officer at Shanta Life Insurance PLC. With over 20 years of experience, he led transformative IT initiatives in roles such as EVP at MetLife Bangladesh and VP of IT at Robi Axiata, where he implemented agile frameworks, digital solutions, and enterprise automations. His expertise spans bank, government, insurance, telecom, and financial services, where he has a proven track record of driving innovation, operational efficiency, and data-driven decision-making to support sustainable growth. Mr. Maksud holds M.Sc. & B.Sc. in Computer Science & Engineering from Bangladesh University of Engineering and Technology.`,
+  },
+  {
+    id: 4,
+    title: 'Jane Alam Romel',
+    designation: 'Chief Marketing Officer',
+    image: '/assets/leaders/CMO.jpg',
+    description: `Jane Alam Romel has been an integral part of Shanta Life since its inception, serving as the Chief Marketing Officer of Shanta Asset Management Limited, Shanta Securities, and Shanta Equity since June 2022. In addition to overseeing brand management, public relations, and strategic marketing for these entities, Romel is driving transformation within Shanta Lifestyle’s marketing with a new take on innovation and heightened customer experience. He is also catering to Shanta’s non-profit and philanthropic concern AWCH’s overall marketing. His career, spanning over 18 years, includes serving as Group Chief Marketing Officer at IDLC Finance, with expertise in corporate branding, marketing, communications, sales, and customer experience. He has contributed to the success of leading organizations across industries, including Singapore Airlines, MGH Group, and Rangs Electronics. He holds a Bachelor of Business Administration with a double major from North South University.`,
+  },
+  {
+    id: 5,
+    title: 'Majedur Rashid Chowdhury',
+    designation: 'Senior Executive Vice President, Chief Financial Officer',
+    image: '/assets/leaders/CFO.jpg',
+    description: `Majedur Rashid Chowdhury has been appointed as Senior Executive Vice President and Chief Financial Officer at Shanta Life Insurance PLC. In addition, he is serving as the Company Secretary. He previously served as Head of Finance and Accounts for Nine years at Guardian Life Insurance Limited and served Fifteen years as Deputy CFO at Pragati Life Insurance Limited. Mr. Majedur holds an MBA in Finance from Northern University.`,
   },
 ]
