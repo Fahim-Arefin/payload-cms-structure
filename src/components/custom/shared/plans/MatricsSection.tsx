@@ -1,0 +1,142 @@
+'use client'
+
+import React from 'react'
+import { Button } from '@/components/ui/button'
+
+type Props = {}
+
+function MatricsSection({}: Props) {
+  return (
+    <div className="container-padding">
+      <div className="space-y-12">
+        {/* Heading */}
+        <h1 className="global-h1 font-medium uppercase">
+          <span className="text-[#ED7125]">Metrics</span> That Matter
+        </h1>
+
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-5 md:gap-12 lg:gap-0">
+          {/* Left image block */}
+          <div
+            className=" bg-[url('/assets/matrics.jpg')] bg-[lightgray] bg-center bg-cover bg-no-repeat 
+            rounded-[10px] lg:rounded-[12px] xl:rounded-[14px] 2xl:rounded-[16px]
+            h-[250px]
+            w-full md:h-[350px]
+            lg:w-[350px] lg:h-[350px]
+            xl:w-[400px] xl:h-[400px]
+            2xl:w-[460px] 2xl:h-[460px]"
+            role="img"
+            aria-label="Surgery room"
+          />
+
+          {/* Right visual layout with image arcs */}
+          <div
+            className=" relative mx-auto  
+           h-[250px] md:h-[350px] lg:h-full
+           w-[330px] md:w-[580px] lg:w-[380px] xl:w-[500px] 2xl:w-[645px] "
+          >
+            {/* Background semi-circle */}
+            <div className="absolute inset-0 flex left-[28%] items-center">
+              <img
+                src="/assets/ellipse.png"
+                alt="Metric Arc"
+                className="object-contain pointer-events-none select-none
+                h-[122px] md:h-[216px] lg:h-[150px] xl:h-[198px] 2xl:h-[265px]"
+              />
+            </div>
+
+            {/* Top vertical line */}
+            <img
+              src="/assets/line2.png"
+              alt="Top Line"
+              className="absolute top-0 left-[47%] md:left-[47%] lg:left-[48%] xl:left-[48%] 2xl:left-[49%] -translate-x-1/2 
+              w-[4px] md:w-[7px] lg:w-[5px] xl:w-fit
+              h-[68px] md:h-[74px] lg:h-[105px] xl:h-[107px] 2xl:h-[107px] "
+            />
+
+            {/* Bottom vertical line */}
+            <img
+              src="/assets/line2.png"
+              alt="Bottom Line"
+              className="absolute bottom-0 left-[47%] md:left-[47%] lg:left-[48%] xl:left-[48%] 2xl:left-[49%] -translate-x-1/2 
+             w-[4px] md:w-[7px] lg:w-[5px] xl:w-fit
+              h-[68px] md:h-[74px] lg:h-[105px] xl:h-[107px] 2xl:h-[107px]"
+            />
+
+            {/* Center text */}
+            <div
+              className="absolute inset-0 flex items-center  text-center z-10
+             left-[32%] md:left-[34%] lg:left-[32%] 2xl:left-[36%]"
+            >
+              <div>
+                <p className="text-[10px] md:text-[16px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-[#ED7125] font-medium">
+                  Minimum Coverage
+                </p>
+                <p className="global-span font-semibold text-[#ED7125]">BDT 100,000</p>
+              </div>
+            </div>
+
+            {/* Top Left */}
+            <div className=" absolute top-0 left-0 text-center p-4 z-10">
+              <p className="global-p2 font-light capitalize">Age At Entry</p>
+              <p className="global-p1 font-semibold">18 - 60 Years</p>
+            </div>
+
+            {/* Top Right */}
+            <div
+              className=" absolute top-0 text-center p-4 z-10
+            right-7 lg:right-8 2xl:right-12 "
+            >
+              <p className="global-p2 font-light capitalize">Policy Term</p>
+              <p className="global-p1 font-semibold">As Your Plan</p>
+            </div>
+
+            {/* Bottom Left */}
+            <div className=" absolute bottom-0 left-0 text-center p-4 z-10">
+              <p className="global-p2 font-light capitalize">Maximum Coverage</p>
+              <p className="global-p1 font-semibold">BDT 5,000,000</p>
+            </div>
+
+            {/* Bottom Right */}
+            <div className=" absolute bottom-0 right-0 text-center p-4 z-10">
+              <p className="global-p2 font-light capitalize">Premium Rate</p>
+              <p className="global-p1 font-semibold">Affordable </p>
+              <p className="global-p1 leading-3 font-semibold">Extensive Protection!</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="hidden lg:flex flex-col sm:flex-row gap-4">
+          <Button
+            variant="primary"
+            className="cursor-not-allowed
+                    global-p1 
+                    w-[130px]  md:w-[160px] lg:w-[170px] xl:w-[180px] 2xl:w-[200px]
+                    h-[33px]  md:h-[42px] lg:h-[45px] xl:h-[48px] 2xl:h-[50px]
+                    text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] 2xl:text-[16px]
+                    font-normal rounded-sm lg:rounded-md transition-all duration-200
+                    "
+          >
+            Download Brochure
+          </Button>
+          <Button
+            variant="outline"
+            className="cursor-not-allowed
+                    text-[#3A3A3A] bg-[#F6EDDD] hover:bg-[#F6EEEE]
+                    global-p1 
+                    w-[130px]  md:w-[160px] lg:w-[170px] xl:w-[180px] 2xl:w-[200px]
+                    h-[33px]  md:h-[42px] lg:h-[45px] xl:h-[48px] 2xl:h-[50px]
+                    text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] 2xl:text-[16px]
+                    font-normal rounded-md transition-all duration-200
+                    "
+          >
+            Calculate Premium
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default MatricsSection

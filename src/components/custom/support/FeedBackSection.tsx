@@ -77,18 +77,20 @@ function FeedBackSection({}: Props) {
               className="shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] w-full 
               h-[150px] lg:h-[258px] xl:h-[332px] bg-white text-black p-5 rounded-[8px] lg:rounded-[10px] xl:rounded-[12px]"
             />
-            <a href="tel:+8809610889900" className="w-fit">
-              <Button
-                variant="primary"
-                className="cursor-not-allowed lg:hidden h-[45px] lg:h-[50px] xl:h-[60px] 
-               lg:w-[180px] xl:w-[240px]
-               lg:rounded-[6px] xl:rounded-[8px]
-               font-normal
-               lg:text-[16px] xl:text-[18px]"
-              >
-                Send Feedback
-              </Button>
-            </a>
+            <div>
+              <a href="tel:+8809610889900" className="w-fit">
+                <Button
+                  variant="primary"
+                  className="cursor-not-allowed lg:hidden h-[45px] lg:h-[50px] xl:h-[60px] 
+                lg:w-[180px] xl:w-[240px]
+                lg:rounded-[6px] xl:rounded-[8px]
+                font-normal
+                lg:text-[16px] xl:text-[18px]"
+                >
+                  Send Feedback
+                </Button>
+              </a>
+            </div>
           </div>
 
           {/* Column 3: Support info */}
@@ -96,18 +98,20 @@ function FeedBackSection({}: Props) {
             <div className="space-y-4 lg:pl-2 xl:pl-4">
               <div className="space-y-4">
                 <p className="global-span font-medium">Want to learn more?</p>
-                <a href="tel:+8809610889900" className="w-fit">
-                  <Button
-                    variant="outline"
-                    className=" h-[45px] lg:h-[50px] xl:h-[60px] 
-                  lg:w-[180px] xl:w-[240px]
-                  lg:rounded-[6px] xl:rounded-[8px]
-                  font-normal
-                  lg:text-[16px] xl:text-[18px]"
-                  >
-                    Call to Support Center
-                  </Button>
-                </a>
+                <div>
+                  <a href="tel:+8809610889900" className="w-fit">
+                    <Button
+                      variant="outline"
+                      className=" h-[45px] lg:h-[50px] xl:h-[60px] 
+                    lg:w-[180px] xl:w-[240px]
+                    lg:rounded-[6px] xl:rounded-[8px]
+                    font-normal
+                    lg:text-[16px] xl:text-[18px]"
+                    >
+                      Call to Support Center
+                    </Button>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

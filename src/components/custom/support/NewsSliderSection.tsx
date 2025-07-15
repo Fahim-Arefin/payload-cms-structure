@@ -51,7 +51,7 @@ function NewsSliderSection({ data }: Props) {
       >
         <CarouselContent className="">
           {data?.map((item, index) => (
-            <CarouselItem key={index} className="basis-1/2 lg:basis-1/3 lg:pl-0 ">
+            <CarouselItem key={index} className="basis-1/2 lg:basis-1/3  ">
               <NewsSliderCard item={item} />
             </CarouselItem>
           ))}

@@ -1,10 +1,8 @@
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
-import OfferCard from '@/components/custom/shared/plans/OfferCard'
-import Offers from '@/components/custom/shared/plans/Offers'
+import MatricsSection from '@/components/custom/shared/plans/MatricsSection'
 import OffersClientWrapper from '@/components/custom/shared/plans/OffersClientWrapper'
-import React from 'react'
 
 function page() {
   const heroSlides = [
@@ -85,7 +83,7 @@ function page() {
         subheading="Four types of protection to keep you and your loved ones financially secure"
         card={2}
       />
-      <div>asd</div>
+      <MatricsSection />
       <ContactUsSection />
     </div>
   )
