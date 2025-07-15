@@ -22,7 +22,7 @@ export type AllAboutCardDataType = {
   image: string
   title: string
   hoverImage: string
-  description: string
+  description: { __html: string }
 }
 
 export type DirectorCardDataType = {
