@@ -86,7 +86,11 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
           {/* button */}
           <div className="flex justify-center lg:justify-start">
             <ToolTip>
-              <GlobalButton variant="primary" text="Calculate Premium" className="" />
+              <GlobalButton
+                variant="primary"
+                text="Calculate Premium"
+                className="cursor-not-allowed"
+              />
             </ToolTip>
           </div>
         </div>
