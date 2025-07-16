@@ -16,10 +16,23 @@ import ToolTip from '../shared/ToolTip'
 
 function QuoteForm() {
   const plans = [
-    'Child Education Plan',
-    'Saving & Investment',
+    {
+      text: 'Shanta Child Education Plan',
+      videoLink: '',
+    },
+    {
+      text: 'Shanta Endowment Plan',
+      videoLink: '',
+    },
+    {
+      text: 'Shanta 3 Stage Plan',
+      videoLink: '',
+    },
+    {
+      text: 'Shanta 4 Stage Plan',
+      videoLink: '',
+    },
     // 'Retirement Plan',
-    'Health Insurance',
     // 'Family Protection',
     // 'Travel Coverage',
   ]
@@ -53,8 +66,8 @@ function QuoteForm() {
 
               {/* generates options  */}
               {plans.map((plan) => (
-                <SelectItem key={plan} value={plan}>
-                  {plan}
+                <SelectItem key={plan.text} value={plan.text}>
+                  {plan.text}
                 </SelectItem>
               ))}
             </SelectGroup>
