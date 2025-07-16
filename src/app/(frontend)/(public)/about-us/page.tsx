@@ -126,48 +126,57 @@ The initiative of enhancing financial literacy among individuals and boosting co
 
   const directorProfileData = [
     {
+      id: 1,
       image: '/assets/profile1.png',
       name: 'Khondoker Monir Uddin',
       title: 'Chairman',
     },
     {
+      id: 2,
       image: '/assets/profile2.png',
       name: 'Jasmine Sultana',
       title: 'Director',
     },
     {
+      id: 3,
       image: '/assets/profile3.png',
       name: 'Saif Khondoker',
       title: 'Director',
     },
     {
+      id: 4,
       image: '/assets/profile4.png',
       name: 'Mayesha Khondoker',
       title: 'Chairman',
     },
     {
+      id: 5,
       image: '/assets/profile5.png',
       name: 'Farzana Hasan',
       title: 'Director',
     },
     {
+      id: 6,
       image: '/assets/profile6.png',
       name: 'Raiven Hasan',
       title: 'Chairman',
     },
     {
-      image: '/assets/profile7.png',
-      name: 'M. Anisul Haque',
-      title: 'Chairman',
-    },
-    {
+      id: 7,
       image: '/assets/profile8.png',
       name: 'Arif Khan',
       title: 'Director',
     },
     {
+      id: 8,
       image: '/assets/profile9.png',
       name: 'Abrar Anwar',
+      title: 'Chairman',
+    },
+    {
+      id: 9,
+      image: '/assets/profile7.png',
+      name: 'M. Anisul Haque',
       title: 'Chairman',
     },
   ]
