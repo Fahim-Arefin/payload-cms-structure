@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { BenefitsTabSection } from './BenefitsTabSection'
 import EligibilityTabSection from './EligibilityTabSection'
+import GlobalButton from '../shared/GlobalButton'
+import ToolTip from '../shared/ToolTip'
 
 export function ArrowIcon() {
   return (
@@ -175,7 +177,7 @@ export function ChildEducationTabs({ config, data }: Props) {
                 </TabsContent>
 
                 <div className="flex justify-center items-center gap-4 mt-4 md:mt-10 lg:mt-20">
-                  <Button
+                  {/* <Button
                     variant="primary"
                     className="
                             cursor-not-allowed
@@ -186,8 +188,15 @@ export function ChildEducationTabs({ config, data }: Props) {
                             global-p1 font-normal"
                   >
                     Download Brochure
-                  </Button>
-                  <Button
+                  </Button> */}
+                  <ToolTip>
+                    <GlobalButton
+                      className="cursor-not-allowed"
+                      text="Download Brochure"
+                      variant="primary"
+                    />
+                  </ToolTip>
+                  {/* <Button
                     variant="outline"
                     className="
                             cursor-not-allowed
@@ -201,7 +210,14 @@ export function ChildEducationTabs({ config, data }: Props) {
             global-p1 font-normal"
                   >
                     Calculate Premium
-                  </Button>
+                  </Button> */}
+                  <ToolTip>
+                    <GlobalButton
+                      className="cursor-not-allowed  text-[#9C8639] border-[#9C8639]"
+                      text="Calculate Premium"
+                      variant="outline"
+                    />
+                  </ToolTip>
                 </div>
               </>
             )

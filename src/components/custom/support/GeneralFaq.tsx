@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import ToolTip from '../shared/ToolTip'
+import GlobalButton from '../shared/GlobalButton'
 
 type Props = {}
 
@@ -163,7 +164,7 @@ function GeneralFaq({}: Props) {
         {/* load more btn */}
         <div className="flex justify-center ">
           <ToolTip>
-            <Button
+            {/* <Button
               variant="outline"
               className="cursor-not-allowed
             text-[#3A3A3A] bg-[#F6EDDD] hover:bg-[#F6EEEE]
@@ -175,7 +176,12 @@ function GeneralFaq({}: Props) {
             "
             >
               Load more
-            </Button>
+            </Button> */}
+            <GlobalButton
+              variant="outline"
+              text="Load more"
+              className=" text-[#3A3A3A] bg-[#F6EDDD] hover:bg-[#F6EEEE] cursor-not-allowed"
+            />
           </ToolTip>
         </div>
       </div>

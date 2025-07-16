@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Button } from '@/components/ui/button'
+import GlobalButton from '../GlobalButton'
 
 type Props = {}
 
@@ -115,7 +116,7 @@ function MatricsSection({}: Props) {
 
         {/* Buttons */}
         <div className="hidden lg:flex flex-col sm:flex-row gap-4">
-          <Button
+          {/* <Button
             variant="primary"
             className="cursor-not-allowed
                     global-p1 
@@ -126,8 +127,9 @@ function MatricsSection({}: Props) {
                     "
           >
             Download Brochure
-          </Button>
-          <Button
+          </Button> */}
+          <GlobalButton className="cursor-not-allowed" text="Download Brochure" variant="primary" />
+          {/* <Button
             variant="outline"
             className="cursor-not-allowed
                     text-[#3A3A3A] bg-[#F6EDDD] hover:bg-[#F6EEEE]
@@ -139,7 +141,12 @@ function MatricsSection({}: Props) {
                     "
           >
             Calculate Premium
-          </Button>
+          </Button> */}
+          <GlobalButton
+            className="cursor-not-allowed text-[#3A3A3A] bg-[#F6EDDD] hover:bg-[#F6EEEE]"
+            text="Calculate Premium"
+            variant="outline"
+          />
         </div>
       </div>
     </div>

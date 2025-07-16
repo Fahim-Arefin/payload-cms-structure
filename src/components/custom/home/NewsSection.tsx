@@ -314,6 +314,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Image from 'next/image'
 import { useState } from 'react'
 import ToolTip from '../shared/ToolTip'
+import GlobalButton from '../shared/GlobalButton'
 
 function NewsSection() {
   const [open, setOpen] = useState(false)
@@ -584,7 +585,7 @@ function NewsSection() {
       {/* Let’s Find More button */}
       <div className="flex justify-center font-avenir">
         <ToolTip>
-          <Button
+          {/* <Button
             variant="primary"
             className="
           cursor-not-allowed
@@ -596,7 +597,8 @@ function NewsSection() {
           global-h4 font-normal"
           >
             Explore
-          </Button>
+          </Button> */}
+          <GlobalButton variant="primary" className="cursor-not-allowed" text="Explore" />
         </ToolTip>
       </div>
     </div>
