@@ -35,18 +35,18 @@ function PlanPage() {
       link: '/plans/individual/health-and-protection',
       image: '/assets/plan6.jpg',
     },
-    {
-      title: 'Retirement',
-      description: 'Plan today for the freedom you deserve tomorrow.',
-      link: '/',
-      image: '/assets/plan7.jpg',
-    },
-    {
-      title: 'Takaful',
-      description: 'Guided by Shariah, united in trust — protection with integrity.',
-      link: '/',
-      image: '/assets/plan8.jpg',
-    },
+    // {
+    //   title: 'Retirement',
+    //   description: 'Plan today for the freedom you deserve tomorrow.',
+    //   link: '/',
+    //   image: '/assets/plan7.jpg',
+    // },
+    // {
+    //   title: 'Takaful',
+    //   description: 'Guided by Shariah, united in trust — protection with integrity.',
+    //   link: '/',
+    //   image: '/assets/plan8.jpg',
+    // },
   ]
 
   return (
