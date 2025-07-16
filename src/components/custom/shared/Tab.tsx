@@ -132,6 +132,8 @@ import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
+import GlobalButton from './GlobalButton'
+import ToolTip from './ToolTip'
 
 export function ArrowIcon() {
   return (
@@ -267,12 +269,26 @@ export function Tab({ config, data }: Props) {
                 className="flex flex-col md:flex-row w-fit gap-2 mx-auto 
               md:mt-[30px] lg:mt-[50px] xl:mt-[100px]"
               >
-                <Button variant="secondary" className="text-xs md:text-[12px] xl:text-[14px]">
+                {/* <Button variant="secondary" className="text-xs md:text-[12px] xl:text-[14px]">
                   Download Brochure
-                </Button>
-                <Button variant="outline" className="text-xs md:text-[12px] xl:text-[14px]">
+                </Button> */}
+                <ToolTip>
+                  <GlobalButton
+                    className="cursor-not-allowed  "
+                    text="Download Brochure"
+                    variant="secondary"
+                  />
+                </ToolTip>
+                {/* <Button variant="outline" className="text-xs md:text-[12px] xl:text-[14px]">
                   Calculate Premium
-                </Button>
+                </Button> */}
+                <ToolTip>
+                  <GlobalButton
+                    className="cursor-not-allowed  "
+                    text="Calculate Premium"
+                    variant="outline"
+                  />
+                </ToolTip>
               </div>
             </>
           )

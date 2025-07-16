@@ -44,7 +44,7 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                   : 'order-2 md:ml-[16%] lg:ml-[20%] xl:ml-[30%] 2xl:ml-[40%]',
               )}
             >
-              <h4 className="font-semibold uppercase">
+              <h4 className="font-semibold text-2xl uppercase">
                 <span className="text-[#ED7125] ">{titleFirstWord}</span> {titleRestWords.join(' ')}
               </h4>
               <h4 className="">{data?.subtitle}</h4>

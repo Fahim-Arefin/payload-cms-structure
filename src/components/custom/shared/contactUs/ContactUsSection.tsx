@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input'
 import './ContactUsSection.css'
 import ToolTip from '../ToolTip'
 import { Textarea } from '@/components/ui/textarea'
+import GlobalButton from '../GlobalButton'
 
 function ContactUsSection() {
   const handleSubmit = (e: React.FormEvent) => {
@@ -158,14 +159,20 @@ function ContactUsSection() {
             {/* Button */}
             <div className="pt-4 flex justify-end">
               <ToolTip>
-                <Button
+                {/* <Button
                   variant="primary"
                   className=" text-white shadow-md cursor-not-allowed
                 
                 text-[10px] md:text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[14px]"
                 >
                   Send Message
-                </Button>
+                </Button> */}
+                <GlobalButton
+                  size="small"
+                  className="cursor-not-allowed"
+                  text="Send Message"
+                  variant="primary"
+                />
               </ToolTip>
             </div>
           </form>
@@ -191,6 +198,7 @@ function ContactUsSection() {
               >
                 Send Message
               </Button>
+              {/* <GlobalButton size="small" className="" text="Send Message" variant="primary" /> */}
             </DialogTrigger>
             {/* bg-[#F6EDDD]/70 backdrop-blur-xl  */}
 

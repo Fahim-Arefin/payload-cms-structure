@@ -1,4 +1,5 @@
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
 import { Tab } from '@/components/custom/shared/Tab'
@@ -140,7 +141,7 @@ function EndowmentPage() {
         "
         >
           <ToolTip>
-            <Button
+            {/* <Button
               variant="primary"
               className="
             cursor-not-allowed
@@ -152,10 +153,16 @@ function EndowmentPage() {
             global-h4 font-normal"
             >
               Purchase Now
-            </Button>
+            </Button> */}
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed"
+              text="Purchase Now"
+              variant="primary"
+            />
           </ToolTip>
           <ToolTip>
-            <Button
+            {/* <Button
               className=" 
             cursor-not-allowed
             px-2 md:px-6 2xl:px-10
@@ -168,7 +175,13 @@ function EndowmentPage() {
              hover:bg-white/30 hover:border-white transition-colors duration-300"
             >
               Call Now
-            </Button>
+            </Button> */}
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md  hover:bg-white/30 hover:border-white "
+              text="Call Now"
+              variant="primary"
+            />
           </ToolTip>
         </div>
       </HeroSection>

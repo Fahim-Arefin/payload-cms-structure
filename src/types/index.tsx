@@ -149,6 +149,14 @@ export type CareerCard = {
   description: string
 }
 
+export type ProtectionDataType = {
+  bgImage: string
+  item: {
+    image: string
+    description: string
+  }[]
+}
+
 
 export type Directors = {
   id: number

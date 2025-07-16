@@ -4,6 +4,7 @@ import CorporateHighlight from '@/components/custom/corporate/CorporateHighlight
 import CorporateSuitability from '@/components/custom/corporate/CorporateSuitability'
 import PartnerCarousel from '@/components/custom/corporate/PartnerCarousel'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
@@ -54,7 +55,8 @@ function page({}: Props) {
     {
       icon: '/assets/choose5.svg',
       text: 'Dedicated Account Management',
-      description: 'Enhance retention with data-backed care solutions, managed by a team of dedicated experts.',
+      description:
+        'Enhance retention with data-backed care solutions, managed by a team of dedicated experts.',
     },
   ]
 
@@ -146,7 +148,7 @@ function page({}: Props) {
         "
         >
           <ToolTip>
-            <Button
+            {/* <Button
               variant="primary"
               className="
             cursor-not-allowed
@@ -158,12 +160,17 @@ function page({}: Props) {
             global-h4 font-normal"
             >
               Explore Now
-            </Button>
+            </Button> */}
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed"
+              text="Download Brochure"
+              variant="primary"
+            />
           </ToolTip>
 
           <ToolTip className="flex items-center space-x-2 text-white 2xl:space-x-4">
-            {/* <div className="flex items-center space-x-2 text-white 2xl:space-x-4"> */}
-            <Button
+            {/* <Button
               className=" cursor-not-allowed
             px-2 md:px-6 2xl:px-10
             py-1 md:py-2 2xl:py-6
@@ -174,8 +181,13 @@ function page({}: Props) {
                         hover:bg-white/30 hover:border-white transition-colors duration-300"
             >
               Call Now
-            </Button>
-            {/* </div> */}
+            </Button> */}
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md  hover:bg-white/30 hover:border-white "
+              text="Call Now"
+              variant="primary"
+            />
           </ToolTip>
         </div>
       </HeroSection>

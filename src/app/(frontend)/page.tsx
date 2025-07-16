@@ -18,6 +18,7 @@ import SearchBarSection from '@/components/custom/home/SearchBarSection'
 import InsuranceSimplifiedLargeSection from '@/components/custom/home/InsuranceSimplifiedLargeSection'
 import { InsuranceDataType } from '@/types'
 import ToolTip from '@/components/custom/shared/ToolTip'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
 export default async function HomePage() {
   const headers = await getHeaders()
   const payloadConfig = await config
@@ -149,7 +150,7 @@ export default async function HomePage() {
         "
         >
           <ToolTip>
-            <Button
+            {/* <Button
               variant="primary"
               className="
             cursor-not-allowed
@@ -161,16 +162,26 @@ export default async function HomePage() {
             global-h4 font-normal"
             >
               Explore Now
-            </Button>
+            </Button> */}
+            <GlobalButton
+              size="large"
+              variant="primary"
+              text="Explore Now"
+              className="cursor-not-allowed"
+            />
           </ToolTip>
 
           <ToolTip className="flex items-center space-x-2 text-white 2xl:space-x-4">
-            {/* <div className="flex items-center space-x-2 text-white 2xl:space-x-4"> */}
-            <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
+            {/* <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
               <BsPlay />
             </div>
-            <div className="global-h4 font-normal ">From the Expert</div>
-            {/* </div> */}
+            <div className="global-h4 font-normal ">From the Expert</div> */}
+            <GlobalButton className="flex items-center space-x-2 px-4 py-2 bg-transparent hover:bg-transparent cursor-not-allowed">
+              <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
+                <BsPlay />
+              </div>
+              <div className="global-h4 font-normal">From the Expert</div>
+            </GlobalButton>
           </ToolTip>
         </div>
       </HeroSection>
