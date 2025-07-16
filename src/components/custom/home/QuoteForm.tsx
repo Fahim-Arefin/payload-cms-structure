@@ -37,8 +37,8 @@ function QuoteForm() {
       onSubmit={handleSubmit}
       action=""
       className="border-2 border-[#9C8639] rounded-2xl bg-[#FFFFFFCC]
-  grid grid-cols-2 gap-x-4 gap-y-8 md:gap-7 xl:gap-8 
-  p-6 xl:p-12 z-10"
+  grid grid-cols-2 gap-x-4 gap-y-8 md:gap-5 xl:gap-6 
+  p-6 xl:p-8 z-10"
     >
       {/* plans */}
       <div className="relative col-span-2 md:col-span-1">
