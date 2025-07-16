@@ -11,6 +11,8 @@ import {
 } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import ToolTip from '../shared/ToolTip'
+import GlobalButton from '../shared/GlobalButton'
+import Link from 'next/link'
 
 const cards = [
   {
@@ -108,12 +110,15 @@ function OnYourCueSection() {
       </div>
       {/* Let’s Find More button */}
       <ToolTip className="flex justify-center mt-6 2xl:mt-12 font-avenir">
-        <Button
+        {/* <Button
           variant="primary"
           className="cursor-not-allowed p-4 lg xl:p-5 2xl:p-6 text-xs xl:text-sm 2xl:text-lg rounded-lg"
         >
           Let's Find More
-        </Button>
+        </Button> */}
+        <Link href="/plans">
+          <GlobalButton variant="primary" className="" text="Lets Find More" />
+        </Link>
       </ToolTip>
     </div>
   )

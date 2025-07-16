@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import GlobalButton from '../shared/GlobalButton'
 
 type CareerOpeningCardProps = {
   type: any
@@ -16,6 +17,7 @@ const CareerOpeningCard: FC<CareerOpeningCardProps> = ({ type, title, descriptio
       <button className="bg-[#ED7125] text-white text-[16px] py-1.5 px-5 rounded-[5px] mt-auto w-max transition-colors hover:bg-[#d15d15]">
         {btnText}
       </button>
+      {/* <GlobalButton size="small" className="cursor-not-allowed " text={btnText} variant="primary" /> */}
     </div>
   )
 }

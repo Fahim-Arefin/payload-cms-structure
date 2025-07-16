@@ -75,8 +75,8 @@ function DirectorCard({ data, index }: Props) {
         {/* Image Container */}
         <div
           className="relative
-        h-[160px] md:h-[250px] lg:h-[360px] xl:h-[460px] 2xl:h-[600px] 
-        w-[160px] md:w-[250px] lg:w-[360px] xl:w-[460px] 2xl:w-[550px]"
+        h-[160px] md:h-[250px] lg:h-[360px] xl:h-[420px] 2xl:h-[600px] 
+        w-[160px] md:w-[250px] lg:w-[360px] xl:w-[420px] 2xl:w-[550px]"
         >
           {/* Gradient Background Frame */}
           <div

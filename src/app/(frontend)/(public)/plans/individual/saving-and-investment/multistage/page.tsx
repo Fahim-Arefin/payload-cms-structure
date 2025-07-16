@@ -7,6 +7,8 @@ import React, { FC } from 'react'
 import MultiPlansSection from '@/components/custom/multistage/MultiPlansSection'
 import FourStagePlan from '@/components/custom/multistage/FourStagePlan'
 import FiveStagePlan from '@/components/custom/multistage/FiveStagePlan'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
+import ToolTip from '@/components/custom/shared/ToolTip'
 
 type Props = {}
 
@@ -51,7 +53,7 @@ const page: FC<Props> = ({}) => {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start
         "
         >
-          <Button
+          {/* <Button
             variant="primary"
             className="
             px-2 md:px-6 2xl:px-10
@@ -61,14 +63,30 @@ const page: FC<Props> = ({}) => {
             global-h4 font-normal"
           >
             Purchase Now
-          </Button>
-          <Button
+          </Button> */}
+          <ToolTip>
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed"
+              text="Purchase Now"
+              variant="primary"
+            />
+          </ToolTip>
+          {/* <Button
             className=" px-2 md:px-6 2xl:px-10
             py-1 md:py-2 2xl:py-6 w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] rounded border border-white text-white bg-white/20 backdrop-blur-md
              hover:bg-white/30 hover:border-white transition-colors duration-300"
           >
             Call Now
-          </Button>
+          </Button> */}
+          <ToolTip>
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md  hover:bg-white/30 hover:border-white "
+              text="Call Now"
+              variant="primary"
+            />
+          </ToolTip>
         </div>
       </HeroSection>
       <PlanInfoSection bgColor="#F6EDDD" data={planInfoData} />

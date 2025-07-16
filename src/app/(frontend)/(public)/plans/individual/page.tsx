@@ -4,6 +4,7 @@ import AllPlanSection from '@/components/custom/shared/plans/AllPlanSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import { Button } from '@/components/ui/button'
 import ToolTip from '@/components/custom/shared/ToolTip'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
 
 function PlanPage() {
   const heroSlides = [
@@ -34,18 +35,18 @@ function PlanPage() {
       link: '/plans/individual/health-and-protection',
       image: '/assets/plan6.jpg',
     },
-    {
-      title: 'Retirement',
-      description: 'Plan today for the freedom you deserve tomorrow.',
-      link: '/',
-      image: '/assets/plan7.jpg',
-    },
-    {
-      title: 'Takaful',
-      description: 'Guided by Shariah, united in trust — protection with integrity.',
-      link: '/',
-      image: '/assets/plan8.jpg',
-    },
+    // {
+    //   title: 'Retirement',
+    //   description: 'Plan today for the freedom you deserve tomorrow.',
+    //   link: '/',
+    //   image: '/assets/plan7.jpg',
+    // },
+    // {
+    //   title: 'Takaful',
+    //   description: 'Guided by Shariah, united in trust — protection with integrity.',
+    //   link: '/',
+    //   image: '/assets/plan8.jpg',
+    // },
   ]
 
   return (
@@ -59,7 +60,7 @@ function PlanPage() {
         "
         >
           <ToolTip>
-            <Button
+            {/* <Button
               variant="primary"
               className="
             cursor-not-allowed
@@ -71,10 +72,16 @@ function PlanPage() {
             global-h4 font-normal"
             >
               Explore Now
-            </Button>
+            </Button> */}
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed"
+              text="Explore Now"
+              variant="primary"
+            />
           </ToolTip>
           <ToolTip>
-            <Button
+            {/* <Button
               className=" 
             cursor-not-allowed
             px-2 md:px-6 2xl:px-10
@@ -87,15 +94,29 @@ function PlanPage() {
              hover:bg-white/30 hover:border-white transition-colors duration-300"
             >
               Call Now
-            </Button>
+            </Button> */}
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md  hover:bg-white/30 hover:border-white "
+              text="Call Now"
+              variant="primary"
+            />
           </ToolTip>
         </div>
       </HeroSection>
       <AllPlanSection plantData={indivisualPlantData} blur>
-        <div>
-          <span>Not Just Policies,</span>
+        <div className="uppercase global-h2 font-medium">
+          <span>
+            Not Just <span className="text-[#ED7125]">policies</span>,
+          </span>
           <br />
-          <span className="text-[#ED7125]">It's POSSIBILITIES </span>
+          <span className="text-[#ED7125]">It's POSSIBILITIES</span>
+        </div>
+        <div className="hidden lg:block global-span text-[#3A3A3A] font-[350] mt-4 xl:mt-6 2xl:mt-12">
+          From wealth-building solutions to education-focused coverage,
+        </div>
+        <div className="hidden lg:block global-span text-[#3A3A3A] font-[350]">
+          we bring you tailored plans that meet your ambitions.
         </div>
       </AllPlanSection>
       <ContactUsSection />

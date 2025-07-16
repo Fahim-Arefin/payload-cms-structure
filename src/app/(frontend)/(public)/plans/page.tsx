@@ -1,3 +1,4 @@
+import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import AllPlanSection from '@/components/custom/shared/plans/AllPlanSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
@@ -8,8 +9,10 @@ function PlanPage() {
     {
       title: 'The right insurance stands with you.',
       subtitle: 'Every step. Every Turn.',
+      // description:
+      //   'Life\u2019s full of surprises. We\u2019re here to help you navigate them. Let\u2019s build a confident future together.',
       description:
-        'Life\u2019s full of surprises. We\u2019re here to help you navigate them. Let\u2019s build a confident future together.',
+        'Life\u2019s full of surprises, We\u2019re here to help you navigate them. Let\u2019s build a confident future together.',
       image: '/assets/banner4.jpg',
     },
   ]
@@ -47,7 +50,7 @@ function PlanPage() {
         "
         >
           <ToolTip>
-            <Button
+            {/* <Button
               variant="primary"
               className="
             cursor-not-allowed
@@ -59,10 +62,16 @@ function PlanPage() {
             global-h4 font-normal"
             >
               Explore Now
-            </Button>
+            </Button> */}
+            <GlobalButton
+              size="large"
+              text="Explore Now"
+              variant="primary"
+              className="cursor-not-allowed"
+            />
           </ToolTip>
           <ToolTip>
-            <Button
+            {/* <Button
               className=" 
             cursor-not-allowed
             px-2 md:px-6 2xl:px-10
@@ -75,15 +84,20 @@ function PlanPage() {
              hover:bg-white/30 hover:border-white transition-colors duration-300"
             >
               Call Now
-            </Button>
+            </Button> */}
+            <GlobalButton
+              size="large"
+              text="Call Now"
+              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md hover:bg-white/40 "
+            />
           </ToolTip>
         </div>
       </HeroSection>
       <AllPlanSection plantData={allPlantData} blur>
-        <div className='uppercase'>
+        <div className="uppercase global-h2 font-medium">
           Choose <span className="text-[#ED7125]">your fit</span>
         </div>
-        <div className='text-[18px] uppercase text-[#3A3A3A] font-[350]'>
+        <div className="global-span text-[#3A3A3A] font-[350]">
           Explore plans built for your need
         </div>
       </AllPlanSection>

@@ -33,6 +33,7 @@ export type DirectorCardDataType = {
   link: string
 }
 export type DirectorProfileDataType = {
+  id?: number
   image: string
   name: string
   title: string
@@ -146,4 +147,29 @@ export type AllNewsDataType = {
 export type CareerCard = {
   title: string
   description: string
+}
+
+export type ProtectionDataType = {
+  bgImage: string
+  item: {
+    image: string
+    description: string
+  }[]
+}
+
+
+export type Directors = {
+  id: number
+  title: string
+  designation: string
+  description: string
+  image: string
+}
+
+export type Leaders = {
+  id: number
+  title: string
+  designation: string
+  description: string
+  image: string
 }

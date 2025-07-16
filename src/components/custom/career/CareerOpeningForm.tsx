@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import GlobalButton from '../shared/GlobalButton'
 
 const positions = [
   'IT Executive',
@@ -81,12 +82,18 @@ function CareerOpeningForm() {
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px] lg:min-h-[105px] xl:min-h-[70px]"
         rows={2}
       />
-      <Button
+      {/* <Button
         type="submit"
         className="mt-2 bg-[#ED7125] text-white text-[15px] font-semibold py-2 px-5 rounded-[5px] w-full md:w-auto md:self-end hover:bg-[#d15d15] transition-colors"
       >
         Send Application
-      </Button>
+      </Button> */}
+      <GlobalButton
+        size="small"
+        className="cursor-not-allowed font-semibold w-full md:w-auto md:self-end"
+        text="Send Application"
+        variant="primary"
+      />
     </form>
   )
 }
