@@ -1,6 +1,7 @@
 import { ProtectionDataType } from '@/types'
 import React from 'react'
 import GlobalButton from '../GlobalButton'
+import ToolTip from '../ToolTip'
 
 type Props = {
   bgColor?: string
@@ -84,7 +85,9 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
           ))}
           {/* button */}
           <div className="flex justify-center lg:justify-start">
-            <GlobalButton variant="primary" text="Calculate Premium" className="" />
+            <ToolTip>
+              <GlobalButton variant="primary" text="Calculate Premium" className="" />
+            </ToolTip>
           </div>
         </div>
       </div>
