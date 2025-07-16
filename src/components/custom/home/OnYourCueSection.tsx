@@ -12,6 +12,7 @@ import {
 import Autoplay from 'embla-carousel-autoplay'
 import ToolTip from '../shared/ToolTip'
 import GlobalButton from '../shared/GlobalButton'
+import Link from 'next/link'
 
 const cards = [
   {
@@ -115,7 +116,9 @@ function OnYourCueSection() {
         >
           Let's Find More
         </Button> */}
-        <GlobalButton variant="primary" className="cursor-not-allowed " text="Lets Find More" />
+        <Link href="/plans">
+          <GlobalButton variant="primary" className="" text="Lets Find More" />
+        </Link>
       </ToolTip>
     </div>
   )
