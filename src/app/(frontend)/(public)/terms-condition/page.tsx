@@ -1,13 +1,13 @@
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import PrivacyPolicyAccordion from './PrivacyPolicyAccordion'
+import PrivacyPolicyAccordion from './TermsConditionAccordion'
 
-function PrivacyPolicy() {
+function TermsCondition() {
   const heroSlides = [
     {
-      title: 'Privacy Policy',
+      title: 'Terms & Condition',
       subtitle: '',
       description: '',
-      image: '/assets/banner9.jpg',
+      image: '/assets/banner12.jpg',
       // titleTop: '60%'
     },
   ]
@@ -41,4 +41,4 @@ function PrivacyPolicy() {
   )
 }
 
-export default PrivacyPolicy
+export default TermsCondition
