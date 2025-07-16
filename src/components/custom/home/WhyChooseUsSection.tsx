@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import ToolTip from '../shared/ToolTip'
+import GlobalButton from '../shared/GlobalButton'
 
 function WhyChooseUsSection() {
   return (
@@ -139,13 +140,19 @@ function WhyChooseUsSection() {
             </div>
 
             <ToolTip className="hidden lg:flex justify-center absolute inset-x-0 bottom-0 ">
-              <Button
+              {/* <Button
                 variant="primary"
                 className="cursor-not-allowed rounded-lg text-white px-6 py-4 lg:h-8 xl:h-10 lg:ml-24 xl:ml-6 2xl:-ml-16
                 h-[52px] lg:w-[140px] xl:w-[180px]"
               >
                 Explore
-              </Button>
+              </Button> */}
+              <GlobalButton
+                size="small"
+                variant="primary"
+                className="cursor-not-allowed lg:ml-20 xl:-ml-4 2xl:-ml-24"
+                text="Explore"
+              />
             </ToolTip>
           </div>
         </div>

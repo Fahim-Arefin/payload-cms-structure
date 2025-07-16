@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import React from 'react'
 import ToolTip from '../shared/ToolTip'
 import Link from 'next/link'
+import GlobalButton from '../shared/GlobalButton'
 
 function OpportunitiesHeader() {
   return (
@@ -25,18 +26,20 @@ function OpportunitiesHeader() {
             Make a difference everyday- your next chapter starts here
           </p>
         </div>
-        <ToolTip>
+        <div>
           <Link href="/career">
-            <Button variant="primary" className="rounded-lg p-8 2xl:p-8">
+            {/* <Button variant="primary" className="rounded-lg p-8 2xl:p-8">
               <div className="flex flex-col">
                 <div className="font-bold text-xl 2xl:text-3xl tracking-wide">Careers</div>
-                {/* <div className="font-light text-xl 2xl:text-2xl tracking-wide"> */}
-                {/*   the opportunities */}
-                {/* </div> */}
               </div>
-            </Button>
+            </Button> */}
+            <GlobalButton
+              variant="primary"
+              text="Careers"
+              className="text-[12px] sm:text-[14px] md:text-[14px] lg:text-[18px] 2xl:text-[20px]"
+            />
           </Link>
-        </ToolTip>
+        </div>
       </div>
     </div>
   )

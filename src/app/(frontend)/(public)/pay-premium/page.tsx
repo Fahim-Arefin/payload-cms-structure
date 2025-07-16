@@ -4,6 +4,7 @@ import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import CalculatorSection from '@/components/custom/pay-premium/CalculatorSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
 
 type Props = {}
 
@@ -28,7 +29,7 @@ const page: FC<Props> = ({}) => {
         "
         >
           <ToolTip>
-            <Button
+            {/* <Button
               variant="primary"
               className="
             cursor-not-allowed
@@ -40,12 +41,17 @@ const page: FC<Props> = ({}) => {
             global-h4 font-normal"
             >
               Purchase Now
-            </Button>
+            </Button> */}
+            <GlobalButton
+              variant="primary"
+              className="cursor-not-allowed"
+              text="Purchase Now"
+              size="large"
+            />
           </ToolTip>
 
           <ToolTip className="flex items-center space-x-2 text-white 2xl:space-x-4">
-            {/* <div className="flex items-center space-x-2 text-white 2xl:space-x-4"> */}
-            <Button
+            {/* <Button
               className=" cursor-not-allowed
             px-2 md:px-6 2xl:px-10
             py-1 md:py-2 2xl:py-6
@@ -56,8 +62,13 @@ const page: FC<Props> = ({}) => {
                         hover:bg-white/30 hover:border-white transition-colors duration-300"
             >
               Call Now
-            </Button>
-            {/* </div> */}
+            </Button> */}
+            <GlobalButton
+              variant="primary"
+              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md hover:bg-white/40 hover:border-white"
+              text="Call Now"
+              size="large"
+            />
           </ToolTip>
         </div>
       </HeroSection>

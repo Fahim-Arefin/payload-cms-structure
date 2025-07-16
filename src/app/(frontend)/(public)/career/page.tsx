@@ -5,6 +5,7 @@ import CareerOurStoryLg from '@/components/custom/career/CareerOurStoryLg'
 import CareerProcessingFlow from '@/components/custom/career/CareerProcessingFlow'
 import { CareerResourceSection } from '@/components/custom/career/CareerResources'
 import CareerSwiper from '@/components/custom/career/CareerSwiper'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
@@ -147,7 +148,7 @@ const page: FC<pageProps> = ({}) => {
         "
         >
           <ToolTip>
-            <Button
+            {/* <Button
               variant="primary"
               className="
             cursor-not-allowed
@@ -159,12 +160,17 @@ const page: FC<pageProps> = ({}) => {
             global-h4 font-normal"
             >
               View All Jobs
-            </Button>
+            </Button> */}
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed"
+              text="View All Jobs"
+              variant="primary"
+            />
           </ToolTip>
 
           <ToolTip className="flex items-center space-x-2 text-white 2xl:space-x-4">
-            {/* <div className="flex items-center space-x-2 text-white 2xl:space-x-4"> */}
-            <Button
+            {/* <Button
               className="cursor-not-allowed
               bg-[#FFFFFFCC]
             px-2 md:px-6 2xl:px-10
@@ -176,8 +182,13 @@ const page: FC<pageProps> = ({}) => {
                         hover:bg-white/30 hover:border-white transition-colors duration-300"
             >
               Become an RO 
-            </Button>
-            {/* </div> */}
+            </Button> */}
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md  hover:bg-white/30 hover:border-white "
+              text="Become an RO"
+              variant="primary"
+            />
           </ToolTip>
         </div>
       </HeroSection>
