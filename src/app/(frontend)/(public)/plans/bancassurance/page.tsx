@@ -11,22 +11,9 @@ function Bancassurance() {
       title: 'Shanta Life Bancassurance',
       subtitle: '',
       description:
-        'Where banking meets protection. Tailored for individuals. Delivered through trust',
+        'Where banking meets protection, Tailored for individuals, Delivered through trust',
       image: '/assets/banner6.jpg',
     },
-    // {
-    //   title: 'Building Better Futures',
-    //   subtitle: 'One Step at a Time',
-    //   description:
-    //     'We walk with you on your journey, providing the tools you need to succeed and grow.',
-    //   image: '/assets/banner2.jpg',
-    // },
-    // {
-    //   title: 'Innovative Thinking',
-    //   subtitle: 'Impactful Living',
-    //   description: "Harness innovation to redefine your future. Together, let's make a difference.",
-    //   image: '/assets/banner1.jpg',
-    // },
   ]
   const planInfoData = {
     image: '/assets/planInfo3.png',

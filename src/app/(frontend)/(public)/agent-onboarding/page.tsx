@@ -7,6 +7,7 @@ import OnboardingRoles from '@/components/custom/agent-onboarding/OnboardingRole
 import OnboardingVision from '@/components/custom/agent-onboarding/OnboardingVIsion'
 import OnboardingWay from '@/components/custom/agent-onboarding/OnboardingWay'
 import RolesSection from '@/components/custom/agent-onboarding/RolesSection'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
@@ -207,7 +208,7 @@ function page({}: Props) {
         "
         >
           <ToolTip>
-            <Button
+            {/* <Button
               variant="primary"
               className="
             cursor-not-allowed
@@ -219,7 +220,13 @@ function page({}: Props) {
             global-h4 font-normal"
             >
               Apply Now
-            </Button>
+            </Button> */}
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed"
+              text="Apply Now"
+              variant="primary"
+            />
           </ToolTip>
         </div>
       </HeroSection>

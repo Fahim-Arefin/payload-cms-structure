@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import React, { FC } from 'react'
+import GlobalButton from '../shared/GlobalButton'
 
 type Benefit = {
   icon: string
@@ -96,10 +97,8 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
         </div>
       </div>
 
-      <div
-        className="flex justify-center items-center md:justify-start md:items-left gap-4 pb-12 pt-10 lg:pt-10 xl:pt-16 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]"
-      >
-        <Button
+      <div className="flex justify-center items-center md:justify-start md:items-left gap-4 pb-12 pt-10 lg:pt-10 xl:pt-16 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]">
+        {/* <Button
           variant="primary"
           className="
             cursor-not-allowed
@@ -111,8 +110,9 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
             global-h4 font-normal"
         >
           Download Brochure
-        </Button>
-        <Button
+        </Button> */}
+        <GlobalButton className="cursor-not-allowed" text="Download Brochure" variant="primary" />
+        {/* <Button
           variant="primary"
           className="
             cursor-not-allowed
@@ -125,7 +125,12 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
             global-h4 font-normal"
         >
           Download Company Profile
-        </Button>
+        </Button> */}
+        <GlobalButton
+          className="cursor-not-allowed bg-[#9C8639] 
+          w-[170px] md:w-[200px] lg:w-[220px] xl:w-[230px] 2xl:w-[250px]"
+          text="Download Company Profile "
+        />
       </div>
     </div>
   )
