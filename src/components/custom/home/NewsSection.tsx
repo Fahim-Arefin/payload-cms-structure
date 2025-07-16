@@ -386,7 +386,7 @@ function NewsSection() {
           </div>
           {/* second News Item */}
           <div
-            onClick={() => window.open('https://www.shantalife.com/media-blogs.php')}
+            onClick={() => window.open('https://www.shantalife.com/banca-dhaka-bank.php')}
             className="w-full  rounded-b-md 2xl:rounded-b-lg rounded-md 2xl:rounded-xl cursor-pointer"
           >
             <div className="relative">
