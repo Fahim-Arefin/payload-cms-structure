@@ -6,12 +6,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { privacyPolicy } from './policyData'
+import { termsCondition } from './termsConditionData'
 
 export default function PrivacyPolicyAccordion() {
   return (
     <Accordion type="single" collapsible className="w-full mx-auto px-1 sm:px-6 space-y-2">
-      {privacyPolicy.map((privacyItem, i) => (
+      {termsCondition.map((privacyItem, i) => (
         <AccordionItem
           key={i}
           value={`item-${i + 2}`}

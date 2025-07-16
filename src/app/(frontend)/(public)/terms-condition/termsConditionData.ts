@@ -1,4 +1,4 @@
-export const privacyPolicy = [
+export const termsCondition = [
   {
     title: '1. Our Commitment to Your Privacy',
     secondTitle: 'This Privacy Policy outlines:',
