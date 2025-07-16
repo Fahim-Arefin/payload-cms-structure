@@ -190,7 +190,7 @@ export default async function HomePage() {
       <OnYourCueSection />
       <QuoteSection />
       <InsuranceSimplifiedSection />
-      <div className="container-padding hidden md:block md:space-y-[30px] lg:space-y-[40px] xl:space-y-[80px] bg-white">
+      <div className="container-padding hidden md:block md:space-y-[40px] lg:space-y-[50px] xl:space-y-[100px] bg-white">
         {insuranceData?.map((data, i) => (
           <InsuranceSimplifiedLargeSection key={i} data={data} content={data?.content} />
         ))}
