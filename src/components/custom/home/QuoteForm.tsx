@@ -17,10 +17,11 @@ import ToolTip from '../shared/ToolTip'
 function QuoteForm() {
   const plans = [
     'Child Education Plan',
-    'Retirement Plan',
+    'Saving & Investment',
+    // 'Retirement Plan',
     'Health Insurance',
-    'Family Protection',
-    'Travel Coverage',
+    // 'Family Protection',
+    // 'Travel Coverage',
   ]
   const genders = ['Male', 'Female']
   const tenures = ['10 years', '20 years', '30 years']
