@@ -20,50 +20,34 @@ const cards = [
     title: 'Shanta',
     subtitle: 'Child Education Plan',
     description: 'They’re building castles in the sky — we’re here to anchor the ground.',
-    image: '/assets/cue4.jpg',
+    image: '/assets/on-ur-cue/child-education.jpg',
   },
   {
     icon: '/assets/cue1.png',
     title: 'Shanta',
     subtitle: '3 Payment Plan',
     description: 'Multiple payouts, 1 powerful plan - because your future is in your hands.  ',
-    image: '/assets/cue5.jpg',
+    image: '/assets/on-ur-cue/multi-stage.jpg',
   },
   {
     icon: '/assets/cue3.png',
     title: 'Shanta',
     subtitle: 'Endowment Plan',
     description: 'For the life you’re building and the ones you’re building it for.',
-    image: '/assets/cue6.jpg',
-  },
-  {
-    icon: '/assets/cue1.png',
-    title: 'Shanta',
-    subtitle: '3 Payment Plan',
-    description: 'Multiple payouts, 1 powerful plan - because your future is in your hands.  ',
-    image: '/assets/cue5.jpg',
-  },
-  {
-    icon: '/assets/cue3.png',
-    title: 'Shanta',
-    subtitle: 'Endowment Plan',
-    description: 'For the life you’re building and the ones you’re building it for.',
-    image: '/assets/cue6.jpg',
+    image: '/assets/on-ur-cue/endowment.jpg',
   },
   // {
   //   icon: '/assets/cue1.png',
   //   title: 'Shanta',
-  //   subtitle: 'Test Insurance',
-  //   description:
-  //     'Your health is your wealth. Protect it with a flexible plan tailored for peace of mind and family care.',
+  //   subtitle: '3 Payment Plan',
+  //   description: 'Multiple payouts, 1 powerful plan - because your future is in your hands.  ',
   //   image: '/assets/cue5.jpg',
   // },
   // {
   //   icon: '/assets/cue3.png',
-  //   title: 'Fahim',
-  //   subtitle: 'Test Insurance',
-  //   description:
-  //     'Your health is your wealth. Protect it with a flexible plan tailored for peace of mind and family care.',
+  //   title: 'Shanta',
+  //   subtitle: 'Endowment Plan',
+  //   description: 'For the life you’re building and the ones you’re building it for.',
   //   image: '/assets/cue6.jpg',
   // },
 ]
@@ -109,7 +93,7 @@ function OnYourCueSection() {
         </Carousel>
       </div>
       {/* Let’s Find More button */}
-      <ToolTip className="flex justify-center mt-6 2xl:mt-12 font-avenir">
+      <div className="flex justify-center mt-6 2xl:mt-12 font-avenir">
         {/* <Button
           variant="primary"
           className="cursor-not-allowed p-4 lg xl:p-5 2xl:p-6 text-xs xl:text-sm 2xl:text-lg rounded-lg"
@@ -119,7 +103,7 @@ function OnYourCueSection() {
         <Link href="/plans">
           <GlobalButton variant="primary" className="" text="Lets Find More" />
         </Link>
-      </ToolTip>
+      </div>
     </div>
   )
 }
