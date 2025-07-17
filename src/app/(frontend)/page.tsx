@@ -57,26 +57,26 @@ export default async function HomePage() {
       title: 'Expert Knows - How',
       subtitle:
         'Life can be messy but your insurance doesn’t have to be. Learn how with our Experts',
-      mainImage: '/assets/is1.jpg',
+      mainImage: '/assets/thumbnails/yt-thumbnail-1.jpg',
       mainVIdeoLink: 'https://www.youtube.com/embed/rcduE_ff314',
       insuranceCardData: [
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is2.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+          title: '',
+          image: '/assets/thumbnails/yt-thumbnail-4.jpg',
+          videoLink: 'https://www.youtube.com/embed/YbnlDrexiGE',
+          description: '',
         },
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is3.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+          title: '',
+          image: '/assets/thumbnails/yt-thumbnail-1.jpg',
+          videoLink: 'https://www.youtube.com/embed/rcduE_ff314',
+          description: '',
         },
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is4.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+          title: '',
+          image: '/assets/thumbnails/yt-thumbnail-4.jpg',
+          videoLink: 'https://www.youtube.com/embed/YbnlDrexiGE',
+          description: '',
         },
       ],
     },
@@ -85,26 +85,26 @@ export default async function HomePage() {
       content: 'right',
       title: 'Decode Life Insurance',
       subtitle: 'Detangle the basics of Life Insurace',
-      mainImage: '/assets/is5.jpg',
+      mainImage: '/assets/thumbnails/yt-thumbnail-2.jpg',
       mainVIdeoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
       insuranceCardData: [
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is6.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+          title: '',
+          image: '/assets/thumbnails/yt-thumbnail-5.jpg',
+          videoLink: 'https://www.youtube.com/embed/CkKkdNkBk9g',
+          description: '',
         },
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is7.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+          title: '',
+          image: '/assets/thumbnails/yt-thumbnail-6.jpg',
+          videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+          description: '',
         },
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is8.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+          title: '',
+          image: '/assets/thumbnails/yt-thumbnail-7.jpg',
+          videoLink: 'https://www.youtube.com/embed/1CuBIcn5Ops',
+          description: '',
         },
       ],
     },
@@ -113,26 +113,26 @@ export default async function HomePage() {
       content: 'left',
       title: 'Zero-Hassle protection',
       subtitle: 'Get your life covered fast, simple and smart',
-      mainImage: '/assets/is9.jpg',
-      mainVIdeoLink: 'https://www.youtube.com/embed/n9fFhLkJwLg',
+      mainImage: '/assets/thumbnails/yt-thumbnail-3.jpg',
+      mainVIdeoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
       insuranceCardData: [
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is10.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+          title: '',
+          image: '/assets/thumbnails/yt-thumbnail-8.jpg',
+          videoLink: 'https://www.youtube.com/embed/mUn_HAvpbag',
+          description: '',
         },
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is11.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+          title: '',
+          image: '/assets/thumbnails/yt-thumbnail-9.jpg',
+          videoLink: 'https://www.youtube.com/embed/DzMzN76gELM',
+          description: '',
         },
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          image: '/assets/is12.jpg',
-          description:
-            'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa. Cursus ornare rhoncus et orci imperdiet elementum nulla adipiscing dignissim.',
+          title: '',
+          image: '/assets/thumbnails/yt-thumbnail-3.jpg',
+          videoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
+          description: '',
         },
       ],
     },
