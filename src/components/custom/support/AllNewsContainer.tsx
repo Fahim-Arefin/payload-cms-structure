@@ -161,7 +161,7 @@ function AllNewsContainer() {
       <Dialog open={open} onOpenChange={setOpen}>
         <div className="relative rounded-[6px] cursor-pointer" onClick={() => setOpen(true)}>
           <img
-            src="/assets/newsbanner.png"
+            src="/assets/thumbnails/yt-thumbnail-4.jpg"
             alt="Main news"
             className="w-full rounded-[6px] object-cover 
           h-[250px] md:h-[350px] lg:h-full"
