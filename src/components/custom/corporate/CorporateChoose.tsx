@@ -15,11 +15,11 @@ type CorporateChooseProps = {
 const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
   return (
     <div
-      className="w-full px-5 py-12 
-           md:px-24 
-           lg:px-[130px]  lg:py-[110px] 
-           xl:px-[200px]  xl:py-[100px] 
-           2xl:px-[250px] 2xl:py-[150px]"
+      className="w-full pl-5 py-12 
+           md:pl-24 
+           lg:pl-[130px]  lg:py-[110px] 
+           xl:pl-[200px]  xl:py-[100px] 
+           2xl:pl-[250px] 2xl:py-[150px]"
     >
       {/* Desktop / Laptop */}
       <div className="hidden lg:flex items-center bg-white">
