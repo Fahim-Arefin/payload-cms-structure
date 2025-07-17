@@ -44,7 +44,7 @@ function AllNewsSection({}: Props) {
            2xl:px-[300px]
            space-y-12"
     >
-      {allNewsData?.map((data, i) => <AllNewsCard data={data} key={i} />)}
+      {allNewsData?.map((data, i) => <AllNewsCard data={data} key={i} index={i} />)}
     </div>
   )
 }
