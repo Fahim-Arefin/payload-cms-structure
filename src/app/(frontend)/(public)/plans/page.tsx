@@ -30,13 +30,14 @@ function PlanPage() {
       link: '/plans/corporate',
       image: '/assets/plan2.jpg',
     },
-    {
-      title: 'BANCASSURANCE',
-      description:
-        'Money moves meet smart moves. Integrated coverage that fits into your financial routine.',
-      link: '/plans/bancassurance',
-      image: '/assets/plan3.jpg',
-    },
+    // BANCASSURANCE will be omitted for now
+    // {
+    //   title: 'BANCASSURANCE',
+    //   description:
+    //     'Money moves meet smart moves. Integrated coverage that fits into your financial routine.',
+    //   link: '/plans/bancassurance',
+    //   image: '/assets/plan3.jpg',
+    // },
   ]
 
   return (
