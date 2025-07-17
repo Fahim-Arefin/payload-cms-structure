@@ -187,31 +187,20 @@ function Footer() {
               md:gap-2 md:px-12 lg:px-0 lg:gap-0"
               >
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/about-us'}>
-                    About
-                  </Link>
+                  <Link href={'/about-us'}>About</Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/plans'}>
-                    Solutions
-                  </Link>
+                  <Link href={'/plans'}>Solutions</Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/career'}>
-                    Career
-                  </Link>
+                  <Link href={'/career'}>Career</Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  
-                  <Link href={'/news-and-media'}>
-                    Media & Blogs
-                  </Link>
+                  <Link href={'/news-and-media'}>Media & Blogs</Link>
                 </li>
-                
+
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/support'}>
-                    Support
-                  </Link>
+                  <Link href={'/support'}>Support</Link>
                 </li>
               </ul>
             </div>
@@ -226,13 +215,10 @@ function Footer() {
             <div>
               <ul className="flex flex-col space-y-2 text-xs 2xl:text-lg">
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/privacy-policy'}>
-                    Privacy Policy
-                
-                  </Link>
+                  <Link href={'/privacy-policy'}>Privacy Policy</Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  Terms & Conditions
+                  <Link href={'/terms-condition'}>Terms & Conditions</Link>
                 </li>
               </ul>
             </div>
