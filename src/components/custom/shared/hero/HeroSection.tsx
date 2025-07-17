@@ -16,9 +16,10 @@ type Props = {
   children?: React.ReactNode
   height?: string
   top?: string
+  position?: string
 }
 
-function HeroSection({ heroSlides, children, height, top }: Props) {
+function HeroSection({ heroSlides, children, height, top, position }: Props) {
   return (
     <>
       <Carousel
@@ -41,7 +42,7 @@ function HeroSection({ heroSlides, children, height, top }: Props) {
               className={`relative w-full ${height ? height : ' h-[352px] md:h-[452px] lg:h-[628px] 2xl:h-[950px] '}`}
               // className="relative w-full h-[352px] md:h-[452px] lg:h-[628px] xl:h-[950px] 2xl:min-h-screen"
             >
-              <HeroItem slide={slide} top={top} />
+              <HeroItem slide={slide} top={top} position={position} />
             </CarouselItem>
           ))}
         </CarouselContent>

@@ -177,3 +177,10 @@ export type Leaders = {
   description: string
   image: string
 }
+
+export type AllNewsAndBlogDataType = {
+  image: string
+  title: string
+  description: string
+  date: string
+}

@@ -1,6 +1,6 @@
 import AllNewsSection from '@/components/custom/news-and-media/AllNewsSection'
+import SearchNews from '@/components/custom/news-and-media/SearchNews'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import CatchTheBuzzSection from '@/components/custom/support/CatchTheBuzzSection'
 
 export default async function NewsAndMedia() {
   const heroSlides = [
@@ -8,7 +8,7 @@ export default async function NewsAndMedia() {
       title: 'News & Media',
       subtitle: '',
       description: 'Focus on highlights',
-      image: '/assets/banner-news-and-media.jpg',
+      image: '/assets/banner13.jpg',
     },
   ]
 
@@ -32,12 +32,15 @@ export default async function NewsAndMedia() {
   ]
 
   return (
-    <div className="font-avenir">
-      {/* <HeroSection /> */}
-      <HeroSection heroSlides={heroSlides}></HeroSection>
-      <CatchTheBuzzSection />
-      <AllNewsSection newsData={newsData}>Blogs</AllNewsSection>
-      <AllNewsSection newsData={newsData}>News</AllNewsSection>
+    <div className="font-avenir bg-white">
+      <HeroSection
+        heroSlides={heroSlides}
+        height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[600px] "
+        top=" top-[150px] md:top-[200px] lg:top-[43%]"
+        position="[object-position:50%_30%]"
+      />
+      <SearchNews />
+      <AllNewsSection />
     </div>
   )
 }
