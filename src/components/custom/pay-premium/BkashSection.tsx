@@ -9,7 +9,7 @@ type Props = {
   data: PayPremiumDataType
 }
 
-function BankSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
+function BkashSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
   return (
     <div
       className="container-padding"
@@ -21,9 +21,9 @@ function BankSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
         <div className="space-x-1">
           <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
             Payment Using{' '}
-            <span className="global-h1 uppercase text-[#ED7125] font-medium">Internet Banking</span>
+            <span className="global-h1 uppercase text-[#ED7125] font-medium">bKash</span>
           </h1>
-          <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">(Bank transfer)</h1>
+          {/* <h1 className="global-h1 uppercase text-[#ED7125] font-medium">bKash</h1> */}
         </div>
       </div>
       <div
@@ -113,4 +113,4 @@ function BankSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
   )
 }
 
-export default BankSection
+export default BkashSection

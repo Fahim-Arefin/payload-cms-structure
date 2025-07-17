@@ -6,10 +6,13 @@ import ToolTip from '@/components/custom/shared/ToolTip'
 type Props = {
   bgColor?: string
   align?: 'left' | 'right'
-  data: PayPremiumDataType
+  data: {
+    bgImage: string
+    content: string
+  }
 }
 
-function BankSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
+function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
   return (
     <div
       className="container-padding"
@@ -17,15 +20,16 @@ function BankSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
         backgroundColor: bgColor,
       }}
     >
-      <div>
+      {/* <div>
         <div className="space-x-1">
           <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
-            Payment Using{' '}
-            <span className="global-h1 uppercase text-[#ED7125] font-medium">Internet Banking</span>
+            Authorization
           </h1>
-          <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">(Bank transfer)</h1>
+          <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
+            of <span className="global-h1 uppercase text-[#ED7125] font-medium">EFT Debit</span>
+          </h1>
         </div>
-      </div>
+      </div> */}
       <div
         className={`grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-9 2xl:gap-16 ${align === 'left' ? ' lg:gap-0 ' : 'gap-7'}`}
       >
@@ -34,7 +38,7 @@ function BankSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
           className={`
             relative 
             w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} xl:w-full
-            h-[250px] md:h-[300px] lg:h-[560px] xl:h-[600px] 2xl:h-[700px]
+            h-[250px] md:h-[300px] lg:h-[360px] xl:h-[400px] 2xl:h-[500px]
             rounded-[8px] md:rounded-[10px]  lg:rounded-[8px]  xl:rounded-[12px] 
             bg-[lightgray]  
             bg-no-repeat 
@@ -63,6 +67,15 @@ function BankSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
         ${align === 'left' ? 'order-2' : 'order-2 lg:order-1'} `}
         >
           {/* heading */}
+          <div className="space-x-1">
+            <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
+              Authorization
+              {/* <span className="global-h1 uppercase text-[#ED7125] font-medium">Internet Banking</span> */}
+            </h1>
+            <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
+              of <span className="global-h1 uppercase text-[#ED7125] font-medium">EFT Debit</span>
+            </h1>
+          </div>
           {/* <div>
             <div className="space-x-1">
               <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
@@ -72,31 +85,12 @@ function BankSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
             </div>
           </div> */}
           {/* items */}
-          {data?.item?.map((eachItem, i) => (
-            <div
-              key={i}
-              className=" flex items-center bg-white/50 backdrop-blur-[12.5px] border-[1.25px] border-[#9C8639]
-              space-x-2 lg:space-x-1 xl:space-x-2.5 2xl:space-x-4
-              p-1 md:px-4 md:py-1.5 lg:px-1 lg:py-2 xl:p-2.5 2xl:p-4 
-              rounded-[4px] lg:rounded-[6px] xl:rounded-[8px]"
-            >
-              {/* <div
-                className="min-w-[35px] md:min-w-[40px] lg:min-w-[30px] xl:min-w-[40px] 2xl:min-w-[46px] 
-                           h-[35px] md:h-[40px] lg:h-[30px] xl:h-[40px] 2xl:h-[46px] 
-                           "
-              >
-                <img src={eachItem?.image} alt="icons" className="w-full h-full" />
-              </div> */}
-              <div className="text-[12px] md:text-[14px] lg:text-[12px] xl:text-[16px] 2xl:text-[15px] text-[#434343]">
-                {/* {eachItem?.descriptionContent} */}
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: eachItem?.descriptionContent,
-                  }}
-                ></div>
-              </div>
-            </div>
-          ))}
+          {/* <div
+            dangerouslySetInnerHTML={{
+              __html: data?.content,
+            }}
+          ></div> */}
+          <div className="text-[#3A3A3A] text-[20px]">{data?.content}</div>
           {/* button */}
           {/* <div className="flex justify-center lg:justify-start">
             <ToolTip>
@@ -113,4 +107,4 @@ function BankSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
   )
 }
 
-export default BankSection
+export default DebitSection
