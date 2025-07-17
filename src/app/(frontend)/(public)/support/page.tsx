@@ -13,7 +13,7 @@ function SupportPage() {
       title: '',
       subtitle: 'SUPPORT',
       description: '',
-      image: '/assets/banner8.jpg',
+      image: '/assets/banners/support1.png',
     },
   ]
 
