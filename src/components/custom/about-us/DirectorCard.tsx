@@ -100,14 +100,14 @@ function DirectorCard({ data, index }: Props) {
         </div>
 
         {/* bg img */}
-        <img
+        {/* <img
           src="/assets/comma.png"
           alt={data.title}
           className="z-0 absolute hidden lg:block object-cover -mt-4
             rounded-sm md:rounded-md lg:rounded-lg 2xl:rounded-[24px]
             lg:left-[360px] xl:left-[550px] 2xl:left-[700px] 
             lg:w-[230px] xl:w-[250px] 2xl:w-fit "
-        />
+        /> */}
 
         {/* Text Content */}
         <div className="z-40 space-y-2 md:space-y-6 lg:space-y-10 2xl:space-y-12">
@@ -121,7 +121,6 @@ function DirectorCard({ data, index }: Props) {
             {data?.description?.slice(0, 130) + (data?.description?.length > 130 ? '...' : '')}
           </p>
           <Link
-            target="_blank"
             href={data?.link}
             className="uppercase  
              text-[10px] md:text-sm lg:text-lg flex"

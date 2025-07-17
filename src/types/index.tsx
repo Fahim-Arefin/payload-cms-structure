@@ -39,6 +39,7 @@ export type DirectorProfileDataType = {
   title: string
 }
 export type AllOfThemDataType = {
+  id: number
   image: string
   name: string
   title: string
