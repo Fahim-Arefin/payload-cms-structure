@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { AllOfThemDataType } from '@/types'
+import Link from 'next/link'
 
 type Props = {
   data: AllOfThemDataType
@@ -8,14 +9,15 @@ type Props = {
 
 function AllOfThemCard({ data }: Props) {
   return (
-    <div
-      className="w-full mx-auto flex flex-col items-center
-    max-w-[200px] md:max-w-[250px] lg:max-w-[200px] xl:max-w-[250px] 2xl:max-w-[300px]"
+    <Link
+      href={`/all-leaders#id-${data?.id}`}
+      className="w-full mx-auto flex flex-col items-center group 
+    max-w-[200px] md:max-w-[250px] lg:max-w-[200px] xl:max-w-[250px] 2xl:max-w-[300px] "
     >
       {/* Image Container with background gradients */}
       <div className="relative w-full aspect-[233/260] sm:aspect-[254/265] md:aspect-[254/280] lg:aspect-[254/295] xl:aspect-[254/310]">
         {/* Gradient Backgrounds */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 group-hover:bg-black/60 transition-all duration-300">
           <svg
             className="absolute inset-0"
             width="100%"
@@ -48,7 +50,7 @@ function AllOfThemCard({ data }: Props) {
             className="absolute inset-0"
             width="100%"
             height="100%"
-            viewBox="0 0 205 354"
+            viewBox="0 0 204 354"
             fill="none"
             preserveAspectRatio="xMidYMid slice"
           >
@@ -74,7 +76,7 @@ function AllOfThemCard({ data }: Props) {
         </div>
 
         {/* Profile Image */}
-        <div className="absolute z-10 w-full h-full bottom-0">
+        <div className="absolute z-10 w-full h-full bottom-0 ">
           <Image src={data?.image} alt={data?.title} fill className="object-cover" />
         </div>
       </div>
@@ -88,7 +90,7 @@ function AllOfThemCard({ data }: Props) {
           {data?.title}
         </p>
       </div>
-    </div>
+    </Link>
   )
 }
 

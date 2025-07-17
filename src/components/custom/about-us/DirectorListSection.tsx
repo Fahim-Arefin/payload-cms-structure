@@ -5,6 +5,7 @@ import { DirectorProfileDataType } from '@/types'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import DirectorProfile from './DirectorProfile'
 import { useEffect, useState } from 'react'
+import Autoplay from 'embla-carousel-autoplay'
 
 type Props = {
   directorProfileData: DirectorProfileDataType[]
@@ -64,6 +65,11 @@ function DirectorListSection({ directorProfileData }: Props) {
             }}
             className="w-full max-w-[95%] mx-auto"
             setApi={setCarouselApi}
+            plugins={[
+              Autoplay({
+                delay: 5000,
+              }),
+            ]}
           >
             <CarouselContent>
               {directorProfileData?.map((data, index) => (
