@@ -313,8 +313,8 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Image from 'next/image'
 import { useState } from 'react'
-import ToolTip from '../shared/ToolTip'
 import GlobalButton from '../shared/GlobalButton'
+import Link from 'next/link'
 
 function NewsSection() {
   const [open, setOpen] = useState(false)
@@ -386,7 +386,7 @@ function NewsSection() {
           </div>
           {/* second News Item */}
           <div
-            onClick={() => window.open('https://www.shantalife.com/media-blogs.php')}
+            onClick={() => window.open('https://www.shantalife.com/banca-dhaka-bank.php')}
             className="w-full  rounded-b-md 2xl:rounded-b-lg rounded-md 2xl:rounded-xl cursor-pointer"
           >
             <div className="relative">
@@ -423,7 +423,7 @@ function NewsSection() {
           w-full 
     h-[220px] md:h-full lg:h-[100%] 
     rounded-xl transition-transform duration-500 
-    bg-[url('/assets/news3.jpg')] bg-cover bg-center 
+    bg-[url('/assets/thumbnails/yt-thumbnail-10.jpg')] bg-cover bg-center 
     group-hover:scale-110
         `}
           />
@@ -557,34 +557,36 @@ function NewsSection() {
           </div>
           <div className="flex-1 flex flex-col space-y-1 2xl:space-y-6 justify-end">
             <hr />
-            <div className="mx-4 xl:mx-8 2xl:mx-10 flex items-center space-x-3 ">
-              <div className="text-xs xl:text-[16px] 2xl:text-[16px] text-[#00000040]">
-                See all post
+            <Link href="/news-and-media">
+              <div className="mx-4 xl:mx-8 2xl:mx-10 flex items-center space-x-3 cursor-pointer">
+                <div className="text-xs xl:text-[16px] 2xl:text-[16px] text-[#00000040]">
+                  See all post
+                </div>
+                <div>
+                  <svg
+                    width="6"
+                    height="12"
+                    viewBox="0 0 6 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0.75 1.5L5.25 6L0.75 10.5"
+                      stroke="#CCCCCC"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
               </div>
-              <div>
-                <svg
-                  width="6"
-                  height="12"
-                  viewBox="0 0 6 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M0.75 1.5L5.25 6L0.75 10.5"
-                    stroke="#CCCCCC"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
       {/* Let’s Find More button */}
       <div className="flex justify-center font-avenir">
-        <ToolTip>
+        <Link href="/news-and-media">
           {/* <Button
             variant="primary"
             className="
@@ -598,8 +600,8 @@ function NewsSection() {
           >
             Explore
           </Button> */}
-          <GlobalButton variant="primary" className="cursor-not-allowed" text="Explore" />
-        </ToolTip>
+          <GlobalButton variant="primary" className="" text="Explore" />
+        </Link>
       </div>
     </div>
   )

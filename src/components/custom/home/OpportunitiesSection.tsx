@@ -4,11 +4,11 @@ import OpportunitiesHeader from './OpportunitiesHeader'
 import GlobalSwiper from '../shared/GlobalSwiper'
 
 const opportunitiesData = [
-  { src: '/assets/life-at-shanta/swiper11.jpg', alt: 'Slide 1' },
+  { src: '/assets/life-at-shanta/swiper55.jpg', alt: 'Slide 5' },
   { src: '/assets/life-at-shanta/swiper22.jpg', alt: 'Slide 2' },
+  { src: '/assets/life-at-shanta/swiper11.jpg', alt: 'Slide 1' },
   { src: '/assets/life-at-shanta/swiper33.jpg', alt: 'Slide 3' },
   { src: '/assets/life-at-shanta/swiper44.jpg', alt: 'Slide 4' },
-  { src: '/assets/life-at-shanta/swiper55.jpg', alt: 'Slide 5' },
   { src: '/assets/life-at-shanta/swiper66.jpg', alt: 'Slide 6' },
   { src: '/assets/life-at-shanta/swiper77.jpg', alt: 'Slide 7' },
 ]
