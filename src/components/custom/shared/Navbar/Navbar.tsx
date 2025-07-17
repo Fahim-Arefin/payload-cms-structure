@@ -114,7 +114,9 @@ export default function Navbar() {
           w-fit 2xl:w-[60px] 
           h-[35px] xl:h-[37px] 2xl:h-[40px]"
           >
-            <img src="/assets/mainlogo.png" alt="logo" className="h-full w-full max-w-[100px]" />
+            <Link href="/">
+              <img src="/assets/mainlogo.png" alt="logo" className="h-full w-full max-w-[100px]" />
+            </Link>
           </div>
 
           {/* Burger Icon */}
