@@ -423,7 +423,7 @@ function NewsSection() {
           w-full 
     h-[220px] md:h-full lg:h-[100%] 
     rounded-xl transition-transform duration-500 
-    bg-[url('/assets/news3.jpg')] bg-cover bg-center 
+    bg-[url('/assets/thumbnails/yt-thumbnail-10.jpg')] bg-cover bg-center 
     group-hover:scale-110
         `}
           />
