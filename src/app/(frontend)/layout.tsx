@@ -20,7 +20,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <link rel="icon" type="image/png" href="/assets/mainlogo.png" />
       </head>
       <body>
-        <main className="bg-[#F6EDDD] min-h-screen relative font-avenir">
+        <main className="bg-[#F6EDDD] min-h-screen relative font-avenir 3xl:max-w-[1925px] 3xl:mx-auto">
           <TopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" />
           {/* <Navbar className="absolute top-0 lg:top-[80px] 2xl:top-[115px] left-0 right-0 z-50 " /> */}
           {/* <Navbar className="top-[0px] lg:top-[80px] 2xl:top-[115px] left-0 right-0 z-50" /> */}
