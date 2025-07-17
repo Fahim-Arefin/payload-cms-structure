@@ -153,10 +153,9 @@ export type ProtectionDataType = {
   bgImage: string
   item: {
     image: string
-    description: string
+    descriptionContent: string
   }[]
 }
-
 
 export type Directors = {
   id: number
