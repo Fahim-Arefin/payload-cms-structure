@@ -33,7 +33,7 @@ function VideoSection() {
           <div
             className=" flex justify-between items-center w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]"
             style={{
-              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/assets/host.jpg')`,
+              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/assets/thumbnails/yt-thumbnail-4.jpg')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
