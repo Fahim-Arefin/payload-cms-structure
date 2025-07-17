@@ -88,8 +88,13 @@
 
 // export default AllNewsContainer
 
+'use client'
 import Image from 'next/image'
 import React from 'react'
+import { useState } from 'react'
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from '@/components/ui/dialog'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { BsPlay } from 'react-icons/bs'
 
 type NewsItem = {
   id: number
@@ -127,15 +132,18 @@ const newsItems: NewsItem[] = [
 ]
 
 function AllNewsContainer() {
+  const [open, setOpen] = useState(false)
   return (
+    // px-10 lg:px-[40px] xl:px-[100px]  2xl:px-[150px]
+    // py-8 lg:py-[20px] xl:py-[40px] 2xl:py-[50px]
     <div
-      className="bg-[#434343]
-    px-10 lg:px-[40px] xl:px-[100px]  2xl:px-[150px] 
-    py-8 lg:py-[20px] xl:py-[40px] 2xl:py-[50px]
+      className="bg-[#434343] 
+    rounded-[6px]  md:rounded-[8px] lg:rounded-[11px] xl:rounded-[13px] 2xl:rounded-[15px]
+    p-8 lg:p-[20px] xl:p-[40px] 2xl:p-[50px]
     grid grid-cols-1 lg:grid-cols-2 text-white gap-6 xl:gap-12 "
     >
       {/* Left Banner */}
-      <div className="relative rounded-[6px] cursor-pointer">
+      {/* <div className="relative rounded-[6px] cursor-pointer">
         <Image
           src="/assets/newsbanner.png"
           alt="Main news"
@@ -147,7 +155,45 @@ function AllNewsContainer() {
         <div className="opacity-0 hover:opacity-100 flex transition-all duration-300 absolute inset-0 items-center bg-black/50 justify-center rounded-[6px]">
           <img src="/assets/play2.png" alt="" />
         </div>
-      </div>
+      </div> */}
+
+      {/* h-[250px] md:h-[350px] lg:h-[350px] xl:h-[460px] 2xl:h-[500px] */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <div className="relative rounded-[6px] cursor-pointer" onClick={() => setOpen(true)}>
+          <img
+            src="/assets/newsbanner.png"
+            alt="Main news"
+            className="w-full rounded-[6px] object-cover 
+          h-[250px] md:h-[350px] lg:h-full"
+          />
+          <div className="opacity-0 hover:opacity-100 flex transition-all duration-300 absolute inset-0 items-center bg-black/50 justify-center rounded-[6px]">
+            <img src="/assets/play2.png" alt="play" />
+          </div>
+        </div>
+
+        {/* ─── Dialog Content ─── */}
+        <DialogContent
+          className="max-w-5xl w-full aspect-video p-0 bg-black 
+        [&>button.absolute]:top-3 [&>button.absolute]:right-3 
+        [&>button.absolute]:bg-black/50 
+        [&>button.absolute]:text-white 
+        [&>button.absolute]:hover:bg-black/80"
+        >
+          <VisuallyHidden>
+            <DialogTitle>Expert Video</DialogTitle>
+          </VisuallyHidden>
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/YbnlDrexiGE"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+        </DialogContent>
+      </Dialog>
 
       {/* News List */}
       <div className="space-y-6">

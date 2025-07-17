@@ -4,6 +4,7 @@ import { InsuranceDataType } from '@/types'
 import { cn } from '@/lib/utils'
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import Link from 'next/link'
 
 type Props = {
   data: InsuranceDataType
@@ -44,8 +45,11 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                   : 'order-2 md:ml-[16%] lg:ml-[20%] xl:ml-[30%] 2xl:ml-[40%]',
               )}
             >
-              <h4 className="font-semibold text-2xl uppercase">
-                <span className="text-[#ED7125] ">{titleFirstWord}</span> {titleRestWords.join(' ')}
+              <h4 className="font-semibold text-2xl uppercase cursor-pointer">
+                <Link href="/">
+                  <span className="text-[#ED7125] ">{titleFirstWord}</span>{' '}
+                  {titleRestWords.join(' ')}
+                </Link>
               </h4>
               <h4 className="">{data?.subtitle}</h4>
             </div>

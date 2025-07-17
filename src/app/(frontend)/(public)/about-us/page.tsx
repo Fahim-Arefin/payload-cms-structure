@@ -113,14 +113,16 @@ function page() {
 
 The initiative of enhancing financial literacy among individuals and boosting confidence in them with services that bring stability is the cornerstone that carries the name of our organization, not only over the financial future of our customers but also over our community as a whole. At Shanta Life, we will continue our four decades long legacy of excellence and commitment with utmost sincerity, and I welcome you to explore planning your family's financial security with our trusted team.  
 `,
-      link: 'https://shantalife.com/message-form-chairman.php',
+      // link: 'https://shantalife.com/message-form-chairman.php',
+      link: '/all-bods#id-1',
     },
     {
       image: '/assets/director1.png',
       title: 'Redefining',
       subtitle: 'Life Insurance',
       description: `I am honored to lead our team in our mission to provide unwavering protection and financial security to our clients. We are committed to innovation, collaboration, and social responsibility, and we strive to set new benchmarks to revolutionize the insurance industry. Our clients can trust us to always prioritize their needs and deliver exceptional service and value. Thank you for choosing Shanta Life Insurance as your trusted partner in safeguarding your future.`,
-      link: 'https://shantalife.com/message-form-ceo.php',
+      // link: 'https://shantalife.com/message-form-ceo.php',
+      link: '/all-leaders#id-1',
     },
   ]
 
@@ -183,34 +185,34 @@ The initiative of enhancing financial literacy among individuals and boosting co
 
   const allOfThemData = [
     {
+      id: 1,
       image: '/assets/allOfThem1.png',
       name: 'Nasif A Ahmed',
       title: 'Chief Executive Officer',
     },
     {
+      id: 2,
       image: '/assets/allOfThem2.png',
       name: 'M Khurshed Kaisar',
       title: 'Chief Distribution Officer',
     },
     {
+      id: 3,
       image: '/assets/allOfThem3.png',
       name: 'Mohammad Maksud Hossain',
       title: 'Chief IT Officer',
     },
     {
-      image: '/assets/allOfThem1.png',
-      name: 'Nasif A Ahmed',
-      title: 'Chief Executive Officer',
+      id: 4,
+      image: '/assets/leaders/CMO.jpg',
+      name: 'Jane Alam Romel',
+      title: 'Chief Marketing Officer',
     },
     {
-      image: '/assets/allOfThem2.png',
-      name: 'M Khurshed Kaisar',
-      title: 'Chief Distribution Officer',
-    },
-    {
-      image: '/assets/allOfThem3.png',
-      name: 'Mohammad Maksud Hossain',
-      title: 'Chief IT Officer',
+      id: 5,
+      image: '/assets/leaders/CFO.jpg',
+      name: 'Majedur Rashid Chowdhury',
+      title: 'Chief Financial Officer',
     },
   ]
 
