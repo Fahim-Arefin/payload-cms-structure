@@ -162,6 +162,14 @@ export type ProtectionDataType = {
   }[]
 }
 
+export type PayPremiumDataType = {
+  bgImage: string
+  item: {
+    // image: string
+    descriptionContent: string
+  }[]
+}
+
 export type Directors = {
   id: number
   title: string

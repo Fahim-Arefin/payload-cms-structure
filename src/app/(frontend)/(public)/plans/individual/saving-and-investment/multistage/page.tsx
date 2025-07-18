@@ -18,7 +18,7 @@ const page: FC<Props> = ({}) => {
       title: 'Shanta Multi-Stage Maturity Plans',
       subtitle: '',
       description: 'Because Life Has More Than One Milestone. We’re With You at Every One.',
-      image: '/assets/multistageBanner.png',
+      image: '/assets/banners/multistage.png',
     },
   ]
 
@@ -93,7 +93,7 @@ const page: FC<Props> = ({}) => {
       <StagePlanTitle />
       <MultiPlansSection data={threeStageData} planData={planData} />
       <FourStagePlan />
-      <FiveStagePlan />
+      {/* <FiveStagePlan /> */}
 
       <ContactUsSection />
     </div>

@@ -37,7 +37,7 @@ function AllPlanCard({ data, blur }: Props) {
       >
         <div className="h-[50%] flex items-start">
           <div
-            className={`text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]  uppercase mx-auto lg:mx-0 text-center lg:text-start ${data?.biggerTitle ? 'font-light' : 'font-medium'}`}
+            className={`text-[20px] lg:text-[24px] xl:text-[28px] 2xl:text-[32px]  uppercase mx-auto lg:mx-0 text-center lg:text-start ${data?.biggerTitle ? 'font-light' : 'font-medium'}`}
           >
             {data?.title}
             <br></br>

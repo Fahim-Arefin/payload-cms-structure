@@ -9,7 +9,7 @@ export default async function NewsAndMedia() {
       title: 'News & Media',
       subtitle: '',
       description: 'Focus on highlights',
-      image: '/assets/banner13.jpg',
+      image: '/assets/blogBanner.jpg',
     },
   ]
 
