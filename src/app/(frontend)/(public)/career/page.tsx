@@ -1,3 +1,5 @@
+'use client'
+
 import CareerIntro from '@/components/custom/career/CareerIntro'
 import CareerOpening from '@/components/custom/career/CareerOpening'
 import CareerOpeningPrograms from '@/components/custom/career/CareerOpeningPrograms'
@@ -10,6 +12,7 @@ import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
 import { CareerCard, OurStoryDataType } from '@/types'
+import Link from 'next/link'
 import React, { FC } from 'react'
 
 type pageProps = {}
@@ -147,8 +150,7 @@ const page: FC<pageProps> = ({}) => {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start cursor-not-allowed
         "
         >
-          <ToolTip>
-            {/* <Button
+          {/* <Button
               variant="primary"
               className="
             cursor-not-allowed
@@ -161,16 +163,21 @@ const page: FC<pageProps> = ({}) => {
             >
               View All Jobs
             </Button> */}
-            <GlobalButton
-              size="large"
-              className="cursor-not-allowed"
-              text="View All Jobs"
-              variant="primary"
-            />
-          </ToolTip>
+          <GlobalButton
+            size="large"
+            // className="cursor-not-allowed"
+            text="View All Jobs"
+            variant="primary"
+            onClick={() => {
+              const section = document.getElementById('career-opening-section')
+              if (section) {
+                section.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+          />
 
-          <ToolTip className="flex items-center space-x-2 text-white 2xl:space-x-4">
-            {/* <Button
+          {/* <ToolTip className="flex items-center space-x-2 text-white 2xl:space-x-4"> */}
+          {/* <Button
               className="cursor-not-allowed
               bg-[#FFFFFFCC]
             px-2 md:px-6 2xl:px-10
@@ -183,13 +190,15 @@ const page: FC<pageProps> = ({}) => {
             >
               Become an RO 
             </Button> */}
+          <Link href="/agent-onboarding">
             <GlobalButton
               size="large"
-              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md  hover:bg-white/30 hover:border-white "
+              className=" border border-white text-white bg-white/30 backdrop-blur-md  hover:bg-white/30 hover:border-white "
               text="Become an RO"
               variant="primary"
             />
-          </ToolTip>
+          </Link>
+          {/* </ToolTip> */}
         </div>
       </HeroSection>
       <CareerIntro data={introData} />
@@ -199,7 +208,7 @@ const page: FC<pageProps> = ({}) => {
       <CareerSwiper careerCards={careerCards} />
       <CareerResourceSection data={resourceData} />
       <CareerOpening openingData={openingData} />
-      <CareerOpeningPrograms />
+      {/* <CareerOpeningPrograms /> */}
       <CareerProcessingFlow />
     </div>
   )
