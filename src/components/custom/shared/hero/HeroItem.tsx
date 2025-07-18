@@ -5,13 +5,20 @@ import { HeroContentType } from '@/types'
 type Props = {
   slide: HeroContentType
   top?: string
+  position?: string
 }
 
-const HeroItem = ({ slide, top }: Props) => {
+const HeroItem = ({ slide, top, position }: Props) => {
   return (
     <>
       {/* Background image */}
-      <Image src={slide.image} alt={slide.title} fill className="object-cover" priority />
+      <Image
+        src={slide.image}
+        alt={slide.title}
+        fill
+        priority
+        className={`object-cover ${position}`}
+      />
       {/* Overlay */}
       <div className="absolute inset-0 z-10 bg-black/35" />
 
