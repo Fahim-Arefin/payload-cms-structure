@@ -1,10 +1,7 @@
-// import ChildEducationPlan from '@/components/custom/child-education/ChildEducationPlan'
-// import { ChildEducationTabs } from '@/components/custom/child-education/ChildEducationTabs'
 import { ClaimTabs } from '@/components/custom/claims/ClaimTabs'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 type pageProps = {}
 
@@ -28,10 +25,6 @@ const page: FC<pageProps> = ({}) => {
       value: 'corporate',
       label: 'Corporate Claim',
     },
-    // {
-    //   value: 'benefits',
-    //   label: 'Additional Benefits',
-    // },
   ]
 
   const tabContent = [
@@ -122,8 +115,6 @@ const page: FC<pageProps> = ({}) => {
   return (
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides} />
-      {/* <ChildEducationPlan bgColor="#FCF4EB" data={childInfoData} /> */}
-      {/* <PlanInfoSection bgColor="#FCF4EB" data={childInfoData} /> */}
       <ClaimTabs data={tabContent} config={tabItems} />
       <ContactUsSection />
     </div>
