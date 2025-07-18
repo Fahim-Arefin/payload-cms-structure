@@ -1,37 +1,56 @@
-import { AllNewsDataType } from '@/types'
+import { AllNewsAndBlogDataType } from '@/types'
 import React from 'react'
 import AllNewsCard from './AllNewsCard'
+import GlobalButton from '../shared/GlobalButton'
 
-type Props = {
-  newsData: AllNewsDataType[]
-  children: React.ReactNode
-}
+type Props = {}
 
-function AllNewsSection({ newsData, children }: Props) {
+function AllNewsSection({}: Props) {
+  const allNewsData: AllNewsAndBlogDataType[] = [
+    {
+      image: '/assets/newsandblog1.jpg',
+      date: 'Jul 17, 2025',
+      title: 'Why is Insurance important?',
+      description:
+        'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset you!',
+    },
+    {
+      image: '/assets/newsandblog2.jpg',
+      date: 'Jul 17, 2025',
+      title: 'How Insurance can help you to keep your loved ones safe?',
+      description:
+        'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset you!',
+    },
+    {
+      image: '/assets/newsandblog3.jpg',
+      date: 'Jul 17, 2025',
+      title: 'How you can be benefited by Santa Life insurance?',
+      description:
+        'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset you!',
+    },
+    {
+      image: '/assets/newsandblog4.jpg',
+      date: 'Jul 17, 2025',
+      title: 'Why is Insurance important?',
+      description:
+        'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset you!',
+    },
+  ]
   return (
-    <div className="container-padding">
-      <h1
-        className="global-h2 uppercase font-semibold text-[#434343] 
-      text-center md:text-start
-      mb-9 md:mb-[40px] lg:mb-[54px] xl:mb-[74px]"
-      >
-        {children}
-      </h1>
-      <h2
-        className="global-h3 font-bold text-[#434343] 
-              text-center md:text-start
-              mb-9 md:mb-[40px] lg:mb-[54px] xl:mb-[74px]"
-      >
-        Coming Soon(Re-designing)
-      </h2>
-      {/* <div className="hidden md:block"> */}
-      {/*   <div className="grid md:grid-cols-2 md:gap-[122px]"> */}
-      {/*     {newsData?.map((data, index) => <AllNewsCard key={index} data={data} />)} */}
-      {/*   </div> */}
-      {/* </div> */}
-
-      {/* Mobile View */}
-      {/* <div className="md:hidden">Mobile view</div> */}
+    <div
+      className="px-5 
+           md:px-24 
+           lg:px-[130px]   
+           xl:px-[200px]  
+           2xl:px-[300px]
+           space-y-12 lg:space-y-24
+            pb-12 md:pb-24 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]
+            pt-[30px] md:pt-[40px] lg:pt-[50px] xl:pt-[60px] 2xl:pt-[70px]"
+    >
+      {allNewsData?.map((data, i) => <AllNewsCard data={data} key={i} index={i} />)}
+      <div className="flex justify-center">
+        <GlobalButton variant="primary" text="Load More" size="small" />
+      </div>
     </div>
   )
 }
