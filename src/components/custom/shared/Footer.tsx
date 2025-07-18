@@ -202,6 +202,9 @@ function Footer() {
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
                   <Link href={'/support'}>Support</Link>
                 </li>
+                <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
+                  <Link href={'/premium-calculator'}>Premium Calculator</Link>
+                </li>
               </ul>
             </div>
           </div>
