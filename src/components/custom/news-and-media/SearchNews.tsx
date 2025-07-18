@@ -3,11 +3,20 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
-function SearchNews() {
+type Props = {
+  bgColor?: string
+  paddingOn?: boolean
+  text: string
+}
+
+function SearchNews({ bgColor, paddingOn = false, text }: Props) {
   return (
-    <div className="container-padding">
-      <div className="flex flex-col md:flex-row md:justify-between items-center space-y-4 md:space-y-0">
-        <h1 className="global-h1 font-semibold">BLOGS</h1>
+    <div
+      className={`${paddingOn && ' px-5 pt-12 md:px-24 md:pt-24 lg:px-[130px]  lg:pt-[110px] xl:px-[200px]  xl:pt-[100px] 2xl:px-[300px] 2xl:pt-[150px] '}`}
+      style={{ backgroundColor: bgColor }}
+    >
+      <div className="flex flex-col md:flex-row md:justify-between items-center space-y-4 md:space-y-0 ">
+        <h1 className="global-h1 font-semibold uppercase">{text}</h1>
         <div className="bg-[#FAF2EA] p-2 rounded-lg">
           <div
             className="flex items-center bg-white max-w-full

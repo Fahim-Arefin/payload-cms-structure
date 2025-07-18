@@ -1,6 +1,7 @@
 import { AllNewsAndBlogDataType } from '@/types'
 import React from 'react'
 import AllNewsCard from './AllNewsCard'
+import GlobalButton from '../shared/GlobalButton'
 
 type Props = {}
 
@@ -42,9 +43,14 @@ function AllNewsSection({}: Props) {
            lg:px-[130px]   
            xl:px-[200px]  
            2xl:px-[300px]
-           space-y-12"
+           space-y-12 lg:space-y-24
+            pb-12 md:pb-24 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]
+            pt-[30px] md:pt-[40px] lg:pt-[50px] xl:pt-[60px] 2xl:pt-[70px]"
     >
       {allNewsData?.map((data, i) => <AllNewsCard data={data} key={i} index={i} />)}
+      <div className="flex justify-center">
+        <GlobalButton variant="primary" text="Load More" size="small" />
+      </div>
     </div>
   )
 }
