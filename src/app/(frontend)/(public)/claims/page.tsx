@@ -1,5 +1,6 @@
 // import ChildEducationPlan from '@/components/custom/child-education/ChildEducationPlan'
-import { ChildEducationTabs } from '@/components/custom/child-education/ChildEducationTabs'
+// import { ChildEducationTabs } from '@/components/custom/child-education/ChildEducationTabs'
+import { ClaimTabs } from '@/components/custom/claims/ClaimTabs'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
@@ -78,7 +79,7 @@ const page: FC<pageProps> = ({}) => {
     {
       content: [
         {
-          title: 'Customizable Coverage',
+          title: 'Customizable sdfsdfsdf',
           description: 'Choose a sum assured based on your child’s future needs.',
           image: '/assets/childTabIcon1.png',
         },
@@ -123,7 +124,7 @@ const page: FC<pageProps> = ({}) => {
       <HeroSection heroSlides={heroSlides} />
       {/* <ChildEducationPlan bgColor="#FCF4EB" data={childInfoData} /> */}
       {/* <PlanInfoSection bgColor="#FCF4EB" data={childInfoData} /> */}
-      <ChildEducationTabs data={tabContent} config={tabItems} />
+      <ClaimTabs data={tabContent} config={tabItems} />
       <ContactUsSection />
     </div>
   )

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import CalculatorSection from '@/components/custom/pay-premium-calc/CalculatorSection'
+import CalculatorSection from '@/components/custom/premium-calculator/CalculatorSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
 import GlobalButton from '@/components/custom/shared/GlobalButton'

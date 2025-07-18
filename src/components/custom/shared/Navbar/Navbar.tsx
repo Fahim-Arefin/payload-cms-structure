@@ -76,14 +76,7 @@ export default function Navbar() {
       ],
     },
     { href: '/pay-premium', label: 'Pay Premium' },
-    {
-      label: 'Claims',
-      href: '#',
-      children: [
-        { href: '#', label: 'Claim Process' },
-        { href: '#', label: 'Track Claim' },
-      ],
-    },
+    { href: '/claims', label: 'Claims' },
     { href: '/support', label: 'Support' },
     { href: '#', label: 'Purchase Now' },
   ]
