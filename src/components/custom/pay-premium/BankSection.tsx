@@ -34,7 +34,7 @@ function BankSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
           className={`
             relative 
             w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} xl:w-full
-             h-[300px] md:h-[400px] lg:h-auto
+            h-[300px] md:h-[400px] lg:h-auto
             rounded-[8px] md:rounded-[10px]  lg:rounded-[8px]  xl:rounded-[12px] 
             bg-[lightgray]  
             bg-no-repeat 
