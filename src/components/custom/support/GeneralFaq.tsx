@@ -108,7 +108,10 @@ function GeneralFaq({}: Props) {
           >
             General <span className="text-[#ED7125]">faq</span>
           </h3>
-          <div className="flex items-center space-x-4">
+          <div
+            onClick={() => window.open('https://www.shantalife.com/support.php')}
+            className="flex items-center space-x-4"
+          >
             <div className="global-p1 cursor-pointer hover:underline underline-offset-4">
               Download forms
             </div>
@@ -147,12 +150,12 @@ function GeneralFaq({}: Props) {
               value={value}
               className="bg-[#FCF4EB] px-2 md:px-6 md:py-1 mb-2 rounded-[6px]"
             >
-              <AccordionTrigger className="font-bold hover:no-underline global-p2">
+              <AccordionTrigger className="font-bold hover:no-underline text-xl">
                 {index + 1}. {title}
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4 text-balance px-2 pb-4 pt-2">
                 {content.map((paragraph, pIndex) => (
-                  <p key={pIndex} className="text-[10px] md:text-[13px]">
+                  <p key={pIndex} className="text-[12px] md:text-[16px]">
                     {paragraph}
                   </p>
                 ))}

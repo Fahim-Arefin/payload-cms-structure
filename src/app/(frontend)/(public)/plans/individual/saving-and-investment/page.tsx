@@ -14,12 +14,12 @@ function SavingAndInvestment() {
       subtitle: '',
       description:
         'The right life insurance doesn\u2019t just wait around for the what-ifs—it walks beside you through the what\u2019s next.',
-      image: '/assets/banner5.jpg',
+      image: '/assets/banners/s&i-banner.png',
     },
   ]
 
   const planInfoData = {
-    image: '/assets/planInfo1.png',
+    image: '/assets/planInfo6.png',
     description:
       'Looking for a savings plan that does more than just save? Shanta Life brings you tailored savings & investment-linked insurance plans that secure your dreams—while protecting the ones you love.',
   }

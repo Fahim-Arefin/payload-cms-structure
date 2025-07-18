@@ -11,7 +11,7 @@ function page() {
       title: '',
       subtitle: 'Shanta Critical Illness Coverage',
       description: '',
-      image: '/assets/banner12.jpg',
+      image: '/assets/banners/crit-coverage.png',
     },
   ]
 

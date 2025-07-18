@@ -72,7 +72,7 @@ export default function Navbar() {
       children: [
         { href: '/plans/individual', label: 'Individual Plan' },
         { href: '/plans/corporate', label: 'Corporate Plan' },
-        { href: '/plans/bancassurance', label: 'Bancassurance Plan' },
+        // { href: '/plans/bancassurance', label: 'Bancassurance Plan' },
       ],
     },
     { href: '/pay-premium', label: 'Pay Premium' },
