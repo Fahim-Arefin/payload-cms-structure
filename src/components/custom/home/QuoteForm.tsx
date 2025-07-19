@@ -62,6 +62,25 @@ function QuoteForm() {
   const [availableTenures, setAvailableTenures] = useState<{ text: string; value: number }[]>([])
   const [isLoadingTenures, setIsLoadingTenures] = useState(false)
   const [tenureError, setTenureError] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<{
+    PlanCode: boolean
+    Age: boolean
+    SumAssured: boolean
+    Term: boolean
+    PaymentMode: boolean
+    AccidentRider: boolean
+    CriticalRider: boolean
+    Gender: boolean
+  }>({
+    PlanCode: false,
+    Age: false,
+    SumAssured: false,
+    Term: false,
+    PaymentMode: false,
+    AccidentRider: false,
+    CriticalRider: false,
+    Gender: false
+  })
 
   const plans = [
     {
@@ -127,6 +146,14 @@ function QuoteForm() {
       ...prev,
       [field]: value,
     }))
+    
+    // Clear field error when user starts typing/selecting (only for validated fields)
+    if (field in fieldErrors && fieldErrors[field as keyof typeof fieldErrors]) {
+      setFieldErrors(prev => ({
+        ...prev,
+        [field as keyof typeof fieldErrors]: false
+      }))
+    }
   }
 
   const fetchTenureOptions = async (planCode: number, age: number) => {
@@ -237,23 +264,50 @@ function QuoteForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Basic validation
-    if (
-      !formData.PlanCode ||
-      !formData.Age ||
-      !formData.SumAssured ||
-      !formData.Term ||
-      !formData.PaymentMode
-    ) {
-      setError('Please fill in all required fields')
+    // Reset previous field errors
+    setFieldErrors({
+      PlanCode: false,
+      Age: false,
+      SumAssured: false,
+      Term: false,
+      PaymentMode: false,
+      AccidentRider: false,
+      CriticalRider: false,
+      Gender: false
+    })
+
+    // Validate each required field and mark errors
+    const errors = {
+      PlanCode: !formData.PlanCode,
+      Age: !formData.Age || formData.Age < 18 || formData.Age > 65,
+      SumAssured: !formData.SumAssured || formData.SumAssured < 100000,
+      Term: !formData.Term,
+      PaymentMode: !formData.PaymentMode,
+      AccidentRider: formData.AccidentRider === undefined || formData.AccidentRider === null,
+      CriticalRider: !formData.CriticalRider,
+      Gender: formData.Gender === undefined || formData.Gender === null
+    }
+
+    // Set field errors
+    setFieldErrors(errors)
+
+    // Check if any errors exist
+    const hasErrors = Object.values(errors).some(error => error)
+
+    if (hasErrors) {
+      setError('Please fill in all required fields correctly')
       return
     }
 
+    // Additional validation for Sum Assured
     if (formData.SumAssured < 100000) {
+      setFieldErrors(prev => ({ ...prev, SumAssured: true }))
       setError('Sum Assured must be greater than 99,999')
       return
     }
 
+    // Clear errors and proceed
+    setError(null)
     calculatePremium()
   }
 
@@ -281,10 +335,20 @@ function QuoteForm() {
               }))
               // Clear tenure options until new plan + age combination is selected
               setAvailableTenures([])
+              
+              // Clear field errors for plan and dependent fields
+              setFieldErrors(prev => ({
+                ...prev,
+                PlanCode: false,
+                Age: false,
+                Term: false
+              }))
             }
           }}
         >
-          <SelectTrigger className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
+          <SelectTrigger className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+            fieldErrors.PlanCode ? 'border-red-500 border-2' : ''
+          }`}>
             <SelectValue placeholder="Select Your Plan *" />
           </SelectTrigger>
           <SelectContent>
@@ -342,7 +406,9 @@ function QuoteForm() {
           placeholder="Age *"
           value={formData.Age || ''}
           onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
-          className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+          className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+            fieldErrors.Age ? 'border-red-500 border-2' : ''
+          }`}
         />
       </div>
       {/* select your tenure */}
@@ -366,7 +432,7 @@ function QuoteForm() {
               availableTenures.length === 0
                 ? 'opacity-50 cursor-not-allowed'
                 : ''
-            }`}
+            } ${fieldErrors.Term ? 'border-red-500 border-2' : ''}`}
           >
             <SelectValue
               placeholder={
@@ -417,7 +483,9 @@ function QuoteForm() {
             }
           }}
         >
-          <SelectTrigger className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
+          <SelectTrigger className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+            fieldErrors.Gender ? 'border-red-500 border-2' : ''
+          }`}>
             <SelectValue placeholder="Select Your Gender *" />
           </SelectTrigger>
           <SelectContent>
@@ -451,7 +519,9 @@ function QuoteForm() {
           placeholder="Sum Assured *"
           value={formData.SumAssured || ''}
           onChange={(e) => handleInputChange('SumAssured', parseInt(e.target.value) || 0)}
-          className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+          className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+            fieldErrors.SumAssured ? 'border-red-500 border-2' : ''
+          }`}
         />
         <p className="text-[10px] py-2 absolute inset-x-0">
           Suggested BDT <span className="text-[#FF6600]">1,00,000</span>
@@ -477,7 +547,9 @@ function QuoteForm() {
             }
           }}
         >
-          <SelectTrigger className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
+          <SelectTrigger className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+            fieldErrors.PaymentMode ? 'border-red-500 border-2' : ''
+          }`}>
             <SelectValue placeholder="Select Your Payment Method *" />
           </SelectTrigger>
           <SelectContent>
@@ -503,7 +575,9 @@ function QuoteForm() {
             }
           }}
         >
-          <SelectTrigger className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
+          <SelectTrigger className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+            fieldErrors.AccidentRider ? 'border-red-500 border-2' : ''
+          }`}>
             <SelectValue placeholder="Accident Rider *" />
           </SelectTrigger>
           <SelectContent>
@@ -529,7 +603,9 @@ function QuoteForm() {
             }
           }}
         >
-          <SelectTrigger className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
+          <SelectTrigger className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+            fieldErrors.CriticalRider ? 'border-red-500 border-2' : ''
+          }`}>
             <SelectValue placeholder="Critical Protection *" />
           </SelectTrigger>
           <SelectContent>
