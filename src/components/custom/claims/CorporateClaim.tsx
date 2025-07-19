@@ -5,45 +5,34 @@ export function CorporateClaim() {
   return (
     <>
       <div>
-        <div className={``}>
+        <div className={`space-y-4 md:space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12`}>
           <div
             className={`
            flex mx-auto mt-12`}
           >
             <div className="flex mx-auto">
               <Link href="https://shantalife.com/claim.php">
-                <GlobalButton variant="primary" className="" text="Submit Claim" />
+                <GlobalButton variant="secondary" className="" text="Submit Claim" size="small" />
               </Link>
             </div>
           </div>
           <div
             className={`
-           flex mx-auto mt-12`}
+           flex mx-auto`}
           >
-            <div className="mx-auto text-[20px]">
-              Click on submit claim to submit your claim online. We humbly request you to attach all
-              necessary documents.
+            <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-1/2 text-center mx-auto text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
+              <p>Click on submit claim to submit your claim online.</p>
+              <p>We humbly request you to attach all necessary documents.</p>
             </div>
           </div>
           <div
             className={`
-           flex mt-12`}
+           flex`}
           >
-            <div className="mx-auto text-[20px] w-1/2">
-              For any further queries please contact.
+            <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-1/2 text-center mx-auto text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
               <ContactComponent />
             </div>
           </div>
-          {/* <div className="mx-auto">
-            <div className="text-[20px]">
-
-              For any further queries please contact.
-
-              <Link href="https://shantalife.com/claim.php">
-                <GlobalButton variant="primary" className="" text="Lets Find More" />
-              </Link>
-            </div>
-          </div> */}
         </div>
       </div>
     </>

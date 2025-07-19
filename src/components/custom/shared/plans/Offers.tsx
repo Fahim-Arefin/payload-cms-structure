@@ -111,7 +111,11 @@ function Offers<T>({ data, subheading, cardComponent: CardComponent }: Props<T>)
   }, [carouselApi])
 
   return (
-    <div className="container-padding min-h-[440px] md:min-h-[550px] space-y-6 md:space-y-12 lg:space-y-20 xl:space-y-24 bg-[#F6EDDD]">
+    <div className="px-5 py-12 
+           md:p-24 
+           lg:px-[100px]  lg:py-[100px] 
+           xl:px-[200px]  xl:py-[100px] 
+           2xl:px-[300px] 2xl:py-[150px] min-h-[440px] md:min-h-[550px] space-y-6 md:space-y-12 lg:space-y-20 xl:space-y-24 bg-[#F6EDDD]">
       <div className="space-y-4">
         <div className="flex space-x-2">
           <h3 className="global-h1 uppercase font-medium text-[#434343]">We</h3>

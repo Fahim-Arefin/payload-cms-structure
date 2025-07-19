@@ -60,6 +60,15 @@ export type AllPlantDataType = {
   videoLink?: string
 }
 
+export type PurchaseCardDataType = {
+  title: string
+  biggerTitle?: string
+  description: string
+  link?: string
+  image: string
+  videoLink?: string
+}
+
 export type PlanInfoDataType = {
   image: string
   description: string
@@ -155,6 +164,9 @@ export type CareerCard = {
 }
 
 export type ProtectionDataType = {
+  title: string
+  subTitle: string
+  smallTitle: string
   bgImage: string
   item: {
     image: string
@@ -187,6 +199,7 @@ export type Leaders = {
 }
 
 export type AllNewsAndBlogDataType = {
+  id: number
   image: string
   title: string
   description: string

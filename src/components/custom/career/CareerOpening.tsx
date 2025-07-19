@@ -34,7 +34,7 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
   }, [carouselApi])
 
   return (
-    <section className="container-padding w-full bg-[#F6EDDD] py-12">
+    <section id="career-opening-section" className="container-padding w-full bg-[#F6EDDD] py-12">
       <div className="mb-8 lg:mb-10">
         <div>
           <span className="block text-[#343434] font-light text-[18px] md:text-[22px] xl:text-[24px]">

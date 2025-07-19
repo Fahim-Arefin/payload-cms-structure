@@ -2,6 +2,7 @@ import { ProtectionDataType } from '@/types'
 import React from 'react'
 import GlobalButton from '../GlobalButton'
 import ToolTip from '../ToolTip'
+import Link from 'next/link'
 
 type Props = {
   bgColor?: string
@@ -55,11 +56,14 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
           {/* heading */}
           <div>
             <h3 className="global-p1 md:global-h4 lg:global-p1 text-[#3A3A3A] uppercase font-light">
-              Critical
+              {data?.title}
             </h3>
             <div className="flex space-x-1">
-              <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">Protection - </h1>
-              <h1 className="global-h1 uppercase text-[#ED7125] font-medium">Classic</h1>
+              <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">{data?.subTitle}</h1>
+              <h1 className="global-h1 uppercase text-[#ED7125] font-medium">
+                {' '}
+                {data?.smallTitle}
+              </h1>
             </div>
           </div>
           {/* items */}
@@ -84,14 +88,22 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
             </div>
           ))}
           {/* button */}
-          <div className="flex justify-center lg:justify-start">
-            <ToolTip>
+          <div className="flex gap-4 lg:gap-6 justify-center lg:justify-start">
+            {/* <ToolTip> */}
+            <Link href="/premium-calculator">
               <GlobalButton
                 variant="primary"
                 text="Calculate Premium"
-                className="cursor-not-allowed"
+                // className="cursor-not-allowed"
               />
-            </ToolTip>
+            </Link>
+            <GlobalButton
+              variant="outline"
+              className=" text-[#9C8639] cursor-not-allowed hover:text-[#9C8638] border-2 border-[#9C8639]"
+              text="Download Brochure"
+              // className="cursor-not-allowed"
+            />
+            {/* </ToolTip> */}
           </div>
         </div>
       </div>

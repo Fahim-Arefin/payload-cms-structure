@@ -1,8 +1,105 @@
+'use client'
 import { Input } from '@/components/ui/input'
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { CiSearch } from 'react-icons/ci'
+import { useRouter } from 'next/navigation'
+
+const searchSuggestions = [
+  {
+    label: 'Shanta Multi-Stage Maturity Plan',
+    url: '/plans/individual/saving-and-investment/multistage',
+  },
+  {
+    label: 'Shanta Saving and Investment Endownment Plans',
+    url: '/plans/individual/saving-and-investment/endowment',
+  },
+  {
+    label: 'Shanta Accidental Covarage',
+    url: '/plans/individual/health-and-protection/accidental-coverage',
+  },
+  {
+    label: 'Shanta Critical Ilness Covarage',
+    url: '/plans/individual/health-and-protection/critical-illness-coverage',
+  },
+  { label: 'Shanta Child Education', url: '/plans/individual/child-education' },
+  { label: 'Premium Calculator', url: '/premium-calculator' },
+  { label: 'Shanta Corporate Plans', url: '/plans/corporate' },
+  // { label: 'Financial Planning', url: '/financial-planning' },
+  // { label: 'SIP Calculator', url: '/calculators/sip' },
+  // { label: 'Risk Assessment', url: '/risk-assessment' },
+  // { label: 'Market Insights', url: '/insights' },
+  { label: 'Contact Us', url: '/support' },
+]
 
 function SearchBarSection() {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filteredSuggestions, setFilteredSuggestions] = useState<typeof searchSuggestions>([])
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  const [activeSuggestion, setActiveSuggestion] = useState(-1)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const suggestionsRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        suggestionsRef.current &&
+        !suggestionsRef.current.contains(event.target as Node) &&
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
+        setShowSuggestions(false)
+        setActiveSuggestion(-1)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setSearchTerm(value)
+
+    if (value.trim()) {
+      const filtered = searchSuggestions.filter((suggestion) =>
+        suggestion.label.toLowerCase().includes(value.toLowerCase()),
+      )
+      setFilteredSuggestions(filtered)
+      setShowSuggestions(true)
+    } else {
+      setShowSuggestions(false)
+    }
+    setActiveSuggestion(-1)
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!showSuggestions || filteredSuggestions.length === 0) return
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setActiveSuggestion((prev) => (prev < filteredSuggestions.length - 1 ? prev + 1 : 0))
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setActiveSuggestion((prev) => (prev > 0 ? prev - 1 : filteredSuggestions.length - 1))
+    } else if (e.key === 'Enter') {
+      e.preventDefault()
+      if (activeSuggestion >= 0) {
+        handleSuggestionClick(filteredSuggestions[activeSuggestion])
+      }
+    } else if (e.key === 'Escape') {
+      setShowSuggestions(false)
+      setActiveSuggestion(-1)
+      inputRef.current?.blur()
+    }
+  }
+
+  const handleSuggestionClick = (suggestion: (typeof searchSuggestions)[0]) => {
+    setSearchTerm(suggestion.label)
+    setShowSuggestions(false)
+    setActiveSuggestion(-1)
+    router.push(suggestion.url)
+  }
+
   return (
     <div
       className="z-40 flex justify-center items-center bg-white
@@ -15,7 +112,11 @@ function SearchBarSection() {
         // style={{ boxShadow: '0px 0px 13px 6px #00000014' }}
       >
         <Input
+          ref={inputRef}
           type="text"
+          value={searchTerm}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           placeholder="Try shanta multi-stage maturity plan"
           className="w-full rounded-xl md:rounded-md bg-white text-[#000000] placeholder:text-[#00000040] 
           placeholder:text-xs sm:placeholder:text-sm tracking-[0.03em] py-4 px-5 sm:py-5 sm:px-12 
@@ -25,6 +126,29 @@ function SearchBarSection() {
         <div className="hidden md:block absolute right-5 sm:right-10 top-1/2 -translate-y-1/2">
           <CiSearch size={28} />
         </div>
+
+        {showSuggestions && filteredSuggestions.length > 0 && (
+          <div
+            ref={suggestionsRef}
+            className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto"
+          >
+            {filteredSuggestions.map((suggestion, index) => (
+              <div
+                key={suggestion.url}
+                className={`px-4 py-3 cursor-pointer hover:bg-gray-50 border-b border-gray-100 last:border-b-0 ${
+                  index === activeSuggestion ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
+                }`}
+                onClick={() => handleSuggestionClick(suggestion)}
+                onMouseEnter={() => setActiveSuggestion(index)}
+              >
+                <div className="flex items-center gap-2">
+                  <CiSearch size={16} className="text-gray-400" />
+                  <span className="text-sm font-medium">{suggestion.label}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

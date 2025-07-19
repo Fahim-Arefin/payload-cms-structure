@@ -8,13 +8,15 @@ type Props = {}
 function AllNewsSection({}: Props) {
   const allNewsData: AllNewsAndBlogDataType[] = [
     {
+      id: 1,
       image: '/assets/newsandblog1.jpg',
       date: 'Jul 17, 2025',
-      title: 'Why is Insurance important?',
+      title: 'Shanta Life to Hold Conference Call for Second Quarter 2025 Results',
       description:
         'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset you!',
     },
     {
+      id: 2,
       image: '/assets/newsandblog2.jpg',
       date: 'Jul 17, 2025',
       title: 'How Insurance can help you to keep your loved ones safe?',
@@ -22,6 +24,7 @@ function AllNewsSection({}: Props) {
         'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset you!',
     },
     {
+      id: 3,
       image: '/assets/newsandblog3.jpg',
       date: 'Jul 17, 2025',
       title: 'How you can be benefited by Santa Life insurance?',
@@ -29,6 +32,7 @@ function AllNewsSection({}: Props) {
         'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset you!',
     },
     {
+      id: 4,
       image: '/assets/newsandblog4.jpg',
       date: 'Jul 17, 2025',
       title: 'Why is Insurance important?',

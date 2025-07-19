@@ -7,9 +7,9 @@ import OffersClientWrapper from '@/components/custom/shared/plans/OffersClientWr
 function page() {
   const heroSlides = [
     {
-      title: '',
-      subtitle: 'Shanta Accidental Coverage',
-      description: '',
+      title: 'Shanta Accidental Coverage',
+      subtitle: '',
+      description: `We're here to be your grounded force because a stumble should never steal your stride.`,
       image: '/assets/banner10.jpg',
     },
   ]
@@ -74,8 +74,8 @@ function page() {
     <div className="font-avenir bg-white">
       <HeroSection
         heroSlides={heroSlides}
-        height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[578px] "
-        top=" top-[150px] md:top-[200px] lg:top-[63%] "
+        // height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[578px] "
+        top=" top-[150px] md:top-[200px] lg:top-[63%]"
       />
       <PlanInfoSection data={planInfoData} />
       <OffersClientWrapper
