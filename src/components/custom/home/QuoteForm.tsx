@@ -43,11 +43,10 @@ interface ApiResponse {
 }
 
 interface QuoteFormProps {
-  onApiResponse?: (response: ApiResponse) => void
-  onPaymentModeChange?: (paymentMode: string) => void
+  onApiResponse?: (response: ApiResponse, paymentMode: string) => void
 }
 
-function QuoteForm({ onApiResponse, onPaymentModeChange }: QuoteFormProps = {}) {
+function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [formData, setFormData] = useState<FormData>({
     PlanCode: 0,
@@ -86,6 +85,7 @@ function QuoteForm({ onApiResponse, onPaymentModeChange }: QuoteFormProps = {}) 
     CriticalRider: false,
     Gender: false
   })
+  const [currentPaymentMode, setCurrentPaymentMode] = useState<string>('')
 
   const plans = [
     {
@@ -261,9 +261,9 @@ function QuoteForm({ onApiResponse, onPaymentModeChange }: QuoteFormProps = {}) 
       const data: ApiResponse[] = await response.json()
       if (data && data.length > 0) {
         setApiResponse(data[0])
-        // Notify parent component about the API response
+        // Notify parent component about the API response with current payment mode
         if (onApiResponse) {
-          onApiResponse(data[0])
+          onApiResponse(data[0], currentPaymentMode)
         }
       }
     } catch (err) {
@@ -556,10 +556,7 @@ function QuoteForm({ onApiResponse, onPaymentModeChange }: QuoteFormProps = {}) 
             const method = paymentMethods.find((pm) => pm.text === v)
             if (method) {
               handleInputChange('PaymentMode', method.value)
-              // Notify parent component about payment mode change
-              if (onPaymentModeChange) {
-                onPaymentModeChange(method.text)
-              }
+              setCurrentPaymentMode(method.text)
             }
           }}
         >
@@ -644,44 +641,6 @@ function QuoteForm({ onApiResponse, onPaymentModeChange }: QuoteFormProps = {}) 
         </div>
       )}
 
-      {/* API Response display */}
-      {apiResponse && (
-        <div className="col-span-2 p-4 bg-green-50 border border-green-200 rounded-lg">
-          <h3 className="font-semibold text-green-800 mb-3">Premium Calculation Results</h3>
-          <div className="grid grid-cols-2 gap-4 text-sm">
-            <div>
-              <span className="text-gray-600">Life Premium:</span>
-              <span className="font-medium ml-2">৳{apiResponse.life_premium.toLocaleString()}</span>
-            </div>
-            <div>
-              <span className="text-gray-600">Accident Premium:</span>
-              <span className="font-medium ml-2">
-                ৳{apiResponse.accident_premium.toLocaleString()}
-              </span>
-            </div>
-            <div>
-              <span className="text-gray-600">CI Premium:</span>
-              <span className="font-medium ml-2">৳{apiResponse.ci_premium.toLocaleString()}</span>
-            </div>
-            <div className="col-span-2 pt-2 border-t">
-              <span className="text-gray-600">Total Premium:</span>
-              <span className="font-bold text-lg ml-2 text-green-700">
-                ৳{apiResponse.total_premium.toLocaleString()}
-              </span>
-            </div>
-            <div>
-              <span className="text-gray-600">Accidental Coverage:</span>
-              <span className="font-medium ml-2">
-                ৳{apiResponse.accidental_coverage.toLocaleString()}
-              </span>
-            </div>
-            <div>
-              <span className="text-gray-600">CI Coverage:</span>
-              <span className="font-medium ml-2">৳{apiResponse.ci_coverage.toLocaleString()}</span>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* submit button */}
       <div className="col-span-2">
