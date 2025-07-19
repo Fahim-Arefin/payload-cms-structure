@@ -59,7 +59,7 @@ function QuoteForm() {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [availableTenures, setAvailableTenures] = useState<{text: string, value: number}[]>([])
+  const [availableTenures, setAvailableTenures] = useState<{ text: string; value: number }[]>([])
   const [isLoadingTenures, setIsLoadingTenures] = useState(false)
   const [tenureError, setTenureError] = useState<string | null>(null)
 
@@ -137,31 +137,47 @@ function QuoteForm() {
 
     setIsLoadingTenures(true)
     setTenureError(null)
-    
+
     try {
       const response = await fetch(`/api/plan/${planCode}/${age}`)
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch tenure options')
       }
-      
+
       const data = await response.json()
-      
-      // Assuming the API returns an array of valid terms
-      if (data && Array.isArray(data)) {
-        const tenureOptions = data.map((term: any) => ({
-          text: `${term} years`,
-          value: term
-        }))
-        setAvailableTenures(tenureOptions)
-      } else if (data && data.terms && Array.isArray(data.terms)) {
-        // Alternative response structure
-        const tenureOptions = data.terms.map((term: any) => ({
-          text: `${term} years`, 
-          value: term
-        }))
-        setAvailableTenures(tenureOptions)
+      console.log('check data', data)
+
+      // The API returns an object with a 'term' property containing a JSON string
+      if (data && data[0]?.term) {
+        try {
+          // Parse the JSON string to get the array of term objects
+          const termArray = JSON.parse(data[0].term)
+          if (Array.isArray(termArray)) {
+            const tenureOptions = termArray.map((termObj: any) => {
+              console.log('termObj structure:', termObj)
+              console.log('termObj.term value:', termObj.term)
+              console.log('typeof termObj.term:', typeof termObj.term)
+
+              const termValue = termObj.term
+              console.log('test the term 3', termValue)
+              return {
+                text: `${termValue} years`,
+                value: Number(termValue),
+              }
+            })
+            console.log('Final tenureOptions:', tenureOptions)
+            setAvailableTenures(tenureOptions)
+          } else {
+            console.log('Parsed term is not an array:', termArray)
+            setAvailableTenures([])
+          }
+        } catch (parseError) {
+          console.error('Failed to parse term JSON:', parseError)
+          setAvailableTenures([])
+        }
       } else {
+        console.log('Unexpected API response format:', data)
         setAvailableTenures([])
       }
     } catch (err) {
@@ -177,7 +193,7 @@ function QuoteForm() {
     if (formData.PlanCode && formData.Age) {
       fetchTenureOptions(formData.PlanCode, formData.Age)
       // Reset selected term when plan or age changes
-      setFormData(prev => ({ ...prev, Term: 0 }))
+      setFormData((prev) => ({ ...prev, Term: 0 }))
     }
   }, [formData.PlanCode, formData.Age])
 
@@ -320,45 +336,49 @@ function QuoteForm() {
             }
           }}
         >
-          <SelectTrigger 
+          <SelectTrigger
             className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-              isLoadingTenures || !formData.PlanCode || !formData.Age 
-                ? 'opacity-50 cursor-not-allowed' 
+              isLoadingTenures || !formData.PlanCode || !formData.Age
+                ? 'opacity-50 cursor-not-allowed'
                 : ''
             }`}
           >
-            <SelectValue 
+            <SelectValue
               placeholder={
-                isLoadingTenures 
-                  ? "Loading tenure options..." 
-                  : !formData.PlanCode || !formData.Age 
-                    ? "Select plan and age first" 
-                    : availableTenures.length === 0 
-                      ? "No tenure options available"
-                      : "Select Your Tenure *"
-              } 
+                isLoadingTenures
+                  ? 'Loading tenure options...'
+                  : !formData.PlanCode || !formData.Age
+                    ? 'Select plan and age first'
+                    : availableTenures.length === 0
+                      ? 'No tenure options available'
+                      : 'Select Your Tenure *'
+              }
             />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Tenure</SelectLabel>
-              {availableTenures.map((tenure) => (
-                <SelectItem key={tenure.text} value={tenure.text}>
-                  {tenure.text}
-                </SelectItem>
-              ))}
-              {availableTenures.length === 0 && !isLoadingTenures && formData.PlanCode && formData.Age && (
-                <SelectItem disabled value="no-options">
-                  No tenure options available for this plan and age
-                </SelectItem>
-              )}
+              {availableTenures.map((tenure) => {
+                console.log('Rendering tenure option:', tenure)
+                return (
+                  <SelectItem key={tenure.value} value={tenure.text}>
+                    {tenure.text}
+                  </SelectItem>
+                )
+              })}
+              {availableTenures.length === 0 &&
+                !isLoadingTenures &&
+                formData.PlanCode &&
+                formData.Age && (
+                  <SelectItem disabled value="no-options">
+                    No tenure options available for this plan and age
+                  </SelectItem>
+                )}
             </SelectGroup>
           </SelectContent>
         </Select>
         {tenureError && (
-          <p className="text-[10px] py-1 text-red-600 absolute inset-x-0">
-            {tenureError}
-          </p>
+          <p className="text-[10px] py-1 text-red-600 absolute inset-x-0">{tenureError}</p>
         )}
       </div>
       {/* age input */}
