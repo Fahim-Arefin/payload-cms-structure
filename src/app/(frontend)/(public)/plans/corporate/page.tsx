@@ -76,22 +76,26 @@ function page({}: Props) {
   ]
 
   const partnerData = [
+    { img: '/assets/valued-clients/client1.png', title: 'Shanta Holdings Limited' },
+    { img: '/assets/valued-clients/client2.jpg', title: 'Shanta Multiverse Limited' },
+    { img: '/assets/valued-clients/client3.png', title: 'Shanta Lifestyle Limited' },
+    { img: '/assets/valued-clients/client4.png', title: 'Amari Dhaka' },
     {
-      img: '/assets/partner1.png',
-      title: 'GOLDEN HARVEST',
+      img: '/assets/valued-clients/client5.jpg',
+      title: 'Hohenstein Laboratories Bangladesh Limited',
     },
-    {
-      img: '/assets/partner2.png',
-      title: 'PARTEX STAR GROUP',
-    },
-    {
-      img: '/assets/partner3.png',
-      title: 'AMERICAN & EFRID, INC',
-    },
-    {
-      img: '/assets/partner4.png',
-      title: 'GE HEALTHCARE',
-    },
+    { img: '/assets/valued-clients/client6.png', title: 'Eskimi Bangladesh' },
+    { img: '/assets/valued-clients/client7.jpg', title: 'Strategic Equity Management' },
+    { img: '/assets/valued-clients/client8.png', title: 'STS Capital Limited' },
+    { img: '/assets/valued-clients/client9.png', title: 'Golden Sky Footwear' },
+    { img: '/assets/valued-clients/client10.png', title: 'Blucheez Fashion' },
+    { img: '/assets/valued-clients/client11.jpg', title: 'Eduko Bangladesh' },
+    { img: '/assets/valued-clients/client12.png', title: 'Glenrich International School' },
+    { img: '/assets/valued-clients/client13.png', title: 'Bengal Airlift Limited' },
+    { img: '/assets/valued-clients/client14.jpg', title: 'Ace Bangladesh Limited' },
+    { img: '/assets/valued-clients/client15.png', title: 'FitsAir' },
+    { img: '/assets/valued-clients/client16.jpg', title: 'Air Alliance Ltd. (SP)' },
+    { img: '/assets/valued-clients/client17.png', title: 'Speedmark Transportation (BD) Limited' },
   ]
 
   const addOnsData = [
