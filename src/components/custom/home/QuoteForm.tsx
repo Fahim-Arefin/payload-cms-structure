@@ -87,6 +87,17 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   })
   const [currentPaymentMode, setCurrentPaymentMode] = useState<string>('')
 
+  // Calculate suggested sum assured based on tenure and annual income
+  const calculateSuggestedAmount = () => {
+    if (formData.Term && formData.annualIncome) {
+      const calculated = formData.Term * formData.annualIncome * 0.1
+      return Math.max(calculated, 100000)
+    }
+    return 100000
+  }
+
+  const suggestedAmount = calculateSuggestedAmount()
+
   const plans = [
     {
       text: 'Shanta Child Education Plan',
@@ -536,7 +547,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           }`}
         />
         <p className="text-[10px] py-2 absolute inset-x-0">
-          Suggested BDT <span className="text-[#FF6600]">1,00,000</span>
+          Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
         </p>
       </div>
       {/* phone number input */}
