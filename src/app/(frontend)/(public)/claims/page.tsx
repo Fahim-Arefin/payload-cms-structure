@@ -1,10 +1,7 @@
-// import ChildEducationPlan from '@/components/custom/child-education/ChildEducationPlan'
-// import { ChildEducationTabs } from '@/components/custom/child-education/ChildEducationTabs'
 import { ClaimTabs } from '@/components/custom/claims/ClaimTabs'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 type pageProps = {}
 
@@ -14,7 +11,7 @@ const page: FC<pageProps> = ({}) => {
       title: 'Claim',
       subtitle: '',
       description:
-        'Powering your protection starts here. Flexible Premium Payment options so we can ensure your protection coverage. ',
+        'Powering your protection starts here. Flexible Premium Payment options so we can ensure your protection coverage.',
       image: '/assets/claims.jpg',
     },
   ]
@@ -28,10 +25,6 @@ const page: FC<pageProps> = ({}) => {
       value: 'corporate',
       label: 'Corporate Claim',
     },
-    // {
-    //   value: 'benefits',
-    //   label: 'Additional Benefits',
-    // },
   ]
 
   const tabContent = [
@@ -121,9 +114,11 @@ const page: FC<pageProps> = ({}) => {
 
   return (
     <div className="font-avenir bg-white">
-      <HeroSection heroSlides={heroSlides} />
-      {/* <ChildEducationPlan bgColor="#FCF4EB" data={childInfoData} /> */}
-      {/* <PlanInfoSection bgColor="#FCF4EB" data={childInfoData} /> */}
+      <HeroSection
+        heroSlides={heroSlides}
+        height=" h-[252px] md:h-[352px] lg:h-[470px] xl:h-[570px] 2xl:h-[670px] "
+        top=" top-[100px] md:top-[150px] lg:top-[43%]"
+      />
       <ClaimTabs data={tabContent} config={tabItems} />
       <ContactUsSection />
     </div>
