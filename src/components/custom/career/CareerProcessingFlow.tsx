@@ -67,8 +67,8 @@ export default function CareerProcessingFlow() {
                 key={i}
                 className={`
                   flex flex-col items-center justify-start px-2
-                  w-[85vw] sm:w-[56vw] md:w-[39vw] xl:w-[260px] 2xl:w-[230px]
-                  max-w-[340px] md:max-w-[320px] xl:max-w-[220px] 2xl:max-w-[270px]
+                  w-[85vw] sm:w-[56vw] md:w-[35vw] lg:w-[100vw] xl:w-[260px] 2xl:w-[230px]
+                  max-w-[340px] md:max-w-fit lg:max-w-fit xl:max-w-fit 2xl:max-w-[270px]
                 `}
               >
                 {/* Top line & numbers */}

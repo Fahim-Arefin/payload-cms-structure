@@ -8,7 +8,7 @@ function PlanPage() {
     {
       title: 'Health & Protection',
       subtitle: '',
-      description: '',
+      description: 'Preventive care meets powerful protection. Let us be your financial shield you can count on. ',
       image: '/assets/healthandprotection1.jpg',
       titleTop: '60%',
     },
@@ -18,14 +18,14 @@ function PlanPage() {
     {
       title: 'Shanta',
       biggerTitle: 'Accidental Coverage',
-      description: 'Why blend in when your coverage can stand out?',
+      description: 'Life’s detours aren’t always in your control — but recovery can be.',
       link: '/plans/individual/health-and-protection/accidental-coverage',
       image: '/assets/healthandprotection2.jpg',
     },
     {
       title: 'Shanta',
-      biggerTitle: 'Critical Illness Coverage',
-      description: 'Why blend in when your coverage can stand out?',
+      biggerTitle: 'Critical Protection',
+      description: 'Coverage to help you heal- financially and fearlessly.',
       link: '/plans/individual/health-and-protection/critical-illness-coverage',
       image: '/assets/healthandprotection3.jpg',
     },
