@@ -36,14 +36,14 @@ function ContactUsSection() {
       lg:left-12
       xl:left-20
       2xl:left-28
-      h-[70%] xl:h-[70%] 2xl:h-[489px] 2xl:w-[950px]"
+      h-[70%] xl:h-[70%] 2xl:h-[489px] 2xl:w-[900px]"
       >
         <img src="/assets/askUsImage.png" alt="" className="h-full w-full" />
       </div>
 
       {/* message arrow img  */}
       <div
-        className="hidden lg:block absolute lg:bottom-20 xl:bottom-28 2xl:bottom-32 inset-x-0 left-[36%] 
+        className="hidden lg:block absolute lg:bottom-10 xl:bottom-20 2xl:bottom-28 inset-x-0 left-[36%] 
              w-[200px] md:w-[250px] lg:w-[250px] xl:w-[300px] 2xl:w-[460px]
              rotate-[20.397deg] z-10"
       >

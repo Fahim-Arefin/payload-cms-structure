@@ -17,7 +17,7 @@ function page() {
       subtitle: 'Designed for Life',
       description:
         'At Shanta Life Insurance, our values aren’t just feel-good words — they’re the GPS guiding every decision, every smile, and every ‘we’ve got you covered’ moment.',
-      image: '/assets/banner3.png',
+      image: '/assets/aboutUsBanner.jpg',
     },
     // {
     //   title: 'Building Better Futures',

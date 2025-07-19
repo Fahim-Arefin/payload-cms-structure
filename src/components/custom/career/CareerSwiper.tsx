@@ -17,20 +17,20 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
   const [canScrollNext, setCanScrollNext] = useState(false)
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
 
-useEffect(() => {
-  if (!carouselApi) return
-  if (hoveredIdx !== null) return // Pause autoplay when hovering
+  useEffect(() => {
+    if (!carouselApi) return
+    if (hoveredIdx !== null) return // Pause autoplay when hovering
 
-  const interval = setInterval(() => {
-    if (carouselApi.canScrollNext()) {
-      carouselApi.scrollNext()
-    } else {
-      carouselApi.scrollTo(0) // Loop back to first slide
-    }
-  }, 3500)
+    const interval = setInterval(() => {
+      if (carouselApi.canScrollNext()) {
+        carouselApi.scrollNext()
+      } else {
+        carouselApi.scrollTo(0) // Loop back to first slide
+      }
+    }, 3500)
 
-  return () => clearInterval(interval)
-}, [carouselApi, hoveredIdx])
+    return () => clearInterval(interval)
+  }, [carouselApi, hoveredIdx])
 
   useEffect(() => {
     if (!carouselApi) return
@@ -71,7 +71,7 @@ useEffect(() => {
           <Carousel
             opts={{
               align: 'start',
-              loop: true
+              loop: true,
             }}
             setApi={setCarouselApi}
             className="w-full"
@@ -91,7 +91,7 @@ useEffect(() => {
                 >
                   <div
                     className={cn(
-                      'flex flex-col w-[250px] md:w-[338px] 2xl:w-[380px] justify-between items-center rounded-[6px] md:rounded-[18px] border-[0.5px] md:border border-[#FFFFFF] bg-[#0000004D] backdrop-blur-[7.5px] text-center px-6 transition-all duration-300',
+                      'flex flex-col w-[250px] md:w-[338px] 2xl:w-[380px] justify-between items-center rounded-[6px] md:rounded-[18px] border-[0.5px] md:border border-[#FFFFFF] bg-[#0000004D] backdrop-blur-[7.5px] text-center px-6 transition-all duration-500',
                       idx % 2 === 1
                         ? 'h-[150px] md:h-[346px] lg:h-[346px]'
                         : 'h-[150px] md:h-[346px] lg:h-[346px]',
@@ -103,6 +103,10 @@ useEffect(() => {
                         : idx % 2 === 1
                           ? 'h-[150px] md:h-[346px] lg:h-[346px]'
                           : 'h-[150px] md:h-[346px] lg:h-[346px]',
+                      // **Width logic**
+                      hoveredIdx === idx
+                        ? 'w-[275px] md:w-[370px] 2xl:w-[410px]'
+                        : 'w-[250px] md:w-[338px] 2xl:w-[380px]',
                     )}
                   >
                     <div className="flex-1 flex flex-col gap-4 md:gap-8 justify-center">
