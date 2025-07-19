@@ -78,7 +78,7 @@ export default function Navbar() {
     { href: '/pay-premium', label: 'Pay Premium' },
     { href: '/claims', label: 'Claims' },
     { href: '/support', label: 'Support' },
-    { href: '#', label: 'Purchase Now' },
+    { href: '/purchase-now', label: 'Purchase Now' },
   ]
 
   const isActive = (href?: string) => {
@@ -201,44 +201,53 @@ export default function Navbar() {
 
         {/* Desktop Right Icons */}
 
-        <ToolTip className="hidden lg:flex items-center space-x-2 xl:space-x-4 2xl:space-x-8 text-[#1F1F1F]">
-          {/* <div className="hidden lg:flex items-center space-x-2 xl:space-x-4 2xl:space-x-8 text-[#1F1F1F]"> */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="cursor-not-allowed"
+        <div className="hidden lg:flex items-center space-x-2 xl:space-x-4 2xl:space-x-8 text-[#1F1F1F]">
+          {/* SVG as link */}
+          <a
+            href="https://portal.shantalife.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+            aria-label="Go to ShantaLife Portal"
           >
-            <path
-              d="M12 15C15.3137 15 18 12.3137 18 9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9C6 12.3137 8.68629 15 12 15Z"
-              stroke="#061C3D"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="cursor-pointer"
+            >
+              <path
+                d="M12 15C15.3137 15 18 12.3137 18 9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9C6 12.3137 8.68629 15 12 15Z"
+                stroke="#061C3D"
+                strokeWidth="1.5"
+                strokeMiterlimit="10"
+              />
+              <path
+                d="M2.90527 20.2491C3.82736 18.6531 5.15322 17.3278 6.74966 16.4064C8.34611 15.485 10.1569 15 12.0002 15C13.8434 15 15.6542 15.4851 17.2506 16.4065C18.8471 17.3279 20.1729 18.6533 21.0949 20.2493"
+                stroke="#061C3D"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+          <ToolTip>
+            <svg
+              width="22"
+              height="22"
+              fill="none"
+              stroke="currentColor"
               strokeWidth="1.5"
-              strokeMiterlimit="10"
-            />
-            <path
-              d="M2.90527 20.2491C3.82736 18.6531 5.15322 17.3278 6.74966 16.4064C8.34611 15.485 10.1569 15 12.0002 15C13.8434 15 15.6542 15.4851 17.2506 16.4065C18.8471 17.3279 20.1729 18.6533 21.0949 20.2493"
-              stroke="#061C3D"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <svg
-            width="22"
-            height="22"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            viewBox="0 0 24 24"
-            className="cursor-not-allowed"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          {/* </div> */}
-        </ToolTip>
+              viewBox="0 0 24 24"
+              className="cursor-not-allowed"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </ToolTip>
+        </div>
       </nav>
 
       {/* Mobile Slide-In Menu */}

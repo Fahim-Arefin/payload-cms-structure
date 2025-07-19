@@ -1,8 +1,10 @@
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
 import OffersClientWrapper from '@/components/custom/shared/plans/OffersClientWrapper'
 import ProtectionSection from '@/components/custom/shared/plans/ProtectionSection'
+import ToolTip from '@/components/custom/shared/ToolTip'
 import React from 'react'
 
 function page() {
@@ -75,7 +77,7 @@ function page() {
   ]
 
   const protectionData = {
-     title: 'Critical',
+    title: 'Critical',
     subTitle: 'Protection - ',
     smallTitle: 'Classic',
     bgImage: '/assets/protectionbg1.jpg',
@@ -129,8 +131,25 @@ function page() {
       <HeroSection
         heroSlides={heroSlides}
         // height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[578px] "
-        top=" top-[150px] md:top-[200px] lg:top-[63%]"
-      />
+        // top=" top-[150px] md:top-[200px] lg:top-[63%]"
+      >
+        <div
+          className="absolute top-[205px] md:top-[305px] lg:top-[400px] xl:top-[420px]  2xl:top-[630px] 
+          inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
+       hero-content-width
+        flex justify-left space-x-4 md:space-x-6 lg:justify-start
+        "
+        >
+          <ToolTip>
+            <GlobalButton
+              size="large"
+              className="cursor-not-allowed"
+              text="Download Brochure"
+              variant="primary"
+            />
+          </ToolTip>
+        </div>
+      </HeroSection>
       <PlanInfoSection data={planInfoData} />
       <OffersClientWrapper
         data={offersData}

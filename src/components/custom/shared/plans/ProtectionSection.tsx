@@ -88,15 +88,21 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
             </div>
           ))}
           {/* button */}
-          <div className="flex justify-center lg:justify-start">
+          <div className="flex gap-4 lg:gap-6 justify-center lg:justify-start">
             {/* <ToolTip> */}
-            <Link href='/premium-calculator'>
+            <Link href="/premium-calculator">
               <GlobalButton
                 variant="primary"
                 text="Calculate Premium"
                 // className="cursor-not-allowed"
-                />
-                </Link>
+              />
+            </Link>
+            <GlobalButton
+              variant="outline"
+              className=" text-[#9C8639] cursor-not-allowed hover:text-[#9C8638] border-2 border-[#9C8639]"
+              text="Download Brochure"
+              // className="cursor-not-allowed"
+            />
             {/* </ToolTip> */}
           </div>
         </div>

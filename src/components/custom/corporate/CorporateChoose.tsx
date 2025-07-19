@@ -22,7 +22,7 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
            2xl:pl-[250px] 2xl:py-[150px]"
     >
       {/* Desktop / Laptop */}
-      <div className="hidden lg:flex items-center bg-white">
+      <div className="hidden lg:grid grid-cols-[1.8fr_1.2fr] items-center bg-white">
         {/* Right content */}
         <div className="flex flex-col justify-center gap-4 lg:gap-10 2xl:gap-16 bg-white">
           <h1 className="global-h1 font-bold text-[#434342] mb-2">
@@ -58,9 +58,9 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
         {/* Left image */}
         <div className="">
           <img
-            src="/assets/corporateChooseBanner.png"
+            src="/assets/DesignatedDeliverBanner.jpg"
             alt="benefits Image"
-            className="w-full h-fit object-cover rounded-md rounded-r-xl"
+            className="w-full lg:h-[660px] xl:h-[820px] 2xl:h-[950px] object-cover rounded-md"
           />
         </div>
       </div>
@@ -68,7 +68,7 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
       {/* Mobile */}
       <div className="relative block lg:hidden w-full">
         <img
-          src="/assets/corporateChooseBanner.png"
+          src="/assets/DesignatedDeliverBanner.jpg"
           alt="Mobile Background"
           className="w-full h-[540px] object-cover"
         />

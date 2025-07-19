@@ -39,13 +39,13 @@ function AddonsCard({ data }: Props) {
         <p className="text-white group-hover:text-white global-p1 font-light text-left transition-colors duration-500">
           {data?.description}
         </p>
-        <span
+        {/* <span
           className="text-[12px] text-white underline underline-offset-4 opacity-0
              group-hover:opacity-100
              transition-all duration-500 ease-in font-medium mx-auto"
         >
           <span>Explore Now</span>
-        </span>
+        </span> */}
       </div>
     </div>
   )
