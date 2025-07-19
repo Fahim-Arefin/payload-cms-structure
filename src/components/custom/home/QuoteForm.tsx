@@ -272,7 +272,15 @@ function QuoteForm() {
             const plan = plans.find((p) => p.text === v)
             setSelectedPlan(plan)
             if (plan) {
-              handleInputChange('PlanCode', plan.code)
+              // Reset dependent fields when plan changes
+              setFormData((prev) => ({
+                ...prev,
+                PlanCode: plan.code,
+                Age: 0,
+                Term: 0,
+              }))
+              // Clear tenure options until new plan + age combination is selected
+              setAvailableTenures([])
             }
           }}
         >
@@ -325,10 +333,24 @@ function QuoteForm() {
           </Dialog>
         )}
       </div>
+      {/* age input */}
+      <div className="col-span-2 md:col-span-1">
+        <Input
+          min={18}
+          max={65}
+          type="number"
+          placeholder="Age *"
+          value={formData.Age || ''}
+          onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
+          className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+        />
+      </div>
       {/* select your tenure */}
       <div className="col-span-2 md:col-span-1">
         <Select
-          disabled={isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0}
+          disabled={
+            isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0
+          }
           onValueChange={(v) => {
             const tenure = availableTenures.find((t) => t.text === v)
             if (tenure) {
@@ -338,7 +360,10 @@ function QuoteForm() {
         >
           <SelectTrigger
             className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-              isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0
+              isLoadingTenures ||
+              !formData.PlanCode ||
+              !formData.Age ||
+              availableTenures.length === 0
                 ? 'opacity-50 cursor-not-allowed'
                 : ''
             }`}
@@ -381,18 +406,7 @@ function QuoteForm() {
           <p className="text-[10px] py-1 text-red-600 absolute inset-x-0">{tenureError}</p>
         )}
       </div>
-      {/* age input */}
-      <div className="col-span-2 md:col-span-1">
-        <Input
-          min={18}
-          max={65}
-          type="number"
-          placeholder="Age *"
-          value={formData.Age || ''}
-          onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
-          className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
-        />
-      </div>
+
       {/* gender select  */}
       <div className="col-span-2 md:col-span-1">
         <Select
