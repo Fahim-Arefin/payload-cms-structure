@@ -22,7 +22,7 @@ function TopHeader({ className }: { className?: string }) {
           </Button>
         </Link>
 
-        <div className="flex items-center bg-[rgba(217,217,217,1)] rounded-full h-[30px] w-[100px] px-2">
+        {/* <div className="flex items-center bg-[rgba(217,217,217,1)] rounded-full h-[30px] w-[100px] px-2">
           <ToggleGroup type="single" defaultValue="en" className="text-[#535353] text-[14px]">
             <ToggleGroupItem
               value="bn"
@@ -45,7 +45,7 @@ function TopHeader({ className }: { className?: string }) {
               EN
             </ToggleGroupItem>
           </ToggleGroup>
-        </div>
+        </div> */}
 
         <Search size={18} className="cursor-pointer hover:text-gray-300" />
       </div>

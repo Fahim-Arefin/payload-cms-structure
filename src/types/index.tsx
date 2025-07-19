@@ -155,6 +155,9 @@ export type CareerCard = {
 }
 
 export type ProtectionDataType = {
+  title: string
+  subTitle: string
+  smallTitle: string
   bgImage: string
   item: {
     image: string
@@ -187,6 +190,7 @@ export type Leaders = {
 }
 
 export type AllNewsAndBlogDataType = {
+  id: number
   image: string
   title: string
   description: string

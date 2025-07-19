@@ -78,7 +78,7 @@ type Props = {
   className?: string
   children?: React.ReactNode
   size?: 'small' | 'medium' | 'large'
-}
+} & React.ButtonHTMLAttributes<HTMLButtonElement> // 👈 this adds native button prop
 
 function GlobalButton({
   variant = 'default',
@@ -86,6 +86,7 @@ function GlobalButton({
   className = '',
   children,
   size = 'medium',
+  ...props
 }: Props) {
   const sizeStyles =
     size === 'medium'
@@ -117,6 +118,7 @@ function GlobalButton({
         sizeStyles,
         className,
       )}
+      {...props}
     >
       {children ?? text}
     </Button>
