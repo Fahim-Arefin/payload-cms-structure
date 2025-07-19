@@ -8,7 +8,11 @@ type Props = {
 
 function PlanInfoSection({ bgColor, data }: Props) {
   return (
-    <div style={{ backgroundColor: bgColor }} className="container-padding">
+    <div style={{ backgroundColor: bgColor }} className="px-5 py-12 
+           md:p-24 
+           lg:px-[100px]  lg:py-[100px] 
+           xl:px-[200px]  xl:py-[100px] 
+           2xl:px-[300px] 2xl:py-[150px]">
       <div className="grid grid-cols-1 items-center justify-items-center md:justify-items-start md:grid-cols-2 gap-10 md:gap-2 lg:gap-8 xl:gap-2">
         <div className=" w-full h-full flex justify-center md:justify-start items-center">
           <div className="w-[50%] md:w-full lg:w-[90%] xl:w-[85%] 2xl:w-[80%] ">

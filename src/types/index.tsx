@@ -60,6 +60,15 @@ export type AllPlantDataType = {
   videoLink?: string
 }
 
+export type PurchaseCardDataType = {
+  title: string
+  biggerTitle?: string
+  description: string
+  link?: string
+  image: string
+  videoLink?: string
+}
+
 export type PlanInfoDataType = {
   image: string
   description: string
