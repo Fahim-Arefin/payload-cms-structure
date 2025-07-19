@@ -51,7 +51,7 @@ export function MapTabSection({ config, data }: Props) {
                     index === 0 ? 'text-left pl-0' : 'text-left',
                     // config.length === 2 && 'w-[30%]',
                     activeTab === tab.value
-                      ? 'text-[#434343] after:content-[""] after:absolute after:inset-x-0 after:bottom-0 after:h-[4px] after:md:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
+                      ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:md:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
                       : 'text-[#434343]',
                   )}
                 >

@@ -191,7 +191,7 @@ function SupportPage() {
       <MapTabSection config={tabItems} data={tabContent} />
       <GeneralFaq />
       <CatchTheBuzzSection />
-      <NewsSliderSection data={newsSliderData} />
+      {/* <NewsSliderSection data={newsSliderData} /> */}
       <FeedBackSection />
       <LevelUpSection data={levelUpData} />
     </div>
