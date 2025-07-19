@@ -1,80 +1,19 @@
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-// import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
-// import OffersClientWrapper from '@/components/custom/shared/plans/OffersClientWrapper'
 import BankSection from '@/components/custom/pay-premium/BankSection'
 import BkashSection from '@/components/custom/pay-premium/BkashSection'
 import DebitSection from '@/components/custom/pay-premium/DebitSection'
-import React from 'react'
 
 function page() {
   const heroSlides = [
     {
       title: 'Pay Premium',
       subtitle: '',
-      description: '',
+      description:
+        'Powering your protection starts here. Flexible Premium Payment options so we can ensure your protection coverage. ',
       image: '/assets/pay-premium-2.jpg',
     },
   ]
-
-  // const planInfoData = {
-  //   image: '/assets/planInfo5.svg',
-  //   description:
-  //     'Health struggles can come with financial struggles too—making recovery even harder. From rising medical bills to daily expenses, the burden can feel overwhelming. With Shanta Life’s Critical Protection Riders, you get financial security when you need it most—covering up to 25 major illnesses, depending on your plan.',
-  // }
-
-  // const offersData = [
-  //   {
-  //     image: '/assets/offer9.png',
-  //     bgImage: '/assets/offerbg9.jpg',
-  //     title: 'Living Benefit',
-  //     description: 'Helping with treatment costs so you can focus on recovery.',
-  //   },
-  //   {
-  //     image: '/assets/offer10.png',
-  //     bgImage: '/assets/offerbg10.jpg',
-  //     title: 'Affordable Premium',
-  //     description: 'Security for you and your family in case of lifelong disability.',
-  //   },
-  //   {
-  //     image: '/assets/offer11.png',
-  //     bgImage: '/assets/offerbg11.jpg',
-  //     title: 'One-Time Payout',
-  //     description: 'Financial support if an accident limits your abilities.',
-  //   },
-  //   {
-  //     image: '/assets/offer12.png',
-  //     bgImage: '/assets/offerbg12.jpg',
-  //     title: 'Protection Against 25+ Critical Illnesses',
-  //     description:
-  //       'Your loved ones receive twice the insured amount for extra protection (including basic life coverage).',
-  //   },
-  //   {
-  //     image: '/assets/offer9.png',
-  //     bgImage: '/assets/offerbg9.jpg',
-  //     title: 'Living Benefit',
-  //     description: 'Helping with treatment costs so you can focus on recovery.',
-  //   },
-  //   {
-  //     image: '/assets/offer10.png',
-  //     bgImage: '/assets/offerbg10.jpg',
-  //     title: 'Affordable Premium',
-  //     description: 'Security for you and your family in case of lifelong disability.',
-  //   },
-  //   {
-  //     image: '/assets/offer11.png',
-  //     bgImage: '/assets/offerbg11.jpg',
-  //     title: 'One-Time Payout',
-  //     description: 'Financial support if an accident limits your abilities.',
-  //   },
-  //   {
-  //     image: '/assets/offer12.png',
-  //     bgImage: '/assets/offerbg12.jpg',
-  //     title: 'Protection Against 25+ Critical Illnesses',
-  //     description:
-  //       'Your loved ones receive twice the insured amount for extra protection (including basic life coverage).',
-  //   },
-  // ]
 
   const bkashData = {
     bgImage: '/assets/bkash-4.png',
@@ -157,17 +96,7 @@ function page() {
 
   return (
     <div className="font-avenir bg-white">
-      <HeroSection
-        heroSlides={heroSlides}
-        height=" h-[252px] md:h-[352px] lg:h-[480px] xl:h-[500px] 2xl:h-[578px] "
-        top=" top-[150px] md:top-[200px] lg:top-[63%]"
-      />
-      {/* <PlanInfoSection data={planInfoData} /> */}
-      {/* <OffersClientWrapper
-        data={offersData}
-        subheading="Four types of protection to keep you and your loved ones financially secure"
-        card={2}
-      /> */}
+      <HeroSection heroSlides={heroSlides} top=" top-[150px] md:top-[200px] lg:top-[43%]" />
       <BankSection align="right" data={bankData} />
       <BkashSection align="left" bgColor="#FCF4EB" data={bkashData} />
       <DebitSection align="right" data={debitData} />

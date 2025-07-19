@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { AllNewsAndBlogDataType } from '@/types'
 import { ArrowUpRight } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 type Props = {
@@ -41,16 +42,20 @@ function AllNewsCard({ data, index }: Props) {
         >
           {data?.description}
         </p>
-        <Button
-          variant="link"
-          className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit mx-auto lg:mx-0
-           global-p2 p-0"
-        >
-          <div className="flex space-x-1 items-center uppercase ">
-            <span>Read More</span>
-            <ArrowUpRight />
-          </div>
-        </Button>
+        <div>
+          <Link href={`/news-and-media/${data?.id}`} passHref>
+            <Button
+              variant="link"
+              className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit mx-auto lg:mx-0
+            global-p2 p-0"
+            >
+              <div className="flex space-x-1 items-center uppercase ">
+                <span>Read More</span>
+                <ArrowUpRight />
+              </div>
+            </Button>
+          </Link>
+        </div>
       </div>
       <div className="hidden lg:block absolute inset-x-0 -bottom-12 mx-auto w-full lg:w-[60%] xl:w-fit">
         <img src="/assets/verticalline.png" alt="" className="w-full h-full" />
