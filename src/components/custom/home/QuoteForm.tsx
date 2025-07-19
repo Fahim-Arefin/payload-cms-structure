@@ -328,8 +328,8 @@ function QuoteForm() {
       {/* select your tenure */}
       <div className="col-span-2 md:col-span-1">
         <Select
+          disabled={isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0}
           onValueChange={(v) => {
-            if (isLoadingTenures || !formData.PlanCode || !formData.Age) return
             const tenure = availableTenures.find((t) => t.text === v)
             if (tenure) {
               handleInputChange('Term', tenure.value)
@@ -338,7 +338,7 @@ function QuoteForm() {
         >
           <SelectTrigger
             className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-              isLoadingTenures || !formData.PlanCode || !formData.Age
+              isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0
                 ? 'opacity-50 cursor-not-allowed'
                 : ''
             }`}
