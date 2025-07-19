@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { X } from 'lucide-react' // ShadCN uses lucide-react for icons
+import GlobalButton from '../shared/GlobalButton'
 
 export function ContactComponent() {
   const [showPopover, setShowPopover] = useState(false)
@@ -29,15 +30,20 @@ export function ContactComponent() {
   }
 
   return (
-    <div className="flex items-center gap-4 relative">
-      <p className="text-lg">For any further queries please contact</p>
+    <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 relative ">
+      <p className="text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
+        For any further queries please contact
+      </p>
 
       <Popover open={showPopover} onOpenChange={setShowPopover}>
         <PopoverTrigger asChild>
-          <Button
+          <GlobalButton
             variant="outline"
-            className="flex items-center gap-2 bg-yellow-800 text-white hover:bg-yellow-700 border-yellow-900"
+            className="flex items-center gap-2 bg-yellow-800 text-white hover:bg-yellow-700 border-yellow-900
+            w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[150px]
+            h-[32px] md:h-[34px] lg:h-[38px] xl:h-[40px] 2xl:h-[42px]"
             onClick={handleCallClick}
+            size="small"
           >
             <svg
               className="w-5 h-5"
@@ -53,7 +59,7 @@ export function ContactComponent() {
               />
             </svg>
             09610889900
-          </Button>
+          </GlobalButton>
         </PopoverTrigger>
 
         <PopoverContent className="w-72 space-y-2">
