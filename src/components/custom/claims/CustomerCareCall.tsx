@@ -22,11 +22,22 @@ export function ContactComponent() {
     }
   }
 
-  const handleConfirm = () => {
-    console.log('User Phone:', userPhone)
-    alert(`We will call you back at: ${userPhone}`)
+  const handleConfirm = async () => {
     setShowPopover(false)
     setUserPhone('')
+    userPhone && alert(`We will call you back at: ${userPhone}`)
+
+    await fetch('/api/emails/corporate-claim', {
+      method: 'POST',
+      // credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        phone: userPhone,
+      }),
+    })
   }
 
   return (
