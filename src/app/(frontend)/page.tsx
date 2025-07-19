@@ -138,6 +138,12 @@ export default async function HomePage() {
     },
   ]
 
+  // const email = await payload.sendEmail({
+  //   to: 'mauchchhash@gmail.com',
+  //   subject: 'hello from shanta',
+  //   text: 'hello from shanta',
+  // })
+
   return (
     <div className="font-avenir">
       {/* <HeroSection /> */}

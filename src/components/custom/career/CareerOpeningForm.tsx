@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
@@ -22,10 +22,53 @@ const positions = [
 ]
 
 function CareerOpeningForm() {
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
-    // your logic here
+    setSendButtonText('Sending...')
+    console.log({ name, email, phone, position, message })
+    const resumeFormData = new FormData()
+    resumeFormData.append('hogamara', 'let go')
+    resumeFormData.append('file', document.querySelector('#resume')?.files?.[0])
+    console.log(resumeFormData)
+    const resumeId = await fetch('/api/resume', {
+      method: 'POST',
+      body: resumeFormData,
+    })
+      .then((rs) => rs.json())
+      .then((resume) => resume.doc.id)
+    console.log({ resumeId })
+
+    await fetch('/api/career-application', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+        position,
+        message,
+        resume: resumeId,
+      }),
+    })
+      .then((rs) => rs.json())
+      .then((rs) => console.log(rs))
+    setSendButtonText('Application Sent')
+    setTimeout(() => {
+      setSendButtonText('Send Application')
+    }, 1500)
   }
+
+  const [sendButtonText, setSendButtonText] = useState('Send Application')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [position, setPosition] = useState(positions[0] ?? '')
+  const [message, setMessage] = useState('')
+  const [resumeUploadFieldText, setResumeUploadFieldText] = useState('Upload your resume')
 
   return (
     <form
@@ -34,18 +77,27 @@ function CareerOpeningForm() {
     >
       <span className="font-bold text-[#343434] text-lg mb-1 tracking-tight">JOIN OUR TEAM</span>
       <Input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
         placeholder="Name"
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
+        required
       />
       <Input
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
         placeholder="Phone"
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
+        required
       />
       <Input
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
+        required
       />
-      <Select>
+      <Select required value={position} onValueChange={(e) => setPosition(e)}>
         <SelectTrigger className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none text-[15px]">
           <SelectValue placeholder="IT Executive" />
         </SelectTrigger>
@@ -64,9 +116,18 @@ function CareerOpeningForm() {
       <div className="flex w-full rounded-[6px] overflow-hidden bg-[#FCF4EB] md:bg-white">
         <label htmlFor="resume" className="flex flex-1 items-center cursor-pointer">
           <span className="block w-full text-[#B0B0B0] text-[13px] px-3 py-2 select-none">
-            Upload your resume
+            {resumeUploadFieldText}
           </span>
-          <input type="file" id="resume" className="hidden" />
+          <input
+            onChange={(e) =>
+              setResumeUploadFieldText(e.target.files?.[0]?.name ?? 'Upload your resume')
+            }
+            required
+            type="file"
+            accept="application/pdf,application/msword"
+            id="resume"
+            className="hidden"
+          />
         </label>
         <label
           htmlFor="resume"
@@ -78,9 +139,12 @@ function CareerOpeningForm() {
       </div>
 
       <Textarea
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
         placeholder="Your message"
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px] lg:min-h-[105px] xl:min-h-[70px]"
         rows={2}
+        required
       />
       {/* <Button
         type="submit"
@@ -90,8 +154,8 @@ function CareerOpeningForm() {
       </Button> */}
       <GlobalButton
         size="small"
-        className="cursor-not-allowed font-semibold w-full md:w-auto md:self-end"
-        text="Send Application"
+        className="font-semibold w-full md:w-auto md:self-end"
+        text={sendButtonText}
         variant="primary"
       />
     </form>
