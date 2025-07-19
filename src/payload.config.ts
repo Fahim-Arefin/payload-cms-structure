@@ -69,4 +69,13 @@ export default buildConfig({
       },
     }),
   ],
+  endpoints: [
+    {
+      path: '/yolo/hello',
+      method: 'get',
+      handler: (_req) => {
+        return Response.json({ message: 'world' })
+      },
+    },
+  ],
 })
