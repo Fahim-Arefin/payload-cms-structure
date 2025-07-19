@@ -155,6 +155,9 @@ export type CareerCard = {
 }
 
 export type ProtectionDataType = {
+  title: string
+  subTitle: string
+  smallTitle: string
   bgImage: string
   item: {
     image: string

@@ -21,7 +21,7 @@ const planData = [
 
 const FourStagePlan: FC<FourStagePlanProps> = ({}) => {
   return (
-    <div className="container-padding bg-[#F6EDDD]">
+    <div className="container-padding">
       <div className="flex flex-col gap-4 items-center lg:items-start">
         <h3 className="global-h3 font-semibold uppercase">
           Shanta <span className="text-[#ED7125] font-semibold">4-Stage</span> Plan

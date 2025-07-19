@@ -86,7 +86,7 @@ function GlobalButton({
   className = '',
   children,
   size = 'medium',
-  ...rest // 👈 rest includes onClick, onMouseEnter, etc.
+  ...props
 }: Props) {
   const sizeStyles =
     size === 'medium'
@@ -118,7 +118,7 @@ function GlobalButton({
         sizeStyles,
         className,
       )}
-      {...rest} // 👈 apply all extra button props (e.g., onClick)
+      {...props}
     >
       {children ?? text}
     </Button>

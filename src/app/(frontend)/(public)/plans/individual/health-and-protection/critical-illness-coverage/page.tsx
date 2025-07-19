@@ -9,8 +9,8 @@ function page() {
   const heroSlides = [
     {
       title: '',
-      subtitle: 'Shanta Critical Illness Coverage',
-      description: '',
+      subtitle: 'Shanta Critical Protection',
+      description: `Get life-sustaining support because a diagnosis shouldn't derail your dreams. We'll step in so you can fight back stronger.`,
       image: '/assets/banners/crit-coverage.png',
     },
   ]
@@ -75,6 +75,9 @@ function page() {
   ]
 
   const protectionData = {
+     title: 'Critical',
+    subTitle: 'Protection - ',
+    smallTitle: 'Classic',
     bgImage: '/assets/protectionbg1.jpg',
     item: [
       {
@@ -96,6 +99,9 @@ function page() {
     ],
   }
   const protectionData2 = {
+    title: '',
+    subTitle: 'Standard',
+    smallTitle: '',
     bgImage: '/assets/protectionbg2.jpg',
     item: [
       {
@@ -122,7 +128,7 @@ function page() {
     <div className="font-avenir bg-white">
       <HeroSection
         heroSlides={heroSlides}
-        height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[578px] "
+        // height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[578px] "
         top=" top-[150px] md:top-[200px] lg:top-[63%]"
       />
       <PlanInfoSection data={planInfoData} />

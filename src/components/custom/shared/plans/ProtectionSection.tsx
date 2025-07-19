@@ -2,6 +2,7 @@ import { ProtectionDataType } from '@/types'
 import React from 'react'
 import GlobalButton from '../GlobalButton'
 import ToolTip from '../ToolTip'
+import Link from 'next/link'
 
 type Props = {
   bgColor?: string
@@ -55,11 +56,14 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
           {/* heading */}
           <div>
             <h3 className="global-p1 md:global-h4 lg:global-p1 text-[#3A3A3A] uppercase font-light">
-              Critical
+              {data?.title}
             </h3>
             <div className="flex space-x-1">
-              <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">Protection - </h1>
-              <h1 className="global-h1 uppercase text-[#ED7125] font-medium">Classic</h1>
+              <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">{data?.subTitle}</h1>
+              <h1 className="global-h1 uppercase text-[#ED7125] font-medium">
+                {' '}
+                {data?.smallTitle}
+              </h1>
             </div>
           </div>
           {/* items */}
@@ -85,13 +89,15 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
           ))}
           {/* button */}
           <div className="flex justify-center lg:justify-start">
-            <ToolTip>
+            {/* <ToolTip> */}
+            <Link href='/premium-calculator'>
               <GlobalButton
                 variant="primary"
                 text="Calculate Premium"
-                className="cursor-not-allowed"
-              />
-            </ToolTip>
+                // className="cursor-not-allowed"
+                />
+                </Link>
+            {/* </ToolTip> */}
           </div>
         </div>
       </div>
