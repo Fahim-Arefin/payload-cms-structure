@@ -19,7 +19,7 @@ function FeedBackSection({}: Props) {
     setSendButtonText('Sending...')
     console.log({ name, email, phone, address, feedback })
 
-    await fetch('/api/emails/ask-us', {
+    await fetch('/api/emails/feedback', {
       method: 'POST',
       // credentials: 'include',
       headers: {
