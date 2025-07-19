@@ -210,6 +210,7 @@
 
 // export default QuoteSection
 
+'use client'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -218,9 +219,25 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { useState } from 'react'
 import QuoteForm from './QuoteForm'
 
+interface ApiResponse {
+  life_premium: number
+  accident_premium: number
+  ci_premium: number
+  total_premium: number
+  life_rate: number
+  accident_rate: number
+  ci_rate: number
+  accidental_coverage: number
+  ci_coverage: number
+  message: string
+}
+
 function QuoteSection() {
+  const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
+  const [selectedPaymentMode, setSelectedPaymentMode] = useState<string>('')
   return (
     <div className="relative font-avenir container-wpm md:pb-[70px] lg:pb-[90px] xl:pb-[80px] 2xl:pb-40">
       <div className="grid grid-cols-1 lg:grid-cols-2 z-10">
@@ -239,33 +256,70 @@ function QuoteSection() {
               and get a personalized quote.
             </p>
           </div>
-          {/* Info Container */}
-          <div className="hidden md:grid grid-cols-3 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600]">
-            <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-6 xl:py-9 lg:mt-6 xl:mt-12 ">
-              <div className="text-[#1E1E1E] lg:text-[16px] xl:text-xl font-medium text-center">
-                Monthly
+          {/* Info Container - Only show when API response is available */}
+          {apiResponse && (
+            <div className="hidden md:grid grid-cols-5 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600]">
+              <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-6 xl:py-9 lg:mt-6 xl:mt-12">
+                <div className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                  selectedPaymentMode === 'Monthly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                }`}>
+                  Monthly
+                </div>
+                <div className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                  selectedPaymentMode === 'Monthly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                }`}>
+                  {selectedPaymentMode === 'Monthly' ? `৳${apiResponse.total_premium.toLocaleString()}` : ''}
+                </div>
               </div>
-              <div className="text-[#1E1E1E] lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-center">
-                10,000.00
+              <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-6 xl:py-9 lg:mt-6 xl:mt-12">
+                <div className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                  selectedPaymentMode === 'Quarterly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                }`}>
+                  Quarterly
+                </div>
+                <div className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                  selectedPaymentMode === 'Quarterly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                }`}>
+                  {selectedPaymentMode === 'Quarterly' ? `৳${apiResponse.total_premium.toLocaleString()}` : ''}
+                </div>
               </div>
-            </div>
-            <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-6 xl:py-9 lg:mt-6 xl:mt-12">
-              <div className="text-[#ED7125] text-[16px] xl:text-xl font-medium text-center">
-                Quarterly
+              <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-6 xl:py-9 lg:mt-6 xl:mt-12">
+                <div className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                  selectedPaymentMode === 'Semi-annually' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                }`}>
+                  Semi-annually
+                </div>
+                <div className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                  selectedPaymentMode === 'Semi-annually' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                }`}>
+                  {selectedPaymentMode === 'Semi-annually' ? `৳${apiResponse.total_premium.toLocaleString()}` : ''}
+                </div>
               </div>
-              <div className="text-[#ED7125] text-xl xl:text-2xl 2xl:text-3xl font-bold text-center">
-                20,000.00
+              <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-6 xl:py-9 lg:mt-6 xl:mt-12">
+                <div className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                  selectedPaymentMode === 'Yearly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                }`}>
+                  Yearly
+                </div>
+                <div className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                  selectedPaymentMode === 'Yearly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                }`}>
+                  {selectedPaymentMode === 'Yearly' ? `৳${apiResponse.total_premium.toLocaleString()}` : ''}
+                </div>
               </div>
-            </div>
-            <div className="col-span-1 p-2 py-6 xl:py-9 lg:mt-6 xl:mt-12 ">
-              <div className="text-[#1E1E1E] text-[16px] xl:text-xl font-medium text-center">
-                Yearly
+              <div className="col-span-1 p-2 py-6 xl:py-9 lg:mt-6 xl:mt-12">
+                <div className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                  selectedPaymentMode === 'Single' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                }`}>
+                  Single
+                </div>
+                <div className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                  selectedPaymentMode === 'Single' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                }`}>
+                  {selectedPaymentMode === 'Single' ? `৳${apiResponse.total_premium.toLocaleString()}` : ''}
+                </div>
               </div>
-              <div className="text-[#1E1E1E] text-xl xl:text-2xl 2xl:text-3xl font-bold text-center">
-                1,00,000.00
-              </div>
-            </div>
-            <div className="col-span-3 py-7 px-10 xl:py-9 xl:px-12 space-y-3">
+              <div className="col-span-5 py-7 px-10 xl:py-9 xl:px-12 space-y-3">
               <div className="bg-[#F6EDDD] md:px-4 lg:px-1 md:py-1.5 lg:py-1 xl:px-4 xl:py-1.5 md:w-[60%] lg:w-[100%] xl:w-[85%] 2xl:w-[70%] mx-auto rounded-full flex items-center space-x-2">
                 <div>
                   <svg
@@ -392,7 +446,8 @@ function QuoteSection() {
                 </div>
               </div>
             </div>
-          </div>
+            </div>
+          )}
           {/* Mobile-only dialog trigger and content */}
           <Dialog>
             <DialogTrigger asChild>
@@ -407,13 +462,13 @@ function QuoteSection() {
                   Get Your Quote
                 </DialogTitle>
               </DialogHeader>
-              <QuoteForm />
+              <QuoteForm onApiResponse={setApiResponse} onPaymentModeChange={setSelectedPaymentMode} />
             </DialogContent>
           </Dialog>
         </div>
         {/* Right Side */}
         <div className="hidden md:block p-4 lg:pr-0 z-10">
-          <QuoteForm />
+          <QuoteForm onApiResponse={setApiResponse} onPaymentModeChange={setSelectedPaymentMode} />
         </div>
       </div>
       {/* bg image */}

@@ -42,7 +42,12 @@ interface ApiResponse {
   message: string
 }
 
-function QuoteForm() {
+interface QuoteFormProps {
+  onApiResponse?: (response: ApiResponse) => void
+  onPaymentModeChange?: (paymentMode: string) => void
+}
+
+function QuoteForm({ onApiResponse, onPaymentModeChange }: QuoteFormProps = {}) {
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [formData, setFormData] = useState<FormData>({
     PlanCode: 0,
@@ -148,11 +153,14 @@ function QuoteForm() {
     }))
     
     // Clear field error when user starts typing/selecting (only for validated fields)
-    if (field in fieldErrors && fieldErrors[field as keyof typeof fieldErrors]) {
-      setFieldErrors(prev => ({
-        ...prev,
-        [field as keyof typeof fieldErrors]: false
-      }))
+    if (field in fieldErrors) {
+      const errorField = field as keyof typeof fieldErrors
+      if (fieldErrors[errorField]) {
+        setFieldErrors(prev => ({
+          ...prev,
+          [errorField]: false
+        }))
+      }
     }
   }
 
@@ -253,6 +261,10 @@ function QuoteForm() {
       const data: ApiResponse[] = await response.json()
       if (data && data.length > 0) {
         setApiResponse(data[0])
+        // Notify parent component about the API response
+        if (onApiResponse) {
+          onApiResponse(data[0])
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
@@ -544,6 +556,10 @@ function QuoteForm() {
             const method = paymentMethods.find((pm) => pm.text === v)
             if (method) {
               handleInputChange('PaymentMode', method.value)
+              // Notify parent component about payment mode change
+              if (onPaymentModeChange) {
+                onPaymentModeChange(method.text)
+              }
             }
           }}
         >
