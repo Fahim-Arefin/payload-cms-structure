@@ -39,7 +39,7 @@ export function ContactComponent() {
         <PopoverTrigger asChild>
           <GlobalButton
             variant="outline"
-            className="flex items-center gap-2 bg-yellow-800 text-white hover:bg-yellow-700 border-yellow-900 
+            className="flex items-center gap-2 bg-yellow-800 text-white hover:bg-yellow-700 border-yellow-900
             w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[150px]
             h-[32px] md:h-[34px] lg:h-[38px] xl:h-[40px] 2xl:h-[42px]"
             onClick={handleCallClick}

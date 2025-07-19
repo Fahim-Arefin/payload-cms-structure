@@ -12,9 +12,11 @@ import GlobalButton from '../shared/GlobalButton'
 import { AllNewsAndBlogDataType } from '@/types'
 import SearchNews from './SearchNews'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 const allNewsData: AllNewsAndBlogDataType[] = [
   {
+    id: 1,
     image: '/assets/newsandblog1.jpg',
     date: 'Jul 17, 2025',
     title: 'Shanta Life to Hold Conference Call for Second Quarter 2025 Results',
@@ -22,6 +24,7 @@ const allNewsData: AllNewsAndBlogDataType[] = [
       'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset – you!',
   },
   {
+    id: 2,
     image: '/assets/newsandblog2.jpg',
     date: 'Jul 17, 2025',
     title: 'How Insurance can help you to keep your loved ones safe?',
@@ -29,6 +32,7 @@ const allNewsData: AllNewsAndBlogDataType[] = [
       'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset – you!',
   },
   {
+    id: 3,
     image: '/assets/newsandblog3.jpg',
     date: 'Jul 17, 2025',
     title: 'How you can be benefited by Santa Life insurance?',
@@ -83,15 +87,19 @@ export default function AllNewsAccordionSection() {
                   >
                     {news.description}
                   </p>
-                  <Button
-                    variant="link"
-                    className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0 "
-                  >
-                    <div className="flex space-x-1 items-center uppercase ">
-                      <span>Read More</span>
-                      <ArrowUpRight />
-                    </div>
-                  </Button>
+                  <div>
+                    <Link href={`/news-and-media/${news?.id}`}>
+                      <Button
+                        variant="link"
+                        className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0 "
+                      >
+                        <div className="flex space-x-1 items-center uppercase ">
+                          <span>Read More</span>
+                          <ArrowUpRight />
+                        </div>
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </AccordionContent>
