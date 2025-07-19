@@ -1,14 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import ResourceCard from './ResourceCard'
 import { CareerResourceDataType } from '@/types'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
@@ -37,6 +30,7 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
       carouselApi.off('select', updateScrollButtons)
     }
   }, [carouselApi])
+
   return (
     <div className="relative w-full flex flex-col items-center container-padding bg-white overflow-hidden">
       {/* Absolute Human Resource Image - Top Right */}
@@ -68,14 +62,47 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
         </div>
       </div>
 
-      {/* Desktop: 2 Cards, Mobile: Carousel 1 Card */}
+      {/* Cards carousel for all screens */}
       <div className="w-full flex justify-center pl-4 xl:pl-20">
-        <div className="hidden lg:flex justify-evenly gap-16 xl:gap-20 2xl:gap-28 w-full z-10">
-          {data.map((item, idx) => (
-            <ResourceCard key={idx} data={item} />
-          ))}
+        {/* Large screens: Carousel with 2 visible cards per slide */}
+        <div className="hidden lg:block w-full z-10 mb-12 relative">
+          <Carousel
+            opts={{ loop: true, align: 'start' }}
+            setApi={setCarouselApi}
+            className="w-full"
+          >
+            <CarouselContent className="gap-12 xl:gap-20">
+              {data.map((item, idx) => (
+                <CarouselItem
+                  key={idx}
+                  className="
+                    basis-[46%] max-w-[540px] 2xl:max-w-[600px] shrink-0
+                    pl-16
+                    py-12
+                    flex justify-center
+                    transition-all 
+                  "
+                >
+                  <ResourceCard data={item} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            {/* Carousel navigation at bottom center (lg+) */}
+            <div
+              className="hidden lg:flex gap-2 absolute
+                inset-x-0 justify-center -bottom-20"
+            >
+              <CarouselNavButtons
+                onPrev={() => carouselApi?.scrollPrev()}
+                onNext={() => carouselApi?.scrollNext()}
+                hasPrev={canScrollPrev}
+                hasNext={canScrollNext}
+              />
+            </div>
+          </Carousel>
         </div>
-        {/* Shadcn Carousel for Mobile/Tablet */}
+
+        {/* Mobile/Tablet carousel (as before) */}
         <div className="block lg:hidden w-full z-10 mb-10">
           <Carousel opts={{ loop: true }} setApi={setCarouselApi}>
             <CarouselContent>
@@ -88,7 +115,7 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
             {/* Carousel navigation at bottom center */}
             <div
               className="flex lg:hidden gap-2 absolute
-                        inset-x-0 justify-center -bottom-10"
+                inset-x-0 justify-center -bottom-10"
             >
               <CarouselNavButtons
                 onPrev={() => carouselApi?.scrollPrev()}
