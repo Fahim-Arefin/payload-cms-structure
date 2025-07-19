@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import ToolTip from './ToolTip'
 
 function Footer() {
   return (
@@ -205,6 +206,11 @@ function Footer() {
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
                   <Link href={'/premium-calculator'}>Premium Calculator</Link>
                 </li>
+                <ToolTip>
+                  <span className=" cursor-not-allowed">
+                    Learning
+                  </span>
+                </ToolTip>
               </ul>
             </div>
           </div>

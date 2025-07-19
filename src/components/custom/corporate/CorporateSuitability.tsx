@@ -10,7 +10,11 @@ type Props = {
 function CorporateSuitability({ data }: Props) {
   return (
     <div
-      className="container-padding py-12 text-white"
+      className="px-5 py-8 
+           md:px-24 md:py-12
+           lg:px-[130px]  lg:py-[60px] 
+           xl:px-[200px]  xl:py-[80px] 
+           2xl:px-[300px] 2xl:py-[100px] text-white"
       style={{
         background: `linear-gradient(0deg, rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.20)), 
            linear-gradient(0deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.20)), 
