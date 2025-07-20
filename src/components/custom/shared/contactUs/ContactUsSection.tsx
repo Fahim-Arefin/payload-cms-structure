@@ -24,7 +24,7 @@ function ContactUsSection() {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [message, setMessage] = useState('')
-  const sendMessageHandler = async (e) => {
+  const sendMessageHandler = async (e: React.FormEvent) => {
     e.preventDefault()
     setSendButtonText('Sending...')
     console.log({ firstName, lastName, email, phone, message })
