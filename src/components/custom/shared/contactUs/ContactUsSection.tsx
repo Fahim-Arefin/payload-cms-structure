@@ -55,7 +55,10 @@ function ContactUsSection() {
   return (
     <div
       className="bg-[#F6EDDD] relative 
-
+      px-5 
+           md:px-24 
+           lg:px-[70px]  
+           xl:px-[80px]
       h-[200px] md:h-[330px] lg:h-[430px] xl:h-[550px] 2xl:h-[700px]
       "
     >
