@@ -1,5 +1,6 @@
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import CatchTheBuzzSection from '@/components/custom/support/CatchTheBuzzSection'
+import { FaqTabSection } from '@/components/custom/support/FaqTabSection'
 import FeedBackSection from '@/components/custom/support/FeedBackSection'
 import GeneralFaq from '@/components/custom/support/GeneralFaq'
 import LevelUpSection from '@/components/custom/support/LevelUpSection'
@@ -84,6 +85,16 @@ function SupportPage() {
     {
       value: 'hospitals',
       label: 'PANEL HOSPITALS',
+    },
+  ]
+  const faqItems = [
+    {
+      value: 'general',
+      label: 'GENERAL FAQ',
+    },
+    {
+      value: 'form',
+      label: 'DOWNLOAD FORMS',
     },
   ]
 
@@ -189,7 +200,8 @@ function SupportPage() {
         top=" top-[150px] md:top-[200px] lg:top-[63%]"
       />
       <MapTabSection config={tabItems} data={tabContent} />
-      <GeneralFaq />
+      <FaqTabSection config={faqItems} />
+      {/* <GeneralFaq /> */}
       <CatchTheBuzzSection />
       {/* <NewsSliderSection data={newsSliderData} /> */}
       <FeedBackSection />

@@ -237,7 +237,7 @@ function SupportTabContent({ data, activeTab }: Props) {
       {/* ✅ Map only re-renders on tab or selection change */}
       {memoizedMap}
 
-      <div className="lg:hidden pl-5 pb-12 md:pb-24 lg:pb-0 md:pl-24 md:pt-4 space-y-5">
+      <div className="lg:hidden pl-5 md:pl-24 md:pt-4 space-y-5">
         <div className="flex space-x-2">
           <ToolTip>
             <Button
