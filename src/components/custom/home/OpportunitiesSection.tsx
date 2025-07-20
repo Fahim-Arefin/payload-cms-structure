@@ -11,6 +11,7 @@ const opportunitiesData = [
   { src: '/assets/life-at-shanta/swiper44.jpg', alt: 'Slide 4' },
   { src: '/assets/life-at-shanta/swiper66.jpg', alt: 'Slide 6' },
   { src: '/assets/life-at-shanta/swiper77.jpg', alt: 'Slide 7' },
+  { src: '/assets/life-at-shanta/swiper77.jpg', alt: 'Slide 8' },
 ]
 
 export default function OpportunitiesSection() {
