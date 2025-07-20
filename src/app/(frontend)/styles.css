@@ -171,6 +171,7 @@ body > div[data-state='open'].fixed.inset-0.z-50 {
   background-color: transparent !important;
   backdrop-filter: none !important;
   box-shadow: none !important;
+  //shadow/
 }
 
 
