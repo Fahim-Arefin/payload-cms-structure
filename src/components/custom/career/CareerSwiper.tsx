@@ -82,7 +82,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
                   key={card.title}
                   className={cn(
                     // For 3.5 cards on desktop: (338 * 3.5 + 18) ~ 1200px fits
-                    'basis-[338px] cursor-pointer md:basis-[338px] 2xl:basis-[460px] shrink-0',
+                    'basis-[338px] cursor-pointer md:basis-[400px] lg:basis-[400px] xl:basis-[420px] 2xl:basis-[460px] shrink-0',
                     'pr-6 last:pr-0',
                     // Mobile: 1.5 cards
                   )}

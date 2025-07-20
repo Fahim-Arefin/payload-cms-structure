@@ -149,7 +149,7 @@ The initiative of enhancing financial literacy among individuals and boosting co
       id: 4,
       image: '/assets/profile4.png',
       name: 'Mayesha Khondoker',
-      title: 'Chairman',
+      title: 'Director',
     },
     {
       id: 5,
@@ -161,25 +161,25 @@ The initiative of enhancing financial literacy among individuals and boosting co
       id: 6,
       image: '/assets/profile6.png',
       name: 'Raiven Hasan',
-      title: 'Chairman',
+      title: 'Direcotor',
     },
     {
       id: 7,
       image: '/assets/profile8.png',
-      name: 'Arif Khan',
+      name: 'Arif Khan, CFA, FCMA',
       title: 'Director',
     },
     {
       id: 8,
       image: '/assets/profile9.png',
-      name: 'Abrar Anwar',
-      title: 'Chairman',
+      name: 'Abrar A. Anwar',
+      title: 'Sponsor Shareholder',
     },
     {
       id: 9,
       image: '/assets/profile7.png',
       name: 'M. Anisul Haque',
-      title: 'Chairman',
+      title: 'Director',
     },
   ]
 

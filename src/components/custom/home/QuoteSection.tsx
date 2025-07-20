@@ -278,7 +278,7 @@ function QuoteSection() {
                   }`}
                 >
                   {confirmedPaymentMode === 'Monthly'
-                    ? `৳${apiResponse?.total_premium.toLocaleString()}`
+                    ? `৳${apiResponse?.total_premium?.toLocaleString() || '0'}`
                     : ''}
                 </div>
               </div>
@@ -296,7 +296,7 @@ function QuoteSection() {
                   }`}
                 >
                   {confirmedPaymentMode === 'Quarterly'
-                    ? `৳${apiResponse?.total_premium.toLocaleString()}`
+                    ? `৳${apiResponse?.total_premium?.toLocaleString() || '0'}`
                     : ''}
                 </div>
               </div>
@@ -314,7 +314,7 @@ function QuoteSection() {
                   }`}
                 >
                   {confirmedPaymentMode === 'Semi-annually'
-                    ? `৳${apiResponse?.total_premium.toLocaleString()}`
+                    ? `৳${apiResponse?.total_premium?.toLocaleString() || '0'}`
                     : ''}
                 </div>
               </div>
@@ -332,7 +332,7 @@ function QuoteSection() {
                   }`}
                 >
                   {confirmedPaymentMode === 'Yearly'
-                    ? `৳${apiResponse?.total_premium.toLocaleString()}`
+                    ? `৳${apiResponse?.total_premium?.toLocaleString() || '0'}`
                     : ''}
                 </div>
               </div>
@@ -350,7 +350,7 @@ function QuoteSection() {
                   }`}
                 >
                   {confirmedPaymentMode === 'Single'
-                    ? `৳${apiResponse?.total_premium.toLocaleString()}`
+                    ? `৳${apiResponse?.total_premium?.toLocaleString() || '0'}`
                     : ''}
                 </div>
               </div>
