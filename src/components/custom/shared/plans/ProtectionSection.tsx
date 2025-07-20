@@ -27,11 +27,9 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
             relative 
             w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} xl:w-full
             h-[250px] md:h-[300px] lg:h-[440px] xl:h-[600px] 2xl:h-[700px]
-            rounded-[8px] md:rounded-[10px]  lg:rounded-[8px]  xl:rounded-[12px] 
+            rounded-[8px] md:rounded-[10px] lg:rounded-[8px]  xl:rounded-[12px] 
             bg-[lightgray]  
             bg-no-repeat 
-            lg:bg-[length:185.378%_100%] 
-            lg:bg-[position:-172.35px_0px]
             bg-cover
             overflow-hidden
            ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}

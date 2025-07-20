@@ -8,7 +8,7 @@ function WhyChooseUsSection() {
       {/* Background image with overlay only for mobile */}
       <div className="absolute lg:hidden inset-0 -z-0">
         <img
-          src="/assets/whychooseus3.png"
+          src="/assets/homepage/whyChooseUs.jpg"
           alt="Background"
           className="w-full h-full object-cover"
         />
@@ -20,8 +20,8 @@ function WhyChooseUsSection() {
         <div className="hidden lg:flex justify-end items-center rounded-t-[24px]">
           <div className="w-full rounded-t-[24px] lg:h-[600px] xl:h-[650px] 2xl:h-[700px]">
             <img
-              className="h-full w-full z-[50] rounded-2xl"
-              src="/assets/whychooseus3.png"
+              className="h-full w-full z-[50] object-cover rounded-2xl"
+              src="/assets/homepage/whyChooseUs.jpg"
               alt="why choose us"
             />
           </div>

@@ -41,19 +41,20 @@ const page: FC<pageProps> = ({}) => {
       mainImage: '/assets/careerVideoMain.png',
       insuranceCardData: [
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
+          title: 'Shanta Life Insurance',
           image: '/assets/careerVideo1.jpg',
-          description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
+          description: 'At Shanta Life Insurance, your journey will be more than just a job.',
         },
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
+          title: 'Shanta Life Insurance Preferred Career',
           image: '/assets/careerVideo2.jpg',
-          description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
+          description:
+            'We believe in fostering a culture where every voice is heard and every idea is valued.',
         },
         {
-          title: 'Lorem ipsum dolor sit amet consectetur.',
+          title: 'Shanta Life',
           image: '/assets/careerVideo3.jpg',
-          description: 'Lorem ipsum dolor sit amet consectetur. Massa et nulla urna massa.',
+          description: `Our commitment to continuous growth means that we're always seeking the most exceptional talent.`,
         },
       ],
     },
@@ -61,17 +62,33 @@ const page: FC<pageProps> = ({}) => {
 
   const resourceData = [
     {
+      title: 'Mantaka Faruqui Aurthi',
+      image: '/assets/career/testimonials/Aurthi.jpg',
+      description: `Shanta Life isn’t just a workplace—it’s a dynamic space where ideas thrive, creativity is celebrated, and every voice matters. As a woman in the Marketing department, I’ve experienced firsthand how empowering and inclusive the culture is. Here, I’m encouraged to think differently, challenge norms, and bring bold, creative ideas to life. It’s a place where talent is nurtured, innovation is embraced, and individuality is valued. If you're looking for an environment that inspires you to grow, lead, and make a difference, Shanta Life is the perfect place to be!`,
+      designation: 'Marketing',
+    },
+    {
+      title: 'Saurab Borua',
+      image: '/assets/career/testimonials/Saurab Borua.jpg',
+      description: `Shanta Life is more than just a workplace - it's a movement built on purpose, passion, and people. From the very first day, I felt the pulse of something extraordinary: a culture rooted in trust, driven by values and fueled by a collective dream to redefine life insurance in Bangladesh.
+    Here, every role matters, every voice is heard, and every idea has the power to inspire change. As a young HR professional, I’ve been fortunate to be part of an environment that doesn’t just talk about transformation - it lives it. From nurturing talent to shaping culture, from building systems to unlocking human potential, I’ve seen firsthand how a clear vision, aligned values and courageous leadership can create something truly exceptional.
+    At Shanta Life, we don’t just offer protection - we ignite possibility. I am proud—honored—to be part of this inspiring journey, alongside brilliant minds and warm hearts who are committed to making a difference. `,
+      designation: 'Information Technology.',
+    },
+    {
       title: 'Rabeya Dihan',
       image: '/assets/Dihan.jpg',
       description: `Working at Shanta Life Insurance PLC has been a rewarding and professionally enriching journey.As part of the Customers Experience Team.I've had the opportunity to enagage directy with our valued custromers ensuring they recived timely support ,clear communication &  a seamless service experience.Everyday at Shanta Life brings new opportunity to grow, learn & make a sure meaningful impact. `,
       designation: 'Customer Service',
     },
+
     {
       title: 'Md. Arif Hossain',
       image: '/assets/Arif.jpg',
       description: `Working at Shanta Life has been a truly rewarding experience. The team is supportive, the environment is positive, and there’s a strong focus on growth and innovation. I’ve learned a lot and felt valued every step of the way.  `,
       designation: 'Corporate Sales',
     },
+
     //     {
     //       title: 'Rafiqul Ahsan Mohin',
     //       image: '/assets/avatar2.jpg',

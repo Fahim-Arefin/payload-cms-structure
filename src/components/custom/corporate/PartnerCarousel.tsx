@@ -1,14 +1,36 @@
 'use client'
 
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import Image from 'next/image'
 import { PartnerType } from '@/types'
+import { useEffect, useState } from 'react'
+import CarouselNavButtons from '../shared/CarousalNavButtons'
 
 type Props = {
   data: PartnerType[]
 }
 
 function PartnerCarousel({ data }: Props) {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
+
+  useEffect(() => {
+    if (!carouselApi) return
+
+    const updateScrollButtons = () => {
+      setCanScrollPrev(carouselApi.canScrollPrev())
+      setCanScrollNext(carouselApi.canScrollNext())
+    }
+
+    updateScrollButtons()
+    carouselApi.on('select', updateScrollButtons)
+
+    return () => {
+      carouselApi.off('select', updateScrollButtons)
+    }
+  }, [carouselApi])
+
   return (
     <section className="w-full py-5 md:py-10 lg:py-16 bg-[#FCF4EB]">
       <h2
@@ -26,6 +48,7 @@ function PartnerCarousel({ data }: Props) {
           align: 'start',
           dragFree: true,
         }}
+        setApi={setCarouselApi}
         className="w-full"
       >
         <CarouselContent>
@@ -45,12 +68,19 @@ function PartnerCarousel({ data }: Props) {
                 />
               </div>
 
-              {/* <p className="text-xs font-semibold text-center text-black uppercase">
-                {item.title}
-              </p> */}
+              <p className="text-xs font-semibold text-center text-black uppercase">{item.title}</p>
             </CarouselItem>
           ))}
         </CarouselContent>
+        {/* Navigation buttons */}
+        <div className="flex md:hidden gap-2 justify-center m-6">
+          <CarouselNavButtons
+            onPrev={() => carouselApi?.scrollPrev()}
+            onNext={() => carouselApi?.scrollNext()}
+            hasPrev={canScrollPrev}
+            hasNext={canScrollNext}
+          />
+        </div>
       </Carousel>
     </section>
   )

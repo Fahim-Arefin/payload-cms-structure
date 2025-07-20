@@ -80,7 +80,7 @@ function page() {
     title: 'Critical',
     subTitle: 'Protection - ',
     smallTitle: 'Classic',
-    bgImage: '/assets/protectionbg1.jpg',
+    bgImage: '/assets/criticalProtection.jpg',
     item: [
       {
         image: '/assets/protection1.png',
@@ -104,7 +104,7 @@ function page() {
     title: '',
     subTitle: 'Standard',
     smallTitle: '',
-    bgImage: '/assets/protectionbg2.jpg',
+    bgImage: '/assets/criticalProtection2.jpg',
     item: [
       {
         image: '/assets/protection5.png',

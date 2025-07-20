@@ -11,8 +11,9 @@ const MultiPlansSection = ({ data, planData, bgColor }: Props) => {
         <h3 className="global-h3 font-semibold uppercase">
           Shanta <span className="text-[#ED7125] font-semibold">3-Stage</span> Plan
         </h3>
-        <p className="global-p1">
-          For those who like to plan - <span className="font-bold">Dream, Act, Achieve</span>
+        <p className="global-p1 w-full lg:w-[70%] xl:w-[60%] 2xl:w-[50%]">
+          Three life stages, three payouts, and one seamless plan- because your ambitions deserve a
+          strategy, not just a policy.
         </p>
       </div>
       {/* Chart section */}

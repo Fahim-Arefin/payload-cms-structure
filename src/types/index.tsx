@@ -205,3 +205,15 @@ export type AllNewsAndBlogDataType = {
   description: string
   date: string
 }
+
+type TabContent = {
+  office_location_Label: string
+  office_location: string
+  office_address: string
+  office_email: string
+  office_phone: string
+}
+
+export type TabDataType = {
+  content: TabContent[]
+}

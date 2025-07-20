@@ -22,7 +22,7 @@ function RolesSection({ onboardingRoleData }: Props) {
           "
           >
             <img
-              src="/assets/freedomBanner.png"
+              src="/assets/agentOnboardingBanner.png"
               alt="All About"
               className="object-cover w-full h-full"
             />

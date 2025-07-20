@@ -1,27 +1,20 @@
 'use client'
 
-type TabData = {
-  content: {
-    office_location: string
-    office_address: string
-    office_email: string
-    office_phone: string
-  }
-}
+import { TabDataType } from '@/types'
 
 type Props = {
-  data: TabData
+  data: TabDataType
 }
 
 function MapSection({ data }: Props) {
   // 🗺️ Logic for map
-  const isIframe = data?.content?.office_location.trim().startsWith('<iframe')
-  const isShortLink = data?.content?.office_location.trim().startsWith('https://maps.app.goo.gl')
+  const isIframe = data?.content[0]?.office_location.trim().startsWith('<iframe')
+  const isShortLink = data?.content[0]?.office_location.trim().startsWith('https://maps.app.goo.gl')
 
   const mapSrc = isShortLink
-    ? `https://www.google.com/maps?q=${encodeURIComponent(data?.content?.office_location)}&output=embed`
+    ? `https://www.google.com/maps?q=${encodeURIComponent(data?.content[0]?.office_location)}&output=embed`
     : `https://www.google.com/maps/embed/v1/place?key=AIzaSyDC9UyRrFn8cIqD5cAtLYg3aVSNREWuaQQ&q=${encodeURIComponent(
-        data?.content?.office_location,
+        data?.content[0]?.office_location,
       )}`
 
   return (
@@ -46,16 +39,16 @@ function MapSection({ data }: Props) {
           Shanta Life Insurance PLC
         </h2>
         <p className="text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#6E6E6E]">
-          {data?.content?.office_address}
+          {data?.content[0]?.office_address}
         </p>
 
         <div className="flex items-center space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
           <img src="/assets/phone.png" alt="" />
-          <p>{data?.content?.office_phone}</p>
+          <p>{data?.content[0]?.office_phone}</p>
         </div>
         <div className="flex items-center space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
           <img src="/assets/phone.png" alt="" />
-          <p>{data?.content?.office_email}</p>
+          <p>{data?.content[0]?.office_email}</p>
         </div>
 
         <div className="hidden lg:block pt-6">
@@ -68,7 +61,7 @@ function MapSection({ data }: Props) {
         {isIframe ? (
           <div
             className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full overflow-hidden"
-            dangerouslySetInnerHTML={{ __html: data?.content?.office_address }}
+            dangerouslySetInnerHTML={{ __html: data?.content[0]?.office_location }}
           />
         ) : (
           <iframe

@@ -21,7 +21,7 @@ function page({}: Props) {
       title: 'Turn your Ambition, Into Impact ',
       subtitle: '',
       description: 'Stay beyond the Ordinary, step into a role that builds futures.',
-      image: '/assets/banner4.png',
+      image: '/assets/agentHeroBanner.jpg',
     },
   ]
 
@@ -55,8 +55,7 @@ function page({}: Props) {
     subheading: 'The front',
     paragraphTitle: 'Own your time. Maximize your growth.',
     image: '/assets/shantaIntroImage.png',
-    paragraph:
-      'Being a Relationship Officer isn’t about desk jobs. It’s about people, progress, and purpose. This role gives you high-earning potential, unmatched flexibility, and the rare chance to secure futures. It’s where your hustle meets human impact. Set your own pace, work from anywhere, and unlock exclusive access to world-class training, rewarding income, and powerful professional connections.',
+    paragraph: `Being a Relationship Officer is about people, progress, and purpose. This role gives you high-earning potential, unmatched flexibility, and the rare chance to secure futures.  Set your own pace, work from anywhere, and unlock exclusive access to world-class training, rewarding income, and powerful professional connections.`,
   }
 
   const rolesData = [
@@ -149,8 +148,8 @@ function page({}: Props) {
       },
     ],
     sectionRight: {
-      avatar: '/assets/opportunityAvatar.jpg',
-      name: 'Khondoker Khalil Ahamed',
+      avatar: '/assets/board-of-directors/abrar-anwar.jpg',
+      name: 'Abrar A. Anwar',
       quote:
         'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Asset Management.',
     },
@@ -192,7 +191,7 @@ function page({}: Props) {
       points: [
         'Excellent communications and networking skills',
         'Self motivated to build a future in sales',
-        'Preferebly compeleted undergrad from any UCG apporved university ',
+        'Preferebly compeleted undergrad from any UGC approved university ',
       ],
     },
   ]

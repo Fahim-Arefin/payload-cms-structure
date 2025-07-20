@@ -15,8 +15,7 @@ function page() {
   ]
   const planInfoData = {
     image: '/assets/planInfo4.png',
-    description:
-      'Accidents can bring life to a sudden halt—impacting financial strain and uncertainty for you and your family. With Shanta Lifes Accidental Coverage, you get a reliable safety net to help safeguard your future and ease the financial burden of unforeseen events. Stay protected, stay prepared—always stay ahead in life. We have you covered, no matter the impact of an accident. Life is unpredictable—but your safety should not be.',
+    description: `Accidents can bring life to a sudden halt, impacting financial strain and uncertainty for you and your family. With Shanta Life's Accidental Coverage, you get a reliable safety net to help safeguard your future and ease the financial burden of unforeseen events. We've got you covered, so you can focus on the recovery. `,
   }
   const offersData = [
     {
