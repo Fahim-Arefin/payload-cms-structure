@@ -5,6 +5,8 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import SupportTabContent from './SupportTabContent'
 import { TabDataType } from '@/types'
+import GeneralFaq from './GeneralFaq'
+import FormsTable from './FormsTable'
 
 type TabConfig = {
   value: string
@@ -13,10 +15,9 @@ type TabConfig = {
 
 type Props = {
   config: TabConfig
-  data: TabDataType[]
 }
 
-export function MapTabSection({ config, data }: Props) {
+export function FaqTabSection({ config }: Props) {
   const [activeTab, setActiveTab] = useState(config[0].value)
   const activeIndex = config.findIndex((tab) => tab.value === activeTab)
 
@@ -79,11 +80,7 @@ export function MapTabSection({ config, data }: Props) {
         </Tabs>
       </div>
       {/* TabsContent outside of Tabs */}
-      {activeTab === 'branches' ? (
-        <SupportTabContent data={data} activeTab="branches" />
-      ) : (
-        <SupportTabContent data={data} activeTab="hospitals" />
-      )}
+      {activeTab === 'general' ? <GeneralFaq /> : <FormsTable />}
     </>
   )
 }

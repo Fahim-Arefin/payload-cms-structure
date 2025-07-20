@@ -140,7 +140,8 @@ function AllNewsContainer() {
       className="bg-[#434343] 
     rounded-[6px]  md:rounded-[8px] lg:rounded-[11px] xl:rounded-[13px] 2xl:rounded-[15px]
     p-8 lg:p-[20px] xl:p-[40px] 2xl:p-[50px]
-    grid grid-cols-1 lg:grid-cols-2 text-white gap-6 xl:gap-12 "
+    grid grid-cols-1 lg:grid-cols-2 text-white gap-6 xl:gap-12 
+    mb-12 lg:mb-16 xl:mb-24"
     >
       {/* Left Banner */}
       {/* <div className="relative rounded-[6px] cursor-pointer">
