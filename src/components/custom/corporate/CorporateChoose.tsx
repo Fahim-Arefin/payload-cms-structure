@@ -15,11 +15,11 @@ type CorporateChooseProps = {
 const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
   return (
     <div
-      className="w-full pl-5 py-12 
-           md:pl-24 
+      className="w-full py-12 
+           
            lg:pl-[130px]  lg:py-[110px] 
            xl:pl-[200px]  xl:py-[100px] 
-           2xl:pl-[250px] 2xl:py-[150px]"
+           2xl:pl-[250px] 2xl:py-[120px]"
     >
       {/* Desktop / Laptop */}
       <div className="hidden lg:grid grid-cols-[1.8fr_1.2fr] items-center bg-white">
@@ -97,7 +97,7 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center md:justify-start md:items-left gap-4 pb-12 pt-10 lg:pt-10 xl:pt-16 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]">
+      <div className="flex justify-center items-center base:justify-start md:items-left gap-4 pb-6 pt-10 lg:pt-10 xl:pt-16 ">
         {/* <Button
           variant="primary"
           className="

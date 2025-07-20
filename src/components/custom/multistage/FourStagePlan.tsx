@@ -26,7 +26,10 @@ const FourStagePlan: FC<FourStagePlanProps> = ({}) => {
         <h3 className="global-h3 font-semibold uppercase">
           Shanta <span className="text-[#ED7125] font-semibold">4-Stage</span> Plan
         </h3>
-        <p className="global-p1">Because life doesn’t wait. Celebrate every quarter.</p>
+        <p className="global-p1 w-full lg:w-[70%] xl:w-[60%] 2xl:w-[50%]">
+          A strategic 4-stage plan crafted to build, elevate, preserve, and transition your
+          wealth—flawlessly.
+        </p>
       </div>
       {/* Chart section */}
       <div className="mt-4 lg:mt-10 ">

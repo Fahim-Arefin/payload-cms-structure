@@ -100,7 +100,7 @@ function GeneralFaq({}: Props) {
     >
       <div className="text-[#434343] space-y-8 lg:space-y-12">
         {/* header */}
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <h3
             className="text-[18px] md:text-[20px] lg:text-[22px] xl:text-[24px] 2xl:text-[32px] 
           leading-6 md:leading-7 xl:leading-[35px] 2xl:leading-[45px] 
@@ -123,7 +123,7 @@ function GeneralFaq({}: Props) {
               />
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* selector */}
         <div className="flex items-center space-x-2 md:space-x-4">

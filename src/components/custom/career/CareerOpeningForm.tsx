@@ -28,7 +28,7 @@ function CareerOpeningForm() {
     console.log({ name, email, phone, position, message })
     const resumeFormData = new FormData()
     resumeFormData.append('hogamara', 'let go')
-    resumeFormData.append('file', document.querySelector('#resume')?.files?.[0])
+    resumeFormData.append('file', (document.querySelector('#resume') as HTMLInputElement)?.files?.[0])
     console.log(resumeFormData)
     const resumeId = await fetch('/api/resume', {
       method: 'POST',

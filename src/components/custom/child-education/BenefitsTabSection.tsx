@@ -16,9 +16,9 @@ export function BenefitsTabSection() {
         {/* Right Image - top on mobile/tablet, right on desktop */}
         <div className="w-full h-fit order-1 lg:order-2">
           <img
-            src="/assets/benefitsBanner.png"
+            src="/assets/benefitBannerTab.jpg"
             alt="Insurance Protection"
-            className="rounded-2xl w-full lg:h-[500px] 2xl:h-[600px] object-cover"
+            className="rounded-2xl w-full lg:h-[500px] 2xl:h-[600px] object-cover lg:object-[80%] 2xl:object-right"
           />
         </div>
 

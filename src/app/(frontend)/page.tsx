@@ -33,20 +33,20 @@ export default async function HomePage() {
       subtitle: 'to live on your terms',
       description:
         'Your life evolves, and so should your protection. Shanta Life Insurance  will make sure you stay ahead',
-      image: '/assets/banner1.jpg',
+      image: '/assets/homepage/banner1.jpg',
     },
     {
       title: 'Building Better Futures',
       subtitle: 'One Step at a Time',
       description:
         'We walk with you on your journey, providing the tools you need to succeed and grow.',
-      image: '/assets/banner2.jpg',
+      image: '/assets/homepage/banner2.jpg',
     },
     {
       title: 'Innovative Thinking',
       subtitle: 'Impactful Living',
       description: "Harness innovation to redefine your future. Together, let's make a difference.",
-      image: '/assets/banner3.png',
+      image: '/assets/homepage/banner3.jpg',
     },
   ]
 

@@ -18,7 +18,8 @@ function CatchTheBuzzSection({}: Props) {
            md:py-[50px]
              lg:py-[70px] 
              xl:py-[100px]
-           px-8"
+           px-8 
+           "
       >
         <div>
           <h3
