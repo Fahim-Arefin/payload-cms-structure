@@ -2,6 +2,7 @@
 
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -9,10 +10,32 @@ import {
 } from '@/components/ui/carousel'
 import { OfferDataType } from '@/types'
 import AddonsCard from './AddonsCard'
+import { useEffect, useState } from 'react'
+import CarouselNavButtons from '../shared/CarousalNavButtons'
 
 type Props = { data: OfferDataType[] }
 
 function CorporateAddons({ data }: Props) {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
+
+  useEffect(() => {
+    if (!carouselApi) return
+
+    const updateScrollButtons = () => {
+      setCanScrollPrev(carouselApi.canScrollPrev())
+      setCanScrollNext(carouselApi.canScrollNext())
+    }
+
+    updateScrollButtons()
+    carouselApi.on('select', updateScrollButtons)
+
+    return () => {
+      carouselApi.off('select', updateScrollButtons)
+    }
+  }, [carouselApi])
+
   return (
     <div
       className=" min-h-[410px] md:min-h-[550px]
@@ -37,7 +60,8 @@ function CorporateAddons({ data }: Props) {
       <Carousel
         className="w-full px-5 pb-12 
            md:px-12 
-           lg:px-[64px] "
+           lg:px-[64px]"
+        setApi={setCarouselApi}
       >
         <CarouselContent className="-ml-1">
           {data?.map((item, index) => (
@@ -51,24 +75,15 @@ function CorporateAddons({ data }: Props) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {/* Carousel Navigation */}
-        {/* <div
-          className="flex gap-2 absolute h-fit
-            inset-x-0 justify-center lg:justify-end -bottom-16 md:-bottom-20 lg:-top-8 xl:-top-10 2xl:-top-12 lg:right-0"
-        >
-          <CarouselPrevious
-            className="
-         w-6 xl:w-8 
-         h-6 xl:h-8 
-        static rounded-full border border-gray-400 bg-white text-gray-700 flex items-center justify-center hover:bg-gray-100 transition"
+        {/* Navigation buttons */}
+        <div className="flex md:hidden gap-2 justify-center m-6">
+          <CarouselNavButtons
+            onPrev={() => carouselApi?.scrollPrev()}
+            onNext={() => carouselApi?.scrollNext()}
+            hasPrev={canScrollPrev}
+            hasNext={canScrollNext}
           />
-          <CarouselNext
-            className="
-         px-6 xl:px-9 
-         h-6 xl:h-8
-        static rounded-full bg-orange-500 text-white flex items-center justify-center hover:bg-orange-600 transition"
-          />
-        </div> */}
+        </div>
       </Carousel>
     </div>
   )

@@ -1,4 +1,3 @@
-
 import { FootPrintDataType } from '@/types'
 import React from 'react'
 

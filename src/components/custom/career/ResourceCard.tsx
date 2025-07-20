@@ -13,7 +13,7 @@ type ResourceData = {
 function ResourceCard({ data }: { data: ResourceData }) {
   const [expanded, setExpanded] = useState(false)
   return (
-    <div className="relative bg-[#F9F4EE] rounded-[18px] px-4 py-6 md:py-8 md:px-7 xl:px-8 w-[300px] md:w-[500px]  flex flex-col justify-between shadow-[0_2px_8px_0_rgba(51,51,51,0.04)] overflow-visible">
+    <div className="relative bg-[#F9F4EE] rounded-[18px] px-4 py-6 md:py-8 md:px-7 xl:px-8 w-[300px] md:w-[500px] flex flex-col justify-between shadow-[0_2px_8px_0_rgba(51,51,51,0.04)] overflow-visible">
       {/* 4 Ellipse Overlays */}
       <EllipseDecoration />
       {/* Description */}

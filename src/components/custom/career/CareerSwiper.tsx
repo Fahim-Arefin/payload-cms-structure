@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { CareerCard } from '@/types'
 import { useEffect, useState } from 'react'
 import SwiperNavButtons from './SwiperNavButtons'
+import Autoplay from 'embla-carousel-autoplay'
 
 type CareerSwiperProps = {
   careerCards: CareerCard[]
@@ -14,6 +15,22 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
+
+  useEffect(() => {
+    if (!carouselApi) return
+    if (hoveredIdx !== null) return // Pause autoplay when hovering
+
+    const interval = setInterval(() => {
+      if (carouselApi.canScrollNext()) {
+        carouselApi.scrollNext()
+      } else {
+        carouselApi.scrollTo(0) // Loop back to first slide
+      }
+    }, 3500)
+
+    return () => clearInterval(interval)
+  }, [carouselApi, hoveredIdx])
 
   useEffect(() => {
     if (!carouselApi) return
@@ -54,6 +71,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
           <Carousel
             opts={{
               align: 'start',
+              loop: true,
             }}
             setApi={setCarouselApi}
             className="w-full"
@@ -64,19 +82,31 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
                   key={card.title}
                   className={cn(
                     // For 3.5 cards on desktop: (338 * 3.5 + 18) ~ 1200px fits
-                    'basis-[338px] md:basis-[338px] 2xl:basis-[460px] shrink-0',
+                    'basis-[338px] cursor-pointer md:basis-[338px] 2xl:basis-[460px] shrink-0',
                     'pr-6 last:pr-0',
                     // Mobile: 1.5 cards
                   )}
+                  onMouseEnter={() => setHoveredIdx(idx)}
+                  onMouseLeave={() => setHoveredIdx(null)}
                 >
                   <div
                     className={cn(
-                      'flex flex-col w-[250px] md:w-[338px] 2xl:w-[380px] justify-between items-center rounded-[6px] md:rounded-[18px] border-[0.5px] md:border border-[#FFFFFF] bg-[#0000004D] backdrop-blur-[7.5px] text-center px-6',
+                      'flex flex-col w-[250px] md:w-[338px] 2xl:w-[380px] justify-between items-center rounded-[6px] md:rounded-[18px] border-[0.5px] md:border border-[#FFFFFF] bg-[#0000004D] backdrop-blur-[7.5px] text-center px-6 transition-all duration-500',
                       idx % 2 === 1
-                        ? 'h-[230px] md:h-[444px] lg:h-[444px]'
+                        ? 'h-[150px] md:h-[346px] lg:h-[346px]'
                         : 'h-[150px] md:h-[346px] lg:h-[346px]',
-                      // Mobile height (half, as per your request)
                       'sm:h-[120px] sm:lg:h-[180px]',
+                      hoveredIdx === idx
+                        ? idx % 2 === 1
+                          ? 'h-[180px] md:h-[400px] lg:h-[450px]'
+                          : 'h-[180px] md:h-[400px] lg:h-[450px]'
+                        : idx % 2 === 1
+                          ? 'h-[150px] md:h-[346px] lg:h-[346px]'
+                          : 'h-[150px] md:h-[346px] lg:h-[346px]',
+                      // **Width logic**
+                      hoveredIdx === idx
+                        ? 'w-[275px] md:w-[370px] 2xl:w-[410px]'
+                        : 'w-[250px] md:w-[338px] 2xl:w-[380px]',
                     )}
                   >
                     <div className="flex-1 flex flex-col gap-4 md:gap-8 justify-center">

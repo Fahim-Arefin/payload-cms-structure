@@ -36,7 +36,7 @@ const EligibilityTabSection: FC<EligibilityTabSectionProps> = ({ value }) => {
           <EligibilityCard
             title="Parents"
             icon="/assets/parentIcon.svg"
-            bgImage="/assets/eligibilityImage2.jpg"
+            bgImage="/assets/parentsTab.jpg"
             entryMin="21"
             entryMinLabel="Years"
             entryMax="55"
