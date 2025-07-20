@@ -15,12 +15,42 @@ import './ContactUsSection.css'
 import ToolTip from '../ToolTip'
 import { Textarea } from '@/components/ui/textarea'
 import GlobalButton from '../GlobalButton'
+import { useState } from 'react'
 
 function ContactUsSection() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [sendButtonText, setSendButtonText] = useState('Send Message')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [message, setMessage] = useState('')
+  const sendMessageHandler = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission logic here
-    console.log('Form submitted')
+    setSendButtonText('Sending...')
+    console.log({ firstName, lastName, email, phone, message })
+
+    await fetch('/api/emails/ask-us', {
+      method: 'POST',
+      // credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        phone,
+        message,
+      }),
+    })
+      .then((rs) => rs.json())
+      .then((rs) => {
+        setSendButtonText('Message Sent')
+        setTimeout(() => {
+          setSendButtonText('Send Message')
+        }, 1500)
+      })
   }
   return (
     <div
@@ -101,13 +131,15 @@ function ContactUsSection() {
 
           <form
             className="relative z-30 lg:space-y-3 xl:space-y-4 2xl:space-y-12"
-            onSubmit={handleSubmit}
+            onSubmit={sendMessageHandler}
           >
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col">
                 <label className="text-lg text-gray-800 2xl:mb-1">First Name</label>
                 <Input
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   placeholder=""
                   className="rounded-none border-0 border-b border-black focus-visible:ring-0 focus-visible:ring-offset-0 px-0
                   h-[10px] lg:h-[28px] xl:h-[30px] 2xl:h-[32px]"
@@ -116,6 +148,8 @@ function ContactUsSection() {
               <div className="flex flex-col">
                 <label className="text-lg text-gray-800 2xl:mb-1">Last Name</label>
                 <Input
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   placeholder=""
                   className="rounded-none border-0 border-b border-black focus-visible:ring-0 focus-visible:ring-offset-0 px-0 
                   h-[10px] lg:h-[28px] xl:h-[30px] 2xl:h-[32px]"
@@ -128,6 +162,8 @@ function ContactUsSection() {
               <div className="flex flex-col">
                 <label className="text-lg text-gray-800 2xl:mb-1">Email</label>
                 <Input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   placeholder=""
                   className="rounded-none border-0 border-b border-black focus-visible:ring-0 focus-visible:ring-offset-0 px-0
@@ -137,6 +173,8 @@ function ContactUsSection() {
               <div className="flex flex-col">
                 <label className="text-lg text-gray-800 2xl:mb-1">Phone Number</label>
                 <Input
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   type="tel"
                   placeholder=""
                   className="rounded-none border-0 border-b border-black focus-visible:ring-0 focus-visible:ring-offset-0 px-0
@@ -149,6 +187,8 @@ function ContactUsSection() {
             <div className="flex flex-col">
               <label className="text-lg text-gray-800 2xl:mb-1">Message</label>
               <Textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 placeholder="Write your message.."
                 className="rounded-none border-0 border-b border-black focus-visible:ring-0 focus-visible:ring-offset-0 px-0
                 h-[10px] lg:h-[28px] xl:h-[30px] 2xl:h-[32px]"
@@ -158,22 +198,15 @@ function ContactUsSection() {
 
             {/* Button */}
             <div className="pt-4 flex justify-end">
-              <ToolTip>
-                {/* <Button
+              {/* <Button
                   variant="primary"
                   className=" text-white shadow-md cursor-not-allowed
                 
                 text-[10px] md:text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[14px]"
                 >
-                  Send Message
+                  {sendButtonText}
                 </Button> */}
-                <GlobalButton
-                  size="small"
-                  className="cursor-not-allowed"
-                  text="Send Message"
-                  variant="primary"
-                />
-              </ToolTip>
+              <GlobalButton size="small" className="" text={sendButtonText} variant="primary" />
             </div>
           </form>
         </div>
@@ -196,7 +229,7 @@ function ContactUsSection() {
              text-[10px] md:text-[12px] 
              h-[26px] md:h-[30px] px-3 rounded-md"
               >
-                Send Message
+                {sendButtonText}
               </Button>
               {/* <GlobalButton size="small" className="" text="Send Message" variant="primary" /> */}
             </DialogTrigger>
@@ -212,16 +245,27 @@ function ContactUsSection() {
                   <DialogTitle></DialogTitle>
                 </DialogHeader>
                 {/* FORM CONTENT */}
-                <form className="space-y-3 text-black text-sm font-light">
+                <form
+                  className="space-y-3 text-black text-sm font-light"
+                  onSubmit={sendMessageHandler}
+                >
                   {/* Name Fields */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col">
                       <label className="text-sm">First Name</label>
-                      <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px]" />
+                      <Input
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px]"
+                      />
                     </div>
                     <div className="flex flex-col">
                       <label className="text-sm">Last Name</label>
-                      <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px]" />
+                      <Input
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px]"
+                      />
                     </div>
                   </div>
 
@@ -229,11 +273,19 @@ function ContactUsSection() {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col">
                       <label className="text-sm">Email</label>
-                      <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px]" />
+                      <Input
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px]"
+                      />
                     </div>
                     <div className="flex flex-col">
                       <label className="text-sm">Phone</label>
-                      <Input className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px]" />
+                      <Input
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px]"
+                      />
                     </div>
                   </div>
 
@@ -241,6 +293,8 @@ function ContactUsSection() {
                   <div className="flex flex-col">
                     <label className="text-sm">Message</label>
                     <Textarea
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                       placeholder="Write your message..."
                       className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 placeholder:text-black/50 placeholder:text-[12px]
                     h-[28px] lg:h-[28px] xl:h-[30px] 2xl:h-[32px]"
@@ -251,7 +305,7 @@ function ContactUsSection() {
                   {/* Submit */}
                   <div className="pt-4 flex justify-end">
                     <Button size="sm" variant="primary" className="text-white shadow-md ">
-                      Send Message
+                      {sendButtonText}
                     </Button>
                   </div>
                 </form>
