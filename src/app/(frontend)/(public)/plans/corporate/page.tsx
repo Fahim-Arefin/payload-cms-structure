@@ -18,14 +18,14 @@ function page({}: Props) {
       title: 'Shanta Corporate Plans',
       subtitle: '',
       description: 'When you go further for your people, they go further for you.',
-      image: '/assets/corporatePlans.png',
+      image: '/assets/corporateHeroBanner.jpg',
     },
   ]
 
   const highlightData = [
     {
       mainDescription:
-        'Deciding on the best package for your team, making sure you’re getting value for money, staying on top of the options available… It can all add up to a daunting to-do list. We’re here to make that easier for you.',
+        `Deciding on the best package for your team, making sure you’re getting value for money, staying on top of the options available.It can all add up to a daunting to-do list. We’re here to make that easier for you. `,
     },
   ]
 
@@ -76,26 +76,26 @@ function page({}: Props) {
   ]
 
   const partnerData = [
-    { img: '/assets/valued-clients/client1.png', title: 'Shanta Holdings Limited' },
-    { img: '/assets/valued-clients/client2.jpg', title: 'Shanta Multiverse Limited' },
-    { img: '/assets/valued-clients/client3.png', title: 'Shanta Lifestyle Limited' },
-    { img: '/assets/valued-clients/client4.png', title: 'Amari Dhaka' },
+    { img: '/assets/valued-clients/Client1.png', title: 'Shanta Holdings Limited' },
+    { img: '/assets/valued-clients/Client2.jpg', title: 'Shanta Multiverse Limited' },
+    { img: '/assets/valued-clients/Client3.png', title: 'Shanta Lifestyle Limited' },
+    { img: '/assets/valued-clients/Client4.png', title: 'Amari Dhaka' },
     {
-      img: '/assets/valued-clients/client5.jpg',
+      img: '/assets/valued-clients/Client5.jpg',
       title: 'Hohenstein Laboratories Bangladesh Limited',
     },
-    { img: '/assets/valued-clients/client6.png', title: 'Eskimi Bangladesh' },
-    { img: '/assets/valued-clients/client7.jpg', title: 'Strategic Equity Management' },
-    { img: '/assets/valued-clients/client8.png', title: 'STS Capital Limited' },
-    { img: '/assets/valued-clients/client9.png', title: 'Golden Sky Footwear' },
-    { img: '/assets/valued-clients/client10.png', title: 'Blucheez Fashion' },
-    { img: '/assets/valued-clients/client11.jpg', title: 'Eduko Bangladesh' },
-    { img: '/assets/valued-clients/client12.png', title: 'Glenrich International School' },
-    { img: '/assets/valued-clients/client13.png', title: 'Bengal Airlift Limited' },
-    { img: '/assets/valued-clients/client14.jpg', title: 'Ace Bangladesh Limited' },
-    { img: '/assets/valued-clients/client15.png', title: 'FitsAir' },
-    { img: '/assets/valued-clients/client16.jpg', title: 'Air Alliance Ltd. (SP)' },
-    { img: '/assets/valued-clients/client17.png', title: 'Speedmark Transportation (BD) Limited' },
+    { img: '/assets/valued-clients/Client6.png', title: 'Eskimi Bangladesh' },
+    { img: '/assets/valued-clients/Client7.jpg', title: 'Strategic Equity Management' },
+    { img: '/assets/valued-clients/Client8.png', title: 'STS Capital Limited' },
+    { img: '/assets/valued-clients/Client9.png', title: 'Golden Sky Footwear' },
+    { img: '/assets/valued-clients/Client10.png', title: 'Blucheez Fashion' },
+    { img: '/assets/valued-clients/Client11.jpg', title: 'Eduko Bangladesh' },
+    { img: '/assets/valued-clients/Client12.png', title: 'Glenrich International School' },
+    { img: '/assets/valued-clients/Client13.png', title: 'Bengal Airlift Limited' },
+    { img: '/assets/valued-clients/Client14.jpg', title: 'Ace Bangladesh Limited' },
+    { img: '/assets/valued-clients/Client15.png', title: 'FitsAir' },
+    { img: '/assets/valued-clients/Client16.jpg', title: 'Air Alliance Ltd. (SP)' },
+    { img: '/assets/valued-clients/Client17.png', title: 'Speedmark Transportation (BD) Limited' },
   ]
 
   const addOnsData = [

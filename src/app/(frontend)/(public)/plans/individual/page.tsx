@@ -9,31 +9,32 @@ import GlobalButton from '@/components/custom/shared/GlobalButton'
 function PlanPage() {
   const heroSlides = [
     {
-      title: 'Offering Confidence',
+      title: 'Individual Plans',
       subtitle: '',
-      description: 'Stay Ahead in Life',
+      description: 'Because real life doesn’t come with a rewind button',
       image: '/assets/plan1.jpg',
     },
   ]
 
   const indivisualPlantData = [
-    {
-      title: 'Saving and Investments',
-      description: 'Turn today\u2019s choices into tomorrow\u2019s freedom.',
-      link: '/plans/individual/saving-and-investment',
-      image: '/assets/plan4.jpg',
-    },
-    {
-      title: 'Child Education',
-      description: 'From crayons to cap and gown — we\u2019ve got you covered',
+{
+      title: 'Child Education Plan',
+      description: `A brighter future starts with a thoughtful plan`,
       link: '/plans/individual/child-education',
-      image: '/assets/plan5.jpg',
+      image: '/assets/childEducationPlan.jpg',
     },
     {
-      title: 'Health & Protection',
-      description: 'Life happens. We make sure you\u2019re ready.',
-      link: '/plans/individual/health-and-protection',
-      image: '/assets/plan6.jpg',
+      title: 'Shanta Multi-stage Plans',
+      description: `Because Life Has More Than One Milestone. We’re With You at Every One.`,
+      link: '/plans/individual/saving-and-investment/multistage',
+      image: '/assets/multiStagePlanBanner.jpg',
+    },
+
+    {
+      title: 'Shanta Endowment Plan',
+      description: `A promise that grows with time and care`,
+      link: '/plans/individual/saving-and-investment/endowment',
+      image: '/assets/endowmentPlan.jpg',
     },
     // {
     //   title: 'Retirement',
