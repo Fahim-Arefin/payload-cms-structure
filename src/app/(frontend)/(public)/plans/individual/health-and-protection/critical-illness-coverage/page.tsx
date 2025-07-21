@@ -5,6 +5,7 @@ import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
 import OffersClientWrapper from '@/components/custom/shared/plans/OffersClientWrapper'
 import ProtectionSection from '@/components/custom/shared/plans/ProtectionSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
+import Link from 'next/link'
 import React from 'react'
 
 function page() {
@@ -140,14 +141,12 @@ function page() {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start
         "
         >
-          <ToolTip>
-            <GlobalButton
-              size="large"
-              className="cursor-not-allowed"
-              text="Download Brochure"
-              variant="primary"
-            />
-          </ToolTip>
+          <Link
+            href="/assets/pdf/Required Brochures/Health & Protection/Shanta Critical Protection/Shanta Life Rider Brochure.pdf"
+            target="_blank"
+          >
+            <GlobalButton size="large" text="Download Brochure" variant="primary" />
+          </Link>
         </div>
       </HeroSection>
       <PlanInfoSection data={planInfoData} />

@@ -95,12 +95,16 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
                 // className="cursor-not-allowed"
               />
             </Link>
-            <GlobalButton
-              variant="outline"
-              className=" text-[#9C8639] cursor-not-allowed hover:text-[#9C8638] border-2 border-[#9C8639]"
-              text="Download Brochure"
-              // className="cursor-not-allowed"
-            />
+            <Link
+              href="/assets/pdf/Required Brochures/Health & Protection/Shanta Critical Protection/Shanta Life Rider Brochure.pdf"
+              target="_blank"
+            >
+              <GlobalButton
+                variant="outline"
+                className=" text-[#9C8639] hover:text-[#9C8638] border-2 border-[#9C8639]"
+                text="Download Brochure"
+              />
+            </Link>
             {/* </ToolTip> */}
           </div>
         </div>

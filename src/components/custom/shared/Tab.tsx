@@ -134,6 +134,7 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import GlobalButton from './GlobalButton'
 import ToolTip from './ToolTip'
+import Link from 'next/link'
 
 export function ArrowIcon() {
   return (
@@ -272,13 +273,13 @@ export function Tab({ config, data }: Props) {
                 {/* <Button variant="secondary" className="text-xs md:text-[12px] xl:text-[14px]">
                   Download Brochure
                 </Button> */}
-                <ToolTip>
-                  <GlobalButton
-                    className="cursor-not-allowed  "
-                    text="Download Brochure"
-                    variant="secondary"
-                  />
-                </ToolTip>
+                <Link
+                  href="/assets/pdf/Required Brochures/Endowment Plan/Endowment Brochure.pdf"
+                  target="_blank"
+                >
+                  <GlobalButton text="Download Brochure" variant="secondary" />
+                </Link>
+
                 {/* <Button variant="outline" className="text-xs md:text-[12px] xl:text-[14px]">
                   Calculate Premium
                 </Button> */}

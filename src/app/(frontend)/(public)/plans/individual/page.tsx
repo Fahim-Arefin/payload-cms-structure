@@ -24,17 +24,17 @@ function PlanPage() {
       image: '/assets/childEducationPlan.jpg',
     },
     {
-      title: 'Shanta Multi-stage Plans',
+      title: 'Saving and Investment Plan',
       description: `Because Life Has More Than One Milestone. We’re With You at Every One.`,
-      link: '/plans/individual/saving-and-investment/multistage',
-      image: '/assets/multiStagePlanBanner.jpg',
+      link: '/plans/individual/saving-and-investment',
+      image: '/assets/banners/s&i-banner.png',
     },
 
     {
-      title: 'Shanta Endowment Plan',
+      title: 'Health and Protection Plan',
       description: `A promise that grows with time and care`,
-      link: '/plans/individual/saving-and-investment/endowment',
-      image: '/assets/endowmentPlan.jpg',
+      link: '/plans/individual/health-and-protection',
+      image: '/assets/healthandprotection1.jpg',
     },
     // {
     //   title: 'Retirement',
