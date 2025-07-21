@@ -1,5 +1,3 @@
-// components/PrivacyPolicyAccordion.tsx
-
 import {
   Accordion,
   AccordionContent,
@@ -8,7 +6,7 @@ import {
 } from '@/components/ui/accordion'
 import { termsCondition } from './termsConditionData'
 
-export default function PrivacyPolicyAccordion() {
+export default function TermsConditionAccordion() {
   return (
     <Accordion type="single" collapsible className="w-full mx-auto px-1 sm:px-6 space-y-2">
       {termsCondition.map((privacyItem, i) => (
@@ -33,7 +31,7 @@ export default function PrivacyPolicyAccordion() {
               <>
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: privacyItem.secondTitle,
+                    __html: privacyItem.secondTitle ?? '',
                   }}
                 ></div>
                 <ul className="list-disc pl-6 space-y-1">

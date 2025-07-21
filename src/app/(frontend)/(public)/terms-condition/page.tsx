@@ -1,5 +1,5 @@
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import PrivacyPolicyAccordion from './TermsConditionAccordion'
+import TermsConditionAccordion from './TermsConditionAccordion'
 
 function TermsCondition() {
   const heroSlides = [
@@ -33,7 +33,7 @@ function TermsCondition() {
             protection regulations.
           </p>
         </div>
-        <PrivacyPolicyAccordion />
+        <TermsConditionAccordion />
       </div>
 
       {/* </AllPlanSection> */}
