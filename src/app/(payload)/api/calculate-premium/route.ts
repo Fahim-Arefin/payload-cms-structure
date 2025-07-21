@@ -11,8 +11,6 @@ export async function POST(request: NextRequest) {
       'SumAssured',
       'Term',
       'PaymentMode',
-      'AccidentRider',
-      'CriticalRider',
       'Gender'
     ]
     
@@ -37,8 +35,8 @@ export async function POST(request: NextRequest) {
         SumAssured: body.SumAssured,
         Term: body.Term,
         PaymentMode: body.PaymentMode,
-        AccidentRider: body.AccidentRider,
-        CriticalRider: body.CriticalRider,
+        AccidentRider: 1,
+        CriticalRider: 'CP-S',
         Gender: body.Gender
       })
     })
