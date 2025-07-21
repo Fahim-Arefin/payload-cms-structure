@@ -8,6 +8,7 @@ import { BenefitsTabSection } from './BenefitsTabSection'
 import EligibilityTabSection from './EligibilityTabSection'
 import GlobalButton from '../shared/GlobalButton'
 import ToolTip from '../shared/ToolTip'
+import Link from 'next/link'
 
 export function ArrowIcon() {
   return (
@@ -189,13 +190,13 @@ export function ChildEducationTabs({ config, data }: Props) {
                   >
                     Download Brochure
                   </Button> */}
-                  <ToolTip>
-                    <GlobalButton
-                      className="cursor-not-allowed"
-                      text="Download Brochure"
-                      variant="primary"
-                    />
-                  </ToolTip>
+                  <Link
+                    href="/assets/pdf/Required Brochures/Child Education Plan/Child Education Security Plan.pdf"
+                    target="_blank"
+                  >
+                    <GlobalButton text="Download Brochure" variant="primary" />
+                  </Link>
+
                   {/* <Button
                     variant="outline"
                     className="

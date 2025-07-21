@@ -13,7 +13,7 @@ type pageProps = {
 const page: FC<pageProps> = ({}) => {
   const heroSlides = [
     {
-      title: 'Purcahse Now',
+      title: 'Purchase Now',
       subtitle: '',
       description:
         '',
