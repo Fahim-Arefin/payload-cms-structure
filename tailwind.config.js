@@ -82,31 +82,19 @@ export default {
           },
         },
         fadeSlideLeft: {
-          '0%': {
-            opacity: '0',
-            transform: 'translateX(-100px)',
-          },
-          '100%': {
-            opacity: '0.1',
-            transform: 'translateX(0)',
-          },
+          '0%': { opacity: 0, transform: 'translateX(-120px)' },
+          '100%': { opacity: 0.2, transform: 'translateX(0)' },
         },
         fadeSlideRight: {
-          '0%': {
-            opacity: '0',
-            transform: 'translateX(100px)',
-          },
-          '100%': {
-            opacity: '0.1',
-            transform: 'translateX(0)',
-          },
+          '0%': { opacity: 0, transform: 'translateX(120px)' },
+          '100%': { opacity: 0.2, transform: 'translateX(0)' },
         },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        fadeSlideLeft: 'fadeSlideLeft 1.2s ease-out forwards',
-        fadeSlideRight: 'fadeSlideRight 1.2s ease-out forwards',
+        fadeSlideLeft: 'fadeSlideLeft 1.2s cubic-bezier(.4,0,.2,1) both',
+        fadeSlideRight: 'fadeSlideRight 1.2s cubic-bezier(.4,0,.2,1) both',
       },
       backdropBlur: {
         15: '15px',

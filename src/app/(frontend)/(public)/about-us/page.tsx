@@ -161,7 +161,7 @@ The initiative of enhancing financial literacy among individuals and boosting co
       id: 6,
       image: '/assets/profile6.png',
       name: 'Raiven Hasan',
-      title: 'Direcotor',
+      title: 'Director',
     },
     {
       id: 7,
