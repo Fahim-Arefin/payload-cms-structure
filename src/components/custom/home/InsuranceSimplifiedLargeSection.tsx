@@ -85,8 +85,9 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                 <div
                   className={cn(
                     `relative group cursor-pointer 
-        md:h-[200px] lg:h-[250px] xl:h-[300px] w-full  
-        bg-no-repeat bg-[length:100%_212.5%] bg-[position:0px_-180.566px] 
+        md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full  
+        bg-no-repeat bg-cover 
+        bg-center lg:bg-[position:0px_-35px] xl:bg-[position:0px_-55px]  2xl:bg-[position:0px_-65px] 
    md:rounded-[5.333px_5.333px_53.333px_5.333px] lg:rounded-[8.333px_8.333px_53.333px_8.333px]
         overflow-hidden transition-all`,
                     content === 'left' ? 'order-2' : 'order-1',
@@ -139,7 +140,7 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
             </Dialog>
           </div>
           {/* second row */}
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-3 gap-2 xl:gap-6">
             {data?.insuranceCardData?.map((item, i) => (
               <InsuranceCard data={item} key={i} />
             ))}
