@@ -21,6 +21,7 @@ const cards = [
     subtitle: 'Child Education Plan',
     description: 'They’re building castles in the sky — we’re here to anchor the ground.',
     image: '/assets/on-ur-cue/child-education.jpg',
+    link: '/plans/individual/child-education',
   },
   {
     icon: '/assets/cue1.png',
@@ -28,6 +29,7 @@ const cards = [
     subtitle: '3 Payment Plan',
     description: 'Multiple payouts, 1 powerful plan - because your future is in your hands.  ',
     image: '/assets/on-ur-cue/multi-stage.jpg',
+    link: '/plans/individual/saving-and-investment/multistage',
   },
   {
     icon: '/assets/cue3.png',
@@ -35,6 +37,7 @@ const cards = [
     subtitle: 'Endowment Plan',
     description: 'For the life you’re building and the ones you’re building it for.',
     image: '/assets/on-ur-cue/endowment.jpg',
+    link: '/plans/individual/saving-and-investment/endowment',
   },
   // {
   //   icon: '/assets/cue1.png',

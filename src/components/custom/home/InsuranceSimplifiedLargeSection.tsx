@@ -140,7 +140,9 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
           </div>
           {/* second row */}
           <div className="grid grid-cols-3 gap-6">
-            {data?.insuranceCardData?.map((item, i) => <InsuranceCard data={item} key={i} />)}
+            {data?.insuranceCardData?.map((item, i) => (
+              <InsuranceCard data={item} key={i} />
+            ))}
           </div>
         </div>
       </div>
