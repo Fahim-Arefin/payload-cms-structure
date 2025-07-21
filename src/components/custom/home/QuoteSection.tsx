@@ -223,7 +223,6 @@ import { useState } from 'react'
 import QuoteForm from './QuoteForm'
 import { getTotalPremium, ApiResponse, ApiResToShow } from '@/utils/premiumCalculator'
 
-
 function QuoteSection() {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
@@ -231,6 +230,24 @@ function QuoteSection() {
   const handleApiResponse = (response: ApiResponse, paymentMode: string) => {
     setApiResponse(response)
     setConfirmedPaymentMode(paymentMode)
+  }
+
+  // Helper function to get the correct key for payment mode
+  const getPaymentModeKey = (paymentMode: string): keyof ApiResToShow['lifePremium'] => {
+    switch (paymentMode) {
+      case 'Monthly':
+        return 'monthly'
+      case 'Quarterly':
+        return 'quarterly'
+      case 'Semi-annually':
+        return 'half_yearly'
+      case 'Yearly':
+        return 'yearly'
+      case 'Single':
+        return 'single'
+      default:
+        return 'monthly'
+    }
   }
 
   return (
@@ -253,7 +270,7 @@ function QuoteSection() {
           </div>
           {/* Info Container - Only show when API response is available */}
           {apiResponse && (
-            <div className="hidden md:grid grid-cols-5 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600]">
+            <div className="hidden md:grid grid-cols-4 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600]">
               <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
                 <div
                   className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
@@ -267,8 +284,10 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Monthly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.monthly.toLocaleString() !==
-                  '0'
+                  {getTotalPremium(
+                    apiResponse,
+                    confirmedPaymentMode,
+                  ).lifePremium.monthly.toLocaleString() !== '0'
                     ? `৳${getTotalPremium(apiResponse, 'Monthly').lifePremium.monthly.toLocaleString()}`
                     : ''}
                 </div>
@@ -286,8 +305,10 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Quarterly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.quarterly.toLocaleString() !==
-                  '0'
+                  {getTotalPremium(
+                    apiResponse,
+                    confirmedPaymentMode,
+                  ).lifePremium.quarterly.toLocaleString() !== '0'
                     ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.quarterly.toLocaleString()}`
                     : ''}
                 </div>
@@ -326,12 +347,15 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Yearly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.yearly.toLocaleString() !== '0'
+                  {getTotalPremium(
+                    apiResponse,
+                    confirmedPaymentMode,
+                  ).lifePremium.yearly.toLocaleString() !== '0'
                     ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.yearly.toLocaleString()}`
                     : ''}
                 </div>
               </div>
-              <div className="col-span-1 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+              {/* <div className="col-span-1 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
                 <div
                   className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
                     confirmedPaymentMode === 'Single' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
@@ -344,11 +368,14 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Single' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.single.toLocaleString() !== '0'
+                  {getTotalPremium(
+                    apiResponse,
+                    confirmedPaymentMode,
+                  ).lifePremium.single.toLocaleString() !== '0'
                     ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.single.toLocaleString()}`
                     : ''}
                 </div>
-              </div>
+              </div> */}
               <div className="col-span-5 py-3 px-6 xl:py-4 xl:px-8 space-y-2">
                 <div className="bg-[#F6EDDD] md:px-4 lg:px-1 md:py-1.5 lg:py-1 xl:px-4 xl:py-1.5 md:w-[60%] lg:w-[100%] xl:w-[85%] 2xl:w-[70%] mx-auto rounded-full flex items-center space-x-2">
                   <div>
@@ -396,7 +423,7 @@ function QuoteSection() {
                   </div>
                   <div className="underline underline-offset-4 text-xs">
                     Add{' '}
-                    {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium.toLocaleString()}`}{' '}
+                    {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
                     taka to Cover 25 Critical Illness!
                   </div>
                   {/* this belwo div will be align right of the flex*/}
@@ -460,8 +487,9 @@ function QuoteSection() {
                     </svg>
                   </div>
                   <div className="underline underline-offset-4 text-xs">
-                    Add {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium.toLocaleString()}`}{' '}
-                    taka to Cover 25 Critical Illness!
+                    Prone to accidents? Let’s get you covered in{' '}
+                    {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
+                    taka!
                   </div>
                   <div className="flex-1 flex justify-end">
                     <svg

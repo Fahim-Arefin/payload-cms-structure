@@ -22,20 +22,25 @@ export interface ApiResponse {
   message: string
 }
 
+type resParam = {
+  monthly: number
+  quarterly: number
+  half_yearly: number
+  yearly: number
+  single: number
+}
+
 export interface ApiResToShow {
-  lifePremium: {
-    monthly: number
-    quarterly: number
-    half_yearly: number
-    yearly: number
-    single: number
-  }
-  accidentPremium: number
-  ciPremium: number
+  lifePremium: resParam
+  accidentPremium: resParam
+  ciPremium: resParam
 }
 
 // Helper function to get total premium for a specific payment mode
-export const getTotalPremium = (apiResponse: ApiResponse | null, paymentMode: string): ApiResToShow => {
+export const getTotalPremium = (
+  apiResponse: ApiResponse | null,
+  paymentMode: string,
+): ApiResToShow => {
   if (!apiResponse)
     return {
       lifePremium: {
@@ -45,8 +50,20 @@ export const getTotalPremium = (apiResponse: ApiResponse | null, paymentMode: st
         yearly: 0,
         single: 0,
       },
-      accidentPremium: 0,
-      ciPremium: 0,
+      accidentPremium: {
+        monthly: 0,
+        quarterly: 0,
+        half_yearly: 0,
+        yearly: 0,
+        single: 0,
+      },
+      ciPremium: {
+        monthly: 0,
+        quarterly: 0,
+        half_yearly: 0,
+        yearly: 0,
+        single: 0,
+      },
     }
 
   const suffix =
@@ -69,9 +86,22 @@ export const getTotalPremium = (apiResponse: ApiResponse | null, paymentMode: st
     yearly: (apiResponse as any)[`life_premium_yearly`] || 0,
     single: (apiResponse as any)[`life_premium_single`] || 0,
   }
-  
-  const accidentPremium = (apiResponse as any)[`accident_premium${suffix}`] || 0
-  const ciPremium = (apiResponse as any)[`ci_premium${suffix}`] || 0
+
+  const accidentPremium = {
+    monthly: (apiResponse as any)[`accident_premium_monthly`] || 0,
+    quarterly: (apiResponse as any)[`accident_premium_quarterly`] || 0,
+    half_yearly: (apiResponse as any)[`accident_premium_half_yearly`] || 0,
+    yearly: (apiResponse as any)[`accident_premium_yearly`] || 0,
+    single: (apiResponse as any)[`accident_premium_single`] || 0,
+  }
+
+  const ciPremium = {
+    monthly: (apiResponse as any)[`ci_premium_monthly`] || 0,
+    quarterly: (apiResponse as any)[`ci_premium_quarterly`] || 0,
+    half_yearly: (apiResponse as any)[`ci_premium_half_yearly`] || 0,
+    yearly: (apiResponse as any)[`ci_premium_yearly`] || 0,
+    single: (apiResponse as any)[`ci_premium_single`] || 0,
+  }
 
   return {
     lifePremium: lifePremium,
