@@ -473,7 +473,9 @@ function QuoteSection() {
                     </svg>
                   </div>
                   <div className="underline underline-offset-4 text-xs">
-                    Add 225 taka to Cover 25 Critical Illness!
+                    Add{' '}
+                    {`৳${getTotalPremium(confirmedPaymentMode).accidentPremium.toLocaleString()}`}{' '}
+                    taka to Cover 25 Critical Illness!
                   </div>
                   {/* this belwo div will be align right of the flex*/}
                   <div className="flex-1 flex justify-end">
@@ -536,7 +538,8 @@ function QuoteSection() {
                     </svg>
                   </div>
                   <div className="underline underline-offset-4 text-xs">
-                    Add 225 taka to Cover 25 Critical Illness!
+                    Add {`৳${getTotalPremium(confirmedPaymentMode).ciPremium.toLocaleString()}`}{' '}
+                    taka to Cover 25 Critical Illness!
                   </div>
                   <div className="flex-1 flex justify-end">
                     <svg
