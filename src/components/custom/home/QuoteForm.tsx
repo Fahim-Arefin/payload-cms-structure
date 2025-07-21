@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import ToolTip from '../shared/ToolTip'
+import { ApiResponse } from '@/utils/premiumCalculator'
 
 interface FormData {
   PlanCode: number
@@ -27,29 +28,6 @@ interface FormData {
   annualIncome: number
 }
 
-interface ApiResponse {
-  life_premium_yearly: number
-  life_premium_half_yearly: number
-  life_premium_quarterly: number
-  life_premium_monthly: number
-  life_premium_single: number
-  accident_premium_yearly: number
-  accident_premium_half_yearly: number
-  accident_premium_quarterly: number
-  accident_premium_monthly: number
-  accident_premium_single: number
-  ci_premium_yearly: number
-  ci_premium_half_yearly: number
-  ci_premium_quarterly: number
-  ci_premium_monthly: number
-  ci_premium_single: number
-  life_rate: number
-  accident_rate: number
-  ci_rate: number
-  accidental_coverage: number
-  ci_coverage: number
-  message: string
-}
 
 interface QuoteFormProps {
   onApiResponse?: (response: ApiResponse, paymentMode: string) => void
