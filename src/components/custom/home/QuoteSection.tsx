@@ -222,6 +222,7 @@ import {
 import { useState } from 'react'
 import QuoteForm from './QuoteForm'
 import { getTotalPremium, ApiResponse, ApiResToShow } from '@/utils/premiumCalculator'
+import AnimatedCounter from '@/components/ui/AnimatedCounter'
 
 function QuoteSection() {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
@@ -310,14 +311,15 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Monthly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {confirmedPaymentMode === 'Monthly' 
-                    ? (getTotalPremiumWithCoverage('Monthly') !== 0
-                        ? `৳${getTotalPremiumWithCoverage('Monthly').toLocaleString()}`
-                        : '')
-                    : (getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly !== 0
-                        ? `৳${getTotalPremium(apiResponse, 'Monthly').lifePremium.monthly.toLocaleString()}`
-                        : '')
-                  }
+                  <AnimatedCounter
+                    value={confirmedPaymentMode === 'Monthly' 
+                      ? getTotalPremiumWithCoverage('Monthly')
+                      : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0
+                    }
+                    prefix="৳"
+                    showAnimation={confirmedPaymentMode === 'Monthly'}
+                    duration={800}
+                  />
                 </div>
               </div>
               <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
@@ -333,14 +335,15 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Quarterly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {confirmedPaymentMode === 'Quarterly' 
-                    ? (getTotalPremiumWithCoverage('Quarterly') !== 0
-                        ? `৳${getTotalPremiumWithCoverage('Quarterly').toLocaleString()}`
-                        : '')
-                    : (getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly !== 0
-                        ? `৳${getTotalPremium(apiResponse, 'Quarterly').lifePremium.quarterly.toLocaleString()}`
-                        : '')
-                  }
+                  <AnimatedCounter
+                    value={confirmedPaymentMode === 'Quarterly' 
+                      ? getTotalPremiumWithCoverage('Quarterly')
+                      : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0
+                    }
+                    prefix="৳"
+                    showAnimation={confirmedPaymentMode === 'Quarterly'}
+                    duration={800}
+                  />
                 </div>
               </div>
               <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
@@ -356,14 +359,15 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Semi-annually' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {confirmedPaymentMode === 'Semi-annually' 
-                    ? (getTotalPremiumWithCoverage('Semi-annually') !== 0
-                        ? `৳${getTotalPremiumWithCoverage('Semi-annually').toLocaleString()}`
-                        : '')
-                    : (getTotalPremium(apiResponse, 'Semi-annually')?.lifePremium.half_yearly !== 0
-                        ? `৳${getTotalPremium(apiResponse, 'Semi-annually').lifePremium.half_yearly.toLocaleString()}`
-                        : '')
-                  }
+                  <AnimatedCounter
+                    value={confirmedPaymentMode === 'Semi-annually' 
+                      ? getTotalPremiumWithCoverage('Semi-annually')
+                      : getTotalPremium(apiResponse, 'Semi-annually')?.lifePremium.half_yearly || 0
+                    }
+                    prefix="৳"
+                    showAnimation={confirmedPaymentMode === 'Semi-annually'}
+                    duration={800}
+                  />
                 </div>
               </div>
               <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
@@ -379,14 +383,15 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Yearly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {confirmedPaymentMode === 'Yearly' 
-                    ? (getTotalPremiumWithCoverage('Yearly') !== 0
-                        ? `৳${getTotalPremiumWithCoverage('Yearly').toLocaleString()}`
-                        : '')
-                    : (getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly !== 0
-                        ? `৳${getTotalPremium(apiResponse, 'Yearly').lifePremium.yearly.toLocaleString()}`
-                        : '')
-                  }
+                  <AnimatedCounter
+                    value={confirmedPaymentMode === 'Yearly' 
+                      ? getTotalPremiumWithCoverage('Yearly')
+                      : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0
+                    }
+                    prefix="৳"
+                    showAnimation={confirmedPaymentMode === 'Yearly'}
+                    duration={800}
+                  />
                 </div>
               </div>
               {/* <div className="col-span-1 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
