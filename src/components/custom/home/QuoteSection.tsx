@@ -226,6 +226,8 @@ import { getTotalPremium, ApiResponse, ApiResToShow } from '@/utils/premiumCalcu
 function QuoteSection() {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
+  const [isCriticalIllnessCovered, setIsCriticalIllnessCovered] = useState<boolean>(false)
+  const [isAccidentCovered, setIsAccidentCovered] = useState<boolean>(false)
 
   const handleApiResponse = (response: ApiResponse, paymentMode: string) => {
     setApiResponse(response)
@@ -248,6 +250,30 @@ function QuoteSection() {
       default:
         return 'monthly'
     }
+  }
+
+  // Click handler to toggle critical illness coverage
+  const handleCriticalIllnessToggle = () => {
+    setIsCriticalIllnessCovered(!isCriticalIllnessCovered)
+  }
+
+  // Click handler to toggle accident coverage
+  const handleAccidentToggle = () => {
+    setIsAccidentCovered(!isAccidentCovered)
+  }
+
+  // Helper function to get the total premium including CI and accident coverage if added
+  const getTotalPremiumWithCoverage = (paymentMode: string): number => {
+    if (!apiResponse) return 0
+    
+    const premiums = getTotalPremium(apiResponse, paymentMode)
+    const paymentKey = getPaymentModeKey(paymentMode)
+    
+    const lifePremium = premiums.lifePremium[paymentKey]
+    const ciPremium = isCriticalIllnessCovered ? premiums.ciPremium[paymentKey] : 0
+    const accidentPremium = isAccidentCovered ? premiums.accidentPremium[paymentKey] : 0
+    
+    return lifePremium + ciPremium + accidentPremium
   }
 
   return (
@@ -284,12 +310,14 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Monthly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(
-                    apiResponse,
-                    confirmedPaymentMode,
-                  ).lifePremium.monthly.toLocaleString() !== '0'
-                    ? `৳${getTotalPremium(apiResponse, 'Monthly').lifePremium.monthly.toLocaleString()}`
-                    : ''}
+                  {confirmedPaymentMode === 'Monthly' 
+                    ? (getTotalPremiumWithCoverage('Monthly') !== 0
+                        ? `৳${getTotalPremiumWithCoverage('Monthly').toLocaleString()}`
+                        : '')
+                    : (getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly !== 0
+                        ? `৳${getTotalPremium(apiResponse, 'Monthly').lifePremium.monthly.toLocaleString()}`
+                        : '')
+                  }
                 </div>
               </div>
               <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
@@ -305,12 +333,14 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Quarterly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(
-                    apiResponse,
-                    confirmedPaymentMode,
-                  ).lifePremium.quarterly.toLocaleString() !== '0'
-                    ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.quarterly.toLocaleString()}`
-                    : ''}
+                  {confirmedPaymentMode === 'Quarterly' 
+                    ? (getTotalPremiumWithCoverage('Quarterly') !== 0
+                        ? `৳${getTotalPremiumWithCoverage('Quarterly').toLocaleString()}`
+                        : '')
+                    : (getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly !== 0
+                        ? `৳${getTotalPremium(apiResponse, 'Quarterly').lifePremium.quarterly.toLocaleString()}`
+                        : '')
+                  }
                 </div>
               </div>
               <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
@@ -326,12 +356,14 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Semi-annually' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(
-                    apiResponse,
-                    confirmedPaymentMode,
-                  ).lifePremium.half_yearly.toLocaleString() !== '0'
-                    ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.half_yearly.toLocaleString()}`
-                    : ''}
+                  {confirmedPaymentMode === 'Semi-annually' 
+                    ? (getTotalPremiumWithCoverage('Semi-annually') !== 0
+                        ? `৳${getTotalPremiumWithCoverage('Semi-annually').toLocaleString()}`
+                        : '')
+                    : (getTotalPremium(apiResponse, 'Semi-annually')?.lifePremium.half_yearly !== 0
+                        ? `৳${getTotalPremium(apiResponse, 'Semi-annually').lifePremium.half_yearly.toLocaleString()}`
+                        : '')
+                  }
                 </div>
               </div>
               <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
@@ -347,12 +379,14 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Yearly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(
-                    apiResponse,
-                    confirmedPaymentMode,
-                  ).lifePremium.yearly.toLocaleString() !== '0'
-                    ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.yearly.toLocaleString()}`
-                    : ''}
+                  {confirmedPaymentMode === 'Yearly' 
+                    ? (getTotalPremiumWithCoverage('Yearly') !== 0
+                        ? `৳${getTotalPremiumWithCoverage('Yearly').toLocaleString()}`
+                        : '')
+                    : (getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly !== 0
+                        ? `৳${getTotalPremium(apiResponse, 'Yearly').lifePremium.yearly.toLocaleString()}`
+                        : '')
+                  }
                 </div>
               </div>
               {/* <div className="col-span-1 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
@@ -421,8 +455,11 @@ function QuoteSection() {
                       />
                     </svg>
                   </div>
-                  <div className="underline underline-offset-4 text-xs">
-                    Add{' '}
+                  <div 
+                    className="underline underline-offset-4 text-xs cursor-pointer hover:text-blue-600 transition-colors"
+                    onClick={handleCriticalIllnessToggle}
+                  >
+                    {isCriticalIllnessCovered ? 'Remove' : 'Add'}{' '}
                     {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
                     taka to Cover 25 Critical Illness!
                   </div>
@@ -486,8 +523,11 @@ function QuoteSection() {
                       />
                     </svg>
                   </div>
-                  <div className="underline underline-offset-4 text-xs">
-                    Prone to accidents? Let’s get you covered in{' '}
+                  <div 
+                    className="underline underline-offset-4 text-xs cursor-pointer hover:text-blue-600 transition-colors"
+                    onClick={handleAccidentToggle}
+                  >
+                    {isAccidentCovered ? 'Remove accident coverage for' : 'Prone to accidents? Let\'s get you covered in'}{' '}
                     {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
                     taka!
                   </div>
