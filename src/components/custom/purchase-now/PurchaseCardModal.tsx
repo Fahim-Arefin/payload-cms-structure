@@ -13,6 +13,7 @@ import GlobalButton from '../shared/GlobalButton'
 
 // Import or copy your tabContent here:
 const tabContent = [
+  // Original tab (Child Plan)
   {
     content: [
       {
@@ -54,26 +55,116 @@ const tabContent = [
       },
     ],
   },
+
+  // Tab 2: Multiple Guaranteed Payouts, Maturity Benefit, Life Coverage, Tax Benefits, Flexible Premium Payments, Healthcare Partner Discounts
+  {
+    content: [
+      {
+        title: 'Multiple Guaranteed Payouts',
+        description: 'Choose a sum assured based on your child’s future needs.', // You can update this description as needed
+        image: '/assets/childTabIcon1.png',
+      },
+      {
+        title: 'Maturity Benefit',
+        description:
+          'Receive the full sum assured at the end of the policy term to support higher education goals.',
+        image: '/assets/childTabIcon2.png',
+      },
+      {
+        title: 'Life Coverage',
+        description: 'In the event of the parent’s death, the plan ensures:',
+        listItems: [
+          'Monthly stipend (1%, 2%, or 3% of the sum assured, based on plan choice) paid to the legal guardian till policy maturity.',
+          'Waiver of all future premiums while continuing full coverage.',
+          'Full maturity benefit paid at term-end.',
+        ],
+        image: '/assets/childTabIcon5.png',
+      },
+      {
+        title: 'Tax Benefits',
+        description: 'Enjoy tax rebates on premiums, avail upto 15% tax rebate. ',
+        image: '/assets/childTabIcon3.png',
+      },
+      {
+        title: 'Flexible Premium Payments',
+        description: 'Opt for monthly, quarterly, half-yearly, or annual premium modes.',
+        image: '/assets/childTabIcon6.png',
+      },
+      {
+        title: 'Healthcare Partner Discounts',
+        description:
+          'Avail exclusive discounts on medical and diagnostic services at partnered hospitals and diagnostic centers.',
+        image: '/assets/childTabIcon4.png',
+      },
+    ],
+  },
+
+  // Tab 3: Maturity Benefit, Life Coverage, Tax Benefits, Flexible Premium Payments, Healthcare Partner Discounts
+  {
+    content: [
+      {
+        title: 'Maturity Benefit',
+        description:
+          'Receive the full sum assured at the end of the policy term to support higher education goals.',
+        image: '/assets/childTabIcon2.png',
+      },
+      {
+        title: 'Life Coverage',
+        description: 'In the event of the parent’s death, the plan ensures:',
+        listItems: [
+          'Monthly stipend (1%, 2%, or 3% of the sum assured, based on plan choice) paid to the legal guardian till policy maturity.',
+          'Waiver of all future premiums while continuing full coverage.',
+          'Full maturity benefit paid at term-end.',
+        ],
+        image: '/assets/childTabIcon5.png',
+      },
+      {
+        title: 'Tax Benefits',
+        description: 'Enjoy tax rebates on premiums, avail upto 15% tax rebate. ',
+        image: '/assets/childTabIcon3.png',
+      },
+      {
+        title: 'Flexible Premium Payments',
+        description: 'Opt for monthly, quarterly, half-yearly, or annual premium modes.',
+        image: '/assets/childTabIcon6.png',
+      },
+      {
+        title: 'Healthcare Partner Discounts',
+        description:
+          'Avail exclusive discounts on medical and diagnostic services at partnered hospitals and diagnostic centers.',
+        image: '/assets/childTabIcon4.png',
+      },
+    ],
+  },
 ]
 
 type PurchaseCardModalProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
+  selectedIndex: number
+  selectedPlanTitle?: string
 }
 
-export const PurchaseCardModal = ({ open, onOpenChange }: PurchaseCardModalProps) => {
-  const content = tabContent[0].content
+export const PurchaseCardModal = ({
+  open,
+  onOpenChange,
+  selectedIndex,
+  selectedPlanTitle,
+}: PurchaseCardModalProps) => {
+  const content = tabContent[selectedIndex]?.content || []
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogOverlay className="backdrop-blur-sm bg-black/30" />
-      <DialogContent className="max-w-3xl lg:max-w-5xl 2xl:max-w-6xl w-full bg-white rounded-lg px-0 py-8">
+      <DialogContent className="w-full h-[80vh] lg:h-fit overflow-scroll lg:overflow-hidden md:max-w-lg lg:max-w-3xl 2xl:max-w-6xl bg-white rounded-lg px-0 py-8">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold text-[#ED7125] text-center"></DialogTitle>
+          <DialogTitle className="text-xl font-bold text-[#ED7125] text-center">
+            {selectedPlanTitle}
+          </DialogTitle>
         </DialogHeader>
-        <div className="px-8 py-4 grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-6 md:gap-y-12">
+        <div className="px-8 py-4 grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-6 md:gap-y-6">
           {/* Left column: First 4 */}
-          <div className="flex flex-col gap-8 xl:gap-12">
-            {content.slice(0, 4).map((content, idx) => (
+          <div className="flex flex-col gap-4 xl:gap-12">
+            {content.slice(0, 3).map((content, idx) => (
               <div key={content.title + idx} className="flex items-start gap-4">
                 <div className="flex-shrink-0 h-[38px] w-[38px] md:h-[48px] md:w-[48px] flex items-center justify-center">
                   <img
@@ -104,7 +195,7 @@ export const PurchaseCardModal = ({ open, onOpenChange }: PurchaseCardModalProps
           </div>
           {/* Right column: Last 2 */}
           <div className="flex flex-col gap-8">
-            {content.slice(4).map((content, idx) => (
+            {content.slice(3).map((content, idx) => (
               <div key={content.title + idx} className="flex items-start gap-4">
                 <div className="flex-shrink-0 h-[38px] w-[38px] md:h-[48px] md:w-[48px] flex items-center justify-center">
                   <img
