@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import ToolTip from '../shared/ToolTip'
+import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 
 type Props = {}
 
@@ -15,7 +16,15 @@ function FeedBackSection({}: Props) {
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
   const [feedback, setFeedback] = useState('')
+  const [requiredError, setRequiredError] = useState(false)
   const sendFeedbackHandler = async () => {
+    if (!name || !email || !phone || !address || !feedback) {
+      setRequiredError(true)
+      setTimeout(() => {
+        setRequiredError(false)
+      }, 3000)
+      return
+    }
     setSendButtonText('Sending...')
     console.log({ name, email, phone, address, feedback })
 
@@ -71,7 +80,7 @@ function FeedBackSection({}: Props) {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-12">
           {/* Column 1: Four input fields */}
-          <div className="space-y-5 xl:space-y-8">
+          <div className="space-y-5 xl:space-y-8 mb-5 xl:mb-0">
             <Input
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -107,7 +116,15 @@ function FeedBackSection({}: Props) {
               font-normal
               lg:text-[16px] xl:text-[18px]"
             >
-              {sendButtonText}
+              {sendButtonText == 'Sending...' ? (
+                <Loader className="inline mb-1" />
+              ) : sendButtonText == 'Feedback Sent' ? (
+                <MailCheck className="inline mb-1" />
+              ) : (
+                <SendHorizontal className="inline mb-1" />
+              )}
+
+              <span className="text-lg ml-2">{sendButtonText}</span>
             </Button>
           </div>
 
@@ -120,19 +137,27 @@ function FeedBackSection({}: Props) {
               className="shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] w-full 
               h-[150px] lg:h-[258px] xl:h-[332px] bg-white text-black p-5 rounded-[8px] lg:rounded-[10px] xl:rounded-[12px]"
             />
+            {requiredError && <p className="pt-2">Please Fill out all the fields</p>}
             <div>
-              <a href="tel:+8809610889900" className="w-fit">
-                <Button
-                  variant="primary"
-                  className="lg:hidden h-[45px] lg:h-[50px] xl:h-[60px] 
+              <Button
+                onClick={sendFeedbackHandler}
+                variant="primary"
+                className="lg:hidden h-[45px] lg:h-[50px] xl:h-[60px] 
                 lg:w-[180px] xl:w-[240px]
                 lg:rounded-[6px] xl:rounded-[8px]
                 font-normal
                 lg:text-[16px] xl:text-[18px]"
-                >
-                  {sendButtonText}
-                </Button>
-              </a>
+              >
+                {sendButtonText == 'Sending...' ? (
+                  <Loader className="inline mb-1" />
+                ) : sendButtonText == 'Feedback Sent' ? (
+                  <MailCheck className="inline mb-1" />
+                ) : (
+                  <SendHorizontal className="inline mb-1" />
+                )}
+
+                <span className="text-lg ml-2">{sendButtonText}</span>
+              </Button>
             </div>
           </div>
 
