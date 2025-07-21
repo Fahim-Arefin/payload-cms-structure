@@ -221,42 +221,7 @@ import {
 } from '@/components/ui/dialog'
 import { useState } from 'react'
 import QuoteForm from './QuoteForm'
-
-interface ApiResponse {
-  life_premium_yearly: number
-  life_premium_half_yearly: number
-  life_premium_quarterly: number
-  life_premium_monthly: number
-  life_premium_single: number
-  accident_premium_yearly: number
-  accident_premium_half_yearly: number
-  accident_premium_quarterly: number
-  accident_premium_monthly: number
-  accident_premium_single: number
-  ci_premium_yearly: number
-  ci_premium_half_yearly: number
-  ci_premium_quarterly: number
-  ci_premium_monthly: number
-  ci_premium_single: number
-  life_rate: number
-  accident_rate: number
-  ci_rate: number
-  accidental_coverage: number
-  ci_coverage: number
-  message: string
-}
-
-interface apiResToShow {
-  lifePremium: {
-    monthly: number
-    quarterly: number
-    half_yearly: number
-    yearly: number
-    single: number
-  }
-  accidentPremium: number
-  ciPremium: number
-}
+import { getTotalPremium, ApiResponse, ApiResToShow } from '@/utils/premiumCalculator'
 
 function QuoteSection() {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
@@ -267,51 +232,24 @@ function QuoteSection() {
     setConfirmedPaymentMode(paymentMode)
   }
 
-  // Helper function to get total premium for a specific payment mode
-  const getTotalPremium = (paymentMode: string): apiResToShow => {
-    if (!apiResponse)
-      return {
-        lifePremium: {
-          monthly: 0,
-          quarterly: 0,
-          half_yearly: 0,
-          yearly: 0,
-          single: 0,
-        },
-        accidentPremium: 0,
-        ciPremium: 0,
-      }
-
-    const suffix =
-      paymentMode === 'Monthly'
-        ? '_monthly'
-        : paymentMode === 'Quarterly'
-          ? '_quarterly'
-          : paymentMode === 'Semi-annually'
-            ? '_half_yearly'
-            : paymentMode === 'Yearly'
-              ? '_yearly'
-              : paymentMode === 'Single'
-                ? '_single'
-                : '_monthly'
-
-    const lifePremium = {
-      monthly: (apiResponse as any)[`life_premium_monthly`] || 0,
-      quarterly: (apiResponse as any)[`life_premium_quarterly`] || 0,
-      half_yearly: (apiResponse as any)[`life_premium_half_yearly`] || 0,
-      yearly: (apiResponse as any)[`life_premium_yearly`] || 0,
-      single: (apiResponse as any)[`life_premium_single`] || 0,
-    }
-    // (apiResponse as any)[`life_premium${suffix}`] || 0
-    const accidentPremium = (apiResponse as any)[`accident_premium${suffix}`] || 0
-    const ciPremium = (apiResponse as any)[`ci_premium${suffix}`] || 0
-
-    return {
-      lifePremium: lifePremium,
-      accidentPremium: accidentPremium,
-      ciPremium: ciPremium,
+  // Helper function to get the correct key for payment mode
+  const getPaymentModeKey = (paymentMode: string): keyof ApiResToShow['lifePremium'] => {
+    switch (paymentMode) {
+      case 'Monthly':
+        return 'monthly'
+      case 'Quarterly':
+        return 'quarterly'
+      case 'Semi-annually':
+        return 'half_yearly'
+      case 'Yearly':
+        return 'yearly'
+      case 'Single':
+        return 'single'
+      default:
+        return 'monthly'
     }
   }
+
   return (
     <div className="relative font-avenir container-wpm md:pb-[70px] lg:pb-[90px] xl:pb-[80px] 2xl:pb-40">
       <div className="grid grid-cols-1 lg:grid-cols-2 z-10">
@@ -332,7 +270,7 @@ function QuoteSection() {
           </div>
           {/* Info Container - Only show when API response is available */}
           {apiResponse && (
-            <div className="hidden md:grid grid-cols-5 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600]">
+            <div className="hidden md:grid grid-cols-4 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600]">
               <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
                 <div
                   className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
@@ -346,9 +284,11 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Monthly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(confirmedPaymentMode).lifePremium.monthly.toLocaleString() !==
-                  '0'
-                    ? `৳${getTotalPremium('Monthly').lifePremium.monthly.toLocaleString()}`
+                  {getTotalPremium(
+                    apiResponse,
+                    confirmedPaymentMode,
+                  ).lifePremium.monthly.toLocaleString() !== '0'
+                    ? `৳${getTotalPremium(apiResponse, 'Monthly').lifePremium.monthly.toLocaleString()}`
                     : ''}
                 </div>
               </div>
@@ -365,9 +305,11 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Quarterly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(confirmedPaymentMode).lifePremium.quarterly.toLocaleString() !==
-                  '0'
-                    ? `৳${getTotalPremium(confirmedPaymentMode).lifePremium.quarterly.toLocaleString()}`
+                  {getTotalPremium(
+                    apiResponse,
+                    confirmedPaymentMode,
+                  ).lifePremium.quarterly.toLocaleString() !== '0'
+                    ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.quarterly.toLocaleString()}`
                     : ''}
                 </div>
               </div>
@@ -385,9 +327,10 @@ function QuoteSection() {
                   }`}
                 >
                   {getTotalPremium(
+                    apiResponse,
                     confirmedPaymentMode,
                   ).lifePremium.half_yearly.toLocaleString() !== '0'
-                    ? `৳${getTotalPremium(confirmedPaymentMode).lifePremium.half_yearly.toLocaleString()}`
+                    ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.half_yearly.toLocaleString()}`
                     : ''}
                 </div>
               </div>
@@ -404,12 +347,15 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Yearly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(confirmedPaymentMode).lifePremium.yearly.toLocaleString() !== '0'
-                    ? `৳${getTotalPremium(confirmedPaymentMode).lifePremium.yearly.toLocaleString()}`
+                  {getTotalPremium(
+                    apiResponse,
+                    confirmedPaymentMode,
+                  ).lifePremium.yearly.toLocaleString() !== '0'
+                    ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.yearly.toLocaleString()}`
                     : ''}
                 </div>
               </div>
-              <div className="col-span-1 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+              {/* <div className="col-span-1 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
                 <div
                   className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
                     confirmedPaymentMode === 'Single' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
@@ -422,11 +368,14 @@ function QuoteSection() {
                     confirmedPaymentMode === 'Single' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
                   }`}
                 >
-                  {getTotalPremium(confirmedPaymentMode).lifePremium.single.toLocaleString() !== '0'
-                    ? `৳${getTotalPremium(confirmedPaymentMode).lifePremium.single.toLocaleString()}`
+                  {getTotalPremium(
+                    apiResponse,
+                    confirmedPaymentMode,
+                  ).lifePremium.single.toLocaleString() !== '0'
+                    ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.single.toLocaleString()}`
                     : ''}
                 </div>
-              </div>
+              </div> */}
               <div className="col-span-5 py-3 px-6 xl:py-4 xl:px-8 space-y-2">
                 <div className="bg-[#F6EDDD] md:px-4 lg:px-1 md:py-1.5 lg:py-1 xl:px-4 xl:py-1.5 md:w-[60%] lg:w-[100%] xl:w-[85%] 2xl:w-[70%] mx-auto rounded-full flex items-center space-x-2">
                   <div>
@@ -473,7 +422,9 @@ function QuoteSection() {
                     </svg>
                   </div>
                   <div className="underline underline-offset-4 text-xs">
-                    Add 225 taka to Cover 25 Critical Illness!
+                    Add{' '}
+                    {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
+                    taka to Cover 25 Critical Illness!
                   </div>
                   {/* this belwo div will be align right of the flex*/}
                   <div className="flex-1 flex justify-end">
@@ -536,7 +487,9 @@ function QuoteSection() {
                     </svg>
                   </div>
                   <div className="underline underline-offset-4 text-xs">
-                    Add 225 taka to Cover 25 Critical Illness!
+                    Prone to accidents? Let’s get you covered in{' '}
+                    {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
+                    taka!
                   </div>
                   <div className="flex-1 flex justify-end">
                     <svg
