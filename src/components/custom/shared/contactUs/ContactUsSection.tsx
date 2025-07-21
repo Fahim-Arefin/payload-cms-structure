@@ -11,6 +11,7 @@ import {
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { SendHorizontal, Loader, MailCheck } from 'lucide-react'
 import './ContactUsSection.css'
 import ToolTip from '../ToolTip'
 import { Textarea } from '@/components/ui/textarea'
@@ -209,7 +210,17 @@ function ContactUsSection() {
                 >
                   {sendButtonText}
                 </Button> */}
-              <GlobalButton size="small" className="" text={sendButtonText} variant="primary" />
+              <GlobalButton size="small" className="" variant="primary">
+                {sendButtonText == 'Sending...' ? (
+                  <Loader />
+                ) : sendButtonText == 'Message Sent' ? (
+                  <MailCheck />
+                ) : (
+                  <SendHorizontal />
+                )}
+
+                <span className="text-sm">{sendButtonText}</span>
+              </GlobalButton>
             </div>
           </form>
         </div>
@@ -232,7 +243,7 @@ function ContactUsSection() {
              text-[10px] md:text-[12px] 
              h-[26px] md:h-[30px] px-3 rounded-md"
               >
-                {sendButtonText}
+                <SendHorizontal /> Send Message
               </Button>
               {/* <GlobalButton size="small" className="" text="Send Message" variant="primary" /> */}
             </DialogTrigger>
@@ -308,7 +319,15 @@ function ContactUsSection() {
                   {/* Submit */}
                   <div className="pt-4 flex justify-end">
                     <Button size="sm" variant="primary" className="text-white shadow-md ">
-                      {sendButtonText}
+                      {sendButtonText == 'Sending...' ? (
+                        <Loader />
+                      ) : sendButtonText == 'Message Sent' ? (
+                        <MailCheck />
+                      ) : (
+                        <SendHorizontal />
+                      )}
+
+                      <span className="text-sm">{sendButtonText}</span>
                     </Button>
                   </div>
                 </form>

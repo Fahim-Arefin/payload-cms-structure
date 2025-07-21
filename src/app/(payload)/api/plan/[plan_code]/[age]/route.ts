@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { plan_code: string; age: string } }
+  { params }: { params: Promise<{ plan_code: string; age: string }> }
 ) {
   try {
-    const { plan_code, age } = params
+    const { plan_code, age } = await params
     
     // Validate parameters
     if (!plan_code || !age) {

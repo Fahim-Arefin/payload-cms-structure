@@ -6,12 +6,32 @@ import { useRouter } from 'next/navigation'
 
 const searchSuggestions = [
   {
+    label: 'Shanta All Plans',
+    url: '/plans',
+  },
+  {
+    label: 'Shanta Solutions',
+    url: '/plans',
+  },
+  {
+    label: 'Shanta Individual Plans',
+    url: '/plans/individual',
+  },
+  {
+    label: 'Shanta Saving and Investment Plans',
+    url: '/plans/individual/saving-and-investment',
+  },
+  {
     label: 'Shanta Multi-Stage Maturity Plan',
     url: '/plans/individual/saving-and-investment/multistage',
   },
   {
     label: 'Shanta Saving and Investment Endownment Plans',
     url: '/plans/individual/saving-and-investment/endowment',
+  },
+  {
+    label: 'Shanta health and protection Plans',
+    url: '/plans/individual/health-and-protection',
   },
   {
     label: 'Shanta Accidental Covarage',
@@ -23,12 +43,46 @@ const searchSuggestions = [
   },
   { label: 'Shanta Child Education', url: '/plans/individual/child-education' },
   { label: 'Premium Calculator', url: '/premium-calculator' },
+  { label: 'Purchase Now', url: '/purchase-now' },
   { label: 'Shanta Corporate Plans', url: '/plans/corporate' },
+
+  {
+    label: 'Pay Premium',
+    url: '/pay-premium',
+  },
+  {
+    label: 'Claims',
+    url: '/claims',
+  },
+  {
+    label: 'Support',
+    url: '/support',
+  },
+  {
+    label: 'Career',
+    url: '/career',
+  },
+  {
+    label: 'News & Media',
+    url: '/news-and-media',
+  },
+  {
+    label: 'About Us',
+    url: '/about-us',
+  },
   // { label: 'Financial Planning', url: '/financial-planning' },
   // { label: 'SIP Calculator', url: '/calculators/sip' },
   // { label: 'Risk Assessment', url: '/risk-assessment' },
   // { label: 'Market Insights', url: '/insights' },
   { label: 'Contact Us', url: '/support' },
+  {
+    label: 'Privacy Policy',
+    url: '/privacy-policy',
+  },
+  {
+    label: 'Terms & Conditions',
+    url: '/terms-condition',
+  },
 ]
 
 function SearchBarSection() {

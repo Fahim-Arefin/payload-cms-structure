@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import ToolTip from '../shared/ToolTip'
+import { ApiResponse } from '@/utils/premiumCalculator'
 
 interface FormData {
   PlanCode: number
@@ -22,25 +23,11 @@ interface FormData {
   SumAssured: number
   Term: number
   PaymentMode: number
-  AccidentRider: number
-  CriticalRider: string
   Gender: number
   phoneNumber: string
   annualIncome: number
 }
 
-interface ApiResponse {
-  life_premium: number
-  accident_premium: number
-  ci_premium: number
-  total_premium: number
-  life_rate: number
-  accident_rate: number
-  ci_rate: number
-  accidental_coverage: number
-  ci_coverage: number
-  message: string
-}
 
 interface QuoteFormProps {
   onApiResponse?: (response: ApiResponse, paymentMode: string) => void
@@ -54,8 +41,6 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     SumAssured: 0,
     Term: 0,
     PaymentMode: 0,
-    AccidentRider: 0,
-    CriticalRider: 'CP-S',
     Gender: 0,
     phoneNumber: '',
     annualIncome: 0,
@@ -72,8 +57,6 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     SumAssured: boolean
     Term: boolean
     PaymentMode: boolean
-    AccidentRider: boolean
-    CriticalRider: boolean
     Gender: boolean
   }>({
     PlanCode: false,
@@ -81,9 +64,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     SumAssured: false,
     Term: false,
     PaymentMode: false,
-    AccidentRider: false,
-    CriticalRider: false,
-    Gender: false
+    Gender: false,
   })
   const [currentPaymentMode, setCurrentPaymentMode] = useState<string>('')
 
@@ -147,29 +128,19 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     { text: 'Single', value: 5 },
   ]
 
-  const criticalRiderOptions = [
-    { text: 'Classic (CP-C)', value: 'CP-C' },
-    { text: 'Standard (CP-S)', value: 'CP-S' },
-  ]
-
-  const accidentRiderOptions = [
-    { text: 'No', value: 0 },
-    { text: 'Yes', value: 1 },
-  ]
-
   const handleInputChange = (field: keyof FormData, value: string | number) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
     }))
-    
+
     // Clear field error when user starts typing/selecting (only for validated fields)
     if (field in fieldErrors) {
       const errorField = field as keyof typeof fieldErrors
       if (fieldErrors[errorField]) {
-        setFieldErrors(prev => ({
+        setFieldErrors((prev) => ({
           ...prev,
-          [errorField]: false
+          [errorField]: false,
         }))
       }
     }
@@ -259,8 +230,8 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           SumAssured: formData.SumAssured,
           Term: formData.Term,
           PaymentMode: formData.PaymentMode,
-          AccidentRider: formData.AccidentRider,
-          CriticalRider: formData.CriticalRider,
+          AccidentRider: 1,
+          CriticalRider: 'CP-S',
           Gender: formData.Gender,
         }),
       })
@@ -294,9 +265,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       SumAssured: false,
       Term: false,
       PaymentMode: false,
-      AccidentRider: false,
-      CriticalRider: false,
-      Gender: false
+      Gender: false,
     })
 
     // Validate each required field and mark errors
@@ -306,16 +275,14 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       SumAssured: !formData.SumAssured || formData.SumAssured < 100000,
       Term: !formData.Term,
       PaymentMode: !formData.PaymentMode,
-      AccidentRider: formData.AccidentRider === undefined || formData.AccidentRider === null,
-      CriticalRider: !formData.CriticalRider,
-      Gender: formData.Gender === undefined || formData.Gender === null
+      Gender: formData.Gender === undefined || formData.Gender === null,
     }
 
     // Set field errors
     setFieldErrors(errors)
 
     // Check if any errors exist
-    const hasErrors = Object.values(errors).some(error => error)
+    const hasErrors = Object.values(errors).some((error) => error)
 
     if (hasErrors) {
       setError('Please fill in all required fields correctly')
@@ -324,7 +291,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
 
     // Additional validation for Sum Assured
     if (formData.SumAssured < 100000) {
-      setFieldErrors(prev => ({ ...prev, SumAssured: true }))
+      setFieldErrors((prev) => ({ ...prev, SumAssured: true }))
       setError('Sum Assured must be greater than 99,999')
       return
     }
@@ -358,20 +325,22 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
               }))
               // Clear tenure options until new plan + age combination is selected
               setAvailableTenures([])
-              
+
               // Clear field errors for plan and dependent fields
-              setFieldErrors(prev => ({
+              setFieldErrors((prev) => ({
                 ...prev,
                 PlanCode: false,
                 Age: false,
-                Term: false
+                Term: false,
               }))
             }
           }}
         >
-          <SelectTrigger className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.PlanCode ? 'border-red-500 border-2' : ''
-          }`}>
+          <SelectTrigger
+            className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+              fieldErrors.PlanCode ? 'border-red-500 border-2' : ''
+            }`}
+          >
             <SelectValue placeholder="Select Your Plan *" />
           </SelectTrigger>
           <SelectContent>
@@ -506,9 +475,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             }
           }}
         >
-          <SelectTrigger className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.Gender ? 'border-red-500 border-2' : ''
-          }`}>
+          <SelectTrigger
+            className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+              fieldErrors.Gender ? 'border-red-500 border-2' : ''
+            }`}
+          >
             <SelectValue placeholder="Select Your Gender *" />
           </SelectTrigger>
           <SelectContent>
@@ -571,9 +542,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             }
           }}
         >
-          <SelectTrigger className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.PaymentMode ? 'border-red-500 border-2' : ''
-          }`}>
+          <SelectTrigger
+            className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+              fieldErrors.PaymentMode ? 'border-red-500 border-2' : ''
+            }`}
+          >
             <SelectValue placeholder="Select Your Payment Method *" />
           </SelectTrigger>
           <SelectContent>
@@ -589,69 +562,12 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         </Select>
       </div>
 
-      {/* accident rider select  */}
-      <div className="col-span-2 md:col-span-1">
-        <Select
-          onValueChange={(v) => {
-            const rider = accidentRiderOptions.find((ar) => ar.text === v)
-            if (rider) {
-              handleInputChange('AccidentRider', rider.value)
-            }
-          }}
-        >
-          <SelectTrigger className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.AccidentRider ? 'border-red-500 border-2' : ''
-          }`}>
-            <SelectValue placeholder="Accident Rider *" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Accident Rider</SelectLabel>
-              {accidentRiderOptions.map((rider) => (
-                <SelectItem key={rider.text} value={rider.text}>
-                  {rider.text}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* critical rider select  */}
-      <div className="col-span-2 md:col-span-1">
-        <Select
-          onValueChange={(v) => {
-            const rider = criticalRiderOptions.find((cr) => cr.text === v)
-            if (rider) {
-              handleInputChange('CriticalRider', rider.value)
-            }
-          }}
-        >
-          <SelectTrigger className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.CriticalRider ? 'border-red-500 border-2' : ''
-          }`}>
-            <SelectValue placeholder="Critical Protection *" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Critical Protection</SelectLabel>
-              {criticalRiderOptions.map((rider) => (
-                <SelectItem key={rider.text} value={rider.text}>
-                  {rider.text}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
-
       {/* Error display */}
       {error && (
         <div className="col-span-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
           {error}
         </div>
       )}
-
 
       {/* submit button */}
       <div className="col-span-2">
