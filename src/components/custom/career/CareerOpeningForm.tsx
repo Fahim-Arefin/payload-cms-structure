@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import GlobalButton from '../shared/GlobalButton'
+import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 
 const positions = [
   'IT Executive',
@@ -28,7 +29,10 @@ function CareerOpeningForm() {
     console.log({ name, email, phone, position, message })
     const resumeFormData = new FormData()
     resumeFormData.append('hogamara', 'let go')
-    resumeFormData.append('file', (document.querySelector('#resume') as HTMLInputElement)?.files?.[0])
+    resumeFormData.append(
+      'file',
+      (document.querySelector('#resume') as HTMLInputElement)?.files?.[0],
+    )
     console.log(resumeFormData)
     const resumeId = await fetch('/api/resume', {
       method: 'POST',
@@ -157,7 +161,17 @@ function CareerOpeningForm() {
         className="font-semibold w-full md:w-auto md:self-end"
         text={sendButtonText}
         variant="primary"
-      />
+      >
+        {sendButtonText == 'Sending...' ? (
+          <Loader />
+        ) : sendButtonText == 'Application Sent' ? (
+          <MailCheck />
+        ) : (
+          <SendHorizontal />
+        )}
+
+        <span className="text-sm">{sendButtonText}</span>
+      </GlobalButton>
     </form>
   )
 }
