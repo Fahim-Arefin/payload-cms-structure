@@ -1,6 +1,8 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import GlobalButton from '../shared/GlobalButton'
 
 const riders = [
   'Accidental Medical Reimbursement (AMR)',
@@ -58,34 +60,17 @@ export function BenefitsTabSection() {
       </div>
       {/* Buttons */}
       <div className="flex justify-center items-center gap-4 mt-10 md:mt-10 lg:mt-20">
-        <Button
-          variant="primary"
-          className="
-            cursor-not-allowed
-            px-4 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6
-            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[6px] 
-            
-            global-p1 font-normal"
+        <Link
+          href="/assets/pdf/Required Brochures/Child Education Plan/Child Education Security Plan.pdf"
+          target="_blank"
         >
-          Download Brochure
-        </Button>
-        <Button
+          <GlobalButton text="Calculate Premium" variant="primary" />
+        </Link>
+        <GlobalButton
+          className="border-[#9C8639] border-2 text-[#9C8639] cursor-not-allowed"
+          text="Download Brochure"
           variant="outline"
-          className="
-            cursor-not-allowed
-            px-4 md:px-6 2xl:px-10
-            text-[#9C8639]
-            border-[#9C8639]
-            border-2
-            py-1 md:py-2 2xl:py-6
-            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[6px] 
-            global-p1 font-normal"
-        >
-          Calculate Premium
-        </Button>
+        />
       </div>
     </div>
   )
