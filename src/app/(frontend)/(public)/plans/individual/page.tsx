@@ -3,7 +3,7 @@ import AllPlanSection from '@/components/custom/shared/plans/AllPlanSection'
 
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import { Button } from '@/components/ui/button'
-import ToolTip from '@/components/custom/shared/ToolTip'
+import CallNowButton from '@/components/custom/shared/CallNowButton'
 import GlobalButton from '@/components/custom/shared/GlobalButton'
 import Link from 'next/link'
 
@@ -64,28 +64,7 @@ function PlanPage() {
           <Link href="/purchase-now">
             <GlobalButton size="large" text="Purchase Now" variant="primary" className="" />
           </Link>
-          <ToolTip>
-            {/* <Button
-              className=" 
-            cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6
-            h-[30px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[8px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-            global-h4 font-normal
-            border border-white text-white bg-white/20 backdrop-blur-md
-             hover:bg-white/30 hover:border-white transition-colors duration-300"
-            >
-              Call Now
-            </Button> */}
-            <GlobalButton
-              size="large"
-              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md  hover:bg-white/30 hover:border-white "
-              text="Call Now"
-              variant="primary"
-            />
-          </ToolTip>
+          <CallNowButton />
         </div>
       </HeroSection>
       <AllPlanSection plantData={indivisualPlantData} blur>
