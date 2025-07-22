@@ -8,6 +8,7 @@ import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import React from 'react'
 
 type Props = {}
@@ -24,8 +25,7 @@ function page({}: Props) {
 
   const highlightData = [
     {
-      mainDescription:
-        `Deciding on the best package for your team, making sure you’re getting value for money, staying on top of the options available.It can all add up to a daunting to-do list. We’re here to make that easier for you. `,
+      mainDescription: `Deciding on the best package for your team, making sure you’re getting value for money, staying on top of the options available.It can all add up to a daunting to-do list. We’re here to make that easier for you. `,
     },
   ]
 
@@ -151,8 +151,7 @@ function page({}: Props) {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start cursor-not-allowed
         "
         >
-          <ToolTip>
-            {/* <Button
+          {/* <Button
               variant="primary"
               className="
             cursor-not-allowed
@@ -165,13 +164,12 @@ function page({}: Props) {
             >
               Explore Now
             </Button> */}
-            <GlobalButton
-              size="large"
-              className="cursor-not-allowed"
-              text="Download Brochure"
-              variant="primary"
-            />
-          </ToolTip>
+          <Link
+            href="/assets/pdf/Required Brochures/Corporate Plans/Shanta Company Profile Brochure.pdf"
+            target="_blank"
+          >
+            <GlobalButton size="large" text="Download Brochure" variant="primary" />
+          </Link>
 
           <ToolTip className="flex items-center space-x-2 text-white 2xl:space-x-4">
             {/* <Button

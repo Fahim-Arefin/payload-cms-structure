@@ -246,8 +246,8 @@ function QuoteSection() {
         return 'half_yearly'
       case 'Yearly':
         return 'yearly'
-      case 'Single':
-        return 'single'
+      // case 'Single':
+      //   return 'single'
       default:
         return 'monthly'
     }
@@ -266,14 +266,14 @@ function QuoteSection() {
   // Helper function to get the total premium including CI and accident coverage if added
   const getTotalPremiumWithCoverage = (paymentMode: string): number => {
     if (!apiResponse) return 0
-    
+
     const premiums = getTotalPremium(apiResponse, paymentMode)
     const paymentKey = getPaymentModeKey(paymentMode)
-    
+
     const lifePremium = premiums.lifePremium[paymentKey]
     const ciPremium = isCriticalIllnessCovered ? premiums.ciPremium[paymentKey] : 0
     const accidentPremium = isAccidentCovered ? premiums.accidentPremium[paymentKey] : 0
-    
+
     return lifePremium + ciPremium + accidentPremium
   }
 
@@ -298,7 +298,13 @@ function QuoteSection() {
           {/* Info Container - Only show when API response is available */}
           {apiResponse && (
             <div className="hidden md:grid grid-cols-4 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600]">
-              <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
+              
+                <h2 className="global-h4 font-normal mb-6 col-span-5 p-2 py-2 xl:py-3 lg:my-3 xl:my-4 text-center">
+                  Your Premium Is - on top of the main output:
+                </h2>
+              
+
+              <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
                 <div
                   className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
                     confirmedPaymentMode === 'Monthly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
@@ -312,9 +318,10 @@ function QuoteSection() {
                   }`}
                 >
                   <AnimatedCounter
-                    value={confirmedPaymentMode === 'Monthly' 
-                      ? getTotalPremiumWithCoverage('Monthly')
-                      : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0
+                    value={
+                      confirmedPaymentMode === 'Monthly'
+                        ? getTotalPremiumWithCoverage('Monthly')
+                        : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0
                     }
                     prefix="৳"
                     showAnimation={confirmedPaymentMode === 'Monthly'}
@@ -322,7 +329,7 @@ function QuoteSection() {
                   />
                 </div>
               </div>
-              <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+              <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
                 <div
                   className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
                     confirmedPaymentMode === 'Quarterly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
@@ -336,9 +343,10 @@ function QuoteSection() {
                   }`}
                 >
                   <AnimatedCounter
-                    value={confirmedPaymentMode === 'Quarterly' 
-                      ? getTotalPremiumWithCoverage('Quarterly')
-                      : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0
+                    value={
+                      confirmedPaymentMode === 'Quarterly'
+                        ? getTotalPremiumWithCoverage('Quarterly')
+                        : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0
                     }
                     prefix="৳"
                     showAnimation={confirmedPaymentMode === 'Quarterly'}
@@ -346,7 +354,7 @@ function QuoteSection() {
                   />
                 </div>
               </div>
-              <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+              <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
                 <div
                   className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
                     confirmedPaymentMode === 'Semi-annually' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
@@ -360,9 +368,11 @@ function QuoteSection() {
                   }`}
                 >
                   <AnimatedCounter
-                    value={confirmedPaymentMode === 'Semi-annually' 
-                      ? getTotalPremiumWithCoverage('Semi-annually')
-                      : getTotalPremium(apiResponse, 'Semi-annually')?.lifePremium.half_yearly || 0
+                    value={
+                      confirmedPaymentMode === 'Semi-annually'
+                        ? getTotalPremiumWithCoverage('Semi-annually')
+                        : getTotalPremium(apiResponse, 'Semi-annually')?.lifePremium.half_yearly ||
+                          0
                     }
                     prefix="৳"
                     showAnimation={confirmedPaymentMode === 'Semi-annually'}
@@ -370,7 +380,7 @@ function QuoteSection() {
                   />
                 </div>
               </div>
-              <div className="col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+              <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
                 <div
                   className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
                     confirmedPaymentMode === 'Yearly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
@@ -384,9 +394,10 @@ function QuoteSection() {
                   }`}
                 >
                   <AnimatedCounter
-                    value={confirmedPaymentMode === 'Yearly' 
-                      ? getTotalPremiumWithCoverage('Yearly')
-                      : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0
+                    value={
+                      confirmedPaymentMode === 'Yearly'
+                        ? getTotalPremiumWithCoverage('Yearly')
+                        : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0
                     }
                     prefix="৳"
                     showAnimation={confirmedPaymentMode === 'Yearly'}
@@ -415,7 +426,7 @@ function QuoteSection() {
                     : ''}
                 </div>
               </div> */}
-              <div className="col-span-5 py-3 px-6 xl:py-4 xl:px-8 space-y-2">
+              <div className="col-span-5 py-3 px-6 xl:py-4 xl:px-8 space-y-2 mt-2 xl:mt-6">
                 <div className="bg-[#F6EDDD] md:px-4 lg:px-1 md:py-1.5 lg:py-1 xl:px-4 xl:py-1.5 md:w-[60%] lg:w-[100%] xl:w-[85%] 2xl:w-[70%] mx-auto rounded-full flex items-center space-x-2">
                   <div>
                     <svg
@@ -460,7 +471,7 @@ function QuoteSection() {
                       />
                     </svg>
                   </div>
-                  <div 
+                  <div
                     className="underline underline-offset-4 text-xs cursor-pointer hover:text-blue-600 transition-colors"
                     onClick={handleCriticalIllnessToggle}
                   >
@@ -528,11 +539,13 @@ function QuoteSection() {
                       />
                     </svg>
                   </div>
-                  <div 
+                  <div
                     className="underline underline-offset-4 text-xs cursor-pointer hover:text-blue-600 transition-colors"
                     onClick={handleAccidentToggle}
                   >
-                    {isAccidentCovered ? 'Remove accident coverage for' : 'Prone to accidents? Let\'s get you covered in'}{' '}
+                    {isAccidentCovered
+                      ? 'Remove accident coverage for'
+                      : "Prone to accidents? Let's get you covered in"}{' '}
                     {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
                     taka!
                   </div>

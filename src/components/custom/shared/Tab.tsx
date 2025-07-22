@@ -7,8 +7,8 @@ import GlobalButton from './GlobalButton'
 import EndowmentKeyFeature from './plans/EndowmentKeyFeature'
 import EndowmentPlanEligibility from './plans/EndowmentPlanEligibility'
 import { BenefitsTabSection } from '../child-education/BenefitsTabSection'
-import Link from 'next/link'
 import ToolTip from './ToolTip'
+import Link from 'next/link'
 
 export function ArrowIcon() {
   return (
