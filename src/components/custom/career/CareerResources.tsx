@@ -5,6 +5,7 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/componen
 import ResourceCard from './ResourceCard'
 import { CareerResourceDataType } from '@/types'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
+import Autoplay from 'embla-carousel-autoplay'
 
 type CareerResourceSectionProps = {
   data: CareerResourceDataType[]
@@ -85,7 +86,15 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
       <div className="w-full flex justify-center pl-4 xl:pl-20">
         {/* Large screens: Carousel with 2 visible cards per slide */}
         <div className="hidden lg:block w-full z-10 mb-12 relative">
-          <Carousel opts={{  align: 'start' }} setApi={setDesktopCarouselApi}>
+          <Carousel
+            opts={{ align: 'start' }}
+            setApi={setDesktopCarouselApi}
+            plugins={[
+              Autoplay({
+                delay: 5000,
+              }),
+            ]}
+          >
             <CarouselContent className="gap-12 xl:gap-20">
               {data.map((item, idx) => (
                 <CarouselItem
