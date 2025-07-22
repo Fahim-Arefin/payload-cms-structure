@@ -3,6 +3,7 @@ import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import AllPlanSection from '@/components/custom/shared/plans/AllPlanSection'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 function PlanPage() {
   const heroSlides = [
@@ -50,27 +51,9 @@ function PlanPage() {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start
         "
         >
-          <ToolTip>
-            {/* <Button
-              variant="primary"
-              className="
-            cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6
-            h-[30px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[8px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-            global-h4 font-normal"
-            >
-              Explore Now
-            </Button> */}
-            <GlobalButton
-              size="large"
-              text="Explore Now"
-              variant="primary"
-              className="cursor-not-allowed"
-            />
-          </ToolTip>
+          <Link href="/purchase-now">
+            <GlobalButton size="large" text="Purchase Now" variant="primary" className="" />
+          </Link>
           <ToolTip>
             {/* <Button
               className=" 
