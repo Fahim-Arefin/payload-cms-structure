@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/carousel'
 import { CarouselNextButton } from '../shared/CarouselNextButton'
 import { CarouselPrevButton } from '../shared/CarouselPrevButton'
+import Autoplay from 'embla-carousel-autoplay'
 
 type OpportunityItem = {
   text: string
@@ -75,6 +76,11 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
               align: 'start',
               slidesToScroll: 1,
             }}
+            plugins={[
+              Autoplay({
+                delay: 5000,
+              }),
+            ]}
             className="w-full"
           >
             <CarouselContent>

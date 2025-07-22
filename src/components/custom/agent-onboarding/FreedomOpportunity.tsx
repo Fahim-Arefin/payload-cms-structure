@@ -1,7 +1,11 @@
+'use client'
+
 import Image from 'next/image'
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import Autoplay from 'embla-carousel-autoplay'
 
 const cards = [
   {
@@ -47,6 +51,25 @@ const cards = [
 ]
 
 export default function FreedomOpportunity() {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
+
+  useEffect(() => {
+    if (!carouselApi) return
+
+    const updateScrollButtons = () => {
+      setCanScrollPrev(carouselApi.canScrollPrev())
+      setCanScrollNext(carouselApi.canScrollNext())
+    }
+
+    updateScrollButtons()
+    carouselApi.on('select', updateScrollButtons)
+
+    return () => {
+      carouselApi.off('select', updateScrollButtons)
+    }
+  }, [carouselApi])
   return (
     <div
       className="w-full  py-12 
@@ -55,46 +78,53 @@ export default function FreedomOpportunity() {
             bg-[#F8F0E6] grid grid-cols-2"
     >
       {/* Left Section */}
-      <div
-        className="pl-5 md:pl-24 lg:pl-[130px] xl:pl-[200px] 2xl:pl-[300px]"
-      >
+      <div className="pl-5 md:pl-24 lg:pl-[130px] xl:pl-[200px] 2xl:pl-[300px]">
         <h1 className="global-h2 font-medium">
           WHERE FREEDOM <br /> MEETS <span className="text-[#DB6A22]">OPPORTUNITY</span>
         </h1>
 
-              <Carousel className="mt-10 w-full">
-        <CarouselContent className="flex gap-6">
-          {cards.map((card, index) => (
-            <CarouselItem
-              key={index}
-              className="basis-[75%] sm:basis-1/2 md:basis-1/3 lg:basis-1/3 2xl:basis-1/4"
-            >
-              <div className="h-full min-h-[280px] bg-white rounded-lg p-6 flex flex-col gap-4 items-center justify-center text-center transition-all duration-300 hover:bg-[#9C8639] hover:text-white shadow-md">
-                <div className="w-[84px] h-[84px]">
-                  <img
-                    src={card.icon}
-                    alt={card.title}
-                    className="w-full h-full object-contain"
-                  />
+        <Carousel
+          opts={{
+            align: 'start',
+          }}
+          setApi={setCarouselApi} // 👈 capture carousel API
+          plugins={[
+            Autoplay({
+              delay: 5000,
+            }),
+          ]}
+          className="mt-10 w-full"
+        >
+          <CarouselContent className="flex gap-6">
+            {cards.map((card, index) => (
+              <CarouselItem
+                key={index}
+                className="basis-[75%] sm:basis-1/2 md:basis-1/3 lg:basis-1/3 2xl:basis-1/4"
+              >
+                <div className="h-full min-h-[280px] bg-white rounded-lg p-6 flex flex-col gap-4 items-center justify-center text-center transition-all duration-300 hover:bg-[#9C8639] hover:text-white shadow-md">
+                  <div className="w-[84px] h-[84px]">
+                    <img
+                      src={card.icon}
+                      alt={card.title}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-lg">{card.title}</h3>
+                  {card.description && <p className="text-sm opacity-80">{card.description}</p>}
                 </div>
-                <h3 className="font-semibold text-lg">{card.title}</h3>
-                {card.description && (
-                  <p className="text-sm opacity-80">{card.description}</p>
-                )}
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
 
-        <div className="mt-6 flex gap-3">
-          <Button size="icon" variant="outline" className="rounded-full h-8 w-8">
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button className="rounded-full h-8 w-8 bg-[#DB6A22] text-white">
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-      </Carousel>
+          <div className="mt-6 flex gap-3">
+            <Button size="icon" variant="outline" className="rounded-full h-8 w-8">
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <Button className="rounded-full h-8 w-8 bg-[#DB6A22] text-white">
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </Carousel>
       </div>
 
       {/* Right Section */}
