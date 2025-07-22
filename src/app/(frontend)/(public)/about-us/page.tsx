@@ -77,21 +77,12 @@ function page() {
       },
     },
     {
-      image: '/assets/allAboutIcon1.png',
-      hoverImage: '/assets/trustWhite.png',
+      image: '/assets/allAboutIcon2.png',
+      hoverImage: '/assets/ownershipWhite.png',
       title: 'Customer Centricity',
       description: {
         __html:
           'We act with proactiveness, empower our employees, and create experiences that truly put you first.',
-      },
-    },
-    {
-      image: '/assets/simplicity.png',
-      hoverImage: '/assets/allAboutIcon3.png',
-      title: 'Simplicity',
-      description: {
-        __html:
-          'With easy-to-understand plans and hassle-free service, we empower our customers to make confident decisions about their future.',
       },
     },
     {
@@ -109,9 +100,8 @@ function page() {
       image: '/assets/director2.png',
       title: 'Charting the Course',
       subtitle: 'for a Bold Tomorrow',
-      description: `At Shanta, we proudly uphold a legacy of integrity, innovation and excellence. As we embark on our journey in the insurance sector, we remain focused on our goal to offer unmatched life insurance solutions that ensure peace of mind and long-term financial security for our customers. Our determination to establish trust will remain unshakeable and so will our commitment to setting a new standard in the quality of life insurance services provided.
-
-The initiative of enhancing financial literacy among individuals and boosting confidence in them with services that bring stability is the cornerstone that carries the name of our organization, not only over the financial future of our customers but also over our community as a whole. At Shanta Life, we will continue our four decades long legacy of excellence and commitment with utmost sincerity, and I welcome you to explore planning your family's financial security with our trusted team.  
+      description: `
+      A highly distinguished and perceptive entrepreneur, Mr. Khondoker Monir Uddin, the founder promoter of Shanta, opts to do business by providing world-class products and services in Bangladesh. With his visionary leadership and extensive business knowledge, Shanta drives forward to not only provide superior quality products and services, but to demonstrate unparalleled foresight by establishing a new standard in every sector in which the company operates. The reputation and success of Shanta are testaments to his high ethical standard and relentless focus on quality, innovation and social responsibility. He is widely regarded as one of the most successful entrepreneurs in Bangladesh, who has brought transformative change in every sector the group has entered from Real Estate to Financial Services, Healthcare, Education and Retail.Mr. Monir completed both his Bachelors with honors and Masters degrees from the Department of Accounting, University of Dhaka. Over the past four decades, he has established Shanta as one of the leading corporate houses in Bangladesh, with successful investments in diversified sectors and thus has been continually recognized as a Commercially Important Person (CIP) by the Government of Bangladesh since 2000 till date. Mr. Monir is also a founder and Managing Director of the prestigious STS Group - which revolutionized the healthcare and education sectors of the country by establishing international standard institutions like Evercare Hospital Dhaka (previously Apollo Hospitals Dhaka), Evercare Hospital Chattogram, International School Dhaka (ISD), the Glenrich International Schools (Previously DPS STS schools). He is also a sponsor Director and former Chairman of Dhaka Bank Limited, and the Managing Director of Shanta Holdings Limited and Shanta Securities Limited.  
 `,
       // link: 'https://shantalife.com/message-form-chairman.php',
       link: '/all-bods#id-1',
@@ -120,7 +110,7 @@ The initiative of enhancing financial literacy among individuals and boosting co
       image: '/assets/director1.png',
       title: 'Redefining',
       subtitle: 'Life Insurance',
-      description: `I am honored to lead our team in our mission to provide unwavering protection and financial security to our clients. We are committed to innovation, collaboration, and social responsibility, and we strive to set new benchmarks to revolutionize the insurance industry. Our clients can trust us to always prioritize their needs and deliver exceptional service and value. Thank you for choosing Shanta Life Insurance as your trusted partner in safeguarding your future.`,
+      description: `Prior to stepping into the role of Chief Executive Officer at Shanta Life Insurance, Nafis Akhter Ahmed embarked on his career journey with MetLife in July 2001, serving as a Sales Manager for Agency Operations in Bangladesh. His dedication and performance led to promotions within the company, as he was elevated to the position of Deputy Agency Director in February 2006, and subsequently as Agency Director in June 2013. In these capacities, Nafis was entrusted with the pivotal responsibilities of steering the leadership and fostering the growth of career Agency Channels for MetLife Bangladesh, while also spearheading efforts to achieve profitability targets for the Bangladesh Agency Operation. With a wealth of experience exceeding 20 years in the Life Insurance industry, Nafis commenced his professional odyssey as a sales counselor in New York, USA in 1995. Possessing a remarkable track record, he has proven himself as a successful and talented executive proficient in Sales, Customer Service, Sales Management, Business Development, Distribution, Face-to-Face interactions, Corporate Sales, Key Account Management, Market Expansion, Strategic Planning, and Team Building. His expertise spans across diverse industries including Insurance, Electronics, Education, and Yarn & Fabrics, both in the US and Bangladesh. Prior to his tenure at MetLife, Nafis held significant roles as the Network (Distribution) Head at Axiom Technologies Limited., and as the Sales & Marketing Manager at Integra Communications Limited. (the sole distributor of Motorola GSM). Nafis's academic credentials include a Bachelor of Business Administration with a major in Accounting from Kansas State University in the USA. Additionally, he holds the Fellow, Life Management Institute (FLMI) qualification from LOMA financial services education.`,
       // link: 'https://shantalife.com/message-form-ceo.php',
       link: '/all-leaders#id-1',
     },
@@ -204,13 +194,13 @@ The initiative of enhancing financial literacy among individuals and boosting co
     },
     {
       id: 4,
-      image: '/assets/leaders/CMO.jpg',
+      image: '/assets/CMO.png',
       name: 'Jane Alam Romel',
       title: 'Chief Marketing Officer',
     },
     {
       id: 5,
-      image: '/assets/leaders/CFO.jpg',
+      image: '/assets/CFO.png',
       name: 'Majedur Rashid Chowdhury',
       title: 'Chief Financial Officer',
     },
@@ -220,62 +210,51 @@ The initiative of enhancing financial literacy among individuals and boosting co
     {
       image: '/assets/footprint1.jpg',
       title: 'Shanta Holdings',
+      link: 'https://shantaholdings.com/',
       description:
-        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+        'The premier real estate developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the caliber of the finest developers across the globe.',
     },
     {
       image: '/assets/footprint2.jpg',
-      title: 'Shanta Holdings',
+      title: 'Shanta Property Management',
+      link: 'https://www.shantapml.com/',
       description:
-        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+        'Shanta Property Management Limited offers integrated property management solutions in Bangladesh, specializing in facilities management, rental services, and buy-sell advisory for a seamless living experience.',
     },
     {
       image: '/assets/footprint3.png',
-      title: 'Shanta Holdings',
+      title: 'Shanta Securities',
+      link: 'https://www.shantasecurities.com/',
       description:
-        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+        'An innovative financial services company offering a range of brokerage and investing solutions.',
     },
     {
       image: '/assets/footprint4.jpg',
-      title: 'Shanta Holdings',
+      title: 'Shanta Asset Management',
+      link: 'https://www.shanta-aml.com/',
       description:
-        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+        'Shanta Asset Management Limited is a leading asset management company in Bangladesh offering corporate and open-end mutual fund management solutions to address the distinct investment objectives of its diverse clientele, including individuals and institutions.',
     },
     {
       image: '/assets/footprint5.jpg',
-      title: 'Shanta Holdings',
+      title: 'Shanta Equity',
+      link: 'https://shantaequity.net/',
       description:
-        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
-    },
-    {
-      image: '/assets/footprint1.jpg',
-      title: 'Shanta Holdings',
-      description:
-        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
-    },
-    {
-      image: '/assets/footprint2.jpg',
-      title: 'Shanta Holdings',
-      description:
-        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
-    },
-    {
-      image: '/assets/footprint3.png',
-      title: 'Shanta Holdings',
-      description:
-        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
-    },
-    {
-      image: '/assets/footprint4.jpg',
-      title: 'Shanta Holdings',
-      description:
-        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+        'A full-fledged merchant bank offering a range of investment banking, corporate advisory and portfolio management solutions.',
     },
     {
       image: '/assets/footprint5.jpg',
-      title: 'Shanta Holdings',
+      title: 'Shanta Lifestyle',
+      link: 'https://shantalifestyle.com/',
       description:
-        'The premier Real Estate Developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the calibre of the finest developers across the globe.',
+        'Luxury home décor company established with an aim to cater to the increasingly sophisticated interior design needs of Bangladeshi consumers searching for customization, luxury and exclusivity.',
+    },
+    {
+      image: '/assets/footprint5.jpg',
+      title: 'Shanta Multiverse',
+      link: 'https://shantamultiverse.com/',
+      description:
+        'Shanta Multiverse owns and operates The White Canary Café, a specialty all-day brunch and cafe chain with its presence spanning 5 locations in Dhaka, Bangladesh.',
     },
   ]
 

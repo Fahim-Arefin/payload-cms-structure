@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import GlobalButton from '../shared/GlobalButton'
+import ToolTip from '../shared/ToolTip'
 
 const riders = [
   'Accidental Medical Reimbursement (AMR)',
@@ -57,20 +57,6 @@ export function BenefitsTabSection() {
             </ul>
           </div>
         </div>
-      </div>
-      {/* Buttons */}
-      <div className="flex justify-center items-center gap-4 mt-10 md:mt-10 lg:mt-20">
-        <Link
-          href="/assets/pdf/Required Brochures/Child Education Plan/Child Education Security Plan.pdf"
-          target="_blank"
-        >
-          <GlobalButton text="Calculate Premium" variant="primary" />
-        </Link>
-        <GlobalButton
-          className="border-[#9C8639] border-2 text-[#9C8639] cursor-not-allowed"
-          text="Download Brochure"
-          variant="outline"
-        />
       </div>
     </div>
   )

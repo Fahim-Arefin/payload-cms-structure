@@ -47,6 +47,7 @@
 
 // v1
 import { FootPrintDataType } from '@/types'
+import Link from 'next/link'
 import React from 'react'
 
 type Props = {
@@ -57,7 +58,7 @@ type Props = {
 function FootPrintCard({ data, isActive = false }: Props) {
   return (
     <div
-      className={`
+      className={` 
         mx-auto relative p-6 overflow-hidden rounded-xl text-white
         transition-all duration-500 ease-in-out
         ${isActive ? 'h-[250px] md:h-[320px] lg:h-[420px] xl:h-[500px] 2xl:h-[600px]' : 'h-[180px] md:h-[220px] lg:h-[250px] xl:h-[300px] 2xl:h-[375px]'}
@@ -65,17 +66,17 @@ function FootPrintCard({ data, isActive = false }: Props) {
     >
       {/* Background image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat "
         style={{
           backgroundImage: `url('${data.image}')`,
         }}
       />
 
       {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-black/50 cursor-pointer" />
 
       {/* Foreground content */}
-      <div className="relative z-10 text-white space-y-2 text-justify flex flex-col justify-between h-full">
+      <div className="cursor-pointer relative z-10 text-white space-y-2 text-justify flex flex-col justify-between h-full">
         <p className="text-xs xl:text-sm font-light leading-snug line-clamp-5">
           {data?.description}
         </p>

@@ -9,6 +9,7 @@ import EligibilityTabSection from './EligibilityTabSection'
 import GlobalButton from '../shared/GlobalButton'
 import ToolTip from '../shared/ToolTip'
 import Link from 'next/link'
+import EndowmentKeyFeature from '../shared/plans/EndowmentKeyFeature'
 
 export function ArrowIcon() {
   return (
@@ -45,18 +46,18 @@ export function ChildEducationTabs({ config, data }: Props) {
          md:mb-[30px] lg:mb-[50px] xl:mb-[80px]"
         >
           <TabsList
-            className={`w-full flex overflow-x-auto md:overflow-x-visible ${config?.length === 2 ? ' justify-start ' : ' justify-between'} bg-transparent border-none p-0`}
+            className={`w-full flex overflow-x-scroll overflow-y-hidden  md:overflow-y-visible md:overflow-x-visible ${config?.length === 2 ? ' justify-start ' : ' justify-between'} bg-transparent border-none p-0`}
           >
             {config.map((tab, index) => (
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
                 className={cn(
-                  'global-p1 xl:text-[28px] font-medium px-2 py-2.5 md:py-6 relative flex justify-start uppercase ',
-                  index === 0 ? 'text-left pl-0' : 'text-left',
+                  'global-p1 font-medium px-2 py-2.5 md:py-6 relative flex justify-start uppercase ',
+                  index === 0 ? 'text-left' : 'text-left',
                   config?.length === 2 && 'w-[30%]',
                   activeTab === tab.value
-                    ? 'text-[#434343] after:content-[""] after:absolute after:inset-x-0 after:bottom-0 after:h-[4px] after:md:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
+                    ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:inset-x-0 after:bottom-0 after:h-[4px] after:md:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
                     : 'text-[#434343]',
                 )}
               >
@@ -95,13 +96,11 @@ export function ChildEducationTabs({ config, data }: Props) {
         </div>
 
         {/* Tab Content */}
-        {activeTab === 'eligibility' ? (
-          // --- PLAN ELIGIBILITY CUSTOM UI ---
+        {/* {activeTab === 'eligibility' ? (
           <EligibilityTabSection value="eligibility" />
         ) : activeTab === 'benefits' ? (
           <BenefitsTabSection />
         ) : (
-          // Default Content Rendering (use your previous logic)
           (() => {
             const activeTabIndex = config.findIndex((tab) => tab.value === activeTab)
             const item = data[activeTabIndex]
@@ -113,7 +112,6 @@ export function ChildEducationTabs({ config, data }: Props) {
                   value={activeTab}
                   className="py-8 md:py-0 grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-6 md:gap-y-12"
                 >
-                  {/* Left column: First 4 */}
                   <div className="flex flex-col gap-8 xl:gap-12">
                     {item?.content?.slice(0, 4).map((content: any, idx: number) => (
                       <div key={content?.title + idx} className="flex items-start gap-4">
@@ -125,10 +123,10 @@ export function ChildEducationTabs({ config, data }: Props) {
                           />
                         </div>
                         <div className="flex flex-col gap-1 md:gap-2">
-                          <h3 className="text-[#434342] text-base md:text-lg font-semibold uppercase">
+                          <h3 className="text-[#434342] global-h4 font-semibold uppercase">
                             {content.title}
                           </h3>
-                          <p className="text-[#434342] text-[15px] md:text-base leading-normal font-normal">
+                          <p className="text-[#434342] global-p2 font-light lg:leading-6">
                             {content.description}
                           </p>
                           {content.listItems && Array.isArray(content.listItems) && (
@@ -144,7 +142,7 @@ export function ChildEducationTabs({ config, data }: Props) {
                       </div>
                     ))}
                   </div>
-                  {/* Right column: Last 2 */}
+
                   <div className="flex flex-col gap-8">
                     {item?.content?.slice(4).map((content: any, idx: number) => (
                       <div key={content?.title + idx} className="flex items-start gap-4">
@@ -156,10 +154,10 @@ export function ChildEducationTabs({ config, data }: Props) {
                           />
                         </div>
                         <div className="flex flex-col gap-1 md:gap-2 max-w-[370px]">
-                          <h3 className="text-[#434342] text-base md:text-lg font-semibold uppercase">
+                          <h3 className="text-[#434342] global-h4 font-semibold uppercase">
                             {content.title}
                           </h3>
-                          <p className="text-[#434342] text-[15px] md:text-base leading-normal font-normal">
+                          <p className="text-[#434342] global-p2 font-light lg:leading-6">
                             {content.description}
                           </p>
                           {content.listItems && Array.isArray(content.listItems) && (
@@ -178,18 +176,6 @@ export function ChildEducationTabs({ config, data }: Props) {
                 </TabsContent>
 
                 <div className="flex justify-center items-center gap-4 mt-4 md:mt-10 lg:mt-20">
-                  {/* <Button
-                    variant="primary"
-                    className="
-                            cursor-not-allowed
-                            px-4 md:px-6 2xl:px-10
-                            py-1 md:py-2 2xl:py-6
-                            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-                            rounded-[4px] lg:rounded-[6px] 
-                            global-p1 font-normal"
-                  >
-                    Download Brochure
-                  </Button> */}
                   <Link
                     href="/assets/pdf/Required Brochures/Child Education Plan/Child Education Security Plan.pdf"
                     target="_blank"
@@ -197,24 +183,9 @@ export function ChildEducationTabs({ config, data }: Props) {
                     <GlobalButton text="Download Brochure" variant="primary" />
                   </Link>
 
-                  {/* <Button
-                    variant="outline"
-                    className="
-                            cursor-not-allowed
-            px-4 md:px-6 2xl:px-10
-            text-[#9C8639]
-            border-[#9C8639]
-            py-1 md:py-2 2xl:py-6
-            border-2
-            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[6px] 
-            global-p1 font-normal"
-                  >
-                    Calculate Premium
-                  </Button> */}
                   <ToolTip>
                     <GlobalButton
-                      className="cursor-not-allowed  text-[#9C8639] border-[#9C8639]"
+                      className="cursor-not-allowed  text-[#9C8639] border-[#9C8639] hover:text-[#9C8639]"
                       text="Calculate Premium"
                       variant="outline"
                     />
@@ -223,7 +194,37 @@ export function ChildEducationTabs({ config, data }: Props) {
               </>
             )
           })()
-        )}
+        )} */}
+        {/* Tab Content */}
+        {(() => {
+          return (
+            <>
+              <TabsContent key={activeTab} value={activeTab}>
+                {activeTab === 'features' && <EndowmentKeyFeature data={data['features']} />}
+                {activeTab === 'eligibility' && <EligibilityTabSection />}
+                {activeTab === 'benefits' && <BenefitsTabSection />}
+              </TabsContent>
+              <div
+                className="flex flex-col md:flex-row w-fit gap-2 mx-auto 
+              mt-[30px] lg:mt-[50px] xl:mt-[100px]"
+              >
+                <Link
+                  href="/assets/pdf/Required Brochures/Child Education Plan/Child Education Security Plan.pdf"
+                  target="_blank"
+                >
+                  <GlobalButton text="Download Brochure" variant="primary" />
+                </Link>
+                <ToolTip>
+                  <GlobalButton
+                    className="cursor-not-allowed  text-[#9C8639] border-[#9C8639] hover:text-[#9C8639]"
+                    text="Calculate Premium"
+                    variant="outline"
+                  />
+                </ToolTip>
+              </div>
+            </>
+          )
+        })()}
       </Tabs>
     </div>
   )
