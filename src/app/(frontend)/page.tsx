@@ -19,6 +19,7 @@ import InsuranceSimplifiedLargeSection from '@/components/custom/home/InsuranceS
 import { InsuranceDataType } from '@/types'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import GlobalButton from '@/components/custom/shared/GlobalButton'
+import HeroSectionWrapper from '@/components/custom/home/HeroSectionWrapper'
 export default async function HomePage() {
   const headers = await getHeaders()
   const payloadConfig = await config
@@ -148,50 +149,7 @@ export default async function HomePage() {
   return (
     <div className="font-avenir">
       {/* <HeroSection /> */}
-      <HeroSection heroSlides={heroSlides}>
-        <div
-          className="absolute top-[245px] md:top-[355px] lg:top-[470px] xl:top-[490px]  2xl:top-[730px] 
-          inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
-       hero-content-width
-        flex justify-left space-x-4 md:space-x-6 lg:justify-start cursor-not-allowed
-        "
-        >
-          <ToolTip>
-            {/* <Button
-              variant="primary"
-              className="
-            cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6
-            h-[30px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[8px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-            global-h4 font-normal"
-            >
-              Explore Now
-            </Button> */}
-            <GlobalButton
-              size="large"
-              variant="primary"
-              text="Explore Now"
-              className="cursor-not-allowed"
-            />
-          </ToolTip>
-
-          <ToolTip className="flex items-center space-x-2 text-white 2xl:space-x-4">
-            {/* <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
-              <BsPlay />
-            </div>
-            <div className="global-h4 font-normal ">From the Expert</div> */}
-            <GlobalButton className="flex items-center space-x-2 px-4 py-2 bg-transparent hover:bg-transparent cursor-not-allowed">
-              <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
-                <BsPlay />
-              </div>
-              <div className="global-h4 font-normal">From the Expert</div>
-            </GlobalButton>
-          </ToolTip>
-        </div>
-      </HeroSection>
+      <HeroSectionWrapper heroSlides={heroSlides}/>
       <SearchBarSection />
       <WhyChooseUsSection />
       <OnYourCueSection />

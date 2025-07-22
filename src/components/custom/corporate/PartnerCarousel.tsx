@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { PartnerType } from '@/types'
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
+import Autoplay from 'embla-carousel-autoplay'
 
 type Props = {
   data: PartnerType[]
@@ -48,6 +49,11 @@ function PartnerCarousel({ data }: Props) {
           align: 'start',
           dragFree: true,
         }}
+        plugins={[
+          Autoplay({
+            delay: 5000,
+          }),
+        ]}
         setApi={setCarouselApi}
         className="w-full"
       >

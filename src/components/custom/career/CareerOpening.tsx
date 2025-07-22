@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import CareerOpeningCard from './CareerOpeningCard'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import { JoinOurTeamMobile } from './JoinOurTeamMobile'
+import Autoplay from 'embla-carousel-autoplay'
 
 type CareerOpeningDataProps = {
   openingData: any
@@ -58,7 +59,15 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
           </div>
           {/* Mobile: Carousel */}
           <div className="md:hidden w-full relative mb-8">
-            <Carousel opts={{ loop: true, align: 'center' }} setApi={setCarouselApi}>
+            <Carousel
+              opts={{ loop: true, align: 'center' }}
+              setApi={setCarouselApi}
+              plugins={[
+                Autoplay({
+                  delay: 5000,
+                }),
+              ]}
+            >
               <CarouselContent className="flex items-stretch">
                 {openingData.map((card: any, idx: number) => (
                   <CarouselItem key={idx} className="flex-shrink-0 w-[91vw] max-w-[350px]">

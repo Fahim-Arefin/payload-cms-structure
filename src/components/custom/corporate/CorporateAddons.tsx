@@ -12,6 +12,7 @@ import { OfferDataType } from '@/types'
 import AddonsCard from './AddonsCard'
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
+import Autoplay from 'embla-carousel-autoplay'
 
 type Props = { data: OfferDataType[] }
 
@@ -62,6 +63,11 @@ function CorporateAddons({ data }: Props) {
            md:px-12 
            lg:px-[64px]"
         setApi={setCarouselApi}
+        plugins={[
+          Autoplay({
+            delay: 5000,
+          }),
+        ]}
       >
         <CarouselContent className="-ml-1">
           {data?.map((item, index) => (
