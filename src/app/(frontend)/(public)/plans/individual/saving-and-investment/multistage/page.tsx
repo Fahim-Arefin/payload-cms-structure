@@ -1,14 +1,14 @@
+import FourStagePlan from '@/components/custom/multistage/FourStagePlan'
+import MultiPlansSection from '@/components/custom/multistage/MultiPlansSection'
+import MultiStageTab from '@/components/custom/multistage/MultiStageTab'
+
+import StagePlanTitle from '@/components/custom/multistage/StagePlanTitle'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
-import StagePlanTitle from '@/components/custom/multistage/StagePlanTitle'
-import { Button } from '@/components/ui/button'
-import React, { FC } from 'react'
-import MultiPlansSection from '@/components/custom/multistage/MultiPlansSection'
-import FourStagePlan from '@/components/custom/multistage/FourStagePlan'
-import FiveStagePlan from '@/components/custom/multistage/FiveStagePlan'
-import GlobalButton from '@/components/custom/shared/GlobalButton'
 import ToolTip from '@/components/custom/shared/ToolTip'
+import { FC } from 'react'
 
 type Props = {}
 
@@ -42,6 +42,56 @@ const page: FC<Props> = ({}) => {
     { image: '/assets/time.png', timeline: '24 YEARS' },
     { image: '/assets/time.png', timeline: '27 YEARS' },
   ]
+
+  // tab-config.ts
+  const tabItems = [
+    {
+      value: 'features',
+      label: 'KEY FEATURES',
+    },
+    {
+      value: 'benefits',
+      label: 'Additional Benefits',
+    },
+  ]
+
+  const tabContent = {
+    features: [
+      {
+        title: 'Maturity Benefit',
+        description: 'Receive a guaranteed sum assured at the end of the policy term.',
+        image: '/assets/tabimage1.png',
+      },
+      {
+        title: 'Tax Benefits',
+        description: 'Enjoy tax rebates on premiums, subject to prevailing tax laws.',
+        image: '/assets/tabimage2.png',
+      },
+      {
+        title: 'Flexible Premium Payments',
+        description:
+          'Pay your premiums monthly, quarterly, half-yearly, or annually—your choice, your pace.',
+        image: '/assets/tabimage3.png',
+      },
+      {
+        title: 'Life Coverage',
+        description:
+          'In the event of the policyholder’s death during the term, the nominee receives the full sum assured.',
+        image: '/assets/tabimage4.png',
+      },
+      {
+        title: 'Customizable Coverage',
+        description: 'Choose a sum assured that fits your financial goals.',
+        image: '/assets/tabimage5.png',
+      },
+      {
+        title: 'Partner Discounts',
+        description:
+          'Get exclusive discounts on medical and diagnostic services at select hospitals and diagnostic centers in our partner network.',
+        image: '/assets/tabimage6.png',
+      },
+    ],
+  }
 
   return (
     <div className="font-avenir bg-white">
@@ -90,6 +140,7 @@ const page: FC<Props> = ({}) => {
         </div>
       </HeroSection>
       <PlanInfoSection bgColor="#F6EDDD" data={planInfoData} />
+      <MultiStageTab config={tabItems} data={tabContent} />
       <StagePlanTitle />
       <MultiPlansSection data={threeStageData} planData={planData} />
       <FourStagePlan />
