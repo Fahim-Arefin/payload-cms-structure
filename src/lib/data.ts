@@ -127,7 +127,7 @@ export const NAV_ITEMS = [
     href: '/plans',
     children: [
       {
-        label: 'Individual',
+        label: 'Individual Plan',
         href: '/plans/individual',
         children: [
           {
