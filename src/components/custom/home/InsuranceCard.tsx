@@ -32,7 +32,11 @@ const content = (data: InsuranceCardDataType) => (
         <p className="text-[#E5E5E5] text-[10px] lg:text-[12px]">{data.description}</p>
       </div>
     </div>
-    <div className="absolute -bottom-1 -right-1 z-20">
+    <div
+      className="absolute bottom-0 right-0 z-20 
+      md:w-[40px] lg:w-[50px] xl:w-[60px] 2xl:w-[70px]  
+      md:h-[40px] lg:h-[50px] xl:h-[60px] 2xl:h-[70px]"
+    >
       <img src={data?.videoLink ? '/assets/play3.svg' : '/assets/circle.svg'} alt="" />
     </div>
   </div>

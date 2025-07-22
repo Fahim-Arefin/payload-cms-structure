@@ -1,33 +1,23 @@
 'use client'
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
-import { CorporateClaim } from './CorporateClaim'
-import { IndividualClaim } from './IndividualClaim'
+import { BenefitsTabSection } from '../child-education/BenefitsTabSection'
+import Link from 'next/link'
+import EndowmentKeyFeature from '../shared/plans/EndowmentKeyFeature'
+import EndowmentPlanEligibility from '../shared/plans/EndowmentPlanEligibility'
+import GlobalButton from '../shared/GlobalButton'
+import ToolTip from '../shared/ToolTip'
 
-export function ArrowIconLeft() {
+export function ArrowIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
       <path
-        d="M15.5801 1.56897L1.48553 9.47103C1.40811 9.51476 1.34367 9.57825 1.29879 9.65501C1.25391 9.73178 1.2302 9.81907 1.23007 9.908C1.22994 9.99692 1.2534 10.0843 1.29806 10.1612C1.34272 10.2381 1.40698 10.3017 1.48427 10.3457L15.5561 18.2883C15.6463 18.3388 15.7499 18.3603 15.8528 18.3498C15.9556 18.3393 16.0528 18.2973 16.1309 18.2296C16.209 18.1619 16.2644 18.0717 16.2894 17.9714C16.3145 17.8711 16.308 17.7655 16.2708 17.669L13.344 10.1074C13.2987 9.99027 13.2989 9.86044 13.3445 9.74345L16.2941 2.19031C16.3317 2.09381 16.3387 1.98803 16.3139 1.88745C16.2892 1.78686 16.2339 1.69637 16.1558 1.62837C16.0777 1.56036 15.9804 1.51815 15.8774 1.50752C15.7743 1.49689 15.6705 1.51835 15.5801 1.56897Z"
+        d="M4.76388 3.90426L16.4372 10.4709C16.5013 10.5073 16.5547 10.56 16.5918 10.6236C16.6289 10.6873 16.6484 10.7597 16.6484 10.8334C16.6484 10.9071 16.6289 10.9795 16.5918 11.0432C16.5547 11.1069 16.5013 11.1596 16.4372 11.1959L4.76388 17.7626C4.68904 17.8044 4.60314 17.822 4.51789 17.8132C4.43265 17.8044 4.35219 17.7695 4.2875 17.7133C4.22281 17.657 4.17703 17.5822 4.1564 17.4991C4.13577 17.4159 4.14129 17.3284 4.17221 17.2484L6.60721 10.9843C6.64489 10.8872 6.64489 10.7796 6.60721 10.6826L4.17138 4.41843C4.14028 4.33839 4.13466 4.25071 4.15529 4.16736C4.17593 4.08401 4.22181 4.00908 4.28666 3.9528C4.35151 3.89653 4.43216 3.86166 4.51758 3.85297C4.603 3.84428 4.68902 3.86219 4.76388 3.90426Z"
         fill="white"
         stroke="#3A3A3A"
-        strokeWidth="1.50806"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-export function ArrowIconRight() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="20" viewBox="0 0 17 20" fill="none">
-      <path
-        d="M1.85735 1.56897L15.952 9.47103C16.0294 9.51476 16.0938 9.57825 16.1387 9.65501C16.1836 9.73178 16.2073 9.81907 16.2074 9.908C16.2076 9.99692 16.1841 10.0843 16.1394 10.1612C16.0948 10.2381 16.0305 10.3017 15.9532 10.3457L1.8814 18.2883C1.79119 18.3388 1.68759 18.3603 1.58473 18.3498C1.48187 18.3393 1.38474 18.2973 1.3066 18.2296C1.22846 18.1619 1.1731 18.0717 1.14806 17.9714C1.12302 17.8711 1.12953 17.7655 1.1667 17.669L4.09352 10.1074C4.13881 9.99027 4.13862 9.86044 4.09299 9.74345L1.14343 2.19031C1.10576 2.09381 1.09883 1.98803 1.12358 1.88745C1.14834 1.78686 1.20356 1.69637 1.2817 1.62837C1.35984 1.56036 1.45708 1.51815 1.56012 1.50752C1.66316 1.49689 1.76697 1.51835 1.85735 1.56897Z"
-        fill="white"
-        stroke="#3A3A3A"
-        strokeWidth="1.50806"
+        strokeWidth="1.25"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -40,17 +30,20 @@ type Props = {
     value: string
     label: string
   }[]
-  data: any
+  data?: any
 }
 
-export function ClaimTabs({ config }: Props) {
+export default function MultiStageTab({ config, data }: Props) {
   const [activeTab, setActiveTab] = useState(config[0].value)
   console.log(activeTab)
-
   return (
     <div className="container-padding">
-      <Tabs defaultValue={config[0].value} value={activeTab} onValueChange={setActiveTab}>
-        {/* Tab Headers */}
+      <Tabs
+        defaultValue={config[0].value}
+        value={activeTab}
+        onValueChange={setActiveTab}
+        className=""
+      >
         <div
           className="relative w-full border-b border-[#434343] md:py-[12px] bg-white
          md:mb-[30px] lg:mb-[50px] xl:mb-[80px]"
@@ -99,9 +92,7 @@ export function ClaimTabs({ config }: Props) {
                 >
                   <img
                     src={
-                      activeTab === 'individual'
-                        ? '/assets/arrowRight.png'
-                        : '/assets/arrowLeft.png'
+                      activeTab === 'features' ? '/assets/arrowRight.png' : '/assets/arrowLeft.png'
                     }
                     alt="arrow"
                     className="w-[14px] lg:w-[16px] xl:w-[18px] 2xl:w-[22px]
@@ -113,8 +104,34 @@ export function ClaimTabs({ config }: Props) {
         </div>
 
         {/* Tab Content */}
-        {activeTab === 'individual' && <IndividualClaim />}
-        {activeTab === 'corporate' && <CorporateClaim />}
+        {(() => {
+          return (
+            <>
+              <TabsContent key={activeTab} value={activeTab}>
+                {activeTab === 'features' && <EndowmentKeyFeature data={data['features']} />}
+                {activeTab === 'benefits' && <BenefitsTabSection />}
+              </TabsContent>
+              <div
+                className="flex flex-col md:flex-row w-fit gap-2 mx-auto 
+              mt-[30px] lg:mt-[50px] xl:mt-[100px]"
+              >
+                <Link
+                  href="/assets/pdf/Required Brochures/Child Education Plan/Child Education Security Plan.pdf"
+                  target="_blank"
+                >
+                  <GlobalButton text="Download Brochure" variant="primary" />
+                </Link>
+                <ToolTip>
+                  <GlobalButton
+                    className="cursor-not-allowed  text-[#9C8639] border-[#9C8639] hover:text-[#9C8639]"
+                    text="Calculate Premium"
+                    variant="outline"
+                  />
+                </ToolTip>
+              </div>
+            </>
+          )
+        })()}
       </Tabs>
     </div>
   )
