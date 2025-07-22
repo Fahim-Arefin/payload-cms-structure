@@ -4,6 +4,7 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/componen
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import NewsSliderCard from './NewsSliderCard'
+import Autoplay from 'embla-carousel-autoplay'
 
 type Props = {
   data: {
@@ -48,6 +49,11 @@ function NewsSliderSection({ data }: Props) {
         }}
         className="px-2"
         setApi={setCarouselApi}
+        plugins={[
+          Autoplay({
+            delay: 5000,
+          }),
+        ]}
       >
         <CarouselContent className="">
           {data?.map((item, index) => (
