@@ -33,7 +33,7 @@ function PlanPage() {
 
     {
       title: 'Health and Protection Plan',
-      description: `A promise that grows with time and care`,
+      description: `Preventive care meets powerful protection. Let us be your financial shield you can count on`,
       link: '/plans/individual/health-and-protection',
       image: '/assets/healthandprotection1.jpg',
     },
