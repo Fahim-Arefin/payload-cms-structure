@@ -61,7 +61,7 @@ export function ClaimTabs({ config }: Props) {
                 key={tab.value}
                 value={tab.value}
                 className={cn(
-                  'global-p1 xl:text-[28px] font-medium px-2 py-2.5 md:py-[22px] lg:py-[23px] xl:py-[24px]  relative flex justify-center',
+                  'global-p1 font-medium px-2 py-2.5 md:py-[22px] lg:py-[23px] xl:py-[24px] uppercase relative flex justify-center',
                   index === 0 ? 'pl-0' : '',
                   config?.length === 2 && 'w-[45%] text-center',
                   activeTab === tab.value
