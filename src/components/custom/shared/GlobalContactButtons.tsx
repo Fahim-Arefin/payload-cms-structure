@@ -1,12 +1,18 @@
+'use client'
+
 import React from 'react'
 
 function GlobalContactButtons() {
+  const handleCall = () => {
+    window.open('tel:09610889900', '_self')
+  }
+
   return (
     <div
       className="hidden lg:flex fixed inset-y-0 right-0 flex-col justify-center items-center gap-2 pr-2 px-0 z-50 h-fit my-auto
     mb-24"
     >
-      <div className="cursor-pointer">
+      <div className="cursor-pointer" onClick={handleCall}>
         <svg
           width="50"
           height="50"
