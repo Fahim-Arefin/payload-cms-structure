@@ -5,6 +5,7 @@ import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import { Button } from '@/components/ui/button'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import GlobalButton from '@/components/custom/shared/GlobalButton'
+import Link from 'next/link'
 
 function PlanPage() {
   const heroSlides = [
@@ -17,7 +18,7 @@ function PlanPage() {
   ]
 
   const indivisualPlantData = [
-{
+    {
       title: 'Child Education Plan',
       description: `A brighter future starts with a thoughtful plan`,
       link: '/plans/individual/child-education',
@@ -32,7 +33,7 @@ function PlanPage() {
 
     {
       title: 'Health and Protection Plan',
-      description: `A promise that grows with time and care`,
+      description: `Preventive care meets powerful protection. Let us be your financial shield you can count on`,
       link: '/plans/individual/health-and-protection',
       image: '/assets/healthandprotection1.jpg',
     },
@@ -60,27 +61,9 @@ function PlanPage() {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start
         "
         >
-          <ToolTip>
-            {/* <Button
-              variant="primary"
-              className="
-            cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6
-            h-[30px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[8px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-            global-h4 font-normal"
-            >
-              Explore Now
-            </Button> */}
-            <GlobalButton
-              size="large"
-              className="cursor-not-allowed"
-              text="Explore Now"
-              variant="primary"
-            />
-          </ToolTip>
+          <Link href="/purchase-now">
+            <GlobalButton size="large" text="Purchase Now" variant="primary" className="" />
+          </Link>
           <ToolTip>
             {/* <Button
               className=" 

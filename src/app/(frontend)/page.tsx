@@ -149,7 +149,7 @@ export default async function HomePage() {
   return (
     <div className="font-avenir">
       {/* <HeroSection /> */}
-      <HeroSectionWrapper heroSlides={heroSlides}/>
+      <HeroSectionWrapper heroSlides={heroSlides} />
       <SearchBarSection />
       <WhyChooseUsSection />
       <OnYourCueSection />
