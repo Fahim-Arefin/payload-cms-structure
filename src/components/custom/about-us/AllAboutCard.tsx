@@ -39,7 +39,9 @@ function AllAboutCard({ data, index }: Props) {
             className="w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
           />
         </div>
-        <div className="global-h2 text-center font-semibold lg:font-medium">{data?.title}</div>
+        <div className="global-h2 text-center font-semibold lg:font-medium uppercase">
+          {data?.title}
+        </div>
         <div
           className="global-p2
           font-light mx-auto text-center

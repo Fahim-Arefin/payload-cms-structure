@@ -12,24 +12,35 @@ function ShantaLifeIntroSection({ shantaIntroContent }: Props) {
         className="grid grid-cols-1 lg:grid-cols-2  
       space-y-6 lg:space-y-0"
       >
-        <div className="grid grid-cols-2 relative">
+        <div className="grid grid-cols-2 relative lg:min-h-[60px] xl:min-h-[130px] ">
           {/* Background-like image */}
-          <img
-            src="/assets/shantaIntroImage.png"
-            alt=""
-            className=" hidden lg:block absolute inset-x-0 lg:-bottom-6 xl:-bottom-2 2xl:-bottom-4 lg:w-[92%] xl:w-[80%] 2xl:w-[78%] h-[112px] object-cover object-center z-0 " // adjust offset as needed
-          />
+          <div
+            className=" hidden lg:block absolute inset-x-0  lg:-bottom-6 xl:-bottom-10 2xl:-bottom-[70px]
+          lg:w-[90%] xl:w-[78%] 2xl:w-[80%] 
+          lg:h-[180px] xl:h-[193px] 2xl:h-[230px]"
+          >
+            <img
+              src="/assets/shantaIntroImage2.png"
+              alt=""
+              className="
+            w-full object-cover object-center z-0 " // adjust offset as needed
+            />
+          </div>
 
           <div
             className="col-span-1 lg:col-span-2
            lg:font-semibold uppercase
-           lg:flex lg:flex-col"
+           lg:flex lg:flex-col "
           >
             <h1 className="global-h1 text-[#ED7125]">{shantaIntroContent?.heading}</h1>
             <h1 className="global-h1 text-black">{shantaIntroContent?.subheading}</h1>
           </div>
-          <div className="col-span-1 pt-3 md:pt-0 lg:hidden">
-            <img src="/assets/shantaIntroImage.png" alt="" className="h-full" />
+          <div className="col-span-1 lg:hidden md:-mt-4 ">
+            <img
+              src="/assets/shantaIntroImage2.png"
+              alt=""
+              className="w-full object-cover object-center"
+            />
           </div>
         </div>
         <div className="space-y-3 md:space-y-5 2xl:space-y-8 ">

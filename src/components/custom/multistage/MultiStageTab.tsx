@@ -3,12 +3,12 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
-import GlobalButton from './GlobalButton'
-import EndowmentKeyFeature from './plans/EndowmentKeyFeature'
-import EndowmentPlanEligibility from './plans/EndowmentPlanEligibility'
 import { BenefitsTabSection } from '../child-education/BenefitsTabSection'
 import Link from 'next/link'
-import ToolTip from './ToolTip'
+import EndowmentKeyFeature from '../shared/plans/EndowmentKeyFeature'
+import EndowmentPlanEligibility from '../shared/plans/EndowmentPlanEligibility'
+import GlobalButton from '../shared/GlobalButton'
+import ToolTip from '../shared/ToolTip'
 
 export function ArrowIcon() {
   return (
@@ -33,7 +33,7 @@ type Props = {
   data?: any
 }
 
-export function Tab({ config, data }: Props) {
+export default function MultiStageTab({ config, data }: Props) {
   const [activeTab, setActiveTab] = useState(config[0].value)
   console.log(activeTab)
   return (
@@ -45,24 +45,20 @@ export function Tab({ config, data }: Props) {
         className=""
       >
         <div
-          className="relative w-full border-b border-[#434343] md:py-[12px]  bg-white
-         md:mb-[30px] lg:mb-[50px] xl:mb-[100px]"
+          className="relative w-full border-b border-[#434343] md:py-[12px] bg-white
+         md:mb-[30px] lg:mb-[50px] xl:mb-[80px]"
         >
-          {/* Tabs */}
-          <TabsList
-            className={`w-full flex overflow-x-scroll overflow-y-hidden  md:overflow-y-visible md:overflow-x-visible 
-              ${config?.length === 2 ? ' justify-start ' : ' justify-between'} bg-transparent border-none p-0`}
-          >
+          <TabsList className={`w-full flex justify-between bg-transparent  p-0 `}>
             {config.map((tab, index) => (
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
                 className={cn(
-                  'global-p1 font-medium px-2 py-2.5 md:py-6 relative flex justify-start uppercase',
-                  index === 0 ? 'text-left ' : 'text-left',
-                  config?.length === 2 && 'w-[30%]',
+                  'global-p1 font-medium px-2 py-2.5 md:py-[22px] lg:py-[23px] xl:py-[24px] uppercase relative flex justify-center',
+                  index === 0 ? 'pl-0' : '',
+                  config?.length === 2 && 'w-[45%] text-center',
                   activeTab === tab.value
-                    ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:inset-x-0 after:bottom-0 after:h-[4px] after:md:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
+                    ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
                     : 'text-[#434343]',
                 )}
               >
@@ -84,17 +80,24 @@ export function Tab({ config, data }: Props) {
             ))}
           </TabsList>
 
-          {/* Dynamic Arrows between Tabs */}
+          {/* Dynamic Arrows */}
           {config.length > 1 &&
             config.slice(1).map((_, i) => {
               const percent = ((i + 1) / config.length) * 100
               return (
                 <div
                   key={`arrow-${i}`}
-                  className="hidden md:block absolute -bottom-2.5 z-10"
-                  style={{ left: `${percent}%`, transform: 'translateX(-50%)' }}
+                  className="hidden md:block absolute md:-bottom-[8px] lg:-bottom-[9px] xl:-bottom-[9px] 2xl:-bottom-[12px] z-10"
+                  style={{ left: `${percent}%`, transform: 'translateX(-60%)' }}
                 >
-                  <ArrowIcon />
+                  <img
+                    src={
+                      activeTab === 'features' ? '/assets/arrowRight.png' : '/assets/arrowLeft.png'
+                    }
+                    alt="arrow"
+                    className="w-[14px] lg:w-[16px] xl:w-[18px] 2xl:w-[22px]
+                    h-[16px] lg:h-[18px] xl:h-[20x] 2xl:h-[24px]"
+                  />
                 </div>
               )
             })}
@@ -106,7 +109,6 @@ export function Tab({ config, data }: Props) {
             <>
               <TabsContent key={activeTab} value={activeTab}>
                 {activeTab === 'features' && <EndowmentKeyFeature data={data['features']} />}
-                {activeTab === 'eligibility' && <EndowmentPlanEligibility />}
                 {activeTab === 'benefits' && <BenefitsTabSection />}
               </TabsContent>
               <div

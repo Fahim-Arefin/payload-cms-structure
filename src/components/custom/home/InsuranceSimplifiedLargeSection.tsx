@@ -39,13 +39,13 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
             {/* Left Text Section */}
             <div
               className={cn(
-                `text-[#434343] global-h4 p-4 flex flex-col justify-center`,
+                `text-[#434343] global-h4 p-4 flex flex-col justify-center space-y-1 lg:space-y-2`,
                 content === 'left'
-                  ? 'order-1'
-                  : 'order-2 md:ml-[16%] lg:ml-[20%] xl:ml-[30%] 2xl:ml-[40%]',
+                  ? 'order-1 md:mr-[16%] lg:mr-[20%] xl:mr-[30%] 2xl:mr-[35%]'
+                  : 'order-2 md:ml-[16%] lg:ml-[20%] xl:ml-[30%] 2xl:ml-[35%]',
               )}
             >
-              <h4 className="font-semibold text-2xl uppercase cursor-pointer">
+              <h4 className="font-semibold uppercase cursor-pointer">
                 <Link href="/">
                   <span className="text-[#ED7125] ">{titleFirstWord}</span>{' '}
                   {titleRestWords.join(' ')}
@@ -85,8 +85,9 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                 <div
                   className={cn(
                     `relative group cursor-pointer 
-        md:h-[200px] lg:h-[250px] xl:h-[300px] w-full  
-        bg-no-repeat bg-[length:100%_212.5%] bg-[position:0px_-180.566px] 
+        md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full  
+        bg-no-repeat bg-cover 
+        bg-center lg:bg-[position:0px_-35px] xl:bg-[position:0px_-55px]  2xl:bg-[position:0px_-65px] 
    md:rounded-[5.333px_5.333px_53.333px_5.333px] lg:rounded-[8.333px_8.333px_53.333px_8.333px]
         overflow-hidden transition-all`,
                     content === 'left' ? 'order-2' : 'order-1',
@@ -107,8 +108,9 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                     <img
                       src="/assets/play.svg"
                       alt=""
-                      className=" md:w-[60px] lg:w-[80px] xl:w-[100px]  
-                  md:h-[60px] lg:h-[80px] xl:h-[100px]"
+                      className=" 
+                      md:w-[50px] lg:w-[60px] xl:w-[70px] 2xl:w-[80px]  
+                      md:h-[50px] lg:h-[60px] xl:h-[70px] 2xl:h-[80px]"
                     />
                   </div>
                 </div>
@@ -139,7 +141,7 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
             </Dialog>
           </div>
           {/* second row */}
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-3 gap-2 xl:gap-6">
             {data?.insuranceCardData?.map((item, i) => (
               <InsuranceCard data={item} key={i} />
             ))}
