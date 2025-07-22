@@ -3,6 +3,7 @@ import PurchaseSection from '@/components/custom/purchase-now/PurchaseSection';
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection';
 import GlobalButton from '@/components/custom/shared/GlobalButton';
 import HeroSection from '@/components/custom/shared/hero/HeroSection';
+import CallNowButton from '@/components/custom/shared/CallNowButton';
 import ToolTip from '@/components/custom/shared/ToolTip';
 import React, { FC } from 'react';
 
@@ -42,14 +43,9 @@ const page: FC<pageProps> = ({}) => {
             />
           </ToolTip>
 
-          <ToolTip className="flex items-center space-x-2 text-white 2xl:space-x-4">
-            <GlobalButton
-              variant="primary"
-              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md hover:bg-white/40 hover:border-white"
-              text="Call Now"
-              size="large"
-            />
-          </ToolTip>
+          <div className="flex items-center space-x-2 text-white 2xl:space-x-4">
+            <CallNowButton />
+          </div>
         </div>
       </HeroSection>
 

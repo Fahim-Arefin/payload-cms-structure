@@ -7,6 +7,7 @@ import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSect
 import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
+import CallNowButton from '@/components/custom/shared/CallNowButton'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { FC } from 'react'
 
@@ -127,14 +128,7 @@ const tabContent = {
           >
             Call Now
           </Button> */}
-          <ToolTip>
-            <GlobalButton
-              size="large"
-              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md  hover:bg-white/30 hover:border-white "
-              text="Call Now"
-              variant="primary"
-            />
-          </ToolTip>
+          <CallNowButton />
         </div>
       </HeroSection>
       <PlanInfoSection bgColor="#F6EDDD" data={planInfoData} />

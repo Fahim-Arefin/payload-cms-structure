@@ -3,6 +3,7 @@ import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
 import { Tab } from '@/components/custom/shared/Tab'
+import CallNowButton from '@/components/custom/shared/CallNowButton'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
 
@@ -96,14 +97,7 @@ function EndowmentPage() {
               variant="primary"
             />
           </ToolTip>
-          <ToolTip>
-            <GlobalButton
-              size="large"
-              className="cursor-not-allowed border border-white text-white bg-white/30 backdrop-blur-md  hover:bg-white/30 hover:border-white "
-              text="Call Now"
-              variant="primary"
-            />
-          </ToolTip>
+          <CallNowButton />
         </div>
       </HeroSection>
       <PlanInfoSection bgColor="#F6EDDD" data={planInfoData} />
