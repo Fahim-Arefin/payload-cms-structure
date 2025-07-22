@@ -4,9 +4,9 @@ const EligibilityTabSection = () => {
   return (
     <div>
       <div className="mt-4 md:mt-0">
-        <span className="text-[20px] lg:global-h1 md:global-span font-bold text-[#434342]">
+        <div className="global-h3 font-semibold text-center text-[#434342]">
           METRICS THAT MATTER
-        </span>
+        </div>
       </div>
 
       <div className="flex flex-col md:flex-row gap-6 pt-4 lg:pt-10 lg:justify-center lg:items-center">

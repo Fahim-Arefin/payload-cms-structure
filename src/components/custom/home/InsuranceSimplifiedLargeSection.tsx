@@ -54,32 +54,6 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
               <h4 className="">{data?.subtitle}</h4>
             </div>
 
-            {/* Right Background Image Section */}
-            {/* <div
-              className={cn(
-                `relative md:h-[200px] lg:h-[250px] xl:h-[300px] w-full  
-    bg-no-repeat bg-[length:100%_212.5%] bg-[position:0px_-180.566px] 
-    rounded-[8.333px_8.333px_53.333px_8.333px]`,
-                content === 'left' ? 'order-2' : 'order-1',
-              )}
-              style={{
-                backgroundImage: `url(${data.mainImage})`,
-              }}
-            >
-              <div
-                className="absolute 
-              md:-bottom-1 lg:-bottom-2 xl:-bottom-4 
-              md:-right-1 lg:-right-2 xl:-right-4"
-              >
-                <img
-                  src="/assets/play.svg"
-                  alt=""
-                  className=" md:w-[60px] lg:w-[80px] xl:w-[100px]  
-                  md:h-[60px] lg:h-[80px] xl:h-[100px]"
-                />
-              </div>
-            </div> */}
-
             <Dialog>
               <DialogTrigger asChild>
                 <div
@@ -88,7 +62,7 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
         md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full  
         bg-no-repeat bg-cover 
         bg-center lg:bg-[position:0px_-35px] xl:bg-[position:0px_-55px]  2xl:bg-[position:0px_-65px] 
-   md:rounded-[5.333px_5.333px_53.333px_5.333px] lg:rounded-[8.333px_8.333px_53.333px_8.333px]
+   md:rounded-[8.333px_8.333px_25.333px_8.333px] LG:rounded-[8.333px_8.333px_33.333px_8.333px] xl:rounded-[8.333px_8.333px_40.333px_8.333px] 2xl:rounded-[8.333px_8.333px_53.333px_8.333px]
         overflow-hidden transition-all`,
                     content === 'left' ? 'order-2' : 'order-1',
                   )}
@@ -97,20 +71,23 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                   }}
                 >
                   {/* Hover dark overlay */}
-                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300 rounded-[8.333px_8.333px_53.333px_8.333px]" />
+                  <div
+                    className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300 
+                  rounded-[8.333px_8.333px_53.333px_8.333px]"
+                  />
 
                   {/* Play Button */}
                   <div
                     className="absolute 
-              md:-bottom-0 lg:-bottom-0.5 xl:-bottom-2 
-              md:-right-0 lg:-right-1 xl:-right-1 "
+              md:-bottom-0.5 lg:-bottom-0.5 xl:bottom-0 2xl:bottom-0.5 
+              md:-right-0.5 lg:-right-0.5 xl:-right-[3px] 2xl:-right-0.5 "
                   >
                     <img
                       src="/assets/play.svg"
                       alt=""
                       className=" 
-                      md:w-[50px] lg:w-[60px] xl:w-[70px] 2xl:w-[80px]  
-                      md:h-[50px] lg:h-[60px] xl:h-[70px] 2xl:h-[80px]"
+                      md:w-[50px] lg:w-[60px] xl:w-[80px] 2xl:w-[90px]  
+                      md:h-[50px] lg:h-[60px] xl:h-[80px] 2xl:h-[90px]"
                     />
                   </div>
                 </div>
