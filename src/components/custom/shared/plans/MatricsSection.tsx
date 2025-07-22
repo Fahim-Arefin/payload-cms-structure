@@ -3,6 +3,7 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import GlobalButton from '../GlobalButton'
+import Link from 'next/link'
 
 type Props = {}
 
@@ -134,7 +135,12 @@ function MatricsSection({}: Props) {
           >
             Download Brochure
           </Button> */}
-          <GlobalButton className="cursor-not-allowed" text="Download Brochure" variant="primary" />
+          <Link
+            href="/assets/pdf/Required Brochures/Health & Protection/Shanta Accidental Coverage/Shanta Life Rider Brochure.pdf"
+            target="_blank"
+          >
+            <GlobalButton text="Download Brochure" variant="primary" />
+          </Link>
           {/* <Button
             variant="outline"
             className="cursor-not-allowed

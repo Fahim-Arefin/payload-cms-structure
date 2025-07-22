@@ -54,6 +54,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   const [fieldErrors, setFieldErrors] = useState<{
     PlanCode: boolean
     Age: boolean
+    annualIncome: boolean
     SumAssured: boolean
     Term: boolean
     PaymentMode: boolean
@@ -61,6 +62,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   }>({
     PlanCode: false,
     Age: false,
+    annualIncome: false,
     SumAssured: false,
     Term: false,
     PaymentMode: false,
@@ -100,11 +102,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
       code: 4,
     },
-    {
-      text: 'Multi Stage Maturity Plan',
-      videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-      code: 5,
-    },
+    // {
+    //   text: 'Multi Stage Maturity Plan',
+    //   videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+    //   code: 5,
+    // },
   ]
 
   const genders = [
@@ -125,7 +127,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     { text: 'Quarterly', value: 3 },
     { text: 'Semi-annually', value: 2 },
     { text: 'Yearly', value: 1 },
-    { text: 'Single', value: 5 },
+    // { text: 'Single', value: 5 },
   ]
 
   const handleInputChange = (field: keyof FormData, value: string | number) => {
@@ -262,6 +264,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     setFieldErrors({
       PlanCode: false,
       Age: false,
+      annualIncome: false,
       SumAssured: false,
       Term: false,
       PaymentMode: false,
@@ -272,6 +275,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     const errors = {
       PlanCode: !formData.PlanCode,
       Age: !formData.Age || formData.Age < 18 || formData.Age > 65,
+      annualIncome: !formData.annualIncome,
       SumAssured: !formData.SumAssured || formData.SumAssured < 100000,
       Term: !formData.Term,
       PaymentMode: !formData.PaymentMode,
@@ -502,7 +506,9 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           placeholder="Annual Income"
           value={formData.annualIncome || ''}
           onChange={(e) => handleInputChange('annualIncome', parseInt(e.target.value) || 0)}
-          className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+          className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+            fieldErrors.annualIncome ? 'border-red-500 border-2' : ''
+          }`}
         />
       </div>
       {/* sum assured input */}

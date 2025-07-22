@@ -64,7 +64,7 @@ const CalculatorSection = (props: Props) => {
 
         {/* right form */}
         <div className='order-1 lg:order-2'>
-          <CalculateForm plan={selectedPlan ?? undefined} onPlanChange={setSelectedPlan} />
+          {/* <CalculateForm plan={selectedPlan ?? undefined} onPlanChange={setSelectedPlan} /> */}
         </div>
       </div>
     </div>
