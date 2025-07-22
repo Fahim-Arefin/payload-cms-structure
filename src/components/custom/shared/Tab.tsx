@@ -111,7 +111,7 @@ export function Tab({ config, data }: Props) {
               </TabsContent>
               <div
                 className="flex flex-col md:flex-row w-fit gap-2 mx-auto 
-              mt-[30px] lg:mt-[50px] xl:mt-[100px]"
+              mt-[30px] lg:mt-[50px] xl:mt-[80px]"
               >
                 <Link
                   href="/assets/pdf/Required Brochures/Child Education Plan/Child Education Security Plan.pdf"
