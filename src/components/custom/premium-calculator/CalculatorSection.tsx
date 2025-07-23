@@ -3,11 +3,76 @@
 import React, { useState } from 'react'
 import CalculateForm from './CalculateForm'
 import PremiumBreakdown from './PremiumBreakdown'
+import { ApiResponse, getTotalPremium } from '@/utils/premiumCalculator'
+import PlanDetailsSection from '../purchase-now/PlanDetailsSection'
+import PurchaseCalculateSection from '../purchase-now/PurchaseCalculateSection'
 
 type Props = {}
 
+interface FormData {
+  PlanCode: number
+  Age: number
+  SumAssured: number
+  Term: number
+  PaymentMode: number
+  Gender: number
+  phoneNumber: string
+  annualIncome: number
+  name: string
+  email: string
+}
+
+
 const CalculatorSection = (props: Props) => {
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null)
+  const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
+    const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
+      const [formData, setFormData] = useState<FormData>({
+        PlanCode: 0,
+        Age: 0,
+        SumAssured: 0,
+        Term: 0,
+        PaymentMode: 0,
+        Gender: 0,
+        phoneNumber: '',
+        annualIncome: 0,
+        name: '',
+        email: ''
+      })
+      const [calculatedPlanCode, setCalculatedPlanCode] = useState<number | null>(null)
+  
+    const handleApiResponse = (response: ApiResponse, paymentMode: string) => {
+      setApiResponse(response)
+      setConfirmedPaymentMode(paymentMode)
+      setCalculatedPlanCode(formData.PlanCode)
+    }
+     const plans = [
+      {
+        text: 'Shanta Child Education Plan',
+        videoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
+        code: 1,
+      },
+      {
+        text: 'Shanta Endowment Plan',
+        videoLink: 'https://www.youtube.com/embed/CkKkdNkBk9g',
+        code: 2,
+      },
+      {
+        text: 'Shanta 3 Stage Plan',
+        videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+        code: 3,
+      },
+      {
+        text: 'Shanta 4 Stage Plan',
+        videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+        code: 4,
+      },
+      // {
+      //   text: 'Multi Stage Maturity Plan',
+      //   videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+      //   code: 5,
+      // },
+    ]
+  
   return (
     <div
       className="px-5 pt-12 py-4
@@ -31,8 +96,16 @@ const CalculatorSection = (props: Props) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.3fr,1fr] gap-4 lg:gap-10 justify-center mt-6 lg:mt-10 xl:mt-20">
         {/* left side box */}
         <div className=" w-full order-2 lg:order-1">
-          {selectedPlan ? (
-            <PremiumBreakdown />
+          {apiResponse ? (
+            <div>
+              
+              <PlanDetailsSection planCode={formData.PlanCode} plans={plans}/>
+              <PurchaseCalculateSection
+                confirmedPaymentMode={confirmedPaymentMode}
+                getTotalPremium={getTotalPremium}
+                apiResponse={apiResponse}
+              />
+            </div>
           ) : (
             <>
               <div className="px-6 pt-6 md:px-10 md:pt-10 pb-4 rounded-t-xl bg-[#9C863940]">
@@ -64,7 +137,7 @@ const CalculatorSection = (props: Props) => {
 
         {/* right form */}
         <div className='order-1 lg:order-2'>
-          {/* <CalculateForm plan={selectedPlan ?? undefined} onPlanChange={setSelectedPlan} /> */}
+          <CalculateForm onApiResponse={handleApiResponse} formData={formData} setFormData={setFormData} />
         </div>
       </div>
     </div>
