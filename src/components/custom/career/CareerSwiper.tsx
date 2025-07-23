@@ -80,7 +80,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
                 <CarouselItem
                   key={card.title}
                   className={cn(
-                    'basis-[338px] cursor-pointer md:basis-[400px] p-10 lg:basis-[400px] xl:basis-[420px] 2xl:basis-[460px]',
+                    'basis-[338px] cursor-pointer md:basis-[400px] pl-5 md:pl-24 lg:pl-[130px] xl:pl-[200px] 2xl:pl-[300px] p-10 lg:basis-[400px] xl:basis-[420px] 2xl:basis-[460px]',
                     'pr-6 last:pr-0',
                     // Ensure content doesn't overflow out of the card
                   )}
@@ -91,7 +91,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
                     className={cn(
                       'flex flex-col w-[250px] md:w-[338px] 2xl:w-[380px] h-[150px] md:h-[346px] lg:h-[346px] justify-between items-center rounded-[6px] md:rounded-[18px] border-[0.5px] md:border border-[#FFFFFF] bg-[#0000004D] backdrop-blur-[7.5px] text-center px-6 transition-all duration-500',
                       hoveredIdx === idx
-                        ? 'transform scale-y-[1.2] scale-x-[1.1] transition-all duration-500' // Apply scaling only to content
+                        ? 'transform scale-y-[1.22] scale-x-[1.1] transition-all duration-500' // Apply scaling only to content
                         : 'scale-100', // Normal size when not hovered
                     )}
                   >
