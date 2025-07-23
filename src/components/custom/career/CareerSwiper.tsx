@@ -50,17 +50,16 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
 
   return (
     <div
-      className="relative pl-5 py-12 
-           md:pl-24 md:py-24
-           lg:pl-[130px]  lg:py-[110px] 
-           xl:pl-[200px]  xl:py-[100px] 
-           2xl:pl-[300px] 2xl:py-[120px] w-full"
+      className="relative py-12 md:py-24
+             lg:py-[110px] 
+             xl:py-[100px] 
+            2xl:py-[100px] w-full"
       style={{
         background: "url('/assets/careerSwiperBanner.gif') no-repeat center/cover",
       }}
     >
       <div className="pt-16 pb-10">
-        <div className="mb-6 flex flex-col gap-2">
+        <div className="mb-6 flex flex-col gap-2 pl-5 md:pl-24 lg:pl-[130px] xl:pl-[200px] 2xl:pl-[300px]">
           <div className="text-white text-lg lg:text-[28px] font-light">FAST TRACK</div>
           <div className="text-[#FF8641] text-3xl lg:text-[46px] font-bold mb-2">YOUR CAREER</div>
           <div className="text-white text-[12px] md:text-base lg:text-lg font-[350] uppercase">
@@ -76,37 +75,24 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
             setApi={setCarouselApi}
             className="w-full"
           >
-            <CarouselContent className="gap-6">
+            <CarouselContent className="gap-6 px-10">
               {careerCards.map((card, idx) => (
                 <CarouselItem
                   key={card.title}
                   className={cn(
-                    // For 3.5 cards on desktop: (338 * 3.5 + 18) ~ 1200px fits
-                    'basis-[338px] cursor-pointer md:basis-[400px] lg:basis-[400px] xl:basis-[420px] 2xl:basis-[460px] shrink-0',
+                    'basis-[338px] cursor-pointer md:basis-[400px] p-10 lg:basis-[400px] xl:basis-[420px] 2xl:basis-[460px]',
                     'pr-6 last:pr-0',
-                    // Mobile: 1.5 cards
+                    // Ensure content doesn't overflow out of the card
                   )}
                   onMouseEnter={() => setHoveredIdx(idx)}
                   onMouseLeave={() => setHoveredIdx(null)}
                 >
                   <div
                     className={cn(
-                      'flex flex-col w-[250px] md:w-[338px] 2xl:w-[380px] justify-between items-center rounded-[6px] md:rounded-[18px] border-[0.5px] md:border border-[#FFFFFF] bg-[#0000004D] backdrop-blur-[7.5px] text-center px-6 transition-all duration-500',
-                      idx % 2 === 1
-                        ? 'h-[150px] md:h-[346px] lg:h-[346px]'
-                        : 'h-[150px] md:h-[346px] lg:h-[346px]',
-                      'sm:h-[120px] sm:lg:h-[180px]',
+                      'flex flex-col w-[250px] md:w-[338px] 2xl:w-[380px] h-[150px] md:h-[346px] lg:h-[346px] justify-between items-center rounded-[6px] md:rounded-[18px] border-[0.5px] md:border border-[#FFFFFF] bg-[#0000004D] backdrop-blur-[7.5px] text-center px-6 transition-all duration-500',
                       hoveredIdx === idx
-                        ? idx % 2 === 1
-                          ? 'h-[180px] md:h-[400px] lg:h-[450px]'
-                          : 'h-[180px] md:h-[400px] lg:h-[450px]'
-                        : idx % 2 === 1
-                          ? 'h-[150px] md:h-[346px] lg:h-[346px]'
-                          : 'h-[150px] md:h-[346px] lg:h-[346px]',
-                      // **Width logic**
-                      hoveredIdx === idx
-                        ? 'w-[275px] md:w-[370px] 2xl:w-[410px]'
-                        : 'w-[250px] md:w-[338px] 2xl:w-[380px]',
+                        ? 'transform scale-y-[1.2] scale-x-[1.1] transition-all duration-500' // Apply scaling only to content
+                        : 'scale-100', // Normal size when not hovered
                     )}
                   >
                     <div className="flex-1 flex flex-col gap-4 md:gap-8 justify-center">
