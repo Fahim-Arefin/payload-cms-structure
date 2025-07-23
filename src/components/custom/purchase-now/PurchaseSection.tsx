@@ -20,6 +20,8 @@ interface FormData {
   Gender: number
   phoneNumber: string
   annualIncome: number
+  name: string
+  email: string
 }
 
 const PurchaseSection = (props: Props) => {
@@ -34,6 +36,8 @@ const PurchaseSection = (props: Props) => {
       Gender: 0,
       phoneNumber: '',
       annualIncome: 0,
+      name: '',
+      email: ''
     })
     const [calculatedPlanCode, setCalculatedPlanCode] = useState<number | null>(null)
 
