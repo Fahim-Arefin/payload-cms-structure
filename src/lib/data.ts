@@ -118,3 +118,54 @@ Nafis's academic credentials include a Bachelor of Business Administration with 
     description: `Majedur Rashid Chowdhury has been appointed as Senior Executive Vice President and Chief Financial Officer at Shanta Life Insurance PLC. In addition, he is serving as the Company Secretary. He previously served as Head of Finance and Accounts for Nine years at Guardian Life Insurance Limited and served Fifteen years as Deputy CFO at Pragati Life Insurance Limited. Mr. Majedur holds an MBA in Finance from Northern University.`,
   },
 ]
+
+export const NAV_ITEMS = [
+  { href: '/', label: 'Home' },
+  { href: '/about-us', label: 'About Us' },
+  {
+    label: 'Solutions',
+    href: '/plans',
+    children: [
+      {
+        label: 'Individual Plan',
+        href: '/plans/individual',
+        children: [
+          {
+            label: 'Saving & Investment Plans',
+            href: '/plans/individual/saving-and-investment',
+            children: [
+              {
+                label: 'Endowment Plans',
+                href: '/plans/individual/saving-and-investment/endowment',
+              },
+              {
+                label: 'Multi-Stage Maturity Plans',
+                href: '/plans/individual/saving-and-investment/multistage',
+              },
+            ],
+          },
+          {
+            label: 'Health & Protection Plans',
+            href: '/plans/individual/health-and-protection',
+            children: [
+              {
+                label: 'Accidental Coverage Plan',
+                href: '/plans/individual/health-and-protection/accidental-coverage',
+              },
+              {
+                label: 'Critical Illness Coverage Plan',
+                href: '/plans/individual/health-and-protection/critical-illness-coverage',
+              },
+            ],
+          },
+          { label: 'Child Education Plan', href: '/plans/individual/child-education' },
+        ],
+      },
+      { href: '/plans/corporate', label: 'Corporate Plan' },
+    ],
+  },
+  { href: '/pay-premium', label: 'Pay Premium' },
+  { href: '/claims', label: 'Claims' },
+  { href: '/support', label: 'Support' },
+  { href: '/purchase-now', label: 'Purchase Now' },
+]
