@@ -56,9 +56,9 @@ export default async function HomePage() {
     {
       sectionHeading: 'Life Insurance Simplified',
       content: 'left',
-      title: 'Expert Know - How,',
+      title: 'Expert Know - How',
       subtitle:
-        'Life can be messy but your insurance doesn’t have to be. Learn how with our Experts.',
+        'Life can be messy but your insurance doesn’t have to be. Learn how from our Experts.',
       mainImage: '/assets/thumbnails/yt-thumbnail-1.jpg',
       mainVIdeoLink: 'https://www.youtube.com/embed/rcduE_ff314',
       insuranceCardData: [
@@ -86,7 +86,7 @@ export default async function HomePage() {
       sectionHeading: '',
       content: 'right',
       title: 'demystify Life Insurance',
-      subtitle: 'Detangle the basics of Life Insurace.',
+      subtitle: 'Detangle the basics of Life Insurance.',
       mainImage: '/assets/thumbnails/yt-thumbnail-2.jpg',
       mainVIdeoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
       insuranceCardData: [
