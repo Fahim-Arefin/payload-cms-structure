@@ -18,7 +18,7 @@ const page: FC<Props> = ({}) => {
     {
       title: 'Shanta Multi-Stage Maturity Plans',
       subtitle: '',
-      description: 'Because Life Has More Than One Milestone. We’re With You at Every One.',
+      description: 'Since Life Has More Than One Milestone , We’re With You at Each One.',
       image: '/assets/banners/multistage.png',
     },
   ]
@@ -107,17 +107,6 @@ const page: FC<Props> = ({}) => {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start
         "
         >
-          {/* <Button
-            variant="primary"
-            className="
-            px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6 
-            rounded-[4px] lg:rounded-[8px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-            global-h4 font-normal"
-          >
-            Purchase Now
-          </Button> */}
           <ToolTip>
             <GlobalButton
               size="large"
@@ -126,13 +115,6 @@ const page: FC<Props> = ({}) => {
               variant="primary"
             />
           </ToolTip>
-          {/* <Button
-            className=" px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6 w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] rounded border border-white text-white bg-white/20 backdrop-blur-md
-             hover:bg-white/30 hover:border-white transition-colors duration-300"
-          >
-            Call Now
-          </Button> */}
           <CallNowButton />
         </div>
       </HeroSection>

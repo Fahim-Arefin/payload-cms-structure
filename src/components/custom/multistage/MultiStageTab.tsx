@@ -116,7 +116,7 @@ export default function MultiStageTab({ config, data }: Props) {
               mt-[30px] lg:mt-[50px] xl:mt-[100px]"
               >
                 <Link
-                  href="/assets/pdf/Required Brochures/Child Education Plan/Child Education Security Plan.pdf"
+                  href="/assets/pdf/Required Brochures/Multi-Stage Maturity Plans/Multi Stage Plan (3pp, 4pp). V1 pdf.pdf"
                   target="_blank"
                 >
                   <GlobalButton text="Download Brochure" variant="primary" />

@@ -128,7 +128,7 @@
   }
   .global-h1 {
     /* @apply text-[18px] md:text-[24px] lg:text-[32px] xl:text-[45px] 2xl:text-[56px]; */
-    @apply text-[17px] md:text-[24px] lg:text-[32px] xl:text-[38px] 2xl:text-[46px] uppercase
+    @apply text-[17px] md:text-[24px] lg:text-[30px] xl:text-[38px] 2xl:text-[46px] uppercase
     leading-6 md:leading-7 lg:leading-10 xl:leading-[50px] 2xl:leading-[55px];
   }
   .global-h2 {

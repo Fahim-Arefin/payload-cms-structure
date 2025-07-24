@@ -12,7 +12,7 @@ import React from 'react'
 function EndowmentPage() {
   const heroSlides = [
     {
-      title: 'Shanta Endowment Plans',
+      title: 'Shanta Endowment Plan',
       subtitle: '',
       description: 'A promise that grows with time and care',
       image: '/assets/banners/s&i-banner.png',

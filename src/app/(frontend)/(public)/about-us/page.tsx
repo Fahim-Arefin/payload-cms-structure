@@ -62,9 +62,13 @@ function page() {
       image: '/assets/simplicity.png',
       hoverImage: '/assets/allAboutIcon3.png',
       title: 'Simplicity',
+      // description: {
+      //   __html:
+      //     'We prioritize <b class="font-bold">ease for our customers</b>, making insurance straightforward, accessible, and hassle-free.',
+      // },
       description: {
         __html:
-          'We prioritize <b class="font-bold">ease for our customers</b>, making insurance straightforward, accessible, and hassle-free.',
+          'We prioritize ease for our customers , making insurance straightforward, accessible, and hassle-free.',
       },
     },
     {
@@ -77,8 +81,8 @@ function page() {
       },
     },
     {
-      image: '/assets/allAboutIcon2.png',
-      hoverImage: '/assets/ownershipWhite.png',
+      image: '/assets/GOLDEN-Customer-Centricity.png',
+      hoverImage: '/assets/Customer-Centricity.png',
       title: 'Customer Centricity',
       description: {
         __html:
@@ -86,8 +90,8 @@ function page() {
       },
     },
     {
-      image: '/assets/allAboutIcon2.png',
-      hoverImage: '/assets/ownershipWhite.png',
+      image: '/assets/ownership-Golden.png',
+      hoverImage: '/assets/ownership-White.png',
       title: 'Transparency',
       description: {
         __html: 'We believe in open communication, owning up to our promises, and full visibility.',

@@ -151,19 +151,6 @@ function page({}: Props) {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start cursor-not-allowed
         "
         >
-          {/* <Button
-              variant="primary"
-              className="
-            cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6
-            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[8px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-            global-h4 font-normal"
-            >
-              Explore Now
-            </Button> */}
           <Link
             href="/assets/pdf/Required Brochures/Corporate Plans/Shanta Company Profile Brochure.pdf"
             target="_blank"

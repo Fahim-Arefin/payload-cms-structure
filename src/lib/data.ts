@@ -127,7 +127,7 @@ export const NAV_ITEMS = [
     href: '/plans',
     children: [
       {
-        label: 'Individual Plan',
+        label: 'Individual Plans',
         href: '/plans/individual',
         children: [
           {
@@ -135,11 +135,11 @@ export const NAV_ITEMS = [
             href: '/plans/individual/saving-and-investment',
             children: [
               {
-                label: 'Endowment Plans',
+                label: 'Shanta Endowment Plan',
                 href: '/plans/individual/saving-and-investment/endowment',
               },
               {
-                label: 'Multi-Stage Maturity Plans',
+                label: 'Multi Stage Maturity Plans',
                 href: '/plans/individual/saving-and-investment/multistage',
               },
             ],
@@ -149,16 +149,16 @@ export const NAV_ITEMS = [
             href: '/plans/individual/health-and-protection',
             children: [
               {
-                label: 'Accidental Coverage Plan',
+                label: 'Shanta Accidental Coverage',
                 href: '/plans/individual/health-and-protection/accidental-coverage',
               },
               {
-                label: 'Critical Illness Coverage Plan',
+                label: 'Shanta Critical Protection',
                 href: '/plans/individual/health-and-protection/critical-illness-coverage',
               },
             ],
           },
-          { label: 'Child Education Plan', href: '/plans/individual/child-education' },
+          { label: 'Shanta Child Education Plan', href: '/plans/individual/child-education' },
         ],
       },
       { href: '/plans/corporate', label: 'Corporate Plan' },
