@@ -26,9 +26,9 @@ export async function GET(
 
     // Validate that plan_code is a number
     const planCodeNumber = parseInt(plan_code)
-    if (isNaN(planCodeNumber) || planCodeNumber < 0 || planCodeNumber > 8) {
+    if (isNaN(planCodeNumber) || planCodeNumber < 0 || planCodeNumber > 10) {
       return NextResponse.json(
-        { error: 'Plan code must be a valid number between 0 and 8' },
+        { error: 'Plan code must be a valid number between 0 and 10' },
         { status: 400 }
       )
     }
