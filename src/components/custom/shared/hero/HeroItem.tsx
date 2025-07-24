@@ -1,6 +1,9 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { HeroContentType } from '@/types'
+import CallNowButton from '../CallNowButton'
+import GlobalButton from '../GlobalButton'
 
 type Props = {
   slide: HeroContentType
@@ -56,7 +59,9 @@ const HeroItem = ({ slide, top, position }: Props) => {
           hero-h5"
             >
               <div className="text-white">
-                {slide?.description?.split('. ')?.map((line, i) => <h5 key={i}>{line.trim()}</h5>)}
+                {slide?.description?.split('. ')?.map((line, i) => (
+                  <h5 key={i}>{line.trim()}</h5>
+                ))}
               </div>
             </div>
 
@@ -72,10 +77,24 @@ const HeroItem = ({ slide, top, position }: Props) => {
           "
             >
               <div className="text-white">
-                {slide?.description?.split('. ')?.map((line, i) => <h5 key={i}>{line.trim()}</h5>)}
+                {slide?.description?.split('. ')?.map((line, i) => (
+                  <h5 key={i}>{line.trim()}</h5>
+                ))}
               </div>
             </div>
           </>
+        )}
+
+        {/* Action Buttons */}
+        {(slide?.showPurchaseButton || slide?.showCallButton) && (
+          <div className="hero-content-width mt-4 lg:mt-6 flex flex-col md:flex-row gap-2 w-fit">
+            {slide?.showPurchaseButton && (
+              <Link href="/purchase" target="_blank">
+                <GlobalButton text="Purchase" variant="primary" size="large" />
+              </Link>
+            )}
+            {slide?.showCallButton && <CallNowButton />}
+          </div>
         )}
 
         {/* Button */}
