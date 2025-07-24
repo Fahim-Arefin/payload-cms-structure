@@ -27,6 +27,8 @@ export type AllAboutCardDataType = {
 
 export type DirectorCardDataType = {
   image: string
+  name?: string
+  designation?: string
   title: string
   subtitle: string
   description: string

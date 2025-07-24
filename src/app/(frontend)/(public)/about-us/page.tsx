@@ -98,6 +98,8 @@ function page() {
   const directorCardData = [
     {
       image: '/assets/director2.png',
+      name: 'Khondoker Monir Uddin',
+      designation: 'Chairman',
       title: 'Charting the Course',
       subtitle: 'for a Bold Tomorrow',
       description: `
@@ -108,6 +110,8 @@ function page() {
     },
     {
       image: '/assets/director1.png',
+      name: 'Nafis Akhter Ahmed',
+      designation: 'Chief Executive Officer',
       title: 'Redefining',
       subtitle: 'Life Insurance',
       description: `Prior to stepping into the role of Chief Executive Officer at Shanta Life Insurance, Nafis Akhter Ahmed embarked on his career journey with MetLife in July 2001, serving as a Sales Manager for Agency Operations in Bangladesh. His dedication and performance led to promotions within the company, as he was elevated to the position of Deputy Agency Director in February 2006, and subsequently as Agency Director in June 2013. In these capacities, Nafis was entrusted with the pivotal responsibilities of steering the leadership and fostering the growth of career Agency Channels for MetLife Bangladesh, while also spearheading efforts to achieve profitability targets for the Bangladesh Agency Operation. With a wealth of experience exceeding 20 years in the Life Insurance industry, Nafis commenced his professional odyssey as a sales counselor in New York, USA in 1995. Possessing a remarkable track record, he has proven himself as a successful and talented executive proficient in Sales, Customer Service, Sales Management, Business Development, Distribution, Face-to-Face interactions, Corporate Sales, Key Account Management, Market Expansion, Strategic Planning, and Team Building. His expertise spans across diverse industries including Insurance, Electronics, Education, and Yarn & Fabrics, both in the US and Bangladesh. Prior to his tenure at MetLife, Nafis held significant roles as the Network (Distribution) Head at Axiom Technologies Limited., and as the Sales & Marketing Manager at Integra Communications Limited. (the sole distributor of Motorola GSM). Nafis's academic credentials include a Bachelor of Business Administration with a major in Accounting from Kansas State University in the USA. Additionally, he holds the Fellow, Life Management Institute (FLMI) qualification from LOMA financial services education.`,

@@ -124,19 +124,30 @@ function DirectorCard({ data, index }: Props) {
         </div>
 
         {/* Text Content */}
-        <div className="z-40 space-y-2 md:space-y-6 lg:space-y-10 2xl:space-y-12">
+        <div className="z-40 space-y-1 md:space-y-4 lg:space-y-4 2xl:space-y-6">
           <div>
             <h1 className="global-h1 font-normal lg:font-semibold text-[#ED7125] uppercase">
               {data.title}
             </h1>
             <h1 className="global-h1 font-normal lg:font-semibold uppercase">{data.subtitle}</h1>
           </div>
+          {/* Name and Designation */}
+          {data.name && data.designation && (
+            <div className="space-y-1 -mt-1 md:-mt-2 lg:-mt-3 mb-2 md:mb-3 lg:mb-4">
+              <h2 className="text-[#1E1E1E] text-lg md:text-xl lg:text-2xl font-semibold">
+                {data.name}
+              </h2>
+              <p className="text-[#ED7125] text-sm md:text-base lg:text-lg font-medium uppercase">
+                {data.designation}
+              </p>
+            </div>
+          )}
           {!expand ? (
-            <p className="text-[#434343] global-p2 font-light line-clamp-2 md:line-clamp-4 lg:line-clamp-5 xl:line-clamp-[9] 2xl:line-clamp-[12]">
+            <p className="text-[#434343] global-p2 font-light text-justify line-clamp-2 md:line-clamp-4 lg:line-clamp-5 xl:line-clamp-[9] 2xl:line-clamp-[12]">
               {data?.description}
             </p>
           ) : (
-            <p className="text-[#434343] global-p2 font-light ">{data?.description}</p>
+            <p className="text-[#434343] global-p2 font-light text-justify">{data?.description}</p>
           )}
 
           <div
