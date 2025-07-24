@@ -11,7 +11,7 @@ function FootPrintSection({ footPrintData }: Props) {
     <div className="relative">
       <div
         className="relative
-        h-[230px] md:h-[330px] lg:h-[430px] xl:h-[530px] 2xl:h-[650px] 
+        h-[230px] md:h-[330px] lg:h-[400px] xl:h-[450px] 2xl:h-[550px] 
         bg-[url('/assets/footprint.gif')] bg-cover bg-center bg-no-repeat overflow-hidden "
       >
         {/* Mobile to <lg overlay */}
@@ -34,8 +34,13 @@ function FootPrintSection({ footPrintData }: Props) {
       {/* Slider */}
       {/* <div className="-mt-[270px] pb-[100px] z-20 bg-white"> */}
       <div
-        className="-mt-[90px] md:-mt-[100px] lg:-mt-[170px] 2xl:-mt-[270px] 
-      pb-24 lg:pb-[150px] 
+        //   className="
+        // pb-24 lg:pb-[150px]
+        // z-20 bg-white
+        // -mt-[90px] md:-mt-[100px] lg:-mt-[170px] 2xl:-mt-[270px] "
+        // >
+        className="
+      pb-[220px] md:pb-[250px]  lg:pb-[250px] xl:pb-[300px] 2xl:pb-[350px] 
       z-20 bg-white"
       >
         <FootPrintSlider footPrintData={footPrintData} />
