@@ -51,7 +51,11 @@ function Footer() {
                 </svg>
               </div>
               <div className="text-white text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
-                <div className="">info@shantalife.com</div>
+                <div className="">
+                  <a href="mailto:info@shantalife.com" className="hover:text-blue-300 transition-colors">
+                    info@shantalife.com
+                  </a>
+                </div>
               </div>
             </div>
             {/* social media 2*/}
@@ -169,7 +173,11 @@ function Footer() {
                 </svg>
               </div>
               <div className="text-white text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
-                <div className="">+88 09610889900</div>
+                <div className="">
+                  <a href="tel:+8809610889900" className="hover:text-blue-300 transition-colors">
+                    +88 09610889900
+                  </a>
+                </div>
                 <div className="">(10 am-6 pm, Sunday-Thursday)</div>
               </div>
             </div>

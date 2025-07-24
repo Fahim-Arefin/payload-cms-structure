@@ -298,11 +298,9 @@ function QuoteSection() {
           {/* Info Container - Only show when API response is available */}
           {apiResponse && (
             <div className="hidden md:grid grid-cols-4 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600]">
-              
-                <h2 className="global-h4 font-normal mb-6 col-span-5 p-2 py-2 xl:py-3 lg:my-3 xl:my-4 text-center">
-                  Your Premium Is - on top of the main output:
-                </h2>
-              
+              <h2 className="global-h4 font-normal mb-6 col-span-5 p-2 py-2 xl:py-3 lg:my-3 xl:my-4 text-center">
+                Your Desired Premium is Highlighted
+              </h2>
 
               <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
                 <div

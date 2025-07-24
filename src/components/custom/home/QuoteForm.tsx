@@ -57,10 +57,14 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   const [availableTenures, setAvailableTenures] = useState<{ text: string; value: number }[]>([])
   const [isLoadingTenures, setIsLoadingTenures] = useState(false)
   const [tenureError, setTenureError] = useState<string | null>(null)
-  const [availablePlans, setAvailablePlans] = useState<{ plan_name: string; plan_code: number }[]>([])
+  const [availablePlans, setAvailablePlans] = useState<{ plan_name: string; plan_code: number }[]>(
+    [],
+  )
   const [isLoadingPlans, setIsLoadingPlans] = useState(false)
   const [planError, setPlanError] = useState<string | null>(null)
-  const [availablePaymentModes, setAvailablePaymentModes] = useState<{ paymode_name: string; paymode_id: number }[]>([])
+  const [availablePaymentModes, setAvailablePaymentModes] = useState<
+    { paymode_name: string; paymode_id: number }[]
+  >([])
   const [isLoadingPaymentModes, setIsLoadingPaymentModes] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<{
     PlanCode: boolean
@@ -118,15 +122,15 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           'Shanta Endowment': 'Shanta Endowment Plan',
           'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
           'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
-          'Shanta Child Education Plan (1%)': 'Shanta Child Education Plan'
+          'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
         }
 
         // Filter and transform the plans
         const filteredPlans = data
-          .filter(plan => planNameMappings.hasOwnProperty(plan.plan_name))
-          .map(plan => ({
+          .filter((plan) => planNameMappings.hasOwnProperty(plan.plan_name))
+          .map((plan) => ({
             ...plan,
-            plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings]
+            plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings],
           }))
 
         console.log('Filtered and transformed plans:', filteredPlans)
@@ -236,13 +240,14 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           if (Array.isArray(payModeArray)) {
             console.log('Payment modes from API:', payModeArray)
             // Filter out invalid payment modes and ensure they have required properties
-            const validPaymentModes = payModeArray.filter(mode => 
-              mode && 
-              typeof mode === 'object' && 
-              mode.paymode_name && 
-              mode.paymode_name.trim() !== '' &&
-              mode.paymode_id !== undefined &&
-              mode.paymode_id !== null
+            const validPaymentModes = payModeArray.filter(
+              (mode) =>
+                mode &&
+                typeof mode === 'object' &&
+                mode.paymode_name &&
+                mode.paymode_name.trim() !== '' &&
+                mode.paymode_id !== undefined &&
+                mode.paymode_id !== null,
             )
             console.log('Valid payment modes:', validPaymentModes)
             setAvailablePaymentModes(validPaymentModes)
@@ -391,7 +396,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   p-6 xl:p-8 z-10"
     >
       {/* plans */}
-      <div 
+      <div
         className="relative col-span-2 md:col-span-1"
         onMouseEnter={() => setIsHoveringPlanSelect(true)}
         onMouseLeave={() => setIsHoveringPlanSelect(false)}
@@ -437,13 +442,13 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
               }
             />
           </SelectTrigger>
-        {/* Custom instant tooltip */}
-        {isHoveringPlanSelect && !formData.Age && (
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
-            Enter your age first
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
-          </div>
-        )}
+          {/* Custom instant tooltip */}
+          {isHoveringPlanSelect && !formData.Age && (
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
+              Enter your age first
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
+            </div>
+          )}
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Plans</SelectLabel>
@@ -452,13 +457,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
                   {plan.plan_name}
                 </SelectItem>
               ))}
-              {availablePlans.length === 0 &&
-                !isLoadingPlans &&
-                formData.Age && (
-                  <SelectItem disabled value="no-options">
-                    No plans available for this age
-                  </SelectItem>
-                )}
+              {availablePlans.length === 0 && !isLoadingPlans && formData.Age && (
+                <SelectItem disabled value="no-options">
+                  No plans available for this age
+                </SelectItem>
+              )}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -514,7 +517,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         />
       </div>
       {/* select your tenure */}
-      <div 
+      <div
         className="col-span-2 md:col-span-1 relative"
         onMouseEnter={() => setIsHoveringTenureSelect(true)}
         onMouseLeave={() => setIsHoveringTenureSelect(false)}
@@ -550,13 +553,13 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
               }
             />
           </SelectTrigger>
-        {/* Custom instant tooltip */}
-        {isHoveringTenureSelect && (!formData.PlanCode || !formData.Age) && (
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
-            Select age and plan first
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
-          </div>
-        )}
+          {/* Custom instant tooltip */}
+          {isHoveringTenureSelect && (!formData.PlanCode || !formData.Age) && (
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
+              Select age and plan first
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
+            </div>
+          )}
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Tenure</SelectLabel>
@@ -653,17 +656,17 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         />
       </div>
       {/* payment method select  */}
-      <div 
+      <div
         className="col-span-2 md:col-span-1 relative"
         onMouseEnter={() => setIsHoveringPaymentSelect(true)}
         onMouseLeave={() => setIsHoveringPaymentSelect(false)}
       >
         <Select
           disabled={
-            isLoadingPaymentModes || 
-            !formData.PlanCode || 
-            !formData.Age || 
-            !formData.Term || 
+            isLoadingPaymentModes ||
+            !formData.PlanCode ||
+            !formData.Age ||
+            !formData.Term ||
             availablePaymentModes.length === 0
           }
           onValueChange={(v) => {
@@ -676,10 +679,10 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         >
           <SelectTrigger
             className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-              isLoadingPaymentModes || 
-              !formData.PlanCode || 
-              !formData.Age || 
-              !formData.Term || 
+              isLoadingPaymentModes ||
+              !formData.PlanCode ||
+              !formData.Age ||
+              !formData.Term ||
               availablePaymentModes.length === 0
                 ? 'opacity-50 cursor-not-allowed'
                 : ''
@@ -689,37 +692,46 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
               placeholder={
                 isLoadingPaymentModes
                   ? 'Loading payment methods...'
-                  : availablePaymentModes.length === 0 && formData.PlanCode && formData.Age && formData.Term
+                  : availablePaymentModes.length === 0 &&
+                      formData.PlanCode &&
+                      formData.Age &&
+                      formData.Term
                     ? 'No payment methods available'
                     : 'Select Payment Method'
               }
             />
           </SelectTrigger>
-        {/* Custom instant tooltip */}
-        {isHoveringPaymentSelect && (!formData.PlanCode || !formData.Age || !formData.Term) && (
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
-            Select plan, age & term first
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
-          </div>
-        )}
+          {/* Custom instant tooltip */}
+          {isHoveringPaymentSelect && (!formData.PlanCode || !formData.Age || !formData.Term) && (
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
+              Select plan, age & term first
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
+            </div>
+          )}
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Payment Method</SelectLabel>
-              {availablePaymentModes.map((paymentMethod, index) => {
-                // Ensure we have valid data before rendering
-                if (!paymentMethod || !paymentMethod.paymode_name || paymentMethod.paymode_name.trim() === '') {
-                  return null
-                }
-                
-                return (
-                  <SelectItem 
-                    key={`payment-${paymentMethod.paymode_id}-${paymentMethod.paymode_name}-${index}`} 
-                    value={paymentMethod.paymode_name}
-                  >
-                    {paymentMethod.paymode_name}
-                  </SelectItem>
-                )
-              }).filter(Boolean)}
+              {availablePaymentModes
+                .map((paymentMethod, index) => {
+                  // Ensure we have valid data before rendering
+                  if (
+                    !paymentMethod ||
+                    !paymentMethod.paymode_name ||
+                    paymentMethod.paymode_name.trim() === ''
+                  ) {
+                    return null
+                  }
+
+                  return (
+                    <SelectItem
+                      key={`payment-${paymentMethod.paymode_id}-${paymentMethod.paymode_name}-${index}`}
+                      value={paymentMethod.paymode_name}
+                    >
+                      {paymentMethod.paymode_name}
+                    </SelectItem>
+                  )
+                })
+                .filter(Boolean)}
               {availablePaymentModes.length === 0 &&
                 !isLoadingPaymentModes &&
                 formData.PlanCode &&
