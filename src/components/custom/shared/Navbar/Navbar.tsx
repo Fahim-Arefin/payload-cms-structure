@@ -1596,11 +1596,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between w-full lg:w-auto">
           <div className="flex items-center space-x-1 w-fit 2xl:w-[60px] h-[35px] xl:h-[37px] 2xl:h-[40px]">
             <Link href="/">
-              <img
-                src="/assets/mainlogo_2.png"
-                alt="logo"
-                className="h-full w-full max-w-[100px]"
-              />
+              <img src="/assets/mainlogo_2.png" alt="logo" className="h-full w-full max-w-[75px]" />
             </Link>
           </div>
           {/* Burger Icon */}
