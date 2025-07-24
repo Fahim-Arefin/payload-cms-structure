@@ -18,7 +18,7 @@ function TopHeader({ className }: { className?: string }) {
       <div className="flex items-center gap-4">
         <Link href="/agent-onboarding">
           <Button variant="link" className="text-white px-3 py-1 font-medium underline">
-          I’m an Agent
+            I’m an Agent
           </Button>
         </Link>
 
@@ -47,7 +47,7 @@ function TopHeader({ className }: { className?: string }) {
           </ToggleGroup>
         </div> */}
 
-        <Search size={18} className="cursor-pointer hover:text-gray-300" />
+        {/* <Search size={18} className="cursor-pointer hover:text-gray-300" /> */}
       </div>
     </div>
   )

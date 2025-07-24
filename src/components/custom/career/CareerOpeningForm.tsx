@@ -62,11 +62,11 @@ function CareerOpeningForm() {
       .then((rs) => console.log(rs))
     setSendButtonText('Application Sent')
     setTimeout(() => {
-      setSendButtonText('Send Application')
+      setSendButtonText('Submit')
     }, 1500)
   }
 
-  const [sendButtonText, setSendButtonText] = useState('Send Application')
+  const [sendButtonText, setSendButtonText] = useState('Submit')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
