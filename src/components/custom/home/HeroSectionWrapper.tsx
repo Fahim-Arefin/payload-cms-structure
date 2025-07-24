@@ -2,11 +2,11 @@
 
 import React, { FC, useState } from 'react'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import ToolTip from '../shared/ToolTip'
 import GlobalButton from '../shared/GlobalButton'
 import { BsPlay } from 'react-icons/bs'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import Link from 'next/link'
 
 type HeroSectionWrapperProps = {
   heroSlides: any
@@ -23,14 +23,9 @@ const HeroSectionWrapper: FC<HeroSectionWrapperProps> = ({ heroSlides }) => {
        hero-content-width flex justify-left space-x-4 md:space-x-6 lg:justify-start cursor-not-allowed
         "
       >
-        <ToolTip>
-          <GlobalButton
-            size="large"
-            variant="primary"
-            text="Explore Now"
-            className="cursor-not-allowed"
-          />
-        </ToolTip>
+        <Link href="/plans">
+          <GlobalButton size="large" variant="primary" text="Explore Now" className="" />
+        </Link>
 
         {/* <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
               <BsPlay />

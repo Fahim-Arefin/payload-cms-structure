@@ -26,8 +26,9 @@ interface FormData {
   Gender: number
   phoneNumber: string
   annualIncome: number
+  name: string
+  email: string
 }
-
 
 interface QuoteFormProps {
   onApiResponse?: (response: ApiResponse, paymentMode: string) => void
@@ -44,6 +45,8 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     Gender: 0,
     phoneNumber: '',
     annualIncome: 0,
+    name: '',
+    email: '',
   })
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -503,7 +506,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         <Input
           min={0}
           type="number"
-          placeholder="Annual Income"
+          placeholder="Annual Income *"
           value={formData.annualIncome || ''}
           onChange={(e) => handleInputChange('annualIncome', parseInt(e.target.value) || 0)}
           className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
@@ -566,6 +569,26 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             </SelectGroup>
           </SelectContent>
         </Select>
+      </div>
+      {/* name input */}
+      <div className="col-span-2 md:col-span-1">
+        <Input
+          type="text"
+          placeholder="Name"
+          value={formData.name}
+          onChange={(e) => handleInputChange('name', e.target.value)}
+          className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+        />
+      </div>
+      {/* email input */}
+      <div className="col-span-2 md:col-span-1">
+        <Input
+          type="text"
+          placeholder="Email"
+          value={formData.email}
+          onChange={(e) => handleInputChange('email', e.target.value)}
+          className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+        />
       </div>
 
       {/* Error display */}

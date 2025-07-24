@@ -16,7 +16,6 @@ import { ApiResponse } from '@/utils/premiumCalculator'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
-
 type FormData = {
   PlanCode: number
   Age: number
@@ -26,6 +25,8 @@ type FormData = {
   Gender: number
   phoneNumber: string
   annualIncome: number
+  name: string
+  email: string
 }
 
 type Props = {
@@ -385,6 +386,21 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         )}
       </div>
 
+      {/* age input */}
+      <div className="col-span-2 md:col-span-1">
+        <Input
+          min={18}
+          max={65}
+          type="number"
+          placeholder="Age *"
+          value={formData.Age || ''}
+          onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
+          className={`bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+            fieldErrors.Age ? 'border-red-500 border-2' : ''
+          }`}
+        />
+      </div>
+
       {/* select your tenure */}
       <div className="col-span-2 md:col-span-1">
         <Select
@@ -447,29 +463,6 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         )}
       </div>
 
-      {/* name input */}
-      <div className="col-span-1">
-        <Input
-          type="text"
-          placeholder="Name"
-          className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
-        />
-      </div>
-      {/* age input */}
-      <div className="col-span-2 md:col-span-1">
-        <Input
-          min={18}
-          max={65}
-          type="number"
-          placeholder="Age *"
-          value={formData.Age || ''}
-          onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
-          className={`bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.Age ? 'border-red-500 border-2' : ''
-          }`}
-        />
-      </div>
-
       {/* gender select  */}
       <div className="col-span-2 md:col-span-1">
         <Select
@@ -500,22 +493,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         </Select>
       </div>
 
-      {/* phone number input */}
-      <div className="col-span-2 md:col-span-1">
-        <Input
-          type="tel"
-          placeholder="Phone Number"
-          value={formData.phoneNumber}
-          onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
-          className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
-        />
-      </div>
       {/* annual income input */}
       <div className="col-span-2 md:col-span-1">
         <Input
           min={0}
           type="number"
-          placeholder="Annual Income"
+          placeholder="Annual Income *"
           value={formData.annualIncome || ''}
           onChange={(e) => handleInputChange('annualIncome', parseInt(e.target.value) || 0)}
           className={`bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
@@ -538,6 +521,17 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         <p className="text-[8px] md:text-[10px] py-2 absolute right-1">
           Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
         </p>
+      </div>
+
+      {/* phone number input */}
+      <div className="col-span-2 md:col-span-1">
+        <Input
+          type="tel"
+          placeholder="Phone Number"
+          value={formData.phoneNumber}
+          onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+          className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+        />
       </div>
 
       {/* payment method select  */}
@@ -569,6 +563,28 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             </SelectGroup>
           </SelectContent>
         </Select>
+      </div>
+
+      {/* name input */}
+      <div className="col-span-2 md:col-span-1">
+        <Input
+          type="text"
+          placeholder="Name"
+          value={formData.name}
+          onChange={(e) => handleInputChange('name', e.target.value)}
+          className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+        />
+      </div>
+
+      {/* name input */}
+      <div className="col-span-2 md:col-span-1">
+        <Input
+          type="text"
+          placeholder="Email"
+          value={formData.email}
+          onChange={(e) => handleInputChange('email', e.target.value)}
+          className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+        />
       </div>
 
       {/* Error display */}
