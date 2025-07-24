@@ -36,6 +36,9 @@ interface QuoteFormProps {
 
 function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
+  const [isHoveringPlanSelect, setIsHoveringPlanSelect] = useState(false)
+  const [isHoveringTenureSelect, setIsHoveringTenureSelect] = useState(false)
+  const [isHoveringPaymentSelect, setIsHoveringPaymentSelect] = useState(false)
   const [formData, setFormData] = useState<FormData>({
     PlanCode: 0,
     Age: 0,
@@ -54,6 +57,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   const [availableTenures, setAvailableTenures] = useState<{ text: string; value: number }[]>([])
   const [isLoadingTenures, setIsLoadingTenures] = useState(false)
   const [tenureError, setTenureError] = useState<string | null>(null)
+  const [availablePlans, setAvailablePlans] = useState<{ plan_name: string; plan_code: number }[]>([])
+  const [isLoadingPlans, setIsLoadingPlans] = useState(false)
+  const [planError, setPlanError] = useState<string | null>(null)
+  const [availablePaymentModes, setAvailablePaymentModes] = useState<{ paymode_name: string; paymode_id: number }[]>([])
+  const [isLoadingPaymentModes, setIsLoadingPaymentModes] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<{
     PlanCode: boolean
     Age: boolean
@@ -84,33 +92,56 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
 
   const suggestedAmount = calculateSuggestedAmount()
 
-  const plans = [
-    {
-      text: 'Shanta Child Education Plan',
-      videoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
-      code: 1,
-    },
-    {
-      text: 'Shanta Endowment Plan',
-      videoLink: 'https://www.youtube.com/embed/CkKkdNkBk9g',
-      code: 2,
-    },
-    {
-      text: 'Shanta 3 Stage Plan',
-      videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-      code: 3,
-    },
-    {
-      text: 'Shanta 4 Stage Plan',
-      videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-      code: 4,
-    },
-    // {
-    //   text: 'Multi Stage Maturity Plan',
-    //   videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-    //   code: 5,
-    // },
-  ]
+  // Fetch plans from API based on age
+  const fetchPlans = async (age: number) => {
+    if (!age || age < 18 || age > 65) {
+      setAvailablePlans([])
+      return
+    }
+
+    setIsLoadingPlans(true)
+    setPlanError(null)
+
+    try {
+      const response = await fetch(`/api/plan/0/${age}`)
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch plans')
+      }
+
+      const data = await response.json()
+      console.log('Plans API response:', data)
+
+      if (Array.isArray(data)) {
+        // Define the plan name mappings
+        const planNameMappings = {
+          'Shanta Endowment': 'Shanta Endowment Plan',
+          'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
+          'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
+          'Shanta Child Education Plan (1%)': 'Shanta Child Education Plan'
+        }
+
+        // Filter and transform the plans
+        const filteredPlans = data
+          .filter(plan => planNameMappings.hasOwnProperty(plan.plan_name))
+          .map(plan => ({
+            ...plan,
+            plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings]
+          }))
+
+        console.log('Filtered and transformed plans:', filteredPlans)
+        setAvailablePlans(filteredPlans)
+      } else {
+        console.log('Unexpected plans API response format:', data)
+        setAvailablePlans([])
+      }
+    } catch (err) {
+      setPlanError(err instanceof Error ? err.message : 'Failed to fetch plans')
+      setAvailablePlans([])
+    } finally {
+      setIsLoadingPlans(false)
+    }
+  }
 
   const genders = [
     { text: 'Male', value: 1 },
@@ -123,14 +154,6 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     { text: '20 years', value: 20 },
     { text: '25 years', value: 25 },
     { text: '30 years', value: 30 },
-  ]
-
-  const paymentMethods = [
-    { text: 'Monthly', value: 4 },
-    { text: 'Quarterly', value: 3 },
-    { text: 'Semi-annually', value: 2 },
-    { text: 'Yearly', value: 1 },
-    // { text: 'Single', value: 5 },
   ]
 
   const handleInputChange = (field: keyof FormData, value: string | number) => {
@@ -168,7 +191,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       }
 
       const data = await response.json()
-      console.log('check data', data)
+      console.log('Tenure API response:', data)
 
       // The API returns an object with a 'term' property containing a JSON string
       if (data && data[0]?.term) {
@@ -177,12 +200,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           const termArray = JSON.parse(data[0].term)
           if (Array.isArray(termArray)) {
             const tenureOptions = termArray.map((termObj: any) => {
-              console.log('termObj structure:', termObj)
-              console.log('termObj.term value:', termObj.term)
-              console.log('typeof termObj.term:', typeof termObj.term)
-
               const termValue = termObj.term
-              console.log('test the term 3', termValue)
               return {
                 text: `${termValue} years`,
                 value: Number(termValue),
@@ -202,20 +220,76 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         console.log('Unexpected API response format:', data)
         setAvailableTenures([])
       }
+
+      // Extract payment modes from the API response
+      if (data && data[0]?.pay_mode) {
+        try {
+          let payModeArray
+          if (typeof data[0].pay_mode === 'string') {
+            // If pay_mode is a JSON string, parse it
+            payModeArray = JSON.parse(data[0].pay_mode)
+          } else {
+            // If pay_mode is already an array/object
+            payModeArray = data[0].pay_mode
+          }
+
+          if (Array.isArray(payModeArray)) {
+            console.log('Payment modes from API:', payModeArray)
+            // Filter out invalid payment modes and ensure they have required properties
+            const validPaymentModes = payModeArray.filter(mode => 
+              mode && 
+              typeof mode === 'object' && 
+              mode.paymode_name && 
+              mode.paymode_name.trim() !== '' &&
+              mode.paymode_id !== undefined &&
+              mode.paymode_id !== null
+            )
+            console.log('Valid payment modes:', validPaymentModes)
+            setAvailablePaymentModes(validPaymentModes)
+          } else {
+            console.log('Payment modes is not an array:', payModeArray)
+            setAvailablePaymentModes([])
+          }
+        } catch (parseError) {
+          console.error('Failed to parse payment modes JSON:', parseError)
+          setAvailablePaymentModes([])
+        }
+      } else {
+        console.log('No payment modes in API response')
+        setAvailablePaymentModes([])
+      }
     } catch (err) {
       setTenureError(err instanceof Error ? err.message : 'Failed to fetch tenure options')
       setAvailableTenures([])
     } finally {
       setIsLoadingTenures(false)
+      setIsLoadingPaymentModes(false)
     }
   }
+
+  // Effect to fetch plans when age changes
+  useEffect(() => {
+    if (formData.Age) {
+      fetchPlans(formData.Age)
+      // Reset selected plan when age changes
+      setFormData((prev) => ({ ...prev, PlanCode: 0, Term: 0 }))
+      setSelectedPlan(null)
+      setAvailableTenures([])
+    }
+  }, [formData.Age])
 
   // Effect to fetch tenure options when plan or age changes
   useEffect(() => {
     if (formData.PlanCode && formData.Age) {
+      setIsLoadingPaymentModes(true)
       fetchTenureOptions(formData.PlanCode, formData.Age)
-      // Reset selected term when plan or age changes
-      setFormData((prev) => ({ ...prev, Term: 0 }))
+      // Reset selected term and payment mode when plan or age changes
+      setFormData((prev) => ({ ...prev, Term: 0, PaymentMode: 0 }))
+      setCurrentPaymentMode('')
+    } else {
+      // Clear payment modes when plan or age is not selected
+      setAvailablePaymentModes([])
+      setIsLoadingPaymentModes(false)
     }
   }, [formData.PlanCode, formData.Age])
 
@@ -317,17 +391,21 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   p-6 xl:p-8 z-10"
     >
       {/* plans */}
-      <div className="relative col-span-2 md:col-span-1">
+      <div 
+        className="relative col-span-2 md:col-span-1"
+        onMouseEnter={() => setIsHoveringPlanSelect(true)}
+        onMouseLeave={() => setIsHoveringPlanSelect(false)}
+      >
         <Select
+          disabled={isLoadingPlans || !formData.Age || availablePlans.length === 0}
           onValueChange={(v) => {
-            const plan = plans.find((p) => p.text === v)
+            const plan = availablePlans.find((p) => p.plan_name === v)
             setSelectedPlan(plan)
             if (plan) {
               // Reset dependent fields when plan changes
               setFormData((prev) => ({
                 ...prev,
-                PlanCode: plan.code,
-                Age: 0,
+                PlanCode: plan.plan_code,
                 Term: 0,
               }))
               // Clear tenure options until new plan + age combination is selected
@@ -337,7 +415,6 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
               setFieldErrors((prev) => ({
                 ...prev,
                 PlanCode: false,
-                Age: false,
                 Term: false,
               }))
             }
@@ -345,25 +422,48 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         >
           <SelectTrigger
             className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-              fieldErrors.PlanCode ? 'border-red-500 border-2' : ''
-            }`}
+              isLoadingPlans || !formData.Age || availablePlans.length === 0
+                ? 'opacity-50 cursor-not-allowed'
+                : ''
+            } ${fieldErrors.PlanCode ? 'border-red-500 border-2' : ''}`}
           >
-            <SelectValue placeholder="Select Your Plan *" />
+            <SelectValue
+              placeholder={
+                isLoadingPlans
+                  ? 'Loading plans...'
+                  : availablePlans.length === 0 && formData.Age
+                    ? 'No plans available'
+                    : 'Select Plan'
+              }
+            />
           </SelectTrigger>
+        {/* Custom instant tooltip */}
+        {isHoveringPlanSelect && !formData.Age && (
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
+            Enter your age first
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
+          </div>
+        )}
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Plans</SelectLabel>
-              {plans.map((plan) => (
-                <SelectItem key={plan.text} value={plan.text}>
-                  {plan.text}
+              {availablePlans.map((plan) => (
+                <SelectItem key={plan.plan_code} value={plan.plan_name}>
+                  {plan.plan_name}
                 </SelectItem>
               ))}
+              {availablePlans.length === 0 &&
+                !isLoadingPlans &&
+                formData.Age && (
+                  <SelectItem disabled value="no-options">
+                    No plans available for this age
+                  </SelectItem>
+                )}
             </SelectGroup>
           </SelectContent>
         </Select>
         {/* below a text saying watch video */}
-        {/* <p className="text-[10px] py-2 absolute inset-x-0 text-[#FF6600] underline">Watch Video</p> */}
-        {selectedPlan && (
+        {selectedPlan && selectedPlan.videoLink && (
           <Dialog>
             <DialogTrigger asChild>
               <p className="text-[10px] py-1 absolute inset-x-0 text-[#FF6600] underline cursor-pointer">
@@ -395,6 +495,9 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             </DialogContent>
           </Dialog>
         )}
+        {planError && (
+          <p className="text-[10px] py-1 text-red-600 absolute inset-x-0">{planError}</p>
+        )}
       </div>
       {/* age input */}
       <div className="col-span-2 md:col-span-1">
@@ -411,7 +514,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         />
       </div>
       {/* select your tenure */}
-      <div className="col-span-2 md:col-span-1">
+      <div 
+        className="col-span-2 md:col-span-1 relative"
+        onMouseEnter={() => setIsHoveringTenureSelect(true)}
+        onMouseLeave={() => setIsHoveringTenureSelect(false)}
+      >
         <Select
           disabled={
             isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0
@@ -437,14 +544,19 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
               placeholder={
                 isLoadingTenures
                   ? 'Loading tenure options...'
-                  : !formData.PlanCode || !formData.Age
-                    ? 'Select plan and age first'
-                    : availableTenures.length === 0
-                      ? 'No tenure options available'
-                      : 'Select Your Tenure *'
+                  : availableTenures.length === 0 && formData.PlanCode && formData.Age
+                    ? 'No tenure options available'
+                    : 'Select Term'
               }
             />
           </SelectTrigger>
+        {/* Custom instant tooltip */}
+        {isHoveringTenureSelect && (!formData.PlanCode || !formData.Age) && (
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
+            Select age and plan first
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
+          </div>
+        )}
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Tenure</SelectLabel>
@@ -541,31 +653,82 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         />
       </div>
       {/* payment method select  */}
-      <div className="col-span-2 md:col-span-1">
+      <div 
+        className="col-span-2 md:col-span-1 relative"
+        onMouseEnter={() => setIsHoveringPaymentSelect(true)}
+        onMouseLeave={() => setIsHoveringPaymentSelect(false)}
+      >
         <Select
+          disabled={
+            isLoadingPaymentModes || 
+            !formData.PlanCode || 
+            !formData.Age || 
+            !formData.Term || 
+            availablePaymentModes.length === 0
+          }
           onValueChange={(v) => {
-            const method = paymentMethods.find((pm) => pm.text === v)
+            const method = availablePaymentModes.find((pm) => pm.paymode_name === v)
             if (method) {
-              handleInputChange('PaymentMode', method.value)
-              setCurrentPaymentMode(method.text)
+              handleInputChange('PaymentMode', method.paymode_id)
+              setCurrentPaymentMode(method.paymode_name)
             }
           }}
         >
           <SelectTrigger
             className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-              fieldErrors.PaymentMode ? 'border-red-500 border-2' : ''
-            }`}
+              isLoadingPaymentModes || 
+              !formData.PlanCode || 
+              !formData.Age || 
+              !formData.Term || 
+              availablePaymentModes.length === 0
+                ? 'opacity-50 cursor-not-allowed'
+                : ''
+            } ${fieldErrors.PaymentMode ? 'border-red-500 border-2' : ''}`}
           >
-            <SelectValue placeholder="Select Your Payment Method *" />
+            <SelectValue
+              placeholder={
+                isLoadingPaymentModes
+                  ? 'Loading payment methods...'
+                  : availablePaymentModes.length === 0 && formData.PlanCode && formData.Age && formData.Term
+                    ? 'No payment methods available'
+                    : 'Select Payment Method'
+              }
+            />
           </SelectTrigger>
+        {/* Custom instant tooltip */}
+        {isHoveringPaymentSelect && (!formData.PlanCode || !formData.Age || !formData.Term) && (
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
+            Select plan, age & term first
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
+          </div>
+        )}
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Payment Method</SelectLabel>
-              {paymentMethods.map((paymentMethod) => (
-                <SelectItem key={paymentMethod.text} value={paymentMethod.text}>
-                  {paymentMethod.text}
-                </SelectItem>
-              ))}
+              {availablePaymentModes.map((paymentMethod, index) => {
+                // Ensure we have valid data before rendering
+                if (!paymentMethod || !paymentMethod.paymode_name || paymentMethod.paymode_name.trim() === '') {
+                  return null
+                }
+                
+                return (
+                  <SelectItem 
+                    key={`payment-${paymentMethod.paymode_id}-${paymentMethod.paymode_name}-${index}`} 
+                    value={paymentMethod.paymode_name}
+                  >
+                    {paymentMethod.paymode_name}
+                  </SelectItem>
+                )
+              }).filter(Boolean)}
+              {availablePaymentModes.length === 0 &&
+                !isLoadingPaymentModes &&
+                formData.PlanCode &&
+                formData.Age &&
+                formData.Term && (
+                  <SelectItem disabled value="no-options">
+                    No payment methods available
+                  </SelectItem>
+                )}
             </SelectGroup>
           </SelectContent>
         </Select>
