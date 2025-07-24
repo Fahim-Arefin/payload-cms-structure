@@ -55,7 +55,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
              xl:py-[100px] 
             2xl:py-[100px] w-full"
       style={{
-        background: "url('/assets/careerSwiperBanner.gif') no-repeat center/cover",
+        background: "url('/assets/careerSwiperBanner_1.gif') no-repeat center/cover",
       }}
     >
       <div className="pt-16 pb-10">
