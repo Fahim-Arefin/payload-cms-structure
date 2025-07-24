@@ -93,7 +93,7 @@ function EndowmentPage() {
             <GlobalButton
               size="large"
               className="cursor-not-allowed"
-              text="Purchase Now"
+              text="Purchase"
               variant="primary"
             />
           </ToolTip>

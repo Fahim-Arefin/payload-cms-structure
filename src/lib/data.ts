@@ -167,5 +167,5 @@ export const NAV_ITEMS = [
   { href: '/pay-premium', label: 'Pay Premium' },
   { href: '/claims', label: 'Claims' },
   { href: '/support', label: 'Support' },
-  { href: '/purchase-now', label: 'Purchase Now' },
+  { href: '/purchase', label: 'Purchase' },
 ]

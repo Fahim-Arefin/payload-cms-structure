@@ -61,8 +61,8 @@ function PlanPage() {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start
         "
         >
-          <Link href="/purchase-now">
-            <GlobalButton size="large" text="Purchase Now" variant="primary" className="" />
+          <Link href="/purchase">
+            <GlobalButton size="large" text="Purchase" variant="primary" className="" />
           </Link>
           <CallNowButton />
         </div>

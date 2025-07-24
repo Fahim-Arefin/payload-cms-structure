@@ -46,7 +46,7 @@ const page: FC<Props> = ({}) => {
             <GlobalButton
               variant="primary"
               className="cursor-not-allowed"
-              text="Purchase Now"
+              text="Purchase"
               size="large"
             />
           </ToolTip>
