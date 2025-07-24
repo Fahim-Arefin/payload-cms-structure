@@ -17,7 +17,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" type="image/png" href="/assets/mainlogo.png" />
+        <link rel="icon" type="image/png" href="/assets/mainlogo_2.png" />
       </head>
       <body>
         <main className="bg-[#F6EDDD] min-h-screen relative font-avenir 3xl:max-w-[1925px] 3xl:mx-auto">
