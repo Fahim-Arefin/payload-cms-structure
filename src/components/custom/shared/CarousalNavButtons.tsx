@@ -56,6 +56,7 @@ type Props = {
   hasPrev?: boolean
   hasNext?: boolean
   defaultActive?: 'left' | 'right'
+  color?: string
 }
 
 export default function CarouselNavButtons({
@@ -64,6 +65,7 @@ export default function CarouselNavButtons({
   hasPrev = true,
   hasNext = true,
   defaultActive = 'right',
+  color = '#000000',
 }: Props) {
   const [active, setActive] = useState<'left' | 'right'>(defaultActive)
 
@@ -87,7 +89,7 @@ export default function CarouselNavButtons({
           ${!hasPrev ? 'opacity-50 cursor-not-allowed' : ''}
         `}
       >
-        {active === 'left' ? <BsArrowLeft size={20} /> : <LuArrowLeft size={20} />}
+        {active === 'left' ? <BsArrowLeft size={20} /> : <LuArrowLeft color={color} size={20} />}
       </button>
 
       {/* Right Button */}
@@ -107,7 +109,7 @@ export default function CarouselNavButtons({
           ${!hasNext ? 'opacity-50 cursor-not-allowed' : ''}
         `}
       >
-        {active === 'right' ? <BsArrowRight size={20} /> : <LuArrowRight size={20} />}
+        {active === 'right' ? <BsArrowRight size={20} /> : <LuArrowRight color={color} size={20} />}
       </button>
     </div>
   )
