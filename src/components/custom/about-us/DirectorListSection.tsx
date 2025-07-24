@@ -6,6 +6,8 @@ import CarouselNavButtons from '../shared/CarousalNavButtons'
 import DirectorProfile from './DirectorProfile'
 import { useEffect, useState } from 'react'
 import Autoplay from 'embla-carousel-autoplay'
+import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 
 type Props = {
   directorProfileData: DirectorProfileDataType[]
@@ -47,9 +49,18 @@ function DirectorListSection({ directorProfileData }: Props) {
             Spearheaded by dynamic leadership team and a visionary board, Shanta Life is ready to
             power progress today, for a better tommorow.
           </p>
-          <h2 className="hidden lg:block global-h3 font-semibold text-[#4A4A4A] text-center lg:text-start uppercase">
-            Board of directors
-          </h2>
+          <div className="hidden lg:flex items-center justify-center lg:justify-start gap-4">
+            <h2 className="global-h3 font-semibold text-[#4A4A4A] uppercase">
+              Board of directors
+            </h2>
+            <Link 
+              href="/all-bods"
+              className="text-sm text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1"
+            >
+              all board of directors
+              <ArrowUpRight size={14} className="inline-block" />
+            </Link>
+          </div>
         </div>
 
         {/* profile card list */}
