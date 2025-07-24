@@ -42,7 +42,7 @@ const tabContent = [
         title: 'Life Coverage',
         description: 'In the event of the parent’s death, the plan ensures:',
         listItems: [
-          'Monthly stipend (1%, 2%, or 3% of the sum assured, based on plan choice) paid to the legal guardian till policy maturity.',
+          "Monthly stipend (1%, 2%, or 3% of the sum assured, based on plan choice) till policy maturity to ensure the child's education quality.",
           'Waiver of all future premiums while continuing full coverage.',
           'Full maturity benefit paid at term-end.',
         ],
@@ -74,7 +74,7 @@ const tabContent = [
         title: 'Life Coverage',
         description: 'In the event of the parent’s death, the plan ensures:',
         listItems: [
-          'Monthly stipend (1%, 2%, or 3% of the sum assured, based on plan choice) paid to the legal guardian till policy maturity.',
+          "Monthly stipend (1%, 2%, or 3% of the sum assured, based on plan choice) till policy maturity to ensure the child's education quality.",
           'Waiver of all future premiums while continuing full coverage.',
           'Full maturity benefit paid at term-end.',
         ],
@@ -112,7 +112,7 @@ const tabContent = [
         title: 'Life Coverage',
         description: 'In the event of the parent’s death, the plan ensures:',
         listItems: [
-          'Monthly stipend (1%, 2%, or 3% of the sum assured, based on plan choice) paid to the legal guardian till policy maturity.',
+          "Monthly stipend (1%, 2%, or 3% of the sum assured, based on plan choice) till policy maturity to ensure the child's education quality.",
           'Waiver of all future premiums while continuing full coverage.',
           'Full maturity benefit paid at term-end.',
         ],

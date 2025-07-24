@@ -4,6 +4,8 @@ export type HeroContentType = {
   subtitle: string
   description: string
   titleTop?: string
+  showCallButton?: boolean
+  showPurchaseButton?: boolean
 }
 
 export type ShantaIntroContentType = {
