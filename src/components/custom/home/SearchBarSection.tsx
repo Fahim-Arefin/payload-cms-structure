@@ -43,7 +43,7 @@ const searchSuggestions = [
   },
   { label: 'Shanta Child Education', url: '/plans/individual/child-education' },
   { label: 'Premium Calculator', url: '/premium-calculator' },
-  { label: 'Purchase Now', url: '/purchase-now' },
+  { label: 'Purchase', url: '/purchase' },
   { label: 'Shanta Corporate Plans', url: '/plans/corporate' },
 
   {

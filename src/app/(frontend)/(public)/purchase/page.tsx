@@ -1,31 +1,26 @@
-import PurchaseCardSection from '@/components/custom/purchase-now/PurchaseCardSection';
-import PurchaseSection from '@/components/custom/purchase-now/PurchaseSection';
-import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection';
-import GlobalButton from '@/components/custom/shared/GlobalButton';
-import HeroSection from '@/components/custom/shared/hero/HeroSection';
-import CallNowButton from '@/components/custom/shared/CallNowButton';
-import ToolTip from '@/components/custom/shared/ToolTip';
-import React, { FC } from 'react';
+import PurchaseCardSection from '@/components/custom/purchase/PurchaseCardSection'
+import PurchaseSection from '@/components/custom/purchase/PurchaseSection'
+import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
+import HeroSection from '@/components/custom/shared/hero/HeroSection'
+import CallNowButton from '@/components/custom/shared/CallNowButton'
+import ToolTip from '@/components/custom/shared/ToolTip'
+import React, { FC } from 'react'
 
-type pageProps = {
-
-}
+type pageProps = {}
 
 const page: FC<pageProps> = ({}) => {
   const heroSlides = [
     {
-      title: 'Purchase Now',
+      title: 'Purchase',
       subtitle: '',
-      description:
-        '',
+      description: '',
       image: '/assets/purchaseBanner.jpg',
     },
   ]
 
-
-
   return (
-    <div className='font-avenir bg-white'>
+    <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides}>
         <div
           className="absolute top-[245px] md:top-[355px] lg:top-[470px] xl:top-[490px]  2xl:top-[730px] 
@@ -38,7 +33,7 @@ const page: FC<pageProps> = ({}) => {
             <GlobalButton
               variant="primary"
               className="cursor-not-allowed"
-              text="Purchase Now"
+              text="Purchase"
               size="large"
             />
           </ToolTip>
@@ -51,11 +46,9 @@ const page: FC<pageProps> = ({}) => {
 
       <PurchaseSection />
 
-
       <ContactUsSection />
-     
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default page

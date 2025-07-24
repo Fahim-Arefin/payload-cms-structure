@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 import CalculateForm from './CalculateForm'
 import PremiumBreakdown from './PremiumBreakdown'
 import { ApiResponse, getTotalPremium } from '@/utils/premiumCalculator'
-import PlanDetailsSection from '../purchase-now/PlanDetailsSection'
-import PurchaseCalculateSection from '../purchase-now/PurchaseCalculateSection'
+import PlanDetailsSection from '../purchase/PlanDetailsSection'
+import PurchaseCalculateSection from '../purchase/PurchaseCalculateSection'
 
 type Props = {}
 
@@ -22,57 +22,56 @@ interface FormData {
   email: string
 }
 
-
 const CalculatorSection = (props: Props) => {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
-    const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
-      const [formData, setFormData] = useState<FormData>({
-        PlanCode: 0,
-        Age: 0,
-        SumAssured: 0,
-        Term: 0,
-        PaymentMode: 0,
-        Gender: 0,
-        phoneNumber: '',
-        annualIncome: 0,
-        name: '',
-        email: ''
-      })
-      const [calculatedPlanCode, setCalculatedPlanCode] = useState<number | null>(null)
-  
-    const handleApiResponse = (response: ApiResponse, paymentMode: string) => {
-      setApiResponse(response)
-      setConfirmedPaymentMode(paymentMode)
-      setCalculatedPlanCode(formData.PlanCode)
-    }
-     const plans = [
-      {
-        text: 'Shanta Child Education Plan',
-        videoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
-        code: 1,
-      },
-      {
-        text: 'Shanta Endowment Plan',
-        videoLink: 'https://www.youtube.com/embed/CkKkdNkBk9g',
-        code: 2,
-      },
-      {
-        text: 'Shanta 3 Stage Plan',
-        videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-        code: 3,
-      },
-      {
-        text: 'Shanta 4 Stage Plan',
-        videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-        code: 4,
-      },
-      // {
-      //   text: 'Multi Stage Maturity Plan',
-      //   videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-      //   code: 5,
-      // },
-    ]
-  
+  const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
+  const [formData, setFormData] = useState<FormData>({
+    PlanCode: 0,
+    Age: 0,
+    SumAssured: 0,
+    Term: 0,
+    PaymentMode: 0,
+    Gender: 0,
+    phoneNumber: '',
+    annualIncome: 0,
+    name: '',
+    email: '',
+  })
+  const [calculatedPlanCode, setCalculatedPlanCode] = useState<number | null>(null)
+
+  const handleApiResponse = (response: ApiResponse, paymentMode: string) => {
+    setApiResponse(response)
+    setConfirmedPaymentMode(paymentMode)
+    setCalculatedPlanCode(formData.PlanCode)
+  }
+  const plans = [
+    {
+      text: 'Shanta Child Education Plan',
+      videoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
+      code: 1,
+    },
+    {
+      text: 'Shanta Endowment Plan',
+      videoLink: 'https://www.youtube.com/embed/CkKkdNkBk9g',
+      code: 2,
+    },
+    {
+      text: 'Shanta 3 Stage Plan',
+      videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+      code: 3,
+    },
+    {
+      text: 'Shanta 4 Stage Plan',
+      videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+      code: 4,
+    },
+    // {
+    //   text: 'Multi Stage Maturity Plan',
+    //   videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+    //   code: 5,
+    // },
+  ]
+
   return (
     <div
       className="px-5 pt-12 py-4
@@ -98,8 +97,7 @@ const CalculatorSection = (props: Props) => {
         <div className=" w-full order-2 lg:order-1">
           {apiResponse ? (
             <div>
-              
-              <PlanDetailsSection planCode={formData.PlanCode} plans={plans}/>
+              <PlanDetailsSection planCode={formData.PlanCode} plans={plans} />
               <PurchaseCalculateSection
                 confirmedPaymentMode={confirmedPaymentMode}
                 getTotalPremium={getTotalPremium}
@@ -136,8 +134,12 @@ const CalculatorSection = (props: Props) => {
         </div>
 
         {/* right form */}
-        <div className='order-1 lg:order-2'>
-          <CalculateForm onApiResponse={handleApiResponse} formData={formData} setFormData={setFormData} />
+        <div className="order-1 lg:order-2">
+          <CalculateForm
+            onApiResponse={handleApiResponse}
+            formData={formData}
+            setFormData={setFormData}
+          />
         </div>
       </div>
     </div>

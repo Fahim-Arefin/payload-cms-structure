@@ -56,41 +56,46 @@ const page: FC<Props> = ({}) => {
     },
   ]
 
-const tabContent = {
-  features: [
-    {
-      title: 'Multiple Guaranteed Payouts',
-      description: 'Enjoy your benefits when you need them most—not just at the end. Structured payouts help you meet life’s big moments head-on.',
-      image: '/assets/tabimage1.png', // You can use or update this image as needed
-    },
-    {
-      title: 'Maturity Benefit',
-      description: 'Receive the final lump sum at the end of your policy term to complete your journey with confidence.',
-      image: '/assets/tabimage1.png',
-    },
-    {
-      title: 'Life Coverage',
-      description: 'Life Coverage That Never Compromises. In case of the unfortunate demise passing, your family receives the full sum assured—regardless of earlier stage payouts.',
-      image: '/assets/tabimage4.png',
-    },
-    {
-      title: 'Tax Benefits',
-      description: 'Get rewarded for being responsible—enjoy up to 15% tax rebates on premiums under existing tax laws.',
-      image: '/assets/tabimage2.png',
-    },
-    {
-      title: 'Flexible Premium Payments',
-      description: 'Pay monthly, quarterly, half-yearly, or annually—it’s all about your convenience.',
-      image: '/assets/tabimage3.png',
-    },
-    {
-      title: 'Healthcare Partner Discounts',
-      description: 'Save more with exclusive discounts at top hospitals and diagnostic centers across our trusted partner network.',
-      image: '/assets/tabimage6.png',
-    },
-  ],
-}
-
+  const tabContent = {
+    features: [
+      {
+        title: 'Multiple Guaranteed Payouts',
+        description:
+          'Enjoy your benefits when you need them most—not just at the end. Structured payouts help you meet life’s big moments head-on.',
+        image: '/assets/tabimage1.png', // You can use or update this image as needed
+      },
+      {
+        title: 'Maturity Benefit',
+        description:
+          'Receive the final lump sum at the end of your policy term to complete your journey with confidence.',
+        image: '/assets/tabimage1.png',
+      },
+      {
+        title: 'Life Coverage',
+        description:
+          'Life Coverage That Never Compromises. In case of the unfortunate demise passing, your family receives the full sum assured—regardless of earlier stage payouts.',
+        image: '/assets/tabimage4.png',
+      },
+      {
+        title: 'Tax Benefits',
+        description:
+          'Get rewarded for being responsible—enjoy up to 15% tax rebates on premiums under existing tax laws.',
+        image: '/assets/tabimage2.png',
+      },
+      {
+        title: 'Flexible Premium Payments',
+        description:
+          'Pay monthly, quarterly, half-yearly, or annually—it’s all about your convenience.',
+        image: '/assets/tabimage3.png',
+      },
+      {
+        title: 'Healthcare Partner Discounts',
+        description:
+          'Save more with exclusive discounts at top hospitals and diagnostic centers across our trusted partner network.',
+        image: '/assets/tabimage6.png',
+      },
+    ],
+  }
 
   return (
     <div className="font-avenir bg-white">
@@ -117,7 +122,7 @@ const tabContent = {
             <GlobalButton
               size="large"
               className="cursor-not-allowed"
-              text="Purchase Now"
+              text="Purchase"
               variant="primary"
             />
           </ToolTip>

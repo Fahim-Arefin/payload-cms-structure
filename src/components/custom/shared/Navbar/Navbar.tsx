@@ -1596,7 +1596,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between w-full lg:w-auto">
           <div className="flex items-center space-x-1 w-fit 2xl:w-[60px] h-[35px] xl:h-[37px] 2xl:h-[40px]">
             <Link href="/">
-              <img src="/assets/mainlogo.png" alt="logo" className="h-full w-full max-w-[100px]" />
+              <img src="/assets/mainlogo_2.png" alt="logo" className="h-full w-full max-w-[75px]" />
             </Link>
           </div>
           {/* Burger Icon */}
@@ -1671,7 +1671,7 @@ export default function Navbar() {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              className="cursor-pointer"
+              className="cursor-pointer flex mx-auto"
             >
               <path
                 d="M12 15C15.3137 15 18 12.3137 18 9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9C6 12.3137 8.68629 15 12 15Z"
@@ -1687,7 +1687,9 @@ export default function Navbar() {
                 strokeLinejoin="round"
               />
             </svg>
+            <p className="text-center text-[14px]">My Portal</p>
           </a>
+
           <ToolTip>
             <svg
               width="22"
@@ -1710,7 +1712,7 @@ export default function Navbar() {
   ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="flex justify-between items-center px-4 py-4 border-b">
-          <img src="/assets/mainlogo.png" alt="logo" className="h-[40px]" />
+          <img src="/assets/mainlogo_2.png" alt="logo" className="h-[40px]" />
           <button onClick={() => setIsMobileMenuOpen(false)} className="text-2xl text-[#1F1F1F]">
             <RxCross2 />
           </button>

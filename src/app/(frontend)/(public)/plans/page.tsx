@@ -13,7 +13,7 @@ function PlanPage() {
       // description:
       //   'Life\u2019s full of surprises. We\u2019re here to help you navigate them. Let\u2019s build a confident future together.',
       description:
-        'Life\u2019s full of surprises, We\u2019re here to help you navigate them. Let\u2019s build a confident future together.',
+        'Life\u2019s full of surprises.. We\u2019re here to help you navigate them.. Let\u2019s build a confident future together.',
       image: '/assets/solutionHeroBanner.jpg',
     },
   ]
@@ -51,8 +51,8 @@ function PlanPage() {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start
         "
         >
-          <Link href="/purchase-now">
-            <GlobalButton size="large" text="Purchase Now" variant="primary" className="" />
+          <Link href="/purchase">
+            <GlobalButton size="large" text="Purchase" variant="primary" className="" />
           </Link>
           <CallNowButton />
         </div>

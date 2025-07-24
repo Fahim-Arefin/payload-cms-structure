@@ -493,7 +493,7 @@ function NewsSection() {
           {/* img */}
           <div className="relative h-[140px] xl:h-[200px] 2xl:h-[250px] w-full">
             {/* main img */}
-            <img src="/assets/news4.jpg" alt="news-1" className="w-full h-full object-cover" />
+            <img src="/assets/news2.jpg" alt="news-1" className="w-full h-full object-cover" />
 
             {/* overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/20"></div>
@@ -525,7 +525,7 @@ function NewsSection() {
                     </svg>
                   </div>
                   <div className="text-white font-light text-xs xl:text-sm 2xl:text-[12px] mt-1">
-                    14 Nov, 2024
+                    06 Mar, 2025
                   </div>
                 </div>
               </div>

@@ -6,6 +6,7 @@ import EndowmentSection from '@/components/custom/shared/plans/EndowmentSection'
 import CallNowButton from '@/components/custom/shared/CallNowButton'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import React from 'react'
 
 function SavingAndInvestment() {
@@ -105,7 +106,7 @@ function SavingAndInvestment() {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start
         "
         >
-          <ToolTip>
+          <Link href="/purchase">
             {/* <Button
               variant="primary"
               className="
@@ -119,13 +120,8 @@ function SavingAndInvestment() {
             >
               Purchase Now
             </Button> */}
-            <GlobalButton
-              size="large"
-              className="cursor-not-allowed"
-              text="Purchase Now"
-              variant="primary"
-            />
-          </ToolTip>
+            <GlobalButton size="large" className="" text="Purchase" variant="primary" />
+          </Link>
           <CallNowButton />
         </div>
       </HeroSection>
