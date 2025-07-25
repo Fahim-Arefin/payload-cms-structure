@@ -125,7 +125,7 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
               alt={expectedData.sectionRight.name}
               className="w-[100px] h-[100px] lg:w-[208px] lg:h-[208px] rounded-full object-cover mb-4"
             />
-            <h4 className="global-p2 font-semibold text-[#9A4E46] mb-2 lg:mb-6 lg:w-[25%]">
+            <h4 className="global-p2 font-semibold text-[#9A4E46] mb-2 lg:mb-6 ">
               {expectedData.sectionRight.name}
             </h4>
             <p className="global-p2 text-[#3A3A3C]">
