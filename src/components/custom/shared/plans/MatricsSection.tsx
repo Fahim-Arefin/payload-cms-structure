@@ -100,7 +100,8 @@ function MatricsSection({}: Props) {
             right-7 md:right-16 lg:right-8 2xl:right-12 "
             >
               <p className="global-p2 font-light capitalize">Policy Term</p>
-              <p className="global-p1 font-semibold">As Your Plan</p>
+              <p className="global-p1 font-semibold">Same As </p>
+              <p className="global-p1 leading-3 font-semibold">Your Basic Plan</p>
             </div>
 
             {/* Bottom Left */}

@@ -19,23 +19,23 @@ function PlanPage() {
 
   const indivisualPlantData = [
     {
-      title: 'Child Education Plan',
-      description: `A brighter future starts with a thoughtful plan`,
-      link: '/plans/individual/child-education',
-      image: '/assets/childEducationPlan.jpg',
-    },
-    {
-      title: 'Saving and Investment Plan',
+      title: 'Saving and Investment Plans',
       description: `Because Life Has More Than One Milestone. We’re With You at Every One.`,
       link: '/plans/individual/saving-and-investment',
       image: '/assets/banners/s&i-banner.png',
     },
 
     {
-      title: 'Health and Protection Plan',
+      title: 'Health and Protection Plans',
       description: `Preventive care meets powerful protection. Let us be your financial shield you can count on`,
       link: '/plans/individual/health-and-protection',
       image: '/assets/healthandprotection1.jpg',
+    },
+    {
+      title: 'Child Education Plan',
+      description: `A brighter future starts with a thoughtful plan`,
+      link: '/plans/individual/child-education',
+      image: '/assets/childEducationPlan.jpg',
     },
     // {
     //   title: 'Retirement',

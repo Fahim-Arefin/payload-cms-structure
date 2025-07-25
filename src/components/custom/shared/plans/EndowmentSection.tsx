@@ -6,15 +6,23 @@
 
 // type Props = {
 //   data: EndowmentDataType
+//   content: 'left' | 'right'
+//   bgColor?: string
 // }
 
-// function EndowmentSection({ data }: Props) {
+// function EndowmentSection({ data, content, bgColor }: Props) {
 //   return (
-//     <div className="container-padding">
-//       <div className="border border-black grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-2 xl:gap-28">
+//     <div
+//       className="container-padding"
+//       style={{
+//         backgroundColor: bgColor,
+//       }}
+//     >
+//       <div className=" grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-2 xl:gap-28">
 //         <div
-//           className="order-2 md:order-1
-//                     space-y-2 lg:space-y-2 xl:space-y-4 2xl:space-y-6"
+//           className={`order-2
+//                      ${content === 'left' ? 'md:order-1' : 'md:order-2'}
+//                      space-y-2 lg:space-y-2 xl:space-y-4 2xl:space-y-6`}
 //         >
 //           <h3 className="ml-[20%] md:ml-0 md:text-start global-h3 uppercase text-[#3A3A3C]">
 //             {data?.subtitle}
@@ -30,14 +38,14 @@
 //           </h4>
 //           <div
 //             className="
-//            md:ml-8 xl:ml-12
-//            space-y-1 md:space-y-2 xl:space-y-4
+//             md:ml-7 xl:ml-10
+//            space-y-1 xl:space-y-4
 //            "
 //           >
 //             {data?.feature?.map((value, index) => (
 //               <div
 //                 key={index}
-//                 className="flex items-center justify-start space-x-1 lg:space-x-2 xl:space-x-3 ml-[20%] md:ml-0"
+//                 className="flex items-center justify-start space-x-1 lg:space-x-2 xl:space-x-3 ml-[20%] md:ml-0 "
 //               >
 //                 <div className="w-[20px] lg:w-[25px] xl:w-[30px] h-[20px] lg:h-[25px] xl:h-[30px]">
 //                   <img src={value?.image} alt={value?.name} className="h-full w-full" />
@@ -58,16 +66,18 @@
 //             </Button>
 //           </div>
 //         </div>
+
 //         <div
-//           className="border border-black
-//         order-1 md:order-2
-//          flex justify-end"
+//           className={`
+//         order-1
+//         ${content === 'left' ? 'md:order-2 justify-end' : 'md:order-1 justify-start'}
+//          flex `}
 //         >
 //           <img
 //             src={data?.image}
 //             alt={data?.title}
-//             className="h-[160px] md:h-full rounded-md object-cover
-//           w-full md:w-[90%] lg:w-[90%] xl:w-[85%] "
+//             className="h-[180px] md:h-full lg:max-h-[580px] xl:max-h-[600px] 2xl:max-h-[720px] md:rounded-md object-cover
+//           w-full md:w-[90%] lg:w-[90%] 2xl:w-[85%] "
 //           />
 //         </div>
 //       </div>
@@ -76,7 +86,6 @@
 // }
 
 // export default EndowmentSection
-
 import { Button } from '@/components/ui/button'
 import { EndowmentDataType } from '@/types'
 import { ArrowUpRight } from 'lucide-react'

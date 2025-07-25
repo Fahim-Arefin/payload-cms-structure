@@ -20,7 +20,7 @@ const HeroSectionWrapper: FC<HeroSectionWrapperProps> = ({ heroSlides }) => {
       <div
         className="absolute top-[245px] md:top-[355px] lg:top-[470px] xl:top-[490px]  2xl:top-[730px] 
           inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
-       hero-content-width flex justify-left space-x-4 md:space-x-6 lg:justify-start cursor-not-allowed
+       hero-content-width flex justify-left space-x-4 md:space-x-6 lg:justify-start 
         "
       >
         <Link href="/plans">

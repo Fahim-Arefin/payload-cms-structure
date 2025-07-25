@@ -8,11 +8,12 @@ import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
 
 import React from 'react'
+import Link from 'next/link'
 
 function EndowmentPage() {
   const heroSlides = [
     {
-      title: 'Shanta Endowment Plans',
+      title: 'Shanta Endowment Plan',
       subtitle: '',
       description: 'A promise that grows with time and care',
       image: '/assets/banners/s&i-banner.png',
@@ -89,14 +90,9 @@ function EndowmentPage() {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start
         "
         >
-          <ToolTip>
-            <GlobalButton
-              size="large"
-              className="cursor-not-allowed"
-              text="Purchase"
-              variant="primary"
-            />
-          </ToolTip>
+          <Link href="/purchase">
+            <GlobalButton size="large" text="Purchase" variant="primary" className="" />
+          </Link>
           <CallNowButton />
         </div>
       </HeroSection>

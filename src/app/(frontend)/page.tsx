@@ -20,6 +20,7 @@ import { InsuranceDataType } from '@/types'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSectionWrapper from '@/components/custom/home/HeroSectionWrapper'
+
 export default async function HomePage() {
   const headers = await getHeaders()
   const payloadConfig = await config
