@@ -18,11 +18,11 @@ function TopHeader({ className }: { className?: string }) {
       <div className="flex items-center gap-4">
         <Link href="/agent-onboarding">
           <Button variant="link" className="text-white px-3 py-1 font-medium underline">
-          I’m an Agent
+            I’m an Agent
           </Button>
         </Link>
 
-        {/* <div className="flex items-center bg-[rgba(217,217,217,1)] rounded-full h-[30px] w-[100px] px-2">
+        <div className="flex items-center bg-[rgba(217,217,217,1)] rounded-full h-[30px] w-[100px] px-2">
           <ToggleGroup type="single" defaultValue="en" className="text-[#535353] text-[14px]">
             <ToggleGroupItem
               value="bn"
@@ -45,9 +45,9 @@ function TopHeader({ className }: { className?: string }) {
               EN
             </ToggleGroupItem>
           </ToggleGroup>
-        </div> */}
+        </div>
 
-        <Search size={18} className="cursor-pointer hover:text-gray-300" />
+        {/* <Search size={18} className="cursor-pointer hover:text-gray-300" /> */}
       </div>
     </div>
   )

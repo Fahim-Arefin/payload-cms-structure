@@ -21,15 +21,15 @@ function CueItem({ card, index }: Props) {
       {/* Top Card */}
       <div
         className={` h-[400px] lg:h-[280px] xl:h-[330px] 2xl:h-[350px] z-20 lg:bg-white text-white lg:text-[#404041] absolute inset-0 bottom-0 flex flex-col justify-end lg:inset-auto lg:relative 
-          p-6 sm:p-8 md:p-10 lg:p-6 xl:p-8 ${
+          p-6 sm:p-8 md:p-10 lg:p-4 xl:p-8 ${
             index % 2 === 0 ? 'order-1 rounded-t-2xl' : 'order-2 rounded-b-2xl'
           }`}
       >
-        <div className="h-[80px] w-[80px] lg:h-[50px] lg:w-[50px] xl:h-[80px] xl:w-[80px]">
+        <div className="h-[80px] w-[80px] lg:h-[50px] lg:w-[50px] xl:h-[60px] xl:w-[60px] 2xl:h-[80px] 2xl:w-[80px]">
           <img className="h-full w-full" src={card.icon} alt={card.title} />
         </div>
-        <h1 className="text-xl lg:text-xl xl:text-2xl mt-4 font-semibold ">{card.title}</h1>
-        <h2 className="text-lg lg:text-xl xl:text-2xl font-semibold ">{card.subtitle}</h2>
+        <h1 className="text-xl lg:text-lg xl:text-2xl mt-4 font-semibold ">{card.title}</h1>
+        <h2 className="text-lg lg:text-lg xl:text-2xl font-semibold ">{card.subtitle}</h2>
         <p className="global-p2 mt-2 text-white lg:text-[#404041] font-light ">
           {card.description}
         </p>

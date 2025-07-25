@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 
 type DataProps = {
@@ -19,6 +19,24 @@ type Props = {
 
 export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = false }) => {
   const [expanded, setExpanded] = useState(false)
+  const [isTextClamped, setIsTextClamped] = useState(false)
+  const textRef = useRef<HTMLParagraphElement>(null)
+
+  useEffect(() => {
+    const checkIfTextClamped = () => {
+      if (textRef.current) {
+        const element = textRef.current
+        const isOverflowing = element.scrollHeight > element.clientHeight
+        setIsTextClamped(isOverflowing)
+      }
+    }
+
+    checkIfTextClamped()
+    
+    // Check again on window resize to handle responsive changes
+    window.addEventListener('resize', checkIfTextClamped)
+    return () => window.removeEventListener('resize', checkIfTextClamped)
+  }, [data.description])
 
   return (
     <div id={`id-${data.id}`} className="container-padding">
@@ -56,6 +74,7 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
           <div className="border w-full border-[#000000] mb-4 xl:mb-8" />
           <div className="transition-all duration-300 overflow-hidden">
             <p
+              ref={textRef}
               className={cn(
                 'text-[#444] font-[350] text-justify text-base leading-7 xl:leading-10 md:global-p1',
                 !expanded && 'line-clamp-5 lg:line-clamp-6 xl:line-clamp-[7]',
@@ -65,13 +84,15 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
             </p>
           </div>
 
-          <button
-            className="mt-2 text-[#ED7125] hover:underline text-sm font-semibold w-fit"
-            onClick={() => setExpanded((prev) => !prev)}
-            aria-expanded={expanded}
-          >
-            {expanded ? 'See Less' : 'See More'}
-          </button>
+          {isTextClamped && (
+            <button
+              className="mt-2 text-[#ED7125] hover:underline text-sm font-semibold w-fit"
+              onClick={() => setExpanded((prev) => !prev)}
+              aria-expanded={expanded}
+            >
+              {expanded ? 'See Less' : 'See More'}
+            </button>
+          )}
         </div>
       </div>
     </div>

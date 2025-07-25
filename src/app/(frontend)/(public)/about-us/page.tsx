@@ -62,9 +62,13 @@ function page() {
       image: '/assets/simplicity.png',
       hoverImage: '/assets/allAboutIcon3.png',
       title: 'Simplicity',
+      // description: {
+      //   __html:
+      //     'We prioritize <b class="font-bold">ease for our customers</b>, making insurance straightforward, accessible, and hassle-free.',
+      // },
       description: {
         __html:
-          'We prioritize <b class="font-bold">ease for our customers</b>, making insurance straightforward, accessible, and hassle-free.',
+          'We prioritize ease for our customers , making insurance straightforward, accessible, and hassle-free.',
       },
     },
     {
@@ -77,8 +81,8 @@ function page() {
       },
     },
     {
-      image: '/assets/allAboutIcon2.png',
-      hoverImage: '/assets/ownershipWhite.png',
+      image: '/assets/GOLDEN-Customer-Centricity.png',
+      hoverImage: '/assets/Customer-Centricity.png',
       title: 'Customer Centricity',
       description: {
         __html:
@@ -86,8 +90,8 @@ function page() {
       },
     },
     {
-      image: '/assets/allAboutIcon2.png',
-      hoverImage: '/assets/ownershipWhite.png',
+      image: '/assets/ownership-Golden.png',
+      hoverImage: '/assets/ownership-White.png',
       title: 'Transparency',
       description: {
         __html: 'We believe in open communication, owning up to our promises, and full visibility.',
@@ -98,16 +102,20 @@ function page() {
   const directorCardData = [
     {
       image: '/assets/director2.png',
+      name: 'Khondoker Monir Uddin',
+      designation: 'Chairman',
       title: 'Charting the Course',
       subtitle: 'for a Bold Tomorrow',
       description: `
-      A highly distinguished and perceptive entrepreneur, Mr. Khondoker Monir Uddin, the founder promoter of Shanta, opts to do business by providing world-class products and services in Bangladesh. With his visionary leadership and extensive business knowledge, Shanta drives forward to not only provide superior quality products and services, but to demonstrate unparalleled foresight by establishing a new standard in every sector in which the company operates. The reputation and success of Shanta are testaments to his high ethical standard and relentless focus on quality, innovation and social responsibility. He is widely regarded as one of the most successful entrepreneurs in Bangladesh, who has brought transformative change in every sector the group has entered from Real Estate to Financial Services, Healthcare, Education and Retail.Mr. Monir completed both his Bachelors with honors and Masters degrees from the Department of Accounting, University of Dhaka. Over the past four decades, he has established Shanta as one of the leading corporate houses in Bangladesh, with successful investments in diversified sectors and thus has been continually recognized as a Commercially Important Person (CIP) by the Government of Bangladesh since 2000 till date. Mr. Monir is also a founder and Managing Director of the prestigious STS Group - which revolutionized the healthcare and education sectors of the country by establishing international standard institutions like Evercare Hospital Dhaka (previously Apollo Hospitals Dhaka), Evercare Hospital Chattogram, International School Dhaka (ISD), the Glenrich International Schools (Previously DPS STS schools). He is also a sponsor Director and former Chairman of Dhaka Bank Limited, and the Managing Director of Shanta Holdings Limited and Shanta Securities Limited.  
+      A highly distinguished and perceptive entrepreneur, Mr. Khondoker Monir Uddin, the founder promoter of Shanta, opts to do business by providing world-class products and services in Bangladesh. With his visionary leadership and extensive business knowledge, Shanta drives forward to not only provide superior quality products and services, but to demonstrate unparalleled foresight by establishing a new standard in every sector in which the company operates. The reputation and success of Shanta are testaments to his high ethical standard and relentless focus on quality, innovation and social responsibility. He is widely regarded as one of the most successful entrepreneurs in Bangladesh, who has brought transformative change in every sector the group has entered from Real Estate to Financial Services, Healthcare, Education and Retail. Mr. Monir completed both his Bachelors with honors and Masters degrees from the Department of Accounting, University of Dhaka. Over the past four decades, he has established Shanta as one of the leading corporate houses in Bangladesh, with successful investments in diversified sectors and thus has been continually recognized as a Commercially Important Person (CIP) by the Government of Bangladesh since 2000 till date. Mr. Monir is also a founder and Managing Director of the prestigious STS Group - which revolutionized the healthcare and education sectors of the country by establishing international standard institutions like Evercare Hospital Dhaka (previously Apollo Hospitals Dhaka), Evercare Hospital Chattogram, International School Dhaka (ISD), the Glenrich International Schools (Previously DPS STS schools). He is also a sponsor Director and former Chairman of Dhaka Bank Limited, and the Managing Director of Shanta Holdings Limited and Shanta Securities Limited.  
 `,
       // link: 'https://shantalife.com/message-form-chairman.php',
       link: '/all-bods#id-1',
     },
     {
       image: '/assets/director1.png',
+      name: 'Nafis Akhter Ahmed',
+      designation: 'Chief Executive Officer',
       title: 'Redefining',
       subtitle: 'Life Insurance',
       description: `Prior to stepping into the role of Chief Executive Officer at Shanta Life Insurance, Nafis Akhter Ahmed embarked on his career journey with MetLife in July 2001, serving as a Sales Manager for Agency Operations in Bangladesh. His dedication and performance led to promotions within the company, as he was elevated to the position of Deputy Agency Director in February 2006, and subsequently as Agency Director in June 2013. In these capacities, Nafis was entrusted with the pivotal responsibilities of steering the leadership and fostering the growth of career Agency Channels for MetLife Bangladesh, while also spearheading efforts to achieve profitability targets for the Bangladesh Agency Operation. With a wealth of experience exceeding 20 years in the Life Insurance industry, Nafis commenced his professional odyssey as a sales counselor in New York, USA in 1995. Possessing a remarkable track record, he has proven himself as a successful and talented executive proficient in Sales, Customer Service, Sales Management, Business Development, Distribution, Face-to-Face interactions, Corporate Sales, Key Account Management, Market Expansion, Strategic Planning, and Team Building. His expertise spans across diverse industries including Insurance, Electronics, Education, and Yarn & Fabrics, both in the US and Bangladesh. Prior to his tenure at MetLife, Nafis held significant roles as the Network (Distribution) Head at Axiom Technologies Limited., and as the Sales & Marketing Manager at Integra Communications Limited. (the sole distributor of Motorola GSM). Nafis's academic credentials include a Bachelor of Business Administration with a major in Accounting from Kansas State University in the USA. Additionally, he holds the Fellow, Life Management Institute (FLMI) qualification from LOMA financial services education.`,

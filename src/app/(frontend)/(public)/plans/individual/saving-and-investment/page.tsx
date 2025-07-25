@@ -12,7 +12,7 @@ import React from 'react'
 function SavingAndInvestment() {
   const heroSlides = [
     {
-      title: 'SAVING AND INVESTMENT',
+      title: 'SAVING AND INVESTMENT PLANS',
       subtitle: '',
       description:
         'The right life insurance doesn\u2019t just wait around for the what-ifs—it walks beside you through the what\u2019s next.',
@@ -62,7 +62,7 @@ function SavingAndInvestment() {
   }
 
   const multiStagePlanData = {
-    title: 'Multi stages Plans',
+    title: 'Multi stage Maturity Plans',
     subtitle: 'Shanta',
     description:
       'Shanta Lifes endowment plan provides the policy owner a guaranteed sum assured. This unique plan combines savings and life insurance components which serves the need for financial security of your family.',

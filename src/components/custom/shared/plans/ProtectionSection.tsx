@@ -30,7 +30,7 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
             rounded-[8px] md:rounded-[10px] lg:rounded-[8px]  xl:rounded-[12px] 
             bg-[lightgray]  
             bg-no-repeat 
-            bg-cover
+           bg-cover lg:bg-center
             overflow-hidden
            ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}
           style={{ backgroundImage: `url(${data?.bgImage})` }}
@@ -58,6 +58,7 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
             </h3>
             <div className="flex space-x-1">
               <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">{data?.subTitle}</h1>
+              <span className="global-h1 uppercase text-[#3A3A3A] font-medium"> - </span>
               <h1 className="global-h1 uppercase text-[#ED7125] font-medium">
                 {' '}
                 {data?.smallTitle}
@@ -87,21 +88,16 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
           ))}
           {/* button */}
           <div className="flex gap-4 lg:gap-6 justify-center lg:justify-start">
-            {/* <ToolTip> */}
-            <Link href="/premium-calculator">
-              <GlobalButton
-                variant="primary"
-                text="Calculate Premium"
-                // className="cursor-not-allowed"
-              />
-            </Link>
+            {/* <Link href="/premium-calculator">
+              <GlobalButton variant="primary" text="Calculate Premium" />
+            </Link> */}
             <Link
               href="/assets/pdf/Required Brochures/Health & Protection/Shanta Critical Protection/Shanta Life Rider Brochure.pdf"
               target="_blank"
             >
               <GlobalButton
-                variant="outline"
-                className=" text-[#9C8639] hover:text-[#9C8638] border-2 border-[#9C8639]"
+                variant="primary"
+                // className=" text-[#9C8639] hover:text-[#9C8638] border-2 border-[#9C8639]"
                 text="Download Brochure"
               />
             </Link>

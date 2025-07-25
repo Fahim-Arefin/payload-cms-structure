@@ -4,6 +4,8 @@ export type HeroContentType = {
   subtitle: string
   description: string
   titleTop?: string
+  showCallButton?: boolean
+  showPurchaseButton?: boolean
 }
 
 export type ShantaIntroContentType = {
@@ -27,6 +29,8 @@ export type AllAboutCardDataType = {
 
 export type DirectorCardDataType = {
   image: string
+  name?: string
+  designation?: string
   title: string
   subtitle: string
   description: string

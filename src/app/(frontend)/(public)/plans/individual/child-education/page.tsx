@@ -1,9 +1,11 @@
-import ChildEducationPlan from '@/components/custom/child-education/ChildEducationPlan'
 import { ChildEducationTabs } from '@/components/custom/child-education/ChildEducationTabs'
+import CallNowButton from '@/components/custom/shared/CallNowButton'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
+import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
-import React, { FC } from 'react'
+import Link from 'next/link'
+import { FC } from 'react'
 
 type pageProps = {}
 
@@ -49,7 +51,7 @@ const page: FC<pageProps> = ({}) => {
         title: 'Life Coverage',
         description: 'In the event of the parent’s death, the plan ensures:',
         listItems: [
-          'Monthly stipend (1%, 2%, or 3% of the sum assured, based on plan choice) paid to the legal guardian till policy maturity.',
+          "Monthly stipend (1%, 2%, or 3% of the sum assured, based on plan choice) till policy maturity to ensure the child's education quality.",
           'Waiver of all future premiums while continuing full coverage.',
           'Full maturity benefit paid at term-end.',
         ],
@@ -82,8 +84,20 @@ const page: FC<pageProps> = ({}) => {
 
   return (
     <div className="font-avenir bg-white">
-      <HeroSection heroSlides={heroSlides} />
-      {/* <ChildEducationPlan bgColor="#FCF4EB" data={childInfoData} /> */}
+      <HeroSection heroSlides={heroSlides}>
+        <div
+          className="absolute bottom-12 lg:top-[500px] xl:top-[490px]  2xl:top-[730px] 
+          inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
+       hero-content-width
+        flex justify-left space-x-4 md:space-x-6 lg:justify-start
+        "
+        >
+          <Link href="/purchase">
+            <GlobalButton size="large" text="Purchase" variant="primary" className="" />
+          </Link>
+          <CallNowButton />
+        </div>
+      </HeroSection>
       <PlanInfoSection bgColor="#FCF4EB" data={childInfoData} />
       <ChildEducationTabs data={tabContent} config={tabItems} />
       <ContactUsSection />

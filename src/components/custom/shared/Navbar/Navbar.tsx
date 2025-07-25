@@ -1481,14 +1481,15 @@ export default function Navbar() {
 
     return (
       <ul
-        className={`
+        className={`shadow-md
         ${positionClass}
-        bg-white/70 backdrop-blur-[16.67px] shadow-md rounded-md lg:min-w-[205px] xl:min-w-[245px] z-50
+        rounded-md lg:min-w-[205px] xl:min-w-[245px] z-50
         space-y-1 p-2 hidden
         group-hover:block hover:block peer-hover:block
         transition-all 
         lg:text-[12px] xl:text-sm
         ${beforeBridge}
+        dropdown-blur
       `}
         style={{ pointerEvents: 'auto' }}
       >
@@ -1498,7 +1499,7 @@ export default function Navbar() {
           return (
             <li
               key={item.label + idx}
-              className="relative"
+              className="relative "
               onMouseEnter={() => setHoveredIdx(idx)}
               onMouseLeave={() => setHoveredIdx(null)}
             >
@@ -1506,7 +1507,7 @@ export default function Navbar() {
                 href={item.href}
                 tabIndex={0}
                 className={`
-                  block lg:px-2 xl:px-4 lg:py-1 xl:py-2
+                  block lg:px-2 xl:px-4 lg:py-1 xl:py-2 
                   hover:bg-[#ED7125] hover:text-white rounded
                   ${item.href === '#' ? ' cursor-not-allowed ' : ' cursor-pointer '}
                   flex items-center justify-between
@@ -1609,7 +1610,7 @@ export default function Navbar() {
         </div>
         {/* Desktop Menu */}
         <ul
-          className="hidden lg:flex
+          className="hidden lg:flex 
           lg:space-x-2 xl:space-x-3 2xl:space-x-4
           lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#1E1E1E] items-center lg:leading-6 xl:leading-8"
         >
@@ -1656,20 +1657,20 @@ export default function Navbar() {
           })}
         </ul>
         {/* Desktop Right Icons */}
-        <div className="hidden lg:flex items-center space-x-2 xl:space-x-4 2xl:space-x-8 text-[#1F1F1F]">
+        <div className="hidden lg:flex text-[#1F1F1F]">
           {/* SVG as link */}
-          <a
+          <Link
             href="https://portal.shantalife.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="block"
+            className="flex flex-col justify-center items-center"
             aria-label="Go to ShantaLife Portal"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
+              width="21"
+              height="21"
+              viewBox="0 0 21 21"
               fill="none"
               className="cursor-pointer flex mx-auto"
             >
@@ -1687,10 +1688,12 @@ export default function Navbar() {
                 strokeLinejoin="round"
               />
             </svg>
-            <p className="text-center text-[14px]">My Portal</p>
-          </a>
+            <div className="text-center lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#1E1E1E]">
+              My Portal
+            </div>
+          </Link>
 
-          <ToolTip>
+          {/* <ToolTip>
             <svg
               width="22"
               height="22"
@@ -1703,7 +1706,7 @@ export default function Navbar() {
               <circle cx="11" cy="11" r="8" />
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
-          </ToolTip>
+          </ToolTip> */}
         </div>
       </nav>
       {/* Mobile Slide-In Menu */}

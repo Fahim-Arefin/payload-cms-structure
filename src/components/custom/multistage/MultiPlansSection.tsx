@@ -9,7 +9,7 @@ const MultiPlansSection = ({ data, planData, bgColor }: Props) => {
     <div className={`container-padding ${bgColor ? `bg-[${bgColor}]` : 'bg-white'}`}>
       <div className="flex flex-col gap-4 items-center lg:items-start">
         <h3 className="global-h3 font-semibold uppercase">
-          Shanta <span className="text-[#ED7125] font-semibold">3-Stage</span> Plan
+          Shanta <span className="text-[#ED7125] font-semibold">3 Payment</span> Plan
         </h3>
         <p className="global-p1 w-full lg:w-[70%] xl:w-[60%] 2xl:w-[50%]">
           Three life stages, three payouts, and one seamless plan- because your ambitions deserve a

@@ -4,8 +4,8 @@ import GlobalButton from './GlobalButton'
 
 interface CallNowButtonProps {
   className?: string
-  size?: string
-  variant?: string
+  size?: 'small' | 'large' | 'medium'
+  variant?: 'link' | 'primary' | 'glass' | 'default' | 'destructive' | 'outline' | 'secondary'
 }
 
 export default function CallNowButton({ className, size = 'large', variant = 'primary' }: CallNowButtonProps) {

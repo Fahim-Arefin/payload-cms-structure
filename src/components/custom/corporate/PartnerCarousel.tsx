@@ -63,7 +63,7 @@ function PartnerCarousel({ data }: Props) {
               key={index}
               className="basis-1/2 md:basis-1/3 lg:basis-1/3 xl:basis-1/4 flex flex-col items-center justify-center space-y-3"
             >
-              <div className="w-[150px] h-[100px] md:w-[200px] md:h-[120px] lg:w-[340px] lg:h-[250px] bg-white flex items-center justify-center">
+              <div className="w-[150px] h-[100px] md:w-[200px] md:h-[120px] lg:w-[340px] lg:h-[250px] flex items-center justify-center ">
                 <img
                   src={item.img}
                   alt={item.title}
