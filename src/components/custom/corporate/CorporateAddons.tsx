@@ -54,7 +54,7 @@ function CorporateAddons({ data }: Props) {
       >
         <div className="flex space-x-2">
           <h3 className="global-h3 uppercase font-bold text-[#434343]">Employee </h3>
-          <h3 className="global-h3 uppercase font-bold text-[#ED7125]">Wellness Ad-ons</h3>
+          <h3 className="global-h3 uppercase font-bold text-[#ED7125]">Wellness Add-ons</h3>
         </div>
       </div>
       {/* carousal */}
@@ -63,10 +63,12 @@ function CorporateAddons({ data }: Props) {
            md:px-12 
            lg:px-[64px]"
         setApi={setCarouselApi}
+        opts={{dragFree: true}}        
         plugins={[
           Autoplay({
             delay: 5000,
           }),
+          
         ]}
       >
         <CarouselContent className="-ml-1">

@@ -28,7 +28,7 @@ const page: FC<pageProps> = ({}) => {
   ]
 
   const introData = {
-    title: 'At Shanta Life-',
+    title: 'At Shanta Life -',
     subTitle: 'We believe in Better',
     description:
       'We’re building a movement of purpose-driven people who believe in smarter protection, stronger communities, and a world where possibilities outpace uncertainties. Together, we push boundaries — in work, in life, and in everything in between.',
