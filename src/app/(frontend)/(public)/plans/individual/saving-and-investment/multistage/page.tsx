@@ -10,6 +10,7 @@ import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
 import CallNowButton from '@/components/custom/shared/CallNowButton'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { FC } from 'react'
+import Link from 'next/link'
 
 type Props = {}
 
@@ -18,7 +19,7 @@ const page: FC<Props> = ({}) => {
     {
       title: 'Shanta Multi-Stage Maturity Plans',
       subtitle: '',
-      description: 'Since Life Has More Than One Milestone , We’re With You at Each One.',
+      description: 'Since life has more than one milestone , we’re with you at each one.',
       image: '/assets/banners/multistage.png',
     },
   ]
@@ -101,20 +102,15 @@ const page: FC<Props> = ({}) => {
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides}>
         <div
-          className="absolute top-[205px] md:top-[305px] lg:top-[400px] xl:top-[420px]  2xl:top-[630px] 
+          className="absolute bottom-12 lg:top-[500px] xl:top-[490px]  2xl:top-[730px] 
           inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
        hero-content-width
         flex justify-left space-x-4 md:space-x-6 lg:justify-start
         "
         >
-          <ToolTip>
-            <GlobalButton
-              size="large"
-              className="cursor-not-allowed"
-              text="Purchase"
-              variant="primary"
-            />
-          </ToolTip>
+          <Link href="/purchase">
+            <GlobalButton size="large" text="Purchase" variant="primary" className="" />
+          </Link>
           <CallNowButton />
         </div>
       </HeroSection>

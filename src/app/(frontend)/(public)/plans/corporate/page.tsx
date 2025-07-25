@@ -76,26 +76,44 @@ function page({}: Props) {
   ]
 
   const partnerData = [
-    { img: '/assets/valued-clients/Client1.png', title: 'Shanta Holdings Limited' },
-    { img: '/assets/valued-clients/Client2.jpg', title: 'Shanta Multiverse Limited' },
-    { img: '/assets/valued-clients/Client3.png', title: 'Shanta Lifestyle Limited' },
-    { img: '/assets/valued-clients/Client4.png', title: 'Amari Dhaka' },
+    { img: '/assets/valued-clients/ShantaHolding.png', title: 'Shanta Holdings Limited' },
     {
-      img: '/assets/valued-clients/Client5.jpg',
+      img: '/assets/valued-clients/Logo-Shanta-Multiverse.png',
+      title: 'Shanta Multiverse Limited',
+    },
+    { img: '/assets/valued-clients/ShantaLifestyle.png', title: 'Shanta Lifestyle Limited' },
+    { img: '/assets/valued-clients/amari-dhaka.png', title: 'Amari Dhaka' },
+    {
+      img: '/assets/valued-clients/hohensteiname.png',
       title: 'Hohenstein Laboratories Bangladesh Limited',
     },
-    { img: '/assets/valued-clients/Client6.png', title: 'Eskimi Bangladesh' },
-    { img: '/assets/valued-clients/Client7.jpg', title: 'Strategic Equity Management' },
-    { img: '/assets/valued-clients/Client8.png', title: 'STS Capital Limited' },
-    { img: '/assets/valued-clients/Client9.png', title: 'Golden Sky Footwear' },
-    { img: '/assets/valued-clients/Client10.png', title: 'Blucheez Fashion' },
-    { img: '/assets/valued-clients/Client11.jpg', title: 'Eduko Bangladesh' },
-    { img: '/assets/valued-clients/Client12.png', title: 'Glenrich International School' },
-    { img: '/assets/valued-clients/Client13.png', title: 'Bengal Airlift Limited' },
-    { img: '/assets/valued-clients/Client14.jpg', title: 'Ace Bangladesh Limited' },
-    { img: '/assets/valued-clients/Client15.png', title: 'FitsAir' },
-    { img: '/assets/valued-clients/Client16.jpg', title: 'Air Alliance Ltd. (SP)' },
-    { img: '/assets/valued-clients/Client17.png', title: 'Speedmark Transportation (BD) Limited' },
+    {
+      img: '/assets/valued-clients/63a0499788734fea9d45a6a1_Logo-eskimi.png',
+      title: 'Eskimi Bangladesh',
+    },
+    { img: '/assets/valued-clients/seml-bg.png', title: 'Strategic Equity Management' },
+    { img: '/assets/valued-clients/STS_Group_logo.png', title: 'STS Capital Limited' },
+    { img: '/assets/valued-clients/Golden-Sky-LOGO-3.png', title: 'Golden Sky Footwear' },
+    { img: '/assets/valued-clients/Blucheez-Red_Blucheez_logo.png', title: 'Blucheez Fashion' },
+    {
+      img: '/assets/valued-clients/Eduko_Logo_Transparent_Background.png',
+      title: 'Eduko Bangladesh',
+    },
+    {
+      img: '/assets/valued-clients/Glenrich-New-Logo-2048x1016.png',
+      title: 'Glenrich International School',
+    },
+    { img: '/assets/valued-clients/Line2.png', title: 'Bengal Airlift Limited' },
+    {
+      img: '/assets/valued-clients/acebangladesh-e1729689682400.png',
+      title: 'Ace Bangladesh Limited',
+    },
+    { img: '/assets/valued-clients/Fitsair_logo.png', title: 'FitsAir' },
+    { img: '/assets/valued-clients/aIR-ALLIANCE.png', title: 'Air Alliance Ltd. (SP)' },
+    {
+      img: '/assets/valued-clients/pixel_speedmark_8fb3bdc46abb8be4b9e2d982fdffea1d-4-4.png',
+      title: 'Speedmark Transportation (BD) Limited',
+    },
   ]
 
   const addOnsData = [
