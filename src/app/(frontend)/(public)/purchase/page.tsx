@@ -12,7 +12,7 @@ type pageProps = {}
 const page: FC<pageProps> = ({}) => {
   const heroSlides = [
     {
-      title: 'Purchase',
+      title: 'Purchase Now',
       subtitle: '',
       description: '',
       image: '/assets/purchaseBanner.jpg',
@@ -21,23 +21,18 @@ const page: FC<pageProps> = ({}) => {
 
   return (
     <div className="font-avenir bg-white">
-      <HeroSection heroSlides={heroSlides}>
+      <HeroSection
+        heroSlides={heroSlides}
+        height=" h-[252px] md:h-[352px] lg:h-[470px] xl:h-[570px] 2xl:h-[670px] "
+        top=" top-[100px] md:top-[150px] lg:top-[43%]"
+      >
         <div
-          className="absolute top-[245px] md:top-[355px] lg:top-[470px] xl:top-[490px]  2xl:top-[730px] 
+          className="absolute top-[145px] md:top-[215px] lg:top-[280px] xl:top-[330px]  2xl:top-[430px] 
           inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
        hero-content-width
         flex justify-left space-x-4 md:space-x-6 lg:justify-start cursor-not-allowed
         "
         >
-          <ToolTip>
-            <GlobalButton
-              variant="primary"
-              className="cursor-not-allowed"
-              text="Purchase"
-              size="large"
-            />
-          </ToolTip>
-
           <div className="flex items-center space-x-2 text-white 2xl:space-x-4">
             <CallNowButton />
           </div>
