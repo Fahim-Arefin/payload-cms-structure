@@ -1,3 +1,4 @@
+import CallNowButton from '@/components/custom/shared/CallNowButton'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
@@ -71,11 +72,19 @@ function page() {
   ]
   return (
     <div className="font-avenir bg-white">
-      <HeroSection
-        heroSlides={heroSlides}
-        // height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[578px] "
-        top=" top-[150px] md:top-[200px] lg:top-[63%]"
-      />
+      <HeroSection heroSlides={heroSlides}>
+        <div
+          className="absolute top-[250px] md:top-[330px] lg:top-[420px] xl:top-[450px]  2xl:top-[700px] 
+          inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
+       hero-content-width
+        flex justify-left space-x-4 md:space-x-6 lg:justify-start
+        "
+        >
+          <div className="flex items-center space-x-2 text-white 2xl:space-x-4">
+            <CallNowButton />
+          </div>
+        </div>
+      </HeroSection>
       <PlanInfoSection data={planInfoData} />
       <OffersClientWrapper
         data={offersData}

@@ -23,7 +23,7 @@ const EligibilityTabSection = () => {
             entryMaxLabel="Years"
             policyTerm="10-20"
             policyTermLabel="Years"
-            maturityAge="55"
+            maturityAge="25"
             maturityAgeLabel="Years"
           />
           <EligibilityCard

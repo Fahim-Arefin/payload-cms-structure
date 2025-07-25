@@ -149,7 +149,7 @@ function page({}: Props) {
     ],
     sectionRight: {
       avatar: '/assets/board-of-directors/abrar-anwar.jpg',
-      name: 'Abrar A. Anwar',
+      name: 'Khondoker Khalil Ahamed',
       quote:
         'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Asset Management.',
     },

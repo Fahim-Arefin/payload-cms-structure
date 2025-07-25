@@ -167,19 +167,6 @@ const page: FC<pageProps> = ({}) => {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start cursor-not-allowed
         "
         >
-          {/* <Button
-              variant="primary"
-              className="
-            cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6
-            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[8px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-            global-h4 font-normal"
-            >
-              View All Jobs
-            </Button> */}
           <GlobalButton
             size="large"
             // className="cursor-not-allowed"
@@ -193,20 +180,6 @@ const page: FC<pageProps> = ({}) => {
             }}
           />
 
-          {/* <ToolTip className="flex items-center space-x-2 text-white 2xl:space-x-4"> */}
-          {/* <Button
-              className="cursor-not-allowed
-              bg-[#FFFFFFCC]
-            px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6
-            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[8px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-            global-h4 font-normal border text-black border-white backdrop-blur-md
-                        hover:bg-white/30 hover:border-white transition-colors duration-300"
-            >
-              Become an RO 
-            </Button> */}
           <Link href="/agent-onboarding">
             <GlobalButton
               size="large"
@@ -215,12 +188,13 @@ const page: FC<pageProps> = ({}) => {
               variant="primary"
             />
           </Link>
-          {/* </ToolTip> */}
         </div>
       </HeroSection>
       <CareerIntro data={introData} />
       <div className="container-padding block bg-gradient-to-r from-[#FBFFD3] to-[#F8E4C6]">
-        {careerStoryData?.map((data, i) => <CareerOurStoryLg key={i} data={data} />)}
+        {careerStoryData?.map((data, i) => (
+          <CareerOurStoryLg key={i} data={data} />
+        ))}
       </div>
       <CareerSwiper careerCards={careerCards} />
       <CareerResourceSection data={resourceData} />

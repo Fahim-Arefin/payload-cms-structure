@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import GlobalButton from '../shared/GlobalButton'
 import ToolTip from '../shared/ToolTip'
+import { Button } from '@/components/ui/button'
+import { LuArrowUpRight } from 'react-icons/lu'
 
 const riders = [
   'Accidental Medical Reimbursement (AMR)',
@@ -54,6 +56,19 @@ export function BenefitsTabSection() {
                   <span className="text-[12px] md:global-p2">{rider}</span>
                 </li>
               ))}
+            </ul>
+            <ul className="flex flex-col gap-4 justify-center text-center px-8 lg:px-16 xl:px-36">
+              <li className="flex items-center gap-1 lg:gap-2">
+                <Link href="/plans/individual/health-and-protection">
+                  <Button
+                    variant="link"
+                    className="mt-2 px-0 text-[#ED7125] flex justify-start items-center gap-1 lg:gap-2 hover:underline hover:underline-offset-8  global-h4 font-normal"
+                  >
+                    See Rider Benefits
+                    <LuArrowUpRight className="global-h4" />
+                  </Button>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
