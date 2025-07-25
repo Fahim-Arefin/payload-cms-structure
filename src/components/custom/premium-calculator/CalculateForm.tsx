@@ -82,6 +82,14 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
 
   const suggestedAmount = calculateSuggestedAmount()
 
+  // Video link mappings for plans
+  const videoLinkMappings = {
+    'Shanta Child Education Plan (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+    'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g', 
+    'Shanta 3 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
+    'Shanta 4 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
+  }
+
   // Fetch plans from API based on age (same as QuoteForm)
   const fetchPlans = async (age: number) => {
     if (!age || age < 18 || age > 65) {
@@ -376,7 +384,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           disabled={isLoadingPlans || !formData.Age || availablePlans.length === 0}
           onValueChange={(v) => {
             const plan = availablePlans.find((p) => p.plan_name === v)
-            setSelectedPlan(plan)
+            // Add video link to the selected plan
+            const planWithVideo = plan ? {
+              ...plan,
+              videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings]
+            } : null
+            setSelectedPlan(planWithVideo)
             if (plan) {
               // Reset dependent fields when plan changes
               setFormData((prev) => ({
@@ -438,11 +451,11 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         </Select>
         {/* below a text saying watch video */}
         {/* <p className="text-[10px] py-2 absolute inset-x-0 text-[#FF6600] underline">Watch Video</p> */}
-        {selectedPlan && (
+        {selectedPlan && selectedPlan.videoLink && (
           <Dialog>
             <DialogTrigger asChild>
               <p className="text-[10px] py-1 absolute inset-x-0 text-[#FF6600] underline cursor-pointer">
-                Watch Video
+                Watch {selectedPlan.plan_name} Video
               </p>
             </DialogTrigger>
 
