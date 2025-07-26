@@ -26,7 +26,7 @@ function HeroSection({ heroSlides, children, height, top, position }: Props) {
         className="w-full"
         opts={{
           align: 'start',
-          // loop: true,
+          loop: true,
         }}
         plugins={[
           Autoplay({
