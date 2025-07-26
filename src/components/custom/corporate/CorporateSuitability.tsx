@@ -43,7 +43,7 @@ function CorporateSuitability({ data }: Props) {
               <img src={item?.img} alt={`icon-${index}`} className="object-contain w-full h-full" />
             </div>
             <h2 className="global-p1 font-bold uppercase text-white lg:mb-10">{item?.title}</h2>
-            <p className="global-p1 font-[350] text-white lg:mb-10 xl:mb-20">
+            <p className="global-p1 font-[350] text-white text-justify lg:mb-10 xl:mb-20">
               {item?.description}
             </p>
           </div>

@@ -10,6 +10,7 @@ import CallNowButton from '@/components/custom/shared/CallNowButton'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import React from 'react'
+import CorporateOfferings from '@/components/custom/corporate/CorporateOfferings'
 
 type Props = {}
 
@@ -38,13 +39,13 @@ function page({}: Props) {
     },
     {
       icon: '/assets/choose2.svg',
-      text: 'Simplified Holistic Healthcare',
+      text: 'Hospital network 24/7 Online Doctor Consultancy Service',
       description:
         'All-around healthcare support—covering hospitalization, maternity, dental, optical, and more.',
     },
     {
       icon: '/assets/choose3.svg',
-      text: 'Effortless Claims Settlement',
+      text: 'Online Claim Settlement Facility',
       description: 'Smart and seamless claims support system with instant cashless access.',
     },
     {
@@ -57,6 +58,12 @@ function page({}: Props) {
       text: 'Dedicated Account Management',
       description:
         'Enhance retention with data-backed care solutions, managed by a team of dedicated experts.',
+    },
+    {
+      icon: '/assets/corporate-bullet.png',
+      text: 'Lifestyle Benefits',
+      description:
+        'Lifestyle Benefit and Discount facility with the Willingness Pass.',
     },
   ]
 
@@ -183,6 +190,7 @@ function page({}: Props) {
       </HeroSection>
       <CorporateHighlight highlightsData={highlightData} />
       <CorporateChoose benefitsData={benefitsData} />
+      <CorporateOfferings />
       <CorporateSuitability data={suitabilityData} />
       <PartnerCarousel data={partnerData} />
       <CorporateAddons data={addOnsData} />

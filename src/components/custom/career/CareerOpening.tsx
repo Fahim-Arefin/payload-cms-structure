@@ -13,10 +13,43 @@ type CareerOpeningDataProps = {
   openingData: any
 }
 
+const positions = [
+  'Junior IT Executive',
+  'Mid IT Executive',
+  'Senior IT Executive',
+  'Management Trainee',
+  'Relationship Officer (Internship)',
+  'Relationship Officer (Full time)',
+  'Campus Ambassador (Part-time)',
+  'Campus Ambassador (Full time)',
+]
+
+// Map type/title to your form options
+function getFormPosition(type: string, title: string) {
+  if (type.toLowerCase().includes('intern')) return 'Relationship Officer (Internship)'
+  if (type.toLowerCase().includes('part')) return 'Campus Ambassador (Part-time)'
+  if (type.toLowerCase().includes('full') && title.toLowerCase().includes('ambassador'))
+    return 'Campus Ambassador (Full time)'
+  if (type.toLowerCase().includes('full') && title.toLowerCase().includes('relationship'))
+    return 'Relationship Officer (Full time)'
+  if (title.toLowerCase() === 'management trainee') return 'Management Trainee'
+  // add more as needed
+  return positions[0]
+}
+
 export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
+    const [pos, setPos] = useState(positions[0])
+
+
+  const handleApply = (type: string, title: string) => {
+    setPos(getFormPosition(type, title))
+    // Optionally scroll to form
+    const formEl = document.querySelector('#career-opening-section form')
+    // if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
 
   useEffect(() => {
     if (!carouselApi) return
@@ -54,7 +87,7 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
           {/* Desktop: Grid */}
           <div className="hidden md:grid grid-cols-2 gap-5 w-full">
             {openingData.map((card: any, idx: number) => (
-              <CareerOpeningCard key={idx} {...card} />
+              <CareerOpeningCard key={idx} {...card} onApply={handleApply} />
             ))}
           </div>
           {/* Mobile: Carousel */}
@@ -71,7 +104,7 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
               <CarouselContent className="flex items-stretch">
                 {openingData.map((card: any, idx: number) => (
                   <CarouselItem key={idx} className="flex-shrink-0 w-[91vw] max-w-[350px]">
-                    <CareerOpeningCard {...card} />
+                    <CareerOpeningCard {...card} onApply={handleApply}/>
                   </CarouselItem>
                 ))}
               </CarouselContent>
@@ -94,7 +127,7 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
         <div className="mt-10 md:mt-0 h-full">
           <JoinOurTeamMobile />
           <div className="hidden md:block h-full">
-            <CareerOpeningForm />
+            <CareerOpeningForm pos={pos} setPos={setPos}/>
           </div>
         </div>
       </div>

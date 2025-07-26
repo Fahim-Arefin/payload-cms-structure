@@ -102,37 +102,43 @@ type NewsItem = {
   date: string
   title: string
   description: string
+  videoLink: string
 }
 
 const newsItems: NewsItem[] = [
   {
     id: 1,
-    image: '/assets/newsbanner2.jpg',
-    date: '14 Aug 2024 | 11.00am',
-    title: 'A Kickoff meeting with Sales team.',
+    image: '/assets/thumbnails/yt-thumbnail-4.jpg',
+    date: '15 Jan 2024 | 10.00am',
+    title: 'Understanding Life Insurance Basics',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Learn the fundamental concepts of life insurance and how it can protect your family\'s financial future. Discover the different types of policies available and find the right coverage for your needs. Our expert explains key terms, benefits, and important considerations when choosing life insurance.',
+    videoLink: 'https://www.youtube.com/embed/YbnlDrexiGE',
   },
   {
     id: 2,
-    image: '/assets/newsbanner2.jpg',
-    date: '15 Aug 2024 | 2.00pm',
-    title: 'Marketing strategy planning session.',
+    image: '/assets/thumbnails/yt-thumbnail-1.jpg',
+    date: '22 Feb 2024 | 2.30pm',
+    title: 'Expert Insurance Guidance & Tips',
     description:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'Get professional insights from our insurance experts on making smart coverage decisions. Learn practical tips for evaluating policies, understanding premiums, and maximizing your insurance benefits. Essential knowledge for protecting what matters most to you.',
+    videoLink: 'https://www.youtube.com/embed/rcduE_ff314',
   },
   {
     id: 3,
-    image: '/assets/newsbanner2.jpg',
-    date: '16 Aug 2024 | 9.00am',
-    title: 'Monthly team performance review.',
+    image: '/assets/thumbnails/yt-thumbnail-4.jpg',
+    date: '15 Jan 2024 | 11.30am',
+    title: 'Life Insurance Planning Strategies',
     description:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+      'Explore comprehensive strategies for incorporating life insurance into your financial planning. Understand how to align coverage with your life goals, protect your family\'s lifestyle, and ensure financial security for the future.',
+    videoLink: 'https://www.youtube.com/embed/YbnlDrexiGE',
   },
 ]
 
 function AllNewsContainer() {
   const [open, setOpen] = useState(false)
+  const [selectedVideo, setSelectedVideo] = useState('')
+  const [newsCardOpen, setNewsCardOpen] = useState(false)
   return (
     // px-10 lg:px-[40px] xl:px-[100px]  2xl:px-[150px]
     // py-8 lg:py-[20px] xl:py-[40px] 2xl:py-[50px]
@@ -201,15 +207,23 @@ function AllNewsContainer() {
         {newsItems.map((item) => (
           <div key={item.id} className="flex items-center space-x-4 lg:space-x-6 h-fit">
             <div
-              className=" rounded-[6px] 
+              className="relative rounded-[6px] cursor-pointer
             min-w-[110px] max-w-[110px] xl:min-w-[140px] xl:max-w-[140px] 
             h-[110px] xl:h-[140px]"
+              onClick={() => {
+                setSelectedVideo(item.videoLink)
+                setNewsCardOpen(true)
+              }}
             >
               <img
                 src={item.image}
                 alt={item.title}
                 className="object-cover rounded-md h-full w-full"
               />
+              {/* Play button overlay */}
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/50 transition-all duration-300 rounded-md">
+                <BsPlay className="text-white text-2xl xl:text-3xl" />
+              </div>
             </div>
             <div className="space-y-2 xl:space-y-3">
               <div className="flex items-center space-x-2">
@@ -220,52 +234,52 @@ function AllNewsContainer() {
               {/* description 2xl */}
               <p className="hidden 2xl:block text-[10px] md:text-[13px] leading-relaxed text-[#E5E5E5]">
                 {item.description.split(' ').slice(0, 40).join(' ')}
-                {item.description.split(' ').length > 40 && (
-                  <span className="ml-1 text-[#ED7125] font-medium cursor-pointer hover:underline hover:text-[#c45d1f] transition-all">
-                    ... see more
-                  </span>
-                )}
               </p>
               {/* description xl */}
               <p className="hidden xl:block 2xl:hidden text-[10px] md:text-[13px] leading-relaxed text-[#E5E5E5]">
                 {item.description.split(' ').slice(0, 28).join(' ')}
-                {item.description.split(' ').length > 28 && (
-                  <span className="ml-1 text-[#ED7125] font-medium cursor-pointer hover:underline hover:text-[#c45d1f] transition-all">
-                    ... see more
-                  </span>
-                )}
               </p>
               {/* description lg */}
               <p className="hidden lg:block xl:hidden text-[10px] md:text-[13px] leading-relaxed text-[#E5E5E5]">
                 {item.description.split(' ').slice(0, 13).join(' ')}
-                {item.description.split(' ').length > 13 && (
-                  <span className="ml-1 text-[#ED7125] font-medium cursor-pointer hover:underline hover:text-[#c45d1f] transition-all">
-                    ... see more
-                  </span>
-                )}
               </p>
               {/* description md */}
               <p className="hidden md:block lg:hidden text-[10px] md:text-[13px] leading-relaxed text-[#E5E5E5]">
                 {item.description.split(' ').slice(0, 18).join(' ')}
-                {item.description.split(' ').length > 18 && (
-                  <span className="ml-1 text-[#ED7125] font-medium cursor-pointer hover:underline hover:text-[#c45d1f] transition-all">
-                    ... see more
-                  </span>
-                )}
               </p>
               {/* description sm */}
               <p className="md:hidden text-[10px] md:text-[13px] leading-relaxed text-[#E5E5E5]">
                 {item.description.split(' ').slice(0, 10).join(' ')}
-                {item.description.split(' ').length > 10 && (
-                  <span className="ml-1 text-[#ED7125] font-medium cursor-pointer hover:underline hover:text-[#c45d1f] transition-all">
-                    ... see more
-                  </span>
-                )}
               </p>
             </div>
           </div>
         ))}
       </div>
+
+      {/* News Card Video Modal */}
+      <Dialog open={newsCardOpen} onOpenChange={setNewsCardOpen}>
+        <DialogContent
+          className="max-w-5xl w-full aspect-video p-0 bg-black 
+        [&>button.absolute]:top-3 [&>button.absolute]:right-3 
+        [&>button.absolute]:bg-black/50 
+        [&>button.absolute]:text-white 
+        [&>button.absolute]:hover:bg-black/80"
+        >
+          <VisuallyHidden>
+            <DialogTitle>News Video</DialogTitle>
+          </VisuallyHidden>
+          <iframe
+            width="100%"
+            height="100%"
+            src={selectedVideo}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

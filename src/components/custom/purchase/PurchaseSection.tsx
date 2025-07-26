@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import PremiumBreakdown from '../premium-calculator/PremiumBreakdown'
 import CalculateForm from '../premium-calculator/CalculateForm'
+import PurchaseForm from './PurchaseForm'
 import PurchaseCardSection from './PurchaseCardSection'
 import { ApiResponse, ApiResToShow, getTotalPremium } from '@/utils/premiumCalculator'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
@@ -14,37 +15,71 @@ type Props = {}
 interface FormData {
   PlanCode: number
   Age: number
-  SumAssured: number
-  Term: number
   PaymentMode: number
-  Gender: number
+  Gender: number | null
   phoneNumber: string
-  annualIncome: number
   name: string
   email: string
+  city: string
+  occupation: string
 }
 
 const PurchaseSection = (props: Props) => {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
+  const [selectedPlanName, setSelectedPlanName] = useState<string>('')
+  const [selectedPlanCode, setSelectedPlanCode] = useState<number>(0)
     const [formData, setFormData] = useState<FormData>({
       PlanCode: 0,
       Age: 0,
-      SumAssured: 0,
-      Term: 0,
       PaymentMode: 0,
-      Gender: 0,
+      Gender: null,
       phoneNumber: '',
-      annualIncome: 0,
       name: '',
-      email: ''
+      email: '',
+      city: '',
+      occupation: ''
     })
     const [calculatedPlanCode, setCalculatedPlanCode] = useState<number | null>(null)
 
-  const handleApiResponse = (response: ApiResponse, paymentMode: string) => {
+  const handleApiResponse = (response: ApiResponse, paymentMode: string, planName?: string) => {
     setApiResponse(response)
     setConfirmedPaymentMode(paymentMode)
     setCalculatedPlanCode(formData.PlanCode)
+    if (planName) {
+      setSelectedPlanName(planName)
+    }
+  }
+
+  // Map plan names to PlanDetailsSection expected codes
+  const getPlanDetailsCode = (planName?: string): number => {
+    // Map plan names to PlanDetailsSection codes
+    const planNameToCode: { [key: string]: number } = {
+      'Shanta Child Education Plan (3%)': 1,
+      'Shanta Endowment Plan': 2, 
+      'Shanta 3 Stage Plan': 3,
+      'Shanta 4 Stage Plan': 4,
+    }
+    
+    // If we have the selected plan name, use it for mapping
+    if (selectedPlanName && planNameToCode[selectedPlanName]) {
+      return planNameToCode[selectedPlanName]
+    }
+    
+    // If no plan name is available, try to use the provided plan name parameter
+    if (planName && planNameToCode[planName]) {
+      return planNameToCode[planName]
+    }
+    
+    // Fallback: try to match partial names
+    if (selectedPlanName) {
+      if (selectedPlanName.includes('Child Education')) return 1
+      if (selectedPlanName.includes('Endowment')) return 2  
+      if (selectedPlanName.includes('3 Stage')) return 3
+      if (selectedPlanName.includes('4 Stage')) return 4
+    }
+    
+    return 1 // Default fallback to show something
   }
    const plans = [
     {
@@ -108,12 +143,16 @@ const PurchaseSection = (props: Props) => {
           {apiResponse ? (
             <div>
               
-              <PlanDetailsSection planCode={formData.PlanCode} plans={plans}/>
+              <PlanDetailsSection planCode={getPlanDetailsCode()} plans={plans}/>
               <PurchaseCalculateSection
                 confirmedPaymentMode={confirmedPaymentMode}
                 getTotalPremium={getTotalPremium}
                 apiResponse={apiResponse}
               />
+            </div>
+          ) : selectedPlanCode > 0 ? (
+            <div>
+              <PlanDetailsSection planCode={getPlanDetailsCode()} plans={plans}/>
             </div>
           ) : (
             <div>
@@ -146,7 +185,14 @@ const PurchaseSection = (props: Props) => {
 
         {/* right form */}
         <div className="order-1 lg:order-2">
-          <CalculateForm onApiResponse={handleApiResponse} formData={formData} setFormData={setFormData}/>
+          <PurchaseForm 
+            formData={formData} 
+            setFormData={setFormData}
+            onPlanSelect={(planCode: number, planName: string) => {
+              setSelectedPlanCode(planCode)
+              setSelectedPlanName(planName)
+            }}
+          />
         </div>
       </div>
     </div>

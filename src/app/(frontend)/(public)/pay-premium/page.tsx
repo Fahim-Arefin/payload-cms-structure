@@ -3,20 +3,21 @@ import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import BankSection from '@/components/custom/pay-premium/BankSection'
 import BkashSection from '@/components/custom/pay-premium/BkashSection'
 import DebitSection from '@/components/custom/pay-premium/DebitSection'
+import RocketSection from '@/components/custom/pay-premium/RocketSection'
+import PaymentTab from '@/components/custom/pay-premium/PaymentTab'
 
 function page() {
   const heroSlides = [
     {
       title: 'Pay Premium',
       subtitle: '',
-      description:
-        'Powering your protection starts here.. Flexible Premium Payment options so we can ensure your protection coverage..',
+      description: 'Powering your protection starts here..',
       image: '/assets/pay-premium-2.jpg',
     },
   ]
 
   const bkashData = {
-    bgImage: '/assets/bkash-4.png',
+    // bgImage: '/assets/bkash-4.png',
     item: [
       {
         // image: '/assets/protection5.png',
@@ -31,7 +32,7 @@ function page() {
       },
       {
         // image: '/assets/protection8.png',
-        descriptionContent: `<b>Step 4:</b> Write your full name in “Reference” field.`,
+        descriptionContent: `<b>Step 4:</b> Write your Policy number or Full name in “Reference” field.`,
       },
       {
         // image: '',
@@ -39,19 +40,43 @@ function page() {
       },
       {
         // image: '',
-        descriptionContent: `<b>Step 6:</b>: Upon successful transaction an acknowledgement SMS will
+        descriptionContent: `<b>Step 6:</b> Upon successful transaction an acknowledgement SMS will
         be sent to you along with the link to e-receipt the following
         business day.`,
       },
     ],
   }
+
+  const rocketData = {
+    // bgImage: '/assets/bkash-4.png', // (Replace with your Rocket background image path)
+    item: [
+      {
+        descriptionContent: `<b>Step 1:</b></br>Log into your Rocket account.`,
+      },
+      {
+        descriptionContent: `<b>Step 2:</b></br>Go to “Bill Pay” section and search by “5309”.`,
+      },
+      {
+        descriptionContent: `<b>Step 3:</b></br>Select “Shanta Life Insurance PLC”.`,
+      },
+      {
+        descriptionContent: `<b>Step 4:</b></br>Mention either the policy number or proposal number under the 'Bill No' section.`,
+      },
+      {
+        descriptionContent: `<b>Step 5:</b></br>Write the payable amount and submit.`,
+      },
+      {
+        descriptionContent: `<b>Step 6:</b></br>Upon successful transaction an acknowledgement SMS will be sent to you along with the link to e-receipt the following business day.`,
+      },
+    ],
+  }
+
   const bankData = {
-    bgImage: '/assets/bank.jpg',
+    bgImage: '/assets/bank_teller.jpg',
     item: [
       {
         image: '/assets/protection5.png',
-        descriptionContent:
-          '<b>Step 1:</b></br> Covers Diagnoses / Surgery for 10 Minor illnesses & 15 Major illnesses',
+        descriptionContent: '<b>Step 1:</b></br> Log into your Internet Banking',
       },
       {
         image: '/assets/protection6.png',
@@ -62,11 +87,11 @@ function page() {
         image: '/assets/protection7.png',
         descriptionContent: `<b>Step 3:</b></br>Give below details in respective fields of “Beneficiary details” page.</br>
           <ul class="list-disc ml-8">
-            <li><b>Beneficiary Name –</b>SLI XXXXX (provide your Policy Number in place of XXXXX)</li>
-            <li><b>Bank Account –</b>2065262900001</li>
+            <li><b>Beneficiary Name –</b> XXXXX (provide your Policy Number in place of XXXXX)</li>
+            <li><b>Bank Account –</b> 2065262900001</li>
             <li><b>Name of Bank –</b> BRAC Bank</li>
-            <li><b>Bank Branch –</b>Gulshan Branch</li> 
-            <li><b>Routing Number –</b>060261726</li> 
+            <li><b>Bank Branch –</b> Gulshan Branch</li> 
+            <li><b>Routing Number –</b> 060261726</li> 
           </ul>
           `,
       },
@@ -80,12 +105,12 @@ function page() {
       },
       {
         image: '',
-        descriptionContent: `<b>Step 6:</b>: An acknowledgement SMS will be sent to you along with the link to e-receipt.`,
+        descriptionContent: `<b>Step 6:</b> An acknowledgement SMS will be sent to you along with the link to e-receipt.`,
       },
     ],
   }
   const debitData = {
-    bgImage: '/assets/debit.jpg',
+    bgImage: '/assets/eft-payment_1.jpg',
     content: `You can conveniently pay your premium using EFT (Electronic Funds Transfer) Debit Authorization. 
     This secure and efficient method ensures that the premium amount is automatically debited from your designated bank account on the due date, 
     eliminating the risk of missed payments and keeping your policy active without any hassle. 
@@ -94,11 +119,24 @@ function page() {
     Stay worry-free about missing your premium deadlines!`,
   }
 
+  const tabItems = [
+    {
+      value: 'bkash',
+      label: 'Bkash',
+    },
+    {
+      value: 'rocket',
+      label: 'Rocket',
+    },
+  ]
+
   return (
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides} top=" top-[150px] md:top-[200px] lg:top-[43%]" />
       <BankSection align="right" data={bankData} />
-      <BkashSection align="left" bgColor="#FCF4EB" data={bkashData} />
+      {/* <BkashSection align="left" bgColor="#FCF4EB" data={bkashData} />
+      <RocketSection align="left" bgColor="#FCF4EB" data={rocketData} /> */}
+      <PaymentTab data={bkashData} rocketData={rocketData} config={tabItems} />
       <DebitSection align="right" data={debitData} />
       <ContactUsSection />
     </div>

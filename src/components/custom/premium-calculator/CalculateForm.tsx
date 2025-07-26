@@ -22,7 +22,7 @@ type FormData = {
   SumAssured: number
   Term: number
   PaymentMode: number
-  Gender: number
+  Gender: number | null
   phoneNumber: string
   annualIncome: number
   name: string
@@ -30,7 +30,7 @@ type FormData = {
 }
 
 type Props = {
-  onApiResponse?: (response: ApiResponse, paymentMode: string) => void
+  onApiResponse?: (response: ApiResponse, paymentMode: string, planName?: string) => void
   formData: FormData
   setFormData: React.Dispatch<React.SetStateAction<FormData>>
 }
@@ -44,6 +44,11 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   const [availableTenures, setAvailableTenures] = useState<{ text: string; value: number }[]>([])
   const [isLoadingTenures, setIsLoadingTenures] = useState(false)
   const [tenureError, setTenureError] = useState<string | null>(null)
+  const [availablePlans, setAvailablePlans] = useState<{ plan_name: string; plan_code: number }[]>([])
+  const [isLoadingPlans, setIsLoadingPlans] = useState(false)
+  const [planError, setPlanError] = useState<string | null>(null)
+  const [availablePaymentModes, setAvailablePaymentModes] = useState<{ paymode_name: string; paymode_id: number }[]>([])
+  const [isLoadingPaymentModes, setIsLoadingPaymentModes] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<{
     PlanCode: boolean
     Age: boolean
@@ -62,6 +67,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     Gender: false,
   })
   const [currentPaymentMode, setCurrentPaymentMode] = useState<string>('')
+  const [isHoveringPlanSelect, setIsHoveringPlanSelect] = useState(false)
+  const [isHoveringTenureSelect, setIsHoveringTenureSelect] = useState(false)
+  const [isHoveringPaymentSelect, setIsHoveringPaymentSelect] = useState(false)
 
   // Calculate suggested sum assured based on tenure and annual income
   const calculateSuggestedAmount = () => {
@@ -74,33 +82,64 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
 
   const suggestedAmount = calculateSuggestedAmount()
 
-  const plans = [
-    {
-      text: 'Shanta Child Education Plan',
-      videoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
-      code: 1,
-    },
-    {
-      text: 'Shanta Endowment Plan',
-      videoLink: 'https://www.youtube.com/embed/CkKkdNkBk9g',
-      code: 2,
-    },
-    {
-      text: 'Shanta 3 Stage Plan',
-      videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-      code: 3,
-    },
-    {
-      text: 'Shanta 4 Stage Plan',
-      videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-      code: 4,
-    },
-    // {
-    //   text: 'Multi Stage Maturity Plan',
-    //   videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-    //   code: 5,
-    // },
-  ]
+  // Video link mappings for plans
+  const videoLinkMappings = {
+    'Shanta Child Education Plan (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+    'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g', 
+    'Shanta 3 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
+    'Shanta 4 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
+  }
+
+  // Fetch plans from API based on age (same as QuoteForm)
+  const fetchPlans = async (age: number) => {
+    if (!age || age < 18 || age > 65) {
+      setAvailablePlans([])
+      return
+    }
+
+    setIsLoadingPlans(true)
+    setPlanError(null)
+
+    try {
+      const response = await fetch(`/api/plan/0/${age}`)
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch plans')
+      }
+
+      const data = await response.json()
+      console.log('Plans API response:', data)
+
+      if (Array.isArray(data)) {
+        // Define the plan name mappings (same as QuoteForm)
+        const planNameMappings = {
+          'Shanta Endowment': 'Shanta Endowment Plan',
+          'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
+          'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
+          'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
+        }
+
+        // Filter and transform the plans
+        const filteredPlans = data
+          .filter((plan) => planNameMappings.hasOwnProperty(plan.plan_name))
+          .map((plan) => ({
+            ...plan,
+            plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings],
+          }))
+
+        console.log('Filtered and transformed plans:', filteredPlans)
+        setAvailablePlans(filteredPlans)
+      } else {
+        console.log('Unexpected plans API response format:', data)
+        setAvailablePlans([])
+      }
+    } catch (err) {
+      setPlanError(err instanceof Error ? err.message : 'Failed to fetch plans')
+      setAvailablePlans([])
+    } finally {
+      setIsLoadingPlans(false)
+    }
+  }
 
   const genders = [
     { text: 'Male', value: 1 },
@@ -115,13 +154,6 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     { text: '30 years', value: 30 },
   ]
 
-  const paymentMethods = [
-    { text: 'Monthly', value: 4 },
-    { text: 'Quarterly', value: 3 },
-    { text: 'Semi-annually', value: 2 },
-    { text: 'Yearly', value: 1 },
-    // { text: 'Single', value: 5 },
-  ]
 
   const handleInputChange = (field: keyof FormData, value: string | number) => {
     setFormData((prev) => ({
@@ -158,35 +190,51 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       }
 
       const data = await response.json()
-      console.log('check data', data)
+      console.log('Tenure options API response:', data)
 
-      // The API returns an object with a 'term' property containing a JSON string
+      // Parse tenure data from API response (same as QuoteForm)
       if (data && data[0]?.term) {
-        try {
-          // Parse the JSON string to get the array of term objects
-          const termArray = JSON.parse(data[0].term)
-          if (Array.isArray(termArray)) {
-            const tenureOptions = termArray.map((termObj: any) => {
-              console.log('termObj structure:', termObj)
-              console.log('termObj.term value:', termObj.term)
-              console.log('typeof termObj.term:', typeof termObj.term)
+        const termArray = JSON.parse(data[0].term)
+        if (Array.isArray(termArray)) {
+          const tenureOptions = termArray.map((termObj: any) => ({
+            text: `${termObj.term} years`,
+            value: Number(termObj.term),
+          }))
+          setAvailableTenures(tenureOptions)
+        }
+      }
 
-              const termValue = termObj.term
-              console.log('test the term 3', termValue)
-              return {
-                text: `${termValue} years`,
-                value: Number(termValue),
-              }
-            })
-            console.log('Final tenureOptions:', tenureOptions)
-            setAvailableTenures(tenureOptions)
+      // Extract payment modes from the same API response (same as QuoteForm)
+      if (data && data[0]?.pay_mode) {
+        try {
+          let payModeArray
+          if (typeof data[0].pay_mode === 'string') {
+            payModeArray = JSON.parse(data[0].pay_mode)
           } else {
-            console.log('Parsed term is not an array:', termArray)
-            setAvailableTenures([])
+            payModeArray = data[0].pay_mode
+          }
+
+          if (Array.isArray(payModeArray)) {
+            console.log('Payment modes from API:', payModeArray)
+            // Filter out invalid payment modes
+            const validPaymentModes = payModeArray.filter(
+              (mode) =>
+                mode &&
+                typeof mode === 'object' &&
+                mode.paymode_name &&
+                mode.paymode_name.trim() !== '' &&
+                mode.paymode_id !== undefined &&
+                mode.paymode_id !== null,
+            )
+            console.log('Valid payment modes:', validPaymentModes)
+            setAvailablePaymentModes(validPaymentModes)
+          } else {
+            console.log('Payment modes is not an array:', payModeArray)
+            setAvailablePaymentModes([])
           }
         } catch (parseError) {
-          console.error('Failed to parse term JSON:', parseError)
-          setAvailableTenures([])
+          console.error('Failed to parse payment modes:', parseError)
+          setAvailablePaymentModes([])
         }
       } else {
         console.log('Unexpected API response format:', data)
@@ -197,15 +245,36 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       setAvailableTenures([])
     } finally {
       setIsLoadingTenures(false)
+      setIsLoadingPaymentModes(false)
     }
   }
 
-  // Effect to fetch tenure options when plan or age changes
+  // Effect to fetch plans when age changes (same as QuoteForm)
+  useEffect(() => {
+    if (formData.Age) {
+      fetchPlans(formData.Age)
+      // Reset selected plan when age changes
+      setFormData((prev) => ({ ...prev, PlanCode: 0, Term: 0 }))
+      setSelectedPlan(null)
+      setAvailableTenures([])
+    }
+  }, [formData.Age])
+
+  // Effect to fetch tenure options when plan or age changes (same as QuoteForm)
   useEffect(() => {
     if (formData.PlanCode && formData.Age) {
+      setIsLoadingTenures(true)
+      setIsLoadingPaymentModes(true)
       fetchTenureOptions(formData.PlanCode, formData.Age)
-      // Reset selected term when plan or age changes
-      setFormData((prev) => ({ ...prev, Term: 0 }))
+      // Reset selected term and payment mode when plan or age changes
+      setFormData((prev) => ({ ...prev, Term: 0, PaymentMode: 0 }))
+      setCurrentPaymentMode('')
+    } else {
+      // Clear tenure and payment modes when plan or age is not selected
+      setAvailableTenures([])
+      setAvailablePaymentModes([])
+      setIsLoadingTenures(false)
+      setIsLoadingPaymentModes(false)
     }
   }, [formData.PlanCode, formData.Age])
 
@@ -238,15 +307,44 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       const data: ApiResponse[] = await response.json()
       if (data && data.length > 0) {
         setApiResponse(data[0])
-        // Notify parent component about the API response with current payment mode
+        // Notify parent component about the API response with current payment mode and plan name
         if (onApiResponse) {
-          onApiResponse(data[0], currentPaymentMode)
+          const planName = selectedPlan?.plan_name || ''
+          onApiResponse(data[0], currentPaymentMode, planName)
         }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  // Function to get specific error message for each field
+  const getFieldErrorMessage = (field: keyof typeof fieldErrors): string => {
+    if (!fieldErrors[field]) return ''
+    
+    switch (field) {
+      case 'PlanCode':
+        return 'Please select a plan'
+      case 'Age':
+        if (!formData.Age) return 'Please enter your age'
+        if (formData.Age < 18 || formData.Age > 65) return 'Age must be between 18 and 65'
+        return ''
+      case 'annualIncome':
+        return 'Please enter your annual income'
+      case 'SumAssured':
+        if (!formData.SumAssured) return 'Please enter sum assured amount'
+        if (formData.SumAssured < 100000) return 'Sum assured must be at least ৳1,00,000'
+        return ''
+      case 'Term':
+        return 'Please select a tenure'
+      case 'PaymentMode':
+        return 'Please select a payment method'
+      case 'Gender':
+        return 'Please select your gender'
+      default:
+        return ''
     }
   }
 
@@ -282,14 +380,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     const hasErrors = Object.values(errors).some((error) => error)
 
     if (hasErrors) {
-      setError('Please fill in all required fields correctly')
-      return
-    }
-
-    // Additional validation for Sum Assured
-    if (formData.SumAssured < 100000) {
-      setFieldErrors((prev) => ({ ...prev, SumAssured: true }))
-      setError('Sum Assured must be greater than 99,999')
+      // Don't set general error message anymore, field-specific messages will show
       return
     }
 
@@ -306,17 +397,27 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   xl:px-4 xl:py-8 py-8 px-4 z-10"
     >
       {/* plans */}
-      <div className="relative col-span-2 md:col-span-1">
+      <div
+        className="relative col-span-2 md:col-span-1"
+        onMouseEnter={() => setIsHoveringPlanSelect(true)}
+        onMouseLeave={() => setIsHoveringPlanSelect(false)}
+      >
         <Select
+          value={formData.PlanCode && formData.PlanCode > 0 ? availablePlans.find(p => p.plan_code === formData.PlanCode)?.plan_name || "" : ""}
+          disabled={isLoadingPlans || !formData.Age || availablePlans.length === 0}
           onValueChange={(v) => {
-            const plan = plans.find((p) => p.text === v)
-            setSelectedPlan(plan)
+            const plan = availablePlans.find((p) => p.plan_name === v)
+            // Add video link to the selected plan
+            const planWithVideo = plan ? {
+              ...plan,
+              videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings]
+            } : null
+            setSelectedPlan(planWithVideo)
             if (plan) {
               // Reset dependent fields when plan changes
               setFormData((prev) => ({
                 ...prev,
-                PlanCode: plan.code,
-                Age: 0,
+                PlanCode: plan.plan_code,
                 Term: 0,
               }))
               // Clear tenure options until new plan + age combination is selected
@@ -326,7 +427,6 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
               setFieldErrors((prev) => ({
                 ...prev,
                 PlanCode: false,
-                Age: false,
                 Term: false,
               }))
             }
@@ -337,26 +437,48 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
               fieldErrors.PlanCode ? 'border-red-500 border-2' : ''
             }`}
           >
-            <SelectValue placeholder="Select Your Plan *" />
+            <SelectValue
+              placeholder={
+                isLoadingPlans
+                  ? 'Loading plans...'
+                  : availablePlans.length === 0 && formData.Age
+                    ? 'No plans available'
+                    : 'Select Plan'
+              }
+            />
           </SelectTrigger>
+          {/* Custom instant tooltip */}
+          {isHoveringPlanSelect && !formData.Age && (
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
+              Enter your age first
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
+            </div>
+          )}
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Plans</SelectLabel>
-              {plans.map((plan) => (
-                <SelectItem key={plan.text} value={plan.text}>
-                  {plan.text}
+              {availablePlans.map((plan) => (
+                <SelectItem key={plan.plan_code} value={plan.plan_name}>
+                  {plan.plan_name}
                 </SelectItem>
               ))}
+              {availablePlans.length === 0 &&
+                !isLoadingPlans &&
+                formData.Age && (
+                  <SelectItem disabled value="no-options">
+                    No plans available for this age
+                  </SelectItem>
+                )}
             </SelectGroup>
           </SelectContent>
         </Select>
         {/* below a text saying watch video */}
         {/* <p className="text-[10px] py-2 absolute inset-x-0 text-[#FF6600] underline">Watch Video</p> */}
-        {selectedPlan && (
+        {selectedPlan && selectedPlan.videoLink && (
           <Dialog>
             <DialogTrigger asChild>
               <p className="text-[10px] py-1 absolute inset-x-0 text-[#FF6600] underline cursor-pointer">
-                Watch Video
+                Watch {selectedPlan.plan_name} Video
               </p>
             </DialogTrigger>
 
@@ -384,6 +506,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             </DialogContent>
           </Dialog>
         )}
+        {/* Plan selection error message */}
+        {getFieldErrorMessage('PlanCode') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('PlanCode')}
+          </p>
+        )}
       </div>
 
       {/* age input */}
@@ -399,11 +527,22 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             fieldErrors.Age ? 'border-red-500 border-2' : ''
           }`}
         />
+        {/* Age error message */}
+        {getFieldErrorMessage('Age') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('Age')}
+          </p>
+        )}
       </div>
 
       {/* select your tenure */}
-      <div className="col-span-2 md:col-span-1">
+      <div
+        className="col-span-2 md:col-span-1 relative"
+        onMouseEnter={() => setIsHoveringTenureSelect(true)}
+        onMouseLeave={() => setIsHoveringTenureSelect(false)}
+      >
         <Select
+          value={formData.Term && formData.Term > 0 ? availableTenures.find(t => t.value === formData.Term)?.text || "" : ""}
           disabled={
             isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0
           }
@@ -436,6 +575,13 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
               }
             />
           </SelectTrigger>
+          {/* Custom instant tooltip */}
+          {isHoveringTenureSelect && (!formData.PlanCode || !formData.Age) && (
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
+              Select age and plan first
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
+            </div>
+          )}
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Tenure</SelectLabel>
@@ -461,11 +607,18 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         {tenureError && (
           <p className="text-[10px] py-1 text-red-600 absolute inset-x-0">{tenureError}</p>
         )}
+        {/* Tenure error message */}
+        {getFieldErrorMessage('Term') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('Term')}
+          </p>
+        )}
       </div>
 
       {/* gender select  */}
       <div className="col-span-2 md:col-span-1">
         <Select
+          value={formData.Gender !== null && formData.Gender !== undefined ? genders.find(g => g.value === formData.Gender)?.text || "" : ""}
           onValueChange={(v) => {
             const gender = genders.find((g) => g.text === v)
             if (gender) {
@@ -478,7 +631,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
               fieldErrors.Gender ? 'border-red-500 border-2' : ''
             }`}
           >
-            <SelectValue placeholder="Select Your Gender *" />
+            <SelectValue placeholder="Select Gender *" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -491,6 +644,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             </SelectGroup>
           </SelectContent>
         </Select>
+        {/* Gender error message */}
+        {getFieldErrorMessage('Gender') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('Gender')}
+          </p>
+        )}
       </div>
 
       {/* annual income input */}
@@ -505,6 +664,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             fieldErrors.annualIncome ? 'border-red-500 border-2' : ''
           }`}
         />
+        {/* Annual income error message */}
+        {getFieldErrorMessage('annualIncome') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('annualIncome')}
+          </p>
+        )}
       </div>
       {/* sum assured input */}
       <div className="relative col-span-2 md:col-span-1">
@@ -518,9 +683,16 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             fieldErrors.SumAssured ? 'border-red-500 border-2' : ''
           }`}
         />
-        <p className="text-[8px] md:text-[10px] py-2 absolute right-1">
-          Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
-        </p>
+        {/* Show either suggested amount OR error message, not both */}
+        {getFieldErrorMessage('SumAssured') ? (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('SumAssured')}
+          </p>
+        ) : (
+          <p className="text-[8px] md:text-[10px] py-2 absolute right-1">
+            Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
+          </p>
+        )}
       </div>
 
       {/* phone number input */}
@@ -535,13 +707,25 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       </div>
 
       {/* payment method select  */}
-      <div className="col-span-2 md:col-span-1">
+      <div
+        className="col-span-2 md:col-span-1 relative"
+        onMouseEnter={() => setIsHoveringPaymentSelect(true)}
+        onMouseLeave={() => setIsHoveringPaymentSelect(false)}
+      >
         <Select
+          value={formData.PaymentMode && formData.PaymentMode > 0 ? availablePaymentModes.find(pm => pm.paymode_id === formData.PaymentMode)?.paymode_name || "" : ""}
+          disabled={
+            isLoadingPaymentModes || 
+            !formData.PlanCode || 
+            !formData.Age || 
+            !formData.Term || 
+            availablePaymentModes.length === 0
+          }
           onValueChange={(v) => {
-            const method = paymentMethods.find((pm) => pm.text === v)
+            const method = availablePaymentModes.find((pm) => pm.paymode_name === v)
             if (method) {
-              handleInputChange('PaymentMode', method.value)
-              setCurrentPaymentMode(method.text)
+              handleInputChange('PaymentMode', method.paymode_id)
+              setCurrentPaymentMode(method.paymode_name)
             }
           }}
         >
@@ -550,19 +734,67 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
               fieldErrors.PaymentMode ? 'border-red-500 border-2' : ''
             }`}
           >
-            <SelectValue placeholder="Select Your Payment Method *" />
+            <SelectValue
+              placeholder={
+                isLoadingPaymentModes
+                  ? 'Loading payment methods...'
+                  : !formData.PlanCode || !formData.Age || !formData.Term
+                    ? 'Select plan, age & term first'
+                    : availablePaymentModes.length === 0
+                      ? 'No payment methods available'
+                      : 'Select Payment Method'
+              }
+            />
           </SelectTrigger>
+          {/* Custom instant tooltip */}
+          {isHoveringPaymentSelect && (!formData.PlanCode || !formData.Age || !formData.Term) && (
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
+              Select plan, age & term first
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
+            </div>
+          )}
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Payment Method</SelectLabel>
-              {paymentMethods.map((paymentMethod) => (
-                <SelectItem key={paymentMethod.text} value={paymentMethod.text}>
-                  {paymentMethod.text}
-                </SelectItem>
-              ))}
+              {availablePaymentModes
+                .map((paymentMethod, index) => {
+                  // Ensure we have valid data before rendering
+                  if (
+                    !paymentMethod ||
+                    !paymentMethod.paymode_name ||
+                    paymentMethod.paymode_name.trim() === ''
+                  ) {
+                    return null
+                  }
+
+                  return (
+                    <SelectItem
+                      key={`payment-${paymentMethod.paymode_id}-${paymentMethod.paymode_name}-${index}`}
+                      value={paymentMethod.paymode_name}
+                    >
+                      {paymentMethod.paymode_name}
+                    </SelectItem>
+                  )
+                })
+                .filter(Boolean)}
+              {availablePaymentModes.length === 0 &&
+                !isLoadingPaymentModes &&
+                formData.PlanCode &&
+                formData.Age &&
+                formData.Term && (
+                  <SelectItem disabled value="no-options">
+                    No payment methods available
+                  </SelectItem>
+                )}
             </SelectGroup>
           </SelectContent>
         </Select>
+        {/* Payment Method error message */}
+        {getFieldErrorMessage('PaymentMode') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('PaymentMode')}
+          </p>
+        )}
       </div>
 
       {/* name input */}
@@ -587,12 +819,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         />
       </div>
 
-      {/* Error display */}
-      {error && (
-        <div className="col-span-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-          {error}
-        </div>
-      )}
+      {/* General error display removed - using field-specific errors now */}
       {/* submit button */}
       <div className="col-span-2 items-center px-4 flex flex-col gap-6 lg:gap-6 justify-center">
         <Button
@@ -606,9 +833,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           and future goals. Whether you're just starting your career or planning for retirement, we
           are with you at every step.
         </p>
-        <p className="text-[10.5px] md:text-[12px] text-[#434343] underline">
+        {/* <p className="text-[10.5px] md:text-[12px] text-[#434343] underline">
           Have Questions? Ask Us! 
-        </p>
+        </p> */}
       </div>
     </form>
   )

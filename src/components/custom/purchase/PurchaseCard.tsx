@@ -14,9 +14,27 @@ type PurchaseCardProps = {
 
 const PurchaseCard: FC<PurchaseCardProps> = ({ data, blur, onExplore }: PurchaseCardProps) => {
   const [open, setOpen] = useState(false)
+  
+  const openModal = () => {
+    if (onExplore) {
+      onExplore();
+    } else {
+      setOpen(true);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openModal();
+    }
+  };
   return (
     <>
       <div
+      role="button"
+       onClick={openModal}
+        onKeyDown={handleKeyDown}
         className="group relative overflow-hidden w-full mx-auto md:w-full 
     h-[250px] md:h-[250px] lg:h-[250px] xl:h-[300px] 2xl:h-[360px] 
     cursor-pointer

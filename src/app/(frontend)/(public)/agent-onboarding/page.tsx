@@ -20,7 +20,7 @@ function page({}: Props) {
     {
       title: 'Turn your Ambition, Into Impact ',
       subtitle: '',
-      description: 'Stay beyond the Ordinary, step into a role that builds futures.',
+      description: 'Stay beyond the ordinary, step into a role that builds futures.',
       image: '/assets/agentHeroBanner.jpg',
     },
   ]
@@ -148,10 +148,10 @@ function page({}: Props) {
       },
     ],
     sectionRight: {
-      avatar: '/assets/board-of-directors/abrar-anwar.jpg',
-      name: 'Khondoker Khalil Ahamed',
+      avatar: '/assets/agent-onboarding-life.jpg',
+      name: 'Tarafder Mohammad Fahim',
       quote:
-        'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Asset Management.',
+        'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Life.',
     },
   }
 
@@ -172,7 +172,15 @@ function page({}: Props) {
     },
     {
       image: '/assets/role4.svg',
-      title: 'Train. Grow. Lead.',
+      title: 'Learn, Earn, Grow',
+    },
+    {
+      image: '/assets/role5.png',
+      title: 'Take Charge of your career',
+    },
+    {
+      image: '/assets/role6.png',
+      title: 'Help secure lives',
     },
   ]
   const visionData = [
@@ -191,7 +199,7 @@ function page({}: Props) {
       points: [
         'Excellent communications and networking skills',
         'Self motivated to build a future in sales',
-        'Preferebly compeleted undergrad from any UGC approved university ',
+        'Graduates and current students from any recognized university or college can apply',
       ],
     },
   ]

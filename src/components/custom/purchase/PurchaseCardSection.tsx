@@ -23,13 +23,13 @@ const PurchaseCardSection: FC<PurchaseCardSectionProps> = ({ blur }) => {
       title: 'Child Education',
       description: 'A brighter future starts with a thoughtful plan',
 
-      image: '/assets/purchase/purchaseCard2.jpg',
+      image: '/assets/purchase/child-education.jpg',
     },
     {
       title: 'Shanta Multi-Stage Maturity Plans',
       description: `Life happens. We make sure you're ready.`,
 
-      image: '/assets/purchase/purchaseCard3.jpg',
+      image: '/assets/purchase/purchaseCard33.jpg',
     },
   ]
   return (

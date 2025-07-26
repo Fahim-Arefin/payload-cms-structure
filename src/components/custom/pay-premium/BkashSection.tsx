@@ -12,7 +12,7 @@ type Props = {
 function BkashSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
   return (
     <div
-      className="container-padding"
+      // className="container-padding"
       style={{
         backgroundColor: bgColor,
       }}

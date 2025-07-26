@@ -127,7 +127,7 @@ function SupportPage() {
           office_phone: '09610889900 (10 am to 6 pm, Sunday to Thursday)',
         },
         {
-          office_location_Label: 'Chittagong Branch',
+          office_location_Label: 'Chattogram Branch',
           office_location:
             '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.842462113068!2d91.8117762!3d22.321797000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30acdf3566b1bfbd%3A0x12d6963aaefdf18f!2sAyub%20Trade%20Center!5e0!3m2!1sen!2sbd!4v1752958082561!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
           office_address:
@@ -164,16 +164,16 @@ function SupportPage() {
           office_phone: '+880 1711 035 050 (10 am to 6 pm, Sunday to Thursday)',
         },
         {
-          office_location_Label: 'Evercare Hospitals, Chittagong',
+          office_location_Label: 'Evercare Hospitals, Chattogram',
           office_location:
             '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3688.7201832219216!2d91.8469776760242!3d22.401903739203593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30ad2782e6299a61%3A0x459db4c66339430c!2sEvercare%20Hospital%20Chattogram!5e0!3m2!1sen!2sbd!4v1752960331706!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
           office_address:
-            'Plot- H1, Ananya R/A, Chittagong Development Authority, Hathazari, Chittagong, Bangladesh',
+            'Plot- H1, Ananya R/A, Chattogram Development Authority, Hathazari, Chattogram, Bangladesh',
           office_email: 'corporate.chattrogram@evercare.com',
           office_phone: '+880 1729 043 247 (10 am to 6 pm, Sunday to Thursday)',
         },
         {
-          office_location_Label: 'Apollo Imperial Hospitals, Chittagong',
+          office_location_Label: 'Apollo Imperial Hospitals, Chattogram',
           office_location:
             '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3689.8521894733467!2d91.79286187602335!3d22.35920934075615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30acd8e328704ffd%3A0x518c4a1ca25f627e!2sApollo%20Imperial%20Hospitals!5e0!3m2!1sen!2sbd!4v1752960458659!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
           office_address: 'Zakir Hossain Road, Pahartali, Chattogram 4202',

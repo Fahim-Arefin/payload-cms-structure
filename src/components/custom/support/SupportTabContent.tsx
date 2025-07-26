@@ -117,16 +117,22 @@ function SupportTabContent({ data, activeTab }: Props) {
   const isHospital = activeTab === 'hospitals'
   const entries = isHospital ? data[1]?.content || [] : data[0]?.content || []
 
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [selectedItemKey, setSelectedItemKey] = useState(0) // for memo map
+  const [selectedIndex, setSelectedIndex] = useState(isHospital ? -1 : 0) // Hospitals: no selection, Branches: first item
+  const [selectedItemKey, setSelectedItemKey] = useState(isHospital ? -1 : 0) // for memo map
   const [searchTerm, setSearchTerm] = useState('')
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    setSelectedIndex(0)
-    setSelectedItemKey(0)
+    // Reset based on tab type
+    if (isHospital) {
+      setSelectedIndex(-1) // No selection for hospitals
+      setSelectedItemKey(-1)
+    } else {
+      setSelectedIndex(0) // First item selected for branches
+      setSelectedItemKey(0)
+    }
     setSearchTerm('')
-  }, [activeTab, data])
+  }, [activeTab, data, isHospital])
 
   const filteredItems = useMemo(() => {
     if (!isHospital) return entries
@@ -147,7 +153,7 @@ function SupportTabContent({ data, activeTab }: Props) {
     setSelectedItemKey(index)
   }
 
-  const selectedItem = entries[selectedIndex]
+  const selectedItem = selectedIndex >= 0 ? entries[selectedIndex] : null
 
   const memoizedMap = useMemo(() => {
     return selectedItem ? (
@@ -157,28 +163,29 @@ function SupportTabContent({ data, activeTab }: Props) {
 
   return (
     <div>
-      <div className="px-5 pb-[16px] md:px-24 md:pb-0 lg:px-[130px] lg:pb-[50px] xl:px-[200px] xl:pb-[50px] 2xl:px-[300px] 2xl:pb-[50px] mb-6 lg:mb-0">
-        <h1 className="global-h3 w-[75%] lg:w-full font-semibold lg:font-normal mb-[16px] md:mb-[20px] lg:mb-[30px] xl:mb-[60px]">
+      <div className="px-5 pt-0 pb-[8px] md:px-24 md:pt-0 md:pb-0 lg:px-[130px] lg:pt-0 lg:pb-[20px] xl:px-[200px] xl:pt-0 xl:pb-[20px] 2xl:px-[300px] 2xl:pt-0 2xl:pb-[20px] mb-3 lg:mb-0">
+        <h1 className="global-h3 w-[75%] lg:w-full font-semibold lg:font-normal mb-[8px] md:mb-[10px] lg:mb-[12px] xl:mb-[16px]">
           {isHospital
             ? 'Search and find our panel hospitals by district.'
             : 'Come and visit us at any of our branches. We are here to assist you.'}
         </h1>
 
         {isHospital ? (
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                role="combobox"
-                className="w-[70%] md:w-[300px] justify-between h-[40px] md:h-[45px] lg:h-[50px] overflow-hidden truncate"
-              >
+          <div className="mb-2 mt-1">
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  className="w-[70%] md:w-[300px] justify-between h-[40px] md:h-[45px] lg:h-[50px] overflow-hidden truncate"
+                >
                 <span className="truncate">
-                  {entries[selectedIndex]?.office_location_Label ?? 'Search & Select a Hospital'}
+                  {selectedIndex >= 0 ? entries[selectedIndex]?.office_location_Label : 'Select any hospital'}
                 </span>
                 <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[300px] p-0">
+            <PopoverContent className="w-[300px] p-0 mt-1">
               <div className="p-2">
                 <Input
                   placeholder="Type district (e.g., Chittagong)"
@@ -216,6 +223,7 @@ function SupportTabContent({ data, activeTab }: Props) {
               </div>
             </PopoverContent>
           </Popover>
+          </div>
         ) : (
           <Select onValueChange={handleBranchSelect} defaultValue="0">
             <SelectTrigger className="w-[70%] md:w-[300px] bg-white text-[#6B6565] h-[40px] md:h-[45px] lg:h-[50px] overflow-hidden truncate">
@@ -234,8 +242,8 @@ function SupportTabContent({ data, activeTab }: Props) {
         )}
       </div>
 
-      {/* ✅ Map only re-renders on tab or selection change */}
-      {memoizedMap}
+      {/* ✅ Map shows for branches (always) and hospitals (when selected) */}
+      {(!isHospital || selectedIndex >= 0) && memoizedMap}
 
       <div className="lg:hidden pl-5 md:pl-24 md:pt-4 space-y-5">
         <div className="flex space-x-2">
