@@ -9,8 +9,7 @@ function page() {
     {
       title: 'Pay Premium',
       subtitle: '',
-      description:
-        'Powering your protection starts here..',
+      description: 'Powering your protection starts here..',
       image: '/assets/pay-premium-2.jpg',
     },
   ]
@@ -46,7 +45,7 @@ function page() {
     ],
   }
   const bankData = {
-    bgImage: '/assets/bank.jpg',
+    bgImage: '/assets/bank_teller.jpg',
     item: [
       {
         image: '/assets/protection5.png',
