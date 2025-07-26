@@ -25,6 +25,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
       case 'Quarterly':
         return 'quarterly'
       case 'Semi-annually':
+      case 'Half Yearly':
         return 'half_yearly'
       case 'Yearly':
         return 'yearly'
@@ -125,28 +126,28 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
         <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
           <div
             className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
-              confirmedPaymentMode === 'Semi-annually'
+              confirmedPaymentMode === 'Half Yearly'
                 ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
                 : 'text-[#1E1E1E]'
             }`}
           >
-            Semi-annually
+            Half Yearly
           </div>
           <div
             className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
-              confirmedPaymentMode === 'Semi-annually'
+              confirmedPaymentMode === 'Half Yearly'
                 ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
                 : 'text-[#1E1E1E]'
             }`}
           >
             <AnimatedCounter
               value={
-                confirmedPaymentMode === 'Semi-annually'
-                  ? getTotalPremiumWithCoverage('Semi-annually')
-                  : getTotalPremium(apiResponse, 'Semi-annually')?.lifePremium.half_yearly || 0
+                confirmedPaymentMode === 'Half Yearly'
+                  ? getTotalPremiumWithCoverage('Half Yearly')
+                  : getTotalPremium(apiResponse, 'Half Yearly')?.lifePremium.half_yearly || 0
               }
               prefix="৳"
-              showAnimation={confirmedPaymentMode === 'Semi-annually'}
+              showAnimation={confirmedPaymentMode === 'Half Yearly'}
               duration={800}
             />
           </div>

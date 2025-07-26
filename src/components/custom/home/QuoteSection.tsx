@@ -243,6 +243,7 @@ function QuoteSection() {
       case 'Quarterly':
         return 'quarterly'
       case 'Semi-annually':
+      case 'Half Yearly':
         return 'half_yearly'
       case 'Yearly':
         return 'yearly'
@@ -304,15 +305,19 @@ function QuoteSection() {
 
               <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
                 <div
-                  className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
-                    confirmedPaymentMode === 'Monthly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                  className={`font-medium text-center ${
+                    confirmedPaymentMode === 'Monthly'
+                      ? 'text-[#ED7125] text-[14px] lg:text-[16px] xl:text-[18px]'
+                      : 'text-[#1E1E1E] text-[12px] lg:text-[14px] xl:text-[16px]'
                   }`}
                 >
                   Monthly
                 </div>
                 <div
-                  className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
-                    confirmedPaymentMode === 'Monthly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                  className={`font-bold text-center ${
+                    confirmedPaymentMode === 'Monthly'
+                      ? 'text-[#ED7125] text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
+                      : 'text-[#1E1E1E] text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
                   }`}
                 >
                   <AnimatedCounter
@@ -329,15 +334,19 @@ function QuoteSection() {
               </div>
               <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
                 <div
-                  className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
-                    confirmedPaymentMode === 'Quarterly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                  className={`font-medium text-center ${
+                    confirmedPaymentMode === 'Quarterly'
+                      ? 'text-[#ED7125] text-[14px] lg:text-[16px] xl:text-[18px]'
+                      : 'text-[#1E1E1E] text-[12px] lg:text-[14px] xl:text-[16px]'
                   }`}
                 >
                   Quarterly
                 </div>
                 <div
-                  className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
-                    confirmedPaymentMode === 'Quarterly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                  className={`font-bold text-center ${
+                    confirmedPaymentMode === 'Quarterly'
+                      ? 'text-[#ED7125] text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
+                      : 'text-[#1E1E1E] text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
                   }`}
                 >
                   <AnimatedCounter
@@ -354,41 +363,48 @@ function QuoteSection() {
               </div>
               <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
                 <div
-                  className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
-                    confirmedPaymentMode === 'Semi-annually' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                  className={`font-medium text-center ${
+                    confirmedPaymentMode === 'Half Yearly'
+                      ? 'text-[#ED7125] text-[14px] lg:text-[16px] xl:text-[18px]'
+                      : 'text-[#1E1E1E] text-[12px] lg:text-[14px] xl:text-[16px]'
                   }`}
                 >
-                  Semi-annually
+                  Half Yearly
                 </div>
                 <div
-                  className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
-                    confirmedPaymentMode === 'Semi-annually' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                  className={`font-bold text-center ${
+                    confirmedPaymentMode === 'Half Yearly'
+                      ? 'text-[#ED7125] text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
+                      : 'text-[#1E1E1E] text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
                   }`}
                 >
                   <AnimatedCounter
                     value={
-                      confirmedPaymentMode === 'Semi-annually'
-                        ? getTotalPremiumWithCoverage('Semi-annually')
-                        : getTotalPremium(apiResponse, 'Semi-annually')?.lifePremium.half_yearly ||
-                          0
+                      confirmedPaymentMode === 'Half Yearly'
+                        ? getTotalPremiumWithCoverage('Half Yearly')
+                        : getTotalPremium(apiResponse, 'Half Yearly')?.lifePremium.half_yearly || 0
                     }
                     prefix="৳"
-                    showAnimation={confirmedPaymentMode === 'Semi-annually'}
+                    showAnimation={confirmedPaymentMode === 'Half Yearly'}
                     duration={800}
                   />
                 </div>
               </div>
               <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
                 <div
-                  className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
-                    confirmedPaymentMode === 'Yearly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                  className={`font-medium text-center ${
+                    confirmedPaymentMode === 'Yearly'
+                      ? 'text-[#ED7125] text-[16px] lg:text-[18px] xl:text-[20px]'
+                      : 'text-[#1E1E1E] text-[12px] lg:text-[14px] xl:text-[16px]'
                   }`}
                 >
                   Yearly
                 </div>
                 <div
-                  className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
-                    confirmedPaymentMode === 'Yearly' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
+                  className={`font-bold text-center ${
+                    confirmedPaymentMode === 'Yearly'
+                      ? 'text-[#ED7125] text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
+                      : 'text-[#1E1E1E] text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
                   }`}
                 >
                   <AnimatedCounter
