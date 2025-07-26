@@ -59,6 +59,12 @@ function page({}: Props) {
       description:
         'Enhance retention with data-backed care solutions, managed by a team of dedicated experts.',
     },
+    {
+      icon: '/assets/corporate-bullet.png',
+      text: 'Lifestyle Benefits',
+      description:
+        'Lifestyle Benefit and Discount facility with the Willingness Pass.',
+    },
   ]
 
   const suitabilityData = [

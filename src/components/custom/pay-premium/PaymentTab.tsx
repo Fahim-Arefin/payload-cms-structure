@@ -27,13 +27,21 @@ export function ArrowIcon() {
   )
 }
 
+type PaymentItem = {
+  descriptionContent: string
+}
+
+type PaymentData = {
+  item: PaymentItem[]
+}
+
 type Props = {
   config: {
     value: string
     label: string
   }[]
-  data?: any
-  rocketData?: any
+  data?: PaymentData
+  rocketData?: PaymentData
 }
 
 export default function PaymentTab({ config, data, rocketData }: Props) {
