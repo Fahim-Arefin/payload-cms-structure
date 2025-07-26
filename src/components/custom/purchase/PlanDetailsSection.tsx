@@ -77,15 +77,15 @@ const PlanDetailsSection: FC<PlanDetailsSectionProps> = ({ planCode }) => {
               <div className="flex flex-col justify-center items-start gap-6 text-[12px] md:global-p2">
                 <div className="flex gap-2 items-center">
                   <FaCircle size={10} color="#F79646" className="" />
-                  <span>1/3 of the policy term - (25%)</span>
+                  <span>1/3 of the policy term - (25% of sum assured)</span>
                 </div>
                 <div className="flex gap-2 items-center">
                   <FaCircle size={10} color="#254525" className="" />
-                  <span>2/3 of the policy term - (25%)</span>
+                  <span>2/3 of the policy term - (25% of sum assured)</span>
                 </div>
                 <div className="flex gap-2 items-center">
                   <FaCircle size={10} color="#583382" className="" />
-                  <span>Remaining Sum Assured - (50%)</span>
+                  <span>Remaining Sum Assured - (50% of sum assured)</span>
                 </div>
               </div>
             </div>
@@ -147,19 +147,19 @@ const PlanDetailsSection: FC<PlanDetailsSectionProps> = ({ planCode }) => {
               <div className="flex flex-col justify-center items-start gap-6 text-[12px] md:global-p2">
                 <div className="flex gap-2 items-center">
                   <FaCircle size={10} color="#F79646" className="" />
-                  <span>1st Stage - (15%)</span>
+                  <span>1st Stage - (15% of sum assured)</span>
                 </div>
                 <div className="flex gap-2 items-center">
                   <FaCircle size={10} color="#7F2D23" className="" />
-                  <span>2nd Stage - (15%)</span>
+                  <span>2nd Stage - (15% of sum assured)</span>
                 </div>
                 <div className="flex gap-2 items-center">
                   <FaCircle size={10} color="#254525" className="" />
-                  <span>3rd Stage - (15%)</span>
+                  <span>3rd Stage - (15% of sum assured)</span>
                 </div>
                 <div className="flex gap-2 items-center">
                   <FaCircle size={10} color="#583382" className="" />
-                  <span>Final Maturity - (55%)</span>
+                  <span>Final Maturity - (55% of sum assured)</span>
                 </div>
               </div>
             </div>

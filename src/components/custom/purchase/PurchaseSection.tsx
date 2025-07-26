@@ -17,7 +17,7 @@ interface FormData {
   SumAssured: number
   Term: number
   PaymentMode: number
-  Gender: number
+  Gender: number | null
   phoneNumber: string
   annualIncome: number
   name: string
@@ -34,7 +34,7 @@ const PurchaseSection = (props: Props) => {
       SumAssured: 0,
       Term: 0,
       PaymentMode: 0,
-      Gender: 0,
+      Gender: null,
       phoneNumber: '',
       annualIncome: 0,
       name: '',

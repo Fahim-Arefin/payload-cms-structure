@@ -22,7 +22,7 @@ type FormData = {
   SumAssured: number
   Term: number
   PaymentMode: number
-  Gender: number
+  Gender: number | null
   phoneNumber: string
   annualIncome: number
   name: string
@@ -631,7 +631,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
               fieldErrors.Gender ? 'border-red-500 border-2' : ''
             }`}
           >
-            <SelectValue placeholder="Select Your Gender *" />
+            <SelectValue placeholder="Select Gender *" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
