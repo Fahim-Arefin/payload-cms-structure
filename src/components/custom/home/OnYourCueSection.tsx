@@ -89,10 +89,10 @@ function OnYourCueSection() {
             ))}
           </CarouselContent>
           {/* Top Center Controls */}
-          <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          {/* <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-20 flex gap-2">
             <CarouselPrevious className="static bg-transparent border-2 border-[#1E1E1E80] rounded-md" />
             <CarouselNext className="static bg-transparent border-2 border-[#1E1E1E80] rounded-md" />
-          </div>
+          </div> */}
         </Carousel>
       </div>
       {/* Let’s Find More button */}
