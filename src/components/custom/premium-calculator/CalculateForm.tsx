@@ -403,6 +403,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         onMouseLeave={() => setIsHoveringPlanSelect(false)}
       >
         <Select
+          value={formData.PlanCode && formData.PlanCode > 0 ? availablePlans.find(p => p.plan_code === formData.PlanCode)?.plan_name || "" : ""}
           disabled={isLoadingPlans || !formData.Age || availablePlans.length === 0}
           onValueChange={(v) => {
             const plan = availablePlans.find((p) => p.plan_name === v)
@@ -541,6 +542,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         onMouseLeave={() => setIsHoveringTenureSelect(false)}
       >
         <Select
+          value={formData.Term && formData.Term > 0 ? availableTenures.find(t => t.value === formData.Term)?.text || "" : ""}
           disabled={
             isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0
           }
@@ -616,6 +618,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       {/* gender select  */}
       <div className="col-span-2 md:col-span-1">
         <Select
+          value={formData.Gender !== null && formData.Gender !== undefined ? genders.find(g => g.value === formData.Gender)?.text || "" : ""}
           onValueChange={(v) => {
             const gender = genders.find((g) => g.text === v)
             if (gender) {
@@ -710,6 +713,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         onMouseLeave={() => setIsHoveringPaymentSelect(false)}
       >
         <Select
+          value={formData.PaymentMode && formData.PaymentMode > 0 ? availablePaymentModes.find(pm => pm.paymode_id === formData.PaymentMode)?.paymode_name || "" : ""}
           disabled={
             isLoadingPaymentModes || 
             !formData.PlanCode || 
