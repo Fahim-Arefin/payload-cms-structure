@@ -11,7 +11,7 @@ const page: FC<pageProps> = ({}) => {
       title: 'Claim',
       subtitle: '',
       description:
-        'Powering your protection starts here. Flexible Premium Payment options so we can ensure your protection coverage.',
+        'Experience a hassle-free, seamless claims journey- submit, track, and settle your claim in just 3 Days!  ',
       image: '/assets/claims.jpg',
     },
   ]

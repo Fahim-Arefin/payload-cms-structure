@@ -69,7 +69,7 @@ export function ClaimTabs({ config }: Props) {
                     : 'text-[#434343]',
                 )}
               >
-                {(() => {
+                {/* {(() => {
                   const words = tab.label.trim().split(' ')
                   const last = words.pop()
                   return (
@@ -82,7 +82,14 @@ export function ClaimTabs({ config }: Props) {
                       </span>
                     </>
                   )
-                })()}
+                })()} */}
+                {
+                  <span
+                    className={` ${activeTab === tab.value ? ' text-[#ED7125] ' : ' text-[#434343] '}`}
+                  >
+                    {tab.label}
+                  </span>
+                }
               </TabsTrigger>
             ))}
           </TabsList>
