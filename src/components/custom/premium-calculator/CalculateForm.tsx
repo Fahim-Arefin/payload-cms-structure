@@ -770,9 +770,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           and future goals. Whether you're just starting your career or planning for retirement, we
           are with you at every step.
         </p>
-        <p className="text-[10.5px] md:text-[12px] text-[#434343] underline">
+        {/* <p className="text-[10.5px] md:text-[12px] text-[#434343] underline">
           Have Questions? Ask Us! 
-        </p>
+        </p> */}
       </div>
     </form>
   )

@@ -20,7 +20,7 @@ function page({}: Props) {
     {
       title: 'Turn your Ambition, Into Impact ',
       subtitle: '',
-      description: 'Stay beyond the Ordinary, step into a role that builds futures.',
+      description: 'Stay beyond the ordinary, step into a role that builds futures.',
       image: '/assets/agentHeroBanner.jpg',
     },
   ]
@@ -172,7 +172,7 @@ function page({}: Props) {
     },
     {
       image: '/assets/role4.svg',
-      title: 'Train. Grow. Lead.',
+      title: 'Learn, Earn, Grow',
     },
   ]
   const visionData = [
@@ -191,7 +191,7 @@ function page({}: Props) {
       points: [
         'Excellent communications and networking skills',
         'Self motivated to build a future in sales',
-        'Preferebly compeleted undergrad from any UGC approved university ',
+        'Graduates and current students from any recognized university or college can apply',
       ],
     },
   ]

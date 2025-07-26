@@ -10,7 +10,7 @@ function page() {
       title: 'Pay Premium',
       subtitle: '',
       description:
-        'Powering your protection starts here.. Flexible Premium Payment options so we can ensure your protection coverage..',
+        'Powering your protection starts here..',
       image: '/assets/pay-premium-2.jpg',
     },
   ]
