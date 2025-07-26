@@ -30,7 +30,7 @@ type FormData = {
 }
 
 type Props = {
-  onApiResponse?: (response: ApiResponse, paymentMode: string) => void
+  onApiResponse?: (response: ApiResponse, paymentMode: string, planName?: string) => void
   formData: FormData
   setFormData: React.Dispatch<React.SetStateAction<FormData>>
 }
@@ -307,9 +307,10 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       const data: ApiResponse[] = await response.json()
       if (data && data.length > 0) {
         setApiResponse(data[0])
-        // Notify parent component about the API response with current payment mode
+        // Notify parent component about the API response with current payment mode and plan name
         if (onApiResponse) {
-          onApiResponse(data[0], currentPaymentMode)
+          const planName = selectedPlan?.plan_name || ''
+          onApiResponse(data[0], currentPaymentMode, planName)
         }
       }
     } catch (err) {

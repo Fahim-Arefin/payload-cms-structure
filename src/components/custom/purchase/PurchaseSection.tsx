@@ -27,6 +27,7 @@ interface FormData {
 const PurchaseSection = (props: Props) => {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
+  const [selectedPlanName, setSelectedPlanName] = useState<string>('')
     const [formData, setFormData] = useState<FormData>({
       PlanCode: 0,
       Age: 0,
@@ -41,10 +42,44 @@ const PurchaseSection = (props: Props) => {
     })
     const [calculatedPlanCode, setCalculatedPlanCode] = useState<number | null>(null)
 
-  const handleApiResponse = (response: ApiResponse, paymentMode: string) => {
+  const handleApiResponse = (response: ApiResponse, paymentMode: string, planName?: string) => {
     setApiResponse(response)
     setConfirmedPaymentMode(paymentMode)
     setCalculatedPlanCode(formData.PlanCode)
+    if (planName) {
+      setSelectedPlanName(planName)
+    }
+  }
+
+  // Map plan names to PlanDetailsSection expected codes
+  const getPlanDetailsCode = (planName?: string): number => {
+    // Map plan names to PlanDetailsSection codes
+    const planNameToCode: { [key: string]: number } = {
+      'Shanta Child Education Plan (3%)': 1,
+      'Shanta Endowment Plan': 2, 
+      'Shanta 3 Stage Plan': 3,
+      'Shanta 4 Stage Plan': 4,
+    }
+    
+    // If we have the selected plan name, use it for mapping
+    if (selectedPlanName && planNameToCode[selectedPlanName]) {
+      return planNameToCode[selectedPlanName]
+    }
+    
+    // If no plan name is available, try to use the provided plan name parameter
+    if (planName && planNameToCode[planName]) {
+      return planNameToCode[planName]
+    }
+    
+    // Fallback: try to match partial names
+    if (selectedPlanName) {
+      if (selectedPlanName.includes('Child Education')) return 1
+      if (selectedPlanName.includes('Endowment')) return 2  
+      if (selectedPlanName.includes('3 Stage')) return 3
+      if (selectedPlanName.includes('4 Stage')) return 4
+    }
+    
+    return 1 // Default fallback to show something
   }
    const plans = [
     {
@@ -108,7 +143,7 @@ const PurchaseSection = (props: Props) => {
           {apiResponse ? (
             <div>
               
-              <PlanDetailsSection planCode={formData.PlanCode} plans={plans}/>
+              <PlanDetailsSection planCode={getPlanDetailsCode()} plans={plans}/>
               <PurchaseCalculateSection
                 confirmedPaymentMode={confirmedPaymentMode}
                 getTotalPremium={getTotalPremium}
