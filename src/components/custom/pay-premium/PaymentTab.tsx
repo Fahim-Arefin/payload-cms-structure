@@ -37,8 +37,8 @@ type Props = {
 }
 
 export default function PaymentTab({ config, data, rocketData }: Props) {
-  const [activeTab, setActiveTab] = useState(config[0].value)
-  console.log(activeTab)
+  const [activeTab, setActiveTab] = useState('bkash')
+  
   return (
     <div
       className="px-5 py-12 
@@ -47,107 +47,132 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
            xl:px-[200px]  xl:py-[100px] 
            2xl:px-[300px] 2xl:py-[100px] bg-[#FCF4EB] "
     >
-      <div>
+      <div className="hidden">
         <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium mb-10">
           Payment With{' '}
           <span className="global-h1 uppercase text-[#ED7125] font-medium">Bkash & Rocket</span>
         </h1>
       </div>
-      <Tabs
-        defaultValue={config[0].value}
-        value={activeTab}
-        onValueChange={setActiveTab}
-        className="p-2"
-      >
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-6 xl:gap-9 2xl:gap-16">
+        {/* Left - Single Static Image */}
         <div
-          className="relative w-full border-b border-[#434343] md:py-[12px] bg-[#FCF4EB]
-         md:mb-[30px] lg:mb-[50px] xl:mb-[80px]"
-        >
-          <TabsList className={`w-full flex justify-between bg-[#FCF4EB] p-0 `}>
-            {config.map((tab, index) => (
-              <TabsTrigger
-                key={tab.value}
-                value={tab.value}
-                className={cn(
-                  'global-p1 font-medium px-2 py-2.5 md:py-[22px] lg:py-[23px] xl:py-[24px] uppercase relative flex justify-center',
-                  index === 0 ? 'pl-0' : '',
-                  config?.length === 2 && 'w-[45%] text-center',
-                  activeTab === tab.value
-                    ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
-                    : 'text-[#434343]',
-                )}
-              >
-                {(() => {
-                  const words = tab.label.trim().split(' ')
-                  const last = words.pop()
-                  return (
-                    <>
-                      {words.join(' ')}{' '}
-                      <span
-                        className={` ${activeTab === tab.value ? ' text-[#ED7125] ' : ' text-[#9C8639] '} ml-1 md:ml-2`}
-                      >
-                        {last}
-                      </span>
-                    </>
-                  )
-                })()}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          className="relative w-full lg:w-[93%] xl:w-full
+            h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px]
+            rounded-[8px] md:rounded-[10px] lg:rounded-[8px] xl:rounded-[12px] 
+            bg-no-repeat bg-center
+            bg-contain
+            mt-12 order-1 flex-shrink-0"
+          style={{ backgroundImage: `url(/assets/bkash-roket.png)` }}
+          role="img"
+          aria-label="Background image"
+        ></div>
 
-          {/* Dynamic Arrows */}
-          {config.length > 1 &&
-            config.slice(1).map((_, i) => {
-              const percent = ((i + 1) / config.length) * 100
-              return (
+        {/* Right - Tabbed Content */}
+        <div className="flex flex-col mt-10 lg:mt-0 order-2">
+          
+          {/* Title */}
+          <div className="hidden lg:block lg:mb-6 2xl:mb-12">
+            <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
+              Payment Using{' '}
+              <span className="global-h1 uppercase text-[#ED7125] font-medium">bKash & Rocket</span>
+            </h1>
+          </div>
+          
+          <div className="lg:hidden mb-6">
+            <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
+              Payment Using{' '}
+              <span className="global-h1 uppercase text-[#ED7125] font-medium">bKash & Rocket</span>
+            </h1>
+          </div>
+
+          {/* Tabs */}
+          <Tabs
+            defaultValue="bkash"
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className=""
+          >
+            <div
+              className="relative w-full border-b border-[#434343] md:py-[12px] bg-[#FCF4EB]
+             mb-[16px] md:mb-[20px] lg:mb-[30px]"
+            >
+              <TabsList className="w-full flex justify-start bg-[#FCF4EB] p-0 space-x-[10%]">
+                <TabsTrigger
+                  value="bkash"
+                  className={cn(
+                    'global-p1 font-medium px-2 py-2.5 md:py-[16px] uppercase relative flex justify-center pl-0 bg-transparent data-[state=active]:bg-transparent',
+                    'w-[40%] text-center',
+                    activeTab === 'bkash'
+                      ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
+                      : 'text-[#434343]',
+                  )}
+                >
+                  <span className={activeTab === 'bkash' ? 'text-[#ED7125]' : 'text-[#9C8639]'}>
+                    bKash
+                  </span>
+                </TabsTrigger>
+                
+                <TabsTrigger
+                  value="rocket"
+                  className={cn(
+                    'global-p1 font-medium px-2 py-2.5 md:py-[16px] uppercase relative flex justify-center bg-transparent data-[state=active]:bg-transparent',
+                    'w-[40%] text-center',
+                    activeTab === 'rocket'
+                      ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
+                      : 'text-[#434343]',
+                  )}
+                >
+                  <span className={activeTab === 'rocket' ? 'text-[#ED7125]' : 'text-[#9C8639]'}>
+                    Rocket
+                  </span>
+                </TabsTrigger>
+              </TabsList>
+            </div>
+
+            {/* Tab Content */}
+            <TabsContent value="bkash" className="space-y-4 lg:space-y-4 xl:space-y-7">
+              {data?.item?.map((eachItem, i) => (
                 <div
-                  key={`arrow-${i}`}
-                  className="hidden md:block absolute md:-bottom-[8px] lg:-bottom-[9px] xl:-bottom-[9px] 2xl:-bottom-[12px] z-10"
-                  style={{ left: `${percent}%`, transform: 'translateX(-60%)' }}
+                  key={i}
+                  className="flex items-center bg-white/50 backdrop-blur-[12.5px] border-[1.25px] border-[#9C8639]
+                  space-x-2 lg:space-x-1 xl:space-x-2.5 2xl:space-x-4
+                  p-1 md:px-4 md:py-1.5 lg:px-1 lg:py-2 xl:p-2.5 2xl:p-4 
+                  rounded-[4px] lg:rounded-[6px] xl:rounded-[8px]"
                 >
-                  <img
-                    src={
-                      activeTab === 'features' ? '/assets/arrowRight.png' : '/assets/arrowLeft.png'
-                    }
-                    alt="arrow"
-                    className="w-[14px] lg:w-[16px] xl:w-[18px] 2xl:w-[22px]
-                    h-[16px] lg:h-[18px] xl:h-[20x] 2xl:h-[24px]"
-                  />
+                  <div className="text-[12px] md:text-[14px] lg:text-[12px] xl:text-[16px] 2xl:text-[15px] text-[#434343]">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: eachItem?.descriptionContent,
+                      }}
+                    ></div>
+                  </div>
                 </div>
-              )
-            })}
-        </div>
+              ))}
+            </TabsContent>
 
-        {/* Tab Content */}
-        {(() => {
-          return (
-            <>
-              <TabsContent key={activeTab} value={activeTab}>
-                {activeTab === 'bkash' && <BkashSection bgColor='#FCF4EB' data={data} />}
-                {activeTab === 'rocket' && <RocketSection bgColor='#FCF4EB' data={rocketData} />}
-              </TabsContent>
-              {/* <div
-                className="flex flex-col md:flex-row w-fit gap-2 mx-auto 
-              mt-[30px] lg:mt-[50px] xl:mt-[100px]"
-              >
-                <Link
-                  href="/assets/pdf/Required Brochures/Multi-Stage Maturity Plans/Multi Stage Plan (3pp, 4pp). V1 pdf.pdf"
-                  target="_blank"
+            <TabsContent value="rocket" className="space-y-4 lg:space-y-4 xl:space-y-7">
+              {rocketData?.item?.map((eachItem, i) => (
+                <div
+                  key={i}
+                  className="flex items-center bg-white/50 backdrop-blur-[12.5px] border-[1.25px] border-[#9C8639]
+                  space-x-2 lg:space-x-1 xl:space-x-2.5 2xl:space-x-4
+                  p-1 md:px-4 md:py-1.5 lg:px-1 lg:py-2 xl:p-2.5 2xl:p-4 
+                  rounded-[4px] lg:rounded-[6px] xl:rounded-[8px]"
                 >
-                  <GlobalButton text="Download Brochure" variant="primary" />
-                </Link>
-                <ToolTip>
-                  <GlobalButton
-                    className="cursor-not-allowed  text-[#9C8639] border-[#9C8639] hover:text-[#9C8639]"
-                    text="Calculate Premium"
-                    variant="outline"
-                  />
-                </ToolTip>
-              </div> */}
-            </>
-          )
-        })()}
-      </Tabs>
+                  <div className="text-[12px] md:text-[14px] lg:text-[12px] xl:text-[16px] 2xl:text-[15px] text-[#434343]">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: eachItem?.descriptionContent,
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
     </div>
   )
 }
