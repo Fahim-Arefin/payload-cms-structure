@@ -680,13 +680,14 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             fieldErrors.SumAssured ? 'border-red-500 border-2' : ''
           }`}
         />
-        <p className="text-[8px] md:text-[10px] py-2 absolute right-1">
-          Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
-        </p>
-        {/* Sum Assured error message */}
-        {getFieldErrorMessage('SumAssured') && (
+        {/* Show either suggested amount OR error message, not both */}
+        {getFieldErrorMessage('SumAssured') ? (
           <p className="text-red-500 text-xs mt-1">
             {getFieldErrorMessage('SumAssured')}
+          </p>
+        ) : (
+          <p className="text-[8px] md:text-[10px] py-2 absolute right-1">
+            Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
           </p>
         )}
       </div>
