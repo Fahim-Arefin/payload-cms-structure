@@ -41,20 +41,21 @@ const page: FC<pageProps> = ({}) => {
       mainImage: '/assets/careerVideoMain.png',
       insuranceCardData: [
         {
-          title: 'Shanta Life Insurance',
+          title: 'Leadership Recognition',
           image: '/assets/careerVideo1.jpg',
-          description: 'At Shanta Life Insurance, your journey will be more than just a job.',
+          description:
+            'Always get the appricaition on your achievements and milestones in our professional journey.',
         },
         {
-          title: 'Shanta Life Insurance Preferred Career',
+          title: 'Team Sports & Unity',
           image: '/assets/careerVideo2.jpg',
           description:
-            'We believe in fostering a culture where every voice is heard and every idea is valued.',
+            'Company sports teams building camaraderie and teamwork beyond the workplace. We value out employee engagement.',
         },
         {
-          title: 'Shanta Life',
+          title: 'Office Culture & Moments',
           image: '/assets/careerVideo3.jpg',
-          description: `Our commitment to continuous growth means that we're always seeking the most exceptional talent.`,
+          description: `Diverse team make you feel with companion rather than collgue in our vibrant office environment.`,
         },
       ],
     },

@@ -60,8 +60,8 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                   className={cn(
                     `relative group cursor-pointer 
         md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full  
-        bg-no-repeat bg-cover 
-        bg-center lg:bg-[position:0px_-35px] xl:bg-[position:0px_-55px]  2xl:bg-[position:0px_-65px] 
+        bg-no-repeat bg-contain 
+        bg-center 
    md:rounded-[8.333px_8.333px_25.333px_8.333px] LG:rounded-[8.333px_8.333px_33.333px_8.333px] xl:rounded-[8.333px_8.333px_40.333px_8.333px] 2xl:rounded-[8.333px_8.333px_53.333px_8.333px]
         overflow-hidden transition-all`,
                     content === 'left' ? 'order-2' : 'order-1',
