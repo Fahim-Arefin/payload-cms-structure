@@ -6,15 +6,16 @@ type CareerOpeningCardProps = {
   title: string
   description: string
   btnText: string
+  onApply?: (type: string, title: string) => void
 }
 
-const CareerOpeningCard: FC<CareerOpeningCardProps> = ({ type, title, description, btnText }) => {
+const CareerOpeningCard: FC<CareerOpeningCardProps> = ({ type, title, description, btnText, onApply }) => {
   return (
     <div className="rounded-[12px] bg-[#FCF4EB] px-5 py-4 flex flex-col gap-3 min-h-[170px]">
       <span className="text-[#CCCCCC] text-[14px] lg:text-[22px] font-bold">{type}</span>
       <span className="text-[#434342] text-[14px] lg:text-[18px] font-bold uppercase">{title}</span>
       <span className="text-[#434342] text-[16px] font-normal line-clamp-3">{description}</span>
-      <button className="bg-[#ED7125] text-white text-[16px] py-1.5 px-5 rounded-[5px] mt-auto w-max transition-colors hover:bg-[#d15d15]">
+      <button onClick={() => onApply?.(type, title)} className="bg-[#ED7125] text-white text-[16px] py-1.5 px-5 rounded-[5px] mt-auto w-max transition-colors hover:bg-[#d15d15]">
         {btnText}
       </button>
       {/* <GlobalButton size="small" className="cursor-not-allowed " text={btnText} variant="primary" /> */}

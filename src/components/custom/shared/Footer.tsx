@@ -12,12 +12,12 @@ function Footer() {
       py-5 2xl:py-6 
       global-p2 md:font-medium"
       >
-        Copyright © 2025 <span className="text-[#FF6600]">Shanta Life Insurance PLC.</span> All Rights
-        Reserved
+        Copyright © 2025 <span className="text-[#FF6600]">Shanta Life Insurance PLC.</span> All
+        Rights Reserved
       </div>
 
       <div
-        className="absolute inset-0 z-30 p-2 lg:px-12 xl:px-24 lg:py-12 xl:py-16 2xl:px-44 2xl:py-24 grid grid-cols-3 lg:grid-cols-4
+        className="absolute inset-0 z-30 p-2 lg:px-12 xl:px-24 lg:py-12 xl:py-16 2xl:px-44 2xl:py-24 grid grid-cols-1 lg:grid-cols-4
        gap-x-2 lg:gap-x-4 2xl:gap-x-12 text-white"
       >
         {/* grid 1  */}
@@ -31,11 +31,11 @@ function Footer() {
               className="h-full w-full object-contain "
             />
           </div>
-          <div className="lg:hidden w-full h-[1px] bg-white"></div>
+          {/* <div className="lg:hidden w-full h-[1px] bg-white"></div> */}
           <div className="grid grid-cols-3 lg:grid-cols-1 gap-x-2 lg:space-y-3 md:px-4 md:py-2 lg:p-0">
             {/* social media 1*/}
             <div className="flex items-center space-x-2">
-              <div className="hidden md:block w-[20px] lg:w-[30px] 2xl:w-[40px] h-[20px] lg:h-[30px] 2xl:h-[40px]">
+              <div className="block w-[20px] lg:w-[30px] 2xl:w-[40px] h-[20px] lg:h-[30px] 2xl:h-[40px]">
                 <svg
                   // width="40"
                   // height="40"
@@ -52,7 +52,10 @@ function Footer() {
               </div>
               <div className="text-white text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
                 <div className="">
-                  <a href="mailto:info@shantalife.com" className="hover:text-blue-300 transition-colors">
+                  <a
+                    href="mailto:info@shantalife.com"
+                    className="hover:text-blue-300 transition-colors"
+                  >
                     info@shantalife.com
                   </a>
                 </div>
@@ -60,8 +63,8 @@ function Footer() {
             </div>
             {/* social media 2*/}
             {/* --------------------------------------------------------------------------------------------------------- */}
-            <div className="hidden space-x-2 md:flex lg:hidden">
-              <div className="hidden md:block w-[50px] xl:w-[55px] 2xl:w-[70px]">
+            <div className="space-x-2 md:flex lg:hidden">
+              <div className="block w-[50px] xl:w-[55px] 2xl:w-[70px]">
                 <svg
                   width="20"
                   height="20"
