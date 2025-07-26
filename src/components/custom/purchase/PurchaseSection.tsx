@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import PremiumBreakdown from '../premium-calculator/PremiumBreakdown'
 import CalculateForm from '../premium-calculator/CalculateForm'
+import PurchaseForm from './PurchaseForm'
 import PurchaseCardSection from './PurchaseCardSection'
 import { ApiResponse, ApiResToShow, getTotalPremium } from '@/utils/premiumCalculator'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
@@ -14,31 +15,30 @@ type Props = {}
 interface FormData {
   PlanCode: number
   Age: number
-  SumAssured: number
-  Term: number
   PaymentMode: number
   Gender: number | null
   phoneNumber: string
-  annualIncome: number
   name: string
   email: string
+  city: string
+  occupation: string
 }
 
 const PurchaseSection = (props: Props) => {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
   const [selectedPlanName, setSelectedPlanName] = useState<string>('')
+  const [selectedPlanCode, setSelectedPlanCode] = useState<number>(0)
     const [formData, setFormData] = useState<FormData>({
       PlanCode: 0,
       Age: 0,
-      SumAssured: 0,
-      Term: 0,
       PaymentMode: 0,
       Gender: null,
       phoneNumber: '',
-      annualIncome: 0,
       name: '',
-      email: ''
+      email: '',
+      city: '',
+      occupation: ''
     })
     const [calculatedPlanCode, setCalculatedPlanCode] = useState<number | null>(null)
 
@@ -150,6 +150,10 @@ const PurchaseSection = (props: Props) => {
                 apiResponse={apiResponse}
               />
             </div>
+          ) : selectedPlanCode > 0 ? (
+            <div>
+              <PlanDetailsSection planCode={getPlanDetailsCode()} plans={plans}/>
+            </div>
           ) : (
             <div>
               <div className="px-6 pt-6 md:px-10 md:pt-10 pb-4 rounded-t-xl bg-[#9C863940]">
@@ -181,7 +185,14 @@ const PurchaseSection = (props: Props) => {
 
         {/* right form */}
         <div className="order-1 lg:order-2">
-          <CalculateForm onApiResponse={handleApiResponse} formData={formData} setFormData={setFormData}/>
+          <PurchaseForm 
+            formData={formData} 
+            setFormData={setFormData}
+            onPlanSelect={(planCode: number, planName: string) => {
+              setSelectedPlanCode(planCode)
+              setSelectedPlanName(planName)
+            }}
+          />
         </div>
       </div>
     </div>
