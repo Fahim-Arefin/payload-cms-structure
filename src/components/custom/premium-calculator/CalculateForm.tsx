@@ -22,7 +22,7 @@ type FormData = {
   SumAssured: number
   Term: number
   PaymentMode: number
-  Gender: number
+  Gender: number | null
   phoneNumber: string
   annualIncome: number
   name: string
@@ -320,6 +320,34 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     }
   }
 
+  // Function to get specific error message for each field
+  const getFieldErrorMessage = (field: keyof typeof fieldErrors): string => {
+    if (!fieldErrors[field]) return ''
+    
+    switch (field) {
+      case 'PlanCode':
+        return 'Please select a plan'
+      case 'Age':
+        if (!formData.Age) return 'Please enter your age'
+        if (formData.Age < 18 || formData.Age > 65) return 'Age must be between 18 and 65'
+        return ''
+      case 'annualIncome':
+        return 'Please enter your annual income'
+      case 'SumAssured':
+        if (!formData.SumAssured) return 'Please enter sum assured amount'
+        if (formData.SumAssured < 100000) return 'Sum assured must be at least ৳1,00,000'
+        return ''
+      case 'Term':
+        return 'Please select a tenure'
+      case 'PaymentMode':
+        return 'Please select a payment method'
+      case 'Gender':
+        return 'Please select your gender'
+      default:
+        return ''
+    }
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -352,14 +380,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     const hasErrors = Object.values(errors).some((error) => error)
 
     if (hasErrors) {
-      setError('Please fill in all required fields correctly')
-      return
-    }
-
-    // Additional validation for Sum Assured
-    if (formData.SumAssured < 100000) {
-      setFieldErrors((prev) => ({ ...prev, SumAssured: true }))
-      setError('Sum Assured must be greater than 99,999')
+      // Don't set general error message anymore, field-specific messages will show
       return
     }
 
@@ -382,6 +403,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         onMouseLeave={() => setIsHoveringPlanSelect(false)}
       >
         <Select
+          value={formData.PlanCode && formData.PlanCode > 0 ? availablePlans.find(p => p.plan_code === formData.PlanCode)?.plan_name || "" : ""}
           disabled={isLoadingPlans || !formData.Age || availablePlans.length === 0}
           onValueChange={(v) => {
             const plan = availablePlans.find((p) => p.plan_name === v)
@@ -484,6 +506,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             </DialogContent>
           </Dialog>
         )}
+        {/* Plan selection error message */}
+        {getFieldErrorMessage('PlanCode') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('PlanCode')}
+          </p>
+        )}
       </div>
 
       {/* age input */}
@@ -499,6 +527,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             fieldErrors.Age ? 'border-red-500 border-2' : ''
           }`}
         />
+        {/* Age error message */}
+        {getFieldErrorMessage('Age') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('Age')}
+          </p>
+        )}
       </div>
 
       {/* select your tenure */}
@@ -508,6 +542,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         onMouseLeave={() => setIsHoveringTenureSelect(false)}
       >
         <Select
+          value={formData.Term && formData.Term > 0 ? availableTenures.find(t => t.value === formData.Term)?.text || "" : ""}
           disabled={
             isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0
           }
@@ -572,11 +607,18 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         {tenureError && (
           <p className="text-[10px] py-1 text-red-600 absolute inset-x-0">{tenureError}</p>
         )}
+        {/* Tenure error message */}
+        {getFieldErrorMessage('Term') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('Term')}
+          </p>
+        )}
       </div>
 
       {/* gender select  */}
       <div className="col-span-2 md:col-span-1">
         <Select
+          value={formData.Gender !== null && formData.Gender !== undefined ? genders.find(g => g.value === formData.Gender)?.text || "" : ""}
           onValueChange={(v) => {
             const gender = genders.find((g) => g.text === v)
             if (gender) {
@@ -589,7 +631,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
               fieldErrors.Gender ? 'border-red-500 border-2' : ''
             }`}
           >
-            <SelectValue placeholder="Select Your Gender *" />
+            <SelectValue placeholder="Select Gender *" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -602,6 +644,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             </SelectGroup>
           </SelectContent>
         </Select>
+        {/* Gender error message */}
+        {getFieldErrorMessage('Gender') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('Gender')}
+          </p>
+        )}
       </div>
 
       {/* annual income input */}
@@ -616,6 +664,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             fieldErrors.annualIncome ? 'border-red-500 border-2' : ''
           }`}
         />
+        {/* Annual income error message */}
+        {getFieldErrorMessage('annualIncome') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('annualIncome')}
+          </p>
+        )}
       </div>
       {/* sum assured input */}
       <div className="relative col-span-2 md:col-span-1">
@@ -629,9 +683,16 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             fieldErrors.SumAssured ? 'border-red-500 border-2' : ''
           }`}
         />
-        <p className="text-[8px] md:text-[10px] py-2 absolute right-1">
-          Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
-        </p>
+        {/* Show either suggested amount OR error message, not both */}
+        {getFieldErrorMessage('SumAssured') ? (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('SumAssured')}
+          </p>
+        ) : (
+          <p className="text-[8px] md:text-[10px] py-2 absolute right-1">
+            Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
+          </p>
+        )}
       </div>
 
       {/* phone number input */}
@@ -652,6 +713,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         onMouseLeave={() => setIsHoveringPaymentSelect(false)}
       >
         <Select
+          value={formData.PaymentMode && formData.PaymentMode > 0 ? availablePaymentModes.find(pm => pm.paymode_id === formData.PaymentMode)?.paymode_name || "" : ""}
           disabled={
             isLoadingPaymentModes || 
             !formData.PlanCode || 
@@ -727,6 +789,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             </SelectGroup>
           </SelectContent>
         </Select>
+        {/* Payment Method error message */}
+        {getFieldErrorMessage('PaymentMode') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('PaymentMode')}
+          </p>
+        )}
       </div>
 
       {/* name input */}
@@ -751,12 +819,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         />
       </div>
 
-      {/* Error display */}
-      {error && (
-        <div className="col-span-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-          {error}
-        </div>
-      )}
+      {/* General error display removed - using field-specific errors now */}
       {/* submit button */}
       <div className="col-span-2 items-center px-4 flex flex-col gap-6 lg:gap-6 justify-center">
         <Button

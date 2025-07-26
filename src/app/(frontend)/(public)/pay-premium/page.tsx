@@ -11,14 +11,13 @@ function page() {
     {
       title: 'Pay Premium',
       subtitle: '',
-      description:
-        'Powering your protection starts here..',
+      description: 'Powering your protection starts here..',
       image: '/assets/pay-premium-2.jpg',
     },
   ]
 
   const bkashData = {
-    bgImage: '/assets/bkash-4.png',
+    // bgImage: '/assets/bkash-4.png',
     item: [
       {
         // image: '/assets/protection5.png',
@@ -49,36 +48,35 @@ function page() {
   }
 
   const rocketData = {
-  bgImage: '/assets/bkash-4.png', // (Replace with your Rocket background image path)
-  item: [
-    {
-      descriptionContent: `<b>Step 1:</b></br>Log into your Rocket account.`,
-    },
-    {
-      descriptionContent: `<b>Step 2:</b></br>Go to “Bill Pay” section and search by “5309”.`,
-    },
-    {
-      descriptionContent: `<b>Step 3:</b></br>Select “Shanta Life Insurance PLC”.`,
-    },
-    {
-      descriptionContent: `<b>Step 4:</b></br>Mention either the policy number or proposal number under the 'Bill No' section.`,
-    },
-    {
-      descriptionContent: `<b>Step 5:</b></br>Write the payable amount and submit.`,
-    },
-    {
-      descriptionContent: `<b>Step 6:</b></br>Upon successful transaction an acknowledgement SMS will be sent to you along with the link to e-receipt the following business day.`,
-    },
-  ],
-}
+    // bgImage: '/assets/bkash-4.png', // (Replace with your Rocket background image path)
+    item: [
+      {
+        descriptionContent: `<b>Step 1:</b></br>Log into your Rocket account.`,
+      },
+      {
+        descriptionContent: `<b>Step 2:</b></br>Go to “Bill Pay” section and search by “5309”.`,
+      },
+      {
+        descriptionContent: `<b>Step 3:</b></br>Select “Shanta Life Insurance PLC”.`,
+      },
+      {
+        descriptionContent: `<b>Step 4:</b></br>Mention either the policy number or proposal number under the 'Bill No' section.`,
+      },
+      {
+        descriptionContent: `<b>Step 5:</b></br>Write the payable amount and submit.`,
+      },
+      {
+        descriptionContent: `<b>Step 6:</b></br>Upon successful transaction an acknowledgement SMS will be sent to you along with the link to e-receipt the following business day.`,
+      },
+    ],
+  }
 
   const bankData = {
-    bgImage: '/assets/bank.jpg',
+    bgImage: '/assets/bank_teller.jpg',
     item: [
       {
         image: '/assets/protection5.png',
-        descriptionContent:
-          '<b>Step 1:</b></br> Log into your Internet Banking',
+        descriptionContent: '<b>Step 1:</b></br> Log into your Internet Banking',
       },
       {
         image: '/assets/protection6.png',
@@ -138,7 +136,7 @@ function page() {
       <BankSection align="right" data={bankData} />
       {/* <BkashSection align="left" bgColor="#FCF4EB" data={bkashData} />
       <RocketSection align="left" bgColor="#FCF4EB" data={rocketData} /> */}
-      <PaymentTab data={bkashData} rocketData={rocketData} config={tabItems}/>
+      <PaymentTab data={bkashData} rocketData={rocketData} config={tabItems} />
       <DebitSection align="right" data={debitData} />
       <ContactUsSection />
     </div>
