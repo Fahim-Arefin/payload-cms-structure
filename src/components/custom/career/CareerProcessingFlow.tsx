@@ -15,7 +15,7 @@ const processData = [
     title: 'PRELIMINARY DISCUSSION',
   },
   {
-    img: '/assets/process6.png',
+    img: '/assets/process3.png',
     title: 'ASSESSMENT CENTER',
   },
   {
@@ -23,7 +23,7 @@ const processData = [
     title: 'FINAL INTERVIEW',
   },
   {
-    img: '/assets/process7.png',
+    img: '/assets/process5.png',
     title: 'ON BOARDING',
   },
 ]

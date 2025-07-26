@@ -42,13 +42,13 @@ function RolesCardList({ onboardingRoleData }: Props) {
     <Carousel
       
       opts={{
-        align: 'start',
+        align: 'start'
       }}
-      className="w-full"
+       className="w-full"
       setApi={setCarouselApi} // 👈 capture carousel API
       plugins={[
         Autoplay({
-          delay: 5000,
+          delay: 3000,
         }),
       ]}
     >
