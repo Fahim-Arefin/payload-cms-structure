@@ -37,7 +37,7 @@ function OnboardingVision({ data }: Props) {
             {/* Bullet List */}
             <div className="flex flex-col gap-3 mb-4 lg:mb-10">
               {item.points.map((point, i) => (
-                <div key={i} className="relative pl-6 text-justify text-white/90 global-p1">
+                <div key={i} className="relative pl-6 text-white/90 global-p1">
                   <span className="absolute left-0 top-0 font-bold">•</span>
                   {point}
                 </div>

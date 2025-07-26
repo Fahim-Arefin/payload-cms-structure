@@ -139,7 +139,7 @@ function OnboardingJoinForm() {
       {/* submit button */}
       <div className="col-span-2">
         <Button className="bg-[#9C8639] text-white uppercase font-semibold rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 w-full">
-          Join Us
+          Submit
         </Button>
       </div>
     </form>
