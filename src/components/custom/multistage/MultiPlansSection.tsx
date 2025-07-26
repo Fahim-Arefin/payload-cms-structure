@@ -30,8 +30,8 @@ const MultiPlansSection = ({ data, planData, bgColor }: Props) => {
                 <img src="/assets/line.png" alt="line" className="h-[180px] mt-1" />
               </div>
               <div className="flex flex-col items-start gap-6 text-[12px] md:global-p2">
-                <span>1/3 of the policy term</span>
-                <span>2/3 of the policy term</span>
+                <span>25% of sum assured</span>
+                <span>25% of sum assured</span>
                 <span>Remaining Sum Assured</span>
               </div>
             </div>
@@ -46,11 +46,13 @@ const MultiPlansSection = ({ data, planData, bgColor }: Props) => {
 
         <div className="relative w-full ">
           {/* connecting dotted line image */}
-          <img
-            src="/assets/lineStraight.svg"
-            alt="timeline connector"
-            className="absolute hidden md:block top-[20px] w-[322px] md:w-[399px] lg:w-[620px] 2xl:w-fit left-[28px] md:left-[84px] lg:left-[70px] xl:left-[208px] 2xl:left-[344px] z-0"
-          />
+          <div className="">
+            <img
+              src="/assets/lineStraight.svg"
+              alt="timeline connector"
+              className="absolute hidden md:block top-[20px] w-[322px] md:w-[399px] lg:w-[620px] 2xl:w-fit left-[28px] md:left-[84px] lg:left-[70px] xl:left-[208px] 2xl:left-[344px] z-0"
+            />
+          </div>
 
           <div className="flex justify-center gap-2 md:gap-4 lg:gap-[59px] relative z-10">
             {planData.map((item: any, idx: number) => (
