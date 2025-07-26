@@ -9,7 +9,7 @@ type Props = {
   data: PayPremiumDataType
 }
 
-function BkashSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
+function RocketSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
   return (
     <div
       // className="container-padding"
@@ -21,7 +21,7 @@ function BkashSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
         <div className="space-x-1">
           <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
             Payment Using{' '}
-            <span className="global-h1 uppercase text-[#ED7125] font-medium">bKash</span>
+            <span className="global-h1 uppercase text-[#ED7125] font-medium">Rocket</span>
           </h1>
         </div>
       </div>
@@ -59,7 +59,7 @@ function BkashSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
             <div className="space-x-1">
               <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
                 Payment Using{' '}
-                <span className="global-h1 uppercase text-[#ED7125] font-medium">bKash</span>
+                <span className="global-h1 uppercase text-[#ED7125] font-medium">Rocket</span>
               </h1>
             </div>
           </div>
@@ -87,4 +87,4 @@ function BkashSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
   )
 }
 
-export default BkashSection
+export default RocketSection
