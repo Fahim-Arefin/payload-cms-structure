@@ -32,7 +32,7 @@ export function MapTabSection({ config, data }: Props) {
         <Tabs defaultValue={config[0].value} value={activeTab} onValueChange={setActiveTab}>
           <div
             className="relative w-full border-b border-[#434343] md:py-[12px] bg-white
-            mb-[16px] md:mb-[20px] lg:mb-[40px] xl:mb-[70px]"
+            mb-[10px] md:mb-[10px] lg:mb-[15px] xl:mb-[20px]"
           >
             <TabsList
               className={cn(

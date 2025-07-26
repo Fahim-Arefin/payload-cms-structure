@@ -20,6 +20,22 @@ function CorporateAddons({ data }: Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
+
+  useEffect(() => {
+    if (!carouselApi) return
+    if (hoveredIdx !== null) return // Pause autoplay when hovering
+
+    const interval = setInterval(() => {
+      if (carouselApi.canScrollNext()) {
+        carouselApi.scrollNext()
+      } else {
+        carouselApi.scrollTo(0) // Loop back to first slide
+      }
+    }, 3500)
+
+    return () => clearInterval(interval)
+  }, [carouselApi, hoveredIdx])
 
   useEffect(() => {
     if (!carouselApi) return
@@ -63,13 +79,12 @@ function CorporateAddons({ data }: Props) {
            md:px-12 
            lg:px-[64px]"
         setApi={setCarouselApi}
-        opts={{dragFree: true}}        
-        plugins={[
-          Autoplay({
-            delay: 5000,
-          }),
-          
-        ]}
+        opts={{ dragFree: true }}
+        // plugins={[
+        //   Autoplay({
+        //     delay: 5000,
+        //   }),
+        // ]}
       >
         <CarouselContent className="-ml-1">
           {data?.map((item, index) => (
@@ -78,6 +93,8 @@ function CorporateAddons({ data }: Props) {
               className="pl-1 
                basis-1/2 md:basis-1/3 lg:basis-1/4
               pr-1 lg:pr-2 xl:pr-6 2xl:pr-10"
+              onMouseEnter={() => setHoveredIdx(index)}
+              onMouseLeave={() => setHoveredIdx(null)}
             >
               <AddonsCard data={item} />
             </CarouselItem>
