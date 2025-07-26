@@ -92,7 +92,7 @@ function SavingAndInvestment() {
         image: '/assets/feature6.png',
       },
     ],
-    image: '/assets/endowment2.png',
+    image: '/assets/multistage-11.jpg',
     link: '/plans/individual/saving-and-investment/multistage',
   }
 

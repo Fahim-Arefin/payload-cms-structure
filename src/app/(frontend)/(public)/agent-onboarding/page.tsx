@@ -179,7 +179,7 @@ function page({}: Props) {
       title: 'Take Charge of your career',
     },
     {
-      image: '/assets/role4.svg',
+      image: '/assets/role6.png',
       title: 'Help secure lives',
     },
   ]
