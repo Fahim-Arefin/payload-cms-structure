@@ -47,7 +47,13 @@ export function IndividualClaim() {
         </div>
       </div>
       <h4 className="mt-[30px] lg:mt-[50px] xl:mt-[80px] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
-        For any further queries please contact 09610889900
+        <span>For any further queries please contact</span>
+        <a
+          href="tel:09610889900"
+          className="text-[#9C8639] hover:underline ml-2 underline underline-offset-4"
+        >
+          09610889900
+        </a>
       </h4>
     </div>
   )

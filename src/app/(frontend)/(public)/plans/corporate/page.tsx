@@ -25,7 +25,7 @@ function page({}: Props) {
 
   const highlightData = [
     {
-      mainDescription: `Deciding on the best package for your team, making sure you’re getting value for money, staying on top of the options available.It can all add up to a daunting to-do list. We’re here to make that easier for you. `,
+      mainDescription: `Deciding on the best package for your team , making sure you’re getting value for money, and staying on top of the available options — it can all add up to a daunting to-do list. We’re here to make that easier for you.`,
     },
   ]
 
