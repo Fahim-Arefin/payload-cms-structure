@@ -31,7 +31,7 @@ function page() {
       },
       {
         // image: '/assets/protection8.png',
-        descriptionContent: `<b>Step 4:</b> Write your full name in “Reference” field.`,
+        descriptionContent: `<b>Step 4:</b> Write your Policy number or Full name in “Reference” field.`,
       },
       {
         // image: '',
@@ -39,7 +39,7 @@ function page() {
       },
       {
         // image: '',
-        descriptionContent: `<b>Step 6:</b>: Upon successful transaction an acknowledgement SMS will
+        descriptionContent: `<b>Step 6:</b> Upon successful transaction an acknowledgement SMS will
         be sent to you along with the link to e-receipt the following
         business day.`,
       },
@@ -51,7 +51,7 @@ function page() {
       {
         image: '/assets/protection5.png',
         descriptionContent:
-          '<b>Step 1:</b></br> Covers Diagnoses / Surgery for 10 Minor illnesses & 15 Major illnesses',
+          '<b>Step 1:</b></br> Log into your Internet Banking',
       },
       {
         image: '/assets/protection6.png',
@@ -62,11 +62,11 @@ function page() {
         image: '/assets/protection7.png',
         descriptionContent: `<b>Step 3:</b></br>Give below details in respective fields of “Beneficiary details” page.</br>
           <ul class="list-disc ml-8">
-            <li><b>Beneficiary Name –</b>SLI XXXXX (provide your Policy Number in place of XXXXX)</li>
-            <li><b>Bank Account –</b>2065262900001</li>
+            <li><b>Beneficiary Name –</b> XXXXX (provide your Policy Number in place of XXXXX)</li>
+            <li><b>Bank Account –</b> 2065262900001</li>
             <li><b>Name of Bank –</b> BRAC Bank</li>
-            <li><b>Bank Branch –</b>Gulshan Branch</li> 
-            <li><b>Routing Number –</b>060261726</li> 
+            <li><b>Bank Branch –</b> Gulshan Branch</li> 
+            <li><b>Routing Number –</b> 060261726</li> 
           </ul>
           `,
       },
@@ -80,7 +80,7 @@ function page() {
       },
       {
         image: '',
-        descriptionContent: `<b>Step 6:</b>: An acknowledgement SMS will be sent to you along with the link to e-receipt.`,
+        descriptionContent: `<b>Step 6:</b> An acknowledgement SMS will be sent to you along with the link to e-receipt.`,
       },
     ],
   }
