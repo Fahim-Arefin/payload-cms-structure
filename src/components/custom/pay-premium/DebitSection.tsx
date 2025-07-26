@@ -61,7 +61,7 @@ function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
         space-y-4 lg:space-y-4 xl:space-y-7
         ${align === 'left' ? 'order-2' : 'order-2 lg:order-1'} `}
         >
-          <div className="text-[#3A3A3A] global-h4 text-justify">{data?.content}</div>
+          <div className="text-[#3A3A3A] global-h4 text-justify"> {renderWithFormLink(data?.content)}</div>
         </div>
       </div>
     </div>
@@ -69,3 +69,27 @@ function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
 }
 
 export default DebitSection
+
+
+import Link from 'next/link'
+
+function renderWithFormLink(text: string) {
+  const linkText = 'EFT Debit Authorization form'
+  const linkHref = '/assets/pdf/EFT-Debit-Authorization-Form.pdf'
+  const idx = text.indexOf(linkText)
+  if (idx === -1) return text // phrase not found, return as-is
+
+  return (
+    <>
+      {text.substring(0, idx)}
+      <Link
+        href={linkHref}
+        target="_blank"
+        className="text-[#ED7125] underline hover:no-underline"
+      >
+        {linkText}
+      </Link>
+      {text.substring(idx + linkText.length)}
+    </>
+  )
+}

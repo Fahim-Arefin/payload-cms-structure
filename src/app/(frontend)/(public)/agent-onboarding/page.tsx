@@ -148,10 +148,10 @@ function page({}: Props) {
       },
     ],
     sectionRight: {
-      avatar: '/assets/board-of-directors/abrar-anwar.jpg',
-      name: 'Khondoker Khalil Ahamed',
+      avatar: '/assets/agent-onboarding-life.jpg',
+      name: 'Tarafder Mohammad Fahim',
       quote:
-        'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Asset Management.',
+        'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Life.',
     },
   }
 
@@ -173,6 +173,14 @@ function page({}: Props) {
     {
       image: '/assets/role4.svg',
       title: 'Learn, Earn, Grow',
+    },
+    {
+      image: '/assets/role5.png',
+      title: 'Take Charge of your career',
+    },
+    {
+      image: '/assets/role4.svg',
+      title: 'Help secure lives',
     },
   ]
   const visionData = [

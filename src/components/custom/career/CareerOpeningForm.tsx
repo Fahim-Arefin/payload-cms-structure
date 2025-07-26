@@ -16,13 +16,20 @@ import GlobalButton from '../shared/GlobalButton'
 import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 
 const positions = [
-  'IT Executive',
+  'Junior IT Executive',
+  'Mid IT Executive',
+  'Senior IT Executive',
   'Management Trainee',
-  'Relationship Officer',
-  'Campus Ambassador',
+  'Relationship Officer (Internship)',
+  'Relationship Officer (Full time)',
+  'Campus Ambassador (Part-time)',
+  'Campus Ambassador (Full time)',
 ]
 
-function CareerOpeningForm() {
+function CareerOpeningForm({ pos, setPos }: {
+  pos: string,
+  setPos: (p: string) => void
+}) {
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     setSendButtonText('Sending...')
@@ -53,7 +60,7 @@ function CareerOpeningForm() {
         name,
         email,
         phone,
-        position,
+        position: pos,
         message,
         resume: resumeId,
       }),
@@ -101,7 +108,7 @@ function CareerOpeningForm() {
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
         required
       />
-      <Select required value={position} onValueChange={(e) => setPosition(e)}>
+      <Select required value={pos} onValueChange={setPos}>
         <SelectTrigger className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none text-[15px]">
           <SelectValue placeholder="IT Executive" />
         </SelectTrigger>
