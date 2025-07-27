@@ -157,29 +157,29 @@ function page({}: Props) {
 
   const onboardingRolesData = [
     {
-      image: '/assets/role1.svg',
+      image: '/assets/agent-onboarding/1.svg',
       title: 'Earn Without Limits',
       description:
         'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
     },
     {
-      image: '/assets/role2.svg',
+      image: '/assets/agent-onboarding/2.svg',
       title: 'Get Recognized, Get Rewarded',
     },
     {
-      image: '/assets/role3.svg',
+      image: '/assets/agent-onboarding/3.svg',
       title: 'Freedom to Work On Your Time ',
     },
+    // {
+    //   image: '/assets/role4.svg',
+    //   title: 'Learn, Earn, Grow',
+    // },
     {
-      image: '/assets/role4.svg',
-      title: 'Learn, Earn, Grow',
-    },
-    {
-      image: '/assets/role5.png',
+      image: '/assets/agent-onboarding/4.svg',
       title: 'Take Charge of your career',
     },
     {
-      image: '/assets/role6.png',
+      image: '/assets/agent-onboarding/5.svg',
       title: 'Help secure lives',
     },
   ]
