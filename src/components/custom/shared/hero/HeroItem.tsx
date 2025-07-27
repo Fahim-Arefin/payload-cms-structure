@@ -71,7 +71,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
               hidden lg:block
           hero-description-bg-lg
           font-[350]
-         hero-content-width
+         w-fit
           p-2 md:p-3 lg:p-4
           hero-h5
           "

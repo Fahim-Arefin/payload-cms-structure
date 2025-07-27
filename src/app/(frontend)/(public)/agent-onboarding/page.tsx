@@ -1,3 +1,4 @@
+import AgentOnboardingHeroWrapper from '@/components/custom/agent-onboarding/AgentOnboardingHeroWrapper'
 import FreedomOpportunity from '@/components/custom/agent-onboarding/FreedomOpportunity'
 import OnboardingForm from '@/components/custom/agent-onboarding/OnboardingForm'
 import OnboardingHighlight from '@/components/custom/agent-onboarding/OnboardingHighlight'
@@ -206,37 +207,7 @@ function page({}: Props) {
 
   return (
     <div className="font-avenir">
-      <HeroSection heroSlides={heroSlides}>
-        <div
-          className="absolute top-[245px] md:top-[355px] lg:top-[470px] xl:top-[490px]  2xl:top-[730px] 
-          inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
-       hero-content-width
-        flex justify-left space-x-4 md:space-x-6 lg:justify-start cursor-not-allowed
-        "
-        >
-          <ToolTip>
-            {/* <Button
-              variant="primary"
-              className="
-            cursor-not-allowed
-            px-2 md:px-6 2xl:px-10
-            py-1 md:py-2 2xl:py-6
-            h-[35px] md:h-[40px] lg:h-[45px] xl:h-[55px] 2xl:h-[60px] 
-            rounded-[4px] lg:rounded-[8px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
-            global-h4 font-normal"
-            >
-              Apply Now
-            </Button> */}
-            <GlobalButton
-              size="large"
-              className="cursor-not-allowed"
-              text="Apply Now"
-              variant="primary"
-            />
-          </ToolTip>
-        </div>
-      </HeroSection>
+      <AgentOnboardingHeroWrapper heroSlides={heroSlides} />
       {/* <OnboardingHighlight highlightSlides={highlightSlides[0]} /> */}
       <OnboardingIntro onboardingIntroContent={onBoardingIntroContent} />
 

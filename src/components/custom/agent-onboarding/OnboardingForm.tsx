@@ -5,7 +5,7 @@ type OnboardingFormProps = {}
 
 const OnboardingForm: FC<OnboardingFormProps> = ({}) => {
   return (
-    <div className="font-avenir container-padding">
+    <div className="font-avenir container-padding" id="onboarding-form">
       <div className="grid grid-cols-1 lg:grid-cols-2 z-10">
         {/* Left Side */}
         <div className="p-4 flex flex-col justify-center items-center">

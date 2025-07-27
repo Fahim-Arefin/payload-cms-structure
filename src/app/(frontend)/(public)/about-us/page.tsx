@@ -127,7 +127,7 @@ function page() {
   const directorProfileData = [
     {
       id: 1,
-      image: '/assets/profile1.png',
+      image: '/assets/BOD1.png',
       name: 'Khondoker Monir Uddin',
       title: 'Chairman',
     },
