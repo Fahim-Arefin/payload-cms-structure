@@ -51,7 +51,7 @@ function AwardSection() {
                   {/* info */}
                   <div className="text-[#434343] p-2 2xl:p-4 border-b-2 border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px] font-bold">
-                      89%
+                      100%
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
                       Success Rate
@@ -69,7 +69,7 @@ function AwardSection() {
                   {/* info */}
                   <div className="text-[#434343] p-2 2xl:p-4 border-b-2 border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      568
+                      112
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
                       Claim Settled

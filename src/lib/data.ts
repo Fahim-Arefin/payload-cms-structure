@@ -139,7 +139,7 @@ export const NAV_ITEMS = [
                 href: '/plans/individual/saving-and-investment/endowment',
               },
               {
-                label: 'Multi Stage Maturity Plans',
+                label: 'Shanta Multi Stage Maturity Plans',
                 href: '/plans/individual/saving-and-investment/multistage',
               },
             ],
