@@ -62,17 +62,19 @@ const FourStagePlan: FC<FourStagePlanProps> = ({}) => {
         <h4 className="global-h4 uppercase font-semibold">POLICY TERMS</h4>
         <div className="h-[1px] w-full bg-[#7D7D7D] mb-2 lg:mb-4" />
 
-        <div className="relative w-full ">
+        <div className="w-full">
           {/* connecting dotted line image */}
-          <img
-            src="/assets/lineStraight.svg"
-            alt="timeline connector"
-            className="absolute hidden md:block top-[20px] w-[322px] md:w-[320px] lg:w-[490px] left-[28px] md:left-[132px] xl:left-[270px] 2xl:left-[406px] z-0"
-          />
 
-          <div className="flex justify-center gap-2 md:gap-4 lg:gap-[59px] relative z-10">
+          <div className="flex w-fit mx-auto gap-2 md:gap-4 lg:gap-[60px] relative">
+            <div className="absolute inset-0 hidden md:block top-[20px] md:w-[85%] lg:w-[90%] md:left-[7%] lg:left-[5%]">
+              <img
+                src="/assets/lineStraight.svg"
+                alt="timeline connector"
+                className="w-full h-auto"
+              />
+            </div>
             {planData.map((item: any, idx: number) => (
-              <div key={idx} className="flex flex-col items-center space-y-2">
+              <div key={idx} className="flex flex-col items-center space-y-2 relative z-10">
                 <img
                   src={item.image}
                   alt={`term-${item.timeline}`}
