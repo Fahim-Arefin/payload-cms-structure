@@ -19,7 +19,8 @@ const page: FC<Props> = ({}) => {
     {
       title: 'Shanta Multi-Stage Maturity Plans',
       subtitle: '',
-      description: 'Since life has more than one milestone , we’re with you at each one.',
+      description: `Since life has more than one milestone, 
+      we’re with you at each one.`,
       image: '/assets/banners/multistage.png',
     },
   ]
@@ -104,7 +105,7 @@ const page: FC<Props> = ({}) => {
         <div
           className="absolute bottom-12 lg:top-[500px] xl:top-[490px]  2xl:top-[730px] 
           inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
-       hero-content-width flex justify-left space-x-4 md:space-x-6 lg:justify-start" 
+       hero-content-width flex justify-left space-x-4 md:space-x-6 lg:justify-start"
         >
           <Link href="/purchase">
             <GlobalButton size="large" text="Purchase" variant="primary" className="" />

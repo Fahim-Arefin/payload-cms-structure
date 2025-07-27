@@ -29,7 +29,7 @@ function AwardSection() {
             >
               <img
                 className="h-full w-full z-[50] rounded-2xl object-cover"
-                src="/assets/life-at-shanta/swiper66.jpg"
+                src="/assets/news11.jpg"
                 alt="why choose us"
               />
             </div>

@@ -11,7 +11,7 @@ function page() {
     {
       title: 'Pay Premium',
       subtitle: '',
-      description: 'Powering your protection starts here..',
+      description: 'Powering your protection starts here.',
       image: '/assets/pay-premium-2.jpg',
     },
   ]
