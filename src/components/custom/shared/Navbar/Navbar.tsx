@@ -357,7 +357,7 @@
 
 'use client'
 import { TooltipContent } from '@/components/ui/tooltip'
-import { NAV_ITEMS } from '@/lib/data'
+import { NAV_ITEMS, NAV_ITEMS_MOBILE } from '@/lib/data'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -505,7 +505,11 @@ export default function Navbar() {
                   }
                 }}
               >
-                <Link href={item.href} className="w-full">
+                <Link
+                  href={item.href}
+                  target={item.href.startsWith('https') ? '_blank' : '_self'}
+                  className="w-full"
+                >
                   {item.label}
                 </Link>
                 {hasChildren && (
@@ -666,7 +670,7 @@ export default function Navbar() {
           </button>
         </div>
         <ul className="flex flex-col space-y-1 px-4 text-[#1E1E1E]">
-          {NAV_ITEMS.map((item, index) => {
+          {NAV_ITEMS_MOBILE.map((item, index) => {
             const hasChildren = item.children && item.children.length > 0
             const isDisabled = item.href === '#'
             const key = item.label
