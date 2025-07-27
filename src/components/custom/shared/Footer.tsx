@@ -8,7 +8,7 @@ function Footer() {
       {/* <div className="bg-[url('/assets/footerbg.png')] bg-cover bg-center bg-no-repeat h-full w-full z-0"></div> */}
       <div className="absolute inset-0 bg-[#3A3A3C] z-10"></div>
       <div
-        className="absolute bottom-0 inset-x-0 text-white text-center z-10 bg-[#FFFFFF21] 
+        className="absolute bottom-0 inset-x-0 text-white/70  text-center z-10 bg-[#FFFFFF21] 
       py-5 2xl:py-6 
       global-p2 md:font-medium"
       >
@@ -18,7 +18,7 @@ function Footer() {
 
       <div
         className="absolute inset-0 z-30 p-2 lg:px-12 xl:px-24 lg:py-12 xl:py-16 2xl:px-44 2xl:py-24 grid grid-cols-1 lg:grid-cols-4
-       gap-x-2 lg:gap-x-4 2xl:gap-x-12 text-white"
+       gap-x-2 lg:gap-x-4 2xl:gap-x-12 text-white/70"
       >
         {/* grid 1  */}
         <div className="flex flex-col space-y-3 p-2 col-span-3 lg:col-span-1 lg:-mt-3 xl:-mt-8">
@@ -50,7 +50,7 @@ function Footer() {
                   />
                 </svg>
               </div>
-              <div className="text-white text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
+              <div className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
                 <div className="">
                   <a
                     href="mailto:info@shantalife.com"
@@ -80,7 +80,7 @@ function Footer() {
                 </svg>
               </div>
 
-              <div className="text-white text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
+              <div className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
                 <div className="">
                   Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
                 </div>
@@ -103,7 +103,7 @@ function Footer() {
                 </svg>
               </div>
 
-              <div className="text-white text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
+              <div className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
                 <div className="">
                   Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
                 </div>
@@ -126,7 +126,7 @@ function Footer() {
                 </svg>
               </div>
 
-              <div className="text-white text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
+              <div className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
                 <div className="">
                   Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
                 </div>
@@ -149,7 +149,7 @@ function Footer() {
                 </svg>
               </div>
 
-              <div className="text-white text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
+              <div className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
                 <div className="">
                   Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
                 </div>
@@ -175,7 +175,7 @@ function Footer() {
                   />
                 </svg>
               </div>
-              <div className="text-white text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
+              <div className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
                 <div className="">
                   <a href="tel:+8809610889900" className="hover:text-blue-300 transition-colors">
                     +88 09610889900

@@ -5,6 +5,7 @@ import './fonts.css'
 import './styles.css'
 import GlobalContactButtons from '@/components/custom/shared/GlobalContactButtons'
 import Navbar from '@/components/custom/shared/Navbar/Navbar'
+import FooterMobile from '@/components/custom/shared/FooterMobile'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
@@ -26,7 +27,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           {/* <Navbar className="top-[0px] lg:top-[80px] 2xl:top-[115px] left-0 right-0 z-50" /> */}
           <Navbar />
           <div className="min-h-screen">{children}</div>
-          <Footer />
+          <div className="hidden lg:block">
+            <Footer />
+          </div>
+          <div className="lg:hidden">
+            <FooterMobile />
+          </div>
           <GlobalContactButtons />
         </main>
       </body>
