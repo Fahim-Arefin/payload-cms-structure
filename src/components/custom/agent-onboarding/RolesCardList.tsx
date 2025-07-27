@@ -57,11 +57,7 @@ function RolesCardList({ onboardingRoleData }: Props) {
         {onboardingRoleData?.map((data, index) => (
           <CarouselItem
             key={index}
-            className="basis-1/3 md:basis-4 lg:basis-4 px-5 py-12 
-           md:p-24 
-           lg:px-[130px]  lg:py-[110px] 
-           xl:px-[150px]  xl:py-[100px] 
-           2xl:px-[180px] 2xl:py-[150px]"
+            className="w-full basis-1/2 md:basis-1/3 xl:basis-1/4 lg:py-24 lg:px-16 xl:py-20 2xl:py-32 xl:px-20"
           >
             <RolesCard data={data} index={index} />
           </CarouselItem>
