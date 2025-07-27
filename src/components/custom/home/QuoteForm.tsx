@@ -416,6 +416,20 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   grid grid-cols-2 gap-x-4 gap-y-8 md:gap-5 xl:gap-6 
   p-6 xl:p-8 z-10"
     >
+      {/* age input */}
+      <div className="col-span-2 md:col-span-1">
+        <Input
+          min={18}
+          max={65}
+          type="number"
+          placeholder="Age *"
+          value={formData.Age || ''}
+          onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
+          className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+            fieldErrors.Age ? 'border-red-500 border-2' : ''
+          }`}
+        />
+      </div>
       {/* plans */}
       <div
         className="relative col-span-2 md:col-span-1"
@@ -526,20 +540,6 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         {planError && (
           <p className="text-[10px] py-1 text-red-600 absolute inset-x-0">{planError}</p>
         )}
-      </div>
-      {/* age input */}
-      <div className="col-span-2 md:col-span-1">
-        <Input
-          min={18}
-          max={65}
-          type="number"
-          placeholder="Age *"
-          value={formData.Age || ''}
-          onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
-          className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.Age ? 'border-red-500 border-2' : ''
-          }`}
-        />
       </div>
       {/* select your tenure */}
       <div

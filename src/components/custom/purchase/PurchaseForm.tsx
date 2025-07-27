@@ -275,6 +275,27 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
   grid grid-cols-2 gap-x-4 gap-y-8 md:gap-5 xl:gap-6 
   xl:px-4 xl:py-8 py-8 px-4 z-10"
     >
+      {/* age input */}
+      <div className="col-span-2 md:col-span-1">
+        <Input
+          min={18}
+          max={65}
+          type="number"
+          placeholder="Age *"
+          value={formData.Age || ''}
+          onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
+          className={`bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+            fieldErrors.Age ? 'border-red-500 border-2' : ''
+          }`}
+        />
+        {/* Age error message */}
+        {getFieldErrorMessage('Age') && (
+          <p className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('Age')}
+          </p>
+        )}
+      </div>
+
       {/* plans */}
       <div
         className="relative col-span-2 md:col-span-1"
@@ -389,27 +410,6 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         {getFieldErrorMessage('PlanCode') && (
           <p className="text-red-500 text-xs mt-1">
             {getFieldErrorMessage('PlanCode')}
-          </p>
-        )}
-      </div>
-
-      {/* age input */}
-      <div className="col-span-2 md:col-span-1">
-        <Input
-          min={18}
-          max={65}
-          type="number"
-          placeholder="Age *"
-          value={formData.Age || ''}
-          onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
-          className={`bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.Age ? 'border-red-500 border-2' : ''
-          }`}
-        />
-        {/* Age error message */}
-        {getFieldErrorMessage('Age') && (
-          <p className="text-red-500 text-xs mt-1">
-            {getFieldErrorMessage('Age')}
           </p>
         )}
       </div>
