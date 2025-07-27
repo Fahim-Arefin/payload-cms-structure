@@ -56,10 +56,12 @@ function MapSection({ data }: Props) {
         </div>
 
         {/* Right Column - Dynamic Map */}
-        <div className="
+        <div
+          className=" pl-5 md:pl-24 lg:pl-0
           pr-5 md:pr-24 lg:pr-[130px] xl:pr-[200px] 2xl:pr-[300px]
           lg:pt-12
-        ">
+        "
+        >
           <div className="h-[200px] md:h-[300px] lg:h-[350px] xl:h-[400px] w-full rounded-lg overflow-hidden border border-gray-200">
             {isIframe ? (
               <div

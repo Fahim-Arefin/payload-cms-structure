@@ -13,8 +13,8 @@ function SupportPage() {
     {
       title: '',
       subtitle: 'SUPPORT',
-      description: '',
-      image: '/assets/banners/support1.png',
+      description: 'Need help? We aim to deliver support that speaks your language.',
+      image: '/assets/suppoprtHero.jpg',
     },
   ]
 
@@ -196,8 +196,10 @@ function SupportPage() {
     <div className="font-avenir bg-white">
       <HeroSection
         heroSlides={heroSlides}
-        height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[578px] "
-        top=" top-[150px] md:top-[200px] lg:top-[63%]"
+        // height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[578px] "
+        height=" h-[252px] md:h-[352px] lg:h-[450px] xl:h-[550px] 2xl:h-[650px] "
+        top=" top-[110px] md:top-[150px] lg:top-[50%]"
+        position="[object-position:50%_50px] md:[object-position:50%_-10%]"
       />
       <MapTabSection config={tabItems} data={tabContent} />
       <FaqTabSection config={faqItems} />
