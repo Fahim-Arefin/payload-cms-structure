@@ -45,6 +45,26 @@ const searchSuggestions = [
   { label: 'Premium Calculator', url: '/premium-calculator' },
   { label: 'Purchase', url: '/purchase' },
   { label: 'Shanta Corporate Plans', url: '/plans/corporate' },
+  {
+    label: 'Medical Insurance',
+    url: '/plans/corporate',
+  },
+  {
+    label: 'Life Insurance',
+    url: '/plans/corporate',
+  },
+  {
+    label: 'Corporate Medical Insurance',
+    url: '/plans/corporate',
+  },
+  {
+    label: 'Corporate Life Insurance',
+    url: '/plans/corporate',
+  },
+  {
+    label: 'Group Insurance',
+    url: '/plans/corporate',
+  },
 
   {
     label: 'Pay Premium',
@@ -63,12 +83,44 @@ const searchSuggestions = [
     url: '/career',
   },
   {
+    label: 'Job Opportunities',
+    url: '/career',
+  },
+  {
+    label: 'Job Openings',
+    url: '/career',
+  },
+  {
+    label: 'Vacancy',
+    url: '/career',
+  },
+  {
+    label: 'Jobs',
+    url: '/career',
+  },
+  {
+    label: 'Employment',
+    url: '/career',
+  },
+  {
     label: 'News & Media',
     url: '/news-and-media',
   },
   {
     label: 'About Us',
     url: '/about-us',
+  },
+  {
+    label: 'All Board of Directors',
+    url: '/all-bods',
+  },
+  {
+    label: 'All Leaders',
+    url: '/all-leaders',
+  },
+  {
+    label: 'Agent Onboarding',
+    url: '/agent-onboarding',
   },
   // { label: 'Financial Planning', url: '/financial-planning' },
   // { label: 'SIP Calculator', url: '/calculators/sip' },
