@@ -9,6 +9,7 @@ import EndowmentKeyFeature from '../shared/plans/EndowmentKeyFeature'
 import EndowmentPlanEligibility from '../shared/plans/EndowmentPlanEligibility'
 import GlobalButton from '../shared/GlobalButton'
 import ToolTip from '../shared/ToolTip'
+import { ArrowUpRight } from 'lucide-react'
 
 export function ArrowIcon() {
   return (
@@ -128,6 +129,9 @@ export default function MultiStageTab({ config, data }: Props) {
                     variant="outline"
                   />
                 </ToolTip>
+                <Link href="/plans/individual">
+                  <GlobalButton text="Explore All Plans" variant="secondary" />
+                </Link>
               </div>
             </>
           )

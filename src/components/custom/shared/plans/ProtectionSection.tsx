@@ -101,6 +101,9 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
                 text="Download Brochure"
               />
             </Link>
+            <Link href="/plans/individual">
+              <GlobalButton text="Explore All Plans" variant="secondary" />
+            </Link>
             {/* </ToolTip> */}
           </div>
         </div>

@@ -221,6 +221,9 @@ export function ChildEducationTabs({ config, data }: Props) {
                     variant="outline"
                   />
                 </ToolTip>
+                <Link href="/plans/individual">
+                  <GlobalButton text="Explore All Plans" variant="secondary" />
+                </Link>
               </div>
             </>
           )
