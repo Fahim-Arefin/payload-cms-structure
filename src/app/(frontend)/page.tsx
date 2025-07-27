@@ -59,7 +59,7 @@ export default async function HomePage() {
       content: 'left',
       title: 'Expert Know - How',
       subtitle:
-        'Life can be messy but your insurance doesn’t have to be. Learn how from our Experts.',
+        'Life can be messy but your insurance doesn’t have to be. Learn how from our experts.',
       mainImage: '/assets/thumbnails/yt-thumbnail-1.jpg',
       mainVIdeoLink: 'https://www.youtube.com/embed/rcduE_ff314',
       insuranceCardData: [
