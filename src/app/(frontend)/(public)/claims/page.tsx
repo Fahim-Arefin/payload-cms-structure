@@ -11,7 +11,7 @@ const page: FC<pageProps> = ({}) => {
       title: 'Claim',
       subtitle: '',
       description:
-        'Experience a hassle-free, seamless claims journey- submit, track, and settle your claim in just 3 Days!  ',
+        'Experience a hassle-free, seamless claims journey- submit, track, and settle your claim in just 5 Days!  ',
       image: '/assets/claims.jpg',
     },
   ]

@@ -27,7 +27,7 @@ const cards = [
     icon: '/assets/cue1.png',
     title: 'Shanta',
     subtitle: 'Multi Stage Maturity Plans',
-    description: 'Multiple payouts, 1 powerful plan - because your future is in your hands.  ',
+    description: 'Multiple payouts, 2 powerful plans - because your future is in your hands.  ',
     image: '/assets/on-ur-cue/multi-stage.jpg',
     link: '/plans/individual/saving-and-investment/multistage',
   },

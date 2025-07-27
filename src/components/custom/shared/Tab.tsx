@@ -115,7 +115,7 @@ export function Tab({ config, data }: Props) {
               mt-[30px] lg:mt-[50px] xl:mt-[80px]"
               >
                 <Link
-                  href="/assets/pdf/Required Brochures/Child Education Plan/Child Education Security Plan.pdf"
+                  href="/assets/pdf/Required Brochures/Endowment Plan/Endowment Brochure.pdf"
                   target="_blank"
                 >
                   <GlobalButton text="Download Brochure" variant="primary" />

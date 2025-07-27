@@ -65,7 +65,7 @@ function SavingAndInvestment() {
     title: 'Multi stage Maturity Plans',
     subtitle: 'Shanta',
     description:
-      'Shanta Lifes endowment plan provides the policy owner a guaranteed sum assured. This unique plan combines savings and life insurance components which serves the need for financial security of your family.',
+      'Shanta Lifes multi stage plans provides the policy owner a guaranteed sum assured. This unique plan combines savings and life insurance components which serves the need for financial security of your family.',
     feature: [
       {
         name: 'Maturity Value',

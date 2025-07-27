@@ -18,7 +18,7 @@ const EndowmentPlanEligibility = () => {
             icon="/assets/childIcon.svg"
             bgImage="/assets/eligibilityImage1.jpg"
             entryMin="30"
-            entryMinLabel="Years"
+            entryMinLabel="Days"
             entryMax="60"
             entryMaxLabel="Years"
             policyTerm="10-25"

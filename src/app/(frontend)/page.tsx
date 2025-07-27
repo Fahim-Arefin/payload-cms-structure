@@ -42,7 +42,7 @@ export default async function HomePage() {
       subtitle: 'to live on your terms',
       description:
         'Your life evolves, and so should your protection. Shanta Life Insurance ensures you stay ahead.',
-      image: '/assets/homepage/banner2.jpg',
+      image: '/assets/homepage/banner22.jpg',
     },
     {
       title: 'Empower yourself',
@@ -59,7 +59,7 @@ export default async function HomePage() {
       content: 'left',
       title: 'Expert Know - How',
       subtitle:
-        'Life can be messy but your insurance doesn’t have to be. Learn how from our Experts.',
+        'Life can be messy but your insurance doesn’t have to be. Learn how from our experts.',
       mainImage: '/assets/thumbnails/yt-thumbnail-1.jpg',
       mainVIdeoLink: 'https://www.youtube.com/embed/rcduE_ff314',
       insuranceCardData: [
