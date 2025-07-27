@@ -169,9 +169,9 @@ function page() {
     },
     {
       id: 8,
-      image: '/assets/profile9.png',
-      name: 'Abrar A. Anwar',
-      title: 'Sponsor Shareholder',
+      image: '/assets/profile10.png',
+      name: 'Iftekhar Rahman',
+      title: 'Director',
     },
     {
       id: 9,
