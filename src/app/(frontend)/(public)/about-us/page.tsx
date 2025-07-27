@@ -101,7 +101,7 @@ function page() {
 
   const directorCardData = [
     {
-      image: '/assets/director2.png',
+      image: '/assets/ku.png',
       name: 'Khondoker Monir Uddin',
       designation: 'Chairman',
       title: 'Charting the Course',
@@ -113,7 +113,7 @@ function page() {
       link: '/all-bods#id-1',
     },
     {
-      image: '/assets/director1.png',
+      image: '/assets/aboutusleaders/CEO.png',
       name: 'Nafis Akhter Ahmed',
       designation: 'Chief Executive Officer',
       title: 'Redefining',
@@ -169,9 +169,9 @@ function page() {
     },
     {
       id: 8,
-      image: '/assets/profile9.png',
-      name: 'Abrar A. Anwar',
-      title: 'Sponsor Shareholder',
+      image: '/assets/Iftekhar-Rahman.png',
+      name: 'Iftekhar Rahman',
+      title: 'Director',
     },
     {
       id: 9,
@@ -184,31 +184,31 @@ function page() {
   const allOfThemData = [
     {
       id: 1,
-      image: '/assets/allOfThem1.png',
+      image: '/assets/aboutusleaders/CEO.png',
       name: 'Nasif A Ahmed',
       title: 'Chief Executive Officer',
     },
     {
       id: 2,
-      image: '/assets/allOfThem2.png',
+      image: '/assets/aboutusleaders/CDO.png',
       name: 'M Khurshed Kaisar',
       title: 'Chief Distribution Officer',
     },
     {
       id: 3,
-      image: '/assets/allOfThem3.png',
+      image: '/assets/aboutusleaders/CITO.png',
       name: 'Mohammad Maksud Hossain',
       title: 'Chief IT Officer',
     },
     {
       id: 4,
-      image: '/assets/CMO.png',
+      image: '/assets/aboutusleaders/CMO.png',
       name: 'Jane Alam Romel',
       title: 'Chief Marketing Officer',
     },
     {
       id: 5,
-      image: '/assets/CFO.png',
+      image: '/assets/aboutusleaders/CFO.png',
       name: 'Majedur Rashid Chowdhury',
       title: 'Chief Financial Officer',
     },
