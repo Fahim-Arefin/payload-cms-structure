@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import React, { FC } from 'react'
 import GlobalButton from '../shared/GlobalButton'
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 
 type Benefit = {
   icon: string
@@ -98,7 +99,7 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center base:justify-start md:items-left gap-4 pb-6 pt-10 lg:pt-10 xl:pt-16 ">
+      <div className="flex flex-wrap md:flex-nowrap justify-center items-center base:justify-start md:items-left gap-4 pb-6 pt-10 lg:pt-10 xl:pt-16 ">
         <Link
           href="/assets/pdf/Required Brochures/Corporate Plans/Group-Insurance-Brochure.pdf"
           target="_blank"
@@ -111,6 +112,9 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
           w-[170px] md:w-[200px] lg:w-[220px] xl:w-[230px] 2xl:w-[250px]"
           text="Download Company Profile "
         />
+        <Link href="/plans">
+          <GlobalButton text="Explore All Plans" variant="outline" />
+        </Link>
       </div>
     </div>
   )
