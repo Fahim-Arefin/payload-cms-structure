@@ -85,6 +85,7 @@
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../CarousalNavButtons'
+import Autoplay from 'embla-carousel-autoplay'
 
 type Props<T> = {
   data: T[]
@@ -111,11 +112,13 @@ function Offers<T>({ data, subheading, cardComponent: CardComponent }: Props<T>)
   }, [carouselApi])
 
   return (
-    <div className="px-5 py-12 
+    <div
+      className="px-5 py-12 
            md:p-24 
            lg:px-[100px]  lg:py-[100px] 
            xl:px-[200px]  xl:py-[100px] 
-           2xl:px-[300px] 2xl:py-[150px] min-h-[440px] md:min-h-[550px] space-y-6 md:space-y-12 lg:space-y-20 xl:space-y-24 bg-[#F6EDDD]">
+           2xl:px-[300px] 2xl:py-[150px] min-h-[440px] md:min-h-[550px] space-y-6 md:space-y-12 lg:space-y-20 xl:space-y-24 bg-[#F6EDDD]"
+    >
       <div className="space-y-4">
         <div className="flex space-x-2">
           <h3 className="global-h1 uppercase font-medium text-[#434343]">We</h3>
@@ -123,7 +126,15 @@ function Offers<T>({ data, subheading, cardComponent: CardComponent }: Props<T>)
         </div>
         {subheading && <div className="global-p1 text-[#434343]">{subheading}</div>}
       </div>
-      <Carousel className="w-full" setApi={setCarouselApi}>
+      <Carousel
+        className="w-full"
+        setApi={setCarouselApi}
+        plugins={[
+          Autoplay({
+            delay: 3000,
+          }),
+        ]}
+      >
         <CarouselContent className="-ml-1">
           {data.map((item, index) => (
             <CarouselItem
