@@ -58,12 +58,10 @@ A skilled communicator and team player, Raiven provides crucial insights to stak
   },
   {
     id: 8,
-    title: 'Abrar A. Anwar',
-    designation: 'Sponsor Shareholder',
-    image: '/assets/board-of-directors/abrar-anwar.jpg',
-    description: `With over 33 years of experience in the banking and financial sectors, Abrar A. Anwar is the CEO and Head of Banking & Coverage, Corporate and Investment Banking at Standard Chartered Bank Mauritius. He has held senior leadership roles which included serving as the CEO at Standard Chartered Bank Malaysia and Bangladesh and worked at Citibank NA and ANZ Grindlays Bank. Abrar pioneered the Structured Finance and Syndications business in Bangladesh, leading landmark transactions in corporate finance area. His international exposure spans roles in Corporate Finance, Capital Markets, and Syndications at ANZ Investment Bank in London, UK and Mumbai, India.
-An alumnus of the Institute of Business Administration (IBA), University of Dhaka, Abrar holds an MBA and the prestigious "Chartered Banker" qualification from the Chartered Banker Institute, UK, as well as AICB accreditation.
-As a sponsor shareholder of Shanta Life Insurance, Abrar A. Anwar's exceptional leadership and vision significantly enrich Shanta Life's pursuit of excellence in the insurance sector.`,
+    title: 'Iftekhar Rahman',
+    designation: 'DIRECTOR',
+    image: '/assets/board-of-directors/Iftekhar-Rahman2.jpg',
+    description: `Mr. Iftekhar Rahman has had a distinguished business career spanning over three decades across a wide range of industries. Mr. Rahman graduated from Dhaka University and started his professional journey in the inspection business with Intertek Testing Service Limited. Eventually, he branched out into sports merchandising and textile manufacturing by founding Greenland Garments Limited in the mid 1990s. The company thrived under his leadership for more than twenty years. He then diversified his portfolio by venturing into the IT industry and founded F-Z Technologies, which specializes in software solutions for financial institutions and partners with global companies such as Oracle, Dell, Microsoft, and Cisco. He then entered the telecommunications industry with Tech Valley Networks Limited. And ADN Technologies Limited., which illustrates both his versatility and foresight in the business world. Mr. Rahman has nurtured a lifelong passion for cricket, beginning as a youth player and evolving into a prominent figure in the Bangladeshi sports industry. He currently serves as a director on the Bangladesh Cricket Board, where he plays a pivotal role in advancing the global stature of Bangladesh Cricket.`,
   },
   {
     id: 9,
