@@ -1,10 +1,16 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 
 function GlobalContactButtons() {
+  const [isChatOpen, setIsChatOpen] = useState(false)
+
   const handleCall = () => {
     window.open('tel:09610889900', '_self')
+  }
+
+  const handleChatToggle = () => {
+    setIsChatOpen(!isChatOpen)
   }
 
   return (
@@ -65,7 +71,7 @@ function GlobalContactButtons() {
           </defs>
         </svg>
       </div>
-      <div className="relative group cursor-pointer z-50">
+      <div className="relative group cursor-pointer z-50" onClick={handleChatToggle}>
         <svg
           width="40"
           height="40"
@@ -95,6 +101,33 @@ function GlobalContactButtons() {
           </div>
         </div>
       </div>
+
+      {/* Inline Chat Widget */}
+      {isChatOpen && (
+        <div className="fixed bottom-4 right-4 lg:bottom-auto lg:right-16 lg:top-1/2 lg:-translate-y-1/2 z-50">
+          <div className="bg-white rounded-lg shadow-2xl overflow-hidden border border-gray-200">
+            {/* Chat Header */}
+            <div className="bg-[#FF6600] text-white px-4 py-3 flex justify-between items-center">
+              <span className="font-medium">Chat with us</span>
+              <button 
+                onClick={handleChatToggle}
+                className="text-white hover:text-gray-200 text-xl leading-none"
+              >
+                ×
+              </button>
+            </div>
+            {/* Chat iframe */}
+            <iframe
+              src="https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2024/12/18/12/20241218123154-P5ENF3RC.json"
+              width="350"
+              height="500"
+              frameBorder="0"
+              title="Botpress Chat"
+              className="block"
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
