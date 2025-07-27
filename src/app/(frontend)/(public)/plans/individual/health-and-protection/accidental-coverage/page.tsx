@@ -44,31 +44,6 @@ function page() {
       description:
         'Your loved ones receive twice the insured amount for extra protection (including basic life coverage).',
     },
-    {
-      image: '/assets/offer5.png',
-      bgImage: '/assets/offerbg5.jpg',
-      title: 'Medical Expense Coverage',
-      description: 'Helping with treatment costs so you can focus on recovery.',
-    },
-    {
-      image: '/assets/offer6.png',
-      bgImage: '/assets/offerbg6.jpg',
-      title: 'Permanent Partial Disability',
-      description: 'Financial support if an accident limits your abilities.',
-    },
-    {
-      image: '/assets/offer7.png',
-      bgImage: '/assets/offerbg7.jpg',
-      title: 'Permanent Total Disability',
-      description: 'Security for you and your family in case of lifelong disability.',
-    },
-    {
-      image: '/assets/offer8.png',
-      bgImage: '/assets/offerbg8.jpg',
-      title: 'Accidental Death',
-      description:
-        'Your loved ones receive twice the insured amount for extra protection (including basic life coverage).',
-    },
   ]
   return (
     <div className="font-avenir bg-white">

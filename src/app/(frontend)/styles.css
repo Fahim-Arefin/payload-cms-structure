@@ -174,9 +174,3 @@ body > div[data-state='open'].fixed.inset-0.z-50 {
 }
 
 /* ---- Add to your CSS ---- */
-.dropdown-blur {
-  /* backdrop-filter for all browsers that support it */
-  backdrop-filter: blur(16.67px);
-  -webkit-backdrop-filter: blur(16.67px); /* For Safari */
-  background: rgba(255, 255, 255, 0.7); /* fallback for older browsers */
-}

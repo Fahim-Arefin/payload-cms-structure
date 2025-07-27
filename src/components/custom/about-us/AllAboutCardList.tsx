@@ -53,7 +53,7 @@ function AllAboutCardList({ allAboutData }: Props) {
       {/* Carousel Content */}
       <CarouselContent>
         {allAboutData?.map((data, index) => (
-          <CarouselItem key={index} className="basis-1/3">
+          <CarouselItem key={index} className="basis-1/2 md:basis-1/3">
             <AllAboutCard data={data} index={index} />
           </CarouselItem>
         ))}

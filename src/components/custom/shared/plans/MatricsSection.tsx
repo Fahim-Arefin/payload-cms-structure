@@ -4,6 +4,7 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import GlobalButton from '../GlobalButton'
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 
 type Props = {}
 
@@ -123,7 +124,9 @@ function MatricsSection({}: Props) {
         </div>
 
         {/* Buttons */}
-        <div className="hidden lg:flex flex-col sm:flex-row gap-4">
+        
+      </div>
+      <div className="hidden lg:flex flex-col justify-center items-center mt-16 sm:flex-row gap-4">
           {/* <Button
             variant="primary"
             className="cursor-not-allowed
@@ -160,8 +163,10 @@ function MatricsSection({}: Props) {
             text="Calculate Premium"
             variant="outline"
           />
+          <Link href="/plans/individual">
+            <GlobalButton text="Explore All Plans" variant="secondary" />
+          </Link>
         </div>
-      </div>
     </div>
   )
 }

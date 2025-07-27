@@ -7,6 +7,7 @@ type Props = {
 }
 
 function RolesCard({ data, index }: Props) {
+  //
   return (
     <div
       className={`
@@ -16,7 +17,7 @@ function RolesCard({ data, index }: Props) {
      hover:bg-[rgba(156,134,57,0.8)]
      hover:text-white
     h-[136px] md:h-[180px]  lg:h-[250px] xl:h-[280px] 2xl:h-[310px]
-    w-[108px] md:w-[150px] lg:w-[220px] xl:w-[250px] 2xl:w-[280px]
+     w-[108px] md:w-[150px] lg:w-[220px] xl:w-[250px] 2xl:w-[280px]
     flex justify-center items-center
     `}
       //  ${index % 2 === 0 ? ' bg-[rgba(252,242,236,0.8)] text-[#434]' : ' bg-[rgba(156,134,57,0.8)] text-white'}

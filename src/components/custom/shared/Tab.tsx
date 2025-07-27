@@ -9,6 +9,7 @@ import EndowmentPlanEligibility from './plans/EndowmentPlanEligibility'
 import { BenefitsTabSection } from '../child-education/BenefitsTabSection'
 import ToolTip from './ToolTip'
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 
 export function ArrowIcon() {
   return (
@@ -110,7 +111,7 @@ export function Tab({ config, data }: Props) {
                 {activeTab === 'benefits' && <BenefitsTabSection />}
               </TabsContent>
               <div
-                className="flex flex-col md:flex-row w-fit gap-2 mx-auto 
+                className="flex flex-col items-center md:flex-row w-fit gap-2 mx-auto 
               mt-[30px] lg:mt-[50px] xl:mt-[80px]"
               >
                 <Link
@@ -126,6 +127,9 @@ export function Tab({ config, data }: Props) {
                     variant="outline"
                   />
                 </ToolTip>
+                <Link href="/plans/individual">
+                  <GlobalButton text="Explore All Plans" variant="secondary" />
+                </Link>
               </div>
             </>
           )
