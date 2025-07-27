@@ -59,11 +59,9 @@ A skilled communicator and team player, Raiven provides crucial insights to stak
   {
     id: 8,
     title: 'Iftekhar Rahman',
-    designation: 'Director',
-    image: '/assets/board-of-directors/Iftekhar-Rahman.jpg',
-    description: `Mr. Iftekhar Rahman has had a distinguished business career spanning over three decades across a wide range of industries. Mr. Rahman graduated from Dhaka University and started his professional journey in the inspection business with Intertek Testing Service Limited. Eventually, he branched out into sports merchandising and textile manufacturing by founding Greenland Garments Limited in the mid 1990s. The company thrived under his leadership for more than twenty years. He then diversified his portfolio by venturing into the IT industry and founded F-Z Technologies, which specializes in software solutions for financial institutions and partners with global companies such as Oracle, Dell, Microsoft, and Cisco. He then entered the telecommunications industry with Tech Valley Networks Limited. And ADN Technologies Limited., which illustrates both his versatility and foresight in the business world.
-
-Mr. Rahman has nurtured a lifelong passion for cricket, beginning as a youth player and evolving into a prominent figure in the Bangladeshi sports industry. He currently serves as a director on the Bangladesh Cricket Board, where he plays a pivotal role in advancing the global stature of Bangladesh Cricket.`,
+    designation: 'DIRECTOR',
+    image: '/assets/board-of-directors/Iftekhar-Rahman2.jpg',
+    description: `Mr. Iftekhar Rahman has had a distinguished business career spanning over three decades across a wide range of industries. Mr. Rahman graduated from Dhaka University and started his professional journey in the inspection business with Intertek Testing Service Limited. Eventually, he branched out into sports merchandising and textile manufacturing by founding Greenland Garments Limited in the mid 1990s. The company thrived under his leadership for more than twenty years. He then diversified his portfolio by venturing into the IT industry and founded F-Z Technologies, which specializes in software solutions for financial institutions and partners with global companies such as Oracle, Dell, Microsoft, and Cisco. He then entered the telecommunications industry with Tech Valley Networks Limited. And ADN Technologies Limited., which illustrates both his versatility and foresight in the business world. Mr. Rahman has nurtured a lifelong passion for cricket, beginning as a youth player and evolving into a prominent figure in the Bangladeshi sports industry. He currently serves as a director on the Bangladesh Cricket Board, where he plays a pivotal role in advancing the global stature of Bangladesh Cricket.`,
   },
   {
     id: 9,
