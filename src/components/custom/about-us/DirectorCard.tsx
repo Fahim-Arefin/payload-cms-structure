@@ -122,19 +122,14 @@ function DirectorCard({ data, index }: Props) {
               className="relative z-10 w-full h-full object-cover 
               rounded-sm md:rounded-md lg:rounded-lg 2xl:rounded-[24px]"
             />
+            {/* Name and Designation under image */}
+            {data.name && data.designation && (
+              <div className="text-center mt-1 md:mt-4">
+                <h2 className="text-[#1E1E1E] global-h4 font-semibold">{data.name}</h2>
+                <p className="text-[#ED7125] global-p2 font-medium uppercase">{data.designation}</p>
+              </div>
+            )}
           </div>
-          
-          {/* Name and Designation under image */}
-          {data.name && data.designation && (
-            <div className="space-y-1">
-              <h2 className="text-[#1E1E1E] text-lg md:text-xl lg:text-2xl font-semibold">
-                {data.name}
-              </h2>
-              <p className="text-[#ED7125] text-sm md:text-base lg:text-lg font-medium uppercase">
-                {data.designation}
-              </p>
-            </div>
-          )}
         </div>
 
         {/* Text Content */}
