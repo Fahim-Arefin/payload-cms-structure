@@ -4,7 +4,7 @@ type CorporateOfferingsProps = {}
 
 const insuranceCards = [
   {
-    title: 'Life Insurance Products',
+    title: 'Life Insurance Benefits',
     items: [
       'Group Life Insurance (GL)',
       'Accidental Death Coverage (AD)',
@@ -14,7 +14,7 @@ const insuranceCards = [
     ],
   },
   {
-    title: 'Group Medical Insurance',
+    title: 'Medical Insurance Benefits',
     items: [
       'In-Patient Coverage (IPC)',
       'Maternity Benefits',
@@ -44,7 +44,7 @@ const CorporateOfferings: FC<CorporateOfferingsProps> = ({}) => {
               {card.items.map((item) => (
                 <li
                   key={item}
-                  className="text-[#434342] text-base font-medium text-left leading-6 pl-3 border-l-4 border-[#ED7125] bg-[#FFF8F2] rounded"
+                  className="text-[#434342] text-base font-medium text-left leading-6 pl-3 border-l-4 border-[#ED7125] rounded"
                 >
                   {item}
                 </li>

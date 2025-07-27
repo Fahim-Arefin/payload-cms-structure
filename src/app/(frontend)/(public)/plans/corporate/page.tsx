@@ -176,12 +176,12 @@ function page({}: Props) {
         flex justify-left space-x-4 md:space-x-6 lg:justify-start 
         "
         >
-          <Link
+          {/* <Link
             href="/assets/pdf/Required Brochures/Corporate Plans/Shanta Company Profile Brochure.pdf"
             target="_blank"
           >
             <GlobalButton size="large" text="Download Brochure" variant="primary" />
-          </Link>
+          </Link> */}
 
           <div className="flex items-center space-x-2 text-white 2xl:space-x-4">
             <CallNowButton />
@@ -189,8 +189,8 @@ function page({}: Props) {
         </div>
       </HeroSection>
       <CorporateHighlight highlightsData={highlightData} />
-      <CorporateChoose benefitsData={benefitsData} />
       <CorporateOfferings />
+      <CorporateChoose benefitsData={benefitsData} />
       <CorporateSuitability data={suitabilityData} />
       <PartnerCarousel data={partnerData} />
       <CorporateAddons data={addOnsData} />
