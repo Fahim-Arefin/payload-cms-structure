@@ -169,3 +169,55 @@ export const NAV_ITEMS = [
   { href: '/support', label: 'Support' },
   { href: '/purchase', label: 'Purchase' },
 ]
+export const NAV_ITEMS_MOBILE = [
+  { href: '/', label: 'Home' },
+  { href: '/about-us', label: 'About Us' },
+  {
+    label: 'Solutions',
+    href: '/plans',
+    children: [
+      {
+        label: 'Individual Plans',
+        href: '/plans/individual',
+        children: [
+          {
+            label: 'Saving & Investment Plans',
+            href: '/plans/individual/saving-and-investment',
+            children: [
+              {
+                label: 'Shanta Endowment Plan',
+                href: '/plans/individual/saving-and-investment/endowment',
+              },
+              {
+                label: 'Multi Stage Maturity Plans',
+                href: '/plans/individual/saving-and-investment/multistage',
+              },
+            ],
+          },
+          {
+            label: 'Health & Protection Plans',
+            href: '/plans/individual/health-and-protection',
+            children: [
+              {
+                label: 'Shanta Accidental Coverage',
+                href: '/plans/individual/health-and-protection/accidental-coverage',
+              },
+              {
+                label: 'Shanta Critical Protection',
+                href: '/plans/individual/health-and-protection/critical-illness-coverage',
+              },
+            ],
+          },
+          { label: 'Shanta Child Education Plan', href: '/plans/individual/child-education' },
+        ],
+      },
+      { href: '/plans/corporate', label: 'Corporate Plan' },
+    ],
+  },
+  { href: '/pay-premium', label: 'Pay Premium' },
+  { href: '/claims', label: 'Claims' },
+  { href: '/support', label: 'Support' },
+  { href: '/purchase', label: 'Purchase' },
+  { href: '/agent-onboarding', label: 'Agent' },
+  { href: 'https://portal.shantalife.com/', label: 'My Portal' },
+]
