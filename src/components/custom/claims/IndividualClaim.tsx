@@ -50,7 +50,7 @@ export function IndividualClaim() {
         <span>For any further queries please contact</span>
         <a
           href="tel:09610889900"
-          className="text-[#9C8639] hover:underline ml-2 underline underline-offset-4"
+          className="text-[#9C8639] ml-2"
         >
           09610889900
         </a>

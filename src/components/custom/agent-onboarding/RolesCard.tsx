@@ -11,7 +11,7 @@ function RolesCard({ data, index }: Props) {
   return (
     <div
       className={`
-    rounded-md lg:rounded-[4px] 
+    rounded-md lg:rounded-[4px] cursor-pointer
      shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)]
      bg-[#FCF4EB]
      hover:bg-[rgba(156,134,57,0.8)]
