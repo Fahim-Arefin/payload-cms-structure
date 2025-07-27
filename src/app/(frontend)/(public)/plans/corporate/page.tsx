@@ -132,7 +132,7 @@ function page({}: Props) {
     {
       image: '/assets/addonIcon2.svg',
       description: 'Exclusive Discounts on Lifestyle Amenities ',
-      bgImage: '/assets/addons2.jpg',
+      bgImage: '/assets/addons5.jpg',
     },
     {
       image: '/assets/addonIcon3.svg',
@@ -144,26 +144,26 @@ function page({}: Props) {
       description: 'Telemedicine Service',
       bgImage: '/assets/addons4.jpg',
     },
-    {
-      image: '/assets/addonIcon1.svg',
-      description: 'Integrated Healthcare and Diagnostic Network',
-      bgImage: '/assets/addons1.jpg',
-    },
-    {
-      image: '/assets/addonIcon2.svg',
-      description: 'Exclusive Discounts on Lifestyle Amenities ',
-      bgImage: '/assets/addons2.jpg',
-    },
-    {
-      image: '/assets/addonIcon3.svg',
-      description: 'Digital Loyalty Card ',
-      bgImage: '/assets/addons3.jpg',
-    },
-    {
-      image: '/assets/addonIcon4.svg',
-      description: 'Telemedicine Service',
-      bgImage: '/assets/addons4.jpg',
-    },
+    // {
+    //   image: '/assets/addonIcon1.svg',
+    //   description: 'Integrated Healthcare and Diagnostic Network',
+    //   bgImage: '/assets/addons1.jpg',
+    // },
+    // {
+    //   image: '/assets/addonIcon2.svg',
+    //   description: 'Exclusive Discounts on Lifestyle Amenities ',
+    //   bgImage: '/assets/addons2.jpg',
+    // },
+    // {
+    //   image: '/assets/addonIcon3.svg',
+    //   description: 'Digital Loyalty Card ',
+    //   bgImage: '/assets/addons3.jpg',
+    // },
+    // {
+    //   image: '/assets/addonIcon4.svg',
+    //   description: 'Telemedicine Service',
+    //   bgImage: '/assets/addons4.jpg',
+    // },
   ]
 
   return (
