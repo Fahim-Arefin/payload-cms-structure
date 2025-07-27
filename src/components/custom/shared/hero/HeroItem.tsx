@@ -28,17 +28,17 @@ const HeroItem = ({ slide, top, position }: Props) => {
       {/* Content */}
       <div
         className={`absolute
-        inset-x-0 lg:left-[120px] xl:left-[200px] 2xl:left-[270px] lg:right-auto 
+        inset-x-0 lg:left-[120px] xl:left-[200px] 2xl:left-[270px] lg:right-auto
        space-y-4 md:space-y-6 xl:space-y-10 2xl:space-y-20
        z-20
-       lg:w-[920px] xl:w-[1205px] 2xl:w-[1405px] 
+       lg:w-[920px] xl:w-[1205px] 2xl:w-[1405px]
         ${top ? top : ' top-[100px] md:top-[150px] lg:top-[35%] '}`}
       >
         {/* Title & subtitle */}
         <div
           className="text-left
         hero-content-width
-        tracking-[3%] lg:tracking-[0%] 
+        tracking-[3%] lg:tracking-[0%]
         font-semibold text-white
         hero-h1 uppercase"
         >
@@ -52,10 +52,10 @@ const HeroItem = ({ slide, top, position }: Props) => {
             <div
               className="
               block lg:hidden
-          hero-description-bg-sm 
+          hero-description-bg-sm
           font-[350]
          hero-content-width
-          p-2 md:p-3 lg:p-4 
+          p-2 md:p-3 lg:p-4
           hero-h5"
             >
               <div className="text-white">
@@ -72,7 +72,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
           hero-description-bg-lg
           font-[350]
          hero-content-width
-          p-2 md:p-3 lg:p-4 
+          p-2 md:p-3 lg:p-4
           hero-h5
           "
             >
@@ -106,8 +106,8 @@ const HeroItem = ({ slide, top, position }: Props) => {
         >
           <Button
             variant="primary"
-            className="px-4 md:px-6 py-1 md:py-2 2xl:px-10 2xl:py-6 rounded-[4px] lg:rounded-[8px] 
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px] 
+            className="px-4 md:px-6 py-1 md:py-2 2xl:px-10 2xl:py-6 rounded-[4px] lg:rounded-[8px]
+            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px]
             text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[18px] font-normal"
           >
             Explore Now

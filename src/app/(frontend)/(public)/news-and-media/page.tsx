@@ -19,7 +19,7 @@ export default async function NewsAndMedia() {
         heroSlides={heroSlides}
         height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[600px] "
         top=" top-[150px] md:top-[200px] lg:top-[43%]"
-        position="[object-position:50%_30%]"
+        position="[object-position:50%_60%]"
       />
       <SearchNews paddingOn text="BLOGS" />
       <AllNewsSection />

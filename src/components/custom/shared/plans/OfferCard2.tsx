@@ -45,13 +45,13 @@ function OfferCard2({ data }: Props) {
         >
           {data?.description}
         </p>
-        <div
+        {/* <div
           className="text-[10px] md:text-[12px] text-white underline underline-offset-4 opacity-0
              group-hover:opacity-100
              transition-all duration-500 ease-in font-medium "
         >
           <span>Explore Now</span>
-        </div>
+        </div> */}
       </div>
     </div>
   )
