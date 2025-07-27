@@ -49,11 +49,9 @@ function DirectorListSection({ directorProfileData }: Props) {
             Spearheaded by dynamic leadership team and a visionary board, Shanta Life is ready to
             power progress today, for a better tommorow.
           </p>
-          <div className="hidden lg:flex items-center justify-center lg:justify-start gap-4">
-            <h2 className="global-h3 font-semibold text-[#4A4A4A] uppercase">
-              Board of directors
-            </h2>
-            <Link 
+          <div className="hidden lg:flex lg:flex-col xl:flex-row gap-2 xl:gap-4">
+            <h2 className="global-h3 font-semibold text-[#4A4A4A] uppercase">Board of directors</h2>
+            <Link
               href="/all-bods"
               className="text-sm text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1"
             >
@@ -65,7 +63,9 @@ function DirectorListSection({ directorProfileData }: Props) {
 
         {/* profile card list */}
         <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-3 xl:gap-12 2xl:gap-2 mt-12">
-          {directorProfileData?.map((data, index) => <DirectorProfile key={index} data={data} />)}
+          {directorProfileData?.map((data, index) => (
+            <DirectorProfile key={index} data={data} />
+          ))}
         </div>
 
         {/* profile card carousal */}
