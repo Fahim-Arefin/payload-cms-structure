@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import CalculateForm from './CalculateForm'
 import PremiumBreakdown from './PremiumBreakdown'
 import { ApiResponse, getTotalPremium } from '@/utils/premiumCalculator'
@@ -39,6 +39,10 @@ const CalculatorSection = (props: Props) => {
     email: '',
   })
   const [calculatedPlanCode, setCalculatedPlanCode] = useState<number | null>(null)
+  const [scrollSignal, setScrollSignal] = useState<number>(0)
+
+  const resultRef = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLDivElement>(null)
 
   const handleApiResponse = (response: ApiResponse, paymentMode: string, planName?: string) => {
     setApiResponse(response)
@@ -47,36 +51,51 @@ const CalculatorSection = (props: Props) => {
     if (planName) {
       setSelectedPlanName(planName)
     }
+
+    if (window.innerWidth < 1025) {
+      // Increase counter to trigger scroll
+      setScrollSignal((prev) => prev + 1)
+    }
   }
+
+  //   useEffect(() => {
+  //   if (scrollToResult && apiResponse && resultRef.current) {
+  //     const timeout = setTimeout(() => {
+  //       resultRef.current?.scrollIntoView({ behavior: 'smooth' })
+  //     }, 100) // slight delay to ensure DOM is ready
+  //     setScrollToResult(false) // reset
+  //     return () => clearTimeout(timeout)
+  //   }
+  // }, [scrollToResult, apiResponse])
 
   // Map plan names to PlanDetailsSection expected codes
   const getPlanDetailsCode = (planName?: string): number => {
     // Map plan names to PlanDetailsSection codes
     const planNameToCode: { [key: string]: number } = {
       'Shanta Child Education Plan (3%)': 1,
-      'Shanta Endowment Plan': 2, 
+      'Shanta Endowment Plan': 2,
       'Shanta 3 Stage Plan': 3,
       'Shanta 4 Stage Plan': 4,
     }
-    
+
     // If we have the selected plan name, use it for mapping
     if (selectedPlanName && planNameToCode[selectedPlanName]) {
       return planNameToCode[selectedPlanName]
     }
-    
+
     // If no plan name is available, try to use the provided plan name parameter
     if (planName && planNameToCode[planName]) {
       return planNameToCode[planName]
     }
-    
+
     // Fallback: try to match partial names
     if (selectedPlanName) {
       if (selectedPlanName.includes('Child Education')) return 1
-      if (selectedPlanName.includes('Endowment')) return 2  
+      if (selectedPlanName.includes('Endowment')) return 2
       if (selectedPlanName.includes('3 Stage')) return 3
       if (selectedPlanName.includes('4 Stage')) return 4
     }
-    
+
     return 1 // Default fallback to show something
   }
   const plans = [
@@ -131,12 +150,18 @@ const CalculatorSection = (props: Props) => {
         {/* left side box */}
         <div className=" w-full order-2 lg:order-1">
           {apiResponse ? (
-            <div>
+            <div ref={resultRef}>
               <PlanDetailsSection planCode={getPlanDetailsCode()} plans={plans} />
               <PurchaseCalculateSection
                 confirmedPaymentMode={confirmedPaymentMode}
                 getTotalPremium={getTotalPremium}
                 apiResponse={apiResponse}
+                scrollSignal={scrollSignal}
+                onCalculateAgain={() => {
+                  if (window.innerWidth < 1025 && formRef.current) {
+                    formRef.current.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
               />
             </div>
           ) : (
@@ -169,7 +194,7 @@ const CalculatorSection = (props: Props) => {
         </div>
 
         {/* right form */}
-        <div className="order-1 lg:order-2">
+        <div className="order-1 lg:order-2" ref={formRef}>
           <CalculateForm
             onApiResponse={handleApiResponse}
             formData={formData}
