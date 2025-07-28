@@ -2,21 +2,29 @@
 
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
 import { ApiResToShow } from '@/utils/premiumCalculator'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
+import GlobalButton from '../shared/GlobalButton'
 
 type PurchaseCalculateSectionProps = {
   confirmedPaymentMode: string
   getTotalPremium: any
   apiResponse: any
+  scrollSignal: number
+  onCalculateAgain: () => void
 }
 
 const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
   confirmedPaymentMode,
   getTotalPremium,
   apiResponse,
+  scrollSignal,
+  onCalculateAgain
 }) => {
   const [isCriticalIllnessCovered, setIsCriticalIllnessCovered] = useState<boolean>(false)
   const [isAccidentCovered, setIsAccidentCovered] = useState<boolean>(false)
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+
 
   const getPaymentModeKey = (paymentMode: string): keyof ApiResToShow['lifePremium'] => {
     switch (paymentMode) {
@@ -57,8 +65,14 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
     return lifePremium + ciPremium + accidentPremium
   }
 
+    useEffect(() => {
+    if (window.innerWidth < 1025 && sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [scrollSignal]) // ✅ scroll every time signal changes
+
   return (
-    <div className="">
+    <div className="" ref={sectionRef}>
       <h2 className="global-h3 lg:global-h4 font-semibold mb-2">
         Your <span className="text-[#ED7125]">Premium</span>
       </h2>
@@ -341,6 +355,9 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex justify-center items-center lg:hidden mt-4">
+        <GlobalButton onClick={onCalculateAgain} className="" variant="secondary" text="Calculate Again" />
       </div>
     </div>
   )
