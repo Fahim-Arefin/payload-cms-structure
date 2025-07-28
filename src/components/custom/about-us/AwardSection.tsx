@@ -25,7 +25,7 @@ function AwardSection() {
             <div
               className="
             w-[70%] mx-auto lg:mx-0 lg:w-full 
-            h-[200px] md:h-[300px] lg:h-[600px] xl:h-[650px] 2xl:h-[700px]"
+            h-[200px] md:h-[300px] lg:h-[600px] xl:h-[570px] 2xl:h-[700px]"
             >
               <img
                 className="h-full w-full z-[50] rounded-2xl object-cover"
