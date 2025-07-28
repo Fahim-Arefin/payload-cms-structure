@@ -54,7 +54,7 @@ function AwardSection() {
                       100%
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Success Rate
+                      Settlement rate
                     </div>
                   </div>
                 </div>
@@ -72,7 +72,7 @@ function AwardSection() {
                       112
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Claim Settled
+                      Claim settled
                     </div>
                   </div>
                 </div>

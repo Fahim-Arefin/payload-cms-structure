@@ -85,7 +85,7 @@ function WhyChooseUsSection() {
                       112
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Claim Settled
+                      Claim settled
                     </div>
                   </div>
                 </div>
