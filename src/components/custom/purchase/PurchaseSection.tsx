@@ -128,7 +128,7 @@ const PurchaseSection = (props: Props) => {
         <h4 className="text-[14px] md:text-[20px] lg:text-[22px] xl:text-[24px] 2xl:text-[32px] font-semibold text-[#4A4A4A] text-start uppercase mb-4 lg:mb-10">
           <span className="text-[#ED7125] font-semibold">for ourselves and our loved ones.</span>
         </h4>
-        <p className="text-[12px] md:global-p1 text-start w-full xl:w-[80%] text-[#434343] line-clamp-4 md:line-clamp-2">
+        <p className="text-[12px] md:global-p1 text-start w-full xl:w-[80%] text-[#434343]">
           Our policies provide more than just life coverage. Many plans include savings and
           investment options, helping you grow your wealth over time while ensuring your loved ones
           are protected. With affordable premiums, flexible terms, and guaranteed returns, Shanta

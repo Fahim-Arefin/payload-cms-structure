@@ -106,7 +106,7 @@ function page() {
     title: 'Critical',
     subTitle: 'Protection',
     smallTitle: 'Standard',
-    bgImage: '/assets/criticalProtection2.jpg',
+    bgImage: '/assets/Critical-illness.jpeg',
     item: [
       {
         image: '/assets/protection5.png',
@@ -146,7 +146,7 @@ function page() {
       <PlanInfoSection data={planInfoData} />
       <OffersClientWrapper
         data={offersData}
-        subheading="Four types of protection to keep you and your loved ones financially secure"
+        subheading="Benefits to keep you and your loved ones financially secure"
         card={2}
       />
       <ProtectionSection bgColor="#FCF4EB" data={protectionData} />
