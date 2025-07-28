@@ -17,6 +17,11 @@ function FeedBackSection({}: Props) {
   const [address, setAddress] = useState('')
   const [feedback, setFeedback] = useState('')
   const [requiredError, setRequiredError] = useState(false)
+  const [emailError, setEmailError] = useState('')
+  const [phoneError, setPhoneError] = useState('')
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
   const sendFeedbackHandler = async () => {
     if (!name || !email || !phone || !address || !feedback) {
       setRequiredError(true)
@@ -87,26 +92,58 @@ function FeedBackSection({}: Props) {
               placeholder="Name"
               className="bg-white text-black w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
             />
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Email"
-              className="bg-white text-black w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
-            />
-            <Input
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              type="number"
-              placeholder="Phone"
-              className="bg-white text-black w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
-            />
+            <div>
+              <Input
+                value={email}
+                onChange={(e) => {
+                  const value = e.target.value
+                  setEmail(value)
+
+                  if (value.trim() === '') {
+                    setEmailError('Email is required')
+                  } else if (!emailRegex.test(value)) {
+                    setEmailError('Enter a valid email address')
+                  } else {
+                    setEmailError('')
+                  }
+                }}
+                type="email"
+                placeholder="Email"
+                className="bg-white text-black w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
+              />
+              {emailError && <p className="text-red-500 text-sm pl-1">{emailError}</p>}
+            </div>
+            <div>
+              <Input
+                value={phone}
+                onChange={(e) => {
+                  let value = e.target.value.replace(/\D/g, '') // Remove all non-digits
+                  if (value.length > 11) value = value.slice(0, 11)
+                  setPhone(value)
+
+                  if (value.length === 0) {
+                    setPhoneError('Phone number is required')
+                  } else if (value.length !== 11) {
+                    setPhoneError('Phone number must be exactly 11 digits')
+                  } else {
+                    setPhoneError('')
+                  }
+                }}
+                type="tel"
+                inputMode="numeric"
+                maxLength={11}
+                placeholder="Phone"
+                className="bg-white text-black w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
+              />
+              {phoneError && <p className="text-red-500 text-sm pl-1">{phoneError}</p>}
+            </div>
             <Input
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="Address"
               className="bg-white text-black w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
             />
+
             <Button
               onClick={sendFeedbackHandler}
               variant="primary"
@@ -130,14 +167,17 @@ function FeedBackSection({}: Props) {
 
           {/* Column 2: Feedback textarea */}
           <div className="space-y-5 lg:space-y-0 ">
+            <div>
+
             <Textarea
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
               placeholder="Write your feedback"
               className="shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] w-full 
               h-[150px] lg:h-[258px] xl:h-[332px] bg-white text-black p-5 rounded-[8px] lg:rounded-[10px] xl:rounded-[12px]"
-            />
-            {requiredError && <p className="pt-2">Please Fill out all the fields</p>}
+              />
+            {requiredError && <p className="text-red-500 text-sm">Please Fill out all the fields</p>}
+              </div>
             <div>
               <Button
                 onClick={sendFeedbackHandler}

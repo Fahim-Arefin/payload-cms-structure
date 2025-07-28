@@ -5,6 +5,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Search } from 'lucide-react'
 import { useState } from 'react'
 import AllNewsContainer from './AllNewsContainer'
+import SupportOVCSection from './SupportOVCSection'
 
 type Props = {}
 
@@ -72,11 +73,7 @@ function CatchTheBuzzSection({}: Props) {
               Showing content for <strong>BLOGS</strong>
             </p>
           )}
-          {activeTab === 'ovc' && (
-            <p className="text-center">
-              Showing content for <strong>OVC/TVC</strong>
-            </p>
-          )}
+          {activeTab === 'ovc' && <SupportOVCSection />}
         </div>
       </div>
     </>
