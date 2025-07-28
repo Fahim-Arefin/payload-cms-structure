@@ -118,7 +118,7 @@ function EndowmentSection({ data, content, bgColor }: Props) {
           <h1 className="ml-[20%] md:ml-0 md:text-start global-h1 font-semibold uppercase text-[#3A3A3C]">
             {data?.title}
           </h1>
-          <p className="ml-[20%] md:ml-0 md:text-start global-p1 w-60 md:w-full">
+          <p className="ml-[20%] md:ml-0 md:text-start text-justify global-p1 w-60 md:w-full">
             {data?.description}
           </p>
           <h4 className="md:text-start global-h4 uppercase text-[#3A3A3C] font-semibold ml-[20%] md:ml-0">

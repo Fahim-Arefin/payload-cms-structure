@@ -3,8 +3,62 @@ import Link from 'next/link'
 import ToolTip from './ToolTip'
 
 function Footer() {
+  const shurjoPayData = [
+    {
+      image: '/assets/fotter logos/1.png',
+    },
+    {
+      image: '/assets/fotter logos/2.png',
+    },
+    {
+      image: '/assets/fotter logos/3.png',
+    },
+    {
+      image: '/assets/fotter logos/4.png',
+    },
+    {
+      image: '/assets/fotter logos/5.png',
+    },
+    {
+      image: '/assets/fotter logos/6.png',
+    },
+    {
+      image: '/assets/fotter logos/7.png',
+    },
+    {
+      image: '/assets/fotter logos/8.png',
+    },
+    {
+      image: '/assets/fotter logos/9.png',
+    },
+    {
+      image: '/assets/fotter logos/10.png',
+    },
+    {
+      image: '/assets/fotter logos/11.png',
+    },
+    {
+      image: '/assets/fotter logos/12.png',
+    },
+    {
+      image: '/assets/fotter logos/13.png',
+    },
+    {
+      image: '/assets/fotter logos/14.png',
+    },
+    {
+      image: '/assets/fotter logos/15.png',
+    },
+    {
+      image: '/assets/fotter logos/16.png',
+    },
+    {
+      image: '/assets/fotter logos/17.png',
+    },
+  ]
+
   return (
-    <div className="h-[420px] 2xl:h-[530px] relative font-avenir ">
+    <div className="h-[420px] xl:h-[452px] 2xl:h-[572px] relative font-avenir ">
       {/* <div className="bg-[url('/assets/footerbg.png')] bg-cover bg-center bg-no-repeat h-full w-full z-0"></div> */}
       <div className="absolute inset-0 bg-[#3A3A3C] z-10"></div>
       <div
@@ -18,7 +72,7 @@ function Footer() {
 
       <div
         className="absolute inset-0 z-30 p-2 lg:px-12 xl:px-24 lg:py-12 xl:py-16 2xl:px-44 2xl:py-24 grid grid-cols-1 lg:grid-cols-4
-       gap-x-2 lg:gap-x-4 2xl:gap-x-12 text-white/70"
+       gap-x-2 text-white/70"
       >
         {/* grid 1  */}
         <div className="flex flex-col space-y-3 p-2 col-span-3 lg:col-span-1 lg:-mt-3 xl:-mt-8">
@@ -203,9 +257,9 @@ function Footer() {
           </div>
         </div>
         {/* grid 2 */}
-        <div className="flex flex-col space-y-3 p-2 lg:p-5 items-center -mt-16 md:-mt-12 lg:mt-0">
+        <div className="flex flex-col space-y-3 p-2 lg:py-5 items-center -mt-16 md:-mt-12 lg:mt-0">
           <div>
-            <h1 className="text-sm lg:text-xl 2xl:text-2xl font-medium mb-2 lg:mb-6 md:px-12 lg:px-0 text-white/50">
+            <h1 className="text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium mb-2 lg:mb-6 md:px-12 lg:px-0 text-white/50">
               Explore
             </h1>
             <div>
@@ -241,9 +295,9 @@ function Footer() {
           </div>
         </div>
         {/* grid 3 */}
-        <div className="flex flex-col space-y-3 p-2 lg:p-5 items-center -mt-16 md:-mt-12 lg:mt-0">
+        <div className="flex flex-col space-y-3 p-2 lg:py-5 items-center -mt-16 md:-mt-12 lg:mt-0 ">
           <div>
-            <h1 className=" text-sm lg:text-xl 2xl:text-2xl font-medium mb-6 text-white/50">
+            <h1 className=" text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium mb-6 text-white/50">
               Legal
             </h1>
             <div>
@@ -259,12 +313,12 @@ function Footer() {
           </div>
         </div>
         {/* grid 4 */}
-        <div className="flex flex-col space-y-3 p-2 lg:p-5 items-center -mt-16 md:-mt-12 lg:mt-0 ">
+        <div className="flex flex-col space-y-3 p-2 lg:py-5 items-center -mt-16 md:-mt-12 lg:mt-0 ">
           <div>
-            <h1 className=" text-sm lg:text-xl 2xl:text-2xl font-medium mb-6 text-white/50">
+            <h1 className=" text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium text-white/50">
               Find us on
             </h1>
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 mt-3 2xl:mt-4">
               <div className="w-[20px] h-[20px] lg:w-[30px] lg:h-[30px] 2xl:w-[40px] 2xl:h-[40px]">
                 <Link target="_blank" href="https://www.facebook.com/profile.php?id=61566152682701">
                   <svg
@@ -335,14 +389,35 @@ function Footer() {
               </div>
             </div>
             {/* powered by section */}
-            {/* <div>
-              <h1 className="mt-6 text-sm lg:text-xl 2xl:text-2xl font-medium mb-6 text-white/50">
+            <div className="mt-7 2xl:mt-9 flex space-x-2 xl:space-x-3">
+              <h1 className="lg:pt-[5px] xl:pt-[6px] 2xl:pt-[9px] text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium text-white/50">
                 Powered By -
               </h1>
-              <div>
-                <img src="/assets/shurjo.png" alt="" />
+              <div className="lg:h-[26px] xl:h-[32px] 2xl:h-[40px]">
+                <img src="/assets/shurjo.png" alt="" className="h-full" />
               </div>
-            </div> */}
+            </div>
+            {/* photos */}
+            <div className="flex gap-[3px] flex-wrap mt-3 2xl:mt-4">
+              {shurjoPayData?.map((img, i) => (
+                <div
+                  key={i}
+                  className="rounded-[5px] bg-[#5A5A5B] p-[2px] flex items-center justify-center 
+                  lg:w-[32px] lg:h-[32px]
+                  xl:w-[42px] xl:h-[42px]
+                  2xl:w-[52px] 2xl:h-[52px]"
+                >
+                  <img
+                    src={img?.image}
+                    alt="pay-icon"
+                    className="object-contain
+                    lg:w-[28px] lg:h-[28px] 
+                    xl:w-[36px] xl:h-[36px] 
+                    2xl:w-[45px] 2xl:h-[45px] "
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
