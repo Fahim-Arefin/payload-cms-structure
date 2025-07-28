@@ -164,7 +164,15 @@ export const NAV_ITEMS = [
   },
   { href: '/pay-premium', label: 'Pay Premium' },
   { href: '/claims', label: 'Claims' },
-  { href: '/support', label: 'Support' },
+  {
+    label: 'Support',
+    href: '/support',
+    children: [
+      { href: '/support#general', label: 'General FAQ' },
+      { href: '/support#form', label: 'Forms Library' },
+      { href: '/support#hospitals', label: 'Panel Hospital' },
+    ],
+  },
   { href: '/purchase', label: 'Purchase' },
 ]
 export const NAV_ITEMS_MOBILE = [
@@ -214,7 +222,15 @@ export const NAV_ITEMS_MOBILE = [
   },
   { href: '/pay-premium', label: 'Pay Premium' },
   { href: '/claims', label: 'Claims' },
-  { href: '/support', label: 'Support' },
+  {
+    label: 'Support',
+    href: '/support',
+    children: [
+      { href: '/support#general', label: 'General FAQ' },
+      { href: '/support#form', label: 'Forms Library' },
+      { href: '/support#hospitals', label: 'Panel Hospital' },
+    ],
+  },
   { href: '/purchase', label: 'Purchase' },
   { href: '/agent-onboarding', label: 'Agent' },
   { href: 'https://portal.shantalife.com/', label: 'My Portal' },
