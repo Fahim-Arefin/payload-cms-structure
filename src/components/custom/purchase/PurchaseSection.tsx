@@ -29,18 +29,18 @@ const PurchaseSection = (props: Props) => {
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
   const [selectedPlanName, setSelectedPlanName] = useState<string>('')
   const [selectedPlanCode, setSelectedPlanCode] = useState<number>(0)
-    const [formData, setFormData] = useState<FormData>({
-      PlanCode: 0,
-      Age: 0,
-      PaymentMode: 0,
-      Gender: null,
-      phoneNumber: '',
-      name: '',
-      email: '',
-      city: '',
-      occupation: ''
-    })
-    const [calculatedPlanCode, setCalculatedPlanCode] = useState<number | null>(null)
+  const [formData, setFormData] = useState<FormData>({
+    PlanCode: 0,
+    Age: 0,
+    PaymentMode: 0,
+    Gender: null,
+    phoneNumber: '',
+    name: '',
+    email: '',
+    city: '',
+    occupation: '',
+  })
+  const [calculatedPlanCode, setCalculatedPlanCode] = useState<number | null>(null)
 
   const handleApiResponse = (response: ApiResponse, paymentMode: string, planName?: string) => {
     setApiResponse(response)
@@ -56,32 +56,32 @@ const PurchaseSection = (props: Props) => {
     // Map plan names to PlanDetailsSection codes
     const planNameToCode: { [key: string]: number } = {
       'Shanta Child Education Plan (3%)': 1,
-      'Shanta Endowment Plan': 2, 
+      'Shanta Endowment Plan': 2,
       'Shanta 3 Stage Plan': 3,
       'Shanta 4 Stage Plan': 4,
     }
-    
+
     // If we have the selected plan name, use it for mapping
     if (selectedPlanName && planNameToCode[selectedPlanName]) {
       return planNameToCode[selectedPlanName]
     }
-    
+
     // If no plan name is available, try to use the provided plan name parameter
     if (planName && planNameToCode[planName]) {
       return planNameToCode[planName]
     }
-    
+
     // Fallback: try to match partial names
     if (selectedPlanName) {
       if (selectedPlanName.includes('Child Education')) return 1
-      if (selectedPlanName.includes('Endowment')) return 2  
+      if (selectedPlanName.includes('Endowment')) return 2
       if (selectedPlanName.includes('3 Stage')) return 3
       if (selectedPlanName.includes('4 Stage')) return 4
     }
-    
+
     return 1 // Default fallback to show something
   }
-   const plans = [
+  const plans = [
     {
       text: 'Shanta Child Education Plan',
       videoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
@@ -122,9 +122,12 @@ const PurchaseSection = (props: Props) => {
            2xl:px-[300px] 2xl:pt-[150px] lg:py-10 mb-4 lg:mb-10 xl:mb-20"
     >
       <div className="flex flex-col items-start justify-start">
-        <h1 className="global-h1 font-semibold text-[#4A4A4A] text-start uppercase mb-4 lg:mb-10">
-          Let’s calculate <span className="text-[#ED7125] font-semibold">the premium</span>
+        <h1 className="text-[17px] md:text-[24px] lg:text-[30px] xl:text-[38px] 2xl:text-[46px] font-semibold text-[#4A4A4A] text-start uppercase">
+          Let's get a policy
         </h1>
+        <h4 className="text-[14px] md:text-[20px] lg:text-[22px] xl:text-[24px] 2xl:text-[32px] font-semibold text-[#4A4A4A] text-start uppercase mb-4 lg:mb-10">
+          <span className="text-[#ED7125] font-semibold">for ourselves and our loved ones.</span>
+        </h4>
         <p className="text-[12px] md:global-p1 text-start w-full xl:w-[80%] text-[#434343] line-clamp-4 md:line-clamp-2">
           Our policies provide more than just life coverage. Many plans include savings and
           investment options, helping you grow your wealth over time while ensuring your loved ones
@@ -142,8 +145,7 @@ const PurchaseSection = (props: Props) => {
         <div className=" w-full order-2 lg:order-1">
           {apiResponse ? (
             <div>
-              
-              <PlanDetailsSection planCode={getPlanDetailsCode()} plans={plans}/>
+              <PlanDetailsSection planCode={getPlanDetailsCode()} plans={plans} />
               <PurchaseCalculateSection
                 confirmedPaymentMode={confirmedPaymentMode}
                 getTotalPremium={getTotalPremium}
@@ -152,7 +154,7 @@ const PurchaseSection = (props: Props) => {
             </div>
           ) : selectedPlanCode > 0 ? (
             <div>
-              <PlanDetailsSection planCode={getPlanDetailsCode()} plans={plans}/>
+              <PlanDetailsSection planCode={getPlanDetailsCode()} plans={plans} />
             </div>
           ) : (
             <div>
@@ -185,8 +187,8 @@ const PurchaseSection = (props: Props) => {
 
         {/* right form */}
         <div className="order-1 lg:order-2">
-          <PurchaseForm 
-            formData={formData} 
+          <PurchaseForm
+            formData={formData}
             setFormData={setFormData}
             onPlanSelect={(planCode: number, planName: string) => {
               setSelectedPlanCode(planCode)
