@@ -3,6 +3,59 @@ import Link from 'next/link'
 import ToolTip from './ToolTip'
 
 function FooterMobile() {
+  const shurjoPayData = [
+    {
+      image: '/assets/fotter logos/1.png',
+    },
+    {
+      image: '/assets/fotter logos/2.png',
+    },
+    {
+      image: '/assets/fotter logos/3.png',
+    },
+    {
+      image: '/assets/fotter logos/4.png',
+    },
+    {
+      image: '/assets/fotter logos/5.png',
+    },
+    {
+      image: '/assets/fotter logos/6.png',
+    },
+    {
+      image: '/assets/fotter logos/7.png',
+    },
+    {
+      image: '/assets/fotter logos/8.png',
+    },
+    {
+      image: '/assets/fotter logos/9.png',
+    },
+    {
+      image: '/assets/fotter logos/10.png',
+    },
+    {
+      image: '/assets/fotter logos/11.png',
+    },
+    {
+      image: '/assets/fotter logos/12.png',
+    },
+    {
+      image: '/assets/fotter logos/13.png',
+    },
+    {
+      image: '/assets/fotter logos/14.png',
+    },
+    {
+      image: '/assets/fotter logos/15.png',
+    },
+    {
+      image: '/assets/fotter logos/16.png',
+    },
+    {
+      image: '/assets/fotter logos/17.png',
+    },
+  ]
   return (
     <div className="h-fit font-avenir bg-[#3A3A3C]">
       {/* logo */}
@@ -143,6 +196,39 @@ function FooterMobile() {
           </Link>
         </div>
       </div>
+
+      <div className="w-[70%] md:w-[50%] mx-auto mt-6 text-white/70 font-light">
+        {/* powered by section */}
+        <div className="flex items-center justify-center space-x-2">
+          <h1 className="pt-[4px] text-[14px] font-medium text-white/50">Powered By -</h1>
+          <div className="w-[85px]">
+            <img src="/assets/shurjo.png" alt="" className="h-full w-full" />
+          </div>
+        </div>
+      </div>
+      <div className="w-[70%] md:w-[50%] mx-auto mt-2 text-white/70 font-light">
+        {/* photos */}
+        <div className="flex gap-[3px] flex-wrap mt-2 justify-center">
+          {shurjoPayData?.map((img, i) => (
+            <div
+              key={i}
+              className="rounded-[5px] bg-[#5A5A5B] p-[2px] flex items-center justify-center 
+                  w-[35px] h-[35px]
+                  md:w-[40px] md:h-[40px]
+                  "
+            >
+              <img
+                src={img?.image}
+                alt="pay-icon"
+                className="object-contain
+                    w-[32px] h-[32px] 
+                    md:w-[38px] md:h-[38px] "
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* copyright section */}
       <div className="bg-[#76746E80] flex justify-center items-center mt-6 h-[40px] md:h-[45px] text-white/70 font-normal text-[10px] md:text-[12px]">
         Copyright © 2025 <span className="text-[#FF6600] mx-1">Shanta Life Insurance PLC.</span>{' '}
