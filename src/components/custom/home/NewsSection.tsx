@@ -336,7 +336,7 @@ function NewsSection() {
           {/* First News Item */}
           <div
             onClick={() =>
-              window.open('https://www.bonikbarta.com/magazine/budget_2025-26/1hkeLgIpXFuVnfZa')
+              window.open('https://www.thedailystar.net/tags/shanta-life-insurance-plc')
             }
             className="relative h-[140px] xl:h-[225px] 2xl:h-[350px] w-full rounded-md 2xl:rounded-xl cursor-pointer"
           >
@@ -386,7 +386,11 @@ function NewsSection() {
           </div>
           {/* second News Item */}
           <div
-            onClick={() => window.open('https://www.shantalife.com/banca-dhaka-bank.php')}
+            onClick={() =>
+              window.open(
+                'https://www.thedailystar.net/business/organisation-news/press-releases/news/shanta-life-insurance-and-dhaka-bank-sign-mou-jointly-prepare-bancassurance-3843041',
+              )
+            }
             className="w-full  rounded-b-md 2xl:rounded-b-lg rounded-md 2xl:rounded-xl cursor-pointer"
           >
             <div className="relative">
