@@ -23,14 +23,24 @@ function FooterMobile() {
           <div>
             <img src="/assets/footericon1.png" alt="" className="min-w-[30px] min-h-[30px]" />
           </div>
-          <div>info@shantalife.com</div>
+          <div className="hover:text-blue-300 duration-100 transition-all">
+            <a href="mailto:info@shantalife.com" className="hover:text-blue-300 transition-colors">
+              info@shantalife.com
+            </a>
+          </div>
         </div>
         {/* address */}
         <div className="flex text-white/70 items-center space-x-2 w-[70%] md:w-[50%] mx-auto text-[10px] md:text-[12px] font-light">
           <div>
             <img src="/assets/footericon2.png" alt="" className="min-w-[30px] min-h-[30px]" />
           </div>
-          <div>Shanta Western Tower, Level 10, 186 Bir Uttam Mir Shawkat Sarak, Dhaka 1208</div>
+          <Link
+            target="_blank"
+            href="https://www.google.com/maps?ll=23.770282,90.40626&z=16&t=m&hl=en-GB&gl=US&mapclient=embed&cid=8200627424099091507"
+            className="hover:text-blue-300 duration-100 transition-all"
+          >
+            Shanta Western Tower, Level 10, 186 Bir Uttam Mir Shawkat Sarak, Dhaka 1208
+          </Link>
         </div>
         {/* address */}
         <div className="flex text-white/70 items-center space-x-2 w-[70%] md:w-[50%] mx-auto text-[10px] md:text-[12px] font-light">
@@ -38,7 +48,10 @@ function FooterMobile() {
             <img src="/assets/footericon3.png" alt="" className="min-w-[30px] min-h-[30px]" />
           </div>
           <div>
-            +88 09610889900 <br />
+            <a href="tel:+8809610889900" className="hover:text-blue-300 transition-colors">
+              +88 09610889900
+            </a>
+            <br />
             (10 am-6 pm, Sunday-Thursday)
           </div>
         </div>
