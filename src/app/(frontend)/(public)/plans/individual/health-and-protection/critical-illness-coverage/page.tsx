@@ -51,31 +51,31 @@ function page() {
       description:
         'Your loved ones receive twice the insured amount for extra protection (including basic life coverage).',
     },
-    {
-      image: '/assets/offer9.png',
-      bgImage: '/assets/offerbg9.jpg',
-      title: 'Living Benefit',
-      description: 'Helping with treatment costs so you can focus on recovery.',
-    },
-    {
-      image: '/assets/offer10.png',
-      bgImage: '/assets/offerbg10.jpg',
-      title: 'Affordable Premium',
-      description: 'Security for you and your family in case of lifelong disability.',
-    },
-    {
-      image: '/assets/offer11.png',
-      bgImage: '/assets/offerbg11.jpg',
-      title: 'One-Time Payout',
-      description: 'Financial support if an accident limits your abilities.',
-    },
-    {
-      image: '/assets/offer12.png',
-      bgImage: '/assets/offerbg12.jpg',
-      title: 'Protection Against 25+ Critical Illnesses',
-      description:
-        'Your loved ones receive twice the insured amount for extra protection (including basic life coverage).',
-    },
+    // {
+    //   image: '/assets/offer9.png',
+    //   bgImage: '/assets/offerbg9.jpg',
+    //   title: 'Living Benefit',
+    //   description: 'Helping with treatment costs so you can focus on recovery.',
+    // },
+    // {
+    //   image: '/assets/offer10.png',
+    //   bgImage: '/assets/offerbg10.jpg',
+    //   title: 'Affordable Premium',
+    //   description: 'Security for you and your family in case of lifelong disability.',
+    // },
+    // {
+    //   image: '/assets/offer11.png',
+    //   bgImage: '/assets/offerbg11.jpg',
+    //   title: 'One-Time Payout',
+    //   description: 'Financial support if an accident limits your abilities.',
+    // },
+    // {
+    //   image: '/assets/offer12.png',
+    //   bgImage: '/assets/offerbg12.jpg',
+    //   title: 'Protection Against 25+ Critical Illnesses',
+    //   description:
+    //     'Your loved ones receive twice the insured amount for extra protection (including basic life coverage).',
+    // },
   ]
 
   const protectionData = {

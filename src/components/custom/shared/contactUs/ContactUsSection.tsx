@@ -25,6 +25,11 @@ function ContactUsSection() {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [message, setMessage] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [phoneError, setPhoneError] = useState('')
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
   const sendMessageHandler = async (e: React.FormEvent) => {
     e.preventDefault()
     setSendButtonText('Sending...')
@@ -42,7 +47,7 @@ function ContactUsSection() {
         lastName,
         email,
         phone,
-        address: "",
+        address: '',
         message,
       }),
     })
@@ -168,23 +173,48 @@ function ContactUsSection() {
                 <label className="text-lg text-gray-800 2xl:mb-1">Email</label>
                 <Input
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    setEmail(value)
+                    if (!value) {
+                      setEmailError('Email is required')
+                    } else if (!emailRegex.test(value)) {
+                      setEmailError('Enter a valid email address')
+                    } else {
+                      setEmailError('')
+                    }
+                  }}
                   type="email"
                   placeholder=""
                   className="rounded-none border-0 border-b border-black focus-visible:ring-0 focus-visible:ring-offset-0 px-0
                   h-[10px] lg:h-[28px] xl:h-[30px] 2xl:h-[32px]"
                 />
+                {emailError && <p className="text-red-500 text-xs pl-1">{emailError}</p>}
               </div>
               <div className="flex flex-col">
                 <label className="text-lg text-gray-800 2xl:mb-1">Phone Number</label>
                 <Input
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  type="tel"
+                  onChange={(e) => {
+                    let value = e.target.value.replace(/\D/g, '') // Remove non-digits
+                    if (value.length > 11) value = value.slice(0, 11)
+                    setPhone(value)
+                    if (value.length === 0) {
+                      setPhoneError('Phone number is required')
+                    } else if (value.length !== 11) {
+                      setPhoneError('Phone number must be exactly 11 digits')
+                    } else {
+                      setPhoneError('')
+                    }
+                  }}
+                  inputMode="numeric"
+                  pattern="\d*"
+                  maxLength={11}
                   placeholder=""
                   className="rounded-none border-0 border-b border-black focus-visible:ring-0 focus-visible:ring-offset-0 px-0
                   h-[10px] lg:h-[28px] xl:h-[30px] 2xl:h-[32px]"
                 />
+                {phoneError && <p className="text-red-500 text-xs pl-1">{phoneError}</p>}
               </div>
             </div>
 
@@ -290,17 +320,43 @@ function ContactUsSection() {
                       <label className="text-sm">Email</label>
                       <Input
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => {
+                          const value = e.target.value
+                          setEmail(value)
+                          if (!value) {
+                            setEmailError('Email is required')
+                          } else if (!emailRegex.test(value)) {
+                            setEmailError('Enter a valid email address')
+                          } else {
+                            setEmailError('')
+                          }
+                        }}
                         className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px]"
                       />
+                      {emailError && <p className="text-red-500 text-xs pl-1">{emailError}</p>}
                     </div>
                     <div className="flex flex-col">
                       <label className="text-sm">Phone</label>
                       <Input
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        onChange={(e) => {
+                          let value = e.target.value.replace(/\D/g, '') // Remove non-digits
+                          if (value.length > 11) value = value.slice(0, 11)
+                          setPhone(value)
+                          if (value.length === 0) {
+                            setPhoneError('Phone number is required')
+                          } else if (value.length !== 11) {
+                            setPhoneError('Phone number must be exactly 11 digits')
+                          } else {
+                            setPhoneError('')
+                          }
+                        }}
+                        inputMode="numeric"
+                        pattern="\d*"
+                        maxLength={11}
                         className="rounded-none border-0 border-b border-black focus-visible:ring-0 px-0 h-[28px]"
                       />
+                      {phoneError && <p className="text-red-500 text-xs pl-1">{phoneError}</p>}
                     </div>
                   </div>
 
