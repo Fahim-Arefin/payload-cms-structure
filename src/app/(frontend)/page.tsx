@@ -116,9 +116,15 @@ export default async function HomePage() {
       content: 'left',
       title: 'Zero-Hassle protection',
       subtitle: 'Get your life covered - fast, simple & smart.',
-      mainImage: '/assets/homepage/zero-hassle-protection-tn-3.jpg',
+      mainImage: '/assets/homepage/bima.jpeg',
       mainVIdeoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
       insuranceCardData: [
+        {
+          title: '',
+          image: '/assets/homepage/zero-hassle-protection-tn-3.jpg',
+          videoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
+          description: '',
+        },
         {
           title: '',
           image: '/assets/homepage/zero-hassle-protection-tn-2.jpg',
@@ -129,12 +135,6 @@ export default async function HomePage() {
           title: '',
           image: '/assets/homepage/zero-hassle-protection-tn-1.jpg',
           videoLink: 'https://www.youtube.com/embed/DzMzN76gELM',
-          description: '',
-        },
-        {
-          title: '',
-          image: '/assets/homepage/zero-hassle-protection-tn-3.jpg',
-          videoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
           description: '',
         },
       ],

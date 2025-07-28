@@ -16,7 +16,7 @@ const EligibilityTabSection = () => {
           <EligibilityCard
             title="Child"
             icon="/assets/childIcon.svg"
-            bgImage="/assets/eligibilityImage1.jpg"
+            // bgImage="/assets/eligibilityImage1.jpg"
             entryMin="30"
             entryMinLabel="Days"
             entryMax="15"
@@ -29,7 +29,7 @@ const EligibilityTabSection = () => {
           <EligibilityCard
             title="Parents"
             icon="/assets/parentIcon.svg"
-            bgImage="/assets/parentsTab.jpg"
+            // bgImage="/assets/parentsTab.jpg"
             entryMin="21"
             entryMinLabel="Years"
             entryMax="55"

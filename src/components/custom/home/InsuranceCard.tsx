@@ -34,8 +34,8 @@ const content = (data: InsuranceCardDataType) => (
     </div>
     <div
       className="absolute bottom-0 right-0 z-20 
-      md:w-[40px] lg:w-[50px] xl:w-[60px] 2xl:w-[70px]  
-      md:h-[40px] lg:h-[50px] xl:h-[60px] 2xl:h-[70px]"
+       md:w-[20px] lg:w-[30px] xl:w-[40px] 2xl:w-[50px]  
+       md:h-[20px] lg:h-[30px] xl:h-[40px] 2xl:h-[50px]"
     >
       <img src={data?.videoLink ? '/assets/play3.svg' : '/assets/circle.svg'} alt="" />
     </div>

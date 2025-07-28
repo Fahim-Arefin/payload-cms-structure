@@ -13,7 +13,7 @@ function PlanPage() {
       // description:
       //   'Life\u2019s full of surprises. We\u2019re here to help you navigate them. Let\u2019s build a confident future together.',
       description:
-        'Life\u2019s full of surprises.. We\u2019re here to help you navigate them.. Let\u2019s build a confident future together.',
+        'Life\u2019s full of surprises. We\u2019re here to help you navigate them... Let\u2019s build a confident future together.',
       image: '/assets/solutionHeroBanner.jpg',
     },
   ]
