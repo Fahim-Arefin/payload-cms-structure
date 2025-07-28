@@ -3,7 +3,7 @@ import React from 'react'
 type EligibilityCardProps = {
   title: string
   icon: string // icon path
-  bgImage: string // background image path
+  bgImage?: string // background image path
   entryMin: string
   entryMinLabel: string
   entryMax: string
@@ -36,7 +36,7 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
     >
       <div className="flex flex-col gap-2 items-center">
         <img src={icon} alt={title} className="w-14 h-14" />
-        <p className="uppercase text-white font-bold global-p1 mt-2">{title}</p>
+        <p className="uppercase text-[#434343] font-bold global-p1 mt-2">{title}</p>
       </div>
       <div className="flex flex-col justify-center items-center space-y-2 mt-4">
         {/* Entry Age */}
@@ -44,7 +44,8 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
           className="p-2 w-64 flex flex-col items-center shadow-md"
           style={{
             borderRadius: '6.667px 6.667px 0px 0px',
-            background: 'rgba(156, 134, 57, 0.10)',
+            // background: 'rgba(156, 134, 57, 0.10)',
+            background: '#434343',
             backdropFilter: 'blur(20px)',
           }}
         >
@@ -68,7 +69,8 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
           className="p-4 w-64 flex flex-col items-center shadow-md"
           style={{
             borderRadius: '6.667px 6.667px 0px 0px',
-            background: 'rgba(156, 134, 57, 0.10)',
+            // background: 'rgba(156, 134, 57, 0.10)',
+            background: '#434343',
             backdropFilter: 'blur(20px)',
           }}
         >
@@ -82,7 +84,8 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
           className="p-4 w-64 flex flex-col items-center shadow-md"
           style={{
             borderRadius: '6.667px 6.667px 0px 0px',
-            background: 'rgba(156, 134, 57, 0.10)',
+            // background: 'rgba(156, 134, 57, 0.10)',
+            background: '#434343',
             backdropFilter: 'blur(20px)',
           }}
         >
