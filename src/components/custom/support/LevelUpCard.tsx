@@ -1,14 +1,16 @@
+import Link from 'next/link'
 import React from 'react'
 
 type Props = {
   item: {
     image: string
     title: string
+    link?: string
   }
 }
 
 function LevelUpCard({ item }: Props) {
-  return (
+  const CardContent = (
     <div
       className="relative flex justify-center items-center cursor-pointer
         bg-no-repeat bg-cover bg-center bg-[lightgray] text-white 
@@ -27,6 +29,18 @@ function LevelUpCard({ item }: Props) {
       <div className="relative z-10 global-h1 font-semibold">{item?.title}</div>
     </div>
   )
+
+  // If there's a link and it's not just a placeholder, wrap with Link
+  if (item?.link && item.link !== '#') {
+    return (
+      <Link href={item.link}>
+        {CardContent}
+      </Link>
+    )
+  }
+
+  // Otherwise return the card without navigation
+  return CardContent
 }
 
 export default LevelUpCard

@@ -12,7 +12,7 @@ function PlanPage() {
     {
       title: 'Individual Plans',
       subtitle: '',
-      description: 'Because real life doesn’t come with a rewind button',
+      description: 'Because real life doesn’t come with a rewind button.',
       image: '/assets/plan1.jpg',
     },
   ]

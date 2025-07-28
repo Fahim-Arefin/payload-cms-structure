@@ -2,7 +2,7 @@
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SupportTabContent from './SupportTabContent'
 import { TabDataType } from '@/types'
 import GeneralFaq from './GeneralFaq'
@@ -15,11 +15,18 @@ type TabConfig = {
 
 type Props = {
   config: TabConfig
+  initialTab?: string
 }
 
-export function FaqTabSection({ config }: Props) {
-  const [activeTab, setActiveTab] = useState(config[0].value)
+export function FaqTabSection({ config, initialTab }: Props) {
+  const [activeTab, setActiveTab] = useState(initialTab || config[0].value)
   const activeIndex = config.findIndex((tab) => tab.value === activeTab)
+
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab)
+    }
+  }, [initialTab])
 
   return (
     <>
@@ -30,7 +37,7 @@ export function FaqTabSection({ config }: Props) {
            xl:px-[200px]  xl:pt-[70px] 
            2xl:px-[300px] 2xl:pt-[100px]"
       >
-        <Tabs defaultValue={config[0].value} value={activeTab} onValueChange={setActiveTab}>
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
           <div
             className="relative w-full border-b border-[#434343] md:py-[12px] bg-white
             mb-[16px] md:mb-[20px] lg:mb-[40px] xl:mb-[70px]"

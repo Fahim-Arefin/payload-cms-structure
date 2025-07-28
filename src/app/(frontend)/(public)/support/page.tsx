@@ -1,3 +1,4 @@
+'use client'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import CatchTheBuzzSection from '@/components/custom/support/CatchTheBuzzSection'
 import { FaqTabSection } from '@/components/custom/support/FaqTabSection'
@@ -5,10 +6,71 @@ import FeedBackSection from '@/components/custom/support/FeedBackSection'
 import GeneralFaq from '@/components/custom/support/GeneralFaq'
 import LevelUpSection from '@/components/custom/support/LevelUpSection'
 import { MapTabSection } from '@/components/custom/support/MapTabSection'
+import { useEffect, useState } from 'react'
 
 import NewsSliderSection from '@/components/custom/support/NewsSliderSection'
 
 function SupportPage() {
+  const [activeMapTab, setActiveMapTab] = useState('branches')
+  const [activeFaqTab, setActiveFaqTab] = useState('general')
+
+  useEffect(() => {
+    let lastHash = ''
+    
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1) // Remove the # symbol
+      
+      // Prevent infinite loops by checking if hash actually changed
+      if (hash === lastHash) return
+      lastHash = hash
+      
+      if (hash) {
+        let targetSection = null
+        
+        // Handle map tab fragments
+        if (hash === 'hospitals') {
+          setActiveMapTab('hospitals')
+          targetSection = 'map-section'
+        } else if (hash === 'branches') {
+          setActiveMapTab('branches')
+          targetSection = 'map-section'
+        }
+        // Handle FAQ tab fragments  
+        else if (hash === 'general') {
+          setActiveFaqTab('general')
+          targetSection = 'faq-section'
+        } else if (hash === 'form') {
+          setActiveFaqTab('form')
+          targetSection = 'faq-section'
+        }
+
+        // Scroll to the target section after a short delay to allow tab to activate
+        if (targetSection) {
+          setTimeout(() => {
+            const element = document.getElementById(targetSection)
+            if (element) {
+              element.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start',
+                inline: 'nearest'
+              })
+            }
+          }, 150)
+        }
+      }
+    }
+
+    // Check hash on component mount
+    handleHashChange()
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange)
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [])
+
   const heroSlides = [
     {
       title: '',
@@ -54,26 +116,32 @@ function SupportPage() {
     {
       title: 'Vlog',
       image: '/assets/levelup1.jpg',
+      link: '#', // No link for now
     },
     {
       title: 'Blog',
       image: '/assets/levelup2.jpg',
+      link: '/news-and-media#blog',
     },
     {
       title: 'News',
       image: '/assets/levelup3.jpg',
+      link: '/news-and-media#news',
     },
     {
       title: 'Vlog',
       image: '/assets/levelup1.jpg',
+      link: '#', // No link for now
     },
     {
       title: 'Blog',
       image: '/assets/levelup2.jpg',
+      link: '/news-and-media#blog',
     },
     {
       title: 'News',
       image: '/assets/levelup3.jpg',
+      link: '/news-and-media#news',
     },
   ]
 
@@ -201,8 +269,12 @@ function SupportPage() {
         top=" top-[110px] md:top-[150px] lg:top-[50%]"
         position="[object-position:50%_50px] md:[object-position:50%_-10%]"
       />
-      <MapTabSection config={tabItems} data={tabContent} />
-      <FaqTabSection config={faqItems} />
+      <div id="map-section">
+        <MapTabSection config={tabItems} data={tabContent} initialTab={activeMapTab} />
+      </div>
+      <div id="faq-section">
+        <FaqTabSection config={faqItems} initialTab={activeFaqTab} />
+      </div>
       {/* <GeneralFaq /> */}
       <CatchTheBuzzSection />
       {/* <NewsSliderSection data={newsSliderData} /> */}
