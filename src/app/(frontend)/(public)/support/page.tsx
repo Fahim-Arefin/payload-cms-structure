@@ -116,26 +116,32 @@ function SupportPage() {
     {
       title: 'Vlog',
       image: '/assets/levelup1.jpg',
+      link: '#', // No link for now
     },
     {
       title: 'Blog',
       image: '/assets/levelup2.jpg',
+      link: '/news-and-media#blog',
     },
     {
       title: 'News',
       image: '/assets/levelup3.jpg',
+      link: '/news-and-media#news',
     },
     {
       title: 'Vlog',
       image: '/assets/levelup1.jpg',
+      link: '#', // No link for now
     },
     {
       title: 'Blog',
       image: '/assets/levelup2.jpg',
+      link: '/news-and-media#blog',
     },
     {
       title: 'News',
       image: '/assets/levelup3.jpg',
+      link: '/news-and-media#news',
     },
   ]
 
