@@ -18,16 +18,17 @@ function AddonsCard({ data }: Props) {
 
       {/* Foreground content */}
       <div
-        className="relative z-10 cursor-pointer
+        className="relative z-10
         h-[220px] md:h-[240px] lg:h-[280px] xl:h-[340px] 2xl:h-[400px] 
         py-7 lg:py-9 xl:py-12 
         px-2 xl:px-5 
         flex flex-col items-center justify-center
         space-y-2 lg:space-y-4 xl:space-y-6 2xl:space-y-6
         group transition-all duration-300 ease-linear
-        hover:bg-[#9C8639]/60
+        
         hover:shadow-lg"
       >
+        {/* hover:bg-[#9C8639]/60 */}
         <div
           className="transition-transform duration-500 group-hover:scale-105
          w-[40px] lg:w-[50px] xl:w-[80px] 
