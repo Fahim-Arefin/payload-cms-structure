@@ -12,7 +12,7 @@ function page() {
       title: 'Pay Premium',
       subtitle: '',
       description: 'Powering your protection starts here.',
-      image: '/assets/pay-premium-2.jpg',
+      image: '/assets/Pay-prem-3.jpg',
     },
   ]
 
@@ -132,7 +132,11 @@ function page() {
 
   return (
     <div className="font-avenir bg-white">
-      <HeroSection heroSlides={heroSlides} top=" top-[150px] md:top-[200px] lg:top-[43%]" />
+      <HeroSection
+        heroSlides={heroSlides}
+        top=" top-[200px] md:top-[250px] lg:top-[43%]"
+        position="[object-position:30%_50px] md:[object-position:50%_10%] lg:[object-position:50%_0%] xl:[object-position:50%_18%] 2xl:[object-position:50%_16%]"
+      />
       <BankSection align="right" data={bankData} />
       {/* <BkashSection align="left" bgColor="#FCF4EB" data={bkashData} />
       <RocketSection align="left" bgColor="#FCF4EB" data={rocketData} /> */}
