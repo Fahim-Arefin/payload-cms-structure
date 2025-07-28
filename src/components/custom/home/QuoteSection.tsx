@@ -219,20 +219,41 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import QuoteForm from './QuoteForm'
 import { getTotalPremium, ApiResponse, ApiResToShow } from '@/utils/premiumCalculator'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
+import GlobalButton from '../shared/GlobalButton'
 
 function QuoteSection() {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
   const [isCriticalIllnessCovered, setIsCriticalIllnessCovered] = useState<boolean>(false)
   const [isAccidentCovered, setIsAccidentCovered] = useState<boolean>(false)
+  const resultRef = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLDivElement>(null)
 
   const handleApiResponse = (response: ApiResponse, paymentMode: string) => {
     setApiResponse(response)
     setConfirmedPaymentMode(paymentMode)
+    
+    // Scroll to results on mobile after API response
+    if (window.innerWidth < 1024 && resultRef.current) {
+      setTimeout(() => {
+        resultRef.current?.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        })
+      }, 300) // Small delay to ensure DOM update
+    }
+  }
+
+  const handleCalculateAgain = () => {
+    if (window.innerWidth < 1024 && formRef.current) {
+      const y = formRef.current.getBoundingClientRect().top + window.scrollY
+      const offset = 80 // Add some offset from top
+      window.scrollTo({ top: y - offset, behavior: 'smooth' })
+    }
   }
 
   // Helper function to get the correct key for payment mode
@@ -280,9 +301,9 @@ function QuoteSection() {
 
   return (
     <div className="relative font-avenir container-wpm md:pb-[70px] lg:pb-[90px] xl:pb-[80px] 2xl:pb-40">
-      <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.3fr,1fr] z-10">
-        {/* Left Side */}
-        <div className="p-4 lg:pl-0 space-y-8 xl:space-y-11 z-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.3fr,1fr] gap-4 lg:gap-10 z-10">
+        {/* Left Side - Results Section (order-2 on mobile, order-1 on lg+) */}
+        <div ref={resultRef} className="p-4 lg:pl-0 space-y-8 xl:space-y-11 z-10 order-2 lg:order-1">
           {/* Text Container */}
           <div className="space-y-2 text-center lg:text-left">
             <div className="uppercase text-[#1E1E1E] text-[16px] md:text-[18px] 2xl:text-2xl font-light ">
@@ -296,19 +317,19 @@ function QuoteSection() {
               and get a personalized quote.
             </p>
           </div>
-          {/* Info Container - Only show when API response is available */}
+          {/* Info Container - Show on all screens when API response is available */}
           {apiResponse && (
-            <div className="hidden md:grid grid-cols-4 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600]">
-              <h2 className="global-h4 font-normal mb-6 col-span-5 p-2 py-2 xl:py-3 lg:my-3 xl:my-4 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600]">
+              <h2 className="global-h4 font-normal mb-6 col-span-2 md:col-span-4 p-2 py-2 xl:py-3 lg:my-3 xl:my-4 text-center">
                 Your Desired Premium is Highlighted
               </h2>
 
-              <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
+              <div className="col-span-1 md:col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
                 <div
                   className={`font-medium text-center ${
                     confirmedPaymentMode === 'Monthly'
-                      ? 'text-[#ED7125] text-[14px] lg:text-[16px] xl:text-[18px]'
-                      : 'text-[#1E1E1E] text-[12px] lg:text-[14px] xl:text-[16px]'
+                      ? 'text-[#ED7125] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'
+                      : 'text-[#1E1E1E] text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px]'
                   }`}
                 >
                   Monthly
@@ -316,8 +337,8 @@ function QuoteSection() {
                 <div
                   className={`font-bold text-center ${
                     confirmedPaymentMode === 'Monthly'
-                      ? 'text-[#ED7125] text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
-                      : 'text-[#1E1E1E] text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
+                      ? 'text-[#ED7125] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
+                      : 'text-[#1E1E1E] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
                   }`}
                 >
                   <AnimatedCounter
@@ -332,12 +353,12 @@ function QuoteSection() {
                   />
                 </div>
               </div>
-              <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+              <div className="col-span-1 md:col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
                 <div
                   className={`font-medium text-center ${
                     confirmedPaymentMode === 'Quarterly'
-                      ? 'text-[#ED7125] text-[14px] lg:text-[16px] xl:text-[18px]'
-                      : 'text-[#1E1E1E] text-[12px] lg:text-[14px] xl:text-[16px]'
+                      ? 'text-[#ED7125] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'
+                      : 'text-[#1E1E1E] text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px]'
                   }`}
                 >
                   Quarterly
@@ -345,8 +366,8 @@ function QuoteSection() {
                 <div
                   className={`font-bold text-center ${
                     confirmedPaymentMode === 'Quarterly'
-                      ? 'text-[#ED7125] text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
-                      : 'text-[#1E1E1E] text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
+                      ? 'text-[#ED7125] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
+                      : 'text-[#1E1E1E] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
                   }`}
                 >
                   <AnimatedCounter
@@ -361,12 +382,12 @@ function QuoteSection() {
                   />
                 </div>
               </div>
-              <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+              <div className="col-span-1 md:col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
                 <div
                   className={`font-medium text-center ${
                     confirmedPaymentMode === 'Half Yearly'
-                      ? 'text-[#ED7125] text-[14px] lg:text-[16px] xl:text-[18px]'
-                      : 'text-[#1E1E1E] text-[12px] lg:text-[14px] xl:text-[16px]'
+                      ? 'text-[#ED7125] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'
+                      : 'text-[#1E1E1E] text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px]'
                   }`}
                 >
                   Half Yearly
@@ -374,8 +395,8 @@ function QuoteSection() {
                 <div
                   className={`font-bold text-center ${
                     confirmedPaymentMode === 'Half Yearly'
-                      ? 'text-[#ED7125] text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
-                      : 'text-[#1E1E1E] text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
+                      ? 'text-[#ED7125] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
+                      : 'text-[#1E1E1E] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
                   }`}
                 >
                   <AnimatedCounter
@@ -390,12 +411,12 @@ function QuoteSection() {
                   />
                 </div>
               </div>
-              <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+              <div className="col-span-1 md:col-span-1 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
                 <div
                   className={`font-medium text-center ${
                     confirmedPaymentMode === 'Yearly'
-                      ? 'text-[#ED7125] text-[16px] lg:text-[18px] xl:text-[20px]'
-                      : 'text-[#1E1E1E] text-[12px] lg:text-[14px] xl:text-[16px]'
+                      ? 'text-[#ED7125] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]'
+                      : 'text-[#1E1E1E] text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px]'
                   }`}
                 >
                   Yearly
@@ -403,8 +424,8 @@ function QuoteSection() {
                 <div
                   className={`font-bold text-center ${
                     confirmedPaymentMode === 'Yearly'
-                      ? 'text-[#ED7125] text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
-                      : 'text-[#1E1E1E] text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
+                      ? 'text-[#ED7125] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-2xl'
+                      : 'text-[#1E1E1E] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl'
                   }`}
                 >
                   <AnimatedCounter
@@ -419,29 +440,8 @@ function QuoteSection() {
                   />
                 </div>
               </div>
-              {/* <div className="col-span-1 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
-                <div
-                  className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
-                    confirmedPaymentMode === 'Single' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
-                  }`}
-                >
-                  Single
-                </div>
-                <div
-                  className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
-                    confirmedPaymentMode === 'Single' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
-                  }`}
-                >
-                  {getTotalPremium(
-                    apiResponse,
-                    confirmedPaymentMode,
-                  ).lifePremium.single.toLocaleString() !== '0'
-                    ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.single.toLocaleString()}`
-                    : ''}
-                </div>
-              </div> */}
-              <div className="col-span-5 py-3 px-6 xl:py-4 xl:px-8 space-y-2 mt-2 xl:mt-6">
-                <div className="bg-[#F6EDDD] md:px-4 lg:px-1 md:py-1.5 lg:py-1 xl:px-4 xl:py-1.5 md:w-[60%] lg:w-[100%] xl:w-[85%] 2xl:w-[70%] mx-auto rounded-full flex items-center space-x-2">
+              <div className="col-span-2 md:col-span-4 py-3 px-6 xl:py-4 xl:px-8 space-y-2 mt-2 xl:mt-6">
+                <div className="bg-[#F6EDDD] px-2 md:px-4 lg:px-1 py-1.5 lg:py-1 xl:px-4 xl:py-1.5 w-full lg:w-[100%] xl:w-[85%] 2xl:w-[70%] mx-auto rounded-full flex items-center space-x-2">
                   <div>
                     <svg
                       width="24"
@@ -509,7 +509,7 @@ function QuoteSection() {
                     </svg>
                   </div>
                 </div>
-                <div className="bg-[#F6EDDD]  md:px-4 lg:px-1 md:py-1.5 lg:py-1 xl:px-4 xl:py-1.5 md:w-[60%] lg:w-[100%] xl:w-[85%] 2xl:w-[70%] mx-auto rounded-full flex items-center space-x-2">
+                <div className="bg-[#F6EDDD] px-2 md:px-4 lg:px-1 py-1.5 lg:py-1 xl:px-4 xl:py-1.5 w-full lg:w-[100%] xl:w-[85%] 2xl:w-[70%] mx-auto rounded-full flex items-center space-x-2">
                   <div>
                     <svg
                       width="24"
@@ -581,26 +581,20 @@ function QuoteSection() {
               </div>
             </div>
           )}
-          {/* Mobile-only dialog trigger and content */}
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button className="md:hidden bg-[#9C8639] text-white rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 w-full">
-                Get A Quote Now
-              </Button>
-            </DialogTrigger>
-
-            <DialogContent className="max-w-[95vw] max-h-[90vh] overflow-y-auto p-4 md:hidden">
-              <DialogHeader>
-                <DialogTitle className="text-lg font-semibold text-center">
-                  Get Your Quote
-                </DialogTitle>
-              </DialogHeader>
-              <QuoteForm onApiResponse={handleApiResponse} />
-            </DialogContent>
-          </Dialog>
+          {/* Calculate Again Button - Only show on mobile when results are available */}
+          {apiResponse && (
+            <div className="flex justify-center items-center lg:hidden mt-4">
+              <GlobalButton 
+                onClick={handleCalculateAgain} 
+                className="" 
+                variant="secondary" 
+                text="Calculate Again" 
+              />
+            </div>
+          )}
         </div>
-        {/* Right Side */}
-        <div className="hidden md:block p-4 lg:pr-0 z-10">
+        {/* Right Side - Form Section (order-1 on mobile, order-2 on lg+) */}
+        <div ref={formRef} className="p-4 lg:pr-0 z-10 order-1 lg:order-2">
           <QuoteForm onApiResponse={handleApiResponse} />
         </div>
       </div>
