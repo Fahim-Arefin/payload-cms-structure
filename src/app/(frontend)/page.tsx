@@ -121,6 +121,12 @@ export default async function HomePage() {
       insuranceCardData: [
         {
           title: '',
+          image: '/assets/homepage/zero-hassle-protection-tn-3.jpg',
+          videoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
+          description: '',
+        },
+        {
+          title: '',
           image: '/assets/homepage/zero-hassle-protection-tn-2.jpg',
           videoLink: 'https://www.youtube.com/embed/mUn_HAvpbag',
           description: '',
@@ -129,12 +135,6 @@ export default async function HomePage() {
           title: '',
           image: '/assets/homepage/zero-hassle-protection-tn-1.jpg',
           videoLink: 'https://www.youtube.com/embed/DzMzN76gELM',
-          description: '',
-        },
-        {
-          title: '',
-          image: '/assets/homepage/zero-hassle-protection-tn-3.jpg',
-          videoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
           description: '',
         },
       ],
