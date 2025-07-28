@@ -334,6 +334,15 @@ function Footer() {
                 </Link>
               </div>
             </div>
+            {/* powered by section */}
+            {/* <div>
+              <h1 className="mt-6 text-sm lg:text-xl 2xl:text-2xl font-medium mb-6 text-white/50">
+                Powered By -
+              </h1>
+              <div>
+                <img src="/assets/shurjo.png" alt="" />
+              </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -41,14 +41,14 @@ export default async function HomePage() {
       title: 'Empower yourself',
       subtitle: 'to live on your terms',
       description:
-        'Your life evolves, and so should your protection. Shanta Life Insurance ensures you stay ahead.',
+        'Your life evolves, and so should your protection.. Shanta Life Insurance ensures you stay ahead.',
       image: '/assets/homepage/banner22.jpg',
     },
     {
       title: 'Empower yourself',
       subtitle: 'to live on your terms',
       description:
-        'Your life evolves, and so should your protection. Shanta Life Insurance ensures you stay ahead.',
+        'Your life evolves, and so should your protection.. Shanta Life Insurance ensures you stay ahead.',
       image: '/assets/homepage/banner1.jpg',
     },
   ]
