@@ -116,7 +116,7 @@ export default async function HomePage() {
       content: 'left',
       title: 'Zero-Hassle protection',
       subtitle: 'Get your life covered - fast, simple & smart.',
-      mainImage: '/assets/homepage/zero-hassle-protection-tn-3.jpg',
+      mainImage: '/assets/homepage/bima.jpeg',
       mainVIdeoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
       insuranceCardData: [
         {
