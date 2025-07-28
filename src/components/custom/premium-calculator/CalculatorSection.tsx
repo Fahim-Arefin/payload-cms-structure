@@ -159,7 +159,9 @@ const CalculatorSection = (props: Props) => {
                 scrollSignal={scrollSignal}
                 onCalculateAgain={() => {
                   if (window.innerWidth < 1025 && formRef.current) {
-                    formRef.current.scrollIntoView({ behavior: 'smooth' })
+                    const y = formRef.current.getBoundingClientRect().top + window.scrollY
+                    const offset = 80
+                    window.scrollTo({ top: y - offset, behavior: 'smooth' })
                   }
                 }}
               />
