@@ -46,7 +46,7 @@ type Props = {
 
 export default function PaymentTab({ config, data, rocketData }: Props) {
   const [activeTab, setActiveTab] = useState('bkash')
-  
+
   return (
     <div
       className="px-5 py-12 
@@ -61,7 +61,7 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
           <span className="global-h1 uppercase text-[#ED7125] font-medium">Bkash & Rocket</span>
         </h1>
       </div>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-6 xl:gap-9 2xl:gap-16">
         {/* Left - Single Static Image */}
         <div
@@ -70,7 +70,7 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
             rounded-[8px] md:rounded-[10px] lg:rounded-[8px] xl:rounded-[12px] 
             bg-no-repeat bg-center
             bg-contain
-            mt-12 order-1 flex-shrink-0"
+            lg:mt-28 xl:mt-44 2xl:mt-36 order-1 flex-shrink-0"
           style={{ backgroundImage: `url(/assets/bkash-roket.png)` }}
           role="img"
           aria-label="Background image"
@@ -78,7 +78,6 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
 
         {/* Right - Tabbed Content */}
         <div className="flex flex-col mt-10 lg:mt-0 order-2">
-          
           {/* Title */}
           <div className="hidden lg:block lg:mb-6 2xl:mb-12">
             <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
@@ -86,7 +85,7 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
               <span className="global-h1 uppercase text-[#ED7125] font-medium">bKash & Rocket</span>
             </h1>
           </div>
-          
+
           <div className="lg:hidden mb-6">
             <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
               Payment Using{' '}
@@ -95,12 +94,7 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
           </div>
 
           {/* Tabs */}
-          <Tabs
-            defaultValue="bkash"
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className=""
-          >
+          <Tabs defaultValue="bkash" value={activeTab} onValueChange={setActiveTab} className="">
             <div
               className="relative w-full border-b border-[#434343] md:py-[12px] bg-[#FCF4EB]
              mb-[16px] md:mb-[20px] lg:mb-[30px]"
@@ -120,7 +114,7 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
                     bKash
                   </span>
                 </TabsTrigger>
-                
+
                 <TabsTrigger
                   value="rocket"
                   className={cn(

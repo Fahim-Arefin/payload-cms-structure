@@ -80,11 +80,15 @@ function Footer() {
                 </svg>
               </div>
 
-              <div className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
+              <Link
+                target="_blank"
+                href="https://www.google.com/maps?ll=23.770282,90.40626&z=16&t=m&hl=en-GB&gl=US&mapclient=embed&cid=8200627424099091507"
+                className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider hover:text-blue-300 cursor-pointer transition-all duration-100"
+              >
                 <div className="">
                   Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
                 </div>
-              </div>
+              </Link>
             </div>
             <div className="hidden space-x-2 lg:flex xl:hidden">
               <div className="hidden md:block w-[50px] xl:w-[55px] 2xl:w-[70px]">
@@ -103,11 +107,15 @@ function Footer() {
                 </svg>
               </div>
 
-              <div className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
+              <Link
+                target="_blank"
+                href="https://www.google.com/maps?ll=23.770282,90.40626&z=16&t=m&hl=en-GB&gl=US&mapclient=embed&cid=8200627424099091507"
+                className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider hover:text-blue-300 cursor-pointer transition-all duration-100"
+              >
                 <div className="">
                   Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
                 </div>
-              </div>
+              </Link>
             </div>
             <div className="hidden space-x-2 xl:flex 2xl:hidden">
               <div className="hidden md:block w-[50px] xl:w-[55px] 2xl:w-[70px]">
@@ -126,11 +134,15 @@ function Footer() {
                 </svg>
               </div>
 
-              <div className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
+              <Link
+                target="_blank"
+                href="https://www.google.com/maps?ll=23.770282,90.40626&z=16&t=m&hl=en-GB&gl=US&mapclient=embed&cid=8200627424099091507"
+                className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider hover:text-blue-300 cursor-pointer transition-all duration-100"
+              >
                 <div className="">
                   Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
                 </div>
-              </div>
+              </Link>
             </div>
             <div className="hidden space-x-2 2xl:flex">
               <div className="hidden md:block w-[50px] xl:w-[55px] 2xl:w-[70px]">
@@ -149,11 +161,15 @@ function Footer() {
                 </svg>
               </div>
 
-              <div className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
+              <Link
+                target="_blank"
+                href="https://www.google.com/maps?ll=23.770282,90.40626&z=16&t=m&hl=en-GB&gl=US&mapclient=embed&cid=8200627424099091507"
+                className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider hover:text-blue-300 cursor-pointer transition-all duration-100"
+              >
                 <div className="">
                   Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
                 </div>
-              </div>
+              </Link>
             </div>
 
             {/* --------------------------------------------------------------------------------------------------------- */}

@@ -62,7 +62,7 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
         md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full  
         bg-no-repeat bg-contain 
         bg-center 
-   md:rounded-[8.333px_8.333px_25.333px_8.333px] LG:rounded-[8.333px_8.333px_33.333px_8.333px] xl:rounded-[8.333px_8.333px_40.333px_8.333px] 2xl:rounded-[8.333px_8.333px_53.333px_8.333px]
+  
         overflow-hidden transition-all`,
                     content === 'left' ? 'order-2' : 'order-1',
                   )}
@@ -73,21 +73,21 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                   {/* Hover dark overlay */}
                   <div
                     className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300 
-                  rounded-[8.333px_8.333px_53.333px_8.333px]"
+                  md:rounded-[4.333px_4.333px_19.333px_4.333px] lg:rounded-[4.333px_4.333px_29.333px_4.333px] xl:rounded-[4.333px_4.333px_39.333px_4.333px]"
                   />
 
                   {/* Play Button */}
                   <div
                     className="absolute 
-              md:-bottom-0.5 lg:-bottom-0.5 xl:bottom-0 2xl:bottom-0.5 
+              md:-bottom-0.5 lg:-bottom-0.5 xl:bottom-0 2xl:bottom-0
               md:-right-0.5 lg:-right-0.5 xl:-right-[3px] 2xl:-right-0.5 "
                   >
                     <img
                       src="/assets/play.svg"
                       alt=""
                       className=" 
-                      md:w-[50px] lg:w-[60px] xl:w-[80px] 2xl:w-[90px]  
-                      md:h-[50px] lg:h-[60px] xl:h-[80px] 2xl:h-[90px]"
+                      md:w-[30px] lg:w-[40px] xl:w-[50px] 2xl:w-[60px]  
+                      md:h-[30px] lg:h-[40px] xl:h-[50px] 2xl:h-[60px]"
                     />
                   </div>
                 </div>

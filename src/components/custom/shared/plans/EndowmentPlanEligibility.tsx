@@ -16,7 +16,7 @@ const EndowmentPlanEligibility = () => {
           <EligibilityCard
             title="Eligibility"
             icon="/assets/childIcon.svg"
-            bgImage="/assets/eligibilityImage1.jpg"
+            // bgImage="/assets/eligibilityImage1.jpg"
             entryMin="30"
             entryMinLabel="Days"
             entryMax="60"

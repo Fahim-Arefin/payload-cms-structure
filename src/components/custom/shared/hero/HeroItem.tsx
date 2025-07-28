@@ -59,7 +59,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
           hero-h5"
             >
               <div className="text-white">
-                {slide?.description?.split('. ')?.map((line, i) => (
+                {slide?.description?.split('.. ')?.map((line, i) => (
                   <h5 key={i}>{line.trim()}</h5>
                 ))}
               </div>
@@ -77,7 +77,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
           "
             >
               <div className="text-white">
-                {slide?.description?.split('. ')?.map((line, i) => (
+                {slide?.description?.split('.. ')?.map((line, i) => (
                   <h5 key={i}>{line.trim()}</h5>
                 ))}
               </div>
