@@ -35,7 +35,7 @@ function AllNewsCard({ data, index }: Props) {
         <h5 className="text-[#6E6E6E] global-p2 uppercase tracking-[2px]">{data?.date}</h5>
         <h3 className="global-span ">{data?.title}</h3>
         <p
-          className="global-p2 leading-6"
+          className="global-p2 leading-6 line-clamp-4"
           style={{
             alignSelf: 'stretch',
           }}
