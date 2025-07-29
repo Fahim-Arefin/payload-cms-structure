@@ -15,7 +15,7 @@ function EndowmentPage() {
     {
       title: 'Shanta Endowment Plan',
       subtitle: '',
-      description: 'A promise that grows with time and care',
+      description: 'A promise that grows with time and care.',
       image: '/assets/banners/s&i-banner.png',
     },
   ]

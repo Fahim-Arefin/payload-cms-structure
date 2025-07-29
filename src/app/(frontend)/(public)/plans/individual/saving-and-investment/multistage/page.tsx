@@ -27,8 +27,12 @@ const page: FC<Props> = ({}) => {
 
   const planInfoData = {
     image: '/assets/multistagePlan.png',
-    description:
-      'Some dreams can’t wait. Whether it’s funding your child’s education, celebrating a life event, or building a safety net for the future—Shanta Life’s Multi-Stage Maturity Plan is your financial partner through it all. With guaranteed payouts at key stages and full protection throughout, it’s the smart way to stay prepared for what’s next!!',
+    description: `Some dreams can’t wait. 
+      Whether it’s funding your child’s education, celebrating a life event, or building a safety net for the 
+      future—Shanta Life’s Multi-Stage Maturity Plan is your financial partner through it all. 
+      With guaranteed payouts at key stages and full protection throughout, 
+      it’s the smart way to stay prepared for what’s next!! 
+      Pick a plan from below that suits your need`,
   }
 
   const threeStageData = [
