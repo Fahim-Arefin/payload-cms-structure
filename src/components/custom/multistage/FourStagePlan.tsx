@@ -40,16 +40,16 @@ const FourStagePlan: FC<FourStagePlanProps> = ({}) => {
           <div className="w-full flex justify-center gap-6 items-center">
             <div className="flex items-start gap-2 space-y-8 text-sm text-black">
               <div className="flex flex-col items-start gap-6 text-[12px] md:global-p2">
-                <span>15% of sum assured</span>
-                <span>15% of sum assured</span>
-                <span>15% of sum assured</span>
+                <span>1st Stage - 15% of sum assured</span>
+                <span>2nd Stage - 15% of sum assured</span>
+                <span>3rd Stage - 15% of sum assured</span>
                 <span>Final Maturity</span>
               </div>
             </div>
             <div>
               <img src="/assets/line.png" alt="line" className="max-h-[180px] mt-1 mr-10" />
             </div>
-            <div className="ml-10">
+            <div className="lg:ml-10">
               <CirclePieChart data={fourStageData} />
             </div>
             {/* Labels and Dotted Lines */}

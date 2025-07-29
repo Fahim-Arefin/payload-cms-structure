@@ -398,14 +398,14 @@ function Footer() {
               </div>
             </div>
             {/* photos */}
-            <div className="flex gap-[3px] flex-wrap mt-3 2xl:mt-4">
+            <div className="flex md:gap-[3px] flex-wrap mt-3 2xl:mt-4">
               {shurjoPayData?.map((img, i) => (
                 <div
                   key={i}
-                  className="rounded-[5px] bg-[#5A5A5B] p-[2px] flex items-center justify-center 
-                  lg:w-[32px] lg:h-[32px]
-                  xl:w-[42px] xl:h-[42px]
-                  2xl:w-[52px] 2xl:h-[52px]"
+                  className="rounded-[5px] bg-[#5A5A5B] p-0 md:p-[2px] flex items-center justify-center 
+                  lg:w-[22px] lg:h-[22px]
+                  xl:w-[25px] xl:h-[25px]
+                  2xl:w-[34px] 2xl:h-[34px]"
                 >
                   <img
                     src={img?.image}
