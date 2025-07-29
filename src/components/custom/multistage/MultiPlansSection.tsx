@@ -30,8 +30,8 @@ const MultiPlansSection = ({ data, planData, bgColor }: Props) => {
                 <img src="/assets/line.png" alt="line" className="h-[180px] mt-1" />
               </div>
               <div className="flex flex-col items-start gap-6 text-[12px] md:global-p2">
-                <span>25% of sum assured</span>
-                <span>25% of sum assured</span>
+                <span>1/3 of the policy term - 25% of sum assured</span>
+                <span>2/3 of the policy term - 25% of sum assured</span>
                 <span>Remaining Sum Assured</span>
               </div>
             </div>

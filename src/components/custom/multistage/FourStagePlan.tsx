@@ -49,7 +49,7 @@ const FourStagePlan: FC<FourStagePlanProps> = ({}) => {
             <div>
               <img src="/assets/line.png" alt="line" className="max-h-[180px] mt-1 mr-10" />
             </div>
-            <div className="ml-10">
+            <div className="lg:ml-10">
               <CirclePieChart data={fourStageData} />
             </div>
             {/* Labels and Dotted Lines */}
