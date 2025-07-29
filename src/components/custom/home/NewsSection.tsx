@@ -497,7 +497,7 @@ function NewsSection() {
           {/* img */}
           <div className="relative h-[140px] xl:h-[200px] 2xl:h-[250px] w-full">
             {/* main img */}
-            <img src="/assets/news2.jpg" alt="news-1" className="w-full h-full object-cover" />
+            <img src="/assets/news5.jpg" alt="news-1" className="w-full h-full object-cover" />
 
             {/* overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/20"></div>
@@ -543,7 +543,8 @@ function NewsSection() {
             <div>
               <h1 className="text-xs xl:text-lg 2xl:text-lg text-[#00000040]">NEWS</h1>
               <div className="text-[9px] xl:text-[12px] 2xl:text-[16px] font-light">
-                Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance
+                Shanta Life Insurance and Pulse Healthcare have partnered to make life insurance and
+                healthcare more accessible across Bangladesh
               </div>
             </div>
           </div>
