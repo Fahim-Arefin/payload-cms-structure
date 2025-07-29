@@ -18,42 +18,48 @@ import { useState } from 'react'
 const allNewsData: AllNewsAndBlogDataType[] = [
   {
     id: 1,
-    image: '/assets/newsandblog1.jpg',
+    image: '/assets/news11.jpg',
     date: 'Jul 17, 2025',
-    title: 'Shanta Life to Hold Conference Call for Second Quarter 2025 Results',
-    description:
-      'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset – you!',
+    title: 'Shanta Life Insurance gets license to launch',
+    description: `Bangladesh's insurance sector is set to expand through the launch of a new venture, "Shanta Life Insurance PLC".
+      The company came into being through a consortium comprising Shanta Holdings Ltd, Shanta Lifestyle, Shanta Securities Ltd, Shanta Multiverse, Shanta Property Management, FAR Asset Management and Nasah Holdings Limited.
+      It received the licence on November 7 from the Insurance Development and Regulatory Authority (IDRA), said a press release.
+      "We are excited to step into a new sector," said Khondoker Monir Uddin, chairman and managing director of business conglomerate Shanta Holdings Ltd.
+      `,
+    externalLink: 'https://www.thedailystar.net/business/news/shanta-life-insurance-gets-licence-launch-3464831',
   },
   {
     id: 2,
-    image: '/assets/newsandblog2.jpg',
-    date: 'Jul 17, 2025',
-    title: 'How Insurance can help you to keep your loved ones safe?',
-    description:
-      'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset – you!',
-  },
-  {
-    id: 3,
-    image: '/assets/newsandblog3.jpg',
-    date: 'Jul 17, 2025',
-    title: 'How you can be benefited by Santa Life insurance?',
-    description:
-      'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset – you!',
-  },
-  {
-    id: 4,
-    image: '/assets/news11.jpg',
-    date: 'Dec 1, 2024',
-    title: 'Shanta Life Insurance gets license to launch',
-    description: `The company is set to drive financial security and peace of mind by launching simplified insurance products, designed to address the varied needs of individuals across Bangladesh. Given Shanta's legacy of trust and quality in all its businesses, the group plans to ensure the same values in the life insurance sector, which is currently riddled with issues of transparency and policyholders' trust. `,
-  },
-  {
-    id: 5,
     image: '/assets/news2.jpg',
-    date: 'Mar 8, 2025',
+    date: 'Jul 17, 2025',
     title: 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
-    description: `Sheikh Mohammad Maroof, managing director & CEO of Dhaka Bank and Nafis A Ahmed, chief executive officer of the Shanta Life Insurance, signed the MoU at the bank's head office in Dhaka recently.`,
+    description: `Shanta Life Insurance PLC, a new venture under Shanta Holdings, signed an MoU with Dhaka Bank to provide Bancassurance service through the bank's distribution channel.
+    Sheikh Mohammad Maroof, managing director & CEO of Dhaka Bank and Nafis A Ahmed, chief executive officer of the Shanta Life Insurance, signed the MoU at the bank's head office in Dhaka recently.
+    Through this MoU, Shanta Life Insurance intends to leverage the robust banking channel of Dhaka Bank to provide tailored insurance policies to the clients of the latter. This proposition will help to offer more financial products to the customers of the bank.`,
+    externalLink: 'https://www.thedailystar.net/business/organisation-news/press-releases/news/shanta-life-insurance-and-dhaka-bank-sign-mou-jointly-prepare-bancassurance-3843041',
   },
+  // {
+  //   id: 3,
+  //   image: '/assets/newsandblog3.jpg',
+  //   date: 'Jul 17, 2025',
+  //   title: 'How you can be benefited by Santa Life insurance?',
+  //   description:
+  //     'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset – you!',
+  // },
+  // {
+  //   id: 4,
+  //   image: '/assets/news11.jpg',
+  //   date: 'Dec 1, 2024',
+  //   title: 'Shanta Life Insurance gets license to launch',
+  //   description: `The company is set to drive financial security and peace of mind by launching simplified insurance products, designed to address the varied needs of individuals across Bangladesh. Given Shanta's legacy of trust and quality in all its businesses, the group plans to ensure the same values in the life insurance sector, which is currently riddled with issues of transparency and policyholders' trust. `,
+  // },
+  // {
+  //   id: 5,
+  //   image: '/assets/news2.jpg',
+  //   date: 'Mar 8, 2025',
+  //   title: 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
+  //   description: `Sheikh Mohammad Maroof, managing director & CEO of Dhaka Bank and Nafis A Ahmed, chief executive officer of the Shanta Life Insurance, signed the MoU at the bank's head office in Dhaka recently.`,
+  // },
 ]
 
 export default function AllNewsAccordionSection() {
@@ -120,7 +126,11 @@ export default function AllNewsAccordionSection() {
                     {news.description}
                   </p>
                   <div>
-                    <Link href={`/news-and-media/${news?.id}`}>
+                    <Link 
+                      href={news?.externalLink || `/news-and-media/${news?.id}`}
+                      target={news?.externalLink ? "_blank" : "_self"}
+                      rel={news?.externalLink ? "noopener noreferrer" : undefined}
+                    >
                       <Button
                         variant="link"
                         className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0 "
@@ -202,7 +212,11 @@ export default function AllNewsAccordionSection() {
                       {news.description}
                     </p>
                     <div>
-                      <Link href={`/news-and-media/${news?.id}`}>
+                      <Link 
+                        href={news?.externalLink || `/news-and-media/${news?.id}`}
+                        target={news?.externalLink ? "_blank" : "_self"}
+                        rel={news?.externalLink ? "noopener noreferrer" : undefined}
+                      >
                         <Button
                           variant="link"
                           className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0 "
