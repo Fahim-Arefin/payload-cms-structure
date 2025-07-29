@@ -155,7 +155,7 @@ export const PurchaseCardModal = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogOverlay className="backdrop-blur-sm bg-black/30" />
-      <DialogContent className="w-full h-[80vh] lg:h-fit overflow-scroll lg:overflow-hidden md:max-w-lg lg:max-w-3xl 2xl:max-w-6xl bg-white rounded-lg px-0 py-8">
+      <DialogContent className="w-full h-[80vh] lg:h-fit overflow-scroll lg:overflow-hidden md:max-w-lg lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl bg-white rounded-lg px-0 py-8">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-[#ED7125] text-center">
             {selectedPlanTitle}

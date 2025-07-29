@@ -35,8 +35,8 @@ export default buildConfig({
   }),
   sharp,
   email: nodemailerAdapter({
-    defaultFromAddress: process?.env?.SMTP_USER ?? 'uchchhash@xynolab.com',
-    defaultFromName: 'Shanta Life Mailer',
+    defaultFromAddress: process?.env?.SMTP_MAIL_FROM ?? 'uchchhash@xynolab.com',
+    defaultFromName: 'Shanta Life',
     transportOptions: {
       host: process?.env?.SMTP_HOST,
       port: parseInt(process?.env?.SMTP_PORT ?? '587'),

@@ -205,7 +205,7 @@ function FeedBackSection({}: Props) {
           <div className="flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-white/60 pt-5 mt-5 lg:mt-0 lg:pt-0 lg:pl-8">
             <div className="space-y-4 lg:pl-2 xl:pl-4">
               <div className="space-y-4">
-                <p className="global-span font-medium">Want to learn more?</p>
+                <p className="global-span font-medium">Want to talk?</p>
                 <div>
                   <a href="tel:+8809610889900" className="w-fit">
                     <Button

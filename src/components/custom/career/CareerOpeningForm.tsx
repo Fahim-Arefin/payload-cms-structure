@@ -16,30 +16,30 @@ import GlobalButton from '../shared/GlobalButton'
 import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 
 const positions = [
-  'Junior IT Executive',
-  'Mid IT Executive',
-  'Senior IT Executive',
-  'Management Trainee',
-  'Relationship Officer (Internship)',
-  'Relationship Officer (Full time)',
-  'Campus Ambassador (Part-time)',
-  'Campus Ambassador (Full time)',
+  // 'Junior IT Executive',
+  'IT Project Manager',
+  'Head of Agency Business',
+  'Full Stack Engineer',
+  // 'Mid IT Executive',
+  // 'Senior IT Executive',
+  // 'Management Trainee',
+  // 'Relationship Officer (Internship)',
+  // 'Relationship Officer (Full time)',
+  // 'Campus Ambassador (Part-time)',
+  // 'Campus Ambassador (Full time)',
 ]
 
-function CareerOpeningForm({ pos, setPos }: {
-  pos: string,
-  setPos: (p: string) => void
-}) {
+function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) => void }) {
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     setSendButtonText('Sending...')
     console.log({ name, email, phone, position, message })
     const resumeFormData = new FormData()
     resumeFormData.append('hogamara', 'let go')
-    resumeFormData.append(
-      'file',
-      (document.querySelector('#resume') as HTMLInputElement)?.files?.[0],
-    )
+    const file = (document.querySelector('#resume') as HTMLInputElement)?.files?.[0]
+    if (file) {
+      resumeFormData.append('file', file)
+    }
     console.log(resumeFormData)
     const resumeId = await fetch('/api/resume', {
       method: 'POST',
@@ -110,7 +110,7 @@ function CareerOpeningForm({ pos, setPos }: {
       />
       <Select required value={pos} onValueChange={setPos}>
         <SelectTrigger className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none text-[15px]">
-          <SelectValue placeholder="IT Executive" />
+          <SelectValue placeholder="Select Job Position" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
@@ -123,6 +123,7 @@ function CareerOpeningForm({ pos, setPos }: {
           </SelectGroup>
         </SelectContent>
       </Select>
+
       {/* File upload */}
       <div className="flex w-full rounded-[6px] overflow-hidden bg-[#FCF4EB] md:bg-white">
         <label htmlFor="resume" className="flex flex-1 items-center cursor-pointer">

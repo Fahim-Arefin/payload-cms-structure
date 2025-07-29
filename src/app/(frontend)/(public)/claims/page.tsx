@@ -12,7 +12,7 @@ const page: FC<pageProps> = ({}) => {
       subtitle: '',
       description:
         'Experience a hassle-free, seamless claims journey- submit, track, and settle your claim in just 5 Days!  ',
-      image: '/assets/claims.jpg',
+      image: '/assets/claimBanner2.jpg',
     },
   ]
 
@@ -118,6 +118,7 @@ const page: FC<pageProps> = ({}) => {
         heroSlides={heroSlides}
         height=" h-[252px] md:h-[352px] lg:h-[470px] xl:h-[570px] 2xl:h-[670px] "
         top=" top-[100px] md:top-[150px] lg:top-[43%]"
+        
       />
       <ClaimTabs data={tabContent} config={tabItems} />
       <ContactUsSection />
