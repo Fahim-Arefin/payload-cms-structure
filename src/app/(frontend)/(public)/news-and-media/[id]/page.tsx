@@ -52,7 +52,7 @@ async function page({ params }: Props) {
       subtitle: '',
       description:
         'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
-      image: '/assets/newsDetailsBanner.jpg',
+      image: '/assets/newsSingleBanner.jpg',
     },
   ]
   return (

@@ -32,7 +32,7 @@ const page: FC<Props> = ({}) => {
       future—Shanta Life’s Multi-Stage Maturity Plan is your financial partner through it all. 
       With guaranteed payouts at key stages and full protection throughout, 
       it’s the smart way to stay prepared for what’s next!! 
-      Pick a plan from below that suits your need`,
+      Pick a plan from below that suits your need.`,
   }
 
   const threeStageData = [

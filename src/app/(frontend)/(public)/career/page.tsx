@@ -102,33 +102,33 @@ const page: FC<pageProps> = ({}) => {
 
   const openingData = [
     {
-      type: 'Internship',
-      title: 'RELATIONSHIP OFFICER',
-      description:
-        'At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture where every voice is heard and every idea is valued, regardless of your background. ',
-      btnText: 'Apply Now',
-    },
-    {
-      type: 'Part-time',
-      title: 'CAMPUS AMBASSADOR',
+      type: 'Full time',
+      title: 'IT PROJECT MANAGER',
       description:
         'At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture where every voice is heard and every idea is valued, regardless of your background. ',
       btnText: 'Apply Now',
     },
     {
       type: 'Full time',
-      title: 'MANAGEMENT TRAINEE',
+      title: 'Head of Agency Business',
       description:
         'At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture where every voice is heard and every idea is valued, regardless of your background. ',
       btnText: 'Apply Now',
     },
     {
       type: 'Full time',
-      title: 'RELATIONSHIP OFFICER',
+      title: 'Full Stack Engineer',
       description:
         'At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture where every voice is heard and every idea is valued, regardless of your background. ',
       btnText: 'Apply Now',
     },
+    // {
+    //   type: 'Full time',
+    //   title: 'RELATIONSHIP OFFICER',
+    //   description:
+    //     'At Shanta Life Insurance, your journey will be more than just a job. We believe in fostering a culture where every voice is heard and every idea is valued, regardless of your background. ',
+    //   btnText: 'Apply Now',
+    // },
   ]
 
   // data.ts

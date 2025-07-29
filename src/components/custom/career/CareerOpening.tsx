@@ -16,6 +16,9 @@ type CareerOpeningDataProps = {
 
 const positions = [
   'Junior IT Executive',
+  'IT Project Manager',
+  'Head of Agency Business',
+  'Full Stack Engineer',
   'Mid IT Executive',
   'Senior IT Executive',
   'Management Trainee',
@@ -26,24 +29,30 @@ const positions = [
 ]
 
 const detailsData = {
-  'MANAGEMENT TRAINEE': {
-    title: 'Management Trainee',
+    'FULL STACK ENGINEER': {
+    title: 'Full Stack Engineer',
     responsibilities: [
-      'Assist in project planning and execution.',
-      'Support cross-functional teams.',
-      'Learn and adapt to company culture.',
-      // ... add more
+      'Design, develop and maintain scalable, secure front-end and back-end solutions for web and mobile applications, ensuring seamless user experiences.',
+      'Integrate third-party APIs, develop and maintain RESTful APIs and manage database design, optimization and data integrity.',
+      'Collaborate with cross-functional teams, including designers and product managers, to translate business requirements into technical solutions and participate in code reviews.',
+      'Optimize application performance for speed, scalability and reliability while monitoring and troubleshooting issues.',
+      'Write and maintain tests (unit, integration, end-to-end) and implement CI/CD pipelines for automated testing and deployment in cloud environments.',
+      'Stay updated on emerging technologies, promoting innovative solutions like containerization and serverless computing.'
     ],
     requirements: [
-      "Bachelor's degree in relevant field.",
-      'Excellent communication skills.',
-      // ... add more
+      'Minimum Bachelor’s degree in Computer Science, Software Engineering or a related field.',
+      '3 to 5 years of experience as a Full Stack Developer, Software Engineer or similar role.',
+      'Proficiency in front-end technologies such as HTML, CSS, JavaScript, and modern frameworks like React, Angular, or Vue.js.',
+      'Expertise in back-end technologies, including Node.js, Python, Ruby, Java, or .NET.',
+      'Strong understanding of cloud platforms and database management.',
+      'Familiarity with microservices architecture and containerization tools such as Docker and Kubernetes.'
     ],
     location: 'Dhaka',
     deadline: '30th August, 2025',
     applyEmail: 'talent@shantalife.com',
-    subjectLine: 'Application for Management Trainee',
-    footer: 'Join us to craft a brighter future at Shanta Life.',
+    subjectLine: 'Application for Full Stack Engineer',
+    footer: '',
+    filename: 'full stack engineer.pdf'
   },
   'RELATIONSHIP OFFICER': {
     title: 'Relationship Officer',
@@ -61,20 +70,32 @@ const detailsData = {
     applyEmail: 'talent@shantalife.com',
     subjectLine: 'Application for Relationship Officer',
     footer: 'Be part of a new era in life insurance.',
+    
   },
-  'CAMPUS AMBASSADOR': {
-    title: 'Campus Ambassador',
+  'HEAD OF AGENCY BUSINESS': {
+    title: 'Head of Agency Business',
     responsibilities: [
-      'Promote company events on campus.',
-      'Engage with students and create awareness.',
-      'Organize campus activities.',
+      'Develop and execute business strategies and plans for retail/agency/individual life insurance.',
+      'Lead the nationwide sales team including divisional/regional offices, agency branches and other offices to achieve budgeted objectives and KPIs.',
+      'Capitalize on new market opportunities, build strategic partnerships and expand the company’s retail presence across Bangladesh.',
+      'Recruit, train and monitor performance of Sales Managers, Agency Supervisors and Distribution Teams.',
+      'Monitor sales campaigns, bonus initiatives, market trends and competitors’ activities.',
+      'Utilize data-driven insights to forecast sales, optimize performance and mitigate risks of sales.',
+      'Ensure a customer centric approach by improving engagement, developing products and coordinating campaigns and events.',
     ],
-    requirements: ['Currently enrolled in a university.', 'Excellent networking skills.'],
+    requirements: [
+      "Bachelor’s /Master's degree in Business.",
+      '12-15 years of experience in insurance/financial sector, with at least 5 years in a leadership role in sales/relationship/account management.',
+      'In-depth knowledge of retail insurance products.',
+      'Digital literacy, current tech trend awareness to capitalize the technology in order to ensure pace, simplicity and productivity.',
+      'Strong network and exceptional communication skills.',
+    ],
     location: 'Dhaka',
     deadline: '30th August, 2025',
     applyEmail: 'talent@shantalife.com',
-    subjectLine: 'Application for Campus Ambassador',
-    footer: 'Grow your leadership and communication skills with Shanta Life.',
+    subjectLine: 'Application for Head of Agency Business',
+    footer: '',
+    filename: 'Head of Agency Business.pdf'
   },
   // Example for a detailed IT Project Manager as from your PDF:
   'IT PROJECT MANAGER': {
@@ -104,6 +125,7 @@ team, we invite you to be a part of our journey.`,
     applyEmail: 'talent@shantalife.com',
     subjectLine: 'Application for IT Project Manager',
     footer: '',
+    filename: 'IT Project Manager.pdf'
   },
 }
 
@@ -115,7 +137,9 @@ function getFormPosition(type: string, title: string) {
     return 'Campus Ambassador (Full time)'
   if (type.toLowerCase().includes('full') && title.toLowerCase().includes('relationship'))
     return 'Relationship Officer (Full time)'
-  if (title.toLowerCase() === 'management trainee') return 'Management Trainee'
+  if (title.toLowerCase() === 'full stack engineer') return 'Full Stack Engineer'
+  if (title.toLowerCase() === 'it project manager') return 'IT Project Manager'
+  if (title.toLowerCase() === 'head of agency business') return 'Head of Agency Business'
   // add more as needed
   return positions[0]
 }
@@ -124,7 +148,7 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
-  const [pos, setPos] = useState(positions[0])
+  const [pos, setPos] = useState("")
   const [openDetails, setOpenDetails] = useState<{ open: boolean; title?: string }>({
     open: false,
     title: undefined,
