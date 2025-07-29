@@ -168,16 +168,17 @@ function FeedBackSection({}: Props) {
           {/* Column 2: Feedback textarea */}
           <div className="space-y-5 lg:space-y-0 ">
             <div>
-
-            <Textarea
-              value={feedback}
-              onChange={(e) => setFeedback(e.target.value)}
-              placeholder="Write your feedback"
-              className="shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] w-full 
+              <Textarea
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+                placeholder="Write your feedback"
+                className="shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] w-full 
               h-[150px] lg:h-[258px] xl:h-[332px] bg-white text-black p-5 rounded-[8px] lg:rounded-[10px] xl:rounded-[12px]"
               />
-            {requiredError && <p className="text-red-500 text-sm">Please Fill out all the fields</p>}
-              </div>
+              {requiredError && (
+                <p className="text-red-500 text-sm">Please Fill out all the fields</p>
+              )}
+            </div>
             <div>
               <Button
                 onClick={sendFeedbackHandler}
@@ -216,7 +217,7 @@ function FeedBackSection({}: Props) {
                     font-normal
                     lg:text-[16px] xl:text-[18px]"
                     >
-                      Call to Support Center
+                      Want to talk?
                     </Button>
                   </a>
                 </div>

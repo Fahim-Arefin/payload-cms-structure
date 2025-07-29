@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import GlobalButton from '../shared/GlobalButton'
-import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
+import { Loader, MailCheck, SendHorizontal, CheckCircle } from 'lucide-react'
 
 const positions = [
   // 'Junior IT Executive',
@@ -30,50 +30,105 @@ const positions = [
 ]
 
 function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) => void }) {
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    setSendButtonText('Sending...')
-    console.log({ name, email, phone, position, message })
-    const resumeFormData = new FormData()
-    resumeFormData.append('hogamara', 'let go')
-    const file = (document.querySelector('#resume') as HTMLInputElement)?.files?.[0]
-    if (file) {
-      resumeFormData.append('file', file)
-    }
-    console.log(resumeFormData)
-    const resumeId = await fetch('/api/resume', {
-      method: 'POST',
-      body: resumeFormData,
-    })
-      .then((rs) => rs.json())
-      .then((resume) => resume.doc.id)
-    console.log({ resumeId })
-
-    await fetch('/api/career-application', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-        position: pos,
-        message,
-        resume: resumeId,
-      }),
-    })
-      .then((rs) => rs.json())
-      .then((rs) => console.log(rs))
-    setSendButtonText('Application Sent')
-    setTimeout(() => {
-      setSendButtonText('Submit')
-    }, 1500)
+  // Validation functions
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
   }
 
-  const [sendButtonText, setSendButtonText] = useState('Submit')
+  const validatePhoneNumber = (phone: string) => {
+    // Bangladesh mobile number format: 11 digits starting with 01
+    const phoneRegex = /^01[0-9]{9}$/
+    return phoneRegex.test(phone)
+  }
+
+  const validateForm = () => {
+    const errors: string[] = []
+    
+    if (!name.trim()) errors.push('Name is required')
+    if (!email.trim()) errors.push('Email is required')
+    else if (!validateEmail(email)) errors.push('Please enter a valid email address')
+    if (!phone.trim()) errors.push('Phone number is required')
+    else if (!validatePhoneNumber(phone)) errors.push('Please enter a valid Bangladesh mobile number (11 digits starting with 01)')
+    if (!pos) errors.push('Please select a job position')
+    
+    const file = (document.querySelector('#resume') as HTMLInputElement)?.files?.[0]
+    if (!file) errors.push('Resume is required')
+    
+    return errors
+  }
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+    
+    // Validate form
+    const validationErrors = validateForm()
+    if (validationErrors.length > 0) {
+      setValidationErrors(validationErrors)
+      return
+    }
+    
+    setValidationErrors([])
+    setIsLoading(true)
+    setShowSuccessAlert(false)
+    console.log({ name, email, phone, position, message })
+    
+    try {
+      const resumeFormData = new FormData()
+      resumeFormData.append('hogamara', 'let go')
+      const file = (document.querySelector('#resume') as HTMLInputElement)?.files?.[0]
+      if (file) {
+        resumeFormData.append('file', file)
+      }
+      console.log(resumeFormData)
+      const resumeId = await fetch('/api/resume', {
+        method: 'POST',
+        body: resumeFormData,
+      })
+        .then((rs) => rs.json())
+        .then((resume) => resume.doc.id)
+      console.log({ resumeId })
+
+      await fetch('/api/career-application', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          position: pos,
+          message: message.trim() || 'No additional message provided.',
+          resume: resumeId,
+        }),
+      })
+        .then((rs) => rs.json())
+        .then((rs) => console.log(rs))
+      
+      setIsLoading(false)
+      setShowSuccessAlert(true)
+      
+      // Reset form after successful submission
+      setTimeout(() => {
+        setName('')
+        setEmail('')
+        setPhone('')
+        setMessage('')
+        setResumeUploadFieldText('Upload your resume')
+        setShowSuccessAlert(false)
+      }, 3000)
+    } catch (error) {
+      console.error('Error submitting application:', error)
+      setIsLoading(false)
+    }
+  }
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+  const [validationErrors, setValidationErrors] = useState<string[]>([])
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -81,25 +136,56 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
   const [message, setMessage] = useState('')
   const [resumeUploadFieldText, setResumeUploadFieldText] = useState('Upload your resume')
 
+  // Handle phone input - only allow numbers and limit to 11 digits
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, '') // Remove non-digits
+    if (value.length <= 11) {
+      setPhone(value)
+    }
+  }
+
   return (
     <form
       onSubmit={handleSubmit}
       className="bg-white md:bg-[#FCF4EB] rounded-[12px] h-full px-5 py-6 flex flex-col gap-4 w-full"
     >
       <span className="font-bold text-[#343434] text-lg mb-1 tracking-tight">JOIN OUR TEAM</span>
+      
+      {/* Validation Errors */}
+      {validationErrors.length > 0 && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md animate-in fade-in-0 slide-in-from-top-1">
+          <ul className="text-sm space-y-1">
+            {validationErrors.map((error, index) => (
+              <li key={index}>• {error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      {/* Success Alert */}
+      {showSuccessAlert && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md flex items-center gap-2 animate-in fade-in-0 slide-in-from-top-1">
+          <CheckCircle className="h-5 w-5" />
+          <span className="text-sm font-medium">Application sent successfully! We'll get back to you soon.</span>
+        </div>
+      )}
       <Input
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Name"
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
         required
+        disabled={isLoading}
       />
       <Input
         value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        placeholder="Phone"
+        onChange={handlePhoneChange}
+        placeholder="Phone (01XXXXXXXXX)"
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
         required
+        disabled={isLoading}
+        type="tel"
+        maxLength={11}
       />
       <Input
         value={email}
@@ -107,8 +193,10 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
         placeholder="Email"
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
         required
+        disabled={isLoading}
+        type="email"
       />
-      <Select required value={pos} onValueChange={setPos}>
+      <Select required value={pos} onValueChange={setPos} disabled={isLoading}>
         <SelectTrigger className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none text-[15px]">
           <SelectValue placeholder="Select Job Position" />
         </SelectTrigger>
@@ -125,7 +213,7 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       </Select>
 
       {/* File upload */}
-      <div className="flex w-full rounded-[6px] overflow-hidden bg-[#FCF4EB] md:bg-white">
+      <div className={`flex w-full rounded-[6px] overflow-hidden bg-[#FCF4EB] md:bg-white ${isLoading ? 'opacity-60 pointer-events-none' : ''}`}>
         <label htmlFor="resume" className="flex flex-1 items-center cursor-pointer">
           <span className="block w-full text-[#B0B0B0] text-[13px] px-3 py-2 select-none">
             {resumeUploadFieldText}
@@ -139,6 +227,7 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
             accept="application/pdf,application/msword"
             id="resume"
             className="hidden"
+            disabled={isLoading}
           />
         </label>
         <label
@@ -153,10 +242,10 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       <Textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder="Your message"
+        placeholder="Your message (optional)"
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px] lg:min-h-[105px] xl:min-h-[70px]"
         rows={2}
-        required
+        disabled={isLoading}
       />
       {/* <Button
         type="submit"
@@ -166,19 +255,21 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       </Button> */}
       <GlobalButton
         size="small"
-        className="font-semibold w-full md:w-auto md:self-end"
-        text={sendButtonText}
+        className={`font-semibold w-full md:w-auto md:self-end ${isLoading ? 'opacity-90' : ''}`}
+        text={isLoading ? 'Sending...' : showSuccessAlert ? 'Sent' : 'Submit'}
         variant="primary"
+        disabled={isLoading}
       >
-        {sendButtonText == 'Sending...' ? (
-          <Loader />
-        ) : sendButtonText == 'Application Sent' ? (
-          <MailCheck />
+        {isLoading ? (
+          <Loader className="h-4 w-4 animate-spin" />
+        ) : showSuccessAlert ? (
+          <CheckCircle className="h-4 w-4" />
         ) : (
-          <SendHorizontal />
+          <SendHorizontal className="h-4 w-4" />
         )}
-
-        <span className="text-sm">{sendButtonText}</span>
+        <span className="text-sm">
+          {isLoading ? 'Sending...' : showSuccessAlert ? 'Sent' : 'Submit'}
+        </span>
       </GlobalButton>
     </form>
   )
