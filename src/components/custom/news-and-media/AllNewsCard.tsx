@@ -21,7 +21,11 @@ function AllNewsCard({ data, index }: Props) {
         max-h-[230px] md:max-h-[350px] lg:max-h-[230px] xl:max-h-[260px] 2xl:max-h-[300px] 
         lg:col-span-4 ${index % 2 !== 0 ? ' lg:order-2  2xl:ml-12' : ' lg:order-1 '}`}
       >
-        <img src={data?.image} alt={data?.title} className="w-full h-full object-cover object-top" />
+        <img
+          src={data?.image}
+          alt={data?.title}
+          className="w-full h-full object-cover object-top"
+        />
         <div
           className={`h-5 w-5 bg-white absolute bottom-0 ${index % 2 !== 0 ? ' right-0' : ' left-0 '}`}
         ></div>
@@ -35,7 +39,7 @@ function AllNewsCard({ data, index }: Props) {
         <h5 className="text-[#6E6E6E] global-p2 uppercase tracking-[2px]">{data?.date}</h5>
         <h3 className="global-span ">{data?.title}</h3>
         <p
-          className="global-p2 leading-6"
+          className="global-p2 leading-6 line-clamp-4"
           style={{
             alignSelf: 'stretch',
           }}

@@ -209,6 +209,7 @@ export type AllNewsAndBlogDataType = {
   title: string
   description: string
   date: string
+  externalLink?: string
 }
 
 type TabContent = {
