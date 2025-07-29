@@ -9,8 +9,8 @@ type PurchaseCalculateSectionProps = {
   confirmedPaymentMode: string
   getTotalPremium: any
   apiResponse: any
-  scrollSignal: number
-  onCalculateAgain: () => void
+  scrollSignal?: number
+  onCalculateAgain?: () => void
 }
 
 const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
