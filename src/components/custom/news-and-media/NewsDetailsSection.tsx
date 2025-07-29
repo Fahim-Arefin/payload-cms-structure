@@ -37,14 +37,33 @@ function NewsDetailsSection({ data, id }: Props) {
             style={{ backgroundImage: `url(${news.image})` }}
           ></div>
 
-          <p
+          <div
             className="global-p2 leading-6 text-justify"
             style={{
               alignSelf: 'stretch',
             }}
           >
-            {news?.description}
-          </p>
+            {news?.description.split('\n').map((line, index) => {
+              // Check if line is a numbered list item
+              if (/^\d+\.\s/.test(line.trim())) {
+                return (
+                  <div key={index} className="ml-4 mb-2">
+                    {line.trim()}
+                  </div>
+                )
+              }
+              // Check if line is empty (for spacing)
+              if (line.trim() === '') {
+                return <br key={index} />
+              }
+              // Regular paragraph
+              return (
+                <p key={index} className="mb-4">
+                  {line}
+                </p>
+              )
+            })}
+          </div>
         </div>
       </div>
     </div>
