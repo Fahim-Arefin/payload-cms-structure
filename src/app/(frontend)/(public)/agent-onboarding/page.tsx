@@ -149,7 +149,7 @@ function page({}: Props) {
       },
     ],
     sectionRight: {
-      avatar: '/assets/agent-onboarding-life.jpg',
+      avatar: '/assets/agent-onboarding-life_2.jpg',
       name: 'Tarafder Mohammad Fahim',
       quote:
         'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Life.',

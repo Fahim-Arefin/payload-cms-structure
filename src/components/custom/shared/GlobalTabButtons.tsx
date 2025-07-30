@@ -29,7 +29,7 @@ function GlobalTabButtons({
           <ToolTip>
             <GlobalButton
               className="cursor-not-allowed  text-[#9C8639] border-[#9C8639] hover:text-[#9C8639]"
-              text={calculateLinkBtn}
+              text={calculateLinkBtn ? calculateLinkBtn : 'Calculate Premium'}
               variant="outline"
             />
           </ToolTip>
