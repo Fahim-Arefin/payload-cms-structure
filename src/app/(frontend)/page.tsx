@@ -2,24 +2,20 @@ import { headers as getHeaders } from 'next/headers.js'
 import { getPayload } from 'payload'
 import { fileURLToPath } from 'url'
 
+import InsuranceSimplifiedSection from '@/components/custom/home/InsuranceSimplifiedSection'
+import NewsSection from '@/components/custom/home/NewsSection'
+import OnYourCueSection from '@/components/custom/home/OnYourCueSection'
+import OpportunitiesSection from '@/components/custom/home/OpportunitiesSection'
+import QuoteSection from '@/components/custom/home/QuoteSection'
+import VideoSection from '@/components/custom/home/VideoSection'
 import WhyChooseUsSection from '@/components/custom/home/WhyChooseUsSection'
 import config from '@/payload.config'
 import './styles.css'
-import OnYourCueSection from '@/components/custom/home/OnYourCueSection'
-import InsuranceSimplifiedSection from '@/components/custom/home/InsuranceSimplifiedSection'
-import VideoSection from '@/components/custom/home/VideoSection'
-import QuoteSection from '@/components/custom/home/QuoteSection'
-import OpportunitiesSection from '@/components/custom/home/OpportunitiesSection'
-import NewsSection from '@/components/custom/home/NewsSection'
-import HeroSection from '@/components/custom/shared/hero/HeroSection'
 // import { Button } from '@/components/ui/button'
-import { BsPlay } from 'react-icons/bs'
-import SearchBarSection from '@/components/custom/home/SearchBarSection'
-import InsuranceSimplifiedLargeSection from '@/components/custom/home/InsuranceSimplifiedLargeSection'
-import { InsuranceDataType } from '@/types'
-import ToolTip from '@/components/custom/shared/ToolTip'
-import GlobalButton from '@/components/custom/shared/GlobalButton'
 import HeroSectionWrapper from '@/components/custom/home/HeroSectionWrapper'
+import InsuranceSimplifiedLargeSection from '@/components/custom/home/InsuranceSimplifiedLargeSection'
+import SearchBarSection from '@/components/custom/home/SearchBarSection'
+import { InsuranceDataType } from '@/types'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -155,8 +151,11 @@ export default async function HomePage() {
       <WhyChooseUsSection />
       <OnYourCueSection />
       <QuoteSection />
-      <InsuranceSimplifiedSection />
-      <div className="container-padding hidden md:block md:space-y-[40px] lg:space-y-[50px] xl:space-y-[100px] bg-white">
+
+      <div className="bg-white py-12 md:hidden">
+        <InsuranceSimplifiedSection data={insuranceData} />
+      </div>
+      <div className="container-padding hidden md:block space-y-[20px] md:space-y-[40px] lg:space-y-[50px] xl:space-y-[100px] bg-white">
         {insuranceData?.map((data, i) => (
           <InsuranceSimplifiedLargeSection key={i} data={data} content={data?.content} />
         ))}
