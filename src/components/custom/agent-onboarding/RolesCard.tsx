@@ -13,7 +13,7 @@ function RolesCard({ data, index }: Props) {
       className={`
     rounded-md lg:rounded-[4px] cursor-pointer
      shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)]
-     bg-[#FCF4EB]
+     bg-[#FCF4EBCC]
      hover:bg-[rgba(156,134,57,0.8)]
      hover:text-white
     h-[136px] md:h-[180px]  lg:h-[250px] xl:h-[280px] 2xl:h-[310px]

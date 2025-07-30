@@ -158,7 +158,7 @@ function page({}: Props) {
 
   const onboardingRolesData = [
     {
-      image: '/assets/agent-onboarding/1.svg',
+      image: '/assets/agent-onboarding/6.svg',
       title: 'Earn Without Limits',
       description:
         'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
