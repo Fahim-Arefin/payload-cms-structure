@@ -53,13 +53,13 @@ const CookieConsentBanner: FC = () => {
           <X className="w-5 h-5" />
         </button>
 
-        <h2 className="text-lg sm:text-xl font-bold mb-2 text-[#22223b]">Cookies Settings</h2>
+        <h2 className="text-[14px] md:text-xl font-bold mb-2 text-[#22223b]">Cookies Settings</h2>
         <div>
-          <p className="mb-2 text-[#22223b] text-justify text-sm sm:text-base leading-snug">
+          <p className="mb-2 text-[#22223b] text-justify text-[12px] md:text-base leading-snug">
             {COOKIE_POLICY_TEXT}{' '}
             <Link
               href="/privacy-policy"
-              className="underline text-[#9C8639] text-sm sm:text-base"
+              className="underline text-[#9C8639] text-[12px] md:text-base"
             >
               Privacy Policy.
             </Link>
@@ -68,14 +68,14 @@ const CookieConsentBanner: FC = () => {
         <div className="flex flex-row justify-center items-center gap-3 w-full">
           <Button
             variant="primary"
-            className="w-[80px] text-base font-semibold"
+            className="w-[80px] text-[12px] md:text-base font-semibold"
             onClick={() => handleAction('accepted')}
           >
             Accept
           </Button>
           <Button
             variant="outline"
-            className="w-[80px] text-base font-semibold"
+            className="w-[80px] text-[12px] md:text-base font-semibold"
             onClick={() => handleAction('rejected')}
           >
             Reject
