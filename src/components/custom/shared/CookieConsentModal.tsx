@@ -2,16 +2,18 @@
 
 import React, { useEffect, useState, FC } from 'react'
 import Link from 'next/link'
-import GlobalButton from './GlobalButton'
+import { Button } from '@/components/ui/button'
+import { X } from 'lucide-react' // Any close icon, or use your own SVG
 
 const STORAGE_KEY = 'shantaLifeCookie'
 type CookieStatus = 'accepted' | 'rejected'
 
 const COOKIE_POLICY_TEXT =
-  'We use cookies and similar technologies to help personalize content, tailor and measure ads, and provide a better experience. By clicking accept, you agree to this, as outlined in our Cookie Policy.'
+  'We use cookies and similar technologies to help personalize content and provide a better experience. By clicking accept, you agree to this, as outlined in our'
 
 const CookieConsentBanner: FC = () => {
   const [show, setShow] = useState(false)
+  const [closed, setClosed] = useState(false)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -25,48 +27,59 @@ const CookieConsentBanner: FC = () => {
     setShow(false)
   }
 
-  if (!show) return null
+  // Hide if not showing or closed this session
+  if (!show || closed) return null
 
   return (
-    <div
-      className="
-        fixed z-[9999] inset-x-0 bottom-0 flex justify-center pointer-events-none
-      "
-    >
+    <div className="fixed z-[9999] inset-x-0 bottom-0 flex justify-center pointer-events-none">
       <div
         className="
-          pointer-events-auto w-[95vw] sm:w-[420px] md:w-[480px] 2xl:w-[550px]
+          pointer-events-auto w-[95vw] md:w-[75%]
           mx-auto bg-white shadow-xl border border-[#e0e0e0]
           rounded-t-2xl sm:rounded-2xl
           px-5 py-6 sm:p-7
           mb-2 sm:mb-6
           flex flex-col items-start
           animate-fade-in-up
+          relative
         "
       >
-        <h2 className="text-lg sm:text-xl font-bold mb-2 text-[#22223b]">Cookies Settings</h2>
-        <p className="mb-2 text-[#22223b] text-sm sm:text-base leading-snug">
-          {COOKIE_POLICY_TEXT}
-        </p>
-        <Link
-          href="/privacy-policy"
-          className="underline text-[#9C8639] text-sm sm:text-base mb-3 sm:mb-5"
+        {/* Close Button */}
+        <button
+          onClick={() => setClosed(true)}
+          className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 rounded-full p-1 transition-colors"
+          aria-label="Close cookie consent"
         >
-          Read more
-        </Link>
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 w-full mt-1">
-          <GlobalButton
-            text="Accept"
+          <X className="w-5 h-5" />
+        </button>
+
+        <h2 className="text-lg sm:text-xl font-bold mb-2 text-[#22223b]">Cookies Settings</h2>
+        <div>
+          <p className="mb-2 text-[#22223b] text-justify text-sm sm:text-base leading-snug">
+            {COOKIE_POLICY_TEXT}{' '}
+            <Link
+              href="/privacy-policy"
+              className="underline text-[#9C8639] text-sm sm:text-base"
+            >
+              Privacy Policy.
+            </Link>
+          </p>
+        </div>
+        <div className="flex flex-row justify-center items-center gap-3 w-full">
+          <Button
             variant="primary"
-            className="w-full sm:w-[150px] text-base font-semibold"
+            className="w-[80px] text-base font-semibold"
             onClick={() => handleAction('accepted')}
-          />
-          <GlobalButton
-            text="Reject"
+          >
+            Accept
+          </Button>
+          <Button
             variant="outline"
-            className="w-full sm:w-[150px] text-base font-semibold"
+            className="w-[80px] text-base font-semibold"
             onClick={() => handleAction('rejected')}
-          />
+          >
+            Reject
+          </Button>
         </div>
       </div>
       <style>{`
