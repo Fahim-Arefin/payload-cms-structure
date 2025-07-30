@@ -505,10 +505,10 @@ function NewsSection() {
             {/* text */}
             <div className="absolute inset-x-0 bottom-1 2xl:bottom-2 gap-1 2xl:gap-2 mx-1 2xl:mx-7 p-2 ">
               <div className="flex flex-col gap-x-2 justify-center text-white ">
-                <h1 className="text-xs xl:text-sm 2xl:text-lg">NEWS</h1>
-                <p className="font-light text-xs xl:text-sm 2xl:text-lg">Annual Conference</p>
+                {/* <h1 className="text-xs xl:text-sm 2xl:text-lg">NEWS</h1>
+                <p className="font-light text-xs xl:text-sm 2xl:text-lg">Annual Conference</p> */}
                 <div className="flex items-center lg:space-x-1 2xl:space-x-2 ">
-                  <div className="hidden lg:block">
+                  {/* <div className="hidden lg:block">
                     <svg
                       width="24"
                       height="24"
@@ -527,10 +527,10 @@ function NewsSection() {
                         fill="white"
                       />
                     </svg>
-                  </div>
-                  <div className="text-white font-light text-xs xl:text-sm 2xl:text-[12px] mt-1">
+                  </div> */}
+                  {/* <div className="text-white font-light text-xs xl:text-sm 2xl:text-[12px] mt-1">
                     06 Mar, 2025
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
