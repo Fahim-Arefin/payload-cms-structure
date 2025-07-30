@@ -1,4 +1,5 @@
 'use client'
+import InsuranceCard from '@/components/custom/home/InsuranceCard'
 import AllNewsAccordianSection from '@/components/custom/news-and-media/AllNewsAccordianSection'
 import AllNewsSection from '@/components/custom/news-and-media/AllNewsSection'
 import SearchNews from '@/components/custom/news-and-media/SearchNews'
@@ -17,17 +18,17 @@ export default function NewsAndMedia() {
 
   useEffect(() => {
     let lastHash = ''
-    
+
     const handleHashChange = () => {
       const hash = window.location.hash.substring(1) // Remove the # symbol
-      
+
       // Prevent infinite loops by checking if hash actually changed
       if (hash === lastHash) return
       lastHash = hash
-      
+
       if (hash) {
         let targetSection = null
-        
+
         // Handle blog and news fragments
         if (hash === 'blog') {
           targetSection = 'blog-section'
@@ -40,10 +41,10 @@ export default function NewsAndMedia() {
           setTimeout(() => {
             const element = document.getElementById(targetSection)
             if (element) {
-              element.scrollIntoView({ 
-                behavior: 'smooth', 
+              element.scrollIntoView({
+                behavior: 'smooth',
                 block: 'start',
-                inline: 'nearest'
+                inline: 'nearest',
               })
             }
           }, 150)
@@ -56,11 +57,32 @@ export default function NewsAndMedia() {
 
     // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange)
-    
+
     return () => {
       window.removeEventListener('hashchange', handleHashChange)
     }
   }, [])
+
+  const insuranceCardData = [
+    {
+      title: 'Necessity of awareness of life insurance',
+      image: '/assets/thumbnails/1.png',
+      videoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
+      description: '',
+    },
+    {
+      title: 'Living benefits of life insurance',
+      image: '/assets/thumbnails/2.png',
+      videoLink: 'https://www.youtube.com/embed/mUn_HAvpbag',
+      description: '',
+    },
+    {
+      title: 'Digitalization of life insurance industry',
+      image: '/assets/thumbnails/3.png',
+      videoLink: 'https://www.youtube.com/embed/DzMzN76gELM',
+      description: '',
+    },
+  ]
 
   return (
     <div className="font-avenir bg-white">
@@ -74,6 +96,24 @@ export default function NewsAndMedia() {
         <SearchNews paddingOn text="BLOGS" />
         <AllNewsSection />
       </div>
+
+      {/* second row */}
+      <div
+        className={`px-5 
+           md:px-24 
+           lg:px-[130px]   
+           xl:px-[200px]  
+           2xl:px-[300px]
+            pt-[30px] md:pt-[40px] lg:pt-[50px] xl:pt-[60px] 2xl:pt-[70px]
+            pb-12 md:pb-24 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]`}
+      >
+        <div className="grid grid-cols-3 gap-1 md:gap-2 lg:gap-6">
+          {insuranceCardData?.map((item, i) => (
+            <InsuranceCard data={item} key={i} />
+          ))}
+        </div>
+      </div>
+
       <div id="news-section">
         <AllNewsAccordianSection />
       </div>

@@ -71,11 +71,14 @@ function Footer() {
       </div>
 
       <div
-        className="absolute inset-0 z-30 p-2 lg:px-12 xl:px-24 lg:py-12 xl:py-16 2xl:px-44 2xl:py-24 grid grid-cols-1 lg:grid-cols-4
+        className="absolute inset-0 z-30
+       p-2 lg:px-8 xl:px-12 2xl:px-32
+       lg:py-12 xl:py-16 2xl:py-24 
+       grid grid-cols-1 lg:grid-cols-8
        gap-x-2 text-white/70"
       >
         {/* grid 1  */}
-        <div className="flex flex-col space-y-3 p-2 col-span-3 lg:col-span-1 lg:-mt-3 xl:-mt-8">
+        <div className="flex flex-col space-y-3 p-2 col-span-3 lg:col-span-2 lg:-mt-3 xl:-mt-8">
           {/* logo */}
           <div className="h-[60px] md:h-[80px] md:w-[80px] lg:h-[100px] 2xl:h-[150px] w-[60px] lg:w-[100px] 2xl:w-[150px] mx-auto lg:mx-0">
             <img
@@ -257,7 +260,7 @@ function Footer() {
           </div>
         </div>
         {/* grid 2 */}
-        <div className="flex flex-col space-y-3 p-2 lg:py-5 items-center -mt-16 md:-mt-12 lg:mt-0">
+        <div className="flex flex-col space-y-3 p-2 lg:py-5 items-center -mt-16 md:-mt-12 lg:mt-0 lg:col-span-2">
           <div>
             <h1 className="text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium mb-2 lg:mb-6 md:px-12 lg:px-0 text-white/50">
               Explore
@@ -295,7 +298,7 @@ function Footer() {
           </div>
         </div>
         {/* grid 3 */}
-        <div className="flex flex-col space-y-3 p-2 lg:py-5 items-center -mt-16 md:-mt-12 lg:mt-0 ">
+        <div className="flex flex-col space-y-3 p-2 lg:py-5 items-center -mt-16 md:-mt-12 lg:mt-0 lg:col-span-1">
           <div>
             <h1 className=" text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium mb-6 text-white/50">
               Legal
@@ -313,7 +316,10 @@ function Footer() {
           </div>
         </div>
         {/* grid 4 */}
-        <div className="flex flex-col space-y-3 p-2 lg:py-5 items-center -mt-16 md:-mt-12 lg:mt-0 ">
+        <div
+          className="flex flex-col space-y-3 p-2 lg:py-5 items-center -mt-16 md:-mt-12 lg:mt-0 lg:col-span-3 
+         lg:ml-6 xl:ml-10 2xl:ml-24"
+        >
           <div>
             <h1 className=" text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium text-white/50">
               Find us on
