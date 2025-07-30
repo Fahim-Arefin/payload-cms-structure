@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import GlobalButton from '../shared/GlobalButton'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
+import ToolTip from '../shared/ToolTip'
 
 type Benefit = {
   icon: string
@@ -99,22 +100,32 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
         </div>
       </div>
 
-      <div className="flex flex-wrap md:flex-nowrap justify-center items-center base:justify-start md:items-left gap-4 pb-6 pt-10 lg:pt-10 xl:pt-16 ">
-        <Link
-          href="/assets/pdf/Required Brochures/Corporate Plans/Group-Insurance-Brochure.pdf"
-          target="_blank"
-        >
-          <GlobalButton text="Download Brochure" variant="primary" />
-        </Link>
-
-        <GlobalButton
-          className="cursor-not-allowed bg-[#9C8639] 
+      <div className="mt-[30px] lg:mt-[50px] xl:mt-[80px] w-fit mx-auto">
+        <div className="flex flex-row gap-2">
+          <Link
+            href="/assets/pdf/Required Brochures/Corporate Plans/Group-Insurance-Brochure.pdf"
+            target="_blank"
+          >
+            <GlobalButton text="Download Brochure" variant="primary" />
+          </Link>
+          <ToolTip>
+            <GlobalButton
+              className="cursor-not-allowed bg-[#9C8639] 
           w-[170px] md:w-[200px] lg:w-[220px] xl:w-[230px] 2xl:w-[250px]"
-          text="Download Company Profile "
-        />
-        <Link href="/plans">
-          <GlobalButton text="Explore All Plans" variant="outline" />
-        </Link>
+              text="Download Company Profile "
+            />
+          </ToolTip>
+        </div>
+        <div className="flex justify-center mt-2">
+          <Link
+            href="/plans"
+            className="capitalize text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1 
+                    text-[10px] md:text-[12px] lg:text-[14px] xl:text-[14px]"
+          >
+            explore all plans
+            <ArrowUpRight size={14} className="inline-block" />
+          </Link>
+        </div>
       </div>
     </div>
   )

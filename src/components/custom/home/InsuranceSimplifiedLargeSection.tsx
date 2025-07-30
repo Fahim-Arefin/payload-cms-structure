@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import InsuranceCard from './InsuranceCard'
 import { InsuranceDataType } from '@/types'
@@ -23,10 +24,10 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
       <div className="">
         {/* headline */}
         {data?.sectionHeading && (
-          <div className="">
+          <div className="hidden md:block">
             <h1
               className="global-h1 uppercase font-semibold space-x-4 
-             md:mb-[30px] lg:mb-[40px] xl:mb-[80px]"
+            mb-[15px] md:mb-[30px] lg:mb-[40px] xl:mb-[80px]"
             >
               <span>{restWords}</span>
               <span className="text-[#ED7125]">{lastWord}</span>
@@ -35,14 +36,14 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
         )}
         <div className={cn(` space-y-6`)}>
           {/* 1st row */}
-          <div className={cn(`grid grid-cols-2`)}>
+          <div className={cn(`grid grid-cols-1 md:grid-cols-2`)}>
             {/* Left Text Section */}
             <div
               className={cn(
-                `text-[#434343] global-h4 p-4 flex flex-col justify-center space-y-1 lg:space-y-2`,
+                `text-[#434343] global-h4 py-2 md:p-4 flex flex-col justify-center md:space-y-1 lg:space-y-2 `,
                 content === 'left'
-                  ? 'order-1 md:mr-[16%] lg:mr-[20%] xl:mr-[30%] 2xl:mr-[35%]'
-                  : 'order-2 md:ml-[16%] lg:ml-[20%] xl:ml-[30%] 2xl:ml-[35%]',
+                  ? 'md:order-1 md:mr-[16%] lg:mr-[20%] xl:mr-[30%] 2xl:mr-[35%]'
+                  : 'md:order-2 md:ml-[16%] lg:ml-[20%] xl:ml-[30%] 2xl:ml-[35%]',
               )}
             >
               <h4 className="font-semibold uppercase cursor-pointer">
@@ -53,16 +54,15 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
               </h4>
               <h4 className="">{data?.subtitle}</h4>
             </div>
-
+            {/* right Section */}
             <Dialog>
               <DialogTrigger asChild>
                 <div
                   className={cn(
                     `relative group cursor-pointer 
-        md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full  
+        h-[150px] md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full  
         bg-no-repeat bg-contain 
         bg-center 
-  
         overflow-hidden transition-all`,
                     content === 'left' ? 'order-2' : 'order-1',
                   )}
@@ -73,21 +73,21 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                   {/* Hover dark overlay */}
                   <div
                     className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300 
-                  md:rounded-[4.333px_4.333px_19.333px_4.333px] lg:rounded-[4.333px_4.333px_29.333px_4.333px] xl:rounded-[4.333px_4.333px_39.333px_4.333px]"
+                  rounded-[4.333px_4.333px_19.333px_4.333px] lg:rounded-[4.333px_4.333px_29.333px_4.333px] xl:rounded-[4.333px_4.333px_39.333px_4.333px]"
                   />
 
                   {/* Play Button */}
                   <div
                     className="absolute 
-              md:-bottom-0.5 lg:-bottom-0.5 xl:bottom-0 2xl:bottom-0
-              md:-right-0.5 lg:-right-0.5 xl:-right-[3px] 2xl:-right-0.5 "
+              -bottom-0.5 lg:-bottom-0.5 xl:bottom-0 2xl:bottom-0
+              -right-0.5 lg:-right-0.5 xl:-right-[3px] 2xl:-right-0.5 "
                   >
                     <img
                       src="/assets/play.svg"
                       alt=""
                       className=" 
-                      md:w-[30px] lg:w-[40px] xl:w-[50px] 2xl:w-[60px]  
-                      md:h-[30px] lg:h-[40px] xl:h-[50px] 2xl:h-[60px]"
+                      w-[30px] lg:w-[40px] xl:w-[50px] 2xl:w-[60px]  
+                      h-[30px] lg:h-[40px] xl:h-[50px] 2xl:h-[60px]"
                     />
                   </div>
                 </div>
@@ -118,7 +118,7 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
             </Dialog>
           </div>
           {/* second row */}
-          <div className="grid grid-cols-3 gap-2 xl:gap-6">
+          <div className="grid grid-cols-3 gap-1 md:gap-2 xl:gap-6">
             {data?.insuranceCardData?.map((item, i) => (
               <InsuranceCard data={item} key={i} />
             ))}

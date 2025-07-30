@@ -206,7 +206,7 @@ function FooterMobile() {
           </div>
         </div>
       </div>
-      <div className="w-[70%] md:w-[50%] mx-auto mt-2 text-white/70 font-light">
+      <div className="w-[95%] md:w-[50%] mx-auto mt-2 text-white/70 font-light">
         {/* photos */}
         <div className="flex gap-[3px] flex-wrap mt-2 justify-center">
           {shurjoPayData?.map((img, i) => (
