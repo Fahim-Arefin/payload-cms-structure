@@ -403,9 +403,9 @@ function Footer() {
                 <div
                   key={i}
                   className="rounded-[5px] bg-[#5A5A5B] p-0 md:p-[2px] flex items-center justify-center 
-                  lg:w-[22px] lg:h-[22px]
-                  xl:w-[25px] xl:h-[25px]
-                  2xl:w-[34px] 2xl:h-[34px]"
+                   lg:w-[32px] lg:h-[32px]
+                  xl:w-[42px] xl:h-[42px]
+                  2xl:w-[52px] 2xl:h-[52px]"
                 >
                   <img
                     src={img?.image}

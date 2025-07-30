@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dialog'
 import React from 'react'
 import GlobalButton from '../shared/GlobalButton'
+import Link from 'next/link'
 
 // Import or copy your tabContent here:
 const tabContent = [
@@ -143,6 +144,7 @@ type PurchaseCardModalProps = {
   onOpenChange: (open: boolean) => void
   selectedIndex: number
   selectedPlanTitle?: string
+  purchasePlanData?: any
 }
 
 export const PurchaseCardModal = ({
@@ -150,8 +152,10 @@ export const PurchaseCardModal = ({
   onOpenChange,
   selectedIndex,
   selectedPlanTitle,
+  purchasePlanData,
 }: PurchaseCardModalProps) => {
   const content = tabContent[selectedIndex]?.content || []
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogOverlay className="backdrop-blur-sm bg-black/30" />
@@ -227,18 +231,14 @@ export const PurchaseCardModal = ({
         </div>
 
         <div className="flex justify-center gap-x-4 mt-8">
-          <GlobalButton
-            size="large"
-            text="Download Brochure"
-            variant="primary"
-            className="min-w-[200px] cursor-not-allowed"
-          />
-          <GlobalButton
-            size="large"
+          <Link href={purchasePlanData[selectedIndex]?.link} target="_blank">
+            <GlobalButton text="Download Brochure" variant="primary" />
+          </Link>
+          {/* <GlobalButton
             text="Calculate Premium"
             variant="outline"
             className="min-w-[200px] cursor-not-allowed text-[#9C8639] hover:text-[#9C8637] border-[#9C8639]"
-          />
+          /> */}
         </div>
       </DialogContent>
     </Dialog>
