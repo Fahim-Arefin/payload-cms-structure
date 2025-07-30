@@ -66,7 +66,7 @@ function ContactUsSection() {
            md:px-24 
            lg:px-[70px]  
            xl:px-[80px]
-      h-[200px] md:h-[330px] lg:h-[430px] xl:h-[550px] 2xl:h-[700px]
+      h-[200px] md:h-[330px] lg:h-[480px] xl:h-[550px] 2xl:h-[700px]
       "
     >
       {/* main img */}
@@ -76,7 +76,7 @@ function ContactUsSection() {
       lg:left-12
       xl:left-20
       2xl:left-28
-      h-[70%] xl:h-[70%] 2xl:h-[489px] 2xl:w-[900px]"
+      h-[65%] md:h-[70%] lg:h-[60%] xl:h-[70%] 2xl:h-[489px] 2xl:w-[900px]"
       >
         <img src="/assets/askUsImage.png" alt="" className="h-full w-full" />
       </div>
@@ -270,7 +270,7 @@ function ContactUsSection() {
             <DialogTrigger asChild>
               <Button
                 variant="primary"
-                className="shadow-md
+                className="shadow-md z-30
              text-[10px] md:text-[12px] 
              h-[26px] md:h-[30px] px-3 rounded-md"
               >
