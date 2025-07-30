@@ -9,6 +9,7 @@ type Props = {
   calculateLinkBtn?: string
   calculateLink?: string
   explorePlansLink?: string
+  showCalculatePremium?: boolean 
 }
 
 function GlobalTabButtons({
@@ -16,6 +17,7 @@ function GlobalTabButtons({
   calculateLink,
   explorePlansLink,
   calculateLinkBtn,
+   showCalculatePremium = true,
 }: Props) {
   return (
     <div className="mt-[30px] lg:mt-[50px] xl:mt-[80px] w-fit mx-auto">
@@ -25,7 +27,7 @@ function GlobalTabButtons({
             <GlobalButton text="Download Brochure" variant="primary" />
           </Link>
         )}
-        {calculateLink && (
+        {calculateLink && showCalculatePremium && (
           <ToolTip>
             <GlobalButton
               className="cursor-not-allowed  text-[#9C8639] border-[#9C8639] hover:text-[#9C8639]"
