@@ -8,37 +8,44 @@ type Props = {
 }
 
 const content = (data: InsuranceCardDataType) => (
-  <div
-    className="relative md:h-[200px] lg:h-[250px] xl:h-[300px] flex-shrink-0 
+  <div>
+    <div
+      className="relative h-[120px] md:h-[200px] lg:h-[250px] xl:h-[300px] flex-shrink-0 
       rounded-[4.167px] 
       bg-no-repeat bg-cover bg-center 
       bg-[#343A40] overflow-hidden cursor-pointer
     "
-    style={{
-      backgroundImage: `url(${data.image})`,
-    }}
-  >
-    {/* Overlay */}
-    <div className="absolute inset-0 bg-[#343A40]/50 rounded-[4.167px] z-10"></div>
+      style={{
+        backgroundImage: `url(${data.image})`,
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-[#343A40]/50 rounded-[4.167px] z-10"></div>
 
-    {/* Text Content */}
-    <div
-      className="relative z-20 h-full flex items-end 
+      {/* Text Content */}
+      <div
+        className="relative z-20 h-full flex items-end 
       md:px-4 xl:px-6 
       md:pb-10 xl:pb-16"
-    >
-      <div className="h-fit md:space-y-2 lg:space-y-3 xl:space-y-4">
-        <h4 className="text-white text-[12px] lg:text-[15px] font-bold">{data.title}</h4>
-        <p className="text-[#E5E5E5] text-[10px] lg:text-[12px]">{data.description}</p>
+      >
+        <div className="h-fit md:space-y-2 lg:space-y-3 xl:space-y-4">
+          {/* <h4 className="text-white text-[12px] lg:text-[15px] font-bold">{data.title}</h4> */}
+          <p className="text-[#E5E5E5] text-[10px] lg:text-[12px]">{data.description}</p>
+        </div>
+      </div>
+      <div
+        className="absolute bottom-0 right-0 z-20 
+       w-[20px] lg:w-[30px] xl:w-[40px] 2xl:w-[50px]  
+       h-[20px] lg:h-[30px] xl:h-[40px] 2xl:h-[50px]"
+      >
+        <img src={data?.videoLink ? '/assets/play3.svg' : '/assets/circle.svg'} alt="" />
       </div>
     </div>
-    <div
-      className="absolute bottom-0 right-0 z-20 
-       md:w-[20px] lg:w-[30px] xl:w-[40px] 2xl:w-[50px]  
-       md:h-[20px] lg:h-[30px] xl:h-[40px] 2xl:h-[50px]"
-    >
-      <img src={data?.videoLink ? '/assets/play3.svg' : '/assets/circle.svg'} alt="" />
-    </div>
+    {data.title && (
+      <h4 className="text-[#434343] text-[10px] md:text-[12px] lg:text-[15px] font-bold text-center mt-1 md:mt-5">
+        {data.title}
+      </h4>
+    )}
   </div>
 )
 

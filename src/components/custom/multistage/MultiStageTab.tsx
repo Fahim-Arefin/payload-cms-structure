@@ -10,6 +10,7 @@ import EndowmentPlanEligibility from '../shared/plans/EndowmentPlanEligibility'
 import GlobalButton from '../shared/GlobalButton'
 import ToolTip from '../shared/ToolTip'
 import { ArrowUpRight } from 'lucide-react'
+import GlobalTabButtons from '../shared/GlobalTabButtons'
 
 export function ArrowIcon() {
   return (
@@ -112,27 +113,11 @@ export default function MultiStageTab({ config, data }: Props) {
                 {activeTab === 'features' && <EndowmentKeyFeature data={data['features']} />}
                 {activeTab === 'benefits' && <BenefitsTabSection />}
               </TabsContent>
-              <div
-                className="flex flex-col md:flex-row w-fit gap-2 mx-auto 
-              mt-[30px] lg:mt-[50px] xl:mt-[100px]"
-              >
-                <Link
-                  href="/assets/pdf/Required Brochures/Multi-Stage Maturity Plans/Multi Stage Plan (3pp, 4pp). V1 pdf.pdf"
-                  target="_blank"
-                >
-                  <GlobalButton text="Download Brochure" variant="primary" />
-                </Link>
-                <ToolTip>
-                  <GlobalButton
-                    className="cursor-not-allowed  text-[#9C8639] border-[#9C8639] hover:text-[#9C8639]"
-                    text="Calculate Premium"
-                    variant="outline"
-                  />
-                </ToolTip>
-                <Link href="/plans/individual">
-                  <GlobalButton text="Explore All Plans" variant="secondary" />
-                </Link>
-              </div>
+              <GlobalTabButtons
+                brochureLink="/assets/pdf/Required Brochures/Multi-Stage Maturity Plans/Multi Stage Plan (3pp, 4pp). V1 pdf.pdf"
+                explorePlansLink="/plans/individual"
+                calculateLink="#"
+              />
             </>
           )
         })()}

@@ -3,6 +3,8 @@ import React from 'react'
 import GlobalButton from '../GlobalButton'
 import ToolTip from '../ToolTip'
 import Link from 'next/link'
+import GlobalTabButtons from '../GlobalTabButtons'
+import { ArrowUpRight } from 'lucide-react'
 
 type Props = {
   bgColor?: string
@@ -87,24 +89,23 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
             </div>
           ))}
           {/* button */}
-          <div className="flex gap-4 lg:gap-6 justify-center lg:justify-start">
-            {/* <Link href="/premium-calculator">
-              <GlobalButton variant="primary" text="Calculate Premium" />
-            </Link> */}
+          <div className="flex gap-4 lg:gap-6 ">
             <Link
               href="/assets/pdf/Required Brochures/Health & Protection/Shanta Critical Protection/Shanta Life Rider Brochure.pdf"
               target="_blank"
             >
-              <GlobalButton
-                variant="primary"
-                // className=" text-[#9C8639] hover:text-[#9C8638] border-2 border-[#9C8639]"
-                text="Download Brochure"
-              />
+              <GlobalButton variant="primary" text="Download Brochure" />
             </Link>
-            <Link href="/plans/individual">
-              <GlobalButton text="Explore All Plans" variant="secondary" />
-            </Link>
-            {/* </ToolTip> */}
+            <div className="flex justify-center mt-2">
+              <Link
+                href="/plans/individual"
+                className="capitalize text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1 
+                    text-[10px] md:text-[12px] lg:text-[14px] xl:text-[14px]"
+              >
+                explore all plans
+                <ArrowUpRight size={14} className="inline-block" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

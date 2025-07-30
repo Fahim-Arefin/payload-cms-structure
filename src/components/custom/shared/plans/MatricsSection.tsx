@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import GlobalButton from '../GlobalButton'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
+import GlobalTabButtons from '../GlobalTabButtons'
 
 type Props = {}
 
@@ -124,49 +125,13 @@ function MatricsSection({}: Props) {
         </div>
 
         {/* Buttons */}
-        
       </div>
-      <div className="hidden lg:flex flex-col justify-center items-center mt-16 sm:flex-row gap-4">
-          {/* <Button
-            variant="primary"
-            className="cursor-not-allowed
-                    global-p1 
-                    w-[130px]  md:w-[160px] lg:w-[170px] xl:w-[180px] 2xl:w-[200px]
-                    h-[33px]  md:h-[42px] lg:h-[45px] xl:h-[48px] 2xl:h-[50px]
-                    text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] 2xl:text-[16px]
-                    font-normal rounded-sm lg:rounded-md transition-all duration-200
-                    "
-          >
-            Download Brochure
-          </Button> */}
-          <Link
-            href="/assets/pdf/Required Brochures/Health & Protection/Shanta Accidental Coverage/Shanta Life Rider Brochure.pdf"
-            target="_blank"
-          >
-            <GlobalButton text="Download Brochure" variant="primary" />
-          </Link>
-          {/* <Button
-            variant="outline"
-            className="cursor-not-allowed
-                    text-[#3A3A3A] bg-[#F6EDDD] hover:bg-[#F6EEEE]
-                    global-p1 
-                    w-[130px]  md:w-[160px] lg:w-[170px] xl:w-[180px] 2xl:w-[200px]
-                    h-[33px]  md:h-[42px] lg:h-[45px] xl:h-[48px] 2xl:h-[50px]
-                    text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] 2xl:text-[16px]
-                    font-normal rounded-md transition-all duration-200
-                    "
-          >
-            Calculate Premium
-          </Button> */}
-          <GlobalButton
-            className="cursor-not-allowed text-[#3A3A3A] bg-[#F6EDDD] hover:bg-[#F6EEEE]"
-            text="Calculate Premium"
-            variant="outline"
-          />
-          <Link href="/plans/individual">
-            <GlobalButton text="Explore All Plans" variant="secondary" />
-          </Link>
-        </div>
+
+      <GlobalTabButtons
+        brochureLink="/assets/pdf/Required Brochures/Health & Protection/Shanta Accidental Coverage/Shanta Life Rider Brochure.pdf"
+        explorePlansLink="/plans/individual"
+        calculateLink="#"
+      />
     </div>
   )
 }
