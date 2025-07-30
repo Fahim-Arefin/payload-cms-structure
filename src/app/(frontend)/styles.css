@@ -174,3 +174,7 @@ body > div[data-state='open'].fixed.inset-0.z-50 {
 }
 
 /* ---- Add to your CSS ---- */
+body[data-dialog-open="true"] {
+  overflow: hidden !important;
+  touch-action: none;
+}
