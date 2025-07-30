@@ -16,20 +16,20 @@ const PurchaseCardSection: FC<PurchaseCardSectionProps> = ({ blur }) => {
     {
       title: 'Shanta Endowment Plans',
       description: `Turn today’s choices into tomorrow’s freedom.`,
-
       image: '/assets/purchase/purchaseCard1.jpg',
+      link: '/assets/pdf/Required Brochures/Endowment Plan/Endowment Brochure.pdf',
     },
     {
       title: 'Child Education',
       description: 'A brighter future starts with a thoughtful plan',
-
       image: '/assets/purchase/child-education.jpg',
+      link: '/assets/pdf/Required Brochures/Child Education Plan/Child Education Security Plan.pdf',
     },
     {
       title: 'Shanta Multi-Stage Maturity Plans',
       description: `Life happens. We make sure you're ready.`,
-
       image: '/assets/purchase/purchaseCard33.jpg',
+      link: '/assets/pdf/Required Brochures/Multi-Stage Maturity Plans/Multi Stage Plan (3pp, 4pp). V1 pdf.pdf',
     },
   ]
   return (
@@ -55,6 +55,7 @@ const PurchaseCardSection: FC<PurchaseCardSectionProps> = ({ blur }) => {
         onOpenChange={setOpen}
         selectedIndex={selectedIndex}
         selectedPlanTitle={purchasePlanData[selectedIndex]?.title}
+        purchasePlanData={purchasePlanData}
       />
     </div>
   )
