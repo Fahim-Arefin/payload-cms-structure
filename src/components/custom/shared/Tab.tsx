@@ -10,6 +10,7 @@ import { BenefitsTabSection } from '../child-education/BenefitsTabSection'
 import ToolTip from './ToolTip'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
+import GlobalTabButtons from './GlobalTabButtons'
 
 export function ArrowIcon() {
   return (
@@ -110,27 +111,11 @@ export function Tab({ config, data }: Props) {
                 {activeTab === 'eligibility' && <EndowmentPlanEligibility />}
                 {activeTab === 'benefits' && <BenefitsTabSection />}
               </TabsContent>
-              <div
-                className="flex flex-col items-center md:flex-row w-fit gap-2 mx-auto 
-              mt-[30px] lg:mt-[50px] xl:mt-[80px]"
-              >
-                <Link
-                  href="/assets/pdf/Required Brochures/Endowment Plan/Endowment Brochure.pdf"
-                  target="_blank"
-                >
-                  <GlobalButton text="Download Brochure" variant="primary" />
-                </Link>
-                <ToolTip>
-                  <GlobalButton
-                    className="cursor-not-allowed  text-[#9C8639] border-[#9C8639] hover:text-[#9C8639]"
-                    text="Calculate Premium"
-                    variant="outline"
-                  />
-                </ToolTip>
-                <Link href="/plans/individual">
-                  <GlobalButton text="Explore All Plans" variant="secondary" />
-                </Link>
-              </div>
+              <GlobalTabButtons
+                brochureLink="/assets/pdf/Required Brochures/Endowment Plan/Endowment Brochure.pdf"
+                explorePlansLink="/plans/individual"
+                calculateLink="#"
+              />
             </>
           )
         })()}
