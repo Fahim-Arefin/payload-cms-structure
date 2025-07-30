@@ -62,8 +62,7 @@ function page({}: Props) {
     {
       icon: '/assets/corporate-bullet.png',
       text: 'Lifestyle Benefits',
-      description:
-        'Lifestyle Benefit and Discount facility with the Willingness Pass.',
+      description: 'Lifestyle Benefit and Discount facility with the Willingness Pass.',
     },
   ]
 
@@ -102,10 +101,10 @@ function page({}: Props) {
     { img: '/assets/valued-clients/STS_Group_logo.png', title: 'STS Capital Limited' },
     { img: '/assets/valued-clients/Golden-Sky-LOGO-3.png', title: 'Golden Sky Footwear' },
     { img: '/assets/valued-clients/Blucheez-Red_Blucheez_logo.png', title: 'Blucheez Fashion' },
-    {
-      img: '/assets/valued-clients/Eduko_Logo_Transparent_Background.png',
-      title: 'Eduko Bangladesh',
-    },
+    // {
+    //   img: '/assets/valued-clients/Eduko_Logo_Transparent_Background.png',
+    //   title: 'Eduko Bangladesh',
+    // },
     {
       img: '/assets/valued-clients/Glenrich-New-Logo-2048x1016.png',
       title: 'Glenrich International School',

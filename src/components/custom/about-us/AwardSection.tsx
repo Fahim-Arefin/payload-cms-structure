@@ -29,7 +29,7 @@ function AwardSection() {
             >
               <img
                 className="h-full w-full z-[50] rounded-2xl object-cover"
-                src="/assets/aboutMilestone.jpg"
+                src="/assets/about_milestone_2.jpg"
                 alt="why choose us"
               />
             </div>
