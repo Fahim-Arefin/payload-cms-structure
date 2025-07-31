@@ -36,7 +36,7 @@ const CookieConsentBanner: FC = () => {
       <div
         className="
           pointer-events-auto w-fit max-w-[95vw] md:max-w-[85%]
-          mx-auto bg-white shadow-xl border border-[#e0e0e0]
+          mx-auto bg-white shadow-xl border-2 border-[#ED7125]
           rounded-2xl
           px-5 py-4 sm:px-6 sm:py-5
           mb-2 sm:mb-6
@@ -55,8 +55,8 @@ const CookieConsentBanner: FC = () => {
         </button>
 
         {/* <h2 className="text-[14px] md:text-xl font-bold mb-2 text-[#22223b]">Cookies Settings</h2> */}
-        <div className="flex flex-col md:flex-row md:items-center gap-3 pr-8">
-          <p className="text-[#22223b] text-[12px] md:text-base leading-snug">
+        <div className="flex items-center gap-2 pr-8">
+          <span className="text-[#22223b] text-[12px] md:text-base leading-snug text-justify">
             {COOKIE_POLICY_TEXT}{' '}
             <Link
               href="/privacy-policy"
@@ -64,23 +64,23 @@ const CookieConsentBanner: FC = () => {
             >
               Privacy Policy.
             </Link>
-          </p>
-          <div className="flex gap-2 self-start md:self-auto">
-            <Button
-              variant="primary"
-              className="px-3 py-1 text-[10px] md:text-sm font-semibold h-auto min-h-0"
-              onClick={() => handleAction('accepted')}
-            >
-              Accept
-            </Button>
-            <Button
-              variant="outline"
-              className="px-3 py-1 text-[10px] md:text-sm font-semibold h-auto min-h-0"
-              onClick={() => handleAction('rejected')}
-            >
-              Reject
-            </Button>
-          </div>
+            <span className="inline-flex gap-1.5 ml-2">
+              <Button
+                variant="primary"
+                className="px-2 py-0.5 text-[9px] md:text-xs font-semibold h-auto min-h-0 leading-tight"
+                onClick={() => handleAction('accepted')}
+              >
+                Accept
+              </Button>
+              <Button
+                variant="outline"
+                className="px-2 py-0.5 text-[9px] md:text-xs font-semibold h-auto min-h-0 leading-tight"
+                onClick={() => handleAction('rejected')}
+              >
+                Reject
+              </Button>
+            </span>
+          </span>
         </div>
       </div>
       <style>{`
