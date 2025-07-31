@@ -27,12 +27,12 @@ const MultiPlansSection = ({ data, planData, bgColor }: Props) => {
             {/* Labels and Dotted Lines */}
             <div className="flex items-start gap-2 space-y-8 text-sm text-black">
               <div>
-                <img src="/assets/line.png" alt="line" className="h-[180px] mt-1" />
+                <img src="/assets/line.png" alt="line" className="h-[200px] md:h-[180px] mt-0 md:mt-1" />
               </div>
-              <div className="flex flex-col items-start gap-6 text-[12px] md:global-p2">
-                <span>1/3 of the policy term - 25% of sum assured</span>
-                <span>2/3 of the policy term - 25% of sum assured</span>
-                <span>Remaining Sum Assured</span>
+              <div className="flex flex-col items-start gap-6 text-[10px] md:global-p2">
+                <span>25% of sum assured amount after 1/3 of the policy term</span>
+                <span>25% of sum assured amount after 2/3 of the policy term</span>
+                <span>Remaining 50% sum assured amount after end of policy term</span>
               </div>
             </div>
           </div>

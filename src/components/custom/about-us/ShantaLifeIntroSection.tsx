@@ -43,7 +43,7 @@ function ShantaLifeIntroSection({ shantaIntroContent }: Props) {
             />
           </div>
         </div>
-        <div className="space-y-3 md:space-y-5 2xl:space-y-8 ">
+        <div className="space-y-3 hidden md:block md:space-y-5 2xl:space-y-8 ">
           <h5
             className=" text-[#4A4A4A] font-semibold uppercase
         global-h4
