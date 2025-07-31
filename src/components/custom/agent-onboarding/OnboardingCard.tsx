@@ -1,18 +1,28 @@
-import { FootPrintDataType } from '@/types'
 import React from 'react'
 
+type DataType = {
+  image: string
+  title: string
+  description: string
+}
+
 type Props = {
-  data: FootPrintDataType
+  data: DataType
   isActive?: boolean
 }
 
 function OnboardingCard({ data, isActive = false }: Props) {
   return (
     <div
-      className={`
-        mx-auto relative p-6 overflow-hidden rounded-xl text-white
+      className={`cursor-pointer
+        mx-auto relative p-4 md:p-6 overflow-hidden text-white
         transition-all duration-500 ease-in-out
-        ${isActive ? 'h-[250px] md:h-[320px] lg:h-[420px] xl:h-[500px] 2xl:h-[600px]' : 'h-[180px] md:h-[220px] lg:h-[250px] xl:h-[300px] 2xl:h-[375px] translate-y-[68px] md:translate-y-[100px] lg:translate-y-[168px] xl:translate-y-[200px] 2xl:translate-y-[224px]'}
+        rounded-md
+        w-[97%] md:w-[95%] lg:w-[95%] xl:w-[90%] 
+        h-[80px] md:h-[170px] lg:h-[220px] xl:h-[280px] 2xl:h-[350px]
+        hover:w-full 
+        hover:h-full
+        flex flex-col justify-end
       `}
     >
       {/* Background image */}
@@ -24,7 +34,7 @@ function OnboardingCard({ data, isActive = false }: Props) {
       />
 
       {/* Overlay gradient */}
-      {/* <div className="absolute inset-0 bg-black/50" /> */}
+      {/* <div className="absolute inset-0 bg-black/20" /> */}
 
       {/* Foreground content */}
       <div className="relative z-10 text-white space-y-2 text-justify flex flex-col justify-between h-full">
