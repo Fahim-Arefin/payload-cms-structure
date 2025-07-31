@@ -8,9 +8,10 @@ import { X } from 'lucide-react' // Any close icon, or use your own SVG
 const STORAGE_KEY = 'shantaLifeCookie'
 type CookieStatus = 'accepted' | 'rejected'
 
+// const COOKIE_POLICY_TEXT =
+//   'We use cookies and similar technologies to help personalize content and provide a better experience. By clicking accept, you agree to this, as outlined in our'
 const COOKIE_POLICY_TEXT =
-  'We use cookies and similar technologies to help personalize content and provide a better experience. By clicking accept, you agree to this, as outlined in our'
-
+  'We use cookies to improve your experience. By clicking "Accept" you agree on this according to our '
 const CookieConsentBanner: FC = () => {
   const [show, setShow] = useState(false)
   const [closed, setClosed] = useState(false)
@@ -34,11 +35,11 @@ const CookieConsentBanner: FC = () => {
     <div className="fixed z-[9999] inset-x-0 bottom-0 flex justify-center pointer-events-none">
       <div
         className="
-          pointer-events-auto w-[95vw] md:w-[75%]
-          mx-auto bg-white shadow-xl border border-[#e0e0e0]
-          rounded-t-2xl sm:rounded-2xl
-          px-5 py-6 sm:p-7
-          mb-2 sm:mb-6
+          pointer-events-auto w-fit max-w-[95vw] md:max-w-[85%]
+          mx-auto bg-white shadow-xl border-2 border-[#ED7125]
+          rounded-2xl
+          px-4 py-2 sm:px-6 sm:py-2
+          mb-2 sm:mb-4
           flex flex-col items-start
           animate-fade-in-up
           relative
@@ -47,39 +48,39 @@ const CookieConsentBanner: FC = () => {
         {/* Close Button */}
         <button
           onClick={() => setClosed(true)}
-          className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 rounded-full p-1 transition-colors"
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 bg-white/70 backdrop-blur-[16.67px] hover:bg-white/80 rounded-full p-1.5 transition-all shadow-sm border border-gray-200"
           aria-label="Close cookie consent"
         >
-          <X className="w-5 h-5" />
+          <X className="w-3 h-3" />
         </button>
 
-        <h2 className="text-[14px] md:text-xl font-bold mb-2 text-[#22223b]">Cookies Settings</h2>
-        <div>
-          <p className="mb-2 text-[#22223b] text-justify text-[12px] md:text-base leading-snug">
+        {/* <h2 className="text-[14px] md:text-xl font-bold mb-2 text-[#22223b]">Cookies Settings</h2> */}
+        <div className="flex items-center gap-2 pr-8">
+          <span className="text-[#22223b] text-[9px] md:text-[12px] leading-snug text-justify">
             {COOKIE_POLICY_TEXT}{' '}
             <Link
               href="/privacy-policy"
-              className="underline text-[#9C8639] text-[12px] md:text-base"
+              className="underline text-[#9C8639] text-[9px] md:text-[12px]"
             >
               Privacy Policy.
             </Link>
-          </p>
-        </div>
-        <div className="flex flex-row justify-center items-center gap-3 w-full">
-          <Button
-            variant="primary"
-            className="w-[80px] text-[12px] md:text-base font-semibold"
-            onClick={() => handleAction('accepted')}
-          >
-            Accept
-          </Button>
-          <Button
-            variant="outline"
-            className="w-[80px] text-[12px] md:text-base font-semibold"
-            onClick={() => handleAction('rejected')}
-          >
-            Reject
-          </Button>
+            <span className="inline-flex gap-1.5 ml-2">
+              <Button
+                variant="primary"
+                className="px-2 py-0.5 text-[9px] md:text-xs font-semibold h-auto min-h-0 leading-tight"
+                onClick={() => handleAction('accepted')}
+              >
+                Accept
+              </Button>
+              <Button
+                variant="outline"
+                className="px-2 py-0.5 text-[9px] md:text-xs font-semibold h-auto min-h-0 leading-tight"
+                onClick={() => handleAction('rejected')}
+              >
+                Reject
+              </Button>
+            </span>
+          </span>
         </div>
       </div>
       <style>{`

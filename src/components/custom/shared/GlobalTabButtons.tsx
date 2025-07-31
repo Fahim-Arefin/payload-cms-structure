@@ -3,6 +3,7 @@ import React from 'react'
 import GlobalButton from './GlobalButton'
 import ToolTip from './ToolTip'
 import { ArrowUpRight } from 'lucide-react'
+import PremiumCalculatorModal from './PremiumCalculatorModal'
 
 type Props = {
   brochureLink?: string
@@ -28,13 +29,22 @@ function GlobalTabButtons({
           </Link>
         )}
         {calculateLink && showCalculatePremium && (
-          <ToolTip>
-            <GlobalButton
-              className="cursor-not-allowed  text-[#9C8639] border-[#9C8639] hover:text-[#9C8639]"
-              text={calculateLinkBtn ? calculateLinkBtn : 'Calculate Premium'}
-              variant="outline"
-            />
-          </ToolTip>
+          calculateLink === "#" ? (
+            <PremiumCalculatorModal>
+              <GlobalButton
+                className="cursor-pointer text-[#9C8639] border-[#9C8639] hover:text-[#d65a1a] hover:border-[#d65a1a] transition-colors"
+                text={calculateLinkBtn ? calculateLinkBtn : 'Calculate Premium'}
+                variant="outline"
+              />
+            </PremiumCalculatorModal>
+          ) : (
+            <Link href={calculateLink}>
+              <GlobalButton
+                text={calculateLinkBtn ? calculateLinkBtn : 'Calculate Premium'}
+                variant="outline"
+              />
+            </Link>
+          )
         )}
       </div>
       {explorePlansLink && (
