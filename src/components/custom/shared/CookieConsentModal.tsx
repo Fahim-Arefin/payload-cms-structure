@@ -56,11 +56,11 @@ const CookieConsentBanner: FC = () => {
 
         {/* <h2 className="text-[14px] md:text-xl font-bold mb-2 text-[#22223b]">Cookies Settings</h2> */}
         <div className="flex items-center gap-2 pr-8">
-          <span className="text-[#22223b] text-[12px] md:text-base leading-snug text-justify">
+          <span className="text-[#22223b] text-[9px] md:text-[12px] leading-snug text-justify">
             {COOKIE_POLICY_TEXT}{' '}
             <Link
               href="/privacy-policy"
-              className="underline text-[#9C8639] text-[12px] md:text-base"
+              className="underline text-[#9C8639] text-[9px] md:text-[12px]"
             >
               Privacy Policy.
             </Link>
