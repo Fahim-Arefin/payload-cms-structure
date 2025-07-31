@@ -23,8 +23,8 @@ const page: FC<pageProps> = ({}) => {
     <div className="font-avenir bg-white">
       <HeroSection
         heroSlides={heroSlides}
-        height=" h-[252px] md:h-[352px] lg:h-[470px] xl:h-[570px] 2xl:h-[670px] "
-        top=" top-[100px] md:top-[150px] lg:top-[43%]"
+        // height=" h-[252px] md:h-[352px] lg:h-[470px] xl:h-[570px] 2xl:h-[670px] "
+        // top=" top-[100px] md:top-[150px] lg:top-[43%]"
       >
         <div
           className="absolute top-[145px] md:top-[215px] lg:top-[280px] xl:top-[330px]  2xl:top-[430px] 

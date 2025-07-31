@@ -43,7 +43,7 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
         <div
           className="p-2 w-64 flex flex-col items-center shadow-md"
           style={{
-            borderRadius: '6.667px 6.667px 0px 0px',
+            borderRadius: '6.667px',
             // background: 'rgba(156, 134, 57, 0.10)',
             background: '#434343',
             backdropFilter: 'blur(20px)',
@@ -68,7 +68,7 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
         <div
           className="p-4 w-64 flex flex-col items-center shadow-md"
           style={{
-            borderRadius: '6.667px 6.667px 0px 0px',
+            borderRadius: '6.667px',
             // background: 'rgba(156, 134, 57, 0.10)',
             background: '#434343',
             backdropFilter: 'blur(20px)',
@@ -83,7 +83,7 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
         <div
           className="p-4 w-64 flex flex-col items-center shadow-md"
           style={{
-            borderRadius: '6.667px 6.667px 0px 0px',
+            borderRadius: '6.667px',
             // background: 'rgba(156, 134, 57, 0.10)',
             background: '#434343',
             backdropFilter: 'blur(20px)',

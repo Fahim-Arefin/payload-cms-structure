@@ -1,10 +1,10 @@
 'use client'
 
 import React from 'react'
-import { Button } from '@/components/ui/button'
-import GlobalButton from '../GlobalButton'
-import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+// import { Button } from '@/components/ui/button'
+// import GlobalButton from '../GlobalButton'
+// import Link from 'next/link'
+// import { ArrowUpRight } from 'lucide-react'
 import GlobalTabButtons from '../GlobalTabButtons'
 
 type Props = {}

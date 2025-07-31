@@ -9,7 +9,7 @@ type Props = {
   calculateLinkBtn?: string
   calculateLink?: string
   explorePlansLink?: string
-  showCalculatePremium?: boolean 
+  showCalculatePremium?: boolean
 }
 
 function GlobalTabButtons({
@@ -17,7 +17,7 @@ function GlobalTabButtons({
   calculateLink,
   explorePlansLink,
   calculateLinkBtn,
-   showCalculatePremium = true,
+  showCalculatePremium = true,
 }: Props) {
   return (
     <div className="mt-[30px] lg:mt-[50px] xl:mt-[80px] w-fit mx-auto">
@@ -42,7 +42,7 @@ function GlobalTabButtons({
           <Link
             href={explorePlansLink}
             className="capitalize text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1 
-                    text-[10px] md:text-[12px] lg:text-[14px] xl:text-[14px]"
+                    text-[14px] md:text-[14px] lg:text-[16px] xl:text-[16px]"
           >
             explore all plans
             <ArrowUpRight size={14} className="inline-block" />
