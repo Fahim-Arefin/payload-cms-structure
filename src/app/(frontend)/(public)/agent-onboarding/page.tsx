@@ -85,27 +85,22 @@ function page({}: Props) {
       description: '',
     },
     {
-      image: '/assets/onboardingWay2.png',
+      image: '/assets/onboardingWay4.jpg',
       title: '',
       description: '',
     },
     {
-      image: '/assets/onboardingWay3.png',
+      image: '/assets/onboardingWay5.jpg',
       title: '',
       description: '',
     },
     {
-      image: '/assets/onboardingWay1.png',
+      image: '/assets/onboardingWay6.jpg',
       title: '',
       description: '',
     },
     {
-      image: '/assets/onboardingWay2.png',
-      title: '',
-      description: '',
-    },
-    {
-      image: '/assets/onboardingWay3.png',
+      image: '/assets/onboardingWay7.jpg',
       title: '',
       description: '',
     },
