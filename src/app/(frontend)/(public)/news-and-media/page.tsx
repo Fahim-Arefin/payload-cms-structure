@@ -29,11 +29,13 @@ export default function NewsAndMedia() {
       if (hash) {
         let targetSection = null
 
-        // Handle blog and news fragments
+        // Handle blog, news, and vlog fragments
         if (hash === 'blog') {
           targetSection = 'blog-section'
         } else if (hash === 'news') {
           targetSection = 'news-section'
+        } else if (hash === 'vlog') {
+          targetSection = 'vlog-section'
         }
 
         // Scroll to the target section after a short delay
@@ -97,8 +99,8 @@ export default function NewsAndMedia() {
         <AllNewsSection />
       </div>
 
-      {/* second row */}
-      <div
+      {/* VLOG section */}
+      <div id="vlog-section"
         className={`px-5 
            md:px-24 
            lg:px-[130px]   
@@ -107,6 +109,9 @@ export default function NewsAndMedia() {
             pt-[30px] md:pt-[40px] lg:pt-[50px] xl:pt-[60px] 2xl:pt-[70px]
             pb-12 md:pb-24 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]`}
       >
+        <div className="flex justify-end items-center mb-8 md:mb-12">
+          <h1 className="global-h1 font-semibold uppercase">VLOG</h1>
+        </div>
         <div className="grid grid-cols-3 gap-1 md:gap-2 lg:gap-6">
           {insuranceCardData?.map((item, i) => (
             <InsuranceCard data={item} key={i} />

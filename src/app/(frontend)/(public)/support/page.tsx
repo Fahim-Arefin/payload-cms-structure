@@ -116,7 +116,7 @@ function SupportPage() {
     {
       title: 'Vlog',
       image: '/assets/levelup1.jpg',
-      link: '#', // No link for now
+      link: '/news-and-media#vlog',
     },
     {
       title: 'Blog',
@@ -131,7 +131,7 @@ function SupportPage() {
     {
       title: 'Vlog',
       image: '/assets/levelup1.jpg',
-      link: '#', // No link for now
+      link: '/news-and-media#vlog',
     },
     {
       title: 'Blog',
