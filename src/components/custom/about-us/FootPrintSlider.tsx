@@ -271,7 +271,7 @@ export function FootPrintSlider({ footPrintData }: Props) {
         } else {
           carouselApi.scrollTo(0) // Reset to the first slide
         }
-      }, 5000) // Change slide every 5 seconds
+      }, 3000) // Change slide every 5 seconds
     }
   }
 

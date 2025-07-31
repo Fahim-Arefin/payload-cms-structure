@@ -85,27 +85,22 @@ function page({}: Props) {
       description: '',
     },
     {
-      image: '/assets/onboardingWay2.png',
+      image: '/assets/onboardingWay4.jpg',
       title: '',
       description: '',
     },
     {
-      image: '/assets/onboardingWay3.png',
+      image: '/assets/onboardingWay5.jpg',
       title: '',
       description: '',
     },
     {
-      image: '/assets/onboardingWay1.png',
+      image: '/assets/onboardingWay6.jpg',
       title: '',
       description: '',
     },
     {
-      image: '/assets/onboardingWay2.png',
-      title: '',
-      description: '',
-    },
-    {
-      image: '/assets/onboardingWay3.png',
+      image: '/assets/onboardingWay7.jpg',
       title: '',
       description: '',
     },
@@ -171,10 +166,6 @@ function page({}: Props) {
       image: '/assets/agent-onboarding/3.svg',
       title: 'Freedom to Work On Your Time ',
     },
-    // {
-    //   image: '/assets/role4.svg',
-    //   title: 'Learn, Earn, Grow',
-    // },
     {
       image: '/assets/agent-onboarding/4.svg',
       title: 'Take Charge of your career',
