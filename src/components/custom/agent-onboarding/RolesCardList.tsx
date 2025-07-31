@@ -40,15 +40,14 @@ function RolesCardList({ onboardingRoleData }: Props) {
   }, [carouselApi])
   return (
     <Carousel
-      
       opts={{
-        align: 'start'
+        align: 'start',
       }}
-       className="w-full "
+      className="w-full "
       setApi={setCarouselApi} // 👈 capture carousel API
       plugins={[
         Autoplay({
-          delay: 3000,
+          delay: 5000,
         }),
       ]}
     >
@@ -57,7 +56,7 @@ function RolesCardList({ onboardingRoleData }: Props) {
         {onboardingRoleData?.map((data, index) => (
           <CarouselItem
             key={index}
-            className="w-full basis-1/2 md:basis-1/3 xl:basis-1/4 lg:py-24 lg:px-16 xl:py-20 2xl:py-32 xl:px-20"
+            className="w-full basis-1/2 md:basis-1/3 xl:basis-1/4 lg:py-24 lg:px-16 xl:py-20 2xl:py-32 xl:px-20 "
           >
             <RolesCard data={data} index={index} />
           </CarouselItem>

@@ -3,12 +3,9 @@ import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import CatchTheBuzzSection from '@/components/custom/support/CatchTheBuzzSection'
 import { FaqTabSection } from '@/components/custom/support/FaqTabSection'
 import FeedBackSection from '@/components/custom/support/FeedBackSection'
-import GeneralFaq from '@/components/custom/support/GeneralFaq'
 import LevelUpSection from '@/components/custom/support/LevelUpSection'
 import { MapTabSection } from '@/components/custom/support/MapTabSection'
 import { useEffect, useState } from 'react'
-
-import NewsSliderSection from '@/components/custom/support/NewsSliderSection'
 
 function SupportPage() {
   const [activeMapTab, setActiveMapTab] = useState('branches')
@@ -16,17 +13,17 @@ function SupportPage() {
 
   useEffect(() => {
     let lastHash = ''
-    
+
     const handleHashChange = () => {
       const hash = window.location.hash.substring(1) // Remove the # symbol
-      
+
       // Prevent infinite loops by checking if hash actually changed
       if (hash === lastHash) return
       lastHash = hash
-      
+
       if (hash) {
         let targetSection = null
-        
+
         // Handle map tab fragments
         if (hash === 'hospitals') {
           setActiveMapTab('hospitals')
@@ -35,7 +32,7 @@ function SupportPage() {
           setActiveMapTab('branches')
           targetSection = 'map-section'
         }
-        // Handle FAQ tab fragments  
+        // Handle FAQ tab fragments
         else if (hash === 'general') {
           setActiveFaqTab('general')
           targetSection = 'faq-section'
@@ -49,10 +46,10 @@ function SupportPage() {
           setTimeout(() => {
             const element = document.getElementById(targetSection)
             if (element) {
-              element.scrollIntoView({ 
-                behavior: 'smooth', 
+              element.scrollIntoView({
+                behavior: 'smooth',
                 block: 'start',
-                inline: 'nearest'
+                inline: 'nearest',
               })
             }
           }, 150)
@@ -65,11 +62,70 @@ function SupportPage() {
 
     // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange)
-    
+
     return () => {
       window.removeEventListener('hashchange', handleHashChange)
     }
   }, [])
+
+  useEffect(() => {
+    let lastHash = window.location.hash
+
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1)
+      if (hash === lastHash?.substring(1)) return
+      lastHash = window.location.hash
+
+      if (hash) {
+        let targetSection = null
+
+        if (hash === 'hospitals') {
+          setActiveMapTab('hospitals')
+          targetSection = 'map-section'
+        } else if (hash === 'branches') {
+          setActiveMapTab('branches')
+          targetSection = 'map-section'
+        } else if (hash === 'general') {
+          setActiveFaqTab('general')
+          targetSection = 'faq-section'
+        } else if (hash === 'form') {
+          setActiveFaqTab('form')
+          targetSection = 'faq-section'
+        }
+
+        if (targetSection) {
+          setTimeout(() => {
+            const element = document.getElementById(targetSection)
+            if (element) {
+              element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+                inline: 'nearest',
+              })
+            }
+          }, 150)
+        }
+      }
+    }
+
+    // Initial check (on mount)
+    handleHashChange()
+
+    // Listen for hashchange (back/forward navigation, etc)
+    window.addEventListener('hashchange', handleHashChange)
+
+    // ALSO: poll for hash changes that Next.js Link might trigger (SPA navigation)
+    const interval = setInterval(() => {
+      if (window.location.hash !== lastHash) {
+        handleHashChange()
+      }
+    }, 100) // fast enough for UX
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange)
+      clearInterval(interval)
+    }
+  }, [setActiveMapTab, setActiveFaqTab])
 
   const heroSlides = [
     {

@@ -171,10 +171,6 @@ function page({}: Props) {
       image: '/assets/agent-onboarding/3.svg',
       title: 'Freedom to Work On Your Time ',
     },
-    // {
-    //   image: '/assets/role4.svg',
-    //   title: 'Learn, Earn, Grow',
-    // },
     {
       image: '/assets/agent-onboarding/4.svg',
       title: 'Take Charge of your career',
