@@ -264,9 +264,9 @@ function SupportPage() {
     <div className="font-avenir bg-white">
       <HeroSection
         heroSlides={heroSlides}
+        top=" top-[220px] md:top-[150px] lg:top-[50%]"
         // height=" h-[252px] md:h-[352px] lg:h-[400px] xl:h-[500px] 2xl:h-[578px] "
         // height=" h-[252px] md:h-[352px] lg:h-[450px] xl:h-[550px] 2xl:h-[650px] "
-        // top=" top-[110px] md:top-[150px] lg:top-[50%]"
         position="[object-position:50%_50px] md:[object-position:50%_-10%]"
       />
       <div id="map-section">

@@ -63,6 +63,36 @@ function NewsDetailsSection({ data, id }: Props) {
                 </p>
               )
             })}
+            
+            {/* External News Link */}
+            {news?.externalLink && (
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <a
+                  href={news.externalLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#9C8639] hover:text-[#7A6B2D] font-medium transition-colors"
+                >
+                  News Link
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="text-current"
+                  >
+                    <path
+                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>

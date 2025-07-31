@@ -19,8 +19,6 @@ const content = (data: InsuranceCardDataType) => (
         backgroundImage: `url(${data.image})`,
       }}
     >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-[#343A40]/50 rounded-[4.167px] z-10"></div>
 
       {/* Text Content */}
       <div
