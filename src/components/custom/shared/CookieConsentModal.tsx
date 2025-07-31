@@ -38,8 +38,8 @@ const CookieConsentBanner: FC = () => {
           pointer-events-auto w-fit max-w-[95vw] md:max-w-[85%]
           mx-auto bg-white shadow-xl border-2 border-[#ED7125]
           rounded-2xl
-          px-5 py-4 sm:px-6 sm:py-5
-          mb-2 sm:mb-6
+          px-4 py-2 sm:px-6 sm:py-2
+          mb-2 sm:mb-4
           flex flex-col items-start
           animate-fade-in-up
           relative
