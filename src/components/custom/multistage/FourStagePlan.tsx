@@ -37,17 +37,17 @@ const FourStagePlan: FC<FourStagePlanProps> = ({}) => {
           <h4 className="global-h4 uppercase font-semibold">Payout Milestones</h4>
           <div className="h-[1px] w-full bg-[#7D7D7D] mb-2 lg:mb-4 " />
 
-          <div className="w-full flex justify-center gap-6 items-center">
+          <div className="w-full flex justify-center gap-1 md:gap-6 items-center">
             <div className="flex items-start gap-2 space-y-8 text-sm text-black">
-              <div className="flex flex-col items-start gap-6 text-[12px] md:global-p2">
-                <span>1st Stage - 15% of sum assured</span>
-                <span>2nd Stage - 15% of sum assured</span>
-                <span>3rd Stage - 15% of sum assured</span>
-                <span>Final Maturity</span>
+              <div className="flex flex-col items-start gap-3 md:gap-6 text-[10px] lg:global-p2">
+                <span className='line-clamp-2'>15% of sum assured amount after 1/4 of the policy term</span>
+                <span className='line-clamp-2'>15% of sum assured amount after 2/4 of the policy term</span>
+                <span className='line-clamp-2'>15% of sum assured amount after 3/4 of the policy term</span>
+                <span className='line-clamp-2'>Remaining 55% sum assured amount after end of policy term</span>
               </div>
             </div>
             <div>
-              <img src="/assets/line.png" alt="line" className="max-h-[180px] mt-1 mr-10" />
+              <img src="/assets/line.png" alt="line" className="h-[250px] md:max-h-[180px] mt-1 mr-10" />
             </div>
             <div className="lg:ml-10">
               <CirclePieChart data={fourStageData} />

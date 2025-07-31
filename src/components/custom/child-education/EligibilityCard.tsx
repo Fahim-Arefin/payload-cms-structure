@@ -29,10 +29,10 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
 }) => {
   return (
     <div
-      className="rounded-xl p-4 lg:p-12 w-full h-auto xl:h-[535px] xl:w-[347px] overflow-hidden shadow-lg bg-cover bg-center flex flex-col"
-      style={{
-        backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.40), rgba(0,0,0,0.30)), url('${bgImage}')`,
-      }}
+      className="bg-[#F6EDDD] rounded-xl p-4 lg:p-12 w-full h-auto xl:h-[535px] xl:w-[347px] overflow-hidden shadow-lg bg-cover bg-center flex flex-col"
+      // style={{
+      //   backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.40), rgba(0,0,0,0.30)), url('${bgImage}')`,
+      // }}
     >
       <div className="flex flex-col gap-2 items-center">
         <img src={icon} alt={title} className="w-14 h-14" />

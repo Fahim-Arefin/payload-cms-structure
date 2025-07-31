@@ -131,6 +131,7 @@ function MatricsSection({}: Props) {
         brochureLink="/assets/pdf/Required Brochures/Health & Protection/Shanta Accidental Coverage/Shanta Life Rider Brochure.pdf"
         explorePlansLink="/plans/individual"
         calculateLink="#"
+        showCalculatePremium={false}
       />
     </div>
   )

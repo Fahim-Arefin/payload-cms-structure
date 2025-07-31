@@ -84,11 +84,11 @@ function page({}: Props) {
   const partnerData = [
     { img: '/assets/valued-clients/ShantaHolding.png', title: 'Shanta Holdings Limited' },
     {
-      img: '/assets/valued-clients/Logo-Shanta-Multiverse.png',
+      img: '/assets/valued-clients/shantaMultiverse.png',
       title: 'Shanta Multiverse Limited',
     },
     { img: '/assets/valued-clients/ShantaLifestyle.png', title: 'Shanta Lifestyle Limited' },
-    { img: '/assets/valued-clients/amari-dhaka.png', title: 'Amari Dhaka' },
+    { img: '/assets/valued-clients/amariDhaka.png', title: 'Amari Dhaka' },
     {
       img: '/assets/valued-clients/hohensteiname.png',
       title: 'Hohenstein Laboratories Bangladesh Limited',
@@ -115,7 +115,8 @@ function page({}: Props) {
       title: 'Ace Bangladesh Limited',
     },
     { img: '/assets/valued-clients/Fitsair_logo.png', title: 'FitsAir' },
-    { img: '/assets/valued-clients/aIR-ALLIANCE.png', title: 'Air Alliance Ltd. (SP)' },
+    { img: '/assets/valued-clients/airAlliance.png', title: 'Air Alliance Ltd. (SP)' },
+    { img: '/assets/valued-clients/ups.png', title: 'UPS Authorized Service Contractor' },
     {
       img: '/assets/valued-clients/pixel_speedmark_8fb3bdc46abb8be4b9e2d982fdffea1d-4-4.png',
       title: 'Speedmark Transportation (BD) Limited',

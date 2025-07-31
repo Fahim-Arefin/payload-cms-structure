@@ -108,13 +108,16 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
           >
             <GlobalButton text="Download Brochure" variant="primary" />
           </Link>
-          <ToolTip>
+          <Link
+            href="/assets/pdf/Required Brochures/Corporate Plans/Shanta Company Profile Brochure.pdf"
+            target="_blank"
+          >
             <GlobalButton
-              className="cursor-not-allowed bg-[#9C8639] 
-          w-[170px] md:w-[200px] lg:w-[220px] xl:w-[230px] 2xl:w-[250px]"
-              text="Download Company Profile "
+              className="bg-[#9C8639] 
+              w-[170px] md:w-[200px] lg:w-[220px] xl:w-[230px] 2xl:w-[250px]"
+              text="Download Company Profile"
             />
-          </ToolTip>
+          </Link>
         </div>
         <div className="flex justify-center mt-2">
           <Link

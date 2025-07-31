@@ -7,10 +7,34 @@ import GlobalContactButtons from '@/components/custom/shared/GlobalContactButton
 import Navbar from '@/components/custom/shared/Navbar/Navbar'
 import FooterMobile from '@/components/custom/shared/FooterMobile'
 import CookieConsentBanner from '@/components/custom/shared/CookieConsentModal'
+import { Metadata } from 'next'
+import Script from 'next/script'
 
-export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Shanta Life',
+export const metadata: Metadata = {
+  title: "Shanta Life Insurance | Life Insurance Company in Bangladesh | Welcome to Shanta Life Insurance",
+  description: "Protecting what matters most with innovative and tailored insurance solutions.",
+  keywords: [
+    "Shanta Life Insurance",
+    "Insurance Bangladesh",
+    "Family Protection Plans",
+    "Life Insurance in Bangladesh",
+    "Welcome to Shanta Life Insurance"
+  ],
+  openGraph: {
+    title: "Shanta Life Insurance | Life Insurance Company in Bangladesh | Welcome to Shanta Life Insurance",
+    description: "Protecting what matters most with innovative and tailored insurance solutions.",
+    url: "https://shantalife.com/",
+    images: [
+      {
+        url: "https://shantalife.com/assets/img/logo/logo-SLI.svg"
+      }
+    ],
+    siteName: "shantalife"
+  },
+  other: {
+    "facebook-domain-verification": "hq1sdzo7wujgmgap4x87q5qhbqotip",
+    "google-site-verification": "V6JFG8AbajjlaJ2TXqUVY8A8yCjOwc047yj_HZcx8As"
+  }
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -20,6 +44,19 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <link rel="icon" type="image/png" href="/assets/mainlogo_2.png" />
+               {/* Google Tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-CP1L2ZN6G5"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-CP1L2ZN6G5');
+          `}
+        </Script>
       </head>
       <body>
         <main className="bg-[#F6EDDD] min-h-screen relative font-avenir 3xl:max-w-[1925px] 3xl:mx-auto">
