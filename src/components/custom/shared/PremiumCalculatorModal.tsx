@@ -145,21 +145,21 @@ export default function PremiumCalculatorModal({ children }: PremiumCalculatorMo
       }}
     >
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-6xl max-h-[90vh] w-[92vw] sm:w-[85vw] md:w-[80vw] p-0 overflow-hidden">
+      <DialogContent className="max-w-6xl max-h-[90vh] w-[92vw] sm:w-[85vw] md:w-[80vw] p-0 overflow-hidden [&>button:not(.custom-close)]:hidden">
         <DialogTitle className="sr-only">Premium Calculator</DialogTitle>
 
         {/* Custom Close Button */}
-        {/* <button
+        <button
           onClick={handleCloseModal}
-          className="absolute top-2 right-2 z-50 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full p-0 shadow-lg transition-all"
+          className="custom-close absolute top-2 md:right-4 lg:right-8 right-2 z-50 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full p-2 shadow-lg transition-all"
         >
-          <X size={8} className="text-gray-600" />
-        </button> */}
+          <X size={14} className="text-gray-600" />
+        </button>
 
         {/* Modal Content */}
         <div className="overflow-y-auto max-h-[90vh]">
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#9C8639] to-[#B09B67] text-white px-8 py-4 md:px-5 md:py-5">
+          <div className="bg-gradient-to-r from-[#9C8639] to-[#B09B67] text-white px-10 py-4 md:px-5 md:py-5">
             {/* <h2 className="text-lg md:text-xl font-bold mb-1">Premium Calculator</h2> */}
             <p className="text-xs md:text-sm opacity-90">
               Calculate your premium and find the perfect plan for your needs
