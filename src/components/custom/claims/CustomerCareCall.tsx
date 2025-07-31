@@ -1,61 +1,85 @@
 'use client'
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Loader, MailCheck, SendHorizontal, X } from 'lucide-react' // ShadCN uses lucide-react for icons
+// import { useState } from 'react'
+// import { Button } from '@/components/ui/button'
+// import { Input } from '@/components/ui/input'
+// import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+// import { Loader, MailCheck, SendHorizontal, X } from 'lucide-react' // ShadCN uses lucide-react for icons
 import GlobalButton from '../shared/GlobalButton'
 
 export function ContactComponent() {
-  const [showPopover, setShowPopover] = useState(false)
-  const [userPhone, setUserPhone] = useState('')
-  const [confirmButtonText, setConfirmButtonText] = useState('Confirm')
+  // const [showPopover, setShowPopover] = useState(false)
+  // const [userPhone, setUserPhone] = useState('')
+  // const [confirmButtonText, setConfirmButtonText] = useState('Confirm')
 
-  console.log('show', showPopover)
+  // console.log('show', showPopover)
 
   const handleCallClick = () => {
-    const now = new Date()
-    const hour = now.getHours()
+    window.location.href = 'tel:09610889900'
+    // const now = new Date()
+    // const hour = now.getHours()
 
-    if (hour >= 17 && hour < 18) {
-      setShowPopover(false)
-      window.location.href = 'tel:09610889900'
-      console.log('withing hour')
-    } else {
-      console.log('not withing hour')
-      setShowPopover(true)
-    }
+    // if (hour >= 17 && hour < 18) {
+    //   setShowPopover(false)
+    //   window.location.href = 'tel:09610889900'
+    //   console.log('withing hour')
+    // } else {
+    //   console.log('not withing hour')
+    //   setShowPopover(true)
+    // }
   }
 
-  const handleConfirm = async () => {
-    setConfirmButtonText('Confirming...')
-    setUserPhone('')
+  // const handleConfirm = async () => {
+  //   setConfirmButtonText('Confirming...')
+  //   setUserPhone('')
 
-    await fetch('/api/emails/corporate-claim', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        phone: userPhone,
-      }),
-    }).then(() => {
-      setConfirmButtonText('Confirmed')
-      setTimeout(() => {
-        setConfirmButtonText('Confirm')
-        setShowPopover(false)
-      }, 1500)
-    })
-  }
+  //   await fetch('/api/emails/corporate-claim', {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       phone: userPhone,
+  //     }),
+  //   }).then(() => {
+  //     setConfirmButtonText('Confirmed')
+  //     setTimeout(() => {
+  //       setConfirmButtonText('Confirm')
+  //       setShowPopover(false)
+  //     }, 1500)
+  //   })
+  // }
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 relative ">
       <p className="text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
         For any further queries please contact
       </p>
-      <Popover open={showPopover}>
+      <GlobalButton
+        variant="outline"
+        className="flex items-center gap-2 bg-yellow-800 text-white hover:bg-yellow-700 border-yellow-900
+            w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[150px]
+            h-[32px] md:h-[34px] lg:h-[38px] xl:h-[40px] 2xl:h-[42px]"
+        onClick={handleCallClick}
+        size="small"
+      >
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 5a2 2 0 012-2h1.6a1 1 0 01.9.55L9.5 7a1 1 0 01-.1 1.04l-1.5 2a16.99 16.99 0 007.06 7.06l2-1.5a1 1 0 011.04-.1l3.45 1.8a1 1 0 01.55.9V19a2 2 0 01-2 2h-1C10.61 21 3 13.39 3 4v1z"
+          />
+        </svg>
+        09610889900
+      </GlobalButton>
+      {/* <Popover open={showPopover}>
         <PopoverTrigger asChild>
           <GlobalButton
             variant="outline"
@@ -113,7 +137,7 @@ export function ContactComponent() {
             <span className="text-base">{confirmButtonText}</span>
           </Button>
         </PopoverContent>
-      </Popover>
+      </Popover> */}
     </div>
   )
 }
