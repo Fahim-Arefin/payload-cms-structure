@@ -70,7 +70,12 @@ async function page({ params }: Props) {
   // Dynamic hero title, description, and image
   const heroTitle = isBlog ? 'Blog' : isNews ? 'News' : 'News & Media'
   const heroDescription = currentItem?.title || 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance'
-  const heroImage = currentItem?.image || '/assets/newsSingleBanner.jpg'
+  
+  // Use high-quality fallback for low-resolution images (like news2.jpg which is only 370x212)
+  const lowQualityImages = ['/assets/news2.jpg']
+  const heroImage = currentItem?.image && !lowQualityImages.includes(currentItem.image) 
+    ? currentItem.image 
+    : '/assets/newsSingleBanner.jpg'
 
   const heroSlides = [
     {
