@@ -124,7 +124,7 @@
     @apply w-full lg:w-[78%] xl:w-[72%] mx-auto;
   }
   .container-wpm {
-    @apply w-full lg:w-[78%] xl:w-[72%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 xl:mt-[150px];
+    @apply w-full lg:w-[78%] xl:w-[72%] mx-auto px-2 lg:px-0 mt-12 lg:mt-32 xl:mt-[150px];
   }
   .global-h1 {
     /* @apply text-[18px] md:text-[24px] lg:text-[32px] xl:text-[45px] 2xl:text-[56px]; */
