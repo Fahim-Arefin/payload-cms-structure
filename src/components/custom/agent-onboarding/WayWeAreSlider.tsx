@@ -114,6 +114,7 @@ import CarouselNavButtons from '../shared/CarousalNavButtons'
 import OnboardingCard from './OnboardingCard'
 type wayWeAreData = {
   image: string
+  mobileImage: string
   title: string
   description: string
 }

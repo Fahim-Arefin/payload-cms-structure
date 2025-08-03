@@ -3,6 +3,7 @@ import WayWeAreSlider from './WayWeAreSlider'
 
 type wayWeAreData = {
   image: string
+  mobileImage: string
   title: string
   description: string
 }

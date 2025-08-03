@@ -12,7 +12,7 @@ function OnboardingVision({ data }: Props) {
     <div
       className="container-padding text-white"
       style={{
-        background: `linear-gradient(0deg, #00000085, #00000085), url('/assets/visionBanner.jpg') #00000085 50% / cover no-repeat`,
+        background: `linear-gradient(0deg, #00000085, #00000085), url('/assets/agent-onboarding/web/visionBanner.jpg') #00000085 50% / cover no-repeat`,
       }}
     >
       {/* Title */}

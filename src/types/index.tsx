@@ -123,6 +123,7 @@ export type CareerResourceDataType = {
 export type OnboardingRoleType = {
   image: string
   title: string
+  mobileImage: string
 }
 
 export type SuitabilityCardType = {
