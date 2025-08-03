@@ -174,7 +174,15 @@ body > div[data-state='open'].fixed.inset-0.z-50 {
 }
 
 /* ---- Add to your CSS ---- */
-body[data-dialog-open="true"] {
+body[data-dialog-open='true'] {
   overflow: hidden !important;
   touch-action: none;
+}
+.dotlottie-player,
+.dotlottie-player svg,
+.dotlottie-player canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: fill !important;
 }
