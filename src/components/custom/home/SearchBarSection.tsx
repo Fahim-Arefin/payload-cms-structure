@@ -209,10 +209,10 @@ function SearchBarSection() {
   return (
     <div
       className="z-40 flex justify-center items-center bg-white
-    px-14 py-12 sm:p-8 md:p-16 lg:p-24 "
+    px-10 py-12 sm:p-8 md:p-16 lg:p-24 "
     >
       <div
-        className="w-full max-w-[80%] md:max-w-sm lg:max-w-xl bg-[#F6EDDD] rounded-lg md:rounded-md 
+        className="w-full md:max-w-sm lg:max-w-xl bg-[#F6EDDD] rounded-lg md:rounded-md 
         relative
         py-1 px-1.5 md:py-1.5 md:px-2 lg:py-2 lg:px-2.5 "
         // style={{ boxShadow: '0px 0px 13px 6px #00000014' }}
@@ -229,8 +229,11 @@ function SearchBarSection() {
           h-[40px] md:h-[45px] lg:h-[60px] xl:h-[70px] "
         />
 
-        <div className="hidden md:block absolute right-5 sm:right-10 top-1/2 -translate-y-1/2">
+        <div className="hidden lg:block absolute right-5 sm:right-10 top-1/2 -translate-y-1/2">
           <CiSearch size={28} />
+        </div>
+        <div className="lg:hidden absolute right-5 sm:right-10 top-1/2 -translate-y-1/2">
+          <CiSearch size={24} />
         </div>
 
         {showSuggestions && filteredSuggestions.length > 0 && (
