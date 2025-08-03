@@ -58,7 +58,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
         background: "url('/assets/careerSwiperBanner_1.gif') no-repeat center/cover",
       }}
     >
-      <div className="pt-16 pb-10">
+      <div className="md:pt-4 lg:pt-16 pb-10">
         <div className="mb-6 flex flex-col gap-2 pl-5 md:pl-24 lg:pl-[130px] xl:pl-[200px] 2xl:pl-[300px]">
           <div className="text-white text-lg lg:text-[28px] font-light">FAST TRACK</div>
           <div className="text-[#FF8641] text-3xl lg:text-[46px] font-bold mb-2">YOUR CAREER</div>

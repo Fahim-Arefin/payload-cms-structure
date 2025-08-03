@@ -23,7 +23,7 @@ const page: FC<pageProps> = ({}) => {
       title: 'Build Your Legacy, Empower Every Step',
       subtitle: '',
       description: 'Join us in reimagining life insurance, where your passion meets purpose.',
-      image: '/assets/careerHero.png',
+      image: '/assets/career/web/careerHero.png',
     },
   ]
   // We’re bringing together people who believe in better protection, stronger communities, and a future full of possibilities.
@@ -38,7 +38,8 @@ const page: FC<pageProps> = ({}) => {
     {
       title: 'SNAPSHOTs of',
       subtitle: 'Our Story',
-      mainImage: '/assets/careerVideoMain.png',
+      mainImage: '/assets/career/web/careerVideoMain.png',
+      mainMobileImage: `/assets/career/mobile/careerVideoMain.png`,
       insuranceCardData: [
         {
           title: 'Leadership Recognition',

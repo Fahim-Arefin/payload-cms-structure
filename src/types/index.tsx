@@ -110,6 +110,7 @@ export type OurStoryDataType = {
   title: string
   subtitle: string
   mainImage: string
+  mainMobileImage: string
   insuranceCardData: InsuranceCardDataType[]
 }
 
