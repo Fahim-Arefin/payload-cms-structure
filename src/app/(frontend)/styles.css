@@ -124,7 +124,7 @@
     @apply w-full lg:w-[78%] xl:w-[72%] mx-auto;
   }
   .container-wpm {
-    @apply w-full lg:w-[78%] xl:w-[72%] mx-auto px-4 lg:px-0 mt-12 lg:mt-32 xl:mt-[150px];
+    @apply w-full lg:w-[78%] xl:w-[72%] mx-auto px-2 lg:px-0 mt-12 lg:mt-32 xl:mt-[150px];
   }
   .global-h1 {
     /* @apply text-[18px] md:text-[24px] lg:text-[32px] xl:text-[45px] 2xl:text-[56px]; */
@@ -174,7 +174,15 @@ body > div[data-state='open'].fixed.inset-0.z-50 {
 }
 
 /* ---- Add to your CSS ---- */
-body[data-dialog-open="true"] {
+body[data-dialog-open='true'] {
   overflow: hidden !important;
   touch-action: none;
+}
+.dotlottie-player,
+.dotlottie-player svg,
+.dotlottie-player canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: fill !important;
 }

@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@/components/ui/button'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import React, { useState } from 'react'
 import { BsPlay } from 'react-icons/bs'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
@@ -20,14 +20,27 @@ function VideoSection() {
           className="absolute inset-0 w-full h-full object-cover z-0"
         /> */}
         <LottiePlayer
-          className="absolute inset-0 w-full h-full z-0 object-cover"
-          style={{ objectFit: 'fill' }}
-          src={'/assets/homepage/test5.json'}
-          background="rgb(255, 255, 255)"
-        ></LottiePlayer>
+          className="absolute inset-0 z-0"
+          style={{ width: '100%', objectFit: 'fill' }}
+          src="/assets/homepage/test5.json"
+          background="white"
+        />
+        {/* <div className="absolute inset-0 z-0 w-full h-full">
+          <DotLottieReact
+            src="/assets/homepage/test5.json"
+            autoplay
+            loop
+            style={{
+              width: '100%',
+              height: '100%',
+              // border: '1px solid red',
+              display: 'block',
+            }}
+          />
+        </div> */}
 
         {/* Semi-transparent black overlay */}
-        <div className="absolute inset-0 bg-black/60 z-10" />
+        {/* <div className="absolute inset-0 bg-black/60 z-10" /> */}
 
         {/* Foreground content */}
         <div
@@ -50,24 +63,6 @@ function VideoSection() {
           ></div>
           <div className=" -mt-14 lg:-mt-16 xl:-mt-20">
             <div className="flex items-center justify-between w-[85%] mx-auto">
-              {/* <ToolTip> */}
-              {/*   <Button */}
-              {/*     className="bg-[#9A4E46] cursor-not-allowed */}
-              {/*   px-4 md:px-6 py-1 md:py-2 lg:px-8 lg:py-5 xl:px-10 xl:py-6  */}
-              {/*   w-[100px] md:w-[120px] lg:w-[140px] xl:w-[160px] 2xl:w-[200px] */}
-              {/*   global-p2 */}
-              {/*   rounded-lg" */}
-              {/*   > */}
-              {/*     Level up Now */}
-              {/*   </Button> */}
-              {/* </ToolTip> */}
-              {/* <div className="flex space-x-2 2xl:space-x-4 text-white items-center">
-                <div className="border-2 border-white rounded-full p-1 2xl:p-2">
-                  <BsPlay />
-                </div>
-                <div className="text-white/70 global-p2">From the Expert</div>
-              </div> */}
-              {/* Play Button Dialog Trigger */}
               <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                   <div className="flex space-x-2 2xl:space-x-4 text-white items-center cursor-pointer">
@@ -104,8 +99,8 @@ function VideoSection() {
           </div>
         </div>
         <div
-          className="z-20 absolute inset-x-0 
-          text-center text-white 
+          className="z-20 absolute inset-x-0
+          text-center text-[#434343]
           bottom-10 lg:bottom-12 xl:bottom-16 2xl:bottom-20 
           global-h2 md:font-medium uppercase"
         >

@@ -15,6 +15,7 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.14.4",
     "@payloadcms/db-mongodb": "3.33.0",
     "@payloadcms/email-nodemailer": "3.33.0",
     "@payloadcms/next": "3.33.0",

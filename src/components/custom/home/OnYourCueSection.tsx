@@ -1,67 +1,51 @@
 'use client'
-import { Button } from '@/components/ui/button'
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import Autoplay from 'embla-carousel-autoplay'
+import Link from 'next/link'
+import GlobalButton from '../shared/GlobalButton'
 import CueHeader from './CueHeader'
 import CueItem from './CueItem'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
-import Autoplay from 'embla-carousel-autoplay'
-import ToolTip from '../shared/ToolTip'
-import GlobalButton from '../shared/GlobalButton'
-import Link from 'next/link'
 
 const cards = [
   {
-    icon: '/assets/cue2.png',
+    icon: '/assets/homepage/web/cue2.png',
+    mobileIcon: '/assets/homepage/mobile/cue2.png',
     title: 'Shanta',
     subtitle: 'Child Education Plan',
     description: 'They’re building castles in the sky — we’re here to anchor the ground.',
-    image: '/assets/on-ur-cue/child-education.jpg',
+    image: '/assets/homepage/web/child-education.jpg',
+    mobileImage: '/assets/homepage/mobile/child-education.jpg',
     link: '/plans/individual/child-education',
   },
   {
-    icon: '/assets/cue1.png',
+    icon: '/assets/homepage/web/cue1.png',
+    mobileIcon: '/assets/homepage/mobile/cue1.png',
     title: 'Shanta',
     subtitle: 'Multi Stage Maturity Plans',
     description: 'Multiple payouts, 2 powerful plans - because your future is in your hands.  ',
-    image: '/assets/on-ur-cue/multi-stage.jpg',
+    image: '/assets/homepage/web/multi-stage.jpg',
+    mobileImage: '/assets/homepage/mobile/multi-stage.jpg',
     link: '/plans/individual/saving-and-investment/multistage',
   },
   {
-    icon: '/assets/cue3.png',
+    icon: '/assets/homepage/web/cue3.png',
+    mobileIcon: '/assets/homepage/mobile/cue3.png',
     title: 'Shanta',
     subtitle: 'Endowment Plan',
     description: 'For the life you’re building and the ones you’re building it for.',
-    image: '/assets/on-ur-cue/endowment.jpg',
+    image: '/assets/homepage/web/endowment.jpg',
+    mobileImage: '/assets/homepage/mobile/endowment.jpg',
     link: '/plans/individual/saving-and-investment/endowment',
   },
-  // {
-  //   icon: '/assets/cue1.png',
-  //   title: 'Shanta',
-  //   subtitle: '3 Payment Plan',
-  //   description: 'Multiple payouts, 1 powerful plan - because your future is in your hands.  ',
-  //   image: '/assets/cue5.jpg',
-  // },
-  // {
-  //   icon: '/assets/cue3.png',
-  //   title: 'Shanta',
-  //   subtitle: 'Endowment Plan',
-  //   description: 'For the life you’re building and the ones you’re building it for.',
-  //   image: '/assets/cue6.jpg',
-  // },
 ]
 
 function OnYourCueSection() {
   return (
-    <div className="container-wpm md:mt-[70px] lg:mt-[90px] xl:mt-[80px] 2xl:mt-40">
+    <div className="container-wpm md:mt-[70px] lg:mt-[90px] xl:mt-[80px] 2xl:mt-40 ">
       <CueHeader />
 
       {/* Mobile View: Grid */}
-      <div className="block md:hidden mt-12 space-y-4">
+      <div className="block md:hidden mt-4 space-y-4">
         {cards.map((card, index) => (
           <CueItem key={index} card={card} index={index} />
         ))}
@@ -96,7 +80,7 @@ function OnYourCueSection() {
         </Carousel>
       </div>
       {/* Let’s Find More button */}
-      <div className="flex justify-center mt-6 2xl:mt-12 font-avenir">
+      <div className="flex justify-center mt-4 md:mt-6 lg:mt-8 2xl:mt-12 font-avenir">
         {/* <Button
           variant="primary"
           className="cursor-not-allowed p-4 lg xl:p-5 2xl:p-6 text-xs xl:text-sm 2xl:text-lg rounded-lg"
