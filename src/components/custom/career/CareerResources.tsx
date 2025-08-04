@@ -55,7 +55,7 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
     <div className="relative w-full flex flex-col items-center container-padding bg-white overflow-hidden">
       {/* Absolute Human Resource Image - Top Right */}
       <img
-        src="/assets/humanresource.png"
+        src="/assets/career/web/humanresource.png"
         alt="Human Resource"
         className="hidden lg:block absolute right-4 md:right-8 xl:right-60 top-8 z-0 pointer-events-none select-none md:w-[400px] md:h-[250px] xl:w-[584px] xl:h-[336px]"
         draggable={false}
@@ -63,7 +63,7 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
       />
       {/* Mobile: Human resource image background */}
       <img
-        src="/assets/humanresource.png"
+        src="/assets/career/mobile/humanresource.png"
         alt="Human Resource"
         width={350}
         height={220}
@@ -131,7 +131,7 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
           <Carousel opts={{ loop: true }} setApi={setMobileCarouselApi}>
             <CarouselContent>
               {data.map((item, idx) => (
-                <CarouselItem key={idx} className="px-16 h-[265px]">
+                <CarouselItem key={idx} className="px-16 pb-16 h-full">
                   <ResourceCard data={item} />
                 </CarouselItem>
               ))}

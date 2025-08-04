@@ -22,7 +22,7 @@ const CareerOpeningCard: FC<CareerOpeningCardProps> = ({
     <div className="rounded-[12px] bg-[#FCF4EB] px-5 py-4 flex flex-col gap-3 min-h-[170px]">
       <span className="text-[#CCCCCC] text-[14px] lg:text-[22px] font-bold">{type}</span>
       <span className="text-[#434342] text-[14px] lg:text-[18px] font-bold uppercase">{title}</span>
-      <span className="text-[#434342] text-[16px] font-normal line-clamp-3">{description}</span>
+      <span className="text-[#434342] text-[14px] font-normal line-clamp-3">{description}</span>
       <div className='flex items-center gap-2 lg:gap-1 xl:gap-2'>
 
      

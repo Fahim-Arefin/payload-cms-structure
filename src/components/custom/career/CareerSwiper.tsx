@@ -27,7 +27,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
       } else {
         carouselApi.scrollTo(0) // Loop back to first slide
       }
-    }, 3500)
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [carouselApi, hoveredIdx])
@@ -55,7 +55,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
              xl:py-[100px] 
             2xl:py-[100px] w-full"
       style={{
-        background: "url('/assets/careerSwiperBanner_1.gif') no-repeat center/cover",
+        background: "url('/assets/career/web/careerSwiperBanner.gif') no-repeat center/cover",
       }}
     >
       <div className="md:pt-4 lg:pt-16 pb-10">
@@ -73,7 +73,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
               loop: true,
             }}
             setApi={setCarouselApi}
-            className="w-full"
+            className="w-full" 
           >
             <CarouselContent className="gap-6 px-10">
               {careerCards.map((card, idx) => (
