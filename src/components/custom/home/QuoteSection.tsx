@@ -80,10 +80,20 @@ function QuoteSection() {
   }
 
   return (
-    <div className="relative font-avenir container-wpm md:pb-[70px] lg:pb-[90px] xl:pb-[80px] 2xl:pb-40">
+    <div className="relative font-avenir container-wpm mb-12 md:mb-24 lg:mb-32 xl:mb-[150px]">
+      <div className="container-wpm lg:hidden space-y-1 md:space-y-2 w-[90%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto text-center mb-8">
+        <div className="uppercase text-[#1E1E1E] global-h4 font-light">Secure Your</div>
+        <div className="uppercase text-[#1E1E1E] global-h1 font-semibold ">
+          Tomorrow, <span className="md:text-[#FF6600]">Today!</span>
+        </div>
+        <p className="global-p1 text-[#1E1E1E] font-light">
+          Curious about your premium? Calculate your life insurance premium in just a few clicks and
+          get a personalized quote.
+        </p>
+      </div>
       <div
         className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.3fr,1fr] z-10 
-      gap-4 lg:gap-0 2xl:gap-10 "
+      gap-4 lg:gap-0 2xl:gap-10 mb-8"
       >
         {/* Left Side - Results Section (order-2 on mobile, order-1 on lg+) */}
         <div
@@ -92,7 +102,7 @@ function QuoteSection() {
           lg:pl-0 space-y-8 xl:space-y-11 z-10 order-2 lg:order-1"
         >
           {/* Text Container */}
-          <div className="space-y-2 text-center lg:text-left">
+          <div className="hidden lg:block space-y-2 text-center lg:text-left">
             <div className="uppercase text-[#1E1E1E] text-[16px] md:text-[18px] 2xl:text-2xl font-light ">
               Secure Your
             </div>
@@ -279,7 +289,7 @@ function QuoteSection() {
                     </svg>
                   </div>
                   <div
-                    className="underline underline-offset-4 text-xs lg:text-[10px] xl:text-xs cursor-pointer hover:text-blue-600 transition-colors"
+                    className="underline underline-offset-4 text-[10px] xl:text-xs cursor-pointer hover:text-blue-600 transition-colors"
                     onClick={handleCriticalIllnessToggle}
                   >
                     {isCriticalIllnessCovered ? 'Remove' : 'Add'}{' '}
@@ -347,7 +357,7 @@ function QuoteSection() {
                     </svg>
                   </div>
                   <div
-                    className="underline underline-offset-4 text-xs lg:text-[10px] xl:text-xs cursor-pointer hover:text-blue-600 transition-colors"
+                    className="underline underline-offset-4 text-[10px] xl:text-xs cursor-pointer hover:text-blue-600 transition-colors"
                     onClick={handleAccidentToggle}
                   >
                     {isAccidentCovered
@@ -374,13 +384,16 @@ function QuoteSection() {
               </div>
             </div>
           ) : (
-            <div className="bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600] h-[60%] flex justify-center items-center">
-              Waiting for result ...
+            <div
+              className="bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600] flex justify-center items-center 
+            h-[100px] md:h-[200px] lg:h-[58%]  xl:h-[63%]  2xl:h-[62%] capitalize"
+            >
+              Waiting for calculted result ...
             </div>
           )}
           {/* Calculate Again Button - Only show on mobile when results are available */}
           {apiResponse && (
-            <div className="flex justify-center items-center lg:hidden mt-4">
+            <div className="flex justify-center items-center lg:hidden ">
               <GlobalButton
                 onClick={handleCalculateAgain}
                 className=""

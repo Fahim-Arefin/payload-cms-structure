@@ -1,9 +1,10 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import React, { useEffect, useState } from 'react'
 
+import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -13,9 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Button } from '@/components/ui/button'
-import ToolTip from '../shared/ToolTip'
 import { ApiResponse } from '@/utils/premiumCalculator'
+import GlobalButton from '../shared/GlobalButton'
 
 interface FormData {
   PlanCode: number
@@ -415,11 +415,13 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       className="border-2 border-[#9C8639] bg-[#FFFFFFCC]
       rounded-lg xl:rounded-xl 2xl:rounded-2xl
   grid grid-cols-2 
-  gap-x-4 gap-y-8 md:gap-5
+  gap-x-6 lg:gap-x-4 xl:gap-x-6
+  gap-y-7
+  md:gap-y-7
   lg:gap-y-[31px]  
   xl:gap-y-[32px] 
   2xl:gap-y-[38px] 
-  p-6 lg:p-5 xl:p-8 z-10"
+  p-4 py-6 md:p-6 lg:p-5 xl:p-8 z-10"
     >
       {/* age input */}
       <div className="col-span-2 md:col-span-1">
@@ -430,9 +432,12 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           placeholder="Age *"
           value={formData.Age || ''}
           onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
-          className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.Age ? 'border-red-500 border-2' : ''
-          }`}
+          className={` !text-[12px] md:!text-[14px] 2xl:!text-[16px] 
+                      placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                      rounded-sm lg:rounded-[9px] xl:rounded-[10px]
+             shadow-[0px_0px_5px_0px_#00000040]  px-5 py-5 xl:px-6 xl:py-6 ${
+               fieldErrors.Age ? 'border-red-500 border-2' : ''
+             }`}
         />
       </div>
       {/* plans */}
@@ -470,11 +475,14 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           }}
         >
           <SelectTrigger
-            className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-              isLoadingPlans || !formData.Age || availablePlans.length === 0
-                ? 'opacity-50 cursor-not-allowed'
-                : ''
-            } ${fieldErrors.PlanCode ? 'border-red-500 border-2' : ''}`}
+            className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
+                      placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                      rounded-sm lg:rounded-[9px] xl:rounded-[10px]
+               shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6 ${
+                 isLoadingPlans || !formData.Age || availablePlans.length === 0
+                   ? 'opacity-50 cursor-not-allowed'
+                   : ''
+               } ${fieldErrors.PlanCode ? 'border-red-500 border-2' : ''}`}
           >
             <SelectValue
               placeholder={
@@ -567,14 +575,16 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           }}
         >
           <SelectTrigger
-            className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-              isLoadingTenures ||
-              !formData.PlanCode ||
-              !formData.Age ||
-              availableTenures.length === 0
-                ? 'opacity-50 cursor-not-allowed'
-                : ''
-            } ${fieldErrors.Term ? 'border-red-500 border-2' : ''}`}
+            className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
+                      placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                      rounded-sm lg:rounded-[9px] xl:rounded-[10px] shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6 ${
+                        isLoadingTenures ||
+                        !formData.PlanCode ||
+                        !formData.Age ||
+                        availableTenures.length === 0
+                          ? 'opacity-50 cursor-not-allowed'
+                          : ''
+                      } ${fieldErrors.Term ? 'border-red-500 border-2' : ''}`}
           >
             <SelectValue
               placeholder={
@@ -636,9 +646,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           }}
         >
           <SelectTrigger
-            className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-              fieldErrors.Gender ? 'border-red-500 border-2' : ''
-            }`}
+            className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
+                      placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                      rounded-sm lg:rounded-[9px] xl:rounded-[10px] shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6 ${
+                        fieldErrors.Gender ? 'border-red-500 border-2' : ''
+                      }`}
           >
             <SelectValue placeholder="Select Gender *" />
           </SelectTrigger>
@@ -666,9 +678,12 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           placeholder="Annual Income *"
           value={formData.annualIncome || ''}
           onChange={(e) => handleInputChange('annualIncome', parseInt(e.target.value) || 0)}
-          className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.annualIncome ? 'border-red-500 border-2' : ''
-          }`}
+          className={` !text-[12px] md:!text-[14px] 2xl:!text-[16px] 
+                      placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                      rounded-sm lg:rounded-[9px] xl:rounded-[10px]
+                      shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6 ${
+                        fieldErrors.annualIncome ? 'border-red-500 border-2' : ''
+                      }`}
         />
         {/* Annual income error message */}
         {getFieldErrorMessage('annualIncome') && (
@@ -683,15 +698,18 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           placeholder="Sum Assured *"
           value={formData.SumAssured || ''}
           onChange={(e) => handleInputChange('SumAssured', parseInt(e.target.value) || 0)}
-          className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.SumAssured ? 'border-red-500 border-2' : ''
-          }`}
+          className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
+                      placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                      rounded-sm lg:rounded-[9px] xl:rounded-[10px]
+            shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6 ${
+              fieldErrors.SumAssured ? 'border-red-500 border-2' : ''
+            }`}
         />
         {/* Show either suggested amount OR error message, not both */}
         {getFieldErrorMessage('SumAssured') ? (
           <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('SumAssured')}</p>
         ) : (
-          <p className="text-[10px] py-2 absolute inset-x-0">
+          <p className="text-[9px] lg:text-[10px] py-2 absolute inset-x-0">
             Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
           </p>
         )}
@@ -703,7 +721,10 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           placeholder="Phone Number"
           value={formData.phoneNumber}
           onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
-          className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+          className="!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
+                      placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                      rounded-sm lg:rounded-[9px] xl:rounded-[10px]
+                       shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
       {/* payment method select  */}
@@ -735,15 +756,17 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           }}
         >
           <SelectTrigger
-            className={`shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-              isLoadingPaymentModes ||
-              !formData.PlanCode ||
-              !formData.Age ||
-              !formData.Term ||
-              availablePaymentModes.length === 0
-                ? 'opacity-50 cursor-not-allowed'
-                : ''
-            } ${fieldErrors.PaymentMode ? 'border-red-500 border-2' : ''}`}
+            className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
+                      placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                      rounded-sm lg:rounded-[9px] xl:rounded-[10px] shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6 ${
+                        isLoadingPaymentModes ||
+                        !formData.PlanCode ||
+                        !formData.Age ||
+                        !formData.Term ||
+                        availablePaymentModes.length === 0
+                          ? 'opacity-50 cursor-not-allowed'
+                          : ''
+                      } ${fieldErrors.PaymentMode ? 'border-red-500 border-2' : ''}`}
           >
             <SelectValue
               placeholder={
@@ -813,7 +836,10 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           placeholder="Name"
           value={formData.name}
           onChange={(e) => handleInputChange('name', e.target.value)}
-          className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+          className="!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
+                      placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                      rounded-sm lg:rounded-[9px] xl:rounded-[10px]
+                       shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
       {/* email input */}
@@ -823,7 +849,10 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           placeholder="Email"
           value={formData.email}
           onChange={(e) => handleInputChange('email', e.target.value)}
-          className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
+          className="!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
+                      placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                      rounded-sm lg:rounded-[9px] xl:rounded-[10px]
+                       shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
 
@@ -831,13 +860,15 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
 
       {/* submit button */}
       <div className="col-span-2">
-        <Button
+        <GlobalButton
           type="submit"
+          variant="secondary"
           disabled={isLoading}
-          className="bg-[#9C8639] hover:bg-[#8B7532] disabled:bg-gray-400 text-white rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 w-full"
+          className="px-5 py-5 xl:px-6 xl:py-6 w-full md:w-full lg:w-full xl:w-full 2xl:w-full 
+          rounded-sm lg:rounded-[9px] xl:rounded-[10px]"
         >
           {isLoading ? 'Calculating...' : 'Get A Quote Now'}
-        </Button>
+        </GlobalButton>
       </div>
     </form>
   )

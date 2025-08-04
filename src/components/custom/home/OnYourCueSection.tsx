@@ -41,18 +41,18 @@ const cards = [
 
 function OnYourCueSection() {
   return (
-    <div className="container-wpm md:mt-[70px] lg:mt-[90px] xl:mt-[80px] 2xl:mt-40 ">
+    <div className="container-wpm ">
       <CueHeader />
 
       {/* Mobile View: Grid */}
-      <div className="block md:hidden mt-4 space-y-4">
+      <div className="block md:hidden mt-8 space-y-4">
         {cards.map((card, index) => (
           <CueItem key={index} card={card} index={index} />
         ))}
       </div>
 
       {/* Desktop View: Carousel */}
-      <div className="hidden md:block mt-24">
+      <div className="hidden md:block mt-8 lg:mt-12 xl:mt-16 2xl:mt-24">
         <Carousel
           className="w-full"
           opts={{
@@ -81,12 +81,6 @@ function OnYourCueSection() {
       </div>
       {/* Let’s Find More button */}
       <div className="flex justify-center mt-4 md:mt-6 lg:mt-8 2xl:mt-12 font-avenir">
-        {/* <Button
-          variant="primary"
-          className="cursor-not-allowed p-4 lg xl:p-5 2xl:p-6 text-xs xl:text-sm 2xl:text-lg rounded-lg"
-        >
-          Let's Find More
-        </Button> */}
         <Link href="/plans">
           <GlobalButton variant="primary" className="" text="Lets Find More" />
         </Link>
