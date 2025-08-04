@@ -22,7 +22,7 @@ function page({}: Props) {
       title: 'Turn your Ambition, Into Impact ',
       subtitle: '',
       description: 'Stay beyond the ordinary, step into a role that builds futures.',
-      image: '/assets/agentHeroBanner.jpg',
+      image: '/assets/agent-onboarding/web/agentHeroBanner.jpg',
     },
   ]
 
@@ -80,27 +80,32 @@ function page({}: Props) {
 
   const wayWeAreData = [
     {
-      image: '/assets/onboardingWay1.png',
+      image: '/assets/agent-onboarding/web/onboardingWay1.png',
+      mobileImage: `/assets/agent-onboarding/mobile/onboardingWay1.png`,
       title: '',
       description: '',
     },
     {
-      image: '/assets/onboardingWay4.jpg',
+      image: '/assets/agent-onboarding/web/onboardingWay4.jpg',
+      mobileImage: `/assets/agent-onboarding/mobile/onboardingWay4.jpg`,
       title: '',
       description: '',
     },
     {
-      image: '/assets/onboardingWay5.jpg',
+      image: '/assets/agent-onboarding/web/onboardingWay5.jpg',
+      mobileImage: `/assets/agent-onboarding/mobile/onboardingWay5.jpg`,
       title: '',
       description: '',
     },
     {
-      image: '/assets/onboardingWay6.jpg',
+      image: '/assets/agent-onboarding/web/onboardingWay6.jpg',
+      mobileImage: `/assets/agent-onboarding/mobile/onboardingWay6.jpg`,
       title: '',
       description: '',
     },
     {
-      image: '/assets/onboardingWay7.jpg',
+      image: '/assets/agent-onboarding/web/onboardingWay7.jpg',
+      mobileImage: `/assets/agent-onboarding/mobile/onboardingWay7.jpg`,
       title: '',
       description: '',
     },
@@ -119,32 +124,33 @@ function page({}: Props) {
     title: 'What Sets a Shanta Life RM/RO Champion Apart',
     sectionLeft: [
       {
-        icon: '/assets/opportunityIcon1.svg',
+        icon: '/assets/agent-onboarding/web/opportunityIcon1.svg',
         text: 'Be a Brand Ambassador',
       },
       {
-        icon: '/assets/opportunityIcon2.svg',
+        icon: '/assets/agent-onboarding/web/opportunityIcon2.svg',
         text: 'Own your Numbers',
       },
       {
-        icon: '/assets/opportunityIcon3.svg',
+        icon: '/assets/agent-onboarding/web/opportunityIcon3.svg',
         text: 'Master the product,own the pitch',
       },
       {
-        icon: '/assets/opportunityIcon4.svg',
+        icon: '/assets/agent-onboarding/web/opportunityIcon4.svg',
         text: 'Be Digitally Savy',
       },
       {
-        icon: '/assets/opportunityIcon5.svg',
+        icon: '/assets/agent-onboarding/web/opportunityIcon5.svg',
         text: 'Follow up, follow through- build genuine connections',
       },
       {
-        icon: '/assets/opportunityIcon5.svg',
+        icon: '/assets/agent-onboarding/web/opportunityIcon5.svg',
         text: 'Learn, Evolve & Excel',
       },
     ],
     sectionRight: {
-      avatar: '/assets/agent-onboarding-life_2.jpg',
+      avatar: '/assets/agent-onboarding/web/agent-onboarding-life_2.jpg',
+      mobileAvatar: `/assets/agent-onboarding/mobile/agent-onboarding-life_2.jpg`,
       name: 'Tarafder Mohammad Fahim',
       quote:
         'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Life.',
@@ -153,31 +159,36 @@ function page({}: Props) {
 
   const onboardingRolesData = [
     {
-      image: '/assets/agent-onboarding/6.svg',
+      image: '/assets/agent-onboarding/web/6.svg',
+      mobileImage: `/assets/agent-onboarding/mobile/6.svg`,
       title: 'Earn Without Limits',
       description:
         'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
     },
     {
-      image: '/assets/agent-onboarding/2.svg',
+      image: '/assets/agent-onboarding/web/2.svg',
+      mobileImage: `/assets/agent-onboarding/mobile/2.svg`,
       title: 'Get Recognized, Get Rewarded',
     },
     {
-      image: '/assets/agent-onboarding/3.svg',
+      image: '/assets/agent-onboarding/web/3.svg',
+      mobileImage: `/assets/agent-onboarding/mobile/3.svg`,
       title: 'Freedom to Work On Your Time ',
     },
     {
-      image: '/assets/agent-onboarding/4.svg',
+      image: '/assets/agent-onboarding/web/4.svg',
+      mobileImage: `/assets/agent-onboarding/mobile/4.svg`,
       title: 'Take Charge of your career',
     },
     {
-      image: '/assets/agent-onboarding/5.svg',
+      image: '/assets/agent-onboarding/web/5.svg',
+      mobileImage: `/assets/agent-onboarding/mobile/5.svg`,
       title: 'Help secure lives',
     },
   ]
   const visionData = [
     {
-      img: '/assets/vision1.svg',
+      img: '/assets/agent-onboarding/web/vision1.svg',
       title: 'Experienced Professionals ',
       points: [
         '1-2 years of working in Sales',
@@ -186,7 +197,7 @@ function page({}: Props) {
       ],
     },
     {
-      img: '/assets/vision2.svg',
+      img: '/assets/agent-onboarding/web/vision2.svg',
       title: 'Freshers & Undergrads',
       points: [
         'Excellent communications and networking skills',

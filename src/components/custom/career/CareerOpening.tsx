@@ -29,7 +29,7 @@ const positions = [
 ]
 
 const detailsData = {
-    'FULL STACK ENGINEER': {
+  'FULL STACK ENGINEER': {
     title: 'Full Stack Engineer',
     responsibilities: [
       'Design, develop and maintain scalable, secure front-end and back-end solutions for web and mobile applications, ensuring seamless user experiences.',
@@ -37,7 +37,7 @@ const detailsData = {
       'Collaborate with cross-functional teams, including designers and product managers, to translate business requirements into technical solutions and participate in code reviews.',
       'Optimize application performance for speed, scalability and reliability while monitoring and troubleshooting issues.',
       'Write and maintain tests (unit, integration, end-to-end) and implement CI/CD pipelines for automated testing and deployment in cloud environments.',
-      'Stay updated on emerging technologies, promoting innovative solutions like containerization and serverless computing.'
+      'Stay updated on emerging technologies, promoting innovative solutions like containerization and serverless computing.',
     ],
     requirements: [
       'Minimum Bachelor’s degree in Computer Science, Software Engineering or a related field.',
@@ -45,14 +45,14 @@ const detailsData = {
       'Proficiency in front-end technologies such as HTML, CSS, JavaScript, and modern frameworks like React, Angular, or Vue.js.',
       'Expertise in back-end technologies, including Node.js, Python, Ruby, Java, or .NET.',
       'Strong understanding of cloud platforms and database management.',
-      'Familiarity with microservices architecture and containerization tools such as Docker and Kubernetes.'
+      'Familiarity with microservices architecture and containerization tools such as Docker and Kubernetes.',
     ],
     location: 'Dhaka',
     deadline: '30th August, 2025',
     applyEmail: 'talent@shantalife.com',
     subjectLine: 'Application for Full Stack Engineer',
     footer: '',
-    filename: 'full stack engineer.pdf'
+    filename: 'full stack engineer.pdf',
   },
   'RELATIONSHIP OFFICER': {
     title: 'Relationship Officer',
@@ -70,7 +70,6 @@ const detailsData = {
     applyEmail: 'talent@shantalife.com',
     subjectLine: 'Application for Relationship Officer',
     footer: 'Be part of a new era in life insurance.',
-    
   },
   'HEAD OF AGENCY BUSINESS': {
     title: 'Head of Agency Business',
@@ -95,7 +94,7 @@ const detailsData = {
     applyEmail: 'talent@shantalife.com',
     subjectLine: 'Application for Head of Agency Business',
     footer: '',
-    filename: 'Head of Agency Business.pdf'
+    filename: 'Head of Agency Business.pdf',
   },
   // Example for a detailed IT Project Manager as from your PDF:
   'IT PROJECT MANAGER': {
@@ -125,7 +124,7 @@ team, we invite you to be a part of our journey.`,
     applyEmail: 'talent@shantalife.com',
     subjectLine: 'Application for IT Project Manager',
     footer: '',
-    filename: 'IT Project Manager.pdf'
+    filename: 'IT Project Manager.pdf',
   },
 }
 
@@ -148,7 +147,7 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
-  const [pos, setPos] = useState("")
+  const [pos, setPos] = useState('')
   const [openDetails, setOpenDetails] = useState<{ open: boolean; title?: string }>({
     open: false,
     title: undefined,
@@ -212,7 +211,7 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
           {/* Mobile: Carousel */}
           <div className="md:hidden w-full relative mb-8">
             <Carousel
-              opts={{ loop: true, align: 'center' }}
+              opts={{ align: 'start' }}
               setApi={setCarouselApi}
               plugins={[
                 Autoplay({
