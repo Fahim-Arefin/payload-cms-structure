@@ -386,7 +386,7 @@ function QuoteSection() {
           ) : (
             <div
               className="bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600] flex justify-center items-center 
-            h-[100px] md:h-[200px] lg:h-[58%]  xl:h-[63%]  2xl:h-[62%] capitalize"
+            h-[100px] md:h-[200px] lg:h-[58%]  xl:h-[63%]  2xl:h-[62%] capitalize global-p1"
             >
               Waiting for calculted result ...
             </div>

@@ -94,7 +94,9 @@ export type EndowmentDataType = {
 export type InsuranceCardDataType = Pick<
   AllPlantDataType,
   'title' | 'description' | 'image' | 'videoLink'
->
+> & {
+  mobileImage: string
+}
 
 export type InsuranceDataType = {
   content: 'left' | 'right'
@@ -102,6 +104,7 @@ export type InsuranceDataType = {
   title: string
   subtitle: string
   mainImage: string
+  mainMobileImage: string
   mainVIdeoLink: string
   insuranceCardData: InsuranceCardDataType[]
 }

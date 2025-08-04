@@ -11,8 +11,11 @@ import LottiePlayer from '../shared/LottiePlayer'
 function VideoSection() {
   const [open, setOpen] = useState(false)
   return (
-    <div className="pt-[150px] md:pt-[100px] lg:pt-[150px] xl:pt-[200px] bg-white">
-      <div className="relative w-full font-avenir h-[230px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px]">
+    <div
+      className="pt-[150px] md:pt-[100px] lg:pt-[150px] xl:pt-[200px] bg-white 
+    pb-9 md:pb-20 lg:pb-[80px] xl:pb-[70px] 2xl:pb-[70px]"
+    >
+      <div className="relative w-full font-avenir h-[230px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px] ">
         {/* Background GIF */}
         {/* <img
           src="/assets/bg.gif"
@@ -51,10 +54,22 @@ function VideoSection() {
           rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px] mx-auto
           -top-[100px] lg:-top-[120px] xl:-top-[160px] 2xl:-top-[200px]"
         >
+          {/* mobile */}
           <div
-            className=" flex justify-between items-center w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]"
+            className="lg:hidden flex justify-between items-center w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]"
             style={{
-              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/assets/thumbnails/yt-thumbnail-4.jpg')`,
+              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/assets/homepage/mobile/thumbnails/yt-thumbnail-4.jpg')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: 'lightgray',
+            }}
+          ></div>
+          {/* after lg */}
+          <div
+            className="hidden lg:flex justify-between items-center w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]"
+            style={{
+              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/assets/homepage/web/thumbnails/yt-thumbnail-4.jpg')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
