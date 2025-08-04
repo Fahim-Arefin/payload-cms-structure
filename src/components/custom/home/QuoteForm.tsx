@@ -342,7 +342,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   // Function to get specific error message for each field
   const getFieldErrorMessage = (field: keyof typeof fieldErrors): string => {
     if (!fieldErrors[field]) return ''
-    
+
     switch (field) {
       case 'PlanCode':
         return 'Please select a plan'
@@ -412,9 +412,14 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     <form
       onSubmit={handleSubmit}
       action=""
-      className="border-2 border-[#9C8639] rounded-2xl bg-[#FFFFFFCC]
-  grid grid-cols-2 gap-x-4 gap-y-8 md:gap-5 xl:gap-6 
-  p-6 xl:p-8 z-10"
+      className="border-2 border-[#9C8639] bg-[#FFFFFFCC]
+      rounded-lg xl:rounded-xl 2xl:rounded-2xl
+  grid grid-cols-2 
+  gap-x-4 gap-y-8 md:gap-5
+  lg:gap-y-[31px]  
+  xl:gap-y-[32px] 
+  2xl:gap-y-[38px] 
+  p-6 lg:p-5 xl:p-8 z-10"
     >
       {/* age input */}
       <div className="col-span-2 md:col-span-1">
@@ -548,7 +553,9 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         onMouseLeave={() => setIsHoveringTenureSelect(false)}
       >
         <Select
-          value={formData.Term > 0 ? availableTenures.find(t => t.value === formData.Term)?.text : ""}
+          value={
+            formData.Term > 0 ? availableTenures.find((t) => t.value === formData.Term)?.text : ''
+          }
           disabled={
             isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0
           }
@@ -616,7 +623,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       {/* gender select  */}
       <div className="col-span-2 md:col-span-1">
         <Select
-          value={formData.Gender !== undefined ? genders.find(g => g.value === formData.Gender)?.text : ""}
+          value={
+            formData.Gender !== undefined
+              ? genders.find((g) => g.value === formData.Gender)?.text
+              : ''
+          }
           onValueChange={(v) => {
             const gender = genders.find((g) => g.text === v)
             if (gender) {
@@ -644,9 +655,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         </Select>
         {/* Gender error message */}
         {getFieldErrorMessage('Gender') && (
-          <p className="text-red-500 text-xs mt-1">
-            {getFieldErrorMessage('Gender')}
-          </p>
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Gender')}</p>
         )}
       </div>
       {/* annual income input */}
@@ -663,9 +672,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         />
         {/* Annual income error message */}
         {getFieldErrorMessage('annualIncome') && (
-          <p className="text-red-500 text-xs mt-1">
-            {getFieldErrorMessage('annualIncome')}
-          </p>
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('annualIncome')}</p>
         )}
       </div>
       {/* sum assured input */}
@@ -682,9 +689,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         />
         {/* Show either suggested amount OR error message, not both */}
         {getFieldErrorMessage('SumAssured') ? (
-          <p className="text-red-500 text-xs mt-1">
-            {getFieldErrorMessage('SumAssured')}
-          </p>
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('SumAssured')}</p>
         ) : (
           <p className="text-[10px] py-2 absolute inset-x-0">
             Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
@@ -708,7 +713,12 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         onMouseLeave={() => setIsHoveringPaymentSelect(false)}
       >
         <Select
-          value={formData.PaymentMode > 0 ? availablePaymentModes.find(pm => pm.paymode_id === formData.PaymentMode)?.paymode_name : ""}
+          value={
+            formData.PaymentMode > 0
+              ? availablePaymentModes.find((pm) => pm.paymode_id === formData.PaymentMode)
+                  ?.paymode_name
+              : ''
+          }
           disabled={
             isLoadingPaymentModes ||
             !formData.PlanCode ||
@@ -793,9 +803,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         </Select>
         {/* Payment Method error message */}
         {getFieldErrorMessage('PaymentMode') && (
-          <p className="text-red-500 text-xs mt-1">
-            {getFieldErrorMessage('PaymentMode')}
-          </p>
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('PaymentMode')}</p>
         )}
       </div>
       {/* name input */}
