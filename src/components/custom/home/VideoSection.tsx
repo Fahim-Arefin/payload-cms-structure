@@ -1,12 +1,12 @@
 'use client'
-import { DotLottieReact } from '@lottiefiles/dotlottie-react'
+// import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import React, { useState } from 'react'
 import { BsPlay } from 'react-icons/bs'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 // import
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 // import ToolTip from '../shared/ToolTip'
-import LottiePlayer from '../shared/LottiePlayer'
+// import LottiePlayer from '../shared/LottiePlayer'
 
 function VideoSection() {
   const [open, setOpen] = useState(false)
@@ -14,17 +14,17 @@ function VideoSection() {
     <div className="pt-[150px] md:pt-[100px] lg:pt-[150px] xl:pt-[200px] bg-white">
       <div className="relative w-full font-avenir h-[230px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px]">
         {/* Background GIF */}
-        {/* <img
+        <img
           src="/assets/bg.gif"
           alt="background gif"
           className="absolute inset-0 w-full h-full object-cover z-0"
-        /> */}
-        <LottiePlayer
+        />
+        {/* <LottiePlayer
           className="absolute inset-0 z-0"
           style={{ width: '100%', objectFit: 'fill' }}
           src="/assets/homepage/test5.json"
           background="white"
-        />
+        /> */}
         {/* <div className="absolute inset-0 z-0 w-full h-full">
           <DotLottieReact
             src="/assets/homepage/test5.json"
@@ -40,7 +40,7 @@ function VideoSection() {
         </div> */}
 
         {/* Semi-transparent black overlay */}
-        {/* <div className="absolute inset-0 bg-black/60 z-10" /> */}
+        <div className="absolute inset-0 bg-black/60 z-10" />
 
         {/* Foreground content */}
         <div
@@ -100,7 +100,7 @@ function VideoSection() {
         </div>
         <div
           className="z-20 absolute inset-x-0
-          text-center text-[#434343]
+          text-center text-white
           bottom-10 lg:bottom-12 xl:bottom-16 2xl:bottom-20 
           global-h2 md:font-medium uppercase"
         >
