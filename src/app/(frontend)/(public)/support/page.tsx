@@ -171,32 +171,38 @@ function SupportPage() {
   const levelUpData = [
     {
       title: 'Vlog',
-      image: '/assets/levelup1.jpg',
+      image: '/assets/supportpage/web/levelup1.jpg',
+      mobileImage: '/assets/supportpage/mobile/levelup1.jpg',
       link: '/news-and-media#vlog',
     },
     {
       title: 'Blog',
-      image: '/assets/levelup2.jpg',
+      image: '/assets/supportpage/web/levelup2.jpg',
+      mobileImage: '/assets/supportpage/mobile/levelup2.jpg',
       link: '/news-and-media#blog',
     },
     {
       title: 'News',
-      image: '/assets/levelup3.jpg',
+      image: '/assets/supportpage/web/levelup3.jpg',
+      mobileImage: '/assets/supportpage/mobile/levelup3.jpg',
       link: '/news-and-media#news',
     },
     {
       title: 'Vlog',
-      image: '/assets/levelup1.jpg',
+      image: '/assets/supportpage/web/levelup1.jpg',
+      mobileImage: '/assets/supportpage/mobile/levelup1.jpg',
       link: '/news-and-media#vlog',
     },
     {
       title: 'Blog',
-      image: '/assets/levelup2.jpg',
+      image: '/assets/supportpage/web/levelup2.jpg',
+      mobileImage: '/assets/supportpage/mobile/levelup2.jpg',
       link: '/news-and-media#blog',
     },
     {
       title: 'News',
-      image: '/assets/levelup3.jpg',
+      image: '/assets/supportpage/web/levelup3.jpg',
+      mobileImage: '/assets/supportpage/mobile/levelup3.jpg',
       link: '/news-and-media#news',
     },
   ]

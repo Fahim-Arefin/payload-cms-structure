@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 // import ToolTip from '../shared/ToolTip'
 import LottiePlayer from '../shared/LottiePlayer'
+import LottieBackground from '../shared/LottieBackground'
 
 function VideoSection() {
   const [open, setOpen] = useState(false)
@@ -15,19 +16,21 @@ function VideoSection() {
       className="pt-[150px] md:pt-[100px] lg:pt-[150px] xl:pt-[200px] bg-white 
     pb-9 md:pb-20 lg:pb-[80px] xl:pb-[70px] 2xl:pb-[70px]"
     >
-      <div className="relative w-full font-avenir h-[230px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px] ">
+      <div className="relative w-full font-avenir h-[230px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px]">
         {/* Background GIF */}
         {/* <img
           src="/assets/bg.gif"
           alt="background gif"
           className="absolute inset-0 w-full h-full object-cover z-0"
         /> */}
-        <LottiePlayer
+        {/* <LottiePlayer
           className="absolute inset-0 z-0"
           style={{ width: '100%', objectFit: 'fill' }}
           src="/assets/homepage/test5.json"
           background="white"
-        />
+        /> */}
+        {/* Lottie background */}
+        <LottieBackground src="/assets/homepage/test6.json" background="white" />
         {/* <div className="absolute inset-0 z-0 w-full h-full">
           <DotLottieReact
             src="/assets/homepage/test5.json"

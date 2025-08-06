@@ -164,11 +164,15 @@ function SupportTabContent({ data, activeTab }: Props) {
   return (
     <div>
       <div className="px-5 pt-0 pb-[8px] md:px-24 md:pt-0 md:pb-0 lg:px-[130px] lg:pt-0 lg:pb-[20px] xl:px-[200px] xl:pt-0 xl:pb-[20px] 2xl:px-[300px] 2xl:pt-0 2xl:pb-[20px] mb-3 lg:mb-0">
-        <h1 className="global-h3 w-[75%] lg:w-full font-semibold lg:font-normal mb-[8px] md:mb-[10px] lg:mb-[12px] xl:mb-[16px]">
-          {isHospital
-            ? 'Search and find our panel hospitals by district.'
-            : 'Come and visit us at any of our branches. We are here to assist you.'}
-        </h1>
+        {isHospital ? (
+          <h1 className="global-h3 w-full font-semibold lg:font-normal mb-[8px] md:mb-[10px] lg:mb-[12px] xl:mb-[16px]">
+            Search and find our panel hospitals by district.
+          </h1>
+        ) : (
+          <h1 className="global-h3 w-full font-semibold lg:font-normal mb-[8px] md:mb-[10px] lg:mb-[12px] xl:mb-[16px]">
+            Come and visit us at any of our branches. <br /> We are here to assist you.
+          </h1>
+        )}
 
         {isHospital ? (
           <div className="mb-2 mt-1">
@@ -177,62 +181,74 @@ function SupportTabContent({ data, activeTab }: Props) {
                 <Button
                   variant="outline"
                   role="combobox"
-                  className="w-[70%] md:w-[300px] justify-between h-[40px] md:h-[45px] lg:h-[50px] overflow-hidden truncate"
+                  className="bg-white text-[#6B6565] w-[70%] md:w-[300px] justify-between h-[40px] md:h-[45px] lg:h-[50px] overflow-hidden truncate
+                     border border-gray-300 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground font-normal transition-all duration-300"
                 >
-                <span className="truncate">
-                  {selectedIndex >= 0 ? entries[selectedIndex]?.office_location_Label : 'Select any hospital'}
-                </span>
-                <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[300px] p-0 mt-1">
-              <div className="p-2">
-                <Input
-                  placeholder="Type district (e.g., Chittagong)"
-                  className="h-9"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-              <div className="max-h-60 overflow-auto">
-                {filteredItems.length > 0 ? (
-                  filteredItems.map((item, index) => {
-                    const realIndex = entries.indexOf(item)
-                    return (
-                      <div
-                        key={realIndex}
-                        onClick={() => handleHospitalSelect(realIndex)}
-                        className={cn(
-                          'flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-accent hover:text-accent-foreground',
-                          realIndex === selectedIndex && 'bg-muted text-muted-foreground',
-                        )}
-                      >
-                        <Check
+                  <span className="truncate">
+                    {selectedIndex >= 0
+                      ? entries[selectedIndex]?.office_location_Label
+                      : 'Select any hospital'}
+                  </span>
+                  <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="start" className="w-[300px] p-0 ">
+                <div className="p-2">
+                  <Input
+                    placeholder="Type district (e.g., Chittagong)"
+                    className="h-9"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+                <div className="max-h-60 overflow-auto">
+                  {filteredItems.length > 0 ? (
+                    filteredItems.map((item, index) => {
+                      const realIndex = entries.indexOf(item)
+                      return (
+                        <div
+                          key={realIndex}
+                          onClick={() => handleHospitalSelect(realIndex)}
                           className={cn(
-                            'mr-2 h-4 w-4',
-                            realIndex === selectedIndex ? 'opacity-100' : 'opacity-0',
+                            'flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-accent hover:text-accent-foreground',
+                            realIndex === selectedIndex &&
+                              'bg-muted text-muted-foreground hover:bg-muted hover:text-muted-foreground',
                           )}
-                        />
-                        <span className="truncate">{item.office_location_Label}</span>
-                      </div>
-                    )
-                  })
-                ) : (
-                  <div className="px-4 py-2 text-sm text-gray-500">No match found</div>
-                )}
-              </div>
-            </PopoverContent>
-          </Popover>
+                        >
+                          <Check
+                            className={cn(
+                              'mr-2 h-4 w-4',
+                              realIndex === selectedIndex ? 'opacity-100' : 'opacity-0',
+                            )}
+                          />
+                          <span className="truncate">{item.office_location_Label}</span>
+                        </div>
+                      )
+                    })
+                  ) : (
+                    <div className="px-4 py-2 text-sm text-gray-500">No match found</div>
+                  )}
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
         ) : (
           <Select onValueChange={handleBranchSelect} defaultValue="0">
-            <SelectTrigger className="w-[70%] md:w-[300px] bg-white text-[#6B6565] h-[40px] md:h-[45px] lg:h-[50px] overflow-hidden truncate">
+            <SelectTrigger
+              className="cursor-pointer bg-white text-[#6B6565] w-[70%] md:w-[300px] h-[40px] md:h-[45px] lg:h-[50px] overflow-hidden truncate 
+            border border-gray-300 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+            >
               <SelectValue placeholder="Select a Branch Location" />
             </SelectTrigger>
             <SelectContent>
               {entries.map((item, idx) => (
-                <SelectItem key={idx} value={String(idx)}>
-                  <span className="truncate">
+                <SelectItem
+                  key={idx}
+                  value={String(idx)}
+                  className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-accent hover:text-accent-foreground 
+    data-[state=checked]:bg-muted data-[state=checked]:text-muted-foreground rounded-md transition-colors"
+                >
+                  <span className="truncate ">
                     {item.office_location_Label || item.office_location}
                   </span>
                 </SelectItem>

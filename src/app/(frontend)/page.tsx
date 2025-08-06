@@ -16,6 +16,7 @@ import HeroSectionWrapper from '@/components/custom/home/HeroSectionWrapper'
 import InsuranceSimplifiedLargeSection from '@/components/custom/home/InsuranceSimplifiedLargeSection'
 import SearchBarSection from '@/components/custom/home/SearchBarSection'
 import { InsuranceDataType } from '@/types'
+import LottiePlayer from '@/components/custom/shared/LottiePlayer'
 
 export default async function HomePage() {
   const headers = await getHeaders()

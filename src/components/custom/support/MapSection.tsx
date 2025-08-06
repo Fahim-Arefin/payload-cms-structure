@@ -41,12 +41,14 @@ function MapSection({ data }: Props) {
             {data?.content[0]?.office_address}
           </p>
 
-          <div className="flex items-center space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
-            <img src="/assets/phone.png" alt="" />
+          <div className="flex items-center space-x-1 lg:space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
+            <img className="lg:hidden w-4 h-4" src="/assets/supportpage/mobile/phone.png" alt="" />
+            <img className="hidden lg:block" src="/assets/supportpage/web/phone.png" alt="" />
             <p>{data?.content[0]?.office_phone}</p>
           </div>
-          <div className="flex items-center space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
-            <img src="/assets/phone.png" alt="" />
+          <div className="flex items-center space-x-1 lg:space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
+            <img className="lg:hidden w-4 h-4" src="/assets/supportpage/mobile/phone.png" alt="" />
+            <img className="hidden lg:block" src="/assets/supportpage/web/phone.png" alt="" />
             <p>{data?.content[0]?.office_email}</p>
           </div>
 
