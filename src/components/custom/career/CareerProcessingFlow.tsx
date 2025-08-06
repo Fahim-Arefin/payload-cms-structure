@@ -7,23 +7,28 @@ import CarouselNavButtons from '../shared/CarousalNavButtons'
 
 const processData = [
   {
-    img: '/assets/process1.png',
+    img: '/assets/career/web/process1.png',
+    mobileImg: '/assets/career/mobile/process1.png',
     title: 'INITIAL SCREENING',
   },
   {
-    img: '/assets/process2.png',
+    img: '/assets/career/web/process2.png',
+    mobileImg: '/assets/career/mobile/process2.png',
     title: 'PRELIMINARY DISCUSSION',
   },
   {
-    img: '/assets/process3.png',
+    img: '/assets/career/web/process3.png',
+    mobileImg: '/assets/career/mobile/process3.png',
     title: 'ASSESSMENT CENTER',
   },
   {
-    img: '/assets/process4.png',
+    img: '/assets/career/web/process4.png',
+    mobileImg: '/assets/career/mobile/process4.png',
     title: 'FINAL INTERVIEW',
   },
   {
-    img: '/assets/process5.png',
+    img: '/assets/career/web/process5.png',
+    mobileImg: '/assets/career/mobile/process5.png',
     title: 'ON BOARDING',
   },
 ]
@@ -89,7 +94,7 @@ export default function CareerProcessingFlow() {
                     {i < processData.length - 1 && (
                       <div className="absolute right-[-26px] top-1/2 -translate-y-1/2 z-10">
                         <img
-                          src="/assets/process-arrow.png"
+                          src="/assets/career/web/process-arrow.png"
                           alt="Arrow"
                           className="w-[26px] h-[16px] select-none"
                         />
@@ -102,7 +107,13 @@ export default function CareerProcessingFlow() {
                   <img
                     src={item.img}
                     alt={item.title}
-                    className="rounded-[12px] mb-2 w-[186px] h-[157px] object-contain"
+                    className="rounded-[12px] hidden md:block mb-2 w-[186px] h-[157px] object-contain"
+                    draggable={false}
+                  />
+                  <img
+                    src={item.mobileImg}
+                    alt={item.title}
+                    className="rounded-[12px] block md:hidden mb-2 w-[186px] h-[157px] object-contain"
                     draggable={false}
                   />
                   <span className="mt-2 text-[#343434] text-center text-[12px] font-medium uppercase max-w-[145px] mx-auto leading-tight break-words">

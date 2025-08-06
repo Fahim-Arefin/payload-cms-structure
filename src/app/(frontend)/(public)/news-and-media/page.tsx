@@ -68,19 +68,19 @@ export default function NewsAndMedia() {
   const insuranceCardData = [
     {
       title: 'Necessity of awareness of life insurance',
-      image: '/assets/thumbnails/1.png',
+      image: '/assets/thumbnails/1.jpg',
       videoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
       description: '',
     },
     {
       title: 'Living benefits of life insurance',
-      image: '/assets/thumbnails/2.png',
+      image: '/assets/thumbnails/2.jpg',
       videoLink: 'https://www.youtube.com/embed/mUn_HAvpbag',
       description: '',
     },
     {
       title: 'Digitalization of life insurance industry',
-      image: '/assets/thumbnails/3.png',
+      image: '/assets/thumbnails/3.jpg',
       videoLink: 'https://www.youtube.com/embed/DzMzN76gELM',
       description: '',
     },
@@ -100,7 +100,8 @@ export default function NewsAndMedia() {
       </div>
 
       {/* VLOG section */}
-      <div id="vlog-section"
+      <div
+        id="vlog-section"
         className={`px-5 
            md:px-24 
            lg:px-[130px]   

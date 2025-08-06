@@ -16,7 +16,7 @@ const SupportOVCSection: FC<SupportOVCSectionProps> = ({}) => {
       <div className="relative w-full font-avenir h-[230px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px]">
         {/* Background GIF */}
         <img
-          src="/assets/bg.gif"
+          src="/assets/bg.lottie"
           alt="background gif"
           className="absolute inset-0 w-full h-full object-cover z-0"
         />

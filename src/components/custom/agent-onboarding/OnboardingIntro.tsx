@@ -8,7 +8,7 @@ type Props = {
 function OnboardingIntro({ onboardingIntroContent }: Props) {
   return (
     <div
-      className="bg-white px-5 pt-12 pb-20
+      className="bg-white px-5 pt-12 pb-12 md:pb-20
            md:px-24 md:pt-24
            lg:px-[130px]  lg:pt-[110px] 
            xl:px-[200px]  xl:pt-[100px] 
@@ -21,7 +21,7 @@ function OnboardingIntro({ onboardingIntroContent }: Props) {
         <div className="grid grid-cols-2 relative">
           {/* Background-like image */}
           <img
-            src="/assets/leaderBanner.png"
+            src="/assets/agent-onboarding/web/leaderBanner.png"
             alt=""
             className=" hidden lg:block absolute inset-x-0 lg:-bottom-6 xl:-bottom-2 2xl:-bottom-20 lg:w-[92%] xl:w-[80%] 2xl:w-[60%] object-cover" // adjust offset as needed
           />
@@ -35,7 +35,7 @@ function OnboardingIntro({ onboardingIntroContent }: Props) {
             <h1 className="global-h1 text-black">{onboardingIntroContent?.subheading}</h1>
           </div>
           <div className="col-span-1 pt-3 md:pt-0 lg:hidden">
-            <img src="/assets/leaderBanner.png" alt="" className="h-full" />
+            <img src="/assets/agent-onboarding/mobile/leaderBanner.png" alt="" className="h-full" />
           </div>
         </div>
         <div className="space-y-3 md:space-y-5 2xl:space-y-8 ">

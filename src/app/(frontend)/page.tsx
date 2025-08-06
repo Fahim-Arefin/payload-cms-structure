@@ -117,19 +117,19 @@ export default async function HomePage() {
       insuranceCardData: [
         {
           title: '',
-          image: '/assets/thumbnails/1.png',
+          image: '/assets/thumbnails/1.jpg',
           videoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
           description: '',
         },
         {
           title: '',
-          image: '/assets/thumbnails/2.png',
+          image: '/assets/thumbnails/2.jpg',
           videoLink: 'https://www.youtube.com/embed/mUn_HAvpbag',
           description: '',
         },
         {
           title: '',
-          image: '/assets/thumbnails/3.png',
+          image: '/assets/thumbnails/3.jpg',
           videoLink: 'https://www.youtube.com/embed/DzMzN76gELM',
           description: '',
         },

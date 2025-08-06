@@ -6,6 +6,7 @@ import EllipseDecoration from './EllipseDecoration'
 type ResourceData = {
   title: string
   image: string
+  mobileImage: string
   description: string
   designation: string
 }
@@ -49,11 +50,16 @@ function ResourceCard({ data }: { data: ResourceData }) {
             <img
               src={data.image}
               alt={data.title}
-              className="rounded-full relative z-20 w-[70px] h-[70px] object-cover"
+              className="rounded-full hidden md:block relative z-20 w-[70px] h-[70px] object-cover"
+            />
+            <img
+              src={data.mobileImage}
+              alt={data.title}
+              className="rounded-full block md:hidden relative z-20 w-[70px] h-[70px] object-cover"
             />
           </div>
         </div>
-        <div className="flex flex-col ml-10">
+        <div className="flex flex-col ml-12 md:ml-10">
           <span className="text-[#434342] font-semibold text-[12px] md:text-[14px] xl:text-[16px]">
             {data.title}
           </span>

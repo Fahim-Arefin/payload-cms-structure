@@ -31,6 +31,7 @@ type Props = {
     sectionLeft: ExpectedItem[]
     sectionRight: {
       avatar: string
+      mobileAvatar: string
       name: string
       quote: string
     }
@@ -43,7 +44,7 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
       <h1 className="global-h1 hidden md:block font-semibold text-[#434342] uppercase lg:block mb-12 w-[50%]">
         {expectedData.title}
       </h1>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col md:gap-2 lg:gap-10">
         {/* Opportunity Section */}
         {/* <div className='hidden md:block'>
           <h1 className="global-h1 font-semibold text-[#434342] uppercase lg:block mb-12">
@@ -64,7 +65,7 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
             ))}
           </div>
         </div> */}
-        <section className="bg-[#FCF4EB] block md:hidden px-4 py-4">
+        <section className="bg-[#FCF4EB] block md:hidden px-4 py-2">
           {/* Section Title */}
           <h1 className="text-[18px] font-semibold text-[#434342] uppercase mb-6 text-center">
             {opportunityData.title}
@@ -105,7 +106,7 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
         </section>
 
         {/* Expected Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 md:mt-12">
           {/* Left list */}
           <div>
             <div className="flex flex-col gap-4 md:gap-6 lg:gap-10 py-4">
@@ -123,9 +124,14 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
             <img
               src={expectedData.sectionRight.avatar}
               alt={expectedData.sectionRight.name}
-              className="w-[100px] h-[100px] lg:w-[208px] lg:h-[208px] object-cover mb-4"
+              className="hidden md:block w-[100px] h-[100px] lg:w-[208px] lg:h-[208px] object-cover mb-4"
             />
-            <h4 className="global-p2 font-semibold text-[#9A4E46] mb-2 lg:mb-6 ">
+            <img
+              src={expectedData.sectionRight.mobileAvatar}
+              alt={expectedData.sectionRight.name}
+              className="block md:hidden w-[100px] h-[100px] lg:w-[208px] lg:h-[208px] object-cover mb-4"
+            />
+            <h4 className="global-p2 font-semibold text-[#9A4E46] mb-2 lg:mb-6">
               {expectedData.sectionRight.name}
             </h4>
             <p className="global-p2 text-[#3A3A3C]">
