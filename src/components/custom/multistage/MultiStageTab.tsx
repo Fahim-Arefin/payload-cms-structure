@@ -94,7 +94,9 @@ export default function MultiStageTab({ config, data }: Props) {
                 >
                   <img
                     src={
-                      activeTab === 'features' ? '/assets/arrowRight.png' : '/assets/arrowLeft.png'
+                      activeTab === 'features'
+                        ? '/assets/icons/web/arrowRight.png'
+                        : '/assets/icons/web/arrowLeft.png'
                     }
                     alt="arrow"
                     className="w-[14px] lg:w-[16px] xl:w-[18px] 2xl:w-[22px]

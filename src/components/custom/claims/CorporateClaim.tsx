@@ -12,14 +12,17 @@ export function CorporateClaim() {
           >
             <div className="flex mx-auto">
               <Link href="https://portal.shantalife.com/">
-                <GlobalButton variant="secondary" className="" text="Submit Claim" size="small" />
+                <GlobalButton
+                  variant="secondary"
+                  className="w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[150px]
+            h-[32px] md:h-[34px] lg:h-[38px] xl:h-[40px] 2xl:h-[42px]"
+                  text="Submit Claim"
+                  size="small"
+                />
               </Link>
             </div>
           </div>
-          <div
-            className={`
-           flex mx-auto`}
-          >
+          <div className={`flex mx-auto`}>
             <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-1/2 text-center mx-auto text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
               <p>Click "Submit Claim" to proceed with your online claim.</p>
               <p>We humbly request you to attach all necessary documents.</p>

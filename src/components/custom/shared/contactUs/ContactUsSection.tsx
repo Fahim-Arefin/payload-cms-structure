@@ -241,7 +241,11 @@ function ContactUsSection() {
                 >
                   {sendButtonText}
                 </Button> */}
-              <GlobalButton size="small" className="" variant="primary">
+              <GlobalButton
+                size="small"
+                className="w-[100px] md:w-[120px] lg:w-[140px] xl:w-[150px] 2xl:w-[150px]"
+                variant="primary"
+              >
                 {sendButtonText == 'Sending...' ? (
                   <Loader />
                 ) : sendButtonText == 'Message Sent' ? (
@@ -272,9 +276,10 @@ function ContactUsSection() {
                 variant="primary"
                 className="shadow-md z-30
              text-[10px] md:text-[12px] 
-             h-[26px] md:h-[30px] px-2.5 rounded-md"
+             h-[30px] px-2.5 rounded-md gap-1"
               >
-                <SendHorizontal size={8} /> Send Message
+                <SendHorizontal style={{ width: '12px', height: '12px' }} />
+                <div>Send Message</div>
               </Button>
               {/* <GlobalButton size="small" className="" text="Send Message" variant="primary" /> */}
             </DialogTrigger>
@@ -375,16 +380,21 @@ function ContactUsSection() {
 
                   {/* Submit */}
                   <div className="pt-4 flex justify-end">
-                    <Button size="xs" variant="primary" className="text-white shadow-md ">
+                    <Button
+                      variant="primary"
+                      className="shadow-md z-30
+             text-[10px] md:text-[12px] 
+             h-[30px] px-2.5 rounded-md gap-1"
+                    >
                       {sendButtonText == 'Sending...' ? (
-                        <Loader />
+                        <Loader style={{ width: '12px', height: '12px' }} />
                       ) : sendButtonText == 'Message Sent' ? (
-                        <MailCheck />
+                        <MailCheck style={{ width: '12px', height: '12px' }} />
                       ) : (
-                        <SendHorizontal />
+                        <SendHorizontal style={{ width: '12px', height: '12px' }} />
                       )}
 
-                      <span className="text-sm">{sendButtonText}</span>
+                      <span>{sendButtonText}</span>
                     </Button>
                   </div>
                 </form>
