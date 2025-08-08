@@ -1,6 +1,10 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { Input } from '@/components/ui/input'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { format, differenceInYears } from 'date-fns'
 
 import {
   Select,
@@ -19,6 +23,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 type FormData = {
   PlanCode: number
   Age: number
+  dateOfBirth: Date | null
   SumAssured: number
   Term: number
   PaymentMode: number
@@ -70,6 +75,62 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   const [isHoveringPlanSelect, setIsHoveringPlanSelect] = useState(false)
   const [isHoveringTenureSelect, setIsHoveringTenureSelect] = useState(false)
   const [isHoveringPaymentSelect, setIsHoveringPaymentSelect] = useState(false)
+  const [tempSelectedDate, setTempSelectedDate] = useState<Date | null>(null)
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+  const [isCalculatingAge, setIsCalculatingAge] = useState(false)
+  const [ageCalculationError, setAgeCalculationError] = useState<string | null>(null)
+  const [isChildEducationHovered, setIsChildEducationHovered] = useState(false)
+  const [childEducationVariants, setChildEducationVariants] = useState<{ plan_name: string; plan_code: number }[]>([])
+
+  // Format date to DD/MM/YYYY
+  const formatDateForAPI = (date: Date): string => {
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear().toString()
+    return `${day}/${month}/${year}`
+  }
+
+  // Call API to calculate age from date of birth
+  const calculateAgeFromAPI = async (dateOfBirth: Date) => {
+    setIsCalculatingAge(true)
+    setAgeCalculationError(null)
+
+    try {
+      const formattedDate = formatDateForAPI(dateOfBirth)
+      const response = await fetch(`/api/age-calculate?dateofbirth=${formattedDate}`)
+
+      if (!response.ok) {
+        throw new Error('Failed to calculate age')
+      }
+
+      const data = await response.json()
+      
+      if (data.age !== undefined) {
+        // Update form data with both date and calculated age
+        setFormData((prev) => ({
+          ...prev,
+          dateOfBirth: dateOfBirth,
+          Age: data.age,
+        }))
+        
+        // Close the date picker
+        setIsDatePickerOpen(false)
+        setTempSelectedDate(null)
+        
+        // Clear any field errors
+        setFieldErrors((prev) => ({
+          ...prev,
+          Age: false,
+        }))
+      } else {
+        throw new Error('Invalid response from age calculation API')
+      }
+    } catch (err) {
+      setAgeCalculationError(err instanceof Error ? err.message : 'Failed to calculate age')
+    } finally {
+      setIsCalculatingAge(false)
+    }
+  }
 
   // Calculate suggested sum assured based on tenure and annual income
   const calculateSuggestedAmount = () => {
@@ -84,6 +145,8 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
 
   // Video link mappings for plans
   const videoLinkMappings = {
+    'Shanta Child Education Plan (1%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+    'Shanta Child Education Plan (2%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
     'Shanta Child Education Plan (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
     'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g', 
     'Shanta 3 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
@@ -116,6 +179,8 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           'Shanta Endowment': 'Shanta Endowment Plan',
           'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
           'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
+          'Shanta Child Education Plan (1%)': 'Shanta Child Education Plan (1%)',
+          'Shanta Child Education Plan (2%)': 'Shanta Child Education Plan (2%)',
           'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
         }
 
@@ -127,8 +192,30 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings],
           }))
 
-        console.log('Filtered and transformed plans:', filteredPlans)
-        setAvailablePlans(filteredPlans)
+        // Separate Child Education Plans from other plans
+        const childEducationPlans = filteredPlans.filter(plan => 
+          plan.plan_name.includes('Shanta Child Education Plan')
+        )
+        const otherPlans = filteredPlans.filter(plan => 
+          !plan.plan_name.includes('Shanta Child Education Plan')
+        )
+
+        // Store child education variants separately
+        setChildEducationVariants(childEducationPlans)
+
+        // Create a grouped plan list with single "Shanta Child Education Plan" entry
+        const groupedPlans = [
+          ...otherPlans,
+          ...(childEducationPlans.length > 0 ? [{
+            plan_name: 'Shanta Child Education Plan',
+            plan_code: 0, // Temporary code for the group
+            isGroup: true
+          }] : [])
+        ]
+
+        console.log('Child Education variants:', childEducationPlans)
+        console.log('Grouped plans:', groupedPlans)
+        setAvailablePlans(groupedPlans)
       } else {
         console.log('Unexpected plans API response format:', data)
         setAvailablePlans([])
@@ -143,7 +230,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
 
   const genders = [
     { text: 'Male', value: 1 },
-    { text: 'Female', value: 0 },
+    { text: 'Female', value: 2 },
   ]
 
   const tenures = [
@@ -155,7 +242,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   ]
 
 
-  const handleInputChange = (field: keyof FormData, value: string | number) => {
+  const handleInputChange = (field: keyof FormData, value: string | number | Date | null) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
@@ -171,6 +258,64 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         }))
       }
     }
+  }
+
+  // Handle date selection in the picker (temporary selection)
+  const handleDateChange = (date: Date | null) => {
+    setTempSelectedDate(date)
+  }
+
+  // Handle confirm button click
+  const handleConfirmDate = () => {
+    if (tempSelectedDate) {
+      calculateAgeFromAPI(tempSelectedDate)
+    }
+  }
+
+  // Handle opening date picker
+  const handleOpenDatePicker = () => {
+    setTempSelectedDate(formData.dateOfBirth)
+    setIsDatePickerOpen(true)
+    setAgeCalculationError(null)
+  }
+
+  // Handle closing date picker
+  const handleCloseDatePicker = () => {
+    setIsDatePickerOpen(false)
+    setTempSelectedDate(null)
+    setAgeCalculationError(null)
+  }
+
+  // Handle child education plan selection from submenu
+  const handleChildEducationPlanSelect = (variant: { plan_name: string; plan_code: number }) => {
+    console.log('Selected variant:', variant)
+    const planWithVideo = {
+      ...variant,
+      videoLink: videoLinkMappings[variant.plan_name as keyof typeof videoLinkMappings]
+    }
+    setSelectedPlan(planWithVideo)
+    
+    setFormData((prev) => {
+      console.log('Updating formData with PlanCode:', variant.plan_code)
+      return {
+        ...prev,
+        PlanCode: variant.plan_code,
+        Term: 0,
+      }
+    })
+    
+    // Clear tenure options until new plan + age combination is selected
+    setAvailableTenures([])
+    
+    // Clear field errors for plan and dependent fields
+    setFieldErrors((prev) => ({
+      ...prev,
+      PlanCode: false,
+      Term: false,
+    }))
+    
+    // Hide the submenu after selection
+    setIsChildEducationHovered(false)
   }
 
   const fetchTenureOptions = async (planCode: number, age: number) => {
@@ -291,6 +436,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         body: JSON.stringify({
           PlanCode: formData.PlanCode,
           Age: formData.Age,
+          DateOfBirth: formData.dateOfBirth ? formatDateForAPI(formData.dateOfBirth) : '',
           SumAssured: formData.SumAssured,
           Term: formData.Term,
           PaymentMode: formData.PaymentMode,
@@ -328,7 +474,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       case 'PlanCode':
         return 'Please select a plan'
       case 'Age':
-        if (!formData.Age) return 'Please enter your age'
+        if (!formData.dateOfBirth) return 'Please select your date of birth'
         if (formData.Age < 18 || formData.Age > 65) return 'Age must be between 18 and 65'
         return ''
       case 'annualIncome':
@@ -365,7 +511,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     // Validate each required field and mark errors
     const errors = {
       PlanCode: !formData.PlanCode,
-      Age: !formData.Age || formData.Age < 18 || formData.Age > 65,
+      Age: !formData.dateOfBirth || formData.Age < 18 || formData.Age > 65,
       annualIncome: !formData.annualIncome,
       SumAssured: !formData.SumAssured || formData.SumAssured < 100000,
       Term: !formData.Term,
@@ -396,19 +542,79 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   grid grid-cols-2 gap-x-4 gap-y-8 md:gap-5 xl:gap-6 
   xl:px-4 xl:py-8 py-8 px-4 z-10"
     >
-      {/* age input */}
+      {/* date of birth input */}
       <div className="col-span-2 md:col-span-1">
-        <Input
-          min={18}
-          max={65}
-          type="number"
-          placeholder="Age *"
-          value={formData.Age || ''}
-          onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
-          className={`bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-            fieldErrors.Age ? 'border-red-500 border-2' : ''
-          }`}
-        />
+        <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              onClick={handleOpenDatePicker}
+              className={`w-full justify-start text-left font-normal bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
+                fieldErrors.Age ? 'border-red-500 border-2' : ''
+              } ${
+                !formData.dateOfBirth ? 'text-muted-foreground' : ''
+              }`}
+            >
+              {formData.dateOfBirth && formData.Age ? (
+                <span>Age: {formData.Age} years</span>
+              ) : (
+                <span>Date of Birth *</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <div className="p-4">
+              <DatePicker
+                selected={tempSelectedDate}
+                onChange={handleDateChange}
+                maxDate={new Date()}
+                minDate={new Date(new Date().getFullYear() - 65, 0, 1)}
+                showYearDropdown
+                showMonthDropdown
+                dropdownMode="select"
+                placeholderText="Select date of birth"
+                dateFormat="dd/MM/yyyy"
+                inline
+              />
+              
+              {/* Action buttons */}
+              <div className="flex justify-between items-center mt-3 pt-3 border-t">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleCloseDatePicker}
+                  disabled={isCalculatingAge}
+                >
+                  Cancel
+                </Button>
+                
+                <Button
+                  size="sm"
+                  onClick={handleConfirmDate}
+                  disabled={!tempSelectedDate || isCalculatingAge}
+                  className="bg-[#978900] hover:bg-[#978900]/90"
+                >
+                  {isCalculatingAge ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Calculating...
+                    </div>
+                  ) : (
+                    'Confirm'
+                  )}
+                </Button>
+              </div>
+              
+              {/* Error message */}
+              {ageCalculationError && (
+                <p className="text-red-500 text-xs mt-2">
+                  {ageCalculationError}
+                </p>
+              )}
+            </div>
+          </PopoverContent>
+        </Popover>
+        
         {/* Age error message */}
         {getFieldErrorMessage('Age') && (
           <p className="text-red-500 text-xs mt-1">
@@ -424,9 +630,38 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         onMouseLeave={() => setIsHoveringPlanSelect(false)}
       >
         <Select
-          value={formData.PlanCode && formData.PlanCode > 0 ? availablePlans.find(p => p.plan_code === formData.PlanCode)?.plan_name || "" : ""}
+          value={
+            (() => {
+              if (!formData.PlanCode || formData.PlanCode === 0) {
+                console.log('No PlanCode selected')
+                return ""
+              }
+              
+              // Check if it's a child education plan variant
+              const childVariant = childEducationVariants.find(p => p.plan_code === formData.PlanCode)
+              if (childVariant) {
+                console.log('Found child variant:', childVariant.plan_name)
+                return childVariant.plan_name
+              }
+              
+              // Check regular plans
+              const regularPlan = availablePlans.find(p => p.plan_code === formData.PlanCode)
+              if (regularPlan) {
+                console.log('Found regular plan:', regularPlan.plan_name)
+                return regularPlan.plan_name
+              }
+              
+              console.log('No matching plan found for PlanCode:', formData.PlanCode)
+              return ""
+            })()
+          }
           disabled={isLoadingPlans || !formData.Age || availablePlans.length === 0}
           onValueChange={(v) => {
+            // Don't handle Child Education Plan group selection here - handled by submenu
+            if (v === 'Shanta Child Education Plan') {
+              return
+            }
+            
             const plan = availablePlans.find((p) => p.plan_name === v)
             // Add video link to the selected plan
             const planWithVideo = plan ? {
@@ -475,14 +710,73 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
               <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
             </div>
           )}
+          
+          {/* Child Education Plan Submenu with continuous hover area */}
+          {isChildEducationHovered && childEducationVariants.length > 0 && (
+            <div 
+              className="absolute z-[100]"
+              onMouseLeave={() => setIsChildEducationHovered(false)}
+              style={{
+                top: '120px',
+                left: '0px',
+                width: '520px',
+                height: '120px'
+              }}
+            >
+              {/* Actual submenu */}
+              <div 
+                className="absolute bg-white border border-gray-200 rounded-md shadow-lg min-w-[250px]"
+                style={{
+                  top: '20px',
+                  left: '260px' // Position closer to the dropdown
+                }}
+              >
+                <div className="py-1">
+                  {childEducationVariants.map((variant) => (
+                    <div
+                      key={variant.plan_code}
+                      className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm whitespace-nowrap"
+                      onClick={() => handleChildEducationPlanSelect(variant)}
+                    >
+                      {variant.plan_name}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+          
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Plans</SelectLabel>
-              {availablePlans.map((plan) => (
-                <SelectItem key={plan.plan_code} value={plan.plan_name}>
-                  {plan.plan_name}
-                </SelectItem>
-              ))}
+              {availablePlans.map((plan) => {
+                // Handle Child Education Plan group with submenu trigger
+                if (plan.plan_name === 'Shanta Child Education Plan') {
+                  return (
+                    <SelectItem 
+                      key="child-education-group"
+                      value={plan.plan_name}
+                      className="cursor-pointer"
+                      onMouseEnter={() => setIsChildEducationHovered(true)}
+                      onSelect={(e) => {
+                        e.preventDefault() // Prevent selection, only show submenu
+                      }}
+                    >
+                      <div className="flex items-center justify-between w-full">
+                        <span>{plan.plan_name}</span>
+                        <span className="ml-2">▶</span>
+                      </div>
+                    </SelectItem>
+                  )
+                }
+                
+                // Handle other plans normally
+                return (
+                  <SelectItem key={plan.plan_code} value={plan.plan_name}>
+                    {plan.plan_name}
+                  </SelectItem>
+                )
+              })}
               {availablePlans.length === 0 &&
                 !isLoadingPlans &&
                 formData.Age && (

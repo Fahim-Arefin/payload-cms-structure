@@ -12,6 +12,7 @@ type Props = {}
 interface FormData {
   PlanCode: number
   Age: number
+  dateOfBirth: Date | null
   SumAssured: number
   Term: number
   PaymentMode: number
@@ -29,6 +30,7 @@ const CalculatorSection = (props: Props) => {
   const [formData, setFormData] = useState<FormData>({
     PlanCode: 0,
     Age: 0,
+    dateOfBirth: null,
     SumAssured: 0,
     Term: 0,
     PaymentMode: 0,
