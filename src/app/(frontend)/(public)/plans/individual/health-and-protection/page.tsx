@@ -21,14 +21,18 @@ function PlanPage() {
       biggerTitle: 'Accidental Coverage',
       description: 'Life’s detours aren’t always in your control — but recovery can be.',
       link: '/plans/individual/health-and-protection/accidental-coverage',
-      image: '/assets/healthandprotection2.jpg',
+      image: '/assets/solutions/individual/health-and-protection/web/accidental-coverage.jpg',
+      mobileImage:
+        '/assets/solutions/individual/health-and-protection/mobile/accidental-coverage.jpg',
     },
     {
       title: 'Shanta',
       biggerTitle: 'Critical Protection',
       description: 'Coverage to help you heal- financially and fearlessly.',
       link: '/plans/individual/health-and-protection/critical-illness-coverage',
-      image: '/assets/healthandprotection3.jpg',
+      image: '/assets/solutions/individual/health-and-protection/web/critical-protection.jpg',
+      mobileImage:
+        '/assets/solutions/individual/health-and-protection/mobile/critical-protection.jpg',
     },
   ]
 
@@ -39,7 +43,7 @@ function PlanPage() {
         <div className="uppercase global-h2 font-medium">
           <span>A healthy outside </span>
           {/* <br /> */}
-          <span className="text-[#ED7125]">starts from the inside </span>
+          <span className="text-[#ED7125]">starts from the inside</span>
         </div>
       </AllPlanSection>
       <ContactUsSection />
