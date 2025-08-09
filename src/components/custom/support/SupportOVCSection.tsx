@@ -23,9 +23,9 @@ const SupportOVCSection: FC<SupportOVCSectionProps> = ({}) => {
           alt="background gif"
           className="absolute inset-0 w-full h-full object-cover z-0"
         /> */}
-        <LottieBackground src="/assets/homepage/test6.json" background="white" />
+        {/* <LottieBackground src="/assets/homepage/test6.json" background="white" /> */}
         {/* Semi-transparent black overlay */}
-        {/* <div className="absolute inset-0 bg-black/60 z-10" /> */}
+        <div className="absolute inset-0 bg-black/60 z-10" />
 
         {/* Foreground content */}
         <div
@@ -95,7 +95,7 @@ const SupportOVCSection: FC<SupportOVCSectionProps> = ({}) => {
         </div>
         <div
           className="z-20 absolute inset-x-0 
-              text-center text-[#434343] 
+              text-center text-white
               bottom-8 lg:bottom-7 xl:bottom-9 2xl:bottom-12 
               global-h2 md:font-medium uppercase"
         >

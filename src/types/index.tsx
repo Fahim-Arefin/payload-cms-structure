@@ -184,6 +184,7 @@ export type ProtectionDataType = {
 
 export type PayPremiumDataType = {
   bgImage: string
+  bgMobileImage: string
   item: {
     // image: string
     descriptionContent: string

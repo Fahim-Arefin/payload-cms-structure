@@ -55,23 +55,47 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
            xl:px-[200px]  xl:py-[100px] 
            2xl:px-[300px] 2xl:py-[100px] bg-[#FCF4EB] "
     >
-      <div className="hidden">
-        <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium mb-10">
+      <div className="lg:hidden mb-12">
+        <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium ">
+          Payment With{' '}
+          <span className="global-h1 uppercase text-[#ED7125] font-medium">Bkash & Rocket</span>
+        </h1>
+      </div>
+      <div className="hidden lg:flex mb-12 lg:w-[49%] 2xl:w-[48%] ml-auto">
+        <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium ">
           Payment With{' '}
           <span className="global-h1 uppercase text-[#ED7125] font-medium">Bkash & Rocket</span>
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-6 xl:gap-9 2xl:gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-6 xl:gap-9 2xl:gap-16 ">
         {/* Left - Single Static Image */}
+        {/* lg:mt-28 xl:mt-44 2xl:mt-36 */}
+        {/* h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px] */}
+
+        {/* mbile */}
         <div
-          className="relative w-full lg:w-[93%] xl:w-full
-            h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px]
+          className="lg:hidden relative w-full  
+            lg:mt-[100px]
+            h-[300px] md:h-[400px] lg:h-auto
             rounded-[8px] md:rounded-[10px] lg:rounded-[8px] xl:rounded-[12px] 
             bg-no-repeat bg-center
             bg-contain
-            lg:mt-28 xl:mt-44 2xl:mt-36 order-1 flex-shrink-0"
-          style={{ backgroundImage: `url(/assets/bkash-roket.png)` }}
+            order-1 flex-shrink-0"
+          style={{ backgroundImage: `url(/assets/paypremium/mobile/bkash-roket.png)` }}
+          role="img"
+          aria-label="Background image"
+        ></div>
+        {/* large */}
+        <div
+          className="hidden lg:block relative w-full  
+            lg:mt-[100px]
+            h-[300px] md:h-[400px] lg:h-auto
+            rounded-[8px] md:rounded-[10px] lg:rounded-[8px] xl:rounded-[12px] 
+            bg-no-repeat bg-center
+            bg-contain
+            order-1 flex-shrink-0"
+          style={{ backgroundImage: `url(/assets/paypremium/web/bkash-roket.png)` }}
           role="img"
           aria-label="Background image"
         ></div>
@@ -79,34 +103,46 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
         {/* Right - Tabbed Content */}
         <div className="flex flex-col mt-10 lg:mt-0 order-2">
           {/* Title */}
-          <div className="hidden lg:block lg:mb-6 2xl:mb-12">
+          {/* <div className="hidden lg:block lg:mb-6 2xl:mb-12">
             <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
               Payment Using{' '}
               <span className="global-h1 uppercase text-[#ED7125] font-medium">bKash & Rocket</span>
             </h1>
-          </div>
+          </div> */}
 
-          <div className="lg:hidden mb-6">
+          {/* <div className="lg:hidden mb-6">
             <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
               Payment Using{' '}
               <span className="global-h1 uppercase text-[#ED7125] font-medium">bKash & Rocket</span>
             </h1>
-          </div>
+          </div> */}
 
           {/* Tabs */}
-          <Tabs defaultValue="bkash" value={activeTab} onValueChange={setActiveTab} className="">
+          <Tabs
+            defaultValue="bkash"
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="bg-[#FCF4EB] "
+          >
             <div
               className="relative w-full border-b border-[#434343] md:py-[12px] bg-[#FCF4EB]
              mb-[16px] md:mb-[20px] lg:mb-[30px]"
             >
-              <TabsList className="w-full flex justify-start bg-[#FCF4EB] p-0 space-x-[10%]">
+              <TabsList className="w-full flex justify-between bg-[#FCF4EB]  p-0 ">
                 <TabsTrigger
                   value="bkash"
+                  // className={cn(
+                  //   'global-p1 font-medium px-2 py-2.5 md:py-[16px] uppercase relative flex justify-center pl-0 bg-transparent data-[state=active]:bg-transparent',
+                  //   'w-[40%] text-center',
+                  //   activeTab === 'bkash'
+                  //     ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
+                  //     : 'text-[#434343]',
+                  // )}
                   className={cn(
-                    'global-p1 font-medium px-2 py-2.5 md:py-[16px] uppercase relative flex justify-center pl-0 bg-transparent data-[state=active]:bg-transparent',
-                    'w-[40%] text-center',
+                    'global-p1 font-semibold px-2 py-2.5 md:py-[22px] lg:py-[23px] xl:py-[24px] uppercase relative flex justify-center pl-0 data-[state=active]:bg-transparent',
+                    config?.length === 2 && 'w-[45%] text-center',
                     activeTab === 'bkash'
-                      ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
+                      ? ' text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
                       : 'text-[#434343]',
                   )}
                 >
@@ -117,9 +153,16 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
 
                 <TabsTrigger
                   value="rocket"
+                  // className={cn(
+                  //   'global-p1 font-medium px-2 py-2.5 md:py-[16px] uppercase relative flex justify-center bg-transparent data-[state=active]:bg-transparent',
+                  //   'w-[40%] text-center',
+                  //   activeTab === 'rocket'
+                  //     ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
+                  //     : 'text-[#434343]',
+                  // )}
                   className={cn(
-                    'global-p1 font-medium px-2 py-2.5 md:py-[16px] uppercase relative flex justify-center bg-transparent data-[state=active]:bg-transparent',
-                    'w-[40%] text-center',
+                    'global-p1 font-semibold px-2 py-2.5 md:py-[22px] lg:py-[23px] xl:py-[24px] uppercase relative flex justify-center data-[state=active]:bg-transparent',
+                    config?.length === 2 && 'w-[45%] text-center',
                     activeTab === 'rocket'
                       ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
                       : 'text-[#434343]',
@@ -130,6 +173,39 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
                   </span>
                 </TabsTrigger>
               </TabsList>
+              {/* Dynamic Arrows */}
+              {config.length > 1 &&
+                config.slice(1).map((_, i) => {
+                  const percent = ((i + 1) / config.length) * 100
+                  return (
+                    <div
+                      key={`arrow-${i}`}
+                      className="hidden md:block absolute md:-bottom-[8px] lg:-bottom-[9px] xl:-bottom-[9px] 2xl:-bottom-[12px] z-10"
+                      style={{ left: `${percent}%`, transform: 'translateX(-60%)' }}
+                    >
+                      <img
+                        src={
+                          activeTab === 'bkash'
+                            ? '/assets/icons/web/arrowRight.png'
+                            : '/assets/icons/web/arrowLeft.png'
+                        }
+                        alt="arrow"
+                        className="hidden lg:block w-[14px] lg:w-[16px] xl:w-[18px] 2xl:w-[22px]
+                    h-[16px] lg:h-[18px] xl:h-[20x] 2xl:h-[24px]"
+                      />
+                      <img
+                        src={
+                          activeTab === 'rocket'
+                            ? '/assets/icons/mobile/arrowRight.png'
+                            : '/assets/icons/mobile/arrowLeft.png'
+                        }
+                        alt="arrow"
+                        className="lg:hidden w-[14px] lg:w-[16px] xl:w-[18px] 2xl:w-[22px]
+                    h-[16px] lg:h-[18px] xl:h-[20x] 2xl:h-[24px]"
+                      />
+                    </div>
+                  )
+                })}
             </div>
 
             {/* Tab Content */}
