@@ -8,8 +8,9 @@ function PlanPage() {
     {
       title: 'Health & Protection',
       subtitle: '',
-      description: 'Preventive care meets powerful protection. Let us be your financial shield you can count on. ',
-      image: '/assets/healthandprotection1.jpg',
+      description:
+        'Preventive care meets powerful protection. Let us be your financial shield you can count on. ',
+      image: '/assets/banners/health-and-protection-banner.jpg',
       titleTop: '60%',
     },
   ]

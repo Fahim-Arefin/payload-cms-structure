@@ -15,7 +15,7 @@ const page: FC<pageProps> = ({}) => {
       title: 'Shanta Child Education Plan ',
       subtitle: '',
       description: 'Set them up for success - nurture their boundless potential.',
-      image: '/assets/childEducationPlan.jpg',
+      image: '/assets/banners/child-education-banner.jpg',
     },
   ]
 
