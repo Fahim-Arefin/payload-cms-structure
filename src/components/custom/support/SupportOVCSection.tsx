@@ -16,16 +16,20 @@ const SupportOVCSection: FC<SupportOVCSectionProps> = ({}) => {
       pb-8 md:pb-12 lg:pb-[75px] xl:pb-[90px] 2xl:pb-[100px] bg-white 
     "
     >
-      <div className="relative w-full font-avenir h-[230px] md:h-[300px] lg:h-[370px] xl:h-[450px] 2xl:h-[500px]">
+      <div
+        className="relative w-full font-avenir h-[230px] md:h-[300px] lg:h-[370px] xl:h-[450px] 2xl:h-[500px]
+       rounded-[6px]  md:rounded-[8px] lg:rounded-[11px] xl:rounded-[13px] 2xl:rounded-[15px]"
+      >
         {/* Background GIF */}
-        {/* <img
-          src="/assets/bg.lottie"
+        <img
+          src="/assets/bg.gif"
           alt="background gif"
-          className="absolute inset-0 w-full h-full object-cover z-0"
-        /> */}
+          className="absolute inset-0 w-full h-full object-cover z-0
+           rounded-[6px]  md:rounded-[8px] lg:rounded-[11px] xl:rounded-[13px] 2xl:rounded-[15px]"
+        />
         {/* <LottieBackground src="/assets/homepage/test6.json" background="white" /> */}
         {/* Semi-transparent black overlay */}
-        <div className="absolute inset-0 bg-black/60 z-10" />
+        <div className="absolute inset-0 bg-black/60 z-10  rounded-[6px]  md:rounded-[8px] lg:rounded-[11px] xl:rounded-[13px] 2xl:rounded-[15px]" />
 
         {/* Foreground content */}
         <div
