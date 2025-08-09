@@ -80,7 +80,7 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
               ref={textRef}
               className={cn(
                 'text-[#444] font-[350] text-justify text-base leading-7 xl:leading-10 md:global-p1',
-                !expanded && 'line-clamp-5 lg:line-clamp-6 xl:line-clamp-[7]',
+                !expanded && 'line-clamp-5 lg:line-clamp-5 xl:line-clamp-[7]',
               )}
             >
               {data.description}
