@@ -62,6 +62,7 @@ export type AllPlantDataType = {
   description: string
   link: string
   image: string
+  mobileImage?: string
   videoLink?: string
 }
 
@@ -113,12 +114,14 @@ export type OurStoryDataType = {
   title: string
   subtitle: string
   mainImage: string
+  mainMobileImage: string
   insuranceCardData: InsuranceCardDataType[]
 }
 
 export type CareerResourceDataType = {
   title: string
   image: string
+  mobileImage: string
   description: string
   designation: string
 }
@@ -126,6 +129,7 @@ export type CareerResourceDataType = {
 export type OnboardingRoleType = {
   image: string
   title: string
+  mobileImage: string
 }
 
 export type SuitabilityCardType = {

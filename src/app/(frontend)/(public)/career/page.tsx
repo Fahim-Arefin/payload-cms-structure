@@ -23,7 +23,7 @@ const page: FC<pageProps> = ({}) => {
       title: 'Build Your Legacy, Empower Every Step',
       subtitle: '',
       description: 'Join us in reimagining life insurance, where your passion meets purpose.',
-      image: '/assets/careerHero.png',
+      image: '/assets/career/web/careerHero.png',
     },
   ]
   // We’re bringing together people who believe in better protection, stronger communities, and a future full of possibilities.
@@ -38,23 +38,27 @@ const page: FC<pageProps> = ({}) => {
     {
       title: 'SNAPSHOTs of',
       subtitle: 'Our Story',
-      mainImage: '/assets/careerVideoMain.png',
+      mainImage: '/assets/career/web/careerVideoMain.png',
+      mainMobileImage: `/assets/career/mobile/careerVideoMain.png`,
       insuranceCardData: [
         {
           title: 'Leadership Recognition',
-          image: '/assets/careerVideo1.jpg',
+          image: '/assets/career/web/careerVideo1.jpg',
+          mobileImage: `/assets/career/mobile/careerVideo1.jpg`,
           description:
             'Always get the appricaition on your achievements and milestones in our professional journey.',
         },
         {
           title: 'Team Sports & Unity',
-          image: '/assets/careerVideo2.jpg',
+          image: '/assets/career/web/careerVideo2.jpg',
+          mobileImage: `/assets/career/mobile/careerVideo2.jpg`,
           description:
             'Company sports teams building camaraderie and teamwork beyond the workplace. We value out employee engagement.',
         },
         {
           title: 'Office Culture & Moments',
-          image: '/assets/careerVideo3.jpg',
+          image: '/assets/career/web/careerVideo3.jpg',
+          mobileImage: `/assets/career/mobile/careerVideo3.jpg`,
           description: `Diverse team make you feel with companion rather than collgue in our vibrant office environment.`,
         },
       ],
@@ -65,12 +69,14 @@ const page: FC<pageProps> = ({}) => {
     {
       title: 'Mantaka Faruqui Aurthi',
       image: '/assets/career/testimonials/Aurthi.jpg',
+      mobileImage: `/assets/career/mobile/Aurthi.jpg`,
       description: `Shanta Life isn’t just a workplace—it’s a dynamic space where ideas thrive, creativity is celebrated, and every voice matters. As a woman in the Marketing department, I’ve experienced firsthand how empowering and inclusive the culture is. Here, I’m encouraged to think differently, challenge norms, and bring bold, creative ideas to life. It’s a place where talent is nurtured, innovation is embraced, and individuality is valued. If you're looking for an environment that inspires you to grow, lead, and make a difference, Shanta Life is the perfect place to be!`,
       designation: 'Marketing',
     },
     {
       title: 'Saurab Borua',
       image: '/assets/career/testimonials/Saurab Borua.jpg',
+      mobileImage: `/assets/career/mobile/Saurab Borua.jpg`,
       description: `Shanta Life is more than just a workplace - it's a movement built on purpose, passion, and people. From the very first day, I felt the pulse of something extraordinary: a culture rooted in trust, driven by values and fueled by a collective dream to redefine life insurance in Bangladesh.
     Here, every role matters, every voice is heard, and every idea has the power to inspire change. As a young HR professional, I’ve been fortunate to be part of an environment that doesn’t just talk about transformation - it lives it. From nurturing talent to shaping culture, from building systems to unlocking human potential, I’ve seen firsthand how a clear vision, aligned values and courageous leadership can create something truly exceptional.
     At Shanta Life, we don’t just offer protection - we ignite possibility. I am proud—honored—to be part of this inspiring journey, alongside brilliant minds and warm hearts who are committed to making a difference. `,
@@ -78,14 +84,16 @@ const page: FC<pageProps> = ({}) => {
     },
     {
       title: 'Rabeya Dihan',
-      image: '/assets/Dihan.jpg',
+      image: '/assets/career/testimonials/Dihan.jpg',
+      mobileImage: `/assets/career/mobile/Dihan.jpg`,
       description: `Working at Shanta Life Insurance PLC has been a rewarding and professionally enriching journey.As part of the Customers Experience Team.I've had the opportunity to enagage directy with our valued custromers ensuring they recived timely support ,clear communication &  a seamless service experience.Everyday at Shanta Life brings new opportunity to grow, learn & make a sure meaningful impact. `,
       designation: 'Customer Service',
     },
 
     {
       title: 'Md. Arif Hossain',
-      image: '/assets/Arif.jpg',
+      image: '/assets/career/testimonials/Arif.jpg',
+      mobileImage: `/assets/career/mobile/Arif.jpg`,
       description: `Working at Shanta Life has been a truly rewarding experience. The team is supportive, the environment is positive, and there’s a strong focus on growth and innovation. I’ve learned a lot and felt valued every step of the way.  `,
       designation: 'Corporate Sales',
     },

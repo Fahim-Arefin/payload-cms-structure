@@ -28,7 +28,8 @@ function RolesCard({ data, index }: Props) {
          w-[40px] md:w-[70px] xl:w-[100px] 
          h-[40px] md:h-[70px] xl:h-[100px]"
         >
-          <img src={data?.image} alt={data?.title} className="w-full h-full" />
+          <img src={data?.image} alt={data?.title} className="w-full h-full hidden md:block" />
+          <img src={data?.mobileImage} alt={data?.title} className="w-full h-full block md:hidden" />
         </div>
         <div
           className="global-p2

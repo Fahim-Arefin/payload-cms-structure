@@ -11,7 +11,7 @@ function RolesSection({ onboardingRoleData }: Props) {
       <h1 className="global-h1 font-semibold text-[#434342] uppercase">
         Where Freedom Meets <span className="text-[#ED7125]">Opportunity</span>
       </h1>
-      <div className="mt-10">
+      <div className="mt-6 md:mt-10">
         {/* left side */}
         <div className="flex lg:gap-12 xl:gap-20 2xl:gap-x-20">
           {/* image with gradient */}
@@ -22,7 +22,7 @@ function RolesSection({ onboardingRoleData }: Props) {
           "
           >
             <img
-              src="/assets/agentOnboardingBanner.png"
+              src="/assets/agent-onboarding/web/agentOnboardingBanner.jpg"
               alt="All About"
               className="object-cover w-full h-full"
             />
@@ -34,9 +34,9 @@ function RolesSection({ onboardingRoleData }: Props) {
         {/* right-side */}
         <div
           className="absolute z-40
-        top-[60%] md:top-[61%] lg:top-[22%] xl:top-[23%] 2xl:top-1/4 
-        left-[2%] md:left-[5%] lg:left-[200px] xl:left-[220px] 2xl:left-[400px] 
-        w-[95%] md:w-[90%] lg:w-[80%] xl:w-[83%] 2xl:w-[1500px]"
+        top-[45%] md:top-[45%] lg:top-[22%] xl:top-[23%] 2xl:top-1/4 
+        left-[20%] md:left-[16%] lg:left-[200px] xl:left-[220px] 2xl:left-[400px] 
+        w-[91%] md:w-[90%] lg:w-[80%] xl:w-[83%] 2xl:w-[1500px]"
         >
           <RolesCardList onboardingRoleData={onboardingRoleData} />
         </div>

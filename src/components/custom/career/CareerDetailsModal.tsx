@@ -46,7 +46,16 @@ const CareerDetailsModal: FC<CareerDetailsModalProps> = ({ open, onOpenChange, d
         {/* Branding Row */}
         <div className="flex justify-between px-6 pt-4 pb-2 border-b">
           <div className="flex flex-col lg:flex-row lg:items-center gap-2">
-            <img src="/assets/modalBanner.png" alt="Modal Banner" />
+            <img
+              src="/assets/career/web/modalBanner.png"
+              alt="Modal Banner"
+              className="hidden md:block"
+            />
+            <img
+              src="/assets/career/mobile/modalBanner.png"
+              alt="Modal Mobile Banner"
+              className="block md:hidden"
+            />
             <div className="text-[#ED7125] text-[18px] lg:text-[22px] xl:text-[32px] font-bold">
               JOIN US <br className="hidden md:block" />
               IN CRAFTING A <br className="hidden md:block" />
