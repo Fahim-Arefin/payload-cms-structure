@@ -18,8 +18,17 @@ function AllPlanCard({ data, blur }: Props) {
     rounded-[6px] xl:rounded-[10px] 2xl:rounded-[10px] "
     >
       {/* Background image only */}
+      {/* mobile */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 scale-100 group-hover:scale-105"
+        className="lg:hidden absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 scale-100 group-hover:scale-105"
+        style={{
+          backgroundImage: `url('${data?.mobileImage}')`,
+          backgroundColor: 'lightgray',
+        }}
+      />
+      {/* web */}
+      <div
+        className="hidden lg:block absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 scale-100 group-hover:scale-105"
         style={{
           backgroundImage: `url('${data?.image}')`,
           backgroundColor: 'lightgray',
@@ -27,7 +36,7 @@ function AllPlanCard({ data, blur }: Props) {
       />
 
       {/* Gradient overlay with hover effect */}
-      <div className="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition-all duration-300 z-10" />
+      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-300 z-10" />
 
       {/* Content */}
       <div
@@ -37,7 +46,7 @@ function AllPlanCard({ data, blur }: Props) {
       >
         <div className="h-[50%] flex items-start">
           <div
-            className={`text-[20px] lg:text-[24px] xl:text-[28px] 2xl:text-[32px]  uppercase mx-auto lg:mx-0 text-center lg:text-start ${data?.biggerTitle ? 'font-light' : 'font-medium'}`}
+            className={`text-[20px] xl:text-[28px] 2xl:text-[32px]  uppercase mx-auto lg:mx-0 text-center lg:text-start ${data?.biggerTitle ? 'font-light' : 'font-medium'}`}
           >
             {data?.title}
             <br></br>
@@ -50,7 +59,7 @@ function AllPlanCard({ data, blur }: Props) {
         </div>
         {/* blur section */}
         <div
-          className={`${blur && 'bg-black/20 backdrop-blur-[16.666666px] rounded-md px-3 py-4 md:px-4 md:py-4 lg:px-3 lg:py-2 xl:py-4 xl:px-3 w-[85%] md:w-[95%] mx-auto lg:w-full'} 
+          className={`${blur && 'bg-[#3A3A3A]/20 backdrop-blur-[21.599998474121094px] rounded-md px-3 py-4 md:px-4 md:py-4 lg:px-3 lg:py-2 xl:py-4 xl:px-3 w-[85%] md:w-[95%] mx-auto lg:w-full'} 
         h-[60%] flex flex-col justify-between`}
         >
           <p className="global-p2 text-center lg:text-start">
