@@ -77,6 +77,7 @@ export type PurchaseCardDataType = {
 
 export type PlanInfoDataType = {
   image: string
+  mobileImage: string
   description: string
 }
 

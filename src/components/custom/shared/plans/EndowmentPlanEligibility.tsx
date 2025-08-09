@@ -15,7 +15,7 @@ const EndowmentPlanEligibility = () => {
         <div className="flex flex-col md:flex-row gap-4 lg:gap-10 xl:gap-16 2xl:gap-20 mb-10">
           <EligibilityCard
             title="Eligibility"
-            icon="/assets/childIcon.svg"
+            icon="/assets/icons/web/childIcon.svg"
             // bgImage="/assets/eligibilityImage1.jpg"
             entryMin="30"
             entryMinLabel="Days"
