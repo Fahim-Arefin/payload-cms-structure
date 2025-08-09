@@ -18,7 +18,8 @@ import { useState } from 'react'
 const allNewsData: AllNewsAndBlogDataType[] = [
   {
     id: 1,
-    image: '/assets/news11.jpg',
+    image: '/assets/news-and-media/web/news11.jpg',
+    mobileImage: '/assets/news-and-media/mobile/news11.jpg',
     date: 'Jul 17, 2025',
     title: 'Shanta Life Insurance gets license to launch',
     description: `Bangladesh's insurance sector is set to expand through the launch of a new venture, "Shanta Life Insurance PLC".
@@ -26,17 +27,20 @@ const allNewsData: AllNewsAndBlogDataType[] = [
       It received the licence on November 7 from the Insurance Development and Regulatory Authority (IDRA), said a press release.
       "We are excited to step into a new sector," said Khondoker Monir Uddin, chairman and managing director of business conglomerate Shanta Holdings Ltd.
       `,
-    externalLink: 'https://www.thedailystar.net/business/news/shanta-life-insurance-gets-licence-launch-3464831',
+    externalLink:
+      'https://www.thedailystar.net/business/news/shanta-life-insurance-gets-licence-launch-3464831',
   },
   {
     id: 2,
-    image: '/assets/news2.jpg',
+    image: '/assets/news-and-media/web/news2.jpg',
+    mobileImage: '/assets/news-and-media/mobile/news2.jpg',
     date: 'Jul 17, 2025',
     title: 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
     description: `Shanta Life Insurance PLC, a new venture under Shanta Holdings, signed an MoU with Dhaka Bank to provide Bancassurance service through the bank's distribution channel.
     Sheikh Mohammad Maroof, managing director & CEO of Dhaka Bank and Nafis A Ahmed, chief executive officer of the Shanta Life Insurance, signed the MoU at the bank's head office in Dhaka recently.
     Through this MoU, Shanta Life Insurance intends to leverage the robust banking channel of Dhaka Bank to provide tailored insurance policies to the clients of the latter. This proposition will help to offer more financial products to the customers of the bank.`,
-    externalLink: 'https://www.thedailystar.net/business/organisation-news/press-releases/news/shanta-life-insurance-and-dhaka-bank-sign-mou-jointly-prepare-bancassurance-3843041',
+    externalLink:
+      'https://www.thedailystar.net/business/organisation-news/press-releases/news/shanta-life-insurance-and-dhaka-bank-sign-mou-jointly-prepare-bancassurance-3843041',
   },
   // {
   //   id: 3,
@@ -73,7 +77,7 @@ export default function AllNewsAccordionSection() {
 
   return (
     <div
-      className={`container-padding bg-[#FCF4EB] space-y-6 
+      className={`container-padding bg-[#FCF4EB] 
       ${
         showAll
           ? 'pb-12 md:pb-24 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]'
@@ -100,18 +104,25 @@ export default function AllNewsAccordionSection() {
               space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5 "
               >
                 <p className="text-[#6E6E6E] global-p2 uppercase tracking-[2px] ">{news.date}</p>
-                <p className="text-[16px] md:text-[18px] lg:text-[20px] xl:text-[24px] 2xl:text-[24px] font-normal">
-                  {news.title}
-                </p>
+                <p className="global-p1 font-normal">{news.title}</p>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-1 lg:pt-2 xl:pt-3.5 2xl:pt-4 ">
               <div className="flex flex-col md:flex-row gap-8 ">
                 <div className="">
+                  {/* mobile */}
+                  <img
+                    src={news.mobileImage}
+                    alt={news.title}
+                    className="lg:hidden rounded-lg
+                     w-full md:min-w-[200px] lg:min-w-[230px] xl:min-w-[300px] 2xl:min-w-[350px]  
+        h-[200px] md:h-[150px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px] "
+                  />
+                  {/* web */}
                   <img
                     src={news.image}
                     alt={news.title}
-                    className="rounded-lg
+                    className="hidden lg:block rounded-lg
                      w-full md:min-w-[200px] lg:min-w-[230px] xl:min-w-[300px] 2xl:min-w-[350px]  
         h-[200px] md:h-[150px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px] "
                   />
@@ -126,10 +137,10 @@ export default function AllNewsAccordionSection() {
                     {news.description}
                   </p>
                   <div>
-                    <Link 
+                    <Link
                       href={news?.externalLink || `/news-and-media/${news?.id}`}
-                      target={news?.externalLink ? "_blank" : "_self"}
-                      rel={news?.externalLink ? "noopener noreferrer" : undefined}
+                      target={news?.externalLink ? '_blank' : '_self'}
+                      rel={news?.externalLink ? 'noopener noreferrer' : undefined}
                     >
                       <Button
                         variant="link"
@@ -212,10 +223,10 @@ export default function AllNewsAccordionSection() {
                       {news.description}
                     </p>
                     <div>
-                      <Link 
+                      <Link
                         href={news?.externalLink || `/news-and-media/${news?.id}`}
-                        target={news?.externalLink ? "_blank" : "_self"}
-                        rel={news?.externalLink ? "noopener noreferrer" : undefined}
+                        target={news?.externalLink ? '_blank' : '_self'}
+                        rel={news?.externalLink ? 'noopener noreferrer' : undefined}
                       >
                         <Button
                           variant="link"
