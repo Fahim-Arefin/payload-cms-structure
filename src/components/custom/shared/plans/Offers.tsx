@@ -113,7 +113,7 @@ function Offers<T>({ data, subheading, cardComponent: CardComponent }: Props<T>)
 
   return (
     <div
-      className="px-5 py-12 
+      className="px-5 pt-12 pb-24
            md:p-24 
            lg:px-[100px]  lg:py-[100px] 
            xl:px-[200px]  xl:py-[100px] 
