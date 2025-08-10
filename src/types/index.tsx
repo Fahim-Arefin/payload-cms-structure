@@ -86,6 +86,7 @@ export type EndowmentDataType = {
   subtitle: string
   description: string
   image: string
+  mobileImage: string
   link: string
   feature: {
     name: string

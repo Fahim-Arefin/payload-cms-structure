@@ -78,7 +78,16 @@ function ContactUsSection() {
       2xl:left-28
       h-[63%] md:h-[75%] lg:h-[65%] xl:h-[70%] 2xl:h-[489px] 2xl:w-[900px]"
       >
-        <img src="/assets/askUsImage.png" alt="" className="h-full w-full" />
+        <img
+          src="/assets/solutions/individual/saving-and-investment/web/askUsImage.png"
+          alt=""
+          className="lg:hidden h-full w-full"
+        />
+        <img
+          src="/assets/solutions/individual/saving-and-investment/web/askUsImage.png"
+          alt=""
+          className="hidden lg:block h-full w-full"
+        />
       </div>
 
       {/* message arrow img  */}
@@ -87,7 +96,11 @@ function ContactUsSection() {
              w-[200px] md:w-[250px] lg:w-[250px] xl:w-[300px] 2xl:w-[460px]
              rotate-[20.397deg] z-10"
       >
-        <img src="/assets/contactUs3.png" alt="" className="w-full h-auto" />
+        <img
+          src="/assets/solutions/individual/saving-and-investment/web/contactUs3.png"
+          alt=""
+          className="w-full h-auto"
+        />
       </div>
 
       {/* hanging phone  */}
@@ -95,28 +108,64 @@ function ContactUsSection() {
         className="z-10 absolute top-0 right-[85%]
                     h-1/3"
       >
-        <img src="/assets/contactUs4.png" alt="" className="h-full" />
+        <img
+          src="/assets/solutions/individual/saving-and-investment/web/contactUs4.png"
+          alt=""
+          className="lg:hidden h-full"
+        />
+        <img
+          src="/assets/solutions/individual/saving-and-investment/web/contactUs4.png"
+          alt=""
+          className="hidden lg:block h-full"
+        />
       </div>
       {/* hanging phone  */}
       <div
         className="z-10 absolute top-0 right-[75%]
                     h-[40%]"
       >
-        <img src="/assets/contactUs5.png" alt="" className="h-full" />
+        <img
+          src="/assets/solutions/individual/saving-and-investment/web/contactUs5.png"
+          alt=""
+          className="lg:hidden h-full"
+        />
+        <img
+          src="/assets/solutions/individual/saving-and-investment/web/contactUs5.png"
+          alt=""
+          className="hidden lg:block h-full"
+        />
       </div>
       {/* hanging phone  */}
       <div
         className="z-10 absolute top-0 right-[65%]
                     h-1/3"
       >
-        <img src="/assets/contactUs4.png" alt="" className="h-full" />
+        <img
+          src="/assets/solutions/individual/saving-and-investment/web/contactUs4.png"
+          alt=""
+          className="lg:hidden h-full"
+        />
+        <img
+          src="/assets/solutions/individual/saving-and-investment/web/contactUs4.png"
+          alt=""
+          className="hidden lg:block h-full"
+        />
       </div>
       {/* hanging phone  */}
       <div
         className="z-10 absolute top-0 right-[55%]
                     h-1/3"
       >
-        <img src="/assets/contactUs5.png" alt="" className="h-full" />
+        <img
+          src="/assets/solutions/individual/saving-and-investment/web/contactUs5.png"
+          alt=""
+          className="lg:hidden h-full"
+        />
+        <img
+          src="/assets/solutions/individual/saving-and-investment/web/contactUs5.png"
+          alt=""
+          className="hidden lg:block h-full"
+        />
       </div>
 
       {/* form */}

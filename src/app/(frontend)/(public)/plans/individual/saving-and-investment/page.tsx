@@ -21,7 +21,8 @@ function SavingAndInvestment() {
   ]
 
   const planInfoData = {
-    image: '/assets/planInfo6.png',
+    image: '/assets/solutions/individual/saving-and-investment/web/planInfo6.png',
+    mobileImage: '/assets/solutions/individual/saving-and-investment/web/planInfo6.png',
     description:
       'Looking for a savings plan that does more than just save? Shanta Life brings you tailored savings & investment-linked insurance plans that secure your dreams—while protecting the ones you love.',
   }
@@ -34,30 +35,37 @@ function SavingAndInvestment() {
     feature: [
       {
         name: 'Maturity Value',
-        image: '/assets/feature1.png',
+        image: '/assets/icons/web/feature1.png',
+        mobileImage: '/assets/icons/mobile/feature1.png',
       },
       {
         name: 'Death Benefit',
-        image: '/assets/feature2.png',
+        image: '/assets/icons/web/feature2.png',
+        mobileImage: '/assets/icons/mobile/feature2.png',
       },
       {
         name: 'Grace Period',
-        image: '/assets/feature3.png',
+        image: '/assets/icons/web/feature3.png',
+        mobileImage: '/assets/icons/mobile/feature3.png',
       },
       {
         name: 'Surrender & Policy Loan Facility',
-        image: '/assets/feature4.png',
+        image: '/assets/icons/web/feature4.png',
+        mobileImage: '/assets/icons/mobile/feature4.png',
       },
       {
         name: 'Tax Benefits',
-        image: '/assets/feature5.png',
+        image: '/assets/icons/web/feature5.png',
+        mobileImage: '/assets/icons/mobile/feature5.png',
       },
       {
         name: 'Additional Rider Facility (If taken)',
-        image: '/assets/feature6.png',
+        image: '/assets/icons/web/feature6.png',
+        mobileImage: '/assets/icons/mobile/feature6.png',
       },
     ],
-    image: '/assets/endowment1.jpg',
+    image: '/assets/solutions/individual/saving-and-investment/web/endowment1.jpg',
+    mobileImage: '/assets/solutions/individual/saving-and-investment/mobile/endowment1.jpg',
     link: '/plans/individual/saving-and-investment/endowment',
   }
 
@@ -69,30 +77,37 @@ function SavingAndInvestment() {
     feature: [
       {
         name: 'Maturity Value',
-        image: '/assets/feature1.png',
+        image: '/assets/icons/web/feature1.png',
+        mobileImage: '/assets/icons/mobile/feature1.png',
       },
       {
         name: 'Death Benefit',
-        image: '/assets/feature2.png',
+        image: '/assets/icons/web/feature2.png',
+        mobileImage: '/assets/icons/mobile/feature2.png',
       },
       {
         name: 'Grace Period',
-        image: '/assets/feature3.png',
+        image: '/assets/icons/web/feature3.png',
+        mobileImage: '/assets/icons/mobile/feature3.png',
       },
       {
         name: 'Surrender & Policy Loan Facility',
-        image: '/assets/feature4.png',
+        image: '/assets/icons/web/feature4.png',
+        mobileImage: '/assets/icons/mobile/feature4.png',
       },
       {
         name: 'Tax Benefits',
-        image: '/assets/feature5.png',
+        image: '/assets/icons/web/feature5.png',
+        mobileImage: '/assets/icons/mobile/feature5.png',
       },
       {
         name: 'Additional Rider Facility (If taken)',
-        image: '/assets/feature6.png',
+        image: '/assets/icons/web/feature6.png',
+        mobileImage: '/assets/icons/mobile/feature6.png',
       },
     ],
-    image: '/assets/multistage-11.jpg',
+    image: '/assets/solutions/individual/saving-and-investment/web/multistage-11.jpg',
+    mobileImage: '/assets/solutions/individual/saving-and-investment/mobile/multistage-11.jpg',
     link: '/plans/individual/saving-and-investment/multistage',
   }
 
