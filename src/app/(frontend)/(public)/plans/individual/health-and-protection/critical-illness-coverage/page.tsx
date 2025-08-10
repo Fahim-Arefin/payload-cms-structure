@@ -20,7 +20,10 @@ function page() {
   ]
 
   const planInfoData = {
-    image: '/assets/planInfo5.svg',
+    image:
+      '/assets/solutions/individual/health-and-protection/critical-protection/web/planInfo5.svg',
+    mobileImage:
+      '/assets/solutions/individual/health-and-protection/critical-protection/mobile/planInfo5.svg',
     description:
       'Health struggles can come with financial struggles too—making recovery even harder. From rising medical bills to daily expenses, the burden can feel overwhelming. With Shanta Life’s Critical Protection Riders, you get financial security when you need it most—covering up to 25 major illnesses, depending on your plan.',
   }
