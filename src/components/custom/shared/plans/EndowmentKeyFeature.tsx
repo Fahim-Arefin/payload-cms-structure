@@ -19,7 +19,7 @@ function EndowmentKeyFeature({ data }: Props) {
           <div className="min-h-[40px] max-h-[40px] min-w-[40px] max-w-[40px] ">
             {/* mobile */}
             <img
-              src={content?.image}
+              src={content?.mobileImage}
               alt={content.title}
               className="lg:hidden h-full w-full object-contain"
             />
