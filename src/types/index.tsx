@@ -159,6 +159,8 @@ export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
 
 export type OfferDataType2 = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
+  bgMobileImage?: string
+  mobileImage?: string
   title: string
 }
 
@@ -182,8 +184,10 @@ export type ProtectionDataType = {
   subTitle: string
   smallTitle: string
   bgImage: string
+  bgMobileImage: string
   item: {
     image: string
+    mobileImage: string
     description: string
   }[]
 }

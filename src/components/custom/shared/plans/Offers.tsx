@@ -139,23 +139,26 @@ function Offers<T>({ data, subheading, cardComponent: CardComponent }: Props<T>)
           {data.map((item, index) => (
             <CarouselItem
               key={index}
-              className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/4 pr-1 lg:pr-2 xl:pr-6 2xl::pr-10"
+              className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/4 pr-1 lg:pr-1 xl:pr-2 2xl::pr-10"
             >
               <CardComponent data={item} />
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div
-          className="flex gap-2 absolute h-fit inset-x-0 justify-center lg:justify-end 
+
+        {(canScrollPrev || canScrollNext) && (
+          <div
+            className="flex gap-2 absolute h-fit inset-x-0 justify-center lg:justify-end 
         -bottom-12 md:-bottom-12 lg:-top-10 xl:-top-12 2xl:-top-14 lg:right-0 "
-        >
-          <CarouselNavButtons
-            onPrev={() => carouselApi?.scrollPrev()}
-            onNext={() => carouselApi?.scrollNext()}
-            hasPrev={canScrollPrev}
-            hasNext={canScrollNext}
-          />
-        </div>
+          >
+            <CarouselNavButtons
+              onPrev={() => carouselApi?.scrollPrev()}
+              onNext={() => carouselApi?.scrollNext()}
+              hasPrev={canScrollPrev}
+              hasNext={canScrollNext}
+            />
+          </div>
+        )}
       </Carousel>
     </div>
   )
