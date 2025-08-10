@@ -115,7 +115,7 @@ function QuoteSection() {
             </p>
           </div>
           {/* Info Container - Show on all screens when API response is available */}
-          {apiResponse ? (
+          {apiResponse && (
             <div
               className="grid grid-cols-2 md:grid-cols-4 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600] 
             py-2"
@@ -382,13 +382,6 @@ function QuoteSection() {
                   </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <div
-              className="bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600] flex justify-center items-center 
-            h-[100px] md:h-[200px] lg:h-[58%]  xl:h-[63%]  2xl:h-[62%] capitalize global-p1"
-            >
-              Waiting for calculted result ...
             </div>
           )}
           {/* Calculate Again Button - Only show on mobile when results are available */}
