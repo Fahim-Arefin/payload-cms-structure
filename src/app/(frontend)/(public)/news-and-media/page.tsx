@@ -68,19 +68,22 @@ export default function NewsAndMedia() {
   const insuranceCardData = [
     {
       title: 'Necessity of awareness of life insurance',
-      image: '/assets/thumbnails/1.jpg',
+      image: '/assets/news-and-media/web/thumbnails/1.jpg',
+      mobileImage: '/assets/news-and-media/mobile/thumbnails/1.jpg',
       videoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
       description: '',
     },
     {
       title: 'Living benefits of life insurance',
-      image: '/assets/thumbnails/2.jpg',
+      image: '/assets/news-and-media/web/thumbnails/2.jpg',
+      mobileImage: '/assets/news-and-media/mobile/thumbnails/2.jpg',
       videoLink: 'https://www.youtube.com/embed/mUn_HAvpbag',
       description: '',
     },
     {
       title: 'Digitalization of life insurance industry',
-      image: '/assets/thumbnails/3.jpg',
+      image: '/assets/news-and-media/web/thumbnails/3.jpg',
+      mobileImage: '/assets/news-and-media/mobile/thumbnails/3.jpg',
       videoLink: 'https://www.youtube.com/embed/DzMzN76gELM',
       description: '',
     },
@@ -110,8 +113,8 @@ export default function NewsAndMedia() {
             pt-[30px] md:pt-[40px] lg:pt-[50px] xl:pt-[60px] 2xl:pt-[70px]
             pb-12 md:pb-24 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]`}
       >
-        <div className="flex justify-end items-center mb-8 md:mb-12">
-          <h1 className="global-h1 font-semibold uppercase">VLOG</h1>
+        <div className="flex justify-center md:justify-end items-center mb-8 md:mb-12">
+          <h1 className="global-h1 font-semibold uppercase">VLOGS</h1>
         </div>
         <div className="grid grid-cols-3 gap-1 md:gap-2 lg:gap-6">
           {insuranceCardData?.map((item, i) => (

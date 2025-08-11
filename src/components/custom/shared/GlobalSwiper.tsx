@@ -117,6 +117,7 @@ import './slider.css'
 
 type SlideData = {
   src: string
+  mobileSrc: string
   alt: string
 }
 
@@ -179,7 +180,8 @@ export default function GlobalSwiper({ slidesData }: GlobalSwiperProps) {
               <div
                 className={`relative w-60 h-[18rem] md:h-[24rem] overflow-hidden shadow-md rounded-[16px]`}
               >
-                <img src={slide.src} alt={slide.alt} className="object-cover" />
+                <img src={slide.mobileSrc} alt={slide.alt} className="object-cover lg:hidden" />
+                <img src={slide.src} alt={slide.alt} className="object-cover hidden lg:block" />
               </div>
             </SwiperSlide>
           )

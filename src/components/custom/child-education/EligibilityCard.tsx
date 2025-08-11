@@ -3,6 +3,7 @@ import React from 'react'
 type EligibilityCardProps = {
   title: string
   icon: string // icon path
+  mobileIcon?: string // icon path
   bgImage?: string // background image path
   entryMin: string
   entryMinLabel: string
@@ -17,6 +18,7 @@ type EligibilityCardProps = {
 export const EligibilityCard: React.FC<EligibilityCardProps> = ({
   title,
   icon,
+  mobileIcon,
   bgImage,
   entryMin,
   entryMinLabel,
@@ -29,19 +31,20 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
 }) => {
   return (
     <div
-      className="bg-[#F6EDDD] rounded-xl p-4 lg:p-12 w-full h-auto xl:h-[535px] xl:w-[347px] overflow-hidden shadow-lg bg-cover bg-center flex flex-col"
+      className="bg-[#F6EDDD] rounded-xl p-4 lg:p-12 w-full h-auto xl:h-[535px] xl:w-[347px] overflow-hidden shadow-lg bg-cover bg-center flex flex-col "
       // style={{
       //   backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.40), rgba(0,0,0,0.30)), url('${bgImage}')`,
       // }}
     >
       <div className="flex flex-col gap-2 items-center">
-        <img src={icon} alt={title} className="w-14 h-14" />
+        <img src={mobileIcon} alt={title} className="lg:hidden w-14 h-14" />
+        <img src={icon} alt={title} className="hidden lg:block w-14 h-14" />
         <p className="uppercase text-[#434343] font-bold global-p1 mt-2">{title}</p>
       </div>
       <div className="flex flex-col justify-center items-center space-y-2 mt-4">
         {/* Entry Age */}
         <div
-          className="p-2 w-64 flex flex-col items-center shadow-md"
+          className="px-2 py-4 w-full md:w-[245px] lg:w-64 flex flex-col items-center shadow-md"
           style={{
             borderRadius: '6.667px',
             // background: 'rgba(156, 134, 57, 0.10)',
@@ -66,7 +69,7 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
         </div>
         {/* Policy Term */}
         <div
-          className="p-4 w-64 flex flex-col items-center shadow-md"
+          className="px-2 py-4 w-full md:w-[245px] lg:w-64 flex flex-col items-center shadow-md"
           style={{
             borderRadius: '6.667px',
             // background: 'rgba(156, 134, 57, 0.10)',
@@ -81,7 +84,7 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
         </div>
         {/* Maturity Age */}
         <div
-          className="p-4 w-64 flex flex-col items-center shadow-md"
+          className="px-2 py-4 w-full md:w-[245px] lg:w-64 flex flex-col items-center shadow-md"
           style={{
             borderRadius: '6.667px',
             // background: 'rgba(156, 134, 57, 0.10)',

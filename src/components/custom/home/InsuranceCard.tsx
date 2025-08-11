@@ -15,10 +15,20 @@ const content = (data: InsuranceCardDataType) => (
       bg-no-repeat bg-cover bg-center 
       bg-[#343A40] overflow-hidden cursor-pointer
     "
-      style={{
-        backgroundImage: `url(${data.image})`,
-      }}
+      // style={{
+      //   backgroundImage: `url(${data.image})`,
+      // }}
     >
+      {/* Mobile image: visible on mobile only */}
+      <div
+        className="absolute inset-0 bg-no-repeat bg-cover bg-center md:hidden"
+        style={{ backgroundImage: `url(${data.mobileImage})` }}
+      />
+      {/* Desktop image: visible on md and up */}
+      <div
+        className="absolute inset-0 bg-no-repeat bg-cover bg-center hidden md:block"
+        style={{ backgroundImage: `url(${data.image})` }}
+      />
 
       {/* Text Content */}
       <div

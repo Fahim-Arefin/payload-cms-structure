@@ -2,17 +2,10 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 import { cn } from '@/lib/utils'
-
-type DataProps = {
-  id: number
-  title: string
-  designation: string
-  description: string
-  image: string
-}
+import { Directors } from '@/types'
 
 type Props = {
-  data: DataProps
+  data: Directors
   titleColor: string
   reverse?: boolean // Controls image/desc order for desktop
 }
@@ -32,7 +25,7 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
     }
 
     checkIfTextClamped()
-    
+
     // Check again on window resize to handle responsive changes
     window.addEventListener('resize', checkIfTextClamped)
     return () => window.removeEventListener('resize', checkIfTextClamped)
@@ -53,10 +46,18 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
             reverse ? 'md:order-2' : 'md:order-1',
           )}
         >
+          {/* mobile */}
+          <img
+            src={data.mobileImage}
+            alt={data.title}
+            className="lg:hidden rounded-[20px] w-full max-w-[400px] h-[400px] md:h-[250px] lg:h-[300px] xl:h-[480px] object-cover shadow-md"
+            style={{ minHeight: '200px' }}
+          />
+          {/* web */}
           <img
             src={data.image}
             alt={data.title}
-            className="rounded-[20px] w-full max-w-[400px] h-[400px] md:h-[250px] lg:h-[300px] xl:h-[480px] object-cover shadow-md"
+            className="hidden lg:block rounded-[20px] w-full max-w-[400px] h-[400px] md:h-[250px] lg:h-[300px] xl:h-[480px] object-cover shadow-md"
             style={{ minHeight: '200px' }}
           />
         </div>
@@ -67,7 +68,9 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
             reverse ? 'md:order-1' : 'md:order-2',
           )}
         >
-          <h2 className={`global-h2 font-semibold text-[${titleColor}] mb-1 uppercase`}>{data.title}</h2>
+          <h2 className={`global-h2 font-semibold text-[${titleColor}] mb-1 uppercase`}>
+            {data.title}
+          </h2>
           <div className="font-medium global-span text-[#444] mb-1 uppercase">
             {data.designation}
           </div>
@@ -77,7 +80,7 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
               ref={textRef}
               className={cn(
                 'text-[#444] font-[350] text-justify text-base leading-7 xl:leading-10 md:global-p1',
-                !expanded && 'line-clamp-5 lg:line-clamp-6 xl:line-clamp-[7]',
+                !expanded && 'line-clamp-5 lg:line-clamp-5 xl:line-clamp-[7]',
               )}
             >
               {data.description}

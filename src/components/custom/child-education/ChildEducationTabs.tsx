@@ -54,7 +54,7 @@ export function ChildEducationTabs({ config, data }: Props) {
                 key={tab.value}
                 value={tab.value}
                 className={cn(
-                  'global-p1 font-medium px-2 py-2.5 md:py-6 relative flex justify-start uppercase ',
+                  'global-p1 font-semibold px-2 py-2.5 md:py-6 relative flex justify-start uppercase ',
                   index === 0 ? 'text-left' : 'text-left',
                   config?.length === 2 && 'w-[30%]',
                   activeTab === tab.value
@@ -62,7 +62,7 @@ export function ChildEducationTabs({ config, data }: Props) {
                     : 'text-[#434343]',
                 )}
               >
-                {(() => {
+                {/* {(() => {
                   const words = tab.label.trim().split(' ')
                   const last = words.pop()
                   return (
@@ -75,7 +75,14 @@ export function ChildEducationTabs({ config, data }: Props) {
                       </span>
                     </>
                   )
-                })()}
+                })()} */}
+                {
+                  <span
+                    className={` ${activeTab === tab.value ? ' text-[#ED7125] ' : ' text-[#434343] '}`}
+                  >
+                    {tab.label}
+                  </span>
+                }
               </TabsTrigger>
             ))}
           </TabsList>

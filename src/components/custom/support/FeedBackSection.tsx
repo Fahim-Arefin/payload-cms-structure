@@ -67,9 +67,16 @@ function FeedBackSection({}: Props) {
     >
       {/* Background layer */}
       <div
-        className="
+        className="lg:hidden
           absolute inset-0 z-0 rounded-[8px]
-          bg-[linear-gradient(0deg,_rgba(0,0,0,0.5)_0%,_rgba(0,0,0,0.5)_100%),url('/assets/feedback.jpg')]
+          bg-[linear-gradient(0deg,_rgba(0,0,0,0.5)_0%,_rgba(0,0,0,0.5)_100%),url('/assets/supportpage/mobile/feedback.jpg')]
+          bg-no-repeat bg-center bg-cover
+        "
+      />
+      <div
+        className="hidden lg:block
+          absolute inset-0 z-0 rounded-[8px]
+          bg-[linear-gradient(0deg,_rgba(0,0,0,0.5)_0%,_rgba(0,0,0,0.5)_100%),url('/assets/supportpage/web/feedback.jpg')]
           bg-no-repeat bg-center bg-cover
         "
       />
@@ -150,8 +157,8 @@ function FeedBackSection({}: Props) {
               className="hidden lg:block h-[45px] lg:h-[50px] xl:h-[60px] 
               lg:w-[180px] xl:w-[240px]
               lg:rounded-[6px] xl:rounded-[8px]
-              font-normal
-              lg:text-[16px] xl:text-[18px]"
+              font-normal lg:text-[16px] xl:text-[18px]
+              "
             >
               {sendButtonText == 'Sending...' ? (
                 <Loader className="inline mb-1" />
@@ -161,7 +168,7 @@ function FeedBackSection({}: Props) {
                 <SendHorizontal className="inline mb-1" />
               )}
 
-              <span className="text-lg ml-2">{sendButtonText}</span>
+              <span className="ml-2.5">{sendButtonText}</span>
             </Button>
           </div>
 
@@ -186,8 +193,7 @@ function FeedBackSection({}: Props) {
                 className="lg:hidden h-[45px] lg:h-[50px] xl:h-[60px] 
                 lg:w-[180px] xl:w-[240px]
                 lg:rounded-[6px] xl:rounded-[8px]
-                font-normal
-                lg:text-[16px] xl:text-[18px]"
+                font-normal flex items-center"
               >
                 {sendButtonText == 'Sending...' ? (
                   <Loader className="inline mb-1" />
@@ -197,7 +203,7 @@ function FeedBackSection({}: Props) {
                   <SendHorizontal className="inline mb-1" />
                 )}
 
-                <span className="text-lg ml-2">{sendButtonText}</span>
+                <span className="">{sendButtonText}</span>
               </Button>
             </div>
           </div>

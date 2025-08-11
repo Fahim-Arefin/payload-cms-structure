@@ -7,20 +7,27 @@ type Props = {
 
 function EndowmentKeyFeature({ data }: Props) {
   return (
-    <div className="py-8 md:py-0 grid grid-cols-1 md:grid-cols-2 md:gap-4 ">
+    <div className="py-[15px] md:py-0 grid grid-cols-1 md:grid-cols-2 md:gap-4">
       {data?.map((content: any, i: number) => (
         <div
           key={content?.title + i}
           className={cn(
-            'flex flex-col items-center md:items-start justify-center md:justify-start space-y-4 md:space-y-0 w-[65%] md:w-full mx-auto lg:mx-0 md:flex-row md:space-x-2 2xl:space-x-4 xl:w-[80%] p-4',
+            ' flex flex-col items-center md:items-start justify-center md:justify-start w-[80%] md:w-full mx-auto lg:mx-0 md:flex-row md:space-x-2 2xl:space-x-4 xl:w-[80%] p-2 lg:p-3 xl:p-4',
             i % 2 === 0 ? '' : ' lg:ml-auto',
           )}
         >
-          <div className="h-[40px] w-[40px] ">
+          <div className="min-h-[40px] max-h-[40px] min-w-[40px] max-w-[40px] ">
+            {/* mobile */}
+            <img
+              src={content?.mobileImage}
+              alt={content.title}
+              className="lg:hidden h-full w-full object-contain"
+            />
+            {/* web */}
             <img
               src={content?.image}
               alt={content.title}
-              className="h-full w-full object-contain"
+              className="hidden lg:block h-full w-full object-contain"
             />
           </div>
           <div
@@ -34,16 +41,16 @@ function EndowmentKeyFeature({ data }: Props) {
               {content.description}
             </p>
             {content.listItems && Array.isArray(content.listItems) && (
-              // <ul className="list-disc  pl-4 mt-2 space-y-1 text-[#434342] global-p2 font-light lg:leading-6 text-center md:text-start">
+              // <ul className="list-disc mt-2 space-y-1 text-[#434342] global-p2 font-light lg:leading-6 text-center md:text-start ">
               //   {content.listItems.map((item: string, liIdx: number) => (
-              //     <li key={liIdx} className="leading-snug">
+              //     <li key={liIdx} className="leading-snug list-inside sm:list-outside">
               //       {item}
               //     </li>
               //   ))}
               // </ul>
-              <ul className="list-disc pl-5 mt-2 space-y-1 text-[#434342] global-p2 font-light lg:leading-6 text-center md:text-start ">
+              <ul className="list-disc list-outside pl-[26px] mt-2 space-y-1 text-[#434342] global-p2 font-light lg:leading-6 text-left md:text-start marker:text-[#434342]">
                 {content.listItems.map((item: string, liIdx: number) => (
-                  <li key={liIdx} className="leading-snug list-inside sm:list-outside">
+                  <li key={liIdx} className="leading-snug">
                     {item}
                   </li>
                 ))}

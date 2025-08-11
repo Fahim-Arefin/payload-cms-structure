@@ -99,6 +99,7 @@ import { BsPlay } from 'react-icons/bs'
 type NewsItem = {
   id: number
   image: string
+  mobileImage: string
   date: string
   title: string
   description: string
@@ -108,16 +109,18 @@ type NewsItem = {
 const newsItems: NewsItem[] = [
   {
     id: 1,
-    image: '/assets/thumbnails/yt-thumbnail-4.jpg',
+    image: '/assets/supportpage/web/thumbnails/yt-thumbnail-4.jpg',
+    mobileImage: '/assets/supportpage/mobile/thumbnails/yt-thumbnail-4.jpg',
     date: '15 Jan 2024 | 10.00am',
     title: 'Understanding Life Insurance Basics',
     description:
-      'Learn the fundamental concepts of life insurance and how it can protect your family\'s financial future. Discover the different types of policies available and find the right coverage for your needs. Our expert explains key terms, benefits, and important considerations when choosing life insurance.',
+      "Learn the fundamental concepts of life insurance and how it can protect your family's financial future. Discover the different types of policies available and find the right coverage for your needs. Our expert explains key terms, benefits, and important considerations when choosing life insurance.",
     videoLink: 'https://www.youtube.com/embed/YbnlDrexiGE',
   },
   {
     id: 2,
-    image: '/assets/thumbnails/yt-thumbnail-1.jpg',
+    image: '/assets/supportpage/web/thumbnails/yt-thumbnail-1.jpg',
+    mobileImage: '/assets/supportpage/mobile/thumbnails/yt-thumbnail-1.jpg',
     date: '22 Feb 2024 | 2.30pm',
     title: 'Expert Insurance Guidance & Tips',
     description:
@@ -126,11 +129,12 @@ const newsItems: NewsItem[] = [
   },
   {
     id: 3,
-    image: '/assets/thumbnails/yt-thumbnail-4.jpg',
+    image: '/assets/supportpage/web/thumbnails/yt-thumbnail-4.jpg',
+    mobileImage: '/assets/supportpage/mobile/thumbnails/yt-thumbnail-4.jpg',
     date: '15 Jan 2024 | 11.30am',
     title: 'Life Insurance Planning Strategies',
     description:
-      'Explore comprehensive strategies for incorporating life insurance into your financial planning. Understand how to align coverage with your life goals, protect your family\'s lifestyle, and ensure financial security for the future.',
+      "Explore comprehensive strategies for incorporating life insurance into your financial planning. Understand how to align coverage with your life goals, protect your family's lifestyle, and ensure financial security for the future.",
     videoLink: 'https://www.youtube.com/embed/YbnlDrexiGE',
   },
 ]
@@ -168,13 +172,28 @@ function AllNewsContainer() {
       <Dialog open={open} onOpenChange={setOpen}>
         <div className="relative rounded-[6px] cursor-pointer" onClick={() => setOpen(true)}>
           <img
-            src="/assets/thumbnails/yt-thumbnail-4.jpg"
+            src="/assets/supportpage/mobile/thumbnails/yt-thumbnail-4.jpg"
             alt="Main news"
-            className="w-full rounded-[6px] object-cover 
+            className="lg:hidden w-full rounded-[6px] object-cover 
+          h-[250px] md:h-[350px] lg:h-full"
+          />
+          <img
+            src="/assets/supportpage/web/thumbnails/yt-thumbnail-4.jpg"
+            alt="Main news"
+            className="hidden lg:block w-full rounded-[6px] object-cover 
           h-[250px] md:h-[350px] lg:h-full"
           />
           <div className="opacity-0 hover:opacity-100 flex transition-all duration-300 absolute inset-0 items-center bg-black/50 justify-center rounded-[6px]">
-            <img src="/assets/play2.png" alt="play" />
+            <img
+              className="lg:hidden w-12 h-12 md:w-16 md:h-16"
+              src="/assets/supportpage/mobile/play2.png"
+              alt="play"
+            />
+            <img
+              className="hidden lg:block lg:w-12 lg:h-12 xl:w-16 xl:h-16"
+              src="/assets/supportpage/web/play2.png"
+              alt="play"
+            />
           </div>
         </div>
 
@@ -216,9 +235,14 @@ function AllNewsContainer() {
               }}
             >
               <img
+                src={item.mobileImage}
+                alt={item.title}
+                className="object-cover rounded-md h-full w-full lg:hidden"
+              />
+              <img
                 src={item.image}
                 alt={item.title}
-                className="object-cover rounded-md h-full w-full"
+                className="object-cover rounded-md h-full w-full hidden lg:block"
               />
               {/* Play button overlay */}
               <div className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/50 transition-all duration-300 rounded-md">
@@ -226,9 +250,18 @@ function AllNewsContainer() {
               </div>
             </div>
             <div className="space-y-2 xl:space-y-3">
-              <div className="flex items-center space-x-2">
-                <Image src="/assets/calender2.png" alt="calendar" width={16} height={16} />
-                <p className="text-[11px]">{item.date}</p>
+              <div className="flex items-center">
+                <img
+                  src="/assets/supportpage/mobile/calender2.png"
+                  alt="calendar"
+                  className="lg:hidden "
+                />
+                <img
+                  src="/assets/supportpage/web/calender2.png"
+                  alt="calendar"
+                  className="hidden lg:block"
+                />
+                <p className="text-[11px] ml-2">{item.date}</p>
               </div>
               <h3 className="text-[#ED7125]  text-[11px] md:text-[15px]">{item.title}</h3>
               {/* description 2xl */}

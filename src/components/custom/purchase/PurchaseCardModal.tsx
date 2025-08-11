@@ -20,78 +20,78 @@ const tabContent = [
       {
         title: 'Maturity Benefit',
         description: 'Receive a guaranteed sum assured at the end of the policy term.',
-        image: '/assets/childTabIcon2.png',
+        image: '/assets/icons/web/childTabIcon2.png',
       },
       {
         title: 'Tax Benefits',
         description: 'Enjoy tax rebates on premiums, subject to prevailing tax laws.',
-        image: '/assets/childTabIcon3.png',
+        image: '/assets/icons/web/childTabIcon3.png',
       },
       {
         title: 'Flexible Premium Payments',
         description:
           'Pay your premiums monthly, quarterly, half-yearly, or annually—your choice, your pace.',
-        image: '/assets/childTabIcon6.png',
+        image: '/assets/icons/web/childTabIcon6.png',
       },
       {
         title: 'Life Coverage',
         description:
           'In the event of the policyholder’s death during the term, the nominee receives the full sum assured.',
-        image: '/assets/childTabIcon5.png',
+        image: '/assets/icons/web/childTabIcon5.png',
       },
       {
         title: 'Customizable Coverage',
         description: 'Choose a sum assured that fits your financial goals.',
-        image: '/assets/childTabIcon1.png',
+        image: '/assets/icons/web/childTabIcon1.png',
       },
       {
         title: 'Partner Discounts',
         description:
           'Get exclusive discounts on medical and diagnostic services at select hospitals and diagnostic centers in our partner network.',
-        image: '/assets/childTabIcon4.png',
+        image: '/assets/icons/web/childTabIcon4.png',
       },
     ],
   },
 
   // Tab 2: Multiple Guaranteed Payouts, Maturity Benefit, Life Coverage, Tax Benefits, Flexible Premium Payments, Healthcare Partner Discounts
- {
+  {
     content: [
       {
         title: 'Maturity Benefit',
         description:
           'Receive the full sum assured at the end of the policy term to support higher education goals.',
-        image: '/assets/childTabIcon2.png',
+        image: '/assets/icons/web/childTabIcon2.png',
       },
       {
         title: 'Life Coverage',
-        description: "In the event of the parent’s death, the plan ensures:",
+        description: 'In the event of the parent’s death, the plan ensures:',
         listItems: [
           "Monthly stipend (1%, 2%, or 3% of the sum assured, based on plan choice) till policy maturity to ensure the child's education quality.",
           'Waiver of all future premiums while continuing full coverage.',
           'Full maturity benefit paid at term-end.',
         ],
-        image: '/assets/childTabIcon5.png',
+        image: '/assets/icons/web/childTabIcon5.png',
       },
       {
         title: 'Tax Benefits',
         description: 'Enjoy tax rebates on premiums, avail upto 15% tax rebate.',
-        image: '/assets/childTabIcon3.png',
+        image: '/assets/icons/web/childTabIcon3.png',
       },
       {
         title: 'Customizable Coverage',
         description: 'Choose a sum assured based on your child’s future needs.',
-        image: '/assets/childTabIcon1.png',
+        image: '/assets/icons/web/childTabIcon1.png',
       },
       {
         title: 'Flexible Premium Payments',
         description: 'Opt for monthly, quarterly, half-yearly, or annual premium modes.',
-        image: '/assets/childTabIcon6.png',
+        image: '/assets/icons/web/childTabIcon6.png',
       },
       {
         title: 'Partner Discounts',
         description:
           'Avail exclusive discounts on medical and diagnostic services at partnered hospitals and diagnostic centers.',
-        image: '/assets/childTabIcon4.png',
+        image: '/assets/icons/web/childTabIcon4.png',
       },
     ],
   },
@@ -103,37 +103,37 @@ const tabContent = [
         title: 'Multiple Guaranteed Payouts',
         description:
           'Enjoy your benefits when you need them most—not just at the end. Structured payouts help you meet life’s big moments head-on.',
-        image: '/assets/childTabIcon2.png',
+        image: '/assets/icons/web/childTabIcon2.png',
       },
       {
         title: 'Maturity Benefit',
         description:
           'Receive the final lump sum at the end of your policy term to complete your journey with confidence.',
-        image: '/assets/childTabIcon2.png',
+        image: '/assets/icons/web/childTabIcon2.png',
       },
       {
         title: 'Life Coverage',
         description:
           'Life Coverage That Never Compromises. In case of the unfortunate demise passing, your family receives the full sum assured—regardless of earlier stage payouts.',
-        image: '/assets/childTabIcon5.png',
+        image: '/assets/icons/web/childTabIcon5.png',
       },
       {
         title: 'Tax Benefits',
         description:
           'Get rewarded for being responsible—enjoy up to 15% tax rebates on premiums under existing tax laws.',
-        image: '/assets/childTabIcon3.png',
+        image: '/assets/icons/web/childTabIcon3.png',
       },
       {
         title: 'Flexible Premium Payments',
         description:
           'Pay monthly, quarterly, half-yearly, or annually—it’s all about your convenience.',
-        image: '/assets/childTabIcon6.png',
+        image: '/assets/icons/web/childTabIcon6.png',
       },
       {
         title: 'Healthcare Partner Discounts',
         description:
           'Save more with exclusive discounts at top hospitals and diagnostic centers across our trusted partner network.',
-        image: '/assets/childTabIcon4.png',
+        image: '/assets/icons/web/childTabIcon4.png',
       },
     ],
   },

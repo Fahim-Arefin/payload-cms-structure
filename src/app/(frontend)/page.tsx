@@ -16,6 +16,7 @@ import HeroSectionWrapper from '@/components/custom/home/HeroSectionWrapper'
 import InsuranceSimplifiedLargeSection from '@/components/custom/home/InsuranceSimplifiedLargeSection'
 import SearchBarSection from '@/components/custom/home/SearchBarSection'
 import { InsuranceDataType } from '@/types'
+import LottiePlayer from '@/components/custom/shared/LottiePlayer'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -56,24 +57,28 @@ export default async function HomePage() {
       title: 'Expert Know - How',
       subtitle:
         'Life can be messy but your insurance doesn’t have to be. Learn how from our experts.',
-      mainImage: '/assets/thumbnails/yt-thumbnail-1.jpg',
+      mainImage: '/assets/homepage/web/thumbnails/yt-thumbnail-1.jpg',
+      mainMobileImage: '/assets/homepage/mobile/thumbnails/yt-thumbnail-1.jpg',
       mainVIdeoLink: 'https://www.youtube.com/embed/rcduE_ff314',
       insuranceCardData: [
         {
           title: '',
-          image: '/assets/thumbnails/yt-thumbnail-4.jpg',
+          image: '/assets/homepage/web/thumbnails/yt-thumbnail-4.jpg',
+          mobileImage: '/assets/homepage/mobile/thumbnails/yt-thumbnail-4.jpg',
           videoLink: 'https://www.youtube.com/embed/YbnlDrexiGE',
           description: '',
         },
         {
           title: '',
-          image: '/assets/thumbnails/yt-thumbnail-1.jpg',
+          image: '/assets/homepage/web/thumbnails/yt-thumbnail-1.jpg',
+          mobileImage: '/assets/homepage/mobile/thumbnails/yt-thumbnail-1.jpg',
           videoLink: 'https://www.youtube.com/embed/rcduE_ff314',
           description: '',
         },
         {
           title: '',
-          image: '/assets/thumbnails/yt-thumbnail-4.jpg',
+          image: '/assets/homepage/web/thumbnails/yt-thumbnail-4.jpg',
+          mobileImage: '/assets/homepage/mobile/thumbnails/yt-thumbnail-4.jpg',
           videoLink: 'https://www.youtube.com/embed/YbnlDrexiGE',
           description: '',
         },
@@ -84,24 +89,28 @@ export default async function HomePage() {
       content: 'right',
       title: 'demystify Life Insurance',
       subtitle: 'Detangle the basics of Life Insurance.',
-      mainImage: '/assets/thumbnails/yt-thumbnail-2.jpg',
+      mainImage: '/assets/homepage/web/thumbnails/yt-thumbnail-2.jpg',
+      mainMobileImage: '/assets/homepage/mobile/thumbnails/yt-thumbnail-2.jpg',
       mainVIdeoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
       insuranceCardData: [
         {
           title: '',
-          image: '/assets/thumbnails/yt-thumbnail-5.jpg',
+          image: '/assets/homepage/web/thumbnails/yt-thumbnail-5.jpg',
+          mobileImage: '/assets/homepage/mobile/thumbnails/yt-thumbnail-5.jpg',
           videoLink: 'https://www.youtube.com/embed/CkKkdNkBk9g',
           description: '',
         },
         {
           title: '',
-          image: '/assets/thumbnails/yt-thumbnail-6.jpg',
+          image: '/assets/homepage/web/thumbnails/yt-thumbnail-6.jpg',
+          mobileImage: '/assets/homepage/mobile/thumbnails/yt-thumbnail-6.jpg',
           videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
           description: '',
         },
         {
           title: '',
-          image: '/assets/thumbnails/yt-thumbnail-7.jpg',
+          image: '/assets/homepage/web/thumbnails/yt-thumbnail-7.jpg',
+          mobileImage: '/assets/homepage/mobile/thumbnails/yt-thumbnail-7.jpg',
           videoLink: 'https://www.youtube.com/embed/1CuBIcn5Ops',
           description: '',
         },
@@ -112,24 +121,28 @@ export default async function HomePage() {
       content: 'left',
       title: 'Zero-Hassle protection',
       subtitle: 'Get your life covered - fast, simple & smart.',
-      mainImage: '/assets/thumbnails/1.png',
+      mainImage: '/assets/homepage/web/thumbnails/1.png',
+      mainMobileImage: '/assets/homepage/mobile/thumbnails/1.png',
       mainVIdeoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
       insuranceCardData: [
         {
           title: '',
-          image: '/assets/thumbnails/1.jpg',
+          image: '/assets/homepage/web/thumbnails/1.jpg',
+          mobileImage: '/assets/homepage/mobile/thumbnails/1.jpg',
           videoLink: 'https://youtube.com/embed/n9fFhLkJwLg',
           description: '',
         },
         {
           title: '',
-          image: '/assets/thumbnails/2.jpg',
+          image: '/assets/homepage/web/thumbnails/2.jpg',
+          mobileImage: '/assets/homepage/mobile/thumbnails/2.jpg',
           videoLink: 'https://www.youtube.com/embed/mUn_HAvpbag',
           description: '',
         },
         {
           title: '',
-          image: '/assets/thumbnails/3.jpg',
+          image: '/assets/homepage/web/thumbnails/3.jpg',
+          mobileImage: '/assets/homepage/mobile/thumbnails/3.jpg',
           videoLink: 'https://www.youtube.com/embed/DzMzN76gELM',
           description: '',
         },

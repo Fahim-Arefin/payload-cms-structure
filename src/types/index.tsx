@@ -77,6 +77,7 @@ export type PurchaseCardDataType = {
 
 export type PlanInfoDataType = {
   image: string
+  mobileImage: string
   description: string
 }
 
@@ -85,6 +86,7 @@ export type EndowmentDataType = {
   subtitle: string
   description: string
   image: string
+  mobileImage: string
   link: string
   feature: {
     name: string
@@ -94,8 +96,10 @@ export type EndowmentDataType = {
 
 export type InsuranceCardDataType = Pick<
   AllPlantDataType,
-  'title' | 'description' | 'image' | 'videoLink' | 'mobileImage'
->
+  'title' | 'description' | 'image' | 'videoLink'
+> & {
+  mobileImage: string
+}
 
 export type InsuranceDataType = {
   content: 'left' | 'right'
@@ -103,6 +107,7 @@ export type InsuranceDataType = {
   title: string
   subtitle: string
   mainImage: string
+  mainMobileImage: string
   mainVIdeoLink: string
   insuranceCardData: InsuranceCardDataType[]
 }
@@ -154,6 +159,8 @@ export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
 
 export type OfferDataType2 = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
+  bgMobileImage?: string
+  mobileImage?: string
   title: string
 }
 
@@ -177,14 +184,17 @@ export type ProtectionDataType = {
   subTitle: string
   smallTitle: string
   bgImage: string
+  bgMobileImage: string
   item: {
     image: string
+    mobileImage: string
     description: string
   }[]
 }
 
 export type PayPremiumDataType = {
   bgImage: string
+  bgMobileImage: string
   item: {
     // image: string
     descriptionContent: string
@@ -197,6 +207,7 @@ export type Directors = {
   designation: string
   description: string
   image: string
+  mobileImage: string
 }
 
 export type Leaders = {
@@ -205,11 +216,13 @@ export type Leaders = {
   designation: string
   description: string
   image: string
+  mobileImage: string
 }
 
 export type AllNewsAndBlogDataType = {
   id: number
   image: string
+  mobileImage: string
   title: string
   description: string
   date: string

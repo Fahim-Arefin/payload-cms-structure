@@ -3,10 +3,12 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/componen
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import LevelUpCard from './LevelUpCard'
+import Autoplay from 'embla-carousel-autoplay'
 
 type Props = {
   data: {
     image: string
+    mobileImage: string
     title: string
     link?: string
   }[]
@@ -50,7 +52,13 @@ function LevelUpSection({ data }: Props) {
         <Carousel
           opts={{
             align: 'start',
+            loop: true,
           }}
+          plugins={[
+            Autoplay({
+              delay: 3000,
+            }),
+          ]}
           className=""
           setApi={setCarouselApi}
         >

@@ -48,7 +48,7 @@ export function Tab({ config, data }: Props) {
       >
         <div
           className="relative w-full border-b border-[#434343] md:py-[12px]  bg-white
-         md:mb-[30px] lg:mb-[50px] xl:mb-[100px]"
+         md:mb-[30px] lg:mb-[50px] xl:mb-[80px]"
         >
           {/* Tabs */}
           <TabsList
@@ -60,7 +60,7 @@ export function Tab({ config, data }: Props) {
                 key={tab.value}
                 value={tab.value}
                 className={cn(
-                  'global-p1 font-medium px-2 py-2.5 md:py-6 relative flex justify-start uppercase',
+                  'global-p1 font-semibold px-2 py-2.5 md:py-6 relative flex justify-start uppercase',
                   index === 0 ? 'text-left ' : 'text-left',
                   config?.length === 2 && 'w-[30%]',
                   activeTab === tab.value
@@ -68,7 +68,7 @@ export function Tab({ config, data }: Props) {
                     : 'text-[#434343]',
                 )}
               >
-                {(() => {
+                {/* {(() => {
                   const words = tab.label.trim().split(' ')
                   const last = words.pop()
                   return (
@@ -81,7 +81,14 @@ export function Tab({ config, data }: Props) {
                       </span>
                     </>
                   )
-                })()}
+                })()} */}
+                {
+                  <span
+                    className={` ${activeTab === tab.value ? ' text-[#ED7125] ' : ' text-[#434343] '}`}
+                  >
+                    {tab.label}
+                  </span>
+                }
               </TabsTrigger>
             ))}
           </TabsList>
@@ -94,7 +101,7 @@ export function Tab({ config, data }: Props) {
                 <div
                   key={`arrow-${i}`}
                   className="hidden md:block absolute -bottom-2.5 z-10"
-                  style={{ left: `${percent}%`, transform: 'translateX(-50%)' }}
+                  style={{ left: `${percent}%`, transform: 'translateX(-150%)' }}
                 >
                   <ArrowIcon />
                 </div>

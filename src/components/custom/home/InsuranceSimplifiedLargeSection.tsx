@@ -61,15 +61,24 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                   className={cn(
                     `relative group cursor-pointer 
         h-[150px] md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full  
-        bg-no-repeat bg-contain 
-        bg-center 
         overflow-hidden transition-all`,
                     content === 'left' ? 'order-2' : 'order-1',
                   )}
-                  style={{
-                    backgroundImage: `url(${data.mainImage})`,
-                  }}
+                  // style={{
+                  //   backgroundImage: `url(${data.mainImage})`,
+                  // }}
                 >
+                  {/* Mobile image: visible only on mobile */}
+                  <div
+                    className="absolute inset-0 md:hidden bg-no-repeat bg-contain bg-center"
+                    style={{ backgroundImage: `url(${data?.mainMobileImage})` }}
+                  />
+                  {/* Desktop/Tablet image: visible on md and up */}
+                  <div
+                    className="absolute inset-0 hidden md:block bg-no-repeat bg-contain bg-center"
+                    style={{ backgroundImage: `url(${data.mainImage})` }}
+                  />
+
                   {/* Hover dark overlay */}
                   <div
                     className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300 

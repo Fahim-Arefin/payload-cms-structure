@@ -20,9 +20,11 @@ function AllPlanSection({ plantData, children, blur }: Props) {
       </div>
       <div
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
-     gap-5 md:gap-8 lg:gap-5 xl:gap-12 2xl:gap-16"
+     gap-5 md:gap-8 lg:gap-2 xl:gap-8 2xl:gap-16"
       >
-        {plantData?.map((data, index) => <AllPlanCard key={index} data={data} blur={blur} />)}
+        {plantData?.map((data, index) => (
+          <AllPlanCard key={index} data={data} blur={blur} />
+        ))}
       </div>
     </div>
   )
