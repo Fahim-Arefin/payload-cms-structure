@@ -138,7 +138,7 @@ function LiscensedInfo({}: Props) {
             </svg>
           </div>
           <div className="uppercase global-h4">
-            <span className="">Launched : </span> <span> December 1st, 2024</span>
+            <span className="">Launched : </span> <span> December 1, 2024</span>
           </div>
         </div>
       </div>

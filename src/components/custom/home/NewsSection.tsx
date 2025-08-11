@@ -202,7 +202,7 @@ function NewsSection() {
             </p>
             <div className="flex items-center space-x-2">
               <img src="/assets/calender.png" alt="" className="w-4 h-4 md:w-6 md:h-6" />
-              <span className="text-xs xl:text-sm">08 Nov, 2023</span>
+              <span className="text-xs xl:text-sm">1st Dec, 2024</span>
             </div>
           </div>
         </div>
