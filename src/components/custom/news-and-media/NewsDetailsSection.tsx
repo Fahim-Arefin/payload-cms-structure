@@ -24,10 +24,24 @@ function NewsDetailsSection({ data, id }: Props) {
           <h2 className="global-h2 font-normal">{news?.title}</h2>
         </div>
         <div className="flex flex-col lg:flex-row gap-8 ">
+          {/* mobile */}
           <div
             role="img"
             aria-label={news.title}
-            className={`
+            className={`lg:hidden
+    rounded-lg 
+    w-full md:min-w-[200px] lg:min-w-[230px] xl:min-w-[300px] 2xl:min-w-[350px]
+    h-[220px] md:h-[350px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px]
+    bg-no-repeat bg-cover
+    bg-[position:0px_0px] 
+  `}
+            style={{ backgroundImage: `url(${news.mobileImage})` }}
+          ></div>
+          {/* web */}
+          <div
+            role="img"
+            aria-label={news.title}
+            className={`hidden lg:block
     rounded-lg 
     w-full md:min-w-[200px] lg:min-w-[230px] xl:min-w-[300px] 2xl:min-w-[350px]
     h-[220px] md:h-[350px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px]
@@ -63,7 +77,7 @@ function NewsDetailsSection({ data, id }: Props) {
                 </p>
               )
             })}
-            
+
             {/* External News Link */}
             {news?.externalLink && (
               <div className="mt-6 pt-4 border-t border-gray-200">

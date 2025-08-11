@@ -72,7 +72,8 @@ function page() {
   }
 
   const bankData = {
-    bgImage: '/assets/bank_teller.jpg',
+    bgImage: '/assets/paypremium/web/bank_teller.jpg',
+    bgMobileImage: '/assets/paypremium/mobile/bank_teller.jpg',
     item: [
       {
         image: '/assets/protection5.png',
@@ -110,7 +111,8 @@ function page() {
     ],
   }
   const debitData = {
-    bgImage: '/assets/eft-payment_1.jpg',
+    bgImage: '/assets/paypremium/web/eft-payment_1.jpg',
+    bgMobileImage: '/assets/paypremium/mobile/eft-payment_1.jpg',
     content: `You can conveniently pay your premium using EFT (Electronic Funds Transfer) Debit Authorization. 
     This secure and efficient method ensures that the premium amount is automatically debited from your designated bank account on the due date, 
     eliminating the risk of missed payments and keeping your policy active without any hassle. 

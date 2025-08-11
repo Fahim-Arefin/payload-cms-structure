@@ -45,7 +45,7 @@ function AwardSection() {
                   {/* img */}
                   <div className="p-2 2xl:p-4 border-2 rounded-t-xl border-[#9A4E46] ">
                     <div className="">
-                      <img src="/assets/award1.png" alt="" />
+                      <img src="/assets/homepage/web/award1.png" alt="" />
                     </div>
                   </div>
                   {/* info */}
@@ -63,7 +63,7 @@ function AwardSection() {
                   {/* svg */}
                   <div className="p-2 2xl:p-4 border-2 rounded-t-xl border-[#9A4E46]">
                     <div className="">
-                      <img src="/assets/award2.png" alt="" />
+                      <img src="/assets/homepage/web/award2.png" alt="" />
                     </div>
                   </div>
                   {/* info */}
@@ -81,7 +81,7 @@ function AwardSection() {
                   {/* svg */}
                   <div className="p-2 2xl:p-4 border-2 rounded-b-xl border-[#9A4E46]">
                     <div className="">
-                      <img src="/assets/award3.png" alt="" />
+                      <img src="/assets/homepage/web/award3.png" alt="" />
                     </div>
                   </div>
                   {/* info */}
@@ -90,7 +90,7 @@ function AwardSection() {
                       235
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Satisfied Customer
+                      Satisfied Customers
                     </div>
                   </div>
                 </div>
@@ -99,7 +99,7 @@ function AwardSection() {
                   {/* svg */}
                   <div className="p-2 2xl:p-4 border-2 rounded-b-xl border-[#9A4E46]">
                     <div className="">
-                      <img src="/assets/award4.png" alt="" />
+                      <img src="/assets/homepage/web/award4.png" alt="" />
                     </div>
                   </div>
                   {/* info */}

@@ -53,7 +53,7 @@ function NewsDetailsSlider({ data, id }: Props) {
             setApi={setCarouselApi} // 👈 capture carousel API
             plugins={[
               Autoplay({
-                delay: 5000,
+                delay: 3000,
               }),
             ]}
           >

@@ -21,14 +21,35 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
       }}
     >
       <div
-        className={`grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-9 2xl:gap-16 ${align === 'left' ? ' lg:gap-0 ' : 'gap-7'}`}
+        className={`grid grid-cols-1 lg:grid-cols-2 gap-7 md:gap-12 xl:gap-9 2xl:gap-16 ${align === 'left' ? ' lg:gap-0 ' : 'lg:gap-7'}`}
       >
         {/* left content */}
+        {/* mobile */}
         <div
-          className={`
+          className={`lg:hidden
             relative 
             w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} xl:w-full
-            h-[250px] md:h-[300px] lg:h-[440px] xl:h-[600px] 2xl:h-[700px]
+            h-[250px] md:h-[350px] lg:h-[440px] xl:h-[600px] 2xl:h-[700px]
+            rounded-[8px] md:rounded-[10px] lg:rounded-[8px]  xl:rounded-[12px] 
+            bg-[lightgray]  
+            bg-no-repeat 
+           bg-cover lg:bg-center
+            overflow-hidden
+           ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}
+          style={{ backgroundImage: `url(${data?.bgMobileImage})` }}
+          role="img"
+          aria-label="Background image"
+        >
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/10 " />
+        </div>
+
+        {/* web */}
+        <div
+          className={`hidden lg:block
+            relative 
+            w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} xl:w-full
+            h-[250px] md:h-[350px] lg:h-[440px] xl:h-[600px] 2xl:h-[700px]
             rounded-[8px] md:rounded-[10px] lg:rounded-[8px]  xl:rounded-[12px] 
             bg-[lightgray]  
             bg-no-repeat 
@@ -44,10 +65,6 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
         </div>
         {/* right content */}
         <div
-          //   className={`
-          //   xl:py-10 2xl:py-12
-          // space-y-4 lg:space-y-4 xl:space-y-7
-          // ${align === 'left' ? 'order-2 lg:py-6' : 'order-2 lg:order-1 lg:py-0'}`}
           className={`
           flex flex-col justify-center
         space-y-4 lg:space-y-4 xl:space-y-7
@@ -81,7 +98,8 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
                            h-[35px] md:h-[40px] lg:h-[30px] xl:h-[40px] 2xl:h-[46px] 
                            "
               >
-                <img src={eachItem?.image} alt="icons" className="w-full h-full" />
+                <img src={eachItem?.mobileImage} alt="icons" className="lg:hidden w-full h-full" />
+                <img src={eachItem?.image} alt="icons" className="hidden lg:block w-full h-full" />
               </div>
               <div className="text-[12px] md:text-[14px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px] text-[#434343] font-semibold ">
                 {eachItem?.description}

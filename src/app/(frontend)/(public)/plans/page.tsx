@@ -23,13 +23,15 @@ function PlanPage() {
       title: 'INDIVIDUAL',
       description: 'Because your protection should be as exceptional as you are.',
       link: '/plans/individual',
-      image: '/assets/plan1.jpg',
+      image: '/assets/solutions/web/plan1.jpg',
+      mobileImage: '/assets/solutions/mobile/plan1.jpg',
     },
     {
       title: 'CORPORATE',
       description: 'Corporate policies as sharp as your strategy.',
       link: '/plans/corporate',
-      image: '/assets/plan2.jpg',
+      image: '/assets/solutions/web/plan2.jpg',
+      mobileImage: '/assets/solutions/mobile/plan2.jpg',
     },
     // BANCASSURANCE will be omitted for now
     // {
@@ -37,7 +39,7 @@ function PlanPage() {
     //   description:
     //     'Money moves meet smart moves. Integrated coverage that fits into your financial routine.',
     //   link: '/plans/bancassurance',
-    //   image: '/assets/plan3.jpg',
+    //   image: '/assets/solutions/web/plan3.jpg',
     // },
   ]
 

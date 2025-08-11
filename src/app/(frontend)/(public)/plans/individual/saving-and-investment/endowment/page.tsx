@@ -21,7 +21,9 @@ function EndowmentPage() {
   ]
 
   const planInfoData = {
-    image: '/assets/planInfo2.png',
+    image: '/assets/solutions/individual/saving-and-investment/endowment/web/planInfo2.png',
+    mobileImage:
+      '/assets/solutions/individual/saving-and-investment/endowment/mobile/planInfo2.png',
     description:
       'Secure your future with confidence. Shanta Life\u2019s Endowment Plan offers policyholders a guaranteed sum assured, seamlessly blending savings and life insurance to ensure long-term financial security for their families.',
   }
@@ -47,35 +49,41 @@ function EndowmentPage() {
       {
         title: 'Maturity Benefit',
         description: 'Receive a guaranteed sum assured at the end of the policy term.',
-        image: '/assets/tabimage1.png',
+        image: '/assets/icons/web/childTabIcon2.png',
+        mobileImage: '/assets/icons/mobile/childTabIcon2.png',
       },
       {
         title: 'Tax Benefits',
         description: 'Enjoy tax rebates on premiums, subject to prevailing tax laws.',
-        image: '/assets/tabimage2.png',
+        image: '/assets/icons/web/childTabIcon3.png',
+        mobileImage: '/assets/icons/mobile/childTabIcon3.png',
       },
       {
         title: 'Flexible Premium Payments',
         description:
           'Pay your premiums monthly, quarterly, half-yearly, or annually—your choice, your pace.',
-        image: '/assets/tabimage3.png',
+        image: '/assets/icons/web/childTabIcon6.png',
+        mobileImage: '/assets/icons/mobile/childTabIcon6.png',
       },
       {
         title: 'Life Coverage',
         description:
           'In the event of the policyholder’s death during the term, the nominee receives the full sum assured.',
-        image: '/assets/tabimage4.png',
+        image: '/assets/icons/web/childTabIcon5.png',
+        mobileImage: '/assets/icons/mobile/childTabIcon5.png',
       },
       {
         title: 'Customizable Coverage',
         description: 'Choose a sum assured that fits your financial goals.',
-        image: '/assets/tabimage5.png',
+        image: '/assets/icons/web/childTabIcon1.png',
+        mobileImage: '/assets/icons/mobile/childTabIcon1.png',
       },
       {
         title: 'Partner Discounts',
         description:
           'Get exclusive discounts on medical and diagnostic services at select hospitals and diagnostic centers in our partner network.',
-        image: '/assets/tabimage6.png',
+        image: '/assets/icons/web/childTabIcon4.png',
+        mobileImage: '/assets/icons/mobile/childTabIcon4.png',
       },
     ],
   }

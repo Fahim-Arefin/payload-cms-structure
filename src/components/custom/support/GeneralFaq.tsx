@@ -129,7 +129,7 @@ function GeneralFaq({}: Props) {
         <div className="flex items-center space-x-2 md:space-x-4">
           <div className="global-h3 font-semibold lg:font-normal">I want to learn more about</div>
           <Select value={selectedKey} onValueChange={(value) => setSelectedKey(value as FaqKey)}>
-            <SelectTrigger className="bg-[#FCF4EB] rounded-[6px] p-4 md:p-6 w-[140px] md:w-[260px] lg:w-[300px] xl:w-[460px]">
+            <SelectTrigger className="bg-[#FCF4EB] rounded-[6px] p-4 md:p-6 w-[150px] md:w-[260px] lg:w-[300px] xl:w-[460px]">
               <SelectValue placeholder="Select FAQ Topic" />
             </SelectTrigger>
             <SelectContent className="bg-[#FCF4EB] rounded-[6px]">
@@ -150,7 +150,7 @@ function GeneralFaq({}: Props) {
               value={value}
               className="bg-[#FCF4EB] px-2 md:px-6 md:py-1 mb-2 rounded-[6px]"
             >
-              <AccordionTrigger className="font-bold hover:no-underline text-xl">
+              <AccordionTrigger className="font-semibold hover:no-underline global-p1">
                 {index + 1}. {title}
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4 text-balance px-2 pb-4 pt-2">
@@ -167,19 +167,6 @@ function GeneralFaq({}: Props) {
         {/* load more btn */}
         <div className="flex justify-center ">
           <ToolTip>
-            {/* <Button
-              variant="outline"
-              className="cursor-not-allowed
-            text-[#3A3A3A] bg-[#F6EDDD] hover:bg-[#F6EEEE]
-            global-p1 
-            w-[90px] sm:w-[110px] md:w-[130px] lg:w-[140px] 2xl:w-[160px]
-            h-[28px] sm:h-[34px] md:h-[40px] lg:h-[44px] 2xl:h-[47px]
-            text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] 2xl:text-[16px]
-            font-medium rounded-md transition-all duration-200
-            "
-            >
-              Load more
-            </Button> */}
             <GlobalButton
               variant="outline"
               text="Load more"

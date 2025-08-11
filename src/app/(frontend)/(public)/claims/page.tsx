@@ -33,24 +33,24 @@ const page: FC<pageProps> = ({}) => {
         {
           title: 'Customizable Coverage',
           description: 'Choose a sum assured based on your child’s future needs.',
-          image: '/assets/childTabIcon1.png',
+          image: '/assets/icons/web/childTabIcon1.png',
         },
         {
           title: 'Maturity Benefit',
           description:
             'Receive the full sum assured at the end of the policy term to support higher education goals.',
-          image: '/assets/childTabIcon2.png',
+          image: '/assets/icons/web/childTabIcon2.png',
         },
         {
           title: 'Tax Benefits',
           description: 'Enjoy tax rebates on premiums, avail upto 15% tax rebate. ',
-          image: '/assets/childTabIcon3.png',
+          image: '/assets/icons/web/childTabIcon3.png',
         },
         {
           title: 'Partner Discounts',
           description:
             'Avail exclusive discounts on medical and diagnostic services at partnered hospitals and diagnostic centers.',
-          image: '/assets/childTabIcon4.png',
+          image: '/assets/icons/web/childTabIcon4.png',
         },
         {
           title: 'Life Coverage',
@@ -60,12 +60,12 @@ const page: FC<pageProps> = ({}) => {
             'Waiver of all future premiums while continuing full coverage.',
             'Full maturity benefit paid at term-end.',
           ],
-          image: '/assets/childTabIcon5.png',
+          image: '/assets/icons/web/childTabIcon5.png',
         },
         {
           title: 'Flexible Premium Payments',
           description: 'Opt for monthly, quarterly, half-yearly, or annual premium modes.',
-          image: '/assets/childTabIcon6.png',
+          image: '/assets/icons/web/childTabIcon6.png',
         },
       ],
     },
@@ -74,24 +74,24 @@ const page: FC<pageProps> = ({}) => {
         {
           title: 'Customizable sdfsdfsdf',
           description: 'Choose a sum assured based on your child’s future needs.',
-          image: '/assets/childTabIcon1.png',
+          image: '/assets/icons/web/childTabIcon1.png',
         },
         {
           title: 'Maturity Benefit',
           description:
             'Receive the full sum assured at the end of the policy term to support higher education goals.',
-          image: '/assets/childTabIcon2.png',
+          image: '/assets/icons/web/childTabIcon2.png',
         },
         {
           title: 'Tax Benefits',
           description: 'Enjoy tax rebates on premiums, avail upto 15% tax rebate. ',
-          image: '/assets/childTabIcon3.png',
+          image: '/assets/icons/web/childTabIcon3.png',
         },
         {
           title: 'Partner Discounts',
           description:
             'Avail exclusive discounts on medical and diagnostic services at partnered hospitals and diagnostic centers.',
-          image: '/assets/childTabIcon4.png',
+          image: '/assets/icons/web/childTabIcon4.png',
         },
         {
           title: 'Life Coverage',
@@ -101,12 +101,12 @@ const page: FC<pageProps> = ({}) => {
             'Waiver of all future premiums while continuing full coverage.',
             'Full maturity benefit paid at term-end.',
           ],
-          image: '/assets/childTabIcon5.png',
+          image: '/assets/icons/web/childTabIcon5.png',
         },
         {
           title: 'Flexible Premium Payments',
           description: 'Opt for monthly, quarterly, half-yearly, or annual premium modes.',
-          image: '/assets/childTabIcon6.png',
+          image: '/assets/icons/web/childTabIcon6.png',
         },
       ],
     },

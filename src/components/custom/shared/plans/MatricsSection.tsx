@@ -6,6 +6,9 @@ import React from 'react'
 // import Link from 'next/link'
 // import { ArrowUpRight } from 'lucide-react'
 import GlobalTabButtons from '../GlobalTabButtons'
+import Link from 'next/link'
+import GlobalButton from '../GlobalButton'
+import { ArrowUpRight } from 'lucide-react'
 
 type Props = {}
 
@@ -16,9 +19,10 @@ function MatricsSection({}: Props) {
            md:p-24 
            lg:px-[100px]  lg:py-[100px] 
            xl:px-[200px]  xl:py-[100px] 
-           2xl:px-[300px] 2xl:py-[150px]"
+           2xl:px-[300px] 2xl:py-[150px]
+           space-y-4 md:space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12"
     >
-      <div className="space-y-12">
+      <div className="space-y-4 md:space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12">
         {/* Heading */}
         <h1 className="global-h1 font-medium uppercase">
           <span className="text-[#ED7125]">Metrics</span> That Matter
@@ -27,8 +31,21 @@ function MatricsSection({}: Props) {
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-5 md:gap-12 lg:gap-0">
           {/* Left image block */}
+          {/* mobile */}
           <div
-            className=" bg-[url('/assets/matrics.jpg')] bg-[lightgray] bg-center bg-cover bg-no-repeat 
+            className="lg:hidden bg-[url('/assets/solutions/individual/health-and-protection/accidental-coverage/mobile/matrics.jpg')] bg-[lightgray] bg-center bg-cover bg-no-repeat 
+            rounded-[10px] lg:rounded-[12px] xl:rounded-[14px] 2xl:rounded-[16px]
+            h-[250px]
+            w-full md:h-[350px]
+            lg:w-[350px] lg:h-[350px]
+            xl:w-[400px] xl:h-[400px]
+            2xl:w-[460px] 2xl:h-[460px]"
+            role="img"
+            aria-label="Surgery room"
+          />
+          {/* web */}
+          <div
+            className="hidden lg:block bg-[url('/assets/solutions/individual/health-and-protection/accidental-coverage/web/matrics.jpg')] bg-[lightgray] bg-center bg-cover bg-no-repeat 
             rounded-[10px] lg:rounded-[12px] xl:rounded-[14px] 2xl:rounded-[16px]
             h-[250px]
             w-full md:h-[350px]
@@ -123,16 +140,33 @@ function MatricsSection({}: Props) {
             </div>
           </div>
         </div>
-
-        {/* Buttons */}
       </div>
-
-      <GlobalTabButtons
+      {/* Buttons */}
+      {/* <GlobalTabButtons
         brochureLink="/assets/pdf/Required Brochures/Health & Protection/Shanta Accidental Coverage/Shanta Life Rider Brochure.pdf"
         explorePlansLink="/plans/individual"
         calculateLink="#"
         showCalculatePremium={false}
-      />
+      /> */}
+      {/* button */}
+      <div className="flex gap-4 lg:gap-6 justify-center">
+        <Link
+          href="/assets/pdf/Required Brochures/Health & Protection/Shanta Accidental Coverage/Shanta Life Rider Brochure.pdf"
+          target="_blank"
+        >
+          <GlobalButton variant="primary" text="Download Brochure" />
+        </Link>
+        <div className="flex justify-center mt-2">
+          <Link
+            href="/plans/individual"
+            className="capitalize text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1 
+                    text-[10px] md:text-[12px] lg:text-[14px] xl:text-[14px]"
+          >
+            explore all plans
+            <ArrowUpRight size={14} className="inline-block" />
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

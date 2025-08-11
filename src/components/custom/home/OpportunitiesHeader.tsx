@@ -13,16 +13,17 @@ function OpportunitiesHeader() {
     mt-28 lg:mt-0"
     >
       {/* Background overlay */}
-      <div className="absolute inset-0 -top-1/2 lg:-top-16 bg-[url('/assets/opportunities.png')] bg-cover bg-center bg-no-repeat opacity-45 z-0" />
+      <div className="lg:hidden absolute inset-0 -top-1/2 lg:-top-16 bg-[url('/assets/homepage/mobile/opportunities.png')] bg-cover bg-center bg-no-repeat opacity-45 z-0" />
+      <div className="hidden lg:block absolute inset-0 -top-1/2 lg:-top-16 bg-[url('/assets/homepage/web/opportunities.png')] bg-cover bg-center bg-no-repeat opacity-45 z-0" />
 
       {/* Foreground content */}
-      <div className="relative z-10 space-y-6">
+      <div className="relative z-10 space-y-4 md:space-y-6">
         <div className="space-y-2">
-          <h1 className="text-xl md:text-2xl font-medium uppercase">Life at</h1>
-          <h1 className="text-3xl md:text-5xl font-bold uppercase">
+          <h1 className="global-h4 font-medium uppercase">Life at</h1>
+          <h1 className="global-h1 font-semibold uppercase">
             Shanta <span className="md:text-[#FF6600]">Life</span>
           </h1>
-          <p className="text-lg 2xl:text-[22px] font-light text-[#1F1F1F]">
+          <p className="global-p1 font-light text-[#1F1F1F]">
             Make a difference everyday- your next chapter starts here
           </p>
         </div>

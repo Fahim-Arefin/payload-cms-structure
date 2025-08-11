@@ -6,7 +6,8 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/
 // import
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 // import ToolTip from '../shared/ToolTip'
-// import LottiePlayer from '../shared/LottiePlayer'
+import LottiePlayer from '../shared/LottiePlayer'
+import LottieBackground from '../shared/LottieBackground'
 
 function VideoSection() {
   const [open, setOpen] = useState(false)
@@ -25,6 +26,8 @@ function VideoSection() {
           src="/assets/homepage/test5.json"
           background="white"
         /> */}
+        {/* Lottie background */}
+        {/* <LottieBackground src="/assets/homepage/test6.json" background="white" /> */}
         {/* <div className="absolute inset-0 z-0 w-full h-full">
           <DotLottieReact
             src="/assets/homepage/test5.json"
@@ -51,10 +54,22 @@ function VideoSection() {
           rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px] mx-auto
           -top-[100px] lg:-top-[120px] xl:-top-[160px] 2xl:-top-[200px]"
         >
+          {/* mobile */}
           <div
-            className=" flex justify-between items-center w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]"
+            className="lg:hidden flex justify-between items-center w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]"
             style={{
-              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/assets/thumbnails/yt-thumbnail-4.jpg')`,
+              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/assets/homepage/mobile/thumbnails/yt-thumbnail-4.jpg')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: 'lightgray',
+            }}
+          ></div>
+          {/* after lg */}
+          <div
+            className="hidden lg:flex justify-between items-center w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]"
+            style={{
+              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/assets/homepage/web/thumbnails/yt-thumbnail-4.jpg')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',

@@ -16,7 +16,8 @@ function Bancassurance() {
     },
   ]
   const planInfoData = {
-    image: '/assets/planInfo3.png',
+    image: '/assets/solutions/bancassurance/web/planInfo3.png',
+    mobileImage: '/assets/solutions/bancassurance/mobile/planInfo3.png',
     description: `At Shanta Life, we partner with leading banks and NBFIs to offer clear, affordable life insurance solutions that safeguard your financial journey.
 Our customized coverage options are designed to meet the distinct needs of different banking segments—ensuring protection that truly fits.`,
   }
