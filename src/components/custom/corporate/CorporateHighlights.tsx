@@ -39,12 +39,12 @@ const CorporateHighlight: FC<CorporateHighlightProps> = ({
             </div>
             <div className="text-start">
               <p className="text-[30px] md:text-[60px] font-bold">
-                3 <span className="font-semibold">Days</span>
+                5 <span className="font-semibold">Days</span>
               </p>
               <p className="mt-2 text-[1.1rem] lg:text-[1.5rem]">Settlement</p>
             </div>
             <div className="text-start">
-              <p className="text-[30px] md:text-[60px] font-bold">92%</p>
+              <p className="text-[30px] md:text-[60px] font-bold">100%</p>
               <p className="mt-2 text-[1.1rem]  lg:text-[1.5rem]">Success ratio</p>
             </div>
           </div>

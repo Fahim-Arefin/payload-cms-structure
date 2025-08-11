@@ -57,7 +57,7 @@ function WhyChooseUsSection() {
             <div className=" h-[250px] 2xl:h-[300px] lg:bg-[#FCF4EB] flex justify-center lg:justify-end items-center rounded-tl-2xl">
               <div className="flex justify-center lg:justify-end items-center flex-wrap w-full lg:w-[60%] xl:w-[67%] 2xl:w-[69%]">
                 {/* each info section */}
-                <div className="w-[47%] md:w-[40%] lg:w-[45%] flex ">
+                <div className="w-[48%] md:w-[40%] lg:w-[45%] flex ">
                   {/* img */}
                   <div className="p-2 2xl:p-4 border-2 rounded-t-sm md:rounded-t-md lg:rounded-t-xl border-white lg:border-[#9A4E46] bg-white lg:bg-none">
                     <div className="lg:hidden">
@@ -78,7 +78,7 @@ function WhyChooseUsSection() {
                   </div>
                 </div>
                 {/* each info section */}
-                <div className="w-[47%] md:w-[40%] lg:w-[45%] flex">
+                <div className="w-[48%] md:w-[40%] lg:w-[45%] flex">
                   {/* svg */}
                   <div className="p-2 2xl:p-4 border-2 rounded-t-sm md:rounded-t-md lg:rounded-t-xl border-white lg:border-[#9A4E46]  bg-white lg:bg-none">
                     <div className="lg:hidden">
@@ -99,7 +99,7 @@ function WhyChooseUsSection() {
                   </div>
                 </div>
                 {/* each info section */}
-                <div className="w-[47%] md:w-[40%] lg:w-[45%] flex">
+                <div className="w-[48%] md:w-[40%] lg:w-[45%] flex">
                   {/* svg */}
                   <div className="p-2 2xl:p-4 border-2 rounded-b-sm md:rounded-b-md lg:rounded-b-xl border-white lg:border-[#9A4E46]  bg-white lg:bg-none">
                     <div className="lg:hidden">
@@ -115,12 +115,12 @@ function WhyChooseUsSection() {
                       235
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Satisfied Customer
+                      Satisfied Customers
                     </div>
                   </div>
                 </div>
                 {/* each info section */}
-                <div className="w-[47%] md:w-[40%] lg:w-[45%] flex">
+                <div className="w-[48%] md:w-[40%] lg:w-[45%] flex">
                   {/* svg */}
                   <div className="p-2 2xl:p-4 border-2 rounded-b-sm md:rounded-b-md lg:rounded-b-xl border-white lg:border-[#9A4E46]  bg-white lg:bg-none">
                     <div className="lg:hidden">

@@ -90,7 +90,7 @@ function AwardSection() {
                       235
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Satisfied Customer
+                      Satisfied Customers
                     </div>
                   </div>
                 </div>
