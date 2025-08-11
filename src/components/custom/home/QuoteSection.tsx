@@ -236,13 +236,13 @@ function QuoteSection() {
   const handleApiResponse = (response: ApiResponse, paymentMode: string) => {
     setApiResponse(response)
     setConfirmedPaymentMode(paymentMode)
-    
+
     // Scroll to results on mobile after API response
     if (window.innerWidth < 1024 && resultRef.current) {
       setTimeout(() => {
-        resultRef.current?.scrollIntoView({ 
+        resultRef.current?.scrollIntoView({
           behavior: 'smooth',
-          block: 'start'
+          block: 'start',
         })
       }, 300) // Small delay to ensure DOM update
     }
@@ -303,7 +303,10 @@ function QuoteSection() {
     <div className="relative font-avenir container-wpm md:pb-[70px] lg:pb-[90px] xl:pb-[80px] 2xl:pb-40">
       <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.3fr,1fr] gap-4 lg:gap-10 z-10">
         {/* Left Side - Results Section (order-2 on mobile, order-1 on lg+) */}
-        <div ref={resultRef} className="p-4 lg:pl-0 space-y-8 xl:space-y-11 z-10 order-2 lg:order-1">
+        <div
+          ref={resultRef}
+          className="p-4 lg:pl-0 space-y-8 xl:space-y-11 z-10 order-2 lg:order-1"
+        >
           {/* Text Container */}
           <div className="space-y-2 text-center lg:text-left">
             <div className="uppercase text-[#1E1E1E] text-[16px] md:text-[18px] 2xl:text-2xl font-light ">
@@ -489,9 +492,15 @@ function QuoteSection() {
                     className="underline underline-offset-4 text-xs cursor-pointer hover:text-blue-600 transition-colors"
                     onClick={handleCriticalIllnessToggle}
                   >
-                    {isCriticalIllnessCovered ? 'Remove' : 'Add'}{' '}
-                    {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
-                    taka to Cover 25 Critical Illness!
+                    {getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[
+                      getPaymentModeKey(confirmedPaymentMode)
+                    ] > 0 && (
+                      <>
+                        {isCriticalIllnessCovered ? 'Remove' : 'Add'}{' '}
+                        {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
+                        taka to Cover 25 Critical Illness!
+                      </>
+                    )}
                   </div>
                   {/* this belwo div will be align right of the flex*/}
                   <div className="flex-1 flex justify-end">
@@ -584,11 +593,11 @@ function QuoteSection() {
           {/* Calculate Again Button - Only show on mobile when results are available */}
           {apiResponse && (
             <div className="flex justify-center items-center lg:hidden mt-4">
-              <GlobalButton 
-                onClick={handleCalculateAgain} 
-                className="" 
-                variant="secondary" 
-                text="Calculate Again" 
+              <GlobalButton
+                onClick={handleCalculateAgain}
+                className=""
+                variant="secondary"
+                text="Calculate Again"
               />
             </div>
           )}
