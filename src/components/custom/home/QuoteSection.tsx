@@ -98,8 +98,12 @@ function QuoteSection() {
         {/* Left Side - Results Section (order-2 on mobile, order-1 on lg+) */}
         <div
           ref={resultRef}
+<<<<<<< HEAD
           className="lg:p-1 xl:p-2 2xl:p-3
           lg:pl-0 space-y-8 xl:space-y-11 z-10 order-2 lg:order-1"
+=======
+          className="p-4 lg:pl-0 space-y-8 xl:space-y-11 z-10 order-2 lg:order-1"
+>>>>>>> 3c9fa3d0d9f37f1b342f1adbc433d01844a6e5db
         >
           {/* Text Container */}
           <div className="hidden lg:block space-y-2 text-center lg:text-left">
@@ -292,9 +296,15 @@ function QuoteSection() {
                     className="underline underline-offset-4 text-[10px] xl:text-xs cursor-pointer hover:text-blue-600 transition-colors"
                     onClick={handleCriticalIllnessToggle}
                   >
-                    {isCriticalIllnessCovered ? 'Remove' : 'Add'}{' '}
-                    {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
-                    taka to Cover 25 Critical Illness!
+                    {getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[
+                      getPaymentModeKey(confirmedPaymentMode)
+                    ] > 0 && (
+                      <>
+                        {isCriticalIllnessCovered ? 'Remove' : 'Add'}{' '}
+                        {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
+                        taka to Cover 25 Critical Illness!
+                      </>
+                    )}
                   </div>
                   {/* this belwo div will be align right of the flex*/}
                   <div className="flex-1 flex justify-end">
@@ -386,7 +396,11 @@ function QuoteSection() {
           )}
           {/* Calculate Again Button - Only show on mobile when results are available */}
           {apiResponse && (
+<<<<<<< HEAD
             <div className="flex justify-center items-center lg:hidden ">
+=======
+            <div className="flex justify-center items-center lg:hidden mt-4">
+>>>>>>> 3c9fa3d0d9f37f1b342f1adbc433d01844a6e5db
               <GlobalButton
                 onClick={handleCalculateAgain}
                 className=""
