@@ -45,7 +45,7 @@ const CorporateHighlight: FC<CorporateHighlightProps> = ({
             </div>
             <div className="text-start">
               <p className="text-[30px] md:text-[60px] font-bold">100%</p>
-              <p className="mt-2 text-[1.1rem]  lg:text-[1.5rem]">Success ratio</p>
+              <p className="mt-2 text-[1.1rem]  lg:text-[1.5rem]">Settlement rate</p>
             </div>
           </div>
         </div>
