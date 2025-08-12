@@ -52,55 +52,69 @@ function page() {
       'To promote the desired quality of life through innovation, digitalization and customer centricity.',
   }
 
-  const allAboutData = [
-    {
-      image: '/assets/allAboutIcon1.png',
-      hoverImage: '/assets/trustWhite.png',
-      title: 'Trust',
-      description: {
-        __html: "For us, trust is more than a word — it's the foundation of every promise we make.",
+  const allAboutData = {
+    image: '/assets/about-us/web/allAbout.jpg',
+    mobileImage: '/assets/about-us/mobile/allAbout.jpg',
+    title: 'Values That',
+    coloredTitle: 'Shape Us',
+    data: [
+      {
+        image: '/assets/icons/web/allAboutIcon1.png',
+        mobileImage: '/assets/icons/mobile/allAboutIcon1.png',
+        hoverImage: '/assets/icons/web/trustWhite.png',
+        hoverMobileImage: '/assets/icons/mobile/trustWhite.png',
+        title: 'Trust',
+        description: {
+          __html:
+            "For us, trust is more than a word — it's the foundation of every promise we make.",
+        },
       },
-    },
-    {
-      image: '/assets/simplicity.png',
-      hoverImage: '/assets/allAboutIcon3.png',
-      title: 'Simplicity',
-      // description: {
-      //   __html:
-      //     'We prioritize <b class="font-bold">ease for our customers</b>, making insurance straightforward, accessible, and hassle-free.',
-      // },
-      description: {
-        __html:
-          'We prioritize ease for our customers , making insurance straightforward, accessible, and hassle-free.',
+      {
+        image: '/assets/icons/web/simplicity.png',
+        mobileImage: '/assets/icons/mobile/simplicity.png',
+        hoverImage: '/assets/icons/web/allAboutIcon3.png',
+        hoverMobileImage: '/assets/icons/mobile/allAboutIcon3.png',
+        title: 'Simplicity',
+        description: {
+          __html:
+            'We prioritize ease for our customers , making insurance straightforward, accessible, and hassle-free.',
+        },
       },
-    },
-    {
-      image: '/assets/allAboutIcon2.png',
-      hoverImage: '/assets/ownershipWhite.png',
-      title: 'Ownership',
-      description: {
-        __html:
-          'We stay agile, positive, and collaborative — always learning and evolving to deliver the best.',
+      {
+        image: '/assets/icons/web/allAboutIcon2.png',
+        mobileImage: '/assets/icons/mobile/allAboutIcon2.png',
+        hoverImage: '/assets/icons/web/ownershipWhite.png',
+        hoverMobileImage: '/assets/icons/mobile/ownershipWhite.png',
+        title: 'Ownership',
+        description: {
+          __html:
+            'We stay agile, positive, and collaborative — always learning and evolving to deliver the best.',
+        },
       },
-    },
-    {
-      image: '/assets/GOLDEN-Customer-Centricity.png',
-      hoverImage: '/assets/Customer-Centricity.png',
-      title: 'Customer Centricity',
-      description: {
-        __html:
-          'We act with proactiveness, empower our employees, and create experiences that truly put you first.',
+      {
+        image: '/assets/icons/web/GOLDEN-Customer-Centricity.png',
+        mobileImage: '/assets/icons/mobile/GOLDEN-Customer-Centricity.png',
+        hoverImage: '/assets/icons/web/Customer-Centricity.png',
+        hoverMobileImage: '/assets/icons/mobile/Customer-Centricity.png',
+        title: 'Customer Centricity',
+        description: {
+          __html:
+            'We act with proactiveness, empower our employees, and create experiences that truly put you first.',
+        },
       },
-    },
-    {
-      image: '/assets/ownership-Golden.png',
-      hoverImage: '/assets/ownership-White.png',
-      title: 'Transparency',
-      description: {
-        __html: 'We believe in open communication, owning up to our promises, and full visibility.',
+      {
+        image: '/assets/icons/web/ownership-Golden.png',
+        mobileImage: '/assets/icons/mobile/ownership-Golden.png',
+        hoverImage: '/assets/icons/web/ownership-White.png',
+        hoverMobileImage: '/assets/icons/mobile/ownership-White.png',
+        title: 'Transparency',
+        description: {
+          __html:
+            'We believe in open communication, owning up to our promises, and full visibility.',
+        },
       },
-    },
-  ]
+    ],
+  }
 
   const directorCardData = [
     {

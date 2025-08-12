@@ -67,7 +67,7 @@ function VisionMissionSection({ vissionMissionContent }: Props) {
       className="container-padding relative
         lg:margin-bottom
         flex items-center text-white
-        h-[160px] md:h-[250px] lg:h-[480px] xl:h-[480px] 2xl:h-[580px]
+        h-[200px] md:h-[250px] lg:h-[480px] xl:h-[480px] 2xl:h-[580px]
       "
     >
       {/* Mobile background */}
