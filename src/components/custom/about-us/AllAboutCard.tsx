@@ -28,19 +28,33 @@ function AllAboutCard({ data, index }: Props) {
     relative group"
         >
           {/* Main image (shown by default, fades out on hover) */}
+          {/* mobile */}
+          <img
+            src={data?.mobileImage}
+            alt={data?.title}
+            className="lg:hidden w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 z-10"
+          />
+          {/* web */}
           <img
             src={data?.image}
             alt={data?.title}
-            className="w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 z-10"
+            className="hidden lg:block w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 z-10"
           />
           {/* Hover image (hidden by default, fades in on hover) */}
+          {/* mobile */}
+          <img
+            src={data?.hoverMobileImage}
+            alt="Trust"
+            className="lg:hidden w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
+          />
+          {/* web */}
           <img
             src={data?.hoverImage}
             alt="Trust"
-            className="w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
+            className="hidden lg:block w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
           />
         </div>
-        <div className="global-h2 text-center font-semibold lg:font-medium uppercase px-1 ">
+        <div className="global-p1 lg:global-h3 text-center font-semibold lg:font-medium uppercase px-1 ">
           {data?.title}
         </div>
         <div

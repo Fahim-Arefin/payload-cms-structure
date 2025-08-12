@@ -13,22 +13,37 @@ export type ShantaIntroContentType = {
   subheading: string
   paragraphTitle: string
   image: string
+  mobileImage: string
   paragraph: string
 }
 export type VissionMissionContentType = {
   visionDescription: string
   missionDescription: string
+  bgImage: string
+  bgMobileImage: string
 }
 
 export type AllAboutCardDataType = {
   image: string
-  title: string
+  mobileImage: string
   hoverImage: string
+  hoverMobileImage: string
+  title: string
   description: { __html: string }
+}
+
+export type LicensedInfoType = {
+  licensedImage: string
+  licensedMobileImage: string
+  licensedDate: string
+  launchedImage: string
+  launchedMobileImage: string
+  launchedDate: string
 }
 
 export type DirectorCardDataType = {
   image: string
+  mobileImage: string
   name?: string
   designation?: string
   title: string
@@ -39,18 +54,21 @@ export type DirectorCardDataType = {
 export type DirectorProfileDataType = {
   id?: number
   image: string
+  mobileImage: string
   name: string
   title: string
 }
 export type AllOfThemDataType = {
   id: number
   image: string
+  mobileImage: string
   name: string
   title: string
 }
 
 export type FootPrintDataType = {
   image: string
+  mobileImage: string
   title: string
   description: string
   link: string

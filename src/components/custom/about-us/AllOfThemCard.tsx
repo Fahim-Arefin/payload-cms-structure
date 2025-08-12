@@ -77,16 +77,27 @@ function AllOfThemCard({ data }: Props) {
 
         {/* Profile Image */}
         <div className="absolute z-10 w-full h-full bottom-0 ">
-          <Image src={data?.image} alt={data?.title} fill className="object-cover" />
+          <Image
+            src={data?.mobileImage}
+            alt={data?.title}
+            fill
+            className="lg:hidden object-cover"
+          />
+          <Image
+            src={data?.image}
+            alt={data?.title}
+            fill
+            className="hidden lg:block object-cover"
+          />
         </div>
       </div>
 
       {/* Name & Title */}
       <div className="mt-6 text-center">
-        <p className="text-[#434342] font-light lg:font-medium text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[18px] uppercase lg:capitalize">
+        <p className="text-[#434342] font-medium text-[14px] xl:text-[16px] 2xl:text-[18px] capitalize">
           {data?.name}
         </p>
-        <p className="text-[#9C8639] font-light lg:font-medium text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[18px] uppercase lg:capitalize">
+        <p className="text-[#9C8639] font-medium text-[12px] xl:text-[14px] 2xl:text-[16px] uppercase ">
           {data?.title}
         </p>
       </div>

@@ -38,70 +38,98 @@ function page() {
     heading: 'Advancing',
     subheading: 'A Legacy of Setting Standards',
     paragraphTitle: 'Nurtured with Trust. Built for Tomorrow',
-    image: '/assets/shantaIntroImage.png',
+    image: '/assets/about-us/web/shantaIntroImage.png',
+    mobileImage: '/assets/about-us/web/shantaIntroImage.png',
     paragraph:
       'Born from a vision to redefine life insurance in Bangladesh, Shanta Life is backed by a powerful consortium comprised of Shanta Holdings, Shanta Lifestyle, Shanta Securities, Shanta Asset Management, Shanta Equity, Shanta Multiverse, Shanta Property Management, FAR Asset Management, and Nasah Holdings.',
   }
   const vissionMissionContent = {
+    bgImage: '/assets/about-us/web/vision.png',
+    bgMobileImage: '/assets/about-us/mobile/vision.png',
     visionDescription:
       'To be the most trusted insurance brand by protecting the uncertainties of life through simple solutions and delivering maximum value.',
     missionDescription:
       'To promote the desired quality of life through innovation, digitalization and customer centricity.',
   }
 
-  const allAboutData = [
-    {
-      image: '/assets/allAboutIcon1.png',
-      hoverImage: '/assets/trustWhite.png',
-      title: 'Trust',
-      description: {
-        __html: "For us, trust is more than a word — it's the foundation of every promise we make.",
+  const allAboutData = {
+    image: '/assets/about-us/web/allAbout.jpg',
+    mobileImage: '/assets/about-us/mobile/allAbout.jpg',
+    title: 'Values That',
+    coloredTitle: 'Shape Us',
+    data: [
+      {
+        image: '/assets/icons/web/allAboutIcon1.png',
+        mobileImage: '/assets/icons/mobile/allAboutIcon1.png',
+        hoverImage: '/assets/icons/web/trustWhite.png',
+        hoverMobileImage: '/assets/icons/mobile/trustWhite.png',
+        title: 'Trust',
+        description: {
+          __html:
+            "For us, trust is more than a word — it's the foundation of every promise we make.",
+        },
       },
-    },
-    {
-      image: '/assets/simplicity.png',
-      hoverImage: '/assets/allAboutIcon3.png',
-      title: 'Simplicity',
-      // description: {
-      //   __html:
-      //     'We prioritize <b class="font-bold">ease for our customers</b>, making insurance straightforward, accessible, and hassle-free.',
-      // },
-      description: {
-        __html:
-          'We prioritize ease for our customers , making insurance straightforward, accessible, and hassle-free.',
+      {
+        image: '/assets/icons/web/simplicity.png',
+        mobileImage: '/assets/icons/mobile/simplicity.png',
+        hoverImage: '/assets/icons/web/allAboutIcon3.png',
+        hoverMobileImage: '/assets/icons/mobile/allAboutIcon3.png',
+        title: 'Simplicity',
+        description: {
+          __html:
+            'We prioritize ease for our customers , making insurance straightforward, accessible, and hassle-free.',
+        },
       },
-    },
-    {
-      image: '/assets/allAboutIcon2.png',
-      hoverImage: '/assets/ownershipWhite.png',
-      title: 'Ownership',
-      description: {
-        __html:
-          'We stay agile, positive, and collaborative — always learning and evolving to deliver the best.',
+      {
+        image: '/assets/icons/web/allAboutIcon2.png',
+        mobileImage: '/assets/icons/mobile/allAboutIcon2.png',
+        hoverImage: '/assets/icons/web/ownershipWhite.png',
+        hoverMobileImage: '/assets/icons/mobile/ownershipWhite.png',
+        title: 'Ownership',
+        description: {
+          __html:
+            'We stay agile, positive, and collaborative — always learning and evolving to deliver the best.',
+        },
       },
-    },
-    {
-      image: '/assets/GOLDEN-Customer-Centricity.png',
-      hoverImage: '/assets/Customer-Centricity.png',
-      title: 'Customer Centricity',
-      description: {
-        __html:
-          'We act with proactiveness, empower our employees, and create experiences that truly put you first.',
+      {
+        image: '/assets/icons/web/GOLDEN-Customer-Centricity.png',
+        mobileImage: '/assets/icons/mobile/GOLDEN-Customer-Centricity.png',
+        hoverImage: '/assets/icons/web/Customer-Centricity.png',
+        hoverMobileImage: '/assets/icons/mobile/Customer-Centricity.png',
+        title: 'Customer Centricity',
+        description: {
+          __html:
+            'We act with proactiveness, empower our employees, and create experiences that truly put you first.',
+        },
       },
-    },
-    {
-      image: '/assets/ownership-Golden.png',
-      hoverImage: '/assets/ownership-White.png',
-      title: 'Transparency',
-      description: {
-        __html: 'We believe in open communication, owning up to our promises, and full visibility.',
+      {
+        image: '/assets/icons/web/ownership-Golden.png',
+        mobileImage: '/assets/icons/mobile/ownership-Golden.png',
+        hoverImage: '/assets/icons/web/ownership-White.png',
+        hoverMobileImage: '/assets/icons/mobile/ownership-White.png',
+        title: 'Transparency',
+        description: {
+          __html:
+            'We believe in open communication, owning up to our promises, and full visibility.',
+        },
       },
-    },
-  ]
+    ],
+  }
+
+  const liscensedData = {
+    licensedImage: '/assets/icons/web/licensed.png',
+    licensedMobileImage: '/assets/icons/mobile/licensedMobile.png',
+    licensedDate: 'November 7, 2023',
+
+    launchedImage: '/assets/icons/web/rocket.png',
+    launchedMobileImage: '/assets/icons/mobile/rocketMobile.png',
+    launchedDate: ' December 1, 2024',
+  }
 
   const directorCardData = [
     {
-      image: '/assets/ku.png',
+      image: '/assets/about-us/web/directoralone.png',
+      mobileImage: '/assets/about-us/mobile/directoralone.png',
       name: 'Khondoker Monir Uddin',
       designation: 'Chairman',
       title: 'Charting the Course',
@@ -113,7 +141,8 @@ function page() {
       link: '/all-bods#id-1',
     },
     {
-      image: '/assets/aboutusleaders/CEO.png',
+      image: '/assets/about-us/web/CEOalone.png',
+      mobileImage: '/assets/about-us/mobile/CEOalone.png',
       name: 'Nafis Akhter Ahmed',
       designation: 'Chief Executive Officer',
       title: 'Redefining',
@@ -127,55 +156,64 @@ function page() {
   const directorProfileData = [
     {
       id: 1,
-      image: '/assets/BOD1.png',
+      image: '/assets/about-us/web/aboutusdirectors/profile1.png',
+      mobileImage: '/assets/about-us/mobile/aboutusdirectors/profile1.png',
       name: 'Khondoker Monir Uddin',
       title: 'Chairman',
     },
     {
       id: 2,
-      image: '/assets/profile2.png',
+      image: '/assets/about-us/web/aboutusdirectors/profile2.png',
+      mobileImage: '/assets/about-us/mobile/aboutusdirectors/profile2.png',
       name: 'Jasmine Sultana',
       title: 'Director',
     },
     {
       id: 3,
-      image: '/assets/profile3.png',
+      image: '/assets/about-us/web/aboutusdirectors/profile3.png',
+      mobileImage: '/assets/about-us/mobile/aboutusdirectors/profile3.png',
       name: 'Saif Khondoker',
       title: 'Director',
     },
     {
       id: 4,
-      image: '/assets/profile4.png',
+      image: '/assets/about-us/web/aboutusdirectors/profile4.png',
+      mobileImage: '/assets/about-us/mobile/aboutusdirectors/profile4.png',
       name: 'Mayesha Khondoker',
       title: 'Director',
     },
     {
       id: 5,
-      image: '/assets/profile5.png',
+      image: '/assets/about-us/web/aboutusdirectors/profile5.png',
+      mobileImage: '/assets/about-us/mobile/aboutusdirectors/profile5.png',
       name: 'Farzana Hasan',
       title: 'Director',
     },
     {
       id: 6,
-      image: '/assets/profile6.png',
+      image: '/assets/about-us/web/aboutusdirectors/profile6.png',
+      mobileImage: '/assets/about-us/mobile/aboutusdirectors/profile6.png',
       name: 'Raiven Hasan',
       title: 'Director',
     },
     {
       id: 7,
-      image: '/assets/profile8.png',
+      image: '/assets/about-us/web/aboutusdirectors/profile8.png',
+      mobileImage: '/assets/about-us/mobile/aboutusdirectors/profile8.png',
       name: 'Arif Khan, CFA, FCMA',
       title: 'Director',
     },
     {
       id: 8,
-      image: '/assets/Iftekhar-Rahman.png',
+      image: '/assets/about-us/web/aboutusdirectors/profile10.png',
+      mobileImage: '/assets/about-us/mobile/aboutusdirectors/profile10.png',
       name: 'Iftekhar Rahman',
       title: 'Director',
     },
     {
       id: 9,
-      image: '/assets/profile7.png',
+      image: '/assets/about-us/web/aboutusdirectors/profile7.png',
+      mobileImage: '/assets/about-us/mobile/aboutusdirectors/profile7.png',
       name: 'M. Anisul Haque',
       title: 'Director',
     },
@@ -184,87 +222,105 @@ function page() {
   const allOfThemData = [
     {
       id: 1,
-      image: '/assets/aboutusleaders/CEO.png',
+      image: '/assets/about-us/web/aboutusleaders/CEO.png',
+      mobileImage: '/assets/about-us/mobile/aboutusleaders/CEO.png',
       name: 'Nasif A Ahmed',
       title: 'Chief Executive Officer',
     },
     {
       id: 2,
-      image: '/assets/aboutusleaders/CDO.png',
+      image: '/assets/about-us/web/aboutusleaders/CDO.png',
+      mobileImage: '/assets/about-us/mobile/aboutusleaders/CDO.png',
       name: 'M Khurshed Kaisar',
       title: 'Chief Distribution Officer',
     },
     {
       id: 3,
-      image: '/assets/aboutusleaders/CITO.png',
+      image: '/assets/about-us/web/aboutusleaders/CITO.png',
+      mobileImage: '/assets/about-us/mobile/aboutusleaders/CITO.png',
       name: 'Mohammad Maksud Hossain',
       title: 'Chief IT Officer',
     },
     {
       id: 4,
-      image: '/assets/aboutusleaders/CMO.png',
+      image: '/assets/about-us/web/aboutusleaders/CMO.png',
+      mobileImage: '/assets/about-us/mobile/aboutusleaders/CMO.png',
       name: 'Jane Alam Romel',
       title: 'Chief Marketing Officer',
     },
     {
       id: 5,
-      image: '/assets/aboutusleaders/CFO.png',
+      image: '/assets/about-us/web/aboutusleaders/CFO.png',
+      mobileImage: '/assets/about-us/mobile/aboutusleaders/CFO.png',
       name: 'Majedur Rashid Chowdhury',
       title: 'Chief Financial Officer',
     },
   ]
 
-  const footPrintData = [
-    {
-      image: '/assets/footprint3.png',
-      title: 'Shanta Holdings',
-      link: 'https://shantaholdings.com/',
-      description:
-        'The premier real estate developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the caliber of the finest developers across the globe.',
-    },
-    {
-      image: '/assets/footprint4.jpg',
-      title: 'Shanta Securities',
-      link: 'https://www.shantasecurities.com/',
-      description:
-        'An innovative financial services company offering a range of brokerage and investing solutions.',
-    },
-    {
-      image: '/assets/assetmanagement.jpg',
-      title: 'Shanta Asset Management',
-      link: 'https://www.shanta-aml.com/',
-      description:
-        'Shanta Asset Management Limited is a leading asset management company in Bangladesh offering corporate and open-end mutual fund management solutions to address the distinct investment objectives of its diverse clientele, including individuals and institutions.',
-    },
-    {
-      image: '/assets/shanta-equity-img.jpg',
-      title: 'Shanta Equity',
-      link: 'https://shantaequity.net/',
-      description:
-        'A full-fledged merchant bank offering a range of investment banking, corporate advisory and portfolio management solutions.',
-    },
-    {
-      image: '/assets/footprint5.jpg',
-      title: 'Shanta Lifestyle',
-      link: 'https://shantalifestyle.com/',
-      description:
-        'Luxury home décor company established with an aim to cater to the increasingly sophisticated interior design needs of Bangladeshi consumers searching for customization, luxury and exclusivity.',
-    },
-    {
-      image: '/assets/footprint2.jpg',
-      title: 'Shanta Multiverse',
-      link: 'https://shantamultiverse.com/',
-      description:
-        'Shanta Multiverse owns and operates The White Canary Café, a specialty all-day brunch and cafe chain with its presence spanning 5 locations in Dhaka, Bangladesh.',
-    },
-    {
-      image: '/assets/shanta_property.jpg',
-      title: 'Shanta Property Management',
-      link: 'https://www.shantapml.com/',
-      description:
-        'Shanta Property Management Limited offers integrated property management solutions in Bangladesh, specializing in facilities management, rental services, and buy-sell advisory for a seamless living experience.',
-    },
-  ]
+  const footPrintData = {
+    title: 'Shanta’s FOOTPRINT',
+    subTitle: 'Where Every Venture Connects',
+    bgImage: '/assets/about-us/web/footprint.gif',
+    bgMobileImage: '/assets/about-us/mobile/footprint.gif',
+    data: [
+      {
+        image: '/assets/about-us/web/footprint3.png',
+        mobileImage: '/assets/about-us/mobile/footprint3.png',
+        title: 'Shanta Holdings',
+        link: 'https://shantaholdings.com/',
+        description:
+          'The premier real estate developer of Bangladesh on a mission to transform the lifestyle of city dwellers by providing luxurious, functional and aesthetic living and working spaces that can rival the caliber of the finest developers across the globe.',
+      },
+      {
+        image: '/assets/about-us/web/footprint4.jpg',
+        mobileImage: '/assets/about-us/mobile/footprint4.jpg',
+        title: 'Shanta Securities',
+        link: 'https://www.shantasecurities.com/',
+        description:
+          'An innovative financial services company offering a range of brokerage and investing solutions.',
+      },
+      {
+        image: '/assets/about-us/web/assetmanagement.jpg',
+        mobileImage: '/assets/about-us/mobile/assetmanagement.jpg',
+        title: 'Shanta Asset Management',
+        link: 'https://www.shanta-aml.com/',
+        description:
+          'Shanta Asset Management Limited is a leading asset management company in Bangladesh offering corporate and open-end mutual fund management solutions to address the distinct investment objectives of its diverse clientele, including individuals and institutions.',
+      },
+      {
+        image: '/assets/about-us/web/shanta-equity-img.jpg',
+        mobileImage: '/assets/about-us/mobile/shanta-equity-img.jpg',
+        title: 'Shanta Equity',
+        link: 'https://shantaequity.net/',
+        description:
+          'A full-fledged merchant bank offering a range of investment banking, corporate advisory and portfolio management solutions.',
+      },
+      {
+        image: '/assets/about-us/web/footprint5.jpg',
+        mobileImage: '/assets/about-us/mobile/footprint5.jpg',
+        title: 'Shanta Lifestyle',
+        link: 'https://shantalifestyle.com/',
+        description:
+          'Luxury home décor company established with an aim to cater to the increasingly sophisticated interior design needs of Bangladeshi consumers searching for customization, luxury and exclusivity.',
+      },
+      {
+        image: '/assets/about-us/web/footprint2.jpg',
+        mobileImage: '/assets/about-us/mobile/footprint2.jpg',
+        title: 'Shanta Multiverse',
+        link: 'https://shantamultiverse.com/',
+        description:
+          'Shanta Multiverse owns and operates The White Canary Café, a specialty all-day brunch and cafe chain with its presence spanning 5 locations in Dhaka, Bangladesh.',
+      },
+      {
+        image: '/assets/about-us/web/shanta_property.jpg',
+        mobileImage: '/assets/about-us/mobile/shanta_property.jpg',
+        title: 'Shanta Property Management',
+        link: 'https://www.shantapml.com/',
+        description:
+          'Shanta Property Management Limited offers integrated property management solutions in Bangladesh, specializing in facilities management, rental services, and buy-sell advisory for a seamless living experience.',
+      },
+    ],
+  }
 
   return (
     <div className="font-avenir">
@@ -272,7 +328,7 @@ function page() {
       <ShantaLifeIntroSection shantaIntroContent={shantaIntroContent} />
       <VisionMissionSection vissionMissionContent={vissionMissionContent} />
       <AllAboutSection allAboutData={allAboutData} />
-      <LiscensedInfo />
+      <LiscensedInfo data={liscensedData} />
       {directorCardData?.map((data, index) => {
         return <DirectorCard data={data} index={index} key={index} />
       })}
