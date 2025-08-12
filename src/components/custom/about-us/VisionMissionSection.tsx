@@ -88,7 +88,7 @@ function VisionMissionSection({ vissionMissionContent }: Props) {
       <div className="w-full grid grid-cols-2 gap-2 md:gap-4 lg:gap-7 xl:gap-10 z-30">
         {/* Vision */}
         <div className="space-y-2 md:space-y-6 pr-2 md:pr-12 ">
-          <h1 className="global-h1 font-semibold uppercase ">
+          <h1 className="global-h1 font-medium lg:font-semibold uppercase ">
             Our <span className="text-[#ED7125]">Vision</span>
           </h1>
           <p
@@ -102,7 +102,7 @@ function VisionMissionSection({ vissionMissionContent }: Props) {
 
         {/* Mission */}
         <div className="space-y-2 md:space-y-6 pl-2 md:pl-12 ">
-          <h1 className="global-h1 font-semibold uppercase ">
+          <h1 className="global-h1 font-medium lg:font-semibold uppercase ">
             Our <span className="text-[#ED7125]">Mission</span>
           </h1>
           <p

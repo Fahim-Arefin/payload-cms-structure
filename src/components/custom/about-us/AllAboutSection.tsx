@@ -39,12 +39,12 @@ function AllAboutSection({ allAboutData }: Props) {
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/40 lg:rounded-[10px] xl:rounded-[13px] 2xl:rounded-[15px] z-10"></div>
 
-            <h1 className="shantaLifeIntroSection-h1 font-semibold uppercase absolute inset-x-0 top-1/4 text-center z-20 text-white lg:hidden">
+            <h1 className="shantaLifeIntroSection-h1 font-medium lg:font-semibold uppercase absolute inset-x-0 top-1/4 text-center z-20 text-white lg:hidden">
               {title} <span className="text-[#ED7125]">{coloredTitle}</span>
             </h1>
           </div>
           {/* heading */}
-          <h1 className="global-h1 font-semibold text-[#434342] uppercase hidden lg:block mt-6">
+          <h1 className="global-h1 font-medium lg:font-semibold text-[#434342] uppercase hidden lg:block mt-6">
             {title} <span className="text-[#ED7125]">{coloredTitle}</span>
           </h1>
         </div>

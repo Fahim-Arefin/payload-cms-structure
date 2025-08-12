@@ -131,10 +131,10 @@ function DirectorCard({ data, index }: Props) {
             {/* Name and Designation under image */}
             {data.name && data.designation && (
               <div className="text-center mt-1 md:mt-4">
-                <h2 className="text-[#1E1E1E] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-semibold">
+                <h2 className="text-[#1E1E1E] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-medium lg:font-semibold">
                   {data.name}
                 </h2>
-                <p className="text-[#ED7125] text-[9px] md:text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-medium uppercase">
+                <p className="text-[#ED7125] text-[9px] md:text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-medium lg:font-semibold uppercase">
                   {data.designation}
                 </p>
               </div>

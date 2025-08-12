@@ -39,7 +39,7 @@ function DirectorListSection({ directorProfileData }: Props) {
         {/* top section */}
         <div className="lg:w-[50%] space-y-2 md:space-y-6 2xl:space-y-12 ">
           <div
-            className="global-h1 font-semibold text-[#4A4A4A] 
+            className="global-h1 font-medium lg:font-semibold text-[#4A4A4A] 
           flex space-x-1 justify-center lg:block lg:space-x-0 lg:justify-start flex-wrap"
           >
             <h1>The Power of</h1>
