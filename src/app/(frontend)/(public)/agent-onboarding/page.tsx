@@ -105,7 +105,8 @@ function page({}: Props) {
   ]
 
   const opportunityData = {
-    title: 'What Sets a Shanta Life RM/RO Champion Apart',
+    title: 'What Sets a Shanta Life ',
+    subTitle: 'RM/RO Champion Apart',
     items: [
       { text: 'Seasoned Professionals', src: '/assets/onboardingOpportunity1.jpg' },
       { text: 'Fresh Graduates', src: '/assets/onboardingOpportunity2.jpg' },
@@ -114,30 +115,38 @@ function page({}: Props) {
   }
 
   const expectedData = {
-    title: 'What Sets a Shanta Life RM/RO Champion Apart',
+    // title: 'What Sets a Shanta Life RM/RO Champion Apart',
+    title: 'What Sets a Shanta Life',
+    subTitle: 'RM/RO Champion Apart',
     sectionLeft: [
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon1.svg',
+        icon: '/assets/icons/web/opportunityIcon1.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon1.svg',
         text: 'Be a Brand Ambassador',
       },
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon2.svg',
+        icon: '/assets/icons/web/opportunityIcon2.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon2.svg',
         text: 'Own your Numbers',
       },
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon3.svg',
+        icon: '/assets/icons/web/opportunityIcon3.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon3.svg',
         text: 'Master the product,own the pitch',
       },
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon4.svg',
+        icon: '/assets/icons/web/opportunityIcon4.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon4.svg',
         text: 'Be Digitally Savy',
       },
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon5.svg',
+        icon: '/assets/icons/web/opportunityIcon5.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon5.svg',
         text: 'Follow up, follow through- build genuine connections',
       },
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon5.svg',
+        icon: '/assets/icons/web/opportunityIcon5.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon5.svg',
         text: 'Learn, Evolve & Excel',
       },
     ],
