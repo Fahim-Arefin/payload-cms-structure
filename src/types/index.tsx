@@ -32,6 +32,15 @@ export type AllAboutCardDataType = {
   description: { __html: string }
 }
 
+export type LicensedInfoType = {
+  licensedImage: string
+  licensedMobileImage: string
+  licensedDate: string
+  launchedImage: string
+  launchedMobileImage: string
+  launchedDate: string
+}
+
 export type DirectorCardDataType = {
   image: string
   name?: string

@@ -116,6 +116,16 @@ function page() {
     ],
   }
 
+  const liscensedData = {
+    licensedImage: '/assets/icons/web/licensed.png',
+    licensedMobileImage: '/assets/icons/mobile/licensedMobile.png',
+    licensedDate: 'November 7, 2023',
+
+    launchedImage: '/assets/icons/web/rocket.png',
+    launchedMobileImage: '/assets/icons/mobile/rocketMobile.png',
+    launchedDate: ' December 1, 2024',
+  }
+
   const directorCardData = [
     {
       image: '/assets/ku.png',
@@ -289,7 +299,7 @@ function page() {
       <ShantaLifeIntroSection shantaIntroContent={shantaIntroContent} />
       <VisionMissionSection vissionMissionContent={vissionMissionContent} />
       <AllAboutSection allAboutData={allAboutData} />
-      <LiscensedInfo />
+      <LiscensedInfo data={liscensedData} />
       {directorCardData?.map((data, index) => {
         return <DirectorCard data={data} index={index} key={index} />
       })}
