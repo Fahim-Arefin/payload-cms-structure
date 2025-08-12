@@ -16,8 +16,9 @@ const OnboardingWay: FC<OnboardingWayProps> = ({ wayWeAreData }: OnboardingWayPr
   return (
     <div className="relative">
       <div
-        className="relative
-            h-[180px] md:h-[360px] lg:h-[470px] xl:h-[620px] 2xl:h-[750px] bg-white overflow-hidden bg-[url('/assets/wayBgBanner.png')] bg-cover bg-no-repeat"
+        className="relative 
+            h-[200px] md:h-[400px] lg:h-[500px] xl:h-[650px] 2xl:h-[750px]
+             bg-white overflow-hidden bg-[url('/assets/wayBgBanner.png')] bg-cover bg-no-repeat"
       >
         {/* Content */}
         <div
