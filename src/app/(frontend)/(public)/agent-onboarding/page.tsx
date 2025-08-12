@@ -1,19 +1,10 @@
-import ShantaLifeIntroSection from '@/components/custom/about-us/ShantaLifeIntroSection'
 import AgentOnboardingHeroWrapper from '@/components/custom/agent-onboarding/AgentOnboardingHeroWrapper'
-import FreedomOpportunity from '@/components/custom/agent-onboarding/FreedomOpportunity'
 import OnboardingForm from '@/components/custom/agent-onboarding/OnboardingForm'
-import OnboardingHighlight from '@/components/custom/agent-onboarding/OnboardingHighlight'
 import OnboardingIntro from '@/components/custom/agent-onboarding/OnboardingIntro'
 import OnboardingOpportunity from '@/components/custom/agent-onboarding/OnboardingOpportunity'
-import OnboardingRoles from '@/components/custom/agent-onboarding/OnboardingRoles'
 import OnboardingVision from '@/components/custom/agent-onboarding/OnboardingVIsion'
 import OnboardingWay from '@/components/custom/agent-onboarding/OnboardingWay'
 import RolesSection from '@/components/custom/agent-onboarding/RolesSection'
-import GlobalButton from '@/components/custom/shared/GlobalButton'
-import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import ToolTip from '@/components/custom/shared/ToolTip'
-import { Button } from '@/components/ui/button'
-import React from 'react'
 
 type Props = {}
 
@@ -188,26 +179,30 @@ function page({}: Props) {
       title: 'Help secure lives',
     },
   ]
-  const visionData = [
-    {
-      img: '/assets/agent-onboarding/web/vision1.svg',
-      title: 'Experienced Professionals ',
-      points: [
-        '1-2 years of working in Sales',
-        'Proven expertise in leading teams',
-        'Excellent communication, networking, and analytical skills',
-      ],
-    },
-    {
-      img: '/assets/agent-onboarding/web/vision2.svg',
-      title: 'Freshers & Undergrads',
-      points: [
-        'Excellent communications and networking skills',
-        'Self motivated to build a future in sales',
-        'Graduates and current students from any recognized university or college can apply',
-      ],
-    },
-  ]
+  const visionData = {
+    bgImage: '/assets/agent-onboarding/web/visionBanner.jpg',
+    bgMobileImage: '/assets/agent-onboarding/mobile/visionBanner.jpg',
+    data: [
+      {
+        img: '/assets/agent-onboarding/web/vision1.svg',
+        title: 'Experienced Professionals ',
+        points: [
+          '1-2 years of working in Sales',
+          'Proven expertise in leading teams',
+          'Excellent communication, networking, and analytical skills',
+        ],
+      },
+      {
+        img: '/assets/agent-onboarding/web/vision2.svg',
+        title: 'Freshers & Undergrads',
+        points: [
+          'Excellent communications and networking skills',
+          'Self motivated to build a future in sales',
+          'Graduates and current students from any recognized university or college can apply',
+        ],
+      },
+    ],
+  }
 
   return (
     <div className="font-avenir">
@@ -218,7 +213,7 @@ function page({}: Props) {
       <RolesSection onboardingRoleData={onboardingRolesData} />
       {/* <FreedomOpportunity /> */}
       {/* <OnboardingRoles rolesData={rolesData} /> */}
-      <OnboardingVision data={visionData} />
+      <OnboardingVision visionData={visionData} />
       <OnboardingOpportunity expectedData={expectedData} opportunityData={opportunityData} />
       <OnboardingWay wayWeAreData={wayWeAreData} />
       <OnboardingForm />

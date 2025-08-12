@@ -69,7 +69,8 @@ type Props = {
   onboardingIntroContent: ShantaIntroContentType
 }
 
-function ShantaLifeIntroSection({ onboardingIntroContent }: Props) {
+// this component is similar to ShantaLifeIntroSection only change is lg:-ml-[7%] this style is added here
+function OnboardingIntro({ onboardingIntroContent }: Props) {
   return (
     <div className="bg-white container-padding">
       <div
@@ -141,4 +142,4 @@ function ShantaLifeIntroSection({ onboardingIntroContent }: Props) {
   )
 }
 
-export default ShantaLifeIntroSection
+export default OnboardingIntro
