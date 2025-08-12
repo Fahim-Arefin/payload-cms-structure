@@ -24,8 +24,8 @@ function ShantaLifeIntroSection({ shantaIntroContent }: Props) {
             <img
               src={shantaIntroContent?.image}
               alt={shantaIntroContent?.heading}
-              className="
-            w-full object-cover object-center z-0 " // adjust offset as needed
+              // className="w-full object-cover object-center z-0 "
+              className="w-full h-full object-contain z-0 "
             />
           </div>
 
