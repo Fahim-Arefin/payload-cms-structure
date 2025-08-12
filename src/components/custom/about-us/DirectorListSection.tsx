@@ -37,7 +37,7 @@ function DirectorListSection({ directorProfileData }: Props) {
     <div className="bg-white pb-12 lg:pb-0">
       <div className="container-padding">
         {/* top section */}
-        <div className="lg:w-[50%] space-y-6 2xl:space-y-12 ">
+        <div className="lg:w-[50%] space-y-2 md:space-y-6 2xl:space-y-12 ">
           <div
             className="global-h1 font-semibold text-[#4A4A4A] 
           flex space-x-1 justify-center lg:block lg:space-x-0 lg:justify-start flex-wrap"
@@ -69,7 +69,7 @@ function DirectorListSection({ directorProfileData }: Props) {
         </div>
 
         {/* profile card carousal */}
-        <div className="lg:hidden mt-12 lg:mt-16 xl:mt-20 2xl:mt-32">
+        <div className="lg:hidden mt-6 md:mt-12 lg:mt-16 xl:mt-20 2xl:mt-32">
           <Carousel
             opts={{
               align: 'start',
@@ -78,7 +78,7 @@ function DirectorListSection({ directorProfileData }: Props) {
             setApi={setCarouselApi}
             plugins={[
               Autoplay({
-                delay: 5000,
+                delay: 3000,
               }),
             ]}
           >
@@ -92,7 +92,7 @@ function DirectorListSection({ directorProfileData }: Props) {
             {/* Carousel Navigation */}
             <div
               className="flex gap-2 absolute
-            inset-x-0 justify-center lg:justify-end -bottom-16 md:-bottom-20 lg:-top-8 2xl:-top-12 lg:right-0"
+            inset-x-0 justify-center lg:justify-end -bottom-12 md:-bottom-20 lg:-top-8 2xl:-top-12 lg:right-0"
             >
               <CarouselNavButtons
                 onPrev={() => carouselApi?.scrollPrev()}

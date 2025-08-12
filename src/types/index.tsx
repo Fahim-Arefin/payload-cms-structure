@@ -43,6 +43,7 @@ export type LicensedInfoType = {
 
 export type DirectorCardDataType = {
   image: string
+  mobileImage: string
   name?: string
   designation?: string
   title: string
@@ -53,12 +54,14 @@ export type DirectorCardDataType = {
 export type DirectorProfileDataType = {
   id?: number
   image: string
+  mobileImage: string
   name: string
   title: string
 }
 export type AllOfThemDataType = {
   id: number
   image: string
+  mobileImage: string
   name: string
   title: string
 }

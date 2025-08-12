@@ -117,31 +117,43 @@ function DirectorCard({ data, index }: Props) {
 
             {/* Foreground Image */}
             <img
+              src={data.mobileImage}
+              alt={data.title}
+              className="lg:hidden relative z-10 w-full h-full object-cover 
+              rounded-sm md:rounded-md lg:rounded-lg 2xl:rounded-[24px]"
+            />
+            <img
               src={data.image}
               alt={data.title}
-              className="relative z-10 w-full h-full object-cover 
+              className="hidden lg:block relative z-10 w-full h-full object-cover 
               rounded-sm md:rounded-md lg:rounded-lg 2xl:rounded-[24px]"
             />
             {/* Name and Designation under image */}
             {data.name && data.designation && (
               <div className="text-center mt-1 md:mt-4">
-                <h2 className="text-[#1E1E1E] global-h4 font-semibold">{data.name}</h2>
-                <p className="text-[#ED7125] global-p2 font-medium uppercase">{data.designation}</p>
+                <h2 className="text-[#1E1E1E] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-semibold">
+                  {data.name}
+                </h2>
+                <p className="text-[#ED7125] text-[9px] md:text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-medium uppercase">
+                  {data.designation}
+                </p>
               </div>
             )}
           </div>
         </div>
 
         {/* Text Content */}
-        <div className="z-40 space-y-1 md:space-y-4 lg:space-y-4 2xl:space-y-6">
+        <div className="z-40 space-y-1.5 md:space-y-4 lg:space-y-4 2xl:space-y-6">
           <div>
-            <h1 className="global-h1 font-normal lg:font-semibold text-[#ED7125] uppercase">
+            <h1 className="text-[13px] md:text-[20px] lg:global-h1 font-medium  lg:font-semibold text-[#ED7125] uppercase">
               {data.title}
             </h1>
-            <h1 className="global-h1 font-normal lg:font-semibold uppercase">{data.subtitle}</h1>
+            <h1 className="text-[13px] md:text-[20px] lg:global-h1 font-medium lg:font-semibold uppercase">
+              {data.subtitle}
+            </h1>
           </div>
           {!expand ? (
-            <p className="text-[#434343] global-p2 font-light text-justify line-clamp-2 md:line-clamp-4 lg:line-clamp-5 xl:line-clamp-[9] 2xl:line-clamp-[12]">
+            <p className="text-[#434343] global-p2 font-light text-justify line-clamp-6 md:line-clamp-[8] lg:line-clamp-[10] xl:line-clamp-[11] 2xl:line-clamp-[13]">
               {data?.description}
             </p>
           ) : (
