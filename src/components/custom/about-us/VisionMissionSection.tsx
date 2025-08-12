@@ -64,27 +64,35 @@ type Props = {
 function VisionMissionSection({ vissionMissionContent }: Props) {
   return (
     <div
-      className="container-padding
+      className="container-padding relative
         lg:margin-bottom
-        bg-no-repeat bg-cover bg-center
         flex items-center text-white
-        h-[160px] md:h-[250px] lg:h-[380px] xl:h-[400px] 2xl:h-[600px]
+        h-[200px] md:h-[250px] lg:h-[480px] xl:h-[480px] 2xl:h-[580px]
       "
-      style={{
-        backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/assets/vision.png')`,
-        backgroundColor: 'lightgray',
-        // backgroundPosition: '-262.109px -99.012px',
-        // backgroundSize: '123.449% 120.889%',
-      }}
     >
-      <div className="w-full grid grid-cols-2 md:gap-4 lg:gap-7 xl:gap-10">
+      {/* Mobile background */}
+      <div
+        className="absolute inset-0 lg:hidden bg-no-repeat bg-cover bg-center z-20"
+        style={{
+          backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${vissionMissionContent?.bgMobileImage}')`,
+        }}
+      />
+
+      {/* Desktop background */}
+      <div
+        className="absolute inset-0 hidden lg:block bg-no-repeat bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${vissionMissionContent?.bgImage}')`,
+        }}
+      />
+      <div className="w-full grid grid-cols-2 gap-2 md:gap-4 lg:gap-7 xl:gap-10 z-30">
         {/* Vision */}
         <div className="space-y-2 md:space-y-6 pr-2 md:pr-12 ">
-          <h1 className="global-h1 font-semibold uppercase ">
+          <h1 className="global-h1 font-medium lg:font-semibold uppercase ">
             Our <span className="text-[#ED7125]">Vision</span>
           </h1>
           <p
-            className="global-p1 max-w-[550px] 
+            className="global-p2 md:global-p1 max-w-[550px] 
           font-light text-justify 
           "
           >
@@ -94,11 +102,11 @@ function VisionMissionSection({ vissionMissionContent }: Props) {
 
         {/* Mission */}
         <div className="space-y-2 md:space-y-6 pl-2 md:pl-12 ">
-          <h1 className="global-h1 font-semibold uppercase ">
+          <h1 className="global-h1 font-medium lg:font-semibold uppercase ">
             Our <span className="text-[#ED7125]">Mission</span>
           </h1>
           <p
-            className="global-p1 max-w-[550px]
+            className="global-p2 md:global-p1 max-w-[550px]
           font-light text-justify"
           >
             {vissionMissionContent?.missionDescription}

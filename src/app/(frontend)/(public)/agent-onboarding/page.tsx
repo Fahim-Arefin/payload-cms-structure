@@ -1,18 +1,10 @@
 import AgentOnboardingHeroWrapper from '@/components/custom/agent-onboarding/AgentOnboardingHeroWrapper'
-import FreedomOpportunity from '@/components/custom/agent-onboarding/FreedomOpportunity'
 import OnboardingForm from '@/components/custom/agent-onboarding/OnboardingForm'
-import OnboardingHighlight from '@/components/custom/agent-onboarding/OnboardingHighlight'
 import OnboardingIntro from '@/components/custom/agent-onboarding/OnboardingIntro'
 import OnboardingOpportunity from '@/components/custom/agent-onboarding/OnboardingOpportunity'
-import OnboardingRoles from '@/components/custom/agent-onboarding/OnboardingRoles'
 import OnboardingVision from '@/components/custom/agent-onboarding/OnboardingVIsion'
 import OnboardingWay from '@/components/custom/agent-onboarding/OnboardingWay'
 import RolesSection from '@/components/custom/agent-onboarding/RolesSection'
-import GlobalButton from '@/components/custom/shared/GlobalButton'
-import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import ToolTip from '@/components/custom/shared/ToolTip'
-import { Button } from '@/components/ui/button'
-import React from 'react'
 
 type Props = {}
 
@@ -55,7 +47,8 @@ function page({}: Props) {
     heading: 'Lead from',
     subheading: 'The front',
     paragraphTitle: 'Own your time. Maximize your growth.',
-    image: '/assets/shantaIntroImage.png',
+    image: '/assets/agent-onboarding/web/leaderBanner.png',
+    mobileImage: '/assets/agent-onboarding/mobile/leaderBanner.png',
     paragraph: `Being a Relationship Officer is about people, progress, and purpose. This role gives you high-earning potential, unmatched flexibility, and the rare chance to secure futures.  Set your own pace, work from anywhere, and unlock exclusive access to world-class training, rewarding income, and powerful professional connections.`,
   }
 
@@ -112,39 +105,60 @@ function page({}: Props) {
   ]
 
   const opportunityData = {
-    title: 'What Sets a Shanta Life RM/RO Champion Apart',
+    title: 'What Sets a Shanta Life ',
+    subTitle: 'RM/RO Champion Apart',
     items: [
-      { text: 'Seasoned Professionals', src: '/assets/onboardingOpportunity1.jpg' },
-      { text: 'Fresh Graduates', src: '/assets/onboardingOpportunity2.jpg' },
-      { text: 'Self-Motivated Undergrad Students', src: '/assets/onboardingOpportunity3.jpg' },
+      {
+        text: 'Seasoned Professionals',
+        src: '/assets/agent-onboarding/web/onboardingOpportunity1.jpg',
+        mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity1.jpg',
+      },
+      {
+        text: 'Fresh Graduates',
+        src: '/assets/agent-onboarding/web/onboardingOpportunity2.jpg',
+        mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity2.jpg',
+      },
+      {
+        text: 'Self-Motivated Undergrad Students',
+        src: '/assets/agent-onboarding/web/onboardingOpportunity3.jpg',
+        mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity3.jpg',
+      },
     ],
   }
 
   const expectedData = {
-    title: 'What Sets a Shanta Life RM/RO Champion Apart',
+    // title: 'What Sets a Shanta Life RM/RO Champion Apart',
+    title: 'What Sets a Shanta Life',
+    subTitle: 'RM/RO Champion Apart',
     sectionLeft: [
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon1.svg',
+        icon: '/assets/icons/web/opportunityIcon1.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon1.svg',
         text: 'Be a Brand Ambassador',
       },
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon2.svg',
+        icon: '/assets/icons/web/opportunityIcon2.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon2.svg',
         text: 'Own your Numbers',
       },
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon3.svg',
+        icon: '/assets/icons/web/opportunityIcon3.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon3.svg',
         text: 'Master the product,own the pitch',
       },
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon4.svg',
+        icon: '/assets/icons/web/opportunityIcon4.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon4.svg',
         text: 'Be Digitally Savy',
       },
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon5.svg',
+        icon: '/assets/icons/web/opportunityIcon5.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon5.svg',
         text: 'Follow up, follow through- build genuine connections',
       },
       {
-        icon: '/assets/agent-onboarding/web/opportunityIcon5.svg',
+        icon: '/assets/icons/web/opportunityIcon5.svg',
+        mobileIcon: '/assets/icons/mobile/opportunityIcon5.svg',
         text: 'Learn, Evolve & Excel',
       },
     ],
@@ -186,26 +200,30 @@ function page({}: Props) {
       title: 'Help secure lives',
     },
   ]
-  const visionData = [
-    {
-      img: '/assets/agent-onboarding/web/vision1.svg',
-      title: 'Experienced Professionals ',
-      points: [
-        '1-2 years of working in Sales',
-        'Proven expertise in leading teams',
-        'Excellent communication, networking, and analytical skills',
-      ],
-    },
-    {
-      img: '/assets/agent-onboarding/web/vision2.svg',
-      title: 'Freshers & Undergrads',
-      points: [
-        'Excellent communications and networking skills',
-        'Self motivated to build a future in sales',
-        'Graduates and current students from any recognized university or college can apply',
-      ],
-    },
-  ]
+  const visionData = {
+    bgImage: '/assets/agent-onboarding/web/visionBanner.jpg',
+    bgMobileImage: '/assets/agent-onboarding/mobile/visionBanner.jpg',
+    data: [
+      {
+        img: '/assets/agent-onboarding/web/vision1.svg',
+        title: 'Experienced Professionals ',
+        points: [
+          '1-2 years of working in Sales',
+          'Proven expertise in leading teams',
+          'Excellent communication, networking, and analytical skills',
+        ],
+      },
+      {
+        img: '/assets/agent-onboarding/web/vision2.svg',
+        title: 'Freshers & Undergrads',
+        points: [
+          'Excellent communications and networking skills',
+          'Self motivated to build a future in sales',
+          'Graduates and current students from any recognized university or college can apply',
+        ],
+      },
+    ],
+  }
 
   return (
     <div className="font-avenir">
@@ -216,7 +234,7 @@ function page({}: Props) {
       <RolesSection onboardingRoleData={onboardingRolesData} />
       {/* <FreedomOpportunity /> */}
       {/* <OnboardingRoles rolesData={rolesData} /> */}
-      <OnboardingVision data={visionData} />
+      <OnboardingVision visionData={visionData} />
       <OnboardingOpportunity expectedData={expectedData} opportunityData={opportunityData} />
       <OnboardingWay wayWeAreData={wayWeAreData} />
       <OnboardingForm />

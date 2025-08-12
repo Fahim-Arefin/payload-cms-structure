@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 
 function AwardSection() {
   return (
-    <div className="bg-white py-12 md:py-24 lg:py-[110px] 2xl:py-[150px]">
+    <div className="bg-white pb-24 pt-12 md:py-24 lg:py-[110px] 2xl:py-[150px]">
       <div className="relative">
         {/* linear linear-gradient */}
         <div className="md:hidden absolute top-[135px] w-full h-[4px]">
@@ -13,7 +13,7 @@ function AwardSection() {
         </div>
 
         <h1
-          className="global-h1 w-full lg:w-[85%] 2xl:w-[70%] mx-auto  font-semibold text-[#4A4A4A]
+          className="global-h1 w-full lg:w-[85%] 2xl:w-[70%] mx-auto font-medium lg:font-semibold text-[#4A4A4A]
         text-center lg:text-start
         mb-5 md:mb-8 lg:mb-16  2xl:mb-24"
         >
@@ -27,9 +27,16 @@ function AwardSection() {
             w-[70%] mx-auto lg:mx-0 lg:w-full 
             h-[200px] md:h-[300px] lg:h-[600px] xl:h-[650px] 2xl:h-[700px]"
             >
+              {/* mobile */}
               <img
-                className="h-full w-full z-[50] rounded-2xl object-cover"
-                src="/assets/about_milestone_2.jpg"
+                className="lg:hidden h-full w-full z-[50] rounded-2xl object-cover"
+                src="/assets/about-us/mobile/about_milestone_2.jpg"
+                alt="why choose us"
+              />
+              {/* web */}
+              <img
+                className="hidden lg:block h-full w-full z-[50] rounded-2xl object-cover"
+                src="/assets/about-us/web/about_milestone_2.jpg"
                 alt="why choose us"
               />
             </div>

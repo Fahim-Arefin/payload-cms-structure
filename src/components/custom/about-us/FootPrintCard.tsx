@@ -111,8 +111,16 @@ function FootPrintCard({ data, isActive = false }: Props) {
       `}
       >
         {/* Background image */}
+        {/* mobile */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat "
+          className="lg:hidden absolute inset-0 bg-cover bg-center bg-no-repeat "
+          style={{
+            backgroundImage: `url('${data.mobileImage}')`,
+          }}
+        />
+        {/* web */}
+        <div
+          className="hidden lg:block absolute inset-0 bg-cover bg-center bg-no-repeat "
           style={{
             backgroundImage: `url('${data.image}')`,
           }}
