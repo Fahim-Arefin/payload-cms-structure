@@ -45,7 +45,7 @@ function AllAboutCardList({ allAboutData }: Props) {
       }}
       plugins={[
         Autoplay({
-          delay: 5000,
+          delay: 3000,
         }),
       ]}
       setApi={setCarouselApi} // 👈 capture carousel API

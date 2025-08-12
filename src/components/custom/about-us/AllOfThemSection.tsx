@@ -34,8 +34,8 @@ function AllOfThemSection({ allOfThemData }: Props) {
     <div className="bg-[#F6EDDD] pb-12 lg:pb-0">
       <div className="container-padding">
         {/* top section */}
-        <div className="lg:w-[50%] space-y-6 2xl:space-y-12 ">
-          <h2 className="global-h3 font-semibold text-[#4A4A4A] text-center lg:text-start uppercase">
+        <div className="lg:w-[50%] space-y-2 md:space-y-6 2xl:space-y-12 ">
+          <h2 className="global-h1 lg:global-h3 font-medium lg:font-semibold text-[#4A4A4A] text-center lg:text-start uppercase">
             Leadership Team
           </h2>
           {/* <p className="global-p1 text-[#4A4A4A] text-center lg:text-justify ">
@@ -44,7 +44,7 @@ function AllOfThemSection({ allOfThemData }: Props) {
           </p> */}
         </div>
         {/* carousal section */}
-        <div className="mt-12 lg:mt-16 xl:mt-20 2xl:mt-32">
+        <div className="mt-6 md:mt-12 lg:mt-16 xl:mt-20 2xl:mt-32">
           <Carousel
             opts={{
               align: 'start',
@@ -53,7 +53,7 @@ function AllOfThemSection({ allOfThemData }: Props) {
             setApi={setCarouselApi} // 👈 capture carousel API
             plugins={[
               Autoplay({
-                delay: 5000,
+                delay: 3000,
               }),
             ]}
           >
@@ -67,7 +67,7 @@ function AllOfThemSection({ allOfThemData }: Props) {
             {/* Carousel Navigation */}
             <div
               className="flex gap-2 absolute h-fit
-            inset-x-0 justify-center lg:justify-end -bottom-16 md:-bottom-20 lg:-top-8 2xl:-top-12 lg:right-0"
+            inset-x-0 justify-center lg:justify-end -bottom-12 md:-bottom-20 lg:-top-8 2xl:-top-12 lg:right-0"
             >
               <CarouselNavButtons
                 onPrev={() => carouselApi?.scrollPrev()}

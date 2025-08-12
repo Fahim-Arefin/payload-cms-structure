@@ -14,36 +14,40 @@ function ShantaLifeIntroSection({ shantaIntroContent }: Props) {
       >
         <div className="grid grid-cols-2 relative lg:min-h-[60px] xl:min-h-[130px] ">
           {/* Background-like image */}
+
+          {/* web */}
           <div
             className=" hidden lg:block absolute inset-x-0  lg:-bottom-6 xl:-bottom-10 2xl:-bottom-[70px]
           lg:w-[90%] xl:w-[78%] 2xl:w-[80%] 
           lg:h-[180px] xl:h-[193px] 2xl:h-[230px]"
           >
             <img
-              src="/assets/shantaIntroImage2.png"
-              alt=""
-              className="
-            w-full object-cover object-center z-0 " // adjust offset as needed
+              src={shantaIntroContent?.image}
+              alt={shantaIntroContent?.heading}
+              // className="w-full object-cover object-center z-0 "
+              className="w-full h-full object-contain z-0 "
             />
           </div>
 
           <div
             className="col-span-1 lg:col-span-2
-           lg:font-semibold uppercase
+           font-medium lg:font-semibold uppercase
            lg:flex lg:flex-col "
           >
-            <h1 className="global-h1 text-[#ED7125]">{shantaIntroContent?.heading}</h1>
-            <h1 className="global-h1 text-black">{shantaIntroContent?.subheading}</h1>
+            <h1 className="global-h3 md:global-h1 text-[#ED7125]">{shantaIntroContent?.heading}</h1>
+            <h1 className="global-h3 md:global-h1 text-black">{shantaIntroContent?.subheading}</h1>
           </div>
+
+          {/* mobile */}
           <div className="col-span-1 lg:hidden md:-mt-4 ">
             <img
-              src="/assets/shantaIntroImage2.png"
-              alt=""
+              src={shantaIntroContent?.mobileImage}
+              alt={shantaIntroContent?.heading}
               className="w-full object-cover object-center"
             />
           </div>
         </div>
-        <div className="space-y-3 hidden md:block md:space-y-5 2xl:space-y-8 ">
+        <div className="space-y-2 md:space-y-5 2xl:space-y-8">
           <h5
             className=" text-[#4A4A4A] font-semibold uppercase
         global-h4

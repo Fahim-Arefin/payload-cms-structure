@@ -3,17 +3,42 @@ import { FootPrintSlider } from './FootPrintSlider'
 import { FootPrintDataType } from '@/types'
 
 type Props = {
-  footPrintData: FootPrintDataType[]
+  footPrintData: {
+    title: string
+    subTitle: string
+    bgImage: string
+    bgMobileImage: string
+    data: FootPrintDataType[]
+  }
 }
 
 function FootPrintSection({ footPrintData }: Props) {
+  const { title, subTitle, bgImage, bgMobileImage, data } = footPrintData
   return (
     <div className="relative">
       <div
         className="relative
-        h-[230px] md:h-[330px] lg:h-[400px] xl:h-[450px] 2xl:h-[550px] 
-        bg-[url('/assets/footprint.gif')] bg-cover bg-center bg-no-repeat overflow-hidden "
+        h-[230px] md:h-[330px] lg:h-[400px] xl:h-[450px] 2xl:h-[550px] overflow-hidden "
       >
+        {/* Background Image */}
+        {/* mobile */}
+        <div
+          className="lg:hidden absolute inset-0 bg-cover bg-center bg-no-repeat overflow-hidden"
+          style={{
+            backgroundImage: `url(${bgMobileImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        {/* web */}
+        <div
+          className="hidden lg:block absolute inset-0 bg-cover bg-center bg-no-repeat overflow-hidden"
+          style={{
+            backgroundImage: `url(${bgImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
         {/* Mobile to <lg overlay */}
         <div className="absolute inset-0 bg-[rgba(37,69,37,0.8)] lg:hidden z-0" />
 
@@ -23,11 +48,11 @@ function FootPrintSection({ footPrintData }: Props) {
         {/* Content */}
         <div className="container-padding uppercase text-white relative z-10">
           <div className="text-center lg:text-start">
-            <h1 className="hidden lg:block global-h1 lg:font-semibold">Shanta&rsquo;s FOOTPRINT</h1>
-            <h1 className="lg:hidden global-h1 lg:font-semibold">
+            <h1 className="global-h1 font-medium lg:font-semibold uppercase">{title}</h1>
+            {/* <h1 className="lg:hidden global-h1 font-medium lg:font-semibold uppercase">
               Shanta&rsquo;s Living <span className="text-[#ED7125]">Ecosystem</span>
-            </h1>
-            <h3 className="global-h1 md:global-h4 font-light">Where Every Venture Connects</h3>
+            </h1> */}
+            <h3 className="global-h1 md:global-h4 font-light">{subTitle}</h3>
           </div>
         </div>
       </div>
@@ -43,7 +68,7 @@ function FootPrintSection({ footPrintData }: Props) {
       pb-[220px] md:pb-[250px]  lg:pb-[250px] xl:pb-[300px] 2xl:pb-[350px] 
       z-20 bg-white"
       >
-        <FootPrintSlider footPrintData={footPrintData} />
+        <FootPrintSlider footPrintData={data} />
       </div>
     </div>
   )

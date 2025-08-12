@@ -10,7 +10,7 @@ function DirectorProfile({ data }: Props) {
     <Link href={`/all-bods#id-${data?.id}`}>
       <div
         className="group
-     hover:bg-[#585859] transition-all duration-200 cursor-pointer
+     hover:bg-[#585859]/60 transition-all duration-300 cursor-pointer
         p-3 xl:p-5
       rounded-md"
       >
@@ -29,11 +29,20 @@ function DirectorProfile({ data }: Props) {
     bg-contain bg-no-repeat bg-center
   "
           >
+            {/* mobile */}
+            <img
+              src={data?.mobileImage}
+              alt={data?.title}
+              className="lg:hidden absolute z-20 bottom-0
+            w-full
+            h-[220px] lg:h-[240px] xl:h-[260px] 2xl:h-[350px]
+            rounded-b-full"
+            />
+            {/* web */}
             <img
               src={data?.image}
               alt={data?.title}
-              className="absolute z-20 bottom-0
-
+              className="hidden lg:block absolute z-20 bottom-0
             w-full
             h-[220px] lg:h-[240px] xl:h-[260px] 2xl:h-[350px]
             rounded-b-full"
@@ -52,14 +61,14 @@ function DirectorProfile({ data }: Props) {
         </div>
         <div className="mt-6">
           <p
-            className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[18px]
-         text-[#434342] group-hover:text-white  uppercase lg:capitalize md:font-medium text-center"
+            className="text-[14px] xl:text-[16px] 2xl:text-[18px]
+         text-[#434342] group-hover:text-white capitalize font-medium text-center"
           >
             {data?.name}
           </p>
           <p
-            className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[18px]
-         text-[#9C8639] group-hover:text-white  uppercase lg:capitalize md:font-medium text-center"
+            className="text-[12px] xl:text-[14px] 2xl:text-[16px]
+         text-[#9C8639] group-hover:text-white uppercase font-medium text-center"
           >
             {data?.title}
           </p>
