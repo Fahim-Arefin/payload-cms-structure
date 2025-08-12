@@ -17,6 +17,7 @@ import CarouselNavButtons from '../shared/CarousalNavButtons'
 type OpportunityItem = {
   text: string
   src: string
+  mobileSrc: string
 }
 
 type ExpectedItem = {
@@ -96,7 +97,16 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
               {opportunityData.items.map((item, idx) => (
                 <CarouselItem key={idx} className="basis-[45%] flex flex-col items-center gap-4">
                   <div className="relative w-full aspect-[170/155] rounded-md overflow-hidden">
-                    <img src={item.src} alt={item.text} className="w-full h-full object-cover" />
+                    <img
+                      src={item.mobileSrc}
+                      alt={item.text}
+                      className="md:hidden w-full h-full object-cover"
+                    />
+                    <img
+                      src={item.src}
+                      alt={item.text}
+                      className="hidden md:block w-full h-full object-cover"
+                    />
                     <div className="absolute inset-0 bg-black/30 flex items-center justify-center px-4 text-center">
                       {/* <p className="text-white font-medium text-base">{item.text}</p> */}
                     </div>

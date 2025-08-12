@@ -108,9 +108,21 @@ function page({}: Props) {
     title: 'What Sets a Shanta Life ',
     subTitle: 'RM/RO Champion Apart',
     items: [
-      { text: 'Seasoned Professionals', src: '/assets/onboardingOpportunity1.jpg' },
-      { text: 'Fresh Graduates', src: '/assets/onboardingOpportunity2.jpg' },
-      { text: 'Self-Motivated Undergrad Students', src: '/assets/onboardingOpportunity3.jpg' },
+      {
+        text: 'Seasoned Professionals',
+        src: '/assets/agent-onboarding/web/onboardingOpportunity1.jpg',
+        mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity1.jpg',
+      },
+      {
+        text: 'Fresh Graduates',
+        src: '/assets/agent-onboarding/web/onboardingOpportunity2.jpg',
+        mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity2.jpg',
+      },
+      {
+        text: 'Self-Motivated Undergrad Students',
+        src: '/assets/agent-onboarding/web/onboardingOpportunity3.jpg',
+        mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity3.jpg',
+      },
     ],
   }
 
