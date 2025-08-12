@@ -38,7 +38,8 @@ function page() {
     heading: 'Advancing',
     subheading: 'A Legacy of Setting Standards',
     paragraphTitle: 'Nurtured with Trust. Built for Tomorrow',
-    image: '/assets/shantaIntroImage.png',
+    image: '/assets/about-us/web/shantaIntroImage.png',
+    mobileImage: '/assets/about-us/web/shantaIntroImage.png',
     paragraph:
       'Born from a vision to redefine life insurance in Bangladesh, Shanta Life is backed by a powerful consortium comprised of Shanta Holdings, Shanta Lifestyle, Shanta Securities, Shanta Asset Management, Shanta Equity, Shanta Multiverse, Shanta Property Management, FAR Asset Management, and Nasah Holdings.',
   }
