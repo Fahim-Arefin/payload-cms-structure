@@ -48,7 +48,7 @@ function CueItem({ card, index }: Props) {
       </div>
 
       {/* Bottom Image */}
-      <div
+      {/* <div
         className={`bg-red-500 z-0 w-full h-[400px] lg:h-[280px] xl:h-[330px] 2xl:h-[350px] ${index % 2 === 0 ? 'order-2 rounded-2xl' : 'order-1 rounded-2xl'}`}
       >
         <img
@@ -61,6 +61,29 @@ function CueItem({ card, index }: Props) {
           src={card.image}
           alt={`${card.title} visual`}
         />
+      </div> */}
+      {/* Bottom Image */}
+      <div
+        className={`z-0 w-full h-[400px] lg:h-[280px] xl:h-[330px] 2xl:h-[350px] ${
+          index % 2 === 0 ? 'order-2 rounded-2xl' : 'order-1 rounded-2xl'
+        }`}
+      >
+        <picture>
+          {/* Desktop / Large screens */}
+          <source media="(min-width: 1024px)" srcSet={card.image} />
+          {/* Mobile (fallback) */}
+          <img
+            src={card.mobileImage}
+            alt={`${card.title} visual`}
+            className={`h-full w-full object-cover rounded-2xl ${
+              index % 2 === 0
+                ? 'lg:rounded-b-2xl lg:rounded-t-none'
+                : 'lg:rounded-t-2xl lg:rounded-b-none'
+            }`}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       </div>
 
       {/* overlay background: #0000005E;*/}
