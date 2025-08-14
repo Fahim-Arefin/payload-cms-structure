@@ -6,20 +6,24 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/
 // import
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 // import ToolTip from '../shared/ToolTip'
-import LottiePlayer from '../shared/LottiePlayer'
-import LottieBackground from '../shared/LottieBackground'
+// import LottiePlayer from '../shared/LottiePlayer'
+// import LottieBackground from '../shared/LottieBackground'
 
 function VideoSection() {
   const [open, setOpen] = useState(false)
   return (
     <div className="pt-[150px] md:pt-[100px] lg:pt-[150px] xl:pt-[200px] bg-white">
       <div className="relative w-full font-avenir h-[230px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[600px]">
-        {/* Background GIF */}
-        <img
-          src="/assets/bg.gif"
-          alt="background gif"
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="absolute inset-0 w-full h-full object-cover z-0"
-        />
+        >
+          <source src="/assets/bg.mp4" type="video/mp4" />
+        </video>
         {/* <LottiePlayer
           className="absolute inset-0 z-0"
           style={{ width: '100%', objectFit: 'fill' }}
