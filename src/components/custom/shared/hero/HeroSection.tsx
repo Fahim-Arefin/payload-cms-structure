@@ -10,6 +10,7 @@ import {
 import { HeroContentType } from '@/types'
 import Autoplay from 'embla-carousel-autoplay'
 import HeroItem from './HeroItem'
+import { sliderDelay } from '@/lib/data'
 
 type Props = {
   heroSlides: HeroContentType[]
@@ -30,7 +31,7 @@ function HeroSection({ heroSlides, children, height, top, position }: Props) {
         }}
         plugins={[
           Autoplay({
-            delay: 5000,
+            delay: sliderDelay,
           }),
         ]}
       >

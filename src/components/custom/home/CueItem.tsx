@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { LuArrowUpRight } from 'react-icons/lu'
@@ -6,12 +7,12 @@ import { LuArrowUpRight } from 'react-icons/lu'
 type Props = {
   card: {
     icon: string
-    mobileIcon: string
+    // mobileIcon: string
     title: string
     subtitle: string
     description: string
     image: string
-    mobileImage: string
+    // mobileImage: string
     link: string
   }
   index: number
@@ -27,9 +28,14 @@ function CueItem({ card, index }: Props) {
             index % 2 === 0 ? 'order-1 rounded-t-2xl' : 'order-2 rounded-b-2xl'
           }`}
       >
-        <div className="h-[80px] w-[80px] lg:h-[50px] lg:w-[50px] xl:h-[60px] xl:w-[60px] 2xl:h-[80px] 2xl:w-[80px]">
-          <img className="h-full w-full md:hidden" src={card.mobileIcon} alt={card.title} />
-          <img className="h-full w-full hidden md:block" src={card.icon} alt={card.title} />
+        <div className="relative h-[80px] w-[80px] lg:h-[50px] lg:w-[50px] xl:h-[60px] xl:w-[60px] 2xl:h-[80px] 2xl:w-[80px]">
+          <Image
+            className=""
+            src={card.icon}
+            alt={card.title}
+            fill
+            sizes="(max-width: 1023px) 80px, 5vw"
+          />
         </div>
         <h1 className="text-xl lg:text-lg xl:text-2xl mt-4 font-semibold ">{card.title}</h1>
         <h2 className="text-lg lg:text-lg xl:text-2xl font-semibold ">{card.subtitle}</h2>
@@ -49,22 +55,20 @@ function CueItem({ card, index }: Props) {
 
       {/* Bottom Image */}
       <div
-        className={`bg-red-500 z-0 w-full h-[400px] lg:h-[280px] xl:h-[330px] 2xl:h-[350px] ${index % 2 === 0 ? 'order-2 rounded-2xl' : 'order-1 rounded-2xl'}`}
+        className={`relative z-0 w-full h-[400px] lg:h-[280px] xl:h-[330px] 2xl:h-[350px] ${index % 2 === 0 ? 'order-2 rounded-2xl' : 'order-1 rounded-2xl'}`}
       >
-        <img
-          className={`md:hidden h-full w-full object-cover rounded-2xl ${index % 2 === 0 ? 'lg:rounded-b-2xl lg:rounded-t-none' : 'lg:rounded-t-2xl lg:rounded-b-none'}`}
-          src={card.mobileImage}
-          alt={`${card.title} visual`}
-        />
-        <img
-          className={`hidden md:block h-full w-full object-cover rounded-2xl ${index % 2 === 0 ? 'lg:rounded-b-2xl lg:rounded-t-none' : 'lg:rounded-t-2xl lg:rounded-b-none'}`}
+        <Image
+          fill
+          className={`z-0 object-cover rounded-2xl ${index % 2 === 0 ? 'lg:rounded-b-2xl lg:rounded-t-none' : 'lg:rounded-t-2xl lg:rounded-b-none'}`}
           src={card.image}
           alt={`${card.title} visual`}
+          sizes="(max-width: 767px) 100vw,(max-width: 1023px) 50vw, 33vw"
         />
       </div>
 
       {/* overlay background: #0000005E;*/}
       <div className="lg:hidden absolute inset-0 bg-black/50 rounded-2xl z-10" />
+      <div className="hidden lg:block absolute inset-0 bg-black/10 rounded-2xl z-10" />
     </div>
   )
 }

@@ -4,6 +4,7 @@ import { ApiResponse, ApiResToShow, getTotalPremium } from '@/utils/premiumCalcu
 import { useRef, useState } from 'react'
 import GlobalButton from '../shared/GlobalButton'
 import QuoteForm from './QuoteForm'
+import Image from 'next/image'
 
 function QuoteSection() {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
@@ -409,7 +410,7 @@ function QuoteSection() {
       </div>
       {/* bg image */}
       {/* left rotate image */}
-      <div
+      {/* <div
         className="hidden lg:block absolute 
         lg:h-[550px] lg:w-[370px] xl:w-[470px] xl:h-[650px] 2xl:w-[670px] 
         bg-[url('/assets/homepage/web/quotebg.jpg')] bg-cover bg-center bg-no-repeat rounded-[20px] z-0
@@ -418,9 +419,29 @@ function QuoteSection() {
           transform: 'rotate(-7deg)',
           transformOrigin: 'top left',
         }}
-      />
-      {/* right rotate image */}
+      /> */}
       <div
+        className="hidden lg:block  
+        lg:h-[550px] lg:w-[370px] xl:w-[470px] xl:h-[650px] 2xl:w-[670px] rounded-[20px] z-0
+        absolute top-0 lg:right-[140px] xl:right-[230px] 2xl:right-[200px] opacity-20"
+      >
+        <Image
+          src="/assets/homepage/web/quotebg.jpg"
+          alt="Quote background"
+          fill
+          className="
+        inset-0
+        rounded-[20px] z-0 
+        object-cover object-center object-no-repeat"
+          style={{
+            transform: 'rotate(-7deg)',
+            transformOrigin: 'top left',
+          }}
+          sizes="(max-width: 1349px) 300px , 500px"
+        />
+      </div>
+      {/* right rotate image */}
+      {/* <div
         className="hidden lg:block absolute 
         lg:h-[550px] lg:w-[370px] xl:w-[470px] xl:h-[650px] 2xl:w-[670px] 
         bg-[url('/assets/homepage/web/quotebg.jpg')] bg-cover bg-center bg-no-repeat rounded-[20px] z-0
@@ -429,7 +450,27 @@ function QuoteSection() {
           transform: 'rotate(7deg)',
           transformOrigin: 'top right',
         }}
-      />
+      /> */}
+      <div
+        className="hidden lg:block 
+        lg:h-[550px] lg:w-[370px] xl:w-[470px] xl:h-[650px] 2xl:w-[670px] rounded-[20px] z-0 opacity-20 
+        absolute top-0 lg:-right-[50px] xl:-right-[90px] 2xl:-right-[200px]"
+      >
+        <Image
+          src="/assets/homepage/web/quotebg.jpg"
+          alt="Quote background"
+          fill
+          className="
+        inset-0
+        rounded-[20px] z-0 
+        object-cover object-center object-no-repeat"
+          style={{
+            transform: 'rotate(7deg)',
+            transformOrigin: 'top right',
+          }}
+          sizes="(max-width: 1349px) 300px , 500px"
+        />
+      </div>
     </div>
   )
 }

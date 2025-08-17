@@ -19,8 +19,8 @@ const HeroItem = ({ slide, top, position }: Props) => {
         src={slide.image}
         alt={slide.title}
         fill
-        priority
         className={`object-cover ${position}`}
+        sizes="(max-width: 1349px) 50vw, 100vw"
       />
       {/* Overlay */}
       <div className="absolute inset-0 z-10 bg-black/35" />

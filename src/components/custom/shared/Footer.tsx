@@ -1,59 +1,60 @@
 import React from 'react'
 import Link from 'next/link'
 import ToolTip from './ToolTip'
+import Image from 'next/image'
 
 function Footer() {
   const shurjoPayData = [
     {
-      image: '/assets/fotter logos/1.png',
+      image: '/assets/fotter-logos/1.png',
     },
     {
-      image: '/assets/fotter logos/2.png',
+      image: '/assets/fotter-logos/2.png',
     },
     {
-      image: '/assets/fotter logos/3.png',
+      image: '/assets/fotter-logos/3.png',
     },
     {
-      image: '/assets/fotter logos/4.png',
+      image: '/assets/fotter-logos/4.png',
     },
     {
-      image: '/assets/fotter logos/5.png',
+      image: '/assets/fotter-logos/5.png',
     },
     {
-      image: '/assets/fotter logos/6.png',
+      image: '/assets/fotter-logos/6.png',
     },
     {
-      image: '/assets/fotter logos/7.png',
+      image: '/assets/fotter-logos/7.png',
     },
     {
-      image: '/assets/fotter logos/8.png',
+      image: '/assets/fotter-logos/8.png',
     },
     {
-      image: '/assets/fotter logos/9.png',
+      image: '/assets/fotter-logos/9.png',
     },
     {
-      image: '/assets/fotter logos/10.png',
+      image: '/assets/fotter-logos/10.png',
     },
     {
-      image: '/assets/fotter logos/11.png',
+      image: '/assets/fotter-logos/11.png',
     },
     {
-      image: '/assets/fotter logos/12.png',
+      image: '/assets/fotter-logos/12.png',
     },
     {
-      image: '/assets/fotter logos/13.png',
+      image: '/assets/fotter-logos/13.png',
     },
     {
-      image: '/assets/fotter logos/14.png',
+      image: '/assets/fotter-logos/14.png',
     },
     {
-      image: '/assets/fotter logos/15.png',
+      image: '/assets/fotter-logos/15.png',
     },
     {
-      image: '/assets/fotter logos/16.png',
+      image: '/assets/fotter-logos/16.png',
     },
     {
-      image: '/assets/fotter logos/17.png',
+      image: '/assets/fotter-logos/17.png',
     },
   ]
 
@@ -80,12 +81,13 @@ function Footer() {
         {/* grid 1  */}
         <div className="flex flex-col space-y-3 p-2 col-span-3 lg:col-span-2 lg:-mt-3 xl:-mt-8">
           {/* logo */}
-          <div className="h-[60px] md:h-[80px] md:w-[80px] lg:h-[100px] 2xl:h-[150px] w-[60px] lg:w-[100px] 2xl:w-[150px] mx-auto lg:mx-0">
-            <img
-              src="/assets/footer2.png"
-              // src="/assets/footer2.png"
+          <div className="relative h-[60px] md:h-[80px] md:w-[80px] lg:h-[100px] 2xl:h-[150px] w-[60px] lg:w-[100px] 2xl:w-[150px] mx-auto lg:mx-0">
+            <Image
+              src="/assets/fotter-logos/footer2.png"
+              fill
               alt="footer logo"
-              className="h-full w-full object-contain "
+              className="object-contain "
+              sizes="200px"
             />
           </div>
           {/* <div className="lg:hidden w-full h-[1px] bg-white"></div> */}
@@ -399,8 +401,18 @@ function Footer() {
               <h1 className="lg:pt-[5px] xl:pt-[6px] 2xl:pt-[9px] text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium text-white/50">
                 Powered By -
               </h1>
+              {/* <div className=" lg:h-[26px] xl:h-[32px] 2xl:h-[40px]">
+                <img src="/assets/fotter-logos/shurjo.png" alt="" className="h-full" />
+              </div> */}
               <div className="lg:h-[26px] xl:h-[32px] 2xl:h-[40px]">
-                <img src="/assets/shurjo.png" alt="" className="h-full" />
+                <Image
+                  src="/assets/fotter-logos/shurjo.png" // better: /assets/footer-logos/shurjo.png
+                  alt="Shurjo"
+                  width={160}
+                  height={40}
+                  className="h-full w-auto object-contain"
+                  sizes="85px"
+                />
               </div>
             </div>
             {/* photos */}
@@ -413,14 +425,19 @@ function Footer() {
                   xl:w-[42px] xl:h-[42px]
                   2xl:w-[52px] 2xl:h-[52px]"
                 >
-                  <img
-                    src={img?.image}
-                    alt="pay-icon"
-                    className="object-contain
-                    lg:w-[28px] lg:h-[28px] 
+                  <div
+                    className="relative lg:w-[28px] lg:h-[28px] 
                     xl:w-[36px] xl:h-[36px] 
                     2xl:w-[45px] 2xl:h-[45px] "
-                  />
+                  >
+                    <Image
+                      fill
+                      src={img?.image}
+                      alt="pay-icon"
+                      className="object-contain"
+                      sizes="(max-width:1023px) 32px, (max-width:1279px) 32px, (max-width:1535px) 42px, 52px"
+                    />
+                  </div>
                 </div>
               ))}
             </div>

@@ -32,20 +32,20 @@ const CorporateHighlight: FC<CorporateHighlightProps> = ({
           <h2 className="text-[20px] md:global-h2 font-bold text-left uppercase mb-6 lg:mb-10">
             At a Glance
           </h2>
-          <div className="flex justify-between text-center px-10">
+          <div className="flex justify-between text-center px-0 md:px-10 border border-black">
             <div className="text-start">
-              <p className="text-[30px] md:text-[60px] font-bold">100+</p>
-              <p className="mt-2 text-[1.1rem]  lg:text-[1.5rem]">Claims</p>
+              <p className="text-[25px] md:text-[50px] lg:text-[60px] font-bold">100+</p>
+              <p className="mt-2 text-[1.1rem] lg:text-[1.5rem] font-normal">Claims</p>
             </div>
             <div className="text-start">
-              <p className="text-[30px] md:text-[60px] font-bold">
+              <p className="text-[25px] md:text-[50px] lg:text-[60px] font-bold">
                 5 <span className="font-semibold">Days</span>
               </p>
-              <p className="mt-2 text-[1.1rem] lg:text-[1.5rem]">Settlement</p>
+              <p className="mt-2 text-[1.1rem] lg:text-[1.5rem] font-normal">Settlement</p>
             </div>
             <div className="text-start">
-              <p className="text-[30px] md:text-[60px] font-bold">100%</p>
-              <p className="mt-2 text-[1.1rem]  lg:text-[1.5rem]">Settlement rate</p>
+              <p className="text-[25px] md:text-[50px] lg:text-[60px] font-bold">100%</p>
+              <p className="mt-2 text-[1.1rem]  lg:text-[1.5rem] font-normal">Settlement rate</p>
             </div>
           </div>
         </div>

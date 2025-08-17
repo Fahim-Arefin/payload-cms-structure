@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Props = {
   data: InsuranceDataType
@@ -48,7 +49,7 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
             >
               <h4 className="font-semibold uppercase cursor-pointer">
                 <Link href="/">
-                  <span className="text-[#ED7125] ">{titleFirstWord}</span>{' '}
+                  <span className="text-[#ED7125] ">{titleFirstWord} </span>{' '}
                   {titleRestWords.join(' ')}
                 </Link>
               </h4>
@@ -58,27 +59,27 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
             <Dialog>
               <DialogTrigger asChild>
                 <div
+                  // w-full aspect-[640/480]
+                  // h-[150px] md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full
                   className={cn(
                     `relative group cursor-pointer 
-        h-[150px] md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full  
-        overflow-hidden transition-all`,
+                    h-[150px] md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full
+                    overflow-hidden transition-all`,
                     content === 'left' ? 'order-2' : 'order-1',
                   )}
-                  // style={{
-                  //   backgroundImage: `url(${data.mainImage})`,
-                  // }}
                 >
-                  {/* Mobile image: visible only on mobile */}
-                  <div
-                    className="absolute inset-0 md:hidden bg-no-repeat bg-contain bg-center"
-                    style={{ backgroundImage: `url(${data?.mainMobileImage})` }}
-                  />
-                  {/* Desktop/Tablet image: visible on md and up */}
-                  <div
-                    className="absolute inset-0 hidden md:block bg-no-repeat bg-contain bg-center"
+                  {/* <div
+                    className="absolute inset-0 bg-no-repeat bg-contain bg-center"
                     style={{ backgroundImage: `url(${data.mainImage})` }}
+                  /> */}
+                  <Image
+                    src={data.mainImage}
+                    alt={data?.subtitle ?? 'Video thumbnail'}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 1023px) 300px, (max-width: 1349px) 400px, 500px"
+                    // placeholder="blur" blurDataURL="/tiny-placeholder.png"
                   />
-
                   {/* Hover dark overlay */}
                   <div
                     className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300 
@@ -92,7 +93,7 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
               -right-0.5 lg:-right-0.5 xl:-right-[3px] 2xl:-right-0.5 "
                   >
                     <img
-                      src="/assets/play.svg"
+                      src="/assets/icons/web/play.svg"
                       alt=""
                       className=" 
                       w-[30px] lg:w-[40px] xl:w-[50px] 2xl:w-[60px]  
