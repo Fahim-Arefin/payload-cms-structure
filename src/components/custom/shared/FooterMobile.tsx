@@ -6,55 +6,55 @@ import Image from 'next/image'
 function FooterMobile() {
   const shurjoPayData = [
     {
-      image: '/assets/fotter logos/1.png',
+      image: '/assets/fotter-logos/1.png',
     },
     {
-      image: '/assets/fotter logos/2.png',
+      image: '/assets/fotter-logos/2.png',
     },
     {
-      image: '/assets/fotter logos/3.png',
+      image: '/assets/fotter-logos/3.png',
     },
     {
-      image: '/assets/fotter logos/4.png',
+      image: '/assets/fotter-logos/4.png',
     },
     {
-      image: '/assets/fotter logos/5.png',
+      image: '/assets/fotter-logos/5.png',
     },
     {
-      image: '/assets/fotter logos/6.png',
+      image: '/assets/fotter-logos/6.png',
     },
     {
-      image: '/assets/fotter logos/7.png',
+      image: '/assets/fotter-logos/7.png',
     },
     {
-      image: '/assets/fotter logos/8.png',
+      image: '/assets/fotter-logos/8.png',
     },
     {
-      image: '/assets/fotter logos/9.png',
+      image: '/assets/fotter-logos/9.png',
     },
     {
-      image: '/assets/fotter logos/10.png',
+      image: '/assets/fotter-logos/10.png',
     },
     {
-      image: '/assets/fotter logos/11.png',
+      image: '/assets/fotter-logos/11.png',
     },
     {
-      image: '/assets/fotter logos/12.png',
+      image: '/assets/fotter-logos/12.png',
     },
     {
-      image: '/assets/fotter logos/13.png',
+      image: '/assets/fotter-logos/13.png',
     },
     {
-      image: '/assets/fotter logos/14.png',
+      image: '/assets/fotter-logos/14.png',
     },
     {
-      image: '/assets/fotter logos/15.png',
+      image: '/assets/fotter-logos/15.png',
     },
     {
-      image: '/assets/fotter logos/16.png',
+      image: '/assets/fotter-logos/16.png',
     },
     {
-      image: '/assets/fotter logos/17.png',
+      image: '/assets/fotter-logos/17.png',
     },
   ]
   return (
