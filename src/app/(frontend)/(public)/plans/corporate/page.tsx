@@ -1,16 +1,12 @@
 import CorporateAddons from '@/components/custom/corporate/CorporateAddons'
 import CorporateChoose from '@/components/custom/corporate/CorporateChoose'
 import CorporateHighlight from '@/components/custom/corporate/CorporateHighlights'
+import CorporateOfferings from '@/components/custom/corporate/CorporateOfferings'
 import CorporateSuitability from '@/components/custom/corporate/CorporateSuitability'
 import PartnerCarousel from '@/components/custom/corporate/PartnerCarousel'
-import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
-import GlobalButton from '@/components/custom/shared/GlobalButton'
-import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import CallNowButton from '@/components/custom/shared/CallNowButton'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import React from 'react'
-import CorporateOfferings from '@/components/custom/corporate/CorporateOfferings'
+import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
+import HeroSection from '@/components/custom/shared/hero/HeroSection'
 
 type Props = {}
 

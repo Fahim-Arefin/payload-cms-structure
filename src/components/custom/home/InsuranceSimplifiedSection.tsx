@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import InsuranceSimplifiedLargeSection from './InsuranceSimplifiedLargeSection'
 import Autoplay from 'embla-carousel-autoplay'
+import { sliderDelay } from '@/lib/data'
 
 type Props = {
   data: InsuranceDataType[]
@@ -34,7 +35,6 @@ function InsuranceSimplifiedSection({ data }: Props) {
   return (
     <div className="">
       {/* headline */}
-
       <div className="w-[95%] mx-auto">
         <h1
           className="global-h1 uppercase font-semibold space-x-2 md:space-x-4 
@@ -44,13 +44,12 @@ function InsuranceSimplifiedSection({ data }: Props) {
           <span className="text-[#ED7125]">Simplified</span>
         </h1>
       </div>
-
       <Carousel
         className="w-[95%] mx-auto"
         setApi={setCarouselApi}
         plugins={[
           Autoplay({
-            delay: 5000,
+            delay: sliderDelay,
           }),
         ]}
       >

@@ -5,6 +5,7 @@ import { BsPlay } from 'react-icons/bs'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 // import
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import Image from 'next/image'
 // import ToolTip from '../shared/ToolTip'
 // import LottiePlayer from '../shared/LottiePlayer'
 // import LottieBackground from '../shared/LottieBackground'
@@ -58,37 +59,31 @@ function VideoSection() {
           rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px] mx-auto
           -top-[100px] lg:-top-[120px] xl:-top-[160px] 2xl:-top-[200px]"
         >
-          {/* mobile */}
+          <div className="relative w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]">
+            <Image
+              src="/assets/homepage/web/thumbnails/yt-thumbnail-4.jpg"
+              alt="Video thumbnail"
+              fill
+              className="inset-0 rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px] object-cover"
+              sizes="(max-width: 1023px) 300px, (max-width: 1349px) 500px, 600px"
+            />
+          </div>
+
+          {/* linear-gradient overlay */}
           <div
-            className="lg:hidden flex justify-between items-center w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]"
-            style={{
-              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/assets/homepage/mobile/thumbnails/yt-thumbnail-4.jpg')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              backgroundColor: 'lightgray',
-            }}
-          ></div>
-          {/* after lg */}
-          <div
-            className="hidden lg:flex justify-between items-center w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]"
-            style={{
-              backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/assets/homepage/web/thumbnails/yt-thumbnail-4.jpg')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              backgroundColor: 'lightgray',
-            }}
-          ></div>
-          <div className=" -mt-14 lg:-mt-16 xl:-mt-20">
+            className="rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px] 
+          absolute inset-0 bg-[linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.2))]"
+          />
+
+          <div className="relative z-30 -mt-14 lg:-mt-16 xl:-mt-20">
             <div className="flex items-center justify-between w-[85%] mx-auto">
               <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                   <div className="flex space-x-2 2xl:space-x-4 text-white items-center cursor-pointer">
                     <div className="border-2 border-white rounded-full p-1 2xl:p-2">
-                      <BsPlay />
+                      <BsPlay className="font-bold" />
                     </div>
-                    <div className="text-white/70 global-p2">From the Expert</div>
+                    <div className="text-white font-medium global-p2">From the Expert</div>
                   </div>
                 </DialogTrigger>
 
