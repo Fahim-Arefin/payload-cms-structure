@@ -33,13 +33,12 @@ function NewsSection() {
             className="relative h-[140px] xl:h-[225px] 2xl:h-[350px] w-full rounded-sm lg:rounded-md 2xl:rounded-xl cursor-pointer"
           >
             {/* main img */}
-            {/* lg */}
             <Image
               src="/assets/homepage/web/news11.jpg"
               alt="news-1"
               fill
               className="object-cover rounded-sm lg:rounded-md 2xl:rounded-xl"
-              sizes="33vw"
+              sizes="(max-width: 767px) 100vw, 33vw"
             />
 
             {/* overlay */}
@@ -95,7 +94,7 @@ function NewsSection() {
                 src="/assets/homepage/web/newsSingleBanner.jpg"
                 alt="news-2"
                 className=" object-cover rounded-t-sm lg:rounded-t-md 2xl:!rounded-t-xl"
-                sizes="33vw"
+                sizes="(max-width: 767px) 100vw, 33vw"
               />
               {/* overlay */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/30 rounded-t-sm lg:rounded-t-md 2xl:!rounded-t-xl"></div>
@@ -142,7 +141,7 @@ function NewsSection() {
               alt="News Thumbnail"
               fill
               className="inset-0 object-cover rounded-sm lg:rounded-md 2xl:!rounded-xl"
-              sizes="50vw"
+              sizes="(max-width: 767px) 100vw, 50vw"
             />
           </div>
 
@@ -216,7 +215,7 @@ function NewsSection() {
               src="/assets/homepage/web/news5.jpg"
               alt="news-1"
               className="object-cover"
-              sizes="33vw"
+              sizes="(max-width: 767px) 100vw, 33vw"
             />
 
             {/* overlay */}

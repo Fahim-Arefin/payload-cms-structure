@@ -34,7 +34,7 @@ function CueItem({ card, index }: Props) {
             src={card.icon}
             alt={card.title}
             fill
-            sizes="(max-width: 400px) 10vw,(max-width: 1023px) 5vw, (max-width: 1349px) 5vw , (max-width: 1699px) 5vw, 5vw"
+            sizes="(max-width: 1023px) 80px, 5vw"
           />
         </div>
         <h1 className="text-xl lg:text-lg xl:text-2xl mt-4 font-semibold ">{card.title}</h1>
@@ -62,7 +62,7 @@ function CueItem({ card, index }: Props) {
           className={`z-0 object-cover rounded-2xl ${index % 2 === 0 ? 'lg:rounded-b-2xl lg:rounded-t-none' : 'lg:rounded-t-2xl lg:rounded-b-none'}`}
           src={card.image}
           alt={`${card.title} visual`}
-          sizes="(max-width: 767px) 100vw,(max-width: 1023px) 50w, 400px"
+          sizes="(max-width: 767px) 100vw,(max-width: 1023px) 50vw, 33vw"
         />
       </div>
 
