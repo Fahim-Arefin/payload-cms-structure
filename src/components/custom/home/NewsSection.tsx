@@ -33,17 +33,13 @@ function NewsSection() {
             className="relative h-[140px] xl:h-[225px] 2xl:h-[350px] w-full rounded-sm lg:rounded-md 2xl:rounded-xl cursor-pointer"
           >
             {/* main img */}
-            {/* mobile */}
-            <img
-              src="/assets/homepage/mobile/news11.jpg"
-              alt="news-1"
-              className="lg:hidden w-full h-full object-cover rounded-sm lg:rounded-md 2xl:rounded-xl"
-            />
             {/* lg */}
-            <img
+            <Image
               src="/assets/homepage/web/news11.jpg"
               alt="news-1"
-              className="hidden lg:block w-full h-full object-cover rounded-sm lg:rounded-md 2xl:rounded-xl"
+              fill
+              className="object-cover rounded-sm lg:rounded-md 2xl:rounded-xl"
+              sizes="33vw"
             />
 
             {/* overlay */}
@@ -90,21 +86,16 @@ function NewsSection() {
                 'https://www.thedailystar.net/business/organisation-news/press-releases/news/shanta-life-insurance-and-dhaka-bank-sign-mou-jointly-prepare-bancassurance-3843041',
               )
             }
-            className="w-full  rounded-sm lg:rounded-md 2xl:rounded-xl cursor-pointer"
+            className="w-full rounded-sm lg:rounded-md 2xl:rounded-xl cursor-pointer"
           >
-            <div className="relative">
+            <div className="relative w-full h-[110px] xl:h-[200px] 2xl:h-[280px]">
               {/* img */}
-              {/* mobile */}
-              <img
-                src="/assets/homepage/mobile/newsSingleBanner.jpg"
-                alt="news-2"
-                className="lg:hidden w-full h-[110px] xl:h-[200px] 2xl:h-[280px] object-cover rounded-t-sm lg:rounded-t-md 2xl:rounded-t-xl"
-              />
-              {/* lg */}
-              <img
+              <Image
+                fill
                 src="/assets/homepage/web/newsSingleBanner.jpg"
                 alt="news-2"
-                className="hidden lg:block w-full h-[110px] xl:h-[200px] 2xl:h-[280px] object-cover rounded-t-sm lg:rounded-t-md 2xl:!rounded-t-xl"
+                className=" object-cover rounded-t-sm lg:rounded-t-md 2xl:!rounded-t-xl"
+                sizes="33vw"
               />
               {/* overlay */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/30 rounded-t-sm lg:rounded-t-md 2xl:!rounded-t-xl"></div>
@@ -128,26 +119,32 @@ function NewsSection() {
         {/* second grid */}
         <div className="col-span-1 md:col-span-3 group relative overflow-hidden rounded-sm lg:rounded-md 2xl:!rounded-xl">
           {/* Background Image */}
-          {/* modile */}
-          <div
-            className={`
-          w-full lg:hidden
-    h-[220px] md:h-full lg:h-[100%] 
-    rounded-sm lg:rounded-md 2xl:!rounded-xl transition-transform duration-500 
-    bg-[url('/assets/homepage/mobile/thumbnails/yt-thumbnail-10.jpg')] bg-cover bg-center bg-no-repeat
-    group-hover:scale-110
-        `}
-          />
           {/* lg */}
-          <div
-            className={`hidden lg:block
+          {/* <div
+            className={`
           w-full 
     h-[220px] md:h-full lg:h-[100%] 
     rounded-sm lg:rounded-md 2xl:!rounded-xl transition-transform duration-500 
     bg-[url('/assets/homepage/web/thumbnails/yt-thumbnail-10.jpg')] bg-cover bg-center bg-no-repeat
     group-hover:scale-110
         `}
-          />
+          /> */}
+          <div
+            className={`
+          relative w-full 
+    h-[220px] md:h-full lg:h-[100%] 
+    rounded-sm lg:rounded-md 2xl:!rounded-xl transition-transform duration-500 
+    group-hover:scale-110
+        `}
+          >
+            <Image
+              src="/assets/homepage/web/thumbnails/yt-thumbnail-10.jpg"
+              alt="News Thumbnail"
+              fill
+              className="inset-0 object-cover rounded-sm lg:rounded-md 2xl:!rounded-xl"
+              sizes="50vw"
+            />
+          </div>
 
           {/* Overlay (semi-transparent) */}
           <div className="absolute inset-0 bg-black/40 z-10 rounded-sm lg:rounded-md 2xl:!rounded-xl" />
@@ -214,17 +211,12 @@ function NewsSection() {
           {/* img */}
           <div className="relative h-[140px] xl:h-[200px] 2xl:h-[250px] w-full">
             {/* main img */}
-            {/* mobile */}
-            <img
-              src="/assets/homepage/mobile/news5.jpg"
-              alt="news-1"
-              className="lg:hidden w-full h-full object-cover"
-            />
-            {/* lg */}
-            <img
+            <Image
+              fill
               src="/assets/homepage/web/news5.jpg"
               alt="news-1"
-              className="hidden lg:block w-full h-full object-cover"
+              className="object-cover"
+              sizes="33vw"
             />
 
             {/* overlay */}

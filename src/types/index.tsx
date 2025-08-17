@@ -116,7 +116,7 @@ export type InsuranceCardDataType = Pick<
   AllPlantDataType,
   'title' | 'description' | 'image' | 'videoLink'
 > & {
-  mobileImage: string
+  mobileImage?: string
 }
 
 export type InsuranceDataType = {
@@ -125,7 +125,7 @@ export type InsuranceDataType = {
   title: string
   subtitle: string
   mainImage: string
-  mainMobileImage: string
+  mainMobileImage?: string
   mainVIdeoLink: string
   insuranceCardData: InsuranceCardDataType[]
 }

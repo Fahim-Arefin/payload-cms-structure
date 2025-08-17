@@ -2,6 +2,7 @@ import { InsuranceCardDataType } from '@/types'
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import React from 'react'
+import Image from 'next/image'
 
 type Props = {
   data: InsuranceCardDataType
@@ -10,24 +11,19 @@ type Props = {
 const content = (data: InsuranceCardDataType) => (
   <div>
     <div
-      className="relative h-[120px] md:h-[200px] lg:h-[250px] xl:h-[300px] flex-shrink-0 
+      // h-[120px] md:h-[200px] lg:h-[250px] xl:h-[300px] flex-shrink-0
+      className="relative
+       aspect-[640/480] w-full
       rounded-[4.167px] 
-      bg-no-repeat bg-cover bg-center 
       bg-[#343A40] overflow-hidden cursor-pointer
     "
-      // style={{
-      //   backgroundImage: `url(${data.image})`,
-      // }}
     >
-      {/* Mobile image: visible on mobile only */}
-      <div
-        className="absolute inset-0 bg-no-repeat bg-cover bg-center md:hidden"
-        style={{ backgroundImage: `url(${data.mobileImage})` }}
-      />
-      {/* Desktop image: visible on md and up */}
-      <div
-        className="absolute inset-0 bg-no-repeat bg-cover bg-center hidden md:block"
-        style={{ backgroundImage: `url(${data.image})` }}
+      <Image
+        src={data.image}
+        alt={data?.title ?? 'Video thumbnail'}
+        fill
+        className="object-cover"
+        sizes="(max-width: 1023px) 300px, (max-width: 1349px) 400px, 500px"
       />
 
       {/* Text Content */}
@@ -46,7 +42,10 @@ const content = (data: InsuranceCardDataType) => (
        w-[20px] lg:w-[30px] xl:w-[40px] 2xl:w-[50px]  
        h-[20px] lg:h-[30px] xl:h-[40px] 2xl:h-[50px]"
       >
-        <img src={data?.videoLink ? '/assets/play3.svg' : '/assets/circle.svg'} alt="" />
+        <img
+          src={data?.videoLink ? '/assets/icons/web/play3.svg' : '/assets/icons/web/circle.svg'}
+          alt=""
+        />
       </div>
     </div>
     {data.title && (

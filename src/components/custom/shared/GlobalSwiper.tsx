@@ -107,17 +107,19 @@
 
 import React, { useRef, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectCoverflow } from 'swiper/modules'
+import { EffectCoverflow, Autoplay } from 'swiper/modules'
 import { LuArrowLeft, LuArrowRight } from 'react-icons/lu'
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import { LiaArrowRightSolid } from 'react-icons/lia'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import './slider.css'
+import { sliderDelay } from '@/lib/data'
+import Image from 'next/image'
 
 type SlideData = {
   src: string
-  mobileSrc: string
+  mobileSrc?: string
   alt: string
 }
 
@@ -143,7 +145,7 @@ export default function GlobalSwiper({ slidesData }: GlobalSwiperProps) {
   return (
     <div className="w-full max-w-screen-xl mx-auto py-10">
       <Swiper
-        modules={[EffectCoverflow]}
+        modules={[EffectCoverflow, Autoplay]}
         effect="coverflow"
         centeredSlides
         // loop
@@ -161,6 +163,11 @@ export default function GlobalSwiper({ slidesData }: GlobalSwiperProps) {
           },
         }}
         spaceBetween={10}
+        autoplay={{
+          delay: sliderDelay,
+          disableOnInteraction: false, // keep autoplay after user swipes/clicks
+          pauseOnMouseEnter: true, // pause on hover (desktop)
+        }}
         coverflowEffect={{
           rotate: 35,
           stretch: 0,
@@ -180,8 +187,13 @@ export default function GlobalSwiper({ slidesData }: GlobalSwiperProps) {
               <div
                 className={`relative w-60 h-[18rem] md:h-[24rem] overflow-hidden shadow-md rounded-[16px]`}
               >
-                <img src={slide.mobileSrc} alt={slide.alt} className="object-cover lg:hidden" />
-                <img src={slide.src} alt={slide.alt} className="object-cover hidden lg:block" />
+                <Image
+                  src={slide.src}
+                  alt={slide.alt}
+                  className="object-cover"
+                  fill
+                  sizes="500px"
+                />
               </div>
             </SwiperSlide>
           )

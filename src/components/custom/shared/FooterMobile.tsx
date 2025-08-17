@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import ToolTip from './ToolTip'
+import Image from 'next/image'
 
 function FooterMobile() {
   const shurjoPayData = [
@@ -60,13 +61,15 @@ function FooterMobile() {
     <div className="h-fit font-avenir bg-[#3A3A3C]">
       {/* logo */}
       <div
-        className="h-[80px] md:h-[120px]
+        className="relative h-[80px] md:h-[120px]
        w-[80px] md:w-[120px] mx-auto"
       >
-        <img
-          src="/assets/footer2.png"
+        <Image
+          fill
+          src="/assets/fotter-logos/footer2.png"
           alt="footer logo"
-          className="h-full w-full object-contain "
+          className="object-contain "
+          sizes="200px"
         />
       </div>
       {/* info section */}
@@ -74,7 +77,11 @@ function FooterMobile() {
         {/* email */}
         <div className="flex text-white/70 items-center space-x-2 w-[70%] md:w-[50%] mx-auto text-[10px] md:text-[12px] font-light">
           <div>
-            <img src="/assets/footericon1.png" alt="" className="min-w-[30px] min-h-[30px]" />
+            <img
+              src="/assets/fotter-logos/footericon1.png"
+              alt=""
+              className="min-w-[30px] min-h-[30px]"
+            />
           </div>
           <div className="hover:text-blue-300 duration-100 transition-all">
             <a href="mailto:info@shantalife.com" className="hover:text-blue-300 transition-colors">
@@ -85,7 +92,11 @@ function FooterMobile() {
         {/* address */}
         <div className="flex text-white/70 items-center space-x-2 w-[70%] md:w-[50%] mx-auto text-[10px] md:text-[12px] font-light">
           <div>
-            <img src="/assets/footericon2.png" alt="" className="min-w-[30px] min-h-[30px]" />
+            <img
+              src="/assets/fotter-logos/footericon2.png"
+              alt=""
+              className="min-w-[30px] min-h-[30px]"
+            />
           </div>
           <Link
             target="_blank"
@@ -98,7 +109,11 @@ function FooterMobile() {
         {/* address */}
         <div className="flex text-white/70 items-center space-x-2 w-[70%] md:w-[50%] mx-auto text-[10px] md:text-[12px] font-light">
           <div>
-            <img src="/assets/footericon3.png" alt="" className="min-w-[30px] min-h-[30px]" />
+            <img
+              src="/assets/fotter-logos/footericon3.png"
+              alt=""
+              className="min-w-[30px] min-h-[30px]"
+            />
           </div>
           <div>
             <a href="tel:+8809610889900" className="hover:text-blue-300 transition-colors">
@@ -183,16 +198,32 @@ function FooterMobile() {
         <h4 className="text-[14px] md:text-[16px] text-white/50 mb-2 text-center">Find us on</h4>
         <div className="flex justify-center items-center space-x-2">
           <Link target="_blank" href="https://www.facebook.com/profile.php?id=61566152682701">
-            <img src="/assets/findus1.png" alt="" className="min-w-[30px] min-h-[30px]" />
+            <img
+              src="/assets/fotter-logos/findus1.png"
+              alt=""
+              className="min-w-[30px] min-h-[30px]"
+            />
           </Link>
           <Link target="_blank" href="https://www.youtube.com/@ShantaLifeInsurance">
-            <img src="/assets/findus2.png" alt="" className="min-w-[30px] min-h-[30px]" />
+            <img
+              src="/assets/fotter-logos/findus2.png"
+              alt=""
+              className="min-w-[30px] min-h-[30px]"
+            />
           </Link>
           <Link target="_blank" href="https://www.linkedin.com/company/shanta-life-insurance">
-            <img src="/assets/findus3.png" alt="" className="min-w-[30px] min-h-[30px]" />
+            <img
+              src="/assets/fotter-logos/findus3.png"
+              alt=""
+              className="min-w-[30px] min-h-[30px]"
+            />
           </Link>
           <Link target="_blank" href="https://www.instagram.com/shanta_life_insurance">
-            <img src="/assets/findus4.png" alt="" className="min-w-[30px] min-h-[30px]" />
+            <img
+              src="/assets/fotter-logos/findus4.png"
+              alt=""
+              className="min-w-[30px] min-h-[30px]"
+            />
           </Link>
         </div>
       </div>
@@ -201,8 +232,19 @@ function FooterMobile() {
         {/* powered by section */}
         <div className="flex items-center justify-center space-x-2">
           <h1 className="pt-[4px] text-[14px] font-medium text-white/50">Powered By -</h1>
-          <div className="w-[85px]">
-            <img src="/assets/shurjo.png" alt="" className="h-full w-full" />
+          {/* <div className="w-[85px]">
+            <img src="/assets/fotter-logos/shurjo.png" alt="" className="h-full w-full" />
+          </div> */}
+          {/* make the logo box a positioned container */}
+          <div className="relative w-[85px] h-[22px]">
+            <Image
+              src="/assets/fotter-logos/shurjo.png"
+              alt="Shurjo"
+              fill
+              className="object-contain"
+              sizes="85px"
+              priority={false}
+            />
           </div>
         </div>
       </div>
@@ -217,13 +259,18 @@ function FooterMobile() {
                   md:w-[40px] md:h-[40px]
                   "
             >
-              <img
-                src={img?.image}
-                alt="pay-icon"
-                className="object-contain
-                    w-[32px] h-[32px] 
+              <div
+                className="relative w-[32px] h-[32px] 
                     md:w-[38px] md:h-[38px] "
-              />
+              >
+                <Image
+                  fill
+                  src={img?.image}
+                  alt="pay-icon"
+                  className="object-contain"
+                  sizes="52px"
+                />
+              </div>
             </div>
           ))}
         </div>

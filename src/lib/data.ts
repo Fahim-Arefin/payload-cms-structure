@@ -249,3 +249,5 @@ export const NAV_ITEMS_MOBILE = [
   { href: '/agent-onboarding', label: 'I’m an Agent' },
   { href: 'https://portal.shantalife.com/', label: 'My Portal' },
 ]
+
+export const sliderDelay = 3000
