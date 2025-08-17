@@ -34,7 +34,7 @@ function WhyChooseUsSection() {
               alt="why choose us"
               quality={85}
               fill
-              sizes="(max-width: 400px) 100vw,(max-width: 1023px) 50vw, (max-width: 1349px) 25vw , (max-width: 1699px) 25vw, 25vw" // Define responsive image sizes
+              sizes="(max-width: 1023px) 100vw, 50vw" // Define responsive image sizes
             />
           </div>
         </div>

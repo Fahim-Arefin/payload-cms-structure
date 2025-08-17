@@ -27,6 +27,7 @@ const page: FC<Props> = ({}) => {
 
   const planInfoData = {
     image: '/assets/multistagePlan.png',
+    mobileImage: '/assets/multistagePlan.png',
     description: `Some dreams can’t wait. 
       Whether it’s funding your child’s education, celebrating a life event, or building a safety net for the 
       future—Shanta Life’s Multi-Stage Maturity Plan is your financial partner through it all. 
@@ -68,37 +69,49 @@ const page: FC<Props> = ({}) => {
         title: 'Multiple Guaranteed Payouts',
         description:
           'Enjoy your benefits when you need them most—not just at the end. Structured payouts help you meet life’s big moments head-on.',
-        image: '/assets/tabimage1.png', // You can use or update this image as needed
+        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage1.png', // You can use or update this image as needed
+        mobileImage:
+          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage1.png', // You can use or update this image as needed
       },
       {
         title: 'Maturity Benefit',
         description:
           'Receive the final lump sum at the end of your policy term to complete your journey with confidence.',
-        image: '/assets/tabimage1.png',
+        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage1.png',
+        mobileImage:
+          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage1.png',
       },
       {
         title: 'Life Coverage',
         description:
           'Life Coverage That Never Compromises. In case of the unfortunate demise passing, your family receives the full sum assured—regardless of earlier stage payouts.',
-        image: '/assets/tabimage4.png',
+        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage4.png',
+        mobileImage:
+          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage4.png',
       },
       {
         title: 'Tax Benefits',
         description:
           'Get rewarded for being responsible—enjoy up to 15% tax rebates on premiums under existing tax laws.',
-        image: '/assets/tabimage2.png',
+        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage2.png',
+        mobileImage:
+          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage2.png',
       },
       {
         title: 'Flexible Premium Payments',
         description:
           'Pay monthly, quarterly, half-yearly, or annually—it’s all about your convenience.',
-        image: '/assets/tabimage3.png',
+        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage3.png',
+        mobileImage:
+          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage3.png',
       },
       {
         title: 'Healthcare Partner Discounts',
         description:
           'Save more with exclusive discounts at top hospitals and diagnostic centers across our trusted partner network.',
-        image: '/assets/tabimage6.png',
+        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage6.png',
+        mobileImage:
+          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage6.png',
       },
     ],
   }
