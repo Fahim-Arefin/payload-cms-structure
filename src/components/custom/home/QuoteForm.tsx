@@ -3,6 +3,9 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/
 import { Input } from '@/components/ui/input'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import React, { useEffect, useState } from 'react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -20,10 +23,11 @@ import GlobalButton from '../shared/GlobalButton'
 interface FormData {
   PlanCode: number
   Age: number
+  dateOfBirth: Date | null
   SumAssured: number
   Term: number
   PaymentMode: number
-  Gender: number | undefined
+  Gender: number | null
   phoneNumber: string
   annualIncome: number
   name: string
@@ -42,10 +46,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   const [formData, setFormData] = useState<FormData>({
     PlanCode: 0,
     Age: 0,
+    dateOfBirth: null,
     SumAssured: 0,
     Term: 0,
     PaymentMode: 0,
-    Gender: undefined,
+    Gender: null,
     phoneNumber: '',
     annualIncome: 0,
     name: '',
@@ -84,6 +89,86 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     Gender: false,
   })
   const [currentPaymentMode, setCurrentPaymentMode] = useState<string>('')
+  const [tempSelectedDate, setTempSelectedDate] = useState<Date | null>(null)
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+  const [isCalculatingAge, setIsCalculatingAge] = useState(false)
+  const [ageCalculationError, setAgeCalculationError] = useState<string | null>(null)
+
+  // Format date to DD/MM/YYYY
+  const formatDateForAPI = (date: Date): string => {
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear().toString()
+    return `${day}/${month}/${year}`
+  }
+
+  // Call API to calculate age from date of birth
+  const calculateAgeFromAPI = async (dateOfBirth: Date) => {
+    setIsCalculatingAge(true)
+    setAgeCalculationError(null)
+
+    try {
+      const formattedDate = formatDateForAPI(dateOfBirth)
+      const response = await fetch(`/api/age-calculate?dateofbirth=${formattedDate}`)
+
+      if (!response.ok) {
+        throw new Error('Failed to calculate age')
+      }
+
+      const data = await response.json()
+
+      if (data.age !== undefined) {
+        // Update form data with both date and calculated age
+        setFormData((prev) => ({
+          ...prev,
+          dateOfBirth: dateOfBirth,
+          Age: data.age,
+        }))
+
+        // Close the date picker
+        setIsDatePickerOpen(false)
+        setTempSelectedDate(null)
+
+        // Clear any field errors
+        setFieldErrors((prev) => ({
+          ...prev,
+          Age: false,
+        }))
+      } else {
+        throw new Error('Invalid response from age calculation API')
+      }
+    } catch (err) {
+      setAgeCalculationError(err instanceof Error ? err.message : 'Failed to calculate age')
+    } finally {
+      setIsCalculatingAge(false)
+    }
+  }
+
+  // Handle date selection in the picker (temporary selection)
+  const handleDateChange = (date: Date | null) => {
+    setTempSelectedDate(date)
+  }
+
+  // Handle confirm button click
+  const handleConfirmDate = () => {
+    if (tempSelectedDate) {
+      calculateAgeFromAPI(tempSelectedDate)
+    }
+  }
+
+  // Handle opening date picker
+  const handleOpenDatePicker = () => {
+    setTempSelectedDate(formData.dateOfBirth)
+    setIsDatePickerOpen(true)
+    setAgeCalculationError(null)
+  }
+
+  // Handle closing date picker
+  const handleCloseDatePicker = () => {
+    setIsDatePickerOpen(false)
+    setTempSelectedDate(null)
+    setAgeCalculationError(null)
+  }
 
   // Calculate suggested sum assured based on tenure and annual income
   const calculateSuggestedAmount = () => {
@@ -311,6 +396,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         body: JSON.stringify({
           PlanCode: formData.PlanCode,
           Age: formData.Age,
+          DateOfBirth: formData.dateOfBirth ? formatDateForAPI(formData.dateOfBirth) : '',
           SumAssured: formData.SumAssured,
           Term: formData.Term,
           PaymentMode: formData.PaymentMode,
@@ -347,7 +433,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       case 'PlanCode':
         return 'Please select a plan'
       case 'Age':
-        if (!formData.Age) return 'Please enter your age'
+        if (!formData.dateOfBirth) return 'Please select your date of birth'
         if (formData.Age < 18 || formData.Age > 65) return 'Age must be between 18 and 65'
         return ''
       case 'annualIncome':
@@ -384,12 +470,12 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     // Validate each required field and mark errors
     const errors = {
       PlanCode: !formData.PlanCode,
-      Age: !formData.Age || formData.Age < 18 || formData.Age > 65,
+      Age: !formData.dateOfBirth || formData.Age < 18 || formData.Age > 65,
       annualIncome: !formData.annualIncome,
       SumAssured: !formData.SumAssured || formData.SumAssured < 100000,
       Term: !formData.Term,
       PaymentMode: !formData.PaymentMode,
-      Gender: formData.Gender === undefined,
+      Gender: formData.Gender === undefined || formData.Gender === null,
     }
 
     // Set field errors
@@ -423,22 +509,82 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   2xl:gap-y-[38px] 
   p-4 py-6 md:p-6 lg:p-5 xl:p-8 z-10"
     >
-      {/* age input */}
+      {/* date of birth input */}
       <div className="col-span-2 md:col-span-1">
-        <Input
-          min={18}
-          max={65}
-          type="number"
-          placeholder="Age *"
-          value={formData.Age || ''}
-          onChange={(e) => handleInputChange('Age', parseInt(e.target.value) || 0)}
-          className={` !text-[12px] md:!text-[14px] 2xl:!text-[16px] 
+        <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              onClick={handleOpenDatePicker}
+              className={`w-full justify-start text-left font-normal !text-[12px] md:!text-[14px] 2xl:!text-[16px] 
                       placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
                       rounded-sm lg:rounded-[9px] xl:rounded-[10px]
              shadow-[0px_0px_5px_0px_#00000040]  px-5 py-5 xl:px-6 xl:py-6 ${
                fieldErrors.Age ? 'border-red-500 border-2' : ''
-             }`}
-        />
+             } ${!formData.dateOfBirth ? 'text-muted-foreground' : ''}`}
+            >
+              {formData.dateOfBirth && formData.Age ? (
+                <span>Age: {formData.Age} years</span>
+              ) : (
+                <span>Date of Birth *</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <div className="p-4">
+              <DatePicker
+                selected={tempSelectedDate}
+                onChange={handleDateChange}
+                maxDate={new Date()}
+                minDate={new Date(new Date().getFullYear() - 65, 0, 1)}
+                showYearDropdown
+                showMonthDropdown
+                dropdownMode="select"
+                placeholderText="Select date of birth"
+                dateFormat="dd/MM/yyyy"
+                inline
+              />
+
+              {/* Action buttons */}
+              <div className="flex justify-between items-center mt-3 pt-3 border-t">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleCloseDatePicker}
+                  disabled={isCalculatingAge}
+                >
+                  Cancel
+                </Button>
+
+                <Button
+                  size="sm"
+                  onClick={handleConfirmDate}
+                  disabled={!tempSelectedDate || isCalculatingAge}
+                  className="bg-[#978900] hover:bg-[#978900]/90"
+                >
+                  {isCalculatingAge ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Calculating...
+                    </div>
+                  ) : (
+                    'Confirm'
+                  )}
+                </Button>
+              </div>
+
+              {/* Error message */}
+              {ageCalculationError && (
+                <p className="text-red-500 text-xs mt-2">{ageCalculationError}</p>
+              )}
+            </div>
+          </PopoverContent>
+        </Popover>
+
+        {/* Age error message */}
+        {getFieldErrorMessage('Age') && (
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Age')}</p>
+        )}
       </div>
       {/* plans */}
       <div
