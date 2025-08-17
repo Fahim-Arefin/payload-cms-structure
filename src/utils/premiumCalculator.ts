@@ -14,6 +14,11 @@ export interface ApiResponse {
   ci_premium_quarterly: number
   ci_premium_monthly: number
   ci_premium_single: number
+  ci_premium_yearly_25: number
+  ci_premium_half_yearly_25: number
+  ci_premium_quarterly_25: number
+  ci_premium_monthly_25: number
+  ci_premium_single_25: number
   life_rate: number
   accident_rate: number
   ci_rate: number
@@ -34,6 +39,7 @@ export interface ApiResToShow {
   lifePremium: resParam
   accidentPremium: resParam
   ciPremium: resParam
+  ci25Premium: resParam
 }
 
 // Helper function to get total premium for a specific payment mode
@@ -58,6 +64,13 @@ export const getTotalPremium = (
         single: 0,
       },
       ciPremium: {
+        monthly: 0,
+        quarterly: 0,
+        half_yearly: 0,
+        yearly: 0,
+        single: 0,
+      },
+      ci25Premium: {
         monthly: 0,
         quarterly: 0,
         half_yearly: 0,
@@ -103,9 +116,18 @@ export const getTotalPremium = (
     single: (apiResponse as any)[`ci_premium_single`] || 0,
   }
 
+  const ci25Premium = {
+    monthly: (apiResponse as any)[`ci_premium_monthly_25`] || 0,
+    quarterly: (apiResponse as any)[`ci_premium_quarterly_25`] || 0,
+    half_yearly: (apiResponse as any)[`ci_premium_half_yearly_25`] || 0,
+    yearly: (apiResponse as any)[`ci_premium_yearly_25`] || 0,
+    single: (apiResponse as any)[`ci_premium_single_25`] || 0,
+  }
+
   return {
     lifePremium: lifePremium,
     accidentPremium: accidentPremium,
     ciPremium: ciPremium,
+    ci25Premium: ci25Premium,
   }
 }
