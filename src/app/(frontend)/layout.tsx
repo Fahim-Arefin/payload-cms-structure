@@ -1,7 +1,7 @@
 import Footer from '@/components/custom/shared/Footer'
 import TopHeader from '@/components/custom/shared/TopHeader'
 import React from 'react'
-import './fonts.css'
+// import './fonts.css'
 import './styles.css'
 import GlobalContactButtons from '@/components/custom/shared/GlobalContactButtons'
 import Navbar from '@/components/custom/shared/Navbar/Navbar'

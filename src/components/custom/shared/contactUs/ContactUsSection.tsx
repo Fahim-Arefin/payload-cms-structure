@@ -11,12 +11,10 @@ import {
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { SendHorizontal, Loader, MailCheck } from 'lucide-react'
-import './ContactUsSection.css'
-import ToolTip from '../ToolTip'
 import { Textarea } from '@/components/ui/textarea'
-import GlobalButton from '../GlobalButton'
+import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 import { useState } from 'react'
+import GlobalButton from '../GlobalButton'
 
 function ContactUsSection() {
   const [sendButtonText, setSendButtonText] = useState('Send Message')

@@ -12,7 +12,8 @@ function WhyChooseUsSection() {
       {/* Background image with overlay only for mobile */}
       <div className="absolute lg:hidden inset-0 z-10">
         <Image
-          src="/assets/homepage/mobile/whyChooseUs.jpg"
+          // src="/assets/homepage/mobile/whyChooseUs.jpg"
+          src="https://s3.ap-southeast-1.wasabisys.com/shantalife-static/assets/homepage/mobile/whyChooseUs.jpg"
           alt="Background"
           className="object-cover"
           fill
