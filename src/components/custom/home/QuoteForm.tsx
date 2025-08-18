@@ -234,7 +234,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
 
   const genders = [
     { text: 'Male', value: 1 },
-    { text: 'Female', value: 0 },
+    { text: 'Female', value: 2 },
   ]
 
   const tenures = [
