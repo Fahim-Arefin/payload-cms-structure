@@ -304,7 +304,7 @@ function QuoteSection() {
                     >
                       <>
                         {isCriticalIllness19Covered ? 'Remove' : 'Add'}{' '}
-                        {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
+                        {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
                         taka to Cover 19 Critical Illness!
                       </>
                     </div>
@@ -378,7 +378,7 @@ function QuoteSection() {
                     >
                       <>
                         {isCriticalIllness25Covered ? 'Remove' : 'Add'}{' '}
-                        {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).ci25Premium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
+                        {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ci25Premium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
                         taka to Cover 25 Critical Illness!
                       </>
                     </div>
@@ -453,7 +453,7 @@ function QuoteSection() {
                       {isAccidentCovered
                         ? 'Remove accident coverage for'
                         : "Prone to accidents? Let's get you covered in"}{' '}
-                      {`৳${getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium[getPaymentModeKey(confirmedPaymentMode)].toLocaleString()}`}{' '}
+                      {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
                       taka!
                     </div>
                     <div className="flex-1 flex justify-end">
