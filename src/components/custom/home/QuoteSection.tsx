@@ -1053,7 +1053,8 @@ function QuoteSection() {
         absolute top-0 lg:right-[140px] xl:right-[230px] 2xl:right-[200px] opacity-20"
       >
         <Image
-          src="/assets/homepage/web/quotebg.jpg"
+          // src="/assets/homepage/web/quotebg.jpg"
+          src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/quotebg.jpg`}
           alt="Quote background"
           fill
           className="
@@ -1074,7 +1075,8 @@ function QuoteSection() {
         absolute top-0 lg:-right-[50px] xl:-right-[90px] 2xl:-right-[200px]"
       >
         <Image
-          src="/assets/homepage/web/quotebg.jpg"
+          // src="/assets/homepage/web/quotebg.jpg"
+          src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/quotebg.jpg`}
           alt="Quote background"
           fill
           className="

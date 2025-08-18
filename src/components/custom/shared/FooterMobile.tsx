@@ -6,55 +6,55 @@ import Image from 'next/image'
 function FooterMobile() {
   const shurjoPayData = [
     {
-      image: '/assets/fotter-logos/1.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/1.png`,
     },
     {
-      image: '/assets/fotter-logos/2.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/2.png`,
     },
     {
-      image: '/assets/fotter-logos/3.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/3.png`,
     },
     {
-      image: '/assets/fotter-logos/4.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/4.png`,
     },
     {
-      image: '/assets/fotter-logos/5.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/5.png`,
     },
     {
-      image: '/assets/fotter-logos/6.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/6.png`,
     },
     {
-      image: '/assets/fotter-logos/7.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/7.png`,
     },
     {
-      image: '/assets/fotter-logos/8.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/8.png`,
     },
     {
-      image: '/assets/fotter-logos/9.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/9.png`,
     },
     {
-      image: '/assets/fotter-logos/10.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/10.png`,
     },
     {
-      image: '/assets/fotter-logos/11.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/11.png`,
     },
     {
-      image: '/assets/fotter-logos/12.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/12.png`,
     },
     {
-      image: '/assets/fotter-logos/13.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/13.png`,
     },
     {
-      image: '/assets/fotter-logos/14.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/14.png`,
     },
     {
-      image: '/assets/fotter-logos/15.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/15.png`,
     },
     {
-      image: '/assets/fotter-logos/16.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/16.png`,
     },
     {
-      image: '/assets/fotter-logos/17.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/17.png`,
     },
   ]
   return (
@@ -66,7 +66,7 @@ function FooterMobile() {
       >
         <Image
           fill
-          src="/assets/fotter-logos/footer2.png"
+          src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/footer2.png`}
           alt="footer logo"
           className="object-contain "
           sizes="200px"
@@ -238,7 +238,7 @@ function FooterMobile() {
           {/* make the logo box a positioned container */}
           <div className="relative w-[85px] h-[22px]">
             <Image
-              src="/assets/fotter-logos/shurjo.png"
+              src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/shurjo.png`}
               alt="Shurjo"
               fill
               className="object-contain"
