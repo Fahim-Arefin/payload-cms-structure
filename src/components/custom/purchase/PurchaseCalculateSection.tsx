@@ -276,7 +276,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                 <>
                   {isCriticalIllness19Covered ? 'Remove' : 'Add'}{' '}
                   {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
-                  taka to Cover 19 Critical Illness!
+                  taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 19 Critical Illness!
                 </>
               </div>
 
@@ -352,7 +352,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                 <>
                   {isCriticalIllness25Covered ? 'Remove' : 'Add'}{' '}
                   {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ci25Premium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
-                  taka to Cover 25 Critical Illness!
+                  taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 25 Critical Illness!
                 </>
               </div>
 
@@ -429,7 +429,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                     ? 'Remove accident coverage for'
                     : "Prone to accidents? Let's get you covered in"}{' '}
                   {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
-                  taka!
+                  taka <span className="font-bold">{confirmedPaymentMode}</span>!
                 </div>
                 <div className="flex-1 flex justify-end">
                   <svg
