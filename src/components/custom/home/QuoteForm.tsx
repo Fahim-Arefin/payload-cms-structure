@@ -1080,6 +1080,7 @@ import GlobalButton from '../shared/GlobalButton'
 
 // NEW: icons & dropdown-menu pieces for the plan selector
 import { Check, ChevronDown } from 'lucide-react'
+import { format } from 'date-fns'
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -1501,72 +1502,92 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
                  grid grid-cols-2 gap-x-6 lg:gap-x-4 xl:gap-x-6 gap-y-7 md:gap-y-7 lg:gap-y-[31px] xl:gap-y-[32px] 2xl:gap-y-[38px]
                  p-4 py-6 md:p-6 lg:p-5 xl:p-8 z-10"
     >
-      {/* DOB */}
+      {/* DOB and Age Fields */}
       <div className="col-span-2 md:col-span-1">
-        <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
-          <PopoverTrigger asChild>
-            <Button
-              aria-haspopup="dialog"
-              variant="outline"
-              onClick={handleOpenDatePicker}
-              className={`w-full justify-start text-left font-normal !text-[12px] md:!text-[14px] 2xl:!text-[16px]
-                          placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
-                          rounded-sm lg:rounded-[9px] xl:rounded-[10px]
-                          shadow-[0px_0px_5px_0px_#00000040]  px-5 py-5 xl:px-6 xl:py-6
-                          ${fieldErrors.Age ? 'border-red-500 border-2' : ''} ${!formData.dateOfBirth ? 'text-muted-foreground' : ''}`}
-            >
-              {formData.dateOfBirth && formData.Age ? (
-                <span>Age: {formData.Age} years</span>
-              ) : (
-                <span>Date of Birth *</span>
-              )}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <div className="p-4">
-              <DatePicker
-                selected={tempSelectedDate}
-                onChange={setTempSelectedDate}
-                maxDate={new Date()}
-                minDate={new Date(new Date().getFullYear() - 65, 0, 1)}
-                showYearDropdown
-                showMonthDropdown
-                dropdownMode="select"
-                placeholderText="Select date of birth"
-                dateFormat="dd/MM/yyyy"
-                inline
-              />
-              <div className="flex justify-between items-center mt-3 pt-3 border-t">
+        <div className="flex gap-2">
+          {/* DOB Field */}
+          <div className="flex-1">
+            <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
+              <PopoverTrigger asChild>
                 <Button
+                  aria-haspopup="dialog"
                   variant="outline"
-                  size="sm"
-                  onClick={handleCloseDatePicker}
-                  disabled={isCalculatingAge}
+                  onClick={handleOpenDatePicker}
+                  className={`w-full justify-start text-left font-normal !text-[12px] md:!text-[14px] 2xl:!text-[16px]
+                              placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                              rounded-sm lg:rounded-[9px] xl:rounded-[10px]
+                              shadow-[0px_0px_5px_0px_#00000040] px-3 py-5 xl:px-4 xl:py-6
+                              ${fieldErrors.Age ? 'border-red-500 border-2' : ''} ${!formData.dateOfBirth ? 'text-muted-foreground' : ''}`}
                 >
-                  Cancel
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={handleConfirmDate}
-                  disabled={!tempSelectedDate || isCalculatingAge}
-                  className="bg-[#978900] hover:bg-[#978900]/90"
-                >
-                  {isCalculatingAge ? (
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      Calculating...
-                    </div>
+                  {formData.dateOfBirth ? (
+                    <span>{format(new Date(formData.dateOfBirth), 'dd/MM/yyyy')}</span>
                   ) : (
-                    'Confirm'
+                    <span>Date of Birth *</span>
                   )}
                 </Button>
-              </div>
-              {ageCalculationError && (
-                <p className="text-red-500 text-xs mt-2">{ageCalculationError}</p>
-              )}
-            </div>
-          </PopoverContent>
-        </Popover>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <div className="p-4">
+                  <DatePicker
+                    selected={tempSelectedDate}
+                    onChange={setTempSelectedDate}
+                    maxDate={new Date()}
+                    minDate={new Date(new Date().getFullYear() - 65, 0, 1)}
+                    showYearDropdown
+                    showMonthDropdown
+                    dropdownMode="select"
+                    placeholderText="Select date of birth"
+                    dateFormat="dd/MM/yyyy"
+                    inline
+                  />
+                  <div className="flex justify-between items-center mt-3 pt-3 border-t">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleCloseDatePicker}
+                      disabled={isCalculatingAge}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={handleConfirmDate}
+                      disabled={!tempSelectedDate || isCalculatingAge}
+                      className="bg-[#978900] hover:bg-[#978900]/90"
+                    >
+                      {isCalculatingAge ? (
+                        <div className="flex items-center gap-2">
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          Calculating...
+                        </div>
+                      ) : (
+                        'Confirm'
+                      )}
+                    </Button>
+                  </div>
+                  {ageCalculationError && (
+                    <p className="text-red-500 text-xs mt-2">{ageCalculationError}</p>
+                  )}
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
+          
+          {/* Age Field */}
+          <div className="flex-1">
+            <Button
+              variant="outline"
+              disabled
+              className="w-full justify-start text-left font-normal !text-[12px] md:!text-[14px] 2xl:!text-[16px]
+                         placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+                         rounded-sm lg:rounded-[9px] xl:rounded-[10px]
+                         shadow-[0px_0px_5px_0px_#00000040] px-3 py-5 xl:px-4 xl:py-6
+                         bg-background text-foreground cursor-not-allowed opacity-60"
+            >
+              {formData.Age ? `Age: ${formData.Age}` : 'Age'}
+            </Button>
+          </div>
+        </div>
         {getFieldErrorMessage('Age') && (
           <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Age')}</p>
         )}

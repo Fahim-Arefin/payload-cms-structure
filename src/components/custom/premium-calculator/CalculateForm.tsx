@@ -1719,78 +1719,104 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   grid grid-cols-2 gap-x-4 gap-y-8 md:gap-5 xl:gap-6 
   xl:px-4 xl:py-8 py-8 px-4 z-10"
     >
-      {/* date of birth input */}
+      {/* date of birth and age inputs - combined in one column */}
       <div className="col-span-2 md:col-span-1">
-        <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              onClick={handleOpenDatePicker}
-              className={`w-full justify-start text-left font-normal bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
-                fieldErrors.Age ? 'border-red-500 border-2' : ''
-              } ${!formData.dateOfBirth ? 'text-muted-foreground' : ''}`}
-            >
-              {formData.dateOfBirth && formData.Age ? (
-                <span>Age: {formData.Age} years</span>
-              ) : (
-                <span>Date of Birth *</span>
-              )}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <div className="p-4">
-              <DatePicker
-                selected={tempSelectedDate}
-                onChange={handleDateChange}
-                maxDate={new Date()}
-                minDate={new Date(new Date().getFullYear() - 65, 0, 1)}
-                showYearDropdown
-                showMonthDropdown
-                dropdownMode="select"
-                placeholderText="Select date of birth"
-                dateFormat="dd/MM/yyyy"
-                inline
-              />
-
-              {/* Action buttons */}
-              <div className="flex justify-between items-center mt-3 pt-3 border-t">
+        <div className="flex gap-2">
+          {/* date of birth input - half width */}
+          <div className="flex-1">
+            <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
+              <PopoverTrigger asChild>
                 <Button
                   variant="outline"
-                  size="sm"
-                  onClick={handleCloseDatePicker}
-                  disabled={isCalculatingAge}
+                  onClick={handleOpenDatePicker}
+                  className={`w-full justify-start text-left font-normal bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-3 py-5 xl:px-4 xl:py-6 text-xs xl:text-sm ${
+                    fieldErrors.Age ? 'border-red-500 border-2' : ''
+                  } ${!formData.dateOfBirth ? 'text-muted-foreground' : ''}`}
                 >
-                  Cancel
-                </Button>
-
-                <Button
-                  size="sm"
-                  onClick={handleConfirmDate}
-                  disabled={!tempSelectedDate || isCalculatingAge}
-                  className="bg-[#978900] hover:bg-[#978900]/90"
-                >
-                  {isCalculatingAge ? (
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Calculating...
-                    </div>
+                  {formData.dateOfBirth ? (
+                    <span>{format(formData.dateOfBirth, 'dd/MM/yyyy')}</span>
                   ) : (
-                    'Confirm'
+                    <span>DOB *</span>
                   )}
                 </Button>
-              </div>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <div className="p-4">
+                  <DatePicker
+                    selected={tempSelectedDate}
+                    onChange={handleDateChange}
+                    maxDate={new Date()}
+                    minDate={new Date(new Date().getFullYear() - 65, 0, 1)}
+                    showYearDropdown
+                    showMonthDropdown
+                    dropdownMode="select"
+                    placeholderText="Select date of birth"
+                    dateFormat="dd/MM/yyyy"
+                    inline
+                  />
 
-              {/* Error message */}
-              {ageCalculationError && (
-                <p className="text-red-500 text-xs mt-2">{ageCalculationError}</p>
-              )}
-            </div>
-          </PopoverContent>
-        </Popover>
+                  {/* Action buttons */}
+                  <div className="flex justify-between items-center mt-3 pt-3 border-t">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleCloseDatePicker}
+                      disabled={isCalculatingAge}
+                    >
+                      Cancel
+                    </Button>
 
-        {/* Age error message */}
+                    <Button
+                      size="sm"
+                      onClick={handleConfirmDate}
+                      disabled={!tempSelectedDate || isCalculatingAge}
+                      className="bg-[#978900] hover:bg-[#978900]/90"
+                    >
+                      {isCalculatingAge ? (
+                        <div className="flex items-center gap-2">
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          Calculating...
+                        </div>
+                      ) : (
+                        'Confirm'
+                      )}
+                    </Button>
+                  </div>
+
+                  {/* Error message */}
+                  {ageCalculationError && (
+                    <p className="text-red-500 text-xs mt-2">{ageCalculationError}</p>
+                  )}
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
+
+          {/* age input (read-only, auto-populated) - half width */}
+          <div className="flex-1">
+            <Input
+              type="text"
+              placeholder="Age"
+              value={formData.Age ? `Age: ${formData.Age}` : ''}
+              readOnly
+              className={`bg-gray-50 shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-3 py-5 xl:px-4 xl:py-6 cursor-not-allowed text-xs xl:text-sm ${
+                fieldErrors.Age ? 'border-red-500 border-2' : ''
+              }`}
+            />
+          </div>
+        </div>
+
+        {/* Age error message and loading indicator - below both fields */}
         {getFieldErrorMessage('Age') && (
           <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Age')}</p>
+        )}
+        
+        {/* Loading indicator for age calculation */}
+        {isCalculatingAge && (
+          <div className="flex items-center gap-2 mt-1">
+            <div className="w-3 h-3 border-2 border-[#978900] border-t-transparent rounded-full animate-spin"></div>
+            <span className="text-xs text-[#978900]">Calculating age...</span>
+          </div>
         )}
       </div>
 
