@@ -1,7 +1,7 @@
 import Footer from '@/components/custom/shared/Footer'
 import TopHeader from '@/components/custom/shared/TopHeader'
 import React from 'react'
-import './fonts.css'
+// import './fonts.css'
 import './styles.css'
 import GlobalContactButtons from '@/components/custom/shared/GlobalContactButtons'
 import Navbar from '@/components/custom/shared/Navbar/Navbar'
@@ -45,7 +45,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" type="image/png" href="/assets/mainlogo_2.png" />
+        <link rel="icon" type="image/png" href="/assets/logo/mainlogo_2.png" />
         {/* Google Tag (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-CP1L2ZN6G5"

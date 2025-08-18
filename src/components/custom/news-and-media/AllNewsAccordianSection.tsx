@@ -20,8 +20,8 @@ const allNewsData: AllNewsAndBlogDataType[] = [
     id: 1,
     // image: '/assets/news-and-media/web/news11.jpg',
     // mobileImage: '/assets/news-and-media/mobile/news11.jpg',
-    image: '/assets/mainlogo_2.png',
-    mobileImage: '/assets/mainlogo_2.png',
+    image: '/assets/logo/mainlogo_2.png',
+    mobileImage: '/assets/logo/mainlogo_2.png',
     date: 'Jul 17, 2025',
     title: 'Shanta Life Insurance gets license to launch',
     description: `Bangladesh's insurance sector is set to expand through the launch of a new venture, "Shanta Life Insurance PLC".

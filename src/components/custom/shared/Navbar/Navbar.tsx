@@ -185,7 +185,7 @@
 //         <div className="flex items-center justify-between w-full lg:w-auto">
 //           <div className="flex items-center space-x-1 w-fit 2xl:w-[60px] h-[35px] xl:h-[37px] 2xl:h-[40px]">
 //             <Link href="/">
-//               <img src="/assets/mainlogo_2.png" alt="logo" className="h-full w-full max-w-[75px]" />
+//               <img src="/assets/logo/mainlogo_2.png" alt="logo" className="h-full w-full max-w-[75px]" />
 //             </Link>
 //           </div>
 //           {/* Burger Icon */}
@@ -303,7 +303,7 @@
 //   ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
 //       >
 //         <div className="flex justify-between items-center px-4 py-4 border-b">
-//           <img src="/assets/mainlogo_2.png" alt="logo" className="h-[40px]" />
+//           <img src="/assets/logo/mainlogo_2.png" alt="logo" className="h-[40px]" />
 //           <button onClick={() => setIsMobileMenuOpen(false)} className="text-2xl text-[#1F1F1F]">
 //             <RxCross2 />
 //           </button>
@@ -358,6 +358,7 @@
 'use client'
 import { TooltipContent } from '@/components/ui/tooltip'
 import { NAV_ITEMS, NAV_ITEMS_MOBILE } from '@/lib/data'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -545,8 +546,22 @@ export default function Navbar() {
         {/* Logo + Burger */}
         <div className="flex items-center justify-between w-full lg:w-auto">
           <div className="flex items-center space-x-1 w-fit 2xl:w-[60px] h-[35px] xl:h-[37px] 2xl:h-[40px]">
-            <Link href="/">
-              <img src="/assets/mainlogo_2.png" alt="logo" className="h-full w-full max-w-[75px]" />
+            {/* <Link href="/">
+              <img
+                src="/assets/logo/mainlogo_2.png"
+                alt="Website Logo"
+                className="h-full w-full max-w-[75px]"
+              />
+            </Link> */}
+            <Link href="/" aria-label="Home">
+              <Image
+                src="/assets/logo/mainlogo_2.png"
+                alt="Company logo"
+                width={75}
+                height={40}
+                className="h-full w-full max-w-[75px] object-contain"
+                priority
+              />
             </Link>
           </div>
           {/* Burger Icon */}
@@ -664,7 +679,15 @@ export default function Navbar() {
   ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="flex justify-between items-center px-4 py-4 border-b">
-          <img src="/assets/mainlogo_2.png" alt="logo" className="h-[40px]" />
+          {/* <img src="/assets/logo/mainlogo_2.png" alt="logo" className="h-[40px]" /> */}
+          <Image
+            src="/assets/logo/mainlogo_2.png"
+            alt="Company logo"
+            width={120} // adjust as needed
+            height={40} // adjust as needed
+            className="h-[40px] w-auto"
+            priority
+          />
           <button onClick={() => setIsMobileMenuOpen(false)} className="text-2xl text-[#1F1F1F]">
             <RxCross2 />
           </button>
