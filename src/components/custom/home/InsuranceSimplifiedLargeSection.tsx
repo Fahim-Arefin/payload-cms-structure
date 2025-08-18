@@ -57,10 +57,9 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
             </div>
             {/* right Section */}
             <Dialog>
-              <DialogTrigger asChild>
+              {/* <DialogTrigger asChild>
                 <div
-                  // w-full aspect-[640/480]
-                  // h-[150px] md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full
+                  aria-label="Play insurance video"
                   className={cn(
                     `relative group cursor-pointer 
                     h-[150px] md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full
@@ -68,25 +67,17 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                     content === 'left' ? 'order-2' : 'order-1',
                   )}
                 >
-                  {/* <div
-                    className="absolute inset-0 bg-no-repeat bg-contain bg-center"
-                    style={{ backgroundImage: `url(${data.mainImage})` }}
-                  /> */}
                   <Image
                     src={data.mainImage}
                     alt={data?.subtitle ?? 'Video thumbnail'}
                     fill
                     className="object-contain"
                     sizes="(max-width: 1023px) 300px, (max-width: 1349px) 400px, 500px"
-                    // placeholder="blur" blurDataURL="/tiny-placeholder.png"
                   />
-                  {/* Hover dark overlay */}
                   <div
                     className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300 
                   rounded-[4.333px_4.333px_19.333px_4.333px] lg:rounded-[4.333px_4.333px_29.333px_4.333px] xl:rounded-[4.333px_4.333px_39.333px_4.333px]"
                   />
-
-                  {/* Play Button */}
                   <div
                     className="absolute 
               -bottom-0.5 lg:-bottom-0.5 xl:bottom-0 2xl:bottom-0
@@ -101,8 +92,40 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
                     />
                   </div>
                 </div>
+              </DialogTrigger> */}
+              <DialogTrigger asChild>
+                <button
+                  type="button"
+                  aria-label="Play insurance video"
+                  className={cn(
+                    `relative group cursor-pointer 
+         h-[150px] md:h-[180px] lg:h-[210px] xl:h-[280px] 2xl:h-[320px] w-full
+         overflow-hidden transition-all`,
+                    content === 'left' ? 'order-2' : 'order-1',
+                  )}
+                >
+                  <Image
+                    src={data.mainImage}
+                    alt={data?.subtitle ?? 'Video thumbnail'}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 1023px) 300px, (max-width: 1349px) 400px, 500px"
+                  />
+                  <div
+                    className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300 
+        rounded-[4.333px_4.333px_19.333px_4.333px] lg:rounded-[4.333px_4.333px_29.333px_4.333px] xl:rounded-[4.333px_4.333px_39.333px_4.333px]"
+                  />
+                  <div
+                    className="absolute 
+        -bottom-0.5 lg:-bottom-0.5 xl:bottom-0 2xl:bottom-0
+        -right-0.5 lg:-right-0.5 xl:-right-[3px] 2xl:-right-0.5 
+         w-[30px] lg:w-[40px] xl:w-[50px] 2xl:w-[60px]  
+          h-[30px] lg:h-[40px] xl:h-[50px] 2xl:h-[60px]"
+                  >
+                    <Image src="/assets/icons/web/play.svg" alt="Play video" fill className="" />
+                  </div>
+                </button>
               </DialogTrigger>
-
               <DialogContent
                 className="max-w-5xl w-full aspect-video p-0 bg-black 
       [&>button.absolute]:top-3 [&>button.absolute]:right-3 

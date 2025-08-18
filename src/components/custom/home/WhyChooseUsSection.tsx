@@ -16,9 +16,7 @@ function WhyChooseUsSection() {
           alt="Background"
           className="object-cover"
           fill
-          unoptimized={false}
-          quality={85}
-          sizes="(max-width: 400px) 100vw,(max-width: 1023px) 50vw, 33vw" // Define responsive image sizes
+          sizes="(max-width: 400px) 200px,(max-width: 1023px) 50vw, 33vw" // Define responsive image sizes
         />
         {/* overlay */}
         <div className="absolute inset-0 bg-[#1E1E1E]/60 z-20" />

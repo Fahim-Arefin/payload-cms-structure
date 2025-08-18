@@ -514,6 +514,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
           <PopoverTrigger asChild>
             <Button
+              aria-haspopup="dialog"
               variant="outline"
               onClick={handleOpenDatePicker}
               className={`w-full justify-start text-left font-normal !text-[12px] md:!text-[14px] 2xl:!text-[16px] 
@@ -621,6 +622,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           }}
         >
           <SelectTrigger
+            aria-label="Select Plan"
             className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
                       placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
                       rounded-sm lg:rounded-[9px] xl:rounded-[10px]
@@ -666,12 +668,20 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         {/* below a text saying watch video */}
         {selectedPlan && selectedPlan.videoLink && (
           <Dialog>
-            <DialogTrigger asChild>
+            {/* <DialogTrigger asChild>
               <p className="text-[10px] py-1 absolute inset-x-0 text-[#FF6600] underline cursor-pointer">
                 Watch Video
               </p>
+            </DialogTrigger> */}
+            <DialogTrigger asChild>
+              <button
+                type="button"
+                className="text-[10px] py-1 absolute inset-x-0 text-[#FF6600] underline cursor-pointer"
+                aria-label={`Watch video about ${selectedPlan.plan_name}`}
+              >
+                Watch Video
+              </button>
             </DialogTrigger>
-
             <DialogContent
               className="max-w-5xl w-full aspect-video p-0 bg-black 
       [&>button.absolute]:top-3 [&>button.absolute]:right-3 
@@ -721,6 +731,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           }}
         >
           <SelectTrigger
+            aria-label="Select Tenure"
             className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
                       placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
                       rounded-sm lg:rounded-[9px] xl:rounded-[10px] shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6 ${
@@ -792,6 +803,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           }}
         >
           <SelectTrigger
+            aria-label="Select Gender"
             className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
                       placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
                       rounded-sm lg:rounded-[9px] xl:rounded-[10px] shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6 ${
@@ -818,7 +830,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       </div>
       {/* annual income input */}
       <div className="col-span-2 md:col-span-1">
+        <label htmlFor="annualIncome" className="sr-only">
+          Annual Income
+        </label>
         <Input
+          id="annualIncome"
           min={0}
           type="number"
           placeholder="Annual Income *"
@@ -838,7 +854,13 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       </div>
       {/* sum assured input */}
       <div className="relative col-span-2 md:col-span-1">
+        <label htmlFor="sumAssured" className="sr-only">
+          Sum Assured
+        </label>
         <Input
+          aria-invalid={fieldErrors.SumAssured || undefined}
+          aria-describedby={fieldErrors.SumAssured ? 'sumAssured-error' : undefined}
+          id="sumAssured"
           min={100000}
           type="number"
           placeholder="Sum Assured *"
@@ -862,7 +884,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       </div>
       {/* phone number input */}
       <div className="col-span-2 md:col-span-1">
+        <label htmlFor="phoneNumber" className="sr-only">
+          Phone Number
+        </label>
         <Input
+          id="phoneNumber"
           type="tel"
           placeholder="Phone Number"
           value={formData.phoneNumber}
@@ -902,6 +928,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           }}
         >
           <SelectTrigger
+            aria-label="Select Payment Method"
             className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px] 
                       placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
                       rounded-sm lg:rounded-[9px] xl:rounded-[10px] shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6 ${
@@ -977,7 +1004,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       </div>
       {/* name input */}
       <div className="col-span-2 md:col-span-1">
+        <label htmlFor="name" className="sr-only">
+          Name
+        </label>
         <Input
+          id="name"
           type="text"
           placeholder="Name"
           value={formData.name}
@@ -990,7 +1021,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       </div>
       {/* email input */}
       <div className="col-span-2 md:col-span-1">
+        <label htmlFor="email" className="sr-only">
+          Email
+        </label>
         <Input
+          id="email"
           type="text"
           placeholder="Email"
           value={formData.email}
