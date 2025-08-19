@@ -613,8 +613,8 @@ function QuoteSection() {
         return 'half_yearly'
       case 'Yearly':
         return 'yearly'
-      // case 'Single':
-      //   return 'single'
+      case 'Single':
+        return 'single'
       default:
         return 'monthly'
     }
@@ -677,133 +677,157 @@ function QuoteSection() {
           {/* Info Container - Show on all screens when API response is available */}
           {apiResponse && (
             <div
-              className="grid grid-cols-2 md:grid-cols-4 bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600] 
-            py-2"
+              className="bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600] py-2"
             >
               <h2
-                className="text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-normal mb-6 col-span-2 md:col-span-4 p-2
+                className="text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-normal mb-6 p-2
               xl:py-3 lg:my-3 xl:my-4 text-center"
               >
                 Your Desired Premium is Highlighted
               </h2>
 
-              <div className="col-span-1 md:col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
-                <div
-                  className={`font-medium text-center ${
-                    confirmedPaymentMode === 'Monthly'
-                      ? 'text-[#ED7125] result-selected-header-size'
-                      : 'text-[#1E1E1E] result-not-selected-header-size'
-                  }`}
-                >
-                  Monthly
+              {/* Regular 4-column grid for non-Single payment modes */}
+              {confirmedPaymentMode !== 'Single' && (
+                <div className="grid grid-cols-2 md:grid-cols-4">
+                  <div className="col-span-1 md:col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
+                    <div
+                      className={`font-medium text-center ${
+                        confirmedPaymentMode === 'Monthly'
+                          ? 'text-[#ED7125] result-selected-header-size'
+                          : 'text-[#1E1E1E] result-not-selected-header-size'
+                      }`}
+                    >
+                      Monthly
+                    </div>
+                    <div
+                      className={`font-bold text-center ${
+                        confirmedPaymentMode === 'Monthly'
+                          ? 'text-[#ED7125] result-selected-text-size '
+                          : 'text-[#1E1E1E] result-not-selected-text-size'
+                      }`}
+                    >
+                      <AnimatedCounter
+                        value={
+                          confirmedPaymentMode === 'Monthly'
+                            ? getTotalPremiumWithCoverage('Monthly')
+                            : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0
+                        }
+                        prefix="৳"
+                        showAnimation={confirmedPaymentMode === 'Monthly'}
+                        duration={800}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-1 md:col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+                    <div
+                      className={`font-medium text-center ${
+                        confirmedPaymentMode === 'Quarterly'
+                          ? 'text-[#ED7125] result-selected-header-size'
+                          : 'text-[#1E1E1E] result-not-selected-header-size'
+                      }`}
+                    >
+                      Quarterly
+                    </div>
+                    <div
+                      className={`font-bold text-center ${
+                        confirmedPaymentMode === 'Quarterly'
+                          ? 'text-[#ED7125] result-selected-text-size '
+                          : 'text-[#1E1E1E] result-not-selected-text-size'
+                      }`}
+                    >
+                      <AnimatedCounter
+                        value={
+                          confirmedPaymentMode === 'Quarterly'
+                            ? getTotalPremiumWithCoverage('Quarterly')
+                            : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0
+                        }
+                        prefix="৳"
+                        showAnimation={confirmedPaymentMode === 'Quarterly'}
+                        duration={800}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-1 md:col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+                    <div
+                      className={`font-medium text-center ${
+                        confirmedPaymentMode === 'Half Yearly'
+                          ? 'text-[#ED7125] result-selected-header-size'
+                          : 'text-[#1E1E1E] result-not-selected-header-size'
+                      }`}
+                    >
+                      Half Yearly
+                    </div>
+                    <div
+                      className={`font-bold text-center ${
+                        confirmedPaymentMode === 'Half Yearly'
+                          ? 'text-[#ED7125] result-selected-text-size '
+                          : 'text-[#1E1E1E] result-not-selected-text-size'
+                      }`}
+                    >
+                      <AnimatedCounter
+                        value={
+                          confirmedPaymentMode === 'Half Yearly'
+                            ? getTotalPremiumWithCoverage('Half Yearly')
+                            : getTotalPremium(apiResponse, 'Half Yearly')?.lifePremium.half_yearly || 0
+                        }
+                        prefix="৳"
+                        showAnimation={confirmedPaymentMode === 'Half Yearly'}
+                        duration={800}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-1 md:col-span-1 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+                    <div
+                      className={`font-medium text-center ${
+                        confirmedPaymentMode === 'Yearly'
+                          ? 'text-[#ED7125] result-selected-header-size'
+                          : 'text-[#1E1E1E] result-not-selected-header-size'
+                      }`}
+                    >
+                      Yearly
+                    </div>
+                    <div
+                      className={`font-bold text-center ${
+                        confirmedPaymentMode === 'Yearly'
+                          ? 'text-[#ED7125] result-selected-text-size '
+                          : 'text-[#1E1E1E] result-not-selected-text-size'
+                      }`}
+                    >
+                      <AnimatedCounter
+                        value={
+                          confirmedPaymentMode === 'Yearly'
+                            ? getTotalPremiumWithCoverage('Yearly')
+                            : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0
+                        }
+                        prefix="৳"
+                        showAnimation={confirmedPaymentMode === 'Yearly'}
+                        duration={800}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div
-                  className={`font-bold text-center ${
-                    confirmedPaymentMode === 'Monthly'
-                      ? 'text-[#ED7125] result-selected-text-size '
-                      : 'text-[#1E1E1E] result-not-selected-text-size'
-                  }`}
-                >
-                  <AnimatedCounter
-                    value={
-                      confirmedPaymentMode === 'Monthly'
-                        ? getTotalPremiumWithCoverage('Monthly')
-                        : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0
-                    }
-                    prefix="৳"
-                    showAnimation={confirmedPaymentMode === 'Monthly'}
-                    duration={800}
-                  />
+              )}
+
+              {/* Single Payment section */}
+              {confirmedPaymentMode === 'Single' && (
+                <div className="p-6 py-8 bg-gradient-to-br from-[#ED7125]/10 to-[#ED7125]/20 rounded-lg border border-[#ED7125]/30 mx-4">
+                  <div className="text-center">
+                    <div className="text-[#ED7125] text-[18px] lg:text-[24px] xl:text-[28px] font-bold mb-3">
+                      Single Payment
+                    </div>
+                    <div className="text-[#ED7125] text-[24px] lg:text-[32px] xl:text-[36px] 2xl:text-[40px] font-bold">
+                      <AnimatedCounter
+                        value={getTotalPremiumWithCoverage('Single')}
+                        prefix="৳"
+                        showAnimation={true}
+                        duration={800}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="col-span-1 md:col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
-                <div
-                  className={`font-medium text-center ${
-                    confirmedPaymentMode === 'Quarterly'
-                      ? 'text-[#ED7125] result-selected-header-size'
-                      : 'text-[#1E1E1E] result-not-selected-header-size'
-                  }`}
-                >
-                  Quarterly
-                </div>
-                <div
-                  className={`font-bold text-center ${
-                    confirmedPaymentMode === 'Quarterly'
-                      ? 'text-[#ED7125] result-selected-text-size '
-                      : 'text-[#1E1E1E] result-not-selected-text-size'
-                  }`}
-                >
-                  <AnimatedCounter
-                    value={
-                      confirmedPaymentMode === 'Quarterly'
-                        ? getTotalPremiumWithCoverage('Quarterly')
-                        : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0
-                    }
-                    prefix="৳"
-                    showAnimation={confirmedPaymentMode === 'Quarterly'}
-                    duration={800}
-                  />
-                </div>
-              </div>
-              <div className="col-span-1 md:col-span-1 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
-                <div
-                  className={`font-medium text-center ${
-                    confirmedPaymentMode === 'Half Yearly'
-                      ? 'text-[#ED7125] result-selected-header-size'
-                      : 'text-[#1E1E1E] result-not-selected-header-size'
-                  }`}
-                >
-                  Half Yearly
-                </div>
-                <div
-                  className={`font-bold text-center ${
-                    confirmedPaymentMode === 'Half Yearly'
-                      ? 'text-[#ED7125] result-selected-text-size '
-                      : 'text-[#1E1E1E] result-not-selected-text-size'
-                  }`}
-                >
-                  <AnimatedCounter
-                    value={
-                      confirmedPaymentMode === 'Half Yearly'
-                        ? getTotalPremiumWithCoverage('Half Yearly')
-                        : getTotalPremium(apiResponse, 'Half Yearly')?.lifePremium.half_yearly || 0
-                    }
-                    prefix="৳"
-                    showAnimation={confirmedPaymentMode === 'Half Yearly'}
-                    duration={800}
-                  />
-                </div>
-              </div>
-              <div className="col-span-1 md:col-span-1 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
-                <div
-                  className={`font-medium text-center ${
-                    confirmedPaymentMode === 'Yearly'
-                      ? 'text-[#ED7125] result-selected-header-size'
-                      : 'text-[#1E1E1E] result-not-selected-header-size'
-                  }`}
-                >
-                  Yearly
-                </div>
-                <div
-                  className={`font-bold text-center ${
-                    confirmedPaymentMode === 'Yearly'
-                      ? 'text-[#ED7125] result-selected-text-size '
-                      : 'text-[#1E1E1E] result-not-selected-text-size'
-                  }`}
-                >
-                  <AnimatedCounter
-                    value={
-                      confirmedPaymentMode === 'Yearly'
-                        ? getTotalPremiumWithCoverage('Yearly')
-                        : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0
-                    }
-                    prefix="৳"
-                    showAnimation={confirmedPaymentMode === 'Yearly'}
-                    duration={800}
-                  />
-                </div>
-              </div>
-              <div className="col-span-2 md:col-span-4 p-2 md:py-3 md:px-6 xl:py-4 xl:px-8 space-y-2 mt-2 xl:mt-6">
+              )}
+
+              <div className="p-2 md:py-3 md:px-6 xl:py-4 xl:px-8 space-y-2 mt-2 xl:mt-6">
                 {getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[
                   getPaymentModeKey(confirmedPaymentMode)
                 ] > 0 && (
