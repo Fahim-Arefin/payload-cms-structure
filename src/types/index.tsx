@@ -13,7 +13,7 @@ export type ShantaIntroContentType = {
   subheading: string
   paragraphTitle: string
   image: string
-  mobileImage: string
+  mobileImage?: string
   paragraph: string
 }
 export type VissionMissionContentType = {

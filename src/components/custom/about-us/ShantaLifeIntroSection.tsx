@@ -1,4 +1,5 @@
 import { ShantaIntroContentType } from '@/types'
+import Image from 'next/image'
 import React from 'react'
 
 type Props = {
@@ -21,11 +22,13 @@ function ShantaLifeIntroSection({ shantaIntroContent }: Props) {
           lg:w-[90%] xl:w-[78%] 2xl:w-[80%] 
           lg:h-[180px] xl:h-[193px] 2xl:h-[230px]"
           >
-            <img
+            <Image
               src={shantaIntroContent?.image}
               alt={shantaIntroContent?.heading}
               // className="w-full object-cover object-center z-0 "
-              className="w-full h-full object-contain z-0 "
+              className="object-contain z-0 "
+              fill
+              sizes="(max-width: 1349px) 350px, 400px"
             />
           </div>
 
@@ -39,11 +42,13 @@ function ShantaLifeIntroSection({ shantaIntroContent }: Props) {
           </div>
 
           {/* mobile */}
-          <div className="col-span-1 lg:hidden md:-mt-4 ">
-            <img
-              src={shantaIntroContent?.mobileImage}
+          <div className="relative col-span-1 lg:hidden md:-mt-4">
+            <Image
+              fill
+              src={shantaIntroContent?.image}
               alt={shantaIntroContent?.heading}
-              className="w-full object-cover object-center"
+              className="object-cover object-center"
+              sizes="(max-width: 767px) 150px, 300px"
             />
           </div>
         </div>

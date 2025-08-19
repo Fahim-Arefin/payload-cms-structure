@@ -17,7 +17,7 @@ function page() {
       subtitle: 'Designed for Life',
       description:
         'At Shanta Life Insurance, our values aren’t just feel-good words — they’re the GPS guiding every decision, every smile, and every ‘we’ve got you covered’ moment.',
-      image: '/assets/aboutUsBanner.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/aboutUsBanner.jpg`,
     },
     // {
     //   title: 'Building Better Futures',
@@ -38,8 +38,8 @@ function page() {
     heading: 'Advancing',
     subheading: 'A Legacy of Setting Standards',
     paragraphTitle: 'Nurtured with Trust. Built for Tomorrow',
-    image: '/assets/about-us/web/shantaIntroImage.png',
-    mobileImage: '/assets/about-us/web/shantaIntroImage.png',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/shantaIntroImage.png`,
+    // mobileImage: '/assets/about-us/web/shantaIntroImage.png',
     paragraph:
       'Born from a vision to redefine life insurance in Bangladesh, Shanta Life is backed by a powerful consortium comprised of Shanta Holdings, Shanta Lifestyle, Shanta Securities, Shanta Asset Management, Shanta Equity, Shanta Multiverse, Shanta Property Management, FAR Asset Management, and Nasah Holdings.',
   }
