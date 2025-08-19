@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import AllOfThemCard from './AllOfThemCard'
 import Autoplay from 'embla-carousel-autoplay'
+import { sliderDelay } from '@/lib/data'
 type Props = {
   allOfThemData: AllOfThemDataType[]
 }
@@ -53,7 +54,7 @@ function AllOfThemSection({ allOfThemData }: Props) {
             setApi={setCarouselApi} // 👈 capture carousel API
             plugins={[
               Autoplay({
-                delay: 3000,
+                delay: sliderDelay,
               }),
             ]}
           >

@@ -61,7 +61,7 @@ export type DirectorProfileDataType = {
 export type AllOfThemDataType = {
   id: number
   image: string
-  mobileImage: string
+  mobileImage?: string
   name: string
   title: string
 }

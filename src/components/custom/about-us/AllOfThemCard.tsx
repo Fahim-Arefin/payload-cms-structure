@@ -78,16 +78,11 @@ function AllOfThemCard({ data }: Props) {
         {/* Profile Image */}
         <div className="absolute z-10 w-full h-full bottom-0 ">
           <Image
-            src={data?.mobileImage}
-            alt={data?.title}
-            fill
-            className="lg:hidden object-cover"
-          />
-          <Image
             src={data?.image}
             alt={data?.title}
             fill
-            className="hidden lg:block object-cover"
+            className="object-cover"
+            sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , 33vw"
           />
         </div>
       </div>
