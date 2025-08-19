@@ -128,8 +128,8 @@ function page() {
 
   const directorCardData = [
     {
-      image: '/assets/about-us/web/directoralone.png',
-      mobileImage: '/assets/about-us/mobile/directoralone.png',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/directoralone.png`,
+      // mobileImage: '/assets/about-us/mobile/directoralone.png',
       name: 'Khondoker Monir Uddin',
       designation: 'Chairman',
       title: 'Charting the Course',
@@ -141,8 +141,8 @@ function page() {
       link: '/all-bods#id-1',
     },
     {
-      image: '/assets/about-us/web/CEOalone.png',
-      mobileImage: '/assets/about-us/mobile/CEOalone.png',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/CEOalone.png`,
+      // mobileImage: '/assets/about-us/mobile/CEOalone.png',
       name: 'Nafis Akhter Ahmed',
       designation: 'Chief Executive Officer',
       title: 'Redefining',

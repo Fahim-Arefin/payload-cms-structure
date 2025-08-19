@@ -43,7 +43,7 @@ export type LicensedInfoType = {
 
 export type DirectorCardDataType = {
   image: string
-  mobileImage: string
+  mobileImage?: string
   name?: string
   designation?: string
   title: string
