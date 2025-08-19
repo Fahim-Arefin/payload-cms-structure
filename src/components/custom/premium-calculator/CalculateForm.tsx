@@ -1322,6 +1322,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     'Shanta Child Education Plan (1%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
     'Shanta Child Education Plan (2%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
     'Shanta Child Education Plan (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+    'Shanta Child Education Plan Single Payment (1%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+    'Shanta Child Education Plan Single Payment (2%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+    'Shanta Child Education Plan Single Payment (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
     'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g',
     'Shanta 3 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
     'Shanta 4 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
@@ -1356,6 +1359,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           'Shanta Child Education Plan (1%)': 'Shanta Child Education Plan (1%)',
           'Shanta Child Education Plan (2%)': 'Shanta Child Education Plan (2%)',
           'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
+          'Shanta Child Education Plan Single Payment (1%)': 'Shanta Child Education Plan Single Payment (1%)',
+          'Shanta Child Education Plan Single Payment (2%)': 'Shanta Child Education Plan Single Payment (2%)',
+          'Shanta Child Education Plan Single Payment (3%)': 'Shanta Child Education Plan Single Payment (3%)',
         }
 
         // Filter and transform the plans
@@ -1366,12 +1372,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings],
           }))
 
-        // Separate Child Education Plans from other plans
+        // Separate Child Education Plans from other plans (including Single Payment variants)
         const childEducationPlans = filteredPlans.filter((plan) =>
-          plan.plan_name.includes('Shanta Child Education Plan'),
+          plan.plan_name.toLowerCase().includes('child education')
         )
         const otherPlans = filteredPlans.filter(
-          (plan) => !plan.plan_name.includes('Shanta Child Education Plan'),
+          (plan) => !plan.plan_name.toLowerCase().includes('child education')
         )
 
         // Store child education variants separately
