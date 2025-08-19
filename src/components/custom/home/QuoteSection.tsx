@@ -707,11 +707,11 @@ function QuoteSection() {
                       }`}
                     >
                       <AnimatedCounter
-                        value={
+                        value={Math.ceil(
                           confirmedPaymentMode === 'Monthly'
                             ? getTotalPremiumWithCoverage('Monthly')
                             : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0
-                        }
+                        )}
                         prefix="৳"
                         showAnimation={confirmedPaymentMode === 'Monthly'}
                         duration={800}
@@ -736,11 +736,11 @@ function QuoteSection() {
                       }`}
                     >
                       <AnimatedCounter
-                        value={
+                        value={Math.ceil(
                           confirmedPaymentMode === 'Quarterly'
                             ? getTotalPremiumWithCoverage('Quarterly')
                             : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0
-                        }
+                        )}
                         prefix="৳"
                         showAnimation={confirmedPaymentMode === 'Quarterly'}
                         duration={800}
@@ -765,11 +765,11 @@ function QuoteSection() {
                       }`}
                     >
                       <AnimatedCounter
-                        value={
+                        value={Math.ceil(
                           confirmedPaymentMode === 'Half Yearly'
                             ? getTotalPremiumWithCoverage('Half Yearly')
                             : getTotalPremium(apiResponse, 'Half Yearly')?.lifePremium.half_yearly || 0
-                        }
+                        )}
                         prefix="৳"
                         showAnimation={confirmedPaymentMode === 'Half Yearly'}
                         duration={800}
@@ -794,11 +794,11 @@ function QuoteSection() {
                       }`}
                     >
                       <AnimatedCounter
-                        value={
+                        value={Math.ceil(
                           confirmedPaymentMode === 'Yearly'
                             ? getTotalPremiumWithCoverage('Yearly')
                             : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0
-                        }
+                        )}
                         prefix="৳"
                         showAnimation={confirmedPaymentMode === 'Yearly'}
                         duration={800}
@@ -817,7 +817,7 @@ function QuoteSection() {
                     </div>
                     <div className="text-[#ED7125] text-[24px] lg:text-[32px] xl:text-[36px] 2xl:text-[40px] font-bold">
                       <AnimatedCounter
-                        value={getTotalPremiumWithCoverage('Single')}
+                        value={Math.ceil(getTotalPremiumWithCoverage('Single'))}
                         prefix="৳"
                         showAnimation={true}
                         duration={800}
