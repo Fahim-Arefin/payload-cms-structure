@@ -34,10 +34,10 @@ export type AllAboutCardDataType = {
 
 export type LicensedInfoType = {
   licensedImage: string
-  licensedMobileImage: string
+  licensedMobileImage?: string
   licensedDate: string
   launchedImage: string
-  launchedMobileImage: string
+  launchedMobileImage?: string
   launchedDate: string
 }
 

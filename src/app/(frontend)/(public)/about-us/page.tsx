@@ -117,12 +117,12 @@ function page() {
   }
 
   const liscensedData = {
-    licensedImage: '/assets/icons/web/licensed.png',
-    licensedMobileImage: '/assets/icons/mobile/licensedMobile.png',
+    licensedImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/licensed.png`,
+    // licensedMobileImage: '/assets/icons/mobile/licensedMobile.png',
     licensedDate: 'November 7, 2023',
 
-    launchedImage: '/assets/icons/web/rocket.png',
-    launchedMobileImage: '/assets/icons/mobile/rocketMobile.png',
+    launchedImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/rocket.png`,
+    // launchedMobileImage: '/assets/icons/mobile/rocketMobile.png',
     launchedDate: ' December 1, 2024',
   }
 
