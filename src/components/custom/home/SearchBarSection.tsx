@@ -223,7 +223,7 @@ function SearchBarSection() {
           value={searchTerm}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          placeholder="Try shanta multi-stage maturity plan"
+          placeholder="Search..."
           className="w-full rounded-xl md:rounded-md bg-white text-[#000000] placeholder:text-[#000000]/70 
           placeholder:text-xs sm:placeholder:text-sm tracking-[0.03em] py-4 px-5 sm:py-5 sm:px-12 
           h-[40px] md:h-[45px] lg:h-[60px] xl:h-[70px] "
