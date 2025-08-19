@@ -25,9 +25,9 @@ export type VissionMissionContentType = {
 
 export type AllAboutCardDataType = {
   image: string
-  mobileImage: string
+  mobileImage?: string
   hoverImage: string
-  hoverMobileImage: string
+  hoverMobileImage?: string
   title: string
   description: { __html: string }
 }

@@ -53,16 +53,16 @@ function page() {
   }
 
   const allAboutData = {
-    image: '/assets/about-us/web/allAbout.jpg',
-    mobileImage: '/assets/about-us/mobile/allAbout.jpg',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/allAbout.jpg`,
+    // mobileImage: '/assets/about-us/mobile/allAbout.jpg',
     title: 'Values That',
     coloredTitle: 'Shape Us',
     data: [
       {
-        image: '/assets/icons/web/allAboutIcon1.png',
-        mobileImage: '/assets/icons/mobile/allAboutIcon1.png',
-        hoverImage: '/assets/icons/web/trustWhite.png',
-        hoverMobileImage: '/assets/icons/mobile/trustWhite.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/allAboutIcon1.png`,
+        // mobileImage: '/assets/icons/mobile/allAboutIcon1.png',
+        hoverImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/trustWhite.png`,
+        // hoverMobileImage: '/assets/icons/mobile/trustWhite.png',
         title: 'Trust',
         description: {
           __html:
@@ -70,10 +70,10 @@ function page() {
         },
       },
       {
-        image: '/assets/icons/web/simplicity.png',
-        mobileImage: '/assets/icons/mobile/simplicity.png',
-        hoverImage: '/assets/icons/web/allAboutIcon3.png',
-        hoverMobileImage: '/assets/icons/mobile/allAboutIcon3.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/simplicity.png `,
+        // mobileImage: '/assets/icons/mobile/simplicity.png',
+        hoverImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/allAboutIcon3.png`,
+        // hoverMobileImage: '/assets/icons/mobile/allAboutIcon3.png',
         title: 'Simplicity',
         description: {
           __html:
@@ -81,10 +81,10 @@ function page() {
         },
       },
       {
-        image: '/assets/icons/web/allAboutIcon2.png',
-        mobileImage: '/assets/icons/mobile/allAboutIcon2.png',
-        hoverImage: '/assets/icons/web/ownershipWhite.png',
-        hoverMobileImage: '/assets/icons/mobile/ownershipWhite.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/allAboutIcon2.png`,
+        // mobileImage: '/assets/icons/mobile/allAboutIcon2.png',
+        hoverImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/ownershipWhite.png`,
+        // hoverMobileImage: '/assets/icons/mobile/ownershipWhite.png',
         title: 'Ownership',
         description: {
           __html:
@@ -92,10 +92,10 @@ function page() {
         },
       },
       {
-        image: '/assets/icons/web/GOLDEN-Customer-Centricity.png',
-        mobileImage: '/assets/icons/mobile/GOLDEN-Customer-Centricity.png',
-        hoverImage: '/assets/icons/web/Customer-Centricity.png',
-        hoverMobileImage: '/assets/icons/mobile/Customer-Centricity.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/GOLDEN-Customer-Centricity.png `,
+        // mobileImage: '/assets/icons/mobile/GOLDEN-Customer-Centricity.png',
+        hoverImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/Customer-Centricity.png`,
+        // hoverMobileImage: '/assets/icons/mobile/Customer-Centricity.png',
         title: 'Customer Centricity',
         description: {
           __html:
@@ -103,10 +103,10 @@ function page() {
         },
       },
       {
-        image: '/assets/icons/web/ownership-Golden.png',
-        mobileImage: '/assets/icons/mobile/ownership-Golden.png',
-        hoverImage: '/assets/icons/web/ownership-White.png',
-        hoverMobileImage: '/assets/icons/mobile/ownership-White.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/ownership-Golden.png `,
+        // mobileImage: '/assets/icons/mobile/ownership-Golden.png',
+        hoverImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/ownership-White.png`,
+        // hoverMobileImage: '/assets/icons/mobile/ownership-White.png',
         title: 'Transparency',
         description: {
           __html:

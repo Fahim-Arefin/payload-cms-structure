@@ -1,4 +1,5 @@
 import { AllAboutCardDataType } from '@/types'
+import Image from 'next/image'
 import React from 'react'
 
 type Props = {
@@ -28,30 +29,18 @@ function AllAboutCard({ data, index }: Props) {
     relative group"
         >
           {/* Main image (shown by default, fades out on hover) */}
-          {/* mobile */}
-          <img
-            src={data?.mobileImage}
-            alt={data?.title}
-            className="lg:hidden w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 z-10"
-          />
-          {/* web */}
-          <img
+          <Image
+            fill
             src={data?.image}
             alt={data?.title}
-            className="hidden lg:block w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 z-10"
+            className="inset-0 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 z-10"
           />
           {/* Hover image (hidden by default, fades in on hover) */}
-          {/* mobile */}
-          <img
-            src={data?.hoverMobileImage}
-            alt="Trust"
-            className="lg:hidden w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
-          />
-          {/* web */}
-          <img
+          <Image
+            fill
             src={data?.hoverImage}
-            alt="Trust"
-            className="hidden lg:block w-full h-full absolute inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
+            alt={data?.title}
+            className="inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
           />
         </div>
         <div className="global-p1 lg:global-h3 text-center font-semibold lg:font-medium uppercase px-1 ">
