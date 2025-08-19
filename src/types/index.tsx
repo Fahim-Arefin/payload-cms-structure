@@ -54,7 +54,7 @@ export type DirectorCardDataType = {
 export type DirectorProfileDataType = {
   id?: number
   image: string
-  mobileImage: string
+  mobileImage?: string
   name: string
   title: string
 }

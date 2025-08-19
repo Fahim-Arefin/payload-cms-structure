@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import Autoplay from 'embla-carousel-autoplay'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
+import { sliderDelay } from '@/lib/data'
 
 type Props = {
   directorProfileData: DirectorProfileDataType[]
@@ -78,7 +79,7 @@ function DirectorListSection({ directorProfileData }: Props) {
             setApi={setCarouselApi}
             plugins={[
               Autoplay({
-                delay: 3000,
+                delay: sliderDelay,
               }),
             ]}
           >
