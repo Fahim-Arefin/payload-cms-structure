@@ -260,7 +260,8 @@ function page() {
   const footPrintData = {
     title: 'Shanta’s FOOTPRINT',
     subTitle: 'Where Every Venture Connects',
-    bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/footprint.gif`,
+    // bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/footprint.mp4`,
+    bgImage: `/assets/about-us/web/footprint.mp4`,
     // bgMobileImage: '/assets/about-us/mobile/footprint.gif',
     data: [
       {
