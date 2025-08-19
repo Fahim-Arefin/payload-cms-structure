@@ -55,6 +55,7 @@
 // export default VisionMissionSection
 
 import { VissionMissionContentType } from '@/types'
+import Image from 'next/image'
 import React from 'react'
 
 type Props = {
@@ -70,21 +71,31 @@ function VisionMissionSection({ vissionMissionContent }: Props) {
         h-[200px] md:h-[250px] lg:h-[480px] xl:h-[480px] 2xl:h-[580px]
       "
     >
-      {/* Mobile background */}
-      <div
-        className="absolute inset-0 lg:hidden bg-no-repeat bg-cover bg-center z-20"
-        style={{
-          backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${vissionMissionContent?.bgMobileImage}')`,
-        }}
-      />
-
       {/* Desktop background */}
-      <div
-        className="absolute inset-0 hidden lg:block bg-no-repeat bg-cover bg-center"
+      {/* <div
+        className="absolute inset-0 bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${vissionMissionContent?.bgImage}')`,
         }}
+      /> */}
+
+      {/* convert into Image component */}
+      <Image
+        src={vissionMissionContent?.bgImage}
+        alt="Vision and Mission Background"
+        fill
+        className="object-cover object-center inset-0"
+        sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
       />
+
+      {/* backgroun linear effect */}
+      <div
+        className="absolute inset-0 bg-no-repeat bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6))`,
+        }}
+      />
+
       <div className="w-full grid grid-cols-2 gap-2 md:gap-4 lg:gap-7 xl:gap-10 z-30">
         {/* Vision */}
         <div className="space-y-2 md:space-y-6 pr-2 md:pr-12 ">

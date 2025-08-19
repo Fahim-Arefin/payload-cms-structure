@@ -20,7 +20,7 @@ export type VissionMissionContentType = {
   visionDescription: string
   missionDescription: string
   bgImage: string
-  bgMobileImage: string
+  bgMobileImage?: string
 }
 
 export type AllAboutCardDataType = {
