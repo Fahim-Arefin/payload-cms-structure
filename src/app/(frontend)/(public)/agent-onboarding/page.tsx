@@ -14,7 +14,7 @@ function page({}: Props) {
       title: 'Turn your Ambition, Into Impact ',
       subtitle: '',
       description: 'Stay beyond the ordinary, step into a role that builds futures.',
-      image: '/assets/agent-onboarding/web/agentHeroBanner.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/agentHeroBanner.jpg`,
     },
   ]
 
@@ -47,8 +47,8 @@ function page({}: Props) {
     heading: 'Lead from',
     subheading: 'The front',
     paragraphTitle: 'Own your time. Maximize your growth.',
-    image: '/assets/agent-onboarding/web/leaderBanner.png',
-    mobileImage: '/assets/agent-onboarding/mobile/leaderBanner.png',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/leaderBanner.png`,
+    // mobileImage: '/assets/agent-onboarding/mobile/leaderBanner.png',
     paragraph: `Being a Relationship Officer is about people, progress, and purpose. This role gives you high-earning potential, unmatched flexibility, and the rare chance to secure futures.  Set your own pace, work from anywhere, and unlock exclusive access to world-class training, rewarding income, and powerful professional connections.`,
   }
 

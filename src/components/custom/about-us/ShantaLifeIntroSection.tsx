@@ -42,7 +42,7 @@ function ShantaLifeIntroSection({ shantaIntroContent }: Props) {
           </div>
 
           {/* mobile */}
-          <div className="relative col-span-1 lg:hidden md:-mt-4">
+          <div className="relative w-full max-h-[100px] col-span-1 lg:hidden md:-mt-4">
             <Image
               fill
               src={shantaIntroContent?.image}
