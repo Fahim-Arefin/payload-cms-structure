@@ -13,7 +13,7 @@ function WhyChooseUsSection() {
       <div className="absolute lg:hidden inset-0 z-10">
         <Image
           // src="/assets/homepage/mobile/whyChooseUs.jpg"
-          src="https://s3.ap-southeast-1.wasabisys.com/shantalife-static/assets/homepage/mobile/whyChooseUs.jpg"
+          src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/mobile/whyChooseUs.jpg`}
           alt="Background"
           className="object-cover"
           fill
@@ -29,7 +29,8 @@ function WhyChooseUsSection() {
           <div className="relative w-full rounded-t-[24px] lg:h-[600px] xl:h-[650px] 2xl:h-[700px]">
             <Image
               className="object-cover rounded-2xl"
-              src="/assets/homepage/web/whyChooseUs.jpg"
+              // src="/assets/homepage/web/whyChooseUs.jpg"
+              src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/whyChooseUs.jpg`}
               alt="why choose us"
               quality={85}
               fill
@@ -170,7 +171,8 @@ function WhyChooseUsSection() {
               <div className="relative lg:h-[350px] xl:h-[370px] 2xl:h-[420px] lg:w-[235px]  xl:w-[250px] 2xl:w-[300px] z-[50] rounded-2xl">
                 <Image
                   className="z-[50] rounded-2xl"
-                  src="/assets/homepage/web/whychooseus2.png"
+                  // src="/assets/homepage/web/whychooseus2.png"
+                  src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/whychooseus2.png`}
                   alt="why choose us"
                   fill
                   // sizes="(max-width: 1349px) 10vw , (max-width: 1699px) 20vw, 20vw"

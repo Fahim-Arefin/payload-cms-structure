@@ -59,10 +59,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             gtag('config', 'G-CP1L2ZN6G5');
           `}
         </Script>
-        <Script
+        {/* <Script
           src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"
           strategy="beforeInteractive"
-        />
+        /> */}
       </head>
       <body>
         <main className="bg-[#F6EDDD] min-h-screen relative font-avenir 3xl:max-w-[1925px] 3xl:mx-auto">
