@@ -6,55 +6,55 @@ import Image from 'next/image'
 function Footer() {
   const shurjoPayData = [
     {
-      image: '/assets/fotter-logos/1.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/1.png`,
     },
     {
-      image: '/assets/fotter-logos/2.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/2.png`,
     },
     {
-      image: '/assets/fotter-logos/3.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/3.png`,
     },
     {
-      image: '/assets/fotter-logos/4.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/4.png`,
     },
     {
-      image: '/assets/fotter-logos/5.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/5.png`,
     },
     {
-      image: '/assets/fotter-logos/6.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/6.png`,
     },
     {
-      image: '/assets/fotter-logos/7.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/7.png`,
     },
     {
-      image: '/assets/fotter-logos/8.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/8.png`,
     },
     {
-      image: '/assets/fotter-logos/9.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/9.png`,
     },
     {
-      image: '/assets/fotter-logos/10.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/10.png`,
     },
     {
-      image: '/assets/fotter-logos/11.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/11.png`,
     },
     {
-      image: '/assets/fotter-logos/12.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/12.png`,
     },
     {
-      image: '/assets/fotter-logos/13.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/13.png`,
     },
     {
-      image: '/assets/fotter-logos/14.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/14.png`,
     },
     {
-      image: '/assets/fotter-logos/15.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/15.png`,
     },
     {
-      image: '/assets/fotter-logos/16.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/16.png`,
     },
     {
-      image: '/assets/fotter-logos/17.png',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/17.png`,
     },
   ]
 
@@ -83,7 +83,7 @@ function Footer() {
           {/* logo */}
           <div className="relative h-[60px] md:h-[80px] md:w-[80px] lg:h-[100px] 2xl:h-[150px] w-[60px] lg:w-[100px] 2xl:w-[150px] mx-auto lg:mx-0">
             <Image
-              src="/assets/fotter-logos/footer2.png"
+              src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/footer2.png`}
               fill
               alt="footer logo"
               className="object-contain "
@@ -406,7 +406,7 @@ function Footer() {
               </div> */}
               <div className="lg:h-[26px] xl:h-[32px] 2xl:h-[40px]">
                 <Image
-                  src="/assets/fotter-logos/shurjo.png" // better: /assets/footer-logos/shurjo.png
+                  src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/shurjo.png`} // better: /assets/footer-logos/shurjo.png
                   alt="Shurjo"
                   width={160}
                   height={40}

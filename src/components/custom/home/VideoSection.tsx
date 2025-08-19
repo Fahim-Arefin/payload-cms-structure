@@ -23,7 +23,7 @@ function VideoSection() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover z-0"
         >
-          <source src="/assets/bg.mp4" type="video/mp4" />
+          <source src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/bg.mp4`} type="video/mp4" />
         </video>
         {/* <LottiePlayer
           className="absolute inset-0 z-0"
@@ -61,7 +61,7 @@ function VideoSection() {
         >
           <div className="relative w-full h-full rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px]">
             <Image
-              src="/assets/homepage/web/thumbnails/yt-thumbnail-4.jpg"
+              src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/thumbnails/yt-thumbnail-4.jpg`}
               alt="Video thumbnail"
               fill
               className="inset-0 rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px] object-cover"

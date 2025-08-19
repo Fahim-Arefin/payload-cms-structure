@@ -34,7 +34,7 @@ function NewsSection() {
           >
             {/* main img */}
             <Image
-              src="/assets/homepage/web/news11.jpg"
+              src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/news11.jpg`}
               alt="news-1"
               fill
               className="object-cover rounded-sm lg:rounded-md 2xl:rounded-xl"
@@ -91,7 +91,7 @@ function NewsSection() {
               {/* img */}
               <Image
                 fill
-                src="/assets/homepage/web/newsSingleBanner.jpg"
+                src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/newsSingleBanner.jpg`}
                 alt="news-2"
                 className=" object-cover rounded-t-sm lg:rounded-t-md 2xl:!rounded-t-xl"
                 sizes="(max-width: 767px) 100vw, 33vw"
@@ -137,7 +137,7 @@ function NewsSection() {
         `}
           >
             <Image
-              src="/assets/homepage/web/thumbnails/yt-thumbnail-10.jpg"
+              src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/thumbnails/yt-thumbnail-10.jpg`}
               alt="News Thumbnail"
               fill
               className="inset-0 object-cover rounded-sm lg:rounded-md 2xl:!rounded-xl"
@@ -153,7 +153,7 @@ function NewsSection() {
             <DialogTrigger asChild>
               <div className="absolute inset-0 flex justify-center items-center cursor-pointer z-20">
                 <Image
-                  src="/assets/playbtn.png"
+                  src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/playbtn.png`}
                   alt="Play"
                   width={60}
                   height={60}
@@ -197,7 +197,11 @@ function NewsSection() {
               "Shanta Life Insurance PLC".
             </p>
             <div className="flex items-center space-x-2">
-              <img src="/assets/calender.png" alt="" className="w-4 h-4 md:w-6 md:h-6" />
+              <img
+                src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/calender.png`}
+                alt=""
+                className="w-4 h-4 md:w-6 md:h-6"
+              />
               <span className="text-xs xl:text-sm">1st Dec, 2024</span>
             </div>
           </div>
@@ -212,7 +216,7 @@ function NewsSection() {
             {/* main img */}
             <Image
               fill
-              src="/assets/homepage/web/news5.jpg"
+              src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/news5.jpg`}
               alt="news-1"
               className="object-cover"
               sizes="(max-width: 767px) 100vw, 33vw"
@@ -260,7 +264,11 @@ function NewsSection() {
               className=" min-w-[30px] lg:min-w-[25px] xl:min-w-[40px] 2xl:min-w-[56px] 
             h-[40px] lg:h-[30px] xl:h-[50px] 2xl:h-[81px]"
             >
-              <img src="/assets/2.png" alt="" className="w-full h-full" />
+              <img
+                src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/2.png`}
+                alt=""
+                className="w-full h-full"
+              />
             </div>
             <div className="">
               <h1 className="text-xs xl:text-lg 2xl:text-lg text-[#00000040]">NEWS</h1>
@@ -276,7 +284,11 @@ function NewsSection() {
               className=" min-w-[30px] lg:min-w-[25px] xl:min-w-[40px] 2xl:min-w-[56px] 
             h-[40px] lg:h-[30px] xl:h-[50px] 2xl:h-[81px]"
             >
-              <img src="/assets/3.png" alt="" className="w-full h-full" />
+              <img
+                src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/3.png`}
+                alt=""
+                className="w-full h-full"
+              />
             </div>
             <div>
               <h1 className="text-xs 2xl:text-lg text-[#00000040]">NEWS</h1>
