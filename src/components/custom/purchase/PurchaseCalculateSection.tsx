@@ -4,6 +4,7 @@ import AnimatedCounter from '@/components/ui/AnimatedCounter'
 import { ApiResToShow } from '@/utils/premiumCalculator'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import GlobalButton from '../shared/GlobalButton'
+// import PurchaseCalculateSectionCommon from '@/components/custom/purchase/PurchaseCalculateSectionCommon'
 
 type PurchaseCalculateSectionProps = {
   confirmedPaymentMode: string
@@ -36,6 +37,8 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
         return 'half_yearly'
       case 'Yearly':
         return 'yearly'
+      case 'Single':
+        return 'single'
       default:
         return 'monthly'
     }
@@ -83,143 +86,143 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
       <div className="h-[1px] w-full bg-[#ED7125] mb-6" />
 
       <div className="grid grid-cols-4 gap-2 bg-[#FFFFFFCC] rounded-b-lg ">
-        <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
-          <div
-            className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
-              confirmedPaymentMode === 'Monthly'
-                ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
-                : 'text-[#1E1E1E]'
-            }`}
-          >
-            Monthly
+        {confirmedPaymentMode !== 'Single' && (
+          <>
+            <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
+              <div
+                className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                  confirmedPaymentMode === 'Monthly'
+                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    : 'text-[#1E1E1E]'
+                }`}
+              >
+                Monthly
+              </div>
+              <div
+                className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                  confirmedPaymentMode === 'Monthly'
+                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    : 'text-[#1E1E1E]'
+                }`}
+              >
+                <AnimatedCounter
+                  value={Math.ceil(
+                    confirmedPaymentMode === 'Monthly'
+                      ? getTotalPremiumWithCoverage('Monthly')
+                      : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0
+                  )}
+                  prefix="৳"
+                  showAnimation={confirmedPaymentMode === 'Monthly'}
+                  duration={800}
+                />
+              </div>
+            </div>
+            <div className="col-span-2 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+              <div
+                className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                  confirmedPaymentMode === 'Quarterly'
+                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    : 'text-[#1E1E1E]'
+                }`}
+              >
+                Quarterly
+              </div>
+              <div
+                className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                  confirmedPaymentMode === 'Quarterly'
+                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    : 'text-[#1E1E1E]'
+                }`}
+              >
+                <AnimatedCounter
+                  value={Math.ceil(
+                    confirmedPaymentMode === 'Quarterly'
+                      ? getTotalPremiumWithCoverage('Quarterly')
+                      : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0
+                  )}
+                  prefix="৳"
+                  showAnimation={confirmedPaymentMode === 'Quarterly'}
+                  duration={800}
+                />
+              </div>
+            </div>
+            <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+              <div
+                className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                  confirmedPaymentMode === 'Half Yearly'
+                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    : 'text-[#1E1E1E]'
+                }`}
+              >
+                Half Yearly
+              </div>
+              <div
+                className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                  confirmedPaymentMode === 'Half Yearly'
+                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    : 'text-[#1E1E1E]'
+                }`}
+              >
+                <AnimatedCounter
+                  value={Math.ceil(
+                    confirmedPaymentMode === 'Half Yearly'
+                      ? getTotalPremiumWithCoverage('Half Yearly')
+                      : getTotalPremium(apiResponse, 'Half Yearly')?.lifePremium.half_yearly || 0
+                  )}
+                  prefix="৳"
+                  showAnimation={confirmedPaymentMode === 'Half Yearly'}
+                  duration={800}
+                />
+              </div>
+            </div>
+            <div className="col-span-2 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
+              <div
+                className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                  confirmedPaymentMode === 'Yearly'
+                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    : 'text-[#1E1E1E]'
+                }`}
+              >
+                Yearly
+              </div>
+              <div
+                className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                  confirmedPaymentMode === 'Yearly'
+                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    : 'text-[#1E1E1E]'
+                }`}
+              >
+                <AnimatedCounter
+                  value={Math.ceil(
+                    confirmedPaymentMode === 'Yearly'
+                      ? getTotalPremiumWithCoverage('Yearly')
+                      : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0
+                  )}
+                  prefix="৳"
+                  showAnimation={confirmedPaymentMode === 'Yearly'}
+                  duration={800}
+                />
+              </div>
+            </div>
+          </>
+        )}
+        {confirmedPaymentMode === 'Single' && (
+          <div className="col-span-4 p-6 py-8 bg-gradient-to-br from-[#ED7125]/10 to-[#ED7125]/20 rounded-lg border border-[#ED7125]/30">
+            <div className="text-center">
+              <div className="text-[#ED7125] text-[18px] lg:text-[24px] xl:text-[28px] font-bold mb-3">
+                Single Payment
+              </div>
+              <div className="text-[#ED7125] text-[24px] lg:text-[32px] xl:text-[36px] 2xl:text-[40px] font-bold">
+                <AnimatedCounter
+                  value={Math.ceil(getTotalPremiumWithCoverage('Single'))}
+                  prefix="৳"
+                  showAnimation={true}
+                  duration={800}
+                />
+              </div>
+            </div>
           </div>
-          <div
-            className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
-              confirmedPaymentMode === 'Monthly'
-                ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
-                : 'text-[#1E1E1E]'
-            }`}
-          >
-            <AnimatedCounter
-              value={
-                confirmedPaymentMode === 'Monthly'
-                  ? getTotalPremiumWithCoverage('Monthly')
-                  : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0
-              }
-              prefix="৳"
-              showAnimation={confirmedPaymentMode === 'Monthly'}
-              duration={800}
-            />
-          </div>
-        </div>
-        <div className="col-span-2 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
-          <div
-            className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
-              confirmedPaymentMode === 'Quarterly'
-                ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
-                : 'text-[#1E1E1E]'
-            }`}
-          >
-            Quarterly
-          </div>
-          <div
-            className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
-              confirmedPaymentMode === 'Quarterly'
-                ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
-                : 'text-[#1E1E1E]'
-            }`}
-          >
-            <AnimatedCounter
-              value={
-                confirmedPaymentMode === 'Quarterly'
-                  ? getTotalPremiumWithCoverage('Quarterly')
-                  : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0
-              }
-              prefix="৳"
-              showAnimation={confirmedPaymentMode === 'Quarterly'}
-              duration={800}
-            />
-          </div>
-        </div>
-        <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
-          <div
-            className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
-              confirmedPaymentMode === 'Half Yearly'
-                ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
-                : 'text-[#1E1E1E]'
-            }`}
-          >
-            Half Yearly
-          </div>
-          <div
-            className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
-              confirmedPaymentMode === 'Half Yearly'
-                ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
-                : 'text-[#1E1E1E]'
-            }`}
-          >
-            <AnimatedCounter
-              value={
-                confirmedPaymentMode === 'Half Yearly'
-                  ? getTotalPremiumWithCoverage('Half Yearly')
-                  : getTotalPremium(apiResponse, 'Half Yearly')?.lifePremium.half_yearly || 0
-              }
-              prefix="৳"
-              showAnimation={confirmedPaymentMode === 'Half Yearly'}
-              duration={800}
-            />
-          </div>
-        </div>
-        <div className="col-span-2 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
-          <div
-            className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
-              confirmedPaymentMode === 'Yearly'
-                ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
-                : 'text-[#1E1E1E]'
-            }`}
-          >
-            Yearly
-          </div>
-          <div
-            className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
-              confirmedPaymentMode === 'Yearly'
-                ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
-                : 'text-[#1E1E1E]'
-            }`}
-          >
-            <AnimatedCounter
-              value={
-                confirmedPaymentMode === 'Yearly'
-                  ? getTotalPremiumWithCoverage('Yearly')
-                  : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0
-              }
-              prefix="৳"
-              showAnimation={confirmedPaymentMode === 'Yearly'}
-              duration={800}
-            />
-          </div>
-        </div>
-        {/* <div className="col-span-1 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
-                <div
-                  className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
-                    confirmedPaymentMode === 'Single' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
-                  }`}
-                >
-                  Single
-                </div>
-                <div
-                  className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
-                    confirmedPaymentMode === 'Single' ? 'text-[#ED7125]' : 'text-[#1E1E1E]'
-                  }`}
-                >
-                  {getTotalPremium(
-                    apiResponse,
-                    confirmedPaymentMode,
-                  ).lifePremium.single.toLocaleString() !== '0'
-                    ? `৳${getTotalPremium(apiResponse, confirmedPaymentMode).lifePremium.single.toLocaleString()}`
-                    : ''}
-                </div>
-              </div> */}
+        )}
         <div className="col-span-5 py-3 px-6 xl:py-4 xl:px-8 space-y-2 mt-2 xl:mt-6">
           {getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[
             getPaymentModeKey(confirmedPaymentMode)
@@ -276,7 +279,8 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                 <>
                   {isCriticalIllness19Covered ? 'Remove' : 'Add'}{' '}
                   {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
-                  taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 19 Critical Illness!
+                  taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 19
+                  Critical Illness!
                 </>
               </div>
 
@@ -352,7 +356,8 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                 <>
                   {isCriticalIllness25Covered ? 'Remove' : 'Add'}{' '}
                   {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ci25Premium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
-                  taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 25 Critical Illness!
+                  taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 25
+                  Critical Illness!
                 </>
               </div>
 
