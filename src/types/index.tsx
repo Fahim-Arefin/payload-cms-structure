@@ -68,7 +68,7 @@ export type AllOfThemDataType = {
 
 export type FootPrintDataType = {
   image: string
-  mobileImage: string
+  mobileImage?: string
   title: string
   description: string
   link: string

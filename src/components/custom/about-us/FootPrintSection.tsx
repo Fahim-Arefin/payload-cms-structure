@@ -7,7 +7,7 @@ type Props = {
     title: string
     subTitle: string
     bgImage: string
-    bgMobileImage: string
+    bgMobileImage?: string
     data: FootPrintDataType[]
   }
 }
@@ -21,18 +21,8 @@ function FootPrintSection({ footPrintData }: Props) {
         h-[230px] md:h-[330px] lg:h-[400px] xl:h-[450px] 2xl:h-[550px] overflow-hidden "
       >
         {/* Background Image */}
-        {/* mobile */}
         <div
-          className="lg:hidden absolute inset-0 bg-cover bg-center bg-no-repeat overflow-hidden"
-          style={{
-            backgroundImage: `url(${bgMobileImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        {/* web */}
-        <div
-          className="hidden lg:block absolute inset-0 bg-cover bg-center bg-no-repeat overflow-hidden"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat overflow-hidden"
           style={{
             backgroundImage: `url(${bgImage})`,
             backgroundSize: 'cover',

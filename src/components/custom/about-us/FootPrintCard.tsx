@@ -84,6 +84,7 @@
 
 // v1 modifing
 import { FootPrintDataType } from '@/types'
+import Image from 'next/image'
 import Link from 'next/link'
 
 type Props = {
@@ -111,19 +112,19 @@ function FootPrintCard({ data, isActive = false }: Props) {
       `}
       >
         {/* Background image */}
-        {/* mobile */}
-        <div
-          className="lg:hidden absolute inset-0 bg-cover bg-center bg-no-repeat "
-          style={{
-            backgroundImage: `url('${data.mobileImage}')`,
-          }}
-        />
         {/* web */}
-        <div
-          className="hidden lg:block absolute inset-0 bg-cover bg-center bg-no-repeat "
+        {/* <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat "
           style={{
             backgroundImage: `url('${data.image}')`,
           }}
+        /> */}
+        <Image
+          src={data.image}
+          alt={data.title}
+          fill
+          className="object-cover object-center  "
+          sizes="(max-width: 767px) 50vw, (max-width: 1349px) 33vw, 400px"
         />
 
         {/* Overlay gradient */}
@@ -131,9 +132,7 @@ function FootPrintCard({ data, isActive = false }: Props) {
 
         {/* Foreground content */}
         <div className="cursor-pointer relative z-10 text-white space-y-2 flex flex-col justify-between h-full">
-          <p className="global-p2 font-light line-clamp-5 lg:line-clamp-7 text-justify">
-            {data?.description}
-          </p>
+          <p className="global-p2 line-clamp-5 lg:line-clamp-7 text-justify">{data?.description}</p>
           <h1 className="text-[10px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] tracking-wide">
             {data?.title}
           </h1>

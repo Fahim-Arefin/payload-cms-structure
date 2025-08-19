@@ -249,6 +249,7 @@ import { FootPrintDataType } from '@/types'
 import { useEffect, useState, useRef } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import FootPrintCard from './FootPrintCard'
+import { sliderDelay } from '@/lib/data'
 
 type Props = {
   footPrintData: FootPrintDataType[]
@@ -271,7 +272,7 @@ export function FootPrintSlider({ footPrintData }: Props) {
         } else {
           carouselApi.scrollTo(0) // Reset to the first slide
         }
-      }, 3000) // Change slide every 5 seconds
+      }, sliderDelay) // Change slide every 5 seconds
     }
   }
 
