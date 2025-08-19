@@ -76,7 +76,7 @@ function WhyChooseUsSection() {
                       <Image
                         unoptimized={false}
                         src={award1}
-                        alt=""
+                        alt="award1"
                         placeholder="blur"
                         sizes="30vw"
                       />
@@ -100,7 +100,7 @@ function WhyChooseUsSection() {
                       <Image
                         unoptimized={false}
                         src={award2}
-                        alt=""
+                        alt="award2"
                         placeholder="blur"
                         sizes="30vw"
                       />
@@ -124,7 +124,7 @@ function WhyChooseUsSection() {
                       <Image
                         unoptimized={false}
                         src={award3}
-                        alt=""
+                        alt="award3"
                         placeholder="blur"
                         sizes="30vw"
                       />
@@ -148,7 +148,7 @@ function WhyChooseUsSection() {
                       <Image
                         unoptimized={false}
                         src={award4}
-                        alt=""
+                        alt="award4"
                         placeholder="blur"
                         sizes="30vw"
                       />
