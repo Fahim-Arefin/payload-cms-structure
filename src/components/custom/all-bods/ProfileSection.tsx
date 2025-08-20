@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { Directors } from '@/types'
+import Image from 'next/image'
 
 type Props = {
   data: Directors
@@ -46,20 +47,19 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
             reverse ? 'md:order-2' : 'md:order-1',
           )}
         >
-          {/* mobile */}
-          <img
-            src={data.mobileImage}
-            alt={data.title}
-            className="lg:hidden rounded-[20px] w-full max-w-[400px] h-[400px] md:h-[250px] lg:h-[300px] xl:h-[480px] object-cover shadow-md"
-            style={{ minHeight: '200px' }}
-          />
-          {/* web */}
-          <img
-            src={data.image}
-            alt={data.title}
-            className="hidden lg:block rounded-[20px] w-full max-w-[400px] h-[400px] md:h-[250px] lg:h-[300px] xl:h-[480px] object-cover shadow-md"
-            style={{ minHeight: '200px' }}
-          />
+          <div
+            className="relative rounded-md lg:rounded-lg xl:rounded-xl 
+          w-full max-w-[400px] 
+          h-[400px] md:h-[250px] lg:h-[300px] xl:h-[480px] shadow-md"
+          >
+            <Image
+              fill
+              src={data.image}
+              alt={data.title}
+              className="rounded-md lg:rounded-lg xl:rounded-xl object-cover "
+              sizes="(max-width:767px) 100vw, 50vw"
+            />
+          </div>
         </div>
         {/* Content block */}
         <div

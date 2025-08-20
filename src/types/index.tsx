@@ -232,7 +232,7 @@ export type Directors = {
   designation: string
   description: string
   image: string
-  mobileImage: string
+  mobileImage?: string
 }
 
 export type Leaders = {
