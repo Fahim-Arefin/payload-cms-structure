@@ -265,3 +265,18 @@ type TabContent = {
 export type TabDataType = {
   content: TabContent[]
 }
+
+export type EligibilityCardProps = {
+  title: string
+  icon: string // icon path
+  mobileIcon?: string // icon path
+  bgImage?: string // background image path
+  entryMin: string
+  entryMinLabel: string
+  entryMax: string
+  entryMaxLabel: string
+  policyTerm: string
+  policyTermLabel: string
+  maturityAge: string
+  maturityAgeLabel: string
+}
