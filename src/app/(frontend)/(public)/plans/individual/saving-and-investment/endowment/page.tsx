@@ -86,20 +86,22 @@ function EndowmentPage() {
         // mobileImage: '/assets/icons/mobile/childTabIcon4.png',
       },
     ],
-    eligibility: {
-      title: 'Eligibility',
-      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/childIcon.svg`,
-      // mobileIcon:"/assets/icons/mobile/childIcon.svg",
-      // bgImage:"/assets/eligibilityImage1.jpg",
-      entryMin: '30',
-      entryMinLabel: 'Days',
-      entryMax: '60',
-      entryMaxLabel: 'Years',
-      policyTerm: '10-25',
-      policyTermLabel: 'Years',
-      maturityAge: '70',
-      maturityAgeLabel: 'Years',
-    },
+    eligibility: [
+      {
+        title: 'Eligibility',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/childIcon.svg`,
+        // mobileIcon:"/assets/icons/mobile/childIcon.svg",
+        // bgImage:"/assets/eligibilityImage1.jpg",
+        entryMin: '30',
+        entryMinLabel: 'Days',
+        entryMax: '60',
+        entryMaxLabel: 'Years',
+        policyTerm: '10-25',
+        policyTermLabel: 'Years',
+        maturityAge: '70',
+        maturityAgeLabel: 'Years',
+      },
+    ],
   }
 
   return (

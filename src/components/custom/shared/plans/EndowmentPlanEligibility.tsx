@@ -38,7 +38,7 @@ import { EligibilityCardProps } from '@/types'
 import { EligibilityCard } from '../../child-education/EligibilityCard'
 
 type EndowmentPlanEligibilityProps = {
-  data: EligibilityCardProps
+  data: EligibilityCardProps[]
 }
 
 const EndowmentPlanEligibility = ({ data }: EndowmentPlanEligibilityProps) => {
@@ -54,7 +54,9 @@ const EndowmentPlanEligibility = ({ data }: EndowmentPlanEligibilityProps) => {
         {/* CHILD CARD */}
 
         <div className="flex flex-col md:flex-row gap-4 lg:gap-10 xl:gap-16 2xl:gap-20 md:mx-auto lg:mx-0">
-          <EligibilityCard data={data} />
+          {data?.map((item, i) => (
+            <EligibilityCard key={i} data={item} />
+          ))}
         </div>
       </div>
     </div>

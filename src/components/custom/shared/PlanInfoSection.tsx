@@ -25,7 +25,7 @@ function PlanInfoSection({ bgColor, data }: Props) {
               src={data?.image}
               alt="Plpan info image"
               className=""
-              sizes="(max-width:767px) 100vw,50vw"
+              // sizes="(max-width:767px) 100vw,50vw"
             />
           </div>
         </div>
