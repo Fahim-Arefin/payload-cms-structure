@@ -35,37 +35,37 @@ function SavingAndInvestment() {
     feature: [
       {
         name: 'Maturity Value',
-        image: '/assets/icons/web/feature1.png',
-        mobileImage: '/assets/icons/mobile/feature1.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature1.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature1.png`,
       },
       {
         name: 'Death Benefit',
-        image: '/assets/icons/web/feature2.png',
-        mobileImage: '/assets/icons/mobile/feature2.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature2.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature2.png`,
       },
       {
         name: 'Grace Period',
-        image: '/assets/icons/web/feature3.png',
-        mobileImage: '/assets/icons/mobile/feature3.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature3.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature3.png`,
       },
       {
         name: 'Surrender & Policy Loan Facility',
-        image: '/assets/icons/web/feature4.png',
-        mobileImage: '/assets/icons/mobile/feature4.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature4.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature4.png`,
       },
       {
         name: 'Tax Benefits',
-        image: '/assets/icons/web/feature5.png',
-        mobileImage: '/assets/icons/mobile/feature5.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature5.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature5.png`,
       },
       {
         name: 'Additional Rider Facility (If taken)',
-        image: '/assets/icons/web/feature6.png',
-        mobileImage: '/assets/icons/mobile/feature6.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature6.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature6.png`,
       },
     ],
-    image: '/assets/solutions/individual/saving-and-investment/web/endowment1.jpg',
-    mobileImage: '/assets/solutions/individual/saving-and-investment/mobile/endowment1.jpg',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/endowment1.jpg`,
+    mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/mobile/endowment1.jpg`,
     link: '/plans/individual/saving-and-investment/endowment',
   }
 
@@ -77,37 +77,37 @@ function SavingAndInvestment() {
     feature: [
       {
         name: 'Maturity Value',
-        image: '/assets/icons/web/feature1.png',
-        mobileImage: '/assets/icons/mobile/feature1.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature1.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature1.png`,
       },
       {
         name: 'Death Benefit',
-        image: '/assets/icons/web/feature2.png',
-        mobileImage: '/assets/icons/mobile/feature2.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature2.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature2.png`,
       },
       {
         name: 'Grace Period',
-        image: '/assets/icons/web/feature3.png',
-        mobileImage: '/assets/icons/mobile/feature3.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature3.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature3.png`,
       },
       {
         name: 'Surrender & Policy Loan Facility',
-        image: '/assets/icons/web/feature4.png',
-        mobileImage: '/assets/icons/mobile/feature4.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature4.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature4.png`,
       },
       {
         name: 'Tax Benefits',
-        image: '/assets/icons/web/feature5.png',
-        mobileImage: '/assets/icons/mobile/feature5.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature5.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature5.png`,
       },
       {
         name: 'Additional Rider Facility (If taken)',
-        image: '/assets/icons/web/feature6.png',
-        mobileImage: '/assets/icons/mobile/feature6.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature6.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature6.png`,
       },
     ],
-    image: '/assets/solutions/individual/saving-and-investment/web/multistage-11.jpg',
-    mobileImage: '/assets/solutions/individual/saving-and-investment/mobile/multistage-11.jpg',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/multistage-11.jpg`,
+    mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/mobile/multistage-11.jpg`,
     link: '/plans/individual/saving-and-investment/multistage',
   }
 

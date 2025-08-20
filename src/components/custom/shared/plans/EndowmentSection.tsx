@@ -89,6 +89,7 @@
 import { Button } from '@/components/ui/button'
 import { EndowmentDataType } from '@/types'
 import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -131,15 +132,8 @@ function EndowmentSection({ data, content, bgColor }: Props) {
                 key={index}
                 className="flex items-center justify-start space-x-1 lg:space-x-2 xl:space-x-3  "
               >
-                <div className="w-[20px] lg:w-[25px] xl:w-[30px] h-[20px] lg:h-[25px] xl:h-[30px]">
-                  {/* mobile */}
-                  <img src={value?.image} alt={value?.name} className="md:hidden h-full w-full" />
-                  {/* web */}
-                  <img
-                    src={value?.image}
-                    alt={value?.name}
-                    className="hidden md:block h-full w-full"
-                  />
+                <div className="relative w-[20px] lg:w-[25px] xl:w-[30px] h-[20px] lg:h-[25px] xl:h-[30px]">
+                  <Image fill src={value?.image} alt={value?.name} className="" />
                 </div>
                 <div className="global-h4 capitalize">{value?.name}</div>
               </div>
@@ -165,21 +159,32 @@ function EndowmentSection({ data, content, bgColor }: Props) {
          flex `}
         >
           {/* mobile */}
-          <img
-            src={data?.mobileImage}
-            alt={data?.title}
-            className="md:hidden h-[250px] md:h-auto
-            rounded-md object-cover
-          w-full md:w-[90%] lg:w-[90%] 2xl:w-[85%] "
-          />
+          <div
+            className="relative w-full md:w-[90%] lg:w-[90%] 2xl:w-[85%]
+          md:hidden rounded-md object-cover aspect-[300/200]"
+          >
+            <Image
+              fill
+              src={data?.mobileImage}
+              alt={data?.title}
+              className="rounded-md object-center object-cover"
+              sizes="100vw"
+            />
+          </div>
           {/* web */}
-          <img
-            src={data?.image}
-            alt={data?.title}
-            className="hidden md:block h-[250px] md:h-auto
-            rounded-md object-cover
+          <div
+            className="relative hidden md:block h-auto
+            rounded-md lg:rounded-lg xl:rounded-xl object-cover
           w-full md:w-[90%] lg:w-[90%] 2xl:w-[85%] "
-          />
+          >
+            <Image
+              fill
+              src={data?.image}
+              alt={data?.title}
+              className="object-cover object-center rounded-md lg:rounded-lg xl:rounded-xl"
+              sizes="50vw"
+            />
+          </div>
         </div>
       </div>
     </div>
