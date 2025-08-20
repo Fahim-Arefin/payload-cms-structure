@@ -72,38 +72,43 @@ function page({}: Props) {
     },
   ]
 
-  const wayWeAreData = [
-    {
-      image: '/assets/agent-onboarding/web/onboardingWay1.png',
-      mobileImage: `/assets/agent-onboarding/mobile/onboardingWay1.png`,
-      title: '',
-      description: '',
-    },
-    {
-      image: '/assets/agent-onboarding/web/onboardingWay4.jpg',
-      mobileImage: `/assets/agent-onboarding/mobile/onboardingWay4.jpg`,
-      title: '',
-      description: '',
-    },
-    {
-      image: '/assets/agent-onboarding/web/onboardingWay5.jpg',
-      mobileImage: `/assets/agent-onboarding/mobile/onboardingWay5.jpg`,
-      title: '',
-      description: '',
-    },
-    {
-      image: '/assets/agent-onboarding/web/onboardingWay6.jpg',
-      mobileImage: `/assets/agent-onboarding/mobile/onboardingWay6.jpg`,
-      title: '',
-      description: '',
-    },
-    {
-      image: '/assets/agent-onboarding/web/onboardingWay7.jpg',
-      mobileImage: `/assets/agent-onboarding/mobile/onboardingWay7.jpg`,
-      title: '',
-      description: '',
-    },
-  ]
+  const wayWeAreData = {
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/wayBgBanner.png`,
+    title: 'More than a Workplace',
+    coloredTitle: 'A Movement',
+    data: [
+      {
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/onboardingWay1.png`,
+        // mobileImage: `/assets/agent-onboarding/mobile/onboardingWay1.png`,
+        title: '',
+        description: '',
+      },
+      {
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/onboardingWay4.jpg`,
+        // mobileImage: `/assets/agent-onboarding/mobile/onboardingWay4.jpg`,
+        title: '',
+        description: '',
+      },
+      {
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/onboardingWay5.jpg`,
+        // mobileImage: `/assets/agent-onboarding/mobile/onboardingWay5.jpg`,
+        title: '',
+        description: '',
+      },
+      {
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/onboardingWay6.jpg`,
+        // mobileImage: `/assets/agent-onboarding/mobile/onboardingWay6.jpg`,
+        title: '',
+        description: '',
+      },
+      {
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/onboardingWay7.jpg`,
+        // mobileImage: `/assets/agent-onboarding/mobile/onboardingWay7.jpg`,
+        title: '',
+        description: '',
+      },
+    ],
+  }
 
   const opportunityData = {
     title: 'What Sets a Shanta Life ',

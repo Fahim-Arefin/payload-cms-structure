@@ -164,6 +164,13 @@ export type VisionCardType = {
   points: Array<string>
 }
 
+export type WayWeAreDataType = {
+  image: string
+  mobileImage?: string
+  title: string
+  description: string
+}
+
 export type PartnerType = {
   img: string
   title: string
