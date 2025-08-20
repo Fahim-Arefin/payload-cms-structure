@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { AllPlantDataType } from '@/types'
 import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 type Props = {
@@ -18,21 +19,21 @@ function AllPlanCard({ data, blur }: Props) {
     rounded-[6px] xl:rounded-[10px] 2xl:rounded-[10px] "
     >
       {/* Background image only */}
-      {/* mobile */}
-      <div
-        className="lg:hidden absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 scale-100 group-hover:scale-105"
-        style={{
-          backgroundImage: `url('${data?.mobileImage}')`,
-          backgroundColor: 'lightgray',
-        }}
-      />
       {/* web */}
-      <div
-        className="hidden lg:block absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 scale-100 group-hover:scale-105"
+      {/* <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 scale-100 group-hover:scale-105"
         style={{
           backgroundImage: `url('${data?.image}')`,
           backgroundColor: 'lightgray',
         }}
+      /> */}
+
+      <Image
+        src={data?.image}
+        alt={data?.title}
+        fill
+        className="object-cover object-center transition-transform duration-500 scale-100 group-hover:scale-105"
+        sizes="(max-width:639px) 400px, (max-width:1023px) 300px, 500px"
       />
 
       {/* Gradient overlay with hover effect */}
