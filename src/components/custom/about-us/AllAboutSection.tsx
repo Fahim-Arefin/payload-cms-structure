@@ -33,7 +33,7 @@ function AllAboutSection({ allAboutData }: Props) {
               fill
               src={image}
               alt={title}
-              className="object-cover"
+              className="object-cover object-center"
               sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , (max-width: 1349px) 350px, 500px"
             />
 

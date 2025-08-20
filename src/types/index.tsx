@@ -29,7 +29,7 @@ export type AllAboutCardDataType = {
   hoverImage: string
   hoverMobileImage?: string
   title: string
-  description: { __html: string }
+  description?: { __html: string }
 }
 
 export type LicensedInfoType = {
@@ -149,7 +149,7 @@ export type CareerResourceDataType = {
 export type OnboardingRoleType = {
   image: string
   title: string
-  mobileImage: string
+  mobileImage?: string
 }
 
 export type SuitabilityCardType = {

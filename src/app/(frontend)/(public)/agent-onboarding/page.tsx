@@ -1,3 +1,4 @@
+import AllAboutSection from '@/components/custom/about-us/AllAboutSection'
 import AgentOnboardingHeroWrapper from '@/components/custom/agent-onboarding/AgentOnboardingHeroWrapper'
 import OnboardingForm from '@/components/custom/agent-onboarding/OnboardingForm'
 import OnboardingIntro from '@/components/custom/agent-onboarding/OnboardingIntro'
@@ -171,41 +172,67 @@ function page({}: Props) {
     },
   }
 
-  const onboardingRolesData = [
-    {
-      image: '/assets/agent-onboarding/web/6.svg',
-      mobileImage: `/assets/agent-onboarding/mobile/6.svg`,
-      title: 'Earn Without Limits',
-      description:
-        'Trust is our foundation. We earn trust not through words, but through consistent action and care.',
-    },
-    {
-      image: '/assets/agent-onboarding/web/2.svg',
-      mobileImage: `/assets/agent-onboarding/mobile/2.svg`,
-      title: 'Get Recognized, Get Rewarded',
-    },
-    {
-      image: '/assets/agent-onboarding/web/3.svg',
-      mobileImage: `/assets/agent-onboarding/mobile/3.svg`,
-      title: 'Freedom to Work On Your Time ',
-    },
-    {
-      image: '/assets/agent-onboarding/web/4.svg',
-      mobileImage: `/assets/agent-onboarding/mobile/4.svg`,
-      title: 'Take Charge of your career',
-    },
-    {
-      image: '/assets/agent-onboarding/web/5.svg',
-      mobileImage: `/assets/agent-onboarding/mobile/5.svg`,
-      title: 'Help secure lives',
-    },
-  ]
-  const visionData = {
-    bgImage: '/assets/agent-onboarding/web/visionBanner.jpg',
-    bgMobileImage: '/assets/agent-onboarding/mobile/visionBanner.jpg',
+  const onboardingRolesData = {
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/agentOnboardingBanner.jpg`,
+    // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/agentOnboardingBanner.jpg`,
+    // title: 'Where Freedom Meets',
+    // coloredTitle: 'Opportunity',
+    title: 'Why this role ',
+    coloredTitle: 'works for you',
     data: [
       {
-        img: '/assets/agent-onboarding/web/vision1.svg',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/6.svg`,
+        // mobileImage: `/assets/agent-onboarding/mobile/6.svg`,
+        hoverImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/6.svg`,
+        title: 'Earn Without Limits',
+        description: {
+          __html: 'Your income grows with your ambition — no limits, just possibilities.',
+        },
+      },
+      {
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/2.svg`,
+        // mobileImage: `/assets/agent-onboarding/mobile/2.svg`,
+        hoverImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/2.svg`,
+        title: 'Get Recognized, Get Rewarded',
+        description: {
+          __html: 'From incentives to applause, your achievements will never go unnoticed.',
+        },
+      },
+      {
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/3.svg`,
+        // mobileImage: `/assets/agent-onboarding/mobile/3.svg`,
+        hoverImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/3.svg`,
+        title: 'Freedom to Work On Your Time ',
+        description: {
+          __html: 'Set your schedule. Work your way.',
+        },
+      },
+      {
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/4.svg`,
+        // mobileImage: `/assets/agent-onboarding/mobile/4.svg`,
+        hoverImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/4.svg`,
+        title: 'Take Charge of your career',
+        description: {
+          __html: 'Own your future by proactively shaping your career path.',
+        },
+      },
+      {
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/5.svg`,
+        // mobileImage: `/assets/agent-onboarding/mobile/5.svg`,
+        hoverImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/5.svg`,
+        title: 'Help secure lives',
+        description: {
+          __html: 'Protect and safeguard the well-being of others with dedication.',
+        },
+      },
+    ],
+  }
+  const visionData = {
+    bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/visionBanner.jpg`,
+    // bgMobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/mobile/visionBanner.jpg`,
+    data: [
+      {
+        img: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/vision1.svg`,
         title: 'Experienced Professionals ',
         points: [
           '1-2 years of working in Sales',
@@ -214,7 +241,7 @@ function page({}: Props) {
         ],
       },
       {
-        img: '/assets/agent-onboarding/web/vision2.svg',
+        img: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/vision2.svg`,
         title: 'Freshers & Undergrads',
         points: [
           'Excellent communications and networking skills',
@@ -230,8 +257,13 @@ function page({}: Props) {
       <AgentOnboardingHeroWrapper heroSlides={heroSlides} />
       {/* <OnboardingHighlight highlightSlides={highlightSlides[0]} /> */}
       <OnboardingIntro onboardingIntroContent={onBoardingIntroContent} />
+      {/* <RolesSection onboardingRoleData={onboardingRolesData} /> */}
 
-      <RolesSection onboardingRoleData={onboardingRolesData} />
+      {/* repalced roles section with the AllAboutSection section */}
+      <div className="lg:margin-top">
+        <AllAboutSection allAboutData={onboardingRolesData} />
+      </div>
+
       {/* <FreedomOpportunity /> */}
       {/* <OnboardingRoles rolesData={rolesData} /> */}
       <OnboardingVision visionData={visionData} />

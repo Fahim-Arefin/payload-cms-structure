@@ -1,4 +1,5 @@
 import { OnboardingRoleType } from '@/types'
+import Image from 'next/image'
 import React from 'react'
 
 type Props = {
@@ -24,12 +25,11 @@ function RolesCard({ data, index }: Props) {
     >
       <div className="space-y-1 ">
         <div
-          className="mx-auto
+          className="relative mx-auto
          w-[40px] md:w-[70px] xl:w-[100px] 
          h-[40px] md:h-[70px] xl:h-[100px]"
         >
-          <img src={data?.image} alt={data?.title} className="w-full h-full hidden md:block" />
-          <img src={data?.mobileImage} alt={data?.title} className="w-full h-full block md:hidden" />
+          <Image fill src={data?.image} alt={data?.title} className="" />
         </div>
         <div
           className="global-p2

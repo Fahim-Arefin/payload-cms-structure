@@ -15,8 +15,8 @@ function AllAboutCard({ data, index }: Props) {
     rounded-md lg:rounded-[15px] cursor-pointer
      shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)]
     h-[180px] md:h-[220px] lg:h-[300px] xl:h-[400px] 2xl:h-[450px]
-    w-full
-    flex justify-center items-center bg-[rgba(252,242,236,0.8)] text-[#434]
+    w-full flex justify-center items-center
+    bg-[rgba(252,242,236,0.8)] text-[#434]
     hover:bg-[rgba(156,134,57,0.8)] hover:text-white 
     transition-all duration-300 ease-in-out 
     `}
@@ -43,7 +43,7 @@ function AllAboutCard({ data, index }: Props) {
             className="inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
           />
         </div>
-        <div className="global-p1 lg:global-h3 text-center font-semibold lg:font-medium uppercase px-1 ">
+        <div className="global-p1 text-center font-semibold lg:font-medium uppercase px-1 ">
           {data?.title}
         </div>
         <div

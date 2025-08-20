@@ -13,6 +13,7 @@ import Autoplay from 'embla-carousel-autoplay'
 import RolesCard from './RolesCard'
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
+import { sliderDelay } from '@/lib/data'
 
 type Props = {
   onboardingRoleData: OnboardingRoleType[]
@@ -47,7 +48,7 @@ function RolesCardList({ onboardingRoleData }: Props) {
       setApi={setCarouselApi} // 👈 capture carousel API
       plugins={[
         Autoplay({
-          delay: 5000,
+          delay: sliderDelay,
         }),
       ]}
     >
