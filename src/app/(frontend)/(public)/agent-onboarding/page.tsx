@@ -111,18 +111,18 @@ function page({}: Props) {
     items: [
       {
         text: 'Seasoned Professionals',
-        src: '/assets/agent-onboarding/web/onboardingOpportunity1.jpg',
-        mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity1.jpg',
+        src: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/onboardingOpportunity1.jpg`,
+        // mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity1.jpg',
       },
       {
         text: 'Fresh Graduates',
-        src: '/assets/agent-onboarding/web/onboardingOpportunity2.jpg',
-        mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity2.jpg',
+        src: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/onboardingOpportunity2.jpg`,
+        // mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity2.jpg',
       },
       {
         text: 'Self-Motivated Undergrad Students',
-        src: '/assets/agent-onboarding/web/onboardingOpportunity3.jpg',
-        mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity3.jpg',
+        src: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/onboardingOpportunity3.jpg`,
+        // mobileSrc: '/assets/agent-onboarding/mobile/onboardingOpportunity3.jpg',
       },
     ],
   }
@@ -133,39 +133,39 @@ function page({}: Props) {
     subTitle: 'RM/RO Champion Apart',
     sectionLeft: [
       {
-        icon: '/assets/icons/web/opportunityIcon1.svg',
-        mobileIcon: '/assets/icons/mobile/opportunityIcon1.svg',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/opportunityIcon1.svg`,
+        // mobileIcon: '/assets/icons/mobile/opportunityIcon1.svg',
         text: 'Be a Brand Ambassador',
       },
       {
-        icon: '/assets/icons/web/opportunityIcon2.svg',
-        mobileIcon: '/assets/icons/mobile/opportunityIcon2.svg',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/opportunityIcon2.svg`,
+        // mobileIcon: '/assets/icons/mobile/opportunityIcon2.svg',
         text: 'Own your Numbers',
       },
       {
-        icon: '/assets/icons/web/opportunityIcon3.svg',
-        mobileIcon: '/assets/icons/mobile/opportunityIcon3.svg',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/opportunityIcon3.svg`,
+        // mobileIcon: '/assets/icons/mobile/opportunityIcon3.svg',
         text: 'Master the product,own the pitch',
       },
       {
-        icon: '/assets/icons/web/opportunityIcon4.svg',
-        mobileIcon: '/assets/icons/mobile/opportunityIcon4.svg',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/opportunityIcon4.svg`,
+        // mobileIcon: '/assets/icons/mobile/opportunityIcon4.svg',
         text: 'Be Digitally Savy',
       },
       {
-        icon: '/assets/icons/web/opportunityIcon5.svg',
-        mobileIcon: '/assets/icons/mobile/opportunityIcon5.svg',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/opportunityIcon5.svg`,
+        // mobileIcon: '/assets/icons/mobile/opportunityIcon5.svg',
         text: 'Follow up, follow through- build genuine connections',
       },
       {
-        icon: '/assets/icons/web/opportunityIcon5.svg',
-        mobileIcon: '/assets/icons/mobile/opportunityIcon5.svg',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/opportunityIcon5.svg`,
+        // mobileIcon: '/assets/icons/mobile/opportunityIcon5.svg',
         text: 'Learn, Evolve & Excel',
       },
     ],
     sectionRight: {
-      avatar: '/assets/agent-onboarding/web/agent-onboarding-life_2.jpg',
-      mobileAvatar: `/assets/agent-onboarding/mobile/agent-onboarding-life_2.jpg`,
+      avatar: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/agent-onboarding/web/agent-onboarding-life_2.jpg`,
+      // mobileAvatar: `/assets/agent-onboarding/mobile/agent-onboarding-life_2.jpg`,
       name: 'Tarafder Mohammad Fahim',
       quote:
         'Every day, I learn something new, try to make a real impact on clients’ lives, and feel valued as a team member of Shanta Life.',
