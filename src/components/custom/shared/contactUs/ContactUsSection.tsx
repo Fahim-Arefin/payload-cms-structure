@@ -15,6 +15,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 import { useState } from 'react'
 import GlobalButton from '../GlobalButton'
+import Image from 'next/image'
 
 function ContactUsSection() {
   const [sendButtonText, setSendButtonText] = useState('Send Message')
@@ -68,102 +69,97 @@ function ContactUsSection() {
       "
     >
       {/* main img */}
+      {/*  h-[63%] md:h-[75%] lg:h-[65%] xl:h-[70%] 2xl:h-[489px]  */}
       <div
         className=" 
       z-20 absolute -bottom-1 left-5 
       lg:left-12
       xl:left-20
       2xl:left-28
-      h-[63%] md:h-[75%] lg:h-[65%] xl:h-[70%] 2xl:h-[489px] 2xl:w-[900px]"
+      w-[60%] lg:w-[50%] 
+      aspect-[891/489]"
       >
-        <img
+        {/* <img
           src="/assets/solutions/individual/saving-and-investment/web/askUsImage.png"
           alt=""
-          className="lg:hidden h-full w-full"
-        />
-        <img
-          src="/assets/solutions/individual/saving-and-investment/web/askUsImage.png"
-          alt=""
-          className="hidden lg:block h-full w-full"
-        />
+          className=" h-full w-full"
+        /> */}
+        <div className="relative h-full w-full">
+          <Image
+            fill
+            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/askUsImage.png`}
+            alt="Contant us image"
+            sizes="50vw"
+          />
+        </div>
       </div>
 
       {/* message arrow img  */}
       <div
         className="hidden lg:block absolute lg:bottom-10 xl:bottom-20 2xl:bottom-28 inset-x-0 left-[36%] 
              w-[200px] md:w-[250px] lg:w-[250px] xl:w-[300px] 2xl:w-[460px]
-             rotate-[20.397deg] z-10"
+             rotate-[20.397deg] z-10 aspect-[730/300]"
       >
-        <img
-          src="/assets/solutions/individual/saving-and-investment/web/contactUs3.png"
-          alt=""
-          className="w-full h-auto"
-        />
+        <div className="w-full h-full relative">
+          <Image
+            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/contactUs3.png`}
+            alt=""
+            fill
+          />
+        </div>
       </div>
 
       {/* hanging phone  */}
       <div
         className="z-10 absolute top-0 right-[85%]
-                    h-1/3"
+                    h-1/3 aspect-[80/310]"
       >
-        <img
-          src="/assets/solutions/individual/saving-and-investment/web/contactUs4.png"
-          alt=""
-          className="lg:hidden h-full"
-        />
-        <img
-          src="/assets/solutions/individual/saving-and-investment/web/contactUs4.png"
-          alt=""
-          className="hidden lg:block h-full"
-        />
+        <div className="relative w-full h-full">
+          <Image
+            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/contactUs4.png`}
+            alt="hanging phone"
+            fill
+          />
+        </div>
       </div>
       {/* hanging phone  */}
       <div
         className="z-10 absolute top-0 right-[75%]
-                    h-[40%]"
+                    h-[40%] aspect-[70/310]"
       >
-        <img
-          src="/assets/solutions/individual/saving-and-investment/web/contactUs5.png"
-          alt=""
-          className="lg:hidden h-full"
-        />
-        <img
-          src="/assets/solutions/individual/saving-and-investment/web/contactUs5.png"
-          alt=""
-          className="hidden lg:block h-full"
-        />
+        <div className="relative w-full h-full">
+          <Image
+            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/contactUs5.png`}
+            alt="hanging phone"
+            fill
+          />
+        </div>
       </div>
       {/* hanging phone  */}
       <div
         className="z-10 absolute top-0 right-[65%]
-                    h-1/3"
+                    h-1/3 aspect-[80/310]"
       >
-        <img
-          src="/assets/solutions/individual/saving-and-investment/web/contactUs4.png"
-          alt=""
-          className="lg:hidden h-full"
-        />
-        <img
-          src="/assets/solutions/individual/saving-and-investment/web/contactUs4.png"
-          alt=""
-          className="hidden lg:block h-full"
-        />
+        <div className="relative w-full h-full">
+          <Image
+            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/contactUs4.png`}
+            alt="hanging phone"
+            fill
+          />
+        </div>
       </div>
       {/* hanging phone  */}
       <div
         className="z-10 absolute top-0 right-[55%]
-                    h-1/3"
+                    h-1/3 aspect-[80/310]"
       >
-        <img
-          src="/assets/solutions/individual/saving-and-investment/web/contactUs5.png"
-          alt=""
-          className="lg:hidden h-full"
-        />
-        <img
-          src="/assets/solutions/individual/saving-and-investment/web/contactUs5.png"
-          alt=""
-          className="hidden lg:block h-full"
-        />
+        <div className="relative w-full h-full">
+          <Image
+            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/contactUs5.png`}
+            alt="hanging phone"
+            fill
+          />
+        </div>
       </div>
 
       {/* form */}
