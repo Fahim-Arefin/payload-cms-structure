@@ -241,7 +241,7 @@ export type Leaders = {
   designation: string
   description: string
   image: string
-  mobileImage: string
+  mobileImage?: string
 }
 
 export type AllNewsAndBlogDataType = {
