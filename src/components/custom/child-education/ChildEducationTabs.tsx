@@ -11,6 +11,7 @@ import ToolTip from '../shared/ToolTip'
 import Link from 'next/link'
 import EndowmentKeyFeature from '../shared/plans/EndowmentKeyFeature'
 import GlobalTabButtons from '../shared/GlobalTabButtons'
+import EndowmentPlanEligibility from '../shared/plans/EndowmentPlanEligibility'
 
 export function ArrowIcon() {
   return (
@@ -209,7 +210,10 @@ export function ChildEducationTabs({ config, data }: Props) {
             <>
               <TabsContent key={activeTab} value={activeTab}>
                 {activeTab === 'features' && <EndowmentKeyFeature data={data['features']} />}
-                {activeTab === 'eligibility' && <EligibilityTabSection />}
+                {/* {activeTab === 'eligibility' && <EligibilityTabSection />} */}
+                {activeTab === 'eligibility' && (
+                  <EndowmentPlanEligibility data={data['eligibility']} />
+                )}
                 {activeTab === 'benefits' && <BenefitsTabSection />}
               </TabsContent>
               <GlobalTabButtons

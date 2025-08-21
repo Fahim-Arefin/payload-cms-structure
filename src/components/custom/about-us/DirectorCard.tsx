@@ -79,6 +79,7 @@
 'use client'
 
 import { DirectorCardDataType } from '@/types'
+import Image from 'next/image'
 import { useState } from 'react'
 
 type Props = {
@@ -116,18 +117,24 @@ function DirectorCard({ data, index }: Props) {
             />
 
             {/* Foreground Image */}
-            <img
+            {/* <img
               src={data.mobileImage}
               alt={data.title}
               className="lg:hidden relative z-10 w-full h-full object-cover 
               rounded-sm md:rounded-md lg:rounded-lg 2xl:rounded-[24px]"
-            />
-            <img
-              src={data.image}
-              alt={data.title}
-              className="hidden lg:block relative z-10 w-full h-full object-cover 
+            /> */}
+            <div className="relative z-10 w-full h-full rounded-sm md:rounded-md lg:rounded-lg 2xl:rounded-[24px]">
+              <Image
+                fill
+                src={data.image}
+                alt={data.title}
+                className="inset-0 object-cover 
               rounded-sm md:rounded-md lg:rounded-lg 2xl:rounded-[24px]"
-            />
+                sizes="50vw"
+                quality={100}
+              />
+            </div>
+
             {/* Name and Designation under image */}
             {data.name && data.designation && (
               <div className="text-center mt-1 md:mt-4">

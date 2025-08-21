@@ -112,15 +112,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import OnboardingCard from './OnboardingCard'
-type wayWeAreData = {
-  image: string
-  mobileImage: string
-  title: string
-  description: string
-}
+import { WayWeAreDataType } from '@/types'
+import { sliderDelay } from '@/lib/data'
 
 type Props = {
-  wayWeAreData: wayWeAreData[]
+  wayWeAreData: WayWeAreDataType[]
 }
 
 function WayWeAreSlider({ wayWeAreData }: Props) {
@@ -140,7 +136,7 @@ function WayWeAreSlider({ wayWeAreData }: Props) {
         } else {
           carouselApi.scrollTo(0) // Reset to the first slide
         }
-      }, 3000) // Change slide every 5 seconds
+      }, sliderDelay) // Change slide every 5 seconds
     }
   }
 

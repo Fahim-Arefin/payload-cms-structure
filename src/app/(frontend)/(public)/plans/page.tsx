@@ -14,7 +14,7 @@ function PlanPage() {
       //   'Life\u2019s full of surprises. We\u2019re here to help you navigate them. Let\u2019s build a confident future together.',
       description:
         'Life\u2019s full of surprises. We\u2019re here to help you navigate them... Let\u2019s build a confident future together.',
-      image: '/assets/solutionHeroBanner.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutionHeroBanner.jpg`,
     },
   ]
 
@@ -23,15 +23,15 @@ function PlanPage() {
       title: 'INDIVIDUAL',
       description: 'Because your protection should be as exceptional as you are.',
       link: '/plans/individual',
-      image: '/assets/solutions/web/plan1.jpg',
-      mobileImage: '/assets/solutions/mobile/plan1.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/web/plan1.jpg`,
+      // mobileImage: '/assets/solutions/mobile/plan1.jpg',
     },
     {
       title: 'CORPORATE',
       description: 'Corporate policies as sharp as your strategy.',
       link: '/plans/corporate',
-      image: '/assets/solutions/web/plan2.jpg',
-      mobileImage: '/assets/solutions/mobile/plan2.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/web/plan2.jpg`,
+      // mobileImage: '/assets/solutions/mobile/plan2.jpg',
     },
     // BANCASSURANCE will be omitted for now
     // {

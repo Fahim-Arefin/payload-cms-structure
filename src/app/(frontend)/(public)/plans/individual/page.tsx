@@ -13,7 +13,7 @@ function PlanPage() {
       title: 'Individual Plans',
       subtitle: '',
       description: 'Because real life doesn’t come with a rewind button.',
-      image: '/assets/banners/planBanner.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/planBanner.jpg`,
     },
   ]
 
@@ -22,23 +22,23 @@ function PlanPage() {
       title: 'Saving and Investment Plans',
       description: `Because Life Has More Than One Milestone. We’re With You at Every One.`,
       link: '/plans/individual/saving-and-investment',
-      image: '/assets/solutions/individual/web/saving-and-investment.png',
-      mobileImage: '/assets/solutions/individual/mobile/saving-and-investment.png',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/web/saving-and-investment.png`,
+      // mobileImage: '/assets/solutions/individual/mobile/saving-and-investment.png',
     },
 
     {
       title: 'Health and Protection Plans',
       description: `Preventive care meets powerful protection. Let us be your financial shield you can count on`,
       link: '/plans/individual/health-and-protection',
-      image: '/assets/solutions/individual/web/health-and-protection.jpg',
-      mobileImage: '/assets/solutions/individual/mobile/health-and-protection.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/web/health-and-protection.jpg`,
+      // mobileImage: '/assets/solutions/individual/mobile/health-and-protection.jpg',
     },
     {
       title: 'Child Education Plan',
       description: `A brighter future starts with a thoughtful plan`,
       link: '/plans/individual/child-education',
-      image: '/assets/solutions/individual/web/child-education.jpg',
-      mobileImage: '/assets/solutions/individual/mobile/child-education.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/web/child-education.jpg`,
+      // mobileImage: '/assets/solutions/individual/mobile/child-education.jpg',
     },
     // {
     //   title: 'Retirement',

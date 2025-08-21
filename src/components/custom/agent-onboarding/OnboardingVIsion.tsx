@@ -1,12 +1,13 @@
 'use client'
 
 import { VisionCardType } from '@/types'
+import Image from 'next/image'
 import React from 'react'
 
 type Props = {
   visionData: {
     bgImage: string
-    bgMobileImage: string
+    bgMobileImage?: string
     data: VisionCardType[]
   }
 }
@@ -15,23 +16,22 @@ function OnboardingVision({ visionData }: Props) {
   const { bgImage, bgMobileImage, data } = visionData
   return (
     <div className="container-padding text-white relative">
-      {/* Mobile bg */}
-      <div
-        aria-hidden
-        className="z-10 absolute inset-0 lg:hidden bg-center bg-no-repeat bg-cover"
-        style={{
-          background: `url('${bgMobileImage}') #F6EDDD 50%/cover no-repeat`,
-        }}
-      />
-
       {/* Desktop bg */}
-      <div
+      {/* <div
         aria-hidden
-        className="z-10 absolute inset-0 hidden lg:block bg-center bg-no-repeat bg-cover"
+        className="z-10 absolute inset-0 bg-center bg-no-repeat bg-cover"
         style={{
           // no gradient here — keep it in one place (overlay) to avoid duplication
           background: `url('${bgImage}') #F6EDDD 50%/cover no-repeat`,
         }}
+      /> */}
+
+      <Image
+        fill
+        src={bgImage}
+        alt="vision background image"
+        className="object-cover object-center z-10"
+        sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
       />
 
       {/* Overlay (one layer for both) */}
@@ -64,8 +64,8 @@ function OnboardingVision({ visionData }: Props) {
               WebkitBackdropFilter: 'blur(16.6667px)',
             }}
           >
-            <div className="w-[44px] h-[44px] lg:w-[100px] lg:h-[100px]">
-              <img src={item?.img} alt={`icon-${index}`} className="object-contain w-full h-full" />
+            <div className="relative w-[44px] h-[44px] lg:w-[100px] lg:h-[100px]">
+              <Image fill src={item?.img} alt={`icon-${index}`} className="object-contain" />
             </div>
 
             <h2 className="global-p1 font-bold uppercase text-white">{item?.title}</h2>

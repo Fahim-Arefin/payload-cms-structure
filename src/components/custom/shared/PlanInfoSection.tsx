@@ -1,4 +1,5 @@
 import { PlanInfoDataType } from '@/types'
+import Image from 'next/image'
 import React from 'react'
 
 type Props = {
@@ -18,13 +19,14 @@ function PlanInfoSection({ bgColor, data }: Props) {
     >
       <div className="grid grid-cols-1 items-center justify-items-center md:justify-items-start md:grid-cols-2 gap-10 md:gap-2 lg:gap-8 xl:gap-2">
         <div className=" w-full h-full flex justify-center md:justify-start items-center">
-          {/* mobile */}
-          <div className="lg:hidden w-[50%] md:w-full lg:w-[90%] xl:w-[85%] 2xl:w-[80%] ">
-            <img src={data?.mobileImage} alt="info image" className="h-full w-full" />
-          </div>
-          {/* web */}
-          <div className="hidden lg:block w-[50%] md:w-full lg:w-[90%] xl:w-[85%] 2xl:w-[80%] ">
-            <img src={data?.image} alt="info image" className="h-full w-full" />
+          <div className="relative w-[50%] md:w-[80%] lg:w-[90%] xl:w-[85%] 2xl:w-[80%] aspect-[416/374]">
+            <Image
+              fill
+              src={data?.image}
+              alt="Plpan info image"
+              className=""
+              // sizes="(max-width:767px) 100vw,50vw"
+            />
           </div>
         </div>
         <div className="flex justify-center items-center text-justify">

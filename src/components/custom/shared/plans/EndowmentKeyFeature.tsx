@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 import React from 'react'
 
 type Props = {
@@ -16,19 +17,9 @@ function EndowmentKeyFeature({ data }: Props) {
             i % 2 === 0 ? '' : ' lg:ml-auto',
           )}
         >
-          <div className="min-h-[40px] max-h-[40px] min-w-[40px] max-w-[40px] ">
-            {/* mobile */}
-            <img
-              src={content?.mobileImage}
-              alt={content.title}
-              className="lg:hidden h-full w-full object-contain"
-            />
+          <div className="relative min-h-[40px] max-h-[40px] min-w-[40px] max-w-[40px] ">
             {/* web */}
-            <img
-              src={content?.image}
-              alt={content.title}
-              className="hidden lg:block h-full w-full object-contain"
-            />
+            <Image fill src={content?.image} alt={content.title} className="object-contain" />
           </div>
           <div
             className="text-[#434342] 

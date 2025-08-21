@@ -1,34 +1,26 @@
+import { EligibilityCardProps } from '@/types'
+import Image from 'next/image'
 import React from 'react'
 
-type EligibilityCardProps = {
-  title: string
-  icon: string // icon path
-  mobileIcon?: string // icon path
-  bgImage?: string // background image path
-  entryMin: string
-  entryMinLabel: string
-  entryMax: string
-  entryMaxLabel: string
-  policyTerm: string
-  policyTermLabel: string
-  maturityAge: string
-  maturityAgeLabel: string
+type Props = {
+  data: EligibilityCardProps
 }
 
-export const EligibilityCard: React.FC<EligibilityCardProps> = ({
-  title,
-  icon,
-  mobileIcon,
-  bgImage,
-  entryMin,
-  entryMinLabel,
-  entryMax,
-  entryMaxLabel,
-  policyTerm,
-  policyTermLabel,
-  maturityAge,
-  maturityAgeLabel,
-}) => {
+export const EligibilityCard = ({ data }: Props) => {
+  const {
+    title,
+    icon,
+    mobileIcon,
+    bgImage,
+    entryMin,
+    entryMinLabel,
+    entryMax,
+    entryMaxLabel,
+    policyTerm,
+    policyTermLabel,
+    maturityAge,
+    maturityAgeLabel,
+  } = data
   return (
     <div
       className="bg-[#F6EDDD] rounded-xl p-4 lg:p-12 w-full h-auto xl:h-[535px] xl:w-[347px] overflow-hidden shadow-lg bg-cover bg-center flex flex-col "
@@ -37,11 +29,12 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
       // }}
     >
       <div className="flex flex-col gap-2 items-center">
-        <img src={mobileIcon} alt={title} className="lg:hidden w-14 h-14" />
-        <img src={icon} alt={title} className="hidden lg:block w-14 h-14" />
+        <div className="relative w-14 h-14">
+          <Image fill src={icon} alt={title} className="" />
+        </div>
         <p className="uppercase text-[#434343] font-bold global-p1 mt-2">{title}</p>
       </div>
-      <div className="flex flex-col justify-center items-center space-y-2 mt-4">
+      <div className="flex flex-col justify-center items-center space-y-2 my-4">
         {/* Entry Age */}
         <div
           className="px-2 py-4 w-full md:w-[245px] lg:w-64 flex flex-col items-center shadow-md"
@@ -55,13 +48,13 @@ export const EligibilityCard: React.FC<EligibilityCardProps> = ({
           <div className="text-white global-p2 uppercase mb-1 font-light">Entry Age</div>
           <div className="flex justify-between w-full px-2 text-white">
             <div className="flex flex-col items-center">
-              <p className="text-xs font-light text-[#FCF4EB]">Minimum</p>
+              <p className="text-sm font-light text-[#FCF4EB]">Minimum</p>
               <p className="global-span font-bold">{entryMin}</p>
               <p className="text-base -mt-2 font-light">{entryMinLabel}</p>
             </div>
 
             <div className="flex flex-col items-center">
-              <p className="text-xs font-light">Maximum</p>
+              <p className="text-sm font-light">Maximum</p>
               <p className="global-span font-bold">{entryMax}</p>
               <p className="text-base -mt-2 font-light">{entryMaxLabel}</p>
             </div>

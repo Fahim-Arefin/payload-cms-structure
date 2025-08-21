@@ -1,13 +1,14 @@
 import React from 'react'
 import { FootPrintSlider } from './FootPrintSlider'
 import { FootPrintDataType } from '@/types'
+import Image from 'next/image'
 
 type Props = {
   footPrintData: {
     title: string
     subTitle: string
     bgImage: string
-    bgMobileImage: string
+    bgMobileImage?: string
     data: FootPrintDataType[]
   }
 }
@@ -21,24 +22,24 @@ function FootPrintSection({ footPrintData }: Props) {
         h-[230px] md:h-[330px] lg:h-[400px] xl:h-[450px] 2xl:h-[550px] overflow-hidden "
       >
         {/* Background Image */}
-        {/* mobile */}
-        <div
-          className="lg:hidden absolute inset-0 bg-cover bg-center bg-no-repeat overflow-hidden"
-          style={{
-            backgroundImage: `url(${bgMobileImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        {/* web */}
-        <div
-          className="hidden lg:block absolute inset-0 bg-cover bg-center bg-no-repeat overflow-hidden"
+        {/* <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat overflow-hidden"
           style={{
             backgroundImage: `url(${bgImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
-        />
+        /> */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-center object-cover overflow-hidden"
+        >
+          <source src={bgImage} type="video/mp4" />
+        </video>
+
         {/* Mobile to <lg overlay */}
         <div className="absolute inset-0 bg-[rgba(37,69,37,0.8)] lg:hidden z-0" />
 

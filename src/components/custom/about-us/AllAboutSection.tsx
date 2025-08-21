@@ -1,9 +1,10 @@
 import { AllAboutCardDataType } from '@/types'
 import AllAboutCardList from './AllAboutCardList'
+import Image from 'next/image'
 
 type AllAboutData = {
   image: string
-  mobileImage: string
+  mobileImage?: string
   title: string
   coloredTitle: string
   data: AllAboutCardDataType[]
@@ -27,13 +28,13 @@ function AllAboutSection({ allAboutData }: Props) {
            h-[200px] md:h-[250px] lg:h-[500px] xl:h-[650px] 2xl:h-[820px]
            lg:rounded-[10px] xl:rounded-[13px] 2xl:rounded-[15px]"
           >
-            {/* mobile */}
-            <img src={image} alt={title} className="lg:hidden object-cover w-full h-full" />
             {/* web */}
-            <img
-              src={mobileImage}
+            <Image
+              fill
+              src={image}
               alt={title}
-              className="hidden lg:block object-cover w-full h-full"
+              className="object-cover object-center"
+              sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , (max-width: 1349px) 350px, 500px"
             />
 
             {/* Overlay */}
