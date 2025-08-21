@@ -247,7 +247,7 @@ export type Leaders = {
 export type AllNewsAndBlogDataType = {
   id: number
   image: string
-  mobileImage: string
+  mobileImage?: string
   title: string
   description: string
   date: string

@@ -1,42 +1,40 @@
 import { Button } from '@/components/ui/button'
 import { AllNewsAndBlogDataType } from '@/types'
 import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 type Props = {
   data: AllNewsAndBlogDataType
   index: number
+  length: number
 }
 
-function AllNewsCard({ data, index }: Props) {
+function AllNewsCard({ data, index, length }: Props) {
   return (
     <div
       className="relative grid grid-cols-1 lg:grid-cols-9 
     gap-6 xl:gap-12"
     >
+      {/* left */}
       <div
         className={` relative 
-        lg:max-w-[450px] 2xl:max-w-[500px]  
-        max-h-[230px] md:max-h-[350px] lg:max-h-[230px] xl:max-h-[260px] 2xl:max-h-[300px] 
-        lg:col-span-4 ${index % 2 !== 0 ? ' lg:order-2  2xl:ml-12' : ' lg:order-1 '}`}
+       w-full aspect-[3248/2165] 
+        lg:col-span-4 ${index % 2 !== 0 ? ' lg:order-2' : ' lg:order-1 '}`}
       >
-        {/* mobile */}
-        <img
-          src={data?.mobileImage}
-          alt={data?.title}
-          className="lg:hidden w-full h-full object-cover object-top"
-        />
-        {/* web */}
-        <img
+        <Image
+          fill
           src={data?.image}
           alt={data?.title}
-          className="hidden lg:block w-full h-full object-cover object-top"
+          className="object-cover object-center"
+          sizes="(max-width: 767px) 300px, 600px"
         />
         <div
           className={`h-5 w-5 bg-white absolute bottom-0 ${index % 2 !== 0 ? ' right-0' : ' left-0 '}`}
         ></div>
       </div>
+      {/* right */}
       <div
         className={` lg:col-span-5 
         space-y-3 xl:space-y-6 
@@ -46,7 +44,7 @@ function AllNewsCard({ data, index }: Props) {
         <h5 className="text-[#6E6E6E] global-p2 uppercase tracking-[2px]">{data?.date}</h5>
         <h3 className="global-span ">{data?.title}</h3>
         <p
-          className="global-p2 leading-6 line-clamp-4 xl:line-clamp-3 text-justify"
+          className="global-p2 leading-6 line-clamp-4 lg:line-clamp-3 xl:line-clamp-4 2xl:line-clamp-[6] text-justify"
           style={{
             alignSelf: 'stretch',
           }}
@@ -68,9 +66,12 @@ function AllNewsCard({ data, index }: Props) {
           </Link>
         </div>
       </div>
-      <div className="hidden lg:block absolute inset-x-0 -bottom-12 mx-auto w-full lg:w-[60%] xl:w-fit">
-        <img src="/assets/verticalline.png" alt="" className="w-full h-full" />
-      </div>
+      {/* horizontal line */}
+      {index !== length - 1 && (
+        <div className="hidden lg:block absolute inset-x-0 -bottom-12 mx-auto w-full lg:w-[60%] xl:w-fit">
+          <img src="/assets/verticalline.png" alt="" className="w-full h-full" />
+        </div>
+      )}
     </div>
   )
 }

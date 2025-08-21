@@ -5,65 +5,21 @@ import { Input } from '@/components/ui/input'
 import { AllNewsAndBlogDataType } from '@/types'
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 type Props = {
   bgColor?: string
   paddingOn?: boolean
   text: string
+  allContent: AllNewsAndBlogDataType[]
 }
 
-function SearchNews({ bgColor, paddingOn = false, text }: Props) {
+function SearchNews({ bgColor, paddingOn = false, text, allContent }: Props) {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<AllNewsAndBlogDataType[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
-
-  // Combined data from both blogs and news
-  const allContent: AllNewsAndBlogDataType[] = [
-    // Blog data
-    {
-      id: 1,
-      image: '/assets/news-and-media/web/newsandblog1.jpg',
-      mobileImage: '/assets/news-and-media/mobile/newsandblog1.jpg',
-      date: 'Jul 17, 2025',
-      title: 'What is the Potential of the Insurance Sector in Bangladesh?',
-      description:
-        'We know that currently, there are 36 life insurance companies in Bangladesh. If we look at the life insurance penetration in Bangladesh, it is just over 0.4% of the GDP. This figure alone indicates that the existing insurance companies in Bangladesh have not yet fully capitalized on the available opportunities.',
-    },
-    {
-      id: 3,
-      image: '/assets/news-and-media/web/newsandblog3.jpg',
-      mobileImage: '/assets/news-and-media/mobile/newsandblog3.jpg',
-      date: 'Jul 17, 2025',
-      title: 'What Steps Should Be Taken to Develop the Insurance Sector?',
-      description:
-        'Companies working in the insurance sector — along with regulatory body, IDRA — have been making efforts for a long time. One of the biggest ongoing challenges in our industry is the lack of trust. Restoring that trust is essential.',
-    },
-    // News data
-    {
-      id: 2,
-      image: '/assets/news-and-media/web/news2.jpg',
-      mobileImage: '/assets/news-and-media/mobile/news2.jpg',
-      date: 'Jul 17, 2025',
-      title: 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
-      description:
-        "Shanta Life Insurance PLC, a new venture under Shanta Holdings, signed an MoU with Dhaka Bank to provide Bancassurance service through the bank's distribution channel.",
-      externalLink:
-        'https://www.thedailystar.net/business/organisation-news/press-releases/news/shanta-life-insurance-and-dhaka-bank-sign-mou-jointly-prepare-bancassurance-3843041',
-    },
-    {
-      id: 4,
-      image: '/assets/news-and-media/web/news11.jpg',
-      mobileImage: '/assets/news-and-media/mobile/news11.jpg',
-      date: 'Jul 17, 2025',
-      title: 'Shanta Life Insurance gets license to launch',
-      description:
-        'Bangladesh\'s insurance sector is set to expand through the launch of a new venture, "Shanta Life Insurance PLC". The company came into being through a consortium comprising Shanta Holdings Ltd.',
-      externalLink:
-        'https://www.thedailystar.net/business/news/shanta-life-insurance-gets-licence-launch-3464831',
-    },
-  ]
 
   // Search logic
   const handleSearch = (query: string) => {
@@ -148,18 +104,16 @@ function SearchNews({ bgColor, paddingOn = false, text }: Props) {
                   className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
                 >
                   <div className="flex gap-3">
-                    {/* mobile */}
-                    <img
-                      src={item.mobileImage}
-                      alt={item.title}
-                      className="lg:hidden w-12 h-9 object-cover rounded flex-shrink-0"
-                    />
                     {/* web */}
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="hidden lg:block w-16 h-12 object-cover rounded flex-shrink-0"
-                    />
+                    <div className="relative w-12 h-9 lg:w-16 lg:h-12 ">
+                      <Image
+                        fill
+                        src={item.image}
+                        alt={item.title}
+                        className="object-cover rounded flex-shrink-0"
+                        sizes="350px"
+                      />
+                    </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-medium text-sm text-gray-900 line-clamp-2 leading-tight">
                         {item.title}

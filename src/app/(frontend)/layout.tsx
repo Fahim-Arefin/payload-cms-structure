@@ -45,7 +45,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" type="image/png" href="/assets/logo/mainlogo_2.png" />
+        {/* <link rel="icon" type="image/png" href="/assets/logo/mainlogo_2.png" /> */}
+        <link
+          rel="icon"
+          type="image/png"
+          href={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/mainlogo_2.png`}
+        />
         {/* Google Tag (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-CP1L2ZN6G5"
