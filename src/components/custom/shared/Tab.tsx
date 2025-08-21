@@ -3,14 +3,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
-import GlobalButton from './GlobalButton'
+import { BenefitsTabSection } from '../child-education/BenefitsTabSection'
+import GlobalTabButtons from './GlobalTabButtons'
 import EndowmentKeyFeature from './plans/EndowmentKeyFeature'
 import EndowmentPlanEligibility from './plans/EndowmentPlanEligibility'
-import { BenefitsTabSection } from '../child-education/BenefitsTabSection'
-import ToolTip from './ToolTip'
-import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
-import GlobalTabButtons from './GlobalTabButtons'
 
 export function ArrowIcon() {
   return (
@@ -115,7 +111,9 @@ export function Tab({ config, data }: Props) {
             <>
               <TabsContent key={activeTab} value={activeTab}>
                 {activeTab === 'features' && <EndowmentKeyFeature data={data['features']} />}
-                {activeTab === 'eligibility' && <EndowmentPlanEligibility />}
+                {activeTab === 'eligibility' && (
+                  <EndowmentPlanEligibility data={data['eligibility']} />
+                )}
                 {activeTab === 'benefits' && <BenefitsTabSection />}
               </TabsContent>
               <GlobalTabButtons

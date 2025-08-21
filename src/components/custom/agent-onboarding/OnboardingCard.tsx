@@ -1,14 +1,9 @@
+import { WayWeAreDataType } from '@/types'
+import Image from 'next/image'
 import React from 'react'
 
-type DataType = {
-  image: string
-  mobileImage: string
-  title: string
-  description: string
-}
-
 type Props = {
-  data: DataType
+  data: WayWeAreDataType
   isActive?: boolean
 }
 
@@ -27,17 +22,19 @@ function OnboardingCard({ data, isActive = false }: Props) {
       `}
     >
       {/* Background image */}
-      <div
-        className="absolute hidden md:block inset-0 bg-cover bg-center bg-no-repeat"
+      {/* <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('${data.image}')`,
         }}
-      />
-      <div
-        className="absolute block md:hidden inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('${data.mobileImage}')`,
-        }}
+      /> */}
+
+      <Image
+        src={data?.image}
+        alt={data?.title}
+        fill
+        className="object-cover object-center"
+        sizes="(max-width: 767px) 300px, 500px"
       />
 
       {/* Overlay gradient */}

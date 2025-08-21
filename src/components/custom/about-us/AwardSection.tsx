@@ -1,7 +1,8 @@
-import React from 'react'
-
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
+import award1 from '/public/assets/homepage/web/award1.png'
+import award2 from '/public/assets/homepage/web/award2.png'
+import award3 from '/public/assets/homepage/web/award3.png'
+import award4 from '/public/assets/homepage/web/award4.png'
 
 function AwardSection() {
   return (
@@ -23,21 +24,17 @@ function AwardSection() {
           {/* Image Section aligned to right */}
           <div className="flex justify-end items-center rounded-t-[14px] lg:rounded-t-[24px]">
             <div
-              className="
-            w-[70%] mx-auto lg:mx-0 lg:w-full 
+              className="relative
+            w-[70%] mx-auto lg:mx-0 lg:w-full rounded-2xl
             h-[200px] md:h-[300px] lg:h-[600px] xl:h-[650px] 2xl:h-[700px]"
             >
-              {/* mobile */}
-              <img
-                className="lg:hidden h-full w-full z-[50] rounded-2xl object-cover"
-                src="/assets/about-us/mobile/about_milestone_2.jpg"
-                alt="why choose us"
-              />
               {/* web */}
-              <img
-                className="hidden lg:block h-full w-full z-[50] rounded-2xl object-cover"
-                src="/assets/about-us/web/about_milestone_2.jpg"
+              <Image
+                fill
+                className="rounded-2xl object-cover"
+                src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/about_milestone_2.jpg`}
                 alt="why choose us"
+                sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , (max-width: 1349px) 600px , 100vw"
               />
             </div>
           </div>
@@ -52,7 +49,14 @@ function AwardSection() {
                   {/* img */}
                   <div className="p-2 2xl:p-4 border-2 rounded-t-xl border-[#9A4E46] ">
                     <div className="">
-                      <img src="/assets/homepage/web/award1.png" alt="" />
+                      {/* <img src="/assets/homepage/web/award1.png" alt="" /> */}
+                      <Image
+                        unoptimized={false}
+                        src={award1}
+                        alt="award1"
+                        placeholder="blur"
+                        sizes="30vw"
+                      />
                     </div>
                   </div>
                   {/* info */}
@@ -70,7 +74,14 @@ function AwardSection() {
                   {/* svg */}
                   <div className="p-2 2xl:p-4 border-2 rounded-t-xl border-[#9A4E46]">
                     <div className="">
-                      <img src="/assets/homepage/web/award2.png" alt="" />
+                      {/* <img src="/assets/homepage/web/award2.png" alt="" /> */}
+                      <Image
+                        unoptimized={false}
+                        src={award2}
+                        alt=" award2"
+                        placeholder="blur"
+                        sizes="30vw"
+                      />
                     </div>
                   </div>
                   {/* info */}
@@ -88,7 +99,14 @@ function AwardSection() {
                   {/* svg */}
                   <div className="p-2 2xl:p-4 border-2 rounded-b-xl border-[#9A4E46]">
                     <div className="">
-                      <img src="/assets/homepage/web/award3.png" alt="" />
+                      {/* <img src="/assets/homepage/web/award3.png" alt="" /> */}
+                      <Image
+                        unoptimized={false}
+                        src={award3}
+                        alt=" award3"
+                        placeholder="blur"
+                        sizes="30vw"
+                      />
                     </div>
                   </div>
                   {/* info */}
@@ -106,7 +124,14 @@ function AwardSection() {
                   {/* svg */}
                   <div className="p-2 2xl:p-4 border-2 rounded-b-xl border-[#9A4E46]">
                     <div className="">
-                      <img src="/assets/homepage/web/award4.png" alt="" />
+                      {/* <img src="/assets/homepage/web/award4.png" alt="" /> */}
+                      <Image
+                        unoptimized={false}
+                        src={award4}
+                        alt=" award4"
+                        placeholder="blur"
+                        sizes="30vw"
+                      />
                     </div>
                   </div>
                   {/* info */}

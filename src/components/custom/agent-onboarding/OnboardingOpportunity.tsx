@@ -13,16 +13,18 @@ import { CarouselPrevButton } from '../shared/CarouselPrevButton'
 import Autoplay from 'embla-carousel-autoplay'
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
+import { sliderDelay } from '@/lib/data'
+import Image from 'next/image'
 
 type OpportunityItem = {
   text: string
   src: string
-  mobileSrc: string
+  mobileSrc?: string
 }
 
 type ExpectedItem = {
   icon: string
-  mobileIcon: string
+  mobileIcon?: string
   text: string
 }
 
@@ -38,7 +40,7 @@ type Props = {
     sectionLeft: ExpectedItem[]
     sectionRight: {
       avatar: string
-      mobileAvatar: string
+      mobileAvatar?: string
       name: string
       quote: string
     }
@@ -87,7 +89,7 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
             }}
             plugins={[
               Autoplay({
-                delay: 3000,
+                delay: sliderDelay,
               }),
             ]}
             setApi={setCarouselApi}
@@ -97,15 +99,12 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
               {opportunityData.items.map((item, idx) => (
                 <CarouselItem key={idx} className="basis-[45%] flex flex-col items-center gap-4">
                   <div className="relative w-full aspect-[170/155] rounded-md overflow-hidden">
-                    <img
-                      src={item.mobileSrc}
-                      alt={item.text}
-                      className="md:hidden w-full h-full object-cover"
-                    />
-                    <img
+                    <Image
+                      fill
                       src={item.src}
                       alt={item.text}
-                      className="hidden md:block w-full h-full object-cover"
+                      className="object-cover"
+                      sizes="50vw"
                     />
                     <div className="absolute inset-0 bg-black/30 flex items-center justify-center px-4 text-center">
                       {/* <p className="text-white font-medium text-base">{item.text}</p> */}
@@ -148,18 +147,11 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
             >
               {expectedData.sectionLeft.map((item, idx) => (
                 <div key={idx} className="flex items-center gap-6">
-                  {/* mobile */}
-                  <img
-                    src={item.icon}
-                    alt={`icon-${idx}`}
-                    className="lg:hidden w-[40px] h-[34px] mt-1"
-                  />
                   {/* web */}
-                  <img
-                    src={item.icon}
-                    alt={`icon-${idx}`}
-                    className="hidden lg:block lg:w-[48px] lg:h-[42px] mt-1"
-                  />
+                  <div className="relative w-[40px] h-[34px] lg:w-[48px] lg:h-[42px] mt-1">
+                    <Image fill src={item.icon} alt={`icon-${idx}`} className="" />
+                  </div>
+
                   <p className="global-p1 whitespace-pre-line">{item.text}</p>
                 </div>
               ))}
@@ -168,16 +160,16 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
 
           {/* Right testimonial */}
           <div className="bg-[#FFFFFF8C] rounded-md p-6 shadow-sm text-center flex flex-col items-center justify-center gap-2 lg:gap-6">
-            <img
-              src={expectedData.sectionRight.avatar}
-              alt={expectedData.sectionRight.name}
-              className="hidden md:block w-[100px] h-[100px] lg:w-[208px] lg:h-[208px] object-cover mb-4"
-            />
-            <img
-              src={expectedData.sectionRight.mobileAvatar}
-              alt={expectedData.sectionRight.name}
-              className="block md:hidden w-[100px] h-[100px] lg:w-[208px] lg:h-[208px] object-cover mb-4"
-            />
+            <div className="relative w-[100px] h-[100px] lg:w-[208px] lg:h-[208px] mb-4">
+              <Image
+                fill
+                src={expectedData.sectionRight.avatar}
+                alt={expectedData.sectionRight.name}
+                className="object-cover "
+                sizes="400px"
+              />
+            </div>
+
             <h4 className="global-p2 font-semibold text-[#9A4E46] mb-2 lg:mb-6">
               {expectedData.sectionRight.name}
             </h4>

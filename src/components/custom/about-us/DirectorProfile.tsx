@@ -1,4 +1,5 @@
 import { DirectorProfileDataType } from '@/types'
+import Image from 'next/image'
 import Link from 'next/link'
 
 type Props = {
@@ -22,31 +23,32 @@ function DirectorProfile({ data }: Props) {
       mt-8 lg:mt-10 xl:mt-12 2xl:mt-14 "
         >
           {/* Inner Circle with Image and Beige Background */}
-          <div
+          {/* <div
             className="
     relative w-full h-full rounded-full z-10
     bg-[#D3C59D]
     bg-contain bg-no-repeat bg-center
   "
           >
-            {/* mobile */}
-            <img
-              src={data?.mobileImage}
-              alt={data?.title}
-              className="lg:hidden absolute z-20 bottom-0
-            w-full
-            h-[220px] lg:h-[240px] xl:h-[260px] 2xl:h-[350px]
-            rounded-b-full"
-            />
-            {/* web */}
             <img
               src={data?.image}
               alt={data?.title}
-              className="hidden lg:block absolute z-20 bottom-0
+              className="absolute z-20 bottom-0
             w-full
             h-[220px] lg:h-[240px] xl:h-[260px] 2xl:h-[350px]
             rounded-b-full"
             />
+          </div> */}
+          <div className="relative w-full h-full rounded-full z-10 bg-[#D3C59D] bg-contain bg-no-repeat bg-center">
+            <div className="w-full h-[220px] lg:h-[240px] xl:h-[260px] 2xl:h-[350px] absolute z-20 bottom-0 rounded-b-full">
+              <Image
+                fill
+                src={data?.image}
+                alt={data?.title}
+                className="z-20 bottom-0 rounded-b-full"
+                sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , 33vw"
+              />
+            </div>
           </div>
 
           {/* Orange curved stroke — placed OUTSIDE clipping context */}

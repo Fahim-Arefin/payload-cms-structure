@@ -1,15 +1,17 @@
 import { FC } from 'react'
 import WayWeAreSlider from './WayWeAreSlider'
+import { WayWeAreDataType } from '@/types'
+import Image from 'next/image'
 
 type wayWeAreData = {
   image: string
-  mobileImage: string
   title: string
-  description: string
+  coloredTitle: string
+  data: WayWeAreDataType[]
 }
 
 type OnboardingWayProps = {
-  wayWeAreData?: wayWeAreData[]
+  wayWeAreData: wayWeAreData
 }
 
 const OnboardingWay: FC<OnboardingWayProps> = ({ wayWeAreData }: OnboardingWayProps) => {
@@ -18,16 +20,25 @@ const OnboardingWay: FC<OnboardingWayProps> = ({ wayWeAreData }: OnboardingWayPr
       <div
         className="relative 
             h-[200px] md:h-[400px] lg:h-[500px] xl:h-[650px] 2xl:h-[750px]
-             bg-white overflow-hidden bg-[url('/assets/wayBgBanner.png')] bg-cover bg-no-repeat"
+             bg-white overflow-hidden"
       >
+        {/* image */}
+        <Image
+          src={wayWeAreData?.image}
+          alt={wayWeAreData?.title}
+          fill
+          className="object-cover object-center"
+          sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
+        />
         {/* Content */}
         <div
-          className="w-[95%] mx-auto uppercase relative z-10
-        py-5 md:py-[50px] lg:py-[80px] xl:py-[100px] "
+          className="w-full md:w-[95%] mx-auto uppercase relative z-10
+        py-5 md:py-[50px] lg:py-[80px] xl:py-[90px] "
         >
           <div className="text-center">
-            <h1 className="global-h1 lg:font-normal">
-              More than a Workplace- <span className="text-[#ED7125]">A Movement</span> 
+            <h1 className="global-h1 lg:font-normal uppercase">
+              {wayWeAreData?.title} -{' '}
+              <span className="text-[#ED7125]">{wayWeAreData?.coloredTitle}</span> 
             </h1>
           </div>
         </div>
@@ -40,7 +51,7 @@ const OnboardingWay: FC<OnboardingWayProps> = ({ wayWeAreData }: OnboardingWayPr
         className=" bg-transparent
           z-20 "
       >
-        <WayWeAreSlider wayWeAreData={wayWeAreData ?? []} />
+        <WayWeAreSlider wayWeAreData={wayWeAreData?.data ?? []} />
       </div>
     </div>
   )

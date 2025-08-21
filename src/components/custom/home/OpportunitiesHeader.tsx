@@ -20,7 +20,7 @@ function OpportunitiesHeader() {
         aria-hidden="true"
       >
         <Image
-          src="/assets/homepage/web/opportunities.png"
+          src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/opportunities.png`}
           alt=""
           fill
           className="object-cover object-center"

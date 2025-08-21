@@ -13,37 +13,37 @@ export type ShantaIntroContentType = {
   subheading: string
   paragraphTitle: string
   image: string
-  mobileImage: string
+  mobileImage?: string
   paragraph: string
 }
 export type VissionMissionContentType = {
   visionDescription: string
   missionDescription: string
   bgImage: string
-  bgMobileImage: string
+  bgMobileImage?: string
 }
 
 export type AllAboutCardDataType = {
   image: string
-  mobileImage: string
+  mobileImage?: string
   hoverImage: string
-  hoverMobileImage: string
+  hoverMobileImage?: string
   title: string
-  description: { __html: string }
+  description?: { __html: string }
 }
 
 export type LicensedInfoType = {
   licensedImage: string
-  licensedMobileImage: string
+  licensedMobileImage?: string
   licensedDate: string
   launchedImage: string
-  launchedMobileImage: string
+  launchedMobileImage?: string
   launchedDate: string
 }
 
 export type DirectorCardDataType = {
   image: string
-  mobileImage: string
+  mobileImage?: string
   name?: string
   designation?: string
   title: string
@@ -54,21 +54,21 @@ export type DirectorCardDataType = {
 export type DirectorProfileDataType = {
   id?: number
   image: string
-  mobileImage: string
+  mobileImage?: string
   name: string
   title: string
 }
 export type AllOfThemDataType = {
   id: number
   image: string
-  mobileImage: string
+  mobileImage?: string
   name: string
   title: string
 }
 
 export type FootPrintDataType = {
   image: string
-  mobileImage: string
+  mobileImage?: string
   title: string
   description: string
   link: string
@@ -95,7 +95,7 @@ export type PurchaseCardDataType = {
 
 export type PlanInfoDataType = {
   image: string
-  mobileImage: string
+  mobileImage?: string
   description: string
 }
 
@@ -149,7 +149,7 @@ export type CareerResourceDataType = {
 export type OnboardingRoleType = {
   image: string
   title: string
-  mobileImage: string
+  mobileImage?: string
 }
 
 export type SuitabilityCardType = {
@@ -162,6 +162,13 @@ export type VisionCardType = {
   img: string
   title: string
   points: Array<string>
+}
+
+export type WayWeAreDataType = {
+  image: string
+  mobileImage?: string
+  title: string
+  description: string
 }
 
 export type PartnerType = {
@@ -225,7 +232,7 @@ export type Directors = {
   designation: string
   description: string
   image: string
-  mobileImage: string
+  mobileImage?: string
 }
 
 export type Leaders = {
@@ -234,7 +241,7 @@ export type Leaders = {
   designation: string
   description: string
   image: string
-  mobileImage: string
+  mobileImage?: string
 }
 
 export type AllNewsAndBlogDataType = {
@@ -257,4 +264,19 @@ type TabContent = {
 
 export type TabDataType = {
   content: TabContent[]
+}
+
+export type EligibilityCardProps = {
+  title: string
+  icon: string // icon path
+  mobileIcon?: string // icon path
+  bgImage?: string // background image path
+  entryMin: string
+  entryMinLabel: string
+  entryMax: string
+  entryMaxLabel: string
+  policyTerm: string
+  policyTermLabel: string
+  maturityAge: string
+  maturityAgeLabel: string
 }

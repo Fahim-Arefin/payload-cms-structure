@@ -57,6 +57,7 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   compress: true,
+
   async headers() {
     const farFuture = 'Tue, 19 Jan 2038 03:14:07 GMT'
     const longCache = 'public, max-age=31536000, immutable'
@@ -83,6 +84,15 @@ const nextConfig = {
       // Payload uploads (adjust the path if your upload staticURL differs)
       {
         source: '/media/:path*',
+        headers: [
+          { key: 'Cache-Control', value: longCache },
+          { key: 'Expires', value: farFuture },
+        ],
+      },
+
+      // ✅ Optimized images served by Next.js
+      {
+        source: '/_next/image',
         headers: [
           { key: 'Cache-Control', value: longCache },
           { key: 'Expires', value: farFuture },

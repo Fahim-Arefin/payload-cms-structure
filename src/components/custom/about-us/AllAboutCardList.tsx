@@ -12,6 +12,7 @@ import AllAboutCard from './AllAboutCard'
 import { AllAboutCardDataType } from '@/types'
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
+import { sliderDelay } from '@/lib/data'
 
 type Props = {
   allAboutData: AllAboutCardDataType[]
@@ -45,7 +46,7 @@ function AllAboutCardList({ allAboutData }: Props) {
       }}
       plugins={[
         Autoplay({
-          delay: 3000,
+          delay: sliderDelay,
         }),
       ]}
       setApi={setCarouselApi} // 👈 capture carousel API

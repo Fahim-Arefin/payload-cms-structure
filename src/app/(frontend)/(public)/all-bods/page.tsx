@@ -1,8 +1,7 @@
 import { ProfileSection } from '@/components/custom/all-bods/ProfileSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import { directors } from '@/lib/data'
-import { Directors } from '@/types'
-import React, { FC, useEffect } from 'react'
+import { FC } from 'react'
 
 type pageProps = {}
 
@@ -12,7 +11,7 @@ const page: FC<pageProps> = ({}) => {
       title: '',
       subtitle: 'Board of Directors',
       description: '',
-      image: '/assets/all-bod-Banner.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/all-bod-Banner.jpg`,
     },
   ]
 
@@ -26,7 +25,7 @@ const page: FC<pageProps> = ({}) => {
       <div className="">
         {directors.map((director, i) => (
           <div key={director.id} className={`${i % 2 === 0 ? 'bg-white' : 'bg-[#F6EDDD]'} py-10`}>
-            <ProfileSection titleColor='#ED7125' data={director} reverse={i % 2 === 1} />
+            <ProfileSection titleColor="#ED7125" data={director} reverse={i % 2 === 1} />
           </div>
         ))}
       </div>

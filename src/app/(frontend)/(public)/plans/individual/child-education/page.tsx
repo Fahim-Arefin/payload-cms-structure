@@ -15,13 +15,13 @@ const page: FC<pageProps> = ({}) => {
       title: 'Shanta Child Education Plan ',
       subtitle: '',
       description: 'Set them up for success - nurture their boundless potential.',
-      image: '/assets/banners/child-education-banner.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/child-education-banner.jpg`,
     },
   ]
 
   const childInfoData = {
-    image: '/assets/solutions/individual/child-education/web/childInfo.png',
-    mobileImage: '/assets/solutions/individual/child-education/web/childInfo.png',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/child-education/web/childInfo.png`,
+    // mobileImage: '/assets/solutions/individual/child-education/web/childInfo.png',
     description: `Shanta Life’s Child Education Plan is designed to help parents build an education fund while offering robust life insurance protection. It's a perfect blend of savings and security for every milestone in your child’s journey.`,
   }
 
@@ -46,8 +46,8 @@ const page: FC<pageProps> = ({}) => {
         title: 'Maturity Benefit',
         description:
           'Receive the full sum assured at the end of the policy term to support higher education goals.',
-        image: '/assets/icons/web/childTabIcon2.png',
-        mobileImage: '/assets/icons/mobile/childTabIcon2.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/childTabIcon2.png`,
+        // mobileImage: '/assets/icons/mobile/childTabIcon2.png',
       },
       {
         title: 'Life Coverage',
@@ -57,34 +57,64 @@ const page: FC<pageProps> = ({}) => {
           'Waiver of all future premiums while continuing full coverage.',
           'Full maturity benefit paid at term-end.',
         ],
-        image: '/assets/icons/web/childTabIcon5.png',
-        mobileImage: '/assets/icons/mobile/childTabIcon5.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/childTabIcon5.png`,
+        // mobileImage: '/assets/icons/mobile/childTabIcon5.png',
       },
       {
         title: 'Tax Benefits',
         description: 'Enjoy tax rebates on premiums, avail upto 15% tax rebate. ',
-        image: '/assets/icons/web/childTabIcon3.png',
-        mobileImage: '/assets/icons/mobile/childTabIcon3.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/childTabIcon3.png`,
+        // mobileImage: '/assets/icons/mobile/childTabIcon3.png',
       },
 
       {
         title: 'Customizable Coverage',
         description: 'Choose a sum assured based on your child’s future needs.',
-        image: '/assets/icons/web/childTabIcon1.png',
-        mobileImage: '/assets/icons/mobile/childTabIcon1.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/childTabIcon1.png`,
+        // mobileImage: '/assets/icons/mobile/childTabIcon1.png',
       },
       {
         title: 'Flexible Premium Payments',
         description: 'Opt for monthly, quarterly, half-yearly, or annual premium modes.',
-        image: '/assets/icons/web/childTabIcon6.png',
-        mobileImage: '/assets/icons/mobile/childTabIcon6.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/childTabIcon6.png`,
+        // mobileImage: '/assets/icons/mobile/childTabIcon6.png',
       },
       {
         title: 'Partner Discounts',
         description:
           'Avail exclusive discounts on medical and diagnostic services at partnered hospitals and diagnostic centers.',
-        image: '/assets/icons/web/childTabIcon4.png',
-        mobileImage: '/assets/icons/mobile/childTabIcon4.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/childTabIcon4.png`,
+        // mobileImage: '/assets/icons/mobile/childTabIcon4.png',
+      },
+    ],
+    eligibility: [
+      {
+        title: 'Child',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/childIcon.svg`,
+        // mobileIcon: '/assets/icons/mobile/childIcon.svg',
+        // bgImage:"/assets/eligibilityImage1.jpg",
+        entryMin: '30',
+        entryMinLabel: 'Days',
+        entryMax: '15',
+        entryMaxLabel: 'Years',
+        policyTerm: '10-20',
+        policyTermLabel: 'Years',
+        maturityAge: '25',
+        maturityAgeLabel: 'Years',
+      },
+      {
+        title: 'Parents',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/parentIcon.svg`,
+        // mobileIcon: '/assets/icons/mobile/parentIcon.svg',
+        // bgImage:"/assets/parentsTab.jpg",
+        entryMin: '21',
+        entryMinLabel: 'Years',
+        entryMax: '55',
+        entryMaxLabel: 'Years',
+        policyTerm: '10-20',
+        policyTermLabel: 'Years',
+        maturityAge: '65',
+        maturityAgeLabel: 'Years',
       },
     ],
   }

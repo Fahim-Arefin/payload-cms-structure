@@ -63,6 +63,7 @@
 // export default OnboardingIntro
 
 import { ShantaIntroContentType } from '@/types'
+import Image from 'next/image'
 import React from 'react'
 
 type Props = {
@@ -87,11 +88,12 @@ function OnboardingIntro({ onboardingIntroContent }: Props) {
           lg:w-[90%] xl:w-[78%] 2xl:w-[80%] 
           lg:h-[180px] xl:h-[193px] 2xl:h-[230px]"
           >
-            <img
+            <Image
+              fill
               src={onboardingIntroContent?.image}
               alt={onboardingIntroContent?.heading}
-              className="
-            w-full h-full object-contain z-0 " // adjust offset as needed
+              className="object-contain z-0 "
+              sizes="(max-width: 1349px) 350px, 400px"
             />
           </div>
 
@@ -109,11 +111,13 @@ function OnboardingIntro({ onboardingIntroContent }: Props) {
           </div>
 
           {/* mobile */}
-          <div className="col-span-1 lg:hidden md:-mt-4 ">
-            <img
-              src={onboardingIntroContent?.mobileImage}
+          <div className="relative w-full min-h-[120px] col-span-1 lg:hidden md:-mt-4">
+            <Image
+              fill
+              src={onboardingIntroContent?.image}
               alt={onboardingIntroContent?.heading}
-              className="w-full object-cover object-center"
+              className="object-contain object-center"
+              sizes="(max-width: 767px) 150px, 300px"
             />
           </div>
         </div>

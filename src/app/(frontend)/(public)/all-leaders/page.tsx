@@ -11,7 +11,7 @@ const page: FC<pageProps> = ({}) => {
       title: '',
       subtitle: 'Leadership Team',
       description: '',
-      image: '/assets/leadersBanner.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/leadersBanner.jpg`,
     },
   ]
 
@@ -25,7 +25,7 @@ const page: FC<pageProps> = ({}) => {
       <div className="">
         {leaders.map((leader, i) => (
           <div key={leader.id} className={`${i % 2 === 0 ? 'bg-white' : 'bg-[#F6EDDD]'} py-10`}>
-            <ProfileSection data={leader} titleColor='#9C8639' reverse={i % 2 === 1} />
+            <ProfileSection data={leader} titleColor="#9C8639" reverse={i % 2 === 1} />
           </div>
         ))}
       </div>
