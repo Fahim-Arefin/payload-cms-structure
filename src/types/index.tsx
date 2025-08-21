@@ -280,3 +280,18 @@ export type EligibilityCardProps = {
   maturityAge: string
   maturityAgeLabel: string
 }
+
+export type PaymentTabDataType = {
+  bkash: {
+    item: {
+      descriptionContent: string
+    }[]
+  }
+  rocket: {
+    item: {
+      descriptionContent: string
+    }[]
+  }
+  image: string
+  mobileImage: string
+}

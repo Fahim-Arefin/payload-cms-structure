@@ -8,7 +8,7 @@ type Props = {
   align?: 'left' | 'right'
   data: {
     bgImage: string
-    bgMobileImage: string
+    bgMobileImage?: string
     content: string
   }
 }
@@ -38,48 +38,53 @@ function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
         className={`grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-9 2xl:gap-16 ${align === 'left' ? ' lg:gap-0 ' : 'gap-7'}`}
       >
         {/* left content mobile*/}
-        {/* h-[250px] md:h-[300px] lg:h-[360px] xl:h-[400px] 2xl:h-[500px] */}
+        {/* h-[300px] md:h-[400px] lg:h-auto  */}
         <div
           className={`lg:hidden
             relative 
             w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} w-full xl:w-[380px] 2xl:w-[500px] mx-auto
-            h-[300px] md:h-[400px] lg:h-auto 
-            rounded-[8px] md:rounded-[10px]  lg:rounded-[8px]  xl:rounded-[12px] 
-            bg-[lightgray]  
-            bg-no-repeat 
-            bg-[position:-80px_0px] md:bg-[position:-60px_0px] lg:bg-[position:-150px_0px] xl:bg-[position:0px_0px]
-            bg-cover
+             aspect-[2880/1920]
+            rounded-md lg:rounded-lg  xl:rounded-xl 
             overflow-hidden
             mt-12
             
            ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}
-          style={{ backgroundImage: `url(${data?.bgMobileImage})` }}
           role="img"
           aria-label="Background image"
         >
+          {/* Background Image */}
+          <Image
+            src={data?.bgImage}
+            alt="Background"
+            fill
+            className="object-cover object-center"
+            sizes="50vw"
+          />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black/10 " />
         </div>
         {/* left content large*/}
-        {/* h-[250px] md:h-[300px] lg:h-[360px] xl:h-[400px] 2xl:h-[500px] */}
+        {/* bg-[position:-80px_0px] md:bg-[position:-60px_0px] lg:bg-[position:-150px_0px] xl:bg-[position:0px_0px]  */}
         <div
           className={`hidden lg:block
             relative 
             w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} w-full xl:w-[380px] 2xl:w-[500px] mx-auto
-            h-[300px] md:h-[400px] lg:h-auto 
-            rounded-[8px] md:rounded-[10px]  lg:rounded-[8px]  xl:rounded-[12px] 
-            bg-[lightgray]  
-            bg-no-repeat 
-            bg-[position:-80px_0px] md:bg-[position:-60px_0px] lg:bg-[position:-150px_0px] xl:bg-[position:0px_0px]
-            bg-cover
+            h-auto 
+            rounded-md lg:rounded-lg xl:rounded-xl 
             overflow-hidden
             mt-12
-            
            ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}
-          style={{ backgroundImage: `url(${data?.bgImage})` }}
           role="img"
           aria-label="Background image"
         >
+          {/* Background Image */}
+          <Image
+            src={data?.bgImage}
+            alt="Background"
+            fill
+            className="object-cover object-center"
+            sizes="50vw"
+          />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black/10 " />
         </div>
@@ -103,6 +108,7 @@ function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
 export default DebitSection
 
 import Link from 'next/link'
+import Image from 'next/image'
 
 function renderWithFormLink(text: string) {
   const linkText = 'EFT Debit Authorization form'

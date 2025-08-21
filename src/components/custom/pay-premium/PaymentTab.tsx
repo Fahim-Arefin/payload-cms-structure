@@ -11,6 +11,8 @@ import GlobalButton from '../shared/GlobalButton'
 import ToolTip from '../shared/ToolTip'
 import BkashSection from './BkashSection'
 import RocketSection from './RocketSection'
+import { PaymentTabDataType } from '@/types'
+import Image from 'next/image'
 
 export function ArrowIcon() {
   return (
@@ -27,24 +29,15 @@ export function ArrowIcon() {
   )
 }
 
-type PaymentItem = {
-  descriptionContent: string
-}
-
-type PaymentData = {
-  item: PaymentItem[]
-}
-
-type Props = {
+type PaymentTabProps = {
   config: {
     value: string
     label: string
   }[]
-  data?: PaymentData
-  rocketData?: PaymentData
+  data: PaymentTabDataType
 }
 
-export default function PaymentTab({ config, data, rocketData }: Props) {
+export default function PaymentTab({ config, data }: PaymentTabProps) {
   const [activeTab, setActiveTab] = useState('bkash')
 
   return (
@@ -75,30 +68,39 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
 
         {/* mbile */}
         <div
-          className="lg:hidden relative w-full  
+          className="relative lg:hidden 
             lg:mt-[100px]
-            h-[300px] md:h-[400px] lg:h-auto
-            rounded-[8px] md:rounded-[10px] lg:rounded-[8px] xl:rounded-[12px] 
-            bg-no-repeat bg-center
-            bg-contain
-            order-1 flex-shrink-0"
-          style={{ backgroundImage: `url(/assets/paypremium/mobile/bkash-roket.png)` }}
+            w-full  
+            h-[300px] md:h-[400px] 
+            rounded-md lg:rounded-lg xl:rounded-xl "
           role="img"
           aria-label="Background image"
-        ></div>
+        >
+          <Image
+            src={data?.mobileImage}
+            alt="bkash and rocket image"
+            fill
+            className="rounded-md lg:rounded-lg xl:rounded-xl  object-contain object-center"
+            sizes="50vw"
+          />
+        </div>
         {/* large */}
         <div
-          className="hidden lg:block relative w-full  
+          className="relative hidden lg:block 
             lg:mt-[100px]
-            h-[300px] md:h-[400px] lg:h-auto
-            rounded-[8px] md:rounded-[10px] lg:rounded-[8px] xl:rounded-[12px] 
-            bg-no-repeat bg-center
-            bg-contain
+            w-full h-[300px] md:h-[400px] lg:h-auto
             order-1 flex-shrink-0"
-          style={{ backgroundImage: `url(/assets/paypremium/web/bkash-roket.png)` }}
           role="img"
           aria-label="Background image"
-        ></div>
+        >
+          <Image
+            src={data?.image}
+            alt="bkash and rocket image"
+            fill
+            className="rounded-md lg:rounded-lg xl:rounded-xl  object-contain object-center"
+            sizes="50vw"
+          />
+        </div>
 
         {/* Right - Tabbed Content */}
         <div className="flex flex-col mt-10 lg:mt-0 order-2">
@@ -210,7 +212,8 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
 
             {/* Tab Content */}
             <TabsContent value="bkash" className="space-y-4 lg:space-y-4 xl:space-y-7">
-              {data?.item?.map((eachItem, i) => (
+              {/* {data?.item?.map((eachItem, i) => ( */}
+              {data?.bkash?.item?.map((eachItem, i) => (
                 <div
                   key={i}
                   className="flex items-center bg-white/50 backdrop-blur-[12.5px] border-[1.25px] border-[#9C8639]
@@ -230,7 +233,7 @@ export default function PaymentTab({ config, data, rocketData }: Props) {
             </TabsContent>
 
             <TabsContent value="rocket" className="space-y-4 lg:space-y-4 xl:space-y-7">
-              {rocketData?.item?.map((eachItem, i) => (
+              {data?.rocket?.item?.map((eachItem, i) => (
                 <div
                   key={i}
                   className="flex items-center bg-white/50 backdrop-blur-[12.5px] border-[1.25px] border-[#9C8639]
