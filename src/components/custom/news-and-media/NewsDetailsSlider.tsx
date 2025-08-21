@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import Autoplay from 'embla-carousel-autoplay'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import NewsSliderCard from './NewsSliderCard'
+import { sliderDelay } from '@/lib/data'
 
 type Props = {
   id: number
@@ -53,7 +54,7 @@ function NewsDetailsSlider({ data, id }: Props) {
             setApi={setCarouselApi} // 👈 capture carousel API
             plugins={[
               Autoplay({
-                delay: 3000,
+                delay: sliderDelay,
               }),
             ]}
           >

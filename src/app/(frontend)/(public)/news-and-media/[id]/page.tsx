@@ -13,8 +13,8 @@ async function page({ params }: Props) {
   const blogData: AllNewsAndBlogDataType[] = [
     {
       id: 1,
-      image: '/assets/news-and-media/web/newsandblog1.jpg',
-      mobileImage: '/assets/news-and-media/mobile/newsandblog1.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/news-and-media/web/newsandblog1.jpg`,
+      // mobileImage: '/assets/news-and-media/mobile/newsandblog1.jpg',
       date: 'Jul 17, 2025',
       title: 'What is the Potential of the Insurance Sector in Bangladesh?',
       description:
@@ -22,8 +22,8 @@ async function page({ params }: Props) {
     },
     {
       id: 3,
-      image: '/assets/news-and-media/web/newsandblog3.jpg',
-      mobileImage: '/assets/news-and-media/mobile/newsandblog3.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/news-and-media/web/newsandblog3.jpg`,
+      // mobileImage: '/assets/news-and-media/mobile/newsandblog3.jpg',
       date: 'Jul 17, 2025',
       title: 'What Steps Should Be Taken to Develop the Insurance Sector?',
       description:
@@ -35,8 +35,8 @@ async function page({ params }: Props) {
   const newsData: AllNewsAndBlogDataType[] = [
     {
       id: 2,
-      image: '/assets/news-and-media/web/news2.jpg',
-      mobileImage: '/assets/news-and-media/mobile/news2.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/news-and-media/web/news2.jpg`,
+      // mobileImage: '/assets/news-and-media/mobile/news2.jpg',
       date: 'Jul 17, 2025',
       title: 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
       description: `Shanta Life Insurance PLC, a new venture under Shanta Holdings, signed an MoU with Dhaka Bank to provide Bancassurance service through the bank's distribution channel.
@@ -47,8 +47,8 @@ async function page({ params }: Props) {
     },
     {
       id: 4,
-      image: '/assets/news-and-media/web/news11.jpg',
-      mobileImage: '/assets/news-and-media/mobile/news11.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/news-and-media/web/news11.jpg`,
+      // mobileImage: '/assets/news-and-media/mobile/news11.jpg',
       date: 'Jul 17, 2025',
       title: 'Shanta Life Insurance gets license to launch',
       description: `Bangladesh's insurance sector is set to expand through the launch of a new venture, "Shanta Life Insurance PLC".
@@ -80,11 +80,13 @@ async function page({ params }: Props) {
     'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance'
 
   // Use high-quality fallback for low-resolution images (like news2.jpg which is only 370x212)
-  const lowQualityImages = ['/assets/news2.jpg']
+  const lowQualityImages = [
+    `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/news-and-media/web/news2.jpg`,
+  ]
   const heroImage =
     currentItem?.image && !lowQualityImages.includes(currentItem.image)
       ? currentItem.image
-      : '/assets/newsSingleBanner.jpg'
+      : `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/newsSingleBanner.jpg`
 
   const heroSlides = [
     {
