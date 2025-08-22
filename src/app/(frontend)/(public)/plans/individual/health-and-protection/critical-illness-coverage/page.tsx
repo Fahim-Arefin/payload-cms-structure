@@ -15,57 +15,52 @@ function page() {
       title: '',
       subtitle: 'Shanta Critical Protection',
       description: `Get life-sustaining support because a diagnosis shouldn't derail your dreams. We'll step in so you can fight back stronger.`,
-      image: '/assets/banners/crit-coverage.png',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/crit-coverage.png`,
     },
   ]
 
   const planInfoData = {
-    image:
-      '/assets/solutions/individual/health-and-protection/critical-protection/web/planInfo5.svg',
-    mobileImage:
-      '/assets/solutions/individual/health-and-protection/critical-protection/mobile/planInfo5.svg',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/critical-protection/web/planInfo5.svg`,
+    // mobileImage:
+    //   '/assets/solutions/individual/health-and-protection/critical-protection/mobile/planInfo5.svg',
     description:
       'Health struggles can come with financial struggles too—making recovery even harder. From rising medical bills to daily expenses, the burden can feel overwhelming. With Shanta Life’s Critical Protection Riders, you get financial security when you need it most—covering up to 25 major illnesses, depending on your plan.',
   }
 
   const offersData = [
     {
-      image: '/assets/icons/web/offer9.png',
-      mobileImage: '/assets/icons/mobile/offer9.png',
-      bgImage:
-        '/assets/solutions/individual/health-and-protection/critical-protection/web/offerbg9.jpg',
-      bgMobileImage:
-        '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg9.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/offer9.png`,
+      // mobileImage: '/assets/icons/mobile/offer9.png',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/critical-protection/web/offerbg9.jpg`,
+      // bgMobileImage:
+      //   '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg9.jpg',
       title: 'Living Benefit',
       description: 'Helping with treatment costs so you can focus on recovery.',
     },
     {
-      image: '/assets/icons/web/offer10.png',
-      mobileImage: '/assets/icons/mobile/offer10.png',
-      bgImage:
-        '/assets/solutions/individual/health-and-protection/critical-protection/web/offerbg10.jpg',
-      bgMobileImage:
-        '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg10.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/offer10.png`,
+      // mobileImage: '/assets/icons/mobile/offer10.png',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/critical-protection/web/offerbg10.jpg`,
+      // bgMobileImage:
+      //   '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg10.jpg',
       title: 'Affordable Premium',
       description: 'Security for you and your family in case of lifelong disability.',
     },
     {
-      image: '/assets/icons/web/offer11.png',
-      mobileImage: '/assets/icons/mobile/offer11.png',
-      bgImage:
-        '/assets/solutions/individual/health-and-protection/critical-protection/web/offerbg11.jpg',
-      bgMobileImage:
-        '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg11.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/offer11.png`,
+      // mobileImage: '/assets/icons/mobile/offer11.png',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/critical-protection/web/offerbg11.jpg`,
+      // bgMobileImage:
+      //   '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg11.jpg',
       title: 'One-Time Payout',
       description: 'Financial support if an accident limits your abilities.',
     },
     {
-      image: '/assets/icons/web/offer12.png',
-      mobileImage: '/assets/icons/mobile/offer12.png',
-      bgImage:
-        '/assets/solutions/individual/health-and-protection/critical-protection/web/offerbg12.jpg',
-      bgMobileImage:
-        '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg12.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/offer12.png`,
+      // mobileImage: '/assets/icons/mobile/offer12.png',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/critical-protection/web/offerbg12.jpg`,
+      // bgMobileImage:
+      //   '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg12.jpg',
       title: 'Protection Against 25+ Critical Illnesses',
       description:
         'Your loved ones receive twice the insured amount for extra protection (including basic life coverage).',
@@ -76,29 +71,27 @@ function page() {
     title: 'Critical',
     subTitle: 'Protection',
     smallTitle: 'Classic',
-    bgImage:
-      '/assets/solutions/individual/health-and-protection/critical-protection/web/criticalProtection.jpg',
-    bgMobileImage:
-      '/assets/solutions/individual/health-and-protection/critical-protection/mobile/criticalProtection.jpg',
+    bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/critical-protection/web/criticalProtection.jpg`,
+    bgMobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/critical-protection/mobile/criticalProtection.jpg`,
     item: [
       {
-        image: '/assets/icons/web/protection1.png',
-        mobileImage: '/assets/icons/mobile/protection1.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/protection1.png`,
+        // mobileImage: '/assets/icons/mobile/protection1.png',
         description: 'Covers Surgery or diagnose for 19 Critical Illnesses',
       },
       {
-        image: '/assets/icons/web/protection2.png',
-        mobileImage: '/assets/icons/mobile/protection2.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/protection2.png`,
+        // mobileImage: '/assets/icons/mobile/protection2.png',
         description: 'Full Coverage Amount Payout',
       },
       {
-        image: '/assets/icons/web/protection3.png',
-        mobileImage: '/assets/icons/mobile/protection3.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/protection3.png`,
+        // mobileImage: '/assets/icons/mobile/protection3.png',
         description: 'Coverage amount = 50% of Basic Life Coverage',
       },
       {
-        image: '/assets/icons/web/protection4.png',
-        mobileImage: '/assets/icons/mobile/protection4.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/protection4.png`,
+        // mobileImage: '/assets/icons/mobile/protection4.png',
         description: 'Coverage up to 15 lacs',
       },
     ],
@@ -107,30 +100,28 @@ function page() {
     title: 'Critical',
     subTitle: 'Protection',
     smallTitle: 'Standard',
-    bgImage:
-      '/assets/solutions/individual/health-and-protection/critical-protection/web/Critical-illness.jpeg',
-    bgMobileImage:
-      '/assets/solutions/individual/health-and-protection/critical-protection/mobile/Critical-illness.jpeg',
+    bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/critical-protection/web/Critical-illness.jpeg`,
+    bgMobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/critical-protection/mobile/Critical-illness.jpeg`,
     item: [
       {
-        image: '/assets/icons/web/protection5.png',
-        mobileImage: '/assets/icons/mobile/protection5.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/protection5.png`,
+        // mobileImage: '/assets/icons/mobile/protection5.png',
         description: 'Covers Diagnoses / Surgery for 10 Minor illnesses & 15 Major illnesses',
       },
       {
-        image: '/assets/icons/web/protection6.png',
-        mobileImage: '/assets/icons/mobile/protection6.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/protection6.png`,
+        // mobileImage: '/assets/icons/mobile/protection6.png',
         description:
           'Minor Critical illness coverage = 30 % of Rider Coverage Amount or BDT 3 lacs (whichever is lower)',
       },
       {
-        image: '/assets/icons/web/protection7.png',
-        mobileImage: '/assets/icons/mobile/protection7.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/protection7.png`,
+        // mobileImage: '/assets/icons/mobile/protection7.png',
         description: 'Coverage amount = 50% of Basic Life Coverage',
       },
       {
-        image: '/assets/icons/web/protection8.png',
-        mobileImage: '/assets/icons/mobile/protection8.png',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/protection8.png`,
+        // mobileImage: '/assets/icons/mobile/protection8.png',
         description: 'Rider continues even after minor CI claim payment Coverage up to 15 lacs',
       },
     ],

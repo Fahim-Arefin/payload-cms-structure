@@ -212,7 +212,7 @@ export type ProtectionDataType = {
   bgMobileImage: string
   item: {
     image: string
-    mobileImage: string
+    mobileImage?: string
     description: string
   }[]
 }
