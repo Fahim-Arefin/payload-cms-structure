@@ -9,6 +9,7 @@ import GlobalTabButtons from '../GlobalTabButtons'
 import Link from 'next/link'
 import GlobalButton from '../GlobalButton'
 import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
 
 type Props = {}
 
@@ -31,9 +32,8 @@ function MatricsSection({}: Props) {
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-5 md:gap-12 lg:gap-0">
           {/* Left image block */}
-          {/* mobile */}
-          <div
-            className="lg:hidden bg-[url('/assets/solutions/individual/health-and-protection/accidental-coverage/mobile/matrics.jpg')] bg-[lightgray] bg-center bg-cover bg-no-repeat 
+          {/* <div
+            className="bg-[url('/assets/solutions/individual/health-and-protection/accidental-coverage/web/matrics.jpg')] bg-[lightgray] bg-center bg-cover bg-no-repeat 
             rounded-[10px] lg:rounded-[12px] xl:rounded-[14px] 2xl:rounded-[16px]
             h-[250px]
             w-full md:h-[350px]
@@ -42,19 +42,23 @@ function MatricsSection({}: Props) {
             2xl:w-[460px] 2xl:h-[460px]"
             role="img"
             aria-label="Surgery room"
-          />
-          {/* web */}
+          /> */}
           <div
-            className="hidden lg:block bg-[url('/assets/solutions/individual/health-and-protection/accidental-coverage/web/matrics.jpg')] bg-[lightgray] bg-center bg-cover bg-no-repeat 
-            rounded-[10px] lg:rounded-[12px] xl:rounded-[14px] 2xl:rounded-[16px]
-            h-[250px]
-            w-full md:h-[350px]
+            className="relative
+           rounded-md lg:rounded-lg xl:rounded-xl 
+           w-full aspect-[350/250] lg:aspect-auto
             lg:w-[350px] lg:h-[350px]
             xl:w-[400px] xl:h-[400px]
             2xl:w-[460px] 2xl:h-[460px]"
-            role="img"
-            aria-label="Surgery room"
-          />
+          >
+            <Image
+              fill
+              src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/accidental-coverage/web/matrics.jpg`}
+              alt="Surgery room"
+              className="object-cover object-center rounded-md lg:rounded-lg xl:rounded-xl "
+              sizes="(max-width: 1023px) 350px, 700px"
+            />
+          </div>
 
           {/* Right visual layout with image arcs */}
           <div

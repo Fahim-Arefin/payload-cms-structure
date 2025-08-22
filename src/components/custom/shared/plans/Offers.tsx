@@ -86,6 +86,7 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/componen
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../CarousalNavButtons'
 import Autoplay from 'embla-carousel-autoplay'
+import { sliderDelay } from '@/lib/data'
 
 type Props<T> = {
   data: T[]
@@ -131,7 +132,7 @@ function Offers<T>({ data, subheading, cardComponent: CardComponent }: Props<T>)
         setApi={setCarouselApi}
         plugins={[
           Autoplay({
-            delay: 3000,
+            delay: sliderDelay,
           }),
         ]}
       >
