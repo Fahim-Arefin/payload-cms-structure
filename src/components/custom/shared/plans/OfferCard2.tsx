@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { OfferDataType2 } from '@/types'
 import { ArrowUpRight } from 'lucide-react'
 import ToolTip from '../ToolTip'
+import Image from 'next/image'
 
 type Props = {
   data: OfferDataType2
@@ -12,23 +13,15 @@ function OfferCard2({ data }: Props) {
     <div
       className="relative z-30 overflow-hidden
             rounded-[4px] lg:rounded-[6px]"
-      // style={{
-      //   backgroundImage: `url(${data?.bgImage})`,
-      // }}
     >
-      {/* mobile */}
-      <img
-        className="lg:hidden absolute inset-0  w-full h-full object-cover rounded-[4px] lg:rounded-[6px]"
-        src={data?.bgMobileImage}
-        alt={data?.title}
-        aria-hidden="true"
-      />
-      {/* web */}
-      <img
-        className="hidden lg:block absolute inset-0  w-full h-full object-cover rounded-[4px] lg:rounded-[6px]"
+      {/* Image */}
+      <Image
+        fill
+        className="object-cover rounded-[4px] lg:rounded-[6px]"
         src={data?.bgImage}
         alt={data?.title}
         aria-hidden="true"
+        sizes="(max-width: 767px) 150px,(max-width: 1349px) 350px, 600px"
       />
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#0000004D] to-[#0000004D]/60 z-0" />
@@ -47,20 +40,11 @@ function OfferCard2({ data }: Props) {
       >
         {/*  hover:bg-[#9C8639]/60 */}
         <div
-          className="transition-transform duration-500 group-hover:scale-105
+          className="relative transition-transform duration-500 group-hover:scale-105 
          w-[40px] lg:w-[50px] xl:w-[70px] 2xl:w-[80px] 
          h-[40px] lg:h-[50px] xl:h-[70px] 2xl:h-[80px]"
         >
-          <img
-            src={data?.mobileImage}
-            alt={data?.description}
-            className="lg:hidden h-full w-full object-contain"
-          />
-          <img
-            src={data?.image}
-            alt={data?.description}
-            className="hidden lg:block h-full w-full object-contain"
-          />
+          <Image fill src={data?.image} alt={data?.description} className="object-contain" />
         </div>
 
         <p

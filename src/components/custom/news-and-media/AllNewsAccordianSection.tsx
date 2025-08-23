@@ -15,60 +15,12 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useState } from 'react'
 
-const allNewsData: AllNewsAndBlogDataType[] = [
-  {
-    id: 1,
-    // image: '/assets/news-and-media/web/news11.jpg',
-    // mobileImage: '/assets/news-and-media/mobile/news11.jpg',
-    image: '/assets/logo/mainlogo_2.png',
-    mobileImage: '/assets/logo/mainlogo_2.png',
-    date: 'Jul 17, 2025',
-    title: 'Shanta Life Insurance gets license to launch',
-    description: `Bangladesh's insurance sector is set to expand through the launch of a new venture, "Shanta Life Insurance PLC".
-      The company came into being through a consortium comprising Shanta Holdings Ltd, Shanta Lifestyle, Shanta Securities Ltd, Shanta Multiverse, Shanta Property Management, FAR Asset Management and Nasah Holdings Limited.
-      It received the licence on November 7 from the Insurance Development and Regulatory Authority (IDRA), said a press release.
-      "We are excited to step into a new sector," said Khondoker Monir Uddin, chairman and managing director of business conglomerate Shanta Holdings Ltd.
-      `,
-    externalLink:
-      'https://www.thedailystar.net/business/news/shanta-life-insurance-gets-licence-launch-3464831',
-  },
-  {
-    id: 2,
-    image: '/assets/news-and-media/web/news2.jpg',
-    mobileImage: '/assets/news-and-media/mobile/news2.jpg',
-    date: 'Jul 17, 2025',
-    title: 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
-    description: `Shanta Life Insurance PLC, a new venture under Shanta Holdings, signed an MoU with Dhaka Bank to provide Bancassurance service through the bank's distribution channel.
-    Sheikh Mohammad Maroof, managing director & CEO of Dhaka Bank and Nafis A Ahmed, chief executive officer of the Shanta Life Insurance, signed the MoU at the bank's head office in Dhaka recently.
-    Through this MoU, Shanta Life Insurance intends to leverage the robust banking channel of Dhaka Bank to provide tailored insurance policies to the clients of the latter. This proposition will help to offer more financial products to the customers of the bank.`,
-    externalLink:
-      'https://www.thedailystar.net/business/organisation-news/press-releases/news/shanta-life-insurance-and-dhaka-bank-sign-mou-jointly-prepare-bancassurance-3843041',
-  },
-  // {
-  //   id: 3,
-  //   image: '/assets/newsandblog3.jpg',
-  //   date: 'Jul 17, 2025',
-  //   title: 'How you can be benefited by Santa Life insurance?',
-  //   description:
-  //     'Nothing is more important than your life and your ability to earn a living. Therefore, it is sensible to seek insurance coverage for the most valuable of asset – you!',
-  // },
-  // {
-  //   id: 4,
-  //   image: '/assets/news11.jpg',
-  //   date: 'Dec 1, 2024',
-  //   title: 'Shanta Life Insurance gets license to launch',
-  //   description: `The company is set to drive financial security and peace of mind by launching simplified insurance products, designed to address the varied needs of individuals across Bangladesh. Given Shanta's legacy of trust and quality in all its businesses, the group plans to ensure the same values in the life insurance sector, which is currently riddled with issues of transparency and policyholders' trust. `,
-  // },
-  // {
-  //   id: 5,
-  //   image: '/assets/news2.jpg',
-  //   date: 'Mar 8, 2025',
-  //   title: 'Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for Bancassurance',
-  //   description: `Sheikh Mohammad Maroof, managing director & CEO of Dhaka Bank and Nafis A Ahmed, chief executive officer of the Shanta Life Insurance, signed the MoU at the bank's head office in Dhaka recently.`,
-  // },
-]
+type Props = {
+  allNewsData: AllNewsAndBlogDataType[]
+  allContent: AllNewsAndBlogDataType[]
+}
 
-export default function AllNewsAccordionSection() {
+export default function AllNewsAccordionSection({ allNewsData, allContent }: Props) {
   const [showAll, setShowAll] = useState(false)
 
   const hasMoreNews = allNewsData.length > 3
@@ -87,7 +39,7 @@ export default function AllNewsAccordionSection() {
       }
       transition-all duration-700 ease-in-out`}
     >
-      <SearchNews bgColor="#FCF4EB" text="News" />
+      <SearchNews bgColor="#FCF4EB" text="News" allContent={allContent} />
       <Accordion
         type="single"
         collapsible
@@ -111,22 +63,19 @@ export default function AllNewsAccordionSection() {
             </AccordionTrigger>
             <AccordionContent className="pt-1 lg:pt-2 xl:pt-3.5 2xl:pt-4 ">
               <div className="flex flex-col md:flex-row gap-8 ">
-                <div className="">
-                  {/* mobile */}
-                  <img
-                    src={news.mobileImage}
-                    alt={news.title}
-                    className="lg:hidden rounded-lg
-                     w-full md:min-w-[200px] lg:min-w-[230px] xl:min-w-[300px] 2xl:min-w-[350px]  
-        h-[200px] md:h-[150px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px] "
-                  />
-                  {/* web */}
-                  <img
+                <div
+                  className="relative rounded-md lg:rounded-lg xl:rounded-xl
+                  w-full md:min-w-[200px] lg:min-w-[230px] xl:min-w-[300px] 2xl:min-w-[350px] 
+                  md:h-[150px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px]
+                  aspect-[350/220] md:aspect-auto 
+                  "
+                >
+                  <Image
+                    fill
                     src={news.image}
                     alt={news.title}
-                    className="hidden lg:block rounded-lg
-                     w-full md:min-w-[200px] lg:min-w-[230px] xl:min-w-[300px] 2xl:min-w-[350px]  
-        h-[200px] md:h-[150px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px] "
+                    className="rounded-md lg:rounded-lg xl:rounded-xl"
+                    sizes="(max-width: 767px) 300px, 500px"
                   />
                 </div>
                 <div className="flex flex-col justify-between text-[#3C3C3C]">
@@ -206,13 +155,19 @@ export default function AllNewsAccordionSection() {
               </AccordionTrigger>
               <AccordionContent className="pt-1 lg:pt-2 xl:pt-3.5 2xl:pt-4 ">
                 <div className="flex flex-col md:flex-row gap-8 ">
-                  <div className="">
-                    <img
+                  <div
+                    className="relative rounded-md lg:rounded-lg xl:rounded-xl
+                  w-full md:min-w-[200px] lg:min-w-[230px] xl:min-w-[300px] 2xl:min-w-[350px] 
+                  md:h-[150px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px]
+                  aspect-[350/220] md:aspect-auto 
+                  "
+                  >
+                    <Image
+                      fill
                       src={news.image}
                       alt={news.title}
-                      className="rounded-lg
-                     w-full md:min-w-[200px] lg:min-w-[230px] xl:min-w-[300px] 2xl:min-w-[350px]  
-        h-[200px] md:h-[150px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px] "
+                      className="rounded-md lg:rounded-lg xl:rounded-xl"
+                      sizes="(max-width: 767px) 300px, 500px"
                     />
                   </div>
                   <div className="flex flex-col justify-between text-[#3C3C3C]">

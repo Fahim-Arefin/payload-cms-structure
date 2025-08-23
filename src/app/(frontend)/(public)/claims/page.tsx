@@ -12,7 +12,7 @@ const page: FC<pageProps> = ({}) => {
       subtitle: '',
       description:
         'Experience a hassle-free, seamless claims journey... Submit, track and settle your claim in just 5 Days!  ',
-      image: '/assets/claimBanner_33.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/claimBanner_33.jpg`,
     },
   ]
 

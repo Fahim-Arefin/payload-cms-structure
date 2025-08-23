@@ -65,7 +65,7 @@ const CareerDetailsModal: FC<CareerDetailsModalProps> = ({ open, onOpenChange, d
 
           <div className="flex flex-col gap-2 xl:gap-6 2xl:gap-10 items-start">
             <img
-              src="/assets/logo/mainlogo_2.png"
+              src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/mainlogo_2.png`}
               alt="Shanta Life Logo"
               className="h-[60px] md:h-[90px] w-auto object-contain ml-2"
               style={{ maxWidth: 120 }}
