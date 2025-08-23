@@ -212,7 +212,7 @@ export type ProtectionDataType = {
   bgMobileImage: string
   item: {
     image: string
-    mobileImage: string
+    mobileImage?: string
     description: string
   }[]
 }
@@ -247,7 +247,7 @@ export type Leaders = {
 export type AllNewsAndBlogDataType = {
   id: number
   image: string
-  mobileImage: string
+  mobileImage?: string
   title: string
   description: string
   date: string
@@ -279,4 +279,19 @@ export type EligibilityCardProps = {
   policyTermLabel: string
   maturityAge: string
   maturityAgeLabel: string
+}
+
+export type PaymentTabDataType = {
+  bkash: {
+    item: {
+      descriptionContent: string
+    }[]
+  }
+  rocket: {
+    item: {
+      descriptionContent: string
+    }[]
+  }
+  image: string
+  mobileImage: string
 }

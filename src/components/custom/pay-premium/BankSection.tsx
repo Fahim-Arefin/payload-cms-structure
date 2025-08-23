@@ -2,6 +2,7 @@ import { PayPremiumDataType } from '@/types'
 import React from 'react'
 import GlobalButton from '@/components/custom/shared/GlobalButton'
 import ToolTip from '@/components/custom/shared/ToolTip'
+import Image from 'next/image'
 
 type Props = {
   bgColor?: string
@@ -30,44 +31,54 @@ function BankSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
         className={`grid grid-cols-1 lg:grid-cols-2 lg:gap-6 xl:gap-9 2xl:gap-16 ${align === 'left' ? ' lg:gap-0 ' : 'gap-0'}`}
       >
         {/* left content mobile*/}
+        {/* h-[300px] md:h-[400px] lg:h-auto */}
         <div
           className={`lg:hidden
-            relative 
-            w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} xl:w-full
-            h-[300px] md:h-[400px] lg:h-auto
-            rounded-[8px] md:rounded-[10px]  lg:rounded-[8px]  xl:rounded-[12px] 
-            bg-[lightgray]  
-            bg-no-repeat 
-            lg:bg-[position:-300px_0px]  xl:bg-[position:-400px_0px]  2xl:bg-[position:-272.65px_0px]  
-            bg-cover
-            overflow-hidden
-            mt-12
-           ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}
-          style={{ backgroundImage: `url(${data?.bgMobileImage})` }}
+    relative 
+    w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} xl:w-full
+    aspect-[2880/1920]
+    rounded-md lg:rounded-lg xl:rounded-xl 
+    overflow-hidden
+    mt-12
+    ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}
           role="img"
           aria-label="Background image"
         >
+          {/* Background Image */}
+          <Image
+            src={data?.bgMobileImage} // fallback to avoid crash
+            alt="Background"
+            fill
+            className="object-cover object-center"
+            sizes="50vw"
+          />
+
           {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/10 " />
+          <div className="absolute inset-0 bg-black/10" />
         </div>
+
         {/* left content large*/}
+        {/* lg:bg-[position:-300px_0px]  xl:bg-[position:-400px_0px]  2xl:bg-[position:-272.65px_0px]   */}
         <div
           className={`hidden lg:block
             relative 
             w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} xl:w-full
             h-[300px] md:h-[400px] lg:h-auto
-            rounded-[8px] md:rounded-[10px]  lg:rounded-[8px]  xl:rounded-[12px] 
-            bg-[lightgray]  
-            bg-no-repeat 
-            lg:bg-[position:-300px_0px]  xl:bg-[position:-400px_0px]  2xl:bg-[position:-272.65px_0px]  
-            bg-cover
+            rounded-md lg:rounded-lg xl:rounded-xl 
             overflow-hidden
             mt-12
            ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}
-          style={{ backgroundImage: `url(${data?.bgImage})` }}
           role="img"
           aria-label="Background image"
         >
+          {/* Background Image */}
+          <Image
+            src={data?.bgImage} // fallback to avoid crash
+            alt="Background"
+            fill
+            className="object-cover object-center"
+            sizes="50vw"
+          />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black/10 " />
         </div>

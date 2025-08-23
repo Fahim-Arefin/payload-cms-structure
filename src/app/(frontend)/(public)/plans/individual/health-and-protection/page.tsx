@@ -10,7 +10,7 @@ function PlanPage() {
       subtitle: '',
       description:
         'Preventive care meets powerful protection. Let us be your financial shield you can count on. ',
-      image: '/assets/banners/health-and-protection-banner.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/health-and-protection-banner.jpg`,
       titleTop: '60%',
     },
   ]
@@ -21,18 +21,18 @@ function PlanPage() {
       biggerTitle: 'Accidental Coverage',
       description: 'Life’s detours aren’t always in your control — but recovery can be.',
       link: '/plans/individual/health-and-protection/accidental-coverage',
-      image: '/assets/solutions/individual/health-and-protection/web/accidental-coverage.jpg',
-      mobileImage:
-        '/assets/solutions/individual/health-and-protection/mobile/accidental-coverage.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/web/accidental-coverage.jpg`,
+      // mobileImage:
+      //   '/assets/solutions/individual/health-and-protection/mobile/accidental-coverage.jpg',
     },
     {
       title: 'Shanta',
       biggerTitle: 'Critical Protection',
       description: 'Coverage to help you heal- financially and fearlessly.',
       link: '/plans/individual/health-and-protection/critical-illness-coverage',
-      image: '/assets/solutions/individual/health-and-protection/web/critical-protection.jpg',
-      mobileImage:
-        '/assets/solutions/individual/health-and-protection/mobile/critical-protection.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/web/critical-protection.jpg`,
+      // mobileImage:
+      //   '/assets/solutions/individual/health-and-protection/mobile/critical-protection.jpg',
     },
   ]
 

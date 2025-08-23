@@ -11,7 +11,7 @@ export function CorporateClaim() {
            flex mx-auto mt-12`}
           >
             <div className="flex mx-auto">
-              <Link href="https://portal.shantalife.com/">
+              <Link href="https://portal.shantalife.com/" target="_blank">
                 <GlobalButton
                   variant="secondary"
                   className="w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[150px]

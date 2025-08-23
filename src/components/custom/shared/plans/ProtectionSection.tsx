@@ -5,6 +5,7 @@ import ToolTip from '../ToolTip'
 import Link from 'next/link'
 import GlobalTabButtons from '../GlobalTabButtons'
 import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
 
 type Props = {
   bgColor?: string
@@ -29,17 +30,21 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
           className={`lg:hidden
             relative 
             w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} xl:w-full
-            h-[250px] md:h-[350px] lg:h-[440px] xl:h-[600px] 2xl:h-[700px]
-            rounded-[8px] md:rounded-[10px] lg:rounded-[8px]  xl:rounded-[12px] 
-            bg-[lightgray]  
-            bg-no-repeat 
-           bg-cover lg:bg-center
+            aspect-[300/260] lg:aspect-auto lg:h-[440px] xl:h-[600px] 2xl:h-[700px]
+            rounded-md lg:rounded-lg  xl:rounded-xl 
             overflow-hidden
            ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}
-          style={{ backgroundImage: `url(${data?.bgMobileImage})` }}
           role="img"
           aria-label="Background image"
         >
+          {/* Image */}
+          <Image
+            fill
+            src={data?.bgMobileImage}
+            alt={data?.title}
+            className="object-center object-cover rounded-md lg:rounded-lg  xl:rounded-xl "
+            sizes="50vw"
+          />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black/10 " />
         </div>
@@ -50,16 +55,20 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
             relative 
             w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} xl:w-full
             h-[250px] md:h-[350px] lg:h-[440px] xl:h-[600px] 2xl:h-[700px]
-            rounded-[8px] md:rounded-[10px] lg:rounded-[8px]  xl:rounded-[12px] 
-            bg-[lightgray]  
-            bg-no-repeat 
-           bg-cover lg:bg-center
+            rounded-md lg:rounded-lg  xl:rounded-xl
             overflow-hidden
            ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}
-          style={{ backgroundImage: `url(${data?.bgImage})` }}
           role="img"
           aria-label="Background image"
         >
+          {/* Image */}
+          <Image
+            fill
+            src={data?.bgImage}
+            alt={data?.title}
+            className="object-center object-cover rounded-md lg:rounded-lg  xl:rounded-xl "
+            sizes="50vw"
+          />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black/10 " />
         </div>
@@ -94,12 +103,11 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
               rounded-[4px] lg:rounded-[6px] xl:rounded-[8px]"
             >
               <div
-                className="min-w-[35px] md:min-w-[40px] lg:min-w-[30px] xl:min-w-[40px] 2xl:min-w-[46px] 
+                className="relative min-w-[35px] md:min-w-[40px] lg:min-w-[30px] xl:min-w-[40px] 2xl:min-w-[46px] 
                            h-[35px] md:h-[40px] lg:h-[30px] xl:h-[40px] 2xl:h-[46px] 
                            "
               >
-                <img src={eachItem?.mobileImage} alt="icons" className="lg:hidden w-full h-full" />
-                <img src={eachItem?.image} alt="icons" className="hidden lg:block w-full h-full" />
+                <Image fill src={eachItem?.image} alt="icons" />
               </div>
               <div className="text-[12px] md:text-[14px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px] text-[#434343] font-semibold ">
                 {eachItem?.description}

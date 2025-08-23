@@ -555,7 +555,7 @@ export default function Navbar() {
             </Link> */}
             <Link href="/" aria-label="Home">
               <Image
-                src="/assets/logo/mainlogo_2.png"
+                src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/mainlogo_2.png`}
                 alt="Company logo"
                 width={75}
                 height={40}
@@ -681,7 +681,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center px-4 py-4 border-b">
           {/* <img src="/assets/logo/mainlogo_2.png" alt="logo" className="h-[40px]" /> */}
           <Image
-            src="/assets/logo/mainlogo_2.png"
+            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/mainlogo_2.png`}
             alt="Company logo"
             width={120} // adjust as needed
             height={40} // adjust as needed

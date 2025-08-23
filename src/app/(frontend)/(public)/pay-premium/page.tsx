@@ -12,80 +12,25 @@ function page() {
       title: 'Pay Premium',
       subtitle: '',
       description: 'Powering your protection starts here.',
-      image: '/assets/Pay-prem-2.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/Pay-prem-2.jpg`,
     },
   ]
 
-  const bkashData = {
-    // bgImage: '/assets/bkash-4.png',
+  const bankData = {
+    bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/paypremium/web/bank_teller.jpg`,
+    bgMobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/paypremium/mobile/bank_teller.jpg`,
     item: [
       {
         // image: '/assets/protection5.png',
-        descriptionContent: `<b>Step 1:</b></br> Log into your bKash account.`,
-      },
-      {
-        // image: '/assets/protection6.png',
-        descriptionContent: `<b>Step 2:</b></br>Go to “Payment” section and write “Shanta Life” or provide number “01332544799” and search.`,
-      },
-      {
-        descriptionContent: `<b>Step 3:</b></br>Write the Payable amount and proceed.`,
-      },
-      {
-        // image: '/assets/protection8.png',
-        descriptionContent: `<b>Step 4:</b> Write your Policy number or Full name in “Reference” field.`,
-      },
-      {
-        // image: '',
-        descriptionContent: `<b>Step 5:</b> Enter PIN and Proceed to pay.`,
-      },
-      {
-        // image: '',
-        descriptionContent: `<b>Step 6:</b> Upon successful transaction an acknowledgement SMS will
-        be sent to you along with the link to e-receipt the following
-        business day.`,
-      },
-    ],
-  }
-
-  const rocketData = {
-    // bgImage: '/assets/bkash-4.png', // (Replace with your Rocket background image path)
-    item: [
-      {
-        descriptionContent: `<b>Step 1:</b></br>Log into your Rocket account.`,
-      },
-      {
-        descriptionContent: `<b>Step 2:</b></br>Go to “Bill Pay” section and search by “5309”.`,
-      },
-      {
-        descriptionContent: `<b>Step 3:</b></br>Select “Shanta Life Insurance PLC”.`,
-      },
-      {
-        descriptionContent: `<b>Step 4:</b></br>Mention either the policy number or proposal number under the 'Bill No' section.`,
-      },
-      {
-        descriptionContent: `<b>Step 5:</b></br>Write the payable amount and submit.`,
-      },
-      {
-        descriptionContent: `<b>Step 6:</b></br>Upon successful transaction an acknowledgement SMS will be sent to you along with the link to e-receipt the following business day.`,
-      },
-    ],
-  }
-
-  const bankData = {
-    bgImage: '/assets/paypremium/web/bank_teller.jpg',
-    bgMobileImage: '/assets/paypremium/mobile/bank_teller.jpg',
-    item: [
-      {
-        image: '/assets/protection5.png',
         descriptionContent: '<b>Step 1:</b></br> Log into your Internet Banking',
       },
       {
-        image: '/assets/protection6.png',
+        // image: '/assets/protection6.png',
         descriptionContent:
           '<b>Step 2:</b></br>Go to the menu “Transfer Fund”. You can save the account details from “Add beneficiary” which will help you to smooth future payments as well. You may choose “One time transfer”, if your banking system have this option on their menu.',
       },
       {
-        image: '/assets/protection7.png',
+        // image: '/assets/protection7.png',
         descriptionContent: `<b>Step 3:</b></br>Give below details in respective fields of “Beneficiary details” page.</br>
           <ul class="list-disc ml-8">
             <li><b>Beneficiary Name –</b> XXXXX (provide your Policy Number in place of XXXXX)</li>
@@ -97,28 +42,18 @@ function page() {
           `,
       },
       {
-        image: '/assets/protection8.png',
+        // image: '/assets/protection8.png',
         descriptionContent: `<b>Step 4:</b> Write your full name in “Reference” field`,
       },
       {
-        image: '',
+        // image: '',
         descriptionContent: `<b>Step 5:</b> Upon successful transaction your payment will be received the following Bank business day.`,
       },
       {
-        image: '',
+        // image: '',
         descriptionContent: `<b>Step 6:</b> An acknowledgement SMS will be sent to you along with the link to e-receipt.`,
       },
     ],
-  }
-  const debitData = {
-    bgImage: '/assets/paypremium/web/eft-payment_1.jpg',
-    bgMobileImage: '/assets/paypremium/mobile/eft-payment_1.jpg',
-    content: `You can conveniently pay your premium using EFT (Electronic Funds Transfer) Debit Authorization. 
-    This secure and efficient method ensures that the premium amount is automatically debited from your designated bank account on the due date, 
-    eliminating the risk of missed payments and keeping your policy active without any hassle. 
-    By choosing EFT, you save time and effort, avoiding manual payments or late fees. 
-    To activate this service, simply complete the EFT Debit Authorization form and submit it to us with the required bank details. 
-    Stay worry-free about missing your premium deadlines!`,
   }
 
   const tabItems = [
@@ -132,6 +67,68 @@ function page() {
     },
   ]
 
+  const tabContent = {
+    bkash: {
+      item: [
+        {
+          descriptionContent: `<b>Step 1:</b></br> Log into your bKash account.`,
+        },
+        {
+          descriptionContent: `<b>Step 2:</b></br>Go to “Payment” section and write “Shanta Life” or provide number “01332544799” and search.`,
+        },
+        {
+          descriptionContent: `<b>Step 3:</b></br>Write the Payable amount and proceed.`,
+        },
+        {
+          descriptionContent: `<b>Step 4:</b> Write your Policy number or Full name in “Reference” field.`,
+        },
+        {
+          descriptionContent: `<b>Step 5:</b> Enter PIN and Proceed to pay.`,
+        },
+        {
+          descriptionContent: `<b>Step 6:</b> Upon successful transaction an acknowledgement SMS will
+        be sent to you along with the link to e-receipt the following
+        business day.`,
+        },
+      ],
+    },
+    rocket: {
+      item: [
+        {
+          descriptionContent: `<b>Step 1:</b></br>Log into your Rocket account.`,
+        },
+        {
+          descriptionContent: `<b>Step 2:</b></br>Go to “Bill Pay” section and search by “5309”.`,
+        },
+        {
+          descriptionContent: `<b>Step 3:</b></br>Select “Shanta Life Insurance PLC”.`,
+        },
+        {
+          descriptionContent: `<b>Step 4:</b></br>Mention either the policy number or proposal number under the 'Bill No' section.`,
+        },
+        {
+          descriptionContent: `<b>Step 5:</b></br>Write the payable amount and submit.`,
+        },
+        {
+          descriptionContent: `<b>Step 6:</b></br>Upon successful transaction an acknowledgement SMS will be sent to you along with the link to e-receipt the following business day.`,
+        },
+      ],
+    },
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/paypremium/mobile/bkash-roket.png`,
+    mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/paypremium/mobile/bkash-roket.png`,
+  }
+
+  const debitData = {
+    bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/paypremium/web/eft-payment_1.jpg`,
+    // bgMobileImage: '/assets/paypremium/mobile/eft-payment_1.jpg',
+    content: `You can conveniently pay your premium using EFT (Electronic Funds Transfer) Debit Authorization. 
+    This secure and efficient method ensures that the premium amount is automatically debited from your designated bank account on the due date, 
+    eliminating the risk of missed payments and keeping your policy active without any hassle. 
+    By choosing EFT, you save time and effort, avoiding manual payments or late fees. 
+    To activate this service, simply complete the EFT Debit Authorization form and submit it to us with the required bank details. 
+    Stay worry-free about missing your premium deadlines!`,
+  }
+
   return (
     <div className="font-avenir bg-white">
       <HeroSection
@@ -142,7 +139,7 @@ function page() {
       <BankSection align="right" data={bankData} />
       {/* <BkashSection align="left" bgColor="#FCF4EB" data={bkashData} />
       <RocketSection align="left" bgColor="#FCF4EB" data={rocketData} /> */}
-      <PaymentTab data={bkashData} rocketData={rocketData} config={tabItems} />
+      <PaymentTab config={tabItems} data={tabContent} />
       <DebitSection align="right" data={debitData} />
       <ContactUsSection />
     </div>
