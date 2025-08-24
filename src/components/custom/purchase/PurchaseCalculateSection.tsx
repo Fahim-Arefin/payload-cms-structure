@@ -21,9 +21,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
   scrollSignal,
   onCalculateAgain,
 }) => {
-  const [isCriticalIllness19Covered, setIsCriticalIllness19Covered] = useState<boolean>(false)
-  const [isCriticalIllness25Covered, setIsCriticalIllness25Covered] = useState<boolean>(false)
-  const [isAccidentCovered, setIsAccidentCovered] = useState<boolean>(false)
+  const [selectedCoverage, setSelectedCoverage] = useState<'ci19' | 'ci25' | 'accident' | null>(null)
   const sectionRef = useRef<HTMLDivElement>(null)
 
   const getPaymentModeKey = (paymentMode: string): keyof ApiResToShow['lifePremium'] => {
@@ -45,19 +43,19 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
   }
 
   const handleCriticalIllness19Toggle = () => {
-    setIsCriticalIllness19Covered(!isCriticalIllness19Covered)
+    setSelectedCoverage(selectedCoverage === 'ci19' ? null : 'ci19')
   }
 
   const handleCriticalIllness25Toggle = () => {
-    setIsCriticalIllness25Covered(!isCriticalIllness25Covered)
+    setSelectedCoverage(selectedCoverage === 'ci25' ? null : 'ci25')
   }
 
   // Click handler to toggle accident coverage
   const handleAccidentToggle = () => {
-    setIsAccidentCovered(!isAccidentCovered)
+    setSelectedCoverage(selectedCoverage === 'accident' ? null : 'accident')
   }
 
-  // Helper function to get the total premium including CI and accident coverage if added
+  // Helper function to get the total premium including selected coverage if any
   const getTotalPremiumWithCoverage = (paymentMode: string): number => {
     if (!apiResponse) return 0
 
@@ -65,11 +63,17 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
     const paymentKey = getPaymentModeKey(paymentMode)
 
     const lifePremium = premiums.lifePremium[paymentKey]
-    const ci19Premium = isCriticalIllness19Covered ? premiums.ciPremium[paymentKey] : 0
-    const ci25Premium = isCriticalIllness25Covered ? premiums.ci25Premium[paymentKey] : 0
-    const accidentPremium = isAccidentCovered ? premiums.accidentPremium[paymentKey] : 0
+    let additionalPremium = 0
 
-    return lifePremium + ci19Premium + ci25Premium + accidentPremium
+    if (selectedCoverage === 'ci19') {
+      additionalPremium = premiums.ciPremium[paymentKey]
+    } else if (selectedCoverage === 'ci25') {
+      additionalPremium = premiums.ci25Premium[paymentKey]
+    } else if (selectedCoverage === 'accident') {
+      additionalPremium = premiums.accidentPremium[paymentKey]
+    }
+
+    return lifePremium + additionalPremium
   }
 
   useEffect(() => {
@@ -277,7 +281,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                 onClick={handleCriticalIllness19Toggle}
               >
                 <>
-                  {isCriticalIllness19Covered ? 'Remove' : 'Add'}{' '}
+                  {selectedCoverage === 'ci19' ? 'Remove' : 'Add'}{' '}
                   {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
                   taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 19
                   Critical Illness!
@@ -354,7 +358,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                 onClick={handleCriticalIllness25Toggle}
               >
                 <>
-                  {isCriticalIllness25Covered ? 'Remove' : 'Add'}{' '}
+                  {selectedCoverage === 'ci25' ? 'Remove' : 'Add'}{' '}
                   {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ci25Premium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
                   taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 25
                   Critical Illness!
@@ -430,7 +434,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                   className="underline underline-offset-4 text-xs cursor-pointer hover:text-blue-600 transition-colors"
                   onClick={handleAccidentToggle}
                 >
-                  {isAccidentCovered
+                  {selectedCoverage === 'accident'
                     ? 'Remove accident coverage for'
                     : "Prone to accidents? Let's get you covered in"}{' '}
                   {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
