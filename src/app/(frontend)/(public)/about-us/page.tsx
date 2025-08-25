@@ -224,7 +224,7 @@ function page() {
       id: 1,
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/aboutusleaders/CEO.png`,
       // mobileImage: '/assets/about-us/mobile/aboutusleaders/CEO.png',
-      name: 'Nasif A Ahmed',
+      name: 'Nafis A Ahmed',
       title: 'Chief Executive Officer',
     },
     {
