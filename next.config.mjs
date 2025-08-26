@@ -43,6 +43,7 @@ const nextConfig = {
     deviceSizes: [350, 750, 828, 1080, 1200, 1520, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ['image/webp'],
+    // unoptimized: true, // ✅ disables Next.js/Vercel optimization
     // ✅ Remote image patterns
     remotePatterns: [
       {
