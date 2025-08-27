@@ -12,9 +12,10 @@ import Autoplay from 'embla-carousel-autoplay'
 
 type Props = {
   data: BenefitSliderSectionData
+  basis?: number
 }
 
-function BenefitSliderSection({ data }: Props) {
+function BenefitSliderSection({ data, basis }: Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
@@ -57,16 +58,18 @@ function BenefitSliderSection({ data }: Props) {
         {/* heading */}
         <div className="">
           <div className="flex space-x-2">
-            <h3 className="global-h3 uppercase font-bold text-[#434343]">{data?.title} </h3>{' '}
-            <h3 className="global-h3 uppercase font-bold text-[#ED7125]">{data?.coloredTitle}</h3>
+            <h3 className="global-h2 uppercase font-bold text-[#434343]">{data?.title} </h3>{' '}
+            <h3 className="global-h2 uppercase font-bold text-[#ED7125]">{data?.coloredTitle}</h3>
           </div>
-          <div className="global-span text-[#434343]">{data?.description}</div>
+          <div className="global-span text-[#434343] font-light">{data?.description}</div>
         </div>
         {/* carousal */}
         <Carousel
           className="w-full"
           setApi={setCarouselApi}
-          opts={{ dragFree: true }}
+          opts={{
+            dragFree: true,
+          }}
           plugins={[
             Autoplay({
               delay: sliderDelay,
@@ -77,9 +80,9 @@ function BenefitSliderSection({ data }: Props) {
             {data?.item?.map((item, index) => (
               <CarouselItem
                 key={index}
-                className="pl-1 
-               basis-1/2 md:basis-1/3 lg:basis-1/3
-              pr-1 lg:pr-2 xl:pr-6 2xl:pr-10"
+                className={`pl-1 
+               basis-1/2 md:basis-1/3 lg:basis-1/${basis}
+              pr-1 lg:pr-2 xl:pr-6 2xl:pr-10`}
                 onMouseEnter={() => setHoveredIdx(index)}
                 onMouseLeave={() => setHoveredIdx(null)}
               >

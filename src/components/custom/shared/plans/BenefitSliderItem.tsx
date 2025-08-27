@@ -50,7 +50,7 @@ function BenefitSliderItem({ data }: Props) {
         bg-[#3A3A3A]/20 backdrop-blur-[21.599998474121094px] rounded-md 
         px-2 py-2 lg:px-2 lg:py-2 xl:py-4 xl:px-3 
         w-full lg:w-[90%] xl:w-[80%] mx-auto
-        min-h-[30%] max-h-[50%] flex flex-col justify-between"
+        min-h-fit max-h-[50%] flex flex-col justify-between"
         >
           <p
             className="text-white transition-colors duration-500 

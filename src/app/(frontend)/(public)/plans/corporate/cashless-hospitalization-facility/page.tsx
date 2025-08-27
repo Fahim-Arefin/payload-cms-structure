@@ -46,8 +46,8 @@ function page() {
   }
 
   const WCTMSectionData = {
-    coloredTitle: 'Why Cashless',
-    title: 'Treatment Matters',
+    title: 'Why Cashless',
+    coloredTitle: 'Treatment Matters',
     description:
       'With medical costs rising, the cashless benefit ensures that your team can access quality healthcare instantly and stress-free. It removes the financial burden at the time of hospitalization and simplifies the entire claims process.  ',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/cashless-hospitalization-facility/web/WCTMImage.png`,

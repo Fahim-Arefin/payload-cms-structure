@@ -16,8 +16,10 @@ function WCTMSection({ data }: Props) {
       {/* heading */}
       <div className="">
         <div className="flex space-x-2">
-          <h3 className="global-h3 uppercase font-bold text-[#ED7125]">{data?.coloredTitle}</h3>{' '}
-          <h3 className="global-h3 uppercase font-bold text-[#434343]">{data?.title} </h3>
+          <h3 className="global-h2 uppercase font-bold text-[#434343]">{data?.title} </h3>
+          <h3 className="global-h2 uppercase font-bold text-[#ED7125]">
+            {data?.coloredTitle}
+          </h3>{' '}
         </div>
       </div>
 
