@@ -1,6 +1,7 @@
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import BenefitSliderSection from '@/components/custom/shared/plans/BenefitSliderSection'
 import CHFInfoSection from '@/components/custom/shared/plans/CHFInfoSection'
+import WCTMSection from '@/components/custom/shared/plans/WCTMSection'
 import React from 'react'
 
 function page() {
@@ -44,11 +45,21 @@ function page() {
     ],
   }
 
+  const WCTMSectionData = {
+    coloredTitle: 'Why Cashless',
+    title: 'Treatment Matters',
+    description:
+      'With medical costs rising, the cashless benefit ensures that your team can access quality healthcare instantly and stress-free. It removes the financial burden at the time of hospitalization and simplifies the entire claims process.  ',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/cashless-hospitalization-facility/web/WCTMImage.png`,
+    // image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/cashless-hospitalization-facility/web/CHFBgImage1.jpg`,
+  }
+
   return (
     <div className="font-avenir">
       <HeroSection heroSlides={heroSlides} top="top-[150px] md:top-[200px] lg:top-[45%]" />
       <CHFInfoSection data={descriptionHtml} />
       <BenefitSliderSection data={benefitSliderData} />
+      <WCTMSection data={WCTMSectionData} />
     </div>
   )
 }
