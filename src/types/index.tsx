@@ -303,3 +303,14 @@ export type PaymentTabDataType = {
   image: string
   mobileImage: string
 }
+
+export type BenefitSliderSectionData = {
+  title: string
+  coloredTitle: string
+  description: string
+  item: {
+    bgImage: string
+    icon: string
+    description: string
+  }[]
+}
