@@ -1,80 +1,57 @@
-'use client'
-
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
 import { BankingFacilitiesDataType } from '@/types'
-import BankingCard from './BankingCard'
-import { useEffect, useState } from 'react'
-import CarouselNavButtons from '../CarousalNavButtons'
+import Image from 'next/image'
+import React from 'react'
 
-type Props = { data: BankingFacilitiesDataType[] }
+type Props = {
+  data: BankingFacilitiesDataType
+}
 
 function BankingFacilities({ data }: Props) {
-  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
-  const [canScrollPrev, setCanScrollPrev] = useState(false)
-  const [canScrollNext, setCanScrollNext] = useState(false)
-
-  useEffect(() => {
-    if (!carouselApi) return
-
-    const updateScrollButtons = () => {
-      setCanScrollPrev(carouselApi.canScrollPrev())
-      setCanScrollNext(carouselApi.canScrollNext())
-    }
-
-    updateScrollButtons()
-    carouselApi.on('select', updateScrollButtons)
-
-    return () => {
-      carouselApi.off('select', updateScrollButtons)
-    }
-  }, [carouselApi])
   return (
     <div
-      className="container-padding bg-[#FCF4EB] min-h-[350px] md:min-h-[500px]
-    space-y-6 md:space-y-12 lg:space-y-20 xl:space-y-24"
+      className="bg-[#F6EDDD]
+           px-5 py-12 
+           md:p-24 
+           lg:px-[100px]  lg:py-[100px] 
+           xl:px-[200px]  xl:py-[100px] 
+           2xl:px-[300px] 2xl:py-[150px]
+           space-y-4 md:space-y-10 lg:space-y-12"
     >
-      {/* heading */}
+      {/* headers */}
       <div>
-        <h3 className="global-h1 uppercase font-medium text-[#434343]">Banking Facilities</h3>
-        <div className="flex space-x-2">
-          <h3 className="global-h1 uppercase font-medium text-[#434343]">Protected under </h3>
-          <h3 className="global-h1 uppercase font-medium text-[#ED7125]">Life Insurance</h3>
-        </div>
+        <h1 className="global-h1 font-medium">{data?.title}</h1>
+        <h1 className="global-h1 text-[#ED7125] font-medium">{data?.coloredTitle}</h1>
       </div>
-      {/* carousal */}
-      <Carousel className="w-full" setApi={setCarouselApi}>
-        <CarouselContent className="-ml-1">
-          {data?.map((item, index) => (
-            <CarouselItem
-              key={index}
-              className="pl-1 
-               basis-1/2 md:basis-1/3 lg:basis-1/4
-              pr-1 lg:pr-2 xl:pr-6 2xl::pr-10"
-            >
-              <BankingCard data={item} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        {/* Carousel Navigation */}
-        <div
-          className="flex gap-2 absolute h-fit
-            inset-x-0 justify-center lg:justify-end -bottom-16 md:-bottom-20 lg:-top-10 xl:-top-12 2xl:-top-14 lg:right-0"
-        >
-          <CarouselNavButtons
-            onPrev={() => carouselApi?.scrollPrev()}
-            onNext={() => carouselApi?.scrollNext()}
-            hasPrev={canScrollPrev}
-            hasNext={canScrollNext}
+      <div
+        className="grid grid-cols-1 lg:grid-cols-2 
+      gap-4 md:gap-10 lg:gap-16 xl:gap-20 2xl:gap-28"
+      >
+        {/* left side */}
+        <div className="relative aspect-video lg:aspect-square rounded-md lg:rounded-lg xl:rounded-xl">
+          <Image
+            src={data?.bancassuranceProductsImage}
+            alt="Bancassurance ProductsImage"
+            fill
+            className="rounded-md lg:rounded-lg xl:rounded-xl object-center object-cover"
+            sizes="(max-width:1023px) 400px,700px"
           />
         </div>
-      </Carousel>
+        {/* right side */}
+        <div className="flex flex-col justify-between space-y-2 md:space-y-4 lg:space-y-0">
+          {data?.bancassuranceProducts?.map((item, i) => (
+            <div className="flex items-center space-x-8 " key={i}>
+              <div
+                className="
+              w-[40px] md:w-[50px] lg:w-[60px] xl:w-[70px] 2xl:w-[80px]
+              h-[40px] md:h-[50px] lg:h-[60px] xl:h-[70px] 2xl:h-[80px] "
+              >
+                <img src={item?.image} alt={item?.description} className="w-full h-full" />
+              </div>
+              <div className="global-p1 font-semibold text-[#3A3A3A]">{item?.description}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
