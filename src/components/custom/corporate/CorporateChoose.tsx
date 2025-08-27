@@ -91,8 +91,12 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
 
                 {/* TEXT */}
                 <div className="flex flex-col gap-2">
-                  <p className="uppercase text-left global-p1 text-[#434342]">{item?.text}</p>
-                  <p className="uppercase global-p2 text-[#434342]">{item?.description}</p>
+                  <p className="uppercase text-left global-p1 font-medium text-[#434342]">
+                    {item?.text}
+                  </p>
+                  <p className="uppercase global-p2 text-[#434342]">
+                    {item?.description}
+                  </p>
                 </div>
               </div>
             ))}
