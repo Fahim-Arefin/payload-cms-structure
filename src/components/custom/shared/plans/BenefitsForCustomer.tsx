@@ -73,6 +73,8 @@ function BenefitsForCustomer({ data }: Props) {
             fill
             src={data?.bancassuranceProductsImage}
             alt={data?.title}
+            // placeholder="blur"
+            // blurDataURL=""
             className="object-center object-cover rounded-md lg:rounded-lg  xl:rounded-xl "
             sizes="50vw"
           />
