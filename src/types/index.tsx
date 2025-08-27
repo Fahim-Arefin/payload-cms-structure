@@ -176,7 +176,15 @@ export type PartnerType = {
   title: string
 }
 
-export type BankingFacilitiesDataType = Pick<AllPlantDataType, 'description' | 'image'>
+export type BankingFacilitiesDataType = {
+  title: string
+  coloredTitle: string
+  bancassuranceProductsImage: string
+  bancassuranceProducts: {
+    image: string
+    description: string
+  }[]
+}
 
 export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
