@@ -57,7 +57,7 @@ function page() {
   }
 
   const WCTMSectionData = {
-    title: 'Why ',
+    title: 'Why',
     coloredTitle: 'It Matters',
     description:
       'By offering an integrated healthcare solution, employers can ensure that their workforce has easy access to quality healthcare services, reducing downtime and enhancing overall well-being.',
@@ -68,7 +68,11 @@ function page() {
     <div className="font-avenir">
       <HeroSection heroSlides={heroSlides} top="top-[150px] md:top-[200px] lg:top-[45%]" />
       <CHFInfoSection data={descriptionHtml} />
-      <BenefitSliderSection data={benefitSliderData} basis={benefitSliderData?.item?.length} />
+      <BenefitSliderSection
+        data={benefitSliderData}
+        basis=" basis-1/2 md:basis-1/3 lg:basis-1/4"
+        bgColor="bg-white"
+      />
       <WCTMSection data={WCTMSectionData} />
     </div>
   )

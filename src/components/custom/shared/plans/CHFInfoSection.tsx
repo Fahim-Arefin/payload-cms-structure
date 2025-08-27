@@ -49,7 +49,7 @@ function CHFInfoSection({ data }: Props) {
 
         {/* Render HTML content with Tailwind Typography's prose class */}
         <div
-          className="prose prose-neutral max-w-none text-white global-span" // Apply prose styling to rich text
+          className="prose prose-neutral max-w-none text-white global-p1 font-light" // Apply prose styling to rich text
           dangerouslySetInnerHTML={{ __html: data?.description }}
         />
       </div>

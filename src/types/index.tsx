@@ -312,5 +312,6 @@ export type BenefitSliderSectionData = {
     bgImage: string
     icon: string
     description: string
+    rateText?: string
   }[]
 }

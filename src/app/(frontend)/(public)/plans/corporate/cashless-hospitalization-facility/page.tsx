@@ -58,7 +58,7 @@ function page() {
     <div className="font-avenir">
       <HeroSection heroSlides={heroSlides} top="top-[150px] md:top-[200px] lg:top-[45%]" />
       <CHFInfoSection data={descriptionHtml} />
-      <BenefitSliderSection data={benefitSliderData} />
+      <BenefitSliderSection data={benefitSliderData} bgColor="bg-white" />
       <WCTMSection data={WCTMSectionData} />
     </div>
   )

@@ -8,6 +8,7 @@ type Props = {
     bgImage: string
     icon: string
     description: string
+    rateText?: string
   }
 }
 
@@ -19,7 +20,7 @@ function BenefitSliderItem({ data }: Props) {
         src={data?.bgImage}
         alt={data?.description}
         fill
-        className="inset-0 rounded-md"
+        className="inset-0 rounded-md object-cover object-center "
         sizes="(max-width: 767px) 150px,(max-width: 1349px) 350px, 600px"
       />
       {/* Gradient overlay */}
@@ -39,24 +40,38 @@ function BenefitSliderItem({ data }: Props) {
         {/* hover:bg-[#9C8639]/60 */}
         <div
           className="transition-transform duration-300 group-hover:scale-105
-         w-[40px] lg:w-[50px] xl:w-[80px] 
-         h-[40px] lg:h-[50px] xl:h-[80px] "
+         w-[60px] md:w-[70px] lg:w-[80px] xl:w-[90px] 2xl:w-[100px] 
+         h-[60px] md:h-[70px] lg:h-[80px] xl:h-[90px] 2xl:h-[100px] "
         >
           <img src={data?.icon} alt={data?.description} className="h-full w-full object-contain" />
         </div>
 
         <div
           className="
-        bg-[#3A3A3A]/20 backdrop-blur-[21.599998474121094px] rounded-md 
-        px-2 py-2 lg:px-2 lg:py-2 xl:py-4 xl:px-3 
+        bg-[#3A3A3A]/20 backdrop-blur-[21.599998474121094px] rounded-sm md:rounded-md 
+        p-2
         w-full lg:w-[90%] xl:w-[80%] mx-auto
         min-h-fit max-h-[50%] flex flex-col justify-between"
         >
           <p
             className="text-white transition-colors duration-500 
-         text-[10px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text-center uppercase font-light"
+         global-p2 text-center uppercase font-light"
           >
             {data?.description}
+          </p>
+        </div>
+        <div
+          className="
+        bg-[#3A3A3A]/20 backdrop-blur-[21.599998474121094px] rounded-[2px] md:rounded-sm
+       p-2 
+        w-full lg:w-[90%] xl:w-[80%] mx-auto
+        min-h-fit max-h-[50%] flex flex-col justify-between"
+        >
+          <p
+            className="text-white transition-colors duration-500 
+         global-p2 text-center uppercase font-light"
+          >
+            {data?.rateText}
           </p>
           {/* <Button
             variant="link"

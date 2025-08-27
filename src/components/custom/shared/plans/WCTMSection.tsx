@@ -8,11 +8,12 @@ type Props = {
     description: string
     image: string
   }
+  className?: string
 }
 
-function WCTMSection({ data }: Props) {
+function WCTMSection({ data, className }: Props) {
   return (
-    <div className="container-padding space-y-6 font-avenir">
+    <div className={`container-padding space-y-6 font-avenir ${className}`}>
       {/* heading */}
       <div className="">
         <div className="flex space-x-2">

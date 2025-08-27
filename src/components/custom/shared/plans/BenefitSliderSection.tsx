@@ -12,10 +12,11 @@ import Autoplay from 'embla-carousel-autoplay'
 
 type Props = {
   data: BenefitSliderSectionData
-  basis?: number
+  basis?: string
+  bgColor?: string
 }
 
-function BenefitSliderSection({ data, basis }: Props) {
+function BenefitSliderSection({ data, basis, bgColor }: Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
@@ -53,7 +54,7 @@ function BenefitSliderSection({ data, basis }: Props) {
   }, [carouselApi])
 
   return (
-    <div className="container-padding bg-white">
+    <div className={`container-padding ${bgColor ? bgColor : ''} `}>
       <div className="space-y-6 md:space-y-10 lg:space-y-12 xl:space-y-16">
         {/* heading */}
         <div className="">
@@ -67,9 +68,6 @@ function BenefitSliderSection({ data, basis }: Props) {
         <Carousel
           className="w-full"
           setApi={setCarouselApi}
-          opts={{
-            dragFree: true,
-          }}
           plugins={[
             Autoplay({
               delay: sliderDelay,
@@ -81,7 +79,7 @@ function BenefitSliderSection({ data, basis }: Props) {
               <CarouselItem
                 key={index}
                 className={`pl-1 
-               basis-1/2 md:basis-1/3 lg:basis-1/${basis}
+               ${basis ? basis : ' basis-1/2 md:basis-1/3 lg:basis-1/3'} 
               pr-1 lg:pr-2 xl:pr-6 2xl:pr-10`}
                 onMouseEnter={() => setHoveredIdx(index)}
                 onMouseLeave={() => setHoveredIdx(null)}
