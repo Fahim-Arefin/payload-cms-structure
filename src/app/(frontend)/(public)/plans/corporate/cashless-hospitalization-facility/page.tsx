@@ -1,6 +1,7 @@
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import BenefitSliderSection from '@/components/custom/shared/plans/BenefitSliderSection'
 import CHFInfoSection from '@/components/custom/shared/plans/CHFInfoSection'
+import OurService from '@/components/custom/shared/plans/OurService'
 import WCTMSection from '@/components/custom/shared/plans/WCTMSection'
 import React from 'react'
 
@@ -60,6 +61,7 @@ function page() {
       <CHFInfoSection data={descriptionHtml} />
       <BenefitSliderSection data={benefitSliderData} bgColor="bg-white" />
       <WCTMSection data={WCTMSectionData} />
+      <OurService />
     </div>
   )
 }

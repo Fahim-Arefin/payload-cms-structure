@@ -4,9 +4,10 @@ import { TabDataType } from '@/types'
 
 type Props = {
   data: TabDataType
+  bgColor?: string
 }
 
-function MapSection({ data }: Props) {
+function MapSection({ data, bgColor }: Props) {
   // 🗺️ Logic for map
   const isIframe = data?.content[0]?.office_location.trim().startsWith('<iframe')
   const isShortLink = data?.content[0]?.office_location.trim().startsWith('https://maps.app.goo.gl')
@@ -19,8 +20,8 @@ function MapSection({ data }: Props) {
 
   return (
     <div
-      className="bg-white lg:bg-[#FFF8F2] w-full 
-    pb-6 md:pb-12 lg:pb-16"
+      className={` ${bgColor ? bgColor : 'bg-white lg:bg-[#FFF8F2]'}  w-full 
+    pb-6 md:pb-12 lg:pb-16`}
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12">
         {/* Left Column - Contact Info */}
@@ -43,14 +44,27 @@ function MapSection({ data }: Props) {
 
           <div className="flex items-center space-x-1 lg:space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
             <div className="w-4 h-4 flex items-center justify-center">
-              <img className="lg:hidden w-4 h-4" src="/assets/supportpage/mobile/phone.png" alt="" />
-              <img className="hidden lg:block w-4 h-4" src="/assets/supportpage/web/phone.png" alt="" />
+              <img
+                className="lg:hidden w-4 h-4"
+                src="/assets/supportpage/mobile/phone.png"
+                alt=""
+              />
+              <img
+                className="hidden lg:block w-4 h-4"
+                src="/assets/supportpage/web/phone.png"
+                alt=""
+              />
             </div>
             <p>{data?.content[0]?.office_phone}</p>
           </div>
           <div className="flex items-center space-x-1 lg:space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
             <div className="w-4 h-4 flex items-center justify-center">
-              <svg className="w-4 h-4 text-[#434343]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                className="w-4 h-4 text-[#434343]"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
               </svg>

@@ -1,4 +1,8 @@
+import { Button } from '@/components/ui/button'
 import { OfferDataType } from '@/types'
+import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 type Props = {
   data: OfferDataType
@@ -6,13 +10,14 @@ type Props = {
 
 function AddonsCard({ data }: Props) {
   return (
-    <div
-      className="relative z-30 bg-cover bg-no-repeat bg-center overflow-hidden
-            rounded-[4px] lg:rounded-[6px]"
-      style={{
-        backgroundImage: `url(${data?.bgImage})`,
-      }}
-    >
+    <div className=" relative z-30 overflow-hidden rounded-md">
+      <Image
+        src={data?.bgImage}
+        alt={data?.description}
+        fill
+        className="inset-0 rounded-md object-cover object-center "
+        sizes="(max-width: 767px) 150px,(max-width: 1349px) 350px, 600px"
+      />
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#0000004D] to-[#0000004D]/60 z-0" />
 
@@ -30,23 +35,40 @@ function AddonsCard({ data }: Props) {
       >
         {/* hover:bg-[#9C8639]/60 */}
         <div
-          className="transition-transform duration-500 group-hover:scale-105
-         w-[40px] lg:w-[50px] xl:w-[80px] 
-         h-[40px] lg:h-[50px] xl:h-[80px] "
+          className="transition-transform duration-300 group-hover:scale-105
+          w-[60px] md:w-[70px] lg:w-[80px] xl:w-[90px] 2xl:w-[100px] 
+         h-[60px] md:h-[70px] lg:h-[80px] xl:h-[90px] 2xl:h-[100px] "
         >
           <img src={data?.image} alt={data?.description} className="h-full w-full object-contain" />
         </div>
 
-        <p className="text-white group-hover:text-white global-p1 font-light text-left transition-colors duration-500">
+        {/* <p className="text-white group-hover:text-white global-p1 font-light text-center transition-colors duration-500">
           {data?.description}
-        </p>
-        {/* <span
-          className="text-[12px] text-white underline underline-offset-4 opacity-0
-             group-hover:opacity-100
-             transition-all duration-500 ease-in font-medium mx-auto"
+        </p> */}
+        <div
+          className="
+        bg-[#3A3A3A]/20 backdrop-blur-[21.599998474121094px] rounded-sm md:rounded-md 
+        p-2
+        w-full lg:w-[90%] xl:w-[80%] mx-auto
+        min-h-fit max-h-[50%] flex flex-col justify-between"
         >
-          <span>Explore Now</span>
-        </span> */}
+          <p
+            className="text-white transition-colors duration-500 
+         global-p2 text-center uppercase font-light"
+          >
+            {data?.description}
+          </p>
+          <Button
+            variant="link"
+            className="text-[#ED7125] hover:underline w-fit mx-auto 
+            text-[10px] md:text-[12px] p-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-linear"
+          >
+            <Link href={data?.link ? data?.link : ''} className="flex space-x-1 items-center ">
+              <div>Explore Now</div>
+              <ArrowUpRight />
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   )

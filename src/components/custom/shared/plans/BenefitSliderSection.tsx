@@ -68,11 +68,11 @@ function BenefitSliderSection({ data, basis, bgColor }: Props) {
         <Carousel
           className="w-full"
           setApi={setCarouselApi}
-          plugins={[
-            Autoplay({
-              delay: sliderDelay,
-            }),
-          ]}
+          // plugins={[
+          //   Autoplay({
+          //     delay: sliderDelay,
+          //   }),
+          // ]}
         >
           <CarouselContent className="-ml-1">
             {data?.item?.map((item, index) => (

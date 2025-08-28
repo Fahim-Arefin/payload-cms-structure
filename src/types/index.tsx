@@ -188,6 +188,7 @@ export type BankingFacilitiesDataType = {
 
 export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
+  link?: string
 }
 
 export type OfferDataType2 = Pick<AllPlantDataType, 'description' | 'image'> & {
