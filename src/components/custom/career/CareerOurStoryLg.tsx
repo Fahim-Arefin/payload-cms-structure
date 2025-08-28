@@ -51,7 +51,7 @@ const CareerOurStoryLg: FC<CareerOurStoryLgProps> = ({ data }) => {
                   {/* Play Button */}
                   <div className="absolute -bottom-0 lg:-bottom-0.5 xl:-bottom-2 -right-0 lg:-right-1 xl:-right-1">
                     <img
-                      src="/assets/play2.svg"
+                      src="/assets/icons/web/play3.svg"
                       alt=""
                       className="w-[65px] lg:w-[80px] xl:w-[100px]  
                   h-[65px] lg:h-[80px] xl:h-[100px]"
