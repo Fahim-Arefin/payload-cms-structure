@@ -29,22 +29,22 @@ const CorporateOfferings: FC<CorporateOfferingsProps> = ({}) => {
   return (
     <div className="container-padding">
       {/* Title */}
-      <h1 className="global-h1 font-semibold uppercase mb-10">
+      <h1 className="global-h1 font-semibold uppercase mb-0 lg:mb-10">
         Our <span className="text-[#ED7125]">Offerings</span>
       </h1>
 
-      <div className="flex flex-col md:flex-row gap-8 w-full justify-between">
+      <div className="flex flex-col md:flex-row gap-0 md:gap-4 lg:gap-8 w-full justify-between">
         {insuranceCards.map((card, idx) => (
           <div
             key={card.title}
-            className="flex-1 bg-white rounded-xl px-2 py-6 flex flex-col gap-4"
+            className="flex-1 bg-white rounded-xl px-0 md:px-2 mt-4 flex flex-col gap-4"
           >
-            <div className="text-[#ED7125] global-h4 font-bold mb-2">{card.title}:</div>
+            <div className="text-[#ED7125] global-h2 md:global-h4 font-bold">{card.title}:</div>
             <ul className="space-y-4">
               {card.items.map((item) => (
                 <li
                   key={item}
-                  className="text-[#434342] text-base font-medium text-left leading-6 pl-3 border-l-4 border-[#ED7125] rounded"
+                  className="text-[#434342] text-sm md:text-base font-medium text-left leading-6 pl-3 border-l-4 border-[#ED7125] rounded"
                 >
                   {item}
                 </li>

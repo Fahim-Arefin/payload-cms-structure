@@ -18,14 +18,11 @@ function CorporateSuitability({ data }: Props) {
       style={{
         background: `linear-gradient(0deg, rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.20)), 
            linear-gradient(0deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.20)), 
-           url('/assets/suitabilityBanner.jpg') 30% top/cover no-repeat, 
+           url('${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/suitabilityBanner.jpg') 30% top/cover no-repeat, 
            linear-gradient(0deg, rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.20)), 
            #F6EDDD`,
       }}
     >
-      
-
-      
       {/* Title */}
       <h1 className="global-h1 font-semibold uppercase mb-10 text-white">
         <span className="text-[#ED7125]">SUITABILITY</span> STANDARDS
@@ -36,7 +33,7 @@ function CorporateSuitability({ data }: Props) {
         {data.map((item: SuitabilityCardType, index: number) => (
           <div
             key={index}
-            className="rounded-xl px-4 py-6 lg:px-10 lg:py-12 flex flex-col gap-6 xl:gap-10
+            className="rounded-xl px-4 py-6 lg:px-10 lg:py-12 flex flex-col gap-2 md:gap-6 xl:gap-10
                        bg-[#43434333] backdrop-blur-[16.666666px] border border-white"
           >
             <div className="w-[44px] h-[44px] lg:w-[118px] lg:h-[118px]">
@@ -49,7 +46,6 @@ function CorporateSuitability({ data }: Props) {
           </div>
         ))}
       </div>
-    
     </div>
   )
 }
