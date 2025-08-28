@@ -1,8 +1,7 @@
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import BenefitSliderSection from '@/components/custom/shared/plans/BenefitSliderSection'
 import CHFInfoSection from '@/components/custom/shared/plans/CHFInfoSection'
+import KeyBenefits from '@/components/custom/shared/plans/KeyBenefits'
 import WCTMSection from '@/components/custom/shared/plans/WCTMSection'
-import React from 'react'
 
 function page() {
   const heroSlides = [
@@ -29,12 +28,33 @@ function page() {
       'All eligible employees and their covered dependents under Shanta Life’s Group Health Insurance Plan are eligible to use the Telemedicine platform, free of charge.',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/telemedicine-services/web/WCTMImage.jpg`,
   }
+  const keyBenefitsData = {
+    title: 'Key Benefits of',
+    coloredTitle: 'Telemedicine with Shanta Life',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/telemedicine-services/web/keybenefit.webp`,
+    description: 'Enjoy the facilities you deserve without breaking the bank.',
+    items: [
+      {
+        title: 'Instant Doctor Access',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/telemedicine-services/web/keybenefitIIcon1.png`,
+      },
+      {
+        title: '24/7 Availability',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/telemedicine-services/web/keybenefitIIcon2.png`,
+      },
+      {
+        title: 'E-Prescriptions',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/telemedicine-services/web/keybenefitIIcon3.png`,
+      },
+    ],
+  }
 
   return (
     <div className="font-avenir">
       <HeroSection heroSlides={heroSlides} top="top-[150px] md:top-[200px] lg:top-[45%]" />
       <CHFInfoSection data={descriptionHtml} />
       <WCTMSection data={WCTMSectionData} className="bg-white" />
+      <KeyBenefits data={keyBenefitsData} />
     </div>
   )
 }
