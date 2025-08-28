@@ -4,6 +4,7 @@ import GlobalButton from '../shared/GlobalButton'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import ToolTip from '../shared/ToolTip'
+import Image from 'next/image'
 
 type Benefit = {
   icon: string
@@ -36,15 +37,21 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
             <div key={idx} className="flex items-center gap-4 xl:gap-6 xl:px-6">
               {/* ICON */}
               <div
-                className="
-                  w-[40px] h-[40px]
-                  md:w-[60px] md:h-[60px]
+                className="w-[40px] h-[40px] md:w-[60px] md:h-[60px]
                   lg:w-[80px] lg:h-[80px]
                   2xl:w-[115px] 2xl:h-[115px]
                   shrink-0 flex-none
+                  relative
+                  aspect-[1/1]
                 "
               >
-                <img src={item.icon} alt={`icon-${idx}`} className="w-full h-full object-contain" />
+                <Image
+                  src={item.icon}
+                  alt={`icon-${idx}`}
+                  fill
+                  sizes="( max-width: 767px) 40px, (max-width: 1023px) 60px, (max-width: 1279px) 80px, 115px"
+                  className="w-full h-full object-contain"
+                />
               </div>
 
               {/* TEXT */}
@@ -59,21 +66,25 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
         </div>
 
         {/* Left image */}
-        <div className="">
-          <img
+        <div className="relative w-full lg:h-[660px] xl:h-[820px] 2xl:h-[950px]">
+          <Image
             src="/assets/DesignatedDeliverBanner.jpg"
             alt="benefits Image"
-            className="w-full lg:h-[660px] xl:h-[820px] 2xl:h-[950px] object-cover rounded-md"
+            fill
+            className="rounded-md object-cover"
+            // sizes="(max-width: 767px) 100vw, (max-width: 1023px) 100vw, (max-width: 1349px) 100vw, 100vw"
           />
         </div>
       </div>
 
       {/* Mobile */}
-      <div className="relative block lg:hidden w-full">
-        <img
+      <div className="relative block lg:hidden w-full h-[540px]">
+        <Image
           src="/assets/DesignatedDeliverBanner.jpg"
           alt="Mobile Background"
-          className="w-full h-[540px] object-cover"
+          fill
+          sizes="(max-width: 767px) 540px"
+          className="object-cover"
         />
 
         <div className="absolute bottom-0 left-0 right-0 px-4 pb-6">
@@ -91,7 +102,9 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
 
                 {/* TEXT */}
                 <div className="flex flex-col gap-2">
-                  <p className="uppercase text-left global-p1 text-[#434342]">{item?.text}</p>
+                  <p className="uppercase text-left global-p1 font-medium text-[#434342]">
+                    {item?.text}
+                  </p>
                   <p className="uppercase global-p2 text-[#434342]">{item?.description}</p>
                 </div>
               </div>

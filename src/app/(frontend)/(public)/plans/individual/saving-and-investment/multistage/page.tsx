@@ -21,13 +21,13 @@ const page: FC<Props> = ({}) => {
       subtitle: '',
       description: `Since life has more than one milestone, 
       we’re with you at each one.`,
-      image: '/assets/banners/multistage.png',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/multi-stage/web/multistage.png`,
     },
   ]
 
   const planInfoData = {
-    image: '/assets/multistagePlan.png',
-    mobileImage: '/assets/multistagePlan.png',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/multi-stage/web/multistagePlan.png`,
+    mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/multi-stage/mobile/multistagePlan.png`,
     description: `Some dreams can’t wait. 
       Whether it’s funding your child’s education, celebrating a life event, or building a safety net for the 
       future—Shanta Life’s Multi-Stage Maturity Plan is your financial partner through it all. 

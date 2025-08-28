@@ -16,7 +16,7 @@ function page({}: Props) {
       title: 'Shanta Corporate Plans',
       subtitle: '',
       description: 'When you go further for your people, they go further for you.',
-      image: '/assets/corporateHeroBanner.jpg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/corporateHeroBanner.jpg`,
     },
   ]
 
@@ -28,35 +28,35 @@ function page({}: Props) {
 
   const benefitsData = [
     {
-      icon: '/assets/choose1.svg',
+      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/choose1.svg`,
       text: 'Comprehensive Coverage',
       description:
         'Protection that spans natural demise, accidental fatalities, disabilities, and major health conditions. ',
     },
     {
-      icon: '/assets/choose2.svg',
+      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/choose2.svg`,
       text: 'Hospital network 24/7 Online Doctor Consultancy Service',
       description:
         'All-around healthcare support—covering hospitalization, maternity, dental, optical, and more.',
     },
     {
-      icon: '/assets/choose3.svg',
+      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/choose3.svg`,
       text: 'Online Claim Settlement Facility',
       description: 'Smart and seamless claims support system with instant cashless access.',
     },
     {
-      icon: '/assets/choose4.svg',
+      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/choose4.svg`,
       text: 'Global Care Access',
       description: 'Intelligent healthcare coverage—seamlessly bridging local and global support.',
     },
     {
-      icon: '/assets/choose5.svg',
+      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/choose5.svg`,
       text: 'Dedicated Account Management',
       description:
         'Enhance retention with data-backed care solutions, managed by a team of dedicated experts.',
     },
     {
-      icon: '/assets/corporate-bullet.png',
+      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/corporate-bullet.png`,
       text: 'Lifestyle Benefits',
       description: 'Lifestyle Benefit and Discount facility with the Willingness Pass.',
     },
@@ -64,13 +64,13 @@ function page({}: Props) {
 
   const suitabilityData = [
     {
-      img: '/assets/standard1.svg',
+      img: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/standard1.svg`,
       title: 'FOR LIFE COVERAGE',
       description:
         'All regular, healthy employees aged 18 to 64 are eligible for coverage. New hires receive instant protection from day one, ensuring seamless and hassle-free security from the very start of their journey with your company.',
     },
     {
-      img: '/assets/standard2.svg',
+      img: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/standard2.svg`,
       title: 'FOR HEALH COVERAGE',
       description:
         'All eligible employees qualify for this coverage. Extending it to their dependents adds another layer of support, demonstrating a strong commitment not only to the employee but also to their family—fostering security, care, and well-being for the entire household.',
@@ -121,24 +121,24 @@ function page({}: Props) {
 
   const addOnsData = [
     {
-      image: '/assets/addonIcon1.svg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addonIcon1.svg`,
       description: 'Integrated Healthcare and Diagnostic Network',
-      bgImage: '/assets/addons1.jpg',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addons1.jpg`,
     },
     {
-      image: '/assets/addonIcon2.svg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addonIcon2.svg`,
       description: 'Exclusive Discounts on Lifestyle Amenities ',
-      bgImage: '/assets/addons5.jpg',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addons5.jpg`,
     },
     {
-      image: '/assets/addonIcon3.svg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addonIcon3.svg`,
       description: 'Digital Loyalty Card ',
-      bgImage: '/assets/addons3.jpg',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addons3.jpg`,
     },
     {
-      image: '/assets/addonIcon4.svg',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addonIcon4.svg`,
       description: 'Telemedicine Service',
-      bgImage: '/assets/addons4.jpg',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addons4.jpg`,
     },
     // {
     //   image: '/assets/addonIcon1.svg',
