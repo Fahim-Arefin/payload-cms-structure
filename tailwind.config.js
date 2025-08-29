@@ -99,6 +99,28 @@ export default {
       backdropBlur: {
         15: '15px',
       },
+      // typography: {
+      //   DEFAULT: {
+      //     css: {
+      //       // Unordered list (ul) styles
+      //       ul: {
+      //         paddingLeft: '1.5rem', // Add left padding to unordered lists
+      //         listStyleType: 'disc', // Bullets for unordered lists
+      //       },
+      //       // Ordered list (ol) styles
+      //       ol: {
+      //         paddingLeft: '1.5rem', // Add left padding to ordered lists
+      //         listStyleType: 'decimal', // Numbers for ordered lists
+      //       },
+      //       // List items (li) styling within ul or ol
+      //       'ul li, ol li': {
+      //         colors:whi,
+      //         marginBottom: '0.25rem', // Space between list items
+      //         lineHeight: '1.6', // Line height for readability
+      //       },
+      //     },
+      //   },
+      // },
     },
     screens: {
       sm: '640px',
@@ -111,5 +133,5 @@ export default {
       '3xl': '1925px',
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 }
