@@ -26,10 +26,11 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
            2xl:pl-[250px] 2xl:py-[120px]"
     >
       {/* Desktop / Laptop */}
-      <div className="hidden lg:grid grid-cols-[1.8fr_1.2fr] items-center bg-white">
+      {/* grid-cols-[1.8fr_1.2fr] */}
+      <div className="hidden lg:grid grid-cols-2 gap-4 items-center bg-white ">
         {/* Right content */}
-        <div className="flex flex-col justify-center gap-4 lg:gap-10 2xl:gap-16 bg-white">
-          <h1 className="global-h1 font-bold text-[#434342] mb-2">
+        <div className="flex flex-col justify-center gap-4 xl:gap-7 2xl:gap-12 bg-white ">
+          <h1 className="global-h1 font-bold text-[#434342] mb-2 whitespace-nowrap">
             Designed to <span className="text-[#ED7125]">Deliver More</span>
           </h1>
 
@@ -56,23 +57,25 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
 
               {/* TEXT */}
               <div className="flex flex-col gap-2 px-4">
-                <p className="lg:text-[1.1rem] font-bold whitespace-nowrap xl:text-[1.5rem] text-[#434342]">
+                <p className="lg:text-[1.1rem] font-bold xl:text-[1.3rem] text-[#434342]">
                   {item.text}
                 </p>
-                <p className="lg:global-p2 xl:text-[21px] text-[#434342]">{item.description}</p>
+                <p className="lg:text-[14px] xl:text-[18px] font-extralight text-justify text-[#434342]">
+                  {item.description}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
         {/* Left image */}
-        <div className="relative w-full lg:h-[660px] xl:h-[820px] 2xl:h-[950px]">
+        <div className="relative w-full lg:h-[660px] xl:h-[820px] 2xl:h-[950px] rounded-md lg:rounded-lg xl:rounded-xl ">
           <Image
-            src="/assets/DesignatedDeliverBanner.jpg"
+            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/DesignatedDeliverBanner.jpg`}
             alt="benefits Image"
             fill
-            className="rounded-md object-cover"
-            // sizes="(max-width: 767px) 100vw, (max-width: 1023px) 100vw, (max-width: 1349px) 100vw, 100vw"
+            className="rounded-md lg:rounded-lg xl:rounded-xl object-cover object-[30%,0%]"
+            sizes="(max-width: 1023px) 100vw, 50vw"
           />
         </div>
       </div>
@@ -113,6 +116,7 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
         </div>
       </div>
 
+      {/* btn */}
       <div className="mt-[30px] lg:mt-[50px] xl:mt-[80px] w-fit mx-auto">
         <div className="flex flex-row gap-2">
           <Link

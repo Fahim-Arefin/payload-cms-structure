@@ -188,6 +188,7 @@ export type BankingFacilitiesDataType = {
 
 export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
+  link?: string
 }
 
 export type OfferDataType2 = Pick<AllPlantDataType, 'description' | 'image'> & {
@@ -302,4 +303,16 @@ export type PaymentTabDataType = {
   }
   image: string
   mobileImage: string
+}
+
+export type BenefitSliderSectionData = {
+  title: string
+  coloredTitle: string
+  description: string
+  item: {
+    bgImage: string
+    icon: string
+    description: string
+    rateText?: string
+  }[]
 }

@@ -187,7 +187,7 @@
   }
   .global-span {
     /* @apply text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]; */
-    @apply text-[16px] md:text-[18px] lg:text-[20px] xl:text-[24px] 2xl:text-[26px];
+    @apply text-[14px] md:text-[18px] lg:text-[20px] xl:text-[24px] 2xl:text-[26px];
   }
 
   /* premium calculator result text size (monthly yearly ....)*/
