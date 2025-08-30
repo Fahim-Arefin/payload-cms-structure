@@ -236,6 +236,7 @@ export const NAV_ITEMS_MOBILE = [
     ],
   },
   { href: '/pay-premium', label: 'Pay Premium' },
+  { href: '/premium-calculator', label: 'Premium Calculator' },
   { href: '/claims', label: 'Claims' },
   {
     label: 'Support',

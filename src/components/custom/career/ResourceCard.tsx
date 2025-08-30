@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import EllipseDecoration from './EllipseDecoration'
+import Image from 'next/image'
 
 type ResourceData = {
   title: string
@@ -46,15 +47,19 @@ function ResourceCard({ data }: { data: ResourceData }) {
       <div className="flex items-center mt-auto gap-4">
         <div className="">
           {/* Ellipse overlays around image */}
-          <div className="absolute left-[-23px] bottom-[-23px]">
-            <img
+          <div className="absolute left-[-23px] bottom-[-23px] w-[70px] h-[70px]">
+            <Image
               src={data.image}
               alt={data.title}
-              className="rounded-full hidden md:block relative z-20 w-[70px] h-[70px] object-cover"
+              fill
+              sizes="( min-width: 768px) 70px"
+              className="rounded-full hidden md:block relative z-20 object-cover"
             />
-            <img
+            <Image
               src={data.mobileImage}
               alt={data.title}
+              fill
+              sizes="( max-width: 768px) 70px"
               className="rounded-full block md:hidden relative z-20 w-[70px] h-[70px] object-cover"
             />
           </div>

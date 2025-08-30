@@ -70,7 +70,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
           <Carousel
             opts={{
               align: 'start',
-              loop: true,
+              // loop: true,
             }}
             setApi={setCarouselApi}
             className="w-full" 
@@ -80,7 +80,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
                 <CarouselItem
                   key={card.title}
                   className={cn(
-                    'basis-[338px] cursor-pointer md:basis-[400px] pl-5 md:pl-24 lg:pl-[130px] xl:pl-[200px] 2xl:pl-[300px] p-10 lg:basis-[400px] xl:basis-[420px] 2xl:basis-[460px]',
+                    'basis-[338px] cursor-pointer md:basis-[400px] p-10 lg:basis-[400px] xl:basis-[420px] 2xl:basis-[460px]',
                     'pr-6 last:pr-0',
                     // Ensure content doesn't overflow out of the card
                   )}
