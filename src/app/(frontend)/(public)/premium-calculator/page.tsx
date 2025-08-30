@@ -56,7 +56,9 @@ const page: FC<Props> = ({}) => {
           </div>
         </div>
       </HeroSection>
+
       <CalculatorSection />
+
       <ContactUsSection />
     </div>
   )
