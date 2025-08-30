@@ -13,7 +13,7 @@ type Props = {}
 function page({}: Props) {
   const heroSlides = [
     {
-      title: 'Shanta Corporate Plans',
+      title: 'Corporate Plans',
       subtitle: '',
       description: 'When you go further for your people, they go further for you.',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/corporateHeroBanner.jpg`,

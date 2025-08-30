@@ -64,10 +64,11 @@ function AllPlanCard({ data, blur }: Props) {
         h-[60%] flex flex-col justify-between`}
         >
           <p className="global-p2 text-center lg:text-start">
-            {data?.description &&
+            {/* {data?.description &&
               (data.description.split(' ').length > 12
                 ? data.description.split(' ').slice(0, 12).join(' ') + '...'
-                : data.description)}
+                : data.description)} */}
+                {data?.description}
           </p>
           <Button
             variant="link"

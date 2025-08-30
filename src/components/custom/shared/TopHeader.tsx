@@ -16,6 +16,11 @@ function TopHeader({ className }: { className?: string }) {
       <div></div>
       {/* Right: Agent + Language Switch + Search */}
       <div className="flex items-center gap-4">
+        <Link href="/premium-calculator">
+          <Button variant="link" className="text-white px-3 py-1 font-medium underline">
+            Premium Calculator
+          </Button>
+        </Link>
         <Link href="/agent-onboarding">
           <Button variant="link" className="text-white px-3 py-1 font-medium underline">
             I’m an Agent
