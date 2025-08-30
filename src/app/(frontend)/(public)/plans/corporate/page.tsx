@@ -122,44 +122,28 @@ function page({}: Props) {
   const addOnsData = [
     {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addonIcon1.svg`,
-      description: 'Integrated Healthcare and Diagnostic Network',
-      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addons1.jpg`,
+      description: 'Cashless Hospitalization Facility',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addOnimg1.jpg`,
+      link: `/plans/corporate/cashless-hospitalization-facility`,
     },
     {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addonIcon2.svg`,
-      description: 'Exclusive Discounts on Lifestyle Amenities ',
-      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addons5.jpg`,
+      description: 'Integrated Healthcare & Hospital Network',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addOnimg2.jpg`,
+      link: `/plans/corporate/integrated-healthcare-and-hospital-network`,
     },
     {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addonIcon3.svg`,
-      description: 'Digital Loyalty Card ',
-      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addons3.jpg`,
+      description: 'Lifestyle Privileges with Digital Loyalty Card',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addOnimg3.jpg`,
+      link: `/plans/corporate/lifestyle-privileges-with-digital-loyalty-card`,
     },
     {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addonIcon4.svg`,
-      description: 'Telemedicine Service',
-      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addons4.jpg`,
+      description: 'Telemedicine Services — Healthcare Anytime, Anywhere',
+      bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/addOnimg4.jpg`,
+      link: `/plans/corporate/telemedicine-services`,
     },
-    // {
-    //   image: '/assets/addonIcon1.svg',
-    //   description: 'Integrated Healthcare and Diagnostic Network',
-    //   bgImage: '/assets/addons1.jpg',
-    // },
-    // {
-    //   image: '/assets/addonIcon2.svg',
-    //   description: 'Exclusive Discounts on Lifestyle Amenities ',
-    //   bgImage: '/assets/addons2.jpg',
-    // },
-    // {
-    //   image: '/assets/addonIcon3.svg',
-    //   description: 'Digital Loyalty Card ',
-    //   bgImage: '/assets/addons3.jpg',
-    // },
-    // {
-    //   image: '/assets/addonIcon4.svg',
-    //   description: 'Telemedicine Service',
-    //   bgImage: '/assets/addons4.jpg',
-    // },
   ]
 
   return (

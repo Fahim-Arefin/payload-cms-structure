@@ -1,32 +1,3 @@
-// import { withPayload } from '@payloadcms/next/withPayload'
-
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   typescript: {
-//     ignoreBuildErrors: true,
-//   },
-//   eslint: {
-//     ignoreDuringBuilds: true,
-//   },
-//   images: {
-//     // Allow both localhost and production domain
-//     // domains: ['localhost', 'shantalife.com'],
-//     deviceSizes: [350, 750, 828, 1080, 1200, 1520, 2048],
-//     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-//     formats: ['image/webp'],
-//     remotePatterns: [
-//       {
-//         protocol: 'https',
-//         hostname: 's3.ap-southeast-1.wasabisys.com',
-//         port: '', // leave empty unless you need a specific port
-//         pathname: '/shantalife-static/**', // allow all under shantalife-static
-//       },
-//     ],
-//   },
-// }
-
-// export default withPayload(nextConfig, { devBundleServerPackages: false })
-
 import { withPayload } from '@payloadcms/next/withPayload'
 
 /** @type {import('next').NextConfig} */

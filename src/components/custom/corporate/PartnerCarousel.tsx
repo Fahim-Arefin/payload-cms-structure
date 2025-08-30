@@ -6,6 +6,7 @@ import { PartnerType } from '@/types'
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import Autoplay from 'embla-carousel-autoplay'
+import { sliderDelay } from '@/lib/data'
 
 type Props = {
   data: PartnerType[]
@@ -51,7 +52,7 @@ function PartnerCarousel({ data }: Props) {
         }}
         plugins={[
           Autoplay({
-            delay: 5000,
+            delay: sliderDelay,
           }),
         ]}
         setApi={setCarouselApi}

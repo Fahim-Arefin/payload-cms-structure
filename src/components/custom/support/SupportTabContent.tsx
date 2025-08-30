@@ -111,9 +111,10 @@ import { Check, ChevronDown } from 'lucide-react'
 type Props = {
   data: TabDataType[]
   activeTab: 'hospitals' | 'branches'
+  bgColor?: string
 }
 
-function SupportTabContent({ data, activeTab }: Props) {
+function SupportTabContent({ data, activeTab, bgColor }: Props) {
   const isHospital = activeTab === 'hospitals'
   const entries = isHospital ? data[1]?.content || [] : data[0]?.content || []
 
@@ -157,7 +158,7 @@ function SupportTabContent({ data, activeTab }: Props) {
 
   const memoizedMap = useMemo(() => {
     return selectedItem ? (
-      <MapSection key={selectedItemKey} data={{ content: [selectedItem] }} />
+      <MapSection key={selectedItemKey} data={{ content: [selectedItem] }} bgColor={bgColor} />
     ) : null
   }, [selectedItemKey]) // Only change on actual selection, not typing
 
@@ -181,8 +182,9 @@ function SupportTabContent({ data, activeTab }: Props) {
                 <Button
                   variant="outline"
                   role="combobox"
-                  className="bg-white text-[#6B6565] w-[70%] md:w-[300px] justify-between h-[40px] md:h-[45px] lg:h-[50px] overflow-hidden truncate
-                     border border-gray-300 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground font-normal transition-all duration-300"
+                  className="bg-white text-[#6B6565] justify-between h-[40px] md:h-[45px] lg:h-[50px] overflow-hidden truncate
+                     border border-gray-300 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground font-normal transition-all duration-300
+                     w-[300px] md:w-[600px]"
                 >
                   <span className="truncate">
                     {selectedIndex >= 0
@@ -192,7 +194,7 @@ function SupportTabContent({ data, activeTab }: Props) {
                   <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent align="start" className="w-[300px] p-0 ">
+              <PopoverContent align="start" className="w-[300px] md:w-[600px] p-0">
                 <div className="p-2">
                   <Input
                     placeholder="Type district (e.g., Chittagong)"
@@ -210,18 +212,18 @@ function SupportTabContent({ data, activeTab }: Props) {
                           key={realIndex}
                           onClick={() => handleHospitalSelect(realIndex)}
                           className={cn(
-                            'flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-accent hover:text-accent-foreground',
+                            'border flex items-center justify-between px-4 py-2 my-2 text-sm cursor-pointer hover:bg-accent hover:text-accent-foreground',
                             realIndex === selectedIndex &&
                               'bg-muted text-muted-foreground hover:bg-muted hover:text-muted-foreground',
                           )}
                         >
+                          <span className="">{item.office_location_Label}</span>{' '}
                           <Check
                             className={cn(
-                              'mr-2 h-4 w-4',
+                              'mr-2 h-4 w-4 ',
                               realIndex === selectedIndex ? 'opacity-100' : 'opacity-0',
                             )}
                           />
-                          <span className="truncate">{item.office_location_Label}</span>
                         </div>
                       )
                     })
@@ -235,7 +237,7 @@ function SupportTabContent({ data, activeTab }: Props) {
         ) : (
           <Select onValueChange={handleBranchSelect} defaultValue="0">
             <SelectTrigger
-              className="cursor-pointer bg-white text-[#6B6565] w-[70%] md:w-[300px] h-[40px] md:h-[45px] lg:h-[50px] overflow-hidden truncate 
+              className="cursor-pointer bg-white text-[#6B6565] w-[300px] md:w-[600px] h-[40px] md:h-[45px] lg:h-[50px] overflow-hidden truncate 
             border border-gray-300 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground transition-all duration-300"
             >
               <SelectValue placeholder="Select a Branch Location" />
@@ -246,11 +248,10 @@ function SupportTabContent({ data, activeTab }: Props) {
                   key={idx}
                   value={String(idx)}
                   className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-accent hover:text-accent-foreground 
-    data-[state=checked]:bg-muted data-[state=checked]:text-muted-foreground rounded-md transition-colors"
+    data-[state=checked]:bg-muted data-[state=checked]:text-muted-foreground rounded-md transition-colors
+    border my-2"
                 >
-                  <span className="truncate ">
-                    {item.office_location_Label || item.office_location}
-                  </span>
+                  <span className="">{item.office_location_Label || item.office_location}</span>
                 </SelectItem>
               ))}
             </SelectContent>
@@ -261,7 +262,7 @@ function SupportTabContent({ data, activeTab }: Props) {
       {/* ✅ Map shows for branches (always) and hospitals (when selected) */}
       {(!isHospital || selectedIndex >= 0) && memoizedMap}
 
-      <div className="lg:hidden pl-5 md:pl-24 md:pt-4 space-y-5">
+      <div className="lg:hidden pl-5 md:pl-24 space-y-5 pb-12">
         <div className="flex space-x-2">
           <ToolTip>
             <Button

@@ -15,9 +15,10 @@ type Props = {
   config: TabConfig
   data: TabDataType[]
   initialTab?: string
+  bgColor?: string
 }
 
-export function MapTabSection({ config, data, initialTab }: Props) {
+export function MapTabSection({ config, data, initialTab, bgColor }: Props) {
   const [activeTab, setActiveTab] = useState(initialTab || config[0].value)
   const activeIndex = config.findIndex((tab) => tab.value === activeTab)
 
@@ -87,9 +88,9 @@ export function MapTabSection({ config, data, initialTab }: Props) {
       </div>
       {/* TabsContent outside of Tabs */}
       {activeTab === 'branches' ? (
-        <SupportTabContent data={data} activeTab="branches" />
+        <SupportTabContent data={data} activeTab="branches" bgColor={bgColor} />
       ) : (
-        <SupportTabContent data={data} activeTab="hospitals" />
+        <SupportTabContent data={data} activeTab="hospitals" bgColor={bgColor} />
       )}
     </>
   )
