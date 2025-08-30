@@ -15,7 +15,7 @@ function page() {
     },
   ]
   const planInfoData = {
-    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/accidental-coverage/web/planInfo4.png`,
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/accidental-coverage/web/accidental-coverage.png`,
     // mobileImage:
     //   '/assets/solutions/individual/health-and-protection/accidental-coverage/mobile/planInfo4.png',
     description: `Accidents can bring life to a sudden halt, impacting financial strain and uncertainty for you and your family. With Shanta Life's Accidental Coverage, you get a reliable safety net to help safeguard your future and ease the financial burden of unforeseen events. We've got you covered, so you can focus on the recovery. `,

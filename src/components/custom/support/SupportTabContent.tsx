@@ -262,7 +262,7 @@ function SupportTabContent({ data, activeTab, bgColor }: Props) {
       {/* ✅ Map shows for branches (always) and hospitals (when selected) */}
       {(!isHospital || selectedIndex >= 0) && memoizedMap}
 
-      <div className="lg:hidden pl-5 md:pl-24 space-y-5 pb-12">
+      {/* <div className="lg:hidden pl-5 md:pl-24 space-y-5 pb-12">
         <div className="flex space-x-2">
           <ToolTip>
             <Button
@@ -284,7 +284,7 @@ function SupportTabContent({ data, activeTab, bgColor }: Props) {
         <div className="cursor-not-allowed text-[#434343] text-[11px] md:text-[13px] border-b w-fit px-2 border-b-[#434343]">
           Have a Question? Ask Us!
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
