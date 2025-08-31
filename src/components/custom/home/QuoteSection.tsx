@@ -568,13 +568,17 @@ import { useRef, useState } from 'react'
 import GlobalButton from '../shared/GlobalButton'
 import QuoteForm from './QuoteForm'
 import Image from 'next/image'
+import { Checkbox } from '@/components/ui/checkbox'
 
 function QuoteSection() {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
-  const [selectedCoverage, setSelectedCoverage] = useState<'ci19' | 'ci25' | 'accident' | null>(null)
+const [ciSelection, setCiSelection] = useState<'ci19' | 'ci25' | null>(null)
+const [isAccidentSelected, setIsAccidentSelected] = useState<boolean>(false)
   const resultRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLDivElement>(null)
+  const brandCheckbox =
+    'w-4 h-4 md:w-5 md:h-5 rounded-sm border-[#ED7125] data-[state=checked]:bg-[#ED7125] data-[state=checked]:border-[#ED7125] focus-visible:ring-0 focus-visible:ring-offset-0'
 
   const handleApiResponse = (response: ApiResponse, paymentMode: string) => {
     setApiResponse(response)
@@ -618,38 +622,35 @@ function QuoteSection() {
     }
   }
 
-  const handleCriticalIllness19Toggle = () => {
-    setSelectedCoverage(selectedCoverage === 'ci19' ? null : 'ci19')
-  }
+const handleCriticalIllness19Toggle = () => {
+  setCiSelection(prev => (prev === 'ci19' ? null : 'ci19')) // mutually exclusive within CI
+}
 
-  const handleCriticalIllness25Toggle = () => {
-    setSelectedCoverage(selectedCoverage === 'ci25' ? null : 'ci25')
-  }
+const handleCriticalIllness25Toggle = () => {
+  setCiSelection(prev => (prev === 'ci25' ? null : 'ci25'))
+}
 
-  const handleAccidentToggle = () => {
-    setSelectedCoverage(selectedCoverage === 'accident' ? null : 'accident')
-  }
+const handleAccidentToggle = () => {
+  setIsAccidentSelected(prev => !prev) // independent toggle
+}
 
   // Helper function to get the total premium including selected coverage if any
-  const getTotalPremiumWithCoverage = (paymentMode: string): number => {
-    if (!apiResponse) return 0
+const getTotalPremiumWithCoverage = (paymentMode: string): number => {
+  if (!apiResponse) return 0
+  const premiums = getTotalPremium(apiResponse, paymentMode)
+  const paymentKey = getPaymentModeKey(paymentMode)
 
-    const premiums = getTotalPremium(apiResponse, paymentMode)
-    const paymentKey = getPaymentModeKey(paymentMode)
+  const life = premiums.lifePremium[paymentKey]
+  const ci =
+    ciSelection === 'ci19'
+      ? premiums.ciPremium[paymentKey]
+      : ciSelection === 'ci25'
+      ? premiums.ci25Premium[paymentKey]
+      : 0
+  const accident = isAccidentSelected ? premiums.accidentPremium[paymentKey] : 0
 
-    const lifePremium = premiums.lifePremium[paymentKey]
-    let additionalPremium = 0
-
-    if (selectedCoverage === 'ci19') {
-      additionalPremium = premiums.ciPremium[paymentKey]
-    } else if (selectedCoverage === 'ci25') {
-      additionalPremium = premiums.ci25Premium[paymentKey]
-    } else if (selectedCoverage === 'accident') {
-      additionalPremium = premiums.accidentPremium[paymentKey]
-    }
-
-    return lifePremium + additionalPremium
-  }
+  return life + ci + accident
+}
 
   return (
     <div className="relative font-avenir container-wpm mb-12 md:mb-24 lg:mb-32 xl:mb-[150px]">
@@ -688,9 +689,7 @@ function QuoteSection() {
           </div>
           {/* Info Container - Show on all screens when API response is available */}
           {apiResponse && (
-            <div
-              className="bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600] py-2"
-            >
+            <div className="bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600] py-2">
               <h2
                 className="text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-normal mb-6 p-2
               xl:py-3 lg:my-3 xl:my-4 text-center"
@@ -722,7 +721,7 @@ function QuoteSection() {
                         value={Math.ceil(
                           confirmedPaymentMode === 'Monthly'
                             ? getTotalPremiumWithCoverage('Monthly')
-                            : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0
+                            : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0,
                         )}
                         prefix="৳"
                         showAnimation={confirmedPaymentMode === 'Monthly'}
@@ -751,7 +750,7 @@ function QuoteSection() {
                         value={Math.ceil(
                           confirmedPaymentMode === 'Quarterly'
                             ? getTotalPremiumWithCoverage('Quarterly')
-                            : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0
+                            : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0,
                         )}
                         prefix="৳"
                         showAnimation={confirmedPaymentMode === 'Quarterly'}
@@ -780,7 +779,8 @@ function QuoteSection() {
                         value={Math.ceil(
                           confirmedPaymentMode === 'Half Yearly'
                             ? getTotalPremiumWithCoverage('Half Yearly')
-                            : getTotalPremium(apiResponse, 'Half Yearly')?.lifePremium.half_yearly || 0
+                            : getTotalPremium(apiResponse, 'Half Yearly')?.lifePremium
+                                .half_yearly || 0,
                         )}
                         prefix="৳"
                         showAnimation={confirmedPaymentMode === 'Half Yearly'}
@@ -809,7 +809,7 @@ function QuoteSection() {
                         value={Math.ceil(
                           confirmedPaymentMode === 'Yearly'
                             ? getTotalPremiumWithCoverage('Yearly')
-                            : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0
+                            : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0,
                         )}
                         prefix="৳"
                         showAnimation={confirmedPaymentMode === 'Yearly'}
@@ -844,57 +844,22 @@ function QuoteSection() {
                   getPaymentModeKey(confirmedPaymentMode)
                 ] > 0 && (
                   <div className="bg-[#F6EDDD] px-2 md:px-4 lg:px-1 py-1.5 lg:py-1 xl:px-4 xl:py-1.5 w-full 2xl:w-[80%] mx-auto rounded-full flex items-center space-x-2">
-                    <div>
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M7.5 4H16.5V20H7.5V4ZM4.5 8.33333H7.5V20H4.5V8.33333ZM16.5 8.33333H19.5V20H16.5V8.33333Z"
-                          fill="white"
-                        />
-                        <path d="M9.8335 14.666H14.1668V19.9993H9.8335V14.666Z" fill="#92D3F5" />
-                        <path
-                          d="M14.5 7.66667H12.8333V6H11.1667V7.66667H9.5V9.33333H11.1667V11H12.8333V9.33333H14.5V7.66667Z"
-                          fill="#EA5A47"
-                        />
-                        <path
-                          d="M5.6665 10H6.33317V11.6667H5.6665V10ZM5.6665 13.3333H6.33317V15H5.6665V13.3333ZM5.6665 16.6667H6.33317V18.3333H5.6665V16.6667ZM17.6665 10H18.3332V11.6667H17.6665V10ZM17.6665 13.3333H18.3332V15H17.6665V13.3333ZM17.6665 16.6667H18.3332V18.3333H17.6665V16.6667Z"
-                          stroke="#92D3F5"
-                          strokeWidth="0.444444"
-                          strokeMiterlimit="10"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M16.5 20V4H7.5V20M16.5 20H7.5M16.5 20H19.5V8.33333H16.5V20ZM7.5 20V8.33333H4.5V20H7.5Z"
-                          stroke="black"
-                          strokeWidth="0.444444"
-                          strokeMiterlimit="10"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M11.9998 20V14.6667M6.33317 11.6667H5.6665V10M6.33317 15H5.6665V13.3333M6.33317 18.3333H5.6665V16.6667M18.3332 11.6667H17.6665V10M18.3332 15H17.6665V13.3333M18.3332 18.3333H17.6665V16.6667M9.83317 14.6667H14.1665V20H9.83317V14.6667ZM14.4998 7.66667H12.8332V6H11.1665V7.66667H9.49984V9.33333H11.1665V11H12.8332V9.33333H14.4998V7.66667Z"
-                          stroke="black"
-                          strokeWidth="0.444444"
-                          strokeMiterlimit="10"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
+                    <Checkbox
+                      className={brandCheckbox}
+                       checked={ciSelection === 'ci19'}
+                      onCheckedChange={handleCriticalIllness19Toggle}
+                      aria-label="Toggle CI-19 coverage"
+                      id="ci19-left"
+                    />
                     <div
                       className="underline underline-offset-4 text-[10px] xl:text-xs cursor-pointer hover:text-blue-600 transition-colors"
                       onClick={handleCriticalIllness19Toggle}
                     >
                       <>
-                        {selectedCoverage === 'ci19' ? 'Remove' : 'Add'}{' '}
+                        {ciSelection  === 'ci19' ? 'Remove' : 'Add'}{' '}
                         {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
-                        taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 19 Critical Illness!
+                        taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 19
+                        Critical Illness!
                       </>
                     </div>
                     {/* this belwo div will be align right of the flex*/}
@@ -918,57 +883,22 @@ function QuoteSection() {
                   getPaymentModeKey(confirmedPaymentMode)
                 ] > 0 && (
                   <div className="bg-[#F6EDDD] px-2 md:px-4 lg:px-1 py-1.5 lg:py-1 xl:px-4 xl:py-1.5 w-full 2xl:w-[80%] mx-auto rounded-full flex items-center space-x-2">
-                    <div>
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M7.5 4H16.5V20H7.5V4ZM4.5 8.33333H7.5V20H4.5V8.33333ZM16.5 8.33333H19.5V20H16.5V8.33333Z"
-                          fill="white"
-                        />
-                        <path d="M9.8335 14.666H14.1668V19.9993H9.8335V14.666Z" fill="#92D3F5" />
-                        <path
-                          d="M14.5 7.66667H12.8333V6H11.1667V7.66667H9.5V9.33333H11.1667V11H12.8333V9.33333H14.5V7.66667Z"
-                          fill="#EA5A47"
-                        />
-                        <path
-                          d="M5.6665 10H6.33317V11.6667H5.6665V10ZM5.6665 13.3333H6.33317V15H5.6665V13.3333ZM5.6665 16.6667H6.33317V18.3333H5.6665V16.6667ZM17.6665 10H18.3332V11.6667H17.6665V10ZM17.6665 13.3333H18.3332V15H17.6665V13.3333ZM17.6665 16.6667H18.3332V18.3333H17.6665V16.6667Z"
-                          stroke="#92D3F5"
-                          strokeWidth="0.444444"
-                          strokeMiterlimit="10"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M16.5 20V4H7.5V20M16.5 20H7.5M16.5 20H19.5V8.33333H16.5V20ZM7.5 20V8.33333H4.5V20H7.5Z"
-                          stroke="black"
-                          strokeWidth="0.444444"
-                          strokeMiterlimit="10"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M11.9998 20V14.6667M6.33317 11.6667H5.6665V10M6.33317 15H5.6665V13.3333M6.33317 18.3333H5.6665V16.6667M18.3332 11.6667H17.6665V10M18.3332 15H17.6665V13.3333M18.3332 18.3333H17.6665V16.6667M9.83317 14.6667H14.1665V20H9.83317V14.6667ZM14.4998 7.66667H12.8332V6H11.1665V7.66667H9.49984V9.33333H11.1665V11H12.8332V9.33333H14.4998V7.66667Z"
-                          stroke="black"
-                          strokeWidth="0.444444"
-                          strokeMiterlimit="10"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
+                    <Checkbox
+                      className={brandCheckbox}
+                       checked={ciSelection === 'ci25'}
+                      onCheckedChange={handleCriticalIllness25Toggle}
+                      aria-label="Toggle CI-25 coverage"
+                      id="ci25-left"
+                    />
                     <div
                       className="underline underline-offset-4 text-[10px] xl:text-xs cursor-pointer hover:text-blue-600 transition-colors"
                       onClick={handleCriticalIllness25Toggle}
                     >
                       <>
-                        {selectedCoverage === 'ci25' ? 'Remove' : 'Add'}{' '}
+                        {ciSelection === 'ci25' ? 'Remove' : 'Add'}{' '}
                         {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ci25Premium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
-                        taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 25 Critical Illness!
+                        taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 25
+                        Critical Illness!
                       </>
                     </div>
                     {/* this belwo div will be align right of the flex*/}
@@ -992,56 +922,18 @@ function QuoteSection() {
                   getPaymentModeKey(confirmedPaymentMode)
                 ] > 0 && (
                   <div className="bg-[#F6EDDD] px-2 md:px-4 lg:px-1 py-1.5 lg:py-1 xl:px-4 xl:py-1.5 w-full 2xl:w-[80%] mx-auto rounded-full flex items-center space-x-2">
-                    <div>
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M7.5 4H16.5V20H7.5V4ZM4.5 8.33333H7.5V20H4.5V8.33333ZM16.5 8.33333H19.5V20H16.5V8.33333Z"
-                          fill="white"
-                        />
-                        <path d="M9.8335 14.666H14.1668V19.9993H9.8335V14.666Z" fill="#92D3F5" />
-                        <path
-                          d="M14.5 7.66667H12.8333V6H11.1667V7.66667H9.5V9.33333H11.1667V11H12.8333V9.33333H14.5V7.66667Z"
-                          fill="#EA5A47"
-                        />
-                        <path
-                          d="M5.6665 10H6.33317V11.6667H5.6665V10ZM5.6665 13.3333H6.33317V15H5.6665V13.3333ZM5.6665 16.6667H6.33317V18.3333H5.6665V16.6667ZM17.6665 10H18.3332V11.6667H17.6665V10ZM17.6665 13.3333H18.3332V15H17.6665V13.3333ZM17.6665 16.6667H18.3332V18.3333H17.6665V16.6667Z"
-                          stroke="#92D3F5"
-                          strokeWidth="0.444444"
-                          strokeMiterlimit="10"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M16.5 20V4H7.5V20M16.5 20H7.5M16.5 20H19.5V8.33333H16.5V20ZM7.5 20V8.33333H4.5V20H7.5Z"
-                          stroke="black"
-                          strokeWidth="0.444444"
-                          strokeMiterlimit="10"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M11.9998 20V14.6667M6.33317 11.6667H5.6665V10M6.33317 15H5.6665V13.3333M6.33317 18.3333H5.6665V16.6667M18.3332 11.6667H17.6665V10M18.3332 15H17.6665V13.3333M18.3332 18.3333H17.6665V16.6667M9.83317 14.6667H14.1665V20H9.83317V14.6667ZM14.4998 7.66667H12.8332V6H11.1665V7.66667H9.49984V9.33333H11.1665V11H12.8332V9.33333H14.4998V7.66667Z"
-                          stroke="black"
-                          strokeWidth="0.444444"
-                          strokeMiterlimit="10"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
+                    <Checkbox
+                      className={brandCheckbox}
+                      checked={isAccidentSelected}
+                       onCheckedChange={handleAccidentToggle}
+                      aria-label="Toggle Accident coverage"
+                      id="acc-left"
+                    />
                     <div
                       className="underline underline-offset-4 text-[10px] xl:text-xs cursor-pointer hover:text-blue-600 transition-colors"
                       onClick={handleAccidentToggle}
                     >
-                      {selectedCoverage === 'accident'
-                        ? 'Remove accident coverage for'
-                        : "Prone to accidents? Let's get you covered in"}{' '}
+                      {isAccidentSelected ? 'Remove accident coverage for' : "Prone to accidents? Let's get you covered in"}{' '}
                       {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
                       taka <span className="font-bold">{confirmedPaymentMode}</span>!
                     </div>

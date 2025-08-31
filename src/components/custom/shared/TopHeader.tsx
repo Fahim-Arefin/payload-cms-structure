@@ -16,7 +16,7 @@ function TopHeader({ className }: { className?: string }) {
       <div></div>
       {/* Right: Agent + Language Switch + Search */}
       <div className="flex items-center gap-4">
-        <Link href="/premium-calculator">
+        <Link href="/premium-calculator#calculator">
           <Button variant="link" className="text-white px-3 py-1 font-medium underline">
             Premium Calculator
           </Button>

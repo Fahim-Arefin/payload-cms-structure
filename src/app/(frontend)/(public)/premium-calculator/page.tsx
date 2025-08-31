@@ -57,7 +57,9 @@ const page: FC<Props> = ({}) => {
         </div>
       </HeroSection>
 
-      <CalculatorSection />
+       <section id="calculator" >
+        <CalculatorSection />
+      </section>
 
       <ContactUsSection />
     </div>
