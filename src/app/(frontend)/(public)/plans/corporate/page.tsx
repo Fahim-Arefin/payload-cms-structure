@@ -3,6 +3,7 @@ import CorporateChoose from '@/components/custom/corporate/CorporateChoose'
 import CorporateHighlight from '@/components/custom/corporate/CorporateHighlights'
 import CorporateOfferings from '@/components/custom/corporate/CorporateOfferings'
 import CorporateSuitability from '@/components/custom/corporate/CorporateSuitability'
+import OfferingsTab from '@/components/custom/corporate/OfferingsTab'
 import PartnerCarousel from '@/components/custom/corporate/PartnerCarousel'
 import CallNowButton from '@/components/custom/shared/CallNowButton'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
@@ -146,6 +147,68 @@ function page({}: Props) {
     },
   ]
 
+  const tabItems = [
+    {
+      value: 'life',
+      label: 'Life Insurance Benefits',
+    },
+    {
+      value: 'medical',
+      label: 'Medical Insurance Benefits',
+    },
+  ]
+
+  const tabContent = [
+    {
+      content: [
+        {
+          title: 'Group Life Insurance (GL)',
+          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon1.png`,
+        },
+        {
+          title: 'Accidental Death Coverage (AD)',
+          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon1.png`,
+        },
+        {
+          title: 'Permanent and Total Disability (PTD)',
+          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon3.png`,
+        },
+        {
+          title: 'Permanent and Partial Disability (PPD)',
+          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon4.png`,
+        },
+        {
+          title: 'Critical Illness Coverage (CIB)',
+          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon5.png`,
+        },
+      ],
+    },
+    {
+      content: [
+        {
+          title: 'In-Patient Coverage (IPC)',
+          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon6.png`,
+        },
+        {
+          title: 'Maternity Benefits',
+          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon7.png`,
+        },
+        {
+          title: 'Out Patient Coverage (OPC)',
+          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon8.png`,
+        },
+        {
+          title: 'OPC Dental',
+          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon9.png`,
+        },
+        {
+          title: 'OPC Optical',
+          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon10.png`,
+        },
+      ],
+    },
+  ]
+
   return (
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides}>
@@ -169,7 +232,8 @@ function page({}: Props) {
         </div>
       </HeroSection>
       <CorporateHighlight highlightsData={highlightData} />
-      <CorporateOfferings />
+      <OfferingsTab data={tabContent} config={tabItems} />
+      {/* <CorporateOfferings /> */}
       <CorporateChoose benefitsData={benefitsData} />
       <CorporateSuitability data={suitabilityData} />
       <PartnerCarousel data={partnerData} />

@@ -1,6 +1,7 @@
 'use client'
 
 import { TabDataType } from '@/types'
+import { MdDiscount } from "react-icons/md";
 
 type Props = {
   data: TabDataType
@@ -11,6 +12,11 @@ function MapSection({ data, bgColor }: Props) {
   // 🗺️ Logic for map
   const isIframe = data?.content[0]?.office_location.trim().startsWith('<iframe')
   const isShortLink = data?.content[0]?.office_location.trim().startsWith('https://maps.app.goo.gl')
+
+  const discountDetails = (data?.content?.[0]?.discount_details ?? '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
 
   const mapSrc = isShortLink
     ? `https://www.google.com/maps?q=${encodeURIComponent(data?.content[0]?.office_location)}&output=embed`
@@ -40,6 +46,10 @@ function MapSection({ data, bgColor }: Props) {
           </h2>
           <p className="text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#6E6E6E]">
             {data?.content[0]?.office_address}
+          </p>
+
+          <p className="text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#6E6E6E] font-bold">
+            {data?.content[0]?.office_name}
           </p>
 
           <div className="flex items-center space-x-1 lg:space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
@@ -75,6 +85,26 @@ function MapSection({ data, bgColor }: Props) {
           <div className="hidden lg:block pt-6">
             <hr className="border-[#6E6E6E]" />
           </div>
+          {/* ⬇️ Discount details: one icon, label on right, items below */}
+          {discountDetails.length > 0 && (
+            <div className="">
+              <div className="flex items-start gap-2">
+                <MdDiscount className="w-4 h-4 mt-[2px] shrink-0" aria-hidden="true" />
+
+                <div className="text-[#434343]">
+                  <div className="font-semibold text-[12px] xl:text-[13px] 2xl:text-[15px]">
+                    Discount Details
+                  </div>
+
+                  <div className="mt-1 space-y-1 md:space-y-2 text-[12px] xl:text-[13px] 2xl:text-[15px]">
+                    {discountDetails.map((line, i) => (
+                      <div key={`discount-${i}`}>{line}</div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Right Column - Dynamic Map */}

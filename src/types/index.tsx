@@ -269,6 +269,8 @@ type TabContent = {
   office_address: string
   office_email: string
   office_phone: string
+  office_name?: string
+  discount_details?: string
 }
 
 export type TabDataType = {
