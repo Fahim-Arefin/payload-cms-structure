@@ -192,16 +192,16 @@
 
   /* premium calculator result text size (monthly yearly ....)*/
   .result-selected-header-size {
-    @apply text-[12px] md:text-[14px] lg:text-[12px] xl:text-[14px] 2xl:text-[19px];
+    @apply text-[16px] md:text-[14px] lg:text-[12px] xl:text-[14px] 2xl:text-[19px];
   }
   .result-not-selected-header-size {
-    @apply text-[10px] md:text-[12px] lg:text-[10px] xl:text-[13px] 2xl:text-[17px];
+    @apply text-[14px] md:text-[12px] lg:text-[10px] xl:text-[13px] 2xl:text-[17px];
   }
   .result-selected-text-size {
-    @apply text-[14px] md:text-[16px] lg:text-[13px] xl:text-[16px] 2xl:text-[21px];
+    @apply text-[16px] md:text-[16px] lg:text-[13px] xl:text-[16px] 2xl:text-[21px];
   }
   .result-not-selected-text-size {
-    @apply text-[12px] md:text-[14px] lg:text-[12px] xl:text-[15px] 2xl:text-[19px];
+    @apply text-[14px] md:text-[14px] lg:text-[12px] xl:text-[15px] 2xl:text-[19px];
   }
 }
 
@@ -230,4 +230,8 @@ body[data-dialog-open='true'] {
   height: 100% !important;
   display: block !important;
   object-fit: fill !important;
+}
+
+html {
+  scroll-behavior: smooth;
 }

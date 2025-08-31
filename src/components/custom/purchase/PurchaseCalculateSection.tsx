@@ -4,6 +4,7 @@ import AnimatedCounter from '@/components/ui/AnimatedCounter'
 import { ApiResToShow } from '@/utils/premiumCalculator'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import GlobalButton from '../shared/GlobalButton'
+import { Checkbox } from '@/components/ui/checkbox'
 // import PurchaseCalculateSectionCommon from '@/components/custom/purchase/PurchaseCalculateSectionCommon'
 
 type PurchaseCalculateSectionProps = {
@@ -21,8 +22,11 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
   scrollSignal,
   onCalculateAgain,
 }) => {
-  const [selectedCoverage, setSelectedCoverage] = useState<'ci19' | 'ci25' | 'accident' | null>(null)
+  const [ciSelection, setCiSelection] = useState<'ci19' | 'ci25' | null>(null)
+  const [isAccidentSelected, setIsAccidentSelected] = useState<boolean>(false)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const brandCheckbox =
+    'w-4 h-4 md:w-5 md:h-5 rounded-sm border-[#ED7125] data-[state=checked]:bg-[#ED7125] data-[state=checked]:border-[#ED7125] focus-visible:ring-0 focus-visible:ring-offset-0'
 
   const getPaymentModeKey = (paymentMode: string): keyof ApiResToShow['lifePremium'] => {
     switch (paymentMode) {
@@ -43,37 +47,33 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
   }
 
   const handleCriticalIllness19Toggle = () => {
-    setSelectedCoverage(selectedCoverage === 'ci19' ? null : 'ci19')
+    setCiSelection((prev) => (prev === 'ci19' ? null : 'ci19')) // mutually exclusive within CI
   }
 
   const handleCriticalIllness25Toggle = () => {
-    setSelectedCoverage(selectedCoverage === 'ci25' ? null : 'ci25')
+    setCiSelection((prev) => (prev === 'ci25' ? null : 'ci25'))
   }
 
-  // Click handler to toggle accident coverage
   const handleAccidentToggle = () => {
-    setSelectedCoverage(selectedCoverage === 'accident' ? null : 'accident')
+    setIsAccidentSelected((prev) => !prev) // independent toggle
   }
 
   // Helper function to get the total premium including selected coverage if any
   const getTotalPremiumWithCoverage = (paymentMode: string): number => {
     if (!apiResponse) return 0
-
     const premiums = getTotalPremium(apiResponse, paymentMode)
     const paymentKey = getPaymentModeKey(paymentMode)
 
-    const lifePremium = premiums.lifePremium[paymentKey]
-    let additionalPremium = 0
+    const life = premiums.lifePremium[paymentKey]
+    const ci =
+      ciSelection === 'ci19'
+        ? premiums.ciPremium[paymentKey]
+        : ciSelection === 'ci25'
+          ? premiums.ci25Premium[paymentKey]
+          : 0
+    const accident = isAccidentSelected ? premiums.accidentPremium[paymentKey] : 0
 
-    if (selectedCoverage === 'ci19') {
-      additionalPremium = premiums.ciPremium[paymentKey]
-    } else if (selectedCoverage === 'ci25') {
-      additionalPremium = premiums.ci25Premium[paymentKey]
-    } else if (selectedCoverage === 'accident') {
-      additionalPremium = premiums.accidentPremium[paymentKey]
-    }
-
-    return lifePremium + additionalPremium
+    return life + ci + accident
   }
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
               <div
                 className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
                   confirmedPaymentMode === 'Monthly'
-                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    ? 'text-[#ED7125] text-[16px] lg:text-[20px] xl:text-[24px] font-bold'
                     : 'text-[#1E1E1E]'
                 }`}
               >
@@ -105,7 +105,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
               <div
                 className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
                   confirmedPaymentMode === 'Monthly'
-                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    ? 'text-[#ED7125] text-[16px] lg:text-[20px] xl:text-[24px] font-bold'
                     : 'text-[#1E1E1E]'
                 }`}
               >
@@ -113,7 +113,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                   value={Math.ceil(
                     confirmedPaymentMode === 'Monthly'
                       ? getTotalPremiumWithCoverage('Monthly')
-                      : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0
+                      : getTotalPremium(apiResponse, 'Monthly')?.lifePremium.monthly || 0,
                   )}
                   prefix="৳"
                   showAnimation={confirmedPaymentMode === 'Monthly'}
@@ -123,18 +123,18 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
             </div>
             <div className="col-span-2 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
               <div
-                className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                className={`text-[16px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
                   confirmedPaymentMode === 'Quarterly'
-                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    ? 'text-[#ED7125] text-[16px] lg:text-[20px] xl:text-[24px] font-bold'
                     : 'text-[#1E1E1E]'
                 }`}
               >
                 Quarterly
               </div>
               <div
-                className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                className={`text-[16px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
                   confirmedPaymentMode === 'Quarterly'
-                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    ? 'text-[#ED7125] text-[16px] lg:text-[20px] xl:text-[24px] font-bold'
                     : 'text-[#1E1E1E]'
                 }`}
               >
@@ -142,7 +142,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                   value={Math.ceil(
                     confirmedPaymentMode === 'Quarterly'
                       ? getTotalPremiumWithCoverage('Quarterly')
-                      : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0
+                      : getTotalPremium(apiResponse, 'Quarterly')?.lifePremium.quarterly || 0,
                   )}
                   prefix="৳"
                   showAnimation={confirmedPaymentMode === 'Quarterly'}
@@ -152,18 +152,18 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
             </div>
             <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
               <div
-                className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                className={`text-[16px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
                   confirmedPaymentMode === 'Half Yearly'
-                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    ? 'text-[#ED7125] text-[16px] lg:text-[20px] xl:text-[24px] font-bold'
                     : 'text-[#1E1E1E]'
                 }`}
               >
                 Half Yearly
               </div>
               <div
-                className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                className={`text-[16px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
                   confirmedPaymentMode === 'Half Yearly'
-                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    ? 'text-[#ED7125] text-[16px] lg:text-[20px] xl:text-[24px] font-bold'
                     : 'text-[#1E1E1E]'
                 }`}
               >
@@ -171,7 +171,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                   value={Math.ceil(
                     confirmedPaymentMode === 'Half Yearly'
                       ? getTotalPremiumWithCoverage('Half Yearly')
-                      : getTotalPremium(apiResponse, 'Half Yearly')?.lifePremium.half_yearly || 0
+                      : getTotalPremium(apiResponse, 'Half Yearly')?.lifePremium.half_yearly || 0,
                   )}
                   prefix="৳"
                   showAnimation={confirmedPaymentMode === 'Half Yearly'}
@@ -181,18 +181,18 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
             </div>
             <div className="col-span-2 p-2 py-2 xl:py-3 lg:mt-2 xl:mt-3">
               <div
-                className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                className={`text-[16px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
                   confirmedPaymentMode === 'Yearly'
-                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    ? 'text-[#ED7125] text-[16px] lg:text-[20px] xl:text-[24px] font-bold'
                     : 'text-[#1E1E1E]'
                 }`}
               >
                 Yearly
               </div>
               <div
-                className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                className={`text-[16px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
                   confirmedPaymentMode === 'Yearly'
-                    ? 'text-[#ED7125] text-[12px] lg:text-[20px] xl:text-[24px] font-bold'
+                    ? 'text-[#ED7125] text-[16px] lg:text-[20px] xl:text-[24px] font-bold'
                     : 'text-[#1E1E1E]'
                 }`}
               >
@@ -200,7 +200,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                   value={Math.ceil(
                     confirmedPaymentMode === 'Yearly'
                       ? getTotalPremiumWithCoverage('Yearly')
-                      : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0
+                      : getTotalPremium(apiResponse, 'Yearly')?.lifePremium.yearly || 0,
                   )}
                   prefix="৳"
                   showAnimation={confirmedPaymentMode === 'Yearly'}
@@ -232,56 +232,20 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
             getPaymentModeKey(confirmedPaymentMode)
           ] > 0 && (
             <div className="bg-[#F6EDDD] md:px-4 lg:px-1 md:py-1.5 lg:py-1 xl:px-4 xl:py-1.5 md:w-[60%] lg:w-[100%] xl:w-[85%] 2xl:w-[70%] mx-auto rounded-full flex items-center space-x-2">
-              <div>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7.5 4H16.5V20H7.5V4ZM4.5 8.33333H7.5V20H4.5V8.33333ZM16.5 8.33333H19.5V20H16.5V8.33333Z"
-                    fill="white"
-                  />
-                  <path d="M9.8335 14.666H14.1668V19.9993H9.8335V14.666Z" fill="#92D3F5" />
-                  <path
-                    d="M14.5 7.66667H12.8333V6H11.1667V7.66667H9.5V9.33333H11.1667V11H12.8333V9.33333H14.5V7.66667Z"
-                    fill="#EA5A47"
-                  />
-                  <path
-                    d="M5.6665 10H6.33317V11.6667H5.6665V10ZM5.6665 13.3333H6.33317V15H5.6665V13.3333ZM5.6665 16.6667H6.33317V18.3333H5.6665V16.6667ZM17.6665 10H18.3332V11.6667H17.6665V10ZM17.6665 13.3333H18.3332V15H17.6665V13.3333ZM17.6665 16.6667H18.3332V18.3333H17.6665V16.6667Z"
-                    stroke="#92D3F5"
-                    strokeWidth="0.444444"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M16.5 20V4H7.5V20M16.5 20H7.5M16.5 20H19.5V8.33333H16.5V20ZM7.5 20V8.33333H4.5V20H7.5Z"
-                    stroke="black"
-                    strokeWidth="0.444444"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M11.9998 20V14.6667M6.33317 11.6667H5.6665V10M6.33317 15H5.6665V13.3333M6.33317 18.3333H5.6665V16.6667M18.3332 11.6667H17.6665V10M18.3332 15H17.6665V13.3333M18.3332 18.3333H17.6665V16.6667M9.83317 14.6667H14.1665V20H9.83317V14.6667ZM14.4998 7.66667H12.8332V6H11.1665V7.66667H9.49984V9.33333H11.1665V11H12.8332V9.33333H14.4998V7.66667Z"
-                    stroke="black"
-                    strokeWidth="0.444444"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
+              <Checkbox
+                className={brandCheckbox}
+                checked={ciSelection === 'ci19'}
+                onCheckedChange={handleCriticalIllness19Toggle}
+                aria-label="Toggle CI-19 coverage"
+                id="ci19-left"
+              />
 
               <div
                 className="underline underline-offset-4 text-xs cursor-pointer hover:text-blue-600 transition-colors"
                 onClick={handleCriticalIllness19Toggle}
               >
                 <>
-                  {selectedCoverage === 'ci19' ? 'Remove' : 'Add'}{' '}
+                  {ciSelection === 'ci19' ? 'Remove' : 'Add'}{' '}
                   {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
                   taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 19
                   Critical Illness!
@@ -309,56 +273,20 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
             getPaymentModeKey(confirmedPaymentMode)
           ] > 0 && (
             <div className="bg-[#F6EDDD] md:px-4 lg:px-1 md:py-1.5 lg:py-1 xl:px-4 xl:py-1.5 md:w-[60%] lg:w-[100%] xl:w-[85%] 2xl:w-[70%] mx-auto rounded-full flex items-center space-x-2">
-              <div>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7.5 4H16.5V20H7.5V4ZM4.5 8.33333H7.5V20H4.5V8.33333ZM16.5 8.33333H19.5V20H16.5V8.33333Z"
-                    fill="white"
-                  />
-                  <path d="M9.8335 14.666H14.1668V19.9993H9.8335V14.666Z" fill="#92D3F5" />
-                  <path
-                    d="M14.5 7.66667H12.8333V6H11.1667V7.66667H9.5V9.33333H11.1667V11H12.8333V9.33333H14.5V7.66667Z"
-                    fill="#EA5A47"
-                  />
-                  <path
-                    d="M5.6665 10H6.33317V11.6667H5.6665V10ZM5.6665 13.3333H6.33317V15H5.6665V13.3333ZM5.6665 16.6667H6.33317V18.3333H5.6665V16.6667ZM17.6665 10H18.3332V11.6667H17.6665V10ZM17.6665 13.3333H18.3332V15H17.6665V13.3333ZM17.6665 16.6667H18.3332V18.3333H17.6665V16.6667Z"
-                    stroke="#92D3F5"
-                    strokeWidth="0.444444"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M16.5 20V4H7.5V20M16.5 20H7.5M16.5 20H19.5V8.33333H16.5V20ZM7.5 20V8.33333H4.5V20H7.5Z"
-                    stroke="black"
-                    strokeWidth="0.444444"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M11.9998 20V14.6667M6.33317 11.6667H5.6665V10M6.33317 15H5.6665V13.3333M6.33317 18.3333H5.6665V16.6667M18.3332 11.6667H17.6665V10M18.3332 15H17.6665V13.3333M18.3332 18.3333H17.6665V16.6667M9.83317 14.6667H14.1665V20H9.83317V14.6667ZM14.4998 7.66667H12.8332V6H11.1665V7.66667H9.49984V9.33333H11.1665V11H12.8332V9.33333H14.4998V7.66667Z"
-                    stroke="black"
-                    strokeWidth="0.444444"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
+              <Checkbox
+                className={brandCheckbox}
+                checked={ciSelection === 'ci25'}
+                onCheckedChange={handleCriticalIllness25Toggle}
+                aria-label="Toggle CI-25 coverage"
+                id="ci25-left"
+              />
 
               <div
                 className="underline underline-offset-4 text-xs cursor-pointer hover:text-blue-600 transition-colors"
                 onClick={handleCriticalIllness25Toggle}
               >
                 <>
-                  {selectedCoverage === 'ci25' ? 'Remove' : 'Add'}{' '}
+                  {ciSelection === 'ci25' ? 'Remove' : 'Add'}{' '}
                   {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ci25Premium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
                   taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 25
                   Critical Illness!
@@ -387,54 +315,18 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
           ] > 0 && (
             <>
               <div className="bg-[#F6EDDD]  md:px-4 lg:px-1 md:py-1.5 lg:py-1 xl:px-4 xl:py-1.5 md:w-[60%] lg:w-[100%] xl:w-[85%] 2xl:w-[70%] mx-auto rounded-full flex items-center space-x-2">
-                <div>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.5 4H16.5V20H7.5V4ZM4.5 8.33333H7.5V20H4.5V8.33333ZM16.5 8.33333H19.5V20H16.5V8.33333Z"
-                      fill="white"
-                    />
-                    <path d="M9.8335 14.666H14.1668V19.9993H9.8335V14.666Z" fill="#92D3F5" />
-                    <path
-                      d="M14.5 7.66667H12.8333V6H11.1667V7.66667H9.5V9.33333H11.1667V11H12.8333V9.33333H14.5V7.66667Z"
-                      fill="#EA5A47"
-                    />
-                    <path
-                      d="M5.6665 10H6.33317V11.6667H5.6665V10ZM5.6665 13.3333H6.33317V15H5.6665V13.3333ZM5.6665 16.6667H6.33317V18.3333H5.6665V16.6667ZM17.6665 10H18.3332V11.6667H17.6665V10ZM17.6665 13.3333H18.3332V15H17.6665V13.3333ZM17.6665 16.6667H18.3332V18.3333H17.6665V16.6667Z"
-                      stroke="#92D3F5"
-                      strokeWidth="0.444444"
-                      strokeMiterlimit="10"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M16.5 20V4H7.5V20M16.5 20H7.5M16.5 20H19.5V8.33333H16.5V20ZM7.5 20V8.33333H4.5V20H7.5Z"
-                      stroke="black"
-                      strokeWidth="0.444444"
-                      strokeMiterlimit="10"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M11.9998 20V14.6667M6.33317 11.6667H5.6665V10M6.33317 15H5.6665V13.3333M6.33317 18.3333H5.6665V16.6667M18.3332 11.6667H17.6665V10M18.3332 15H17.6665V13.3333M18.3332 18.3333H17.6665V16.6667M9.83317 14.6667H14.1665V20H9.83317V14.6667ZM14.4998 7.66667H12.8332V6H11.1665V7.66667H9.49984V9.33333H11.1665V11H12.8332V9.33333H14.4998V7.66667Z"
-                      stroke="black"
-                      strokeWidth="0.444444"
-                      strokeMiterlimit="10"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
+                <Checkbox
+                  className={brandCheckbox}
+                  checked={isAccidentSelected}
+                  onCheckedChange={handleAccidentToggle}
+                  aria-label="Toggle Accident coverage"
+                  id="acc-left"
+                />
                 <div
                   className="underline underline-offset-4 text-xs cursor-pointer hover:text-blue-600 transition-colors"
                   onClick={handleAccidentToggle}
                 >
-                  {selectedCoverage === 'accident'
+                  {isAccidentSelected
                     ? 'Remove accident coverage for'
                     : "Prone to accidents? Let's get you covered in"}{' '}
                   {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
