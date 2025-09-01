@@ -1,21 +1,31 @@
 'use client'
 
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
-import Image from 'next/image'
 import { PartnerType } from '@/types'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import Autoplay from 'embla-carousel-autoplay'
 import { sliderDelay } from '@/lib/data'
 
-type Props = {
-  data: PartnerType[]
-}
+type Props = { data: PartnerType[] }
 
 function PartnerCarousel({ data }: Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
+
+  // normal autoplay (e.g., 4000ms). Keep interaction running.
+  const autoplay = useRef(
+    Autoplay({
+      delay: sliderDelay,
+      stopOnInteraction: false,
+      stopOnMouseEnter: false, // we’ll manage hover ourselves
+    })
+  )
+
+  // faster-on-hover interval
+  const hoverIntervalRef = useRef<number | null>(null)
+  const FAST_DELAY = 1200 // “a bit faster” – tweak as you like
 
   useEffect(() => {
     if (!carouselApi) return
@@ -33,6 +43,35 @@ function PartnerCarousel({ data }: Props) {
     }
   }, [carouselApi])
 
+  // cleanup interval on unmount, just in case
+  useEffect(() => {
+    return () => {
+      if (hoverIntervalRef.current) {
+        window.clearInterval(hoverIntervalRef.current)
+        hoverIntervalRef.current = null
+      }
+    }
+  }, [])
+
+  const handleMouseEnter = () => {
+    // stop normal autoplay and start faster ticking
+    autoplay.current?.stop?.()
+    if (!hoverIntervalRef.current) {
+      hoverIntervalRef.current = window.setInterval(() => {
+        carouselApi?.scrollNext()
+      }, FAST_DELAY)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    // clear faster ticking and resume normal autoplay
+    if (hoverIntervalRef.current) {
+      window.clearInterval(hoverIntervalRef.current)
+      hoverIntervalRef.current = null
+    }
+    autoplay.current?.play?.()
+  }
+
   return (
     <section className="w-full py-5 md:py-10 lg:py-16 bg-[#FCF4EB]">
       <h2
@@ -45,50 +84,46 @@ function PartnerCarousel({ data }: Props) {
         <span className="text-[#ED7125]">OUR VALUED</span> CLIENTS
       </h2>
 
-      <Carousel
-        opts={{
-          align: 'start',
-          dragFree: true,
-        }}
-        plugins={[
-          Autoplay({
-            delay: sliderDelay,
-          }),
-        ]}
-        setApi={setCarouselApi}
-        className="w-full"
-      >
-        <CarouselContent>
-          {data.map((item, index) => (
-            <CarouselItem
-              key={index}
-              className="basis-1/2 md:basis-1/3 lg:basis-1/3 xl:basis-1/4 flex flex-col items-center justify-center space-y-3"
-            >
-              <div className="w-[150px] h-[100px] md:w-[200px] md:h-[120px] lg:w-[340px] lg:h-[250px] flex items-center justify-center ">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  width={340}
-                  height={250}
-                  className="object-contain w-full h-full"
-                  loading={index < 4 ? 'eager' : 'lazy'}
-                />
-              </div>
+      {/* Wrap the carousel to capture hover */}
+      <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <Carousel
+          opts={{ align: 'start', dragFree: true }}
+          plugins={[autoplay.current]}
+          setApi={setCarouselApi}
+          className="w-full"
+        >
+          <CarouselContent>
+            {data.map((item, index) => (
+              <CarouselItem
+                key={index}
+                className="basis-1/2 md:basis-1/3 lg:basis-1/3 xl:basis-1/4 flex flex-col items-center justify-center space-y-3"
+              >
+                <div className="w-[150px] h-[100px] md:w-[200px] md:h-[120px] lg:w-[340px] lg:h-[250px] flex items-center justify-center ">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    width={340}
+                    height={250}
+                    className="object-contain w-full h-full"
+                    loading={index < 4 ? 'eager' : 'lazy'}
+                  />
+                </div>
+                <p className="text-xs font-semibold text-center text-black uppercase">{item.title}</p>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
 
-              <p className="text-xs font-semibold text-center text-black uppercase">{item.title}</p>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        {/* Navigation buttons */}
-        <div className="flex md:hidden gap-2 justify-center m-6">
-          <CarouselNavButtons
-            onPrev={() => carouselApi?.scrollPrev()}
-            onNext={() => carouselApi?.scrollNext()}
-            hasPrev={canScrollPrev}
-            hasNext={canScrollNext}
-          />
-        </div>
-      </Carousel>
+          {/* Navigation buttons */}
+          <div className="flex md:hidden gap-2 justify-center m-6">
+            <CarouselNavButtons
+              onPrev={() => carouselApi?.scrollPrev()}
+              onNext={() => carouselApi?.scrollNext()}
+              hasPrev={canScrollPrev}
+              hasNext={canScrollNext}
+            />
+          </div>
+        </Carousel>
+      </div>
     </section>
   )
 }
