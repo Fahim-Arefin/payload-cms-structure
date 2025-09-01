@@ -77,7 +77,7 @@ function OfferCard2({ data }: Props) {
             <div>Explore Now</div>
             <ArrowUpRight size={15} className="mt-0.5" />
           </div> */}
-          <ToolTip>
+          {/* <ToolTip>
             <Button
               variant="link"
               className="text-[#ED7125] hover:underline w-fit mx-auto lg:mx-0 
@@ -89,7 +89,7 @@ function OfferCard2({ data }: Props) {
                 <ArrowUpRight />
               </div>
             </Button>
-          </ToolTip>
+          </ToolTip> */}
         </div>
       </div>
     </div>
