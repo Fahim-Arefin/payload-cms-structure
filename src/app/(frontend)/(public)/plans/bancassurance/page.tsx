@@ -7,18 +7,17 @@ import { InsuranceCoverageTab } from '@/components/custom/shared/plans/Insurance
 function Bancassurance() {
   const heroSlides = [
     {
-      title: 'Shanta Life Bancassurance',
+      title: 'Bancassurance',
       subtitle: '',
       description:
-        'Where banking meets protection, Tailored for individuals, Delivered through trust',
+        'Where banking meets protection, Tailored for individuals, delivered through trust',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/banner6.jpg`,
     },
   ]
   const planInfoData = {
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/planInfo3.png`,
     // mobileImage: '/assets/solutions/bancassurance/mobile/planInfo3.png',
-    description: `At Shanta Life, we partner with leading banks and NBFIs to offer clear, affordable life insurance solutions that safeguard your financial journey.
-Our customized coverage options are designed to meet the distinct needs of different banking segments—ensuring protection that truly fits.`,
+    description: `At Shanta Life, we partner with leading banks to offer clear, affordable life insurance solutions that safeguard your financial journey. Our customized products address the diverse financial needs and risks of different banking segments, ensuring maximum protection for families during uncertain times while offering substantial financial benefits at maturity.`,
   }
 
   const bankingFacilitiesData = {
@@ -83,19 +82,19 @@ Our customized coverage options are designed to meet the distinct needs of diffe
         title: 'Total Permanent Disability',
         description:
           'In the event of an insured member’s death, Shanta Life provides financial support to the nominated beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times. ',
-        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon1.png`,
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon3.png`,
       },
       {
         title: 'In-Patient Health Coverage',
         description:
           'In the event of an insured member’s death, Shanta Life provides financial support to the nominated beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.',
-        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon2.png`,
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon4.png`,
       },
       {
         title: 'Critical Illness Coverage',
         description:
           'In the event of an insured member’s death, Shanta Life provides financial support to the nominated beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.',
-        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon2.png`,
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon5.png`,
       },
     ],
   }

@@ -77,10 +77,25 @@ const page: FC<pageProps> = ({}) => {
       title: 'Saurab Borua',
       image: '/assets/career/testimonials/Saurab Borua.jpg',
       mobileImage: `/assets/career/mobile/Saurab Borua.jpg`,
-      description: `Shanta Life is more than just a workplace - it's a movement built on purpose, passion, and people. From the very first day, I felt the pulse of something extraordinary: a culture rooted in trust, driven by values and fueled by a collective dream to redefine life insurance in Bangladesh.
-    Here, every role matters, every voice is heard, and every idea has the power to inspire change. As a young HR professional, I’ve been fortunate to be part of an environment that doesn’t just talk about transformation - it lives it. From nurturing talent to shaping culture, from building systems to unlocking human potential, I’ve seen firsthand how a clear vision, aligned values and courageous leadership can create something truly exceptional.
-    At Shanta Life, we don’t just offer protection - we ignite possibility. I am proud—honored—to be part of this inspiring journey, alongside brilliant minds and warm hearts who are committed to making a difference. `,
-      designation: 'Information Technology.',
+      description: `At Shanta Life, innovation is in our DNA, and every challenge is an opportunity to grow. 
+      As a member of the IT Department, I’ve had the chance to work on building the digital backbone of a next-gen life insurance brand. 
+      Here, IT isn’t just support — it’s strategy, speed, and serious innovation. Every day is a mix of clean code, caffeine, 
+      and conversations that actually spark change.`,
+      designation: 'Information Technology',
+    },
+    {
+      title: 'Rafiqul Ahsan Mohin',
+      image: '/assets/career/testimonials/Mohin.jpg',
+      mobileImage: `/assets/career/mobile/Mohin.jpg`,
+      description: `Shanta Life is more than just a workplace - it's a movement built on purpose, passion, and people. 
+      From the very first day, I felt the pulse of something extraordinary: a culture rooted in trust, driven by values and fueled by a 
+      collective dream to redefine life insurance in Bangladesh.Here, every role matters, every voice is heard, and every idea has the 
+      power to inspire change. As a young HR professional, I’ve been fortunate to be part of an environment that doesn’t just talk about 
+      transformation - it lives it. From nurturing talent to shaping culture, from building systems to unlocking human potential, 
+      I’ve seen firsthand how a clear vision, aligned values and courageous leadership can create something truly exceptional. 
+      At Shanta Life, we don’t just offer protection - we ignite possibility. I am proud—honored—to be part of this inspiring journey, 
+      alongside brilliant minds and warm hearts who are committed to making a difference.`,
+      designation: 'Human Resources',
     },
     {
       title: 'Rabeya Dihan',

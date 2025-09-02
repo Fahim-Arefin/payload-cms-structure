@@ -1,7 +1,7 @@
 import CallNowButton from '@/components/custom/shared/CallNowButton'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import PlanInfoSection from '@/components/custom/shared/PlanInfoSection'
+import AccidentalIntroSection from '@/components/custom/shared/plans/AccidentalIntroSection'
 import MatricsSection from '@/components/custom/shared/plans/MatricsSection'
 import OffersClientWrapper from '@/components/custom/shared/plans/OffersClientWrapper'
 
@@ -74,7 +74,7 @@ function page() {
           </div>
         </div>
       </HeroSection>
-      <PlanInfoSection data={planInfoData} />
+      <AccidentalIntroSection data={planInfoData}/>
       <OffersClientWrapper
         data={offersData}
         subheading="Four types of protection to keep you and your loved ones financially secure"
