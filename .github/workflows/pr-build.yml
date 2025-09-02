@@ -17,6 +17,9 @@ jobs:
 
       - name: Set up Node.js version with NVM
         run: |
+          # Load NVM (assuming it's already installed on the runner)
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads NVM
           nvm install v22.19.0
           nvm use v22.19.0
 
