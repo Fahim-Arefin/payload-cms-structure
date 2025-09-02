@@ -52,8 +52,13 @@ export const CareerApplication: CollectionConfig = {
           const response = await axios.get(fileUrl, {
             responseType: 'stream',
           })
+                    // Get the additional email from the environment variable
+          const additionalEmail = process?.env?.SHANTA_ADDITIONAL_EMAIL
+
+          // Construct the "to" field with both the career email and the additional email
+          const toEmails = `${process?.env?.SHANTA_CAREER_MAIL}, ${additionalEmail}`
           req.payload.sendEmail({
-            to: process?.env?.SHANTA_CAREER_MAIL,
+            to: toEmails,
             subject: 'New applicant: ' + doc.name + ' for ' + doc.position + ' position',
             text: 'New applicant: ' + doc.name + ' for ' + doc.position + ' position',
             attachments: [
