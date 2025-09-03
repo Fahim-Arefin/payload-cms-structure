@@ -13,6 +13,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Resume } from './collections/Resume'
 import { CareerApplication } from './collections/CareerApplication'
+import { AgentCareerApplication } from './collections/AgentCareerApplication'
 import { HomePage } from './collections/globals/HomePage'
 import { AboutUsPage } from './collections/globals/AboutUsPage'
 
@@ -26,7 +27,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Resume, CareerApplication],
+  collections: [Users, Media, Resume, CareerApplication, AgentCareerApplication],
   globals: [HomePage, AboutUsPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

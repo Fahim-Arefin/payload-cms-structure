@@ -55,7 +55,7 @@ export const AgentCareerApplication: CollectionConfig = {
           const additionalEmail = process?.env?.SHANTA_ADDITIONAL_EMAIL
 
           // Construct the "to" field with both the career email and the additional email
-          const toEmails = `${process?.env?.SHANTA_CAREER_MAIL}, ${additionalEmail}`
+          const toEmails = `${process?.env?.SHANTA_AGENT_CAREER_MAIL}, ${additionalEmail}`
 
           req.payload.sendEmail({
             to: toEmails,
