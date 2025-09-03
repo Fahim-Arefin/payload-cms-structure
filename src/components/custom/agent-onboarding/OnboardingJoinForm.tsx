@@ -265,13 +265,13 @@ function OnboardingJoinForm() {
           Browse File
         </label> */}
         <div
-          className={`flex w-full rounded-[6px] overflow-hidden bg-[#FCF4EB] md:bg-white ${isLoading ? 'opacity-60 pointer-events-none' : ''}`}
+          className={`flex w-full rounded-[6px] shadow-[0px_0px_5px_0px_#00000040] overflow-hidden bg-[#FCF4EB] md:bg-white ${isLoading ? 'opacity-60 pointer-events-none' : ''}`}
         >
           <label
             htmlFor="resume"
             className="shadow-[0px_0px_5px_0px_#00000040] flex flex-1 items-center cursor-pointer"
           >
-            <span className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 block w-full text-[#B0B0B0] text-[13px] select-none">
+            <span className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] rounded-r-none px-5 py-2 xl:px-6 xl:py-4 block w-full text-[#737373] text-[13px] select-none">
               {resumeUploadFieldText}
             </span>
             <input
@@ -288,7 +288,7 @@ function OnboardingJoinForm() {
           </label>
           <label
             htmlFor="resume"
-            className="shadow-[0px_0px_5px_0px_#00000040] bg-[#B09B67] text-white font-semibold text-[13px] px-4 py-2 cursor-pointer transition-colors hover:bg-[#a29050] select-none"
+            className="shadow-[0px_0px_5px_0px_#00000040] flex justify-center items-center bg-[#B09B67] text-white font-semibold text-[13px] px-4 py-2 cursor-pointer transition-colors hover:bg-[#a29050] select-none"
             style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
           >
             Browse File
