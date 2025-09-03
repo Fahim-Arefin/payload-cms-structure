@@ -15,9 +15,14 @@ export const POST = async (req: PayloadRequest) => {
     city: string
     occupation: string
   }
-  
+
+  const additionalEmail = process?.env?.SHANTA_ADDITIONAL_EMAIL
+
+  // Construct the "to" field with both the original and additional email
+  const toEmails = `${process?.env?.SHANTA_PURCHASE_MAIL}, ${additionalEmail}`
+
   await payload?.sendEmail({
-    to: process?.env?.SHANTA_SUPPORT_MAIL,
+    to: toEmails,
     subject: 'Purchase Request - Insurance Plan',
     text: `New Purchase Request:
     
@@ -32,6 +37,6 @@ Occupation: ${occupation}
 
 This customer is interested in purchasing the ${planName} and has provided their details for follow-up.`,
   })
-  
+
   return Response.json({ success: true })
 }
