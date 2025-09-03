@@ -1,0 +1,56 @@
+name: PNPM Build
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+      - staging
+
+jobs:
+  pr-build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js version with NVM
+        run: |
+          # Load NVM (assuming it's already installed on the runner)
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads NVM
+          nvm install v22.19.0
+          nvm use v22.19.0
+
+      - name: Install pnpm if not installed
+        run: |
+          # Check if pnpm is installed
+          if ! command -v pnpm &> /dev/null
+          then
+            echo "pnpm is not installed, installing..."
+            npm install -g pnpm  # Install pnpm globally for the current Node version
+          else
+            echo "pnpm is already installed"
+          fi
+
+      - name: Run build
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+          DATABASE_URI: ${{ secrets.DATABASE_URI }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_MAIL_FROM: ${{ secrets.SMTP_MAIL_FROM }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+          S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
+          S3_ACCESS_KEY: ${{ secrets.S3_ACCESS_KEY }}
+          S3_SECRET_KEY: ${{ secrets.S3_SECRET_KEY }}
+          S3_REGION: ${{ secrets.S3_REGION }}
+          SHANTA_CAREER_MAIL: ${{ secrets.SHANTA_CAREER_MAIL }}
+          SHANTA_SUPPORT_MAIL: ${{ secrets.SHANTA_SUPPORT_MAIL }}
+          NEXT_PUBLIC_STATIC_IMG_DOMAIN: ${{ secrets.NEXT_PUBLIC_STATIC_IMG_DOMAIN }}
+        run: pnpm build
