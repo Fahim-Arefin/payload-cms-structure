@@ -94,7 +94,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
           <>
             <div className="col-span-2 border-r-2 border-[#D9D9D9] p-2 py-2 xl:py-3 lg:my-3 xl:my-4">
               <div
-                className={`text-[12px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
+                className={`text-[16px] lg:text-[14px] xl:text-[16px] font-medium text-center ${
                   confirmedPaymentMode === 'Monthly'
                     ? 'text-[#ED7125] text-[16px] lg:text-[20px] xl:text-[24px] font-bold'
                     : 'text-[#1E1E1E]'
@@ -103,7 +103,7 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
                 Monthly
               </div>
               <div
-                className={`text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
+                className={`text-[16px] lg:text-[16px] xl:text-[18px] 2xl:text-xl font-bold text-center ${
                   confirmedPaymentMode === 'Monthly'
                     ? 'text-[#ED7125] text-[16px] lg:text-[20px] xl:text-[24px] font-bold'
                     : 'text-[#1E1E1E]'
