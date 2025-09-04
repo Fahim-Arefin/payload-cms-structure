@@ -25,11 +25,16 @@ jobs:
       - name: Build Docker image
         run: |
           IMAGE_TAG=$(git rev-parse --short HEAD)
+          if ${{ github.ref == 'refs/heads/main' }}; then
+            BRANCH='main'
+          else
+            BRANCH='staging'
+          fi
 
           docker build --progress=plain \
             -f Dockerfile \
             -t shantalife:$IMAGE_TAG \
-            -t shantalife:latest .
+            -t shantalife:$BRANCH-latest .
 
       - name: Deploy to servers
         run: |
@@ -37,13 +42,9 @@ jobs:
 
           if ${{ github.ref == 'refs/heads/main' }}; then
             BRANCH='main'
-          else
-            BRANCH='staging'
-          fi
-
-          if ${{ github.ref == 'refs/heads/main' }}; then
             PORT=${{ secrets.SERVER_PORT_MAIN }}
           else
+            BRANCH='staging'
             PORT=${{ secrets.SERVER_PORT_STAGING }}
           fi
 
