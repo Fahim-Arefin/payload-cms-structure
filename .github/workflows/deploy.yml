@@ -67,7 +67,7 @@ jobs:
               docker ps -q --filter name=shantalife-$BRANCH | xargs -r docker stop
               docker ps -a -q --filter "name=shantalife-$BRANCH" | xargs -r docker rm
 
-              docker run -d -p ${{ secrets.PORT }}:3000 --name shantalife-$BRANCH shantalife:$BRANCH-latest
+              docker run -d -p $PORT:3000 --name shantalife-$BRANCH shantalife:$BRANCH-latest
 
               docker image prune -a -f
 
