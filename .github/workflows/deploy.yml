@@ -1,0 +1,77 @@
+name: Build and Deploy Docker Image
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+jobs:
+  build_and_deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create .env from ENV_FILE secret
+        run: |
+          cat > .env << 'EOF'
+          ${{ secrets.ENV_FILE }}
+          EOF
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker image
+        run: |
+          IMAGE_TAG=$(git rev-parse --short HEAD)
+
+          docker build --progress=plain \
+            -f Dockerfile \
+            -t shantalife:$IMAGE_TAG \
+            -t shantalife:latest .
+
+      - name: Deploy to servers
+        run: |
+          IMAGE_TAG=$(git rev-parse --short HEAD)
+
+          if ${{ github.ref == 'refs/heads/main' }}; then
+            BRANCH='main'
+          else
+            BRANCH='staging'
+          fi
+
+          if ${{ github.ref == 'refs/heads/main' }}; then
+            PORT=${{ secrets.SERVER_PORT_MAIN }}
+          else
+            PORT=${{ secrets.SERVER_PORT_STAGING }}
+          fi
+
+          mkdir -p ~/.ssh/shanta-life
+          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/shanta-life/id_rsa
+          chmod 600 ~/.ssh/shanta-life/id_rsa
+
+          docker save -o shantalife.tar shantalife:$IMAGE_TAG shantalife:$BRANCH-latest
+
+          for SERVER_IP in $(echo ${{ secrets.SERVER_IP_LIST }} | tr ',' '\n'); do
+            echo "Deploying to $SERVER_IP"
+
+            ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
+
+            scp -i ~/.ssh/shanta-life/id_rsa shantalife.tar ubuntu@$SERVER_IP:/tmp
+
+            ssh -i ~/.ssh/shanta-life/id_rsa ubuntu@$SERVER_IP <<EOF
+              docker images -q --filter "reference=shantalife" | xargs -r docker rmi -f
+              docker load -i /tmp/shantalife.tar
+              docker ps -q --filter "name=shantalife" | xargs -r docker stop
+              docker ps -a -q --filter "name=shantalife" | xargs -r docker rm
+              docker images -q --filter "dangling=true" | xargs -r docker rmi
+
+              docker run -d -p ${{ secrets.PORT }}:3000 --name shantalife shantalife:latest
+
+              rm -f /tmp/shantalife.tar
+          EOF
+          done
+
+          rm -f ~/.ssh/shanta-life/id_rsa
+          rm -f shantalife.tar
