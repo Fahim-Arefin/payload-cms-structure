@@ -5,14 +5,16 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "pnpm install --frozen-lockfile && cross-env NODE_OPTIONS=--no-deprecation next build",
+    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "sabuild": "pnpm install --frozen-lockfile && pnpm build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
+    "sastart": "cross-env NODE_OPTIONS=--no-deprecation node .next/standalone/server.js"
   },
   "dependencies": {
     "@lottiefiles/dotlottie-react": "^0.14.4",
