@@ -233,7 +233,7 @@ export const NAV_ITEMS_MOBILE = [
         ],
       },
       { href: '/plans/corporate', label: 'Corporate Plan' },
-      { href: '/plans/microinsurance', label: 'Microinsurance' },
+      // { href: '/plans/microinsurance', label: 'Microinsurance' },
     ],
   },
   { href: '/pay-premium', label: 'Pay Premium' },
