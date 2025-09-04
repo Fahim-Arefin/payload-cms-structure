@@ -64,10 +64,10 @@ jobs:
             ssh -i ~/.ssh/shanta-life/id_rsa ubuntu@$SERVER_IP <<EOF
               docker images -q --filter "reference=shantalife" | xargs -r docker rmi -f
               docker load -i /tmp/shantalife.tar
-              docker ps -q --filter "name=shantalife" | xargs -r docker stop
-              docker ps -a -q --filter "name=shantalife" | xargs -r docker rm
+              docker ps -q --filter name=shantalife-$BRANCH | xargs -r docker stop
+              docker ps -a -q --filter "name=shantalife-$BRANCH" | xargs -r docker rm
 
-              docker run -d -p ${{ secrets.PORT }}:3000 --name shantalife shantalife:$BRANCH-latest
+              docker run -d -p ${{ secrets.PORT }}:3000 --name shantalife-$BRANCH shantalife:$BRANCH-latest
 
               docker image prune -a -f
 
