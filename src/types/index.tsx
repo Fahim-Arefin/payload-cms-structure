@@ -186,6 +186,16 @@ export type BankingFacilitiesDataType = {
   }[]
 }
 
+export type MicroinsuranceDataType = {
+  title: string
+  coloredTitle: string
+  microinsuranceProductsImage: string
+  microinsuranceProducts: {
+    image: string
+    description: string
+  }[]
+}
+
 export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
   link?: string

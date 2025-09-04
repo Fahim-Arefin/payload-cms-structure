@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     resume: Resume;
     'career-application': CareerApplication;
+    'agent-career-application': AgentCareerApplication;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -81,6 +82,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     resume: ResumeSelect<false> | ResumeSelect<true>;
     'career-application': CareerApplicationSelect<false> | CareerApplicationSelect<true>;
+    'agent-career-application': AgentCareerApplicationSelect<false> | AgentCareerApplicationSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -220,6 +222,18 @@ export interface CareerApplication {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "agent-career-application".
+ */
+export interface AgentCareerApplication {
+  id: string;
+  name: string;
+  phone: string;
+  resume: string | Resume;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -240,6 +254,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'career-application';
         value: string | CareerApplication;
+      } | null)
+    | ({
+        relationTo: 'agent-career-application';
+        value: string | AgentCareerApplication;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -377,6 +395,17 @@ export interface CareerApplicationSelect<T extends boolean = true> {
   email?: T;
   position?: T;
   message?: T;
+  resume?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "agent-career-application_select".
+ */
+export interface AgentCareerApplicationSelect<T extends boolean = true> {
+  name?: T;
+  phone?: T;
   resume?: T;
   updatedAt?: T;
   createdAt?: T;
