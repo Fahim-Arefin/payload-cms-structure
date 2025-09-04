@@ -77,3 +77,8 @@ jobs:
 
           rm -f ~/.ssh/shanta-life/id_rsa
           rm -f shantalife.tar
+
+          docker images -q --filter "dangling=true" | xargs -r docker rmi
+          docker images -q --filter "reference=shantalife" | xargs -r docker rmi
+          docker container prune -f
+          docker volume ls -q --filter dangling=true | xargs -r docker volume rm
