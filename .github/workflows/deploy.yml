@@ -66,9 +66,10 @@ jobs:
               docker load -i /tmp/shantalife.tar
               docker ps -q --filter "name=shantalife" | xargs -r docker stop
               docker ps -a -q --filter "name=shantalife" | xargs -r docker rm
-              docker images -q --filter "dangling=true" | xargs -r docker rmi
 
-              docker run -d -p ${{ secrets.PORT }}:3000 --name shantalife shantalife:latest
+              docker run -d -p ${{ secrets.PORT }}:3000 --name shantalife shantalife:$BRANCH-latest
+
+              docker image prune -a -f
 
               rm -f /tmp/shantalife.tar
           EOF
