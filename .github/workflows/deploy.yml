@@ -17,12 +17,12 @@ jobs:
         run: |
           if ${{ github.ref == 'refs/heads/main' }}; then
             cat > .env << 'EOF'
-            ${{ secrets.ENV_FILE_MAIN }}
-            EOF
+          ${{ secrets.ENV_FILE_MAIN }}
+          EOF
           else
             cat > .env << 'EOF'
-            ${{ secrets.ENV_FILE_STAGING }}
-            EOF
+          ${{ secrets.ENV_FILE_STAGING }}
+          EOF
           fi
 
       - name: Set up Docker Buildx
