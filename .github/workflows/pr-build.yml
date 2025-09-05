@@ -14,9 +14,15 @@ jobs:
 
       - name: Create .env from ENV_FILE secret
         run: |
-          cat > .env << 'EOF'
-          ${{ secrets.ENV_FILE }}
+          if ${{ github.ref == 'refs/heads/main' }}; then
+            cat > .env << 'EOF'
+          ${{ secrets.ENV_FILE_MAIN }}
           EOF
+          else
+            cat > .env << 'EOF'
+          ${{ secrets.ENV_FILE_STAGING }}
+          EOF
+          fi
 
       # - name: Set up Docker Buildx
       #   uses: docker/setup-buildx-action@v1
