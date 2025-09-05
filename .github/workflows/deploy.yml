@@ -67,14 +67,13 @@ jobs:
             scp -i ~/.ssh/shanta-life/id_rsa shantalife.tar ubuntu@$SERVER_IP:/tmp
 
             ssh -i ~/.ssh/shanta-life/id_rsa ubuntu@$SERVER_IP <<EOF
-              mkdir -p ~/docker_cache
 
               docker images -q --filter "reference=shantalife" | xargs -r docker rmi -f
               docker load -i /tmp/shantalife.tar
               docker ps -q --filter name=shantalife-$BRANCH | xargs -r docker stop
               docker ps -a -q --filter "name=shantalife-$BRANCH" | xargs -r docker rm
 
-              docker run -d --restart=always --cache-from type=local,src=~/docker_cache --cache-to type=local,dest=~/docker_cache,mode=max -p $PORT:3000 --name shantalife-$BRANCH shantalife:$BRANCH-latest
+              docker run -d --restart=always -p $PORT:3000 --name shantalife-$BRANCH shantalife:$BRANCH-latest
 
               docker image prune -a -f
 
