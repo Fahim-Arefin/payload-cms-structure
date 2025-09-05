@@ -25,6 +25,9 @@ jobs:
           EOF
           fi
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: Build Docker image
         run: |
           IMAGE_TAG=$(git rev-parse --short HEAD)
@@ -35,7 +38,7 @@ jobs:
           fi
 
           mkdir -p ~/docker_cache
-          docker build --progress=plain \
+          DOCKER_BUILDKIT=1 docker build --progress=plain \
             --cache-from type=local,src=~/docker_cache --cache-to type=local,dest=~/docker_cache,mode=max \
             -f Dockerfile \
             -t shantalife:$IMAGE_TAG \
