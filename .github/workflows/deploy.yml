@@ -34,9 +34,7 @@ jobs:
             BRANCH='staging'
           fi
 
-          mkdir -p ~/docker_cache
           docker build --progress=plain \
-            --cache-from type=local,src=~/docker_cache --cache-to type=local,dest=~/docker_cache,mode=max \
             -f Dockerfile \
             -t shantalife:$IMAGE_TAG \
             -t shantalife:$BRANCH-latest .
