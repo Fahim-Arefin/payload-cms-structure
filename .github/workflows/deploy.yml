@@ -49,9 +49,11 @@ jobs:
           if ${{ github.ref == 'refs/heads/main' }}; then
             BRANCH='main'
             PORT=${{ secrets.SERVER_PORT_MAIN }}
+            SERVER_IP_LIST=${{ secrets.SERVER_IP_LIST_MAIN }}
           else
             BRANCH='staging'
             PORT=${{ secrets.SERVER_PORT_STAGING }}
+            SERVER_IP_LIST=${{ secrets.SERVER_IP_LIST_STAGING }}
           fi
 
           mkdir -p ~/.ssh/shanta-life
@@ -60,7 +62,7 @@ jobs:
 
           docker save -o shantalife.tar shantalife:$IMAGE_TAG shantalife:$BRANCH-latest
 
-          for SERVER_IP in $(echo ${{ secrets.SERVER_IP_LIST }} | tr ',' '\n'); do
+          for SERVER_IP in $(echo $SERVER_IP_LIST | tr ',' '\n'); do
             echo "Deploying to $SERVER_IP"
 
             ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
