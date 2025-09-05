@@ -26,7 +26,9 @@ jobs:
 
       - name: Build Docker image
         run: |
+          mkdir -p ~/docker_cache
           docker build --progress=plain \
+            --cache-from type=local,src=~/docker_cache --cache-to type=local,dest=~/docker_cache,mode=max \
             -f Dockerfile \
             -t shantalife .
           docker images -q --filter "dangling=true" | xargs -r docker rmi -f
