@@ -38,7 +38,7 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
   }),
 
-  // sharp,
+  sharp,
   email: nodemailerAdapter({
     defaultFromAddress: process?.env?.SMTP_MAIL_FROM ?? 'uchchhash@xynolab.com',
     defaultFromName: 'Shanta Life',

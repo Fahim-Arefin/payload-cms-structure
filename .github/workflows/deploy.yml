@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - staging
+      - staging_clone
 
 jobs:
   build_and_deploy:
