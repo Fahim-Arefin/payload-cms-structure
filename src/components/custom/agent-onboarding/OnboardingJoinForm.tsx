@@ -144,7 +144,7 @@ function OnboardingJoinForm() {
 
   // const [position, setPosition] = useState(positions[0] ?? '')
   // const [message, setMessage] = useState('')
-  const [resumeUploadFieldText, setResumeUploadFieldText] = useState('Upload your resume')
+  const [resumeUploadFieldText, setResumeUploadFieldText] = useState('Upload your resume. (Pdf format & maximum 12mb)')
 
   return (
     <form

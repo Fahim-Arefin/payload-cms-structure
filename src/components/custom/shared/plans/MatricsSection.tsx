@@ -155,7 +155,7 @@ function MatricsSection({}: Props) {
       {/* button */}
       <div className="flex gap-4 lg:gap-6 justify-center">
         <Link
-          href="/assets/pdf/Required Brochures/Health & Protection/Shanta Accidental Coverage/Shanta Life Rider Brochure.pdf"
+          href="/assets/pdf/Required Brochures/Health & Protection/Shanta Accidental Coverage/Shanta-Life-Rider-Brochure.pdf"
           target="_blank"
         >
           <GlobalButton variant="primary" text="Download Brochure" />
