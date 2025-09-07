@@ -43,18 +43,20 @@ jobs:
       - name: Deploy to servers
         run: |
           IMAGE_TAG=$(git rev-parse --short HEAD)
+          mkdir -p ~/.ssh/shanta-life
 
           if ${{ github.ref == 'refs/heads/main' }}; then
             BRANCH='main'
             PORT=${{ secrets.SERVER_PORT_MAIN }}
             SERVER_IP_LIST=${{ secrets.SERVER_IP_LIST_MAIN }}
+            printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY_MAIN }}" > ~/.ssh/shanta-life/id_rsa
           else
             BRANCH='staging'
             PORT=${{ secrets.SERVER_PORT_STAGING }}
             SERVER_IP_LIST=${{ secrets.SERVER_IP_LIST_STAGING }}
+            printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY_STAGING }}" > ~/.ssh/shanta-life/id_rsa
           fi
 
-          mkdir -p ~/.ssh/shanta-life
           printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/shanta-life/id_rsa
           chmod 600 ~/.ssh/shanta-life/id_rsa
 
