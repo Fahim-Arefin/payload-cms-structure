@@ -57,7 +57,6 @@ jobs:
             printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY_STAGING }}" > ~/.ssh/shanta-life/id_rsa
           fi
 
-          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/shanta-life/id_rsa
           chmod 600 ~/.ssh/shanta-life/id_rsa
 
           docker save -o shantalife.tar shantalife:$IMAGE_TAG shantalife:$BRANCH-latest
