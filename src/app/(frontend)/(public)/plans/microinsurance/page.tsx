@@ -3,6 +3,7 @@ import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import CallNowButton from '@/components/custom/shared/CallNowButton'
 import MicroinsuranceIntro from '@/components/custom/shared/plans/MicroinsuranceIntro'
 import MicroinsuranceDescSection from '@/components/custom/microinsurance/MicroinsuranceDescSection'
+import MicroinsuranceOffer from '@/components/custom/microinsurance/MicroinsuranceOffer'
 
 type Props = {}
 
@@ -38,6 +39,42 @@ function page({}: Props) {
      
     ],
   }
+
+ const offerData = {
+  title: 'We',
+  coloredTitle: 'Offer',
+  description: 'Comprehensive insurance solutions tailored for your needs and budget',
+  offers: [
+    {
+      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon1.png`,
+      title: 'Life Insurance',
+      summary:
+        "Comprehensive life coverage to protect your family's financial future",
+      bullets: ['Family protection', 'Affordable premiums', 'Quick claims'],
+    },
+    {
+      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon2.png`,
+      title: 'Health Insurance',
+      summary:
+        'Essential health coverage for medical emergencies and treatments',
+      bullets: ['Emergency coverage', 'Hospital benefits', 'Medical support'],
+    },
+    {
+      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon3.png`,
+      title: 'Family Protection',
+      summary:
+        'Complete family insurance solutions tailored for your needs',
+      bullets: ['Multi-member coverage', 'Flexible plans', '24/7 support'],
+    },
+    {
+      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon4.png`,
+      title: 'Property Insurance',
+      summary:
+        'Protect your home and belongings from unexpected events',
+      bullets: ['Home protection', 'Asset coverage', 'Natural disaster cover'],
+    },
+  ],
+}
   return (
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides}>
@@ -55,6 +92,7 @@ function page({}: Props) {
       </HeroSection>
         <MicroinsuranceIntro data={planInfoData} />
       <MicroinsuranceDescSection data={benefitsForCustomerData}/>
+      <MicroinsuranceOffer data={offerData}/>
     </div>
   )
 }
