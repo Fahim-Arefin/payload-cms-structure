@@ -4,6 +4,8 @@ import CallNowButton from '@/components/custom/shared/CallNowButton'
 import MicroinsuranceIntro from '@/components/custom/shared/plans/MicroinsuranceIntro'
 import MicroinsuranceDescSection from '@/components/custom/microinsurance/MicroinsuranceDescSection'
 import MicroinsuranceOffer from '@/components/custom/microinsurance/MicroinsuranceOffer'
+import MicroinsuranceEligibility from '@/components/custom/microinsurance/MicroinsuranceEligibility'
+import MicroinsurancePartners from '@/components/custom/microinsurance/MicroinsurancePartners'
 
 type Props = {}
 
@@ -36,45 +38,82 @@ function page({}: Props) {
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-icon2.png`,
         description: 'Untimely loss of life',
       },
-     
     ],
   }
 
- const offerData = {
-  title: 'We',
-  coloredTitle: 'Offer',
-  description: 'Comprehensive insurance solutions tailored for your needs and budget',
-  offers: [
-    {
-      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon1.png`,
-      title: 'Life Insurance',
-      summary:
-        "Comprehensive life coverage to protect your family's financial future",
-      bullets: ['Family protection', 'Affordable premiums', 'Quick claims'],
-    },
-    {
-      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon2.png`,
-      title: 'Health Insurance',
-      summary:
-        'Essential health coverage for medical emergencies and treatments',
-      bullets: ['Emergency coverage', 'Hospital benefits', 'Medical support'],
-    },
-    {
-      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon3.png`,
-      title: 'Family Protection',
-      summary:
-        'Complete family insurance solutions tailored for your needs',
-      bullets: ['Multi-member coverage', 'Flexible plans', '24/7 support'],
-    },
-    {
-      icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon4.png`,
-      title: 'Property Insurance',
-      summary:
-        'Protect your home and belongings from unexpected events',
-      bullets: ['Home protection', 'Asset coverage', 'Natural disaster cover'],
-    },
+  const offerData = {
+    title: 'We',
+    coloredTitle: 'Offer',
+    description: 'Comprehensive insurance solutions tailored for your needs and budget',
+    offers: [
+      {
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon1.png`,
+        title: 'Life Insurance',
+        summary: "Comprehensive life coverage to protect your family's financial future",
+        bullets: ['Family protection', 'Affordable premiums', 'Quick claims'],
+      },
+      {
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon2.png`,
+        title: 'Health Insurance',
+        summary: 'Essential health coverage for medical emergencies and treatments',
+        bullets: ['Emergency coverage', 'Hospital benefits', 'Medical support'],
+      },
+      {
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon3.png`,
+        title: 'Family Protection',
+        summary: 'Complete family insurance solutions tailored for your needs',
+        bullets: ['Multi-member coverage', 'Flexible plans', '24/7 support'],
+      },
+      {
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon4.png`,
+        title: 'Property Insurance',
+        summary: 'Protect your home and belongings from unexpected events',
+        bullets: ['Home protection', 'Asset coverage', 'Natural disaster cover'],
+      },
+    ],
+  }
+
+  const benefitsData = {
+    title: 'ELIGIBILITY',
+    coloredTitle: 'CRITERIA',
+    description: 'Simple requirements to get started with our microinsurance protection',
+    image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-eligibility.jpg`,
+    items: [
+      {
+        title: 'Age Requirement',
+        label: 'Age: 18-65',
+        icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/eligibility-icon1.png`,
+      },
+      {
+        title: 'Residency Status',
+        label: 'Resident/Citizen of Issuing Country',
+        icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/eligibility-icon2.png`,
+      },
+      {
+        title: 'Income Verification',
+        label: 'Regular Income/Employment',
+        icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/eligibility-icon3.png`,
+      },
+    ],
+  }
+
+  const partnerData = {
+    title: 'Our',
+    coloredTitle: 'Strategic Partners',
+    description:
+      'Working together with trusted organizations to bring insurance to every community',
+        items: [
+    { title: 'NGOs',         dotColor: '#8A7B3D' }, // olive
+    { title: 'MFIs',         dotColor: '#ED7125' }, // orange
+    { title: 'Banks',        dotColor: '#8A7B3D' },
+    { title: 'NBFIs',        dotColor: '#ED7125' },
+    { title: 'Cooperatives', dotColor: '#8A7B3D' },
+    { title: 'NGOs',         dotColor: '#ED7125' },
+    { title: 'MFIs',         dotColor: '#8A7B3D' },
+    { title: 'Banks',        dotColor: '#ED7125' },
   ],
-}
+  }
+
   return (
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides}>
@@ -90,9 +129,11 @@ function page({}: Props) {
           </div>
         </div>
       </HeroSection>
-        <MicroinsuranceIntro data={planInfoData} />
-      <MicroinsuranceDescSection data={benefitsForCustomerData}/>
-      <MicroinsuranceOffer data={offerData}/>
+      <MicroinsuranceIntro data={planInfoData} />
+      <MicroinsuranceDescSection data={benefitsForCustomerData} />
+      <MicroinsuranceOffer data={offerData} />
+      <MicroinsuranceEligibility data={benefitsData} />
+      {/* <MicroinsurancePartners data={partnerData} /> */}
     </div>
   )
 }
