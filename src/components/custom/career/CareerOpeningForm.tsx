@@ -134,7 +134,7 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
   const [phone, setPhone] = useState('')
   const [position, setPosition] = useState(positions[0] ?? '')
   const [message, setMessage] = useState('')
-  const [resumeUploadFieldText, setResumeUploadFieldText] = useState('Upload your resume')
+  const [resumeUploadFieldText, setResumeUploadFieldText] = useState('Upload your resume. (Pdf format & maximum 12mb)')
 
   // Handle phone input - only allow numbers and limit to 11 digits
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -215,7 +215,7 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       {/* File upload */}
       <div className={`flex w-full rounded-[6px] overflow-hidden bg-[#FCF4EB] md:bg-white ${isLoading ? 'opacity-60 pointer-events-none' : ''}`}>
         <label htmlFor="resume" className="flex flex-1 items-center cursor-pointer">
-          <span className="block w-full text-[#B0B0B0] text-[13px] px-3 py-2 select-none">
+          <span className="block w-full text-[#B0B0B0] text-[11px] px-3 py-2 select-none">
             {resumeUploadFieldText}
           </span>
           <input

@@ -116,7 +116,7 @@ export default function MultiStageTab({ config, data }: Props) {
                 {activeTab === 'benefits' && <BenefitsTabSection />}
               </TabsContent>
               <GlobalTabButtons
-                brochureLink="/assets/pdf/Required Brochures/Multi-Stage Maturity Plans/Multi Stage Plan (3pp, 4pp). V1 pdf.pdf"
+                brochureLink="/assets/pdf/Required Brochures/Multi-Stage Maturity Plans/Multi-Stage-Plan.pdf"
                 explorePlansLink="/plans/individual"
                 calculateLink="#"
               />
