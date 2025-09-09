@@ -119,6 +119,7 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
             <Link
               href="/assets/pdf/Required Brochures/Health Protection/Shanta Critical Protection/Shanta-Life-Rider-Brochure.pdf"
               target="_blank"
+              prefetch={false}
             >
               <GlobalButton variant="primary" text="Download Brochure" />
             </Link>

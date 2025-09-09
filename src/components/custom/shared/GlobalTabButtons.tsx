@@ -24,7 +24,7 @@ function GlobalTabButtons({
     <div className="mt-[15px] md:mt-[30px] lg:mt-[50px] xl:mt-[80px] w-fit mx-auto">
       <div className="flex flex-row gap-2  ">
         {brochureLink && (
-          <Link href={brochureLink} target="_blank">
+          <Link href={brochureLink} target="_blank" prefetch={false}>
             <GlobalButton text="Download Brochure" variant="primary" />
           </Link>
         )}

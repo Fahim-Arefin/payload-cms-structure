@@ -231,7 +231,7 @@ export const PurchaseCardModal = ({
         </div>
 
         <div className="flex justify-center gap-x-4 mt-8">
-          <Link href={purchasePlanData[selectedIndex]?.link} target="_blank">
+          <Link href={purchasePlanData[selectedIndex]?.link} target="_blank" prefetch={false}>
             <GlobalButton text="Download Brochure" variant="primary" />
           </Link>
           {/* <GlobalButton

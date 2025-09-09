@@ -157,6 +157,7 @@ function MatricsSection({}: Props) {
         <Link
           href="/assets/pdf/Required Brochures/Health Protection/Shanta Accidental Coverage/Shanta-Life-Rider-Brochure.pdf"
           target="_blank"
+          prefetch={false}
         >
           <GlobalButton variant="primary" text="Download Brochure" />
         </Link>
