@@ -1,10 +1,8 @@
 import { withPayload } from '@payloadcms/next/withPayload'
 
-const isCI = process.env.CI === 'true';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: isCI ? 'standalone' : undefined,
+  output: 'standalone',
   typescript: {
     ignoreBuildErrors: true,
   },
