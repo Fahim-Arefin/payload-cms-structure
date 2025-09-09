@@ -117,7 +117,7 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
           {/* button */}
           <div className="flex gap-4 lg:gap-6 ">
             <Link
-              href="/assets/pdf/Required Brochures/Health & Protection/Shanta Critical Protection/Shanta-Life-Rider-Brochure.pdf"
+              href="/assets/pdf/Required Brochures/Health Protection/Shanta Critical Protection/Shanta-Life-Rider-Brochure.pdf"
               target="_blank"
             >
               <GlobalButton variant="primary" text="Download Brochure" />
