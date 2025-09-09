@@ -122,6 +122,7 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
           <Link
             href="/assets/pdf/Required Brochures/Corporate Plans/Group-Insurance-Brochure.pdf"
             target="_blank"
+            prefetch={false}
           >
             <GlobalButton text="Download Brochure" variant="primary" />
           </Link>
