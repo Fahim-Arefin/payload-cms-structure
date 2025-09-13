@@ -164,22 +164,32 @@ function page({}: Props) {
         {
           title: 'Group Life Insurance (GL)',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon1.png`,
+          description: `In the event of an insured member’s death, Shanta Life provides financial support to the nominated 
+          beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.`,
         },
         {
           title: 'Accidental Death Coverage (AD)',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon1.png`,
+          description: `In the event of an insured member’s death, Shanta Life provides financial support to the nominated 
+          beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.`,
         },
         {
           title: 'Permanent and Total Disability (PTD)',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon3.png`,
+          description: `In the event of an insured member’s death, Shanta Life provides financial support to the nominated 
+          beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.`,
         },
         {
           title: 'Permanent and Partial Disability (PPD)',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon4.png`,
+          description: `In the event of an insured member’s death, Shanta Life provides financial support to the nominated 
+          beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.`,
         },
         {
           title: 'Critical Illness Coverage (CIB)',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon5.png`,
+          description: `In the event of an insured member’s death, Shanta Life provides financial support to the nominated 
+          beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.`,
         },
       ],
     },
@@ -188,22 +198,32 @@ function page({}: Props) {
         {
           title: 'In-Patient Coverage (IPC)',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon6.png`,
+          description: `Shanta Life’s In-Patient Treatment Plan covers hospitalization costs for 24 hours or more due 
+          to illness or injury, ensuring financial protection for room charges, medical bills, and related expenses`,
         },
         {
           title: 'Maternity Benefits',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon7.png`,
+          description: `Shanta Life’s In-Patient Treatment Plan covers hospitalization costs for 24 hours or more due 
+          to illness or injury, ensuring financial protection for room charges, medical bills, and related expenses`,
         },
         {
           title: 'Out Patient Coverage (OPC)',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon8.png`,
+          description: `Shanta Life’s In-Patient Treatment Plan covers hospitalization costs for 24 hours or more due 
+          to illness or injury, ensuring financial protection for room charges, medical bills, and related expenses`,
         },
         {
           title: 'OPC Dental',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon9.png`,
+          description: `Shanta Life’s In-Patient Treatment Plan covers hospitalization costs for 24 hours or more due 
+          to illness or injury, ensuring financial protection for room charges, medical bills, and related expenses`,
         },
         {
           title: 'OPC Optical',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon10.png`,
+          description: `Shanta Life’s In-Patient Treatment Plan covers hospitalization costs for 24 hours or more due 
+          to illness or injury, ensuring financial protection for room charges, medical bills, and related expenses`,
         },
       ],
     },

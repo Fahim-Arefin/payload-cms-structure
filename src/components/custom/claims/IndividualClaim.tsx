@@ -1,5 +1,7 @@
 'use client'
 
+const SUPPORT_EMAIL = 'info@shantalife.com'
+
 export function IndividualClaim() {
   const data = [
     {
@@ -14,7 +16,10 @@ export function IndividualClaim() {
     },
     {
       descriptionContent: `
-      <b>Step 3:</b></br> Send the documents via email to info@shantalife.com or via your representative to our head office.
+      <b>Step 3:</b></br> Send the documents via email to <a href="mailto:${SUPPORT_EMAIL}"
+           class="text-[#9C8639] underline underline-offset-2 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#9C8639]/40">
+          ${SUPPORT_EMAIL}
+        </a> or via your representative to our head office.
 
         `,
     },
@@ -48,10 +53,7 @@ export function IndividualClaim() {
       </div>
       <h4 className="mt-[30px] lg:mt-[50px] xl:mt-[80px] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
         <span>For any further queries please contact</span>
-        <a
-          href="tel:09610889900"
-          className="text-[#9C8639] ml-2"
-        >
+        <a href="tel:09610889900" className="text-[#9C8639] ml-2">
           09610889900
         </a>
       </h4>

@@ -84,12 +84,12 @@ function Bancassurance() {
           'In the event of an insured member’s death, Shanta Life provides financial support to the nominated beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times. ',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon3.png`,
       },
-      {
-        title: 'In-Patient Health Coverage',
-        description:
-          'In the event of an insured member’s death, Shanta Life provides financial support to the nominated beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.',
-        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon4.png`,
-      },
+      // {
+      //   title: 'In-Patient Health Coverage',
+      //   description:
+      //     'In the event of an insured member’s death, Shanta Life provides financial support to the nominated beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.',
+      //   image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon4.png`,
+      // },
       {
         title: 'Critical Illness Coverage',
         description:
