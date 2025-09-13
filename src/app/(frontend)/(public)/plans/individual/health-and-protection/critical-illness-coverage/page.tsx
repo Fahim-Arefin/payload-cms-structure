@@ -44,7 +44,7 @@ function page() {
       // bgMobileImage:
       //   '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg10.jpg',
       title: 'Affordable Premium',
-      description: 'Security for you and your family in case of lifelong disability.',
+      description: 'Affordable Security for you and your family in case of lifelong disability.',
     },
     {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/offer11.png`,
@@ -63,7 +63,7 @@ function page() {
       //   '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg12.jpg',
       title: 'Protection Against 25+ Critical Illnesses',
       description:
-        'Your loved ones receive twice the insured amount for extra protection (including basic life coverage).',
+        'Your loved ones receive 50% of the insured amount for extra protection (including basic life coverage).',
     },
   ]
 

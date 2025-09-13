@@ -72,8 +72,9 @@ function SavingAndInvestment() {
   const multiStagePlanData = {
     title: 'Multi stage Maturity Plans',
     subtitle: 'Shanta',
-    description:
-      'Shanta Lifes multi stage plans provides the policy owner a guaranteed sum assured. This unique plan combines savings and life insurance components which serves the need for financial security of your family.',
+    description: `With Shanta Multi-stage Maturity Plans, receive the coverage
+    amount in scheduled installments over time, providing financial
+    security to support your future goals and safeguard what matters most.`,
     feature: [
       {
         name: 'Maturity Value',
