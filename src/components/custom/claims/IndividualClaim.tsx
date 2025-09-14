@@ -1,12 +1,14 @@
 'use client'
 
 const SUPPORT_EMAIL = 'info@shantalife.com'
+const CLAIM_FORM_URL = 'https://portal.shantalife.com/'
 
 export function IndividualClaim() {
   const data = [
     {
       descriptionContent: `
-      <b>Step 1:</b></br> Complete the Health Insurance Claim Form duly signed off by the Policy Owner.
+      <b>Step 1:</b></br> Complete the Health Insurance <a href="${CLAIM_FORM_URL}" target="_blank" rel="noopener noreferrer"
+         class="text-[#9C8639] underline underline-offset-2 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#9C8639]/40"> Claim Form </a> duly signed off by the Policy Owner.
         `,
     },
     {

@@ -32,9 +32,9 @@ function SpousePlanTabSection({ data }: Props) {
       ))}
 
       <div className="flex flex-row justify-center items-center gap-4">
-        <GlobalButton text="Download Brochure" variant="secondary" />
+        <GlobalButton text="Download Brochure" className='cursor-not-allowed' variant="secondary" />
 
-        <GlobalButton variant="outline" text="Explore Now" />
+        <GlobalButton variant="outline" className='cursor-not-allowed' text="Explore Now" />
       </div>
     </div>
   )

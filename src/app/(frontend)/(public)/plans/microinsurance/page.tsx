@@ -111,6 +111,10 @@ function page({}: Props) {
     { title: 'NGOs',         dotColor: '#ED7125' },
     { title: 'MFIs',         dotColor: '#8A7B3D' },
     { title: 'Banks',        dotColor: '#ED7125' },
+    { title: 'Banks',        dotColor: '#ED7125' },
+    { title: 'Banks',        dotColor: '#ED7125' },
+    { title: 'Banks',        dotColor: '#ED7125' },
+    { title: 'Banks',        dotColor: '#ED7125' },
   ],
   }
 
@@ -133,7 +137,7 @@ function page({}: Props) {
       <MicroinsuranceDescSection data={benefitsForCustomerData} />
       <MicroinsuranceOffer data={offerData} />
       <MicroinsuranceEligibility data={benefitsData} />
-      {/* <MicroinsurancePartners data={partnerData} /> */}
+      <MicroinsurancePartners data={partnerData} />
     </div>
   )
 }
