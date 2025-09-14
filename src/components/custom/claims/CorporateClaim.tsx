@@ -1,6 +1,8 @@
 import GlobalButton from '@/components/custom/shared/GlobalButton'
 import Link from 'next/link'
 import { ContactComponent } from './CustomerCareCall'
+const PORTAL_URL = 'https://portal.shantalife.com/'
+
 export function CorporateClaim() {
   return (
     <>
@@ -26,6 +28,22 @@ export function CorporateClaim() {
             <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-1/2 text-center mx-auto text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
               <p>Click "Submit Claim" to proceed with your online claim.</p>
               <p>We humbly request you to attach all necessary documents.</p>
+            </div>
+          </div>
+          <div className={`flex mx-auto`}>
+            <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-1/2 text-center mx-auto text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
+              <p>
+                If you have any prior claim submitted, please Login to{' '}
+                <a
+                  href={PORTAL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#9C8639] underline underline-offset-2 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#9C8639]/40"
+                >
+                  My Portal
+                </a>{' '}
+                and check the status.
+              </p>
             </div>
           </div>
           <div

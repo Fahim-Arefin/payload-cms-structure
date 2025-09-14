@@ -25,7 +25,7 @@ function PartnerCarousel({ data }: Props) {
 
   // faster-on-hover interval
   const hoverIntervalRef = useRef<number | null>(null)
-  const FAST_DELAY = 1200 // “a bit faster” – tweak as you like
+  const FAST_DELAY = 800 // “a bit faster” – tweak as you like
 
   useEffect(() => {
     if (!carouselApi) return
