@@ -222,4 +222,25 @@ export const privacyPolicy = [
       </div>
     `,
   },
+  {
+    title: '14. Chatbot Services (Botpress)',
+    secondTitle: ``,
+    points: [],
+    footerText: ``,
+    type: 'custom',
+    content: `
+      <div class="bg-white text-black p-2 text-lg leading-relaxed max-w-4xl ml-2">
+        <p class="mb-6">
+          To improve customer experience, Shanta Life Insurance PLC provides an interactive chatbot service powered by Botpress, a trusted third-party provider.
+        </p>
+         <ul class="list-disc list-inside space-y-1 mb-4">
+    <li>When you interact with the chatbot, the information you share is processed securely and may be used to assist with your queries or improve our services.</li>
+    <li>All chatbot interactions are encrypted and safeguarded to prevent unauthorized access.</li>
+    <li>The chatbot does not request or store sensitive personal information such as financial details, identification numbers, or passwords.</li>
+    <li>Data collected through the chatbot is used only for service enhancement and customer support. It is not shared with unauthorized third parties, sold, or used for advertising purposes.</li>
+    <li>By using the chatbot, you agree to the secure processing of your information in line with this Privacy Policy.</li> 
+  </ul>
+      </div>
+    `,
+  },
 ]
