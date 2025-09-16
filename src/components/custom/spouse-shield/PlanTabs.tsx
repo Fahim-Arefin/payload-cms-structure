@@ -14,7 +14,7 @@ type Props = {
 }
 
 export function PlanTabs({ config, data }: Props) {
-  const [activeTab, setActiveTab] = useState(config[0].value)
+  const [activeTab, setActiveTab] = useState(config[1].value)
   console.log(activeTab)
 
   return (
@@ -33,7 +33,7 @@ export function PlanTabs({ config, data }: Props) {
         <h1 className="global-h1 font-medium">{data?.title} </h1>
         <h1 className="global-h1 text-[#ED7125] font-medium">{data?.coloredTitle}</h1>
       </div>
-      <Tabs defaultValue={config[0].value} value={activeTab} onValueChange={setActiveTab}>
+      <Tabs defaultValue={config[1].value} value={activeTab} onValueChange={setActiveTab}>
         {/* Tab Headers */}
         <div
           className="relative w-full border-b border-[#434343] md:py-[12px] bg-white

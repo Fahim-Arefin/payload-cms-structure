@@ -30,14 +30,14 @@ const MicroinsuranceOffer: FC<MicroinsuranceOfferProps> = ({ data }) => {
       </div>
 
       {/* Cards grid: 1 / 2 / 3 / 4 */}
-      <div className="mt-4 md:mt-6 lg:mt-10 xl:mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 items-stretch">
+      <div className="mt-4 md:mt-6 lg:mt-10 xl:mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
         {data?.offers?.map((offer, idx) => (
           <div
             key={offer.title + idx}
             className="h-full rounded-2xl bg-white border border-[#F0EAE1] shadow-[0_8px_24px_#0000000D] p-6 md:p-8"
           >
             {/* Equal-height internals via grid */}
-            <div className="grid grid-rows-[auto_auto_1fr_auto] gap-y-3 md:gap-y-4 h-full">
+            <div className="grid grid-rows-[auto_auto_1fr_1fr] gap-y-3 md:gap-y-4 h-full">
               {/* Category icon (fill) */}
               <div className="relative w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]">
                 <Image
