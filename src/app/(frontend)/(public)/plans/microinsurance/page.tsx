@@ -58,18 +58,18 @@ function page({}: Props) {
         summary: 'Essential health coverage for medical emergencies and treatments',
         bullets: ['Emergency coverage', 'Hospital benefits', 'Medical support'],
       },
-      {
-        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon3.png`,
-        title: 'Family Protection',
-        summary: 'Complete family insurance solutions tailored for your needs',
-        bullets: ['Multi-member coverage', 'Flexible plans', '24/7 support'],
-      },
-      {
-        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon4.png`,
-        title: 'Property Insurance',
-        summary: 'Protect your home and belongings from unexpected events',
-        bullets: ['Home protection', 'Asset coverage', 'Natural disaster cover'],
-      },
+      // {
+      //   icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon3.png`,
+      //   title: 'Family Protection',
+      //   summary: 'Complete family insurance solutions tailored for your needs',
+      //   bullets: ['Multi-member coverage', 'Flexible plans', '24/7 support'],
+      // },
+      // {
+      //   icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon4.png`,
+      //   title: 'Property Insurance',
+      //   summary: 'Protect your home and belongings from unexpected events',
+      //   bullets: ['Home protection', 'Asset coverage', 'Natural disaster cover'],
+      // },
     ],
   }
 
@@ -111,10 +111,10 @@ function page({}: Props) {
     { title: 'NGOs',         dotColor: '#ED7125' },
     { title: 'MFIs',         dotColor: '#8A7B3D' },
     { title: 'Banks',        dotColor: '#ED7125' },
-    { title: 'Banks',        dotColor: '#ED7125' },
-    { title: 'Banks',        dotColor: '#ED7125' },
-    { title: 'Banks',        dotColor: '#ED7125' },
-    { title: 'Banks',        dotColor: '#ED7125' },
+    { title: 'NBFIs',        dotColor: '#ED7125' },
+    { title: 'Cooperatives',        dotColor: '#ED7125' },
+    { title: 'NGOs',        dotColor: '#ED7125' },
+    { title: 'MFIs',        dotColor: '#ED7125' },
   ],
   }
 

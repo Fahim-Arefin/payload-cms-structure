@@ -250,6 +250,7 @@ export const NAV_ITEMS_MOBILE = [
         ],
       },
       { href: '/plans/corporate', label: 'Corporate Plan' },
+      { href: '/plans/bancassurance', label: 'Bancassurance Plan' },
       { href: '/plans/microinsurance', label: 'Microinsurance' },
     ],
   },

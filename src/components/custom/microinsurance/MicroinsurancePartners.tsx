@@ -71,7 +71,7 @@ const MicroinsurancePartners: FC<MicroinsurancePartnersProps> = ({
         </div>
       </div>
       {/* SHADCN CAROUSEL */}
-      <Carousel opts={{ align: 'start', dragFree: true }} setApi={setCarouselApi} className="w-full">
+      <Carousel opts={{ align: 'start', dragFree: true, loop: true }} setApi={setCarouselApi} className="w-full">
         <CarouselContent className="mb-4">
           {data?.items?.map((it: any, idx: number) => (
             <div key={`${it.title}-${idx}`}>
