@@ -9,6 +9,7 @@ import FooterMobile from '@/components/custom/shared/FooterMobile'
 import CookieConsentBanner from '@/components/custom/shared/CookieConsentModal'
 import { Metadata } from 'next'
 import Script from 'next/script'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   title:
@@ -162,7 +163,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           href={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/mainlogo_2.png`}
         />
         {/* Google Tag (gtag.js) */}
-        <Script
+        {/* <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-CP1L2ZN6G5"
           strategy="afterInteractive"
         />
@@ -173,7 +174,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             gtag('js', new Date());
             gtag('config', 'G-CP1L2ZN6G5');
           `}
-        </Script>
+        </Script> */}
         {/* <Script
           src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"
           strategy="beforeInteractive"
@@ -195,6 +196,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           </div>
           <GlobalContactButtons />
         </main>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
       </body>
     </html>
   )
