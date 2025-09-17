@@ -59,7 +59,7 @@ function page({}: Props) {
     {
       icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/corporate-bullet.png`,
       text: 'Lifestyle Benefits',
-      description: 'Lifestyle Benefit and Discount facility with the Willingness Pass.',
+      description: 'Lifestyle Benefit and Discount facility with the Wellness Pass.',
     },
   ]
 

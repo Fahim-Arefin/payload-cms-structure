@@ -12,9 +12,9 @@ type Props = {}
 function page({}: Props) {
   const heroSlides = [
     {
-      title: 'Affordable Insurance for Everyone ',
+      title: 'Microinsurance',
       subtitle: '',
-      description: 'Protecting lives, securing future',
+      description: 'Protecting lives, securing futures-affordable insurance for everyone.',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-hero.jpg`,
     },
   ]
@@ -31,12 +31,12 @@ function page({}: Props) {
     microinsuranceProductsImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-desc.jpg`,
     microinsuranceProducts: [
       {
-        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-icon1.png`,
-        description: 'Health emergencies',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-icon2.png`,
+        description: 'Untimely death',
       },
       {
-        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-icon2.png`,
-        description: 'Untimely loss of life',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-icon1.png`,
+        description: 'Health emergencies',
       },
     ],
   }
@@ -50,13 +50,13 @@ function page({}: Props) {
         icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon1.png`,
         title: 'Life Insurance',
         summary: "Comprehensive life coverage to protect your family's financial future",
-        bullets: ['Family protection', 'Affordable premiums', 'Quick claims'],
+        bullets: ['Credit Shield', 'Affordable Premiums', 'Quick Claims Settlement'],
       },
       {
         icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon2.png`,
         title: 'Health Insurance',
-        summary: 'Essential health coverage for medical emergencies and treatments',
-        bullets: ['Emergency coverage', 'Hospital benefits', 'Medical support'],
+        summary: 'Affordable protection for life’s unexpected health moments.',
+        bullets: ['Emergency coverage', 'Hospital benefits'],
       },
       // {
       //   icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon3.png`,
@@ -102,20 +102,19 @@ function page({}: Props) {
     coloredTitle: 'Strategic Partners',
     description:
       'Working together with trusted organizations to bring insurance to every community',
-        items: [
-    { title: 'NGOs',         dotColor: '#8A7B3D' }, // olive
-    { title: 'MFIs',         dotColor: '#ED7125' }, // orange
-    { title: 'Banks',        dotColor: '#8A7B3D' },
-    { title: 'NBFIs',        dotColor: '#ED7125' },
-    { title: 'Cooperatives', dotColor: '#8A7B3D' },
-    { title: 'NGOs',         dotColor: '#ED7125' },
-    { title: 'MFIs',         dotColor: '#8A7B3D' },
-    { title: 'Banks',        dotColor: '#ED7125' },
-    { title: 'NBFIs',        dotColor: '#ED7125' },
-    { title: 'Cooperatives',        dotColor: '#ED7125' },
-    { title: 'NGOs',        dotColor: '#ED7125' },
-    { title: 'MFIs',        dotColor: '#ED7125' },
-  ],
+    items: [
+      { title: 'NGOs', dotColor: '#8A7B3D' }, // olive
+      { title: 'MFIs', dotColor: '#ED7125' }, // orange
+      { title: 'Banks', dotColor: '#8A7B3D' },
+      { title: 'NBFIs', dotColor: '#ED7125' },
+      { title: 'Cooperatives', dotColor: '#8A7B3D' },
+      { title: 'NGOs', dotColor: '#8A7B3D' }, // olive
+      { title: 'MFIs', dotColor: '#ED7125' }, // orange
+      { title: 'Banks', dotColor: '#8A7B3D' },
+      { title: 'NBFIs', dotColor: '#ED7125' },
+      { title: 'Cooperatives', dotColor: '#8A7B3D' },
+
+    ],
   }
 
   return (

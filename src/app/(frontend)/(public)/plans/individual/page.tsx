@@ -28,14 +28,14 @@ function PlanPage() {
 
     {
       title: 'Health and Protection Plans',
-      description: `Preventive care meets powerful protection. Let us be your financial shield you can count on`,
+      description: `Preventive care meets powerful protection. Let us be your financial shield you can count on.`,
       link: '/plans/individual/health-and-protection',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/web/health-and-protection.jpg`,
       // mobileImage: '/assets/solutions/individual/mobile/health-and-protection.jpg',
     },
     {
       title: 'Child Education Plan',
-      description: `A brighter future starts with a thoughtful plan`,
+      description: `A brighter future starts with a thoughtful plan.`,
       link: '/plans/individual/child-education',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/web/child-education.jpg`,
       // mobileImage: '/assets/solutions/individual/mobile/child-education.jpg',

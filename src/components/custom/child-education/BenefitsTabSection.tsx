@@ -35,7 +35,7 @@ export function BenefitsTabSection() {
               fill
               src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/child-education/web/benefitBannerTab.jpg`}
               alt="Benifit Section Image"
-              className="object-cover lg:object-[83%] xl:object-[88%] 2xl:object-[95%] rounded-md lg:rounded-lg xl:rounded-xl"
+              className="object-cover lg:object-[83%] xl:object-[88%] rounded-md lg:rounded-lg xl:rounded-xl"
               sizes="50vw"
             />
           </div>
@@ -43,16 +43,25 @@ export function BenefitsTabSection() {
 
         {/* Left Content */}
         <div className="order-2 lg:order-1 col-span-1 lg:col-span-3 xl:col-span-2">
-          <h2 className="global-h4 font-semibold uppercase mb-2 lg:mb-10 text-[#434343]">
-            BOOST YOUR COVERAGE
+          <h2 className="global-h1 font-semibold uppercase mb-2 lg:mb-10 text-[#434343]">
+            BOOST YOUR COVERAGE WITH
             <br />
             <span className="font-semibold">
-              WITH THESE <span className="text-[#ED7125]">SUPERCHARGED RIDERS!</span>
+              THESE <span className="text-[#ED7125]">SUPERCHARGED RIDERS!</span>
             </span>
           </h2>
           <div className="space-y-4 lg:space-y-8 mt-6 text-[#434343] ">
             <p className="global-p2 font-light">
-              <span className="font-semibold">Shanta Critical Protection:</span> Safeguard yourself
+              <span className="font-semibold">Shanta Spouse Shield: </span>A smart, practical, and
+              future-focused protection plan designed to secure your family’s financial well-being.
+            </p>
+            <p className="global-p2 font-light">
+              <span className="font-semibold ">Shanta Premium of Waiver:</span> When life takes an
+              unexpected turn, your family stays protected. In case of death or disability, all
+              premiums are waived but coverage remains intact.
+            </p>
+            <p className="global-p2 font-light">
+              <span className="font-semibold ">Shanta Critical Protection:</span> Safeguard yourself
               against life’s serious health challenges with coverage for up to 25 critical
               illnesses. On diagnosis, receive a lump sum payout—so you can focus on recovery, not
               financial strain.

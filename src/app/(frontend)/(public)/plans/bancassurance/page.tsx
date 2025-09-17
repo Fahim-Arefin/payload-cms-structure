@@ -66,23 +66,37 @@ function Bancassurance() {
     lifeCoverage: [
       {
         title: 'Natural Death',
-        description:
-          'In the event of an insured member’s death, Shanta Life provides financial support to the nominated beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.',
+        description: `In the event of an insured member’s death
+                      due to natural/accidental causes, Shanta
+                      Life provides financial support to the
+                      nominated beneficiary or organization as 
+                      per policy terms, ensuring peace of mind 
+                      and security during difficult times.`,
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon1.png`,
       },
       {
-        title: 'Accidental Death',
-        description:
-          'In the event of an insured member’s death, Shanta Life provides financial support to the nominated beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.',
-        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon2.png`,
+        title: 'Total Permanent Disability',
+        description: `In the event of an insured member’s disability, due
+                    to accident, injury, or illness, and insured being
+                    unable to work permanently, Shanta Life provides
+                    financial support to the nominated beneficiary or
+                    organization as per policy terms, ensuring peace of
+                    mind and security during difficult times.`,
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon3.png`,
       },
     ],
     healthCoverage: [
       {
-        title: 'Total Permanent Disability',
-        description:
-          'In the event of an insured member’s death, Shanta Life provides financial support to the nominated beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times. ',
-        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon3.png`,
+        title: 'Critical Illness Coverage',
+        description: `In the event of an insured member’s critical illness
+                      (such as Kidney Failure, Cancer, Stroke, Major
+                      Organ Transplant, etc.) and diagnosed by a
+                      qualified medical practitioner, Shanta Life
+                      provides financial support to the nominated
+                      beneficiary or organization as per policy terms,
+                      ensuring peace of mind and security during
+                      difficult times.`,
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon2.png`,
       },
       // {
       //   title: 'In-Patient Health Coverage',
@@ -91,10 +105,15 @@ function Bancassurance() {
       //   image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon4.png`,
       // },
       {
-        title: 'Critical Illness Coverage',
-        description:
-          'In the event of an insured member’s death, Shanta Life provides financial support to the nominated beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.',
-        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon5.png`,
+        title: 'In-Patient Health Coverage',
+        description: `In the event of an insured
+                      member's hospitalization for
+                      medical treatment, Shanta Life
+                      provides financial support to the
+                      insured as per policy terms,
+                      ensuring peace of mind and
+                      security during difficult times.`,
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon4.png`,
       },
     ],
   }
