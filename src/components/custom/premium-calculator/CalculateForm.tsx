@@ -34,6 +34,8 @@ import { Button } from '@/components/ui/button'
 import { ApiResponse } from '@/utils/premiumCalculator'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { Checkbox } from '@/components/ui/checkbox'
+import Link from 'next/link'
 
 type FormData = {
   PlanCode: number
@@ -67,6 +69,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   const [availablePlans, setAvailablePlans] = useState<{ plan_name: string; plan_code: number }[]>(
     [],
   )
+  const [agreeTerms, setAgreeTerms] = useState(false)
   const [isLoadingPlans, setIsLoadingPlans] = useState(false)
   const [planError, setPlanError] = useState<string | null>(null)
   const [availablePaymentModes, setAvailablePaymentModes] = useState<
@@ -1300,12 +1303,49 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         />
       </div>
 
+      {/* CONSENT CHECKBOX */}
+      <div className="col-span-2">
+        <label className="flex items-start gap-3">
+          <Checkbox
+            id="agree-terms"
+            checked={agreeTerms}
+            onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+          />
+          <span className="text-xs md:text-sm leading-relaxed">
+            By clicking <span className="font-semibold">Request for purchase</span>, you agree to
+            our{' '}
+            <Link
+              href="/terms-condition"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              terms and conditions
+            </Link>{' '}
+            and Shanta Life{' '}
+            <Link
+              href="/privacy-policy"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              privacy policy
+            </Link>
+            .
+          </span>
+        </label>
+      </div>
+
       {/* General error display removed - using field-specific errors now */}
       {/* submit button */}
       <div className="col-span-2 items-center px-4 flex flex-col gap-6 lg:gap-6 justify-center">
         <Button
-          disabled={isLoading}
-          className="bg-[#978900] disabled:bg-gray-400 w-fit text-[11px] md:global-h4 text-white rounded-[4px] md:rounded-[10px] px-6 py-4 xl:px-8 xl:py-8"
+          disabled={isLoading || !agreeTerms}
+          aria-disabled={isLoading || !agreeTerms}
+          className={[
+            'bg-[#978900] disabled:bg-gray-400 w-fit text-[11px] md:global-h4 text-white rounded-[4px] md:rounded-[10px] px-6 py-4 xl:px-8 xl:py-8',
+            !agreeTerms || isLoading ? 'opacity-60 cursor-not-allowed' : '',
+          ].join(' ')}
         >
           {isLoading ? 'Calculating...' : 'Calculate Now'}
         </Button>

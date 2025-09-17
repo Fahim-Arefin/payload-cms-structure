@@ -243,4 +243,27 @@ export const privacyPolicy = [
       </div>
     `,
   },
+  {
+    title: '15. Privacy Policy Image Save Description (for a Specific Image)',
+    secondTitle:
+      'When saving an image that contains personal or sensitive information, the description must identify any privacy-sensitive elements, including:',
+    points: [],
+
+    footerText: ``,
+    type: 'custom',
+    content: `<div class="bg-white text-black p-2 text-lg leading-relaxed max-w-4xl ml-2">
+        <p class="mb-6">
+         <ul class="list-disc list-inside space-y-1 mb-4">
+         <li>Facial Recognition: Note any faces present and whether they must be blurred or excluded from storage.</li>
+         <li>Personally Identifiable Information (PII): Text or visuals that reveal PII (e.g., names, addresses, phone numbers, license plates, ID/passport details, account numbers, signatures).</li>
+         <li>Sensitive Locations: Content that could disclose a private location (e.g., home interiors, children’s schools, hospitals, restricted/private workplaces).</li>
+         <li>Behavioral Data: Actions, habits, or contextual behaviors captured in the image that should not be shared.</li>
+
+        </ul>
+         </p>
+         <p className="mt-4 text-[12px] sm:text-[20px] text-gray-500">
+    The image description should clearly list these elements and indicate required protections (e.g., blur/redact or exclude) before storage or sharing. If adequate protection is not feasible, the image should not be saved.
+  </p>
+        `,
+  },
 ]

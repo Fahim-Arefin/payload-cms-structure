@@ -15,6 +15,8 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Loader, MailCheck, CheckCircle } from 'lucide-react'
+import { Checkbox } from '@/components/ui/checkbox'
+import Link from 'next/link'
 
 type FormData = {
   PlanCode: number
@@ -36,8 +38,11 @@ type Props = {
 
 function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
-  const [availablePlans, setAvailablePlans] = useState<{ plan_name: string; plan_code: number }[]>([])
+  const [availablePlans, setAvailablePlans] = useState<{ plan_name: string; plan_code: number }[]>(
+    [],
+  )
   const [isLoadingPlans, setIsLoadingPlans] = useState(false)
+  const [agreeTerms, setAgreeTerms] = useState(false)
   const [planError, setPlanError] = useState<string | null>(null)
   const [fieldErrors, setFieldErrors] = useState<{
     PlanCode: boolean
@@ -58,11 +63,10 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
-
   // Video link mappings for plans
   const videoLinkMappings = {
     'Shanta Child Education Plan (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-    'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g', 
+    'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g',
     'Shanta 3 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
     'Shanta 4 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
   }
@@ -123,7 +127,6 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
     { text: 'Female', value: 0 },
   ]
 
-
   const handleInputChange = (field: keyof FormData, value: string | number) => {
     setFormData((prev) => ({
       ...prev,
@@ -142,7 +145,6 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
     }
   }
 
-
   // Effect to fetch plans when age changes
   useEffect(() => {
     if (formData.Age) {
@@ -156,7 +158,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
   // Function to get specific error message for each field
   const getFieldErrorMessage = (field: keyof typeof fieldErrors): string => {
     if (!fieldErrors[field]) return ''
-    
+
     switch (field) {
       case 'PlanCode':
         return 'Please select a plan'
@@ -209,12 +211,13 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
     // Handle form submission - send email
     setIsSubmitting(true)
     setSubmitButtonText('Submitting...')
-    
+
     try {
       // Get plan name from selected plan
-      const planName = availablePlans.find(p => p.plan_code === formData.PlanCode)?.plan_name || 'N/A'
-      const genderText = genders.find(g => g.value === formData.Gender)?.text || 'N/A'
-      
+      const planName =
+        availablePlans.find((p) => p.plan_code === formData.PlanCode)?.plan_name || 'N/A'
+      const genderText = genders.find((g) => g.value === formData.Gender)?.text || 'N/A'
+
       const response = await fetch('/api/emails/purchase-request', {
         method: 'POST',
         headers: {
@@ -232,11 +235,11 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
           occupation: formData.occupation || 'N/A',
         }),
       })
-      
+
       if (response.ok) {
         setSubmitButtonText('Request Submitted!')
         setShowSuccessAlert(true)
-        
+
         // Reset form after successful submission
         setTimeout(() => {
           setFormData({
@@ -248,7 +251,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
             name: '',
             email: '',
             city: '',
-            occupation: ''
+            occupation: '',
           })
           setSelectedPlan(null)
           setSubmitButtonText('Request for purchase')
@@ -290,9 +293,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         />
         {/* Age error message */}
         {getFieldErrorMessage('Age') && (
-          <p className="text-red-500 text-xs mt-1">
-            {getFieldErrorMessage('Age')}
-          </p>
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Age')}</p>
         )}
       </div>
 
@@ -303,15 +304,21 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         onMouseLeave={() => setIsHoveringPlanSelect(false)}
       >
         <Select
-          value={formData.PlanCode && formData.PlanCode > 0 ? availablePlans.find(p => p.plan_code === formData.PlanCode)?.plan_name || "" : ""}
+          value={
+            formData.PlanCode && formData.PlanCode > 0
+              ? availablePlans.find((p) => p.plan_code === formData.PlanCode)?.plan_name || ''
+              : ''
+          }
           disabled={isLoadingPlans || !formData.Age || availablePlans.length === 0}
           onValueChange={(v) => {
             const plan = availablePlans.find((p) => p.plan_name === v)
             // Add video link to the selected plan
-            const planWithVideo = plan ? {
-              ...plan,
-              videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings]
-            } : null
+            const planWithVideo = plan
+              ? {
+                  ...plan,
+                  videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings],
+                }
+              : null
             setSelectedPlan(planWithVideo)
             if (plan) {
               // Set plan code when plan changes
@@ -363,13 +370,11 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
                   {plan.plan_name}
                 </SelectItem>
               ))}
-              {availablePlans.length === 0 &&
-                !isLoadingPlans &&
-                formData.Age && (
-                  <SelectItem disabled value="no-options">
-                    No plans available for this age
-                  </SelectItem>
-                )}
+              {availablePlans.length === 0 && !isLoadingPlans && formData.Age && (
+                <SelectItem disabled value="no-options">
+                  No plans available for this age
+                </SelectItem>
+              )}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -408,13 +413,9 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         )}
         {/* Plan selection error message */}
         {getFieldErrorMessage('PlanCode') && (
-          <p className="text-red-500 text-xs mt-1">
-            {getFieldErrorMessage('PlanCode')}
-          </p>
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('PlanCode')}</p>
         )}
       </div>
-
-
 
       {/* name input */}
       <div className="col-span-2 md:col-span-1">
@@ -429,9 +430,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         />
         {/* Name error message */}
         {getFieldErrorMessage('name') && (
-          <p className="text-red-500 text-xs mt-1">
-            {getFieldErrorMessage('name')}
-          </p>
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('name')}</p>
         )}
       </div>
 
@@ -448,9 +447,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         />
         {/* Phone number error message */}
         {getFieldErrorMessage('phoneNumber') && (
-          <p className="text-red-500 text-xs mt-1">
-            {getFieldErrorMessage('phoneNumber')}
-          </p>
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('phoneNumber')}</p>
         )}
       </div>
 
@@ -468,7 +465,11 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
       {/* gender select  */}
       <div className="col-span-2 md:col-span-1">
         <Select
-          value={formData.Gender !== null && formData.Gender !== undefined ? genders.find(g => g.value === formData.Gender)?.text || "" : ""}
+          value={
+            formData.Gender !== null && formData.Gender !== undefined
+              ? genders.find((g) => g.value === formData.Gender)?.text || ''
+              : ''
+          }
           onValueChange={(v) => {
             const gender = genders.find((g) => g.text === v)
             if (gender) {
@@ -496,9 +497,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         </Select>
         {/* Gender error message */}
         {getFieldErrorMessage('Gender') && (
-          <p className="text-red-500 text-xs mt-1">
-            {getFieldErrorMessage('Gender')}
-          </p>
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Gender')}</p>
         )}
       </div>
 
@@ -524,11 +523,48 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         />
       </div>
 
+      {/* CONSENT CHECKBOX */}
+      <div className="col-span-2">
+        <label className="flex items-start gap-3">
+          <Checkbox
+            id="agree-terms"
+            checked={agreeTerms}
+            onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+          />
+          <span className="text-xs md:text-sm leading-relaxed">
+            By clicking <span className="font-semibold">Request for purchase</span>, you agree to
+            our{' '}
+            <Link
+              href="/terms-condition"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              terms and conditions
+            </Link>{' '}
+            and Shanta Life{' '}
+            <Link
+              href="/privacy-policy"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              privacy policy
+            </Link>
+            .
+          </span>
+        </label>
+      </div>
+
       {/* submit button */}
       <div className="col-span-2 items-center px-4 flex flex-col gap-6 lg:gap-6 justify-center">
         <Button
-          disabled={isSubmitting}
-          className="bg-[#978900] disabled:bg-gray-400 w-fit text-[11px] md:global-h4 text-white rounded-[4px] md:rounded-[10px] px-6 py-4 xl:px-8 xl:py-8 flex items-center gap-2"
+          disabled={isSubmitting || !agreeTerms}
+          aria-disabled={isSubmitting || !agreeTerms}
+          className={[
+            'bg-[#978900] disabled:bg-gray-400 w-fit text-[11px] md:global-h4 text-white rounded-[4px] md:rounded-[10px] px-6 py-4 xl:px-8 xl:py-8 flex items-center gap-2',
+            !agreeTerms || isSubmitting ? 'opacity-60 cursor-not-allowed' : '',
+          ].join(' ')}
         >
           {submitButtonText === 'Submitting...' ? (
             <Loader className="w-4 h-4 animate-spin" />
@@ -554,7 +590,8 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
                 Request Submitted Successfully!
               </h3>
               <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-                Your purchase request is submitted successfully, our representative will contact you soon.
+                Your purchase request is submitted successfully, our representative will contact you
+                soon.
               </p>
             </div>
             <Button

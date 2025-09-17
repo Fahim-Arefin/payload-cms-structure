@@ -16,6 +16,8 @@ import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 import { useState } from 'react'
 import GlobalButton from '../GlobalButton'
 import Image from 'next/image'
+import { Checkbox } from '@/components/ui/checkbox'
+import Link from 'next/link'
 
 function ContactUsSection() {
   const [sendButtonText, setSendButtonText] = useState('Send Message')
@@ -26,6 +28,7 @@ function ContactUsSection() {
   const [message, setMessage] = useState('')
   const [emailError, setEmailError] = useState('')
   const [phoneError, setPhoneError] = useState('')
+  const [agreeTerms, setAgreeTerms] = useState(false)
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -171,7 +174,7 @@ function ContactUsSection() {
         <div
           className="col-span-1 
           lg:py-8 lg:px-4
-          xl:py-12 2xl:px-6 
+          xl:py-8 2xl:px-6 
           "
         >
           <h3 className="global-h2">Have a Question?</h3>
@@ -274,6 +277,38 @@ function ContactUsSection() {
               />
             </div>
 
+            {/* CONSENT (desktop) */}
+            <div className="">
+              <label className="flex items-start gap-3 text-black">
+                <Checkbox
+                  id="agree-terms-desktop"
+                  checked={agreeTerms}
+                  onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+                />
+                <span className="text-xs leading-relaxed">
+                  By clicking <span className="font-semibold">Send Message</span>, you agree to our{' '}
+                  <Link
+                    href="/terms-condition"
+                    className="underline text-[#FF6600] hover:opacity-90"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    terms and conditions
+                  </Link>{' '}
+                  and Shanta Life{' '}
+                  <Link
+                    href="/privacy-policy"
+                    className="underline text-[#FF6600] hover:opacity-90"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    privacy policy
+                  </Link>
+                  .
+                </span>
+              </label>
+            </div>
+
             {/* Button */}
             <div className="pt-4 flex justify-end">
               {/* <Button
@@ -286,8 +321,15 @@ function ContactUsSection() {
                 </Button> */}
               <GlobalButton
                 size="small"
-                className="w-[100px] md:w-[120px] lg:w-[140px] xl:w-[150px] 2xl:w-[150px]"
+                className={[
+                  'w-[100px] md:w-[120px] lg:w-[140px] xl:w-[150px] 2xl:w-[150px]',
+                  !agreeTerms || sendButtonText === 'Sending...'
+                    ? 'opacity-60 cursor-not-allowed'
+                    : '',
+                ].join(' ')}
                 variant="primary"
+                disabled={!agreeTerms || sendButtonText === 'Sending...'}
+                aria-disabled={!agreeTerms || sendButtonText === 'Sending...'}
               >
                 {sendButtonText == 'Sending...' ? (
                   <Loader />
@@ -421,13 +463,51 @@ function ContactUsSection() {
                     />
                   </div>
 
+                  {/* CONSENT (mobile) */}
+                  <div className="pt-2">
+                    <label className="flex items-start gap-3 text-black">
+                      <Checkbox
+                        id="agree-terms-mobile"
+                        checked={agreeTerms}
+                        onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+                      />
+                      <span className="text-xs leading-relaxed">
+                        By clicking <span className="font-semibold">Send Message</span>, you agree
+                        to our{' '}
+                        <Link
+                          href="/terms-condition"
+                          className="underline text-[#FF6600] hover:opacity-90"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          terms and conditions
+                        </Link>{' '}
+                        and Shanta Life{' '}
+                        <Link
+                          href="/privacy-policy"
+                          className="underline text-[#FF6600] hover:opacity-90"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          privacy policy
+                        </Link>
+                        .
+                      </span>
+                    </label>
+                  </div>
+
                   {/* Submit */}
                   <div className="pt-4 flex justify-end">
                     <Button
                       variant="primary"
-                      className="shadow-md z-30
-             text-[10px] md:text-[12px] 
-             h-[30px] px-2.5 rounded-md gap-1"
+                      disabled={!agreeTerms || sendButtonText === 'Sending...'}
+                      aria-disabled={!agreeTerms || sendButtonText === 'Sending...'}
+                      className={[
+                        'shadow-md z-30 text-[10px] md:text-[12px] h-[30px] px-2.5 rounded-md gap-1',
+                        !agreeTerms || sendButtonText === 'Sending...'
+                          ? 'opacity-60 cursor-not-allowed'
+                          : '',
+                      ].join(' ')}
                     >
                       {sendButtonText == 'Sending...' ? (
                         <Loader style={{ width: '12px', height: '12px' }} />

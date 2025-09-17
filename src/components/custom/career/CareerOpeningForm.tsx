@@ -14,6 +14,8 @@ import {
 } from '@/components/ui/select'
 import GlobalButton from '../shared/GlobalButton'
 import { Loader, MailCheck, SendHorizontal, CheckCircle } from 'lucide-react'
+import { Checkbox } from '@/components/ui/checkbox'
+import Link from 'next/link'
 
 const positions = [
   // 'Junior IT Executive',
@@ -30,6 +32,7 @@ const positions = [
 ]
 
 function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) => void }) {
+  const [agreeTerms, setAgreeTerms] = useState(false)
   // Validation functions
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -44,35 +47,37 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
 
   const validateForm = () => {
     const errors: string[] = []
-    
+
     if (!name.trim()) errors.push('Name is required')
     if (!email.trim()) errors.push('Email is required')
     else if (!validateEmail(email)) errors.push('Please enter a valid email address')
     if (!phone.trim()) errors.push('Phone number is required')
-    else if (!validatePhoneNumber(phone)) errors.push('Please enter a valid Bangladesh mobile number (11 digits starting with 01)')
+    else if (!validatePhoneNumber(phone))
+      errors.push('Please enter a valid Bangladesh mobile number (11 digits starting with 01)')
     if (!pos) errors.push('Please select a job position')
-    
+
     const file = (document.querySelector('#resume') as HTMLInputElement)?.files?.[0]
     if (!file) errors.push('Resume is required')
-    
+    if (!agreeTerms) errors.push('You must agree to the terms and privacy policy to continue')
+
     return errors
   }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    
+
     // Validate form
     const validationErrors = validateForm()
     if (validationErrors.length > 0) {
       setValidationErrors(validationErrors)
       return
     }
-    
+
     setValidationErrors([])
     setIsLoading(true)
     setShowSuccessAlert(false)
     console.log({ name, email, phone, position, message })
-    
+
     try {
       const resumeFormData = new FormData()
       resumeFormData.append('hogamara', 'let go')
@@ -107,10 +112,10 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       })
         .then((rs) => rs.json())
         .then((rs) => console.log(rs))
-      
+
       setIsLoading(false)
       setShowSuccessAlert(true)
-      
+
       // Reset form after successful submission
       setTimeout(() => {
         setName('')
@@ -134,7 +139,9 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
   const [phone, setPhone] = useState('')
   const [position, setPosition] = useState(positions[0] ?? '')
   const [message, setMessage] = useState('')
-  const [resumeUploadFieldText, setResumeUploadFieldText] = useState('Upload your resume. (Pdf format & maximum 12mb)')
+  const [resumeUploadFieldText, setResumeUploadFieldText] = useState(
+    'Upload your resume. (Pdf format & maximum 12mb)',
+  )
 
   // Handle phone input - only allow numbers and limit to 11 digits
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -150,7 +157,7 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       className="bg-white md:bg-[#FCF4EB] rounded-[12px] h-full px-5 py-6 flex flex-col gap-4 w-full"
     >
       <span className="font-bold text-[#343434] text-lg mb-1 tracking-tight">JOIN OUR TEAM</span>
-      
+
       {/* Validation Errors */}
       {validationErrors.length > 0 && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md animate-in fade-in-0 slide-in-from-top-1">
@@ -161,12 +168,14 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
           </ul>
         </div>
       )}
-      
+
       {/* Success Alert */}
       {showSuccessAlert && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md flex items-center gap-2 animate-in fade-in-0 slide-in-from-top-1">
           <CheckCircle className="h-5 w-5" />
-          <span className="text-sm font-medium">Application sent successfully! We'll get back to you soon.</span>
+          <span className="text-sm font-medium">
+            Application sent successfully! We'll get back to you soon.
+          </span>
         </div>
       )}
       <Input
@@ -213,7 +222,9 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       </Select>
 
       {/* File upload */}
-      <div className={`flex w-full rounded-[6px] overflow-hidden bg-[#FCF4EB] md:bg-white ${isLoading ? 'opacity-60 pointer-events-none' : ''}`}>
+      <div
+        className={`flex w-full rounded-[6px] overflow-hidden bg-[#FCF4EB] md:bg-white ${isLoading ? 'opacity-60 pointer-events-none' : ''}`}
+      >
         <label htmlFor="resume" className="flex flex-1 items-center cursor-pointer">
           <span className="block w-full text-[#B0B0B0] text-[11px] px-3 py-2 select-none">
             {resumeUploadFieldText}
@@ -253,12 +264,47 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       >
         Send Application
       </Button> */}
+      {/* CONSENT CHECKBOX */}
+      <div className="mt-1">
+        <label className="flex items-start gap-3">
+          <Checkbox
+            id="agree-terms"
+            checked={agreeTerms}
+            onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+          />
+          <span className="text-xs md:text-sm leading-relaxed">
+            By clicking <span className="font-semibold">Submit</span>, you agree to our{' '}
+            <Link
+              href="/terms-condition"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              terms and conditions
+            </Link>{' '}
+            and Shanta Life{' '}
+            <Link
+              href="/privacy-policy"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              privacy policy
+            </Link>
+            .
+          </span>
+        </label>
+      </div>
+
       <GlobalButton
         size="small"
-        className={`font-semibold w-full md:w-auto md:self-end ${isLoading ? 'opacity-90' : ''}`}
+        className={`font-semibold w-full md:w-auto md:self-end ${
+          isLoading || !agreeTerms ? 'opacity-60 cursor-not-allowed' : ''
+        }`}
         text={isLoading ? 'Sending...' : showSuccessAlert ? 'Sent' : 'Submit'}
         variant="primary"
-        disabled={isLoading}
+        disabled={isLoading || !agreeTerms}
+        aria-disabled={isLoading || !agreeTerms}
       >
         {isLoading ? (
           <Loader className="h-4 w-4 animate-spin" />
