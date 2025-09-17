@@ -192,13 +192,13 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
           </span>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
         {/* Left: Section Title */}
 
         {/* Center: Cards (Grid for desktop, Carousel for mobile) */}
-        <div className="flex flex-col items-center w-full">
+        <div className="flex flex-col items-center w-full self-stretch">
           {/* Desktop: Grid */}
-          <div className="hidden md:grid grid-cols-2 gap-4 w-full">
+          <div className="hidden md:grid grid-cols-2 gap-4 w-full grow">
             {openingData.map((card: any, idx: number) => (
               <CareerOpeningCard
                 key={idx}

@@ -14,6 +14,8 @@ import {
 import { Button } from '@/components/ui/button'
 import GlobalButton from '../shared/GlobalButton'
 import { Loader, MailCheck, SendHorizontal, CheckCircle } from 'lucide-react'
+import { Checkbox } from '@/components/ui/checkbox'
+import Link from 'next/link'
 
 function OnboardingJoinForm() {
   const plans = [
@@ -29,6 +31,7 @@ function OnboardingJoinForm() {
 
   const [validationErrors, setValidationErrors] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [agreeTerms, setAgreeTerms] = useState(false)
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -144,7 +147,9 @@ function OnboardingJoinForm() {
 
   // const [position, setPosition] = useState(positions[0] ?? '')
   // const [message, setMessage] = useState('')
-  const [resumeUploadFieldText, setResumeUploadFieldText] = useState('Upload your resume. (Pdf format & maximum 12mb)')
+  const [resumeUploadFieldText, setResumeUploadFieldText] = useState(
+    'Upload your resume. (Pdf format & maximum 12mb)',
+  )
 
   return (
     <form
@@ -296,6 +301,38 @@ function OnboardingJoinForm() {
         </div>
       </div>
 
+      {/* CONSENT CHECKBOX */}
+      <div className="col-span-2">
+        <label className="flex items-start gap-3">
+          <Checkbox
+            id="agree-terms"
+            checked={agreeTerms}
+            onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+          />
+          <span className="text-xs md:text-sm leading-relaxed">
+            By clicking <span className="font-semibold">Submit</span>, you agree to our{' '}
+            <Link
+              href="/terms-condition"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              terms and conditions
+            </Link>{' '}
+            and Shanta Life{' '}
+            <Link
+              href="/privacy-policy"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              privacy policy
+            </Link>
+            .
+          </span>
+        </label>
+      </div>
+
       {/* <div className="col-span-1 flex items-center">
         <Button
           type="button"
@@ -308,7 +345,14 @@ function OnboardingJoinForm() {
 
       {/* submit button */}
       <div className="col-span-2">
-        <Button className="bg-[#9C8639] text-white uppercase font-semibold rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 w-full">
+        <Button
+          disabled={isLoading || !agreeTerms}
+          aria-disabled={isLoading || !agreeTerms}
+          className={[
+            'bg-[#9C8639] text-white uppercase font-semibold rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 w-full',
+            !agreeTerms || isLoading ? 'opacity-60 cursor-not-allowed' : '',
+          ].join(' ')}
+        >
           {isLoading ? 'Sending...' : showSuccessAlert ? 'Sent' : 'Submit'}
         </Button>
       </div>

@@ -34,6 +34,8 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from '@/components/ui/dropdown-menu'
+import Link from 'next/link'
+import { Checkbox } from '@/components/ui/checkbox'
 
 interface FormData {
   PlanCode: number
@@ -91,6 +93,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     { paymode_name: string; paymode_id: number }[]
   >([])
   const [isLoadingPaymentModes, setIsLoadingPaymentModes] = useState(false)
+  const [agreeTerms, setAgreeTerms] = useState(false)
 
   const [fieldErrors, setFieldErrors] = useState({
     PlanCode: false,
@@ -100,6 +103,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     Term: false,
     PaymentMode: false,
     Gender: false,
+    agreeTerms: false,
   })
 
   const [currentPaymentMode, setCurrentPaymentMode] = useState<string>('')
@@ -213,9 +217,12 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           'Shanta Child Education Plan (1%)': 'Shanta Child Education Plan (1%)',
           'Shanta Child Education Plan (2%)': 'Shanta Child Education Plan (2%)',
           'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
-          'Shanta Child Education Plan Single Payment (1%)': 'Shanta Child Education Plan Single Payment (1%)',
-          'Shanta Child Education Plan Single Payment (2%)': 'Shanta Child Education Plan Single Payment (2%)',
-          'Shanta Child Education Plan Single Payment (3%)': 'Shanta Child Education Plan Single Payment (3%)',
+          'Shanta Child Education Plan Single Payment (1%)':
+            'Shanta Child Education Plan Single Payment (1%)',
+          'Shanta Child Education Plan Single Payment (2%)':
+            'Shanta Child Education Plan Single Payment (2%)',
+          'Shanta Child Education Plan Single Payment (3%)':
+            'Shanta Child Education Plan Single Payment (3%)',
         }
 
         const normalized = data
@@ -422,6 +429,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       Term: false,
       PaymentMode: false,
       Gender: false,
+      agreeTerms: false,
     })
 
     const errors = {
@@ -432,6 +440,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       Term: !formData.Term,
       PaymentMode: !formData.PaymentMode,
       Gender: formData.Gender === undefined || formData.Gender === null,
+      agreeTerms: !agreeTerms,
     }
 
     setFieldErrors(errors as any)
@@ -1117,14 +1126,64 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         />
       </div>
 
+      {/* CONSENT CHECKBOX */}
+      <div className="col-span-2">
+        <label className="flex items-start gap-3">
+          <Checkbox
+            id="agree-terms"
+            checked={agreeTerms}
+            onCheckedChange={(v) => {
+              const next = Boolean(v)
+              setAgreeTerms(next)
+              if (fieldErrors.agreeTerms && next) {
+                setFieldErrors((prev) => ({ ...prev, agreeTerms: false }))
+              }
+            }}
+            className={fieldErrors.agreeTerms ? 'border-red-500' : ''}
+            aria-invalid={fieldErrors.agreeTerms || undefined}
+            aria-describedby={fieldErrors.agreeTerms ? 'agree-terms-error' : undefined}
+          />
+          <span className="text-xs md:text-sm leading-relaxed">
+            By clicking <span className="font-semibold">Get a Quote Now</span>, you agree to our{' '}
+            <Link
+              href="/terms-condition"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              terms and conditions
+            </Link>{' '}
+            and Shanta Life{' '}
+            <Link
+              href="/privacy-policy"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              privacy policy
+            </Link>
+            .
+          </span>
+        </label>
+        {getFieldErrorMessage('agreeTerms') && (
+          <p id="agree-terms-error" className="text-red-500 text-xs mt-1">
+            {getFieldErrorMessage('agreeTerms')}
+          </p>
+        )}
+      </div>
+
       {/* SUBMIT */}
       <div className="col-span-2">
         <GlobalButton
           type="submit"
           variant="secondary"
-          disabled={isLoading}
-          className="px-5 py-5 xl:px-6 xl:py-6 w-full md:w-full lg:w-full xl:w-full 2xl:w-full 
-                     rounded-sm lg:rounded-[9px] xl:rounded-[10px]"
+          disabled={isLoading || !agreeTerms} // ⬅️ disable until checked
+          aria-disabled={isLoading || !agreeTerms}
+          className={[
+            'px-5 py-5 xl:px-6 xl:py-6 w-full md:w-full lg:w-full xl:w-full 2xl:w-full',
+            'rounded-sm lg:rounded-[9px] xl:rounded-[10px]',
+            !agreeTerms || isLoading ? 'opacity-60 cursor-not-allowed' : '',
+          ].join(' ')}
         >
           {isLoading ? 'Calculating...' : 'Get A Quote Now'}
         </GlobalButton>

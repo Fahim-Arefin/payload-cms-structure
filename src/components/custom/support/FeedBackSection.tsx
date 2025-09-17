@@ -6,6 +6,8 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import ToolTip from '../shared/ToolTip'
 import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
+import { Checkbox } from '@/components/ui/checkbox'
+import Link from 'next/link'
 
 type Props = {}
 
@@ -19,6 +21,7 @@ function FeedBackSection({}: Props) {
   const [requiredError, setRequiredError] = useState(false)
   const [emailError, setEmailError] = useState('')
   const [phoneError, setPhoneError] = useState('')
+  const [agreeTerms, setAgreeTerms] = useState(false)
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -151,14 +154,50 @@ function FeedBackSection({}: Props) {
               className="bg-white text-black w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
             />
 
+            {/* CONSENT (desktop) */}
+            <div className="hidden lg:block">
+              <label className="flex items-start gap-3">
+                <Checkbox
+                  id="agree-terms-desktop"
+                  checked={agreeTerms}
+                  onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+                />
+                <span className="text-xs leading-relaxed">
+                  By clicking <span className="font-semibold">Send Feedback</span>, you agree to our{' '}
+                  <Link
+                    href="/terms-condition"
+                    className="underline text-[#FF6600] hover:opacity-90"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    terms and conditions
+                  </Link>{' '}
+                  and Shanta Life{' '}
+                  <Link
+                    href="/privacy-policy"
+                    className="underline text-[#FF6600] hover:opacity-90"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    privacy policy
+                  </Link>
+                  .
+                </span>
+              </label>
+            </div>
+
             <Button
               onClick={sendFeedbackHandler}
               variant="primary"
-              className="hidden lg:block h-[45px] lg:h-[50px] xl:h-[60px] 
-              lg:w-[180px] xl:w-[240px]
-              lg:rounded-[6px] xl:rounded-[8px]
-              font-normal lg:text-[16px] xl:text-[18px]
-              "
+              disabled={sendButtonText === 'Sending...' || !agreeTerms}
+              aria-disabled={sendButtonText === 'Sending...' || !agreeTerms}
+              className={[
+                'hidden lg:block h-[45px] lg:h-[50px] xl:h-[60px] lg:w-[180px] xl:w-[240px]',
+                'lg:rounded-[6px] xl:rounded-[8px] font-normal lg:text-[16px] xl:text-[18px]',
+                sendButtonText === 'Sending...' || !agreeTerms
+                  ? 'opacity-60 cursor-not-allowed'
+                  : '',
+              ].join(' ')}
             >
               {sendButtonText == 'Sending...' ? (
                 <Loader className="inline mb-1" />
@@ -186,14 +225,52 @@ function FeedBackSection({}: Props) {
                 <p className="text-red-500 text-sm">Please Fill out all the fields</p>
               )}
             </div>
+
+            {/* CONSENT (mobile) mirrors desktop checkbox */}
+            <div className="lg:hidden mb-2">
+              <label className="flex items-start gap-3">
+                <Checkbox
+                  id="agree-terms-mobile"
+                  checked={agreeTerms}
+                  onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+                />
+                <span className="text-xs leading-relaxed">
+                  By clicking <span className="font-semibold">Send Feedback</span>, you agree to our{' '}
+                  <Link
+                    href="/terms-and-condition"
+                    className="underline text-[#FF6600] hover:opacity-90"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    terms and conditions
+                  </Link>{' '}
+                  and Shanta Life{' '}
+                  <Link
+                    href="/privacy-policy"
+                    className="underline text-[#FF6600] hover:opacity-90"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    privacy policy
+                  </Link>
+                  .
+                </span>
+              </label>
+            </div>
+
             <div>
               <Button
                 onClick={sendFeedbackHandler}
                 variant="primary"
-                className="lg:hidden h-[45px] lg:h-[50px] xl:h-[60px] 
-                lg:w-[180px] xl:w-[240px]
-                lg:rounded-[6px] xl:rounded-[8px]
-                font-normal flex items-center"
+                disabled={sendButtonText === 'Sending...' || !agreeTerms}
+                aria-disabled={sendButtonText === 'Sending...' || !agreeTerms}
+                className={[
+                  'lg:hidden h-[45px] lg:h-[50px] xl:h-[60px] lg:w-[180px] xl:w-[240px]',
+                  'lg:rounded-[6px] xl:rounded-[8px] font-normal flex items-center',
+                  sendButtonText === 'Sending...' || !agreeTerms
+                    ? 'opacity-60 cursor-not-allowed'
+                    : '',
+                ].join(' ')}
               >
                 {sendButtonText == 'Sending...' ? (
                   <Loader className="inline mb-1" />
