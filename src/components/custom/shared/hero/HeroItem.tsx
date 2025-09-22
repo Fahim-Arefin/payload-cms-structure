@@ -48,7 +48,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
             {/* {slide.title ? slide.title : ''} */}
             <LocalizedText
               en={slide?.title ? slide.title : ''}
-              bn={slide?.titleBN ? slide?.titleBN : ''}
+              bn={slide?.titleBN ? slide?.titleBN : slide?.title}
             />
           </h1>
 
@@ -56,7 +56,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
             {/* {slide.subtitle ? slide.subtitle : ''} */}
             <LocalizedText
               en={slide?.subtitle ? slide.subtitle : ''}
-              bn={slide?.subtitleBN ? slide.subtitleBN : ''}
+              bn={slide?.subtitleBN ? slide.subtitleBN : slide?.subtitle}
             />
           </h1>
         </div>
@@ -79,7 +79,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
                 ))} */}
                 <LocalizedText
                   en={slide?.description ? slide.description : ''}
-                  bn={slide?.descriptionBN ? slide?.descriptionBN : ''}
+                  bn={slide?.descriptionBN ? slide?.descriptionBN : slide?.description}
                 /> 
               
               </div>
@@ -100,7 +100,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
               <div className="text-white">
                 <LocalizedText
                   en={slide?.description ? slide.description : ''}
-                  bn={slide?.descriptionBN ? slide?.descriptionBN : ''}
+                  bn={slide?.descriptionBN ? slide?.descriptionBN : slide?.description}
                 /> 
               </div>
             </div>

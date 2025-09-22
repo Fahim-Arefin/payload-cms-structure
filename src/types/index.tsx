@@ -271,6 +271,7 @@ export type PayPremiumDataType = {
   item: {
     // image: string
     descriptionContent: string
+    descriptionContentBN?: string
   }[]
 }
 
@@ -341,11 +342,13 @@ export type PaymentTabDataType = {
   bkash: {
     item: {
       descriptionContent: string
+      descriptionBN?: string
     }[]
   }
   rocket: {
     item: {
       descriptionContent: string
+      descriptionBN?: string
     }[]
   }
   image: string
