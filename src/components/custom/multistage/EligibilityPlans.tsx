@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import LocalizedText from '../shared/LocalizedText'
 
 type EligibilityPlansProps = {}
 
@@ -9,18 +10,32 @@ const EligibilityPlans: FC<EligibilityPlansProps> = ({}) => {
       <div className="w-full md:max-w-[280px] border border-[#a88b36] rounded-lg px-4 pt-4 flex flex-col gap-4 ">
         <div className="flex items-center justify-center md:justify-start gap-2">
           <img src="/assets/iconfeet.svg" alt="icon" className="w-4 h-4" />
-          <h3 className="text-[10px] md:text-sm tracking-wide font-semibold text-[#000] uppercase">Entry Age</h3>
+          <h3 className="text-[10px] md:text-sm tracking-wide font-semibold text-[#000] uppercase">
+            <LocalizedText en="Entry Age" bn="আবেদন করার বয়স" />
+          </h3>
         </div>
         <div className="flex justify-center gap-3">
           <div className="flex flex-col items-center bg-[#a88b36] text-white rounded-t-md px-4 py-3 md:min-w-[80px]">
-            <span className="text-[8px] md:text-xs">Minimum</span>
-            <span className="text-[16px] md:text-2xl font-bold leading-none">30</span>
-            <span className="text-sm">Days</span>
+            <span className="text-[8px] md:text-xs">
+              <LocalizedText en="Minimum" bn="সর্বনিম্ন" />
+            </span>
+            <span className="text-[16px] md:text-2xl font-bold leading-none">
+              <LocalizedText en="30" bn="৩০" />
+            </span>
+            <span className="text-sm">
+              <LocalizedText en="Days" bn="দিন" />
+            </span>
           </div>
           <div className="flex flex-col items-center bg-[#a88b36] text-white rounded-t-md px-4 py-3 md:min-w-[80px]">
-            <span className="text-[8px] md:text-xs">Maximum</span>
-            <span className="text-[16px] md:text-2xl font-bold leading-none">60</span>
-            <span className="text-sm">Years</span>
+            <span className="text-[8px] md:text-xs">
+              <LocalizedText en="Maximum" bn="সর্বোচ্চ" />
+            </span>
+            <span className="text-[16px] md:text-2xl font-bold leading-none">
+              <LocalizedText en="60" bn="৬০" />
+            </span>
+            <span className="text-sm">
+              <LocalizedText en="Years" bn="বছর" />
+            </span>
           </div>
         </div>
       </div>
@@ -29,13 +44,21 @@ const EligibilityPlans: FC<EligibilityPlansProps> = ({}) => {
       <div className="w-full md:max-w-[280px] border border-[#a88b36] rounded-lg px-4 pt-4 flex flex-col gap-4">
         <div className="flex items-center justify-center md:justify-start gap-2">
           <img src="/assets/iconfeet.svg" alt="icon" className="w-4 h-4" />
-          <h3 className="text-[10px] md:text-sm tracking-wide font-semibold text-[#000] uppercase">Maturity Age</h3>
+          <h3 className="text-[10px] md:text-sm tracking-wide font-semibold text-[#000] uppercase">
+            <LocalizedText en="Maturity Age" bn="পলিসি মেয়াদপূর্তিতে বয়স" />
+          </h3>
         </div>
         <div className="flex justify-center">
           <div className="flex flex-col items-center bg-[#a88b36] text-white rounded-t-md px-6 py-3 md:min-w-[80px]">
-            <span className="text-[8px] md:text-xs">Upto</span>
-            <span className="text-[16px] md:text-2xl font-bold leading-none">72</span>
-            <span className="text-sm">Years</span>
+            <span className="text-[8px] md:text-xs">
+              <LocalizedText en="Upto" bn="সর্বোচ্চ" />
+            </span>
+            <span className="text-[16px] md:text-2xl font-bold leading-none">
+              <LocalizedText en="70" bn="৭০" />
+            </span>
+            <span className="text-sm">
+              <LocalizedText en="Years" bn="বছর" />
+            </span>
           </div>
         </div>
       </div>
