@@ -7,6 +7,8 @@ import { BsPlay } from 'react-icons/bs'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Link from 'next/link'
+import LocalizedString from '../shared/LocalizedString'
+import LocalizedText from '../shared/LocalizedText'
 
 type HeroSectionWrapperProps = {
   heroSlides: any
@@ -24,7 +26,9 @@ const HeroSectionWrapper: FC<HeroSectionWrapperProps> = ({ heroSlides }) => {
         "
       >
         <Link href="/plans">
-          <GlobalButton size="large" variant="primary" text="Explore Now" className="" />
+          <GlobalButton size="large" variant="primary" text="Explore Now" className="">
+            <LocalizedString en="Explore Now" bn="অন্বেষণ করুন" />
+          </GlobalButton>
         </Link>
 
         {/* <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
@@ -37,7 +41,9 @@ const HeroSectionWrapper: FC<HeroSectionWrapperProps> = ({ heroSlides }) => {
               <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
                 <BsPlay />
               </div>
-              <div className="global-h4 font-normal">From the Expert</div>
+              <div className="global-h4 font-normal">
+                <LocalizedText en="From the Expert" bn="বিশেষজ্ঞের থেকে" />
+              </div>
             </GlobalButton>
           </DialogTrigger>
 

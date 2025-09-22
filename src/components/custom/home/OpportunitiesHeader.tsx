@@ -4,6 +4,8 @@ import ToolTip from '../shared/ToolTip'
 import Link from 'next/link'
 import GlobalButton from '../shared/GlobalButton'
 import Image from 'next/image'
+import LocalizedText from '../shared/LocalizedText'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 
 function OpportunitiesHeader() {
   return (
@@ -30,12 +32,24 @@ function OpportunitiesHeader() {
       {/* Foreground content */}
       <div className="relative z-10 space-y-4 md:space-y-6">
         <div className="space-y-2">
-          <h1 className="global-h4 font-medium uppercase">Life at</h1>
+          <h1 className="global-h4 font-medium uppercase">
+            <LocalizedText bn="শান্তা লাইফে" en="Life at" />
+          </h1>
           <h1 className="global-h1 font-semibold uppercase">
-            Shanta <span className="md:text-[#FF6600]">Life</span>
+            {/* Shanta <span className="md:text-[#FF6600]">Life</span> */}
+            <LocalizedHighlighted
+              textEn="Shanta Life"
+              textBn="আপনার ক্যারিয়ার"
+              highlightBn="ক্যারিয়ার"
+              highlightEn="Life"
+              highlightClassName="text-[#FF6600]"
+            />
           </h1>
           <p className="global-p1 font-light text-[#1F1F1F]">
-            Make a difference everyday- your next chapter starts here
+            <LocalizedText
+              bn="পরিবর্তনের নতুন অধ্যায় এখানেই"
+              en="Make a difference everyday- your next chapter starts here"
+            />
           </p>
         </div>
         <div>
@@ -44,7 +58,9 @@ function OpportunitiesHeader() {
               variant="primary"
               text="Careers"
               className="text-[12px] sm:text-[14px] md:text-[14px] lg:text-[18px] 2xl:text-[20px]"
-            />
+            >
+              <LocalizedText bn="ক্যারিয়ারস" en="Careers" />
+            </GlobalButton>
           </Link>
         </div>
       </div>

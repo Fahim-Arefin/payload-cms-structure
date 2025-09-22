@@ -6,6 +6,7 @@ import CarouselNavButtons from '../shared/CarousalNavButtons'
 import InsuranceSimplifiedLargeSection from './InsuranceSimplifiedLargeSection'
 import Autoplay from 'embla-carousel-autoplay'
 import { sliderDelay } from '@/lib/data'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 
 type Props = {
   data: InsuranceDataType[]
@@ -40,8 +41,15 @@ function InsuranceSimplifiedSection({ data }: Props) {
           className="global-h1 uppercase font-semibold space-x-2 md:space-x-4 
             mb-[15px] md:mb-[30px] lg:mb-[40px] xl:mb-[80px]"
         >
-          <span>Life Insurance </span>
-          <span className="text-[#ED7125]">Simplified</span>
+          {/* <span>Life Insurance </span>
+          <span className="text-[#ED7125]">Simplified</span> */}
+          <LocalizedHighlighted
+            textBn="লাইফ ইন্সুরেন্স - সিমপ্লিফাইড"
+            textEn="Life Insurance Simplified"
+            highlightEn="Simplified"
+            highlightBn="সিমপ্লিফাইড"
+            highlightClassName="text-[#ED7125]"
+          />
         </h1>
       </div>
       <Carousel

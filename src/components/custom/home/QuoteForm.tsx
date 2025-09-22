@@ -36,6 +36,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
 import { Checkbox } from '@/components/ui/checkbox'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 
 interface FormData {
   PlanCode: number
@@ -75,6 +76,8 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     email: '',
   })
 
+  const lang = useSSRLanguage()
+  const L = (en: string, bn: string) => (lang === 'en' ? en : bn)
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -479,7 +482,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
                   {formData.dateOfBirth ? (
                     <span>{format(new Date(formData.dateOfBirth), 'dd/MM/yyyy')}</span>
                   ) : (
-                    <span>Date of Birth *</span>
+                    <span>{L('Date of Birth *', 'জন্মতারিখ *')}</span>
                   )}
                 </Button>
               </PopoverTrigger>
@@ -541,7 +544,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
                          shadow-[0px_0px_5px_0px_#00000040] px-3 py-5 xl:px-4 xl:py-6
                          bg-background text-foreground cursor-not-allowed opacity-60"
             >
-              {formData.Age ? `Age: ${formData.Age}` : 'Age'}
+              {formData.Age ? `${L('Age', 'বয়স')}: ${formData.Age}` : L('Age', 'বয়স')}
             </Button>
           </div>
         </div>
@@ -633,7 +636,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
                   if (!formData.Age) return 'Enter age to load plans'
                   if (availablePlans.length === 0 && childEducationVariants.length === 0)
                     return 'No plans available'
-                  return 'Select Plan'
+                  return L('Select Plan', 'প্ল্যান নির্বাচন করুন')
                 })()}
               </span>
 
@@ -842,10 +845,10 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             <SelectValue
               placeholder={
                 isLoadingTenures
-                  ? 'Loading tenure options...'
+                  ? L('Loading tenure options...', 'মেয়াদের তালিকা লোড হচ্ছে...')
                   : availableTenures.length === 0 && formData.PlanCode && formData.Age
-                    ? 'No tenure options available'
-                    : 'Select Term'
+                    ? L('No tenure options available', 'কোনো মেয়াদ পাওয়া যায়নি')
+                    : L('Select Term', 'মেয়াদ নির্বাচন করুন')
               }
             />
           </SelectTrigger>
@@ -902,7 +905,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
                         rounded-sm lg:rounded-[9px] xl:rounded-[10px] shadow-[0px_0px_5px_0px_#00000040] px-5 py-5 xl:px-6 xl:py-6
                         ${fieldErrors.Gender ? 'border-red-500 border-2' : ''}`}
           >
-            <SelectValue placeholder="Select Gender *" />
+            <SelectValue placeholder={L('Select Gender *', 'লিঙ্গ নির্বাচন করুন *')} />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -929,7 +932,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           id="annualIncome"
           min={0}
           type="number"
-          placeholder="Annual Income *"
+          placeholder={L('Annual Income *', 'বার্ষিক আয় *')}
           value={formData.annualIncome || ''}
           onChange={(e) => handleInputChange('annualIncome', parseInt(e.target.value) || 0)}
           className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px]
@@ -954,7 +957,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           id="sumAssured"
           min={100000}
           type="number"
-          placeholder="Sum Assured *"
+          placeholder={L('Sum Assured *', 'বিমা অঙ্ক *')}
           value={formData.SumAssured || ''}
           onChange={(e) => handleInputChange('SumAssured', parseInt(e.target.value) || 0)}
           className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px]
@@ -980,7 +983,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         <Input
           id="phoneNumber"
           type="tel"
-          placeholder="Phone Number"
+          placeholder={L('Phone Number', 'ফোন নম্বর')}
           value={formData.phoneNumber}
           onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
           className="!text-[12px] md:!text-[14px] 2xl:!text-[16px]
@@ -1036,13 +1039,13 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             <SelectValue
               placeholder={
                 isLoadingPaymentModes
-                  ? 'Loading payment methods...'
+                  ? L('Loading payment methods...', 'পেমেন্ট পদ্ধতি লোড হচ্ছে...')
                   : availablePaymentModes.length === 0 &&
                       formData.PlanCode &&
                       formData.Age &&
                       formData.Term
-                    ? 'No payment methods available'
-                    : 'Select Payment Method'
+                    ? L('No payment methods available', 'কোনো পেমেন্ট পদ্ধতি নেই')
+                    : L('Select Payment Method', 'পেমেন্ট পদ্ধতি নির্বাচন করুন')
               }
             />
           </SelectTrigger>
@@ -1098,7 +1101,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         <Input
           id="name"
           type="text"
-          placeholder="Name"
+          placeholder={L('Name', 'নাম')}
           value={formData.name}
           onChange={(e) => handleInputChange('name', e.target.value)}
           className="!text-[12px] md:!text-[14px] 2xl:!text-[16px]
@@ -1116,7 +1119,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         <Input
           id="email"
           type="text"
-          placeholder="Email"
+          placeholder={L('Email', 'ইমেইল')}
           value={formData.email}
           onChange={(e) => handleInputChange('email', e.target.value)}
           className="!text-[12px] md:!text-[14px] 2xl:!text-[16px]

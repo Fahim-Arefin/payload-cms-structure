@@ -10,6 +10,7 @@ import CookieConsentBanner from '@/components/custom/shared/CookieConsentModal'
 import { Metadata } from 'next'
 import Script from 'next/script'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import Providers from '@/context/providers'
 
 export const metadata: Metadata = {
   title:
@@ -181,22 +182,24 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         /> */}
       </head>
       <body>
-        <main className="bg-[#F6EDDD] min-h-screen relative font-avenir 3xl:max-w-[1925px] 3xl:mx-auto">
-          <TopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" />
-          {/* <Navbar className="absolute top-0 lg:top-[80px] 2xl:top-[115px] left-0 right-0 z-50 " /> */}
-          {/* <Navbar className="top-[0px] lg:top-[80px] 2xl:top-[115px] left-0 right-0 z-50" /> */}
-          <Navbar />
-          <div className="min-h-screen">{children}</div>
-          <CookieConsentBanner />
-          <div className="hidden lg:block">
-            <Footer />
-          </div>
-          <div className="lg:hidden">
-            <FooterMobile />
-          </div>
-          <GlobalContactButtons />
-        </main>
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+        <Providers initialLang="en">
+          <main className="bg-[#F6EDDD] min-h-screen relative font-avenir 3xl:max-w-[1925px] 3xl:mx-auto">
+            <TopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" />
+            {/* <Navbar className="absolute top-0 lg:top-[80px] 2xl:top-[115px] left-0 right-0 z-50 " /> */}
+            {/* <Navbar className="top-[0px] lg:top-[80px] 2xl:top-[115px] left-0 right-0 z-50" /> */}
+            <Navbar />
+            <div className="min-h-screen">{children}</div>
+            <CookieConsentBanner />
+            <div className="hidden lg:block">
+              <Footer />
+            </div>
+            <div className="lg:hidden">
+              <FooterMobile />
+            </div>
+            <GlobalContactButtons />
+          </main>
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+        </Providers>
       </body>
     </html>
   )

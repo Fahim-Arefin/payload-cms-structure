@@ -5,6 +5,10 @@ import award1 from '/public/assets/homepage/web/award1.png'
 import award2 from '/public/assets/homepage/web/award2.png'
 import award3 from '/public/assets/homepage/web/award3.png'
 import award4 from '/public/assets/homepage/web/award4.png'
+import LocalizedString from '../shared/LocalizedString'
+import LocalizedText from '../shared/LocalizedText'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedRichText from '../shared/LocalizedRichText'
 
 function WhyChooseUsSection() {
   return (
@@ -47,19 +51,32 @@ function WhyChooseUsSection() {
            text-center lg:text-left"
           >
             <div className="global-h4  text-white lg:text-[#1E1E1E] uppercase font-light">
-              Why Choose us?
+              <LocalizedText en="Why Choose Us" bn="কেন শান্তা লাইফ ?" />
             </div>
             <div className="flex items-center justify-center space-x-2 lg:flex-col lg:justify-start lg:items-start lg:space-x-0">
               <div className="global-h1 font-medium  text-white lg:text-[#434342] uppercase">
-                Built on Trust
+                <LocalizedText en="Built on Trust" bn="ঐতিহ্যের ভরসা," />
               </div>
               <div className="global-h1 uppercase font-medium  text-white lg:text-[#434342]">
-                Backed by <span className="text-white lg:text-[#ED7125]"> Legacy</span>
+                {/* Backed by <span className="text-white lg:text-[#ED7125]"> Legacy</span> */}
+                <LocalizedHighlighted
+                  textEn="Backed by Legacy"
+                  textBn="সুরক্ষার প্রতিশ্রুতি"
+                  highlightEn="by Legacy"
+                  highlightBn="প্রতিশ্রুতি"
+                  highlightClassName="text-[#ED7125]"
+                />
               </div>
             </div>
             <div className=" text-white lg:text-[#434342] text-[12px] md:text-[16px] lg:text-[14px] 2xl:text-[17px] mt-3 lg:mt-0 font-normal">
-              Born from a vision to redefine life insurance in Bangladesh, Shanta Life Insurance is
-              backed by a powerful consortium, including Shanta Holdings.
+              <LocalizedText
+                en={
+                  `Born from a vision to redefine life insurance in Bangladesh, Shanta Life Insurance is backed by a powerful consortium, including Shanta Holdings.` as any
+                }
+                bn={
+                  `শান্তা হোল্ডিংস-এর দৃঢ় ভিত ও সাফল্যের ধারাবাহিকতায়, লাইফ ইন্স্যুরেন্স ইন্ডাস্ট্রিতে নতুনত্বের অঙ্গীকার নিয়ে এসেছে শান্তা লাইফ ইন্স্যুরেন্স। শান্তা পরিবারের দীর্ঘ অভিজ্ঞতা, মূল্যবোধ ও বিশ্বাসের ওপর ভর করে আমরা এগিয়ে চলেছি জীবনকে আরও নিরাপদ ও অর্থনৈতিকভাবে নিশ্চিত করতে।` as any
+                }
+              />
             </div>
           </div>
 
@@ -85,10 +102,10 @@ function WhyChooseUsSection() {
                   {/* info */}
                   <div className=" text-white lg:text-[#434343] p-2 2xl:p-4 border-b-2 border-white lg:border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px] font-bold ">
-                      100%
+                      <LocalizedText en="100%" bn="১০০%" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Settlement rate
+                      <LocalizedText en="Settlement Rate" bn="নিষ্পত্তির হার" />
                     </div>
                   </div>
                 </div>
@@ -109,10 +126,10 @@ function WhyChooseUsSection() {
                   {/* info */}
                   <div className="text-white lg:text-[#434343] p-2 2xl:p-4 border-b-2 border-white lg:border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      112
+                      <LocalizedText en="112" bn="১১২" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Claim settled
+                      <LocalizedText en="Claim Settled" bn="দাবি নিষ্পত্তি হয়েছে।" />
                     </div>
                   </div>
                 </div>
@@ -133,10 +150,10 @@ function WhyChooseUsSection() {
                   {/* info */}
                   <div className="text-white lg:text-[#434343] p-2 2xl:p-4 border-t-2 border-white lg:border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      235
+                      <LocalizedText en="235" bn="২৩৫" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Satisfied Customers
+                      <LocalizedText en="Satisfied Customers" bn="সন্তুষ্ট গ্রাহকরা" />
                     </div>
                   </div>
                 </div>
@@ -157,10 +174,11 @@ function WhyChooseUsSection() {
                   {/* info */}
                   <div className="text-white lg:text-[#434343] p-2 2xl:p-4 border-t-2 border-white lg:border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      1K +
+                      <LocalizedText en="1K +" bn="১কে  +" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Families Insured
+                      
+                      <LocalizedText en="Families Insured" bn="বীমাকৃত পরিবার" />
                     </div>
                   </div>
                 </div>
@@ -187,8 +205,10 @@ function WhyChooseUsSection() {
                   size="small"
                   variant="primary"
                   className="lg:ml-16 xl:-ml-5 2xl:-ml-32"
-                  text="Explore"
-                />
+                  // text="Explore"
+                >
+                  <LocalizedString en="Explore" bn="অন্বেষণ করুন" />
+                </GlobalButton>
               </Link>
             </div>
           </div>

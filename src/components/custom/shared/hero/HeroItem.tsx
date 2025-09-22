@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { HeroContentType } from '@/types'
 import CallNowButton from '../CallNowButton'
 import GlobalButton from '../GlobalButton'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   slide: HeroContentType
@@ -43,12 +44,25 @@ const HeroItem = ({ slide, top, position }: Props) => {
         font-semibold text-white
         hero-h1 uppercase"
         >
-          <h1>{slide.title ? slide.title : ''}</h1>
-          <h1 className="lg:mt-2">{slide.subtitle ? slide.subtitle : ''}</h1>
+          <h1>
+            {/* {slide.title ? slide.title : ''} */}
+            <LocalizedText
+              en={slide?.title ? slide.title : ''}
+              bn={slide?.titleBN ? slide?.titleBN : ''}
+            />
+          </h1>
+
+          <h1 className="lg:mt-2">
+            {/* {slide.subtitle ? slide.subtitle : ''} */}
+            <LocalizedText
+              en={slide?.subtitle ? slide.subtitle : ''}
+              bn={slide?.subtitleBN ? slide.subtitleBN : ''}
+            />
+          </h1>
         </div>
 
         {/* description */}
-        {slide?.description && (
+      {/* {slide?.description && ( */}
           <>
             <div
               className="
@@ -60,9 +74,14 @@ const HeroItem = ({ slide, top, position }: Props) => {
           hero-h5"
             >
               <div className="text-white">
-                {slide?.description?.split('.. ')?.map((line, i) => (
+                {/* {slide?.description?.split('.. ')?.map((line, i) => (
                   <h5 key={i}>{line.trim()}</h5>
-                ))}
+                ))} */}
+                <LocalizedText
+                  en={slide?.description ? slide.description : ''}
+                  bn={slide?.descriptionBN ? slide?.descriptionBN : ''}
+                /> 
+              
               </div>
             </div>
 
@@ -72,19 +91,20 @@ const HeroItem = ({ slide, top, position }: Props) => {
               hidden lg:block
           hero-description-bg-lg
           font-[350]
-         w-fit
+         w-[65%]
           p-2 md:p-3 lg:p-4
           hero-h5
           "
             >
               <div className="text-white">
-                {slide?.description?.split('.. ')?.map((line, i) => (
-                  <h5 key={i}>{line.trim()}</h5>
-                ))}
+                <LocalizedText
+                  en={slide?.description ? slide.description : ''}
+                  bn={slide?.descriptionBN ? slide?.descriptionBN : ''}
+                /> 
               </div>
             </div>
           </>
-        )}
+        {/* )} */}
 
         {/* Action Buttons */}
         {(slide?.showPurchaseButton || slide?.showCallButton) && (

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { LuArrowUpRight } from 'react-icons/lu'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   card: {
@@ -10,7 +11,9 @@ type Props = {
     // mobileIcon: string
     title: string
     subtitle: string
+    subtitleBN?: string
     description: string
+    descriptionBN?: string
     image: string
     // mobileImage: string
     link: string
@@ -37,17 +40,19 @@ function CueItem({ card, index }: Props) {
             sizes="(max-width: 1023px) 80px, 5vw"
           />
         </div>
-        <h1 className="text-xl lg:text-lg xl:text-2xl mt-4 font-semibold ">{card.title}</h1>
-        <h2 className="text-lg lg:text-lg xl:text-2xl font-semibold ">{card.subtitle}</h2>
+        <h1 className="text-xl lg:text-lg xl:text-2xl mt-4 font-semibold ">{/* {card.title} */}</h1>
+        <h2 className="text-lg lg:text-lg xl:text-2xl font-semibold ">
+          <LocalizedText en={card.subtitle} bn={card.subtitleBN || ''} />
+        </h2>
         <p className="global-p2 mt-2 text-white lg:text-[#404041] font-light ">
-          {card.description}
+          <LocalizedText en={card.description || ''} bn={card.descriptionBN || ''} />
         </p>
         <Link href={card.link}>
           <Button
             variant="link"
             className="mt-2 px-0 text-white lg:text-[#ED7125] lg:text-sm xl:text-xl flex justify-start items-center gap-2 underline lg:no-underline"
           >
-            Explore Now
+            <LocalizedText en="Explore Now" bn="অন্বেষণ করুন" />
             <LuArrowUpRight className="text-[24px] sm:text-[26px] md:text-[30px]" />
           </Button>
         </Link>

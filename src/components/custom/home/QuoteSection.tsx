@@ -569,12 +569,14 @@ import GlobalButton from '../shared/GlobalButton'
 import QuoteForm from './QuoteForm'
 import Image from 'next/image'
 import { Checkbox } from '@/components/ui/checkbox'
+import LocalizedText from '../shared/LocalizedText'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 
 function QuoteSection() {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
-const [ciSelection, setCiSelection] = useState<'ci19' | 'ci25' | null>(null)
-const [isAccidentSelected, setIsAccidentSelected] = useState<boolean>(false)
+  const [ciSelection, setCiSelection] = useState<'ci19' | 'ci25' | null>(null)
+  const [isAccidentSelected, setIsAccidentSelected] = useState<boolean>(false)
   const resultRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLDivElement>(null)
   const brandCheckbox =
@@ -622,46 +624,58 @@ const [isAccidentSelected, setIsAccidentSelected] = useState<boolean>(false)
     }
   }
 
-const handleCriticalIllness19Toggle = () => {
-  setCiSelection(prev => (prev === 'ci19' ? null : 'ci19')) // mutually exclusive within CI
-}
+  const handleCriticalIllness19Toggle = () => {
+    setCiSelection((prev) => (prev === 'ci19' ? null : 'ci19')) // mutually exclusive within CI
+  }
 
-const handleCriticalIllness25Toggle = () => {
-  setCiSelection(prev => (prev === 'ci25' ? null : 'ci25'))
-}
+  const handleCriticalIllness25Toggle = () => {
+    setCiSelection((prev) => (prev === 'ci25' ? null : 'ci25'))
+  }
 
-const handleAccidentToggle = () => {
-  setIsAccidentSelected(prev => !prev) // independent toggle
-}
+  const handleAccidentToggle = () => {
+    setIsAccidentSelected((prev) => !prev) // independent toggle
+  }
 
   // Helper function to get the total premium including selected coverage if any
-const getTotalPremiumWithCoverage = (paymentMode: string): number => {
-  if (!apiResponse) return 0
-  const premiums = getTotalPremium(apiResponse, paymentMode)
-  const paymentKey = getPaymentModeKey(paymentMode)
+  const getTotalPremiumWithCoverage = (paymentMode: string): number => {
+    if (!apiResponse) return 0
+    const premiums = getTotalPremium(apiResponse, paymentMode)
+    const paymentKey = getPaymentModeKey(paymentMode)
 
-  const life = premiums.lifePremium[paymentKey]
-  const ci =
-    ciSelection === 'ci19'
-      ? premiums.ciPremium[paymentKey]
-      : ciSelection === 'ci25'
-      ? premiums.ci25Premium[paymentKey]
-      : 0
-  const accident = isAccidentSelected ? premiums.accidentPremium[paymentKey] : 0
+    const life = premiums.lifePremium[paymentKey]
+    const ci =
+      ciSelection === 'ci19'
+        ? premiums.ciPremium[paymentKey]
+        : ciSelection === 'ci25'
+          ? premiums.ci25Premium[paymentKey]
+          : 0
+    const accident = isAccidentSelected ? premiums.accidentPremium[paymentKey] : 0
 
-  return life + ci + accident
-}
+    return life + ci + accident
+  }
 
   return (
     <div className="relative font-avenir container-wpm mb-12 md:mb-24 lg:mb-32 xl:mb-[150px]">
       <div className="container-wpm lg:hidden space-y-1 md:space-y-2 w-[90%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto text-center mb-8">
-        <div className="uppercase text-[#1E1E1E] global-h4 font-light">Secure Your</div>
+        <div className="uppercase text-[#1E1E1E] global-h4 font-light">
+          <LocalizedText en="Secure Your" bn="আপনার আগামী" />
+        </div>
         <div className="uppercase text-[#1E1E1E] global-h1 font-semibold ">
-          Tomorrow, <span className="md:text-[#FF6600]">Today!</span>
+          {/* Tomorrow, <span className="md:text-[#FF6600]">Today!</span> */}
+          <LocalizedHighlighted
+            textBn="সুরক্ষিত করুন আজই"
+            textEn="Tomorrow, Today!"
+            highlightBn="আজই"
+            highlightEn="Today!"
+            highlightClassName="text-[#FF6600]"
+          />
         </div>
         <p className="global-p1 text-[#1E1E1E] font-light">
-          Curious about your premium? Calculate your life insurance premium in just a few clicks and
-          get a personalized quote.
+          <LocalizedText
+            en="Curious about your premium? Calculate your life insurance premium in just a few clicks
+              and get a personalized quote."
+            bn="প্রিমিয়াম নিয়ে চিন্তিত ? এখন খুব সহজেই হিসাব করুন আপনার জন্য কাস্টমাইড প্রিমিয়াম।"
+          />
         </p>
       </div>
       <div
@@ -677,14 +691,24 @@ const getTotalPremiumWithCoverage = (paymentMode: string): number => {
           {/* Text Container */}
           <div className="hidden lg:block space-y-2 text-center lg:text-left">
             <div className="uppercase text-[#1E1E1E] text-[16px] md:text-[18px] 2xl:text-2xl font-light ">
-              Secure Your
+              <LocalizedText en="Secure Your" bn="আপনার আগামী" />
             </div>
             <div className="uppercase text-[#1E1E1E] global-h1 font-semibold ">
-              Tomorrow, <span className="md:text-[#FF6600]">Today!</span>
+              {/* Tomorrow, <span className="md:text-[#FF6600]">Today!</span> */}
+              <LocalizedHighlighted
+                textBn="সুরক্ষিত করুন আজই"
+                textEn="Tomorrow, Today!"
+                highlightBn="আজই"
+                highlightEn="Today!"
+                highlightClassName="text-[#FF6600]"
+              />
             </div>
             <p className="global-p1 text-[#1E1E1E] font-light">
-              Curious about your premium? Calculate your life insurance premium in just a few clicks
-              and get a personalized quote.
+              <LocalizedText
+                en="Curious about your premium? Calculate your life insurance premium in just a few clicks
+              and get a personalized quote."
+                bn="প্রিমিয়াম নিয়ে চিন্তিত ? এখন খুব সহজেই হিসাব করুন আপনার জন্য কাস্টমাইড প্রিমিয়াম।"
+              />
             </p>
           </div>
           {/* Info Container - Show on all screens when API response is available */}
@@ -846,7 +870,7 @@ const getTotalPremiumWithCoverage = (paymentMode: string): number => {
                   <div className="bg-[#F6EDDD] px-2 md:px-4 lg:px-1 py-1.5 lg:py-1 xl:px-4 xl:py-1.5 w-full 2xl:w-[80%] mx-auto rounded-full flex items-center space-x-2">
                     <Checkbox
                       className={brandCheckbox}
-                       checked={ciSelection === 'ci19'}
+                      checked={ciSelection === 'ci19'}
                       onCheckedChange={handleCriticalIllness19Toggle}
                       aria-label="Toggle CI-19 coverage"
                       id="ci19-left"
@@ -856,7 +880,7 @@ const getTotalPremiumWithCoverage = (paymentMode: string): number => {
                       onClick={handleCriticalIllness19Toggle}
                     >
                       <>
-                        {ciSelection  === 'ci19' ? 'Remove' : 'Add'}{' '}
+                        {ciSelection === 'ci19' ? 'Remove' : 'Add'}{' '}
                         {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
                         taka <span className="font-bold">{confirmedPaymentMode}</span> to Cover 19
                         Critical Illness!
@@ -885,7 +909,7 @@ const getTotalPremiumWithCoverage = (paymentMode: string): number => {
                   <div className="bg-[#F6EDDD] px-2 md:px-4 lg:px-1 py-1.5 lg:py-1 xl:px-4 xl:py-1.5 w-full 2xl:w-[80%] mx-auto rounded-full flex items-center space-x-2">
                     <Checkbox
                       className={brandCheckbox}
-                       checked={ciSelection === 'ci25'}
+                      checked={ciSelection === 'ci25'}
                       onCheckedChange={handleCriticalIllness25Toggle}
                       aria-label="Toggle CI-25 coverage"
                       id="ci25-left"
@@ -925,7 +949,7 @@ const getTotalPremiumWithCoverage = (paymentMode: string): number => {
                     <Checkbox
                       className={brandCheckbox}
                       checked={isAccidentSelected}
-                       onCheckedChange={handleAccidentToggle}
+                      onCheckedChange={handleAccidentToggle}
                       aria-label="Toggle Accident coverage"
                       id="acc-left"
                     />
@@ -933,7 +957,9 @@ const getTotalPremiumWithCoverage = (paymentMode: string): number => {
                       className="underline underline-offset-4 text-[10px] xl:text-xs cursor-pointer hover:text-blue-600 transition-colors"
                       onClick={handleAccidentToggle}
                     >
-                      {isAccidentSelected ? 'Remove accident coverage for' : "Prone to accidents? Let's get you covered in"}{' '}
+                      {isAccidentSelected
+                        ? 'Remove accident coverage for'
+                        : "Prone to accidents? Let's get you covered in"}{' '}
                       {`৳${Math.ceil(getTotalPremium(apiResponse, confirmedPaymentMode).accidentPremium[getPaymentModeKey(confirmedPaymentMode)]).toLocaleString()}`}{' '}
                       taka <span className="font-bold">{confirmedPaymentMode}</span>!
                     </div>

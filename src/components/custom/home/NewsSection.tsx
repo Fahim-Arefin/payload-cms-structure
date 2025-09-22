@@ -5,6 +5,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import GlobalButton from '../shared/GlobalButton'
+import LocalizedText from '../shared/LocalizedText'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedString from '../shared/LocalizedString'
 
 function NewsSection() {
   const [open, setOpen] = useState(false)
@@ -16,9 +19,18 @@ function NewsSection() {
     >
       {/* News Section Title */}
       <div className="text-center uppercase">
-        <h1 className="global-h4 font-light lg:font-medium">News & Media</h1>
+        <h1 className="global-h4 font-light lg:font-medium">
+          <LocalizedText bn="নিউজ এন্ড মিডিয়া" en="News & Media" />
+        </h1>
         <h1 className="global-h1 font-bold">
-          Explore what's making <span className="md:text-[#ED7125]">headlines</span>
+          {/* Explore what's making <span className="md:text-[#ED7125]">headlines</span> */}
+          <LocalizedHighlighted
+            textBn="খবরের শিরোনামে শান্তা লাইফ"
+            textEn={`Explore what's making headlines`}
+            highlightBn="লাইফ"
+            highlightEn="headlines"
+            highlightClassName="text-[#ED7125]"
+          />
         </h1>
       </div>
       {/* News Section Grid */}
@@ -209,7 +221,7 @@ function NewsSection() {
         {/* third grid */}
         <div className="rounded-sm lg:rounded-md 2xl:!rounded-xl col-span-1 md:col-span-2 bg-white flex flex-col space-y-6 md:space-y-2  2xl:space-y-10 pb-2 2xl:pb-12">
           <h1 className="text-xs xl:text-lg 2xl:text-2xl font-bold mx-6 my-2 2xl:mt-6 2xl:mx-12">
-            TRENDING POST
+            <LocalizedText en="TRENDING POST" bn="ট্রেন্ডিং পোষ্ট" />
           </h1>
           {/* img */}
           <div className="relative h-[140px] xl:h-[200px] 2xl:h-[250px] w-full">
@@ -342,7 +354,9 @@ function NewsSection() {
           >
             Explore
           </Button> */}
-          <GlobalButton variant="primary" className="" text="Explore" />
+          <GlobalButton variant="primary" className="" text="Explore">
+            <LocalizedString bn="এক্সপ্লোর" en="Explore" />
+          </GlobalButton>
         </Link>
       </div>
     </div>
