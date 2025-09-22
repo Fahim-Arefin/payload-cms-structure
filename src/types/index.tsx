@@ -272,8 +272,11 @@ export type PayPremiumDataType = {
 export type Directors = {
   id: number
   title: string
+  titleBN?: string
   designation: string
+  designationBN?: string
   description: string
+  descriptionBN?: string
   image: string
   mobileImage?: string
 }
@@ -281,8 +284,11 @@ export type Directors = {
 export type Leaders = {
   id: number
   title: string
+  titleBN?: string
   designation: string
+  designationBN?: string
   description: string
+  descriptionBN?: string
   image: string
   mobileImage?: string
 }

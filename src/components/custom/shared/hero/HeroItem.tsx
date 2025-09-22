@@ -62,7 +62,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
         </div>
 
         {/* description */}
-      {/* {slide?.description && ( */}
+      {slide?.description && (
           <>
             <div
               className="
@@ -86,6 +86,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
             </div>
 
             {/* description style after lg screen */}
+          
             <div
               className="
               hidden lg:block
@@ -103,8 +104,9 @@ const HeroItem = ({ slide, top, position }: Props) => {
                 /> 
               </div>
             </div>
+            
           </>
-        {/* )} */}
+        )}
 
         {/* Action Buttons */}
         {(slide?.showPurchaseButton || slide?.showCallButton) && (

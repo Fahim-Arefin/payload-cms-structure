@@ -10,6 +10,7 @@ const page: FC<pageProps> = ({}) => {
     {
       title: '',
       subtitle: 'Board of Directors',
+      subtitleBN: 'বোর্ড অফ ডিরেক্টরস',
       description: '',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/all-bod-Banner.jpg`,
     },
