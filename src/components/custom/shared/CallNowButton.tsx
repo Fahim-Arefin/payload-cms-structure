@@ -1,6 +1,7 @@
 'use client'
 
 import GlobalButton from './GlobalButton'
+import LocalizedString from './LocalizedString'
 
 interface CallNowButtonProps {
   className?: string
@@ -20,7 +21,9 @@ export default function CallNowButton({ className, size = 'large', variant = 'pr
         className={className || "border border-white text-white bg-white/20 backdrop-blur-md hover:bg-white/30 hover:border-white transition-colors duration-300"}
         text="Call Now"
         size={size}
-      />
+      >
+        <LocalizedString en='Call Now' bn='কল করুন'/>
+      </GlobalButton>
     </div>
   )
 }

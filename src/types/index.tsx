@@ -97,8 +97,10 @@ export type FootPrintDataType = {
 
 export type AllPlantDataType = {
   title: string
+  titleBN?: string
   biggerTitle?: string
   description: string
+  descriptionBN?: string
   link: string
   image: string
   mobileImage?: string
