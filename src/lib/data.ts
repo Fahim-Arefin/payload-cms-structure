@@ -137,9 +137,17 @@ export const leaders: Leaders[] = [
   {
     id: 1,
     title: 'Nafis A Ahmed',
+    titleBN: 'নাফিস আখতার আহমেদ',
     designation: 'Chief Executive Officer',
+    designationBN: 'প্রধান নির্বাহী কর্মকর্তা (সিইও)',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/leaders/web/CEO.jpg`,
     // mobileImage: '/assets/leaders/mobile/CEO.jpg',
+    descriptionBN: `নাফিস আকতার আহমেদ বাংলাদেশের জীবনবীমা সেক্টরে  দুই দশকেরও বেশি অভিজ্ঞতাসম্পন্ন একজন দক্ষ নির্বাহী। তিনি শান্তা লাইফ ইন্স্যুরেন্সের  প্রধান নির্বাহী কর্মকর্তা হিসেবে যোগদান করেন ৫ এপ্রিল ২০২৫ সালে।  তাঁর ক্যারিয়ার শুরু হয় ১৯৯৫ সালে যুক্তরাষ্ট্রের নিউ ইয়র্কে সেলস কাউন্সেলর হিসেবে। ইলেকট্রনিক্স, শিক্ষা, এবং টেক্সটাইল খাতে যুক্তরাষ্ট্র ও বাংলাদেশে কাজ করে তিনি বিক্রয় ব্যবস্থাপনা, গ্রাহকসেবা, ব্যবসা উন্নয়ন, করপোরেট সেলস, মার্কেট সম্প্রসারণ ও কৌশলগত পরিকল্পনায় অসামান্য দক্ষতা অর্জন করেছেন। তিনি অ্যাক্সিওম টেকনোলজিস লিমিটেড-এর নেটওয়ার্ক (ডিস্ট্রিবিউশন) প্রধান এবং ইন্টেগ্রা কমিউনিকেশন্স লিমিটেড-এর সেলস অ্যান্ড মার্কেটিং ম্যানেজার হিসেবে দায়িত্ব পালন করেছেন। 
+
+২০০১ সালে তিনি মেটলাইফ বাংলাদেশে যোগ দেন এবং নিষ্ঠা ও কর্মদক্ষতার স্বীকৃতিস্বরূপ  ডেপুটি এজেন্সি ডিরেক্টর (২০০৬) এবং এজেন্সি ডিরেক্টর (২০১৩) পদে উন্নীত হন। এই সময়ে তিনি ক্যারিয়ার এজেন্সি চ্যানেলের সম্প্রসারণ ও প্রফিট বৃদ্ধিতে গুরুত্বপূর্ণ ভূমিকা পালন করেন।
+
+
+তিনি যুক্তরাষ্ট্রের ক্যানসাস স্টেট ইউনিভার্সিটি থেকে অ্যাকাউন্টিং-এ মেজরসহ ব্যাচেলর অব বিজনেস অ্যাডমিনিস্ট্রেশন ডিগ্রি অর্জন করেছেন এবং ফেলো, লাইফ ম্যানেজমেন্ট ইনস্টিটিউট (FLMI) সনদপ্রাপ্ত।`,
     description: `Prior to stepping into the role of Chief Executive Officer at Shanta Life Insurance, Nafis Akhter Ahmed embarked on his career journey with MetLife in July 2001, serving as a Sales Manager for Agency Operations in Bangladesh. His dedication and performance led to promotions within the company, as he was elevated to the position of Deputy Agency Director in February 2006, and subsequently as Agency Director in June 2013. In these capacities, Nafis was entrusted with the pivotal responsibilities of steering the leadership and fostering the growth of career Agency Channels for MetLife Bangladesh, while also spearheading efforts to achieve profitability targets for the Bangladesh Agency Operation.
 
 With a wealth of experience exceeding 20 years in the Life Insurance industry, Nafis commenced his professional odyssey as a sales counselor in New York, USA in 1995. Possessing a remarkable track record, he has proven himself as a successful and talented executive proficient in Sales, Customer Service, Sales Management, Business Development, Distribution, Face-to-Face interactions, Corporate Sales, Key Account Management, Market Expansion, Strategic Planning, and Team Building. His expertise spans across diverse industries including Insurance, Electronics, Education, and Yarn & Fabrics, both in the US and Bangladesh.
@@ -152,33 +160,51 @@ Nafis's academic credentials include a Bachelor of Business Administration with 
   {
     id: 2,
     title: 'M Khurshed Kaisar',
+    titleBN: 'এম খুরশেদ কায়সার',
     designation: 'Chief Distribution Officer',
+    designationBN: 'চিফ ডিস্ট্রিবিউশন অফিসার',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/leaders/web/CDO.jpg`,
     // mobileImage: '/assets/leaders/mobile/CDO.jpg',
+    descriptionBN: `এম খুরশেদ কায়সার, শান্তা লাইফ ইন্স্যুরেন্স পিএলসি-এর ডেপুটি ম্যানেজিং ডিরেক্টর এবং চিফ ডিস্ট্রিবিউশন অফিসার  হিসেবে দায়িত্ব পালন করছেন। পূর্ববর্তীতে তার প্রায় ১৮ বছরের অভিজ্ঞতায় তিনি মেটলাইফ বাংলাদেশের এরিয়া হেড, জোনাল হেড এবং রেজিওনাল হেড এর মতো গুরুত্বপূর্ণ পদে দায়িত্ব পালন করেছেন। এছাড়াও, তিনি বাংলাদেশের বেশ কয়েকটি স্বনামধন্য বেসরকারি বিশ্ববিদ্যালয়ে Adjunct Faculty হিসেবে যুক্ত ছিলেন।
+
+জনাব কায়সার যুক্তরাজ্যের Newport Business School থেকে Strategic Management ও Finance-এ এমবিএ সম্পন্ন করেছেন।`,
     description: `Khurshed Kaisar is the Deputy Managing Director and Chief Distribution Officer at Shanta Life Insurance PLC. He brings nearly 18 years of experience from MetLife Bangladesh, where he held roles such as Area Head, Zonal Head, and Regional Head. Additionally, he served as an Adjunct Faculty member at several reputed private universities in Bangladesh. Mr. Kaisar holds an MBA in Strategic Management and Finance from Newport Business School, UK.`,
   },
   {
     id: 3,
     title: 'Mohammad Maksud Hossain',
+    titleBN: 'মোহাম্মাদ মাকসুদ হোসেইন',
     designation: 'Chief Information & Technology Officer',
+    designationBN: 'চিফ ইনফরমেশন এন্ড টেকনোলোজি অফিসার',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/leaders/web/CITO.jpg`,
     // mobileImage: '/assets/leaders/mobile/CITO.jpg',
+    descriptionBN: `২০ বছরেরও বেশি অভিজ্ঞতাসম্পন্ন মোহাম্মাদ মাকসুদ হোসেইন শান্তা লাইফ ইন্সুরেন্স- এর বর্তমান অ্যাসিস্ট্যান্ট ম্যানেজিং ডিরেক্টর ও চিফ ইনফরমেশন এন্ড টেকনোলোজি অফিসার।  পূর্ববর্তীতে তিনি মেটলাইফ বাংলাদেশ -এ এক্সেকিউটিভ ভাইস প্রেসিডেন্ট  এবং রবি এক্সিয়াটা-তে IT - ভাইস প্রেসিডেন্ট  হিসেবে দায়িত্ব পালন করেছেন, যেখানে তিনি agile framework, digital solution এবং enterprise automation বাস্তবায়নের মাধ্যমে আইটি খাতে রূপান্তরমূলক সাফল্য এনেছেন।
+
+জনাব মাকসুদ বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (BUET) থেকে Computer Science & Engineering-এ বি.এসসি. ও এম.এসসি. ডিগ্রি অর্জন করেছেন।`,
     description: `Mohammad Maksud Hossain has been appointed AMD and Chief Information & Technology Officer at Shanta Life Insurance PLC. With over 20 years of experience, he led transformative IT initiatives in roles such as EVP at MetLife Bangladesh and VP of IT at Robi Axiata, where he implemented agile frameworks, digital solutions, and enterprise automations. His expertise spans bank, government, insurance, telecom, and financial services, where he has a proven track record of driving innovation, operational efficiency, and data-driven decision-making to support sustainable growth. Mr. Maksud holds M.Sc. & B.Sc. in Computer Science & Engineering from Bangladesh University of Engineering and Technology.`,
   },
   {
     id: 4,
     title: 'Jane Alam Romel',
+    titleBN: 'জানে আলম রোমেল',
     designation: 'Chief Marketing Officer',
+    designationBN: 'চিফ মার্কেটিং অফিসার',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/leaders/web/CMO.jpg`,
     // mobileImage: '/assets/leaders/mobile/CMO.jpg',
+    descriptionBN: `শান্তা লাইফের শুরু থেকেই লাইফ ইন্সুরেন্সকে সহজে সাধারণ মানুষের কাছে পৌঁছে দিতে অবিচ্ছেদ্য অংশ হিসেবে কাজ করছেন জানে আলম রোমেল।  শান্তা লাইফ এর চিফ মার্কেটিং অফিসারের দায়িত্বের পাশাপাশি তিনি শান্তার অন্যান্য অঙ্গসংগঠন - শান্তা অ্যাসেট ম্যানেজমেন্ট লিমিটেড, শান্তা সিকিউরিটিজ ,শান্তা ইক্যুইটি ও শান্তা লাইফস্টাইলের মার্কেটিংকে নেতৃত্ব দিয়ে যাচ্ছেন।  এছাড়াও তিনি, শান্তার ননপ্রফিট ও ফিলানথ্রোপিক প্রতিষ্ঠান  আশুলিয়া নারী ও শিশু হাসপাতাল (AWCH)-এর সামগ্রিক মার্কেটিং কার্যক্রমও  তত্ত্বাবধান করছেন। আঠারো বছরের বেশি ক্যারিয়ারে তিনি কর্পোরেট ব্র্যান্ডিং, মার্কেটিং, কমিউনিকেশন, সেলস এবং কাস্টমার এক্সপেরিয়েন্স-এ অভিজ্ঞতা অর্জন করেছেন। শান্তাতে নিয়োগের পূর্ববর্তীতে তিনি IDLC ফাইন্যান্স-এর গ্রুপ চিফ মার্কেটিং অফিসার হিসেবে দায়িত্বরত ছিলেন।  এছাড়া তিনি সিঙ্গাপুর এয়ারলাইনস, এমজিএইচ গ্রুপ আর র‍্যাংগস ইলেকট্রনিক্স-এর মতো শীর্ষস্থানীয় প্রতিষ্ঠানে কর্মরত ছিলেন। 
+
+জনাব রোমেল নর্থ সাউথ ইউনিভার্সিটি থেকে ব্যাচেলর অব বিজনেস অ্যাডমিনিস্ট্রেশন ডিগ্রি অর্জন করেছেন, যেখানে তিনি ডাবল মেজর সম্পন্ন করেন।`,
     description: `Jane Alam Romel has been an integral part of Shanta Life since its inception, serving as the Chief Marketing Officer of Shanta Asset Management Limited, Shanta Securities, and Shanta Equity since June 2022. In addition to overseeing brand management, public relations, and strategic marketing for these entities, Romel is driving transformation within Shanta Lifestyle’s marketing with a new take on innovation and heightened customer experience. He is also catering to Shanta’s non-profit and philanthropic concern AWCH’s overall marketing. His career, spanning over 18 years, includes serving as Group Chief Marketing Officer at IDLC Finance, with expertise in corporate branding, marketing, communications, sales, and customer experience. He has contributed to the success of leading organizations across industries, including Singapore Airlines, MGH Group, and Rangs Electronics. He holds a Bachelor of Business Administration with a double major from North South University.`,
   },
   {
     id: 5,
     title: 'Majedur Rashid Chowdhury',
+    titleBN: 'মাজেদুর রশীদ চৌধুরী ',
     designation: 'Senior Executive Vice President, Chief Financial Officer',
+    designationBN: 'চিফ ফিনান্সিয়াল অফিসার',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/leaders/web/CFO.jpg`,
     // mobileImage: '/assets/leaders/mobile/CFO.jpg',
+    descriptionBN: `লাইফ ইন্সুরেন্স খাতে দীর্ঘ ২৫ বছরের অভিজ্ঞতাসম্পন্ন মাজেদুর রশীদ চৌধুরী শান্তা লাইফ ইন্স্যুরেন্স পিএলসির বর্তমান  সিনিয়র এক্সিকিউটিভ ভাইস প্রেসিডেন্ট ও চিফ ফাইন্যান্সিয়াল অফিসার। এই দায়িত্বের পাশাপাশি তিনি কোম্পানি সেক্রেটারির দায়িত্ব পালন করছেন।  শান্তা লাইফে যোগদানের পূর্ববর্তীতে তিনি নয় বছর গার্ডিয়ান লাইফ ইন্স্যুরেন্স লিমিটেড-এ হেড অব ফাইন্যান্স অ্যান্ড অ্যাকাউন্টস ছিলেন এবং পনেরো বছর প্রগতি লাইফ ইন্স্যুরেন্স লিমিটেড-এ ডেপুটি সিএফও হিসেবে কাজ করেছেন। তিনি নর্দান ইউনিভার্সিটি থেকে ফাইন্যান্স-এ এমবিএ ডিগ্রি অর্জন করেছেন।`,
     description: `Majedur Rashid Chowdhury has been appointed as Senior Executive Vice President and Chief Financial Officer at Shanta Life Insurance PLC. In addition, he is serving as the Company Secretary. He previously served as Head of Finance and Accounts for Nine years at Guardian Life Insurance Limited and served Fifteen years as Deputy CFO at Pragati Life Insurance Limited. Mr. Majedur holds an MBA in Finance from Northern University.`,
   },
 ]
