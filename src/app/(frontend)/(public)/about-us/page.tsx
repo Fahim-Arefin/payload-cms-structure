@@ -69,6 +69,8 @@ function page() {
     // mobileImage: '/assets/about-us/mobile/allAbout.jpg',
     title: 'Values That',
     coloredTitle: 'Shape Us',
+    titleBN: 'আমাদের মূল্যবোধসমূহ',
+    coloredTitleBN: 'মূল্যবোধসমূহ',
     data: [
       {
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/allAboutIcon1.png`,

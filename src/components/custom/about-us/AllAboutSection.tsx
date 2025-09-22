@@ -8,6 +8,8 @@ type AllAboutData = {
   mobileImage?: string
   title: string
   coloredTitle: string
+  titleBN?: string
+  coloredTitleBN?: string
   data: AllAboutCardDataType[]
 }
 
@@ -16,7 +18,7 @@ type Props = {
 }
 
 function AllAboutSection({ allAboutData }: Props) {
-  const { image, mobileImage, title, coloredTitle, data } = allAboutData
+  const { image, mobileImage, title, titleBN, coloredTitleBN, coloredTitle, data } = allAboutData
 
   const mainTitle = title + ' ' + coloredTitle
   return (
@@ -45,13 +47,13 @@ function AllAboutSection({ allAboutData }: Props) {
 
             <h1 className="shantaLifeIntroSection-h1 font-medium lg:font-semibold uppercase absolute inset-x-0 top-1/4 text-center z-20 text-white lg:hidden">
               {/* {title} <span className="text-[#ED7125]">{coloredTitle}</span> */}
-              <LocalizedHighlighted textEn={mainTitle} textBn='আমাদের মূল্যবোধসমূহ' highlightEn={coloredTitle} highlightBn='মূল্যবোধসমূহ'/>
+              <LocalizedHighlighted textEn={mainTitle} textBn={titleBN} highlightEn={coloredTitle} highlightBn={coloredTitleBN}/>
             </h1>
           </div>
           {/* heading */}
           <h1 className="global-h1 font-medium lg:font-semibold text-[#434342] uppercase hidden lg:block mt-6">
             {/* {title} <span className="text-[#ED7125]">{coloredTitle}</span> */}
-            <LocalizedHighlighted textEn={mainTitle} textBn='আমাদের মূল্যবোধসমূহ' highlightEn={coloredTitle} highlightBn='মূল্যবোধসমূহ'/>
+            <LocalizedHighlighted textEn={mainTitle} textBn={titleBN} highlightEn={coloredTitle} highlightBn={coloredTitleBN}/>
           </h1>
         </div>
         {/* right-side */}

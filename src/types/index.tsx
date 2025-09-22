@@ -185,7 +185,9 @@ export type SuitabilityCardType = {
 export type VisionCardType = {
   img: string
   title: string
+  titleBN?: string
   points: Array<string>
+  pointsBN?: Array<string>
 }
 
 export type WayWeAreDataType = {

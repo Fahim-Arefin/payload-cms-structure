@@ -3,6 +3,7 @@
 import React, { FC, useCallback } from 'react'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import GlobalButton from '../shared/GlobalButton'
+import LocalizedString from '../shared/LocalizedString'
 
 type AgentOnboardingHeroWrapperProps = {
   heroSlides: any
@@ -37,7 +38,9 @@ const AgentOnboardingHeroWrapper: FC<AgentOnboardingHeroWrapperProps> = ({ heroS
             >
               Apply Now
             </Button> */}
-        <GlobalButton size="large" onClick={scrollToForm} text="Apply Now" variant="primary" />
+        <GlobalButton size="large" onClick={scrollToForm} text="Apply Now" variant="primary">
+          <LocalizedString en='Apply Now' bn='আবেদন করুন'/>
+        </GlobalButton>
       </div>
     </HeroSection>
   )

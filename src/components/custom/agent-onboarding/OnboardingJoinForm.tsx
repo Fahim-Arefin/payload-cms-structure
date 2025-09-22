@@ -16,6 +16,7 @@ import GlobalButton from '../shared/GlobalButton'
 import { Loader, MailCheck, SendHorizontal, CheckCircle } from 'lucide-react'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 
 function OnboardingJoinForm() {
   const plans = [
@@ -145,10 +146,17 @@ function OnboardingJoinForm() {
   const [gender, setGender] = useState('')
   const [age, setAge] = useState('')
 
+  // localized helper (placeholders-only)
+  const lang = useSSRLanguage()
+  const L = (en: string, bn: string) => (lang === 'en' ? en : bn)
+
   // const [position, setPosition] = useState(positions[0] ?? '')
   // const [message, setMessage] = useState('')
   const [resumeUploadFieldText, setResumeUploadFieldText] = useState(
-    'Upload your resume. (Pdf format & maximum 12mb)',
+    L(
+      'Upload your resume. (Pdf format & maximum 12mb)',
+      'আপনার রেজুমে আপলোড করুন। (পিডিএফ ফরম্যাট, সর্বোচ্চ ১২এমবি)',
+    ),
   )
 
   return (
@@ -164,7 +172,7 @@ function OnboardingJoinForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           type="text"
-          placeholder="Name"
+          placeholder={L('Name', 'নাম')}
           className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
           required
           disabled={isLoading}
@@ -178,7 +186,7 @@ function OnboardingJoinForm() {
           type="text"
           inputMode="numeric"
           pattern="[0-9]*"
-          placeholder="Phone Number"
+          placeholder={L('Phone Number', 'ফোন নম্বর')}
           onKeyDown={(e) => {
             if (!/^[0-9]$/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Tab') {
               e.preventDefault()
@@ -197,7 +205,7 @@ function OnboardingJoinForm() {
           disabled={isLoading}
         >
           <SelectTrigger className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6">
-            <SelectValue placeholder="Gender" />
+            <SelectValue placeholder={L('Gender', 'লিঙ্গ')} />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -218,7 +226,7 @@ function OnboardingJoinForm() {
           value={age}
           onChange={(e) => setAge(e.target.value)}
           type="number"
-          placeholder="Age"
+          placeholder={L('Age', 'বয়স')}
           min={1}
           onWheel={(e) => e.currentTarget.blur()}
           className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
@@ -227,7 +235,7 @@ function OnboardingJoinForm() {
       <div className="col-span-1 md:col-span-1">
         <Input
           type="text"
-          placeholder="Present Occupation"
+          placeholder={L('Present Occupation', 'বর্তমান পেশা')}
           className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
@@ -235,7 +243,7 @@ function OnboardingJoinForm() {
       <div className="relative col-span-1 md:col-span-1">
         <Input
           type="text"
-          placeholder="Preferred Working Area"
+          placeholder={L('Preferred Working Area', 'পছন্দের কর্মক্ষেত্র')}
           className="shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
@@ -281,7 +289,9 @@ function OnboardingJoinForm() {
             </span>
             <input
               onChange={(e) =>
-                setResumeUploadFieldText(e.target.files?.[0]?.name ?? 'Upload your resume')
+                setResumeUploadFieldText(
+                  e.target.files?.[0]?.name ?? L('Upload your resume', 'আপনার রেজুমে আপলোড করুন'),
+                )
               }
               required
               type="file"
@@ -296,7 +306,7 @@ function OnboardingJoinForm() {
             className="shadow-[0px_0px_5px_0px_#00000040] flex justify-center items-center bg-[#B09B67] text-white font-semibold text-[13px] px-4 py-2 cursor-pointer transition-colors hover:bg-[#a29050] select-none"
             style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
           >
-            Browse File
+            {L('Browse File', 'ফাইল নির্বাচন করুন')}
           </label>
         </div>
       </div>
@@ -353,7 +363,11 @@ function OnboardingJoinForm() {
             !agreeTerms || isLoading ? 'opacity-60 cursor-not-allowed' : '',
           ].join(' ')}
         >
-          {isLoading ? 'Sending...' : showSuccessAlert ? 'Sent' : 'Submit'}
+          {isLoading
+            ? L('Sending...', 'পাঠানো হচ্ছে...')
+            : showSuccessAlert
+              ? L('Sent', 'পাঠানো হয়েছে')
+              : L('Submit', 'জমা দিন')}
         </Button>
       </div>
     </form>

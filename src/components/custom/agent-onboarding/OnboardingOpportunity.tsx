@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import { sliderDelay } from '@/lib/data'
 import Image from 'next/image'
+import LocalizedText from '../shared/LocalizedText'
 
 type OpportunityItem = {
   text: string
@@ -26,6 +27,7 @@ type ExpectedItem = {
   icon: string
   mobileIcon?: string
   text: string
+  textBN?: string
 }
 
 type Props = {
@@ -36,13 +38,17 @@ type Props = {
   }
   expectedData: {
     title: string
+    titleBN?: string
     subTitle?: string
+    subTitleBN?: string
     sectionLeft: ExpectedItem[]
     sectionRight: {
       avatar: string
       mobileAvatar?: string
       name: string
+      nameBN?: string
       quote: string
+      quoteBN?: string
     }
   }
 }
@@ -70,15 +76,26 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
   return (
     <div className="bg-[#FCF4EB] container-padding">
       <div className="global-h1 hidden md:block font-semibold text-[#434342] uppercase lg:block">
-        {expectedData.title} <br /> <span className="text-[#ED7125]">{expectedData?.subTitle}</span>
+        <LocalizedText en={expectedData?.title} bn={expectedData?.titleBN} />
+        <br />
+        <LocalizedText
+          en={expectedData?.subTitle}
+          bn={expectedData?.subTitleBN}
+          className="text-[#ED7125]"
+        />
       </div>
       <div className="flex flex-col ">
         {/* Opportunity Section */}
         <section className="bg-[#FCF4EB] md:hidden">
           {/* Section Title */}
           <div className="text-[18px] font-medium text-[#434342] uppercase mb-6">
-            {opportunityData.title} <br />
-            <span className="text-[#ED7125]">{expectedData?.subTitle}</span>
+            <LocalizedText en={expectedData?.title} bn={expectedData?.titleBN} />
+            <br />
+            <LocalizedText
+              en={expectedData?.subTitle}
+              bn={expectedData?.subTitleBN}
+              className="text-[#ED7125]"
+            />
           </div>
 
           {/* Carousel */}
@@ -152,7 +169,9 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
                     <Image fill src={item.icon} alt={`icon-${idx}`} className="" />
                   </div>
 
-                  <p className="global-p1 whitespace-pre-line">{item.text}</p>
+                  <p className="global-p1 whitespace-pre-line">
+                    <LocalizedText en={item.text} bn={item.textBN} />
+                  </p>
                 </div>
               ))}
             </div>
@@ -171,11 +190,17 @@ export default function OnboardingOpportunity({ opportunityData, expectedData }:
             </div>
 
             <h4 className="global-p2 font-semibold text-[#9A4E46] mb-2 lg:mb-6">
-              {expectedData.sectionRight.name}
+              <LocalizedText
+                en={expectedData.sectionRight.name}
+                bn={expectedData.sectionRight.nameBN}
+              />
             </h4>
             <p className="global-p2 text-[#3A3A3C]">
               <span className="text-[#9A4E46] text-xl leading-none font-bold">“</span>
-              {expectedData.sectionRight.quote}
+              <LocalizedText
+                en={expectedData.sectionRight.quote}
+                bn={expectedData.sectionRight.quoteBN}
+              />
               <span className="text-[#9A4E46] text-xl leading-none font-bold">”</span>
             </p>
             <div className="bg-[#9A4E46] w-10 h-2 rounded-lg" />
