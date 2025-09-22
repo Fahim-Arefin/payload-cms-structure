@@ -1,6 +1,7 @@
 import GlobalButton from '@/components/custom/shared/GlobalButton'
 import Link from 'next/link'
 import { ContactComponent } from './CustomerCareCall'
+import LocalizedText from '../shared/LocalizedText'
 const PORTAL_URL = 'https://portal.shantalife.com/'
 
 export function CorporateClaim() {
@@ -25,24 +26,37 @@ export function CorporateClaim() {
             </div>
           </div>
           <div className={`flex mx-auto`}>
-            <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-1/2 text-center mx-auto text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
-              <p>Click "Submit Claim" to proceed with your online claim.</p>
-              <p>We humbly request you to attach all necessary documents.</p>
+            <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-[55%] text-center mx-auto text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
+              <p>
+                <LocalizedText
+                  en='Click "Submit Claim" to proceed with your online claim.'
+                  bn='আপনার ক্লেইম অনলাইনে প্রসেস করার জন্য "Submit Claim" এ ক্লিক করুন।'
+                />
+              </p>
+              <p>
+                <LocalizedText
+                  en="We humbly request you to attach all necessary documents."
+                  bn="অনুগ্রহ করে প্রয়োজনীয় সকল কাগজপত্র সংযুক্ত করার বিনীত অনুরোধ রইলো।"
+                />
+              </p>
             </div>
           </div>
           <div className={`flex mx-auto`}>
-            <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-1/2 text-center mx-auto text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
+            <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-[55%] text-center mx-auto text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
               <p>
-                If you have any prior claim submitted, please Login to{' '}
+                <LocalizedText
+                  en="If you have any prior claim submitted, please Login to "
+                  bn="পূর্বে কোন ক্লেইম জমা দিয়ে থাকলে, "
+                />
                 <a
                   href={PORTAL_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#9C8639] underline underline-offset-2 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#9C8639]/40"
                 >
-                  My Portal
+                  <LocalizedText en="My Portal" bn="My Portal" />
                 </a>{' '}
-                and check the status.
+                <LocalizedText en="and check the status." bn="এ লগইন করে স্ট্যাটাস চেক করুন।" />
               </p>
             </div>
           </div>
@@ -50,7 +64,7 @@ export function CorporateClaim() {
             className={`
            flex`}
           >
-            <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-1/2 text-center mx-auto text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
+            <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-[55%] text-center mx-auto text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
               <ContactComponent />
             </div>
           </div>

@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { CorporateClaim } from './CorporateClaim'
 import { IndividualClaim } from './IndividualClaim'
+import LocalizedText from '../shared/LocalizedText'
 
 // export function ArrowIconLeft() {
 //   return (
@@ -39,6 +40,7 @@ type Props = {
   config: {
     value: string
     label: string
+    labelBN?: string
   }[]
   data: any
 }
@@ -87,7 +89,8 @@ export function ClaimTabs({ config }: Props) {
                   <span
                     className={` ${activeTab === tab.value ? ' text-[#ED7125] ' : ' text-[#434343] '}`}
                   >
-                    {tab.label}
+                   
+                    <LocalizedText en={tab.label} bn={tab?.labelBN}/>
                   </span>
                 }
               </TabsTrigger>
