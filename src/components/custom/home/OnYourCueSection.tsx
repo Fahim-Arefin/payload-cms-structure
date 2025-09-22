@@ -6,6 +6,7 @@ import GlobalButton from '../shared/GlobalButton'
 import CueHeader from './CueHeader'
 import CueItem from './CueItem'
 import { sliderDelay } from '@/lib/data'
+import LocalizedString from '../shared/LocalizedString'
 
 const cards = [
   {
@@ -14,7 +15,9 @@ const cards = [
     // mobileIcon: '/assets/homepage/mobile/cue2.png',
     title: 'Shanta',
     subtitle: 'Child Education Plan',
+    subtitleBN: 'চাইল্ড এডুকেশন প্ল্যান',
     description: 'They’re building castles in the sky — we’re here to anchor the ground.',
+    descriptionBN: 'তাদের স্বপ্নের ঘুড়ি যেন উড়ে বাঁধাহীন।',
     // image: '/assets/homepage/web/child-education.jpg',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/child-education.jpg`,
     // mobileImage: '/assets/homepage/mobile/child-education.jpg',
@@ -26,7 +29,9 @@ const cards = [
     // mobileIcon: '/assets/homepage/mobile/cue1.png',
     title: 'Shanta',
     subtitle: 'Multi Stage Maturity Plans',
-    description: 'Multiple payouts, 2 powerful plans - because your future is in your hands.  ',
+    subtitleBN: 'মাল্টি স্টেজ ম্যাচুরিটি প্ল্যান ',
+    description: 'Multiple payouts, 2 powerful plans - because your future is in your hands.',
+    descriptionBN: '২টি পাওয়ারফুল প্ল্যান - ধাপে ধাপে অর্থপ্রাপ্তির নিশ্চয়তা।',
     // image: '/assets/homepage/web/multi-stage.jpg',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/multi-stage.jpg`,
     // mobileImage: '/assets/homepage/mobile/multi-stage.jpg',
@@ -38,7 +43,9 @@ const cards = [
     // mobileIcon: '/assets/homepage/mobile/cue3.png',
     title: 'Shanta',
     subtitle: 'Endowment Plan',
+    subtitleBN: 'এনডাওমেন্ট প্ল্যান',
     description: 'For the life you’re building and the ones you’re building it for.',
+    descriptionBN: 'নিজ ও প্রিয়জনের আর্থিক সুরক্ষায় অবিচল নিশ্চয়তা।',
     // image: '/assets/homepage/web/endowment.jpg',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/endowment.jpg`,
     // mobileImage: '/assets/homepage/mobile/endowment.jpg',
@@ -89,7 +96,9 @@ function OnYourCueSection() {
       {/* Let’s Find More button */}
       <div className="flex justify-center mt-4 md:mt-6 lg:mt-8 2xl:mt-12 font-avenir">
         <Link href="/plans">
-          <GlobalButton variant="primary" className="" text="Lets Find More" />
+          <GlobalButton variant="primary" className="" text="Lets Find More">
+            <LocalizedString en='Lets Find More' bn='খুঁজে বের করুন'/>
+          </GlobalButton>
         </Link>
       </div>
     </div>

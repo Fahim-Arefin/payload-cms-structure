@@ -1,6 +1,9 @@
 export type HeroContentType = {
   image: string
   title: string
+  titleBN?: string
+  subtitleBN?: string
+  descriptionBN?: string
   subtitle: string
   description: string
   titleTop?: string
@@ -123,7 +126,9 @@ export type InsuranceDataType = {
   content: 'left' | 'right'
   sectionHeading: string
   title: string
+  titleBN?: string
   subtitle: string
+  subtitleBN?: string
   mainImage: string
   mainMobileImage?: string
   mainVIdeoLink: string

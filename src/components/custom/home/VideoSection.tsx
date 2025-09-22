@@ -6,6 +6,8 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/
 // import
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Image from 'next/image'
+import LocalizedText from '../shared/LocalizedText'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 // import ToolTip from '../shared/ToolTip'
 // import LottiePlayer from '../shared/LottiePlayer'
 // import LottieBackground from '../shared/LottieBackground'
@@ -83,7 +85,9 @@ function VideoSection() {
                     <div className="border-2 border-white rounded-full p-1 2xl:p-2">
                       <BsPlay className="font-bold" />
                     </div>
-                    <div className="text-white font-medium global-p2">From the Expert</div>
+                    <div className="text-white font-medium global-p2">
+                      <LocalizedText en="From the Expert" bn="এক্সপার্টদের থেকে" />
+                    </div>
                   </div>
                 </DialogTrigger>
 
@@ -118,7 +122,14 @@ function VideoSection() {
           bottom-10 lg:bottom-12 xl:bottom-16 2xl:bottom-20 
           global-h2 md:font-medium uppercase"
         >
-          Stay Ahead With Our <span className="text-[#ED7125]">Experts </span>
+          {/* Stay Ahead With Our <span className="text-[#ED7125]">Experts </span> */}
+          <LocalizedHighlighted
+            textBn="থাকুন এক ধাপ এগিয়ে"
+            textEn="Stay Ahead With Our Experts"
+            highlightBn="এগিয়ে"
+            highlightEn="Experts"
+            highlightClassName="text-[#ED7125]"
+          />
         </div>
       </div>
     </div>

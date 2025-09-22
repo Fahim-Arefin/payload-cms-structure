@@ -7,6 +7,8 @@ import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Link from 'next/link'
 import Image from 'next/image'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: InsuranceDataType
@@ -30,8 +32,15 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
               className="global-h1 uppercase font-semibold space-x-4 
             mb-[15px] md:mb-[30px] lg:mb-[40px] xl:mb-[80px]"
             >
-              <span>{restWords}</span>
-              <span className="text-[#ED7125]">{lastWord}</span>
+              {/* <span>{restWords}</span>
+              <span className="text-[#ED7125]">{lastWord}</span> */}
+              <LocalizedHighlighted
+                textBn="লাইফ ইন্সুরেন্স - সিমপ্লিফাইড"
+                textEn="Life Insurance Simplified"
+                highlightEn="Simplified"
+                highlightBn="সিমপ্লিফাইড"
+                highlightClassName="text-[#ED7125]"
+              />
             </h1>
           </div>
         )}
@@ -49,11 +58,20 @@ function InsuranceSimplifiedLargeSection({ data, content }: Props) {
             >
               <h4 className="font-semibold uppercase cursor-pointer">
                 <Link href="/">
-                  <span className="text-[#ED7125] ">{titleFirstWord} </span>{' '}
-                  {titleRestWords.join(' ')}
+                  {/* <span className="text-[#ED7125] ">{titleFirstWord} </span>{' '}
+                  {titleRestWords.join(' ')} */}
+                  <LocalizedHighlighted
+                    textBn={data?.titleBN || ''}
+                    textEn={data?.title || ''}
+                    highlightBn={data?.titleBN?.split(' ')?.[0] || ''}
+                    highlightEn={data?.title?.split(' ')?.[0] || ''}
+                    highlightClassName="text-[#ED7125]"
+                  />
                 </Link>
               </h4>
-              <h4 className="">{data?.subtitle}</h4>
+              <h4 className="">
+                <LocalizedText en={data?.subtitle} bn={data?.subtitleBN} />
+              </h4>
             </div>
             {/* right Section */}
             <Dialog>
