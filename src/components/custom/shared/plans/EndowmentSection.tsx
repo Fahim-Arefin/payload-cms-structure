@@ -92,6 +92,8 @@ import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import LocalizedHighlighted from '../LocalizedHighlighted'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   data: EndowmentDataType
@@ -113,13 +115,23 @@ function EndowmentSection({ data, content, bgColor }: Props) {
                      ${content === 'left' ? 'md:order-1' : 'md:order-2'}   
                      space-y-2 lg:space-y-2 xl:space-y-4 2xl:space-y-6`}
         >
-          <h3 className=" md:text-start global-h3 uppercase text-[#3A3A3C]">{data?.subtitle}</h3>
+          <h3 className=" md:text-start global-h3 uppercase text-[#3A3A3C]">
+            <LocalizedText en={data?.subtitle} bn={data?.subtitleBN} />
+          </h3>
           <h1 className=" md:text-start global-h1 font-semibold uppercase text-[#3A3A3C]">
-            {data?.title}
+            <LocalizedText en={data?.title} bn={data?.titleBN} />
           </h1>
-          <p className=" md:text-start text-justify global-p1">{data?.description}</p>
+          <p className=" md:text-start text-justify global-p1">
+            <LocalizedText en={data?.description} bn={data?.descriptionBN} />
+          </p>
           <h4 className="md:text-start global-h4 uppercase text-[#3A3A3C] font-semibold ">
-            Key <span className="text-[#ED7125]">Features</span>
+            <LocalizedHighlighted
+              textEn="Key Features"
+              highlightEn="Features"
+              textBn="মূল বৈশিষ্ট্যসমূহ"
+              highlightBn="বৈশিষ্ট্যসমূহ"
+              highlightClassName="text-[#ED7125]"
+            />
           </h4>
           <div
             className="
@@ -135,7 +147,9 @@ function EndowmentSection({ data, content, bgColor }: Props) {
                 <div className="relative w-[20px] lg:w-[25px] xl:w-[30px] h-[20px] lg:h-[25px] xl:h-[30px]">
                   <Image fill src={value?.image} alt={value?.name} className="" />
                 </div>
-                <div className="global-h4 capitalize">{value?.name}</div>
+                <div className="global-h4 capitalize">
+                  <LocalizedText en={value?.name} bn={value?.nameBN} />
+                </div>
               </div>
             ))}
             <Button
@@ -145,7 +159,9 @@ function EndowmentSection({ data, content, bgColor }: Props) {
            hover:underline-offset-8 p-0 "
             >
               <Link href={data?.link} className="flex space-x-1 items-center">
-                <span>Explore</span>
+                <span>
+                  <LocalizedText en='Explore' bn='এক্সপ্লোর'/>
+                </span>
                 <ArrowUpRight />
               </Link>
             </Button>

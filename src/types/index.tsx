@@ -120,17 +120,22 @@ export type PlanInfoDataType = {
   image: string
   mobileImage?: string
   description: string
+  descriptionBN?: string
 }
 
 export type EndowmentDataType = {
   title: string
+  titleBN?: string
   subtitle: string
+  subtitleBN?: string
   description: string
+  descriptionBN?: string
   image: string
   mobileImage: string
   link: string
   feature: {
     name: string
+    nameBN?: string
     image: string
   }[]
 }
@@ -327,17 +332,26 @@ export type TabDataType = {
 
 export type EligibilityCardProps = {
   title: string
+  titleBN?: string
   icon: string // icon path
   mobileIcon?: string // icon path
   bgImage?: string // background image path
   entryMin: string
+  entryMinBN?: string
   entryMinLabel: string
+  entryMinLabelBN?: string
   entryMax: string
+  entryMaxBN?: string
   entryMaxLabel: string
+  entryMaxLabelBN?: string
   policyTerm: string
+  policyTermBN?: string
   policyTermLabel: string
+  policyTermLabelBN?: string
   maturityAge: string
+  maturityAgeBN?: string
   maturityAgeLabel: string
+  maturityAgeLabelBN?: string
 }
 
 export type PaymentTabDataType = {

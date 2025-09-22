@@ -7,6 +7,7 @@ import { BenefitsTabSection } from '../child-education/BenefitsTabSection'
 import GlobalTabButtons from './GlobalTabButtons'
 import EndowmentKeyFeature from './plans/EndowmentKeyFeature'
 import EndowmentPlanEligibility from './plans/EndowmentPlanEligibility'
+import LocalizedText from './LocalizedText'
 
 export function ArrowIcon() {
   return (
@@ -27,6 +28,7 @@ type Props = {
   config: {
     value: string
     label: string
+    labelBN?: string
   }[]
   data?: any
 }
@@ -82,7 +84,7 @@ export function Tab({ config, data }: Props) {
                   <span
                     className={` ${activeTab === tab.value ? ' text-[#ED7125] ' : ' text-[#434343] '}`}
                   >
-                    {tab.label}
+                    <LocalizedText en={tab?.label} bn={tab?.labelBN} />
                   </span>
                 }
               </TabsTrigger>

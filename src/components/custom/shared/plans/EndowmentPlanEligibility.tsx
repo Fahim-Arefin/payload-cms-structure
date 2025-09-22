@@ -36,6 +36,7 @@
 // export default EndowmentPlanEligibility
 import { EligibilityCardProps } from '@/types'
 import { EligibilityCard } from '../../child-education/EligibilityCard'
+import LocalizedText from '../LocalizedText'
 
 type EndowmentPlanEligibilityProps = {
   data: EligibilityCardProps[]
@@ -46,7 +47,7 @@ const EndowmentPlanEligibility = ({ data }: EndowmentPlanEligibilityProps) => {
     <div className="mt-[15px] md:mt-0">
       <div className="p-2 lg:p-3 xl:p-4">
         <div className="global-h3 font-semibold text-center text-[#434342]">
-          METRICS THAT MATTER
+          <LocalizedText en="METRICS THAT MATTER" bn="গুরুত্বপূর্ণ মেট্রিকগুলি" />
         </div>
       </div>
 

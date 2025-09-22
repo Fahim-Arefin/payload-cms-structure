@@ -8,14 +8,17 @@ import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import React from 'react'
+import LocalizedString from '@/components/custom/shared/LocalizedString'
 
 function SavingAndInvestment() {
   const heroSlides = [
     {
       title: 'SAVING AND INVESTMENT PLANS',
+      titleBN: 'সেভিংস এন্ড ইনভেস্টমেন্ট প্ল্যানস',
       subtitle: '',
       description:
         'The right life insurance doesn\u2019t just wait around for the what-ifs—it walks beside you through the what\u2019s next.',
+      descriptionBN: 'একটি সঠিক বীমা পরিকল্পনা শুধু ভবিষ্যতের জন্য নয়, এটি বর্তমানেরও আর্থিক ঢাল ',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/s&i-banner.png`,
     },
   ]
@@ -23,43 +26,54 @@ function SavingAndInvestment() {
   const planInfoData = {
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/planInfo6.png`,
     // mobileImage: '/assets/solutions/individual/saving-and-investment/web/planInfo6.png',
+    descriptionBN: `সঞ্চয় আর স্বপ্নের সুরক্ষা একসাথে—শান্তা লাইফের কাস্টমাইজড সেভিংস ও ইনভেস্টমেন্ট-লিঙ্কড প্ল্যানস এর সঙ্গে।`,
     description:
       'Looking for a savings plan that does more than just save? Shanta Life brings you tailored savings & investment-linked insurance plans that secure your dreams—while protecting the ones you love.',
   }
 
   const endowmentData = {
     title: 'Endowment Plan',
+    titleBN: 'এনডাওমেন্ট প্ল্যান',
     subtitle: 'Shanta',
+    subtitleBN: 'শান্তা',
     description:
       'Shanta Lifes endowment plan provides the policy owner a guaranteed sum assured. This unique plan combines savings and life insurance components which serves the need for financial security of your family.',
+    descriptionBN: `শান্তা লাইফের এনডাওমেন্ট  প্ল্যান পলিসি গ্রহীতাকে একটি নিশ্চিত বীমাঅঙ্ক প্রদান করে। এই বিশেষ প্ল্যানটি সঞ্চয় এবং 
+      জীবনবীমার সমন্বয়ে তৈরি, যা আপনার পরিবারের আর্থিক নিরাপত্তার চাহিদা পূরণ করে।`,
     feature: [
       {
         name: 'Maturity Value',
+        nameBN: 'ম্যাচুরিটি ভ্যালু',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature1.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature1.png`,
       },
       {
         name: 'Death Benefit',
+        nameBN: 'ডেথ বেনিফিট ',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature2.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature2.png`,
       },
       {
         name: 'Grace Period',
+        nameBN: 'গ্রেস পিরিয়ড',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature3.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature3.png`,
       },
       {
         name: 'Surrender & Policy Loan Facility',
+        nameBN: 'সারেন্ডার ও পলিসি লোন সুবিধা ',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature4.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature4.png`,
       },
       {
         name: 'Tax Benefits',
+        nameBN: 'ট্যাক্স সুবিধা',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature5.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature5.png`,
       },
       {
         name: 'Additional Rider Facility (If taken)',
+        nameBN: 'অতিরিক্ত রাইডার সুবিধা (যদি নেওয়া হয়)',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature6.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature6.png`,
       },
@@ -71,38 +85,49 @@ function SavingAndInvestment() {
 
   const multiStagePlanData = {
     title: 'Multi stage Maturity Plans',
+    titleBN: 'মাল্টি স্টেজ ম্যাচুরিটি প্ল্যানস ',
     subtitle: 'Shanta',
+    subtitleBN: 'শান্তা',
     description: `With Shanta Multi-stage Maturity Plans, receive the coverage
     amount in scheduled installments over time, providing financial
     security to support your future goals and safeguard what matters most.`,
+    descriptionBN: `পলিসির মেয়াদ শেষ হওয়ার আগেই সুরক্ষার পাশাপাশি আর্থিক সুবিধা প্রাপ্তির জন্য শান্তা মাল্টি স্টেজ ম্যাচুরিটি প্ল্যানস হতে 
+    পারে আপনার আদর্শ সমাধান। এই প্ল্যানগুলোর মাধ্যমে আপনি কিস্তি ভিত্তিতে নির্দিষ্ট সময় পর পর কাভারেজ অ্যামাউন্টের নির্ধারিত অর্থ গ্রহণ করবেন, 
+    যা আপনার ভবিষ্যৎ লক্ষ্য ও সুরক্ষায় আর্থিক নিশ্চয়তা প্রদান করবে`,
     feature: [
       {
         name: 'Maturity Value',
+        nameBN: 'ম্যাচুরিটি ভ্যালু',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature1.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature1.png`,
       },
       {
         name: 'Death Benefit',
+        nameBN: 'ডেথ বেনিফিট',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature2.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature2.png`,
       },
       {
         name: 'Grace Period',
+        nameBN: 'গ্রেস পিরিয়ড',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature3.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature3.png`,
       },
       {
         name: 'Surrender & Policy Loan Facility',
+        nameBN: 'সারেন্ডার ও পলিসি লোন সুবিধা',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature4.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature4.png`,
       },
       {
         name: 'Tax Benefits',
+        nameBN: 'ট্যাক্স সুবিধা',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature5.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature5.png`,
       },
       {
         name: 'Additional Rider Facility (If taken)',
+        nameBN: 'অতিরিক্ত রাইডার সুবিধা (যদি নেওয়া হয়)',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature6.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature6.png`,
       },
@@ -136,7 +161,9 @@ function SavingAndInvestment() {
             >
               Purchase Now
             </Button> */}
-            <GlobalButton size="large" className="" text="Purchase" variant="primary" />
+            <GlobalButton size="large" className="" text="Purchase" variant="primary">
+              <LocalizedString en="Purchase" bn="কিনুন" />
+            </GlobalButton>
           </Link>
           <CallNowButton />
         </div>

@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import React from 'react'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   data?: any
@@ -26,10 +27,10 @@ function EndowmentKeyFeature({ data }: Props) {
                    2xl:max-w-[400px]"
           >
             <h3 className="global-h4 font-semibold uppercase text-center md:text-start">
-              {content.title}
+              <LocalizedText en={content?.title} bn={content?.titleBN} />
             </h3>
             <p className="global-p2 font-light lg:leading-6 text-center md:text-start">
-              {content.description}
+              <LocalizedText en={content?.description} bn={content?.descriptionBN} />
             </p>
             {content.listItems && Array.isArray(content.listItems) && (
               // <ul className="list-disc mt-2 space-y-1 text-[#434342] global-p2 font-light lg:leading-6 text-center md:text-start ">
