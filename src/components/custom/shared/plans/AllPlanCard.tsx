@@ -54,7 +54,10 @@ function AllPlanCard({ data, blur }: Props) {
             <br></br>
             {data?.biggerTitle && (
               <p className="text-[18px] lg:text-[17px] xl:text-[20px] 2xl:text-[28px] font-medium uppercase mx-auto lg:mx-0 text-center lg:text-start">
-                {data?.biggerTitle}
+                <LocalizedText
+                  en={data?.biggerTitle}
+                  bn={data?.biggerTitleBN ? data?.biggerTitleBN : data?.biggerTitle}
+                />
               </p>
             )}
           </div>
@@ -79,7 +82,7 @@ function AllPlanCard({ data, blur }: Props) {
           >
             <div className="flex space-x-1 items-center ">
               <span>
-                <LocalizedText en='Explore' bn='এক্সপ্লোর'/>
+                <LocalizedText en="Explore" bn="এক্সপ্লোর" />
               </span>
               <ArrowUpRight />
             </div>

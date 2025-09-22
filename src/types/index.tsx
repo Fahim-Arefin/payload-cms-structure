@@ -99,6 +99,7 @@ export type AllPlantDataType = {
   title: string
   titleBN?: string
   biggerTitle?: string
+  biggerTitleBN?: string
   description: string
   descriptionBN?: string
   link: string
@@ -240,6 +241,8 @@ export type OfferDataType2 = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgMobileImage?: string
   mobileImage?: string
   title: string
+  titleBN?: string
+  descriptionBN?: string
 }
 
 export type PlanData = {
