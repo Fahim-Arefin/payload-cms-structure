@@ -9,6 +9,7 @@ import CarouselNavButtons from '../shared/CarousalNavButtons'
 import { JoinOurTeamMobile } from './JoinOurTeamMobile'
 import Autoplay from 'embla-carousel-autoplay'
 import CareerDetailsModal from './CareerDetailsModal'
+import LocalizedText from '../shared/LocalizedText'
 
 type CareerOpeningDataProps = {
   openingData: any
@@ -185,10 +186,10 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
       <div className="mb-8 lg:mb-10">
         <div>
           <span className="block text-[#343434] font-light text-[18px] md:text-[22px] xl:text-[24px]">
-            CURRENTLY OPENING
+            <LocalizedText en="CURRENTLY OPENING" bn="নিয়োগ" />
           </span>
           <span className="block text-[#ED7125] font-bold text-[18px] md:text-[34px] xl:text-[50px] -mt-1">
-            POSITIONS
+            <LocalizedText en="POSITIONS" bn="চলছে" />
           </span>
         </div>
       </div>

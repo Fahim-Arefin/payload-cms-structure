@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
+import LocalizedText from '../shared/LocalizedText'
 // import your navigation buttons if you have
 
 const processData = [
@@ -10,26 +11,31 @@ const processData = [
     img: '/assets/career/web/process1.png',
     mobileImg: '/assets/career/mobile/process1.png',
     title: 'INITIAL SCREENING',
+    titleBN: 'প্রারম্ভিক বাছাই',
   },
   {
     img: '/assets/career/web/process2.png',
     mobileImg: '/assets/career/mobile/process2.png',
     title: 'PRELIMINARY DISCUSSION',
+    titleBN: 'প্রাথমিক আলোচনা',
   },
   {
     img: '/assets/career/web/process3.png',
     mobileImg: '/assets/career/mobile/process3.png',
     title: 'ASSESSMENT CENTER',
+    titleBN: 'মূল্যায়ন কেন্দ্র',
   },
   {
     img: '/assets/career/web/process4.png',
     mobileImg: '/assets/career/mobile/process4.png',
     title: 'FINAL INTERVIEW',
+    titleBN: 'সাক্ষাৎকার',
   },
   {
     img: '/assets/career/web/process5.png',
     mobileImg: '/assets/career/mobile/process5.png',
     title: 'ON BOARDING',
+    titleBN: 'যোগদান',
   },
 ]
 
@@ -57,9 +63,13 @@ export default function CareerProcessingFlow() {
     <section className="container-padding w-full py-12 flex flex-col bg-white">
       {/* Header */}
       <div className="mb-10">
-        <span className="global-h3 text-[#343434] font-light block mb-0">OUR SELECTION</span>
+        <span className="global-h3 text-[#343434] font-light block mb-0">
+          <LocalizedText en="OUR SELECTION" bn="সিলেকশন" />
+        </span>
         <h2 className="global-h1 font-bold">
-          <span className="text-[#ED7125]">PROCESS</span>
+          <span className="text-[#ED7125]">
+            <LocalizedText en="PROCESS" bn="প্রক্রিয়া" />
+          </span>
         </h2>
       </div>
 
@@ -117,7 +127,7 @@ export default function CareerProcessingFlow() {
                     draggable={false}
                   />
                   <span className="mt-2 text-[#343434] text-center text-[12px] font-medium uppercase max-w-[145px] mx-auto leading-tight break-words">
-                    {item.title}
+                    <LocalizedText en={item?.title} bn={item?.titleBN} />
                   </span>
                 </div>
               </CarouselItem>

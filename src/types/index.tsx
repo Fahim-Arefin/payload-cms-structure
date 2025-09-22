@@ -39,8 +39,7 @@ export type AllAboutCardDataType = {
   hoverMobileImage?: string
   title: string
   titleBN?: string
-  description?: { __html: string, __htmlBN?: string }
-
+  description?: { __html: string; __htmlBN?: string }
 }
 
 export type LicensedInfoType = {
@@ -157,6 +156,8 @@ export type InsuranceDataType = {
 export type OurStoryDataType = {
   title: string
   subtitle: string
+  titleBN?: string
+  subtitleBN?: string
   mainImage: string
   mainMobileImage: string
   insuranceCardData: InsuranceCardDataType[]
@@ -246,7 +247,9 @@ export type AllNewsDataType = {
 
 export type CareerCard = {
   title: string
+  titleBN?: string
   description: string
+  descriptionBN?: string
 }
 
 export type ProtectionDataType = {

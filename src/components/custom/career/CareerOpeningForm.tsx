@@ -16,6 +16,8 @@ import GlobalButton from '../shared/GlobalButton'
 import { Loader, MailCheck, SendHorizontal, CheckCircle } from 'lucide-react'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
+import LocalizedText from '../shared/LocalizedText'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 
 const positions = [
   // 'Junior IT Executive',
@@ -32,6 +34,9 @@ const positions = [
 ]
 
 function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) => void }) {
+  const lang = useSSRLanguage()
+  const L = (en: string, bn: string) => (lang === 'en' ? en : bn)
+
   const [agreeTerms, setAgreeTerms] = useState(false)
   // Validation functions
   const validateEmail = (email: string) => {
@@ -140,7 +145,10 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
   const [position, setPosition] = useState(positions[0] ?? '')
   const [message, setMessage] = useState('')
   const [resumeUploadFieldText, setResumeUploadFieldText] = useState(
-    'Upload your resume. (Pdf format & maximum 12mb)',
+    L(
+      'Upload your resume (Pdf format & maximum 12mb)',
+      'আপনার রেজুমে আপলোড করুন (পিডিএফ ফরম্যাট, সর্বোচ্চ ১২এমবি)',
+    ),
   )
 
   // Handle phone input - only allow numbers and limit to 11 digits
@@ -156,7 +164,9 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       onSubmit={handleSubmit}
       className="bg-white md:bg-[#FCF4EB] rounded-[12px] h-full px-5 py-6 flex flex-col gap-4 w-full"
     >
-      <span className="font-bold text-[#343434] text-lg mb-1 tracking-tight">JOIN OUR TEAM</span>
+      <span className="font-bold text-[#343434] text-lg mb-1 tracking-tight">
+        <LocalizedText en="JOIN OUR TEAM" bn="আমাদের সাথে যোগ দিন" />
+      </span>
 
       {/* Validation Errors */}
       {validationErrors.length > 0 && (
@@ -174,14 +184,17 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md flex items-center gap-2 animate-in fade-in-0 slide-in-from-top-1">
           <CheckCircle className="h-5 w-5" />
           <span className="text-sm font-medium">
-            Application sent successfully! We'll get back to you soon.
+            {L(
+              "Application sent successfully! We'll get back to you soon.",
+              'আবেদন সফলভাবে পাঠানো হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।',
+            )}
           </span>
         </div>
       )}
       <Input
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Name"
+        placeholder={L('Name', 'নাম')}
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
         required
         disabled={isLoading}
@@ -189,7 +202,7 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       <Input
         value={phone}
         onChange={handlePhoneChange}
-        placeholder="Phone (01XXXXXXXXX)"
+        placeholder={L('Phone (01XXXXXXXXX)', 'ফোন (০১XXXXXXXXX)')}
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
         required
         disabled={isLoading}
@@ -199,7 +212,7 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       <Input
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
+        placeholder={L('Email', 'ইমেইল')}
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px]"
         required
         disabled={isLoading}
@@ -207,11 +220,11 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       />
       <Select required value={pos} onValueChange={setPos} disabled={isLoading}>
         <SelectTrigger className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none text-[15px]">
-          <SelectValue placeholder="Select Job Position" />
+          <SelectValue placeholder={L('Select Job Position', 'জব পজিশন সিলেক্ট করুন')} />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Position</SelectLabel>
+            <SelectLabel>{L('Position', 'পদ')}</SelectLabel>
             {positions.map((position) => (
               <SelectItem value={position} key={position}>
                 {position}
@@ -231,7 +244,9 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
           </span>
           <input
             onChange={(e) =>
-              setResumeUploadFieldText(e.target.files?.[0]?.name ?? 'Upload your resume')
+              setResumeUploadFieldText(
+                e.target.files?.[0]?.name ?? L('Upload your resume', 'আপনার রেজুমে আপলোড করুন'),
+              )
             }
             required
             type="file"
@@ -246,14 +261,14 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
           className="bg-[#B09B67] text-white font-semibold text-[13px] px-4 py-2 cursor-pointer transition-colors hover:bg-[#a29050] select-none"
           style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
         >
-          Browse File
+          {L('Browse File', 'ব্রাউস ফাইল')}
         </label>
       </div>
 
       <Textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder="Your message (optional)"
+        placeholder={L('Your message (optional)', 'আপনার মেসেজ (অপশনাল)')}
         className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none placeholder:text-[#B0B0B0] text-[15px] lg:min-h-[105px] xl:min-h-[70px]"
         rows={2}
         disabled={isLoading}
@@ -272,26 +287,53 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
             checked={agreeTerms}
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
-          <span className="text-xs md:text-sm leading-relaxed">
-            By clicking <span className="font-semibold">Submit</span>, you agree to our{' '}
-            <Link
-              href="/terms-condition"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              terms and conditions
-            </Link>{' '}
-            and Shanta Life{' '}
-            <Link
-              href="/privacy-policy"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              privacy policy
-            </Link>
-            .
+          <span className="text-xs leading-relaxed">
+            {lang === 'en' ? (
+              <>
+                By clicking <span className="font-semibold">Submit</span>, you agree to our{' '}
+                <Link
+                  href="/terms-condition"
+                  className="underline text-[#FF6600] hover:opacity-90"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  terms and conditions
+                </Link>{' '}
+                and Shanta Life{' '}
+                <Link
+                  href="/privacy-policy"
+                  className="underline text-[#FF6600] hover:opacity-90"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  privacy policy
+                </Link>
+                .
+              </>
+            ) : (
+              <>
+                <span className="font-semibold">বাটনে</span>  ক্লিক করার
+                মাধ্যমে আপনি আমাদের{' '}
+                <Link
+                  href="/terms-condition"
+                  className="underline text-[#FF6600] hover:opacity-90"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  শর্তাবলী (Terms &amp; Conditions)
+                </Link>{' '}
+                এবং শানতা লাইফের{' '}
+                <Link
+                  href="/privacy-policy"
+                  className="underline text-[#FF6600] hover:opacity-90"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  গোপনীয়তা নীতি (Privacy Policy)
+                </Link>{' '}
+                এর সাথে সম্মত হচ্ছেন।
+              </>
+            )}
           </span>
         </label>
       </div>
@@ -301,7 +343,13 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
         className={`font-semibold w-full md:w-auto md:self-end ${
           isLoading || !agreeTerms ? 'opacity-60 cursor-not-allowed' : ''
         }`}
-        text={isLoading ? 'Sending...' : showSuccessAlert ? 'Sent' : 'Submit'}
+        text={
+          isLoading
+            ? L('Sending...', 'পাঠানো হচ্ছে...')
+            : showSuccessAlert
+              ? L('Sent', 'পাঠানো হয়েছে')
+              : L('Submit', 'জমা দিন')
+        }
         variant="primary"
         disabled={isLoading || !agreeTerms}
         aria-disabled={isLoading || !agreeTerms}
@@ -314,7 +362,11 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
           <SendHorizontal className="h-4 w-4" />
         )}
         <span className="text-sm">
-          {isLoading ? 'Sending...' : showSuccessAlert ? 'Sent' : 'Submit'}
+          {isLoading
+            ? L('Sending...', 'পাঠানো হচ্ছে...')
+            : showSuccessAlert
+              ? L('Sent', 'পাঠানো হয়েছে')
+              : L('Submit', 'জমা দিন')}
         </span>
       </GlobalButton>
     </form>

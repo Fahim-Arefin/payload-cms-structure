@@ -3,13 +3,17 @@
 import { useState } from 'react'
 import EllipseDecoration from './EllipseDecoration'
 import Image from 'next/image'
+import LocalizedText from '../shared/LocalizedText'
 
 type ResourceData = {
   title: string
+  titleBN?: string
   image: string
   mobileImage: string
   description: string
+  descriptionBN?: string
   designation: string
+  designationBN?: string
 }
 
 function ResourceCard({ data }: { data: ResourceData }) {
@@ -25,7 +29,7 @@ function ResourceCard({ data }: { data: ResourceData }) {
             expanded ? '' : 'line-clamp-2'
           }`}
         >
-          {data.description}
+          <LocalizedText en={data?.description} bn={data?.descriptionBN} />
         </p>
         <button
           onClick={() => setExpanded((prev) => !prev)}
@@ -66,10 +70,10 @@ function ResourceCard({ data }: { data: ResourceData }) {
         </div>
         <div className="flex flex-col ml-12 md:ml-10">
           <span className="text-[#434342] font-semibold text-[12px] md:text-[14px] xl:text-[16px]">
-            {data.title}
+            <LocalizedText en={data?.title} bn={data?.titleBN} />
           </span>
           <span className="text-[#434342] font-light uppercase text-[12px] md:text-[15px] xl:text-[16px]">
-            {data.designation}
+            <LocalizedText en={data?.designation} bn={data?.designationBN} />
           </span>
         </div>
       </div>

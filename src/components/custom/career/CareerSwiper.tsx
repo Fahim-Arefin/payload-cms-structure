@@ -6,6 +6,7 @@ import { CareerCard } from '@/types'
 import { useEffect, useState } from 'react'
 import SwiperNavButtons from './SwiperNavButtons'
 import Autoplay from 'embla-carousel-autoplay'
+import LocalizedText from '../shared/LocalizedText'
 
 type CareerSwiperProps = {
   careerCards: CareerCard[]
@@ -60,10 +61,17 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
     >
       <div className="md:pt-4 lg:pt-16 pb-10">
         <div className="mb-6 flex flex-col gap-2 pl-5 md:pl-24 lg:pl-[130px] xl:pl-[200px] 2xl:pl-[300px]">
-          <div className="text-white text-lg lg:text-[28px] font-light">FAST TRACK</div>
-          <div className="text-[#FF8641] text-3xl lg:text-[46px] font-bold mb-2">YOUR CAREER</div>
+          <div className="text-white text-lg lg:text-[28px] font-light">
+            <LocalizedText en="FAST TRACK" bn="ক্যারিয়ার এ এগিয়ে থাকুন " />
+          </div>
+          <div className="text-[#FF8641] text-3xl lg:text-[46px] font-bold mb-2">
+            <LocalizedText en="YOUR CAREER" bn="অনন্য গতিতে" />
+          </div>
           <div className="text-white text-[12px] md:text-base lg:text-lg font-[350] uppercase">
-            Discover a purpose with endless opportunity
+            <LocalizedText
+              en="Discover a purpose with endless opportunity"
+              bn="আবিষ্কার করুন এক অভূতপূর্ণ যাত্রা যেখানে সম্ভাবনা অফুরন্ত ​"
+            />
           </div>
         </div>
         <div className="relative mt-10 lg:mt-[62px]">
@@ -73,7 +81,7 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
               // loop: true,
             }}
             setApi={setCarouselApi}
-            className="w-full" 
+            className="w-full"
           >
             <CarouselContent className="gap-6 px-10">
               {careerCards.map((card, idx) => (
@@ -99,7 +107,9 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
                       <div className="text-white text-[14px] md:text-[16px] lg:global-p1 font-bold">
                         {card.title}
                       </div>
-                      <div className="text-white global-p2">{card.description}</div>
+                      <div className="text-white global-p2">
+                        <LocalizedText en={card?.description} bn={card?.descriptionBN} />
+                      </div>
                     </div>
                   </div>
                 </CarouselItem>

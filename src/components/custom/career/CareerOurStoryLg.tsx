@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import InsuranceCard from '../home/InsuranceCard'
 import CareerStoryCard from './CareerStoryCard'
+import LocalizedText from '../shared/LocalizedText'
 
 type CareerOurStoryLgProps = {
   data: OurStoryDataType
@@ -21,9 +22,11 @@ const CareerOurStoryLg: FC<CareerOurStoryLgProps> = ({ data }) => {
           <div className={cn(`grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0`)}>
             {/* Left Text Section */}
             <div className={cn(`text-[#434343] flex flex-col justify-center`, 'order-1')}>
-              <h4 className="font-light hidden md:block global-h3 uppercase">{data?.title}</h4>
+              <h4 className="font-light hidden md:block global-h3 uppercase">
+                <LocalizedText en={data?.title} bn={data?.titleBN} />
+              </h4>
               <h4 className="text-[#ED7125] hidden md:block font-semibold global-h1">
-                {data?.subtitle}
+                <LocalizedText en={data?.subtitle} bn={data?.subtitleBN} />
               </h4>
               <h4 className="block md:hidden text-base uppercase">
                 Shanta Life <span className="text-[#ED7125]">Unveiled</span>
@@ -86,7 +89,9 @@ const CareerOurStoryLg: FC<CareerOurStoryLgProps> = ({ data }) => {
           </div>
           {/* second row */}
           <div className="grid grid-cols-3 gap-6">
-            {data?.insuranceCardData?.map((item, i) => <CareerStoryCard data={item} key={i} />)}
+            {data?.insuranceCardData?.map((item, i) => (
+              <CareerStoryCard data={item} key={i} />
+            ))}
           </div>
         </div>
       </div>
