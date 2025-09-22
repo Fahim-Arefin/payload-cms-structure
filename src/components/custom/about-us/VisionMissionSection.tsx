@@ -57,6 +57,8 @@
 import { VissionMissionContentType } from '@/types'
 import Image from 'next/image'
 import React from 'react'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   vissionMissionContent: VissionMissionContentType
@@ -100,27 +102,45 @@ function VisionMissionSection({ vissionMissionContent }: Props) {
         {/* Vision */}
         <div className="space-y-2 md:space-y-6 pr-2 md:pr-12 ">
           <h1 className="global-h1 font-medium lg:font-semibold uppercase ">
-            Our <span className="text-[#ED7125]">Vision</span>
+            <LocalizedHighlighted
+              textEn="Our Vision"
+              textBn="আমাদের ভিশন"
+              highlightEn="Vision"
+              highlightBn="ভিশন"
+              highlightClassName="text-[#ED7125]"
+            />
           </h1>
           <p
             className="global-p2 md:global-p1 max-w-[550px] 
           font-light text-justify 
           "
           >
-            {vissionMissionContent?.visionDescription}
+            <LocalizedText
+              en={vissionMissionContent?.visionDescription}
+              bn={vissionMissionContent?.visionDescriptionBN}
+            />
           </p>
         </div>
 
         {/* Mission */}
         <div className="space-y-2 md:space-y-6 pl-2 md:pl-12 ">
           <h1 className="global-h1 font-medium lg:font-semibold uppercase ">
-            Our <span className="text-[#ED7125]">Mission</span>
+            <LocalizedHighlighted
+              textEn="Our Mission"
+              textBn="আমাদের মিশন"
+              highlightEn="Mission"
+              highlightBn="মিশন"
+              highlightClassName="text-[#ED7125]"
+            />
           </h1>
           <p
             className="global-p2 md:global-p1 max-w-[550px]
           font-light text-justify"
           >
-            {vissionMissionContent?.missionDescription}
+            <LocalizedText
+              en={vissionMissionContent?.missionDescription}
+              bn={vissionMissionContent?.missionDescriptionBN}
+            />
           </p>
         </div>
       </div>

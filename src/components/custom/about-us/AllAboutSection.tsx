@@ -1,6 +1,7 @@
 import { AllAboutCardDataType } from '@/types'
 import AllAboutCardList from './AllAboutCardList'
 import Image from 'next/image'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 
 type AllAboutData = {
   image: string
@@ -16,6 +17,8 @@ type Props = {
 
 function AllAboutSection({ allAboutData }: Props) {
   const { image, mobileImage, title, coloredTitle, data } = allAboutData
+
+  const mainTitle = title + ' ' + coloredTitle
   return (
     <div className="margin-bottom lg:px-2 relative lg:overflow-hidden">
       <div>
@@ -41,12 +44,14 @@ function AllAboutSection({ allAboutData }: Props) {
             <div className="absolute inset-0 bg-black/40 lg:rounded-[10px] xl:rounded-[13px] 2xl:rounded-[15px] z-10"></div>
 
             <h1 className="shantaLifeIntroSection-h1 font-medium lg:font-semibold uppercase absolute inset-x-0 top-1/4 text-center z-20 text-white lg:hidden">
-              {title} <span className="text-[#ED7125]">{coloredTitle}</span>
+              {/* {title} <span className="text-[#ED7125]">{coloredTitle}</span> */}
+              <LocalizedHighlighted textEn={mainTitle} textBn='আমাদের মূল্যবোধসমূহ' highlightEn={coloredTitle} highlightBn='মূল্যবোধসমূহ'/>
             </h1>
           </div>
           {/* heading */}
           <h1 className="global-h1 font-medium lg:font-semibold text-[#434342] uppercase hidden lg:block mt-6">
-            {title} <span className="text-[#ED7125]">{coloredTitle}</span>
+            {/* {title} <span className="text-[#ED7125]">{coloredTitle}</span> */}
+            <LocalizedHighlighted textEn={mainTitle} textBn='আমাদের মূল্যবোধসমূহ' highlightEn={coloredTitle} highlightBn='মূল্যবোধসমূহ'/>
           </h1>
         </div>
         {/* right-side */}

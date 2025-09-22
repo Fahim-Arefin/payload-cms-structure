@@ -6,6 +6,7 @@ import CarouselNavButtons from '../shared/CarousalNavButtons'
 import AllOfThemCard from './AllOfThemCard'
 import Autoplay from 'embla-carousel-autoplay'
 import { sliderDelay } from '@/lib/data'
+import LocalizedText from '../shared/LocalizedText'
 type Props = {
   allOfThemData: AllOfThemDataType[]
 }
@@ -37,7 +38,7 @@ function AllOfThemSection({ allOfThemData }: Props) {
         {/* top section */}
         <div className="lg:w-[50%] space-y-2 md:space-y-6 2xl:space-y-12 ">
           <h2 className="global-h1 lg:global-h3 font-medium lg:font-semibold text-[#4A4A4A] text-center lg:text-start uppercase">
-            Leadership Team
+            <LocalizedText en={'Leadership Team'} bn={'লিডারশিপ টিম'} />
           </h2>
           {/* <p className="global-p1 text-[#4A4A4A] text-center lg:text-justify ">
             Guided by Visionaries, Driven by Purpose. Meet Our Leadership Team, creating a new
