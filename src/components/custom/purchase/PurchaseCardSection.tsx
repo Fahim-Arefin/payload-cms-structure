@@ -15,6 +15,7 @@ const PurchaseCardSection: FC<PurchaseCardSectionProps> = ({ blur }) => {
   const purchasePlanData = [
     {
       title: 'Shanta Endowment Plans',
+      titleBN: 'শান্তা এনডাওমেন্ট প্ল্যান',
       description: `Turn today’s choices into tomorrow’s freedom.`,
       image: '/assets/purchase/purchaseCard1.jpg',
       link: '/assets/pdf/Required Brochures/Endowment Plan/Endowment Brochure.pdf',

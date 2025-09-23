@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import LevelUpCard from './LevelUpCard'
 import Autoplay from 'embla-carousel-autoplay'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: {
@@ -42,10 +44,19 @@ function LevelUpSection({ data }: Props) {
    py-[50px] lg:py-[70px] xl:py-[100px] 2xl:py-[120px] space-y-2"
       >
         <h1 className="global-h1 uppercase font-semibold text-[#1E1E1E]">
-          Level up with <span className="text-[#ED7125]">our experts</span>
+          <LocalizedHighlighted
+            textBn="এক্সপার্টদের কাছে শিখুন"
+            highlightBn={`শিখুন`}
+            textEn={`Level up with our experts`}
+            highlightEn={`our experts`}
+            highlightClassName="text-[#ED7125]"
+          />
         </h1>
         <p className="text-[12px] md:text-[20px] lg:text-[22px] xl:text-[24px] 2xl:text-[32px] text-[#434343]">
-          Level up your financial literacy game with our Industry Experts 
+          <LocalizedText
+            en={`Level up your financial literacy game with our Industry Experts `}
+            bn={`আপনার ফিনান্সিয়াল গেম আরো তীক্ষ্ণ করতে এক্সপার্টদের সাহায্য নিন `}
+          />
         </p>
       </div>
       <div className="px-2">

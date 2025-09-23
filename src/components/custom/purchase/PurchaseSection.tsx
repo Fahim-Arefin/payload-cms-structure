@@ -9,6 +9,7 @@ import { ApiResponse, ApiResToShow, getTotalPremium } from '@/utils/premiumCalcu
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
 import PurchaseCalculateSection from './PurchaseCalculateSection'
 import PlanDetailsSection from './PlanDetailsSection'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {}
 
@@ -123,16 +124,23 @@ const PurchaseSection = (props: Props) => {
     >
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[17px] md:text-[24px] lg:text-[30px] xl:text-[38px] 2xl:text-[46px] font-semibold text-[#4A4A4A] text-start uppercase">
-          Let's get a policy
+          <LocalizedText en={`Let's get a policy`} bn={`নিজের এবং প্রিয়জনের জন্য`} />
         </h1>
         <h4 className="text-[14px] md:text-[20px] lg:text-[22px] xl:text-[24px] 2xl:text-[32px] font-semibold text-[#4A4A4A] text-start uppercase mb-4 lg:mb-10">
-          <span className="text-[#ED7125] font-semibold">for ourselves and our loved ones.</span>
+          <span className="text-[#ED7125] font-semibold">
+            <LocalizedText en={`for ourselves and our loved ones.`} bn={`পলিসি গ্রহণ করুন `} />
+          </span>
         </h4>
         <p className="text-[12px] md:global-p1 text-start w-full xl:w-[80%] text-[#434343]">
-          Our policies provide more than just life coverage. Many plans include savings and
+          <LocalizedText
+            en={`Our policies provide more than just life coverage. Many plans include savings and
           investment options, helping you grow your wealth over time while ensuring your loved ones
           are protected. With affordable premiums, flexible terms, and guaranteed returns, Shanta
-          Life combines security and financial growth in one comprehensive package.
+          Life combines security and financial growth in one comprehensive package.`}
+            bn={`আমাদের নীতিমালা শুধু আর্থিক সুরক্ষা প্রদান করে না। সাশ্রয়ী প্রিমিয়াম, সহজ শর্তাবলি এবং নিশ্চিত
+               অর্থপ্রাপ্তির মাধ্যমে শান্তা লাইফ একসাথে নিরাপত্তা ও আর্থিক সঞ্চয়কে একটি পূর্ণাঙ্গ প্যাকেজে একত্রিত 
+               করেছে।`}
+          />
         </p>
       </div>
 
@@ -159,26 +167,42 @@ const PurchaseSection = (props: Props) => {
           ) : (
             <div>
               <div className="px-6 pt-6 md:px-10 md:pt-10 pb-4 rounded-t-xl bg-[#9C863940]">
-                <h4 className="global-p1 font-semibold text-[#3A3A3C] mb-1">For their Future</h4>
+                <h4 className="global-p1 font-semibold text-[#3A3A3C] mb-1">
+                  <LocalizedText en={`For their Future`} bn={`তাদের ভবিষ্যতের জন্য`} />
+                </h4>
                 <p className="global-p2 text-[#3A3A3C]">
-                  Secure Your Child’s Future With A Plan That Covers Both Education Costs And Life
-                  Protection—Because Dreams Deserve A Safety Net.
+                  <LocalizedText
+                    en={`Secure Your Child’s Future With A Plan That Covers Both Education Costs And Life
+                  Protection—Because Dreams Deserve A Safety Net.`}
+                    bn={`আপনার সন্তানের ভবিষ্যৎ সুরক্ষিত করুন এমন এক পরিকল্পনায়, যা শিক্ষা ব্যয় ও জীবন সুরক্ষা দুটোই কভার করে।`}
+                  />
                 </p>
               </div>
 
               <div className="bg-[#ccbf95] px-6 md:px-10 py-4 ">
-                <h4 className="global-p1 font-bold text-[#fff] mb-1">For Your Growth</h4>
+                <h4 className="global-p1 font-bold text-[#fff] mb-1">
+                  <LocalizedText en={`For Your Growth`} bn={`আপনার উন্নতির জন্য`} />
+                </h4>
                 <p className="global-p2 font-light text-[#fff]">
-                  Build Wealth With Guaranteed Returns And Built-in Life Insurance
+                  <LocalizedText
+                    en={`Build Wealth With Guaranteed Returns And Built-in Life Insurance`}
+                    bn={`নিশ্চিত অর্থপ্রাপ্তি ও জীবন বিমার মাধ্যমে গড়ে তুলুন সম্পদ।`}
+                  />
                 </p>
               </div>
 
               <div className="bg-[#9C8639B2] rounded-b-xl px-6 md:px-10 py-4">
                 <h4 className="global-p1 font-bold text-[#fff] mb-1">
-                  When life throws you a Curveball
+                  <LocalizedText
+                    en={`When life throws you a Curveball`}
+                    bn={`যখন জীবন হঠাৎ আঘাত হানে`}
+                  />
                 </h4>
                 <p className="global-p2 font-light text-[#fff]">
-                  Because We Want You To Focus On Your Recovery
+                  <LocalizedText
+                    en={`Because We Want You To Focus On Your Recovery.`}
+                    bn={`আমরা চাই আপনি যেন শুধু সুস্থ হয়ে ওঠার দিকেই মনোযোগ দিন।`}
+                  />
                 </p>
               </div>
             </div>

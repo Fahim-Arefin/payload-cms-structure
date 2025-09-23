@@ -13,6 +13,7 @@ const page: FC<pageProps> = ({}) => {
   const heroSlides = [
     {
       title: 'Purchase Now',
+      titleBN: 'পলিসি কিনুন',
       subtitle: '',
       description: '',
       image: '/assets/purchaseBanner.jpg',

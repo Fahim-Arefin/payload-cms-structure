@@ -5,6 +5,7 @@ function PrivacyPolicy() {
   const heroSlides = [
     {
       title: 'Privacy Policy',
+      titleBN: 'প্রাইভেসি পলিসি',
       subtitle: '',
       description: '',
       image: '/assets/banner9.jpg',

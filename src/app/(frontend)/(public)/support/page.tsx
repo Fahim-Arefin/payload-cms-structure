@@ -132,7 +132,9 @@ function SupportPage() {
     {
       title: '',
       subtitle: 'SUPPORT',
+      subtitleBN: 'সাপোর্ট',
       description: 'Need help? We aim to deliver support that speaks your language.',
+      descriptionBN: 'আপনার সকল প্রশ্নের সমাধান, এক জায়গায়',
       image: '/assets/suppoprtHero.jpg',
     },
   ]
@@ -212,20 +214,24 @@ function SupportPage() {
     {
       value: 'branches',
       label: 'OUR BRANCHES',
+      labelBN: 'আমাদের ব্রাঞ্চ সমূহ',
     },
     {
       value: 'hospitals',
       label: 'PANEL HOSPITALS',
+      labelBN: 'প্যানেল হসপিটাল',
     },
   ]
   const faqItems = [
     {
       value: 'general',
       label: 'GENERAL FAQ',
+      labelBN: 'সাধারণ জিজ্ঞাসা',
     },
     {
       value: 'form',
       label: 'DOWNLOAD FORMS',
+      labelBN: 'ডাউনলোড ফরম'
     },
   ]
 

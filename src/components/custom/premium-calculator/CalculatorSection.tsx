@@ -220,6 +220,7 @@ import PremiumBreakdown from './PremiumBreakdown'
 import { ApiResponse, getTotalPremium } from '@/utils/premiumCalculator'
 import PlanDetailsSection from '../purchase/PlanDetailsSection'
 import PurchaseCalculateSection from '../purchase/PurchaseCalculateSection'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {}
 
@@ -385,26 +386,43 @@ const CalculatorSection = (props: Props) => {
           ) : (
             <>
               <div className="px-6 pt-6 md:px-10 md:pt-10 pb-4 rounded-t-xl bg-[#9C863940]">
-                <h4 className="global-p1 font-semibold text-[#3A3A3C] mb-1">For their Future</h4>
+                <h4 className="global-p1 font-semibold text-[#3A3A3C] mb-1">
+                  <LocalizedText en={`For their Future`} bn={`তাদের ভবিষ্যতের জন্য`} />
+                </h4>
                 <p className="global-p2 text-[#3A3A3C]">
-                  Secure Your Child’s Future With A Plan That Covers Both Education Costs And Life
-                  Protection—Because Dreams Deserve A Safety Net.
+                  <LocalizedText
+                    en={`Secure Your Child’s Future With A Plan That Covers Both Education Costs And Life
+                                   Protection—Because Dreams Deserve A Safety Net.`}
+                    bn={`আপনার সন্তানের ভবিষ্যৎ সুরক্ষিত করুন এমন এক পরিকল্পনায়, যা শিক্ষা ব্যয় ও জীবন সুরক্ষা দুটোই কভার করে।`}
+                  />
                 </p>
               </div>
 
               <div className="bg-[#ccbf95] px-6 md:px-10 py-4 ">
-                <h4 className="global-p1 font-bold text-[#fff] mb-1">For Your Growth</h4>
+                <h4 className="global-p1 font-bold text-[#fff] mb-1">
+                  {' '}
+                  <LocalizedText en={`For Your Growth`} bn={`আপনার উন্নতির জন্য`} />
+                </h4>
                 <p className="global-p2 font-light text-[#fff]">
-                  Build Wealth With Guaranteed Returns And Built-in Life Insurance
+                  <LocalizedText
+                    en={`Build Wealth With Guaranteed Returns And Built-in Life Insurance`}
+                    bn={`নিশ্চিত অর্থপ্রাপ্তি ও জীবন বিমার মাধ্যমে গড়ে তুলুন সম্পদ।`}
+                  />
                 </p>
               </div>
 
               <div className="bg-[#9C8639B2] rounded-b-xl px-6 md:px-10 py-4">
                 <h4 className="global-p1 font-bold text-[#fff] mb-1">
-                  When life throws you a Curveball
+                  <LocalizedText
+                    en={`When life throws you a Curveball`}
+                    bn={`যখন জীবন হঠাৎ আঘাত হানে`}
+                  />
                 </h4>
                 <p className="global-p2 font-light text-[#fff]">
-                  Because We Want You To Focus On Your Recovery
+                  <LocalizedText
+                    en={`Because We Want You To Focus On Your Recovery.`}
+                    bn={`আমরা চাই আপনি যেন শুধু সুস্থ হয়ে ওঠার দিকেই মনোযোগ দিন।`}
+                  />
                 </p>
               </div>
             </>
