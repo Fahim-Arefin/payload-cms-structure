@@ -264,14 +264,18 @@ export type CareerCard = {
 
 export type ProtectionDataType = {
   title: string
+  titleBN?: string
   subTitle: string
+  subTitleBN?: string
   smallTitle: string
+  smallTitleBN?: string
   bgImage: string
   bgMobileImage: string
   item: {
     image: string
     mobileImage?: string
     description: string
+    descriptionBN?: string
   }[]
 }
 

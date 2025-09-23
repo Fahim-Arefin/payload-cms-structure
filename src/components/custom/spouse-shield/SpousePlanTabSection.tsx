@@ -1,5 +1,7 @@
 import React from 'react'
 import GlobalButton from '../shared/GlobalButton'
+import LocalizedText from '../shared/LocalizedText'
+import LocalizedString from '../shared/LocalizedString'
 
 type Props = {
   data: any
@@ -25,16 +27,24 @@ function SpousePlanTabSection({ data }: Props) {
             <img src={item?.image} alt={item?.title} className="w-full h-full" />
           </div>
           <div>
-            <div className="global-p1 font-semibold text-[#3A3A3A]">{item?.title}</div>
-            <div className="global-p2 text-justify text-[#434342]">{item?.description}</div>
+            <div className="global-p1 font-semibold text-[#3A3A3A]">
+              <LocalizedText en={item?.title} bn={item?.titleBN} />
+            </div>
+            <div className="global-p2 text-justify text-[#434342]">
+              <LocalizedText en={item?.description} bn={item?.descriptionBN} />
+            </div>
           </div>
         </div>
       ))}
 
       <div className="flex flex-row justify-center items-center gap-4">
-        <GlobalButton text="Download Brochure" className='cursor-not-allowed' variant="secondary" />
+        <GlobalButton text="Download Brochure" className="cursor-not-allowed" variant="secondary">
+          <LocalizedString en={'Download Brochure'} bn={'ডাউনলোড ব্রোশিউর'} />
+        </GlobalButton>
 
-        <GlobalButton variant="outline" className='cursor-not-allowed' text="Explore Now" />
+        <GlobalButton variant="outline" className="cursor-not-allowed" text="Explore Now">
+          <LocalizedString en={'Explore Now'} bn={'ঘুরে দেখুন'} />
+        </GlobalButton>
       </div>
     </div>
   )

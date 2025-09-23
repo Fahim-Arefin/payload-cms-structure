@@ -12,7 +12,9 @@ function page({}: Props) {
     {
       title: '',
       subtitle: 'Spouse Shield',
+      subtitleBN: 'স্পাউস শিল্ড',
       description: `Securing your shared journey, protecting your family’s tomorrow`,
+      descriptionBN: `সুরক্ষা ও ভালোবাসায় ভবিষ্যতের পথচলা`,
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/spouse-shield/web/hero-banner.jpg`,
     },
   ]
@@ -24,55 +26,68 @@ function page({}: Props) {
     description: `Life is a shared journey, built on love and responsibility. 
     Shanta Spouse Shield gives you a smarter way to safeguard your financial future, 
     ensuring protection in every step of tomorrow. `,
+    descriptionBN: `শান্তা স্পাউস শিল্ড আপনার ভবিষ্যৎ অর্থনৈতিক সুরক্ষায় একটি স্মার্ট ও বাস্তবমুখী প্ল্যান - 
+    যেন একসাথে পথচলার প্রতিটি পদক্ষেপে থাকে নিশ্চিন্ত সুরক্ষার ছায়া।`,
   }
 
   const lifestyleData = {
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/spouse-shield/web/lifestyle-banner.jpg`,
     title: `Tailored Options`,
     subTitle: `for Your Lifestyle`,
+    titleBN: `প্রয়োজনমাফিক পছন্দ করুন`,
+    subTitleBN: `আপনার পলিসি`,
     description: `To match the needs of modern families, Shanta Spouse Shield offers two flexible plans, 
     giving you the freedom to choose the protection that best suits your way of life.`,
+    descriptionBN: `মডার্ন ফ্যামিলির প্রয়োজন মাথায় রেখে শান্তা স্পাউস শিল্ড নিয়ে এসেছে ২টা ফ্লেক্সিবল 
+    প্ল্যান—যেখানে আপনি খুব সহজেই নিজের লাইফস্টাইলের সাথে বেস্ট ম্যাচ করা প্রটেকশন পছন্দ করে নিতে পারবেন।`,
   }
 
-    // tab-config.ts
+  // tab-config.ts
   const tabItems = [
     {
       value: 'planA',
       label: 'Plan A',
+      labelBN: 'প্ল্যান এ',
     },
     {
       value: 'planB',
       label: 'Plan B',
+      labelBN: 'প্ল্যান বি',
     },
   ]
 
   const tabContent = {
     title: 'Insurance',
     coloredTitle: 'Coverages',
+    titleBN: 'ইন্সুরেন্স',
+    coloredTitleBN: 'কাভারেজ',
     planA: [
       {
         title: 'Life Coverage',
-        description:
-          `In the event of the insured spouse’s unexpected demise, this plan provides the insured with 50% or 100% of the 
+        titleBN: 'লাইফ কাভারেজ',
+        description: `In the event of the insured spouse’s unexpected demise, this plan provides the insured with 50% or 100% of the 
           coverage amount, depending on the chosen option. Premiums are not refundable in case of the spouse’s 
           survival till maturity.`,
+        descriptionBN: `এই প্ল্যান এর আওতায় বীমাগ্রাহকের স্বামী / স্ত্রী- র আকস্মিক অবর্তমানে বীমাঅঙ্কের ৫০% অথবা ১০০% অর্থ প্রদান করা হবে। `,
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/spouse-shield/web/icon1.png`,
       },
     ],
     planB: [
-          {
+      {
         title: 'Life Coverage',
-        description:
-          `In the event of the insured spouse’s unexpected demise, 
+        titleBN: 'লাইফ কাভারেজ',
+        description: `In the event of the insured spouse’s unexpected demise, 
           this plan provides the insured with 50% or 100% of the coverage amount, 
           depending on the chosen option.`,
+        descriptionBN: `এই প্ল্যান এর আওতায় বীমাগ্রাহকের স্বামী / স্ত্রী- র আকস্মিক অবর্তমানে বীমাঅঙ্কের ৫০% অথবা ১০০% অর্থ প্রদান করা হবে।`,
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/spouse-shield/web/icon1.png`,
       },
-            {
+      {
         title: 'Smart Exit',
-        description:
-          `At the end of the policy term, your spouse’s survival ensures a full refund of 
+        titleBN: 'স্মার্ট প্রস্থান',
+        description: `At the end of the policy term, your spouse’s survival ensures a full refund of 
           the premium paid for this supplementary coverage.`,
+        descriptionBN: `পলিসির মেয়াদপূর্তিতে আপনার স্বামী / স্ত্রী  জীবিত থাকলে এই সহযোগী বীমার জন্য প্রদত্ত সম্পূৰ্ণ প্রিমিয়াম ফেরত পাবেন।`,
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/spouse-shield/web/icon2.png`,
       },
     ],
@@ -93,9 +108,9 @@ function page({}: Props) {
           </div>
         </div>
       </HeroSection>
-       <PlanInfoSection data={planInfoData} />
-       <LifestyleSection data={lifestyleData}/>
-       <PlanTabs config={tabItems} data={tabContent}/>
+      <PlanInfoSection data={planInfoData} />
+      <LifestyleSection data={lifestyleData} />
+      <PlanTabs config={tabItems} data={tabContent} />
     </div>
   )
 }
