@@ -62,20 +62,21 @@ function BenefitSliderItem({ data }: Props) {
             <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
         </div>
-        <div
-          className="
+        {data?.rateText && (
+          <div
+            className="
         bg-[#3A3A3A]/20 backdrop-blur-[21.599998474121094px] rounded-[2px] md:rounded-sm
        p-2 
         w-full lg:w-[90%] xl:w-[80%] mx-auto
         min-h-fit max-h-[50%] flex flex-col justify-between"
-        >
-          <p
-            className="text-white transition-colors duration-500 
-         global-p2 text-center uppercase font-light"
           >
-            {data?.rateText}
-          </p>
-          {/* <Button
+            <p
+              className="text-white transition-colors duration-500 
+         global-p2 text-center uppercase font-light"
+            >
+              {data?.rateText}
+            </p>
+            {/* <Button
             variant="link"
             className="text-[#ED7125] hover:underline w-fit mx-auto 
             text-[10px] md:text-[12px] p-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-linear"
@@ -85,7 +86,8 @@ function BenefitSliderItem({ data }: Props) {
               <ArrowUpRight />
             </div>
           </Button> */}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   )
