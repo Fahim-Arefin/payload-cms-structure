@@ -274,7 +274,7 @@ export const NAV_ITEMS = [
         ],
       },
       { href: '/plans/corporate', label: 'Corporate Plan', labelBN: 'কর্পোরেট' },
-      { href: '/plans/bancassurance', label: 'Bancassurance Plan', labelBN: "ব্যাংকাসুরেন্স"  },
+      { href: '/plans/bancassurance', label: 'Bancassurance Plan', labelBN: 'ব্যাংকাসুরেন্স' },
       // { href: '/plans/microinsurance', label: 'Microinsurance Plan' },
     ],
   },
@@ -357,7 +357,7 @@ export const NAV_ITEMS_MOBILE = [
         ],
       },
       { href: '/plans/corporate', label: 'Corporate', labelBN: 'কর্পোরেট' },
-      { href: '/plans/bancassurance', label: 'Bancassurance', labelBN: "ব্যাংকাসুরেন্স" },
+      { href: '/plans/bancassurance', label: 'Bancassurance', labelBN: 'ব্যাংকাসুরেন্স' },
       // { href: '/plans/microinsurance', label: 'Microinsurance' },
     ],
   },
@@ -389,8 +389,11 @@ export const supportTabContent = [
         office_location: 'Shanta Life Insurance',
         office_address:
           'Shanta Western Tower - 186, Bir Uttam Mir Shawkat Sarak- Tejgaon Link Road, Dhaka-1208 (Level-10)',
+        office_addressBN: `Shanta Western Tower 
+          186, বীর উত্তম মীর শওকত সরাক, তেজগাঁও লিংক রোড, ঢাকা-1208 (Level-10)`,
         office_email: 'info@shantalife.com; customer.services@shantalife.com',
         office_phone: '09610889900 (10 am to 6 pm, Sunday to Thursday)',
+        office_phoneBN: `09610889900 (রবি–বৃহস্পতি | সকাল ১০টা – সন্ধ্যা ৬টা)`
       },
       {
         office_location_Label: 'Head Office Extention ',

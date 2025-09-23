@@ -2,12 +2,14 @@ import { Button } from '@/components/ui/button'
 import { BenefitSliderSectionData, OfferDataType } from '@/types'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   data: {
     bgImage: string
     icon: string
     description: string
+    descriptionBN?: string
     rateText?: string
   }
 }
@@ -57,7 +59,7 @@ function BenefitSliderItem({ data }: Props) {
             className="text-white transition-colors duration-500 
          global-p2 text-center uppercase font-light"
           >
-            {data?.description}
+            <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
         </div>
         <div

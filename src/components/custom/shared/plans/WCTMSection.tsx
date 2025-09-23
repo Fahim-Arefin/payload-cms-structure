@@ -1,11 +1,15 @@
 import Image from 'next/image'
 import React from 'react'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   data: {
     title: string
+    titleBN?: string
     coloredTitle: string
+    coloredTitleBN?: string
     description: string
+    descriptionBN?: string
     image: string
   }
   className?: string
@@ -17,9 +21,11 @@ function WCTMSection({ data, className }: Props) {
       {/* heading */}
       <div className="">
         <div className="flex space-x-2">
-          <h3 className="global-h2 uppercase font-bold text-[#434343]">{data?.title} </h3>
+          <h3 className="global-h2 uppercase font-bold text-[#434343]">
+            <LocalizedText en={data?.title} bn={data?.titleBN} />
+          </h3>
           <h3 className="global-h2 uppercase font-bold text-[#ED7125]">
-            {data?.coloredTitle}
+            <LocalizedText en={data?.coloredTitle} bn={data?.coloredTitleBN} />
           </h3>{' '}
         </div>
       </div>
@@ -29,7 +35,7 @@ function WCTMSection({ data, className }: Props) {
       gap-4 md:gap-8 lg:gap-12 xl:gap-20 2xl:gap-24"
       >
         <div className="order-2 lg:order-1 text-[#434343] global-span font-extralight text-justify flex justify-center items-center  h-auto">
-          {data?.description}
+          <LocalizedText en={data?.description} bn={data?.descriptionBN} />
         </div>
         {/* lg:h-[300px] xl:h-[310px] 2xl:h-[210px]  */}
         <div

@@ -330,8 +330,10 @@ type TabContent = {
   office_location_Label: string
   office_location: string
   office_address: string
+  office_addressBN?: string
   office_email: string
   office_phone: string
+  office_phoneBN?: string
   office_name?: string
   discount_details?: string
 }
@@ -383,12 +385,16 @@ export type PaymentTabDataType = {
 
 export type BenefitSliderSectionData = {
   title: string
+  titleBN?: string
   coloredTitle: string
+  coloredTitleBN?: string
   description: string
+  descriptionBN?: string
   item: {
     bgImage: string
     icon: string
     description: string
+    descriptionBN?: string
     rateText?: string
   }[]
 }

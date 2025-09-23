@@ -31,26 +31,40 @@
 // }
 
 // export default CHFInfoSection
+'use client'
 
 import React from 'react'
+import LocalizedText from '../LocalizedText'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 
 type Props = {
   data: {
     title: string
+    titleBN?: string
     description: string
+    descriptionBN?: string
   }
 }
 
 function CHFInfoSection({ data }: Props) {
+    const lang = useSSRLanguage()
+
+  // Choose BN when site language is bn, otherwise EN (with graceful fallback)
+  const html =
+    lang === 'en'
+      ? (data?.description ?? '')
+      : (data?.descriptionBN ?? data?.description ?? '')
   return (
     <div className="container-padding bg-[#9A4E46]">
       <div className="space-y-2 md:space-y-4">
-        <h1 className="global-h2 font-semibold uppercase text-white">{data?.title}</h1>
+        <h1 className="global-h2 font-semibold uppercase text-white">
+          <LocalizedText en={data?.title} bn={data?.titleBN} />
+        </h1>
 
         {/* Render HTML content with Tailwind Typography's prose class */}
         <div
           className="prose prose-neutral max-w-none text-white global-p1 font-light" // Apply prose styling to rich text
-          dangerouslySetInnerHTML={{ __html: data?.description }}
+          dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
     </div>

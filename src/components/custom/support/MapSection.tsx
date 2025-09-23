@@ -1,8 +1,9 @@
 'use client'
 
 import { TabDataType } from '@/types'
-import { FaUser } from 'react-icons/fa';
-import { MdDiscount } from "react-icons/md";
+import { FaUser } from 'react-icons/fa'
+import { MdDiscount } from 'react-icons/md'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: TabDataType
@@ -46,14 +47,19 @@ function MapSection({ data, bgColor }: Props) {
             {data?.content[0]?.office_location_Label || 'Shanta Life Insurance PLC'}
           </h2>
           <p className="text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#6E6E6E]">
-            {data?.content[0]?.office_address}
+            <LocalizedText
+              en={data?.content[0]?.office_address}
+              bn={data?.content[0]?.office_addressBN}
+            />
           </p>
-<div className="flex items-center space-x-1 lg:space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
-<FaUser className='w-4 h-4'/>
-          <p className="text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#6E6E6E] font-bold">
-            {data?.content[0]?.office_name}
-          </p>
-</div>
+          {data?.content[0]?.office_name && (
+            <div className="flex items-center space-x-1 lg:space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
+              <FaUser className="w-4 h-4" />
+              <p className="text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#6E6E6E] font-bold">
+                {data?.content[0]?.office_name}
+              </p>
+            </div>
+          )}
 
           <div className="flex items-center space-x-1 lg:space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
             <div className="w-4 h-4 flex items-center justify-center">
@@ -68,7 +74,12 @@ function MapSection({ data, bgColor }: Props) {
                 alt=""
               />
             </div>
-            <p>{data?.content[0]?.office_phone}</p>
+            <p>
+              <LocalizedText
+                en={data?.content[0]?.office_phone}
+                bn={data?.content[0]?.office_phoneBN}
+              />
+            </p>
           </div>
           <div className="flex items-center space-x-1 lg:space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
             <div className="w-4 h-4 flex items-center justify-center">
@@ -100,23 +111,23 @@ function MapSection({ data, bgColor }: Props) {
                   </div>
 
                   <div className="mt-1 space-y-1 md:space-y-2 text-[12px] xl:text-[13px] 2xl:text-[16px]">
-  {discountDetails.map((line, i) => {
-    const parts = line.split(/(\d+%)/g) // split into text and percentage parts
-    return (
-      <div key={`discount-${i}`}>
-        {parts.map((part, j) =>
-          /\d+%/.test(part) ? (
-            <span key={j} className="font-bold">
-              {part}
-            </span>
-          ) : (
-            <span key={j}>{part}</span>
-          )
-        )}
-      </div>
-    )
-  })}
-</div>
+                    {discountDetails.map((line, i) => {
+                      const parts = line.split(/(\d+%)/g) // split into text and percentage parts
+                      return (
+                        <div key={`discount-${i}`}>
+                          {parts.map((part, j) =>
+                            /\d+%/.test(part) ? (
+                              <span key={j} className="font-bold">
+                                {part}
+                              </span>
+                            ) : (
+                              <span key={j}>{part}</span>
+                            ),
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
