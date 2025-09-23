@@ -1,36 +1,64 @@
 // components/custom/corporate/LifeOfferings.tsx
 import Image from 'next/image'
+import LocalizedText from '../shared/LocalizedText'
 
-type Offering = { title: string; image: string; description?: string }
+type Offering = {
+  title: string
+  titleBN?: string
+  image: string
+  description?: string
+  descriptionBN?: string
+}
 
 const CDN = process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN ?? ''
 
 const LIFE_OFFERINGS: Offering[] = [
   {
     title: 'Group Life Insurance (GL)',
-    image: `${CDN}/solutions/corporate/web/offerings_icon1.png`,
-    description: `In the event of an insured member’s death, Shanta Life provides financial support to the nominated
-    beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.`,
+    titleBN: 'গ্রুপ লাইফ ইন্স্যুরেন্স (GL)',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon1.png`,
+    description: `In the event of an insured member’s death, Shanta Life provides financial support to the nominated 
+          beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.`,
+    descriptionBN: `বীমাকৃত সদস্যের মৃত্যু ঘটলে, শান্তা লাইফ মনোনীত উত্তরাধিকারী বা প্রতিষ্ঠানে আর্থিক সহায়তা প্রদান করে — 
+          নীতির শর্ত অনুযায়ী। এটি কঠিন সময়ে মানসিক শান্তি ও আর্থিক নিরাপত্তা নিশ্চিত করে।`,
   },
   {
     title: 'Accidental Death Coverage (AD)',
-    image: `${CDN}/solutions/corporate/web/offerings_icon2.png`,
-    description: `Accidental death benefit paid in addition to basic life coverage.`,
+    titleBN: 'দুর্ঘটনাজনিত মৃত্যু কভারেজ (AD)',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon1.png`,
+    description: `In case of death due to an accident, Shanta Life pays an additional benefit on top of the natural death coverage, 
+          offering extra financial protection to the nominee or organization.`,
+    descriptionBN: `দুর্ঘটনায় মৃত্যু হলে, প্রাকৃতিক মৃত্যুর কভারেজের পাশাপাশি অতিরিক্ত আর্থিক সুবিধা প্রদান করা হয়, 
+          যা মনোনীত ব্যক্তি বা প্রতিষ্ঠানের জন্য বাড়তি সুরক্ষা নিশ্চিত করে।`,
   },
   {
     title: 'Permanent and Total Disability (PTD)',
-    image: `${CDN}/solutions/corporate/web/offerings_icon3.png`,
-    description: `Financial support if the insured becomes permanently and totally disabled.`,
+    titleBN: 'স্থায়ী ও সম্পূর্ণ অক্ষমতা (PTD)',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon3.png`,
+    description: `In case of total and permanent disability due to an accident, the full sum insured is paid, 
+          ensuring financial stability for the employee and their family.`,
+    descriptionBN: `দুর্ঘটনায় স্থায়ী ও সম্পূর্ণ অক্ষম হলে সম্পূর্ণ বীমা অংক প্রদান করা হয়, যা কর্মচারী ও তার পরিবারের আর্থিক 
+          স্থিতিশীলতা নিশ্চিত করে।`,
   },
   {
     title: 'Permanent and Partial Disability (PPD)',
-    image: `${CDN}/solutions/corporate/web/offerings_icon4.png`,
-    description: `Coverage for partial but permanent disability due to accident or illness.`,
+    titleBN: 'স্থায়ী ও আংশিক অক্ষমতা (PPD)',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon4.png`,
+    description: `In case of partial but permanent disability due to an accident, Shanta Life provides a 
+          fixed benefit to the employee or employer, as per Bangladesh labor laws, helping ensure financial support 
+          during recovery and adaptation.`,
+    descriptionBN: `দুর্ঘটনায় আংশিক কিন্তু স্থায়ী অক্ষমতা হলে কর্মচারী বা নিয়োগকর্তাকে বাংলাদেশ শ্রম আইনের আলোকে 
+          নির্ধারিত আর্থিক সহায়তা প্রদান করা হয়।`,
   },
   {
     title: 'Critical Illness Coverage (CIB)',
-    image: `${CDN}/solutions/corporate/web/offerings_icon5.png`,
-    description: `One-time lump sum on diagnosis of specified critical illnesses.`,
+    titleBN: 'গুরুতর অসুস্থতা কভারেজ (CIB)',
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon5.png`,
+    description: `Shanta Life’s Critical Illness Benefit provides financial support if the insured is diagnosed 
+          with a specified serious condition, helping ease the burden of medical expenses so the focus can remain on 
+          recovery.`,
+    descriptionBN: `গুরুতর অসুস্থতা ধরা পড়লে শান্তা লাইফ আর্থিক সহায়তা প্রদান করে, যাতে চিকিৎসা ব্যয়ের চাপ কমে এবং 
+          সুস্থতায় মনোযোগ দেওয়া যায়।`,
   },
 ]
 
@@ -64,7 +92,7 @@ function LifeOfferings() {
               </div>
 
               <h4 className="text-[#292929] font-semibold tracking-wide text-[10px] md:text-base lg:text-[18px] uppercase">
-                {item.title}
+                <LocalizedText en={item?.title} bn={item?.titleBN} />
               </h4>
             </div>
 
@@ -80,7 +108,7 @@ function LifeOfferings() {
                 `}
               >
                 <p className="text-[11px] pl-[44px] md:pl-[72px] sm:text-sm md:text-[15px] leading-relaxed text-[#444]">
-                  {item.description}
+                  <LocalizedText en={item?.description} bn={item?.descriptionBN} />
                 </p>
               </div>
             )}

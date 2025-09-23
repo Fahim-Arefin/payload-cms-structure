@@ -2,6 +2,8 @@
 
 import React from 'react'
 import { SuitabilityCardType } from '@/types'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: SuitabilityCardType[]
@@ -25,7 +27,13 @@ function CorporateSuitability({ data }: Props) {
     >
       {/* Title */}
       <h1 className="global-h1 font-semibold uppercase mb-10 text-white">
-        <span className="text-[#ED7125]">SUITABILITY</span> STANDARDS
+        <LocalizedHighlighted
+          textEn={`SUITABILITY STANDARDS`}
+          textBn={`উপযুক্ততার মানদণ্ড`}
+          highlightBn={'উপযুক্ততার'}
+          highlightEn={`SUITABILITY`}
+          highlightClassName="text-[#ED7125]"
+        />
       </h1>
 
       {/* Cards */}
@@ -39,9 +47,11 @@ function CorporateSuitability({ data }: Props) {
             <div className="w-[44px] h-[44px] lg:w-[118px] lg:h-[118px]">
               <img src={item?.img} alt={`icon-${index}`} className="object-contain w-full h-full" />
             </div>
-            <h2 className="global-p1 font-bold uppercase text-white lg:mb-10">{item?.title}</h2>
+            <h2 className="global-p1 font-bold uppercase text-white lg:mb-10">
+              <LocalizedText en={item?.title} bn={item?.titleBN} />
+            </h2>
             <p className="global-p1 font-[350] text-white text-justify lg:mb-10 xl:mb-20">
-              {item?.description}
+              <LocalizedText en={item?.description} bn={item?.descriptionBN} />
             </p>
           </div>
         ))}

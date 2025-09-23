@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import Autoplay from 'embla-carousel-autoplay'
 import { sliderDelay } from '@/lib/data'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 
 type Props = { data: OfferDataType[] }
 
@@ -70,8 +71,16 @@ function CorporateAddons({ data }: Props) {
            2xl:px-[300px] 2xl:pt-[150px]"
       >
         <div className="flex space-x-2">
-          <h3 className="global-h2 uppercase font-bold text-[#434343]">Employee </h3>
-          <h3 className="global-h2 uppercase font-bold text-[#ED7125]">Wellness Add-ons</h3>
+          <h3 className="global-h2 uppercase font-bold text-[#434343]">
+            {/* <h3 className="global-h2 uppercase font-bold text-[#ED7125]">Wellness Add-ons</h3> */}
+            <LocalizedHighlighted
+              textBn={`এমপ্লয়ি ওয়েলনেস অ্যাড-অনস`}
+              textEn={`Employee Wellness Add-ons`}
+              highlightBn={`ওয়েলনেস অ্যাড-অনস`}
+              highlightEn={`Wellness Add-ons`}
+              highlightClassName="text-[#ED7125]"
+            />
+          </h3>
         </div>
       </div>
       {/* carousal */}

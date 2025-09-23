@@ -188,7 +188,9 @@ export type OnboardingRoleType = {
 export type SuitabilityCardType = {
   img: string
   title: string
+  titleBN?: string
   description: string
+  descriptionBN?: string
 }
 
 export type VisionCardType = {
@@ -234,6 +236,7 @@ export type MicroinsuranceDataType = {
 export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
   link?: string
+  descriptionBN?: string
 }
 
 export type OfferDataType2 = Pick<AllPlantDataType, 'description' | 'image'> & {

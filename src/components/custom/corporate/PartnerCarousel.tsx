@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import Autoplay from 'embla-carousel-autoplay'
 import { sliderDelay } from '@/lib/data'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 
 type Props = { data: PartnerType[] }
 
@@ -20,7 +21,7 @@ function PartnerCarousel({ data }: Props) {
       delay: sliderDelay,
       stopOnInteraction: false,
       stopOnMouseEnter: false, // we’ll manage hover ourselves
-    })
+    }),
   )
 
   // faster-on-hover interval
@@ -81,7 +82,13 @@ function PartnerCarousel({ data }: Props) {
            xl:px-[200px]  xl:pt-[100px] 
            2xl:px-[300px] 2xl:pt-[100px]"
       >
-        <span className="text-[#ED7125]">OUR VALUED</span> CLIENTS
+        <LocalizedHighlighted
+          textEn={`OUR VALUED CLIENTS`}
+          textBn={`আমাদের মূল্যবান ক্লায়েন্টদের জন্য`}
+          highlightEn={`OUR VALUED`}
+          highlightBn={`আমাদের মূল্যবান`}
+          highlightClassName="text-[#ED7125]"
+        />
       </h2>
 
       {/* Wrap the carousel to capture hover */}
@@ -108,7 +115,9 @@ function PartnerCarousel({ data }: Props) {
                     loading={index < 4 ? 'eager' : 'lazy'}
                   />
                 </div>
-                <p className="text-xs font-semibold text-center text-black uppercase">{item.title}</p>
+                <p className="text-xs font-semibold text-center text-black uppercase">
+                  {item.title}
+                </p>
               </CarouselItem>
             ))}
           </CarouselContent>
