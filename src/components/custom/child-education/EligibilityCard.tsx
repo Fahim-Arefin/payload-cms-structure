@@ -102,6 +102,7 @@ export const EligibilityCard = ({ data }: Props) => {
           <div className="text-white font-bold global-span">
             <LocalizedText en={policyTerm} bn={policyTermBN} />
             <span className="global-span font-light">
+              {' '}
               <LocalizedText en={policyTermLabel} bn={policyTermLabelBN} />
             </span>
           </div>
@@ -122,6 +123,7 @@ export const EligibilityCard = ({ data }: Props) => {
           <div className="text-white font-bold global-span">
             <LocalizedText en={maturityAge} bn={maturityAgeBN} />
             <span className="global-span font-light">
+              {' '}
               <LocalizedText en={maturityAgeLabel} bn={maturityAgeLabelBN} />
             </span>
           </div>

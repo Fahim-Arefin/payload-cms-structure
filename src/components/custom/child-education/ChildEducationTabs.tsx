@@ -12,6 +12,7 @@ import Link from 'next/link'
 import EndowmentKeyFeature from '../shared/plans/EndowmentKeyFeature'
 import GlobalTabButtons from '../shared/GlobalTabButtons'
 import EndowmentPlanEligibility from '../shared/plans/EndowmentPlanEligibility'
+import LocalizedText from '../shared/LocalizedText'
 
 export function ArrowIcon() {
   return (
@@ -32,6 +33,7 @@ type Props = {
   config: {
     value: string
     label: string
+    labelBN?: string
   }[]
   data: any
 }
@@ -81,7 +83,7 @@ export function ChildEducationTabs({ config, data }: Props) {
                   <span
                     className={` ${activeTab === tab.value ? ' text-[#ED7125] ' : ' text-[#434343] '}`}
                   >
-                    {tab.label}
+                    <LocalizedText en={tab.label} bn={tab.labelBN} />
                   </span>
                 }
               </TabsTrigger>
