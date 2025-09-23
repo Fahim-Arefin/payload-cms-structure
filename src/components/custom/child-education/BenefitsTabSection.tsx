@@ -71,8 +71,15 @@ export function BenefitsTabSection() {
           </h2>
           <div className="space-y-4 lg:space-y-8 mt-6 text-[#434343] ">
             <p className="global-p2 font-light">
-              <span className="font-semibold">Shanta Spouse Shield: </span>A smart, practical, and
-              future-focused protection plan designed to secure your family’s financial well-being.
+              <span className="font-semibold">
+                <LocalizedText en={`Shanta Spouse Shield: `} bn={`শান্তা স্পাউস শিল্ড: `} />
+              </span>
+              <LocalizedText
+                en={`A smart, practical, and
+              future-focused protection plan designed to secure your family’s financial well-being.`}
+                bn={`শান্তা স্পাউস শিল্ড আপনার ভবিষ্যৎ অর্থনৈতিক সুরক্ষায় একটি স্মার্ট ও বাস্তবমুখী প্ল্যান - 
+              যেন একসাথে পথচলার প্রতিটি পদক্ষেপে থাকে নিশ্চিন্ত সুরক্ষার ছায়া।`}
+              />
             </p>
             <p className="global-p2 font-light">
               <span className="font-semibold ">

@@ -210,143 +210,173 @@ Nafis's academic credentials include a Bachelor of Business Administration with 
 ]
 
 export const NAV_ITEMS = [
-  { href: '/', label: 'Home' },
-  { href: '/about-us', label: 'About Us' },
+  { href: '/', label: 'Home', labelBN: 'হোম' },
+  { href: '/about-us', label: 'About Us', labelBN: 'আমাদের সম্পর্কে' },
   {
     label: 'Solutions',
+    labelBN: 'সলিউশন',
     href: '/plans',
     children: [
       {
         label: 'Individual Plans',
+        labelBN: 'একক বীমা',
         href: '/plans/individual',
         children: [
           {
             label: 'Saving & Investment Plans',
+            labelBN: 'সেভিংস এন্ড ইনভেস্টমেন্ট প্ল্যানস',
             href: '/plans/individual/saving-and-investment',
             children: [
               {
                 label: 'Shanta Endowment Plan',
+                labelBN: 'শান্তা এনডাওমেন্ট প্ল্যান',
                 href: '/plans/individual/saving-and-investment/endowment',
               },
               {
                 label: 'Shanta Multi Stage Maturity Plans',
+                labelBN: 'শান্তা মাল্টি-স্টেজ ম্যাচুরিটি প্ল্যান',
                 href: '/plans/individual/saving-and-investment/multistage',
               },
             ],
           },
           {
             label: 'Health & Protection Plans',
+            labelBN: 'হেলথ এন্ড প্রটেকশন প্ল্যানস',
             href: '/plans/individual/health-and-protection',
             children: [
               {
                 label: 'Shanta Accidental Coverage',
+                labelBN: 'শান্তা অ্যাক্সিডেন্টাল কাভারেজ',
                 href: '/plans/individual/health-and-protection/accidental-coverage',
               },
               {
                 label: 'Shanta Critical Protection',
+                labelBN: 'শান্তা ক্রিটিক্যাল প্রটেকশন',
                 href: '/plans/individual/health-and-protection/critical-illness-coverage',
               },
               {
                 label: 'Shanta Waiver of Premium',
+                labelBN: 'শান্তা ওয়েভার অফ প্রিমিয়াম',
                 href: '/plans/individual/health-and-protection/waiver-of-premium',
               },
               {
                 label: 'Shanta Spouse Shield',
+                labelBN: 'স্পাউস শিল্ড',
                 href: '/plans/individual/health-and-protection/spouse-shield',
               },
             ],
           },
-          { label: 'Shanta Child Education Plan', href: '/plans/individual/child-education' },
+          {
+            label: 'Shanta Child Education Plan',
+            labelBN: 'শান্তা চাইল্ড এডুকেশন প্ল্যান',
+            href: '/plans/individual/child-education',
+          },
         ],
       },
-      { href: '/plans/corporate', label: 'Corporate Plan' },
-      { href: '/plans/bancassurance', label: 'Bancassurance Plan' },
+      { href: '/plans/corporate', label: 'Corporate Plan', labelBN: 'কর্পোরেট' },
+      { href: '/plans/bancassurance', label: 'Bancassurance Plan', labelBN: "ব্যাংকাসুরেন্স"  },
       // { href: '/plans/microinsurance', label: 'Microinsurance Plan' },
     ],
   },
-  { href: '/pay-premium', label: 'Pay Premium' },
-  { href: '/claims', label: 'Claims' },
+  { href: '/pay-premium', label: 'Pay Premium', labelBN: 'পে প্রিমিয়াম' },
+  { href: '/claims', label: 'Claims', labelBN: 'ক্লেম' },
   {
     label: 'Support',
+    labelBN: 'সাপোর্ট',
     href: '/support',
     children: [
-      { href: '/support#general', label: 'General FAQ' },
-      { href: '/support#form', label: 'Forms Library' },
-      { href: '/support#hospitals', label: 'Panel Hospital' },
+      { href: '/support#general', label: 'General FAQ', labelBN: 'সাধারণ প্রশ্ন/উত্তর' },
+      { href: '/support#form', label: 'Forms Library', labelBN: 'ফর্মস লাইব্রেরী' },
+      { href: '/support#hospitals', label: 'Panel Hospital', labelBN: 'প্যানেল হাসপাতাল' },
     ],
   },
-  { href: '/purchase', label: 'Purchase' },
+  { href: '/purchase', label: 'Purchase', labelBN: 'ক্রয় করুন' },
 ]
 export const NAV_ITEMS_MOBILE = [
-  { href: '/', label: 'Home' },
-  { href: '/about-us', label: 'About Us' },
+  { href: '/', label: 'Home', labelBN: 'হোম' },
+  { href: '/about-us', label: 'About Us', labelBN: 'আমাদের সম্পর্কে' },
   {
     label: 'Solutions',
+    labelBN: 'সলিউশন',
     href: '/plans',
     children: [
       {
         label: 'Individual Plans',
+        labelBN: 'একক বীমা',
         href: '/plans/individual',
         children: [
           {
             label: 'Saving & Investment Plans',
+            labelBN: 'সেভিংস এন্ড ইনভেস্টমেন্ট প্ল্যানস',
             href: '/plans/individual/saving-and-investment',
             children: [
               {
                 label: 'Shanta Endowment Plan',
+                labelBN: 'শান্তা এনডাওমেন্ট প্ল্যান',
                 href: '/plans/individual/saving-and-investment/endowment',
               },
               {
                 label: 'Multi Stage Maturity Plans',
+                labelBN: 'শান্তা মাল্টি-স্টেজ ম্যাচুরিটি প্ল্যান',
                 href: '/plans/individual/saving-and-investment/multistage',
               },
             ],
           },
           {
             label: 'Health & Protection Plans',
+            labelBN: 'হেলথ এন্ড প্রটেকশন প্ল্যানস',
             href: '/plans/individual/health-and-protection',
             children: [
               {
                 label: 'Shanta Accidental Coverage',
+                labelBN: 'শান্তা অ্যাক্সিডেন্টাল কাভারেজ',
                 href: '/plans/individual/health-and-protection/accidental-coverage',
               },
               {
                 label: 'Shanta Critical Protection',
+                labelBN: 'শান্তা ক্রিটিক্যাল প্রটেকশন',
                 href: '/plans/individual/health-and-protection/critical-illness-coverage',
               },
               {
                 label: 'Shanta Waiver of Premium',
+                labelBN: 'শান্তা ওয়েভার অফ প্রিমিয়াম',
                 href: '/plans/individual/health-and-protection/waiver-of-premium',
               },
               {
                 label: 'Shanta Spouse Shield',
+                labelBN: 'স্পাউস শিল্ড',
                 href: '/plans/individual/health-and-protection/spouse-shield',
               },
             ],
           },
-          { label: 'Shanta Child Education Plan', href: '/plans/individual/child-education' },
+          {
+            label: 'Shanta Child Education Plan',
+            labelBN: 'শান্তা চাইল্ড এডুকেশন প্ল্যান',
+            href: '/plans/individual/child-education',
+          },
         ],
       },
-      { href: '/plans/corporate', label: 'Corporate' },
-      { href: '/plans/bancassurance', label: 'Bancassurance' },
+      { href: '/plans/corporate', label: 'Corporate', labelBN: 'কর্পোরেট' },
+      { href: '/plans/bancassurance', label: 'Bancassurance', labelBN: "ব্যাংকাসুরেন্স" },
       // { href: '/plans/microinsurance', label: 'Microinsurance' },
     ],
   },
-  { href: '/pay-premium', label: 'Pay Premium' },
-  { href: '/premium-calculator', label: 'Premium Calculator' },
-  { href: '/claims', label: 'Claims' },
+  { href: '/pay-premium', label: 'Pay Premium', labelBN: 'পে প্রিমিয়াম' },
+  { href: '/premium-calculator', label: 'Premium Calculator', labelBN: 'প্রিমিয়াম ক্যালকুলেটর' },
+  { href: '/claims', label: 'Claims', labelBN: 'ক্লেম' },
   {
     label: 'Support',
+    labelBN: 'সাপোর্ট',
     href: '/support',
     children: [
-      { href: '/support#general', label: 'General FAQ' },
-      { href: '/support#form', label: 'Forms Library' },
-      { href: '/support#hospitals', label: 'Panel Hospital' },
+      { href: '/support#general', label: 'General FAQ', labelBN: 'সাধারণ প্রশ্ন/উত্তর' },
+      { href: '/support#form', label: 'Forms Library', labelBN: 'ফর্মস লাইব্রেরী' },
+      { href: '/support#hospitals', label: 'Panel Hospital', labelBN: 'প্যানেল হাসপাতাল' },
     ],
   },
-  { href: '/purchase', label: 'Purchase' },
-  { href: '/agent-onboarding', label: 'I’m an Agent' },
-  { href: 'https://portal.shantalife.com/', label: 'My Portal' },
+  { href: '/purchase', label: 'Purchase', labelBN: 'ক্রয় করুন' },
+  { href: '/agent-onboarding', label: 'I’m an Agent', labelBN: 'এজেন্ট' },
+  { href: 'https://portal.shantalife.com/', label: 'My Portal', labelBN: 'মাই পোর্টাল' },
 ]
 
 export const sliderDelay = 3000
