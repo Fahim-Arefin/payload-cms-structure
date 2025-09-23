@@ -1,6 +1,7 @@
 import { BankingFacilitiesDataType } from '@/types'
 import Image from 'next/image'
 import React from 'react'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   data: BankingFacilitiesDataType
@@ -19,8 +20,12 @@ function BankingFacilities({ data }: Props) {
     >
       {/* headers */}
       <div>
-        <h1 className="global-h1 font-medium">{data?.title}</h1>
-        <h1 className="global-h1 text-[#ED7125] font-medium">{data?.coloredTitle}</h1>
+        <h1 className="global-h1 font-medium">
+          <LocalizedText en={data?.title} bn={data?.titleBN}/>
+        </h1>
+        <h1 className="global-h1 text-[#ED7125] font-medium">
+          <LocalizedText en={data?.coloredTitle} bn={data?.coloredTitleBN}/>
+        </h1>
       </div>
       <div
         className="grid grid-cols-1 lg:grid-cols-2 
@@ -47,7 +52,9 @@ function BankingFacilities({ data }: Props) {
               >
                 <img src={item?.image} alt={item?.description} className="w-full h-full" />
               </div>
-              <div className="global-p1 font-semibold text-[#3A3A3A]">{item?.description}</div>
+              <div className="global-p1 font-semibold text-[#3A3A3A]">
+                <LocalizedText en={item?.description} bn={item?.descriptionBN}/>
+              </div>
             </div>
           ))}
         </div>

@@ -112,11 +112,13 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import InsuraceCoverageTabContent from './InsuraceCoverageTabContent'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   config: {
     value: string
     label: string
+    labelBN?: string
   }[]
   data: any
 }
@@ -138,8 +140,12 @@ export function InsuranceCoverageTab({ config, data }: Props) {
         space-x-1 lg:space-x-2 xl:space-x-3 2xl:space-x-4 
       mb-4 md:mb-6 lg:mb-8 xl:mb-12 2xl:mb-16"
       >
-        <h1 className="global-h1 font-medium">{data?.title} </h1>
-        <h1 className="global-h1 text-[#ED7125] font-medium">{data?.coloredTitle}</h1>
+        <h1 className="global-h1 font-medium">
+          <LocalizedText en={data?.title} bn={data?.titleBN}/>
+           </h1>
+        <h1 className="global-h1 text-[#ED7125] font-medium">
+          <LocalizedText en={data?.coloredTitle} bn={data?.coloredTitleBN}/>
+        </h1>
       </div>
       <Tabs defaultValue={config[0].value} value={activeTab} onValueChange={setActiveTab}>
         {/* Tab Headers */}
@@ -165,7 +171,7 @@ export function InsuranceCoverageTab({ config, data }: Props) {
                   <span
                     className={` ${activeTab === tab.value ? ' text-[#ED7125] ' : ' text-[#434343] '}`}
                   >
-                    {tab.label}
+                    <LocalizedText en={tab?.label} bn={tab?.labelBN} />
                   </span>
                 }
               </TabsTrigger>

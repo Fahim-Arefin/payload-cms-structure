@@ -215,11 +215,14 @@ export type PartnerType = {
 
 export type BankingFacilitiesDataType = {
   title: string
+  titleBN?: string
   coloredTitle: string
+  coloredTitleBN?: string
   bancassuranceProductsImage: string
   bancassuranceProducts: {
     image: string
     description: string
+    descriptionBN?: string
   }[]
 }
 

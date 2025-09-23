@@ -1,4 +1,5 @@
 import React from 'react'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   data: any
@@ -24,8 +25,12 @@ function InsuraceCoverageTabContent({ data }: Props) {
             <img src={item?.image} alt={item?.title} className="w-full h-full" />
           </div>
           <div>
-            <div className="global-p1 font-semibold text-[#3A3A3A]">{item?.title}</div>
-            <div className="global-p2 text-justify text-[#434342]">{item?.description}</div>
+            <div className="global-p1 font-semibold text-[#3A3A3A]">
+              <LocalizedText en={item?.title} bn={item?.titleBN} />
+            </div>
+            <div className="global-p2 text-justify text-[#434342]">
+              <LocalizedText en={item?.description} bn={item?.descriptionBN} />
+            </div>
           </div>
         </div>
       ))}
