@@ -4,11 +4,8 @@ import { Input } from '@/components/ui/input'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { format, differenceInYears } from 'date-fns'
-// CHANGE HERE
-import { Check, ChevronDown, ChevronRight } from 'lucide-react'
-
-// CHANGE HERE: add dropdown-menu imports
+import { format } from 'date-fns'
+import { Check, ChevronDown } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -20,7 +17,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from '@/components/ui/dropdown-menu'
-
 import {
   Select,
   SelectContent,
@@ -36,6 +32,7 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 
 type FormData = {
   PlanCode: number
@@ -58,8 +55,11 @@ type Props = {
 }
 
 function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
-  const [selectedPlan, setSelectedPlan] = useState<any>(null)
+  // ===== Localization helper =====
+  const lang = useSSRLanguage()
+  const L = (en: string, bn?: string) => (lang === 'en' ? en : (bn ?? en))
 
+  const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -105,23 +105,19 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   const [childEducationVariants, setChildEducationVariants] = useState<
     { plan_name: string; plan_code: number }[]
   >([])
-
-  // CHANGE HERE: control the plan menu open/close
   const [planMenuOpen, setPlanMenuOpen] = useState(false)
 
-  // CHANGE HERE (add near other const/let before return)
   const isPlanDisabled =
     isLoadingPlans ||
     !formData.Age ||
     (availablePlans.length === 0 && childEducationVariants.length === 0)
 
   const planDisabledMsg = !formData.Age
-    ? 'Enter age first'
+    ? L('Enter age first', 'আগে বয়স লিখুন')
     : isLoadingPlans
-      ? 'Loading plans...'
-      : 'No plans available'
+      ? L('Loading plans...', 'প্ল্যান লোড হচ্ছে...')
+      : L('No plans available', 'কোনো প্ল্যান পাওয়া যায়নি')
 
-  // Format date to DD/MM/YYYY
   const formatDateForAPI = (date: Date): string => {
     const day = date.getDate().toString().padStart(2, '0')
     const month = (date.getMonth() + 1).toString().padStart(2, '0')
@@ -129,7 +125,6 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     return `${day}/${month}/${year}`
   }
 
-  // Call API to calculate age from date of birth
   const calculateAgeFromAPI = async (dateOfBirth: Date) => {
     setIsCalculatingAge(true)
     setAgeCalculationError(null)
@@ -137,30 +132,14 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     try {
       const formattedDate = formatDateForAPI(dateOfBirth)
       const response = await fetch(`/api/age-calculate?dateofbirth=${formattedDate}`)
-
-      if (!response.ok) {
-        throw new Error('Failed to calculate age')
-      }
-
+      if (!response.ok) throw new Error('Failed to calculate age')
       const data = await response.json()
 
       if (data.age !== undefined) {
-        // Update form data with both date and calculated age
-        setFormData((prev) => ({
-          ...prev,
-          dateOfBirth: dateOfBirth,
-          Age: data.age,
-        }))
-
-        // Close the date picker
+        setFormData((prev) => ({ ...prev, dateOfBirth, Age: data.age }))
         setIsDatePickerOpen(false)
         setTempSelectedDate(null)
-
-        // Clear any field errors
-        setFieldErrors((prev) => ({
-          ...prev,
-          Age: false,
-        }))
+        setFieldErrors((prev) => ({ ...prev, Age: false }))
       } else {
         throw new Error('Invalid response from age calculation API')
       }
@@ -171,7 +150,6 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     }
   }
 
-  // Calculate suggested sum assured based on tenure and annual income
   const calculateSuggestedAmount = () => {
     if (formData.Term && formData.annualIncome) {
       const calculated = formData.Term * formData.annualIncome * 0.1
@@ -182,7 +160,6 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
 
   const suggestedAmount = calculateSuggestedAmount()
 
-  // Video link mappings for plans
   const videoLinkMappings = {
     'Shanta Child Education Plan (1%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
     'Shanta Child Education Plan (2%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
@@ -195,7 +172,6 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     'Shanta 4 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
   }
 
-  // Fetch plans from API based on age (same as QuoteForm)
   const fetchPlans = async (age: number) => {
     if (!age || age < 18 || age > 65) {
       setAvailablePlans([])
@@ -207,16 +183,10 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
 
     try {
       const response = await fetch(`/api/plan/0/${age}`)
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch plans')
-      }
-
+      if (!response.ok) throw new Error('Failed to fetch plans')
       const data = await response.json()
-      console.log('Plans API response:', data)
 
       if (Array.isArray(data)) {
-        // Define the plan name mappings (same as QuoteForm)
         const planNameMappings = {
           'Shanta Endowment': 'Shanta Endowment Plan',
           'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
@@ -232,44 +202,26 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             'Shanta Child Education Plan Single Payment (3%)',
         }
 
-        // Filter and transform the plans
         const filteredPlans = data
           .filter((plan) => planNameMappings.hasOwnProperty(plan.plan_name))
-          .map((plan) => ({
-            ...plan,
-            plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings],
-          }))
+          .map((plan) => ({ ...plan, plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings] }))
 
-        // Separate Child Education Plans from other plans (including Single Payment variants)
-        const childEducationPlans = filteredPlans.filter((plan) =>
-          plan.plan_name.toLowerCase().includes('child education'),
+        const childEducationPlans = filteredPlans.filter((p) =>
+          p.plan_name.toLowerCase().includes('child education'),
         )
         const otherPlans = filteredPlans.filter(
-          (plan) => !plan.plan_name.toLowerCase().includes('child education'),
+          (p) => !p.plan_name.toLowerCase().includes('child education'),
         )
 
-        // Store child education variants separately
         setChildEducationVariants(childEducationPlans)
-
-        // Create a grouped plan list with single "Shanta Child Education Plan" entry
         const groupedPlans = [
           ...otherPlans,
           ...(childEducationPlans.length > 0
-            ? [
-                {
-                  plan_name: 'Shanta Child Education Plan',
-                  plan_code: 0, // Temporary code for the group
-                  isGroup: true,
-                },
-              ]
+            ? [{ plan_name: 'Shanta Child Education Plan', plan_code: 0, isGroup: true } as any]
             : []),
         ]
-
-        console.log('Child Education variants:', childEducationPlans)
-        console.log('Grouped plans:', groupedPlans)
         setAvailablePlans(groupedPlans)
       } else {
-        console.log('Unexpected plans API response format:', data)
         setAvailablePlans([])
       }
     } catch (err) {
@@ -294,78 +246,34 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   ]
 
   const handleInputChange = (field: keyof FormData, value: string | number | Date | null) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }))
-
-    // Clear field error when user starts typing/selecting (only for validated fields)
+    setFormData((prev) => ({ ...prev, [field]: value }))
     if (field in fieldErrors) {
       const errorField = field as keyof typeof fieldErrors
       if (fieldErrors[errorField]) {
-        setFieldErrors((prev) => ({
-          ...prev,
-          [errorField]: false,
-        }))
+        setFieldErrors((prev) => ({ ...prev, [errorField]: false }))
       }
     }
   }
 
-  // Handle date selection in the picker (temporary selection)
-  const handleDateChange = (date: Date | null) => {
-    setTempSelectedDate(date)
-  }
-
-  // Handle confirm button click
-  const handleConfirmDate = () => {
-    if (tempSelectedDate) {
-      calculateAgeFromAPI(tempSelectedDate)
-    }
-  }
-
-  // Handle opening date picker
+  const handleDateChange = (date: Date | null) => setTempSelectedDate(date)
+  const handleConfirmDate = () => tempSelectedDate && calculateAgeFromAPI(tempSelectedDate)
   const handleOpenDatePicker = () => {
     setTempSelectedDate(formData.dateOfBirth)
     setIsDatePickerOpen(true)
     setAgeCalculationError(null)
   }
-
-  // Handle closing date picker
   const handleCloseDatePicker = () => {
     setIsDatePickerOpen(false)
     setTempSelectedDate(null)
     setAgeCalculationError(null)
   }
 
-  // Handle child education plan selection from submenu
   const handleChildEducationPlanSelect = (variant: { plan_name: string; plan_code: number }) => {
-    console.log('Selected variant:', variant)
-    const planWithVideo = {
-      ...variant,
-      videoLink: videoLinkMappings[variant.plan_name as keyof typeof videoLinkMappings],
-    }
+    const planWithVideo = { ...variant, videoLink: videoLinkMappings[variant.plan_name as keyof typeof videoLinkMappings] }
     setSelectedPlan(planWithVideo)
-
-    setFormData((prev) => {
-      console.log('Updating formData with PlanCode:', variant.plan_code)
-      return {
-        ...prev,
-        PlanCode: variant.plan_code,
-        Term: 0,
-      }
-    })
-
-    // Clear tenure options until new plan + age combination is selected
+    setFormData((prev) => ({ ...prev, PlanCode: variant.plan_code, Term: 0 }))
     setAvailableTenures([])
-
-    // Clear field errors for plan and dependent fields
-    setFieldErrors((prev) => ({
-      ...prev,
-      PlanCode: false,
-      Term: false,
-    }))
-
-    // Hide the submenu after selection
+    setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
     setIsChildEducationHovered(false)
   }
 
@@ -380,60 +288,32 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
 
     try {
       const response = await fetch(`/api/plan/${planCode}/${age}`)
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch tenure options')
-      }
+      if (!response.ok) throw new Error('Failed to fetch tenure options')
 
       const data = await response.json()
-      console.log('Tenure options API response:', data)
-
-      // Parse tenure data from API response (same as QuoteForm)
       if (data && data[0]?.term) {
         const termArray = JSON.parse(data[0].term)
         if (Array.isArray(termArray)) {
-          const tenureOptions = termArray.map((termObj: any) => ({
-            text: `${termObj.term} years`,
-            value: Number(termObj.term),
-          }))
+          const tenureOptions = termArray.map((t: any) => ({ text: `${t.term} years`, value: Number(t.term) }))
           setAvailableTenures(tenureOptions)
         }
       }
 
-      // Extract payment modes from the same API response (same as QuoteForm)
       if (data && data[0]?.pay_mode) {
         try {
-          let payModeArray
-          if (typeof data[0].pay_mode === 'string') {
-            payModeArray = JSON.parse(data[0].pay_mode)
-          } else {
-            payModeArray = data[0].pay_mode
-          }
-
+          let payModeArray = typeof data[0].pay_mode === 'string' ? JSON.parse(data[0].pay_mode) : data[0].pay_mode
           if (Array.isArray(payModeArray)) {
-            console.log('Payment modes from API:', payModeArray)
-            // Filter out invalid payment modes
-            const validPaymentModes = payModeArray.filter(
-              (mode) =>
-                mode &&
-                typeof mode === 'object' &&
-                mode.paymode_name &&
-                mode.paymode_name.trim() !== '' &&
-                mode.paymode_id !== undefined &&
-                mode.paymode_id !== null,
+            const valid = payModeArray.filter(
+              (m: any) => m && typeof m === 'object' && m.paymode_name && m.paymode_name.trim() !== '' && m.paymode_id != null,
             )
-            console.log('Valid payment modes:', validPaymentModes)
-            setAvailablePaymentModes(validPaymentModes)
+            setAvailablePaymentModes(valid)
           } else {
-            console.log('Payment modes is not an array:', payModeArray)
             setAvailablePaymentModes([])
           }
-        } catch (parseError) {
-          console.error('Failed to parse payment modes:', parseError)
+        } catch {
           setAvailablePaymentModes([])
         }
       } else {
-        console.log('Unexpected API response format:', data)
         setAvailableTenures([])
       }
     } catch (err) {
@@ -445,28 +325,23 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     }
   }
 
-  // Effect to fetch plans when age changes (same as QuoteForm)
   useEffect(() => {
     if (formData.Age) {
       fetchPlans(formData.Age)
-      // Reset selected plan when age changes
       setFormData((prev) => ({ ...prev, PlanCode: 0, Term: 0 }))
       setSelectedPlan(null)
       setAvailableTenures([])
     }
   }, [formData.Age])
 
-  // Effect to fetch tenure options when plan or age changes (same as QuoteForm)
   useEffect(() => {
     if (formData.PlanCode && formData.Age) {
       setIsLoadingTenures(true)
       setIsLoadingPaymentModes(true)
       fetchTenureOptions(formData.PlanCode, formData.Age)
-      // Reset selected term and payment mode when plan or age changes
       setFormData((prev) => ({ ...prev, Term: 0, PaymentMode: 0 }))
       setCurrentPaymentMode('')
     } else {
-      // Clear tenure and payment modes when plan or age is not selected
       setAvailableTenures([])
       setAvailablePaymentModes([])
       setIsLoadingTenures(false)
@@ -477,13 +352,10 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   const calculatePremium = async () => {
     setIsLoading(true)
     setError(null)
-
     try {
       const response = await fetch('/api/calculate-premium', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           PlanCode: formData.PlanCode,
           Age: formData.Age,
@@ -496,19 +368,11 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           Gender: formData.Gender,
         }),
       })
-
-      if (!response.ok) {
-        throw new Error('Failed to calculate premium')
-      }
-
+      if (!response.ok) throw new Error('Failed to calculate premium')
       const data: ApiResponse[] = await response.json()
       if (data && data.length > 0) {
         setApiResponse(data[0])
-        // Notify parent component about the API response with current payment mode and plan name
-        if (onApiResponse) {
-          const planName = selectedPlan?.plan_name || ''
-          onApiResponse(data[0], currentPaymentMode, planName)
-        }
+        onApiResponse?.(data[0], currentPaymentMode, selectedPlan?.plan_name || '')
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
@@ -517,29 +381,28 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     }
   }
 
-  // Function to get specific error message for each field
   const getFieldErrorMessage = (field: keyof typeof fieldErrors): string => {
     if (!fieldErrors[field]) return ''
-
     switch (field) {
       case 'PlanCode':
-        return 'Please select a plan'
+        return L('Please select a plan', 'অনুগ্রহ করে একটি প্ল্যান নির্বাচন করুন')
       case 'Age':
-        if (!formData.dateOfBirth) return 'Please select your date of birth'
-        if (formData.Age < 18 || formData.Age > 65) return 'Age must be between 18 and 65'
+        if (!formData.dateOfBirth) return L('Please select your date of birth', 'অনুগ্রহ করে জন্মতারিখ নির্বাচন করুন')
+        if (formData.Age < 18 || formData.Age > 65)
+          return L('Age must be between 18 and 65', 'বয়স ১৮ থেকে ৬৫ বছরের মধ্যে হতে হবে')
         return ''
       case 'annualIncome':
-        return 'Please enter your annual income'
+        return L('Please enter your annual income', 'অনুগ্রহ করে বার্ষিক আয় লিখুন')
       case 'SumAssured':
-        if (!formData.SumAssured) return 'Please enter sum assured amount'
-        if (formData.SumAssured < 100000) return 'Sum assured must be at least ৳1,00,000'
+        if (!formData.SumAssured) return L('Please enter sum assured amount', 'অনুগ্রহ করে বীমা অঙ্ক লিখুন')
+        if (formData.SumAssured < 100000) return L('Sum assured must be at least ৳1,00,000', 'বীমা অঙ্ক কমপক্ষে ৳১,০০,০০০ হতে হবে')
         return ''
       case 'Term':
-        return 'Please select a tenure'
+        return L('Please select a tenure', 'অনুগ্রহ করে মেয়াদ নির্বাচন করুন')
       case 'PaymentMode':
-        return 'Please select a payment method'
+        return L('Please select a payment method', 'অনুগ্রহ করে পেমেন্ট মেথড নির্বাচন করুন')
       case 'Gender':
-        return 'Please select your gender'
+        return L('Please select your gender', 'অনুগ্রহ করে লিঙ্গ নির্বাচন করুন')
       default:
         return ''
     }
@@ -547,8 +410,6 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-
-    // Reset previous field errors
     setFieldErrors({
       PlanCode: false,
       Age: false,
@@ -559,7 +420,6 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       Gender: false,
     })
 
-    // Validate each required field and mark errors
     const errors = {
       PlanCode: !formData.PlanCode,
       Age: !formData.dateOfBirth || formData.Age < 18 || formData.Age > 65,
@@ -570,33 +430,21 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       Gender: formData.Gender === undefined || formData.Gender === null,
     }
 
-    // Set field errors
     setFieldErrors(errors)
+    if (Object.values(errors).some(Boolean)) return
 
-    // Check if any errors exist
-    const hasErrors = Object.values(errors).some((error) => error)
-
-    if (hasErrors) {
-      // Don't set general error message anymore, field-specific messages will show
-      return
-    }
-
-    // Clear errors and proceed
     setError(null)
     calculatePremium()
   }
+
   return (
     <form
       onSubmit={handleSubmit}
-      action=""
-      className="rounded-2xl bg-[#9C863940]
-  grid grid-cols-2 gap-x-4 gap-y-8 md:gap-5 xl:gap-6 
-  xl:px-4 xl:py-8 py-8 px-4 z-10"
+      className="rounded-2xl bg-[#9C863940] grid grid-cols-2 gap-x-4 gap-y-8 md:gap-5 xl:gap-6 xl:px-4 xl:py-8 py-8 px-4 z-10"
     >
-      {/* date of birth and age inputs - combined in one column */}
+      {/* DOB + Age */}
       <div className="col-span-2 md:col-span-1">
         <div className="flex gap-2">
-          {/* date of birth input - half width */}
           <div className="flex-1">
             <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
               <PopoverTrigger asChild>
@@ -610,7 +458,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                   {formData.dateOfBirth ? (
                     <span>{format(formData.dateOfBirth, 'dd/MM/yyyy')}</span>
                   ) : (
-                    <span>DOB *</span>
+                    <span>{L('DOB *', 'জন্মতারিখ *')}</span>
                   )}
                 </Button>
               </PopoverTrigger>
@@ -624,22 +472,14 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                     showYearDropdown
                     showMonthDropdown
                     dropdownMode="select"
-                    placeholderText="Select date of birth"
+                    placeholderText={L('Select date of birth', 'জন্মতারিখ নির্বাচন করুন')}
                     dateFormat="dd/MM/yyyy"
                     inline
                   />
-
-                  {/* Action buttons */}
                   <div className="flex justify-between items-center mt-3 pt-3 border-t">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={handleCloseDatePicker}
-                      disabled={isCalculatingAge}
-                    >
-                      Cancel
+                    <Button variant="outline" size="sm" onClick={handleCloseDatePicker} disabled={isCalculatingAge}>
+                      {L('Cancel', 'বাতিল')}
                     </Button>
-
                     <Button
                       size="sm"
                       onClick={handleConfirmDate}
@@ -649,29 +489,24 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                       {isCalculatingAge ? (
                         <div className="flex items-center gap-2">
                           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          Calculating...
+                          {L('Calculating...', 'হিসাব করা হচ্ছে...')}
                         </div>
                       ) : (
-                        'Confirm'
+                        L('Confirm', 'নিশ্চিত করুন')
                       )}
                     </Button>
                   </div>
-
-                  {/* Error message */}
-                  {ageCalculationError && (
-                    <p className="text-red-500 text-xs mt-2">{ageCalculationError}</p>
-                  )}
+                  {ageCalculationError && <p className="text-red-500 text-xs mt-2">{ageCalculationError}</p>}
                 </div>
               </PopoverContent>
             </Popover>
           </div>
 
-          {/* age input (read-only, auto-populated) - half width */}
           <div className="flex-1">
             <Input
               type="text"
-              placeholder="Age"
-              value={formData.Age ? `Age: ${formData.Age}` : ''}
+              placeholder={L('Age', 'বয়স')}
+              value={formData.Age ? `${L('Age', 'বয়স')}: ${formData.Age}` : ''}
               readOnly
               className={`bg-gray-50 shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-3 py-5 xl:px-4 xl:py-6 cursor-not-allowed text-xs xl:text-sm ${
                 fieldErrors.Age ? 'border-red-500 border-2' : ''
@@ -680,22 +515,16 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           </div>
         </div>
 
-        {/* Age error message and loading indicator - below both fields */}
-        {getFieldErrorMessage('Age') && (
-          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Age')}</p>
-        )}
-
-        {/* Loading indicator for age calculation */}
+        {getFieldErrorMessage('Age') && <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Age')}</p>}
         {isCalculatingAge && (
           <div className="flex items-center gap-2 mt-1">
             <div className="w-3 h-3 border-2 border-[#978900] border-t-transparent rounded-full animate-spin"></div>
-            <span className="text-xs text-[#978900]">Calculating age...</span>
+            <span className="text-xs text-[#978900]">{L('Calculating age...', 'বয়স হিসাব করা হচ্ছে...')}</span>
           </div>
         )}
       </div>
 
-      {/* plans */}
-      {/* =========================== REPLACE FROM HERE =========================== */}
+      {/* Plans (menu UI unchanged, just localized placeholders/tooltips) */}
       <div
         className="relative col-span-2 md:col-span-1"
         onMouseEnter={() => setIsHoveringPlanSelect(true)}
@@ -712,25 +541,14 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             <Button
               variant="outline"
               className={[
-                // base: match SelectTrigger
                 'font-normal text-xs w-full justify-between text-left bg-background text-foreground',
                 'border border-input rounded-[10px] px-5 py-5 xl:px-4 xl:py-6',
                 'shadow-[0px_0px_5px_0px_#00000040]',
                 'transition-colors',
-
-                // hover (when enabled)
                 !isPlanDisabled && 'hover:bg-accent hover:text-accent-foreground',
-
-                // focus ring like shadcn
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background',
-
-                // open state (match Select’s slight emphasis)
                 planMenuOpen && 'bg-accent text-accent-foreground',
-
-                // error border
                 fieldErrors.PlanCode ? 'border-red-500' : '',
-
-                // disabled visuals
                 isPlanDisabled ? 'opacity-50 cursor-not-allowed' : '',
               ]
                 .filter(Boolean)
@@ -775,65 +593,25 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                     (p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup,
                   )
                   const pickedRegular = regular.find((p) => p.plan_code === formData.PlanCode)
-                  const pickedChild = childEducationVariants.find(
-                    (p) => p.plan_code === formData.PlanCode,
-                  )
+                  const pickedChild = childEducationVariants.find((p) => p.plan_code === formData.PlanCode)
                   const selectedLabel = pickedRegular?.plan_name ?? pickedChild?.plan_name ?? ''
 
                   if (selectedLabel) return selectedLabel
-                  if (isLoadingPlans) return 'Loading plans...'
-                  if (!formData.Age) return 'Enter age to load plans'
+                  if (isLoadingPlans) return L('Loading plans...', 'প্ল্যান লোড হচ্ছে...')
+                  if (!formData.Age) return L('Enter age to load plans', 'প্ল্যান দেখতে আগে বয়স লিখুন')
                   if (availablePlans.length === 0 && childEducationVariants.length === 0)
-                    return 'No plans available'
-                  return 'Select Plan'
+                    return L('No plans available', 'কোনো প্ল্যান পাওয়া যায়নি')
+                  return L('Select Plan', 'প্ল্যান নির্বাচন করুন')
                 })()}
               </span>
-
-              {/* CHANGE HERE — chevron like Select, rotates when open */}
-              <ChevronDown
-                className={`h-4 w-4 shrink-0 transition-transform ${planMenuOpen ? 'rotate-180' : ''}`}
-                aria-hidden="true"
-              />
+              <ChevronDown className={`h-4 w-4 shrink-0 transition-transform ${planMenuOpen ? 'rotate-180' : ''}`} />
             </Button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent
-            align="start"
-            sideOffset={6}
-            // className="z-[1000] rounded-[10px] p-0 overflow-hidden min-w-[260px]"
-            className="z-[1000] min-w-[260px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden"
-          >
+          <DropdownMenuContent align="start" sideOffset={6} className="z-[1000] min-w-[260px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden">
             <div className="py-2">
-              <DropdownMenuLabel className="px-3 py-2">Plans</DropdownMenuLabel>
+              <DropdownMenuLabel className="px-3 py-2">{L('Plans', 'প্ল্যানসমূহ')}</DropdownMenuLabel>
 
-              {/* Regular plans */}
-              {/* {availablePlans
-                .filter((p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup)
-                .map((plan) => (
-                  <DropdownMenuItem
-                    key={plan.plan_code}
-                    className="px-3 py-2 cursor-pointer"
-                    onClick={() => {
-                      const planWithVideo = {
-                        ...plan,
-                        videoLink:
-                          videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings],
-                      }
-                      setSelectedPlan(planWithVideo)
-                      setFormData((prev) => ({
-                        ...prev,
-                        PlanCode: plan.plan_code,
-                        Term: 0,
-                        PaymentMode: 0,
-                      }))
-                      setAvailableTenures([])
-                      setAvailablePaymentModes([])
-                      setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
-                    }}
-                  >
-                    {plan.plan_name}
-                  </DropdownMenuItem>
-                ))} */}
               {availablePlans
                 .filter((p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup)
                 .map((plan) => {
@@ -844,23 +622,15 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                       onClick={() => {
                         const planWithVideo = {
                           ...plan,
-                          videoLink:
-                            videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings],
+                          videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings],
                         }
                         setSelectedPlan(planWithVideo)
-                        setFormData((prev) => ({
-                          ...prev,
-                          PlanCode: plan.plan_code,
-                          Term: 0,
-                          PaymentMode: 0,
-                        }))
+                        setFormData((prev) => ({ ...prev, PlanCode: plan.plan_code, Term: 0, PaymentMode: 0 }))
                         setAvailableTenures([])
                         setAvailablePaymentModes([])
                         setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
                       }}
-                      className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${
-                        selected ? 'bg-accent text-accent-foreground' : ''
-                      }`}
+                      className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${selected ? 'bg-accent text-accent-foreground' : ''}`}
                     >
                       <Check className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`} />
                       <span className="truncate">{plan.plan_name}</span>
@@ -868,54 +638,23 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                   )
                 })}
 
-              {/* If no regular plans */}
               {!isLoadingPlans &&
                 formData.Age &&
-                availablePlans.filter(
-                  (p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup,
-                ).length === 0 && (
+                availablePlans.filter((p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup)
+                  .length === 0 && (
                   <DropdownMenuItem disabled className="px-3 py-2">
-                    No regular plans available
+                    {L('No regular plans available', 'কোনো সাধারণ প্ল্যান নেই')}
                   </DropdownMenuItem>
                 )}
 
-              {/* Child Education submenu */}
               {childEducationVariants.length > 0 && (
                 <>
                   <DropdownMenuSeparator />
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger className="px-3 py-2 cursor-pointer flex items-center justify-between">
-                      <span>Shanta Child Education Plan</span>
-                      {/* <ChevronRight className="h-4 w-4" /> */}
+                      <span>{L('Shanta Child Education Plan', 'শান্তা চাইল্ড এডুকেশন প্ল্যান')}</span>
                     </DropdownMenuSubTrigger>
                     <DropdownMenuSubContent className="z-[1100] min-w-[280px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden">
-                      {/* {childEducationVariants.map((variant) => (
-                        <DropdownMenuItem
-                          key={variant.plan_code}
-                          className="px-3 py-2 cursor-pointer"
-                          onClick={() => {
-                            const planWithVideo = {
-                              ...variant,
-                              videoLink:
-                                videoLinkMappings[
-                                  variant.plan_name as keyof typeof videoLinkMappings
-                                ],
-                            }
-                            setSelectedPlan(planWithVideo)
-                            setFormData((prev) => ({
-                              ...prev,
-                              PlanCode: variant.plan_code,
-                              Term: 0,
-                              PaymentMode: 0,
-                            }))
-                            setAvailableTenures([])
-                            setAvailablePaymentModes([])
-                            setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
-                          }}
-                        >
-                          {variant.plan_name}
-                        </DropdownMenuItem>
-                      ))} */}
                       {childEducationVariants.map((variant) => {
                         const selected = formData.PlanCode === variant.plan_code
                         return (
@@ -924,29 +663,17 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                             onClick={() => {
                               const planWithVideo = {
                                 ...variant,
-                                videoLink:
-                                  videoLinkMappings[
-                                    variant.plan_name as keyof typeof videoLinkMappings
-                                  ],
+                                videoLink: videoLinkMappings[variant.plan_name as keyof typeof videoLinkMappings],
                               }
                               setSelectedPlan(planWithVideo)
-                              setFormData((prev) => ({
-                                ...prev,
-                                PlanCode: variant.plan_code,
-                                Term: 0,
-                                PaymentMode: 0,
-                              }))
+                              setFormData((prev) => ({ ...prev, PlanCode: variant.plan_code, Term: 0, PaymentMode: 0 }))
                               setAvailableTenures([])
                               setAvailablePaymentModes([])
                               setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
                             }}
-                            className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${
-                              selected ? 'bg-accent text-accent-foreground' : ''
-                            }`}
+                            className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${selected ? 'bg-accent text-accent-foreground' : ''}`}
                           >
-                            <Check
-                              className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`}
-                            />
+                            <Check className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`} />
                             <span className="truncate">{variant.plan_name}</span>
                           </DropdownMenuItem>
                         )
@@ -956,20 +683,15 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                 </>
               )}
 
-              {/* If truly nothing */}
-              {!isLoadingPlans &&
-                formData.Age &&
-                availablePlans.length === 0 &&
-                childEducationVariants.length === 0 && (
-                  <DropdownMenuItem disabled className="px-3 py-2">
-                    No plans available for this age
-                  </DropdownMenuItem>
-                )}
+              {!isLoadingPlans && formData.Age && availablePlans.length === 0 && childEducationVariants.length === 0 && (
+                <DropdownMenuItem disabled className="px-3 py-2">
+                  {L('No plans available for this age', 'এই বয়সের জন্য কোনো প্ল্যান নেই')}
+                </DropdownMenuItem>
+              )}
             </div>
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {/* CHANGE HERE: tooltip while "disabled" (simulated) */}
         {isPlanDisabled && isHoveringPlanSelect && (
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
             {planDisabledMsg}
@@ -977,21 +699,17 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           </div>
         )}
 
-        {/* Watch video link (unchanged) */}
         {selectedPlan && selectedPlan.videoLink && (
           <Dialog>
             <DialogTrigger asChild>
               <p className="text-[10px] py-1 absolute inset-x-0 text-[#FF6600] underline cursor-pointer">
-                Watch {selectedPlan.plan_name} Video
+                {L('Watch', 'ভিডিও দেখুন')}{' '}{selectedPlan.plan_name}{' '}{L('Video', '')}
               </p>
             </DialogTrigger>
-            <DialogContent
-              className="max-w-5xl w-full aspect-video p-0 bg-black 
-        [&>button.absolute]:top-3 [&>button.absolute]:right-3 
-        [&>button.absolute]:bg-black/50 
-        [&>button.absolute]:text-white 
-        [&>button.absolute]:hover:bg-black/80"
-            >
+            <DialogContent className="max-w-5xl w-full aspect-video p-0 bg-black 
+              [&>button.absolute]:top-3 [&>button.absolute]:right-3 
+              [&>button.absolute]:bg-black/50 [&>button.absolute]:text-white 
+              [&>button.absolute]:hover:bg-black/80">
               <VisuallyHidden>
                 <DialogTitle>Plan Video</DialogTitle>
               </VisuallyHidden>
@@ -1009,14 +727,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           </Dialog>
         )}
 
-        {/* Plan selection error (unchanged) */}
         {getFieldErrorMessage('PlanCode') && (
           <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('PlanCode')}</p>
         )}
       </div>
-      {/* ============================ REPLACE TO HERE ============================ */}
 
-      {/* select your tenure */}
+      {/* Tenure */}
       <div
         className="col-span-2 md:col-span-1 relative"
         onMouseEnter={() => setIsHoveringTenureSelect(true)}
@@ -1033,9 +749,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           }
           onValueChange={(v) => {
             const tenure = availableTenures.find((t) => t.text === v)
-            if (tenure) {
-              handleInputChange('Term', tenure.value)
-            }
+            if (tenure) handleInputChange('Term', tenure.value)
           }}
         >
           <SelectTrigger
@@ -1051,54 +765,45 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             <SelectValue
               placeholder={
                 isLoadingTenures
-                  ? 'Loading tenure options...'
+                  ? L('Loading tenure options...', 'মেয়াদ অপশন লোড হচ্ছে...')
                   : !formData.PlanCode || !formData.Age
-                    ? 'Select plan and age first'
+                    ? L('Select plan and age first', 'প্রথমে প্ল্যান ও বয়স নির্বাচন করুন')
                     : availableTenures.length === 0
-                      ? 'No tenure options available'
-                      : 'Select Your Tenure *'
+                      ? L('No tenure options available', 'কোনো মেয়াদ অপশন নেই')
+                      : L('Select Your Tenure *', 'মেয়াদ নির্বাচন করুন *')
               }
             />
           </SelectTrigger>
-          {/* Custom instant tooltip */}
           {isHoveringTenureSelect && (!formData.PlanCode || !formData.Age) && (
             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
-              Select age and plan first
+              {L('Select age and plan first', 'প্রথমে বয়স ও প্ল্যান নির্বাচন করুন')}
               <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
             </div>
           )}
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Tenure</SelectLabel>
-              {availableTenures.map((tenure) => {
-                console.log('Rendering tenure option:', tenure)
-                return (
-                  <SelectItem key={tenure.value} value={tenure.text}>
-                    {tenure.text}
-                  </SelectItem>
-                )
-              })}
+              <SelectLabel>{L('Tenure', 'মেয়াদ')}</SelectLabel>
+              {availableTenures.map((tenure) => (
+                <SelectItem key={tenure.value} value={tenure.text}>
+                  {tenure.text}
+                </SelectItem>
+              ))}
               {availableTenures.length === 0 &&
                 !isLoadingTenures &&
                 formData.PlanCode &&
                 formData.Age && (
                   <SelectItem disabled value="no-options">
-                    No tenure options available for this plan and age
+                    {L('No tenure options available for this plan and age', 'এই প্ল্যান ও বয়সের জন্য কোনো মেয়াদ অপশন নেই')}
                   </SelectItem>
                 )}
             </SelectGroup>
           </SelectContent>
         </Select>
-        {tenureError && (
-          <p className="text-[10px] py-1 text-red-600 absolute inset-x-0">{tenureError}</p>
-        )}
-        {/* Tenure error message */}
-        {getFieldErrorMessage('Term') && (
-          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Term')}</p>
-        )}
+        {tenureError && <p className="text-[10px] py-1 text-red-600 absolute inset-x-0">{tenureError}</p>}
+        {getFieldErrorMessage('Term') && <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Term')}</p>}
       </div>
 
-      {/* gender select  */}
+      {/* Gender */}
       <div className="col-span-2 md:col-span-1">
         <Select
           value={
@@ -1108,9 +813,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           }
           onValueChange={(v) => {
             const gender = genders.find((g) => g.text === v)
-            if (gender) {
-              handleInputChange('Gender', gender.value)
-            }
+            if (gender) handleInputChange('Gender', gender.value)
           }}
         >
           <SelectTrigger
@@ -1118,76 +821,74 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
               fieldErrors.Gender ? 'border-red-500 border-2' : ''
             }`}
           >
-            <SelectValue placeholder="Select Gender *" />
+            <SelectValue placeholder={L('Select Gender *', 'লিঙ্গ নির্বাচন করুন *')} />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Gender</SelectLabel>
+              <SelectLabel>{L('Gender', 'লিঙ্গ')}</SelectLabel>
               {genders.map((gender) => (
                 <SelectItem key={gender.text} value={gender.text}>
-                  {gender.text}
+                  {L(gender.text, gender.text === 'Male' ? 'পুরুষ' : 'মহিলা')}
                 </SelectItem>
               ))}
             </SelectGroup>
           </SelectContent>
         </Select>
-        {/* Gender error message */}
-        {getFieldErrorMessage('Gender') && (
-          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Gender')}</p>
-        )}
+        {getFieldErrorMessage('Gender') && <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Gender')}</p>}
       </div>
 
-      {/* annual income input */}
+      {/* Annual Income */}
       <div className="col-span-2 md:col-span-1">
         <Input
           min={0}
           type="number"
-          placeholder="Annual Income *"
+          placeholder={L('Annual Income *', 'বার্ষিক আয় *')}
           value={formData.annualIncome || ''}
           onChange={(e) => handleInputChange('annualIncome', parseInt(e.target.value) || 0)}
           className={`bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
             fieldErrors.annualIncome ? 'border-red-500 border-2' : ''
           }`}
         />
-        {/* Annual income error message */}
         {getFieldErrorMessage('annualIncome') && (
           <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('annualIncome')}</p>
         )}
       </div>
-      {/* sum assured input */}
+
+      {/* Sum Assured */}
       <div className="relative col-span-2 md:col-span-1">
         <Input
           min={100000}
           type="number"
-          placeholder="Sum Assured *"
+          placeholder={L('Sum Assured *', 'বীমা অঙ্ক *')}
           value={formData.SumAssured || ''}
           onChange={(e) => handleInputChange('SumAssured', parseInt(e.target.value) || 0)}
           className={`bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
             fieldErrors.SumAssured ? 'border-red-500 border-2' : ''
           }`}
         />
-        {/* Show either suggested amount OR error message, not both */}
         {getFieldErrorMessage('SumAssured') ? (
           <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('SumAssured')}</p>
         ) : (
           <p className="text-[8px] md:text-[10px] py-2 absolute right-1">
-            Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
+            {L('Suggested', 'সাজেস্টেড')}{' '}
+            <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span>{' '}
+            {L('BDT', 'টাকা')}
           </p>
         )}
       </div>
 
-      {/* phone number input */}
+      {/* Phone */}
       <div className="col-span-2 md:col-span-1">
         <Input
           type="tel"
-          placeholder="Phone Number"
+          placeholder={L('Phone Number', 'ফোন নম্বর')}
           value={formData.phoneNumber}
           onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
           className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
 
-      {/* payment method select  */}
+      {/* Payment Method */}
       <div
         className="col-span-2 md:col-span-1 relative"
         onMouseEnter={() => setIsHoveringPaymentSelect(true)}
@@ -1196,16 +897,11 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         <Select
           value={
             formData.PaymentMode && formData.PaymentMode > 0
-              ? availablePaymentModes.find((pm) => pm.paymode_id === formData.PaymentMode)
-                  ?.paymode_name || ''
+              ? availablePaymentModes.find((pm) => pm.paymode_id === formData.PaymentMode)?.paymode_name || ''
               : ''
           }
           disabled={
-            isLoadingPaymentModes ||
-            !formData.PlanCode ||
-            !formData.Age ||
-            !formData.Term ||
-            availablePaymentModes.length === 0
+            isLoadingPaymentModes || !formData.PlanCode || !formData.Age || !formData.Term || availablePaymentModes.length === 0
           }
           onValueChange={(v) => {
             const method = availablePaymentModes.find((pm) => pm.paymode_name === v)
@@ -1223,36 +919,27 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             <SelectValue
               placeholder={
                 isLoadingPaymentModes
-                  ? 'Loading payment methods...'
+                  ? L('Loading payment methods...', 'পেমেন্ট মেথড লোড হচ্ছে...')
                   : !formData.PlanCode || !formData.Age || !formData.Term
-                    ? 'Select plan, age & term first'
+                    ? L('Select plan, age & term first', 'প্রথমে প্ল্যান, বয়স ও মেয়াদ নির্বাচন করুন')
                     : availablePaymentModes.length === 0
-                      ? 'No payment methods available'
-                      : 'Select Payment Method'
+                      ? L('No payment methods available', 'কোনো পেমেন্ট মেথড নেই')
+                      : L('Select Payment Method', 'পেমেন্ট মেথড নির্বাচন করুন')
               }
             />
           </SelectTrigger>
-          {/* Custom instant tooltip */}
           {isHoveringPaymentSelect && (!formData.PlanCode || !formData.Age || !formData.Term) && (
             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
-              Select plan, age & term first
+              {L('Select plan, age & term first', 'প্রথমে প্ল্যান, বয়স ও মেয়াদ নির্বাচন করুন')}
               <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
             </div>
           )}
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Payment Method</SelectLabel>
+              <SelectLabel>{L('Payment Method', 'পেমেন্ট মেথড')}</SelectLabel>
               {availablePaymentModes
                 .map((paymentMethod, index) => {
-                  // Ensure we have valid data before rendering
-                  if (
-                    !paymentMethod ||
-                    !paymentMethod.paymode_name ||
-                    paymentMethod.paymode_name.trim() === ''
-                  ) {
-                    return null
-                  }
-
+                  if (!paymentMethod || !paymentMethod.paymode_name || paymentMethod.paymode_name.trim() === '') return null
                   return (
                     <SelectItem
                       key={`payment-${paymentMethod.paymode_id}-${paymentMethod.paymode_name}-${index}`}
@@ -1269,41 +956,40 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                 formData.Age &&
                 formData.Term && (
                   <SelectItem disabled value="no-options">
-                    No payment methods available
+                    {L('No payment methods available', 'কোনো পেমেন্ট মেথড নেই')}
                   </SelectItem>
                 )}
             </SelectGroup>
           </SelectContent>
         </Select>
-        {/* Payment Method error message */}
         {getFieldErrorMessage('PaymentMode') && (
           <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('PaymentMode')}</p>
         )}
       </div>
 
-      {/* name input */}
+      {/* Name */}
       <div className="col-span-2 md:col-span-1">
         <Input
           type="text"
-          placeholder="Name"
+          placeholder={L('Name', 'নাম')}
           value={formData.name}
           onChange={(e) => handleInputChange('name', e.target.value)}
           className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
 
-      {/* name input */}
+      {/* Email */}
       <div className="col-span-2 md:col-span-1">
         <Input
           type="text"
-          placeholder="Email"
+          placeholder={L('Email', 'ইমেইল')}
           value={formData.email}
           onChange={(e) => handleInputChange('email', e.target.value)}
           className="bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6"
         />
       </div>
 
-      {/* CONSENT CHECKBOX */}
+      {/* Consent (left as-is per your instruction; feel free to localize similarly if needed) */}
       <div className="col-span-2">
         <label className="flex items-start gap-3">
           <Checkbox
@@ -1312,32 +998,34 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
           <span className="text-xs md:text-sm leading-relaxed">
-            By clicking <span className="font-semibold">Request for purchase</span>, you agree to
-            our{' '}
+            {L('By clicking', 'ক্লিক করলে')}{' '}
+            <span className="font-semibold">
+              {L('Request for purchase', 'পলিসি কেনার রিকোয়েস্ট')}
+            </span>
+            , {L('you agree to our', 'আপনি আমাদের')}{' '}
             <Link
               href="/terms-condition"
               className="underline text-[#FF6600] hover:opacity-90"
               target="_blank"
               rel="noopener noreferrer"
             >
-              terms and conditions
+              {L('terms and conditions', 'শর্তাবলি')}
             </Link>{' '}
-            and Shanta Life{' '}
+            {L('and Shanta Life', 'এবং শান্তা লাইফের')}{' '}
             <Link
               href="/privacy-policy"
               className="underline text-[#FF6600] hover:opacity-90"
               target="_blank"
               rel="noopener noreferrer"
             >
-              privacy policy
+              {L('privacy policy', 'প্রাইভেসি পলিসি')}
             </Link>
             .
           </span>
         </label>
       </div>
 
-      {/* General error display removed - using field-specific errors now */}
-      {/* submit button */}
+      {/* Submit + helper text */}
       <div className="col-span-2 items-center px-4 flex flex-col gap-6 lg:gap-6 justify-center">
         <Button
           disabled={isLoading || !agreeTerms}
@@ -1347,16 +1035,15 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             !agreeTerms || isLoading ? 'opacity-60 cursor-not-allowed' : '',
           ].join(' ')}
         >
-          {isLoading ? 'Calculating...' : 'Calculate Now'}
+          {isLoading ? L('Calculating...', 'হিসাব করা হচ্ছে...') : L('Calculate Now', 'এখনই ক্যালকুলেট করুন')}
         </Button>
+
         <p className="text-[12px] md:text-[14px] text-[#00000099] mt-4 md:mt-1 md:w-[90%] font-light md:capitalize">
-          Our expert advisors are ready to help you choose the best plan based on your age, income,
-          and future goals. Whether you're just starting your career or planning for retirement, we
-          are with you at every step.
+          {L(
+            "Our expert advisors are ready to help you choose the best plan based on your age, income, and future goals. Whether you're just starting your career or planning for retirement, we are with you at every step.",
+            'আপনার বয়স, আয় এবং ভবিষ্যৎ লক্ষ্য অনুযায়ী সেরা প্ল্যান বেছে নিতে আমাদের বিশেষজ্ঞ পরামর্শদাতারা প্রস্তুত। আপনি ক্যারিয়ারের শুরুতেই থাকুন বা অবসরের পরিকল্পনা করুন—আমরা আছি আপনার প্রতিটি পদক্ষেপে।',
+          )}
         </p>
-        {/* <p className="text-[10.5px] md:text-[12px] text-[#434343] underline">
-          Have Questions? Ask Us! 
-        </p> */}
       </div>
     </form>
   )
