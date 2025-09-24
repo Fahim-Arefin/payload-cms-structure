@@ -107,6 +107,7 @@ import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { TabDataType } from '@/types'
 import { Check, ChevronDown } from 'lucide-react'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: TabDataType[]
@@ -167,11 +168,19 @@ function SupportTabContent({ data, activeTab, bgColor }: Props) {
       <div className="px-5 pt-0 pb-[8px] md:px-24 md:pt-0 md:pb-0 lg:px-[130px] lg:pt-0 lg:pb-[20px] xl:px-[200px] xl:pt-0 xl:pb-[20px] 2xl:px-[300px] 2xl:pt-0 2xl:pb-[20px] mb-3 lg:mb-0">
         {isHospital ? (
           <h1 className="global-h3 w-full font-semibold lg:font-normal mb-[8px] md:mb-[10px] lg:mb-[12px] xl:mb-[16px]">
-            Search and find our panel hospitals by district.
+            <LocalizedText
+              en="Search and find our panel hospitals by district."
+              bn="জেলা ভিত্তিক হাসপাতাল খুঁজে নিন সহজেই।"
+            />
           </h1>
         ) : (
           <h1 className="global-h3 w-full font-semibold lg:font-normal mb-[8px] md:mb-[10px] lg:mb-[12px] xl:mb-[16px]">
-            Come and visit us at any of our branches. <br /> We are here to assist you.
+            <LocalizedText
+              en="Come and visit us at any of our branches."
+              bn="আপনার যেকোনো প্রয়োজনে চলে আসুন আমাদের শাখায় —"
+            />
+            <br />
+            <LocalizedText en="We are here to assist you." bn="আমরা সর্বদা আপনার পাশে আছি।" />
           </h1>
         )}
 

@@ -9,6 +9,7 @@ import { sliderDelay } from '@/lib/data'
 import CarouselNavButtons from '../CarousalNavButtons'
 import BenefitSliderItem from './BenefitSliderItem'
 import Autoplay from 'embla-carousel-autoplay'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   data: BenefitSliderSectionData
@@ -59,10 +60,16 @@ function BenefitSliderSection({ data, basis, bgColor }: Props) {
         {/* heading */}
         <div className="">
           <div className="flex space-x-2">
-            <h3 className="global-h2 uppercase font-bold text-[#434343]">{data?.title} </h3>{' '}
-            <h3 className="global-h2 uppercase font-bold text-[#ED7125]">{data?.coloredTitle}</h3>
+            <h3 className="global-h2 uppercase font-bold text-[#434343]">
+              <LocalizedText en={data?.title} bn={data?.titleBN}/>
+               </h3>{' '}
+            <h3 className="global-h2 uppercase font-bold text-[#ED7125]">
+              <LocalizedText en={data?.coloredTitle} bn={data?.coloredTitleBN}/>
+            </h3>
           </div>
-          <div className="global-span text-[#434343] font-light">{data?.description}</div>
+          <div className="global-span text-[#434343] font-light">
+            <LocalizedText en={data?.description} bn={data?.descriptionBN}/>
+          </div>
         </div>
         {/* carousal */}
         <Carousel

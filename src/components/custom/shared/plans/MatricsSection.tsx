@@ -10,6 +10,9 @@ import Link from 'next/link'
 import GlobalButton from '../GlobalButton'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
+import LocalizedHighlighted from '../LocalizedHighlighted'
+import LocalizedText from '../LocalizedText'
+import LocalizedString from '../LocalizedString'
 
 type Props = {}
 
@@ -26,7 +29,13 @@ function MatricsSection({}: Props) {
       <div className="space-y-4 md:space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12">
         {/* Heading */}
         <h1 className="global-h1 font-medium uppercase">
-          <span className="text-[#ED7125]">Metrics</span> That Matter
+          <LocalizedHighlighted
+            textEn={`Metrics That Matter`}
+            textBn={`গুরুত্বপূর্ণ তথ্য`}
+            highlightEn={`Metrics`}
+            highlightBn={`গুরুত্বপূর্ণ`}
+            highlightClassName="text-[#ED7125]"
+          />
         </h1>
 
         {/* Content Grid */}
@@ -101,9 +110,11 @@ function MatricsSection({}: Props) {
             >
               <div>
                 <p className="text-[10px] md:text-[16px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-[#ED7125] font-medium">
-                  Minimum Coverage
+                  <LocalizedText en={`Minimum Coverage`} bn={`সর্বনিম্ন কভারেজ`} />
                 </p>
-                <p className="global-span font-semibold text-[#ED7125]">BDT 100,000</p>
+                <p className="global-span font-semibold text-[#ED7125]">
+                  <LocalizedText en={`BDT 100,000`} bn={`১০০,০০০ টাকা`} />
+                </p>
               </div>
             </div>
 
@@ -112,8 +123,12 @@ function MatricsSection({}: Props) {
               className=" absolute text-center p-4 z-10
               top-4 md:left-8 lg:top-4 lg:left-3 xl:top-4 xl:left-4 2xl:top-4 2xl:left-7"
             >
-              <p className="global-p2 font-light capitalize">Age At Entry</p>
-              <p className="global-p1 font-semibold">18 - 60 Years</p>
+              <p className="global-p2 font-light capitalize">
+                <LocalizedText en={`Age At Entry`} bn={`আবেদন করার বয়স`} />
+              </p>
+              <p className="global-p1 font-semibold">
+                <LocalizedText en={`18 - 60 Years`} bn={`১৮ - ৬০ বছর`} />
+              </p>
             </div>
 
             {/* Top Right */}
@@ -122,9 +137,15 @@ function MatricsSection({}: Props) {
               top-4
             right-7 md:right-16 lg:right-8 2xl:right-12 "
             >
-              <p className="global-p2 font-light capitalize">Policy Term</p>
-              <p className="global-p1 font-semibold">Same As </p>
-              <p className="global-p1 leading-3 font-semibold">Your Basic Plan</p>
+              <p className="global-p2 font-light capitalize">
+                <LocalizedText en={`Policy Term`} bn={`বীমার মেয়াদ`} />
+              </p>
+              <p className="global-p1 font-semibold">
+                <LocalizedText en={`Same As`} bn={`মূল লাইফ`} />
+              </p>
+              <p className="global-p1 leading-3 font-semibold">
+                <LocalizedText en={`Your Basic Plan`} bn={`পলিসির অনুরূপ`} />
+              </p>
             </div>
 
             {/* Bottom Left */}
@@ -132,15 +153,25 @@ function MatricsSection({}: Props) {
               className=" absolute text-center p-4 z-10
               bottom-4 md:left-8 lg:bottom-4 lg:left-3  xl:bottom-4 xl:left-4 2xl:bottom-4 2xl:left-7"
             >
-              <p className="global-p2 font-light capitalize">Maximum Coverage</p>
-              <p className="global-p1 font-semibold">BDT 5,000,000</p>
+              <p className="global-p2 font-light capitalize">
+                <LocalizedText en={`Maximum Coverage`} bn={`সর্বোচ্চ কভারেজ`} />
+              </p>
+              <p className="global-p1 font-semibold">
+                <LocalizedText en={`BDT 5,000,000`} bn={`৫০,০০,০০০ টাকা`} />
+              </p>
             </div>
 
             {/* Bottom Right */}
             <div className=" absolute bottom-4 right-0 md:right-8 lg:right-0 text-center p-4 z-10">
-              <p className="global-p2 font-light capitalize">Premium Rate</p>
-              <p className="global-p1 font-semibold">Affordable </p>
-              <p className="global-p1 leading-3 font-semibold">Extensive Protection!</p>
+              <p className="global-p2 font-light capitalize">
+                <LocalizedText en={`Premium Rate`} bn={`প্রিমিয়াম`} />
+              </p>
+              <p className="global-p1 font-semibold">
+                <LocalizedText en={`Affordable`} bn={`জীবনযাত্রারার`} />
+              </p>
+              <p className="global-p1 leading-3 font-semibold">
+                <LocalizedText en={`Extensive Protection!`} bn={`মানের সাথে সামঞ্জস্যপূর্ণ`} />
+              </p>
             </div>
           </div>
         </div>
@@ -159,7 +190,9 @@ function MatricsSection({}: Props) {
           target="_blank"
           prefetch={false}
         >
-          <GlobalButton variant="primary" text="Download Brochure" />
+          <GlobalButton variant="primary" text="Download Brochure">
+            <LocalizedString en={`Download Brochure`} bn={`ডাউনলোড ব্রোশিওর`} />
+          </GlobalButton>
         </Link>
         <div className="flex justify-center mt-2">
           <Link
@@ -167,7 +200,7 @@ function MatricsSection({}: Props) {
             className="capitalize text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1 
                     text-[10px] md:text-[12px] lg:text-[14px] xl:text-[14px]"
           >
-            explore all plans
+            <LocalizedText en="explore all plans" bn="সকল প্ল্যান ঘুরে দেখুন" />
             <ArrowUpRight size={14} className="inline-block" />
           </Link>
         </div>

@@ -6,6 +6,8 @@ import Link from 'next/link'
 import GlobalTabButtons from '../GlobalTabButtons'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
+import LocalizedText from '../LocalizedText'
+import LocalizedString from '../LocalizedString'
 
 type Props = {
   bgColor?: string
@@ -82,14 +84,16 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
           {/* heading */}
           <div>
             <h3 className="global-p1 md:global-h4 lg:global-p1 text-[#3A3A3A] uppercase font-light">
-              {data?.title}
+              <LocalizedText en={data?.title} bn={data?.titleBN} />
             </h3>
             <div className="flex space-x-1">
-              <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">{data?.subTitle}</h1>
+              <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
+                <LocalizedText en={data?.subTitle} bn={data?.subTitleBN} />
+              </h1>
               <span className="global-h1 uppercase text-[#3A3A3A] font-medium"> - </span>
               <h1 className="global-h1 uppercase text-[#ED7125] font-medium">
                 {' '}
-                {data?.smallTitle}
+                <LocalizedText en={data?.smallTitle} bn={data?.smallTitleBN} />
               </h1>
             </div>
           </div>
@@ -110,7 +114,7 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
                 <Image fill src={eachItem?.image} alt="icons" />
               </div>
               <div className="text-[12px] md:text-[14px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px] text-[#434343] font-semibold ">
-                {eachItem?.description}
+                <LocalizedText en={eachItem?.description} bn={eachItem?.descriptionBN} />
               </div>
             </div>
           ))}
@@ -121,7 +125,9 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
               target="_blank"
               prefetch={false}
             >
-              <GlobalButton variant="primary" text="Download Brochure" />
+              <GlobalButton variant="primary" text="Download Brochure">
+                <LocalizedString en={'Download Brochure'} bn={'ডাউনলোড ব্রোশিওর'} />
+              </GlobalButton>
             </Link>
             <div className="flex justify-center mt-2">
               <Link
@@ -129,7 +135,7 @@ function ProtectionSection({ bgColor = '#FFFFFF', align = 'left', data }: Props)
                 className="capitalize text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1 
                     text-[10px] md:text-[12px] lg:text-[14px] xl:text-[14px]"
               >
-                explore all plans
+                <LocalizedString en={`explore all plans`} bn={`সকল প্ল্যান ঘুরে দেখুন`} />
                 <ArrowUpRight size={14} className="inline-block" />
               </Link>
             </div>

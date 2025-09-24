@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { Directors } from '@/types'
 import Image from 'next/image'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: Directors
@@ -69,10 +70,10 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
           )}
         >
           <h2 className={`global-h2 font-semibold text-[${titleColor}] mb-1 uppercase`}>
-            {data.title}
+            <LocalizedText en={data?.title} bn={data?.titleBN} />
           </h2>
           <div className="font-medium global-span text-[#444] mb-1 uppercase">
-            {data.designation}
+            <LocalizedText en={data?.designation} bn={data?.designationBN} />
           </div>
           <div className="border w-full border-[#000000] mb-4 xl:mb-8" />
           <div className="transition-all duration-300 overflow-hidden">
@@ -83,7 +84,7 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
                 !expanded && 'line-clamp-5 lg:line-clamp-5 xl:line-clamp-[7]',
               )}
             >
-              {data.description}
+              <LocalizedText en={data?.description} bn={data?.descriptionBN} />
             </p>
           </div>
 

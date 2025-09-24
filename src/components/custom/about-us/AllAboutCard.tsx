@@ -1,6 +1,7 @@
 import { AllAboutCardDataType } from '@/types'
 import Image from 'next/image'
 import React from 'react'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: AllAboutCardDataType
@@ -44,15 +45,17 @@ function AllAboutCard({ data, index }: Props) {
           />
         </div>
         <div className="global-p1 text-center font-semibold lg:font-medium uppercase px-1 ">
-          {data?.title}
+          
+          <LocalizedText en={data?.title} bn={data?.titleBN}/>
         </div>
         <div
           className="global-p2
           font-light mx-auto text-center
          max-w-[96%] md:max-w-[90%] xl:max-w-[80%] 2xl:max-w-[70%] "
-          dangerouslySetInnerHTML={data?.description}
+          // dangerouslySetInnerHTML={data?.description}
         >
           {/* {typeof data?.description == 'string' ? data?.description : null} */}
+          <LocalizedText en={data?.description?.__html} bn={data?.description?.__htmlBN}/>
         </div>
       </div>
     </div>

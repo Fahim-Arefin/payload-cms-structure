@@ -10,6 +10,7 @@ type Props = {
     bgImage: string
     bgMobileImage?: string
     content: string
+    contentBN?: string
   }
 }
 
@@ -23,15 +24,25 @@ function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
     >
       {/* heading */}
       <div className="hidden lg:block">
-        <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">Authorization</h1>
         <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
-          of <span className="global-h1 uppercase text-[#ED7125] font-medium">EFT Debit</span>
+          <LocalizedHighlighted
+            textEn="Authorization of EFT Debit"
+            textBn="ইলেকট্রনিক ফান্ড ট্রান্সফার (ইএফটি) ডেবিট"
+            highlightEn="EFT Debit"
+            highlightBn="(ইএফটি) ডেবিট"
+            highlightClassName="global-h1 uppercase text-[#ED7125] font-medium"
+          />
         </h1>
       </div>
       <div className="lg:hidden ">
         <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
-          Authorization of{' '}
-          <span className="global-h1 uppercase text-[#ED7125] font-medium">EFT Debit</span>
+          <LocalizedHighlighted
+            textEn="Authorization of EFT Debit"
+            textBn="ইলেকট্রনিক ফান্ড ট্রান্সফার (ইএফটি) ডেবিট"
+            highlightEn="EFT Debit"
+            highlightBn="(ইএফটি) ডেবিট"
+            highlightClassName="global-h1 uppercase text-[#ED7125] font-medium"
+          />
         </h1>
       </div>
       <div
@@ -96,8 +107,7 @@ function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
         ${align === 'left' ? 'order-2' : 'order-2 lg:order-1'} `}
         >
           <div className="text-[#3A3A3A] global-h4 text-justify">
-            {' '}
-            {renderWithFormLink(data?.content)}
+            <LocalizedText en={renderWithFormLink(data?.content) as any} bn={data?.contentBN}/>
           </div>
         </div>
       </div>
@@ -109,6 +119,8 @@ export default DebitSection
 
 import Link from 'next/link'
 import Image from 'next/image'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
 
 function renderWithFormLink(text: string) {
   const linkText = 'EFT Debit Authorization form'

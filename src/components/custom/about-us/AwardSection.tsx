@@ -3,6 +3,8 @@ import award1 from '/public/assets/homepage/web/award1.png'
 import award2 from '/public/assets/homepage/web/award2.png'
 import award3 from '/public/assets/homepage/web/award3.png'
 import award4 from '/public/assets/homepage/web/award4.png'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
 
 function AwardSection() {
   return (
@@ -18,7 +20,13 @@ function AwardSection() {
         text-center lg:text-start
         mb-5 md:mb-8 lg:mb-16  2xl:mb-24"
         >
-          Milestones <span className="text-[#ED7125]">Unlocked</span>
+          <LocalizedHighlighted
+            textBn="সফলতার প্রতিটি ধাপ"
+            textEn="Milestones Unlocked"
+            highlightBn="ধাপ"
+            highlightEn="Unlocked"
+            highlightClassName="text-[#ED7125]"
+          />
         </h1>
         <div className="z-20 relative w-full lg:w-[85%] 2xl:w-[70%] mx-auto lg:min-h-[500px] grid grid-cols-1 lg:grid-cols-2">
           {/* Image Section aligned to right */}
@@ -62,10 +70,10 @@ function AwardSection() {
                   {/* info */}
                   <div className="text-[#434343] p-2 2xl:p-4 border-b-2 border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px] font-bold">
-                      100%
+                      <LocalizedText en="100%" bn="১০০%" />
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Settlement rate
+                      <LocalizedText en="Settlement Rate" bn="সেটেলমেন্ট রেট" />
                     </div>
                   </div>
                 </div>
@@ -87,10 +95,10 @@ function AwardSection() {
                   {/* info */}
                   <div className="text-[#434343] p-2 2xl:p-4 border-b-2 border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      112
+                      <LocalizedText en="112" bn="১১২" />
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Claim settled
+                      <LocalizedText en="Claim Settled" bn="ক্লেম সেটলড" />
                     </div>
                   </div>
                 </div>
@@ -112,10 +120,10 @@ function AwardSection() {
                   {/* info */}
                   <div className="text-[#434343] p-2 2xl:p-4 border-t-2 border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      235
+                      <LocalizedText en="235" bn="২৩৫" />
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Satisfied Customers
+                      <LocalizedText en="Satisfied Customers" bn="স্যাটিসফাইড কাস্টমার" />
                     </div>
                   </div>
                 </div>
@@ -137,10 +145,10 @@ function AwardSection() {
                   {/* info */}
                   <div className="text-[#434343] p-2 2xl:p-4 border-t-2 border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      1K +
+                      <LocalizedText en="1K +" bn="১কে  +" />
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      Families Insured
+                      <LocalizedText en="Families Insured" bn="সুরক্ষিত পরিবার" />
                     </div>
                   </div>
                 </div>
@@ -161,13 +169,20 @@ function AwardSection() {
               "
               >
                 <div>
-                  <h1 className="global-h2 font-bold">Grand Launch Announcement</h1>
-                  <h5 className="global-h4 font-light">December 1, 2024</h5>
+                  <h1 className="global-h2 font-bold">
+                    <LocalizedText en="Grand Launch Announcement" bn="শান্তা লাইফের শুভযাত্রা" />
+                  </h1>
+                  <h5 className="global-h4 font-light">
+                    <LocalizedText en="December 1, 2024" bn="ডিসেম্বর ১, ২০২৪" />
+                  </h5>
                 </div>
                 <p className="global-p2 font-light">
-                  The ceremony was graced by key leaders including CEO Nafis A. Ahmed and directors
+                  <LocalizedText
+                    en={`The ceremony was graced by key leaders including CEO Nafis A. Ahmed and directors
                   Saif Khondoker, Arif Khan, Raiven Hasan, Anisul Haque, along with other senior
-                  officials
+                  officials.`}
+                    bn={`উদ্বোধনী অনুষ্ঠানে সিইও নাফিস আকতার আহমেদ, পরিচালক সাইফ খন্দকার, আরিফ খান, রাইভেন হাসান, আনিসুল হক ও অন্যান্য সিনিয়র কর্মকর্তারা উপস্থিত ছিলেন।`}
+                  />
                 </p>
               </div>
             </div>

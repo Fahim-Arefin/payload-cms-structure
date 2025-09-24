@@ -6,6 +6,7 @@ import ResourceCard from './ResourceCard'
 import { CareerResourceDataType } from '@/types'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import Autoplay from 'embla-carousel-autoplay'
+import LocalizedText from '../shared/LocalizedText'
 
 type CareerResourceSectionProps = {
   data: CareerResourceDataType[]
@@ -74,11 +75,15 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
       {/* Section Title */}
       <div className="mb-7 sm:mb-10 relative z-10 w-full max-w-[1250px]">
         <h3 className="text-[#434342] font-light text-[16px] md:text-[20px] xl:text-[24px]">
-          HEAR FROM
+          <LocalizedText en="HEAR FROM" bn="তাদের গল্পে" />
         </h3>
         <div className="flex items-center gap-2 mt-[-4px]">
-          <span className="text-[#434342] font-semibold global-h1">OUR</span>
-          <span className="text-[#ED7125] font-semibold global-h1">RESOURCES</span>
+          <span className="text-[#434342] font-semibold global-h1">
+            <LocalizedText en="OUR" bn="আমাদের" />
+          </span>
+          <span className="text-[#ED7125] font-semibold global-h1">
+            <LocalizedText en="RESOURCES" bn="যাত্রা" />
+          </span>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import { EligibilityCardProps } from '@/types'
 import Image from 'next/image'
 import React from 'react'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: EligibilityCardProps
@@ -9,17 +10,26 @@ type Props = {
 export const EligibilityCard = ({ data }: Props) => {
   const {
     title,
+    titleBN,
     icon,
     mobileIcon,
     bgImage,
     entryMin,
+    entryMinBN,
     entryMinLabel,
+    entryMinLabelBN,
     entryMax,
+    entryMaxBN,
     entryMaxLabel,
+    entryMaxLabelBN,
     policyTerm,
+    policyTermBN,
     policyTermLabel,
+    policyTermLabelBN,
     maturityAge,
+    maturityAgeBN,
     maturityAgeLabel,
+    maturityAgeLabelBN,
   } = data
   return (
     <div
@@ -32,7 +42,9 @@ export const EligibilityCard = ({ data }: Props) => {
         <div className="relative w-14 h-14">
           <Image fill src={icon} alt={title} className="" />
         </div>
-        <p className="uppercase text-[#434343] font-bold global-p1 mt-2">{title}</p>
+        <p className="uppercase text-[#434343] font-bold global-p1 mt-2">
+          <LocalizedText en={title} bn={titleBN} />
+        </p>
       </div>
       <div className="flex flex-col justify-center items-center space-y-2 my-4">
         {/* Entry Age */}
@@ -45,18 +57,32 @@ export const EligibilityCard = ({ data }: Props) => {
             backdropFilter: 'blur(20px)',
           }}
         >
-          <div className="text-white global-p2 uppercase mb-1 font-light">Entry Age</div>
+          <div className="text-white global-p2 uppercase mb-1 font-light">
+            <LocalizedText en="Entry Age" bn="প্রবেশের বয়স" />
+          </div>
           <div className="flex justify-between w-full px-2 text-white">
             <div className="flex flex-col items-center">
-              <p className="text-sm font-light text-[#FCF4EB]">Minimum</p>
-              <p className="global-span font-bold">{entryMin}</p>
-              <p className="text-base -mt-2 font-light">{entryMinLabel}</p>
+              <p className="text-sm font-light text-[#FCF4EB]">
+                <LocalizedText en="Minimum" bn="সর্বনিম্ন" />
+              </p>
+              <p className="global-span font-bold">
+                <LocalizedText en={entryMin} bn={entryMinBN} />
+              </p>
+              <p className="text-base -mt-2 font-light">
+                <LocalizedText en={entryMinLabel} bn={entryMinLabelBN} />
+              </p>
             </div>
 
             <div className="flex flex-col items-center">
-              <p className="text-sm font-light">Maximum</p>
-              <p className="global-span font-bold">{entryMax}</p>
-              <p className="text-base -mt-2 font-light">{entryMaxLabel}</p>
+              <p className="text-sm font-light">
+                <LocalizedText en="Maximum" bn="সর্বোচ্চ" />
+              </p>
+              <p className="global-span font-bold">
+                <LocalizedText en={entryMax} bn={entryMaxBN} />
+              </p>
+              <p className="text-base -mt-2 font-light">
+                <LocalizedText en={entryMaxLabel} bn={entryMaxLabelBN} />
+              </p>
             </div>
           </div>
         </div>
@@ -70,9 +96,15 @@ export const EligibilityCard = ({ data }: Props) => {
             backdropFilter: 'blur(20px)',
           }}
         >
-          <div className="text-white global-p2 uppercase mb-1 font-light">Policy Term</div>
+          <div className="text-white global-p2 uppercase mb-1 font-light">
+            <LocalizedText en="Policy Term" bn="বীমার মেয়াদ" />
+          </div>
           <div className="text-white font-bold global-span">
-            {policyTerm} <span className="global-span font-light">{policyTermLabel}</span>
+            <LocalizedText en={policyTerm} bn={policyTermBN} />
+            <span className="global-span font-light">
+              {' '}
+              <LocalizedText en={policyTermLabel} bn={policyTermLabelBN} />
+            </span>
           </div>
         </div>
         {/* Maturity Age */}
@@ -85,9 +117,15 @@ export const EligibilityCard = ({ data }: Props) => {
             backdropFilter: 'blur(20px)',
           }}
         >
-          <div className="text-white global-p2 uppercase mb-1 font-light">Maturity Age</div>
+          <div className="text-white global-p2 uppercase mb-1 font-light">
+            <LocalizedText en="Maturity Age" bn="পলিসি মেয়াদপূর্তিতে বয়স" />
+          </div>
           <div className="text-white font-bold global-span">
-            {maturityAge} <span className="global-span font-light">{maturityAgeLabel}</span>
+            <LocalizedText en={maturityAge} bn={maturityAgeBN} />
+            <span className="global-span font-light">
+              {' '}
+              <LocalizedText en={maturityAgeLabel} bn={maturityAgeLabelBN} />
+            </span>
           </div>
         </div>
       </div>

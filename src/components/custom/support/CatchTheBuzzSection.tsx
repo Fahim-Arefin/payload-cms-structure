@@ -6,6 +6,7 @@ import { Search } from 'lucide-react'
 import { useState } from 'react'
 import AllNewsContainer from './AllNewsContainer'
 import SupportOVCSection from './SupportOVCSection'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 
 type Props = {}
 
@@ -28,7 +29,13 @@ function CatchTheBuzzSection({}: Props) {
           leading-6 md:leading-7 xl:leading-[35px] 2xl:leading-[45px] 
           uppercase font-semibold lg:font-normal"
           >
-            See What's on <span className="text-[#ED7125]">The Highlights</span>
+            <LocalizedHighlighted
+              textBn="শান্তা লাইফ হাইলাইটস"
+              textEn={`See What's on The Highlights`}
+              highlightEn={`The Highlights`}
+              highlightBn={`হাইলাইটস`}
+              highlightClassName="text-[#ED7125]"
+            />
           </h3>
         </div>
         <div className="relative w-[130px] md:w-[340px]">

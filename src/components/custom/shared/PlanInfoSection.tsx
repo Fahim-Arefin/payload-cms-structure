@@ -1,6 +1,7 @@
 import { PlanInfoDataType } from '@/types'
 import Image from 'next/image'
 import React from 'react'
+import LocalizedText from './LocalizedText'
 
 type Props = {
   bgColor?: string
@@ -34,7 +35,10 @@ function PlanInfoSection({ bgColor, data }: Props) {
             className="global-p1 font-light
              leading-4 md:leading-5 lg:leading-8 xl:leading-10"
           >
-            {data?.description}
+            <LocalizedText
+              en={data?.description ? data?.description : ''}
+              bn={data?.descriptionBN ? data?.descriptionBN : data?.description}
+            />
           </p>
         </div>
       </div>

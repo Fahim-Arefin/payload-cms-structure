@@ -105,7 +105,7 @@ function WhyChooseUsSection() {
                       <LocalizedText en="100%" bn="১০০%" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      <LocalizedText en="Settlement Rate" bn="নিষ্পত্তির হার" />
+                      <LocalizedText en="Settlement Rate" bn="সেটেলমেন্ট রেট" />
                     </div>
                   </div>
                 </div>
@@ -129,7 +129,7 @@ function WhyChooseUsSection() {
                       <LocalizedText en="112" bn="১১২" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      <LocalizedText en="Claim Settled" bn="দাবি নিষ্পত্তি হয়েছে।" />
+                      <LocalizedText en="Claim Settled" bn="ক্লেম সেটলড" />
                     </div>
                   </div>
                 </div>
@@ -153,7 +153,7 @@ function WhyChooseUsSection() {
                       <LocalizedText en="235" bn="২৩৫" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      <LocalizedText en="Satisfied Customers" bn="সন্তুষ্ট গ্রাহকরা" />
+                      <LocalizedText en="Satisfied Customers" bn="স্যাটিসফাইড কাস্টমার" />
                     </div>
                   </div>
                 </div>
@@ -178,7 +178,7 @@ function WhyChooseUsSection() {
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
                       
-                      <LocalizedText en="Families Insured" bn="বীমাকৃত পরিবার" />
+                      <LocalizedText en="Families Insured" bn="সুরক্ষিত পরিবার" />
                     </div>
                   </div>
                 </div>

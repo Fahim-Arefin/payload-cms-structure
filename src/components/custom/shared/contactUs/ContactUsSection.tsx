@@ -18,6 +18,9 @@ import GlobalButton from '../GlobalButton'
 import Image from 'next/image'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
+import LocalizedText from '../LocalizedText'
+import LocalizedString from '../LocalizedString'
 
 function ContactUsSection() {
   const [sendButtonText, setSendButtonText] = useState('Send Message')
@@ -29,6 +32,9 @@ function ContactUsSection() {
   const [emailError, setEmailError] = useState('')
   const [phoneError, setPhoneError] = useState('')
   const [agreeTerms, setAgreeTerms] = useState(false)
+
+  const lang = useSSRLanguage()
+  const L = (en: string, bn: string) => (lang === 'en' ? en : bn)
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -60,6 +66,13 @@ function ContactUsSection() {
           setSendButtonText('Send Message')
         }, 1500)
       })
+  }
+
+  // what to display on buttons based on language
+  const renderBtnLabel = () => {
+    if (sendButtonText === 'Sending...') return L('Sending...', 'Sending...')
+    if (sendButtonText === 'Message Sent') return L('Message Sent', 'Message Sent')
+    return L('Send Message', 'জমা দিন')
   }
   return (
     <div
@@ -177,12 +190,14 @@ function ContactUsSection() {
           xl:py-8 2xl:px-6 
           "
         >
-          <h3 className="global-h2">Have a Question?</h3>
+          <h3 className="global-h2">
+            <LocalizedText en="Have a Question?" bn="প্রশ্ন করুন" />
+          </h3>
           <h1
             className="global-h1 font-medium
           lg:mb-6 xl:mb-6 2xl:mb-8"
           >
-            Ask Us!
+            <LocalizedText en="Ask Us!" bn="আমাদের" />
           </h1>
 
           <form
@@ -192,7 +207,9 @@ function ContactUsSection() {
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col">
-                <label className="text-lg text-gray-800 2xl:mb-1">First Name</label>
+                <label className="text-lg text-gray-800 2xl:mb-1">
+                  <LocalizedText en="First Name" bn="ফার্স্ট নাম" />
+                </label>
                 <Input
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -202,7 +219,9 @@ function ContactUsSection() {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-lg text-gray-800 2xl:mb-1">Last Name</label>
+                <label className="text-lg text-gray-800 2xl:mb-1">
+                  <LocalizedText en="Last Name" bn="লাস্ট নাম" />
+                </label>
                 <Input
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
@@ -216,7 +235,9 @@ function ContactUsSection() {
             {/* Contact Fields */}
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col">
-                <label className="text-lg text-gray-800 2xl:mb-1">Email</label>
+                <label className="text-lg text-gray-800 2xl:mb-1">
+                  <LocalizedText en="Email" bn="ইমেইল" />
+                </label>
                 <Input
                   value={email}
                   onChange={(e) => {
@@ -238,7 +259,9 @@ function ContactUsSection() {
                 {emailError && <p className="text-red-500 text-xs pl-1">{emailError}</p>}
               </div>
               <div className="flex flex-col">
-                <label className="text-lg text-gray-800 2xl:mb-1">Phone Number</label>
+                <label className="text-lg text-gray-800 2xl:mb-1">
+                  <LocalizedText en="Phone Number" bn="ফোন নাম্বার" />
+                </label>
                 <Input
                   value={phone}
                   onChange={(e) => {
@@ -266,7 +289,9 @@ function ContactUsSection() {
 
             {/* Message Field */}
             <div className="flex flex-col">
-              <label className="text-lg text-gray-800 2xl:mb-1">Message</label>
+              <label className="text-lg text-gray-800 2xl:mb-1">
+                <LocalizedText en="Message" bn="মেসেজ" />
+              </label>
               <Textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -339,7 +364,9 @@ function ContactUsSection() {
                   <SendHorizontal />
                 )}
 
-                <span className="text-sm">{sendButtonText}</span>
+                <span className="text-sm">
+                  <LocalizedString en={sendButtonText} bn="জমা দিন " />
+                </span>
               </GlobalButton>
             </div>
           </form>
@@ -351,8 +378,12 @@ function ContactUsSection() {
         <div></div>
         <div className="flex flex-col justify-center items-center text-center space-y-3 md:space-y-5">
           <div>
-            <h3 className="global-h3">Have a Question?</h3>
-            <h1 className="global-h1 font-medium">Ask Us!</h1>
+            <h3 className="global-h3">
+              <LocalizedText en="Have a Question?" bn="প্রশ্ন করুন" />
+            </h3>
+            <h1 className="global-h1 font-medium">
+              <LocalizedText en="Ask Us!" bn="আমাদের" />
+            </h1>
           </div>
 
           <Dialog>
@@ -387,7 +418,9 @@ function ContactUsSection() {
                   {/* Name Fields */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col">
-                      <label className="text-sm">First Name</label>
+                      <label className="text-sm">
+                        <LocalizedText en="First Name" bn="ফার্স্ট নাম" />
+                      </label>
                       <Input
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
@@ -395,7 +428,9 @@ function ContactUsSection() {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <label className="text-sm">Last Name</label>
+                      <label className="text-sm">
+                        <LocalizedText en="Last Name" bn="লাস্ট নাম" />
+                      </label>
                       <Input
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
@@ -407,7 +442,9 @@ function ContactUsSection() {
                   {/* Contact Fields */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col">
-                      <label className="text-sm">Email</label>
+                      <label className="text-sm">
+                        <LocalizedText en="Email" bn="ইমেইল" />
+                      </label>
                       <Input
                         value={email}
                         onChange={(e) => {
@@ -426,7 +463,9 @@ function ContactUsSection() {
                       {emailError && <p className="text-red-500 text-xs pl-1">{emailError}</p>}
                     </div>
                     <div className="flex flex-col">
-                      <label className="text-sm">Phone</label>
+                      <label className="text-sm">
+                        <LocalizedText en="Phone Number" bn="ফোন নাম্বার" />
+                      </label>
                       <Input
                         value={phone}
                         onChange={(e) => {
@@ -452,7 +491,9 @@ function ContactUsSection() {
 
                   {/* Message Field */}
                   <div className="flex flex-col">
-                    <label className="text-sm">Message</label>
+                    <label className="text-sm">
+                      <LocalizedText en="Message" bn="মেসেজ" />
+                    </label>
                     <Textarea
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
@@ -517,7 +558,9 @@ function ContactUsSection() {
                         <SendHorizontal style={{ width: '12px', height: '12px' }} />
                       )}
 
-                      <span>{sendButtonText}</span>
+                      <span>
+                        <LocalizedString en={sendButtonText} bn="জমা দিন " />
+                      </span>
                     </Button>
                   </div>
                 </form>

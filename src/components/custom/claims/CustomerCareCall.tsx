@@ -1,5 +1,6 @@
 'use client'
 
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 // import { useState } from 'react'
 // import { Button } from '@/components/ui/button'
 // import { Input } from '@/components/ui/input'
@@ -7,12 +8,21 @@
 // import { Loader, MailCheck, SendHorizontal, X } from 'lucide-react' // ShadCN uses lucide-react for icons
 import GlobalButton from '../shared/GlobalButton'
 
+// helper: EN → BN digits
+function toBengaliNumber(num: string) {
+  const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯']
+  return num.replace(/\d/g, (d) => bnDigits[parseInt(d, 10)])
+}
+
 export function ContactComponent() {
   // const [showPopover, setShowPopover] = useState(false)
   // const [userPhone, setUserPhone] = useState('')
   // const [confirmButtonText, setConfirmButtonText] = useState('Confirm')
 
   // console.log('show', showPopover)
+  const lang = useSSRLanguage()
+  const phone = '09610889900'
+  const phoneBn = toBengaliNumber(phone)
 
   const handleCallClick = () => {
     window.location.href = 'tel:09610889900'
@@ -53,9 +63,24 @@ export function ContactComponent() {
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 relative ">
-      <p className="text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
-        For any further queries please contact
-      </p>
+      <h4 className="text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
+        {lang === 'en' ? (
+          <>
+            For any further queries please contact{' '}
+            <a href={`tel:${phone}`} className="text-[#9C8639]">
+              {phone}
+            </a>
+          </>
+        ) : (
+          <>
+            যে কোনো তথ্যের জন্য অনুগ্রহ করে{' '}
+            <a href={`tel:${phone}`} className="text-[#9C8639]">
+              {phoneBn}
+            </a>{' '}
+            নম্বরে যোগাযোগ করুন।
+          </>
+        )}
+      </h4>
       <GlobalButton
         variant="outline"
         className="flex items-center gap-2 bg-yellow-800 text-white hover:bg-yellow-700 border-yellow-900

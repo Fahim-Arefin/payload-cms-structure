@@ -48,7 +48,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
             {/* {slide.title ? slide.title : ''} */}
             <LocalizedText
               en={slide?.title ? slide.title : ''}
-              bn={slide?.titleBN ? slide?.titleBN : ''}
+              bn={slide?.titleBN ? slide?.titleBN : slide?.title}
             />
           </h1>
 
@@ -56,13 +56,13 @@ const HeroItem = ({ slide, top, position }: Props) => {
             {/* {slide.subtitle ? slide.subtitle : ''} */}
             <LocalizedText
               en={slide?.subtitle ? slide.subtitle : ''}
-              bn={slide?.subtitleBN ? slide.subtitleBN : ''}
+              bn={slide?.subtitleBN ? slide.subtitleBN : slide?.subtitle}
             />
           </h1>
         </div>
 
         {/* description */}
-      {/* {slide?.description && ( */}
+      {slide?.description && (
           <>
             <div
               className="
@@ -79,13 +79,14 @@ const HeroItem = ({ slide, top, position }: Props) => {
                 ))} */}
                 <LocalizedText
                   en={slide?.description ? slide.description : ''}
-                  bn={slide?.descriptionBN ? slide?.descriptionBN : ''}
+                  bn={slide?.descriptionBN ? slide?.descriptionBN : slide?.description}
                 /> 
               
               </div>
             </div>
 
             {/* description style after lg screen */}
+          
             <div
               className="
               hidden lg:block
@@ -99,12 +100,13 @@ const HeroItem = ({ slide, top, position }: Props) => {
               <div className="text-white">
                 <LocalizedText
                   en={slide?.description ? slide.description : ''}
-                  bn={slide?.descriptionBN ? slide?.descriptionBN : ''}
+                  bn={slide?.descriptionBN ? slide?.descriptionBN : slide?.description}
                 /> 
               </div>
             </div>
+            
           </>
-        {/* )} */}
+        )}
 
         {/* Action Buttons */}
         {(slide?.showPurchaseButton || slide?.showCallButton) && (

@@ -3,6 +3,7 @@ import { AllPlantDataType } from '@/types'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   data: AllPlantDataType
@@ -49,11 +50,14 @@ function AllPlanCard({ data, blur }: Props) {
           <div
             className={`text-[20px] xl:text-[28px] 2xl:text-[32px]  uppercase mx-auto lg:mx-0 text-center lg:text-start ${data?.biggerTitle ? 'font-light' : 'font-medium'}`}
           >
-            {data?.title}
+            <LocalizedText en={data?.title} bn={data?.titleBN} />
             <br></br>
             {data?.biggerTitle && (
               <p className="text-[18px] lg:text-[17px] xl:text-[20px] 2xl:text-[28px] font-medium uppercase mx-auto lg:mx-0 text-center lg:text-start">
-                {data?.biggerTitle}
+                <LocalizedText
+                  en={data?.biggerTitle}
+                  bn={data?.biggerTitleBN ? data?.biggerTitleBN : data?.biggerTitle}
+                />
               </p>
             )}
           </div>
@@ -68,7 +72,8 @@ function AllPlanCard({ data, blur }: Props) {
               (data.description.split(' ').length > 12
                 ? data.description.split(' ').slice(0, 12).join(' ') + '...'
                 : data.description)} */}
-                {data?.description}
+
+            <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
           <Button
             variant="link"
@@ -76,7 +81,9 @@ function AllPlanCard({ data, blur }: Props) {
            global-p2 p-0 "
           >
             <div className="flex space-x-1 items-center ">
-              <span>Explore</span>
+              <span>
+                <LocalizedText en="Explore" bn="এক্সপ্লোর" />
+              </span>
               <ArrowUpRight />
             </div>
           </Button>

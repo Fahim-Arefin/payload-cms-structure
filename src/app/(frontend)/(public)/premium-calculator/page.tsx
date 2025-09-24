@@ -6,6 +6,7 @@ import CallNowButton from '@/components/custom/shared/CallNowButton'
 import GlobalButton from '@/components/custom/shared/GlobalButton'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
+import LocalizedString from '@/components/custom/shared/LocalizedString'
 
 type Props = {}
 
@@ -13,8 +14,10 @@ const page: FC<Props> = ({}) => {
   const heroSlides = [
     {
       title: 'Premium Calculator',
+      titleBN: 'প্রিমিয়াম ক্যালকুলেটর',
       subtitle: '',
       description: 'Future-Proof Me',
+      descriptionBN: 'ভবিষ্যতের প্রমাণ',
       image: '/assets/premCalculator.png',
     },
   ]
@@ -48,7 +51,9 @@ const page: FC<Props> = ({}) => {
               className="cursor-not-allowed"
               text="Purchase"
               size="large"
-            />
+            >
+              <LocalizedString en={`Purchase`} bn={`কিনুন`} />
+            </GlobalButton>
           </ToolTip>
 
           <div className="flex items-center space-x-2 text-white 2xl:space-x-4">
@@ -57,7 +62,7 @@ const page: FC<Props> = ({}) => {
         </div>
       </HeroSection>
 
-       <section id="calculator" >
+      <section id="calculator">
         <CalculatorSection />
       </section>
 

@@ -6,6 +6,8 @@ import Link from 'next/link'
 import GlobalTabButtons from '../GlobalTabButtons'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
+import LocalizedText from '../LocalizedText'
+import LocalizedString from '../LocalizedString'
 
 type Props = {
   bgColor?: string
@@ -82,14 +84,16 @@ function PremiumEligibilitySection({ bgColor = '#FFFFFF', align = 'left', data }
           {/* heading */}
           <div>
             <h3 className="global-p1 md:global-h4 lg:global-p1 text-[#3A3A3A] uppercase font-light">
-              {data?.title}
+              <LocalizedText en={data?.title} bn={data?.titleBN} />
             </h3>
             <div className="flex space-x-1">
-              <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">{data?.subTitle}</h1>
+              <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
+                <LocalizedText en={data?.subTitle} bn={data?.subTitleBN} />
+              </h1>
               {/* <span className="global-h1 uppercase text-[#3A3A3A] font-medium"> - </span> */}
               <h1 className="global-h1 uppercase text-[#ED7125] font-medium">
                 {' '}
-                {data?.smallTitle}
+                <LocalizedText en={data?.smallTitle} bn={data?.smallTitleBN} />
               </h1>
             </div>
           </div>
@@ -110,14 +114,17 @@ function PremiumEligibilitySection({ bgColor = '#FFFFFF', align = 'left', data }
                 <Image fill src={eachItem?.image} alt="icons" />
               </div>
               <div className="text-[12px] md:text-[14px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px] text-[#434343] font-semibold ">
-                {eachItem?.description}
+                
+                 <LocalizedText en={eachItem?.description} bn={eachItem?.descriptionBN} />
               </div>
             </div>
           ))}
           {/* button */}
           <div className="flex gap-4 lg:gap-6 ">
             <Link href="/premium-calculator">
-              <GlobalButton variant="primary" text="Calculate Premium" />
+              <GlobalButton variant="primary" text="Calculate Premium">
+                <LocalizedString en='Calculate Premium' bn='ক্যালকুলেট প্রিমিয়াম'/>
+              </GlobalButton>
             </Link>
             {/* <div className="flex justify-center mt-2">
               <Link

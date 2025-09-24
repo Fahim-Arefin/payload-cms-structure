@@ -1,6 +1,7 @@
 import { DirectorProfileDataType } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: DirectorProfileDataType
@@ -66,13 +67,13 @@ function DirectorProfile({ data }: Props) {
             className="text-[14px] xl:text-[16px] 2xl:text-[18px]
          text-[#434342] group-hover:text-white capitalize font-medium text-center"
           >
-            {data?.name}
+            <LocalizedText en={data?.name} bn={data?.nameBN} />
           </p>
           <p
             className="text-[12px] xl:text-[14px] 2xl:text-[16px]
          text-[#9C8639] group-hover:text-white uppercase font-medium text-center"
           >
-            {data?.title}
+            <LocalizedText en={data?.title} bn={data?.titleBN} />
           </p>
         </div>
       </div>

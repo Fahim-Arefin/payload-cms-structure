@@ -13,15 +13,21 @@ export type HeroContentType = {
 
 export type ShantaIntroContentType = {
   heading: string
+  headingBN?: string
   subheading: string
+  subheadingBN?: string
   paragraphTitle: string
+  paragraphTitleBN?: string
   image: string
   mobileImage?: string
   paragraph: string
+  paragraphBN?: string
 }
 export type VissionMissionContentType = {
   visionDescription: string
+  visionDescriptionBN?: string
   missionDescription: string
+  missionDescriptionBN?: string
   bgImage: string
   bgMobileImage?: string
 }
@@ -32,26 +38,34 @@ export type AllAboutCardDataType = {
   hoverImage: string
   hoverMobileImage?: string
   title: string
-  description?: { __html: string }
+  titleBN?: string
+  description?: { __html: string; __htmlBN?: string }
 }
 
 export type LicensedInfoType = {
   licensedImage: string
   licensedMobileImage?: string
   licensedDate: string
+  licensedDateBN?: string
   launchedImage: string
   launchedMobileImage?: string
   launchedDate: string
+  launchedDateBN?: string
 }
 
 export type DirectorCardDataType = {
   image: string
   mobileImage?: string
   name?: string
+  nameBN?: string
   designation?: string
+  designationBN?: string
   title: string
+  titleBN?: string
   subtitle: string
+  subtitleBN?: string
   description: string
+  descriptionBN?: string
   link: string
 }
 export type DirectorProfileDataType = {
@@ -59,14 +73,18 @@ export type DirectorProfileDataType = {
   image: string
   mobileImage?: string
   name: string
+  nameBN?: string
   title: string
+  titleBN?: string
 }
 export type AllOfThemDataType = {
   id: number
   image: string
   mobileImage?: string
   name: string
+  nameBN?: string
   title: string
+  titleBN?: string
 }
 
 export type FootPrintDataType = {
@@ -79,8 +97,11 @@ export type FootPrintDataType = {
 
 export type AllPlantDataType = {
   title: string
+  titleBN?: string
   biggerTitle?: string
+  biggerTitleBN?: string
   description: string
+  descriptionBN?: string
   link: string
   image: string
   mobileImage?: string
@@ -100,17 +121,22 @@ export type PlanInfoDataType = {
   image: string
   mobileImage?: string
   description: string
+  descriptionBN?: string
 }
 
 export type EndowmentDataType = {
   title: string
+  titleBN?: string
   subtitle: string
+  subtitleBN?: string
   description: string
+  descriptionBN?: string
   image: string
   mobileImage: string
   link: string
   feature: {
     name: string
+    nameBN?: string
     image: string
   }[]
 }
@@ -138,6 +164,8 @@ export type InsuranceDataType = {
 export type OurStoryDataType = {
   title: string
   subtitle: string
+  titleBN?: string
+  subtitleBN?: string
   mainImage: string
   mainMobileImage: string
   insuranceCardData: InsuranceCardDataType[]
@@ -160,13 +188,17 @@ export type OnboardingRoleType = {
 export type SuitabilityCardType = {
   img: string
   title: string
+  titleBN?: string
   description: string
+  descriptionBN?: string
 }
 
 export type VisionCardType = {
   img: string
   title: string
+  titleBN?: string
   points: Array<string>
+  pointsBN?: Array<string>
 }
 
 export type WayWeAreDataType = {
@@ -183,11 +215,14 @@ export type PartnerType = {
 
 export type BankingFacilitiesDataType = {
   title: string
+  titleBN?: string
   coloredTitle: string
+  coloredTitleBN?: string
   bancassuranceProductsImage: string
   bancassuranceProducts: {
     image: string
     description: string
+    descriptionBN?: string
   }[]
 }
 
@@ -204,6 +239,7 @@ export type MicroinsuranceDataType = {
 export type OfferDataType = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgImage: string
   link?: string
+  descriptionBN?: string
 }
 
 export type OfferDataType2 = Pick<AllPlantDataType, 'description' | 'image'> & {
@@ -211,6 +247,8 @@ export type OfferDataType2 = Pick<AllPlantDataType, 'description' | 'image'> & {
   bgMobileImage?: string
   mobileImage?: string
   title: string
+  titleBN?: string
+  descriptionBN?: string
 }
 
 export type PlanData = {
@@ -225,19 +263,25 @@ export type AllNewsDataType = {
 
 export type CareerCard = {
   title: string
+  titleBN?: string
   description: string
+  descriptionBN?: string
 }
 
 export type ProtectionDataType = {
   title: string
+  titleBN?: string
   subTitle: string
+  subTitleBN?: string
   smallTitle: string
+  smallTitleBN?: string
   bgImage: string
   bgMobileImage: string
   item: {
     image: string
     mobileImage?: string
     description: string
+    descriptionBN?: string
   }[]
 }
 
@@ -247,14 +291,18 @@ export type PayPremiumDataType = {
   item: {
     // image: string
     descriptionContent: string
+    descriptionContentBN?: string
   }[]
 }
 
 export type Directors = {
   id: number
   title: string
+  titleBN?: string
   designation: string
+  designationBN?: string
   description: string
+  descriptionBN?: string
   image: string
   mobileImage?: string
 }
@@ -262,8 +310,11 @@ export type Directors = {
 export type Leaders = {
   id: number
   title: string
+  titleBN?: string
   designation: string
+  designationBN?: string
   description: string
+  descriptionBN?: string
   image: string
   mobileImage?: string
 }
@@ -282,8 +333,10 @@ type TabContent = {
   office_location_Label: string
   office_location: string
   office_address: string
+  office_addressBN?: string
   office_email: string
   office_phone: string
+  office_phoneBN?: string
   office_name?: string
   discount_details?: string
 }
@@ -294,28 +347,39 @@ export type TabDataType = {
 
 export type EligibilityCardProps = {
   title: string
+  titleBN?: string
   icon: string // icon path
   mobileIcon?: string // icon path
   bgImage?: string // background image path
   entryMin: string
+  entryMinBN?: string
   entryMinLabel: string
+  entryMinLabelBN?: string
   entryMax: string
+  entryMaxBN?: string
   entryMaxLabel: string
+  entryMaxLabelBN?: string
   policyTerm: string
+  policyTermBN?: string
   policyTermLabel: string
+  policyTermLabelBN?: string
   maturityAge: string
+  maturityAgeBN?: string
   maturityAgeLabel: string
+  maturityAgeLabelBN?: string
 }
 
 export type PaymentTabDataType = {
   bkash: {
     item: {
       descriptionContent: string
+      descriptionBN?: string
     }[]
   }
   rocket: {
     item: {
       descriptionContent: string
+      descriptionBN?: string
     }[]
   }
   image: string
@@ -324,12 +388,16 @@ export type PaymentTabDataType = {
 
 export type BenefitSliderSectionData = {
   title: string
+  titleBN?: string
   coloredTitle: string
+  coloredTitleBN?: string
   description: string
+  descriptionBN?: string
   item: {
     bgImage: string
     icon: string
     description: string
+    descriptionBN?: string
     rateText?: string
   }[]
 }

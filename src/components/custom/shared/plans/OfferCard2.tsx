@@ -3,6 +3,7 @@ import { OfferDataType2 } from '@/types'
 import { ArrowUpRight } from 'lucide-react'
 import ToolTip from '../ToolTip'
 import Image from 'next/image'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   data: OfferDataType2
@@ -51,7 +52,8 @@ function OfferCard2({ data }: Props) {
           className="text-white group-hover:text-white  transition-colors duration-500 uppercase
         text-[12px] md:text-[13px] lg:text-[14px] xl:text-[18px] 2xl:text-[20px]"
         >
-          {data?.title}
+          
+          <LocalizedText en={data?.title} bn={data?.titleBN}/>
         </p>
 
         <div
@@ -65,7 +67,8 @@ function OfferCard2({ data }: Props) {
             className="text-white group-hover:text-white  transition-colors duration-500 
         text-[10px] md:text-[12px] lg:text-[12px] xl:text-[14px]"
           >
-            {data?.description}
+           
+            <LocalizedText en={data?.description} bn={data?.descriptionBN}/>
           </p>
           {/* <div
             className="cursor-pointer text-[10px] md:text-[12px] text-[#ED7125] underline underline-offset-4 

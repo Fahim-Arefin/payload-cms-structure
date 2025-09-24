@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import ToolTip from './ToolTip'
 import Image from 'next/image'
+import LocalizedText from './LocalizedText'
 
 function Footer() {
   const shurjoPayData = [
@@ -145,7 +146,10 @@ function Footer() {
                 className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider hover:text-blue-300 cursor-pointer transition-all duration-100"
               >
                 <div className="">
-                  Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
+                  <LocalizedText
+                    en="Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208"
+                    bn="শান্তা ওয়েস্টার্ন টাওয়ার, লেভেল ১০, ১৮৬ বীর উত্তম মীর শওকত সড়ক, ঢাকা ১২০৮"
+                  />
                 </div>
               </Link>
             </div>
@@ -172,7 +176,10 @@ function Footer() {
                 className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider hover:text-blue-300 cursor-pointer transition-all duration-100"
               >
                 <div className="">
-                  Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
+                  <LocalizedText
+                    en="Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208"
+                    bn="শান্তা ওয়েস্টার্ন টাওয়ার, লেভেল ১০, ১৮৬ বীর উত্তম মীর শওকত সড়ক, ঢাকা ১২০৮"
+                  />
                 </div>
               </Link>
             </div>
@@ -199,7 +206,10 @@ function Footer() {
                 className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider hover:text-blue-300 cursor-pointer transition-all duration-100"
               >
                 <div className="">
-                  Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
+                  <LocalizedText
+                    en="Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208"
+                    bn="শান্তা ওয়েস্টার্ন টাওয়ার, লেভেল ১০, ১৮৬ বীর উত্তম মীর শওকত সড়ক, ঢাকা ১২০৮"
+                  />
                 </div>
               </Link>
             </div>
@@ -226,7 +236,10 @@ function Footer() {
                 className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider hover:text-blue-300 cursor-pointer transition-all duration-100"
               >
                 <div className="">
-                  Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208
+                  <LocalizedText
+                    en="Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208"
+                    bn="শান্তা ওয়েস্টার্ন টাওয়ার, লেভেল ১০, ১৮৬ বীর উত্তম মীর শওকত সড়ক, ঢাকা ১২০৮"
+                  />
                 </div>
               </Link>
             </div>
@@ -253,10 +266,15 @@ function Footer() {
               <div className="text-[11px] md:text-xs 2xl:text-sm md:tracking-wider">
                 <div className="">
                   <a href="tel:+8809610889900" className="hover:text-blue-300 transition-colors">
-                    +88 09610889900
+                    <LocalizedText en="+88 09610889900" bn="+৮৮ ০৯৬১০৮৮৯৯০০" />
                   </a>
                 </div>
-                <div className="">(10 am-6 pm, Sunday-Thursday)</div>
+                <div className="">
+                  <LocalizedText
+                    en="(10 am-6 pm, Sunday-Thursday)"
+                    bn="(সকাল ১০টা - সন্ধ্যা ৬টা, রবিবার - বৃহস্পতিবার)"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -265,7 +283,7 @@ function Footer() {
         <div className="flex flex-col space-y-3 p-2 lg:py-5 items-center -mt-16 md:-mt-12 lg:mt-0 lg:col-span-2">
           <div>
             <h1 className="text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium mb-2 lg:mb-6 md:px-12 lg:px-0 text-white/50">
-              Explore
+              <LocalizedText en="Explore" bn="এক্সপ্লোর" />
             </h1>
             <div>
               {/* <ul className="flex flex-col space-y-1 md:space-y-2 text-xs 2xl:text-lg"> */}
@@ -274,26 +292,40 @@ function Footer() {
               md:gap-2 md:px-12 lg:px-0 lg:gap-0"
               >
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/about-us'}>About</Link>
+                  <Link href={'/about-us'}>
+                    <LocalizedText en="About" bn="আমাদের সম্পর্কে" />
+                  </Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/plans'}>Solutions</Link>
+                  <Link href={'/plans'}>
+                    <LocalizedText en="Solutions" bn="সলিউশন" />
+                  </Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/career'}>Career</Link>
+                  <Link href={'/career'}>
+                    <LocalizedText en="Career" bn="ক্যারিয়ার" />
+                  </Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/news-and-media'}>Media & Blogs</Link>
+                  <Link href={'/news-and-media'}>
+                    <LocalizedText en="Media & Blogs" bn="মিডিয়া এন্ড ব্লগস" />
+                  </Link>
                 </li>
 
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/support'}>Support</Link>
+                  <Link href={'/support'}>
+                    <LocalizedText en="Support" bn="সাপোর্ট" />
+                  </Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/premium-calculator'}>Premium Calculator</Link>
+                  <Link href={'/premium-calculator'}>
+                    <LocalizedText en="Premium Calculator" bn="প্রিমিয়াম ক্যালকুলেটর" />
+                  </Link>
                 </li>
                 <ToolTip>
-                  <span className=" cursor-not-allowed">Learning</span>
+                  <span className=" cursor-not-allowed">
+                    <LocalizedText en="Learning" bn="লার্নিং" />
+                  </span>
                 </ToolTip>
               </ul>
             </div>
@@ -303,15 +335,19 @@ function Footer() {
         <div className="flex flex-col space-y-3 p-2 lg:py-5 items-center -mt-16 md:-mt-12 lg:mt-0 lg:col-span-1">
           <div>
             <h1 className=" text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium mb-6 text-white/50">
-              Legal
+              <LocalizedText en="Legal" bn="লিগ্যাল" />
             </h1>
             <div>
               <ul className="flex flex-col space-y-2 text-xs 2xl:text-lg">
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/privacy-policy'}>Privacy Policy</Link>
+                  <Link href={'/privacy-policy'}>
+                    <LocalizedText en="Privacy Policy" bn="প্রাইভেসি পলিসি" />
+                  </Link>
                 </li>
                 <li className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100">
-                  <Link href={'/terms-condition'}>Terms & Conditions</Link>
+                  <Link href={'/terms-condition'}>
+                    <LocalizedText en="Terms & Conditions" bn="টার্মস এন্ড কন্ডিশন" />
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -324,7 +360,8 @@ function Footer() {
         >
           <div>
             <h1 className=" text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium text-white/50">
-              Find us on
+             
+               <LocalizedText en="Find us on" bn="আমাদের সোশ্যাল মিডিয়া প্ল্যাটফর্মসমূহ" />
             </h1>
             <div className="flex space-x-2 mt-3 2xl:mt-4">
               <div className="w-[20px] h-[20px] lg:w-[30px] lg:h-[30px] 2xl:w-[40px] 2xl:h-[40px]">

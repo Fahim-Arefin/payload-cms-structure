@@ -9,9 +9,11 @@ const page: FC<pageProps> = ({}) => {
   const heroSlides = [
     {
       title: 'Claim',
+      titleBN: 'বীমা দাবী',
       subtitle: '',
       description:
         'Experience a hassle-free, seamless claims journey... Submit, track and settle your claim in just 5 Days!  ',
+      descriptionBN: `৫ দিনের মধ্যে বীমা দাবি নিষ্পত্তির নিশ্চয়তা`,
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/claimBanner_33.jpg`,
     },
   ]
@@ -20,10 +22,12 @@ const page: FC<pageProps> = ({}) => {
     {
       value: 'individual',
       label: 'Individual Claim',
+      labelBN: 'একক বীমা দাবী'
     },
     {
       value: 'corporate',
       label: 'Corporate Claim',
+      labelBN: 'গ্রুপ বীমা দাবী'
     },
   ]
 

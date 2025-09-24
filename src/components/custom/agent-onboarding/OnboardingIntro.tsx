@@ -65,6 +65,7 @@
 import { ShantaIntroContentType } from '@/types'
 import Image from 'next/image'
 import React from 'react'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   onboardingIntroContent: ShantaIntroContentType
@@ -103,10 +104,16 @@ function OnboardingIntro({ onboardingIntroContent }: Props) {
            lg:flex lg:flex-col "
           >
             <h1 className="global-h3 md:global-h1 text-[#ED7125]">
-              {onboardingIntroContent?.heading}
+              <LocalizedText
+                en={onboardingIntroContent?.heading}
+                bn={onboardingIntroContent?.headingBN}
+              />
             </h1>
             <h1 className="global-h3 md:global-h1 text-black">
-              {onboardingIntroContent?.subheading}
+              <LocalizedText
+                en={onboardingIntroContent?.subheading}
+                bn={onboardingIntroContent?.subheadingBN}
+              />
             </h1>
           </div>
 
@@ -127,7 +134,10 @@ function OnboardingIntro({ onboardingIntroContent }: Props) {
         global-h4
         text-center lg:text-left"
           >
-            {onboardingIntroContent?.paragraphTitle}
+            <LocalizedText
+              en={onboardingIntroContent?.paragraphTitle}
+              bn={onboardingIntroContent?.paragraphTitleBN}
+            />
           </h5>
           <p
             className="
@@ -138,7 +148,10 @@ function OnboardingIntro({ onboardingIntroContent }: Props) {
             h-full
             "
           >
-            {onboardingIntroContent?.paragraph}
+            <LocalizedText
+              en={onboardingIntroContent?.paragraph}
+              bn={onboardingIntroContent?.paragraphBN}
+            />
           </p>
         </div>
       </div>

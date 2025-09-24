@@ -1,14 +1,19 @@
 import Image from 'next/image'
 import React from 'react'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   data: {
     title: string
+    titleBN?: string
     coloredTitle: string
+    coloredTitleBN?: string
     description: string
+    descriptionBN?: string
     image: string
     items: {
       title: string
+      titleBN?: string
       icon: string
     }[]
   }
@@ -20,9 +25,11 @@ function KeyBenefits({ data }: Props) {
       {/* heading */}
       <div className="">
         <div className="flex flex-col md:flex-row md:space-x-2">
-          <h3 className="global-h2 uppercase font-bold text-[#434343]">{data?.title} </h3>
+          <h3 className="global-h2 uppercase font-bold text-[#434343]">
+            <LocalizedText en={data?.title} bn={data?.titleBN} />
+          </h3>
           <h3 className="global-h2 uppercase font-bold text-[#ED7125]">
-            {data?.coloredTitle}
+            <LocalizedText en={data?.coloredTitle} bn={data?.coloredTitleBN} />
           </h3>{' '}
         </div>
       </div>
@@ -44,7 +51,9 @@ function KeyBenefits({ data }: Props) {
           />
         </div>
         <div className="text-[#434343] flex flex-col justify-center h-auto space-y-4 lg:space-y-6 xl:space-y-8">
-          <div className="global-span font-extralight text-justify">{data?.description}</div>
+          <div className="global-span font-extralight text-justify">
+            <LocalizedText en={data?.description} bn={data?.descriptionBN} />
+          </div>
           <div className="space-y-3">
             {data?.items?.map((item, i) => (
               <div className="flex items-center space-x-4" key={i}>
@@ -56,7 +65,7 @@ function KeyBenefits({ data }: Props) {
                   <img src={item?.icon} alt={item?.title} />
                 </div>
                 <div className="uppercase text-[10px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-semibold text-[#434342]">
-                  {item?.title}
+                  <LocalizedText en={item?.title} bn={item?.titleBN} />
                 </div>
               </div>
             ))}

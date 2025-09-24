@@ -9,6 +9,8 @@ import Autoplay from 'embla-carousel-autoplay'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { sliderDelay } from '@/lib/data'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   directorProfileData: DirectorProfileDataType[]
@@ -43,20 +45,29 @@ function DirectorListSection({ directorProfileData }: Props) {
             className="global-h1 font-medium lg:font-semibold text-[#4A4A4A] 
           flex space-x-1 justify-center lg:block lg:space-x-0 lg:justify-start flex-wrap"
           >
-            <h1>The Power of</h1>
-            <h1 className="text-[#ED7125]">One Connected Vision</h1>
+            <h1>
+              <LocalizedText en="The Power of" bn="এক অভিন্ন" />
+            </h1>
+            <h1 className="text-[#ED7125]">
+              <LocalizedText en="One Connected Vision" bn="দৃষ্টিভঙ্গির শক্তি" />
+            </h1>
           </div>
           <p className="global-p1 text-[#4A4A4A] text-center lg:text-justify">
-            Spearheaded by dynamic leadership team and a visionary board, Shanta Life is ready to
-            power progress today, for a better tommorow.
+            <LocalizedText
+              bn="আমাদের লিডারশিপ টিম ও দূরদর্শী বোর্ড এর সমন্বয়ে শান্তা লাইফ জীবন বীমা সেক্টরে একটি নতুন মানদণ্ড স্থাপনে এগিয়ে চলছে।"
+              en="Spearheaded by dynamic leadership team and a visionary board, Shanta Life is ready to
+            power progress today, for a better tommorow."
+            />
           </p>
           <div className="hidden lg:flex lg:flex-col xl:flex-row gap-2 xl:gap-4">
-            <h2 className="global-h3 font-semibold text-[#4A4A4A] uppercase">Board of directors</h2>
+            <h2 className="global-h3 font-semibold text-[#4A4A4A] uppercase">
+              <LocalizedText en="Board of directors" bn="বোর্ড অফ ডিরেক্টরস" />
+            </h2>
             <Link
               href="/all-bods"
               className="text-sm text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1"
             >
-              all board of directors
+              <LocalizedText en="all board of directors" bn="সব বোর্ড অফ ডিরেক্টরস" />
               <ArrowUpRight size={14} className="inline-block" />
             </Link>
           </div>

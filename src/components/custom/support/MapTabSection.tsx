@@ -5,10 +5,12 @@ import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import SupportTabContent from './SupportTabContent'
 import { TabDataType } from '@/types'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 
 type TabConfig = {
   value: string
   label: string
+  labelBN?: string
 }[]
 
 type Props = {
@@ -21,6 +23,8 @@ type Props = {
 export function MapTabSection({ config, data, initialTab, bgColor }: Props) {
   const [activeTab, setActiveTab] = useState(initialTab || config[0].value)
   const activeIndex = config.findIndex((tab) => tab.value === activeTab)
+
+  const lang = useSSRLanguage()
 
   useEffect(() => {
     if (initialTab) {
@@ -50,38 +54,37 @@ export function MapTabSection({ config, data, initialTab, bgColor }: Props) {
                   : 'justify-between',
               )}
             >
-              {config.map((tab, index) => (
-                <TabsTrigger
-                  key={tab.value}
-                  value={tab.value}
-                  className={cn(
-                    'global-p1 font-medium px-2 py-2.5 md:py-6 relative flex justify-start uppercase',
-                    index === 0 ? 'text-left pl-0' : 'text-left',
-                    // config.length === 2 && 'w-[30%]',
-                    activeTab === tab.value
-                      ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:md:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
-                      : 'text-[#434343]',
-                  )}
-                >
-                  {(() => {
-                    const words = tab.label.trim().split(' ')
-                    const last = words.pop()
-                    return (
-                      <>
-                        {words.join(' ')}{' '}
-                        <span
-                          className={cn(
-                            activeTab === tab.value ? 'text-[#ED7125]' : 'text-[#9C8639]',
-                            'ml-1 md:ml-2',
-                          )}
-                        >
-                          {last}
-                        </span>
-                      </>
-                    )
-                  })()}
-                </TabsTrigger>
-              ))}
+              {config.map((tab, index) => {
+                // Pick localized label
+                const label = lang === 'bn' ? tab.labelBN || tab.label : tab.label
+                // Highlight last word
+                const words = label.trim().split(' ')
+                const last = words.pop()
+
+                return (
+                  <TabsTrigger
+                    key={tab.value}
+                    value={tab.value}
+                    className={cn(
+                      'global-p1 font-medium px-2 py-2.5 md:py-6 relative flex justify-start uppercase',
+                      index === 0 ? 'text-left pl-0' : 'text-left',
+                      activeTab === tab.value
+                        ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:md:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
+                        : 'text-[#434343]',
+                    )}
+                  >
+                    {words.join(' ')}{' '}
+                    <span
+                      className={cn(
+                        activeTab === tab.value ? 'text-[#ED7125]' : 'text-[#9C8639]',
+                        'ml-1 md:ml-2',
+                      )}
+                    >
+                      {last}
+                    </span>
+                  </TabsTrigger>
+                )
+              })}
             </TabsList>
           </div>
         </Tabs>

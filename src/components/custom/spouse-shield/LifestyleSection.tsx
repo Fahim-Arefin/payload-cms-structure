@@ -1,11 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: {
     title: string
+    titleBN?: string
     subTitle: string
+    subTitleBN?: string
     description: string
+    descriptionBN?: string
     image: string
   }
 }
@@ -31,10 +35,16 @@ function LifestyleSection({ data }: Props) {
         {/* Right Text */}
         <div className="flex flex-col space-y-4 text-center lg:text-left">
           <div>
-            <h2 className="global-h1 font-semibold text-[#3A3A3A]">{data.title}</h2>
-            <h3 className="text-[#ED7125] global-h1 font-semibold">{data.subTitle}</h3>
+            <h2 className="global-h1 font-semibold text-[#3A3A3A]">
+              <LocalizedText en={data?.title} bn={data?.titleBN}/>
+            </h2>
+            <h3 className="text-[#ED7125] global-h1 font-semibold">
+              <LocalizedText en={data?.subTitle} bn={data?.subTitleBN}/>
+            </h3>
           </div>
-          <p className="global-p1 xl:global-span text-[#434343]">{data.description}</p>
+          <p className="global-p1 xl:global-span text-[#434343]">
+            <LocalizedText en={data.description} bn={data.descriptionBN}/>
+          </p>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import OnboardingJoinForm from './OnboardingJoinForm'
+import LocalizedText from '../shared/LocalizedText'
 
 type OnboardingFormProps = {}
 
@@ -12,10 +13,16 @@ const OnboardingForm: FC<OnboardingFormProps> = ({}) => {
           {/* Text Container */}
           <div className="text-center lg:text-left lg:px-0">
             <h1 className="global-h2 uppercase text-[#1E1E1E] font-normal">
-              Explore new horizons. Own the challenge. Build the future you deserve.
+              <LocalizedText
+                bn="অন্বেষণ  করুন নতুন দিগন্তের, নিজেকে চ্যালেঞ্জ করে গড়ে তুলুন প্রত্যাশিত আগামী"
+                en="Explore new horizons. Own the challenge. Build the future you deserve."
+              />
             </h1>
             <p className="text-[#1E1E1E] uppercase global-p2 font-light mt-4 md:mt-10">
-              Unlock the Perks of Powering Financial Futures
+              <LocalizedText
+                bn="গড়ে তুলুন অর্থনৈতিক ভবিষ্যতের নতুন দরজা"
+                en="Unlock the Perks of Powering Financial Futures"
+              />
             </p>
           </div>
           {/* Info Container */}

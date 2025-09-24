@@ -1,6 +1,7 @@
 import { ShantaIntroContentType } from '@/types'
 import Image from 'next/image'
 import React from 'react'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   shantaIntroContent: ShantaIntroContentType
@@ -37,8 +38,15 @@ function ShantaLifeIntroSection({ shantaIntroContent }: Props) {
            font-medium lg:font-semibold uppercase
            lg:flex lg:flex-col "
           >
-            <h1 className="global-h3 md:global-h1 text-[#ED7125]">{shantaIntroContent?.heading}</h1>
-            <h1 className="global-h3 md:global-h1 text-black">{shantaIntroContent?.subheading}</h1>
+            <h1 className="global-h3 md:global-h1 text-[#ED7125]">
+              <LocalizedText en={shantaIntroContent?.heading} bn={shantaIntroContent?.headingBN} />
+            </h1>
+            <h1 className="global-h3 md:global-h1 text-black">
+              <LocalizedText
+                en={shantaIntroContent?.subheading}
+                bn={shantaIntroContent?.subheadingBN}
+              />
+            </h1>
           </div>
 
           {/* mobile */}
@@ -58,7 +66,10 @@ function ShantaLifeIntroSection({ shantaIntroContent }: Props) {
         global-h4
         text-center lg:text-left"
           >
-            {shantaIntroContent?.paragraphTitle}
+            <LocalizedText
+              en={shantaIntroContent?.paragraphTitle}
+              bn={shantaIntroContent?.paragraphTitleBN}
+            />
           </h5>
           <p
             className="
@@ -69,7 +80,10 @@ function ShantaLifeIntroSection({ shantaIntroContent }: Props) {
             h-full
             "
           >
-            {shantaIntroContent?.paragraph}
+            <LocalizedText
+              bn={shantaIntroContent?.paragraphBN}
+              en={shantaIntroContent?.paragraph}
+            />
           </p>
         </div>
       </div>

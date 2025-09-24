@@ -5,6 +5,7 @@ function TermsCondition() {
   const heroSlides = [
     {
       title: 'Terms & Condition',
+      titleBN: 'টার্মস এন্ড কন্ডিশন',
       subtitle: '',
       description: '',
       image: '/assets/banner12.jpg',

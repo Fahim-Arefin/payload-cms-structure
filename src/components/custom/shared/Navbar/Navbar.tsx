@@ -364,6 +364,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { RiArrowDownSLine } from 'react-icons/ri'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
+import LocalizedText from '../LocalizedText'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -461,7 +462,9 @@ export default function Navbar() {
                   ${isActive(item.href) ? 'text-[#ED7125] font-semibold' : ''}
                 `}
               >
-                <span>{item.label}</span>
+                <span>
+                  <LocalizedText en={item?.label} bn={item?.labelBN}/>
+                </span>
                 {hasChildren && (
                   <RiArrowDownSLine
                     className={`
@@ -511,7 +514,7 @@ export default function Navbar() {
                   target={item.href.startsWith('https') ? '_blank' : '_self'}
                   className="w-full"
                 >
-                  {item.label}
+                  <LocalizedText en={item?.label} bn={item?.labelBN} />
                 </Link>
                 {hasChildren && (
                   <RiArrowDownSLine
@@ -605,7 +608,9 @@ export default function Navbar() {
                   <div
                     className={`flex items-center space-x-1 ${item.href === '#' ? ' cursor-not-allowed ' : ' cursor-pointer '}`}
                   >
-                    <div>{item.label}</div>
+                    <div>
+                      <LocalizedText en={item?.label} bn={item?.labelBN} />
+                    </div>
                     {hasChildren && (
                       <RiArrowDownSLine
                         className={`mt-0.5 w-[20px] h-[20px] transition-transform duration-200 rotate-0 group-hover:-rotate-180`}
@@ -653,7 +658,7 @@ export default function Navbar() {
               />
             </svg>
             <div className="text-center lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#1E1E1E]">
-              My Portal
+              <LocalizedText en="My Portal" bn="মাই পোর্টাল" />
             </div>
           </Link>
 
@@ -717,7 +722,7 @@ export default function Navbar() {
                   }}
                 >
                   <Link href={isDisabled ? '#' : item.href} className="w-full">
-                    {item.label}
+                    <LocalizedText en={item?.label} bn={item?.labelBN} />
                   </Link>
                   {hasChildren && (
                     <RiArrowDownSLine

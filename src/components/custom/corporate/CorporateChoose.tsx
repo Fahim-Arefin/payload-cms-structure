@@ -5,11 +5,16 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import ToolTip from '../shared/ToolTip'
 import Image from 'next/image'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
+import LocalizedString from '../shared/LocalizedString'
 
 type Benefit = {
   icon: string
   text: string
+  textBN?: string
   description: string
+  descriptionBN?: string
 }
 
 type CorporateChooseProps = {
@@ -30,8 +35,14 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
       <div className="hidden lg:grid grid-cols-2 gap-4 items-center bg-white ">
         {/* Right content */}
         <div className="flex flex-col justify-center gap-4 xl:gap-7 2xl:gap-12 bg-white ">
-          <h1 className="global-h1 font-bold text-[#434342] mb-2 whitespace-nowrap">
-            Designed to <span className="text-[#ED7125]">Deliver More</span>
+          <h1 className="global-h1 font-bold text-[#434342] mb-2">
+            <LocalizedHighlighted
+              textEn="Designed to Deliver More"
+              textBn="আরও বেশি সুবিধা দেওয়ার জন্য তৈরি"
+              highlightEn="Deliver More"
+              highlightBn="দেওয়ার জন্য তৈরি"
+              highlightClassName="text-[#ED7125]"
+            />
           </h1>
 
           {benefitsData.map((item, idx) => (
@@ -58,10 +69,10 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
               {/* TEXT */}
               <div className="flex flex-col gap-2 px-4">
                 <p className="lg:text-[1.1rem] font-bold xl:text-[1.3rem] text-[#434342]">
-                  {item.text}
+                  <LocalizedText en={item?.text} bn={item?.textBN} />
                 </p>
                 <p className="lg:text-[14px] xl:text-[18px] font-extralight text-justify text-[#434342]">
-                  {item.description}
+                  <LocalizedText en={item?.description} bn={item?.descriptionBN} />
                 </p>
               </div>
             </div>
@@ -106,9 +117,12 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
                 {/* TEXT */}
                 <div className="flex flex-col gap-2">
                   <p className="uppercase text-left global-p1 font-medium text-[#434342]">
-                    {item?.text}
+                    <LocalizedText en={item?.text} bn={item?.textBN} />
                   </p>
-                  <p className="uppercase global-p2 text-[#434342]">{item?.description}</p>
+                  <p className="uppercase global-p2 text-[#434342]">
+                    {' '}
+                    <LocalizedText en={item?.description} bn={item?.descriptionBN} />
+                  </p>
                 </div>
               </div>
             ))}
@@ -124,7 +138,9 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
             target="_blank"
             prefetch={false}
           >
-            <GlobalButton text="Download Brochure" variant="primary" />
+            <GlobalButton text="Download Brochure" variant="primary">
+              <LocalizedString en="Download Brochure" bn="ডাউনলোড ব্রোশিউর" />
+            </GlobalButton>
           </Link>
           <Link
             href="/assets/pdf/Required Brochures/Corporate Plans/Shanta Company Profile Brochure.pdf"
@@ -134,7 +150,9 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
               className="bg-[#9C8639] 
               w-[170px] md:w-[200px] lg:w-[220px] xl:w-[230px] 2xl:w-[250px]"
               text="Download Company Profile"
-            />
+            >
+              <LocalizedString en="Download Company Profile" bn="ডাউনলোড কোম্পানি প্রোফাইল" />
+            </GlobalButton>
           </Link>
         </div>
         <div className="flex justify-center mt-2">
@@ -143,7 +161,7 @@ const CorporateChoose: FC<CorporateChooseProps> = ({ benefitsData }) => {
             className="capitalize text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1 
                     text-[10px] md:text-[12px] lg:text-[14px] xl:text-[14px]"
           >
-            explore all plans
+            <LocalizedText en="explore all plans" bn="সব প্ল্যান দেখুন" />
             <ArrowUpRight size={14} className="inline-block" />
           </Link>
         </div>

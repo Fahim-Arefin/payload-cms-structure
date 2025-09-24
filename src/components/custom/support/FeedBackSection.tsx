@@ -8,6 +8,7 @@ import ToolTip from '../shared/ToolTip'
 import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 
 type Props = {}
 
@@ -90,7 +91,13 @@ function FeedBackSection({}: Props) {
           className="text-[18px] md:text-[22px] lg:text-[28px] xl:text-[33px] 2xl:text-[40px] uppercase font-semibold lg:font-normal
         mb-6 lg:mb-8 xl:mb-12 2xl:mb-20 "
         >
-          HAVE ANY <span className="text-[#ED7125]">FEEDBACK?</span>
+          <LocalizedHighlighted
+            textBn="আপনার মন্তব্য শেয়ার করুন"
+            textEn={`HAVE ANY FEEDBACK?`}
+            highlightEn={`FEEDBACK?`}
+            highlightBn={`মন্তব্য`}
+            highlightClassName="text-[#ED7125]"
+          />
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-12">

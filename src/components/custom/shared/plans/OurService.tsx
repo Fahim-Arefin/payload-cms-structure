@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { MapTabSection } from '../../support/MapTabSection'
 import { supportTabContent } from '@/lib/data'
+import LocalizedHighlighted from '../LocalizedHighlighted'
+import LocalizedText from '../LocalizedText'
 
 type Props = {}
 
@@ -11,13 +13,14 @@ function OurService({}: Props) {
     {
       value: 'branches',
       label: 'OUR BRANCHES',
+      labelBN: 'আমাদের শাখাসমূহ'
     },
     {
       value: 'hospitals',
       label: 'PANEL HOSPITALS',
+      labelBN: 'হেড অফিস'
     },
   ]
-
 
   useEffect(() => {
     let lastHash = ''
@@ -133,13 +136,25 @@ function OurService({}: Props) {
         {/* heading */}
         <div className="space-y-6">
           <div className="flex space-x-2">
-            <h3 className="global-h2 uppercase font-bold text-[#434343]">Where You Can Avail</h3>{' '}
-            <h3 className="global-h2 uppercase font-bold text-[#ED7125]">Our Services</h3>
+            <h3 className="global-h2 uppercase font-bold text-[#434343]">
+              <LocalizedHighlighted
+                textEn="Where You Can Avail Our Services"
+                highlightEn="Our Services"
+                textBn="যেখানে এই সেবা পাওয়া যাবে"
+                highlightBn="সেবা পাওয়া"
+                highlightClassName="text-[#ED7125]"
+              />
+            </h3>
           </div>
           <div className="global-span text-[#434343] font-light">
-            This benefit is available only at designated hospitals within the Shanta Life Hospital
+            <LocalizedText
+              en="This benefit is available only at designated hospitals within the Shanta Life Hospital
             Network. We are continuously expanding our partnerships to provide broader access across
-            Bangladesh. 
+            Bangladesh. "
+              bn="এই সুবিধা কেবলমাত্র Shanta Life Hospital Network-এর অনুমোদিত হাসপাতালে প্রযোজ্য। 
+              আমরা ক্রমাগত আমাদের হাসপাতাল নেটওয়ার্ক বিস্তৃত করছি যাতে সারা বাংলাদেশে 
+              আরও বেশি স্থানে আপনারা এই সুবিধা পান।"
+            />
           </div>
         </div>
       </div>

@@ -2,11 +2,14 @@ import React from 'react'
 import { FootPrintSlider } from './FootPrintSlider'
 import { FootPrintDataType } from '@/types'
 import Image from 'next/image'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   footPrintData: {
     title: string
+    titleBN?: string
     subTitle: string
+    subTitleBN?: string
     bgImage: string
     bgMobileImage?: string
     data: FootPrintDataType[]
@@ -14,7 +17,7 @@ type Props = {
 }
 
 function FootPrintSection({ footPrintData }: Props) {
-  const { title, subTitle, bgImage, bgMobileImage, data } = footPrintData
+  const { title, titleBN, subTitle, subTitleBN, bgImage, bgMobileImage, data } = footPrintData
   return (
     <div className="relative">
       <div
@@ -49,11 +52,15 @@ function FootPrintSection({ footPrintData }: Props) {
         {/* Content */}
         <div className="container-padding uppercase text-white relative z-10">
           <div className="text-center lg:text-start">
-            <h1 className="global-h1 font-medium lg:font-semibold uppercase">{title}</h1>
+            <h1 className="global-h1 font-medium lg:font-semibold uppercase">
+              <LocalizedText en={title} bn={titleBN} />
+            </h1>
             {/* <h1 className="lg:hidden global-h1 font-medium lg:font-semibold uppercase">
               Shanta&rsquo;s Living <span className="text-[#ED7125]">Ecosystem</span>
             </h1> */}
-            <h3 className="global-h1 md:global-h4 font-light">{subTitle}</h3>
+            <h3 className="global-h1 md:global-h4 font-light">
+              <LocalizedText en={subTitle} bn={subTitleBN} />
+            </h3>
           </div>
         </div>
       </div>

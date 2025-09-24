@@ -1,6 +1,7 @@
 import { LicensedInfoType } from '@/types'
 import Image from 'next/image'
 import React from 'react'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: LicensedInfoType
@@ -11,9 +12,11 @@ function LiscensedInfo({
     licensedImage,
     licensedMobileImage,
     licensedDate,
+    licensedDateBN,
     launchedImage,
     launchedMobileImage,
     launchedDate,
+    launchedDateBN,
   },
 }: Props) {
   return (
@@ -29,7 +32,7 @@ function LiscensedInfo({
             <Image src={licensedImage} alt="Licensed Image" className="" fill />
           </div>
           <div className="uppercase text-[9px] md:global-h4">
-            <span className="">Licensed : </span> <span> {licensedDate}</span>
+            <LocalizedText en={`Licensed : ${licensedDate}`} bn={`লাইসেন্স : ${licensedDateBN}`} />
           </div>
         </div>
         <div className="flex items-center space-x-1 md:space-x-4">
@@ -37,7 +40,7 @@ function LiscensedInfo({
             <Image src={launchedImage} alt="Launched Image" className="" fill />
           </div>
           <div className="uppercase text-[9px] md:global-h4">
-            <span className="">Launched : </span> <span> {launchedDate}</span>
+            <LocalizedText en={`Licensed : ${launchedDate}`} bn={`লাইসেন্স : ${launchedDateBN}`} />
           </div>
         </div>
       </div>

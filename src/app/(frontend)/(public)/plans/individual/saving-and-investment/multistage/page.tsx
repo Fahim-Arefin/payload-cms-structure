@@ -11,6 +11,7 @@ import CallNowButton from '@/components/custom/shared/CallNowButton'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { FC } from 'react'
 import Link from 'next/link'
+import LocalizedString from '@/components/custom/shared/LocalizedString'
 
 type Props = {}
 
@@ -18,9 +19,11 @@ const page: FC<Props> = ({}) => {
   const heroSlides = [
     {
       title: 'Shanta Multi-Stage Maturity Plans',
+      titleBN: 'শান্তা মাল্টি-স্টেজ ম্যাচুরিটি প্ল্যান',
       subtitle: '',
       description: `Since life has more than one milestone, 
       we’re with you at each one.`,
+      descriptionBN: `জীবনের প্রতিটি মাইলফলকে, আপনার পাশে।`,
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/multi-stage/web/multistage.png`,
     },
   ]
@@ -34,6 +37,9 @@ const page: FC<Props> = ({}) => {
       With guaranteed payouts at key stages and full protection throughout, 
       it’s the smart way to stay prepared for what’s next!! 
       Pick a plan from below that suits your need.`,
+    descriptionBN: `কিছু স্বপ্নের কোনো অপেক্ষা হয় না। হতে পারে সেটা আপনার সন্তানের শিক্ষার ব্যায়, 
+      জীবনের বিশেষ কোনো মুহূর্ত উদযাপন বা ভবিষ্যতের আর্থিক নিরাপত্তা—ধাপে ধাপে সেইসব স্বপ্নপূরণে আপনার পাশে থাকবে শান্তা লাইফের মাল্টি-স্টেজ ম্যাচুরিটি প্ল্যান। 
+      প্রয়োজন অনুযায়ী বেছে নিন নিচের উপযুক্ত প্ল্যান।`,
   }
 
   const threeStageData = [
@@ -43,12 +49,12 @@ const page: FC<Props> = ({}) => {
   ]
 
   const planData = [
-    { image: '/assets/time.png', timeline: '12 YEARS' },
-    { image: '/assets/time.png', timeline: '15 YEARS' },
-    { image: '/assets/time.png', timeline: '18 YEARS' },
-    { image: '/assets/time.png', timeline: '21 YEARS' },
-    { image: '/assets/time.png', timeline: '24 YEARS' },
-    { image: '/assets/time.png', timeline: '27 YEARS' },
+    { image: '/assets/time.png', timeline: '12 YEARS', timelineBN: '১২ বছর' },
+    { image: '/assets/time.png', timeline: '15 YEARS', timelineBN: '১৫ বছর' },
+    { image: '/assets/time.png', timeline: '18 YEARS', timelineBN: '১৮ বছর' },
+    { image: '/assets/time.png', timeline: '21 YEARS', timelineBN: '২১ বছর' },
+    { image: '/assets/time.png', timeline: '24 YEARS', timelineBN: '২৪ বছর' },
+    { image: '/assets/time.png', timeline: '27 YEARS', timelineBN: '২৭ বছর' },
   ]
 
   // tab-config.ts
@@ -56,10 +62,12 @@ const page: FC<Props> = ({}) => {
     {
       value: 'features',
       label: 'KEY FEATURES',
+      labelBN: 'মূল সুবিধাসমূহ',
     },
     {
       value: 'benefits',
       label: 'Additional Benefits',
+      labelBN: 'মূল সুবিধাসমূহ',
     },
   ]
 
@@ -77,6 +85,7 @@ const page: FC<Props> = ({}) => {
         title: 'Maturity Benefit',
         description:
           'Receive the final lump sum at the end of your policy term to complete your journey with confidence.',
+
         image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage1.png',
         mobileImage:
           '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage1.png',
@@ -125,7 +134,9 @@ const page: FC<Props> = ({}) => {
        hero-content-width flex justify-left space-x-4 md:space-x-6 lg:justify-start"
         >
           <Link href="/purchase">
-            <GlobalButton size="large" text="Purchase" variant="primary" className="" />
+            <GlobalButton size="large" text="Purchase" variant="primary" className="">
+              <LocalizedString en="Purchase" bn="কিনুন" />
+            </GlobalButton>
           </Link>
           <CallNowButton />
         </div>

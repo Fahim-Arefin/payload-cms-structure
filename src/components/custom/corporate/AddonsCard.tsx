@@ -3,6 +3,7 @@ import { OfferDataType } from '@/types'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: OfferDataType
@@ -56,7 +57,7 @@ function AddonsCard({ data }: Props) {
             className="text-white transition-colors duration-500 
          global-p2 text-center uppercase font-light"
           >
-            {data?.description}
+            <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
           <Button
             variant="link"
@@ -64,7 +65,9 @@ function AddonsCard({ data }: Props) {
             text-[10px] md:text-[12px] p-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-linear"
           >
             <Link href={data?.link ? data?.link : ''} className="flex space-x-1 items-center ">
-              <div>Explore Now</div>
+              <div>
+                <LocalizedText en='Explore Now' bn='এখনই দেখুন' />
+              </div>
               <ArrowUpRight />
             </Link>
           </Button>

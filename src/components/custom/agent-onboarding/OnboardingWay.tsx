@@ -2,11 +2,14 @@ import { FC } from 'react'
 import WayWeAreSlider from './WayWeAreSlider'
 import { WayWeAreDataType } from '@/types'
 import Image from 'next/image'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 
 type wayWeAreData = {
   image: string
   title: string
+  titleBN: string
   coloredTitle: string
+  coloredTitleBN: string
   data: WayWeAreDataType[]
 }
 
@@ -37,8 +40,15 @@ const OnboardingWay: FC<OnboardingWayProps> = ({ wayWeAreData }: OnboardingWayPr
         >
           <div className="text-center">
             <h1 className="global-h1 lg:font-normal uppercase">
-              {wayWeAreData?.title} -{' '}
-              <span className="text-[#ED7125]">{wayWeAreData?.coloredTitle}</span> 
+              {/* {wayWeAreData?.title} -{' '}
+              <span className="text-[#ED7125]">{wayWeAreData?.coloredTitle}</span>  */}
+              <LocalizedHighlighted
+                textEn={wayWeAreData?.title}
+                textBn={wayWeAreData?.titleBN}
+                highlightBn={wayWeAreData?.coloredTitleBN}
+                highlightEn={wayWeAreData?.coloredTitle}
+                highlightClassName="text-[#ED7125]"
+              />
             </h1>
           </div>
         </div>

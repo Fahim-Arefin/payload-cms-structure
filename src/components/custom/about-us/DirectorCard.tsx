@@ -111,6 +111,7 @@
 import { DirectorCardDataType } from '@/types'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: DirectorCardDataType
@@ -170,10 +171,10 @@ function DirectorCard({ data, index }: Props) {
             {data.name && data.designation && (
               <div className="text-center mt-1 md:mt-4">
                 <h2 className="text-[#1E1E1E] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-medium lg:font-semibold">
-                  {data.name}
+                  <LocalizedText en={data?.name} bn={data?.nameBN} />
                 </h2>
                 <p className="text-[#ED7125] text-[9px] md:text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-medium lg:font-semibold uppercase">
-                  {data.designation}
+                  <LocalizedText en={data?.designation} bn={data?.designationBN} />
                 </p>
               </div>
             )}
@@ -184,10 +185,10 @@ function DirectorCard({ data, index }: Props) {
         <div className="z-40 space-y-1.5 md:space-y-4 lg:space-y-4 2xl:space-y-6">
           <div>
             <h1 className="text-[13px] md:text-[20px] lg:global-h1 font-medium  lg:font-semibold text-[#ED7125] uppercase">
-              {data.title}
+              <LocalizedText en={data?.title} bn={data?.titleBN} />
             </h1>
             <h1 className="text-[13px] md:text-[20px] lg:global-h1 font-medium lg:font-semibold uppercase">
-              {data.subtitle}
+              <LocalizedText en={data?.subtitle} bn={data?.subtitleBN} />
             </h1>
           </div>
 
@@ -200,7 +201,7 @@ function DirectorCard({ data, index }: Props) {
                 : ''
             }`}
           >
-            {data?.description}
+            <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
 
           {/* Conditionally render button only if text is overflowing */}

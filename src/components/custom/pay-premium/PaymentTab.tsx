@@ -13,6 +13,9 @@ import BkashSection from './BkashSection'
 import RocketSection from './RocketSection'
 import { PaymentTabDataType } from '@/types'
 import Image from 'next/image'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 
 export function ArrowIcon() {
   return (
@@ -39,7 +42,9 @@ type PaymentTabProps = {
 
 export default function PaymentTab({ config, data }: PaymentTabProps) {
   const [activeTab, setActiveTab] = useState('bkash')
+  const lang = useSSRLanguage() // ⬅️ current language
 
+  const pickHTML = (en?: string, bn?: string) => (lang === 'en' ? (en ?? '') : (bn ?? en ?? ''))
   return (
     <div
       className="px-5 py-12 
@@ -50,14 +55,24 @@ export default function PaymentTab({ config, data }: PaymentTabProps) {
     >
       <div className="lg:hidden mb-12">
         <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium ">
-          Payment With{' '}
-          <span className="global-h1 uppercase text-[#ED7125] font-medium">Bkash & Rocket</span>
+          <LocalizedHighlighted
+            textEn="Payment With Bkash & Rocket"
+            highlightEn="Bkash & Rocket"
+            textBn="বিকাশ ও রকেটের মাধ্যমে অর্থ প্রদান"
+            highlightBn="বিকাশ ও রকেটের"
+            highlightClassName="global-h1 uppercase text-[#ED7125] font-medium"
+          />
         </h1>
       </div>
       <div className="hidden lg:flex mb-12 lg:w-[49%] 2xl:w-[48%] ml-auto">
         <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium ">
-          Payment With{' '}
-          <span className="global-h1 uppercase text-[#ED7125] font-medium">Bkash & Rocket</span>
+          <LocalizedHighlighted
+            textEn="Payment With Bkash & Rocket"
+            highlightEn="Bkash & Rocket"
+            textBn="বিকাশ ও রকেটের মাধ্যমে অর্থ প্রদান"
+            highlightBn="বিকাশ ও রকেটের"
+            highlightClassName="global-h1 uppercase text-[#ED7125] font-medium"
+          />
         </h1>
       </div>
 
@@ -149,7 +164,7 @@ export default function PaymentTab({ config, data }: PaymentTabProps) {
                   )}
                 >
                   <span className={activeTab === 'bkash' ? 'text-[#ED7125]' : 'text-[#9C8639]'}>
-                    bKash
+                    <LocalizedText en="bKash" bn="বিকাশ" />
                   </span>
                 </TabsTrigger>
 
@@ -171,7 +186,7 @@ export default function PaymentTab({ config, data }: PaymentTabProps) {
                   )}
                 >
                   <span className={activeTab === 'rocket' ? 'text-[#ED7125]' : 'text-[#9C8639]'}>
-                    Rocket
+                    <LocalizedText en="Rocket" bn="রকেট" />
                   </span>
                 </TabsTrigger>
               </TabsList>
@@ -213,43 +228,41 @@ export default function PaymentTab({ config, data }: PaymentTabProps) {
             {/* Tab Content */}
             <TabsContent value="bkash" className="space-y-4 lg:space-y-4 xl:space-y-7">
               {/* {data?.item?.map((eachItem, i) => ( */}
-              {data?.bkash?.item?.map((eachItem, i) => (
-                <div
-                  key={i}
-                  className="flex items-center bg-white/50 backdrop-blur-[12.5px] border-[1.25px] border-[#9C8639]
-                  space-x-2 lg:space-x-1 xl:space-x-2.5 2xl:space-x-4
-                  p-1 md:px-4 md:py-1.5 lg:px-1 lg:py-2 xl:p-2.5 2xl:p-4 
-                  rounded-[4px] lg:rounded-[6px] xl:rounded-[8px]"
-                >
-                  <div className="text-[12px] md:text-[14px] lg:text-[12px] xl:text-[16px] 2xl:text-[15px] text-[#434343]">
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: eachItem?.descriptionContent,
-                      }}
-                    ></div>
+              {data?.bkash?.item?.map((eachItem, i) => {
+                const html = pickHTML(eachItem.descriptionContent, eachItem.descriptionBN)
+                return (
+                  <div
+                    key={`bkash-${i}`}
+                    className="flex items-center bg-white/50 backdrop-blur-[12.5px] border-[1.25px] border-[#9C8639]
+                               space-x-2 lg:space-x-1 xl:space-x-2.5 2xl:space-x-4
+                               p-1 md:px-4 md:py-1.5 lg:px-1 lg:py-2 xl:p-2.5 2xl:p-4 
+                               rounded-[4px] lg:rounded-[6px] xl:rounded-[8px]"
+                  >
+                    <div className="text-[12px] md:text-[14px] lg:text-[12px] xl:text-[16px] 2xl:text-[15px] text-[#434343]">
+                      <div dangerouslySetInnerHTML={{ __html: html }} />
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </TabsContent>
 
             <TabsContent value="rocket" className="space-y-4 lg:space-y-4 xl:space-y-7">
-              {data?.rocket?.item?.map((eachItem, i) => (
-                <div
-                  key={i}
-                  className="flex items-center bg-white/50 backdrop-blur-[12.5px] border-[1.25px] border-[#9C8639]
-                  space-x-2 lg:space-x-1 xl:space-x-2.5 2xl:space-x-4
-                  p-1 md:px-4 md:py-1.5 lg:px-1 lg:py-2 xl:p-2.5 2xl:p-4 
-                  rounded-[4px] lg:rounded-[6px] xl:rounded-[8px]"
-                >
-                  <div className="text-[12px] md:text-[14px] lg:text-[12px] xl:text-[16px] 2xl:text-[15px] text-[#434343]">
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: eachItem?.descriptionContent,
-                      }}
-                    ></div>
+              {data?.rocket?.item?.map((eachItem, i) => {
+                const html = pickHTML(eachItem.descriptionContent, eachItem.descriptionBN)
+                return (
+                  <div
+                    key={`rocket-${i}`}
+                    className="flex items-center bg-white/50 backdrop-blur-[12.5px] border-[1.25px] border-[#9C8639]
+                               space-x-2 lg:space-x-1 xl:space-x-2.5 2xl:space-x-4
+                               p-1 md:px-4 md:py-1.5 lg:px-1 lg:py-2 xl:p-2.5 2xl:p-4 
+                               rounded-[4px] lg:rounded-[6px] xl:rounded-[8px]"
+                  >
+                    <div className="text-[12px] md:text-[14px] lg:text-[12px] xl:text-[16px] 2xl:text-[15px] text-[#434343]">
+                      <div dangerouslySetInnerHTML={{ __html: html }} />
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </TabsContent>
           </Tabs>
         </div>

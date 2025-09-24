@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import ToolTip from './ToolTip'
 import Image from 'next/image'
+import LocalizedText from './LocalizedText'
 
 function FooterMobile() {
   const shurjoPayData = [
@@ -103,7 +104,10 @@ function FooterMobile() {
             href="https://www.google.com/maps?ll=23.770282,90.40626&z=16&t=m&hl=en-GB&gl=US&mapclient=embed&cid=8200627424099091507"
             className="hover:text-blue-300 duration-100 transition-all"
           >
-            Shanta Western Tower, Level 10, 186 Bir Uttam Mir Shawkat Sarak, Dhaka 1208
+            <LocalizedText
+              en="Shanta Western Tower, Level 10, 186, Bir Uttam Mir Shawkat Sarak, Dhaka 1208"
+              bn="শান্তা ওয়েস্টার্ন টাওয়ার, লেভেল ১০, ১৮৬ বীর উত্তম মীর শওকত সড়ক, ঢাকা ১২০৮"
+            />
           </Link>
         </div>
         {/* address */}
@@ -117,85 +121,94 @@ function FooterMobile() {
           </div>
           <div>
             <a href="tel:+8809610889900" className="hover:text-blue-300 transition-colors">
-              +88 09610889900
+              <LocalizedText en="+88 09610889900" bn="+৮৮ ০৯৬১০৮৮৯৯০০" />
             </a>
             <br />
-            (10 am-6 pm, Sunday-Thursday)
+            <LocalizedText
+              en="(10 am-6 pm, Sunday-Thursday)"
+              bn="(সকাল ১০টা - সন্ধ্যা ৬টা, রবিবার - বৃহস্পতিবার)"
+            />
           </div>
         </div>
       </div>
       {/* Link section */}
       <div className="grid grid-cols-2 w-[70%] md:w-[50%] mx-auto mt-6 text-white/70 font-light">
         <div>
-          <h4 className="text-[14px] md:text-[16px] text-white/50 mb-3">Explore</h4>
+          <h4 className="text-[14px] md:text-[16px] text-white/50 mb-3">
+            <LocalizedText en="Explore" bn="এক্সপ্লোর" />
+          </h4>
           <div className="text-[10px] md:text-[12px] flex flex-col">
             <Link
               className="transition-all duration-300 hover:underline hover:underline-offset-4 hover:text-[#FF6600]"
               href="/about-us"
             >
-              About
+              <LocalizedText en="About" bn="আমাদের সম্পর্কে" />
             </Link>
             <Link
               className="transition-all duration-300 hover:underline hover:underline-offset-4 hover:text-[#FF6600]"
               href="/plans"
             >
-              Solutions
+              <LocalizedText en="Solutions" bn="সলিউশন" />
             </Link>
             <Link
               className="transition-all duration-300 hover:underline hover:underline-offset-4 hover:text-[#FF6600]"
               href="/career"
             >
-              Career
+              <LocalizedText en="Career" bn="ক্যারিয়ার" />
             </Link>
             <Link
               className="transition-all duration-300 hover:underline hover:underline-offset-4 hover:text-[#FF6600]"
               href="/news-and-media"
             >
-              Media & Blogs
+              <LocalizedText en="Media & Blogs" bn="মিডিয়া এন্ড ব্লগস" />
             </Link>
             <Link
               className="transition-all duration-300 hover:underline hover:underline-offset-4 hover:text-[#FF6600]"
               href="/support"
             >
-              Support
+              <LocalizedText en="Support" bn="সাপোর্ট" />
             </Link>
             <Link
               className="transition-all duration-300 hover:underline hover:underline-offset-4 hover:text-[#FF6600]"
               href="/premium-calculator"
             >
-              Premium Calculator
+              <LocalizedText en="Premium Calculator" bn="প্রিমিয়াম ক্যালকুলেটর" />
             </Link>
             <ToolTip>
               <Link
                 className="cursor-not-allowed transition-all duration-300 hover:underline hover:underline-offset-4 hover:text-[#FF6600]"
                 href="#"
               >
-                Learning
+                <LocalizedText en="Learning" bn="লার্নিং" />
               </Link>
             </ToolTip>
           </div>
         </div>
         <div>
-          <h4 className="text-[14px] md:text-[16px] text-white/50 mb-3">Legal</h4>
+          <h4 className="text-[14px] md:text-[16px] text-white/50 mb-3">
+            <LocalizedText en="Legal" bn="লিগ্যাল" />
+          </h4>
           <div className="text-[10px] md:text-[12px] flex flex-col">
             <Link
               className="transition-all duration-300 hover:underline hover:underline-offset-4 hover:text-[#FF6600]"
               href="/privacy-policy"
             >
-              Privacy Policy
+              <LocalizedText en="Privacy Policy" bn="প্রাইভেসি পলিসি" />
             </Link>
             <Link
               className="transition-all duration-300 hover:underline hover:underline-offset-4 hover:text-[#FF6600]"
               href="/terms-condition"
             >
-              Terms & Conditions
+              <LocalizedText en="Terms & Conditions" bn="টার্মস এন্ড কন্ডিশন" />
             </Link>
           </div>
         </div>
       </div>
       {/* social media section */}
       <div className="w-[70%] md:w-[50%] mx-auto mt-6 text-white/70 font-light">
-        <h4 className="text-[14px] md:text-[16px] text-white/50 mb-2 text-center">Find us on</h4>
+        <h4 className="text-[14px] md:text-[16px] text-white/50 mb-2 text-center">
+          <LocalizedText en="Find us on" bn="আমাদের সোশ্যাল মিডিয়া প্ল্যাটফর্মসমূহ" />
+        </h4>
         <div className="flex justify-center items-center space-x-2">
           <Link target="_blank" href="https://www.facebook.com/profile.php?id=61566152682701">
             <img

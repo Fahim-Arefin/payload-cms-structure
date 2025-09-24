@@ -87,14 +87,16 @@ import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../CarousalNavButtons'
 import Autoplay from 'embla-carousel-autoplay'
 import { sliderDelay } from '@/lib/data'
+import LocalizedText from '../LocalizedText'
 
 type Props<T> = {
   data: T[]
   subheading?: string
+  subHeadingBN?: string
   cardComponent: React.ComponentType<{ data: T }>
 }
 
-function Offers<T>({ data, subheading, cardComponent: CardComponent }: Props<T>) {
+function Offers<T>({ data, subheading, subHeadingBN, cardComponent: CardComponent }: Props<T>) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
@@ -122,10 +124,18 @@ function Offers<T>({ data, subheading, cardComponent: CardComponent }: Props<T>)
     >
       <div className="space-y-4">
         <div className="flex space-x-2">
-          <h3 className="global-h1 uppercase font-medium text-[#434343]">We</h3>
-          <h3 className="global-h1 uppercase font-medium text-[#ED7125]">Offer</h3>
+          <h3 className="global-h1 uppercase font-medium text-[#434343]">
+            <LocalizedText en={'We'} bn={'আমাদের'} />
+          </h3>
+          <h3 className="global-h1 uppercase font-medium text-[#ED7125]">
+            <LocalizedText en={'Offer'} bn={'পরিকল্পনাসমূহ'} />
+          </h3>
         </div>
-        {subheading && <div className="global-p1 text-[#434343]">{subheading}</div>}
+        {subheading && (
+          <div className="global-p1 text-[#434343]">
+            <LocalizedText en={subheading} bn={subHeadingBN} />
+          </div>
+        )}
       </div>
       <Carousel
         className="w-full"

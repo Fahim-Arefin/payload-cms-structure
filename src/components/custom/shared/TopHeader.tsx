@@ -168,7 +168,7 @@ function TopHeader({ className }: { className?: string }) {
 
         <Link href="/agent-onboarding">
           <Button variant="link" className="text-white px-3 py-1 font-medium underline">
-            <LocalizedText en="I’m an Agent" bn="আমি একজন এজেন্ট" />
+            <LocalizedText en="I’m an Agent" bn="এজেন্ট" />
           </Button>
         </Link>
 

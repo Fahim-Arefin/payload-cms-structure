@@ -6,9 +6,10 @@ import { cn } from '@/lib/utils'
 
 import LifeOfferings from './LifeOfferings'
 import MedicalOfferings from './MedicalOfferings'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
-  config: { value: string; label: string }[]
+  config: { value: string; label: string; labelBN?: string }[]
   data: any
 }
 
@@ -27,7 +28,7 @@ function OfferingsTab({ data, config }: Props) {
             className={cn(
               'w-full flex justify-between p-0',
               // hard override shadcn defaults ONLY here
-              'bg-transparent rounded-none shadow-none border-0'
+              'bg-transparent rounded-none shadow-none border-0',
             )}
           >
             {config.map((tab, index) => (
@@ -45,11 +46,17 @@ function OfferingsTab({ data, config }: Props) {
 
                   activeTab === tab.value
                     ? 'text-[#434343] after:content-[""] after:absolute after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
-                    : 'text-[#434343]'
+                    : 'text-[#434343]',
                 )}
               >
-                <span className={activeTab === tab.value ? 'text-[#ED7125] text-[10px] md:text-base lg:text-[18px]' : 'text-[#434343] text-[10px] md:text-base lg:text-[18px]'}>
-                  {tab.label}
+                <span
+                  className={
+                    activeTab === tab.value
+                      ? 'text-[#ED7125] text-[10px] md:text-base lg:text-[18px]'
+                      : 'text-[#434343] text-[10px] md:text-base lg:text-[18px]'
+                  }
+                >
+                  <LocalizedText en={tab?.label} bn={tab?.labelBN} />
                 </span>
               </TabsTrigger>
             ))}
