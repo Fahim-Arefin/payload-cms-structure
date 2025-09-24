@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input'
 import React, { useState, useRef, useEffect } from 'react'
 import { CiSearch } from 'react-icons/ci'
 import { useRouter } from 'next/navigation'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 
 const searchSuggestions = [
   {
@@ -145,6 +146,8 @@ function SearchBarSection() {
   const inputRef = useRef<HTMLInputElement>(null)
   const suggestionsRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
+  const lang = useSSRLanguage()
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -223,7 +226,7 @@ function SearchBarSection() {
           value={searchTerm}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          placeholder="Search..."
+          placeholder={lang === 'bn' ? 'খুঁজুন' : 'Search...'}
           className="w-full rounded-xl md:rounded-md bg-white text-[#000000] placeholder:text-[#000000]/70 
           placeholder:text-xs sm:placeholder:text-sm tracking-[0.03em] py-4 px-5 sm:py-5 sm:px-12 
           h-[40px] md:h-[45px] lg:h-[60px] xl:h-[70px] "

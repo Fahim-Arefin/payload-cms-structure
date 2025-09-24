@@ -110,8 +110,10 @@ export type AllPlantDataType = {
 
 export type PurchaseCardDataType = {
   title: string
+  titleBN?: string
   biggerTitle?: string
   description: string
+  descriptionBN?: string
   link?: string
   image: string
   videoLink?: string
