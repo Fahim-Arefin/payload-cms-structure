@@ -17,7 +17,7 @@ const page: FC<Props> = ({}) => {
       titleBN: 'প্রিমিয়াম ক্যালকুলেটর',
       subtitle: '',
       description: 'Future-Proof Me',
-      descriptionBN: 'ভবিষ্যতের প্রমাণ',
+      descriptionBN: 'প্রিমিয়াম ক্যালকুলেটর',
       image: '/assets/premCalculator.png',
     },
   ]
@@ -52,7 +52,7 @@ const page: FC<Props> = ({}) => {
               text="Purchase"
               size="large"
             >
-              <LocalizedString en={`Purchase`} bn={`কিনুন`} />
+              <LocalizedString en={`Purchase`} bn={`ক্রয় করুন`} />
             </GlobalButton>
           </ToolTip>
 

@@ -221,6 +221,7 @@ import { ApiResponse, getTotalPremium } from '@/utils/premiumCalculator'
 import PlanDetailsSection from '../purchase/PlanDetailsSection'
 import PurchaseCalculateSection from '../purchase/PurchaseCalculateSection'
 import LocalizedText from '../shared/LocalizedText'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 
 type Props = {}
 
@@ -353,13 +354,24 @@ const CalculatorSection = (props: Props) => {
     >
       <div className="flex flex-col items-start justify-start">
         <h1 className="global-h1 font-semibold text-[#4A4A4A] text-start uppercase mb-4 lg:mb-10">
-          Let’s calculate <span className="text-[#ED7125] font-semibold">the premium</span>
+          <LocalizedHighlighted
+            textEn={`Let’s calculate the premium`}
+            textBn={`সহজ ক্লিকেই আপনার প্রিমিয়াম ক্যালকুলেট করুন`}
+            highlightEn={`the premium`}
+            highlightBn={`ক্যালকুলেট করুন`}
+            highlightClassName="text-[#ED7125] font-semibold"
+          />
         </h1>
         <p className="text-[12px] md:global-p1 text-start w-full xl:w-[80%] text-[#434343] line-clamp-4 md:line-clamp-2">
-          Our policies provide more than just life coverage. Many plans include savings and
-          investment options, helping you grow your wealth over time while ensuring your loved ones
-          are protected. With affordable premiums, flexible terms, and guaranteed returns, Shanta
-          Life combines security and financial growth in one comprehensive package.
+          <LocalizedText
+            en={`Our policies provide more than just life coverage. Many plans include savings and investment options, 
+              helping you grow your wealth over time while ensuring your loved ones are protected. With affordable premiums 
+              and flexible options tailored to your needs, enjoy lifelong protection, and financial growth- protect what matters 
+              the most.`}
+            bn={`আমাদের লক্ষ্য আপনার জীবনের আর্থিক নিরাপত্তার সাথে ভবিষ্যতের ফিন্যান্সিয়াল পার্টনার হয়ে জীবনমান বৃদ্ধিতে পাশে থাকা।  
+                এজন্য আমাদের পলিসিগুলো শুধু জীবনবীমা নয়, বরং আপনার ফিন্যান্সিয়াল প্রোটিফোলিও মজবুত করতে সাহায্য করে। আপনার চাহিদা 
+                অনুযায়ী প্ল্যান এর জন্য  সহজেই প্রিমিয়াম  ক্যালকুলেট করুন।`}
+          />
         </p>
       </div>
 
