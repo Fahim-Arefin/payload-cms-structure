@@ -261,7 +261,7 @@ export const NAV_ITEMS = [
               },
               {
                 label: 'Shanta Spouse Shield',
-                labelBN: 'স্পাউস শিল্ড',
+                labelBN: 'শান্তা স্পাউস শিল্ড',
                 href: '/plans/individual/health-and-protection/spouse-shield',
               },
             ],
@@ -344,7 +344,7 @@ export const NAV_ITEMS_MOBILE = [
               },
               {
                 label: 'Shanta Spouse Shield',
-                labelBN: 'স্পাউস শিল্ড',
+                labelBN: 'শান্তা স্পাউস শিল্ড',
                 href: '/plans/individual/health-and-protection/spouse-shield',
               },
             ],
