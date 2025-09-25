@@ -1,7 +1,8 @@
 # To use this Dockerfile, you have to set `output: 'standalone'` in your next.config.mjs file.
 # From https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
 
-FROM node:22.19.0-alpine AS base
+# Uses node:22-alpine
+FROM node@sha256:cb3143549582cc5f74f26f0992cdef4a422b22128cb517f94173a5f910fa4ee7 AS base
 
 # Install dependencies only when needed
 FROM base AS deps
