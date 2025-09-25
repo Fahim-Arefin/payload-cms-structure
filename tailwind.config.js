@@ -12,7 +12,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        avenir: ['Avenir LT Std'],
+        avenir: ['Avenir LT Std', 'Noto Sans Bengali', 'sans-serif'],
+        // Force Noto when you explicitly need it
+        noto: ['Noto Sans Bengali', 'Avenir LT Std', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',

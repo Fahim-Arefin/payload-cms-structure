@@ -362,7 +362,7 @@ const CalculatorSection = (props: Props) => {
             highlightClassName="text-[#ED7125] font-semibold"
           />
         </h1>
-        <p className="text-[12px] md:global-p1 text-start w-full xl:w-[80%] text-[#434343] line-clamp-4 md:line-clamp-2">
+        <p className="text-[12px] md:global-p1 text-start w-full xl:w-[80%] text-[#434343]">
           <LocalizedText
             en={`Our policies provide more than just life coverage. Many plans include savings and investment options, 
               helping you grow your wealth over time while ensuring your loved ones are protected. With affordable premiums 

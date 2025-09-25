@@ -31,7 +31,7 @@ export default async function HomePage() {
       title: 'Empower yourself',
       subtitle: 'to live on your terms',
       titleBN: 'বাঁচো সাহসে,',
-      subtitleBN: 'আত্মবিশ্বাসে।',
+      subtitleBN: 'আত্মবিশ্বাসে',
       description:
         'Your life evolves, and so should your protection... Shanta Life Insurance ensures you stay ahead.',
       descriptionBN: `জীবনের পথচলায় অর্থনৈতিক সুরক্ষার নির্ভরযোগ্য সঙ্গী—শান্তা লাইফ ইন্স্যুরেন্স।`,
@@ -43,7 +43,7 @@ export default async function HomePage() {
       subtitle: 'to live on your terms',
 
       titleBN: 'বাঁচো সাহসে,',
-      subtitleBN: 'আত্মবিশ্বাসে।',
+      subtitleBN: 'আত্মবিশ্বাসে',
       description:
         'Your life evolves, and so should your protection... Shanta Life Insurance ensures you stay ahead.',
       descriptionBN: `জীবনের পথচলায় অর্থনৈতিক সুরক্ষার নির্ভরযোগ্য সঙ্গী—শান্তা লাইফ ইন্স্যুরেন্স।`,
@@ -54,7 +54,7 @@ export default async function HomePage() {
       title: 'Empower yourself',
       subtitle: 'to live on your terms',
       titleBN: 'বাঁচো সাহসে,',
-      subtitleBN: 'আত্মবিশ্বাসে।',
+      subtitleBN: 'আত্মবিশ্বাসে',
       description:
         'Your life evolves, and so should your protection... Shanta Life Insurance ensures you stay ahead.',
       descriptionBN: `জীবনের পথচলায় অর্থনৈতিক সুরক্ষার নির্ভরযোগ্য সঙ্গী—শান্তা লাইফ ইন্স্যুরেন্স।`,

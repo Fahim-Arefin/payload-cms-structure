@@ -11,7 +11,7 @@ function page({}: Props) {
   const heroSlides = [
     {
       title: '',
-      subtitle: 'Waiver of Premium',
+      subtitle: 'Shanta Waiver of Premium',
       subtitleBN: 'শান্তা ওয়েভার অফ প্রিমিয়াম',
       description: `Secure future for your loved ones, in any situation`,
       descriptionBN: `জীবনের অনিশ্চয়তা কাটিয়ে, নিশ্চিত থাকুক আগামী`,

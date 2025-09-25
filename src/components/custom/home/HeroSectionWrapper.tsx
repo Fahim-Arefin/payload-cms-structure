@@ -27,7 +27,7 @@ const HeroSectionWrapper: FC<HeroSectionWrapperProps> = ({ heroSlides }) => {
       >
         <Link href="/plans">
           <GlobalButton size="large" variant="primary" text="Explore Now" className="">
-            <LocalizedString en="Explore Now" bn="অন্বেষণ করুন" />
+            <LocalizedString en="Explore Now" bn="এক্সপ্লোর করুন" />
           </GlobalButton>
         </Link>
 

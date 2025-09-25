@@ -174,7 +174,7 @@ function WhyChooseUsSection() {
                   {/* info */}
                   <div className="text-white lg:text-[#434343] p-2 2xl:p-4 border-t-2 border-white lg:border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      <LocalizedText en="1K +" bn="১কে  +" />
+                      <LocalizedText en="1K +" bn="১ হাজার+" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
                       
@@ -207,7 +207,7 @@ function WhyChooseUsSection() {
                   className="lg:ml-16 xl:-ml-5 2xl:-ml-32"
                   // text="Explore"
                 >
-                  <LocalizedString en="Explore" bn="অন্বেষণ করুন" />
+                  <LocalizedString en="Explore" bn="এক্সপ্লোর করুন" />
                 </GlobalButton>
               </Link>
             </div>

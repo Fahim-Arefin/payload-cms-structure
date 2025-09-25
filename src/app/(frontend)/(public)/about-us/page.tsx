@@ -19,7 +19,8 @@ function page() {
       subtitleBN: 'পথচলায় এগিয়ে',
       description:
         'At Shanta Life Insurance, our values aren’t just feel-good words — they’re the GPS guiding every decision, every smile, and every ‘we’ve got you covered’ moment.',
-      descriptionBN: `শান্তা লাইফ ইন্সুরেন্সের মূল্যবোধসমূহ আমাদের প্রতিটি কাজের পথ নির্দেশক।`,
+      descriptionBN: `শান্তা লাইফ ইন্স্যুরেন্সে আমাদের মূল্যবোধগুলো কেবল সুন্দর কিছু শব্দ নয় বরং আমাদের প্রতিটি সিদ্ধান্ত, 
+      প্রতিটি কর্মের জন্য নেয়া প্রত্যয়ের দিকনির্দেশনা`,
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/aboutUsBanner.jpg`,
     },
     // {

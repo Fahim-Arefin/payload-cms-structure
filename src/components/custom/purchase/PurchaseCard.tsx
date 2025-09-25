@@ -5,6 +5,7 @@ import { PurchaseCardDataType } from '@/types'
 import { ArrowUpRight } from 'lucide-react'
 import React, { FC, useState } from 'react'
 import { PurchaseCardModal } from './PurchaseCardModal'
+import LocalizedText from '../shared/LocalizedText'
 
 type PurchaseCardProps = {
   data: PurchaseCardDataType
@@ -14,26 +15,30 @@ type PurchaseCardProps = {
 
 const PurchaseCard: FC<PurchaseCardProps> = ({ data, blur, onExplore }: PurchaseCardProps) => {
   const [open, setOpen] = useState(false)
-  
+
   const openModal = () => {
     if (onExplore) {
-      onExplore();
+      onExplore()
     } else {
-      setOpen(true);
+      setOpen(true)
     }
-  };
+  }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      openModal();
+      e.preventDefault()
+      openModal()
     }
-  };
+  }
+  // Utility to trim description
+  const trimText = (text: string) =>
+    text.split(' ').length > 12 ? text.split(' ').slice(0, 12).join(' ') + '...' : text
+  
   return (
     <>
       <div
-      role="button"
-       onClick={openModal}
+        role="button"
+        onClick={openModal}
         onKeyDown={handleKeyDown}
         className="group relative overflow-hidden w-full mx-auto md:w-full 
     h-[250px] md:h-[250px] lg:h-[250px] xl:h-[300px] 2xl:h-[360px] 
@@ -62,7 +67,7 @@ const PurchaseCard: FC<PurchaseCardProps> = ({ data, blur, onExplore }: Purchase
             <div
               className={`text-[20px] lg:text-[20px] xl:text-[20px] 2xl:text-[32px]  uppercase mx-auto lg:mx-0 text-center lg:text-start ${data?.biggerTitle ? 'font-light' : 'font-medium'}`}
             >
-              {data?.title}
+              <LocalizedText en={data?.title} bn={data?.titleBN} />
               <br></br>
               {data?.biggerTitle && (
                 <p className="text-[16px] lg:text-[16px] xl:text-[18px] 2xl:text-[28px] font-medium uppercase mx-auto lg:mx-0 text-center lg:text-start">
@@ -77,10 +82,10 @@ const PurchaseCard: FC<PurchaseCardProps> = ({ data, blur, onExplore }: Purchase
         h-[60%] flex flex-col justify-between`}
           >
             <p className="global-p2 text-center lg:text-start">
-              {data?.description &&
-                (data.description.split(' ').length > 12
-                  ? data.description.split(' ').slice(0, 12).join(' ') + '...'
-                  : data.description)}
+              <LocalizedText
+                en={data?.description ? trimText(data.description) : ''}
+                bn={data?.descriptionBN ? trimText(data.descriptionBN) : ''}
+              />
             </p>
             <Button
               variant="link"
@@ -92,7 +97,9 @@ const PurchaseCard: FC<PurchaseCardProps> = ({ data, blur, onExplore }: Purchase
               }}
             >
               <div className="flex space-x-1 items-center ">
-                <span>Explore</span>
+                <span>
+                  <LocalizedText en={`Explore`} bn={`এক্সপ্লোর`} />
+                </span>
                 <ArrowUpRight />
               </div>
             </Button>

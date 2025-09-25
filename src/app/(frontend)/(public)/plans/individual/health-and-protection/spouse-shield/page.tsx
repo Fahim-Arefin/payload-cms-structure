@@ -11,8 +11,8 @@ function page({}: Props) {
   const heroSlides = [
     {
       title: '',
-      subtitle: 'Spouse Shield',
-      subtitleBN: 'স্পাউস শিল্ড',
+      subtitle: 'Shanta Spouse Shield',
+      subtitleBN: 'শান্তা স্পাউস শিল্ড',
       description: `Securing your shared journey, protecting your family’s tomorrow`,
       descriptionBN: `সুরক্ষা ও ভালোবাসায় ভবিষ্যতের পথচলা`,
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/spouse-shield/web/hero-banner.jpg`,

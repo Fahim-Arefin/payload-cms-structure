@@ -105,7 +105,8 @@ function CareerSwiper({ careerCards }: CareerSwiperProps) {
                   >
                     <div className="flex-1 flex flex-col gap-4 md:gap-8 justify-center">
                       <div className="text-white text-[14px] md:text-[16px] lg:global-p1 font-bold">
-                        {card.title}
+                        
+                        <LocalizedText en={card?.title} bn={card?.titleBN} />
                       </div>
                       <div className="text-white global-p2">
                         <LocalizedText en={card?.description} bn={card?.descriptionBN} />

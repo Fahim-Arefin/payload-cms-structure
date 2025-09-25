@@ -261,7 +261,7 @@ export const NAV_ITEMS = [
               },
               {
                 label: 'Shanta Spouse Shield',
-                labelBN: 'স্পাউস শিল্ড',
+                labelBN: 'শান্তা স্পাউস শিল্ড',
                 href: '/plans/individual/health-and-protection/spouse-shield',
               },
             ],
@@ -344,7 +344,7 @@ export const NAV_ITEMS_MOBILE = [
               },
               {
                 label: 'Shanta Spouse Shield',
-                labelBN: 'স্পাউস শিল্ড',
+                labelBN: 'শান্তা স্পাউস শিল্ড',
                 href: '/plans/individual/health-and-protection/spouse-shield',
               },
             ],
@@ -389,11 +389,11 @@ export const supportTabContent = [
         office_location: 'Shanta Life Insurance',
         office_address:
           'Shanta Western Tower - 186, Bir Uttam Mir Shawkat Sarak- Tejgaon Link Road, Dhaka-1208 (Level-10)',
-        office_addressBN: `Shanta Western Tower 
-          186, বীর উত্তম মীর শওকত সরাক, তেজগাঁও লিংক রোড, ঢাকা-1208 (Level-10)`,
+        office_addressBN: `শান্তা ওয়েস্টার্ন টাওয়ার, 
+          ১৮৬, বীর উত্তম মীর শওকত সরাক, তেজগাঁও লিংক রোড, ঢাকা-১২০৮ (লেভেল ১০)`,
         office_email: 'info@shantalife.com; customer.services@shantalife.com',
         office_phone: '09610889900 (10 am to 6 pm, Sunday to Thursday)',
-        office_phoneBN: `09610889900 (রবি–বৃহস্পতি | সকাল ১০টা – সন্ধ্যা ৬টা)`
+        office_phoneBN: `+৮৮০৯৬১০৮৮৯৯০০ (রবি–বৃহস্পতি | সকাল ১০টা – সন্ধ্যা ৬টা)`
       },
       {
         office_location_Label: 'Head Office Extention ',

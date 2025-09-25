@@ -11,6 +11,14 @@ import { Metadata } from 'next'
 import Script from 'next/script'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Providers from '@/context/providers'
+import { Noto_Sans_Bengali } from 'next/font/google'
+
+const notoBengali = Noto_Sans_Bengali({
+  subsets: ['bengali'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
+  variable: '--font-bn', // expose a CSS variable for Tailwind/use anywhere
+})
 
 export const metadata: Metadata = {
   title:
@@ -181,7 +189,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           strategy="beforeInteractive"
         /> */}
       </head>
-      <body>
+      <body className={`${notoBengali.variable}`}>
         <Providers initialLang="en">
           <main className="bg-[#F6EDDD] min-h-screen relative font-avenir 3xl:max-w-[1925px] 3xl:mx-auto">
             <TopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" />
