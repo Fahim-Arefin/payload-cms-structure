@@ -27,7 +27,7 @@ function EndowmentPage() {
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/endowment/web/planInfo2.png`,
     // mobileImage:
     //   '/assets/solutions/individual/saving-and-investment/endowment/mobile/planInfo2.png',
-    descriptionBN: `আপনার ভবিষ্যৎ হোক নিশ্চিন্ত ও সুরক্ষিত। নিশ্চিত সুরক্ষা আর সঞ্চয়ের পূর্ণাঙ্গ সমাধান — শান্তা লাইফের এন্ডাওমেন্ট প্ল্যান।`,
+    descriptionBN: `আপনার ভবিষ্যৎ হোক নিশ্চিন্ত ও সুরক্ষিত। নিশ্চিত সুরক্ষা আর সঞ্চয়ের পূর্ণাঙ্গ সমাধান — শান্তা লাইফের এনডাওমেন্ট প্ল্যান।`,
     description:
       'Secure your future with confidence. Shanta Life\u2019s Endowment Plan offers policyholders a guaranteed sum assured, seamlessly blending savings and life insurance to ensure long-term financial security for their families.',
   }
