@@ -14,6 +14,7 @@ const cards = [
     icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/cue2.png`,
     // mobileIcon: '/assets/homepage/mobile/cue2.png',
     title: 'Shanta',
+    titleBN: 'শান্তা',
     subtitle: 'Child Education Plan',
     subtitleBN: 'চাইল্ড এডুকেশন প্ল্যান',
     description: 'They’re building castles in the sky — we’re here to anchor the ground.',
@@ -28,6 +29,7 @@ const cards = [
     icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/cue1.png`,
     // mobileIcon: '/assets/homepage/mobile/cue1.png',
     title: 'Shanta',
+    titleBN: 'শান্তা',
     subtitle: 'Multi Stage Maturity Plans',
     subtitleBN: 'মাল্টি স্টেজ ম্যাচুরিটি প্ল্যান ',
     description: 'Multiple payouts, 2 powerful plans - because your future is in your hands.',
@@ -42,6 +44,7 @@ const cards = [
     icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/cue3.png`,
     // mobileIcon: '/assets/homepage/mobile/cue3.png',
     title: 'Shanta',
+    titleBN: 'শান্তা',
     subtitle: 'Endowment Plan',
     subtitleBN: 'এনডাওমেন্ট প্ল্যান',
     description: 'For the life you’re building and the ones you’re building it for.',
@@ -97,7 +100,7 @@ function OnYourCueSection() {
       <div className="flex justify-center mt-4 md:mt-6 lg:mt-8 2xl:mt-12 font-avenir">
         <Link href="/plans">
           <GlobalButton variant="primary" className="" text="Lets Find More">
-            <LocalizedString en='Lets Find More' bn='খুঁজে বের করুন'/>
+            <LocalizedString en='Lets Find More' bn='আরো জানুন'/>
           </GlobalButton>
         </Link>
       </div>

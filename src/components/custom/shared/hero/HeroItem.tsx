@@ -10,9 +10,12 @@ type Props = {
   slide: HeroContentType
   top?: string
   position?: string
+  isHome?: boolean
 }
 
-const HeroItem = ({ slide, top, position }: Props) => {
+const HeroItem = ({ slide, top, position, isHome }: Props) => {
+  const descWidthLg = isHome ? 'lg:w-[40%] xl:w-[45%]' : 'lg:w-[65%] xl:w-[65%]'
+
   return (
     <>
       {/* Background image */}
@@ -62,7 +65,7 @@ const HeroItem = ({ slide, top, position }: Props) => {
         </div>
 
         {/* description */}
-      {slide?.description && (
+        {slide?.description && (
           <>
             <div
               className="
@@ -80,31 +83,23 @@ const HeroItem = ({ slide, top, position }: Props) => {
                 <LocalizedText
                   en={slide?.description ? slide.description : ''}
                   bn={slide?.descriptionBN ? slide?.descriptionBN : slide?.description}
-                /> 
-              
+                />
               </div>
             </div>
 
             {/* description style after lg screen */}
-          
+
             <div
-              className="
-              hidden lg:block
-          hero-description-bg-lg
-          font-[350]
-         w-[65%]
-          p-2 md:p-3 lg:p-4
-          hero-h5
-          "
+              className={`hidden lg:block hero-description-bg-lg font-[350] ${descWidthLg}
+                          p-2 md:p-3 lg:p-4 hero-h5`}
             >
               <div className="text-white">
                 <LocalizedText
                   en={slide?.description ? slide.description : ''}
                   bn={slide?.descriptionBN ? slide?.descriptionBN : slide?.description}
-                /> 
+                />
               </div>
             </div>
-            
           </>
         )}
 

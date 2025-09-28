@@ -37,6 +37,7 @@ import {
 import Link from 'next/link'
 import { Checkbox } from '@/components/ui/checkbox'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
+import LocalizedString from '../shared/LocalizedString'
 
 interface FormData {
   PlanCode: number
@@ -957,7 +958,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           id="sumAssured"
           min={100000}
           type="number"
-          placeholder={L('Sum Assured *', 'বিমা অঙ্ক *')}
+          placeholder={L('Sum Assured *', 'বীমা অঙ্ক *')}
           value={formData.SumAssured || ''}
           onChange={(e) => handleInputChange('SumAssured', parseInt(e.target.value) || 0)}
           className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px]
@@ -1188,7 +1189,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             !agreeTerms || isLoading ? 'opacity-60 cursor-not-allowed' : '',
           ].join(' ')}
         >
-          {isLoading ? 'Calculating...' : 'Get A Quote Now'}
+          {/* {isLoading ? 'Calculating...' : 'Get A Quote Now'} */}
+          <LocalizedString
+            en={isLoading ? 'Calculating...' : 'Get A Quote Now'}
+            bn={isLoading ? 'হিসাব...' : 'গেট এ কোট'}
+          />
         </GlobalButton>
       </div>
     </form>

@@ -12,13 +12,14 @@ import LocalizedText from '../shared/LocalizedText'
 
 type HeroSectionWrapperProps = {
   heroSlides: any
+  isHome?: boolean
 }
 
-const HeroSectionWrapper: FC<HeroSectionWrapperProps> = ({ heroSlides }) => {
+const HeroSectionWrapper: FC<HeroSectionWrapperProps> = ({ heroSlides, isHome }) => {
   const [open, setOpen] = useState(false)
 
   return (
-    <HeroSection heroSlides={heroSlides}>
+    <HeroSection heroSlides={heroSlides} isHome={isHome}>
       <div
         className="absolute top-[245px] md:top-[355px] lg:top-[470px] xl:top-[490px]  2xl:top-[730px] 
           inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
@@ -27,7 +28,7 @@ const HeroSectionWrapper: FC<HeroSectionWrapperProps> = ({ heroSlides }) => {
       >
         <Link href="/plans">
           <GlobalButton size="large" variant="primary" text="Explore Now" className="">
-            <LocalizedString en="Explore Now" bn="এক্সপ্লোর করুন" />
+            <LocalizedString en="Explore Now" bn="এক্সপ্লোর" />
           </GlobalButton>
         </Link>
 
@@ -42,7 +43,7 @@ const HeroSectionWrapper: FC<HeroSectionWrapperProps> = ({ heroSlides }) => {
                 <BsPlay />
               </div>
               <div className="global-h4 font-normal">
-                <LocalizedText en="From the Expert" bn="বিশেষজ্ঞের থেকে" />
+                <LocalizedText en="From the Expert" bn="আরো জানুন" />
               </div>
             </GlobalButton>
           </DialogTrigger>
