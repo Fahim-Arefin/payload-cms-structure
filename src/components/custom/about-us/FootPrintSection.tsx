@@ -58,8 +58,9 @@ function FootPrintSection({ footPrintData }: Props) {
             {/* <h1 className="lg:hidden global-h1 font-medium lg:font-semibold uppercase">
               Shanta&rsquo;s Living <span className="text-[#ED7125]">Ecosystem</span>
             </h1> */}
+            
             <h3 className="global-h1 md:global-h4 font-light">
-              <LocalizedText en={subTitle} bn={subTitleBN} />
+              <LocalizedText en={subTitle} bn={subTitleBN ? subTitleBN : ''} />
             </h3>
           </div>
         </div>
