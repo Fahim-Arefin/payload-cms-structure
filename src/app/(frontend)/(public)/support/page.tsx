@@ -174,36 +174,42 @@ function SupportPage() {
   const levelUpData = [
     {
       title: 'Vlog',
+      titleBN: 'ভ্লগ',
       image: '/assets/supportpage/web/levelup1.jpg',
       mobileImage: '/assets/supportpage/mobile/levelup1.jpg',
       link: '/news-and-media#vlog',
     },
     {
       title: 'Blog',
+      titleBN: 'ব্লগ',
       image: '/assets/supportpage/web/levelup2.jpg',
       mobileImage: '/assets/supportpage/mobile/levelup2.jpg',
       link: '/news-and-media#blog',
     },
     {
       title: 'News',
+      titleBN: 'নিউজ',
       image: '/assets/supportpage/web/levelup3.jpg',
       mobileImage: '/assets/supportpage/mobile/levelup3.jpg',
       link: '/news-and-media#news',
     },
     {
       title: 'Vlog',
+      titleBN: 'ভ্লগ',
       image: '/assets/supportpage/web/levelup1.jpg',
       mobileImage: '/assets/supportpage/mobile/levelup1.jpg',
       link: '/news-and-media#vlog',
     },
     {
       title: 'Blog',
+      titleBN: 'ব্লগ',
       image: '/assets/supportpage/web/levelup2.jpg',
       mobileImage: '/assets/supportpage/mobile/levelup2.jpg',
       link: '/news-and-media#blog',
     },
     {
       title: 'News',
+      titleBN: 'নিউজ',
       image: '/assets/supportpage/web/levelup3.jpg',
       mobileImage: '/assets/supportpage/mobile/levelup3.jpg',
       link: '/news-and-media#news',

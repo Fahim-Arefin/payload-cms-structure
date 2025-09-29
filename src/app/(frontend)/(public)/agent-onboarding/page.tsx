@@ -13,7 +13,7 @@ function page({}: Props) {
   const heroSlides = [
     {
       title: 'Turn your Ambition, Into Impact ',
-      titleBN: `আপনার ভিশনকে বদলে দিন বর্তমানে`,
+      titleBN: `ক্যারিয়ার হোক ইমপ্যাক্টফুল`,
       subtitle: '',
       description: 'Stay beyond the ordinary, step into a role that builds futures.',
       descriptionBN: 'ভবিষ্যৎ গড়ার ভূমিকায় এগিয়ে থাকুন নিজ স্বপ্নপূরণের পথে',

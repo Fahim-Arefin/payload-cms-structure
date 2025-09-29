@@ -151,7 +151,7 @@ function Bancassurance() {
                       ensuring peace of mind and
                       security during difficult times.`,
         descriptionBN: `কোনও বীমাকৃত সদস্যের চিকিৎসার জন্য হাসপাতালে ভর্তির ক্ষেত্রে, 
-        শান্তা. লাইফ পলিসির শর্তাবলী অনুসারে বীমাকৃত ব্যক্তিকে আর্থিক সহায়তা প্রদান করে, 
+        শান্তা লাইফ পলিসির শর্তাবলী অনুসারে বীমাকৃত ব্যক্তিকে আর্থিক সহায়তা প্রদান করে, 
         কঠিন সময়ে মানসিক শান্তি এবং নিরাপত্তা নিশ্চিত করে।`,
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon4.png`,
       },

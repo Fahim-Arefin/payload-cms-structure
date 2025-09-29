@@ -125,10 +125,10 @@ function Offers<T>({ data, subheading, subHeadingBN, cardComponent: CardComponen
       <div className="space-y-4">
         <div className="flex space-x-2">
           <h3 className="global-h1 uppercase font-medium text-[#434343]">
-            <LocalizedText en={'We'} bn={'আমাদের'} />
+            <LocalizedText en={'We'} bn={'এই প্ল্যানের'} />
           </h3>
           <h3 className="global-h1 uppercase font-medium text-[#ED7125]">
-            <LocalizedText en={'Offer'} bn={'পরিকল্পনাসমূহ'} />
+            <LocalizedText en={'Offer'} bn={'সুবিধাসমূহ'} />
           </h3>
         </div>
         {subheading && (

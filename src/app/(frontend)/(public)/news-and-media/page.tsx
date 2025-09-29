@@ -15,7 +15,7 @@ export default function NewsAndMedia() {
       titleBN: 'নিউজ এবং মিডিয়া',
       subtitle: '',
       description: 'Focus on highlights',
-      descriptionBN: 'হাইলাইটগুলিতে ফোকাস করুন',
+      descriptionBN: '',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/news_media_hero.jpg`,
     },
   ]

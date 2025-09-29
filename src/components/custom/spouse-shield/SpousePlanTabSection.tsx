@@ -37,7 +37,7 @@ function SpousePlanTabSection({ data }: Props) {
         </div>
       ))}
 
-      <div className="flex flex-row justify-center items-center gap-4">
+      {/* <div className="flex flex-row justify-center items-center gap-4">
         <GlobalButton text="Download Brochure" className="cursor-not-allowed" variant="secondary">
           <LocalizedString en={'Download Brochure'} bn={'ডাউনলোড ব্রোশিউর'} />
         </GlobalButton>
@@ -45,7 +45,7 @@ function SpousePlanTabSection({ data }: Props) {
         <GlobalButton variant="outline" className="cursor-not-allowed" text="Explore Now">
           <LocalizedString en={'Explore Now'} bn={'ঘুরে দেখুন'} />
         </GlobalButton>
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -59,13 +59,13 @@ const HeroItem = ({ slide, top, position, isHome }: Props) => {
             {/* {slide.subtitle ? slide.subtitle : ''} */}
             <LocalizedText
               en={slide?.subtitle ? slide.subtitle : ''}
-              bn={slide?.subtitleBN ? slide.subtitleBN : slide?.subtitle}
+              bn={slide?.subtitleBN ? slide.subtitleBN : ''}
             />
           </h1>
         </div>
 
         {/* description */}
-        {slide?.description && (
+        {slide?.description && slide?.descriptionBN && (
           <>
             <div
               className="
@@ -82,7 +82,7 @@ const HeroItem = ({ slide, top, position, isHome }: Props) => {
                 ))} */}
                 <LocalizedText
                   en={slide?.description ? slide.description : ''}
-                  bn={slide?.descriptionBN ? slide?.descriptionBN : slide?.description}
+                  bn={slide?.descriptionBN ? slide?.descriptionBN : ''}
                 />
               </div>
             </div>

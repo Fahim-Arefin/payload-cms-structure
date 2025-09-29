@@ -84,9 +84,9 @@ function PartnerCarousel({ data }: Props) {
       >
         <LocalizedHighlighted
           textEn={`OUR VALUED CLIENTS`}
-          textBn={`আমাদের মূল্যবান ক্লায়েন্টদের জন্য`}
+          textBn={`আমাদের সম্মানিত ক্লায়েন্টবৃন্দ`}
           highlightEn={`OUR VALUED`}
-          highlightBn={`আমাদের মূল্যবান`}
+          highlightBn={`আমাদের সম্মানিত`}
           highlightClassName="text-[#ED7125]"
         />
       </h2>

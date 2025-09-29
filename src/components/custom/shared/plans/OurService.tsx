@@ -18,7 +18,7 @@ function OurService({}: Props) {
     {
       value: 'hospitals',
       label: 'PANEL HOSPITALS',
-      labelBN: 'হেড অফিস'
+      labelBN: 'প্যানেল হসপিটাল'
     },
   ]
 

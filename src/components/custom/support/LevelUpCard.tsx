@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import React from 'react'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   item: {
     image: string
     mobileImage: string
     title: string
+    titleBN?: string
     link?: string
   }
 }
@@ -40,7 +42,9 @@ function LevelUpCard({ item }: Props) {
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 z-0" />
 
       {/* Content */}
-      <div className="relative z-10 global-h1 font-semibold">{item?.title}</div>
+      <div className="relative z-10 global-h1 font-semibold">
+        <LocalizedText en={item?.title} bn={item?.titleBN}/>
+      </div>
     </div>
   )
 

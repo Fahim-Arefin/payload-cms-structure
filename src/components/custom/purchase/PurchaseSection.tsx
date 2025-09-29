@@ -186,7 +186,7 @@ const PurchaseSection = (props: Props) => {
                 <p className="global-p2 font-light text-[#fff]">
                   <LocalizedText
                     en={`Build Wealth With Guaranteed Returns And Built-in Life Insurance`}
-                    bn={`নিশ্চিত অর্থপ্রাপ্তি ও জীবন বিমার মাধ্যমে গড়ে তুলুন সম্পদ।`}
+                    bn={`নিশ্চিত অর্থপ্রাপ্তি ও জীবন বীমার মাধ্যমে গড়ে তুলুন সম্পদ।`}
                   />
                 </p>
               </div>

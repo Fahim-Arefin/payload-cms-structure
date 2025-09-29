@@ -31,12 +31,12 @@ function page() {
 
   const benefitSliderData = {
     title: 'Benefits of',
-    titleBN: `আমাদের হাসপাতাল`,
+    titleBN: `প্রিয় মুহূর্তেগুলো এনজয় করুন`,
     coloredTitle: 'Our Hospital Network',
-    coloredTitleBN: 'নেটওয়ার্কের বিশেষ সুবিধা',
+    coloredTitleBN: 'শান্তা লাইফ এর স্পেশাল ডিসকাউন্টে',
     description: 'Discover the benefits that make our hospital service special.',
-    descriptionBN: `শান্তা লাইফের বিস্তৃত হাসপাতাল নেটওয়ার্ক আপনাকে দিচ্ছে সহজলভ্য চিকিৎসা সেবা, 
-    ক্যাশলেস সুবিধা এবং মানসম্পন্ন স্বাস্থ্যসেবার নিশ্চয়তা — যখনই আপনার প্রয়োজন।`,
+    descriptionBN: `শান্তা লাইফ এর ওয়েলনেস কার্ড এর সাথে আনলক করুন লাক্সারি ডিসকাউন্টস - আপনার
+    অবসরকে করুন আরোও আকর্ষণীয়।`,
     item: [
       {
         bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/lifestyle-privileges-with-digital-loyalty-card/web/CHFBgImage1.jpg`,
