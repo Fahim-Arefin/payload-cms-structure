@@ -11,6 +11,7 @@ import GlobalButton from '../shared/GlobalButton'
 import ToolTip from '../shared/ToolTip'
 import { ArrowUpRight } from 'lucide-react'
 import GlobalTabButtons from '../shared/GlobalTabButtons'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 
 export function ArrowIcon() {
   return (
@@ -31,11 +32,13 @@ type Props = {
   config: {
     value: string
     label: string
+    labelBN?: string
   }[]
   data?: any
 }
 
 export default function MultiStageTab({ config, data }: Props) {
+  const lang = useSSRLanguage()
   const [activeTab, setActiveTab] = useState(config[0].value)
   console.log(activeTab)
   return (
@@ -50,36 +53,39 @@ export default function MultiStageTab({ config, data }: Props) {
           className="relative w-full border-b border-[#434343] md:py-[12px] bg-white
          md:mb-[30px] lg:mb-[50px] xl:mb-[80px]"
         >
-          <TabsList className={`w-full flex justify-between bg-transparent  p-0 `}>
-            {config.map((tab, index) => (
-              <TabsTrigger
-                key={tab.value}
-                value={tab.value}
-                className={cn(
-                  'global-p1 font-medium px-2 py-2.5 md:py-[22px] lg:py-[23px] xl:py-[24px] uppercase relative flex justify-center',
-                  index === 0 ? 'pl-0' : '',
-                  config?.length === 2 && 'w-[45%] text-center',
-                  activeTab === tab.value
-                    ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
-                    : 'text-[#434343]',
-                )}
-              >
-                {(() => {
-                  const words = tab.label.trim().split(' ')
-                  const last = words.pop()
-                  return (
-                    <>
-                      {words.join(' ')}{' '}
-                      <span
-                        className={` ${activeTab === tab.value ? ' text-[#ED7125] ' : ' text-[#9C8639] '} ml-1 md:ml-2`}
-                      >
-                        {last}
-                      </span>
-                    </>
-                  )
-                })()}
-              </TabsTrigger>
-            ))}
+          <TabsList className="w-full flex justify-between bg-transparent p-0">
+            {config.map((tab, index) => {
+              const labelText = lang === 'bn' && tab.labelBN ? tab.labelBN : tab.label
+              const words = labelText.trim().split(' ')
+              const last = words.pop() || ''
+              const rest = words.join(' ')
+              return (
+                <TabsTrigger
+                  key={tab.value}
+                  value={tab.value}
+                  className={cn(
+                    'global-p1 font-medium px-2 py-2.5 md:py-[22px] lg:py-[23px] xl:py-[24px] uppercase relative flex justify-center',
+                    index === 0 ? 'pl-0' : '',
+                    config?.length === 2 && 'w-[45%] text-center',
+                    activeTab === tab.value
+                      ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:lg:h-[5px] after:xl:h-[6px] after:2xl:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
+                      : 'text-[#434343]',
+                  )}
+                >
+                  <>
+                    {rest && <span>{rest} </span>}
+                    <span
+                      className={cn(
+                        activeTab === tab.value ? 'text-[#ED7125]' : 'text-[#9C8639]',
+                        'ml-1 md:ml-2',
+                      )}
+                    >
+                      {last}
+                    </span>
+                  </>
+                </TabsTrigger>
+              )
+            })}
           </TabsList>
 
           {/* Dynamic Arrows */}

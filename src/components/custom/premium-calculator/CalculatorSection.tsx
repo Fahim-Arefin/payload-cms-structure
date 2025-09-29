@@ -403,8 +403,8 @@ const CalculatorSection = (props: Props) => {
                 </h4>
                 <p className="global-p2 text-[#3A3A3C]">
                   <LocalizedText
-                    en={`Secure Your Child’s Future With A Plan That Covers Both Education Costs And Life
-                                   Protection—Because Dreams Deserve A Safety Net.`}
+                    en={`Secure your child’s future with a plan that covers both education costs and life
+                                   protection—because dreams deserve a safety net.`}
                     bn={`আপনার সন্তানের ভবিষ্যৎ সুরক্ষিত করুন এমন এক পরিকল্পনায়, যা শিক্ষা ব্যয় ও জীবন সুরক্ষা দুটোই কভার করে।`}
                   />
                 </p>
@@ -417,8 +417,8 @@ const CalculatorSection = (props: Props) => {
                 </h4>
                 <p className="global-p2 font-light text-[#fff]">
                   <LocalizedText
-                    en={`Build Wealth With Guaranteed Returns And Built-in Life Insurance`}
-                    bn={`নিশ্চিত অর্থপ্রাপ্তি ও জীবন বিমার মাধ্যমে গড়ে তুলুন সম্পদ।`}
+                    en={`Build wealth with guaranteed returns and built-in life insurance`}
+                    bn={`নিশ্চিত অর্থপ্রাপ্তি ও জীবন বীমার মাধ্যমে গড়ে তুলুন সম্পদ।`}
                   />
                 </p>
               </div>
@@ -432,7 +432,7 @@ const CalculatorSection = (props: Props) => {
                 </h4>
                 <p className="global-p2 font-light text-[#fff]">
                   <LocalizedText
-                    en={`Because We Want You To Focus On Your Recovery.`}
+                    en={`Because we want you to focus on your recovery.`}
                     bn={`আমরা চাই আপনি যেন শুধু সুস্থ হয়ে ওঠার দিকেই মনোযোগ দিন।`}
                   />
                 </p>

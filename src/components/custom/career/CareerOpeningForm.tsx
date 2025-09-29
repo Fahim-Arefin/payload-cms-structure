@@ -288,52 +288,27 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
           <span className="text-xs leading-relaxed">
-            {lang === 'en' ? (
-              <>
-                By clicking <span className="font-semibold">Submit</span>, you agree to our{' '}
-                <Link
-                  href="/terms-condition"
-                  className="underline text-[#FF6600] hover:opacity-90"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  terms and conditions
-                </Link>{' '}
-                and Shanta Life{' '}
-                <Link
-                  href="/privacy-policy"
-                  className="underline text-[#FF6600] hover:opacity-90"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  privacy policy
-                </Link>
-                .
-              </>
-            ) : (
-              <>
-                <span className="font-semibold">বাটনে</span>  ক্লিক করার
-                মাধ্যমে আপনি আমাদের{' '}
-                <Link
-                  href="/terms-condition"
-                  className="underline text-[#FF6600] hover:opacity-90"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  শর্তাবলী (Terms &amp; Conditions)
-                </Link>{' '}
-                এবং শানতা লাইফের{' '}
-                <Link
-                  href="/privacy-policy"
-                  className="underline text-[#FF6600] hover:opacity-90"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  গোপনীয়তা নীতি (Privacy Policy)
-                </Link>{' '}
-                এর সাথে সম্মত হচ্ছেন।
-              </>
-            )}
+            <>
+              By clicking <span className="font-semibold">Submit</span>, you agree to our{' '}
+              <Link
+                href="/terms-condition"
+                className="underline text-[#FF6600] hover:opacity-90"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                terms and conditions
+              </Link>{' '}
+              and{' '}
+              <Link
+                href="/privacy-policy"
+                className="underline text-[#FF6600] hover:opacity-90"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                privacy policy
+              </Link>
+              .
+            </>
           </span>
         </label>
       </div>

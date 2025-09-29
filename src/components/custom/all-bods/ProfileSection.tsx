@@ -31,7 +31,7 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
     // Check again on window resize to handle responsive changes
     window.addEventListener('resize', checkIfTextClamped)
     return () => window.removeEventListener('resize', checkIfTextClamped)
-  }, [data.description])
+  }, [data.description, data.descriptionBN])
 
   return (
     <div id={`id-${data.id}`} className="container-padding">
@@ -81,7 +81,7 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
               ref={textRef}
               className={cn(
                 'text-[#444] font-[350] text-justify text-base leading-7 xl:leading-10 md:global-p1',
-                !expanded && 'line-clamp-5 lg:line-clamp-5 xl:line-clamp-[7]',
+                !expanded && 'line-clamp-5 lg:line-clamp-5 xl:line-clamp-[5]',
               )}
             >
               <LocalizedText en={data?.description} bn={data?.descriptionBN} />

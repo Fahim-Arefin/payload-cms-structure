@@ -48,7 +48,9 @@ function page() {
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/shantaIntroImage.png`,
     // mobileImage: '/assets/about-us/web/shantaIntroImage.png',
     paragraph:
-      'Born from a vision to redefine life insurance in Bangladesh, Shanta Life is backed by a powerful consortium comprised of Shanta Holdings, Shanta Lifestyle, Shanta Securities, Shanta Asset Management, Shanta Equity, Shanta Multiverse, Shanta Property Management, FAR Asset Management, and Nasah Holdings.',
+      `Born from a vision to redefine life insurance in Bangladesh, Shanta Life is backed by a powerful consortium comprised 
+      of Shanta Holdings, Shanta Lifestyle, Shanta Securities, Shanta Asset Management, Shanta Equity, Shanta Multiverse,
+       Shanta Property Management, FAR Asset Management, and Nasah Holdings.`,
     paragraphBN: `বাংলাদেশের লাইফ ইন্সুরেন্স সেক্টরে নতুন মানদণ্ড স্থাপনের স্বপ্ন নিয়ে শান্তা লাইফের যাত্রা শুরু। 
     দেশের স্বনামধন্য প্রতিষ্ঠান শান্তা হোল্ডিংস , শান্তা লাইফস্টাইল, শান্তা সিকিউরিটিজ, শান্তা অ্যাসেট ম্যানেজমেন্ট, শান্তা ইকুইটি, 
     শান্তা মাল্টিভার্স, শান্তা প্রোপার্টি ম্যানেজমেন্ট , ফার অ্যাসেট ম্যানেজমেন্ট এবং নাসাহ হোল্ডিংস এর যৌথ উদ্যোগে শান্তা লাইফ ইন্সুরেন্সের যাত্রা শুরু।`,
