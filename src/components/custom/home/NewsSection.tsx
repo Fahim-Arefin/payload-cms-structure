@@ -201,9 +201,9 @@ function NewsSection() {
 
           {/* Text Content */}
           <div className="absolute bottom-5 2xl:bottom-16 inset-x-0 z-20 px-4 2xl:px-20 space-y-2 text-white">
-            <h1 className="text-[12px] xl:text-[16px] 2xl:text-2xl font-bold">
+            {/* <h1 className="text-[12px] xl:text-[16px] 2xl:text-2xl font-bold">
               Shanta Life Insurance gets license to launch
-            </h1>
+            </h1> */}
             <p className="text-[10px] xl:text-[14px] 2xl:text-[16px] font-light">
               Bangladesh's insurance sector is set to expand through the launch of a new venture,
               "Shanta Life Insurance PLC".

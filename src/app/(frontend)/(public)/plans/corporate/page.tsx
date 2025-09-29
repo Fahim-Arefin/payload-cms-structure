@@ -25,7 +25,7 @@ function page({}: Props) {
 
   const highlightData = [
     {
-      mainDescription: `Deciding on the best package for your team , making sure you’re getting value for money, 
+      mainDescription: `Deciding on the best package for your team, making sure you’re getting value for money, 
       and staying on top of the available options — it can all add up to a daunting to-do list. 
       We’re here to make that easier for you.`,
       mainDescriptionBN: `সঠিক প্যাকেজ বেছে নেওয়া, অর্থের সর্বোত্তম মূল্য নিশ্চিত করা, এবং সব উপলব্ধ বিকল্পের খোঁজ রাখা — 

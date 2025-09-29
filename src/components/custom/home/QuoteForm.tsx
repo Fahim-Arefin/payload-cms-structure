@@ -1157,7 +1157,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             >
               terms and conditions
             </Link>{' '}
-            and Shanta Life{' '}
+            and {' '}
             <Link
               href="/privacy-policy"
               className="underline text-[#FF6600] hover:opacity-90"

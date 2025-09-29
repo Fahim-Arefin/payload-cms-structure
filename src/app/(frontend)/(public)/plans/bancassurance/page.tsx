@@ -11,7 +11,7 @@ function Bancassurance() {
       titleBN: 'ব্যাংকাসুরেন্স',
       subtitle: '',
       description:
-        'Where banking meets protection, Tailored for individuals, delivered through trust',
+        'Where banking meets protection, tailored for individuals, delivered through trust',
       descriptionBN: `ব্যাংকিং ও সুরক্ষার সহজ সমন্বয়`,
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/banner6.jpg`,
     },

@@ -26,7 +26,7 @@ function PlanPage() {
     {
       title: 'Saving and Investment Plans',
       titleBN: 'সেভিংস এন্ড ইনভেস্টমেন্ট প্ল্যানস',
-      description: `Because Life Has More Than One Milestone. We’re With You at Every One.`,
+      description: `Because life has more than one milestone. We’re with you at every one.`,
       descriptionBN: `জীবনের প্রতিটি মাইলস্টোনে আমরা আছি আপনার পাশে`,
       link: '/plans/individual/saving-and-investment',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/web/saving-and-investment.png`,

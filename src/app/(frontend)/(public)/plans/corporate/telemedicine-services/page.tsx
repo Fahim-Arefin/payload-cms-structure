@@ -25,7 +25,9 @@ function page() {
     সাধারণ স্বাস্থ্য পরামর্শ, ফলো-আপ কনসালটেশন বা ছোটখাটো অসুস্থতার জন্য সদস্যরা হাসপাতাল বা 
     ক্লিনিকে না গিয়েই ডাক্তারের সঙ্গে যোগাযোগ করতে পারেন।`,
     description: `
-   Telemedicine allows insured members to consult licensed physicians remotely via phone, video call, or online chat. Whether it’s for general health advice, follow-up consultations, or minor illnesses, members can connect with a doctor without visiting a hospital or clinic. 
+   Telemedicine allows insured members to consult licensed physicians remotely via phone, video call. 
+   Whether it’s for general health advice, follow-up consultations, or minor illnesses, 
+   members can connect with a doctor without visiting a hospital or clinic. 
   `,
   }
 

@@ -8,13 +8,13 @@ import LocalizedText from '../LocalizedText'
 type Props = {}
 
 function OurService({}: Props) {
-  const [activeMapTab, setActiveMapTab] = useState('branches')
+  const [activeMapTab, setActiveMapTab] = useState('hospitals')
   const tabItems = [
-    {
-      value: 'branches',
-      label: 'OUR BRANCHES',
-      labelBN: 'আমাদের শাখাসমূহ'
-    },
+    // {
+    //   value: 'branches',
+    //   label: 'OUR BRANCHES',
+    //   labelBN: 'আমাদের শাখাসমূহ'
+    // },
     {
       value: 'hospitals',
       label: 'PANEL HOSPITALS',

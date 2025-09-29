@@ -30,11 +30,11 @@ function page() {
   }
 
   const benefitSliderData = {
-    title: 'Benefits of',
+    title: 'UNWIND IN STYLE,',
     titleBN: `প্রিয় মুহূর্তেগুলো এনজয় করুন`,
-    coloredTitle: 'Our Hospital Network',
+    coloredTitle: 'BECAUSE YOU DESERVE IT',
     coloredTitleBN: 'শান্তা লাইফ এর স্পেশাল ডিসকাউন্টে',
-    description: 'Discover the benefits that make our hospital service special.',
+    description: 'Unlock exclusive privileges, designed to elevate your lifestyle.',
     descriptionBN: `শান্তা লাইফ এর ওয়েলনেস কার্ড এর সাথে আনলক করুন লাক্সারি ডিসকাউন্টস - আপনার
     অবসরকে করুন আরোও আকর্ষণীয়।`,
     item: [

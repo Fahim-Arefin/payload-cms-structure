@@ -68,7 +68,7 @@ function page() {
       // bgMobileImage:
       //   '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg11.jpg',
       title: 'One-Time Payout',
-      description: 'Financial support if an accident limits your abilities.',
+      description: 'Financial support if any disease limits your abilities.',
       titleBN: 'এককালীন অর্থ প্রাপ্তি',
       descriptionBN: `যা চিকিৎসা ব্যয়ভার লাঘবে সহায়তা করবে।`,
     },
