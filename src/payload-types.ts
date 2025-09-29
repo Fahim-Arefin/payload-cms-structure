@@ -72,6 +72,7 @@ export interface Config {
     resume: Resume;
     'career-application': CareerApplication;
     'agent-career-application': AgentCareerApplication;
+    pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,6 +84,7 @@ export interface Config {
     resume: ResumeSelect<false> | ResumeSelect<true>;
     'career-application': CareerApplicationSelect<false> | CareerApplicationSelect<true>;
     'agent-career-application': AgentCareerApplicationSelect<false> | AgentCareerApplicationSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -90,14 +92,8 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {
-    'home-page': HomePage;
-    'about-us-page': AboutUsPage;
-  };
-  globalsSelect: {
-    'home-page': HomePageSelect<false> | HomePageSelect<true>;
-    'about-us-page': AboutUsPageSelect<false> | AboutUsPageSelect<true>;
-  };
+  globals: {};
+  globalsSelect: {};
   locale: null;
   user: User & {
     collection: 'users';
@@ -160,32 +156,6 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
-  sizes?: {
-    pc_1290x1000?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    tab_774x600?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    mob_387x300?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -233,6 +203,123 @@ export interface AgentCareerApplication {
   createdAt: string;
 }
 /**
+ * Dynamic pages assembled from blocks
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: string;
+  name: string;
+  slug: string;
+  uploadSessionId?: string | null;
+  layout: {
+    heroes: {
+      image: string | Media;
+      title: string;
+      titleBN: string;
+      subtitle?: string | null;
+      subtitleBN?: string | null;
+      description?: {
+        root: {
+          type: string;
+          children: {
+            type: string;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      descriptionBN?: {
+        root: {
+          type: string;
+          children: {
+            type: string;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      id?: string | null;
+    }[];
+    /**
+     * Add call-to-action buttons that appear below the hero content (maximum 2 buttons)
+     */
+    ctaButtons?:
+      | (
+          | {
+              /**
+               * Max 24 characters.
+               */
+              label: string;
+              /**
+               * সর্বোচ্চ 24 অক্ষর।
+               */
+              labelBN: string;
+              /**
+               * Enter the page path only (no domain). Example: "/plans" or "/premium-calculator".
+               */
+              page: string;
+              style?: ('primary' | 'glass') | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'pageLink';
+            }
+          | {
+              /**
+               * Max 24 characters.
+               */
+              label: string;
+              /**
+               * সর্বোচ্চ 24 অক্ষর।
+               */
+              labelBN: string;
+              /**
+               * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
+               */
+              youtubeUrl: string;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'youtubeVideo';
+            }
+          | {
+              /**
+               * Max 24 characters.
+               */
+              label: string;
+              /**
+               * সর্বোচ্চ 24 অক্ষর।
+               */
+              labelBN: string;
+              /**
+               * Example: +88 09610889900
+               */
+              phoneNumber: string;
+              style?: ('primary' | 'glass') | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'callNow';
+            }
+        )[]
+      | null;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'hero';
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
@@ -258,6 +345,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'agent-career-application';
         value: string | AgentCareerApplication;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: string | Page;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -333,40 +424,6 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
-  sizes?:
-    | T
-    | {
-        pc_1290x1000?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        tab_774x600?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        mob_387x300?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -412,6 +469,72 @@ export interface AgentCareerApplicationSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  uploadSessionId?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              heroes?:
+                | T
+                | {
+                    image?: T;
+                    title?: T;
+                    titleBN?: T;
+                    subtitle?: T;
+                    subtitleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              ctaButtons?:
+                | T
+                | {
+                    pageLink?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          page?: T;
+                          style?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    youtubeVideo?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          youtubeUrl?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    callNow?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          phoneNumber?: T;
+                          style?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -441,138 +564,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "home-page".
- */
-export interface HomePage {
-  id: string;
-  /**
-   * Hero area content
-   */
-  homeHero: {
-    title: string;
-    subtitle?: string | null;
-    description?: string | null;
-    images?:
-      | {
-          image: string | Media;
-          /**
-           * Optional alt text
-           */
-          alt?: string | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  OnYourTermsSchema?: {
-    cards?:
-      | {
-          icon: string | Media;
-          mobileIcon?: (string | null) | Media;
-          title: string;
-          subtitle?: string | null;
-          description?: string | null;
-          image: string | Media;
-          mobileImage?: (string | null) | Media;
-          link: string;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "about-us-page".
- */
-export interface AboutUsPage {
-  id: string;
-  /**
-   * Hero area content
-   */
-  aboutHero: {
-    title: string;
-    subtitle?: string | null;
-    description?: string | null;
-    images?:
-      | {
-          image: string | Media;
-          /**
-           * Optional alt text
-           */
-          alt?: string | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "home-page_select".
- */
-export interface HomePageSelect<T extends boolean = true> {
-  homeHero?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        description?: T;
-        images?:
-          | T
-          | {
-              image?: T;
-              alt?: T;
-              id?: T;
-            };
-      };
-  OnYourTermsSchema?:
-    | T
-    | {
-        cards?:
-          | T
-          | {
-              icon?: T;
-              mobileIcon?: T;
-              title?: T;
-              subtitle?: T;
-              description?: T;
-              image?: T;
-              mobileImage?: T;
-              link?: T;
-              id?: T;
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "about-us-page_select".
- */
-export interface AboutUsPageSelect<T extends boolean = true> {
-  aboutHero?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        description?: T;
-        images?:
-          | T
-          | {
-              image?: T;
-              alt?: T;
-              id?: T;
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

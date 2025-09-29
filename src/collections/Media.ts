@@ -1,66 +1,63 @@
+import type { CollectionConfig } from 'payload'
+
+export const Media: CollectionConfig = {
+  slug: 'media',
+  access: {
+    read: () => true,
+  },
+  fields: [
+    {
+      name: 'alt',
+      type: 'text',
+      required: true,
+    },
+  ],
+  upload: true,
+}
+
+// =================================================================
+// =================================================================
+// =================================================================
+
 // import type { CollectionConfig } from 'payload'
 
 // export const Media: CollectionConfig = {
 //   slug: 'media',
-//   access: {
-//     read: () => true,
+//   upload: true,
+
+//   // 👇 Admin list settings: make ownerCollection the “title”
+//   // and search across ownerCollection/ownerField/filename/session/id
+//   admin: {
+//     useAsTitle: 'ownerCollection',
+//     defaultColumns: ['filename', 'temporary', 'ownerCollection', 'uploadSessionId'],
+//     // Payload v3+: tells the list search bar which fields to search
+//     listSearchableFields: ['ownerCollection', 'filename', 'uploadSessionId', 'id'],
 //   },
+
 //   fields: [
 //     {
-//       name: 'alt',
-//       type: 'text',
-//       required: true,
+//       name: 'temporary',
+//       type: 'checkbox',
+//       defaultValue: true,
+//       index: true,
+//       admin: { description: 'Temporary until document saves successfully' },
 //     },
+//     { name: 'uploadSessionId', type: 'text', index: true },
+//     { name: 'ownerCollection', type: 'text', index: true, admin: { readOnly: true } },
+//     { name: 'ownerDocId', type: 'text', index: true, admin: { readOnly: true } },
+//     { name: 'ownerField', type: 'text', index: true, admin: { readOnly: true } },
+//     // keep if you’re writing the tiny blur here from the cropper
+//     { name: 'blurDataURL', type: 'text', admin: { readOnly: true } },
 //   ],
-//   upload: true,
+
+//   access: {
+//     read: () => true,
+//     create: () => true,
+//     update: () => true,
+//     delete: () => true,
+//   },
 // }
 
-// src/collections/Media.ts
-import type { CollectionConfig } from 'payload'
-
-const MAX_BYTES = 100 * 1024 // 100 KB
-
-export const Media: CollectionConfig = {
-  slug: 'media',
-  labels: { singular: 'Media', plural: 'Media' },
-
-  upload: {
-    // ✅ WebP only (blocks jpg/png/svg, etc.)
-    mimeTypes: ['image/webp'],
-
-    // ✅ Generate fixed 1.29 ratio variants (Sharp crops to fit)
-    // 1.29 ≈ 129:100 — pick widths you actually need
-    imageSizes: [
-      { name: 'pc_1290x1000', width: 1290, height: 1000, position: 'centre' },
-      { name: 'tab_774x600', width: 774, height: 600, position: 'centre' },
-      { name: 'mob_387x300', width: 387, height: 300, position: 'centre' },
-    ],
-
-    // (optional) storage location for originals + sizes
-    // staticURL: '/media',
-    staticDir: 'media',
-
-    // (optional) tune encoder
-    // formatOptions: { webp: { quality: 82 } },
-  },
-
-  hooks: {
-    // You can use beforeValidate or beforeChange; beforeValidate fails earlier.
-    beforeValidate: [
-      async ({ req }) => {
-        // Multer attaches the uploaded file on req
-        const r = req as any
-        const size: number | undefined =
-          r?.file?.size ??
-          r?.files?.file?.size ??
-          (Array.isArray(r?.files?.file) ? r.files.file[0]?.size : undefined)
-
-        if (typeof size === 'number' && size > MAX_BYTES) {
-          throw new Error(`File too large: ${(size / 1024).toFixed(0)} KB. Max is 100 KB.`)
-        }
-      },
-    ],
-  },
-
-  fields: [{ name: 'alt', type: 'text', required: true }],
-}
+// =================================================================
+// =================================================================
+// =================================================================

@@ -14,8 +14,7 @@ import { Media } from './collections/Media'
 import { Resume } from './collections/Resume'
 import { CareerApplication } from './collections/CareerApplication'
 import { AgentCareerApplication } from './collections/AgentCareerApplication'
-import { HomePage } from './collections/globals/HomePage'
-import { AboutUsPage } from './collections/globals/AboutUsPage'
+import { Pages } from './collections/Pages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -27,8 +26,16 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Resume, CareerApplication, AgentCareerApplication],
-  globals: [HomePage, AboutUsPage],
+  upload: {
+    limits: {
+      fileSize: 50 * 1024 * 1024, // 50 MB per file
+      fieldSize: 50 * 1024 * 1024, // buffer for form fields
+      files: 50,
+    },
+    abortOnLimit: true,
+  },
+  collections: [Users, Media, Resume, CareerApplication, AgentCareerApplication, Pages],
+  // globals: [HomePage, AboutUsPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -38,7 +45,7 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
   }),
 
-  sharp,
+  // sharp,
   email: nodemailerAdapter({
     defaultFromAddress: process?.env?.SMTP_MAIL_FROM ?? 'uchchhash@xynolab.com',
     defaultFromName: 'Shanta Life',
