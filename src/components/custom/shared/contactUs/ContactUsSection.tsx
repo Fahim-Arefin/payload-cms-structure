@@ -194,7 +194,7 @@ function ContactUsSection() {
             <LocalizedText en="Have a Question?" bn="প্রশ্ন করুন" />
           </h3>
           <h1
-            className="global-h1 font-medium
+            className="global-h2 font-medium
           lg:mb-6 xl:mb-6 2xl:mb-8"
           >
             <LocalizedText en="Ask Us!" bn="আমাদের" />
@@ -523,7 +523,7 @@ function ContactUsSection() {
                         >
                           terms and conditions
                         </Link>{' '}
-                        and Shanta Life{' '}
+                        and {' '}
                         <Link
                           href="/privacy-policy"
                           className="underline text-[#FF6600] hover:opacity-90"

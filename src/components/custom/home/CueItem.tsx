@@ -10,6 +10,7 @@ type Props = {
     icon: string
     // mobileIcon: string
     title: string
+    titleBN?: string
     subtitle: string
     subtitleBN?: string
     description: string
@@ -40,7 +41,9 @@ function CueItem({ card, index }: Props) {
             sizes="(max-width: 1023px) 80px, 5vw"
           />
         </div>
-        <h1 className="text-xl lg:text-lg xl:text-2xl mt-4 font-semibold ">{/* {card.title} */}</h1>
+        <h1 className="text-xl lg:text-lg xl:text-2xl mt-4 font-semibold ">
+          <LocalizedText en={card.title} bn={card.titleBN || ''} />
+        </h1>
         <h2 className="text-lg lg:text-lg xl:text-2xl font-semibold ">
           <LocalizedText en={card.subtitle} bn={card.subtitleBN || ''} />
         </h2>
@@ -52,7 +55,7 @@ function CueItem({ card, index }: Props) {
             variant="link"
             className="mt-2 px-0 text-white lg:text-[#ED7125] lg:text-sm xl:text-xl flex justify-start items-center gap-2 underline lg:no-underline"
           >
-            <LocalizedText en="Explore Now" bn="অন্বেষণ করুন" />
+            <LocalizedText en="Explore Now" bn="এক্সপ্লোর করুন" />
             <LuArrowUpRight className="text-[24px] sm:text-[26px] md:text-[30px]" />
           </Button>
         </Link>

@@ -41,7 +41,7 @@ function page() {
   const shantaIntroContent = {
     heading: 'Advancing',
     subheading: 'A Legacy of Setting Standards',
-    headingBN: `বিশ্বাসে গড়া,`,
+    headingBN: `বিশ্বাসে গড়া`,
     subheadingBN: 'আস্থার প্রতিশ্রুতি',
     paragraphTitle: 'Nurtured with Trust. Built for Tomorrow',
     paragraphTitleBN: 'অটুট প্রত্যাশার বাঁধনে, আগামীর স্বপ্ন নির্মাণ',
@@ -168,7 +168,7 @@ function page() {
       // link: 'https://shantalife.com/message-form-chairman.php',
       descriptionBN: `শান্তা বিগত কয়েক দশক জুড়ে সততা, নিষ্ঠা এবং উদ্ভাবনী উৎকর্ষতার মাধ্যমে ব্যাবসায়িক কার্যকম পরিচালনা করছে।  
       ইন্সুরেন্স সেক্টর এ নতুন পথচলায় আমাদের লক্ষ্য কাস্টমারদের সর্বোচ্চ ভ্যালু প্রদান করে তাদের অর্থনৈতিক ভবিষ্যৎ সুরক্ষিত করা। 
-      আমরা বিশ্বাস করি জীবনবীমা শুধু সুরক্ষা নয়—এটি আস্থা, স্থিতিশীলতা ও এক উজ্জ্বল ভবিষ্যতের প্রতিশ্রুতি। 
+      আমরা বিশ্বাস করি জীবনবীমা শুধু সুরক্ষা নয়-এটি আস্থা, স্থিতিশীলতা ও এক উজ্জ্বল ভবিষ্যতের প্রতিশ্রুতি। 
       লাইফ ইন্সুরেন্সকে জীবনের বিশ্বস্ততার পার্টনার করে একটি নতুন মাত্রায় রূপান্তর আমাদের প্রতিজ্ঞা। 
       আর্থিক শিক্ষার প্রসার এবং মানুষের সচেতনতা বাড়ানোর মাধ্যমে আমরা শুধু আমাদের গ্রাহকদের আর্থিক ভবিষ্যৎই নয়, 
       পুরো সমাজকেও স্থিতিশীলতার পথে এগিয়ে নিতে চাই। 
@@ -198,7 +198,7 @@ function page() {
       values of trust, simplicity, ownership, transparency
       and customer centricity. At the heart of Shanta Life is
       a passionate and dedicated team who believe that
-      insurance is not just about securing lives—it’s about
+      insurance is not just about securing lives-it’s about
       enabling you to take control of your life. As we
       continue our journey, we remain committed to
       forging lasting relationships with our clients,
@@ -210,9 +210,9 @@ function page() {
 
       আমাদের প্রতিটি পণ্য, সেবা এবং  যোগাযোগ পরিচালিত হয় আমাদের মূল্যবোধের মাধ্যমে যেন আস্থা, দায়িত্বশীলতা, স্বচ্ছতা এবং গ্রাহককেন্দ্রিকতার মাধ্যমে আমরা গ্রাহকের বিশস্ত পার্টনার হতে পারি।
 
-      শান্তা লাইফের প্রাণ হলো আমাদের নিবেদিত টিম, যারা বিশ্বাস করে - বীমা কেবল জীবন সুরক্ষার নয়—এটি নিজ জীবনের নিয়ন্ত্রণ নেওয়ার শক্তি।
+      শান্তা লাইফের প্রাণ হলো আমাদের নিবেদিত টিম, যারা বিশ্বাস করে - বীমা কেবল জীবন সুরক্ষার নয়-এটি নিজ জীবনের নিয়ন্ত্রণ নেওয়ার শক্তি।
 
-      এ যাত্রায় আমরা গড়ে তুলতে চাই  দীর্ঘস্থায়ী সম্পর্ক —গ্রাহক ও সমাজের সঙ্গে। আমাদের সাথে উজ্জ্বল আগামী গড়ে তুলতে আমন্ত্রণ জানাই।`,
+      এ যাত্রায় আমরা গড়ে তুলতে চাই  দীর্ঘস্থায়ী সম্পর্ক-গ্রাহক ও সমাজের সঙ্গে। আমাদের সাথে উজ্জ্বল আগামী গড়ে তুলতে আমন্ত্রণ জানাই।`,
       // link: 'https://shantalife.com/message-form-ceo.php',
       link: '/all-leaders#id-1',
     },
@@ -354,7 +354,7 @@ function page() {
     title: 'Shanta’s FOOTPRINT',
     titleBN: 'শান্তার প্রতিষ্ঠানসমূহ',
     subTitle: 'Where Every Venture Connects',
-    subTitleBN: 'সংযুক্ত প্রতিটি পদক্ষেপ',
+    subTitleBN: '',
     // bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/footprint.mp4`,
     bgImage: `/assets/about-us/web/footprint.mp4`,
     // bgMobileImage: '/assets/about-us/mobile/footprint.gif',

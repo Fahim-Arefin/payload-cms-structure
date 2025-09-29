@@ -99,7 +99,7 @@ export function BenefitsTabSection() {
             <p className="global-p2 font-light">
               <span className="font-semibold ">
                 <LocalizedText
-                  en="Shanta Critical Protection:"
+                  en="Shanta Critical Illness:"
                   bn="শান্তা ক্রিটিক্যাল প্রটেকশন (CP): "
                 />
               </span>
@@ -144,7 +144,7 @@ export function BenefitsTabSection() {
                     variant="link"
                     className="px-0 text-[#ED7125] flex justify-start items-center gap-1 lg:gap-2 hover:underline hover:underline-offset-8 global-p2 font-normal"
                   >
-                    <LocalizedString en={`See Rider Benefits`} bn={`রাইডারদের উপকারিতা দেখুন`} />
+                    <LocalizedString en={`See Rider Benefits`} bn={`রাইডারের সুবিধাসমূহ দেখুন`} />
                     <LuArrowUpRight className="global-h4" />
                   </Button>
                 </Link>

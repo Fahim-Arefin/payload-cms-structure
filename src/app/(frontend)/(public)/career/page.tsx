@@ -36,8 +36,8 @@ const page: FC<pageProps> = ({}) => {
     subTitle: 'We believe in Better',
     subTitleBN: 'অগ্রগতির নিরন্তর প্রচেষ্টায়',
     description:
-      'We’re bringing together people who believe in better protection, stronger communities, and a future full of possibilities. Together, we push boundaries — in work, in life, and in everything in between.',
-    descriptionBN: `আমরা একত্রে গড়ে তুলি শক্তিশালী কমিউনিটি — আর নিশ্চিত করি এক সম্ভাবনাময় আগামী।`,
+      'We’re bringing together people who believe in better protection, stronger communities, and a future full of possibilities. Together, we push boundaries-in work, in life, and in everything in between.',
+    descriptionBN: `আমরা একত্রে গড়ে তুলি শক্তিশালী কমিউনিটি-আর নিশ্চিত করি এক সম্ভাবনাময় আগামী।`,
   }
 
   const careerStoryData: OurStoryDataType[] = [
@@ -135,7 +135,7 @@ const page: FC<pageProps> = ({}) => {
       description: `Working at Shanta Life Insurance PLC has been a rewarding and professionally enriching journey.As part of the Customers Experience Team.I've had the opportunity to enagage directy with our valued custromers ensuring they recived timely support ,clear communication &  a seamless service experience.Everyday at Shanta Life brings new opportunity to grow, learn & make a sure meaningful impact. `,
       descriptionBN: `শান্তা লাইফ ইন্স্যুরেন্স পিএলসি-তে কাজ করা আমার জন্য একটা রিওয়ার্ডিং আর প্রফেশনালি এনরিচিং জার্নি।
 কাস্টমার এক্সপেরিয়েন্স টিম-এর পার্ট হয়ে আমি ডিরেক্টলি আমাদের ভ্যালুড কাস্টমারদের সাথে এনগেজ করার সুযোগ পেয়েছি—যাতে তারা পান টাইমলি সাপোর্ট, ক্লিয়ার কমিউনিকেশন আর একদম সিমলেস সার্ভিস এক্সপেরিয়েন্স।
-প্রতিদিন শান্তা লাইফ মানে নতুন অপরচুনিটি—to গ্রো, লার্ন আর মেক এ মীনিংফুল ইমপ্যাক্ট`,
+প্রতিদিন শান্তা লাইফ মানে নতুন অপরচুনিটি—গ্রো, লার্ন আর মেক এ মীনিংফুল ইমপ্যাক্ট`,
       designation: 'Customer Service',
       designationBN: `কাস্টমার সার্ভিস`,
     },
@@ -204,7 +204,7 @@ const careerCards: CareerCard[] = [
     descriptionBN: 'সাফল্যের কারিগরদের আমরা তুলে ধরি সবার সামনে',
   },
   {
-    title: 'We Co-sign your Success',
+    title: 'We Co-sign Your Success',
     titleBN: 'আমরা সহযাত্রী আপনার সাফল্যে',
     description: 'We cheer your hustle, amplify your milestones, and move forward—together.',
     descriptionBN: `আপনার সাফল্য আমরা উজ্জাপন করি একসাথে`,
@@ -227,7 +227,7 @@ const careerCards: CareerCard[] = [
     title: 'We Ignite Journeys',
     titleBN: 'আমরা প্রজ্জ্বলিত করি যাত্রাপথ',
     description: 'We build each other up, every day, Let’s ignite possibilities together.',
-    descriptionBN: `আপনার ক্যারিয়ারএর পথ উদ্ভাসিত করি সম্ভাবনার আলোয়`,
+    descriptionBN: `আপনার ক্যারিয়ারের পথ উদ্ভাসিত করি সম্ভাবনার আলোয়`,
   },
 ]
 

@@ -9,6 +9,9 @@ import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedString from '../shared/LocalizedString'
+import LocalizedText from '../shared/LocalizedText'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 
 type Props = {}
 
@@ -23,6 +26,10 @@ function FeedBackSection({}: Props) {
   const [emailError, setEmailError] = useState('')
   const [phoneError, setPhoneError] = useState('')
   const [agreeTerms, setAgreeTerms] = useState(false)
+
+  // ---- localization helper using your SSR hook ----
+  const lang = useSSRLanguage()
+  const t = (en: string, bn: string) => (lang === 'bn' ? bn : en)
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -106,7 +113,7 @@ function FeedBackSection({}: Props) {
             <Input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Name"
+              placeholder={t('Name', 'নাম')}
               className="bg-white text-black w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
             />
             <div>
@@ -115,17 +122,13 @@ function FeedBackSection({}: Props) {
                 onChange={(e) => {
                   const value = e.target.value
                   setEmail(value)
-
-                  if (value.trim() === '') {
-                    setEmailError('Email is required')
-                  } else if (!emailRegex.test(value)) {
-                    setEmailError('Enter a valid email address')
-                  } else {
-                    setEmailError('')
-                  }
+                  if (value.trim() === '') setEmailError(t('Email is required', 'ইমেইল প্রয়োজন'))
+                  else if (!emailRegex.test(value))
+                    setEmailError(t('Enter a valid email address', 'সঠিক ইমেইল লিখুন'))
+                  else setEmailError('')
                 }}
                 type="email"
-                placeholder="Email"
+                placeholder={t('Email', 'ইমেইল')}
                 className="bg-white text-black w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
               />
               {emailError && <p className="text-red-500 text-sm pl-1">{emailError}</p>}
@@ -134,22 +137,21 @@ function FeedBackSection({}: Props) {
               <Input
                 value={phone}
                 onChange={(e) => {
-                  let value = e.target.value.replace(/\D/g, '') // Remove all non-digits
+                  let value = e.target.value.replace(/\D/g, '')
                   if (value.length > 11) value = value.slice(0, 11)
                   setPhone(value)
-
-                  if (value.length === 0) {
-                    setPhoneError('Phone number is required')
-                  } else if (value.length !== 11) {
-                    setPhoneError('Phone number must be exactly 11 digits')
-                  } else {
-                    setPhoneError('')
-                  }
+                  if (value.length === 0)
+                    setPhoneError(t('Phone number is required', 'ফোন নম্বর প্রয়োজন'))
+                  else if (value.length !== 11)
+                    setPhoneError(
+                      t('Phone number must be exactly 11 digits', 'ফোন নম্বর ১১ সংখ্যার হতে হবে'),
+                    )
+                  else setPhoneError('')
                 }}
                 type="tel"
                 inputMode="numeric"
                 maxLength={11}
-                placeholder="Phone"
+                placeholder={t('Phone', 'ফোন')}
                 className="bg-white text-black w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
               />
               {phoneError && <p className="text-red-500 text-sm pl-1">{phoneError}</p>}
@@ -157,7 +159,7 @@ function FeedBackSection({}: Props) {
             <Input
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              placeholder="Address"
+              placeholder={t('Address', 'ঠিকানা')}
               className="bg-white text-black w-full  shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px] "
             />
 
@@ -224,12 +226,14 @@ function FeedBackSection({}: Props) {
               <Textarea
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
-                placeholder="Write your feedback"
+                placeholder={t('Write your feedback', 'আপনার মন্তব্য লিখুন')}
                 className="shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] w-full 
               h-[150px] lg:h-[258px] xl:h-[332px] bg-white text-black p-5 rounded-[8px] lg:rounded-[10px] xl:rounded-[12px]"
               />
               {requiredError && (
-                <p className="text-red-500 text-sm">Please Fill out all the fields</p>
+                <p className="text-red-500 text-sm">
+                  {t('Please fill out all the fields', 'সব ঘর পূরণ করুন')}
+                </p>
               )}
             </div>
 
@@ -296,7 +300,9 @@ function FeedBackSection({}: Props) {
           <div className="flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-white/60 pt-5 mt-5 lg:mt-0 lg:pt-0 lg:pl-8">
             <div className="space-y-4 lg:pl-2 xl:pl-4">
               <div className="space-y-4">
-                <p className="global-span font-medium">Want to talk?</p>
+                <p className="global-span font-medium">
+                  <LocalizedText en="Want to talk?" bn="কথা বলতে চান?" />
+                </p>
                 <div>
                   <a href="tel:+8809610889900" className="w-fit">
                     <Button
@@ -307,7 +313,7 @@ function FeedBackSection({}: Props) {
                     font-normal
                     lg:text-[16px] xl:text-[18px]"
                     >
-                      Want to talk?
+                      <LocalizedString en="Want to talk?" bn="কথা বলতে চান?" />
                     </Button>
                   </a>
                 </div>

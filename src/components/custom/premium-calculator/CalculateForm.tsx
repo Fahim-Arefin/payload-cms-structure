@@ -204,7 +204,10 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
 
         const filteredPlans = data
           .filter((plan) => planNameMappings.hasOwnProperty(plan.plan_name))
-          .map((plan) => ({ ...plan, plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings] }))
+          .map((plan) => ({
+            ...plan,
+            plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings],
+          }))
 
         const childEducationPlans = filteredPlans.filter((p) =>
           p.plan_name.toLowerCase().includes('child education'),
@@ -269,7 +272,10 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   }
 
   const handleChildEducationPlanSelect = (variant: { plan_name: string; plan_code: number }) => {
-    const planWithVideo = { ...variant, videoLink: videoLinkMappings[variant.plan_name as keyof typeof videoLinkMappings] }
+    const planWithVideo = {
+      ...variant,
+      videoLink: videoLinkMappings[variant.plan_name as keyof typeof videoLinkMappings],
+    }
     setSelectedPlan(planWithVideo)
     setFormData((prev) => ({ ...prev, PlanCode: variant.plan_code, Term: 0 }))
     setAvailableTenures([])
@@ -294,17 +300,26 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       if (data && data[0]?.term) {
         const termArray = JSON.parse(data[0].term)
         if (Array.isArray(termArray)) {
-          const tenureOptions = termArray.map((t: any) => ({ text: `${t.term} years`, value: Number(t.term) }))
+          const tenureOptions = termArray.map((t: any) => ({
+            text: `${t.term} years`,
+            value: Number(t.term),
+          }))
           setAvailableTenures(tenureOptions)
         }
       }
 
       if (data && data[0]?.pay_mode) {
         try {
-          let payModeArray = typeof data[0].pay_mode === 'string' ? JSON.parse(data[0].pay_mode) : data[0].pay_mode
+          let payModeArray =
+            typeof data[0].pay_mode === 'string' ? JSON.parse(data[0].pay_mode) : data[0].pay_mode
           if (Array.isArray(payModeArray)) {
             const valid = payModeArray.filter(
-              (m: any) => m && typeof m === 'object' && m.paymode_name && m.paymode_name.trim() !== '' && m.paymode_id != null,
+              (m: any) =>
+                m &&
+                typeof m === 'object' &&
+                m.paymode_name &&
+                m.paymode_name.trim() !== '' &&
+                m.paymode_id != null,
             )
             setAvailablePaymentModes(valid)
           } else {
@@ -387,15 +402,18 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       case 'PlanCode':
         return L('Please select a plan', 'অনুগ্রহ করে একটি প্ল্যান নির্বাচন করুন')
       case 'Age':
-        if (!formData.dateOfBirth) return L('Please select your date of birth', 'অনুগ্রহ করে জন্মতারিখ নির্বাচন করুন')
+        if (!formData.dateOfBirth)
+          return L('Please select your date of birth', 'অনুগ্রহ করে জন্মতারিখ নির্বাচন করুন')
         if (formData.Age < 18 || formData.Age > 65)
           return L('Age must be between 18 and 65', 'বয়স ১৮ থেকে ৬৫ বছরের মধ্যে হতে হবে')
         return ''
       case 'annualIncome':
         return L('Please enter your annual income', 'অনুগ্রহ করে বার্ষিক আয় লিখুন')
       case 'SumAssured':
-        if (!formData.SumAssured) return L('Please enter sum assured amount', 'অনুগ্রহ করে বীমা অঙ্ক লিখুন')
-        if (formData.SumAssured < 100000) return L('Sum assured must be at least ৳1,00,000', 'বীমা অঙ্ক কমপক্ষে ৳১,০০,০০০ হতে হবে')
+        if (!formData.SumAssured)
+          return L('Please enter sum assured amount', 'অনুগ্রহ করে বীমা অঙ্ক লিখুন')
+        if (formData.SumAssured < 100000)
+          return L('Sum assured must be at least ৳1,00,000', 'বীমা অঙ্ক কমপক্ষে ৳১,০০,০০০ হতে হবে')
         return ''
       case 'Term':
         return L('Please select a tenure', 'অনুগ্রহ করে মেয়াদ নির্বাচন করুন')
@@ -477,7 +495,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                     inline
                   />
                   <div className="flex justify-between items-center mt-3 pt-3 border-t">
-                    <Button variant="outline" size="sm" onClick={handleCloseDatePicker} disabled={isCalculatingAge}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleCloseDatePicker}
+                      disabled={isCalculatingAge}
+                    >
                       {L('Cancel', 'বাতিল')}
                     </Button>
                     <Button
@@ -496,7 +519,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                       )}
                     </Button>
                   </div>
-                  {ageCalculationError && <p className="text-red-500 text-xs mt-2">{ageCalculationError}</p>}
+                  {ageCalculationError && (
+                    <p className="text-red-500 text-xs mt-2">{ageCalculationError}</p>
+                  )}
                 </div>
               </PopoverContent>
             </Popover>
@@ -515,11 +540,15 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           </div>
         </div>
 
-        {getFieldErrorMessage('Age') && <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Age')}</p>}
+        {getFieldErrorMessage('Age') && (
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Age')}</p>
+        )}
         {isCalculatingAge && (
           <div className="flex items-center gap-2 mt-1">
             <div className="w-3 h-3 border-2 border-[#978900] border-t-transparent rounded-full animate-spin"></div>
-            <span className="text-xs text-[#978900]">{L('Calculating age...', 'বয়স হিসাব করা হচ্ছে...')}</span>
+            <span className="text-xs text-[#978900]">
+              {L('Calculating age...', 'বয়স হিসাব করা হচ্ছে...')}
+            </span>
           </div>
         )}
       </div>
@@ -593,24 +622,35 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                     (p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup,
                   )
                   const pickedRegular = regular.find((p) => p.plan_code === formData.PlanCode)
-                  const pickedChild = childEducationVariants.find((p) => p.plan_code === formData.PlanCode)
+                  const pickedChild = childEducationVariants.find(
+                    (p) => p.plan_code === formData.PlanCode,
+                  )
                   const selectedLabel = pickedRegular?.plan_name ?? pickedChild?.plan_name ?? ''
 
                   if (selectedLabel) return selectedLabel
                   if (isLoadingPlans) return L('Loading plans...', 'প্ল্যান লোড হচ্ছে...')
-                  if (!formData.Age) return L('Enter age to load plans', 'প্ল্যান দেখতে আগে বয়স লিখুন')
+                  if (!formData.Age)
+                    return L('Enter age to load plans', 'প্ল্যান দেখতে আগে বয়স লিখুন')
                   if (availablePlans.length === 0 && childEducationVariants.length === 0)
                     return L('No plans available', 'কোনো প্ল্যান পাওয়া যায়নি')
                   return L('Select Plan', 'প্ল্যান নির্বাচন করুন')
                 })()}
               </span>
-              <ChevronDown className={`h-4 w-4 shrink-0 transition-transform ${planMenuOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                className={`h-4 w-4 shrink-0 transition-transform ${planMenuOpen ? 'rotate-180' : ''}`}
+              />
             </Button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="start" sideOffset={6} className="z-[1000] min-w-[260px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden">
+          <DropdownMenuContent
+            align="start"
+            sideOffset={6}
+            className="z-[1000] min-w-[260px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden"
+          >
             <div className="py-2">
-              <DropdownMenuLabel className="px-3 py-2">{L('Plans', 'প্ল্যানসমূহ')}</DropdownMenuLabel>
+              <DropdownMenuLabel className="px-3 py-2">
+                {L('Plans', 'প্ল্যানসমূহ')}
+              </DropdownMenuLabel>
 
               {availablePlans
                 .filter((p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup)
@@ -622,10 +662,16 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                       onClick={() => {
                         const planWithVideo = {
                           ...plan,
-                          videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings],
+                          videoLink:
+                            videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings],
                         }
                         setSelectedPlan(planWithVideo)
-                        setFormData((prev) => ({ ...prev, PlanCode: plan.plan_code, Term: 0, PaymentMode: 0 }))
+                        setFormData((prev) => ({
+                          ...prev,
+                          PlanCode: plan.plan_code,
+                          Term: 0,
+                          PaymentMode: 0,
+                        }))
                         setAvailableTenures([])
                         setAvailablePaymentModes([])
                         setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
@@ -640,8 +686,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
 
               {!isLoadingPlans &&
                 formData.Age &&
-                availablePlans.filter((p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup)
-                  .length === 0 && (
+                availablePlans.filter(
+                  (p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup,
+                ).length === 0 && (
                   <DropdownMenuItem disabled className="px-3 py-2">
                     {L('No regular plans available', 'কোনো সাধারণ প্ল্যান নেই')}
                   </DropdownMenuItem>
@@ -652,7 +699,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                   <DropdownMenuSeparator />
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger className="px-3 py-2 cursor-pointer flex items-center justify-between">
-                      <span>{L('Shanta Child Education Plan', 'শান্তা চাইল্ড এডুকেশন প্ল্যান')}</span>
+                      <span>
+                        {L('Shanta Child Education Plan', 'শান্তা চাইল্ড এডুকেশন প্ল্যান')}
+                      </span>
                     </DropdownMenuSubTrigger>
                     <DropdownMenuSubContent className="z-[1100] min-w-[280px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden">
                       {childEducationVariants.map((variant) => {
@@ -663,17 +712,27 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                             onClick={() => {
                               const planWithVideo = {
                                 ...variant,
-                                videoLink: videoLinkMappings[variant.plan_name as keyof typeof videoLinkMappings],
+                                videoLink:
+                                  videoLinkMappings[
+                                    variant.plan_name as keyof typeof videoLinkMappings
+                                  ],
                               }
                               setSelectedPlan(planWithVideo)
-                              setFormData((prev) => ({ ...prev, PlanCode: variant.plan_code, Term: 0, PaymentMode: 0 }))
+                              setFormData((prev) => ({
+                                ...prev,
+                                PlanCode: variant.plan_code,
+                                Term: 0,
+                                PaymentMode: 0,
+                              }))
                               setAvailableTenures([])
                               setAvailablePaymentModes([])
                               setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
                             }}
                             className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${selected ? 'bg-accent text-accent-foreground' : ''}`}
                           >
-                            <Check className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`} />
+                            <Check
+                              className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`}
+                            />
                             <span className="truncate">{variant.plan_name}</span>
                           </DropdownMenuItem>
                         )
@@ -683,11 +742,14 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                 </>
               )}
 
-              {!isLoadingPlans && formData.Age && availablePlans.length === 0 && childEducationVariants.length === 0 && (
-                <DropdownMenuItem disabled className="px-3 py-2">
-                  {L('No plans available for this age', 'এই বয়সের জন্য কোনো প্ল্যান নেই')}
-                </DropdownMenuItem>
-              )}
+              {!isLoadingPlans &&
+                formData.Age &&
+                availablePlans.length === 0 &&
+                childEducationVariants.length === 0 && (
+                  <DropdownMenuItem disabled className="px-3 py-2">
+                    {L('No plans available for this age', 'এই বয়সের জন্য কোনো প্ল্যান নেই')}
+                  </DropdownMenuItem>
+                )}
             </div>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -703,13 +765,15 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           <Dialog>
             <DialogTrigger asChild>
               <p className="text-[10px] py-1 absolute inset-x-0 text-[#FF6600] underline cursor-pointer">
-                {L('Watch', 'ভিডিও দেখুন')}{' '}{selectedPlan.plan_name}{' '}{L('Video', '')}
+                {L('Watch', 'ভিডিও দেখুন')} {selectedPlan.plan_name} {L('Video', '')}
               </p>
             </DialogTrigger>
-            <DialogContent className="max-w-5xl w-full aspect-video p-0 bg-black 
+            <DialogContent
+              className="max-w-5xl w-full aspect-video p-0 bg-black 
               [&>button.absolute]:top-3 [&>button.absolute]:right-3 
               [&>button.absolute]:bg-black/50 [&>button.absolute]:text-white 
-              [&>button.absolute]:hover:bg-black/80">
+              [&>button.absolute]:hover:bg-black/80"
+            >
               <VisuallyHidden>
                 <DialogTitle>Plan Video</DialogTitle>
               </VisuallyHidden>
@@ -793,14 +857,21 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                 formData.PlanCode &&
                 formData.Age && (
                   <SelectItem disabled value="no-options">
-                    {L('No tenure options available for this plan and age', 'এই প্ল্যান ও বয়সের জন্য কোনো মেয়াদ অপশন নেই')}
+                    {L(
+                      'No tenure options available for this plan and age',
+                      'এই প্ল্যান ও বয়সের জন্য কোনো মেয়াদ অপশন নেই',
+                    )}
                   </SelectItem>
                 )}
             </SelectGroup>
           </SelectContent>
         </Select>
-        {tenureError && <p className="text-[10px] py-1 text-red-600 absolute inset-x-0">{tenureError}</p>}
-        {getFieldErrorMessage('Term') && <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Term')}</p>}
+        {tenureError && (
+          <p className="text-[10px] py-1 text-red-600 absolute inset-x-0">{tenureError}</p>
+        )}
+        {getFieldErrorMessage('Term') && (
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Term')}</p>
+        )}
       </div>
 
       {/* Gender */}
@@ -834,7 +905,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             </SelectGroup>
           </SelectContent>
         </Select>
-        {getFieldErrorMessage('Gender') && <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Gender')}</p>}
+        {getFieldErrorMessage('Gender') && (
+          <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('Gender')}</p>
+        )}
       </div>
 
       {/* Annual Income */}
@@ -897,11 +970,16 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         <Select
           value={
             formData.PaymentMode && formData.PaymentMode > 0
-              ? availablePaymentModes.find((pm) => pm.paymode_id === formData.PaymentMode)?.paymode_name || ''
+              ? availablePaymentModes.find((pm) => pm.paymode_id === formData.PaymentMode)
+                  ?.paymode_name || ''
               : ''
           }
           disabled={
-            isLoadingPaymentModes || !formData.PlanCode || !formData.Age || !formData.Term || availablePaymentModes.length === 0
+            isLoadingPaymentModes ||
+            !formData.PlanCode ||
+            !formData.Age ||
+            !formData.Term ||
+            availablePaymentModes.length === 0
           }
           onValueChange={(v) => {
             const method = availablePaymentModes.find((pm) => pm.paymode_name === v)
@@ -921,7 +999,10 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                 isLoadingPaymentModes
                   ? L('Loading payment methods...', 'পেমেন্ট মেথড লোড হচ্ছে...')
                   : !formData.PlanCode || !formData.Age || !formData.Term
-                    ? L('Select plan, age & term first', 'প্রথমে প্ল্যান, বয়স ও মেয়াদ নির্বাচন করুন')
+                    ? L(
+                        'Select plan, age & term first',
+                        'প্রথমে প্ল্যান, বয়স ও মেয়াদ নির্বাচন করুন',
+                      )
                     : availablePaymentModes.length === 0
                       ? L('No payment methods available', 'কোনো পেমেন্ট মেথড নেই')
                       : L('Select Payment Method', 'পেমেন্ট মেথড নির্বাচন করুন')
@@ -939,7 +1020,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
               <SelectLabel>{L('Payment Method', 'পেমেন্ট মেথড')}</SelectLabel>
               {availablePaymentModes
                 .map((paymentMethod, index) => {
-                  if (!paymentMethod || !paymentMethod.paymode_name || paymentMethod.paymode_name.trim() === '') return null
+                  if (
+                    !paymentMethod ||
+                    !paymentMethod.paymode_name ||
+                    paymentMethod.paymode_name.trim() === ''
+                  )
+                    return null
                   return (
                     <SelectItem
                       key={`payment-${paymentMethod.paymode_id}-${paymentMethod.paymode_name}-${index}`}
@@ -998,27 +1084,25 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
           <span className="text-xs md:text-sm leading-relaxed">
-            {L('By clicking', 'ক্লিক করলে')}{' '}
-            <span className="font-semibold">
-              {L('Request for purchase', 'পলিসি কেনার রিকোয়েস্ট')}
-            </span>
-            , {L('you agree to our', 'আপনি আমাদের')}{' '}
+            By clicking <span className="font-semibold">Request for purchase</span>, you agree to
+            our{' '}
             <Link
               href="/terms-condition"
               className="underline text-[#FF6600] hover:opacity-90"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {L('terms and conditions', 'শর্তাবলি')}
+              terms and conditions
             </Link>{' '}
-            {L('and Shanta Life', 'এবং শান্তা লাইফের')}{' '}
+            and Shanta Life
             <Link
               href="/privacy-policy"
               className="underline text-[#FF6600] hover:opacity-90"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {L('privacy policy', 'প্রাইভেসি পলিসি')}
+              {' '}
+              privacy policy
             </Link>
             .
           </span>
@@ -1035,7 +1119,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             !agreeTerms || isLoading ? 'opacity-60 cursor-not-allowed' : '',
           ].join(' ')}
         >
-          {isLoading ? L('Calculating...', 'হিসাব করা হচ্ছে...') : L('Calculate Now', 'এখনই ক্যালকুলেট করুন')}
+          {isLoading
+            ? L('Calculating...', 'হিসাব করা হচ্ছে...')
+            : L('Calculate Now', 'এখনই ক্যালকুলেট করুন')}
         </Button>
 
         <p className="text-[12px] md:text-[14px] text-[#00000099] mt-4 md:mt-1 md:w-[90%] font-light md:capitalize">

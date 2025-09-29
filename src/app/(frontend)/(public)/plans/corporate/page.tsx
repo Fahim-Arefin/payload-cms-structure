@@ -25,7 +25,7 @@ function page({}: Props) {
 
   const highlightData = [
     {
-      mainDescription: `Deciding on the best package for your team , making sure you’re getting value for money, 
+      mainDescription: `Deciding on the best package for your team, making sure you’re getting value for money, 
       and staying on top of the available options — it can all add up to a daunting to-do list. 
       We’re here to make that easier for you.`,
       mainDescriptionBN: `সঠিক প্যাকেজ বেছে নেওয়া, অর্থের সর্বোত্তম মূল্য নিশ্চিত করা, এবং সব উপলব্ধ বিকল্পের খোঁজ রাখা — 
@@ -270,39 +270,49 @@ function page({}: Props) {
           title: 'Out Patient Coverage (OPC)',
           titleBN: 'আউট-পেশেন্ট কভারেজ (OPC)',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon8.png`,
-          description: `Shanta Life’s In-Patient Treatment Plan covers hospitalization costs for 24 hours or more due 
-          to illness or injury, ensuring financial protection for room charges, medical bills, and related expenses`,
+          description: `Not all treatments require hospitalization. Our OPC Plan reimburses expenses for consultations, 
+          medicines, and diagnostic tests, helping employees access quality healthcare without added costs. Covered services include:
+          a) Doctor consultation fees,
+          b) Medication,
+          c) Diagnostic tests and procedures`,
+          descriptionBN: `সব চিকিৎসার জন্য হাসপাতালে ভর্তি হওয়া লাগে না। আমাদের OPC সুবিধা পরামর্শ, ওষুধ ও ডায়াগনস্টিক টেস্টের খরচ ফেরত দেয়। 
+          কভারেজ অন্তর্ভুক্ত:
+          ডাক্তারি ফি,
+          ওষুধ,
+          ডায়াগনস্টিক টেস্ট `,
         },
         {
           title: 'OPC Dental',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon9.png`,
-          description: `Not all treatments require hospitalization. Our OPC Plan reimburses expenses for consultations, medicines, and diagnostic tests, helping employees access quality healthcare without added costs. Covered services include:
-          a)  Doctor consultation fees,
-          b)  Medication,
-          c)  Diagnostic tests and procedures.`,
-          descriptionBN: `সব চিকিৎসার জন্য হাসপাতালে ভর্তি হওয়া লাগে না। আমাদের OPC সুবিধা পরামর্শ, ওষুধ ও ডায়াগনস্টিক টেস্টের খরচ ফেরত দেয়। কভারেজ অন্তর্ভুক্ত:
-          ডাক্তারি ফি,
-          ওষুধ,
-          ডায়াগনস্টিক টেস্ট।`,
-        },
-        {
-          title: 'OPC Optical',
-          titleBN: 'OPC ডেন্টাল',
-          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon10.png`,
           description: `Dental care is essential, and our Dental OPC benefit helps cover common treatments that do not require hospitalization. This includes:
           a) Dental consultations,
           b) Fillings,
           c) Routine extractions,
           d) Medication and X-rays,
           e) Root canal treatment, including bridging and capping,
-          f) Scaling & polishing (once a year for each member).`,
+          f) Scaling & polishing (once a year for each member)`,
           descriptionBN: `দাঁতের চিকিৎসায় কভারেজ, যেমন:
           ডেন্টাল কনসালটেশন,
           ফিলিংস,
           সাধারণ দাঁত তোলা,
           ওষুধ ও এক্স-রে,
-          রুট ক্যানাল, ব্রিজিং ও ক্যাপিং,
-          স্কেলিং ও পলিশিং (প্রতি সদস্য বছরে একবার)।`,
+          রুট ক্যানাল, ব্রিজিং ও ক্যাপিং, 
+          স্কেলিং ও পলিশিং (প্রতি সদস্য বছরে একবার)`,
+        },
+        {
+          title: 'OPC Optical',
+          titleBN: 'OPC ডেন্টাল',
+          image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon10.png`,
+          description: `Our Optical OPC benefit provides coverage for vision care and related treatments that do not require hospital admission. The coverage includes:
+          a) Eye consultations,
+          b) Vision tests for refractive errors,
+          c) Required medications,
+          d) Lenses & spectacles`,
+          descriptionBN: `চোখের যত্নের কভারেজ, যেমন:
+          চোখের ডাক্তারি পরামর্শ,
+          ভিশন টেস্ট,
+          ওষুধ,
+          চশমা ও লেন্স`,
         },
       ],
     },

@@ -19,7 +19,7 @@ function PlanPage() {
       //   'Life\u2019s full of surprises. We\u2019re here to help you navigate them. Let\u2019s build a confident future together.',
       description:
         'Life\u2019s full of surprises. We\u2019re here to help you navigate them... Let\u2019s build a confident future together.',
-      descriptionBN: `জীবনের প্রতিটি স্বপ্নে আপনার ভবিষ্যৎ যেন থাকে সুরক্ষিত, শান্তা লাইফের সাথে থাকুন নিশ্চিন্ত`,
+      descriptionBN: `আপনার ভবিষ্যৎ যেন থাকে সুরক্ষিত, শান্তা লাইফের সাথে থাকুন নিশ্চিন্ত`,
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutionHeroBanner.jpg`,
     },
   ]
@@ -29,7 +29,7 @@ function PlanPage() {
       title: 'INDIVIDUAL',
       titleBN: 'একক বীমা',
       description: 'Because your protection should be as exceptional as you are.',
-      descriptionBN: `আপনার নিরাপত্তা আপনার মতোই অনন্য`,
+      descriptionBN: `আপনার নিরাপত্তা আপনার চাহিদামত`,
       link: '/plans/individual',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/web/plan1.jpg`,
       // mobileImage: '/assets/solutions/mobile/plan1.jpg',
@@ -86,7 +86,7 @@ function PlanPage() {
         <div className="global-span text-[#3A3A3A] font-[350]">
           <LocalizedText
             en="Explore plans built for your need"
-            bn="আমাদের প্ল্যানগুলো ঘুরে দেখুন "
+            bn="আমাদের প্ল্যানগুলো যাচাই করুন"
           />
         </div>
       </AllPlanSection>

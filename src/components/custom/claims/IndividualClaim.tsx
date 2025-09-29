@@ -32,7 +32,7 @@ export function IndividualClaim() {
         পলিসি গ্রাহক কর্তৃক স্বাক্ষরিত স্বাস্থ্য বীমার
         <a href="${CLAIM_FORM_URL}" target="_blank" rel="noopener noreferrer"
           class="text-[#9C8639] underline underline-offset-2 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#9C8639]/40">
-          ক্লেইম ফর্ম
+          ক্লেম ফর্ম
         </a>
         সঠিকভাবে পূরণ করুন।
       `,
@@ -44,7 +44,7 @@ export function IndividualClaim() {
       `,
       descriptionContentBN: `
         <b>ধাপ ২:</b><br/>
-        ক্লেইম ফর্মের সাথে চিকিৎসার সকল কাগজপত্র সংযুক্ত করুন। প্রয়োজনীয় ডকুমেন্টের তালিকা ফর্মের শেষ অংশে উল্লেখ আছে।
+        ক্লেম ফর্মের সাথে চিকিৎসার সকল কাগজপত্র সংযুক্ত করুন। প্রয়োজনীয় ডকুমেন্টের তালিকা ফর্মের শেষ অংশে উল্লেখ আছে।
       `,
     },
     {

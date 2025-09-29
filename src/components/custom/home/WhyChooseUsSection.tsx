@@ -51,7 +51,7 @@ function WhyChooseUsSection() {
            text-center lg:text-left"
           >
             <div className="global-h4  text-white lg:text-[#1E1E1E] uppercase font-light">
-              <LocalizedText en="Why Choose Us" bn="কেন শান্তা লাইফ ?" />
+              <LocalizedText en="Why Choose Us" bn="কেন শান্তা লাইফ?" />
             </div>
             <div className="flex items-center justify-center space-x-2 lg:flex-col lg:justify-start lg:items-start lg:space-x-0">
               <div className="global-h1 font-medium  text-white lg:text-[#434342] uppercase">
@@ -129,7 +129,7 @@ function WhyChooseUsSection() {
                       <LocalizedText en="112" bn="১১২" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      <LocalizedText en="Claim Settled" bn="ক্লেম সেটলড" />
+                      <LocalizedText en="Claim Settled" bn="ক্লেম সেটেল্ড" />
                     </div>
                   </div>
                 </div>
@@ -174,7 +174,7 @@ function WhyChooseUsSection() {
                   {/* info */}
                   <div className="text-white lg:text-[#434343] p-2 2xl:p-4 border-t-2 border-white lg:border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      <LocalizedText en="1K +" bn="১ হাজার+" />
+                      <LocalizedText en="1K +" bn="১,০০০+" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
                       

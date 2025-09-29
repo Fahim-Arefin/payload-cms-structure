@@ -7,6 +7,7 @@ import useSSRLanguage from '@/hooks/useSSRLanguage'
 // import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 // import { Loader, MailCheck, SendHorizontal, X } from 'lucide-react' // ShadCN uses lucide-react for icons
 import GlobalButton from '../shared/GlobalButton'
+import LocalizedText from '../shared/LocalizedText'
 
 // helper: EN → BN digits
 function toBengaliNumber(num: string) {
@@ -102,7 +103,7 @@ export function ContactComponent() {
             d="M3 5a2 2 0 012-2h1.6a1 1 0 01.9.55L9.5 7a1 1 0 01-.1 1.04l-1.5 2a16.99 16.99 0 007.06 7.06l2-1.5a1 1 0 011.04-.1l3.45 1.8a1 1 0 01.55.9V19a2 2 0 01-2 2h-1C10.61 21 3 13.39 3 4v1z"
           />
         </svg>
-        09610889900
+        <LocalizedText en="09610889900" bn="০৯৬১০৮৮৯৯০০" />
       </GlobalButton>
       {/* <Popover open={showPopover}>
         <PopoverTrigger asChild>

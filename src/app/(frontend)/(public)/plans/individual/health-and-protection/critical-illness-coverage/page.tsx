@@ -35,7 +35,7 @@ function page() {
       নিজের ও পরিবারের আর্থিক স্থিতিশীলতা ধরে রাখার শক্ত ভিত্তি তৈরি করা যায় শুধুমাত্র প্রস্তুতির মাধ্যমে। 
       চিকিৎসার অতিরিক্ত খরচ ও পারিবারিক ব্যয় যেন আপনার সুস্থতার পথে বাঁধা না হয়ে দাঁড়ায়, এজন্য শান্তা 
       লাইফে আছে দুইটি ক্রিটিক্যাল প্রোটেকশন রাইডার—যা প্যাকেজ অনুযায়ী সর্বোচ্চ ২৫টি জটিল রোগে আপনাকে 
-      নিশ্চিত আর্থিক সুরক্ষা প্রদান করবে ।`,
+      নিশ্চিত আর্থিক সুরক্ষা প্রদান করবে।`,
   }
 
   const offersData = [
@@ -48,7 +48,7 @@ function page() {
       title: 'Living Benefit',
       description: 'Helping with treatment costs so you can focus on recovery.',
       titleBN: 'লিভিং বেনিফিট',
-      descriptionBN: `চিকিৎসার খরচ নিয়ে চিন্তা নয়, আপনার পূর্ণ সুস্থতাই আমাদের আশা`,
+      descriptionBN: `চিকিৎসার খরচ নিয়ে চিন্তা নয়, আপনার পূর্ণ সুস্থতাই আমাদের আশা।`,
     },
     {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/offer10.png`,
@@ -59,7 +59,7 @@ function page() {
       title: 'Affordable Premium',
       description: 'Affordable Security for you and your family in case of lifelong disability.',
       titleBN: 'স্বল্প প্রিমিয়াম',
-      descriptionBN: `জীবনযাত্রার মানের সাথে সামঞ্জস্যপূর্ণ`,
+      descriptionBN: `জীবনযাত্রার মানের সাথে সামঞ্জস্যপূর্ণ।`,
     },
     {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/offer11.png`,
@@ -68,9 +68,9 @@ function page() {
       // bgMobileImage:
       //   '/assets/solutions/individual/health-and-protection/critical-protection/mobile/offerbg11.jpg',
       title: 'One-Time Payout',
-      description: 'Financial support if an accident limits your abilities.',
+      description: 'Financial support if any disease limits your abilities.',
       titleBN: 'এককালীন অর্থ প্রাপ্তি',
-      descriptionBN: `যা চিকিৎসা ব্যয়ভার লাঘবে সহায়তা করবে`,
+      descriptionBN: `যা চিকিৎসা ব্যয়ভার লাঘবে সহায়তা করবে।`,
     },
     {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/offer12.png`,

@@ -36,7 +36,7 @@ function page() {
       title: 'Medical Expense Coverage',
       description: 'Helping with treatment costs so you can focus on recovery.',
       titleBN: 'দুর্ঘটনাজনিত চিকিৎসার আর্থিক খরচ',
-      descriptionBN: `চিকিৎসা খরচে সহায়তা, যাতে আপনি সুস্থতার প্রতি পূর্ণ মনোযোগী হতে পারেন`,
+      descriptionBN: `চিকিৎসা খরচে সহায়তা, যাতে আপনি সুস্থতার প্রতি পূর্ণ মনোযোগী হতে পারেন।`,
     },
     {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/offer6.png`,
@@ -47,7 +47,7 @@ function page() {
       title: 'Permanent Partial Disability',
       description: 'Financial support if an accident limits your abilities.',
       titleBN: 'দুর্ঘটনায় আংশিক চিরস্থায়ী অক্ষমতায় বীমা সুবিধা',
-      descriptionBN: `দুর্ঘটনায় আপনার শারীরিক সক্ষমতা সীমিত হলে, আর্থিক সহায়তা`,
+      descriptionBN: `দুর্ঘটনায় আপনার শারীরিক সক্ষমতা সীমিত হলে, আর্থিক সহায়তা।`,
     },
     {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/offer7.png`,

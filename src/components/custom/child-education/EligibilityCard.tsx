@@ -58,7 +58,7 @@ export const EligibilityCard = ({ data }: Props) => {
           }}
         >
           <div className="text-white global-p2 uppercase mb-1 font-light">
-            <LocalizedText en="Entry Age" bn="প্রবেশের বয়স" />
+            <LocalizedText en="Entry Age" bn="আবেদনের বয়স" />
           </div>
           <div className="flex justify-between w-full px-2 text-white">
             <div className="flex flex-col items-center">

@@ -74,50 +74,67 @@ const page: FC<Props> = ({}) => {
   const tabContent = {
     features: [
       {
-        title: 'Multiple Guaranteed Payouts',
-        description:
-          'Enjoy your benefits when you need them most—not just at the end. Structured payouts help you meet life’s big moments head-on.',
-        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage1.png', // You can use or update this image as needed
-        mobileImage:
-          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage1.png', // You can use or update this image as needed
-      },
-      {
         title: 'Maturity Benefit',
-        description:
-          'Receive the final lump sum at the end of your policy term to complete your journey with confidence.',
+        titleBN: 'মেয়াদপূর্তি সুবিধা',
+        description: 'Receive a guaranteed sum assured at the end of the policy term.',
+        descriptionBN: `পলিসির মেয়াদ শেষে নিশ্চিত বীমা অংক প্রাপ্তি`,
 
         image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage1.png',
         mobileImage:
           '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage1.png',
       },
       {
-        title: 'Life Coverage',
-        description:
-          'Life Coverage That Never Compromises. In case of the unfortunate demise passing, your family receives the full sum assured—regardless of earlier stage payouts.',
-        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage4.png',
-        mobileImage:
-          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage4.png',
-      },
-      {
-        title: 'Tax Benefits',
-        description:
-          'Get rewarded for being responsible—enjoy up to 15% tax rebates on premiums under existing tax laws.',
-        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage2.png',
-        mobileImage:
-          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage2.png',
-      },
-      {
         title: 'Flexible Premium Payments',
+        titleBN: 'সুবিধাজনক প্রিমিয়াম পরিশোধের ধরণ',
         description:
-          'Pay monthly, quarterly, half-yearly, or annually—it’s all about your convenience.',
+          'Pay your premiums monthly, quarterly, half-yearly, or annually-your choice, your pace.',
+        descriptionBN: `পলিসি নেওয়ার সময় আপনার সুবিধা অনুযায়ী মাসিক, ত্রৈমাসিক, অর্ধ-বার্ষিক বা বার্ষিক—যেকোনো 
+        প্রিমিয়াম পরিশোধের ধরন বেছে নিতে পারেন।`,
         image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage3.png',
         mobileImage:
           '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage3.png',
       },
       {
-        title: 'Healthcare Partner Discounts',
+        title: 'Customizable Coverage',
+        titleBN: 'প্রয়োজন অনুযায়ী কাভারেজ',
         description:
-          'Save more with exclusive discounts at top hospitals and diagnostic centers across our trusted partner network.',
+          'Enjoy your benefits when you need them most—not just at the end. Structured payouts help you meet life’s big moments head-on.',
+        descriptionBN:
+          'আপনার চাহিদা বা পছন্দ অনুসারে বীমা অংক/কভারেজ এবং সময়কাল নির্ধারণের স্বাধীনতা',
+        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage1.png', // You can use or update this image as needed
+        mobileImage:
+          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage1.png', // You can use or update this image as needed
+      },
+
+      {
+        title: 'Tax Benefits',
+        titleBN: 'আয়কর রেয়াত সুবিধা',
+        description: 'Enjoy tax rebates on premiums, subject to prevailing tax laws.',
+        descriptionBN: 'কর আইন সাপেক্ষে প্রদত্ত প্রিমিয়ামের ওপর কর ছাড়/রেয়াত',
+        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage2.png',
+        mobileImage:
+          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage2.png',
+      },
+
+      {
+        title: 'Life Coverage',
+        titleBN: 'মৃত্যুজনিত কভারেজ',
+        description:
+          'In the event of the policyholder’s death during the term, the nominee receives the full sum assured.',
+        descriptionBN:
+          'বীমা চলমান অবস্থায় বীমাকৃত ব্যক্তির মৃত্যু হলে সুবিধাগ্রাহীকে পুরো বীমা অংক প্রদান',
+        image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage4.png',
+        mobileImage:
+          '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage4.png',
+      },
+
+      {
+        title: 'Healthcare Partner Discounts',
+        titleBN: 'চিকিৎসাসেবায় বিশেষ ছাড়',
+        description:
+          'Get exclusive discounts on medical and diagnostic services at select hospitals and diagnostic centers in our partner network.',
+        descriptionBN:
+          'নির্বাচিত নেটওয়ার্ক হাসপাতাল এবং ডায়াগনস্টিক সেন্টারগুলিতে চিকিৎসা ও ডায়াগনস্টিক পরিষেবাগুলিতে বিশেষ ছাড়',
         image: '/assets/solutions/individual/saving-and-investment/multi-stage/web/tabimage6.png',
         mobileImage:
           '/assets/solutions/individual/saving-and-investment/multi-stage/mobile/tabimage6.png',

@@ -2,6 +2,7 @@ import GlobalButton from '@/components/custom/shared/GlobalButton'
 import Link from 'next/link'
 import { ContactComponent } from './CustomerCareCall'
 import LocalizedText from '../shared/LocalizedText'
+import LocalizedString from '../shared/LocalizedString'
 const PORTAL_URL = 'https://portal.shantalife.com/'
 
 export function CorporateClaim() {
@@ -21,7 +22,9 @@ export function CorporateClaim() {
             h-[32px] md:h-[34px] lg:h-[38px] xl:h-[40px] 2xl:h-[42px]"
                   text="Submit Claim"
                   size="small"
-                />
+                >
+                  <LocalizedString en="Submit Claim" bn="সাবমিট ক্লেম" />
+                </GlobalButton>
               </Link>
             </div>
           </div>
@@ -30,7 +33,7 @@ export function CorporateClaim() {
               <p>
                 <LocalizedText
                   en='Click "Submit Claim" to proceed with your online claim.'
-                  bn='আপনার ক্লেইম অনলাইনে প্রসেস করার জন্য "Submit Claim" এ ক্লিক করুন।'
+                  bn='আপনার ক্লেম অনলাইনে প্রসেস করার জন্য "সাবমিট ক্লেম" এ ক্লিক করুন।'
                 />
               </p>
               <p>
@@ -46,7 +49,7 @@ export function CorporateClaim() {
               <p>
                 <LocalizedText
                   en="If you have any prior claim submitted, please Login to "
-                  bn="পূর্বে কোন ক্লেইম জমা দিয়ে থাকলে, "
+                  bn="পূর্বে কোন ক্লেম জমা দিয়ে থাকলে, "
                 />
                 <a
                   href={PORTAL_URL}

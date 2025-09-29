@@ -11,7 +11,7 @@ function Bancassurance() {
       titleBN: 'ব্যাংকাসুরেন্স',
       subtitle: '',
       description:
-        'Where banking meets protection, Tailored for individuals, delivered through trust',
+        'Where banking meets protection, tailored for individuals, delivered through trust',
       descriptionBN: `ব্যাংকিং ও সুরক্ষার সহজ সমন্বয়`,
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/banner6.jpg`,
     },
@@ -151,7 +151,7 @@ function Bancassurance() {
                       ensuring peace of mind and
                       security during difficult times.`,
         descriptionBN: `কোনও বীমাকৃত সদস্যের চিকিৎসার জন্য হাসপাতালে ভর্তির ক্ষেত্রে, 
-        শান্তা. লাইফ পলিসির শর্তাবলী অনুসারে বীমাকৃত ব্যক্তিকে আর্থিক সহায়তা প্রদান করে, 
+        শান্তা লাইফ পলিসির শর্তাবলী অনুসারে বীমাকৃত ব্যক্তিকে আর্থিক সহায়তা প্রদান করে, 
         কঠিন সময়ে মানসিক শান্তি এবং নিরাপত্তা নিশ্চিত করে।`,
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/bancassurance/web/ICIcon4.png`,
       },

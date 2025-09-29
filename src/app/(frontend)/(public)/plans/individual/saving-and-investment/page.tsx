@@ -37,7 +37,7 @@ function SavingAndInvestment() {
     subtitle: 'Shanta',
     subtitleBN: 'শান্তা',
     description:
-      'Shanta Lifes endowment plan provides the policy owner a guaranteed sum assured. This unique plan combines savings and life insurance components which serves the need for financial security of your family.',
+      'Shanta Life’s endowment plan provides the policy owner a guaranteed sum assured. This unique plan combines savings and life insurance components which serves the need for financial security of your family.',
     descriptionBN: `শান্তা লাইফের এনডাওমেন্ট  প্ল্যান পলিসি গ্রহীতাকে একটি নিশ্চিত বীমাঅঙ্ক প্রদান করে। এই বিশেষ প্ল্যানটি সঞ্চয় এবং 
       জীবনবীমার সমন্বয়ে তৈরি, যা আপনার পরিবারের আর্থিক নিরাপত্তার চাহিদা পূরণ করে।`,
     feature: [

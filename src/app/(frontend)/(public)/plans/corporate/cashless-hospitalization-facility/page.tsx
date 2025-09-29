@@ -68,7 +68,7 @@ function page() {
     descriptionBN: `চিকিৎসা ব্যয় ক্রমেই বাড়ছে। আমাদের ক্যাশলেস সুবিধা আপনার টিমকে দিচ্ছে
       তাৎক্ষণিক ও মানসম্পন্ন স্বাস্থ্যসেবা
       হাসপাতালে ভর্তি সময়ে আর্থিক চাপমুক্ত অভিজ্ঞতা
-      সহজ ক্লেইম প্রক্রিয়া`,
+      সহজ ক্লেইম প্রক্রিয়া।`,
     description:
       'With medical costs rising, the cashless benefit ensures that your team can access quality healthcare instantly and stress-free. It removes the financial burden at the time of hospitalization and simplifies the entire claims process.  ',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/cashless-hospitalization-facility/web/WCTMImage.png`,
