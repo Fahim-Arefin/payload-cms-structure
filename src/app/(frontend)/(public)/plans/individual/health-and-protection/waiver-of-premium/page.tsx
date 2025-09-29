@@ -79,8 +79,8 @@ function page({}: Props) {
     subTitle: 'elegibility',
     subTitleBN: 'বৈশিষ্ট্য',
     smallTitle: '',
-    bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/waiver-of-premium/web/eligibility-banner.jpg`,
-    bgMobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/waiver-of-premium/mobile/eligibility-banner.jpg`,
+    bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/waiver-of-premium/web/eligibility-banner2.jpg`,
+    bgMobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/waiver-of-premium/mobile/eligibility-banner2.jpg`,
     item: [
       {
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/waiver-of-premium/web/icon1.png`,

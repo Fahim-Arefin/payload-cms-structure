@@ -476,7 +476,6 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
             checked={agreeTerms}
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
-          {lang === 'en' ? (
             <span className="text-xs md:text-sm leading-relaxed">
               By clicking <span className="font-semibold">Request for purchase</span>, you agree to
               our{' '}
@@ -488,7 +487,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
               >
                 terms and conditions
               </Link>{' '}
-              and Shanta Life{' '}
+              and {' '}
               <Link
                 href="/privacy-policy"
                 className="underline text-[#FF6600] hover:opacity-90"
@@ -499,30 +498,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
               </Link>
               .
             </span>
-          ) : (
-            <span className="text-xs md:text-sm leading-relaxed">
-              <span className="font-semibold">পলিসি কিনতে রিকুয়েস্ট করুন</span> বাটনে ক্লিক করলে
-              আপনি আমাদের{' '}
-              <Link
-                href="/terms-condition"
-                className="underline text-[#FF6600] hover:opacity-90"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                শর্তাবলি
-              </Link>{' '}
-              ও শান্তা লাইফের{' '}
-              <Link
-                href="/privacy-policy"
-                className="underline text-[#FF6600] hover:opacity-90"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                প্রাইভেসি পলিসি
-              </Link>{' '}
-              মেনে নিচ্ছেন।
-            </span>
-          )}
+
         </label>
       </div>
 
@@ -547,7 +523,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         <p className="text-[12px] md:text-[14px] text-[#00000099] mt-4 md:mt-1 md:w-[90%] font-light md:capitalize">
           {L(
             "Our expert advisors are ready to help you choose the best plan based on your age, income, and future goals. Whether you're just starting your career or planning for retirement, we are with you at every step.",
-            'আপনার বয়স, আয় এবং ভবিষ্যৎ লক্ষ্য অনুযায়ী সেরা প্ল্যান বেছে নিতে আমাদের বিশেষজ্ঞ পরামর্শদাতারা প্রস্তুত। আপনি ক্যারিয়ারের শুরুতেই থাকুন বা অবসরের পরিকল্পনা করুন—আমরা আছি আপনার প্রতিটি পদক্ষেপে।',
+            'আপনার বয়স, আয় এবং ভবিষ্যৎ লক্ষ্য অনুযায়ী সেরা প্ল্যান বেছে নিতে আমাদের বিশেষজ্ঞ পরামর্শদাতারা প্রস্তুত। আপনি ক্যারিয়ারের শুরুতেই থাকুন বা অবসরের পরিকল্পনা করুন-আমরা আছি আপনার প্রতিটি পদক্ষেপে।',
           )}
         </p>
       </div>

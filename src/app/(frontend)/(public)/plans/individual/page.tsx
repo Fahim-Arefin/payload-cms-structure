@@ -37,7 +37,7 @@ function PlanPage() {
       title: 'Health and Protection Plans',
       titleBN: 'হেলথ এন্ড প্রটেকশন প্ল্যানস',
       description: `Preventive care meets powerful protection. Let us be your financial shield you can count on.`,
-      descriptionBN: `প্রতিরোধের স্বাস্থ্য আর সুরক্ষার শক্তি— নির্ভরযোগ্য আর্থিক ঢাল হয়ে আপনার পাশে সবসময়`,
+      descriptionBN: `স্বাস্থ্য আর সুরক্ষার শক্তি— নির্ভরযোগ্য আর্থিক ঢাল হয়ে আপনার পাশে সবসময়`,
       link: '/plans/individual/health-and-protection',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/web/health-and-protection.jpg`,
       // mobileImage: '/assets/solutions/individual/mobile/health-and-protection.jpg',

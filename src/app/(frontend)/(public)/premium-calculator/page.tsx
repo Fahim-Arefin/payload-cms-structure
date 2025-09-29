@@ -7,6 +7,7 @@ import GlobalButton from '@/components/custom/shared/GlobalButton'
 import ToolTip from '@/components/custom/shared/ToolTip'
 import { Button } from '@/components/ui/button'
 import LocalizedString from '@/components/custom/shared/LocalizedString'
+import Link from 'next/link'
 
 type Props = {}
 
@@ -46,14 +47,16 @@ const page: FC<Props> = ({}) => {
             >
               Purchase Now
             </Button> */}
-            <GlobalButton
-              variant="primary"
-              className="cursor-not-allowed"
-              text="Purchase"
-              size="large"
-            >
-              <LocalizedString en={`Purchase`} bn={`ক্রয় করুন`} />
-            </GlobalButton>
+            <Link href={`/purchase`}>
+              <GlobalButton
+                variant="primary"
+                // className="cursor-not-allowed"
+                text="Purchase"
+                size="large"
+              >
+                <LocalizedString en={`Purchase`} bn={`ক্রয় করুন`} />
+              </GlobalButton>
+            </Link>
           </ToolTip>
 
           <div className="flex items-center space-x-2 text-white 2xl:space-x-4">

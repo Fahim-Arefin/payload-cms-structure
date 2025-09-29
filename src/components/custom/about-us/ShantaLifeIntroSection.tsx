@@ -74,7 +74,7 @@ function ShantaLifeIntroSection({ shantaIntroContent }: Props) {
           <p
             className="
             text-center lg:text-justify 
-            text-[#434343] font-light 
+            text-[#434343] font-normal 
             lg:leading-[30px] xl:leading-[40px]
             global-p1
             h-full

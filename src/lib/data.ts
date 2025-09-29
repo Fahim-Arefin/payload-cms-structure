@@ -113,7 +113,7 @@ A skilled communicator and team player, Raiven provides crucial insights to stak
     designationBN: 'ডিরেক্টর',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/board-of-directors/web/Iftekhar-Rahman2.jpg`,
     // mobileImage: '/assets/board-of-directors/mobile/Iftekhar-Rahman2.jpg',
-    descriptionBN: `তিন দশকেরও বেশি সময়ের ব্যাবসায়িক অভিজ্ঞতাসম্পন্ন জনাব ইফতেখার রহমান বহুমুখী শিল্পখাতে অসাধারণ নেতৃত্ব প্রদর্শন করেছেন। 
+    descriptionBN: `তিন দশকেরও বেশি সময়ের ব্যবসায়িক অভিজ্ঞতাসম্পন্ন জনাব ইফতেখার রহমান বহুমুখী শিল্পখাতে অসাধারণ নেতৃত্ব প্রদর্শন করেছেন। 
 ঢাকা বিশ্ববিদ্যালয় থেকে স্নাতক সম্পন্ন করে তিনি Intertek Testing Service Limited-এ inspection ব্যবসার মাধ্যমে তাঁর পেশাগত যাত্রা শুরু করেন। পরবর্তীতে ১৯৯০-এর দশকের মাঝামাঝি সময়ে তিনি Greenland Garments Limited প্রতিষ্ঠা করেন এবং দুই দশকেরও বেশি সময় ধরে সফলভাবে প্রতিষ্ঠানটিকে নেতৃত্ব দেন।
 
 ব্যবসায়িক পোর্টফোলিওকে বৈচিত্র্যময় করতে তিনি IT খাতে প্রবেশ করেন এবং F-Z Technologies প্রতিষ্ঠা করেন, যা আর্থিক প্রতিষ্ঠানের জন্য software solutions তৈরি করে এবং Oracle, Dell, Microsoft ও Cisco-এর মতো বিশ্বখ্যাত কোম্পানির সঙ্গে কাজ করে। পরবর্তীতে তিনি টেলিযোগাযোগ খাতেও পদার্পণ করেন Tech Valley Networks Limited ও ADN Technologies Limited-এর মাধ্যমে। 

@@ -195,7 +195,7 @@ function DirectorCard({ data, index }: Props) {
           {/* Description */}
           <p
             ref={textRef}
-            className={`text-[#434343] global-p2 font-light text-justify ${
+            className={`text-[#434343] global-p2 font-normal text-justify ${
               !expand
                 ? 'line-clamp-6 md:line-clamp-[8] lg:line-clamp-[10] xl:line-clamp-[11] 2xl:line-clamp-[13]'
                 : ''

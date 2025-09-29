@@ -67,7 +67,7 @@ const page: FC<Props> = ({}) => {
     {
       value: 'benefits',
       label: 'Additional Benefits',
-      labelBN: 'মূল সুবিধাসমূহ',
+      labelBN: 'অতিরিক্ত সুবিধা',
     },
   ]
 
