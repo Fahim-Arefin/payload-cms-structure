@@ -168,7 +168,7 @@ const PurchaseSection = (props: Props) => {
             <div>
               <div className="px-6 pt-6 md:px-10 md:pt-10 pb-4 rounded-t-xl bg-[#9C863940]">
                 <h4 className="global-p1 font-semibold text-[#3A3A3C] mb-1">
-                  <LocalizedText en={`For their Future`} bn={`তাদের ভবিষ্যতের জন্য`} />
+                  <LocalizedText en={`For their future`} bn={`তাদের ভবিষ্যতের জন্য`} />
                 </h4>
                 <p className="global-p2 text-[#3A3A3C]">
                   <LocalizedText
@@ -181,7 +181,7 @@ const PurchaseSection = (props: Props) => {
 
               <div className="bg-[#ccbf95] px-6 md:px-10 py-4 ">
                 <h4 className="global-p1 font-bold text-[#fff] mb-1">
-                  <LocalizedText en={`For Your Growth`} bn={`আপনার উন্নতির জন্য`} />
+                  <LocalizedText en={`For your growth`} bn={`আপনার উন্নতির জন্য`} />
                 </h4>
                 <p className="global-p2 font-light text-[#fff]">
                   <LocalizedText
@@ -194,7 +194,7 @@ const PurchaseSection = (props: Props) => {
               <div className="bg-[#9C8639B2] rounded-b-xl px-6 md:px-10 py-4">
                 <h4 className="global-p1 font-bold text-[#fff] mb-1">
                   <LocalizedText
-                    en={`When life throws you a Curveball`}
+                    en={`When life throws you a curveball`}
                     bn={`যখন জীবন হঠাৎ আঘাত হানে`}
                   />
                 </h4>
