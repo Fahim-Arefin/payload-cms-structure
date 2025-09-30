@@ -99,7 +99,7 @@ export function BenefitsTabSection() {
             <p className="global-p2 font-light">
               <span className="font-semibold ">
                 <LocalizedText
-                  en="Shanta Critical Illness:"
+                  en="Shanta Critical Protection:"
                   bn="শান্তা ক্রিটিক্যাল প্রটেকশন (CP): "
                 />
               </span>

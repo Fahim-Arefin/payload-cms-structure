@@ -30,10 +30,10 @@ export default async function HomePage() {
     {
       title: 'Empower yourself',
       subtitle: 'to live on your terms',
-      titleBN: 'বাঁচো সাহসে,',
+      titleBN: 'বাঁচো সাহসে',
       subtitleBN: 'আত্মবিশ্বাসে',
       description:
-        'Your life evolves, and so should your protection... Shanta Life Insurance ensures you stay ahead.',
+        'Your life evolves, and so should your protection. Shanta Life Insurance ensures you stay ahead.',
       descriptionBN: `জীবনের পথচলায় অর্থনৈতিক সুরক্ষার নির্ভরযোগ্য সঙ্গী-শান্তা লাইফ ইন্স্যুরেন্স।`,
       // image: '/assets/banners/banner3.jpg',
       image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/banner3.jpg`,
@@ -42,10 +42,10 @@ export default async function HomePage() {
       title: 'Empower yourself',
       subtitle: 'to live on your terms',
 
-      titleBN: 'বাঁচো সাহসে,',
+      titleBN: 'বাঁচো সাহসে',
       subtitleBN: 'আত্মবিশ্বাসে',
       description:
-        'Your life evolves, and so should your protection... Shanta Life Insurance ensures you stay ahead.',
+        'Your life evolves, and so should your protection. Shanta Life Insurance ensures you stay ahead.',
       descriptionBN: `জীবনের পথচলায় অর্থনৈতিক সুরক্ষার নির্ভরযোগ্য সঙ্গী-শান্তা লাইফ ইন্স্যুরেন্স।`,
       // image: '/assets/banners/banner22.jpg',
       image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/banner22.jpg`,
@@ -53,10 +53,10 @@ export default async function HomePage() {
     {
       title: 'Empower yourself',
       subtitle: 'to live on your terms',
-      titleBN: 'বাঁচো সাহসে,',
+      titleBN: 'বাঁচো সাহসে',
       subtitleBN: 'আত্মবিশ্বাসে',
       description:
-        'Your life evolves, and so should your protection... Shanta Life Insurance ensures you stay ahead.',
+        'Your life evolves, and so should your protection. Shanta Life Insurance ensures you stay ahead.',
       descriptionBN: `জীবনের পথচলায় অর্থনৈতিক সুরক্ষার নির্ভরযোগ্য সঙ্গী-শান্তা লাইফ ইন্স্যুরেন্স।`,
       // image: '/assets/banners/banner1.jpg',
       image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/banner1.jpg`,

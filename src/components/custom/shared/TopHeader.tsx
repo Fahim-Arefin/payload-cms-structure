@@ -161,14 +161,14 @@ function TopHeader({ className }: { className?: string }) {
 
       <div className="flex items-center gap-4">
         <Link href="/premium-calculator#calculator">
-          <Button variant="link" className="text-white px-3 py-1 font-medium underline">
+          <Button variant="link" className="text-white px-3 py-1 font-medium underline text-xs">
             <LocalizedText en="Premium Calculator" bn="প্রিমিয়াম ক্যালকুলেটর" />
           </Button>
         </Link>
 
         <Link href="/agent-onboarding">
-          <Button variant="link" className="text-white px-3 py-1 font-medium underline">
-            <LocalizedText en="I’m an Agent" bn="এজেন্ট" />
+          <Button variant="link" className="text-white px-3 py-1 font-medium underline text-xs">
+            <LocalizedText en="I'm an Agent" bn="এজেন্ট" />
           </Button>
         </Link>
 

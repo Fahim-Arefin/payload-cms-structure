@@ -204,7 +204,7 @@ const careerCards: CareerCard[] = [
     descriptionBN: 'সাফল্যের কারিগরদের আমরা তুলে ধরি সবার সামনে',
   },
   {
-    title: 'We Co-sign Your Success',
+    title: 'We Co-sign your Success',
     titleBN: 'আমরা সহযাত্রী আপনার সাফল্যে',
     description: 'We cheer your hustle, amplify your milestones, and move forward—together.',
     descriptionBN: `আপনার সাফল্য আমরা উজ্জাপন করি একসাথে`,
