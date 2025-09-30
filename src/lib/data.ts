@@ -129,7 +129,7 @@ A skilled communicator and team player, Raiven provides crucial insights to stak
     designationBN: 'ডিরেক্টর',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/board-of-directors/web/anisul-haque.jpg`,
     // mobileImage: '/assets/board-of-directors/mobile/anisul-haque.jpg',
-    descriptionBN: `শান্তা হোল্ডিংস গ্রুপ এর সকল সহযোগী প্রতিষ্ঠানে গ্রুপ ফিন্যান্স ডিভিশনের এক্সেকিউটিভ ডিরেক্টর পদে নেতৃত্ব দানকারী, জনাব এম আনিসুল হক ৩০ বছরের ও বেশি সময় দেশের বিভিন্ন শীর্ষস্থানীয় প্রতিষ্ঠানে তার বৈচিত্র্যময় ও সফল কর্মজীবন গড়ে তুলেছেন।
+    descriptionBN: `শান্তা হোল্ডিংস এবং এর সকল সহযোগী প্রতিষ্ঠানে গ্রুপ ফিন্যান্স ডিভিশনের এক্সেকিউটিভ ডিরেক্টর পদে নেতৃত্ব দানকারী, জনাব এম আনিসুল হক ৩০ বছরের ও বেশি সময় দেশের বিভিন্ন শীর্ষস্থানীয় প্রতিষ্ঠানে তার বৈচিত্র্যময় ও সফল কর্মজীবন গড়ে তুলেছেন।
 
 বর্তমানে তিনি একজন Cost and Management Accountant ও Consultant হিসেবে কাজ করছেন এবং The Institute of Cost and Management Accountants of Bangladesh (ICMAB)-এর Fellow Member (FCMA)।`,
     description: `Mr. M. Anisul Haque is a highly respected and result-oriented finance professional with over 30+ years of progressive and diverse accomplishments in renowned local and multinational organizations. He is currently practicing as a Cost and Management Accountant and Consultant and is a Fellow Member (FCMA) of The Institute of Cost and Management Accountants of Bangladesh (ICMAB). He is the Executive Director – Group Finance for the entire Shanta Holdings group and its subsidiaries.`,

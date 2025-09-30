@@ -16,6 +16,12 @@ import useSSRLanguage from '@/hooks/useSSRLanguage'
 type Props = {}
 
 function FeedBackSection({}: Props) {
+  // ---- localization helper using your SSR hook ----
+  const lang = useSSRLanguage()
+  const t = (en: string, bn: string) => (lang === 'bn' ? bn : en)
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
   const [sendButtonText, setSendButtonText] = useState('Send Feedback')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -26,12 +32,12 @@ function FeedBackSection({}: Props) {
   const [emailError, setEmailError] = useState('')
   const [phoneError, setPhoneError] = useState('')
   const [agreeTerms, setAgreeTerms] = useState(false)
-
-  // ---- localization helper using your SSR hook ----
-  const lang = useSSRLanguage()
-  const t = (en: string, bn: string) => (lang === 'bn' ? bn : en)
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const localizedSendText =
+    sendButtonText === 'Sending...'
+      ? t('Sending...', 'পাঠানো হচ্ছে...')
+      : sendButtonText === 'Feedback Sent'
+        ? t('Feedback Sent', 'ফিডব্যাক পাঠানো হয়েছে')
+        : t('Send Feedback', 'সেন্ড ফিডব্যাক') // default (idle)
 
   const sendFeedbackHandler = async () => {
     if (!name || !email || !phone || !address || !feedback) {
@@ -181,7 +187,7 @@ function FeedBackSection({}: Props) {
                   >
                     terms and conditions
                   </Link>{' '}
-                  and Shanta Life{' '}
+                  and{' '}
                   <Link
                     href="/privacy-policy"
                     className="underline text-[#FF6600] hover:opacity-90"
@@ -216,7 +222,7 @@ function FeedBackSection({}: Props) {
                 <SendHorizontal className="inline mb-1" />
               )}
 
-              <span className="ml-2.5">{sendButtonText}</span>
+              <span className="ml-2.5">{localizedSendText}</span>
             </Button>
           </div>
 
@@ -255,7 +261,7 @@ function FeedBackSection({}: Props) {
                   >
                     terms and conditions
                   </Link>{' '}
-                  and Shanta Life{' '}
+                  and{' '}
                   <Link
                     href="/privacy-policy"
                     className="underline text-[#FF6600] hover:opacity-90"

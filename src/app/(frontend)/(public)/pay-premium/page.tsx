@@ -13,7 +13,7 @@ function page() {
       titleBN: 'প্রিমিয়াম প্রদান',
       subtitle: '',
       description: 'Powering your protection starts here.',
-      descriptionBN: 'আপনার আগামী সুরক্ষিত রাখুন — প্রিমিয়াম পরিশোধ করুন আজই',
+      descriptionBN: 'আপনার আগামী সুরক্ষিত রাখুন - প্রিমিয়াম পরিশোধ করুন আজই',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/Pay-prem-2.jpg`,
     },
   ]

@@ -108,7 +108,7 @@ function EndowmentPage() {
     eligibility: [
       {
         title: 'Eligibility',
-        titleBN: 'আবেদন করার বয়স',
+        titleBN: '',
         icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/childIcon.svg`,
         // mobileIcon:"/assets/icons/mobile/childIcon.svg",
         // bgImage:"/assets/eligibilityImage1.jpg",
