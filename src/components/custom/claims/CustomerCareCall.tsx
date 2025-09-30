@@ -82,7 +82,7 @@ export function ContactComponent() {
           </>
         )}
       </h4>
-      <GlobalButton
+      {/* <GlobalButton
         variant="outline"
         className="flex items-center gap-2 bg-yellow-800 text-white hover:bg-yellow-700 border-yellow-900
             w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[150px]
@@ -104,7 +104,7 @@ export function ContactComponent() {
           />
         </svg>
         <LocalizedText en="09610889900" bn="০৯৬১০৮৮৯৯০০" />
-      </GlobalButton>
+      </GlobalButton> */}
       {/* <Popover open={showPopover}>
         <PopoverTrigger asChild>
           <GlobalButton

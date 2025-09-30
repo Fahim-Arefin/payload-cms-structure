@@ -98,7 +98,7 @@ function AwardSection() {
                       <LocalizedText en="112" bn="১১২" />
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      <LocalizedText en="Claim Settled" bn="ক্লেম সেটলড" />
+                      <LocalizedText en="Claim Settled" bn="ক্লেম সেটেল্ড" />
                     </div>
                   </div>
                 </div>

@@ -37,7 +37,7 @@ const page: FC<pageProps> = ({}) => {
     subTitleBN: 'অগ্রগতির নিরন্তর প্রচেষ্টায়',
     description:
       'We’re bringing together people who believe in better protection, stronger communities, and a future full of possibilities. Together, we push boundaries-in work, in life, and in everything in between.',
-    descriptionBN: `আমরা একত্রে গড়ে তুলি শক্তিশালী কমিউনিটি-আর নিশ্চিত করি এক সম্ভাবনাময় আগামী।`,
+    descriptionBN: `আমরা একত্রে গড়ে তুলি শক্তিশালী কমিউনিটি - আর নিশ্চিত করি এক সম্ভাবনাময় আগামী।`,
   }
 
   const careerStoryData: OurStoryDataType[] = [
