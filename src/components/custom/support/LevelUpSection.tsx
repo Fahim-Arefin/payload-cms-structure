@@ -12,6 +12,7 @@ type Props = {
     image: string
     mobileImage: string
     title: string
+    titleBN?: string
     link?: string
   }[]
 }
