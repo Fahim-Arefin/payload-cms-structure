@@ -1,10 +1,10 @@
 // src/components/custom/shared/hero/HeroItem.tsx
+import { HeroBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import LocalizedRichText from '../LocalizedRichText'
 import LocalizedString from '../LocalizedString'
-import { Page } from '@/payload-types'
 
-type HeroBlock = Extract<Page['layout'][number], { blockType: 'hero' }>
+type HeroBlock = HeroBlockType
 type HeroSlide = NonNullable<HeroBlock['heroes']>[number]
 
 type Props = {

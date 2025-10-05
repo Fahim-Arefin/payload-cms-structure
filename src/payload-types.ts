@@ -144,7 +144,15 @@ export interface User {
  */
 export interface Media {
   id: string;
-  alt: string;
+  /**
+   * Temporary until document saves successfully
+   */
+  temporary?: boolean | null;
+  ownerCollection?: string | null;
+  ownerDocId?: string | null;
+  ownerField?: string | null;
+  derivedFrom?: (string | null) | Media;
+  blurDataURL?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -203,119 +211,330 @@ export interface AgentCareerApplication {
   createdAt: string;
 }
 /**
- * Dynamic pages assembled from blocks
- *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
   id: string;
+  uploadSessionId?: string | null;
   name: string;
   slug: string;
-  uploadSessionId?: string | null;
-  layout: {
-    heroes: {
-      image: string | Media;
-      title: string;
-      titleBN: string;
-      subtitle?: string | null;
-      subtitleBN?: string | null;
-      description?: {
-        root: {
-          type: string;
-          children: {
-            type: string;
-            version: number;
+  layout: (
+    | {
+        uploadSessionId?: string | null;
+        heroes: {
+          image: string | Media;
+          /**
+           * Title (English). Max 120 characters.
+           */
+          title: string;
+          /**
+           * শিরোনাম (বাংলা)। সর্বোচ্চ ১২০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Subtitle (English). Max 160 characters.
+           */
+          subtitle?: string | null;
+          /**
+           * উপশিরোনাম (বাংলা)। সর্বোচ্চ ১৬০ অক্ষর।
+           */
+          subtitleBN?: string | null;
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
             [k: string]: unknown;
-          }[];
-          direction: ('ltr' | 'rtl') | null;
-          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-          indent: number;
-          version: number;
-        };
-        [k: string]: unknown;
-      } | null;
-      descriptionBN?: {
-        root: {
-          type: string;
-          children: {
-            type: string;
-            version: number;
+          } | null;
+          descriptionBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
             [k: string]: unknown;
-          }[];
-          direction: ('ltr' | 'rtl') | null;
-          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-          indent: number;
-          version: number;
-        };
-        [k: string]: unknown;
-      } | null;
-      id?: string | null;
-    }[];
-    /**
-     * Add call-to-action buttons that appear below the hero content (maximum 2 buttons)
-     */
-    ctaButtons?:
-      | (
-          | {
-              /**
-               * Max 24 characters.
-               */
-              label: string;
-              /**
-               * সর্বোচ্চ 24 অক্ষর।
-               */
-              labelBN: string;
-              /**
-               * Enter the page path only (no domain). Example: "/plans" or "/premium-calculator".
-               */
-              page: string;
-              style?: ('primary' | 'glass') | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'pageLink';
-            }
-          | {
-              /**
-               * Max 24 characters.
-               */
-              label: string;
-              /**
-               * সর্বোচ্চ 24 অক্ষর।
-               */
-              labelBN: string;
-              /**
-               * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
-               */
-              youtubeUrl: string;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'youtubeVideo';
-            }
-          | {
-              /**
-               * Max 24 characters.
-               */
-              label: string;
-              /**
-               * সর্বোচ্চ 24 অক্ষর।
-               */
-              labelBN: string;
-              /**
-               * Example: +88 09610889900
-               */
-              phoneNumber: string;
-              style?: ('primary' | 'glass') | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'callNow';
-            }
-        )[]
-      | null;
-    id?: string | null;
-    blockName?: string | null;
-    blockType: 'hero';
-  }[];
+          } | null;
+          id?: string | null;
+        }[];
+        /**
+         * Add call-to-action buttons that appear below the hero content (maximum 2 buttons)
+         */
+        ctaButtons?:
+          | (
+              | {
+                  /**
+                   * Max 24 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ 24 অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Enter the page path only (no domain). Example: "/plans" or "/premium-calculator".
+                   */
+                  page: string;
+                  style?: ('primary' | 'glass') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'pageLink';
+                }
+              | {
+                  /**
+                   * Max 24 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ 24 অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
+                   */
+                  youtubeUrl: string;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'youtubeVideo';
+                }
+              | {
+                  /**
+                   * Max 24 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ 24 অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Example: +88 09610889900
+                   */
+                  phoneNumber: string;
+                  style?: ('primary' | 'glass') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'callNow';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Short label above the main title. Max 40 characters.
+         */
+        heading: string;
+        /**
+         * মূল শিরোনামের উপরে ছোট লেবেল। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        headingBN: string;
+        /**
+         * Primary headline for the section. Max 80 characters.
+         */
+        title: string;
+        /**
+         * এই সেকশনের মূল শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line under the main title. Max 120 characters.
+         */
+        subtitle: string;
+        /**
+         * মূল শিরোনামের নিচে সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Subtitle. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * 2–3 short sentences about why customers choose us. Max 300 characters.
+         */
+        description: string;
+        /**
+         * গ্রাহকরা কেন আমাদের বেছে নেন—এই বিষয়ে ২–৩টি সংক্ষিপ্ত বাক্য লিখুন। সর্বোচ্চ ৩০০ অক্ষর।
+         */
+        descriptionBN: string;
+        /**
+         * Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~200KB.
+         */
+        mainImage?: (string | null) | Media;
+        /**
+         * Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~100KB.
+         */
+        sideImage?: (string | null) | Media;
+        /**
+         * Provide exactly four highlights (e.g., Settlement Rate, Branches, Years of Service, Happy Customers).
+         */
+        stats: {
+          /**
+           * Upload a small square icon (1:1).
+           */
+          icon?: (string | null) | Media;
+          /**
+           * Short descriptive label. Allowed: letters, numbers, spaces, "&", "-", "/". Max 32 characters.
+           */
+          label: string;
+          /**
+           * সংক্ষিপ্ত বর্ণনামূলক লেবেল। ব্যবহারযোগ্য: অক্ষর, সংখ্যা, স্পেস, “&”, “-”, “/”। সর্বোচ্চ ৩২ অক্ষর।
+           */
+          labelBN: string;
+          /**
+           * e.g., 100%, 112+, 25 yrs, 1.2M+, 3,000+, 98.5%. Max 16 characters.
+           */
+          value: string;
+          /**
+           * যেমন: 100%, 112+, 25 yrs, 1.2M+, 3,000+, 98.5%। সর্বোচ্চ ১৬ অক্ষর।
+           */
+          valueBN: string;
+          id?: string | null;
+        }[];
+        /**
+         * Text shown on the call-to-action button. Max 24 characters.
+         */
+        buttonText?: string | null;
+        /**
+         * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        buttonTextBN?: string | null;
+        /**
+         * Provide only if you want a clickable CTA. If CTA Text is set, this becomes required. Must be an internal path (e.g., /about-us) or a full http(s) URL. Max 100 characters.
+         */
+        buttonLink?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'why-choose-us';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Short label above the main title. Max 40 characters.
+         */
+        heading: string;
+        /**
+         * মূল শিরোনামের উপরে ছোট লেবেল। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        headingBN: string;
+        /**
+         * Primary headline for the section. Max 80 characters.
+         */
+        title: string;
+        /**
+         * সেকশনের প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই শিরোনামের ভিতর হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * 2–3 short sentences about plans. Max 300 characters.
+         */
+        description: string;
+        /**
+         * প্ল্যান সম্পর্কে ২–৩টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ৩০০ অক্ষর।
+         */
+        descriptionBN: string;
+        /**
+         * Add 3–5 plans to feature on the homepage.
+         */
+        plans: {
+          /**
+           * Plan icon. Recommended aspect ratio 1:1; ~50KB.
+           */
+          icon?: (string | null) | Media;
+          /**
+           * Plan image. Recommended aspect ratio ~451:350 (≈1.2886). Keep under ~100KB when possible.
+           */
+          image?: (string | null) | Media;
+          /**
+           * Main plan title. Max 20 characters.
+           */
+          title: string;
+          /**
+           * প্রধান প্ল্যান টাইটেল। সর্বোচ্চ ২০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Secondary plan title. Max 80 characters.
+           */
+          subtitle: string;
+          /**
+           * দ্বিতীয় প্ল্যান টাইটেল। সর্বোচ্চ ৮০ অক্ষর।
+           */
+          subtitleBN: string;
+          /**
+           * Brief description of the plan. Max 300 characters.
+           */
+          description: string;
+          /**
+           * প্ল্যানের সংক্ষিপ্ত বর্ণনা। সর্বোচ্চ ৩০০ অক্ষর।
+           */
+          descriptionBN: string;
+          /**
+           * Text shown on the plan’s call-to-action button. Max 24 characters.
+           */
+          plansButtonText?: string | null;
+          /**
+           * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+           */
+          plansButtonTextBN?: string | null;
+          /**
+           * Provide only if you want a clickable button for this plan. If Plans Button Text is set, this becomes required. Must be an internal path (e.g., /plans/xyz) or a full http(s) URL. Max 100 characters.
+           */
+          plansButtonLink?: string | null;
+          id?: string | null;
+        }[];
+        /**
+         * Text shown on the call-to-action button. Max 24 characters.
+         */
+        buttonText?: string | null;
+        /**
+         * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        buttonTextBN?: string | null;
+        /**
+         * Provide only if you want a clickable CTA. If CTA Text is set, this becomes required. Must be an internal path (e.g., /about-us) or a full http(s) URL. Max 100 characters.
+         */
+        buttonLink?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featured-plans';
+      }
+  )[];
   updatedAt: string;
   createdAt: string;
 }
@@ -412,7 +631,12 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
+  temporary?: T;
+  ownerCollection?: T;
+  ownerDocId?: T;
+  ownerField?: T;
+  derivedFrom?: T;
+  blurDataURL?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -472,15 +696,16 @@ export interface AgentCareerApplicationSelect<T extends boolean = true> {
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
+  uploadSessionId?: T;
   name?: T;
   slug?: T;
-  uploadSessionId?: T;
   layout?:
     | T
     | {
         hero?:
           | T
           | {
+              uploadSessionId?: T;
               heroes?:
                 | T
                 | {
@@ -526,6 +751,72 @@ export interface PagesSelect<T extends boolean = true> {
                           blockName?: T;
                         };
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'why-choose-us'?:
+          | T
+          | {
+              backgroundColor?: T;
+              heading?: T;
+              headingBN?: T;
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              mainImage?: T;
+              sideImage?: T;
+              stats?:
+                | T
+                | {
+                    icon?: T;
+                    label?: T;
+                    labelBN?: T;
+                    value?: T;
+                    valueBN?: T;
+                    id?: T;
+                  };
+              buttonText?: T;
+              buttonTextBN?: T;
+              buttonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'featured-plans'?:
+          | T
+          | {
+              backgroundColor?: T;
+              heading?: T;
+              headingBN?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              plans?:
+                | T
+                | {
+                    icon?: T;
+                    image?: T;
+                    title?: T;
+                    titleBN?: T;
+                    subtitle?: T;
+                    subtitleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    plansButtonText?: T;
+                    plansButtonTextBN?: T;
+                    plansButtonLink?: T;
+                    id?: T;
+                  };
+              buttonText?: T;
+              buttonTextBN?: T;
+              buttonLink?: T;
               id?: T;
               blockName?: T;
             };

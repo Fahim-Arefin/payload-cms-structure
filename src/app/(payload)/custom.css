@@ -27,3 +27,5 @@ button.popup-button-list__button.array-actions__action:has(.icon--copy) {
 .array-actions__remove {
   display: flex !important; /* or whatever display value it originally had */
 }
+
+/* cropper */

@@ -162,7 +162,13 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import type { Page as PayloadPage } from '@/payload-types'
 import HeroBlock from '@/blocks/hero/HeroBlock'
-import { HOME_PAGE_HERO_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
+  HOME_PAGE_HERO_SLUG_AND_TAG,
+  HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
+} from '@/lib/constants'
+import WhyChooseUsBlock from '@/blocks/whyChooseUs/WhyChooseUsBlock'
+import FeaturedPlanBlock from '@/blocks/featuredPlan/FeaturedPlanBlock'
 
 type PageParams = { slug?: string[] }
 type PageProps = { params: Promise<PageParams> } // <-- Next 15: params may be a Promise
@@ -178,6 +184,7 @@ const findExactPage = cache(async (slug: string) => {
   const { docs } = await payload.find({
     collection: 'pages',
     limit: 1,
+    depth: 2, // <-- ensure relationship to media is populated
     where: { slug: { equals: slug } },
   })
   return docs?.[0] || null
@@ -224,6 +231,10 @@ const renderBlock = (block: PayloadPage['layout'][0], params: Record<string, str
   switch (block.blockType) {
     case HOME_PAGE_HERO_SLUG_AND_TAG:
       return <HeroBlock key={block.id} block={block} params={params} />
+    case HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG:
+      return <WhyChooseUsBlock key={block.id} block={block} params={params} />
+    case HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG:
+      return <FeaturedPlanBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

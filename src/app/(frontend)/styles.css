@@ -151,6 +151,23 @@
            xl:px-[200px]  xl:py-[100px] 
            2xl:px-[300px] 2xl:py-[150px];
   }
+
+  .container-padding-y {
+    @apply py-12 
+           md:py-24
+           lg:py-[110px] 
+           xl:py-[100px] 
+           2xl:py-[150px];
+  }
+
+  .container-padding-x {
+    @apply px-5 
+           md:px-24
+           lg:px-[130px]  
+           xl:px-[200px]  
+           2xl:px-[300px];
+  }
+
   .container-width {
     @apply w-full lg:w-[78%] xl:w-[72%] mx-auto;
   }

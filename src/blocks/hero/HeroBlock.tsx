@@ -1,12 +1,12 @@
 import HeroSectionWrapper from '@/components/custom/home/HeroSectionWrapper'
-import { Page } from '@/payload-types'
+import { HeroBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
-  block: Extract<Page['layout'][0], { blockType: 'hero' }>
+  block: HeroBlockType
   params: Record<string, string>
 }
 
-function HeroBlock({ block, params }: Props) {
+function HeroBlock({ block }: Props) {
   return <HeroSectionWrapper data={block} />
 }
 

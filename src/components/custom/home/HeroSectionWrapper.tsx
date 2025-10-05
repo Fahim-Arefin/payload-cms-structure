@@ -1,10 +1,10 @@
 import CTAButtonBlock from '@/blocks/hero/CTAButtonBlock'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import { Page } from '@/payload-types'
+import { HeroBlockType } from '@/types/payloadCustomTypes'
 // import CTAButtonBlock from '../shared/hero/CTAButtonBlock'
 
 type Props = {
-  data: Extract<Page['layout'][0], { blockType: 'hero' }>
+  data: HeroBlockType
 }
 
 const HeroSectionWrapper = async ({ data }: Props) => {

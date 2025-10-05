@@ -8,12 +8,12 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import { sliderDelay } from '@/lib/data'
+import { HeroBlockType } from '@/types/payloadCustomTypes'
 import Autoplay from 'embla-carousel-autoplay'
 import HeroItem from './HeroItem'
-import { Page } from '@/payload-types'
 
 type Props = {
-  heroSlides: Extract<Page['layout'][0], { blockType: 'hero' }>
+  heroSlides: HeroBlockType
   children?: React.ReactNode
   height?: string
   top?: string

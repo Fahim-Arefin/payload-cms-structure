@@ -1,16 +1,16 @@
 'use client'
 
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import Link from 'next/link'
-import { BsPlay } from 'react-icons/bs'
-import { useState } from 'react'
+import CallNowButton from '@/components/custom/shared/CallNowButton'
 import GlobalButton from '@/components/custom/shared/GlobalButton'
 import LocalizedText from '@/components/custom/shared/LocalizedText'
-import CallNowButton from '@/components/custom/shared/CallNowButton'
-import { Page } from '@/payload-types'
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { HeroBlockType } from '@/types/payloadCustomTypes'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import Link from 'next/link'
+import { useState } from 'react'
+import { BsPlay } from 'react-icons/bs'
 
-type HeroBlock = Extract<Page['layout'][number], { blockType: 'hero' }>
+type HeroBlock = HeroBlockType
 type ctaButtons = NonNullable<HeroBlock['ctaButtons']>
 
 type Props = {
@@ -22,7 +22,7 @@ export default function CTAButtonBlock({ ctaButtons }: Props) {
 
   return (
     <div
-      className="absolute top-[245px] md:top-[355px] lg:top-[70%] xl:top-[70%]  2xl:top-[730px] 
+      className="absolute top-[245px] md:top-[355px] lg:top-[75%] xl:top-[70%]  2xl:top-[730px] 
         inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
         hero-content-width flex justify-left space-x-4 md:space-x-6 lg:justify-start"
     >
@@ -68,6 +68,7 @@ export default function CTAButtonBlock({ ctaButtons }: Props) {
                   <iframe
                     width="100%"
                     height="100%"
+                    // https://www.youtube.com/embed/YbnlDrexiGE
                     src={block.youtubeUrl}
                     title="YouTube video player"
                     frameBorder="0"
