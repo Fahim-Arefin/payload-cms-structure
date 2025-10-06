@@ -156,19 +156,27 @@
 // ==========================================================================
 
 // app/(frontend)/[[...slug]]/page.tsx
-import React, { cache } from 'react'
-import { notFound } from 'next/navigation'
-import { getPayload } from 'payload'
-import config from '@/payload.config'
-import type { Page as PayloadPage } from '@/payload-types'
+import FeaturedPlanBlock from '@/blocks/featuredPlan/FeaturedPlanBlock'
 import HeroBlock from '@/blocks/hero/HeroBlock'
+import LifeAtShantaBlock from '@/blocks/lifeAtShanta/LifeAtShantaBlock'
+import LifeInsuranceSimplifiedBlock from '@/blocks/lifeInsuranceSimplified/LifeInsuranceSimplifiedBlock'
+import LifeInsuranceVideoBlock from '@/blocks/lifeInsuranceVideo/LifeInsuranceVideoBlock'
+import PremiumCalculatorBlock from '@/blocks/premiumCalculator/PremiumCalculatorBlock'
+import WhyChooseUsBlock from '@/blocks/whyChooseUs/WhyChooseUsBlock'
 import {
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
+  HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
+  HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG,
+  HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
+  HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
-import WhyChooseUsBlock from '@/blocks/whyChooseUs/WhyChooseUsBlock'
-import FeaturedPlanBlock from '@/blocks/featuredPlan/FeaturedPlanBlock'
+import type { Page as PayloadPage } from '@/payload-types'
+import config from '@/payload.config'
+import { notFound } from 'next/navigation'
+import { getPayload } from 'payload'
+import { cache } from 'react'
 
 type PageParams = { slug?: string[] }
 type PageProps = { params: Promise<PageParams> } // <-- Next 15: params may be a Promise
@@ -192,7 +200,7 @@ const findExactPage = cache(async (slug: string) => {
 
 const findPatternPages = cache(async () => {
   const payload = await payloadClient()
-  const { docs } = await payload.find({ collection: 'pages', limit: 1000 })
+  const { docs } = await payload.find({ collection: 'pages', limit: 1000, depth: 2 })
   return (docs ?? []).filter((p: any) => typeof p.slug === 'string' && p.slug.includes(':'))
 })
 
@@ -235,6 +243,14 @@ const renderBlock = (block: PayloadPage['layout'][0], params: Record<string, str
       return <WhyChooseUsBlock key={block.id} block={block} params={params} />
     case HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG:
       return <FeaturedPlanBlock key={block.id} block={block} params={params} />
+    case HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG:
+      return <PremiumCalculatorBlock key={block.id} block={block} params={params} />
+    case HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG:
+      return <LifeInsuranceSimplifiedBlock key={block.id} block={block} params={params} />
+    case HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG:
+      return <LifeInsuranceVideoBlock key={block.id} block={block} params={params} />
+    case HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG:
+      return <LifeAtShantaBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

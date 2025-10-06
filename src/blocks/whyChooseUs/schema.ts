@@ -646,7 +646,7 @@ const WhyChooseUsSchema: Block = {
       label: 'Main Background Image',
       type: 'upload',
       relationTo: 'media',
-      required: false,
+      required: true,
       admin: {
         description:
           'Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~200KB.',
@@ -657,7 +657,7 @@ const WhyChooseUsSchema: Block = {
       label: 'Side Image (beside stats)',
       type: 'upload',
       relationTo: 'media',
-      required: false,
+      required: true,
       admin: {
         description:
           'Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~100KB.',
@@ -683,7 +683,7 @@ const WhyChooseUsSchema: Block = {
           label: 'Stat Icon/Image',
           type: 'upload',
           relationTo: 'media',
-          required: false,
+          required: true,
           admin: {
             description: 'Upload a small square icon (1:1).',
           },

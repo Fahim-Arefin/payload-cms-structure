@@ -1,6 +1,10 @@
 import {
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
+  HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
+  HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG,
+  HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
+  HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
@@ -17,4 +21,23 @@ export type WhyChooseUsBlockType = Extract<
 export type FeaturedPlansBlock = Extract<
   Page['layout'][number],
   { blockType: typeof HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG }
+>
+
+export type PremiumCalculatorBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG }
+>
+
+export type LifeInsuranceSimplifiedBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG }
+>
+
+export type LifeInsuranceVideoBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG }
+>
+export type LifeAtShantaBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG }
 >

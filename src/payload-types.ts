@@ -384,11 +384,11 @@ export interface Page {
         /**
          * Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~200KB.
          */
-        mainImage?: (string | null) | Media;
+        mainImage: string | Media;
         /**
          * Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~100KB.
          */
-        sideImage?: (string | null) | Media;
+        sideImage: string | Media;
         /**
          * Provide exactly four highlights (e.g., Settlement Rate, Branches, Years of Service, Happy Customers).
          */
@@ -396,7 +396,7 @@ export interface Page {
           /**
            * Upload a small square icon (1:1).
            */
-          icon?: (string | null) | Media;
+          icon: string | Media;
           /**
            * Short descriptive label. Allowed: letters, numbers, spaces, "&", "-", "/". Max 32 characters.
            */
@@ -475,11 +475,11 @@ export interface Page {
           /**
            * Plan icon. Recommended aspect ratio 1:1; ~50KB.
            */
-          icon?: (string | null) | Media;
+          icon: string | Media;
           /**
            * Plan image. Recommended aspect ratio ~451:350 (≈1.2886). Keep under ~100KB when possible.
            */
-          image?: (string | null) | Media;
+          image: string | Media;
           /**
            * Main plan title. Max 20 characters.
            */
@@ -533,6 +533,256 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'featured-plans';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Short label above the main title. Max 40 characters.
+         */
+        heading: string;
+        /**
+         * মূল শিরোনামের উপরে ছোট লেবেল। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        headingBN: string;
+        /**
+         * Primary headline for the section. Max 40 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * 1–2 short sentences describing the premium calculator. Max 200 characters.
+         */
+        description: string;
+        /**
+         * প্রিমিয়াম ক্যালকুলেটর সম্পর্কে ১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ২০০ অক্ষর।
+         */
+        descriptionBN: string;
+        /**
+         * Primary background image (≈1.031:1 recommended). ~100KB preferred.
+         */
+        backgroundImage1: string | Media;
+        /**
+         * Secondary background image (≈1.031:1 recommended). ~100KB preferred.
+         */
+        backgroundImage2: string | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'home-premium-calculator';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Short label above the main title. Max 40 characters.
+         */
+        sectionHeading: string;
+        /**
+         * মূল শিরোনামের উপরে ছোট লেবেল। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        sectionHeadingBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Section Heading. Max 40 characters.
+         */
+        sectionHeadingHighlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই সেকশন হেডিং-এর মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        sectionHeadingHighlightedTextBN?: string | null;
+        /**
+         * 1–3 content sections, each with a main image, video link, and 3 cards.
+         */
+        sections: {
+          /**
+           * Primary headline for this section. Max 80 characters.
+           */
+          title: string;
+          /**
+           * এই সেকশনের মূল শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Optional. Must appear verbatim inside the Title. Max 40 characters.
+           */
+          titleHighlightedText?: string | null;
+          /**
+           * ঐচ্ছিক। অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+           */
+          titleHighlightedTextBN?: string | null;
+          /**
+           * Supporting line under the title. Max 120 characters.
+           */
+          subtitle: string;
+          /**
+           * মূল শিরোনামের নিচে সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+           */
+          subtitleBN: string;
+          /**
+           * Use a YouTube URL (embed, watch, youtu.be, or youtube-nocookie). Max 200 characters.
+           */
+          mainVIdeoLink: string;
+          /**
+           * Large hero/thumbnail for this section. 4:3 recommended; ~100KB.
+           */
+          mainImage: string | Media;
+          /**
+           * Exactly 3 cards per section.
+           */
+          insuranceCardData?:
+            | {
+                /**
+                 * Primary thumbnail for the card. 4:3 recommended; ~100KB.
+                 */
+                image: string | Media;
+                /**
+                 * Short heading for the card. Max 60 characters.
+                 */
+                title?: string | null;
+                /**
+                 * কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+                 */
+                titleBN?: string | null;
+                /**
+                 * Short supporting copy. Max 200 characters.
+                 */
+                description?: string | null;
+                /**
+                 * সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ২০০ অক্ষর।
+                 */
+                descriptionBN?: string | null;
+                /**
+                 * Use a YouTube URL (embed, watch, youtu.be, or youtube-nocookie). Max 200 characters.
+                 */
+                videoLink: string;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'life-insurance-simplified';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 (৮০) characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the title. Max 40 (৪০) characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Absolute http(s) video URL (MP4/WebM/HLS). Max 300 (৩০০) chars.
+         */
+        backgroundVideoUrl: string;
+        /**
+         * youtube.com / youtu.be / youtube-nocookie.com only. Max 300 (৩০০) chars.
+         */
+        youtubeUrl: string;
+        /**
+         * Button label. Max 24 (২৪) characters.
+         */
+        youtubeButtonText: string;
+        /**
+         * বাটনের লেবেল। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        youtubeButtonTextBN: string;
+        /**
+         * Poster/thumbnail for the background video (16:9 recommended, ~300KB).
+         */
+        thumbnail: string | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'home-video';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary headline. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Subtitle. Max 40 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        description: string;
+        descriptionBN: string;
+        /**
+         * Optional. Max 24 characters.
+         */
+        buttonText?: string | null;
+        /**
+         * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        buttonTextBN?: string | null;
+        /**
+         * Required if CTA text is set. Internal path (e.g., /careers) or http(s) URL. Max 100 characters.
+         */
+        buttonLink?: string | null;
+        /**
+         * Displayed above the CTA button for this section. Recommended 16:9, ~200KB.
+         */
+        backgroundImage: string | Media;
+        /**
+         * Add 10–20 images that showcase life at Shanta.
+         */
+        gallery: {
+          /**
+           * Shown in the grid. Recommended 16:9; ~200KB.
+           */
+          image: string | Media;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'life-at-shanta';
       }
   )[];
   updatedAt: string;
@@ -817,6 +1067,99 @@ export interface PagesSelect<T extends boolean = true> {
               buttonText?: T;
               buttonTextBN?: T;
               buttonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'home-premium-calculator'?:
+          | T
+          | {
+              backgroundColor?: T;
+              heading?: T;
+              headingBN?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              backgroundImage1?: T;
+              backgroundImage2?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'life-insurance-simplified'?:
+          | T
+          | {
+              backgroundColor?: T;
+              sectionHeading?: T;
+              sectionHeadingBN?: T;
+              sectionHeadingHighlightedText?: T;
+              sectionHeadingHighlightedTextBN?: T;
+              sections?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    titleHighlightedText?: T;
+                    titleHighlightedTextBN?: T;
+                    subtitle?: T;
+                    subtitleBN?: T;
+                    mainVIdeoLink?: T;
+                    mainImage?: T;
+                    insuranceCardData?:
+                      | T
+                      | {
+                          image?: T;
+                          title?: T;
+                          titleBN?: T;
+                          description?: T;
+                          descriptionBN?: T;
+                          videoLink?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'home-video'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              backgroundVideoUrl?: T;
+              youtubeUrl?: T;
+              youtubeButtonText?: T;
+              youtubeButtonTextBN?: T;
+              thumbnail?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'life-at-shanta'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              buttonText?: T;
+              buttonTextBN?: T;
+              buttonLink?: T;
+              backgroundImage?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

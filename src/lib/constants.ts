@@ -39,8 +39,8 @@ export const HOME_PAGE_PREMIUM_CALCULATOR_CACHE_KEY = 'home-premium-calculator'
 export const HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG = 'life-insurance-simplified'
 export const HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_CACHE_KEY = 'life-insurance-simplified-data'
 
-export const HOME_PAGE_VIDEO_SLUG_AND_TAG = 'home-video'
-export const HOME_PAGE_VIDEO_CACHE_KEY = 'home-video-data'
+export const HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG = 'home-video'
+export const HOME_PAGE_LIFE_INSURANCE_VIDEO_CACHE_KEY = 'home-video-data'
 
 export const HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG = 'life-at-shanta'
 export const HOME_PAGE_LIFE_AT_SHANTA_CACHE_KEY = 'life-at-shanta-data'

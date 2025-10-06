@@ -40,7 +40,6 @@ export default function HeroItem({ slide, top, position }: Props) {
         // lg:w-[920px] xl:w-[1205px] 2xl:w-[1405px]
         className={`absolute inset-x-0 lg:left-[120px] xl:left-[200px] 2xl:left-[270px] lg:right-auto
           space-y-4 md:space-y-6 xl:space-y-10 2xl:space-y-20 z-20
-          lg:w-full 
           ${top ? top : ' top-[100px] md:top-[150px] lg:top-[35%] '}`}
       >
         {/* Titles */}

@@ -236,10 +236,14 @@
 // ======================================================
 // payload collection
 // src/collections/Pages.ts
-import type { CollectionConfig } from 'payload'
-import HeroSchema from '@/blocks/hero/schema'
-import WhyChooseUsSchema from '@/blocks/whyChooseUs/schema'
 import FeaturedPlansSchema from '@/blocks/featuredPlan/schema'
+import HeroSchema from '@/blocks/hero/schema'
+import LifeAtShantaSchema from '@/blocks/lifeAtShanta/schema'
+import LifeInsuranceSimplifiedSchema from '@/blocks/lifeInsuranceSimplified/schema'
+import LifeInsuranceVideoSchema from '@/blocks/lifeInsuranceVideo/schema'
+import PremiumCalculatorSchema from '@/blocks/premiumCalculator/schema'
+import WhyChooseUsSchema from '@/blocks/whyChooseUs/schema'
+import type { CollectionConfig } from 'payload'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -285,7 +289,15 @@ export const Pages: CollectionConfig = {
       label: 'Layout',
       type: 'blocks',
       required: true,
-      blocks: [HeroSchema, WhyChooseUsSchema, FeaturedPlansSchema],
+      blocks: [
+        HeroSchema,
+        WhyChooseUsSchema,
+        FeaturedPlansSchema,
+        PremiumCalculatorSchema,
+        LifeInsuranceSimplifiedSchema,
+        LifeInsuranceVideoSchema,
+        LifeAtShantaSchema,
+      ],
     },
   ],
 

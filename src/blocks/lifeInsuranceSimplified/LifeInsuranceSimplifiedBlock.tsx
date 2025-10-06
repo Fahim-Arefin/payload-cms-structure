@@ -1,0 +1,18 @@
+import InsuranceSection from '@/components/custom/home/InsuranceSection'
+import { LifeInsuranceSimplifiedBlockType } from '@/types/payloadCustomTypes'
+import React from 'react'
+
+type Props = {
+  block: LifeInsuranceSimplifiedBlockType
+  params: Record<string, string>
+}
+
+function LifeInsuranceSimplifiedBlock({ block }: Props) {
+  return (
+    <div>
+      <InsuranceSection lifeInsuranceSimplifiedData={block} />
+    </div>
+  )
+}
+
+export default LifeInsuranceSimplifiedBlock

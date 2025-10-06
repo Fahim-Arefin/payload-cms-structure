@@ -603,7 +603,7 @@ const FeaturedPlansSchema: Block = {
           label: 'Icon',
           type: 'upload',
           relationTo: 'media',
-          required: false,
+          required: true,
           admin: {
             description: 'Plan icon. Recommended aspect ratio 1:1; ~50KB.',
           },
@@ -613,7 +613,7 @@ const FeaturedPlansSchema: Block = {
           label: 'Image',
           type: 'upload',
           relationTo: 'media',
-          required: false,
+          required: true,
           admin: {
             description:
               'Plan image. Recommended aspect ratio ~451:350 (≈1.2886). Keep under ~100KB when possible.',

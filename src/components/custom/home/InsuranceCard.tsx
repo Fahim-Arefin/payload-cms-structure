@@ -1,8 +1,11 @@
-import { InsuranceCardDataType } from '@/types'
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { LifeInsuranceSimplifiedBlockType } from '@/types/payloadCustomTypes'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import React from 'react'
 import Image from 'next/image'
+
+type InsuranceCardDataType = NonNullable<
+  NonNullable<LifeInsuranceSimplifiedBlockType['sections']>[number]['insuranceCardData']
+>[number]
 
 type Props = {
   data: InsuranceCardDataType
@@ -18,13 +21,15 @@ const content = (data: InsuranceCardDataType) => (
       bg-[#343A40] overflow-hidden cursor-pointer
     "
     >
-      <Image
-        src={data.image}
-        alt={data?.title ?? 'Video thumbnail'}
-        fill
-        className="object-cover"
-        sizes="(max-width: 1023px) 300px, (max-width: 1349px) 400px, 500px"
-      />
+      {typeof data.image === 'object' && data.image?.url && (
+        <Image
+          src={data.image.url}
+          alt={data?.title ?? 'Video thumbnail'}
+          fill
+          className="object-cover"
+          sizes="(max-width: 1023px) 300px, (max-width: 1349px) 400px, 500px"
+        />
+      )}
 
       {/* Text Content */}
       <div
