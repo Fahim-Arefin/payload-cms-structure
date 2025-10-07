@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { getPayload } from 'payload'
 import LocalizedHighlighted from './LocalizedHighlighted'
 import LocalizedText from './LocalizedText'
+import { getGlobalCached } from '@/lib/cachedGlobals'
+import { GlobalFooter } from '@/payload-types'
 
 async function FooterMobile() {
   const shurjoPayData = [
@@ -61,12 +63,15 @@ async function FooterMobile() {
     },
   ]
 
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
+  // const payloadConfig = await config
+  // const payload = await getPayload({ config: payloadConfig })
 
-  const footer = await payload.findGlobal({
-    slug: GLOBAL_FOOTER_SLUG_AND_TAG,
-  })
+  // const footer = await payload.findGlobal({
+  //   slug: GLOBAL_FOOTER_SLUG_AND_TAG,
+  // })
+
+  // ⬇️ Cached global fetch (tag: global:global-footer)
+  const footer = await getGlobalCached<GlobalFooter>(GLOBAL_FOOTER_SLUG_AND_TAG, 1) // depth=1 is enough for logo relation url
 
   return (
     <>
@@ -306,13 +311,13 @@ async function FooterMobile() {
               {shurjoPayData?.map((img, i) => (
                 <div
                   key={i}
-                  className="rounded-[5px] bg-[#5A5A5B] p-[2px] flex items-center justify-center 
+                  className="rounded-[5px] bg-[#5A5A5B] p-[2px] flex items-center justify-center
                   w-[35px] h-[35px]
                   md:w-[40px] md:h-[40px]
                   "
                 >
                   <div
-                    className="relative w-[32px] h-[32px] 
+                    className="relative w-[32px] h-[32px]
                     md:w-[38px] md:h-[38px] "
                   >
                     <Image

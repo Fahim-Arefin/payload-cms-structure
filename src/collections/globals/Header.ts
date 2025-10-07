@@ -2,6 +2,8 @@
 import type { GlobalConfig } from 'payload'
 import { bnNum } from '@/lib/utils'
 import { GLOBAL_HEADER_SLUG_AND_TAG } from '@/lib/constants'
+import { revalidateTag } from 'next/cache'
+import { globalTag } from '@/lib/cacheTags'
 
 const LABEL_MAX = 60
 const URL_MAX = 300
@@ -115,6 +117,14 @@ const Header: GlobalConfig = {
       admin: { description: 'Enable / disable the language switcher in the top header.' },
     },
   ],
+
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidateTag(globalTag(GLOBAL_HEADER_SLUG_AND_TAG))
+      },
+    ],
+  },
 }
 
 export default Header

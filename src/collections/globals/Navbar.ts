@@ -4,6 +4,8 @@ import type { Field } from 'payload' // <-- fixes TS7023 when we type the recurs
 
 import { bnNum } from '@/lib/utils'
 import { GLOBAL_NAVBAR_SLUG_AND_TAG } from '@/lib/constants' // add: export const GLOBAL_NAVBAR_SLUG_AND_TAG = 'global-navbar';
+import { revalidateTag } from 'next/cache'
+import { globalTag } from '@/lib/cacheTags'
 
 const LABEL_MAX = 40
 const URL_MAX = 300
@@ -252,6 +254,14 @@ const Navbar: GlobalConfig = {
       ],
     },
   ],
+
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidateTag(globalTag(GLOBAL_NAVBAR_SLUG_AND_TAG))
+      },
+    ],
+  },
 }
 
 export default Navbar

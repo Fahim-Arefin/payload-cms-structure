@@ -771,6 +771,8 @@
 import type { GlobalConfig } from 'payload'
 import { GLOBAL_FOOTER_SLUG_AND_TAG } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
+import { revalidateTag } from 'next/cache'
+import { globalTag } from '@/lib/cacheTags'
 
 /* ---------------- max length constants ---------------- */
 const EMAIL_MAX = 120
@@ -1438,6 +1440,13 @@ const Footer: GlobalConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidateTag(globalTag(GLOBAL_FOOTER_SLUG_AND_TAG))
+      },
+    ],
+  },
 }
 
 export default Footer

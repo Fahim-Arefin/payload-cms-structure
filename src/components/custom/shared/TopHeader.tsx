@@ -112,7 +112,6 @@ function TopHeader({ className, data }: { className?: string; data: HeaderData }
             </Button>
           </Link>
         ))}
-
         {data?.showLocalizationToggle && (
           <div className="flex items-center bg-[rgba(217,217,217,1)] rounded-full h-[30px] w-[100px] px-2 ml-3">
             <ToggleGroup

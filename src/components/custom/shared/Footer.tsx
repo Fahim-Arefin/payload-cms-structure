@@ -7,6 +7,8 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { GLOBAL_FOOTER_SLUG_AND_TAG } from '@/lib/constants'
 import LocalizedHighlighted from './LocalizedHighlighted'
+import { getGlobalCached } from '@/lib/cachedGlobals'
+import { GlobalFooter } from '@/payload-types'
 
 async function Footer() {
   const shurjoPayData = [
@@ -63,13 +65,14 @@ async function Footer() {
     },
   ]
 
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
+  // const payloadConfig = await config
+  // const payload = await getPayload({ config: payloadConfig })
 
-  const footer = await payload.findGlobal({
-    slug: GLOBAL_FOOTER_SLUG_AND_TAG,
-  })
-
+  // const footer = await payload.findGlobal({
+  //   slug: GLOBAL_FOOTER_SLUG_AND_TAG,
+  // })
+  // ⬇️ Cached global fetch (tag: global:global-footer)
+  const footer = await getGlobalCached<GlobalFooter>(GLOBAL_FOOTER_SLUG_AND_TAG, 1) // depth=1 is enough for logo relation url
   return (
     <>
       {footer && (
