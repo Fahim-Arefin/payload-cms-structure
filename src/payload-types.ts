@@ -219,6 +219,8 @@ export interface AgentCareerApplication {
   createdAt: string;
 }
 /**
+ * Dynamic pages assembled from blocks
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
@@ -227,6 +229,10 @@ export interface Page {
   uploadSessionId?: string | null;
   name: string;
   slug: string;
+  /**
+   * If unchecked, the page is not publicly accessible and will return a 404.
+   */
+  isPublished?: boolean | null;
   layout: (
     | {
         uploadSessionId?: string | null;
@@ -957,6 +963,7 @@ export interface PagesSelect<T extends boolean = true> {
   uploadSessionId?: T;
   name?: T;
   slug?: T;
+  isPublished?: T;
   layout?:
     | T
     | {

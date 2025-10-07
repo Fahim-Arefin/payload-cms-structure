@@ -234,7 +234,7 @@
 // ======================================================
 // ======================================================
 // ======================================================
-// payload collection
+
 // src/collections/Pages.ts
 import FeaturedPlansSchema from '@/blocks/featuredPlan/schema'
 import HeroSchema from '@/blocks/hero/schema'
@@ -253,6 +253,8 @@ export const Pages: CollectionConfig = {
   },
 
   admin: {
+    group: 'Dynamic Pages',
+    description: 'Dynamic pages assembled from blocks',
     useAsTitle: 'name',
     defaultColumns: ['name', 'slug', 'updatedAt'],
   },
@@ -281,6 +283,17 @@ export const Pages: CollectionConfig = {
         if (s.startsWith('/') || s.endsWith('/')) return 'No leading/trailing slash'
         if (s.includes('//')) return 'No double slashes'
         return true
+      },
+    },
+    // 👇 Publish toggle (directly below slug)
+    {
+      name: 'isPublished',
+      label: 'Publish this page',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'If unchecked, the page is not publicly accessible and will return a 404.',
       },
     },
 
