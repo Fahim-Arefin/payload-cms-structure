@@ -1,11 +1,13 @@
 // 'use client'
 // import { TooltipContent } from '@/components/ui/tooltip'
-// import { NAV_ITEMS } from '@/lib/data'
+// import { NAV_ITEMS, NAV_ITEMS_MOBILE } from '@/lib/data'
+// import Image from 'next/image'
 // import Link from 'next/link'
 // import { usePathname } from 'next/navigation'
 // import { useEffect, useState } from 'react'
 // import { RiArrowDownSLine } from 'react-icons/ri'
 // import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
+// import LocalizedText from '../LocalizedText'
 
 // export default function Navbar() {
 //   const pathname = usePathname()
@@ -103,7 +105,9 @@
 //                   ${isActive(item.href) ? 'text-[#ED7125] font-semibold' : ''}
 //                 `}
 //               >
-//                 <span>{item.label}</span>
+//                 <span>
+//                   <LocalizedText en={item?.label} bn={item?.labelBN} />
+//                 </span>
 //                 {hasChildren && (
 //                   <RiArrowDownSLine
 //                     className={`
@@ -148,8 +152,12 @@
 //                   }
 //                 }}
 //               >
-//                 <Link href={item.href} className="w-full">
-//                   {item.label}
+//                 <Link
+//                   href={item.href}
+//                   target={item.href.startsWith('https') ? '_blank' : '_self'}
+//                   className="w-full"
+//                 >
+//                   <LocalizedText en={item?.label} bn={item?.labelBN} />
 //                 </Link>
 //                 {hasChildren && (
 //                   <RiArrowDownSLine
@@ -184,8 +192,22 @@
 //         {/* Logo + Burger */}
 //         <div className="flex items-center justify-between w-full lg:w-auto">
 //           <div className="flex items-center space-x-1 w-fit 2xl:w-[60px] h-[35px] xl:h-[37px] 2xl:h-[40px]">
-//             <Link href="/">
-//               <img src="/assets/logo/mainlogo_2.png" alt="logo" className="h-full w-full max-w-[75px]" />
+//             {/* <Link href="/">
+//               <img
+//                 src="/assets/logo/mainlogo_2.png"
+//                 alt="Website Logo"
+//                 className="h-full w-full max-w-[75px]"
+//               />
+//             </Link> */}
+//             <Link href="/" aria-label="Home">
+//               <Image
+//                 src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/mainlogo_2.png`}
+//                 alt="Company logo"
+//                 width={75}
+//                 height={40}
+//                 className="h-full w-full max-w-[75px] object-contain"
+//                 priority
+//               />
 //             </Link>
 //           </div>
 //           {/* Burger Icon */}
@@ -229,7 +251,9 @@
 //                   <div
 //                     className={`flex items-center space-x-1 ${item.href === '#' ? ' cursor-not-allowed ' : ' cursor-pointer '}`}
 //                   >
-//                     <div>{item.label}</div>
+//                     <div>
+//                       <LocalizedText en={item?.label} bn={item?.labelBN} />
+//                     </div>
 //                     {hasChildren && (
 //                       <RiArrowDownSLine
 //                         className={`mt-0.5 w-[20px] h-[20px] transition-transform duration-200 rotate-0 group-hover:-rotate-180`}
@@ -277,7 +301,7 @@
 //               />
 //             </svg>
 //             <div className="text-center lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#1E1E1E]">
-//               My Portal
+//               <LocalizedText en="My Portal" bn="মাই পোর্টাল" />
 //             </div>
 //           </Link>
 
@@ -303,13 +327,21 @@
 //   ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
 //       >
 //         <div className="flex justify-between items-center px-4 py-4 border-b">
-//           <img src="/assets/logo/mainlogo_2.png" alt="logo" className="h-[40px]" />
+//           {/* <img src="/assets/logo/mainlogo_2.png" alt="logo" className="h-[40px]" /> */}
+//           <Image
+//             src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/mainlogo_2.png`}
+//             alt="Company logo"
+//             width={120} // adjust as needed
+//             height={40} // adjust as needed
+//             className="h-[40px] w-auto"
+//             priority
+//           />
 //           <button onClick={() => setIsMobileMenuOpen(false)} className="text-2xl text-[#1F1F1F]">
 //             <RxCross2 />
 //           </button>
 //         </div>
 //         <ul className="flex flex-col space-y-1 px-4 text-[#1E1E1E]">
-//           {NAV_ITEMS.map((item, index) => {
+//           {NAV_ITEMS_MOBILE.map((item, index) => {
 //             const hasChildren = item.children && item.children.length > 0
 //             const isDisabled = item.href === '#'
 //             const key = item.label
@@ -333,7 +365,7 @@
 //                   }}
 //                 >
 //                   <Link href={isDisabled ? '#' : item.href} className="w-full">
-//                     {item.label}
+//                     <LocalizedText en={item?.label} bn={item?.labelBN} />
 //                   </Link>
 //                   {hasChildren && (
 //                     <RiArrowDownSLine
@@ -355,27 +387,42 @@
 //   )
 // }
 
+// =============================================================================================
+// =============================================================================================
+// =============================================================================================
+// =============================================================================================
+
 'use client'
-import { TooltipContent } from '@/components/ui/tooltip'
-import { NAV_ITEMS, NAV_ITEMS_MOBILE } from '@/lib/data'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { RiArrowDownSLine } from 'react-icons/ri'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
-import LocalizedText from '../LocalizedText'
+import { TooltipContent } from '@/components/ui/tooltip'
+import LocalizedText from '@/components/custom/shared/LocalizedText'
+import type { NavbarData, NavItem } from './ServerNavbar'
+import { useLanguage } from '@/context/LanguageContext'
+import useMounted from '@/hooks/useMounted'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { HeaderData } from '../ServerTopHeader'
 
-export default function Navbar() {
+type Props = { data: NavbarData; header: HeaderData }
+
+export default function Navbar({ data, header }: Props) {
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [showNavbar, setShowNavbar] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
-  const [windowWidth, setWindowWidth] = useState<number>(0)
   const [mobileDropdowns, setMobileDropdowns] = useState<Record<string, boolean>>({})
 
+  const { language, setLanguage } = useLanguage()
+  const mounted = useMounted()
+  const uiLang = mounted ? language : 'en'
+
+  // default scroll behavior (config removed from CMS)
   useEffect(() => {
-    let scrollTimeout: NodeJS.Timeout
+    let scrollTimeout: NodeJS.Timeout | undefined
     let lastY = window.scrollY
 
     const handleScroll = () => {
@@ -384,17 +431,15 @@ export default function Navbar() {
 
       if (currentY < 300) {
         setShowNavbar(true)
-        setLastScrollY(currentY)
+        lastY = currentY
         return
       }
-      if (currentY < lastY) setShowNavbar(true)
-      else if (currentY > lastY) setShowNavbar(false)
-
+      setShowNavbar(currentY < lastY)
       scrollTimeout = setTimeout(() => {
         if (currentY > 300) setShowNavbar(true)
       }, 2000)
+
       lastY = currentY
-      setLastScrollY(currentY)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -404,20 +449,13 @@ export default function Navbar() {
     }
   }, [])
 
-  useEffect(() => {
-    setWindowWidth(window.innerWidth)
-    const handleResize = () => setWindowWidth(window.innerWidth)
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
   const isActive = (href?: string) => {
     if (!href) return false
     return pathname === href || pathname.startsWith(href + '/')
   }
 
-  // DESKTOP DROPDOWN - stateful arrow logic
-  function DesktopDropdown({ items, depth = 0 }: { items: any[]; depth?: number }) {
+  // ----- Desktop recursive dropdown -----
+  function DesktopDropdown({ items, depth = 0 }: { items: NavItem[]; depth?: number }) {
     const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
     const positionClass =
       depth === 0 ? 'absolute left-0 top-full mt-2' : 'absolute left-full top-0 ml-3'
@@ -428,25 +466,23 @@ export default function Navbar() {
 
     return (
       <ul
-        className={`shadow-md
-        ${positionClass}
-        rounded-md lg:min-w-[205px] xl:min-w-[245px] z-50
-        space-y-1 p-2 hidden
-        group-hover:block hover:block peer-hover:block
-        transition-all
-        lg:text-[12px] xl:text-sm
-        ${beforeBridge}
-        bg-white/70 backdrop-blur-[16.67px]
-      `}
+        className={`
+          ${positionClass} ${beforeBridge}
+          hidden group-hover:block hover:block peer-hover:block
+          z-50 rounded-md space-y-1 p-2 shadow-md
+          bg-white/70 backdrop-blur-[16.67px]
+          lg:min-w-[205px] xl:min-w-[245px]
+          transition-all lg:text-[12px] xl:text-sm
+        `}
         style={{ pointerEvents: 'auto' }}
       >
-        {items.map((item: any, idx: number) => {
+        {items.map((item, idx) => {
           const hasChildren = !!item.children && item.children.length > 0
           const isHovered = hoveredIdx === idx
           return (
             <li
-              key={item.label + idx}
-              className="relative "
+              key={`${item.label}-${idx}`}
+              className="relative"
               onMouseEnter={() => setHoveredIdx(idx)}
               onMouseLeave={() => setHoveredIdx(null)}
             >
@@ -454,28 +490,26 @@ export default function Navbar() {
                 href={item.href}
                 tabIndex={0}
                 className={`
-                  block lg:px-2 xl:px-4 lg:py-1 xl:py-2
-                  hover:bg-[#ED7125] hover:text-white rounded
-                  ${item.href === '#' ? ' cursor-not-allowed ' : ' cursor-pointer '}
+                  block lg:px-2 xl:px-4 lg:py-1 xl:py-2 rounded
+                  hover:bg-[#ED7125] hover:text-white
                   flex items-center justify-between
                   ${hasChildren ? 'pr-4' : ''}
+                  ${item.href === '#' ? 'cursor-not-allowed' : 'cursor-pointer'}
                   ${isActive(item.href) ? 'text-[#ED7125] font-semibold' : ''}
                 `}
               >
                 <span>
-                  <LocalizedText en={item?.label} bn={item?.labelBN}/>
+                  <LocalizedText en={item.label} bn={item.labelBN} />
                 </span>
                 {hasChildren && (
                   <RiArrowDownSLine
-                    className={`
-                      ml-2 w-[16px] h-[16px] transition-transform duration-200
-                      ${isHovered ? '-rotate-90' : 'rotate-0'}
-                    `}
+                    className={`ml-2 w-[16px] h-[16px] transition-transform duration-200 ${isHovered ? '-rotate-90' : 'rotate-0'}`}
                   />
                 )}
               </Link>
+
               {hasChildren && isHovered && (
-                <DesktopDropdown items={item.children} depth={depth + 1} />
+                <DesktopDropdown items={item.children!} depth={depth + 1} />
               )}
             </li>
           )
@@ -484,26 +518,24 @@ export default function Navbar() {
     )
   }
 
-  // MOBILE DROPDOWN - unchanged
-  function MobileDropdown({ items, parentKey = '' }: any) {
+  // ----- Mobile recursive dropdown -----
+  function MobileDropdown({ items, parentKey = '' }: { items: NavItem[]; parentKey?: string }) {
     return (
       <ul className="ml-4 mt-2 space-y-2 text-sm">
-        {items.map((item: any, i: number) => {
+        {items.map((item, i) => {
           const hasChildren = !!item.children && item.children.length > 0
           const key = parentKey + '-' + item.label
+          const disabled = item.href === '#'
           return (
             <li key={key}>
               <div
                 className={`flex items-center justify-between cursor-pointer ${
                   isActive(item.href) ? 'text-[#ED7125] font-semibold' : ''
-                } ${item.href === '#' ? 'cursor-not-allowed text-gray-400' : ''}`}
+                } ${disabled ? 'cursor-not-allowed text-gray-400' : ''}`}
                 onClick={() => {
-                  if (item.href === '#') return
+                  if (disabled) return
                   if (hasChildren) {
-                    setMobileDropdowns((prev) => ({
-                      ...prev,
-                      [key]: !prev[key],
-                    }))
+                    setMobileDropdowns((prev) => ({ ...prev, [key]: !prev[key] }))
                   } else {
                     setIsMobileMenuOpen(false)
                   }
@@ -514,7 +546,7 @@ export default function Navbar() {
                   target={item.href.startsWith('https') ? '_blank' : '_self'}
                   className="w-full"
                 >
-                  <LocalizedText en={item?.label} bn={item?.labelBN} />
+                  <LocalizedText en={item.label} bn={item.labelBN} />
                 </Link>
                 {hasChildren && (
                   <RiArrowDownSLine
@@ -525,7 +557,7 @@ export default function Navbar() {
                 )}
               </div>
               {hasChildren && mobileDropdowns[key] && (
-                <MobileDropdown items={item.children} parentKey={key} />
+                <MobileDropdown items={item.children!} parentKey={key} />
               )}
             </li>
           )
@@ -534,7 +566,13 @@ export default function Navbar() {
     )
   }
 
-  // NAVBAR JSX
+  const logoUrl =
+    data.branding.logo?.url ?? `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN || ''}/mainlogo_2.png`
+
+  const portalHref = data.portal?.href || 'https://portal.shantalife.com/'
+  const portalLabel = data.portal?.label || 'My Portal'
+  const portalLabelBN = data.portal?.labelBN || 'মাই পোর্টাল'
+
   return (
     <>
       <nav
@@ -549,16 +587,9 @@ export default function Navbar() {
         {/* Logo + Burger */}
         <div className="flex items-center justify-between w-full lg:w-auto">
           <div className="flex items-center space-x-1 w-fit 2xl:w-[60px] h-[35px] xl:h-[37px] 2xl:h-[40px]">
-            {/* <Link href="/">
-              <img
-                src="/assets/logo/mainlogo_2.png"
-                alt="Website Logo"
-                className="h-full w-full max-w-[75px]"
-              />
-            </Link> */}
             <Link href="/" aria-label="Home">
               <Image
-                src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/mainlogo_2.png`}
+                src={logoUrl}
                 alt="Company logo"
                 width={75}
                 height={40}
@@ -567,73 +598,67 @@ export default function Navbar() {
               />
             </Link>
           </div>
-          {/* Burger Icon */}
           <button
             onClick={() => setIsMobileMenuOpen(true)}
             className="lg:hidden text-2xl text-[#1F1F1F]"
+            aria-label="Open menu"
           >
             <RxHamburgerMenu />
           </button>
         </div>
+
         {/* Desktop Menu */}
         <ul
           className="hidden lg:flex
           lg:space-x-2 xl:space-x-3 2xl:space-x-4
           lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#1E1E1E] items-center lg:leading-6 xl:leading-8"
         >
-          {NAV_ITEMS.map((item, index) => {
+          {data.desktop.items.map((item, index) => {
             const hasChildren = !!item.children && item.children.length > 0
             return (
               <li key={index} className="relative group">
                 <Link
                   href={item.href}
-                  // className={`peer flex items-center space-x-1 relative h-[60px] xl:h-[70px] 2xl:h-[80px] lg:px-1 2xl:px-2 ${
-                  //   isActive(item.href)
-                  //     ? ' after:absolute after:left-0.5 after:w-full after:h-[4px] after:xl:h-[7px] after:bg-[#ED7125] after:rounded-full after:lg:bottom-[1px]'
-                  //     : ''
-                  // } `}
                   className={`
-  peer flex items-center space-x-1 relative h-[60px] xl:h-[70px] 2xl:h-[80px] lg:px-1 2xl:px-2
-  after:absolute after:bg-[#ED7125] after:rounded-full after:transition-all after:duration-300 after:content-['']
-  after:bottom-[1px] after:h-[4px] after:xl:h-[7px]
-  ${
-    isActive(item.href)
-      ? // Active: underline fully visible, left aligned
-        'after:left-0.5 after:w-full '
-      : // Inactive: animate underline from center outwards on hover
-        'after:left-1/2 after:w-0 after:-translate-x-1/2 group-hover:after:w-full group-hover:after:left-0.5 group-hover:after:-translate-x-0'
-  }
-`}
+                    peer flex items-center space-x-1 relative h-[60px] xl:h-[70px] 2xl:h-[80px] lg:px-1 2xl:px-2
+                    after:absolute after:bg-[#ED7125] after:rounded-full after:transition-all after:duration-300 after:content-['']
+                    after:bottom-[1px] after:h-[4px] after:xl:h-[7px]
+                    ${
+                      isActive(item.href)
+                        ? 'after:left-0.5 after:w-full '
+                        : 'after:left-1/2 after:w-0 after:-translate-x-1/2 group-hover:after:w-full group-hover:after:left-0.5 group-hover:after:-translate-x-0'
+                    }
+                  `}
                 >
                   <div
-                    className={`flex items-center space-x-1 ${item.href === '#' ? ' cursor-not-allowed ' : ' cursor-pointer '}`}
+                    className={`flex items-center space-x-1 ${
+                      item.href === '#' ? 'cursor-not-allowed' : 'cursor-pointer'
+                    }`}
                   >
                     <div>
-                      <LocalizedText en={item?.label} bn={item?.labelBN} />
+                      <LocalizedText en={item.label} bn={item.labelBN} />
                     </div>
                     {hasChildren && (
-                      <RiArrowDownSLine
-                        className={`mt-0.5 w-[20px] h-[20px] transition-transform duration-200 rotate-0 group-hover:-rotate-180`}
-                      />
+                      <RiArrowDownSLine className="mt-0.5 w-[20px] h-[20px] transition-transform duration-200 rotate-0 group-hover:-rotate-180" />
                     )}
                   </div>
                   {item.href === '#' && <TooltipContent>working on this link</TooltipContent>}
                 </Link>
-                {/* Only render the submenu on hover */}
-                {hasChildren && <DesktopDropdown items={item.children} depth={0} />}
+
+                {hasChildren && <DesktopDropdown items={item.children!} depth={0} />}
               </li>
             )
           })}
         </ul>
-        {/* Desktop Right Icons */}
+
+        {/* Desktop Right / Portal */}
         <div className="hidden lg:flex text-[#1F1F1F]">
-          {/* SVG as link */}
           <Link
-            href="https://portal.shantalife.com/"
-            target="_blank"
+            href={portalHref}
+            target={portalHref.startsWith('http') ? '_blank' : '_self'}
             rel="noopener noreferrer"
             className="flex flex-col justify-center items-center"
-            aria-label="Go to ShantaLife Portal"
+            aria-label="Open portal"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -658,71 +683,59 @@ export default function Navbar() {
               />
             </svg>
             <div className="text-center lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#1E1E1E]">
-              <LocalizedText en="My Portal" bn="মাই পোর্টাল" />
+              <LocalizedText en={portalLabel} bn={portalLabelBN} />
             </div>
           </Link>
-
-          {/* <ToolTip>
-            <svg
-              width="22"
-              height="22"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              viewBox="0 0 24 24"
-              className="cursor-not-allowed"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-          </ToolTip> */}
         </div>
       </nav>
-      {/* Mobile Slide-In Menu */}
-      <div
+
+      {/* Mobile Slide-In */}
+      {/* <div
         className={`fixed top-0 right-0 h-full w-[60%] bg-white/60 backdrop-blur-[16.67px] z-[999] shadow-lg transform transition-transform duration-300 ease-in-out
-  ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="flex justify-between items-center px-4 py-4 border-b">
-          {/* <img src="/assets/logo/mainlogo_2.png" alt="logo" className="h-[40px]" /> */}
           <Image
-            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/mainlogo_2.png`}
+            src={logoUrl}
             alt="Company logo"
-            width={120} // adjust as needed
-            height={40} // adjust as needed
+            width={120}
+            height={40}
             className="h-[40px] w-auto"
             priority
           />
-          <button onClick={() => setIsMobileMenuOpen(false)} className="text-2xl text-[#1F1F1F]">
-            <RxCross2 />
-          </button>
         </div>
-        <ul className="flex flex-col space-y-1 px-4 text-[#1E1E1E]">
-          {NAV_ITEMS_MOBILE.map((item, index) => {
+
+        <button
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="absolute right-3 top-3 text-2xl text-[#1F1F1F]"
+          aria-label="Close menu"
+        >
+          <RxCross2 />
+        </button>
+
+        <ul className="mt-12 flex flex-col space-y-1 px-4 text-[#1E1E1E]">
+          {data.mobile.items.map((item, index) => {
             const hasChildren = item.children && item.children.length > 0
-            const isDisabled = item.href === '#'
-            const key = item.label
+            const disabled = item.href === '#'
+            const key = item.label || `item-${index}`
 
             return (
               <li key={index} className="border-b py-2">
                 <div
                   className={`flex items-center justify-between cursor-pointer ${
                     isActive(item.href) ? 'text-[#ED7125] font-semibold' : ''
-                  } ${isDisabled ? 'cursor-not-allowed text-gray-400' : ''}`}
+                  } ${disabled ? 'cursor-not-allowed text-gray-400' : ''}`}
                   onClick={() => {
-                    if (isDisabled) return
+                    if (disabled) return
                     if (hasChildren) {
-                      setMobileDropdowns((prev) => ({
-                        ...prev,
-                        [key]: !prev[key],
-                      }))
+                      setMobileDropdowns((prev) => ({ ...prev, [key]: !prev[key] }))
                     } else {
                       setIsMobileMenuOpen(false)
                     }
                   }}
                 >
-                  <Link href={isDisabled ? '#' : item.href} className="w-full">
-                    <LocalizedText en={item?.label} bn={item?.labelBN} />
+                  <Link href={disabled ? '#' : item.href} className="w-full">
+                    <LocalizedText en={item.label} bn={item.labelBN} />
                   </Link>
                   {hasChildren && (
                     <RiArrowDownSLine
@@ -733,11 +746,133 @@ export default function Navbar() {
                   )}
                 </div>
                 {hasChildren && mobileDropdowns[key] && (
-                  <MobileDropdown items={item.children} parentKey={key} />
+                  <MobileDropdown items={item.children!} parentKey={key} />
                 )}
               </li>
             )
           })}
+
+          {portalHref && (
+            <li className="py-2">
+              <Link
+                href={portalHref}
+                target={portalHref.startsWith('http') ? '_blank' : '_self'}
+                className="block text-[#1E1E1E]"
+              >
+                <LocalizedText en={portalLabel} bn={portalLabelBN} />
+              </Link>
+            </li>
+          )}
+        </ul>
+      </div> */}
+
+      {/* Mobile Slide-In */}
+      <div
+        className={`fixed top-0 right-0 h-full w-[60%] bg-white/60 backdrop-blur-[16.67px] z-[999] shadow-lg transform transition-transform duration-300 ease-in-out
+  ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+      >
+        <div className="flex justify-between items-center px-4 py-4 border-b relative">
+          <Image
+            src={logoUrl}
+            alt="Company logo"
+            width={120}
+            height={40}
+            className="h-[40px] w-auto"
+            priority
+          />
+          {/* ⬇️ BN/EN toggle (same style as TopHeader) */}
+          {header?.showLocalizationToggle && (
+            <div className="flex items-center bg-[rgba(217,217,217,1)] rounded-full h-[30px] w-[100px] px-2 self-end">
+              <ToggleGroup
+                type="single"
+                value={uiLang}
+                onValueChange={(val) => (val === 'en' || val === 'bn') && setLanguage(val)}
+                className="text-[#535353] text-[14px]"
+              >
+                <ToggleGroupItem
+                  value="bn"
+                  aria-label="Toggle Bangla"
+                  className="h-[24px] w-[41px] rounded-[17px]
+              hover:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:text-[rgba(237,113,37,1)]"
+                >
+                  BN
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  value="en"
+                  aria-label="Toggle English"
+                  className="h-[24px] w-[41px] rounded-[17px]
+              hover:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:text-[rgba(237,113,37,1)]"
+                >
+                  EN
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </div>
+          )}
+
+          {/* Close button stays absolute so it won't shift layout */}
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="absolute right-2 top-2 text-lg text-[#1F1F1F]"
+            aria-label="Close menu"
+          >
+            <RxCross2 />
+          </button>
+        </div>
+
+        <ul className="mt-4 flex flex-col space-y-1 px-4 text-[#1E1E1E]">
+          {data.mobile.items.map((item, index) => {
+            const hasChildren = item.children && item.children.length > 0
+            const disabled = item.href === '#'
+            const key = item.label || `item-${index}`
+
+            return (
+              <li key={index} className="border-b py-2">
+                <div
+                  className={`flex items-center justify-between cursor-pointer ${
+                    isActive(item.href) ? 'text-[#ED7125] font-semibold' : ''
+                  } ${disabled ? 'cursor-not-allowed text-gray-400' : ''}`}
+                  onClick={() => {
+                    if (disabled) return
+                    if (hasChildren) {
+                      setMobileDropdowns((prev) => ({ ...prev, [key]: !prev[key] }))
+                    } else {
+                      setIsMobileMenuOpen(false)
+                    }
+                  }}
+                >
+                  <Link href={disabled ? '#' : item.href} className="w-full">
+                    <LocalizedText en={item.label} bn={item.labelBN} />
+                  </Link>
+                  {hasChildren && (
+                    <RiArrowDownSLine
+                      className={`ml-1 transition-transform duration-300 ${
+                        mobileDropdowns[key] ? 'rotate-180' : ''
+                      }`}
+                    />
+                  )}
+                </div>
+                {hasChildren && mobileDropdowns[key] && (
+                  <MobileDropdown items={item.children!} parentKey={key} />
+                )}
+              </li>
+            )
+          })}
+
+          {portalHref && (
+            <li className="py-2">
+              <Link
+                href={portalHref}
+                target={portalHref.startsWith('http') ? '_blank' : '_self'}
+                className="block text-[#1E1E1E]"
+              >
+                <LocalizedText en={portalLabel} bn={portalLabelBN} />
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </>

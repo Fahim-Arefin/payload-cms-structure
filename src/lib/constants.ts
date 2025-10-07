@@ -17,6 +17,13 @@ export const toKB = (n: number) => Math.round(n / 1024)
 // ----------------------------------------------------------------------------------------------
 
 // GLOBAL API
+// in src/lib/constants.ts
+export const GLOBAL_HEADER_SLUG_AND_TAG = 'global-header'
+export const GLOBAL_HEADER_CACHE_KEY = 'global-header-data'
+
+export const GLOBAL_NAVBAR_SLUG_AND_TAG = 'global-navbar'
+export const GLOBAL_NAVBAR_CACHE_KEY = 'global-navbar-data'
+
 export const GLOBAL_FOOTER_SLUG_AND_TAG = 'global-footer'
 export const GLOBAL_FOOTER_CACHE_KEY = 'global-footer-data'
 

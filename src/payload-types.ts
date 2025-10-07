@@ -92,8 +92,16 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'global-header': GlobalHeader;
+    'global-navbar': GlobalNavbar;
+    'global-footer': GlobalFooter;
+  };
+  globalsSelect: {
+    'global-header': GlobalHeaderSelect<false> | GlobalHeaderSelect<true>;
+    'global-navbar': GlobalNavbarSelect<false> | GlobalNavbarSelect<true>;
+    'global-footer': GlobalFooterSelect<false> | GlobalFooterSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -1198,6 +1206,612 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Top strip above navbar: flat set of links (non-nested) and whether to show the language toggle.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-header".
+ */
+export interface GlobalHeader {
+  id: string;
+  /**
+   * Add simple links for the top header. No nesting. Each link has EN/BN label and a URL/path.
+   */
+  links?:
+    | {
+        /**
+         * Max 60 chars (৬০).
+         */
+        label: string;
+        /**
+         * সর্বোচ্চ ৬০ অক্ষর।
+         */
+        labelBN: string;
+        /**
+         * Starts with "/" or a full http(s) URL. Max 300 chars (৩০০).
+         */
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Enable / disable the language switcher in the top header.
+   */
+  showLocalizationToggle?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Global navbar: logo and multi-level navigation (desktop & mobile), plus an optional portal link.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-navbar".
+ */
+export interface GlobalNavbar {
+  id: string;
+  branding: {
+    /**
+     * Primary logo shown in the navbar. Recommended transparent PNG/SVG.
+     */
+    logo: string | Media;
+  };
+  desktop?: {
+    /**
+     * Top-level nav items for desktop. Each item can optionally have nested children.
+     */
+    items?:
+      | {
+          /**
+           * Max 40 chars (৪০).
+           */
+          label: string;
+          /**
+           * সর্বোচ্চ ৪০ অক্ষর।
+           */
+          labelBN: string;
+          /**
+           * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+           */
+          href: string;
+          /**
+           * Optional submenu items. You can nest up to 5 levels.
+           */
+          children?:
+            | {
+                /**
+                 * Max 40 chars (৪০).
+                 */
+                label: string;
+                /**
+                 * সর্বোচ্চ ৪০ অক্ষর।
+                 */
+                labelBN: string;
+                /**
+                 * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                 */
+                href: string;
+                /**
+                 * Optional submenu items. You can nest up to 5 levels.
+                 */
+                children?:
+                  | {
+                      /**
+                       * Max 40 chars (৪০).
+                       */
+                      label: string;
+                      /**
+                       * সর্বোচ্চ ৪০ অক্ষর।
+                       */
+                      labelBN: string;
+                      /**
+                       * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                       */
+                      href: string;
+                      /**
+                       * Optional submenu items. You can nest up to 5 levels.
+                       */
+                      children?:
+                        | {
+                            /**
+                             * Max 40 chars (৪০).
+                             */
+                            label: string;
+                            /**
+                             * সর্বোচ্চ ৪০ অক্ষর।
+                             */
+                            labelBN: string;
+                            /**
+                             * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                             */
+                            href: string;
+                            /**
+                             * Optional submenu items. You can nest up to 5 levels.
+                             */
+                            children?:
+                              | {
+                                  /**
+                                   * Max 40 chars (৪০).
+                                   */
+                                  label: string;
+                                  /**
+                                   * সর্বোচ্চ ৪০ অক্ষর।
+                                   */
+                                  labelBN: string;
+                                  /**
+                                   * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                                   */
+                                  href: string;
+                                  id?: string | null;
+                                }[]
+                              | null;
+                            id?: string | null;
+                          }[]
+                        | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  mobile?: {
+    /**
+     * Mobile menu items. Often mirrors desktop, but can differ if needed (ordering, labels, etc.).
+     */
+    items?:
+      | {
+          /**
+           * Max 40 chars (৪০).
+           */
+          label: string;
+          /**
+           * সর্বোচ্চ ৪০ অক্ষর।
+           */
+          labelBN: string;
+          /**
+           * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+           */
+          href: string;
+          /**
+           * Optional submenu items. You can nest up to 5 levels.
+           */
+          children?:
+            | {
+                /**
+                 * Max 40 chars (৪০).
+                 */
+                label: string;
+                /**
+                 * সর্বোচ্চ ৪০ অক্ষর।
+                 */
+                labelBN: string;
+                /**
+                 * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                 */
+                href: string;
+                /**
+                 * Optional submenu items. You can nest up to 5 levels.
+                 */
+                children?:
+                  | {
+                      /**
+                       * Max 40 chars (৪০).
+                       */
+                      label: string;
+                      /**
+                       * সর্বোচ্চ ৪০ অক্ষর।
+                       */
+                      labelBN: string;
+                      /**
+                       * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                       */
+                      href: string;
+                      /**
+                       * Optional submenu items. You can nest up to 5 levels.
+                       */
+                      children?:
+                        | {
+                            /**
+                             * Max 40 chars (৪০).
+                             */
+                            label: string;
+                            /**
+                             * সর্বোচ্চ ৪০ অক্ষর।
+                             */
+                            labelBN: string;
+                            /**
+                             * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                             */
+                            href: string;
+                            /**
+                             * Optional submenu items. You can nest up to 5 levels.
+                             */
+                            children?:
+                              | {
+                                  /**
+                                   * Max 40 chars (৪০).
+                                   */
+                                  label: string;
+                                  /**
+                                   * সর্বোচ্চ ৪০ অক্ষর।
+                                   */
+                                  labelBN: string;
+                                  /**
+                                   * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                                   */
+                                  href: string;
+                                  id?: string | null;
+                                }[]
+                              | null;
+                            id?: string | null;
+                          }[]
+                        | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Optional action link (e.g., “My Portal”) on the right in desktop.
+   */
+  portal?: {
+    /**
+     * Max 40 chars (৪০).
+     */
+    label?: string | null;
+    /**
+     * সর্বোচ্চ ৪০ অক্ষর।
+     */
+    labelBN?: string | null;
+    /**
+     * "#", internal path ("/…"), or full http(s) URL. Max 300 chars (৩০০).
+     */
+    href?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Site-wide footer: logo & contact, Explore & Legal links, Social URLs, and Copyright.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-footer".
+ */
+export interface GlobalFooter {
+  id: string;
+  /**
+   * Footer logo and basic contact details shown at the top of the footer.
+   */
+  branding: {
+    /**
+     * Primary footer logo. Recommended square, ~50KB.
+     */
+    logo: string | Media;
+    email: string;
+    /**
+     * Public Google Maps link to your location. Must be an absolute http(s) URL.
+     */
+    mapUrl: string;
+    phone: string;
+    /**
+     * বাংলা নম্বরে দিতে পারেন। সর্বোচ্চ ৪০ অক্ষর।
+     */
+    phoneBN: string;
+    /**
+     * Shown under the phone number (optional). Max 80 chars (৮০).
+     */
+    phoneNote?: string | null;
+    /**
+     * ফোন নম্বরের নিচে দেখানো হবে (ঐচ্ছিক)। সর্বোচ্চ ৮০ অক্ষর।
+     */
+    phoneNoteBN?: string | null;
+    /**
+     * Mailing/visit address. Max 200 chars (২০০).
+     */
+    address: string;
+    /**
+     * বাংলায় ঠিকানা। সর্বোচ্চ ২০০ অক্ষর।
+     */
+    addressBN: string;
+  };
+  /**
+   * Header + links for the “Explore” column. Internal paths (e.g., /plans) or full http(s) URLs.
+   */
+  exploreSection: {
+    /**
+     * Overrides the Explore column title. Max 40 chars (৪০).
+     */
+    exploreHeader: string;
+    /**
+     * Explore কলামের শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
+     */
+    exploreHeaderBN: string;
+    explore?:
+      | {
+          /**
+           * Max 40 chars (৪০).
+           */
+          label: string;
+          /**
+           * সর্বোচ্চ ৪০ অক্ষর।
+           */
+          labelBN: string;
+          /**
+           * Starts with "/" or a full http(s) URL. Max 300 chars (৩০০).
+           */
+          url: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Header + links for the “Legal” column (e.g., Privacy Policy, Terms). Internal paths or full http(s) URLs.
+   */
+  legalSection?: {
+    /**
+     * Overrides the Legal column title. Max 40 chars (৪০).
+     */
+    legalHeader?: string | null;
+    /**
+     * Legal কলামের শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
+     */
+    legalHeaderBN?: string | null;
+    /**
+     * Links for the “Legal” column (e.g., Privacy Policy, Terms). Internal paths or http(s) URLs.
+     */
+    legal?:
+      | {
+          /**
+           * Max 40 chars (৪০).
+           */
+          label: string;
+          /**
+           * সর্বোচ্চ ৪০ অক্ষর।
+           */
+          labelBN: string;
+          /**
+           * Starts with "/" or a full http(s) URL. Max 300 chars (৩০০).
+           */
+          url: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Section header + public social profile links (must be absolute http(s) URLs).
+   */
+  social: {
+    /**
+     * Overrides the Social column title. Max 40 chars (৪০).
+     */
+    socialHeader?: string | null;
+    /**
+     * Social কলামের শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
+     */
+    socialHeaderBN?: string | null;
+    facebookUrl: string;
+    youtubeUrl: string;
+    linkedinUrl: string;
+    instagramUrl: string;
+  };
+  /**
+   * Main copyright line. Max 200 chars (২০০).
+   */
+  copyright: string;
+  /**
+   * বাংলা কপিরাইট টেক্সট। সর্বোচ্চ ২০০ অক্ষর।
+   */
+  copyrightBN: string;
+  /**
+   * Optional; must appear verbatim inside Copyright. Max 120 chars (১২০).
+   */
+  copyrightHighlightedText?: string | null;
+  /**
+   * ঐচ্ছিক; কপিরাইট (বাংলা)-এর মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+   */
+  copyrightHighlightedTextBN?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-header_select".
+ */
+export interface GlobalHeaderSelect<T extends boolean = true> {
+  links?:
+    | T
+    | {
+        label?: T;
+        labelBN?: T;
+        href?: T;
+        id?: T;
+      };
+  showLocalizationToggle?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-navbar_select".
+ */
+export interface GlobalNavbarSelect<T extends boolean = true> {
+  branding?:
+    | T
+    | {
+        logo?: T;
+      };
+  desktop?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              label?: T;
+              labelBN?: T;
+              href?: T;
+              children?:
+                | T
+                | {
+                    label?: T;
+                    labelBN?: T;
+                    href?: T;
+                    children?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          href?: T;
+                          children?:
+                            | T
+                            | {
+                                label?: T;
+                                labelBN?: T;
+                                href?: T;
+                                children?:
+                                  | T
+                                  | {
+                                      label?: T;
+                                      labelBN?: T;
+                                      href?: T;
+                                      id?: T;
+                                    };
+                                id?: T;
+                              };
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  mobile?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              label?: T;
+              labelBN?: T;
+              href?: T;
+              children?:
+                | T
+                | {
+                    label?: T;
+                    labelBN?: T;
+                    href?: T;
+                    children?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          href?: T;
+                          children?:
+                            | T
+                            | {
+                                label?: T;
+                                labelBN?: T;
+                                href?: T;
+                                children?:
+                                  | T
+                                  | {
+                                      label?: T;
+                                      labelBN?: T;
+                                      href?: T;
+                                      id?: T;
+                                    };
+                                id?: T;
+                              };
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  portal?:
+    | T
+    | {
+        label?: T;
+        labelBN?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-footer_select".
+ */
+export interface GlobalFooterSelect<T extends boolean = true> {
+  branding?:
+    | T
+    | {
+        logo?: T;
+        email?: T;
+        mapUrl?: T;
+        phone?: T;
+        phoneBN?: T;
+        phoneNote?: T;
+        phoneNoteBN?: T;
+        address?: T;
+        addressBN?: T;
+      };
+  exploreSection?:
+    | T
+    | {
+        exploreHeader?: T;
+        exploreHeaderBN?: T;
+        explore?:
+          | T
+          | {
+              label?: T;
+              labelBN?: T;
+              url?: T;
+              id?: T;
+            };
+      };
+  legalSection?:
+    | T
+    | {
+        legalHeader?: T;
+        legalHeaderBN?: T;
+        legal?:
+          | T
+          | {
+              label?: T;
+              labelBN?: T;
+              url?: T;
+              id?: T;
+            };
+      };
+  social?:
+    | T
+    | {
+        socialHeader?: T;
+        socialHeaderBN?: T;
+        facebookUrl?: T;
+        youtubeUrl?: T;
+        linkedinUrl?: T;
+        instagramUrl?: T;
+      };
+  copyright?: T;
+  copyrightBN?: T;
+  copyrightHighlightedText?: T;
+  copyrightHighlightedTextBN?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

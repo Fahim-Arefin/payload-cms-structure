@@ -39,7 +39,7 @@ export default function HeroItem({ slide, top, position }: Props) {
       <div
         // lg:w-[920px] xl:w-[1205px] 2xl:w-[1405px]
         className={`absolute inset-x-0 lg:left-[120px] xl:left-[200px] 2xl:left-[270px] lg:right-auto
-          space-y-4 md:space-y-6 xl:space-y-10 2xl:space-y-20 z-20
+          space-y-4 md:space-y-6 xl:space-y-10 2xl:space-y-20 z-20 lg:w-[80%]
           ${top ? top : ' top-[100px] md:top-[150px] lg:top-[35%] '}`}
       >
         {/* Titles */}
@@ -70,7 +70,7 @@ export default function HeroItem({ slide, top, position }: Props) {
             </div>
 
             {/* lg+ */}
-            <div className="hidden lg:block hero-description-bg-lg font-[350] w-fit lg:mr-12 xl:mr-0 p-2 md:p-3 lg:p-4 hero-h5">
+            <div className="hidden lg:block hero-description-bg-lg font-[350] w-fit lg:mr-12 xl:mr-0 p-2 md:p-3 lg:p-4 hero-h5 ">
               <div className="text-white">
                 <LocalizedRichText
                   en={slide?.description as any}

@@ -15,6 +15,9 @@ import { Resume } from './collections/Resume'
 import { CareerApplication } from './collections/CareerApplication'
 import { AgentCareerApplication } from './collections/AgentCareerApplication'
 import { Pages } from './collections/Pages'
+import Footer from './collections/globals/Footer'
+import Navbar from './collections/globals/Navbar'
+import Header from './collections/globals/Header'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -34,8 +37,8 @@ export default buildConfig({
     },
     abortOnLimit: true,
   },
+  globals: [Header, Navbar, Footer],
   collections: [Users, Media, Resume, CareerApplication, AgentCareerApplication, Pages],
-  // globals: [HomePage, AboutUsPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
