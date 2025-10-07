@@ -230,9 +230,9 @@ export interface Page {
   name: string;
   slug: string;
   /**
-   * If unchecked, the page is not publicly accessible and will return a 404.
+   * Uncheck to hide this page (404).
    */
-  isPublished?: boolean | null;
+  publish?: boolean | null;
   layout: (
     | {
         uploadSessionId?: string | null;
@@ -963,7 +963,7 @@ export interface PagesSelect<T extends boolean = true> {
   uploadSessionId?: T;
   name?: T;
   slug?: T;
-  isPublished?: T;
+  publish?: T;
   layout?:
     | T
     | {
