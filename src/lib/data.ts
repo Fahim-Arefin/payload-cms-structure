@@ -188,7 +188,7 @@ Nafis's academic credentials include a Bachelor of Business Administration with 
     designationBN: 'চিফ ইনফরমেশন এন্ড টেকনোলোজি অফিসার',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/leaders/web/CITO.jpg`,
     // mobileImage: '/assets/leaders/mobile/CITO.jpg',
-    descriptionBN: `২০ বছরেরও বেশি অভিজ্ঞতাসম্পন্ন মোহাম্মাদ মাকসুদ হোসেইন শান্তা লাইফ ইন্সুরেন্স- এর বর্তমান অ্যাসিস্ট্যান্ট ম্যানেজিং ডিরেক্টর ও চিফ ইনফরমেশন এন্ড টেকনোলোজি অফিসার।  পূর্ববর্তীতে তিনি মেটলাইফ বাংলাদেশ -এ এক্সেকিউটিভ ভাইস প্রেসিডেন্ট  এবং রবি এক্সিয়াটা-তে IT - ভাইস প্রেসিডেন্ট  হিসেবে দায়িত্ব পালন করেছেন, যেখানে তিনি agile framework, digital solution এবং enterprise automation বাস্তবায়নের মাধ্যমে আইটি খাতে রূপান্তরমূলক সাফল্য এনেছেন।
+    descriptionBN: `২০ বছরেরও বেশি অভিজ্ঞতাসম্পন্ন মোহাম্মাদ মাকসুদ হোসেইন শান্তা লাইফ ইন্স্যুরেন্স- এর বর্তমান অ্যাসিস্ট্যান্ট ম্যানেজিং ডিরেক্টর ও চিফ ইনফরমেশন এন্ড টেকনোলোজি অফিসার।  পূর্ববর্তীতে তিনি মেটলাইফ বাংলাদেশ -এ এক্সেকিউটিভ ভাইস প্রেসিডেন্ট  এবং রবি এক্সিয়াটা-তে IT - ভাইস প্রেসিডেন্ট  হিসেবে দায়িত্ব পালন করেছেন, যেখানে তিনি agile framework, digital solution এবং enterprise automation বাস্তবায়নের মাধ্যমে আইটি খাতে রূপান্তরমূলক সাফল্য এনেছেন।
 
 জনাব মাকসুদ বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (BUET) থেকে Computer Science & Engineering-এ বি.এসসি. ও এম.এসসি. ডিগ্রি অর্জন করেছেন।`,
     description: `Mohammad Maksud Hossain has been appointed AMD and Chief Information & Technology Officer at Shanta Life Insurance PLC. With over 20 years of experience, he led transformative IT initiatives in roles such as EVP at MetLife Bangladesh and VP of IT at Robi Axiata, where he implemented agile frameworks, digital solutions, and enterprise automations. His expertise spans bank, government, insurance, telecom, and financial services, where he has a proven track record of driving innovation, operational efficiency, and data-driven decision-making to support sustainable growth. Mr. Maksud holds M.Sc. & B.Sc. in Computer Science & Engineering from Bangladesh University of Engineering and Technology.`,
@@ -201,7 +201,7 @@ Nafis's academic credentials include a Bachelor of Business Administration with 
     designationBN: 'চিফ মার্কেটিং অফিসার',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/leaders/web/CMO.jpg`,
     // mobileImage: '/assets/leaders/mobile/CMO.jpg',
-    descriptionBN: `শান্তা লাইফের শুরু থেকেই লাইফ ইন্সুরেন্সকে সহজে সাধারণ মানুষের কাছে পৌঁছে দিতে অবিচ্ছেদ্য অংশ হিসেবে কাজ করছেন জানে আলম রোমেল।  শান্তা লাইফ এর চিফ মার্কেটিং অফিসারের দায়িত্বের পাশাপাশি তিনি শান্তার অন্যান্য অঙ্গসংগঠন - শান্তা অ্যাসেট ম্যানেজমেন্ট লিমিটেড, শান্তা সিকিউরিটিজ ,শান্তা ইক্যুইটি ও শান্তা লাইফস্টাইলের মার্কেটিংকে নেতৃত্ব দিয়ে যাচ্ছেন।  এছাড়াও তিনি, শান্তার ননপ্রফিট ও ফিলানথ্রোপিক প্রতিষ্ঠান  আশুলিয়া নারী ও শিশু হাসপাতাল (AWCH)-এর সামগ্রিক মার্কেটিং কার্যক্রমও  তত্ত্বাবধান করছেন। আঠারো বছরের বেশি ক্যারিয়ারে তিনি কর্পোরেট ব্র্যান্ডিং, মার্কেটিং, কমিউনিকেশন, সেলস এবং কাস্টমার এক্সপেরিয়েন্স-এ অভিজ্ঞতা অর্জন করেছেন। শান্তাতে নিয়োগের পূর্ববর্তীতে তিনি IDLC ফাইন্যান্স-এর গ্রুপ চিফ মার্কেটিং অফিসার হিসেবে দায়িত্বরত ছিলেন।  এছাড়া তিনি সিঙ্গাপুর এয়ারলাইনস, এমজিএইচ গ্রুপ আর র‍্যাংগস ইলেকট্রনিক্স-এর মতো শীর্ষস্থানীয় প্রতিষ্ঠানে কর্মরত ছিলেন। 
+    descriptionBN: `শান্তা লাইফের শুরু থেকেই লাইফ ইন্স্যুরেন্সকে সহজে সাধারণ মানুষের কাছে পৌঁছে দিতে অবিচ্ছেদ্য অংশ হিসেবে কাজ করছেন জানে আলম রোমেল।  শান্তা লাইফ এর চিফ মার্কেটিং অফিসারের দায়িত্বের পাশাপাশি তিনি শান্তার অন্যান্য অঙ্গসংগঠন - শান্তা অ্যাসেট ম্যানেজমেন্ট লিমিটেড, শান্তা সিকিউরিটিজ ,শান্তা ইক্যুইটি ও শান্তা লাইফস্টাইলের মার্কেটিংকে নেতৃত্ব দিয়ে যাচ্ছেন।  এছাড়াও তিনি, শান্তার ননপ্রফিট ও ফিলানথ্রোপিক প্রতিষ্ঠান  আশুলিয়া নারী ও শিশু হাসপাতাল (AWCH)-এর সামগ্রিক মার্কেটিং কার্যক্রমও  তত্ত্বাবধান করছেন। আঠারো বছরের বেশি ক্যারিয়ারে তিনি কর্পোরেট ব্র্যান্ডিং, মার্কেটিং, কমিউনিকেশন, সেলস এবং কাস্টমার এক্সপেরিয়েন্স-এ অভিজ্ঞতা অর্জন করেছেন। শান্তাতে নিয়োগের পূর্ববর্তীতে তিনি IDLC ফাইন্যান্স-এর গ্রুপ চিফ মার্কেটিং অফিসার হিসেবে দায়িত্বরত ছিলেন।  এছাড়া তিনি সিঙ্গাপুর এয়ারলাইনস, এমজিএইচ গ্রুপ আর র‍্যাংগস ইলেকট্রনিক্স-এর মতো শীর্ষস্থানীয় প্রতিষ্ঠানে কর্মরত ছিলেন। 
 
 জনাব রোমেল নর্থ সাউথ ইউনিভার্সিটি থেকে ব্যাচেলর অব বিজনেস অ্যাডমিনিস্ট্রেশন ডিগ্রি অর্জন করেছেন, যেখানে তিনি ডাবল মেজর সম্পন্ন করেন।`,
     description: `Jane Alam Romel has been an integral part of Shanta Life since its inception, serving as the Chief Marketing Officer of Shanta Asset Management Limited, Shanta Securities, and Shanta Equity since June 2022. In addition to overseeing brand management, public relations, and strategic marketing for these entities, Romel is driving transformation within Shanta Lifestyle’s marketing with a new take on innovation and heightened customer experience. He is also catering to Shanta’s non-profit and philanthropic concern AWCH’s overall marketing. His career, spanning over 18 years, includes serving as Group Chief Marketing Officer at IDLC Finance, with expertise in corporate branding, marketing, communications, sales, and customer experience. He has contributed to the success of leading organizations across industries, including Singapore Airlines, MGH Group, and Rangs Electronics. He holds a Bachelor of Business Administration with a double major from North South University.`,
@@ -214,7 +214,7 @@ Nafis's academic credentials include a Bachelor of Business Administration with 
     designationBN: 'চিফ ফিনান্সিয়াল অফিসার',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/leaders/web/CFO.jpg`,
     // mobileImage: '/assets/leaders/mobile/CFO.jpg',
-    descriptionBN: `লাইফ ইন্সুরেন্স খাতে দীর্ঘ ২৫ বছরের অভিজ্ঞতাসম্পন্ন মাজেদুর রশীদ চৌধুরী শান্তা লাইফ ইন্স্যুরেন্স পিএলসির বর্তমান  সিনিয়র এক্সিকিউটিভ ভাইস প্রেসিডেন্ট ও চিফ ফাইন্যান্সিয়াল অফিসার। এই দায়িত্বের পাশাপাশি তিনি কোম্পানি সেক্রেটারির দায়িত্ব পালন করছেন।  শান্তা লাইফে যোগদানের পূর্ববর্তীতে তিনি নয় বছর গার্ডিয়ান লাইফ ইন্স্যুরেন্স লিমিটেড-এ হেড অব ফাইন্যান্স অ্যান্ড অ্যাকাউন্টস ছিলেন এবং পনেরো বছর প্রগতি লাইফ ইন্স্যুরেন্স লিমিটেড-এ ডেপুটি সিএফও হিসেবে কাজ করেছেন। তিনি নর্দান ইউনিভার্সিটি থেকে ফাইন্যান্স-এ এমবিএ ডিগ্রি অর্জন করেছেন।`,
+    descriptionBN: `লাইফ ইন্স্যুরেন্স খাতে দীর্ঘ ২৫ বছরের অভিজ্ঞতাসম্পন্ন মাজেদুর রশীদ চৌধুরী শান্তা লাইফ ইন্স্যুরেন্স পিএলসির বর্তমান  সিনিয়র এক্সিকিউটিভ ভাইস প্রেসিডেন্ট ও চিফ ফাইন্যান্সিয়াল অফিসার। এই দায়িত্বের পাশাপাশি তিনি কোম্পানি সেক্রেটারির দায়িত্ব পালন করছেন।  শান্তা লাইফে যোগদানের পূর্ববর্তীতে তিনি নয় বছর গার্ডিয়ান লাইফ ইন্স্যুরেন্স লিমিটেড-এ হেড অব ফাইন্যান্স অ্যান্ড অ্যাকাউন্টস ছিলেন এবং পনেরো বছর প্রগতি লাইফ ইন্স্যুরেন্স লিমিটেড-এ ডেপুটি সিএফও হিসেবে কাজ করেছেন। তিনি নর্দান ইউনিভার্সিটি থেকে ফাইন্যান্স-এ এমবিএ ডিগ্রি অর্জন করেছেন।`,
     description: `Majedur Rashid Chowdhury has been appointed as Senior Executive Vice President and Chief Financial Officer at Shanta Life Insurance PLC. In addition, he is serving as the Company Secretary. He previously served as Head of Finance and Accounts for Nine years at Guardian Life Insurance Limited and served Fifteen years as Deputy CFO at Pragati Life Insurance Limited. Mr. Majedur holds an MBA in Finance from Northern University.`,
   },
 ]
@@ -289,7 +289,7 @@ export const NAV_ITEMS = [
     ],
   },
   { href: '/pay-premium', label: 'Pay Premium', labelBN: 'পে প্রিমিয়াম' },
-  { href: '/claims', label: 'Claims', labelBN: 'ক্লেম' },
+  { href: '/claims', label: 'Claims', labelBN: 'ক্লেইম' },
   {
     label: 'Support',
     labelBN: 'সাপোর্ট',
@@ -373,7 +373,7 @@ export const NAV_ITEMS_MOBILE = [
   },
   { href: '/pay-premium', label: 'Pay Premium', labelBN: 'পে প্রিমিয়াম' },
   { href: '/premium-calculator', label: 'Premium Calculator', labelBN: 'প্রিমিয়াম ক্যালকুলেটর' },
-  { href: '/claims', label: 'Claims', labelBN: 'ক্লেম' },
+  { href: '/claims', label: 'Claims', labelBN: 'ক্লেইম' },
   {
     label: 'Support',
     labelBN: 'সাপোর্ট',

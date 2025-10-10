@@ -44,7 +44,7 @@ function InsuranceSimplifiedSection({ data }: Props) {
           {/* <span>Life Insurance </span>
           <span className="text-[#ED7125]">Simplified</span> */}
           <LocalizedHighlighted
-            textBn="লাইফ ইন্সুরেন্স - সিমপ্লিফাইড"
+            textBn="লাইফ ইন্স্যুরেন্স - সিমপ্লিফাইড"
             textEn="Life Insurance Simplified"
             highlightEn="Simplified"
             highlightBn="সিমপ্লিফাইড"

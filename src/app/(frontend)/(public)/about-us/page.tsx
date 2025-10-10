@@ -47,13 +47,12 @@ function page() {
     paragraphTitleBN: 'অটুট প্রত্যাশার বাঁধনে, আগামীর স্বপ্ন নির্মাণ',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/shantaIntroImage.png`,
     // mobileImage: '/assets/about-us/web/shantaIntroImage.png',
-    paragraph:
-      `Born from a vision to redefine life insurance in Bangladesh, Shanta Life is backed by a powerful consortium comprised 
+    paragraph: `Born from a vision to redefine life insurance in Bangladesh, Shanta Life is backed by a powerful consortium comprised 
       of Shanta Holdings, Shanta Lifestyle, Shanta Securities, Shanta Asset Management, Shanta Equity, Shanta Multiverse,
        Shanta Property Management, FAR Asset Management, and Nasah Holdings.`,
-    paragraphBN: `বাংলাদেশের লাইফ ইন্সুরেন্স সেক্টরে নতুন মানদণ্ড স্থাপনের স্বপ্ন নিয়ে শান্তা লাইফের যাত্রা শুরু। 
+    paragraphBN: `বাংলাদেশের লাইফ ইন্স্যুরেন্স সেক্টরে নতুন মানদণ্ড স্থাপনের স্বপ্ন নিয়ে শান্তা লাইফের যাত্রা শুরু। 
     দেশের স্বনামধন্য প্রতিষ্ঠান শান্তা হোল্ডিংস , শান্তা লাইফস্টাইল, শান্তা সিকিউরিটিজ, শান্তা অ্যাসেট ম্যানেজমেন্ট, শান্তা ইকুইটি, 
-    শান্তা মাল্টিভার্স, শান্তা প্রোপার্টি ম্যানেজমেন্ট , ফার অ্যাসেট ম্যানেজমেন্ট এবং নাসাহ হোল্ডিংস এর যৌথ উদ্যোগে শান্তা লাইফ ইন্সুরেন্সের যাত্রা শুরু।`,
+    শান্তা মাল্টিভার্স, শান্তা প্রোপার্টি ম্যানেজমেন্ট, ফার অ্যাসেট ম্যানেজমেন্ট এবং নাসাহ হোল্ডিংস এর যৌথ উদ্যোগে শান্তা লাইফ ইন্স্যুরেন্সের যাত্রা শুরু।`,
   }
   const vissionMissionContent = {
     bgImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/vision.png`,
@@ -61,10 +60,10 @@ function page() {
     visionDescription:
       'To be the most trusted insurance brand by protecting the uncertainties of life through simple solutions and delivering maximum value.',
     visionDescriptionBN: `সহজ সমাধানের মাধ্যমে জীবনের অনিশ্চয়তাকে সুরক্ষা দিয়ে এবং সর্বোচ্চ মূল্য প্রদান করে, 
-      দেশের সবচেয়ে নির্ভরযোগ্য লাইফ ইন্সুরেন্স ব্র্যান্ড হওয়াই আমাদের ভিশন।`,
+      দেশের সবচেয়ে নির্ভরযোগ্য লাইফ ইন্স্যুরেন্স ব্র্যান্ড হওয়াই আমাদের ভিশন।`,
     missionDescription:
       'To promote the desired quality of life through innovation, digitalization and customer centricity.',
-    missionDescriptionBN: `ইনোভেশন , ডিজিটালাইজেসন, এবং কাস্টমার সেন্ট্রিসিটি -এর মাধ্যমে মানুষের কাঙ্ক্ষিত জীবনমানকে এগিয়ে নেওয়াই আমাদের লক্ষ্য।`,
+    missionDescriptionBN: `ইনোভেশন, ডিজিটালাইজেসন, এবং কাস্টমার সেন্ট্রিসিটি-এর মাধ্যমে মানুষের কাঙ্ক্ষিত জীবনমানকে এগিয়ে নেওয়াই আমাদের লক্ষ্য।`,
   }
 
   const allAboutData = {
@@ -98,7 +97,7 @@ function page() {
         description: {
           __html:
             'We prioritize ease for our customers , making insurance straightforward, accessible, and hassle-free.',
-          __htmlBN: `ইন্সুরেন্সকে  সহজ, স্বচ্ছ ও ঝামেলাহীন করা আমাদের লক্ষ্য।`,
+          __htmlBN: `ইন্স্যুরেন্সকে  সহজ, স্বচ্ছ ও ঝামেলাহীন করা আমাদের লক্ষ্য।`,
         },
       },
       {
@@ -159,7 +158,7 @@ function page() {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/directoralone.png`,
       // mobileImage: '/assets/about-us/mobile/directoralone.png',
       name: 'Khondoker Monir Uddin',
-      nameBN: 'খন্দকার মুনির উদ্দিন',
+      nameBN: 'খন্দকার মনির উদ্দিন',
       designation: 'Chairman',
       designationBN: 'চেয়ারম্যান',
       title: 'Charting the Course',
@@ -169,12 +168,12 @@ function page() {
       description: `At Shanta, we proudly uphold a legacy of integrity, innovation and excellence. As we embark on our journey in the insurance sector, we remain focused on our goal to offer unmatched life insurance solutions that ensure peace of mind and long-term financial security for our customers. Our determination to establish trust will remain unshakeable and so will our commitment to setting a new standard in the quality of life insurance services provided.The initiative of enhancing financial literacy among individuals and boosting confidence in them with services that bring stability is the cornerstone that carries the name of our organization, not only over the financial future of our customers but also over our community as a whole. At Shanta Life, we will continue our four decades long legacy of excellence and commitment with utmost sincerity, and I welcome you to explore planning your family's financial security with our trusted team.`,
       // link: 'https://shantalife.com/message-form-chairman.php',
       descriptionBN: `শান্তা বিগত কয়েক দশক জুড়ে সততা, নিষ্ঠা এবং উদ্ভাবনী উৎকর্ষতার মাধ্যমে ব্যাবসায়িক কার্যকম পরিচালনা করছে।  
-      ইন্সুরেন্স সেক্টর এ নতুন পথচলায় আমাদের লক্ষ্য কাস্টমারদের সর্বোচ্চ ভ্যালু প্রদান করে তাদের অর্থনৈতিক ভবিষ্যৎ সুরক্ষিত করা। 
+      ইন্স্যুরেন্স সেক্টরে নতুন পথচলায় আমাদের লক্ষ্য কাস্টমারদের সর্বোচ্চ ভ্যালু প্রদান করে তাদের অর্থনৈতিক ভবিষ্যৎ সুরক্ষিত করা। 
       আমরা বিশ্বাস করি জীবনবীমা শুধু সুরক্ষা নয়-এটি আস্থা, স্থিতিশীলতা ও এক উজ্জ্বল ভবিষ্যতের প্রতিশ্রুতি। 
-      লাইফ ইন্সুরেন্সকে জীবনের বিশ্বস্ততার পার্টনার করে একটি নতুন মাত্রায় রূপান্তর আমাদের প্রতিজ্ঞা। 
+      লাইফ ইন্স্যুরেন্সকে জীবনের বিশ্বস্ততার পার্টনার করে একটি নতুন মাত্রায় রূপান্তর আমাদের প্রতিজ্ঞা। 
       আর্থিক শিক্ষার প্রসার এবং মানুষের সচেতনতা বাড়ানোর মাধ্যমে আমরা শুধু আমাদের গ্রাহকদের আর্থিক ভবিষ্যৎই নয়, 
       পুরো সমাজকেও স্থিতিশীলতার পথে এগিয়ে নিতে চাই। 
-      গ্রাহকসমাজ ও আমাদের টীম একত্র হয়ে এক নতুন মানদণ্ড তৈরি করার ব্যাপারে শান্তা অঙ্গীকারবদ্ধ। 
+      গ্রাহকসমাজ ও আমাদের টিম একত্র হয়ে এক নতুন মানদণ্ড তৈরি করার ব্যাপারে শান্তা অঙ্গীকারবদ্ধ। 
       আপনার ও আপনার পরিবারের আর্থিক নিরাপত্তা নিশ্চিত করার এই যাত্রায় আমাদের বিশ্বস্ত টিমের সাথে যুক্ত হবার আহবান করছি।  `,
       link: '/all-bods#id-1',
     },

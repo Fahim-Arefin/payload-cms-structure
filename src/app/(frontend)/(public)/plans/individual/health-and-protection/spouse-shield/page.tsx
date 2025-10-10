@@ -59,7 +59,7 @@ function page({}: Props) {
   const tabContent = {
     title: 'Insurance',
     coloredTitle: 'Coverages',
-    titleBN: 'ইন্সুরেন্স',
+    titleBN: 'ইন্স্যুরেন্স',
     coloredTitleBN: 'কাভারেজ',
     planA: [
       {

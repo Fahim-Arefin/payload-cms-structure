@@ -74,7 +74,7 @@ function WhyChooseUsSection() {
                   `Born from a vision to redefine life insurance in Bangladesh, Shanta Life Insurance is backed by a powerful consortium, including Shanta Holdings.` as any
                 }
                 bn={
-                  `শান্তা হোল্ডিংস-এর দৃঢ় ভিত ও সাফল্যের ধারাবাহিকতায়, লাইফ ইন্স্যুরেন্স ইন্ডাস্ট্রিতে নতুনত্বের অঙ্গীকার নিয়ে এসেছে শান্তা লাইফ ইন্স্যুরেন্স। শান্তা পরিবারের দীর্ঘ অভিজ্ঞতা, মূল্যবোধ ও বিশ্বাসের ওপর ভর করে আমরা এগিয়ে চলেছি জীবনকে আরও নিরাপদ ও অর্থনৈতিকভাবে নিশ্চিত করতে।` as any
+                  `শান্তা হোল্ডিংস-এর দৃঢ় ভিত ও সাফল্যের ধারাবাহিকতায়, লাইফ ইন্স্যুরেন্স ইন্ডাস্ট্রিতে নতুনত্বের অঙ্গীকার নিয়ে এসেছে শান্তা লাইফ ইন্স্যুরেন্স। শান্তা পরিবারের দীর্ঘ অভিজ্ঞতা, মূল্যবোধ ও বিশ্বাসের ওপর ভর করে আমরা এগিয়ে চলেছি জীবনকে আরও নিরাপদ ও অর্থনৈতিকভাবে নির্ভার করতে।` as any
                 }
               />
             </div>
@@ -129,7 +129,7 @@ function WhyChooseUsSection() {
                       <LocalizedText en="112" bn="১১২" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      <LocalizedText en="Claim Settled" bn="ক্লেম সেটেল্ড" />
+                      <LocalizedText en="Claim Settled" bn="ক্লেইম সেটেল্ড" />
                     </div>
                   </div>
                 </div>
@@ -177,7 +177,6 @@ function WhyChooseUsSection() {
                       <LocalizedText en="1K +" bn="১,০০০+" />
                     </div>
                     <div className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      
                       <LocalizedText en="Families Insured" bn="সুরক্ষিত পরিবার" />
                     </div>
                   </div>
