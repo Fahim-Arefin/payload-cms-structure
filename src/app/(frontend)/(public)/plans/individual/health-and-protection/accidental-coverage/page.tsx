@@ -9,7 +9,7 @@ function page() {
   const heroSlides = [
     {
       title: 'Shanta Accidental Coverage',
-      titleBN: 'শান্তা অ্যাক্সিডেন্টাল কাভারেজ',
+      titleBN: 'শান্তা অ্যাক্সিডেন্টাল কভারেজ',
       subtitle: '',
       description: `We're here to be your grounded force because a stumble should never steal your stride.`,
       descriptionBN: `আমরা আছি আপনার দৃঢ় ভরসা হয়ে, যেন জীবনের ছোট্ট ছোট্ট বাধাও দমাতে না পারে আপনার এগিয়ে যাওয়ার গতি।`,
@@ -21,7 +21,7 @@ function page() {
     // mobileImage:
     //   '/assets/solutions/individual/health-and-protection/accidental-coverage/mobile/planInfo4.png',
     descriptionBN: `একটি অনাকাঙ্ক্ষিত দুর্ঘটনা মুহূর্তেই বদলে দিতে পারে জীবনের গতি, 
-    আপনাকে ও আপনার পরিবারকে ফেলে দিতে পারে অনিশ্চয়তার মুখে। শান্তা লাইফের অ্যাকসিডেন্টাল 
+    আপনাকে ও আপনার পরিবারকে ফেলে দিতে পারে অনিশ্চয়তার মুখে। শান্তা লাইফের অ্যাক্সিডেন্টাল 
     কভারেজ সেই অপ্রত্যাশিত ঝড়ের সময় হয়ে ওঠে আপনার ভরসা—যা আর্থিক চাপ লাঘব করে এবং 
     আপনাকে দিবে পুনরায় ঘুরে দাঁড়ানোর শক্তি।`,
     description: `Accidents can bring life to a sudden halt, impacting financial strain and uncertainty for you and your family. With Shanta Life's Accidental Coverage, you get a reliable safety net to help safeguard your future and ease the financial burden of unforeseen events. We've got you covered, so you can focus on the recovery. `,
@@ -69,8 +69,8 @@ function page() {
       title: 'Accidental Death',
       description:
         'Your loved ones receive twice the insured amount for extra protection (including basic life coverage).',
-      titleBN: 'দুর্ঘটনায় মৃত্যুতে মূল পলিসি কাভারেজের দ্বিগুণ সুবিধা',
-      descriptionBN: `আপনার প্রিয়জনরা পাবে দ্বিগুণ বীমা কভারেজ, যা যোগ করবে এক অতিরিক্ত নিরাপত্তার স্তর। (মূল জীবনবীমা কাভারেজসহ)`,
+      titleBN: 'দুর্ঘটনায় মৃত্যুতে মূল পলিসি কভারেজের দ্বিগুণ সুবিধা',
+      descriptionBN: `আপনার প্রিয়জনরা পাবে দ্বিগুণ বীমা কভারেজ, যা যোগ করবে এক অতিরিক্ত নিরাপত্তার স্তর। (মূল জীবনবীমা কভারেজসহ)`,
     },
   ]
   return (
@@ -92,7 +92,7 @@ function page() {
       <OffersClientWrapper
         data={offersData}
         subheading="Four types of protection to keep you and your loved ones financially secure"
-        subHeadingBN="আপনার যেকোনো দুর্ঘটনায় আর্থিক নিশ্চয়তা প্রদানের জন্য শান্তা  অ্যাক্সিডেন্টাল কাভারেজ চারটি ভিন্ন বীমা সুবিধা প্রদান করে"
+        subHeadingBN="আপনার যেকোনো দুর্ঘটনায় আর্থিক নিশ্চয়তা প্রদানের জন্য শান্তা  অ্যাক্সিডেন্টাল কভারেজ চারটি ভিন্ন বীমা সুবিধা প্রদান করে"
         card={2}
       />
       <MatricsSection />

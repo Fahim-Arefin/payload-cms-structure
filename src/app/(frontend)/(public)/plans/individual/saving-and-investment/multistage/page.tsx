@@ -19,7 +19,7 @@ const page: FC<Props> = ({}) => {
   const heroSlides = [
     {
       title: 'Shanta Multi-Stage Maturity Plans',
-      titleBN: 'শান্তা মাল্টি-স্টেজ ম্যাচুরিটি প্ল্যান',
+      titleBN: 'শান্তা মাল্টি-স্টেজ ম্যাচিউরিটি প্ল্যান',
       subtitle: '',
       description: `Since life has more than one milestone, 
       we’re with you at each one.`,
@@ -38,7 +38,7 @@ const page: FC<Props> = ({}) => {
       it’s the smart way to stay prepared for what’s next!! 
       Pick a plan from below that suits your need.`,
     descriptionBN: `কিছু স্বপ্নের কোনো অপেক্ষা হয় না। হতে পারে সেটা আপনার সন্তানের শিক্ষার ব্যায়, 
-      জীবনের বিশেষ কোনো মুহূর্ত উদযাপন বা ভবিষ্যতের আর্থিক নিরাপত্তা—ধাপে ধাপে সেইসব স্বপ্নপূরণে আপনার পাশে থাকবে শান্তা লাইফের মাল্টি-স্টেজ ম্যাচুরিটি প্ল্যান। 
+      জীবনের বিশেষ কোনো মুহূর্ত উদযাপন বা ভবিষ্যতের আর্থিক নিরাপত্তা—ধাপে ধাপে সেইসব স্বপ্নপূরণে আপনার পাশে থাকবে শান্তা লাইফের মাল্টি-স্টেজ ম্যাচিউরিটি প্ল্যান। 
       প্রয়োজন অনুযায়ী বেছে নিন নিচের উপযুক্ত প্ল্যান।`,
   }
 
@@ -96,7 +96,7 @@ const page: FC<Props> = ({}) => {
       },
       {
         title: 'Customizable Coverage',
-        titleBN: 'প্রয়োজন অনুযায়ী কাভারেজ',
+        titleBN: 'প্রয়োজন অনুযায়ী কভারেজ',
         description:
           'Enjoy your benefits when you need them most—not just at the end. Structured payouts help you meet life’s big moments head-on.',
         descriptionBN:

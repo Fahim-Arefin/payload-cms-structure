@@ -38,6 +38,7 @@ import Link from 'next/link'
 import { Checkbox } from '@/components/ui/checkbox'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
 import LocalizedString from '../shared/LocalizedString'
+import LocalizedText from '../shared/LocalizedText'
 
 interface FormData {
   PlanCode: number
@@ -127,7 +128,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
     !formData.Age ||
     (availablePlans.length === 0 && childEducationVariants.length === 0)
   const planDisabledMsg = !formData.Age
-    ? 'Enter age first'
+    ? L('Enter age first', 'আগে বয়স লিখুন')
     : isLoadingPlans
       ? 'Loading plans...'
       : 'No plans available'
@@ -634,7 +635,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
 
                   if (selectedLabel) return selectedLabel
                   if (isLoadingPlans) return 'Loading plans...'
-                  if (!formData.Age) return 'Enter age to load plans'
+                  if (!formData.Age) return L('Enter age to load plans', 'প্ল্যান দেখতে বয়স দিন')
                   if (availablePlans.length === 0 && childEducationVariants.length === 0)
                     return 'No plans available'
                   return L('Select Plan', 'প্ল্যান নির্বাচন করুন')
@@ -855,7 +856,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           </SelectTrigger>
           {isHoveringTenureSelect && (!formData.PlanCode || !formData.Age) && (
             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
-              Select age and plan first
+              <LocalizedText
+                en={`Select age and plan first`}
+                bn="আগে বয়স এবং পরিকল্পনা নির্বাচন করুন"
+              />
+
               <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
             </div>
           )}
@@ -971,7 +976,9 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('SumAssured')}</p>
         ) : (
           <p className="text-[9px] lg:text-[10px] py-2 absolute inset-x-0">
-            Suggested <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span> BDT
+            <LocalizedText en={`Suggested`} bn={`সাজেসটেড`} />{' '}
+            <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span>{' '}
+            <LocalizedText en={`BDT`} bn={`বিডিটি`} />
           </p>
         )}
       </div>
@@ -1147,28 +1154,34 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             aria-invalid={fieldErrors.agreeTerms || undefined}
             aria-describedby={fieldErrors.agreeTerms ? 'agree-terms-error' : undefined}
           />
+
           <span className="text-xs md:text-sm leading-relaxed">
-            By clicking <span className="font-semibold">Get a Quote Now</span>, you agree to our{' '}
+            <LocalizedText en="By clicking " bn="ক্লিক করলে " />
+            <span className="font-semibold">
+              <LocalizedText en="Get a Quote Now" bn="এখনই কোট পান" />
+            </span>
+            <LocalizedText en=", you agree to our " bn=", আপনি সম্মত হচ্ছেন আমাদের " />
             <Link
               href="/terms-condition"
               className="underline text-[#FF6600] hover:opacity-90"
               target="_blank"
               rel="noopener noreferrer"
             >
-              terms and conditions
+              <LocalizedText en="terms and conditions" bn="শর্তাবলী" />
             </Link>{' '}
-            and {' '}
+            <LocalizedText en="and " bn="এবং " />
             <Link
               href="/privacy-policy"
               className="underline text-[#FF6600] hover:opacity-90"
               target="_blank"
               rel="noopener noreferrer"
             >
-              privacy policy
+              <LocalizedText en="privacy policy" bn="গোপনীয়তা নীতি" />
             </Link>
-            .
+            <LocalizedText en="." bn="।" />
           </span>
         </label>
+
         {getFieldErrorMessage('agreeTerms') && (
           <p id="agree-terms-error" className="text-red-500 text-xs mt-1">
             {getFieldErrorMessage('agreeTerms')}
@@ -1192,7 +1205,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           {/* {isLoading ? 'Calculating...' : 'Get A Quote Now'} */}
           <LocalizedString
             en={isLoading ? 'Calculating...' : 'Get A Quote Now'}
-            bn={isLoading ? 'হিসাব...' : 'গেট এ কোট'}
+            bn={isLoading ? 'হিসাব...' : 'ইন্স্যুরেন্স এমাউন্ট নির্ধারণ করুন'}
           />
         </GlobalButton>
       </div>

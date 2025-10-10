@@ -97,7 +97,7 @@ function page({}: Props) {
       title: 'FOR HEALH COVERAGE',
       titleBN: 'হেলথ কভারেজ',
       descriptionBN: `সব সুস্থ ইমপ্লয়ি এই হেলথ কভারেজের জন্য যোগ্য। 
-      এছাড়া তার ওপর নীর্ভরশিল পরিবারের সদস্য (স্বামী/স্ত্রী এবং সন্তানদের)  
+      এছাড়া তার ওপর নির্ভরশীল পরিবারের সদস্য (স্বামী/স্ত্রী এবং সন্তানদের)  
       কভারেজ পেতে পারেন, যা পরিবারকেও সুরক্ষা দেয়।`,
       description:
         'All eligible employees qualify for this coverage. Extending it to their dependents adds another layer of support, demonstrating a strong commitment not only to the employee but also to their family—fostering security, care, and well-being for the entire household.',
@@ -283,6 +283,7 @@ function page({}: Props) {
         },
         {
           title: 'OPC Dental',
+          titleBN: 'OPC ডেন্টাল',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon9.png`,
           description: `Dental care is essential, and our Dental OPC benefit helps cover common treatments that do not require hospitalization. This includes:
           a) Dental consultations,
@@ -301,7 +302,7 @@ function page({}: Props) {
         },
         {
           title: 'OPC Optical',
-          titleBN: 'OPC ডেন্টাল',
+          titleBN: 'OPC অপটিক্যাল',
           image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon10.png`,
           description: `Our Optical OPC benefit provides coverage for vision care and related treatments that do not require hospital admission. The coverage includes:
           a) Eye consultations,

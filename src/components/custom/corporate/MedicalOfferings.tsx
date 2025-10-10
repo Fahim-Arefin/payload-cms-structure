@@ -52,6 +52,7 @@ const MEDICAL_OFFERINGS: Offering[] = [
   },
   {
     title: 'OPC Dental',
+    titleBN: 'OPC ডেন্টাল',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon9.png`,
     description: `Dental care is essential, and our Dental OPC benefit helps cover common treatments that do not require hospitalization. This includes:
           a) Dental consultations,
@@ -70,7 +71,7 @@ const MEDICAL_OFFERINGS: Offering[] = [
   },
   {
     title: 'OPC Optical',
-    titleBN: 'OPC ডেন্টাল',
+    titleBN: 'OPC অপটিক্যাল',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon10.png`,
     description: `Our Optical OPC benefit provides coverage for vision care and related treatments that do not require hospital admission. The coverage includes:
           a) Eye consultations,

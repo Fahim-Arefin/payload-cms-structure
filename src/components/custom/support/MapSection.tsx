@@ -44,7 +44,8 @@ function MapSection({ data, bgColor }: Props) {
              "
         >
           <h2 className="text-[#ED7125] text-[14px] md:text-[20px] lg:text-[22px] xl:text-[24px] font-semibold">
-            {data?.content[0]?.office_location_Label || 'Shanta Life Insurance PLC'}
+            
+            <LocalizedText en={data?.content[0]?.office_location_Label || 'Shanta Life Insurance PLC'} bn={data?.content[0]?.office_location_LabelBN || data?.content[0]?.office_location_Label}/>
           </h2>
           <p className="text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#6E6E6E]">
             <LocalizedText

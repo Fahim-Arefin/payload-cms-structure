@@ -17,7 +17,7 @@ function PlanPage() {
       titleBN: 'একক বীমা',
       subtitle: '',
       description: 'Because real life doesn’t come with a rewind button.',
-      descriptionBN: 'আজকের প্রস্তুতি আগামীর নিশ্চয়তা',
+      descriptionBN: 'আজকের প্রস্তুতি আগামীর নির্ভারতা',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/planBanner.jpg`,
     },
   ]
@@ -104,7 +104,7 @@ function PlanPage() {
         <div className="hidden lg:block global-span text-[#3A3A3A] font-[350] mt-4 xl:mt-6 2xl:mt-12">
           <LocalizedText
             en="From wealth-building solutions to education-focused coverage,"
-            bn="অর্থ সঞ্চয়ের সমাধান থেকে শুরু করে সন্তানের ভবিষ্যত শিক্ষার নিশ্চয়তা—"
+            bn="অর্থ সঞ্চয়ের সমাধান থেকে শুরু করে সন্তানের ভবিষ্যত শিক্ষার নির্ভারতা—"
           />
         </div>
         <div className="hidden lg:block global-span text-[#3A3A3A] font-[350]">

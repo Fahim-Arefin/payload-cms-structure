@@ -123,7 +123,7 @@ function PremiumEligibilitySection({ bgColor = '#FFFFFF', align = 'left', data }
           <div className="flex gap-4 lg:gap-6 ">
             <Link href="/premium-calculator">
               <GlobalButton variant="primary" text="Calculate Premium">
-                <LocalizedString en='Calculate Premium' bn='ক্যালকুলেট প্রিমিয়াম'/>
+                <LocalizedString en='Calculate Premium' bn='প্রিমিয়াম হিসেব করুন'/>
               </GlobalButton>
             </Link>
             {/* <div className="flex justify-center mt-2">
