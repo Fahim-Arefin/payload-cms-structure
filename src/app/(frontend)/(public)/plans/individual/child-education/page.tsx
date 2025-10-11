@@ -91,7 +91,7 @@ const page: FC<pageProps> = ({}) => {
 
       {
         title: 'Customizable Coverage',
-        titleBN: 'প্রয়োজন অনুযায়ী কাভারেজ',
+        titleBN: 'প্রয়োজন অনুযায়ী কভারেজ',
         description: 'Choose a sum assured based on your child’s future needs.',
         descriptionBN: `আপনার চাহিদা বা পছন্দ অনুসারে বীমা অংক/কভারেজ এবং সময়কাল নির্ধারণের স্বাধীনতা`,
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/childTabIcon1.png`,

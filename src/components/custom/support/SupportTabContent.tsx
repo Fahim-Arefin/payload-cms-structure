@@ -260,7 +260,10 @@ function SupportTabContent({ data, activeTab, bgColor }: Props) {
     data-[state=checked]:bg-muted data-[state=checked]:text-muted-foreground rounded-md transition-colors
     border my-2"
                 >
-                  <span className="">{item.office_location_Label || item.office_location}</span>
+                  <span className="">
+
+                    <LocalizedText en={item.office_location_Label || item.office_location} bn={item.office_location_LabelBN ? item.office_location_LabelBN : item.office_location_Label}/>
+                  </span>
                 </SelectItem>
               ))}
             </SelectContent>

@@ -183,7 +183,7 @@ function Footer() {
                 </div>
               </Link>
             </div>
-            <div className="hidden space-x-2 xl:flex 2xl:hidden">
+            <div className="hidden space-x-1 xl:flex 2xl:hidden">
               <div className="hidden md:block w-[50px] xl:w-[55px] 2xl:w-[70px]">
                 <svg
                   width="30"
@@ -213,7 +213,7 @@ function Footer() {
                 </div>
               </Link>
             </div>
-            <div className="hidden space-x-2 2xl:flex">
+            <div className="hidden space-x-1 2xl:flex">
               <div className="hidden md:block w-[50px] xl:w-[55px] 2xl:w-[70px]">
                 <svg
                   width="40"

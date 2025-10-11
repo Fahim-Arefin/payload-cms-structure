@@ -43,7 +43,7 @@ function SavingAndInvestment() {
     feature: [
       {
         name: 'Maturity Value',
-        nameBN: 'ম্যাচুরিটি ভ্যালু',
+        nameBN: 'ম্যাচিউরিটি ভ্যালু',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature1.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature1.png`,
       },
@@ -85,19 +85,19 @@ function SavingAndInvestment() {
 
   const multiStagePlanData = {
     title: 'Multi stage Maturity Plans',
-    titleBN: 'মাল্টি স্টেজ ম্যাচুরিটি প্ল্যানস ',
+    titleBN: 'মাল্টি স্টেজ ম্যাচিউরিটি প্ল্যানস ',
     subtitle: 'Shanta',
     subtitleBN: 'শান্তা',
     description: `With Shanta Multi-stage Maturity Plans, receive the coverage
     amount in scheduled installments over time, providing financial
     security to support your future goals and safeguard what matters most.`,
-    descriptionBN: `পলিসির মেয়াদ শেষ হওয়ার আগেই সুরক্ষার পাশাপাশি আর্থিক সুবিধা প্রাপ্তির জন্য শান্তা মাল্টি স্টেজ ম্যাচুরিটি প্ল্যানস হতে 
-    পারে আপনার আদর্শ সমাধান। এই প্ল্যানগুলোর মাধ্যমে আপনি কিস্তি ভিত্তিতে নির্দিষ্ট সময় পর পর কাভারেজ অ্যামাউন্টের নির্ধারিত অর্থ গ্রহণ করবেন, 
+    descriptionBN: `পলিসির মেয়াদ শেষ হওয়ার আগেই সুরক্ষার পাশাপাশি আর্থিক সুবিধা প্রাপ্তির জন্য শান্তা মাল্টি স্টেজ ম্যাচিউরিটি প্ল্যানস হতে 
+    পারে আপনার আদর্শ সমাধান। এই প্ল্যানগুলোর মাধ্যমে আপনি কিস্তি ভিত্তিতে নির্দিষ্ট সময় পর পর কভারেজ অ্যামাউন্টের নির্ধারিত অর্থ গ্রহণ করবেন, 
     যা আপনার ভবিষ্যৎ লক্ষ্য ও সুরক্ষায় আর্থিক নিশ্চয়তা প্রদান করবে`,
     feature: [
       {
         name: 'Maturity Value',
-        nameBN: 'ম্যাচুরিটি ভ্যালু',
+        nameBN: 'ম্যাচিউরিটি ভ্যালু',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature1.png`,
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature1.png`,
       },

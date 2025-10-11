@@ -70,12 +70,12 @@ function Bancassurance() {
     {
       value: 'lifeCoverage',
       label: 'Life Coverage',
-      labelBN: 'লাইফ কাভারেজ',
+      labelBN: 'লাইফ কভারেজ',
     },
     {
       value: 'healthCoverage',
       label: 'Health Coverage',
-      labelBN: 'হেল্থ কাভারেজ',
+      labelBN: 'হেল্থ কভারেজ',
     },
   ]
 

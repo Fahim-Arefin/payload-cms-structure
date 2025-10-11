@@ -25,7 +25,7 @@ const page: FC<pageProps> = ({}) => {
       titleBN: 'আত্মবিশ্বাসে ভরপুর প্রতিটি পদক্ষেপ',
       subtitle: '',
       description: 'Join us in reimagining life insurance, where your passion meets purpose.',
-      descriptionBN: `লাইফ ইন্সুরেন্স সেক্টরে নতুন দিনের সূচনায় যোগ দিন আমাদের সাথে`,
+      descriptionBN: `লাইফ ইন্স্যুরেন্স সেক্টরে নতুন দিনের সূচনায় যোগ দিন আমাদের সাথে`,
       image: '/assets/career/web/careerHero.png',
     },
   ]
@@ -150,7 +150,7 @@ const page: FC<pageProps> = ({}) => {
       এখানে টিম সবসময় সাপোর্টিভ, এনভায়রনমেন্ট একদম পজিটিভ—আর ফোকাস সবসময় গ্রোথ আর ইনোভেশন-এ।
       আমি এখানে অনেক কিছু শিখেছি আর প্রতিটা স্টেপে ভ্যালুড ফিল করেছি।`,
       designation: 'Corporate Sales',
-      designationBN: `কর্পোরেট সেলস`
+      designationBN: `কর্পোরেট সেলস`,
     },
 
     //     {
@@ -195,42 +195,41 @@ const page: FC<pageProps> = ({}) => {
   ]
 
   // data.ts
-const careerCards: CareerCard[] = [
-  {
-    title: 'We Celebrate Impact',
-    titleBN: 'আমরা উদযাপন করি প্রভাব',
-    description:
-      'We spotlight wins, reward outcomes, and champion the people behind the progress.',
-    descriptionBN: 'সাফল্যের কারিগরদের আমরা তুলে ধরি সবার সামনে',
-  },
-  {
-    title: 'We Co-sign your Success',
-    titleBN: 'আমরা সহযাত্রী আপনার সাফল্যে',
-    description: 'We cheer your hustle, amplify your milestones, and move forward—together.',
-    descriptionBN: `আপনার সাফল্য আমরা উজ্জাপন করি একসাথে`,
-  },
-  {
-    title: 'We Drive Knowledge',
-    titleBN: 'আমরা এগিয়ে নেই জ্ঞানচর্চা',
-    description:
-      'We support your quest for knowledge with our curated training programs. We’re committed to nurturing expertise.',
-    descriptionBN: `নতুন স্কিল অর্জনের যাত্রায় আমরা আছি আপনার সাথে`,
-  },
-  {
-    title: 'We-Centric Culture',
-    titleBN: 'আমাদের সংস্কৃতি আমরা-কেন্দ্রিক',
-    description:
-      'We foster a culture where "we" is stronger than "I". Thrive with synergy and get the support without limits.',
-    descriptionBN: `আমাদের সংস্কৃতি "আমি" নয় "আমরা"-তে বিশ্বাসী`,
-  },
-  {
-    title: 'We Ignite Journeys',
-    titleBN: 'আমরা প্রজ্জ্বলিত করি যাত্রাপথ',
-    description: 'We build each other up, every day, Let’s ignite possibilities together.',
-    descriptionBN: `আপনার ক্যারিয়ারের পথ উদ্ভাসিত করি সম্ভাবনার আলোয়`,
-  },
-]
-
+  const careerCards: CareerCard[] = [
+    {
+      title: 'We Celebrate Impact',
+      titleBN: 'আমরা উদযাপন করি প্রভাব',
+      description:
+        'We spotlight wins, reward outcomes, and champion the people behind the progress.',
+      descriptionBN: 'সাফল্যের কারিগরদের আমরা তুলে ধরি সবার সামনে',
+    },
+    {
+      title: 'We Co-sign your Success',
+      titleBN: 'আমরা সহযাত্রী আপনার সাফল্যে',
+      description: 'We cheer your hustle, amplify your milestones, and move forward—together.',
+      descriptionBN: `আপনার সাফল্য আমরা উজ্জাপন করি একসাথে`,
+    },
+    {
+      title: 'We Drive Knowledge',
+      titleBN: 'আমরা এগিয়ে নেই জ্ঞানচর্চা',
+      description:
+        'We support your quest for knowledge with our curated training programs. We’re committed to nurturing expertise.',
+      descriptionBN: `নতুন স্কিল অর্জনের যাত্রায় আমরা আছি আপনার সাথে`,
+    },
+    {
+      title: 'We-Centric Culture',
+      titleBN: 'আমাদের সংস্কৃতি আমরা-কেন্দ্রিক',
+      description:
+        'We foster a culture where "we" is stronger than "I". Thrive with synergy and get the support without limits.',
+      descriptionBN: `আমাদের সংস্কৃতি "আমি" নয় "আমরা"-তে বিশ্বাসী`,
+    },
+    {
+      title: 'We Ignite Journeys',
+      titleBN: 'আমরা প্রজ্জ্বলিত করি যাত্রাপথ',
+      description: 'We build each other up, every day, Let’s ignite possibilities together.',
+      descriptionBN: `আপনার ক্যারিয়ারের পথ উদ্ভাসিত করি সম্ভাবনার আলোয়`,
+    },
+  ]
 
   return (
     <div className="font-avenir">

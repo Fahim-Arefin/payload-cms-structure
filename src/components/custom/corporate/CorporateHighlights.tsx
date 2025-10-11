@@ -46,7 +46,7 @@ const CorporateHighlight: FC<CorporateHighlightProps> = ({
                 <LocalizedText en={`100+`} bn={`১০০+`} />
               </p>
               <p className="mt-2 text-[1.1rem] lg:text-[1.5rem] font-normal">
-                <LocalizedText en={`Claims`} bn={`দাবি`} />
+                <LocalizedText en={`Claims`} bn={`ক্লেইম`} />
               </p>
             </div>
             <div className="text-start">

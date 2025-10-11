@@ -31,7 +31,7 @@ const PurchaseCardSection: FC<PurchaseCardSectionProps> = ({ blur }) => {
     },
     {
       title: 'Shanta Multi-Stage Maturity Plans',
-      titleBN: 'শান্তা মাল্টি-স্টেজ ম্যাচুরিটি প্ল্যান',
+      titleBN: 'শান্তা মাল্টি-স্টেজ ম্যাচিউরিটি প্ল্যান',
       description: `Life happens. We make sure you're ready.`,
       descriptionBN: 'জীবনে যা-ই আসুক, আমরা নিশ্চিত করি আপনি প্রস্তুত।',
       image: '/assets/purchase/purchaseCard33.jpg',

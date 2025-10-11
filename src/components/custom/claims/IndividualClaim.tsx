@@ -7,8 +7,8 @@ const CLAIM_FORM_URL = 'https://portal.shantalife.com/'
 
 // helper: EN → BN digits
 function toBengaliNumber(num: string) {
-  const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯']
-  return num.replace(/\d/g, d => bnDigits[parseInt(d, 10)])
+  const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯']
+  return num.replace(/\d/g, (d) => bnDigits[parseInt(d, 10)])
 }
 
 export function IndividualClaim() {
@@ -32,7 +32,7 @@ export function IndividualClaim() {
         পলিসি গ্রাহক কর্তৃক স্বাক্ষরিত স্বাস্থ্য বীমার
         <a href="${CLAIM_FORM_URL}" target="_blank" rel="noopener noreferrer"
           class="text-[#9C8639] underline underline-offset-2 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#9C8639]/40">
-          ক্লেম ফর্ম
+          ক্লেইম ফর্ম
         </a>
         সঠিকভাবে পূরণ করুন।
       `,
@@ -44,7 +44,7 @@ export function IndividualClaim() {
       `,
       descriptionContentBN: `
         <b>ধাপ ২:</b><br/>
-        ক্লেম ফর্মের সাথে চিকিৎসার সকল কাগজপত্র সংযুক্ত করুন। প্রয়োজনীয় ডকুমেন্টের তালিকা ফর্মের শেষ অংশে উল্লেখ আছে।
+        ক্লেইম ফর্মের সাথে চিকিৎসার সকল কাগজপত্র সংযুক্ত করুন। প্রয়োজনীয় ডকুমেন্টের তালিকা ফর্মের শেষ অংশে উল্লেখ আছে।
       `,
     },
     {
@@ -96,7 +96,7 @@ export function IndividualClaim() {
       </div>
 
       <h4 className="mt-[30px] lg:mt-[50px] xl:mt-[80px] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
-         {lang === 'en' ? (
+        {lang === 'en' ? (
           <>
             For any further queries please contact{' '}
             <a href={`tel:${phone}`} className="text-[#9C8639]">

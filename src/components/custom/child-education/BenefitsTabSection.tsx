@@ -23,7 +23,7 @@ const riders = [
   },
   {
     en: 'Accidental Death (AD)',
-    bn: 'দুর্ঘটনায় মৃত্যুতে মূল পলিসি কাভারেজের দ্বিগুণ সুবিধা (মূল বীমা কভারেজ সহ)',
+    bn: 'দুর্ঘটনায় মৃত্যুতে মূল পলিসি কভারেজের দ্বিগুণ সুবিধা (মূল বীমা কভারেজ সহ)',
   },
 ]
 
@@ -115,14 +115,14 @@ export function BenefitsTabSection() {
               <span className="font-semibold ">
                 <LocalizedText
                   en="Shanta Accidental Coverage: "
-                  bn="শান্তা অ্যাক্সিডেন্টাল কাভারেজ: "
+                  bn="শান্তা অ্যাক্সিডেন্টাল কভারেজ: "
                 />
               </span>{' '}
               <LocalizedText
                 en={`Strengthen your policy with added protection against unforeseen accidents. This rider
               offers financial support across:`}
                 bn={`অপ্রত্যাশিত দুর্ঘটনার শারীরিক ক্ষতি মোকাবেলায় থাকুন অর্থনৈতিকভাবে সুরক্ষিত। দুর্ঘটনায় আর্থিক নিশ্চয়তা প্রদানের 
-                  জন্য শান্তা অ্যাক্সিডেন্টাল কাভারেজ চারটি ভিন্ন বীমা সুবিধা প্রদান করে`}
+                  জন্য শান্তা অ্যাক্সিডেন্টাল কভারেজ চারটি ভিন্ন বীমা সুবিধা প্রদান করে`}
               />
             </p>
             <ul className="flex flex-col gap-2 md:gap-4 justify-center px-4 md:px-8 lg:px-16 xl:px-24">

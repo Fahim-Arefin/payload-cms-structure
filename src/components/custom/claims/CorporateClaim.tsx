@@ -23,7 +23,7 @@ export function CorporateClaim() {
                   text="Submit Claim"
                   size="small"
                 >
-                  <LocalizedString en="Submit Claim" bn="সাবমিট ক্লেম" />
+                  <LocalizedString en="Submit Claim" bn="সাবমিট ক্লেইম" />
                 </GlobalButton>
               </Link>
             </div>
@@ -33,7 +33,7 @@ export function CorporateClaim() {
               <p>
                 <LocalizedText
                   en='Click "Submit Claim" to proceed with your online claim.'
-                  bn='আপনার ক্লেম অনলাইনে প্রসেস করার জন্য "সাবমিট ক্লেম" এ ক্লিক করুন।'
+                  bn='আপনার ক্লেইম অনলাইনে প্রসেস করার জন্য "সাবমিট ক্লেইম" এ ক্লিক করুন।'
                 />
               </p>
               <p>
@@ -49,7 +49,7 @@ export function CorporateClaim() {
               <p>
                 <LocalizedText
                   en="If you have any prior claim submitted, please Login to "
-                  bn="পূর্বে কোন ক্লেম জমা দিয়ে থাকলে, "
+                  bn="পূর্বে কোন ক্লেইম জমা দিয়ে থাকলে, "
                 />
                 <a
                   href={PORTAL_URL}

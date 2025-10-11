@@ -333,6 +333,7 @@ export type AllNewsAndBlogDataType = {
 
 type TabContent = {
   office_location_Label: string
+  office_location_LabelBN: string
   office_location: string
   office_address: string
   office_addressBN?: string

@@ -31,7 +31,7 @@ const cards = [
     title: 'Shanta',
     titleBN: 'শান্তা',
     subtitle: 'Multi Stage Maturity Plans',
-    subtitleBN: 'মাল্টি স্টেজ ম্যাচুরিটি প্ল্যান ',
+    subtitleBN: 'মাল্টি স্টেজ ম্যাচিউরিটি প্ল্যান ',
     description: 'Multiple payouts, 2 powerful plans - because your future is in your hands.',
     descriptionBN: '২টি পাওয়ারফুল প্ল্যান - ধাপে ধাপে অর্থপ্রাপ্তির নিশ্চয়তা।',
     // image: '/assets/homepage/web/multi-stage.jpg',
@@ -100,7 +100,7 @@ function OnYourCueSection() {
       <div className="flex justify-center mt-4 md:mt-6 lg:mt-8 2xl:mt-12 font-avenir">
         <Link href="/plans">
           <GlobalButton variant="primary" className="" text="Lets Find More">
-            <LocalizedString en='Lets Find More' bn='আরো জানুন'/>
+            <LocalizedString en="Lets Find More" bn="আরো জানুন" />
           </GlobalButton>
         </Link>
       </div>

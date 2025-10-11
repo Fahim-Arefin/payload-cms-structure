@@ -59,12 +59,12 @@ function page({}: Props) {
   const tabContent = {
     title: 'Insurance',
     coloredTitle: 'Coverages',
-    titleBN: 'ইন্সুরেন্স',
-    coloredTitleBN: 'কাভারেজ',
+    titleBN: 'ইন্স্যুরেন্স',
+    coloredTitleBN: 'কভারেজ',
     planA: [
       {
         title: 'Life Coverage',
-        titleBN: 'লাইফ কাভারেজ',
+        titleBN: 'লাইফ কভারেজ',
         description: `In the event of the insured spouse’s unexpected demise, this plan provides the insured with 50% or 100% of the 
           coverage amount, depending on the chosen option. Premiums are not refundable in case of the spouse’s 
           survival till maturity.`,
@@ -75,7 +75,7 @@ function page({}: Props) {
     planB: [
       {
         title: 'Life Coverage',
-        titleBN: 'লাইফ কাভারেজ',
+        titleBN: 'লাইফ কভারেজ',
         description: `In the event of the insured spouse’s unexpected demise, 
           this plan provides the insured with 50% or 100% of the coverage amount, 
           depending on the chosen option.`,

@@ -23,7 +23,7 @@ function PlanPage() {
       title: 'Shanta',
       biggerTitle: 'Accidental Coverage',
       titleBN: 'শান্তা',
-      biggerTitleBN: 'অ্যাক্সিডেন্টাল কাভারেজ',
+      biggerTitleBN: 'অ্যাক্সিডেন্টাল কভারেজ',
       description: 'Life’s detours aren’t always in your control — but recovery can be.',
       descriptionBN: 'অনিশ্চিত জীবনের পথে নিয়ন্ত্রণ হোক আপনার হাতে',
       link: '/plans/individual/health-and-protection/accidental-coverage',
@@ -49,7 +49,7 @@ function PlanPage() {
       biggerTitle: 'Waiver of Premium',
       biggerTitleBN: 'ওয়েভার অফ প্রিমিয়াম',
       description: 'Secure future for your loved ones, in any situation.',
-      descriptionBN: `জীবনের অনিশ্চয়তা কাটিয়ে, নিশ্চিত থাকুক আগামী`,
+      descriptionBN: `জীবনের অনিশ্চয়তা কাটিয়ে, নির্ভার থাকুক আগামী`,
       link: '/plans/individual/health-and-protection/waiver-of-premium',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/waiver-of-premium/web/hero-banner.jpg`,
       // mobileImage:

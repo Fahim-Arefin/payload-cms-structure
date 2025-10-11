@@ -12,9 +12,9 @@ function CueHeader() {
         {/* On Your <span className="md:text-[#ED7125]">Terms</span> */}
         <LocalizedHighlighted
           textEn="On Your Terms"
-          textBn="আপনার পছন্দে"
+          textBn="আপনার পছন্দ"
           highlightEn="Terms"
-          highlightBn="পছন্দে"
+          highlightBn="পছন্দ"
           highlightClassName="text-[#ED7125]"
         />
       </h1>
@@ -22,7 +22,7 @@ function CueHeader() {
         <LocalizedText
           en="Advance your ambitions with Life Insurance tailored to you. Enjoy flexible options,
         affordable premiums, and hassle-free claims."
-          bn="সহজ ও স্বল্প প্রিমিয়াম এবং ঝামেলামুক্ত ক্লেম প্রসেস - কন্ট্রোল এখন আপনার হাতে।"
+          bn="সহজ ও স্বল্প প্রিমিয়াম এবং ঝামেলামুক্ত ক্লেইম প্রসেস - কন্ট্রোল এখন আপনার হাতে।"
         />
       </p>
     </div>
