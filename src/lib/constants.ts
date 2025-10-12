@@ -72,6 +72,7 @@ export const ABOUT_US_PAGE_SHANTA_INTRO_BLOCK_LABEL = 'Shanta Intro'
 export const ABOUT_US_PAGE_SHANTA_INTRO_CACHE_KEY = 'shanta-intro-data'
 
 export const ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG = 'shanta-vision'
+export const ABOUT_US_PAGE_SHANTA_VISION_BLOCK_LABEL = 'Shanta Vision'
 export const ABOUT_US_PAGE_SHANTA_VISION_CACHE_KEY = 'shanta-vision-data'
 
 export const ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG = 'values-that-shape-us'

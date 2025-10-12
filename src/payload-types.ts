@@ -844,6 +844,51 @@ export interface Page {
         blockName?: string | null;
         blockType: 'shanta-intro';
       }
+    | {
+        /**
+         * Large background visual for the section. 2.5:1 recommended.
+         */
+        bgImage: string | Media;
+        /**
+         * Primary heading for Vision. Max 14 characters.
+         */
+        visionTitle: string;
+        /**
+         * ভিশনের প্রধান শিরোনাম। সর্বোচ্চ ১৪ অক্ষর।
+         */
+        visionTitleBN: string;
+        /**
+         * Optional. Must appear inside the Vision Title exactly. Max 14 characters.
+         */
+        visionHighlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। ভিশন শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ১৪ অক্ষর।
+         */
+        visionHighlightedTextBN?: string | null;
+        visionDescription: string;
+        visionDescriptionBN: string;
+        /**
+         * Primary heading for Mission. Max 14 characters.
+         */
+        missionTitle: string;
+        /**
+         * মিশনের প্রধান শিরোনাম। সর্বোচ্চ ১৪ অক্ষর।
+         */
+        missionTitleBN: string;
+        /**
+         * Optional. Must appear inside the Mission Title exactly. Max 14 characters.
+         */
+        missionHighlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। মিশন শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ১৪ অক্ষর।
+         */
+        missionHighlightedTextBN?: string | null;
+        missionDescription: string;
+        missionDescriptionBN: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'shanta-vision';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1238,6 +1283,25 @@ export interface PagesSelect<T extends boolean = true> {
               paragraph?: T;
               paragraphBN?: T;
               image?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'shanta-vision'?:
+          | T
+          | {
+              bgImage?: T;
+              visionTitle?: T;
+              visionTitleBN?: T;
+              visionHighlightedText?: T;
+              visionHighlightedTextBN?: T;
+              visionDescription?: T;
+              visionDescriptionBN?: T;
+              missionTitle?: T;
+              missionTitleBN?: T;
+              missionHighlightedText?: T;
+              missionHighlightedTextBN?: T;
+              missionDescription?: T;
+              missionDescriptionBN?: T;
               id?: T;
               blockName?: T;
             };

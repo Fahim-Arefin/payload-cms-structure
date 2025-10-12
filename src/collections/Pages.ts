@@ -105,6 +105,7 @@ import type { CollectionConfig } from 'payload'
 import { revalidateTag } from 'next/cache'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import ShantaIntroSchema from '@/blocks/shantaIntro/schema'
+import ShantaVisionSchema from '@/blocks/shantaVision/schema'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -156,6 +157,7 @@ export const Pages: CollectionConfig = {
         LifeAtShantaSchema,
         // about us page
         ShantaIntroSchema,
+        ShantaVisionSchema,
       ],
     },
   ],
