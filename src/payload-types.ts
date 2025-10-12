@@ -798,6 +798,52 @@ export interface Page {
         blockName?: string | null;
         blockType: 'life-at-shanta';
       }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Short, strong opener. Max 20 characters.
+         */
+        heading: string;
+        /**
+         * সংক্ষিপ্ত, শক্তিশালী সূচনা। সর্বোচ্চ ২০ অক্ষর।
+         */
+        headingBN: string;
+        /**
+         * Secondary line below the heading. Max 35 characters.
+         */
+        subheading: string;
+        /**
+         * শিরোনামের নিচে দ্বিতীয় লাইন। সর্বোচ্চ ৩৫ অক্ষর।
+         */
+        subheadingBN: string;
+        /**
+         * Lead-in title above the paragraph. Max 80 characters.
+         */
+        paragraphTitle: string;
+        /**
+         * অনুচ্ছেদের উপরে লিড-ইন শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        paragraphTitleBN: string;
+        /**
+         * Main descriptive text. Max 400 characters.
+         */
+        paragraph: string;
+        /**
+         * মূল বর্ণনামূলক টেক্সট। সর্বোচ্চ ৪০০ অক্ষর।
+         */
+        paragraphBN: string;
+        /**
+         * Primary visual for the intro section. 2.15:1 recommended.
+         */
+        image: string | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'shanta-intro';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1175,6 +1221,23 @@ export interface PagesSelect<T extends boolean = true> {
                     image?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'shanta-intro'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              heading?: T;
+              headingBN?: T;
+              subheading?: T;
+              subheadingBN?: T;
+              paragraphTitle?: T;
+              paragraphTitleBN?: T;
+              paragraph?: T;
+              paragraphBN?: T;
+              image?: T;
               id?: T;
               blockName?: T;
             };

@@ -316,9 +316,9 @@ export default async function ServerNavbar() {
       items: mapItems(navbarRes?.mobile?.items),
     },
     portal: {
-      label: navbarRes?.portal?.label ?? 'My Portal',
-      labelBN: navbarRes?.portal?.labelBN ?? 'মাই পোর্টাল',
-      href: navbarRes?.portal?.href ?? 'https://portal.shantalife.com/',
+      label: navbarRes?.portal?.label ?? '',
+      labelBN: navbarRes?.portal?.labelBN ?? '',
+      href: navbarRes?.portal?.href ?? '',
     },
   }
 

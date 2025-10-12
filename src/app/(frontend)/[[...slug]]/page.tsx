@@ -368,6 +368,7 @@ import LifeInsuranceVideoBlock from '@/blocks/lifeInsuranceVideo/LifeInsuranceVi
 import PremiumCalculatorBlock from '@/blocks/premiumCalculator/PremiumCalculatorBlock'
 import WhyChooseUsBlock from '@/blocks/whyChooseUs/WhyChooseUsBlock'
 import {
+  ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -383,6 +384,7 @@ import { getPayload } from 'payload'
 import { unstable_cache as unstableCache } from 'next/cache'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { logCacheMiss } from '@/lib/cacheDebug'
+import ShantaIntroBlock from '@/blocks/shantaIntro/ShantaIntroBlock'
 
 type PageParams = { slug?: string[] }
 type PageProps = { params: Promise<PageParams> } // Next 15: params may be a Promise
@@ -459,6 +461,7 @@ function matchPattern(path: string, pattern: string) {
 // --- block renderer ----------------------------------------------------------
 const renderBlock = (block: PayloadPage['layout'][0], params: Record<string, string>) => {
   switch (block.blockType) {
+    // home page
     case HOME_PAGE_HERO_SLUG_AND_TAG:
       return <HeroBlock key={block.id} block={block} params={params} />
     case HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG:
@@ -473,6 +476,9 @@ const renderBlock = (block: PayloadPage['layout'][0], params: Record<string, str
       return <LifeInsuranceVideoBlock key={block.id} block={block} params={params} />
     case HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG:
       return <LifeAtShantaBlock key={block.id} block={block} params={params} />
+    // about us page
+    case ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG:
+      return <ShantaIntroBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

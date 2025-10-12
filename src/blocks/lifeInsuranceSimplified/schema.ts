@@ -375,9 +375,12 @@
 
 // block
 // src/payload/blocks/LifeInsuranceSimplified.ts
-import type { Block } from 'payload'
+import {
+  HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG,
+  HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_LABEL,
+} from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
-import { HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG } from '@/lib/constants'
+import type { Block } from 'payload'
 
 /* =========================
    MAX CONSTANTS (top)
@@ -455,8 +458,8 @@ const validateExactlyNItems = (labelPlural: string, n: number) => (val: unknown)
 const LifeInsuranceSimplifiedSchema: Block = {
   slug: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG,
   labels: {
-    singular: 'Life Insurance Simplified',
-    plural: 'Life Insurance Simplified',
+    singular: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_LABEL,
+    plural: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_LABEL,
   },
   fields: [
     // Appearance
