@@ -889,6 +889,65 @@ export interface Page {
         blockName?: string | null;
         blockType: 'shanta-vision';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Base title (e.g., “Values That”). Max 40 characters.
+         */
+        title: string;
+        /**
+         * মূল শিরোনাম (যেমন, “আমাদের মূল্যবোধ”). সর্বোচ্চ ৪০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Highlighted tail of the heading (e.g., “Shape Us”). Must appear inside Title exactly. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * শিরোনামের রঙিন অংশ (যেমন, “আমাদের পরিচয়”). এটি অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Large background image for the section. 2:3 recommended.
+         */
+        image: string | Media;
+        /**
+         * Add value items with icon + hover icon, a short title, and a brief description.
+         */
+        values: {
+          /**
+           * Icon shown normally. (give colored version and transparent bg image) (ratio 1:1)
+           */
+          image: string | Media;
+          /**
+           * Icon shown on hover. (give white version and transparent bg image) (ratio 1:1)
+           */
+          hoverImage: string | Media;
+          /**
+           * Short card title (e.g., “Trust”). Max 30 characters.
+           */
+          title: string;
+          /**
+           * সংক্ষিপ্ত কার্ড শিরোনাম (যেমন, “বিশ্বাস”). সর্বোচ্চ ৩০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Brief one-liner or two-liner. Max 150 characters.
+           */
+          description: string;
+          /**
+           * সংক্ষিপ্ত এক/দুই লাইনের বিবরণ। সর্বোচ্চ ১৫০ অক্ষর।
+           */
+          descriptionBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'values-that-shape-us';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1302,6 +1361,29 @@ export interface PagesSelect<T extends boolean = true> {
               missionHighlightedTextBN?: T;
               missionDescription?: T;
               missionDescriptionBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'values-that-shape-us'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              image?: T;
+              values?:
+                | T
+                | {
+                    image?: T;
+                    hoverImage?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

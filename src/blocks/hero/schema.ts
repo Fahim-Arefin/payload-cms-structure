@@ -18,6 +18,10 @@ const HeroSchema: Block = {
     plural: HOME_PAGE_HERO_BLOCK_LABEL,
   },
 
+  // 👇 This is the important bit
+  imageURL: '/assets/block-icons/hero-block-thumbnail.png',
+  imageAltText: 'Hero block preview',
+
   fields: [
     // 🔐 Hidden per-doc session id for temp upload lifecycle (used by the cropper + hooks)
     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false } },

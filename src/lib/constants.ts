@@ -76,6 +76,7 @@ export const ABOUT_US_PAGE_SHANTA_VISION_BLOCK_LABEL = 'Shanta Vision'
 export const ABOUT_US_PAGE_SHANTA_VISION_CACHE_KEY = 'shanta-vision-data'
 
 export const ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG = 'values-that-shape-us'
+export const ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_LABEL = 'Values That Shape Us'
 export const ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_CACHE_KEY = 'values-that-shape-us-data'
 
 export const ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG = 'licensed-launched'

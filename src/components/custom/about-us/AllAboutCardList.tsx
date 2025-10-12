@@ -1,21 +1,14 @@
 'use client'
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import { sliderDelay } from '@/lib/data'
 import Autoplay from 'embla-carousel-autoplay'
-import AllAboutCard from './AllAboutCard'
-import { AllAboutCardDataType } from '@/types'
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
-import { sliderDelay } from '@/lib/data'
+import AllAboutCard from './AllAboutCard'
+import { ValuesThatShapeUsBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
-  allAboutData: AllAboutCardDataType[]
+  allAboutData: ValuesThatShapeUsBlockType['values']
 }
 
 function AllAboutCardList({ allAboutData }: Props) {

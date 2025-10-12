@@ -1,10 +1,9 @@
-import { AllAboutCardDataType } from '@/types'
 import Image from 'next/image'
-import React from 'react'
 import LocalizedText from '../shared/LocalizedText'
+import { ValuesThatShapeUsBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
-  data: AllAboutCardDataType
+  data: ValuesThatShapeUsBlockType['values'][0]
   index: number
 }
 
@@ -30,32 +29,42 @@ function AllAboutCard({ data, index }: Props) {
     relative group"
         >
           {/* Main image (shown by default, fades out on hover) */}
-          <Image
-            fill
-            src={data?.image}
-            alt={data?.title}
-            className="inset-0 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 z-10"
-          />
+          {typeof data?.image === 'object' && data?.image?.url && (
+            <Image
+              fill
+              src={data?.image?.url}
+              alt={data?.title}
+              className="inset-0 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 z-10"
+              // placeholder="blur"
+              // blurDataURL={data?.imageBlurDataURL || ''}
+              sizes="100vw"
+              quality={90}
+            />
+          )}
           {/* Hover image (hidden by default, fades in on hover) */}
-          <Image
-            fill
-            src={data?.hoverImage}
-            alt={data?.title}
-            className="inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
-          />
+          {typeof data?.hoverImage === 'object' && data?.hoverImage?.url && (
+            <Image
+              fill
+              src={data?.hoverImage?.url}
+              alt={data?.title}
+              className="inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
+              // placeholder="blur"
+              // blurDataURL={data?.hoverImageBlurDataURL || ''}
+              sizes="100vw"
+              quality={90}
+            />
+          )}
         </div>
         <div className="global-p1 text-center font-semibold lg:font-medium uppercase px-1 ">
-          
-          <LocalizedText en={data?.title} bn={data?.titleBN}/>
+          {/* {data?.title} */}
+          <LocalizedText en={data?.title} bn={data?.titleBN} />
         </div>
         <div
           className="global-p2
           font-light mx-auto text-center
          max-w-[96%] md:max-w-[90%] xl:max-w-[80%] 2xl:max-w-[70%] "
-          // dangerouslySetInnerHTML={data?.description}
         >
-          {/* {typeof data?.description == 'string' ? data?.description : null} */}
-          <LocalizedText en={data?.description?.__html} bn={data?.description?.__htmlBN}/>
+          <LocalizedText en={data?.description} bn={data?.descriptionBN} />
         </div>
       </div>
     </div>

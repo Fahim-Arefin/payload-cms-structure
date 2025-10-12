@@ -106,6 +106,7 @@ import { revalidateTag } from 'next/cache'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import ShantaIntroSchema from '@/blocks/shantaIntro/schema'
 import ShantaVisionSchema from '@/blocks/shantaVision/schema'
+import ValuesThatShapeUsSchema from '@/blocks/valuesThatShapeUs/schema'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -158,6 +159,7 @@ export const Pages: CollectionConfig = {
         // about us page
         ShantaIntroSchema,
         ShantaVisionSchema,
+        ValuesThatShapeUsSchema,
       ],
     },
   ],
