@@ -978,7 +978,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           <p className="text-[9px] lg:text-[10px] py-2 absolute inset-x-0">
             <LocalizedText en={`Suggested`} bn={`সাজেসটেড`} />{' '}
             <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span>{' '}
-            <LocalizedText en={`BDT`} bn={`বিডিটি`} />
+            <LocalizedText en={`BDT`} bn={`টাকা`} />
           </p>
         )}
       </div>
@@ -1156,29 +1156,29 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           />
 
           <span className="text-xs md:text-sm leading-relaxed">
-            <LocalizedText en="By clicking " bn="ক্লিক করলে " />
+            <LocalizedText en="By clicking " bn="বাটনে ক্লিক করলে " />
             <span className="font-semibold">
-              <LocalizedText en="Get a Quote Now" bn="এখনই কোট পান" />
+              <LocalizedText en="Get a Quote Now" bn="আপনি আমাদের " />
             </span>
-            <LocalizedText en=", you agree to our " bn=", আপনি সম্মত হচ্ছেন আমাদের " />
+            <LocalizedText en=", you agree to our " bn="" />
             <Link
               href="/terms-condition"
               className="underline text-[#FF6600] hover:opacity-90"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <LocalizedText en="terms and conditions" bn="শর্তাবলী" />
+              <LocalizedText en="terms and conditions" bn="শর্তাবলি " />
             </Link>{' '}
-            <LocalizedText en="and " bn="এবং " />
+            <LocalizedText en="and " bn=", এবং " />
             <Link
               href="/privacy-policy"
               className="underline text-[#FF6600] hover:opacity-90"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <LocalizedText en="privacy policy" bn="গোপনীয়তা নীতি" />
+              <LocalizedText en="privacy policy" bn="গোপনীয়তা নীতিতে " />
             </Link>
-            <LocalizedText en="." bn="।" />
+            <LocalizedText en="." bn="সম্মতি দিচ্ছেন।" />
           </span>
         </label>
 
