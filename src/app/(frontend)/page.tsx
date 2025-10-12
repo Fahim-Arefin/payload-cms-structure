@@ -109,7 +109,7 @@ export default async function HomePage() {
       title: 'demystify Life Insurance',
       titleBN: 'জীবন বীমার খুঁটিনাটি',
       subtitle: 'Detangle the basics of Life Insurance.',
-      subtitleBN: 'সহজ ভাষায় জীবন বীমা',
+      subtitleBN: 'সহজ ভাষায় জীবন বীমা।',
       // mainImage: '/assets/homepage/web/thumbnails/yt-thumbnail-2.jpg',
       mainImage: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/thumbnails/yt-thumbnail-2.jpg`,
       // mainMobileImage: '/assets/homepage/mobile/thumbnails/yt-thumbnail-2.jpg',
