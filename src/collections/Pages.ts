@@ -107,6 +107,7 @@ import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import ShantaIntroSchema from '@/blocks/shantaIntro/schema'
 import ShantaVisionSchema from '@/blocks/shantaVision/schema'
 import ValuesThatShapeUsSchema from '@/blocks/valuesThatShapeUs/schema'
+import LicensedLaunchedSchema from '@/blocks/LicensedAndLaunched/schema'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -160,6 +161,7 @@ export const Pages: CollectionConfig = {
         ShantaIntroSchema,
         ShantaVisionSchema,
         ValuesThatShapeUsSchema,
+        LicensedLaunchedSchema,
       ],
     },
   ],

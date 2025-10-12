@@ -948,6 +948,51 @@ export interface Page {
         blockName?: string | null;
         blockType: 'values-that-shape-us';
       }
+    | {
+        /**
+         * Small square icon (1:1).
+         */
+        licensedImage: string | Media;
+        /**
+         * Short label under the licensed icon (e.g., "Licensed"). Max 15 characters.
+         */
+        licensedLabel: string;
+        /**
+         * লাইসেন্স আইকনের নিচের লেবেল (যেমন, “লাইসেন্সপ্রাপ্ত”). সর্বোচ্চ ১৫ অক্ষর।
+         */
+        licensedLabelBN: string;
+        /**
+         * Free-form date label (e.g., "November 7, 2023"). Max 20 characters.
+         */
+        licensedDate: string;
+        /**
+         * বাংলা তারিখ লেবেল (উদাহরণ: “৭ নভেম্বর, ২০২৩”). সর্বোচ্চ ২০ অক্ষর।
+         */
+        licensedDateBN: string;
+        /**
+         * Small square icon (1:1).
+         */
+        launchedImage: string | Media;
+        /**
+         * Short label under the launched icon (e.g., "Launched"). Max 15 characters.
+         */
+        launchedLabel: string;
+        /**
+         * লঞ্চ আইকনের নিচের লেবেল (যেমন, “লঞ্চ”). সর্বোচ্চ ১৫ অক্ষর।
+         */
+        launchedLabelBN: string;
+        /**
+         * Free-form date label (e.g., "December 1, 2024"). Max 20 characters.
+         */
+        launchedDate: string;
+        /**
+         * বাংলা তারিখ লেবেল (উদাহরণ: “১ ডিসেম্বর, ২০২৪”). সর্বোচ্চ ২০ অক্ষর।
+         */
+        launchedDateBN: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'licensed-launched';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1384,6 +1429,22 @@ export interface PagesSelect<T extends boolean = true> {
                     descriptionBN?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'licensed-launched'?:
+          | T
+          | {
+              licensedImage?: T;
+              licensedLabel?: T;
+              licensedLabelBN?: T;
+              licensedDate?: T;
+              licensedDateBN?: T;
+              launchedImage?: T;
+              launchedLabel?: T;
+              launchedLabelBN?: T;
+              launchedDate?: T;
+              launchedDateBN?: T;
               id?: T;
               blockName?: T;
             };

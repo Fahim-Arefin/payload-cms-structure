@@ -9,6 +9,7 @@ import WhyChooseUsBlock from '@/blocks/whyChooseUs/WhyChooseUsBlock'
 import ShantaIntroBlock from '@/blocks/shantaIntro/ShantaIntroBlock'
 
 import {
+  ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG,
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
@@ -24,6 +25,7 @@ import {
 import type { Page as PayloadPage } from '@/payload-types'
 import ShantaVisionBlock from './shantaVision/ShantaVisionBlock'
 import ValuesThatShapeUsBlock from './valuesThatShapeUs/ValuesThatShapeUsBlock'
+import LicensedAndLaunchedBlock from './LicensedAndLaunched/LicensedAndLaunchedBlock'
 
 type Params = Record<string, string>
 
@@ -52,7 +54,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <ShantaVisionBlock key={block.id} block={block} params={params} />
     case ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG:
       return <ValuesThatShapeUsBlock key={block.id} block={block} params={params} />
-
+    case ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG:
+      return <LicensedAndLaunchedBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

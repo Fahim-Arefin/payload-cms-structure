@@ -80,6 +80,7 @@ export const ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_LABEL = 'Values That Shape
 export const ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_CACHE_KEY = 'values-that-shape-us-data'
 
 export const ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG = 'licensed-launched'
+export const ABOUT_US_PAGE_LICENSED_LAUNCHED_BLOCK_LABEL = 'Licensed & Launched'
 export const ABOUT_US_PAGE_LICENSED_LAUNCHED_CACHE_KEY = 'licensed-launched-data'
 
 export const ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG = 'directors-message'

@@ -1,4 +1,5 @@
 import {
+  ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG,
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
@@ -60,4 +61,9 @@ export type ShantaVisionBlockType = Extract<
 export type ValuesThatShapeUsBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG }
+>
+
+export type LicensedAndLaunchedBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG }
 >
