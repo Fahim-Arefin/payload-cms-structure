@@ -365,6 +365,9 @@ import { useEffect, useState } from 'react'
 import { RiArrowDownSLine } from 'react-icons/ri'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
 import LocalizedText from '../LocalizedText'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { useLanguage } from '@/context/LanguageContext'
+import useMounted from '@/hooks/useMounted'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -373,6 +376,9 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0)
   const [windowWidth, setWindowWidth] = useState<number>(0)
   const [mobileDropdowns, setMobileDropdowns] = useState<Record<string, boolean>>({})
+    const { language, setLanguage } = useLanguage()
+  const mounted = useMounted()
+  const uiLang = mounted ? language : 'en'
 
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout
@@ -683,6 +689,10 @@ export default function Navbar() {
         className={`fixed top-0 right-0 h-full w-[60%] bg-white/60 backdrop-blur-[16.67px] z-[999] shadow-lg transform transition-transform duration-300 ease-in-out
   ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
+                {/* ⬇️ BN/EN toggle (same style as TopHeader) */}
+          
+            
+         
         <div className="flex justify-between items-center px-4 py-4 border-b">
           {/* <img src="/assets/logo/mainlogo_2.png" alt="logo" className="h-[40px]" /> */}
           <Image
@@ -697,6 +707,35 @@ export default function Navbar() {
             <RxCross2 />
           </button>
         </div>
+        <div className="flex items-center bg-[rgba(217,217,217,1)] mt-2 rounded-full h-[30px] w-[100px] px-2 justify-end">
+              <ToggleGroup
+                type="single"
+                value={uiLang}
+                onValueChange={(val) => (val === 'en' || val === 'bn') && setLanguage(val)}
+                className="text-[#535353] text-[14px]"
+              >
+                <ToggleGroupItem
+                  value="bn"
+                  aria-label="Toggle Bangla"
+                  className="h-[24px] w-[41px] rounded-[17px]
+              hover:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:text-[rgba(237,113,37,1)]"
+                >
+                  BN
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  value="en"
+                  aria-label="Toggle English"
+                  className="h-[24px] w-[41px] rounded-[17px]
+              hover:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:text-[rgba(237,113,37,1)]"
+                >
+                  EN
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </div>
         <ul className="flex flex-col space-y-1 px-4 text-[#1E1E1E]">
           {NAV_ITEMS_MOBILE.map((item, index) => {
             const hasChildren = item.children && item.children.length > 0
