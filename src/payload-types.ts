@@ -993,6 +993,93 @@ export interface Page {
         blockName?: string | null;
         blockType: 'licensed-launched';
       }
+    | {
+        /**
+         * Add one card per leader (portrait + EN/BN name, designation, title, subtitle, and rich description).
+         */
+        cards: {
+          /**
+           * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+           */
+          backgroundColor?: string | null;
+          /**
+           * Leader portrait (8:9 recommended). Will be optimized and a blur placeholder generated.
+           */
+          image: string | Media;
+          /**
+           * Leader’s name (English). Max 40 characters.
+           */
+          name: string;
+          /**
+           * নেতৃত্বের নাম (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
+           */
+          nameBN: string;
+          /**
+           * Official designation (English). Max 40 characters.
+           */
+          designation: string;
+          /**
+           * আনুষ্ঠানিক পদবি (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
+           */
+          designationBN: string;
+          /**
+           * Short message header (English). Max 100 characters.
+           */
+          title: string;
+          /**
+           * সংক্ষিপ্ত বার্তার শিরোনাম (বাংলা)। সর্বোচ্চ ১০০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Support line under the title (English). Max 100 characters.
+           */
+          subtitle: string;
+          /**
+           * শিরোনামের সহায়ক লাইন (বাংলা)। সর্বোচ্চ ১০০ অক্ষর।
+           */
+          subtitleBN: string;
+          /**
+           * Up to 1500 characters.
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * সর্বোচ্চ ~১৫০০ অক্ষর।
+           */
+          descriptionBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'directors-message';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1445,6 +1532,29 @@ export interface PagesSelect<T extends boolean = true> {
               launchedLabelBN?: T;
               launchedDate?: T;
               launchedDateBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'directors-message'?:
+          | T
+          | {
+              cards?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    image?: T;
+                    name?: T;
+                    nameBN?: T;
+                    designation?: T;
+                    designationBN?: T;
+                    title?: T;
+                    titleBN?: T;
+                    subtitle?: T;
+                    subtitleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

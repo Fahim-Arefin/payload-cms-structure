@@ -1,4 +1,5 @@
 import {
+  ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG,
   ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG,
@@ -66,4 +67,9 @@ export type ValuesThatShapeUsBlockType = Extract<
 export type LicensedAndLaunchedBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG }
+>
+
+export type DirectorMessagesBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG }
 >
