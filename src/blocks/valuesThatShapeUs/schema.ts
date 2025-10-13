@@ -280,7 +280,7 @@ import {
 /* ---------------- limits ---------------- */
 const COLOR_HEX_LEN = 7
 const TITLE_MAX = 40
-const CARD_TITLE_MAX = 30
+const CARD_TITLE_MAX = 40
 const DESC_MAX = 150
 
 /* ---------------- validators ---------------- */

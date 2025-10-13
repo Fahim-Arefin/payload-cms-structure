@@ -6,6 +6,7 @@ import {
   ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG,
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
+  AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -84,4 +85,11 @@ export type ShantaMilestoneUnlockedBlockType = Extract<
 export type ShantaFootprintBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG }
+>
+
+// agent onboarding
+
+export type AgentVisionBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG }
 >

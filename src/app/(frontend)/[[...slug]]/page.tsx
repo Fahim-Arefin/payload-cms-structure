@@ -360,32 +360,14 @@
 
 // version 03 (refactored caching, added cache tags)
 // app/(frontend)/[[...slug]]/page.tsx
-import FeaturedPlanBlock from '@/blocks/featuredPlan/FeaturedPlanBlock'
-import HeroBlock from '@/blocks/hero/HeroBlock'
-import LifeAtShantaBlock from '@/blocks/lifeAtShanta/LifeAtShantaBlock'
-import LifeInsuranceSimplifiedBlock from '@/blocks/lifeInsuranceSimplified/LifeInsuranceSimplifiedBlock'
-import LifeInsuranceVideoBlock from '@/blocks/lifeInsuranceVideo/LifeInsuranceVideoBlock'
-import PremiumCalculatorBlock from '@/blocks/premiumCalculator/PremiumCalculatorBlock'
-import WhyChooseUsBlock from '@/blocks/whyChooseUs/WhyChooseUsBlock'
-import {
-  ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG,
-  HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
-  HOME_PAGE_HERO_SLUG_AND_TAG,
-  HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
-  HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG,
-  HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
-  HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
-  HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
-} from '@/lib/constants'
+import RenderBlocks from '@/blocks/RenderBlock'
+import { logCacheMiss } from '@/lib/cacheDebug'
+import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import type { Page as PayloadPage } from '@/payload-types'
 import config from '@/payload.config'
+import { unstable_cache as unstableCache } from 'next/cache'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
-import { unstable_cache as unstableCache } from 'next/cache'
-import { pageTag, pagesListTag } from '@/lib/cacheTags'
-import { logCacheMiss } from '@/lib/cacheDebug'
-import ShantaIntroBlock from '@/blocks/shantaIntro/ShantaIntroBlock'
-import RenderBlocks from '@/blocks/RenderBlock'
 
 type PageParams = { slug?: string[] }
 type PageProps = { params: Promise<PageParams> } // Next 15: params may be a Promise

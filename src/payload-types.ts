@@ -934,11 +934,11 @@ export interface Page {
            */
           hoverImage: string | Media;
           /**
-           * Short card title (e.g., “Trust”). Max 30 characters.
+           * Short card title (e.g., “Trust”). Max 40 characters.
            */
           title: string;
           /**
-           * সংক্ষিপ্ত কার্ড শিরোনাম (যেমন, “বিশ্বাস”). সর্বোচ্চ ৩০ অক্ষর।
+           * সংক্ষিপ্ত কার্ড শিরোনাম (যেমন, “বিশ্বাস”). সর্বোচ্চ ৪০ অক্ষর।
            */
           titleBN: string;
           /**
@@ -1236,6 +1236,85 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'shanta-footprint';
+      }
+    | {
+        /**
+         * Large section background visual. 16:9 recommended.
+         */
+        backgroundImage: string | Media;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim in Title. Max 80 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Add up to two cards. Each card has an icon, title (EN/BN), and a rich description (EN/BN).
+         */
+        items: {
+          /**
+           * Square icon (1:1). PNG with transparent background preferred.
+           */
+          icon: string | Media;
+          /**
+           * Short headline. Max 60 characters.
+           */
+          title: string;
+          /**
+           * সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Rich text (about 1–3 short paragraphs). Up to ~300 characters.
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * রিচ টেক্সট (১–৩টি সংক্ষিপ্ত অনুচ্ছেদ)। সর্বোচ্চ প্রায় ৩০০ অক্ষর।
+           */
+          descriptionBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'agent-vision';
       }
   )[];
   updatedAt: string;
@@ -1766,6 +1845,27 @@ export interface PagesSelect<T extends boolean = true> {
                     highlightedText?: T;
                     highlightedTextBN?: T;
                     link?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'agent-vision'?:
+          | T
+          | {
+              backgroundImage?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              items?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    titleBN?: T;
                     description?: T;
                     descriptionBN?: T;
                     id?: T;

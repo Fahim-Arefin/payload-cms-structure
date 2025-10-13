@@ -16,6 +16,7 @@ import {
   ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG,
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
+  AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -32,6 +33,7 @@ import LicensedAndLaunchedBlock from './LicensedAndLaunched/LicensedAndLaunchedB
 import DirectorMessageBlock from './directorsMessage/DirectorMessageBlock'
 import ShantaMilestoneUnlockedBlock from './shantaMilestoneUnlocked/ShantaMilestoneUnlockedBlock'
 import ShantaFootPrintBlock from './shantaFootprint/ShantaFootPrintBlock'
+import AgentVisionBlock from './agentVision/AgentVisionBlock'
 
 type Params = Record<string, string>
 
@@ -68,6 +70,11 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <ShantaMilestoneUnlockedBlock key={block.id} block={block} params={params} />
     case ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG:
       return <ShantaFootPrintBlock key={block.id} block={block} params={params} />
+
+    // agent onboaring page
+    case AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG:
+      return <AgentVisionBlock key={block.id} block={block} params={params} />
+
     default:
       return null
   }
