@@ -225,7 +225,10 @@
 // ==================================================================================
 
 // src/blocks/premiumCalculator/schema.ts
-import { HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_LABEL,
+  HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 
@@ -278,8 +281,8 @@ const validateHighlightedInTitleBN = (val: unknown, { siblingData }: any) => {
 const PremiumCalculatorSchema: Block = {
   slug: HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG, // e.g., 'premium-calculator' as const
   labels: {
-    singular: 'Premium Calculator',
-    plural: 'Premium Calculator',
+    singular: HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_LABEL,
+    plural: HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_LABEL,
   },
   fields: [
     // Appearance

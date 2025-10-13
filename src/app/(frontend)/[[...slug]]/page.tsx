@@ -368,6 +368,7 @@ import LifeInsuranceVideoBlock from '@/blocks/lifeInsuranceVideo/LifeInsuranceVi
 import PremiumCalculatorBlock from '@/blocks/premiumCalculator/PremiumCalculatorBlock'
 import WhyChooseUsBlock from '@/blocks/whyChooseUs/WhyChooseUsBlock'
 import {
+  ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -383,6 +384,8 @@ import { getPayload } from 'payload'
 import { unstable_cache as unstableCache } from 'next/cache'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { logCacheMiss } from '@/lib/cacheDebug'
+import ShantaIntroBlock from '@/blocks/shantaIntro/ShantaIntroBlock'
+import RenderBlocks from '@/blocks/RenderBlock'
 
 type PageParams = { slug?: string[] }
 type PageProps = { params: Promise<PageParams> } // Next 15: params may be a Promise
@@ -457,26 +460,30 @@ function matchPattern(path: string, pattern: string) {
 }
 
 // --- block renderer ----------------------------------------------------------
-const renderBlock = (block: PayloadPage['layout'][0], params: Record<string, string>) => {
-  switch (block.blockType) {
-    case HOME_PAGE_HERO_SLUG_AND_TAG:
-      return <HeroBlock key={block.id} block={block} params={params} />
-    case HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG:
-      return <WhyChooseUsBlock key={block.id} block={block} params={params} />
-    case HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG:
-      return <FeaturedPlanBlock key={block.id} block={block} params={params} />
-    case HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG:
-      return <PremiumCalculatorBlock key={block.id} block={block} params={params} />
-    case HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG:
-      return <LifeInsuranceSimplifiedBlock key={block.id} block={block} params={params} />
-    case HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG:
-      return <LifeInsuranceVideoBlock key={block.id} block={block} params={params} />
-    case HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG:
-      return <LifeAtShantaBlock key={block.id} block={block} params={params} />
-    default:
-      return null
-  }
-}
+// const renderBlock = (block: PayloadPage['layout'][0], params: Record<string, string>) => {
+//   switch (block.blockType) {
+//     // home page
+//     case HOME_PAGE_HERO_SLUG_AND_TAG:
+//       return <HeroBlock key={block.id} block={block} params={params} />
+//     case HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG:
+//       return <WhyChooseUsBlock key={block.id} block={block} params={params} />
+//     case HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG:
+//       return <FeaturedPlanBlock key={block.id} block={block} params={params} />
+//     case HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG:
+//       return <PremiumCalculatorBlock key={block.id} block={block} params={params} />
+//     case HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG:
+//       return <LifeInsuranceSimplifiedBlock key={block.id} block={block} params={params} />
+//     case HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG:
+//       return <LifeInsuranceVideoBlock key={block.id} block={block} params={params} />
+//     case HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG:
+//       return <LifeAtShantaBlock key={block.id} block={block} params={params} />
+//     // about us page
+//     case ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG:
+//       return <ShantaIntroBlock key={block.id} block={block} params={params} />
+//     default:
+//       return null
+//   }
+// }
 
 // Force static + tag invalidation model (pure tag-based freshness)
 export const dynamic = 'force-static'
@@ -490,7 +497,13 @@ export default async function CatchAll(props: PageProps) {
   // 1) try exact
   const exact = await getPageBySlugCached(path)
   if (!exact) notFound()
-  if (exact?.publish !== false) return <div>{exact?.layout?.map((b) => renderBlock(b, {}))}</div>
+  // if (exact?.publish !== false) return <div>{exact?.layout?.map((b) => renderBlock(b, {}))}</div>
+  if (exact?.publish !== false)
+    return (
+      <div>
+        <RenderBlocks layout={exact.layout} params={{}} />
+      </div>
+    )
   if (exact && exact.publish === false) return notFound()
 
   // 2) try pattern pages (sorted by specificity)
@@ -507,7 +520,15 @@ export default async function CatchAll(props: PageProps) {
     const concrete = await getPageBySlugCached(page.slug)
     const canShow = (concrete ?? page)?.publish !== false
     if (!canShow) break
-    return <div>{(concrete?.layout ?? page.layout)?.map((b: any) => renderBlock(b, params))}</div>
+    // return <div>{(concrete?.layout ?? page.layout)?.map((b: any) => renderBlock(b, params))}</div>
+    return (
+      <div>
+        <RenderBlocks
+          layout={(concrete?.layout ?? page.layout) as PayloadPage['layout']}
+          params={params}
+        />
+      </div>
+    )
   }
 
   notFound()

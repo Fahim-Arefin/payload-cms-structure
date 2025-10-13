@@ -348,7 +348,10 @@
 // =========================================================================
 
 // block
-import { HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  HOME_PAGE_FEATURED_PLANS_BLOCK_LABEL,
+  HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 
@@ -450,8 +453,8 @@ const validateCTAButtonLink = (val: unknown, { siblingData }: any) => {
 const FeaturedPlansSchema: Block = {
   slug: HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG, // e.g., 'featured-plans' (ensure this constant is that literal)
   labels: {
-    singular: 'Featured Plans',
-    plural: 'Featured Plans',
+    singular: HOME_PAGE_FEATURED_PLANS_BLOCK_LABEL,
+    plural: HOME_PAGE_FEATURED_PLANS_BLOCK_LABEL,
   },
   fields: [
     // Appearance

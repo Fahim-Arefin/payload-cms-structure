@@ -569,9 +569,9 @@ export default function Navbar({ data, header }: Props) {
   const logoUrl =
     data.branding.logo?.url ?? `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN || ''}/mainlogo_2.png`
 
-  const portalHref = data.portal?.href || 'https://portal.shantalife.com/'
-  const portalLabel = data.portal?.label || 'My Portal'
-  const portalLabelBN = data.portal?.labelBN || 'মাই পোর্টাল'
+  const portalHref = data.portal?.href || ''
+  const portalLabel = data.portal?.label || ''
+  const portalLabelBN = data.portal?.labelBN || ''
 
   return (
     <>
@@ -652,41 +652,43 @@ export default function Navbar({ data, header }: Props) {
         </ul>
 
         {/* Desktop Right / Portal */}
-        <div className="hidden lg:flex text-[#1F1F1F]">
-          <Link
-            href={portalHref}
-            target={portalHref.startsWith('http') ? '_blank' : '_self'}
-            rel="noopener noreferrer"
-            className="flex flex-col justify-center items-center"
-            aria-label="Open portal"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="21"
-              height="21"
-              viewBox="0 0 21 21"
-              fill="none"
-              className="cursor-pointer flex mx-auto"
+        {portalHref && portalLabel && (
+          <div className="hidden lg:flex text-[#1F1F1F]">
+            <Link
+              href={portalHref}
+              target={portalHref.startsWith('http') ? '_blank' : '_self'}
+              rel="noopener noreferrer"
+              className="flex flex-col justify-center items-center"
+              aria-label="Open portal"
             >
-              <path
-                d="M12 15C15.3137 15 18 12.3137 18 9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9C6 12.3137 8.68629 15 12 15Z"
-                stroke="#061C3D"
-                strokeWidth="1.5"
-                strokeMiterlimit="10"
-              />
-              <path
-                d="M2.90527 20.2491C3.82736 18.6531 5.15322 17.3278 6.74966 16.4064C8.34611 15.485 10.1569 15 12.0002 15C13.8434 15 15.6542 15.4851 17.2506 16.4065C18.8471 17.3279 20.1729 18.6533 21.0949 20.2493"
-                stroke="#061C3D"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <div className="text-center lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#1E1E1E]">
-              <LocalizedText en={portalLabel} bn={portalLabelBN} />
-            </div>
-          </Link>
-        </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="21"
+                height="21"
+                viewBox="0 0 21 21"
+                fill="none"
+                className="cursor-pointer flex mx-auto"
+              >
+                <path
+                  d="M12 15C15.3137 15 18 12.3137 18 9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9C6 12.3137 8.68629 15 12 15Z"
+                  stroke="#061C3D"
+                  strokeWidth="1.5"
+                  strokeMiterlimit="10"
+                />
+                <path
+                  d="M2.90527 20.2491C3.82736 18.6531 5.15322 17.3278 6.74966 16.4064C8.34611 15.485 10.1569 15 12.0002 15C13.8434 15 15.6542 15.4851 17.2506 16.4065C18.8471 17.3279 20.1729 18.6533 21.0949 20.2493"
+                  stroke="#061C3D"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <div className="text-center lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#1E1E1E]">
+                <LocalizedText en={portalLabel} bn={portalLabelBN} />
+              </div>
+            </Link>
+          </div>
+        )}
       </nav>
 
       {/* Mobile Slide-In */}

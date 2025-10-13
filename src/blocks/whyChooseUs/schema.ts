@@ -398,7 +398,10 @@
 // ==========================================================================
 
 // block
-import { HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  HOME_PAGE_WHY_CHOOSE_US_BLOCK_LABEL,
+  HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 
@@ -467,7 +470,7 @@ const SUB_TITLE_MAX = 120
 const HIGHLIGHTED_TEXT_MAX = 40
 const DESCRIPTION_MAX = 300
 const STAT_LABEL_MAX = 32
-const STAT_VALUE_MAX = 16
+const STAT_VALUE_MAX = 20
 const CTA_BUTTON_TEXT_MAX = 24
 const CTA_BUTTON_LINK_MAX = 100
 
@@ -475,8 +478,8 @@ const CTA_BUTTON_LINK_MAX = 100
 const WhyChooseUsSchema: Block = {
   slug: HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   labels: {
-    singular: 'Why Choose Us',
-    plural: 'Why Choose Us',
+    singular: HOME_PAGE_WHY_CHOOSE_US_BLOCK_LABEL,
+    plural: HOME_PAGE_WHY_CHOOSE_US_BLOCK_LABEL,
   },
   fields: [
     // Appearance

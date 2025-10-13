@@ -63,6 +63,5 @@ export default async function ServerTopHeader({ className }: { className?: strin
         }))
       : [],
   }
-
   return <TopHeader className={className} data={safe} />
 }

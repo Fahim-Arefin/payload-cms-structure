@@ -104,6 +104,12 @@ import WhyChooseUsSchema from '@/blocks/whyChooseUs/schema'
 import type { CollectionConfig } from 'payload'
 import { revalidateTag } from 'next/cache'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
+import ShantaIntroSchema from '@/blocks/shantaIntro/schema'
+import ShantaVisionSchema from '@/blocks/shantaVision/schema'
+import ValuesThatShapeUsSchema from '@/blocks/valuesThatShapeUs/schema'
+import LicensedLaunchedSchema from '@/blocks/LicensedAndLaunched/schema'
+import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
+import ShantaMilestonesUnlockedSchema from '@/blocks/shantaMilestoneUnlocked/schema'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -145,6 +151,7 @@ export const Pages: CollectionConfig = {
       type: 'blocks',
       required: true,
       blocks: [
+        // home page
         HeroSchema,
         WhyChooseUsSchema,
         FeaturedPlansSchema,
@@ -152,6 +159,13 @@ export const Pages: CollectionConfig = {
         LifeInsuranceSimplifiedSchema,
         LifeInsuranceVideoSchema,
         LifeAtShantaSchema,
+        // about us page
+        ShantaIntroSchema,
+        ShantaVisionSchema,
+        ValuesThatShapeUsSchema,
+        LicensedLaunchedSchema,
+        DirectorsMessagesSchema,
+        ShantaMilestonesUnlockedSchema,
       ],
     },
   ],

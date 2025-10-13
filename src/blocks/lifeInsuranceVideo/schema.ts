@@ -258,7 +258,10 @@
 // ==========================================================================
 
 // src/payload/blocks/HomeVideo.ts
-import { HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  HOME_PAGE_LIFE_INSURANCE_VIDEO_BLOCK_LABEL,
+  HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 
@@ -341,7 +344,10 @@ const validateHighlightedInField =
 /* ---------------- block ---------------- */
 const LifeInsuranceVideoSchema: Block = {
   slug: HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
-  labels: { singular: 'Life Insurance Video', plural: 'Life Insurance Video' },
+  labels: {
+    singular: HOME_PAGE_LIFE_INSURANCE_VIDEO_BLOCK_LABEL,
+    plural: HOME_PAGE_LIFE_INSURANCE_VIDEO_BLOCK_LABEL,
+  },
   fields: [
     // Appearance
     {

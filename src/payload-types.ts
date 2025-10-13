@@ -427,11 +427,11 @@ export interface Page {
            */
           labelBN: string;
           /**
-           * e.g., 100%, 112+, 25 yrs, 1.2M+, 3,000+, 98.5%. Max 16 characters.
+           * e.g., 100%, 112+, 25 yrs, 1.2M+, 3,000+, 98.5%. Max 20 characters.
            */
           value: string;
           /**
-           * যেমন: 100%, 112+, 25 yrs, 1.2M+, 3,000+, 98.5%। সর্বোচ্চ ১৬ অক্ষর।
+           * যেমন: 100%, 112+, 25 yrs, 1.2M+, 3,000+, 98.5%। সর্বোচ্চ ২০ অক্ষর।
            */
           valueBN: string;
           id?: string | null;
@@ -804,6 +804,367 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'life-at-shanta';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Short, strong opener. Max 20 characters.
+         */
+        heading: string;
+        /**
+         * সংক্ষিপ্ত, শক্তিশালী সূচনা। সর্বোচ্চ ২০ অক্ষর।
+         */
+        headingBN: string;
+        /**
+         * Secondary line below the heading. Max 35 characters.
+         */
+        subheading: string;
+        /**
+         * শিরোনামের নিচে দ্বিতীয় লাইন। সর্বোচ্চ ৩৫ অক্ষর।
+         */
+        subheadingBN: string;
+        /**
+         * Lead-in title above the paragraph. Max 80 characters.
+         */
+        paragraphTitle: string;
+        /**
+         * অনুচ্ছেদের উপরে লিড-ইন শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        paragraphTitleBN: string;
+        /**
+         * Main descriptive text. Max 400 characters.
+         */
+        paragraph: string;
+        /**
+         * মূল বর্ণনামূলক টেক্সট। সর্বোচ্চ ৪০০ অক্ষর।
+         */
+        paragraphBN: string;
+        /**
+         * Primary visual for the intro section. 2.15:1 recommended.
+         */
+        image: string | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'shanta-intro';
+      }
+    | {
+        /**
+         * Large background visual for the section. 2.5:1 recommended.
+         */
+        bgImage: string | Media;
+        /**
+         * Primary heading for Vision. Max 14 characters.
+         */
+        visionTitle: string;
+        /**
+         * ভিশনের প্রধান শিরোনাম। সর্বোচ্চ ১৪ অক্ষর।
+         */
+        visionTitleBN: string;
+        /**
+         * Optional. Must appear inside the Vision Title exactly. Max 14 characters.
+         */
+        visionHighlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। ভিশন শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ১৪ অক্ষর।
+         */
+        visionHighlightedTextBN?: string | null;
+        visionDescription: string;
+        visionDescriptionBN: string;
+        /**
+         * Primary heading for Mission. Max 14 characters.
+         */
+        missionTitle: string;
+        /**
+         * মিশনের প্রধান শিরোনাম। সর্বোচ্চ ১৪ অক্ষর।
+         */
+        missionTitleBN: string;
+        /**
+         * Optional. Must appear inside the Mission Title exactly. Max 14 characters.
+         */
+        missionHighlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। মিশন শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ১৪ অক্ষর।
+         */
+        missionHighlightedTextBN?: string | null;
+        missionDescription: string;
+        missionDescriptionBN: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'shanta-vision';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Base title (e.g., “Values That”). Max 40 characters.
+         */
+        title: string;
+        /**
+         * মূল শিরোনাম (যেমন, “আমাদের মূল্যবোধ”). সর্বোচ্চ ৪০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Highlighted tail of the heading (e.g., “Shape Us”). Must appear inside Title exactly. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * শিরোনামের রঙিন অংশ (যেমন, “আমাদের পরিচয়”). এটি অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Large background image for the section. 2:3 recommended.
+         */
+        image: string | Media;
+        /**
+         * Add value items with icon + hover icon, a short title, and a brief description.
+         */
+        values: {
+          /**
+           * Icon shown normally. (give colored version and transparent bg image) (ratio 1:1)
+           */
+          image: string | Media;
+          /**
+           * Icon shown on hover. (give white version and transparent bg image) (ratio 1:1)
+           */
+          hoverImage: string | Media;
+          /**
+           * Short card title (e.g., “Trust”). Max 30 characters.
+           */
+          title: string;
+          /**
+           * সংক্ষিপ্ত কার্ড শিরোনাম (যেমন, “বিশ্বাস”). সর্বোচ্চ ৩০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Brief one-liner or two-liner. Max 150 characters.
+           */
+          description: string;
+          /**
+           * সংক্ষিপ্ত এক/দুই লাইনের বিবরণ। সর্বোচ্চ ১৫০ অক্ষর।
+           */
+          descriptionBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'values-that-shape-us';
+      }
+    | {
+        /**
+         * Small square icon (1:1).
+         */
+        licensedImage: string | Media;
+        /**
+         * Short label under the licensed icon (e.g., "Licensed"). Max 15 characters.
+         */
+        licensedLabel: string;
+        /**
+         * লাইসেন্স আইকনের নিচের লেবেল (যেমন, “লাইসেন্সপ্রাপ্ত”). সর্বোচ্চ ১৫ অক্ষর।
+         */
+        licensedLabelBN: string;
+        /**
+         * Free-form date label (e.g., "November 7, 2023"). Max 20 characters.
+         */
+        licensedDate: string;
+        /**
+         * বাংলা তারিখ লেবেল (উদাহরণ: “৭ নভেম্বর, ২০২৩”). সর্বোচ্চ ২০ অক্ষর।
+         */
+        licensedDateBN: string;
+        /**
+         * Small square icon (1:1).
+         */
+        launchedImage: string | Media;
+        /**
+         * Short label under the launched icon (e.g., "Launched"). Max 15 characters.
+         */
+        launchedLabel: string;
+        /**
+         * লঞ্চ আইকনের নিচের লেবেল (যেমন, “লঞ্চ”). সর্বোচ্চ ১৫ অক্ষর।
+         */
+        launchedLabelBN: string;
+        /**
+         * Free-form date label (e.g., "December 1, 2024"). Max 20 characters.
+         */
+        launchedDate: string;
+        /**
+         * বাংলা তারিখ লেবেল (উদাহরণ: “১ ডিসেম্বর, ২০২৪”). সর্বোচ্চ ২০ অক্ষর।
+         */
+        launchedDateBN: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'licensed-launched';
+      }
+    | {
+        /**
+         * Add one card per leader (portrait + EN/BN name, designation, title, subtitle, and rich description).
+         */
+        cards: {
+          /**
+           * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+           */
+          backgroundColor?: string | null;
+          /**
+           * Leader portrait (8:9 recommended). Will be optimized and a blur placeholder generated.
+           */
+          image: string | Media;
+          /**
+           * Leader’s name (English). Max 40 characters.
+           */
+          name: string;
+          /**
+           * নেতৃত্বের নাম (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
+           */
+          nameBN: string;
+          /**
+           * Official designation (English). Max 40 characters.
+           */
+          designation: string;
+          /**
+           * আনুষ্ঠানিক পদবি (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
+           */
+          designationBN: string;
+          /**
+           * Short message header (English). Max 100 characters.
+           */
+          title: string;
+          /**
+           * সংক্ষিপ্ত বার্তার শিরোনাম (বাংলা)। সর্বোচ্চ ১০০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Support line under the title (English). Max 100 characters.
+           */
+          subtitle: string;
+          /**
+           * শিরোনামের সহায়ক লাইন (বাংলা)। সর্বোচ্চ ১০০ অক্ষর।
+           */
+          subtitleBN: string;
+          /**
+           * Up to 1500 characters.
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * সর্বোচ্চ ~১৫০০ অক্ষর।
+           */
+          descriptionBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'directors-message';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Section main image. 16:9 recommended.
+         */
+        image: string | Media;
+        /**
+         * Primary heading (e.g., “Shanta Milestones”). Max 40 characters.
+         */
+        sectionTitle: string;
+        /**
+         * প্রধান শিরোনাম (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        sectionTitleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Section Title. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। সেকশন শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Headline for the milestone. Max 40 characters.
+         */
+        milestoneTitle: string;
+        /**
+         * মাইলস্টোনের শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        milestoneTitleBN: string;
+        /**
+         * e.g., “December 1, 2024”. Max 30 characters.
+         */
+        milestoneDate: string;
+        /**
+         * যেমন, “December ১, ২০২৪”。 সর্বোচ্চ ৩০ অক্ষর।
+         */
+        milestoneDateBN: string;
+        /**
+         * 1–3 lines summarizing the milestone. Max 250 characters.
+         */
+        milestoneDescription: string;
+        /**
+         * ১–৩ লাইনের সারাংশ। সর্বোচ্চ ২৫০ অক্ষর।
+         */
+        milestoneDescriptionBN: string;
+        /**
+         * Small highlight items displayed under the milestone (icon + label + value).
+         */
+        stats: {
+          /**
+           * Square icon (1:1). Use transparent PNG if possible.
+           */
+          icon: string | Media;
+          /**
+           * Short label (e.g., “Policies”). Max 32 characters.
+           */
+          label: string;
+          /**
+           * সংক্ষিপ্ত লেবেল। সর্বোচ্চ ৩২ অক্ষর।
+           */
+          labelBN: string;
+          /**
+           * E.g., “100+”, “1M+”, “24/7”. Max 20 characters.
+           */
+          value: string;
+          /**
+           * যেমন, “১০০+”, “১M+”, “২৪/৭”。 সর্বোচ্চ ২০ অক্ষর।
+           */
+          valueBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'shanta-milestone-unloacked';
       }
   )[];
   updatedAt: string;
@@ -1184,6 +1545,132 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'shanta-intro'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              heading?: T;
+              headingBN?: T;
+              subheading?: T;
+              subheadingBN?: T;
+              paragraphTitle?: T;
+              paragraphTitleBN?: T;
+              paragraph?: T;
+              paragraphBN?: T;
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'shanta-vision'?:
+          | T
+          | {
+              bgImage?: T;
+              visionTitle?: T;
+              visionTitleBN?: T;
+              visionHighlightedText?: T;
+              visionHighlightedTextBN?: T;
+              visionDescription?: T;
+              visionDescriptionBN?: T;
+              missionTitle?: T;
+              missionTitleBN?: T;
+              missionHighlightedText?: T;
+              missionHighlightedTextBN?: T;
+              missionDescription?: T;
+              missionDescriptionBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'values-that-shape-us'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              image?: T;
+              values?:
+                | T
+                | {
+                    image?: T;
+                    hoverImage?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'licensed-launched'?:
+          | T
+          | {
+              licensedImage?: T;
+              licensedLabel?: T;
+              licensedLabelBN?: T;
+              licensedDate?: T;
+              licensedDateBN?: T;
+              launchedImage?: T;
+              launchedLabel?: T;
+              launchedLabelBN?: T;
+              launchedDate?: T;
+              launchedDateBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'directors-message'?:
+          | T
+          | {
+              cards?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    image?: T;
+                    name?: T;
+                    nameBN?: T;
+                    designation?: T;
+                    designationBN?: T;
+                    title?: T;
+                    titleBN?: T;
+                    subtitle?: T;
+                    subtitleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'shanta-milestone-unloacked'?:
+          | T
+          | {
+              backgroundColor?: T;
+              image?: T;
+              sectionTitle?: T;
+              sectionTitleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              milestoneTitle?: T;
+              milestoneTitleBN?: T;
+              milestoneDate?: T;
+              milestoneDateBN?: T;
+              milestoneDescription?: T;
+              milestoneDescriptionBN?: T;
+              stats?:
+                | T
+                | {
+                    icon?: T;
+                    label?: T;
+                    labelBN?: T;
+                    value?: T;
+                    valueBN?: T;
                     id?: T;
                   };
               id?: T;

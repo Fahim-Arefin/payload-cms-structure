@@ -285,7 +285,10 @@
 
 // src/blocks/lifeAtShanta/schema.ts
 import type { Block } from 'payload'
-import { HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  HOME_PAGE_LIFE_AT_SHANTA_BLOCK_LABEL,
+  HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 
 /* ---------------- limits ---------------- */
@@ -367,8 +370,8 @@ const validateCTAButtonLink = (val: unknown, { siblingData }: any) => {
 const LifeAtShantaSchema: Block = {
   slug: HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
   labels: {
-    singular: 'Life at Shanta',
-    plural: 'Life at Shanta',
+    singular: HOME_PAGE_LIFE_AT_SHANTA_BLOCK_LABEL,
+    plural: HOME_PAGE_LIFE_AT_SHANTA_BLOCK_LABEL,
   },
   fields: [
     // Appearance

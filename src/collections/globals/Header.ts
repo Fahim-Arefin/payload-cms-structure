@@ -50,7 +50,7 @@ const validateNavUrl =
 /* ---------------- global ---------------- */
 const Header: GlobalConfig = {
   slug: GLOBAL_HEADER_SLUG_AND_TAG,
-  label: 'Header (Top Bar)',
+  label: 'Header',
   admin: {
     description:
       'Top strip above navbar: flat set of links (non-nested) and whether to show the language toggle.',
