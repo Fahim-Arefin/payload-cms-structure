@@ -21,7 +21,7 @@ export function CorporateClaim() {
                   className="w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[150px]
             h-[32px] md:h-[34px] lg:h-[38px] xl:h-[40px] 2xl:h-[42px]"
                   text="Submit Claim"
-                  size="small"
+                  size="medium"
                 >
                   <LocalizedString en="Submit Claim" bn="সাবমিট ক্লেইম" />
                 </GlobalButton>

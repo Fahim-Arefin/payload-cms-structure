@@ -37,14 +37,61 @@ type Props = {
   onPlanSelect?: (planCode: number, planName: string) => void
 }
 
+/** Canonical EN plan keys -> both labels (EN/BN). */
+const PLAN_LABELS: Record<
+  string,
+  { en: string; bn: string }
+> = {
+  'Shanta Endowment Plan': {
+    en: 'Shanta Endowment Plan',
+    bn: 'শান্তা এনডাওমেন্ট প্ল্যান',
+  },
+  'Shanta 3 Stage Plan': {
+    en: 'Shanta 3 Stage Plan',
+    bn: 'শান্তা থ্রি পেমেন্ট প্ল্যান',
+  },
+  'Shanta 4 Stage Plan': {
+    en: 'Shanta 4 Stage Plan',
+    bn: 'শান্তা ফোর পেমেন্ট প্ল্যান',
+  },
+  'Shanta Child Education Plan (3%)': {
+    en: 'Shanta Child Education Plan (3%)',
+    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (৩%)',
+  },
+}
+
+/** API → Canonical EN mapping (normalize external names). */
+const API_NAME_TO_CANONICAL: Record<string, keyof typeof PLAN_LABELS> = {
+  'Shanta Endowment': 'Shanta Endowment Plan',
+  'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
+  'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
+  'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
+}
+
+/** Canonical EN -> video URL */
+const VIDEO_LINKS: Record<keyof typeof PLAN_LABELS, string> = {
+  'Shanta Child Education Plan (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+  'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g',
+  'Shanta 3 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
+  'Shanta 4 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
+}
+
+type AvailablePlan = {
+  plan_code: number
+  /** Canonical EN key used for logic (stable) */
+  key: keyof typeof PLAN_LABELS
+  /** Display labels */
+  labelEn: string
+  labelBn: string
+  videoLink?: string
+}
+
 function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
   const lang = useSSRLanguage()
-  const L = (en: string, bn?: string) => (lang === 'en' ? en : (bn ?? en))
+  const L = (en: string, bn?: string) => (lang === 'en' ? en : bn ?? en)
 
-  const [selectedPlan, setSelectedPlan] = useState<any>(null)
-  const [availablePlans, setAvailablePlans] = useState<{ plan_name: string; plan_code: number }[]>(
-    [],
-  )
+  const [selectedPlan, setSelectedPlan] = useState<AvailablePlan | null>(null)
+  const [availablePlans, setAvailablePlans] = useState<AvailablePlan[]>([])
   const [isLoadingPlans, setIsLoadingPlans] = useState(false)
   const [agreeTerms, setAgreeTerms] = useState(false)
   const [planError, setPlanError] = useState<string | null>(null)
@@ -61,9 +108,8 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
     name: false,
     phoneNumber: false,
   })
-  const [currentPaymentMode, setCurrentPaymentMode] = useState<string>('')
 
-  // Use a status machine for button text localization
+  // submit state machine
   type SubmitState = 'idle' | 'submitting' | 'success' | 'failed'
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -82,15 +128,13 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
     }
   })()
 
-  // Video link mappings for plans
-  const videoLinkMappings = {
-    'Shanta Child Education Plan (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-    'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g',
-    'Shanta 3 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
-    'Shanta 4 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
-  }
+  // gender options (stable values, localized labels)
+  const genders = [
+    { labelEn: 'Male', labelBn: 'পুরুষ', value: 1 },
+    { labelEn: 'Female', labelBn: 'মহিলা', value: 0 },
+  ]
 
-  // Fetch plans from API based on age
+  /** Fetch plans by age and normalize to canonical keys + labels */
   const fetchPlans = async (age: number) => {
     if (!age || age < 18 || age > 65) {
       setAvailablePlans([])
@@ -101,23 +145,25 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
     setPlanError(null)
 
     try {
-      const response = await fetch(`/api/plan/0/${age}`)
-      if (!response.ok) throw new Error('Failed to fetch plans')
-      const data = await response.json()
+      const res = await fetch(`/api/plan/0/${age}`)
+      if (!res.ok) throw new Error('Failed to fetch plans')
+      const data = await res.json()
 
       if (Array.isArray(data)) {
-        const planNameMappings: Record<string, string> = {
-          'Shanta Endowment': 'Shanta Endowment Plan',
-          'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
-          'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
-          'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
-        }
+        const normalized: AvailablePlan[] = data
+          .filter((p: any) => API_NAME_TO_CANONICAL[p.plan_name])
+          .map((p: any) => {
+            const key = API_NAME_TO_CANONICAL[p.plan_name] as keyof typeof PLAN_LABELS
+            return {
+              plan_code: p.plan_code,
+              key,
+              labelEn: PLAN_LABELS[key].en,
+              labelBn: PLAN_LABELS[key].bn,
+              videoLink: VIDEO_LINKS[key],
+            }
+          })
 
-        const filtered = data
-          .filter((p: any) => planNameMappings.hasOwnProperty(p.plan_name))
-          .map((p: any) => ({ ...p, plan_name: planNameMappings[p.plan_name] }))
-
-        setAvailablePlans(filtered)
+        setAvailablePlans(normalized)
       } else {
         setAvailablePlans([])
       }
@@ -128,12 +174,6 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
       setIsLoadingPlans(false)
     }
   }
-
-  // Keep stable values for gender; only translate the label
-  const genders = [
-    { labelEn: 'Male', labelBn: 'পুরুষ', value: 1 },
-    { labelEn: 'Female', labelBn: 'মহিলা', value: 0 },
-  ]
 
   const handleInputChange = (field: keyof FormData, value: string | number) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -198,8 +238,9 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
     setSubmitState('submitting')
 
     try {
-      const planName =
-        availablePlans.find((p) => p.plan_code === formData.PlanCode)?.plan_name || 'N/A'
+      const plan = availablePlans.find((p) => p.plan_code === formData.PlanCode)
+      const planNameCanonical = plan?.key ?? 'N/A'
+      const planNameLocalized = plan ? (lang === 'en' ? plan.labelEn : plan.labelBn) : 'N/A'
       const genderText =
         genders.find((g) => g.value === formData.Gender)?.[lang === 'en' ? 'labelEn' : 'labelBn'] ||
         'N/A'
@@ -208,7 +249,8 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         method: 'POST',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          planName,
+          planName: planNameCanonical, // keep canonical for backend/reporting
+          planNameLocalized,          // optional: send localized for convenience
           age: formData.Age,
           gender: genderText,
           name: formData.name || 'N/A',
@@ -275,29 +317,21 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         )}
       </div>
 
-      {/* Plans */}
+      {/* Plans (value = plan_code; labels localized) */}
       <div className="relative col-span-2 md:col-span-1">
         <Select
-          value={
-            formData.PlanCode && formData.PlanCode > 0
-              ? availablePlans.find((p) => p.plan_code === formData.PlanCode)?.plan_name || ''
-              : ''
-          }
+          value={formData.PlanCode ? String(formData.PlanCode) : ''}
           disabled={isLoadingPlans || !formData.Age || availablePlans.length === 0}
-          onValueChange={(v) => {
-            const plan = availablePlans.find((p) => p.plan_name === v)
-            const planWithVideo = plan
-              ? {
-                  ...plan,
-                  videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings],
-                }
-              : null
-            setSelectedPlan(planWithVideo)
-            if (plan) {
-              setFormData((prev) => ({ ...prev, PlanCode: plan.plan_code }))
-              setFieldErrors((prev) => ({ ...prev, PlanCode: false }))
-              onPlanSelect?.(plan.plan_code, plan.plan_name)
-            }
+          onValueChange={(value) => {
+            const code = parseInt(value, 10)
+            const plan = availablePlans.find((p) => p.plan_code === code) || null
+            setSelectedPlan(plan ?? null)
+            setFormData((prev) => ({ ...prev, PlanCode: code }))
+            setFieldErrors((prev) => ({ ...prev, PlanCode: false }))
+
+            // IMPORTANT: pass canonical EN key to parent so your
+            // getPlanDetailsCode() mapping in PurchaseSection keeps working.
+            if (plan) onPlanSelect?.(plan.plan_code, plan.key)
           }}
         >
           <SelectTrigger
@@ -321,8 +355,8 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
                 <LocalizedText en="Plans" bn="প্ল্যানসমূহ" />
               </SelectLabel>
               {availablePlans.map((plan) => (
-                <SelectItem key={plan.plan_code} value={plan.plan_name}>
-                  {plan.plan_name}
+                <SelectItem key={plan.plan_code} value={String(plan.plan_code)}>
+                  {lang === 'en' ? plan.labelEn : plan.labelBn}
                 </SelectItem>
               ))}
               {availablePlans.length === 0 && !isLoadingPlans && formData.Age && (
@@ -334,13 +368,13 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
           </SelectContent>
         </Select>
 
-        {selectedPlan && selectedPlan.videoLink && (
+        {selectedPlan?.videoLink && (
           <Dialog>
             <DialogTrigger asChild>
               <p className="text-[10px] py-1 absolute inset-x-0 text-[#FF6600] underline cursor-pointer">
                 <LocalizedText
-                  en={`Watch ${selectedPlan.plan_name} Video`}
-                  bn={`${selectedPlan.plan_name} ভিডিও দেখুন`}
+                  en={`Watch ${selectedPlan.labelEn} Video`}
+                  bn={`${selectedPlan.labelBn} ভিডিও দেখুন`}
                 />
               </p>
             </DialogTrigger>
@@ -356,7 +390,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
               <iframe
                 width="100%"
                 height="100%"
-                src={selectedPlan?.videoLink}
+                src={selectedPlan.videoLink}
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -415,7 +449,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         />
       </div>
 
-      {/* Gender (stable values, localized labels) */}
+      {/* Gender */}
       <div className="col-span-2 md:col-span-1">
         <Select
           value={

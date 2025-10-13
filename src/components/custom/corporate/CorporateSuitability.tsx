@@ -29,8 +29,8 @@ function CorporateSuitability({ data }: Props) {
       <h1 className="global-h1 font-semibold uppercase mb-10 text-white">
         <LocalizedHighlighted
           textEn={`SUITABILITY STANDARDS`}
-          textBn={`উপযুক্ততার মানদণ্ড`}
-          highlightBn={'উপযুক্ততার'}
+          textBn={`কভারেজের জন্য যিনি উপযুক্ত`}
+          highlightBn={'উপযুক্ত'}
           highlightEn={`SUITABILITY`}
           highlightClassName="text-[#ED7125]"
         />

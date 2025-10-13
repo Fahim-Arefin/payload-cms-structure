@@ -17,12 +17,16 @@ function OfferingsTab({ data, config }: Props) {
   const [activeTab, setActiveTab] = useState(config[0].value)
 
   return (
-    <div className="container-padding bg-[#FCF4EB]">
+    <div className="px-5 py-4 
+           md:px-24 md:py-8
+           lg:px-[130px]  lg:py-[40px] 
+           xl:px-[200px]  xl:py-[60px] 
+           2xl:px-[300px] 2xl:py-[80px] bg-[#FCF4EB]">
       <Tabs defaultValue={config[0].value} value={activeTab} onValueChange={setActiveTab}>
         {/* Tab Headers */}
         <div
           className="relative w-full border-b border-[#434343] md:py-[12px] bg-transparent
-           md:mb-[30px] lg:mb-[50px] xl:mb-[80px]"
+           md:mb-[30px] xl:mb-[40px]"
         >
           <TabsList
             className={cn(

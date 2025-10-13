@@ -208,7 +208,7 @@ function ContactUsSection() {
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col">
                 <label className="text-lg text-gray-800 2xl:mb-1">
-                  <LocalizedText en="First Name" bn="ফার্স্ট নাম" />
+                  <LocalizedText en="First Name" bn="নামের প্রথম অংশ" />
                 </label>
                 <Input
                   value={firstName}
@@ -220,7 +220,7 @@ function ContactUsSection() {
               </div>
               <div className="flex flex-col">
                 <label className="text-lg text-gray-800 2xl:mb-1">
-                  <LocalizedText en="Last Name" bn="লাস্ট নাম" />
+                  <LocalizedText en="Last Name" bn="নামের শেষ অংশ" />
                 </label>
                 <Input
                   value={lastName}

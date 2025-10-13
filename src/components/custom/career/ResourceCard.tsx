@@ -35,7 +35,7 @@ function ResourceCard({ data }: { data: ResourceData }) {
           onClick={() => setExpanded((prev) => !prev)}
           className="group flex items-center gap-1 mt-4 text-[#ED7125] font-bold text-[13px] md:text-[14px] uppercase tracking-tight transition-colors hover:text-[#d76420]"
         >
-          {expanded ? 'READ LESS' : 'READ MORE'}
+          {expanded ? <LocalizedText en={`READ LESS`} bn={`কম পড়ুন`}/>  : <LocalizedText en={`READ MORE`} bn={`আরো পড়ুন`}/> }
           <svg
             className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
             fill="none"
