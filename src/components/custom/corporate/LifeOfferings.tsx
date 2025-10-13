@@ -19,13 +19,13 @@ const LIFE_OFFERINGS: Offering[] = [
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon1.png`,
     description: `In the event of an insured member’s death, Shanta Life provides financial support to the nominated 
           beneficiary or organization as per policy terms, ensuring peace of mind and security during difficult times.`,
-    descriptionBN: `বীমাকৃত সদস্যের মৃত্যু ঘটলে, শান্তা লাইফ মনোনীত উত্তরাধিকারী বা প্রতিষ্ঠানে আর্থিক সহায়তা প্রদান করে — 
+    descriptionBN: `বীমাকৃত সদস্যের মৃত্যু ঘটলে, শান্তা লাইফ আপনার মনোনীত উত্তরাধিকারী বা প্রতিষ্ঠানে আর্থিক সহায়তা প্রদান করে — 
           নীতির শর্ত অনুযায়ী। এটি কঠিন সময়ে মানসিক শান্তি ও আর্থিক নিরাপত্তা নিশ্চিত করে।`,
   },
   {
     title: 'Accidental Death Coverage (AD)',
     titleBN: 'দুর্ঘটনাজনিত মৃত্যু কভারেজ (AD)',
-    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon1.png`,
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon2.png`,
     description: `In case of death due to an accident, Shanta Life pays an additional benefit on top of the natural death coverage, 
           offering extra financial protection to the nominee or organization.`,
     descriptionBN: `দুর্ঘটনায় মৃত্যু হলে, প্রাকৃতিক মৃত্যুর কভারেজের পাশাপাশি অতিরিক্ত আর্থিক সুবিধা প্রদান করা হয়, 

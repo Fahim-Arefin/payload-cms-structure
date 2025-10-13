@@ -1,5 +1,6 @@
 import { InsuranceCardDataType } from '@/types'
 import React from 'react'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   data: InsuranceCardDataType
@@ -22,8 +23,12 @@ function CareerStoryCard({ data }: Props) {
         {/* Text Content */}
         <div className="relative z-20 p-2 h-full flex items-end">
           <div className="h-20 space-y-4">
-            <h4 className="text-white text-[15px] font-bold line-clamp-1">{data.title}</h4>
-            <p className="text-[#E5E5E5] text-[10px] line-clamp-2">{data.description}</p>
+            <h4 className="text-white text-[15px] font-bold line-clamp-1">
+              <LocalizedText en={data?.title} bn={data?.titleBN} />
+            </h4>
+            <p className="text-[#E5E5E5] text-[10px] line-clamp-2">
+              <LocalizedText en={data?.description} bn={data?.descriptionBN} />
+            </p>
           </div>
         </div>
         <div className="absolute w-[24px] h-[24px] -bottom-1 -right-1 z-20">
@@ -45,9 +50,11 @@ function CareerStoryCard({ data }: Props) {
         {/* Text Content */}
         <div className="relative z-20 md:p-0 h-full flex items-end md:px-4 xl:px-6 md:pb-10 xl:pb-16">
           <div className="md:h-fit space-y-2 lg:space-y-3 xl:space-y-4">
-            <h4 className="text-white text-[15px] font-bold md:line-clamp-none">{data.title}</h4>
+            <h4 className="text-white text-[15px] font-bold md:line-clamp-none">
+              <LocalizedText en={data?.title} bn={data?.titleBN} />
+            </h4>
             <p className="text-[#E5E5E5] text-[10px] lg:text-[12px] md:line-clamp-none">
-              {data.description}
+              <LocalizedText en={data?.description} bn={data?.descriptionBN} />
             </p>
           </div>
         </div>

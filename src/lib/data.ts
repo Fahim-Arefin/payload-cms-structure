@@ -11,7 +11,7 @@ export const directors: Directors[] = [
     // mobileImage: '/assets/board-of-directors/mobile/khandaker-monir-uddin.jpg',
     descriptionBN: `দেশের ব্যবসা জগতে অন্যতম পথিকৃৎ জনাব খন্দকার মনির উদ্দিন।  চার দশকেরও বেশি সময় ধরে তাঁর নেতৃত্বে রিয়েল এস্টেট, ফিন্যান্স, স্বাস্থ্যসেবা, শিক্ষাসহ বিভিন্ন  খাতে নতুন নতুন প্রতিষ্ঠান নির্মাণের মাধ্যমে শান্তা দেশের অর্থনীতিতে অসামান্য অবদান রেখে যাচ্ছে। তাঁর দূরদর্শী নেতৃত্ব ও ব্যবসায়িক প্রজ্ঞার মাধ্যমে শান্তা এগিয়ে যাচ্ছে কেবলমাত্র উচ্চমানের পণ্য ও সেবা প্রদানের জন্য নয়, বরং প্রতিটি খাতে নতুন মানদণ্ড স্থাপন করতে। 
 জনাব খন্দকার মনির উদ্দিন  ঢাকা বিশ্ববিদ্যালয়ের হিসাববিজ্ঞান বিভাগ থেকে স্নাতক ও স্নাতকোত্তর সম্পন্ন করেছেন এবং ২০০০ সাল থেকে তিনি ধারাবাহিকভাবে বাংলাদেশ সরকারের স্বীকৃত  একজন সিআইপি।
-তিনি  STS গ্রুপ-এর প্রতিষ্ঠাতা ও ব্যবস্থাপনা পরিচালক, যা এভারকেয়ার হাসপাতাল, ঢাকা ও চট্টগ্রাম এভারকেয়ার হাসপাতাল, ইন্টারন্যাশনাল স্কুল ঢাকা (ISD), এবং গ্লেনরিচ ইন্টারন্যাশনাল স্কুল এর মতো আন্তর্জাতিক মানের প্রতিষ্ঠান প্রতিষ্ঠা করেছে। এছাড়াও তিনি ঢাকা
+তিনি  STS গ্রুপ-এর প্রতিষ্ঠাতা ও ব্যবস্থাপনা পরিচালক, ঢাকা ও চট্টগ্রাম এভারকেয়ার হাসপাতাল, ইন্টারন্যাশনাল স্কুল ঢাকা (ISD), এবং গ্লেনরিচ ইন্টারন্যাশনাল স্কুল এর মতো আন্তর্জাতিক মানের প্রতিষ্ঠান প্রতিষ্ঠা করেছে। এছাড়াও তিনি ঢাকা
 ব্যাংক লিমিটেড-এর স্পন্সর ডিরেক্টর ও সাবেক চেয়ারম্যান এবং শান্তা হোল্ডিংস লিমিটেড ও শান্তা সিকিউরিটিজ লিমিটেড-এর ব্যবস্থাপনা পরিচালক হিসেবে দায়িত্ব পালন করছেন।`,
     description:
       'A highly distinguished and perceptive entrepreneur, Mr. Khondoker Monir Uddin, the founder promoter of Shanta, opts to do business by providing world-class products and services in Bangladesh. With his visionary leadership and extensive business knowledge, Shanta drives forward to not only provide superior quality products and services, but to demonstrate unparalleled foresight by establishing a new standard in every sector in which the company operates. The reputation and success of Shanta are testaments to his high ethical standard and relentless focus on quality, innovation and social responsibility. He is widely regarded as one of the most successful entrepreneurs in Bangladesh, who has brought transformative change in every sector the group has entered from Real Estate to Financial Services, Healthcare, Education and Retail. Mr. Monir completed both his Bachelors with honors and Masters degrees from the Department of Accounting, University of Dhaka. Over the past four decades, he has established Shanta as one of the leading corporate houses in Bangladesh, with successful investments in diversified sectors and thus has been continually recognized as a Commercially Important Person (CIP) by the Government of Bangladesh since 2000 till date. Mr. Monir is also a founder and Managing Director of the prestigious STS Group - which revolutionized the healthcare and education sectors of the country by establishing international standard institutions like Evercare Hospital Dhaka (previously Apollo Hospitals Dhaka), Evercare Hospital Chattogram, International School Dhaka (ISD), the Glenrich International Schools (Previously DPS STS schools). He is also a sponsor Director and former Chairman of Dhaka Bank Limited, and the Managing Director of Shanta Holdings Limited and Shanta Securities Limited.',
@@ -41,9 +41,12 @@ export const directors: Directors[] = [
     designationBN: 'ডিরেক্টর',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/board-of-directors/web/saif-khondokar.jpg`,
     // mobileImage: '/assets/board-of-directors/mobile/saif-khondokar.jpg',
-    descriptionBN: `শান্তাকে আগামী প্রজন্মের জন্য গড়তে কৌশলগত উদ্যোগ, কার্যকারিতা বৃদ্ধি, উন্নত মার্কেটিং, অত্যাধুনিক প্রযুক্তি এবং সর্বোত্তম আন্তর্জাতিক প্র্যাক্টিস বাস্তবায়ন করে জনাব সাইফ খন্দকার ২০১২ থেকে শান্তার নেতৃত্বে সক্রিয়। তিনি বর্তমানে শান্তা হোল্ডিংস এর ডিরেক্টর, আশুলিয়া নারী ও শিশু হাসপাতাল এর ট্রাস্টি এবং শান্তা অ্যাসেট ম্যানেজমেন্টের চেয়ারম্যান। 
+    descriptionBN: `শান্তাকে আগামী প্রজন্মের জন্য গড়তে কৌশলগত উদ্যোগ, কার্যকারিতা বৃদ্ধি, উন্নত মার্কেটিং, অত্যাধুনিক প্রযুক্তি এবং 
+    সর্বোত্তম আন্তর্জাতিক প্র্যাক্টিস বাস্তবায়ন করে জনাব সাইফ খন্দকার ২০১২ থেকে শান্তার নেতৃত্বে সক্রিয়। তিনি বর্তমানে শান্তা হোল্ডিংস এর ডিরেক্টর, 
+    আশুলিয়া নারী ও শিশু হাসপাতাল এর ট্রাস্টি এবং শান্তা অ্যাসেট ম্যানেজমেন্টের চেয়ারম্যান। 
 
-সাইফ খন্দকার ইউনিভার্সিটি অফ টরেন্টো থেকে স্ট্র্যাটেজিক ম্যানেজমেন্ট এ বিবিএ সম্পন্ন করেন এবং একই বিশ্ববিদ্যালয়ের রুটম্যান স্কুল অফ ম্যানেজমেন্ট থেকে এমবিএ করেন। তিনি একজন সার্টিফাইড প্রজেক্ট ম্যানেজমেন্ট প্রফেশনাল (PMP)®।`,
+সাইফ খন্দকার ইউনিভার্সিটি অফ টরেন্টো থেকে স্ট্র্যাটেজিক ম্যানেজমেন্টে বিবিএ সম্পন্ন করেন এবং একই বিশ্ববিদ্যালয়ের রুটম্যান স্কুল অফ ম্যানেজমেন্ট 
+থেকে এমবিএ করেন। তিনি একজন সার্টিফাইড প্রজেক্ট ম্যানেজমেন্ট প্রফেশনাল (PMP)®।`,
     description:
       'Mr. Saif Khondoker completed his BBA with a specialization in Strategic Management from the University of Toronto, and his MBA from the prestigious Rotman School of Management, University of Toronto. He is also a certified Project Management Professional (PMP)®. Under his leadership, Shanta drives forward with strategic initiatives, driving operational efficiencies, engaging in superior marketing and branding, and incorporating state-of-the-art technologies and best practices throughout the organizations. He has been involved in the executive decision making of the group since 2012 and leading the next generation of transformation. Mr. Saif is also the Director at Shanta Holdings Limited, trustee at Ashulia Women and Children’s Hospital and Chairman of Shanta Asset Management Limited.',
   },
@@ -64,7 +67,7 @@ export const directors: Directors[] = [
 নেতৃত্বে মাত্র এক বছরের মধ্যেই হাসপাতাল প্রথমবারের মতো ব্রেক ইভেন করতে সক্ষম হয় এবং একই সাথে রোগী এবং কেয়ারগিভারদের সন্তুষ্টির মাত্রা বৃদ্ধি পায়। 
 
 মিস খন্দকার ওয়ারউইক বিজনেস স্কুল থেকে এমবিএ ডিগ্রি অর্জন করেন এবং ডিস্টিংশনসহ স্নাতক সম্পন্ন করেন এবং তিনি চেঞ্জ মেকার স্কলারশিপ প্রাপ্ত হন।  
-এর আগে তিনি কানাডার ওয়ার্ক বিশ্ববিদ্যালয় থেকে বি.কম সম্পন্ন করেন, যেখানে তিনি ডীন'স হনার রোল-এ অন্তর্ভুক্ত হন এবং ডীন'স স্কলারশিপ লাভ করেন।`,
+এর আগে তিনি কানাডার ওয়ার্ক বিশ্ববিদ্যালয় থেকে বি.কম সম্পন্ন করেন, যেখানে তিনি ডীন'স অনার রোল-এ অন্তর্ভুক্ত হন এবং ডীন'স স্কলারশিপ লাভ করেন।`,
     description: `Ms. Khondoker currently serves as a Director of Shanta Holdings, where she is responsible for founding and overseeing the divisions Shanta Lifestyle and Shanta Multiverse. She also sits on the board for Shanta Asset Management. As Managing Director of Shanta Multiverse and Founding Director of Shanta Lifestyle, Ms. Khondoker is responsible for developing the businesses' strategies, focusing on driving efficiency, team development, revenue growth, and business expansion. Prior to joining Shanta, Ms. Khondoker was the Head of Corporate Branding and Market Communications at Evercare Hospital Dhaka. She had the unique opportunity to develop her own business development department and pursue a digital transformation of the hospital and its marketing methods. Within a year, her team helped the hospital breakeven for the first time by monitoring and significantly improving patient satisfaction and patient/caregiver experience. Ms. Khondoker earned her MBA from The University of Warwick, during which she was awarded a Distinction by Warwick Business School. She was also a Change Maker scholarship recipient. Ms. Khondoker has a BCom from York University in Canada, where she was on the Dean’s Honor Roll and received the Dean’s scholarship.`,
   },
   {
@@ -104,11 +107,16 @@ A skilled communicator and team player, Raiven provides crucial insights to stak
     designationBN: 'ডিরেক্টর',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/board-of-directors/web/arif-khan.jpg`,
     // mobileImage: '/assets/board-of-directors/mobile/arif-khan.jpg',
-    descriptionBN: `বর্তমান বাংলাদেশের আর্থিক খাতে প্রজ্ঞাবান ও গুরুত্বপূর্ণ ব্যক্তিত্ব হিসেবে জনাব আরিফ খান একজন সুপরিচিত নির্বাহী।  গত ৩৪ বছর যাবত বিভিন্ন আর্থিক প্রতিষ্ঠানে তিনি অভিজ্ঞতা ও দক্ষতার সাথে নেতৃত্ব দিয়েছেন। তাঁর পেশাগত যাত্রা শুরু হয় ১৯৯১ সালে এবি ব্যাংক  লিমিটেড -এ probationary officer হিসেবে। পরবর্তীতে তিনি Beximco Fisheries এবং British American Tobacco (BAT) Limited-এর মতো শীর্ষস্থানীয় প্রতিষ্ঠানে দায়িত্ব পালন করেন। তিনি বাংলাদেশ সিকিউরিটিজ অ্যান্ড এক্সচেঞ্জ কমিশন (BSEC)-এর কমিশনার হিসেবে নিয়োগকৃত হন এবং পরবর্তীতে তিনি IDLC Finance-এর ম্যানেজিং ডিরেক্টর ও সিইও হিসেবে দায়িত্ব নেন।  বর্তমানে তিনি শান্তা ক্যাপিটাল মার্কেট এর অন্তর্ভুক্ত প্রতিষ্ঠান - শান্তা অ্যাসেট   ম্যানেজমেন্টের সার্বিক দায়িত্বে ভাইস চেয়ারম্যান হিসেবে নেতৃত্ব দিচ্ছেন। 
+    descriptionBN: `বর্তমান বাংলাদেশের আর্থিক খাতে প্রজ্ঞাবান ও গুরুত্বপূর্ণ ব্যক্তিত্ব হিসেবে জনাব আরিফ খান একজন সুপরিচিত নির্বাহী।  
+    গত ৩৪ বছর যাবত বিভিন্ন আর্থিক প্রতিষ্ঠানে তিনি অভিজ্ঞতা ও দক্ষতার সাথে নেতৃত্ব দিয়েছেন। তাঁর পেশাগত যাত্রা শুরু হয় ১৯৯১ সালে এবি ব্যাংক  
+    লিমিটেড -এ probationary officer হিসেবে। পরবর্তীতে তিনি Beximco Fisheries এবং British American Tobacco (BAT) Limited-এর মতো 
+    শীর্ষস্থানীয় প্রতিষ্ঠানে দায়িত্ব পালন করেন। তিনি বাংলাদেশ সিকিউরিটিজ অ্যান্ড এক্সচেঞ্জ কমিশন (BSEC)-এর কমিশনার হিসেবে নিয়োগকৃত হন এবং 
+    পরবর্তীতে তিনি IDLC Finance-এর ম্যানেজিং ডিরেক্টর ও সিইও হিসেবে দায়িত্ব নেন। বর্তমানে তিনি শান্তা ক্যাপিটাল মার্কেট এর অন্তর্ভুক্ত প্রতিষ্ঠান - 
+    শান্তা অ্যাসেট ম্যানেজমেন্টের সার্বিক দায়িত্বে ভাইস চেয়ারম্যান হিসেবে নেতৃত্ব দিচ্ছেন। 
 
 জনাব আরিফ খান Bangladesh Merchant Bank Association (BMBA) এবং CFA Society, Bangladesh-এর প্রতিষ্ঠাতা সভাপতি। পাশাপাশি Institute of Cost and Management Accountants of Bangladesh (ICMAB)-এর সভাপতি হিসেবেও দায়িত্ব পালন করেছেন।
 
-তিনি ঢাকা বিশ্ববিদ্যালয়ের  ফিনান্স ও ব্যাংকিং থেকে স্নাতক এবং Institute of Business Administration (IBA), ঢাকা বিশ্ববিদ্যালয় থেকে এমবিএ সম্পন্ন করেন।`,
+তিনি ঢাকা বিশ্ববিদ্যালয়ের  ফিন্যান্স ও ব্যাংকিং থেকে স্নাতক এবং Institute of Business Administration (IBA), ঢাকা বিশ্ববিদ্যালয় থেকে এমবিএ সম্পন্ন করেন।`,
     description: `Over the past 34 years, Mr. Khan has played numerous pivotal roles in several prestigious organizations. He is widely regarded as one of the most knowledgeable and seasoned veterans in the Finance sector of Bangladesh. Prior to partnering with Shanta in its capital market businesses, Mr. Khan led IDLC Finance as its Managing Director and Chief Executive Officer. Before his tenure at IDLC, Mr. Khan served as the commissioner of Bangladesh Securities and Exchange Commission (BSEC). Mr. Khan initiated his professional journey in 1991 as a probationary officer at AB Bank Limited. He subsequently served in renowned companies including Beximco Fisheries and British American Tobacco (BAT) Limited. He is the founding president of both the Bangladesh Merchant Bank Association (BMBA) and the CFA Society, Bangladesh. He also functioned as the President at the Institute of Cost and Management Accountants of Bangladesh (ICMAB). Mr. Khan graduated in Finance and Banking from the University of Dhaka and obtained his MBA degree from the Institute of Business Administration (IBA), University of Dhaka. He is also Vice Chairman of Shanta Asset Management Limited.`,
   },
   {
@@ -146,12 +154,12 @@ export const leaders: Leaders[] = [
   {
     id: 1,
     title: 'Nafis A Ahmed',
-    titleBN: 'নাফিস আখতার আহমেদ',
+    titleBN: 'নাফিস আকতার আহমেদ',
     designation: 'Chief Executive Officer',
     designationBN: 'প্রধান নির্বাহী কর্মকর্তা (সিইও)',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/leaders/web/CEO.jpg`,
     // mobileImage: '/assets/leaders/mobile/CEO.jpg',
-    descriptionBN: `নাফিস আখতার আহমেদ বাংলাদেশের জীবনবীমা সেক্টরে  দুই দশকেরও বেশি অভিজ্ঞতাসম্পন্ন একজন দক্ষ নির্বাহী। 
+    descriptionBN: `নাফিস আকতার আহমেদ বাংলাদেশের জীবনবীমা সেক্টরে  দুই দশকেরও বেশি অভিজ্ঞতাসম্পন্ন একজন দক্ষ নির্বাহী। 
     তিনি শান্তা লাইফ ইন্স্যুরেন্সের  প্রধান নির্বাহী কর্মকর্তা হিসেবে যোগদান করেন ১লা মার্চ, ২০২৪ সালে।  
     তাঁর ক্যারিয়ার শুরু হয় ১৯৯৫ সালে যুক্তরাষ্ট্রের নিউ ইয়র্কে সেলস কাউন্সেলর হিসেবে। ইলেকট্রনিক্স, শিক্ষা, 
     এবং টেক্সটাইল খাতে যুক্তরাষ্ট্র ও বাংলাদেশে কাজ করে তিনি বিক্রয় ব্যবস্থাপনা, গ্রাহকসেবা, ব্যবসা উন্নয়ন, 
@@ -184,7 +192,7 @@ Nafis's academic credentials include a Bachelor of Business Administration with 
     // mobileImage: '/assets/leaders/mobile/CDO.jpg',
     descriptionBN: `এম খুরশেদ কায়সার, শান্তা লাইফ ইন্স্যুরেন্স পিএলসি-এর ডেপুটি ম্যানেজিং ডিরেক্টর এবং চিফ ডিস্ট্রিবিউশন অফিসার  হিসেবে দায়িত্ব পালন করছেন। পূর্ববর্তীতে তার প্রায় ১৮ বছরের অভিজ্ঞতায় তিনি মেটলাইফ বাংলাদেশের এরিয়া হেড, জোনাল হেড এবং রেজিওনাল হেড এর মতো গুরুত্বপূর্ণ পদে দায়িত্ব পালন করেছেন। এছাড়াও, তিনি বাংলাদেশের বেশ কয়েকটি স্বনামধন্য বেসরকারি বিশ্ববিদ্যালয়ে Adjunct Faculty হিসেবে যুক্ত ছিলেন।
 
-জনাব কায়সার যুক্তরাজ্যের Newport Business School থেকে Strategic Management ও Finance-এ এমবিএ সম্পন্ন করেছেন।`,
+জনাব কায়সার যুক্তরাজ্যের Newport Business School থেকে Strategic Management & Finance-এ এমবিএ সম্পন্ন করেছেন।`,
     description: `Khurshed Kaisar is the Deputy Managing Director and Chief Distribution Officer at Shanta Life Insurance PLC. He brings nearly 18 years of experience from MetLife Bangladesh, where he held roles such as Area Head, Zonal Head, and Regional Head. Additionally, he served as an Adjunct Faculty member at several reputed private universities in Bangladesh. Mr. Kaisar holds an MBA in Strategic Management and Finance from Newport Business School, UK.`,
   },
   {
@@ -414,30 +422,39 @@ export const supportTabContent = [
         office_phoneBN: `+৮৮০৯৬১০৮৮৯৯০০ (রবি–বৃহস্পতি | সকাল ১০টা – সন্ধ্যা ৬টা)`,
       },
       {
-        office_location_Label: 'Head Office Extention ',
+        office_location_Label: 'Head Office Extention',
+        office_location_LabelBN: 'হেড অফিস এক্সটেনশন',
         office_location: 'Shanta Life Insurance | Sales Office',
         office_address:
           '191/A Haque Tower (4th floor), Bir Uttam Mir Showkat Sorok, Tejgaon-Gulshan Link Road, Dhaka-1208',
+        office_addressBN: `১৯১/এ হক টাওয়ার (লেভেল ৪), বীর উত্তম মীর শওকত সড়ক, তেজগাঁও - গুলশান লিংক রোড, ঢাকা - ১২০৮`,
         office_email: 'info@shantalife.com',
         office_phone: '09610889900 (10 am to 6 pm, Sunday to Thursday)',
+        office_phoneBN: `+৮৮০৯৬১০৮৮৯৯০০ (রবি–বৃহস্পতি | সকাল ১০টা – সন্ধ্যা ৬টা)`,
       },
       {
         office_location_Label: 'Motijheel Branch',
+        office_location_LabelBN: 'মতিঝিল ব্রাঞ্চ',
         office_location:
           '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58441.38016697795!2d90.3798384867766!3d23.726464622294557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8506cc33d99%3A0xfd076b7e6b99cdb7!2sShanta%20Asset%20Management%20Limited!5e0!3m2!1sen!2sus!4v1752957902530!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
         office_address:
           'Peoples Insurance Bhaban (10th Floor), 36, Dilkusha C/A, Dhaka-1000, Bangladesh',
+        office_addressBN: `পিপল'স ইন্স্যুরেন্স ভবন ( লেভেল ১০),৩৬, দিলখুশা সি/এ, ঢাকা - ১০০০, বাংলাদেশ`,
         office_email: 'info@shantalife.com',
         office_phone: '09610889900 (10 am to 6 pm, Sunday to Thursday)',
+        office_phoneBN: `+৮৮০৯৬১০৮৮৯৯০০ (রবি–বৃহস্পতি | সকাল ১০টা – সন্ধ্যা ৬টা)`,
       },
       {
         office_location_Label: 'Chattogram Branch',
+        office_location_LabelBN: 'চট্টগ্রাম ব্রাঞ্চ',
         office_location:
           '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.842462113068!2d91.8117762!3d22.321797000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30acdf3566b1bfbd%3A0x12d6963aaefdf18f!2sAyub%20Trade%20Center!5e0!3m2!1sen!2sbd!4v1752958082561!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
         office_address:
           'Ayub Trade Centre (7th Floor), 1269/B, SK Mujib Road, Agrabad C/A, Chattogram-4100',
+        office_addressBN: `আইয়ুব ট্রেড সেন্টার ( লেভেল ৭), ১২৬৯/ বি, এস কে মুজিব রোড, আগ্রাবাদ সি/এ, চট্টগ্রাম – ৪১০০`,
         office_email: 'info@shantalife.com',
         office_phone: '09610889900 (10 am to 6 pm, Sunday to Thursday)',
+        office_phoneBN: `+৮৮০৯৬১০৮৮৯৯০০ (রবি–বৃহস্পতি | সকাল ১০টা – সন্ধ্যা ৬টা)`,
       },
     ],
   },

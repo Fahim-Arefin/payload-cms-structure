@@ -59,7 +59,7 @@ function page() {
     // bgMobileImage: '/assets/about-us/mobile/vision.png',
     visionDescription:
       'To be the most trusted insurance brand by protecting the uncertainties of life through simple solutions and delivering maximum value.',
-    visionDescriptionBN: `সহজ সমাধানের মাধ্যমে জীবনের অনিশ্চয়তাকে সুরক্ষা দিয়ে এবং সর্বোচ্চ মূল্য প্রদান করে, 
+    visionDescriptionBN: `সহজ সমাধানের মাধ্যমে জীবনের অনিশ্চয়তাকে সুরক্ষা দিয়ে এবং ভোক্তাকে সর্বোচ্চ ভ্যালু প্রদান করে, 
       দেশের সবচেয়ে নির্ভরযোগ্য লাইফ ইন্স্যুরেন্স ব্র্যান্ড হওয়াই আমাদের ভিশন।`,
     missionDescription:
       'To promote the desired quality of life through innovation, digitalization and customer centricity.',
@@ -167,21 +167,21 @@ function page() {
       subtitleBN: 'নির্ভীক পদক্ষেপ',
       description: `At Shanta, we proudly uphold a legacy of integrity, innovation and excellence. As we embark on our journey in the insurance sector, we remain focused on our goal to offer unmatched life insurance solutions that ensure peace of mind and long-term financial security for our customers. Our determination to establish trust will remain unshakeable and so will our commitment to setting a new standard in the quality of life insurance services provided.The initiative of enhancing financial literacy among individuals and boosting confidence in them with services that bring stability is the cornerstone that carries the name of our organization, not only over the financial future of our customers but also over our community as a whole. At Shanta Life, we will continue our four decades long legacy of excellence and commitment with utmost sincerity, and I welcome you to explore planning your family's financial security with our trusted team.`,
       // link: 'https://shantalife.com/message-form-chairman.php',
-      descriptionBN: `শান্তা বিগত কয়েক দশক জুড়ে সততা, নিষ্ঠা এবং উদ্ভাবনী উৎকর্ষতার মাধ্যমে ব্যাবসায়িক কার্যকম পরিচালনা করছে।  
+      descriptionBN: `শান্তা বিগত কয়েক দশক জুড়ে সততা, নিষ্ঠা এবং উদ্ভাবনী উৎকর্ষতার মাধ্যমে ব্যবসায়িক কার্যকম পরিচালনা করছে।  
       ইন্স্যুরেন্স সেক্টরে নতুন পথচলায় আমাদের লক্ষ্য কাস্টমারদের সর্বোচ্চ ভ্যালু প্রদান করে তাদের অর্থনৈতিক ভবিষ্যৎ সুরক্ষিত করা। 
       আমরা বিশ্বাস করি জীবনবীমা শুধু সুরক্ষা নয়-এটি আস্থা, স্থিতিশীলতা ও এক উজ্জ্বল ভবিষ্যতের প্রতিশ্রুতি। 
       লাইফ ইন্স্যুরেন্সকে জীবনের বিশ্বস্ততার পার্টনার করে একটি নতুন মাত্রায় রূপান্তর আমাদের প্রতিজ্ঞা। 
       আর্থিক শিক্ষার প্রসার এবং মানুষের সচেতনতা বাড়ানোর মাধ্যমে আমরা শুধু আমাদের গ্রাহকদের আর্থিক ভবিষ্যৎই নয়, 
       পুরো সমাজকেও স্থিতিশীলতার পথে এগিয়ে নিতে চাই। 
       গ্রাহকসমাজ ও আমাদের টিম একত্র হয়ে এক নতুন মানদণ্ড তৈরি করার ব্যাপারে শান্তা অঙ্গীকারবদ্ধ। 
-      আপনার ও আপনার পরিবারের আর্থিক নিরাপত্তা নিশ্চিত করার এই যাত্রায় আমাদের বিশ্বস্ত টিমের সাথে যুক্ত হবার আহবান করছি।  `,
+      আপনার ও আপনার পরিবারের আর্থিক নিরাপত্তা নিশ্চিত করার এই যাত্রায় আমাদের বিশ্বস্ত টিমের সাথে যুক্ত হবার আহ্বান করছি।  `,
       link: '/all-bods#id-1',
     },
     {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/CEOalone.png`,
       // mobileImage: '/assets/about-us/mobile/CEOalone.png',
       name: 'Nafis Akhter Ahmed',
-      nameBN: 'নাফিস আখতার আহমেদ',
+      nameBN: 'নাফিস আকতার আহমেদ',
       designation: 'Chief Executive Officer',
       designationBN: 'প্রধান নির্বাহী কর্মকর্তা',
       title: 'Redefining',
@@ -309,7 +309,7 @@ function page() {
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/aboutusleaders/CEO.png`,
       // mobileImage: '/assets/about-us/mobile/aboutusleaders/CEO.png',
       name: 'Nafis A Ahmed',
-      nameBN: 'নাফিস আখতার আহমেদ',
+      nameBN: 'নাফিস আকতার আহমেদ',
       title: 'Chief Executive Officer',
       titleBN: 'প্রধান নির্বাহী কর্মকর্তা (সিইও)',
     },

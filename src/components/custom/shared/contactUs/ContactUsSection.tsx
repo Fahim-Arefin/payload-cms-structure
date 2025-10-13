@@ -310,26 +310,31 @@ function ContactUsSection() {
                   checked={agreeTerms}
                   onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
                 />
-                <span className="text-xs leading-relaxed">
-                  By clicking <span className="font-semibold">Send Message</span>, you agree to our{' '}
+
+                <span className="text-xs md:text-sm leading-relaxed">
+                  <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
+                  <span className="font-semibold">
+                    <LocalizedText en="Send Message" bn="আপনি আমাদের " />
+                  </span>
+                  <LocalizedText en=", you agree to our " bn="" />
                   <Link
                     href="/terms-condition"
                     className="underline text-[#FF6600] hover:opacity-90"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    terms and conditions
+                    <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
                   </Link>{' '}
-                  and{' '}
+                  <LocalizedText en="and " bn=", ও " />
                   <Link
                     href="/privacy-policy"
                     className="underline text-[#FF6600] hover:opacity-90"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    privacy policy
+                    <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
                   </Link>
-                  .
+                  <LocalizedText en="." bn="সম্মত করছেন।" />
                 </span>
               </label>
             </div>
