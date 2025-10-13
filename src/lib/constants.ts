@@ -88,6 +88,7 @@ export const ABOUT_US_PAGE_DIRECTORS_MESSAGES_BLOCK_LABEL = 'Directors Message'
 export const ABOUT_US_PAGE_DIRECTORS_MESSAGES_CACHE_KEY = 'directors-message-data'
 
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG = 'shanta-milestone-unloacked'
+export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_BLOCK_LABEL = 'Shanta Milestones Unlocked'
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_CACHE_KEY = 'shanta-milestone-unloacked-data'
 
 export const ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG = 'shanta-footprint'

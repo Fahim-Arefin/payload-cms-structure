@@ -420,11 +420,11 @@ export interface Page {
            */
           labelBN: string;
           /**
-           * e.g., 100%, 112+, 25 yrs, 1.2M+, 3,000+, 98.5%. Max 16 characters.
+           * e.g., 100%, 112+, 25 yrs, 1.2M+, 3,000+, 98.5%. Max 20 characters.
            */
           value: string;
           /**
-           * যেমন: 100%, 112+, 25 yrs, 1.2M+, 3,000+, 98.5%। সর্বোচ্চ ১৬ অক্ষর।
+           * যেমন: 100%, 112+, 25 yrs, 1.2M+, 3,000+, 98.5%। সর্বোচ্চ ২০ অক্ষর।
            */
           valueBN: string;
           id?: string | null;
@@ -1080,6 +1080,85 @@ export interface Page {
         blockName?: string | null;
         blockType: 'directors-message';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Section main image. 16:9 recommended.
+         */
+        image: string | Media;
+        /**
+         * Primary heading (e.g., “Shanta Milestones”). Max 40 characters.
+         */
+        sectionTitle: string;
+        /**
+         * প্রধান শিরোনাম (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        sectionTitleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Section Title. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। সেকশন শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Headline for the milestone. Max 40 characters.
+         */
+        milestoneTitle: string;
+        /**
+         * মাইলস্টোনের শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        milestoneTitleBN: string;
+        /**
+         * e.g., “December 1, 2024”. Max 30 characters.
+         */
+        milestoneDate: string;
+        /**
+         * যেমন, “December ১, ২০২৪”。 সর্বোচ্চ ৩০ অক্ষর।
+         */
+        milestoneDateBN: string;
+        /**
+         * 1–3 lines summarizing the milestone. Max 250 characters.
+         */
+        milestoneDescription: string;
+        /**
+         * ১–৩ লাইনের সারাংশ। সর্বোচ্চ ২৫০ অক্ষর।
+         */
+        milestoneDescriptionBN: string;
+        /**
+         * Small highlight items displayed under the milestone (icon + label + value).
+         */
+        stats: {
+          /**
+           * Square icon (1:1). Use transparent PNG if possible.
+           */
+          icon: string | Media;
+          /**
+           * Short label (e.g., “Policies”). Max 32 characters.
+           */
+          label: string;
+          /**
+           * সংক্ষিপ্ত লেবেল। সর্বোচ্চ ৩২ অক্ষর।
+           */
+          labelBN: string;
+          /**
+           * E.g., “100+”, “1M+”, “24/7”. Max 20 characters.
+           */
+          value: string;
+          /**
+           * যেমন, “১০০+”, “১M+”, “২৪/৭”。 সর্বোচ্চ ২০ অক্ষর।
+           */
+          valueBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'shanta-milestone-unloacked';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1553,6 +1632,34 @@ export interface PagesSelect<T extends boolean = true> {
                     subtitleBN?: T;
                     description?: T;
                     descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'shanta-milestone-unloacked'?:
+          | T
+          | {
+              backgroundColor?: T;
+              image?: T;
+              sectionTitle?: T;
+              sectionTitleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              milestoneTitle?: T;
+              milestoneTitleBN?: T;
+              milestoneDate?: T;
+              milestoneDateBN?: T;
+              milestoneDescription?: T;
+              milestoneDescriptionBN?: T;
+              stats?:
+                | T
+                | {
+                    icon?: T;
+                    label?: T;
+                    labelBN?: T;
+                    value?: T;
+                    valueBN?: T;
                     id?: T;
                   };
               id?: T;
