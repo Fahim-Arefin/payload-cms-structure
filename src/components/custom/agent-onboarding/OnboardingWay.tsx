@@ -1,42 +1,36 @@
-import { FC } from 'react'
-import WayWeAreSlider from './WayWeAreSlider'
-import { WayWeAreDataType } from '@/types'
+import { MoreThanAWorkplaceBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
+import { FC } from 'react'
 import LocalizedHighlighted from '../shared/LocalizedHighlighted'
-
-type wayWeAreData = {
-  image: string
-  title: string
-  titleBN: string
-  coloredTitle: string
-  coloredTitleBN: string
-  data: WayWeAreDataType[]
-}
+import WayWeAreSlider from './WayWeAreSlider'
 
 type OnboardingWayProps = {
-  wayWeAreData: wayWeAreData
+  wayWeAreData: MoreThanAWorkplaceBlockType
 }
 
 const OnboardingWay: FC<OnboardingWayProps> = ({ wayWeAreData }: OnboardingWayProps) => {
   return (
     <div className="relative">
       <div
-        className="relative 
+        className="relative
             h-[200px] md:h-[400px] lg:h-[500px] xl:h-[650px] 2xl:h-[750px]
              bg-white overflow-hidden"
       >
         {/* image */}
-        <Image
-          src={wayWeAreData?.image}
-          alt={wayWeAreData?.title}
-          fill
-          className="object-cover object-center"
-          sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
-        />
+        {typeof wayWeAreData?.backgroundImage === 'object' &&
+          wayWeAreData?.backgroundImage?.url && (
+            <Image
+              src={wayWeAreData?.backgroundImage?.url}
+              alt={wayWeAreData?.title}
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
+            />
+          )}
         {/* Content */}
         <div
-          className="w-full md:w-[95%] mx-auto uppercase relative z-10
-        py-5 md:py-[50px] lg:py-[80px] xl:py-[90px] "
+          //  py-5 md:py-[50px] lg:py-[80px] xl:py-[90px]
+          className="w-full md:w-[95%] mx-auto uppercase relative z-10 py-5 md:py-[50px] lg:py-[80px] xl:py-[90px]"
         >
           <div className="text-center">
             <h1 className="global-h1 lg:font-normal uppercase">
@@ -45,9 +39,8 @@ const OnboardingWay: FC<OnboardingWayProps> = ({ wayWeAreData }: OnboardingWayPr
               <LocalizedHighlighted
                 textEn={wayWeAreData?.title}
                 textBn={wayWeAreData?.titleBN}
-                highlightBn={wayWeAreData?.coloredTitleBN}
-                highlightEn={wayWeAreData?.coloredTitle}
-                highlightClassName="text-[#ED7125]"
+                highlightEn={wayWeAreData?.highlightedText}
+                highlightBn={wayWeAreData?.highlightedTextBN}
               />
             </h1>
           </div>
@@ -61,7 +54,7 @@ const OnboardingWay: FC<OnboardingWayProps> = ({ wayWeAreData }: OnboardingWayPr
         className=" bg-transparent
           z-20 "
       >
-        <WayWeAreSlider wayWeAreData={wayWeAreData?.data ?? []} />
+        <WayWeAreSlider wayWeAreData={wayWeAreData?.gallery ?? []} />
       </div>
     </div>
   )

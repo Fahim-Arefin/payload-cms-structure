@@ -181,6 +181,13 @@
            xl:py-[100px] 
            2xl:py-[150px];
   }
+  .container-padding-b {
+    @apply pb-12 
+           md:pb-[70px] 
+           lg:pb-[90px] 
+           xl:pb-[100px] 
+           2xl:pb-[150px];
+  }
 
   .container-padding-x {
     @apply px-5 
@@ -188,6 +195,21 @@
            lg:px-[130px]  
            xl:px-[200px]  
            2xl:px-[300px];
+  }
+
+  .container-margin-y {
+    @apply my-12 
+           md:my-[70px] 
+           lg:my-[90px] 
+           xl:my-[100px] 
+           2xl:my-[150px];
+  }
+  .container-margin-b {
+    @apply mb-12 
+           md:mb-[70px] 
+           lg:mb-[90px] 
+           xl:mb-[100px] 
+           2xl:mb-[150px];
   }
 
   .container-width {

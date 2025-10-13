@@ -1399,6 +1399,45 @@ export interface Page {
         blockName?: string | null;
         blockType: 'agent-onboarding-opportunity';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Large section background visual. 16:9 recommended.
+         */
+        backgroundImage: string | Media;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * A collection of images to display in the gallery.
+         */
+        gallery: {
+          /**
+           * Upload an image for the gallery. aspect ratio 1.5:1
+           */
+          image: string | Media;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'more-than-a-workplace';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1995,6 +2034,24 @@ export interface PagesSelect<T extends boolean = true> {
                           quoteBN?: T;
                           id?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'more-than-a-workplace'?:
+          | T
+          | {
+              backgroundColor?: T;
+              backgroundImage?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;

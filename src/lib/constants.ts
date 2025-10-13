@@ -141,4 +141,5 @@ export const AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_CACHE_KEY =
   'agent-onboarding-opportunity-data'
 
 export const AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG = 'more-than-a-workplace'
+export const AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_BLOCK_LABEL = 'More Than A Workplace'
 export const AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_CACHE_KEY = 'more-than-a-workplace-data'

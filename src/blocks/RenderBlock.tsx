@@ -18,6 +18,7 @@ import {
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
+  AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -36,6 +37,7 @@ import ShantaMilestoneUnlockedBlock from './shantaMilestoneUnlocked/ShantaMilest
 import ShantaFootPrintBlock from './shantaFootprint/ShantaFootPrintBlock'
 import AgentVisionBlock from './agentVision/AgentVisionBlock'
 import AgentOnboardingOpportunityBlock from './agentOnboadringOpportunity/AgentOnboardingOpportunityBlock'
+import MoreThanAWorkplaceBlock from './moreThanAWorkplace/MoreThanAWorkplaceBlock'
 
 type Params = Record<string, string>
 
@@ -78,6 +80,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <AgentVisionBlock key={block.id} block={block} params={params} />
     case AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG:
       return <AgentOnboardingOpportunityBlock key={block.id} block={block} params={params} />
+    case AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG:
+      return <MoreThanAWorkplaceBlock key={block.id} block={block} params={params} />
 
     default:
       return null
