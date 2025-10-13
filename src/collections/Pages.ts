@@ -112,6 +112,7 @@ import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
 import ShantaMilestonesUnlockedSchema from '@/blocks/shantaMilestoneUnlocked/schema'
 import ShantaFootprintSchema from '@/blocks/shantaFootprint/schema'
 import AgentVisionSchema from '@/blocks/agentVision/schema'
+import AgentOnboardingOpportunitySchema from '@/blocks/agentOnboadringOpportunity/schema'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -171,6 +172,7 @@ export const Pages: CollectionConfig = {
         ShantaFootprintSchema,
         // agent onboarding
         AgentVisionSchema,
+        AgentOnboardingOpportunitySchema,
       ],
     },
   ],

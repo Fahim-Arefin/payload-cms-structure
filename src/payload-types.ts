@@ -1316,6 +1316,89 @@ export interface Page {
         blockName?: string | null;
         blockType: 'agent-vision';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        section: {
+          /**
+           * Primary heading. Max 60 characters.
+           */
+          title: string;
+          /**
+           * প্রধান শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Second line under the title. Max 60 characters.
+           */
+          subTitle: string;
+          /**
+           * শিরোনামের নিচের লাইন। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          subTitleBN: string;
+        };
+        /**
+         * These cards are shown on mobile only. Each item has one image and a short line (EN/BN).
+         */
+        audienceCards: {
+          /**
+           * Square visual (1:1 recommended). Optimized with blur placeholder.
+           */
+          image: string | Media;
+          id?: string | null;
+        }[];
+        expectations: {
+          /**
+           * Bullets with icon + EN/BN short text.
+           */
+          left: {
+            /**
+             * Square icon (1:1). PNG with transparent background preferred.
+             */
+            icon: string | Media;
+            /**
+             * Short line. Max 100 characters.
+             */
+            text: string;
+            /**
+             * সংক্ষিপ্ত লাইন। সর্বোচ্চ ১০০ অক্ষর।
+             */
+            textBN: string;
+            id?: string | null;
+          }[];
+          /**
+           * Single agent testimonial: avatar + EN/BN name + EN/BN quote.
+           */
+          right: {
+            /**
+             * Agent photo (prefer 1:1 portrait). Optimized with blur placeholder.
+             */
+            avatar: string | Media;
+            /**
+             * Agent’s name. Max 60 characters.
+             */
+            name: string;
+            /**
+             * এজেন্টের নাম। সর্বোচ্চ ৬০ অক্ষর।
+             */
+            nameBN: string;
+            /**
+             * Short testimonial sentence. Max 240 characters.
+             */
+            quote: string;
+            /**
+             * সংক্ষিপ্ত উক্তি। সর্বোচ্চ ২৪০ অক্ষর।
+             */
+            quoteBN: string;
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'agent-onboarding-opportunity';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1869,6 +1952,49 @@ export interface PagesSelect<T extends boolean = true> {
                     description?: T;
                     descriptionBN?: T;
                     id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'agent-onboarding-opportunity'?:
+          | T
+          | {
+              backgroundColor?: T;
+              section?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    subTitle?: T;
+                    subTitleBN?: T;
+                  };
+              audienceCards?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              expectations?:
+                | T
+                | {
+                    left?:
+                      | T
+                      | {
+                          icon?: T;
+                          text?: T;
+                          textBN?: T;
+                          id?: T;
+                        };
+                    right?:
+                      | T
+                      | {
+                          avatar?: T;
+                          name?: T;
+                          nameBN?: T;
+                          quote?: T;
+                          quoteBN?: T;
+                          id?: T;
+                        };
                   };
               id?: T;
               blockName?: T;
