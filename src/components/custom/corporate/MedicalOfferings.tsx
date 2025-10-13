@@ -25,26 +25,26 @@ const MEDICAL_OFFERINGS: Offering[] = [
   {
     title: 'Maternity Benefits',
     titleBN: `মাতৃত্বকালীন সুবিধা`,
-    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon7.png`,
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon8.png`,
     description: `Welcoming a new life should be a moment of joy, not financial stress. Our Maternity Benefit offers coverage for:
           Normal delivery, Caesarean, ectopic, or extra-uterine pregnancies, Legal abortion or miscarriage.
           This benefit is available for female employees and/or spouses up to 45 years of age.`,
     descriptionBN: `একটি নতুন জীবনকে স্বাগত জানান আনন্দের সঙ্গে, আর্থিক চাপ ছাড়াই। কভারেজের আওতায়:
           স্বাভাবিক প্রসব
-          সিজারিয়ান, একটপিক বা এক্সট্রা-ইউটেরিন গর্ভধারণ
-          বৈধ গর্ভপাত বা গর্ভস্রাব
+          সিজারিয়ান, একটপিক বা এক্সট্রা-ইউটেরিন গর্ভধারণ,
+          বৈধ গর্ভপাত বা গর্ভস্রাব।
           এই সুবিধা মহিলা কর্মচারী ও/অথবা স্ত্রীদের জন্য প্রযোজ্য, বয়সসীমা ৪৫ বছর পর্যন্ত।`,
   },
   {
     title: 'Out Patient Coverage (OPC)',
     titleBN: 'আউট-পেশেন্ট কভারেজ (OPC)',
-    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon8.png`,
+    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/offerings_icon7.png`,
     description: `Not all treatments require hospitalization. Our OPC Plan reimburses expenses for consultations, 
           medicines, and diagnostic tests, helping employees access quality healthcare without added costs. Covered services include:
           a) Doctor consultation fees,
           b) Medication,
           c) Diagnostic tests and procedures`,
-    descriptionBN: `সব চিকিৎসার জন্য হাসপাতালে ভর্তি হওয়া লাগে না। আমাদের OPC সুবিধা পরামর্শ, ওষুধ ও ডায়াগনস্টিক টেস্টের খরচ ফেরত দেয়। 
+    descriptionBN: `আমাদের OPC সুবিধা ডাক্তার পরামর্শ, ওষুধ ও ডায়াগনস্টিক টেস্টের খরচ ফেরত দেয়। 
           কভারেজ অন্তর্ভুক্ত:
           ডাক্তারি ফি,
           ওষুধ,

@@ -39,7 +39,7 @@ type Props = {
 
 function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
   const lang = useSSRLanguage()
-  const L = (en: string, bn?: string) => (lang === 'en' ? en : bn ?? en)
+  const L = (en: string, bn?: string) => (lang === 'en' ? en : (bn ?? en))
 
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [availablePlans, setAvailablePlans] = useState<{ plan_name: string; plan_code: number }[]>(
@@ -287,7 +287,10 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
           onValueChange={(v) => {
             const plan = availablePlans.find((p) => p.plan_name === v)
             const planWithVideo = plan
-              ? { ...plan, videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings] }
+              ? {
+                  ...plan,
+                  videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings],
+                }
               : null
             setSelectedPlan(planWithVideo)
             if (plan) {
@@ -341,7 +344,8 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
                 />
               </p>
             </DialogTrigger>
-            <DialogContent className="max-w-5xl w-full aspect-video p-0 bg-black 
+            <DialogContent
+              className="max-w-5xl w-full aspect-video p-0 bg-black 
               [&>button.absolute]:top-3 [&>button.absolute]:right-3 
               [&>button.absolute]:bg-black/50 [&>button.absolute]:text-white 
               [&>button.absolute]:hover:bg-black/80"
@@ -415,9 +419,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
       <div className="col-span-2 md:col-span-1">
         <Select
           value={
-            formData.Gender !== null && formData.Gender !== undefined
-              ? String(formData.Gender)
-              : ''
+            formData.Gender !== null && formData.Gender !== undefined ? String(formData.Gender) : ''
           }
           onValueChange={(v) => handleInputChange('Gender', parseInt(v, 10))}
         >
@@ -476,29 +478,31 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
             checked={agreeTerms}
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
-            <span className="text-xs md:text-sm leading-relaxed">
-              By clicking <span className="font-semibold">Request for purchase</span>, you agree to
-              our{' '}
-              <Link
-                href="/terms-condition"
-                className="underline text-[#FF6600] hover:opacity-90"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                terms and conditions
-              </Link>{' '}
-              and {' '}
-              <Link
-                href="/privacy-policy"
-                className="underline text-[#FF6600] hover:opacity-90"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                privacy policy
-              </Link>
-              .
+          <span className="text-xs md:text-sm leading-relaxed">
+            <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
+            <span className="font-semibold">
+              <LocalizedText en="Request for purchase" bn="আপনি আমাদের " />
             </span>
-
+            <LocalizedText en=", you agree to our " bn="" />
+            <Link
+              href="/terms-condition"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
+            </Link>{' '}
+            <LocalizedText en="and " bn=", ও " />
+            <Link
+              href="/privacy-policy"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
+            </Link>
+            <LocalizedText en="." bn="সম্মত করছেন।" />
+          </span>
         </label>
       </div>
 

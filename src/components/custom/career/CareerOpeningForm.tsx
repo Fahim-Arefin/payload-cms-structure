@@ -287,28 +287,31 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
             checked={agreeTerms}
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
-          <span className="text-xs leading-relaxed">
-            <>
-              By clicking <span className="font-semibold">Submit</span>, you agree to our{' '}
-              <Link
-                href="/terms-condition"
-                className="underline text-[#FF6600] hover:opacity-90"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                terms and conditions
-              </Link>{' '}
-              and{' '}
-              <Link
-                href="/privacy-policy"
-                className="underline text-[#FF6600] hover:opacity-90"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                privacy policy
-              </Link>
-              .
-            </>
+
+          <span className="text-xs md:text-sm leading-relaxed">
+            <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
+            <span className="font-semibold">
+              <LocalizedText en="Submit" bn="আপনি আমাদের " />
+            </span>
+            <LocalizedText en=", you agree to our " bn="" />
+            <Link
+              href="/terms-condition"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
+            </Link>{' '}
+            <LocalizedText en="and " bn=", ও " />
+            <Link
+              href="/privacy-policy"
+              className="underline text-[#FF6600] hover:opacity-90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
+            </Link>
+            <LocalizedText en="." bn="সম্মত করছেন।" />
           </span>
         </label>
       </div>

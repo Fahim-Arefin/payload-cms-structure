@@ -674,7 +674,7 @@ function QuoteSection() {
           <LocalizedText
             en="Curious about your premium? Calculate your life insurance premium in just a few clicks
               and get a personalized quote."
-            bn="প্রিমিয়াম নিয়ে চিন্তিত ? এখন খুব সহজেই হিসাব করুন আপনার জন্য কাস্টমাইড প্রিমিয়াম।"
+            bn="প্রিমিয়াম নিয়ে চিন্তিত ? এখন খুব সহজেই হিসাব করুন আপনার জন্য কাস্টমাইজড প্রিমিয়াম।"
           />
         </p>
       </div>
@@ -707,7 +707,7 @@ function QuoteSection() {
               <LocalizedText
                 en="Curious about your premium? Calculate your life insurance premium in just a few clicks
               and get a personalized quote."
-                bn="প্রিমিয়াম নিয়ে চিন্তিত ? এখন খুব সহজেই হিসাব করুন আপনার জন্য কাস্টমাইড প্রিমিয়াম।"
+                bn="প্রিমিয়াম নিয়ে চিন্তিত ? এখন খুব সহজেই হিসাব করুন আপনার জন্য কাস্টমাইজড প্রিমিয়াম।"
               />
             </p>
           </div>

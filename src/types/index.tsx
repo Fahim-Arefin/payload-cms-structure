@@ -148,6 +148,8 @@ export type InsuranceCardDataType = Pick<
   'title' | 'description' | 'image' | 'videoLink'
 > & {
   mobileImage?: string
+  titleBN?: string
+  descriptionBN?: string
 }
 
 export type InsuranceDataType = {

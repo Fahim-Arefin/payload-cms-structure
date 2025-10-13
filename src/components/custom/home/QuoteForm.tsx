@@ -1060,7 +1060,10 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           </SelectTrigger>
           {isHoveringPaymentSelect && (!formData.PlanCode || !formData.Age || !formData.Term) && (
             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
-              Select plan, age & term first
+              <LocalizedText
+                en={`Select plan, age & term first`}
+                bn={`আপনার প্ল্যান, বয়স এবং মেয়াদ নির্বাচন করুন`}
+              />
               <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-600"></div>
             </div>
           )}

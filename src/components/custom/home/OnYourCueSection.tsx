@@ -48,7 +48,7 @@ const cards = [
     subtitle: 'Endowment Plan',
     subtitleBN: 'এনডাওমেন্ট প্ল্যান',
     description: 'For the life you’re building and the ones you’re building it for.',
-    descriptionBN: 'নিজ ও প্রিয়জনের আর্থিক সুরক্ষায় অবিচল নিশ্চয়তা।',
+    descriptionBN: 'নিজ ও প্রিয়জনের আর্থিক সুরক্ষায় অবিচল নির্ভরতা।',
     // image: '/assets/homepage/web/endowment.jpg',
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/endowment.jpg`,
     // mobileImage: '/assets/homepage/mobile/endowment.jpg',

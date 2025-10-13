@@ -28,8 +28,8 @@ function page({}: Props) {
       mainDescription: `Deciding on the best package for your team, making sure you’re getting value for money, 
       and staying on top of the available options — it can all add up to a daunting to-do list. 
       We’re here to make that easier for you.`,
-      mainDescriptionBN: `সঠিক প্যাকেজ বেছে নেওয়া, অর্থের সর্বোত্তম মূল্য নিশ্চিত করা, এবং সব উপলব্ধ বিকল্পের খোঁজ রাখা — 
-      অনেক সময় জটিল মনে হতে পারে। শান্তা লাইফ আছে এই প্রক্রিয়াটিকে সহজ করতে।`,
+      mainDescriptionBN: `আপনার অর্থের সর্বোচ্চ ব্যবহার নিশ্চিত করে এবং সর্বোচ্চ সুবিধা সম্পন্ন অপশন নিশ্চিত করে
+      শান্তা লাইফ আপনার জন্য ইন্সুরেন্স কে সহজ করে তুলে।`,
     },
   ]
 
@@ -62,7 +62,7 @@ function page({}: Props) {
       text: 'Global Care Access',
       textBN: 'গ্লোবাল কেয়ার এক্সেস',
       description: 'Intelligent healthcare coverage—seamlessly bridging local and global support.',
-      descriptionBN: `বুদ্ধিমান স্বাস্থ্যসেবা কভারেজ—লোকাল ও গ্লোবাল সাপোর্টকে একসাথে যুক্ত করে।`,
+      descriptionBN: `ইন্টেলিজেন্ট হেলথকেয়ার কভারেজ—লোকাল ও গ্লোবাল সাপোর্টকে একসাথে যুক্ত করে।`,
     },
     {
       icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/choose5.svg`,
@@ -70,7 +70,7 @@ function page({}: Props) {
       textBN: 'ডেডিকেটেড অ্যাকাউন্ট ম্যানেজমেন্ট',
       description:
         'Enhance retention with data-backed care solutions, managed by a team of dedicated experts.',
-      descriptionBN: `ডেটা-ভিত্তিক কেয়ার সল্যুশন দিয়ে গ্রাহক ধরে রাখুন, যা একদল বিশেষজ্ঞ টিম দ্বারা পরিচালিত।`,
+      descriptionBN: `একজন অভিজ্ঞ একাউন্ট ম্যানেজার সর্বদা আপনার সেবার নিশ্চয়তা প্রদানে নিবেদিত থাকবেন।`,
     },
     {
       icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/corporate/web/corporate-bullet.png`,

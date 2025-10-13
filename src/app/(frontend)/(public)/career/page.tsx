@@ -51,23 +51,34 @@ const page: FC<pageProps> = ({}) => {
       insuranceCardData: [
         {
           title: 'Leadership Recognition',
+          titleBN: `নেতৃত্বের স্বীকৃতি`,
           image: '/assets/career/web/careerVideo1.jpg',
           mobileImage: `/assets/career/mobile/careerVideo1.jpg`,
           description:
             'Always get the appricaition on your achievements and milestones in our professional journey.',
+          descriptionBN: `আমাদের সাথে আপনার প্রফেশনাল যাত্রায়
+              সেলিব্রেট করুন সকল অর্জন এবং
+              মাইলফলক।`,
         },
         {
           title: 'Team Sports & Unity',
+          titleBN: `টিম স্পোর্টস এবং ইউনিটি`,
           image: '/assets/career/web/careerVideo2.jpg',
           mobileImage: `/assets/career/mobile/careerVideo2.jpg`,
           description:
             'Company sports teams building camaraderie and teamwork beyond the workplace. We value out employee engagement.',
+          descriptionBN: `আমাদের স্পোর্টস টিম কর্মক্ষেত্রের বাইরেও
+            বিভিন্ন খেলায় এক্টিভ এবং টীম হিসেবে
+            পার্টিসিপেশনই আমাদের এনক্যারেজমেন্ট।`,
         },
         {
           title: 'Office Culture & Moments',
+          titleBN: `অফিস সংস্কৃতি এবং মুহূর্ত`,
           image: '/assets/career/web/careerVideo3.jpg',
           mobileImage: `/assets/career/mobile/careerVideo3.jpg`,
           description: `Diverse team make you feel with companion rather than collgue in our vibrant office environment.`,
+          descriptionBN: `আমাদের প্রাণবন্ত অফিস পরিবেশে বৈচিত্র্যময় টিম
+            আপনাকে সহকর্মীর নয় বরং বন্ধুর পরিচয় দিবে।`,
         },
       ],
     },
