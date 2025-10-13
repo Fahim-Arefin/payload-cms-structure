@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { ApiResponse } from '@/utils/premiumCalculator'
+import { formatLocalizedNumber } from '@/utils/numberLocalization'
 import GlobalButton from '../shared/GlobalButton'
 
 // NEW: icons & dropdown-menu pieces for the plan selector
@@ -976,8 +977,8 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           <p className="text-red-500 text-xs mt-1">{getFieldErrorMessage('SumAssured')}</p>
         ) : (
           <p className="text-[9px] lg:text-[10px] py-2 absolute inset-x-0">
-            <LocalizedText en={`Suggested`} bn={`সাজেসটেড`} />{' '}
-            <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span>{' '}
+            <LocalizedText en={`Suggested`} bn={`সাজেস্টেড`} />{' '}
+            <span className="text-[#FF6600]">{formatLocalizedNumber(suggestedAmount, lang)}</span>{' '}
             <LocalizedText en={`BDT`} bn={`টাকা`} />
           </p>
         )}
@@ -1156,7 +1157,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           />
 
           <span className="text-xs md:text-sm leading-relaxed">
-            <LocalizedText en="By clicking " bn="বাটনে ক্লিক করলে " />
+            <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
             <span className="font-semibold">
               <LocalizedText en="Get a Quote Now" bn="আপনি আমাদের " />
             </span>
@@ -1167,18 +1168,18 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <LocalizedText en="terms and conditions" bn="শর্তাবলি " />
+              <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
             </Link>{' '}
-            <LocalizedText en="and " bn=", এবং " />
+            <LocalizedText en="and " bn=", ও " />
             <Link
               href="/privacy-policy"
               className="underline text-[#FF6600] hover:opacity-90"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <LocalizedText en="privacy policy" bn="গোপনীয়তা নীতিতে " />
+              <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
             </Link>
-            <LocalizedText en="." bn="সম্মতি দিচ্ছেন।" />
+            <LocalizedText en="." bn="সম্মত করছেন।" />
           </span>
         </label>
 
@@ -1205,7 +1206,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           {/* {isLoading ? 'Calculating...' : 'Get A Quote Now'} */}
           <LocalizedString
             en={isLoading ? 'Calculating...' : 'Get A Quote Now'}
-            bn={isLoading ? 'হিসাব...' : 'ইন্স্যুরেন্স এমাউন্ট নির্ধারণ করুন'}
+            bn={isLoading ? 'হিসাব...' : 'আপনার প্রিমিয়াম ক্যালকুলেট করুন'}
           />
         </GlobalButton>
       </div>
