@@ -36,7 +36,10 @@ const blobToDataURL = (blob: Blob) =>
 const loadImage = (src: string) =>
   new Promise<HTMLImageElement>((resolve, reject) => {
     const img = new Image()
-    img.crossOrigin = 'anonymous'
+    // Only set crossOrigin for remote URLs, not data URLs
+    if (!src.startsWith('data:')) {
+      img.crossOrigin = 'anonymous'
+    }
     img.onload = () => resolve(img)
     img.onerror = reject
     img.src = src
@@ -207,6 +210,7 @@ const CropUploadField: React.FC<AdminFieldProps> = ({
 
   // UI state
   const [src, setSrc] = useState<string | null>(null)
+  const [imageLoaded, setImageLoaded] = useState(false)
   const [alt, setAlt] = useState<string>(defaultAlt)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [zoom, setZoom] = useState<number>(1)
@@ -283,6 +287,7 @@ const CropUploadField: React.FC<AdminFieldProps> = ({
     setZoom(1)
     setCrop({ x: 0, y: 0 })
     setCroppedAreaPixels(null)
+    setError('')
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
@@ -340,13 +345,18 @@ const CropUploadField: React.FC<AdminFieldProps> = ({
       return
     }
 
-    // Prepare preview + tiny blur first (so we can save blur into doc)
-    const dataURL = await fileToDataURL(f)
-    const tinyBlur = await makeTinyBlurDataURL(dataURL)
-    setDocBlur(tinyBlur)
+    setBusy(true)
+    try {
+      // Prepare preview + tiny blur first (so we can save blur into doc)
+      const dataURL = await fileToDataURL(f)
+      
+      // Preload the image to ensure it's ready before setting src
+      await loadImage(dataURL)
+      
+      const tinyBlur = await makeTinyBlurDataURL(dataURL)
+      setDocBlur(tinyBlur)
 
-    if (DIRECT_UPLOAD) {
-      try {
+      if (DIRECT_UPLOAD) {
         // delete any previous temps made by this field
         if (tempCroppedId) {
           await deleteMedia(tempCroppedId)
@@ -371,21 +381,24 @@ const CropUploadField: React.FC<AdminFieldProps> = ({
         setSizes({ original: f.size, cropped: undefined })
         setCrop({ x: 0, y: 0 })
         setZoom(1)
-      } catch (err: any) {
-        setError(err?.message || 'Failed to upload original')
-        e.target.value = ''
+        setCroppedAreaPixels(null)
+      } else {
+        // legacy base64 path
+        setSrc(dataURL)
+        setPendingOriginal(dataURL)
+        setOriginalId(null)
+        setPendingCrop(null)
+        setSizes({ original: f.size, cropped: undefined })
+        setCrop({ x: 0, y: 0 })
+        setZoom(1)
+        setCroppedAreaPixels(null)
       }
-      return
+    } catch (err: any) {
+      setError(err?.message || 'Failed to load image')
+      e.target.value = ''
+    } finally {
+      setBusy(false)
     }
-
-    // legacy base64 path
-    setSrc(dataURL)
-    setPendingOriginal(dataURL)
-    setOriginalId(null)
-    setPendingCrop(null)
-    setSizes({ original: f.size, cropped: undefined })
-    setCrop({ x: 0, y: 0 })
-    setZoom(1)
   }
 
   // create cropped image: direct upload + replace temp + tiny blur (doc)
@@ -629,7 +642,7 @@ const CropUploadField: React.FC<AdminFieldProps> = ({
               cropShape="rect"
               zoom={zoom}
               onZoomChange={setZoom}
-              onCropComplete={(_: Area, areaPixels: Area) => setCroppedAreaPixels(areaPixels)}
+              onCropComplete={onCropComplete}
               showGrid
             />
           </div>

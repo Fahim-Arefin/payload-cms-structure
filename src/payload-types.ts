@@ -237,7 +237,14 @@ export interface Page {
     | {
         uploadSessionId?: string | null;
         heroes: {
+          /**
+           * Upload & crop a 16:9 hero image.
+           */
           image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
           /**
            * Title (English). Max 120 characters.
            */
@@ -975,6 +982,10 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     title?: T;
                     titleBN?: T;
                     subtitle?: T;

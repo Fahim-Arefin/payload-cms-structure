@@ -27,23 +27,23 @@ const HeroSchema: Block = {
       labels: { singular: 'Hero Item', plural: 'Hero Items' },
 
       fields: [
-        // ...generateArrayImageFields({
-        //   fieldName: 'image',
-        //   label: 'Hero Image',
-        //   description: 'Upload & crop a 16:9 hero image.',
-        //   aspectRatio: 16 / 9,
-        //   quality: 0.9,
-        //   maxKB: 400, // UI hint only; server accepts big files now
-        //   ownerCollection: HOME_PAGE_HERO_SLUG_AND_TAG as any, // pass through to cropper
-        // } as any),
+        ...generateArrayImageFields({
+          fieldName: 'image',
+          label: 'Hero Image',
+          description: 'Upload & crop a 16:9 hero image.',
+          aspectRatio: 16 / 9,
+          quality: 0.9,
+          maxKB: 400, // UI hint only; server accepts big files now
+          ownerCollection: HOME_PAGE_HERO_SLUG_AND_TAG as any, // pass through to cropper
+        } as any),
 
-        {
-          name: 'image',
-          label: 'Banner Image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-        },
+        // {
+        //   name: 'image',
+        //   label: 'Banner Image',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        // },
 
         // ===== Text fields (EN + BN twins) =====
         {
