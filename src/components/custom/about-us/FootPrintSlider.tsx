@@ -245,14 +245,14 @@
 'use client'
 
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
-import { FootPrintDataType } from '@/types'
-import { useEffect, useState, useRef } from 'react'
+import { sliderDelay } from '@/lib/data'
+import { ShantaFootprintBlockType } from '@/types/payloadCustomTypes'
+import { useEffect, useRef, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import FootPrintCard from './FootPrintCard'
-import { sliderDelay } from '@/lib/data'
 
 type Props = {
-  footPrintData: FootPrintDataType[]
+  footPrintData: ShantaFootprintBlockType['cards']
 }
 
 export function FootPrintSlider({ footPrintData }: Props) {

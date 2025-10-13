@@ -237,7 +237,14 @@ export interface Page {
     | {
         uploadSessionId?: string | null;
         heroes: {
+          /**
+           * Upload & crop a 16:9 hero image.
+           */
           image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
           /**
            * Title (English). Max 120 characters.
            */
@@ -1159,6 +1166,77 @@ export interface Page {
         blockName?: string | null;
         blockType: 'shanta-milestone-unloacked';
       }
+    | {
+        /**
+         * Primary heading (e.g., “Shanta’s FOOTPRINT”). Max 40 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional: a highlighted part inside Title. Must appear verbatim. Max 40 chars.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক: শিরোনামের ভেতরে রঙিন অংশ (হুবহু মিল থাকতে হবে)। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line (e.g., “Where Every Venture Connects”). Max 60 characters.
+         */
+        subtitle: string;
+        /**
+         * সহায়ক লাইন (বাংলা)। সর্বোচ্চ ৬০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * Absolute https URL to your MP4/WebM/HLS asset. Internal paths are not allowed. Max 400 characters.
+         */
+        backgroundVideoUrl: string;
+        /**
+         * Add one card per company/venture: image (1:1), https website link, and EN/BN texts.
+         */
+        cards: {
+          /**
+           * Company/brand image (1:1).
+           */
+          image: string | Media;
+          /**
+           * Company/brand name (English). Max 60 characters.
+           */
+          title: string;
+          /**
+           * কোম্পানি/ব্র্যান্ডের নাম (বাংলা)। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Optional: a highlighted part inside Card Title. Must appear verbatim. Max 40 chars.
+           */
+          highlightedText?: string | null;
+          /**
+           * ঐচ্ছিক: কার্ড শিরোনামের ভেতরে রঙিন অংশ (হুবহু মিল থাকতে হবে)। সর্বোচ্চ ৪০ অক্ষর।
+           */
+          highlightedTextBN?: string | null;
+          /**
+           * Absolute https URL only (e.g., https://example.com). Internal paths are not allowed.
+           */
+          link: string;
+          /**
+           * Short description in English (1–3 lines). Max 300 characters.
+           */
+          description: string;
+          /**
+           * সংক্ষিপ্ত বিবরণ (বাংলা, ১–৩ লাইন)। সর্বোচ্চ ৩০০ অক্ষর।
+           */
+          descriptionBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'shanta-footprint';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1336,6 +1414,10 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     title?: T;
                     titleBN?: T;
                     subtitle?: T;
@@ -1660,6 +1742,32 @@ export interface PagesSelect<T extends boolean = true> {
                     labelBN?: T;
                     value?: T;
                     valueBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'shanta-footprint'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              backgroundVideoUrl?: T;
+              cards?:
+                | T
+                | {
+                    image?: T;
+                    title?: T;
+                    titleBN?: T;
+                    highlightedText?: T;
+                    highlightedTextBN?: T;
+                    link?: T;
+                    description?: T;
+                    descriptionBN?: T;
                     id?: T;
                   };
               id?: T;

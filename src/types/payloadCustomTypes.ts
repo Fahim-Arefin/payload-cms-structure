@@ -1,6 +1,7 @@
 import {
   ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG,
   ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG,
+  ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG,
@@ -78,4 +79,9 @@ export type DirectorMessagesBlockType = Extract<
 export type ShantaMilestoneUnlockedBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG }
+>
+
+export type ShantaFootprintBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG }
 >

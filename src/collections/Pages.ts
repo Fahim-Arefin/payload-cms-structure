@@ -110,6 +110,7 @@ import ValuesThatShapeUsSchema from '@/blocks/valuesThatShapeUs/schema'
 import LicensedLaunchedSchema from '@/blocks/LicensedAndLaunched/schema'
 import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
 import ShantaMilestonesUnlockedSchema from '@/blocks/shantaMilestoneUnlocked/schema'
+import ShantaFootprintSchema from '@/blocks/shantaFootprint/schema'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -166,6 +167,7 @@ export const Pages: CollectionConfig = {
         LicensedLaunchedSchema,
         DirectorsMessagesSchema,
         ShantaMilestonesUnlockedSchema,
+        ShantaFootprintSchema,
       ],
     },
   ],

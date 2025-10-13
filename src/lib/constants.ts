@@ -92,6 +92,7 @@ export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_BLOCK_LABEL = 'Shanta Mile
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_CACHE_KEY = 'shanta-milestone-unloacked-data'
 
 export const ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG = 'shanta-footprint'
+export const ABOUT_US_PAGE_SHANTA_FOOTPRINT_BLOCK_LABEL = 'shanta-footprint'
 export const ABOUT_US_PAGE_SHANTA_FOOTPRINT_CACHE_KEY = 'shanta-footprint-data'
 
 // ----------------------------------------------------------------------------------------------
