@@ -1,14 +1,15 @@
 import {
-  ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL,
-  ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG,
+  BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL,
+  BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
 } from '@/lib/constants'
+
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 
 const COLOR_HEX_LEN = 7
 
 const validateHexColor = (val: unknown) => {
-  if (val == null || val === '') return true // optional field
+  if (val == null || val === '') return true // optional
   const s = String(val).trim()
   if (!/^#[0-9A-Fa-f]{6}$/.test(s)) {
     return 'Must be a valid hex color in #RRGGBB (e.g., #FFFFFF).'
@@ -16,18 +17,18 @@ const validateHexColor = (val: unknown) => {
   return true
 }
 
-const BoardOfDirectorsCardSchema: Block = {
-  slug: ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG,
+const BoardOfDirectorsListSchema: Block = {
+  slug: BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
   labels: {
-    singular: ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL,
-    plural: ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL,
+    singular: BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL,
+    plural: BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL,
   },
   fields: [
     // Appearance
     {
-      name: 'backgroundColor',
+      name: 'oddBackgroundColor',
       type: 'text',
-      label: 'Section Background Color',
+      label: 'Odd Section Background Color',
       maxLength: COLOR_HEX_LEN,
       validate: validateHexColor,
       defaultValue: '#FFFFFF',
@@ -37,14 +38,26 @@ const BoardOfDirectorsCardSchema: Block = {
       },
     },
     {
+      name: 'evenBackgroundColor',
+      type: 'text',
+      label: 'Even Section Background Color',
+      maxLength: COLOR_HEX_LEN,
+      validate: validateHexColor,
+      defaultValue: '#F6EDDD',
+      admin: {
+        width: '33%',
+        description: `Hex color in #RRGGBB (e.g., #F6EDDD). Length ${COLOR_HEX_LEN} (${bnNum(COLOR_HEX_LEN)}).`,
+      },
+    },
+
+    // Data source toggle
+    {
       name: 'useSharedData',
       type: 'checkbox',
       label: 'Use shared Board of Directors (Global)',
       defaultValue: true,
       required: true,
       admin: {
-        // description:
-        //   'When ON, this block renders from the Global “BoardOfDirectors”. Turn OFF to hide.',
         description: `When ON, this block renders data from **Global → Board of Directors**.
 
 **Before enabling:** fill up the Global → Board of Directors data.
@@ -56,4 +69,5 @@ const BoardOfDirectorsCardSchema: Block = {
     },
   ],
 }
-export default BoardOfDirectorsCardSchema
+
+export default BoardOfDirectorsListSchema

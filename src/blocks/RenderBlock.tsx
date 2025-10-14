@@ -20,6 +20,7 @@ import {
   AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
+  BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -40,6 +41,7 @@ import AgentVisionBlock from './agentVision/AgentVisionBlock'
 import AgentOnboardingOpportunityBlock from './agentOnboadringOpportunity/AgentOnboardingOpportunityBlock'
 import MoreThanAWorkplaceBlock from './moreThanAWorkplace/MoreThanAWorkplaceBlock'
 import BoardOfDirectorsCardBlock from './BoardOfDirectorsCard/BoardOfDirectorsCardBlock'
+import BoardOfDirectorsListBlock from './BoardOfDirectorsList/BoardOfDirectorsListBlock'
 
 type Params = Record<string, string>
 
@@ -86,6 +88,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <AgentOnboardingOpportunityBlock key={block.id} block={block} params={params} />
     case AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG:
       return <MoreThanAWorkplaceBlock key={block.id} block={block} params={params} />
+
+    //BOD page
+    case BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG:
+      return <BoardOfDirectorsListBlock key={block.id} block={block} params={params} />
 
     default:
       return null

@@ -3,6 +3,7 @@ import type { GlobalConfig } from 'payload'
 
 import {
   ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG,
+  BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
   GLOBAL_BOARD_OF_DIRECTORS_BLOCK_LABEL,
   GLOBAL_BOARD_OF_DIRECTORS_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -414,6 +415,7 @@ const BoardOfDirectors: GlobalConfig = {
       async () => {
         revalidateTag(globalTag(GLOBAL_BOARD_OF_DIRECTORS_SLUG_AND_TAG))
         revalidateTag(ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG)
+        revalidateTag(BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG)
       },
     ],
   },

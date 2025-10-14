@@ -1095,7 +1095,13 @@ export interface Page {
          */
         backgroundColor?: string | null;
         /**
-         * When ON, this block renders from the Global “BoardOfDirectors”. Turn OFF to hide.
+         * When ON, this block renders data from **Global → Board of Directors**.
+         *
+         * **Before enabling:** fill up the Global → Board of Directors data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
          */
         useSharedData: boolean;
         id?: string | null;
@@ -1452,6 +1458,29 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'more-than-a-workplace';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        oddBackgroundColor?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        evenBackgroundColor?: string | null;
+        /**
+         * When ON, this block renders data from **Global → Board of Directors**.
+         *
+         * **Before enabling:** fill up the Global → Board of Directors data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'board-of-directors-list';
       }
   )[];
   updatedAt: string;
@@ -2076,6 +2105,15 @@ export interface PagesSelect<T extends boolean = true> {
                     image?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'board-of-directors-list'?:
+          | T
+          | {
+              oddBackgroundColor?: T;
+              evenBackgroundColor?: T;
+              useSharedData?: T;
               id?: T;
               blockName?: T;
             };

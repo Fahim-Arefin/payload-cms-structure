@@ -109,8 +109,9 @@ export const ABOUT_US_PAGE_SHANTA_FOOTPRINT_CACHE_KEY = 'shanta-footprint-data'
 // ----------------------------------------------------------------------------------------------
 export const BOD_PAGE_ADMIN_GROUP = 'BOD Page'
 
-// export const BOD_PAGE_BOARD_OF_DIRECTORS_SLUG_AND_TAG = 'board-of-directors'
-// export const BOD_PAGE_BOARD_OF_DIRECTORS_CACHE_KEY = 'board-of-directors-data'
+export const BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG = 'board-of-directors-list'
+export const BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL = 'Board Of Directors List'
+export const BOD_PAGE_BOARD_OF_DIRECTORS_List_CACHE_KEY = 'board-of-directors-list-data'
 
 // ----------------------------------------------------------------------------------------------
 

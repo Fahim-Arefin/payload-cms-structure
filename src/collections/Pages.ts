@@ -115,6 +115,7 @@ import AgentVisionSchema from '@/blocks/agentVision/schema'
 import AgentOnboardingOpportunitySchema from '@/blocks/agentOnboadringOpportunity/schema'
 import MoreThanAWorkplaceSchema from '@/blocks/moreThanAWorkplace/schema'
 import BoardOfDirectorsCardSchema from '@/blocks/BoardOfDirectorsCard/schema'
+import BoardOfDirectorsListSchema from '@/blocks/BoardOfDirectorsList/schema'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -177,6 +178,8 @@ export const Pages: CollectionConfig = {
         AgentVisionSchema,
         AgentOnboardingOpportunitySchema,
         MoreThanAWorkplaceSchema,
+        // BOD page
+        BoardOfDirectorsListSchema,
       ],
     },
   ],
