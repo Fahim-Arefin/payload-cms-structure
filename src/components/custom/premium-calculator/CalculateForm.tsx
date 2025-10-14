@@ -55,37 +55,139 @@ type Props = {
   setFormData: React.Dispatch<React.SetStateAction<FormData>>
 }
 
+/* -----------------------------
+   Helpers for localization
+------------------------------ */
+
+// Convert 0-9 to Bengali numerals
+const bnNum = (s: string | number) =>
+  String(s).replace(/[0-9]/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)])
+
+// Localize payment mode labels; keep paymode_id as value
+const localizePaymode = (name: string, lang: 'en' | 'bn') => {
+  const map: Record<string, { en: string; bn: string }> = {
+    Yearly: { en: 'Yearly', bn: 'বার্ষিক' },
+    HalfYearly: { en: 'Half Yearly', bn: 'অর্ধ-বার্ষিক' },
+    Quarterly: { en: 'Quarterly', bn: 'ত্রৈমাসিক' },
+    Monthly: { en: 'Monthly', bn: 'মাসিক' },
+    Single: { en: 'Single Payment', bn: 'এককালীন' },
+    // fallback handled below
+  }
+  // Try direct, space-less, and space-kept keys
+  const key = name.replace(/\s+/g, '')
+  if (map[key]) return lang === 'en' ? map[key].en : map[key].bn
+  if (map[name]) return lang === 'en' ? map[name].en : map[name].bn
+  return name // default
+}
+
+/** Canonical EN keys -> labels (EN/BN) */
+const PLAN_LABELS = {
+  'Shanta Endowment Plan': {
+    en: 'Shanta Endowment Plan',
+    bn: 'শান্তা এনডাওমেন্ট প্ল্যান',
+  },
+  'Shanta 3 Stage Plan': {
+    en: 'Shanta 3 Stage Plan',
+    bn: 'শান্তা থ্রি পেমেন্ট প্ল্যান',
+  },
+  'Shanta 4 Stage Plan': {
+    en: 'Shanta 4 Stage Plan',
+    bn: 'শান্তা ফোর পেমেন্ট প্ল্যান',
+  },
+  'Shanta Child Education Plan (1%)': {
+    en: 'Shanta Child Education Plan (1%)',
+    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (১%)',
+  },
+  'Shanta Child Education Plan (2%)': {
+    en: 'Shanta Child Education Plan (2%)',
+    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (২%)',
+  },
+  'Shanta Child Education Plan (3%)': {
+    en: 'Shanta Child Education Plan (3%)',
+    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (৩%)',
+  },
+  'Shanta Child Education Plan Single Payment (1%)': {
+    en: 'Shanta Child Education Plan Single Payment (1%)',
+    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (১%)',
+  },
+  'Shanta Child Education Plan Single Payment (2%)': {
+    en: 'Shanta Child Education Plan Single Payment (2%)',
+    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (২%)',
+  },
+  'Shanta Child Education Plan Single Payment (3%)': {
+    en: 'Shanta Child Education Plan Single Payment (3%)',
+    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (৩%)',
+  },
+} as const
+
+type CanonicalKey = keyof typeof PLAN_LABELS
+
+/** API → Canonical EN mapping */
+const API_TO_CANONICAL: Record<string, CanonicalKey> = {
+  'Shanta Endowment': 'Shanta Endowment Plan',
+  'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
+  'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
+  'Shanta Child Education Plan (1%)': 'Shanta Child Education Plan (1%)',
+  'Shanta Child Education Plan (2%)': 'Shanta Child Education Plan (2%)',
+  'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
+  'Shanta Child Education Plan Single Payment (1%)':
+    'Shanta Child Education Plan Single Payment (1%)',
+  'Shanta Child Education Plan Single Payment (2%)':
+    'Shanta Child Education Plan Single Payment (2%)',
+  'Shanta Child Education Plan Single Payment (3%)':
+    'Shanta Child Education Plan Single Payment (3%)',
+}
+
+/** Canonical EN -> video URL */
+const VIDEO_LINKS: Record<CanonicalKey, string> = {
+  'Shanta Child Education Plan (1%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+  'Shanta Child Education Plan (2%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+  'Shanta Child Education Plan (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+  'Shanta Child Education Plan Single Payment (1%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+  'Shanta Child Education Plan Single Payment (2%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+  'Shanta Child Education Plan Single Payment (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
+  'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g',
+  'Shanta 3 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
+  'Shanta 4 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
+}
+
+type AvailablePlan = {
+  plan_code: number
+  key: CanonicalKey
+  labelEn: string
+  labelBn: string
+  videoLink: string
+}
+type ChildVariant = AvailablePlan
+
 function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   // ===== Localization helper =====
   const lang = useSSRLanguage()
   const L = (en: string, bn?: string) => (lang === 'en' ? en : (bn ?? en))
 
-  const [selectedPlan, setSelectedPlan] = useState<any>(null)
+  const [selectedPlan, setSelectedPlan] = useState<AvailablePlan | null>(null)
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [availableTenures, setAvailableTenures] = useState<{ text: string; value: number }[]>([])
+
+  const [availableTenures, setAvailableTenures] = useState<{ labelEn: string; labelBn: string; value: number }[]>([])
   const [isLoadingTenures, setIsLoadingTenures] = useState(false)
   const [tenureError, setTenureError] = useState<string | null>(null)
-  const [availablePlans, setAvailablePlans] = useState<{ plan_name: string; plan_code: number }[]>(
-    [],
-  )
-  const [agreeTerms, setAgreeTerms] = useState(false)
+
+  const [availablePlans, setAvailablePlans] = useState<AvailablePlan[]>([])
+  const [childEducationVariants, setChildEducationVariants] = useState<ChildVariant[]>([])
   const [isLoadingPlans, setIsLoadingPlans] = useState(false)
   const [planError, setPlanError] = useState<string | null>(null)
+  const [planMenuOpen, setPlanMenuOpen] = useState(false)
+
+  const [agreeTerms, setAgreeTerms] = useState(false)
+
   const [availablePaymentModes, setAvailablePaymentModes] = useState<
     { paymode_name: string; paymode_id: number }[]
   >([])
   const [isLoadingPaymentModes, setIsLoadingPaymentModes] = useState(false)
-  const [fieldErrors, setFieldErrors] = useState<{
-    PlanCode: boolean
-    Age: boolean
-    annualIncome: boolean
-    SumAssured: boolean
-    Term: boolean
-    PaymentMode: boolean
-    Gender: boolean
-  }>({
+
+  const [fieldErrors, setFieldErrors] = useState({
     PlanCode: false,
     Age: false,
     annualIncome: false,
@@ -95,18 +197,15 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     Gender: false,
   })
   const [currentPaymentMode, setCurrentPaymentMode] = useState<string>('')
+
   const [isHoveringPlanSelect, setIsHoveringPlanSelect] = useState(false)
   const [isHoveringTenureSelect, setIsHoveringTenureSelect] = useState(false)
   const [isHoveringPaymentSelect, setIsHoveringPaymentSelect] = useState(false)
+
   const [tempSelectedDate, setTempSelectedDate] = useState<Date | null>(null)
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
   const [isCalculatingAge, setIsCalculatingAge] = useState(false)
   const [ageCalculationError, setAgeCalculationError] = useState<string | null>(null)
-  const [isChildEducationHovered, setIsChildEducationHovered] = useState(false)
-  const [childEducationVariants, setChildEducationVariants] = useState<
-    { plan_name: string; plan_code: number }[]
-  >([])
-  const [planMenuOpen, setPlanMenuOpen] = useState(false)
 
   const isPlanDisabled =
     isLoadingPlans ||
@@ -129,21 +228,17 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
   const calculateAgeFromAPI = async (dateOfBirth: Date) => {
     setIsCalculatingAge(true)
     setAgeCalculationError(null)
-
     try {
       const formattedDate = formatDateForAPI(dateOfBirth)
       const response = await fetch(`/api/age-calculate?dateofbirth=${formattedDate}`)
       if (!response.ok) throw new Error('Failed to calculate age')
       const data = await response.json()
-
       if (data.age !== undefined) {
         setFormData((prev) => ({ ...prev, dateOfBirth, Age: data.age }))
         setIsDatePickerOpen(false)
         setTempSelectedDate(null)
         setFieldErrors((prev) => ({ ...prev, Age: false }))
-      } else {
-        throw new Error('Invalid response from age calculation API')
-      }
+      } else throw new Error('Invalid response from age calculation API')
     } catch (err) {
       setAgeCalculationError(err instanceof Error ? err.message : 'Failed to calculate age')
     } finally {
@@ -158,27 +253,15 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     }
     return 100000
   }
-
   const suggestedAmount = calculateSuggestedAmount()
 
-  const videoLinkMappings = {
-    'Shanta Child Education Plan (1%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-    'Shanta Child Education Plan (2%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-    'Shanta Child Education Plan (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-    'Shanta Child Education Plan Single Payment (1%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-    'Shanta Child Education Plan Single Payment (2%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-    'Shanta Child Education Plan Single Payment (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-    'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g',
-    'Shanta 3 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
-    'Shanta 4 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
-  }
-
+  // Fetch & normalize plans (localized)
   const fetchPlans = async (age: number) => {
     if (!age || age < 18 || age > 65) {
       setAvailablePlans([])
+      setChildEducationVariants([])
       return
     }
-
     setIsLoadingPlans(true)
     setPlanError(null)
 
@@ -188,74 +271,111 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       const data = await response.json()
 
       if (Array.isArray(data)) {
-        const planNameMappings = {
-          'Shanta Endowment': 'Shanta Endowment Plan',
-          'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
-          'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
-          'Shanta Child Education Plan (1%)': 'Shanta Child Education Plan (1%)',
-          'Shanta Child Education Plan (2%)': 'Shanta Child Education Plan (2%)',
-          'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
-          'Shanta Child Education Plan Single Payment (1%)':
-            'Shanta Child Education Plan Single Payment (1%)',
-          'Shanta Child Education Plan Single Payment (2%)':
-            'Shanta Child Education Plan Single Payment (2%)',
-          'Shanta Child Education Plan Single Payment (3%)':
-            'Shanta Child Education Plan Single Payment (3%)',
-        }
+        // Normalize to canonical keys
+        const normalized = data
+          .filter((p: any) => API_TO_CANONICAL[p.plan_name])
+          .map((p: any) => {
+            const key = API_TO_CANONICAL[p.plan_name]
+            return {
+              plan_code: p.plan_code,
+              key,
+              labelEn: PLAN_LABELS[key].en,
+              labelBn: PLAN_LABELS[key].bn,
+              videoLink: VIDEO_LINKS[key],
+            } as AvailablePlan
+          })
 
-        const filteredPlans = data
-          .filter((plan) => planNameMappings.hasOwnProperty(plan.plan_name))
-          .map((plan) => ({
-            ...plan,
-            plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings],
-          }))
-
-        const childEducationPlans = filteredPlans.filter((p) =>
-          p.plan_name.toLowerCase().includes('child education'),
+        const children = normalized.filter((p) =>
+          p.key.toLowerCase().includes('child education'),
         )
-        const otherPlans = filteredPlans.filter(
-          (p) => !p.plan_name.toLowerCase().includes('child education'),
-        )
+        const others = normalized.filter((p) => !p.key.toLowerCase().includes('child education'))
 
-        setChildEducationVariants(childEducationPlans)
-        const groupedPlans = [
-          ...otherPlans,
-          ...(childEducationPlans.length > 0
-            ? [{ plan_name: 'Shanta Child Education Plan', plan_code: 0, isGroup: true } as any]
-            : []),
-        ]
-        setAvailablePlans(groupedPlans)
+        setChildEducationVariants(children)
+        setAvailablePlans(others)
       } else {
         setAvailablePlans([])
+        setChildEducationVariants([])
       }
     } catch (err) {
       setPlanError(err instanceof Error ? err.message : 'Failed to fetch plans')
       setAvailablePlans([])
+      setChildEducationVariants([])
     } finally {
       setIsLoadingPlans(false)
     }
   }
 
-  const genders = [
-    { text: 'Male', value: 1 },
-    { text: 'Female', value: 2 },
-  ]
+  // Tenure + payment modes (localized)
+  const fetchTenureOptions = async (planCode: number, age: number) => {
+    if (!planCode || !age || age < 18 || age > 65) {
+      setAvailableTenures([])
+      setAvailablePaymentModes([])
+      return
+    }
+    setIsLoadingTenures(true)
+    setIsLoadingPaymentModes(true)
+    setTenureError(null)
+    try {
+      const response = await fetch(`/api/plan/${planCode}/${age}`)
+      if (!response.ok) throw new Error('Failed to fetch tenure options')
+      const data = await response.json()
 
-  const tenures = [
-    { text: '10 years', value: 10 },
-    { text: '15 years', value: 15 },
-    { text: '20 years', value: 20 },
-    { text: '25 years', value: 25 },
-    { text: '30 years', value: 30 },
+      if (data && data[0]?.term) {
+        const termArray = JSON.parse(data[0].term)
+        if (Array.isArray(termArray)) {
+          const tenureOptions = termArray.map((t: any) => ({
+            labelEn: `${t.term} years`,
+            labelBn: `${bnNum(t.term)} বছর`,
+            value: Number(t.term),
+          }))
+          setAvailableTenures(tenureOptions)
+        } else setAvailableTenures([])
+      } else {
+        setAvailableTenures([])
+      }
+
+      if (data && data[0]?.pay_mode) {
+        try {
+          const payModeArray =
+            typeof data[0].pay_mode === 'string' ? JSON.parse(data[0].pay_mode) : data[0].pay_mode
+          if (Array.isArray(payModeArray)) {
+            const valid = payModeArray.filter(
+              (m: any) =>
+                m &&
+                typeof m === 'object' &&
+                m.paymode_name &&
+                m.paymode_name.trim() !== '' &&
+                m.paymode_id != null,
+            )
+            setAvailablePaymentModes(valid)
+          } else setAvailablePaymentModes([])
+        } catch {
+          setAvailablePaymentModes([])
+        }
+      } else {
+        setAvailablePaymentModes([])
+      }
+    } catch (err) {
+      setTenureError(err instanceof Error ? err.message : 'Failed to fetch tenure options')
+      setAvailableTenures([])
+      setAvailablePaymentModes([])
+    } finally {
+      setIsLoadingTenures(false)
+      setIsLoadingPaymentModes(false)
+    }
+  }
+
+  // Gender (stable numeric; localized label)
+  const genders = [
+    { textEn: 'Male', textBn: 'পুরুষ', value: 1 },
+    { textEn: 'Female', textBn: 'মহিলা', value: 2 },
   ]
 
   const handleInputChange = (field: keyof FormData, value: string | number | Date | null) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
-    if (field in fieldErrors) {
-      const errorField = field as keyof typeof fieldErrors
-      if (fieldErrors[errorField]) {
-        setFieldErrors((prev) => ({ ...prev, [errorField]: false }))
-      }
+    if ((field as keyof typeof fieldErrors) in fieldErrors) {
+      const f = field as keyof typeof fieldErrors
+      if (fieldErrors[f]) setFieldErrors((prev) => ({ ...prev, [f]: false }))
     }
   }
 
@@ -272,82 +392,23 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
     setAgeCalculationError(null)
   }
 
-  const handleChildEducationPlanSelect = (variant: { plan_name: string; plan_code: number }) => {
-    const planWithVideo = {
-      ...variant,
-      videoLink: videoLinkMappings[variant.plan_name as keyof typeof videoLinkMappings],
-    }
-    setSelectedPlan(planWithVideo)
-    setFormData((prev) => ({ ...prev, PlanCode: variant.plan_code, Term: 0 }))
+  const handleChildEducationPlanSelect = (variant: ChildVariant) => {
+    setSelectedPlan(variant)
+    setFormData((prev) => ({ ...prev, PlanCode: variant.plan_code, Term: 0, PaymentMode: 0 }))
     setAvailableTenures([])
+    setAvailablePaymentModes([])
     setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
-    setIsChildEducationHovered(false)
-  }
-
-  const fetchTenureOptions = async (planCode: number, age: number) => {
-    if (!planCode || !age || age < 18 || age > 65) {
-      setAvailableTenures([])
-      return
-    }
-
-    setIsLoadingTenures(true)
-    setTenureError(null)
-
-    try {
-      const response = await fetch(`/api/plan/${planCode}/${age}`)
-      if (!response.ok) throw new Error('Failed to fetch tenure options')
-
-      const data = await response.json()
-      if (data && data[0]?.term) {
-        const termArray = JSON.parse(data[0].term)
-        if (Array.isArray(termArray)) {
-          const tenureOptions = termArray.map((t: any) => ({
-            text: `${t.term} years`,
-            value: Number(t.term),
-          }))
-          setAvailableTenures(tenureOptions)
-        }
-      }
-
-      if (data && data[0]?.pay_mode) {
-        try {
-          let payModeArray =
-            typeof data[0].pay_mode === 'string' ? JSON.parse(data[0].pay_mode) : data[0].pay_mode
-          if (Array.isArray(payModeArray)) {
-            const valid = payModeArray.filter(
-              (m: any) =>
-                m &&
-                typeof m === 'object' &&
-                m.paymode_name &&
-                m.paymode_name.trim() !== '' &&
-                m.paymode_id != null,
-            )
-            setAvailablePaymentModes(valid)
-          } else {
-            setAvailablePaymentModes([])
-          }
-        } catch {
-          setAvailablePaymentModes([])
-        }
-      } else {
-        setAvailableTenures([])
-      }
-    } catch (err) {
-      setTenureError(err instanceof Error ? err.message : 'Failed to fetch tenure options')
-      setAvailableTenures([])
-    } finally {
-      setIsLoadingTenures(false)
-      setIsLoadingPaymentModes(false)
-    }
   }
 
   useEffect(() => {
     if (formData.Age) {
       fetchPlans(formData.Age)
-      setFormData((prev) => ({ ...prev, PlanCode: 0, Term: 0 }))
+      setFormData((prev) => ({ ...prev, PlanCode: 0, Term: 0, PaymentMode: 0 }))
       setSelectedPlan(null)
       setAvailableTenures([])
+      setAvailablePaymentModes([])
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.Age])
 
   useEffect(() => {
@@ -363,6 +424,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       setIsLoadingTenures(false)
       setIsLoadingPaymentModes(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.PlanCode, formData.Age])
 
   const calculatePremium = async () => {
@@ -388,7 +450,8 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
       const data: ApiResponse[] = await response.json()
       if (data && data.length > 0) {
         setApiResponse(data[0])
-        onApiResponse?.(data[0], currentPaymentMode, selectedPlan?.plan_name || '')
+        // pass canonical EN name to parent for any mapping logic
+        onApiResponse?.(data[0], currentPaymentMode, selectedPlan?.key)
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
@@ -485,7 +548,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                 <div className="p-4">
                   <DatePicker
                     selected={tempSelectedDate}
-                    onChange={handleDateChange}
+                    onChange={(d) => setTempSelectedDate(d)}
                     maxDate={new Date()}
                     minDate={new Date(new Date().getFullYear() - 65, 0, 1)}
                     showYearDropdown
@@ -532,7 +595,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             <Input
               type="text"
               placeholder={L('Age', 'বয়স')}
-              value={formData.Age ? `${L('Age', 'বয়স')}: ${formData.Age}` : ''}
+              value={formData.Age ? `${L('Age', 'বয়স')}: ${lang === 'en' ? formData.Age : bnNum(formData.Age)}` : ''}
               readOnly
               className={`bg-gray-50 shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-3 py-5 xl:px-4 xl:py-6 cursor-not-allowed text-xs xl:text-sm ${
                 fieldErrors.Age ? 'border-red-500 border-2' : ''
@@ -554,7 +617,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         )}
       </div>
 
-      {/* Plans (menu UI unchanged, just localized placeholders/tooltips) */}
+      {/* Plans (DropdownMenu) */}
       <div
         className="relative col-span-2 md:col-span-1"
         onMouseEnter={() => setIsHoveringPlanSelect(true)}
@@ -619,27 +682,19 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                 }`}
               >
                 {(() => {
-                  const regular = availablePlans.filter(
-                    (p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup,
-                  )
-                  const pickedRegular = regular.find((p) => p.plan_code === formData.PlanCode)
-                  const pickedChild = childEducationVariants.find(
-                    (p) => p.plan_code === formData.PlanCode,
-                  )
-                  const selectedLabel = pickedRegular?.plan_name ?? pickedChild?.plan_name ?? ''
+                  const pickedRegular = availablePlans.find((p) => p.plan_code === formData.PlanCode)
+                  const pickedChild = childEducationVariants.find((p) => p.plan_code === formData.PlanCode)
+                  const label = pickedRegular?.[lang === 'en' ? 'labelEn' : 'labelBn'] ?? pickedChild?.[lang === 'en' ? 'labelEn' : 'labelBn'] ?? ''
 
-                  if (selectedLabel) return selectedLabel
+                  if (label) return label
                   if (isLoadingPlans) return L('Loading plans...', 'প্ল্যান লোড হচ্ছে...')
-                  if (!formData.Age)
-                    return L('Enter age to load plans', 'প্ল্যান দেখতে আগে বয়স লিখুন')
+                  if (!formData.Age) return L('Enter age to load plans', 'প্ল্যান দেখতে আগে বয়স লিখুন')
                   if (availablePlans.length === 0 && childEducationVariants.length === 0)
                     return L('No plans available', 'কোনো প্ল্যান পাওয়া যায়নি')
                   return L('Select Plan', 'প্ল্যান নির্বাচন করুন')
                 })()}
               </span>
-              <ChevronDown
-                className={`h-4 w-4 shrink-0 transition-transform ${planMenuOpen ? 'rotate-180' : ''}`}
-              />
+              <ChevronDown className={`h-4 w-4 shrink-0 transition-transform ${planMenuOpen ? 'rotate-180' : ''}`} />
             </Button>
           </DropdownMenuTrigger>
 
@@ -653,48 +708,40 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                 {L('Plans', 'প্ল্যানসমূহ')}
               </DropdownMenuLabel>
 
-              {availablePlans
-                .filter((p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup)
-                .map((plan) => {
-                  const selected = formData.PlanCode === plan.plan_code
-                  return (
-                    <DropdownMenuItem
-                      key={plan.plan_code}
-                      onClick={() => {
-                        const planWithVideo = {
-                          ...plan,
-                          videoLink:
-                            videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings],
-                        }
-                        setSelectedPlan(planWithVideo)
-                        setFormData((prev) => ({
-                          ...prev,
-                          PlanCode: plan.plan_code,
-                          Term: 0,
-                          PaymentMode: 0,
-                        }))
-                        setAvailableTenures([])
-                        setAvailablePaymentModes([])
-                        setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
-                      }}
-                      className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${selected ? 'bg-accent text-accent-foreground' : ''}`}
-                    >
-                      <Check className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`} />
-                      <span className="truncate">{plan.plan_name}</span>
-                    </DropdownMenuItem>
-                  )
-                })}
-
-              {!isLoadingPlans &&
-                formData.Age &&
-                availablePlans.filter(
-                  (p) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup,
-                ).length === 0 && (
-                  <DropdownMenuItem disabled className="px-3 py-2">
-                    {L('No regular plans available', 'কোনো সাধারণ প্ল্যান নেই')}
+              {/* Regular plans */}
+              {availablePlans.map((plan) => {
+                const selected = formData.PlanCode === plan.plan_code
+                const label = lang === 'en' ? plan.labelEn : plan.labelBn
+                return (
+                  <DropdownMenuItem
+                    key={plan.plan_code}
+                    onClick={() => {
+                      setSelectedPlan(plan)
+                      setFormData((prev) => ({
+                        ...prev,
+                        PlanCode: plan.plan_code,
+                        Term: 0,
+                        PaymentMode: 0,
+                      }))
+                      setAvailableTenures([])
+                      setAvailablePaymentModes([])
+                      setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
+                    }}
+                    className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${selected ? 'bg-accent text-accent-foreground' : ''}`}
+                  >
+                    <Check className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`} />
+                    <span className="truncate">{label}</span>
                   </DropdownMenuItem>
-                )}
+                )
+              })}
 
+              {!isLoadingPlans && formData.Age && availablePlans.length === 0 && (
+                <DropdownMenuItem disabled className="px-3 py-2">
+                  {L('No regular plans available', 'কোনো সাধারণ প্ল্যান নেই')}
+                </DropdownMenuItem>
+              )}
+
+              {/* Child Education group */}
               {childEducationVariants.length > 0 && (
                 <>
                   <DropdownMenuSeparator />
@@ -707,34 +754,15 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                     <DropdownMenuSubContent className="z-[1100] min-w-[280px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden">
                       {childEducationVariants.map((variant) => {
                         const selected = formData.PlanCode === variant.plan_code
+                        const label = lang === 'en' ? variant.labelEn : variant.labelBn
                         return (
                           <DropdownMenuItem
                             key={variant.plan_code}
-                            onClick={() => {
-                              const planWithVideo = {
-                                ...variant,
-                                videoLink:
-                                  videoLinkMappings[
-                                    variant.plan_name as keyof typeof videoLinkMappings
-                                  ],
-                              }
-                              setSelectedPlan(planWithVideo)
-                              setFormData((prev) => ({
-                                ...prev,
-                                PlanCode: variant.plan_code,
-                                Term: 0,
-                                PaymentMode: 0,
-                              }))
-                              setAvailableTenures([])
-                              setAvailablePaymentModes([])
-                              setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
-                            }}
+                            onClick={() => handleChildEducationPlanSelect(variant)}
                             className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${selected ? 'bg-accent text-accent-foreground' : ''}`}
                           >
-                            <Check
-                              className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`}
-                            />
-                            <span className="truncate">{variant.plan_name}</span>
+                            <Check className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`} />
+                            <span className="truncate">{label}</span>
                           </DropdownMenuItem>
                         )
                       })}
@@ -743,18 +771,16 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                 </>
               )}
 
-              {!isLoadingPlans &&
-                formData.Age &&
-                availablePlans.length === 0 &&
-                childEducationVariants.length === 0 && (
-                  <DropdownMenuItem disabled className="px-3 py-2">
-                    {L('No plans available for this age', 'এই বয়সের জন্য কোনো প্ল্যান নেই')}
-                  </DropdownMenuItem>
-                )}
+              {!isLoadingPlans && formData.Age && availablePlans.length === 0 && childEducationVariants.length === 0 && (
+                <DropdownMenuItem disabled className="px-3 py-2">
+                  {L('No plans available for this age', 'এই বয়সের জন্য কোনো প্ল্যান নেই')}
+                </DropdownMenuItem>
+              )}
             </div>
           </DropdownMenuContent>
         </DropdownMenu>
 
+        {/* Tooltip when disabled */}
         {isPlanDisabled && isHoveringPlanSelect && (
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-2 bg-gray-600 bg-opacity-90 text-white text-sm rounded-md shadow-lg z-50 whitespace-nowrap">
             {planDisabledMsg}
@@ -762,11 +788,12 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           </div>
         )}
 
+        {/* Watch video */}
         {selectedPlan && selectedPlan.videoLink && (
           <Dialog>
             <DialogTrigger asChild>
               <p className="text-[10px] py-1 absolute inset-x-0 text-[#FF6600] underline cursor-pointer">
-                {L('Watch', 'ভিডিও দেখুন')} {selectedPlan.plan_name} {L('Video', '')}
+                {L('Watch', 'ভিডিও দেখুন')} {lang === 'en' ? selectedPlan.labelEn : selectedPlan.labelBn} {L('Video', '')}
               </p>
             </DialogTrigger>
             <DialogContent
@@ -781,7 +808,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
               <iframe
                 width="100%"
                 height="100%"
-                src={selectedPlan?.videoLink}
+                src={selectedPlan.videoLink}
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -804,17 +831,13 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         onMouseLeave={() => setIsHoveringTenureSelect(false)}
       >
         <Select
-          value={
-            formData.Term && formData.Term > 0
-              ? availableTenures.find((t) => t.value === formData.Term)?.text || ''
-              : ''
-          }
+          value={formData.Term ? String(formData.Term) : ''}
           disabled={
             isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0
           }
           onValueChange={(v) => {
-            const tenure = availableTenures.find((t) => t.text === v)
-            if (tenure) handleInputChange('Term', tenure.value)
+            const val = parseInt(v, 10)
+            if (!isNaN(val)) handleInputChange('Term', val)
           }}
         >
           <SelectTrigger
@@ -849,8 +872,8 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             <SelectGroup>
               <SelectLabel>{L('Tenure', 'মেয়াদ')}</SelectLabel>
               {availableTenures.map((tenure) => (
-                <SelectItem key={tenure.value} value={tenure.text}>
-                  {tenure.text}
+                <SelectItem key={tenure.value} value={String(tenure.value)}>
+                  {lang === 'en' ? tenure.labelEn : tenure.labelBn}
                 </SelectItem>
               ))}
               {availableTenures.length === 0 &&
@@ -880,13 +903,10 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         <Select
           value={
             formData.Gender !== null && formData.Gender !== undefined
-              ? genders.find((g) => g.value === formData.Gender)?.text || ''
+              ? String(formData.Gender)
               : ''
           }
-          onValueChange={(v) => {
-            const gender = genders.find((g) => g.text === v)
-            if (gender) handleInputChange('Gender', gender.value)
-          }}
+          onValueChange={(v) => handleInputChange('Gender', parseInt(v, 10))}
         >
           <SelectTrigger
             className={`bg-white shadow-[0px_0px_5px_0px_#00000040] rounded-[10px] px-5 py-5 xl:px-6 xl:py-6 ${
@@ -898,9 +918,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>{L('Gender', 'লিঙ্গ')}</SelectLabel>
-              {genders.map((gender) => (
-                <SelectItem key={gender.text} value={gender.text}>
-                  {L(gender.text, gender.text === 'Male' ? 'পুরুষ' : 'মহিলা')}
+              {genders.map((g) => (
+                <SelectItem key={g.value} value={String(g.value)}>
+                  {L(g.textEn, g.textBn)}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -945,7 +965,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         ) : (
           <p className="text-[8px] md:text-[10px] py-2 absolute right-1">
             {L('Suggested', 'সাজেস্টেড')}{' '}
-            <span className="text-[#FF6600]">{suggestedAmount.toLocaleString()}</span>{' '}
+            <span className="text-[#FF6600]">
+              {lang === 'en' ? suggestedAmount.toLocaleString() : bnNum(suggestedAmount.toLocaleString())}
+            </span>{' '}
             {L('BDT', 'টাকা')}
           </p>
         )}
@@ -969,12 +991,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         onMouseLeave={() => setIsHoveringPaymentSelect(false)}
       >
         <Select
-          value={
-            formData.PaymentMode && formData.PaymentMode > 0
-              ? availablePaymentModes.find((pm) => pm.paymode_id === formData.PaymentMode)
-                  ?.paymode_name || ''
-              : ''
-          }
+          value={formData.PaymentMode ? String(formData.PaymentMode) : ''}
           disabled={
             isLoadingPaymentModes ||
             !formData.PlanCode ||
@@ -983,7 +1000,8 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             availablePaymentModes.length === 0
           }
           onValueChange={(v) => {
-            const method = availablePaymentModes.find((pm) => pm.paymode_name === v)
+            const id = parseInt(v, 10)
+            const method = availablePaymentModes.find((pm) => pm.paymode_id === id)
             if (method) {
               handleInputChange('PaymentMode', method.paymode_id)
               setCurrentPaymentMode(method.paymode_name)
@@ -1000,10 +1018,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
                 isLoadingPaymentModes
                   ? L('Loading payment methods...', 'পেমেন্ট মেথড লোড হচ্ছে...')
                   : !formData.PlanCode || !formData.Age || !formData.Term
-                    ? L(
-                        'Select plan, age & term first',
-                        'প্রথমে প্ল্যান, বয়স ও মেয়াদ নির্বাচন করুন',
-                      )
+                    ? L('Select plan, age & term first', 'প্রথমে প্ল্যান, বয়স ও মেয়াদ নির্বাচন করুন')
                     : availablePaymentModes.length === 0
                       ? L('No payment methods available', 'কোনো পেমেন্ট মেথড নেই')
                       : L('Select Payment Method', 'পেমেন্ট মেথড নির্বাচন করুন')
@@ -1019,24 +1034,11 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>{L('Payment Method', 'পেমেন্ট মেথড')}</SelectLabel>
-              {availablePaymentModes
-                .map((paymentMethod, index) => {
-                  if (
-                    !paymentMethod ||
-                    !paymentMethod.paymode_name ||
-                    paymentMethod.paymode_name.trim() === ''
-                  )
-                    return null
-                  return (
-                    <SelectItem
-                      key={`payment-${paymentMethod.paymode_id}-${paymentMethod.paymode_name}-${index}`}
-                      value={paymentMethod.paymode_name}
-                    >
-                      {paymentMethod.paymode_name}
-                    </SelectItem>
-                  )
-                })
-                .filter(Boolean)}
+              {availablePaymentModes.map((pm) => (
+                <SelectItem key={pm.paymode_id} value={String(pm.paymode_id)}>
+                  {localizePaymode(pm.paymode_name, lang as 'en' | 'bn')}
+                </SelectItem>
+              ))}
               {availablePaymentModes.length === 0 &&
                 !isLoadingPaymentModes &&
                 formData.PlanCode &&
@@ -1076,7 +1078,7 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
         />
       </div>
 
-      {/* Consent (left as-is per your instruction; feel free to localize similarly if needed) */}
+      {/* Consent */}
       <div className="col-span-2">
         <label className="flex items-start gap-3">
           <Checkbox
@@ -1084,11 +1086,10 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             checked={agreeTerms}
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
-
           <span className="text-xs md:text-sm leading-relaxed">
             <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
             <span className="font-semibold">
-              <LocalizedText en="Request for purchase" bn="আপনি আমাদের " />
+              <LocalizedText en="Calculate Now" bn="আপনি আমাদের " />
             </span>
             <LocalizedText en=", you agree to our " bn="" />
             <Link

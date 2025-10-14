@@ -102,6 +102,12 @@ function SavingAndInvestment() {
         // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature1.png`,
       },
       {
+        name: 'Survival Benefits',
+        nameBN: 'সারভাইভাল বেনিফিটস',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature8.png`,
+        // mobileImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/mobile/feature1.png`,
+      },
+      {
         name: 'Death Benefit',
         nameBN: 'ডেথ বেনিফিট',
         image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/icons/web/feature2.png`,

@@ -41,6 +41,78 @@ import useSSRLanguage from '@/hooks/useSSRLanguage'
 import LocalizedString from '../shared/LocalizedString'
 import LocalizedText from '../shared/LocalizedText'
 
+/* ---------------- helpers JUST for select option localization ---------------- */
+
+const bnNum = (s: string | number) => String(s).replace(/[0-9]/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)])
+
+const PLAN_LABELS: Record<string, { en: string; bn: string }> = {
+  'Shanta Endowment Plan': { en: 'Shanta Endowment Plan', bn: 'শান্তা এনডাওমেন্ট প্ল্যান' },
+  'Shanta 3 Stage Plan': { en: 'Shanta 3 Stage Plan', bn: 'শান্তা থ্রি পেমেন্ট প্ল্যান' },
+  'Shanta 4 Stage Plan': { en: 'Shanta 4 Stage Plan', bn: 'শান্তা ফোর পেমেন্ট প্ল্যান' },
+  'Shanta Child Education Plan (1%)': {
+    en: 'Shanta Child Education Plan (1%)',
+    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (১%)',
+  },
+  'Shanta Child Education Plan (2%)': {
+    en: 'Shanta Child Education Plan (2%)',
+    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (২%)',
+  },
+  'Shanta Child Education Plan (3%)': {
+    en: 'Shanta Child Education Plan (3%)',
+    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (৩%)',
+  },
+  'Shanta Child Education Plan Single Payment (1%)': {
+    en: 'Shanta Child Education Plan Single Payment (1%)',
+    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (১%)',
+  },
+  'Shanta Child Education Plan Single Payment (2%)': {
+    en: 'Shanta Child Education Plan Single Payment (2%)',
+    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (২%)',
+  },
+  'Shanta Child Education Plan Single Payment (3%)': {
+    en: 'Shanta Child Education Plan Single Payment (3%)',
+    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (৩%)',
+  },
+}
+// API → canonical EN
+const API_PLAN_NAME_MAP: Record<string, string> = {
+  'Shanta Endowment': 'Shanta Endowment Plan',
+  'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
+  'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
+  'Shanta Child Education Plan (1%)': 'Shanta Child Education Plan (1%)',
+  'Shanta Child Education Plan (2%)': 'Shanta Child Education Plan (2%)',
+  'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
+  'Shanta Child Education Plan Single Payment (1%)':
+    'Shanta Child Education Plan Single Payment (1%)',
+  'Shanta Child Education Plan Single Payment (2%)':
+    'Shanta Child Education Plan Single Payment (2%)',
+  'Shanta Child Education Plan Single Payment (3%)':
+    'Shanta Child Education Plan Single Payment (3%)',
+}
+const planLabel = (name: string, lang: 'en' | 'bn') => PLAN_LABELS[name]?.[lang] ?? name
+
+const localizeTenure = (label: string, lang: 'en' | 'bn') => {
+  if (lang === 'en') return label
+  // "10 years" -> "১০ বছর"
+  return label.replace(/(\d+)/, (m) => bnNum(m)).replace(/years?/, 'বছর')
+}
+
+const localizePaymode = (name: string, lang: 'en' | 'bn') => {
+  const map: Record<string, { en: string; bn: string }> = {
+    Yearly: { en: 'Yearly', bn: 'বার্ষিক' },
+    'Half Yearly': { en: 'Half Yearly', bn: 'অর্ধ-বার্ষিক' },
+    HalfYearly: { en: 'Half Yearly', bn: 'অর্ধ-বার্ষিক' },
+    Quarterly: { en: 'Quarterly', bn: 'ত্রৈমাসিক' },
+    Monthly: { en: 'Monthly', bn: 'মাসিক' },
+    Single: { en: 'Single Payment', bn: 'এককালীন' },
+    'Single Payment': { en: 'Single Payment', bn: 'এককালীন' },
+  }
+  const key = map[name] ? name : name.replace(/\s+/g, '')
+  return map[key] ? map[key][lang] : name
+}
+
+/* --------------------------------------------------------------------------- */
+
 interface FormData {
   PlanCode: number
   Age: number
@@ -216,26 +288,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       const data = await response.json()
 
       if (Array.isArray(data)) {
-        const planNameMappings: Record<string, string> = {
-          'Shanta Endowment': 'Shanta Endowment Plan',
-          'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
-          'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
-          'Shanta Child Education Plan (1%)': 'Shanta Child Education Plan (1%)',
-          'Shanta Child Education Plan (2%)': 'Shanta Child Education Plan (2%)',
-          'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
-          'Shanta Child Education Plan Single Payment (1%)':
-            'Shanta Child Education Plan Single Payment (1%)',
-          'Shanta Child Education Plan Single Payment (2%)':
-            'Shanta Child Education Plan Single Payment (2%)',
-          'Shanta Child Education Plan Single Payment (3%)':
-            'Shanta Child Education Plan Single Payment (3%)',
-        }
-
         const normalized = data
-          .filter((plan: any) => planNameMappings.hasOwnProperty(plan.plan_name))
+          .filter((plan: any) => API_PLAN_NAME_MAP[plan.plan_name])
           .map((plan: any) => ({
             ...plan,
-            plan_name: planNameMappings[plan.plan_name as keyof typeof planNameMappings],
+            plan_name: API_PLAN_NAME_MAP[plan.plan_name],
           }))
 
         const childPlans = normalized.filter((p: any) =>
@@ -276,7 +333,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
   const handleInputChange = (field: keyof FormData, value: string | number) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
     if (field in fieldErrors && (fieldErrors as any)[field]) {
-      setFieldErrors((prev) => ({ ...prev, [field]: false }))
+      setFieldErrors((prev) => ({ ...prev, [field]: false }) as any)
     }
   }
 
@@ -420,6 +477,8 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         return 'Please select a payment method'
       case 'Gender':
         return 'Please select your gender'
+      case 'agreeTerms':
+        return 'Please agree to the terms'
       default:
         return ''
     }
@@ -436,7 +495,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       PaymentMode: false,
       Gender: false,
       agreeTerms: false,
-    })
+    } as any)
 
     const errors = {
       PlanCode: !formData.PlanCode,
@@ -542,12 +601,14 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
               variant="outline"
               disabled
               className="w-full justify-start text-left font-normal !text-[12px] md:!text-[14px] 2xl:!text-[16px]
-                         placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
-                         rounded-sm lg:rounded-[9px] xl:rounded-[10px]
-                         shadow-[0px_0px_5px_0px_#00000040] px-3 py-5 xl:px-4 xl:py-6
-                         bg-background text-foreground cursor-not-allowed opacity-60"
+               placeholder:!text-[12px] md:placeholder:!text-[14px] 2xl:placeholder:!text-[16px]
+               rounded-sm lg:rounded-[9px] xl:rounded-[10px]
+               shadow-[0px_0px_5px_0px_#00000040] px-3 py-5 xl:px-4 xl:py-6
+               bg-background text-foreground cursor-not-allowed opacity-60"
             >
-              {formData.Age ? `${L('Age', 'বয়স')}: ${formData.Age}` : L('Age', 'বয়স')}
+              {formData.Age
+                ? `${L('Age', 'বয়স')}: ${formatLocalizedNumber(formData.Age, lang)}`
+                : L('Age', 'বয়স')}
             </Button>
           </div>
         </div>
@@ -556,7 +617,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         )}
       </div>
 
-      {/* PLAN SELECTOR — DROPDOWN MENU (exact structure you requested) */}
+      {/* PLAN SELECTOR — DROPDOWN MENU */}
       <div
         className="relative col-span-2 md:col-span-1"
         onMouseEnter={() => setIsHoveringPlanSelect(true)}
@@ -632,9 +693,9 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
                   const pickedChild = childEducationVariants.find(
                     (p) => p.plan_code === formData.PlanCode,
                   )
-                  const selectedLabel = pickedRegular?.plan_name ?? pickedChild?.plan_name ?? ''
+                  const raw = pickedRegular?.plan_name ?? pickedChild?.plan_name ?? ''
 
-                  if (selectedLabel) return selectedLabel
+                  if (raw) return planLabel(raw, lang as 'en' | 'bn')
                   if (isLoadingPlans) return 'Loading plans...'
                   if (!formData.Age) return L('Enter age to load plans', 'প্ল্যান দেখতে বয়স দিন')
                   if (availablePlans.length === 0 && childEducationVariants.length === 0)
@@ -658,13 +719,14 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             <div className="py-2">
               <DropdownMenuLabel className="px-3 py-2">Plans</DropdownMenuLabel>
 
-              {/* Regular plans */}
+              {/* Regular plans (localized label) */}
               {availablePlans
                 .filter(
                   (p: any) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup,
                 )
                 .map((plan) => {
                   const selected = formData.PlanCode === plan.plan_code
+                  const label = planLabel(plan.plan_name, lang as 'en' | 'bn')
                   return (
                     <DropdownMenuItem
                       key={plan.plan_code}
@@ -683,12 +745,12 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
                         }))
                         setAvailableTenures([])
                         setAvailablePaymentModes([])
-                        setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
+                        setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }) as any)
                       }}
                       className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${selected ? 'bg-accent text-accent-foreground' : ''}`}
                     >
                       <Check className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`} />
-                      <span className="truncate">{plan.plan_name}</span>
+                      <span className="truncate">{label}</span>
                     </DropdownMenuItem>
                   )
                 })}
@@ -704,17 +766,23 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
                   </DropdownMenuItem>
                 )}
 
-              {/* Child Education submenu */}
+              {/* Child Education submenu (localized titles + items) */}
               {childEducationVariants.length > 0 && (
                 <>
                   <DropdownMenuSeparator />
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger className="px-3 py-2 cursor-pointer flex items-center justify-between">
-                      <span>Shanta Child Education Plan</span>
+                      <span>
+                        {planLabel('Shanta Child Education Plan (3%)', lang as 'en' | 'bn').replace(
+                          /\s*\(৩%\)|\s*\(3%\)/,
+                          '',
+                        )}
+                      </span>
                     </DropdownMenuSubTrigger>
                     <DropdownMenuSubContent className="z-[1100] min-w-[280px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden">
                       {childEducationVariants.map((variant) => {
                         const selected = formData.PlanCode === variant.plan_code
+                        const label = planLabel(variant.plan_name, lang as 'en' | 'bn')
                         return (
                           <DropdownMenuItem
                             key={variant.plan_code}
@@ -735,14 +803,16 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
                               }))
                               setAvailableTenures([])
                               setAvailablePaymentModes([])
-                              setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }))
+                              setFieldErrors(
+                                (prev) => ({ ...prev, PlanCode: false, Term: false }) as any,
+                              )
                             }}
                             className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${selected ? 'bg-accent text-accent-foreground' : ''}`}
                           >
                             <Check
                               className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`}
                             />
-                            <span className="truncate">{variant.plan_name}</span>
+                            <span className="truncate">{label}</span>
                           </DropdownMenuItem>
                         )
                       })}
@@ -772,12 +842,12 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           </div>
         )}
 
-        {/* Watch video link */}
+        {/* Watch video link (uses localized title for display only) */}
         {selectedPlan && selectedPlan.videoLink && (
           <Dialog>
             <DialogTrigger asChild>
               <p className="text-[10px] py-1 absolute inset-x-0 text-[#FF6600] underline cursor-pointer">
-                Watch {selectedPlan.plan_name} Video
+                Watch {planLabel(selectedPlan.plan_name, lang as 'en' | 'bn')} Video
               </p>
             </DialogTrigger>
             <DialogContent
@@ -813,22 +883,20 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         )}
       </div>
 
-      {/* TERM */}
+      {/* TERM (Tenure) */}
       <div
         className="col-span-2 md:col-span-1 relative"
         onMouseEnter={() => setIsHoveringTenureSelect(true)}
         onMouseLeave={() => setIsHoveringTenureSelect(false)}
       >
         <Select
-          value={
-            formData.Term > 0 ? availableTenures.find((t) => t.value === formData.Term)?.text : ''
-          }
+          value={formData.Term > 0 ? String(formData.Term) : ''}
           disabled={
             isLoadingTenures || !formData.PlanCode || !formData.Age || availableTenures.length === 0
           }
           onValueChange={(v) => {
-            const tenure = availableTenures.find((t) => t.text === v)
-            if (tenure) handleInputChange('Term', tenure.value)
+            const num = parseInt(v, 10)
+            if (!isNaN(num)) handleInputChange('Term', num)
           }}
         >
           <SelectTrigger
@@ -869,8 +937,8 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             <SelectGroup>
               <SelectLabel>Tenure</SelectLabel>
               {availableTenures.map((tenure) => (
-                <SelectItem key={tenure.value} value={tenure.text}>
-                  {tenure.text}
+                <SelectItem key={tenure.value} value={String(tenure.value)}>
+                  {localizeTenure(tenure.text, lang as 'en' | 'bn')}
                 </SelectItem>
               ))}
               {availableTenures.length === 0 &&
@@ -892,17 +960,15 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         )}
       </div>
 
-      {/* GENDER */}
+      {/* GENDER (labels localized; value unchanged) */}
       <div className="col-span-2 md:col-span-1">
         <Select
           value={
-            formData.Gender !== undefined && formData.Gender !== null
-              ? genders.find((g) => g.value === formData.Gender)?.text
-              : ''
+            formData.Gender !== undefined && formData.Gender !== null ? String(formData.Gender) : ''
           }
           onValueChange={(v) => {
-            const gender = genders.find((g) => g.text === v)
-            if (gender) handleInputChange('Gender', gender.value)
+            const num = parseInt(v, 10)
+            if (!isNaN(num)) handleInputChange('Gender', num)
           }}
         >
           <SelectTrigger
@@ -916,10 +982,12 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Gender</SelectLabel>
-              {genders.map((gender) => (
-                <SelectItem key={gender.text} value={gender.text}>
-                  {gender.text}
+              <SelectLabel>
+                <LocalizedText en="Gender" bn="লিঙ্গ" />
+              </SelectLabel>
+              {genders.map((g) => (
+                <SelectItem key={g.value} value={String(g.value)}>
+                  {L(g.text, g.text === 'Male' ? 'পুরুষ' : 'মহিলা')}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -1002,19 +1070,14 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         />
       </div>
 
-      {/* PAYMENT MODE */}
+      {/* PAYMENT MODE (display localized label; keep values the same) */}
       <div
         className="col-span-2 md:col-span-1 relative"
         onMouseEnter={() => setIsHoveringPaymentSelect(true)}
         onMouseLeave={() => setIsHoveringPaymentSelect(false)}
       >
         <Select
-          value={
-            formData.PaymentMode > 0
-              ? availablePaymentModes.find((pm) => pm.paymode_id === formData.PaymentMode)
-                  ?.paymode_name
-              : ''
-          }
+          value={formData.PaymentMode > 0 ? String(formData.PaymentMode) : ''}
           disabled={
             isLoadingPaymentModes ||
             !formData.PlanCode ||
@@ -1023,7 +1086,8 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             availablePaymentModes.length === 0
           }
           onValueChange={(v) => {
-            const method = availablePaymentModes.find((pm) => pm.paymode_name === v)
+            const id = parseInt(v, 10)
+            const method = availablePaymentModes.find((pm) => pm.paymode_id === id)
             if (method) {
               handleInputChange('PaymentMode', method.paymode_id)
               setCurrentPaymentMode(method.paymode_name)
@@ -1070,24 +1134,11 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Payment Method</SelectLabel>
-              {availablePaymentModes
-                .map((paymentMethod, index) => {
-                  if (
-                    !paymentMethod ||
-                    !paymentMethod.paymode_name ||
-                    paymentMethod.paymode_name.trim() === ''
-                  )
-                    return null
-                  return (
-                    <SelectItem
-                      key={`payment-${paymentMethod.paymode_id}-${paymentMethod.paymode_name}-${index}`}
-                      value={paymentMethod.paymode_name}
-                    >
-                      {paymentMethod.paymode_name}
-                    </SelectItem>
-                  )
-                })
-                .filter(Boolean)}
+              {availablePaymentModes.map((pm) => (
+                <SelectItem key={pm.paymode_id} value={String(pm.paymode_id)}>
+                  {localizePaymode(pm.paymode_name, lang as 'en' | 'bn')}
+                </SelectItem>
+              ))}
               {availablePaymentModes.length === 0 &&
                 !isLoadingPaymentModes &&
                 formData.PlanCode &&
@@ -1141,7 +1192,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         />
       </div>
 
-      {/* CONSENT CHECKBOX */}
+      {/* CONSENT CHECKBOX (unchanged text) */}
       <div className="col-span-2">
         <label className="flex items-start gap-3">
           <Checkbox
@@ -1151,7 +1202,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
               const next = Boolean(v)
               setAgreeTerms(next)
               if (fieldErrors.agreeTerms && next) {
-                setFieldErrors((prev) => ({ ...prev, agreeTerms: false }))
+                setFieldErrors((prev) => ({ ...prev, agreeTerms: false }) as any)
               }
             }}
             className={fieldErrors.agreeTerms ? 'border-red-500' : ''}
@@ -1198,7 +1249,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         <GlobalButton
           type="submit"
           variant="secondary"
-          disabled={isLoading || !agreeTerms} // ⬅️ disable until checked
+          disabled={isLoading || !agreeTerms}
           aria-disabled={isLoading || !agreeTerms}
           className={[
             'px-5 py-5 xl:px-6 xl:py-6 w-full md:w-full lg:w-full xl:w-full 2xl:w-full',
@@ -1206,12 +1257,13 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             !agreeTerms || isLoading ? 'opacity-60 cursor-not-allowed' : '',
           ].join(' ')}
         >
-          {/* {isLoading ? 'Calculating...' : 'Get A Quote Now'} */}
+          {' '}
+          {/* {isLoading ? 'Calculating...' : 'Get A Quote Now'} */}{' '}
           <LocalizedString
             en={isLoading ? 'Calculating...' : 'Get A Quote Now'}
             bn={isLoading ? 'হিসাব...' : 'আপনার প্রিমিয়াম ক্যালকুলেট করুন'}
-          />
-        </GlobalButton>
+          />{' '}
+        </GlobalButton>{' '}
       </div>
     </form>
   )

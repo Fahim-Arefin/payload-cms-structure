@@ -1,7 +1,10 @@
-import { PayPremiumDataType } from '@/types'
+'use client'
+
 import React from 'react'
-import GlobalButton from '@/components/custom/shared/GlobalButton'
-import ToolTip from '@/components/custom/shared/ToolTip'
+import Link from 'next/link'
+import Image from 'next/image'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   bgColor?: string
@@ -14,13 +17,97 @@ type Props = {
   }
 }
 
+/* =========================
+   Link helpers (EN & BN)
+   ========================= */
+
+type TargetLink = {
+  phrase: string
+  href: string
+  external?: boolean
+  className?: string
+}
+
+/** Split strings and interleave with <Link> for a single target phrase. */
+function interleavePiecesWithLink(
+  pieces: (string | React.ReactNode)[],
+  t: TargetLink
+) {
+  const next: (string | React.ReactNode)[] = []
+
+  for (const chunk of pieces) {
+    if (typeof chunk !== 'string') {
+      next.push(chunk)
+      continue
+    }
+
+    const parts = chunk.split(t.phrase)
+    parts.forEach((part, i) => {
+      next.push(part)
+      if (i < parts.length - 1) {
+        next.push(
+          <Link
+            key={`${t.phrase}-${i}-${part.length}`}
+            href={t.href}
+            {...(t.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            className={t.className ?? 'text-[#ED7125] underline hover:no-underline'}
+          >
+            {t.phrase}
+          </Link>
+        )
+      }
+    })
+  }
+
+  return next
+}
+
+/** Generic linkifier that can replace multiple phrases in order. */
+function linkifyText(text: string, targets: TargetLink[]): React.ReactNode {
+  let result: (string | React.ReactNode)[] = [text]
+  for (const t of targets) {
+    result = interleavePiecesWithLink(result, t)
+  }
+  return <>{result}</>
+}
+
+/** EN: link “EFT Debit Authorization form” → /premium-calculator#calculator */
+function renderWithLinksEN(text: string) {
+  return linkifyText(text, [
+    {
+      phrase: 'EFT Debit Authorization form',
+      href: '/premium-calculator#calculator',
+    },
+  ])
+}
+
+/** BN:
+ *  - “ইএফটি ডেবিট অনুমোদন ফর্ম” → /premium-calculator#calculator
+ *  - “মাই পোর্টাল” → https://portal.shantalife.com/ (external)
+ */
+function renderWithLinksBN(text: string) {
+  return linkifyText(text, [
+    {
+      phrase: 'ইএফটি ডেবিট অনুমোদন ফর্ম',
+      href: '/premium-calculator#calculator',
+    },
+    {
+      phrase: 'মাই পোর্টাল',
+      href: 'https://portal.shantalife.com/',
+      external: true,
+    },
+  ])
+}
+
+/* =========================
+   Component
+   ========================= */
+
 function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
   return (
     <div
-      className=" container-padding"
-      style={{
-        backgroundColor: bgColor,
-      }}
+      className="container-padding"
+      style={{ backgroundColor: bgColor }}
     >
       {/* heading */}
       <div className="hidden lg:block">
@@ -34,7 +121,8 @@ function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
           />
         </h1>
       </div>
-      <div className="lg:hidden ">
+
+      <div className="lg:hidden">
         <h1 className="global-h1 uppercase text-[#3A3A3A] font-medium">
           <LocalizedHighlighted
             textEn="Authorization of EFT Debit"
@@ -45,25 +133,22 @@ function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
           />
         </h1>
       </div>
+
       <div
-        className={`grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-9 2xl:gap-16 ${align === 'left' ? ' lg:gap-0 ' : 'gap-7'}`}
+        className={`grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-9 2xl:gap-16 ${
+          align === 'left' ? ' lg:gap-0 ' : 'gap-7'
+        }`}
       >
-        {/* left content mobile*/}
-        {/* h-[300px] md:h-[400px] lg:h-auto  */}
+        {/* left content (mobile) */}
         <div
-          className={`lg:hidden
-            relative 
-            w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} w-full xl:w-[380px] 2xl:w-[500px] mx-auto
-             aspect-[2880/1920]
-            rounded-md lg:rounded-lg  xl:rounded-xl 
-            overflow-hidden
-            mt-12
-            
-           ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}
+          className={`lg:hidden relative w-full ${
+            align == 'left' ? ' lg:w-[93%] ' : ''
+          } w-full xl:w-[380px] 2xl:w-[500px] mx-auto aspect-[2880/1920] rounded-md lg:rounded-lg xl:rounded-xl overflow-hidden mt-12 ${
+            align === 'left' ? 'order-1' : 'order-1 lg:order-2'
+          }`}
           role="img"
           aria-label="Background image"
         >
-          {/* Background Image */}
           <Image
             src={data?.bgImage}
             alt="Background"
@@ -71,24 +156,19 @@ function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
             className="object-cover object-center"
             sizes="50vw"
           />
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/10 " />
+          <div className="absolute inset-0 bg-black/10" />
         </div>
-        {/* left content large*/}
-        {/* bg-[position:-80px_0px] md:bg-[position:-60px_0px] lg:bg-[position:-150px_0px] xl:bg-[position:0px_0px]  */}
+
+        {/* left content (large) */}
         <div
-          className={`hidden lg:block
-            relative 
-            w-full ${align == 'left' ? ' lg:w-[93%] ' : ''} w-full xl:w-[380px] 2xl:w-[500px] mx-auto
-            h-auto 
-            rounded-md lg:rounded-lg xl:rounded-xl 
-            overflow-hidden
-            mt-12
-           ${align === 'left' ? 'order-1' : 'order-1 lg:order-2 '}`}
+          className={`hidden lg:block relative w-full ${
+            align == 'left' ? ' lg:w-[93%] ' : ''
+          } w-full xl:w-[380px] 2xl:w-[500px] mx-auto h-auto rounded-md lg:rounded-lg xl:rounded-xl overflow-hidden mt-12 ${
+            align === 'left' ? 'order-1' : 'order-1 lg:order-2'
+          }`}
           role="img"
           aria-label="Background image"
         >
-          {/* Background Image */}
           <Image
             src={data?.bgImage}
             alt="Background"
@@ -96,18 +176,20 @@ function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
             className="object-cover object-center"
             sizes="50vw"
           />
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/10 " />
+          <div className="absolute inset-0 bg-black/10" />
         </div>
+
         {/* right content */}
         <div
-          className={`
-          flex flex-col mt-6 lg:mt-12
-        space-y-4 lg:space-y-4 xl:space-y-7
-        ${align === 'left' ? 'order-2' : 'order-2 lg:order-1'} `}
+          className={`flex flex-col mt-6 lg:mt-12 space-y-4 lg:space-y-4 xl:space-y-7 ${
+            align === 'left' ? 'order-2' : 'order-2 lg:order-1'
+          }`}
         >
           <div className="text-[#3A3A3A] global-h4 text-justify">
-            <LocalizedText en={renderWithFormLink(data?.content) as any} bn={data?.contentBN}/>
+            <LocalizedText
+              en={renderWithLinksEN(data?.content) as any}
+              bn={renderWithLinksBN(data?.contentBN ?? '') as any}
+            />
           </div>
         </div>
       </div>
@@ -116,25 +198,3 @@ function DebitSection({ bgColor = '#FFFFFF', align = 'left', data }: Props) {
 }
 
 export default DebitSection
-
-import Link from 'next/link'
-import Image from 'next/image'
-import LocalizedHighlighted from '../shared/LocalizedHighlighted'
-import LocalizedText from '../shared/LocalizedText'
-
-function renderWithFormLink(text: string) {
-  const linkText = 'EFT Debit Authorization form'
-  const linkHref = '/assets/pdf/EFT-Debit-Authorization-Form.pdf'
-  const idx = text.indexOf(linkText)
-  if (idx === -1) return text // phrase not found, return as-is
-
-  return (
-    <>
-      {text.substring(0, idx)}
-      <Link href={linkHref} target="_blank" className="text-[#ED7125] underline hover:no-underline">
-        {linkText}
-      </Link>
-      {text.substring(idx + linkText.length)}
-    </>
-  )
-}

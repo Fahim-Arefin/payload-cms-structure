@@ -376,7 +376,7 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0)
   const [windowWidth, setWindowWidth] = useState<number>(0)
   const [mobileDropdowns, setMobileDropdowns] = useState<Record<string, boolean>>({})
-    const { language, setLanguage } = useLanguage()
+  const { language, setLanguage } = useLanguage()
   const mounted = useMounted()
   const uiLang = mounted ? language : 'en'
 
@@ -469,7 +469,7 @@ export default function Navbar() {
                 `}
               >
                 <span>
-                  <LocalizedText en={item?.label} bn={item?.labelBN}/>
+                  <LocalizedText en={item?.label} bn={item?.labelBN} />
                 </span>
                 {hasChildren && (
                   <RiArrowDownSLine
@@ -574,12 +574,49 @@ export default function Navbar() {
             </Link>
           </div>
           {/* Burger Icon */}
-          <button
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="lg:hidden text-2xl text-[#1F1F1F]"
-          >
-            <RxHamburgerMenu />
-          </button>
+          <div className="flex flex-end gap-4 items-center justify-center">
+            <div className="flex lg:hidden items-center bg-[rgba(217,217,217,1)] rounded-full h-[20px] w-[90px] px-2">
+              <ToggleGroup
+                type="single"
+                value={uiLang}
+                onValueChange={(val) => (val === 'en' || val === 'bn') && setLanguage(val)}
+                className="text-[#535353] text-[10px]"
+              >
+                <ToggleGroupItem
+                  value="bn"
+                  aria-label="Toggle Bangla"
+                  className="h-[20px] w-[38px] rounded-[17px]
+              hover:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:text-[rgba(237,113,37,1)]
+              text-[10px]
+              "
+
+                >
+                  BN
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  value="en"
+                  aria-label="Toggle English"
+                  className="h-[20px] w-[38px] rounded-[17px]
+              hover:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:bg-[rgba(237,113,37,0.28)]
+              data-[state=on]:text-[rgba(237,113,37,1)]
+              text-[10px]"
+                >
+                  EN
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </div>
+            <div className='flex items-center'>
+              <button
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="lg:hidden text-2xl text-[#1F1F1F]"
+              >
+                <RxHamburgerMenu />
+              </button>
+            </div>
+          </div>
         </div>
         {/* Desktop Menu */}
         <ul
@@ -689,10 +726,8 @@ export default function Navbar() {
         className={`fixed top-0 right-0 h-full w-[60%] bg-white/60 backdrop-blur-[16.67px] z-[999] shadow-lg transform transition-transform duration-300 ease-in-out
   ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
-                {/* ⬇️ BN/EN toggle (same style as TopHeader) */}
-          
-            
-         
+        {/* ⬇️ BN/EN toggle (same style as TopHeader) */}
+
         <div className="flex justify-between items-center px-4 py-4 border-b">
           {/* <img src="/assets/logo/mainlogo_2.png" alt="logo" className="h-[40px]" /> */}
           <Image
@@ -707,35 +742,7 @@ export default function Navbar() {
             <RxCross2 />
           </button>
         </div>
-        <div className="flex items-center bg-[rgba(217,217,217,1)] mt-2 rounded-full h-[30px] w-[100px] px-2 justify-end">
-              <ToggleGroup
-                type="single"
-                value={uiLang}
-                onValueChange={(val) => (val === 'en' || val === 'bn') && setLanguage(val)}
-                className="text-[#535353] text-[14px]"
-              >
-                <ToggleGroupItem
-                  value="bn"
-                  aria-label="Toggle Bangla"
-                  className="h-[24px] w-[41px] rounded-[17px]
-              hover:bg-[rgba(237,113,37,0.28)]
-              data-[state=on]:bg-[rgba(237,113,37,0.28)]
-              data-[state=on]:text-[rgba(237,113,37,1)]"
-                >
-                  BN
-                </ToggleGroupItem>
-                <ToggleGroupItem
-                  value="en"
-                  aria-label="Toggle English"
-                  className="h-[24px] w-[41px] rounded-[17px]
-              hover:bg-[rgba(237,113,37,0.28)]
-              data-[state=on]:bg-[rgba(237,113,37,0.28)]
-              data-[state=on]:text-[rgba(237,113,37,1)]"
-                >
-                  EN
-                </ToggleGroupItem>
-              </ToggleGroup>
-            </div>
+
         <ul className="flex flex-col space-y-1 px-4 text-[#1E1E1E]">
           {NAV_ITEMS_MOBILE.map((item, index) => {
             const hasChildren = item.children && item.children.length > 0

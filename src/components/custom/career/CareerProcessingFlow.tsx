@@ -4,7 +4,8 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/componen
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import LocalizedText from '../shared/LocalizedText'
-// import your navigation buttons if you have
+import useSSRLanguage from '@/hooks/useSSRLanguage'
+import { formatLocalizedNumber } from '@/utils/numberLocalization'
 
 const processData = [
   {
@@ -43,6 +44,7 @@ export default function CareerProcessingFlow() {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
+  const lang = useSSRLanguage()
 
   useEffect(() => {
     if (!carouselApi) return
@@ -59,6 +61,7 @@ export default function CareerProcessingFlow() {
       carouselApi.off('select', updateScrollButtons)
     }
   }, [carouselApi])
+
   return (
     <section className="container-padding w-full py-12 flex flex-col bg-white">
       {/* Header */}
@@ -74,31 +77,33 @@ export default function CareerProcessingFlow() {
       </div>
 
       {/* Always Carousel: For ALL screens! */}
-      <div className="w-full  relative overflow-hidden">
+      <div className="w-full relative overflow-hidden">
         <Carousel opts={{ align: 'start', loop: false }} setApi={setCarouselApi}>
           <CarouselContent className="flex items-stretch">
             {processData.map((item, i) => (
               <CarouselItem
                 key={i}
-                className={`
+                className="
                   flex flex-col items-center justify-start px-2
                   w-[85vw] sm:w-[56vw] md:w-[35vw] lg:w-[100vw] xl:w-[260px] 2xl:w-[230px]
                   max-w-[340px] md:max-w-fit lg:max-w-fit xl:max-w-fit 2xl:max-w-[270px]
-                `}
+                "
               >
                 {/* Top line & numbers */}
                 <div className="relative w-full flex items-center mb-6" style={{ height: 44 }}>
                   {/* Line */}
                   <div
-                    className={`absolute top-1/2 right-0 h-1 border-t border-[#000000] z-0 ${i == processData.length - 1 ? 'right-1/2' : 'right-0'} ${i == 0 ? 'left-1/2' : 'left-0'}`}
+                    className={`absolute top-1/2 right-0 h-1 border-t border-[#000000] z-0 ${
+                      i == processData.length - 1 ? 'right-1/2' : 'right-0'
+                    } ${i == 0 ? 'left-1/2' : 'left-0'}`}
                   />
                   <div className="relative flex flex-row items-center justify-center w-full z-10">
-                    {/* Step number */}
+                    {/* Step number (localized) */}
                     <div
                       style={{ boxShadow: '0px 4px 6px 0px #00000033 inset' }}
                       className="w-[38px] h-[38px] xl:w-[40px] xl:h-[40px] bg-white border border-[#E0E0E0] rounded-[10px] flex items-center justify-center text-[19px] font-bold text-[#343434] z-10 relative"
                     >
-                      {i + 1}
+                      {formatLocalizedNumber(i + 1, lang)}
                     </div>
                     {/* Arrow if not last */}
                     {i < processData.length - 1 && (
@@ -112,6 +117,7 @@ export default function CareerProcessingFlow() {
                     )}
                   </div>
                 </div>
+
                 {/* Card */}
                 <div className="flex flex-col items-center text-center w-full">
                   <img
@@ -123,16 +129,17 @@ export default function CareerProcessingFlow() {
                   <img
                     src={item.mobileImg}
                     alt={item.title}
-                    className="rounded-[12px] block md:hidden mb-2 w-[186px] h-[157px] object-contain"
+                    className="rounded-[12px] block md:hidden mb-2 w+[186px] h-[157px] object-contain"
                     draggable={false}
                   />
                   <span className="mt-2 text-[#343434] text-center text-[12px] font-medium uppercase max-w-[145px] mx-auto leading-tight break-words">
-                    <LocalizedText en={item?.title} bn={item?.titleBN} />
+                    <LocalizedText en={item.title} bn={item.titleBN} />
                   </span>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
+
           {/* Navigation buttons */}
           <div className="flex md:hidden gap-2 justify-center mt-10">
             <CarouselNavButtons
