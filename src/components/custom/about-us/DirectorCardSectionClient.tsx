@@ -95,7 +95,7 @@ function DirectorCardSectionClient({ directorProfileData, blockData }: Props) {
         {/* profile card list */}
         <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-3 xl:gap-12 2xl:gap-2 mt-12">
           {directorProfileData?.directors?.map((data, index) => (
-            <DirectorProfile key={index} data={data} />
+            <DirectorProfile key={index} data={data} pageLink={blockData?.linkTarget} />
           ))}
         </div>
 
@@ -116,7 +116,7 @@ function DirectorCardSectionClient({ directorProfileData, blockData }: Props) {
             <CarouselContent>
               {directorProfileData?.directors?.map((data, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 mx-auto lg:py-4">
-                  <DirectorProfile data={data} />
+                  <DirectorProfile data={data} pageLink={blockData?.linkTarget} />
                 </CarouselItem>
               ))}
             </CarouselContent>

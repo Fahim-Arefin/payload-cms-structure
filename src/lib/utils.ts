@@ -21,3 +21,15 @@ export function pageHref(target: MaybePopulated): string {
   if (!s) return '#'
   return s === 'index' ? '/' : `/${s.replace(/^\/+/, '')}`
 }
+/** New: returns a Link-friendly href (string or UrlObject) with an optional #hash */
+export function pageHrefWithAnchor(target: MaybePopulated, anchor?: string) {
+  const base = pageHref(target)
+  if (!base || base === '#') return '#'
+
+  const hash = (anchor ?? '').replace(/^#/, '')
+  // If no anchor, just return the base string
+  if (!hash) return base
+
+  // Prefer UrlObject so Next.js preserves pathname + hash cleanly
+  return { pathname: base, hash }
+}

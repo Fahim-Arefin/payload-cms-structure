@@ -97,12 +97,14 @@ export interface Config {
     'global-navbar': GlobalNavbar;
     'global-footer': GlobalFooter;
     'board-of-directors': BoardOfDirector;
+    'leadership-team': LeadershipTeam;
   };
   globalsSelect: {
     'global-header': GlobalHeaderSelect<false> | GlobalHeaderSelect<true>;
     'global-navbar': GlobalNavbarSelect<false> | GlobalNavbarSelect<true>;
     'global-footer': GlobalFooterSelect<false> | GlobalFooterSelect<true>;
     'board-of-directors': BoardOfDirectorsSelect<false> | BoardOfDirectorsSelect<true>;
+    'leadership-team': LeadershipTeamSelect<false> | LeadershipTeamSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1095,6 +1097,10 @@ export interface Page {
          */
         backgroundColor?: string | null;
         /**
+         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
+         */
+        linkTarget: string | Page;
+        /**
          * When ON, this block renders data from **Global → Board of Directors**.
          *
          * **Before enabling:** fill up the Global → Board of Directors data.
@@ -1107,6 +1113,29 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'bod-card';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
+         */
+        linkTarget: string | Page;
+        /**
+         * When ON, this block renders data from **Global → Leadership Team**.
+         *
+         * **Before enabling:** fill up the Global → Leadership Team data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'leadership-card';
       }
     | {
         /**
@@ -1481,6 +1510,29 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'board-of-directors-list';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        oddBackgroundColor?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        evenBackgroundColor?: string | null;
+        /**
+         * When ON, this block renders data from **Global → Leadership Team**.
+         *
+         * **Before enabling:** fill up the Global → Leadership Team data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'leadership-team-list';
       }
   )[];
   updatedAt: string;
@@ -1968,6 +2020,16 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               backgroundColor?: T;
+              linkTarget?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'leadership-card'?:
+          | T
+          | {
+              backgroundColor?: T;
+              linkTarget?: T;
               useSharedData?: T;
               id?: T;
               blockName?: T;
@@ -2109,6 +2171,15 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
         'board-of-directors-list'?:
+          | T
+          | {
+              oddBackgroundColor?: T;
+              evenBackgroundColor?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'leadership-team-list'?:
           | T
           | {
               oddBackgroundColor?: T;
@@ -2690,6 +2761,91 @@ export interface BoardOfDirector {
   createdAt?: string | null;
 }
 /**
+ * This collection powers BOTH pages: About Us + Leaders. About Us uses ROOT fields (Section Title) and the aboutImage (transparent, BG-removed, 4:5 PNG). Leaders page uses leaders[] items (portrait image 4:5, EN/BN name, EN/BN designation, rich bio). Note: aboutImage must be background-removed (transparent PNG) for About Us overlays.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leadership-team".
+ */
+export interface LeadershipTeam {
+  id: string;
+  /**
+   * Primary heading for this page. Max 60 characters.
+   */
+  sectionTitle: string;
+  /**
+   * প্রধান শিরোনাম (বাংলা)। সর্বোচ্চ ৬০ অক্ষর।
+   */
+  sectionTitleBN: string;
+  /**
+   * Add one card per leader.
+   */
+  leaders: {
+    /**
+     * Leader portrait (4:5 recommended). Optimized and blur placeholder generated automatically.
+     */
+    image: string | Media;
+    /**
+     * Upload a background-removed PNG (transparent) framed ~8:9 (e.g., 400×450). Keep subject centered; same person/pose as the main Portrait Image.
+     */
+    aboutImage: string | Media;
+    /**
+     * Leader’s full name (English). Max 100 characters.
+     */
+    title: string;
+    /**
+     * নেতৃত্বের পূর্ণ নাম (বাংলা)। সর্বোচ্চ ১০০ অক্ষর।
+     */
+    titleBN: string;
+    /**
+     * Official designation (English). Max 80 characters.
+     */
+    designation: string;
+    /**
+     * আনুষ্ঠানিক পদবি (বাংলা)। সর্বোচ্চ ৮০ অক্ষর।
+     */
+    designationBN: string;
+    /**
+     * Long bio (English). Up to ~3000 characters.
+     */
+    description?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * দীর্ঘ বায়ো (বাংলা)। প্রায় ৩০০০ অক্ষর পর্যন্ত।
+     */
+    descriptionBN?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-header_select".
  */
@@ -2897,6 +3053,30 @@ export interface BoardOfDirectorsSelect<T extends boolean = true> {
   linkLabelBN?: T;
   linkTarget?: T;
   directors?:
+    | T
+    | {
+        image?: T;
+        aboutImage?: T;
+        title?: T;
+        titleBN?: T;
+        designation?: T;
+        designationBN?: T;
+        description?: T;
+        descriptionBN?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leadership-team_select".
+ */
+export interface LeadershipTeamSelect<T extends boolean = true> {
+  sectionTitle?: T;
+  sectionTitleBN?: T;
+  leaders?:
     | T
     | {
         image?: T;

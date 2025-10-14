@@ -31,6 +31,10 @@ export const GLOBAL_BOARD_OF_DIRECTORS_SLUG_AND_TAG = 'board-of-directors' as co
 export const GLOBAL_BOARD_OF_DIRECTORS_BLOCK_LABEL = 'Board Of Directors'
 export const GLOBAL_BOARD_OF_DIRECTORS_CACHE_KEY = 'board-of-directors-data'
 
+export const GLOBAL_LEADERSHIP_TEAM_SLUG_AND_TAG = 'leadership-team' as const
+export const GLOBAL_LEADERSHIP_TEAM_BLOCK_LABEL = 'Leadership Team'
+export const GLOBAL_LEADERSHIP_TEAM_CACHE_KEY = 'leadership-team-data'
+
 // home page constants
 // ----------------------------------------------------------------------------------------------
 export const HOME_PAGE_ADMIN_GROUP = 'Home Page'
@@ -95,6 +99,10 @@ export const ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG = 'bod-card'
 export const ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL = 'Board Of Directors Card'
 export const ABOUT_US_PAGE_BOD_CARD_CACHE_KEY = 'bod-card-data'
 
+export const ABOUT_US_PAGE_LEADERSHIP_TEAM_CARD_SLUG_AND_TAG = 'leadership-card'
+export const ABOUT_US_PAGE_LEADERSHIP_TEAM_CARD_BLOCK_LABEL = 'Leadership Team Card'
+export const ABOUT_US_PAGE_LEADERSHIP_TEAM_CARD_CACHE_KEY = 'leadership-card-data'
+
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG = 'shanta-milestone-unloacked'
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_BLOCK_LABEL = 'Shanta Milestones Unlocked'
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_CACHE_KEY = 'shanta-milestone-unloacked-data'
@@ -119,8 +127,9 @@ export const BOD_PAGE_BOARD_OF_DIRECTORS_List_CACHE_KEY = 'board-of-directors-li
 // ----------------------------------------------------------------------------------------------
 export const LEADERS_PAGE_ADMIN_GROUP = 'Leaders Page'
 
-export const LEADERS_PAGE_LEADERS_SLUG_AND_TAG = 'leaders'
-export const LEADERS_PAGE_LEADERS_CACHE_KEY = 'leaders-data'
+export const LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG = 'leadership-team-list'
+export const LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_BLOCK_LABEL = 'Leadership Team List'
+export const LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_CACHE_KEY = 'leadership-team-list-data'
 // ----------------------------------------------------------------------------------------------
 
 // Agent OnBoarding page constants

@@ -1,6 +1,7 @@
 import {
   ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG,
   ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG,
+  ABOUT_US_PAGE_LEADERSHIP_TEAM_CARD_SLUG_AND_TAG,
   ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG,
@@ -18,6 +19,7 @@ import {
   HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
+  LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -86,6 +88,11 @@ export type BoardOfDirectorsCardBlockType = Extract<
   { blockType: typeof ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG }
 >
 
+export type LeadershipTeamCardBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ABOUT_US_PAGE_LEADERSHIP_TEAM_CARD_SLUG_AND_TAG }
+>
+
 export type ShantaMilestoneUnlockedBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG }
@@ -114,8 +121,13 @@ export type MoreThanAWorkplaceBlockType = Extract<
 >
 
 // BOD page
-
 export type BoardOfDirectorsListBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG }
+>
+
+// Leadership team page
+export type LeadershipTeamListBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG }
 >

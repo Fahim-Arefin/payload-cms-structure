@@ -116,6 +116,8 @@ import AgentOnboardingOpportunitySchema from '@/blocks/agentOnboadringOpportunit
 import MoreThanAWorkplaceSchema from '@/blocks/moreThanAWorkplace/schema'
 import BoardOfDirectorsCardSchema from '@/blocks/BoardOfDirectorsCard/schema'
 import BoardOfDirectorsListSchema from '@/blocks/BoardOfDirectorsList/schema'
+import LeadershipTeamCardSchema from '@/blocks/leadershipTeamCard/schema'
+import LeadershipTeamListSchema from '@/blocks/leadershipTeamList/schema'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -172,6 +174,7 @@ export const Pages: CollectionConfig = {
         LicensedLaunchedSchema,
         DirectorsMessagesSchema,
         BoardOfDirectorsCardSchema,
+        LeadershipTeamCardSchema,
         ShantaMilestonesUnlockedSchema,
         ShantaFootprintSchema,
         // agent onboarding
@@ -180,6 +183,8 @@ export const Pages: CollectionConfig = {
         MoreThanAWorkplaceSchema,
         // BOD page
         BoardOfDirectorsListSchema,
+        // leadershipo page
+        LeadershipTeamListSchema,
       ],
     },
   ],

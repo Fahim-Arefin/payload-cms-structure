@@ -2,14 +2,20 @@ import { BoardOfDirector } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import LocalizedText from '../shared/LocalizedText'
+import { pageHrefWithAnchor } from '@/lib/utils'
+import { BoardOfDirectorsCardBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
   data: BoardOfDirector['directors'][number]
+  pageLink: BoardOfDirectorsCardBlockType['linkTarget']
 }
 
-function DirectorProfile({ data }: Props) {
+function DirectorProfile({ data, pageLink }: Props) {
   return (
-    <Link href={`/all-bods#id-${data?.id}`}>
+    <Link
+      // href={`/all-bods#id-${data?.id}`}
+      href={pageHrefWithAnchor(pageLink, `id-${data?.id}`)}
+    >
       <div
         className="group
      hover:bg-[#585859]/60 transition-all duration-300 cursor-pointer

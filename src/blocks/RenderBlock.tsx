@@ -11,6 +11,7 @@ import ShantaIntroBlock from '@/blocks/shantaIntro/ShantaIntroBlock'
 import {
   ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG,
   ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG,
+  ABOUT_US_PAGE_LEADERSHIP_TEAM_CARD_SLUG_AND_TAG,
   ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG,
@@ -28,6 +29,7 @@ import {
   HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
+  LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -42,6 +44,8 @@ import AgentOnboardingOpportunityBlock from './agentOnboadringOpportunity/AgentO
 import MoreThanAWorkplaceBlock from './moreThanAWorkplace/MoreThanAWorkplaceBlock'
 import BoardOfDirectorsCardBlock from './BoardOfDirectorsCard/BoardOfDirectorsCardBlock'
 import BoardOfDirectorsListBlock from './BoardOfDirectorsList/BoardOfDirectorsListBlock'
+import LeadershipTeamCardBlock from './leadershipTeamCard/LeadershipTeamCardBlock'
+import LeadershipTeamListBlock from './leadershipTeamList/LeadershipTeamListBlock'
 
 type Params = Record<string, string>
 
@@ -76,6 +80,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <DirectorMessageBlock key={block.id} block={block} params={params} />
     case ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG:
       return <BoardOfDirectorsCardBlock key={block.id} block={block} params={params} />
+    case ABOUT_US_PAGE_LEADERSHIP_TEAM_CARD_SLUG_AND_TAG:
+      return <LeadershipTeamCardBlock key={block.id} block={block} params={params} />
     case ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG:
       return <ShantaMilestoneUnlockedBlock key={block.id} block={block} params={params} />
     case ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG:
@@ -92,6 +98,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     //BOD page
     case BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG:
       return <BoardOfDirectorsListBlock key={block.id} block={block} params={params} />
+
+    //leadership team page
+    case LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG:
+      return <LeadershipTeamListBlock key={block.id} block={block} params={params} />
 
     default:
       return null
