@@ -96,11 +96,13 @@ export interface Config {
     'global-header': GlobalHeader;
     'global-navbar': GlobalNavbar;
     'global-footer': GlobalFooter;
+    'board-of-directors': BoardOfDirector;
   };
   globalsSelect: {
     'global-header': GlobalHeaderSelect<false> | GlobalHeaderSelect<true>;
     'global-navbar': GlobalNavbarSelect<false> | GlobalNavbarSelect<true>;
     'global-footer': GlobalFooterSelect<false> | GlobalFooterSelect<true>;
+    'board-of-directors': BoardOfDirectorsSelect<false> | BoardOfDirectorsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1093,6 +1095,19 @@ export interface Page {
          */
         backgroundColor?: string | null;
         /**
+         * When ON, this block renders from the Global “BoardOfDirectors”. Turn OFF to hide.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'bod-card';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
          * Section main image. 16:9 recommended.
          */
         image: string | Media;
@@ -1920,6 +1935,14 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'bod-card'?:
+          | T
+          | {
+              backgroundColor?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
         'shanta-milestone-unloacked'?:
           | T
           | {
@@ -2508,6 +2531,127 @@ export interface GlobalFooter {
   createdAt?: string | null;
 }
 /**
+ * This collection powers BOTH pages: About Us + BOD. About Us uses ROOT fields (Section Title, Section Subtitle, Section Description) and the aboutImage (transparent, BG-removed, 4:5 PNG). BOD page uses directors[] items (portrait image 4:5, EN/BN name, EN/BN designation, rich bio). Note: aboutImage must be background-removed (transparent PNG) for About Us overlays.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "board-of-directors".
+ */
+export interface BoardOfDirector {
+  id: string;
+  /**
+   * Primary heading for this section. Max 60 characters.
+   */
+  sectionTitle: string;
+  /**
+   * প্রধান শিরোনাম (বাংলা)। সর্বোচ্চ ৬০ অক্ষর।
+   */
+  sectionTitleBN: string;
+  /**
+   * Supporting line under the title. Max 100 characters.
+   */
+  sectionSubtitle: string;
+  /**
+   * শিরোনামের সহায়ক লাইন (বাংলা)। সর্বোচ্চ ১০০ অক্ষর।
+   */
+  sectionSubtitleBN: string;
+  /**
+   * Short intro paragraph (1–3 lines). Max 200 characters.
+   */
+  sectionDescription: string;
+  /**
+   * সংক্ষিপ্ত পরিচিতি (১–৩ লাইন)। সর্বোচ্চ ২০০ অক্ষর।
+   */
+  sectionDescriptionBN: string;
+  /**
+   * Heading shown above the cards. Max 60 characters.
+   */
+  cardSectionTitle: string;
+  /**
+   * কার্ড অংশের উপরের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+   */
+  cardSectionTitleBN: string;
+  /**
+   * CTA text (e.g., “View all directors”). Max 100 characters.
+   */
+  linkLabel: string;
+  /**
+   * CTA টেক্সট (যেমন, “সব পরিচালক দেখুন”). সর্বোচ্চ ১০০ অক্ষর।
+   */
+  linkLabelBN: string;
+  /**
+   * Pick an internal Page to link to. External URLs are not allowed.
+   */
+  linkTarget: string | Page;
+  /**
+   * Add one card per director.
+   */
+  directors: {
+    /**
+     * Director portrait (4:5 recommended). Optimized and blur placeholder generated automatically.
+     */
+    image: string | Media;
+    /**
+     * Used on the About Us page overlays. Upload a background-removed PNG (transparent background) of the director, framed 4:5 (e.g., 560×700). Keep subject centered; same person/pose as the main Portrait Image.
+     */
+    aboutImage: string | Media;
+    /**
+     * Director’s full name (English). Max 100 characters.
+     */
+    title: string;
+    /**
+     * পরিচালকের পূর্ণ নাম (বাংলা)। সর্বোচ্চ ১০০ অক্ষর।
+     */
+    titleBN: string;
+    /**
+     * Official designation (English). Max 80 characters.
+     */
+    designation: string;
+    /**
+     * আনুষ্ঠানিক পদবি (বাংলা)। সর্বোচ্চ ৮০ অক্ষর।
+     */
+    designationBN: string;
+    /**
+     * Long bio (English). Up to ~3000 characters.
+     */
+    description?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * দীর্ঘ বায়ো (বাংলা)। প্রায় ৩০০০ অক্ষর পর্যন্ত।
+     */
+    descriptionBN?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-header_select".
  */
@@ -2694,6 +2838,39 @@ export interface GlobalFooterSelect<T extends boolean = true> {
   copyrightBN?: T;
   copyrightHighlightedText?: T;
   copyrightHighlightedTextBN?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "board-of-directors_select".
+ */
+export interface BoardOfDirectorsSelect<T extends boolean = true> {
+  sectionTitle?: T;
+  sectionTitleBN?: T;
+  sectionSubtitle?: T;
+  sectionSubtitleBN?: T;
+  sectionDescription?: T;
+  sectionDescriptionBN?: T;
+  cardSectionTitle?: T;
+  cardSectionTitleBN?: T;
+  linkLabel?: T;
+  linkLabelBN?: T;
+  linkTarget?: T;
+  directors?:
+    | T
+    | {
+        image?: T;
+        aboutImage?: T;
+        title?: T;
+        titleBN?: T;
+        designation?: T;
+        designationBN?: T;
+        description?: T;
+        descriptionBN?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

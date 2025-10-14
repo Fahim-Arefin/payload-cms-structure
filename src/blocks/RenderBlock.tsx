@@ -9,6 +9,7 @@ import WhyChooseUsBlock from '@/blocks/whyChooseUs/WhyChooseUsBlock'
 import ShantaIntroBlock from '@/blocks/shantaIntro/ShantaIntroBlock'
 
 import {
+  ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG,
   ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG,
   ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG,
@@ -38,6 +39,7 @@ import ShantaFootPrintBlock from './shantaFootprint/ShantaFootPrintBlock'
 import AgentVisionBlock from './agentVision/AgentVisionBlock'
 import AgentOnboardingOpportunityBlock from './agentOnboadringOpportunity/AgentOnboardingOpportunityBlock'
 import MoreThanAWorkplaceBlock from './moreThanAWorkplace/MoreThanAWorkplaceBlock'
+import BoardOfDirectorsCardBlock from './BoardOfDirectorsCard/BoardOfDirectorsCardBlock'
 
 type Params = Record<string, string>
 
@@ -70,6 +72,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <LicensedAndLaunchedBlock key={block.id} block={block} params={params} />
     case ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG:
       return <DirectorMessageBlock key={block.id} block={block} params={params} />
+    case ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG:
+      return <BoardOfDirectorsCardBlock key={block.id} block={block} params={params} />
     case ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG:
       return <ShantaMilestoneUnlockedBlock key={block.id} block={block} params={params} />
     case ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG:

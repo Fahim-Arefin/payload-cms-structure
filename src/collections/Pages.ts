@@ -114,6 +114,7 @@ import ShantaFootprintSchema from '@/blocks/shantaFootprint/schema'
 import AgentVisionSchema from '@/blocks/agentVision/schema'
 import AgentOnboardingOpportunitySchema from '@/blocks/agentOnboadringOpportunity/schema'
 import MoreThanAWorkplaceSchema from '@/blocks/moreThanAWorkplace/schema'
+import BoardOfDirectorsCardSchema from '@/blocks/BoardOfDirectorsCard/schema'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -169,6 +170,7 @@ export const Pages: CollectionConfig = {
         ValuesThatShapeUsSchema,
         LicensedLaunchedSchema,
         DirectorsMessagesSchema,
+        BoardOfDirectorsCardSchema,
         ShantaMilestonesUnlockedSchema,
         ShantaFootprintSchema,
         // agent onboarding

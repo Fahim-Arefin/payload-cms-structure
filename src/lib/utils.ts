@@ -12,3 +12,12 @@ export const delay = async (): Promise<void> => {
 }
 
 export const bnNum = (n: number) => String(n).replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[+d])
+
+type MaybePopulated = string | { slug?: string } | null | undefined
+
+export function pageHref(target: MaybePopulated): string {
+  if (!target || typeof target === 'string') return '#' // not populated; resolve on server
+  const s = target.slug || ''
+  if (!s) return '#'
+  return s === 'index' ? '/' : `/${s.replace(/^\/+/, '')}`
+}

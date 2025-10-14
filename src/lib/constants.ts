@@ -27,6 +27,10 @@ export const GLOBAL_NAVBAR_CACHE_KEY = 'global-navbar-data'
 export const GLOBAL_FOOTER_SLUG_AND_TAG = 'global-footer' as const
 export const GLOBAL_FOOTER_CACHE_KEY = 'global-footer-data'
 
+export const GLOBAL_BOARD_OF_DIRECTORS_SLUG_AND_TAG = 'board-of-directors' as const
+export const GLOBAL_BOARD_OF_DIRECTORS_BLOCK_LABEL = 'Board Of Directors'
+export const GLOBAL_BOARD_OF_DIRECTORS_CACHE_KEY = 'board-of-directors-data'
+
 // home page constants
 // ----------------------------------------------------------------------------------------------
 export const HOME_PAGE_ADMIN_GROUP = 'Home Page'
@@ -87,6 +91,10 @@ export const ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG = 'directors-message'
 export const ABOUT_US_PAGE_DIRECTORS_MESSAGES_BLOCK_LABEL = 'Directors Message'
 export const ABOUT_US_PAGE_DIRECTORS_MESSAGES_CACHE_KEY = 'directors-message-data'
 
+export const ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG = 'bod-card'
+export const ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL = 'Board Of Directors Card'
+export const ABOUT_US_PAGE_BOD_CARD_CACHE_KEY = 'bod-card-data'
+
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG = 'shanta-milestone-unloacked'
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_BLOCK_LABEL = 'Shanta Milestones Unlocked'
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_CACHE_KEY = 'shanta-milestone-unloacked-data'
@@ -101,8 +109,8 @@ export const ABOUT_US_PAGE_SHANTA_FOOTPRINT_CACHE_KEY = 'shanta-footprint-data'
 // ----------------------------------------------------------------------------------------------
 export const BOD_PAGE_ADMIN_GROUP = 'BOD Page'
 
-export const BOD_PAGE_BOARD_OF_DIRECTORS_SLUG_AND_TAG = 'board-of-directors'
-export const BOD_PAGE_BOARD_OF_DIRECTORS_CACHE_KEY = 'board-of-directors-data'
+// export const BOD_PAGE_BOARD_OF_DIRECTORS_SLUG_AND_TAG = 'board-of-directors'
+// export const BOD_PAGE_BOARD_OF_DIRECTORS_CACHE_KEY = 'board-of-directors-data'
 
 // ----------------------------------------------------------------------------------------------
 

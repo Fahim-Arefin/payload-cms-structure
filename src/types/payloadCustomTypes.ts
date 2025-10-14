@@ -1,4 +1,5 @@
 import {
+  ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG,
   ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG,
   ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG,
@@ -77,6 +78,11 @@ export type LicensedAndLaunchedBlockType = Extract<
 export type DirectorMessagesBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG }
+>
+
+export type BoardOfDirectorsCardBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG }
 >
 
 export type ShantaMilestoneUnlockedBlockType = Extract<
