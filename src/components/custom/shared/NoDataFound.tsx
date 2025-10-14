@@ -71,10 +71,10 @@ function NoDataFound({
 }: Props) {
   return (
     <div
-      className={`flex items-center justify-center ${widthHeight} rounded-lg p-6`}
+      className={`container-padding flex items-center justify-center ${widthHeight}`}
       style={{ backgroundColor: bgColor }}
     >
-      <div className="text-center max-w-md mx-auto">
+      <div className="text-center max-w-lg mx-auto">
         {showIllustration && (
           <div className="relative mb-8">
             {/* Main container for all animations */}

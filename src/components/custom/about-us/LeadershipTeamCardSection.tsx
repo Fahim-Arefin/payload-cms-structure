@@ -7,6 +7,7 @@ import { LeadershipTeam } from '@/payload-types'
 import { LeadershipTeamCardBlockType } from '@/types/payloadCustomTypes'
 import React from 'react'
 import LeadershipTeamCardSectionClient from './LeadershipTeamCardSectionClient'
+import NoDataFound from '../shared/NoDataFound'
 
 type Props = {
   blockData: LeadershipTeamCardBlockType
@@ -23,7 +24,11 @@ async function LeadershipTeamCardSection({ blockData }: Props) {
       {data ? (
         <LeadershipTeamCardSectionClient leadersData={data} blockData={blockData} />
       ) : (
-        'No Global Data Found'
+        <NoDataFound
+          message="No Data Found"
+          description="Please fill up Global 'Leadership Team' collection data"
+          bgColor={blockData?.backgroundColor || ''}
+        />
       )}
     </div>
   )

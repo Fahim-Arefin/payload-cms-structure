@@ -7,6 +7,7 @@ import { BoardOfDirector } from '@/payload-types'
 import { BoardOfDirectorsListBlockType } from '@/types/payloadCustomTypes'
 import React from 'react'
 import AllDirectorListSectionClient from './AllDirectorListSectionClient'
+import NoDataFound from '../shared/NoDataFound'
 
 type Props = {
   blockData: BoardOfDirectorsListBlockType
@@ -23,7 +24,11 @@ async function AllDirectorListSection({ blockData }: Props) {
       {data ? (
         <AllDirectorListSectionClient directorProfileData={data} blockData={blockData} />
       ) : (
-        'No Global Data Found'
+        <NoDataFound
+          message="No Data Found"
+          description="Please fill up Global 'Board of Directors' collection data"
+          bgColor={blockData?.oddBackgroundColor || ''}
+        />
       )}
     </div>
   )

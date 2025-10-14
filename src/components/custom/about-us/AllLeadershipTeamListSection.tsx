@@ -7,6 +7,7 @@ import { LeadershipTeam } from '@/payload-types'
 import { LeadershipTeamListBlockType } from '@/types/payloadCustomTypes'
 import React from 'react'
 import AllLeadershipTeamListSectionClient from './AllLeadershipTeamListSectionClient'
+import NoDataFound from '../shared/NoDataFound'
 
 type Props = {
   blockData: LeadershipTeamListBlockType
@@ -23,7 +24,11 @@ async function AllLeadershipTeamListSection({ blockData }: Props) {
       {data ? (
         <AllLeadershipTeamListSectionClient leadersData={data} blockData={blockData} />
       ) : (
-        'No Global Data Found'
+        <NoDataFound
+          message="No Data Found"
+          description="Please fill up Global 'Leadership Team' collection data"
+          bgColor={blockData?.oddBackgroundColor || ''}
+        />
       )}
     </div>
   )

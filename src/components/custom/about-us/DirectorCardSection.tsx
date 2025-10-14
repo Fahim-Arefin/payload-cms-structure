@@ -6,6 +6,7 @@ import {
 import { BoardOfDirector } from '@/payload-types'
 import DirectorCardSectionClient from './DirectorCardSectionClient'
 import { BoardOfDirectorsCardBlockType } from '@/types/payloadCustomTypes'
+import NoDataFound from '../shared/NoDataFound'
 
 type Props = {
   blockData: BoardOfDirectorsCardBlockType
@@ -23,7 +24,11 @@ async function DirectorCardSection({ blockData }: Props) {
       {data ? (
         <DirectorCardSectionClient directorProfileData={data} blockData={blockData} />
       ) : (
-        'No Global Data Found'
+        <NoDataFound
+          message="No Data Found"
+          description="Please fill up Global 'Board of Directors' collection data"
+          bgColor={blockData?.backgroundColor || ''}
+        />
       )}
     </div>
   )
