@@ -717,7 +717,9 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             className="z-[1000] min-w-[260px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden"
           >
             <div className="py-2">
-              <DropdownMenuLabel className="px-3 py-2">Plans</DropdownMenuLabel>
+              <DropdownMenuLabel className="px-3 py-2">
+                <LocalizedText en="Plans" bn="প্ল্যানসমূহ" />
+              </DropdownMenuLabel>
 
               {/* Regular plans (localized label) */}
               {availablePlans
@@ -935,7 +937,9 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           )}
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Tenure</SelectLabel>
+              <SelectLabel>
+                <LocalizedText en="Tenure" bn="মেয়াদ" />
+              </SelectLabel>
               {availableTenures.map((tenure) => (
                 <SelectItem key={tenure.value} value={String(tenure.value)}>
                   {localizeTenure(tenure.text, lang as 'en' | 'bn')}
@@ -1133,7 +1137,9 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
           )}
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Payment Method</SelectLabel>
+              <SelectLabel>
+                <LocalizedText en="Payment Method" bn="পেমেন্ট পদ্ধতি" />
+              </SelectLabel>
               {availablePaymentModes.map((pm) => (
                 <SelectItem key={pm.paymode_id} value={String(pm.paymode_id)}>
                   {localizePaymode(pm.paymode_name, lang as 'en' | 'bn')}
@@ -1145,7 +1151,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
                 formData.Age &&
                 formData.Term && (
                   <SelectItem disabled value="no-options">
-                    No payment methods available
+                    <LocalizedText en="No payment methods available" bn="কোনো পেমেন্ট পদ্ধতি নেই" />
                   </SelectItem>
                 )}
             </SelectGroup>
