@@ -2,6 +2,7 @@ import CallNowButton from '@/components/custom/shared/CallNowButton'
 import ContactUsSection from '@/components/custom/shared/contactUs/ContactUsSection'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import AccidentalIntroSection from '@/components/custom/shared/plans/AccidentalIntroSection'
+import AccidentalPermanentPartialDisabilitySection from '@/components/custom/shared/plans/AccidentalPermanentPartialDisabilitySection'
 import MatricsSection from '@/components/custom/shared/plans/MatricsSection'
 import OffersClientWrapper from '@/components/custom/shared/plans/OffersClientWrapper'
 
@@ -95,6 +96,7 @@ function page() {
         subHeadingBN="আপনার যেকোনো দুর্ঘটনায় আর্থিক নিশ্চয়তা প্রদানের জন্য শান্তা  অ্যাক্সিডেন্টাল কভারেজ চারটি ভিন্ন বীমা সুবিধা প্রদান করে"
         card={2}
       />
+      <AccidentalPermanentPartialDisabilitySection />
       <MatricsSection />
       <ContactUsSection />
     </div>
