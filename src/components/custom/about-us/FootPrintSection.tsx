@@ -1,23 +1,23 @@
-import React from 'react'
-import { FootPrintSlider } from './FootPrintSlider'
-import { FootPrintDataType } from '@/types'
-import Image from 'next/image'
+import { ShantaFootprintBlockType } from '@/types/payloadCustomTypes'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 import LocalizedText from '../shared/LocalizedText'
+import { FootPrintSlider } from './FootPrintSlider'
 
 type Props = {
-  footPrintData: {
-    title: string
-    titleBN?: string
-    subTitle: string
-    subTitleBN?: string
-    bgImage: string
-    bgMobileImage?: string
-    data: FootPrintDataType[]
-  }
+  footPrintData: ShantaFootprintBlockType
 }
 
 function FootPrintSection({ footPrintData }: Props) {
-  const { title, titleBN, subTitle, subTitleBN, bgImage, bgMobileImage, data } = footPrintData
+  const {
+    title,
+    titleBN,
+    highlightedText,
+    highlightedTextBN,
+    subtitle,
+    subtitleBN,
+    backgroundVideoUrl,
+    cards,
+  } = footPrintData
   return (
     <div className="relative">
       <div
@@ -40,7 +40,7 @@ function FootPrintSection({ footPrintData }: Props) {
           playsInline
           className="absolute inset-0 w-full h-full object-center object-cover overflow-hidden"
         >
-          <source src={bgImage} type="video/mp4" />
+          <source src={backgroundVideoUrl} type="video/mp4" />
         </video>
 
         {/* Mobile to <lg overlay */}
@@ -53,14 +53,19 @@ function FootPrintSection({ footPrintData }: Props) {
         <div className="container-padding uppercase text-white relative z-10">
           <div className="text-center lg:text-start">
             <h1 className="global-h1 font-medium lg:font-semibold uppercase">
-              <LocalizedText en={title} bn={titleBN} />
+              <LocalizedHighlighted
+                textEn={title}
+                textBn={titleBN}
+                highlightEn={highlightedText}
+                highlightBn={highlightedTextBN}
+              />
             </h1>
             {/* <h1 className="lg:hidden global-h1 font-medium lg:font-semibold uppercase">
               Shanta&rsquo;s Living <span className="text-[#ED7125]">Ecosystem</span>
             </h1> */}
-            
+
             <h3 className="global-h1 md:global-h4 font-light">
-              <LocalizedText en={subTitle} bn={subTitleBN ? subTitleBN : ''} />
+              <LocalizedText en={subtitle} bn={subtitleBN} />
             </h3>
           </div>
         </div>
@@ -74,10 +79,10 @@ function FootPrintSection({ footPrintData }: Props) {
         // -mt-[90px] md:-mt-[100px] lg:-mt-[170px] 2xl:-mt-[270px] "
         // >
         className="
-      pb-[220px] md:pb-[250px]  lg:pb-[250px] xl:pb-[300px] 2xl:pb-[350px] 
+      pb-[150px] md:pb-[200px] lg:pb-[250px] xl:pb-[300px] 2xl:pb-[350px] 
       z-20 bg-white"
       >
-        <FootPrintSlider footPrintData={data} />
+        <FootPrintSlider footPrintData={cards} />
       </div>
     </div>
   )

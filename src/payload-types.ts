@@ -96,11 +96,15 @@ export interface Config {
     'global-header': GlobalHeader;
     'global-navbar': GlobalNavbar;
     'global-footer': GlobalFooter;
+    'board-of-directors': BoardOfDirector;
+    'leadership-team': LeadershipTeam;
   };
   globalsSelect: {
     'global-header': GlobalHeaderSelect<false> | GlobalHeaderSelect<true>;
     'global-navbar': GlobalNavbarSelect<false> | GlobalNavbarSelect<true>;
     'global-footer': GlobalFooterSelect<false> | GlobalFooterSelect<true>;
+    'board-of-directors': BoardOfDirectorsSelect<false> | BoardOfDirectorsSelect<true>;
+    'leadership-team': LeadershipTeamSelect<false> | LeadershipTeamSelect<true>;
   };
   locale: null;
   user: User & {
@@ -934,11 +938,11 @@ export interface Page {
            */
           hoverImage: string | Media;
           /**
-           * Short card title (e.g., “Trust”). Max 30 characters.
+           * Short card title (e.g., “Trust”). Max 40 characters.
            */
           title: string;
           /**
-           * সংক্ষিপ্ত কার্ড শিরোনাম (যেমন, “বিশ্বাস”). সর্বোচ্চ ৩০ অক্ষর।
+           * সংক্ষিপ্ত কার্ড শিরোনাম (যেমন, “বিশ্বাস”). সর্বোচ্চ ৪০ অক্ষর।
            */
           titleBN: string;
           /**
@@ -1093,6 +1097,52 @@ export interface Page {
          */
         backgroundColor?: string | null;
         /**
+         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
+         */
+        linkTarget: string | Page;
+        /**
+         * When ON, this block renders data from **Global → Board of Directors**.
+         *
+         * **Before enabling:** fill up the Global → Board of Directors data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'bod-card';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
+         */
+        linkTarget: string | Page;
+        /**
+         * When ON, this block renders data from **Global → Leadership Team**.
+         *
+         * **Before enabling:** fill up the Global → Leadership Team data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'leadership-card';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
          * Section main image. 16:9 recommended.
          */
         image: string | Media;
@@ -1165,6 +1215,324 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'shanta-milestone-unloacked';
+      }
+    | {
+        /**
+         * Primary heading (e.g., “Shanta’s FOOTPRINT”). Max 40 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional: a highlighted part inside Title. Must appear verbatim. Max 40 chars.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক: শিরোনামের ভেতরে রঙিন অংশ (হুবহু মিল থাকতে হবে)। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line (e.g., “Where Every Venture Connects”). Max 60 characters.
+         */
+        subtitle: string;
+        /**
+         * সহায়ক লাইন (বাংলা)। সর্বোচ্চ ৬০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * Absolute https URL to your MP4/WebM/HLS asset. Internal paths are not allowed. Max 400 characters.
+         */
+        backgroundVideoUrl: string;
+        /**
+         * Add one card per company/venture: image (1:1), https website link, and EN/BN texts.
+         */
+        cards: {
+          /**
+           * Company/brand image (1:1).
+           */
+          image: string | Media;
+          /**
+           * Company/brand name (English). Max 60 characters.
+           */
+          title: string;
+          /**
+           * কোম্পানি/ব্র্যান্ডের নাম (বাংলা)। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Optional: a highlighted part inside Card Title. Must appear verbatim. Max 40 chars.
+           */
+          highlightedText?: string | null;
+          /**
+           * ঐচ্ছিক: কার্ড শিরোনামের ভেতরে রঙিন অংশ (হুবহু মিল থাকতে হবে)। সর্বোচ্চ ৪০ অক্ষর।
+           */
+          highlightedTextBN?: string | null;
+          /**
+           * Absolute https URL only (e.g., https://example.com). Internal paths are not allowed.
+           */
+          link: string;
+          /**
+           * Short description in English (1–3 lines). Max 300 characters.
+           */
+          description: string;
+          /**
+           * সংক্ষিপ্ত বিবরণ (বাংলা, ১–৩ লাইন)। সর্বোচ্চ ৩০০ অক্ষর।
+           */
+          descriptionBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'shanta-footprint';
+      }
+    | {
+        /**
+         * Large section background visual. 16:9 recommended.
+         */
+        backgroundImage: string | Media;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim in Title. Max 80 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Add up to two cards. Each card has an icon, title (EN/BN), and a rich description (EN/BN).
+         */
+        items: {
+          /**
+           * Square icon (1:1). PNG with transparent background preferred.
+           */
+          icon: string | Media;
+          /**
+           * Short headline. Max 60 characters.
+           */
+          title: string;
+          /**
+           * সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Rich text (about 1–3 short paragraphs). Up to ~300 characters.
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * রিচ টেক্সট (১–৩টি সংক্ষিপ্ত অনুচ্ছেদ)। সর্বোচ্চ প্রায় ৩০০ অক্ষর।
+           */
+          descriptionBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'agent-vision';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        section: {
+          /**
+           * Primary heading. Max 60 characters.
+           */
+          title: string;
+          /**
+           * প্রধান শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Second line under the title. Max 60 characters.
+           */
+          subTitle: string;
+          /**
+           * শিরোনামের নিচের লাইন। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          subTitleBN: string;
+        };
+        /**
+         * These cards are shown on mobile only. Each item has one image and a short line (EN/BN).
+         */
+        audienceCards: {
+          /**
+           * Square visual (1:1 recommended). Optimized with blur placeholder.
+           */
+          image: string | Media;
+          id?: string | null;
+        }[];
+        expectations: {
+          /**
+           * Bullets with icon + EN/BN short text.
+           */
+          left: {
+            /**
+             * Square icon (1:1). PNG with transparent background preferred.
+             */
+            icon: string | Media;
+            /**
+             * Short line. Max 100 characters.
+             */
+            text: string;
+            /**
+             * সংক্ষিপ্ত লাইন। সর্বোচ্চ ১০০ অক্ষর।
+             */
+            textBN: string;
+            id?: string | null;
+          }[];
+          /**
+           * Single agent testimonial: avatar + EN/BN name + EN/BN quote.
+           */
+          right: {
+            /**
+             * Agent photo (prefer 1:1 portrait). Optimized with blur placeholder.
+             */
+            avatar: string | Media;
+            /**
+             * Agent’s name. Max 60 characters.
+             */
+            name: string;
+            /**
+             * এজেন্টের নাম। সর্বোচ্চ ৬০ অক্ষর।
+             */
+            nameBN: string;
+            /**
+             * Short testimonial sentence. Max 240 characters.
+             */
+            quote: string;
+            /**
+             * সংক্ষিপ্ত উক্তি। সর্বোচ্চ ২৪০ অক্ষর।
+             */
+            quoteBN: string;
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'agent-onboarding-opportunity';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Large section background visual. 16:9 recommended.
+         */
+        backgroundImage: string | Media;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * A collection of images to display in the gallery.
+         */
+        gallery: {
+          /**
+           * Upload an image for the gallery. aspect ratio 1.5:1
+           */
+          image: string | Media;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'more-than-a-workplace';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        oddBackgroundColor?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        evenBackgroundColor?: string | null;
+        /**
+         * When ON, this block renders data from **Global → Board of Directors**.
+         *
+         * **Before enabling:** fill up the Global → Board of Directors data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'board-of-directors-list';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        oddBackgroundColor?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        evenBackgroundColor?: string | null;
+        /**
+         * When ON, this block renders data from **Global → Leadership Team**.
+         *
+         * **Before enabling:** fill up the Global → Leadership Team data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'leadership-team-list';
       }
   )[];
   updatedAt: string;
@@ -1648,6 +2016,24 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'bod-card'?:
+          | T
+          | {
+              backgroundColor?: T;
+              linkTarget?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'leadership-card'?:
+          | T
+          | {
+              backgroundColor?: T;
+              linkTarget?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
         'shanta-milestone-unloacked'?:
           | T
           | {
@@ -1673,6 +2059,132 @@ export interface PagesSelect<T extends boolean = true> {
                     valueBN?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'shanta-footprint'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              backgroundVideoUrl?: T;
+              cards?:
+                | T
+                | {
+                    image?: T;
+                    title?: T;
+                    titleBN?: T;
+                    highlightedText?: T;
+                    highlightedTextBN?: T;
+                    link?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'agent-vision'?:
+          | T
+          | {
+              backgroundImage?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              items?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'agent-onboarding-opportunity'?:
+          | T
+          | {
+              backgroundColor?: T;
+              section?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    subTitle?: T;
+                    subTitleBN?: T;
+                  };
+              audienceCards?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              expectations?:
+                | T
+                | {
+                    left?:
+                      | T
+                      | {
+                          icon?: T;
+                          text?: T;
+                          textBN?: T;
+                          id?: T;
+                        };
+                    right?:
+                      | T
+                      | {
+                          avatar?: T;
+                          name?: T;
+                          nameBN?: T;
+                          quote?: T;
+                          quoteBN?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'more-than-a-workplace'?:
+          | T
+          | {
+              backgroundColor?: T;
+              backgroundImage?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'board-of-directors-list'?:
+          | T
+          | {
+              oddBackgroundColor?: T;
+              evenBackgroundColor?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'leadership-team-list'?:
+          | T
+          | {
+              oddBackgroundColor?: T;
+              evenBackgroundColor?: T;
+              useSharedData?: T;
               id?: T;
               blockName?: T;
             };
@@ -2128,6 +2640,212 @@ export interface GlobalFooter {
   createdAt?: string | null;
 }
 /**
+ * This collection powers BOTH pages: About Us + BOD. About Us uses ROOT fields (Section Title, Section Subtitle, Section Description) and the aboutImage (transparent, BG-removed, 4:5 PNG). BOD page uses directors[] items (portrait image 4:5, EN/BN name, EN/BN designation, rich bio). Note: aboutImage must be background-removed (transparent PNG) for About Us overlays.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "board-of-directors".
+ */
+export interface BoardOfDirector {
+  id: string;
+  /**
+   * Primary heading for this section. Max 60 characters.
+   */
+  sectionTitle: string;
+  /**
+   * প্রধান শিরোনাম (বাংলা)। সর্বোচ্চ ৬০ অক্ষর।
+   */
+  sectionTitleBN: string;
+  /**
+   * Supporting line under the title. Max 100 characters.
+   */
+  sectionSubtitle: string;
+  /**
+   * শিরোনামের সহায়ক লাইন (বাংলা)। সর্বোচ্চ ১০০ অক্ষর।
+   */
+  sectionSubtitleBN: string;
+  /**
+   * Short intro paragraph (1–3 lines). Max 200 characters.
+   */
+  sectionDescription: string;
+  /**
+   * সংক্ষিপ্ত পরিচিতি (১–৩ লাইন)। সর্বোচ্চ ২০০ অক্ষর।
+   */
+  sectionDescriptionBN: string;
+  /**
+   * Heading shown above the cards. Max 60 characters.
+   */
+  cardSectionTitle: string;
+  /**
+   * কার্ড অংশের উপরের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+   */
+  cardSectionTitleBN: string;
+  /**
+   * CTA text (e.g., “View all directors”). Max 100 characters.
+   */
+  linkLabel: string;
+  /**
+   * CTA টেক্সট (যেমন, “সব পরিচালক দেখুন”). সর্বোচ্চ ১০০ অক্ষর।
+   */
+  linkLabelBN: string;
+  /**
+   * Pick an internal Page to link to. External URLs are not allowed.
+   */
+  linkTarget: string | Page;
+  /**
+   * Add one card per director.
+   */
+  directors: {
+    /**
+     * Director portrait (4:5 recommended). Optimized and blur placeholder generated automatically.
+     */
+    image: string | Media;
+    /**
+     * Used on the About Us page overlays. Upload a background-removed PNG (transparent background) of the director, framed 4:5 (e.g., 560×700). Keep subject centered; same person/pose as the main Portrait Image.
+     */
+    aboutImage: string | Media;
+    /**
+     * Director’s full name (English). Max 100 characters.
+     */
+    title: string;
+    /**
+     * পরিচালকের পূর্ণ নাম (বাংলা)। সর্বোচ্চ ১০০ অক্ষর।
+     */
+    titleBN: string;
+    /**
+     * Official designation (English). Max 80 characters.
+     */
+    designation: string;
+    /**
+     * আনুষ্ঠানিক পদবি (বাংলা)। সর্বোচ্চ ৮০ অক্ষর।
+     */
+    designationBN: string;
+    /**
+     * Long bio (English). Up to ~3000 characters.
+     */
+    description?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * দীর্ঘ বায়ো (বাংলা)। প্রায় ৩০০০ অক্ষর পর্যন্ত।
+     */
+    descriptionBN?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This collection powers BOTH pages: About Us + Leaders. About Us uses ROOT fields (Section Title) and the aboutImage (transparent, BG-removed, 4:5 PNG). Leaders page uses leaders[] items (portrait image 4:5, EN/BN name, EN/BN designation, rich bio). Note: aboutImage must be background-removed (transparent PNG) for About Us overlays.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leadership-team".
+ */
+export interface LeadershipTeam {
+  id: string;
+  /**
+   * Primary heading for this page. Max 60 characters.
+   */
+  sectionTitle: string;
+  /**
+   * প্রধান শিরোনাম (বাংলা)। সর্বোচ্চ ৬০ অক্ষর।
+   */
+  sectionTitleBN: string;
+  /**
+   * Add one card per leader.
+   */
+  leaders: {
+    /**
+     * Leader portrait (4:5 recommended). Optimized and blur placeholder generated automatically.
+     */
+    image: string | Media;
+    /**
+     * Upload a background-removed PNG (transparent) framed ~8:9 (e.g., 400×450). Keep subject centered; same person/pose as the main Portrait Image.
+     */
+    aboutImage: string | Media;
+    /**
+     * Leader’s full name (English). Max 100 characters.
+     */
+    title: string;
+    /**
+     * নেতৃত্বের পূর্ণ নাম (বাংলা)। সর্বোচ্চ ১০০ অক্ষর।
+     */
+    titleBN: string;
+    /**
+     * Official designation (English). Max 80 characters.
+     */
+    designation: string;
+    /**
+     * আনুষ্ঠানিক পদবি (বাংলা)। সর্বোচ্চ ৮০ অক্ষর।
+     */
+    designationBN: string;
+    /**
+     * Long bio (English). Up to ~3000 characters.
+     */
+    description?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * দীর্ঘ বায়ো (বাংলা)। প্রায় ৩০০০ অক্ষর পর্যন্ত।
+     */
+    descriptionBN?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-header_select".
  */
@@ -2314,6 +3032,63 @@ export interface GlobalFooterSelect<T extends boolean = true> {
   copyrightBN?: T;
   copyrightHighlightedText?: T;
   copyrightHighlightedTextBN?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "board-of-directors_select".
+ */
+export interface BoardOfDirectorsSelect<T extends boolean = true> {
+  sectionTitle?: T;
+  sectionTitleBN?: T;
+  sectionSubtitle?: T;
+  sectionSubtitleBN?: T;
+  sectionDescription?: T;
+  sectionDescriptionBN?: T;
+  cardSectionTitle?: T;
+  cardSectionTitleBN?: T;
+  linkLabel?: T;
+  linkLabelBN?: T;
+  linkTarget?: T;
+  directors?:
+    | T
+    | {
+        image?: T;
+        aboutImage?: T;
+        title?: T;
+        titleBN?: T;
+        designation?: T;
+        designationBN?: T;
+        description?: T;
+        descriptionBN?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leadership-team_select".
+ */
+export interface LeadershipTeamSelect<T extends boolean = true> {
+  sectionTitle?: T;
+  sectionTitleBN?: T;
+  leaders?:
+    | T
+    | {
+        image?: T;
+        aboutImage?: T;
+        title?: T;
+        titleBN?: T;
+        designation?: T;
+        designationBN?: T;
+        description?: T;
+        descriptionBN?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

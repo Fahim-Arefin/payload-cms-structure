@@ -1,15 +1,21 @@
-import { DirectorProfileDataType } from '@/types'
+import { BoardOfDirector } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import LocalizedText from '../shared/LocalizedText'
+import { pageHrefWithAnchor } from '@/lib/utils'
+import { BoardOfDirectorsCardBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
-  data: DirectorProfileDataType
+  data: BoardOfDirector['directors'][number]
+  pageLink: BoardOfDirectorsCardBlockType['linkTarget']
 }
 
-function DirectorProfile({ data }: Props) {
+function DirectorProfile({ data, pageLink }: Props) {
   return (
-    <Link href={`/all-bods#id-${data?.id}`}>
+    <Link
+      // href={`/all-bods#id-${data?.id}`}
+      href={pageHrefWithAnchor(pageLink, `id-${data?.id}`)}
+    >
       <div
         className="group
      hover:bg-[#585859]/60 transition-all duration-300 cursor-pointer
@@ -42,13 +48,15 @@ function DirectorProfile({ data }: Props) {
           </div> */}
           <div className="relative w-full h-full rounded-full z-10 bg-[#D3C59D] bg-contain bg-no-repeat bg-center">
             <div className="w-full h-[220px] lg:h-[240px] xl:h-[260px] 2xl:h-[350px] absolute z-20 bottom-0 rounded-b-full">
-              <Image
-                fill
-                src={data?.image}
-                alt={data?.title}
-                className="z-20 bottom-0 rounded-b-full"
-                sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , 33vw"
-              />
+              {typeof data?.aboutImage === 'object' && data?.aboutImage?.url && (
+                <Image
+                  fill
+                  src={data?.aboutImage?.url}
+                  alt={data?.title}
+                  className="z-20 bottom-0 rounded-b-full"
+                  sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , 33vw"
+                />
+              )}
             </div>
           </div>
 
@@ -67,13 +75,13 @@ function DirectorProfile({ data }: Props) {
             className="text-[14px] xl:text-[16px] 2xl:text-[18px]
          text-[#434342] group-hover:text-white capitalize font-medium text-center"
           >
-            <LocalizedText en={data?.name} bn={data?.nameBN} />
+            <LocalizedText en={data?.title} bn={data?.titleBN} />
           </p>
           <p
             className="text-[12px] xl:text-[14px] 2xl:text-[16px]
          text-[#9C8639] group-hover:text-white uppercase font-medium text-center"
           >
-            <LocalizedText en={data?.title} bn={data?.titleBN} />
+            <LocalizedText en={data?.designation} bn={data?.designationBN} />
           </p>
         </div>
       </div>

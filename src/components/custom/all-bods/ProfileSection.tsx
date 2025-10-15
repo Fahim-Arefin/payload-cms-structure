@@ -1,13 +1,15 @@
+// id is not jumping to expected section
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
 import { cn } from '@/lib/utils'
-import { Directors } from '@/types'
+import { BoardOfDirector } from '@/payload-types'
 import Image from 'next/image'
+import React, { useEffect, useRef, useState } from 'react'
 import LocalizedText from '../shared/LocalizedText'
+import LocalizedRichText from '../shared/LocalizedRichText'
 
 type Props = {
-  data: Directors
+  data: BoardOfDirector['directors'][number]
   titleColor: string
   reverse?: boolean // Controls image/desc order for desktop
 }
@@ -49,17 +51,19 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
           )}
         >
           <div
-            className="relative rounded-md lg:rounded-lg xl:rounded-xl 
-          w-full max-w-[400px] 
+            className="relative rounded-md lg:rounded-lg xl:rounded-xl
+          w-full max-w-[400px]
           h-[400px] md:h-[250px] lg:h-[300px] xl:h-[480px] shadow-md"
           >
-            <Image
-              fill
-              src={data.image}
-              alt={data.title}
-              className="rounded-md lg:rounded-lg xl:rounded-xl object-cover "
-              sizes="(max-width:767px) 100vw, 50vw"
-            />
+            {typeof data?.image === 'object' && data?.image?.url && (
+              <Image
+                fill
+                src={data.image?.url}
+                alt={data.title}
+                className="rounded-md lg:rounded-lg xl:rounded-xl object-cover "
+                sizes="(max-width:767px) 100vw, 50vw"
+              />
+            )}
           </div>
         </div>
         {/* Content block */}
@@ -77,15 +81,15 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
           </div>
           <div className="border w-full border-[#000000] mb-4 xl:mb-8" />
           <div className="transition-all duration-300 overflow-hidden">
-            <p
+            <div
               ref={textRef}
               className={cn(
                 'text-[#444] font-[350] text-justify text-base leading-7 xl:leading-10 md:global-p1',
                 !expanded && 'line-clamp-5 lg:line-clamp-5 xl:line-clamp-[7]',
               )}
             >
-              <LocalizedText en={data?.description} bn={data?.descriptionBN} />
-            </p>
+              <LocalizedRichText en={data?.description} bn={data?.descriptionBN} />
+            </div>
           </div>
 
           {isTextClamped && (
@@ -102,3 +106,7 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
     </div>
   )
 }
+
+// ================================================================================
+// ================================================================================
+// ================================================================================

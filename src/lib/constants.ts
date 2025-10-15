@@ -27,6 +27,14 @@ export const GLOBAL_NAVBAR_CACHE_KEY = 'global-navbar-data'
 export const GLOBAL_FOOTER_SLUG_AND_TAG = 'global-footer' as const
 export const GLOBAL_FOOTER_CACHE_KEY = 'global-footer-data'
 
+export const GLOBAL_BOARD_OF_DIRECTORS_SLUG_AND_TAG = 'board-of-directors' as const
+export const GLOBAL_BOARD_OF_DIRECTORS_BLOCK_LABEL = 'Board Of Directors'
+export const GLOBAL_BOARD_OF_DIRECTORS_CACHE_KEY = 'board-of-directors-data'
+
+export const GLOBAL_LEADERSHIP_TEAM_SLUG_AND_TAG = 'leadership-team' as const
+export const GLOBAL_LEADERSHIP_TEAM_BLOCK_LABEL = 'Leadership Team'
+export const GLOBAL_LEADERSHIP_TEAM_CACHE_KEY = 'leadership-team-data'
+
 // home page constants
 // ----------------------------------------------------------------------------------------------
 export const HOME_PAGE_ADMIN_GROUP = 'Home Page'
@@ -87,11 +95,20 @@ export const ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG = 'directors-message'
 export const ABOUT_US_PAGE_DIRECTORS_MESSAGES_BLOCK_LABEL = 'Directors Message'
 export const ABOUT_US_PAGE_DIRECTORS_MESSAGES_CACHE_KEY = 'directors-message-data'
 
+export const ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG = 'bod-card'
+export const ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL = 'Board Of Directors Card'
+export const ABOUT_US_PAGE_BOD_CARD_CACHE_KEY = 'bod-card-data'
+
+export const ABOUT_US_PAGE_LEADERSHIP_TEAM_CARD_SLUG_AND_TAG = 'leadership-card'
+export const ABOUT_US_PAGE_LEADERSHIP_TEAM_CARD_BLOCK_LABEL = 'Leadership Team Card'
+export const ABOUT_US_PAGE_LEADERSHIP_TEAM_CARD_CACHE_KEY = 'leadership-card-data'
+
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG = 'shanta-milestone-unloacked'
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_BLOCK_LABEL = 'Shanta Milestones Unlocked'
 export const ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_CACHE_KEY = 'shanta-milestone-unloacked-data'
 
 export const ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG = 'shanta-footprint'
+export const ABOUT_US_PAGE_SHANTA_FOOTPRINT_BLOCK_LABEL = 'shanta-footprint'
 export const ABOUT_US_PAGE_SHANTA_FOOTPRINT_CACHE_KEY = 'shanta-footprint-data'
 
 // ----------------------------------------------------------------------------------------------
@@ -100,8 +117,9 @@ export const ABOUT_US_PAGE_SHANTA_FOOTPRINT_CACHE_KEY = 'shanta-footprint-data'
 // ----------------------------------------------------------------------------------------------
 export const BOD_PAGE_ADMIN_GROUP = 'BOD Page'
 
-export const BOD_PAGE_BOARD_OF_DIRECTORS_SLUG_AND_TAG = 'board-of-directors'
-export const BOD_PAGE_BOARD_OF_DIRECTORS_CACHE_KEY = 'board-of-directors-data'
+export const BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG = 'board-of-directors-list'
+export const BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL = 'Board Of Directors List'
+export const BOD_PAGE_BOARD_OF_DIRECTORS_List_CACHE_KEY = 'board-of-directors-list-data'
 
 // ----------------------------------------------------------------------------------------------
 
@@ -109,32 +127,37 @@ export const BOD_PAGE_BOARD_OF_DIRECTORS_CACHE_KEY = 'board-of-directors-data'
 // ----------------------------------------------------------------------------------------------
 export const LEADERS_PAGE_ADMIN_GROUP = 'Leaders Page'
 
-export const LEADERS_PAGE_LEADERS_SLUG_AND_TAG = 'leaders'
-export const LEADERS_PAGE_LEADERS_CACHE_KEY = 'leaders-data'
+export const LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG = 'leadership-team-list'
+export const LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_BLOCK_LABEL = 'Leadership Team List'
+export const LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_CACHE_KEY = 'leadership-team-list-data'
 // ----------------------------------------------------------------------------------------------
 
 // Agent OnBoarding page constants
 // ----------------------------------------------------------------------------------------------
 export const AGENT_ONBOARDING_PAGE_ADMIN_GROUP = 'Agent Onboarding Page'
 
-export const AGENT_ONBOARDING_PAGE_HERO_SLUG_AND_TAG = 'agent-onboarding-hero'
-export const AGENT_ONBOARDING_PAGE_HERO_CACHE_KEY = 'agent-onboarding-data'
+// export const AGENT_ONBOARDING_PAGE_HERO_SLUG_AND_TAG = 'agent-onboarding-hero'
+// export const AGENT_ONBOARDING_PAGE_HERO_CACHE_KEY = 'agent-onboarding-data'
 
-export const AGENT_ONBOARDING_PAGE_AGENT_INTRO_SLUG_AND_TAG = 'agent-onboarding-intro'
-export const AGENT_ONBOARDING_PAGE_AGENT_INTRO_CACHE_KEY = 'agent-onboarding-intro-data'
+// export const AGENT_ONBOARDING_PAGE_AGENT_INTRO_SLUG_AND_TAG = 'agent-onboarding-intro'
+// export const AGENT_ONBOARDING_PAGE_AGENT_INTRO_CACHE_KEY = 'agent-onboarding-intro-data'
 
-export const AGENT_ONBOARDING_PAGE_WHY_THIS_ROLE_WORKS_FOR_YOU_SLUG_AND_TAG =
-  'why-this-role-works-for-you'
-export const AGENT_ONBOARDING_PAGE_WHY_THIS_ROLE_WORKS_FOR_YOU_CACHE_KEY =
-  'why-this-role-works-for-you-data'
+// export const AGENT_ONBOARDING_PAGE_WHY_THIS_ROLE_WORKS_FOR_YOU_SLUG_AND_TAG =
+//   'why-this-role-works-for-you'
+// export const AGENT_ONBOARDING_PAGE_WHY_THIS_ROLE_WORKS_FOR_YOU_CACHE_KEY =
+//   'why-this-role-works-for-you-data'
 
 export const AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG = 'agent-vision'
+export const AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_LABEL = 'Agent Vision'
 export const AGENT_ONBOARDING_PAGE_AGENT_VISION_CACHE_KEY = 'agent-vision-data'
 
 export const AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG =
   'agent-onboarding-opportunity'
+export const AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_BLOCK_LABEL =
+  'Agent Onboarding Opportunity'
 export const AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_CACHE_KEY =
   'agent-onboarding-opportunity-data'
 
 export const AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG = 'more-than-a-workplace'
+export const AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_BLOCK_LABEL = 'More Than A Workplace'
 export const AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_CACHE_KEY = 'more-than-a-workplace-data'

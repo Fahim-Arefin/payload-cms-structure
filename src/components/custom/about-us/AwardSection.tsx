@@ -15,7 +15,7 @@ function AwardSection({ data }: Props) {
   return (
     // <div className="bg-white pb-24 pt-12 md:py-24 lg:py-[110px] 2xl:py-[150px]">
     <div
-      className="container-padding-y"
+      className="pb-24 pt-12 md:py-24  lg:container-padding-y"
       style={{
         backgroundColor: data?.backgroundColor || '',
       }}

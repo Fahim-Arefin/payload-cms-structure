@@ -110,6 +110,14 @@ import ValuesThatShapeUsSchema from '@/blocks/valuesThatShapeUs/schema'
 import LicensedLaunchedSchema from '@/blocks/LicensedAndLaunched/schema'
 import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
 import ShantaMilestonesUnlockedSchema from '@/blocks/shantaMilestoneUnlocked/schema'
+import ShantaFootprintSchema from '@/blocks/shantaFootprint/schema'
+import AgentVisionSchema from '@/blocks/agentVision/schema'
+import AgentOnboardingOpportunitySchema from '@/blocks/agentOnboadringOpportunity/schema'
+import MoreThanAWorkplaceSchema from '@/blocks/moreThanAWorkplace/schema'
+import BoardOfDirectorsCardSchema from '@/blocks/BoardOfDirectorsCard/schema'
+import BoardOfDirectorsListSchema from '@/blocks/BoardOfDirectorsList/schema'
+import LeadershipTeamCardSchema from '@/blocks/leadershipTeamCard/schema'
+import LeadershipTeamListSchema from '@/blocks/leadershipTeamList/schema'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -165,7 +173,18 @@ export const Pages: CollectionConfig = {
         ValuesThatShapeUsSchema,
         LicensedLaunchedSchema,
         DirectorsMessagesSchema,
+        BoardOfDirectorsCardSchema,
+        LeadershipTeamCardSchema,
         ShantaMilestonesUnlockedSchema,
+        ShantaFootprintSchema,
+        // agent onboarding
+        AgentVisionSchema,
+        AgentOnboardingOpportunitySchema,
+        MoreThanAWorkplaceSchema,
+        // BOD page
+        BoardOfDirectorsListSchema,
+        // leadershipo page
+        LeadershipTeamListSchema,
       ],
     },
   ],

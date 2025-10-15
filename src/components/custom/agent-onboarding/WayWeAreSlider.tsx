@@ -108,15 +108,15 @@
 //   )
 // }
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import { sliderDelay } from '@/lib/data'
+import { MoreThanAWorkplaceBlockType } from '@/types/payloadCustomTypes'
+import { useEffect, useRef, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import OnboardingCard from './OnboardingCard'
-import { WayWeAreDataType } from '@/types'
-import { sliderDelay } from '@/lib/data'
 
 type Props = {
-  wayWeAreData: WayWeAreDataType[]
+  wayWeAreData: MoreThanAWorkplaceBlockType['gallery']
 }
 
 function WayWeAreSlider({ wayWeAreData }: Props) {

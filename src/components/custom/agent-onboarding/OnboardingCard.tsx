@@ -1,9 +1,8 @@
-import { WayWeAreDataType } from '@/types'
+import { MoreThanAWorkplaceBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
-import React from 'react'
 
 type Props = {
-  data: WayWeAreDataType
+  data: MoreThanAWorkplaceBlockType['gallery'][number]
   isActive?: boolean
 }
 
@@ -28,25 +27,26 @@ function OnboardingCard({ data, isActive = false }: Props) {
           backgroundImage: `url('${data.image}')`,
         }}
       /> */}
-
-      <Image
-        src={data?.image}
-        alt={data?.title}
-        fill
-        className="object-cover object-center"
-        sizes="(max-width: 767px) 300px, 500px"
-      />
+      {typeof data?.image === 'object' && data?.image?.url && (
+        <Image
+          src={data?.image?.url}
+          alt="Slider Image"
+          fill
+          className="object-cover object-center"
+          sizes="(max-width: 767px) 300px, 500px"
+        />
+      )}
 
       {/* Overlay gradient */}
       {/* <div className="absolute inset-0 bg-black/20" /> */}
 
       {/* Foreground content */}
-      <div className="relative z-10 text-white space-y-2 text-justify flex flex-col justify-between h-full">
+      {/* <div className="relative z-10 text-white space-y-2 text-justify flex flex-col justify-between h-full">
         <p className="text-xs xl:text-sm font-light leading-snug line-clamp-5">
           {data?.description}
         </p>
         <h1 className="text-lg font-bold">{data?.title}</h1>
-      </div>
+      </div> */}
     </div>
   )
 }
