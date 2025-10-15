@@ -378,6 +378,7 @@
 import {
   HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG,
   HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_LABEL,
+  HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_THUMBNAIL_URL,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
@@ -461,6 +462,10 @@ const LifeInsuranceSimplifiedSchema: Block = {
     singular: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_LABEL,
     plural: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_LABEL,
   },
+
+  imageURL: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_LABEL} preview`,
+
   fields: [
     // Appearance
     {

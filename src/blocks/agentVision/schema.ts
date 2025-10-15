@@ -1,4 +1,7 @@
-import { AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_LABEL } from './../../lib/constants'
+import {
+  AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_LABEL,
+  AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_THUMBNAIL_URL,
+} from './../../lib/constants'
 // // collection config
 // import { revalidateTag } from 'next/cache'
 // import type { CollectionConfig } from 'payload'
@@ -419,6 +422,9 @@ const AgentVisionSchema: Block = {
     singular: AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_LABEL,
     plural: AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_LABEL,
   },
+
+  imageURL: AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_LABEL} preview`,
 
   fields: [
     // Background image (not localized)

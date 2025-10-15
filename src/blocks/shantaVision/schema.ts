@@ -302,6 +302,7 @@ import type { Block } from 'payload'
 
 import {
   ABOUT_US_PAGE_SHANTA_VISION_BLOCK_LABEL,
+  ABOUT_US_PAGE_SHANTA_VISION_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG,
 } from '@/lib/constants'
 
@@ -341,6 +342,9 @@ const ShantaVisionSchema: Block = {
     singular: ABOUT_US_PAGE_SHANTA_VISION_BLOCK_LABEL,
     plural: ABOUT_US_PAGE_SHANTA_VISION_BLOCK_LABEL,
   },
+
+  imageURL: ABOUT_US_PAGE_SHANTA_VISION_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${ABOUT_US_PAGE_SHANTA_VISION_BLOCK_LABEL} preview`,
 
   fields: [
     // Background image (direct upload; cropper will also write bgImageBlurDataURL)

@@ -260,6 +260,7 @@
 // src/payload/blocks/HomeVideo.ts
 import {
   HOME_PAGE_LIFE_INSURANCE_VIDEO_BLOCK_LABEL,
+  HOME_PAGE_LIFE_INSURANCE_VIDEO_BLOCK_THUMBNAIL_URL,
   HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
@@ -348,6 +349,10 @@ const LifeInsuranceVideoSchema: Block = {
     singular: HOME_PAGE_LIFE_INSURANCE_VIDEO_BLOCK_LABEL,
     plural: HOME_PAGE_LIFE_INSURANCE_VIDEO_BLOCK_LABEL,
   },
+
+  imageURL: HOME_PAGE_LIFE_INSURANCE_VIDEO_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${HOME_PAGE_LIFE_INSURANCE_VIDEO_BLOCK_LABEL} preview`,
+
   fields: [
     // Appearance
     {

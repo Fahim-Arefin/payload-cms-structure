@@ -2,7 +2,11 @@ import { bnNum } from './../../lib/utils'
 // with localization
 import type { Block } from 'payload'
 
-import { HOME_PAGE_HERO_BLOCK_LABEL, HOME_PAGE_HERO_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  HOME_PAGE_HERO_BLOCK_LABEL,
+  HOME_PAGE_HERO_BLOCK_THUMBNAIL_URL,
+  HOME_PAGE_HERO_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 import { callNowButton } from './callNowButton'
 import { pageLinkButton } from './pageLinkButton'
@@ -18,9 +22,8 @@ const HeroSchema: Block = {
     plural: HOME_PAGE_HERO_BLOCK_LABEL,
   },
 
-  // 👇 This is the important bit
-  imageURL: '/assets/block-icons/hero-block-thumbnail.png',
-  imageAltText: 'Hero block preview',
+  imageURL: HOME_PAGE_HERO_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${HOME_PAGE_HERO_BLOCK_LABEL} preview`,
 
   fields: [
     // 🔐 Hidden per-doc session id for temp upload lifecycle (used by the cropper + hooks)

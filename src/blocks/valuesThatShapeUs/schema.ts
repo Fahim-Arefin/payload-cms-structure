@@ -274,6 +274,7 @@ import type { Block } from 'payload'
 
 import {
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_LABEL,
+  ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 
@@ -322,6 +323,9 @@ const ValuesThatShapeUsSchema: Block = {
     singular: ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_LABEL,
     plural: ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_LABEL,
   },
+
+  imageURL: ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_LABEL} preview`,
 
   fields: [
     // Appearance

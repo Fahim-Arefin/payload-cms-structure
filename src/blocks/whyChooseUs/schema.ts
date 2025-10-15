@@ -400,6 +400,7 @@
 // block
 import {
   HOME_PAGE_WHY_CHOOSE_US_BLOCK_LABEL,
+  HOME_PAGE_WHY_CHOOSE_US_BLOCK_THUMBNAIL_URL,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
@@ -481,6 +482,10 @@ const WhyChooseUsSchema: Block = {
     singular: HOME_PAGE_WHY_CHOOSE_US_BLOCK_LABEL,
     plural: HOME_PAGE_WHY_CHOOSE_US_BLOCK_LABEL,
   },
+
+  imageURL: HOME_PAGE_WHY_CHOOSE_US_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${HOME_PAGE_WHY_CHOOSE_US_BLOCK_LABEL} preview`,
+
   fields: [
     // Appearance
     {
