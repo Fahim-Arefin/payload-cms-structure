@@ -156,6 +156,7 @@ export interface User {
  */
 export interface Media {
   id: string;
+  alt?: string | null;
   /**
    * Temporary until document saves successfully
    */
@@ -163,6 +164,7 @@ export interface Media {
   ownerCollection?: string | null;
   ownerDocId?: string | null;
   ownerField?: string | null;
+  ownerSessionId?: string | null;
   derivedFrom?: (string | null) | Media;
   blurDataURL?: string | null;
   updatedAt: string;
@@ -410,10 +412,24 @@ export interface Page {
          * Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~200KB.
          */
         mainImage: string | Media;
+        mainImageOriginal?: (string | null) | Media;
+        pendingMainImageOriginal?: string | null;
+        pendingMainImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        mainImageBlurDataURL?: string | null;
         /**
          * Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~100KB.
          */
         sideImage: string | Media;
+        sideImageOriginal?: (string | null) | Media;
+        pendingSideImageOriginal?: string | null;
+        pendingSideImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        sideImageBlurDataURL?: string | null;
         /**
          * Provide exactly four highlights (e.g., Settlement Rate, Branches, Years of Service, Happy Customers).
          */
@@ -422,6 +438,10 @@ export interface Page {
            * Upload a small square icon (1:1).
            */
           icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
           /**
            * Short descriptive label. Allowed: letters, numbers, spaces, "&", "-", "/". Max 32 characters.
            */
@@ -1631,10 +1651,12 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
   temporary?: T;
   ownerCollection?: T;
   ownerDocId?: T;
   ownerField?: T;
+  ownerSessionId?: T;
   derivedFrom?: T;
   blurDataURL?: T;
   updatedAt?: T;
@@ -1774,11 +1796,23 @@ export interface PagesSelect<T extends boolean = true> {
               description?: T;
               descriptionBN?: T;
               mainImage?: T;
+              mainImageOriginal?: T;
+              pendingMainImageOriginal?: T;
+              pendingMainImageCrop?: T;
+              mainImageBlurDataURL?: T;
               sideImage?: T;
+              sideImageOriginal?: T;
+              pendingSideImageOriginal?: T;
+              pendingSideImageCrop?: T;
+              sideImageBlurDataURL?: T;
               stats?:
                 | T
                 | {
                     icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
                     label?: T;
                     labelBN?: T;
                     value?: T;
@@ -2761,13 +2795,14 @@ export interface BoardOfDirector {
   createdAt?: string | null;
 }
 /**
- * This collection powers BOTH pages: About Us + Leaders. About Us uses ROOT fields (Section Title) and the aboutImage (transparent, BG-removed, 4:5 PNG). Leaders page uses leaders[] items (portrait image 4:5, EN/BN name, EN/BN designation, rich bio). Note: aboutImage must be background-removed (transparent PNG) for About Us overlays.
+ * Powers About Us + Leaders. About Us reads Section Title + aboutImage; Leaders page reads leaders[] (portrait, name, designation, bios).
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "leadership-team".
  */
 export interface LeadershipTeam {
   id: string;
+  uploadSessionId?: string | null;
   /**
    * Primary heading for this page. Max 60 characters.
    */
@@ -2784,10 +2819,18 @@ export interface LeadershipTeam {
      * Leader portrait (4:5 recommended). Optimized and blur placeholder generated automatically.
      */
     image: string | Media;
+    imageOriginal?: (string | null) | Media;
+    pendingImageOriginal?: string | null;
+    pendingImageCrop?: string | null;
+    imageBlurDataURL?: string | null;
     /**
-     * Upload a background-removed PNG (transparent) framed ~8:9 (e.g., 400×450). Keep subject centered; same person/pose as the main Portrait Image.
+     * Upload a background-removed PNG (transparent), framed ~8:9 (e.g., 400×450). Keep subject centered.
      */
     aboutImage: string | Media;
+    aboutImageOriginal?: (string | null) | Media;
+    pendingAboutImageOriginal?: string | null;
+    pendingAboutImageCrop?: string | null;
+    aboutImageBlurDataURL?: string | null;
     /**
      * Leader’s full name (English). Max 100 characters.
      */
@@ -3074,13 +3117,22 @@ export interface BoardOfDirectorsSelect<T extends boolean = true> {
  * via the `definition` "leadership-team_select".
  */
 export interface LeadershipTeamSelect<T extends boolean = true> {
+  uploadSessionId?: T;
   sectionTitle?: T;
   sectionTitleBN?: T;
   leaders?:
     | T
     | {
         image?: T;
+        imageOriginal?: T;
+        pendingImageOriginal?: T;
+        pendingImageCrop?: T;
+        imageBlurDataURL?: T;
         aboutImage?: T;
+        aboutImageOriginal?: T;
+        pendingAboutImageOriginal?: T;
+        pendingAboutImageCrop?: T;
+        aboutImageBlurDataURL?: T;
         title?: T;
         titleBN?: T;
         designation?: T;

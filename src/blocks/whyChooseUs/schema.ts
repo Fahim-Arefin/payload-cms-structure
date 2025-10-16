@@ -404,6 +404,7 @@ import {
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
+import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
 import type { Block } from 'payload'
 
 // --- validators (unchanged logic, just inlined here) ---
@@ -647,30 +648,50 @@ const WhyChooseUsSchema: Block = {
     },
 
     // Images (default Payload Media)
-    // NOTE: Default upload field cannot hard-enforce aspect ratio/quality/size.
-    // Keep the guidance in descriptions; enforce in your editor/UX if needed.
-    {
-      name: 'mainImage',
+    // {
+    //   name: 'mainImage',
+    //   label: 'Main Background Image',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description:
+    //       'Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~200KB.',
+    //   },
+    // },
+    // {
+    //   name: 'sideImage',
+    //   label: 'Side Image (beside stats)',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description:
+    //       'Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~100KB.',
+    //   },
+    // },
+
+    // Images — use cropper generators
+    ...generateImageFields({
+      fieldName: 'mainImage',
       label: 'Main Background Image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description:
-          'Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~200KB.',
-      },
-    },
-    {
-      name: 'sideImage',
+      description:
+        'Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~200KB.',
+      aspectRatio: 16 / 9,
+      quality: 0.92,
+      maxKB: 400,
+      ownerCollection: HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG as any,
+    } as any),
+
+    ...generateImageFields({
+      fieldName: 'sideImage',
       label: 'Side Image (beside stats)',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description:
-          'Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~100KB.',
-      },
-    },
+      description: 'Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~100KB.',
+      aspectRatio: 4 / 5,
+      quality: 0.92,
+      maxKB: 250,
+      ownerCollection: HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG as any,
+    } as any),
 
     // Stats
     {
@@ -686,16 +707,26 @@ const WhyChooseUsSchema: Block = {
           'Provide exactly four highlights (e.g., Settlement Rate, Branches, Years of Service, Happy Customers).',
       },
       fields: [
-        {
-          name: 'icon',
+        // {
+        //   name: 'icon',
+        //   label: 'Stat Icon/Image',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description: 'Upload a small square icon (1:1).',
+        //   },
+        // },
+        // Use cropper generator for icon (1:1)
+        ...generateArrayImageFields({
+          fieldName: 'icon',
           label: 'Stat Icon/Image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description: 'Upload a small square icon (1:1).',
-          },
-        },
+          description: 'Upload a small square icon (1:1).',
+          aspectRatio: 1,
+          quality: 0.92,
+          maxKB: 120,
+          ownerCollection: HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG as any,
+        } as any),
         {
           type: 'row',
           fields: [
