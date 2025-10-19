@@ -31,7 +31,7 @@ export const mediaHooks = withMediaLifecycle({
     },
   ],
 
-  // Blocks with arrays that contain media fields:
+  // Blocks with arrays of arrays that contain media fields:
 
   onAfterChange: async ({ req }) => {
     triggerMediaTemporaryPurge(req)

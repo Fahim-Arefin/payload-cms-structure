@@ -27,8 +27,9 @@ export default function HeroItem({ slide, top, position }: Props) {
           className={`object-cover object-center ${position || ''}`}
           sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
           priority
-          // placeholder="blur"
-          // blurDataURL={slide?.imageBlurDataURL || ''}
+          quality={85}
+          placeholder="blur"
+          blurDataURL={slide?.imageBlurDataURL || ''}
         />
       )}
 

@@ -6,6 +6,7 @@ import GlobalButton from '../shared/GlobalButton'
 import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 import LocalizedString from '../shared/LocalizedString'
 import LocalizedText from '../shared/LocalizedText'
+import { pageHref } from '@/lib/utils'
 
 type Props = {
   whyChooseUsData: WhyChooseUsBlockType
@@ -13,6 +14,7 @@ type Props = {
 
 function WhyChooseUsContent({ whyChooseUsData }: Props) {
   const btnText = (whyChooseUsData?.buttonText ?? '').trim()
+  const btnTextBN = (whyChooseUsData?.buttonTextBN ?? '').trim()
   return (
     // bg-white lg:pb-[200px]
     <div
@@ -28,11 +30,11 @@ function WhyChooseUsContent({ whyChooseUsData }: Props) {
             <Image
               src={whyChooseUsData?.mainImage?.url || ``}
               alt="Background"
-              className="object-cover"
+              className="object-cover object-center"
               fill
-              sizes="100vw"
-              // placeholder="blur"
-              // blurDataURL={whyChooseUsData?.mainImageBlurDataURL || ''}
+              sizes="700px"
+              placeholder="blur"
+              blurDataURL={whyChooseUsData?.mainImageBlurDataURL || ''}
             />
             <div className="absolute inset-0 bg-[#1E1E1E]/60 z-20" />
           </>
@@ -49,9 +51,9 @@ function WhyChooseUsContent({ whyChooseUsData }: Props) {
                 src={whyChooseUsData?.mainImage?.url || ``}
                 alt="why choose us"
                 fill
-                sizes="50vw"
-                // placeholder="blur"
-                // blurDataURL={whyChooseUsData?.mainImageBlurDataURL || ''}
+                sizes="100vw"
+                placeholder="blur"
+                blurDataURL={whyChooseUsData?.mainImageBlurDataURL || ''}
               />
             )}
           </div>
@@ -119,8 +121,8 @@ function WhyChooseUsContent({ whyChooseUsData }: Props) {
                             alt="stat-icon"
                             className="object-cover object-center"
                             sizes="30vw"
-                            // placeholder="blur"
-                            // blurDataURL={stat?.iconBlurDataURL || ''}
+                            placeholder="blur"
+                            blurDataURL={stat?.iconBlurDataURL || ''}
                           />
                         </div>
                       )}
@@ -158,17 +160,17 @@ function WhyChooseUsContent({ whyChooseUsData }: Props) {
                     alt="why choose us"
                     fill
                     sizes="300px"
-                    // placeholder="blur"
-                    // blurDataURL={whyChooseUsData?.sideImageBlurDataURL || ''}
+                    placeholder="blur"
+                    blurDataURL={whyChooseUsData?.sideImageBlurDataURL || ''}
                   />
                 )}
               </div>
             </div>
 
             {/* CTA (uses EN/BN only for text) */}
-            {btnText.length > 0 && whyChooseUsData?.buttonLink && (
+            {btnText.length > 0 && btnTextBN.length > 0 && whyChooseUsData?.buttonLink && (
               <div className="hidden lg:flex justify-center absolute inset-x-0 bottom-0 ">
-                <Link href={whyChooseUsData.buttonLink}>
+                <Link href={pageHref(whyChooseUsData.buttonLink)}>
                   <GlobalButton
                     size="small"
                     variant="primary"

@@ -409,7 +409,7 @@ export interface Page {
          */
         descriptionBN: string;
         /**
-         * Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~200KB.
+         * Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~400KB.
          */
         mainImage: string | Media;
         mainImageOriginal?: (string | null) | Media;
@@ -420,7 +420,7 @@ export interface Page {
          */
         mainImageBlurDataURL?: string | null;
         /**
-         * Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~100KB.
+         * Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~200KB.
          */
         sideImage: string | Media;
         sideImageOriginal?: (string | null) | Media;
@@ -469,9 +469,9 @@ export interface Page {
          */
         buttonTextBN?: string | null;
         /**
-         * Provide only if you want a clickable CTA. If CTA Text is set, this becomes required. Must be an internal path (e.g., /about-us) or a full http(s) URL. Max 100 characters.
+         * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
          */
-        buttonLink?: string | null;
+        buttonLink?: (string | null) | Page;
         id?: string | null;
         blockName?: string | null;
         blockType: 'why-choose-us';
