@@ -291,6 +291,7 @@ import {
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
+import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
 const COLOR_HEX_LEN = 7
@@ -554,16 +555,26 @@ const LifeAtShantaSchema: Block = {
     },
 
     // Background Image (default media flow)
-    {
-      name: 'backgroundImage',
+    // {
+    //   name: 'backgroundImage',
+    //   label: 'Background Image',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description: 'Displayed above the CTA button for this section. Recommended 16:9, ~200KB.',
+    //   },
+    // },
+    // Background Image (generated cropper)
+    ...generateImageFields({
+      fieldName: 'backgroundImage',
       label: 'Background Image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'Displayed above the CTA button for this section. Recommended 16:9, ~200KB.',
-      },
-    },
+      description: 'Displayed above the CTA button. Recommended 16:9',
+      aspectRatio: 16 / 9,
+      quality: 0.93,
+      maxKB: 500,
+      ownerCollection: HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG as any,
+    } as any),
 
     // Gallery (array of images, default media flow)
     {
@@ -576,16 +587,25 @@ const LifeAtShantaSchema: Block = {
       labels: { singular: 'Image', plural: 'Images' },
       admin: { description: 'Add 10–20 images that showcase life at Shanta.' },
       fields: [
-        {
-          name: 'image',
+        // {
+        //   name: 'image',
+        //   label: 'Image',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description: 'Shown in the grid. Recommended 16:9; ~200KB.',
+        //   },
+        // },
+        ...generateArrayImageFields({
+          fieldName: 'image',
           label: 'Image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description: 'Shown in the grid. Recommended 16:9; ~200KB.',
-          },
-        },
+          description: 'Shown in the grid. Recommended 16:9',
+          aspectRatio: 16 / 9,
+          quality: 0.9,
+          maxKB: 500,
+          ownerCollection: HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG as any,
+        } as any),
       ],
     },
   ],

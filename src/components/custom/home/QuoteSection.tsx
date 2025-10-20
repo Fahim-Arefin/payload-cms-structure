@@ -456,8 +456,8 @@ function QuoteSection({ data }: Props) {
               transformOrigin: 'top left',
             }}
             sizes="(max-width: 1349px) 300px , 500px"
-            // placeholder="blur"
-            // blurDataURL={data?.backgroundImage1BlurDataURL || ''}
+            placeholder="blur"
+            blurDataURL={data?.backgroundImage1BlurDataURL || ''}
           />
         )}
       </div>
@@ -482,8 +482,8 @@ function QuoteSection({ data }: Props) {
               transformOrigin: 'top right',
             }}
             sizes="(max-width: 1349px) 300px , 500px"
-            // placeholder="blur"
-            // blurDataURL={data?.backgroundImage2BlurDataURL || ''}
+            placeholder="blur"
+            blurDataURL={data?.backgroundImage2BlurDataURL || ''}
           />
         )}
       </div>

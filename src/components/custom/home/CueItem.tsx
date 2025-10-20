@@ -6,6 +6,7 @@ import { LuArrowUpRight } from 'react-icons/lu'
 import LocalizedText from '../shared/LocalizedText'
 import { FeaturedPlansBlock } from '@/types/payloadCustomTypes'
 import LocalizedString from '../shared/LocalizedString'
+import { pageHref } from '@/lib/utils'
 
 type Props = {
   card: FeaturedPlansBlock['plans'][0]
@@ -14,6 +15,7 @@ type Props = {
 
 function CueItem({ card, index }: Props) {
   const btnText = (card?.plansButtonText ?? '').trim()
+  const btnTextBN = (card?.plansButtonTextBN ?? '').trim()
   return (
     <div className="relative flex flex-col w-full mx-auto shadow-md font-avenir rounded-2xl">
       {/* Top Card */}
@@ -30,9 +32,9 @@ function CueItem({ card, index }: Props) {
               alt={card.title}
               fill
               className="object-cover object-center"
-              // placeholder="blur"
-              // blurDataURL={card?.iconBlurDataURL || ''}
-              // sizes="(max-width: 1023px) 80px, 5vw"
+              placeholder="blur"
+              blurDataURL={card?.iconBlurDataURL || ''}
+              sizes="(max-width: 1023px) 80px, 5vw"
             />
           )}
         </div>
@@ -59,8 +61,8 @@ function CueItem({ card, index }: Props) {
           en={card?.description}
           bn={card?.descriptionBN}
         />
-        {btnText.length > 0 && card.plansButtonLink && (
-          <Link href={card.plansButtonLink || ''}>
+        {btnText.length > 0 && btnTextBN.length > 0 && card.plansButtonLink && (
+          <Link href={pageHref(card.plansButtonLink)}>
             <Button
               variant="link"
               className="mt-2 px-0 text-white lg:text-[#ED7125] lg:text-sm xl:text-xl flex justify-start items-center gap-2 underline lg:no-underline"
@@ -82,9 +84,11 @@ function CueItem({ card, index }: Props) {
             className={`z-0 object-cover object-center rounded-2xl ${index % 2 === 0 ? 'lg:rounded-b-2xl lg:rounded-t-none' : 'lg:rounded-t-2xl lg:rounded-b-none'}`}
             src={card.image?.url || ''}
             alt={`${card.title} visual`}
+            placeholder="blur"
+            blurDataURL={card?.imageBlurDataURL || ''}
             sizes="(max-width: 767px) 100vw,(max-width: 1023px) 50vw, 33vw"
-            // placeholder="blur"
-            // blurDataURL={card?.imageBlurDataURL || ''}
+            // sizes="100vw"
+            quality={100}
           />
         )}
       </div>

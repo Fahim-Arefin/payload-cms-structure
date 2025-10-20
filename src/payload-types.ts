@@ -158,14 +158,14 @@ export interface Media {
   id: string;
   alt?: string | null;
   /**
-   * Temporary until document saves successfully
+   * Temporary until the owning document publishes successfully
    */
   temporary?: boolean | null;
   ownerCollection?: string | null;
   ownerDocId?: string | null;
   ownerField?: string | null;
   ownerSessionId?: string | null;
-  derivedFrom?: (string | null) | Media;
+  derivedFrom?: string | null;
   blurDataURL?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -518,13 +518,21 @@ export interface Page {
          */
         plans: {
           /**
-           * Plan icon. Recommended aspect ratio 1:1; ~50KB.
+           * Plan icon. Upload & crop a square (1:1).
            */
           icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
           /**
-           * Plan image. Recommended aspect ratio ~451:350 (≈1.2886). Keep under ~100KB when possible.
+           * Plan image. Upload & crop to ~451:350 (≈1.2886). Keep subject centered.
            */
           image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
           /**
            * Main plan title. Max 20 characters.
            */
@@ -558,9 +566,9 @@ export interface Page {
            */
           plansButtonTextBN?: string | null;
           /**
-           * Provide only if you want a clickable button for this plan. If Plans Button Text is set, this becomes required. Must be an internal path (e.g., /plans/xyz) or a full http(s) URL. Max 100 characters.
+           * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
            */
-          plansButtonLink?: string | null;
+          plansButtonLink?: (string | null) | Page;
           id?: string | null;
         }[];
         /**
@@ -572,9 +580,9 @@ export interface Page {
          */
         buttonTextBN?: string | null;
         /**
-         * Provide only if you want a clickable CTA. If CTA Text is set, this becomes required. Must be an internal path (e.g., /about-us) or a full http(s) URL. Max 100 characters.
+         * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
          */
-        buttonLink?: string | null;
+        buttonLink?: (string | null) | Page;
         id?: string | null;
         blockName?: string | null;
         blockType: 'featured-plans';
@@ -617,13 +625,27 @@ export interface Page {
          */
         descriptionBN: string;
         /**
-         * Primary background image (≈1.031:1 recommended). ~100KB preferred.
+         * Primary background image (≈1.031:1). Upload & crop here.
          */
         backgroundImage1: string | Media;
+        backgroundImage1Original?: (string | null) | Media;
+        pendingBackgroundImage1Original?: string | null;
+        pendingBackgroundImage1Crop?: string | null;
         /**
-         * Secondary background image (≈1.031:1 recommended). ~100KB preferred.
+         * Auto-generated Base64 blur
+         */
+        backgroundImage1BlurDataURL?: string | null;
+        /**
+         * Secondary background image (≈1.031:1). Upload & crop here.
          */
         backgroundImage2: string | Media;
+        backgroundImage2Original?: (string | null) | Media;
+        pendingBackgroundImage2Original?: string | null;
+        pendingBackgroundImage2Crop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImage2BlurDataURL?: string | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'home-premium-calculator';
@@ -682,18 +704,26 @@ export interface Page {
            */
           mainVIdeoLink: string;
           /**
-           * Large hero/thumbnail for this section. 4:3 recommended; ~100KB.
+           * Large hero/thumbnail for this section. 4:3 recommended.
            */
           mainImage: string | Media;
+          mainImageOriginal?: (string | null) | Media;
+          pendingMainImageOriginal?: string | null;
+          pendingMainImageCrop?: string | null;
+          mainImageBlurDataURL?: string | null;
           /**
            * Exactly 3 cards per section.
            */
           insuranceCardData?:
             | {
                 /**
-                 * Primary thumbnail for the card. 4:3 recommended; ~100KB.
+                 * Primary thumbnail for the card. 4:3 recommended.
                  */
                 image: string | Media;
+                imageOriginal?: (string | null) | Media;
+                pendingImageOriginal?: string | null;
+                pendingImageCrop?: string | null;
+                imageBlurDataURL?: string | null;
                 /**
                  * Short heading for the card. Max 60 characters.
                  */
@@ -761,9 +791,16 @@ export interface Page {
          */
         youtubeButtonTextBN: string;
         /**
-         * Poster/thumbnail for the background video (16:9 recommended, ~300KB).
+         * Poster/thumbnail for the background video (16:9 recommended).
          */
         thumbnail: string | Media;
+        thumbnailOriginal?: (string | null) | Media;
+        pendingThumbnailOriginal?: string | null;
+        pendingThumbnailCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        thumbnailBlurDataURL?: string | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'home-video';
@@ -812,17 +849,28 @@ export interface Page {
          */
         buttonLink?: string | null;
         /**
-         * Displayed above the CTA button for this section. Recommended 16:9, ~200KB.
+         * Displayed above the CTA button. Recommended 16:9
          */
         backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
         /**
          * Add 10–20 images that showcase life at Shanta.
          */
         gallery: {
           /**
-           * Shown in the grid. Recommended 16:9; ~200KB.
+           * Shown in the grid. Recommended 16:9
            */
           image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
           id?: string | null;
         }[];
         id?: string | null;
@@ -1841,7 +1889,15 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
                     image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     title?: T;
                     titleBN?: T;
                     subtitle?: T;
@@ -1872,7 +1928,15 @@ export interface PagesSelect<T extends boolean = true> {
               description?: T;
               descriptionBN?: T;
               backgroundImage1?: T;
+              backgroundImage1Original?: T;
+              pendingBackgroundImage1Original?: T;
+              pendingBackgroundImage1Crop?: T;
+              backgroundImage1BlurDataURL?: T;
               backgroundImage2?: T;
+              backgroundImage2Original?: T;
+              pendingBackgroundImage2Original?: T;
+              pendingBackgroundImage2Crop?: T;
+              backgroundImage2BlurDataURL?: T;
               id?: T;
               blockName?: T;
             };
@@ -1895,10 +1959,18 @@ export interface PagesSelect<T extends boolean = true> {
                     subtitleBN?: T;
                     mainVIdeoLink?: T;
                     mainImage?: T;
+                    mainImageOriginal?: T;
+                    pendingMainImageOriginal?: T;
+                    pendingMainImageCrop?: T;
+                    mainImageBlurDataURL?: T;
                     insuranceCardData?:
                       | T
                       | {
                           image?: T;
+                          imageOriginal?: T;
+                          pendingImageOriginal?: T;
+                          pendingImageCrop?: T;
+                          imageBlurDataURL?: T;
                           title?: T;
                           titleBN?: T;
                           description?: T;
@@ -1924,6 +1996,10 @@ export interface PagesSelect<T extends boolean = true> {
               youtubeButtonText?: T;
               youtubeButtonTextBN?: T;
               thumbnail?: T;
+              thumbnailOriginal?: T;
+              pendingThumbnailOriginal?: T;
+              pendingThumbnailCrop?: T;
+              thumbnailBlurDataURL?: T;
               id?: T;
               blockName?: T;
             };
@@ -1943,10 +2019,18 @@ export interface PagesSelect<T extends boolean = true> {
               buttonTextBN?: T;
               buttonLink?: T;
               backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
               gallery?:
                 | T
                 | {
                     image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     id?: T;
                   };
               id?: T;

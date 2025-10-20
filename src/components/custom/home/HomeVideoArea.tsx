@@ -30,10 +30,11 @@ function HomeVideoArea({ data }: Props) {
             src={data?.thumbnail?.url || ''}
             alt="Video thumbnail"
             fill
-            className="inset-0 rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px] object-cover"
+            className="inset-0 rounded-[24px] md:rounded-[32px] xl:rounded-[40px] 2xl:rounded-[56px] object-cover object-center"
             sizes="(max-width: 1023px) 300px, (max-width: 1349px) 500px, 600px"
-            // placeholder="blur"
-            // blurDataURL={data?.thumbnailBlurDataURL || ''}
+            placeholder="blur"
+            blurDataURL={data?.thumbnailBlurDataURL || ''}
+            quality={80}
           />
         )}
       </div>

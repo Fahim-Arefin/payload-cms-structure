@@ -13,15 +13,16 @@ type Props = {
 function OpportunitiesHeader({ data }: Props) {
   return (
     <div
-      className="font-avenir relative text-center w-[95%] md:w-[60%] lg:w-[50%] mx-auto 
-    space-y-2 2xl:space-y-6
-    2xl:px-24 pb-5 
-    mt-12 md:mt-[70px] lg:mt-0"
+      // mt-12 md:mt-[70px] lg:mt-0 xl:mt-28 2xl:mt-32
+      className="font-avenir relative text-center w-[95%] md:w-[60%] lg:w-[50%] mx-auto
+    2xl:px-24 pb-5 aspect-[16/9]"
     >
       {/* Background overlay */}
       {/* <div className="border border-black absolute inset-0 -top-1/2 lg:-top-16 bg-[url('/assets/homepage/web/opportunities.png')] bg-cover bg-center bg-no-repeat opacity-45 z-0" /> */}
       <div
-        className="absolute inset-0 -top-1/2 lg:-top-16 z-0 opacity-45 overflow-hidden"
+        // -top-1/2 lg:-top-16 xl:-top-28 2xl:-top-40
+        className="absolute inset-0 top-0 z-0 opacity-45
+        "
         aria-hidden="true"
       >
         {typeof data?.backgroundImage === 'object' && data?.backgroundImage?.url && (
@@ -32,13 +33,16 @@ function OpportunitiesHeader({ data }: Props) {
             fill
             className="object-cover object-center"
             sizes="(max-width: 1023px) 300px, 400px"
-            // placeholder="blur"
-            // blurDataURL={data?.backgroundImageBlurDataURL || ''}
+            placeholder="blur"
+            blurDataURL={data?.backgroundImageBlurDataURL || ''}
           />
         )}
       </div>
       {/* Foreground content */}
-      <div className="relative z-10 space-y-4 md:space-y-6">
+      <div
+        className="relative z-10 space-y-4 md:space-y-6 
+      pt-12 md:pt-[70px] lg:pt-12 xl:pt-24 2xl:pt-32 "
+      >
         <div className="space-y-2">
           <h1 className="global-h4 font-medium uppercase">
             {/* {data?.title} */}
