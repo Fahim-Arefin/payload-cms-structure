@@ -26,8 +26,11 @@ const content = (data: InsuranceCardDataType) => (
           src={data.image.url}
           alt={data?.title ?? 'Video thumbnail'}
           fill
-          className="object-cover"
+          className="object-cover object-center"
           sizes="(max-width: 1023px) 300px, (max-width: 1349px) 400px, 500px"
+          placeholder="blur"
+          blurDataURL={data?.imageBlurDataURL || ''}
+          quality={90}
         />
       )}
 

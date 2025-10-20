@@ -354,6 +354,7 @@ import {
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
+import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 import type { Block } from 'payload'
 
 /* ------------ limits (keep these at top; reuse in admin descriptions) ------------ */
@@ -447,6 +448,96 @@ const validateCTAButtonLink = (val: unknown, { siblingData }: any) => {
     if (u.protocol === 'http:' || u.protocol === 'https:') return true
   } catch {}
   return 'CTA Button Link must start with "/" or be a valid http(s) URL.'
+}
+
+/* ---------- shared ---------- */
+const isNonEmpty = (v: unknown) => String(v ?? '').trim().length > 0
+
+/* ---------- PLAN-LEVEL CTA (inside plans[] items) ---------- */
+const validatePlanCTAEnglishText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText =
+    isNonEmpty(siblingData?.plansButtonText) || isNonEmpty(siblingData?.plansButtonTextBN)
+  const hasThis = isNonEmpty(val)
+
+  if (hasAnyText && !hasThis) {
+    return 'Plans Button Text (EN) is required when any plan CTA text is provided.'
+  }
+  if (hasThis && String(val).length > CTA_BUTTON_TEXT_MAX) {
+    return `Plans Button Text must be at most ${CTA_BUTTON_TEXT_MAX} characters.`
+  }
+  return true
+}
+
+const validatePlanCTABanglaText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText =
+    isNonEmpty(siblingData?.plansButtonText) || isNonEmpty(siblingData?.plansButtonTextBN)
+  const hasThis = isNonEmpty(val)
+
+  if (hasAnyText && !hasThis) {
+    return 'প্ল্যানের CTA বাটনের (বাংলা) টেক্সট বাধ্যতামূলক, যখন প্ল্যানের CTA টেক্সট দেওয়া হয়।'
+  }
+  if (hasThis && String(val).length > CTA_BUTTON_TEXT_MAX) {
+    return `প্ল্যান CTA টেক্সট সর্বোচ্চ ${bnNum(CTA_BUTTON_TEXT_MAX)} অক্ষর হতে পারবে।`
+  }
+  return true
+}
+
+const validatePlanCTALinkRequiredIfAnyText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText =
+    isNonEmpty(siblingData?.plansButtonText) || isNonEmpty(siblingData?.plansButtonTextBN)
+
+  let hasLink = false
+  if (Array.isArray(val)) hasLink = val.length > 0
+  else if (val && typeof val === 'object')
+    hasLink = Object.keys(val as Record<string, unknown>).length > 0
+  else hasLink = Boolean(val)
+
+  if (hasAnyText && !hasLink) {
+    return 'Plans Button Link is required when plan CTA text is provided.'
+  }
+  return true
+}
+
+/* ---------- SECTION/GLOBAL CTA (bottom fields) ---------- */
+const validateRootCTAEnglishText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+  const hasThis = isNonEmpty(val)
+
+  if (hasAnyText && !hasThis) {
+    return 'CTA Button Text (EN) is required when any CTA button text is provided.'
+  }
+  if (hasThis && String(val).length > CTA_BUTTON_TEXT_MAX) {
+    return `CTA Button Text must be at most ${CTA_BUTTON_TEXT_MAX} characters.`
+  }
+  return true
+}
+
+const validateRootCTABanglaText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+  const hasThis = isNonEmpty(val)
+
+  if (hasAnyText && !hasThis) {
+    return 'CTA বাটনের (বাংলা) টেক্সট বাধ্যতামূলক, যখন CTA বাটনের যেকোনো টেক্সট দেওয়া হয়।'
+  }
+  if (hasThis && String(val).length > CTA_BUTTON_TEXT_MAX) {
+    return `CTA বাটনের টেক্সট সর্বোচ্চ ${bnNum(CTA_BUTTON_TEXT_MAX)} অক্ষর হতে পারবে।`
+  }
+  return true
+}
+
+const validateRootCTALinkRequiredIfAnyText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+
+  let hasLink = false
+  if (Array.isArray(val)) hasLink = val.length > 0
+  else if (val && typeof val === 'object')
+    hasLink = Object.keys(val as Record<string, unknown>).length > 0
+  else hasLink = Boolean(val)
+
+  if (hasAnyText && !hasLink) {
+    return 'CTA Button Link is required when CTA Button Text is provided.'
+  }
+  return true
 }
 
 /* ------------ Block config (default Payload media) ------------ */
@@ -606,27 +697,48 @@ const FeaturedPlansSchema: Block = {
       },
       fields: [
         // Media (no BN) — default Payload media
-        {
-          name: 'icon',
+        // {
+        //   name: 'icon',
+        //   label: 'Icon',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description: 'Plan icon. Recommended aspect ratio 1:1; ~50KB.',
+        //   },
+        // },
+        // {
+        //   name: 'image',
+        //   label: 'Image',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description:
+        //       'Plan image. Recommended aspect ratio ~451:350 (≈1.2886). Keep under ~100KB when possible.',
+        //   },
+        // },
+        // ⬇️ Icon (1:1)
+        ...generateArrayImageFields({
+          fieldName: 'icon',
           label: 'Icon',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description: 'Plan icon. Recommended aspect ratio 1:1; ~50KB.',
-          },
-        },
-        {
-          name: 'image',
+          description: 'Plan icon. Upload & crop a square (1:1).',
+          aspectRatio: 1,
+          quality: 0.95,
+          maxKB: 100,
+          ownerCollection: HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG as any,
+        } as any),
+
+        // ⬇️ Image (~451:350 ≈ 1.2886)
+        ...generateArrayImageFields({
+          fieldName: 'image',
           label: 'Image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description:
-              'Plan image. Recommended aspect ratio ~451:350 (≈1.2886). Keep under ~100KB when possible.',
-          },
-        },
+          description: 'Plan image. Upload & crop to ~451:350 (≈1.2886). Keep subject centered.',
+          aspectRatio: 451 / 350,
+          quality: 0.9,
+          maxKB: 300,
+          ownerCollection: HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG as any,
+        } as any),
 
         // Plan Title + TitleBN
         {
@@ -686,20 +798,6 @@ const FeaturedPlansSchema: Block = {
           ],
         },
 
-        // Link (EN only)
-        // {
-        //   name: 'link',
-        //   type: 'text',
-        //   label: 'Plan Link',
-        //   required: true,
-        //   defaultValue: '/plans/individual/child-education',
-        //   maxLength: LINK_MAX,
-        //   validate: validateLink,
-        //   admin: {
-        //     description: `Must be an internal path (e.g., /plans/individual/child-education) or a full http(s) URL. Max ${LINK_MAX} characters.`,
-        //   },
-        // },
-
         // Plan Description + DescriptionBN
         {
           type: 'row',
@@ -737,7 +835,8 @@ const FeaturedPlansSchema: Block = {
               type: 'text',
               label: 'Plans Button Text',
               maxLength: CTA_BUTTON_TEXT_MAX,
-              validate: validateButtonText,
+              // validate: validateButtonText,
+              validate: validatePlanCTAEnglishText,
               admin: {
                 width: '50%',
                 description: `Text shown on the plan’s call-to-action button. Max ${CTA_BUTTON_TEXT_MAX} characters.`,
@@ -748,7 +847,8 @@ const FeaturedPlansSchema: Block = {
               type: 'text',
               label: 'প্ল্যানস বাটনের টেক্সট (বাংলা)',
               maxLength: CTA_BUTTON_TEXT_MAX,
-              validate: validateButtonTextBN,
+              // validate: validateButtonTextBN,
+              validate: validatePlanCTABanglaText,
               admin: {
                 width: '50%',
                 description: `কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ${bnNum(CTA_BUTTON_TEXT_MAX)} অক্ষর।`,
@@ -758,14 +858,27 @@ const FeaturedPlansSchema: Block = {
         },
         {
           name: 'plansButtonLink',
-          type: 'text',
-          label: 'Plans Button Link (URL or Path)',
-          maxLength: CTA_BUTTON_LINK_MAX,
-          validate: validatePlansCTAButtonLink,
+          label: 'Link to (internal page)',
+          type: 'relationship',
+          relationTo: 'pages',
+          // required: true,
+          validate: validatePlanCTALinkRequiredIfAnyText,
           admin: {
-            description: `Provide only if you want a clickable button for this plan. If Plans Button Text is set, this becomes required. Must be an internal path (e.g., /plans/xyz) or a full http(s) URL. Max ${CTA_BUTTON_LINK_MAX} characters.`,
+            description:
+              'Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here',
           },
         },
+        // {
+        //   name: 'plansButtonLink',
+        //   type: 'text',
+        //   label: 'Plans Button Link (URL or Path)',
+        //   maxLength: CTA_BUTTON_LINK_MAX,
+        //   // validate: validatePlansCTAButtonLink,
+        //   validate: validateCTALinkRequiredIfAnyText,
+        //   admin: {
+        //     description: `Provide only if you want a clickable button for this plan. If Plans Button Text is set, this becomes required. Must be an internal path (e.g., /plans/xyz) or a full http(s) URL. Max ${CTA_BUTTON_LINK_MAX} characters.`,
+        //   },
+        // },
       ],
     },
     // CTA text (localized) + link (NOT localized)
@@ -777,7 +890,7 @@ const FeaturedPlansSchema: Block = {
           type: 'text',
           label: 'CTA Button Text',
           maxLength: CTA_BUTTON_TEXT_MAX,
-          validate: validateButtonText,
+          validate: validateRootCTAEnglishText,
           admin: {
             width: '50%',
             description: `Text shown on the call-to-action button. Max ${CTA_BUTTON_TEXT_MAX} characters.`,
@@ -788,7 +901,7 @@ const FeaturedPlansSchema: Block = {
           type: 'text',
           label: 'CTA বাটনের টেক্সট (বাংলা)',
           maxLength: CTA_BUTTON_TEXT_MAX,
-          validate: validateButtonTextBN,
+          validate: validateRootCTABanglaText,
           admin: {
             width: '50%',
             description: `কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ${bnNum(CTA_BUTTON_TEXT_MAX)} অক্ষর।`,
@@ -796,14 +909,26 @@ const FeaturedPlansSchema: Block = {
         },
       ],
     },
+    // {
+    //   name: 'buttonLink',
+    //   type: 'text',
+    //   label: 'CTA Button Link (URL or Path)',
+    //   maxLength: CTA_BUTTON_LINK_MAX,
+    //   validate: validateCTAButtonLink,
+    //   admin: {
+    //     description: `Provide only if you want a clickable CTA. If CTA Text is set, this becomes required. Must be an internal path (e.g., /about-us) or a full http(s) URL. Max ${CTA_BUTTON_LINK_MAX} characters.`,
+    //   },
+    // },
     {
       name: 'buttonLink',
-      type: 'text',
-      label: 'CTA Button Link (URL or Path)',
-      maxLength: CTA_BUTTON_LINK_MAX,
-      validate: validateCTAButtonLink,
+      label: 'Link to (internal page)',
+      type: 'relationship',
+      relationTo: 'pages',
+      // required: true,
+      validate: validateRootCTALinkRequiredIfAnyText,
       admin: {
-        description: `Provide only if you want a clickable CTA. If CTA Text is set, this becomes required. Must be an internal path (e.g., /about-us) or a full http(s) URL. Max ${CTA_BUTTON_LINK_MAX} characters.`,
+        description:
+          'Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here',
       },
     },
   ],

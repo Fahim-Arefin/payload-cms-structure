@@ -381,6 +381,7 @@ import {
   HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_THUMBNAIL_URL,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
+import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 import type { Block } from 'payload'
 
 /* =========================
@@ -683,16 +684,26 @@ const LifeInsuranceSimplifiedSchema: Block = {
         },
 
         // Main Image (default Payload media upload)
-        {
-          name: 'mainImage',
+        // {
+        //   name: 'mainImage',
+        //   label: 'Main Thumbnail Image (4:3)',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description: 'Large hero/thumbnail for this section. 4:3 recommended; ~100KB.',
+        //   },
+        // },
+        // Main Image (generated, 4:3)
+        ...generateArrayImageFields({
+          fieldName: 'mainImage',
           label: 'Main Thumbnail Image (4:3)',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description: 'Large hero/thumbnail for this section. 4:3 recommended; ~100KB.',
-          },
-        },
+          description: 'Large hero/thumbnail for this section. 4:3 recommended.',
+          aspectRatio: 4 / 3,
+          quality: 0.96,
+          maxKB: 300,
+          ownerCollection: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG as any,
+        } as any),
 
         // Cards (exactly 3)
         {
@@ -706,16 +717,26 @@ const LifeInsuranceSimplifiedSchema: Block = {
           admin: { description: 'Exactly 3 cards per section.' },
           fields: [
             // Card Image
-            {
-              name: 'image',
+            // {
+            //   name: 'image',
+            //   label: 'Card Thumbnail Image (4:3)',
+            //   type: 'upload',
+            //   relationTo: 'media',
+            //   required: true,
+            //   admin: {
+            //     description: 'Primary thumbnail for the card. 4:3 recommended; ~100KB.',
+            //   },
+            // },
+            // Card Image (generated, 4:3)
+            ...generateArrayImageFields({
+              fieldName: 'image',
               label: 'Card Thumbnail Image (4:3)',
-              type: 'upload',
-              relationTo: 'media',
-              required: true,
-              admin: {
-                description: 'Primary thumbnail for the card. 4:3 recommended; ~100KB.',
-              },
-            },
+              description: 'Primary thumbnail for the card. 4:3 recommended.',
+              aspectRatio: 4 / 3,
+              quality: 0.96,
+              maxKB: 300,
+              ownerCollection: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG as any,
+            } as any),
 
             // Card Title (optional) EN/BN
             {

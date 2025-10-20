@@ -60,7 +60,7 @@ type Props = {
 export default async function OpportunitiesSection({ lifeAtShantaData }: Props) {
   return (
     <>
-      <div className="container-width ">
+      <div className="container-width">
         <OpportunitiesHeader data={lifeAtShantaData} />
 
         <div className="">

@@ -264,6 +264,7 @@ import {
   HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
+import { generateImageFields } from '@/utils/media/fieldGenerators'
 import type { Block } from 'payload'
 
 /* ---------------- limits ---------------- */
@@ -507,16 +508,26 @@ const LifeInsuranceVideoSchema: Block = {
     },
 
     // Thumbnail (default media upload)
-    {
-      name: 'thumbnail',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
+    // {
+    //   name: 'thumbnail',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   label: 'Thumbnail Image',
+    //   admin: {
+    //     description: `Poster/thumbnail for the background video (16:9 recommended, ~300KB).`,
+    //   },
+    // },
+    // Thumbnail (generated via media lifecycle)
+    ...generateImageFields({
+      fieldName: 'thumbnail',
       label: 'Thumbnail Image',
-      admin: {
-        description: `Poster/thumbnail for the background video (16:9 recommended, ~300KB).`,
-      },
-    },
+      description: 'Poster/thumbnail for the background video (16:9 recommended).',
+      aspectRatio: 16 / 9,
+      quality: 0.93,
+      maxKB: 500,
+      ownerCollection: HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG as any,
+    } as any),
   ],
 }
 

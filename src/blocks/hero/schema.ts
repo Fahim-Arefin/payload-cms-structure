@@ -43,8 +43,8 @@ const HeroSchema: Block = {
           label: 'Hero Image',
           description: 'Upload & crop a 16:9 hero image.',
           aspectRatio: 16 / 9,
-          quality: 0.9,
-          maxKB: 400, // UI hint only; server accepts big files now
+          quality: 0.93,
+          maxKB: 600, // UI hint only; server accepts big files now
           ownerCollection: HOME_PAGE_HERO_SLUG_AND_TAG as any, // pass through to cropper
         } as any),
 

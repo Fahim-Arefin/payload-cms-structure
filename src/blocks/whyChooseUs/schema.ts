@@ -404,6 +404,7 @@ import {
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
+import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
 import type { Block } from 'payload'
 
 // --- validators (unchanged logic, just inlined here) ---
@@ -462,6 +463,54 @@ const validateCTAButtonLink = (val: unknown, { siblingData }: any) => {
     if (u.protocol === 'http:' || u.protocol === 'https:') return true
   } catch {}
   return 'CTA Button Link must start with "/" or be a valid http(s) URL.'
+}
+
+const isNonEmpty = (v: unknown) => String(v ?? '').trim().length > 0
+
+const validateCTAEnglishText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+  const hasThis = isNonEmpty(val)
+
+  if (hasAnyText && !hasThis) {
+    return 'CTA Button Text (EN) is required when any CTA button text is provided.'
+  }
+  if (hasThis && String(val).length > CTA_BUTTON_TEXT_MAX) {
+    return `CTA Button Text must be at most ${CTA_BUTTON_TEXT_MAX} characters.`
+  }
+  return true
+}
+
+const validateCTABanglaText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+  const hasThis = isNonEmpty(val)
+
+  if (hasAnyText && !hasThis) {
+    return 'CTA বাটনের (বাংলা) টেক্সট বাধ্যতামূলক, যখন CTA বাটনের যেকোনো টেক্সট দেওয়া হয়।'
+  }
+  if (hasThis && String(val).length > CTA_BUTTON_TEXT_MAX) {
+    return `CTA বাটনের টেক্সট সর্বোচ্চ ${bnNum(CTA_BUTTON_TEXT_MAX)} অক্ষর হতে পারবে।`
+  }
+  return true
+}
+
+// Works for relationship or text/url fields
+const validateCTALinkRequiredIfAnyText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+
+  // presence check for relationship or text
+  let hasLink = false
+  if (Array.isArray(val)) {
+    hasLink = val.length > 0
+  } else if (val && typeof val === 'object') {
+    hasLink = Object.keys(val as Record<string, unknown>).length > 0
+  } else {
+    hasLink = Boolean(val)
+  }
+
+  if (hasAnyText && !hasLink) {
+    return 'CTA Button Link is required when CTA Button Text is provided.'
+  }
+  return true
 }
 
 const COLOR_HEX_LEN = 7
@@ -647,30 +696,50 @@ const WhyChooseUsSchema: Block = {
     },
 
     // Images (default Payload Media)
-    // NOTE: Default upload field cannot hard-enforce aspect ratio/quality/size.
-    // Keep the guidance in descriptions; enforce in your editor/UX if needed.
-    {
-      name: 'mainImage',
+    // {
+    //   name: 'mainImage',
+    //   label: 'Main Background Image',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description:
+    //       'Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~200KB.',
+    //   },
+    // },
+    // {
+    //   name: 'sideImage',
+    //   label: 'Side Image (beside stats)',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description:
+    //       'Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~100KB.',
+    //   },
+    // },
+
+    // Images — use cropper generators
+    ...generateImageFields({
+      fieldName: 'mainImage',
       label: 'Main Background Image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description:
-          'Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~200KB.',
-      },
-    },
-    {
-      name: 'sideImage',
+      description:
+        'Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~400KB.',
+      aspectRatio: 16 / 9,
+      quality: 0.92,
+      maxKB: 400,
+      ownerCollection: HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG as any,
+    } as any),
+
+    ...generateImageFields({
+      fieldName: 'sideImage',
       label: 'Side Image (beside stats)',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description:
-          'Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~100KB.',
-      },
-    },
+      description: 'Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~200KB.',
+      aspectRatio: 4 / 5,
+      quality: 0.92,
+      maxKB: 200,
+      ownerCollection: HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG as any,
+    } as any),
 
     // Stats
     {
@@ -686,16 +755,26 @@ const WhyChooseUsSchema: Block = {
           'Provide exactly four highlights (e.g., Settlement Rate, Branches, Years of Service, Happy Customers).',
       },
       fields: [
-        {
-          name: 'icon',
+        // {
+        //   name: 'icon',
+        //   label: 'Stat Icon/Image',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description: 'Upload a small square icon (1:1).',
+        //   },
+        // },
+        // Use cropper generator for icon (1:1)
+        ...generateArrayImageFields({
+          fieldName: 'icon',
           label: 'Stat Icon/Image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description: 'Upload a small square icon (1:1).',
-          },
-        },
+          description: 'Upload a small square icon (1:1).',
+          aspectRatio: 1,
+          quality: 0.92,
+          maxKB: 120,
+          ownerCollection: HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG as any,
+        } as any),
         {
           type: 'row',
           fields: [
@@ -762,7 +841,7 @@ const WhyChooseUsSchema: Block = {
           type: 'text',
           label: 'CTA Button Text',
           maxLength: CTA_BUTTON_TEXT_MAX,
-          validate: validateButtonText,
+          validate: validateCTAEnglishText,
           admin: {
             width: '50%',
             description: `Text shown on the call-to-action button. Max ${CTA_BUTTON_TEXT_MAX} characters.`,
@@ -773,7 +852,7 @@ const WhyChooseUsSchema: Block = {
           type: 'text',
           label: 'CTA বাটনের টেক্সট (বাংলা)',
           maxLength: CTA_BUTTON_TEXT_MAX,
-          validate: validateButtonTextBN,
+          validate: validateCTABanglaText,
           admin: {
             width: '50%',
             description: `কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ${bnNum(CTA_BUTTON_TEXT_MAX)} অক্ষর।`,
@@ -781,14 +860,26 @@ const WhyChooseUsSchema: Block = {
         },
       ],
     },
+    // {
+    //   name: 'buttonLink',
+    //   type: 'text',
+    //   label: 'CTA Button Link (URL or Path)',
+    //   maxLength: CTA_BUTTON_LINK_MAX,
+    //   validate: validateCTAButtonLink,
+    //   admin: {
+    //     description: `Provide only if you want a clickable CTA. If CTA Text is set, this becomes required. Must be an internal path (e.g., /about-us) or a full http(s) URL. Max ${CTA_BUTTON_LINK_MAX} characters.`,
+    //   },
+    // },
     {
       name: 'buttonLink',
-      type: 'text',
-      label: 'CTA Button Link (URL or Path)',
-      maxLength: CTA_BUTTON_LINK_MAX,
-      validate: validateCTAButtonLink,
+      label: 'Link to (internal page)',
+      type: 'relationship',
+      relationTo: 'pages',
+      // required: true,
+      validate: validateCTALinkRequiredIfAnyText,
       admin: {
-        description: `Provide only if you want a clickable CTA. If CTA Text is set, this becomes required. Must be an internal path (e.g., /about-us) or a full http(s) URL. Max ${CTA_BUTTON_LINK_MAX} characters.`,
+        description:
+          'Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here',
       },
     },
   ],

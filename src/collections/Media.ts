@@ -15,23 +15,20 @@
 //   upload: true,
 // }
 
-// =================================================================
-// =================================================================
-// =================================================================
-
+// =============================================================================
+// =============================================================================
+// =============================================================================
+// // prev working code
 // import type { CollectionConfig } from 'payload'
 
 // export const Media: CollectionConfig = {
 //   slug: 'media',
 //   upload: true,
 
-//   // 👇 Admin list settings: make ownerCollection the “title”
-//   // and search across ownerCollection/ownerField/filename/session/id
 //   admin: {
 //     useAsTitle: 'ownerCollection',
-//     defaultColumns: ['filename', 'temporary', 'ownerCollection', 'uploadSessionId'],
-//     // Payload v3+: tells the list search bar which fields to search
-//     listSearchableFields: ['ownerCollection', 'filename', 'uploadSessionId', 'id'],
+//     defaultColumns: ['filename', 'temporary', 'ownerCollection', 'derivedFrom'],
+//     listSearchableFields: ['ownerCollection', 'filename', 'id', 'derivedFrom'],
 //   },
 
 //   fields: [
@@ -42,11 +39,14 @@
 //       index: true,
 //       admin: { description: 'Temporary until document saves successfully' },
 //     },
-//     { name: 'uploadSessionId', type: 'text', index: true },
 //     { name: 'ownerCollection', type: 'text', index: true, admin: { readOnly: true } },
 //     { name: 'ownerDocId', type: 'text', index: true, admin: { readOnly: true } },
 //     { name: 'ownerField', type: 'text', index: true, admin: { readOnly: true } },
-//     // keep if you’re writing the tiny blur here from the cropper
+
+//     // Link cropped file back to original
+//     { name: 'derivedFrom', type: 'relationship', relationTo: 'media', admin: { readOnly: true } },
+
+//     // Optional: if you store tiny blur here
 //     { name: 'blurDataURL', type: 'text', admin: { readOnly: true } },
 //   ],
 
@@ -58,9 +58,65 @@
 //   },
 // }
 
-// =============================================================================
-// =============================================================================
-// =============================================================================
+// export default Media
+
+// ====================================================================================
+// ====================================================================================
+// ====================================================================================
+
+// //  working code dont delete
+// import type { CollectionConfig } from 'payload'
+
+// export const Media: CollectionConfig = {
+//   slug: 'media',
+//   upload: true,
+
+//   admin: {
+//     useAsTitle: 'filename',
+//     defaultColumns: ['filename', 'temporary', 'ownerCollection', 'derivedFrom'],
+//     listSearchableFields: ['ownerCollection', 'filename', 'id', 'derivedFrom', 'alt'],
+//   },
+
+//   fields: [
+//     // ✅ add alt so create/update({ data: { alt } }) type-checks
+//     { name: 'alt', type: 'text', required: false },
+
+//     {
+//       name: 'temporary',
+//       type: 'checkbox',
+//       defaultValue: true,
+//       index: true,
+//       admin: { description: 'Temporary until document saves successfully' },
+//     },
+
+//     { name: 'ownerCollection', type: 'text', index: true, admin: { readOnly: true } },
+//     { name: 'ownerDocId', type: 'text', index: true, admin: { readOnly: true } },
+//     { name: 'ownerField', type: 'text', index: true, admin: { readOnly: true } },
+//     { name: 'ownerSessionId', type: 'text', index: true, admin: { readOnly: true } },
+
+//     // Link cropped file back to original
+//     { name: 'derivedFrom', type: 'relationship', relationTo: 'media', admin: { readOnly: true } },
+
+//     // Optional blur
+//     { name: 'blurDataURL', type: 'text', admin: { readOnly: true } },
+//   ],
+
+//   access: {
+//     read: () => true,
+//     create: () => true,
+//     update: () => true,
+//     delete: () => true,
+//   },
+// }
+
+// export default Media
+
+// =====================================================================================
+// =====================================================================================
+// =====================================================================================
+
+// testing
+// src/collections/Media.ts
 import type { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
@@ -68,27 +124,32 @@ export const Media: CollectionConfig = {
   upload: true,
 
   admin: {
-    useAsTitle: 'ownerCollection',
+    useAsTitle: 'filename',
     defaultColumns: ['filename', 'temporary', 'ownerCollection', 'derivedFrom'],
-    listSearchableFields: ['ownerCollection', 'filename', 'id', 'derivedFrom'],
+    listSearchableFields: ['filename', 'ownerCollection', 'derivedFrom'],
   },
 
   fields: [
+    // alt text kept for type-safe create/update
+    { name: 'alt', type: 'text', required: false },
+
     {
       name: 'temporary',
       type: 'checkbox',
       defaultValue: true,
       index: true,
-      admin: { description: 'Temporary until document saves successfully' },
+      admin: { description: 'Temporary until the owning document publishes successfully' },
     },
+
     { name: 'ownerCollection', type: 'text', index: true, admin: { readOnly: true } },
     { name: 'ownerDocId', type: 'text', index: true, admin: { readOnly: true } },
     { name: 'ownerField', type: 'text', index: true, admin: { readOnly: true } },
+    { name: 'ownerSessionId', type: 'text', index: true, admin: { readOnly: true } },
 
-    // Link cropped file back to original
-    { name: 'derivedFrom', type: 'relationship', relationTo: 'media', admin: { readOnly: true } },
+    // 🔁 JUST TEXT — we will write the BLOCK SLUG here (e.g., "hero", "why-choose-us")
+    { name: 'derivedFrom', type: 'text', index: true, admin: { readOnly: true } },
 
-    // Optional: if you store tiny blur here
+    // Optional tiny blur data URL (useful for previews)
     { name: 'blurDataURL', type: 'text', admin: { readOnly: true } },
   ],
 

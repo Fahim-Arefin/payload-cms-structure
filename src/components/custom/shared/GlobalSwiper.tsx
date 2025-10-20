@@ -401,7 +401,7 @@ export default function GlobalSwiper({ slidesData }: GlobalSwiperProps) {
   if (!normalized.length) return null
 
   return (
-    <div className="w-full max-w-screen-xl mx-auto pt-10 ">
+    <div className="w-[95%] max-w-screen-xl mx-auto pt-10">
       <Swiper
         modules={[EffectCoverflow, Autoplay]}
         onSwiper={(sw) => (swiperRef.current = sw)}
@@ -409,13 +409,12 @@ export default function GlobalSwiper({ slidesData }: GlobalSwiperProps) {
         centeredSlides
         grabCursor
         loop={hasEnoughForLoop}
-        slidesPerView={1.2}
+        slidesPerView={2.2}
         breakpoints={{
-          480: { slidesPerView: 2 },
-          768: { slidesPerView: 2.6 },
-          1024: { slidesPerView: 3.2 },
+          1024: { slidesPerView: 4 },
         }}
-        spaceBetween={16}
+        // spaceBetween={16}
+        spaceBetween={20}
         autoplay={{
           delay: sliderDelay,
           disableOnInteraction: false,
@@ -450,7 +449,7 @@ export default function GlobalSwiper({ slidesData }: GlobalSwiperProps) {
                   {...(slide.blur
                     ? ({ placeholder: 'blur', blurDataURL: slide.blur } as const)
                     : {})}
-                  quality={100}
+                  quality={90}
                 />
               </div>
             </SwiperSlide>
@@ -521,11 +520,11 @@ export default function GlobalSwiper({ slidesData }: GlobalSwiperProps) {
               alt="Preview"
               fill
               sizes="100vw"
-              className="object-contain"
+              className="object-contain object-center"
               {...(normalized[previewIndex].blur
                 ? ({ placeholder: 'blur', blurDataURL: normalized[previewIndex].blur } as const)
                 : {})}
-              quality={100}
+              quality={90}
             />
             <button
               onClick={closePreview}

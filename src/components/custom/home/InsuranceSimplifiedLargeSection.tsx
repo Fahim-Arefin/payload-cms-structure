@@ -104,10 +104,11 @@ function InsuranceSimplifiedLargeSection({
                       src={data.mainImage.url}
                       alt={data?.subtitle ?? 'Video thumbnail'}
                       fill
-                      className="object-contain"
+                      className="object-contain object-center"
                       sizes="(max-width: 1023px) 300px, (max-width: 1349px) 400px, 500px"
-                      // placeholder="blur"
-                      // blurDataURL={data.mainImageBlurDataURL || ''}
+                      placeholder="blur"
+                      blurDataURL={data.mainImageBlurDataURL || ''}
+                      quality={90}
                     />
                   )}
                   <div

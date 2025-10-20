@@ -231,6 +231,7 @@ import {
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
+import { generateImageFields } from '@/utils/media/fieldGenerators'
 import type { Block } from 'payload'
 
 /* ------------ limits (keep at top; reuse in admin descriptions) ------------ */
@@ -426,26 +427,46 @@ const PremiumCalculatorSchema: Block = {
     },
 
     // Background images (default Payload media; guidance only)
-    {
-      name: 'backgroundImage1',
+    // {
+    //   name: 'backgroundImage1',
+    //   label: 'Background Image 1',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description: 'Primary background image (≈1.031:1 recommended). ~100KB preferred.',
+    //   },
+    // },
+    // {
+    //   name: 'backgroundImage2',
+    //   label: 'Background Image 2',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description: 'Secondary background image (≈1.031:1 recommended). ~100KB preferred.',
+    //   },
+    // },
+
+    ...generateImageFields({
+      fieldName: 'backgroundImage1',
       label: 'Background Image 1',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'Primary background image (≈1.031:1 recommended). ~100KB preferred.',
-      },
-    },
-    {
-      name: 'backgroundImage2',
+      description: 'Primary background image (≈1.031:1). Upload & crop here.',
+      aspectRatio: 1.031,
+      quality: 0.8,
+      maxKB: 200,
+      ownerCollection: HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG as any,
+    } as any),
+
+    ...generateImageFields({
+      fieldName: 'backgroundImage2',
       label: 'Background Image 2',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'Secondary background image (≈1.031:1 recommended). ~100KB preferred.',
-      },
-    },
+      description: 'Secondary background image (≈1.031:1). Upload & crop here.',
+      aspectRatio: 1.031,
+      quality: 0.8,
+      maxKB: 200,
+      ownerCollection: HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG as any,
+    } as any),
   ],
 }
 

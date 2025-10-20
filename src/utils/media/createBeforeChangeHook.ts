@@ -1,4 +1,4 @@
-// // now i can pass new gropupArray fields
+// // collection config 100% working code
 // import path from 'node:path'
 // import os from 'node:os'
 // import fs from 'node:fs/promises'
@@ -11,16 +11,18 @@
 //   trackReqCreatedMedia,
 //   MEDIA_SLUG,
 // } from './mediaUtils'
+// import type {
+//   ArrayMediaConfig,
+//   GroupMediaConfig,
+//   BlockSimpleMediaConfig,
+//   BlockArrayMediaConfig,
+//   BlockGroupMediaConfig,
+// } from './withMediaLifecycle'
 
-// // Turn "icon" -> "Icon", "sideImage" -> "Side Image"
 // function labelFromFieldName(fieldName: string) {
 //   return fieldName.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^\w/, (c) => c.toUpperCase())
 // }
 
-// /**
-//  * CREATE-only for array item media (no deletions here).
-//  * Uses per-field label for accessible alt text.
-//  */
 // async function processArrayImageField(args: {
 //   item: any
 //   fieldName: string
@@ -78,47 +80,47 @@
 //   }
 // }
 
+// function isBlockItemOfType(row: any, type: string) {
+//   return row && typeof row === 'object' && row.blockType === type
+// }
+
+// function eachBlockRow(
+//   holder: any,
+//   layoutKey: string,
+//   blockType: string,
+//   cb: (row: any, idx: number) => void,
+// ) {
+//   const rows = Array.isArray(holder?.[layoutKey]) ? holder[layoutKey] : []
+//   for (let i = 0; i < rows.length; i++) {
+//     const row = rows[i]
+//     if (isBlockItemOfType(row, blockType)) cb(row, i)
+//   }
+// }
+
 // /**
-//  * Hook factory
-//  * - Creates media in beforeChange (no deletions).
-//  * - Keeps your existing behaviour intact.
-//  * - NEW: supports nested arrays via `groupFields` (array-of-arrays).
+//  * Hook factory — now block-aware.
 //  */
 // export function createBeforeChangeHook(config: {
 //   imageConfigs?: ImageConfig[]
-//   arrayFields?: Array<{
-//     fieldName: string
-//     mediaFields: string[]
-//     itemLabelField?: string
-//     /** Optional explicit labels for each media field (e.g. { icon: 'Icon', image: 'Image' }) */
-//     mediaFieldLabels?: Record<string, string>
-//   }>
-//   /** NEW: nested arrays like sections[].insuranceCardData[] */
-//   groupFields?: Array<{
-//     groupKey: string // e.g., "sections"
-//     arrayKey: string // e.g., "insuranceCardData"
-//     mediaFields: string[] // e.g., ["image", "mobileImage"]
-//     /** Optional: use a nested item field to build alt text (e.g., 'title' or 'label') */
-//     itemLabelField?: string
-//     /** Optional: explicit labels per media field for alt text */
-//     mediaFieldLabels?: Record<string, string>
-//     /** Optional: field on the group item used to seed alt text (fallback before nested item) */
-//     groupItemLabelField?: string
-//   }>
+//   arrayFields?: ArrayMediaConfig[]
+//   groupFields?: GroupMediaConfig[]
+//   blockSimpleFields?: BlockSimpleMediaConfig[]
+//   blockArrayFields?: BlockArrayMediaConfig[]
+//   blockGroupFields?: BlockGroupMediaConfig[]
 // }) {
 //   return async ({ data, req, originalDoc }: any) => {
 //     if (!data) return data
 
-//     const altBase = data.title || (data.heading ?? data.sectionHeading) || 'Document'
+//     const altBase = data.title || (data.heading ?? data.sectionHeading) || data.name || 'Document'
 //     const createdMedia: CreatedMedia[] = []
 
 //     try {
-//       // 1) Main images (single fields)
+//       // 1) Main images (top-level)
 //       if (config.imageConfigs?.length) {
 //         for (const imageConfig of config.imageConfigs) {
 //           await processImageField({
 //             data,
-//             fieldConfig: imageConfig, // uses label from ImageConfig
+//             fieldConfig: imageConfig,
 //             originalDoc,
 //             req,
 //             altBase,
@@ -127,7 +129,7 @@
 //         }
 //       }
 
-//       // 2) One-level arrays (unchanged existing logic)
+//       // 2) One-level arrays
 //       if (config.arrayFields?.length) {
 //         for (const arrayConfig of config.arrayFields) {
 //           const arr = data[arrayConfig.fieldName]
@@ -136,7 +138,6 @@
 //           for (let i = 0; i < arr.length; i++) {
 //             const item = arr[i]
 //             if (!item) continue
-
 //             const itemAltBase =
 //               item[arrayConfig.itemLabelField || 'label'] ||
 //               item.title ||
@@ -150,7 +151,7 @@
 //               await processArrayImageField({
 //                 item,
 //                 fieldName: mediaField,
-//                 label: mfLabel, // ✅ per-field label used in alt text
+//                 label: mfLabel,
 //                 req,
 //                 altBase: itemAltBase,
 //                 createdMedia,
@@ -160,7 +161,7 @@
 //         }
 //       }
 
-//       // 3) NEW — Nested arrays (array-of-arrays), e.g. sections[].insuranceCardData[]
+//       // 3) Nested arrays (groupFields)
 //       if (config.groupFields?.length) {
 //         for (const gf of config.groupFields) {
 //           const groups = Array.isArray(data?.[gf.groupKey]) ? data[gf.groupKey] : []
@@ -170,39 +171,32 @@
 //             const groupItem = groups[gi]
 //             if (!groupItem || typeof groupItem !== 'object') continue
 
-//             // alt seed for the group level (section title/heading/etc.)
 //             const groupAltBase =
 //               (gf.groupItemLabelField && groupItem[gf.groupItemLabelField]) ||
 //               groupItem.title ||
 //               groupItem.heading ||
 //               groupItem.sectionHeading ||
-//               `${labelFromFieldName(gf.groupKey)} ${gi + 1}`
+//               `${gf.groupKey} ${gi + 1}`
 
 //             const nestedArr = Array.isArray(groupItem?.[gf.arrayKey]) ? groupItem[gf.arrayKey] : []
-//             if (!nestedArr.length) continue
-
 //             for (let ni = 0; ni < nestedArr.length; ni++) {
 //               const nestedItem = nestedArr[ni]
 //               if (!nestedItem || typeof nestedItem !== 'object') continue
 
-//               // alt seed for the nested item (card title/label/etc.) with fallback to group
 //               const nestedAltBase =
 //                 (gf.itemLabelField && nestedItem[gf.itemLabelField]) ||
 //                 nestedItem.title ||
 //                 nestedItem.label ||
-//                 `${labelFromFieldName(gf.arrayKey)} ${ni + 1}`
-
-//               const altSeed = `${groupAltBase} ${nestedAltBase}`.trim()
+//                 `${gf.arrayKey} ${ni + 1}`
 
 //               for (const mediaField of gf.mediaFields) {
 //                 const mfLabel = gf.mediaFieldLabels?.[mediaField] ?? labelFromFieldName(mediaField)
-
 //                 await processArrayImageField({
 //                   item: nestedItem,
 //                   fieldName: mediaField,
 //                   label: mfLabel,
 //                   req,
-//                   altBase: altSeed,
+//                   altBase: `${groupAltBase} ${nestedAltBase}`.trim(),
 //                   createdMedia,
 //                 })
 //               }
@@ -211,9 +205,99 @@
 //         }
 //       }
 
+//       /* ---------- NEW: blocks ---------- */
+
+//       // 4) Block simple fields (media on block row)
+//       if (config.blockSimpleFields?.length) {
+//         for (const b of config.blockSimpleFields) {
+//           eachBlockRow(data, b.layoutKey, b.blockType, async (row) => {
+//             for (const mf of b.mediaFields) {
+//               await processImageField({
+//                 data: row,
+//                 fieldConfig: {
+//                   fieldName: mf,
+//                   label: b.mediaFieldLabels?.[mf] ?? mf,
+//                   description: '',
+//                   aspectRatio: 1,
+//                 },
+//                 originalDoc,
+//                 req,
+//                 altBase,
+//               })
+//             }
+//           })
+//         }
+//       }
+
+//       // 5) Block array fields (array items have media)
+//       if (config.blockArrayFields?.length) {
+//         for (const b of config.blockArrayFields) {
+//           eachBlockRow(data, b.layoutKey, b.blockType, async (row) => {
+//             const arr = Array.isArray(row?.[b.arrayKey]) ? row[b.arrayKey] : []
+//             for (let i = 0; i < arr.length; i++) {
+//               const item = arr[i]
+//               const itemAltBase =
+//                 item?.[b.itemLabelField || 'label'] ||
+//                 item?.title ||
+//                 item?.heading ||
+//                 `Item ${i + 1}`
+//               for (const mf of b.mediaFields) {
+//                 const label = b.mediaFieldLabels?.[mf] ?? labelFromFieldName(mf)
+//                 await processArrayImageField({
+//                   item,
+//                   fieldName: mf,
+//                   label,
+//                   req,
+//                   altBase: `${altBase} ${itemAltBase}`.trim(),
+//                   createdMedia,
+//                 })
+//               }
+//             }
+//           })
+//         }
+//       }
+
+//       // 6) Block group fields (group -> nested array)
+//       if (config.blockGroupFields?.length) {
+//         for (const b of config.blockGroupFields) {
+//           eachBlockRow(data, b.layoutKey, b.blockType, async (row) => {
+//             const groups = Array.isArray(row?.[b.groupKey]) ? row[b.groupKey] : []
+//             for (let gi = 0; gi < groups.length; gi++) {
+//               const group = groups[gi]
+//               const groupAltBase =
+//                 (b.groupItemLabelField && group?.[b.groupItemLabelField]) ||
+//                 group?.title ||
+//                 group?.heading ||
+//                 `${b.groupKey} ${gi + 1}`
+
+//               const nestedArr = Array.isArray(group?.[b.arrayKey]) ? group[b.arrayKey] : []
+//               for (let ni = 0; ni < nestedArr.length; ni++) {
+//                 const item = nestedArr[ni]
+//                 const nestedAltBase =
+//                   (b.itemLabelField && item?.[b.itemLabelField]) ||
+//                   item?.title ||
+//                   item?.label ||
+//                   `${b.arrayKey} ${ni + 1}`
+
+//                 for (const mf of b.mediaFields) {
+//                   const label = b.mediaFieldLabels?.[mf] ?? labelFromFieldName(mf)
+//                   await processArrayImageField({
+//                     item,
+//                     fieldName: mf,
+//                     label,
+//                     req,
+//                     altBase: `${groupAltBase} ${nestedAltBase}`.trim(),
+//                     createdMedia,
+//                   })
+//                 }
+//               }
+//             }
+//           })
+//         }
+//       }
+
 //       return data
 //     } catch (error) {
-//       // Rollback any media created in this beforeChange, plus anything tracked on req
 //       const r = req as any
 //       const stash = createdMedia.length ? createdMedia : r._createdMediaForRollback || []
 //       if (stash.length) {
@@ -232,10 +316,9 @@
 //   }
 // }
 
-// ====================================================================================================
-// ====================================================================================================
-// ====================================================================================================
-// ====================================================================================================
+// =========================================================================================
+// =========================================================================================
+// =========================================================================================
 
 // src/utils/media/createBeforeChangeHook.ts
 import path from 'node:path'
@@ -337,7 +420,7 @@ function eachBlockRow(
 }
 
 /**
- * Hook factory — now block-aware.
+ * Hook factory — block-aware.
  */
 export function createBeforeChangeHook(config: {
   imageConfigs?: ImageConfig[]
@@ -384,8 +467,7 @@ export function createBeforeChangeHook(config: {
               `Item ${i + 1}`
 
             for (const mediaField of arrayConfig.mediaFields) {
-              const mfLabel =
-                arrayConfig.mediaFieldLabels?.[mediaField] ?? labelFromFieldName(mediaField)
+              const mfLabel = arrayConfig.mediaFieldLabels?.[mediaField] ?? mediaField
 
               await processArrayImageField({
                 item,
@@ -429,7 +511,7 @@ export function createBeforeChangeHook(config: {
                 `${gf.arrayKey} ${ni + 1}`
 
               for (const mediaField of gf.mediaFields) {
-                const mfLabel = gf.mediaFieldLabels?.[mediaField] ?? labelFromFieldName(mediaField)
+                const mfLabel = gf.mediaFieldLabels?.[mediaField] ?? mediaField
                 await processArrayImageField({
                   item: nestedItem,
                   fieldName: mediaField,
@@ -444,7 +526,7 @@ export function createBeforeChangeHook(config: {
         }
       }
 
-      /* ---------- NEW: blocks ---------- */
+      /* ---------- blocks ---------- */
 
       // 4) Block simple fields (media on block row)
       if (config.blockSimpleFields?.length) {
@@ -481,7 +563,7 @@ export function createBeforeChangeHook(config: {
                 item?.heading ||
                 `Item ${i + 1}`
               for (const mf of b.mediaFields) {
-                const label = b.mediaFieldLabels?.[mf] ?? labelFromFieldName(mf)
+                const label = b.mediaFieldLabels?.[mf] ?? mf
                 await processArrayImageField({
                   item,
                   fieldName: mf,
@@ -519,7 +601,7 @@ export function createBeforeChangeHook(config: {
                   `${b.arrayKey} ${ni + 1}`
 
                 for (const mf of b.mediaFields) {
-                  const label = b.mediaFieldLabels?.[mf] ?? labelFromFieldName(mf)
+                  const label = b.mediaFieldLabels?.[mf] ?? mf
                   await processArrayImageField({
                     item,
                     fieldName: mf,
