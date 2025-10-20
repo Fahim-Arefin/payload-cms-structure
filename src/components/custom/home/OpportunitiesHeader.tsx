@@ -5,6 +5,7 @@ import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 import LocalizedString from '../shared/LocalizedString'
 import LocalizedText from '../shared/LocalizedText'
 import { LifeAtShantaBlockType } from '@/types/payloadCustomTypes'
+import { pageHref } from '@/lib/utils'
 
 type Props = {
   data: LifeAtShantaBlockType
@@ -66,9 +67,9 @@ function OpportunitiesHeader({ data }: Props) {
             <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
         </div>
-        {data?.buttonText && data?.buttonLink && (
+        {data?.buttonText && data?.buttonTextBN && data?.buttonLink && (
           <div>
-            <Link href={data?.buttonLink}>
+            <Link href={pageHref(data?.buttonLink)}>
               <GlobalButton
                 variant="primary"
                 // text={data?.buttonText}

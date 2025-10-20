@@ -88,7 +88,7 @@ function CueItem({ card, index }: Props) {
             blurDataURL={card?.imageBlurDataURL || ''}
             sizes="(max-width: 767px) 100vw,(max-width: 1023px) 50vw, 33vw"
             // sizes="100vw"
-            quality={100}
+            quality={90}
           />
         )}
       </div>

@@ -735,7 +735,7 @@ const FeaturedPlansSchema: Block = {
           label: 'Image',
           description: 'Plan image. Upload & crop to ~451:350 (≈1.2886). Keep subject centered.',
           aspectRatio: 451 / 350,
-          quality: 0.99,
+          quality: 0.9,
           maxKB: 300,
           ownerCollection: HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG as any,
         } as any),

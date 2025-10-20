@@ -368,6 +368,54 @@ const validateCTAButtonLink = (val: unknown, { siblingData }: any) => {
   return 'CTA Button Link must start with "/" or be a valid http(s) URL.'
 }
 
+const isNonEmpty = (v: unknown) => String(v ?? '').trim().length > 0
+
+const validateCTAEnglishText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+  const hasThis = isNonEmpty(val)
+
+  if (hasAnyText && !hasThis) {
+    return 'CTA Button Text (EN) is required when any CTA button text is provided.'
+  }
+  if (hasThis && String(val).length > CTA_TEXT_MAX) {
+    return `CTA Button Text must be at most ${CTA_TEXT_MAX} characters.`
+  }
+  return true
+}
+
+const validateCTABanglaText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+  const hasThis = isNonEmpty(val)
+
+  if (hasAnyText && !hasThis) {
+    return 'CTA বাটনের (বাংলা) টেক্সট বাধ্যতামূলক, যখন CTA বাটনের যেকোনো টেক্সট দেওয়া হয়।'
+  }
+  if (hasThis && String(val).length > CTA_TEXT_MAX) {
+    return `CTA বাটনের টেক্সট সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর হতে পারবে।`
+  }
+  return true
+}
+
+// Works for relationship or text/url fields
+const validateCTALinkRequiredIfAnyText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+
+  // presence check for relationship or text
+  let hasLink = false
+  if (Array.isArray(val)) {
+    hasLink = val.length > 0
+  } else if (val && typeof val === 'object') {
+    hasLink = Object.keys(val as Record<string, unknown>).length > 0
+  } else {
+    hasLink = Boolean(val)
+  }
+
+  if (hasAnyText && !hasLink) {
+    return 'CTA Button Link is required when CTA Button Text is provided.'
+  }
+  return true
+}
+
 /* ---------------- block ---------------- */
 const LifeAtShantaSchema: Block = {
   slug: HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -524,7 +572,7 @@ const LifeAtShantaSchema: Block = {
           type: 'text',
           label: 'CTA Button Text',
           maxLength: CTA_TEXT_MAX,
-          validate: validateCTAButtonText,
+          validate: validateCTAEnglishText,
           admin: {
             width: '50%',
             description: `Optional. Max ${CTA_TEXT_MAX} characters.`,
@@ -535,7 +583,7 @@ const LifeAtShantaSchema: Block = {
           type: 'text',
           label: 'বাটনের টেক্সট (বাংলা)',
           maxLength: CTA_TEXT_MAX,
-          validate: validateCTAButtonText,
+          validate: validateCTABanglaText,
           admin: {
             width: '50%',
             description: `ঐচ্ছিক। সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর।`,
@@ -543,14 +591,26 @@ const LifeAtShantaSchema: Block = {
         },
       ],
     },
+    // {
+    //   name: 'buttonLink',
+    //   type: 'text',
+    //   label: 'CTA Button Link (URL or Path)',
+    //   maxLength: CTA_LINK_MAX,
+    //   validate: validateCTAButtonLink,
+    //   admin: {
+    //     description: `Required if CTA text is set. Internal path (e.g., /careers) or http(s) URL. Max ${CTA_LINK_MAX} characters.`,
+    //   },
+    // },
     {
       name: 'buttonLink',
-      type: 'text',
-      label: 'CTA Button Link (URL or Path)',
-      maxLength: CTA_LINK_MAX,
-      validate: validateCTAButtonLink,
+      label: 'Link to (internal page)',
+      type: 'relationship',
+      relationTo: 'pages',
+      // required: true,
+      validate: validateCTALinkRequiredIfAnyText,
       admin: {
-        description: `Required if CTA text is set. Internal path (e.g., /careers) or http(s) URL. Max ${CTA_LINK_MAX} characters.`,
+        description:
+          'Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here',
       },
     },
 

@@ -845,9 +845,9 @@ export interface Page {
          */
         buttonTextBN?: string | null;
         /**
-         * Required if CTA text is set. Internal path (e.g., /careers) or http(s) URL. Max 100 characters.
+         * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
          */
-        buttonLink?: string | null;
+        buttonLink?: (string | null) | Page;
         /**
          * Displayed above the CTA button. Recommended 16:9
          */
