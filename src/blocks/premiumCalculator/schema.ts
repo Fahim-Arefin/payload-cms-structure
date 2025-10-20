@@ -227,6 +227,7 @@
 // src/blocks/premiumCalculator/schema.ts
 import {
   HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_LABEL,
+  HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_THUMBNAIL_URL,
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
@@ -284,6 +285,10 @@ const PremiumCalculatorSchema: Block = {
     singular: HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_LABEL,
     plural: HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_LABEL,
   },
+
+  imageURL: HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_LABEL} preview`,
+
   fields: [
     // Appearance
     {

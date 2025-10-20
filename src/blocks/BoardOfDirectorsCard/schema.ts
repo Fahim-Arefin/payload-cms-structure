@@ -1,5 +1,6 @@
 import {
   ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL,
+  ABOUT_US_PAGE_BOD_CARD_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
@@ -22,6 +23,10 @@ const BoardOfDirectorsCardSchema: Block = {
     singular: ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL,
     plural: ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL,
   },
+
+  imageURL: ABOUT_US_PAGE_BOD_CARD_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL} preview`,
+
   fields: [
     // Appearance
     {

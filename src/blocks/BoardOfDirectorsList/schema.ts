@@ -1,5 +1,6 @@
 import {
   BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL,
+  BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_THUMBNAIL_URL,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
 } from '@/lib/constants'
 
@@ -23,6 +24,10 @@ const BoardOfDirectorsListSchema: Block = {
     singular: BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL,
     plural: BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL,
   },
+
+  imageURL: BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL} preview`,
+
   fields: [
     // Appearance
     {

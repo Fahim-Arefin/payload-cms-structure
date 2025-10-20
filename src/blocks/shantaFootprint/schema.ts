@@ -354,7 +354,11 @@ import { bnNum } from '@/lib/utils'
 // src/collections/AboutUsFootprint.ts
 import type { Block } from 'payload'
 
-import { ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  ABOUT_US_PAGE_SHANTA_FOOTPRINT_BLOCK_LABEL,
+  ABOUT_US_PAGE_SHANTA_FOOTPRINT_BLOCK_THUMBNAIL_URL,
+  ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG,
+} from '@/lib/constants'
 
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 
@@ -409,6 +413,14 @@ const validateHTTPSOnlyUrl =
 /* ---------------- collection ---------------- */
 const ShantaFootprintSchema: Block = {
   slug: ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG,
+
+  labels: {
+    singular: ABOUT_US_PAGE_SHANTA_FOOTPRINT_BLOCK_LABEL,
+    plural: ABOUT_US_PAGE_SHANTA_FOOTPRINT_BLOCK_LABEL,
+  },
+
+  imageURL: ABOUT_US_PAGE_SHANTA_FOOTPRINT_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${ABOUT_US_PAGE_SHANTA_FOOTPRINT_BLOCK_LABEL} preview`,
 
   fields: [
     /* --------- Top heading (EN/BN twins + highlights) --------- */
