@@ -185,3 +185,11 @@ export const AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG = 'more-th
 export const AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_BLOCK_LABEL = 'More Than A Workplace'
 export const AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_CACHE_KEY = 'more-than-a-workplace-data'
 export const AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_BLOCK_THUMBNAIL_URL = `${folder}/more-than-a-workplace-block-thumbnail.png`
+
+// plan page
+//  --------------------------------------------------------------------------------------------------
+
+export const PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG = 'plan-card'
+export const PLAN_PAGE_PLAN_CARD_BLOCK_LABEL = 'Plan Card'
+export const PLAN_PAGE_PLAN_CARD_CACHE_KEY = 'plan-card-data'
+export const PLAN_PAGE_PLAN_CARD_BLOCK_THUMBNAIL_URL = `${folder}/plan-card-block-thumbnail.png`

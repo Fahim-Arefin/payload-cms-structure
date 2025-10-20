@@ -147,6 +147,7 @@ import LifeAtShantaSchema from '@/blocks/lifeAtShanta/schema'
 import LifeInsuranceSimplifiedSchema from '@/blocks/lifeInsuranceSimplified/schema'
 import LifeInsuranceVideoSchema from '@/blocks/lifeInsuranceVideo/schema'
 import MoreThanAWorkplaceSchema from '@/blocks/moreThanAWorkplace/schema'
+import PlanCardSchema from '@/blocks/planCard/schema'
 import PremiumCalculatorSchema from '@/blocks/premiumCalculator/schema'
 import ShantaFootprintSchema from '@/blocks/shantaFootprint/schema'
 import ShantaIntroSchema from '@/blocks/shantaIntro/schema'
@@ -248,6 +249,8 @@ export const Pages: CollectionConfig = {
         BoardOfDirectorsListSchema,
         // leadershipo page
         LeadershipTeamListSchema,
+        // plan page
+        PlanCardSchema,
       ],
     },
   ],

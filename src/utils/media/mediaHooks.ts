@@ -6,6 +6,7 @@ import {
   HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
+  PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { withMediaLifecycle } from './withMediaLifecycle'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
@@ -70,6 +71,12 @@ export const mediaHooks = withMediaLifecycle({
       blockType: HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
       arrayKey: 'gallery',
       mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+      arrayKey: 'cards',
+      mediaFields: ['bgImage'],
     },
   ],
 

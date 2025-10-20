@@ -20,6 +20,7 @@ import {
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
+  PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -130,4 +131,10 @@ export type BoardOfDirectorsListBlockType = Extract<
 export type LeadershipTeamListBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG }
+>
+
+// plan card type
+export type PlanCardBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG }
 >

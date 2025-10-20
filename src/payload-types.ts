@@ -1602,6 +1602,97 @@ export interface Page {
         blockName?: string | null;
         blockType: 'leadership-team-list';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 40 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Title. Max 40 chars.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 40 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Subtitle. Max 40 chars.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * 1–2 concise lines. Max 200 characters.
+         */
+        description: string;
+        /**
+         * ১–২টি সংক্ষিপ্ত লাইন। সর্বোচ্চ ২০০ অক্ষর।
+         */
+        descriptionBN: string;
+        /**
+         * Add at least 1 card.
+         */
+        cards: {
+          /**
+           * Upload & crop a 13:12 image.
+           */
+          bgImage: string | Media;
+          bgImageOriginal?: (string | null) | Media;
+          pendingBgImageOriginal?: string | null;
+          pendingBgImageCrop?: string | null;
+          bgImageBlurDataURL?: string | null;
+          /**
+           * Max 40 characters.
+           */
+          title: string;
+          /**
+           * সর্বোচ্চ ৪০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Max 100 characters.
+           */
+          description: string;
+          /**
+           * সর্বোচ্চ ১০০ অক্ষর।
+           */
+          descriptionBN: string;
+          /**
+           * Optional. Max 24 characters.
+           */
+          buttonText?: string | null;
+          /**
+           * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+           */
+          buttonTextBN?: string | null;
+          /**
+           * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+           */
+          buttonLink?: (string | null) | Page;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-card';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2303,6 +2394,40 @@ export interface PagesSelect<T extends boolean = true> {
               oddBackgroundColor?: T;
               evenBackgroundColor?: T;
               useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'plan-card'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              cards?:
+                | T
+                | {
+                    bgImage?: T;
+                    bgImageOriginal?: T;
+                    pendingBgImageOriginal?: T;
+                    pendingBgImageCrop?: T;
+                    bgImageBlurDataURL?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    buttonText?: T;
+                    buttonTextBN?: T;
+                    buttonLink?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
