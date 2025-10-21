@@ -12,8 +12,9 @@ const OnboardingWay: FC<OnboardingWayProps> = ({ wayWeAreData }: OnboardingWayPr
   return (
     <div className="relative">
       <div
+        // h-[200px] md:h-[400px] lg:h-[500px] xl:h-[650px] 2xl:h-[750px]
         className="relative
-            h-[200px] md:h-[400px] lg:h-[500px] xl:h-[650px] 2xl:h-[750px]
+            h-[200px] md:h-[350px] lg:h-[400px] xl:h-[550px] 2xl:h-[650px]
              bg-white overflow-hidden"
       >
         {/* image */}
@@ -25,6 +26,9 @@ const OnboardingWay: FC<OnboardingWayProps> = ({ wayWeAreData }: OnboardingWayPr
               fill
               className="object-cover object-center"
               sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
+              placeholder="blur"
+              blurDataURL={wayWeAreData?.backgroundImageBlurDataURL || ''}
+              quality={80}
             />
           )}
         {/* Content */}

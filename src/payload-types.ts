@@ -1572,7 +1572,7 @@ export interface Page {
            */
           right: {
             /**
-             * Agent photo (1:1 portrait preferred). Optimized with blur placeholder.
+             * Agent photo (1:1 portrait preferred and also prefered transparent img).
              */
             avatar: string | Media;
             avatarOriginal?: (string | null) | Media;
@@ -1611,6 +1611,13 @@ export interface Page {
          * Large section background visual. 16:9 recommended.
          */
         backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
         /**
          * Primary heading. Max 80 characters.
          */
@@ -1632,9 +1639,13 @@ export interface Page {
          */
         gallery: {
           /**
-           * Upload an image for the gallery. aspect ratio 1.5:1
+           * Upload an image for the gallery. Aspect ratio ~1.5:1.
            */
           image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
           id?: string | null;
         }[];
         id?: string | null;
@@ -2515,6 +2526,10 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               backgroundColor?: T;
               backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
               title?: T;
               titleBN?: T;
               highlightedText?: T;
@@ -2523,6 +2538,10 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     id?: T;
                   };
               id?: T;

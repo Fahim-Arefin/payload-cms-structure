@@ -652,9 +652,10 @@ const AgentOnboardingOpportunitySchema: Block = {
             ...generateArrayImageFields({
               fieldName: 'avatar',
               label: 'Avatar',
-              description: 'Agent photo (1:1 portrait preferred). Optimized with blur placeholder.',
+              description:
+                'Agent photo (1:1 portrait preferred and also prefered transparent img).',
               aspectRatio: 1,
-              quality: 0.9,
+              quality: 1,
               maxKB: 300,
               ownerCollection:
                 AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG as any,

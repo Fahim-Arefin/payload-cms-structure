@@ -8,6 +8,7 @@ import {
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
+  AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -73,6 +74,12 @@ export const mediaHooks = withMediaLifecycle({
     {
       layoutKey: 'layout',
       blockType: AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
+      mediaFields: ['backgroundImage'],
+    },
+    {
+      // Block row media (background image)
+      layoutKey: 'layout',
+      blockType: AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
       mediaFields: ['backgroundImage'],
     },
   ],
@@ -154,6 +161,12 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
       arrayKey: 'audienceCards',
+      mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
+      arrayKey: 'gallery',
       mediaFields: ['image'],
     },
   ],
