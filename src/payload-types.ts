@@ -1736,13 +1736,41 @@ export interface Page {
          */
         highlightedSubtitleBN?: string | null;
         /**
-         * 1–2 concise lines. Max 200 characters.
+         * Up to ~200 characters.
          */
-        description: string;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         /**
-         * ১–২টি সংক্ষিপ্ত লাইন। সর্বোচ্চ ২০০ অক্ষর।
+         * সর্বোচ্চ ~২০০ অক্ষর।
          */
-        descriptionBN: string;
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         /**
          * Add at least 1 card.
          */

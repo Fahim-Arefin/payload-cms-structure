@@ -59,18 +59,18 @@ function AllPlanCard({ data, blur }: Props) {
           <p className="global-p2 text-center lg:text-start">
             <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
-          <Button
-            variant="link"
-            className="text-[#ED7125] hover:underline w-fit mx-auto lg:mx-0
-           global-p2 p-0 "
-          >
-            <div className="flex space-x-1 items-center cursor-pointer">
-              <Link href={pageHref(data?.buttonLink)}>
+          <Link href={pageHref(data?.buttonLink)}>
+            <Button
+              variant="link"
+              className="text-[#ED7125] hover:underline w-fit mx-auto lg:mx-0
+            global-p2 p-0 "
+            >
+              <div className="flex space-x-1 items-center cursor-pointer">
                 <LocalizedText en="Explore" bn="এক্সপ্লোর" />
-              </Link>
-              <ArrowUpRight />
-            </div>
-          </Button>
+                <ArrowUpRight />
+              </div>
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
