@@ -368,6 +368,7 @@ import {
 } from '@/lib/constants'
 
 import { bnNum } from '@/lib/utils'
+import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
 const COLOR_HEX_LEN = 7
@@ -505,16 +506,25 @@ const AgentOnboardingOpportunitySchema: Block = {
           'These cards are shown on mobile only. Each item has one image and a short line (EN/BN).',
       },
       fields: [
-        {
-          name: 'image',
+        // {
+        //   name: 'image',
+        //   label: 'Audience Image',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description: 'Square visual (1:1 recommended). Optimized with blur placeholder.',
+        //   },
+        // },
+        ...generateArrayImageFields({
+          fieldName: 'image',
           label: 'Audience Image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description: 'Square visual (1:1 recommended). Optimized with blur placeholder.',
-          },
-        },
+          description: 'Square visual (1:1 recommended). Optimized with blur placeholder.',
+          aspectRatio: 1,
+          quality: 0.9,
+          maxKB: 300,
+          ownerCollection: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG as any,
+        } as any),
 
         // {
         //   type: 'row',
@@ -565,16 +575,26 @@ const AgentOnboardingOpportunitySchema: Block = {
           labels: { singular: 'Bullet', plural: 'Bullets' },
           admin: { description: 'Bullets with icon + EN/BN short text.' },
           fields: [
-            {
-              name: 'icon',
+            // {
+            //   name: 'icon',
+            //   label: 'Icon',
+            //   type: 'upload',
+            //   relationTo: 'media',
+            //   required: true,
+            //   admin: {
+            //     description: 'Square icon (1:1). PNG with transparent background preferred.',
+            //   },
+            // },
+            ...generateArrayImageFields({
+              fieldName: 'icon',
               label: 'Icon',
-              type: 'upload',
-              relationTo: 'media',
-              required: true,
-              admin: {
-                description: 'Square icon (1:1). PNG with transparent background preferred.',
-              },
-            },
+              description: 'Square icon (1:1). PNG with transparent background preferred.',
+              aspectRatio: 1,
+              quality: 0.9,
+              maxKB: 200,
+              ownerCollection:
+                AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG as any,
+            } as any),
 
             {
               type: 'row',
@@ -619,16 +639,26 @@ const AgentOnboardingOpportunitySchema: Block = {
           labels: { singular: 'Right Card', plural: 'Right Card' },
           admin: { description: 'Single agent testimonial: avatar + EN/BN name + EN/BN quote.' },
           fields: [
-            {
-              name: 'avatar',
+            // {
+            //   name: 'avatar',
+            //   label: 'Avatar',
+            //   type: 'upload',
+            //   relationTo: 'media',
+            //   required: true,
+            //   admin: {
+            //     description: 'Agent photo (prefer 1:1 portrait). Optimized with blur placeholder.',
+            //   },
+            // },
+            ...generateArrayImageFields({
+              fieldName: 'avatar',
               label: 'Avatar',
-              type: 'upload',
-              relationTo: 'media',
-              required: true,
-              admin: {
-                description: 'Agent photo (prefer 1:1 portrait). Optimized with blur placeholder.',
-              },
-            },
+              description: 'Agent photo (1:1 portrait preferred). Optimized with blur placeholder.',
+              aspectRatio: 1,
+              quality: 0.9,
+              maxKB: 300,
+              ownerCollection:
+                AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG as any,
+            } as any),
 
             {
               type: 'row',

@@ -372,6 +372,7 @@ import {
 } from '@/lib/constants'
 
 import { bnNum } from '@/lib/utils'
+import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
 const COLOR_HEX_LEN = 7
@@ -442,16 +443,26 @@ const ShantaMilestonesUnlockedSchema: Block = {
       },
     },
     // main image
-    {
-      name: 'image',
+    // {
+    //   name: 'image',
+    //   label: 'Section Image',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description: 'Section main image. 16:9 recommended.',
+    //   },
+    // },
+    // Section main image (generator-based cropper; writes imageOriginal + imageBlurDataURL)
+    ...generateImageFields({
+      fieldName: 'image',
       label: 'Section Image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'Section main image. 16:9 recommended.',
-      },
-    },
+      description: 'Section main image. 16:9 recommended.',
+      aspectRatio: 16 / 9,
+      quality: 0.9,
+      maxKB: 600,
+      ownerCollection: ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG as any,
+    } as any),
 
     /* ---------- Section heading (EN/BN twins + highlight) ---------- */
     {
@@ -626,16 +637,26 @@ const ShantaMilestonesUnlockedSchema: Block = {
         description: 'Small highlight items displayed under the milestone (icon + label + value).',
       },
       fields: [
-        {
-          name: 'icon',
+        // {
+        //   name: 'icon',
+        //   label: 'Icon',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description: 'Square icon (1:1). Use transparent PNG if possible.',
+        //   },
+        // },
+        // Icon (generator-based; 1:1)
+        ...generateArrayImageFields({
+          fieldName: 'icon',
           label: 'Icon',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description: 'Square icon (1:1). Use transparent PNG if possible.',
-          },
-        },
+          description: 'Square icon (1:1). Use transparent PNG if possible.',
+          aspectRatio: 1,
+          quality: 0.9,
+          maxKB: 150,
+          ownerCollection: ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG as any,
+        } as any),
 
         // label (EN/BN)
         {

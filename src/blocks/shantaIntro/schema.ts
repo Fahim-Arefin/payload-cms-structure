@@ -239,6 +239,7 @@ import {
   ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
+import { generateImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------- limits ---------- */
 const COLOR_HEX_LEN = 7
@@ -439,16 +440,26 @@ const ShantaIntroSchema: Block = {
       ],
     },
 
-    {
-      name: 'image',
+    // {
+    //   name: 'image',
+    //   label: 'Intro Image',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description: 'Primary visual for the intro section. 2.15:1 recommended.',
+    //   },
+    // },
+    ...generateImageFields({
+      fieldName: 'image',
       label: 'Intro Image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'Primary visual for the intro section. 2.15:1 recommended.',
-      },
-    },
+      description:
+        'Primary visual for the intro section. Use tranparent image. 2.15:1 recommended.',
+      aspectRatio: 2.15 / 1, // ≈ 2.15 : 1
+      quality: 0.9, // high quality webp
+      maxKB: 300, // tweak if you want stricter size
+      ownerCollection: ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG as any,
+    } as any),
   ],
 }
 

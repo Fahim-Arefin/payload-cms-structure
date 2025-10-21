@@ -277,6 +277,7 @@ import {
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
+import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
 const COLOR_HEX_LEN = 7
@@ -404,17 +405,27 @@ const ValuesThatShapeUsSchema: Block = {
       ],
     },
 
-    // Background image (not localized)
-    {
-      name: 'image',
+    // // Background image (not localized)
+    // {
+    //   name: 'image',
+    //   label: 'Background Image',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description: 'Large background image for the section. 2:3 recommended.',
+    //   },
+    // },
+    // Background image (cropper-based)
+    ...generateImageFields({
+      fieldName: 'image',
       label: 'Background Image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'Large background image for the section. 2:3 recommended.',
-      },
-    },
+      description: 'Large background image for the section. 2:3 recommended.',
+      aspectRatio: 2 / 3, // portrait as per your hint
+      quality: 0.9,
+      maxKB: 300,
+      ownerCollection: ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG as any,
+    } as any),
 
     // Cards (values) — localized EN/BN twins for title & description; media stays single
     {
@@ -430,31 +441,52 @@ const ValuesThatShapeUsSchema: Block = {
           'Add value items with icon + hover icon, a short title, and a brief description.',
       },
       fields: [
-        // Static icon (not localized)
-        {
-          name: 'image',
-          label: 'Icon (default)',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description:
-              'Icon shown normally. (give colored version and transparent bg image) (ratio 1:1)',
-          },
-        },
+        // // Static icon (not localized)
+        // {
+        //   name: 'image',
+        //   label: 'Icon (default)',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description:
+        //       'Icon shown normally. (give colored version and transparent bg image) (ratio 1:1)',
+        //   },
+        // },
 
-        // Hover icon (not localized)
-        {
-          name: 'hoverImage',
+        // // Hover icon (not localized)
+        // {
+        //   name: 'hoverImage',
+        //   label: 'Icon (on hover)',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description:
+        //       'Icon shown on hover. (give white version and transparent bg image) (ratio 1:1)',
+        //   },
+        // },
+        // Icon (1:1)
+        ...generateArrayImageFields({
+          fieldName: 'image',
+          label: 'Icon (default)',
+          description: 'Icon shown normally. (Colored version, transparent bg). Ratio 1:1.',
+          aspectRatio: 1,
+          quality: 0.9,
+          maxKB: 100,
+          ownerCollection: ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG as any,
+        } as any),
+
+        // Hover Icon (1:1)
+        ...generateArrayImageFields({
+          fieldName: 'hoverImage',
           label: 'Icon (on hover)',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description:
-              'Icon shown on hover. (give white version and transparent bg image) (ratio 1:1)',
-          },
-        },
+          description: 'Hover icon (white version, transparent bg). Ratio 1:1.',
+          aspectRatio: 1,
+          quality: 0.9,
+          maxKB: 100,
+          ownerCollection: ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG as any,
+        } as any),
 
         // Texts (EN + BN twins, paired rows)
         {

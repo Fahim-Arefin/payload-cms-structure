@@ -7,6 +7,7 @@ import Autoplay from 'embla-carousel-autoplay'
 import React, { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import AllOfThemCard from './AllOfThemCard'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   blockData: LeadershipTeamCardBlockType
@@ -46,7 +47,7 @@ function LeadershipTeamCardSectionClient({ blockData, leadersData }: Props) {
         {/* top section */}
         <div className="lg:w-[50%] space-y-2 md:space-y-6 2xl:space-y-12 ">
           <h2 className="global-h1 lg:global-h3 font-medium lg:font-semibold text-[#4A4A4A] text-center lg:text-start uppercase">
-            Leadership Team
+            <LocalizedText en={leadersData?.sectionTitle} bn={leadersData?.sectionTitleBN} />
           </h2>
           {/* <p className="global-p1 text-[#4A4A4A] text-center lg:text-justify ">
             Guided by Visionaries, Driven by Purpose. Meet Our Leadership Team, creating a new

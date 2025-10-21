@@ -166,6 +166,7 @@ import {
   ABOUT_US_PAGE_LICENSED_LAUNCHED_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG,
 } from '@/lib/constants'
+import { generateImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
 const LICENSED_LABEL_MAX = 15
@@ -195,16 +196,26 @@ const LicensedLaunchedSchema: Block = {
 
   fields: [
     // Licensed block
-    {
-      name: 'licensedImage',
+    // {
+    //   name: 'licensedImage',
+    //   label: 'Licensed Icon',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description: 'Small square icon (1:1).',
+    //   },
+    // },
+    // with this:
+    ...generateImageFields({
+      fieldName: 'licensedImage',
       label: 'Licensed Icon',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'Small square icon (1:1).',
-      },
-    },
+      description: 'Small square icon (1:1).',
+      aspectRatio: 1,
+      quality: 0.9,
+      maxKB: 150,
+      ownerCollection: ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG as any,
+    } as any),
     {
       type: 'row',
       fields: [
@@ -267,16 +278,26 @@ const LicensedLaunchedSchema: Block = {
 
     // Launched block
 
-    {
-      name: 'launchedImage',
+    // {
+    //   name: 'launchedImage',
+    //   label: 'Launched Icon',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description: 'Small square icon (1:1).',
+    //   },
+    // },
+    // with this:
+    ...generateImageFields({
+      fieldName: 'launchedImage',
       label: 'Launched Icon',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'Small square icon (1:1).',
-      },
-    },
+      description: 'Small square icon (1:1).',
+      aspectRatio: 1,
+      quality: 0.9,
+      maxKB: 150,
+      ownerCollection: ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG as any,
+    } as any),
     {
       type: 'row',
       fields: [

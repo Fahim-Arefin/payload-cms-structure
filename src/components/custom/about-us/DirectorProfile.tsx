@@ -55,6 +55,9 @@ function DirectorProfile({ data, pageLink }: Props) {
                   alt={data?.title}
                   className="z-20 bottom-0 rounded-b-full"
                   sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , 33vw"
+                  placeholder="blur"
+                  blurDataURL={data?.aboutImageBlurDataURL || ''}
+                  quality={85}
                 />
               )}
             </div>

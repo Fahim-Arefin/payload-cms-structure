@@ -345,6 +345,7 @@ import {
   ABOUT_US_PAGE_DIRECTORS_MESSAGES_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG,
 } from '@/lib/constants'
+import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
 const COLOR_HEX_LEN = 7
@@ -480,17 +481,27 @@ const DirectorsMessagesSchema: Block = {
         },
 
         // portrait (direct upload via cropper; will also save imageBlurDataURL)
-        {
-          name: 'image',
+        // {
+        //   name: 'image',
+        //   label: 'Portrait Image',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description:
+        //       'Leader portrait (8:9 recommended). Will be optimized and a blur placeholder generated.',
+        //   },
+        // },
+        ...generateArrayImageFields({
+          fieldName: 'image',
           label: 'Portrait Image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description:
-              'Leader portrait (8:9 recommended). Will be optimized and a blur placeholder generated.',
-          },
-        },
+          description:
+            'Leader portrait (8:9 recommended). Will be optimized and a blur placeholder generated.',
+          aspectRatio: 8 / 9,
+          quality: 1,
+          maxKB: 300,
+          ownerCollection: ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG as any,
+        } as any),
 
         // Name (EN/BN)
         {

@@ -61,7 +61,9 @@ function DirectorCard({ data, index }: Props) {
                   className="inset-0 object-cover object-center
                 rounded-sm md:rounded-md lg:rounded-lg 2xl:rounded-[24px]"
                   sizes="100vw"
-                  quality={100}
+                  quality={99}
+                  placeholder="blur"
+                  blurDataURL={data?.imageBlurDataURL || ''}
                 />
               )}
             </div>

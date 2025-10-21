@@ -78,17 +78,20 @@ function DirectorCardSectionClient({ directorProfileData, blockData }: Props) {
                 bn={directorProfileData?.cardSectionTitleBN}
               />
             </h2>
-            <Link
-              //   href="/all-bods"
-              href={pageHref(directorProfileData?.linkTarget)}
-              className="text-sm text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1"
-            >
-              <LocalizedText
-                en={directorProfileData?.linkLabel}
-                bn={directorProfileData?.linkLabelBN}
-              />
-              <ArrowUpRight size={14} className="inline-block" />
-            </Link>
+            {directorProfileData?.linkLabel &&
+              directorProfileData?.linkLabelBN &&
+              directorProfileData?.linkTarget && (
+                <Link
+                  href={pageHref(directorProfileData?.linkTarget)}
+                  className="text-sm text-[#ED7125] underline hover:text-[#d65a1a] transition-colors font-medium flex items-center gap-1"
+                >
+                  <LocalizedText
+                    en={directorProfileData?.linkLabel}
+                    bn={directorProfileData?.linkLabelBN}
+                  />
+                  <ArrowUpRight size={14} className="inline-block" />
+                </Link>
+              )}
           </div>
         </div>
 
