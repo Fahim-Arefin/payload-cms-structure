@@ -138,6 +138,7 @@ import BoardOfDirectorsListSchema from '@/blocks/BoardOfDirectorsList/schema'
 import LicensedLaunchedSchema from '@/blocks/LicensedAndLaunched/schema'
 import AgentOnboardingOpportunitySchema from '@/blocks/agentOnboadringOpportunity/schema'
 import AgentVisionSchema from '@/blocks/agentVision/schema'
+import ContactUsSchema from '@/blocks/contactUs/schema'
 import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
 import FeaturedPlansSchema from '@/blocks/featuredPlan/schema'
 import HeroSchema from '@/blocks/hero/schema'
@@ -251,6 +252,8 @@ export const Pages: CollectionConfig = {
         LeadershipTeamListSchema,
         // plan page
         PlanCardSchema,
+        // contact us block
+        ContactUsSchema,
       ],
     },
   ],

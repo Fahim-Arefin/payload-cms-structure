@@ -1817,6 +1817,66 @@ export interface Page {
         blockName?: string | null;
         blockType: 'plan-card';
       }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading above the form. Max 80 characters.
+         */
+        title: string;
+        /**
+         * ফর্মের উপরের প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line under the title. Max 120 characters.
+         */
+        subtitle: string;
+        /**
+         * শিরোনামের নিচের সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * Main visual near the form. 891:489 recommended.
+         */
+        image: string | Media;
+        imageOriginal?: (string | null) | Media;
+        pendingImageOriginal?: string | null;
+        pendingImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageBlurDataURL?: string | null;
+        /**
+         * Provide at least one email address. All valid ones will receive the message.
+         */
+        recipientEmails?: {
+          email1?: string | null;
+          email2?: string | null;
+          email3?: string | null;
+        };
+        /**
+         * If set, emails from this block will use this From name/email instead of the default env (SMTP_MAIL_FROM).
+         */
+        senderOverride?: {
+          fromName?: string | null;
+          fromEmail?: string | null;
+        };
+        /**
+         * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+         */
+        termsAndConditionButtonLink: string | Page;
+        /**
+         * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+         */
+        privacyPolicyButtonLink: string | Page;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contact-us-form';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2624,6 +2684,38 @@ export interface PagesSelect<T extends boolean = true> {
                     buttonLink?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'contact-us-form'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              image?: T;
+              imageOriginal?: T;
+              pendingImageOriginal?: T;
+              pendingImageCrop?: T;
+              imageBlurDataURL?: T;
+              recipientEmails?:
+                | T
+                | {
+                    email1?: T;
+                    email2?: T;
+                    email3?: T;
+                  };
+              senderOverride?:
+                | T
+                | {
+                    fromName?: T;
+                    fromEmail?: T;
+                  };
+              termsAndConditionButtonLink?: T;
+              privacyPolicyButtonLink?: T;
               id?: T;
               blockName?: T;
             };

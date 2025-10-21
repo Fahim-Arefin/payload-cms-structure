@@ -12,6 +12,7 @@ import {
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
+  CONTACT_US_BLOCK_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -137,4 +138,9 @@ export type LeadershipTeamListBlockType = Extract<
 export type PlanCardBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG }
+>
+// contact us form
+export type ContactUsFormBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CONTACT_US_BLOCK_SLUG_AND_TAG }
 >

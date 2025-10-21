@@ -193,3 +193,11 @@ export const PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG = 'plan-card'
 export const PLAN_PAGE_PLAN_CARD_BLOCK_LABEL = 'Plan Card'
 export const PLAN_PAGE_PLAN_CARD_CACHE_KEY = 'plan-card-data'
 export const PLAN_PAGE_PLAN_CARD_BLOCK_THUMBNAIL_URL = `${folder}/plan-card-block-thumbnail.png`
+
+// contact us block
+// ------------------------------------------------------------------------------------------------------
+
+export const CONTACT_US_BLOCK_SLUG_AND_TAG = 'contact-us-form'
+export const CONTACT_US_BLOCK_LABEL = 'Contact Us Form'
+export const CONTACT_US_BLOCK_THUMBNAIL_URL = `${folder}/contact-us-form-block-thumbnail.png`
+export const CONTACT_US_BLOCK_CACHE_KEY = 'contact-us-form-data'
