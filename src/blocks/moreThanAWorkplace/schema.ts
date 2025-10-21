@@ -210,6 +210,7 @@ import {
 } from '@/lib/constants'
 
 import { bnNum } from '@/lib/utils'
+import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
 const COLOR_HEX_LEN = 7
@@ -275,16 +276,26 @@ const MoreThanAWorkplaceSchema: Block = {
       },
     },
     // Background image
-    {
-      name: 'backgroundImage',
+    // {
+    //   name: 'backgroundImage',
+    //   label: 'Background Image',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description: 'Large section background visual. 16:9 recommended.',
+    //   },
+    // },
+    // Background image (generated, 16:9)
+    ...generateImageFields({
+      fieldName: 'backgroundImage',
       label: 'Background Image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'Large section background visual. 16:9 recommended.',
-      },
-    },
+      description: 'Large section background visual. 16:9 recommended.',
+      aspectRatio: 16 / 9,
+      quality: 0.93,
+      maxKB: 500,
+      ownerCollection: AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG as any,
+    } as any),
 
     /* ---------- Title (EN/BN) ---------- */
     {
@@ -364,16 +375,26 @@ const MoreThanAWorkplaceSchema: Block = {
         description: 'A collection of images to display in the gallery.',
       },
       fields: [
-        {
-          name: 'image',
+        // {
+        //   name: 'image',
+        //   label: 'Image',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description: 'Upload an image for the gallery. aspect ratio 1.5:1',
+        //   },
+        // },
+        // Image (generated, 1.5:1)
+        ...generateArrayImageFields({
+          fieldName: 'image',
           label: 'Image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description: 'Upload an image for the gallery. aspect ratio 1.5:1',
-          },
-        },
+          description: 'Upload an image for the gallery. Aspect ratio ~1.5:1.',
+          aspectRatio: 1.5 / 1,
+          quality: 0.93,
+          maxKB: 400,
+          ownerCollection: AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG as any,
+        } as any),
       ],
     },
   ],

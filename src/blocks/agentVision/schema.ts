@@ -327,7 +327,7 @@ import type { Block } from 'payload'
 import { AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG } from '@/lib/constants'
 
 import { bnNum } from '@/lib/utils'
-import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
+import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
 const TITLE_MAX = 80
@@ -428,16 +428,26 @@ const AgentVisionSchema: Block = {
 
   fields: [
     // Background image (not localized)
-    {
-      name: 'backgroundImage',
+    // {
+    //   name: 'backgroundImage',
+    //   label: 'Background Image',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description: 'Large section background visual. 16:9 recommended.',
+    //   },
+    // },
+    // ✅ Background image via generator (16:9)
+    ...generateImageFields({
+      fieldName: 'backgroundImage',
       label: 'Background Image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'Large section background visual. 16:9 recommended.',
-      },
-    },
+      description: 'Large section background visual. 16:9 recommended.',
+      aspectRatio: 16 / 9,
+      quality: 0.9,
+      maxKB: 600,
+      ownerCollection: AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG as any,
+    } as any),
 
     /* ---------- Title (EN/BN) + highlighted (EN/BN) ---------- */
     {
@@ -517,16 +527,28 @@ const AgentVisionSchema: Block = {
       },
       fields: [
         // Icon (not localized)
-        {
-          name: 'icon',
+        // {
+        //   name: 'icon',
+        //   label: 'Icon',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description: 'Square icon (1:1). PNG with transparent background preferred.',
+        //   },
+        // },
+
+        // ✅ Icon via generator (1:1)
+        ...generateArrayImageFields({
+          fieldName: 'icon',
           label: 'Icon',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description: 'Square icon (1:1). PNG with transparent background preferred.',
-          },
-        },
+          description: 'Square icon (1:1). PNG with transparent background preferred.',
+          aspectRatio: 1,
+          quality: 0.92,
+          maxKB: 150,
+          ownerCollection: AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG as any,
+        } as any),
+
         // Title (EN/BN)
         {
           type: 'row',

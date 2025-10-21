@@ -62,6 +62,9 @@ export const ProfileSection: React.FC<Props> = ({ data, titleColor, reverse = fa
                 alt={data.title}
                 className="rounded-md lg:rounded-lg xl:rounded-xl object-cover "
                 sizes="(max-width:767px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL={data?.imageBlurDataURL || ''}
+                quality={90}
               />
             )}
           </div>

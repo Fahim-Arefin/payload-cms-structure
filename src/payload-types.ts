@@ -916,9 +916,16 @@ export interface Page {
          */
         paragraphBN: string;
         /**
-         * Primary visual for the intro section. 2.15:1 recommended.
+         * Primary visual for the intro section. Use tranparent image. 2.15:1 recommended.
          */
         image: string | Media;
+        imageOriginal?: (string | null) | Media;
+        pendingImageOriginal?: string | null;
+        pendingImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageBlurDataURL?: string | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'shanta-intro';
@@ -928,6 +935,13 @@ export interface Page {
          * Large background visual for the section. 2.5:1 recommended.
          */
         bgImage: string | Media;
+        bgImageOriginal?: (string | null) | Media;
+        pendingBgImageOriginal?: string | null;
+        pendingBgImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        bgImageBlurDataURL?: string | null;
         /**
          * Primary heading for Vision. Max 14 characters.
          */
@@ -993,18 +1007,33 @@ export interface Page {
          * Large background image for the section. 2:3 recommended.
          */
         image: string | Media;
+        imageOriginal?: (string | null) | Media;
+        pendingImageOriginal?: string | null;
+        pendingImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageBlurDataURL?: string | null;
         /**
          * Add value items with icon + hover icon, a short title, and a brief description.
          */
         values: {
           /**
-           * Icon shown normally. (give colored version and transparent bg image) (ratio 1:1)
+           * Icon shown normally. (Colored version, transparent bg). Ratio 1:1.
            */
           image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
           /**
-           * Icon shown on hover. (give white version and transparent bg image) (ratio 1:1)
+           * Hover icon (white version, transparent bg). Ratio 1:1.
            */
           hoverImage: string | Media;
+          hoverImageOriginal?: (string | null) | Media;
+          pendingHoverImageOriginal?: string | null;
+          pendingHoverImageCrop?: string | null;
+          hoverImageBlurDataURL?: string | null;
           /**
            * Short card title (e.g., “Trust”). Max 40 characters.
            */
@@ -1032,6 +1061,13 @@ export interface Page {
          * Small square icon (1:1).
          */
         licensedImage: string | Media;
+        licensedImageOriginal?: (string | null) | Media;
+        pendingLicensedImageOriginal?: string | null;
+        pendingLicensedImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        licensedImageBlurDataURL?: string | null;
         /**
          * Short label under the licensed icon (e.g., "Licensed"). Max 15 characters.
          */
@@ -1052,6 +1088,13 @@ export interface Page {
          * Small square icon (1:1).
          */
         launchedImage: string | Media;
+        launchedImageOriginal?: (string | null) | Media;
+        pendingLaunchedImageOriginal?: string | null;
+        pendingLaunchedImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        launchedImageBlurDataURL?: string | null;
         /**
          * Short label under the launched icon (e.g., "Launched"). Max 15 characters.
          */
@@ -1085,6 +1128,10 @@ export interface Page {
            * Leader portrait (8:9 recommended). Will be optimized and a blur placeholder generated.
            */
           image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
           /**
            * Leader’s name (English). Max 40 characters.
            */
@@ -1214,6 +1261,13 @@ export interface Page {
          * Section main image. 16:9 recommended.
          */
         image: string | Media;
+        imageOriginal?: (string | null) | Media;
+        pendingImageOriginal?: string | null;
+        pendingImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageBlurDataURL?: string | null;
         /**
          * Primary heading (e.g., “Shanta Milestones”). Max 40 characters.
          */
@@ -1262,6 +1316,10 @@ export interface Page {
            * Square icon (1:1). Use transparent PNG if possible.
            */
           icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
           /**
            * Short label (e.g., “Policies”). Max 32 characters.
            */
@@ -1321,6 +1379,10 @@ export interface Page {
            * Company/brand image (1:1).
            */
           image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
           /**
            * Company/brand name (English). Max 60 characters.
            */
@@ -1360,6 +1422,13 @@ export interface Page {
          * Large section background visual. 16:9 recommended.
          */
         backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
         /**
          * Primary heading. Max 80 characters.
          */
@@ -1384,6 +1453,10 @@ export interface Page {
            * Square icon (1:1). PNG with transparent background preferred.
            */
           icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
           /**
            * Short headline. Max 60 characters.
            */
@@ -1465,6 +1538,10 @@ export interface Page {
            * Square visual (1:1 recommended). Optimized with blur placeholder.
            */
           image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
           id?: string | null;
         }[];
         expectations: {
@@ -1476,6 +1553,10 @@ export interface Page {
              * Square icon (1:1). PNG with transparent background preferred.
              */
             icon: string | Media;
+            iconOriginal?: (string | null) | Media;
+            pendingIconOriginal?: string | null;
+            pendingIconCrop?: string | null;
+            iconBlurDataURL?: string | null;
             /**
              * Short line. Max 100 characters.
              */
@@ -1491,9 +1572,13 @@ export interface Page {
            */
           right: {
             /**
-             * Agent photo (prefer 1:1 portrait). Optimized with blur placeholder.
+             * Agent photo (1:1 portrait preferred and also prefered transparent img).
              */
             avatar: string | Media;
+            avatarOriginal?: (string | null) | Media;
+            pendingAvatarOriginal?: string | null;
+            pendingAvatarCrop?: string | null;
+            avatarBlurDataURL?: string | null;
             /**
              * Agent’s name. Max 60 characters.
              */
@@ -1526,6 +1611,13 @@ export interface Page {
          * Large section background visual. 16:9 recommended.
          */
         backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
         /**
          * Primary heading. Max 80 characters.
          */
@@ -1547,9 +1639,13 @@ export interface Page {
          */
         gallery: {
           /**
-           * Upload an image for the gallery. aspect ratio 1.5:1
+           * Upload an image for the gallery. Aspect ratio ~1.5:1.
            */
           image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
           id?: string | null;
         }[];
         id?: string | null;
@@ -1601,6 +1697,97 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'leadership-team-list';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 40 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Title. Max 40 chars.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 40 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Subtitle. Max 40 chars.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * 1–2 concise lines. Max 200 characters.
+         */
+        description: string;
+        /**
+         * ১–২টি সংক্ষিপ্ত লাইন। সর্বোচ্চ ২০০ অক্ষর।
+         */
+        descriptionBN: string;
+        /**
+         * Add at least 1 card.
+         */
+        cards: {
+          /**
+           * Upload & crop a 13:12 image.
+           */
+          bgImage: string | Media;
+          bgImageOriginal?: (string | null) | Media;
+          pendingBgImageOriginal?: string | null;
+          pendingBgImageCrop?: string | null;
+          bgImageBlurDataURL?: string | null;
+          /**
+           * Max 40 characters.
+           */
+          title: string;
+          /**
+           * সর্বোচ্চ ৪০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Max 100 characters.
+           */
+          description: string;
+          /**
+           * সর্বোচ্চ ১০০ অক্ষর।
+           */
+          descriptionBN: string;
+          /**
+           * Optional. Max 24 characters.
+           */
+          buttonText?: string | null;
+          /**
+           * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+           */
+          buttonTextBN?: string | null;
+          /**
+           * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+           */
+          buttonLink?: (string | null) | Page;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-card';
       }
   )[];
   updatedAt: string;
@@ -2050,6 +2237,10 @@ export interface PagesSelect<T extends boolean = true> {
               paragraph?: T;
               paragraphBN?: T;
               image?: T;
+              imageOriginal?: T;
+              pendingImageOriginal?: T;
+              pendingImageCrop?: T;
+              imageBlurDataURL?: T;
               id?: T;
               blockName?: T;
             };
@@ -2057,6 +2248,10 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               bgImage?: T;
+              bgImageOriginal?: T;
+              pendingBgImageOriginal?: T;
+              pendingBgImageCrop?: T;
+              bgImageBlurDataURL?: T;
               visionTitle?: T;
               visionTitleBN?: T;
               visionHighlightedText?: T;
@@ -2081,11 +2276,23 @@ export interface PagesSelect<T extends boolean = true> {
               highlightedText?: T;
               highlightedTextBN?: T;
               image?: T;
+              imageOriginal?: T;
+              pendingImageOriginal?: T;
+              pendingImageCrop?: T;
+              imageBlurDataURL?: T;
               values?:
                 | T
                 | {
                     image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     hoverImage?: T;
+                    hoverImageOriginal?: T;
+                    pendingHoverImageOriginal?: T;
+                    pendingHoverImageCrop?: T;
+                    hoverImageBlurDataURL?: T;
                     title?: T;
                     titleBN?: T;
                     description?: T;
@@ -2099,11 +2306,19 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               licensedImage?: T;
+              licensedImageOriginal?: T;
+              pendingLicensedImageOriginal?: T;
+              pendingLicensedImageCrop?: T;
+              licensedImageBlurDataURL?: T;
               licensedLabel?: T;
               licensedLabelBN?: T;
               licensedDate?: T;
               licensedDateBN?: T;
               launchedImage?: T;
+              launchedImageOriginal?: T;
+              pendingLaunchedImageOriginal?: T;
+              pendingLaunchedImageCrop?: T;
+              launchedImageBlurDataURL?: T;
               launchedLabel?: T;
               launchedLabelBN?: T;
               launchedDate?: T;
@@ -2119,6 +2334,10 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     backgroundColor?: T;
                     image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     name?: T;
                     nameBN?: T;
                     designation?: T;
@@ -2157,6 +2376,10 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               backgroundColor?: T;
               image?: T;
+              imageOriginal?: T;
+              pendingImageOriginal?: T;
+              pendingImageCrop?: T;
+              imageBlurDataURL?: T;
               sectionTitle?: T;
               sectionTitleBN?: T;
               highlightedText?: T;
@@ -2171,6 +2394,10 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
                     label?: T;
                     labelBN?: T;
                     value?: T;
@@ -2194,6 +2421,10 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     title?: T;
                     titleBN?: T;
                     highlightedText?: T;
@@ -2210,6 +2441,10 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
               title?: T;
               titleBN?: T;
               highlightedText?: T;
@@ -2218,6 +2453,10 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
                     title?: T;
                     titleBN?: T;
                     description?: T;
@@ -2243,6 +2482,10 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     id?: T;
                   };
               expectations?:
@@ -2252,6 +2495,10 @@ export interface PagesSelect<T extends boolean = true> {
                       | T
                       | {
                           icon?: T;
+                          iconOriginal?: T;
+                          pendingIconOriginal?: T;
+                          pendingIconCrop?: T;
+                          iconBlurDataURL?: T;
                           text?: T;
                           textBN?: T;
                           id?: T;
@@ -2260,6 +2507,10 @@ export interface PagesSelect<T extends boolean = true> {
                       | T
                       | {
                           avatar?: T;
+                          avatarOriginal?: T;
+                          pendingAvatarOriginal?: T;
+                          pendingAvatarCrop?: T;
+                          avatarBlurDataURL?: T;
                           name?: T;
                           nameBN?: T;
                           quote?: T;
@@ -2275,6 +2526,10 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               backgroundColor?: T;
               backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
               title?: T;
               titleBN?: T;
               highlightedText?: T;
@@ -2283,6 +2538,10 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     id?: T;
                   };
               id?: T;
@@ -2303,6 +2562,40 @@ export interface PagesSelect<T extends boolean = true> {
               oddBackgroundColor?: T;
               evenBackgroundColor?: T;
               useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'plan-card'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              cards?:
+                | T
+                | {
+                    bgImage?: T;
+                    bgImageOriginal?: T;
+                    pendingBgImageOriginal?: T;
+                    pendingBgImageCrop?: T;
+                    bgImageBlurDataURL?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    buttonText?: T;
+                    buttonTextBN?: T;
+                    buttonLink?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -2765,6 +3058,7 @@ export interface GlobalFooter {
  */
 export interface BoardOfDirector {
   id: string;
+  uploadSessionId?: string | null;
   /**
    * Primary heading for this section. Max 60 characters.
    */
@@ -2806,9 +3100,9 @@ export interface BoardOfDirector {
    */
   linkLabelBN: string;
   /**
-   * Pick an internal Page to link to. External URLs are not allowed.
+   * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
    */
-  linkTarget: string | Page;
+  linkTarget?: (string | null) | Page;
   /**
    * Add one card per director.
    */
@@ -2817,10 +3111,18 @@ export interface BoardOfDirector {
      * Director portrait (4:5 recommended). Optimized and blur placeholder generated automatically.
      */
     image: string | Media;
+    imageOriginal?: (string | null) | Media;
+    pendingImageOriginal?: string | null;
+    pendingImageCrop?: string | null;
+    imageBlurDataURL?: string | null;
     /**
-     * Used on the About Us page overlays. Upload a background-removed PNG (transparent background) of the director, framed 4:5 (e.g., 560×700). Keep subject centered; same person/pose as the main Portrait Image.
+     * Upload a background-removed IMG (transparent), framed 4:5 (e.g., 560×700). Keep subject centered.
      */
     aboutImage: string | Media;
+    aboutImageOriginal?: (string | null) | Media;
+    pendingAboutImageOriginal?: string | null;
+    pendingAboutImageCrop?: string | null;
+    aboutImageBlurDataURL?: string | null;
     /**
      * Director’s full name (English). Max 100 characters.
      */
@@ -3168,6 +3470,7 @@ export interface GlobalFooterSelect<T extends boolean = true> {
  * via the `definition` "board-of-directors_select".
  */
 export interface BoardOfDirectorsSelect<T extends boolean = true> {
+  uploadSessionId?: T;
   sectionTitle?: T;
   sectionTitleBN?: T;
   sectionSubtitle?: T;
@@ -3183,7 +3486,15 @@ export interface BoardOfDirectorsSelect<T extends boolean = true> {
     | T
     | {
         image?: T;
+        imageOriginal?: T;
+        pendingImageOriginal?: T;
+        pendingImageCrop?: T;
+        imageBlurDataURL?: T;
         aboutImage?: T;
+        aboutImageOriginal?: T;
+        pendingAboutImageOriginal?: T;
+        pendingAboutImageCrop?: T;
+        aboutImageBlurDataURL?: T;
         title?: T;
         titleBN?: T;
         designation?: T;

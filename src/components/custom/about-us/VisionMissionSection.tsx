@@ -34,8 +34,9 @@ async function VisionMissionSection({ data }: Props) {
             fill
             className="object-cover object-center inset-0"
             sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
-            // placeholder="blur"
-            // blurDataURL={data?.bgImageBlurDataURL || ''}
+            placeholder="blur"
+            blurDataURL={data?.bgImageBlurDataURL || ''}
+            quality={85}
           />
         )}
 

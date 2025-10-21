@@ -189,9 +189,9 @@ function WayWeAreSlider({ wayWeAreData }: Props) {
         {wayWeAreData?.map((data, index) => (
           <CarouselItem
             key={index}
-            // border border-black
-            className="basis-1/3 md:basis-1/3 lg:basis-1/3 pl-0 flex items-end 
-             h-[110px] md:h-[230px] lg:h-[300px] xl:h-[400px] 2xl:h-[480px]"
+            // h-[110px] md:h-[230px] lg:h-[300px] xl:h-[400px] 2xl:h-[480px]
+            // className="basis-1/3 md:basis-1/3 lg:basis-1/3 pl-0 flex items-end "
+            className="basis-1/2 md:basis-1/2 lg:basis-1/3 pl-0 flex items-end "
           >
             <OnboardingCard data={data} />
           </CarouselItem>

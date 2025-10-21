@@ -305,6 +305,7 @@ import {
   ABOUT_US_PAGE_SHANTA_VISION_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG,
 } from '@/lib/constants'
+import { generateImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
 const TITLE_MAX = 14
@@ -348,16 +349,25 @@ const ShantaVisionSchema: Block = {
 
   fields: [
     // Background image (direct upload; cropper will also write bgImageBlurDataURL)
-    {
-      name: 'bgImage',
+    // {
+    //   name: 'bgImage',
+    //   label: 'Background Image',
+    //   type: 'upload',
+    //   relationTo: 'media',
+    //   required: true,
+    //   admin: {
+    //     description: 'Large background visual for the section. 2.5:1 recommended.',
+    //   },
+    // },
+    ...generateImageFields({
+      fieldName: 'bgImage',
       label: 'Background Image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'Large background visual for the section. 2.5:1 recommended.',
-      },
-    },
+      description: 'Large background visual for the section. 2.5:1 recommended.',
+      aspectRatio: 2.5 / 1, // ≈ 2.5 : 1
+      quality: 0.92, // high quality webp
+      maxKB: 500, // adjust if you want tighter size
+      ownerCollection: ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG as any,
+    } as any),
 
     /* ---------------- Vision ---------------- */
     {

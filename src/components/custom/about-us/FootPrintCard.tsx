@@ -142,6 +142,9 @@ function FootPrintCard({ data, isActive = false }: Props) {
             fill
             className="object-cover object-center  "
             sizes="(max-width: 767px) 50vw, (max-width: 1349px) 33vw, 400px"
+            placeholder="blur"
+            blurDataURL={data?.imageBlurDataURL || ''}
+            quality={80}
           />
         )}
 

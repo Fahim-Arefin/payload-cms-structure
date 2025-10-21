@@ -94,8 +94,8 @@ async function AllAboutSection({ valuesThatSavesUs }: Props) {
                   className="object-cover object-center"
                   quality={85}
                   sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , (max-width: 1349px) 350px, 500px"
-                  // placeholder="blur"
-                  // blurDataURL={valuesThatSavesUs?.imageBlurDataURL || ''}
+                  placeholder="blur"
+                  blurDataURL={valuesThatSavesUs?.imageBlurDataURL || ''}
                 />
               )}
 

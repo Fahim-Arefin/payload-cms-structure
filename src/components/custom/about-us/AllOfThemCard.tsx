@@ -86,8 +86,11 @@ function AllOfThemCard({ data, pageLink }: Props) {
               src={data?.aboutImage?.url}
               alt={data?.title}
               fill
-              className="object-cover"
+              className="object-cover object-center"
               sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , 33vw"
+              placeholder="blur"
+              blurDataURL={data?.aboutImageBlurDataURL || ''}
+              quality={85}
             />
           )}
         </div>

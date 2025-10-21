@@ -51,11 +51,14 @@ function AwardSection({ data }: Props) {
               {typeof data?.image === 'object' && data?.image?.url && (
                 <Image
                   fill
-                  className="rounded-2xl object-cover"
+                  className="rounded-2xl object-cover object-center"
                   // src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/about_milestone_2.jpg`}
                   src={data?.image?.url}
                   alt="why choose us"
-                  sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , (max-width: 1349px) 600px , 100vw"
+                  sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , (max-width: 1349px) 100vw , 100vw "
+                  placeholder="blur"
+                  blurDataURL={data?.imageBlurDataURL || ''}
+                  quality={80}
                 />
               )}
             </div>
@@ -81,8 +84,9 @@ function AwardSection({ data }: Props) {
                             alt="stat-icon"
                             className="object-cover object-center"
                             sizes="30vw"
-                            // placeholder="blur"
-                            // blurDataURL={stat?.iconBlurDataURL || ''}
+                            placeholder="blur"
+                            blurDataURL={stat?.iconBlurDataURL || ''}
+                            quality={85}
                           />
                         </div>
                       )}

@@ -35,7 +35,7 @@ async function ShantaLifeIntroSection({ data }: Props) {
 
             {/* web */}
             <div
-              className=" hidden lg:block absolute inset-x-0  lg:-bottom-6 xl:-bottom-10 2xl:-bottom-[70px]
+              className=" hidden lg:block absolute inset-x-0  lg:-bottom-6 xl:-bottom-10 2xl:-bottom-[80px]
           lg:w-[90%] xl:w-[78%] 2xl:w-[80%] 
           lg:h-[180px] xl:h-[193px] 2xl:h-[230px]"
             >
@@ -47,8 +47,9 @@ async function ShantaLifeIntroSection({ data }: Props) {
                   className="object-contain z-0 "
                   fill
                   sizes="(max-width: 1349px) 350px, 400px"
-                  // placeholder="blur"
-                  // blurDataURL={data?.imageBlurDataURL || ''}
+                  placeholder="blur"
+                  blurDataURL={data?.imageBlurDataURL || ''}
+                  quality={85}
                 />
               )}
             </div>
@@ -75,8 +76,9 @@ async function ShantaLifeIntroSection({ data }: Props) {
                   alt={data?.heading}
                   className="object-cover object-center"
                   sizes="(max-width: 767px) 150px, 300px"
-                  // placeholder="blur"
-                  // blurDataURL={data?.imageBlurDataURL || ''}
+                  placeholder="blur"
+                  blurDataURL={data?.imageBlurDataURL || ''}
+                  quality={85}
                 />
               )}
             </div>

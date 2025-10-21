@@ -9,14 +9,23 @@ type Props = {
 function OnboardingCard({ data, isActive = false }: Props) {
   return (
     <div
+      // className={`cursor-pointer
+      //   mx-auto relative p-4 md:p-6 overflow-hidden text-white
+      //   transition-all duration-500 ease-in-out
+      //   rounded-md
+      //   w-[97%] md:w-[95%] lg:w-[95%] xl:w-[90%]
+      //   h-[80px] md:h-[170px] lg:h-[220px] xl:h-[280px] 2xl:h-[350px]
+      //   hover:w-full
+      //   hover:h-full
+      //   flex flex-col justify-end
+      // `}
       className={`cursor-pointer
         mx-auto relative p-4 md:p-6 overflow-hidden text-white
         transition-all duration-500 ease-in-out
         rounded-md
-        w-[97%] md:w-[95%] lg:w-[95%] xl:w-[90%] 
-        h-[80px] md:h-[170px] lg:h-[220px] xl:h-[280px] 2xl:h-[350px]
+        w-[85%] md:w-[85%] lg:w-[85%] xl:w-[83%] 2xl:w-[80%]
+        aspect-[1.5/1]
         hover:w-full 
-        hover:h-full
         flex flex-col justify-end
       `}
     >
@@ -34,6 +43,9 @@ function OnboardingCard({ data, isActive = false }: Props) {
           fill
           className="object-cover object-center"
           sizes="(max-width: 767px) 300px, 500px"
+          placeholder="blur"
+          blurDataURL={data?.imageBlurDataURL || ''}
+          quality={80}
         />
       )}
 

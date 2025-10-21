@@ -81,14 +81,16 @@ export default function OnboardingOpportunity({ data }: Props) {
             <CarouselContent>
               {data?.audienceCards?.map((item, idx) => (
                 <CarouselItem key={idx} className="basis-[45%] flex flex-col items-center gap-4">
-                  <div className="relative w-full aspect-[170/155] rounded-md overflow-hidden">
+                  <div className="relative w-full aspect-[1/1] rounded-md overflow-hidden">
                     {typeof item?.image === 'object' && item?.image?.url && (
                       <Image
                         fill
                         src={item?.image?.url}
                         alt="audience image"
-                        className="object-cover"
+                        className="object-cover object-center"
                         sizes="50vw"
+                        placeholder="blur"
+                        blurDataURL={item?.imageBlurDataURL || ''}
                       />
                     )}
                     <div className="absolute inset-0 bg-black/30 flex items-center justify-center px-4 text-center">
@@ -134,9 +136,17 @@ export default function OnboardingOpportunity({ data }: Props) {
                 <div key={idx} className="flex items-center gap-6">
                   {/* web */}
 
-                  <div className="relative w-[40px] h-[34px] lg:w-[48px] lg:h-[42px] mt-1">
+                  {/* <div className="relative w-[40px] h-[34px] lg:w-[48px] lg:h-[42px] mt-1"> */}
+                  <div className="mt-1 relative w-[40px] lg:w-[48px] aspect-[1/1]">
                     {typeof item?.icon === 'object' && item?.icon?.url && (
-                      <Image fill src={item.icon?.url} alt={`icon-${idx}`} className="" />
+                      <Image
+                        fill
+                        src={item.icon?.url}
+                        alt={`icon-${idx}`}
+                        className=""
+                        placeholder="blur"
+                        blurDataURL={item?.iconBlurDataURL || ''}
+                      />
                     )}
                   </div>
 
@@ -160,8 +170,11 @@ export default function OnboardingOpportunity({ data }: Props) {
                     fill
                     src={item?.avatar?.url}
                     alt={item?.name}
-                    className="object-cover "
+                    className="object-cover object-center"
                     sizes="400px"
+                    placeholder="blur"
+                    blurDataURL={item?.avatarBlurDataURL || ''}
+                    quality={85}
                   />
                 )}
               </div>

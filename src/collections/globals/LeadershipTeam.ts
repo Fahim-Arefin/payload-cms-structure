@@ -74,7 +74,7 @@ const validateRichText =
 
 /** Media lifecycle for this Global (leaders[] has image + aboutImage) */
 const mediaHooks = withMediaLifecycle({
-  collectionSlug: 'leadership-team',
+  collectionSlug: GLOBAL_LEADERSHIP_TEAM_SLUG_AND_TAG,
   arrayFields: [
     { fieldName: 'leaders', mediaFields: ['image', 'aboutImage'], itemLabelField: 'title' },
   ],
@@ -150,8 +150,8 @@ const LeadershipTeam: GlobalConfig = {
           description:
             'Leader portrait (4:5 recommended). Optimized and blur placeholder generated automatically.',
           aspectRatio: 4 / 5,
-          quality: 0.95,
-          maxKB: 500,
+          quality: 0.93,
+          maxKB: 400,
           ownerCollection: GLOBAL_LEADERSHIP_TEAM_SLUG_AND_TAG as any,
         } as any),
 
@@ -162,7 +162,7 @@ const LeadershipTeam: GlobalConfig = {
           description:
             'Upload a background-removed PNG (transparent), framed ~8:9 (e.g., 400×450). Keep subject centered.',
           aspectRatio: 8 / 9,
-          quality: 0.95,
+          quality: 1,
           maxKB: 500,
           ownerCollection: GLOBAL_LEADERSHIP_TEAM_SLUG_AND_TAG as any,
         } as any),

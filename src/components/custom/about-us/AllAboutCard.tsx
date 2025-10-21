@@ -35,8 +35,8 @@ function AllAboutCard({ data, index }: Props) {
               src={data?.image?.url}
               alt={data?.title}
               className="inset-0 object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 z-10"
-              // placeholder="blur"
-              // blurDataURL={data?.imageBlurDataURL || ''}
+              placeholder="blur"
+              blurDataURL={data?.imageBlurDataURL || ''}
               sizes="100vw"
               quality={90}
             />
@@ -48,8 +48,8 @@ function AllAboutCard({ data, index }: Props) {
               src={data?.hoverImage?.url}
               alt={data?.title}
               className="inset-0 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-20"
-              // placeholder="blur"
-              // blurDataURL={data?.hoverImageBlurDataURL || ''}
+              placeholder="blur"
+              blurDataURL={data?.hoverImageBlurDataURL || ''}
               sizes="100vw"
               quality={90}
             />

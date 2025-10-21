@@ -34,7 +34,10 @@ async function LiscensedInfo({ data }: Props) {
                   alt="Licensed Image"
                   className=""
                   fill
-                  sizes="100vw"
+                  sizes="33vw"
+                  placeholder="blur"
+                  blurDataURL={data?.licensedImageBlurDataURL || ''}
+                  quality={90}
                 />
               )}
             </div>
@@ -56,7 +59,10 @@ async function LiscensedInfo({ data }: Props) {
                   alt="Launched Image"
                   className=""
                   fill
-                  sizes="100vw"
+                  sizes="33vw"
+                  placeholder="blur"
+                  blurDataURL={data?.launchedImageBlurDataURL || ''}
+                  quality={90}
                 />
               )}
             </div>

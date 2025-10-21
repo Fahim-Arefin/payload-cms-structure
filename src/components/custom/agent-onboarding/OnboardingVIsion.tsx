@@ -30,6 +30,9 @@ function OnboardingVision({ visionData }: Props) {
           alt="vision background image"
           className="object-cover object-center z-10"
           sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
+          placeholder="blur"
+          blurDataURL={visionData?.backgroundImageBlurDataURL || ''}
+          quality={80}
         />
       )}
 
@@ -75,7 +78,10 @@ function OnboardingVision({ visionData }: Props) {
                   fill
                   src={item?.icon?.url}
                   alt={`icon-${index}`}
-                  className="object-contain"
+                  className="object-contain object-center"
+                  placeholder="blur"
+                  blurDataURL={item?.iconBlurDataURL || ''}
+                  quality={80}
                 />
               )}
             </div>

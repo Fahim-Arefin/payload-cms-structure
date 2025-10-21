@@ -359,7 +359,6 @@ import {
   ABOUT_US_PAGE_SHANTA_FOOTPRINT_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG,
 } from '@/lib/constants'
-
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
@@ -546,17 +545,26 @@ const ShantaFootprintSchema: Block = {
       },
       fields: [
         // Card image (not localized)
-        {
-          name: 'image',
+        // {
+        //   name: 'image',
+        //   label: 'Card Image',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: {
+        //     description: 'Company/brand image (1:1).',
+        //   },
+        // },
+        // ✅ generator-based image field (handles original, crop, blur, temp lifecycle)
+        ...generateArrayImageFields({
+          fieldName: 'image',
           label: 'Card Image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            description: 'Company/brand image (1:1).',
-          },
-        },
-
+          description: 'Company/brand image (1:1).',
+          aspectRatio: 1,
+          quality: 0.93,
+          maxKB: 400,
+          ownerCollection: ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG as any,
+        } as any),
         // Title (EN/BN) + highlighted part (EN/BN)
         {
           type: 'row',
