@@ -137,13 +137,13 @@ function MapSection({ data, bgColor }: Props) {
               </div>
             </div>
           )}
-          
+
           <div>
-            <p className="text-[12px] xl:text-[13px] 2xl:text-[15px] ">
+            <p className="text-[12px] xl:text-[13px] 2xl:text-[16px]">
               {data?.content[0]?.cashless_status && (
                 <>
-                  <span className="font-bold">Cashless Status: </span>
-                  <span className='text-[#6E6E6E]'>{data?.content[0]?.cashless_status}</span>
+                  {/* <span className="font-bold">Cashless Status: </span> */}
+                  <span className="text-[#434343]">{data?.content[0]?.cashless_status}</span>
                 </>
               )}
             </p>
