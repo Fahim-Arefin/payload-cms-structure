@@ -23,6 +23,7 @@ import {
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
   CONTACT_US_BLOCK_SLUG_AND_TAG,
+  CORPORATE_INFO_SLUG_AND_TAG,
   CORPORATE_INTRO_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
@@ -52,6 +53,7 @@ import LeadershipTeamListBlock from './leadershipTeamList/LeadershipTeamListBloc
 import PlanCardBlock from './planCard/PlanCardBlock'
 import ContactUsBlock from './contactUs/ContactUsBlock'
 import CorporateIntroBlock from './corporateIntro/CorporateIntroBlock'
+import CorporateInfoBlock from './corporateInfo/CorporateInfoBlock'
 
 type Params = Record<string, string>
 
@@ -120,6 +122,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     // corporate page
     case CORPORATE_INTRO_SLUG_AND_TAG:
       return <CorporateIntroBlock key={block.id} block={block} params={params} />
+    case CORPORATE_INFO_SLUG_AND_TAG:
+      return <CorporateInfoBlock key={block.id} block={block} params={params} />
 
     default:
       return null

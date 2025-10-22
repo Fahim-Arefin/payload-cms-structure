@@ -209,3 +209,19 @@ export const CORPORATE_INTRO_SLUG_AND_TAG = 'corporate-intro'
 export const CORPORATE_INTRO_BLOCK_LABEL = 'Corporate Intro'
 export const CORPORATE_INTRO_BLOCK_THUMBNAIL_URL = `${folder}/corporate-intro-block-thumbnail.png`
 export const CORPORATE_INTRO_CACHE_KEY = 'corporate-intro-data'
+
+export const CORPORATE_INFO_SLUG_AND_TAG = 'corporate-info'
+export const CORPORATE_INFO_BLOCK_LABEL = 'Corporate Info'
+export const CORPORATE_INFO_BLOCK_THUMBNAIL_URL = `${folder}/corporate-info-block-thumbnail.png`
+export const CORPORATE_INFO_CACHE_KEY = 'corporate-info-data'
+
+// Resoure button blocks
+export const BROCHURE_BUTTON_SLUG_AND_TAG = 'brochure-button'
+export const BROCHURE_BUTTON_BLOCK_LABEL = 'Brochure Button'
+export const BROCHURE_BUTTON_BLOCK_THUMBNAIL_URL = `${folder}/brochure-button-block-thumbnail.png`
+export const BROCHURE_BUTTON_CACHE_KEY = 'brochure-button-data'
+
+export const LINK_BUTTON_SLUG_AND_TAG = 'link-button'
+export const LINK_BUTTON_BLOCK_LABEL = 'Link Button'
+export const LINK_BUTTON_BLOCK_THUMBNAIL_URL = `${folder}/link-button-block-thumbnail.png`
+export const LINK_BUTTON_CACHE_KEY = 'link-button-data'

@@ -13,6 +13,7 @@ import {
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
   CONTACT_US_BLOCK_SLUG_AND_TAG,
+  CORPORATE_INFO_SLUG_AND_TAG,
   CORPORATE_INTRO_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
@@ -149,4 +150,9 @@ export type ContactUsFormBlockType = Extract<
 export type CorporateIntroBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CORPORATE_INTRO_SLUG_AND_TAG }
+>
+
+export type CorporateInfoBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CORPORATE_INFO_SLUG_AND_TAG }
 >

@@ -9,7 +9,9 @@ import {
   AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
+  BROCHURE_BUTTON_SLUG_AND_TAG,
   CONTACT_US_BLOCK_SLUG_AND_TAG,
+  CORPORATE_INFO_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -19,8 +21,8 @@ import {
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
-import { withMediaLifecycle } from './withMediaLifecycle'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
+import { withMediaLifecycle } from './withMediaLifecycle'
 
 export const mediaHooks = withMediaLifecycle({
   collectionSlug: 'pages',
@@ -87,6 +89,11 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: CONTACT_US_BLOCK_SLUG_AND_TAG,
       mediaFields: ['image'], // generator also creates imageOriginal; our hook handles both
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CORPORATE_INFO_SLUG_AND_TAG,
+      mediaFields: ['image'], // generated field pair (image + imageOriginal handled internally)
     },
   ],
 
@@ -175,6 +182,21 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'gallery',
       mediaFields: ['image'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: CORPORATE_INFO_SLUG_AND_TAG,
+      arrayKey: 'infos',
+      mediaFields: ['icon'],
+      itemLabelField: 'title',
+    },
+    // ⬇️ ADD THIS to blockArrayFields
+    {
+      layoutKey: 'layout',
+      blockType: CORPORATE_INFO_SLUG_AND_TAG, // the parent block row
+      arrayKey: 'resourceButtons', // the blocks[] inside CorporateInfo
+      mediaFields: ['brochurePDF'], // the upload field on the BrochureButton block
+      itemLabelField: 'label', // optional, helps alt naming
+    },
   ],
 
   // Blocks with nested array (media that inside another array) that contain media fields
@@ -202,6 +224,10 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['avatar'],
     },
   ],
+
+  // otherUploadFields: [
+  //   'brochurePDF', // 👈 top-level upload fields to Media (PDFs)
+  // ],
 
   onAfterChange: async ({ req }) => {
     triggerMediaTemporaryPurge(req)

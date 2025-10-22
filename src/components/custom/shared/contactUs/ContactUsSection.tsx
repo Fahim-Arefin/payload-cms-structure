@@ -723,6 +723,9 @@ function ContactUsSection({ data }: Props) {
               src={data?.image?.url}
               alt="Contant us image"
               sizes="50vw"
+              placeholder="blur"
+              blurDataURL={data?.imageBlurDataURL || ''}
+              quality={85}
             />
           )}
         </div>
