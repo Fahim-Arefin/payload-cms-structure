@@ -141,6 +141,7 @@ import AgentVisionSchema from '@/blocks/agentVision/schema'
 import ContactUsSchema from '@/blocks/contactUs/schema'
 import CorporateInfoSchema from '@/blocks/corporateInfo/schema'
 import CorporateIntroSchema from '@/blocks/corporateIntro/schema'
+import CorporatePartnersSchema from '@/blocks/corporatePartners/schema'
 import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
 import FeaturedPlansSchema from '@/blocks/featuredPlan/schema'
 import HeroSchema from '@/blocks/hero/schema'
@@ -259,6 +260,7 @@ export const Pages: CollectionConfig = {
         // corporate page
         CorporateIntroSchema,
         CorporateInfoSchema,
+        CorporatePartnersSchema,
       ],
     },
   ],

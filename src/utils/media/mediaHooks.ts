@@ -12,6 +12,7 @@ import {
   BROCHURE_BUTTON_SLUG_AND_TAG,
   CONTACT_US_BLOCK_SLUG_AND_TAG,
   CORPORATE_INFO_SLUG_AND_TAG,
+  CORPORATE_PARTNERS_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -196,6 +197,13 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'resourceButtons', // the blocks[] inside CorporateInfo
       mediaFields: ['brochurePDF'], // the upload field on the BrochureButton block
       itemLabelField: 'label', // optional, helps alt naming
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CORPORATE_PARTNERS_SLUG_AND_TAG,
+      arrayKey: 'partners',
+      mediaFields: ['image'], // generated array image field
+      itemLabelField: 'name', // optional, improves alt/ownerField naming
     },
   ],
 

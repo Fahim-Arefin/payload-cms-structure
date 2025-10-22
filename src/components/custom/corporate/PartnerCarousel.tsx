@@ -1,14 +1,16 @@
 'use client'
 
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
-import { PartnerType } from '@/types'
+import { sliderDelay } from '@/lib/data'
+import { CorporatePartnersBlockType } from '@/types/payloadCustomTypes'
+import Autoplay from 'embla-carousel-autoplay'
 import { useEffect, useRef, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
-import Autoplay from 'embla-carousel-autoplay'
-import { sliderDelay } from '@/lib/data'
 import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
+import Image from 'next/image'
 
-type Props = { data: PartnerType[] }
+type Props = { data: CorporatePartnersBlockType }
 
 function PartnerCarousel({ data }: Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
@@ -74,20 +76,30 @@ function PartnerCarousel({ data }: Props) {
   }
 
   return (
-    <section className="w-full py-5 md:py-10 lg:py-16 bg-[#FCF4EB]">
+    // bg-[#FCF4EB]
+    <section
+      className="container-padding-y w-full border border-black
+      px-4 md:px-6 lg:px-8 xl:px-10 2xl:px-12"
+      style={{
+        backgroundColor: data?.backgroundColor || '',
+      }}
+    >
       <h2
-        className="global-h2 font-semibold text-[#3A3A3C] mb-6 px-5 py-2  
-           md:px-24 
-           lg:px-[130px]  lg:pt-[100px] 
-           xl:px-[200px]  xl:pt-[100px] 
-           2xl:px-[300px] 2xl:pt-[100px]"
+        className="global-h2 font-semibold text-[#3A3A3C] container-padding-x 
+       mb-4 md:mb-6 lg:mb-8 xl:mb-10 2xl:mb-12"
       >
-        <LocalizedHighlighted
+        {/* <LocalizedHighlighted
           textEn={`OUR VALUED CLIENTS`}
           textBn={`আমাদের সম্মানিত ক্লায়েন্টবৃন্দ`}
           highlightEn={`OUR VALUED`}
           highlightBn={`আমাদের সম্মানিত`}
           highlightClassName="text-[#ED7125]"
+        /> */}
+        <LocalizedHighlighted
+          textEn={data?.title}
+          textBn={data?.titleBN}
+          highlightEn={data?.highlightedText}
+          highlightBn={data?.highlightedTextBN}
         />
       </h2>
 
@@ -100,30 +112,34 @@ function PartnerCarousel({ data }: Props) {
           className="w-full"
         >
           <CarouselContent>
-            {data.map((item, index) => (
+            {data?.partners?.map((item, index) => (
               <CarouselItem
                 key={index}
-                className="basis-1/2 md:basis-1/3 lg:basis-1/3 xl:basis-1/4 flex flex-col items-center justify-center space-y-3"
+                className="basis-1/2 md:basis-1/3 lg:basis-1/3 xl:basis-1/4 flex flex-col items-center justify-center space-y-3 "
               >
-                <div className="w-[150px] h-[100px] md:w-[200px] md:h-[120px] lg:w-[340px] lg:h-[250px] flex items-center justify-center ">
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    width={340}
-                    height={250}
-                    className="object-contain w-full h-full"
-                    loading={index < 4 ? 'eager' : 'lazy'}
-                  />
+                <div className="relative w-full aspect-[340/250] flex items-center justify-center ">
+                  {typeof item?.image === 'object' && item?.image?.url && (
+                    <Image
+                      fill
+                      src={item.image?.url}
+                      alt={item.name}
+                      className="object-cover object-center w-full h-full"
+                      loading={index < 4 ? 'eager' : 'lazy'}
+                      placeholder="blur"
+                      blurDataURL={item?.imageBlurDataURL || ''}
+                      quality={80}
+                    />
+                  )}
                 </div>
                 <p className="text-xs font-semibold text-center text-black uppercase">
-                  {item.title}
+                  <LocalizedText en={item?.name} bn={item?.nameBN} />
                 </p>
               </CarouselItem>
             ))}
           </CarouselContent>
 
           {/* Navigation buttons */}
-          <div className="flex md:hidden gap-2 justify-center m-6">
+          <div className="flex md:hidden gap-2 justify-center mt-6">
             <CarouselNavButtons
               onPrev={() => carouselApi?.scrollPrev()}
               onNext={() => carouselApi?.scrollNext()}

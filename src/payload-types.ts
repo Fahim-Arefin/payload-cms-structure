@@ -2079,6 +2079,54 @@ export interface Page {
         blockName?: string | null;
         blockType: 'corporate-info';
       }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Add partners with a logo and name (EN/BN).
+         */
+        partners: {
+          /**
+           * Upload the partner logo (square logo recommended 340:250).
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Display name. Max 60 characters.
+           */
+          name: string;
+          /**
+           * প্রদর্শিত নাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          nameBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'corporate-partners';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -3000,6 +3048,30 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'corporate-partners'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              partners?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;

@@ -225,3 +225,8 @@ export const LINK_BUTTON_SLUG_AND_TAG = 'link-button'
 export const LINK_BUTTON_BLOCK_LABEL = 'Link Button'
 export const LINK_BUTTON_BLOCK_THUMBNAIL_URL = `${folder}/link-button-block-thumbnail.png`
 export const LINK_BUTTON_CACHE_KEY = 'link-button-data'
+
+export const CORPORATE_PARTNERS_SLUG_AND_TAG = 'corporate-partners'
+export const CORPORATE_PARTNERS_BLOCK_LABEL = 'corporate-partners'
+export const CORPORATE_PARTNERS_BLOCK_THUMBNAIL_URL = `${folder}/corporate-partners-block-thumbnail.png`
+export const CORPORATE_PARTNERS_CACHE_KEY = 'corporate-partners'
