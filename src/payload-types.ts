@@ -1446,9 +1446,27 @@ export interface Page {
          */
         highlightedTextBN?: string | null;
         /**
+         * Topmost first. Each overlay is a flat linear-gradient: color + opacity + angle (deg).
+         */
+        overlayLayers?:
+          | {
+              color: string;
+              opacity: number;
+              /**
+               * 0deg = top→bottom (like your original).
+               */
+              angle: number;
+              id?: string | null;
+            }[]
+          | null;
+        /**
          * Add up to two cards. Each card has an icon, title (EN/BN), and a rich description (EN/BN).
          */
         items: {
+          /**
+           * Example: #9C86394D , #43434333 (last 2 hex are alpha).
+           */
+          cardBgHex8?: string | null;
           /**
            * Square icon (1:1). PNG with transparent background preferred.
            */
@@ -2721,9 +2739,18 @@ export interface PagesSelect<T extends boolean = true> {
               titleBN?: T;
               highlightedText?: T;
               highlightedTextBN?: T;
+              overlayLayers?:
+                | T
+                | {
+                    color?: T;
+                    opacity?: T;
+                    angle?: T;
+                    id?: T;
+                  };
               items?:
                 | T
                 | {
+                    cardBgHex8?: T;
                     icon?: T;
                     iconOriginal?: T;
                     pendingIconOriginal?: T;

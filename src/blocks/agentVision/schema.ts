@@ -330,6 +330,7 @@ import { bnNum } from '@/lib/utils'
 import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
+const COLOR_HEX_LEN = 9
 const TITLE_MAX = 80
 const HILITE_MAX = 80
 const ITEM_TITLE_MAX = 60
@@ -415,6 +416,14 @@ const validateRichText =
     return true
   }
 
+const validateHexColor = (val: unknown) => {
+  if (val == null || val === '') return true
+  const s = String(val).trim()
+  return /^#[0-9A-Fa-f]{8}$/.test(s)
+    ? true
+    : 'Must be a valid hex color with opacity (last two digit are opacity) (e.g., #FFFFFF22).'
+}
+
 /* ---------------- collection ---------------- */
 const AgentVisionSchema: Block = {
   slug: AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
@@ -427,17 +436,6 @@ const AgentVisionSchema: Block = {
   imageAltText: `${AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_LABEL} preview`,
 
   fields: [
-    // Background image (not localized)
-    // {
-    //   name: 'backgroundImage',
-    //   label: 'Background Image',
-    //   type: 'upload',
-    //   relationTo: 'media',
-    //   required: true,
-    //   admin: {
-    //     description: 'Large section background visual. 16:9 recommended.',
-    //   },
-    // },
     // ✅ Background image via generator (16:9)
     ...generateImageFields({
       fieldName: 'backgroundImage',
@@ -511,6 +509,48 @@ const AgentVisionSchema: Block = {
         },
       ],
     },
+    // --- Up to 3 overlay layers, each is a flat linear-gradient (same color at start/end) ---
+    {
+      name: 'overlayLayers',
+      type: 'array',
+      label: 'Overlay Layers',
+      minRows: 0,
+      maxRows: 2,
+      labels: { singular: 'Overlay', plural: 'Overlays' },
+      admin: {
+        description:
+          'Topmost first. Each overlay is a flat linear-gradient: color + opacity + angle (deg).',
+      },
+      fields: [
+        {
+          name: 'color',
+          type: 'text',
+          label: 'Color (#RRGGBB)',
+          required: true,
+          defaultValue: '#000000',
+          validate: (v: any) =>
+            /^#([0-9a-fA-F]{6})$/.test((v ?? '').toString()) ? true : 'Use #RRGGBB.',
+          admin: { width: '30%' },
+        },
+        {
+          name: 'opacity',
+          type: 'number',
+          label: 'Opacity (0–1)',
+          required: true,
+          defaultValue: 0.2,
+          admin: { step: 0.01, width: '20%' },
+          validate: (v: any) => (v >= 0 && v <= 1 ? true : 'Opacity must be between 0 and 1.'),
+        },
+        {
+          name: 'angle',
+          type: 'number',
+          label: 'Angle (deg)',
+          required: true,
+          defaultValue: 0,
+          admin: { width: '20%', description: '0deg = top→bottom (like your original).' },
+        },
+      ],
+    },
 
     /* ---------- Cards (max 2): icon + title(EN/BN) + rich description(EN/BN) ---------- */
     {
@@ -526,17 +566,17 @@ const AgentVisionSchema: Block = {
           'Add up to two cards. Each card has an icon, title (EN/BN), and a rich description (EN/BN).',
       },
       fields: [
-        // Icon (not localized)
-        // {
-        //   name: 'icon',
-        //   label: 'Icon',
-        //   type: 'upload',
-        //   relationTo: 'media',
-        //   required: true,
-        //   admin: {
-        //     description: 'Square icon (1:1). PNG with transparent background preferred.',
-        //   },
-        // },
+        {
+          name: 'cardBgHex8',
+          type: 'text',
+          label: 'Custom 8-digit Hex (#43434333)',
+          maxLength: COLOR_HEX_LEN,
+          validate: validateHexColor,
+          defaultValue: '#43434333',
+          admin: {
+            description: 'Example: #9C86394D , #43434333 (last 2 hex are alpha).',
+          },
+        },
 
         // ✅ Icon via generator (1:1)
         ...generateArrayImageFields({
