@@ -201,3 +201,11 @@ export const CONTACT_US_BLOCK_SLUG_AND_TAG = 'contact-us-form'
 export const CONTACT_US_BLOCK_LABEL = 'Contact Us Form'
 export const CONTACT_US_BLOCK_THUMBNAIL_URL = `${folder}/contact-us-form-block-thumbnail.png`
 export const CONTACT_US_BLOCK_CACHE_KEY = 'contact-us-form-data'
+
+// corporate page
+// ------------------------------------------------------------------------------------------------------
+
+export const CORPORATE_INTRO_SLUG_AND_TAG = 'corporate-intro'
+export const CORPORATE_INTRO_BLOCK_LABEL = 'Corporate Intro'
+export const CORPORATE_INTRO_BLOCK_THUMBNAIL_URL = `${folder}/corporate-intro-block-thumbnail.png`
+export const CORPORATE_INTRO_CACHE_KEY = 'corporate-intro-data'

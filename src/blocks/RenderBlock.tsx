@@ -23,6 +23,7 @@ import {
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
   CONTACT_US_BLOCK_SLUG_AND_TAG,
+  CORPORATE_INTRO_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -50,6 +51,7 @@ import LeadershipTeamCardBlock from './leadershipTeamCard/LeadershipTeamCardBloc
 import LeadershipTeamListBlock from './leadershipTeamList/LeadershipTeamListBlock'
 import PlanCardBlock from './planCard/PlanCardBlock'
 import ContactUsBlock from './contactUs/ContactUsBlock'
+import CorporateIntroBlock from './corporateIntro/CorporateIntroBlock'
 
 type Params = Record<string, string>
 
@@ -114,6 +116,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     // contact us form
     case CONTACT_US_BLOCK_SLUG_AND_TAG:
       return <ContactUsBlock key={block.id} block={block} params={params} />
+
+    // corporate page
+    case CORPORATE_INTRO_SLUG_AND_TAG:
+      return <CorporateIntroBlock key={block.id} block={block} params={params} />
 
     default:
       return null

@@ -1877,6 +1877,81 @@ export interface Page {
         blockName?: string | null;
         blockType: 'contact-us-form';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #9A4E46). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Rich text (about 1–3 short paragraphs). Up to ~400 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * রিচ টেক্সট (১–৩টি সংক্ষিপ্ত অনুচ্ছেদ)। সর্বোচ্চ প্রায় ৪০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Add key metrics. Each item has a value and a short label (both EN/BN).
+         */
+        stats: {
+          /**
+           * Displayed metric value (e.g., “1.2M” or “25+”). Max 50 characters.
+           */
+          value: string;
+          /**
+           * প্রদর্শিত মান (যেমন “১.২M” বা “২৫+”). সর্বোচ্চ ৫০ অক্ষর।
+           */
+          valueBN: string;
+          /**
+           * Short label (e.g., “Policies Issued”). Max 50 characters.
+           */
+          label: string;
+          /**
+           * সংক্ষিপ্ত লেবেল। সর্বোচ্চ ৫০ অক্ষর।
+           */
+          labelBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'corporate-intro';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2716,6 +2791,26 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               termsAndConditionButtonLink?: T;
               privacyPolicyButtonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'corporate-intro'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    valueBN?: T;
+                    label?: T;
+                    labelBN?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
