@@ -1789,6 +1789,175 @@ export interface Page {
         blockName?: string | null;
         blockType: 'plan-card';
       }
+    | {
+        /**
+         * Primary headline. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 40 characters.
+         */
+        highlightedTitle?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTitleBN?: string | null;
+        /**
+         * 1–2 short sentences. Max 200 characters.
+         */
+        description: string;
+        /**
+         * ১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ২০০ অক্ষর।
+         */
+        descriptionBN: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-intro';
+      }
+    | {
+        /**
+         * Primary headline. Max 30 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৩০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line. Max 40 characters.
+         */
+        subtitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * 1–2 short sentences. Max 80 characters.
+         */
+        description: string;
+        /**
+         * ১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        descriptionBN: string;
+        /**
+         * Background image for the swiper section. Recommended 16:9.
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        /**
+         * Add one or more cards to display in the swiper.
+         */
+        cards: {
+          /**
+           * Short heading for the card. Max 50 characters.
+           */
+          title: string;
+          /**
+           * কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৫০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Brief supporting copy. Max 200 characters.
+           */
+          description: string;
+          /**
+           * সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ২০০ অক্ষর।
+           */
+          descriptionBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-swiper';
+      }
+    | {
+        /**
+         * Primary headline. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subTitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subTitleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Subtitle. Max 40 characters.
+         */
+        highlightedSubTitle?: string | null;
+        /**
+         * ঐচ্ছিক। উপশিরোনামের ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedSubTitleBN?: string | null;
+        /**
+         * Background image for the section (16:9 recommended).
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        /**
+         * Add one or more resource cards.
+         */
+        cards: {
+          /**
+           * Short heading for the card. Max 60 characters.
+           */
+          title: string;
+          /**
+           * কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Thumbnail for the resource card. 4:3 recommended.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Brief supporting copy. Max 1000 characters.
+           */
+          description: string;
+          /**
+           * সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ১০০০ অক্ষর।
+           */
+          descriptionBN: string;
+          /**
+           * e.g., Senior Advisor. Max 60 characters.
+           */
+          designation: string;
+          /**
+           * যেমন: সিনিয়র অ্যাডভাইজার। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          designationBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-resources';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2594,6 +2763,77 @@ export interface PagesSelect<T extends boolean = true> {
                     buttonText?: T;
                     buttonTextBN?: T;
                     buttonLink?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'career-intro'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'career-swiper'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'career-resources'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subTitle?: T;
+              subTitleBN?: T;
+              highlightedSubTitle?: T;
+              highlightedSubTitleBN?: T;
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    designation?: T;
+                    designationBN?: T;
                     id?: T;
                   };
               id?: T;

@@ -193,3 +193,22 @@ export const PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG = 'plan-card'
 export const PLAN_PAGE_PLAN_CARD_BLOCK_LABEL = 'Plan Card'
 export const PLAN_PAGE_PLAN_CARD_CACHE_KEY = 'plan-card-data'
 export const PLAN_PAGE_PLAN_CARD_BLOCK_THUMBNAIL_URL = `${folder}/plan-card-block-thumbnail.png`
+
+// career page
+//  --------------------------------------------------------------------------------------------------
+
+export const CAREER_PAGE_INTRO_SLUG_AND_TAG = 'career-intro'
+export const CAREER_PAGE_INTRO_BLOCK_LABEL = 'Career Intro Card'
+export const CAREER_PAGE_INTRO_CACHE_KEY = 'career-intro-data'
+export const CAREER_PAGE_INTRO_BLOCK_THUMBNAIL_URL = `${folder}/career-page-intro-thumbnail.png`
+
+
+export const CAREER_PAGE_SWIPER_SLUG_AND_TAG = 'career-swiper'
+export const CAREER_PAGE_SWIPER_BLOCK_LABEL = 'Career Swiper Card'
+export const CAREER_PAGE_SWIPER_CACHE_KEY = 'career-swiper-data'
+export const CAREER_PAGE_SWIPER_BLOCK_THUMBNAIL_URL = `${folder}/career-page-swiper-thumbnail.png`
+
+export const CAREER_PAGE_RESOURCES_SLUG_AND_TAG = 'career-resources'
+export const CAREER_PAGE_RESOURCES_BLOCK_LABEL = 'Career Resources Card'
+export const CAREER_PAGE_RESOURCES_CACHE_KEY = 'career-resources-data'
+export const CAREER_PAGE_RESOURCES_BLOCK_THUMBNAIL_URL = `${folder}/career-page-resources-thumbnail.png`

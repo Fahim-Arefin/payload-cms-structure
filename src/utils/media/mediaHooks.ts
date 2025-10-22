@@ -17,6 +17,8 @@ import {
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+  CAREER_PAGE_SWIPER_SLUG_AND_TAG,
+  CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { withMediaLifecycle } from './withMediaLifecycle'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
@@ -80,6 +82,16 @@ export const mediaHooks = withMediaLifecycle({
       // Block row media (background image)
       layoutKey: 'layout',
       blockType: AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
+      mediaFields: ['backgroundImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_PAGE_SWIPER_SLUG_AND_TAG,
+      mediaFields: ['backgroundImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
       mediaFields: ['backgroundImage'],
     },
   ],
@@ -167,6 +179,12 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
       arrayKey: 'gallery',
+      mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
+      arrayKey: 'cards',
       mediaFields: ['image'],
     },
   ],
