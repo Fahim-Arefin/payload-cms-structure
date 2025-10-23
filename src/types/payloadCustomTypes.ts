@@ -13,6 +13,8 @@ import {
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
   CAREER_PAGE_INTRO_SLUG_AND_TAG,
+  CAREER_PAGE_OPENINGS_SLUG_AND_TAG,
+  CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
   CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
   CAREER_PAGE_SWIPER_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
@@ -156,4 +158,14 @@ export type CareerPageSwiperBlockType = Extract<
 export type CareerPageResourcesBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CAREER_PAGE_RESOURCES_SLUG_AND_TAG }
+>
+
+export type CareerPageOpeningBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CAREER_PAGE_OPENINGS_SLUG_AND_TAG }
+>
+
+export type CareerPageProcessingBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CAREER_PAGE_PROCESSING_SLUG_AND_TAG }
 >

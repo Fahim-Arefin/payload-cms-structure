@@ -23,6 +23,8 @@ import {
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
   CAREER_PAGE_INTRO_SLUG_AND_TAG,
+  CAREER_PAGE_OPENINGS_SLUG_AND_TAG,
+  CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
   CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
   CAREER_PAGE_SWIPER_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
@@ -53,7 +55,9 @@ import LeadershipTeamListBlock from './leadershipTeamList/LeadershipTeamListBloc
 import PlanCardBlock from './planCard/PlanCardBlock'
 import CareerIntroBlock from './careerIntro/CareerIntroBlock'
 import CareerSwiperBlock from './careerSwiper/CareerSwiperBlock'
-import CareerResourcesBlock from './careerResources/careerResourcesBlock'
+import CareerResourcesBlock from './careerResources/CareerResourcesBlock'
+import CareerOpeningBlock from './careerOpening/CareerOpeningBlock'
+import CareerProcessingBlock from './careerProcessingFlow/CareerProcessingBlock'
 
 type Params = Record<string, string>
 
@@ -122,7 +126,11 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CareerSwiperBlock key={block.id} block={block} params={params} />
     case CAREER_PAGE_RESOURCES_SLUG_AND_TAG:
       return <CareerResourcesBlock key={block.id} block={block} params={params} />
-      
+    case CAREER_PAGE_OPENINGS_SLUG_AND_TAG:
+      return <CareerOpeningBlock key={block.id} block={block} params={params} />
+    case CAREER_PAGE_PROCESSING_SLUG_AND_TAG:
+      return <CareerProcessingBlock key={block.id} block={block} params={params} />
+
     default:
       return null
   }

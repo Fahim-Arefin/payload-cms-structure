@@ -19,6 +19,7 @@ import {
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
   CAREER_PAGE_SWIPER_SLUG_AND_TAG,
   CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
+  CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { withMediaLifecycle } from './withMediaLifecycle'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
@@ -185,6 +186,12 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
       arrayKey: 'cards',
+      mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
+      arrayKey: 'processingCards',
       mediaFields: ['image'],
     },
   ],

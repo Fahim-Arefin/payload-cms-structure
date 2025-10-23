@@ -1958,6 +1958,177 @@ export interface Page {
         blockName?: string | null;
         blockType: 'career-resources';
       }
+    | {
+        /**
+         * Primary heading. Max 80 (৮০) characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line. Max 120 (১২০) characters.
+         */
+        subtitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * Add one or more opening cards with details.
+         */
+        cards: {
+          /**
+           * e.g., Full-time, Contract, Internship. Max 40 characters.
+           */
+          type?: string | null;
+          /**
+           * যেমন: ফুল-টাইম, কন্ট্রাক্ট, ইন্টার্নশিপ। সর্বোচ্চ ৪০ অক্ষর।
+           */
+          typeBN?: string | null;
+          /**
+           * Job title. Max 80 characters.
+           */
+          title: string;
+          /**
+           * পদের নাম। সর্বোচ্চ ৮০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * 1–2 lines summary. Max 300 characters.
+           */
+          description: string;
+          /**
+           * ১–২ লাইনের সারমর্ম। সর্বোচ্চ ৩০০ অক্ষর।
+           */
+          descriptionBN: string;
+          /**
+           * Main CTA (e.g., Apply Now). Max 24 chars.
+           */
+          btnText?: string | null;
+          /**
+           * প্রধান CTA (যেমন, এখন আবেদন করুন)। সর্বোচ্চ ২৪ অক্ষর।
+           */
+          btnTextBN?: string | null;
+          /**
+           * Secondary CTA (e.g., View Details). Max 24 chars.
+           */
+          detailsBtnText?: string | null;
+          /**
+           * সেকেন্ডারি CTA (যেমন, বিস্তারিত দেখুন)। সর্বোচ্চ ২৪ অক্ষর।
+           */
+          detailsBtnTextBN?: string | null;
+          /**
+           * Add one or more detail entries (title, responsibilities, requirements, location, deadline, etc.).
+           */
+          detailsData: {
+            /**
+             * Section title (e.g., “Role Overview”). Max 80 characters.
+             */
+            title: string;
+            responsibilities: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            requirements: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            /**
+             * City/Office. Max 60 characters.
+             */
+            location?: string | null;
+            deadline: string;
+            /**
+             * Email to receive applications.
+             */
+            applyEmail: string;
+            /**
+             * Optional. Max 120 characters.
+             */
+            subjectLine?: string | null;
+            /**
+             * Optional closing note. Max 200 characters.
+             */
+            footer?: string | null;
+            /**
+             * Optional. Max 80 characters.
+             */
+            filename?: string | null;
+            id?: string | null;
+          }[];
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-opening';
+      }
+    | {
+        /**
+         * Primary headline. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * Add 2–8 processing steps. Each has a title (EN/BN) and an image (186×157 ratio).
+         */
+        processingCards: {
+          /**
+           * Short step label. Max 60 characters.
+           */
+          title: string;
+          /**
+           * ধাপের ছোট শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Upload & crop to match 186×157 ratio (≈1.1847). UI target size w-186px h-157px.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-processing';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2834,6 +3005,67 @@ export interface PagesSelect<T extends boolean = true> {
                     descriptionBN?: T;
                     designation?: T;
                     designationBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'career-opening'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              cards?:
+                | T
+                | {
+                    type?: T;
+                    typeBN?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    btnText?: T;
+                    btnTextBN?: T;
+                    detailsBtnText?: T;
+                    detailsBtnTextBN?: T;
+                    detailsData?:
+                      | T
+                      | {
+                          title?: T;
+                          responsibilities?: T;
+                          requirements?: T;
+                          location?: T;
+                          deadline?: T;
+                          applyEmail?: T;
+                          subjectLine?: T;
+                          footer?: T;
+                          filename?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'career-processing'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              processingCards?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     id?: T;
                   };
               id?: T;

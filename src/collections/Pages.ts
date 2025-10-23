@@ -139,6 +139,8 @@ import LicensedLaunchedSchema from '@/blocks/LicensedAndLaunched/schema'
 import AgentOnboardingOpportunitySchema from '@/blocks/agentOnboadringOpportunity/schema'
 import AgentVisionSchema from '@/blocks/agentVision/schema'
 import CareerIntroSchema from '@/blocks/careerIntro/schema'
+import CareerOpeningSchema from '@/blocks/careerOpening/schema'
+import CareerProcessingSchema from '@/blocks/careerProcessingFlow/schema'
 import CareerResourcesSchema from '@/blocks/careerResources/schema'
 import CareerSwiperSchema from '@/blocks/careerSwiper/schema'
 import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
@@ -257,7 +259,9 @@ export const Pages: CollectionConfig = {
         //careerpage
         CareerIntroSchema,
         CareerSwiperSchema,
-        CareerResourcesSchema
+        CareerResourcesSchema,
+        CareerOpeningSchema,
+        CareerProcessingSchema,
       ],
     },
   ],

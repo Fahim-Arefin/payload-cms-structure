@@ -212,3 +212,13 @@ export const CAREER_PAGE_RESOURCES_SLUG_AND_TAG = 'career-resources'
 export const CAREER_PAGE_RESOURCES_BLOCK_LABEL = 'Career Resources Card'
 export const CAREER_PAGE_RESOURCES_CACHE_KEY = 'career-resources-data'
 export const CAREER_PAGE_RESOURCES_BLOCK_THUMBNAIL_URL = `${folder}/career-page-resources-thumbnail.png`
+
+export const CAREER_PAGE_OPENINGS_SLUG_AND_TAG = 'career-opening'
+export const CAREER_PAGE_OPENINGS_BLOCK_LABEL = 'Career Opening Card'
+export const CAREER_PAGE_OPENINGS_CACHE_KEY = 'career-opening-data'
+export const CAREER_PAGE_OPENINGS_BLOCK_THUMBNAIL_URL = `${folder}/career-page-opening-thumbnail.png`
+
+export const CAREER_PAGE_PROCESSING_SLUG_AND_TAG = 'career-processing'
+export const CAREER_PAGE_PROCESSING_BLOCK_LABEL = 'Career Processing'
+export const CAREER_PAGE_PROCESSING_CACHE_KEY = 'career-processing-data'
+export const CAREER_PAGE_PROCESSING_BLOCK_THUMBNAIL_URL = `${folder}/career-page-processing-thumbnail.png`
