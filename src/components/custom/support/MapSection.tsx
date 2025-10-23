@@ -2,7 +2,8 @@
 
 import { TabDataType } from '@/types'
 import { FaUser } from 'react-icons/fa'
-import { MdDiscount } from 'react-icons/md'
+import { MdDiscount, MdCreditScore, MdCreditCardOff } from 'react-icons/md'
+
 import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
@@ -138,8 +139,16 @@ function MapSection({ data, bgColor }: Props) {
             </div>
           )}
 
-          <div>
-            <p className="text-[12px] xl:text-[13px] 2xl:text-[16px]">
+          <div className="flex items-start gap-2">
+            {data?.content[0]?.cashless_status == 'Cashless Facility Available' ? (
+              <MdCreditScore className="w-4 h-4 mt-[2px] md:mt-[4px] shrink-0" aria-hidden="true" />
+            ) : (
+              <MdCreditCardOff
+                className="w-4 h-4 mt-[2px] md:mt-[4px] shrink-0"
+                aria-hidden="true"
+              />
+            )}
+            <p className="font-bold text-[12px] xl:text-[13px] 2xl:text-[16px]">
               {data?.content[0]?.cashless_status && (
                 <>
                   {/* <span className="font-bold">Cashless Status: </span> */}
