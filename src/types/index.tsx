@@ -344,6 +344,7 @@ type TabContent = {
   office_phoneBN?: string
   office_name?: string
   discount_details?: string
+  cashless_status?: string
 }
 
 export type TabDataType = {

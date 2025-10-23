@@ -10,6 +10,7 @@ type HospitalApi = {
   hospital_contact_person_mobile_no?: string
   hospital_contact_person_email?: string
   benefit_details?: string
+  cashless_status?: string
 }
 
 const toIframe = (addr?: string) => {
@@ -37,4 +38,5 @@ export const toSupportTabHospitals = (rows: HospitalApi[]) =>
         .map(s => String(s).trim())
         .join(', ') || '',
     discount_details: h.benefit_details || '',
+    cashless_status: h.cashless_status || '',
   }))
