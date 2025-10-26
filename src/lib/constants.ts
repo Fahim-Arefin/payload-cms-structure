@@ -230,3 +230,15 @@ export const CORPORATE_PARTNERS_SLUG_AND_TAG = 'corporate-partners'
 export const CORPORATE_PARTNERS_BLOCK_LABEL = 'corporate-partners'
 export const CORPORATE_PARTNERS_BLOCK_THUMBNAIL_URL = `${folder}/corporate-partners-block-thumbnail.png`
 export const CORPORATE_PARTNERS_CACHE_KEY = 'corporate-partners'
+
+// custom card section
+export const CUSTOM_CARD_SECTION_SLUG_AND_TAG = 'custom-card'
+export const CUSTOM_CARD_SECTION_BLOCK_LABEL = 'custom-card'
+export const CUSTOM_CARD_SECTION_BLOCK_THUMBNAIL_URL = `${folder}/custom-card-block-thumbnail.png`
+export const CUSTOM_CARD_SECTION_CACHE_KEY = 'custom-card'
+
+// card 01 -> corporate card
+export const CORPORATE_PAGE_CARDS_SLUG_AND_TAG = 'corporate-cards'
+export const CORPORATE_PAGE_CARDS_CACHE_KEY = 'corporate-cards-data'
+export const CORPORATE_PAGE_CARDS_BLOCK_LABEL = 'Corporate Cards'
+export const CORPORATE_PAGE_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/corporate-cards-block-thumbnail.png`

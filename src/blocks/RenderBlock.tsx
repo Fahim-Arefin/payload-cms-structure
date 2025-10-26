@@ -26,6 +26,7 @@ import {
   CORPORATE_INFO_SLUG_AND_TAG,
   CORPORATE_INTRO_SLUG_AND_TAG,
   CORPORATE_PARTNERS_SLUG_AND_TAG,
+  CUSTOM_CARD_SECTION_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -56,6 +57,7 @@ import ContactUsBlock from './contactUs/ContactUsBlock'
 import CorporateIntroBlock from './corporateIntro/CorporateIntroBlock'
 import CorporateInfoBlock from './corporateInfo/CorporateInfoBlock'
 import CorporatePartnersBlock from './corporatePartners/CorporatePartnersBlock'
+import CustomCardSectionBlock from './customCardSection/CustomCardSectionBlock'
 
 type Params = Record<string, string>
 
@@ -128,6 +130,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CorporateInfoBlock key={block.id} block={block} params={params} />
     case CORPORATE_PARTNERS_SLUG_AND_TAG:
       return <CorporatePartnersBlock key={block.id} block={block} params={params} />
+
+    // custom card section
+    case CUSTOM_CARD_SECTION_SLUG_AND_TAG:
+      return <CustomCardSectionBlock key={block.id} block={block} params={params} />
 
     default:
       return null

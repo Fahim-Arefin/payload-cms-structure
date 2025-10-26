@@ -1903,11 +1903,11 @@ export interface Page {
         /**
          * Primary heading. Max 80 characters.
          */
-        title: string;
+        title?: string | null;
         /**
          * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
          */
-        titleBN: string;
+        titleBN?: string | null;
         /**
          * Rich text (about 1–3 short paragraphs). Up to ~400 characters.
          */
@@ -1945,27 +1945,37 @@ export interface Page {
           [k: string]: unknown;
         } | null;
         /**
+         * Heading above the stats section. Max 80 characters.
+         */
+        statsTitle?: string | null;
+        /**
+         * স্ট্যাটস সেকশনের শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        statsTitleBN?: string | null;
+        /**
          * Add key metrics. Each item has a value and a short label (both EN/BN).
          */
-        stats: {
-          /**
-           * Displayed metric value (e.g., “1.2M” or “25+”). Max 50 characters.
-           */
-          value: string;
-          /**
-           * প্রদর্শিত মান (যেমন “১.২M” বা “২৫+”). সর্বোচ্চ ৫০ অক্ষর।
-           */
-          valueBN: string;
-          /**
-           * Short label (e.g., “Policies Issued”). Max 50 characters.
-           */
-          label: string;
-          /**
-           * সংক্ষিপ্ত লেবেল। সর্বোচ্চ ৫০ অক্ষর।
-           */
-          labelBN: string;
-          id?: string | null;
-        }[];
+        stats?:
+          | {
+              /**
+               * Displayed metric value (e.g., “1.2M” or “25+”). Max 50 characters.
+               */
+              value: string;
+              /**
+               * প্রদর্শিত মান (যেমন “১.২M” বা “২৫+”). সর্বোচ্চ ৫০ অক্ষর।
+               */
+              valueBN: string;
+              /**
+               * Short label (e.g., “Policies Issued”). Max 50 characters.
+               */
+              label: string;
+              /**
+               * সংক্ষিপ্ত লেবেল। সর্বোচ্চ ৫০ অক্ষর।
+               */
+              labelBN: string;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'corporate-intro';
@@ -2126,6 +2136,163 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'corporate-partners';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 100 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Title. Max 40 chars.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 100 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Subtitle. Max 40 chars.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~200 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~২০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * If checked, render cards in a horizontal carousel on desktop & mobile. If unchecked, render as a responsive grid. / চেক করা থাকলে কার্ডগুলো ক্যারোসেলে দেখাবে, না হলে গ্রিডে দেখাবে।
+         */
+        displayAsCarousel?: boolean | null;
+        /**
+         * Adds padding on the left/right of the card container (padding-x). / কার্ড কন্টেইনারের বাম/ডানে প্যাডিং যোগ করবে।
+         */
+        addHorizontalPadding?: boolean | null;
+        /**
+         * How many cards should be visible on a small phone screen at once? Type a number from 1 to 4. Example: 1 shows one big card; 2 shows two smaller cards side-by-side.
+         */
+        mobileCardsPerView?: number | null;
+        /**
+         * How many cards should be visible on tablet screens? Type 1–4. Example: 2 shows two cards across; 3 shows three smaller cards.
+         */
+        tabletCardsPerView?: number | null;
+        /**
+         * How many cards should be visible on laptop screens? Type 1–4. Example: 3 fits three cards neatly in a row.
+         */
+        laptopCardsPerView?: number | null;
+        /**
+         * How many cards should be visible on large desktop screens? Type 1–4. Example: 3 shows three balanced cards; 4 makes them smaller but fits more.
+         */
+        desktopCardsPerView?: number | null;
+        /**
+         * Please add a card
+         */
+        card: {
+          /**
+           * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
+           */
+          cards: {
+            /**
+             * Main background of the card. Recommended 16:9.
+             */
+            bgImage: string | Media;
+            bgImageOriginal?: (string | null) | Media;
+            pendingBgImageOriginal?: string | null;
+            pendingBgImageCrop?: string | null;
+            bgImageBlurDataURL?: string | null;
+            /**
+             * Square icon. Recommended 1:1.
+             */
+            icon: string | Media;
+            iconOriginal?: (string | null) | Media;
+            pendingIconOriginal?: string | null;
+            pendingIconCrop?: string | null;
+            iconBlurDataURL?: string | null;
+            /**
+             * Add short bullet/lines to describe the card. Each line must have EN & BN. Max 180 (১৮০) chars per field.
+             */
+            descriptions: {
+              /**
+               * One short line. Max 180 characters.
+               */
+              text: string;
+              /**
+               * একটি ছোট লাইন। সর্বোচ্চ ১৮০ অক্ষর।
+               */
+              textBN: string;
+              /**
+               * Optional. Max 24 characters.
+               */
+              buttonText?: string | null;
+              /**
+               * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+               */
+              buttonTextBN?: string | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+               */
+              buttonLink?: (string | null) | Page;
+              id?: string | null;
+            }[];
+            id?: string | null;
+          }[];
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'corporate-cards';
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'custom-card';
       }
   )[];
   updatedAt: string;
@@ -2986,6 +3153,8 @@ export interface PagesSelect<T extends boolean = true> {
               titleBN?: T;
               description?: T;
               descriptionBN?: T;
+              statsTitle?: T;
+              statsTitleBN?: T;
               stats?:
                 | T
                 | {
@@ -3072,6 +3241,64 @@ export interface PagesSelect<T extends boolean = true> {
                     name?: T;
                     nameBN?: T;
                     id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'custom-card'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              displayAsCarousel?: T;
+              addHorizontalPadding?: T;
+              mobileCardsPerView?: T;
+              tabletCardsPerView?: T;
+              laptopCardsPerView?: T;
+              desktopCardsPerView?: T;
+              card?:
+                | T
+                | {
+                    'corporate-cards'?:
+                      | T
+                      | {
+                          cards?:
+                            | T
+                            | {
+                                bgImage?: T;
+                                bgImageOriginal?: T;
+                                pendingBgImageOriginal?: T;
+                                pendingBgImageCrop?: T;
+                                bgImageBlurDataURL?: T;
+                                icon?: T;
+                                iconOriginal?: T;
+                                pendingIconOriginal?: T;
+                                pendingIconCrop?: T;
+                                iconBlurDataURL?: T;
+                                descriptions?:
+                                  | T
+                                  | {
+                                      text?: T;
+                                      textBN?: T;
+                                      buttonText?: T;
+                                      buttonTextBN?: T;
+                                      buttonLink?: T;
+                                      id?: T;
+                                    };
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               id?: T;
               blockName?: T;

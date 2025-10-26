@@ -123,10 +123,10 @@ const CorporateIntroSchema: Block = {
         {
           name: 'title',
           type: 'text',
-          required: true,
+          required: false,
           label: 'Title',
           maxLength: TITLE_MAX,
-          validate: validateShortText('Title', TITLE_MAX, true),
+          validate: validateShortText('Title', TITLE_MAX, false),
           admin: {
             width: '50%',
             description: `Primary heading. Max ${TITLE_MAX} characters.`,
@@ -135,10 +135,10 @@ const CorporateIntroSchema: Block = {
         {
           name: 'titleBN',
           type: 'text',
-          required: true,
+          required: false,
           label: 'শিরোনাম (বাংলা)',
           maxLength: TITLE_MAX,
-          validate: validateShortText('Title (BN)', TITLE_MAX, true),
+          validate: validateShortText('Title (BN)', TITLE_MAX, false),
           admin: {
             width: '50%',
             description: `প্রধান শিরোনাম। সর্বোচ্চ ${bnNum(TITLE_MAX)} অক্ষর।`,
@@ -176,12 +176,43 @@ const CorporateIntroSchema: Block = {
       ],
     },
 
+    /* ---------- Stats Title (EN/BN) ---------- */
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'statsTitle',
+          type: 'text',
+          required: false,
+          label: 'Stats Title',
+          maxLength: TITLE_MAX,
+          validate: validateShortText('Stats Title', TITLE_MAX, false),
+          admin: {
+            width: '50%',
+            description: `Heading above the stats section. Max ${TITLE_MAX} characters.`,
+          },
+        },
+        {
+          name: 'statsTitleBN',
+          type: 'text',
+          required: false,
+          label: 'স্ট্যাটস শিরোনাম (বাংলা)',
+          maxLength: TITLE_MAX,
+          validate: validateShortText('Stats Title (BN)', TITLE_MAX, false),
+          admin: {
+            width: '50%',
+            description: `স্ট্যাটস সেকশনের শিরোনাম। সর্বোচ্চ ${bnNum(TITLE_MAX)} অক্ষর।`,
+          },
+        },
+      ],
+    },
+
     {
       name: 'stats',
       type: 'array',
       label: 'Stats',
-      required: true,
-      minRows: 3,
+      required: false,
+      minRows: 0,
       maxRows: 6,
       labels: { singular: 'Stat', plural: 'Stats' },
       admin: {

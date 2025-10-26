@@ -15,7 +15,9 @@ import {
   CONTACT_US_BLOCK_SLUG_AND_TAG,
   CORPORATE_INFO_SLUG_AND_TAG,
   CORPORATE_INTRO_SLUG_AND_TAG,
+  CORPORATE_PAGE_CARDS_SLUG_AND_TAG,
   CORPORATE_PARTNERS_SLUG_AND_TAG,
+  CUSTOM_CARD_SECTION_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -161,4 +163,11 @@ export type CorporateInfoBlockType = Extract<
 export type CorporatePartnersBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CORPORATE_PARTNERS_SLUG_AND_TAG }
+>
+
+// custom card
+
+export type CustomCardSectionBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CUSTOM_CARD_SECTION_SLUG_AND_TAG }
 >

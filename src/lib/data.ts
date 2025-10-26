@@ -389,7 +389,7 @@ export const NAV_ITEMS_MOBILE = [
   { href: 'https://portal.shantalife.com/', label: 'My Portal', labelBN: 'মাই পোর্টাল' },
 ]
 
-export const sliderDelay = 3000
+export const sliderDelay = 5000
 
 export const supportTabContent = [
   {

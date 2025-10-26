@@ -142,6 +142,7 @@ import ContactUsSchema from '@/blocks/contactUs/schema'
 import CorporateInfoSchema from '@/blocks/corporateInfo/schema'
 import CorporateIntroSchema from '@/blocks/corporateIntro/schema'
 import CorporatePartnersSchema from '@/blocks/corporatePartners/schema'
+import CustomCardSectionSchema from '@/blocks/customCardSection/schema'
 import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
 import FeaturedPlansSchema from '@/blocks/featuredPlan/schema'
 import HeroSchema from '@/blocks/hero/schema'
@@ -261,6 +262,8 @@ export const Pages: CollectionConfig = {
         CorporateIntroSchema,
         CorporateInfoSchema,
         CorporatePartnersSchema,
+        // custom card
+        CustomCardSectionSchema,
       ],
     },
   ],

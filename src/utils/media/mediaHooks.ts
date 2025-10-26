@@ -9,10 +9,10 @@ import {
   AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
-  BROCHURE_BUTTON_SLUG_AND_TAG,
   CONTACT_US_BLOCK_SLUG_AND_TAG,
   CORPORATE_INFO_SLUG_AND_TAG,
   CORPORATE_PARTNERS_SLUG_AND_TAG,
+  CUSTOM_CARD_SECTION_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -230,6 +230,14 @@ export const mediaHooks = withMediaLifecycle({
       groupKey: 'expectations',
       arrayKey: 'right',
       mediaFields: ['avatar'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_CARD_SECTION_SLUG_AND_TAG,
+      groupKey: 'card', // the nested "blocks" field inside the outer block
+      arrayKey: 'cards', // array inside the nested CorporateCards block
+      mediaFields: ['bgImage', 'icon'],
+      // itemLabelField is optional; leave out or set to something like 'title' if you add one later
     },
   ],
 

@@ -78,7 +78,7 @@ function PartnerCarousel({ data }: Props) {
   return (
     // bg-[#FCF4EB]
     <section
-      className="container-padding-y w-full border border-black
+      className="container-padding-y w-full
       px-4 md:px-6 lg:px-8 xl:px-10 2xl:px-12"
       style={{
         backgroundColor: data?.backgroundColor || '',
