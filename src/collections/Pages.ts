@@ -133,6 +133,7 @@
 // ================================================================================================
 
 // version 02 (added media cleanup hooks)
+import AddonsInfoSchema from '@/blocks/AddonsInfoSchema/schema'
 import BoardOfDirectorsCardSchema from '@/blocks/BoardOfDirectorsCard/schema'
 import BoardOfDirectorsListSchema from '@/blocks/BoardOfDirectorsList/schema'
 import LicensedLaunchedSchema from '@/blocks/LicensedAndLaunched/schema'
@@ -264,6 +265,8 @@ export const Pages: CollectionConfig = {
         CorporatePartnersSchema,
         // custom card
         CustomCardSectionSchema,
+        // add on info
+        AddonsInfoSchema,
       ],
     },
   ],

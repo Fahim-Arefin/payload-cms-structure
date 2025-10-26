@@ -2294,6 +2294,206 @@ export interface Page {
         blockName?: string | null;
         blockType: 'custom-card';
       }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must be inside Title. Max 40.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must be inside Subtitle. Max 40.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের মধ্যে থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~600 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Select which image to display on the UI.
+         */
+        imageVariant?: ('square' | 'wide') | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Square image (optional). Recommended 1:1.
+         */
+        imageSquare: string | Media;
+        imageSquareOriginal?: (string | null) | Media;
+        pendingImageSquareOriginal?: string | null;
+        pendingImageSquareCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageSquareBlurDataURL?: string | null;
+        /**
+         * Wide image (optional). Recommended 16:9.
+         */
+        imageWide: string | Media;
+        imageWideOriginal?: (string | null) | Media;
+        pendingImageWideOriginal?: string | null;
+        pendingImageWideCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageWideBlurDataURL?: string | null;
+        /**
+         * Max 80 characters.
+         */
+        infoTitle?: string | null;
+        /**
+         * সর্বোচ্চ ৮০ অক্ষর।
+         */
+        infoTitleBN?: string | null;
+        /**
+         * Optional, must appear inside Info Title.
+         */
+        infoTitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক, ইনফো শিরোনামের মধ্যে থাকতে হবে।
+         */
+        infoTitleHighlightedBN?: string | null;
+        /**
+         * Max 120 characters.
+         */
+        infoSubtitle?: string | null;
+        /**
+         * সর্বোচ্চ ১২০ অক্ষর।
+         */
+        infoSubtitleBN?: string | null;
+        /**
+         * Optional, must appear inside Info Subtitle.
+         */
+        infoSubtitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক, ইনফো উপশিরোনামের মধ্যে থাকতে হবে।
+         */
+        infoSubtitleHighlightedBN?: string | null;
+        /**
+         * Up to ~600 characters.
+         */
+        infoDescription?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        infoDescriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Each feature needs an icon (required) and a name (EN/BN, required).
+         */
+        keyFeatures?:
+          | {
+              /**
+               * Square icon (1:1).
+               */
+              icon: string | Media;
+              iconOriginal?: (string | null) | Media;
+              pendingIconOriginal?: string | null;
+              pendingIconCrop?: string | null;
+              iconBlurDataURL?: string | null;
+              /**
+               * Max 60 characters.
+               */
+              name: string;
+              /**
+               * সর্বোচ্চ ৬০ অক্ষর।
+               */
+              nameBN: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'add-on-info';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -3299,6 +3499,58 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'add-on-info'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              imageVariant?: T;
+              imageOrder?: T;
+              imageSquare?: T;
+              imageSquareOriginal?: T;
+              pendingImageSquareOriginal?: T;
+              pendingImageSquareCrop?: T;
+              imageSquareBlurDataURL?: T;
+              imageWide?: T;
+              imageWideOriginal?: T;
+              pendingImageWideOriginal?: T;
+              pendingImageWideCrop?: T;
+              imageWideBlurDataURL?: T;
+              infoTitle?: T;
+              infoTitleBN?: T;
+              infoTitleHighlighted?: T;
+              infoTitleHighlightedBN?: T;
+              infoSubtitle?: T;
+              infoSubtitleBN?: T;
+              infoSubtitleHighlighted?: T;
+              infoSubtitleHighlightedBN?: T;
+              infoDescription?: T;
+              infoDescriptionBN?: T;
+              keyFeatures?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;

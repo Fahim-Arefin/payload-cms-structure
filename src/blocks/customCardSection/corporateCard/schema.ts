@@ -2,11 +2,13 @@
 import type { Block } from 'payload'
 import { bnNum } from '@/lib/utils'
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
+import LayoutThumbPreview from '@/components/admin/LayoutThumbPreview'
 import {
   CORPORATE_PAGE_CARDS_BLOCK_LABEL,
   CORPORATE_PAGE_CARDS_BLOCK_THUMBNAIL_URL,
   CORPORATE_PAGE_CARDS_SLUG_AND_TAG,
 } from '@/lib/constants'
+import CorporateCardsThumbField from './CorporateCardsThumbField'
 
 // ---- limits ----
 const CARDS_MIN = 1
@@ -77,6 +79,16 @@ const CorporateCardsSchema: Block = {
   imageAltText: `${CORPORATE_PAGE_CARDS_BLOCK_LABEL} preview`,
 
   fields: [
+    // {
+    //   type: 'ui',
+    //   name: 'layoutPreview',
+    //   label: 'Layout Preview',
+    //   admin: {
+    //     components: {
+    //       Field: CorporateCardsThumbField, // <- pass the component, not JSX
+    //     },
+    //   },
+    // },
     {
       name: 'cards',
       type: 'array',

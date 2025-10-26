@@ -13,6 +13,7 @@ import {
   CORPORATE_INFO_SLUG_AND_TAG,
   CORPORATE_PARTNERS_SLUG_AND_TAG,
   CUSTOM_CARD_SECTION_SLUG_AND_TAG,
+  EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -95,6 +96,12 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: CORPORATE_INFO_SLUG_AND_TAG,
       mediaFields: ['image'], // generated field pair (image + imageOriginal handled internally)
+    },
+    {
+      layoutKey: 'layout',
+      blockType: EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
+      // the hook already knows how to handle the *Original fields, so just list the primary names
+      mediaFields: ['imageSquare', 'imageWide'],
     },
   ],
 
@@ -204,6 +211,13 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'partners',
       mediaFields: ['image'], // generated array image field
       itemLabelField: 'name', // optional, improves alt/ownerField naming
+    },
+    {
+      layoutKey: 'layout',
+      blockType: EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
+      arrayKey: 'keyFeatures',
+      mediaFields: ['icon'],
+      itemLabelField: 'name',
     },
   ],
 

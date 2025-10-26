@@ -7,6 +7,7 @@ import {
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 import CorporateCardsSchema from './corporateCard/schema'
+import CustomCardsThumbField from './CustomCardsThumbField'
 
 /* ------------ limits ------------ */
 const TITLE_MAX = 100
@@ -132,6 +133,16 @@ const CustomCardSectionSchema: Block = {
   imageAltText: `${CUSTOM_CARD_SECTION_BLOCK_LABEL} preview`,
 
   fields: [
+    // {
+    //   type: 'ui',
+    //   name: 'layoutPreview',
+    //   label: 'Layout Preview',
+    //   admin: {
+    //     components: {
+    //       Field: CustomCardsThumbField, // <- pass the component, not JSX
+    //     },
+    //   },
+    // },
     {
       name: 'backgroundColor',
       type: 'text',

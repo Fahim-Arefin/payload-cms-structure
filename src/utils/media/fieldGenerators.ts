@@ -21,6 +21,7 @@ async function validateExistingMedia(
   { siblingData, req }: any,
   fieldName: string,
   label: string,
+  required: boolean = true,
 ) {
   const cap = fieldName.charAt(0).toUpperCase() + fieldName.slice(1)
   const pendingCropKey = `pending${cap}Crop`
@@ -28,6 +29,9 @@ async function validateExistingMedia(
 
   const hasPending = Boolean(siblingData?.[pendingCropKey] || siblingData?.[pendingOriginalKey])
   const id = relIdFrom(val)
+
+  // 👇 If field is NOT required and nothing provided, allow empty
+  if (!required && !id && !hasPending) return true
 
   if (!id && !hasPending) return `Please select and crop the ${label.toLowerCase()}.`
   if (hasPending) return true
@@ -50,6 +54,7 @@ export function generateImageFields(config: ImageConfig & { ownerCollection?: st
     quality = 0.95,
     maxKB = 500,
     ownerCollection,
+    required = true,
   } = config
 
   return [
@@ -57,13 +62,14 @@ export function generateImageFields(config: ImageConfig & { ownerCollection?: st
       name: fieldName,
       type: 'upload',
       relationTo: MEDIA_SLUG,
-      required: true,
+      required,
       label,
       admin: {
         description,
         components: { Field: { path: '@/components/admin/CropUploadField' } },
       },
-      validate: async (val: any, ctx: any) => validateExistingMedia(val, ctx, fieldName, label),
+      validate: async (val: any, ctx: any) =>
+        validateExistingMedia(val, ctx, fieldName, label, required),
       ...({
         cropper: {
           aspect: aspectRatio,
@@ -116,6 +122,7 @@ export function generateArrayImageFields(config: {
   quality?: number
   maxKB?: number
   ownerCollection?: string
+  required?: boolean
 }): Field[] {
   const {
     fieldName,
@@ -126,6 +133,7 @@ export function generateArrayImageFields(config: {
     quality = 0.95,
     maxKB = 500,
     ownerCollection,
+    required = true,
   } = config
 
   return [
@@ -133,13 +141,14 @@ export function generateArrayImageFields(config: {
       name: fieldName,
       type: 'upload',
       relationTo: MEDIA_SLUG,
-      required: true,
+      required,
       label,
       admin: {
         description,
         components: { Field: { path: '@/components/admin/CropUploadField' } },
       },
-      validate: async (val: any, ctx: any) => validateExistingMedia(val, ctx, fieldName, label),
+      validate: async (val: any, ctx: any) =>
+        validateExistingMedia(val, ctx, fieldName, label, required),
       ...({
         cropper: {
           aspect: aspectRatio,

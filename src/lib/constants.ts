@@ -242,3 +242,9 @@ export const CORPORATE_PAGE_CARDS_SLUG_AND_TAG = 'corporate-cards'
 export const CORPORATE_PAGE_CARDS_CACHE_KEY = 'corporate-cards-data'
 export const CORPORATE_PAGE_CARDS_BLOCK_LABEL = 'Corporate Cards'
 export const CORPORATE_PAGE_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/corporate-cards-block-thumbnail.png`
+
+// corporate Add on info
+export const EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG = 'add-on-info'
+export const EMPLOYEE_WELLNESS_ADDONS_INFO_CACHE_KEY = 'add-on-info-data'
+export const EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_LABEL = 'Add On Info'
+export const EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_THUMBNAIL_URL = `${folder}/add-on-info-block-thumbnail.png`

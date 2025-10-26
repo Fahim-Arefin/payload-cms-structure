@@ -18,6 +18,7 @@ import {
   CORPORATE_PAGE_CARDS_SLUG_AND_TAG,
   CORPORATE_PARTNERS_SLUG_AND_TAG,
   CUSTOM_CARD_SECTION_SLUG_AND_TAG,
+  EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -170,4 +171,9 @@ export type CorporatePartnersBlockType = Extract<
 export type CustomCardSectionBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CUSTOM_CARD_SECTION_SLUG_AND_TAG }
+>
+
+export type AddonInfoBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG }
 >

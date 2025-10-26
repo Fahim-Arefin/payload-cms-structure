@@ -1,54 +1,161 @@
+import { AddonInfoBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
-import React from 'react'
+import LocalizedHighlighted from '../LocalizedHighlighted'
+import LocalizedRichText from '../LocalizedRichText'
 import LocalizedText from '../LocalizedText'
 
 type Props = {
-  data: {
-    title: string
-    titleBN?: string
-    coloredTitle: string
-    coloredTitleBN?: string
-    description: string
-    descriptionBN?: string
-    image: string
-  }
-  className?: string
+  data: AddonInfoBlockType
 }
 
-function WCTMSection({ data, className }: Props) {
+function WCTMSection({ data }: Props) {
   return (
-    <div className={`container-padding space-y-6 font-avenir ${className}`}>
+    <div
+      className={`container-padding font-avenir space-y-4 lg:space-y-6 xl:space-y-8 2xl:space-y-10`}
+      style={{ backgroundColor: data?.backgroundColor || '' }}
+    >
       {/* heading */}
       <div className="">
-        <div className="flex space-x-2">
-          <h3 className="global-h2 uppercase font-bold text-[#434343]">
-            <LocalizedText en={data?.title} bn={data?.titleBN} />
-          </h3>
-          <h3 className="global-h2 uppercase font-bold text-[#ED7125]">
-            <LocalizedText en={data?.coloredTitle} bn={data?.coloredTitleBN} />
-          </h3>{' '}
+        <div>
+          {(data?.title || data?.titleBN) && (
+            <h3 className="global-h2 uppercase font-bold text-[#434343]">
+              <LocalizedHighlighted
+                textEn={data?.title}
+                textBn={data?.titleBN}
+                highlightEn={data?.highlightedText}
+                highlightBn={data?.highlightedTextBN}
+              />
+            </h3>
+          )}
+          {(data?.subtitle || data?.subtitleBN) && (
+            <h3 className="global-h2 uppercase font-bold text-[#434343]">
+              <LocalizedHighlighted
+                textEn={data?.subtitle}
+                textBn={data?.subtitleBN}
+                highlightEn={data?.highlightedSubtitle}
+                highlightBn={data?.highlightedSubtitleBN}
+              />
+            </h3>
+          )}
+        </div>
+        <div className={``}>
+          {(data?.description || data?.descriptionBN) && (
+            <div
+              className={`global-span text-[#3A3A3A] font-[350] 
+                       ${(data?.title || data?.titleBN) && (data?.subtitle || data?.subtitleBN) ? `mt-2 xl:mt-4` : ''}`}
+            >
+              <LocalizedRichText en={data?.description} bn={data?.descriptionBN} />
+            </div>
+          )}
         </div>
       </div>
 
       <div
         className="grid grid-cols-1 lg:grid-cols-2 
-      gap-4 md:gap-8 lg:gap-12 xl:gap-20 2xl:gap-24"
+      gap-4 lg:gap-8 xl:gap-12 2xl:gap-16 
+      "
       >
-        <div className="order-2 lg:order-1 text-[#434343] global-span font-extralight text-justify flex justify-center items-center  h-auto">
-          <LocalizedText en={data?.description} bn={data?.descriptionBN} />
-        </div>
-        {/* lg:h-[300px] xl:h-[310px] 2xl:h-[210px]  */}
+        {/* info */}
         <div
-          className="order-1 lg:order-2  relative w-full h-auto lg:h-[230px] xl:h-[300px] 2xl:h-[330px]  
-       aspect-video rounded-md lg:rounded-lg xl:rounded-xl"
+          // gap-3 xl:gap-6
+          className={`order-2 lg:${data?.imageOrder === 'left' ? `order-1` : `order-2`} text-[#434343] 
+          flex flex-col justify-center gap-3 xl:gap-6`}
         >
-          <Image
-            fill
-            src={data?.image}
-            alt={data?.title}
-            className="object-cover rounded-md lg:rounded-lg xl:rounded-xl"
-            sizes="(max-width: 639px) 350px, 50vw"
-          />
+          {(data?.infoTitle || data?.infoTitleBN || data?.infoSubtitle || data?.infoSubtitleBN) && (
+            <div className="">
+              {(data?.infoTitle || data?.infoTitleBN) && (
+                <LocalizedHighlighted
+                  as="h3"
+                  className="global-h3 uppercase font-semibold text-[#434343]"
+                  textEn={data?.infoTitle}
+                  textBn={data?.infoTitleBN}
+                  highlightEn={data?.infoTitleHighlighted}
+                  highlightBn={data?.infoTitleHighlightedBN}
+                />
+              )}
+              {(data?.infoSubtitle || data?.infoSubtitleBN) && (
+                <LocalizedHighlighted
+                  as="h3"
+                  className="global-h3 uppercase font-semibold text-[#434343]"
+                  textEn={data?.infoSubtitle}
+                  textBn={data?.infoSubtitleBN}
+                  highlightEn={data?.infoSubtitleHighlighted}
+                  highlightBn={data?.infoSubtitleHighlightedBN}
+                />
+              )}
+            </div>
+          )}
+
+          {(data?.infoDescription || data?.infoDescriptionBN) && (
+            <div className="text-justify global-span font-extralight ">
+              <LocalizedRichText en={data?.infoDescription} bn={data?.infoDescriptionBN} />
+            </div>
+          )}
+          {data?.keyFeatures && data?.keyFeatures?.length > 0 && (
+            <div className="space-y-3 ">
+              {data?.keyFeatures?.map((item, i) => (
+                <div className="flex items-center space-x-4" key={i}>
+                  <div
+                    className="relative flex items-center justify-center
+                    w-[20px] lg:w-[25px] xl:w-[40px] aspect-[1/1]"
+                  >
+                    {typeof item?.icon === 'object' && item?.icon?.url && (
+                      <Image
+                        fill
+                        src={item?.icon?.url}
+                        alt={item?.name}
+                        placeholder="blur"
+                        blurDataURL={item?.iconBlurDataURL || ''}
+                      />
+                    )}
+                  </div>
+                  <div className="uppercase text-[10px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-semibold text-[#434342]">
+                    <LocalizedText en={item?.name} bn={item?.nameBN} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* image */}
+        <div
+          // h-auto lg:h-[230px] xl:h-[300px] 2xl:h-[330px]
+          className={`order-1 lg:${data?.imageOrder === 'left' ? `order-2` : `order-1`} relative w-full my-auto 
+          rounded-md lg:rounded-lg xl:rounded-xl border border-black
+          ${data?.imageVariant === 'wide' ? 'aspect-[16/9]' : 'aspect-[1/1]'} `}
+        >
+          {data?.imageVariant &&
+          data?.imageVariant === 'square' &&
+          typeof data?.imageSquare === 'object' &&
+          data?.imageSquare?.url ? (
+            <Image
+              fill
+              src={data?.imageSquare?.url}
+              alt={`side Image`}
+              className="object-cover object-center rounded-md lg:rounded-lg xl:rounded-xl"
+              sizes="(max-width: 639px) 350px, 50vw"
+              placeholder="blur"
+              blurDataURL={data?.imageSquareBlurDataURL || ''}
+              quality={80}
+            />
+          ) : data?.imageVariant &&
+            data?.imageVariant === 'wide' &&
+            typeof data?.imageWide === 'object' &&
+            data?.imageWide?.url ? (
+            <Image
+              fill
+              src={data?.imageWide?.url}
+              alt={`side Image`}
+              className="object-cover object-center rounded-md lg:rounded-lg xl:rounded-xl"
+              sizes="(max-width: 639px) 350px, 50vw"
+              placeholder="blur"
+              blurDataURL={data?.imageWideBlurDataURL || ''}
+              quality={80}
+            />
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </div>

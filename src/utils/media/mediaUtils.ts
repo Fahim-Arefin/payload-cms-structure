@@ -139,6 +139,7 @@ export interface ImageConfig {
   maxKB?: number
   minWidth?: number
   minHeight?: number
+  required?: boolean
 }
 
 export interface CreatedMedia {

@@ -27,6 +27,7 @@ import {
   CORPORATE_INTRO_SLUG_AND_TAG,
   CORPORATE_PARTNERS_SLUG_AND_TAG,
   CUSTOM_CARD_SECTION_SLUG_AND_TAG,
+  EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -58,6 +59,7 @@ import CorporateIntroBlock from './corporateIntro/CorporateIntroBlock'
 import CorporateInfoBlock from './corporateInfo/CorporateInfoBlock'
 import CorporatePartnersBlock from './corporatePartners/CorporatePartnersBlock'
 import CustomCardSectionBlock from './customCardSection/CustomCardSectionBlock'
+import AddonsInfoBlock from './AddonsInfoSchema/AddonsInfoBlock'
 
 type Params = Record<string, string>
 
@@ -134,6 +136,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     // custom card section
     case CUSTOM_CARD_SECTION_SLUG_AND_TAG:
       return <CustomCardSectionBlock key={block.id} block={block} params={params} />
+
+    // add on info
+    case EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG:
+      return <AddonsInfoBlock key={block.id} block={block} params={params} />
 
     default:
       return null
