@@ -2194,6 +2194,14 @@ export interface Page {
                  */
                 titleBN: string;
                 /**
+                 * Max 40 characters.
+                 */
+                subTitle?: string | null;
+                /**
+                 * সর্বোচ্চ ৪০ অক্ষর।
+                 */
+                subTitleBN?: string | null;
+                /**
                  * Max 100 characters.
                  */
                 description: string;
@@ -3517,6 +3525,8 @@ export interface PagesSelect<T extends boolean = true> {
                                 bgImageBlurDataURL?: T;
                                 title?: T;
                                 titleBN?: T;
+                                subTitle?: T;
+                                subTitleBN?: T;
                                 description?: T;
                                 descriptionBN?: T;
                                 buttonText?: T;

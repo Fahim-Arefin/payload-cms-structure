@@ -10,6 +10,7 @@ import {
 
 /* ------------ limits ------------ */
 const CARD_TITLE_MAX = 40
+const CARD_SUBTITLE_MAX = 40
 const CARD_DESC_MAX = 100
 const CTA_TEXT_MAX = 24
 
@@ -117,6 +118,29 @@ const PlanCardSchema: Block = {
               maxLength: CARD_TITLE_MAX,
               validate: validateShortText('Card Title (BN)', CARD_TITLE_MAX, true),
               admin: { width: '50%', description: `সর্বোচ্চ ${bnNum(CARD_TITLE_MAX)} অক্ষর।` },
+            },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'subTitle',
+              type: 'text',
+              required: false,
+              label: 'Card SubTitle',
+              maxLength: CARD_SUBTITLE_MAX,
+              validate: validateShortText('Card SubTitle', CARD_SUBTITLE_MAX, false),
+              admin: { width: '50%', description: `Max ${CARD_SUBTITLE_MAX} characters.` },
+            },
+            {
+              name: 'subTitleBN',
+              type: 'text',
+              required: false,
+              label: 'কার্ড উপ-শিরোনাম (বাংলা)',
+              maxLength: CARD_SUBTITLE_MAX,
+              validate: validateShortText('Card SubTitle (BN)', CARD_SUBTITLE_MAX, false),
+              admin: { width: '50%', description: `সর্বোচ্চ ${bnNum(CARD_SUBTITLE_MAX)} অক্ষর।` },
             },
           ],
         },
