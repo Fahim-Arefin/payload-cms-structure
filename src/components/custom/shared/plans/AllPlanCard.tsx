@@ -45,7 +45,7 @@ function AllPlanCard({ data, blur = true }: Props) {
       >
         <div className="h-[50%] flex items-start">
           <div
-            className={`text-[20px] xl:text-[28px] 2xl:text-[32px]  uppercase mx-auto lg:mx-0 text-center lg:text-start`}
+            className={`text-[20px] xl:text-[24px] 2xl:text-[28px]  uppercase mx-auto lg:mx-0 text-center lg:text-start`}
           >
             <LocalizedText en={data?.title} bn={data?.titleBN} />
             <br></br>
@@ -60,14 +60,17 @@ function AllPlanCard({ data, blur = true }: Props) {
           <p className="global-p2 text-center lg:text-start">
             <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
-          <Link href={pageHref(data?.buttonLink)}>
+          <Link
+            href={pageHref(data?.buttonLink)}
+            className="flex justify-center lg:justify-start  "
+          >
             <Button
               variant="link"
               className="text-[#ED7125] hover:underline w-fit mx-auto lg:mx-0
             global-p2 p-0"
             >
-              <div className="flex space-x-1 items-center cursor-pointer">
-                <LocalizedText en="Explore" bn="এক্সপ্লোর" />
+              <div className="flex space-x-1 items-center cursor-pointer ">
+                <LocalizedText en={data?.buttonText} bn={data?.buttonTextBN} />
                 <ArrowUpRight />
               </div>
             </Button>
