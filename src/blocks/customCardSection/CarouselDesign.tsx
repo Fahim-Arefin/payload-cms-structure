@@ -97,11 +97,19 @@ import { sliderDelay } from '@/lib/data'
 import { CustomCardSectionBlockType } from '@/types/payloadCustomTypes'
 
 // Infer the item type from either `corporateCards` or `planCards`
+// type ItemOf<T> = T extends { corporateCards: infer A extends any[] }
+//   ? A[number]
+//   : T extends { planCards: infer B extends any[] }
+//     ? B[number]
+//     : never
+
 type ItemOf<T> = T extends { corporateCards: infer A extends any[] }
   ? A[number]
   : T extends { planCards: infer B extends any[] }
     ? B[number]
-    : never
+    : T extends { offerCards: infer C extends any[] }
+      ? C[number]
+      : never
 
 type Props<T extends CustomCardSectionBlockType['card'][number]> = {
   block: CustomCardSectionBlockType
@@ -124,12 +132,6 @@ const toBasis = (n?: number) => {
   }
 }
 
-// type Props = {
-//   block: CustomCardSectionBlockType
-//   data: CustomCardSectionBlockType['card'][number]
-//   renderItem: (item: ItemType, index: number) => React.ReactNode
-// }
-
 // export default function CarouselDesign({ block, data, renderItem }: Props) {
 export default function CarouselDesign<T extends CustomCardSectionBlockType['card'][number]>({
   block,
@@ -147,8 +149,17 @@ export default function CarouselDesign<T extends CustomCardSectionBlockType['car
   const desktopBasis = toBasis(block?.desktopCardsPerView ?? 3)
 
   // Safely pick the correct array from the union
+  // const items = (
+  //   'corporateCards' in data ? data.corporateCards : 'planCards' in data ? data.planCards : []
+  // ) as ItemOf<T>[]
   const items = (
-    'corporateCards' in data ? data.corporateCards : 'planCards' in data ? data.planCards : []
+    'corporateCards' in data
+      ? data.corporateCards
+      : 'planCards' in data
+        ? data.planCards
+        : 'offerCards' in data
+          ? data.offerCards
+          : []
   ) as ItemOf<T>[]
 
   useEffect(() => {

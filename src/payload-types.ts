@@ -2125,7 +2125,7 @@ export interface Page {
                */
               corporateCards: {
                 /**
-                 * Main background of the card. Recommended 16:9.
+                 * Main background of the card. Recommended 1:1.
                  */
                 bgImage: string | Media;
                 bgImageOriginal?: (string | null) | Media;
@@ -2226,6 +2226,69 @@ export interface Page {
               id?: string | null;
               blockName?: string | null;
               blockType: 'plan-card';
+            }
+          | {
+              /**
+               * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
+               */
+              offerCards: {
+                /**
+                 * Main background of the card. Recommended 1:1.
+                 */
+                bgImage: string | Media;
+                bgImageOriginal?: (string | null) | Media;
+                pendingBgImageOriginal?: string | null;
+                pendingBgImageCrop?: string | null;
+                bgImageBlurDataURL?: string | null;
+                /**
+                 * Square icon. Recommended 1:1.
+                 */
+                icon: string | Media;
+                iconOriginal?: (string | null) | Media;
+                pendingIconOriginal?: string | null;
+                pendingIconCrop?: string | null;
+                iconBlurDataURL?: string | null;
+                /**
+                 * Max 40 characters.
+                 */
+                title: string;
+                /**
+                 * সর্বোচ্চ ৪০ অক্ষর।
+                 */
+                titleBN: string;
+                /**
+                 * Max 40 characters.
+                 */
+                subTitle?: string | null;
+                /**
+                 * সর্বোচ্চ ৪০ অক্ষর।
+                 */
+                subTitleBN?: string | null;
+                /**
+                 * One short line. Max 180 characters.
+                 */
+                text: string;
+                /**
+                 * একটি ছোট লাইন। সর্বোচ্চ ১৮০ অক্ষর।
+                 */
+                textBN: string;
+                /**
+                 * Optional. Max 24 characters.
+                 */
+                buttonText?: string | null;
+                /**
+                 * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+                 */
+                buttonTextBN?: string | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                 */
+                buttonLink?: (string | null) | Page;
+                id?: string | null;
+              }[];
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'offer-card';
             }
         )[];
         id?: string | null;
@@ -3529,6 +3592,36 @@ export interface PagesSelect<T extends boolean = true> {
                                 subTitleBN?: T;
                                 description?: T;
                                 descriptionBN?: T;
+                                buttonText?: T;
+                                buttonTextBN?: T;
+                                buttonLink?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'offer-card'?:
+                      | T
+                      | {
+                          offerCards?:
+                            | T
+                            | {
+                                bgImage?: T;
+                                bgImageOriginal?: T;
+                                pendingBgImageOriginal?: T;
+                                pendingBgImageCrop?: T;
+                                bgImageBlurDataURL?: T;
+                                icon?: T;
+                                iconOriginal?: T;
+                                pendingIconOriginal?: T;
+                                pendingIconCrop?: T;
+                                iconBlurDataURL?: T;
+                                title?: T;
+                                titleBN?: T;
+                                subTitle?: T;
+                                subTitleBN?: T;
+                                text?: T;
+                                textBN?: T;
                                 buttonText?: T;
                                 buttonTextBN?: T;
                                 buttonLink?: T;

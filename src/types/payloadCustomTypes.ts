@@ -27,6 +27,7 @@ import {
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
+  OFFER_CARDS_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -191,6 +192,10 @@ export type CorporateBlock = Extract<
 
 export type PlanBlock = Extract<AnyCard, { blockType: typeof PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG }> & {
   planCards: unknown[]
+}
+
+export type OfferBlock = Extract<AnyCard, { blockType: typeof OFFER_CARDS_SLUG_AND_TAG }> & {
+  offerCards: unknown[]
 }
 
 export type PlanInfoDesignBlockType = Extract<

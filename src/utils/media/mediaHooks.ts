@@ -272,6 +272,13 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'planCards', // array inside the nested CorporateCards block
       mediaFields: ['bgImage'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_CARD_SECTION_SLUG_AND_TAG,
+      groupKey: 'card', // the nested "blocks" field inside the outer block
+      arrayKey: 'offerCards', // array inside the nested CorporateCards block
+      mediaFields: ['bgImage', 'icon'],
+    },
   ],
 
   // otherUploadFields: [

@@ -249,6 +249,12 @@ export const PLAN_PAGE_PLAN_CARD_BLOCK_LABEL = 'Plan Cards'
 export const PLAN_PAGE_PLAN_CARD_CACHE_KEY = 'plan-card-data'
 export const PLAN_PAGE_PLAN_CARD_BLOCK_THUMBNAIL_URL = `${folder}/plan-card-block-thumbnail.png`
 
+// card 03 -> OFFER card
+export const OFFER_CARDS_SLUG_AND_TAG = 'offer-card'
+export const OFFER_CARDS_BLOCK_LABEL = 'Offer Cards'
+export const OFFER_CARDS_CACHE_KEY = 'offer-card-data'
+export const OFFER_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/offer-card-block-thumbnail.png`
+
 // corporate Add on info
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG = 'add-on-info'
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_CACHE_KEY = 'add-on-info-data'

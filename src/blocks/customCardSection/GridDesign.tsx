@@ -4,11 +4,20 @@ import { CustomCardSectionBlockType } from '@/types/payloadCustomTypes'
 import React from 'react'
 
 // Infer the item type from either `corporateCards` or `planCards`
+// type ItemOf<T> = T extends { corporateCards: infer A extends any[] }
+//   ? A[number]
+//   : T extends { planCards: infer B extends any[] }
+//     ? B[number]
+//     : never
+
+// Infer the item type from corporateCards / planCards / offerCards
 type ItemOf<T> = T extends { corporateCards: infer A extends any[] }
   ? A[number]
   : T extends { planCards: infer B extends any[] }
     ? B[number]
-    : never
+    : T extends { offerCards: infer C extends any[] }
+      ? C[number]
+      : never
 
 type Props<T extends CustomCardSectionBlockType['card'][number]> = {
   data: T
@@ -42,8 +51,17 @@ export default function GridDesign<T extends CustomCardSectionBlockType['card'][
   const desktopBasis = toBasis(block?.desktopCardsPerView ?? 3)
 
   // Safely pick the correct array from the union
+  // const items = (
+  //   'corporateCards' in data ? data.corporateCards : 'planCards' in data ? data.planCards : []
+  // ) as ItemOf<T>[]
   const items = (
-    'corporateCards' in data ? data.corporateCards : 'planCards' in data ? data.planCards : []
+    'corporateCards' in data
+      ? data.corporateCards
+      : 'planCards' in data
+        ? data.planCards
+        : 'offerCards' in data
+          ? data.offerCards
+          : []
   ) as ItemOf<T>[]
 
   return (

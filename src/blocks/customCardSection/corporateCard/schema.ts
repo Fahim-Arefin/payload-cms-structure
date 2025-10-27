@@ -105,7 +105,7 @@ const CorporateCardsSchema: Block = {
         ...generateArrayImageFields({
           fieldName: 'bgImage',
           label: 'Background Image',
-          description: 'Main background of the card. Recommended 16:9.',
+          description: 'Main background of the card. Recommended 1:1.',
           aspectRatio: 1,
           quality: 0.9,
           maxKB: 600,
