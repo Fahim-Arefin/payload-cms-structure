@@ -2424,6 +2424,115 @@ export interface Page {
         blockName?: string | null;
         blockType: 'add-on-info';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * Short text. Max 400 characters.
+         */
+        description: string;
+        /**
+         * সংক্ষিপ্ত টেক্সট। সর্বোচ্চ ৪০০ অক্ষর।
+         */
+        descriptionBN: string;
+        /**
+         * Main background image. 516:705 recommended.
+         */
+        bgImageDesktop: string | Media;
+        bgImageDesktopOriginal?: (string | null) | Media;
+        pendingBgImageDesktopOriginal?: string | null;
+        pendingBgImageDesktopCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        bgImageDesktopBlurDataURL?: string | null;
+        /**
+         * Main background image. 300:200 recommended.
+         */
+        bgImageMobile: string | Media;
+        bgImageMobileOriginal?: (string | null) | Media;
+        pendingBgImageMobileOriginal?: string | null;
+        pendingBgImageMobileCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        bgImageMobileBlurDataURL?: string | null;
+        /**
+         * Heading above features. Max 80 chars.
+         */
+        featuresTitle: string;
+        /**
+         * ফিচার শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        featuresTitleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Key Features Title. Max 80 characters.
+         */
+        featuresTitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক। কী ফিচার শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        featuresTitleHighlightedBN?: string | null;
+        /**
+         * Each feature needs an icon and a short name (EN/BN).
+         */
+        features: {
+          /**
+           * Square icon. 1:1 recommended.
+           */
+          icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
+          /**
+           * Max 60 characters.
+           */
+          name: string;
+          /**
+           * সর্বোচ্চ ৬০ অক্ষর।
+           */
+          nameBN: string;
+          id?: string | null;
+        }[];
+        /**
+         * Text shown on the button. Max 24 characters.
+         */
+        buttonText?: string | null;
+        /**
+         * বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        buttonTextBN?: string | null;
+        /**
+         * Pick an internal Page to navigate to when the CTA button is clicked (required if CTA text is set).
+         */
+        buttonLink?: (string | null) | Page;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-info-design';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -3471,6 +3580,49 @@ export interface PagesSelect<T extends boolean = true> {
                     nameBN?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'plan-info-design'?:
+          | T
+          | {
+              backgroundColor?: T;
+              imageOrder?: T;
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              bgImageDesktop?: T;
+              bgImageDesktopOriginal?: T;
+              pendingBgImageDesktopOriginal?: T;
+              pendingBgImageDesktopCrop?: T;
+              bgImageDesktopBlurDataURL?: T;
+              bgImageMobile?: T;
+              bgImageMobileOriginal?: T;
+              pendingBgImageMobileOriginal?: T;
+              pendingBgImageMobileCrop?: T;
+              bgImageMobileBlurDataURL?: T;
+              featuresTitle?: T;
+              featuresTitleBN?: T;
+              featuresTitleHighlighted?: T;
+              featuresTitleHighlightedBN?: T;
+              features?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    id?: T;
+                  };
+              buttonText?: T;
+              buttonTextBN?: T;
+              buttonLink?: T;
               id?: T;
               blockName?: T;
             };

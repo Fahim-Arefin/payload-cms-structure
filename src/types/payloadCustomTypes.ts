@@ -27,6 +27,7 @@ import {
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
+  PLAN_INFO_DESIGN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
@@ -191,3 +192,8 @@ export type CorporateBlock = Extract<
 export type PlanBlock = Extract<AnyCard, { blockType: typeof PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG }> & {
   planCards: unknown[]
 }
+
+export type PlanInfoDesignBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PLAN_INFO_DESIGN_SLUG_AND_TAG }
+>

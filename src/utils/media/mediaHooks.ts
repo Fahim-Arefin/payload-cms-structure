@@ -21,6 +21,7 @@ import {
   HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
+  PLAN_INFO_DESIGN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
@@ -102,6 +103,11 @@ export const mediaHooks = withMediaLifecycle({
       blockType: EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
       // the hook already knows how to handle the *Original fields, so just list the primary names
       mediaFields: ['imageSquare', 'imageWide'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_SLUG_AND_TAG,
+      mediaFields: ['bgImageMobile', 'bgImageDesktop'],
     },
   ],
 
@@ -216,6 +222,13 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
       arrayKey: 'keyFeatures',
+      mediaFields: ['icon'],
+      itemLabelField: 'name',
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_SLUG_AND_TAG,
+      arrayKey: 'features',
       mediaFields: ['icon'],
       itemLabelField: 'name',
     },

@@ -5,8 +5,8 @@ import LifeAtShantaBlock from '@/blocks/lifeAtShanta/LifeAtShantaBlock'
 import LifeInsuranceSimplifiedBlock from '@/blocks/lifeInsuranceSimplified/LifeInsuranceSimplifiedBlock'
 import LifeInsuranceVideoBlock from '@/blocks/lifeInsuranceVideo/LifeInsuranceVideoBlock'
 import PremiumCalculatorBlock from '@/blocks/premiumCalculator/PremiumCalculatorBlock'
-import WhyChooseUsBlock from '@/blocks/whyChooseUs/WhyChooseUsBlock'
 import ShantaIntroBlock from '@/blocks/shantaIntro/ShantaIntroBlock'
+import WhyChooseUsBlock from '@/blocks/whyChooseUs/WhyChooseUsBlock'
 
 import {
   ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG,
@@ -36,30 +36,30 @@ import {
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
-  PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+  PLAN_INFO_DESIGN_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
-import ShantaVisionBlock from './shantaVision/ShantaVisionBlock'
-import ValuesThatShapeUsBlock from './valuesThatShapeUs/ValuesThatShapeUsBlock'
-import LicensedAndLaunchedBlock from './LicensedAndLaunched/LicensedAndLaunchedBlock'
-import DirectorMessageBlock from './directorsMessage/DirectorMessageBlock'
-import ShantaMilestoneUnlockedBlock from './shantaMilestoneUnlocked/ShantaMilestoneUnlockedBlock'
-import ShantaFootPrintBlock from './shantaFootprint/ShantaFootPrintBlock'
-import AgentVisionBlock from './agentVision/AgentVisionBlock'
-import AgentOnboardingOpportunityBlock from './agentOnboadringOpportunity/AgentOnboardingOpportunityBlock'
-import MoreThanAWorkplaceBlock from './moreThanAWorkplace/MoreThanAWorkplaceBlock'
+import AddonsInfoBlock from './AddonsInfoSchema/AddonsInfoBlock'
 import BoardOfDirectorsCardBlock from './BoardOfDirectorsCard/BoardOfDirectorsCardBlock'
 import BoardOfDirectorsListBlock from './BoardOfDirectorsList/BoardOfDirectorsListBlock'
-import LeadershipTeamCardBlock from './leadershipTeamCard/LeadershipTeamCardBlock'
-import LeadershipTeamListBlock from './leadershipTeamList/LeadershipTeamListBlock'
-import PlanCardBlock from './planCard/PlanCardBlock'
+import LicensedAndLaunchedBlock from './LicensedAndLaunched/LicensedAndLaunchedBlock'
+import AgentOnboardingOpportunityBlock from './agentOnboadringOpportunity/AgentOnboardingOpportunityBlock'
+import AgentVisionBlock from './agentVision/AgentVisionBlock'
 import ContactUsBlock from './contactUs/ContactUsBlock'
-import CorporateIntroBlock from './corporateIntro/CorporateIntroBlock'
 import CorporateInfoBlock from './corporateInfo/CorporateInfoBlock'
+import CorporateIntroBlock from './corporateIntro/CorporateIntroBlock'
 import CorporatePartnersBlock from './corporatePartners/CorporatePartnersBlock'
 import CustomCardSectionBlock from './customCardSection/CustomCardSectionBlock'
-import AddonsInfoBlock from './AddonsInfoSchema/AddonsInfoBlock'
+import DirectorMessageBlock from './directorsMessage/DirectorMessageBlock'
+import LeadershipTeamCardBlock from './leadershipTeamCard/LeadershipTeamCardBlock'
+import LeadershipTeamListBlock from './leadershipTeamList/LeadershipTeamListBlock'
+import MoreThanAWorkplaceBlock from './moreThanAWorkplace/MoreThanAWorkplaceBlock'
+import PlanInfoDesignBlock from './planInfoDesign/PlanInfoDesignBlock'
+import ShantaFootPrintBlock from './shantaFootprint/ShantaFootPrintBlock'
+import ShantaMilestoneUnlockedBlock from './shantaMilestoneUnlocked/ShantaMilestoneUnlockedBlock'
+import ShantaVisionBlock from './shantaVision/ShantaVisionBlock'
+import ValuesThatShapeUsBlock from './valuesThatShapeUs/ValuesThatShapeUsBlock'
 
 type Params = Record<string, string>
 
@@ -117,10 +117,6 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     case LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG:
       return <LeadershipTeamListBlock key={block.id} block={block} params={params} />
 
-    // plan
-    // case PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG:
-    //   return <PlanCardBlock key={block.id} block={block} params={params} />
-
     // contact us form
     case CONTACT_US_BLOCK_SLUG_AND_TAG:
       return <ContactUsBlock key={block.id} block={block} params={params} />
@@ -140,6 +136,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     // add on info
     case EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG:
       return <AddonsInfoBlock key={block.id} block={block} params={params} />
+
+    // plan info design
+    case PLAN_INFO_DESIGN_SLUG_AND_TAG:
+      return <PlanInfoDesignBlock key={block.id} block={block} params={params} />
 
     default:
       return null
