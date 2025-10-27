@@ -58,7 +58,7 @@ function WCTMSection({ data }: Props) {
         {/* info */}
         <div
           // gap-3 xl:gap-6
-          className={`order-2 lg:${data?.imageOrder === 'left' ? `order-1` : `order-2`} text-[#434343] 
+          className={`order-2 lg:${data?.imageOrder === 'left' ? `order-2 ` : `order-1 `} text-[#434343] 
           flex flex-col justify-center gap-3 xl:gap-6`}
         >
           {(data?.infoTitle || data?.infoTitleBN || data?.infoSubtitle || data?.infoSubtitleBN) && (
@@ -121,8 +121,8 @@ function WCTMSection({ data }: Props) {
         {/* image */}
         <div
           // h-auto lg:h-[230px] xl:h-[300px] 2xl:h-[330px]
-          className={`order-1 lg:${data?.imageOrder === 'left' ? `order-2` : `order-1`} relative w-full my-auto 
-          rounded-md lg:rounded-lg xl:rounded-xl border border-black
+          className={`order-1 lg:${data?.imageOrder === 'left' ? `order-1 ` : `order-2 `} relative w-full my-auto 
+          rounded-md lg:rounded-lg xl:rounded-xl 
           ${data?.imageVariant === 'wide' ? 'aspect-[16/9]' : 'aspect-[1/1]'} `}
         >
           {data?.imageVariant &&
