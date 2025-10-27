@@ -1,13 +1,13 @@
-import Image from 'next/image'
-import LocalizedText from '../LocalizedText'
-import { CustomCardSectionBlockType } from '@/types/payloadCustomTypes'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
 import { pageHref } from '@/lib/utils'
+import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import LocalizedText from '../LocalizedText'
+import { CorporateBlock } from '@/types/payloadCustomTypes'
 
 type Props = {
-  data: CustomCardSectionBlockType['card'][number]['cards'][number]
+  data: CorporateBlock['corporateCards'][number]
 }
 
 function CorporateCardItem({ data }: Props) {

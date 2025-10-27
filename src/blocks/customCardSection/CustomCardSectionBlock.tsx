@@ -1,9 +1,13 @@
 import LocalizedHighlighted from '@/components/custom/shared/LocalizedHighlighted'
 import LocalizedRichText from '@/components/custom/shared/LocalizedRichText'
-import { CORPORATE_PAGE_CARDS_SLUG_AND_TAG } from '@/lib/constants'
-import { CustomCardSectionBlockType } from '@/types/payloadCustomTypes'
+import {
+  CORPORATE_PAGE_CARDS_SLUG_AND_TAG,
+  PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+} from '@/lib/constants'
+import { CorporateBlock, CustomCardSectionBlockType, PlanBlock } from '@/types/payloadCustomTypes'
 import React from 'react'
 import CorporateCardBlock from './corporateCard/CorporateCardBlock'
+import PlanCardBlock from './planCard/PlanCardBlock'
 
 type Props = {
   block: CustomCardSectionBlockType
@@ -60,24 +64,31 @@ function CustomCardSectionBlock({ block }: Props) {
         const key = eachCard?.id ?? index
 
         switch (eachCard?.blockType) {
-          case CORPORATE_PAGE_CARDS_SLUG_AND_TAG:
+          case CORPORATE_PAGE_CARDS_SLUG_AND_TAG: {
+            const cardData = eachCard as CorporateBlock
             return (
               <div key={key}>
                 <CorporateCardBlock
                   block={block}
-                  data={eachCard}
+                  data={cardData}
                   displayAsCarousel={block?.displayAsCarousel}
                 />
               </div>
             )
-
+          }
           // add more cases as you introduce new card block types
-          // case SOME_OTHER_CARD_SLUG:
-          //   return (
-          //     <div key={key}>
-          //       <SomeOtherCardBlock data={eachCard} />
-          //     </div>
-          //   );
+          case PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG: {
+            const cardData = eachCard as PlanBlock
+            return (
+              <div key={key}>
+                <PlanCardBlock
+                  block={block}
+                  data={cardData}
+                  displayAsCarousel={block?.displayAsCarousel}
+                />
+              </div>
+            )
+          }
 
           default:
             return null // unknown block type -> render nothing

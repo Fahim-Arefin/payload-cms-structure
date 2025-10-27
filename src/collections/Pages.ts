@@ -255,8 +255,8 @@ export const Pages: CollectionConfig = {
         BoardOfDirectorsListSchema,
         // leadershipo page
         LeadershipTeamListSchema,
-        // plan page
-        PlanCardSchema,
+        // // plan page
+        // PlanCardSchema,
         // contact us block
         ContactUsSchema,
         // corporate page

@@ -1,17 +1,17 @@
 import { Button } from '@/components/ui/button'
-import { PlanCardBlockType } from '@/types/payloadCustomTypes'
+import { pageHref } from '@/lib/utils'
+import { PlanBlock } from '@/types/payloadCustomTypes'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import LocalizedText from '../LocalizedText'
-import { pageHref } from '@/lib/utils'
 
 type Props = {
-  data: PlanCardBlockType['cards'][number]
+  data: PlanBlock['planCards'][number]
   blur?: boolean
 }
 
-function AllPlanCard({ data, blur }: Props) {
+function AllPlanCard({ data, blur = true }: Props) {
   return (
     <div
       // h-[250px] md:h-[250px] lg:h-[250px] xl:h-[300px] 2xl:h-[360px]

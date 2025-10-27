@@ -177,3 +177,17 @@ export type AddonInfoBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG }
 >
+
+// cards
+type AnyCard = CustomCardSectionBlockType['card'][number]
+
+export type CorporateBlock = Extract<
+  AnyCard,
+  { blockType: typeof CORPORATE_PAGE_CARDS_SLUG_AND_TAG }
+> & {
+  corporateCards: unknown[]
+}
+
+export type PlanBlock = Extract<AnyCard, { blockType: typeof PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG }> & {
+  planCards: unknown[]
+}

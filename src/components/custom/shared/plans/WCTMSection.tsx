@@ -121,9 +121,9 @@ function WCTMSection({ data }: Props) {
         {/* image */}
         <div
           // h-auto lg:h-[230px] xl:h-[300px] 2xl:h-[330px]
-          className={`order-1 lg:${data?.imageOrder === 'left' ? `order-1 ` : `order-2 `} relative w-full my-auto 
+          className={`order-1 lg:${data?.imageOrder === 'left' ? `order-1 ` : `order-2 `} relative my-auto 
           rounded-md lg:rounded-lg xl:rounded-xl 
-          ${data?.imageVariant === 'wide' ? 'aspect-[16/9]' : 'aspect-[1/1]'} `}
+          ${data?.imageVariant === 'wide' ? 'w-full aspect-[16/9]' : 'w-[70%] mx-auto aspect-[1/1]'} `}
         >
           {data?.imageVariant &&
           data?.imageVariant === 'square' &&

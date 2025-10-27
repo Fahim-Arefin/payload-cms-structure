@@ -96,7 +96,18 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/componen
 import { sliderDelay } from '@/lib/data'
 import { CustomCardSectionBlockType } from '@/types/payloadCustomTypes'
 
-type ItemType = CustomCardSectionBlockType['card'][number]['cards'][number]
+// Infer the item type from either `corporateCards` or `planCards`
+type ItemOf<T> = T extends { corporateCards: infer A extends any[] }
+  ? A[number]
+  : T extends { planCards: infer B extends any[] }
+    ? B[number]
+    : never
+
+type Props<T extends CustomCardSectionBlockType['card'][number]> = {
+  block: CustomCardSectionBlockType
+  data: T
+  renderItem: (item: ItemOf<T>, index: number) => React.ReactNode
+}
 
 const toBasis = (n?: number) => {
   switch (n) {
@@ -113,13 +124,18 @@ const toBasis = (n?: number) => {
   }
 }
 
-type Props = {
-  block: CustomCardSectionBlockType
-  data: CustomCardSectionBlockType['card'][number]
-  renderItem: (item: ItemType, index: number) => React.ReactNode
-}
+// type Props = {
+//   block: CustomCardSectionBlockType
+//   data: CustomCardSectionBlockType['card'][number]
+//   renderItem: (item: ItemType, index: number) => React.ReactNode
+// }
 
-export default function CarouselDesign({ block, data, renderItem }: Props) {
+// export default function CarouselDesign({ block, data, renderItem }: Props) {
+export default function CarouselDesign<T extends CustomCardSectionBlockType['card'][number]>({
+  block,
+  data,
+  renderItem,
+}: Props<T>) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
@@ -129,6 +145,11 @@ export default function CarouselDesign({ block, data, renderItem }: Props) {
   const tabletBasis = toBasis(block?.tabletCardsPerView ?? 2)
   const laptopBasis = toBasis(block?.laptopCardsPerView ?? 3)
   const desktopBasis = toBasis(block?.desktopCardsPerView ?? 3)
+
+  // Safely pick the correct array from the union
+  const items = (
+    'corporateCards' in data ? data.corporateCards : 'planCards' in data ? data.planCards : []
+  ) as ItemOf<T>[]
 
   useEffect(() => {
     if (!carouselApi) return
@@ -166,7 +187,7 @@ export default function CarouselDesign({ block, data, renderItem }: Props) {
       }}
     >
       <CarouselContent className="-ml-4">
-        {data?.cards?.map((item, index) => (
+        {items?.map((item, index) => (
           <CarouselItem
             key={index}
             className={`pl-4 shrink-0 ${mobileBasis} md:${tabletBasis} lg:${laptopBasis} xl:${desktopBasis}`}

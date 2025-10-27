@@ -3,11 +3,17 @@
 import { CustomCardSectionBlockType } from '@/types/payloadCustomTypes'
 import React from 'react'
 
-type ItemType = CustomCardSectionBlockType['card'][number]['cards'][number]
-type Props = {
-  data: CustomCardSectionBlockType['card'][number]
+// Infer the item type from either `corporateCards` or `planCards`
+type ItemOf<T> = T extends { corporateCards: infer A extends any[] }
+  ? A[number]
+  : T extends { planCards: infer B extends any[] }
+    ? B[number]
+    : never
+
+type Props<T extends CustomCardSectionBlockType['card'][number]> = {
+  data: T
   block: CustomCardSectionBlockType
-  renderItem: (item: ItemType, index: number) => React.ReactNode
+  renderItem: (item: ItemOf<T>, index: number) => React.ReactNode
 }
 
 const toBasis = (n?: number) => {
@@ -25,22 +31,30 @@ const toBasis = (n?: number) => {
   }
 }
 
-function GridDesign({ data, block, renderItem }: Props) {
+export default function GridDesign<T extends CustomCardSectionBlockType['card'][number]>({
+  data,
+  block,
+  renderItem,
+}: Props<T>) {
   const mobileBasis = toBasis(block?.mobileCardsPerView ?? 1)
   const tabletBasis = toBasis(block?.tabletCardsPerView ?? 2)
   const laptopBasis = toBasis(block?.laptopCardsPerView ?? 3)
   const desktopBasis = toBasis(block?.desktopCardsPerView ?? 3)
+
+  // Safely pick the correct array from the union
+  const items = (
+    'corporateCards' in data ? data.corporateCards : 'planCards' in data ? data.planCards : []
+  ) as ItemOf<T>[]
+
   return (
     <div
       className={`${!block?.addHorizontalPadding && `container-padding-b px-5 md:px-12 lg:px-[64px]`} 
       grid ${mobileBasis} sm:${tabletBasis} lg:${laptopBasis} xl:${desktopBasis} 
       gap-4 md:gap-4 lg:gap-4 xl:gap-4`}
     >
-      {data?.cards?.map((item, index) => (
+      {items?.map((item, index) => (
         <div key={index}>{renderItem(item, index)}</div>
       ))}
     </div>
   )
 }
-
-export default GridDesign

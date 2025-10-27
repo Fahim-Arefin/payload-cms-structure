@@ -28,14 +28,14 @@
 
 'use client'
 
-import { CustomCardSectionBlockType } from '@/types/payloadCustomTypes'
+import { CorporateBlock, CustomCardSectionBlockType } from '@/types/payloadCustomTypes'
 import CarouselDesign from '../CarouselDesign'
 import GridDesign from '../GridDesign'
 import CorporateCardItem from '@/components/custom/shared/plans/CorporateCardItem'
 
 type Props = {
   block: CustomCardSectionBlockType
-  data: CustomCardSectionBlockType['card'][number]
+  data: CorporateBlock
   displayAsCarousel: CustomCardSectionBlockType['displayAsCarousel']
 }
 

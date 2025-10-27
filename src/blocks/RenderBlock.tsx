@@ -118,8 +118,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <LeadershipTeamListBlock key={block.id} block={block} params={params} />
 
     // plan
-    case PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG:
-      return <PlanCardBlock key={block.id} block={block} params={params} />
+    // case PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG:
+    //   return <PlanCardBlock key={block.id} block={block} params={params} />
 
     // contact us form
     case CONTACT_US_BLOCK_SLUG_AND_TAG:

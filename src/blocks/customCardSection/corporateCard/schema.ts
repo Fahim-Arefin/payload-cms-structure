@@ -90,7 +90,7 @@ const CorporateCardsSchema: Block = {
     //   },
     // },
     {
-      name: 'cards',
+      name: 'corporateCards',
       type: 'array',
       label: 'Cards',
       required: true,

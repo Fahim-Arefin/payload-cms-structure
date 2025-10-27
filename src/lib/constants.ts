@@ -189,10 +189,10 @@ export const AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_BLOCK_THUMBNAIL_URL = `
 // plan page
 //  --------------------------------------------------------------------------------------------------
 
-export const PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG = 'plan-card'
-export const PLAN_PAGE_PLAN_CARD_BLOCK_LABEL = 'Plan Card'
-export const PLAN_PAGE_PLAN_CARD_CACHE_KEY = 'plan-card-data'
-export const PLAN_PAGE_PLAN_CARD_BLOCK_THUMBNAIL_URL = `${folder}/plan-card-block-thumbnail.png`
+// export const PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG = 'plan-card'
+// export const PLAN_PAGE_PLAN_CARD_BLOCK_LABEL = 'Plan Card'
+// export const PLAN_PAGE_PLAN_CARD_CACHE_KEY = 'plan-card-data'
+// export const PLAN_PAGE_PLAN_CARD_BLOCK_THUMBNAIL_URL = `${folder}/plan-card-block-thumbnail.png`
 
 // contact us block
 // ------------------------------------------------------------------------------------------------------
@@ -242,6 +242,12 @@ export const CORPORATE_PAGE_CARDS_SLUG_AND_TAG = 'corporate-cards'
 export const CORPORATE_PAGE_CARDS_CACHE_KEY = 'corporate-cards-data'
 export const CORPORATE_PAGE_CARDS_BLOCK_LABEL = 'Corporate Cards'
 export const CORPORATE_PAGE_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/corporate-cards-block-thumbnail.png`
+
+// card 02 -> plan card
+export const PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG = 'plan-card'
+export const PLAN_PAGE_PLAN_CARD_BLOCK_LABEL = 'Plan Cards'
+export const PLAN_PAGE_PLAN_CARD_CACHE_KEY = 'plan-card-data'
+export const PLAN_PAGE_PLAN_CARD_BLOCK_THUMBNAIL_URL = `${folder}/plan-card-block-thumbnail.png`
 
 // corporate Add on info
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG = 'add-on-info'

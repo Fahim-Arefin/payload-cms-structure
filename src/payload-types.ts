@@ -1717,125 +1717,6 @@ export interface Page {
         blockType: 'leadership-team-list';
       }
     | {
-        /**
-         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Primary heading. Max 40 characters.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Optional. Must appear verbatim inside Title. Max 40 chars.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Supporting line. Max 40 characters.
-         */
-        subtitle?: string | null;
-        /**
-         * সহায়ক লাইন। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        subtitleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside Subtitle. Max 40 chars.
-         */
-        highlightedSubtitle?: string | null;
-        /**
-         * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedSubtitleBN?: string | null;
-        /**
-         * Up to ~200 characters.
-         */
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * সর্বোচ্চ ~২০০ অক্ষর।
-         */
-        descriptionBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * Add at least 1 card.
-         */
-        cards: {
-          /**
-           * Upload & crop a 13:12 image.
-           */
-          bgImage: string | Media;
-          bgImageOriginal?: (string | null) | Media;
-          pendingBgImageOriginal?: string | null;
-          pendingBgImageCrop?: string | null;
-          bgImageBlurDataURL?: string | null;
-          /**
-           * Max 40 characters.
-           */
-          title: string;
-          /**
-           * সর্বোচ্চ ৪০ অক্ষর।
-           */
-          titleBN: string;
-          /**
-           * Max 100 characters.
-           */
-          description: string;
-          /**
-           * সর্বোচ্চ ১০০ অক্ষর।
-           */
-          descriptionBN: string;
-          /**
-           * Optional. Max 24 characters.
-           */
-          buttonText?: string | null;
-          /**
-           * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
-           */
-          buttonTextBN?: string | null;
-          /**
-           * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
-           */
-          buttonLink?: (string | null) | Page;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'plan-card';
-      }
-    | {
         uploadSessionId?: string | null;
         /**
          * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
@@ -2237,59 +2118,108 @@ export interface Page {
         /**
          * Please add a card
          */
-        card: {
-          /**
-           * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
-           */
-          cards: {
-            /**
-             * Main background of the card. Recommended 16:9.
-             */
-            bgImage: string | Media;
-            bgImageOriginal?: (string | null) | Media;
-            pendingBgImageOriginal?: string | null;
-            pendingBgImageCrop?: string | null;
-            bgImageBlurDataURL?: string | null;
-            /**
-             * Square icon. Recommended 1:1.
-             */
-            icon: string | Media;
-            iconOriginal?: (string | null) | Media;
-            pendingIconOriginal?: string | null;
-            pendingIconCrop?: string | null;
-            iconBlurDataURL?: string | null;
-            /**
-             * Add short bullet/lines to describe the card. Each line must have EN & BN. Max 180 (১৮০) chars per field.
-             */
-            descriptions: {
+        card: (
+          | {
               /**
-               * One short line. Max 180 characters.
+               * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
                */
-              text: string;
-              /**
-               * একটি ছোট লাইন। সর্বোচ্চ ১৮০ অক্ষর।
-               */
-              textBN: string;
-              /**
-               * Optional. Max 24 characters.
-               */
-              buttonText?: string | null;
-              /**
-               * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
-               */
-              buttonTextBN?: string | null;
-              /**
-               * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
-               */
-              buttonLink?: (string | null) | Page;
+              corporateCards: {
+                /**
+                 * Main background of the card. Recommended 16:9.
+                 */
+                bgImage: string | Media;
+                bgImageOriginal?: (string | null) | Media;
+                pendingBgImageOriginal?: string | null;
+                pendingBgImageCrop?: string | null;
+                bgImageBlurDataURL?: string | null;
+                /**
+                 * Square icon. Recommended 1:1.
+                 */
+                icon: string | Media;
+                iconOriginal?: (string | null) | Media;
+                pendingIconOriginal?: string | null;
+                pendingIconCrop?: string | null;
+                iconBlurDataURL?: string | null;
+                /**
+                 * Add short bullet/lines to describe the card. Each line must have EN & BN. Max 180 (১৮০) chars per field.
+                 */
+                descriptions: {
+                  /**
+                   * One short line. Max 180 characters.
+                   */
+                  text: string;
+                  /**
+                   * একটি ছোট লাইন। সর্বোচ্চ ১৮০ অক্ষর।
+                   */
+                  textBN: string;
+                  /**
+                   * Optional. Max 24 characters.
+                   */
+                  buttonText?: string | null;
+                  /**
+                   * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+                   */
+                  buttonTextBN?: string | null;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                   */
+                  buttonLink?: (string | null) | Page;
+                  id?: string | null;
+                }[];
+                id?: string | null;
+              }[];
               id?: string | null;
-            }[];
-            id?: string | null;
-          }[];
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'corporate-cards';
-        }[];
+              blockName?: string | null;
+              blockType: 'corporate-cards';
+            }
+          | {
+              /**
+               * Add at least 1 card.
+               */
+              planCards: {
+                /**
+                 * Upload & crop a 13:12 image.
+                 */
+                bgImage: string | Media;
+                bgImageOriginal?: (string | null) | Media;
+                pendingBgImageOriginal?: string | null;
+                pendingBgImageCrop?: string | null;
+                bgImageBlurDataURL?: string | null;
+                /**
+                 * Max 40 characters.
+                 */
+                title: string;
+                /**
+                 * সর্বোচ্চ ৪০ অক্ষর।
+                 */
+                titleBN: string;
+                /**
+                 * Max 100 characters.
+                 */
+                description: string;
+                /**
+                 * সর্বোচ্চ ১০০ অক্ষর।
+                 */
+                descriptionBN: string;
+                /**
+                 * Optional. Max 24 characters.
+                 */
+                buttonText?: string | null;
+                /**
+                 * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+                 */
+                buttonTextBN?: string | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                 */
+                buttonLink?: (string | null) | Page;
+                id?: string | null;
+              }[];
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'plan-card';
+            }
+        )[];
         id?: string | null;
         blockName?: string | null;
         blockType: 'custom-card';
@@ -3279,40 +3209,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'plan-card'?:
-          | T
-          | {
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              highlightedSubtitle?: T;
-              highlightedSubtitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              cards?:
-                | T
-                | {
-                    bgImage?: T;
-                    bgImageOriginal?: T;
-                    pendingBgImageOriginal?: T;
-                    pendingBgImageCrop?: T;
-                    bgImageBlurDataURL?: T;
-                    title?: T;
-                    titleBN?: T;
-                    description?: T;
-                    descriptionBN?: T;
-                    buttonText?: T;
-                    buttonTextBN?: T;
-                    buttonLink?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
         'contact-us-form'?:
           | T
           | {
@@ -3471,7 +3367,7 @@ export interface PagesSelect<T extends boolean = true> {
                     'corporate-cards'?:
                       | T
                       | {
-                          cards?:
+                          corporateCards?:
                             | T
                             | {
                                 bgImage?: T;
@@ -3494,6 +3390,29 @@ export interface PagesSelect<T extends boolean = true> {
                                       buttonLink?: T;
                                       id?: T;
                                     };
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'plan-card'?:
+                      | T
+                      | {
+                          planCards?:
+                            | T
+                            | {
+                                bgImage?: T;
+                                bgImageOriginal?: T;
+                                pendingBgImageOriginal?: T;
+                                pendingBgImageCrop?: T;
+                                bgImageBlurDataURL?: T;
+                                title?: T;
+                                titleBN?: T;
+                                description?: T;
+                                descriptionBN?: T;
+                                buttonText?: T;
+                                buttonTextBN?: T;
+                                buttonLink?: T;
                                 id?: T;
                               };
                           id?: T;
