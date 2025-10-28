@@ -166,6 +166,7 @@ const MultiStagePlanSchema: Block = {
         },
       ],
     },
+
     {
       type: 'row',
       fields: [
@@ -190,9 +191,7 @@ const MultiStagePlanSchema: Block = {
       ],
     },
 
-    // ⬇️ NEW: 1:1 image (design target ~50×50px; higher-res OK)
-    // Uses your standard cropper helper with ownerCollection tagged to this block.
-    // ✅ fix
+    // Plan icon (1:1)
     ...generateImageFields({
       fieldName: 'planIcon',
       label: 'Plan Icon',
@@ -204,7 +203,25 @@ const MultiStagePlanSchema: Block = {
         'Square image (1:1). Design uses about 50×50 px; larger is fine—will be resized on the frontend.',
     } as any),
 
-    /* -------- Stage data (sum of values must equal 100) -------- */
+    // Chart side selector
+    {
+      name: 'chartSide',
+      type: 'select',
+      label: 'Chart Side (on desktop)',
+      required: true,
+      defaultValue: 'left',
+      options: [
+        { label: 'Left', value: 'left' },
+        { label: 'Right', value: 'right' },
+      ],
+      admin: {
+        description:
+          'Controls which side the pie chart appears on desktop (mobile is stacked automatically).',
+        width: '33%',
+      },
+    },
+
+    // Stage data
     {
       name: 'stageData',
       type: 'array',
@@ -258,7 +275,6 @@ const MultiStagePlanSchema: Block = {
           },
         },
       ],
-      // Validate the SUM == 100
       validate: (val: unknown) => {
         const arr = Array.isArray(val) ? val : []
         const sum = arr.reduce((acc, it: any) => acc + (Number(it?.value) || 0), 0)
@@ -268,7 +284,7 @@ const MultiStagePlanSchema: Block = {
       },
     },
 
-    /* -------- Plan timeline data -------- */
+    // Plan timeline
     {
       name: 'planData',
       type: 'array',
@@ -301,6 +317,7 @@ const MultiStagePlanSchema: Block = {
         },
       ],
     },
+
     // ===== Eligibility (drives your fixed FE cards) =====
     {
       name: 'eligibility',
@@ -362,6 +379,16 @@ const MultiStagePlanSchema: Block = {
                   defaultValue: 30,
                   validate: validateNumber('Minimum Value', { min: 0, max: 200, int: true }),
                 },
+                // ⬇️ NEW: Bangla display for minValue
+                {
+                  name: 'minValueBN',
+                  type: 'text',
+                  label: 'Minimum Value (BN)',
+                  defaultValue: '৩০',
+                  maxLength: SHORT_MAX,
+                  validate: validateShortText('Minimum Value (BN)', SHORT_MAX, true),
+                  admin: { description: 'বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।' },
+                },
                 {
                   name: 'minUnit',
                   type: 'text',
@@ -402,6 +429,16 @@ const MultiStagePlanSchema: Block = {
                   required: true,
                   defaultValue: 60,
                   validate: validateNumber('Maximum Value', { min: 0, max: 120, int: true }),
+                },
+                // ⬇️ NEW: Bangla display for maxValue
+                {
+                  name: 'maxValueBN',
+                  type: 'text',
+                  label: 'Maximum Value (BN)',
+                  defaultValue: '৬০',
+                  maxLength: SHORT_MAX,
+                  validate: validateShortText('Maximum Value (BN)', SHORT_MAX, true),
+                  admin: { description: 'বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।' },
                 },
                 {
                   name: 'maxUnit',
@@ -470,6 +507,16 @@ const MultiStagePlanSchema: Block = {
                   required: true,
                   defaultValue: 70,
                   validate: validateNumber('Upto Value', { min: 0, max: 120, int: true }),
+                },
+                // ⬇️ NEW: Bangla display for uptoValue
+                {
+                  name: 'uptoValueBN',
+                  type: 'text',
+                  label: 'Upto Value (BN)',
+                  defaultValue: '৭০',
+                  maxLength: SHORT_MAX,
+                  validate: validateShortText('Upto Value (BN)', SHORT_MAX, true),
+                  admin: { description: 'বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।' },
                 },
                 {
                   name: 'uptoUnit',

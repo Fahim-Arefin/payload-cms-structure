@@ -2198,6 +2198,10 @@ export interface Page {
          */
         planIconBlurDataURL?: string | null;
         /**
+         * Controls which side the pie chart appears on desktop (mobile is stacked automatically).
+         */
+        chartSide: 'left' | 'right';
+        /**
          * Define each stage and its percentage. The sum of all stage “value” fields must equal 100.
          */
         stageData?:
@@ -2234,11 +2238,19 @@ export interface Page {
             minLabel?: string | null;
             minLabelBN?: string | null;
             minValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            minValueBN?: string | null;
             minUnit?: string | null;
             minUnitBN?: string | null;
             maxLabel?: string | null;
             maxLabelBN?: string | null;
             maxValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            maxValueBN?: string | null;
             maxUnit?: string | null;
             maxUnitBN?: string | null;
           };
@@ -2248,6 +2260,10 @@ export interface Page {
             uptoLabel?: string | null;
             uptoLabelBN?: string | null;
             uptoValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            uptoValueBN?: string | null;
             uptoUnit?: string | null;
             uptoUnitBN?: string | null;
           };
@@ -3227,6 +3243,7 @@ export interface PagesSelect<T extends boolean = true> {
               pendingPlanIconOriginal?: T;
               pendingPlanIconCrop?: T;
               planIconBlurDataURL?: T;
+              chartSide?: T;
               stageData?:
                 | T
                 | {
@@ -3253,11 +3270,13 @@ export interface PagesSelect<T extends boolean = true> {
                           minLabel?: T;
                           minLabelBN?: T;
                           minValue?: T;
+                          minValueBN?: T;
                           minUnit?: T;
                           minUnitBN?: T;
                           maxLabel?: T;
                           maxLabelBN?: T;
                           maxValue?: T;
+                          maxValueBN?: T;
                           maxUnit?: T;
                           maxUnitBN?: T;
                         };
@@ -3269,6 +3288,7 @@ export interface PagesSelect<T extends boolean = true> {
                           uptoLabel?: T;
                           uptoLabelBN?: T;
                           uptoValue?: T;
+                          uptoValueBN?: T;
                           uptoUnit?: T;
                           uptoUnitBN?: T;
                         };

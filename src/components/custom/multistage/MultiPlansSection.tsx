@@ -23,9 +23,8 @@ const MultiPlansSection = ({ data, bgColor }: Props) => {
         </h3>
         <p className="global-p1 w-full lg:w-[70%] xl:w-[60%] 2xl:w-[50%]">
           <LocalizedText
-            en="Three life stages, three payouts, and one seamless plan- because your ambitions deserve a
-          strategy, not just a policy."
-            bn="তিনটি ধাপ, তিনটি কিস্তি, এক পরিকল্পনা— আপনার স্বপ্নপূরণের স্ট্র্যাটেজি"
+            en={data?.description || ''}
+            bn={data?.descriptionBN || ''}
           />
         </p>
       </div>
@@ -33,58 +32,73 @@ const MultiPlansSection = ({ data, bgColor }: Props) => {
       <div className="mt-6 lg:mt-10">
         <div className="flex flex-col gap-2 lg:gap-4 items-center md:items-start">
           <h4 className="global-h3 md:global-h4 uppercase font-normal md:font-semibold">
-            <LocalizedText en="Payout Milestones" bn="অর্থ প্রাপ্তির ধাপসমূহ" />
+            <LocalizedText
+              en={data?.mainTitle || 'Payout Milestones'}
+              bn={data?.mainTitleBN || 'অর্থ প্রাপ্তির ধাপসমূহ'}
+            />
           </h4>
           <div className="h-[1px] w-full bg-[#7D7D7D] mb-0 lg:mb-4" />
 
-          <div className="w-full flex justify-center gap-6 lg:gap-28 xl:gap-40 items-center h-[300px]">
-            <CirclePieChart data={data?.stageData} />
-            {/* Labels and Dotted Lines */}
-            <div className="flex items-start gap-2 space-y-8 text-sm text-black">
-              <div>
-                <img
-                  src="/assets/line.png"
-                  alt="line"
-                  className="h-[200px] md:h-[180px] mt-0 md:mt-1"
-                />
+          {/*
+      Grid + dynamic ordering:
+      - Mobile: stack (chart first).
+      - md+: 2 columns; if chartSide === 'right', chart goes right.
+    */}
+          {(() => {
+            const chartOnRight = (data as any)?.chartSide === 'right'
+            return (
+              <div className="w-full grid grid-cols-2 gap-4 md:gap-0 items-center justify-center">
+                {/* Chart column */}
+                <div
+                  className={`${chartOnRight ? 'md:order-2' : 'md:order-1'} flex items-center justify-center h-[300px]`}
+                >
+                  <CirclePieChart data={data?.stageData} />
+                </div>
+
+                {/* Labels + dotted line column */}
+                <div
+                  className={`order-2 ${chartOnRight ? 'md:order-1' : 'md:order-2'} flex justify-center`}
+                >
+                  {/* When chart is on RIGHT, put the dotted line AFTER the stage names by reversing the row */}
+                  <div
+                    className={`flex items-center gap-2 md:gap-4 ${chartOnRight ? 'md:flex-row-reverse' : 'flex-row'}`}
+                  >
+                    {/* Dotted line image */}
+                    <img
+                      src="/assets/line.png"
+                      alt="connector"
+                      className="h-[180px] select-none"
+                      draggable={false}
+                    />
+
+                    {/* Stage labels from schema (no static text) */}
+                    <div className="flex flex-col items-start gap-4 text-[10px] md:global-p2">
+                      {data?.stageData?.map((stg: any, i: number) => (
+                        <span key={i} className="line-clamp-2">
+                          <LocalizedText en={stg?.name} bn={stg?.nameBN} />
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col items-start gap-6 text-[10px] md:global-p2">
-                <span className="line-clamp-2">
-                  <LocalizedText
-                    en="25% of sum assured amount after 1/3 of the policy term"
-                    bn="১ম ধাপে: মেয়াদের ১/৩ পূর্তির পর বীমা অংকের ২৫% প্রদান"
-                  />
-                </span>
-                <span className="line-clamp-2">
-                  <LocalizedText
-                    en="25% of sum assured amount after 2/3 of the policy term"
-                    bn="২য় ধাপে: মেয়াদের ২/৩ পূর্তির পর বীমা অংকের ২৫% প্রদান"
-                  />
-                </span>
-                <span className="line-clamp-2">
-                  <LocalizedText
-                    en="Remaining 50% sum assured amount after end of policy term"
-                    bn="৩য় ধাপে বা চূড়ান্ত ধাপে : মেয়াদপূর্তিতে বীমা অংকের অবশিষ্ট ৫০% প্রদান"
-                  />
-                </span>
-              </div>
-            </div>
-          </div>
+            )
+          })()}
         </div>
       </div>
 
       {/* multistage timeline */}
       <div className="flex flex-col gap-2 lg:gap-4 items-center lg:items-start">
         <h4 className="global-h3 md:global-h4 uppercase font-normal md:font-semibold">
-          <LocalizedText en="POLICY TERMS" bn="বীমার মেয়াদ" />
+          <LocalizedText en={data?.secondaryTitle} bn={data?.secondaryTitleBN} />
         </h4>
         <div className="h-[1px] w-full bg-[#7D7D7D] mb-2 lg:mb-4" />
 
         <div className="w-full">
           {/* connecting dotted line image */}
 
-          <div className="flex w-fit mx-auto gap-4 md:gap-4 lg:gap-[60px] border-2 border-black relative">
-            <div className="absolute inset-0 hidden md:block top-[20px]  w-[88%] lg:w-fit md:left-[6%] lg:left-[4%]">
+          <div className="flex w-fit mx-auto gap-4 md:gap-4 lg:gap-[60px] relative">
+            <div className="absolute inset-0 hidden md:block top-[20px] w-[88%] lg:w-[90%] md:left-[6%] lg:left-[4%]">
               <img
                 src="/assets/lineStraight.svg"
                 alt="timeline connector"
@@ -118,7 +132,7 @@ const MultiPlansSection = ({ data, bgColor }: Props) => {
 
       {/* finishing touch */}
       <div>
-        <EligibilityPlans />
+        <EligibilityPlans data={data}/>
       </div>
     </div>
   )
