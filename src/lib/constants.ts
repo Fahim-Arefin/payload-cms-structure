@@ -222,3 +222,16 @@ export const CAREER_PAGE_PROCESSING_SLUG_AND_TAG = 'career-processing'
 export const CAREER_PAGE_PROCESSING_BLOCK_LABEL = 'Career Processing'
 export const CAREER_PAGE_PROCESSING_CACHE_KEY = 'career-processing-data'
 export const CAREER_PAGE_PROCESSING_BLOCK_THUMBNAIL_URL = `${folder}/career-page-processing-thumbnail.png`
+
+
+// multistage page
+//  --------------------------------------------------------------------------------------------------
+export const MULTI_STAGE_INTRO_SLUG_AND_TAG = 'multistage-intro'
+export const MULTI_STAGE_INTRO_BLOCK_LABEL = 'Multistage Intro'
+export const MULTI_STAGE_INTRO_CACHE_KEY = 'multistage-intro-data'
+export const MULTI_STAGE_INTRO_BLOCK_THUMBNAIL_URL = `${folder}/multistage-page-intro-thumbnail.png`
+
+export const MULTI_STAGE_PLAN_SLUG_AND_TAG = 'multistage-plan'
+export const MULTI_STAGE_PLAN_BLOCK_LABEL = 'Multistage Plan'
+export const MULTI_STAGE_PLAN_CACHE_KEY = 'multistage-plan-data'
+export const MULTI_STAGE_PLAN_BLOCK_THUMBNAIL_URL = `${folder}/multistage-page-plan-thumbnail.png`

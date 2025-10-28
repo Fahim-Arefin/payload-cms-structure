@@ -152,6 +152,8 @@ import LifeAtShantaSchema from '@/blocks/lifeAtShanta/schema'
 import LifeInsuranceSimplifiedSchema from '@/blocks/lifeInsuranceSimplified/schema'
 import LifeInsuranceVideoSchema from '@/blocks/lifeInsuranceVideo/schema'
 import MoreThanAWorkplaceSchema from '@/blocks/moreThanAWorkplace/schema'
+import MultiStagePlanSchema from '@/blocks/multiStagePlan/schema'
+import MultiStageIntroSchema from '@/blocks/multiStageTitle/schema'
 import PlanCardSchema from '@/blocks/planCard/schema'
 import PremiumCalculatorSchema from '@/blocks/premiumCalculator/schema'
 import ShantaFootprintSchema from '@/blocks/shantaFootprint/schema'
@@ -262,6 +264,9 @@ export const Pages: CollectionConfig = {
         CareerResourcesSchema,
         CareerOpeningSchema,
         CareerProcessingSchema,
+        //multistage page
+        MultiStageIntroSchema,
+        MultiStagePlanSchema
       ],
     },
   ],

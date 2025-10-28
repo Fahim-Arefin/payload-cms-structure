@@ -25,6 +25,8 @@ import {
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
+  MULTI_STAGE_INTRO_SLUG_AND_TAG,
+  MULTI_STAGE_PLAN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
@@ -168,4 +170,15 @@ export type CareerPageOpeningBlockType = Extract<
 export type CareerPageProcessingBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CAREER_PAGE_PROCESSING_SLUG_AND_TAG }
+>
+
+//multistage page
+export type MultistageIntroBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof MULTI_STAGE_INTRO_SLUG_AND_TAG }
+>
+
+export type MultistagePlanBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof MULTI_STAGE_PLAN_SLUG_AND_TAG }
 >

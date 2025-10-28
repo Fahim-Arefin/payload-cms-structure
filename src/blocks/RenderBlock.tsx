@@ -35,6 +35,8 @@ import {
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
+  MULTI_STAGE_INTRO_SLUG_AND_TAG,
+  MULTI_STAGE_PLAN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
 
@@ -58,6 +60,8 @@ import CareerSwiperBlock from './careerSwiper/CareerSwiperBlock'
 import CareerResourcesBlock from './careerResources/CareerResourcesBlock'
 import CareerOpeningBlock from './careerOpening/CareerOpeningBlock'
 import CareerProcessingBlock from './careerProcessingFlow/CareerProcessingBlock'
+import MultiStageTitleBlock from './multiStageTitle/MultiStageTitleBlock'
+import MultistagePlanBlock from './multiStagePlan/MultistagePlanBlock'
 
 type Params = Record<string, string>
 
@@ -130,6 +134,12 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CareerOpeningBlock key={block.id} block={block} params={params} />
     case CAREER_PAGE_PROCESSING_SLUG_AND_TAG:
       return <CareerProcessingBlock key={block.id} block={block} params={params} />
+
+    //multistage page
+    case MULTI_STAGE_INTRO_SLUG_AND_TAG:
+      return <MultiStageTitleBlock key={block.id} block={block} params={params} />
+    case MULTI_STAGE_PLAN_SLUG_AND_TAG:
+      return <MultistagePlanBlock key={block.id} block={block} params={params} />
 
     default:
       return null
