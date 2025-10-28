@@ -1,12 +1,11 @@
+import { getGlobalCached } from '@/lib/cachedGlobals'
 import { GLOBAL_FOOTER_SLUG_AND_TAG } from '@/lib/constants'
-import config from '@/payload.config'
+import { pageHref } from '@/lib/utils'
+import { GlobalFooter } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getPayload } from 'payload'
 import LocalizedHighlighted from './LocalizedHighlighted'
 import LocalizedText from './LocalizedText'
-import { getGlobalCached } from '@/lib/cachedGlobals'
-import { GlobalFooter } from '@/payload-types'
 
 async function FooterMobile() {
   const shurjoPayData = [
@@ -76,25 +75,30 @@ async function FooterMobile() {
   return (
     <>
       {footer && (
-        <div className="h-fit font-avenir bg-[#3A3A3C]">
+        <div className="h-fit font-avenir bg-[#3A3A3C] ">
           {/* logo */}
-          <div
-            className="relative h-[80px] md:h-[120px]
-       w-[80px] md:w-[120px] mx-auto"
-          >
-            {typeof footer?.branding?.logo === 'object' && footer?.branding?.logo?.url && (
-              <Image
-                fill
-                // src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/footer2.png`}
-                src={footer?.branding?.logo?.url}
-                alt="footer logo"
-                className="object-contain "
-                sizes="200px"
-              />
-            )}
+          <div className="w-full py-4">
+            <div
+              className="relative
+       w-[80px] md:w-[120px] mx-auto aspect-[1.48/1] "
+            >
+              {typeof footer?.branding?.logo === 'object' && footer?.branding?.logo?.url && (
+                <Image
+                  fill
+                  // src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/footer2.png`}
+                  src={footer?.branding?.logo?.url}
+                  alt="footer logo"
+                  className="object-contain object-center"
+                  sizes="200px"
+                  placeholder="blur"
+                  blurDataURL={footer?.branding?.logoBlurDataURL || ''}
+                  quality={80}
+                />
+              )}
+            </div>
           </div>
           {/* info section */}
-          <div className="space-y-2">
+          <div className="space-y-2 ">
             {/* email */}
             <div className="flex text-white/70 items-center space-x-2 w-[70%] md:w-[50%] mx-auto text-[10px] md:text-[12px] font-light">
               <div>
@@ -170,9 +174,9 @@ async function FooterMobile() {
                   <Link
                     key={index}
                     className="transition-all duration-300 hover:underline hover:underline-offset-4 hover:text-[#FF6600]"
-                    href={link?.url}
+                    href={pageHref(link?.buttonLink)}
                   >
-                    <LocalizedText en={link?.label} bn={link?.labelBN} />
+                    <LocalizedText en={link?.buttonText} bn={link?.buttonTextBN} />
                   </Link>
                 ))}
 
@@ -229,9 +233,9 @@ async function FooterMobile() {
                   <Link
                     key={index}
                     className="transition-all duration-300 hover:underline hover:underline-offset-4 hover:text-[#FF6600]"
-                    href={link?.url}
+                    href={pageHref(link?.buttonLink)}
                   >
-                    <LocalizedText en={link?.label} bn={link?.labelBN} />
+                    <LocalizedText en={link?.buttonText} bn={link?.buttonTextBN} />
                   </Link>
                 ))}
 

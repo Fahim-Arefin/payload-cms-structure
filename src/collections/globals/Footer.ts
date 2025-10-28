@@ -773,6 +773,9 @@ import { GLOBAL_FOOTER_SLUG_AND_TAG } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import { revalidateTag } from 'next/cache'
 import { globalTag } from '@/lib/cacheTags'
+import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
+import { triggerMediaTemporaryPurge } from '@/utils/media/triggerMediaTemporaryPurge'
+import { generateImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- max length constants ---------------- */
 const EMAIL_MAX = 120
@@ -783,6 +786,7 @@ const LABEL_MAX = 40
 const URL_MAX = 300
 const COPYRIGHT_MAX = 200
 const COPYRIGHT_HILITE_MAX = 120
+const CTA_TEXT_MAX = 24
 
 /* ---------------- validators ---------------- */
 const validateShortText =
@@ -918,6 +922,83 @@ const validateHighlightedInFieldBN =
     return true
   }
 
+// ✨ ADD
+
+const isNonEmpty = (v: unknown) => String(v ?? '').trim().length > 0
+
+const validateFooterCTAEnglishText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+  const hasThis = isNonEmpty(val)
+  if (hasAnyText && !hasThis)
+    return 'CTA Button Text (EN) is required when any CTA text is provided.'
+  if (hasThis && String(val).length > CTA_TEXT_MAX)
+    return `CTA Button Text must be at most ${CTA_TEXT_MAX} characters.`
+  return true
+}
+
+const validateFooterCTABanglaText = (val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+  const hasThis = isNonEmpty(val)
+  if (hasAnyText && !hasThis)
+    return 'CTA বাটনের (বাংলা) টেক্সট বাধ্যতামূলক, যখন CTA বাটনের যেকোনো টেক্সট দেওয়া হয়।'
+  if (hasThis && String(val).length > CTA_TEXT_MAX)
+    return `CTA বাটনের টেক্সট সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর হতে পারবে।`
+  return true
+}
+
+/**
+ * Footer CTA link rule:
+ * - If any CTA text exists → require EITHER `buttonLink` (relationship) OR `url` (text).
+ * - Keeps existing `url` semantics; we made `url` not required and enforce via this rule.
+ */
+const validateFooterCTALinkRequiredIfAnyText = (_val: unknown, { siblingData }: any) => {
+  const hasAnyText = isNonEmpty(siblingData?.buttonText) || isNonEmpty(siblingData?.buttonTextBN)
+
+  if (!hasAnyText) return true
+
+  // relationship present?
+  const link = siblingData?.buttonLink
+  let hasRel = false
+  if (Array.isArray(link)) hasRel = link.length > 0
+  else if (link && typeof link === 'object') hasRel = Object.keys(link).length > 0
+  else hasRel = Boolean(link)
+
+  const hasUrl = isNonEmpty(siblingData?.url)
+
+  if (!hasRel && !hasUrl) {
+    return 'CTA Button Link is required when CTA Button Text is provided (use internal page or URL).'
+  }
+  return true
+}
+
+// ✨ ADD: lifecycle for Footer (handles branding.logo as a group image via dot-path)
+const footerMediaHooks = withMediaLifecycle({
+  collectionSlug: GLOBAL_FOOTER_SLUG_AND_TAG,
+  imageConfigs: [
+    {
+      fieldName: 'branding.logo',
+      aspectRatio: 1.48,
+      quality: 0.92,
+      maxKB: 500,
+      required: true,
+      label: 'Footer Logo',
+      description: 'Primary footer logo. Recommended square.',
+    },
+  ],
+  onAfterChange: async ({ req }) => {
+    await triggerMediaTemporaryPurge(req)
+  },
+})
+
+// ✨ ADD: accept Global-style hook shape from withMediaLifecycle
+const pickGlobalHooks = (h: any) => ({
+  beforeValidate: h?.beforeValidate ?? [],
+  beforeChange: h?.beforeChange ?? [],
+  afterChange: h?.afterChange ?? [],
+})
+
+const footerBase = pickGlobalHooks(footerMediaHooks)
+
 /* ---------------- global ---------------- */
 const Footer: GlobalConfig = {
   slug: GLOBAL_FOOTER_SLUG_AND_TAG,
@@ -928,6 +1009,7 @@ const Footer: GlobalConfig = {
   },
 
   fields: [
+    { name: 'uploadSessionId', type: 'text', admin: { condition: () => false, readOnly: true } },
     /* 1) Branding & contact */
     {
       name: 'branding',
@@ -937,14 +1019,26 @@ const Footer: GlobalConfig = {
         description: 'Footer logo and basic contact details shown at the top of the footer.',
       },
       fields: [
-        {
-          name: 'logo',
+        // {
+        //   name: 'logo',
+        //   label: 'Footer Logo',
+        //   type: 'upload',
+        //   relationTo: 'media',
+        //   required: true,
+        //   admin: { description: 'Primary footer logo. Recommended square, ~50KB.' },
+        // },
+        // ✅ ADD this generated cropper set (drop-in replacement)
+        ...generateImageFields({
+          fieldName: 'logo',
           label: 'Footer Logo',
-          type: 'upload',
-          relationTo: 'media',
+          description: 'Primary footer logo. Recommended square.',
+          aspectRatio: 1.48, // 1.48 / 1
+          quality: 0.92,
+          maxKB: 500,
           required: true,
-          admin: { description: 'Primary footer logo. Recommended square, ~50KB.' },
-        },
+          ownerCollection: GLOBAL_FOOTER_SLUG_AND_TAG as any, // ok to pass; lifecycle also stamps via collectionSlug
+        } as any),
+
         {
           type: 'row',
           fields: [
@@ -1025,6 +1119,7 @@ const Footer: GlobalConfig = {
               label: 'ফোন নোট (বাংলা)',
               maxLength: PHONE_NOTE_MAX,
               validate: validateShortTextBN('ফোন নোট', PHONE_NOTE_MAX, false),
+              defaultValue: '(সকাল ১০টা-সন্ধ্যা ৬টা, রবিবার-বৃহস্পতিবার)',
               admin: {
                 width: '50%',
                 description: `ফোন নম্বরের নিচে দেখানো হবে (ঐচ্ছিক)। সর্বোচ্চ ${bnNum(PHONE_NOTE_MAX)} অক্ষর।`,
@@ -1056,6 +1151,8 @@ const Footer: GlobalConfig = {
               required: true,
               maxLength: ADDRESS_MAX,
               validate: validateShortTextBN('ঠিকানা', ADDRESS_MAX, true),
+              defaultValue:
+                'শান্তা ওয়েস্টার্ন টাওয়ার, লেভেল ১০, ১৮৬ বীর উত্তম মীর শওকত সড়ক, ঢাকা ১২০৮।',
               admin: {
                 width: '50%',
                 description: `বাংলায় ঠিকানা। সর্বোচ্চ ${bnNum(ADDRESS_MAX)} অক্ষর।`,
@@ -1121,46 +1218,46 @@ const Footer: GlobalConfig = {
           validate: validateMaxItems('Explore links', 9),
           labels: { singular: 'Explore Link', plural: 'Explore Links' },
           fields: [
+            // label rows
+            // ✨ CTA texts (EN/BN) — mirrors CorporateCards names & rules
             {
               type: 'row',
               fields: [
                 {
-                  name: 'label',
+                  name: 'buttonText',
                   type: 'text',
-                  required: true,
-                  label: 'Label',
-                  maxLength: LABEL_MAX,
-                  validate: validateShortText('Label', LABEL_MAX, true),
+                  label: 'CTA Button Text',
+                  maxLength: CTA_TEXT_MAX,
+                  validate: validateFooterCTAEnglishText,
                   admin: {
                     width: '50%',
-                    description: `Max ${LABEL_MAX} chars (${bnNum(LABEL_MAX)}).`,
+                    description: `Optional. Max ${CTA_TEXT_MAX} characters.`,
                   },
                 },
                 {
-                  name: 'labelBN',
+                  name: 'buttonTextBN',
                   type: 'text',
-                  required: true,
-                  label: 'লেবেল (বাংলা)',
-                  maxLength: LABEL_MAX,
-                  validate: validateShortTextBN('লেবেল', LABEL_MAX, true),
+                  label: 'CTA বাটনের টেক্সট (বাংলা)',
+                  maxLength: CTA_TEXT_MAX,
+                  validate: validateFooterCTABanglaText,
                   admin: {
                     width: '50%',
-                    description: `সর্বোচ্চ ${bnNum(LABEL_MAX)} অক্ষর।`,
+                    description: `ঐচ্ছিক। সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর।`,
                   },
                 },
               ],
             },
+
+            // ✨ CTA relationship link (internal page). Either this or URL must exist if CTA text present.
             {
-              name: 'url',
-              type: 'text',
-              required: true,
-              label: 'URL / Path',
-              maxLength: URL_MAX,
-              validate: validateNavUrl(URL_MAX, true),
+              name: 'buttonLink',
+              label: 'Link to (internal page)',
+              type: 'relationship',
+              relationTo: 'pages',
+              validate: validateFooterCTALinkRequiredIfAnyText,
               admin: {
-                description: `Starts with "/" or a full http(s) URL. Max ${URL_MAX} chars (${bnNum(
-                  URL_MAX,
-                )}).`,
+                description:
+                  'Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.',
               },
             },
           ],
@@ -1225,46 +1322,45 @@ const Footer: GlobalConfig = {
               'Links for the “Legal” column (e.g., Privacy Policy, Terms). Internal paths or http(s) URLs.',
           },
           fields: [
+            // ✨ CTA texts (EN/BN) — same naming as CorporateCards
             {
               type: 'row',
               fields: [
                 {
-                  name: 'label',
+                  name: 'buttonText',
                   type: 'text',
-                  required: true,
-                  label: 'Label',
-                  maxLength: LABEL_MAX,
-                  validate: validateShortText('Label', LABEL_MAX, true),
+                  label: 'CTA Button Text',
+                  maxLength: CTA_TEXT_MAX,
+                  validate: validateFooterCTAEnglishText,
                   admin: {
                     width: '50%',
-                    description: `Max ${LABEL_MAX} chars (${bnNum(LABEL_MAX)}).`,
+                    description: `Optional. Max ${CTA_TEXT_MAX} characters.`,
                   },
                 },
                 {
-                  name: 'labelBN',
+                  name: 'buttonTextBN',
                   type: 'text',
-                  required: true,
-                  label: 'লেবেল (বাংলা)',
-                  maxLength: LABEL_MAX,
-                  validate: validateShortTextBN('লেবেল', LABEL_MAX, true),
+                  label: 'CTA বাটনের টেক্সট (বাংলা)',
+                  maxLength: CTA_TEXT_MAX,
+                  validate: validateFooterCTABanglaText,
                   admin: {
                     width: '50%',
-                    description: `সর্বোচ্চ ${bnNum(LABEL_MAX)} অক্ষর।`,
+                    description: `ঐচ্ছিক। সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর।`,
                   },
                 },
               ],
             },
+
+            // ✨ CTA relationship link (internal)
             {
-              name: 'url',
-              type: 'text',
-              required: true,
-              label: 'URL / Path',
-              maxLength: URL_MAX,
-              validate: validateNavUrl(URL_MAX, true),
+              name: 'buttonLink',
+              label: 'Link to (internal page)',
+              type: 'relationship',
+              relationTo: 'pages',
+              validate: validateFooterCTALinkRequiredIfAnyText,
               admin: {
-                description: `Starts with "/" or a full http(s) URL. Max ${URL_MAX} chars (${bnNum(
-                  URL_MAX,
-                )}).`,
+                description:
+                  'Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.',
               },
             },
           ],
@@ -1391,6 +1487,7 @@ const Footer: GlobalConfig = {
           required: true,
           maxLength: COPYRIGHT_MAX,
           validate: validateShortTextBN('কপিরাইট', COPYRIGHT_MAX, true),
+          defaultValue: 'কপিরাইট © ২০২৫ শান্তা লাইফ ইনস্যুরেন্স পিএলসি। সর্বস্বত্ব সংরক্ষিত।',
           admin: {
             width: '50%',
             description: `বাংলা কপিরাইট টেক্সট। সর্বোচ্চ ${bnNum(COPYRIGHT_MAX)} অক্ষর।`,
@@ -1440,8 +1537,18 @@ const Footer: GlobalConfig = {
       ],
     },
   ],
+  // hooks: {
+  //   afterChange: [
+  //     async () => {
+  //       revalidateTag(globalTag(GLOBAL_FOOTER_SLUG_AND_TAG))
+  //     },
+  //   ],
+  // },
   hooks: {
+    beforeValidate: [...(footerBase.beforeValidate ?? [])],
+    beforeChange: [...(footerBase.beforeChange ?? [])],
     afterChange: [
+      ...(footerBase.afterChange ?? []),
       async () => {
         revalidateTag(globalTag(GLOBAL_FOOTER_SLUG_AND_TAG))
       },

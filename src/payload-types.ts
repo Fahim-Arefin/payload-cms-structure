@@ -4107,11 +4107,19 @@ export interface GlobalHeader {
  */
 export interface GlobalNavbar {
   id: string;
+  uploadSessionId?: string | null;
   branding: {
     /**
-     * Primary logo shown in the navbar. Recommended transparent PNG/SVG.
+     * Primary navbar logo. Transparent PNG/SVG preferred. Square-ish crop recommended.
      */
     logo: string | Media;
+    logoOriginal?: (string | null) | Media;
+    pendingLogoOriginal?: string | null;
+    pendingLogoCrop?: string | null;
+    /**
+     * Auto-generated Base64 blur
+     */
+    logoBlurDataURL?: string | null;
   };
   desktop?: {
     /**
@@ -4120,85 +4128,85 @@ export interface GlobalNavbar {
     items?:
       | {
           /**
-           * Max 40 chars (৪০).
+           * Optional. Max 100 characters.
            */
           label: string;
           /**
-           * সর্বোচ্চ ৪০ অক্ষর।
+           * ঐচ্ছিক। সর্বোচ্চ ১০০ অক্ষর।
            */
           labelBN: string;
           /**
-           * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+           * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
            */
-          href: string;
+          href: string | Page;
           /**
            * Optional submenu items. You can nest up to 5 levels.
            */
           children?:
             | {
                 /**
-                 * Max 40 chars (৪০).
+                 * Optional. Max 100 characters.
                  */
                 label: string;
                 /**
-                 * সর্বোচ্চ ৪০ অক্ষর।
+                 * ঐচ্ছিক। সর্বোচ্চ ১০০ অক্ষর।
                  */
                 labelBN: string;
                 /**
-                 * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                 * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                  */
-                href: string;
+                href: string | Page;
                 /**
                  * Optional submenu items. You can nest up to 5 levels.
                  */
                 children?:
                   | {
                       /**
-                       * Max 40 chars (৪০).
+                       * Optional. Max 100 characters.
                        */
                       label: string;
                       /**
-                       * সর্বোচ্চ ৪০ অক্ষর।
+                       * ঐচ্ছিক। সর্বোচ্চ ১০০ অক্ষর।
                        */
                       labelBN: string;
                       /**
-                       * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                       * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                        */
-                      href: string;
+                      href: string | Page;
                       /**
                        * Optional submenu items. You can nest up to 5 levels.
                        */
                       children?:
                         | {
                             /**
-                             * Max 40 chars (৪০).
+                             * Optional. Max 100 characters.
                              */
                             label: string;
                             /**
-                             * সর্বোচ্চ ৪০ অক্ষর।
+                             * ঐচ্ছিক। সর্বোচ্চ ১০০ অক্ষর।
                              */
                             labelBN: string;
                             /**
-                             * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                             * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                              */
-                            href: string;
+                            href: string | Page;
                             /**
                              * Optional submenu items. You can nest up to 5 levels.
                              */
                             children?:
                               | {
                                   /**
-                                   * Max 40 chars (৪০).
+                                   * Optional. Max 100 characters.
                                    */
                                   label: string;
                                   /**
-                                   * সর্বোচ্চ ৪০ অক্ষর।
+                                   * ঐচ্ছিক। সর্বোচ্চ ১০০ অক্ষর।
                                    */
                                   labelBN: string;
                                   /**
-                                   * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                                   * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                                    */
-                                  href: string;
+                                  href: string | Page;
                                   id?: string | null;
                                 }[]
                               | null;
@@ -4222,85 +4230,85 @@ export interface GlobalNavbar {
     items?:
       | {
           /**
-           * Max 40 chars (৪০).
+           * Optional. Max 100 characters.
            */
           label: string;
           /**
-           * সর্বোচ্চ ৪০ অক্ষর।
+           * ঐচ্ছিক। সর্বোচ্চ ১০০ অক্ষর।
            */
           labelBN: string;
           /**
-           * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+           * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
            */
-          href: string;
+          href: string | Page;
           /**
            * Optional submenu items. You can nest up to 5 levels.
            */
           children?:
             | {
                 /**
-                 * Max 40 chars (৪০).
+                 * Optional. Max 100 characters.
                  */
                 label: string;
                 /**
-                 * সর্বোচ্চ ৪০ অক্ষর।
+                 * ঐচ্ছিক। সর্বোচ্চ ১০০ অক্ষর।
                  */
                 labelBN: string;
                 /**
-                 * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                 * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                  */
-                href: string;
+                href: string | Page;
                 /**
                  * Optional submenu items. You can nest up to 5 levels.
                  */
                 children?:
                   | {
                       /**
-                       * Max 40 chars (৪০).
+                       * Optional. Max 100 characters.
                        */
                       label: string;
                       /**
-                       * সর্বোচ্চ ৪০ অক্ষর।
+                       * ঐচ্ছিক। সর্বোচ্চ ১০০ অক্ষর।
                        */
                       labelBN: string;
                       /**
-                       * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                       * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                        */
-                      href: string;
+                      href: string | Page;
                       /**
                        * Optional submenu items. You can nest up to 5 levels.
                        */
                       children?:
                         | {
                             /**
-                             * Max 40 chars (৪০).
+                             * Optional. Max 100 characters.
                              */
                             label: string;
                             /**
-                             * সর্বোচ্চ ৪০ অক্ষর।
+                             * ঐচ্ছিক। সর্বোচ্চ ১০০ অক্ষর।
                              */
                             labelBN: string;
                             /**
-                             * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                             * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                              */
-                            href: string;
+                            href: string | Page;
                             /**
                              * Optional submenu items. You can nest up to 5 levels.
                              */
                             children?:
                               | {
                                   /**
-                                   * Max 40 chars (৪০).
+                                   * Optional. Max 100 characters.
                                    */
                                   label: string;
                                   /**
-                                   * সর্বোচ্চ ৪০ অক্ষর।
+                                   * ঐচ্ছিক। সর্বোচ্চ ১০০ অক্ষর।
                                    */
                                   labelBN: string;
                                   /**
-                                   * Use "#", start with "/", or a full http(s) URL. Max 300 chars (৩০০).
+                                   * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                                    */
-                                  href: string;
+                                  href: string | Page;
                                   id?: string | null;
                                 }[]
                               | null;
@@ -4345,14 +4353,22 @@ export interface GlobalNavbar {
  */
 export interface GlobalFooter {
   id: string;
+  uploadSessionId?: string | null;
   /**
    * Footer logo and basic contact details shown at the top of the footer.
    */
   branding: {
     /**
-     * Primary footer logo. Recommended square, ~50KB.
+     * Primary footer logo. Recommended square.
      */
     logo: string | Media;
+    logoOriginal?: (string | null) | Media;
+    pendingLogoOriginal?: string | null;
+    pendingLogoCrop?: string | null;
+    /**
+     * Auto-generated Base64 blur
+     */
+    logoBlurDataURL?: string | null;
     email: string;
     /**
      * Public Google Maps link to your location. Must be an absolute http(s) URL.
@@ -4395,17 +4411,17 @@ export interface GlobalFooter {
     explore?:
       | {
           /**
-           * Max 40 chars (৪০).
+           * Optional. Max 24 characters.
            */
-          label: string;
+          buttonText?: string | null;
           /**
-           * সর্বোচ্চ ৪০ অক্ষর।
+           * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
            */
-          labelBN: string;
+          buttonTextBN?: string | null;
           /**
-           * Starts with "/" or a full http(s) URL. Max 300 chars (৩০০).
+           * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
            */
-          url: string;
+          buttonLink?: (string | null) | Page;
           id?: string | null;
         }[]
       | null;
@@ -4428,17 +4444,17 @@ export interface GlobalFooter {
     legal?:
       | {
           /**
-           * Max 40 chars (৪০).
+           * Optional. Max 24 characters.
            */
-          label: string;
+          buttonText?: string | null;
           /**
-           * সর্বোচ্চ ৪০ অক্ষর।
+           * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
            */
-          labelBN: string;
+          buttonTextBN?: string | null;
           /**
-           * Starts with "/" or a full http(s) URL. Max 300 chars (৩০০).
+           * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
            */
-          url: string;
+          buttonLink?: (string | null) | Page;
           id?: string | null;
         }[]
       | null;
@@ -4726,10 +4742,15 @@ export interface GlobalHeaderSelect<T extends boolean = true> {
  * via the `definition` "global-navbar_select".
  */
 export interface GlobalNavbarSelect<T extends boolean = true> {
+  uploadSessionId?: T;
   branding?:
     | T
     | {
         logo?: T;
+        logoOriginal?: T;
+        pendingLogoOriginal?: T;
+        pendingLogoCrop?: T;
+        logoBlurDataURL?: T;
       };
   desktop?:
     | T
@@ -4835,10 +4856,15 @@ export interface GlobalNavbarSelect<T extends boolean = true> {
  * via the `definition` "global-footer_select".
  */
 export interface GlobalFooterSelect<T extends boolean = true> {
+  uploadSessionId?: T;
   branding?:
     | T
     | {
         logo?: T;
+        logoOriginal?: T;
+        pendingLogoOriginal?: T;
+        pendingLogoCrop?: T;
+        logoBlurDataURL?: T;
         email?: T;
         mapUrl?: T;
         phone?: T;
@@ -4856,9 +4882,9 @@ export interface GlobalFooterSelect<T extends boolean = true> {
         explore?:
           | T
           | {
-              label?: T;
-              labelBN?: T;
-              url?: T;
+              buttonText?: T;
+              buttonTextBN?: T;
+              buttonLink?: T;
               id?: T;
             };
       };
@@ -4870,9 +4896,9 @@ export interface GlobalFooterSelect<T extends boolean = true> {
         legal?:
           | T
           | {
-              label?: T;
-              labelBN?: T;
-              url?: T;
+              buttonText?: T;
+              buttonTextBN?: T;
+              buttonLink?: T;
               id?: T;
             };
       };

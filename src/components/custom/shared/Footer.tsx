@@ -1,14 +1,11 @@
-import React from 'react'
-import Link from 'next/link'
-import ToolTip from './ToolTip'
-import Image from 'next/image'
-import LocalizedText from './LocalizedText'
-import { getPayload } from 'payload'
-import config from '@/payload.config'
-import { GLOBAL_FOOTER_SLUG_AND_TAG } from '@/lib/constants'
-import LocalizedHighlighted from './LocalizedHighlighted'
 import { getGlobalCached } from '@/lib/cachedGlobals'
+import { GLOBAL_FOOTER_SLUG_AND_TAG } from '@/lib/constants'
+import { pageHref } from '@/lib/utils'
 import { GlobalFooter } from '@/payload-types'
+import Image from 'next/image'
+import Link from 'next/link'
+import LocalizedHighlighted from './LocalizedHighlighted'
+import LocalizedText from './LocalizedText'
 
 async function Footer() {
   const shurjoPayData = [
@@ -103,17 +100,27 @@ async function Footer() {
        gap-x-2 text-white/70"
           >
             {/* grid 1  */}
-            <div className="flex flex-col space-y-3 p-2 col-span-3 lg:col-span-2 lg:-mt-3 xl:-mt-8">
+            {/* <div className="flex flex-col space-y-6 p-2 col-span-3 lg:col-span-2"> */}
+            <div className="flex flex-col space-y-6 p-2 lg:py-5 -mt-16 md:-mt-12 lg:mt-0 lg:col-span-2">
               {/* logo */}
-              <div className="relative h-[60px] md:h-[80px] md:w-[80px] lg:h-[100px] 2xl:h-[150px] w-[60px] lg:w-[100px] 2xl:w-[150px] mx-auto lg:mx-0">
+              {/* 1.48 / 1 */}
+              <div
+                // h-[60px] md:h-[80px] lg:h-[100px] 2xl:h-[150px]
+                className="relative
+               w-[60px] md:w-[80px] lg:w-[100px] 2xl:w-[150px] mx-auto lg:mx-0 
+               aspect-[1.48/1]"
+              >
                 {typeof footer?.branding?.logo === 'object' && footer?.branding?.logo?.url && (
                   <Image
                     // src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/footer2.png`}
                     src={footer?.branding?.logo?.url}
                     fill
                     alt="footer logo"
-                    className="object-contain "
+                    className="object-contain object-center"
                     sizes="200px"
+                    placeholder="blur"
+                    blurDataURL={footer?.branding?.logoBlurDataURL || ''}
+                    quality={80}
                   />
                 )}
               </div>
@@ -335,8 +342,8 @@ async function Footer() {
                         key={index}
                         className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100"
                       >
-                        <Link href={link?.url}>
-                          <LocalizedText en={link?.label} bn={link?.labelBN} />
+                        <Link href={pageHref(link?.buttonLink)}>
+                          <LocalizedText en={link?.buttonText} bn={link?.buttonTextBN} />
                         </Link>
                       </li>
                     ))}
@@ -391,8 +398,8 @@ async function Footer() {
                         key={index}
                         className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100"
                       >
-                        <Link href={link?.url}>
-                          <LocalizedText en={link?.label} bn={link?.labelBN} />
+                        <Link href={pageHref(link?.buttonLink)}>
+                          <LocalizedText en={link?.buttonText} bn={link?.buttonTextBN} />
                         </Link>
                       </li>
                     ))}
