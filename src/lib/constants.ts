@@ -258,11 +258,17 @@ export const OFFER_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/offer-card-block-thumb
 // corporate Add on info
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG = 'add-on-info'
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_CACHE_KEY = 'add-on-info-data'
-export const EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_LABEL = 'Add On Info'
+export const EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_LABEL = 'Plan Info Design 01'
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_THUMBNAIL_URL = `${folder}/add-on-info-block-thumbnail.png`
 
 // corporate plan info design
 export const PLAN_INFO_DESIGN_SLUG_AND_TAG = 'plan-info-design'
 export const PLAN_INFO_DESIGN_CACHE_KEY = 'plan-info-design-data'
-export const PLAN_INFO_DESIGN_BLOCK_LABEL = 'Plan Info Design 01'
+export const PLAN_INFO_DESIGN_BLOCK_LABEL = 'Plan Info Design 02'
 export const PLAN_INFO_DESIGN_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-block-thumbnail.png`
+
+// corporate plan info design
+export const PLAN_INFO_DESIGN_03_SLUG_AND_TAG = 'plan-info-design-03'
+export const PLAN_INFO_DESIGN_03_CACHE_KEY = 'plan-info-design-03-data'
+export const PLAN_INFO_DESIGN_03_BLOCK_LABEL = 'Plan Info Design 03'
+export const PLAN_INFO_DESIGN_03_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-03-block-thumbnail.png`

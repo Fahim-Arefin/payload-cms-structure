@@ -12,7 +12,6 @@ type Props = {
 }
 
 function OfferCardBlock({ block, data, displayAsCarousel }: Props) {
-  console.log(data)
   if (!displayAsCarousel)
     return (
       <GridDesign data={data} block={block} renderItem={(item) => <OfferCard2 data={item} />} />

@@ -21,6 +21,7 @@ import {
   HOME_PAGE_LIFE_INSURANCE_VIDEO_SLUG_AND_TAG,
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
+  PLAN_INFO_DESIGN_03_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -108,6 +109,11 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: PLAN_INFO_DESIGN_SLUG_AND_TAG,
       mediaFields: ['bgImageMobile', 'bgImageDesktop'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_03_SLUG_AND_TAG,
+      mediaFields: ['imageTall', 'imageWide'],
     },
   ],
 
@@ -204,6 +210,8 @@ export const mediaHooks = withMediaLifecycle({
       itemLabelField: 'title',
     },
     // ⬇️ ADD THIS to blockArrayFields
+    // -------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------
     {
       layoutKey: 'layout',
       blockType: CORPORATE_INFO_SLUG_AND_TAG, // the parent block row
@@ -211,6 +219,15 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['brochurePDF'], // the upload field on the BrochureButton block
       itemLabelField: 'label', // optional, helps alt naming
     },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_03_SLUG_AND_TAG, // the parent block row
+      arrayKey: 'resourceButtons', // the blocks[] inside CorporateInfo
+      mediaFields: ['brochurePDF'], // the upload field on the BrochureButton block
+      itemLabelField: 'label', // optional, helps alt naming
+    },
+    // -------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------
     {
       layoutKey: 'layout',
       blockType: CORPORATE_PARTNERS_SLUG_AND_TAG,
@@ -231,6 +248,12 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'features',
       mediaFields: ['icon'],
       itemLabelField: 'name',
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_03_SLUG_AND_TAG,
+      arrayKey: 'cardItems',
+      mediaFields: ['icon'],
     },
   ],
 

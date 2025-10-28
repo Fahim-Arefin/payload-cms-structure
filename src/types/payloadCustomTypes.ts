@@ -28,6 +28,7 @@ import {
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
   OFFER_CARDS_SLUG_AND_TAG,
+  PLAN_INFO_DESIGN_03_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -201,4 +202,8 @@ export type OfferBlock = Extract<AnyCard, { blockType: typeof OFFER_CARDS_SLUG_A
 export type PlanInfoDesignBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PLAN_INFO_DESIGN_SLUG_AND_TAG }
+>
+export type PlanInfoDesign03BlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PLAN_INFO_DESIGN_03_SLUG_AND_TAG }
 >

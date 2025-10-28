@@ -13,7 +13,7 @@ const CARDS_MIN = 1
 const CARDS_MAX = 12
 const CARD_TITLE_MAX = 40
 const CARD_SUBTITLE_MAX = 40
-const DESC_LINE_MAX = 180
+const DESC_LINE_MAX = 250
 const CTA_TEXT_MAX = 24
 
 // ---- validators ----

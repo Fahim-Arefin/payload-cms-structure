@@ -102,7 +102,6 @@ type Props = {
 }
 
 function EndowmentSection({ data, content, bgColor }: Props) {
-  console.log('content', content)
   return (
     <div
       className="container-padding"

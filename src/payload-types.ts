@@ -2265,11 +2265,11 @@ export interface Page {
                  */
                 subTitleBN?: string | null;
                 /**
-                 * One short line. Max 180 characters.
+                 * One short line. Max 250 characters.
                  */
                 text: string;
                 /**
-                 * একটি ছোট লাইন। সর্বোচ্চ ১৮০ অক্ষর।
+                 * একটি ছোট লাইন। সর্বোচ্চ ২৫০ অক্ষর।
                  */
                 textBN: string;
                 /**
@@ -2603,6 +2603,228 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'plan-info-design';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 80 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Subtitle. Max 80 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~600 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Tall image (630×700, aspect ≈ 0.9). Required.
+         */
+        imageTall: string | Media;
+        imageTallOriginal?: (string | null) | Media;
+        pendingImageTallOriginal?: string | null;
+        pendingImageTallCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageTallBlurDataURL?: string | null;
+        /**
+         * Wide image (500×370, aspect ≈ 1.351). Required.
+         */
+        imageWide: string | Media;
+        imageWideOriginal?: (string | null) | Media;
+        pendingImageWideOriginal?: string | null;
+        pendingImageWideCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageWideBlurDataURL?: string | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Which image to display on desktop layouts.
+         */
+        desktopImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Which image to display on mobile layouts.
+         */
+        mobileImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Max 60 characters.
+         */
+        cardTitle?: string | null;
+        /**
+         * সর্বোচ্চ ৬০ অক্ষর।
+         */
+        cardTitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Card Title. Max 80 characters.
+         */
+        cardTitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক। কার্ড শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        cardTitleHighlightedBN?: string | null;
+        /**
+         * Max 120 characters.
+         */
+        cardSubtitle?: string | null;
+        /**
+         * সর্বোচ্চ ১২০ অক্ষর।
+         */
+        cardSubtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Card Subtitle. Max 80 characters.
+         */
+        cardSubtitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক। কার্ড সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        cardSubtitleHighlightedBN?: string | null;
+        /**
+         * Choose whether individual card items should render with a border.
+         */
+        cardItemBorder?: ('border' | 'no-border') | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #9C8639).
+         */
+        cardItemBorderColor?: string | null;
+        /**
+         * Hex color with optional alpha: #RRGGBB or #RRGGBBAA (e.g., #FFFFFF or #FFFFFF80).
+         */
+        cardItemBorderBgColor?: string | null;
+        /**
+         * Each item has an icon (1:1) and a short description (EN/BN).
+         */
+        cardItems?:
+          | {
+              /**
+               * Square icon (1:1).
+               */
+              icon?: (string | null) | Media;
+              iconOriginal?: (string | null) | Media;
+              pendingIconOriginal?: string | null;
+              pendingIconCrop?: string | null;
+              iconBlurDataURL?: string | null;
+              /**
+               * Short line. Max 200 characters.
+               */
+              description?: string | null;
+              /**
+               * সংক্ষিপ্ত লাইন। সর্বোচ্চ ২০০ অক্ষর।
+               */
+              descriptionBN?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Add resource buttons that appear below the content (maximum 3 buttons)
+         */
+        resourceButtons?:
+          | (
+              | {
+                  /**
+                   * Upload/select the brochure PDF.
+                   */
+                  brochurePDF?: (string | null) | Media;
+                  /**
+                   * Max 60 characters.
+                   */
+                  label?: string | null;
+                  /**
+                   * সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  labelBN?: string | null;
+                  style?: ('primary' | 'secondary') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'brochure-button';
+                }
+              | {
+                  /**
+                   * Text shown on the call-to-action button. Max 60 characters.
+                   */
+                  buttonText: string;
+                  /**
+                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  buttonTextBN: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. When clicking the button it will navigate to this page.
+                   */
+                  buttonLink: string | Page;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'link-button';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-info-design-03';
       }
   )[];
   updatedAt: string;
@@ -3726,6 +3948,83 @@ export interface PagesSelect<T extends boolean = true> {
               buttonText?: T;
               buttonTextBN?: T;
               buttonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'plan-info-design-03'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              imageTall?: T;
+              imageTallOriginal?: T;
+              pendingImageTallOriginal?: T;
+              pendingImageTallCrop?: T;
+              imageTallBlurDataURL?: T;
+              imageWide?: T;
+              imageWideOriginal?: T;
+              pendingImageWideOriginal?: T;
+              pendingImageWideCrop?: T;
+              imageWideBlurDataURL?: T;
+              imageOrder?: T;
+              desktopImageChoice?: T;
+              mobileImageChoice?: T;
+              cardTitle?: T;
+              cardTitleBN?: T;
+              cardTitleHighlighted?: T;
+              cardTitleHighlightedBN?: T;
+              cardSubtitle?: T;
+              cardSubtitleBN?: T;
+              cardSubtitleHighlighted?: T;
+              cardSubtitleHighlightedBN?: T;
+              cardItemBorder?: T;
+              cardItemBorderColor?: T;
+              cardItemBorderBgColor?: T;
+              cardItems?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              resourceButtons?:
+                | T
+                | {
+                    'brochure-button'?:
+                      | T
+                      | {
+                          brochurePDF?: T;
+                          label?: T;
+                          labelBN?: T;
+                          style?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'link-button'?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          buttonTextBN?: T;
+                          buttonLink?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
               id?: T;
               blockName?: T;
             };
