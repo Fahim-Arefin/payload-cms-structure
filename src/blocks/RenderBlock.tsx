@@ -38,6 +38,7 @@ import {
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_03_SLUG_AND_TAG,
+  PLAN_INFO_DESIGN_04_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_SLUG_AND_TAG,
 } from '@/lib/constants'
 
@@ -64,6 +65,7 @@ import ShantaVisionBlock from './shantaVision/ShantaVisionBlock'
 import ValuesThatShapeUsBlock from './valuesThatShapeUs/ValuesThatShapeUsBlock'
 import PlanInfoDesign03Block from './planInfoDesign03/PlanInfoDesign03Block'
 import APPDBlock from './APPD/APPDBlock'
+import PlanInfoDesign04Block from './planInfoDesign04/PlanInfoDesign04Block'
 
 type Params = Record<string, string>
 
@@ -148,6 +150,9 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     // plan info design
     case PLAN_INFO_DESIGN_03_SLUG_AND_TAG:
       return <PlanInfoDesign03Block key={block.id} block={block} params={params} />
+    // plan info design
+    case PLAN_INFO_DESIGN_04_SLUG_AND_TAG:
+      return <PlanInfoDesign04Block key={block.id} block={block} params={params} />
 
     // APPD
     case APPD_BLOCK_SLUG_AND_TAG:

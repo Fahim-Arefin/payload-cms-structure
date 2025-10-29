@@ -14,6 +14,6 @@ type Props = {
 export default function LocalizedString({ en, bn }: Props) {
   const mounted = useMounted()
   const { language } = useLanguage()
-  const text = !mounted ? (en ?? bn ?? '') : language === 'en' ? (en ?? bn ?? '') : (bn ?? en ?? '')
+  const text = !mounted ? (en ?? bn ?? '') : language === 'en' ? (en ?? '') : (bn ?? '')
   return <Fragment>{text}</Fragment>
 }

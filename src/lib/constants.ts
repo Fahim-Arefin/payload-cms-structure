@@ -277,6 +277,12 @@ export const PLAN_INFO_DESIGN_03_CACHE_KEY = 'plan-info-design-03-data'
 export const PLAN_INFO_DESIGN_03_BLOCK_LABEL = 'Plan Info Design 03'
 export const PLAN_INFO_DESIGN_03_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-03-block-thumbnail.png`
 
+// corporate plan info design
+export const PLAN_INFO_DESIGN_04_SLUG_AND_TAG = 'plan-info-design-04'
+export const PLAN_INFO_DESIGN_04_CACHE_KEY = 'plan-info-design-04-data'
+export const PLAN_INFO_DESIGN_04_BLOCK_LABEL = 'Plan Info Design 04'
+export const PLAN_INFO_DESIGN_04_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-04-block-thumbnail.png`
+
 //
 export const APPD_BLOCK_SLUG_AND_TAG = 'accidental-permanent-partial-disability'
 export const APPD_BLOCK_SLUG_AND_TAG_CACHE_KEY = 'accidental-permanent-partial-disability-data'

@@ -156,6 +156,7 @@ import LifeInsuranceVideoSchema from '@/blocks/lifeInsuranceVideo/schema'
 import MoreThanAWorkplaceSchema from '@/blocks/moreThanAWorkplace/schema'
 import PlanInfoDesignSchema from '@/blocks/planInfoDesign/schema'
 import PlanInfoDesign03Schema from '@/blocks/planInfoDesign03/schema'
+import PlanInfoDesign04Schema from '@/blocks/planInfoDesign04/schema'
 import PremiumCalculatorSchema from '@/blocks/premiumCalculator/schema'
 import ShantaFootprintSchema from '@/blocks/shantaFootprint/schema'
 import ShantaIntroSchema from '@/blocks/shantaIntro/schema'
@@ -270,6 +271,7 @@ export const Pages: CollectionConfig = {
         AddonsInfoSchema,
         PlanInfoDesignSchema,
         PlanInfoDesign03Schema,
+        PlanInfoDesign04Schema,
         APPDSchema,
       ],
     },

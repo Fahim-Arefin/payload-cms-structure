@@ -2788,6 +2788,245 @@ export interface Page {
         blockType: 'plan-info-design-03';
       }
     | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 80 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Subtitle. Max 80 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~600 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Tall image (630×700, aspect ≈ 0.9). Required.
+         */
+        imageTall: string | Media;
+        imageTallOriginal?: (string | null) | Media;
+        pendingImageTallOriginal?: string | null;
+        pendingImageTallCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageTallBlurDataURL?: string | null;
+        /**
+         * Wide image (500×370, aspect ≈ 1.351). Required.
+         */
+        imageWide: string | Media;
+        imageWideOriginal?: (string | null) | Media;
+        pendingImageWideOriginal?: string | null;
+        pendingImageWideCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageWideBlurDataURL?: string | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Which image to display on desktop layouts.
+         */
+        desktopImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Which image to display on mobile layouts.
+         */
+        mobileImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Texts shown around the orange circle and in the center.
+         */
+        circleInfo?: {
+          /**
+           * e.g., “Minimum Coverage” (max 80).
+           */
+          centerTitle?: string | null;
+          /**
+           * যেমন: “ন্যূনতম কভারেজ” (সর্বোচ্চ ৮০).
+           */
+          centerTitleBN?: string | null;
+          /**
+           * e.g., “BDT 100,000” (max 120).
+           */
+          centerValue?: string | null;
+          /**
+           * যেমন: “বিডিটি ১,০০,০০০” (সর্বোচ্চ ১২০).
+           */
+          centerValueBN?: string | null;
+          /**
+           * e.g., “Age At Entry” (max 80).
+           */
+          topLeftLabel?: string | null;
+          /**
+           * যেমন: “ভর্তির বয়স” (সর্বোচ্চ ৮০).
+           */
+          topLeftLabelBN?: string | null;
+          /**
+           * e.g., “18 - 60 Years” (max 120).
+           */
+          topLeftValue?: string | null;
+          /**
+           * যেমন: “১৮ - ৬০ বছর” (সর্বোচ্চ ১২০).
+           */
+          topLeftValueBN?: string | null;
+          /**
+           * e.g., “Policy Term” (max 80).
+           */
+          topRightLabel?: string | null;
+          /**
+           * যেমন: “পলিসির মেয়াদ” (সর্বোচ্চ ৮০).
+           */
+          topRightLabelBN?: string | null;
+          /**
+           * e.g., “Same As Your Basic Plan” (max 120).
+           */
+          topRightValue?: string | null;
+          /**
+           * যেমন: “আপনার বেসিক প্ল্যানের সমান” (সর্বোচ্চ ১২০).
+           */
+          topRightValueBN?: string | null;
+          /**
+           * e.g., “Maximum Coverage” (max 80).
+           */
+          bottomLeftLabel?: string | null;
+          /**
+           * যেমন: “সর্বোচ্চ কভারেজ” (সর্বোচ্চ ৮০).
+           */
+          bottomLeftLabelBN?: string | null;
+          /**
+           * e.g., “BDT 5,000,000” (max 120).
+           */
+          bottomLefValue?: string | null;
+          /**
+           * যেমন: “বিডিটি ৫০,০০,০০০” (সর্বোচ্চ ১২০).
+           */
+          bottomLefValueBN?: string | null;
+          /**
+           * e.g., “Premium Rate” (max 80).
+           */
+          bottomRightLabel?: string | null;
+          /**
+           * যেমন: “প্রিমিয়াম হার” (সর্বোচ্চ ৮০).
+           */
+          bottomRightLabelBN?: string | null;
+          /**
+           * e.g., “Affordable Extensive Protection!” (max 120).
+           */
+          bottomRightValue?: string | null;
+          /**
+           * যেমন: “সাশ্রয়ী, বিস্তৃত সুরক্ষা!” (সর্বোচ্চ ১২০).
+           */
+          bottomRightValueBN?: string | null;
+        };
+        /**
+         * Add resource buttons that appear below the content (maximum 3 buttons)
+         */
+        resourceButtons?:
+          | (
+              | {
+                  /**
+                   * Upload/select the brochure PDF.
+                   */
+                  brochurePDF?: (string | null) | Media;
+                  /**
+                   * Max 60 characters.
+                   */
+                  label?: string | null;
+                  /**
+                   * সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  labelBN?: string | null;
+                  style?: ('primary' | 'secondary') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'brochure-button';
+                }
+              | {
+                  /**
+                   * Text shown on the call-to-action button. Max 60 characters.
+                   */
+                  buttonText: string;
+                  /**
+                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  buttonTextBN: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. When clicking the button it will navigate to this page.
+                   */
+                  buttonLink: string | Page;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'link-button';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-info-design-04';
+      }
+    | {
         /**
          * Hex color in #RRGGBB. Length 7 (৭).
          */
@@ -4013,6 +4252,84 @@ export interface PagesSelect<T extends boolean = true> {
                     description?: T;
                     descriptionBN?: T;
                     id?: T;
+                  };
+              resourceButtons?:
+                | T
+                | {
+                    'brochure-button'?:
+                      | T
+                      | {
+                          brochurePDF?: T;
+                          label?: T;
+                          labelBN?: T;
+                          style?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'link-button'?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          buttonTextBN?: T;
+                          buttonLink?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'plan-info-design-04'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              imageTall?: T;
+              imageTallOriginal?: T;
+              pendingImageTallOriginal?: T;
+              pendingImageTallCrop?: T;
+              imageTallBlurDataURL?: T;
+              imageWide?: T;
+              imageWideOriginal?: T;
+              pendingImageWideOriginal?: T;
+              pendingImageWideCrop?: T;
+              imageWideBlurDataURL?: T;
+              imageOrder?: T;
+              desktopImageChoice?: T;
+              mobileImageChoice?: T;
+              circleInfo?:
+                | T
+                | {
+                    centerTitle?: T;
+                    centerTitleBN?: T;
+                    centerValue?: T;
+                    centerValueBN?: T;
+                    topLeftLabel?: T;
+                    topLeftLabelBN?: T;
+                    topLeftValue?: T;
+                    topLeftValueBN?: T;
+                    topRightLabel?: T;
+                    topRightLabelBN?: T;
+                    topRightValue?: T;
+                    topRightValueBN?: T;
+                    bottomLeftLabel?: T;
+                    bottomLeftLabelBN?: T;
+                    bottomLefValue?: T;
+                    bottomLefValueBN?: T;
+                    bottomRightLabel?: T;
+                    bottomRightLabelBN?: T;
+                    bottomRightValue?: T;
+                    bottomRightValueBN?: T;
                   };
               resourceButtons?:
                 | T

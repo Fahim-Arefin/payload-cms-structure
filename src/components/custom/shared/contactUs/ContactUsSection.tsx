@@ -954,8 +954,13 @@ function ContactUsSection({ data, block }: Props) {
                   checked={agreeTerms}
                   onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
                 />
-                <span className="text-xs leading-relaxed">
-                  By clicking <span className="font-semibold">Send Message</span>, you agree to our{' '}
+                <span className="text-xs md:text-sm leading-relaxed">
+                  {/* By clicking <span className="font-semibold">Send Message</span>, you agree to our{' '} */}
+                  <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
+                  <span className="font-semibold">
+                    <LocalizedText en="Send Message" bn="আপনি আমাদের " />
+                  </span>
+                  <LocalizedText en=", you agree to our " bn="" />
                   <Link
                     // href="/terms-condition"
                     href={pageHref(data?.termsAndConditionButtonLink)}
@@ -963,9 +968,11 @@ function ContactUsSection({ data, block }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    terms and conditions
+                    {/* terms and conditions */}
+                    <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
                   </Link>{' '}
-                  and Shanta Life{' '}
+                  {/* and Shanta Life{' '} */}
+                  <LocalizedText en="and " bn=", ও " />
                   <Link
                     // href="/privacy-policy"
                     href={pageHref(data?.privacyPolicyButtonLink)}
@@ -973,9 +980,10 @@ function ContactUsSection({ data, block }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    privacy policy
+                    {/* privacy policy */}
+                    <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
                   </Link>
-                  .
+                  <LocalizedText en="." bn="সম্মত করছেন।" />
                 </span>
               </label>
             </div>
@@ -1169,8 +1177,13 @@ function ContactUsSection({ data, block }: Props) {
                         onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
                       />
                       <span className="text-xs leading-relaxed">
-                        By clicking <span className="font-semibold">Send Message</span>, you agree
-                        to our{' '}
+                        {/* By clicking <span className="font-semibold">Send Message</span>, you agree
+                        to our{' '} */}
+                        <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
+                        <span className="font-semibold">
+                          <LocalizedText en="Send Message" bn="আপনি আমাদের " />
+                        </span>
+                        <LocalizedText en=", you agree to our " bn="" />
                         <Link
                           // href="/terms-condition"
                           href={pageHref(data?.termsAndConditionButtonLink)}
@@ -1178,9 +1191,11 @@ function ContactUsSection({ data, block }: Props) {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          terms and conditions
+                          {/* terms and conditions */}
+                          <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
                         </Link>{' '}
-                        and{' '}
+                        {/* and{' '} */}
+                        <LocalizedText en="and " bn=", ও " />
                         <Link
                           // href="/privacy-policy"
                           href={pageHref(data?.privacyPolicyButtonLink)}
@@ -1188,9 +1203,10 @@ function ContactUsSection({ data, block }: Props) {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          privacy policy
+                          {/* privacy policy */}
+                          <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
                         </Link>
-                        .
+                        <LocalizedText en="." bn="সম্মত করছেন।" />
                       </span>
                     </label>
                   </div>
