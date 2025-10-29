@@ -235,3 +235,11 @@ export const MULTI_STAGE_PLAN_SLUG_AND_TAG = 'multistage-plan'
 export const MULTI_STAGE_PLAN_BLOCK_LABEL = 'Multistage Plan'
 export const MULTI_STAGE_PLAN_CACHE_KEY = 'multistage-plan-data'
 export const MULTI_STAGE_PLAN_BLOCK_THUMBNAIL_URL = `${folder}/multistage-page-plan-thumbnail.png`
+
+
+// terms and privacy page
+//  --------------------------------------------------------------------------------------------------
+export const CUSTOM_ACCORDION_SLUG_AND_TAG = 'custom-accordion'
+export const CUSTOM_ACCORDION_BLOCK_LABEL = 'Custom Accordion'
+export const CUSTOM_ACCORDION_CACHE_KEY = 'custom-accordion-data'
+export const CUSTOM_ACCORDION_BLOCK_THUMBNAIL_URL = `${folder}/custom-accordion-block-thumbnail.png`

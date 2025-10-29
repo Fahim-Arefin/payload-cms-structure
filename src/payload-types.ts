@@ -2272,6 +2272,65 @@ export interface Page {
         blockName?: string | null;
         blockType: 'multistage-plan';
       }
+    | {
+        /**
+         * Plain text. Maximum 800 words.
+         */
+        description?: string | null;
+        /**
+         * প্লেইন টেক্সট। সর্বোচ্চ ৮০০ শব্দ।
+         */
+        descriptionBN?: string | null;
+        /**
+         * Each item has EN/BN main titles and EN/BN rich-text “points”.
+         */
+        data?:
+          | {
+              mainTitle: string;
+              mainTitleBN?: string | null;
+              /**
+               * Add paragraphs / bullet points.
+               */
+              points: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              /**
+               * অনুচ্ছেদ / বুলেট পয়েন্ট যোগ করুন।
+               */
+              pointsBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'custom-accordion';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -3292,6 +3351,23 @@ export interface PagesSelect<T extends boolean = true> {
                           uptoUnit?: T;
                           uptoUnitBN?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'custom-accordion'?:
+          | T
+          | {
+              description?: T;
+              descriptionBN?: T;
+              data?:
+                | T
+                | {
+                    mainTitle?: T;
+                    mainTitleBN?: T;
+                    points?: T;
+                    pointsBN?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;

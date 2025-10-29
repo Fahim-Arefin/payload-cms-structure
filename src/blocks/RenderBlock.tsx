@@ -27,6 +27,7 @@ import {
   CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
   CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
   CAREER_PAGE_SWIPER_SLUG_AND_TAG,
+  CUSTOM_ACCORDION_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -62,6 +63,7 @@ import CareerOpeningBlock from './careerOpening/CareerOpeningBlock'
 import CareerProcessingBlock from './careerProcessingFlow/CareerProcessingBlock'
 import MultiStageTitleBlock from './multiStageTitle/MultiStageTitleBlock'
 import MultistagePlanBlock from './multiStagePlan/MultistagePlanBlock'
+import CustomAccordionBlock from './customAccordion/CustomAccordionBlock'
 
 type Params = Record<string, string>
 
@@ -140,6 +142,9 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <MultiStageTitleBlock key={block.id} block={block} params={params} />
     case MULTI_STAGE_PLAN_SLUG_AND_TAG:
       return <MultistagePlanBlock key={block.id} block={block} params={params} />
+    //terms & privacy page
+    case CUSTOM_ACCORDION_SLUG_AND_TAG:
+      return <CustomAccordionBlock key={block.id} block={block} params={params} />
 
     default:
       return null

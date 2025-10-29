@@ -143,6 +143,7 @@ import CareerOpeningSchema from '@/blocks/careerOpening/schema'
 import CareerProcessingSchema from '@/blocks/careerProcessingFlow/schema'
 import CareerResourcesSchema from '@/blocks/careerResources/schema'
 import CareerSwiperSchema from '@/blocks/careerSwiper/schema'
+import CustomAccordionSchema from '@/blocks/customAccordion/schema'
 import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
 import FeaturedPlansSchema from '@/blocks/featuredPlan/schema'
 import HeroSchema from '@/blocks/hero/schema'
@@ -266,7 +267,8 @@ export const Pages: CollectionConfig = {
         CareerProcessingSchema,
         //multistage page
         MultiStageIntroSchema,
-        MultiStagePlanSchema
+        MultiStagePlanSchema,
+        CustomAccordionSchema
       ],
     },
   ],

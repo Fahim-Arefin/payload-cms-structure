@@ -17,6 +17,7 @@ import {
   CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
   CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
   CAREER_PAGE_SWIPER_SLUG_AND_TAG,
+  CUSTOM_ACCORDION_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -181,4 +182,10 @@ export type MultistageIntroBlockType = Extract<
 export type MultistagePlanBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof MULTI_STAGE_PLAN_SLUG_AND_TAG }
+>
+
+// terms and privacy page
+export type CustomAccordionBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CUSTOM_ACCORDION_SLUG_AND_TAG }
 >
