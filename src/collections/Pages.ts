@@ -133,6 +133,7 @@
 // ================================================================================================
 
 // version 02 (added media cleanup hooks)
+import APPDSchema from '@/blocks/APPD/schema'
 import AddonsInfoSchema from '@/blocks/AddonsInfoSchema/schema'
 import BoardOfDirectorsCardSchema from '@/blocks/BoardOfDirectorsCard/schema'
 import BoardOfDirectorsListSchema from '@/blocks/BoardOfDirectorsList/schema'
@@ -269,6 +270,7 @@ export const Pages: CollectionConfig = {
         AddonsInfoSchema,
         PlanInfoDesignSchema,
         PlanInfoDesign03Schema,
+        APPDSchema,
       ],
     },
   ],

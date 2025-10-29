@@ -2787,6 +2787,81 @@ export interface Page {
         blockName?: string | null;
         blockType: 'plan-info-design-03';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB. Length 7 (৭).
+         */
+        backgroundColor: string;
+        /**
+         * Used in the page URL hash (e.g., #ptd-schedule) and as the <section id="…"> value.
+         */
+        sectionId: string;
+        /**
+         * First line of section heading. Max 80 chars.
+         */
+        titleLine1: string;
+        /**
+         * শিরোনামের প্রথম লাইন। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleLine1BN: string;
+        /**
+         * Second line of section heading (accent color). Max 80 chars.
+         */
+        titleLine2: string;
+        /**
+         * শিরোনামের দ্বিতীয় লাইন (অ্যাকসেন্ট রঙ)। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleLine2BN: string;
+        /**
+         * Left column header. Max 60 chars.
+         */
+        lossHeader: string;
+        /**
+         * বাম কলামের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+         */
+        lossHeaderBN: string;
+        /**
+         * Right column header. Max 60 chars.
+         */
+        benefitsHeader: string;
+        /**
+         * ডান কলামের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+         */
+        benefitsHeaderBN: string;
+        /**
+         * Small line under Benefits header. Max 100 chars.
+         */
+        benefitsSubHeader: string;
+        /**
+         * সুবিধা হেডারের নিচের ছোট লাইন। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        benefitsSubHeaderBN: string;
+        /**
+         * Each row contains the “Loss of …” text and the “Benefit” value/label. Min 1, Max 50.
+         */
+        rows: {
+          /**
+           * Loss description. Max 120 chars.
+           */
+          lossEN: string;
+          /**
+           * ক্ষতির বিবরণ। সর্বোচ্চ ১২০ অক্ষর।
+           */
+          lossBN: string;
+          /**
+           * e.g., "100%" or "50%". Max 20 chars.
+           */
+          benefitEN: string;
+          /**
+           * যেমন, "১০০%" বা "৫০%". সর্বোচ্চ ২০ অক্ষর।
+           */
+          benefitBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'accidental-permanent-partial-disability';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -3961,6 +4036,33 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'accidental-permanent-partial-disability'?:
+          | T
+          | {
+              backgroundColor?: T;
+              sectionId?: T;
+              titleLine1?: T;
+              titleLine1BN?: T;
+              titleLine2?: T;
+              titleLine2BN?: T;
+              lossHeader?: T;
+              lossHeaderBN?: T;
+              benefitsHeader?: T;
+              benefitsHeaderBN?: T;
+              benefitsSubHeader?: T;
+              benefitsSubHeaderBN?: T;
+              rows?:
+                | T
+                | {
+                    lossEN?: T;
+                    lossBN?: T;
+                    benefitEN?: T;
+                    benefitBN?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;

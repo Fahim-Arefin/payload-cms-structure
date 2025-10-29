@@ -11,6 +11,7 @@ import {
   AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
+  APPD_BLOCK_SLUG_AND_TAG,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
   CONTACT_US_BLOCK_SLUG_AND_TAG,
   CORPORATE_INFO_SLUG_AND_TAG,
@@ -206,4 +207,9 @@ export type PlanInfoDesignBlockType = Extract<
 export type PlanInfoDesign03BlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PLAN_INFO_DESIGN_03_SLUG_AND_TAG }
+>
+
+export type APPDBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof APPD_BLOCK_SLUG_AND_TAG }
 >

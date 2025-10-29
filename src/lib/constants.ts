@@ -276,3 +276,9 @@ export const PLAN_INFO_DESIGN_03_SLUG_AND_TAG = 'plan-info-design-03'
 export const PLAN_INFO_DESIGN_03_CACHE_KEY = 'plan-info-design-03-data'
 export const PLAN_INFO_DESIGN_03_BLOCK_LABEL = 'Plan Info Design 03'
 export const PLAN_INFO_DESIGN_03_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-03-block-thumbnail.png`
+
+//
+export const APPD_BLOCK_SLUG_AND_TAG = 'accidental-permanent-partial-disability'
+export const APPD_BLOCK_SLUG_AND_TAG_CACHE_KEY = 'accidental-permanent-partial-disability-data'
+export const APPD_BLOCK_LABEL = 'Accidental Permanent Partial DisabilitySection'
+export const APPD_BLOCK_THUMBNAIL_URL = `${folder}/accidental-permanent-partial-disability-block-thumbnail.png`

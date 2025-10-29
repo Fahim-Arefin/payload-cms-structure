@@ -21,6 +21,7 @@ import {
   AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
+  APPD_BLOCK_SLUG_AND_TAG,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
   CONTACT_US_BLOCK_SLUG_AND_TAG,
   CORPORATE_INFO_SLUG_AND_TAG,
@@ -62,6 +63,7 @@ import ShantaMilestoneUnlockedBlock from './shantaMilestoneUnlocked/ShantaMilest
 import ShantaVisionBlock from './shantaVision/ShantaVisionBlock'
 import ValuesThatShapeUsBlock from './valuesThatShapeUs/ValuesThatShapeUsBlock'
 import PlanInfoDesign03Block from './planInfoDesign03/PlanInfoDesign03Block'
+import APPDBlock from './APPD/APPDBlock'
 
 type Params = Record<string, string>
 
@@ -146,6 +148,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     // plan info design
     case PLAN_INFO_DESIGN_03_SLUG_AND_TAG:
       return <PlanInfoDesign03Block key={block.id} block={block} params={params} />
+
+    // APPD
+    case APPD_BLOCK_SLUG_AND_TAG:
+      return <APPDBlock key={block.id} block={block} params={params} />
 
     default:
       return null
