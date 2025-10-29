@@ -110,16 +110,16 @@ async function Footer() {
                w-[60px] md:w-[80px] lg:w-[100px] 2xl:w-[150px] mx-auto lg:mx-0 
                aspect-[1.48/1]"
               >
-                {typeof footer?.branding?.logo === 'object' && footer?.branding?.logo?.url && (
+                {typeof footer?.logo === 'object' && footer?.logo?.url && (
                   <Image
                     // src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/footer2.png`}
-                    src={footer?.branding?.logo?.url}
+                    src={footer?.logo?.url}
                     fill
                     alt="footer logo"
                     className="object-contain object-center"
                     sizes="200px"
                     placeholder="blur"
-                    blurDataURL={footer?.branding?.logoBlurDataURL || ''}
+                    blurDataURL={footer?.logoBlurDataURL || ''}
                     quality={80}
                   />
                 )}

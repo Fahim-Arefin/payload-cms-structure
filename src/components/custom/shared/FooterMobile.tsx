@@ -82,16 +82,16 @@ async function FooterMobile() {
               className="relative
        w-[80px] md:w-[120px] mx-auto aspect-[1.48/1] "
             >
-              {typeof footer?.branding?.logo === 'object' && footer?.branding?.logo?.url && (
+              {typeof footer?.logo === 'object' && footer?.logo?.url && (
                 <Image
                   fill
                   // src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/footer2.png`}
-                  src={footer?.branding?.logo?.url}
+                  src={footer?.logo?.url}
                   alt="footer logo"
                   className="object-contain object-center"
                   sizes="200px"
                   placeholder="blur"
-                  blurDataURL={footer?.branding?.logoBlurDataURL || ''}
+                  blurDataURL={footer?.logoBlurDataURL || ''}
                   quality={80}
                 />
               )}

@@ -378,8 +378,8 @@ const validateNavUrl =
     }
     return 'Link must be "#", start with "/" or be a valid http(s) URL.'
   }
-// helper: require at least one of internal relationship or URL/path
 
+// helper: require at least one of internal relationship or URL/path
 const isNonEmpty = (v: unknown) => String(v ?? '').trim().length > 0
 
 const validateFooterCTAEnglishText = (val: unknown, { siblingData }: any) => {
@@ -424,48 +424,23 @@ const validateFooterCTALinkRequiredIfAnyText = (_val: unknown, { siblingData }: 
 
 /* -----------------------------------------------------------------------------
    MEDIA LIFECYCLE WIRING
-   This extends your existing lifecycle coverage to include GROUP fields.
-
-   Covered shapes now:
-   - simple image fields (plain top-level)
-   - array image fields
-   - arrays of arrays (nested lists)
-   - [NEW] group simple image  → branding.logo
-   - [NEW] group array image   → ready if you ever add group arrays with images
-   - [NEW] group arrays of arrays → ready if you add nested image arrays inside groups
-
-   Nothing in your previous logic is overridden; we only add the mapping below.
 ----------------------------------------------------------------------------- */
 
-// [NEW] Extend withMediaLifecycle to understand the `branding.logo` group image.
-// NOTE: If you later add more group-based images (e.g., `someGroup.gallery[].image`,
-// or nested arrays inside groups), just add descriptors under `groupFields`.
-
 // ✅ Configure lifecycle for the Navbar global
+// CHANGED: track top-level "logo" (not "branding.logo")
 const mediaHooks = withMediaLifecycle({
   collectionSlug: GLOBAL_NAVBAR_SLUG_AND_TAG, // stamps ownerCollection during finalize
-
-  // process the branding.logo cropper inside the "branding" group
   imageConfigs: [
     {
-      fieldName: 'branding.logo', // dot-path supported by the updated lifecycle
+      fieldName: 'logo', // <— moved out of branding group
       aspectRatio: 1.48, // 1.48 / 1
       quality: 0.92,
       maxKB: 500,
       required: true,
       label: 'Navbar Logo',
       description: 'Primary navbar logo. Transparent PNG/SVG preferred.',
-      // ❌ no ownerCollection here — let collectionSlug handle it
     },
   ],
-
-  // Optional: if you also have non-image uploads, list them here (supports dot-path).
-  // otherUploadFields: ['branding.pdfBrochure'],
-
-  // If you have arrays or block mappings, keep using the same APIs you already use:
-  // arrayFields, groupFields, blockSimpleFields, blockArrayFields, blockGroupFields
-
-  // Trigger the temp-cleanup like your BoardOfDirectors config
   onAfterChange: async ({ req }) => {
     await triggerMediaTemporaryPurge(req)
   },
@@ -481,82 +456,6 @@ const pickGlobalHooks = (h: any) => ({
 const base = pickGlobalHooks(mediaHooks)
 
 /* ------------------------------- nav item fields ------------------------------ */
-/**
- * Depth-limited recursive fields for menu items.
- * - levelLabel: used in labels/help text (e.g., "Item", "Child")
- * - depth/maxDepth: prevents infinite recursion (default 3 levels)
- */
-// const navItemFields = (
-//   levelLabel: string = 'Item',
-//   depth: number = 0,
-//   maxDepth: number = 4,
-// ): Field[] => {
-//   // base fields (label/en + labelBN + href)
-//   const base: Field[] = [
-//     {
-//       type: 'row',
-//       fields: [
-//         {
-//           name: 'label',
-//           type: 'text',
-//           label: `${levelLabel} Label`,
-//           required: true,
-//           maxLength: LABEL_MAX,
-//           validate: validateShortText(`${levelLabel} Label`, LABEL_MAX, true),
-//           admin: {
-//             width: '50%',
-//             description: `Max ${LABEL_MAX} chars (${bnNum(LABEL_MAX)}).`,
-//           },
-//         },
-//         {
-//           name: 'labelBN',
-//           type: 'text',
-//           label: `${levelLabel} লেবেল (বাংলা)`,
-//           required: true,
-//           maxLength: LABEL_MAX,
-//           validate: validateShortTextBN(`${levelLabel} লেবেল`, LABEL_MAX, true),
-//           admin: {
-//             width: '50%',
-//             description: `সর্বোচ্চ ${bnNum(LABEL_MAX)} অক্ষর।`,
-//           },
-//         },
-//       ],
-//     },
-//     {
-//       name: 'href',
-//       type: 'text',
-//       label: 'URL / Path',
-//       required: true,
-//       maxLength: URL_MAX,
-//       validate: validateNavUrl(URL_MAX, true),
-//       admin: {
-//         description: `Use "#", start with "/", or a full http(s) URL. Max ${URL_MAX} chars (${bnNum(
-//           URL_MAX,
-//         )}).`,
-//       },
-//     },
-//   ]
-
-//   // add children only if we’re below max depth
-//   if (depth < maxDepth) {
-//     base.push({
-//       name: 'children',
-//       type: 'array',
-//       label: 'Children',
-//       minRows: 0,
-//       maxRows: 20,
-//       labels: { singular: 'Child', plural: 'Children' },
-//       admin: {
-//         description: `Optional submenu items. You can nest up to ${maxDepth + 1} levels.`,
-//       },
-//       fields: navItemFields('Child', depth + 1, maxDepth),
-//     })
-//   }
-
-//   return base
-// }
-
-// helper: require at least one of internal relationship or URL/path
 
 const navItemFields = (
   levelLabel: string = 'Item',
@@ -602,7 +501,6 @@ const navItemFields = (
       relationTo: 'pages',
       // validate: validateFooterCTALinkRequiredIfAnyText,
       required: true,
-
       admin: {
         description:
           'Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.',
@@ -639,26 +537,19 @@ const Navbar: GlobalConfig = {
   },
   fields: [
     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false, readOnly: true } },
-    /* Branding (logo) */
-    // ⬇️ keep your cropper-based logo inside a GROUP. Lifecycle now tracks it via groupFields mapping.
-    {
-      name: 'branding',
-      type: 'group',
-      label: 'Branding',
-      fields: [
-        ...generateImageFields({
-          fieldName: 'logo',
-          label: 'Navbar Logo',
-          description:
-            'Primary navbar logo. Transparent PNG/SVG preferred. Square-ish crop recommended.',
-          aspectRatio: 1.48 / 1, // keep exactly as you set; lifecycle just follows the generated field bundle
-          quality: 0.92,
-          maxKB: 500,
-          required: true,
-          ownerCollection: GLOBAL_NAVBAR_SLUG_AND_TAG as any,
-        } as any),
-      ],
-    },
+
+    // NEW: Top-level logo (not inside "branding")
+    ...generateImageFields({
+      fieldName: 'logo',
+      label: 'Navbar Logo',
+      description:
+        'Primary navbar logo. Transparent PNG/SVG preferred. Square-ish crop recommended.',
+      aspectRatio: 1.48 / 1,
+      quality: 0.92,
+      maxKB: 500,
+      required: true,
+      ownerCollection: GLOBAL_NAVBAR_SLUG_AND_TAG as any,
+    } as any),
 
     /* Desktop navigation */
     {
@@ -766,8 +657,6 @@ const Navbar: GlobalConfig = {
       async () => {
         // Keep your cache revalidation
         revalidateTag(globalTag(GLOBAL_NAVBAR_SLUG_AND_TAG))
-        // If your lifecycle helper exposes purge, it’s already chained internally.
-        // Otherwise, you can call: await triggerMediaTemporaryPurge(req) inside the helper.
       },
     ],
   },

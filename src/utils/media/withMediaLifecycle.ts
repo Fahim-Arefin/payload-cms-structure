@@ -785,6 +785,8 @@
 // This file now relies on createBeforeChangeHook + imageConfigs to do all image processing.
 // We still ADD support for groupSimpleFields and groupNestedArrayFields in deletion/finalization paths.
 // withMediaLifecycle.ts
+
+// src/utils/media/withMediaLifecycle.ts
 import type { CollectionConfig } from 'payload'
 import { createBeforeChangeHook } from './createBeforeChangeHook'
 import { deleteRemovedMedia } from './deleteRemovedMedia'
@@ -858,7 +860,7 @@ export type WithMediaLifecycleOpts = {
   collectionSlug?: string
 }
 
-/* ---------------- helpers ---------------- */
+/* ───────────────── helpers ───────────────── */
 
 const relID = (v: any): string | null => {
   if (!v) return null
@@ -888,14 +890,60 @@ function eachBlockRow(
   }
 }
 
-// NEW: safe getter by dot path (supports "a.b.c")
+// ── dot-path safe getters/setters ──
 function getByPath(obj: any, path: string): any {
   if (!obj) return undefined
   if (!path.includes('.')) return obj?.[path]
   return path.split('.').reduce((acc, key) => (acc ? acc[key] : undefined), obj)
 }
+function setByPath(obj: any, path: string, value: any) {
+  const parts = path.split('.')
+  const last = parts.pop()!
+  let cur = obj
+  for (const k of parts) {
+    if (!cur[k] || typeof cur[k] !== 'object') cur[k] = {}
+    cur = cur[k]
+  }
+  cur[last] = value
+}
 
-// NEW: we only need to READ values by path in this file; stamping uses payload.update directly
+// ── flatten/unflatten adapter for dot paths ──
+//
+// We temporarily mirror nested values onto flat keys (e.g. data['a.b'])
+// so older hooks that access data[fieldName] keep working.
+// After the hook runs, we push values back into the nested structure.
+//
+function flattenDotFields(data: any, fieldNames: string[]) {
+  for (const name of fieldNames) {
+    if (!name.includes('.')) continue
+    const val = getByPath(data, name)
+    if (typeof val !== 'undefined') {
+      data[name] = val // create a temporary flat key
+    }
+    // also mirror the "...Original" companion
+    const origPath = `${name}Original`
+    const origVal = getByPath(data, origPath)
+    if (typeof origVal !== 'undefined') {
+      data[origPath] = origVal
+    }
+  }
+}
+
+function unflattenDotFields(data: any, fieldNames: string[]) {
+  for (const name of fieldNames) {
+    if (!name.includes('.')) continue
+    // write back base and Original if the flat keys exist
+    if (Object.prototype.hasOwnProperty.call(data, name)) {
+      setByPath(data, name, data[name])
+      delete data[name]
+    }
+    const origPath = `${name}Original`
+    if (Object.prototype.hasOwnProperty.call(data, origPath)) {
+      setByPath(data, origPath, data[origPath])
+      delete data[origPath]
+    }
+  }
+}
 
 /** We want (id, derivedFromSlug, ownerField) pairs of all *current* references in the saved doc */
 function collectIDsWithSource(
@@ -909,12 +957,10 @@ function collectIDsWithSource(
 ): Array<{ id: string; derivedFrom?: string; ownerField?: string }> {
   const out: Array<{ id: string; derivedFrom?: string; ownerField?: string }> = []
 
-  // NEW: accept dot-paths in simpleFields and look up both field and fieldOriginal by path
   const addPairByPath = (root: any, path: string, derivedFrom?: string) => {
     const val = getByPath(root, path)
     const id = relID(val)
     if (id) out.push({ id: String(id), derivedFrom, ownerField: path })
-
     const origPath = `${path}Original`
     const oVal = getByPath(root, origPath)
     const oid = relID(oVal)
@@ -922,9 +968,7 @@ function collectIDsWithSource(
   }
 
   // 1) top-level (or dot-path) simple fields (no block; we won't set derivedFrom here)
-  for (const f of simpleFields) {
-    addPairByPath(doc, f, undefined)
-  }
+  for (const f of simpleFields) addPairByPath(doc, f, undefined)
 
   // 2) one-level arrays (no block; leave derivedFrom empty)
   for (const a of arrayFields) {
@@ -1046,7 +1090,7 @@ async function finalizeReferencedMedia(opts: {
   }
 }
 
-/* ---------------- main ---------------- */
+/* ───────────────── main ───────────────── */
 
 export function withMediaLifecycle(opts: WithMediaLifecycleOpts): CollectionConfig['hooks'] {
   const {
@@ -1088,9 +1132,31 @@ export function withMediaLifecycle(opts: WithMediaLifecycleOpts): CollectionConf
     return data
   }
 
+  // ✨ NEW: dot-path adapter (the key to stop duplicate pairs)
+  const dotPathPreAdapter = ({ data }: any) => {
+    // mirror nested -> flat so existing hook logic can read data[fieldName]
+    flattenDotFields(data, simpleMediaNames)
+    return data
+  }
+  const dotPathPostAdapter = ({ data }: any) => {
+    // write flat values back into nested paths and clean up
+    unflattenDotFields(data, simpleMediaNames)
+    return data
+  }
+
   return {
     beforeValidate: [stashSessionIdPreHook],
-    beforeChange: [stashSessionIdPreHook, beforeChangeCreator],
+    // Order matters:
+    // 1) stash session id (unchanged)
+    // 2) ✨ lift nested fields to flat keys
+    // 3) run your existing beforeChange hook untouched
+    // 4) ✨ push values back into nested structure
+    beforeChange: [
+      stashSessionIdPreHook,
+      dotPathPreAdapter,
+      beforeChangeCreator,
+      dotPathPostAdapter,
+    ],
     afterChange: [
       async ({ req, doc, previousDoc }) => {
         // delete removed relations (including originals)

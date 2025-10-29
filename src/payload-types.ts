@@ -4108,19 +4108,17 @@ export interface GlobalHeader {
 export interface GlobalNavbar {
   id: string;
   uploadSessionId?: string | null;
-  branding: {
-    /**
-     * Primary navbar logo. Transparent PNG/SVG preferred. Square-ish crop recommended.
-     */
-    logo: string | Media;
-    logoOriginal?: (string | null) | Media;
-    pendingLogoOriginal?: string | null;
-    pendingLogoCrop?: string | null;
-    /**
-     * Auto-generated Base64 blur
-     */
-    logoBlurDataURL?: string | null;
-  };
+  /**
+   * Primary navbar logo. Transparent PNG/SVG preferred. Square-ish crop recommended.
+   */
+  logo: string | Media;
+  logoOriginal?: (string | null) | Media;
+  pendingLogoOriginal?: string | null;
+  pendingLogoCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  logoBlurDataURL?: string | null;
   desktop?: {
     /**
      * Top-level nav items for desktop. Each item can optionally have nested children.
@@ -4355,20 +4353,20 @@ export interface GlobalFooter {
   id: string;
   uploadSessionId?: string | null;
   /**
-   * Footer logo and basic contact details shown at the top of the footer.
+   * Primary footer logo. Recommended square.
+   */
+  logo: string | Media;
+  logoOriginal?: (string | null) | Media;
+  pendingLogoOriginal?: string | null;
+  pendingLogoCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  logoBlurDataURL?: string | null;
+  /**
+   * Contact details shown at the top of the footer.
    */
   branding: {
-    /**
-     * Primary footer logo. Recommended square.
-     */
-    logo: string | Media;
-    logoOriginal?: (string | null) | Media;
-    pendingLogoOriginal?: string | null;
-    pendingLogoCrop?: string | null;
-    /**
-     * Auto-generated Base64 blur
-     */
-    logoBlurDataURL?: string | null;
     email: string;
     /**
      * Public Google Maps link to your location. Must be an absolute http(s) URL.
@@ -4743,15 +4741,11 @@ export interface GlobalHeaderSelect<T extends boolean = true> {
  */
 export interface GlobalNavbarSelect<T extends boolean = true> {
   uploadSessionId?: T;
-  branding?:
-    | T
-    | {
-        logo?: T;
-        logoOriginal?: T;
-        pendingLogoOriginal?: T;
-        pendingLogoCrop?: T;
-        logoBlurDataURL?: T;
-      };
+  logo?: T;
+  logoOriginal?: T;
+  pendingLogoOriginal?: T;
+  pendingLogoCrop?: T;
+  logoBlurDataURL?: T;
   desktop?:
     | T
     | {
@@ -4857,14 +4851,14 @@ export interface GlobalNavbarSelect<T extends boolean = true> {
  */
 export interface GlobalFooterSelect<T extends boolean = true> {
   uploadSessionId?: T;
+  logo?: T;
+  logoOriginal?: T;
+  pendingLogoOriginal?: T;
+  pendingLogoCrop?: T;
+  logoBlurDataURL?: T;
   branding?:
     | T
     | {
-        logo?: T;
-        logoOriginal?: T;
-        pendingLogoOriginal?: T;
-        pendingLogoCrop?: T;
-        logoBlurDataURL?: T;
         email?: T;
         mapUrl?: T;
         phone?: T;

@@ -174,30 +174,76 @@ function toSafeMedia(m: any): SafeMedia {
 }
 
 // ✨ changed: resolve Payload relationship (pages) → usable href string
+// function resolveHref(rel: any): string {
+//   // Accepts: populated doc (object with slug), string id, array, or empty
+//   if (!rel) return '#'
+//   // array relationships (not expected here, but guard anyway)
+//   if (Array.isArray(rel)) {
+//     const first = rel[0]
+//     if (!first) return '#'
+//     return resolveHref(first)
+//   }
+//   // populated doc
+//   if (typeof rel === 'object') {
+//     const slug: string | undefined =
+//       rel?.slug ??
+//       // sometimes depth could nest it deeper if you customize — be defensive
+//       rel?.value?.slug
+//     if (slug && typeof slug === 'string') {
+//       // keep nested slugs like "plans/corporate" intact
+//       return slug.startsWith('/') ? slug : `/${slug}`
+//     }
+//     // fall back: some editors leave empty object {}
+//     return '#'
+//   }
+//   // id string only – no doc loaded, can’t build a stable path
+//   if (typeof rel === 'string') return '#'
+//   return '#'
+// }
+
+// Add this helper above resolveHref (or inline it if you prefer)
+function toPathFromSlug(raw: string): string {
+  // normalize: trim leading/trailing slashes
+  const s = (raw || '').replace(/^\/+|\/+$/g, '')
+  // treat "", "index", or "home" as site root
+  if (s === '' || s === 'index' || s === 'home') return '/'
+  return `/${s}`
+}
+
+// ✨ updated: resolve Payload relationship (pages) → usable href string
 function resolveHref(rel: any): string {
   // Accepts: populated doc (object with slug), string id, array, or empty
   if (!rel) return '#'
-  // array relationships (not expected here, but guard anyway)
+
+  // array relationships (guard)
   if (Array.isArray(rel)) {
     const first = rel[0]
     if (!first) return '#'
     return resolveHref(first)
   }
+
   // populated doc
   if (typeof rel === 'object') {
     const slug: string | undefined =
       rel?.slug ??
-      // sometimes depth could nest it deeper if you customize — be defensive
+      // sometimes depth could nest it deeper
       rel?.value?.slug
-    if (slug && typeof slug === 'string') {
-      // keep nested slugs like "plans/corporate" intact
-      return slug.startsWith('/') ? slug : `/${slug}`
+
+    if (typeof slug === 'string') {
+      return toPathFromSlug(slug)
     }
     // fall back: some editors leave empty object {}
     return '#'
   }
+
   // id string only – no doc loaded, can’t build a stable path
-  if (typeof rel === 'string') return '#'
+  if (typeof rel === 'string') {
+    // if for some reason you stored a slug string directly:
+    if (rel === 'index' || rel === '/index') return '/'
+    if (rel.startsWith('/')) return rel
+    return '#'
+  }
+
   return '#'
 }
 
@@ -228,7 +274,7 @@ export default async function ServerNavbar() {
 
   const navbarData: NavbarData = {
     branding: {
-      logo: toSafeMedia(navbarRes?.branding?.logo),
+      logo: toSafeMedia(navbarRes?.logo),
     },
     desktop: {
       items: mapItems(navbarRes?.desktop?.items),
@@ -248,11 +294,5 @@ export default async function ServerNavbar() {
     links: mapSimpleLinks(headerRes?.links),
   }
 
-  return (
-    <Navbar
-      data={navbarData}
-      header={headerData}
-      blur={navbarRes?.branding.logoBlurDataURL || ''}
-    />
-  )
+  return <Navbar data={navbarData} header={headerData} blur={navbarRes?.logoBlurDataURL || ''} />
 }
