@@ -98,6 +98,7 @@ export interface Config {
     'global-footer': GlobalFooter;
     'board-of-directors': BoardOfDirector;
     'leadership-team': LeadershipTeam;
+    'global-contact-us-form': GlobalContactUsForm;
   };
   globalsSelect: {
     'global-header': GlobalHeaderSelect<false> | GlobalHeaderSelect<true>;
@@ -105,6 +106,7 @@ export interface Config {
     'global-footer': GlobalFooterSelect<false> | GlobalFooterSelect<true>;
     'board-of-directors': BoardOfDirectorsSelect<false> | BoardOfDirectorsSelect<true>;
     'leadership-team': LeadershipTeamSelect<false> | LeadershipTeamSelect<true>;
+    'global-contact-us-form': GlobalContactUsFormSelect<false> | GlobalContactUsFormSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1717,61 +1719,20 @@ export interface Page {
         blockType: 'leadership-team-list';
       }
     | {
-        uploadSessionId?: string | null;
         /**
          * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         backgroundColor?: string | null;
         /**
-         * Primary heading above the form. Max 80 characters.
+         * When ON, this block renders data from **Global → Contact Us**.
+         *
+         * **Before enabling:** fill up the Global → Contact Us data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
          */
-        title: string;
-        /**
-         * ফর্মের উপরের প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Supporting line under the title. Max 120 characters.
-         */
-        subtitle: string;
-        /**
-         * শিরোনামের নিচের সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
-         */
-        subtitleBN: string;
-        /**
-         * Main visual near the form. 891:489 recommended.
-         */
-        image: string | Media;
-        imageOriginal?: (string | null) | Media;
-        pendingImageOriginal?: string | null;
-        pendingImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageBlurDataURL?: string | null;
-        /**
-         * Provide at least one email address. All valid ones will receive the message.
-         */
-        recipientEmails?: {
-          email1?: string | null;
-          email2?: string | null;
-          email3?: string | null;
-        };
-        /**
-         * If set, emails from this block will use this From name/email instead of the default env (SMTP_MAIL_FROM).
-         */
-        senderOverride?: {
-          fromName?: string | null;
-          fromEmail?: string | null;
-        };
-        /**
-         * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
-         */
-        termsAndConditionButtonLink: string | Page;
-        /**
-         * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
-         */
-        privacyPolicyButtonLink: string | Page;
+        useSharedData: boolean;
         id?: string | null;
         blockName?: string | null;
         blockType: 'contact-us-form';
@@ -3614,32 +3575,8 @@ export interface PagesSelect<T extends boolean = true> {
         'contact-us-form'?:
           | T
           | {
-              uploadSessionId?: T;
               backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              image?: T;
-              imageOriginal?: T;
-              pendingImageOriginal?: T;
-              pendingImageCrop?: T;
-              imageBlurDataURL?: T;
-              recipientEmails?:
-                | T
-                | {
-                    email1?: T;
-                    email2?: T;
-                    email3?: T;
-                  };
-              senderOverride?:
-                | T
-                | {
-                    fromName?: T;
-                    fromEmail?: T;
-                  };
-              termsAndConditionButtonLink?: T;
-              privacyPolicyButtonLink?: T;
+              useSharedData?: T;
               id?: T;
               blockName?: T;
             };
@@ -4718,6 +4655,76 @@ export interface LeadershipTeam {
   createdAt?: string | null;
 }
 /**
+ * Global Contact Us configuration (title, copy, recipients, image, links).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-contact-us-form".
+ */
+export interface GlobalContactUsForm {
+  id: string;
+  uploadSessionId?: string | null;
+  /**
+   * Primary heading above the form. Max 80 characters.
+   */
+  title: string;
+  /**
+   * ফর্মের উপরের প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+   */
+  titleBN: string;
+  /**
+   * Supporting line under the title. Max 120 characters.
+   */
+  subtitle: string;
+  /**
+   * শিরোনামের নিচের সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+   */
+  subtitleBN: string;
+  /**
+   * Main visual near the form. 891×489 recommended.
+   */
+  image: string | Media;
+  imageOriginal?: (string | null) | Media;
+  pendingImageOriginal?: string | null;
+  pendingImageCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  imageBlurDataURL?: string | null;
+  /**
+   * Provide at least one email address. All valid ones will receive the message through email.
+   */
+  recipientEmails?: {
+    email1?: string | null;
+    email2?: string | null;
+    email3?: string | null;
+    email4?: string | null;
+    email5?: string | null;
+  };
+  /**
+   * If set, emails from this global will use this From name/replay email instead of the default env (SMTP_MAIL_FROM).
+   */
+  senderOverride?: {
+    /**
+     * Optional display name shown in the recipient’s inbox as the sender name. If omitted, ‘Shanta Life’ is used.
+     */
+    fromName?: string | null;
+    /**
+     * If set, recipient replies are directed to this email. If not set, replies go to the default SMTP sender address.
+     */
+    fromEmail?: string | null;
+  };
+  /**
+   * Pick an internal Page to link to. External URLs are not allowed. Click navigates to the linked page.
+   */
+  termsAndConditionButtonLink: string | Page;
+  /**
+   * Pick an internal Page to link to. External URLs are not allowed. Click navigates to the linked page.
+   */
+  privacyPolicyButtonLink: string | Page;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-header_select".
  */
@@ -4985,6 +4992,42 @@ export interface LeadershipTeamSelect<T extends boolean = true> {
         descriptionBN?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-contact-us-form_select".
+ */
+export interface GlobalContactUsFormSelect<T extends boolean = true> {
+  uploadSessionId?: T;
+  title?: T;
+  titleBN?: T;
+  subtitle?: T;
+  subtitleBN?: T;
+  image?: T;
+  imageOriginal?: T;
+  pendingImageOriginal?: T;
+  pendingImageCrop?: T;
+  imageBlurDataURL?: T;
+  recipientEmails?:
+    | T
+    | {
+        email1?: T;
+        email2?: T;
+        email3?: T;
+        email4?: T;
+        email5?: T;
+      };
+  senderOverride?:
+    | T
+    | {
+        fromName?: T;
+        fromEmail?: T;
+      };
+  termsAndConditionButtonLink?: T;
+  privacyPolicyButtonLink?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

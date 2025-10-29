@@ -594,6 +594,8 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { pageHref } from '@/lib/utils'
+import { GlobalContactUsForm } from '@/payload-types'
 import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -602,13 +604,14 @@ import GlobalButton from '../GlobalButton'
 import LocalizedString from '../LocalizedString'
 import LocalizedText from '../LocalizedText'
 import { ContactUsFormBlockType } from '@/types/payloadCustomTypes'
-import { pageHref } from '@/lib/utils'
 
 type Props = {
-  data: ContactUsFormBlockType
+  // data: ContactUsFormBlockType
+  data: GlobalContactUsForm
+  block: ContactUsFormBlockType
 }
 
-function ContactUsSection({ data }: Props) {
+function ContactUsSection({ data, block }: Props) {
   const [sendButtonText, setSendButtonText] = useState('Send Message')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -628,6 +631,8 @@ function ContactUsSection({ data }: Props) {
     data?.recipientEmails?.email1,
     data?.recipientEmails?.email2,
     data?.recipientEmails?.email3,
+    data?.recipientEmails?.email4,
+    data?.recipientEmails?.email5,
   ].filter((e): e is string => !!e && !!e.trim())
 
   const sendMessageHandler = async (e: React.FormEvent) => {
@@ -691,13 +696,14 @@ function ContactUsSection({ data }: Props) {
 
   return (
     <div
-      className="bg-[#F6EDDD] relative
+      className="relative
       px-5
            md:px-24
            lg:px-[70px]
            xl:px-[80px]
       h-[200px] md:h-[330px] lg:h-[480px] xl:h-[550px] 2xl:h-[700px]
       "
+      style={{ backgroundColor: block?.backgroundColor || '' }}
     >
       {/* main img */}
       {/*  h-[63%] md:h-[75%] lg:h-[65%] xl:h-[70%] 2xl:h-[489px]  */}

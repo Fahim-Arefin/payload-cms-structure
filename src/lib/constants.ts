@@ -35,6 +35,10 @@ export const GLOBAL_LEADERSHIP_TEAM_SLUG_AND_TAG = 'leadership-team' as const
 export const GLOBAL_LEADERSHIP_TEAM_BLOCK_LABEL = 'Leadership Team'
 export const GLOBAL_LEADERSHIP_TEAM_CACHE_KEY = 'leadership-team-data'
 
+export const GLOBAL_CONTACT_US_SLUG_AND_TAG = 'global-contact-us-form'
+export const GLOBAL_CONTACT_US_BLOCK_LABEL = 'Contact Us'
+export const GLOBAL_CONTACT_US_CACHE_KEY = 'global-contact-us-form-data'
+
 // thumbnail folder name
 const folder = '/assets/block-icons'
 

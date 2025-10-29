@@ -125,7 +125,7 @@ export const POST = async (req: PayloadRequest) => {
     })
   }
 
-  const subject = 'Ask Us — Website Message'
+  const subject = 'Contact Us Form — Website Message'
   const text = [
     `First Name: ${firstName}`,
     `Last Name: ${lastName}`,
