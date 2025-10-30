@@ -54,7 +54,7 @@ const EligibilityPlans: FC<EligibilityPlansProps> = ({}) => {
               <LocalizedText en="Upto" bn="সর্বোচ্চ" />
             </span>
             <span className="text-[16px] md:text-2xl font-bold leading-none">
-              <LocalizedText en="70" bn="৭২" />
+              <LocalizedText en="72" bn="৭২" />
             </span>
             <span className="text-sm">
               <LocalizedText en="Years" bn="বছর" />
