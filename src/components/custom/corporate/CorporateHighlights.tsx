@@ -65,7 +65,7 @@ const CorporateHighlight: FC<CorporateHighlightProps> = ({
             </div>
             <div className="text-start">
               <p className="text-[25px] md:text-[50px] lg:text-[60px] font-bold">
-                <LocalizedText en="100%" bn="১০০%" />
+                <LocalizedText en="98%" bn="৯৮%" />
               </p>
               <p className="mt-2 text-[1.1rem]  lg:text-[1.5rem] font-normal">
                 <LocalizedText en="Settlement rate" bn="সেটেলমেন্ট রেট" />
