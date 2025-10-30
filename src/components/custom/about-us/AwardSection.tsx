@@ -70,7 +70,7 @@ function AwardSection() {
                   {/* info */}
                   <div className="text-[#434343] p-2 2xl:p-4 border-b-2 border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px] font-bold">
-                      <LocalizedText en="100%" bn="১০০%" />
+                      <LocalizedText en="98%" bn="৯৮%" />
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
                       <LocalizedText en="Settlement Rate" bn="সেটেলমেন্ট রেট" />
@@ -95,7 +95,7 @@ function AwardSection() {
                   {/* info */}
                   <div className="text-[#434343] p-2 2xl:p-4 border-b-2 border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      <LocalizedText en="112" bn="১১২" />
+                      <LocalizedText en="1299" bn="১২৯৯" />
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
                       <LocalizedText en="Claim Settled" bn="ক্লেইম সেটেল্ড" />
@@ -120,7 +120,7 @@ function AwardSection() {
                   {/* info */}
                   <div className="text-[#434343] p-2 2xl:p-4 border-t-2 border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      <LocalizedText en="235" bn="২৩৫" />
+                      <LocalizedText en="7322" bn="৭৩২২" />
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
                       <LocalizedText en="Satisfied Customers" bn="স্যাটিসফাইড কাস্টমার" />
@@ -145,7 +145,7 @@ function AwardSection() {
                   {/* info */}
                   <div className="text-[#434343] p-2 2xl:p-4 border-t-2 border-[#9A4E46] w-full">
                     <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      <LocalizedText en="1K +" bn="১,০০০+" />
+                      <LocalizedText en="3.5K +" bn="৩,৫০০+" />
                     </div>
                     <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
                       <LocalizedText en="Families Insured" bn="সুরক্ষিত পরিবার" />
