@@ -7,15 +7,14 @@ import {
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 import CorporateCardsSchema from './corporateCard/schema'
-import CustomCardsThumbField from './CustomCardsThumbField'
-import PlanCardSchema from './planCard/schema'
 import OfferCardsSchema from './offerCard/schema'
+import PlanCardSchema from './planCard/schema'
 
 /* ------------ limits ------------ */
 const TITLE_MAX = 100
 const SUBTITLE_MAX = 100
-const DESC_MAX = 200
-const HIGHLIGHT_MAX = 40
+const DESC_MAX = 500
+const HIGHLIGHT_MAX = 100
 const COLOR_HEX_LEN = 7
 
 /* ------------ validators ------------ */

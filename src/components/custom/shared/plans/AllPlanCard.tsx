@@ -1,10 +1,14 @@
+'use client'
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { pageHref } from '@/lib/utils'
 import { PlanBlock } from '@/types/payloadCustomTypes'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 import LocalizedText from '../LocalizedText'
+import PlanModal from './PlanModal'
 
 type Props = {
   data: PlanBlock['planCards'][number]
@@ -12,6 +16,8 @@ type Props = {
 }
 
 function AllPlanCard({ data, blur = true }: Props) {
+  const [open, setOpen] = useState(false)
+
   return (
     <div
       // h-[250px] md:h-[250px] lg:h-[250px] xl:h-[300px] 2xl:h-[360px]
@@ -60,21 +66,45 @@ function AllPlanCard({ data, blur = true }: Props) {
           <p className="global-p2 text-center lg:text-start">
             <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
-          <Link
-            href={pageHref(data?.buttonLink)}
-            className="flex justify-center lg:justify-start  "
-          >
-            <Button
-              variant="link"
-              className="text-[#ED7125] hover:underline w-fit mx-auto lg:mx-0
+          {data?.actionType === 'cta' &&
+            (data?.buttonLink || data?.buttonText || data?.buttonTextBN) && (
+              <Link
+                href={pageHref(data?.buttonLink)}
+                className="flex justify-center lg:justify-start  "
+              >
+                <Button
+                  variant="link"
+                  className="text-[#ED7125] hover:underline w-fit mx-auto lg:mx-0
             global-p2 p-0"
-            >
-              <div className="flex space-x-1 items-center cursor-pointer ">
-                <LocalizedText en={data?.buttonText} bn={data?.buttonTextBN} />
-                <ArrowUpRight />
-              </div>
-            </Button>
-          </Link>
+                >
+                  <div className="flex space-x-1 items-center cursor-pointer ">
+                    <LocalizedText en={data?.buttonText} bn={data?.buttonTextBN} />
+                    <ArrowUpRight />
+                  </div>
+                </Button>
+              </Link>
+            )}
+          {/* modal logic */}
+          {data?.actionType === 'modal' && (
+            <div>
+              <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="link"
+                    className="text-[#ED7125] hover:underline w-fit mx-auto lg:mx-0
+            global-p2 p-0 flex justify-center lg:justify-start"
+                  >
+                    <div className="flex space-x-1 items-center cursor-pointer ">
+                      <LocalizedText en={data?.modalButtonText} bn={data?.modalButtonTextBN} />
+                      <ArrowUpRight />
+                    </div>
+                  </Button>
+                </DialogTrigger>
+
+                <PlanModal data={data} items={data?.modalItems || []} />
+              </Dialog>
+            </div>
+          )}
         </div>
       </div>
     </div>

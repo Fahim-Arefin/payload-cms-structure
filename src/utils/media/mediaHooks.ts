@@ -328,11 +328,31 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'offerCards', // array inside the nested CorporateCards block
       mediaFields: ['bgImage', 'icon'],
     },
+    // plan card modal pdf hook
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_CARD_SECTION_SLUG_AND_TAG,
+      groupKey: 'card', // nested blocks field on the parent block row
+      arrayKey: 'planCards', // the array inside PlanCardSchema
+      mediaFields: ['brochurePDF'], // 👈 PDF upload on each plan card (non-image is fine)
+    },
   ],
 
   // otherUploadFields: [
   //   'brochurePDF', // 👈 top-level upload fields to Media (PDFs)
   // ],
+  // src/utils/media/mediaHooks.ts (where you build export const mediaHooks = withMediaLifecycle({...}))
+  blockNestedDeepFields: [
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_CARD_SECTION_SLUG_AND_TAG, // outer block
+      blocksKey: 'card', // nested blocks field on the outer block
+      nestedBlockType: PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG, // the inner block to target
+      firstArrayKey: 'planCards', // array on inner block
+      secondArrayKey: 'modalItems', // nested array inside each planCards item
+      mediaFields: ['icon'], // media on modalItems[]
+    },
+  ],
 
   onAfterChange: async ({ req }) => {
     triggerMediaTemporaryPurge(req)

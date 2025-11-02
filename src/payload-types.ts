@@ -1993,11 +1993,11 @@ export interface Page {
          */
         titleBN: string;
         /**
-         * Optional. Must appear verbatim inside Title. Max 40 chars.
+         * Optional. Must appear verbatim inside Title. Max 100 chars.
          */
         highlightedText?: string | null;
         /**
-         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
          */
         highlightedTextBN?: string | null;
         /**
@@ -2009,15 +2009,15 @@ export interface Page {
          */
         subtitleBN?: string | null;
         /**
-         * Optional. Must appear verbatim inside Subtitle. Max 40 chars.
+         * Optional. Must appear verbatim inside Subtitle. Max 100 chars.
          */
         highlightedSubtitle?: string | null;
         /**
-         * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
          */
         highlightedSubtitleBN?: string | null;
         /**
-         * Up to ~200 characters.
+         * Up to ~500 characters.
          */
         description?: {
           root: {
@@ -2035,7 +2035,7 @@ export interface Page {
           [k: string]: unknown;
         } | null;
         /**
-         * সর্বোচ্চ ~২০০ অক্ষর।
+         * সর্বোচ্চ ~৫০০ অক্ষর।
          */
         descriptionBN?: {
           root: {
@@ -2147,41 +2147,134 @@ export interface Page {
                 pendingBgImageCrop?: string | null;
                 bgImageBlurDataURL?: string | null;
                 /**
-                 * Max 40 characters.
+                 * Max 100 characters.
                  */
                 title: string;
                 /**
-                 * সর্বোচ্চ ৪০ অক্ষর।
+                 * সর্বোচ্চ ১০০ অক্ষর।
                  */
                 titleBN: string;
                 /**
-                 * Max 40 characters.
+                 * Max 100 characters.
                  */
                 subTitle?: string | null;
                 /**
-                 * সর্বোচ্চ ৪০ অক্ষর।
+                 * সর্বোচ্চ ১০০ অক্ষর।
                  */
                 subTitleBN?: string | null;
                 /**
-                 * Max 100 characters.
+                 * Max 200 characters.
                  */
                 description: string;
                 /**
-                 * সর্বোচ্চ ১০০ অক্ষর।
+                 * সর্বোচ্চ ২০০ অক্ষর।
                  */
                 descriptionBN: string;
                 /**
+                 * Pick whether this card shows a CTA button or opens a modal with items.
+                 */
+                actionType?: ('cta' | 'modal') | null;
+                /**
                  * Optional. Max 24 characters.
                  */
-                buttonText?: string | null;
+                buttonText: string;
                 /**
                  * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
                  */
-                buttonTextBN?: string | null;
+                buttonTextBN: string;
                 /**
-                 * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                 * Pick an internal Page to link to. External URLs are not allowed. Visible only for CTA.
                  */
                 buttonLink?: (string | null) | Page;
+                /**
+                 * Optional. Max 24 characters.
+                 */
+                modalButtonText: string;
+                /**
+                 * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+                 */
+                modalButtonTextBN: string;
+                /**
+                 * Upload/select the brochure PDF.
+                 */
+                brochurePDF?: (string | null) | Media;
+                /**
+                 * Max 100 characters.
+                 */
+                label?: string | null;
+                /**
+                 * সর্বোচ্চ ১০০ অক্ষর।
+                 */
+                labelBN?: string | null;
+                style?: ('primary' | 'secondary') | null;
+                /**
+                 * Required. Max 100 characters.
+                 */
+                modalTitle?: string | null;
+                /**
+                 * আবশ্যক। সর্বোচ্চ ১০০ অক্ষর।
+                 */
+                modalTitleBN?: string | null;
+                /**
+                 * Add one or more items shown inside the modal.
+                 */
+                modalItems?:
+                  | {
+                      /**
+                       * Square icon (1:1). PNG/SVG recommended.
+                       */
+                      icon: string | Media;
+                      iconOriginal?: (string | null) | Media;
+                      pendingIconOriginal?: string | null;
+                      pendingIconCrop?: string | null;
+                      iconBlurDataURL?: string | null;
+                      /**
+                       * Required. Max 100 characters.
+                       */
+                      title?: string | null;
+                      /**
+                       * আবশ্যক। সর্বোচ্চ ১০০ অক্ষর।
+                       */
+                      titleBN?: string | null;
+                      /**
+                       * Up to ~500 characters.
+                       */
+                      description?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      /**
+                       * সর্বোচ্চ ~৫০০ অক্ষর।
+                       */
+                      descriptionBN?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      id?: string | null;
+                    }[]
+                  | null;
                 id?: string | null;
               }[];
               id?: string | null;
@@ -3177,48 +3270,6 @@ export interface Page {
               } | null;
               id?: string | null;
             }[]
-          | null;
-        /**
-         * Add resource buttons that appear below the content (maximum 3 buttons)
-         */
-        resourceButtons?:
-          | (
-              | {
-                  /**
-                   * Upload/select the brochure PDF.
-                   */
-                  brochurePDF?: (string | null) | Media;
-                  /**
-                   * Max 60 characters.
-                   */
-                  label?: string | null;
-                  /**
-                   * সর্বোচ্চ ৬০ অক্ষর।
-                   */
-                  labelBN?: string | null;
-                  style?: ('primary' | 'secondary') | null;
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'brochure-button';
-                }
-              | {
-                  /**
-                   * Text shown on the call-to-action button. Max 60 characters.
-                   */
-                  buttonText: string;
-                  /**
-                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ৬০ অক্ষর।
-                   */
-                  buttonTextBN: string;
-                  /**
-                   * Pick an internal Page to link to. External URLs are not allowed. When clicking the button it will navigate to this page.
-                   */
-                  buttonLink: string | Page;
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'link-button';
-                }
-            )[]
           | null;
         id?: string | null;
         blockName?: string | null;
@@ -4263,9 +4314,32 @@ export interface PagesSelect<T extends boolean = true> {
                                 subTitleBN?: T;
                                 description?: T;
                                 descriptionBN?: T;
+                                actionType?: T;
                                 buttonText?: T;
                                 buttonTextBN?: T;
                                 buttonLink?: T;
+                                modalButtonText?: T;
+                                modalButtonTextBN?: T;
+                                brochurePDF?: T;
+                                label?: T;
+                                labelBN?: T;
+                                style?: T;
+                                modalTitle?: T;
+                                modalTitleBN?: T;
+                                modalItems?:
+                                  | T
+                                  | {
+                                      icon?: T;
+                                      iconOriginal?: T;
+                                      pendingIconOriginal?: T;
+                                      pendingIconCrop?: T;
+                                      iconBlurDataURL?: T;
+                                      title?: T;
+                                      titleBN?: T;
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      id?: T;
+                                    };
                                 id?: T;
                               };
                           id?: T;
@@ -4589,29 +4663,6 @@ export interface PagesSelect<T extends boolean = true> {
                     description?: T;
                     descriptionBN?: T;
                     id?: T;
-                  };
-              resourceButtons?:
-                | T
-                | {
-                    'brochure-button'?:
-                      | T
-                      | {
-                          brochurePDF?: T;
-                          label?: T;
-                          labelBN?: T;
-                          style?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    'link-button'?:
-                      | T
-                      | {
-                          buttonText?: T;
-                          buttonTextBN?: T;
-                          buttonLink?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
                   };
               id?: T;
               blockName?: T;

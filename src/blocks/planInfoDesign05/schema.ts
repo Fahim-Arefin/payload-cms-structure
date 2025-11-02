@@ -367,23 +367,6 @@ const PlanInfoDesign05Schema: Block = {
         },
       ],
     },
-
-    // CTA Buttons Block Layout (outside of hero items)
-    {
-      name: 'resourceButtons',
-      type: 'blocks',
-      label: 'Resources Button',
-      admin: {
-        description: 'Add resource buttons that appear below the content (maximum 3 buttons)',
-      },
-      labels: {
-        singular: 'Button',
-        plural: 'Buttons',
-      },
-      minRows: 1,
-      maxRows: 3,
-      blocks: [BrochureButtonSchema, LinkButtonSchema],
-    },
   ],
 }
 
