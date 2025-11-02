@@ -15,7 +15,7 @@ const SUBTITLE_MAX = 120
 const HIGHLIGHT_MAX = 40
 const INFO_TITLE_MAX = 80
 const INFO_SUBTITLE_MAX = 120
-const DESC_MAX = 600
+const DESC_MAX = 800
 const FEATURE_NAME_MAX = 60
 
 /* ---------- basic validators (same style as before) ---------- */

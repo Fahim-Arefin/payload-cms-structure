@@ -231,13 +231,13 @@ export const LINK_BUTTON_BLOCK_THUMBNAIL_URL = `${folder}/link-button-block-thum
 export const LINK_BUTTON_CACHE_KEY = 'link-button-data'
 
 export const CORPORATE_PARTNERS_SLUG_AND_TAG = 'corporate-partners'
-export const CORPORATE_PARTNERS_BLOCK_LABEL = 'corporate-partners'
+export const CORPORATE_PARTNERS_BLOCK_LABEL = 'Corporate Partners'
 export const CORPORATE_PARTNERS_BLOCK_THUMBNAIL_URL = `${folder}/corporate-partners-block-thumbnail.png`
 export const CORPORATE_PARTNERS_CACHE_KEY = 'corporate-partners'
 
 // custom card section
 export const CUSTOM_CARD_SECTION_SLUG_AND_TAG = 'custom-card'
-export const CUSTOM_CARD_SECTION_BLOCK_LABEL = 'custom-card'
+export const CUSTOM_CARD_SECTION_BLOCK_LABEL = 'Custom Card'
 export const CUSTOM_CARD_SECTION_BLOCK_THUMBNAIL_URL = `${folder}/custom-card-block-thumbnail.png`
 export const CUSTOM_CARD_SECTION_CACHE_KEY = 'custom-card'
 
@@ -265,23 +265,29 @@ export const EMPLOYEE_WELLNESS_ADDONS_INFO_CACHE_KEY = 'add-on-info-data'
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_LABEL = 'Plan Info Design 01'
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_THUMBNAIL_URL = `${folder}/add-on-info-block-thumbnail.png`
 
-// corporate plan info design
+// plan info design
 export const PLAN_INFO_DESIGN_SLUG_AND_TAG = 'plan-info-design'
 export const PLAN_INFO_DESIGN_CACHE_KEY = 'plan-info-design-data'
 export const PLAN_INFO_DESIGN_BLOCK_LABEL = 'Plan Info Design 02'
 export const PLAN_INFO_DESIGN_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-block-thumbnail.png`
 
-// corporate plan info design
+// plan info design
 export const PLAN_INFO_DESIGN_03_SLUG_AND_TAG = 'plan-info-design-03'
 export const PLAN_INFO_DESIGN_03_CACHE_KEY = 'plan-info-design-03-data'
 export const PLAN_INFO_DESIGN_03_BLOCK_LABEL = 'Plan Info Design 03'
 export const PLAN_INFO_DESIGN_03_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-03-block-thumbnail.png`
 
-// corporate plan info design
+// plan info design
 export const PLAN_INFO_DESIGN_04_SLUG_AND_TAG = 'plan-info-design-04'
 export const PLAN_INFO_DESIGN_04_CACHE_KEY = 'plan-info-design-04-data'
 export const PLAN_INFO_DESIGN_04_BLOCK_LABEL = 'Plan Info Design 04'
 export const PLAN_INFO_DESIGN_04_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-04-block-thumbnail.png`
+
+// plan info design
+export const PLAN_INFO_DESIGN_05_SLUG_AND_TAG = 'plan-info-design-05'
+export const PLAN_INFO_DESIGN_05_CACHE_KEY = 'plan-info-design-05-data'
+export const PLAN_INFO_DESIGN_05_BLOCK_LABEL = 'Plan Info Design 05'
+export const PLAN_INFO_DESIGN_05_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-05-block-thumbnail.png`
 
 //
 export const APPD_BLOCK_SLUG_AND_TAG = 'accidental-permanent-partial-disability'

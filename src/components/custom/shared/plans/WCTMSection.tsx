@@ -87,7 +87,7 @@ function WCTMSection({ data }: Props) {
           )}
 
           {(data?.infoDescription || data?.infoDescriptionBN) && (
-            <div className="text-justify global-span font-extralight ">
+            <div className="text-justify global-span2 font-extralight ">
               <LocalizedRichText en={data?.infoDescription} bn={data?.infoDescriptionBN} />
             </div>
           )}

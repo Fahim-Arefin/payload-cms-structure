@@ -31,6 +31,7 @@ import {
   OFFER_CARDS_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_03_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_04_SLUG_AND_TAG,
+  PLAN_INFO_DESIGN_05_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -212,6 +213,10 @@ export type PlanInfoDesign03BlockType = Extract<
 export type PlanInfoDesign04BlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PLAN_INFO_DESIGN_04_SLUG_AND_TAG }
+>
+export type PlanInfoDesign05BlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PLAN_INFO_DESIGN_05_SLUG_AND_TAG }
 >
 
 export type APPDBlockType = Extract<

@@ -250,6 +250,10 @@
     /* @apply text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]; */
     @apply text-[14px] md:text-[18px] lg:text-[20px] xl:text-[24px] 2xl:text-[26px];
   }
+  .global-span2 {
+    /* @apply text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]; */
+    @apply text-[14px] md:text-[18px] lg:text-[20px] xl:text-[22px] 2xl:text-[24px];
+  }
 
   /* premium calculator result text size (monthly yearly ....)*/
   .result-selected-header-size {

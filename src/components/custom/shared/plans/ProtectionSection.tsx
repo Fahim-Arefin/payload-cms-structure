@@ -23,7 +23,6 @@ function ProtectionSection({ align = 'left', data }: Props) {
       }}
     >
       {/* section heading */}
-      {/* Card heading section */}
       {(data?.title ||
         data?.subtitle ||
         data?.description ||

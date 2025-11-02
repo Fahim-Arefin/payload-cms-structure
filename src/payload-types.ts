@@ -2295,7 +2295,7 @@ export interface Page {
          */
         highlightedSubtitleBN?: string | null;
         /**
-         * Up to ~600 characters.
+         * Up to ~800 characters.
          */
         description?: {
           root: {
@@ -2313,7 +2313,7 @@ export interface Page {
           [k: string]: unknown;
         } | null;
         /**
-         * সর্বোচ্চ ~৬০০ অক্ষর।
+         * সর্বোচ্চ ~৮০০ অক্ষর।
          */
         descriptionBN?: {
           root: {
@@ -2393,7 +2393,7 @@ export interface Page {
          */
         infoSubtitleHighlightedBN?: string | null;
         /**
-         * Up to ~600 characters.
+         * Up to ~800 characters.
          */
         infoDescription?: {
           root: {
@@ -2411,7 +2411,7 @@ export interface Page {
           [k: string]: unknown;
         } | null;
         /**
-         * সর্বোচ্চ ~৬০০ অক্ষর।
+         * সর্বোচ্চ ~৮০০ অক্ষর।
          */
         infoDescriptionBN?: {
           root: {
@@ -3025,6 +3025,204 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'plan-info-design-04';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 80 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Subtitle. Max 80 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~600 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Tall image (630×700, aspect ≈ 0.9). Required.
+         */
+        imageTall: string | Media;
+        imageTallOriginal?: (string | null) | Media;
+        pendingImageTallOriginal?: string | null;
+        pendingImageTallCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageTallBlurDataURL?: string | null;
+        /**
+         * Wide image (500×370, aspect ≈ 1.351). Required.
+         */
+        imageWide: string | Media;
+        imageWideOriginal?: (string | null) | Media;
+        pendingImageWideOriginal?: string | null;
+        pendingImageWideCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageWideBlurDataURL?: string | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Which image to display on desktop layouts.
+         */
+        desktopImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Which image to display on mobile layouts.
+         */
+        mobileImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Add one or more extra description blocks. Each supports EN/BN Rich Text (same validator + ~600 chars).
+         */
+        descriptions?:
+          | {
+              /**
+               * Up to ~1600 characters.
+               */
+              description?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              /**
+               * সর্বোচ্চ ~১৬০০ অক্ষর।
+               */
+              descriptionBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Add resource buttons that appear below the content (maximum 3 buttons)
+         */
+        resourceButtons?:
+          | (
+              | {
+                  /**
+                   * Upload/select the brochure PDF.
+                   */
+                  brochurePDF?: (string | null) | Media;
+                  /**
+                   * Max 60 characters.
+                   */
+                  label?: string | null;
+                  /**
+                   * সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  labelBN?: string | null;
+                  style?: ('primary' | 'secondary') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'brochure-button';
+                }
+              | {
+                  /**
+                   * Text shown on the call-to-action button. Max 60 characters.
+                   */
+                  buttonText: string;
+                  /**
+                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  buttonTextBN: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. When clicking the button it will navigate to this page.
+                   */
+                  buttonLink: string | Page;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'link-button';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-info-design-05';
       }
     | {
         /**
@@ -4330,6 +4528,67 @@ export interface PagesSelect<T extends boolean = true> {
                     bottomRightLabelBN?: T;
                     bottomRightValue?: T;
                     bottomRightValueBN?: T;
+                  };
+              resourceButtons?:
+                | T
+                | {
+                    'brochure-button'?:
+                      | T
+                      | {
+                          brochurePDF?: T;
+                          label?: T;
+                          labelBN?: T;
+                          style?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'link-button'?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          buttonTextBN?: T;
+                          buttonLink?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'plan-info-design-05'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              imageTall?: T;
+              imageTallOriginal?: T;
+              pendingImageTallOriginal?: T;
+              pendingImageTallCrop?: T;
+              imageTallBlurDataURL?: T;
+              imageWide?: T;
+              imageWideOriginal?: T;
+              pendingImageWideOriginal?: T;
+              pendingImageWideCrop?: T;
+              imageWideBlurDataURL?: T;
+              imageOrder?: T;
+              desktopImageChoice?: T;
+              mobileImageChoice?: T;
+              descriptions?:
+                | T
+                | {
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
                   };
               resourceButtons?:
                 | T

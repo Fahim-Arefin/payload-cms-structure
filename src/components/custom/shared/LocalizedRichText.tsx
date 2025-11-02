@@ -1,52 +1,20 @@
-// // working code
 // 'use client'
 
 // import { RichText } from '@payloadcms/richtext-lexical/react'
 // import useMounted from '@/hooks/useMounted'
 // import { useLanguage } from '@/context/LanguageContext'
+// import './richtext.css' // tiny list styles (below)
 
 // type Props = {
 //   en?: any | null
 //   bn?: any | null
-//   className?: string
 // }
 
 // /** SSR renders EN; after mount swaps to selected language. */
-// export default function LocalizedRichText({ en, bn, className }: Props) {
+// export default function LocalizedRichText({ en, bn }: Props) {
 //   const mounted = useMounted()
 //   const { language } = useLanguage()
-//   const data = !mounted
-//     ? (en ?? bn ?? null)
-//     : language === 'en'
-//       ? (en ?? bn ?? null)
-//       : (bn ?? en ?? null)
-//   if (!data) return null
-//   return <RichText data={data as any} className={className} />
-// }
 
-// =======================================================================
-// =======================================================================
-// =======================================================================
-// // v1 working but color and fontsize not applied
-// 'use client'
-
-// import { RichText } from '@payloadcms/richtext-lexical/react'
-// import useMounted from '@/hooks/useMounted'
-// import { useLanguage } from '@/context/LanguageContext'
-// import clsx from 'clsx'
-
-// type Props = {
-//   en?: any | null
-//   bn?: any | null
-//   className?: string
-//   /** set true when rendering on dark backgrounds */
-//   invert?: boolean
-// }
-
-// /** SSR renders EN; after mount swaps to selected language. */
-// export default function LocalizedRichText({ en, bn, className, invert }: Props) {
-//   const mounted = useMounted()
-//   const { language } = useLanguage()
 //   const data = !mounted
 //     ? (en ?? bn ?? null)
 //     : language === 'en'
@@ -55,100 +23,178 @@
 
 //   if (!data) return null
 
-//   // prose: enables list bullets/numbers, spacing, headings, etc.
-//   // max-w-none: let content fill container
-//   // list-outside: place markers outside
-//   const prose = clsx('prose max-w-none list-outside', invert && 'prose-invert', className)
-
+//   // NOTE: wrapper has only the .rt class which adds bullets/spacing for lists.
+//   // It does NOT set color/size, so parent classes like "text-white/90 global-p1" apply.
 //   return (
-//     <div className={prose}>
+//     <div className="rt ">
 //       <RichText key={mounted ? language : 'ssr'} data={data as any} />
 //     </div>
 //   )
 // }
 
-// ===========================================================================
-// ===========================================================================
-// ===========================================================================
-// // v2 working but fontsize not applied
-// import clsx from 'clsx'
-// import { RichText } from '@payloadcms/richtext-lexical/react'
+// ==================================================================================
+// ==================================================================================
+// ==================================================================================
 
-// export default function LocalizedRichText({
-//   en,
-//   bn,
-//   className,
-// }: {
-//   en?: any
-//   bn?: any
-//   className?: string
-// }) {
-//   // pick `data` like you already do
-//   const data = en ?? bn ?? null
-//   if (!data) return null
+// // without SPA
+// 'use client'
+
+// import { RichText } from '@payloadcms/richtext-lexical/react'
+// import useMounted from '@/hooks/useMounted'
+// import { useLanguage } from '@/context/LanguageContext'
+// import './richtext.css'
+
+// type Props = {
+//   en?: any | null
+//   bn?: any | null
+// }
+
+// /* Resolve a Payload internal doc (e.g., a Page) to a public href */
+// function resolveHrefFromDoc(doc: any): string {
+//   const slug =
+//     doc?.slug ??
+//     doc?.value?.slug ?? // sometimes relationship is nested
+//     undefined
+
+//   if (!slug || typeof slug !== 'string') return '#'
+//   if (slug === 'index') return '/' // 🔸 your requirement: hide "index" in URL
+//   return slug.startsWith('/') ? slug : `/${slug}`
+// }
+
+// /* Walk Lexical JSON and turn internal links into normal links with url */
+// function normalizeInternalLinks(node: any): any {
+//   if (!node || typeof node !== 'object') return node
+
+//   // If this is a link node with an internal doc, convert it to a "custom" url link
+//   if (node.type === 'link' && node?.fields?.linkType === 'internal') {
+//     const doc = node?.fields?.doc
+//     const href = Array.isArray(doc)
+//       ? resolveHrefFromDoc(doc[0]) // relationship array safety
+//       : resolveHrefFromDoc(doc)
+
+//     return {
+//       ...node,
+//       fields: {
+//         ...(node.fields || {}),
+//         linkType: 'custom', // make it behave like an external/custom URL
+//         url: href,
+//         // keep target/newTab if present
+//       },
+//     }
+//   }
+
+//   // Recurse into arrays / objects
+//   if (Array.isArray(node)) return node.map(normalizeInternalLinks)
+//   const out: any = {}
+//   for (const k of Object.keys(node)) out[k] = normalizeInternalLinks(node[k])
+//   return out
+// }
+
+// export default function LocalizedRichText({ en, bn }: Props) {
+//   const mounted = useMounted()
+//   const { language } = useLanguage()
+
+//   const raw = !mounted
+//     ? (en ?? bn ?? null)
+//     : language === 'en'
+//       ? (en ?? bn ?? null)
+//       : (bn ?? en ?? null)
+
+//   if (!raw) return null
+
+//   const data = normalizeInternalLinks(raw)
 
 //   return (
-//     <div
-//       // prose-ul:pl-6 prose-ol:pl-6 prose-li:my-1
-//       className={clsx(
-//         // enable list bullets/numbers & spacing
-//         'prose max-w-none',
-//         // make typography inherit your colors/sizes
-//         'prose-headings:text-inherit prose-p:text-inherit prose-li:text-inherit prose-strong:text-inherit prose-em:text-inherit',
-//         // control list look
-//         'prose-ul:list-disc prose-ol:list-decimal',
-//         // now your own utilities apply “on top”
-//         // 'text-white/90 global-p1',
-//         className,
-//       )}
-//       // final nudge: make the plugin’s CSS vars inherit current color
-//       style={{
-//         // body text and headings take current color (so `text-white/90` works)
-//         // @ts-expect-error: CSS vars
-//         '--tw-prose-body': 'inherit',
-//         '--tw-prose-headings': 'inherit',
-//         '--tw-prose-links': 'inherit',
-//         '--tw-prose-bullets': 'currentColor',
-//         '--tw-prose-counters': 'currentColor',
-//       }}
-//     >
-//       <RichText data={data} />
+//     <div className="rt">
+//       <RichText key={mounted ? language : 'ssr'} data={data as any} />
 //     </div>
 //   )
 // }
 
-// ====================================================================================
-// ====================================================================================
-// ====================================================================================
+// ===================================================================================
+// ===================================================================================
+// ===================================================================================
+
 'use client'
 
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import useMounted from '@/hooks/useMounted'
 import { useLanguage } from '@/context/LanguageContext'
-import './richtext.css' // tiny list styles (below)
+import { useRouter } from 'next/navigation'
+import React from 'react'
+import './richtext.css'
 
 type Props = {
   en?: any | null
   bn?: any | null
 }
 
-/** SSR renders EN; after mount swaps to selected language. */
+/* map Payload internal doc → href */
+function resolveHrefFromDoc(doc: any): string {
+  const slug = doc?.slug ?? doc?.value?.slug
+  if (!slug || typeof slug !== 'string') return '#'
+  if (slug === 'index') return '/' // hide "index"
+  return slug.startsWith('/') ? slug : `/${slug}`
+}
+
+/* convert internal link nodes to custom url links so RichText emits <a href="..."> */
+function normalizeInternalLinks(node: any): any {
+  if (!node || typeof node !== 'object') return node
+  if (node.type === 'link' && node?.fields?.linkType === 'internal') {
+    const doc = node?.fields?.doc
+    const href = Array.isArray(doc) ? resolveHrefFromDoc(doc[0]) : resolveHrefFromDoc(doc)
+    return {
+      ...node,
+      fields: {
+        ...(node.fields || {}),
+        linkType: 'custom',
+        url: href,
+      },
+    }
+  }
+  if (Array.isArray(node)) return node.map(normalizeInternalLinks)
+  const out: any = {}
+  for (const k of Object.keys(node)) out[k] = normalizeInternalLinks(node[k])
+  return out
+}
+
 export default function LocalizedRichText({ en, bn }: Props) {
   const mounted = useMounted()
   const { language } = useLanguage()
+  const router = useRouter()
 
-  const data = !mounted
+  const raw = !mounted
     ? (en ?? bn ?? null)
     : language === 'en'
       ? (en ?? bn ?? null)
       : (bn ?? en ?? null)
+  if (!raw) return null
+  const data = normalizeInternalLinks(raw)
 
-  if (!data) return null
+  // Intercept same-origin links to keep SPA navigation
+  const onClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    // respect new-tab/middle/modified clicks
+    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0)
+      return
 
-  // NOTE: wrapper has only the .rt class which adds bullets/spacing for lists.
-  // It does NOT set color/size, so parent classes like "text-white/90 global-p1" apply.
+    const anchor = (e.target as HTMLElement).closest('a') as HTMLAnchorElement | null
+    if (!anchor) return
+    const hrefAttr = anchor.getAttribute('href') || ''
+    const target = anchor.getAttribute('target')
+
+    // allow explicit new tab
+    if (target === '_blank') return
+    // only handle app-local paths
+    if (!hrefAttr.startsWith('/')) return
+    // normalize "index" already done; but ensure empty path -> '/'
+    const href = hrefAttr === '/index' ? '/' : hrefAttr
+
+    e.preventDefault()
+    router.push(href)
+  }
+
   return (
-    <div className="rt ">
+    <div className="rt" onClick={onClick}>
       <RichText key={mounted ? language : 'ssr'} data={data as any} />
     </div>
   )
