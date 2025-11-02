@@ -40,7 +40,10 @@ function LiscensedInfo({
             <Image src={launchedImage} alt="Launched Image" className="" fill />
           </div>
           <div className="uppercase text-[9px] md:global-h4">
-            <LocalizedText en={`Licensed : ${launchedDate}`} bn={`যাত্রা শুরু : ${launchedDateBN}`} />
+            <LocalizedText
+              en={`Launched : ${launchedDate}`}
+              bn={`যাত্রা শুরু : ${launchedDateBN}`}
+            />
           </div>
         </div>
       </div>
