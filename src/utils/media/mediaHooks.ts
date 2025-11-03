@@ -21,6 +21,7 @@ import {
   CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
   CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
   MULTI_STAGE_PLAN_SLUG_AND_TAG,
+  SUPPORT_BUZZ_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { withMediaLifecycle } from './withMediaLifecycle'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
@@ -100,6 +101,16 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: MULTI_STAGE_PLAN_SLUG_AND_TAG,
       mediaFields: ['planIcon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SUPPORT_BUZZ_SLUG_AND_TAG,
+      mediaFields: ['mainImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SUPPORT_BUZZ_SLUG_AND_TAG,
+      mediaFields: ['backgroundImage'],
     },
   ],
 
@@ -198,6 +209,12 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
       arrayKey: 'processingCards',
+      mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SUPPORT_BUZZ_SLUG_AND_TAG,
+      arrayKey: 'newsItems',
       mediaFields: ['image'],
     },
   ],

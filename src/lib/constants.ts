@@ -202,7 +202,6 @@ export const CAREER_PAGE_INTRO_BLOCK_LABEL = 'Career Intro Card'
 export const CAREER_PAGE_INTRO_CACHE_KEY = 'career-intro-data'
 export const CAREER_PAGE_INTRO_BLOCK_THUMBNAIL_URL = `${folder}/career-page-intro-thumbnail.png`
 
-
 export const CAREER_PAGE_SWIPER_SLUG_AND_TAG = 'career-swiper'
 export const CAREER_PAGE_SWIPER_BLOCK_LABEL = 'Career Swiper Card'
 export const CAREER_PAGE_SWIPER_CACHE_KEY = 'career-swiper-data'
@@ -223,7 +222,6 @@ export const CAREER_PAGE_PROCESSING_BLOCK_LABEL = 'Career Processing'
 export const CAREER_PAGE_PROCESSING_CACHE_KEY = 'career-processing-data'
 export const CAREER_PAGE_PROCESSING_BLOCK_THUMBNAIL_URL = `${folder}/career-page-processing-thumbnail.png`
 
-
 // multistage page
 //  --------------------------------------------------------------------------------------------------
 export const MULTI_STAGE_INTRO_SLUG_AND_TAG = 'multistage-intro'
@@ -236,10 +234,26 @@ export const MULTI_STAGE_PLAN_BLOCK_LABEL = 'Multistage Plan'
 export const MULTI_STAGE_PLAN_CACHE_KEY = 'multistage-plan-data'
 export const MULTI_STAGE_PLAN_BLOCK_THUMBNAIL_URL = `${folder}/multistage-page-plan-thumbnail.png`
 
-
 // terms and privacy page
 //  --------------------------------------------------------------------------------------------------
 export const CUSTOM_ACCORDION_SLUG_AND_TAG = 'custom-accordion'
 export const CUSTOM_ACCORDION_BLOCK_LABEL = 'Custom Accordion'
 export const CUSTOM_ACCORDION_CACHE_KEY = 'custom-accordion-data'
 export const CUSTOM_ACCORDION_BLOCK_THUMBNAIL_URL = `${folder}/custom-accordion-block-thumbnail.png`
+
+// support page
+//  --------------------------------------------------------------------------------------------------
+export const SUPPORT_MAP_TAB_SLUG_AND_TAG = 'support-map-tab'
+export const SUPPORT_MAP_TAB_BLOCK_LABEL = 'Support Map Tab'
+export const SUPPORT_MAP_TAB_CACHE_KEY = 'support-map-tab-data'
+export const SUPPORT_MAP_TAB_BLOCK_THUMBNAIL_URL = `${folder}/support-map-page-block-thumbnail.png`
+
+export const SUPPORT_FAQ_TAB_SLUG_AND_TAG = 'support-faq-tab'
+export const SUPPORT_FAQ_TAB_BLOCK_LABEL = 'Support FAQ Tab'
+export const SUPPORT_FAQ_TAB_CACHE_KEY = 'support-faq-tab-data'
+export const SUPPORT_FAQ_TAB_BLOCK_THUMBNAIL_URL = `${folder}/support-faq-page-block-thumbnail.png`
+
+export const SUPPORT_BUZZ_SLUG_AND_TAG = 'support-buzz'
+export const SUPPORT_BUZZ_BLOCK_LABEL = 'Support Buzz'
+export const SUPPORT_BUZZ_CACHE_KEY = 'support-buzz-data'
+export const SUPPORT_BUZZ_BLOCK_THUMBNAIL_URL = `${folder}/support-buzz-page-block-thumbnail.png`

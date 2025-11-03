@@ -161,6 +161,9 @@ import ShantaFootprintSchema from '@/blocks/shantaFootprint/schema'
 import ShantaIntroSchema from '@/blocks/shantaIntro/schema'
 import ShantaMilestonesUnlockedSchema from '@/blocks/shantaMilestoneUnlocked/schema'
 import ShantaVisionSchema from '@/blocks/shantaVision/schema'
+import SupportBuzzSchema from '@/blocks/supportBuzz/schema'
+import SupportFaqTabSchema from '@/blocks/supportFaqTab/schema'
+import SupportMapTabSchema from '@/blocks/supportMapTab/schema'
 import ValuesThatShapeUsSchema from '@/blocks/valuesThatShapeUs/schema'
 import WhyChooseUsSchema from '@/blocks/whyChooseUs/schema'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
@@ -268,7 +271,12 @@ export const Pages: CollectionConfig = {
         //multistage page
         MultiStageIntroSchema,
         MultiStagePlanSchema,
-        CustomAccordionSchema
+        //custom blocks
+        CustomAccordionSchema,
+        //support page
+        SupportMapTabSchema,
+        SupportFaqTabSchema,
+        SupportBuzzSchema,
       ],
     },
   ],

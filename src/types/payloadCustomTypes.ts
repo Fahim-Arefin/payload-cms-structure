@@ -29,6 +29,9 @@ import {
   MULTI_STAGE_INTRO_SLUG_AND_TAG,
   MULTI_STAGE_PLAN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+  SUPPORT_BUZZ_SLUG_AND_TAG,
+  SUPPORT_FAQ_TAB_SLUG_AND_TAG,
+  SUPPORT_MAP_TAB_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -188,4 +191,20 @@ export type MultistagePlanBlockType = Extract<
 export type CustomAccordionBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CUSTOM_ACCORDION_SLUG_AND_TAG }
+>
+
+// support page
+export type SupportMapTabBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SUPPORT_MAP_TAB_SLUG_AND_TAG }
+>
+
+export type SupportFaqTabBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SUPPORT_FAQ_TAB_SLUG_AND_TAG}
+>
+
+export type SupportBuzzBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SUPPORT_BUZZ_SLUG_AND_TAG}
 >

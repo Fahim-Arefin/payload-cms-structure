@@ -2331,6 +2331,243 @@ export interface Page {
         blockName?: string | null;
         blockType: 'custom-accordion';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (default #ED7125). Length 7 (৭).
+         */
+        primaryLabelColor?: string | null;
+        /**
+         * Hex color in #RRGGBB (default #9C8639). Length 7 (৭).
+         */
+        secondaryLabelColor?: string | null;
+        /**
+         * Exactly 2 tabs are required.
+         */
+        tabItems?:
+          | {
+              /**
+               * Unique key for this tab item (e.g., "branches", "hospitals"). Must match usage in code. Also for navigation.
+               */
+              value: string;
+              label: string;
+              labelBN: string;
+              /**
+               * Optional. Must appear verbatim inside the corresponding Label.
+               */
+              highlightedLabel?: string | null;
+              /**
+               * ঐচ্ছিক। সংশ্লিষ্ট বাংলা লেবেলের ভিতরে হুবহু থাকতে হবে।
+               */
+              highlightedLabelBN?: string | null;
+              description?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              descriptionBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-map-tab';
+      }
+    | {
+        faqTab: {
+          value: 'general' | 'form';
+          label: string;
+          labelBN: string;
+          categoryTitle?: string | null;
+          categoryTitleBN?: string | null;
+          /**
+           * Hex color in #RRGGBB (e.g., #F6EDDD).
+           */
+          backgroundColor?: string | null;
+          title?: string | null;
+          titleBN?: string | null;
+          /**
+           * Pick each category once. Then add many Q&A items under each category.
+           */
+          categories?:
+            | {
+                key: 'general' | 'claims' | 'policy' | 'customer' | 'product' | 'insurance';
+                title: string;
+                titleBN?: string | null;
+                /**
+                 * Add as many questions as needed for this category.
+                 */
+                items?:
+                  | {
+                      title: string;
+                      titleBN?: string | null;
+                      desc?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      descBN?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        formsTab: {
+          value: 'general' | 'form';
+          label: string;
+          labelBN: string;
+          /**
+           * Hex color in #RRGGBB (e.g., #F6EDDD).
+           */
+          backgroundColor?: string | null;
+          /**
+           * Hex color in #RRGGBB (e.g., #a08d2c).
+           */
+          tableHeaderBgColor?: string | null;
+          /**
+           * Used for all rows. No links/IDs stored here.
+           */
+          buttonText?: string | null;
+          buttonTextBN?: string | null;
+          forms?:
+            | {
+                title: string;
+                titleBN?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-faq-tab';
+      }
+    | {
+        uploadSessionId?: string | null;
+        title: string;
+        titleBN?: string | null;
+        highlightedTitle?: string | null;
+        highlightedTitleBN?: string | null;
+        /**
+         * Main “ALL” feed. Includes hero image + a list of news cards with image, date, title, description and YouTube link.
+         */
+        allTab: {
+          value: 'all' | 'ovc';
+          /**
+           * Large section background visual. 16:9 recommended.
+           */
+          mainImage: string | Media;
+          mainImageOriginal?: (string | null) | Media;
+          pendingMainImageOriginal?: string | null;
+          pendingMainImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          mainImageBlurDataURL?: string | null;
+          mainImageSrcLink?: string | null;
+          /**
+           * Each news item uses a single image (no mobileImage). Date is a real date field. Video link must be a YouTube URL.
+           */
+          newsItems?:
+            | {
+                /**
+                 * Square icon (1:1). PNG with transparent background preferred.
+                 */
+                image: string | Media;
+                imageOriginal?: (string | null) | Media;
+                pendingImageOriginal?: string | null;
+                pendingImageCrop?: string | null;
+                imageBlurDataURL?: string | null;
+                date: string;
+                title: string;
+                titleBN?: string | null;
+                /**
+                 * Max 700 chars.
+                 */
+                description?: string | null;
+                descriptionBN?: string | null;
+                /**
+                 * Ex: https://www.youtube.com/watch?v=...
+                 */
+                videoLink?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        /**
+         * Background hero with overlaid headline. Optionally add a YouTube link for the modal video.
+         */
+        ovcTab: {
+          value: 'all' | 'ovc';
+          /**
+           * Background visual for the OVC/TVC tab. 16:9 recommended.
+           */
+          backgroundImage: string | Media;
+          backgroundImageOriginal?: (string | null) | Media;
+          pendingBackgroundImageOriginal?: string | null;
+          pendingBackgroundImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          backgroundImageBlurDataURL?: string | null;
+          title?: string | null;
+          titleBN?: string | null;
+          highlightedTitle?: string | null;
+          highlightedTitleBN?: string | null;
+          videoLink?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-buzz';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -3368,6 +3605,132 @@ export interface PagesSelect<T extends boolean = true> {
                     points?: T;
                     pointsBN?: T;
                     id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'support-map-tab'?:
+          | T
+          | {
+              primaryLabelColor?: T;
+              secondaryLabelColor?: T;
+              tabItems?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    labelBN?: T;
+                    highlightedLabel?: T;
+                    highlightedLabelBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'support-faq-tab'?:
+          | T
+          | {
+              faqTab?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    labelBN?: T;
+                    categoryTitle?: T;
+                    categoryTitleBN?: T;
+                    backgroundColor?: T;
+                    title?: T;
+                    titleBN?: T;
+                    categories?:
+                      | T
+                      | {
+                          key?: T;
+                          title?: T;
+                          titleBN?: T;
+                          items?:
+                            | T
+                            | {
+                                title?: T;
+                                titleBN?: T;
+                                desc?: T;
+                                descBN?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              formsTab?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    labelBN?: T;
+                    backgroundColor?: T;
+                    tableHeaderBgColor?: T;
+                    buttonText?: T;
+                    buttonTextBN?: T;
+                    forms?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'support-buzz'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              allTab?:
+                | T
+                | {
+                    value?: T;
+                    mainImage?: T;
+                    mainImageOriginal?: T;
+                    pendingMainImageOriginal?: T;
+                    pendingMainImageCrop?: T;
+                    mainImageBlurDataURL?: T;
+                    mainImageSrcLink?: T;
+                    newsItems?:
+                      | T
+                      | {
+                          image?: T;
+                          imageOriginal?: T;
+                          pendingImageOriginal?: T;
+                          pendingImageCrop?: T;
+                          imageBlurDataURL?: T;
+                          date?: T;
+                          title?: T;
+                          titleBN?: T;
+                          description?: T;
+                          descriptionBN?: T;
+                          videoLink?: T;
+                          id?: T;
+                        };
+                  };
+              ovcTab?:
+                | T
+                | {
+                    value?: T;
+                    backgroundImage?: T;
+                    backgroundImageOriginal?: T;
+                    pendingBackgroundImageOriginal?: T;
+                    pendingBackgroundImageCrop?: T;
+                    backgroundImageBlurDataURL?: T;
+                    title?: T;
+                    titleBN?: T;
+                    highlightedTitle?: T;
+                    highlightedTitleBN?: T;
+                    videoLink?: T;
                   };
               id?: T;
               blockName?: T;

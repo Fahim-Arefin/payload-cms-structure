@@ -1,0 +1,402 @@
+// src/payload/blocks/FaqTabs.ts
+import type { Block } from 'payload'
+import {
+  SUPPORT_FAQ_TAB_SLUG_AND_TAG,
+  SUPPORT_FAQ_TAB_BLOCK_LABEL,
+  SUPPORT_FAQ_TAB_BLOCK_THUMBNAIL_URL,
+} from '@/lib/constants'
+
+const TITLE_MAX = 120
+const BTN_TEXT_MAX = 24
+
+const validateShort =
+  (label: string, max: number, required = true) =>
+  (val: unknown) => {
+    const s = (val ?? '').toString().trim()
+    if (required && !s) return `${label} is required.`
+    if (!s) return true
+    return s.length <= max ? true : `${label} must be ≤ ${max} characters.`
+  }
+
+// ✅ New hex color validator (per your spec)
+const validateHexColor = (val: unknown) => {
+  if (val == null || val === '') return true
+  const s = String(val).trim()
+  return /^#[0-9A-Fa-f]{6}$/.test(s)
+    ? true
+    : 'Must be a valid hex color in #RRGGBB (e.g., #FFFFFF).'
+}
+
+const VALID_FAQ_KEYS = [
+  { label: 'General Query', value: 'general' },
+  { label: 'Claim', value: 'claims' },
+  { label: 'New Policy', value: 'policy' },
+  { label: 'Customer Care', value: 'customer' },
+  { label: 'Product', value: 'product' },
+  { label: 'Group Insurance', value: 'insurance' },
+] as const
+
+const FaqTabsSchema: Block = {
+  slug: SUPPORT_FAQ_TAB_SLUG_AND_TAG,
+  labels: { singular: SUPPORT_FAQ_TAB_BLOCK_LABEL, plural: SUPPORT_FAQ_TAB_BLOCK_LABEL },
+  imageURL: SUPPORT_FAQ_TAB_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${SUPPORT_FAQ_TAB_BLOCK_LABEL} preview`,
+
+  fields: [
+    /* ---------------------- FAQ TAB ---------------------- */
+    {
+      name: 'faqTab',
+      type: 'group',
+      label: 'FAQ Tab',
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'value',
+              type: 'select',
+              label: 'Tab Value',
+              required: true,
+              defaultValue: 'general',
+              options: [
+                { label: 'General', value: 'general' },
+                { label: 'Download Forms', value: 'form' }, // keeps FE parity
+              ],
+              admin: { width: '25%' },
+            },
+            {
+              name: 'label',
+              type: 'text',
+              label: 'Label',
+              required: true,
+              defaultValue: 'General Forms',
+              maxLength: TITLE_MAX,
+              validate: validateShort('Label', TITLE_MAX, true),
+              admin: { width: '37.5%' },
+            },
+            {
+              name: 'labelBN',
+              type: 'text',
+              label: 'লেবেল (বাংলা)',
+              required: true,
+              defaultValue: 'সাধারণ জিজ্ঞাসা',
+              maxLength: TITLE_MAX,
+              validate: validateShort('Label (BN)', TITLE_MAX, true),
+              admin: { width: '37.5%' },
+            },
+          ],
+        },
+
+        // ✅ Optional localized heading shown above the category selector
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'categoryTitle',
+              type: 'text',
+              label: 'Category Heading',
+              required: false,
+              maxLength: TITLE_MAX,
+              validate: validateShort('Category Heading', TITLE_MAX, false),
+              admin: { width: '50%' },
+            },
+            {
+              name: 'categoryTitleBN',
+              type: 'text',
+              label: 'ক্যাটাগরি শিরোনাম (বাংলা)',
+              required: false,
+              maxLength: TITLE_MAX,
+              validate: validateShort('Category Heading (BN)', TITLE_MAX, false),
+              admin: { width: '50%' },
+            },
+          ],
+        },
+
+        // ✅ NEW: FAQ section background color
+        {
+          name: 'backgroundColor',
+          type: 'text',
+          label: 'FAQ Background Color',
+          defaultValue: '#F6EDDD',
+          validate: validateHexColor,
+          admin: {
+            description: 'Hex color in #RRGGBB (e.g., #F6EDDD).',
+            width: '33%',
+          },
+        },
+
+        // Section headline (optional)
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              label: 'FAQ Title',
+              required: false,
+              maxLength: TITLE_MAX,
+              validate: validateShort('FAQ Title', TITLE_MAX, false),
+              admin: { width: '50%' },
+            },
+            {
+              name: 'titleBN',
+              type: 'text',
+              label: 'FAQ Title (BN)',
+              required: false,
+              maxLength: TITLE_MAX,
+              validate: validateShort('FAQ Title (BN)', TITLE_MAX, false),
+              admin: { width: '50%' },
+            },
+          ],
+        },
+
+        // Exactly 6 FAQ categories from fixed options (unique keys)
+        {
+          name: 'categories',
+          type: 'array',
+          label: 'FAQ Categories (exactly 6, unique)',
+          minRows: 6,
+          maxRows: 6,
+          admin: {
+            description: 'Pick each category once. Then add many Q&A items under each category.',
+          },
+          // ensure uniqueness of 'key'
+          validate: (value) => {
+            const arr = (value ?? []) as any[]
+            if (!Array.isArray(arr)) return true
+            const keys = arr.map((r) => r?.key).filter(Boolean)
+            const set = new Set(keys)
+            if (keys.length !== set.size) return 'Each category can be selected only once.'
+            return true
+          },
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'key',
+                  type: 'select',
+                  label: 'Category',
+                  required: true,
+                  options: [VALID_FAQ_KEYS].flat(),
+                  admin: { width: '30%' },
+                },
+                {
+                  name: 'title',
+                  type: 'text',
+                  label: 'Category Title',
+                  required: true,
+                  maxLength: TITLE_MAX,
+                  validate: validateShort('Category Title', TITLE_MAX, true),
+                  admin: { width: '35%' },
+                },
+                {
+                  name: 'titleBN',
+                  type: 'text',
+                  label: 'ক্যাটাগরি শিরোনাম (বাংলা)',
+                  required: false,
+                  maxLength: TITLE_MAX,
+                  validate: validateShort('Category Title (BN)', TITLE_MAX, false),
+                  admin: { width: '35%' },
+                },
+              ],
+            },
+            // Nested Q&A list for this category
+            {
+              name: 'items',
+              type: 'array',
+              label: 'Q&A Items',
+              minRows: 1,
+              admin: { description: 'Add as many questions as needed for this category.' },
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'title',
+                      type: 'text',
+                      label: 'Question Title',
+                      required: true,
+                      maxLength: TITLE_MAX,
+                      validate: validateShort('Question Title', TITLE_MAX, true),
+                      admin: { width: '50%' },
+                    },
+                    {
+                      name: 'titleBN',
+                      type: 'text',
+                      label: 'প্রশ্ন (বাংলা)',
+                      required: false,
+                      maxLength: TITLE_MAX,
+                      validate: validateShort('Question Title (BN)', TITLE_MAX, false),
+                      admin: { width: '50%' },
+                    },
+                  ],
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'desc',
+                      type: 'richText',
+                      label: 'Answer (Rich Text)',
+                      required: false,
+                      admin: { width: '50%' },
+                    },
+                    {
+                      name: 'descBN',
+                      type: 'richText',
+                      label: 'উত্তর (রিচ টেক্সট)',
+                      required: false,
+                      admin: { width: '50%' },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+          // Seed all 6 rows with the keys in order (titles are editable)
+          defaultValue: [
+            { key: 'general', title: 'General Query', titleBN: 'সাধারণ জিজ্ঞাসা' },
+            { key: 'claims', title: 'Claim', titleBN: 'ক্লেইম' },
+            { key: 'policy', title: 'New Policy', titleBN: 'নতুন পলিসি' },
+            { key: 'customer', title: 'Customer Care', titleBN: 'কাস্টমার কেয়ার' },
+            { key: 'product', title: 'Product', titleBN: 'পণ্য' },
+            { key: 'insurance', title: 'Group Insurance', titleBN: 'গ্রুপ ইন্স্যুরেন্স' },
+          ],
+        },
+      ],
+    },
+
+    /* ---------------------- DOWNLOAD FORMS TAB ---------------------- */
+    {
+      name: 'formsTab',
+      type: 'group',
+      label: 'Download Forms Tab',
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'value',
+              type: 'select',
+              label: 'Tab Value',
+              required: true,
+              defaultValue: 'form',
+              options: [
+                { label: 'General', value: 'general' },
+                { label: 'Download Forms', value: 'form' },
+              ],
+              admin: { width: '25%' },
+            },
+            {
+              name: 'label',
+              type: 'text',
+              label: 'Label',
+              required: true,
+              defaultValue: 'Download Forms',
+              maxLength: TITLE_MAX,
+              validate: validateShort('Label', TITLE_MAX, true),
+              admin: { width: '37.5%' },
+            },
+            {
+              name: 'labelBN',
+              type: 'text',
+              label: 'লেবেল (বাংলা)',
+              required: true,
+              defaultValue: 'ডাউনলোড ফরম',
+              maxLength: TITLE_MAX,
+              validate: validateShort('Label (BN)', TITLE_MAX, true),
+              admin: { width: '37.5%' },
+            },
+          ],
+        },
+
+        // ✅ NEW: Forms table background color (container)
+        {
+          name: 'backgroundColor',
+          type: 'text',
+          label: 'Forms Table Background Color',
+          defaultValue: '#F6EDDD',
+          validate: validateHexColor,
+          admin: {
+            description: 'Hex color in #RRGGBB (e.g., #F6EDDD).',
+            width: '33%',
+          },
+        },
+
+        // ✅ NEW: Forms table header background
+        {
+          name: 'tableHeaderBgColor',
+          type: 'text',
+          label: 'Table Header Background Color',
+          defaultValue: '#a08d2c',
+          validate: validateHexColor,
+          admin: {
+            description: 'Hex color in #RRGGBB (e.g., #a08d2c).',
+            width: '33%',
+          },
+        },
+
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'buttonText',
+              type: 'text',
+              label: 'Button Text',
+              required: false,
+              defaultValue: 'Download',
+              maxLength: BTN_TEXT_MAX,
+              validate: validateShort('Button Text', BTN_TEXT_MAX, false),
+              admin: { width: '50%', description: 'Used for all rows. No links/IDs stored here.' },
+            },
+            {
+              name: 'buttonTextBN',
+              type: 'text',
+              label: 'বোতামের লেখা (বাংলা)',
+              required: false,
+              defaultValue: 'ডাউনলোড',
+              maxLength: BTN_TEXT_MAX,
+              validate: validateShort('Button Text (BN)', BTN_TEXT_MAX, false),
+              admin: { width: '50%' },
+            },
+          ],
+        },
+
+        {
+          name: 'forms',
+          type: 'array',
+          label: 'Forms',
+          minRows: 1,
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  label: 'Title',
+                  required: true,
+                  maxLength: TITLE_MAX,
+                  validate: validateShort('Title', TITLE_MAX, true),
+                  admin: { width: '50%' },
+                },
+                {
+                  name: 'titleBN',
+                  type: 'text',
+                  label: 'শিরোনাম (বাংলা)',
+                  required: false,
+                  maxLength: TITLE_MAX,
+                  validate: validateShort('Title (BN)', TITLE_MAX, false),
+                  admin: { width: '50%' },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
+export default FaqTabsSchema
