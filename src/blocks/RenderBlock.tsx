@@ -22,6 +22,8 @@ import {
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
   APPD_BLOCK_SLUG_AND_TAG,
+  BLOGS_DETAILS_SLUG_AND_TAG,
+  BLOGS_SLUG_AND_TAG,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
   CONTACT_US_BLOCK_SLUG_AND_TAG,
   CORPORATE_INFO_SLUG_AND_TAG,
@@ -68,6 +70,8 @@ import PlanInfoDesign03Block from './planInfoDesign03/PlanInfoDesign03Block'
 import APPDBlock from './APPD/APPDBlock'
 import PlanInfoDesign04Block from './planInfoDesign04/PlanInfoDesign04Block'
 import PlanInfoDesign05Block from './planInfoDesign05/PlanInfoDesign05Block'
+import BlogsBlock from './blogs/BlogsBlock'
+import BlockDetailsBlock from './blogDetails/BlockDetailsBlock'
 
 type Params = Record<string, string>
 
@@ -162,6 +166,12 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     // APPD
     case APPD_BLOCK_SLUG_AND_TAG:
       return <APPDBlock key={block.id} block={block} params={params} />
+
+    // news and media
+    case BLOGS_SLUG_AND_TAG:
+      return <BlogsBlock key={block.id} block={block} params={params} />
+    case BLOGS_DETAILS_SLUG_AND_TAG:
+      return <BlockDetailsBlock key={block.id} block={block} params={params} />
 
     default:
       return null

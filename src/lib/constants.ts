@@ -35,9 +35,13 @@ export const GLOBAL_LEADERSHIP_TEAM_SLUG_AND_TAG = 'leadership-team' as const
 export const GLOBAL_LEADERSHIP_TEAM_BLOCK_LABEL = 'Leadership Team'
 export const GLOBAL_LEADERSHIP_TEAM_CACHE_KEY = 'leadership-team-data'
 
-export const GLOBAL_CONTACT_US_SLUG_AND_TAG = 'global-contact-us-form'
+export const GLOBAL_CONTACT_US_SLUG_AND_TAG = 'global-contact-us-form' as const
 export const GLOBAL_CONTACT_US_BLOCK_LABEL = 'Contact Us'
 export const GLOBAL_CONTACT_US_CACHE_KEY = 'global-contact-us-form-data'
+
+export const GLOBAL_BLOGS_SLUG_AND_TAG = 'global-blogs' as const
+export const GLOBAL_BLOGS_BLOCK_LABEL = 'Blogs'
+export const GLOBAL_BLOGS_CACHE_KEY = 'global-blogs-data'
 
 // thumbnail folder name
 const folder = '/assets/block-icons'
@@ -294,3 +298,14 @@ export const APPD_BLOCK_SLUG_AND_TAG = 'accidental-permanent-partial-disability'
 export const APPD_BLOCK_SLUG_AND_TAG_CACHE_KEY = 'accidental-permanent-partial-disability-data'
 export const APPD_BLOCK_LABEL = 'Accidental Permanent Partial DisabilitySection'
 export const APPD_BLOCK_THUMBNAIL_URL = `${folder}/accidental-permanent-partial-disability-block-thumbnail.png`
+
+// news and media page
+export const BLOGS_SLUG_AND_TAG = 'blogs'
+export const BLOGS_BLOCK_LABEL = 'All Blogs'
+export const BLOGS_BLOCK_THUMBNAIL_URL = `${folder}/blogs-block-thumbnail.png`
+export const BLOGS_CACHE_KEY = 'blogs-data'
+
+export const BLOGS_DETAILS_SLUG_AND_TAG = 'blogs-details'
+export const BLOGS_DETAILS_BLOCK_LABEL = 'Blog Details'
+export const BLOGS_DETAILS_BLOCK_THUMBNAIL_URL = `${folder}/blogs-details-block-thumbnail.png`
+export const BLOGS_DETAILS_CACHE_KEY = 'blogs-details-data'

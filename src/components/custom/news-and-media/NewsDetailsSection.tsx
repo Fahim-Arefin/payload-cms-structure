@@ -1,46 +1,56 @@
-import { AllNewsAndBlogDataType } from '@/types'
+import { GlobalBlog } from '@/payload-types'
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
-import React from 'react'
+import LocalizedText from '../shared/LocalizedText'
+import { formatLocalDhaka, formatMonDYYYYBN } from '@/lib/utils'
+import LocalizedRichText from '../shared/LocalizedRichText'
+import { BlogDetailsSectionType } from '@/types/payloadCustomTypes'
 
 type Props = {
-  id: number
-  data: AllNewsAndBlogDataType[]
+  data: GlobalBlog['blogs'][number]
+  block: BlogDetailsSectionType
 }
 
-function NewsDetailsSection({ data, id }: Props) {
-  const news = data.find((item, i) => item.id === id)
-
-  if (!news) {
-    notFound()
-  }
-
-  console.log(news)
-
+function NewsDetailsSection({ data, block }: Props) {
   return (
-    <div className="container-padding ">
+    <div className="container-padding " style={{ backgroundColor: block?.backgroundColor || '' }}>
       <div className="space-y-8 lg:space-y-12">
         <div className="">
-          <div className="text-[#6E6E6E] global-p2 uppercase tracking-[2px] mb-2">{news?.date}</div>
-          <h2 className="global-h2 font-normal">{news?.title}</h2>
+          <div className="text-[#6E6E6E] global-p2 uppercase tracking-[2px] mb-2">
+            {data?.importantDate && data?.importantDateBN ? (
+              <LocalizedText en={data?.importantDate} bn={data?.importantDateBN} />
+            ) : (
+              <LocalizedText
+                en={formatLocalDhaka(data?.updatedAt ? data?.updatedAt : '')}
+                bn={formatMonDYYYYBN(data?.updatedAt ? data?.updatedAt : '')}
+              />
+            )}
+          </div>
+          <h2 className="global-h2 font-normal">
+            <LocalizedText en={data?.title} bn={data?.titleBN} />
+          </h2>
         </div>
         <div className="flex flex-col lg:flex-row gap-8 ">
           <div
             role="img"
-            aria-label={news?.title}
+            aria-label={data?.title}
             className={`relative
     md:rounded-md lg:rounded-lg xl:rounded-xl 
-    w-full md:min-w-[200px] lg:min-w-[230px] lg:max-w-[230px] xl:min-w-[300px] xl:max-w-[300px] 2xl:min-w-[350px] 2xl:max-w-[350px]
-    aspect-[3248/2165] lg:aspect-auto lg:h-[153px] xl:h-[200px] 2xl:h-[233px]
+    w-full md:min-w-[200px] lg:min-w-[230px] lg:max-w-[230px] xl:min-w-[300px] xl:max-w-[300px] 2xl:min-w-[350px] 2xl:max-w-[350px] h-fit
+    aspect-[600/375]
   `}
           >
-            <Image
-              src={news?.image}
-              alt={news?.title}
-              fill
-              className="md:rounded-md lg:rounded-lg xl:rounded-xl "
-              sizes="(max-width: 767px) 300px, 600px"
-            />
+            {typeof data?.image === 'object' && data?.image?.url && (
+              <Image
+                src={data?.image?.url}
+                alt={data?.title}
+                fill
+                className="md:rounded-md lg:rounded-lg xl:rounded-xl "
+                sizes="(max-width: 767px) 300px, 600px"
+                placeholder="blur"
+                blurDataURL={data?.imageBlurDataURL || ''}
+                quality={80}
+              />
+            )}
           </div>
 
           <div
@@ -49,37 +59,18 @@ function NewsDetailsSection({ data, id }: Props) {
               alignSelf: 'stretch',
             }}
           >
-            {news?.description.split('\n').map((line, index) => {
-              // Check if line is a numbered list item
-              if (/^\d+\.\s/.test(line.trim())) {
-                return (
-                  <div key={index} className="ml-4 mb-2">
-                    {line.trim()}
-                  </div>
-                )
-              }
-              // Check if line is empty (for spacing)
-              if (line.trim() === '') {
-                return <br key={index} />
-              }
-              // Regular paragraph
-              return (
-                <p key={index} className="mb-4">
-                  {line}
-                </p>
-              )
-            })}
+            <LocalizedRichText en={data?.description} bn={data?.descriptionBN} />
 
             {/* External News Link */}
-            {news?.externalLink && (
+            {(data?.newsLinkBtnText || data?.newsLinkBtnTextBN) && (
               <div className="mt-6 pt-4 border-t border-gray-200">
                 <a
-                  href={news.externalLink}
+                  href={data.newsLink ?? ''}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-[#9C8639] hover:text-[#7A6B2D] font-medium transition-colors"
                 >
-                  News Link
+                  <LocalizedText en={data?.newsLinkBtnText} bn={data?.newsLinkBtnTextBN} />
                   <svg
                     width="16"
                     height="16"

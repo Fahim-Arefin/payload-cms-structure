@@ -140,6 +140,8 @@ import BoardOfDirectorsListSchema from '@/blocks/BoardOfDirectorsList/schema'
 import LicensedLaunchedSchema from '@/blocks/LicensedAndLaunched/schema'
 import AgentOnboardingOpportunitySchema from '@/blocks/agentOnboadringOpportunity/schema'
 import AgentVisionSchema from '@/blocks/agentVision/schema'
+import BLogDetailsSectionSchema from '@/blocks/blogDetails/schema'
+import AllBLogsSectionSchema from '@/blocks/blogs/schema'
 import ContactUsSchema from '@/blocks/contactUs/schema'
 import CorporateInfoSchema from '@/blocks/corporateInfo/schema'
 import CorporateIntroSchema from '@/blocks/corporateIntro/schema'
@@ -207,11 +209,14 @@ export const Pages: CollectionConfig = {
     { name: 'name', label: 'Name', type: 'text', required: true },
     {
       name: 'slug',
-      label: 'Slug (e.g. index, about, bods/all-bods)',
+      label: 'Slug (e.g. index , plans/individual , news-and-blogs , news-and-blogs/:slug)',
       type: 'text',
       required: true,
       unique: true,
-      admin: { position: 'sidebar' },
+      admin: {
+        position: 'sidebar',
+        description: 'for home page use `index`, for dynamic page use `:slug`',
+      },
       validate: (val: unknown) => {
         const s = String(val ?? '').trim()
         if (!s) return 'Slug is required'
@@ -275,6 +280,8 @@ export const Pages: CollectionConfig = {
         PlanInfoDesign04Schema,
         PlanInfoDesign05Schema,
         APPDSchema,
+        AllBLogsSectionSchema,
+        BLogDetailsSectionSchema,
       ],
     },
   ],

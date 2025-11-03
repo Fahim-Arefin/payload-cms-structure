@@ -1,5 +1,6 @@
 import DirectorCardSection from '@/components/custom/about-us/DirectorCardSection'
 import NoDataFound from '@/components/custom/shared/NoDataFound'
+import { ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL } from '@/lib/constants'
 import { BoardOfDirectorsCardBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
@@ -15,7 +16,7 @@ async function BoardOfDirectorsCardBlock({ block }: Props) {
       ) : (
         <NoDataFound
           message="Please Turn On The Checkbox"
-          description="In the admin panel, open the “Board of Directors Card” block and check the “Use shared Board of Directors (Global)” checkbox."
+          description={`In the admin panel, open the “${ABOUT_US_PAGE_BOD_CARD_BLOCK_LABEL}” block and check the “Use shared Board of Directors (Global)” checkbox.`}
           bgColor={block?.backgroundColor || ''}
         />
       )}

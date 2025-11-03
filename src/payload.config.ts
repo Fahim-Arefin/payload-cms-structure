@@ -21,6 +21,7 @@ import Header from './collections/globals/Header'
 import BoardOfDirectors from './collections/globals/BoardOfDirectors'
 import LeadershipTeam from './collections/globals/LeadershipTeam'
 import ContactUsGlobal from './collections/globals/GlobalContactUs'
+import GlobalBlogs from './collections/globals/Blogs'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -40,7 +41,7 @@ export default buildConfig({
     },
     abortOnLimit: true,
   },
-  globals: [Header, Navbar, Footer, BoardOfDirectors, LeadershipTeam, ContactUsGlobal],
+  globals: [Header, Navbar, Footer, BoardOfDirectors, LeadershipTeam, ContactUsGlobal, GlobalBlogs],
   collections: [Users, Media, Resume, CareerApplication, AgentCareerApplication, Pages],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

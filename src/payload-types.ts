@@ -99,6 +99,7 @@ export interface Config {
     'board-of-directors': BoardOfDirector;
     'leadership-team': LeadershipTeam;
     'global-contact-us-form': GlobalContactUsForm;
+    'global-blogs': GlobalBlog;
   };
   globalsSelect: {
     'global-header': GlobalHeaderSelect<false> | GlobalHeaderSelect<true>;
@@ -107,6 +108,7 @@ export interface Config {
     'board-of-directors': BoardOfDirectorsSelect<false> | BoardOfDirectorsSelect<true>;
     'leadership-team': LeadershipTeamSelect<false> | LeadershipTeamSelect<true>;
     'global-contact-us-form': GlobalContactUsFormSelect<false> | GlobalContactUsFormSelect<true>;
+    'global-blogs': GlobalBlogsSelect<false> | GlobalBlogsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -236,6 +238,9 @@ export interface Page {
   id: string;
   uploadSessionId?: string | null;
   name: string;
+  /**
+   * for home page use `index`, for dynamic page use `:slug`
+   */
   slug: string;
   /**
    * Uncheck to hide this page (404).
@@ -3350,6 +3355,88 @@ export interface Page {
         blockName?: string | null;
         blockType: 'accidental-permanent-partial-disability';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 100 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Used for direct jump links to this section (e.g., blog-section). Must not have leading/trailing spaces.
+         */
+        sectionId: string;
+        /**
+         * Search bar will show if u check the checkbox
+         */
+        showSearchBar: boolean;
+        /**
+         * When ON, this block renders data from **Global → Blogs**.
+         *
+         * **Before enabling:** fill up the Global → Blogs data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        /**
+         * Label for the per-card CTA (e.g., “Read More”). Max 50 characters.
+         */
+        readMoreText: string;
+        /**
+         * কার্ডের CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
+         */
+        readMoreTextBN: string;
+        /**
+         * Label for the list “Load More” button. Max 50 characters.
+         */
+        loadMoreText: string;
+        /**
+         * লিস্টের “Load More” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
+         */
+        loadMoreTextBN: string;
+        /**
+         * Label for collapsing the list (e.g., “See Less”). Max 50 characters.
+         */
+        seeLessText: string;
+        /**
+         * লিস্ট সংকুচিত করার বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
+         */
+        seeLessTextBN: string;
+        /**
+         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
+         */
+        linkTarget: string | Page;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'blogs';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * When ON, this block renders data from **Global → Blogs**.
+         *
+         * **Before enabling:** fill up the Global → Blogs data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'blogs-details';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -4694,6 +4781,33 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        blogs?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              sectionId?: T;
+              showSearchBar?: T;
+              useSharedData?: T;
+              readMoreText?: T;
+              readMoreTextBN?: T;
+              loadMoreText?: T;
+              loadMoreTextBN?: T;
+              seeLessText?: T;
+              seeLessTextBN?: T;
+              linkTarget?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'blogs-details'?:
+          | T
+          | {
+              backgroundColor?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -5454,6 +5568,102 @@ export interface GlobalContactUsForm {
   createdAt?: string | null;
 }
 /**
+ * Global list of blog/news cards. Each item has EN/BN title, image (cropper), rich descriptions, important date, Bangla date label, and a news link with EN/BN button text.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-blogs".
+ */
+export interface GlobalBlog {
+  id: string;
+  uploadSessionId?: string | null;
+  /**
+   * Add each blog/news as a card item.
+   */
+  blogs: {
+    /**
+     * 563:375 recommended. Blur placeholder generated automatically.
+     */
+    image: string | Media;
+    imageOriginal?: (string | null) | Media;
+    pendingImageOriginal?: string | null;
+    pendingImageCrop?: string | null;
+    imageBlurDataURL?: string | null;
+    /**
+     * Max 500 characters.
+     */
+    title: string;
+    /**
+     * সর্বোচ্চ ৫০০ অক্ষর।
+     */
+    titleBN: string;
+    /**
+     * Up to ~5000 characters.
+     */
+    description?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+     */
+    descriptionBN?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    /**
+     * Primary date used for sorting/highlighting.
+     */
+    importantDate?: string | null;
+    /**
+     * সর্বোচ্চ ১৫০ অক্ষর।
+     */
+    importantDateBN?: string | null;
+    /**
+     * If you featured a blog that means it will show on the homepage news and blog section. (exactly 2 must be selected)
+     */
+    isFeatured?: boolean | null;
+    /**
+     * Max 150 chars.
+     */
+    newsLinkBtnText?: string | null;
+    /**
+     * সর্বোচ্চ ১৫০ অক্ষর।
+     */
+    newsLinkBtnTextBN?: string | null;
+    /**
+     * Must be a full http(s) URL.
+     */
+    newsLink?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-header_select".
  */
@@ -5757,6 +5967,38 @@ export interface GlobalContactUsFormSelect<T extends boolean = true> {
       };
   termsAndConditionButtonLink?: T;
   privacyPolicyButtonLink?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-blogs_select".
+ */
+export interface GlobalBlogsSelect<T extends boolean = true> {
+  uploadSessionId?: T;
+  blogs?:
+    | T
+    | {
+        image?: T;
+        imageOriginal?: T;
+        pendingImageOriginal?: T;
+        pendingImageCrop?: T;
+        imageBlurDataURL?: T;
+        title?: T;
+        titleBN?: T;
+        description?: T;
+        descriptionBN?: T;
+        importantDate?: T;
+        importantDateBN?: T;
+        isFeatured?: T;
+        newsLinkBtnText?: T;
+        newsLinkBtnTextBN?: T;
+        newsLink?: T;
+        createdAt?: T;
+        updatedAt?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

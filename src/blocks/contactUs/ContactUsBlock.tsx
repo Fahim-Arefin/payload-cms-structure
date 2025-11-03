@@ -1,5 +1,6 @@
 import ContactUsSectionServer from '@/components/custom/shared/contactUs/ContactUsSectionServer'
 import NoDataFound from '@/components/custom/shared/NoDataFound'
+import { CONTACT_US_BLOCK_LABEL } from '@/lib/constants'
 import { ContactUsFormBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
@@ -15,7 +16,7 @@ function ContactUsBlock({ block }: Props) {
       ) : (
         <NoDataFound
           message="Please Turn On The Checkbox"
-          description="In the admin panel, open the “Contact Us Form” block and check the “Use shared Contact Us (Global)” checkbox."
+          description={`In the admin panel, open the “${CONTACT_US_BLOCK_LABEL}” block and check the “Use shared Contact Us (Global)” checkbox.`}
           bgColor={block?.backgroundColor || ''}
         />
       )}

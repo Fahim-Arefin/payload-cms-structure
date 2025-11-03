@@ -2,7 +2,11 @@
 
 import { useEffect } from 'react'
 
-export default function HashScroller() {
+type Props = {
+  blogSectionId?: string
+}
+
+export default function HashScroller({ blogSectionId }: Props) {
   useEffect(() => {
     let lastHash = ''
 
@@ -12,7 +16,7 @@ export default function HashScroller() {
       lastHash = hash
 
       const map: Record<string, string> = {
-        blog: 'blog-section',
+        blog: blogSectionId ?? '',
         news: 'news-section',
         vlog: 'vlog-section',
       }

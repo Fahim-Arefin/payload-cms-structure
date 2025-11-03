@@ -476,19 +476,62 @@ export default async function CatchAll(props: PageProps) {
   const effective = slug?.length ? slug.join('/') : 'index'
   const path = norm(effective)
 
+  // // =============================================================================================
+  // // =============================================================================================
+  // // 1) try exact
+  // const exact = await getPageBySlugCached(path)
+  // if (!exact) notFound()
+  // // if (exact?.publish !== false) return <div>{exact?.layout?.map((b) => renderBlock(b, {}))}</div>
+  // if (exact?.publish !== false)
+  //   return (
+  //     <div>
+  //       <RenderBlocks layout={exact.layout} params={{}} />
+  //     </div>
+  //   )
+  // if (exact && exact.publish === false) return notFound()
+
+  // // 2) try pattern pages (sorted by specificity)
+  // const patterns = await getPatternPagesCached()
+  // patterns.sort((a: any, b: any) => {
+  //   const statics = (s: string) => s.split('/').filter((p) => p && !p.startsWith(':')).length
+  //   return statics(b.slug) - statics(a.slug)
+  // })
+
+  // for (const page of patterns) {
+  //   const params = matchPattern(path, page.slug)
+  //   if (!params) continue
+  //   // If you store the same doc under that pattern slug, reuse its tag
+  //   const concrete = await getPageBySlugCached(page.slug)
+  //   const canShow = (concrete ?? page)?.publish !== false
+  //   if (!canShow) break
+  //   // return <div>{(concrete?.layout ?? page.layout)?.map((b: any) => renderBlock(b, params))}</div>
+  //   return (
+  //     <div>
+  //       <RenderBlocks
+  //         layout={(concrete?.layout ?? page.layout) as PayloadPage['layout']}
+  //         params={params}
+  //       />
+  //     </div>
+  //   )
+  // }
+  // notFound()
+  // // =============================================================================================
+  // // =============================================================================================
   // 1) try exact
   const exact = await getPageBySlugCached(path)
-  if (!exact) notFound()
-  // if (exact?.publish !== false) return <div>{exact?.layout?.map((b) => renderBlock(b, {}))}</div>
-  if (exact?.publish !== false)
-    return (
-      <div>
-        <RenderBlocks layout={exact.layout} params={{}} />
-      </div>
-    )
-  if (exact && exact.publish === false) return notFound()
 
-  // 2) try pattern pages (sorted by specificity)
+  if (exact) {
+    if (exact.publish !== false) {
+      return (
+        <div>
+          <RenderBlocks layout={exact.layout} params={{}} />
+        </div>
+      )
+    }
+    return notFound()
+  }
+
+  // 2) try pattern pages (only when no exact match)
   const patterns = await getPatternPagesCached()
   patterns.sort((a: any, b: any) => {
     const statics = (s: string) => s.split('/').filter((p) => p && !p.startsWith(':')).length
@@ -498,11 +541,11 @@ export default async function CatchAll(props: PageProps) {
   for (const page of patterns) {
     const params = matchPattern(path, page.slug)
     if (!params) continue
-    // If you store the same doc under that pattern slug, reuse its tag
+
     const concrete = await getPageBySlugCached(page.slug)
     const canShow = (concrete ?? page)?.publish !== false
     if (!canShow) break
-    // return <div>{(concrete?.layout ?? page.layout)?.map((b: any) => renderBlock(b, params))}</div>
+
     return (
       <div>
         <RenderBlocks
