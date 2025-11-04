@@ -40,6 +40,7 @@ import {
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
+  NEWS_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_03_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_04_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_05_SLUG_AND_TAG,
@@ -74,6 +75,7 @@ import PlanInfoDesign05Block from './planInfoDesign05/PlanInfoDesign05Block'
 import BlogsBlock from './blogs/BlogsBlock'
 import BlockDetailsBlock from './blogDetails/BlockDetailsBlock'
 import AllBlogsCardBlock from './AllblogsCard/AllBlogsCardBlock'
+import AllNewsBlock from './news/AllNewsBlock'
 
 type Params = Record<string, string>
 
@@ -176,6 +178,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <BlockDetailsBlock key={block.id} block={block} params={params} />
     case BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_SLUG_AND_TAG:
       return <AllBlogsCardBlock key={block.id} block={block} params={params} />
+    case NEWS_SLUG_AND_TAG:
+      return <AllNewsBlock key={block.id} block={block} params={params} />
 
     default:
       return null

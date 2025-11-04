@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { buildDetailHref, formatLocalDhaka, formatMonDYYYYBN, resolvePageSlug } from '@/lib/utils'
 import { GlobalBlog } from '@/payload-types'
-import { AllBlogsSectionType } from '@/types/payloadCustomTypes'
+import { AllBlogsSectionType, AllNewsSectionType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -16,7 +16,7 @@ type Props = {
   bgColor?: string
   paddingOn?: boolean
   allContent: GlobalBlog['blogs']
-  block: AllBlogsSectionType
+  block: AllBlogsSectionType | AllNewsSectionType
 }
 
 function SearchNews({ bgColor, paddingOn = false, allContent, block }: Props) {

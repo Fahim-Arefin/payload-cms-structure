@@ -40,7 +40,7 @@ export const GLOBAL_CONTACT_US_BLOCK_LABEL = 'Contact Us'
 export const GLOBAL_CONTACT_US_CACHE_KEY = 'global-contact-us-form-data'
 
 export const GLOBAL_BLOGS_SLUG_AND_TAG = 'global-blogs' as const
-export const GLOBAL_BLOGS_BLOCK_LABEL = 'Blogs'
+export const GLOBAL_BLOGS_BLOCK_LABEL = 'News and Blogs'
 export const GLOBAL_BLOGS_CACHE_KEY = 'global-blogs-data'
 
 // thumbnail folder name
@@ -320,3 +320,8 @@ export const BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_SLUG_AND_TAG = 'all-blogs-card'
 export const BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_BLOCK_LABEL = 'All Blogs Card'
 export const BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_BLOCK_THUMBNAIL_URL = `${folder}/all-blogs-card-block-thumbnail.png`
 export const BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_CACHE_KEY = 'all-blogs-card-data'
+
+export const NEWS_SLUG_AND_TAG = 'news'
+export const NEWS_BLOCK_LABEL = 'All News'
+export const NEWS_BLOCK_THUMBNAIL_URL = `${folder}/news-block-thumbnail.png`
+export const NEWS_CACHE_KEY = 'news-data'

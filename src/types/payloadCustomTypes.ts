@@ -32,6 +32,7 @@ import {
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
   LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
+  NEWS_SLUG_AND_TAG,
   OFFER_CARDS_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_03_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_04_SLUG_AND_TAG,
@@ -236,6 +237,7 @@ export type AllBlogsSectionType = Extract<
   Page['layout'][number],
   { blockType: typeof BLOGS_SLUG_AND_TAG }
 >
+
 export type BlogDetailsSectionType = Extract<
   Page['layout'][number],
   { blockType: typeof BLOGS_DETAILS_SLUG_AND_TAG }
@@ -243,4 +245,9 @@ export type BlogDetailsSectionType = Extract<
 export type AllBlockCardType = Extract<
   Page['layout'][number],
   { blockType: typeof BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_SLUG_AND_TAG }
+>
+
+export type AllNewsSectionType = Extract<
+  Page['layout'][number],
+  { blockType: typeof NEWS_SLUG_AND_TAG }
 >

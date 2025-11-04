@@ -1,4 +1,4 @@
-import { BLOGS_BLOCK_LABEL, BLOGS_BLOCK_THUMBNAIL_URL, BLOGS_SLUG_AND_TAG } from '@/lib/constants'
+import { NEWS_BLOCK_LABEL, NEWS_BLOCK_THUMBNAIL_URL, NEWS_SLUG_AND_TAG } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 
@@ -40,15 +40,15 @@ const validateRequiredNoEdgeSpaces = (val: unknown) => {
   return validateSingleWordId(s)
 }
 
-const AllBLogsSectionSchema: Block = {
-  slug: BLOGS_SLUG_AND_TAG,
+const AllNewsSectionSchema: Block = {
+  slug: NEWS_SLUG_AND_TAG,
   labels: {
-    singular: BLOGS_BLOCK_LABEL,
-    plural: BLOGS_BLOCK_LABEL,
+    singular: NEWS_BLOCK_LABEL,
+    plural: NEWS_BLOCK_LABEL,
   },
 
-  imageURL: BLOGS_BLOCK_THUMBNAIL_URL,
-  imageAltText: `${BLOGS_BLOCK_LABEL} preview`,
+  imageURL: NEWS_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${NEWS_BLOCK_LABEL} preview`,
 
   fields: [
     // Appearance
@@ -58,10 +58,10 @@ const AllBLogsSectionSchema: Block = {
       label: 'Section Background Color',
       maxLength: COLOR_HEX_LEN,
       validate: validateHexColor,
-      defaultValue: '#FFFFFF',
+      defaultValue: '#FCF4EB',
       admin: {
         width: '33%',
-        description: `Hex color in #RRGGBB (e.g., #FFFFFF). Length ${COLOR_HEX_LEN} (${bnNum(COLOR_HEX_LEN)}).`,
+        description: `Hex color in #RRGGBB (e.g., #FCF4EB). Length ${COLOR_HEX_LEN} (${bnNum(COLOR_HEX_LEN)}).`,
       },
     },
     {
@@ -142,37 +142,6 @@ const AllBLogsSectionSchema: Block = {
       type: 'row',
       fields: [
         {
-          name: 'readMoreText',
-          type: 'text',
-          label: 'Read More Button Text',
-          required: true,
-          defaultValue: 'Read More',
-          maxLength: CTA_TEXT_MAX,
-          validate: validateShortText('Read More Button Text', CTA_TEXT_MAX, true),
-          admin: {
-            width: '50%',
-            description: `Label for the per-card CTA (e.g., “Read More”). Max ${CTA_TEXT_MAX} characters.`,
-          },
-        },
-        {
-          name: 'readMoreTextBN',
-          type: 'text',
-          label: 'বাটনের টেক্সট (বাংলা) — Read More',
-          required: true,
-          defaultValue: 'বিস্তারিত পড়ুন',
-          maxLength: CTA_TEXT_MAX,
-          validate: validateShortText('Read More Button Text (BN)', CTA_TEXT_MAX, true),
-          admin: {
-            width: '50%',
-            description: `কার্ডের CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর।`,
-          },
-        },
-      ],
-    },
-    {
-      type: 'row',
-      fields: [
-        {
           name: 'loadMoreText',
           type: 'text',
           label: 'Load More Button Text',
@@ -244,4 +213,4 @@ const AllBLogsSectionSchema: Block = {
     },
   ],
 }
-export default AllBLogsSectionSchema
+export default AllNewsSectionSchema

@@ -10,6 +10,8 @@ type Props = {
   block: AllBlogsSectionType
 }
 function BlogsSectionClient({ data, block }: Props) {
+  const blogsData = data?.blogs?.filter((blog) => blog?.category === 'blog')
+
   return (
     <div
       id={block?.sectionId}
@@ -19,7 +21,7 @@ function BlogsSectionClient({ data, block }: Props) {
     >
       <HashScroller blogSectionId={block?.sectionId} />
       <SearchNews paddingOn block={block} allContent={data?.blogs} />
-      <AllNewsSection allNewsData={data?.blogs} block={block} />
+      <AllNewsSection allNewsData={blogsData} block={block} />
     </div>
   )
 }

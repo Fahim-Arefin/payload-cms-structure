@@ -157,6 +157,7 @@ import LifeAtShantaSchema from '@/blocks/lifeAtShanta/schema'
 import LifeInsuranceSimplifiedSchema from '@/blocks/lifeInsuranceSimplified/schema'
 import LifeInsuranceVideoSchema from '@/blocks/lifeInsuranceVideo/schema'
 import MoreThanAWorkplaceSchema from '@/blocks/moreThanAWorkplace/schema'
+import AllNewsSectionSchema from '@/blocks/news/schema'
 import PlanInfoDesignSchema from '@/blocks/planInfoDesign/schema'
 import PlanInfoDesign03Schema from '@/blocks/planInfoDesign03/schema'
 import PlanInfoDesign04Schema from '@/blocks/planInfoDesign04/schema'
@@ -284,6 +285,7 @@ export const Pages: CollectionConfig = {
         AllBLogsSectionSchema,
         BLogDetailsSectionSchema,
         AllBLogsCardSchema,
+        AllNewsSectionSchema,
       ],
     },
   ],

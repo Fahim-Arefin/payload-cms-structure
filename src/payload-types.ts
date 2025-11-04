@@ -3412,9 +3412,9 @@ export interface Page {
          */
         showSearchBar: boolean;
         /**
-         * When ON, this block renders data from **Global → Blogs**.
+         * When ON, this block renders data from **Global → News and Blogs**.
          *
-         * **Before enabling:** fill up the Global → Blogs data.
+         * **Before enabling:** fill up the Global → News and Blogs data.
          *
          * **Notes:**
          * • This block only stores presentation options (e.g., background color).
@@ -3502,6 +3502,61 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'all-blogs-card';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 100 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Used for direct jump links to this section (e.g., blog-section). Must not have leading/trailing spaces.
+         */
+        sectionId: string;
+        /**
+         * Search bar will show if u check the checkbox
+         */
+        showSearchBar: boolean;
+        /**
+         * When ON, this block renders data from **Global → News and Blogs**.
+         *
+         * **Before enabling:** fill up the Global → News and Blogs data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        /**
+         * Label for the list “Load More” button. Max 50 characters.
+         */
+        loadMoreText: string;
+        /**
+         * লিস্টের “Load More” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
+         */
+        loadMoreTextBN: string;
+        /**
+         * Label for collapsing the list (e.g., “See Less”). Max 50 characters.
+         */
+        seeLessText: string;
+        /**
+         * লিস্ট সংকুচিত করার বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
+         */
+        seeLessTextBN: string;
+        /**
+         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
+         */
+        linkTarget: string | Page;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'news';
       }
   )[];
   updatedAt: string;
@@ -4905,6 +4960,23 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        news?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              sectionId?: T;
+              showSearchBar?: T;
+              useSharedData?: T;
+              loadMoreText?: T;
+              loadMoreTextBN?: T;
+              seeLessText?: T;
+              seeLessTextBN?: T;
+              linkTarget?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -5678,7 +5750,7 @@ export interface GlobalBlog {
    */
   blogs: {
     /**
-     * 563:375 recommended. Blur placeholder generated automatically.
+     * 600:375 recommended. Blur placeholder generated automatically.
      */
     image: string | Media;
     imageOriginal?: (string | null) | Media;
@@ -5738,9 +5810,9 @@ export interface GlobalBlog {
      */
     importantDateBN?: string | null;
     /**
-     * If you featured a blog that means it will show on the homepage news and blog section. (exactly 2 must be selected)
+     * Choose whether this item is a Blog or a News item (default: Blog).
      */
-    isFeatured?: boolean | null;
+    category?: ('blog' | 'news') | null;
     /**
      * Max 150 chars.
      */
@@ -5753,6 +5825,14 @@ export interface GlobalBlog {
      * Must be a full http(s) URL.
      */
     newsLink?: string | null;
+    /**
+     * If you featured a blog that means it will show on the homepage news and blog section. (exactly 2 must be selected)
+     */
+    isFeatured?: boolean | null;
+    /**
+     * Use for the “Trending” area. Exactly 2 items across the list must be selected as trending.
+     */
+    isTrending?: boolean | null;
     createdAt?: string | null;
     updatedAt?: string | null;
     id?: string | null;
@@ -6088,10 +6168,12 @@ export interface GlobalBlogsSelect<T extends boolean = true> {
         descriptionBN?: T;
         importantDate?: T;
         importantDateBN?: T;
-        isFeatured?: T;
+        category?: T;
         newsLinkBtnText?: T;
         newsLinkBtnTextBN?: T;
         newsLink?: T;
+        isFeatured?: T;
+        isTrending?: T;
         createdAt?: T;
         updatedAt?: T;
         id?: T;
