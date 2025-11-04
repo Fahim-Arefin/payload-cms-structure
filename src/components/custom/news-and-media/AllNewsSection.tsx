@@ -29,9 +29,6 @@ function AllNewsSection({ allNewsData, block }: Props) {
                 : 'pb-6 md:pb-12 lg:pb-[60px] xl:pb-[70px] 2xl:pb-[80px]'
             }
             transition-all duration-700 ease-in-out`}
-      style={{
-        backgroundColor: block?.backgroundColor || '',
-      }}
     >
       <div className="space-y-12 lg:space-y-24">
         {/* First 3 blogs - always visible */}

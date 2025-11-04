@@ -11,7 +11,12 @@ type Props = {
 }
 function BlogsSectionClient({ data, block }: Props) {
   return (
-    <div id={block?.sectionId}>
+    <div
+      id={block?.sectionId}
+      style={{
+        backgroundColor: block?.backgroundColor || '',
+      }}
+    >
       <HashScroller blogSectionId={block?.sectionId} />
       <SearchNews paddingOn block={block} allContent={data?.blogs} />
       <AllNewsSection allNewsData={data?.blogs} block={block} />
