@@ -264,10 +264,10 @@ export const OFFER_CARDS_CACHE_KEY = 'offer-card-data'
 export const OFFER_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/offer-card-block-thumbnail.png`
 
 // card 04 -> OFFER card
-// export const BLOG_CARDS_SLUG_AND_TAG = 'blog-card'
-// export const BLOG_CARDS_BLOCK_LABEL = 'Blog Cards'
-// export const BLOG_CARDS_CACHE_KEY = 'blog-card-data'
-// export const BLOG_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/blog-card-block-thumbnail.png`
+export const HASHLINK_CARDS_SLUG_AND_TAG = 'hash-link-card'
+export const HASHLINK_CARDS_BLOCK_LABEL = 'Hash Link Cards'
+export const HASHLINK_CARDS_CACHE_KEY = 'hash-link-card-data'
+export const HASHLINK_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/hash-link-card-block-thumbnail.png`
 
 // corporate Add on info
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG = 'add-on-info'

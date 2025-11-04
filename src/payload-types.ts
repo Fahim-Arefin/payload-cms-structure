@@ -2349,6 +2349,41 @@ export interface Page {
               blockName?: string | null;
               blockType: 'offer-card';
             }
+          | {
+              /**
+               * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
+               */
+              hashLinkCards: {
+                /**
+                 * Main background of the card. Recommended 1:1.
+                 */
+                bgImage: string | Media;
+                bgImageOriginal?: (string | null) | Media;
+                pendingBgImageOriginal?: string | null;
+                pendingBgImageCrop?: string | null;
+                bgImageBlurDataURL?: string | null;
+                /**
+                 * Max 100 characters.
+                 */
+                title: string;
+                /**
+                 * সর্বোচ্চ ১০০ অক্ষর।
+                 */
+                titleBN: string;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., blog-section). Must not have leading/trailing spaces.
+                 */
+                sectionId: string;
+                id?: string | null;
+              }[];
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'hash-link-card';
+            }
         )[];
         id?: string | null;
         blockName?: string | null;
@@ -4488,6 +4523,26 @@ export interface PagesSelect<T extends boolean = true> {
                                 buttonText?: T;
                                 buttonTextBN?: T;
                                 buttonLink?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'hash-link-card'?:
+                      | T
+                      | {
+                          hashLinkCards?:
+                            | T
+                            | {
+                                bgImage?: T;
+                                bgImageOriginal?: T;
+                                pendingBgImageOriginal?: T;
+                                pendingBgImageCrop?: T;
+                                bgImageBlurDataURL?: T;
+                                title?: T;
+                                titleBN?: T;
+                                buttonLink?: T;
+                                sectionId?: T;
                                 id?: T;
                               };
                           id?: T;

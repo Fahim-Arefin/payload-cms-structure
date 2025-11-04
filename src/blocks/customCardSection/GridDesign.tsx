@@ -3,21 +3,24 @@
 import { CustomCardSectionBlockType } from '@/types/payloadCustomTypes'
 import React from 'react'
 
-// Infer the item type from either `corporateCards` or `planCards`
 // type ItemOf<T> = T extends { corporateCards: infer A extends any[] }
 //   ? A[number]
 //   : T extends { planCards: infer B extends any[] }
 //     ? B[number]
-//     : never
+//     : T extends { offerCards: infer C extends any[] }
+//       ? C[number]
+//       : never
 
-// Infer the item type from corporateCards / planCards / offerCards
+// add this arm to the conditional
 type ItemOf<T> = T extends { corporateCards: infer A extends any[] }
   ? A[number]
   : T extends { planCards: infer B extends any[] }
     ? B[number]
     : T extends { offerCards: infer C extends any[] }
       ? C[number]
-      : never
+      : T extends { hashLinkCards: infer D extends any[] } // ⬅️ add
+        ? D[number]
+        : never
 
 type Props<T extends CustomCardSectionBlockType['card'][number]> = {
   data: T
@@ -50,10 +53,17 @@ export default function GridDesign<T extends CustomCardSectionBlockType['card'][
   const laptopBasis = toBasis(block?.laptopCardsPerView ?? 3)
   const desktopBasis = toBasis(block?.desktopCardsPerView ?? 3)
 
-  // Safely pick the correct array from the union
   // const items = (
-  //   'corporateCards' in data ? data.corporateCards : 'planCards' in data ? data.planCards : []
+  //   'corporateCards' in data
+  //     ? data.corporateCards
+  //     : 'planCards' in data
+  //       ? data.planCards
+  //       : 'offerCards' in data
+  //         ? data.offerCards
+  //         : []
   // ) as ItemOf<T>[]
+
+  // pick the array from the union, now including hashLinkCards
   const items = (
     'corporateCards' in data
       ? data.corporateCards
@@ -61,7 +71,9 @@ export default function GridDesign<T extends CustomCardSectionBlockType['card'][
         ? data.planCards
         : 'offerCards' in data
           ? data.offerCards
-          : []
+          : 'hashLinkCards' in data // ⬅️ add
+            ? data.hashLinkCards
+            : []
   ) as ItemOf<T>[]
 
   return (

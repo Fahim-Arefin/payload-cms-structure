@@ -336,6 +336,13 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'planCards', // the array inside PlanCardSchema
       mediaFields: ['brochurePDF'], // 👈 PDF upload on each plan card (non-image is fine)
     },
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_CARD_SECTION_SLUG_AND_TAG,
+      groupKey: 'card', // the nested "blocks" field inside the outer block
+      arrayKey: 'hashLinkCards', // array inside the nested CorporateCards block
+      mediaFields: ['bgImage'],
+    },
   ],
 
   // otherUploadFields: [

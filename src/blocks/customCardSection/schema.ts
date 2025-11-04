@@ -9,6 +9,7 @@ import type { Block } from 'payload'
 import CorporateCardsSchema from './corporateCard/schema'
 import OfferCardsSchema from './offerCard/schema'
 import PlanCardSchema from './planCard/schema'
+import HashLinkCardsSchema from './hashLinkCard/schema'
 
 /* ------------ limits ------------ */
 const TITLE_MAX = 100
@@ -424,7 +425,7 @@ const CustomCardSectionSchema: Block = {
       admin: {
         description: 'Please add a card',
       },
-      blocks: [CorporateCardsSchema, PlanCardSchema, OfferCardsSchema],
+      blocks: [CorporateCardsSchema, PlanCardSchema, OfferCardsSchema, HashLinkCardsSchema],
     },
   ],
 }

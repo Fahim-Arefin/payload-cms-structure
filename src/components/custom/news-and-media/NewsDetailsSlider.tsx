@@ -36,7 +36,12 @@ function NewsDetailsSlider({ data, block }: Props) {
   }, [carouselApi])
 
   return (
-    <div className="container-padding">
+    <div
+      className="container-padding"
+      style={{
+        backgroundColor: block?.backgroundColor || '',
+      }}
+    >
       <div>
         <h3 className="global-h3 font-normal uppercase">
           <LocalizedText en={block?.title} bn={block?.titleBN} />

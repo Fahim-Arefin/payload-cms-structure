@@ -23,6 +23,7 @@ import {
   CORPORATE_PARTNERS_SLUG_AND_TAG,
   CUSTOM_CARD_SECTION_SLUG_AND_TAG,
   EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
+  HASHLINK_CARDS_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -203,6 +204,10 @@ export type PlanBlock = Extract<AnyCard, { blockType: typeof PLAN_PAGE_PLAN_CARD
 
 export type OfferBlock = Extract<AnyCard, { blockType: typeof OFFER_CARDS_SLUG_AND_TAG }> & {
   offerCards: unknown[]
+}
+
+export type HashlinkBlock = Extract<AnyCard, { blockType: typeof HASHLINK_CARDS_SLUG_AND_TAG }> & {
+  hashLinkCards: unknown[]
 }
 
 export type PlanInfoDesignBlockType = Extract<

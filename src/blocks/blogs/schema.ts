@@ -23,11 +23,21 @@ const validateShortText =
   }
 
 // near other validators
+const validateSingleWordId = (val: unknown) => {
+  const s = String(val ?? '')
+  if (!s) return 'Section ID is required.'
+  if (!/^[A-Za-z0-9]+$/.test(s)) {
+    return 'Section ID must be one word: letters and numbers only (no spaces, -, _ or symbols).'
+  }
+  return true
+}
+
+// near other validators
 const validateRequiredNoEdgeSpaces = (val: unknown) => {
   const s = String(val ?? '')
   if (!s.trim()) return 'Section ID is required.'
   if (s !== s.trim()) return 'No leading or trailing spaces are allowed.'
-  return true
+  return validateSingleWordId(s)
 }
 
 const AllBLogsSectionSchema: Block = {

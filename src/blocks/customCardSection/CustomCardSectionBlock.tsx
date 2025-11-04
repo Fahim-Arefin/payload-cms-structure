@@ -2,12 +2,14 @@ import LocalizedHighlighted from '@/components/custom/shared/LocalizedHighlighte
 import LocalizedRichText from '@/components/custom/shared/LocalizedRichText'
 import {
   CORPORATE_PAGE_CARDS_SLUG_AND_TAG,
+  HASHLINK_CARDS_SLUG_AND_TAG,
   OFFER_CARDS_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
 import {
   CorporateBlock,
   CustomCardSectionBlockType,
+  HashlinkBlock,
   OfferBlock,
   PlanBlock,
 } from '@/types/payloadCustomTypes'
@@ -15,6 +17,7 @@ import React from 'react'
 import CorporateCardBlock from './corporateCard/CorporateCardBlock'
 import PlanCardBlock from './planCard/PlanCardBlock'
 import OfferCardBlock from './offerCard/OfferCardBlock'
+import HashCardBlock from './hashLinkCard/HashCardBlock'
 
 type Props = {
   block: CustomCardSectionBlockType
@@ -104,6 +107,19 @@ function CustomCardSectionBlock({ block }: Props) {
                 <OfferCardBlock
                   block={block}
                   data={offerData}
+                  displayAsCarousel={block?.displayAsCarousel}
+                />
+              </div>
+            )
+          }
+
+          case HASHLINK_CARDS_SLUG_AND_TAG: {
+            const hashLinkData = eachCard as HashlinkBlock
+            return (
+              <div key={key}>
+                <HashCardBlock
+                  block={block}
+                  data={hashLinkData}
                   displayAsCarousel={block?.displayAsCarousel}
                 />
               </div>
