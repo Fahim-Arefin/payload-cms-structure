@@ -3437,6 +3437,37 @@ export interface Page {
         blockName?: string | null;
         blockType: 'blogs-details';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 100 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * When ON, this block renders data from **Global → Blogs**.
+         *
+         * **Before enabling:** fill up the Global → Blogs data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        /**
+         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
+         */
+        linkTarget: string | Page;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'all-blogs-card';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -4805,6 +4836,17 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               backgroundColor?: T;
               useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'all-blogs-card'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              useSharedData?: T;
+              linkTarget?: T;
               id?: T;
               blockName?: T;
             };

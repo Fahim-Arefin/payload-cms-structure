@@ -135,6 +135,7 @@
 // version 02 (added media cleanup hooks)
 import APPDSchema from '@/blocks/APPD/schema'
 import AddonsInfoSchema from '@/blocks/AddonsInfoSchema/schema'
+import AllBLogsCardSchema from '@/blocks/AllblogsCard/schema'
 import BoardOfDirectorsCardSchema from '@/blocks/BoardOfDirectorsCard/schema'
 import BoardOfDirectorsListSchema from '@/blocks/BoardOfDirectorsList/schema'
 import LicensedLaunchedSchema from '@/blocks/LicensedAndLaunched/schema'
@@ -282,6 +283,7 @@ export const Pages: CollectionConfig = {
         APPDSchema,
         AllBLogsSectionSchema,
         BLogDetailsSectionSchema,
+        AllBLogsCardSchema,
       ],
     },
   ],

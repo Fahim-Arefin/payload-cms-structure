@@ -3,6 +3,7 @@ import { revalidateTag } from 'next/cache'
 import type { GlobalConfig } from 'payload'
 
 import {
+  BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_SLUG_AND_TAG,
   BLOGS_DETAILS_SLUG_AND_TAG,
   BLOGS_SLUG_AND_TAG,
   GLOBAL_BLOGS_BLOCK_LABEL,
@@ -339,6 +340,7 @@ const GlobalBlogs: GlobalConfig = {
         revalidateTag(globalTag(GLOBAL_BLOGS_SLUG_AND_TAG))
         revalidateTag(BLOGS_SLUG_AND_TAG)
         revalidateTag(BLOGS_DETAILS_SLUG_AND_TAG)
+        revalidateTag(BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_SLUG_AND_TAG)
       },
     ],
   },

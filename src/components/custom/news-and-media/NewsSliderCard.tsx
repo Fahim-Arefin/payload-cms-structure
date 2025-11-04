@@ -1,15 +1,20 @@
-import { AllNewsAndBlogDataType } from '@/types'
+import { GlobalBlog } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import LocalizedText from '../shared/LocalizedText'
+import { buildDetailHref, formatLocalDhaka, formatMonDYYYYBN, resolvePageSlug } from '@/lib/utils'
+import LocalizedRichText from '../shared/LocalizedRichText'
+import { AllBlockCardType } from '@/types/payloadCustomTypes'
 
 type Props = {
-  data: AllNewsAndBlogDataType
+  data: GlobalBlog['blogs'][number]
+  block: AllBlockCardType
 }
 
-function NewsSliderCard({ data }: Props) {
+function NewsSliderCard({ data, block }: Props) {
+  const pattern = resolvePageSlug(block?.linkTarget) ?? ''
   return (
-    <Link href={`/news-and-media/${data?.id}`}>
+    <Link href={buildDetailHref(pattern, data.id ? data.id : '')}>
       <div className="border border-[#ED7125] rounded-xl overflow-hidden mx-[2px] lg:mx-[4px] xl:mx-[2px] 2xl:mx-2">
         <div className="overflow-hidden rounded-t-xl w-full">
           <div
@@ -18,18 +23,34 @@ function NewsSliderCard({ data }: Props) {
             role="img"
             aria-label={data?.title}
           >
-            <Image
-              src={data?.image}
-              alt={data?.title}
-              fill
-              className="object-cover object-center transition-all duration-300 hover:scale-110"
-              sizes="(max-width: 767px) 300px, 600px"
-            />
+            {typeof data?.image === 'object' && data?.image?.url && (
+              <Image
+                src={data?.image?.url}
+                alt={data?.title}
+                fill
+                className="object-cover object-center transition-all duration-300 hover:scale-110"
+                sizes="(max-width: 767px) 300px, 600px"
+                placeholder="blur"
+                blurDataURL={data?.imageBlurDataURL || ''}
+                quality={80}
+              />
+            )}
           </div>
         </div>
         <div className="p-4 md:p-6 lg:p-4 xl:p-4 2xl:p-6">
-          <div className="text-[#6E6E6E] global-p2 uppercase mb-2">{data?.date}</div>
-          <p className="global-p2 leading-6 text-justify line-clamp-3">{data?.description}</p>
+          <div className="text-[#6E6E6E] global-p2 uppercase mb-2">
+            {data?.importantDate && data?.importantDateBN ? (
+              <LocalizedText en={data?.importantDate} bn={data?.importantDateBN} />
+            ) : (
+              <LocalizedText
+                en={formatLocalDhaka(data?.updatedAt ? data?.updatedAt : '')}
+                bn={formatMonDYYYYBN(data?.updatedAt ? data?.updatedAt : '')}
+              />
+            )}
+          </div>
+          <div className="global-p2 leading-6 text-justify line-clamp-3">
+            <LocalizedRichText en={data?.description} bn={data?.descriptionBN} />
+          </div>
         </div>
       </div>
     </Link>

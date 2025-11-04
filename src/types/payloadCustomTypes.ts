@@ -12,6 +12,7 @@ import {
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
   APPD_BLOCK_SLUG_AND_TAG,
+  BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_SLUG_AND_TAG,
   BLOGS_DETAILS_SLUG_AND_TAG,
   BLOGS_SLUG_AND_TAG,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
@@ -233,4 +234,8 @@ export type AllBlogsSectionType = Extract<
 export type BlogDetailsSectionType = Extract<
   Page['layout'][number],
   { blockType: typeof BLOGS_DETAILS_SLUG_AND_TAG }
+>
+export type AllBlockCardType = Extract<
+  Page['layout'][number],
+  { blockType: typeof BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_SLUG_AND_TAG }
 >

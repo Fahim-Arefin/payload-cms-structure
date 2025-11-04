@@ -263,6 +263,12 @@ export const OFFER_CARDS_BLOCK_LABEL = 'Offer Cards'
 export const OFFER_CARDS_CACHE_KEY = 'offer-card-data'
 export const OFFER_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/offer-card-block-thumbnail.png`
 
+// card 04 -> OFFER card
+// export const BLOG_CARDS_SLUG_AND_TAG = 'blog-card'
+// export const BLOG_CARDS_BLOCK_LABEL = 'Blog Cards'
+// export const BLOG_CARDS_CACHE_KEY = 'blog-card-data'
+// export const BLOG_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/blog-card-block-thumbnail.png`
+
 // corporate Add on info
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG = 'add-on-info'
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_CACHE_KEY = 'add-on-info-data'
@@ -309,3 +315,8 @@ export const BLOGS_DETAILS_SLUG_AND_TAG = 'blogs-details'
 export const BLOGS_DETAILS_BLOCK_LABEL = 'Blog Details'
 export const BLOGS_DETAILS_BLOCK_THUMBNAIL_URL = `${folder}/blogs-details-block-thumbnail.png`
 export const BLOGS_DETAILS_CACHE_KEY = 'blogs-details-data'
+
+export const BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_SLUG_AND_TAG = 'all-blogs-card'
+export const BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_BLOCK_LABEL = 'All Blogs Card'
+export const BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_BLOCK_THUMBNAIL_URL = `${folder}/all-blogs-card-block-thumbnail.png`
+export const BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_CACHE_KEY = 'all-blogs-card-data'

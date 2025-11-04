@@ -1,18 +1,20 @@
 'use client'
-import { AllNewsAndBlogDataType } from '@/types'
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
-import React, { useEffect, useState } from 'react'
+import { sliderDelay } from '@/lib/data'
 import Autoplay from 'embla-carousel-autoplay'
+import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import NewsSliderCard from './NewsSliderCard'
-import { sliderDelay } from '@/lib/data'
+import { AllBlockCardType } from '@/types/payloadCustomTypes'
+import { GlobalBlog } from '@/payload-types'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
-  id: number
-  data: AllNewsAndBlogDataType[]
+  data: GlobalBlog['blogs']
+  block: AllBlockCardType
 }
 
-function NewsDetailsSlider({ data, id }: Props) {
+function NewsDetailsSlider({ data, block }: Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
@@ -34,16 +36,11 @@ function NewsDetailsSlider({ data, id }: Props) {
   }, [carouselApi])
 
   return (
-    <div
-      className="px-5 pb-12 
-           md:px-24 md:pb-24
-           lg:px-[130px]  lg:pb-[110px] 
-           xl:px-[200px]  xl:pb-[100px] 
-           2xl:px-[300px] 2xl:pb-[150px]
-           "
-    >
+    <div className="container-padding">
       <div>
-        <h3 className="global-h3 font-normal uppercase">You may also like</h3>
+        <h3 className="global-h3 font-normal uppercase">
+          <LocalizedText en={block?.title} bn={block?.titleBN} />
+        </h3>
         {/* carousal section */}
         <div className="mt-12 lg:mt-16 xl:mt-20 2xl:mt-32">
           <Carousel
@@ -61,7 +58,7 @@ function NewsDetailsSlider({ data, id }: Props) {
             <CarouselContent>
               {data?.map((item, index) => (
                 <CarouselItem key={index} className="lg:basis-1/2 xl:basis-1/3 mx-auto lg:py-4">
-                  <NewsSliderCard data={item} />
+                  <NewsSliderCard data={item} block={block} />
                 </CarouselItem>
               ))}
             </CarouselContent>
