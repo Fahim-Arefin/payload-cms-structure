@@ -22,6 +22,7 @@ import {
   CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
   MULTI_STAGE_PLAN_SLUG_AND_TAG,
   SUPPORT_BUZZ_SLUG_AND_TAG,
+  SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { withMediaLifecycle } from './withMediaLifecycle'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
@@ -110,6 +111,11 @@ export const mediaHooks = withMediaLifecycle({
     {
       layoutKey: 'layout',
       blockType: SUPPORT_BUZZ_SLUG_AND_TAG,
+      mediaFields: ['backgroundImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
       mediaFields: ['backgroundImage'],
     },
   ],
@@ -211,12 +217,6 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'processingCards',
       mediaFields: ['image'],
     },
-    {
-      layoutKey: 'layout',
-      blockType: SUPPORT_BUZZ_SLUG_AND_TAG,
-      arrayKey: 'newsItems',
-      mediaFields: ['image'],
-    },
   ],
 
   // Blocks with nested array (media that inside another array) that contain media fields
@@ -242,6 +242,13 @@ export const mediaHooks = withMediaLifecycle({
       groupKey: 'expectations',
       arrayKey: 'right',
       mediaFields: ['avatar'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SUPPORT_BUZZ_SLUG_AND_TAG,
+      groupKey: 'allTab',
+      arrayKey: 'newsItems',
+      mediaFields: ['image'],
     },
   ],
 

@@ -2497,29 +2497,40 @@ export interface Page {
         highlightedTitle?: string | null;
         highlightedTitleBN?: string | null;
         /**
-         * Main “ALL” feed. Includes hero image + a list of news cards with image, date, title, description and YouTube link.
+         * Large section background visual for ALL tab. 16:9 recommended.
+         */
+        mainImage: string | Media;
+        mainImageOriginal?: (string | null) | Media;
+        pendingMainImageOriginal?: string | null;
+        pendingMainImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        mainImageBlurDataURL?: string | null;
+        /**
+         * Background visual for the OVC/TVC tab. 16:9 recommended.
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        /**
+         * Main “ALL” feed. Uses the top-level Main Image. Contains a source link and exactly 3 news cards.
          */
         allTab: {
           value: 'all' | 'ovc';
-          /**
-           * Large section background visual. 16:9 recommended.
-           */
-          mainImage: string | Media;
-          mainImageOriginal?: (string | null) | Media;
-          pendingMainImageOriginal?: string | null;
-          pendingMainImageCrop?: string | null;
-          /**
-           * Auto-generated Base64 blur
-           */
-          mainImageBlurDataURL?: string | null;
           mainImageSrcLink?: string | null;
           /**
-           * Each news item uses a single image (no mobileImage). Date is a real date field. Video link must be a YouTube URL.
+           * Exactly 3 items. Each uses a single 16:9 image, real date, EN/BN title/description, and optional YouTube link.
            */
           newsItems?:
             | {
                 /**
-                 * Square icon (1:1). PNG with transparent background preferred.
+                 * Single image per item. 16:9 recommended.
                  */
                 image: string | Media;
                 imageOriginal?: (string | null) | Media;
@@ -2543,21 +2554,10 @@ export interface Page {
             | null;
         };
         /**
-         * Background hero with overlaid headline. Optionally add a YouTube link for the modal video.
+         * Uses the top-level Background Image. Add headline (EN/BN) and optional YouTube link for the modal.
          */
         ovcTab: {
           value: 'all' | 'ovc';
-          /**
-           * Background visual for the OVC/TVC tab. 16:9 recommended.
-           */
-          backgroundImage: string | Media;
-          backgroundImageOriginal?: (string | null) | Media;
-          pendingBackgroundImageOriginal?: string | null;
-          pendingBackgroundImageCrop?: string | null;
-          /**
-           * Auto-generated Base64 blur
-           */
-          backgroundImageBlurDataURL?: string | null;
           title?: string | null;
           titleBN?: string | null;
           highlightedTitle?: string | null;
@@ -2567,6 +2567,31 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'support-buzz';
+      }
+    | {
+        uploadSessionId?: string | null;
+        title: string;
+        titleBN?: string | null;
+        highlightedTitle?: string | null;
+        highlightedTitleBN?: string | null;
+        /**
+         * Hero/section background. Recommended 16:9.
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        rightTitle: string;
+        rightTitleBN?: string | null;
+        rightButtonText: string;
+        rightButtonTextBN?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-feedback-form';
       }
   )[];
   updatedAt: string;
@@ -3690,15 +3715,20 @@ export interface PagesSelect<T extends boolean = true> {
               titleBN?: T;
               highlightedTitle?: T;
               highlightedTitleBN?: T;
+              mainImage?: T;
+              mainImageOriginal?: T;
+              pendingMainImageOriginal?: T;
+              pendingMainImageCrop?: T;
+              mainImageBlurDataURL?: T;
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
               allTab?:
                 | T
                 | {
                     value?: T;
-                    mainImage?: T;
-                    mainImageOriginal?: T;
-                    pendingMainImageOriginal?: T;
-                    pendingMainImageCrop?: T;
-                    mainImageBlurDataURL?: T;
                     mainImageSrcLink?: T;
                     newsItems?:
                       | T
@@ -3721,17 +3751,32 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     value?: T;
-                    backgroundImage?: T;
-                    backgroundImageOriginal?: T;
-                    pendingBackgroundImageOriginal?: T;
-                    pendingBackgroundImageCrop?: T;
-                    backgroundImageBlurDataURL?: T;
                     title?: T;
                     titleBN?: T;
                     highlightedTitle?: T;
                     highlightedTitleBN?: T;
                     videoLink?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'support-feedback-form'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
+              rightTitle?: T;
+              rightTitleBN?: T;
+              rightButtonText?: T;
+              rightButtonTextBN?: T;
               id?: T;
               blockName?: T;
             };

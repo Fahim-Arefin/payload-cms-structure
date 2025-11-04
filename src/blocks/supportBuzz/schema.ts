@@ -7,13 +7,12 @@ import {
   SUPPORT_BUZZ_BLOCK_THUMBNAIL_URL,
 } from '@/lib/constants'
 
-import { bnNum } from '@/lib/utils'
 import { generateImageFields, generateArrayImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------------- limits ---------------- */
 const TITLE_MAX = 120
 const HILITE_MAX = 80
-const DESC_MAX = 700 // plain text/textarea (you can switch to richText later if needed)
+const DESC_MAX = 700 // textarea
 const URL_MAX = 300
 
 /* ---------------- validators ---------------- */
@@ -118,6 +117,26 @@ const SupportBuzzSchema: Block = {
       ],
     },
 
+    /* ---------- Moved image fields OUTSIDE groups (as requested) ---------- */
+    ...generateImageFields({
+      ownerCollection: SUPPORT_BUZZ_SLUG_AND_TAG,
+      fieldName: 'mainImage',
+      label: 'Main Image (Hero) — 16:9',
+      description: 'Large section background visual for ALL tab. 16:9 recommended.',
+      aspectRatio: 16 / 9,
+      quality: 0.85,
+      maxKB: 600,
+    }),
+    ...generateImageFields({
+      ownerCollection: SUPPORT_BUZZ_SLUG_AND_TAG,
+      fieldName: 'backgroundImage',
+      label: 'Background Image — 16:9',
+      description: 'Background visual for the OVC/TVC tab. 16:9 recommended.',
+      aspectRatio: 16 / 9,
+      quality: 0.85,
+      maxKB: 700,
+    }),
+
     /* ---------- ALL tab (value = "all") ---------- */
     {
       name: 'allTab',
@@ -125,10 +144,9 @@ const SupportBuzzSchema: Block = {
       label: 'All Tab',
       admin: {
         description:
-          'Main “ALL” feed. Includes hero image + a list of news cards with image, date, title, description and YouTube link.',
+          'Main “ALL” feed. Uses the top-level Main Image. Contains a source link and exactly 3 news cards.',
       },
       fields: [
-        // Keep a select "value" like your other tabs for FE parity (optional but helpful)
         {
           name: 'value',
           type: 'select',
@@ -142,17 +160,7 @@ const SupportBuzzSchema: Block = {
           admin: { width: '25%' },
         },
 
-        // Hero image & optional source link
-        ...generateImageFields({
-          ownerCollection: SUPPORT_BUZZ_SLUG_AND_TAG,
-          fieldName: 'mainImage',
-          label: 'Main Image (Hero) — 16:9',
-          description: 'Large section background visual. 16:9 recommended.',
-          // guidance only; your generator may accept ratio/quality hints
-          aspectRatio: 16 / 9,
-          quality: 0.85,
-          maxKB: 600,
-        }),
+        // kept here: source link only (image lives at top-level now)
         {
           name: 'mainImageSrcLink',
           type: 'text',
@@ -162,30 +170,27 @@ const SupportBuzzSchema: Block = {
           validate: validateAbsoluteHttpUrl('Main Image Source Link'),
         },
 
-        // News items
+        // EXACTLY 3 news items
         {
           name: 'newsItems',
           type: 'array',
-          label: 'News Items',
-          minRows: 0,
+          label: 'News Items (exactly 3)',
+          minRows: 3,
+          maxRows: 3,
           admin: {
             description:
-              'Each news item uses a single image (no mobileImage). Date is a real date field. Video link must be a YouTube URL.',
+              'Exactly 3 items. Each uses a single 16:9 image, real date, EN/BN title/description, and optional YouTube link.',
           },
           fields: [
-            // Thumbnail image (single)
             ...generateArrayImageFields({
               ownerCollection: SUPPORT_BUZZ_SLUG_AND_TAG,
               fieldName: 'image',
-
-              description: 'Square icon (1:1). PNG with transparent background preferred.',
               label: 'News Image — 16:9',
+              description: 'Single image per item. 16:9 recommended.',
               aspectRatio: 16 / 9,
               quality: 0.8,
               maxKB: 400,
             }),
-
-            // Meta
             {
               type: 'row',
               fields: [
@@ -193,11 +198,8 @@ const SupportBuzzSchema: Block = {
                   name: 'date',
                   type: 'date',
                   label: 'Date',
-                  admin: {
-                    date: { pickerAppearance: 'dayAndTime' },
-                    width: '33%',
-                  },
                   required: true,
+                  admin: { date: { pickerAppearance: 'dayAndTime' }, width: '33%' },
                 },
                 {
                   name: 'title',
@@ -219,8 +221,6 @@ const SupportBuzzSchema: Block = {
                 },
               ],
             },
-
-            // Descriptions
             {
               type: 'row',
               fields: [
@@ -242,8 +242,6 @@ const SupportBuzzSchema: Block = {
                 },
               ],
             },
-
-            // YouTube link
             {
               name: 'videoLink',
               type: 'text',
@@ -262,6 +260,20 @@ const SupportBuzzSchema: Block = {
                 "Learn the fundamental concepts of life insurance and how it can protect your family's financial future. Discover the different types of policies available and find the right coverage for your needs. Our expert explains key terms, benefits, and important considerations when choosing life insurance.",
               videoLink: 'https://www.youtube.com/embed/YbnlDrexiGE',
             },
+            {
+              title: 'Expert Insurance Guidance & Tips',
+              date: '2024-02-22T14:30:00.000Z',
+              description:
+                'Get professional insights from our insurance experts on making smart coverage decisions. Learn practical tips for evaluating policies, understanding premiums, and maximizing your insurance benefits.',
+              videoLink: 'https://www.youtube.com/embed/rcduE_ff314',
+            },
+            {
+              title: 'Life Insurance Planning Strategies',
+              date: '2024-01-15T11:30:00.000Z',
+              description:
+                "Explore comprehensive strategies for incorporating life insurance into your financial planning. Align coverage with your goals to protect your family's lifestyle.",
+              videoLink: 'https://www.youtube.com/embed/YbnlDrexiGE',
+            },
           ],
         },
       ],
@@ -274,7 +286,7 @@ const SupportBuzzSchema: Block = {
       label: 'OVC/TVC Tab',
       admin: {
         description:
-          'Background hero with overlaid headline. Optionally add a YouTube link for the modal video.',
+          'Uses the top-level Background Image. Add headline (EN/BN) and optional YouTube link for the modal.',
       },
       fields: [
         {
@@ -289,19 +301,6 @@ const SupportBuzzSchema: Block = {
           ],
           admin: { width: '25%' },
         },
-
-        // Background hero (desktop/mobile handled by CSS; single image here)
-        ...generateImageFields({
-          ownerCollection: SUPPORT_BUZZ_SLUG_AND_TAG,
-          fieldName: 'backgroundImage',
-          description: 'Background visual for the OVC/TVC tab. 16:9 recommended.',
-          label: 'Background Image — 16:9',
-          aspectRatio: 16 / 9,
-          quality: 0.85,
-          maxKB: 700,
-        }),
-
-        // Headline
         {
           type: 'row',
           fields: [
@@ -348,8 +347,6 @@ const SupportBuzzSchema: Block = {
             },
           ],
         },
-
-        // Optional OVC/TVC video (YouTube)
         {
           name: 'videoLink',
           type: 'text',

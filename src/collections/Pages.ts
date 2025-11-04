@@ -163,6 +163,7 @@ import ShantaMilestonesUnlockedSchema from '@/blocks/shantaMilestoneUnlocked/sch
 import ShantaVisionSchema from '@/blocks/shantaVision/schema'
 import SupportBuzzSchema from '@/blocks/supportBuzz/schema'
 import SupportFaqTabSchema from '@/blocks/supportFaqTab/schema'
+import SupportFeedbackSchema from '@/blocks/supportFeedbackForm/schema'
 import SupportMapTabSchema from '@/blocks/supportMapTab/schema'
 import ValuesThatShapeUsSchema from '@/blocks/valuesThatShapeUs/schema'
 import WhyChooseUsSchema from '@/blocks/whyChooseUs/schema'
@@ -277,6 +278,7 @@ export const Pages: CollectionConfig = {
         SupportMapTabSchema,
         SupportFaqTabSchema,
         SupportBuzzSchema,
+        SupportFeedbackSchema,
       ],
     },
   ],

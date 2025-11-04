@@ -31,6 +31,7 @@ import {
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
   SUPPORT_BUZZ_SLUG_AND_TAG,
   SUPPORT_FAQ_TAB_SLUG_AND_TAG,
+  SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
   SUPPORT_MAP_TAB_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
@@ -207,4 +208,9 @@ export type SupportFaqTabBlockType = Extract<
 export type SupportBuzzBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof SUPPORT_BUZZ_SLUG_AND_TAG}
+>
+
+export type SupportFeedbackFormBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG}
 >

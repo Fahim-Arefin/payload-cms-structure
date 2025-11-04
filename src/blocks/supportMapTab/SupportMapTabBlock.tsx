@@ -19,7 +19,7 @@ async function SupportMapTabBlock({ block, params }: Props) {
   const hospitals = await fetchHospitals()
 
   return (
-    <div>
+    <div >
       <MapTabBlockSection block={block} params={params} hospitals={hospitals} />
     </div>
   )

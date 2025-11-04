@@ -257,3 +257,8 @@ export const SUPPORT_BUZZ_SLUG_AND_TAG = 'support-buzz'
 export const SUPPORT_BUZZ_BLOCK_LABEL = 'Support Buzz'
 export const SUPPORT_BUZZ_CACHE_KEY = 'support-buzz-data'
 export const SUPPORT_BUZZ_BLOCK_THUMBNAIL_URL = `${folder}/support-buzz-page-block-thumbnail.png`
+
+export const SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG = 'support-feedback-form'
+export const SUPPORT_FEEDBACK_FORM_BLOCK_LABEL = 'Support Feedback Form'
+export const SUPPORT_FEEDBACK_FORM_CACHE_KEY = 'support-feedback-form-data'
+export const SUPPORT_FEEDBACK_FORM_BLOCK_THUMBNAIL_URL = `${folder}/support-feedback-form-page-block-thumbnail.png`

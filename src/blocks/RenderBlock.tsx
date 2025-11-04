@@ -39,7 +39,9 @@ import {
   MULTI_STAGE_INTRO_SLUG_AND_TAG,
   MULTI_STAGE_PLAN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+  SUPPORT_BUZZ_SLUG_AND_TAG,
   SUPPORT_FAQ_TAB_SLUG_AND_TAG,
+  SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
   SUPPORT_MAP_TAB_SLUG_AND_TAG,
 } from '@/lib/constants'
 
@@ -68,6 +70,8 @@ import MultistagePlanBlock from './multiStagePlan/MultistagePlanBlock'
 import CustomAccordionBlock from './customAccordion/CustomAccordionBlock'
 import SupportMapTabBlock from './supportMapTab/SupportMapTabBlock'
 import SupportFaqTabBlock from './supportFaqTab/SupportFaqTabBlock'
+import SupportBuzzBlock from './supportBuzz/SupportBuzzBlock'
+import SupportFeedbackFormBlock from './supportFeedbackForm/SupportFeedbackFormBlock'
 
 type Params = Record<string, string>
 
@@ -154,6 +158,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <SupportMapTabBlock key={block.id} block={block} params={params} />
     case SUPPORT_FAQ_TAB_SLUG_AND_TAG:
       return <SupportFaqTabBlock key={block.id} block={block} params={params} />
+    case SUPPORT_BUZZ_SLUG_AND_TAG:
+      return <SupportBuzzBlock key={block.id} block={block} params={params} />
+    case SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG:
+      return <SupportFeedbackFormBlock key={block.id} block={block} params={params} />
 
     default:
       return null
