@@ -105,7 +105,7 @@ export default function AllNewsAccordionSection({ allNewsData, allContent, block
                     <LocalizedRichText en={news?.description} bn={news?.descriptionBN} />
                   </div>
                   <div>
-                    <Link href={news?.newsLink ?? ''} target="_blank">
+                    {/* <Link href={news?.newsLink ?? ''} target="_blank">
                       <Button
                         variant="link"
                         className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0 "
@@ -120,7 +120,31 @@ export default function AllNewsAccordionSection({ allNewsData, allContent, block
                           <ArrowUpRight />
                         </div>
                       </Button>
-                    </Link>
+                    </Link> */}
+                    {news?.newsLinkBtnText && news?.newsLinkBtnTextBN && news?.newsLink && (
+                      <Button
+                        variant="link"
+                        asChild
+                        className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0"
+                      >
+                        <Link
+                          href={news?.newsLink ?? ''}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          prefetch={false}
+                        >
+                          <span className="flex space-x-1 items-center uppercase">
+                            <span>
+                              <LocalizedText
+                                en={news?.newsLinkBtnText}
+                                bn={news?.newsLinkBtnTextBN}
+                              />
+                            </span>
+                            <ArrowUpRight />
+                          </span>
+                        </Link>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -135,7 +159,7 @@ export default function AllNewsAccordionSection({ allNewsData, allContent, block
               variant="primary"
               // text="Load More"
               size="small"
-              className="w-[120px] md:w-[140px] lg:w-[150px] xl:w-[160px] 2xl:w-[180px]"
+              // className="w-[120px] md:w-[140px] lg:w-[150px] xl:w-[160px] 2xl:w-[180px]"
               onClick={handleToggle}
             >
               <LocalizedString en={block?.loadMoreText} bn={block?.loadMoreTextBN} />
@@ -213,7 +237,7 @@ export default function AllNewsAccordionSection({ allNewsData, allContent, block
                       <LocalizedRichText en={news?.description} bn={news?.descriptionBN} />
                     </div>
                     <div>
-                      <Link href={news?.newsLink ?? ''} target="_blank">
+                      {/* <Link href={news?.newsLink ?? ''} target="_blank">
                         <Button
                           variant="link"
                           className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0 "
@@ -226,7 +250,29 @@ export default function AllNewsAccordionSection({ allNewsData, allContent, block
                             <ArrowUpRight />
                           </div>
                         </Button>
-                      </Link>
+                      </Link> */}
+                      <Button
+                        variant="link"
+                        asChild
+                        className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0"
+                      >
+                        <Link
+                          href={news?.newsLink ?? '#'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          prefetch={false}
+                        >
+                          <span className="flex space-x-1 items-center uppercase">
+                            <span>
+                              <LocalizedText
+                                en={news?.newsLinkBtnText}
+                                bn={news?.newsLinkBtnTextBN}
+                              />
+                            </span>
+                            <ArrowUpRight />
+                          </span>
+                        </Link>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -241,7 +287,7 @@ export default function AllNewsAccordionSection({ allNewsData, allContent, block
               variant="primary"
               // text="Show Less"
               size="small"
-              className="w-[120px] md:w-[140px] lg:w-[150px] xl:w-[160px] 2xl:w-[180px]"
+              // className="w-[120px] md:w-[140px] lg:w-[150px] xl:w-[160px] 2xl:w-[180px]"
               onClick={handleToggle}
             >
               <LocalizedString en={block?.seeLessText} bn={block?.seeLessTextBN} />

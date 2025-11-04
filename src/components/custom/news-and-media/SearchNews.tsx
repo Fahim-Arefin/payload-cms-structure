@@ -104,20 +104,15 @@ function SearchNews({ bgColor, paddingOn = false, allContent, block }: Props) {
             </div>
 
             {/* Search Suggestions Dropdown */}
-            {showSuggestions && searchResults.length > 0 && (
+            {/* {showSuggestions && searchResults.length > 0 && (
               <div className="absolute top-full left-2 right-2 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-80 overflow-y-auto">
                 {searchResults.map((item) => (
                   <div
                     key={item.id}
                     className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
                   >
-                    <Link
-                      href={buildDetailHref(pattern, item.id ?? '')}
-                      passHref
-                      // onClick={() => handleSuggestionClick(item.id)}
-                    >
+                    <Link href={buildDetailHref(pattern, item.id ?? '')}>
                       <div className="flex gap-3">
-                        {/* web */}
                         <div className="relative w-12 h-9 lg:w-16 lg:h-12 ">
                           {typeof item?.image === 'object' && item?.image?.url && (
                             <Image
@@ -132,14 +127,13 @@ function SearchNews({ bgColor, paddingOn = false, allContent, block }: Props) {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-medium text-sm text-gray-900 line-clamp-2 leading-tight">
+                          <div className="font-medium text-sm text-gray-900 line-clamp-2 leading-tight">
                             <LocalizedText en={item.title} bn={item.titleBN} />
-                          </h3>
+                          </div>
                           <div className="text-xs text-gray-600 mt-1 line-clamp-2">
-                            {/* {item.description.substring(0, 100)}... */}
                             <LocalizedRichText en={item?.description} bn={item?.descriptionBN} />
                           </div>
-                          <span className="text-xs text-gray-400 mt-1 block">
+                          <div className="text-xs text-gray-400 mt-1 block">
                             {item?.importantDate && item?.importantDateBN ? (
                               <LocalizedText en={item?.importantDate} bn={item?.importantDateBN} />
                             ) : (
@@ -148,12 +142,68 @@ function SearchNews({ bgColor, paddingOn = false, allContent, block }: Props) {
                                 bn={formatMonDYYYYBN(item?.updatedAt ? item?.updatedAt : '')}
                               />
                             )}
-                          </span>
+                          </div>
                         </div>
                       </div>
                     </Link>
                   </div>
                 ))}
+              </div>
+            )} */}
+            {/* Search Suggestions Dropdown */}
+            {showSuggestions && searchResults.length > 0 && (
+              <div className="absolute top-full left-2 right-2 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-80 overflow-y-auto">
+                {searchResults.map((item) => {
+                  const href = buildDetailHref(pattern, item.id ?? '')
+                  return (
+                    <div
+                      key={item.id}
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => router.push(href)}
+                      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && router.push(href)}
+                      className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0 focus:outline-none focus:bg-gray-50"
+                    >
+                      <div className="flex gap-3">
+                        <div className="relative w-12 h-9 lg:w-16 lg:h-12">
+                          {typeof item?.image === 'object' && item?.image?.url && (
+                            <Image
+                              fill
+                              src={item.image.url}
+                              alt={item.title}
+                              className="object-cover object-center rounded flex-shrink-0"
+                              sizes="350px"
+                              placeholder="blur"
+                              blurDataURL={item.imageBlurDataURL || ''}
+                            />
+                          )}
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-sm text-gray-900 line-clamp-2 leading-tight">
+                            <LocalizedText en={item.title} bn={item.titleBN} />
+                          </div>
+
+                          {/* If your descriptions often include links, consider a 'plain' mode */}
+                          <div className="text-xs text-gray-600 mt-1 line-clamp-2">
+                            <LocalizedRichText en={item.description} bn={item.descriptionBN} />
+                          </div>
+
+                          <div className="text-xs text-gray-400 mt-1">
+                            {item?.importantDate && item?.importantDateBN ? (
+                              <LocalizedText en={item.importantDate} bn={item.importantDateBN} />
+                            ) : (
+                              <LocalizedText
+                                en={formatLocalDhaka(item?.updatedAt ? item.updatedAt : '')}
+                                bn={formatMonDYYYYBN(item?.updatedAt ? item.updatedAt : '')}
+                              />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             )}
 

@@ -75,20 +75,21 @@ function AllNewsCard({ data, index, length, block }: Props) {
           <LocalizedRichText en={data?.description} bn={data?.descriptionBN} />
         </div>
         <div>
-          <Link href={buildDetailHref(pattern, data.id ? data.id : '')} passHref>
-            <Button
-              variant="link"
-              className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit mx-auto lg:mx-0
+          <Button
+            asChild
+            variant="link"
+            className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit mx-auto lg:mx-0
             global-p2 p-0"
-            >
+          >
+            <Link href={buildDetailHref(pattern, data.id ? data.id : '')} passHref>
               <div className="flex space-x-1 items-center uppercase ">
                 {/* <span>Read More</span> */}
                 {/* <LocalizedText en={`Read More`} bn={`বিস্তারিত পড়ুন`} /> */}
                 <LocalizedText en={block?.readMoreText} bn={block?.readMoreTextBN} />
                 <ArrowUpRight />
               </div>
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </div>
       {/* horizontal line */}
