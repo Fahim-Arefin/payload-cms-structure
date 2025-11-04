@@ -659,17 +659,21 @@ export interface Page {
       }
     | {
         /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         * Hex color in #RRGGBB (e.g., #FBFFD3). Length 7 (৭).
          */
         backgroundColor?: string | null;
         /**
+         * Hex color in #RRGGBB (e.g., #F8E4C6). Length 7 (৭).
+         */
+        backgroundColor2?: string | null;
+        /**
          * Short label above the main title. Max 40 characters.
          */
-        sectionHeading: string;
+        sectionHeading?: string | null;
         /**
          * মূল শিরোনামের উপরে ছোট লেবেল। সর্বোচ্চ ৪০ অক্ষর।
          */
-        sectionHeadingBN: string;
+        sectionHeadingBN?: string | null;
         /**
          * Optional. Must appear verbatim inside the Section Heading. Max 40 characters.
          */
@@ -685,11 +689,11 @@ export interface Page {
           /**
            * Primary headline for this section. Max 80 characters.
            */
-          title: string;
+          title?: string | null;
           /**
            * এই সেকশনের মূল শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
            */
-          titleBN: string;
+          titleBN?: string | null;
           /**
            * Optional. Must appear verbatim inside the Title. Max 40 characters.
            */
@@ -701,17 +705,17 @@ export interface Page {
           /**
            * Supporting line under the title. Max 120 characters.
            */
-          subtitle: string;
+          subtitle?: string | null;
           /**
            * মূল শিরোনামের নিচে সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
            */
-          subtitleBN: string;
+          subtitleBN?: string | null;
           /**
            * Use a YouTube URL (embed, watch, youtu.be, or youtube-nocookie). Max 200 characters.
            */
           mainVIdeoLink: string;
           /**
-           * Large hero/thumbnail for this section. 4:3 recommended.
+           * Large hero/thumbnail for this section. 660:320 recommended.
            */
           mainImage: string | Media;
           mainImageOriginal?: (string | null) | Media;
@@ -750,7 +754,7 @@ export interface Page {
                 /**
                  * Use a YouTube URL (embed, watch, youtu.be, or youtube-nocookie). Max 200 characters.
                  */
-                videoLink: string;
+                videoLink?: string | null;
                 id?: string | null;
               }[]
             | null;
@@ -3900,6 +3904,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               backgroundColor?: T;
+              backgroundColor2?: T;
               sectionHeading?: T;
               sectionHeadingBN?: T;
               sectionHeadingHighlightedText?: T;

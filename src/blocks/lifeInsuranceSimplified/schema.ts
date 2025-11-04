@@ -448,6 +448,27 @@ const validateYouTubeLinkWithMax = (max: number) => (val: unknown) => {
   }
 }
 
+export const validateOptionalYouTubeLinkWithMax = (max: number) => (val: unknown) => {
+  const link = (val ?? '').toString().trim()
+  if (!link) return true // optional
+
+  if (link.length > max) return `Video link must be at most ${max} characters.`
+
+  try {
+    const u = new URL(link)
+    const host = u.hostname.toLowerCase()
+    const isHttp = u.protocol === 'http:' || u.protocol === 'https:'
+    const isYouTube =
+      host === 'youtu.be' || host.endsWith('youtube.com') || host.endsWith('youtube-nocookie.com')
+
+    if (!isHttp) return 'Video link must be http(s).'
+    if (!isYouTube) return 'Only YouTube links are allowed.'
+    return true
+  } catch {
+    return 'Provide a valid URL.'
+  }
+}
+
 const validateExactlyNItems = (labelPlural: string, n: number) => (val: unknown) => {
   if (!Array.isArray(val)) return `At least ${n} ${labelPlural.toLowerCase()} are required.`
   if (val.length !== n) return `Provide exactly ${n} ${labelPlural.toLowerCase()}.`
@@ -470,16 +491,33 @@ const LifeInsuranceSimplifiedSchema: Block = {
   fields: [
     // Appearance
     {
-      name: 'backgroundColor',
-      type: 'text',
-      label: 'Section Background Color',
-      maxLength: COLOR_HEX_LEN,
-      validate: validateHexColor,
-      defaultValue: '#FFFFFF',
-      admin: {
-        width: '33%',
-        description: `Hex color in #RRGGBB (e.g., #FFFFFF). Length ${COLOR_HEX_LEN} (${bnNum(COLOR_HEX_LEN)}).`,
-      },
+      type: 'row',
+      fields: [
+        {
+          name: 'backgroundColor',
+          type: 'text',
+          label: 'Section Background Color',
+          maxLength: COLOR_HEX_LEN,
+          validate: validateHexColor,
+          defaultValue: '#FBFFD3',
+          admin: {
+            width: '50%',
+            description: `Hex color in #RRGGBB (e.g., #FBFFD3). Length ${COLOR_HEX_LEN} (${bnNum(COLOR_HEX_LEN)}).`,
+          },
+        },
+        {
+          name: 'backgroundColor2',
+          type: 'text',
+          label: 'Section Background Color',
+          maxLength: COLOR_HEX_LEN,
+          validate: validateHexColor,
+          defaultValue: '#F8E4C6',
+          admin: {
+            width: '50%',
+            description: `Hex color in #RRGGBB (e.g., #F8E4C6). Length ${COLOR_HEX_LEN} (${bnNum(COLOR_HEX_LEN)}).`,
+          },
+        },
+      ],
     },
     // Section Heading (EN/BN)
     {
@@ -490,24 +528,24 @@ const LifeInsuranceSimplifiedSchema: Block = {
           type: 'text',
           label: 'Section Heading',
           maxLength: MAX_SECTION_HEADING,
-          required: true,
+          required: false,
           admin: {
             width: '50%',
             description: `Short label above the main title. Max ${MAX_SECTION_HEADING} characters.`,
           },
-          validate: validateShortText('Section Heading', MAX_SECTION_HEADING, true),
+          validate: validateShortText('Section Heading', MAX_SECTION_HEADING, false),
         },
         {
           name: 'sectionHeadingBN',
           type: 'text',
           label: 'সেকশন হেডিং (বাংলা)',
           maxLength: MAX_SECTION_HEADING,
-          required: true,
+          required: false,
           admin: {
             width: '50%',
             description: `মূল শিরোনামের উপরে ছোট লেবেল। সর্বোচ্চ ${bnNum(MAX_SECTION_HEADING)} অক্ষর।`,
           },
-          validate: validateShortText('Section Heading (BN)', MAX_SECTION_HEADING, true),
+          validate: validateShortText('Section Heading (BN)', MAX_SECTION_HEADING, false),
         },
       ],
     },
@@ -571,26 +609,26 @@ const LifeInsuranceSimplifiedSchema: Block = {
             {
               name: 'title',
               type: 'text',
-              required: true,
+              required: false,
               label: 'Title',
               maxLength: MAX_TITLE,
               admin: {
                 width: '50%',
                 description: `Primary headline for this section. Max ${MAX_TITLE} characters.`,
               },
-              validate: validateShortText('Title', MAX_TITLE, true),
+              validate: validateShortText('Title', MAX_TITLE, false),
             },
             {
               name: 'titleBN',
               type: 'text',
-              required: true,
+              required: false,
               label: 'শিরোনাম (বাংলা)',
               maxLength: MAX_TITLE,
               admin: {
                 width: '50%',
                 description: `এই সেকশনের মূল শিরোনাম। সর্বোচ্চ ${bnNum(MAX_TITLE)} অক্ষর।`,
               },
-              validate: validateShortText('Title (BN)', MAX_TITLE, true),
+              validate: validateShortText('Title (BN)', MAX_TITLE, false),
             },
           ],
         },
@@ -641,26 +679,26 @@ const LifeInsuranceSimplifiedSchema: Block = {
             {
               name: 'subtitle',
               type: 'text',
-              required: true,
+              required: false,
               label: 'Subtitle',
               maxLength: MAX_SUBTITLE,
               admin: {
                 width: '50%',
                 description: `Supporting line under the title. Max ${MAX_SUBTITLE} characters.`,
               },
-              validate: validateShortText('Subtitle', MAX_SUBTITLE, true),
+              validate: validateShortText('Subtitle', MAX_SUBTITLE, false),
             },
             {
               name: 'subtitleBN',
               type: 'text',
-              required: true,
+              required: false,
               label: 'উপশিরোনাম (বাংলা)',
               maxLength: MAX_SUBTITLE,
               admin: {
                 width: '50%',
                 description: `মূল শিরোনামের নিচে সহায়ক লাইন। সর্বোচ্চ ${bnNum(MAX_SUBTITLE)} অক্ষর।`,
               },
-              validate: validateShortText('Subtitle (BN)', MAX_SUBTITLE, true),
+              validate: validateShortText('Subtitle (BN)', MAX_SUBTITLE, false),
             },
           ],
         },
@@ -697,11 +735,11 @@ const LifeInsuranceSimplifiedSchema: Block = {
         // Main Image (generated, 4:3)
         ...generateArrayImageFields({
           fieldName: 'mainImage',
-          label: 'Main Thumbnail Image (4:3)',
-          description: 'Large hero/thumbnail for this section. 4:3 recommended.',
-          aspectRatio: 4 / 3,
-          quality: 0.96,
-          maxKB: 300,
+          label: 'Main Thumbnail Image (660:320)',
+          description: 'Large hero/thumbnail for this section. 660:320 recommended.',
+          aspectRatio: 660 / 320,
+          quality: 0.95,
+          maxKB: 500,
           ownerCollection: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG as any,
         } as any),
 
@@ -733,8 +771,8 @@ const LifeInsuranceSimplifiedSchema: Block = {
               label: 'Card Thumbnail Image (4:3)',
               description: 'Primary thumbnail for the card. 4:3 recommended.',
               aspectRatio: 4 / 3,
-              quality: 0.96,
-              maxKB: 300,
+              quality: 0.95,
+              maxKB: 500,
               ownerCollection: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG as any,
             } as any),
 
@@ -800,10 +838,10 @@ const LifeInsuranceSimplifiedSchema: Block = {
             {
               name: 'videoLink',
               type: 'text',
-              required: true,
+              required: false,
               label: 'Card Video Link (YouTube)',
               maxLength: MAX_VIDEO_LINK,
-              validate: validateYouTubeLinkWithMax(MAX_VIDEO_LINK),
+              validate: validateOptionalYouTubeLinkWithMax(MAX_VIDEO_LINK),
               admin: {
                 description: `Use a YouTube URL (embed, watch, youtu.be, or youtube-nocookie). Max ${MAX_VIDEO_LINK} characters.`,
               },

@@ -78,9 +78,16 @@ async function InsuranceSection({ lifeInsuranceSimplifiedData }: Props) {
     <>
       {/* py-12  */}
       <div
-        className="pt-12 pb-24 md:hidden"
+        className="pt-12 pb-24 md:hidden "
+        // style={{
+        //   backgroundColor: lifeInsuranceSimplifiedData?.backgroundColor || '',
+        // }}
         style={{
-          backgroundColor: lifeInsuranceSimplifiedData?.backgroundColor || '',
+          background:
+            lifeInsuranceSimplifiedData?.backgroundColor &&
+            lifeInsuranceSimplifiedData?.backgroundColor2
+              ? `linear-gradient(to left, ${lifeInsuranceSimplifiedData.backgroundColor2}, ${lifeInsuranceSimplifiedData.backgroundColor})`
+              : lifeInsuranceSimplifiedData?.backgroundColor || undefined,
         }}
       >
         <InsuranceSimplifiedSection
@@ -95,8 +102,15 @@ async function InsuranceSection({ lifeInsuranceSimplifiedData }: Props) {
       </div>
       <div
         className="container-padding hidden md:block space-y-[20px] md:space-y-[40px] lg:space-y-[50px] xl:space-y-[100px] "
+        // style={{
+        //   backgroundColor: lifeInsuranceSimplifiedData?.backgroundColor || '',
+        // }}
         style={{
-          backgroundColor: lifeInsuranceSimplifiedData?.backgroundColor || '',
+          background:
+            lifeInsuranceSimplifiedData?.backgroundColor &&
+            lifeInsuranceSimplifiedData?.backgroundColor2
+              ? `linear-gradient(to left, ${lifeInsuranceSimplifiedData.backgroundColor2}, ${lifeInsuranceSimplifiedData.backgroundColor})`
+              : lifeInsuranceSimplifiedData?.backgroundColor || undefined,
         }}
       >
         {lifeInsuranceSimplifiedData?.sections?.map((data, i: number) => (

@@ -2,6 +2,7 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/
 import { LifeInsuranceSimplifiedBlockType } from '@/types/payloadCustomTypes'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Image from 'next/image'
+import LocalizedText from '../shared/LocalizedText'
 
 type InsuranceCardDataType = NonNullable<
   NonNullable<LifeInsuranceSimplifiedBlockType['sections']>[number]['insuranceCardData']
@@ -15,11 +16,11 @@ const content = (data: InsuranceCardDataType) => (
   <div>
     <div
       // h-[120px] md:h-[200px] lg:h-[250px] xl:h-[300px] flex-shrink-0
-      className="relative
+      className={`relative
        aspect-[640/480] w-full
       rounded-[4.167px] 
-      bg-[#343A40] overflow-hidden cursor-pointer
-    "
+      bg-[#343A40] overflow-hidden ${data?.videoLink && ' cursor-pointer '} 
+    `}
     >
       {typeof data.image === 'object' && data.image?.url && (
         <Image
@@ -35,16 +36,24 @@ const content = (data: InsuranceCardDataType) => (
       )}
 
       {/* Text Content */}
-      <div
-        className="relative z-20 h-full flex items-end 
+      {(data?.title || data?.description || data?.titleBN || data?.descriptionBN) && (
+        <div
+          className="relative z-20 h-full flex items-end 
+          p-2
       md:px-4 xl:px-6 
       md:pb-10 xl:pb-16"
-      >
-        <div className="h-fit md:space-y-2 lg:space-y-3 xl:space-y-4">
-          {/* <h4 className="text-white text-[12px] lg:text-[15px] font-bold">{data.title}</h4> */}
-          <p className="text-[#E5E5E5] text-[10px] lg:text-[12px]">{data.description}</p>
+        >
+          <div className="absolute inset-0 bg-[#343A40]/50 rounded-[4.167px] z-20"></div>
+          <div className="h-fit md:space-y-2 lg:space-y-3 xl:space-y-4 z-30">
+            <h4 className="text-white text-[12px] lg:text-[15px] font-bold line-clamp-1 md:line-clamp-none">
+              <LocalizedText en={data?.title} bn={data?.titleBN} />
+            </h4>
+            <p className="text-[#E5E5E5] text-[10px] lg:text-[12px] line-clamp-2 md:line-clamp-none">
+              <LocalizedText en={data?.description} bn={data?.descriptionBN} />
+            </p>
+          </div>
         </div>
-      </div>
+      )}
       <div
         className="absolute bottom-0 right-0 z-20 
        w-[20px] lg:w-[30px] xl:w-[40px] 2xl:w-[50px]  
@@ -56,11 +65,11 @@ const content = (data: InsuranceCardDataType) => (
         />
       </div>
     </div>
-    {data.title && (
+    {/* {data.title && (
       <h4 className="text-[#434343] text-[10px] md:text-[12px] lg:text-[15px] font-bold text-center mt-1 md:mt-5">
         {data.title}
       </h4>
-    )}
+    )} */}
   </div>
 )
 
