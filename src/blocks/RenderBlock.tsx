@@ -18,6 +18,7 @@ import {
   ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG,
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
+  AGENT_ONBOARDING_FORM_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
@@ -39,6 +40,8 @@ import {
   MULTI_STAGE_INTRO_SLUG_AND_TAG,
   MULTI_STAGE_PLAN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+  PREM_CALC_PAGE_SLUG_AND_TAG,
+  PURCHASE_FORM_SLUG_AND_TAG,
   SUPPORT_BUZZ_SLUG_AND_TAG,
   SUPPORT_FAQ_TAB_SLUG_AND_TAG,
   SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
@@ -72,6 +75,9 @@ import SupportMapTabBlock from './supportMapTab/SupportMapTabBlock'
 import SupportFaqTabBlock from './supportFaqTab/SupportFaqTabBlock'
 import SupportBuzzBlock from './supportBuzz/SupportBuzzBlock'
 import SupportFeedbackFormBlock from './supportFeedbackForm/SupportFeedbackFormBlock'
+import PremCalculatorPageBlock from './premCalculatorPage/PremCalculatorPageBlock'
+import PurchaseFormBlock from './purchaseFormBlock/PurchaseFormBlock'
+import AgentFormBlock from './agentForm/AgentFormBlock'
 
 type Params = Record<string, string>
 
@@ -120,6 +126,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <AgentOnboardingOpportunityBlock key={block.id} block={block} params={params} />
     case AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG:
       return <MoreThanAWorkplaceBlock key={block.id} block={block} params={params} />
+    case AGENT_ONBOARDING_FORM_SLUG_AND_TAG:
+      return <AgentFormBlock key={block.id} block={block} params={params} />
 
     //BOD page
     case BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG:
@@ -162,6 +170,12 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <SupportBuzzBlock key={block.id} block={block} params={params} />
     case SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG:
       return <SupportFeedbackFormBlock key={block.id} block={block} params={params} />
+    // prem calc page
+    case PREM_CALC_PAGE_SLUG_AND_TAG:
+      return <PremCalculatorPageBlock key={block.id} block={block} params={params} />
+    //purchase page
+    case PURCHASE_FORM_SLUG_AND_TAG:
+      return <PurchaseFormBlock key={block.id} block={block} params={params} />
 
     default:
       return null

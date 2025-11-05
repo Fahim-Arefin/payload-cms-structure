@@ -2593,6 +2593,181 @@ export interface Page {
         blockName?: string | null;
         blockType: 'support-feedback-form';
       }
+    | {
+        title: string;
+        titleBN?: string | null;
+        highlightedTitle?: string | null;
+        highlightedTitleBN?: string | null;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Cards shown under the hero copy. Each card has a title, rich description, and a hex background color.
+         */
+        cards?:
+          | {
+              cardTitle: string;
+              cardTitleBN?: string | null;
+              cardDesc?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              cardDescBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              /**
+               * Hex color (#RRGGBB or #RRGGBBAA). Example: #9C8639 or #9C8639B2
+               */
+              cardBg?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'prem-calculator-card';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Add 1–4 cards. Each card has text (EN/BN), rich text description (EN/BN), and a background color.
+         */
+        cards?:
+          | {
+              cardText: string;
+              cardTextBN?: string | null;
+              cardDesc?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              cardDescBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              /**
+               * Example: #9C863940 (with alpha) or #CCBF95 (solid).
+               */
+              cardBg?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'purchase-form';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB. Default: #f6eddd
+         */
+        bgColor?: string | null;
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        subdescription?: string | null;
+        subdescriptionBN?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'agent-form';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -3777,6 +3952,57 @@ export interface PagesSelect<T extends boolean = true> {
               rightTitleBN?: T;
               rightButtonText?: T;
               rightButtonTextBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'prem-calculator-card'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              cards?:
+                | T
+                | {
+                    cardTitle?: T;
+                    cardTitleBN?: T;
+                    cardDesc?: T;
+                    cardDescBN?: T;
+                    cardBg?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'purchase-form'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              cards?:
+                | T
+                | {
+                    cardText?: T;
+                    cardTextBN?: T;
+                    cardDesc?: T;
+                    cardDescBN?: T;
+                    cardBg?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'agent-form'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              bgColor?: T;
+              description?: T;
+              descriptionBN?: T;
+              subdescription?: T;
+              subdescriptionBN?: T;
               id?: T;
               blockName?: T;
             };

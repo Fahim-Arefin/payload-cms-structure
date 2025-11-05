@@ -262,3 +262,23 @@ export const SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG = 'support-feedback-form'
 export const SUPPORT_FEEDBACK_FORM_BLOCK_LABEL = 'Support Feedback Form'
 export const SUPPORT_FEEDBACK_FORM_CACHE_KEY = 'support-feedback-form-data'
 export const SUPPORT_FEEDBACK_FORM_BLOCK_THUMBNAIL_URL = `${folder}/support-feedback-form-page-block-thumbnail.png`
+
+
+//prem calc page
+export const PREM_CALC_PAGE_SLUG_AND_TAG = 'prem-calculator-card'
+export const PREM_CALC_PAGE_BLOCK_LABEL = 'Premium Calculator Card'
+export const PREM_CALC_PAGE_CACHE_KEY = 'prem-calculator-card-data'
+export const PREM_CALC_PAGE_BLOCK_THUMBNAIL_URL = `${folder}/premium-calculator-card-page-block-thumbnail.png`
+
+//purchase page
+export const PURCHASE_FORM_SLUG_AND_TAG = 'purchase-form'
+export const PURCHASE_FORM_PAGE_BLOCK_LABEL = 'Purchase Now Form'
+export const PURCHASE_FORM_CACHE_KEY = 'purchase-form-data'
+export const PURCHASE_FORM_BLOCK_THUMBNAIL_URL = `${folder}/purchase-form-page-block-thumbnail.png`
+
+
+// agent onboarding form
+export const AGENT_ONBOARDING_FORM_SLUG_AND_TAG = 'agent-form'
+export const AGENT_ONBOARDING_FORM_PAGE_BLOCK_LABEL = 'Agent Onboarding Form'
+export const AGENT_ONBOARDING_FORM_CACHE_KEY = 'agent-form-data'
+export const AGENT_ONBOARDING_FORM_BLOCK_THUMBNAIL_URL = `${folder}/agent-form-page-block-thumbnail.png`

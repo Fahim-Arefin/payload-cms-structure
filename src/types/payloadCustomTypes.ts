@@ -8,6 +8,7 @@ import {
   ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG,
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
+  AGENT_ONBOARDING_FORM_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
@@ -29,6 +30,8 @@ import {
   MULTI_STAGE_INTRO_SLUG_AND_TAG,
   MULTI_STAGE_PLAN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+  PREM_CALC_PAGE_SLUG_AND_TAG,
+  PURCHASE_FORM_SLUG_AND_TAG,
   SUPPORT_BUZZ_SLUG_AND_TAG,
   SUPPORT_FAQ_TAB_SLUG_AND_TAG,
   SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
@@ -213,4 +216,22 @@ export type SupportBuzzBlockType = Extract<
 export type SupportFeedbackFormBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG}
+>
+
+//prem calc page
+export type PremCalculatorPageBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PREM_CALC_PAGE_SLUG_AND_TAG}
+>
+
+//purchase page
+export type PurchasePageBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PURCHASE_FORM_SLUG_AND_TAG}
+>
+
+//agent onboarding page
+export type AgentOnboardingFormBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof AGENT_ONBOARDING_FORM_SLUG_AND_TAG}
 >

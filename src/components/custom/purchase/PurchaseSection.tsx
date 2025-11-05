@@ -10,8 +10,13 @@ import AnimatedCounter from '@/components/ui/AnimatedCounter'
 import PurchaseCalculateSection from './PurchaseCalculateSection'
 import PlanDetailsSection from './PlanDetailsSection'
 import LocalizedText from '../shared/LocalizedText'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedRichText from '../shared/LocalizedRichText'
+import { PurchasePageBlockType } from '@/types/payloadCustomTypes'
 
-type Props = {}
+type Props = {
+  block: PurchasePageBlockType
+}
 
 interface FormData {
   PlanCode: number
@@ -25,7 +30,36 @@ interface FormData {
   occupation: string
 }
 
-const PurchaseSection = (props: Props) => {
+// ✅ Your plans list (restored)
+const plans = [
+  {
+    text: 'Shanta Child Education Plan',
+    videoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
+    code: 1,
+  },
+  {
+    text: 'Shanta Endowment Plan',
+    videoLink: 'https://www.youtube.com/embed/CkKkdNkBk9g',
+    code: 2,
+  },
+  {
+    text: 'Shanta 3 Stage Plan',
+    videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+    code: 3,
+  },
+  {
+    text: 'Shanta 4 Stage Plan',
+    videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+    code: 4,
+  },
+  // {
+  //   text: 'Multi Stage Maturity Plan',
+  //   videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+  //   code: 5,
+  // },
+]
+
+const PurchaseSection = ({ block }: Props) => {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
   const [selectedPlanName, setSelectedPlanName] = useState<string>('')
@@ -47,14 +81,11 @@ const PurchaseSection = (props: Props) => {
     setApiResponse(response)
     setConfirmedPaymentMode(paymentMode)
     setCalculatedPlanCode(formData.PlanCode)
-    if (planName) {
-      setSelectedPlanName(planName)
-    }
+    if (planName) setSelectedPlanName(planName)
   }
 
   // Map plan names to PlanDetailsSection expected codes
   const getPlanDetailsCode = (planName?: string): number => {
-    // Map plan names to PlanDetailsSection codes
     const planNameToCode: { [key: string]: number } = {
       'Shanta Child Education Plan (3%)': 1,
       'Shanta Endowment Plan': 2,
@@ -62,17 +93,13 @@ const PurchaseSection = (props: Props) => {
       'Shanta 4 Stage Plan': 4,
     }
 
-    // If we have the selected plan name, use it for mapping
     if (selectedPlanName && planNameToCode[selectedPlanName]) {
       return planNameToCode[selectedPlanName]
     }
-
-    // If no plan name is available, try to use the provided plan name parameter
     if (planName && planNameToCode[planName]) {
       return planNameToCode[planName]
     }
 
-    // Fallback: try to match partial names
     if (selectedPlanName) {
       if (selectedPlanName.includes('Child Education')) return 1
       if (selectedPlanName.includes('Endowment')) return 2
@@ -80,39 +107,11 @@ const PurchaseSection = (props: Props) => {
       if (selectedPlanName.includes('4 Stage')) return 4
     }
 
-    return 1 // Default fallback to show something
+    return 1 // default fallback
   }
-  const plans = [
-    {
-      text: 'Shanta Child Education Plan',
-      videoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
-      code: 1,
-    },
-    {
-      text: 'Shanta Endowment Plan',
-      videoLink: 'https://www.youtube.com/embed/CkKkdNkBk9g',
-      code: 2,
-    },
-    {
-      text: 'Shanta 3 Stage Plan',
-      videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-      code: 3,
-    },
-    {
-      text: 'Shanta 4 Stage Plan',
-      videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-      code: 4,
-    },
-    // {
-    //   text: 'Multi Stage Maturity Plan',
-    //   videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
-    //   code: 5,
-    // },
-  ]
 
-  // Helper function to get the correct key for payment mode
-
-  // Click handler to toggle critical illness coverage
+  // NOTE: Per your instruction — we will only USE `block` data inside the main grid (left side fallback).
+  const schemaCards = Array.isArray(block?.cards) ? block.cards.slice(0, 4) : []
 
   return (
     <div
@@ -122,6 +121,7 @@ const PurchaseSection = (props: Props) => {
            xl:px-[200px]  xl:pt-[100px] 
            2xl:px-[300px] 2xl:pt-[150px] lg:py-10 mb-4 lg:mb-10 xl:mb-20"
     >
+      {/* ======= STATIC HEADER (unchanged, no block usage here) ======= */}
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[17px] md:text-[24px] lg:text-[30px] xl:text-[38px] 2xl:text-[46px] font-semibold text-[#4A4A4A] text-start uppercase">
           <LocalizedText en={`Let's get a policy`} bn={`নিজের এবং প্রিয়জনের জন্য`} />
@@ -144,10 +144,12 @@ const PurchaseSection = (props: Props) => {
         </p>
       </div>
 
+      {/* ======= STATIC TOP CARDS / SECTION (unchanged, no block usage here) ======= */}
       <div className="">
         <PurchaseCardSection blur />
       </div>
 
+      {/* ======= MAIN GRID (block data ONLY used inside this area) ======= */}
       <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.3fr,1fr] gap-4 lg:gap-10 justify-center mt-6 lg:mt-10 xl:mt-20">
         {/* left side box */}
         <div className=" w-full order-2 lg:order-1">
@@ -164,7 +166,43 @@ const PurchaseSection = (props: Props) => {
             <div>
               <PlanDetailsSection planCode={getPlanDetailsCode()} plans={plans} />
             </div>
+          ) : schemaCards.length > 0 ? (
+            // ✅ Use schema cards ONLY here (inside main grid left column)
+            <div className="mt-0 space-y-0">
+              {schemaCards.map((c, idx) => {
+                const bg =
+                  c.cardBg || (idx === 0 ? '#9C863940' : idx === 1 ? '#ccbf95' : '#9C8639B2')
+                const color = idx === 1 ? '#ffffff' : '#3A3A3C'
+                const titleColor = color
+                const descColor = color
+                const rounded =
+                  idx === 0
+                    ? 'rounded-t-xl'
+                    : idx === schemaCards.length - 1
+                      ? 'rounded-b-xl'
+                      : 'rounded-none'
+
+                return (
+                  <div
+                    key={idx}
+                    className={`${rounded} px-6 md:px-10 py-4 ${idx === 0 ? 'pt-6 md:pt-10' : ''}`}
+                    style={{ backgroundColor: bg }}
+                  >
+                    {(c.cardText || c.cardTextBN) && (
+                      <h4 className="global-p1 font-semibold mb-1" style={{ color: titleColor }}>
+                        <LocalizedText en={c.cardText ?? ''} bn={c.cardTextBN ?? ''} />
+                      </h4>
+                    )}
+
+                    <div className="global-p2 font-light" style={{ color: descColor }}>
+                      <LocalizedRichText en={c.cardDesc} bn={c.cardDescBN} />
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           ) : (
+            // Fallback demo (only if schema has no cards and nothing selected/calculated)
             <div>
               <div className="px-6 pt-6 md:px-10 md:pt-10 pb-4 rounded-t-xl bg-[#9C863940]">
                 <h4 className="global-p1 font-semibold text-[#3A3A3C] mb-1">

@@ -136,6 +136,7 @@
 import BoardOfDirectorsCardSchema from '@/blocks/BoardOfDirectorsCard/schema'
 import BoardOfDirectorsListSchema from '@/blocks/BoardOfDirectorsList/schema'
 import LicensedLaunchedSchema from '@/blocks/LicensedAndLaunched/schema'
+import AgentOnboardingFormSchema from '@/blocks/agentForm/schema'
 import AgentOnboardingOpportunitySchema from '@/blocks/agentOnboadringOpportunity/schema'
 import AgentVisionSchema from '@/blocks/agentVision/schema'
 import CareerIntroSchema from '@/blocks/careerIntro/schema'
@@ -156,7 +157,9 @@ import MoreThanAWorkplaceSchema from '@/blocks/moreThanAWorkplace/schema'
 import MultiStagePlanSchema from '@/blocks/multiStagePlan/schema'
 import MultiStageIntroSchema from '@/blocks/multiStageTitle/schema'
 import PlanCardSchema from '@/blocks/planCard/schema'
+import PremCalculatorPageSchema from '@/blocks/premCalculatorPage/schema'
 import PremiumCalculatorSchema from '@/blocks/premiumCalculator/schema'
+import PurchaseFormSchema from '@/blocks/purchaseFormBlock/schema'
 import ShantaFootprintSchema from '@/blocks/shantaFootprint/schema'
 import ShantaIntroSchema from '@/blocks/shantaIntro/schema'
 import ShantaMilestonesUnlockedSchema from '@/blocks/shantaMilestoneUnlocked/schema'
@@ -279,6 +282,9 @@ export const Pages: CollectionConfig = {
         SupportFaqTabSchema,
         SupportBuzzSchema,
         SupportFeedbackSchema,
+        PremCalculatorPageSchema,
+        PurchaseFormSchema,
+        AgentOnboardingFormSchema
       ],
     },
   ],
