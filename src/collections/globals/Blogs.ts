@@ -362,6 +362,7 @@ import {
   BLOGS_SLUG_AND_TAG,
   GLOBAL_BLOGS_BLOCK_LABEL,
   GLOBAL_BLOGS_SLUG_AND_TAG,
+  HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG,
   NEWS_SLUG_AND_TAG,
 } from '@/lib/constants'
 
@@ -736,6 +737,7 @@ const GlobalBlogs: GlobalConfig = {
         revalidateTag(BLOGS_DETAILS_SLUG_AND_TAG)
         revalidateTag(BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_SLUG_AND_TAG)
         revalidateTag(NEWS_SLUG_AND_TAG)
+        revalidateTag(HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG)
       },
     ],
   },

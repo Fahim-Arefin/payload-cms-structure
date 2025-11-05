@@ -1,19 +1,14 @@
-import Link from 'next/link'
-import React from 'react'
-import LocalizedText from '../shared/LocalizedText'
+import { resolvePageSlug } from '@/lib/utils'
 import { HashlinkBlock } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
-import { pageHrefWithAnchor, resolvePageSlug } from '@/lib/utils'
+import Link from 'next/link'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   item: HashlinkBlock['hashLinkCards'][number]
 }
 
 function LevelUpCard({ item }: Props) {
-  console.log(item?.sectionId)
-  console.log('first', resolvePageSlug(item?.buttonLink))
-  console.log('second', pageHrefWithAnchor(resolvePageSlug(item?.buttonLink), item?.sectionId))
-
   return (
     <Link href={`/${resolvePageSlug(item?.buttonLink)}/#${item?.sectionId}`}>
       <div

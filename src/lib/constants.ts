@@ -335,3 +335,9 @@ export const VLOGS_SLUG_AND_TAG = 'vlogs'
 export const VLOGS_BLOCK_LABEL = 'All Vlogs'
 export const VLOGS_BLOCK_THUMBNAIL_URL = `${folder}/vlogs-block-thumbnail.png`
 export const VLOGS_CACHE_KEY = 'vlogs-data'
+
+// Home featureds news
+export const HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG = 'featured-blog-vlog-and-news'
+export const HOME_FEATURED_BLOG_VLOG_AND_NEWS_BLOCK_LABEL = 'Featured Blogs, Vlogs and News'
+export const HOME_FEATURED_BLOG_VLOG_AND_NEWS_BLOCK_THUMBNAIL_URL = `${folder}/featured-blog-vlog-and-news-block-thumbnail.png`
+export const HOME_FEATURED_BLOG_VLOG_AND_NEWS_CACHE_KEY = 'featured-blog-vlog-and-news-data'

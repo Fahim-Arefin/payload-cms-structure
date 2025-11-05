@@ -149,6 +149,7 @@ import CorporateIntroSchema from '@/blocks/corporateIntro/schema'
 import CorporatePartnersSchema from '@/blocks/corporatePartners/schema'
 import CustomCardSectionSchema from '@/blocks/customCardSection/schema'
 import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
+import FeaturedBlogVlogNewsSchema from '@/blocks/featuredBlogVlogNews/schema'
 import FeaturedPlansSchema from '@/blocks/featuredPlan/schema'
 import HeroSchema from '@/blocks/hero/schema'
 import LeadershipTeamCardSchema from '@/blocks/leadershipTeamCard/schema'
@@ -288,6 +289,7 @@ export const Pages: CollectionConfig = {
         AllBLogsCardSchema,
         AllNewsSectionSchema,
         AllVLogsSectionSchema,
+        FeaturedBlogVlogNewsSchema,
       ],
     },
   ],

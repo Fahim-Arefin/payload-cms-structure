@@ -32,6 +32,7 @@ import {
   CORPORATE_PARTNERS_SLUG_AND_TAG,
   CUSTOM_CARD_SECTION_SLUG_AND_TAG,
   EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
+  HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -78,6 +79,7 @@ import BlockDetailsBlock from './blogDetails/BlockDetailsBlock'
 import AllBlogsCardBlock from './AllblogsCard/AllBlogsCardBlock'
 import AllNewsBlock from './news/AllNewsBlock'
 import VlogBlock from './vlogs/VlogBlock'
+import FeaturedBlogVloNewsBlock from './featuredBlogVlogNews/FeaturedBlogVloNewsBlock'
 
 type Params = Record<string, string>
 
@@ -185,6 +187,9 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     // vlog
     case VLOGS_SLUG_AND_TAG:
       return <VlogBlock key={block.id} block={block} params={params} />
+    // featured blog vlog news
+    case HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG:
+      return <FeaturedBlogVloNewsBlock key={block.id} block={block} params={params} />
 
     default:
       return null

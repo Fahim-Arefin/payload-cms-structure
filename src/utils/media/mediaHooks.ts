@@ -14,6 +14,7 @@ import {
   CORPORATE_PARTNERS_SLUG_AND_TAG,
   CUSTOM_CARD_SECTION_SLUG_AND_TAG,
   EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
+  HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -126,6 +127,11 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: PLAN_INFO_DESIGN_05_SLUG_AND_TAG,
       mediaFields: ['imageTall', 'imageWide'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG,
+      mediaFields: ['trendingBanner'],
     },
   ],
 

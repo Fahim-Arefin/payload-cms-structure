@@ -3595,6 +3595,90 @@ export interface Page {
         blockName?: string | null;
         blockType: 'vlogs';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * heading. Max 120 chars.
+         */
+        heading?: string | null;
+        /**
+         * হেডিং সর্বোচ্চ ১২০ অক্ষর।
+         */
+        headingBN?: string | null;
+        /**
+         * Primary heading. Max 120 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 120 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই শিরোনামের ভিতর হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Optional sub-heading. Max 120 chars.
+         */
+        trendingTitle?: string | null;
+        /**
+         * ঐচ্ছিক উপ-শিরোনাম। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        trendingTitleBN?: string | null;
+        /**
+         * 16:9 recommended (e.g., 1600×900). Blur placeholder generated automatically.
+         */
+        trendingBanner: string | Media;
+        trendingBannerOriginal?: (string | null) | Media;
+        pendingTrendingBannerOriginal?: string | null;
+        pendingTrendingBannerCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        trendingBannerBlurDataURL?: string | null;
+        /**
+         * Text shown on the call-to-action button. Max 24 characters.
+         */
+        buttonText?: string | null;
+        /**
+         * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        buttonTextBN?: string | null;
+        /**
+         * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+         */
+        buttonLink?: (string | null) | Page;
+        /**
+         * Optional "See all posts" button text. Max 24 characters.
+         */
+        seeAllText?: string | null;
+        /**
+         * ঐচ্ছিক "সব দেখুন" বাটন টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        seeAllTextBN?: string | null;
+        /**
+         * Pick an internal Page to link to. Required if any See All button text is provided.
+         */
+        seeAllLink?: (string | null) | Page;
+        /**
+         * When ON, this section reads **global Blog And News** items from global sources.
+         */
+        useSharedBlogAndNewsData: boolean;
+        /**
+         * When ON, this section reads **global Vlog** items from global sources.
+         */
+        useSharedVlogData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featured-blog-vlog-and-news';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -5023,6 +5107,34 @@ export interface PagesSelect<T extends boolean = true> {
               titleBN?: T;
               sectionId?: T;
               useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'featured-blog-vlog-and-news'?:
+          | T
+          | {
+              backgroundColor?: T;
+              heading?: T;
+              headingBN?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              trendingTitle?: T;
+              trendingTitleBN?: T;
+              trendingBanner?: T;
+              trendingBannerOriginal?: T;
+              pendingTrendingBannerOriginal?: T;
+              pendingTrendingBannerCrop?: T;
+              trendingBannerBlurDataURL?: T;
+              buttonText?: T;
+              buttonTextBN?: T;
+              buttonLink?: T;
+              seeAllText?: T;
+              seeAllTextBN?: T;
+              seeAllLink?: T;
+              useSharedBlogAndNewsData?: T;
+              useSharedVlogData?: T;
               id?: T;
               blockName?: T;
             };

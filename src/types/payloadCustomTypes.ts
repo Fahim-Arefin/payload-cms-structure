@@ -24,6 +24,7 @@ import {
   CUSTOM_CARD_SECTION_SLUG_AND_TAG,
   EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
   HASHLINK_CARDS_SLUG_AND_TAG,
+  HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -256,4 +257,9 @@ export type AllNewsSectionType = Extract<
 export type VlogBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof VLOGS_SLUG_AND_TAG }
+>
+
+export type FeaturedBlogVlogNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG }
 >

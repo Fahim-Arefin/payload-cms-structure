@@ -4,6 +4,7 @@ import type { GlobalConfig } from 'payload'
 import {
   GLOBAL_VLOGS_BLOCK_LABEL,
   GLOBAL_VLOGS_SLUG_AND_TAG,
+  HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG,
   VLOGS_SLUG_AND_TAG,
 } from '@/lib/constants'
 
@@ -304,6 +305,7 @@ const GlobalVlogs: GlobalConfig = {
         // Revalidate both the global tag and your cache key for FE caches
         revalidateTag(globalTag(GLOBAL_VLOGS_SLUG_AND_TAG))
         revalidateTag(VLOGS_SLUG_AND_TAG)
+        revalidateTag(HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG)
       },
     ],
   },
