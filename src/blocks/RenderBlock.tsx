@@ -45,6 +45,7 @@ import {
   PLAN_INFO_DESIGN_04_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_05_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_SLUG_AND_TAG,
+  VLOGS_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -76,6 +77,7 @@ import BlogsBlock from './blogs/BlogsBlock'
 import BlockDetailsBlock from './blogDetails/BlockDetailsBlock'
 import AllBlogsCardBlock from './AllblogsCard/AllBlogsCardBlock'
 import AllNewsBlock from './news/AllNewsBlock'
+import VlogBlock from './vlogs/VlogBlock'
 
 type Params = Record<string, string>
 
@@ -180,6 +182,9 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <AllBlogsCardBlock key={block.id} block={block} params={params} />
     case NEWS_SLUG_AND_TAG:
       return <AllNewsBlock key={block.id} block={block} params={params} />
+    // vlog
+    case VLOGS_SLUG_AND_TAG:
+      return <VlogBlock key={block.id} block={block} params={params} />
 
     default:
       return null

@@ -5,9 +5,10 @@ import { useEffect } from 'react'
 type Props = {
   blogSectionId?: string
   newsSectionId?: string
+  vlogSectionId?: string
 }
 
-export default function HashScroller({ blogSectionId, newsSectionId }: Props) {
+export default function HashScroller({ blogSectionId, newsSectionId, vlogSectionId }: Props) {
   useEffect(() => {
     let lastHash = ''
 
@@ -19,7 +20,7 @@ export default function HashScroller({ blogSectionId, newsSectionId }: Props) {
       const map: Record<string, string> = {
         blog: blogSectionId ?? '',
         news: newsSectionId ?? '',
-        vlog: 'vlog-section',
+        vlog: vlogSectionId ?? '',
       }
 
       const targetId = map[hash]

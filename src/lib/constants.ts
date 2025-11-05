@@ -43,6 +43,10 @@ export const GLOBAL_BLOGS_SLUG_AND_TAG = 'global-blogs' as const
 export const GLOBAL_BLOGS_BLOCK_LABEL = 'News and Blogs'
 export const GLOBAL_BLOGS_CACHE_KEY = 'global-blogs-data'
 
+export const GLOBAL_VLOGS_SLUG_AND_TAG = 'global-vlogs' as const
+export const GLOBAL_VLOGS_BLOCK_LABEL = 'Vlogs'
+export const GLOBAL_VLOGS_CACHE_KEY = 'global-vlogs-data'
+
 // thumbnail folder name
 const folder = '/assets/block-icons'
 
@@ -325,3 +329,9 @@ export const NEWS_SLUG_AND_TAG = 'news'
 export const NEWS_BLOCK_LABEL = 'All News'
 export const NEWS_BLOCK_THUMBNAIL_URL = `${folder}/news-block-thumbnail.png`
 export const NEWS_CACHE_KEY = 'news-data'
+
+// Vlogs
+export const VLOGS_SLUG_AND_TAG = 'vlogs'
+export const VLOGS_BLOCK_LABEL = 'All Vlogs'
+export const VLOGS_BLOCK_THUMBNAIL_URL = `${folder}/vlogs-block-thumbnail.png`
+export const VLOGS_CACHE_KEY = 'vlogs-data'

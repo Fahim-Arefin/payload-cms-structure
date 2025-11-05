@@ -168,6 +168,7 @@ import ShantaIntroSchema from '@/blocks/shantaIntro/schema'
 import ShantaMilestonesUnlockedSchema from '@/blocks/shantaMilestoneUnlocked/schema'
 import ShantaVisionSchema from '@/blocks/shantaVision/schema'
 import ValuesThatShapeUsSchema from '@/blocks/valuesThatShapeUs/schema'
+import AllVLogsSectionSchema from '@/blocks/vlogs/schema'
 import WhyChooseUsSchema from '@/blocks/whyChooseUs/schema'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { mediaHooks } from '@/utils/media/mediaHooks'
@@ -286,6 +287,7 @@ export const Pages: CollectionConfig = {
         BLogDetailsSectionSchema,
         AllBLogsCardSchema,
         AllNewsSectionSchema,
+        AllVLogsSectionSchema,
       ],
     },
   ],

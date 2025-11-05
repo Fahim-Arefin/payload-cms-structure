@@ -100,6 +100,7 @@ export interface Config {
     'leadership-team': LeadershipTeam;
     'global-contact-us-form': GlobalContactUsForm;
     'global-blogs': GlobalBlog;
+    'global-vlogs': GlobalVlog;
   };
   globalsSelect: {
     'global-header': GlobalHeaderSelect<false> | GlobalHeaderSelect<true>;
@@ -109,6 +110,7 @@ export interface Config {
     'leadership-team': LeadershipTeamSelect<false> | LeadershipTeamSelect<true>;
     'global-contact-us-form': GlobalContactUsFormSelect<false> | GlobalContactUsFormSelect<true>;
     'global-blogs': GlobalBlogsSelect<false> | GlobalBlogsSelect<true>;
+    'global-vlogs': GlobalVlogsSelect<false> | GlobalVlogsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -3562,6 +3564,37 @@ export interface Page {
         blockName?: string | null;
         blockType: 'news';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 100 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Used for direct jump links to this section (e.g., blog-section). Must not have leading/trailing spaces.
+         */
+        sectionId: string;
+        /**
+         * When ON, this block renders data from **Global → Vlogs**.
+         *
+         * **Before enabling:** fill up the Global → Vlogs data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'vlogs';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -4982,6 +5015,17 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        vlogs?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              sectionId?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -5846,6 +5890,78 @@ export interface GlobalBlog {
   createdAt?: string | null;
 }
 /**
+ * Global list of Vlog cards. Each item has EN/BN title, image (cropper), rich descriptions, important date, Bangla date label
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-vlogs".
+ */
+export interface GlobalVlog {
+  id: string;
+  uploadSessionId?: string | null;
+  /**
+   * Add each vlog as a card item.
+   */
+  vlogs: {
+    /**
+     * 4:3 recommended. Blur placeholder generated automatically.
+     */
+    image: string | Media;
+    imageOriginal?: (string | null) | Media;
+    pendingImageOriginal?: string | null;
+    pendingImageCrop?: string | null;
+    imageBlurDataURL?: string | null;
+    /**
+     * Use a YouTube URL (embed, watch, youtu.be, or youtube-nocookie). Max 200 characters.
+     */
+    videoLink?: string | null;
+    /**
+     * Max 500 characters.
+     */
+    title?: string | null;
+    /**
+     * সর্বোচ্চ ৫০০ অক্ষর।
+     */
+    titleBN?: string | null;
+    /**
+     * Max 500 characters.
+     */
+    headline?: string | null;
+    /**
+     * সর্বোচ্চ ৫০০ অক্ষর।
+     */
+    headlineBN?: string | null;
+    /**
+     * 2–3 short sentences. Max 200 characters.
+     */
+    description?: string | null;
+    /**
+     * ২–৩টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ২০০ অক্ষর।
+     */
+    descriptionBN?: string | null;
+    /**
+     * Primary date used for sorting/highlighting.
+     */
+    importantDate?: string | null;
+    /**
+     * সর্বোচ্চ ১৫০ অক্ষর।
+     */
+    importantDateBN?: string | null;
+    /**
+     * If you featured a blog that means it will show on the homepage news and blog section. (exactly 1 must be selected)
+     */
+    isFeatured?: boolean | null;
+    /**
+     * If checked, this vlog will be hidden from public view.
+     */
+    isHide?: boolean | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-header_select".
  */
@@ -6179,6 +6295,39 @@ export interface GlobalBlogsSelect<T extends boolean = true> {
         newsLink?: T;
         isFeatured?: T;
         isTrending?: T;
+        createdAt?: T;
+        updatedAt?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-vlogs_select".
+ */
+export interface GlobalVlogsSelect<T extends boolean = true> {
+  uploadSessionId?: T;
+  vlogs?:
+    | T
+    | {
+        image?: T;
+        imageOriginal?: T;
+        pendingImageOriginal?: T;
+        pendingImageCrop?: T;
+        imageBlurDataURL?: T;
+        videoLink?: T;
+        title?: T;
+        titleBN?: T;
+        headline?: T;
+        headlineBN?: T;
+        description?: T;
+        descriptionBN?: T;
+        importantDate?: T;
+        importantDateBN?: T;
+        isFeatured?: T;
+        isHide?: T;
         createdAt?: T;
         updatedAt?: T;
         id?: T;

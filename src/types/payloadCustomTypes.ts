@@ -39,6 +39,7 @@ import {
   PLAN_INFO_DESIGN_05_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+  VLOGS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -250,4 +251,9 @@ export type AllBlockCardType = Extract<
 export type AllNewsSectionType = Extract<
   Page['layout'][number],
   { blockType: typeof NEWS_SLUG_AND_TAG }
+>
+
+export type VlogBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof VLOGS_SLUG_AND_TAG }
 >

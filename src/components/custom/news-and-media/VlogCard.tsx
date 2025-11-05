@@ -1,18 +1,14 @@
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { LifeInsuranceSimplifiedBlockType } from '@/types/payloadCustomTypes'
+import { GlobalVlog } from '@/payload-types'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Image from 'next/image'
 import LocalizedText from '../shared/LocalizedText'
 
-type InsuranceCardDataType = NonNullable<
-  NonNullable<LifeInsuranceSimplifiedBlockType['sections']>[number]['insuranceCardData']
->[number]
-
 type Props = {
-  data: InsuranceCardDataType
+  data: GlobalVlog['vlogs'][number]
 }
 
-const content = (data: InsuranceCardDataType) => (
+const content = (data: GlobalVlog['vlogs'][number]) => (
   <div>
     <div
       // h-[120px] md:h-[200px] lg:h-[250px] xl:h-[300px] flex-shrink-0
@@ -39,12 +35,12 @@ const content = (data: InsuranceCardDataType) => (
       {(data?.title || data?.description || data?.titleBN || data?.descriptionBN) && (
         <div
           className="relative z-20 h-full flex items-end 
-          p-2
-      md:px-4 xl:px-6 
-      md:pb-10 xl:pb-16"
+          
+      px-4 xl:px-6 
+      pb-10 xl:pb-16"
         >
           <div className="absolute inset-0 bg-[#343A40]/50 rounded-[4.167px] z-20"></div>
-          <div className="h-fit md:space-y-2 lg:space-y-3 xl:space-y-4 z-30">
+          <div className="h-fit space-y-2 lg:space-y-3 xl:space-y-4 z-30">
             <h4 className="text-white text-[12px] lg:text-[15px] font-bold line-clamp-1 md:line-clamp-none">
               <LocalizedText en={data?.title} bn={data?.titleBN} />
             </h4>
@@ -65,15 +61,15 @@ const content = (data: InsuranceCardDataType) => (
         />
       </div>
     </div>
-    {/* {data.title && (
+    {data.headline && (
       <h4 className="text-[#434343] text-[10px] md:text-[12px] lg:text-[15px] font-bold text-center mt-1 md:mt-5">
-        {data.title}
+        <LocalizedText en={data.headline} bn={data.headlineBN} />
       </h4>
-    )} */}
+    )}
   </div>
 )
 
-function InsuranceCard({ data }: Props) {
+function VlogCard({ data }: Props) {
   return data?.videoLink ? (
     <Dialog>
       <DialogTrigger asChild>{content(data)}</DialogTrigger>
@@ -86,7 +82,7 @@ function InsuranceCard({ data }: Props) {
       [&>button.absolute]:hover:bg-black/80"
       >
         <VisuallyHidden>
-          <DialogTitle>Insurance Video</DialogTitle>
+          <DialogTitle>Vlog Video</DialogTitle>
         </VisuallyHidden>
 
         <iframe
@@ -106,4 +102,4 @@ function InsuranceCard({ data }: Props) {
   )
 }
 
-export default InsuranceCard
+export default VlogCard
