@@ -2381,7 +2381,7 @@ export interface Page {
                  */
                 buttonLink: string | Page;
                 /**
-                 * Used for direct jump links to this section (e.g., blog-section). Must not have leading/trailing spaces.
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
                  */
                 sectionId: string;
                 id?: string | null;
@@ -3410,7 +3410,7 @@ export interface Page {
          */
         titleBN: string;
         /**
-         * Used for direct jump links to this section (e.g., blog-section). Must not have leading/trailing spaces.
+         * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
          */
         sectionId: string;
         /**
@@ -3523,7 +3523,7 @@ export interface Page {
          */
         titleBN: string;
         /**
-         * Used for direct jump links to this section (e.g., blog-section). Must not have leading/trailing spaces.
+         * Used for direct jump links to this section (e.g., "news-section"). Required. No spaces. Use "-" to separate words (e.g., "news-section", not "news section").
          */
         sectionId: string;
         /**
@@ -3578,7 +3578,7 @@ export interface Page {
          */
         titleBN: string;
         /**
-         * Used for direct jump links to this section (e.g., blog-section). Must not have leading/trailing spaces.
+         * Used for direct jump links to this section (e.g., "vlog-section"). Required. No spaces. Use "-" to separate words (e.g., "vlog-section", not "vlog section").
          */
         sectionId: string;
         /**

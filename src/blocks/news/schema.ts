@@ -33,11 +33,39 @@ const validateSingleWordId = (val: unknown) => {
 }
 
 // near other validators
-const validateRequiredNoEdgeSpaces = (val: unknown) => {
-  const s = String(val ?? '')
-  if (!s.trim()) return 'Section ID is required.'
-  if (s !== s.trim()) return 'No leading or trailing spaces are allowed.'
-  return validateSingleWordId(s)
+// === Section ID validator ===
+// Rules:
+//  - required (cannot be empty)
+//  - no leading or trailing spaces
+//  - no spaces in between
+//  - only letters, numbers, and hyphens are allowed
+//  - recommend using hyphen for multi-word ids (e.g., "blog-section")
+const validateSectionId = (val: unknown) => {
+  const raw = String(val ?? '')
+
+  // required
+  if (!raw.trim()) {
+    return 'Section ID is required.'
+  }
+
+  // no leading/trailing spaces
+  if (raw !== raw.trim()) {
+    return 'Section ID must not have leading or trailing spaces.'
+  }
+
+  const s = raw.trim()
+
+  // no spaces at all
+  if (/\s/.test(s)) {
+    return 'No spaces allowed. Use "-" to separate words (e.g., "blog-section", not "blog section").'
+  }
+
+  // allowed chars: letters, numbers, hyphen
+  if (!/^[A-Za-z0-9-]+$/.test(s)) {
+    return 'Section ID can only contain letters, numbers, and hyphens (e.g., "blog-section").'
+  }
+
+  return true
 }
 
 const AllNewsSectionSchema: Block = {
@@ -99,11 +127,11 @@ const AllNewsSectionSchema: Block = {
       label: 'Section ID (anchor)',
       required: true,
       admin: {
-        width: '33%',
+        width: '50%',
         description:
-          'Used for direct jump links to this section (e.g., blog-section). Must not have leading/trailing spaces.',
+          'Used for direct jump links to this section (e.g., "news-section"). Required. No spaces. Use "-" to separate words (e.g., "news-section", not "news section").',
       },
-      validate: validateRequiredNoEdgeSpaces, // any string allowed, but no before/after space
+      validate: validateSectionId,
     },
     {
       type: 'row',
