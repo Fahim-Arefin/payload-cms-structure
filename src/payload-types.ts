@@ -5196,9 +5196,13 @@ export interface GlobalHeader {
          */
         labelBN: string;
         /**
-         * Starts with "/" or a full http(s) URL. Max 300 chars (৩০০).
+         * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
          */
-        href: string;
+        href: string | Page;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+         */
+        sectionId?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -5248,6 +5252,10 @@ export interface GlobalNavbar {
            */
           href: string | Page;
           /**
+           * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+           */
+          sectionId?: string | null;
+          /**
            * Optional submenu items. You can nest up to 5 levels.
            */
           children?:
@@ -5264,6 +5272,10 @@ export interface GlobalNavbar {
                  * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                  */
                 href: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
                 /**
                  * Optional submenu items. You can nest up to 5 levels.
                  */
@@ -5282,6 +5294,10 @@ export interface GlobalNavbar {
                        */
                       href: string | Page;
                       /**
+                       * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                       */
+                      sectionId?: string | null;
+                      /**
                        * Optional submenu items. You can nest up to 5 levels.
                        */
                       children?:
@@ -5299,6 +5315,10 @@ export interface GlobalNavbar {
                              */
                             href: string | Page;
                             /**
+                             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                             */
+                            sectionId?: string | null;
+                            /**
                              * Optional submenu items. You can nest up to 5 levels.
                              */
                             children?:
@@ -5315,6 +5335,10 @@ export interface GlobalNavbar {
                                    * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                                    */
                                   href: string | Page;
+                                  /**
+                                   * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                                   */
+                                  sectionId?: string | null;
                                   id?: string | null;
                                 }[]
                               | null;
@@ -5350,6 +5374,10 @@ export interface GlobalNavbar {
            */
           href: string | Page;
           /**
+           * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+           */
+          sectionId?: string | null;
+          /**
            * Optional submenu items. You can nest up to 5 levels.
            */
           children?:
@@ -5366,6 +5394,10 @@ export interface GlobalNavbar {
                  * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                  */
                 href: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
                 /**
                  * Optional submenu items. You can nest up to 5 levels.
                  */
@@ -5384,6 +5416,10 @@ export interface GlobalNavbar {
                        */
                       href: string | Page;
                       /**
+                       * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                       */
+                      sectionId?: string | null;
+                      /**
                        * Optional submenu items. You can nest up to 5 levels.
                        */
                       children?:
@@ -5401,6 +5437,10 @@ export interface GlobalNavbar {
                              */
                             href: string | Page;
                             /**
+                             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                             */
+                            sectionId?: string | null;
+                            /**
                              * Optional submenu items. You can nest up to 5 levels.
                              */
                             children?:
@@ -5417,6 +5457,10 @@ export interface GlobalNavbar {
                                    * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
                                    */
                                   href: string | Page;
+                                  /**
+                                   * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                                   */
+                                  sectionId?: string | null;
                                   id?: string | null;
                                 }[]
                               | null;
@@ -6084,6 +6128,7 @@ export interface GlobalHeaderSelect<T extends boolean = true> {
         label?: T;
         labelBN?: T;
         href?: T;
+        sectionId?: T;
         id?: T;
       };
   showLocalizationToggle?: T;
@@ -6111,30 +6156,35 @@ export interface GlobalNavbarSelect<T extends boolean = true> {
               label?: T;
               labelBN?: T;
               href?: T;
+              sectionId?: T;
               children?:
                 | T
                 | {
                     label?: T;
                     labelBN?: T;
                     href?: T;
+                    sectionId?: T;
                     children?:
                       | T
                       | {
                           label?: T;
                           labelBN?: T;
                           href?: T;
+                          sectionId?: T;
                           children?:
                             | T
                             | {
                                 label?: T;
                                 labelBN?: T;
                                 href?: T;
+                                sectionId?: T;
                                 children?:
                                   | T
                                   | {
                                       label?: T;
                                       labelBN?: T;
                                       href?: T;
+                                      sectionId?: T;
                                       id?: T;
                                     };
                                 id?: T;
@@ -6155,30 +6205,35 @@ export interface GlobalNavbarSelect<T extends boolean = true> {
               label?: T;
               labelBN?: T;
               href?: T;
+              sectionId?: T;
               children?:
                 | T
                 | {
                     label?: T;
                     labelBN?: T;
                     href?: T;
+                    sectionId?: T;
                     children?:
                       | T
                       | {
                           label?: T;
                           labelBN?: T;
                           href?: T;
+                          sectionId?: T;
                           children?:
                             | T
                             | {
                                 label?: T;
                                 labelBN?: T;
                                 href?: T;
+                                sectionId?: T;
                                 children?:
                                   | T
                                   | {
                                       label?: T;
                                       labelBN?: T;
                                       href?: T;
+                                      sectionId?: T;
                                       id?: T;
                                     };
                                 id?: T;

@@ -47,6 +47,41 @@ const validateNavUrl =
     return 'Link must start with "/" or be a valid http(s) URL.'
   }
 
+// === Section ID validator ===
+// Rules:
+//  - required (cannot be empty)
+//  - no leading or trailing spaces
+//  - no spaces in between
+//  - only letters, numbers, and hyphens are allowed
+//  - recommend using hyphen for multi-word ids (e.g., "blog-section")
+const validateSectionIdOptional = (val: unknown) => {
+  const raw = String(val ?? '')
+
+  // required
+  if (!raw.trim()) {
+    return true // optional
+  }
+
+  // no leading/trailing spaces
+  if (raw !== raw.trim()) {
+    return 'Section ID must not have leading or trailing spaces.'
+  }
+
+  const s = raw.trim()
+
+  // no spaces at all
+  if (/\s/.test(s)) {
+    return 'No spaces allowed. Use "-" to separate words (e.g., "blog-section", not "blog section").'
+  }
+
+  // allowed chars: letters, numbers, hyphen
+  if (!/^[A-Za-z0-9-]+$/.test(s)) {
+    return 'Section ID can only contain letters, numbers, and hyphens (e.g., "blog-section").'
+  }
+
+  return true
+}
+
 /* ---------------- global ---------------- */
 const Header: GlobalConfig = {
   slug: GLOBAL_HEADER_SLUG_AND_TAG,
@@ -94,17 +129,47 @@ const Header: GlobalConfig = {
           ],
         },
         {
-          name: 'href',
-          type: 'text',
-          label: 'URL / Path',
-          required: true,
-          maxLength: URL_MAX,
-          validate: validateNavUrl(URL_MAX, true),
-          admin: {
-            description: `Starts with "/" or a full http(s) URL. Max ${URL_MAX} chars (${bnNum(
-              URL_MAX,
-            )}).`,
-          },
+          type: 'row',
+          fields: [
+            // {
+            //   name: 'href',
+            //   type: 'text',
+            //   label: 'URL / Path',
+            //   required: true,
+            //   maxLength: URL_MAX,
+            //   validate: validateNavUrl(URL_MAX, true),
+            //   admin: {
+            //     description: `Starts with "/" or a full http(s) URL. Max ${URL_MAX} chars (${bnNum(
+            //       URL_MAX,
+            //     )}).`,
+            //   },
+            // },
+            {
+              name: 'href',
+              label: 'Link to (internal page)',
+              type: 'relationship',
+              relationTo: 'pages',
+              // validate: validateFooterCTALinkRequiredIfAnyText,
+              required: true,
+              admin: {
+                width: '50%',
+                description:
+                  'Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.',
+              },
+            },
+            {
+              name: 'sectionId',
+              type: 'text',
+              label: 'Section ID (anchor)',
+              required: false,
+              admin: {
+                width: '50%',
+                description:
+                  'Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").',
+              },
+              validate: validateSectionIdOptional,
+            },
+          ],
         },
       ],
     },

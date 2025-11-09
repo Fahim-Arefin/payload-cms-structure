@@ -379,46 +379,39 @@ const validateNavUrl =
     return 'Link must be "#", start with "/" or be a valid http(s) URL.'
   }
 
-// helper: require at least one of internal relationship or URL/path
-const isNonEmpty = (v: unknown) => String(v ?? '').trim().length > 0
+// near other validators
+// === Section ID validator ===
+// Rules:
+//  - required (cannot be empty)
+//  - no leading or trailing spaces
+//  - no spaces in between
+//  - only letters, numbers, and hyphens are allowed
+//  - recommend using hyphen for multi-word ids (e.g., "blog-section")
+const validateSectionIdOptional = (val: unknown) => {
+  const raw = String(val ?? '')
 
-const validateFooterCTAEnglishText = (val: unknown, { siblingData }: any) => {
-  const hasAnyText = isNonEmpty(siblingData?.label) || isNonEmpty(siblingData?.labelBN)
-  const hasThis = isNonEmpty(val)
-  if (hasAnyText && !hasThis)
-    return 'CTA Button Text (EN) is required when any CTA text is provided.'
-  if (hasThis && String(val).length > CTA_TEXT_MAX)
-    return `CTA Button Text must be at most ${CTA_TEXT_MAX} characters.`
-  return true
-}
-
-const validateFooterCTABanglaText = (val: unknown, { siblingData }: any) => {
-  const hasAnyText = isNonEmpty(siblingData?.label) || isNonEmpty(siblingData?.labelBN)
-  const hasThis = isNonEmpty(val)
-  if (hasAnyText && !hasThis)
-    return 'CTA বাটনের (বাংলা) টেক্সট বাধ্যতামূলক, যখন CTA বাটনের যেকোনো টেক্সট দেওয়া হয়।'
-  if (hasThis && String(val).length > CTA_TEXT_MAX)
-    return `CTA বাটনের টেক্সট সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর হতে পারবে।`
-  return true
-}
-
-const validateFooterCTALinkRequiredIfAnyText = (_val: unknown, { siblingData }: any) => {
-  const hasAnyText = isNonEmpty(siblingData?.label) || isNonEmpty(siblingData?.labelBN)
-
-  if (!hasAnyText) return true
-
-  // relationship present?
-  const link = siblingData?.href
-  let hasRel = false
-  if (Array.isArray(link)) hasRel = link.length > 0
-  else if (link && typeof link === 'object') hasRel = Object.keys(link).length > 0
-  else hasRel = Boolean(link)
-
-  const hasUrl = isNonEmpty(siblingData?.url)
-
-  if (!hasRel && !hasUrl) {
-    return 'CTA Button Link is required when CTA Button Text is provided (use internal page or URL).'
+  // required
+  if (!raw.trim()) {
+    return true // optional
   }
+
+  // no leading/trailing spaces
+  if (raw !== raw.trim()) {
+    return 'Section ID must not have leading or trailing spaces.'
+  }
+
+  const s = raw.trim()
+
+  // no spaces at all
+  if (/\s/.test(s)) {
+    return 'No spaces allowed. Use "-" to separate words (e.g., "blog-section", not "blog section").'
+  }
+
+  // allowed chars: letters, numbers, hyphen
+  if (!/^[A-Za-z0-9-]+$/.test(s)) {
+    return 'Section ID can only contain letters, numbers, and hyphens (e.g., "blog-section").'
+  }
+
   return true
 }
 
@@ -495,16 +488,33 @@ const navItemFields = (
 
     // Internal page relationship (preferred)
     {
-      name: 'href',
-      label: 'Link to (internal page)',
-      type: 'relationship',
-      relationTo: 'pages',
-      // validate: validateFooterCTALinkRequiredIfAnyText,
-      required: true,
-      admin: {
-        description:
-          'Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.',
-      },
+      type: 'row',
+      fields: [
+        {
+          name: 'href',
+          label: 'Link to (internal page)',
+          type: 'relationship',
+          relationTo: 'pages',
+          // validate: validateFooterCTALinkRequiredIfAnyText,
+          required: true,
+          admin: {
+            description:
+              'Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.',
+          },
+        },
+        {
+          name: 'sectionId',
+          type: 'text',
+          label: 'Section ID (anchor)',
+          required: false,
+          admin: {
+            width: '50%',
+            description:
+              'Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").',
+          },
+          validate: validateSectionIdOptional,
+        },
+      ],
     },
   ]
 
