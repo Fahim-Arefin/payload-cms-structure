@@ -3828,6 +3828,22 @@ export interface Page {
          */
         backgroundImageBlurDataURL?: string | null;
         /**
+         * Label for the "Read More" button. Optional. Max 24 characters.
+         */
+        readMoreButtonText?: string | null;
+        /**
+         * “Read More” বাটনের জন্য বাংলা টেক্সট। ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        readMoreButtonTextBN?: string | null;
+        /**
+         * Label for the "Read Less" button (collapse). Optional. Max 24 characters.
+         */
+        readLessButtonText?: string | null;
+        /**
+         * “Read Less” (কম দেখানোর) বাটনের জন্য বাংলা টেক্সট। ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        readLessButtonTextBN?: string | null;
+        /**
          * Add one or more resource cards.
          */
         cards: {
@@ -6186,6 +6202,10 @@ export interface PagesSelect<T extends boolean = true> {
               pendingBackgroundImageOriginal?: T;
               pendingBackgroundImageCrop?: T;
               backgroundImageBlurDataURL?: T;
+              readMoreButtonText?: T;
+              readMoreButtonTextBN?: T;
+              readLessButtonText?: T;
+              readLessButtonTextBN?: T;
               cards?:
                 | T
                 | {

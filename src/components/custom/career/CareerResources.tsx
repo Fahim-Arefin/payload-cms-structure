@@ -127,7 +127,14 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
                     transition-all
                   "
                     >
-                      <ResourceCard data={item} />
+                      <ResourceCard
+                        data={item}
+                        
+                        readMoreButtonText={data.readMoreButtonText ?? 'Read More'}
+                        readMoreButtonTextBN={data.readMoreButtonTextBN ?? 'আরও পড়ুন'}
+                        readLessButtonText={data.readLessButtonText ?? 'Read Less'}
+                        readLessButtonTextBN={data.readLessButtonTextBN ?? 'কম পড়ুন'}
+                      />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
@@ -152,7 +159,13 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
                 <CarouselContent>
                   {data?.cards?.map((item, idx) => (
                     <CarouselItem key={idx} className="px-16 pb-16 h-full">
-                      <ResourceCard data={item} />
+                      <ResourceCard
+                        data={item}
+                        readMoreButtonText={data.readMoreButtonText || 'Read More'}
+                        readMoreButtonTextBN={data.readMoreButtonTextBN || 'আরও পড়ুন'}
+                        readLessButtonText={data.readLessButtonText || 'Read Less'}
+                        readLessButtonTextBN={data.readLessButtonTextBN || 'কম পড়ুন'}
+                      />
                     </CarouselItem>
                   ))}
                 </CarouselContent>

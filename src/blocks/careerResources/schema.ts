@@ -15,6 +15,7 @@ const HILITE_MAX = 40
 const CARD_TITLE_MAX = 60
 const CARD_DESC_MAX = 1000
 const DESIGNATION_MAX = 60
+const CTA_TEXT_MAX = 24 // root-level CTA text limit
 
 /* ---------------- validators ---------------- */
 const validateShortText =
@@ -37,7 +38,9 @@ const validateHighlightedInSubtitle = (val: unknown, { siblingData }: any) => {
 const validateHighlightedInSubtitleBN = (val: unknown, { siblingData }: any) => {
   const s = (val ?? '').toString().trim()
   if (!s) return true // optional
-  if (s.length > HILITE_MAX) return `হাইলাইটেড টেক্সট সর্বোচ্চ ${bnNum(HILITE_MAX)} অক্ষর হতে পারবে।`
+  if (s.length > HILITE_MAX) {
+    return `হাইলাইটেড টেক্সট সর্বোচ্চ ${bnNum(HILITE_MAX)} অক্ষর হতে পারবে।`
+  }
   const target = (siblingData?.subTitleBN ?? '').toString()
   return target.includes(s)
     ? true
@@ -67,7 +70,10 @@ const CareerResourcesSchema: Block = {
           label: 'Title',
           maxLength: TITLE_MAX,
           validate: validateShortText('Title', TITLE_MAX, true),
-          admin: { width: '50%', description: `Primary headline. Max ${TITLE_MAX} characters.` },
+          admin: {
+            width: '50%',
+            description: `Primary headline. Max ${TITLE_MAX} characters.`,
+          },
         },
         {
           name: 'titleBN',
@@ -95,7 +101,10 @@ const CareerResourcesSchema: Block = {
           label: 'Subtitle',
           maxLength: SUBTITLE_MAX,
           validate: validateShortText('Subtitle', SUBTITLE_MAX, true),
-          admin: { width: '50%', description: `Supporting line. Max ${SUBTITLE_MAX} characters.` },
+          admin: {
+            width: '50%',
+            description: `Supporting line. Max ${SUBTITLE_MAX} characters.`,
+          },
         },
         {
           name: 'subTitleBN',
@@ -143,7 +152,7 @@ const CareerResourcesSchema: Block = {
       ],
     },
 
-    // NEW: Background Image (main-level, not in cards)
+    // Background Image (main-level, not in cards)
     ...generateImageFields({
       fieldName: 'backgroundImage',
       label: 'Background Image',
@@ -153,6 +162,70 @@ const CareerResourcesSchema: Block = {
       maxKB: 500,
       ownerCollection: CAREER_PAGE_RESOURCES_SLUG_AND_TAG as any,
     } as any),
+
+    // Root-level CTA button texts (Read More / Read Less) EN / BN
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'readMoreButtonText',
+          type: 'text',
+          label: 'Read More Button Text',
+          maxLength: CTA_TEXT_MAX,
+          defaultValue: 'Read More',
+          validate: validateShortText('Read More Button Text', CTA_TEXT_MAX, false),
+          admin: {
+            width: '50%',
+            description: `Label for the "Read More" button. Optional. Max ${CTA_TEXT_MAX} characters.`,
+          },
+        },
+        {
+          name: 'readMoreButtonTextBN',
+          type: 'text',
+          label: '“Read More” বাটনের টেক্সট (বাংলা)',
+          maxLength: CTA_TEXT_MAX,
+          defaultValue: 'আরও পড়ুন',
+          validate: validateShortText('Read More Button Text (BN)', CTA_TEXT_MAX, false),
+          admin: {
+            width: '50%',
+            description: `“Read More” বাটনের জন্য বাংলা টেক্সট। ঐচ্ছিক। সর্বোচ্চ ${bnNum(
+              CTA_TEXT_MAX,
+            )} অক্ষর।`,
+          },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'readLessButtonText',
+          type: 'text',
+          label: 'Read Less Button Text',
+          maxLength: CTA_TEXT_MAX,
+          defaultValue: 'Read Less',
+          validate: validateShortText('Read Less Button Text', CTA_TEXT_MAX, false),
+          admin: {
+            width: '50%',
+            description: `Label for the "Read Less" button (collapse). Optional. Max ${CTA_TEXT_MAX} characters.`,
+          },
+        },
+        {
+          name: 'readLessButtonTextBN',
+          type: 'text',
+          label: '“Read Less” বাটনের টেক্সট (বাংলা)',
+          maxLength: CTA_TEXT_MAX,
+          defaultValue: 'কম পড়ুন',
+          validate: validateShortText('Read Less Button Text (BN)', CTA_TEXT_MAX, false),
+          admin: {
+            width: '50%',
+            description: `“Read Less” (কম দেখানোর) বাটনের জন্য বাংলা টেক্সট। ঐচ্ছিক। সর্বোচ্চ ${bnNum(
+              CTA_TEXT_MAX,
+            )} অক্ষর।`,
+          },
+        },
+      ],
+    },
 
     // Cards array
     {
@@ -189,7 +262,9 @@ const CareerResourcesSchema: Block = {
               validate: validateShortText('Card Title (BN)', CARD_TITLE_MAX, true),
               admin: {
                 width: '50%',
-                description: `কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ${bnNum(CARD_TITLE_MAX)} অক্ষর।`,
+                description: `কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ${bnNum(
+                  CARD_TITLE_MAX,
+                )} অক্ষর।`,
               },
             },
           ],
@@ -231,7 +306,9 @@ const CareerResourcesSchema: Block = {
               validate: validateShortText('Card Description (BN)', CARD_DESC_MAX, true),
               admin: {
                 width: '50%',
-                description: `সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ${bnNum(CARD_DESC_MAX)} অক্ষর।`,
+                description: `সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ${bnNum(
+                  CARD_DESC_MAX,
+                )} অক্ষর।`,
               },
             },
           ],
@@ -262,7 +339,9 @@ const CareerResourcesSchema: Block = {
               validate: validateShortText('Designation (BN)', DESIGNATION_MAX, true),
               admin: {
                 width: '50%',
-                description: `যেমন: সিনিয়র অ্যাডভাইজার। সর্বোচ্চ ${bnNum(DESIGNATION_MAX)} অক্ষর।`,
+                description: `যেমন: সিনিয়র অ্যাডভাইজার। সর্বোচ্চ ${bnNum(
+                  DESIGNATION_MAX,
+                )} অক্ষর।`,
               },
             },
           ],
