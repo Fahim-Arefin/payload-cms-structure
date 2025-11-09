@@ -1,12 +1,16 @@
 // src/payload/blocks/CareerIntro.ts
 import type { Block } from 'payload'
-import { CAREER_PAGE_INTRO_BLOCK_LABEL, CAREER_PAGE_INTRO_BLOCK_THUMBNAIL_URL, CAREER_PAGE_INTRO_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  CAREER_PAGE_INTRO_BLOCK_LABEL,
+  CAREER_PAGE_INTRO_BLOCK_THUMBNAIL_URL,
+  CAREER_PAGE_INTRO_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 
 /* ---------------- limits ---------------- */
 const TITLE_MAX = 80
 const HILITE_MAX = 40
-const DESCRIPTION_MAX = 200
+const DESCRIPTION_MAX = 300
 
 /* ---------------- validators ---------------- */
 
@@ -96,41 +100,46 @@ const CareerIntroSchema: Block = {
           type: 'text',
           label: 'রঙিন টেক্সট (শিরোনামের মধ্যে)',
           maxLength: HILITE_MAX,
-          validate: validateHighlightedInField('Highlighted Text (BN)', 'titleBN', HILITE_MAX, false),
+          validate: validateHighlightedInField(
+            'Highlighted Text (BN)',
+            'titleBN',
+            HILITE_MAX,
+            false,
+          ),
           admin: {
             width: '50%',
-            description: `ঐচ্ছিক। অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ${bnNum(HILITE_MAX)} অক্ষর।`,
+            description: `ঐচ্ছিক। অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ${bnNum(
+              HILITE_MAX,
+            )} অক্ষর।`,
           },
         },
       ],
     },
 
-    // Description (plain text; NOT textarea) EN/BN
+    // Description (now richText) EN/BN
     {
       type: 'row',
       fields: [
         {
           name: 'description',
-          type: 'text',
+          type: 'richText',
           required: true,
           label: 'Description',
-          maxLength: DESCRIPTION_MAX,
-          validate: validateShortText('Description', DESCRIPTION_MAX, true),
           admin: {
             width: '50%',
-            description: `1–2 short sentences. Max ${DESCRIPTION_MAX} characters.`,
+            description: `1–2 short sentences. Max ${DESCRIPTION_MAX} characters (guideline).`,
           },
         },
         {
           name: 'descriptionBN',
-          type: 'text',
+          type: 'richText',
           required: true,
           label: 'বর্ণনা (বাংলা)',
-          maxLength: DESCRIPTION_MAX,
-          validate: validateShortText('Description (BN)', DESCRIPTION_MAX, true),
           admin: {
             width: '50%',
-            description: `১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ${bnNum(DESCRIPTION_MAX)} অক্ষর।`,
+            description: `১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ${bnNum(
+              DESCRIPTION_MAX,
+            )} অক্ষরের মধ্যে রাখার পরামর্শ।`,
           },
         },
       ],

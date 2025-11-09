@@ -3697,13 +3697,41 @@ export interface Page {
          */
         highlightedTitleBN?: string | null;
         /**
-         * 1–2 short sentences. Max 200 characters.
+         * 1–2 short sentences. Max 300 characters (guideline).
          */
-        description: string;
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
         /**
-         * ১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ২০০ অক্ষর।
+         * ১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ৩০০ অক্ষরের মধ্যে রাখার পরামর্শ।
          */
-        descriptionBN: string;
+        descriptionBN: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'career-intro';
