@@ -139,6 +139,7 @@ import AllBLogsCardSchema from '@/blocks/AllblogsCard/schema'
 import BoardOfDirectorsCardSchema from '@/blocks/BoardOfDirectorsCard/schema'
 import BoardOfDirectorsListSchema from '@/blocks/BoardOfDirectorsList/schema'
 import LicensedLaunchedSchema from '@/blocks/LicensedAndLaunched/schema'
+import AgentOnboardingFormSchema from '@/blocks/agentForm/schema'
 import AgentOnboardingOpportunitySchema from '@/blocks/agentOnboadringOpportunity/schema'
 import AgentVisionSchema from '@/blocks/agentVision/schema'
 import BLogDetailsSectionSchema from '@/blocks/blogDetails/schema'
@@ -148,6 +149,12 @@ import CorporateInfoSchema from '@/blocks/corporateInfo/schema'
 import CorporateIntroSchema from '@/blocks/corporateIntro/schema'
 import CorporatePartnersSchema from '@/blocks/corporatePartners/schema'
 import CustomCardSectionSchema from '@/blocks/customCardSection/schema'
+import CareerIntroSchema from '@/blocks/careerIntro/schema'
+import CareerOpeningSchema from '@/blocks/careerOpening/schema'
+import CareerProcessingSchema from '@/blocks/careerProcessingFlow/schema'
+import CareerResourcesSchema from '@/blocks/careerResources/schema'
+import CareerSwiperSchema from '@/blocks/careerSwiper/schema'
+import CustomAccordionSchema from '@/blocks/customAccordion/schema'
 import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
 import FeaturedBlogVlogNewsSchema from '@/blocks/featuredBlogVlogNews/schema'
 import FeaturedPlansSchema from '@/blocks/featuredPlan/schema'
@@ -163,11 +170,20 @@ import PlanInfoDesignSchema from '@/blocks/planInfoDesign/schema'
 import PlanInfoDesign03Schema from '@/blocks/planInfoDesign03/schema'
 import PlanInfoDesign04Schema from '@/blocks/planInfoDesign04/schema'
 import PlanInfoDesign05Schema from '@/blocks/planInfoDesign05/schema'
+import MultiStagePlanSchema from '@/blocks/multiStagePlan/schema'
+import MultiStageIntroSchema from '@/blocks/multiStageTitle/schema'
+// import PlanCardSchema from '@/blocks/planCard/schema'
+import PremCalculatorPageSchema from '@/blocks/premCalculatorPage/schema'
 import PremiumCalculatorSchema from '@/blocks/premiumCalculator/schema'
+import PurchaseFormSchema from '@/blocks/purchaseFormBlock/schema'
 import ShantaFootprintSchema from '@/blocks/shantaFootprint/schema'
 import ShantaIntroSchema from '@/blocks/shantaIntro/schema'
 import ShantaMilestonesUnlockedSchema from '@/blocks/shantaMilestoneUnlocked/schema'
 import ShantaVisionSchema from '@/blocks/shantaVision/schema'
+import SupportBuzzSchema from '@/blocks/supportBuzz/schema'
+import SupportFaqTabSchema from '@/blocks/supportFaqTab/schema'
+import SupportFeedbackSchema from '@/blocks/supportFeedbackForm/schema'
+import SupportMapTabSchema from '@/blocks/supportMapTab/schema'
 import ValuesThatShapeUsSchema from '@/blocks/valuesThatShapeUs/schema'
 import AllVLogsSectionSchema from '@/blocks/vlogs/schema'
 import WhyChooseUsSchema from '@/blocks/whyChooseUs/schema'
@@ -290,6 +306,27 @@ export const Pages: CollectionConfig = {
         AllNewsSectionSchema,
         AllVLogsSectionSchema,
         FeaturedBlogVlogNewsSchema,
+        // plan page
+        // PlanCardSchema,
+        //careerpage
+        CareerIntroSchema,
+        CareerSwiperSchema,
+        CareerResourcesSchema,
+        CareerOpeningSchema,
+        CareerProcessingSchema,
+        //multistage page
+        MultiStageIntroSchema,
+        MultiStagePlanSchema,
+        //custom blocks
+        CustomAccordionSchema,
+        //support page
+        SupportMapTabSchema,
+        SupportFaqTabSchema,
+        SupportBuzzSchema,
+        SupportFeedbackSchema,
+        PremCalculatorPageSchema,
+        PurchaseFormSchema,
+        AgentOnboardingFormSchema,
       ],
     },
   ],

@@ -27,6 +27,12 @@ import {
   PLAN_INFO_DESIGN_05_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+  CAREER_PAGE_SWIPER_SLUG_AND_TAG,
+  CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
+  CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
+  MULTI_STAGE_PLAN_SLUG_AND_TAG,
+  SUPPORT_BUZZ_SLUG_AND_TAG,
+  SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -132,6 +138,36 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG,
       mediaFields: ['trendingBanner'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_PAGE_SWIPER_SLUG_AND_TAG,
+      mediaFields: ['backgroundImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
+      mediaFields: ['backgroundImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: MULTI_STAGE_PLAN_SLUG_AND_TAG,
+      mediaFields: ['planIcon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SUPPORT_BUZZ_SLUG_AND_TAG,
+      mediaFields: ['mainImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SUPPORT_BUZZ_SLUG_AND_TAG,
+      mediaFields: ['backgroundImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
+      mediaFields: ['backgroundImage'],
     },
   ],
 
@@ -287,6 +323,18 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'cardItems',
       mediaFields: ['icon'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
+      arrayKey: 'cards',
+      mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
+      arrayKey: 'processingCards',
+      mediaFields: ['image'],
+    },
   ],
 
   // Blocks with nested array (media that inside another array) that contain media fields
@@ -348,6 +396,13 @@ export const mediaHooks = withMediaLifecycle({
       groupKey: 'card', // the nested "blocks" field inside the outer block
       arrayKey: 'hashLinkCards', // array inside the nested CorporateCards block
       mediaFields: ['bgImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SUPPORT_BUZZ_SLUG_AND_TAG,
+      groupKey: 'allTab',
+      arrayKey: 'newsItems',
+      mediaFields: ['image'],
     },
   ],
 

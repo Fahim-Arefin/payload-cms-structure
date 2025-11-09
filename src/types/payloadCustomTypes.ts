@@ -8,6 +8,7 @@ import {
   ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG,
   ABOUT_US_PAGE_SHANTA_VISION_SLUG_AND_TAG,
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
+  AGENT_ONBOARDING_FORM_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
   AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
@@ -25,6 +26,12 @@ import {
   EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
   HASHLINK_CARDS_SLUG_AND_TAG,
   HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG,
+  CAREER_PAGE_INTRO_SLUG_AND_TAG,
+  CAREER_PAGE_OPENINGS_SLUG_AND_TAG,
+  CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
+  CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
+  CAREER_PAGE_SWIPER_SLUG_AND_TAG,
+  CUSTOM_ACCORDION_SLUG_AND_TAG,
   HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
   HOME_PAGE_HERO_SLUG_AND_TAG,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -39,8 +46,17 @@ import {
   PLAN_INFO_DESIGN_04_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_05_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_SLUG_AND_TAG,
-  PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+  // PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
   VLOGS_SLUG_AND_TAG,
+  MULTI_STAGE_INTRO_SLUG_AND_TAG,
+  MULTI_STAGE_PLAN_SLUG_AND_TAG,
+  PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
+  PREM_CALC_PAGE_SLUG_AND_TAG,
+  PURCHASE_FORM_SLUG_AND_TAG,
+  SUPPORT_BUZZ_SLUG_AND_TAG,
+  SUPPORT_FAQ_TAB_SLUG_AND_TAG,
+  SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
+  SUPPORT_MAP_TAB_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -262,4 +278,86 @@ export type VlogBlockType = Extract<
 export type FeaturedBlogVlogNewsBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG }
+>
+
+//career page
+export type CareerPageIntroBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CAREER_PAGE_INTRO_SLUG_AND_TAG }
+>
+
+export type CareerPageSwiperBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CAREER_PAGE_SWIPER_SLUG_AND_TAG }
+>
+
+export type CareerPageResourcesBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CAREER_PAGE_RESOURCES_SLUG_AND_TAG }
+>
+
+export type CareerPageOpeningBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CAREER_PAGE_OPENINGS_SLUG_AND_TAG }
+>
+
+export type CareerPageProcessingBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CAREER_PAGE_PROCESSING_SLUG_AND_TAG }
+>
+
+//multistage page
+export type MultistageIntroBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof MULTI_STAGE_INTRO_SLUG_AND_TAG }
+>
+
+export type MultistagePlanBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof MULTI_STAGE_PLAN_SLUG_AND_TAG }
+>
+
+// terms and privacy page
+export type CustomAccordionBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CUSTOM_ACCORDION_SLUG_AND_TAG }
+>
+
+// support page
+export type SupportMapTabBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SUPPORT_MAP_TAB_SLUG_AND_TAG }
+>
+
+export type SupportFaqTabBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SUPPORT_FAQ_TAB_SLUG_AND_TAG }
+>
+
+export type SupportBuzzBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SUPPORT_BUZZ_SLUG_AND_TAG }
+>
+
+export type SupportFeedbackFormBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG }
+>
+
+//prem calc page
+export type PremCalculatorPageBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PREM_CALC_PAGE_SLUG_AND_TAG }
+>
+
+//purchase page
+export type PurchasePageBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PURCHASE_FORM_SLUG_AND_TAG }
+>
+
+//agent onboarding page
+export type AgentOnboardingFormBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof AGENT_ONBOARDING_FORM_SLUG_AND_TAG }
 >

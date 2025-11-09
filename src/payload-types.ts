@@ -3679,6 +3679,985 @@ export interface Page {
         blockName?: string | null;
         blockType: 'featured-blog-vlog-and-news';
       }
+    | {
+        /**
+         * Primary headline. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 40 characters.
+         */
+        highlightedTitle?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTitleBN?: string | null;
+        /**
+         * 1–2 short sentences. Max 200 characters.
+         */
+        description: string;
+        /**
+         * ১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ২০০ অক্ষর।
+         */
+        descriptionBN: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-intro';
+      }
+    | {
+        /**
+         * Primary headline. Max 30 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৩০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line. Max 40 characters.
+         */
+        subtitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * 1–2 short sentences. Max 80 characters.
+         */
+        description: string;
+        /**
+         * ১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        descriptionBN: string;
+        /**
+         * Background image for the swiper section. Recommended 16:9.
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        /**
+         * Add one or more cards to display in the swiper.
+         */
+        cards: {
+          /**
+           * Short heading for the card. Max 50 characters.
+           */
+          title: string;
+          /**
+           * কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৫০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Brief supporting copy. Max 200 characters.
+           */
+          description: string;
+          /**
+           * সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ২০০ অক্ষর।
+           */
+          descriptionBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-swiper';
+      }
+    | {
+        /**
+         * Primary headline. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subTitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subTitleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Subtitle. Max 40 characters.
+         */
+        highlightedSubTitle?: string | null;
+        /**
+         * ঐচ্ছিক। উপশিরোনামের ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedSubTitleBN?: string | null;
+        /**
+         * Background image for the section (16:9 recommended).
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        /**
+         * Add one or more resource cards.
+         */
+        cards: {
+          /**
+           * Short heading for the card. Max 60 characters.
+           */
+          title: string;
+          /**
+           * কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Thumbnail for the resource card. 4:3 recommended.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Brief supporting copy. Max 1000 characters.
+           */
+          description: string;
+          /**
+           * সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ১০০০ অক্ষর।
+           */
+          descriptionBN: string;
+          /**
+           * e.g., Senior Advisor. Max 60 characters.
+           */
+          designation: string;
+          /**
+           * যেমন: সিনিয়র অ্যাডভাইজার। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          designationBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-resources';
+      }
+    | {
+        /**
+         * Primary heading. Max 80 (৮০) characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line. Max 120 (১২০) characters.
+         */
+        subtitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * Add one or more opening cards with details.
+         */
+        cards: {
+          /**
+           * e.g., Full-time, Contract, Internship. Max 40 characters.
+           */
+          type?: string | null;
+          /**
+           * যেমন: ফুল-টাইম, কন্ট্রাক্ট, ইন্টার্নশিপ। সর্বোচ্চ ৪০ অক্ষর।
+           */
+          typeBN?: string | null;
+          /**
+           * Job title. Max 80 characters.
+           */
+          title: string;
+          /**
+           * পদের নাম। সর্বোচ্চ ৮০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * 1–2 lines summary. Max 300 characters.
+           */
+          description: string;
+          /**
+           * ১–২ লাইনের সারমর্ম। সর্বোচ্চ ৩০০ অক্ষর।
+           */
+          descriptionBN: string;
+          /**
+           * Main CTA (e.g., Apply Now). Max 24 chars.
+           */
+          btnText?: string | null;
+          /**
+           * প্রধান CTA (যেমন, এখন আবেদন করুন)। সর্বোচ্চ ২৪ অক্ষর।
+           */
+          btnTextBN?: string | null;
+          /**
+           * Secondary CTA (e.g., View Details). Max 24 chars.
+           */
+          detailsBtnText?: string | null;
+          /**
+           * সেকেন্ডারি CTA (যেমন, বিস্তারিত দেখুন)। সর্বোচ্চ ২৪ অক্ষর।
+           */
+          detailsBtnTextBN?: string | null;
+          /**
+           * Add one or more detail entries (title, responsibilities, requirements, location, deadline, etc.).
+           */
+          detailsData: {
+            /**
+             * Section title (e.g., “Role Overview”). Max 80 characters.
+             */
+            title: string;
+            responsibilities: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            requirements: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            /**
+             * City/Office. Max 60 characters.
+             */
+            location?: string | null;
+            deadline: string;
+            /**
+             * Email to receive applications.
+             */
+            applyEmail: string;
+            /**
+             * Optional. Max 120 characters.
+             */
+            subjectLine?: string | null;
+            /**
+             * Optional closing note. Max 200 characters.
+             */
+            footer?: string | null;
+            /**
+             * Optional. Max 80 characters.
+             */
+            filename?: string | null;
+            id?: string | null;
+          }[];
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-opening';
+      }
+    | {
+        /**
+         * Primary headline. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * Add 2–8 processing steps. Each has a title (EN/BN) and an image (186×157 ratio).
+         */
+        processingCards: {
+          /**
+           * Short step label. Max 60 characters.
+           */
+          title: string;
+          /**
+           * ধাপের ছোট শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Upload & crop to match 186×157 ratio (≈1.1847). UI target size w-186px h-157px.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-processing';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Main line. Max 160 characters.
+         */
+        text: string;
+        /**
+         * মূল লাইন। সর্বোচ্চ ১৬০ অক্ষর।
+         */
+        textBN: string;
+        /**
+         * Optional. Must appear verbatim inside “Text”. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। “টেক্সট (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'multistage-intro';
+      }
+    | {
+        /**
+         * Main heading. Max 80 chars.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Title. Max 40 chars.
+         */
+        highlightedTitle?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTitleBN?: string | null;
+        /**
+         * Short description. Max 300 chars.
+         */
+        description?: string | null;
+        /**
+         * সংক্ষিপ্ত বর্ণনা। সর্বোচ্চ ৩০০ অক্ষর।
+         */
+        descriptionBN?: string | null;
+        /**
+         * Section label above stages.
+         */
+        mainTitle: string;
+        /**
+         * ঐচ্ছিক বাংলা শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        mainTitleBN?: string | null;
+        secondaryTitle?: string | null;
+        secondaryTitleBN?: string | null;
+        planIcon: string | Media;
+        planIconOriginal?: (string | null) | Media;
+        pendingPlanIconOriginal?: string | null;
+        pendingPlanIconCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        planIconBlurDataURL?: string | null;
+        /**
+         * Controls which side the pie chart appears on desktop (mobile is stacked automatically).
+         */
+        chartSide: 'left' | 'right';
+        /**
+         * Define each stage and its percentage. The sum of all stage “value” fields must equal 100.
+         */
+        stageData?:
+          | {
+              name: string;
+              nameBN?: string | null;
+              /**
+               * Percentage for this stage. Overall total across stages must be 100.
+               */
+              value: number;
+              id?: string | null;
+            }[]
+          | null;
+        planData?:
+          | {
+              /**
+               * e.g., “12 YEARS”.
+               */
+              timeline: string;
+              /**
+               * যেমন: “১২ বছর”.
+               */
+              timelineBN?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Populates the “Entry Age” and “Maturity Age” cards. Defaults are provided for minimal input.
+         */
+        eligibility: {
+          entryAge: {
+            label?: string | null;
+            labelBN?: string | null;
+            minLabel?: string | null;
+            minLabelBN?: string | null;
+            minValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            minValueBN?: string | null;
+            minUnit?: string | null;
+            minUnitBN?: string | null;
+            maxLabel?: string | null;
+            maxLabelBN?: string | null;
+            maxValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            maxValueBN?: string | null;
+            maxUnit?: string | null;
+            maxUnitBN?: string | null;
+          };
+          maturityAge: {
+            label?: string | null;
+            labelBN?: string | null;
+            uptoLabel?: string | null;
+            uptoLabelBN?: string | null;
+            uptoValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            uptoValueBN?: string | null;
+            uptoUnit?: string | null;
+            uptoUnitBN?: string | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'multistage-plan';
+      }
+    | {
+        /**
+         * Plain text. Maximum 800 words.
+         */
+        description?: string | null;
+        /**
+         * প্লেইন টেক্সট। সর্বোচ্চ ৮০০ শব্দ।
+         */
+        descriptionBN?: string | null;
+        /**
+         * Each item has EN/BN main titles and EN/BN rich-text “points”.
+         */
+        data?:
+          | {
+              mainTitle: string;
+              mainTitleBN?: string | null;
+              /**
+               * Add paragraphs / bullet points.
+               */
+              points: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              /**
+               * অনুচ্ছেদ / বুলেট পয়েন্ট যোগ করুন।
+               */
+              pointsBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'custom-accordion';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (default #ED7125). Length 7 (৭).
+         */
+        primaryLabelColor?: string | null;
+        /**
+         * Hex color in #RRGGBB (default #9C8639). Length 7 (৭).
+         */
+        secondaryLabelColor?: string | null;
+        /**
+         * Exactly 2 tabs are required.
+         */
+        tabItems?:
+          | {
+              /**
+               * Unique key for this tab item (e.g., "branches", "hospitals"). Must match usage in code. Also for navigation.
+               */
+              value: string;
+              label: string;
+              labelBN: string;
+              /**
+               * Optional. Must appear verbatim inside the corresponding Label.
+               */
+              highlightedLabel?: string | null;
+              /**
+               * ঐচ্ছিক। সংশ্লিষ্ট বাংলা লেবেলের ভিতরে হুবহু থাকতে হবে।
+               */
+              highlightedLabelBN?: string | null;
+              description?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              descriptionBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-map-tab';
+      }
+    | {
+        faqTab: {
+          value: 'general' | 'form';
+          label: string;
+          labelBN: string;
+          categoryTitle?: string | null;
+          categoryTitleBN?: string | null;
+          /**
+           * Hex color in #RRGGBB (e.g., #F6EDDD).
+           */
+          backgroundColor?: string | null;
+          title?: string | null;
+          titleBN?: string | null;
+          /**
+           * Pick each category once. Then add many Q&A items under each category.
+           */
+          categories?:
+            | {
+                key: 'general' | 'claims' | 'policy' | 'customer' | 'product' | 'insurance';
+                title: string;
+                titleBN?: string | null;
+                /**
+                 * Add as many questions as needed for this category.
+                 */
+                items?:
+                  | {
+                      title: string;
+                      titleBN?: string | null;
+                      desc?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      descBN?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        formsTab: {
+          value: 'general' | 'form';
+          label: string;
+          labelBN: string;
+          /**
+           * Hex color in #RRGGBB (e.g., #F6EDDD).
+           */
+          backgroundColor?: string | null;
+          /**
+           * Hex color in #RRGGBB (e.g., #a08d2c).
+           */
+          tableHeaderBgColor?: string | null;
+          /**
+           * Used for all rows. No links/IDs stored here.
+           */
+          buttonText?: string | null;
+          buttonTextBN?: string | null;
+          forms?:
+            | {
+                title: string;
+                titleBN?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-faq-tab';
+      }
+    | {
+        uploadSessionId?: string | null;
+        title: string;
+        titleBN?: string | null;
+        highlightedTitle?: string | null;
+        highlightedTitleBN?: string | null;
+        /**
+         * Large section background visual for ALL tab. 16:9 recommended.
+         */
+        mainImage: string | Media;
+        mainImageOriginal?: (string | null) | Media;
+        pendingMainImageOriginal?: string | null;
+        pendingMainImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        mainImageBlurDataURL?: string | null;
+        /**
+         * Background visual for the OVC/TVC tab. 16:9 recommended.
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        /**
+         * Main “ALL” feed. Uses the top-level Main Image. Contains a source link and exactly 3 news cards.
+         */
+        allTab: {
+          value: 'all' | 'ovc';
+          mainImageSrcLink?: string | null;
+          /**
+           * Exactly 3 items. Each uses a single 16:9 image, real date, EN/BN title/description, and optional YouTube link.
+           */
+          newsItems?:
+            | {
+                /**
+                 * Single image per item. 16:9 recommended.
+                 */
+                image: string | Media;
+                imageOriginal?: (string | null) | Media;
+                pendingImageOriginal?: string | null;
+                pendingImageCrop?: string | null;
+                imageBlurDataURL?: string | null;
+                date: string;
+                title: string;
+                titleBN?: string | null;
+                /**
+                 * Max 700 chars.
+                 */
+                description?: string | null;
+                descriptionBN?: string | null;
+                /**
+                 * Ex: https://www.youtube.com/watch?v=...
+                 */
+                videoLink?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        /**
+         * Uses the top-level Background Image. Add headline (EN/BN) and optional YouTube link for the modal.
+         */
+        ovcTab: {
+          value: 'all' | 'ovc';
+          title?: string | null;
+          titleBN?: string | null;
+          highlightedTitle?: string | null;
+          highlightedTitleBN?: string | null;
+          videoLink?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-buzz';
+      }
+    | {
+        uploadSessionId?: string | null;
+        title: string;
+        titleBN?: string | null;
+        highlightedTitle?: string | null;
+        highlightedTitleBN?: string | null;
+        /**
+         * Hero/section background. Recommended 16:9.
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        rightTitle: string;
+        rightTitleBN?: string | null;
+        rightButtonText: string;
+        rightButtonTextBN?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-feedback-form';
+      }
+    | {
+        title: string;
+        titleBN?: string | null;
+        highlightedTitle?: string | null;
+        highlightedTitleBN?: string | null;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Cards shown under the hero copy. Each card has a title, rich description, and a hex background color.
+         */
+        cards?:
+          | {
+              cardTitle: string;
+              cardTitleBN?: string | null;
+              cardDesc?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              cardDescBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              /**
+               * Hex color (#RRGGBB or #RRGGBBAA). Example: #9C8639 or #9C8639B2
+               */
+              cardBg?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'prem-calculator-card';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Add 1–4 cards. Each card has text (EN/BN), rich text description (EN/BN), and a background color.
+         */
+        cards?:
+          | {
+              cardText: string;
+              cardTextBN?: string | null;
+              cardDesc?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              cardDescBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              /**
+               * Example: #9C863940 (with alpha) or #CCBF95 (solid).
+               */
+              cardBg?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'purchase-form';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB. Default: #f6eddd
+         */
+        bgColor?: string | null;
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        subdescription?: string | null;
+        subdescriptionBN?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'agent-form';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -5135,6 +6114,434 @@ export interface PagesSelect<T extends boolean = true> {
               seeAllLink?: T;
               useSharedBlogAndNewsData?: T;
               useSharedVlogData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'career-intro'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'career-swiper'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'career-resources'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subTitle?: T;
+              subTitleBN?: T;
+              highlightedSubTitle?: T;
+              highlightedSubTitleBN?: T;
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    designation?: T;
+                    designationBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'career-opening'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              cards?:
+                | T
+                | {
+                    type?: T;
+                    typeBN?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    btnText?: T;
+                    btnTextBN?: T;
+                    detailsBtnText?: T;
+                    detailsBtnTextBN?: T;
+                    detailsData?:
+                      | T
+                      | {
+                          title?: T;
+                          responsibilities?: T;
+                          requirements?: T;
+                          location?: T;
+                          deadline?: T;
+                          applyEmail?: T;
+                          subjectLine?: T;
+                          footer?: T;
+                          filename?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'career-processing'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              processingCards?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'multistage-intro'?:
+          | T
+          | {
+              backgroundColor?: T;
+              text?: T;
+              textBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'multistage-plan'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              mainTitle?: T;
+              mainTitleBN?: T;
+              secondaryTitle?: T;
+              secondaryTitleBN?: T;
+              planIcon?: T;
+              planIconOriginal?: T;
+              pendingPlanIconOriginal?: T;
+              pendingPlanIconCrop?: T;
+              planIconBlurDataURL?: T;
+              chartSide?: T;
+              stageData?:
+                | T
+                | {
+                    name?: T;
+                    nameBN?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              planData?:
+                | T
+                | {
+                    timeline?: T;
+                    timelineBN?: T;
+                    id?: T;
+                  };
+              eligibility?:
+                | T
+                | {
+                    entryAge?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          minLabel?: T;
+                          minLabelBN?: T;
+                          minValue?: T;
+                          minValueBN?: T;
+                          minUnit?: T;
+                          minUnitBN?: T;
+                          maxLabel?: T;
+                          maxLabelBN?: T;
+                          maxValue?: T;
+                          maxValueBN?: T;
+                          maxUnit?: T;
+                          maxUnitBN?: T;
+                        };
+                    maturityAge?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          uptoLabel?: T;
+                          uptoLabelBN?: T;
+                          uptoValue?: T;
+                          uptoValueBN?: T;
+                          uptoUnit?: T;
+                          uptoUnitBN?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'custom-accordion'?:
+          | T
+          | {
+              description?: T;
+              descriptionBN?: T;
+              data?:
+                | T
+                | {
+                    mainTitle?: T;
+                    mainTitleBN?: T;
+                    points?: T;
+                    pointsBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'support-map-tab'?:
+          | T
+          | {
+              primaryLabelColor?: T;
+              secondaryLabelColor?: T;
+              tabItems?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    labelBN?: T;
+                    highlightedLabel?: T;
+                    highlightedLabelBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'support-faq-tab'?:
+          | T
+          | {
+              faqTab?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    labelBN?: T;
+                    categoryTitle?: T;
+                    categoryTitleBN?: T;
+                    backgroundColor?: T;
+                    title?: T;
+                    titleBN?: T;
+                    categories?:
+                      | T
+                      | {
+                          key?: T;
+                          title?: T;
+                          titleBN?: T;
+                          items?:
+                            | T
+                            | {
+                                title?: T;
+                                titleBN?: T;
+                                desc?: T;
+                                descBN?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              formsTab?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    labelBN?: T;
+                    backgroundColor?: T;
+                    tableHeaderBgColor?: T;
+                    buttonText?: T;
+                    buttonTextBN?: T;
+                    forms?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'support-buzz'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              mainImage?: T;
+              mainImageOriginal?: T;
+              pendingMainImageOriginal?: T;
+              pendingMainImageCrop?: T;
+              mainImageBlurDataURL?: T;
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
+              allTab?:
+                | T
+                | {
+                    value?: T;
+                    mainImageSrcLink?: T;
+                    newsItems?:
+                      | T
+                      | {
+                          image?: T;
+                          imageOriginal?: T;
+                          pendingImageOriginal?: T;
+                          pendingImageCrop?: T;
+                          imageBlurDataURL?: T;
+                          date?: T;
+                          title?: T;
+                          titleBN?: T;
+                          description?: T;
+                          descriptionBN?: T;
+                          videoLink?: T;
+                          id?: T;
+                        };
+                  };
+              ovcTab?:
+                | T
+                | {
+                    value?: T;
+                    title?: T;
+                    titleBN?: T;
+                    highlightedTitle?: T;
+                    highlightedTitleBN?: T;
+                    videoLink?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'support-feedback-form'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
+              rightTitle?: T;
+              rightTitleBN?: T;
+              rightButtonText?: T;
+              rightButtonTextBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'prem-calculator-card'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              cards?:
+                | T
+                | {
+                    cardTitle?: T;
+                    cardTitleBN?: T;
+                    cardDesc?: T;
+                    cardDescBN?: T;
+                    cardBg?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'purchase-form'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              cards?:
+                | T
+                | {
+                    cardText?: T;
+                    cardTextBN?: T;
+                    cardDesc?: T;
+                    cardDescBN?: T;
+                    cardBg?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'agent-form'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              bgColor?: T;
+              description?: T;
+              descriptionBN?: T;
+              subdescription?: T;
+              subdescriptionBN?: T;
               id?: T;
               blockName?: T;
             };

@@ -1,32 +1,31 @@
 import React, { FC } from 'react'
 import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 import LocalizedText from '../shared/LocalizedText'
+import { CareerPageIntroBlockType } from '@/types/payloadCustomTypes'
 
-type introDataProps = {
-  title: string
-  titleBN: string
-  subTitle: string
-  subTitleBN?: string
-  description: string
-  descriptionBN?: string
-}
+// type introDataProps = {
+//   title: string
+//   titleBN: string
+//   subTitle: string
+//   subTitleBN?: string
+//   description: string
+//   descriptionBN?: string
+// }
 
 type CareerIntroProps = {
-  data: introDataProps
+  data: CareerPageIntroBlockType
 }
 
 const CareerIntro: FC<CareerIntroProps> = ({ data }) => {
-  const fullTitle = `${data?.title} ${data?.subTitle}`
-  const fullBNTitle = `${data?.titleBN} ${data?.subTitleBN}`
   return (
     <div className="container-padding bg-white">
       <div className="flex flex-col gap-4 lg:gap-10 xl:gap-16">
         <h1 className="global-h1 font-normal md:font-semibold text-[#ED7125] md:text-[#434343]">
           <LocalizedHighlighted
-            textEn={fullTitle}
-            highlightEn={data?.subTitle}
-            textBn={fullBNTitle}
-            highlightBn={data?.subTitleBN}
+            textEn={data?.title}
+            highlightEn={data?.highlightedTitle}
+            textBn={data?.titleBN}
+            highlightBn={data?.highlightedTitleBN}
             highlightClassName="text-[#ED7125]"
           />
         </h1>

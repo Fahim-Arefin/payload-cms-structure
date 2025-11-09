@@ -341,3 +341,89 @@ export const HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG = 'featured-blog-vlog
 export const HOME_FEATURED_BLOG_VLOG_AND_NEWS_BLOCK_LABEL = 'Featured Blogs, Vlogs and News'
 export const HOME_FEATURED_BLOG_VLOG_AND_NEWS_BLOCK_THUMBNAIL_URL = `${folder}/featured-blog-vlog-and-news-block-thumbnail.png`
 export const HOME_FEATURED_BLOG_VLOG_AND_NEWS_CACHE_KEY = 'featured-blog-vlog-and-news-data'
+// career page
+//  --------------------------------------------------------------------------------------------------
+
+export const CAREER_PAGE_INTRO_SLUG_AND_TAG = 'career-intro'
+export const CAREER_PAGE_INTRO_BLOCK_LABEL = 'Career Intro Card'
+export const CAREER_PAGE_INTRO_CACHE_KEY = 'career-intro-data'
+export const CAREER_PAGE_INTRO_BLOCK_THUMBNAIL_URL = `${folder}/career-page-intro-thumbnail.png`
+
+export const CAREER_PAGE_SWIPER_SLUG_AND_TAG = 'career-swiper'
+export const CAREER_PAGE_SWIPER_BLOCK_LABEL = 'Career Swiper Card'
+export const CAREER_PAGE_SWIPER_CACHE_KEY = 'career-swiper-data'
+export const CAREER_PAGE_SWIPER_BLOCK_THUMBNAIL_URL = `${folder}/career-page-swiper-thumbnail.png`
+
+export const CAREER_PAGE_RESOURCES_SLUG_AND_TAG = 'career-resources'
+export const CAREER_PAGE_RESOURCES_BLOCK_LABEL = 'Career Resources Card'
+export const CAREER_PAGE_RESOURCES_CACHE_KEY = 'career-resources-data'
+export const CAREER_PAGE_RESOURCES_BLOCK_THUMBNAIL_URL = `${folder}/career-page-resources-thumbnail.png`
+
+export const CAREER_PAGE_OPENINGS_SLUG_AND_TAG = 'career-opening'
+export const CAREER_PAGE_OPENINGS_BLOCK_LABEL = 'Career Opening Card'
+export const CAREER_PAGE_OPENINGS_CACHE_KEY = 'career-opening-data'
+export const CAREER_PAGE_OPENINGS_BLOCK_THUMBNAIL_URL = `${folder}/career-page-opening-thumbnail.png`
+
+export const CAREER_PAGE_PROCESSING_SLUG_AND_TAG = 'career-processing'
+export const CAREER_PAGE_PROCESSING_BLOCK_LABEL = 'Career Processing'
+export const CAREER_PAGE_PROCESSING_CACHE_KEY = 'career-processing-data'
+export const CAREER_PAGE_PROCESSING_BLOCK_THUMBNAIL_URL = `${folder}/career-page-processing-thumbnail.png`
+
+// multistage page
+//  --------------------------------------------------------------------------------------------------
+export const MULTI_STAGE_INTRO_SLUG_AND_TAG = 'multistage-intro'
+export const MULTI_STAGE_INTRO_BLOCK_LABEL = 'Multistage Intro'
+export const MULTI_STAGE_INTRO_CACHE_KEY = 'multistage-intro-data'
+export const MULTI_STAGE_INTRO_BLOCK_THUMBNAIL_URL = `${folder}/multistage-page-intro-thumbnail.png`
+
+export const MULTI_STAGE_PLAN_SLUG_AND_TAG = 'multistage-plan'
+export const MULTI_STAGE_PLAN_BLOCK_LABEL = 'Multistage Plan'
+export const MULTI_STAGE_PLAN_CACHE_KEY = 'multistage-plan-data'
+export const MULTI_STAGE_PLAN_BLOCK_THUMBNAIL_URL = `${folder}/multistage-page-plan-thumbnail.png`
+
+// terms and privacy page
+//  --------------------------------------------------------------------------------------------------
+export const CUSTOM_ACCORDION_SLUG_AND_TAG = 'custom-accordion'
+export const CUSTOM_ACCORDION_BLOCK_LABEL = 'Custom Accordion'
+export const CUSTOM_ACCORDION_CACHE_KEY = 'custom-accordion-data'
+export const CUSTOM_ACCORDION_BLOCK_THUMBNAIL_URL = `${folder}/custom-accordion-block-thumbnail.png`
+
+// support page
+//  --------------------------------------------------------------------------------------------------
+export const SUPPORT_MAP_TAB_SLUG_AND_TAG = 'support-map-tab'
+export const SUPPORT_MAP_TAB_BLOCK_LABEL = 'Support Map Tab'
+export const SUPPORT_MAP_TAB_CACHE_KEY = 'support-map-tab-data'
+export const SUPPORT_MAP_TAB_BLOCK_THUMBNAIL_URL = `${folder}/support-map-page-block-thumbnail.png`
+
+export const SUPPORT_FAQ_TAB_SLUG_AND_TAG = 'support-faq-tab'
+export const SUPPORT_FAQ_TAB_BLOCK_LABEL = 'Support FAQ Tab'
+export const SUPPORT_FAQ_TAB_CACHE_KEY = 'support-faq-tab-data'
+export const SUPPORT_FAQ_TAB_BLOCK_THUMBNAIL_URL = `${folder}/support-faq-page-block-thumbnail.png`
+
+export const SUPPORT_BUZZ_SLUG_AND_TAG = 'support-buzz'
+export const SUPPORT_BUZZ_BLOCK_LABEL = 'Support Buzz'
+export const SUPPORT_BUZZ_CACHE_KEY = 'support-buzz-data'
+export const SUPPORT_BUZZ_BLOCK_THUMBNAIL_URL = `${folder}/support-buzz-page-block-thumbnail.png`
+
+export const SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG = 'support-feedback-form'
+export const SUPPORT_FEEDBACK_FORM_BLOCK_LABEL = 'Support Feedback Form'
+export const SUPPORT_FEEDBACK_FORM_CACHE_KEY = 'support-feedback-form-data'
+export const SUPPORT_FEEDBACK_FORM_BLOCK_THUMBNAIL_URL = `${folder}/support-feedback-form-page-block-thumbnail.png`
+
+//prem calc page
+export const PREM_CALC_PAGE_SLUG_AND_TAG = 'prem-calculator-card'
+export const PREM_CALC_PAGE_BLOCK_LABEL = 'Premium Calculator Card'
+export const PREM_CALC_PAGE_CACHE_KEY = 'prem-calculator-card-data'
+export const PREM_CALC_PAGE_BLOCK_THUMBNAIL_URL = `${folder}/premium-calculator-card-page-block-thumbnail.png`
+
+//purchase page
+export const PURCHASE_FORM_SLUG_AND_TAG = 'purchase-form'
+export const PURCHASE_FORM_PAGE_BLOCK_LABEL = 'Purchase Now Form'
+export const PURCHASE_FORM_CACHE_KEY = 'purchase-form-data'
+export const PURCHASE_FORM_BLOCK_THUMBNAIL_URL = `${folder}/purchase-form-page-block-thumbnail.png`
+
+// agent onboarding form
+export const AGENT_ONBOARDING_FORM_SLUG_AND_TAG = 'agent-form'
+export const AGENT_ONBOARDING_FORM_PAGE_BLOCK_LABEL = 'Agent Onboarding Form'
+export const AGENT_ONBOARDING_FORM_CACHE_KEY = 'agent-form-data'
+export const AGENT_ONBOARDING_FORM_BLOCK_THUMBNAIL_URL = `${folder}/agent-form-page-block-thumbnail.png`

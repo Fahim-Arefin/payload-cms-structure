@@ -2,35 +2,65 @@
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
-import { useEffect, useState } from 'react'
-import SupportTabContent from './SupportTabContent'
-import { TabDataType } from '@/types'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
+import { useEffect, useMemo, useState } from 'react'
 import GeneralFaq from './GeneralFaq'
 import FormsTable from './FormsTable'
-import useSSRLanguage from '@/hooks/useSSRLanguage'
-
-type TabConfig = {
-  value: string
-  label: string
-  labelBN?: string
-}[]
+import type { SupportFaqTabBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
-  config: TabConfig
+  block: SupportFaqTabBlockType
   initialTab?: string
 }
 
-export function FaqTabSection({ config, initialTab }: Props) {
-  const [activeTab, setActiveTab] = useState(initialTab || config[0].value)
-  const activeIndex = config.findIndex((tab) => tab.value === activeTab)
-
+export function FaqTabSection({ block, initialTab }: Props) {
   const lang = useSSRLanguage()
 
-  useEffect(() => {
-    if (initialTab) {
-      setActiveTab(initialTab)
+  // Build visible tabs from the block (keeps your “value/label/labelBN” parity)
+  const tabs = useMemo(() => {
+    const list: { value: string; label: string; labelBN?: string | null }[] = []
+    if (block?.faqTab) {
+      list.push({
+        value: block.faqTab.value ?? 'general',
+        label: block.faqTab.label ?? 'General Forms',
+        labelBN: block.faqTab.labelBN ?? 'সাধারণ জিজ্ঞাসা',
+      })
     }
+    if (block?.formsTab) {
+      list.push({
+        value: block.formsTab.value ?? 'form',
+        label: block.formsTab.label ?? 'Download Forms',
+        labelBN: block.formsTab.labelBN ?? 'ডাউনলোড ফরম',
+      })
+    }
+    return list
+  }, [block])
+
+  // Normalize categories (never null) → [{ key, title, titleBN, items: [{...}] }]
+  const normalizedCategories = useMemo(() => {
+    const cats = block?.faqTab?.categories ?? []
+    return cats.map((c) => ({
+      key: (c as any)?.key ?? 'general',
+      title: (c as any)?.title ?? '',
+      titleBN: (c as any)?.titleBN ?? null,
+      items: ((c as any)?.items ?? []).map((q: any) => ({
+        title: q?.title ?? '',
+        titleBN: q?.titleBN ?? null,
+        desc: q?.desc ?? null,
+        descBN: q?.descBN ?? null,
+      })),
+    }))
+  }, [block])
+
+  const defaultTab = initialTab || tabs?.[0]?.value || 'general'
+  const [activeTab, setActiveTab] = useState(defaultTab)
+
+  useEffect(() => {
+    if (initialTab) setActiveTab(initialTab)
   }, [initialTab])
+
+  const renderLabel = (t: { label: string; labelBN?: string | null }) =>
+    lang === 'bn' ? t.labelBN || t.label : t.label
 
   return (
     <>
@@ -49,15 +79,13 @@ export function FaqTabSection({ config, initialTab }: Props) {
             <TabsList
               className={cn(
                 'w-full flex md:overflow-x-visible bg-transparent border-none p-0 ',
-                config.length === 2
+                tabs.length === 2
                   ? 'justify-start space-x-[5%] md:space-x-[15%] lg:space-x-[25%]'
                   : 'justify-between',
               )}
             >
-              {config.map((tab, index) => {
-                // Pick localized label
-                const label = lang === 'bn' ? tab.labelBN || tab.label : tab.label
-                // Highlight last word
+              {tabs.map((tab, index) => {
+                const label = renderLabel(tab)
                 const words = label.trim().split(' ')
                 const last = words.pop()
                 return (
@@ -67,7 +95,6 @@ export function FaqTabSection({ config, initialTab }: Props) {
                     className={cn(
                       'global-p1 font-medium px-2 py-2.5 md:py-6 relative flex justify-start uppercase',
                       index === 0 ? 'text-left pl-0' : 'text-left',
-                      // config.length === 2 && 'w-[30%]',
                       activeTab === tab.value
                         ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:md:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
                         : 'text-[#434343]',
@@ -89,8 +116,29 @@ export function FaqTabSection({ config, initialTab }: Props) {
           </div>
         </Tabs>
       </div>
+
       {/* TabsContent outside of Tabs */}
-      {activeTab === 'general' ? <GeneralFaq /> : <FormsTable />}
+      {activeTab === (block?.faqTab?.value ?? 'general') ? (
+        <GeneralFaq
+          categories={normalizedCategories}
+          containerBg={block?.faqTab?.backgroundColor || '#F6EDDD'}
+          categoryHeadingEn={block?.faqTab?.categoryTitle || ''}
+          categoryHeadingBn={block?.faqTab?.categoryTitleBN || ''}
+        />
+      ) : (
+        <FormsTable
+          forms={(block?.formsTab?.forms ?? []).map((f: any) => ({
+            title: f?.title ?? '',
+            titleBN: f?.titleBN ?? null,
+          }))}
+          buttonTextEn={block?.formsTab?.buttonText || 'Download'}
+          buttonTextBn={block?.formsTab?.buttonTextBN || 'ডাউনলোড'}
+          containerBg={block?.formsTab?.backgroundColor || '#F6EDDD'}
+          headerBg={block?.formsTab?.tableHeaderBgColor || '#a08d2c'}
+        />
+      )}
     </>
   )
 }
+
+export default FaqTabSection
