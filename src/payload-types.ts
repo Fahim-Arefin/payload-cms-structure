@@ -3762,16 +3762,9 @@ export interface Page {
          */
         descriptionBN: string;
         /**
-         * Background image for the swiper section. Recommended 16:9.
+         * Absolute https URL to your GIF asset. Internal paths are not allowed. Max 400 characters.
          */
-        backgroundImage: string | Media;
-        backgroundImageOriginal?: (string | null) | Media;
-        pendingBackgroundImageOriginal?: string | null;
-        pendingBackgroundImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        backgroundImageBlurDataURL?: string | null;
+        backgroundGifUrl: string;
         /**
          * Add one or more cards to display in the swiper.
          */
@@ -6166,11 +6159,7 @@ export interface PagesSelect<T extends boolean = true> {
               subtitleBN?: T;
               description?: T;
               descriptionBN?: T;
-              backgroundImage?: T;
-              backgroundImageOriginal?: T;
-              pendingBackgroundImageOriginal?: T;
-              pendingBackgroundImageCrop?: T;
-              backgroundImageBlurDataURL?: T;
+              backgroundGifUrl?: T;
               cards?:
                 | T
                 | {
