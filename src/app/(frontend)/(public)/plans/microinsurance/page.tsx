@@ -37,6 +37,7 @@ function page({}: Props) {
     description: `Simple requirements to get started with our microinsurance protection`,
     descriptionBN: ``,
     image: `/assets/solutions/microinsurance/web/WSLS.jpg`,
+    stampImage: `/assets/solutions/microinsurance/web/absoluteImage.png`,
     items: [
       {
         icon: `/assets/solutions/microinsurance/web/WSLS-icon1.png`,

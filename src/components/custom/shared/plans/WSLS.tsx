@@ -12,6 +12,7 @@ type Props = {
     description: string
     descriptionBN: string
     image: string
+    stampImage: string
     items: {
       icon: string
       title: string
@@ -40,14 +41,33 @@ function WSLSSection({ data }: Props) {
           <LocalizedText en={data?.description} bn={data?.descriptionBN} />
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:ga-6 lg:gap-8 xl:gap-10 2xl:gap-12">
-        <div className=" flex items-center justify-center">
+      <div className=" grid grid-cols-1 lg:grid-cols-2 gap-4 md:ga-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+        <div className="relative flex items-center justify-center">
+          {/* main iamge */}
           <div className="relative w-full aspect-[530/340]">
             <Image
               fill
               src={data?.image}
               alt="Image"
               className="object-cover object-center w-full h-full 
+              rounded-md lg:rounded-lg xl:rounded-xl 2xl:rounded-2xl"
+              sizes="50vw"
+              quality={80}
+            />
+          </div>
+          {/* stamp iamge */}
+          <div
+            className="hidden lg:block absolute 
+          xl:-right-10 xl:-bottom-10 
+          lg:-right-8 lg:-bottom-8 
+          w-[70px] xl:w-[90px]
+           aspect-[1/1]"
+          >
+            <Image
+              fill
+              src={data?.stampImage}
+              alt="Image"
+              className="object-cover object-center 
               rounded-md lg:rounded-lg xl:rounded-xl 2xl:rounded-2xl"
               sizes="50vw"
               quality={80}
