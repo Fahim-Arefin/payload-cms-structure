@@ -1,6 +1,7 @@
 import { PlanInfoDataType } from '@/types'
 import Image from 'next/image'
 import React from 'react'
+import LocalizedText from '../LocalizedText'
 
 type Props = {
   bgColor?: string
@@ -34,11 +35,10 @@ function MicroinsuranceIntro({ bgColor, data }: Props) {
             className="text-[14px] md:text-[16px] lg:text-[20px] xl:text-[22px] 2xl:text-[26px] font-light
              leading-4 md:leading-5 lg:leading-8 xl:leading-10 text-[#434343]"
           >
-            {data?.description}
+            <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
         </div>
       </div>
-      
     </div>
   )
 }

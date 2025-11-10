@@ -6,6 +6,7 @@ import MicroinsuranceDescSection from '@/components/custom/microinsurance/Microi
 import MicroinsuranceOffer from '@/components/custom/microinsurance/MicroinsuranceOffer'
 import MicroinsuranceEligibility from '@/components/custom/microinsurance/MicroinsuranceEligibility'
 import MicroinsurancePartners from '@/components/custom/microinsurance/MicroinsurancePartners'
+import WSLSSection from '@/components/custom/shared/plans/WSLS'
 
 type Props = {}
 
@@ -13,18 +14,47 @@ function page({}: Props) {
   const heroSlides = [
     {
       title: 'Microinsurance',
+      titleBN: 'মাইক্রোইনস্যুরেন্স',
       subtitle: '',
-      description: 'Protecting lives, securing futures-affordable insurance for everyone.',
-      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-hero.jpg`,
+      description: 'Empowering communities, strengthening financial resilience',
+      descriptionBN: `কমিউনিটিকে ক্ষমতায়ন, আর্থিক স্থিতিস্থাপকতাকে শক্তিশালীকরণ।`,
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-hero2.jpg`,
     },
   ]
 
   const planInfoData = {
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-intro.png`,
     // mobileImage: '/assets/solutions/bancassurance/mobile/planInfo3.png',
-    description: `Our mission is to provide affordable coverage for low-income and vulnerable people. 
-    With growing demand for inclusive financial services, we ensure protection for all.`,
+    description: `At Shanta Life, we believe protection should be within everyone’s reach. Our microinsurance plans offer simple, affordable coverage with small and accessible premiums ensuring financial strength across multifaceted communities.`,
+    descriptionBN: `মাইক্রোইনস্যুরেন্স এমন এক গুরুত্বপূর্ণ উদ্যোগ যা এনজিও, মাল্টিপারপাস প্রতিষ্ঠান ও বিভিন্ন আর্থিক প্রতিষ্ঠান (ব্যাংকসহ) থেকে ঋণ গ্রহণকারী সদস্যদের বীমা সুরক্ষার আওতায় আনতে কার্যকর ভূমিকা পালন করে। আমাদের মূল লক্ষ্য হলো স্বল্প প্রিমিয়ামের মাধ্যমে সাধারণ জনগণের মাঝে বীমা সুরক্ষা বিস্তৃত করা। আমাদের সহজ এবং গ্রহণযোগ্য মাইক্রো ইন্স্যুরেন্স পলিসিসমূহের মাধ্যমে দেশের প্রান্তিক জনসাধারণ বীমা সুবিধার আওতায় আসতে পারেন।   `,
   }
+
+  const WSLS = {
+    sectionTitle: 'why Shanta Life is special?',
+    highlighedSectionTitle: 'Shanta Life',
+    sectionTitleBN: 'কেন শান্তা লাইফ থেকে মাইক্রোইনস্যুরেন্স নিবেন ?',
+    highlighedSectionTitleBN: 'মাইক্রোইনস্যুরেন্স নিবেন',
+    description: `Simple requirements to get started with our microinsurance protection`,
+    descriptionBN: ``,
+    image: `/assets/solutions/microinsurance/web/WSLS.jpg`,
+    items: [
+      {
+        icon: `/assets/solutions/microinsurance/web/WSLS-icon1.png`,
+        title: `Affordable Protection`,
+        titleBN: `স্বল্প প্রিমিয়াম`,
+        description: `Get essential insurance coverage at prices that won't strain your budget. We believe financial security should be a right, not a luxury.`,
+        descriptionBN: `কম খরচে কার্যকর বীমা সুরক্ষা প্রদান।`,
+      },
+      {
+        icon: `/assets/solutions/microinsurance/web/WSLS-icon2.png`,
+        title: `Effortless Enrollment`,
+        titleBN: `সহজ নিবন্ধন প্রক্রিয়া`,
+        description: `Our signup process is quick, simple, and digital. No complex paperwork, no long waits— protection through our strategic partners.`,
+        descriptionBN: `ন্যূনতম ডকুমেন্টেশন, দীর্ঘসূত্রিতাবিহীন`,
+      },
+    ],
+  }
+
   const benefitsForCustomerData = {
     title: 'Benefits for ',
     coloredTitle: 'Customers',
@@ -113,7 +143,6 @@ function page({}: Props) {
       { title: 'Banks', dotColor: '#8A7B3D' },
       { title: 'NBFIs', dotColor: '#ED7125' },
       { title: 'Cooperatives', dotColor: '#8A7B3D' },
-
     ],
   }
 
@@ -133,10 +162,11 @@ function page({}: Props) {
         </div>
       </HeroSection>
       <MicroinsuranceIntro data={planInfoData} />
-      <MicroinsuranceDescSection data={benefitsForCustomerData} />
+      <WSLSSection data={WSLS} />
+      {/* <MicroinsuranceDescSection data={benefitsForCustomerData} />
       <MicroinsuranceOffer data={offerData} />
       <MicroinsuranceEligibility data={benefitsData} />
-      <MicroinsurancePartners data={partnerData} />
+      <MicroinsurancePartners data={partnerData} /> */}
     </div>
   )
 }
