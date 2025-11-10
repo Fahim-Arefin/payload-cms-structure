@@ -93,7 +93,9 @@ const CareerOpeningSchema: Block = {
           validate: validateShortText('Subtitle', SUBTITLE_MAX, true),
           admin: {
             width: '50%',
-            description: `Supporting line. Max ${SUBTITLE_MAX} (${bnNum(SUBTITLE_MAX)}) characters.`,
+            description: `Supporting line. Max ${SUBTITLE_MAX} (${bnNum(
+              SUBTITLE_MAX,
+            )}) characters.`,
           },
         },
         {
@@ -146,7 +148,9 @@ const CareerOpeningSchema: Block = {
               validate: validateShortText('Type (BN)', TYPE_MAX, true),
               admin: {
                 width: '50%',
-                description: `যেমন: ফুল-টাইম, কন্ট্রাক্ট, ইন্টার্নশিপ। সর্বোচ্চ ${bnNum(TYPE_MAX)} অক্ষর।`,
+                description: `যেমন: ফুল-টাইম, কন্ট্রাক্ট, ইন্টার্নশিপ। সর্বোচ্চ ${bnNum(
+                  TYPE_MAX,
+                )} অক্ষর।`,
               },
             },
           ],
@@ -235,7 +239,9 @@ const CareerOpeningSchema: Block = {
               validate: validateShortText('Apply Button Text (BN)', BTN_TEXT_MAX, true),
               admin: {
                 width: '50%',
-                description: `প্রধান CTA (যেমন, এখন আবেদন করুন)। সর্বোচ্চ ${bnNum(BTN_TEXT_MAX)} অক্ষর।`,
+                description: `প্রধান CTA (যেমন, এখন আবেদন করুন)। সর্বোচ্চ ${bnNum(
+                  BTN_TEXT_MAX,
+                )} অক্ষর।`,
               },
             },
           ],
@@ -262,44 +268,157 @@ const CareerOpeningSchema: Block = {
               validate: validateShortText('Details Button Text (BN)', BTN_TEXT_MAX, true),
               admin: {
                 width: '50%',
-                description: `সেকেন্ডারি CTA (যেমন, বিস্তারিত দেখুন)। সর্বোচ্চ ${bnNum(BTN_TEXT_MAX)} অক্ষর।`,
+                description: `সেকেন্ডারি CTA (যেমন, বিস্তারিত দেখুন)। সর্বোচ্চ ${bnNum(
+                  BTN_TEXT_MAX,
+                )} অক্ষর।`,
               },
             },
           ],
         },
 
-        /* ---- Details Data (nested array) ---- */
+        /* ---- Details (single group instead of array) ---- */
         {
-          name: 'detailsData',
-          type: 'array',
-          label: 'Details Data',
-          labels: { singular: 'Details Item', plural: 'Details Items' },
-          required: true,
-          minRows: 1,
+          name: 'details',
+          type: 'group',
+          label: 'Details',
           admin: {
             description:
-              'Add one or more detail entries (title, responsibilities, requirements, location, deadline, etc.).',
+              'Single details object for this opening (overview text, responsibilities, requirements, etc.).',
           },
           fields: [
+            // Top Title (EN / BN) - now richText
             {
-              name: 'title',
-              type: 'text',
-              label: 'Details Title',
-              required: true,
-              maxLength: DETAILS_TITLE_MAX,
-              validate: validateShortText('Details Title', DETAILS_TITLE_MAX, true),
-              admin: {
-                description: `Section title (e.g., “Role Overview”). Max ${DETAILS_TITLE_MAX} characters.`,
-              },
+              type: 'row',
+              fields: [
+                {
+                  name: 'topTitle',
+                  type: 'richText',
+                  label: 'Top Title',
+                  admin: {
+                    width: '50%',
+                    description: 'Intro heading above details (rich text, English).',
+                  },
+                },
+                {
+                  name: 'topTitleBN',
+                  type: 'richText',
+                  label: 'টপ শিরোনাম (বাংলা)',
+                  admin: {
+                    width: '50%',
+                    description: 'ডিটেইলস-এর উপরে ইন্ট্রো শিরোনাম (রিচ টেক্সট, বাংলা)।',
+                  },
+                },
+              ],
             },
 
+            // Top Description (EN / BN, richText)
             {
-              name: 'responsibilities',
-              type: 'richText',
-              label: 'Responsibilities',
-              required: true,
+              type: 'row',
+              fields: [
+                {
+                  name: 'topDescription',
+                  type: 'richText',
+                  label: 'Top Description',
+                  admin: {
+                    width: '50%',
+                    description: 'Intro rich text above responsibilities/requirements.',
+                  },
+                },
+                {
+                  name: 'topDescriptionBN',
+                  type: 'richText',
+                  label: 'টপ বর্ণনা (বাংলা)',
+                  admin: {
+                    width: '50%',
+                    description: 'বিস্তারিতের আগে ইন্ট্রো বর্ণনা (রিচ টেক্সট)।',
+                  },
+                },
+              ],
             },
-            { name: 'requirements', type: 'richText', label: 'Requirements', required: true },
+            {
+              type: 'row',
+              fields: [
+                // Details Title (plain text, EN)
+                {
+                  name: 'title',
+                  type: 'text',
+                  label: 'Details Title',
+                  required: true,
+                  maxLength: DETAILS_TITLE_MAX,
+                  validate: validateShortText('Details Title', DETAILS_TITLE_MAX, true),
+                  admin: {
+                    description: `Section title (e.g., “Role Overview”). Max ${DETAILS_TITLE_MAX} characters.`,
+                  },
+                },
+
+                {
+                  name: 'titleBN',
+                  type: 'text',
+                  label: 'শিরোনাম (বাংলা)',
+                  required: true,
+                  maxLength: DETAILS_TITLE_MAX,
+                  validate: validateShortText('Details Title (BN)', DETAILS_TITLE_MAX, true),
+                  admin: {
+                    width: '50%',
+                    description: `পদের নাম। সর্বোচ্চ ${bnNum(DETAILS_TITLE_MAX)} অক্ষর।`,
+                  },
+                },
+              ],
+            },
+
+            // Responsibilities EN / BN
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'responsibilities',
+                  type: 'richText',
+                  label: 'Responsibilities',
+                  required: true,
+                  admin: {
+                    width: '50%',
+                    description: 'Key responsibilities for this role (English).',
+                  },
+                },
+                {
+                  name: 'responsibilitiesBN',
+                  type: 'richText',
+                  label: 'দায়িত্বসমূহ (বাংলা)',
+                  required: true,
+                  admin: {
+                    width: '50%',
+                    description: 'এই পদের মূল দায়িত্বসমূহ (বাংলা)।',
+                  },
+                },
+              ],
+            },
+
+            // Requirements EN / BN
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'requirements',
+                  type: 'richText',
+                  label: 'Requirements',
+                  required: true,
+                  admin: {
+                    width: '50%',
+                    description: 'Job requirements / qualifications (English).',
+                  },
+                },
+                {
+                  name: 'requirementsBN',
+                  type: 'richText',
+                  label: 'যোগ্যতা ও শর্তাবলি (বাংলা)',
+                  required: true,
+                  admin: {
+                    width: '50%',
+                    description: 'পদের জন্য প্রয়োজনীয় যোগ্যতা ও শর্তাবলি (বাংলা)।',
+                  },
+                },
+              ],
+            },
 
             {
               type: 'row',
@@ -311,15 +430,26 @@ const CareerOpeningSchema: Block = {
                   maxLength: LOCATION_MAX,
                   validate: validateShortText('Location', LOCATION_MAX, true),
                   admin: {
-                    width: '50%',
+                    width: '33%',
                     description: `City/Office. Max ${LOCATION_MAX} characters.`,
+                  },
+                },
+                {
+                  name: 'locationBN',
+                  type: 'text',
+                  label: 'অবস্থান (বাংলা)',
+                  maxLength: LOCATION_MAX,
+                  validate: validateShortText('Location (BN)', LOCATION_MAX, true),
+                  admin: {
+                    width: '33%',
+                    description: `শহর/অফিসের নাম। সর্বোচ্চ ${bnNum(LOCATION_MAX)} অক্ষর।`,
                   },
                 },
                 {
                   name: 'deadline',
                   type: 'date',
                   label: 'Application Deadline',
-                  admin: { width: '50%' },
+                  admin: { width: '34%' },
                   required: true,
                 },
               ],
@@ -370,7 +500,8 @@ const CareerOpeningSchema: Block = {
               maxLength: FILENAME_MAX,
               validate: validateShortText('Attachment Filename', FILENAME_MAX, false),
               admin: {
-                description: `Optional. Max ${FILENAME_MAX} characters.`,
+                description:
+                  'Optional. Example: it-project-manager.pdf — this should match the name of the PDF users will download.',
               },
             },
           ],

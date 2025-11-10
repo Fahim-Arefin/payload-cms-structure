@@ -3947,13 +3947,92 @@ export interface Page {
            */
           detailsBtnTextBN?: string | null;
           /**
-           * Add one or more detail entries (title, responsibilities, requirements, location, deadline, etc.).
+           * Single details object for this opening (overview text, responsibilities, requirements, etc.).
            */
-          detailsData: {
+          details: {
+            /**
+             * Intro heading above details (rich text, English).
+             */
+            topTitle?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            /**
+             * ডিটেইলস-এর উপরে ইন্ট্রো শিরোনাম (রিচ টেক্সট, বাংলা)।
+             */
+            topTitleBN?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            /**
+             * Intro rich text above responsibilities/requirements.
+             */
+            topDescription?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            /**
+             * বিস্তারিতের আগে ইন্ট্রো বর্ণনা (রিচ টেক্সট)।
+             */
+            topDescriptionBN?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
             /**
              * Section title (e.g., “Role Overview”). Max 80 characters.
              */
             title: string;
+            /**
+             * পদের নাম। সর্বোচ্চ ৮০ অক্ষর।
+             */
+            titleBN: string;
+            /**
+             * Key responsibilities for this role (English).
+             */
             responsibilities: {
               root: {
                 type: string;
@@ -3969,7 +4048,46 @@ export interface Page {
               };
               [k: string]: unknown;
             };
+            /**
+             * এই পদের মূল দায়িত্বসমূহ (বাংলা)।
+             */
+            responsibilitiesBN: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            /**
+             * Job requirements / qualifications (English).
+             */
             requirements: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            /**
+             * পদের জন্য প্রয়োজনীয় যোগ্যতা ও শর্তাবলি (বাংলা)।
+             */
+            requirementsBN: {
               root: {
                 type: string;
                 children: {
@@ -3988,6 +4106,10 @@ export interface Page {
              * City/Office. Max 60 characters.
              */
             location?: string | null;
+            /**
+             * শহর/অফিসের নাম। সর্বোচ্চ ৬০ অক্ষর।
+             */
+            locationBN?: string | null;
             deadline: string;
             /**
              * Email to receive applications.
@@ -4002,11 +4124,10 @@ export interface Page {
              */
             footer?: string | null;
             /**
-             * Optional. Max 80 characters.
+             * Optional. Example: it-project-manager.pdf — this should match the name of the PDF users will download.
              */
             filename?: string | null;
-            id?: string | null;
-          }[];
+          };
           id?: string | null;
         }[];
         id?: string | null;
@@ -6245,19 +6366,26 @@ export interface PagesSelect<T extends boolean = true> {
                     btnTextBN?: T;
                     detailsBtnText?: T;
                     detailsBtnTextBN?: T;
-                    detailsData?:
+                    details?:
                       | T
                       | {
+                          topTitle?: T;
+                          topTitleBN?: T;
+                          topDescription?: T;
+                          topDescriptionBN?: T;
                           title?: T;
+                          titleBN?: T;
                           responsibilities?: T;
+                          responsibilitiesBN?: T;
                           requirements?: T;
+                          requirementsBN?: T;
                           location?: T;
+                          locationBN?: T;
                           deadline?: T;
                           applyEmail?: T;
                           subjectLine?: T;
                           footer?: T;
                           filename?: T;
-                          id?: T;
                         };
                     id?: T;
                   };

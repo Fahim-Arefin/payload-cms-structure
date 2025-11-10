@@ -16,12 +16,15 @@ type CareerOpeningDataProps = {
   openingData: CareerPageOpeningBlockType
 }
 
-// shape of a single detail entry inside a card (matches your schema)
 type OpeningDetail = {
   title?: string
-  responsibilities?: any // Payload RichText JSON
-  requirements?: any // Payload RichText JSON
+  titleBN?: string
+  responsibilities?: any
+  responsibilitiesBN?: any
+  requirements?: any
+  requirementsBN?: any
   location?: string
+  locationBN?: string
   deadline?: string
   applyEmail?: string
   subjectLine?: string
@@ -37,20 +40,21 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
 
   const [openDetails, setOpenDetails] = useState<{
     open: boolean
-    details?: OpeningDetail[] // ← now we store the clicked card’s detailsData array
+    details?: OpeningDetail[]
   }>({ open: false })
 
-  const handleViewDetails = (detailsFromCard?: OpeningDetail[] | null) => {
-    if (detailsFromCard && detailsFromCard.length) {
-      setOpenDetails({ open: true, details: detailsFromCard })
-    }
+  // ✅ Accept group OR array, normalize to array
+  const handleViewDetails = (rawDetails?: OpeningDetail | OpeningDetail[] | null) => {
+    if (!rawDetails) return
+
+    const normalized = Array.isArray(rawDetails) ? rawDetails : [rawDetails]
+
+    if (!normalized.length) return
+    setOpenDetails({ open: true, details: normalized })
   }
 
   const handleApply = (type: string, title: string) => {
-    // keep your existing position mapping logic, or simplify as you wish
     setPos(title)
-    // const formEl = document.querySelector('#career-opening-section form')
-    // if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
   useEffect(() => {
@@ -90,8 +94,8 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
                 key={idx}
                 {...card}
                 onApply={handleApply}
-                // pass the card’s detailsData to the handler
-                onViewDetails={() => handleViewDetails(card?.detailsData)}
+                // ✅ use `details` (group), not `detailsData`
+                onViewDetails={() => handleViewDetails(card?.details)}
               />
             ))}
           </div>
@@ -129,7 +133,12 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
           {/* Details modal (now uses details array from card) */}
           <CareerDetailsModal
             open={openDetails.open}
-            onOpenChange={(o: boolean) => setOpenDetails({ open: o })}
+            onOpenChange={(o: boolean) =>
+              setOpenDetails((prev) => ({
+                ...prev,
+                open: o,
+              }))
+            }
             details={openDetails.details}
           />
         </div>
