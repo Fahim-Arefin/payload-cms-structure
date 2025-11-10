@@ -1,11 +1,8 @@
-import React from 'react'
-import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import CallNowButton from '@/components/custom/shared/CallNowButton'
+import HeroSection from '@/components/custom/shared/hero/HeroSection'
+import EligibilityCriteria from '@/components/custom/shared/plans/EligibilityCriteria'
 import MicroinsuranceIntro from '@/components/custom/shared/plans/MicroinsuranceIntro'
-import MicroinsuranceDescSection from '@/components/custom/microinsurance/MicroinsuranceDescSection'
-import MicroinsuranceOffer from '@/components/custom/microinsurance/MicroinsuranceOffer'
-import MicroinsuranceEligibility from '@/components/custom/microinsurance/MicroinsuranceEligibility'
-import MicroinsurancePartners from '@/components/custom/microinsurance/MicroinsurancePartners'
+import OSAP from '@/components/custom/shared/plans/OSAP'
 import WSLSSection from '@/components/custom/shared/plans/WSLS'
 
 type Props = {}
@@ -56,94 +53,62 @@ function page({}: Props) {
     ],
   }
 
-  const benefitsForCustomerData = {
-    title: 'Benefits for ',
-    coloredTitle: 'Customers',
-    microinsuranceProductsImage: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-desc.jpg`,
-    microinsuranceProducts: [
-      {
-        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-icon2.png`,
-        description: 'Untimely death',
-      },
-      {
-        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-icon1.png`,
-        description: 'Health emergencies',
-      },
-    ],
+  const OSAPData = {
+    title: 'Our Services and Products',
+    titleBN: `আমাদের সেবা ও পণ্যসমূহ`,
+    highlightedTitle: `Services and Products`,
+    highlightedTitleBN: `সেবা ও পণ্যসমূহ`,
   }
 
-  const offerData = {
-    title: 'We',
-    coloredTitle: 'Offer',
-    description: 'Comprehensive insurance solutions tailored for your needs and budget',
-    offers: [
+  const eligibilityCriteriaData = {
+    sectionTitle: 'ELIGIBILITY CRITERIA',
+    highlighedSectionTitle: 'CRITERIA',
+    sectionTitleBN: 'আবেদনের জন্য প্রয়োজনীয় যোগ্যতা',
+    highlighedSectionTitleBN: 'প্রয়োজনীয় যোগ্যতা',
+    description: `Simple requirements to get started with our microinsurance protection`,
+    descriptionBN: ``,
+    image: `/assets/solutions/microinsurance/web/ec.png`,
+    eligibilityData: [
       {
-        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon1.png`,
-        title: 'Life Insurance',
-        summary: "Comprehensive life coverage to protect your family's financial future",
-        bullets: ['Credit Shield', 'Affordable Premiums', 'Quick Claims Settlement'],
+        backGroundColor: '#FFFFFF',
+        icon: `/assets/solutions/microinsurance/web/eligibility-iconlast.png`,
+        iconTitle: 'Eligibility',
+        iconTitleBN: 'যোগ্যতা',
+        age: {
+          title: 'Entry Age',
+          titleBN: 'আবেদনের বয়স',
+          minAgeLabel: 'Minimum',
+          minAgeLabelBN: 'সর্বনিম্ন',
+          minAgeValue: '18',
+          minAgeValueBN: '১৮',
+          minAgeValuePeriod: 'Years',
+          minAgeValuePeriodBN: 'বছর',
+          maxAgeLabel: 'Maximum',
+          maxAgeLabelBN: 'সর্বোচ্চ',
+          maxAgeValue: '65',
+          maxAgeValueBN: '৬৫',
+          maxAgeValuePeriod: 'Years',
+          maxAgeValuePeriodBN: 'বছর',
+        },
+        // policyTerm: {
+        //   title: 'Policy Term',
+        //   titleBN: 'বীমার মেয়াদ',
+        //   value: '10-20 Years',
+        //   valueBN: '১০-২০ বছর',
+        // },
+        // maturityAge: {
+        //   title: 'Maturity Age',
+        //   titleBN: 'পলিসি মেয়াদপূর্তিতে বয়স',
+        //   value: '25 Years',
+        //   valueBN: '২৫ বছর',
+        // },
+        physicalCondition: {
+          title: 'Physical Condition',
+          titleBN: 'শারীরিক অবস্থা',
+          value: 'Physically Fit',
+          valueBN: 'শারীরিকভাবে পরিপূর্ণ সুস্থ',
+        },
       },
-      {
-        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon2.png`,
-        title: 'Health Insurance',
-        summary: 'Affordable protection for life’s unexpected health moments.',
-        bullets: ['Emergency coverage', 'Hospital benefits'],
-      },
-      // {
-      //   icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon3.png`,
-      //   title: 'Family Protection',
-      //   summary: 'Complete family insurance solutions tailored for your needs',
-      //   bullets: ['Multi-member coverage', 'Flexible plans', '24/7 support'],
-      // },
-      // {
-      //   icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/offer-icon4.png`,
-      //   title: 'Property Insurance',
-      //   summary: 'Protect your home and belongings from unexpected events',
-      //   bullets: ['Home protection', 'Asset coverage', 'Natural disaster cover'],
-      // },
-    ],
-  }
-
-  const benefitsData = {
-    title: 'ELIGIBILITY',
-    coloredTitle: 'CRITERIA',
-    description: 'Simple requirements to get started with our microinsurance protection',
-    image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-eligibility.jpg`,
-    items: [
-      {
-        title: 'Age Requirement',
-        label: 'Age: 18-65',
-        icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/eligibility-icon1.png`,
-      },
-      {
-        title: 'Residency Status',
-        label: 'Resident/Citizen of Issuing Country',
-        icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/eligibility-icon2.png`,
-      },
-      {
-        title: 'Income Verification',
-        label: 'Regular Income/Employment',
-        icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/eligibility-icon3.png`,
-      },
-    ],
-  }
-
-  const partnerData = {
-    title: 'Our',
-    coloredTitle: 'Strategic Partners',
-    description:
-      'Working together with trusted organizations to bring insurance to every community',
-    items: [
-      { title: 'NGOs', dotColor: '#8A7B3D' }, // olive
-      { title: 'MFIs', dotColor: '#ED7125' }, // orange
-      { title: 'Banks', dotColor: '#8A7B3D' },
-      { title: 'NBFIs', dotColor: '#ED7125' },
-      { title: 'Cooperatives', dotColor: '#8A7B3D' },
-      { title: 'NGOs', dotColor: '#8A7B3D' }, // olive
-      { title: 'MFIs', dotColor: '#ED7125' }, // orange
-      { title: 'Banks', dotColor: '#8A7B3D' },
-      { title: 'NBFIs', dotColor: '#ED7125' },
-      { title: 'Cooperatives', dotColor: '#8A7B3D' },
     ],
   }
 
@@ -164,10 +129,8 @@ function page({}: Props) {
       </HeroSection>
       <MicroinsuranceIntro data={planInfoData} />
       <WSLSSection data={WSLS} />
-      {/* <MicroinsuranceDescSection data={benefitsForCustomerData} />
-      <MicroinsuranceOffer data={offerData} />
-      <MicroinsuranceEligibility data={benefitsData} />
-      <MicroinsurancePartners data={partnerData} /> */}
+      <OSAP data={OSAPData} />
+      <EligibilityCriteria data={eligibilityCriteriaData} image="right" />
     </div>
   )
 }

@@ -41,7 +41,7 @@ function WSLSSection({ data }: Props) {
           <LocalizedText en={data?.description} bn={data?.descriptionBN} />
         </div>
       </div>
-      <div className=" grid grid-cols-1 lg:grid-cols-2 gap-4 md:ga-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+      <div className=" grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
         <div className="relative flex items-center justify-center">
           {/* main iamge */}
           <div className="relative w-full aspect-[530/340]">
