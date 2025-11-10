@@ -17,6 +17,7 @@ import InsuranceSimplifiedLargeSection from '@/components/custom/home/InsuranceS
 import SearchBarSection from '@/components/custom/home/SearchBarSection'
 import { InsuranceDataType } from '@/types'
 import LottiePlayer from '@/components/custom/shared/LottiePlayer'
+import OnYourCueSection2 from '@/components/custom/shared/plans/OnYourCueSection2'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -181,13 +182,73 @@ export default async function HomePage() {
     },
   ]
 
+  const cueData = {
+    sectionHeading: `Let's do this`,
+    sectionHeadingBN: `আপনার প্ল্যান`,
+    sectionTitle: `On Your Terms`,
+    highlighedSectionTitle: 'Terms',
+    sectionTitleBN: 'আপনার পছন্দ',
+    highlighedSectionTitleBN: 'পছন্দ',
+    description: `Advance your ambitions with Life Insurance tailored to you. Enjoy flexible options,
+        affordable premiums, and hassle-free claims.`,
+    descriptionBN: `সহজ ও স্বল্প প্রিমিয়াম এবং ঝামেলামুক্ত ক্লেইম প্রসেস - কন্ট্রোল এখন আপনার হাতে।`,
+    cards: [
+      {
+        // icon: '/assets/homepage/web/cue2.png',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/cue2.png`,
+        // mobileIcon: '/assets/homepage/mobile/cue2.png',
+        title: 'Shanta',
+        titleBN: 'শান্তা',
+        subtitle: 'Child Education Plan',
+        subtitleBN: 'চাইল্ড এডুকেশন প্ল্যান',
+        description: 'They’re building castles in the sky — we’re here to anchor the ground.',
+        descriptionBN: 'তাদের স্বপ্নের ঘুড়ি যেন উড়ে বাঁধাহীন।',
+        // image: '/assets/homepage/web/child-education.jpg',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/child-education.jpg`,
+        // mobileImage: '/assets/homepage/mobile/child-education.jpg',
+        link: '/plans/individual/child-education',
+      },
+      {
+        // icon: '/assets/homepage/web/cue1.png',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/cue1.png`,
+        // mobileIcon: '/assets/homepage/mobile/cue1.png',
+        title: 'Shanta',
+        titleBN: 'শান্তা',
+        subtitle: 'Multi Stage Maturity Plans',
+        subtitleBN: 'মাল্টি স্টেজ ম্যাচিউরিটি প্ল্যান ',
+        description: 'Multiple payouts, 2 powerful plans - because your future is in your hands.',
+        descriptionBN: '২টি পাওয়ারফুল প্ল্যান - ধাপে ধাপে অর্থপ্রাপ্তির নিশ্চয়তা।',
+        // image: '/assets/homepage/web/multi-stage.jpg',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/multi-stage.jpg`,
+        // mobileImage: '/assets/homepage/mobile/multi-stage.jpg',
+        link: '/plans/individual/saving-and-investment/multistage',
+      },
+      {
+        // icon: '/assets/homepage/web/cue3.png',
+        icon: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/cue3.png`,
+        // mobileIcon: '/assets/homepage/mobile/cue3.png',
+        title: 'Shanta',
+        titleBN: 'শান্তা',
+        subtitle: 'Endowment Plan',
+        subtitleBN: 'এনডাওমেন্ট প্ল্যান',
+        description: 'For the life you’re building and the ones you’re building it for.',
+        descriptionBN: 'নিজ ও প্রিয়জনের আর্থিক সুরক্ষায় অবিচল নির্ভরতা।',
+        // image: '/assets/homepage/web/endowment.jpg',
+        image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/endowment.jpg`,
+        // mobileImage: '/assets/homepage/mobile/endowment.jpg',
+        link: '/plans/individual/saving-and-investment/endowment',
+      },
+    ],
+  }
+
   return (
     <div className="font-avenir">
       {/* <HeroSection /> */}
       <HeroSectionWrapper heroSlides={heroSlides} isHome />
       <SearchBarSection />
       <WhyChooseUsSection />
-      <OnYourCueSection />
+      {/* <OnYourCueSection /> */}
+      <OnYourCueSection2 data={cueData} bg="#FFFFFF" />
       <QuoteSection />
 
       <div className="bg-white py-12 md:hidden">

@@ -1,8 +1,11 @@
 import CallNowButton from '@/components/custom/shared/CallNowButton'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
+import PartnerCarousel from '@/components/custom/shared/PartnerCarousel'
 import EligibilityCriteria from '@/components/custom/shared/plans/EligibilityCriteria'
 import MicroinsuranceIntro from '@/components/custom/shared/plans/MicroinsuranceIntro'
+import OnYourCueSection2 from '@/components/custom/shared/plans/OnYourCueSection2'
 import OSAP from '@/components/custom/shared/plans/OSAP'
+import StrategicPatners from '@/components/custom/shared/plans/StrategicPatners'
 import WhyMicroInsuranceMatter from '@/components/custom/shared/plans/WhyMicroInsuranceMatter'
 import WSLSSection from '@/components/custom/shared/plans/WSLS'
 
@@ -16,7 +19,9 @@ function page({}: Props) {
       subtitle: '',
       description: 'Empowering communities, strengthening financial resilience',
       descriptionBN: `কমিউনিটিকে ক্ষমতায়ন, আর্থিক স্থিতিস্থাপকতাকে শক্তিশালীকরণ।`,
-      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-hero2.jpg`,
+      image: `/assets/solutions/microinsurance/web/microinsurance-hero.jpg`,
+      // image: `/assets/solutions/microinsurance/web/microinsurance-hero2.jpg`,
+      // image: `/assets/solutions/microinsurance/web/microBanner.jpeg`,
     },
   ]
 
@@ -146,6 +151,212 @@ function page({}: Props) {
     ],
   }
 
+  const strategicPatnersData = {
+    title: 'Our Strategic Partners',
+    highlightedText: 'Strategic Partners',
+    titleBN: 'আমাদের টার্গেট ক্লায়েন্টস',
+    highlightedTextBN: 'টার্গেট ক্লায়েন্টস',
+    backgroundColor: '#FFFFFF',
+    partners: [
+      {
+        image: `/assets/solutions/microinsurance/web/1.png`,
+        name: 'NGOs',
+        nameBN: 'এনজিও',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/2.png`,
+        name: 'Co-Operative Society',
+        nameBN: 'সমবায় সমিতি',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/3.png`,
+        name: 'Banks',
+        nameBN: 'ব্যাংক',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/4.png`,
+        name: 'Multipurpose',
+        nameBN: 'মাল্টিপারপাস অর্গানাইজেশন',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/5.png`,
+        name: 'NBFIs',
+        nameBN: 'এনবিএফআই',
+      },
+    ],
+  }
+  const patnerNetworkData = {
+    title: 'Our Partner Network',
+    highlightedText: 'Partner Network',
+    titleBN: 'আমাদের পার্টনার নেটওয়ার্ক',
+    highlightedTextBN: 'পার্টনার নেটওয়ার্ক',
+    backgroundColor: '#FCF4EB',
+    partners: [
+      {
+        image: `/assets/solutions/microinsurance/web/p1.png`,
+        name: 'Heed Sanchoy Rindan Samobay Samity Ltd',
+        nameBN: 'হিড সঞ্চয় ঋণদান সমবায় সমিতি লিঃ',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/p2.png`,
+        name: 'Sehed Society',
+        nameBN: 'শেড সোসাইটি',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/p3.png`,
+        name: 'Association for Social Progress',
+        nameBN: 'এসোসিয়েশন ফর সোস্যাল প্রোগ্রেস',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/p4.png`,
+        name: 'R N Consortium Ltd',
+        nameBN: 'আর এন কনসোর্টিয়াম লিঃ',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/p5.png`,
+        name: 'Come to Work',
+        nameBN: 'কাম টু ওয়ার্ক',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/p6.png`,
+        name: 'Paksey Babosayi Samabay Somiti Ltd',
+        nameBN: 'পাকশি ব্যবসায়ী সমবায় সমিতি লিঃ',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/p7.png`,
+        name: 'Abirbhav Samaj Unnayan Sangstha',
+        nameBN: 'আবির্ভাব সমাজ উন্নয়ন সংস্থা ',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/p8.png`,
+        name: 'Ekota Khudra Babsayi Somo Bayi Samiti Ltd',
+        nameBN: 'একতা ক্ষুদ্র ব্যবসায়ী সমবায় সমিতি লিঃ',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/p9.png`,
+        name: 'Elegant For Better Life',
+        nameBN: 'এলিগ্যান্ট টেলিকমিউনিকেশন লিঃ',
+      },
+      {
+        image: `/assets/solutions/microinsurance/web/p10.png`,
+        name: 'Glory Association',
+        nameBN: 'গ্লোরি এসোসিয়েটস',
+      },
+    ],
+  }
+
+  const cueData = {
+    sectionHeading: ``,
+    sectionHeadingBN: ``,
+    sectionTitle: ``,
+    highlighedSectionTitle: ``,
+    sectionTitleBN: ``,
+    highlighedSectionTitleBN: ``,
+    description: ``,
+    descriptionBN: ``,
+    cards: [
+      {
+        icon: `/assets/solutions/microinsurance/web/c1.png`,
+        title: 'Loan Shield',
+        titleBN: 'ঋণ সুরক্ষা',
+        // subtitle: 'Multi Stage Maturity Plans',
+        // subtitleBN: 'মাল্টি স্টেজ ম্যাচিউরিটি প্ল্যান ',
+        description: 'Covers Death (Natural & Accidental) and Permanent Total Disability (PTD).',
+        descriptionBN:
+          'ঋণগ্রহীতার অকাল মৃত্যু বা দুর্ঘটনায় স্থায়ী অক্ষমতার ক্ষেত্রে পরিবারের আর্থিক নিরাপত্তা নিশ্চিত করে।',
+        image: `/assets/solutions/microinsurance/web/cc1.jpg`,
+        // link: '/plans/individual/child-education',
+        moreItem: [
+          {
+            description: 'Repayment of the outstanding loan as Death benefit',
+            descriptionBN: 'মৃত্যু ঘটলে সম্পূর্ণ ঋণ পরিশোধ সুবিধা',
+          },
+          {
+            description:
+              'Repayment of the outstanding loan in case of Accidental death or Total Permanent Disability',
+            descriptionBN: 'দুর্ঘটনাজনিত মৃত্যু ঘটলে সম্পূর্ণ ঋণ পরিশোধ সুবিধা',
+          },
+          {
+            description: 'Funeral Cash Benefit',
+            descriptionBN: 'অন্ত্যেষ্টিক্রিয়া সম্পাদন সহায়তা',
+          },
+          {
+            description: 'Telemedicine Support',
+            descriptionBN: 'টেলিমেডিসিন সেবা',
+          },
+        ],
+      },
+      {
+        icon: `/assets/solutions/microinsurance/web/c2.png`,
+        title: 'Deposit Shield',
+        titleBN: 'আমানত সুরক্ষা',
+        // subtitle: 'Multi Stage Maturity Plans',
+        // subtitleBN: 'মাল্টি স্টেজ ম্যাচিউরিটি প্ল্যান ',
+        description:
+          'Protects against Death (Natural & Accidental) and Permanent Total Disability (PTD).',
+        descriptionBN: 'আপনার সঞ্চয় ও আমানতকে অনাকাঙ্ক্ষিত ঝুঁকি থেকে সুরক্ষা দেয়।',
+        image: `/assets/solutions/microinsurance/web/cc2.jpg`,
+        // link: '/plans/individual/child-education',
+        moreItem: [
+          {
+            description: 'Payment of Full maturity value any type of deposits in case of death',
+            descriptionBN: 'মৃত্যুবরণ পূর্ণ ম্যাচুরিটি মূল্য প্রদান',
+          },
+          {
+            description:
+              'Payment of Full maturity value any type of deposits in case of accidental death or Total Permanent Disability',
+            descriptionBN: 'দুর্ঘটনায় পূর্ণ ম্যাচুরিটি মূল্য প্রদান',
+          },
+          {
+            description: 'Funeral Cash Benefit',
+            descriptionBN: 'অন্ত্যেষ্টিক্রিয়া সম্পাদন সহায়তা',
+          },
+          {
+            description: 'Telemedicine Support',
+            descriptionBN: 'টেলিমেডিসিন সেবা',
+          },
+        ],
+      },
+      {
+        icon: `/assets/solutions/microinsurance/web/c3.png`,
+        title: 'Term Life Insurance',
+        titleBN: 'টার্ম লাইফ বীমা',
+        // subtitle: 'Multi Stage Maturity Plans',
+        // subtitleBN: 'মাল্টি স্টেজ ম্যাচিউরিটি প্ল্যান ',
+        description: 'Includes Death, Accidental Death (AD), and Permanent Total Disability (PTD).',
+        descriptionBN: 'পরিবারের ভবিষ্যৎ সুরক্ষায় নির্ভরযোগ্য জীবনবীমা পরিকল্পনা।',
+        image: `/assets/solutions/microinsurance/web/cc3.jpg`,
+        // link: '/plans/individual/child-education',
+        moreItem: [
+          {
+            description: 'Death Coverage',
+            descriptionBN: 'মৃত্যু কভারেজ',
+          },
+          {
+            description: 'Accidental death and Total Permanent Disability Coverage',
+            descriptionBN: 'দুর্ঘটনাজনিত কভারেজ',
+          },
+          {
+            description: 'Accidental medical expense Coverage',
+            descriptionBN: 'দুর্ঘটনাজনিত চিকিৎসা ব্যয় সুরক্ষা',
+          },
+          {
+            description: 'In-hospitalization benefit',
+            descriptionBN: 'হাসপাতালে ভর্তি হলে বিল সুবিধা',
+          },
+          {
+            description: 'Hospital Discount Facility',
+            descriptionBN: 'হাসপাতালে ছাড় সুবিধা',
+          },
+          {
+            description: 'Telemedicine Support',
+            descriptionBN: 'টেলিমেডিসিন সেবা',
+          },
+        ],
+      },
+    ],
+  }
+
   return (
     <div className="font-avenir bg-white">
       <HeroSection heroSlides={heroSlides}>
@@ -165,7 +376,11 @@ function page({}: Props) {
       <WhyMicroInsuranceMatter data={microInsuranceMatterData} />
       <WSLSSection data={WSLS} />
       <OSAP data={OSAPData} />
+      {/* bg="#F6EDDD" */}
+      <OnYourCueSection2 data={cueData} bg="#F6EDDD" />
       <EligibilityCriteria data={eligibilityCriteriaData} image="right" />
+      <StrategicPatners data={strategicPatnersData} />
+      <PartnerCarousel data={patnerNetworkData} />
     </div>
   )
 }
