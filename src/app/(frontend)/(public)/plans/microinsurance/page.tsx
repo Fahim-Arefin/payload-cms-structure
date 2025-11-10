@@ -3,6 +3,7 @@ import HeroSection from '@/components/custom/shared/hero/HeroSection'
 import EligibilityCriteria from '@/components/custom/shared/plans/EligibilityCriteria'
 import MicroinsuranceIntro from '@/components/custom/shared/plans/MicroinsuranceIntro'
 import OSAP from '@/components/custom/shared/plans/OSAP'
+import WhyMicroInsuranceMatter from '@/components/custom/shared/plans/WhyMicroInsuranceMatter'
 import WSLSSection from '@/components/custom/shared/plans/WSLS'
 
 type Props = {}
@@ -49,6 +50,39 @@ function page({}: Props) {
         titleBN: `সহজ নিবন্ধন প্রক্রিয়া`,
         description: `Our signup process is quick, simple, and digital. No complex paperwork, no long waits— protection through our strategic partners.`,
         descriptionBN: `ন্যূনতম ডকুমেন্টেশন, দীর্ঘসূত্রিতাবিহীন`,
+      },
+    ],
+  }
+
+  const microInsuranceMatterData = {
+    sectionTitle: 'Why Microinsurance Matters?',
+    highlighedSectionTitle: 'Microinsurance',
+    sectionTitleBN: 'কেন মাইক্রোইনস্যুরেন্স গুরুত্বপূর্ণ ?',
+    highlighedSectionTitleBN: 'মাইক্রোইনস্যুরেন্স',
+    description: `Specially designed to cover for low-income individuals and who obtain loan facilities from NGOs, Multipurpose organizations, and financial institutions including Banks. Our protection includes: `,
+    descriptionBN: `বিশেষভাবে তৈরি করা হয়েছে নিম্ন আয়ের ব্যক্তি এবং যারা এনজিও, বহুমুখী সংস্থা এবং ব্যাংকসহ আর্থিক প্রতিষ্ঠান থেকে ঋণ সুবিধা গ্রহণ করেন, তাদের সুরক্ষার জন্য। আমাদের সুরক্ষার অন্তর্ভুক্ত:`,
+    items: [
+      {
+        title: 'Coverage for sudden loss of life',
+        titleBN: 'আকস্মিক মৃত্যু',
+        description: 'Ensure financial protection to your family even if you’re not there.',
+        descriptionBN:
+          'পরিবারের প্রধান সদস্যের আকস্মিক মৃত্যু হলে পরিবারকে আর্থিক সুরক্ষা প্রদান করে।',
+      },
+      {
+        title: 'Permanent Disability Coverage',
+        titleBN: 'স্থায়ী অক্ষমতা',
+        description: 'Secure your income from life’s sudden slip-ups.',
+        descriptionBN:
+          'দুর্ঘটনা বা গুরুতর অসুস্থতার কারণে কর্মক্ষমতা হারালে আয় সুরক্ষা নিশ্চিত করে।',
+      },
+      {
+        title: 'Health Care Support',
+        titleBN: 'চিকিৎসা সুবিধা',
+        description:
+          'Cover medical expenses and hospitalization costs through affordable, easy to manage premiums.',
+        descriptionBN:
+          'স্বল্প প্রিমিয়ামে চিকিৎসা ব্যয় ও হাসপাতালে ভর্তি সংক্রান্ত খরচ বহন করে, যা সবার নাগালের মধ্যে।',
       },
     ],
   }
@@ -128,6 +162,7 @@ function page({}: Props) {
         </div>
       </HeroSection>
       <MicroinsuranceIntro data={planInfoData} />
+      <WhyMicroInsuranceMatter data={microInsuranceMatterData} />
       <WSLSSection data={WSLS} />
       <OSAP data={OSAPData} />
       <EligibilityCriteria data={eligibilityCriteriaData} image="right" />
