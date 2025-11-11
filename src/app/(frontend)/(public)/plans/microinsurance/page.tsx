@@ -15,10 +15,10 @@ function page({}: Props) {
   const heroSlides = [
     {
       title: 'Microinsurance',
-      titleBN: 'মাইক্রোইনস্যুরেন্স',
+      titleBN: 'মাইক্রোইন্স্যুরেন্স',
       subtitle: '',
       description: 'Empowering communities, strengthening financial resilience',
-      descriptionBN: `কমিউনিটিকে ক্ষমতায়ন, আর্থিক স্থিতিস্থাপকতাকে শক্তিশালীকরণ।`,
+      descriptionBN: `সবার জন্য লাইফ ইন্স্যুরেন্স`,
       image: `/assets/solutions/microinsurance/web/microinsurance-hero.jpg`,
       // image: `/assets/solutions/microinsurance/web/microinsurance-hero2.jpg`,
       // image: `/assets/solutions/microinsurance/web/microBanner.jpeg`,
@@ -29,14 +29,14 @@ function page({}: Props) {
     image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-intro.png`,
     // mobileImage: '/assets/solutions/bancassurance/mobile/planInfo3.png',
     description: `At Shanta Life, we believe protection should be within everyone’s reach. Our microinsurance plans offer simple, affordable coverage with small and accessible premiums ensuring financial strength across multifaceted communities.`,
-    descriptionBN: `মাইক্রোইনস্যুরেন্স এমন এক গুরুত্বপূর্ণ উদ্যোগ যা এনজিও, মাল্টিপারপাস প্রতিষ্ঠান ও বিভিন্ন আর্থিক প্রতিষ্ঠান (ব্যাংকসহ) থেকে ঋণ গ্রহণকারী সদস্যদের বীমা সুরক্ষার আওতায় আনতে কার্যকর ভূমিকা পালন করে। আমাদের মূল লক্ষ্য হলো স্বল্প প্রিমিয়ামের মাধ্যমে সাধারণ জনগণের মাঝে বীমা সুরক্ষা বিস্তৃত করা। আমাদের সহজ এবং গ্রহণযোগ্য মাইক্রো ইন্স্যুরেন্স পলিসিসমূহের মাধ্যমে দেশের প্রান্তিক জনসাধারণ বীমা সুবিধার আওতায় আসতে পারেন।   `,
+    descriptionBN: `মাইক্রোইন্স্যুরেন্স এমন এক গুরুত্বপূর্ণ উদ্যোগ যা এনজিও, মাল্টিপারপাস প্রতিষ্ঠান ও বিভিন্ন আর্থিক প্রতিষ্ঠান (ব্যাংকসহ) থেকে ঋণ গ্রহণকারী সদস্যদের বীমা সুরক্ষার আওতায় আনতে কার্যকর ভূমিকা পালন করে। আমাদের মূল লক্ষ্য হলো স্বল্প প্রিমিয়ামের মাধ্যমে সাধারণ জনগণের মাঝে বীমা সুরক্ষা বিস্তৃত করা। আমাদের সহজ এবং গ্রহণযোগ্য মাইক্রো ইন্স্যুরেন্স পলিসিসমূহের মাধ্যমে দেশের প্রান্তিক জনসাধারণ বীমা সুবিধার আওতায় আসতে পারেন।   `,
   }
 
   const WSLS = {
     sectionTitle: 'why Shanta Life is special?',
     highlighedSectionTitle: 'Shanta Life',
-    sectionTitleBN: 'কেন শান্তা লাইফ থেকে মাইক্রোইনস্যুরেন্স নিবেন ?',
-    highlighedSectionTitleBN: 'মাইক্রোইনস্যুরেন্স নিবেন',
+    sectionTitleBN: 'কেন শান্তা লাইফ থেকে মাইক্রোইন্স্যুরেন্স নিবেন ?',
+    highlighedSectionTitleBN: 'মাইক্রোইন্স্যুরেন্স নিবেন',
     description: `Simple requirements to get started with our microinsurance protection`,
     descriptionBN: ``,
     image: `/assets/solutions/microinsurance/web/WSLS.jpg`,
@@ -62,17 +62,16 @@ function page({}: Props) {
   const microInsuranceMatterData = {
     sectionTitle: 'Why Microinsurance Matters?',
     highlighedSectionTitle: 'Microinsurance',
-    sectionTitleBN: 'কেন মাইক্রোইনস্যুরেন্স গুরুত্বপূর্ণ ?',
-    highlighedSectionTitleBN: 'মাইক্রোইনস্যুরেন্স',
-    description: `Specially designed to cover for low-income individuals and who obtain loan facilities from NGOs, Multipurpose organizations, and financial institutions including Banks. Our protection includes: `,
+    sectionTitleBN: 'কেন মাইক্রোইন্স্যুরেন্স গুরুত্বপূর্ণ ?',
+    highlighedSectionTitleBN: 'মাইক্রোইন্স্যুরেন্স',
+    description: `Specially designed to cover low-income individuals and who obtain loan facilities from NGOs, Multipurpose organizations, and financial institutions including Banks. Our protection includes: `,
     descriptionBN: `বিশেষভাবে তৈরি করা হয়েছে নিম্ন আয়ের ব্যক্তি এবং যারা এনজিও, বহুমুখী সংস্থা এবং ব্যাংকসহ আর্থিক প্রতিষ্ঠান থেকে ঋণ সুবিধা গ্রহণ করেন, তাদের সুরক্ষার জন্য। আমাদের সুরক্ষার অন্তর্ভুক্ত:`,
     items: [
       {
         title: 'Coverage for sudden loss of life',
         titleBN: 'আকস্মিক মৃত্যু',
         description: 'Ensure financial protection to your family even if you’re not there.',
-        descriptionBN:
-          'পরিবারের প্রধান সদস্যের আকস্মিক মৃত্যু হলে পরিবারকে আর্থিক সুরক্ষা প্রদান করে।',
+        descriptionBN: 'পলিসি গ্রাহকের আকস্মিক মৃত্যু হলে পরিবারকে আর্থিক সুরক্ষা প্রদান করে।',
       },
       {
         title: 'Permanent Disability Coverage',
@@ -104,7 +103,7 @@ function page({}: Props) {
     highlighedSectionTitle: 'CRITERIA',
     sectionTitleBN: 'আবেদনের জন্য প্রয়োজনীয় যোগ্যতা',
     highlighedSectionTitleBN: 'প্রয়োজনীয় যোগ্যতা',
-    description: `Simple requirements to get started with our microinsurance protection`,
+    description: ``,
     descriptionBN: ``,
     image: `/assets/solutions/microinsurance/web/ec.png`,
     eligibilityData: [
@@ -154,8 +153,8 @@ function page({}: Props) {
   const strategicPatnersData = {
     title: 'Our Strategic Partners',
     highlightedText: 'Strategic Partners',
-    titleBN: 'আমাদের টার্গেট ক্লায়েন্টস',
-    highlightedTextBN: 'টার্গেট ক্লায়েন্টস',
+    titleBN: 'আমাদের স্ট্রাটেজিক পার্টনারস',
+    highlightedTextBN: 'স্ট্রাটেজিক পার্টনারস',
     backgroundColor: '#FFFFFF',
     partners: [
       {
@@ -300,12 +299,13 @@ function page({}: Props) {
         moreItem: [
           {
             description: 'Payment of Full maturity value any type of deposits in case of death',
-            descriptionBN: 'মৃত্যুবরণ পূর্ণ ম্যাচুরিটি মূল্য প্রদান',
+            descriptionBN: 'গ্রাহকের মৃত্যতে, মেয়াদি আমানতের পূর্ণ মেয়াদপূর্তি মূল্য প্রদান',
           },
           {
             description:
               'Payment of Full maturity value any type of deposits in case of accidental death or Total Permanent Disability',
-            descriptionBN: 'দুর্ঘটনায় পূর্ণ ম্যাচুরিটি মূল্য প্রদান',
+            descriptionBN:
+              'গ্রাহকের দোরঘটনাজনিত মৃত্য বা পূর্ণ চিরস্থায়ী অক্ষমতায়, মেয়াদি আমানতের পূর্ণ মেয়াদপূর্তি মূল্য প্রদান',
           },
           {
             description: 'Funeral Cash Benefit',
