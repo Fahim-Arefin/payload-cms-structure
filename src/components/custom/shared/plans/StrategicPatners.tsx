@@ -58,7 +58,9 @@ function StrategicPatners({ data }: Props) {
                 className="w-full h-full object-contain object-center"
               />
             </div>
-            <p className="global-p2 font-semibold text-center text-[#374151] uppercase">
+            <p
+              className={`global-p2 font-semibold text-center text-[#374151] ${index > 0 ? 'uppercase' : ''}`}
+            >
               <LocalizedText en={item?.name} bn={item?.nameBN} />
             </p>
           </div>

@@ -298,12 +298,12 @@ function page({}: Props) {
         // link: '/plans/individual/child-education',
         moreItem: [
           {
-            description: 'Payment of Full maturity value any type of deposits in case of death',
+            description: 'Payment of full maturity value of term deposits in case of death',
             descriptionBN: 'গ্রাহকের মৃত্যতে, মেয়াদি আমানতের পূর্ণ মেয়াদপূর্তি মূল্য প্রদান',
           },
           {
             description:
-              'Payment of Full maturity value any type of deposits in case of accidental death or Total Permanent Disability',
+              'Payment of full maturity value of term deposits in case of accidental death or total permanent disability',
             descriptionBN:
               'গ্রাহকের দোরঘটনাজনিত মৃত্য বা পূর্ণ চিরস্থায়ী অক্ষমতায়, মেয়াদি আমানতের পূর্ণ মেয়াদপূর্তি মূল্য প্রদান',
           },
