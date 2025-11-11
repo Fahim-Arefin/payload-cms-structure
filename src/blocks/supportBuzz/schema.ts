@@ -55,6 +55,14 @@ const validateYouTubeUrl =
     }
   }
 
+// Ensure a text field equals a literal string (prevents other values)
+const requireLiteral =
+  (literal: string, label = 'Value') =>
+  (val: unknown) => {
+    const s = (val ?? '').toString().trim()
+    return s === literal ? true : `${label} must be "${literal}".`
+  }
+
 /* ---------------- block ---------------- */
 const SupportBuzzSchema: Block = {
   slug: SUPPORT_BUZZ_SLUG_AND_TAG,
@@ -147,17 +155,29 @@ const SupportBuzzSchema: Block = {
           'Main “ALL” feed. Uses the top-level Main Image. Contains a source link and exactly 3 news cards.',
       },
       fields: [
+        // ✅ Text value (no selector) with fixed default + BN
         {
-          name: 'value',
-          type: 'select',
-          label: 'Tab Value',
-          required: true,
-          defaultValue: 'all',
-          options: [
-            { label: 'ALL', value: 'all' },
-            { label: 'OVC/TVC', value: 'ovc' },
+          type: 'row',
+          fields: [
+            {
+              name: 'value',
+              type: 'text',
+              label: 'Tab Value (fixed)',
+              required: true,
+              defaultValue: 'all',
+              validate: requireLiteral('all', 'Tab Value'),
+              admin: { width: '25%', description: 'Fixed: "all" (string).' },
+            },
+            {
+              name: 'valueBN',
+              type: 'text',
+              label: 'ট্যাব ভ্যালু (বাংলা)',
+              required: true,
+              defaultValue: 'সকল',
+              validate: validateShort('Tab Value (BN)', 40, true),
+              admin: { width: '25%', description: 'ডিফল্ট: “সকল”.' },
+            },
           ],
-          admin: { width: '25%' },
         },
 
         // kept here: source link only (image lives at top-level now)
@@ -289,17 +309,29 @@ const SupportBuzzSchema: Block = {
           'Uses the top-level Background Image. Add headline (EN/BN) and optional YouTube link for the modal.',
       },
       fields: [
+        // ✅ Text value (no selector) with fixed default + BN
         {
-          name: 'value',
-          type: 'select',
-          label: 'Tab Value',
-          required: true,
-          defaultValue: 'ovc',
-          options: [
-            { label: 'ALL', value: 'all' },
-            { label: 'OVC/TVC', value: 'ovc' },
+          type: 'row',
+          fields: [
+            {
+              name: 'value',
+              type: 'text',
+              label: 'Tab Value (fixed)',
+              required: true,
+              defaultValue: 'ovc',
+              validate: requireLiteral('ovc', 'Tab Value'),
+              admin: { width: '25%', description: 'Fixed: "OVC" (string).' },
+            },
+            {
+              name: 'valueBN',
+              type: 'text',
+              label: 'ট্যাব ভ্যালু (বাংলা)',
+              required: true,
+              defaultValue: 'অভিসি/টিভিসি',
+              validate: validateShort('Tab Value (BN)', 40, true),
+              admin: { width: '25%', description: 'ডিফল্ট: “অভিসি/টিভিসি”.' },
+            },
           ],
-          admin: { width: '25%' },
         },
         {
           type: 'row',

@@ -12,6 +12,7 @@ import { useLanguage } from '@/context/LanguageContext'
 // 👉 Import your Payload type if you have it generated.
 // Replace this with your actual generated type import.
 import type { SupportBuzzBlockType } from '@/types/payloadCustomTypes'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
   block: SupportBuzzBlockType
@@ -79,16 +80,16 @@ function CatchTheBuzzSection({ block }: Props) {
           <TabsList className="w-full justify-start space-x-12 md:space-x-24 lg:space-x-32 xl:space-x-60 rounded-none bg-transparent ">
             <TabsTrigger
               value="all"
-              className="text-[13px] md:text-base text-[#3A3A3A] data-[state=active]:text-[#ED7125]"
+              className="text-[13px] md:text-base uppercase text-[#3A3A3A] data-[state=active]:text-[#ED7125]"
             >
-              ALL
+              <LocalizedText en={block?.allTab?.value} bn={block?.allTab?.valueBN} />
             </TabsTrigger>
 
             <TabsTrigger
               value="ovc"
-              className="text-[13px] md:text-base text-[#3A3A3A] data-[state=active]:text-[#ED7125]"
+              className="text-[13px] md:text-base uppercase text-[#3A3A3A] data-[state=active]:text-[#ED7125]"
             >
-              OVC/TVC
+              <LocalizedText en={block?.ovcTab?.value} bn={block?.ovcTab?.valueBN} />
             </TabsTrigger>
           </TabsList>
         </Tabs>

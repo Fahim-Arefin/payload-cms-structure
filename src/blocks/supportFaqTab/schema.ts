@@ -52,17 +52,20 @@ const FaqTabsSchema: Block = {
         {
           type: 'row',
           fields: [
+            // 🔁 CHANGED: select -> text, default "general"
             {
               name: 'value',
-              type: 'select',
-              label: 'Tab Value',
+              type: 'text',
+              label: 'Tab Value (key)',
               required: true,
               defaultValue: 'general',
-              options: [
-                { label: 'General', value: 'general' },
-                { label: 'Download Forms', value: 'form' }, // keeps FE parity
-              ],
-              admin: { width: '25%' },
+              maxLength: TITLE_MAX,
+              validate: validateShort('Tab Value', TITLE_MAX, true),
+              admin: {
+                width: '25%',
+                description:
+                  'Internal key used by frontend routing. Typically "general" for this FAQ tab.',
+              },
             },
             {
               name: 'label',
@@ -87,32 +90,8 @@ const FaqTabsSchema: Block = {
           ],
         },
 
-        // ✅ Optional localized heading shown above the category selector
-        {
-          type: 'row',
-          fields: [
-            {
-              name: 'categoryTitle',
-              type: 'text',
-              label: 'Category Heading',
-              required: false,
-              maxLength: TITLE_MAX,
-              validate: validateShort('Category Heading', TITLE_MAX, false),
-              admin: { width: '50%' },
-            },
-            {
-              name: 'categoryTitleBN',
-              type: 'text',
-              label: 'ক্যাটাগরি শিরোনাম (বাংলা)',
-              required: false,
-              maxLength: TITLE_MAX,
-              validate: validateShort('Category Heading (BN)', TITLE_MAX, false),
-              admin: { width: '50%' },
-            },
-          ],
-        },
 
-        // ✅ NEW: FAQ section background color
+        // FAQ section background color
         {
           name: 'backgroundColor',
           type: 'text',
@@ -160,7 +139,6 @@ const FaqTabsSchema: Block = {
           admin: {
             description: 'Pick each category once. Then add many Q&A items under each category.',
           },
-          // ensure uniqueness of 'key'
           validate: (value) => {
             const arr = (value ?? []) as any[]
             if (!Array.isArray(arr)) return true
@@ -201,7 +179,6 @@ const FaqTabsSchema: Block = {
                 },
               ],
             },
-            // Nested Q&A list for this category
             {
               name: 'items',
               type: 'array',
@@ -254,7 +231,6 @@ const FaqTabsSchema: Block = {
               ],
             },
           ],
-          // Seed all 6 rows with the keys in order (titles are editable)
           defaultValue: [
             { key: 'general', title: 'General Query', titleBN: 'সাধারণ জিজ্ঞাসা' },
             { key: 'claims', title: 'Claim', titleBN: 'ক্লেইম' },
@@ -276,17 +252,20 @@ const FaqTabsSchema: Block = {
         {
           type: 'row',
           fields: [
+            // 🔁 CHANGED: select -> text, default "forms"
             {
               name: 'value',
-              type: 'select',
-              label: 'Tab Value',
+              type: 'text',
+              label: 'Tab Value (key)',
               required: true,
               defaultValue: 'form',
-              options: [
-                { label: 'General', value: 'general' },
-                { label: 'Download Forms', value: 'form' },
-              ],
-              admin: { width: '25%' },
+              maxLength: TITLE_MAX,
+              validate: validateShort('Tab Value', TITLE_MAX, true),
+              admin: {
+                width: '25%',
+                description:
+                  'Internal key used by frontend routing. Typically "form" for this Download Forms tab.',
+              },
             },
             {
               name: 'label',
@@ -311,7 +290,7 @@ const FaqTabsSchema: Block = {
           ],
         },
 
-        // ✅ NEW: Forms table background color (container)
+        // Forms table background color (container)
         {
           name: 'backgroundColor',
           type: 'text',
@@ -324,7 +303,7 @@ const FaqTabsSchema: Block = {
           },
         },
 
-        // ✅ NEW: Forms table header background
+        // Forms table header background
         {
           name: 'tableHeaderBgColor',
           type: 'text',

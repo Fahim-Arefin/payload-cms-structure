@@ -4446,11 +4446,12 @@ export interface Page {
       }
     | {
         faqTab: {
-          value: 'general' | 'form';
+          /**
+           * Internal key used by frontend routing. Typically "general" for this FAQ tab.
+           */
+          value: string;
           label: string;
           labelBN: string;
-          categoryTitle?: string | null;
-          categoryTitleBN?: string | null;
           /**
            * Hex color in #RRGGBB (e.g., #F6EDDD).
            */
@@ -4510,7 +4511,10 @@ export interface Page {
             | null;
         };
         formsTab: {
-          value: 'general' | 'form';
+          /**
+           * Internal key used by frontend routing. Typically "form" for this Download Forms tab.
+           */
+          value: string;
           label: string;
           labelBN: string;
           /**
@@ -4570,7 +4574,14 @@ export interface Page {
          * Main “ALL” feed. Uses the top-level Main Image. Contains a source link and exactly 3 news cards.
          */
         allTab: {
-          value: 'all' | 'ovc';
+          /**
+           * Fixed: "all" (string).
+           */
+          value: string;
+          /**
+           * ডিফল্ট: “সকল”.
+           */
+          valueBN: string;
           mainImageSrcLink?: string | null;
           /**
            * Exactly 3 items. Each uses a single 16:9 image, real date, EN/BN title/description, and optional YouTube link.
@@ -4605,7 +4616,14 @@ export interface Page {
          * Uses the top-level Background Image. Add headline (EN/BN) and optional YouTube link for the modal.
          */
         ovcTab: {
-          value: 'all' | 'ovc';
+          /**
+           * Fixed: "OVC" (string).
+           */
+          value: string;
+          /**
+           * ডিফল্ট: “অভিসি/টিভিসি”.
+           */
+          valueBN: string;
           title?: string | null;
           titleBN?: string | null;
           highlightedTitle?: string | null;
@@ -6542,8 +6560,6 @@ export interface PagesSelect<T extends boolean = true> {
                     value?: T;
                     label?: T;
                     labelBN?: T;
-                    categoryTitle?: T;
-                    categoryTitleBN?: T;
                     backgroundColor?: T;
                     title?: T;
                     titleBN?: T;
@@ -6608,6 +6624,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     value?: T;
+                    valueBN?: T;
                     mainImageSrcLink?: T;
                     newsItems?:
                       | T
@@ -6630,6 +6647,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     value?: T;
+                    valueBN?: T;
                     title?: T;
                     titleBN?: T;
                     highlightedTitle?: T;
