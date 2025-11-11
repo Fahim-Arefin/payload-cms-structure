@@ -4130,6 +4130,47 @@ export interface Page {
           };
           id?: string | null;
         }[];
+        /**
+         * Consent text shown with the application form CTA.
+         */
+        careerOpeningForm?: {
+          /**
+           * Default can be edited. Appears near the Apply/Submit action.
+           */
+          consentText?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * ডিফল্ট লেখা প্রয়োজনমতো পরিবর্তন করতে পারেন। এটি Apply/Submit বাটনের পাশে দেখাবে।
+           */
+          consentTextBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'career-opening';
@@ -4655,6 +4696,59 @@ export interface Page {
         rightTitleBN?: string | null;
         rightButtonText: string;
         rightButtonTextBN?: string | null;
+        /**
+         * Provide at least one email address. All valid ones will receive the feedback submission.
+         */
+        recipientEmails?: {
+          email1?: string | null;
+          email2?: string | null;
+          email3?: string | null;
+          email4?: string | null;
+          email5?: string | null;
+        };
+        /**
+         * If set, feedback emails will use this Sender Name / Reply Email instead of the default SMTP sender.
+         */
+        senderOverride?: {
+          fromName?: string | null;
+          fromEmail?: string | null;
+        };
+        /**
+         * Shown near the submit button. You can bold or link “terms and conditions” and “privacy policy”.
+         */
+        consentText: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * সাবমিট বাটনের কাছে দেখানো হবে। “টার্মস এন্ড কন্ডিশনস” ও “প্রাইভেসি পলিসি”তে লিংক যোগ করতে পারেন।
+         */
+        consentTextBN: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'support-feedback-form';
@@ -6407,6 +6501,12 @@ export interface PagesSelect<T extends boolean = true> {
                         };
                     id?: T;
                   };
+              careerOpeningForm?:
+                | T
+                | {
+                    consentText?: T;
+                    consentTextBN?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -6674,6 +6774,23 @@ export interface PagesSelect<T extends boolean = true> {
               rightTitleBN?: T;
               rightButtonText?: T;
               rightButtonTextBN?: T;
+              recipientEmails?:
+                | T
+                | {
+                    email1?: T;
+                    email2?: T;
+                    email3?: T;
+                    email4?: T;
+                    email5?: T;
+                  };
+              senderOverride?:
+                | T
+                | {
+                    fromName?: T;
+                    fromEmail?: T;
+                  };
+              consentText?: T;
+              consentTextBN?: T;
               id?: T;
               blockName?: T;
             };

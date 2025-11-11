@@ -38,8 +38,8 @@ type Category = {
 type Props = {
   categories: Category[]
   containerBg?: string
-  categoryHeadingEn?: string
-  categoryHeadingBn?: string
+  title?: string
+  titleBN?: string
 }
 
 const KEY_LABELS: Record<Category['key'], string> = {
@@ -54,8 +54,8 @@ const KEY_LABELS: Record<Category['key'], string> = {
 function GeneralFaq({
   categories,
   containerBg = '#F6EDDD',
-  categoryHeadingEn,
-  categoryHeadingBn,
+  title,
+  titleBN,
 }: Props) {
   const lang = useSSRLanguage()
 
@@ -95,8 +95,8 @@ function GeneralFaq({
         <div className="flex items-center space-x-2 md:space-x-4">
           <div className="global-h3 font-semibold lg:font-normal">
             <LocalizedText
-              en={categoryHeadingEn || 'I want to learn more about'}
-              bn={categoryHeadingBn || 'আমি জানতে চাই'}
+              en={title || 'I want to learn more about'}
+              bn={titleBN || 'আমি জানতে চাই'}
             />
           </div>
 

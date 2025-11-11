@@ -34,8 +34,71 @@ const validateShortText =
 const validateEmail = (val: unknown) => {
   const s = (val ?? '').toString().trim()
   if (!s) return true
-  // simple RFC 5322-ish check
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) ? true : 'Provide a valid email address.'
+}
+
+/* ---------------- rich text defaults (Lexical) ---------------- */
+
+const CONSENT_EN_DEFAULT: any = {
+  root: {
+    type: 'root',
+    format: '',
+    indent: 0,
+    direction: 'ltr',
+    version: 1,
+    children: [
+      {
+        type: 'paragraph',
+        format: '',
+        indent: 0,
+        direction: 'ltr',
+        version: 1,
+        children: [
+          {
+            type: 'text',
+            detail: 0,
+            format: 0,
+            mode: 'normal',
+            style: '',
+            text:
+              'By clicking Send Feedback, you agree to our terms and conditions and privacy policy.',
+            version: 1,
+          },
+        ],
+      },
+    ],
+  },
+}
+
+const CONSENT_BN_DEFAULT: any = {
+  root: {
+    type: 'root',
+    format: '',
+    indent: 0,
+    direction: 'ltr',
+    version: 1,
+    children: [
+      {
+        type: 'paragraph',
+        format: '',
+        indent: 0,
+        direction: 'ltr',
+        version: 1,
+        children: [
+          {
+            type: 'text',
+            detail: 0,
+            format: 0,
+            mode: 'normal',
+            style: '',
+            text:
+              'এখানে ক্লিক করার মাধ্যমে, আপনি আমাদের টার্মস এন্ড কন্ডিশনস , ও প্রাইভেসি পলিসিতে সম্মত করছেন।',
+            version: 1,
+          },
+        ],
+      },
+    ],
+  },
 }
 
 /* ---------------- block ---------------- */
@@ -286,7 +349,7 @@ const CareerOpeningSchema: Block = {
               'Single details object for this opening (overview text, responsibilities, requirements, etc.).',
           },
           fields: [
-            // Top Title (EN / BN) - now richText
+            // Top Title (EN / BN) - richText
             {
               type: 'row',
               fields: [
@@ -502,6 +565,45 @@ const CareerOpeningSchema: Block = {
               admin: {
                 description:
                   'Optional. Example: it-project-manager.pdf — this should match the name of the PDF users will download.',
+              },
+            },
+          ],
+        },
+      ],
+    },
+
+    /* ---------- Career Opening Form (consent) ---------- */
+    {
+      name: 'careerOpeningForm',
+      type: 'group',
+      label: 'Career Opening Form', // header in admin
+      admin: {
+        description: 'Consent text shown with the application form CTA.',
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'consentText',
+              type: 'richText',
+              label: 'Consent Text (EN)',
+              defaultValue: CONSENT_EN_DEFAULT,
+              admin: {
+                width: '50%',
+                description:
+                  'Default can be edited. Appears near the Apply/Submit action.',
+              },
+            },
+            {
+              name: 'consentTextBN',
+              type: 'richText',
+              label: 'কনসেন্ট টেক্সট (বাংলা)',
+              defaultValue: CONSENT_BN_DEFAULT,
+              admin: {
+                width: '50%',
+                description:
+                  'ডিফল্ট লেখা প্রয়োজনমতো পরিবর্তন করতে পারেন। এটি Apply/Submit বাটনের পাশে দেখাবে।',
               },
             },
           ],
