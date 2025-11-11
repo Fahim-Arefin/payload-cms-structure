@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import LocalizedText from '../shared/LocalizedText'
 import { CareerPageProcessingBlockType } from '@/types/payloadCustomTypes'
+import { formatLocalizedNumber } from '@/utils/numberLocalization'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
 // import your navigation buttons if you have
 
 // const processData = [
@@ -48,7 +50,7 @@ export default function CareerProcessingFlow({ processData }: Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
-
+  const lang = useSSRLanguage()
   useEffect(() => {
     if (!carouselApi) return
 
@@ -104,7 +106,7 @@ export default function CareerProcessingFlow({ processData }: Props) {
                       style={{ boxShadow: '0px 4px 6px 0px #00000033 inset' }}
                       className="w-[38px] h-[38px] xl:w-[40px] xl:h-[40px] bg-white border border-[#E0E0E0] rounded-[10px] flex items-center justify-center text-[19px] font-bold text-[#343434] z-10 relative"
                     >
-                      {i + 1}
+                      {formatLocalizedNumber(i + 1, lang)}
                     </div>
                     {/* Arrow if not last */}
                     {i < processData?.processingCards.length - 1 && (

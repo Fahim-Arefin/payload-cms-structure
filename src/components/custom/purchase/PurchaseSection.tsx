@@ -256,6 +256,8 @@ const PurchaseSection = ({ block }: Props) => {
               setSelectedPlanCode(planCode)
               setSelectedPlanName(planName)
             }}
+              consentEn={block?.purchaseNowForm?.consentText}
+  consentBn={block?.purchaseNowForm?.consentTextBN}
           />
         </div>
       </div>

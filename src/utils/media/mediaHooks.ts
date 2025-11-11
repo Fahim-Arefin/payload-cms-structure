@@ -139,11 +139,11 @@ export const mediaHooks = withMediaLifecycle({
       blockType: HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG,
       mediaFields: ['trendingBanner'],
     },
-    {
-      layoutKey: 'layout',
-      blockType: CAREER_PAGE_SWIPER_SLUG_AND_TAG,
-      mediaFields: ['backgroundImage'],
-    },
+    // {
+    //   layoutKey: 'layout',
+    //   blockType: CAREER_PAGE_SWIPER_SLUG_AND_TAG,
+    //   mediaFields: ['backgroundImage'],
+    // },
     {
       layoutKey: 'layout',
       blockType: CAREER_PAGE_RESOURCES_SLUG_AND_TAG,

@@ -6,21 +6,15 @@ import { useMemo, useState } from 'react'
 import { BsPlay } from 'react-icons/bs'
 import { useLanguage } from '@/context/LanguageContext'
 
-/** Accept either a plain URL string or a Payload Media object (with nullable url) */
 type MediaLike =
   | string
-  | {
-      url?: string | null
-      alt?: string | null
-      sizes?: Record<string, { url?: (string | null) }>
-      // ...other media fields are fine; we only read url
-    }
+  | { url?: string | null; alt?: string | null; sizes?: Record<string, { url?: string | null }> }
   | null
   | undefined
 
 type NewsItem = {
   image?: MediaLike
-  date: string // ISO string from Payload date field
+  date: string
   title: string
   titleBN?: string | null
   description?: string | null
@@ -34,24 +28,60 @@ type Props = {
   newsItems?: NewsItem[] | null
 }
 
-/** Safely extract a URL from either string or Payload media (nullable url). */
+/** Extract URL from string or Payload media. */
 const getMediaUrl = (m?: MediaLike): string => {
   if (!m) return ''
   if (typeof m === 'string') return m
-  return m.url ?? '' // normalize null → ''
+  return m.url ?? ''
 }
 
-/** Example: "15 Jan 2024 | 10.00am" */
-const formatDateTime = (iso: string) => {
+/* ---------- NEW: Localized date formatter (EN / BN) ---------- */
+const bnMonths = [
+  'জানুয়ারি',
+  'ফেব্রুয়ারি',
+  'মার্চ',
+  'এপ্রিল',
+  'মে',
+  'জুন',
+  'জুলাই',
+  'আগস্ট',
+  'সেপ্টেম্বর',
+  'অক্টোবর',
+  'নভেম্বর',
+  'ডিসেম্বর',
+]
+const toBnDigits = (s: string) =>
+  s.replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)])
+
+/** Examples:
+ * EN -> "15 Jan 2024 | 10.00am"
+ * BN -> "১৫ জানুয়ারি ২০২৪ | ১০.০০ এএম"
+ */
+const formatDateTimeLocalized = (iso: string, lang: 'en' | 'bn' | string) => {
   try {
     const d = new Date(iso)
-    const day = d.getDate().toString().padStart(2, '0')
-    const month = d.toLocaleString('en-US', { month: 'short' })
-    const year = d.getFullYear()
+    if (isNaN(d.getTime())) return iso
+
+    const dayNum = d.getDate()
+    const yearNum = d.getFullYear()
     let hours = d.getHours()
     const mins = d.getMinutes().toString().padStart(2, '0')
     const ampm = hours >= 12 ? 'pm' : 'am'
     hours = hours % 12 || 12
+
+    if (lang === 'bn') {
+      const day = toBnDigits(dayNum.toString().padStart(2, '0'))
+      const month = bnMonths[d.getMonth()]
+      const year = toBnDigits(yearNum.toString())
+      const time = toBnDigits(`${hours}.${mins}`)
+      const bnAmPm = ampm === 'pm' ? 'পিএম' : 'এএম'
+      return `${day} ${month} ${year} | ${time} ${bnAmPm}`
+    }
+
+    // English (existing style)
+    const day = dayNum.toString().padStart(2, '0')
+    const month = d.toLocaleString('en-US', { month: 'short' })
+    const year = yearNum
     return `${day} ${month} ${year} | ${hours}.${mins}${ampm}`
   } catch {
     return iso
@@ -61,12 +91,7 @@ const formatDateTime = (iso: string) => {
 function AllNewsContainer({ mainImage, mainImageSrcLink = '', newsItems }: Props) {
   const { language } = useLanguage()
 
-  // schema enforces exactly 3; defensively slice
-  const items = useMemo(
-    () => (Array.isArray(newsItems) ? newsItems.slice(0, 3) : []),
-    [newsItems]
-  )
-
+  const items = useMemo(() => (Array.isArray(newsItems) ? newsItems.slice(0, 3) : []), [newsItems])
   const heroSrc = getMediaUrl(mainImage)
 
   const [heroOpen, setHeroOpen] = useState(false)
@@ -164,7 +189,7 @@ function AllNewsContainer({ mainImage, mainImageSrcLink = '', newsItems }: Props
             language === 'bn'
               ? item.descriptionBN || item.description || ''
               : item.description || item.descriptionBN || ''
-          const dateStr = formatDateTime(item.date)
+          const dateStr = formatDateTimeLocalized(item.date, language)
 
           return (
             <div key={idx} className="flex items-center space-x-4 lg:space-x-6 h-fit">

@@ -3697,13 +3697,41 @@ export interface Page {
          */
         highlightedTitleBN?: string | null;
         /**
-         * 1–2 short sentences. Max 200 characters.
+         * 1–2 short sentences. Max 300 characters (guideline).
          */
-        description: string;
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
         /**
-         * ১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ২০০ অক্ষর।
+         * ১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ৩০০ অক্ষরের মধ্যে রাখার পরামর্শ।
          */
-        descriptionBN: string;
+        descriptionBN: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'career-intro';
@@ -3734,16 +3762,9 @@ export interface Page {
          */
         descriptionBN: string;
         /**
-         * Background image for the swiper section. Recommended 16:9.
+         * Absolute https URL to your GIF asset. Internal paths are not allowed. Max 400 characters.
          */
-        backgroundImage: string | Media;
-        backgroundImageOriginal?: (string | null) | Media;
-        pendingBackgroundImageOriginal?: string | null;
-        pendingBackgroundImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        backgroundImageBlurDataURL?: string | null;
+        backgroundGifUrl: string;
         /**
          * Add one or more cards to display in the swiper.
          */
@@ -3806,6 +3827,22 @@ export interface Page {
          * Auto-generated Base64 blur
          */
         backgroundImageBlurDataURL?: string | null;
+        /**
+         * Label for the "Read More" button. Optional. Max 24 characters.
+         */
+        readMoreButtonText?: string | null;
+        /**
+         * “Read More” বাটনের জন্য বাংলা টেক্সট। ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        readMoreButtonTextBN?: string | null;
+        /**
+         * Label for the "Read Less" button (collapse). Optional. Max 24 characters.
+         */
+        readLessButtonText?: string | null;
+        /**
+         * “Read Less” (কম দেখানোর) বাটনের জন্য বাংলা টেক্সট। ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        readLessButtonTextBN?: string | null;
         /**
          * Add one or more resource cards.
          */
@@ -3910,13 +3947,92 @@ export interface Page {
            */
           detailsBtnTextBN?: string | null;
           /**
-           * Add one or more detail entries (title, responsibilities, requirements, location, deadline, etc.).
+           * Single details object for this opening (overview text, responsibilities, requirements, etc.).
            */
-          detailsData: {
+          details: {
+            /**
+             * Intro heading above details (rich text, English).
+             */
+            topTitle?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            /**
+             * ডিটেইলস-এর উপরে ইন্ট্রো শিরোনাম (রিচ টেক্সট, বাংলা)।
+             */
+            topTitleBN?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            /**
+             * Intro rich text above responsibilities/requirements.
+             */
+            topDescription?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            /**
+             * বিস্তারিতের আগে ইন্ট্রো বর্ণনা (রিচ টেক্সট)।
+             */
+            topDescriptionBN?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
             /**
              * Section title (e.g., “Role Overview”). Max 80 characters.
              */
             title: string;
+            /**
+             * পদের নাম। সর্বোচ্চ ৮০ অক্ষর।
+             */
+            titleBN: string;
+            /**
+             * Key responsibilities for this role (English).
+             */
             responsibilities: {
               root: {
                 type: string;
@@ -3932,7 +4048,46 @@ export interface Page {
               };
               [k: string]: unknown;
             };
+            /**
+             * এই পদের মূল দায়িত্বসমূহ (বাংলা)।
+             */
+            responsibilitiesBN: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            /**
+             * Job requirements / qualifications (English).
+             */
             requirements: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            /**
+             * পদের জন্য প্রয়োজনীয় যোগ্যতা ও শর্তাবলি (বাংলা)।
+             */
+            requirementsBN: {
               root: {
                 type: string;
                 children: {
@@ -3951,6 +4106,10 @@ export interface Page {
              * City/Office. Max 60 characters.
              */
             location?: string | null;
+            /**
+             * শহর/অফিসের নাম। সর্বোচ্চ ৬০ অক্ষর।
+             */
+            locationBN?: string | null;
             deadline: string;
             /**
              * Email to receive applications.
@@ -3965,13 +4124,53 @@ export interface Page {
              */
             footer?: string | null;
             /**
-             * Optional. Max 80 characters.
+             * Optional. Example: it-project-manager.pdf — this should match the name of the PDF users will download.
              */
             filename?: string | null;
-            id?: string | null;
-          }[];
+          };
           id?: string | null;
         }[];
+        /**
+         * Consent text shown with the application form CTA.
+         */
+        careerOpeningForm?: {
+          /**
+           * Default can be edited. Appears near the Apply/Submit action.
+           */
+          consentText?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * ডিফল্ট লেখা প্রয়োজনমতো পরিবর্তন করতে পারেন। এটি Apply/Submit বাটনের পাশে দেখাবে।
+           */
+          consentTextBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'career-opening';
@@ -4288,11 +4487,12 @@ export interface Page {
       }
     | {
         faqTab: {
-          value: 'general' | 'form';
+          /**
+           * Internal key used by frontend routing. Typically "general" for this FAQ tab.
+           */
+          value: string;
           label: string;
           labelBN: string;
-          categoryTitle?: string | null;
-          categoryTitleBN?: string | null;
           /**
            * Hex color in #RRGGBB (e.g., #F6EDDD).
            */
@@ -4352,7 +4552,10 @@ export interface Page {
             | null;
         };
         formsTab: {
-          value: 'general' | 'form';
+          /**
+           * Internal key used by frontend routing. Typically "form" for this Download Forms tab.
+           */
+          value: string;
           label: string;
           labelBN: string;
           /**
@@ -4412,7 +4615,14 @@ export interface Page {
          * Main “ALL” feed. Uses the top-level Main Image. Contains a source link and exactly 3 news cards.
          */
         allTab: {
-          value: 'all' | 'ovc';
+          /**
+           * Fixed: "all" (string).
+           */
+          value: string;
+          /**
+           * ডিফল্ট: “সকল”.
+           */
+          valueBN: string;
           mainImageSrcLink?: string | null;
           /**
            * Exactly 3 items. Each uses a single 16:9 image, real date, EN/BN title/description, and optional YouTube link.
@@ -4447,7 +4657,14 @@ export interface Page {
          * Uses the top-level Background Image. Add headline (EN/BN) and optional YouTube link for the modal.
          */
         ovcTab: {
-          value: 'all' | 'ovc';
+          /**
+           * Fixed: "OVC" (string).
+           */
+          value: string;
+          /**
+           * ডিফল্ট: “অভিসি/টিভিসি”.
+           */
+          valueBN: string;
           title?: string | null;
           titleBN?: string | null;
           highlightedTitle?: string | null;
@@ -4479,6 +4696,59 @@ export interface Page {
         rightTitleBN?: string | null;
         rightButtonText: string;
         rightButtonTextBN?: string | null;
+        /**
+         * Provide at least one email address. All valid ones will receive the feedback submission.
+         */
+        recipientEmails?: {
+          email1?: string | null;
+          email2?: string | null;
+          email3?: string | null;
+          email4?: string | null;
+          email5?: string | null;
+        };
+        /**
+         * If set, feedback emails will use this Sender Name / Reply Email instead of the default SMTP sender.
+         */
+        senderOverride?: {
+          fromName?: string | null;
+          fromEmail?: string | null;
+        };
+        /**
+         * Shown near the submit button. You can bold or link “terms and conditions” and “privacy policy”.
+         */
+        consentText: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * সাবমিট বাটনের কাছে দেখানো হবে। “টার্মস এন্ড কন্ডিশনস” ও “প্রাইভেসি পলিসি”তে লিংক যোগ করতে পারেন।
+         */
+        consentTextBN: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'support-feedback-form';
@@ -4570,6 +4840,41 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        /**
+         * Consent line shown under the premium calculator form submit/CTA.
+         */
+        premiumCalculatorForm?: {
+          consentText?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          consentTextBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'prem-calculator-card';
@@ -4620,6 +4925,47 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        /**
+         * Consent text shown under the Purchase form submit button (localized EN/BN).
+         */
+        purchaseNowForm?: {
+          /**
+           * Rich text consent displayed in English under the form submit area.
+           */
+          consentText?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * বাংলা কনসেন্ট টেক্সট (ফর্ম সাবমিট অংশে দেখানো হবে)।
+           */
+          consentTextBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'purchase-form';
@@ -4630,6 +4976,8 @@ export interface Page {
          * Hex color in #RRGGBB. Default: #f6eddd
          */
         bgColor?: string | null;
+        formHeader?: string | null;
+        formHeaderBN?: string | null;
         description: {
           root: {
             type: string;
@@ -4662,6 +5010,42 @@ export interface Page {
         } | null;
         subdescription?: string | null;
         subdescriptionBN?: string | null;
+        /**
+         * Shown near the submit action on the Agent form. Default provided; you can customize.
+         */
+        consentText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * এজেন্ট ফর্মের সাবমিট বাটনের কাছে প্রদর্শিত হবে। ডিফল্ট দেয়া আছে; প্রয়োজনে সম্পাদনা করুন।
+         */
+        consentTextBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'agent-form';
@@ -6146,11 +6530,7 @@ export interface PagesSelect<T extends boolean = true> {
               subtitleBN?: T;
               description?: T;
               descriptionBN?: T;
-              backgroundImage?: T;
-              backgroundImageOriginal?: T;
-              pendingBackgroundImageOriginal?: T;
-              pendingBackgroundImageCrop?: T;
-              backgroundImageBlurDataURL?: T;
+              backgroundGifUrl?: T;
               cards?:
                 | T
                 | {
@@ -6177,6 +6557,10 @@ export interface PagesSelect<T extends boolean = true> {
               pendingBackgroundImageOriginal?: T;
               pendingBackgroundImageCrop?: T;
               backgroundImageBlurDataURL?: T;
+              readMoreButtonText?: T;
+              readMoreButtonTextBN?: T;
+              readLessButtonText?: T;
+              readLessButtonTextBN?: T;
               cards?:
                 | T
                 | {
@@ -6216,21 +6600,34 @@ export interface PagesSelect<T extends boolean = true> {
                     btnTextBN?: T;
                     detailsBtnText?: T;
                     detailsBtnTextBN?: T;
-                    detailsData?:
+                    details?:
                       | T
                       | {
+                          topTitle?: T;
+                          topTitleBN?: T;
+                          topDescription?: T;
+                          topDescriptionBN?: T;
                           title?: T;
+                          titleBN?: T;
                           responsibilities?: T;
+                          responsibilitiesBN?: T;
                           requirements?: T;
+                          requirementsBN?: T;
                           location?: T;
+                          locationBN?: T;
                           deadline?: T;
                           applyEmail?: T;
                           subjectLine?: T;
                           footer?: T;
                           filename?: T;
-                          id?: T;
                         };
                     id?: T;
+                  };
+              careerOpeningForm?:
+                | T
+                | {
+                    consentText?: T;
+                    consentTextBN?: T;
                   };
               id?: T;
               blockName?: T;
@@ -6385,8 +6782,6 @@ export interface PagesSelect<T extends boolean = true> {
                     value?: T;
                     label?: T;
                     labelBN?: T;
-                    categoryTitle?: T;
-                    categoryTitleBN?: T;
                     backgroundColor?: T;
                     title?: T;
                     titleBN?: T;
@@ -6451,6 +6846,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     value?: T;
+                    valueBN?: T;
                     mainImageSrcLink?: T;
                     newsItems?:
                       | T
@@ -6473,6 +6869,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     value?: T;
+                    valueBN?: T;
                     title?: T;
                     titleBN?: T;
                     highlightedTitle?: T;
@@ -6499,6 +6896,23 @@ export interface PagesSelect<T extends boolean = true> {
               rightTitleBN?: T;
               rightButtonText?: T;
               rightButtonTextBN?: T;
+              recipientEmails?:
+                | T
+                | {
+                    email1?: T;
+                    email2?: T;
+                    email3?: T;
+                    email4?: T;
+                    email5?: T;
+                  };
+              senderOverride?:
+                | T
+                | {
+                    fromName?: T;
+                    fromEmail?: T;
+                  };
+              consentText?: T;
+              consentTextBN?: T;
               id?: T;
               blockName?: T;
             };
@@ -6523,6 +6937,12 @@ export interface PagesSelect<T extends boolean = true> {
                     cardTextColor?: T;
                     id?: T;
                   };
+              premiumCalculatorForm?:
+                | T
+                | {
+                    consentText?: T;
+                    consentTextBN?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -6540,6 +6960,12 @@ export interface PagesSelect<T extends boolean = true> {
                     cardBg?: T;
                     id?: T;
                   };
+              purchaseNowForm?:
+                | T
+                | {
+                    consentText?: T;
+                    consentTextBN?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -6548,10 +6974,14 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               uploadSessionId?: T;
               bgColor?: T;
+              formHeader?: T;
+              formHeaderBN?: T;
               description?: T;
               descriptionBN?: T;
               subdescription?: T;
               subdescriptionBN?: T;
+              consentText?: T;
+              consentTextBN?: T;
               id?: T;
               blockName?: T;
             };

@@ -423,6 +423,8 @@ const CalculatorSection = ({ block }: Props) => {
             onApiResponse={handleApiResponse}
             formData={formData}
             setFormData={setFormData}
+            consentEn={block?.premiumCalculatorForm?.consentText}
+            consentBn={block?.premiumCalculatorForm?.consentTextBN}
           />
         </div>
       </div>

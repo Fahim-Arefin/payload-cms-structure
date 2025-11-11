@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import DatePicker from 'react-datepicker'
+// @ts-ignore: side-effect import of CSS without type declarations
 import 'react-datepicker/dist/react-datepicker.css'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { format } from 'date-fns'
@@ -33,6 +34,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
+import LocalizedRichText from '../shared/LocalizedRichText'
 
 type FormData = {
   PlanCode: number
@@ -52,9 +54,11 @@ type Props = {
   onApiResponse?: (response: ApiResponse, paymentMode: string, planName?: string) => void
   formData: FormData
   setFormData: React.Dispatch<React.SetStateAction<FormData>>
+  consentEn?: any | null
+  consentBn?: any | null
 }
 
-function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
+function CalculateForm({ onApiResponse, formData, setFormData, consentBn, consentEn }: Props) {
   // ===== Localization helper =====
   const lang = useSSRLanguage()
   const L = (en: string, bn?: string) => (lang === 'en' ? en : (bn ?? en))
@@ -1083,29 +1087,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             checked={agreeTerms}
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
-          <span className="text-xs md:text-sm leading-relaxed">
-            By clicking <span className="font-semibold">Request for purchase</span>, you agree to
-            our{' '}
-            <Link
-              href="/terms-condition"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              terms and conditions
-            </Link>{' '}
-            and Shanta Life
-            <Link
-              href="/privacy-policy"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {' '}
-              privacy policy
-            </Link>
-            .
-          </span>
+          <div className="text-xs md:text-sm leading-relaxed">
+            <LocalizedRichText en={consentEn} bn={consentBn} />
+          </div>
         </label>
       </div>
 

@@ -1,3 +1,4 @@
+// src/components/custom/support/MapTabSection.tsx
 'use client'
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -12,6 +13,7 @@ type Props = {
   data: any[] // keep as-is (your TabDataType[] datasets)
   initialTab?: string
   bgColor?: string
+  onTabChange?: (val: 'hospitals' | 'branches') => void // NEW
 }
 
 // Narrowed tabItem type (value can only be 'hospitals' or 'branches')
@@ -27,7 +29,7 @@ type TabItemFromBlock = {
   secondaryLabelColor?: string
 }
 
-export function MapTabSection({ config, data, initialTab, bgColor }: Props) {
+export function MapTabSection({ config, data, initialTab, bgColor, onTabChange }: Props) { // NEW (accept onTabChange)
   const lang = useSSRLanguage()
 
   // Normalize & narrow the tabItems to the strict union
@@ -44,6 +46,11 @@ export function MapTabSection({ config, data, initialTab, bgColor }: Props) {
       .filter(Boolean) as TabItemFromBlock[]
   }, [config])
 
+  const allowedValues = useMemo<('hospitals' | 'branches')[]>(
+    () => tabs.map((t) => t.value),
+    [tabs]
+  ) // NEW
+
   const firstValue = tabs[0]?.value
   const [activeTab, setActiveTab] = useState<string>(initialTab || firstValue || '')
 
@@ -52,6 +59,29 @@ export function MapTabSection({ config, data, initialTab, bgColor }: Props) {
     else if (!activeTab && firstValue) setActiveTab(firstValue)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialTab, firstValue])
+
+  // Apply URL hash on mount + when it changes (e.g., /support#hospitals)
+  useEffect(() => {
+    const applyHash = () => {
+      const raw = (window.location.hash || '').replace(/^#/, '')
+      if (raw && allowedValues.includes(raw as any)) {
+        setActiveTab(raw)
+      }
+    }
+    applyHash()
+    window.addEventListener('hashchange', applyHash)
+    return () => window.removeEventListener('hashchange', applyHash)
+  }, [allowedValues]) // NEW
+
+  // When user switches tabs, update hash + bubble up
+  const handleTabChange = (val: string) => { // NEW
+    const v = (val as 'hospitals' | 'branches')
+    setActiveTab(v)
+    if (typeof window !== 'undefined' && window.location.hash !== `#${v}`) {
+      history.replaceState(null, '', `#${v}`)
+    }
+    onTabChange?.(v)
+  }
 
   // Colors from schema (fallbacks preserved)
   const primaryColor = config?.primaryLabelColor || '#ED7125'
@@ -69,7 +99,7 @@ export function MapTabSection({ config, data, initialTab, bgColor }: Props) {
         )}
         style={bgColor ? { backgroundColor: bgColor } : undefined}
       >
-        <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <Tabs value={activeTab} onValueChange={handleTabChange}> {/* NEW */}
           <div
             className={cn(
               'relative w-full border-b border-[#434343] md:py-[12px] bg-white',

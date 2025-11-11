@@ -15,6 +15,7 @@ const DESC_MAX = 80
 
 const CARD_TITLE_MAX = 50
 const CARD_DESC_MAX = 200
+const URL_MAX = 400 // ⬅️ added for GIF URL max length
 
 /* ---------------- validators ---------------- */
 const validateShortText =
@@ -137,16 +138,31 @@ const CareerSwiperSchema: Block = {
       ],
     },
 
-    // Background Image (cropper-based field)
-    ...generateImageFields({
-      fieldName: 'backgroundImage',
-      label: 'Background Image',
-      description: 'Background image for the swiper section. Recommended 16:9.',
-      aspectRatio: 16 / 9,
-      quality: 0.93,
-      maxKB: 500,
-      ownerCollection: CAREER_PAGE_SWIPER_SLUG_AND_TAG as any,
-    } as any),
+    // // Background Image (cropper-based field)
+    // ...generateImageFields({
+    //   fieldName: 'backgroundImage',
+    //   label: 'Background Image',
+    //   description: 'Background image for the swiper section. Recommended 16:9.',
+    //   aspectRatio: 16 / 9,
+    //   quality: 0.93,
+    //   maxKB: 500,
+    //   ownerCollection: CAREER_PAGE_SWIPER_SLUG_AND_TAG as any,
+    // } as any),
+
+        /* --------- Background GIF (https only) --------- */
+    {
+      name: 'backgroundGifUrl',
+      type: 'text',
+      required: true,
+      label: 'Background GIF URL (https)',
+      maxLength: URL_MAX,
+      // validate: validateHTTPSOnlyUrl('Background GIF URL', URL_MAX, true),
+      defaultValue: '/assets/career/web/careerSwiperBanner.gif',
+      admin: {
+        description:
+          'Absolute https URL to your GIF asset. Internal paths are not allowed. Max 400 characters.',
+      },
+    },
 
     // Cards array
     {

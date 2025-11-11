@@ -7,14 +7,13 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 import { Checkbox } from '@/components/ui/checkbox'
-import Link from 'next/link'
 
 import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 import LocalizedString from '../shared/LocalizedString'
 import LocalizedText from '../shared/LocalizedText'
+import LocalizedRichText from '../shared/LocalizedRichText'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
 
-// 👉 keep your actual type import, but we won't use MediaField anywhere
 import type { SupportFeedbackFormBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
@@ -26,9 +25,7 @@ function mediaToUrl(src: any): string {
   if (!src) return ''
   if (typeof src === 'string') return src
   if (typeof src === 'object') {
-    // prefer top-level url
     if (typeof src.url === 'string' && src.url) return src.url
-    // fallback: first sizes url if available
     if (src.sizes && typeof src.sizes === 'object') {
       const first = Object.values(src.sizes)[0] as any
       if (first && typeof first.url === 'string') return first.url
@@ -53,9 +50,15 @@ function FeedBackSection({ block }: Props) {
   const rightBtnEn = block?.rightButtonText ?? ''
   const rightBtnBn = block?.rightButtonTextBN ?? ''
 
-  // ==== form state (unchanged)
+  // consent rich text from schema
+  const consentEN = block?.consentText
+  const consentBN = block?.consentTextBN
+
+  // ==== form state
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  const [sendButtonText, setSendButtonText] = useState<'Send Feedback' | 'Sending...' | 'Feedback Sent'>('Send Feedback')
+  const [sendButtonText, setSendButtonText] = useState<
+    'Send Feedback' | 'Sending...' | 'Feedback Sent'
+  >('Send Feedback')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -65,6 +68,15 @@ function FeedBackSection({ block }: Props) {
   const [emailError, setEmailError] = useState('')
   const [phoneError, setPhoneError] = useState('')
   const [agreeTerms, setAgreeTerms] = useState(false)
+
+  // 1–3 recipients from block
+  const recipients = [
+    block?.recipientEmails?.email1,
+    block?.recipientEmails?.email2,
+    block?.recipientEmails?.email3,
+    block?.recipientEmails?.email4,
+    block?.recipientEmails?.email5,
+  ].filter((e): e is string => !!e && !!e.trim())
 
   const localizedSendText =
     sendButtonText === 'Sending...'
@@ -84,7 +96,18 @@ function FeedBackSection({ block }: Props) {
       await fetch('/api/emails/feedback', {
         method: 'POST',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone, address, feedback }),
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          address,
+          feedback,
+          recipients,
+          senderOverride: {
+            fromName: block?.senderOverride?.fromName || null,
+            fromEmail: block?.senderOverride?.fromEmail || null,
+          },
+        }),
       }).then((r) => r.json())
       setSendButtonText('Feedback Sent')
       setTimeout(() => setSendButtonText('Send Feedback'), 1500)
@@ -146,7 +169,8 @@ function FeedBackSection({ block }: Props) {
                   const value = e.target.value
                   setEmail(value)
                   if (value.trim() === '') setEmailError(t('Email is required', 'ইমেইল প্রয়োজন'))
-                  else if (!emailRegex.test(value)) setEmailError(t('Enter a valid email address', 'সঠিক ইমেইল লিখুন'))
+                  else if (!emailRegex.test(value))
+                    setEmailError(t('Enter a valid email address', 'সঠিক ইমেইল লিখুন'))
                   else setEmailError('')
                 }}
                 type="email"
@@ -162,9 +186,12 @@ function FeedBackSection({ block }: Props) {
                   let value = e.target.value.replace(/\D/g, '')
                   if (value.length > 11) value = value.slice(0, 11)
                   setPhone(value)
-                  if (value.length === 0) setPhoneError(t('Phone number is required', 'ফোন নম্বর প্রয়োজন'))
+                  if (value.length === 0)
+                    setPhoneError(t('Phone number is required', 'ফোন নম্বর প্রয়োজন'))
                   else if (value.length !== 11)
-                    setPhoneError(t('Phone number must be exactly 11 digits', 'ফোন নম্বর ১১ সংখ্যার হতে হবে'))
+                    setPhoneError(
+                      t('Phone number must be exactly 11 digits', 'ফোন নম্বর ১১ সংখ্যার হতে হবে'),
+                    )
                   else setPhoneError('')
                 }}
                 type="tel"
@@ -182,7 +209,7 @@ function FeedBackSection({ block }: Props) {
               className="bg-white text-black w-full shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] rounded-[8px] lg:rounded-[10px] xl:rounded-[12px] h-[45px] lg:h-[50px] xl:h-[60px]"
             />
 
-            {/* Consent (desktop) */}
+            {/* Consent (desktop) — now rendered from RichText fields */}
             <div className="hidden lg:block">
               <label className="flex items-start gap-3">
                 <Checkbox
@@ -190,19 +217,9 @@ function FeedBackSection({ block }: Props) {
                   checked={agreeTerms}
                   onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
                 />
-                <span className="text-xs md:text-sm leading-relaxed">
-                  <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
-                  <span className="font-semibold"><LocalizedText en="Send Feedback" bn="আপনি আমাদের " /></span>
-                  <LocalizedText en=", you agree to our " bn="" />
-                  <Link href="/terms-condition" className="underline text-[#FF6600] hover:opacity-90" target="_blank" rel="noopener noreferrer">
-                    <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
-                  </Link>{' '}
-                  <LocalizedText en="and " bn=", ও " />
-                  <Link href="/privacy-policy" className="underline text-[#FF6600] hover:opacity-90" target="_blank" rel="noopener noreferrer">
-                    <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
-                  </Link>
-                  <LocalizedText en="." bn="সম্মত করছেন।" />
-                </span>
+                <div className="text-xs md:text-sm leading-relaxed">
+                  <LocalizedRichText en={consentEN} bn={consentBN} />
+                </div>
               </label>
             </div>
 
@@ -214,10 +231,18 @@ function FeedBackSection({ block }: Props) {
               className={[
                 'hidden lg:block h-[45px] lg:h-[50px] xl:h-[60px] lg:w-[180px] xl:w-[240px]',
                 'lg:rounded-[6px] xl:rounded-[8px] font-normal lg:text-[16px] xl:text-[18px]',
-                sendButtonText === 'Sending...' || !agreeTerms ? 'opacity-60 cursor-not-allowed' : '',
+                sendButtonText === 'Sending...' || !agreeTerms
+                  ? 'opacity-60 cursor-not-allowed'
+                  : '',
               ].join(' ')}
             >
-              {sendButtonText == 'Sending...' ? <Loader className="inline mb-1" /> : sendButtonText == 'Feedback Sent' ? <MailCheck className="inline mb-1" /> : <SendHorizontal className="inline mb-1" />}
+              {sendButtonText == 'Sending...' ? (
+                <Loader className="inline mb-1" />
+              ) : sendButtonText == 'Feedback Sent' ? (
+                <MailCheck className="inline mb-1" />
+              ) : (
+                <SendHorizontal className="inline mb-1" />
+              )}
               <span className="ml-2.5">{localizedSendText}</span>
             </Button>
           </div>
@@ -232,10 +257,14 @@ function FeedBackSection({ block }: Props) {
                 className="shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] w-full 
                   h-[150px] lg:h-[258px] xl:h-[332px] bg-white text-black p-5 rounded-[8px] lg:rounded-[10px] xl:rounded-[12px]"
               />
-              {requiredError && <p className="text-red-500 text-sm">{t('Please fill out all the fields', 'সব ঘর পূরণ করুন')}</p>}
+              {requiredError && (
+                <p className="text-red-500 text-sm">
+                  {t('Please fill out all the fields', 'সব ঘর পূরণ করুন')}
+                </p>
+              )}
             </div>
 
-            {/* Consent (mobile) */}
+            {/* Consent (mobile) — now rendered from RichText fields */}
             <div className="lg:hidden mb-2">
               <label className="flex items-start gap-3">
                 <Checkbox
@@ -243,19 +272,9 @@ function FeedBackSection({ block }: Props) {
                   checked={agreeTerms}
                   onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
                 />
-                <span className="text-xs md:text-sm leading-relaxed">
-                  <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
-                  <span className="font-semibold"><LocalizedText en="Send Feedback" bn="আপনি আমাদের " /></span>
-                  <LocalizedText en=", you agree to our " bn="" />
-                  <Link href="/terms-condition" className="underline text-[#FF6600] hover:opacity-90" target="_blank" rel="noopener noreferrer">
-                    <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
-                  </Link>{' '}
-                  <LocalizedText en="and " bn=", ও " />
-                  <Link href="/privacy-policy" className="underline text-[#FF6600] hover:opacity-90" target="_blank" rel="noopener noreferrer">
-                    <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
-                  </Link>
-                  <LocalizedText en="." bn="সম্মত করছেন।" />
-                </span>
+                <div className="text-xs md:text-sm leading-relaxed">
+                  <LocalizedRichText en={consentEN} bn={consentBN} />
+                </div>
               </label>
             </div>
 
@@ -268,10 +287,18 @@ function FeedBackSection({ block }: Props) {
                 className={[
                   'lg:hidden h-[45px] lg:h-[50px] xl:h-[60px] lg:w-[180px] xl:w-[240px]',
                   'lg:rounded-[6px] xl:rounded-[8px] font-normal flex items-center',
-                  sendButtonText === 'Sending...' || !agreeTerms ? 'opacity-60 cursor-not-allowed' : '',
+                  sendButtonText === 'Sending...' || !agreeTerms
+                    ? 'opacity-60 cursor-not-allowed'
+                    : '',
                 ].join(' ')}
               >
-                {sendButtonText == 'Sending...' ? <Loader className="inline mb-1" /> : sendButtonText == 'Feedback Sent' ? <MailCheck className="inline mb-1" /> : <SendHorizontal className="inline mb-1" />}
+                {sendButtonText == 'Sending...' ? (
+                  <Loader className="inline mb-1" />
+                ) : sendButtonText == 'Feedback Sent' ? (
+                  <MailCheck className="inline mb-1" />
+                ) : (
+                  <SendHorizontal className="inline mb-1" />
+                )}
                 <span className="">{localizedSendText}</span>
               </Button>
             </div>
@@ -299,8 +326,10 @@ function FeedBackSection({ block }: Props) {
               </div>
             </div>
           </div>
-        </div>{/* grid */}
-      </div>{/* Foreground */}
+        </div>
+        {/* grid */}
+      </div>
+      {/* Foreground */}
     </div>
   )
 }

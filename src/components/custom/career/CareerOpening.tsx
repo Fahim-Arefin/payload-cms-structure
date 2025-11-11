@@ -1,9 +1,10 @@
+// src/components/custom/career/CareerOpening.tsx
 'use client'
 
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import CareerOpeningForm from './CareerOpeningForm'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import CareerOpeningCard from './CareerOpeningCard'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import { JoinOurTeamMobile } from './JoinOurTeamMobile'
@@ -16,12 +17,15 @@ type CareerOpeningDataProps = {
   openingData: CareerPageOpeningBlockType
 }
 
-// shape of a single detail entry inside a card (matches your schema)
 type OpeningDetail = {
   title?: string
-  responsibilities?: any // Payload RichText JSON
-  requirements?: any // Payload RichText JSON
+  titleBN?: string
+  responsibilities?: any
+  responsibilitiesBN?: any
+  requirements?: any
+  requirementsBN?: any
   location?: string
+  locationBN?: string
   deadline?: string
   applyEmail?: string
   subjectLine?: string
@@ -37,20 +41,19 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
 
   const [openDetails, setOpenDetails] = useState<{
     open: boolean
-    details?: OpeningDetail[] // ← now we store the clicked card’s detailsData array
+    details?: OpeningDetail[]
   }>({ open: false })
 
-  const handleViewDetails = (detailsFromCard?: OpeningDetail[] | null) => {
-    if (detailsFromCard && detailsFromCard.length) {
-      setOpenDetails({ open: true, details: detailsFromCard })
-    }
+  // ✅ Normalize details (group or array)
+  const handleViewDetails = (rawDetails?: OpeningDetail | OpeningDetail[] | null) => {
+    if (!rawDetails) return
+    const normalized = Array.isArray(rawDetails) ? rawDetails : [rawDetails]
+    if (!normalized.length) return
+    setOpenDetails({ open: true, details: normalized })
   }
 
-  const handleApply = (type: string, title: string) => {
-    // keep your existing position mapping logic, or simplify as you wish
+  const handleApply = (_type: string, title: string) => {
     setPos(title)
-    // const formEl = document.querySelector('#career-opening-section form')
-    // if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
   useEffect(() => {
@@ -66,6 +69,31 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
     }
   }, [carouselApi])
 
+  // ✅ Build positions from cards (value + localized labels)
+  const positions = useMemo(
+    () => {
+      const seen = new Set<string>()
+      return (openingData?.cards ?? [])
+        .map((c: any) => {
+          const value = (c?.title ?? '').trim()
+          if (!value) return null
+          if (seen.has(value)) return null
+          seen.add(value)
+          return {
+            value,
+            labelEn: c?.title ?? '',
+            labelBn: c?.titleBN ?? c?.title ?? '',
+          }
+        })
+        .filter(Boolean) as { value: string; labelEn: string; labelBn?: string }[]
+    },
+    [openingData?.cards]
+  )
+
+  // ✅ Read consent richtext from block.careerOpeningForm
+  const consentEN = (openingData as any)?.careerOpeningForm?.consentText ?? null
+  const consentBN = (openingData as any)?.careerOpeningForm?.consentTextBN ?? null
+
   return (
     <section id="career-opening-section" className="container-padding w-full bg-[#F6EDDD] py-12">
       <div className="mb-8 lg:mb-10">
@@ -74,7 +102,6 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
             <LocalizedText en={openingData?.title} bn={openingData?.titleBN} />
           </span>
           <span className="block text-[#ED7125] font-bold text-[18px] md:text-[34px] xl:text-[50px] -mt-1">
-            {/* fixed BN prop (was using subtitle twice) */}
             <LocalizedText en={openingData?.subtitle} bn={openingData?.subtitleBN} />
           </span>
         </div>
@@ -90,8 +117,7 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
                 key={idx}
                 {...card}
                 onApply={handleApply}
-                // pass the card’s detailsData to the handler
-                onViewDetails={() => handleViewDetails(card?.detailsData)}
+                onViewDetails={() => handleViewDetails(card?.details)}
               />
             ))}
           </div>
@@ -109,7 +135,7 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
                     <CareerOpeningCard
                       {...card}
                       onApply={handleApply}
-                      onViewDetails={() => handleViewDetails(card?.detailsData)}
+                      onViewDetails={() => handleViewDetails(card?.details)}
                     />
                   </CarouselItem>
                 ))}
@@ -126,10 +152,15 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
             </Carousel>
           </div>
 
-          {/* Details modal (now uses details array from card) */}
+          {/* Details modal */}
           <CareerDetailsModal
             open={openDetails.open}
-            onOpenChange={(o: boolean) => setOpenDetails({ open: o })}
+            onOpenChange={(o: boolean) =>
+              setOpenDetails((prev) => ({
+                ...prev,
+                open: o,
+              }))
+            }
             details={openDetails.details}
           />
         </div>
@@ -138,7 +169,13 @@ export default function CareerOpening({ openingData }: CareerOpeningDataProps) {
         <div className="mt-10 md:mt-0 h-full">
           <JoinOurTeamMobile />
           <div className="hidden md:block h-full">
-            <CareerOpeningForm pos={pos} setPos={setPos} />
+            <CareerOpeningForm
+              pos={pos}
+              setPos={setPos}
+              positions={positions}          
+              consentEN={consentEN}           
+              consentBN={consentBN}          
+            />
           </div>
         </div>
       </div>

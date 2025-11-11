@@ -117,54 +117,38 @@ const SupportOVCSection: FC<SupportOVCSectionProps> = ({
           />
 
           {/* Trigger row */}
-          <div className="-mt-14 lg:-mt-16 xl:-mt-20">
+          <div className=" -mt-14 lg:-mt-16 xl:-mt-20">
             <div className="flex items-center justify-between w-[85%] mx-auto">
               <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                  <button
-                    type="button"
-                    className="flex space-x-2 2xl:space-x-4 text-white items-center cursor-pointer"
-                  >
-                    <span className="border-2 border-white rounded-full p-1 2xl:p-2">
+                  <div className="flex space-x-2 2xl:space-x-4 text-white items-center cursor-pointer">
+                    <div className="border-2 border-white rounded-full p-1 2xl:p-2">
                       <BsPlay />
-                    </span>
-                    <span className="text-white/70 global-p2">From the Expert</span>
-                  </button>
+                    </div>
+                    <div className="text-white/70 global-p2">From the Expert</div>
+                  </div>
                 </DialogTrigger>
 
-                {/* NOTE: Keep content relative so we can place a poster behind the iframe if wanted */}
                 <DialogContent
-                  className="relative max-w-5xl w-full aspect-video p-0 bg-black
-                             [&>button.absolute]:top-3 [&>button.absolute]:right-3
-                             [&>button.absolute]:bg-black/50
-                             [&>button.absolute]:text-white
-                             [&>button.absolute]:hover:bg-black/80"
+                  className="max-w-5xl w-full aspect-video p-0 bg-black 
+                      [&>button.absolute]:top-3 [&>button.absolute]:right-3 
+                      [&>button.absolute]:bg-black/50 
+                      [&>button.absolute]:text-white 
+                      [&>button.absolute]:hover:bg-black/80"
                 >
                   <VisuallyHidden>
                     <DialogTitle>Expert Video</DialogTitle>
                   </VisuallyHidden>
-
-                  {/* Optional poster fallback behind the iframe */}
-                  {posterUrl && (
-                    <img
-                      src={posterUrl}
-                      alt=""
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  )}
-
-                  {/* Video iframe */}
-                  {videoLink && (
-                    <iframe
-                      className="relative z-10 w-full h-full"
-                      src={videoLink || ''}
-                      title="YouTube video player"
-                      frameBorder={0}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                    />
-                  )}
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={videoLink || ''}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  ></iframe>
                 </DialogContent>
               </Dialog>
             </div>
