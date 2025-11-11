@@ -9,7 +9,7 @@ type Props = {
 
 function PremCalculatorPageBlock({ block, params }: Props) {
   return (
-    <div>
+    <div id={block?.sectionId}>
       <CalculatorSection block={block} />
     </div>
   )

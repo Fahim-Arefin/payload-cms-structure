@@ -43,6 +43,34 @@ const validateRichTextNonEmpty =
     }
   }
 
+const validateSectionId = (val: unknown) => {
+  const raw = String(val ?? '')
+
+  // required
+  if (!raw.trim()) {
+    return 'Section ID is required.'
+  }
+
+  // no leading/trailing spaces
+  if (raw !== raw.trim()) {
+    return 'Section ID must not have leading or trailing spaces.'
+  }
+
+  const s = raw.trim()
+
+  // no spaces at all
+  if (/\s/.test(s)) {
+    return 'No spaces allowed. Use "-" to separate words (e.g., "blog-section", not "blog section").'
+  }
+
+  // allowed chars: letters, numbers, hyphen
+  if (!/^[A-Za-z0-9-]+$/.test(s)) {
+    return 'Section ID can only contain letters, numbers, and hyphens (e.g., "blog-section").'
+  }
+
+  return true
+}
+
 /* ---------------- block ---------------- */
 const PremCalculatorPageSchema: Block = {
   slug: PREM_CALC_PAGE_SLUG_AND_TAG,
@@ -54,6 +82,18 @@ const PremCalculatorPageSchema: Block = {
   imageAltText: `${PREM_CALC_PAGE_BLOCK_LABEL} preview`,
 
   fields: [
+    {
+      name: 'sectionId',
+      type: 'text',
+      label: 'Section ID (anchor)',
+      required: true,
+      admin: {
+        width: '50%',
+        description:
+          'Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").',
+      },
+      validate: validateSectionId,
+    },
     // ── Section Title (EN/BN)
     {
       type: 'row',
@@ -199,13 +239,29 @@ const PremCalculatorPageSchema: Block = {
             description: 'Hex color (#RRGGBB or #RRGGBBAA). Example: #9C8639 or #9C8639B2',
             width: '50%',
           },
-          defaultValue: '#9C8639B2',
+          // defaultValue: '#9C8639B2',
+        },
+        {
+          name: 'cardTextColor',
+          type: 'text',
+          label: 'Card Text Color',
+          required: false,
+          validate: validateHexColor,
+          admin: {
+            description: 'Hex color (#RRGGBB or #RRGGBBAA). Example: #9C8639 or #9C8639B2',
+            width: '50%',
+          },
+          // defaultValue: '#3A3A3C',
         },
       ],
       defaultValue: [
-        { cardTitle: 'For their future', cardBg: '#9C863940' },
-        { cardTitle: 'For your growth', cardBg: '#CCBF95' },
-        { cardTitle: 'When life throws you a curveball', cardBg: '#9C8639B2' },
+        { cardTitle: 'For their future', cardBg: '#9C863940', cardTextColor: '#3A3A3C' },
+        { cardTitle: 'For your growth', cardBg: '#ccbf95', cardTextColor: '#FFFFFF' },
+        {
+          cardTitle: 'When life throws you a curveball',
+          cardBg: '#9C8639B2',
+          cardTextColor: '#FFFFFF',
+        },
       ],
     },
   ],

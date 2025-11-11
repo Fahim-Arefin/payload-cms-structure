@@ -4484,6 +4484,10 @@ export interface Page {
         blockType: 'support-feedback-form';
       }
     | {
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+         */
+        sectionId: string;
         title: string;
         titleBN?: string | null;
         highlightedTitle?: string | null;
@@ -4559,6 +4563,10 @@ export interface Page {
                * Hex color (#RRGGBB or #RRGGBBAA). Example: #9C8639 or #9C8639B2
                */
               cardBg?: string | null;
+              /**
+               * Hex color (#RRGGBB or #RRGGBBAA). Example: #9C8639 or #9C8639B2
+               */
+              cardTextColor?: string | null;
               id?: string | null;
             }[]
           | null;
@@ -6497,6 +6505,7 @@ export interface PagesSelect<T extends boolean = true> {
         'prem-calculator-card'?:
           | T
           | {
+              sectionId?: T;
               title?: T;
               titleBN?: T;
               highlightedTitle?: T;
@@ -6511,6 +6520,7 @@ export interface PagesSelect<T extends boolean = true> {
                     cardDesc?: T;
                     cardDescBN?: T;
                     cardBg?: T;
+                    cardTextColor?: T;
                     id?: T;
                   };
               id?: T;

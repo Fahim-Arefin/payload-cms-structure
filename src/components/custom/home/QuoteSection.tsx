@@ -124,11 +124,11 @@ function QuoteSection({ data }: Props) {
         {/* Left Side - Results Section (order-2 on mobile, order-1 on lg+) */}
         <div
           ref={resultRef}
-          className="lg:p-1 xl:p-2 2xl:p-3
+          className="lg:p-1 xl:p-2 2xl:p-3 
           lg:pl-0 space-y-8 xl:space-y-11 z-10 order-2 lg:order-1"
         >
           {/* Text Container */}
-          <div className="hidden lg:block space-y-2 text-center lg:text-left">
+          <div className="hidden lg:block space-y-2 text-center lg:text-left ">
             <div className="uppercase text-[#434342] text-[16px] md:text-[18px] 2xl:text-2xl font-light ">
               <LocalizedText en={data?.heading} bn={data?.headingBN} />
             </div>
