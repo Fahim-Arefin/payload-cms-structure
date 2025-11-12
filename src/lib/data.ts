@@ -303,7 +303,7 @@ export const NAV_ITEMS = [
       {
         href: '/plans/microinsurance',
         label: 'Microinsurance Plan',
-        labelBN: 'মাইক্রোইনস্যুরেন্স',
+        labelBN: 'মাইক্রোইন্স্যুরেন্স',
       },
     ],
   },
@@ -387,7 +387,7 @@ export const NAV_ITEMS_MOBILE = [
       },
       { href: '/plans/corporate', label: 'Corporate', labelBN: 'কর্পোরেট' },
       { href: '/plans/bancassurance', label: 'Bancassurance', labelBN: 'ব্যাংকাসুরেন্স' },
-      { href: '/plans/microinsurance', label: 'Microinsurance', labelBN: 'মাইক্রোইনস্যুরেন্স' },
+      { href: '/plans/microinsurance', label: 'Microinsurance', labelBN: 'মাইক্রোইন্স্যুরেন্স' },
     ],
   },
   { href: '/pay-premium', label: 'Pay Premium', labelBN: 'পে প্রিমিয়াম' },

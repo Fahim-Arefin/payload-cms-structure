@@ -59,7 +59,7 @@ function StrategicPatners({ data }: Props) {
               />
             </div>
             <p
-              className={`global-p2 font-semibold text-center text-[#374151] ${index > 0 ? 'uppercase' : ''}`}
+              className={`global-p2 font-semibold text-center text-[#374151] ${index > 0 && index < data?.partners?.length - 1 ? 'uppercase' : ''}`}
             >
               <LocalizedText en={item?.name} bn={item?.nameBN} />
             </p>
