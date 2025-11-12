@@ -7,11 +7,11 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
-import Link from 'next/link'
+// import Link from 'next/link'
 import CueItem from '../../home/CueItem'
 import { sliderDelay } from '@/lib/data'
-import GlobalButton from '../GlobalButton'
-import LocalizedString from '../LocalizedString'
+// import GlobalButton from '../GlobalButton'
+// import LocalizedString from '../LocalizedString'
 import CueHeader from '../../home/CueHeader'
 
 type Props = {

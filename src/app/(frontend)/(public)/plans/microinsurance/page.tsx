@@ -54,7 +54,7 @@ function page({}: Props) {
         title: `Effortless Enrollment`,
         titleBN: `সহজ নিবন্ধন প্রক্রিয়া`,
         description: `Our signup process is quick, simple, and digital. No complex paperwork, no long waits— protection through our strategic partners.`,
-        descriptionBN: `ন্যূনতম ডকুমেন্টেশন, দীর্ঘসূত্রিতাবিহীন`,
+        descriptionBN: `ন্যূনতম ডকুমেন্টেশন, দীর্ঘসূত্রিতাবিহীন।`,
       },
     ],
   }
@@ -305,7 +305,7 @@ function page({}: Props) {
             description:
               'Payment of full maturity value of term deposits in case of accidental death or total permanent disability',
             descriptionBN:
-              'গ্রাহকের দোরঘটনাজনিত মৃত্য বা পূর্ণ চিরস্থায়ী অক্ষমতায়, মেয়াদি আমানতের পূর্ণ মেয়াদপূর্তি মূল্য প্রদান',
+              'গ্রাহকের দুর্ঘটনা মৃত্য বা পূর্ণ চিরস্থায়ী অক্ষমতায়, মেয়াদি আমানতের পূর্ণ মেয়াদপূর্তি মূল্য প্রদান',
           },
           {
             description: 'Funeral Cash Benefit',
