@@ -226,6 +226,7 @@
 
 // src/blocks/premiumCalculator/schema.ts
 import {
+  HOME_PAGE,
   HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_LABEL,
   HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_THUMBNAIL_URL,
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
@@ -285,6 +286,9 @@ const PremiumCalculatorSchema: Block = {
   labels: {
     singular: HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_LABEL,
     plural: HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_LABEL,
+  },
+  admin: {
+    group: HOME_PAGE,
   },
 
   imageURL: HOME_PAGE_PREMIUM_CALCULATOR_BLOCK_THUMBNAIL_URL,

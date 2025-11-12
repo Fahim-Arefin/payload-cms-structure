@@ -379,6 +379,7 @@ import {
   HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_SLUG_AND_TAG,
   HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_LABEL,
   HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_THUMBNAIL_URL,
+  COMMON,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
@@ -483,6 +484,10 @@ const LifeInsuranceSimplifiedSchema: Block = {
   labels: {
     singular: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_LABEL,
     plural: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: COMMON,
   },
 
   imageURL: HOME_PAGE_LIFE_INSURANCE_SIMPLIFIED_BLOCK_THUMBNAIL_URL,

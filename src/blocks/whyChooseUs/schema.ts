@@ -399,6 +399,7 @@
 
 // block
 import {
+  HOME_PAGE,
   HOME_PAGE_WHY_CHOOSE_US_BLOCK_LABEL,
   HOME_PAGE_WHY_CHOOSE_US_BLOCK_THUMBNAIL_URL,
   HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
@@ -530,6 +531,9 @@ const WhyChooseUsSchema: Block = {
   labels: {
     singular: HOME_PAGE_WHY_CHOOSE_US_BLOCK_LABEL,
     plural: HOME_PAGE_WHY_CHOOSE_US_BLOCK_LABEL,
+  },
+  admin: {
+    group: HOME_PAGE,
   },
 
   imageURL: HOME_PAGE_WHY_CHOOSE_US_BLOCK_THUMBNAIL_URL,

@@ -3,6 +3,7 @@ import { bnNum } from './../../lib/utils'
 import type { Block } from 'payload'
 
 import {
+  HERO,
   HOME_PAGE_HERO_BLOCK_LABEL,
   HOME_PAGE_HERO_BLOCK_THUMBNAIL_URL,
   HOME_PAGE_HERO_SLUG_AND_TAG,
@@ -20,6 +21,10 @@ const HeroSchema: Block = {
   labels: {
     singular: HOME_PAGE_HERO_BLOCK_LABEL,
     plural: HOME_PAGE_HERO_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: HERO,
   },
 
   imageURL: HOME_PAGE_HERO_BLOCK_THUMBNAIL_URL,

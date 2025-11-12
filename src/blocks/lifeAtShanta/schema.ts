@@ -286,6 +286,7 @@
 // src/blocks/lifeAtShanta/schema.ts
 import type { Block } from 'payload'
 import {
+  HOME_PAGE,
   HOME_PAGE_LIFE_AT_SHANTA_BLOCK_LABEL,
   HOME_PAGE_LIFE_AT_SHANTA_BLOCK_THUMBNAIL_URL,
   HOME_PAGE_LIFE_AT_SHANTA_SLUG_AND_TAG,
@@ -422,6 +423,10 @@ const LifeAtShantaSchema: Block = {
   labels: {
     singular: HOME_PAGE_LIFE_AT_SHANTA_BLOCK_LABEL,
     plural: HOME_PAGE_LIFE_AT_SHANTA_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: HOME_PAGE,
   },
 
   imageURL: HOME_PAGE_LIFE_AT_SHANTA_BLOCK_THUMBNAIL_URL,

@@ -50,6 +50,11 @@ export const GLOBAL_VLOGS_CACHE_KEY = 'global-vlogs-data'
 // thumbnail folder name
 const folder = '/assets/block-icons'
 
+// Group
+export const HERO = 'Hero Sections'
+export const COMMON = 'Common Sections'
+export const HOME_PAGE = 'Home Page Unique Sections'
+
 // home page constants
 // ----------------------------------------------------------------------------------------------
 export const HOME_PAGE_ADMIN_GROUP = 'Home Page'

@@ -5,6 +5,7 @@ import {
   HOME_FEATURED_BLOG_VLOG_AND_NEWS_BLOCK_LABEL,
   HOME_FEATURED_BLOG_VLOG_AND_NEWS_BLOCK_THUMBNAIL_URL,
   HOME_FEATURED_BLOG_VLOG_AND_NEWS_SLUG_AND_TAG,
+  HOME_PAGE,
 } from '@/lib/constants'
 import { generateImageFields } from '@/utils/media/fieldGenerators' // ⬅️ ADD
 
@@ -130,6 +131,10 @@ const FeaturedBlogVlogNewsSchema: Block = {
   labels: {
     singular: HOME_FEATURED_BLOG_VLOG_AND_NEWS_BLOCK_LABEL,
     plural: HOME_FEATURED_BLOG_VLOG_AND_NEWS_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: HOME_PAGE,
   },
 
   imageURL: HOME_FEATURED_BLOG_VLOG_AND_NEWS_BLOCK_THUMBNAIL_URL,
