@@ -432,3 +432,21 @@ export const AGENT_ONBOARDING_FORM_SLUG_AND_TAG = 'agent-form'
 export const AGENT_ONBOARDING_FORM_PAGE_BLOCK_LABEL = 'Agent Onboarding Form'
 export const AGENT_ONBOARDING_FORM_CACHE_KEY = 'agent-form-data'
 export const AGENT_ONBOARDING_FORM_BLOCK_THUMBNAIL_URL = `${folder}/agent-form-page-block-thumbnail.png`
+
+// Custom Tab
+export const CUSTOM_TAB_SLUG_AND_TAG = 'custom-tab'
+export const CUSTOM_TAB_PAGE_BLOCK_LABEL = 'Custom Tab'
+export const CUSTOM_TAB_CACHE_KEY = 'custom-tab-data'
+export const CUSTOM_TAB_BLOCK_THUMBNAIL_URL = `${folder}/custom-tab-block-thumbnail.png`
+
+// conten 01 --> descriptive content
+export const DESCRIPTIVE_CONTENT_SLUG_AND_TAG = 'descriptive-content'
+export const DESCRIPTIVE_CONTENT_PAGE_BLOCK_LABEL = 'Descriptive Content'
+export const DESCRIPTIVE_CONTENT_CACHE_KEY = 'descriptive-content-data'
+export const DESCRIPTIVE_CONTENT_BLOCK_THUMBNAIL_URL = `${folder}/descriptive-content-block-thumbnail.png`
+
+// conten 02 --> step content
+export const STEP_CONTENT_SLUG_AND_TAG = 'step-content'
+export const STEP_CONTENT_PAGE_BLOCK_LABEL = 'Step Content'
+export const STEP_CONTENT_CACHE_KEY = 'step-content-data'
+export const STEP_CONTENT_BLOCK_THUMBNAIL_URL = `${folder}/step-content-block-thumbnail.png`

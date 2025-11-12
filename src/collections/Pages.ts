@@ -191,6 +191,7 @@ import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { mediaHooks } from '@/utils/media/mediaHooks'
 import { revalidateTag } from 'next/cache'
 import type { CollectionConfig } from 'payload'
+import CustomTabSchema from '@/blocks/customTab/schema'
 
 // const mediaHooks = withMediaLifecycle({
 //   collectionSlug: 'pages',
@@ -327,6 +328,7 @@ export const Pages: CollectionConfig = {
         PremCalculatorPageSchema,
         PurchaseFormSchema,
         AgentOnboardingFormSchema,
+        CustomTabSchema,
       ],
     },
   ],

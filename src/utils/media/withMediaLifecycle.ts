@@ -1,793 +1,4 @@
-// // working code
-// import type { CollectionConfig } from 'payload'
-// import { createBeforeChangeHook } from './createBeforeChangeHook'
-// import { deleteRemovedMedia } from './deleteRemovedMedia'
-// import type { ImageConfig, CreatedMedia } from './mediaUtils'
-// import { MEDIA_SLUG } from './mediaUtils'
-
-// // optional single-doc guard (keep if you already use it)
-// import { createSingleDocBeforeOperationHook } from '@/utils/singleDocUtils'
-
-// export type ArrayMediaConfig = {
-//   fieldName: string
-//   mediaFields: string[]
-//   itemLabelField?: string
-//   mediaFieldLabels?: Record<string, string>
-// }
-
-// export type GroupMediaConfig = {
-//   groupKey: string
-//   arrayKey: string
-//   mediaFields: string[]
-//   itemLabelField?: string
-//   mediaFieldLabels?: Record<string, string>
-//   groupItemLabelField?: string
-// }
-
-// /** Blocks: media directly on the block row */
-// export type BlockSimpleMediaConfig = {
-//   layoutKey: string // e.g. "layout"
-//   blockType: string // block slug (we will write THIS into Media.derivedFrom)
-//   mediaFields: string[] // fields on the block row itself
-// }
-
-// /** Blocks: array inside a block where items have media */
-// export type BlockArrayMediaConfig = {
-//   layoutKey: string
-//   blockType: string
-//   arrayKey: string
-//   mediaFields: string[]
-//   itemLabelField?: string
-// }
-
-// /** Blocks: group -> nested array where items have media */
-// export type BlockGroupMediaConfig = {
-//   layoutKey: string
-//   blockType: string
-//   groupKey: string
-//   arrayKey: string
-//   mediaFields: string[]
-//   itemLabelField?: string
-//   groupItemLabelField?: string
-// }
-
-// export type WithMediaLifecycleOpts = {
-//   imageConfigs?: ImageConfig[]
-//   arrayFields?: ArrayMediaConfig[]
-//   groupFields?: GroupMediaConfig[]
-//   blockSimpleFields?: BlockSimpleMediaConfig[]
-//   blockArrayFields?: BlockArrayMediaConfig[]
-//   blockGroupFields?: BlockGroupMediaConfig[]
-//   skipOnDraft?: boolean
-//   onAfterChange?: (args: { req: any; doc: any; previousDoc: any }) => void | Promise<void>
-//   singleDocSlug?: string
-//   /** collectionSlug will be stamped into media.ownerCollection */
-//   collectionSlug?: string
-// }
-
-// /* ---------------- helpers ---------------- */
-
-// const relID = (v: any): string | null => {
-//   if (!v) return null
-//   if (typeof v === 'string') return v
-//   if (typeof v === 'object') {
-//     if (typeof v.value === 'string') return v.value
-//     if (typeof v.value?.id === 'string') return v.value.id
-//     if (typeof v.id === 'string') return v.id
-//   }
-//   return null
-// }
-
-// function isBlockItemOfType(row: any, type: string) {
-//   return row && typeof row === 'object' && row.blockType === type
-// }
-
-// function eachBlockRow(
-//   holder: any,
-//   layoutKey: string,
-//   blockType: string,
-//   cb: (row: any, idx: number) => void,
-// ) {
-//   const rows = Array.isArray(holder?.[layoutKey]) ? holder[layoutKey] : []
-//   for (let i = 0; i < rows.length; i++) {
-//     const row = rows[i]
-//     if (isBlockItemOfType(row, blockType)) cb(row, i)
-//   }
-// }
-
-// /** We want (id, derivedFromSlug) pairs of all *current* references in the saved doc */
-// function collectIDsWithSource(
-//   doc: any,
-//   simpleFields: string[],
-//   arrayFields: Array<{ field: string; mediaFields: string[] }>,
-//   groupFields: Array<{ groupKey: string; arrayKey: string; mediaFields: string[] }>,
-//   blockSimpleFields: BlockSimpleMediaConfig[],
-//   blockArrayFields: BlockArrayMediaConfig[],
-//   blockGroupFields: BlockGroupMediaConfig[],
-// ): Array<{ id: string; derivedFrom?: string; ownerField?: string }> {
-//   const out: Array<{ id: string; derivedFrom?: string; ownerField?: string }> = []
-
-//   const addPair = (holder: any, base: string, derivedFrom?: string) => {
-//     const a = relID(holder?.[base])
-//     if (a) out.push({ id: String(a), derivedFrom, ownerField: base })
-//     const b = relID(holder?.[`${base}Original`])
-//     if (b) out.push({ id: String(b), derivedFrom, ownerField: `${base}Original` })
-//   }
-
-//   // 1) top-level simple fields (no block; we won't set derivedFrom here)
-//   for (const f of simpleFields) addPair(doc, f, undefined)
-
-//   // 2) one-level arrays (no block; leave derivedFrom empty)
-//   for (const a of arrayFields) {
-//     const items = doc?.[a.field]
-//     if (!Array.isArray(items)) continue
-//     for (const it of items) for (const mf of a.mediaFields) addPair(it, mf, undefined)
-//   }
-
-//   // 3) nested arrays (no block; leave derivedFrom empty)
-//   for (const g of groupFields) {
-//     const holder = doc?.[g.groupKey]
-//     if (Array.isArray(holder)) {
-//       for (const gi of holder) {
-//         const nested = gi?.[g.arrayKey]
-//         if (!Array.isArray(nested)) continue
-//         for (const ni of nested) for (const mf of g.mediaFields) addPair(ni, mf, undefined)
-//       }
-//     } else if (holder && typeof holder === 'object') {
-//       const nested = holder?.[g.arrayKey]
-//       if (!Array.isArray(nested)) continue
-//       for (const ni of nested) for (const mf of g.mediaFields) addPair(ni, mf, undefined)
-//     }
-//   }
-
-//   // 4) blocks: media on the block row — derivedFrom = blockType (slug)
-//   for (const b of blockSimpleFields) {
-//     eachBlockRow(doc, b.layoutKey, b.blockType, (row) => {
-//       for (const mf of b.mediaFields) addPair(row, mf, b.blockType)
-//     })
-//   }
-
-//   // 5) blocks: array items with media — derivedFrom = blockType (slug)
-//   for (const b of blockArrayFields) {
-//     eachBlockRow(doc, b.layoutKey, b.blockType, (row) => {
-//       const items = Array.isArray(row?.[b.arrayKey]) ? row[b.arrayKey] : []
-//       for (const it of items) for (const mf of b.mediaFields) addPair(it, mf, b.blockType)
-//     })
-//   }
-
-//   // 6) blocks: groups -> arrays — derivedFrom = blockType (slug)
-//   // for (const b of blockGroupFields) {
-//   //   eachBlockRow(doc, b.layoutKey, b.blockType, (row) => {
-//   //     const groups = Array.isArray(row?.[b.groupKey]) ? row[b.groupKey] : []
-//   //     for (const g of groups) {
-//   //       const nested = Array.isArray(g?.[b.arrayKey]) ? g[b.arrayKey] : []
-//   //       for (const ni of nested) for (const mf of b.mediaFields) addPair(ni, mf, b.blockType)
-//   //     }
-//   //   })
-//   // }
-
-//   // 6) blocks: groups -> arrays — derivedFrom = blockType (slug)
-//   for (const b of blockGroupFields) {
-//     eachBlockRow(doc, b.layoutKey, b.blockType, (row) => {
-//       const holder = row?.[b.groupKey]
-
-//       // Case A: group is an ARRAY of group items
-//       if (Array.isArray(holder)) {
-//         for (const g of holder) {
-//           const nested = Array.isArray(g?.[b.arrayKey]) ? g[b.arrayKey] : []
-//           for (const ni of nested) for (const mf of b.mediaFields) addPair(ni, mf, b.blockType)
-//         }
-//         return
-//       }
-
-//       // ✅ Case B: group is a plain OBJECT that itself contains the array (your expectations.{left|right})
-//       if (holder && typeof holder === 'object') {
-//         const nested = Array.isArray(holder?.[b.arrayKey]) ? holder[b.arrayKey] : []
-//         for (const ni of nested) for (const mf of b.mediaFields) addPair(ni, mf, b.blockType)
-//       }
-//     })
-//   }
-
-//   return out
-// }
-
-// /** Finalize (and stamp) the media actually referenced by this saved doc. */
-// async function finalizeReferencedMedia(opts: {
-//   req: any
-//   doc: any
-//   collectionSlug?: string
-//   simpleFields: string[]
-//   arrayFields: Array<{ field: string; mediaFields: string[] }>
-//   groupFields: Array<{ groupKey: string; arrayKey: string; mediaFields: string[] }>
-//   blockSimpleFields: BlockSimpleMediaConfig[]
-//   blockArrayFields: BlockArrayMediaConfig[]
-//   blockGroupFields: BlockGroupMediaConfig[]
-// }) {
-//   const {
-//     req,
-//     doc,
-//     collectionSlug,
-//     simpleFields,
-//     arrayFields,
-//     groupFields,
-//     blockSimpleFields,
-//     blockArrayFields,
-//     blockGroupFields,
-//   } = opts
-
-//   const refs = collectIDsWithSource(
-//     doc,
-//     simpleFields,
-//     arrayFields,
-//     groupFields,
-//     blockSimpleFields,
-//     blockArrayFields,
-//     blockGroupFields,
-//   )
-//   if (!refs.length) return
-
-//   for (const ref of refs) {
-//     try {
-//       await req.payload.update({
-//         collection: MEDIA_SLUG,
-//         id: ref.id,
-//         data: {
-//           uploadSessionId: doc?.uploadSessionId ?? undefined,
-//           ownerCollection: collectionSlug ?? undefined,
-//           ownerDocId: String(doc.id),
-//           ownerField: ref.ownerField,
-//           // 👇 Only the block slug, just like you asked
-//           derivedFrom: ref.derivedFrom ?? undefined,
-//           temporary: false,
-//         },
-//         overrideAccess: true,
-//       })
-//     } catch {
-//       /* ignore */
-//     }
-//   }
-// }
-
-// /* ---------------- main ---------------- */
-
-// export function withMediaLifecycle(opts: WithMediaLifecycleOpts): CollectionConfig['hooks'] {
-//   const {
-//     imageConfigs = [],
-//     arrayFields = [],
-//     groupFields = [],
-//     blockSimpleFields = [],
-//     blockArrayFields = [],
-//     blockGroupFields = [],
-//     skipOnDraft = true,
-//     onAfterChange,
-//     singleDocSlug,
-//     collectionSlug,
-//   } = opts
-
-//   const simpleMediaNames = imageConfigs.map((c) => c.fieldName)
-//   const simpleDeleteFields = [...simpleMediaNames, ...simpleMediaNames.map((n) => `${n}Original`)]
-//   const arrayDeleteFields = arrayFields.map((a) => ({
-//     field: a.fieldName,
-//     mediaFields: [...a.mediaFields, ...a.mediaFields.map((n) => `${n}Original`)],
-//   }))
-
-//   const beforeChangeCreator = createBeforeChangeHook({
-//     imageConfigs,
-//     arrayFields,
-//     groupFields,
-//     blockSimpleFields,
-//     blockArrayFields,
-//     blockGroupFields,
-//   })
-
-//   const stashSessionIdPreHook = ({ req, data }: any) => {
-//     ;(req as any)._uploadSessionId = data?.uploadSessionId
-//     return data
-//   }
-
-//   return {
-//     beforeValidate: [stashSessionIdPreHook],
-//     beforeChange: [stashSessionIdPreHook, beforeChangeCreator],
-//     afterChange: [
-//       async ({ req, doc, previousDoc }) => {
-//         // delete removed relations (including originals)
-//         await deleteRemovedMedia({
-//           req,
-//           previousDoc,
-//           doc,
-//           mediaFields: simpleDeleteFields,
-//           arrayFields: arrayDeleteFields,
-//           groupFields,
-//           blockSimpleFields,
-//           blockArrayFields,
-//           blockGroupFields,
-//           skipOnDraft,
-//         })
-
-//         // stamp all referenced media (owner*, temporary:false, derivedFrom = block slug)
-//         await finalizeReferencedMedia({
-//           req,
-//           doc,
-//           collectionSlug: collectionSlug || singleDocSlug,
-//           simpleFields: simpleMediaNames,
-//           arrayFields: arrayFields.map((a) => ({ field: a.fieldName, mediaFields: a.mediaFields })),
-//           groupFields: groupFields.map((g) => ({
-//             groupKey: g.groupKey,
-//             arrayKey: g.arrayKey,
-//             mediaFields: g.mediaFields,
-//           })),
-//           blockSimpleFields,
-//           blockArrayFields,
-//           blockGroupFields,
-//         })
-
-//         // clear rollback stash
-//         const r = req as any
-//         if (Array.isArray(r._createdMediaForRollback)) r._createdMediaForRollback = []
-
-//         if (onAfterChange) await onAfterChange({ req, doc, previousDoc })
-//         return doc
-//       },
-//     ],
-//     afterError: [
-//       async ({ req }) => {
-//         const r = req as any
-//         const stash: CreatedMedia[] = Array.isArray(r._createdMediaForRollback)
-//           ? r._createdMediaForRollback
-//           : []
-//         for (const m of stash) {
-//           try {
-//             await req.payload.delete({ collection: m.collection, id: m.id, overrideAccess: true })
-//           } catch {}
-//         }
-//         r._createdMediaForRollback = []
-//       },
-//     ],
-//     afterDelete: [
-//       async ({ req, doc }) => {
-//         await deleteRemovedMedia({
-//           req,
-//           previousDoc: doc,
-//           doc: {},
-//           mediaFields: simpleDeleteFields,
-//           arrayFields: arrayDeleteFields,
-//           groupFields,
-//           blockSimpleFields,
-//           blockArrayFields,
-//           blockGroupFields,
-//           skipOnDraft: false,
-//         })
-
-//         // ownerCollection sweep
-//         try {
-//           const found = await req.payload.find({
-//             collection: MEDIA_SLUG,
-//             limit: 500,
-//             where: {
-//               and: [
-//                 { ownerDocId: { equals: String(doc.id) } },
-//                 { ownerCollection: { exists: true } },
-//               ],
-//             },
-//             depth: 0,
-//             overrideAccess: true,
-//           })
-//           for (const m of found.docs) {
-//             await req.payload.delete({ collection: MEDIA_SLUG, id: m.id, overrideAccess: true })
-//           }
-//         } catch (e) {
-//           req.payload.logger?.warn?.(`afterDelete owner cleanup failed: ${(e as Error).message}`)
-//         }
-//       },
-//     ],
-//     ...(singleDocSlug
-//       ? { beforeOperation: [createSingleDocBeforeOperationHook(singleDocSlug)] }
-//       : {}),
-//   }
-// }
-
-// =================================================================================
-// =================================================================================
-// =================================================================================
-// // // testing (last working code)
-// import type { CollectionConfig } from 'payload'
-// import { createBeforeChangeHook } from './createBeforeChangeHook'
-// import { deleteRemovedMedia } from './deleteRemovedMedia'
-// import type { ImageConfig, CreatedMedia } from './mediaUtils'
-// import { MEDIA_SLUG } from './mediaUtils'
-
-// // optional single-doc guard (keep if you already use it)
-// import { createSingleDocBeforeOperationHook } from '@/utils/singleDocUtils'
-
-// export type ArrayMediaConfig = {
-//   fieldName: string
-//   mediaFields: string[]
-//   itemLabelField?: string
-//   mediaFieldLabels?: Record<string, string>
-// }
-
-// export type GroupMediaConfig = {
-//   groupKey: string
-//   arrayKey: string
-//   mediaFields: string[]
-//   itemLabelField?: string
-//   mediaFieldLabels?: Record<string, string>
-//   groupItemLabelField?: string
-// }
-
-// /** Blocks: media directly on the block row */
-// export type BlockSimpleMediaConfig = {
-//   layoutKey: string // e.g. "layout"
-//   blockType: string // block slug (we will write THIS into Media.derivedFrom)
-//   mediaFields: string[] // fields on the block row itself
-//   mediaFieldLabels?: Record<string, string> // <-- add this line
-// }
-
-// /** Blocks: array inside a block where items have media */
-// export type BlockArrayMediaConfig = {
-//   layoutKey: string
-//   blockType: string
-//   arrayKey: string
-//   mediaFields: string[]
-//   itemLabelField?: string
-//   mediaFieldLabels?: Record<string, string> // <-- add this line
-// }
-
-// /** Blocks: group -> nested array where items have media */
-// export type BlockGroupMediaConfig = {
-//   layoutKey: string
-//   blockType: string
-//   groupKey: string
-//   arrayKey: string
-//   mediaFields: string[]
-//   itemLabelField?: string
-//   groupItemLabelField?: string
-//   mediaFieldLabels?: Record<string, string> // <-- add this line
-// }
-
-// export type WithMediaLifecycleOpts = {
-//   imageConfigs?: ImageConfig[]
-
-//   /** NEW: plain upload fields (e.g., PDFs) at the top level (no image processing). */
-//   otherUploadFields?: string[]
-
-//   arrayFields?: ArrayMediaConfig[]
-//   groupFields?: GroupMediaConfig[]
-//   blockSimpleFields?: BlockSimpleMediaConfig[]
-//   blockArrayFields?: BlockArrayMediaConfig[]
-//   blockGroupFields?: BlockGroupMediaConfig[]
-//   skipOnDraft?: boolean
-//   onAfterChange?: (args: { req: any; doc: any; previousDoc: any }) => void | Promise<void>
-//   singleDocSlug?: string
-//   /** collectionSlug will be stamped into media.ownerCollection */
-//   collectionSlug?: string
-// }
-
-// /* ---------------- helpers ---------------- */
-
-// const relID = (v: any): string | null => {
-//   if (!v) return null
-//   if (typeof v === 'string') return v
-//   if (typeof v === 'object') {
-//     if (typeof v.value === 'string') return v.value
-//     if (typeof v.value?.id === 'string') return v.value.id
-//     if (typeof v.id === 'string') return v.id
-//   }
-//   return null
-// }
-
-// function isBlockItemOfType(row: any, type: string) {
-//   return row && typeof row === 'object' && row.blockType === type
-// }
-
-// function eachBlockRow(
-//   holder: any,
-//   layoutKey: string,
-//   blockType: string,
-//   cb: (row: any, idx: number) => void,
-// ) {
-//   const rows = Array.isArray(holder?.[layoutKey]) ? holder[layoutKey] : []
-//   for (let i = 0; i < rows.length; i++) {
-//     const row = rows[i]
-//     if (isBlockItemOfType(row, blockType)) cb(row, i)
-//   }
-// }
-
-// /** We want (id, derivedFromSlug) pairs of all *current* references in the saved doc */
-// function collectIDsWithSource(
-//   doc: any,
-//   simpleFields: string[],
-//   arrayFields: Array<{ field: string; mediaFields: string[] }>,
-//   groupFields: Array<{ groupKey: string; arrayKey: string; mediaFields: string[] }>,
-//   blockSimpleFields: BlockSimpleMediaConfig[],
-//   blockArrayFields: BlockArrayMediaConfig[],
-//   blockGroupFields: BlockGroupMediaConfig[],
-// ): Array<{ id: string; derivedFrom?: string; ownerField?: string }> {
-//   const out: Array<{ id: string; derivedFrom?: string; ownerField?: string }> = []
-
-//   const addPair = (holder: any, base: string, derivedFrom?: string) => {
-//     const a = relID(holder?.[base])
-//     if (a) out.push({ id: String(a), derivedFrom, ownerField: base })
-//     const b = relID(holder?.[`${base}Original`])
-//     if (b) out.push({ id: String(b), derivedFrom, ownerField: `${base}Original` })
-//   }
-
-//   // 1) top-level simple fields (no block; we won't set derivedFrom here)
-//   for (const f of simpleFields) addPair(doc, f, undefined)
-
-//   // 2) one-level arrays (no block; leave derivedFrom empty)
-//   for (const a of arrayFields) {
-//     const items = doc?.[a.field]
-//     if (!Array.isArray(items)) continue
-//     for (const it of items) for (const mf of a.mediaFields) addPair(it, mf, undefined)
-//   }
-
-//   // 3) nested arrays (no block; leave derivedFrom empty)
-//   for (const g of groupFields) {
-//     const holder = doc?.[g.groupKey]
-//     if (Array.isArray(holder)) {
-//       for (const gi of holder) {
-//         const nested = gi?.[g.arrayKey]
-//         if (!Array.isArray(nested)) continue
-//         for (const ni of nested) for (const mf of g.mediaFields) addPair(ni, mf, undefined)
-//       }
-//     } else if (holder && typeof holder === 'object') {
-//       const nested = holder?.[g.arrayKey]
-//       if (!Array.isArray(nested)) continue
-//       for (const ni of nested) for (const mf of g.mediaFields) addPair(ni, mf, undefined)
-//     }
-//   }
-
-//   // 4) blocks: media on the block row — derivedFrom = blockType (slug)
-//   for (const b of blockSimpleFields) {
-//     eachBlockRow(doc, b.layoutKey, b.blockType, (row) => {
-//       for (const mf of b.mediaFields) addPair(row, mf, b.blockType)
-//     })
-//   }
-
-//   // 5) blocks: array items with media — derivedFrom = blockType (slug)
-//   for (const b of blockArrayFields) {
-//     eachBlockRow(doc, b.layoutKey, b.blockType, (row) => {
-//       const items = Array.isArray(row?.[b.arrayKey]) ? row[b.arrayKey] : []
-//       for (const it of items) for (const mf of b.mediaFields) addPair(it, mf, b.blockType)
-//     })
-//   }
-
-//   // 6) blocks: groups -> arrays — derivedFrom = blockType (slug)
-//   for (const b of blockGroupFields) {
-//     eachBlockRow(doc, b.layoutKey, b.blockType, (row) => {
-//       const holder = row?.[b.groupKey]
-
-//       // Case A: group is an ARRAY of group items
-//       if (Array.isArray(holder)) {
-//         for (const g of holder) {
-//           const nested = Array.isArray(g?.[b.arrayKey]) ? g[b.arrayKey] : []
-//           for (const ni of nested) for (const mf of b.mediaFields) addPair(ni, mf, b.blockType)
-//         }
-//         return
-//       }
-
-//       // Case B: group is a plain OBJECT that itself contains the array
-//       if (holder && typeof holder === 'object') {
-//         const nested = Array.isArray(holder?.[b.arrayKey]) ? holder[b.arrayKey] : []
-//         for (const ni of nested) for (const mf of b.mediaFields) addPair(ni, mf, b.blockType)
-//       }
-//     })
-//   }
-
-//   return out
-// }
-
-// /** Finalize (and stamp) the media actually referenced by this saved doc. */
-// async function finalizeReferencedMedia(opts: {
-//   req: any
-//   doc: any
-//   collectionSlug?: string
-//   simpleFields: string[]
-//   arrayFields: Array<{ field: string; mediaFields: string[] }>
-//   groupFields: Array<{ groupKey: string; arrayKey: string; mediaFields: string[] }>
-//   blockSimpleFields: BlockSimpleMediaConfig[]
-//   blockArrayFields: BlockArrayMediaConfig[]
-//   blockGroupFields: BlockGroupMediaConfig[]
-// }) {
-//   const {
-//     req,
-//     doc,
-//     collectionSlug,
-//     simpleFields,
-//     arrayFields,
-//     groupFields,
-//     blockSimpleFields,
-//     blockArrayFields,
-//     blockGroupFields,
-//   } = opts
-
-//   const refs = collectIDsWithSource(
-//     doc,
-//     simpleFields,
-//     arrayFields,
-//     groupFields,
-//     blockSimpleFields,
-//     blockArrayFields,
-//     blockGroupFields,
-//   )
-//   if (!refs.length) return
-
-//   for (const ref of refs) {
-//     try {
-//       await req.payload.update({
-//         collection: MEDIA_SLUG,
-//         id: ref.id,
-//         data: {
-//           uploadSessionId: doc?.uploadSessionId ?? undefined,
-//           ownerCollection: collectionSlug ?? undefined,
-//           ownerDocId: String(doc.id),
-//           ownerField: ref.ownerField,
-//           // Only the block slug
-//           derivedFrom: ref.derivedFrom ?? undefined,
-//           temporary: false,
-//         },
-//         overrideAccess: true,
-//       })
-//     } catch {
-//       /* ignore */
-//     }
-//   }
-// }
-
-// /* ---------------- main ---------------- */
-
-// export function withMediaLifecycle(opts: WithMediaLifecycleOpts): CollectionConfig['hooks'] {
-//   const {
-//     imageConfigs = [],
-//     otherUploadFields = [], // <- NEW
-//     arrayFields = [],
-//     groupFields = [],
-//     blockSimpleFields = [],
-//     blockArrayFields = [],
-//     blockGroupFields = [],
-//     skipOnDraft = true,
-//     onAfterChange,
-//     singleDocSlug,
-//     collectionSlug,
-//   } = opts
-
-//   // add non-image upload fields (e.g., PDFs) to the tracked simple fields
-//   const simpleMediaNames = [...imageConfigs.map((c) => c.fieldName), ...otherUploadFields]
-
-//   const simpleDeleteFields = [...simpleMediaNames, ...simpleMediaNames.map((n) => `${n}Original`)]
-
-//   const arrayDeleteFields = arrayFields.map((a) => ({
-//     field: a.fieldName,
-//     mediaFields: [...a.mediaFields, ...a.mediaFields.map((n) => `${n}Original`)],
-//   }))
-
-//   const beforeChangeCreator = createBeforeChangeHook({
-//     imageConfigs,
-//     arrayFields,
-//     groupFields,
-//     blockSimpleFields,
-//     blockArrayFields,
-//     blockGroupFields,
-//   })
-
-//   const stashSessionIdPreHook = ({ req, data }: any) => {
-//     ;(req as any)._uploadSessionId = data?.uploadSessionId
-//     return data
-//   }
-
-//   return {
-//     beforeValidate: [stashSessionIdPreHook],
-//     beforeChange: [stashSessionIdPreHook, beforeChangeCreator],
-//     afterChange: [
-//       async ({ req, doc, previousDoc }) => {
-//         // delete removed relations (including originals)
-//         await deleteRemovedMedia({
-//           req,
-//           previousDoc,
-//           doc,
-//           mediaFields: simpleDeleteFields,
-//           arrayFields: arrayDeleteFields,
-//           groupFields,
-//           blockSimpleFields,
-//           blockArrayFields,
-//           blockGroupFields,
-//           skipOnDraft,
-//         })
-
-//         // stamp all referenced media (owner*, temporary:false, derivedFrom = block slug)
-//         await finalizeReferencedMedia({
-//           req,
-//           doc,
-//           collectionSlug: collectionSlug || singleDocSlug,
-//           simpleFields: simpleMediaNames,
-//           arrayFields: arrayFields.map((a) => ({ field: a.fieldName, mediaFields: a.mediaFields })),
-//           groupFields: groupFields.map((g) => ({
-//             groupKey: g.groupKey,
-//             arrayKey: g.arrayKey,
-//             mediaFields: g.mediaFields,
-//           })),
-//           blockSimpleFields,
-//           blockArrayFields,
-//           blockGroupFields,
-//         })
-
-//         // clear rollback stash
-//         const r = req as any
-//         if (Array.isArray(r._createdMediaForRollback)) r._createdMediaForRollback = []
-
-//         if (onAfterChange) await onAfterChange({ req, doc, previousDoc })
-//         return doc
-//       },
-//     ],
-//     afterError: [
-//       async ({ req }) => {
-//         const r = req as any
-//         const stash: CreatedMedia[] = Array.isArray(r._createdMediaForRollback)
-//           ? r._createdMediaForRollback
-//           : []
-//         for (const m of stash) {
-//           try {
-//             await req.payload.delete({ collection: m.collection, id: m.id, overrideAccess: true })
-//           } catch {}
-//         }
-//         r._createdMediaForRollback = []
-//       },
-//     ],
-//     afterDelete: [
-//       async ({ req, doc }) => {
-//         await deleteRemovedMedia({
-//           req,
-//           previousDoc: doc,
-//           doc: {},
-//           mediaFields: simpleDeleteFields,
-//           arrayFields: arrayDeleteFields,
-//           groupFields,
-//           blockSimpleFields,
-//           blockArrayFields,
-//           blockGroupFields,
-//           skipOnDraft: false,
-//         })
-
-//         // ownerCollection sweep
-//         try {
-//           const found = await req.payload.find({
-//             collection: MEDIA_SLUG,
-//             limit: 500,
-//             where: {
-//               and: [
-//                 { ownerDocId: { equals: String(doc.id) } },
-//                 { ownerCollection: { exists: true } },
-//               ],
-//             },
-//             depth: 0,
-//             overrideAccess: true,
-//           })
-//           for (const m of found.docs) {
-//             await req.payload.delete({ collection: MEDIA_SLUG, id: m.id, overrideAccess: true })
-//           }
-//         } catch (e) {
-//           req.payload.logger?.warn?.(`afterDelete owner cleanup failed: ${(e as Error).message}`)
-//         }
-//       },
-//     ],
-//     ...(singleDocSlug
-//       ? { beforeOperation: [createSingleDocBeforeOperationHook(singleDocSlug)] }
-//       : {}),
-//   }
-// }
-
-// ==================================================================================================
-// ==================================================================================================
-// ==================================================================================================
-// ==================================================================================================
-// // testing (last working code) — UPDATED: remove direct processImageField calls to avoid TS errors.
-// // This file now relies on createBeforeChangeHook + imageConfigs to do all image processing.
-// // We still ADD support for groupSimpleFields and groupNestedArrayFields in deletion/finalization paths.
-// // withMediaLifecycle.ts
-// // this code is woking currently as the last modified code but here dot methods are not working correctly though i did not use dot method on the media hooks
-
-// // src/utils/media/withMediaLifecycle.ts
+// // currently working code
 // import type { CollectionConfig } from 'payload'
 // import { createBeforeChangeHook } from './createBeforeChangeHook'
 // import { deleteRemovedMedia } from './deleteRemovedMedia'
@@ -840,6 +51,19 @@
 //   mediaFields: string[]
 //   itemLabelField?: string
 //   groupItemLabelField?: string
+//   mediaFieldLabels?: Record<string, string>
+// }
+
+// /* === NEW: block → nested blocks[] → firstArray[] → secondArray[] → media === */
+// export type BlockNestedDeepMediaConfig = {
+//   layoutKey: string
+//   blockType: string // outer block type (e.g., CUSTOM_CARD_SECTION_SLUG_AND_TAG)
+//   blocksKey: string // nested blocks field on the outer block (e.g., 'card')
+//   nestedBlockType: string // inner block type to match (e.g., PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG)
+//   firstArrayKey: string // e.g., 'planCards'
+//   secondArrayKey: string // e.g., 'modalItems'
+//   mediaFields: string[] // e.g., ['icon']
+//   itemLabelField?: string
 //   mediaFieldLabels?: Record<string, string>
 // }
 
@@ -854,6 +78,10 @@
 //   blockSimpleFields?: BlockSimpleMediaConfig[]
 //   blockArrayFields?: BlockArrayMediaConfig[]
 //   blockGroupFields?: BlockGroupMediaConfig[]
+
+//   /* === NEW: deep nested block media === */
+//   blockNestedDeepFields?: BlockNestedDeepMediaConfig[]
+
 //   skipOnDraft?: boolean
 //   onAfterChange?: (args: { req: any; doc: any; previousDoc: any }) => void | Promise<void>
 //   singleDocSlug?: string
@@ -908,32 +136,20 @@
 //   cur[last] = value
 // }
 
-// // ── flatten/unflatten adapter for dot paths ──
-// //
-// // We temporarily mirror nested values onto flat keys (e.g. data['a.b'])
-// // so older hooks that access data[fieldName] keep working.
-// // After the hook runs, we push values back into the nested structure.
-// //
+// // ── flatten/unflatten adapter for dot paths (simple fields only) ──
 // function flattenDotFields(data: any, fieldNames: string[]) {
 //   for (const name of fieldNames) {
 //     if (!name.includes('.')) continue
 //     const val = getByPath(data, name)
-//     if (typeof val !== 'undefined') {
-//       data[name] = val // create a temporary flat key
-//     }
-//     // also mirror the "...Original" companion
+//     if (typeof val !== 'undefined') data[name] = val
 //     const origPath = `${name}Original`
 //     const origVal = getByPath(data, origPath)
-//     if (typeof origVal !== 'undefined') {
-//       data[origPath] = origVal
-//     }
+//     if (typeof origVal !== 'undefined') data[origPath] = origVal
 //   }
 // }
-
 // function unflattenDotFields(data: any, fieldNames: string[]) {
 //   for (const name of fieldNames) {
 //     if (!name.includes('.')) continue
-//     // write back base and Original if the flat keys exist
 //     if (Object.prototype.hasOwnProperty.call(data, name)) {
 //       setByPath(data, name, data[name])
 //       delete data[name]
@@ -955,6 +171,8 @@
 //   blockSimpleFields: BlockSimpleMediaConfig[],
 //   blockArrayFields: BlockArrayMediaConfig[],
 //   blockGroupFields: BlockGroupMediaConfig[],
+//   // === NEW
+//   blockNestedDeepFields: BlockNestedDeepMediaConfig[] = [],
 // ): Array<{ id: string; derivedFrom?: string; ownerField?: string }> {
 //   const out: Array<{ id: string; derivedFrom?: string; ownerField?: string }> = []
 
@@ -1032,7 +250,61 @@
 //     })
 //   }
 
+//   // === 7) NEW: block → nested blocks[] → firstArray[] → secondArray[] → media
+//   for (const b of blockNestedDeepFields) {
+//     eachBlockRow(doc, b.layoutKey, b.blockType, (outerRow) => {
+//       const nestedBlocks = Array.isArray(outerRow?.[b.blocksKey]) ? outerRow[b.blocksKey] : []
+//       for (const inner of nestedBlocks) {
+//         if (!isBlockItemOfType(inner, b.nestedBlockType)) continue
+//         const firstArr = Array.isArray(inner?.[b.firstArrayKey]) ? inner[b.firstArrayKey] : []
+//         for (const firstItem of firstArr) {
+//           const secondArr = Array.isArray(firstItem?.[b.secondArrayKey])
+//             ? firstItem[b.secondArrayKey]
+//             : []
+//           for (const secondItem of secondArr) {
+//             for (const mf of b.mediaFields) addPairByPath(secondItem, mf, b.nestedBlockType)
+//           }
+//         }
+//       }
+//     })
+//   }
+
 //   return out
+// }
+
+// /** Diff helper for deep nested removal */
+// function collectDeepNestedIDs(doc: any, cfgs: BlockNestedDeepMediaConfig[]): Set<string> {
+//   const ids = new Set<string>()
+//   const push = (v: any) => {
+//     const id = relID(v)
+//     if (id) ids.add(String(id))
+//     const oid = relID((v && (v as any).imageOriginal) ?? (v && (v as any).iconOriginal))
+//     if (oid) ids.add(String(oid))
+//   }
+
+//   for (const b of cfgs) {
+//     eachBlockRow(doc, b.layoutKey, b.blockType, (outerRow) => {
+//       const nestedBlocks = Array.isArray(outerRow?.[b.blocksKey]) ? outerRow[b.blocksKey] : []
+//       for (const inner of nestedBlocks) {
+//         if (!isBlockItemOfType(inner, b.nestedBlockType)) continue
+//         const firstArr = Array.isArray(inner?.[b.firstArrayKey]) ? inner[b.firstArrayKey] : []
+//         for (const firstItem of firstArr) {
+//           const secondArr = Array.isArray(firstItem?.[b.secondArrayKey])
+//             ? firstItem[b.secondArrayKey]
+//             : []
+//           for (const secondItem of secondArr) {
+//             for (const mf of b.mediaFields) {
+//               const val = secondItem?.[mf]
+//               if (val) push(val)
+//               const orig = secondItem?.[`${mf}Original`]
+//               if (orig) push(orig)
+//             }
+//           }
+//         }
+//       }
+//     })
+//   }
+//   return ids
 // }
 
 // /** Finalize (and stamp) the media actually referenced by this saved doc. */
@@ -1046,6 +318,8 @@
 //   blockSimpleFields: BlockSimpleMediaConfig[]
 //   blockArrayFields: BlockArrayMediaConfig[]
 //   blockGroupFields: BlockGroupMediaConfig[]
+//   // NEW
+//   blockNestedDeepFields?: BlockNestedDeepMediaConfig[]
 // }) {
 //   const {
 //     req,
@@ -1057,6 +331,7 @@
 //     blockSimpleFields,
 //     blockArrayFields,
 //     blockGroupFields,
+//     blockNestedDeepFields = [],
 //   } = opts
 
 //   const refs = collectIDsWithSource(
@@ -1067,6 +342,7 @@
 //     blockSimpleFields,
 //     blockArrayFields,
 //     blockGroupFields,
+//     blockNestedDeepFields,
 //   )
 //   if (!refs.length) return
 
@@ -1077,10 +353,10 @@
 //         id: ref.id,
 //         data: {
 //           uploadSessionId: doc?.uploadSessionId ?? undefined,
-//           ownerCollection: collectionSlug ?? undefined, // stamp from opts
+//           ownerCollection: collectionSlug ?? undefined,
 //           ownerDocId: String(doc.id),
-//           ownerField: ref.ownerField, // e.g., "branding.logo" or "branding.logoOriginal"
-//           derivedFrom: ref.derivedFrom ?? undefined, // only the block slug (if any)
+//           ownerField: ref.ownerField,
+//           derivedFrom: ref.derivedFrom ?? undefined,
 //           temporary: false,
 //         },
 //         overrideAccess: true,
@@ -1102,6 +378,7 @@
 //     blockSimpleFields = [],
 //     blockArrayFields = [],
 //     blockGroupFields = [],
+//     blockNestedDeepFields = [], // NEW
 //     skipOnDraft = true,
 //     onAfterChange,
 //     singleDocSlug,
@@ -1133,25 +410,47 @@
 //     return data
 //   }
 
-//   // ✨ NEW: dot-path adapter (the key to stop duplicate pairs)
+//   // Dot-path adapter (simple fields only)
 //   const dotPathPreAdapter = ({ data }: any) => {
-//     // mirror nested -> flat so existing hook logic can read data[fieldName]
 //     flattenDotFields(data, simpleMediaNames)
 //     return data
 //   }
 //   const dotPathPostAdapter = ({ data }: any) => {
-//     // write flat values back into nested paths and clean up
 //     unflattenDotFields(data, simpleMediaNames)
 //     return data
 //   }
 
+//   // NEW: targeted cleanup for deep nested configs (prev vs current)
+//   const cleanupDeepNested = async ({
+//     req,
+//     previousDoc,
+//     doc,
+//     configs,
+//   }: {
+//     req: any
+//     previousDoc: any
+//     doc: any
+//     configs: BlockNestedDeepMediaConfig[]
+//   }) => {
+//     if (!configs.length) return
+//     try {
+//       const prevIDs = collectDeepNestedIDs(previousDoc ?? {}, configs)
+//       const curIDs = collectDeepNestedIDs(doc ?? {}, configs)
+//       const toDelete = [...prevIDs].filter((id) => !curIDs.has(id))
+//       for (const id of toDelete) {
+//         try {
+//           await req.payload.delete({ collection: MEDIA_SLUG, id, overrideAccess: true })
+//         } catch {}
+//       }
+//     } catch (e) {
+//       req.payload.logger?.warn?.(
+//         `cleanupDeepNested failed: ${(e as Error)?.message ?? 'unknown error'}`,
+//       )
+//     }
+//   }
+
 //   return {
 //     beforeValidate: [stashSessionIdPreHook],
-//     // Order matters:
-//     // 1) stash session id (unchanged)
-//     // 2) ✨ lift nested fields to flat keys
-//     // 3) run your existing beforeChange hook untouched
-//     // 4) ✨ push values back into nested structure
 //     beforeChange: [
 //       stashSessionIdPreHook,
 //       dotPathPreAdapter,
@@ -1160,12 +459,12 @@
 //     ],
 //     afterChange: [
 //       async ({ req, doc, previousDoc }) => {
-//         // delete removed relations (including originals)
+//         // delete removed relations (existing shapes)
 //         await deleteRemovedMedia({
 //           req,
 //           previousDoc,
 //           doc,
-//           mediaFields: simpleDeleteFields, // dot-path aware
+//           mediaFields: simpleDeleteFields,
 //           arrayFields: arrayDeleteFields,
 //           groupFields,
 //           blockSimpleFields,
@@ -1174,7 +473,15 @@
 //           skipOnDraft,
 //         })
 
-//         // stamp all referenced media (owner*, temporary:false, derivedFrom = block slug)
+//         // NEW: handle deep nested removals (block → nested blocks → array → array)
+//         await cleanupDeepNested({
+//           req,
+//           previousDoc,
+//           doc,
+//           configs: blockNestedDeepFields,
+//         })
+
+//         // stamp all referenced media (owner*, temporary:false, derivedFrom = block or inner block)
 //         await finalizeReferencedMedia({
 //           req,
 //           doc,
@@ -1189,13 +496,14 @@
 //           blockSimpleFields,
 //           blockArrayFields,
 //           blockGroupFields,
+//           blockNestedDeepFields, // NEW
 //         })
 
 //         // clear rollback stash
 //         const r = req as any
 //         if (Array.isArray(r._createdMediaForRollback)) r._createdMediaForRollback = []
 
-//         // Optional cleanup trigger (like your BoardOfDirectors global)
+//         // Optional cleanup trigger
 //         if (onAfterChange) await onAfterChange({ req, doc, previousDoc })
 //         return doc
 //       },
@@ -1257,18 +565,20 @@
 //   }
 // }
 
-// ==========================================================================================================
-// ==========================================================================================================
-// ==========================================================================================================
+// =========================================================================================
+// =========================================================================================
+// =========================================================================================
+
+// currently working code
 // src/utils/media/withMediaLifecycle.ts
 import type { CollectionConfig } from 'payload'
 import { createBeforeChangeHook } from './createBeforeChangeHook'
 import { deleteRemovedMedia } from './deleteRemovedMedia'
 import type { ImageConfig, CreatedMedia } from './mediaUtils'
 import { MEDIA_SLUG } from './mediaUtils'
-
-// optional single-doc guard (keep if you already use it)
 import { createSingleDocBeforeOperationHook } from '@/utils/singleDocUtils'
+
+/* ───────────────── types ───────────────── */
 
 export type ArrayMediaConfig = {
   fieldName: string
@@ -1288,9 +598,9 @@ export type GroupMediaConfig = {
 
 /** Blocks: media directly on the block row */
 export type BlockSimpleMediaConfig = {
-  layoutKey: string // e.g. "layout"
-  blockType: string // block slug (we will write THIS into Media.derivedFrom)
-  mediaFields: string[] // fields on the block row itself
+  layoutKey: string
+  blockType: string
+  mediaFields: string[]
   mediaFieldLabels?: Record<string, string>
 }
 
@@ -1304,7 +614,7 @@ export type BlockArrayMediaConfig = {
   mediaFieldLabels?: Record<string, string>
 }
 
-/** Blocks: group -> nested array where items have media */
+/** Blocks: group → nested array where items have media */
 export type BlockGroupMediaConfig = {
   layoutKey: string
   blockType: string
@@ -1316,23 +626,35 @@ export type BlockGroupMediaConfig = {
   mediaFieldLabels?: Record<string, string>
 }
 
-/* === NEW: block → nested blocks[] → firstArray[] → secondArray[] → media === */
+/** Blocks: nested blocks[] → firstArray[] → secondArray[] → media */
 export type BlockNestedDeepMediaConfig = {
   layoutKey: string
-  blockType: string // outer block type (e.g., CUSTOM_CARD_SECTION_SLUG_AND_TAG)
-  blocksKey: string // nested blocks field on the outer block (e.g., 'card')
-  nestedBlockType: string // inner block type to match (e.g., PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG)
-  firstArrayKey: string // e.g., 'planCards'
-  secondArrayKey: string // e.g., 'modalItems'
-  mediaFields: string[] // e.g., ['icon']
+  blockType: string
+  blocksKey: string
+  nestedBlockType: string
+  firstArrayKey: string
+  secondArrayKey: string
+  mediaFields: string[]
+  itemLabelField?: string
+  mediaFieldLabels?: Record<string, string>
+}
+
+/** NEW: block → array (e.g., tabs[]) → blocks (e.g., content[]) → array (e.g., items[]) → media */
+export type BlockArrayBlocksMediaConfig = {
+  layoutKey: string
+  blockType: string
+  arrayKey: string
+  blocksKey: string
+  nestedBlockType: string
+  nestedArrayKey: string
+  mediaFields: string[]
   itemLabelField?: string
   mediaFieldLabels?: Record<string, string>
 }
 
 export type WithMediaLifecycleOpts = {
   imageConfigs?: ImageConfig[]
-
-  /** Plain upload fields (e.g., PDFs) at the top level (or dot-path like "group.file"). */
+  /** top-level (or dot-path) upload fields like PDFs */
   otherUploadFields?: string[]
 
   arrayFields?: ArrayMediaConfig[]
@@ -1341,13 +663,18 @@ export type WithMediaLifecycleOpts = {
   blockArrayFields?: BlockArrayMediaConfig[]
   blockGroupFields?: BlockGroupMediaConfig[]
 
-  /* === NEW: deep nested block media === */
+  /** blocks → nested blocks[] → firstArray[] → secondArray[] → media */
   blockNestedDeepFields?: BlockNestedDeepMediaConfig[]
+
+  /** NEW: block → array[] → blocks[] → array[] → media */
+  blockArrayBlocksFields?: BlockArrayBlocksMediaConfig[]
 
   skipOnDraft?: boolean
   onAfterChange?: (args: { req: any; doc: any; previousDoc: any }) => void | Promise<void>
+
+  /** if present, guards collection to single doc */
   singleDocSlug?: string
-  /** collectionSlug will be stamped into media.ownerCollection */
+  /** stamped into media.ownerCollection */
   collectionSlug?: string
 }
 
@@ -1433,8 +760,10 @@ function collectIDsWithSource(
   blockSimpleFields: BlockSimpleMediaConfig[],
   blockArrayFields: BlockArrayMediaConfig[],
   blockGroupFields: BlockGroupMediaConfig[],
-  // === NEW
+  // deep: blocks → blocks → array → array
   blockNestedDeepFields: BlockNestedDeepMediaConfig[] = [],
+  // NEW: array → blocks → array
+  blockArrayBlocksFields: BlockArrayBlocksMediaConfig[] = [],
 ): Array<{ id: string; derivedFrom?: string; ownerField?: string }> {
   const out: Array<{ id: string; derivedFrom?: string; ownerField?: string }> = []
 
@@ -1448,17 +777,17 @@ function collectIDsWithSource(
     if (oid) out.push({ id: String(oid), derivedFrom, ownerField: origPath })
   }
 
-  // 1) top-level (or dot-path) simple fields (no block; we won't set derivedFrom here)
+  // 1) top-level (or dot-path) simple fields
   for (const f of simpleFields) addPairByPath(doc, f, undefined)
 
-  // 2) one-level arrays (no block; leave derivedFrom empty)
+  // 2) one-level arrays
   for (const a of arrayFields) {
     const items = doc?.[a.field]
     if (!Array.isArray(items)) continue
     for (const it of items) for (const mf of a.mediaFields) addPairByPath(it, mf, undefined)
   }
 
-  // 3) nested arrays under a group (no block; leave derivedFrom empty)
+  // 3) nested arrays under a group
   for (const g of groupFields) {
     const holder = doc?.[g.groupKey]
     if (Array.isArray(holder)) {
@@ -1474,14 +803,14 @@ function collectIDsWithSource(
     }
   }
 
-  // 4) blocks: media on the block row — derivedFrom = blockType (slug)
+  // 4) blocks: media on the block row
   for (const b of blockSimpleFields) {
     eachBlockRow(doc, b.layoutKey, b.blockType, (row) => {
       for (const mf of b.mediaFields) addPairByPath(row, mf, b.blockType)
     })
   }
 
-  // 5) blocks: array items with media — derivedFrom = blockType (slug)
+  // 5) blocks: array items with media
   for (const b of blockArrayFields) {
     eachBlockRow(doc, b.layoutKey, b.blockType, (row) => {
       const items = Array.isArray(row?.[b.arrayKey]) ? row[b.arrayKey] : []
@@ -1489,12 +818,12 @@ function collectIDsWithSource(
     })
   }
 
-  // 6) blocks: groups -> arrays — derivedFrom = blockType (slug)
+  // 6) blocks: groups -> arrays
   for (const b of blockGroupFields) {
     eachBlockRow(doc, b.layoutKey, b.blockType, (row) => {
       const holder = row?.[b.groupKey]
 
-      // Case A: group is an ARRAY of group items
+      // array of groups
       if (Array.isArray(holder)) {
         for (const g of holder) {
           const nested = Array.isArray(g?.[b.arrayKey]) ? g[b.arrayKey] : []
@@ -1504,7 +833,7 @@ function collectIDsWithSource(
         return
       }
 
-      // Case B: group is a plain OBJECT that itself contains the array
+      // single group object
       if (holder && typeof holder === 'object') {
         const nested = Array.isArray(holder?.[b.arrayKey]) ? holder[b.arrayKey] : []
         for (const ni of nested) for (const mf of b.mediaFields) addPairByPath(ni, mf, b.blockType)
@@ -1512,7 +841,7 @@ function collectIDsWithSource(
     })
   }
 
-  // === 7) NEW: block → nested blocks[] → firstArray[] → secondArray[] → media
+  // 7) blocks: nested blocks[] → firstArray[] → secondArray[] → media
   for (const b of blockNestedDeepFields) {
     eachBlockRow(doc, b.layoutKey, b.blockType, (outerRow) => {
       const nestedBlocks = Array.isArray(outerRow?.[b.blocksKey]) ? outerRow[b.blocksKey] : []
@@ -1531,10 +860,27 @@ function collectIDsWithSource(
     })
   }
 
+  // 8) NEW: block → array[] → blocks[] → array[] → media
+  for (const b of blockArrayBlocksFields) {
+    eachBlockRow(doc, b.layoutKey, b.blockType, (outerRow) => {
+      const arr = Array.isArray(outerRow?.[b.arrayKey]) ? outerRow[b.arrayKey] : []
+      for (const arrItem of arr) {
+        const innerBlocks = Array.isArray(arrItem?.[b.blocksKey]) ? arrItem[b.blocksKey] : []
+        for (const inner of innerBlocks) {
+          if (!isBlockItemOfType(inner, b.nestedBlockType)) continue
+          const nestedArr = Array.isArray(inner?.[b.nestedArrayKey]) ? inner[b.nestedArrayKey] : []
+          for (const ni of nestedArr) {
+            for (const mf of b.mediaFields) addPairByPath(ni, mf, b.nestedBlockType)
+          }
+        }
+      }
+    })
+  }
+
   return out
 }
 
-/** Diff helper for deep nested removal */
+/** Diff helper for deep nested removal: blocks → blocks → array → array */
 function collectDeepNestedIDs(doc: any, cfgs: BlockNestedDeepMediaConfig[]): Set<string> {
   const ids = new Set<string>()
   const push = (v: any) => {
@@ -1569,6 +915,35 @@ function collectDeepNestedIDs(doc: any, cfgs: BlockNestedDeepMediaConfig[]): Set
   return ids
 }
 
+/** NEW: Diff helper for array → blocks → array removal */
+function collectArrayBlocksIDs(doc: any, cfgs: BlockArrayBlocksMediaConfig[]): Set<string> {
+  const ids = new Set<string>()
+  const pushRel = (v: any) => {
+    const id = relID(v)
+    if (id) ids.add(String(id))
+  }
+
+  for (const b of cfgs) {
+    eachBlockRow(doc, b.layoutKey, b.blockType, (outerRow) => {
+      const arr = Array.isArray(outerRow?.[b.arrayKey]) ? outerRow[b.arrayKey] : []
+      for (const arrItem of arr) {
+        const innerBlocks = Array.isArray(arrItem?.[b.blocksKey]) ? arrItem[b.blocksKey] : []
+        for (const inner of innerBlocks) {
+          if (!isBlockItemOfType(inner, b.nestedBlockType)) continue
+          const nestedArr = Array.isArray(inner?.[b.nestedArrayKey]) ? inner[b.nestedArrayKey] : []
+          for (const ni of nestedArr) {
+            for (const mf of b.mediaFields) {
+              pushRel(ni?.[mf])
+              pushRel(ni?.[`${mf}Original`])
+            }
+          }
+        }
+      }
+    })
+  }
+  return ids
+}
+
 /** Finalize (and stamp) the media actually referenced by this saved doc. */
 async function finalizeReferencedMedia(opts: {
   req: any
@@ -1580,8 +955,8 @@ async function finalizeReferencedMedia(opts: {
   blockSimpleFields: BlockSimpleMediaConfig[]
   blockArrayFields: BlockArrayMediaConfig[]
   blockGroupFields: BlockGroupMediaConfig[]
-  // NEW
   blockNestedDeepFields?: BlockNestedDeepMediaConfig[]
+  blockArrayBlocksFields?: BlockArrayBlocksMediaConfig[] // NEW
 }) {
   const {
     req,
@@ -1594,17 +969,23 @@ async function finalizeReferencedMedia(opts: {
     blockArrayFields,
     blockGroupFields,
     blockNestedDeepFields = [],
+    blockArrayBlocksFields = [],
   } = opts
 
   const refs = collectIDsWithSource(
     doc,
     simpleFields,
-    arrayFields,
-    groupFields,
+    arrayFields.map((a) => ({ field: a.field, mediaFields: a.mediaFields })),
+    groupFields.map((g) => ({
+      groupKey: g.groupKey,
+      arrayKey: g.arrayKey,
+      mediaFields: g.mediaFields,
+    })),
     blockSimpleFields,
     blockArrayFields,
     blockGroupFields,
     blockNestedDeepFields,
+    blockArrayBlocksFields,
   )
   if (!refs.length) return
 
@@ -1640,7 +1021,8 @@ export function withMediaLifecycle(opts: WithMediaLifecycleOpts): CollectionConf
     blockSimpleFields = [],
     blockArrayFields = [],
     blockGroupFields = [],
-    blockNestedDeepFields = [], // NEW
+    blockNestedDeepFields = [],
+    blockArrayBlocksFields = [], // NEW
     skipOnDraft = true,
     onAfterChange,
     singleDocSlug,
@@ -1650,7 +1032,7 @@ export function withMediaLifecycle(opts: WithMediaLifecycleOpts): CollectionConf
   // Track simple media (supports dot-paths like "branding.logo")
   const simpleMediaNames = [...imageConfigs.map((c) => c.fieldName), ...otherUploadFields]
 
-  // For delete sweep we include both field and fieldOriginal (dot-path OK)
+  // For delete sweep include both field and fieldOriginal
   const simpleDeleteFields = [...simpleMediaNames, ...simpleMediaNames.map((n) => `${n}Original`)]
 
   const arrayDeleteFields = arrayFields.map((a) => ({
@@ -1682,7 +1064,7 @@ export function withMediaLifecycle(opts: WithMediaLifecycleOpts): CollectionConf
     return data
   }
 
-  // NEW: targeted cleanup for deep nested configs (prev vs current)
+  // Cleanup helper for deep nested (blocks → blocks → array → array)
   const cleanupDeepNested = async ({
     req,
     previousDoc,
@@ -1711,6 +1093,35 @@ export function withMediaLifecycle(opts: WithMediaLifecycleOpts): CollectionConf
     }
   }
 
+  // NEW: Cleanup helper for array → blocks → array
+  const cleanupArrayBlocks = async ({
+    req,
+    previousDoc,
+    doc,
+    configs,
+  }: {
+    req: any
+    previousDoc: any
+    doc: any
+    configs: BlockArrayBlocksMediaConfig[]
+  }) => {
+    if (!configs.length) return
+    try {
+      const prevIDs = collectArrayBlocksIDs(previousDoc ?? {}, configs)
+      const curIDs = collectArrayBlocksIDs(doc ?? {}, configs)
+      const toDelete = [...prevIDs].filter((id) => !curIDs.has(id))
+      for (const id of toDelete) {
+        try {
+          await req.payload.delete({ collection: MEDIA_SLUG, id, overrideAccess: true })
+        } catch {}
+      }
+    } catch (e) {
+      req.payload.logger?.warn?.(
+        `cleanupArrayBlocks failed: ${(e as Error)?.message ?? 'unknown error'}`,
+      )
+    }
+  }
+
   return {
     beforeValidate: [stashSessionIdPreHook],
     beforeChange: [
@@ -1735,7 +1146,7 @@ export function withMediaLifecycle(opts: WithMediaLifecycleOpts): CollectionConf
           skipOnDraft,
         })
 
-        // NEW: handle deep nested removals (block → nested blocks → array → array)
+        // handle deep nested removals (blocks → blocks → array → array)
         await cleanupDeepNested({
           req,
           previousDoc,
@@ -1743,7 +1154,15 @@ export function withMediaLifecycle(opts: WithMediaLifecycleOpts): CollectionConf
           configs: blockNestedDeepFields,
         })
 
-        // stamp all referenced media (owner*, temporary:false, derivedFrom = block or inner block)
+        // NEW: handle array → blocks → array removals
+        await cleanupArrayBlocks({
+          req,
+          previousDoc,
+          doc,
+          configs: blockArrayBlocksFields,
+        })
+
+        // stamp all referenced media
         await finalizeReferencedMedia({
           req,
           doc,
@@ -1758,14 +1177,14 @@ export function withMediaLifecycle(opts: WithMediaLifecycleOpts): CollectionConf
           blockSimpleFields,
           blockArrayFields,
           blockGroupFields,
-          blockNestedDeepFields, // NEW
+          blockNestedDeepFields,
+          blockArrayBlocksFields, // NEW
         })
 
         // clear rollback stash
         const r = req as any
         if (Array.isArray(r._createdMediaForRollback)) r._createdMediaForRollback = []
 
-        // Optional cleanup trigger
         if (onAfterChange) await onAfterChange({ req, doc, previousDoc })
         return doc
       },

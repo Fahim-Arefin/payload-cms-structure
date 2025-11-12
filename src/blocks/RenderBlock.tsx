@@ -63,6 +63,7 @@ import {
   SUPPORT_FAQ_TAB_SLUG_AND_TAG,
   SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
   SUPPORT_MAP_TAB_SLUG_AND_TAG,
+  CUSTOM_TAB_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -113,6 +114,7 @@ import PremCalculatorPageBlock from './premCalculatorPage/PremCalculatorPageBloc
 import PurchaseFormBlock from './purchaseFormBlock/PurchaseFormBlock'
 import AgentFormBlock from './agentForm/AgentFormBlock'
 import SupportBuzzBlock from './supportBuzz/supportBuzzBlock'
+import CustomTabBlock from './customTab/CustomTabBlock'
 
 type Params = Record<string, string>
 
@@ -261,6 +263,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     //purchase page
     case PURCHASE_FORM_SLUG_AND_TAG:
       return <PurchaseFormBlock key={block.id} block={block} params={params} />
+
+    // custom tab
+    case CUSTOM_TAB_SLUG_AND_TAG:
+      return <CustomTabBlock key={block.id} block={block} params={params} />
 
     default:
       return null

@@ -33,6 +33,8 @@ import {
   MULTI_STAGE_PLAN_SLUG_AND_TAG,
   SUPPORT_BUZZ_SLUG_AND_TAG,
   SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
+  CUSTOM_TAB_SLUG_AND_TAG,
+  DESCRIPTIVE_CONTENT_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -409,7 +411,8 @@ export const mediaHooks = withMediaLifecycle({
   // otherUploadFields: [
   //   'brochurePDF', // 👈 top-level upload fields to Media (PDFs)
   // ],
-  // src/utils/media/mediaHooks.ts (where you build export const mediaHooks = withMediaLifecycle({...}))
+
+  // arrays -> arrays -> arrays --> arrays
   blockNestedDeepFields: [
     {
       layoutKey: 'layout',
@@ -419,6 +422,20 @@ export const mediaHooks = withMediaLifecycle({
       firstArrayKey: 'planCards', // array on inner block
       secondArrayKey: 'modalItems', // nested array inside each planCards item
       mediaFields: ['icon'], // media on modalItems[]
+    },
+  ],
+
+  // ✅ NEW: block → tabs[] → content (blocks) → (descriptive-content) items[] → icon
+  blockArrayBlocksFields: [
+    // descriptive content image
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_TAB_SLUG_AND_TAG, // outer block
+      arrayKey: 'tabs',
+      blocksKey: 'content',
+      nestedBlockType: DESCRIPTIVE_CONTENT_SLUG_AND_TAG, // the inner block to target
+      nestedArrayKey: 'items',
+      mediaFields: ['icon'],
     },
   ],
 

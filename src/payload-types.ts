@@ -5050,6 +5050,210 @@ export interface Page {
         blockName?: string | null;
         blockType: 'agent-form';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 100 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Title. Max 100 chars.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 100 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Subtitle. Max 100 chars.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~500 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৫০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Add each tab header with a one-word “value” key, then choose exactly one content block.
+         */
+        tabs: {
+          /**
+           * e.g., features, eligibility, benefits
+           */
+          value: string;
+          label: string;
+          labelBN?: string | null;
+          /**
+           * Pick ONE content block for this tab.
+           */
+          content: (
+            | {
+                /**
+                 * Add one or more items (icon 1:1, EN/BN title + description).
+                 */
+                items: {
+                  /**
+                   * Square icon, PNG/SVG preferred. Blur placeholder generated automatically.
+                   */
+                  icon: string | Media;
+                  iconOriginal?: (string | null) | Media;
+                  pendingIconOriginal?: string | null;
+                  pendingIconCrop?: string | null;
+                  iconBlurDataURL?: string | null;
+                  /**
+                   * Max 100 characters.
+                   */
+                  title: string;
+                  /**
+                   * সর্বোচ্চ ১০০ অক্ষর।
+                   */
+                  titleBN: string;
+                  /**
+                   * Up to ~5000 characters.
+                   */
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                   */
+                  descriptionBN?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                }[];
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'descriptive-content';
+              }
+            | {
+                /**
+                 * Add one or more items (description).
+                 */
+                items: {
+                  /**
+                   * Up to ~5000 characters.
+                   */
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                   */
+                  descriptionBN?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                }[];
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'step-content';
+              }
+          )[];
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'custom-tab';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -6982,6 +7186,68 @@ export interface PagesSelect<T extends boolean = true> {
               subdescriptionBN?: T;
               consentText?: T;
               consentTextBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'custom-tab'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              tabs?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    labelBN?: T;
+                    content?:
+                      | T
+                      | {
+                          'descriptive-content'?:
+                            | T
+                            | {
+                                items?:
+                                  | T
+                                  | {
+                                      icon?: T;
+                                      iconOriginal?: T;
+                                      pendingIconOriginal?: T;
+                                      pendingIconCrop?: T;
+                                      iconBlurDataURL?: T;
+                                      title?: T;
+                                      titleBN?: T;
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
+                          'step-content'?:
+                            | T
+                            | {
+                                items?:
+                                  | T
+                                  | {
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
+                        };
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

@@ -57,6 +57,9 @@ import {
   SUPPORT_FAQ_TAB_SLUG_AND_TAG,
   SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
   SUPPORT_MAP_TAB_SLUG_AND_TAG,
+  CUSTOM_TAB_SLUG_AND_TAG,
+  DESCRIPTIVE_CONTENT_SLUG_AND_TAG,
+  STEP_CONTENT_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -360,4 +363,22 @@ export type PurchasePageBlockType = Extract<
 export type AgentOnboardingFormBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof AGENT_ONBOARDING_FORM_SLUG_AND_TAG }
+>
+
+// Custom Tab
+export type CustomTabBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CUSTOM_TAB_SLUG_AND_TAG }
+>
+
+// descriptive Content
+export type DescriptiveContentBlockType = Extract<
+  CustomTabBlockType['tabs'][number]['content'][number],
+  { blockType: typeof DESCRIPTIVE_CONTENT_SLUG_AND_TAG }
+>
+
+// descriptive Content
+export type StepContentBlockType = Extract<
+  CustomTabBlockType['tabs'][number]['content'][number],
+  { blockType: typeof STEP_CONTENT_SLUG_AND_TAG }
 >
