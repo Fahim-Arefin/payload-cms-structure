@@ -43,7 +43,8 @@ const OnboardingForm: FC<OnboardingFormProps> = ({ block }) => {
 
         {/* Right Side */}
         <div className="p-4 lg:pr-0 z-10">
-          <OnboardingJoinForm />
+          <OnboardingJoinForm consentEn={block?.consentText}
+            consentBn={block?.consentTextBN} />
         </div>
       </div>
     </div>

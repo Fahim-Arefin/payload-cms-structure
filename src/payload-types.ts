@@ -4832,6 +4832,41 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        /**
+         * Consent line shown under the premium calculator form submit/CTA.
+         */
+        premiumCalculatorForm?: {
+          consentText?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          consentTextBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'prem-calculator-card';
@@ -4882,6 +4917,47 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        /**
+         * Consent text shown under the Purchase form submit button (localized EN/BN).
+         */
+        purchaseNowForm?: {
+          /**
+           * Rich text consent displayed in English under the form submit area.
+           */
+          consentText?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * বাংলা কনসেন্ট টেক্সট (ফর্ম সাবমিট অংশে দেখানো হবে)।
+           */
+          consentTextBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'purchase-form';
@@ -4892,6 +4968,8 @@ export interface Page {
          * Hex color in #RRGGBB. Default: #f6eddd
          */
         bgColor?: string | null;
+        formHeader?: string | null;
+        formHeaderBN?: string | null;
         description: {
           root: {
             type: string;
@@ -4924,6 +5002,42 @@ export interface Page {
         } | null;
         subdescription?: string | null;
         subdescriptionBN?: string | null;
+        /**
+         * Shown near the submit action on the Agent form. Default provided; you can customize.
+         */
+        consentText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * এজেন্ট ফর্মের সাবমিট বাটনের কাছে প্রদর্শিত হবে। ডিফল্ট দেয়া আছে; প্রয়োজনে সম্পাদনা করুন।
+         */
+        consentTextBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'agent-form';
@@ -6813,6 +6927,12 @@ export interface PagesSelect<T extends boolean = true> {
                     cardBg?: T;
                     id?: T;
                   };
+              premiumCalculatorForm?:
+                | T
+                | {
+                    consentText?: T;
+                    consentTextBN?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -6830,6 +6950,12 @@ export interface PagesSelect<T extends boolean = true> {
                     cardBg?: T;
                     id?: T;
                   };
+              purchaseNowForm?:
+                | T
+                | {
+                    consentText?: T;
+                    consentTextBN?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -6838,10 +6964,14 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               uploadSessionId?: T;
               bgColor?: T;
+              formHeader?: T;
+              formHeaderBN?: T;
               description?: T;
               descriptionBN?: T;
               subdescription?: T;
               subdescriptionBN?: T;
+              consentText?: T;
+              consentTextBN?: T;
               id?: T;
               blockName?: T;
             };

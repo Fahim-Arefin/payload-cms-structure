@@ -43,6 +43,69 @@ const validateRichTextNonEmpty =
     }
   }
 
+/* ---------- default rich text (Lexical JSON) for consent (EN/BN) ---------- */
+const CONSENT_EN_DEFAULT = {
+  root: {
+    type: 'root',
+    version: 1,
+    children: [
+      {
+        type: 'paragraph',
+        version: 1,
+        indent: 0,
+        format: '',
+        direction: 'ltr',
+        children: [
+          {
+            type: 'text',
+            version: 1,
+            style: '',
+            detail: 0,
+            format: 0,
+            mode: 'normal',
+            text:
+              'By clicking Send Feedback, you agree to our terms and conditions and privacy policy.',
+          },
+        ],
+      },
+    ],
+    direction: 'ltr',
+    format: '',
+    indent: 0,
+  },
+}
+
+const CONSENT_BN_DEFAULT = {
+  root: {
+    type: 'root',
+    version: 1,
+    children: [
+      {
+        type: 'paragraph',
+        version: 1,
+        indent: 0,
+        format: '',
+        direction: 'ltr',
+        children: [
+          {
+            type: 'text',
+            version: 1,
+            style: '',
+            detail: 0,
+            format: 0,
+            mode: 'normal',
+            text:
+              'এখানে ক্লিক করার মাধ্যমে, আপনি আমাদের টার্মস এন্ড কন্ডিশনস , ও প্রাইভেসি পলিসিতে সম্মত করছেন।',
+          },
+        ],
+      },
+    ],
+    direction: 'ltr',
+    format: '',
+    indent: 0,
+  },
+}
+
 /* ---------------- block ---------------- */
 const PremCalculatorPageSchema: Block = {
   slug: PREM_CALC_PAGE_SLUG_AND_TAG,
@@ -206,6 +269,37 @@ const PremCalculatorPageSchema: Block = {
         { cardTitle: 'For their future', cardBg: '#9C863940' },
         { cardTitle: 'For your growth', cardBg: '#CCBF95' },
         { cardTitle: 'When life throws you a curveball', cardBg: '#9C8639B2' },
+      ],
+    },
+
+    /* ─────────────────────────────────────────────────────────────
+       Premium Calculater Form (consent rich text EN/BN)
+       ─ add at the end, same defaults as requested
+       ───────────────────────────────────────────────────────────── */
+    {
+      name: 'premiumCalculatorForm',
+      type: 'group',
+      label: 'Premium Calculater Form',
+      admin: {
+        description: 'Consent line shown under the premium calculator form submit/CTA.',
+      },
+      fields: [
+        {
+          name: 'consentText',
+          type: 'richText',
+          label: 'Consent Text (EN)',
+          required: false,
+          validate: validateRichTextNonEmpty('Consent Text'),
+          defaultValue: CONSENT_EN_DEFAULT,
+        },
+        {
+          name: 'consentTextBN',
+          type: 'richText',
+          label: 'Consent Text (BN)',
+          required: false,
+          validate: validateRichTextNonEmpty('Consent Text (BN)'),
+          defaultValue: CONSENT_BN_DEFAULT,
+        },
       ],
     },
   ],

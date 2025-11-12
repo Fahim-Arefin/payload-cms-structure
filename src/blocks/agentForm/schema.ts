@@ -50,6 +50,43 @@ const validateRichTextRequired =
   (val: unknown) =>
     hasRealLexicalText(val) ? true : `${label} must contain some text.`
 
+/* ---------------- defaults (Lexical JSON) ---------------- */
+const lexicalParagraph = (text: string) => ({
+  root: {
+    type: 'root',
+    direction: 'ltr',
+    format: '',
+    indent: 0,
+    version: 1,
+    children: [
+      {
+        type: 'paragraph',
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+        children: [
+          {
+            type: 'text',
+            text,
+            detail: 0,
+            format: 0,
+            mode: 'normal',
+            style: '',
+            version: 1,
+          },
+        ],
+      },
+    ],
+  },
+})
+
+const DEFAULT_CONSENT_EN =
+  lexicalParagraph('By clicking Submit, you agree to our terms and conditions and privacy policy.')
+const DEFAULT_CONSENT_BN = lexicalParagraph(
+  'সাবমিট বাটনে ক্লিক করলে, আপনি আমাদের শর্তাবলি এবং প্রাইভেসি পলিসি মেনে নিচ্ছেন।',
+)
+
 /* ---------------- block ---------------- */
 const AgentOnboardingFormSchema: Block = {
   slug: AGENT_ONBOARDING_FORM_SLUG_AND_TAG,
@@ -78,6 +115,32 @@ const AgentOnboardingFormSchema: Block = {
       },
     },
 
+    /* ---------- Agent Form Section (Header) ---------- */
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'formHeader',
+          type: 'text',
+          label: 'Agent Form Section (Header)',
+          required: false,
+          defaultValue: 'Agent Form Section',
+          maxLength: HEADING_MAX,
+          validate: validateShort('Agent Form Section (Header)', HEADING_MAX, false),
+          admin: { width: '50%' },
+        },
+        {
+          name: 'formHeaderBN',
+          type: 'text',
+          label: 'এজেন্ট ফর্ম সেকশন (হেডার)',
+          required: false,
+          defaultValue: 'এজেন্ট ফর্ম সেকশন',
+          maxLength: HEADING_MAX,
+          validate: validateShort('Agent Form Section (Header) (BN)', HEADING_MAX, false),
+          admin: { width: '50%' },
+        },
+      ],
+    },
 
     /* ---------- Description (Rich Text) ---------- */
     {
@@ -123,6 +186,37 @@ const AgentOnboardingFormSchema: Block = {
           maxLength: SUBDESC_MAX,
           validate: validateShort('Subdescription (BN)', SUBDESC_MAX, false),
           admin: { width: '50%' },
+        },
+      ],
+    },
+
+    /* ---------- Consent (Rich Text, optional) ---------- */
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'consentText',
+          type: 'richText',
+          label: 'Agent Form Section — Consent Text',
+          required: false,
+          admin: {
+            width: '50%',
+            description:
+              'Shown near the submit action on the Agent form. Default provided; you can customize.',
+          },
+          defaultValue: DEFAULT_CONSENT_EN,
+        },
+        {
+          name: 'consentTextBN',
+          type: 'richText',
+          label: 'এজেন্ট ফর্ম সেকশন — কনসেন্ট টেক্সট (বাংলা)',
+          required: false,
+          admin: {
+            width: '50%',
+            description:
+              'এজেন্ট ফর্মের সাবমিট বাটনের কাছে প্রদর্শিত হবে। ডিফল্ট দেয়া আছে; প্রয়োজনে সম্পাদনা করুন।',
+          },
+          defaultValue: DEFAULT_CONSENT_BN,
         },
       ],
     },

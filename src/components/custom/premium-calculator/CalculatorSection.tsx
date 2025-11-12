@@ -232,9 +232,13 @@ type Props = {
 function pickTextColor(bgHex?: string) {
   const hex = (bgHex || '').replace('#', '')
   if (![3, 6, 8].includes(hex.length)) return '#3A3A3C' // default dark
-  const normalized = hex.length === 3
-    ? hex.split('').map(c => c + c).join('')
-    : hex.slice(0, 6)
+  const normalized =
+    hex.length === 3
+      ? hex
+          .split('')
+          .map((c) => c + c)
+          .join('')
+      : hex.slice(0, 6)
 
   const r = parseInt(normalized.slice(0, 2), 16)
   const g = parseInt(normalized.slice(2, 4), 16)
@@ -294,10 +298,26 @@ const CalculatorSection = ({ block }: Props) => {
   }
 
   const plans = [
-    { text: 'Shanta Child Education Plan', videoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4', code: 1 },
-    { text: 'Shanta Endowment Plan',       videoLink: 'https://www.youtube.com/embed/CkKkdNkBk9g', code: 2 },
-    { text: 'Shanta 3 Stage Plan',         videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw', code: 3 },
-    { text: 'Shanta 4 Stage Plan',         videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw', code: 4 },
+    {
+      text: 'Shanta Child Education Plan',
+      videoLink: 'https://www.youtube.com/embed/Fj_BE9D64W4',
+      code: 1,
+    },
+    {
+      text: 'Shanta Endowment Plan',
+      videoLink: 'https://www.youtube.com/embed/CkKkdNkBk9g',
+      code: 2,
+    },
+    {
+      text: 'Shanta 3 Stage Plan',
+      videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+      code: 3,
+    },
+    {
+      text: 'Shanta 4 Stage Plan',
+      videoLink: 'https://www.youtube.com/embed/h11sOPnfnhw',
+      code: 4,
+    },
   ]
 
   const sectionTitleEn = block?.title ?? ''
@@ -359,7 +379,8 @@ const CalculatorSection = ({ block }: Props) => {
             <>
               {/* Cards from schema (1–4) */}
               {cards.map((card, idx) => {
-                const bg = card.cardBg || (idx === 0 ? '#9C863940' : idx === 1 ? '#CCBF95' : '#9C8639B2')
+                const bg =
+                  card.cardBg || (idx === 0 ? '#9C863940' : idx === 1 ? '#CCBF95' : '#9C8639B2')
                 const textColor = pickTextColor(bg)
                 const isFirst = idx === 0
                 const isLast = idx === cards.length - 1
@@ -380,16 +401,13 @@ const CalculatorSection = ({ block }: Props) => {
                     </h4>
 
                     {/* If you prefer plain text fallback when rich text is empty */}
-                    {(card.cardDesc || card.cardDescBN) ? (
+                    {card.cardDesc || card.cardDescBN ? (
                       <div className="global-p2 font-light">
                         <LocalizedRichText en={card.cardDesc} bn={card.cardDescBN} />
                       </div>
                     ) : (
                       <p className="global-p2 font-light opacity-80">
-                        <LocalizedText
-                          en="—"
-                          bn="—"
-                        />
+                        <LocalizedText en="—" bn="—" />
                       </p>
                     )}
                   </div>
@@ -405,6 +423,8 @@ const CalculatorSection = ({ block }: Props) => {
             onApiResponse={handleApiResponse}
             formData={formData}
             setFormData={setFormData}
+            consentEn={block?.premiumCalculatorForm?.consentText}
+            consentBn={block?.premiumCalculatorForm?.consentTextBN}
           />
         </div>
       </div>
@@ -413,4 +433,3 @@ const CalculatorSection = ({ block }: Props) => {
 }
 
 export default CalculatorSection
-

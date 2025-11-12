@@ -18,6 +18,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
 import LocalizedText from '../shared/LocalizedText'
+import LocalizedRichText from '../shared/LocalizedRichText'
 
 type FormData = {
   PlanCode: number
@@ -35,11 +36,13 @@ type Props = {
   formData: FormData
   setFormData: React.Dispatch<React.SetStateAction<FormData>>
   onPlanSelect?: (planCode: number, planName: string) => void
+  consentEn?: any
+  consentBn?: any
 }
 
-function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
+function PurchaseForm({ formData, setFormData, onPlanSelect, consentEn, consentBn }: Props) {
   const lang = useSSRLanguage()
-  const L = (en: string, bn?: string) => (lang === 'en' ? en : bn ?? en)
+  const L = (en: string, bn?: string) => (lang === 'en' ? en : (bn ?? en))
 
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [availablePlans, setAvailablePlans] = useState<{ plan_name: string; plan_code: number }[]>(
@@ -287,7 +290,10 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
           onValueChange={(v) => {
             const plan = availablePlans.find((p) => p.plan_name === v)
             const planWithVideo = plan
-              ? { ...plan, videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings] }
+              ? {
+                  ...plan,
+                  videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings],
+                }
               : null
             setSelectedPlan(planWithVideo)
             if (plan) {
@@ -341,7 +347,8 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
                 />
               </p>
             </DialogTrigger>
-            <DialogContent className="max-w-5xl w-full aspect-video p-0 bg-black 
+            <DialogContent
+              className="max-w-5xl w-full aspect-video p-0 bg-black 
               [&>button.absolute]:top-3 [&>button.absolute]:right-3 
               [&>button.absolute]:bg-black/50 [&>button.absolute]:text-white 
               [&>button.absolute]:hover:bg-black/80"
@@ -415,9 +422,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
       <div className="col-span-2 md:col-span-1">
         <Select
           value={
-            formData.Gender !== null && formData.Gender !== undefined
-              ? String(formData.Gender)
-              : ''
+            formData.Gender !== null && formData.Gender !== undefined ? String(formData.Gender) : ''
           }
           onValueChange={(v) => handleInputChange('Gender', parseInt(v, 10))}
         >
@@ -469,6 +474,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
       </div>
 
       {/* Consent */}
+      {/* Consent (from CMS via LocalizedRichText; no fallback) */}
       <div className="col-span-2">
         <label className="flex items-start gap-3">
           <Checkbox
@@ -476,53 +482,9 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
             checked={agreeTerms}
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
-          {lang === 'en' ? (
-            <span className="text-xs md:text-sm leading-relaxed">
-              By clicking <span className="font-semibold">Request for purchase</span>, you agree to
-              our{' '}
-              <Link
-                href="/terms-condition"
-                className="underline text-[#FF6600] hover:opacity-90"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                terms and conditions
-              </Link>{' '}
-              and Shanta Life{' '}
-              <Link
-                href="/privacy-policy"
-                className="underline text-[#FF6600] hover:opacity-90"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                privacy policy
-              </Link>
-              .
-            </span>
-          ) : (
-            <span className="text-xs md:text-sm leading-relaxed">
-              <span className="font-semibold">পলিসি কিনতে রিকুয়েস্ট করুন</span> বাটনে ক্লিক করলে
-              আপনি আমাদের{' '}
-              <Link
-                href="/terms-condition"
-                className="underline text-[#FF6600] hover:opacity-90"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                শর্তাবলি
-              </Link>{' '}
-              ও শান্তা লাইফের{' '}
-              <Link
-                href="/privacy-policy"
-                className="underline text-[#FF6600] hover:opacity-90"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                প্রাইভেসি পলিসি
-              </Link>{' '}
-              মেনে নিচ্ছেন।
-            </span>
-          )}
+          <span className="text-xs md:text-sm leading-relaxed">
+            <LocalizedRichText en={consentEn} bn={consentBn} />
+          </span>
         </label>
       </div>
 

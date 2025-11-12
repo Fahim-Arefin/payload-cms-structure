@@ -133,6 +133,100 @@ const PurchaseFormSchema: Block = {
         },
       ],
     },
+
+    /* ---------- Purchase Now Form (Consent RichText EN/BN) ---------- */
+    {
+      name: 'purchaseNowForm',
+      type: 'group',
+      label: 'Purchase Now Form',
+      admin: {
+        description: 'Consent text shown under the Purchase form submit button (localized EN/BN).',
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'consentText',
+              type: 'richText',
+              label: 'Consent (EN)',
+              admin: {
+                width: '50%',
+                description: 'Rich text consent displayed in English under the form submit area.',
+              },
+              // Minimal Lexical JSON default
+              defaultValue: {
+                root: {
+                  type: 'root',
+                  direction: null,
+                  format: '',
+                  indent: 0,
+                  version: 1,
+                  children: [
+                    {
+                      type: 'paragraph',
+                      format: '',
+                      indent: 0,
+                      direction: null,
+                      version: 1,
+                      children: [
+                        {
+                          type: 'text',
+                          text: 'By clicking Purchase Now, you agree to our terms and conditions and privacy policy.',
+                          format: 0,
+                          detail: 0,
+                          mode: 'normal',
+                          style: '',
+                          version: 1,
+                        },
+                      ],
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              name: 'consentTextBN',
+              type: 'richText',
+              label: 'Consent (BN)',
+              admin: {
+                width: '50%',
+                description: 'বাংলা কনসেন্ট টেক্সট (ফর্ম সাবমিট অংশে দেখানো হবে)।',
+              },
+              defaultValue: {
+                root: {
+                  type: 'root',
+                  direction: null,
+                  format: '',
+                  indent: 0,
+                  version: 1,
+                  children: [
+                    {
+                      type: 'paragraph',
+                      format: '',
+                      indent: 0,
+                      direction: null,
+                      version: 1,
+                      children: [
+                        {
+                          type: 'text',
+                          text: 'পলিসি কিনতে রিকুয়েস্ট করুন বাটনে ক্লিক করলে আপনি আমাদের টার্মস এন্ড কন্ডিশনস ও শান্তা লাইফের প্রাইভেসি পলিসি মেনে নিচ্ছেন।',
+                          format: 0,
+                          detail: 0,
+                          mode: 'normal',
+                          style: '',
+                          version: 1,
+                        },
+                      ],
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+      ],
+    },
   ],
 }
 
