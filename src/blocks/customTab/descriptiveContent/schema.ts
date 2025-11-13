@@ -77,6 +77,42 @@ const DescriptiveContent: Block = {
 
   fields: [
     {
+      type: 'row',
+      fields: [
+        {
+          name: 'fullWidth',
+          type: 'checkbox',
+          label: 'Full width layout',
+          defaultValue: false,
+          admin: {
+            width: '33%',
+            description: 'If enabled, this item will be rendered using full-width layout.',
+          },
+        },
+        {
+          name: 'hoverVisibility',
+          type: 'checkbox',
+          label: 'Hover Effect',
+          defaultValue: false,
+          admin: {
+            width: '33%',
+            description: 'If enabled, there will be a hover effect.',
+          },
+        },
+        {
+          name: 'desVisibility',
+          type: 'checkbox',
+          label: 'Visible description',
+          defaultValue: true,
+          admin: {
+            width: '33%',
+            description:
+              'If not enabled, the description will be shown only on hover. If enabled description will be shown always',
+          },
+        },
+      ],
+    },
+    {
       name: 'items',
       type: 'array',
       label: 'Items',

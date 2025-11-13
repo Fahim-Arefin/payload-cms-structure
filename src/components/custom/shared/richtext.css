@@ -28,3 +28,21 @@
   margin-top: var(--rt-li-gap-y, 0.25rem);
   margin-bottom: var(--rt-li-gap-y, 0.25rem);
 }
+
+/* Ensure rich text inherits alignment from parent container */
+.rt {
+  text-align: inherit;
+}
+
+/* Override Lexical's inline text-align with inherited value */
+.rt p,
+.rt div,
+.rt h1,
+.rt h2,
+.rt h3,
+.rt h4,
+.rt h5,
+.rt h6,
+.rt li {
+  text-align: inherit !important;
+}

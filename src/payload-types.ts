@@ -5052,7 +5052,7 @@ export interface Page {
       }
     | {
         /**
-         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
          */
         backgroundColor?: string | null;
         /**
@@ -5138,6 +5138,18 @@ export interface Page {
            */
           content: (
             | {
+                /**
+                 * If enabled, this item will be rendered using full-width layout.
+                 */
+                fullWidth?: boolean | null;
+                /**
+                 * If enabled, there will be a hover effect.
+                 */
+                hoverVisibility?: boolean | null;
+                /**
+                 * If not enabled, the description will be shown only on hover. If enabled description will be shown always
+                 */
+                desVisibility?: boolean | null;
                 /**
                  * Add one or more items (icon 1:1, EN/BN title + description).
                  */
@@ -7215,6 +7227,9 @@ export interface PagesSelect<T extends boolean = true> {
                           'descriptive-content'?:
                             | T
                             | {
+                                fullWidth?: T;
+                                hoverVisibility?: T;
+                                desVisibility?: T;
                                 items?:
                                   | T
                                   | {

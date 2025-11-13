@@ -1,0 +1,10 @@
+/* Arrow direction */
+.arrow-right svg {
+  transform: scaleX(1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.arrow-left svg {
+  transform: scaleX(-1);
+  transition: transform 0.2s ease-in-out;
+}

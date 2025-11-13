@@ -122,10 +122,36 @@ const validateRichText =
   }
 
 /** one word: letters/digits only (no spaces,-,_) */
+const ONE_WORD_RE = /^[A-Za-z0-9]+$/
 const validateOneWordKey = (val: unknown) => {
   const s = String(val ?? '').trim()
   if (!s) return 'Value key is required.'
-  if (!/^[A-Za-z0-9]+$/.test(s)) return 'Use a single word with letters/digits only.'
+  if (!ONE_WORD_RE.test(s)) return 'Use a single word with letters/digits only (no spaces).'
+  return true
+}
+
+/** Array-level validator for uniqueness of tab.value (and one-word enforcement) */
+const validateTabsUniqueValues = (val: unknown) => {
+  const arr = Array.isArray(val) ? (val as any[]) : []
+  if (!arr.length) return 'At least one tab is required.'
+  const values = arr.map((t) => String(t?.value ?? '').trim())
+
+  // empty guard
+  if (values.some((v) => !v)) return 'Every tab must have a non-empty value key.'
+
+  // one-word pattern (defensive; field-level already checks this)
+  const invalid = values.filter((v) => !ONE_WORD_RE.test(v))
+  if (invalid.length) {
+    const uniq = [...new Set(invalid)]
+    return `Tab value must be a single word (letters/digits only). Invalid: ${uniq.join(', ')}.`
+  }
+
+  // uniqueness
+  const dups = values.filter((v, i) => values.indexOf(v) !== i)
+  if (dups.length) {
+    const uniq = [...new Set(dups)]
+    return `Duplicate tab value keys: ${uniq.join(', ')}. Each value must be unique.`
+  }
   return true
 }
 
@@ -147,10 +173,10 @@ const CustomTabSchema: Block = {
       label: 'Section Background Color',
       maxLength: COLOR_HEX_LEN,
       validate: validateHexColor,
-      defaultValue: '#F6EDDD',
+      defaultValue: '#FCF4EB',
       admin: {
         width: '33%',
-        description: `Hex color in #RRGGBB (e.g., #F6EDDD). Length ${COLOR_HEX_LEN} (${bnNum(
+        description: `Hex color in #RRGGBB (e.g., #FCF4EB). Length ${COLOR_HEX_LEN} (${bnNum(
           COLOR_HEX_LEN,
         )}).`,
       },
@@ -302,7 +328,7 @@ const CustomTabSchema: Block = {
       name: 'tabs',
       type: 'array',
       label: 'Tabs',
-      minRows: 1,
+      minRows: 2,
       maxRows: 6,
       required: true,
       labels: { singular: 'Tab', plural: 'Tabs' },
@@ -310,6 +336,8 @@ const CustomTabSchema: Block = {
         description:
           'Add each tab header with a one-word “value” key, then choose exactly one content block.',
       },
+      // ⬇️ NEW: array-level uniqueness validator
+      validate: validateTabsUniqueValues,
       fields: [
         {
           type: 'row',
