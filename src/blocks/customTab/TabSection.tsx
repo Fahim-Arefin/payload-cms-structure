@@ -179,6 +179,7 @@
 import LocalizedText from '@/components/custom/shared/LocalizedText'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
+  ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG,
   DESCRIPTIVE_CONTENT_SLUG_AND_TAG,
   ELIGIBILITY_CONTENT_SLUG_AND_TAG,
   STEP_CONTENT_SLUG_AND_TAG,
@@ -189,6 +190,7 @@ import DescriptiveContentBlock from './descriptiveContent/DescriptiveContentBloc
 import StepContentBlock from './stepContent/StepContentBlock'
 import './TabSection.css'
 import EligibilityContentBlock from './eligibilityContent/EligibilityContentBlock'
+import AdditionalBenefitContentBlock from './additionalBenefitContent/AdditionalBenefitContentBlock'
 
 type Props = {
   block: CustomTabBlockType
@@ -368,6 +370,10 @@ function TabSection({ block }: Props) {
 
               {single?.blockType === ELIGIBILITY_CONTENT_SLUG_AND_TAG && (
                 <EligibilityContentBlock data={single} />
+              )}
+
+              {single?.blockType === ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG && (
+                <AdditionalBenefitContentBlock data={single} />
               )}
             </TabsContent>
           )

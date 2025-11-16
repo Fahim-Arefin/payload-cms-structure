@@ -5283,6 +5283,127 @@ export interface Page {
                 blockType: 'eligibility-content';
               }
             | {
+                uploadSessionId?: string | null;
+                /**
+                 * Add one or more items (icon 1:1, EN/BN title + description).
+                 */
+                additionalBenefits: {
+                  /**
+                   * Square image for mobile view. Aspect 4:3. Ideal PNG/JPG. Blur placeholder generated automatically.
+                   */
+                  mobileImage: string | Media;
+                  mobileImageOriginal?: (string | null) | Media;
+                  pendingMobileImageOriginal?: string | null;
+                  pendingMobileImageCrop?: string | null;
+                  /**
+                   * Auto-generated Base64 blur
+                   */
+                  mobileImageBlurDataURL?: string | null;
+                  /**
+                   * Portrait image for desktop view. Aspect ≈ 500:700 (~0.714). Blur placeholder generated automatically.
+                   */
+                  desktopImage: string | Media;
+                  desktopImageOriginal?: (string | null) | Media;
+                  pendingDesktopImageOriginal?: string | null;
+                  pendingDesktopImageCrop?: string | null;
+                  /**
+                   * Auto-generated Base64 blur
+                   */
+                  desktopImageBlurDataURL?: string | null;
+                  /**
+                   * Max 120 characters.
+                   */
+                  title?: string | null;
+                  /**
+                   * সর্বোচ্চ ১২০ অক্ষর।
+                   */
+                  titleBN?: string | null;
+                  /**
+                   * Optional. Must appear verbatim inside Title. Max 120 chars.
+                   */
+                  highlightedText?: string | null;
+                  /**
+                   * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+                   */
+                  highlightedTextBN?: string | null;
+                  /**
+                   * Max 120 characters.
+                   */
+                  subtitle?: string | null;
+                  /**
+                   * সর্বোচ্চ ১২০ অক্ষর।
+                   */
+                  subtitleBN?: string | null;
+                  /**
+                   * Optional. Must appear verbatim inside Subtitle. Max 120 chars.
+                   */
+                  highlightedSubtitle?: string | null;
+                  /**
+                   * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+                   */
+                  highlightedSubtitleBN?: string | null;
+                  benefits?:
+                    | {
+                        benefit: string;
+                        benefitBN?: string | null;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  /**
+                   * Text shown on the plan’s call-to-action button. Max 100 characters.
+                   */
+                  plansButtonText?: string | null;
+                  /**
+                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ১০০ অক্ষর।
+                   */
+                  plansButtonTextBN?: string | null;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                   */
+                  plansButtonLink?: (string | null) | Page;
+                  /**
+                   * Up to ~5000 characters.
+                   */
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                   */
+                  descriptionBN?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                }[];
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'additional-benefit-content';
+              }
+            | {
                 /**
                  * Add one or more items (description).
                  */
@@ -7375,6 +7496,48 @@ export interface PagesSelect<T extends boolean = true> {
                                             value?: T;
                                             valueBN?: T;
                                           };
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
+                          'additional-benefit-content'?:
+                            | T
+                            | {
+                                uploadSessionId?: T;
+                                additionalBenefits?:
+                                  | T
+                                  | {
+                                      mobileImage?: T;
+                                      mobileImageOriginal?: T;
+                                      pendingMobileImageOriginal?: T;
+                                      pendingMobileImageCrop?: T;
+                                      mobileImageBlurDataURL?: T;
+                                      desktopImage?: T;
+                                      desktopImageOriginal?: T;
+                                      pendingDesktopImageOriginal?: T;
+                                      pendingDesktopImageCrop?: T;
+                                      desktopImageBlurDataURL?: T;
+                                      title?: T;
+                                      titleBN?: T;
+                                      highlightedText?: T;
+                                      highlightedTextBN?: T;
+                                      subtitle?: T;
+                                      subtitleBN?: T;
+                                      highlightedSubtitle?: T;
+                                      highlightedSubtitleBN?: T;
+                                      benefits?:
+                                        | T
+                                        | {
+                                            benefit?: T;
+                                            benefitBN?: T;
+                                            id?: T;
+                                          };
+                                      plansButtonText?: T;
+                                      plansButtonTextBN?: T;
+                                      plansButtonLink?: T;
+                                      description?: T;
+                                      descriptionBN?: T;
                                       id?: T;
                                     };
                                 id?: T;

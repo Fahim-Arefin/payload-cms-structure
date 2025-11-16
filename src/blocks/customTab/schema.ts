@@ -9,6 +9,7 @@ import type { Block } from 'payload'
 import DescriptiveContent from './descriptiveContent/schema'
 import StepContent from './stepContent/schema'
 import EligibilityContentSchema from './eligibilityContent/schema'
+import AdditionalBenfitContent from './additionalBenefitContent/schema'
 
 /* ------------ limits ------------ */
 const TITLE_MAX = 100
@@ -383,7 +384,12 @@ const CustomTabSchema: Block = {
           admin: {
             description: 'Pick ONE content block for this tab.',
           },
-          blocks: [DescriptiveContent, EligibilityContentSchema, StepContent],
+          blocks: [
+            DescriptiveContent,
+            EligibilityContentSchema,
+            AdditionalBenfitContent,
+            StepContent,
+          ],
         },
       ],
     },

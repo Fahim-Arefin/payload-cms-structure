@@ -36,6 +36,7 @@ import {
   CUSTOM_TAB_SLUG_AND_TAG,
   DESCRIPTIVE_CONTENT_SLUG_AND_TAG,
   ELIGIBILITY_CONTENT_SLUG_AND_TAG,
+  ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -447,6 +448,25 @@ export const mediaHooks = withMediaLifecycle({
       nestedBlockType: ELIGIBILITY_CONTENT_SLUG_AND_TAG,
       nestedArrayKey: 'eligibilityData',
       mediaFields: ['icon'],
+    },
+
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_TAB_SLUG_AND_TAG,
+      arrayKey: 'tabs',
+      blocksKey: 'content',
+      nestedBlockType: ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG,
+      nestedArrayKey: 'additionalBenefits',
+      mediaFields: ['mobileImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_TAB_SLUG_AND_TAG,
+      arrayKey: 'tabs',
+      blocksKey: 'content',
+      nestedBlockType: ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG,
+      nestedArrayKey: 'additionalBenefits',
+      mediaFields: ['desktopImage'],
     },
   ],
 
