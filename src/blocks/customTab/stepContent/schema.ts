@@ -95,6 +95,25 @@ const StepContent: Block = {
         },
       ],
     },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'additionalDescription',
+          type: 'richText',
+          label: 'Additional Description',
+          validate: validateRichText('Description', { required: false, max: DESC_MAX }),
+          admin: { width: '50%', description: `Up to ~${DESC_MAX} characters.` },
+        },
+        {
+          name: 'additionalDescriptionBN',
+          type: 'richText',
+          label: 'অতিরিক্ত বর্ণনা (বাংলা)',
+          validate: validateRichText('Description (BN)', { required: false, max: DESC_MAX }),
+          admin: { width: '50%', description: `প্রায় ${bnNum(DESC_MAX)} অক্ষর পর্যন্ত।` },
+        },
+      ],
+    },
   ],
 }
 

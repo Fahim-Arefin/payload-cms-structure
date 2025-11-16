@@ -5446,9 +5446,102 @@ export interface Page {
                   } | null;
                   id?: string | null;
                 }[];
+                /**
+                 * Up to ~5000 characters.
+                 */
+                additionalDescription?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+                /**
+                 * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                 */
+                additionalDescriptionBN?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
                 id?: string | null;
                 blockName?: string | null;
                 blockType: 'step-content';
+              }
+            | {
+                /**
+                 * Up to ~5000 characters.
+                 */
+                description?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+                /**
+                 * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                 */
+                descriptionBN?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+                /**
+                 * Text shown on the call-to-action button. Max 24 characters.
+                 */
+                buttonText?: string | null;
+                /**
+                 * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+                 */
+                buttonTextBN?: string | null;
+                /**
+                 * Pick an internal Page to link to. If you prefer an external link instead, leave this empty and fill the External URL below.
+                 */
+                buttonLink?: (string | null) | Page;
+                /**
+                 * Absolute URL starting with http:// or https://. If provided, this will be used instead of the internal Page link.
+                 */
+                buttonExternalUrl?: string | null;
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'details-benefit-content';
               }
           )[];
           id?: string | null;
@@ -7553,6 +7646,20 @@ export interface PagesSelect<T extends boolean = true> {
                                       descriptionBN?: T;
                                       id?: T;
                                     };
+                                additionalDescription?: T;
+                                additionalDescriptionBN?: T;
+                                id?: T;
+                                blockName?: T;
+                              };
+                          'details-benefit-content'?:
+                            | T
+                            | {
+                                description?: T;
+                                descriptionBN?: T;
+                                buttonText?: T;
+                                buttonTextBN?: T;
+                                buttonLink?: T;
+                                buttonExternalUrl?: T;
                                 id?: T;
                                 blockName?: T;
                               };

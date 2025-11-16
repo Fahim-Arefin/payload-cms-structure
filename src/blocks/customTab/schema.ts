@@ -10,6 +10,7 @@ import DescriptiveContent from './descriptiveContent/schema'
 import StepContent from './stepContent/schema'
 import EligibilityContentSchema from './eligibilityContent/schema'
 import AdditionalBenfitContent from './additionalBenefitContent/schema'
+import DetailsContent from './detailsContent/schema'
 
 /* ------------ limits ------------ */
 const TITLE_MAX = 100
@@ -134,8 +135,12 @@ const validateOneWordKey = (val: unknown) => {
 
 /** Array-level validator for uniqueness of tab.value (and one-word enforcement) */
 const validateTabsUniqueValues = (val: unknown) => {
+  // const arr = Array.isArray(val) ? (val as any[]) : []
+  // if (!arr.length) return 'At least one tab is required.'
+
   const arr = Array.isArray(val) ? (val as any[]) : []
-  if (!arr.length) return 'At least one tab is required.'
+  if (arr.length < 2) return 'At least two tab is required'
+
   const values = arr.map((t) => String(t?.value ?? '').trim())
 
   // empty guard
@@ -389,6 +394,7 @@ const CustomTabSchema: Block = {
             EligibilityContentSchema,
             AdditionalBenfitContent,
             StepContent,
+            DetailsContent,
           ],
         },
       ],

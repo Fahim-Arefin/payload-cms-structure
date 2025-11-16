@@ -181,6 +181,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG,
   DESCRIPTIVE_CONTENT_SLUG_AND_TAG,
+  DETAILS_CONTENT_SLUG_AND_TAG,
   ELIGIBILITY_CONTENT_SLUG_AND_TAG,
   STEP_CONTENT_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -191,6 +192,7 @@ import StepContentBlock from './stepContent/StepContentBlock'
 import './TabSection.css'
 import EligibilityContentBlock from './eligibilityContent/EligibilityContentBlock'
 import AdditionalBenefitContentBlock from './additionalBenefitContent/AdditionalBenefitContentBlock'
+import DetailsContentBlock from './detailsContent/DetailsContentBlock'
 
 type Props = {
   block: CustomTabBlockType
@@ -374,6 +376,10 @@ function TabSection({ block }: Props) {
 
               {single?.blockType === ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG && (
                 <AdditionalBenefitContentBlock data={single} />
+              )}
+
+              {single?.blockType === DETAILS_CONTENT_SLUG_AND_TAG && (
+                <DetailsContentBlock data={single} />
               )}
             </TabsContent>
           )

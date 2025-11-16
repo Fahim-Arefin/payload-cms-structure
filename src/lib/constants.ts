@@ -462,3 +462,9 @@ export const ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG = 'additional-benefit-conte
 export const ADDITIONAL_BENEFIT_CONTENT_PAGE_BLOCK_LABEL = 'Additional Benefit Content'
 export const ADDITIONAL_BENEFIT_CONTENT_CACHE_KEY = 'additional-benefit-content-data'
 export const ADDITIONAL_BENEFIT_CONTENT_BLOCK_THUMBNAIL_URL = `${folder}/additional-benefit-content-block-thumbnail.png`
+
+// conten 05 --> step content
+export const DETAILS_CONTENT_SLUG_AND_TAG = 'details-benefit-content'
+export const DETAILS_CONTENT_PAGE_BLOCK_LABEL = 'Details Content'
+export const DETAILS_CONTENT_CACHE_KEY = 'details-benefit-content-data'
+export const DETAILS_CONTENT_BLOCK_THUMBNAIL_URL = `${folder}/details-benefit-content-block-thumbnail.png`

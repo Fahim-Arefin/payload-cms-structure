@@ -1,6 +1,6 @@
 /* richtext.css */
 .rt a {
-  color: #ed7125; /* primary */
+  color: #9c8639; /* primary */
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -9,7 +9,7 @@
   color: #9c8639; /* secondary */
 }
 .rt a:visited {
-  color: #ed7125;
+  color: #9c8639;
 }
 
 .rt ul {

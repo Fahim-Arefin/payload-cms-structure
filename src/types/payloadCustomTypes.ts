@@ -62,6 +62,7 @@ import {
   STEP_CONTENT_SLUG_AND_TAG,
   ELIGIBILITY_CONTENT_SLUG_AND_TAG,
   ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG,
+  DETAILS_CONTENT_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -393,4 +394,9 @@ export type EligibilityContentBlockType = Extract<
 export type AdditionalBenefitContentBlockType = Extract<
   CustomTabBlockType['tabs'][number]['content'][number],
   { blockType: typeof ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG }
+>
+// descriptive Content
+export type DetailsContentBlockType = Extract<
+  CustomTabBlockType['tabs'][number]['content'][number],
+  { blockType: typeof DETAILS_CONTENT_SLUG_AND_TAG }
 >
