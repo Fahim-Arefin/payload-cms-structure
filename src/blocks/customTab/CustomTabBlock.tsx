@@ -54,7 +54,9 @@ function CustomTabBlock({ block }: Props) {
       </div>
 
       {/* tab block */}
-      <TabSection block={block} />
+      <div className="">
+        <TabSection block={block} />
+      </div>
     </div>
   )
 }

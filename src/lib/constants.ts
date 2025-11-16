@@ -450,3 +450,9 @@ export const STEP_CONTENT_SLUG_AND_TAG = 'step-content'
 export const STEP_CONTENT_PAGE_BLOCK_LABEL = 'Step Content'
 export const STEP_CONTENT_CACHE_KEY = 'step-content-data'
 export const STEP_CONTENT_BLOCK_THUMBNAIL_URL = `${folder}/step-content-block-thumbnail.png`
+
+// conten 03 --> step content
+export const ELIGIBILITY_CONTENT_SLUG_AND_TAG = 'eligibility-content'
+export const ELIGIBILITY_CONTENT_PAGE_BLOCK_LABEL = 'Eligibility Content'
+export const ELIGIBILITY_CONTENT_CACHE_KEY = 'eligibility-content-data'
+export const ELIGIBILITY_CONTENT_BLOCK_THUMBNAIL_URL = `${folder}/eligibility-content-block-thumbnail.png`

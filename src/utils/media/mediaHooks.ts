@@ -35,6 +35,7 @@ import {
   SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
   CUSTOM_TAB_SLUG_AND_TAG,
   DESCRIPTIVE_CONTENT_SLUG_AND_TAG,
+  ELIGIBILITY_CONTENT_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -435,6 +436,16 @@ export const mediaHooks = withMediaLifecycle({
       blocksKey: 'content',
       nestedBlockType: DESCRIPTIVE_CONTENT_SLUG_AND_TAG, // the inner block to target
       nestedArrayKey: 'items',
+      mediaFields: ['icon'],
+    },
+
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_TAB_SLUG_AND_TAG,
+      arrayKey: 'tabs',
+      blocksKey: 'content',
+      nestedBlockType: ELIGIBILITY_CONTENT_SLUG_AND_TAG,
+      nestedArrayKey: 'eligibilityData',
       mediaFields: ['icon'],
     },
   ],

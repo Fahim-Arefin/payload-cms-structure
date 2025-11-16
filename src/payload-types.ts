@@ -5213,6 +5213,76 @@ export interface Page {
                 blockType: 'descriptive-content';
               }
             | {
+                uploadSessionId?: string | null;
+                /**
+                 * Each item may carry its own icon and age/condition fields.
+                 */
+                eligibilityData: {
+                  /**
+                   * Hex color in #FCF4EB. Length ৭.
+                   */
+                  backGroundColor?: string | null;
+                  /**
+                   * Hex color in #FFFFFF. Length ৭.
+                   */
+                  borderColor?: string | null;
+                  /**
+                   * Square icon (PNG/SVG). Blur placeholder generated automatically. Aspect 1:1.
+                   */
+                  icon: string | Media;
+                  iconOriginal?: (string | null) | Media;
+                  pendingIconOriginal?: string | null;
+                  pendingIconCrop?: string | null;
+                  iconBlurDataURL?: string | null;
+                  iconTitle?: string | null;
+                  iconTitleBN?: string | null;
+                  age?: {
+                    title?: string | null;
+                    titleBN?: string | null;
+                    minAgeLabel?: string | null;
+                    minAgeLabelBN?: string | null;
+                    minAgeValue?: string | null;
+                    minAgeValueBN?: string | null;
+                    minAgeValuePeriod?: string | null;
+                    minAgeValuePeriodBN?: string | null;
+                    maxAgeLabel?: string | null;
+                    maxAgeLabelBN?: string | null;
+                    maxAgeValue?: string | null;
+                    maxAgeValueBN?: string | null;
+                    maxAgeValuePeriod?: string | null;
+                    maxAgeValuePeriodBN?: string | null;
+                  };
+                  /**
+                   * Optional. Example: value = "10-20 Years".
+                   */
+                  policyTerm?: {
+                    title?: string | null;
+                    titleBN?: string | null;
+                    value?: string | null;
+                    valueBN?: string | null;
+                  };
+                  /**
+                   * Optional. Example: value = "25 Years".
+                   */
+                  maturityAge?: {
+                    title?: string | null;
+                    titleBN?: string | null;
+                    value?: string | null;
+                    valueBN?: string | null;
+                  };
+                  physicalCondition?: {
+                    title?: string | null;
+                    titleBN?: string | null;
+                    value?: string | null;
+                    valueBN?: string | null;
+                  };
+                  id?: string | null;
+                }[];
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'eligibility-content';
+              }
+            | {
                 /**
                  * Add one or more items (description).
                  */
@@ -7242,6 +7312,69 @@ export interface PagesSelect<T extends boolean = true> {
                                       titleBN?: T;
                                       description?: T;
                                       descriptionBN?: T;
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
+                          'eligibility-content'?:
+                            | T
+                            | {
+                                uploadSessionId?: T;
+                                eligibilityData?:
+                                  | T
+                                  | {
+                                      backGroundColor?: T;
+                                      borderColor?: T;
+                                      icon?: T;
+                                      iconOriginal?: T;
+                                      pendingIconOriginal?: T;
+                                      pendingIconCrop?: T;
+                                      iconBlurDataURL?: T;
+                                      iconTitle?: T;
+                                      iconTitleBN?: T;
+                                      age?:
+                                        | T
+                                        | {
+                                            title?: T;
+                                            titleBN?: T;
+                                            minAgeLabel?: T;
+                                            minAgeLabelBN?: T;
+                                            minAgeValue?: T;
+                                            minAgeValueBN?: T;
+                                            minAgeValuePeriod?: T;
+                                            minAgeValuePeriodBN?: T;
+                                            maxAgeLabel?: T;
+                                            maxAgeLabelBN?: T;
+                                            maxAgeValue?: T;
+                                            maxAgeValueBN?: T;
+                                            maxAgeValuePeriod?: T;
+                                            maxAgeValuePeriodBN?: T;
+                                          };
+                                      policyTerm?:
+                                        | T
+                                        | {
+                                            title?: T;
+                                            titleBN?: T;
+                                            value?: T;
+                                            valueBN?: T;
+                                          };
+                                      maturityAge?:
+                                        | T
+                                        | {
+                                            title?: T;
+                                            titleBN?: T;
+                                            value?: T;
+                                            valueBN?: T;
+                                          };
+                                      physicalCondition?:
+                                        | T
+                                        | {
+                                            title?: T;
+                                            titleBN?: T;
+                                            value?: T;
+                                            valueBN?: T;
+                                          };
                                       id?: T;
                                     };
                                 id?: T;

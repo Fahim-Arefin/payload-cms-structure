@@ -178,12 +178,17 @@
 'use client'
 import LocalizedText from '@/components/custom/shared/LocalizedText'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { DESCRIPTIVE_CONTENT_SLUG_AND_TAG, STEP_CONTENT_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  DESCRIPTIVE_CONTENT_SLUG_AND_TAG,
+  ELIGIBILITY_CONTENT_SLUG_AND_TAG,
+  STEP_CONTENT_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { CustomTabBlockType } from '@/types/payloadCustomTypes'
 import { useEffect, useRef, useState } from 'react'
 import DescriptiveContentBlock from './descriptiveContent/DescriptiveContentBlock'
 import StepContentBlock from './stepContent/StepContentBlock'
 import './TabSection.css'
+import EligibilityContentBlock from './eligibilityContent/EligibilityContentBlock'
 
 type Props = {
   block: CustomTabBlockType
@@ -299,7 +304,7 @@ function TabSection({ block }: Props) {
   }
 
   return (
-    <div>
+    <div className="">
       {/* Tabs */}
       <Tabs defaultValue={initialValue} value={active} onValueChange={handleTabChange}>
         <div
@@ -352,13 +357,17 @@ function TabSection({ block }: Props) {
         {tabs.map((t) => {
           const single = t.content?.[0]
           return (
-            <TabsContent key={t.value} value={t.value}>
+            <TabsContent key={t.value} value={t.value} className="">
               {single?.blockType === DESCRIPTIVE_CONTENT_SLUG_AND_TAG && (
                 <DescriptiveContentBlock data={single} />
               )}
 
               {single?.blockType === STEP_CONTENT_SLUG_AND_TAG && (
                 <StepContentBlock data={single} />
+              )}
+
+              {single?.blockType === ELIGIBILITY_CONTENT_SLUG_AND_TAG && (
+                <EligibilityContentBlock data={single} />
               )}
             </TabsContent>
           )
