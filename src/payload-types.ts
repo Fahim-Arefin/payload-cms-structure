@@ -5588,6 +5588,62 @@ export interface Page {
           )[];
           id?: string | null;
         }[];
+        /**
+         * Add resource buttons that appear below the content (maximum 3 buttons)
+         */
+        resourceButtons?:
+          | (
+              | {
+                  /**
+                   * Upload/select the brochure PDF.
+                   */
+                  brochurePDF?: (string | null) | Media;
+                  /**
+                   * Max 60 characters.
+                   */
+                  label?: string | null;
+                  /**
+                   * সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  labelBN?: string | null;
+                  style?: ('primary' | 'secondary') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'brochure-button';
+                }
+              | {
+                  /**
+                   * Max 60 characters.
+                   */
+                  label?: string | null;
+                  /**
+                   * সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  labelBN?: string | null;
+                  style?: ('primary' | 'secondary' | 'outline') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'calculator-modal';
+                }
+              | {
+                  /**
+                   * Text shown on the call-to-action button. Max 60 characters.
+                   */
+                  buttonText: string;
+                  /**
+                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  buttonTextBN: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. When clicking the button it will navigate to this page.
+                   */
+                  buttonLink: string | Page;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'link-button';
+                }
+            )[]
+          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'custom-tab';
@@ -7722,6 +7778,38 @@ export interface PagesSelect<T extends boolean = true> {
                               };
                         };
                     id?: T;
+                  };
+              resourceButtons?:
+                | T
+                | {
+                    'brochure-button'?:
+                      | T
+                      | {
+                          brochurePDF?: T;
+                          label?: T;
+                          labelBN?: T;
+                          style?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'calculator-modal'?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          style?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'link-button'?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          buttonTextBN?: T;
+                          buttonLink?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               id?: T;
               blockName?: T;

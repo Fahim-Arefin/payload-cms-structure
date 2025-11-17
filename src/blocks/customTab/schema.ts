@@ -495,6 +495,9 @@ import EligibilityContentSchema from './eligibilityContent/schema'
 import AdditionalBenfitContent from './additionalBenefitContent/schema'
 import DetailsContent from './detailsContent/schema'
 import { generateImageFields } from '@/utils/media/fieldGenerators'
+import BrochureButtonSchema from '../resourcesButton/BrochureButton/schema'
+import LinkButtonSchema from '../resourcesButton/LinkButton/schema'
+import CalculatorModalSchema from '../calculatorModalBlock.tsx/schema'
 
 /* ------------ limits ------------ */
 const TITLE_MAX = 100
@@ -1013,6 +1016,23 @@ const CustomTabSchema: Block = {
           ],
         },
       ],
+    },
+
+    // CTA Buttons Block Layout (outside of hero items)
+    {
+      name: 'resourceButtons',
+      type: 'blocks',
+      label: 'Resources Button',
+      admin: {
+        description: 'Add resource buttons that appear below the content (maximum 3 buttons)',
+      },
+      labels: {
+        singular: 'Button',
+        plural: 'Buttons',
+      },
+      minRows: 1,
+      maxRows: 3,
+      blocks: [BrochureButtonSchema, CalculatorModalSchema, LinkButtonSchema],
     },
   ],
 }

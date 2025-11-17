@@ -1,8 +1,9 @@
 import LocalizedHighlighted from '@/components/custom/shared/LocalizedHighlighted'
 import LocalizedRichText from '@/components/custom/shared/LocalizedRichText'
+import ResourceButton from '@/components/custom/shared/plans/ResourceButton'
 import { CustomTabBlockType } from '@/types/payloadCustomTypes'
-import TabSection from './TabSection'
 import Image from 'next/image'
+import TabSection from './TabSection'
 
 type Props = {
   block: CustomTabBlockType
@@ -58,6 +59,7 @@ function CustomTabBlock({ block }: Props) {
           </div>
         </div>
 
+        {/* Tab content with image */}
         <div
           className={`grid ${block?.halfWidth ? 'grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 xl:gap-9 2xl:gap-16' : 'grid-cols-1'}`}
         >
@@ -147,6 +149,16 @@ function CustomTabBlock({ block }: Props) {
             className={`
                order-2 ${block?.imageOrder === 'left' ? `lg:order-2` : `lg:order-1`}`}
           />
+        </div>
+
+        {/* resource btn */}
+        <div>
+          {/* btn */}
+          {block?.resourceButtons && block?.resourceButtons?.length > 0 && (
+            <>
+              <ResourceButton data={block?.resourceButtons} />
+            </>
+          )}
         </div>
       </div>
     </div>

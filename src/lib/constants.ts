@@ -238,6 +238,11 @@ export const BROCHURE_BUTTON_BLOCK_LABEL = 'Brochure Button'
 export const BROCHURE_BUTTON_BLOCK_THUMBNAIL_URL = `${folder}/brochure-button-block-thumbnail.png`
 export const BROCHURE_BUTTON_CACHE_KEY = 'brochure-button-data'
 
+export const CALCULATOR_MODAL_SLUG_AND_TAG = 'calculator-modal'
+export const CALCULATOR_MODAL_BLOCK_LABEL = 'Calculator Modal'
+export const CALCULATOR_MODAL_BLOCK_THUMBNAIL_URL = `${folder}/calculator-modal-block-thumbnail.png`
+export const CALCULATOR_MODAL_CACHE_KEY = 'calculator-modal-data'
+
 export const LINK_BUTTON_SLUG_AND_TAG = 'link-button'
 export const LINK_BUTTON_BLOCK_LABEL = 'Link Button'
 export const LINK_BUTTON_BLOCK_THUMBNAIL_URL = `${folder}/link-button-block-thumbnail.png`

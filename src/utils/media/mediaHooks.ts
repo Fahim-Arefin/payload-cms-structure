@@ -309,6 +309,14 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['brochurePDF'], // the upload field on the BrochureButton block
       itemLabelField: 'label', // optional, helps alt naming
     },
+
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_TAB_SLUG_AND_TAG, // the parent block row
+      arrayKey: 'resourceButtons', // the blocks[] inside CorporateInfo
+      mediaFields: ['brochurePDF'], // the upload field on the BrochureButton block
+      itemLabelField: 'label', // optional, helps alt naming
+    },
     // -------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------
     {
