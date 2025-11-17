@@ -26,10 +26,10 @@ function page({}: Props) {
   ]
 
   const planInfoData = {
-    image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/microinsurance/web/microinsurance-intro.png`,
+    image: `/assets/solutions/microinsurance/web/microinsurance-intro.svg`,
     // mobileImage: '/assets/solutions/bancassurance/mobile/planInfo3.png',
     description: `At Shanta Life, we believe protection should be within everyone’s reach. Our microinsurance plans offer simple, affordable coverage with small and accessible premiums ensuring financial strength across multifaceted communities.`,
-    descriptionBN: `মাইক্রোইন্স্যুরেন্স এমন এক গুরুত্বপূর্ণ উদ্যোগ যা এনজিও, মাল্টিপারপাস প্রতিষ্ঠান ও বিভিন্ন আর্থিক প্রতিষ্ঠান (ব্যাংকসহ) থেকে ঋণ গ্রহণকারী সদস্যদের বীমা সুরক্ষার আওতায় আনতে কার্যকর ভূমিকা পালন করে। আমাদের মূল লক্ষ্য হলো স্বল্প প্রিমিয়ামের মাধ্যমে সাধারণ জনগণের মাঝে বীমা সুরক্ষা বিস্তৃত করা। আমাদের সহজ এবং গ্রহণযোগ্য মাইক্রো ইন্স্যুরেন্স পলিসিসমূহের মাধ্যমে দেশের প্রান্তিক জনসাধারণ বীমা সুবিধার আওতায় আসতে পারেন।   `,
+    descriptionBN: `মাইক্রোইন্স্যুরেন্স এমন এক গুরুত্বপূর্ণ উদ্যোগ যা এনজিও, মাল্টিপারপাস প্রতিষ্ঠান ও বিভিন্ন আর্থিক প্রতিষ্ঠান (ব্যাংকসহ) থেকে ঋণ গ্রহণকারী সদস্যদের বীমা সুরক্ষার আওতায় আনতে কার্যকর ভূমিকা পালন করে। আমাদের মূল লক্ষ্য হলো স্বল্প প্রিমিয়ামের মাধ্যমে সাধারণ জনগণের মাঝে বীমা সুরক্ষা বিস্তৃত করা। আমাদের সহজ এবং গ্রহণযোগ্য মাইক্রোইন্স্যুরেন্স পলিসিসমূহের মাধ্যমে দেশের প্রান্তিক জনসাধারণ বীমা সুবিধার আওতায় আসতে পারবেন।   `,
   }
 
   const WSLS = {
@@ -39,7 +39,7 @@ function page({}: Props) {
     highlighedSectionTitleBN: 'মাইক্রোইন্স্যুরেন্স নিবেন',
     description: `Simple requirements to get started with our microinsurance protection`,
     descriptionBN: ``,
-    image: `/assets/solutions/microinsurance/web/WSLS.jpg`,
+    image: `/assets/solutions/microinsurance/web/WSLS.jpeg`,
     stampImage: `/assets/solutions/microinsurance/web/absoluteImage.png`,
     items: [
       {
@@ -263,7 +263,7 @@ function page({}: Props) {
         description: 'Covers Death (Natural & Accidental) and Permanent Total Disability (PTD).',
         descriptionBN:
           'ঋণগ্রহীতার অকাল মৃত্যু বা দুর্ঘটনায় স্থায়ী অক্ষমতার ক্ষেত্রে পরিবারের আর্থিক নিরাপত্তা নিশ্চিত করে।',
-        image: `/assets/solutions/microinsurance/web/cc1.jpg`,
+        image: `/assets/solutions/microinsurance/web/cc11.jpg`,
         // link: '/plans/individual/child-education',
         moreItem: [
           {
@@ -294,7 +294,7 @@ function page({}: Props) {
         description:
           'Protects against Death (Natural & Accidental) and Permanent Total Disability (PTD).',
         descriptionBN: 'আপনার সঞ্চয় ও আমানতকে অনাকাঙ্ক্ষিত ঝুঁকি থেকে সুরক্ষা দেয়।',
-        image: `/assets/solutions/microinsurance/web/cc2.jpg`,
+        image: `/assets/solutions/microinsurance/web/cc22.jpg`,
         // link: '/plans/individual/child-education',
         moreItem: [
           {
@@ -325,7 +325,7 @@ function page({}: Props) {
         // subtitleBN: 'মাল্টি স্টেজ ম্যাচিউরিটি প্ল্যান ',
         description: 'Includes Death, Accidental Death (AD), and Permanent Total Disability (PTD).',
         descriptionBN: 'পরিবারের ভবিষ্যৎ সুরক্ষায় নির্ভরযোগ্য জীবনবীমা পরিকল্পনা।',
-        image: `/assets/solutions/microinsurance/web/cc3.jpg`,
+        image: `/assets/solutions/microinsurance/web/cc33.jpg`,
         // link: '/plans/individual/child-education',
         moreItem: [
           {
