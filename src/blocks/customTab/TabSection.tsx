@@ -196,6 +196,7 @@ import DetailsContentBlock from './detailsContent/DetailsContentBlock'
 
 type Props = {
   block: CustomTabBlockType
+  className?: string
 }
 
 function ArrowIcon() {
@@ -213,7 +214,7 @@ function ArrowIcon() {
   )
 }
 
-function TabSection({ block }: Props) {
+function TabSection({ block, className }: Props) {
   // always an array
   const tabs = block?.tabs
 
@@ -308,13 +309,15 @@ function TabSection({ block }: Props) {
   }
 
   return (
-    <div className="">
+    <div className={className}>
       {/* Tabs */}
       <Tabs defaultValue={initialValue} value={active} onValueChange={handleTabChange}>
         <div
+          // md:mb-[30px] lg:mb-[50px] xl:mb-[80px]
           ref={containerRef}
           className="relative w-full border-b border-[#434343] md:py-[12px]  
-         md:mb-[30px] lg:mb-[50px] xl:mb-[80px]"
+         mb-[12px] md:mb-[25px] lg:mb-[40px] xl:mb-[60px]
+         "
         >
           <TabsList
             className={`w-full flex justify-between overflow-x-scroll overflow-y-hidden  lg:overflow-y-visible lg:overflow-x-visible bg-transparent border-none p-0 
@@ -361,7 +364,7 @@ function TabSection({ block }: Props) {
         {tabs.map((t) => {
           const single = t.content?.[0]
           return (
-            <TabsContent key={t.value} value={t.value} className="">
+            <TabsContent key={t.value} value={t.value} className=" my-0 py-0">
               {single?.blockType === DESCRIPTIVE_CONTENT_SLUG_AND_TAG && (
                 <DescriptiveContentBlock data={single} />
               )}

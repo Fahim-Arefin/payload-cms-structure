@@ -5124,6 +5124,44 @@ export interface Page {
           [k: string]: unknown;
         } | null;
         /**
+         * If Half Width is true it will take half width, and you can display image on the other half. If unchecked, image options are hidden.
+         */
+        halfWidth?: boolean | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Which image to display on desktop layouts.
+         */
+        desktopImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Which image to display on mobile layouts.
+         */
+        mobileImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Tall image (630×650). Required when Half Width is enabled.
+         */
+        imageTall?: (string | null) | Media;
+        imageTallOriginal?: (string | null) | Media;
+        pendingImageTallOriginal?: string | null;
+        pendingImageTallCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageTallBlurDataURL?: string | null;
+        /**
+         * Wide image (500×370, aspect ≈ 1.351). Required when Half Width is enabled.
+         */
+        imageWide?: (string | null) | Media;
+        imageWideOriginal?: (string | null) | Media;
+        pendingImageWideOriginal?: string | null;
+        pendingImageWideCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageWideBlurDataURL?: string | null;
+        /**
          * Add each tab header with a one-word “value” key, then choose exactly one content block.
          */
         tabs: {
@@ -5134,7 +5172,7 @@ export interface Page {
           label: string;
           labelBN?: string | null;
           /**
-           * Pick ONE content block for this tab.
+           * Pick one content block for this tab.
            */
           content: (
             | {
@@ -5446,6 +5484,10 @@ export interface Page {
                   } | null;
                   id?: string | null;
                 }[];
+                /**
+                 * if true then font and content gap will be increased
+                 */
+                LargeFont?: boolean | null;
                 /**
                  * Up to ~5000 characters.
                  */
@@ -7499,6 +7541,20 @@ export interface PagesSelect<T extends boolean = true> {
               highlightedSubtitleBN?: T;
               description?: T;
               descriptionBN?: T;
+              halfWidth?: T;
+              imageOrder?: T;
+              desktopImageChoice?: T;
+              mobileImageChoice?: T;
+              imageTall?: T;
+              imageTallOriginal?: T;
+              pendingImageTallOriginal?: T;
+              pendingImageTallCrop?: T;
+              imageTallBlurDataURL?: T;
+              imageWide?: T;
+              imageWideOriginal?: T;
+              pendingImageWideOriginal?: T;
+              pendingImageWideCrop?: T;
+              imageWideBlurDataURL?: T;
               tabs?:
                 | T
                 | {
@@ -7646,6 +7702,7 @@ export interface PagesSelect<T extends boolean = true> {
                                       descriptionBN?: T;
                                       id?: T;
                                     };
+                                LargeFont?: T;
                                 additionalDescription?: T;
                                 additionalDescriptionBN?: T;
                                 id?: T;

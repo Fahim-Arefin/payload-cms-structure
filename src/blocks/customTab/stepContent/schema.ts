@@ -96,6 +96,15 @@ const StepContent: Block = {
       ],
     },
     {
+      name: 'LargeFont',
+      type: 'checkbox',
+      label: 'Bigger Font',
+      defaultValue: false,
+      admin: {
+        description: 'if true then font and content gap will be increased',
+      },
+    },
+    {
       type: 'row',
       fields: [
         {

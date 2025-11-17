@@ -16,7 +16,7 @@ function DetailsContentBlock({ data }: Props) {
       <div className={`space-y-4 md:space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12`}>
         <div
           className={`
-           flex mx-auto mt-12`}
+           flex mx-auto `}
         >
           {(data?.buttonLink || data?.buttonExternalUrl) && (
             <div className="flex mx-auto">

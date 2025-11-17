@@ -173,6 +173,17 @@ export const mediaHooks = withMediaLifecycle({
       blockType: SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
       mediaFields: ['backgroundImage'],
     },
+
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_TAB_SLUG_AND_TAG,
+      mediaFields: ['imageTall'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_TAB_SLUG_AND_TAG,
+      mediaFields: ['imageWide'],
+    },
   ],
 
   // Blocks with arrays that contain media fields:
