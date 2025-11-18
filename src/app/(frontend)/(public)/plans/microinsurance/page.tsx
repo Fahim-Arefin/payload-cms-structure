@@ -105,7 +105,7 @@ function page({}: Props) {
     highlighedSectionTitleBN: 'প্রয়োজনীয় যোগ্যতা',
     description: ``,
     descriptionBN: ``,
-    image: `/assets/solutions/microinsurance/web/ec.png`,
+    image: `/assets/solutions/microinsurance/web/ec8.png`,
     eligibilityData: [
       {
         backGroundColor: '#FFFFFF',
