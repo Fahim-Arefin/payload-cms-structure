@@ -23,6 +23,8 @@ import LeadershipTeam from './collections/globals/LeadershipTeam'
 import ContactUsGlobal from './collections/globals/GlobalContactUs'
 import GlobalBlogs from './collections/globals/Blogs'
 import GlobalVlogs from './collections/globals/Vlogs'
+import AuditLogs from './collections/AuditLogs'
+import { getClientIP } from './lib/http'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -52,7 +54,7 @@ export default buildConfig({
     GlobalBlogs,
     GlobalVlogs,
   ],
-  collections: [Users, Media, Resume, CareerApplication, AgentCareerApplication, Pages],
+  collections: [Users, Media, Resume, CareerApplication, AgentCareerApplication, Pages, AuditLogs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -61,6 +63,44 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
+  onInit: async (payload) => {
+    try {
+      const countResult = (await payload.count({ collection: 'users' })) as
+        | number
+        | { totalDocs: number }
+      const totalUsers = typeof countResult === 'number' ? countResult : countResult.totalDocs
+
+      if (totalUsers > 0) {
+        payload.logger.info('Bootstrap skipped: users already exist.')
+        return
+      }
+
+      const email = (process.env.BOOTSTRAP_SUPER_EMAIL || '').trim()
+      const password = (process.env.BOOTSTRAP_SUPER_PASSWORD || '').trim()
+
+      if (!email || !password) {
+        payload.logger.warn(
+          'Bootstrap skipped: set BOOTSTRAP_SUPER_EMAIL and BOOTSTRAP_SUPER_PASSWORD for first-run.',
+        )
+        return
+      }
+
+      await payload.create({
+        collection: 'users',
+        data: {
+          email,
+          password,
+          role: 'super-admin', // ← your RBAC role
+          name: 'Super Admin',
+        },
+        overrideAccess: true, // ← bypass access since no super exists yet
+      })
+
+      payload.logger.info(`✅ Bootstrap Super Admin created: ${email}`)
+    } catch (e) {
+      payload.logger.error('Bootstrap failed:', e)
+    }
+  },
 
   // sharp,
   email: nodemailerAdapter({
