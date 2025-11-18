@@ -3,7 +3,7 @@ import LocalizedRichText from '@/components/custom/shared/LocalizedRichText'
 import LocalizedText from '@/components/custom/shared/LocalizedText'
 import { Button } from '@/components/ui/button'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
-import { LearnMoreBlogContentBlockType } from '@/types/payloadCustomTypes'
+import { CustomTabBlockType, LearnMoreBlogContentBlockType } from '@/types/payloadCustomTypes'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
@@ -15,9 +15,10 @@ type BlogType = NonNullable<
 type BlogItemProps = {
   blog: BlogType
   index: number
+  bg: string
 }
 
-const BlogItem: React.FC<BlogItemProps> = ({ blog, index }) => {
+const BlogItem: React.FC<BlogItemProps> = ({ blog, index, bg }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isOverflowing, setIsOverflowing] = useState(false)
   const descRef = useRef<HTMLDivElement | null>(null)
@@ -66,10 +67,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ blog, index }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-32">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-6 lg:gap-20 xl:gap-28 2xl:gap-32">
       {/* content */}
       <div
-        className={`order-2 space-y-4 flex flex-col justify-center items-center ${
+        className={`order-2 md:space-y-1 lg:space-y-2 2xl:space-y-4 flex flex-col justify-center items-center ${
           index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'
         }`}
       >
@@ -109,24 +110,33 @@ const BlogItem: React.FC<BlogItemProps> = ({ blog, index }) => {
 
       {/* image */}
       <div
-        className={`relative flex flex-col justify-center order-1 rounded-xl ${
+        className={` h-full flex flex-col justify-center order-1  rounded-xl ${
           index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'
-        } w-full aspect-[525/278]`}
+        } `}
       >
-        {typeof blog?.image === 'object' && blog?.image?.url && (
-          <Image
-            fill
-            src={blog?.image?.url}
-            alt={blog?.title}
-            sizes="50vw"
-            className="object-cover object-center rounded-xl"
-            quality={80}
-            placeholder="blur"
-            blurDataURL={blog?.imageBlurDataURL || ''}
-          />
-        )}
-        <div className="bg-white rounded-tr-xl absolute left-0 bottom-0 h-12 w-12">
-          <div className="invisible">white layer</div>
+        <div className="relative w-full aspect-[525/278] ">
+          {typeof blog?.image === 'object' && blog?.image?.url && (
+            <Image
+              fill
+              src={blog?.image?.url}
+              alt={blog?.title}
+              sizes="50vw"
+              className="object-cover object-center rounded-xl w-full h-full"
+              quality={80}
+              placeholder="blur"
+              blurDataURL={blog?.imageBlurDataURL || ''}
+            />
+          )}
+          <div
+            className="rounded-tr-xl absolute -left-0.5 -bottom-0.5 
+        h-8 md:h-10 lg:h-9 xl:h-11 2xl:h-12 
+        w-8 md:w-10 lg:w-9 xl:w-11 2xl:w-12"
+            style={{
+              backgroundColor: bg,
+            }}
+          >
+            <div className="invisible">white layer</div>
+          </div>
         </div>
       </div>
     </div>

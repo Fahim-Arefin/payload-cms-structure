@@ -317,13 +317,16 @@ function TabSection({ block, className }: Props) {
         <div
           // md:mb-[30px] lg:mb-[50px] xl:mb-[80px]
           ref={containerRef}
-          className="relative w-full border-b border-[#434343] md:py-[12px]  
-         mb-[12px] md:mb-[25px] lg:mb-[40px] xl:mb-[60px]
-         "
+          className={`
+          ${block?.addPadding ? 'w-full ' : 'w-[90%] md:w-[80%] lg:w-[75%] xl:w-[72%] 2xl:w-[68%] mx-auto'}
+          relative border-b border-[#434343] md:py-[12px]  
+         mb-[12px] md:mb-[25px] lg:mb-[40px] xl:mb-[60px] 
+          `}
         >
           <TabsList
-            className={`w-full flex justify-between overflow-x-scroll overflow-y-hidden  lg:overflow-y-visible lg:overflow-x-visible bg-transparent border-none p-0 
-          ${tabs.length === 2 ? 'gap-4 md:gap-20' : 'gap-0 lg:gap-6'} `}
+            className={` w-full flex justify-between overflow-x-scroll overflow-y-hidden  lg:overflow-y-visible lg:overflow-x-visible bg-transparent border-none p-0 
+          ${tabs.length === 2 ? 'gap-4 md:gap-20' : 'gap-0 lg:gap-6'} 
+          `}
           >
             {tabs.map((t) => (
               <TabsTrigger
@@ -332,7 +335,7 @@ function TabSection({ block, className }: Props) {
                 ref={(el) => {
                   if (el) tabRefs.current[t.value] = el
                 }}
-                className={`global-p1 font-semibold px-2 py-2.5 md:py-6 relative uppercase  
+                className={`global-p1 font-semibold px-2 py-2.5 md:py-6 relative uppercase 
                 ${
                   active === t.value
                     ? `${tabs.length === 2 && 'after:w-full'} text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none data-[state=active]:bg-transparent after:inset-x-0 after:bottom-0 after:h-[4px] after:md:h-[8px] after:bg-orange-500 after:rounded-full`

@@ -13,6 +13,7 @@ const SUBTITLE_MAX = 140
 const HIGHLIGHT_MAX = 80
 const DESC_MAX = 5000
 const CTA_TEXT_MAX = 50
+const COLOR_HEX_LEN = 7
 
 /* ---- validators ---- */
 const validateShortText =
@@ -37,6 +38,14 @@ const validateHighlightedInside =
     const target = (siblingData?.[targetField] ?? '').toString()
     return target.includes(hl) ? true : `${label} must exist within ${targetField} exactly.`
   }
+
+const validateHexColor = (val: unknown) => {
+  if (val == null || val === '') return true
+  const s = String(val).trim()
+  return /^#[0-9A-Fa-f]{6}$/.test(s)
+    ? true
+    : 'Must be a valid hex color in #RRGGBB (e.g., #FFFFFF).'
+}
 
 /* ---- rich text helpers ---- */
 function lexicalHasRealText(root: any): boolean {
@@ -108,6 +117,20 @@ const LearnMoreBlogContent: Block = {
           'Each group has Title/Subtitle (+ optional highlighted parts), a Description, and an array of Blogs.',
       },
       fields: [
+        {
+          name: 'backgroundColor',
+          type: 'text',
+          label: 'Section Background Color',
+          maxLength: COLOR_HEX_LEN,
+          validate: validateHexColor,
+          defaultValue: '#FCF4EB',
+          admin: {
+            width: '33%',
+            description: `Hex color in #RRGGBB (e.g., #FCF4EB). Length ${COLOR_HEX_LEN} (${bnNum(
+              COLOR_HEX_LEN,
+            )}).`,
+          },
+        },
         {
           type: 'row',
           fields: [
@@ -262,6 +285,48 @@ const LearnMoreBlogContent: Block = {
               },
             },
           ],
+        },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'loadLessText',
+              type: 'text',
+              label: 'Load Less Button Text',
+              required: true,
+              defaultValue: 'Load Less',
+              maxLength: CTA_TEXT_MAX,
+              validate: validateShortText('Load Less Button Text', CTA_TEXT_MAX, true),
+              admin: {
+                width: '50%',
+                description: `Label for the list “Load Less” button. Max ${CTA_TEXT_MAX} characters.`,
+              },
+            },
+            {
+              name: 'loadLessTextBN',
+              type: 'text',
+              label: 'বাটনের টেক্সট (বাংলা) — Load Less',
+              required: true,
+              defaultValue: 'কম দেখান',
+              maxLength: CTA_TEXT_MAX,
+              validate: validateShortText('Load Less Button Text (BN)', CTA_TEXT_MAX, true),
+              admin: {
+                width: '50%',
+                description: `লিস্টের “Load Less” বাটনের লেখা। সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর।`,
+              },
+            },
+          ],
+        },
+        {
+          name: 'style',
+          type: 'select',
+          label: 'Load More/Less Button Style',
+          options: [
+            { label: 'Primary', value: 'primary' },
+            { label: 'Secendary', value: 'secendary' },
+            { label: 'Outline', value: 'outline' },
+          ],
+          defaultValue: 'outline',
         },
 
         // Nested blogs array inside each group

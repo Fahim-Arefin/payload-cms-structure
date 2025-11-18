@@ -5056,6 +5056,10 @@ export interface Page {
          */
         backgroundColor?: string | null;
         /**
+         * Keep this padding setting checked unless you are creating content for the 'Learn More' page. If checked (True), padding will be applied to all sides. If unchecked (False), padding will only be applied to the tab header, not the tab content.
+         */
+        addPadding?: boolean | null;
+        /**
          * Primary heading. Max 100 characters.
          */
         title?: string | null;
@@ -5591,6 +5595,10 @@ export interface Page {
                  */
                 groups: {
                   /**
+                   * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+                   */
+                  backgroundColor?: string | null;
+                  /**
                    * Max 100 characters.
                    */
                   title?: string | null;
@@ -5666,6 +5674,15 @@ export interface Page {
                    * লিস্টের “Load More” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
                    */
                   loadMoreTextBN: string;
+                  /**
+                   * Label for the list “Load Less” button. Max 50 characters.
+                   */
+                  loadLessText: string;
+                  /**
+                   * লিস্টের “Load Less” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
+                   */
+                  loadLessTextBN: string;
+                  style?: ('primary' | 'secendary' | 'outline') | null;
                   /**
                    * Per-blog Title/Description with an image.
                    */
@@ -7748,6 +7765,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               backgroundColor?: T;
+              addPadding?: T;
               title?: T;
               titleBN?: T;
               highlightedText?: T;
@@ -7943,6 +7961,7 @@ export interface PagesSelect<T extends boolean = true> {
                                 groups?:
                                   | T
                                   | {
+                                      backgroundColor?: T;
                                       title?: T;
                                       titleBN?: T;
                                       highlightedTitle?: T;
@@ -7955,6 +7974,9 @@ export interface PagesSelect<T extends boolean = true> {
                                       descriptionBN?: T;
                                       loadMoreText?: T;
                                       loadMoreTextBN?: T;
+                                      loadLessText?: T;
+                                      loadLessTextBN?: T;
+                                      style?: T;
                                       blogs?:
                                         | T
                                         | {

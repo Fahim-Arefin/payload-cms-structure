@@ -11,17 +11,19 @@ type Props = {
 }
 
 function CustomTabBlock({ block }: Props) {
+  // const selectedBlock = block?.tabs?.map((t) => t.content?.[0])
   return (
     <div
-      className={`container-padding `}
+      className={`${block?.addPadding && 'container-padding'}`}
       style={{
         backgroundColor: block?.backgroundColor || '',
       }}
     >
-      <div className="space-y-4 md:space-y-10 lg:space-y-12">
+      <div className="space-y-4 md:space-y-10 lg:space-y-12 ">
         {/* Tab heading section */}
         <div
-          className={`${block?.halfWidth && block?.imageOrder === 'left' ? 'lg:flex lg:justify-end' : 'lg:flex lg:justify-start'} text-[#434343] text-start `}
+          className={`${block?.halfWidth && block?.imageOrder === 'left' ? 'lg:flex lg:justify-end' : 'lg:flex lg:justify-start'} text-[#434343] text-start 
+          ${!block?.addPadding && 'container-padding-x pt-6 md:pt-8 lg:pt-10 xl:pt-12 2xl:pt-16'}`}
         >
           <div
             className={`${block?.halfWidth && block?.imageOrder === 'left' ? 'lg:w-1/2 lg:pl-3 xl:pl-5 2xl:pl-8' : 'lg:w-full'}`}
@@ -152,14 +154,11 @@ function CustomTabBlock({ block }: Props) {
         </div>
 
         {/* resource btn */}
-        <div>
-          {/* btn */}
-          {block?.resourceButtons && block?.resourceButtons?.length > 0 && (
-            <>
-              <ResourceButton data={block?.resourceButtons} />
-            </>
-          )}
-        </div>
+        {block?.resourceButtons && block?.resourceButtons?.length > 0 && (
+          <>
+            <ResourceButton data={block?.resourceButtons} />
+          </>
+        )}
       </div>
     </div>
   )
