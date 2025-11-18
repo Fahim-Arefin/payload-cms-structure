@@ -52,7 +52,7 @@ function LearnMoreBlogContentBlock({ data }: Props) {
             }}
           >
             {/* heading */}
-            <div>
+            <div className="">
               <div className="uppercase global-h3 font-medium">
                 <div>
                   <LocalizedHighlighted

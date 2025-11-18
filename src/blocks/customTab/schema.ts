@@ -744,11 +744,11 @@ const CustomTabSchema: Block = {
     {
       name: 'addPadding',
       type: 'checkbox',
-      label: 'Add Padding',
+      label: 'Normal Tab?',
       defaultValue: true,
       admin: {
         description:
-          "Keep this padding setting checked unless you are creating content for the 'Learn More' page. If checked (True), padding will be applied to all sides. If unchecked (False), padding will only be applied to the tab header, not the tab content.",
+          "Keep this setting checked unless you are creating content for the 'Learn More' page.",
       },
     },
 
