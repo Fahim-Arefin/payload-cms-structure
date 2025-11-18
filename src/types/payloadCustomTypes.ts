@@ -64,6 +64,7 @@ import {
   ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG,
   DETAILS_CONTENT_SLUG_AND_TAG,
   LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG,
+  LEARN_MORE_VIDEO_CONTENT_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -405,4 +406,9 @@ export type DetailsContentBlockType = Extract<
 export type LearnMoreBlogContentBlockType = Extract<
   CustomTabBlockType['tabs'][number]['content'][number],
   { blockType: typeof LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG }
+>
+// descriptive Content
+export type LearnMoreVideoContentBlockType = Extract<
+  CustomTabBlockType['tabs'][number]['content'][number],
+  { blockType: typeof LEARN_MORE_VIDEO_CONTENT_SLUG_AND_TAG }
 >

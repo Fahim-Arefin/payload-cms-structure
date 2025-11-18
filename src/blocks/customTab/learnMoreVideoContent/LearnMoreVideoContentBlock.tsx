@@ -4,17 +4,17 @@ import GlobalButton from '@/components/custom/shared/GlobalButton'
 import LocalizedHighlighted from '@/components/custom/shared/LocalizedHighlighted'
 import LocalizedRichText from '@/components/custom/shared/LocalizedRichText'
 import LocalizedString from '@/components/custom/shared/LocalizedString'
-import { LearnMoreBlogContentBlockType } from '@/types/payloadCustomTypes'
+import { LearnMoreVideoContentBlockType } from '@/types/payloadCustomTypes'
 import { useState } from 'react'
-import BlogItem from './BlogItem'
+import VideoItem from './VideoItem'
 
 type Props = {
-  data: LearnMoreBlogContentBlockType
+  data: LearnMoreVideoContentBlockType
 }
 
 const SLICE_PART = 4
 
-function LearnMoreBlogContentBlock({ data }: Props) {
+function LearnMoreVideoContentBlock({ data }: Props) {
   // track which groups are expanded (show all blogs)
   const [expandedGroups, setExpandedGroups] = useState<Record<number, boolean>>({})
 
@@ -88,13 +88,22 @@ function LearnMoreBlogContentBlock({ data }: Props) {
             </div>
 
             {/* content section */}
-            {blogsToShow.map((blog, index) => (
-              <BlogItem key={index} blog={blog} index={index} bg={group?.backgroundColor || ''} />
-            ))}
-
+            <div
+              className="
+             grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-20 xl:gap-28 2xl:gap-32"
+            >
+              {blogsToShow.map((blog, index) => (
+                <VideoItem
+                  key={index}
+                  blog={blog}
+                  index={index}
+                  bg={group?.backgroundColor || ''}
+                />
+              ))}
+            </div>
             {/* toggle load more / load less */}
             {hasMoreThanSlice && (
-              <div className="flex justify-center">
+              <div className=" col-span-2 flex justify-center ">
                 <GlobalButton
                   onClick={() => handleToggle(groupIndex)}
                   variant={
@@ -121,4 +130,4 @@ function LearnMoreBlogContentBlock({ data }: Props) {
   )
 }
 
-export default LearnMoreBlogContentBlock
+export default LearnMoreVideoContentBlock

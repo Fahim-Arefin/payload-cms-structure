@@ -5128,7 +5128,7 @@ export interface Page {
           [k: string]: unknown;
         } | null;
         /**
-         * If Half Width is true it will take half width, and you can display image on the other half. If unchecked, image options are hidden.
+         * Checked the check box only for `step content`. If Half Width is true it will take half width, and you can display image on the other half. If unchecked, image options are hidden.
          */
         halfWidth?: boolean | null;
         /**
@@ -5762,6 +5762,176 @@ export interface Page {
                 id?: string | null;
                 blockName?: string | null;
                 blockType: 'learn-more-blog-content';
+              }
+            | {
+                /**
+                 * Each group has Title/Subtitle (+ optional highlighted parts), a Description, and an array of Blogs.
+                 */
+                groups: {
+                  /**
+                   * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+                   */
+                  backgroundColor?: string | null;
+                  /**
+                   * Max 100 characters.
+                   */
+                  title?: string | null;
+                  /**
+                   * সর্বোচ্চ ১০০ অক্ষর।
+                   */
+                  titleBN?: string | null;
+                  /**
+                   * Optional. Must appear inside Title.
+                   */
+                  highlightedTitle?: string | null;
+                  /**
+                   * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে।
+                   */
+                  highlightedTitleBN?: string | null;
+                  /**
+                   * Max 140 characters.
+                   */
+                  subtitle?: string | null;
+                  /**
+                   * সর্বোচ্চ ১৪০ অক্ষর।
+                   */
+                  subtitleBN?: string | null;
+                  /**
+                   * Optional. Must appear inside Subtitle.
+                   */
+                  highlightedSubtitle?: string | null;
+                  /**
+                   * ঐচ্ছিক। উপশিরোনামের ভিতরে হুবহু থাকতে হবে।
+                   */
+                  highlightedSubtitleBN?: string | null;
+                  /**
+                   * Up to ~5000 characters.
+                   */
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                   */
+                  descriptionBN?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * Label for the list “Load More” button. Max 50 characters.
+                   */
+                  loadMoreText: string;
+                  /**
+                   * লিস্টের “Load More” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
+                   */
+                  loadMoreTextBN: string;
+                  /**
+                   * Label for the list “Load Less” button. Max 50 characters.
+                   */
+                  loadLessText: string;
+                  /**
+                   * লিস্টের “Load Less” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
+                   */
+                  loadLessTextBN: string;
+                  style?: ('primary' | 'secendary' | 'outline') | null;
+                  /**
+                   * Per-blog Title/Description with an image.
+                   */
+                  blogs: {
+                    /**
+                     * 525:278 image for the blog card. Blur placeholder generated automatically.
+                     */
+                    image: string | Media;
+                    imageOriginal?: (string | null) | Media;
+                    pendingImageOriginal?: string | null;
+                    pendingImageCrop?: string | null;
+                    imageBlurDataURL?: string | null;
+                    /**
+                     * Optional. YouTube video link for this blog. Max 200 characters.
+                     */
+                    videoUrl: string;
+                    /**
+                     * Max 100 characters.
+                     */
+                    title: string;
+                    /**
+                     * সর্বোচ্চ ১০০ অক্ষর।
+                     */
+                    titleBN: string;
+                    /**
+                     * Up to ~5000 characters.
+                     */
+                    description?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                    /**
+                     * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                     */
+                    descriptionBN?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                    /**
+                     * Max 100 characters.
+                     */
+                    caption: string;
+                    /**
+                     * সর্বোচ্চ ১০০ অক্ষর।
+                     */
+                    captionBN: string;
+                    id?: string | null;
+                  }[];
+                  id?: string | null;
+                }[];
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'learn-more-video-content';
               }
           )[];
           id?: string | null;
@@ -7993,6 +8163,50 @@ export interface PagesSelect<T extends boolean = true> {
                                             readMoreTextBN?: T;
                                             readLessText?: T;
                                             readLessTextBN?: T;
+                                            id?: T;
+                                          };
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
+                          'learn-more-video-content'?:
+                            | T
+                            | {
+                                groups?:
+                                  | T
+                                  | {
+                                      backgroundColor?: T;
+                                      title?: T;
+                                      titleBN?: T;
+                                      highlightedTitle?: T;
+                                      highlightedTitleBN?: T;
+                                      subtitle?: T;
+                                      subtitleBN?: T;
+                                      highlightedSubtitle?: T;
+                                      highlightedSubtitleBN?: T;
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      loadMoreText?: T;
+                                      loadMoreTextBN?: T;
+                                      loadLessText?: T;
+                                      loadLessTextBN?: T;
+                                      style?: T;
+                                      blogs?:
+                                        | T
+                                        | {
+                                            image?: T;
+                                            imageOriginal?: T;
+                                            pendingImageOriginal?: T;
+                                            pendingImageCrop?: T;
+                                            imageBlurDataURL?: T;
+                                            videoUrl?: T;
+                                            title?: T;
+                                            titleBN?: T;
+                                            description?: T;
+                                            descriptionBN?: T;
+                                            caption?: T;
+                                            captionBN?: T;
                                             id?: T;
                                           };
                                       id?: T;

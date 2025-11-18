@@ -499,6 +499,7 @@ import BrochureButtonSchema from '../resourcesButton/BrochureButton/schema'
 import LinkButtonSchema from '../resourcesButton/LinkButton/schema'
 import CalculatorModalSchema from '../calculatorModalBlock.tsx/schema'
 import LearnMoreBlogContent from './learnMoreBlogContent/schema'
+import LearnMoreVideoContentSchema from './learnMoreVideoContent/schema'
 
 /* ------------ limits ------------ */
 const TITLE_MAX = 100
@@ -899,7 +900,7 @@ const CustomTabSchema: Block = {
       defaultValue: false,
       admin: {
         description:
-          'If Half Width is true it will take half width, and you can display image on the other half. If unchecked, image options are hidden.',
+          'Checked the check box only for `step content`. If Half Width is true it will take half width, and you can display image on the other half. If unchecked, image options are hidden.',
       },
     },
 
@@ -1025,6 +1026,7 @@ const CustomTabSchema: Block = {
             StepContent,
             DetailsContent,
             LearnMoreBlogContent,
+            LearnMoreVideoContentSchema,
           ],
         },
       ],
