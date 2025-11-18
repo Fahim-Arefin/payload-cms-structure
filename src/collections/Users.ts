@@ -30,7 +30,7 @@ const afterLogin: CollectionAfterLoginHook = async ({ req, user }) => {
       })
     }
 
-    // 2) stamp lastLoginAt and AVOID creating a "random users update" audit
+    // 2) stamp lastLoginAt and AVOID creating a "random users update" auditss
     if (actorId) {
       await req.payload.update({
         collection: 'users',
