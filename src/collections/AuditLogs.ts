@@ -7,15 +7,13 @@ const AuditLogs: CollectionConfig = {
   admin: {
     useAsTitle: 'action',
     hidden: ({ user }) => !hasRole(user, ['super-admin', 'admin', 'editor']),
-    // was: ['action', 'collection', 'docId', 'actor', 'createdAt']
     defaultColumns: ['action', 'targetCollection', 'docId', 'actor', 'createdAt'],
   },
   access: {
     read: ({ req }) => {
       if (hasRole(req.user, ['super-admin', 'admin'])) return true
       if (hasRole(req.user, ['editor'])) {
-        if (!req.user) return false
-        return { actor: { equals: req.user.id } }
+        return req.user ? { actor: { equals: req.user.id } } : false
       }
       return false
     },
@@ -29,12 +27,15 @@ const AuditLogs: CollectionConfig = {
       type: 'select',
       required: true,
       options: [
-        'create','update','delete','publish',
-        'approve','reject','settings-update',
+        // auth
+        'login', 'logout',
+        // content/user ops
+        'create', 'update', 'delete', 'publish',
+        'approve', 'reject', 'settings-update',
+        'role-assign',
       ],
     },
-    // was: { name: 'collection', type: 'text' }
-    { name: 'targetCollection', type: 'text' },
+    { name: 'targetCollection', type: 'text' }, // avoid reserved 'collection'
     { name: 'docId', type: 'text' },
     { name: 'actor', type: 'relationship', relationTo: 'users' },
     { name: 'ip', type: 'text' },

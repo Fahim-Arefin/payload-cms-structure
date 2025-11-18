@@ -152,6 +152,8 @@ export interface User {
    * Only Super Admin can set or change this.
    */
   role?: ('super-admin' | 'admin' | 'editor' | 'viewer') | null;
+  lastLoginAt?: string | null;
+  lastLogoutAt?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -5067,7 +5069,17 @@ export interface Page {
  */
 export interface AuditLog {
   id: string;
-  action: 'create' | 'update' | 'delete' | 'publish' | 'approve' | 'reject' | 'settings-update';
+  action:
+    | 'login'
+    | 'logout'
+    | 'create'
+    | 'update'
+    | 'delete'
+    | 'publish'
+    | 'approve'
+    | 'reject'
+    | 'settings-update'
+    | 'role-assign';
   targetCollection?: string | null;
   docId?: string | null;
   actor?: (string | null) | User;
@@ -5169,6 +5181,8 @@ export interface PayloadMigration {
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
   role?: T;
+  lastLoginAt?: T;
+  lastLogoutAt?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

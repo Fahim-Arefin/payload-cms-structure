@@ -1,25 +1,27 @@
 // src/lib/http.ts
-export function getClientIP(req: any): string {
+import type { PayloadRequest } from 'payload'
+
+export function getClientIP(req: PayloadRequest | any): string {
   try {
-    // Fetch API Headers object?
     const h: any = req?.headers
+    // Fetch Headers (Next 15 / node-fetch style)
     if (h && typeof h.get === 'function') {
-      const xff = h.get('x-forwarded-for')
-      if (xff) return String(xff).split(',')[0].trim()
-      const real = h.get('x-real-ip')
-      if (real) return String(real).trim()
+      return (
+        h.get('x-forwarded-for') ||
+        h.get('x-real-ip') ||
+        (req as any).ip ||
+        (req?.socket as any)?.remoteAddress ||
+        ''
+      )
     }
-
-    // Node/Express-like headers object?
-    const raw = req?.headers?.['x-forwarded-for']
-    if (Array.isArray(raw)) return raw[0]
-    if (typeof raw === 'string' && raw) return raw.split(',')[0].trim()
-
-    // Fallbacks commonly present on Node req
+    // Plain object headers
+    const xff = h?.['x-forwarded-for']
+    const real = h?.['x-real-ip']
     return (
-      (req as any)?.ip ??
-      (req as any)?.socket?.remoteAddress ??
-      (req as any)?.connection?.remoteAddress ??
+      (Array.isArray(xff) ? xff.join(', ') : xff) ||
+      real ||
+      (req as any).ip ||
+      (req?.socket as any)?.remoteAddress ||
       ''
     )
   } catch {
