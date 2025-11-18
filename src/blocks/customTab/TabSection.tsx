@@ -183,6 +183,7 @@ import {
   DESCRIPTIVE_CONTENT_SLUG_AND_TAG,
   DETAILS_CONTENT_SLUG_AND_TAG,
   ELIGIBILITY_CONTENT_SLUG_AND_TAG,
+  LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG,
   STEP_CONTENT_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { CustomTabBlockType } from '@/types/payloadCustomTypes'
@@ -193,6 +194,7 @@ import './TabSection.css'
 import EligibilityContentBlock from './eligibilityContent/EligibilityContentBlock'
 import AdditionalBenefitContentBlock from './additionalBenefitContent/AdditionalBenefitContentBlock'
 import DetailsContentBlock from './detailsContent/DetailsContentBlock'
+import LearnMoreBlogContentBlock from './learnMoreBlogContent/LearnMoreBlogContentBlock'
 
 type Props = {
   block: CustomTabBlockType
@@ -383,6 +385,10 @@ function TabSection({ block, className }: Props) {
 
               {single?.blockType === DETAILS_CONTENT_SLUG_AND_TAG && (
                 <DetailsContentBlock data={single} />
+              )}
+
+              {single?.blockType === LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG && (
+                <LearnMoreBlogContentBlock data={single} />
               )}
             </TabsContent>
           )

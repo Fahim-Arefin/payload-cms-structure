@@ -473,3 +473,15 @@ export const DETAILS_CONTENT_SLUG_AND_TAG = 'details-benefit-content'
 export const DETAILS_CONTENT_PAGE_BLOCK_LABEL = 'Details Content'
 export const DETAILS_CONTENT_CACHE_KEY = 'details-benefit-content-data'
 export const DETAILS_CONTENT_BLOCK_THUMBNAIL_URL = `${folder}/details-benefit-content-block-thumbnail.png`
+
+// conten 06 --> learn more video content
+export const LEARN_MORE_VIDEO_CONTENT_SLUG_AND_TAG = 'learn-more-video-content'
+export const LEARN_MORE_VIDEO_CONTENT_PAGE_BLOCK_LABEL = 'Learn More Video Content'
+export const LEARN_MORE_VIDEO_CONTENT_CACHE_KEY = 'learn-more-video-content-data'
+export const LEARN_MORE_VIDEO_CONTENT_BLOCK_THUMBNAIL_URL = `${folder}/learn-more-video-content-block-thumbnail.png`
+
+// conten 07 --> learn more video content
+export const LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG = 'learn-more-blog-content'
+export const LEARN_MORE_BLOG_CONTENT_PAGE_BLOCK_LABEL = 'Learn More Blog Content'
+export const LEARN_MORE_BLOG_CONTENT_CACHE_KEY = 'learn-more-blog-content-data'
+export const LEARN_MORE_BLOG_CONTENT_BLOCK_THUMBNAIL_URL = `${folder}/learn-more-blog-content-block-thumbnail.png`

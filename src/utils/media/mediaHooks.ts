@@ -37,6 +37,7 @@ import {
   DESCRIPTIVE_CONTENT_SLUG_AND_TAG,
   ELIGIBILITY_CONTENT_SLUG_AND_TAG,
   ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG,
+  LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -486,6 +487,19 @@ export const mediaHooks = withMediaLifecycle({
       nestedBlockType: ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG,
       nestedArrayKey: 'additionalBenefits',
       mediaFields: ['desktopImage'],
+    },
+  ],
+
+  blockArrayBlocksGroupFields: [
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_TAB_SLUG_AND_TAG,
+      arrayKey: 'tabs',
+      blocksKey: 'content',
+      nestedBlockType: LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG,
+      groupKey: 'groups', // groups[] (array is supported)
+      nestedArrayKey: 'blogs', // blogs[] inside each group
+      mediaFields: ['image'], // generated via generateArrayImageFields
     },
   ],
 
