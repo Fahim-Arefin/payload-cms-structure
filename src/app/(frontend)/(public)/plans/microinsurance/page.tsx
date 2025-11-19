@@ -20,8 +20,6 @@ function page({}: Props) {
       description: 'Empowering communities, strengthening financial resilience',
       descriptionBN: `সবার জন্য লাইফ ইন্স্যুরেন্স`,
       image: `/assets/solutions/microinsurance/web/microinsurance-hero.jpg`,
-      // image: `/assets/solutions/microinsurance/web/microinsurance-hero2.jpg`,
-      // image: `/assets/solutions/microinsurance/web/microBanner.jpeg`,
     },
   ]
 

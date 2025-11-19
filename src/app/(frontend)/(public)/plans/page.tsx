@@ -53,6 +53,15 @@ function PlanPage() {
       link: '/plans/bancassurance',
       image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/web/plan3.jpg`,
     },
+    // MICROINSURANCE will be omitted for now
+    {
+      title: 'MICROINSURANCE',
+      titleBN: `মাইক্রোইন্স্যুরেন্স`,
+      description: 'Making life insurance affordable & accessible to all.',
+      descriptionBN: `সবার জন্য লাইফ ইন্স্যুরেন্স`,
+      link: '/plans/microinsurance',
+      image: `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/web/plan4.jpg`,
+    },
   ]
 
   return (
