@@ -1,3 +1,8 @@
+import {
+  HERO_YOUTUBE_BUTTON_BLOCK_LABEL,
+  HERO_YOUTUBE_BUTTON_BLOCK_THUMBNAIL_URL,
+  HERO_YOUTUBE_BUTTON_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { bnNum } from './../../lib/utils'
 // import type { Block } from 'payload'
 
@@ -115,11 +120,15 @@ const validateYouTubeUrl =
   }
 
 export const youtubeVideoButton: Block = {
-  slug: 'youtubeVideo',
+  slug: HERO_YOUTUBE_BUTTON_SLUG_AND_TAG,
   labels: {
-    singular: 'YouTube Video Button',
-    plural: 'YouTube Video Button',
+    singular: HERO_YOUTUBE_BUTTON_BLOCK_LABEL,
+    plural: HERO_YOUTUBE_BUTTON_BLOCK_LABEL,
   },
+
+  imageURL: HERO_YOUTUBE_BUTTON_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${HERO_YOUTUBE_BUTTON_BLOCK_LABEL} preview`,
+
   fields: [
     {
       type: 'row',

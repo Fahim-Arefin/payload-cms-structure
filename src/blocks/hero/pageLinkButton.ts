@@ -1,3 +1,8 @@
+import {
+  HERO_LINK_BUTTON_BLOCK_LABEL,
+  HERO_LINK_BUTTON_BLOCK_THUMBNAIL_URL,
+  HERO_LINK_BUTTON_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { bnNum } from './../../lib/utils'
 import type { Block } from 'payload'
 
@@ -38,11 +43,16 @@ const validateInternalPath =
   }
 
 export const pageLinkButton: Block = {
-  slug: 'pageLink',
+  slug: HERO_LINK_BUTTON_SLUG_AND_TAG,
   labels: {
-    singular: 'Link Button',
-    plural: 'Link Button',
+    singular: HERO_LINK_BUTTON_BLOCK_LABEL,
+    plural: HERO_LINK_BUTTON_BLOCK_LABEL,
   },
+
+  imageURL: HERO_LINK_BUTTON_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${HERO_LINK_BUTTON_BLOCK_LABEL} preview`,
+
+  // link-button-block-thumbnail.png
   fields: [
     {
       type: 'row',

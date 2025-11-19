@@ -53,7 +53,7 @@ const folder = '/assets/block-icons'
 // Group
 export const HERO = 'Hero Sections'
 export const COMMON = 'Common Sections'
-export const HOME_PAGE = 'Home Page Unique Sections'
+export const HOME_PAGE = 'Home Page (unique sections)'
 
 // home page constants
 // ----------------------------------------------------------------------------------------------
@@ -63,6 +63,24 @@ export const HOME_PAGE_HERO_SLUG_AND_TAG = 'hero'
 export const HOME_PAGE_HERO_BLOCK_LABEL = 'Hero (Large)'
 export const HOME_PAGE_HERO_CACHE_KEY = 'hero-data'
 export const HOME_PAGE_HERO_BLOCK_THUMBNAIL_URL = `${folder}/hero-block-thumbnail.png`
+
+// Link Button
+export const HERO_LINK_BUTTON_SLUG_AND_TAG = 'pageLink'
+export const HERO_LINK_BUTTON_BLOCK_LABEL = 'Link Button'
+export const HERO_LINK_BUTTON_CACHE_KEY = 'pageLink-data'
+export const HERO_LINK_BUTTON_BLOCK_THUMBNAIL_URL = `${folder}/pageLink-block-thumbnail.png`
+
+// YouTube Button
+export const HERO_YOUTUBE_BUTTON_SLUG_AND_TAG = 'youtubeVideo'
+export const HERO_YOUTUBE_BUTTON_BLOCK_LABEL = 'YouTube Video Button'
+export const HERO_YOUTUBE_BUTTON_CACHE_KEY = 'youtubeVideo-data'
+export const HERO_YOUTUBE_BUTTON_BLOCK_THUMBNAIL_URL = `${folder}/youtubeVideo-block-thumbnail.png`
+
+// Call Button
+export const HERO_CALL_NOW_BUTTON_SLUG_AND_TAG = 'callNow'
+export const HERO_CALL_NOW_BUTTON_BLOCK_LABEL = 'Call Now Button'
+export const HERO_CALL_NOW_BUTTON_CACHE_KEY = 'callNow-data'
+export const HERO_CALL_NOW_BUTTON_BLOCK_THUMBNAIL_URL = `${folder}/callNow-block-thumbnail.png`
 
 export const HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG = 'why-choose-us'
 export const HOME_PAGE_WHY_CHOOSE_US_BLOCK_LABEL = 'Why Choose Us'

@@ -1,3 +1,8 @@
+import {
+  HERO_CALL_NOW_BUTTON_BLOCK_LABEL,
+  HERO_CALL_NOW_BUTTON_BLOCK_THUMBNAIL_URL,
+  HERO_CALL_NOW_BUTTON_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { bnNum } from './../../lib/utils'
 // import type { Block } from 'payload'
 
@@ -105,11 +110,15 @@ const validatePhone =
   }
 
 export const callNowButton: Block = {
-  slug: 'callNow',
+  slug: HERO_CALL_NOW_BUTTON_SLUG_AND_TAG,
   labels: {
-    singular: 'Call Now Button',
-    plural: 'Call Now Button',
+    singular: HERO_CALL_NOW_BUTTON_BLOCK_LABEL,
+    plural: HERO_CALL_NOW_BUTTON_BLOCK_LABEL,
   },
+
+  imageURL: HERO_CALL_NOW_BUTTON_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${HERO_CALL_NOW_BUTTON_BLOCK_LABEL} preview`,
+
   fields: [
     {
       type: 'row',
