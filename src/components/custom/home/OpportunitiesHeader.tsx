@@ -73,7 +73,7 @@ function OpportunitiesHeader({ data }: Props) {
               <GlobalButton
                 variant="primary"
                 // text={data?.buttonText}
-                className="text-[12px] sm:text-[14px] md:text-[14px] lg:text-[18px] 2xl:text-[20px]"
+                className=""
               >
                 <LocalizedString en={data.buttonText} bn={data.buttonTextBN} />
               </GlobalButton>

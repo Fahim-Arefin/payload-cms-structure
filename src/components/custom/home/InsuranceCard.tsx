@@ -60,7 +60,7 @@ const content = (data: InsuranceCardDataType) => (
        h-[20px] lg:h-[30px] xl:h-[40px] 2xl:h-[50px]"
       >
         <img
-          src={data?.videoLink ? '/assets/icons/web/play3.svg' : '/assets/icons/web/circle.svg'}
+          src={data?.videoLink ? '/assets/icons/play3.svg' : '/assets/icons/circle.svg'}
           alt=""
         />
       </div>

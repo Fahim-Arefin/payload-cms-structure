@@ -9,7 +9,8 @@ type Props = {
 
 function LifeInsuranceSimplifiedBlock({ block }: Props) {
   return (
-    <div className="bg-gradient-to-r from-[#FBFFD3] to-[#F8E4C6]">
+    // <div className="bg-gradient-to-r from-[#FBFFD3] to-[#F8E4C6]">
+    <div className="">
       <InsuranceSection lifeInsuranceSimplifiedData={block} />
     </div>
   )

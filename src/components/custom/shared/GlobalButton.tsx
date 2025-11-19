@@ -15,7 +15,7 @@ function GlobalButton({
   text,
   className = '',
   children,
-  size = 'medium',
+  size = 'small',
   ...props
 }: Props) {
   // ✅ no fixed widths; just padding + height + font-size
