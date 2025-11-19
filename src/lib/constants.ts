@@ -60,7 +60,7 @@ export const HOME_PAGE = 'Home Page Unique Sections'
 export const HOME_PAGE_ADMIN_GROUP = 'Home Page'
 
 export const HOME_PAGE_HERO_SLUG_AND_TAG = 'hero'
-export const HOME_PAGE_HERO_BLOCK_LABEL = 'Hero'
+export const HOME_PAGE_HERO_BLOCK_LABEL = 'Hero (Large)'
 export const HOME_PAGE_HERO_CACHE_KEY = 'hero-data'
 export const HOME_PAGE_HERO_BLOCK_THUMBNAIL_URL = `${folder}/hero-block-thumbnail.png`
 

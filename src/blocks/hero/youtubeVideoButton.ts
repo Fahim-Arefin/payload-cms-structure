@@ -1,3 +1,4 @@
+import { bnNum } from './../../lib/utils'
 // import type { Block } from 'payload'
 
 // /* ---------- limits ---------- */
@@ -77,7 +78,7 @@
 import type { Block } from 'payload'
 
 /* ---------- limits ---------- */
-const BUTTON_LABEL_MAX = 24
+const BUTTON_LABEL_MAX = 40
 const URL_MAX = 300
 
 /* ---------- validators ---------- */
@@ -120,28 +121,33 @@ export const youtubeVideoButton: Block = {
     plural: 'YouTube Video Button',
   },
   fields: [
-    // EN
     {
-      name: 'label',
-      type: 'text',
-      required: true,
-      label: 'Button Text',
-      defaultValue: 'From The Expert',
-      maxLength: BUTTON_LABEL_MAX,
-      validate: validateShortText('Button Text', BUTTON_LABEL_MAX, true),
-      admin: { description: `Max ${BUTTON_LABEL_MAX} characters.` },
-    },
+      type: 'row',
+      fields: [
+        // EN
+        {
+          name: 'label',
+          type: 'text',
+          required: true,
+          label: 'Button Text',
+          defaultValue: 'From The Expert',
+          maxLength: BUTTON_LABEL_MAX,
+          validate: validateShortText('Button Text', BUTTON_LABEL_MAX, true),
+          admin: { width: '50%', description: `Max ${BUTTON_LABEL_MAX} characters.` },
+        },
 
-    // BN twins
-    {
-      name: 'labelBN',
-      type: 'text',
-      required: true,
-      label: 'বাটনের টেক্সট (বাংলা)',
-      defaultValue: 'বিশেষজ্ঞের কাছ থেকে',
-      maxLength: BUTTON_LABEL_MAX,
-      validate: validateShortText('Button Text (BN)', BUTTON_LABEL_MAX, true),
-      admin: { description: `সর্বোচ্চ ${BUTTON_LABEL_MAX} অক্ষর।` },
+        // BN twins
+        {
+          name: 'labelBN',
+          type: 'text',
+          required: true,
+          label: 'বাটনের টেক্সট (বাংলা)',
+          defaultValue: 'আরো জানুন',
+          maxLength: BUTTON_LABEL_MAX,
+          validate: validateShortText('Button Text (BN)', BUTTON_LABEL_MAX, true),
+          admin: { width: '50%', description: `সর্বোচ্চ ${bnNum(BUTTON_LABEL_MAX)} অক্ষর।` },
+        },
+      ],
     },
 
     {

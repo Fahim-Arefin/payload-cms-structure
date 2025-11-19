@@ -4,7 +4,7 @@ import GlobalButton from './GlobalButton'
 
 interface CallNowButtonProps {
   className?: string
-  size?: 'small' | 'large' | 'medium'
+  size?: 'small' | 'large' | 'medium' | 'extraLarge'
   variant?: 'link' | 'primary' | 'glass' | 'default' | 'destructive' | 'outline' | 'secondary'
   number: string
   label: string
@@ -26,10 +26,11 @@ export default function CallNowButton({
     <div onClick={handleCall} className="cursor-pointer">
       <GlobalButton
         variant={variant}
-        className={
-          className ||
-          'border border-white text-white bg-white/20 backdrop-blur-md hover:bg-white/30 hover:border-white transition-colors duration-300'
-        }
+        // className={
+        //   className ||
+        //   'border border-white text-white bg-white/20 backdrop-blur-md hover:bg-white/30 hover:border-white transition-colors duration-300'
+        // }
+        className={className}
         // text="Call Now"
         text={label}
         size={size}

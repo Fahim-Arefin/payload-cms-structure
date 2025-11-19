@@ -316,29 +316,36 @@ export interface Page {
           | (
               | {
                   /**
-                   * Max 24 characters.
+                   * Max 40 characters.
                    */
                   label: string;
                   /**
-                   * সর্বোচ্চ 24 অক্ষর।
+                   * সর্বোচ্চ ৪০ অক্ষর।
                    */
                   labelBN: string;
                   /**
-                   * Enter the page path only (no domain). Example: "/plans" or "/premium-calculator".
+                   * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
                    */
-                  page: string;
-                  style?: ('primary' | 'glass') | null;
+                  buttonLink: string | Page;
+                  /**
+                   * Select the button style
+                   */
+                  style?: ('primary' | 'secondary' | 'glass') | null;
+                  /**
+                   * Select the button size
+                   */
+                  size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
                   id?: string | null;
                   blockName?: string | null;
                   blockType: 'pageLink';
                 }
               | {
                   /**
-                   * Max 24 characters.
+                   * Max 40 characters.
                    */
                   label: string;
                   /**
-                   * সর্বোচ্চ 24 অক্ষর।
+                   * সর্বোচ্চ ৪০ অক্ষর।
                    */
                   labelBN: string;
                   /**
@@ -351,18 +358,25 @@ export interface Page {
                 }
               | {
                   /**
-                   * Max 24 characters.
+                   * Max 40 characters.
                    */
                   label: string;
                   /**
-                   * সর্বোচ্চ 24 অক্ষর।
+                   * সর্বোচ্চ ৪০ অক্ষর।
                    */
                   labelBN: string;
                   /**
                    * Example: +88 09610889900
                    */
                   phoneNumber: string;
-                  style?: ('primary' | 'glass') | null;
+                  /**
+                   * Select the button style
+                   */
+                  style?: ('primary' | 'secondary' | 'glass') | null;
+                  /**
+                   * Select the button size
+                   */
+                  size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
                   id?: string | null;
                   blockName?: string | null;
                   blockType: 'callNow';
@@ -6197,8 +6211,9 @@ export interface PagesSelect<T extends boolean = true> {
                       | {
                           label?: T;
                           labelBN?: T;
-                          page?: T;
+                          buttonLink?: T;
                           style?: T;
+                          size?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -6218,6 +6233,7 @@ export interface PagesSelect<T extends boolean = true> {
                           labelBN?: T;
                           phoneNumber?: T;
                           style?: T;
+                          size?: T;
                           id?: T;
                           blockName?: T;
                         };

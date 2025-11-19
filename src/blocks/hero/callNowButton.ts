@@ -1,3 +1,4 @@
+import { bnNum } from './../../lib/utils'
 // import type { Block } from 'payload'
 
 // /* ---------- limits ---------- */
@@ -75,7 +76,7 @@
 import type { Block } from 'payload'
 
 /* ---------- limits ---------- */
-const BUTTON_LABEL_MAX = 24
+const BUTTON_LABEL_MAX = 40
 const PHONE_MAX = 40
 
 /* ---------- validators ---------- */
@@ -110,48 +111,80 @@ export const callNowButton: Block = {
     plural: 'Call Now Button',
   },
   fields: [
-    // EN
     {
-      name: 'label',
-      type: 'text',
-      required: true,
-      label: 'Button Text',
-      defaultValue: 'Call Now',
-      maxLength: BUTTON_LABEL_MAX,
-      validate: validateShortText('Button Text', BUTTON_LABEL_MAX, true),
-      admin: { description: `Max ${BUTTON_LABEL_MAX} characters.` },
-    },
-    // BN twins
-    {
-      name: 'labelBN',
-      type: 'text',
-      required: true,
-      label: 'বাটনের টেক্সট (বাংলা)',
-      defaultValue: 'এখনই কল করুন',
-      maxLength: BUTTON_LABEL_MAX,
-      validate: validateShortText('Button Text (BN)', BUTTON_LABEL_MAX, true),
-      admin: { description: `সর্বোচ্চ ${BUTTON_LABEL_MAX} অক্ষর।` },
-    },
-    {
-      name: 'phoneNumber',
-      type: 'text',
-      required: true,
-      label: 'Phone Number',
-      maxLength: PHONE_MAX,
-      validate: validatePhone(PHONE_MAX, true),
-      admin: { description: 'Example: +88 09610889900' },
-    },
-
-    // Not localized (style is a control, not user-facing text)
-    {
-      name: 'style',
-      type: 'select',
-      label: 'Button Style',
-      options: [
-        { label: 'Primary', value: 'primary' },
-        { label: 'Glass', value: 'glass' },
+      type: 'row',
+      fields: [
+        // EN
+        {
+          name: 'label',
+          type: 'text',
+          required: true,
+          label: 'Button Text',
+          defaultValue: 'Call Now',
+          maxLength: BUTTON_LABEL_MAX,
+          validate: validateShortText('Button Text', BUTTON_LABEL_MAX, true),
+          admin: { width: '50%', description: `Max ${BUTTON_LABEL_MAX} characters.` },
+        },
+        // BN twins
+        {
+          name: 'labelBN',
+          type: 'text',
+          required: true,
+          label: 'বাটনের টেক্সট (বাংলা)',
+          defaultValue: 'কল করুন',
+          maxLength: BUTTON_LABEL_MAX,
+          validate: validateShortText('Button Text (BN)', BUTTON_LABEL_MAX, true),
+          admin: { width: '50%', description: `সর্বোচ্চ ${bnNum(BUTTON_LABEL_MAX)} অক্ষর।` },
+        },
       ],
-      defaultValue: 'glass',
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'phoneNumber',
+          type: 'text',
+          required: true,
+          label: 'Phone Number',
+          maxLength: PHONE_MAX,
+          validate: validatePhone(PHONE_MAX, true),
+          defaultValue: '09610889900',
+          admin: { width: '33%', description: 'Example: +88 09610889900' },
+        },
+
+        {
+          name: 'style',
+          type: 'select',
+          label: 'Button Style',
+          options: [
+            { label: 'Primary', value: 'primary' },
+            { label: 'Secondary', value: 'secondary' },
+            { label: 'Glass', value: 'glass' },
+          ],
+          defaultValue: 'glass',
+          admin: {
+            width: '33%',
+            description: 'Select the button style',
+          },
+        },
+        // size?: 'small' | 'medium' | 'large' | 'extraLarge'
+        {
+          name: 'size',
+          type: 'select',
+          label: 'Button Size',
+          options: [
+            { label: 'Small', value: 'small' },
+            { label: 'Medium', value: 'medium' },
+            { label: 'Large', value: 'large' },
+            { label: 'ExtraLarge', value: 'extraLarge' },
+          ],
+          defaultValue: 'extraLarge',
+          admin: {
+            width: '33%',
+            description: 'Select the button size',
+          },
+        },
+      ],
     },
   ],
 }

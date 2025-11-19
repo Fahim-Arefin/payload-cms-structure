@@ -4,6 +4,7 @@ import CallNowButton from '@/components/custom/shared/CallNowButton'
 import GlobalButton from '@/components/custom/shared/GlobalButton'
 import LocalizedText from '@/components/custom/shared/LocalizedText'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { pageHref } from '@/lib/utils'
 import { HeroBlockType } from '@/types/payloadCustomTypes'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Link from 'next/link'
@@ -24,15 +25,28 @@ export default function CTAButtonBlock({ ctaButtons }: Props) {
     <div
       className="absolute top-[245px] md:top-[355px] lg:top-[75%] xl:top-[70%]  2xl:top-[730px] 
         inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
-        hero-content-width flex justify-left space-x-4 md:space-x-6 lg:justify-start"
+        hero-content-width flex items-center justify-left space-x-2 lg:space-x-3 xl:space-x-5 lg:justify-start"
     >
       {ctaButtons?.map((block, index) => {
         if (block?.blockType === 'pageLink') {
           // If GlobalButton supports children (you already do in the YT button), render label as child:
           return (
             <div key={`pageLink-${index}`}>
-              <Link href={block.page}>
-                <GlobalButton size="large" variant={block.style || 'primary'}>
+              <Link href={pageHref(block.buttonLink)}>
+                <GlobalButton
+                  // size="large"
+                  size={block?.size ?? 'small'}
+                  variant={
+                    block.style as
+                      | 'link'
+                      | 'primary'
+                      | 'glass'
+                      | 'default'
+                      | 'destructive'
+                      | 'outline'
+                      | 'secondary'
+                  }
+                >
                   <LocalizedText en={block.label} bn={block.labelBN} />
                 </GlobalButton>
               </Link>
@@ -49,7 +63,7 @@ export default function CTAButtonBlock({ ctaButtons }: Props) {
                     <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
                       <BsPlay />
                     </div>
-                    <div className="text-[12px] sm:text-[13px] md:text-[15px] xl:text-[16px] 2xl:text-[18px] font-normal">
+                    <div className="text-[12px] sm:text-[13px] md:text-[15px] lg:text-[16px] 2xl:text-[18px] font-normal">
                       <LocalizedText en={block.label} bn={block.labelBN} />
                     </div>
                   </GlobalButton>
@@ -91,6 +105,7 @@ export default function CTAButtonBlock({ ctaButtons }: Props) {
                 label={label}
                 number={block.phoneNumber}
                 variant={block.style || 'glass'}
+                size={block?.size ?? 'small'}
               />
             </div>
           )
