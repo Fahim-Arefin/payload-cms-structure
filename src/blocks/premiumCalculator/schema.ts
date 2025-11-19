@@ -241,6 +241,68 @@ const HEADING_MAX = 40
 const TITLE_MAX = 40
 const HIGHLIGHTED_TEXT_MAX = 40
 const DESCRIPTION_MAX = 200
+const DESC_MAX = 400
+
+/* ---------- default rich text (Lexical JSON) for consent (EN/BN) ---------- */
+const CONSENT_EN_DEFAULT = {
+  root: {
+    type: 'root',
+    version: 1,
+    children: [
+      {
+        type: 'paragraph',
+        version: 1,
+        indent: 0,
+        format: '',
+        direction: 'ltr',
+        children: [
+          {
+            type: 'text',
+            version: 1,
+            style: '',
+            detail: 0,
+            format: 0,
+            mode: 'normal',
+            text: 'By clicking Send Feedback, you agree to our terms and conditions and privacy policy.',
+          },
+        ],
+      },
+    ],
+    direction: 'ltr',
+    format: '',
+    indent: 0,
+  },
+}
+
+const CONSENT_BN_DEFAULT = {
+  root: {
+    type: 'root',
+    version: 1,
+    children: [
+      {
+        type: 'paragraph',
+        version: 1,
+        indent: 0,
+        format: '',
+        direction: 'ltr',
+        children: [
+          {
+            type: 'text',
+            version: 1,
+            style: '',
+            detail: 0,
+            format: 0,
+            mode: 'normal',
+            text: 'এখানে ক্লিক করার মাধ্যমে, আপনি আমাদের টার্মস এন্ড কন্ডিশনস , ও প্রাইভেসি পলিসিতে সম্মত করছেন।',
+          },
+        ],
+      },
+    ],
+    direction: 'ltr',
+    format: '',
+    indent: 0,
+  },
+}
 
 /* ------------ validators ------------ */
 
@@ -279,6 +341,61 @@ const validateHighlightedInTitleBN = (val: unknown, { siblingData }: any) => {
   }
   return true
 }
+
+function lexicalHasRealText(root: any): boolean {
+  if (!root) return false
+  const stack = [root]
+  while (stack.length) {
+    const node = stack.pop()
+    if (!node) continue
+    if (node.type === 'text' && typeof node.text === 'string') {
+      const stripped = node.text.replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/\s+/g, '')
+      if (stripped.length > 0) return true
+    }
+    if (Array.isArray(node)) {
+      for (const c of node) stack.push(c)
+    } else if (typeof node === 'object') {
+      for (const k of Object.keys(node)) {
+        if (k === 'text') continue
+        stack.push((node as any)[k])
+      }
+    }
+  }
+  return false
+}
+
+function lexicalCharCount(root: any): number {
+  let count = 0
+  const stack = [root]
+  while (stack.length) {
+    const node = stack.pop()
+    if (!node) continue
+    if (node.type === 'text' && typeof node.text === 'string') {
+      count += node.text.replace(/[\u200B-\u200D\uFEFF]/g, '').length
+    }
+    if (Array.isArray(node)) {
+      for (const c of node) stack.push(c)
+    } else if (typeof node === 'object') {
+      for (const k of Object.keys(node)) {
+        if (k === 'text') continue
+        stack.push((node as any)[k])
+      }
+    }
+  }
+  return count
+}
+
+/** Single source-of-truth validator for richText fields (handles required + max) */
+const validateRichText =
+  (label: string, { required, max }: { required: boolean; max: number }) =>
+  (val: unknown) => {
+    const root = (val as any)?.root ?? val
+    if (required && !lexicalHasRealText(root)) return `${label} is required.`
+    if (!root) return true
+    const chars = lexicalCharCount(root)
+    if (max && chars > max) return `${label} must be at most ${max} characters.`
+    return true
+  }
 
 /* ------------ Block config (default Payload media) ------------ */
 const PremiumCalculatorSchema: Block = {
@@ -471,6 +588,29 @@ const PremiumCalculatorSchema: Block = {
       maxKB: 200,
       ownerCollection: HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG as any,
     } as any),
+
+    {
+      name: 'premiumCalculatorForm',
+      type: 'group',
+      label: 'Premium Calculater Form',
+      admin: {
+        description: 'Consent line shown under the premium calculator form submit/CTA.',
+      },
+      fields: [
+        {
+          name: 'consentText',
+          type: 'richText',
+          label: 'Consent Text (EN)',
+          validate: validateRichText('Description', { required: true, max: DESC_MAX }),
+        },
+        {
+          name: 'consentTextBN',
+          type: 'richText',
+          label: 'Consent Text (BN)',
+          validate: validateRichText('Description', { required: true, max: DESC_MAX }),
+        },
+      ],
+    },
   ],
 }
 

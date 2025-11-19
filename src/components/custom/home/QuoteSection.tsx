@@ -431,7 +431,7 @@ function QuoteSection({ data }: Props) {
         </div>
         {/* Right Side - Form Section (order-1 on mobile, order-2 on lg+) */}
         <div ref={formRef} className="lg:p-1 xl:p-2 2xl:p-3 lg:pr-0 z-10 order-1 lg:order-2">
-          <QuoteForm onApiResponse={handleApiResponse} />
+          <QuoteForm onApiResponse={handleApiResponse} payloadData={data} />
         </div>
       </div>
       {/* bg image */}

@@ -670,6 +670,41 @@ export interface Page {
          * Auto-generated Base64 blur
          */
         backgroundImage2BlurDataURL?: string | null;
+        /**
+         * Consent line shown under the premium calculator form submit/CTA.
+         */
+        premiumCalculatorForm?: {
+          consentText?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          consentTextBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'home-premium-calculator';
@@ -6349,6 +6384,12 @@ export interface PagesSelect<T extends boolean = true> {
               pendingBackgroundImage2Original?: T;
               pendingBackgroundImage2Crop?: T;
               backgroundImage2BlurDataURL?: T;
+              premiumCalculatorForm?:
+                | T
+                | {
+                    consentText?: T;
+                    consentTextBN?: T;
+                  };
               id?: T;
               blockName?: T;
             };

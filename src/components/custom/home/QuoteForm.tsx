@@ -38,6 +38,8 @@ import Link from 'next/link'
 import { Checkbox } from '@/components/ui/checkbox'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
 import LocalizedString from '../shared/LocalizedString'
+import LocalizedRichText from '../shared/LocalizedRichText'
+import { PremiumCalculatorBlockType } from '@/types/payloadCustomTypes'
 
 interface FormData {
   PlanCode: number
@@ -55,9 +57,11 @@ interface FormData {
 
 interface QuoteFormProps {
   onApiResponse?: (response: ApiResponse, paymentMode: string) => void
+  payloadData: PremiumCalculatorBlockType
 }
 
-function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
+// function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
+function QuoteForm({ onApiResponse, payloadData }: QuoteFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [isHoveringPlanSelect, setIsHoveringPlanSelect] = useState(false)
   const [isHoveringTenureSelect, setIsHoveringTenureSelect] = useState(false)
@@ -1131,7 +1135,7 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
       </div>
 
       {/* CONSENT CHECKBOX */}
-      <div className="col-span-2">
+      {/* <div className="col-span-2">
         <label className="flex items-start gap-3">
           <Checkbox
             id="agree-terms"
@@ -1174,6 +1178,22 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             {getFieldErrorMessage('agreeTerms')}
           </p>
         )}
+      </div> */}
+      {/* Consent (left as-is per your instruction; feel free to localize similarly if needed) */}
+      <div className="col-span-2 w-full">
+        <div className="flex gap-3">
+          <Checkbox
+            id="agree-terms"
+            checked={agreeTerms}
+            onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+          />
+          <div className="text-xs md:text-sm leading-relaxed ">
+            <LocalizedRichText
+              en={payloadData?.premiumCalculatorForm?.consentText}
+              bn={payloadData?.premiumCalculatorForm?.consentTextBN}
+            />
+          </div>
+        </div>
       </div>
 
       {/* SUBMIT */}

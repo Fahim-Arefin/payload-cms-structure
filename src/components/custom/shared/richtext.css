@@ -1,15 +1,15 @@
 /* richtext.css */
 .rt a {
-  color: #9c8639; /* primary */
+  color: #ed7125; /* primary */
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 .rt a:hover,
 .rt a:focus {
-  color: #9c8639; /* secondary */
+  color: #ed7125; /* secondary */
 }
 .rt a:visited {
-  color: #9c8639;
+  color: #ed7125;
 }
 
 .rt ul {
