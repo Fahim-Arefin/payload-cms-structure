@@ -78,33 +78,24 @@ export default buildConfig({
   plugins: [
     payloadCloudPlugin(),
     // storage-adapter-placeholder
-    // s3Storage({
-    //   bucket: process.env.S3_BUCKET_NAME ?? 'shanta-life',
-    //   collections: {
-    //     media: {
-    //       prefix: 'media',
-    //     },
-    //     resume: {
-    //       prefix: 'resumes',
-    //     },
-    //   },
-    //   config: {
-    //     credentials: {
-    //       accessKeyId: process.env.S3_ACCESS_KEY ?? '',
-    //       secretAccessKey: process.env.S3_SECRET_KEY ?? '',
-    //     },
-    //     endpoint: process.env.S3_ENDPOINT ?? '',
-    //     region: process.env.S3_BUCKET_NAME ?? '',
-    //   },
-    // }),
+    s3Storage({
+      bucket: process.env.S3_BUCKET_NAME ?? 'shanta-life',
+      collections: {
+        media: {
+          prefix: 'media',
+        },
+        resume: {
+          prefix: 'resumes',
+        },
+      },
+      config: {
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY ?? '',
+          secretAccessKey: process.env.S3_SECRET_KEY ?? '',
+        },
+        endpoint: process.env.S3_ENDPOINT ?? '',
+        region: process.env.S3_BUCKET_NAME ?? '',
+      },
+    }),
   ],
-  // endpoints: [
-  //   {
-  //     path: '/yolo/hello',
-  //     method: 'get',
-  //     handler: (_req) => {
-  //       return Response.json({ message: 'world' })
-  //     },
-  //   },
-  // ],
 })

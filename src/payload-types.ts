@@ -173,6 +173,7 @@ export interface Media {
   ownerSessionId?: string | null;
   derivedFrom?: string | null;
   blurDataURL?: string | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -191,6 +192,7 @@ export interface Media {
  */
 export interface Resume {
   id: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -6101,6 +6103,7 @@ export interface MediaSelect<T extends boolean = true> {
   ownerSessionId?: T;
   derivedFrom?: T;
   blurDataURL?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -6118,6 +6121,7 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "resume_select".
  */
 export interface ResumeSelect<T extends boolean = true> {
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
