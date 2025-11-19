@@ -25,7 +25,7 @@ async function OnYourCueSection({ data }: Props) {
         {btnText.length > 0 && btnTextBN.length > 0 && data?.buttonLink && (
           <div className="flex justify-center mt-4 md:mt-6 lg:mt-8 2xl:mt-12 font-avenir">
             <Link href={pageHref(data?.buttonLink)}>
-              <GlobalButton variant="primary" className="" text="Lets Find More">
+              <GlobalButton variant="primary" size="small" className="">
                 <LocalizedString en={data.buttonText} bn={data.buttonTextBN} />
               </GlobalButton>
             </Link>

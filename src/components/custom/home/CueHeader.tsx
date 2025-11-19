@@ -8,7 +8,10 @@ type Props = {
 
 function CueHeader({ data }: Props) {
   return (
-    <div className="space-y-1 md:space-y-2 lg:space-y-3 font-avenir text-center">
+    <div
+      className={`space-y-1 md:space-y-2 lg:space-y-3 font-avenir text-center 
+    ${data?.plans?.length > 3 ? ' mb-4 md:mb-6 lg:mb-[70px] xl:mb-20 ' : ' mb-4 md:mb-6  lg:mb-8 2xl:mb-10'}`}
+    >
       {/* <h2 className="global-h4 uppercase text-[#434342]">
         {data?.heading}
       </h2> */}

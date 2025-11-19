@@ -174,7 +174,7 @@ function WhyChooseUsContent({ whyChooseUsData }: Props) {
                   <GlobalButton
                     size="small"
                     variant="primary"
-                    className="lg:ml-16 xl:-ml-5 2xl:-ml-32"
+                    className="lg:ml-12 xl:-ml-10 2xl:-ml-[140px]"
                   >
                     <LocalizedString
                       en={whyChooseUsData.buttonText}

@@ -17,10 +17,10 @@ function CueItem({ card, index }: Props) {
   const btnText = (card?.plansButtonText ?? '').trim()
   const btnTextBN = (card?.plansButtonTextBN ?? '').trim()
   return (
-    <div className="relative flex flex-col w-full mx-auto shadow-md font-avenir rounded-2xl">
+    <div className="relative flex flex-col w-full mx-auto shadow-md font-avenir rounded-2xl ">
       {/* Top Card */}
       <div
-        className={`h-[400px] lg:h-[280px] xl:h-[330px] 2xl:h-[350px] z-20 lg:bg-white text-white lg:text-[#404041] absolute inset-0 bottom-0 flex flex-col justify-end lg:inset-auto lg:relative 
+        className={`h-[300px] lg:h-[280px] xl:h-[330px] 2xl:h-[350px] z-20 lg:bg-white text-white lg:text-[#404041] absolute inset-0 bottom-0 flex flex-col justify-end lg:inset-auto lg:relative 
           p-6 sm:p-8 md:p-10 lg:p-4 xl:p-8 ${
             index % 2 === 0 ? 'order-1 rounded-t-2xl' : 'order-2 rounded-b-2xl'
           }`}
@@ -65,7 +65,7 @@ function CueItem({ card, index }: Props) {
           <Link href={pageHref(card.plansButtonLink)}>
             <Button
               variant="link"
-              className="mt-2 px-0 text-white lg:text-[#ED7125] lg:text-sm xl:text-xl flex justify-start items-center gap-2 underline lg:no-underline"
+              className="mt-2 px-0 text-white lg:text-[#ED7125] lg:text-sm xl:text-[16px] flex justify-start items-center gap-2 underline lg:no-underline"
             >
               <LocalizedString en={card?.plansButtonText} bn={card?.plansButtonTextBN} />
               <LuArrowUpRight className="text-[24px] sm:text-[26px] md:text-[30px]" />
@@ -76,7 +76,7 @@ function CueItem({ card, index }: Props) {
 
       {/* Bottom Image */}
       <div
-        className={`relative z-0 w-full h-[400px] lg:h-[280px] xl:h-[330px] 2xl:h-[350px] ${index % 2 === 0 ? 'order-2 rounded-2xl' : 'order-1 rounded-2xl'}`}
+        className={`relative z-0 w-full h-[300px] lg:h-[280px] xl:h-[330px] 2xl:h-[350px] ${index % 2 === 0 ? 'order-2 rounded-2xl' : 'order-1 rounded-2xl'}`}
       >
         {typeof card.image === 'object' && card.image?.url && (
           <Image

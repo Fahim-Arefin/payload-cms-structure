@@ -45,7 +45,7 @@ function GlobalButton({
     size === 'small'
       ? `
         px-3 md:px-4 lg:px-5 xl:px-5 2xl:px-6
-        h-[28px] md:h-[30px] lg:h-[38px] xl:h-[40px] 2xl:h-[42px]
+        h-[28px] md:h-[30px] lg:h-[34px] xl:h-[40px] 2xl:h-[42px]
         text-[10px] sm:text-[11px] md:text-[12px] lg:text-[13px] 2xl:text-[14px]
         rounded-sm lg:rounded-md
       `

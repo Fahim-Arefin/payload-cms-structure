@@ -417,11 +417,11 @@ export interface Page {
          */
         subtitleBN: string;
         /**
-         * Optional. Must appear verbatim inside the Subtitle. Max 40 characters.
+         * Optional. Must appear verbatim inside the Subtitle. Max 120 characters.
          */
         highlightedText?: string | null;
         /**
-         * ঐচ্ছিক। সাবটাইটেলের ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         * ঐচ্ছিক। সাবটাইটেলের ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
          */
         highlightedTextBN?: string | null;
         /**
@@ -433,7 +433,7 @@ export interface Page {
          */
         descriptionBN: string;
         /**
-         * Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~400KB.
+         * Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9.
          */
         mainImage: string | Media;
         mainImageOriginal?: (string | null) | Media;
@@ -444,7 +444,7 @@ export interface Page {
          */
         mainImageBlurDataURL?: string | null;
         /**
-         * Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~200KB.
+         * Shown left of the statistics on desktop. Recommended aspect ratio 4:5.
          */
         sideImage: string | Media;
         sideImageOriginal?: (string | null) | Media;

@@ -53,7 +53,8 @@ function CueContent({ data }: Props) {
       </div>
 
       {/* Desktop View: Carousel */}
-      <div className="hidden md:block mt-8 lg:mt-16 xl:mt-20 2xl:mt-24">
+      {/* mt-8 lg:mt-16 xl:mt-20 2xl:mt-24 */}
+      <div className="hidden md:block">
         <Carousel
           className="w-full"
           opts={{

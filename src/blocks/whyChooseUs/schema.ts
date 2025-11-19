@@ -518,7 +518,7 @@ const COLOR_HEX_LEN = 7
 const HEADING_MAX = 40
 const TITLE_MAX = 80
 const SUB_TITLE_MAX = 120
-const HIGHLIGHTED_TEXT_MAX = 40
+const HIGHLIGHTED_TEXT_MAX = 120
 const DESCRIPTION_MAX = 300
 const STAT_LABEL_MAX = 32
 const STAT_VALUE_MAX = 20
@@ -728,20 +728,20 @@ const WhyChooseUsSchema: Block = {
       fieldName: 'mainImage',
       label: 'Main Background Image',
       description:
-        'Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9; ~400KB.',
+        'Used as the background on mobile; on larger screens it appears on the left side. Recommended aspect ratio 16:9.',
       aspectRatio: 16 / 9,
       quality: 0.92,
-      maxKB: 400,
+      maxKB: 600,
       ownerCollection: HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG as any,
     } as any),
 
     ...generateImageFields({
       fieldName: 'sideImage',
       label: 'Side Image (beside stats)',
-      description: 'Shown left of the statistics on desktop. Recommended aspect ratio 4:5; ~200KB.',
+      description: 'Shown left of the statistics on desktop. Recommended aspect ratio 4:5.',
       aspectRatio: 4 / 5,
       quality: 0.92,
-      maxKB: 200,
+      maxKB: 300,
       ownerCollection: HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG as any,
     } as any),
 
