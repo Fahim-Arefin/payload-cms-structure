@@ -363,6 +363,7 @@
 import RenderBlocks from '@/blocks/RenderBlock'
 import { logCacheMiss } from '@/lib/cacheDebug'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
+import { stripButtonLinksToSlug } from '@/lib/utils'
 import type { Page as PayloadPage } from '@/payload-types'
 import config from '@/payload.config'
 import { unstable_cache as unstableCache } from 'next/cache'
@@ -381,6 +382,26 @@ const payloadClient = async () => getPayload({ config: await config })
 
 // --- Cached fetchers ---------------------------------------------------------
 
+// old one
+// const getPageBySlugCached = (slug: string) =>
+//   unstableCache(
+//     async () => {
+//       logCacheMiss(`page:${slug}`)
+//       const payload = await payloadClient()
+//       const { docs } = await payload.find({
+//         collection: 'pages',
+//         limit: 1,
+//         depth: 2,
+//         where: { slug: { equals: slug } },
+//       })
+//       return docs?.[0] || null
+//     },
+//     // cache key must be stable
+//     [`page:${slug}`],
+//     { tags: [pageTag(slug)] },
+//   )()
+
+// new one
 const getPageBySlugCached = (slug: string) =>
   unstableCache(
     async () => {
@@ -392,19 +413,35 @@ const getPageBySlugCached = (slug: string) =>
         depth: 2,
         where: { slug: { equals: slug } },
       })
-      return docs?.[0] || null
+
+      const page = (docs?.[0] as PayloadPage | null) || null
+      return page ? stripButtonLinksToSlug(page) : null
     },
-    // cache key must be stable
     [`page:${slug}`],
     { tags: [pageTag(slug)] },
   )()
 
+// old one
+// const getPatternPagesCached = unstableCache(
+//   async () => {
+//     logCacheMiss('pages:patterns')
+//     const payload = await payloadClient()
+//     const { docs } = await payload.find({ collection: 'pages', limit: 1000, depth: 2 })
+//     return (docs ?? []).filter((p: any) => typeof p.slug === 'string' && p.slug.includes(':'))
+//   },
+//   ['pages:patterns'],
+//   { tags: [pagesListTag] },
+// )
+// new one
 const getPatternPagesCached = unstableCache(
   async () => {
     logCacheMiss('pages:patterns')
     const payload = await payloadClient()
     const { docs } = await payload.find({ collection: 'pages', limit: 1000, depth: 2 })
-    return (docs ?? []).filter((p: any) => typeof p.slug === 'string' && p.slug.includes(':'))
+
+    const sanitized = (docs ?? []).map((p) => stripButtonLinksToSlug(p)) // shrink nested buttonLink
+
+    return sanitized.filter((p: any) => typeof p.slug === 'string' && p.slug.includes(':'))
   },
   ['pages:patterns'],
   { tags: [pagesListTag] },

@@ -17,7 +17,98 @@ export const bnNum = (n: number) => String(n).replace(/\d/g, (d) => '০১২�
 // ========================================================================================
 type MaybePopulated = string | { slug?: string } | null | undefined
 
+// Strip heavy nested "pages" docs from buttonLink; keep only { slug }
+// export function stripButtonLinksToSlug<T = any>(page: T): T {
+//   if (!page || typeof page !== 'object') return page
+
+//   // clone so we don't mutate Payload's internal objects
+//   const clone: any =
+//     typeof structuredClone === 'function' ? structuredClone(page) : JSON.parse(JSON.stringify(page))
+
+//   const visit = (node: any) => {
+//     if (!node || typeof node !== 'object') return
+
+//     // If this node has a populated buttonLink (relationship to pages),
+//     // shrink it from full doc → { slug }
+//     if (node.buttonLink && typeof node.buttonLink === 'object') {
+//       const slug = (node.buttonLink as any).slug
+//       if (typeof slug === 'string') {
+//         node.buttonLink = { slug }
+//       }
+//     }
+
+//     // Walk children
+//     for (const key in node) {
+//       if (!Object.prototype.hasOwnProperty.call(node, key)) continue
+//       const value = node[key]
+//       if (Array.isArray(value)) {
+//         value.forEach(visit)
+//       } else if (value && typeof value === 'object') {
+//         visit(value)
+//       }
+//     }
+//   }
+
+//   visit(clone)
+//   return clone as T
+// }
+
+export function stripButtonLinksToSlug<T = any>(page: T): T {
+  if (!page || typeof page !== 'object') return page
+
+  // clone so we don't mutate Payload's internal objects
+  const clone: any =
+    typeof structuredClone === 'function' ? structuredClone(page) : JSON.parse(JSON.stringify(page))
+
+  const looksLikePageDoc = (node: any) => {
+    if (!node || typeof node !== 'object') return false
+    const hasSlug = typeof node.slug === 'string'
+    const hasLayout = Array.isArray(node.layout)
+    const isPagesCollection = typeof node.collection === 'string' && node.collection === 'pages'
+    return hasSlug && (hasLayout || isPagesCollection)
+  }
+
+  const visit = (node: any, isRoot = false) => {
+    if (!node || typeof node !== 'object') return
+
+    // Walk children
+    for (const key in node) {
+      if (!Object.prototype.hasOwnProperty.call(node, key)) continue
+      const value = node[key]
+
+      if (Array.isArray(value)) {
+        for (let i = 0; i < value.length; i++) {
+          const item = value[i]
+          if (item && typeof item === 'object') {
+            if (!isRoot && looksLikePageDoc(item)) {
+              // shrink nested page doc in arrays → { slug }
+              const slug = (item as any).slug
+              value[i] = { slug }
+            } else {
+              visit(item, false)
+            }
+          }
+        }
+      } else if (value && typeof value === 'object') {
+        if (!isRoot && looksLikePageDoc(value)) {
+          // shrink nested page doc in objects → { slug }
+          const slug = (value as any).slug
+          node[key] = { slug }
+        } else {
+          visit(value, false)
+        }
+      }
+    }
+  }
+
+  // root should stay full; only strip nested page docs
+  visit(clone, true)
+
+  return clone as T
+}
+
 export function pageHref(target: MaybePopulated): string {
+  // console.log('target', target)
   if (!target || typeof target === 'string') return '#' // not populated; resolve on server
   const s = target.slug || ''
   if (!s) return '#'

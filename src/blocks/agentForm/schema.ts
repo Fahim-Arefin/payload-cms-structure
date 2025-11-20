@@ -82,6 +82,34 @@ const lexicalParagraph = (text: string) => ({
   },
 })
 
+const validateSectionId = (val: unknown) => {
+  const raw = String(val ?? '')
+
+  // required
+  if (!raw.trim()) {
+    return 'Section ID is required.'
+  }
+
+  // no leading/trailing spaces
+  if (raw !== raw.trim()) {
+    return 'Section ID must not have leading or trailing spaces.'
+  }
+
+  const s = raw.trim()
+
+  // no spaces at all
+  if (/\s/.test(s)) {
+    return 'No spaces allowed. Use "-" to separate words (e.g., "blog-section", not "blog section").'
+  }
+
+  // allowed chars: letters, numbers, hyphen
+  if (!/^[A-Za-z0-9-]+$/.test(s)) {
+    return 'Section ID can only contain letters, numbers, and hyphens (e.g., "blog-section").'
+  }
+
+  return true
+}
+
 const DEFAULT_CONSENT_EN = lexicalParagraph(
   'By clicking Submit, you agree to our terms and conditions and privacy policy.',
 )
@@ -110,16 +138,33 @@ const AgentOnboardingFormSchema: Block = {
 
     /* ---------- Appearance ---------- */
     {
-      name: 'bgColor',
-      type: 'text',
-      label: 'Background Color',
-      defaultValue: '#f6eddd',
-      required: false,
-      validate: validateHexColor('Background Color'),
-      admin: {
-        description: 'Hex color in #RRGGBB. Default: #f6eddd',
-        width: '25%',
-      },
+      type: 'row',
+      fields: [
+        {
+          name: 'bgColor',
+          type: 'text',
+          label: 'Background Color',
+          defaultValue: '#f6eddd',
+          required: false,
+          validate: validateHexColor('Background Color'),
+          admin: {
+            description: 'Hex color in #RRGGBB. Default: #f6eddd',
+            width: '50%',
+          },
+        },
+        {
+          name: 'sectionId',
+          type: 'text',
+          label: 'Section ID (anchor)',
+          required: true,
+          admin: {
+            width: '50%',
+            description:
+              'Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").',
+          },
+          validate: validateSectionId,
+        },
+      ],
     },
 
     /* ---------- Agent Form Section (Header) ---------- */

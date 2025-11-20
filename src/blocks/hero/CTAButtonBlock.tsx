@@ -4,7 +4,7 @@ import CallNowButton from '@/components/custom/shared/CallNowButton'
 import GlobalButton from '@/components/custom/shared/GlobalButton'
 import LocalizedText from '@/components/custom/shared/LocalizedText'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { pageHref } from '@/lib/utils'
+import { pageHref, resolvePageSlug } from '@/lib/utils'
 import { HeroBlockType } from '@/types/payloadCustomTypes'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Link from 'next/link'
@@ -20,6 +20,7 @@ type Props = {
 
 export default function CTAButtonBlock({ ctaButtons }: Props) {
   const [open, setOpen] = useState(false)
+  // href={`/${resolvePageSlug(item?.buttonLink)}/#${item?.sectionId}`}
 
   return (
     <div
@@ -30,9 +31,13 @@ export default function CTAButtonBlock({ ctaButtons }: Props) {
       {ctaButtons?.map((block, index) => {
         if (block?.blockType === 'pageLink') {
           // If GlobalButton supports children (you already do in the YT button), render label as child:
+          const href = block?.sectionId
+            ? `/${resolvePageSlug(block?.buttonLink)}/#${block?.sectionId}`
+            : pageHref(block.buttonLink)
           return (
             <div key={`pageLink-${index}`}>
-              <Link href={pageHref(block.buttonLink)}>
+              {/* <Link href={pageHref(block.buttonLink)}> */}
+              <Link href={href}>
                 <GlobalButton
                   // size="large"
                   size={block?.size ?? 'small'}

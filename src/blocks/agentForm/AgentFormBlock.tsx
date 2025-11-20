@@ -4,13 +4,13 @@ import React from 'react'
 
 type Props = {
   block: AgentOnboardingFormBlockType
-    params: Record<string, string>
+  params: Record<string, string>
 }
 
-function AgentFormBlock({block, params}: Props) {
+function AgentFormBlock({ block, params }: Props) {
   return (
     <div>
-      <OnboardingForm block={block}/>
+      <OnboardingForm block={block} />
     </div>
   )
 }

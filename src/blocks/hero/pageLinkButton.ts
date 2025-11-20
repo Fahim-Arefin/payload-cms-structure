@@ -42,6 +42,34 @@ const validateInternalPath =
     return true
   }
 
+const validateSectionIdOptional = (val: unknown) => {
+  const raw = String(val ?? '')
+
+  // required
+  if (!raw.trim()) {
+    return true // optional
+  }
+
+  // no leading/trailing spaces
+  if (raw !== raw.trim()) {
+    return 'Section ID must not have leading or trailing spaces.'
+  }
+
+  const s = raw.trim()
+
+  // no spaces at all
+  if (/\s/.test(s)) {
+    return 'No spaces allowed. Use "-" to separate words (e.g., "blog-section", not "blog section").'
+  }
+
+  // allowed chars: letters, numbers, hyphen
+  if (!/^[A-Za-z0-9-]+$/.test(s)) {
+    return 'Section ID can only contain letters, numbers, and hyphens (e.g., "blog-section").'
+  }
+
+  return true
+}
+
 export const pageLinkButton: Block = {
   slug: HERO_LINK_BUTTON_SLUG_AND_TAG,
   labels: {
@@ -96,18 +124,39 @@ export const pageLinkButton: Block = {
       type: 'row',
       fields: [
         {
-          name: 'buttonLink',
-          label: 'Link to (internal page)',
-          type: 'relationship',
-          relationTo: 'pages',
-          required: true,
-          admin: {
-            width: '33%',
-            description:
-              'Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here',
-          },
+          type: 'row',
+          fields: [
+            {
+              name: 'buttonLink',
+              label: 'Link to (internal page)',
+              type: 'relationship',
+              relationTo: 'pages',
+              required: true,
+              admin: {
+                width: '50%',
+                description:
+                  'Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.',
+              },
+            },
+            {
+              name: 'sectionId',
+              type: 'text',
+              label: 'Section ID (anchor)',
+              required: false,
+              admin: {
+                width: '50%',
+                description:
+                  'Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").',
+              },
+              validate: validateSectionIdOptional,
+            },
+          ],
         },
-
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
         // Non-localized control (not user-facing text)
         {
           name: 'style',
@@ -120,7 +169,7 @@ export const pageLinkButton: Block = {
           ],
           defaultValue: 'primary',
           admin: {
-            width: '33%',
+            width: '50%',
             description: 'Select the button style',
           },
         },
@@ -137,7 +186,7 @@ export const pageLinkButton: Block = {
           ],
           defaultValue: 'extraLarge',
           admin: {
-            width: '33%',
+            width: '50%',
             description: 'Select the button size',
           },
         },

@@ -324,9 +324,13 @@ export interface Page {
                    */
                   labelBN: string;
                   /**
-                   * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                   * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
                    */
                   buttonLink: string | Page;
+                  /**
+                   * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                   */
+                  sectionId?: string | null;
                   /**
                    * Select the button style
                    */
@@ -1833,6 +1837,10 @@ export interface Page {
          * Hex color in #RRGGBB. Default: #f6eddd
          */
         bgColor?: string | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+         */
+        sectionId: string;
         formHeader?: string | null;
         formHeaderBN?: string | null;
         description: {
@@ -6295,6 +6303,7 @@ export interface PagesSelect<T extends boolean = true> {
                           label?: T;
                           labelBN?: T;
                           buttonLink?: T;
+                          sectionId?: T;
                           style?: T;
                           size?: T;
                           id?: T;
@@ -6906,6 +6915,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               uploadSessionId?: T;
               bgColor?: T;
+              sectionId?: T;
               formHeader?: T;
               formHeaderBN?: T;
               description?: T;
