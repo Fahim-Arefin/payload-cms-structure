@@ -1,6 +1,7 @@
 import {
   AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_LABEL,
   AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_THUMBNAIL_URL,
+  COMMON,
 } from './../../lib/constants'
 // // collection config
 // import { revalidateTag } from 'next/cache'
@@ -430,6 +431,9 @@ const AgentVisionSchema: Block = {
   labels: {
     singular: AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_LABEL,
     plural: AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_LABEL,
+  },
+  admin: {
+    group: COMMON,
   },
 
   imageURL: AGENT_ONBOARDING_PAGE_AGENT_VISION_BLOCK_THUMBNAIL_URL,

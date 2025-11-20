@@ -265,6 +265,7 @@ export const Pages: CollectionConfig = {
         LifeInsuranceSimplifiedSchema,
         ShantaIntroSchema,
         ValuesThatShapeUsSchema,
+        AgentVisionSchema,
         // home page unique
         WhyChooseUsSchema,
         FeaturedPlansSchema,
@@ -279,15 +280,14 @@ export const Pages: CollectionConfig = {
         LeadershipTeamCardSchema,
         ShantaMilestonesUnlockedSchema,
         ShantaFootprintSchema,
-        // agent onboarding
-        AgentVisionSchema,
-        AgentOnboardingOpportunitySchema,
-        MoreThanAWorkplaceSchema,
         // BOD page
         BoardOfDirectorsListSchema,
         // leadershipo page
         LeadershipTeamListSchema,
-
+        // agent onboarding
+        AgentOnboardingOpportunitySchema,
+        MoreThanAWorkplaceSchema,
+        AgentOnboardingFormSchema,
         // contact us block
         ContactUsSchema,
         // corporate page
@@ -329,7 +329,6 @@ export const Pages: CollectionConfig = {
         SupportFeedbackSchema,
         PremCalculatorPageSchema,
         PurchaseFormSchema,
-        AgentOnboardingFormSchema,
         CustomTabSchema,
       ],
     },

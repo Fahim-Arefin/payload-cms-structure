@@ -5,6 +5,7 @@ import {
   AGENT_ONBOARDING_FORM_SLUG_AND_TAG,
   AGENT_ONBOARDING_FORM_PAGE_BLOCK_LABEL,
   AGENT_ONBOARDING_FORM_BLOCK_THUMBNAIL_URL,
+  AGENT_ONBOARDING_PAGE,
 } from '@/lib/constants'
 
 /* ---------------- limits ---------------- */
@@ -81,8 +82,9 @@ const lexicalParagraph = (text: string) => ({
   },
 })
 
-const DEFAULT_CONSENT_EN =
-  lexicalParagraph('By clicking Submit, you agree to our terms and conditions and privacy policy.')
+const DEFAULT_CONSENT_EN = lexicalParagraph(
+  'By clicking Submit, you agree to our terms and conditions and privacy policy.',
+)
 const DEFAULT_CONSENT_BN = lexicalParagraph(
   'সাবমিট বাটনে ক্লিক করলে, আপনি আমাদের শর্তাবলি এবং প্রাইভেসি পলিসি মেনে নিচ্ছেন।',
 )
@@ -94,6 +96,11 @@ const AgentOnboardingFormSchema: Block = {
     singular: AGENT_ONBOARDING_FORM_PAGE_BLOCK_LABEL,
     plural: AGENT_ONBOARDING_FORM_PAGE_BLOCK_LABEL,
   },
+
+  admin: {
+    group: AGENT_ONBOARDING_PAGE,
+  },
+
   imageURL: AGENT_ONBOARDING_FORM_BLOCK_THUMBNAIL_URL,
   imageAltText: `${AGENT_ONBOARDING_FORM_PAGE_BLOCK_LABEL} preview`,
 
@@ -204,7 +211,7 @@ const AgentOnboardingFormSchema: Block = {
             description:
               'Shown near the submit action on the Agent form. Default provided; you can customize.',
           },
-          defaultValue: DEFAULT_CONSENT_EN,
+          // defaultValue: DEFAULT_CONSENT_EN,
         },
         {
           name: 'consentTextBN',
@@ -216,7 +223,7 @@ const AgentOnboardingFormSchema: Block = {
             description:
               'এজেন্ট ফর্মের সাবমিট বাটনের কাছে প্রদর্শিত হবে। ডিফল্ট দেয়া আছে; প্রয়োজনে সম্পাদনা করুন।',
           },
-          defaultValue: DEFAULT_CONSENT_BN,
+          // defaultValue: DEFAULT_CONSENT_BN,
         },
       ],
     },

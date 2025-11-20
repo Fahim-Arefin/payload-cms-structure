@@ -623,6 +623,114 @@ export interface Page {
       }
     | {
         /**
+         * Large section background visual. 16:9 recommended.
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim in Title. Max 80 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Topmost first. Each overlay is a flat linear-gradient: color + opacity + angle (deg).
+         */
+        overlayLayers?:
+          | {
+              color: string;
+              opacity: number;
+              /**
+               * 0deg = top→bottom (like your original).
+               */
+              angle: number;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Add up to two cards. Each card has an icon, title (EN/BN), and a rich description (EN/BN).
+         */
+        items: {
+          /**
+           * Example: #9C86394D , #43434333 (last 2 hex are alpha).
+           */
+          cardBgHex8?: string | null;
+          /**
+           * Square icon (1:1). PNG with transparent background preferred.
+           */
+          icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
+          /**
+           * Short headline. Max 60 characters.
+           */
+          title: string;
+          /**
+           * সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Rich text (about 1–3 short paragraphs). Up to ~300 characters.
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * রিচ টেক্সট (১–৩টি সংক্ষিপ্ত অনুচ্ছেদ)। সর্বোচ্চ প্রায় ৩০০ অক্ষর।
+           */
+          descriptionBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'agent-vision';
+      }
+    | {
+        /**
          * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
          */
         backgroundColor?: string | null;
@@ -1498,111 +1606,81 @@ export interface Page {
       }
     | {
         /**
-         * Large section background visual. 16:9 recommended.
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
          */
-        backgroundImage: string | Media;
-        backgroundImageOriginal?: (string | null) | Media;
-        pendingBackgroundImageOriginal?: string | null;
-        pendingBackgroundImageCrop?: string | null;
+        oddBackgroundColor?: string | null;
         /**
-         * Auto-generated Base64 blur
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
-        backgroundImageBlurDataURL?: string | null;
+        evenBackgroundColor?: string | null;
         /**
-         * Primary heading. Max 80 characters.
+         * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
          */
-        title: string;
+        readMoreText: string;
         /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
          */
-        titleBN: string;
+        readMoreTextBN: string;
         /**
-         * Optional. Must appear verbatim in Title. Max 80 characters.
+         * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
          */
-        highlightedText?: string | null;
+        readLessText: string;
         /**
-         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
          */
-        highlightedTextBN?: string | null;
+        readLessTextBN: string;
         /**
-         * Topmost first. Each overlay is a flat linear-gradient: color + opacity + angle (deg).
+         * When ON, this block renders data from **Global → Board of Directors**.
+         *
+         * **Before enabling:** fill up the Global → Board of Directors data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
          */
-        overlayLayers?:
-          | {
-              color: string;
-              opacity: number;
-              /**
-               * 0deg = top→bottom (like your original).
-               */
-              angle: number;
-              id?: string | null;
-            }[]
-          | null;
-        /**
-         * Add up to two cards. Each card has an icon, title (EN/BN), and a rich description (EN/BN).
-         */
-        items: {
-          /**
-           * Example: #9C86394D , #43434333 (last 2 hex are alpha).
-           */
-          cardBgHex8?: string | null;
-          /**
-           * Square icon (1:1). PNG with transparent background preferred.
-           */
-          icon: string | Media;
-          iconOriginal?: (string | null) | Media;
-          pendingIconOriginal?: string | null;
-          pendingIconCrop?: string | null;
-          iconBlurDataURL?: string | null;
-          /**
-           * Short headline. Max 60 characters.
-           */
-          title: string;
-          /**
-           * সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
-           */
-          titleBN: string;
-          /**
-           * Rich text (about 1–3 short paragraphs). Up to ~300 characters.
-           */
-          description?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-          /**
-           * রিচ টেক্সট (১–৩টি সংক্ষিপ্ত অনুচ্ছেদ)। সর্বোচ্চ প্রায় ৩০০ অক্ষর।
-           */
-          descriptionBN?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-          id?: string | null;
-        }[];
+        useSharedData: boolean;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'agent-vision';
+        blockType: 'board-of-directors-list';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        oddBackgroundColor?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        evenBackgroundColor?: string | null;
+        /**
+         * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
+         */
+        readMoreText: string;
+        /**
+         * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
+         */
+        readMoreTextBN: string;
+        /**
+         * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
+         */
+        readLessText: string;
+        /**
+         * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
+         */
+        readLessTextBN: string;
+        /**
+         * When ON, this block renders data from **Global → Leadership Team**.
+         *
+         * **Before enabling:** fill up the Global → Leadership Team data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'leadership-team-list';
       }
     | {
         /**
@@ -1750,82 +1828,84 @@ export interface Page {
         blockType: 'more-than-a-workplace';
       }
     | {
+        uploadSessionId?: string | null;
         /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         * Hex color in #RRGGBB. Default: #f6eddd
          */
-        oddBackgroundColor?: string | null;
+        bgColor?: string | null;
+        formHeader?: string | null;
+        formHeaderBN?: string | null;
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        subdescription?: string | null;
+        subdescriptionBN?: string | null;
         /**
-         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         * Shown near the submit action on the Agent form. Default provided; you can customize.
          */
-        evenBackgroundColor?: string | null;
+        consentText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         /**
-         * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
+         * এজেন্ট ফর্মের সাবমিট বাটনের কাছে প্রদর্শিত হবে। ডিফল্ট দেয়া আছে; প্রয়োজনে সম্পাদনা করুন।
          */
-        readMoreText: string;
-        /**
-         * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
-         */
-        readMoreTextBN: string;
-        /**
-         * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
-         */
-        readLessText: string;
-        /**
-         * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
-         */
-        readLessTextBN: string;
-        /**
-         * When ON, this block renders data from **Global → Board of Directors**.
-         *
-         * **Before enabling:** fill up the Global → Board of Directors data.
-         *
-         * **Notes:**
-         * • This block only stores presentation options (e.g., background color).
-         * • All content comes from the single shared Global to keep pages in sync.
-         */
-        useSharedData: boolean;
+        consentTextBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'board-of-directors-list';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
-         */
-        oddBackgroundColor?: string | null;
-        /**
-         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
-         */
-        evenBackgroundColor?: string | null;
-        /**
-         * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
-         */
-        readMoreText: string;
-        /**
-         * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
-         */
-        readMoreTextBN: string;
-        /**
-         * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
-         */
-        readLessText: string;
-        /**
-         * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
-         */
-        readLessTextBN: string;
-        /**
-         * When ON, this block renders data from **Global → Leadership Team**.
-         *
-         * **Before enabling:** fill up the Global → Leadership Team data.
-         *
-         * **Notes:**
-         * • This block only stores presentation options (e.g., background color).
-         * • All content comes from the single shared Global to keep pages in sync.
-         */
-        useSharedData: boolean;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'leadership-team-list';
+        blockType: 'agent-form';
       }
     | {
         /**
@@ -5069,86 +5149,6 @@ export interface Page {
         blockType: 'purchase-form';
       }
     | {
-        uploadSessionId?: string | null;
-        /**
-         * Hex color in #RRGGBB. Default: #f6eddd
-         */
-        bgColor?: string | null;
-        formHeader?: string | null;
-        formHeaderBN?: string | null;
-        description: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        descriptionBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        subdescription?: string | null;
-        subdescriptionBN?: string | null;
-        /**
-         * Shown near the submit action on the Agent form. Default provided; you can customize.
-         */
-        consentText?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * এজেন্ট ফর্মের সাবমিট বাটনের কাছে প্রদর্শিত হবে। ডিফল্ট দেয়া আছে; প্রয়োজনে সম্পাদনা করুন।
-         */
-        consentTextBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'agent-form';
-      }
-    | {
         /**
          * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
          */
@@ -6424,6 +6424,44 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'agent-vision'?:
+          | T
+          | {
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              overlayLayers?:
+                | T
+                | {
+                    color?: T;
+                    opacity?: T;
+                    angle?: T;
+                    id?: T;
+                  };
+              items?:
+                | T
+                | {
+                    cardBgHex8?: T;
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'why-choose-us'?:
           | T
           | {
@@ -6756,41 +6794,29 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'agent-vision'?:
+        'board-of-directors-list'?:
           | T
           | {
-              backgroundImage?: T;
-              backgroundImageOriginal?: T;
-              pendingBackgroundImageOriginal?: T;
-              pendingBackgroundImageCrop?: T;
-              backgroundImageBlurDataURL?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              overlayLayers?:
-                | T
-                | {
-                    color?: T;
-                    opacity?: T;
-                    angle?: T;
-                    id?: T;
-                  };
-              items?:
-                | T
-                | {
-                    cardBgHex8?: T;
-                    icon?: T;
-                    iconOriginal?: T;
-                    pendingIconOriginal?: T;
-                    pendingIconCrop?: T;
-                    iconBlurDataURL?: T;
-                    title?: T;
-                    titleBN?: T;
-                    description?: T;
-                    descriptionBN?: T;
-                    id?: T;
-                  };
+              oddBackgroundColor?: T;
+              evenBackgroundColor?: T;
+              readMoreText?: T;
+              readMoreTextBN?: T;
+              readLessText?: T;
+              readLessTextBN?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'leadership-team-list'?:
+          | T
+          | {
+              oddBackgroundColor?: T;
+              evenBackgroundColor?: T;
+              readMoreText?: T;
+              readMoreTextBN?: T;
+              readLessText?: T;
+              readLessTextBN?: T;
+              useSharedData?: T;
               id?: T;
               blockName?: T;
             };
@@ -6875,29 +6901,19 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'board-of-directors-list'?:
+        'agent-form'?:
           | T
           | {
-              oddBackgroundColor?: T;
-              evenBackgroundColor?: T;
-              readMoreText?: T;
-              readMoreTextBN?: T;
-              readLessText?: T;
-              readLessTextBN?: T;
-              useSharedData?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'leadership-team-list'?:
-          | T
-          | {
-              oddBackgroundColor?: T;
-              evenBackgroundColor?: T;
-              readMoreText?: T;
-              readMoreTextBN?: T;
-              readLessText?: T;
-              readLessTextBN?: T;
-              useSharedData?: T;
+              uploadSessionId?: T;
+              bgColor?: T;
+              formHeader?: T;
+              formHeaderBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              subdescription?: T;
+              subdescriptionBN?: T;
+              consentText?: T;
+              consentTextBN?: T;
               id?: T;
               blockName?: T;
             };
@@ -8031,22 +8047,6 @@ export interface PagesSelect<T extends boolean = true> {
                     consentText?: T;
                     consentTextBN?: T;
                   };
-              id?: T;
-              blockName?: T;
-            };
-        'agent-form'?:
-          | T
-          | {
-              uploadSessionId?: T;
-              bgColor?: T;
-              formHeader?: T;
-              formHeaderBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              subdescription?: T;
-              subdescriptionBN?: T;
-              consentText?: T;
-              consentTextBN?: T;
               id?: T;
               blockName?: T;
             };
