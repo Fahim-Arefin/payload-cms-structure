@@ -965,7 +965,7 @@ export interface Page {
          */
         highlightedTextBN?: string | null;
         /**
-         * Absolute http(s) video URL (MP4/WebM/HLS). Max 300 (৩০০) chars.
+         * Either an internal path starting with “/assets” or an absolute http(s) video URL (MP4/WebM/HLS). Max 300. (/assets/videos/bg.mp4)
          */
         backgroundVideoUrl: string;
         /**
@@ -1447,7 +1447,7 @@ export interface Page {
          */
         subtitleBN: string;
         /**
-         * Absolute https URL to your MP4/WebM/HLS asset. Internal paths are not allowed. Max 400 characters.
+         * Either an internal path starting with “/assets” or an absolute http(s) video URL (MP4/WebM/HLS). Max 400. (/assets/videos/footprint.mp4)
          */
         backgroundVideoUrl: string;
         /**

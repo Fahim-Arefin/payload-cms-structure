@@ -51,10 +51,12 @@ export const GLOBAL_VLOGS_CACHE_KEY = 'global-vlogs-data'
 const folder = '/assets/block-icons'
 
 // Group
-export const HERO = 'Hero Sections'
-export const COMMON = 'Common Sections'
+export const HERO = 'Hero Blocks'
+export const COMMON = 'Common Blocks'
 export const HOME_PAGE = 'Home Page'
 export const ABOUT_US_PAGE = 'About Us Page'
+export const BOD_PAGE = 'BOD Page'
+export const LEARERS_PAGE = 'Leaders Page'
 
 // home page constants
 // ----------------------------------------------------------------------------------------------

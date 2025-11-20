@@ -1,4 +1,5 @@
 import {
+  BOD_PAGE,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_THUMBNAIL_URL,
   BOD_PAGE_BOARD_OF_DIRECTORS_List_SLUG_AND_TAG,
@@ -33,6 +34,10 @@ const BoardOfDirectorsListSchema: Block = {
   labels: {
     singular: BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL,
     plural: BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: BOD_PAGE,
   },
 
   imageURL: BOD_PAGE_BOARD_OF_DIRECTORS_List_BLOCK_THUMBNAIL_URL,
