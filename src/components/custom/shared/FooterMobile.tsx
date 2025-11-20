@@ -243,12 +243,8 @@ function FooterMobile() {
 
       <div className="w-[70%] md:w-[50%] mx-auto mt-6 text-white/70 font-light">
         {/* powered by section */}
-        <div className="flex items-center justify-center space-x-2">
+        {/* <div className="flex items-center justify-center space-x-2">
           <h1 className="pt-[4px] text-[14px] font-medium text-white/50">Powered By -</h1>
-          {/* <div className="w-[85px]">
-            <img src="/assets/fotter-logos/shurjo.png" alt="" className="h-full w-full" />
-          </div> */}
-          {/* make the logo box a positioned container */}
           <div className="relative w-[85px] h-[22px]">
             <Image
               src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/shurjo.png`}
@@ -259,11 +255,11 @@ function FooterMobile() {
               priority={false}
             />
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="w-[95%] md:w-[50%] mx-auto mt-2 text-white/70 font-light">
         {/* photos */}
-        <div className="flex gap-[3px] flex-wrap mt-2 justify-center">
+        {/* <div className="flex gap-[3px] flex-wrap mt-2 justify-center">
           {shurjoPayData?.map((img, i) => (
             <div
               key={i}
@@ -286,7 +282,7 @@ function FooterMobile() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* copyright section */}
