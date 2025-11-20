@@ -234,9 +234,11 @@
 import type { Block } from 'payload'
 
 import {
+  ABOUT_US_PAGE,
   ABOUT_US_PAGE_SHANTA_INTRO_BLOCK_LABEL,
   ABOUT_US_PAGE_SHANTA_INTRO_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_SHANTA_INTRO_SLUG_AND_TAG,
+  COMMON,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import { generateImageFields } from '@/utils/media/fieldGenerators'
@@ -283,6 +285,9 @@ const ShantaIntroSchema: Block = {
   labels: {
     singular: ABOUT_US_PAGE_SHANTA_INTRO_BLOCK_LABEL,
     plural: ABOUT_US_PAGE_SHANTA_INTRO_BLOCK_LABEL,
+  },
+  admin: {
+    group: COMMON,
   },
 
   imageURL: ABOUT_US_PAGE_SHANTA_INTRO_BLOCK_THUMBNAIL_URL,

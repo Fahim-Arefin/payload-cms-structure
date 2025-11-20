@@ -1,6 +1,7 @@
 import { getGlobalCached } from '@/lib/cachedGlobals'
 import {
   ABOUT_US_PAGE_BOD_CARD_SLUG_AND_TAG,
+  GLOBAL_BOARD_OF_DIRECTORS_BLOCK_LABEL,
   GLOBAL_BOARD_OF_DIRECTORS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { BoardOfDirector } from '@/payload-types'
@@ -21,12 +22,12 @@ async function DirectorCardSection({ blockData }: Props) {
 
   return (
     <div>
-      {data ? (
+      {data && data?.directors && data?.directors?.length > 0 ? (
         <DirectorCardSectionClient directorProfileData={data} blockData={blockData} />
       ) : (
         <NoDataFound
           message="No Data Found"
-          description="Please fill up Global 'Board of Directors' collection data"
+          description={`Please fill up Global '${GLOBAL_BOARD_OF_DIRECTORS_BLOCK_LABEL}' collection data`}
           bgColor={blockData?.backgroundColor || ''}
         />
       )}

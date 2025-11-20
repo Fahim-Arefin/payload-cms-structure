@@ -96,7 +96,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ blog, index, bg }) => {
               className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit mx-auto lg:mx-0 cursor-pointer global-p2 p-0"
               onClick={handleToggle}
             >
-              <div className="flex space-x-1 items-center uppercase">
+              <div className="flex space-x-1 items-center">
                 <LocalizedText
                   en={isExpanded ? blog?.readLessText : blog?.readMoreText}
                   bn={isExpanded ? blog?.readLessTextBN : blog?.readMoreTextBN}

@@ -259,18 +259,20 @@ export const Pages: CollectionConfig = {
       type: 'blocks',
       required: true,
       blocks: [
-        // home page
+        // hero page
         HeroSchema,
+        // common section
+        LifeInsuranceSimplifiedSchema,
+        ShantaIntroSchema,
+        ValuesThatShapeUsSchema,
+        // home page unique
         WhyChooseUsSchema,
         FeaturedPlansSchema,
         PremiumCalculatorSchema,
-        LifeInsuranceSimplifiedSchema,
         LifeInsuranceVideoSchema,
         LifeAtShantaSchema,
         // about us page
-        ShantaIntroSchema,
         ShantaVisionSchema,
-        ValuesThatShapeUsSchema,
         LicensedLaunchedSchema,
         DirectorsMessagesSchema,
         BoardOfDirectorsCardSchema,

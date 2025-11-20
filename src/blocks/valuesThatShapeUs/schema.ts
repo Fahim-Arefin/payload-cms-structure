@@ -276,6 +276,7 @@ import {
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_LABEL,
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_SLUG_AND_TAG,
+  COMMON,
 } from '@/lib/constants'
 import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
 
@@ -323,6 +324,9 @@ const ValuesThatShapeUsSchema: Block = {
   labels: {
     singular: ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_LABEL,
     plural: ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_LABEL,
+  },
+  admin: {
+    group: COMMON,
   },
 
   imageURL: ABOUT_US_PAGE_VALUES_THAT_SHAPE_US_BLOCK_THUMBNAIL_URL,

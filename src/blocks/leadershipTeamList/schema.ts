@@ -8,6 +8,7 @@ import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 
 const COLOR_HEX_LEN = 7
+const CTA_TEXT_MAX = 50
 
 const validateHexColor = (val: unknown) => {
   if (val == null || val === '') return true // optional
@@ -17,6 +18,14 @@ const validateHexColor = (val: unknown) => {
   }
   return true
 }
+const validateShortText =
+  (label: string, max: number, required = true) =>
+  (val: unknown) => {
+    const s = (val ?? '').toString().trim()
+    if (required && !s) return `${label} is required.`
+    if (!s) return true
+    return s.length <= max ? true : `${label} must be at most ${max} characters.`
+  }
 
 const LeadershipTeamListSchema: Block = {
   slug: LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
@@ -29,31 +38,100 @@ const LeadershipTeamListSchema: Block = {
   imageAltText: `${LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_BLOCK_LABEL} preview`,
 
   fields: [
-    // Appearance
     {
-      name: 'oddBackgroundColor',
-      type: 'text',
-      label: 'Odd Section Background Color',
-      maxLength: COLOR_HEX_LEN,
-      validate: validateHexColor,
-      defaultValue: '#FFFFFF',
-      admin: {
-        width: '33%',
-        description: `Hex color in #RRGGBB (e.g., #FFFFFF). Length ${COLOR_HEX_LEN} (${bnNum(COLOR_HEX_LEN)}).`,
-      },
+      type: 'row',
+      fields: [
+        // Appearance
+        {
+          name: 'oddBackgroundColor',
+          type: 'text',
+          label: 'Odd Section Background Color',
+          maxLength: COLOR_HEX_LEN,
+          validate: validateHexColor,
+          defaultValue: '#FFFFFF',
+          admin: {
+            width: '50%',
+            description: `Hex color in #RRGGBB (e.g., #FFFFFF). Length ${COLOR_HEX_LEN} (${bnNum(COLOR_HEX_LEN)}).`,
+          },
+        },
+        {
+          name: 'evenBackgroundColor',
+          type: 'text',
+          label: 'Even Section Background Color',
+          maxLength: COLOR_HEX_LEN,
+          validate: validateHexColor,
+          defaultValue: '#F6EDDD',
+          admin: {
+            width: '50%',
+            description: `Hex color in #RRGGBB (e.g., #F6EDDD). Length ${COLOR_HEX_LEN} (${bnNum(COLOR_HEX_LEN)}).`,
+          },
+        },
+      ],
+    },
+
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'readMoreText',
+          type: 'text',
+          label: 'Read More Button Text',
+          required: true,
+          defaultValue: 'Read More',
+          maxLength: CTA_TEXT_MAX,
+          validate: validateShortText('Read More Button Text', CTA_TEXT_MAX, true),
+          admin: {
+            width: '50%',
+            description: `Label for the per-section CTA (e.g., “Read More”). Max ${CTA_TEXT_MAX} characters.`,
+          },
+        },
+        {
+          name: 'readMoreTextBN',
+          type: 'text',
+          label: 'বাটনের টেক্সট (বাংলা) — Read More',
+          required: true,
+          defaultValue: 'বিস্তারিত পড়ুন',
+          maxLength: CTA_TEXT_MAX,
+          validate: validateShortText('Read More Button Text (BN)', CTA_TEXT_MAX, true),
+          admin: {
+            width: '50%',
+            description: `CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর।`,
+          },
+        },
+      ],
     },
     {
-      name: 'evenBackgroundColor',
-      type: 'text',
-      label: 'Even Section Background Color',
-      maxLength: COLOR_HEX_LEN,
-      validate: validateHexColor,
-      defaultValue: '#F6EDDD',
-      admin: {
-        width: '33%',
-        description: `Hex color in #RRGGBB (e.g., #F6EDDD). Length ${COLOR_HEX_LEN} (${bnNum(COLOR_HEX_LEN)}).`,
-      },
+      type: 'row',
+      fields: [
+        {
+          name: 'readLessText',
+          type: 'text',
+          label: 'Read Less Button Text',
+          required: true,
+          defaultValue: 'Read Less',
+          maxLength: CTA_TEXT_MAX,
+          validate: validateShortText('Read Less Button Text', CTA_TEXT_MAX, true),
+          admin: {
+            width: '50%',
+            description: `Label for collapsing long content (e.g., “Read Less”). Max ${CTA_TEXT_MAX} characters.`,
+          },
+        },
+        {
+          name: 'readLessTextBN',
+          type: 'text',
+          label: 'বাটনের টেক্সট (বাংলা) — Read Less',
+          required: true,
+          defaultValue: 'কম পড়ুন',
+          maxLength: CTA_TEXT_MAX,
+          validate: validateShortText('Read Less Button Text (BN)', CTA_TEXT_MAX, true),
+          admin: {
+            width: '50%',
+            description: `দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর।`,
+          },
+        },
+      ],
     },
+
     // Data source toggle
     {
       name: 'useSharedData',

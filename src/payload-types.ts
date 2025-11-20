@@ -389,6 +389,240 @@ export interface Page {
       }
     | {
         /**
+         * Hex color in #RRGGBB (e.g., #FBFFD3). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #F8E4C6). Length 7 (৭).
+         */
+        backgroundColor2?: string | null;
+        /**
+         * Short label above the main title. Max 40 characters.
+         */
+        sectionHeading?: string | null;
+        /**
+         * মূল শিরোনামের উপরে ছোট লেবেল। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        sectionHeadingBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Section Heading. Max 40 characters.
+         */
+        sectionHeadingHighlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই সেকশন হেডিং-এর মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        sectionHeadingHighlightedTextBN?: string | null;
+        /**
+         * 1–3 content sections, each with a main image, video link, and 3 cards.
+         */
+        sections: {
+          /**
+           * Primary headline for this section. Max 80 characters.
+           */
+          title?: string | null;
+          /**
+           * এই সেকশনের মূল শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+           */
+          titleBN?: string | null;
+          /**
+           * Optional. Must appear verbatim inside the Title. Max 40 characters.
+           */
+          titleHighlightedText?: string | null;
+          /**
+           * ঐচ্ছিক। অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+           */
+          titleHighlightedTextBN?: string | null;
+          /**
+           * Supporting line under the title. Max 120 characters.
+           */
+          subtitle?: string | null;
+          /**
+           * মূল শিরোনামের নিচে সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+           */
+          subtitleBN?: string | null;
+          /**
+           * Use a YouTube URL (embed, watch, youtu.be, or youtube-nocookie). Max 200 characters.
+           */
+          mainVIdeoLink: string;
+          /**
+           * Large hero/thumbnail for this section. 660:320 recommended.
+           */
+          mainImage: string | Media;
+          mainImageOriginal?: (string | null) | Media;
+          pendingMainImageOriginal?: string | null;
+          pendingMainImageCrop?: string | null;
+          mainImageBlurDataURL?: string | null;
+          /**
+           * Exactly 3 cards per section.
+           */
+          insuranceCardData?:
+            | {
+                /**
+                 * Primary thumbnail for the card. 4:3 recommended.
+                 */
+                image: string | Media;
+                imageOriginal?: (string | null) | Media;
+                pendingImageOriginal?: string | null;
+                pendingImageCrop?: string | null;
+                imageBlurDataURL?: string | null;
+                /**
+                 * Short heading for the card. Max 60 characters.
+                 */
+                title?: string | null;
+                /**
+                 * কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+                 */
+                titleBN?: string | null;
+                /**
+                 * Short supporting copy. Max 200 characters.
+                 */
+                description?: string | null;
+                /**
+                 * সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ২০০ অক্ষর।
+                 */
+                descriptionBN?: string | null;
+                /**
+                 * Use a YouTube URL (embed, watch, youtu.be, or youtube-nocookie). Max 200 characters.
+                 */
+                videoLink?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'life-insurance-simplified';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Short, strong opener. Max 20 characters.
+         */
+        heading: string;
+        /**
+         * সংক্ষিপ্ত, শক্তিশালী সূচনা। সর্বোচ্চ ২০ অক্ষর।
+         */
+        headingBN: string;
+        /**
+         * Secondary line below the heading. Max 35 characters.
+         */
+        subheading: string;
+        /**
+         * শিরোনামের নিচে দ্বিতীয় লাইন। সর্বোচ্চ ৩৫ অক্ষর।
+         */
+        subheadingBN: string;
+        /**
+         * Lead-in title above the paragraph. Max 80 characters.
+         */
+        paragraphTitle: string;
+        /**
+         * অনুচ্ছেদের উপরে লিড-ইন শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        paragraphTitleBN: string;
+        /**
+         * Main descriptive text. Max 400 characters.
+         */
+        paragraph: string;
+        /**
+         * মূল বর্ণনামূলক টেক্সট। সর্বোচ্চ ৪০০ অক্ষর।
+         */
+        paragraphBN: string;
+        /**
+         * Primary visual for the intro section. Use tranparent image. 2.15:1 recommended.
+         */
+        image: string | Media;
+        imageOriginal?: (string | null) | Media;
+        pendingImageOriginal?: string | null;
+        pendingImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageBlurDataURL?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'shanta-intro';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Base title (e.g., “Values That”). Max 40 characters.
+         */
+        title: string;
+        /**
+         * মূল শিরোনাম (যেমন, “আমাদের মূল্যবোধ”). সর্বোচ্চ ৪০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Highlighted tail of the heading (e.g., “Shape Us”). Must appear inside Title exactly. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * শিরোনামের রঙিন অংশ (যেমন, “আমাদের পরিচয়”). এটি অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Large background image for the section. 2:3 recommended.
+         */
+        image: string | Media;
+        imageOriginal?: (string | null) | Media;
+        pendingImageOriginal?: string | null;
+        pendingImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageBlurDataURL?: string | null;
+        /**
+         * Add value items with icon + hover icon, a short title, and a brief description.
+         */
+        values: {
+          /**
+           * Icon shown normally. (Colored version, transparent bg). Ratio 1:1.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Hover icon (white version, transparent bg). Ratio 1:1.
+           */
+          hoverImage: string | Media;
+          hoverImageOriginal?: (string | null) | Media;
+          pendingHoverImageOriginal?: string | null;
+          pendingHoverImageCrop?: string | null;
+          hoverImageBlurDataURL?: string | null;
+          /**
+           * Short card title (e.g., “Trust”). Max 40 characters.
+           */
+          title: string;
+          /**
+           * সংক্ষিপ্ত কার্ড শিরোনাম (যেমন, “বিশ্বাস”). সর্বোচ্চ ৪০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Brief one-liner or two-liner. Max 150 characters.
+           */
+          description: string;
+          /**
+           * সংক্ষিপ্ত এক/দুই লাইনের বিবরণ। সর্বোচ্চ ১৫০ অক্ষর।
+           */
+          descriptionBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'values-that-shape-us';
+      }
+    | {
+        /**
          * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
          */
         backgroundColor?: string | null;
@@ -711,113 +945,6 @@ export interface Page {
       }
     | {
         /**
-         * Hex color in #RRGGBB (e.g., #FBFFD3). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Hex color in #RRGGBB (e.g., #F8E4C6). Length 7 (৭).
-         */
-        backgroundColor2?: string | null;
-        /**
-         * Short label above the main title. Max 40 characters.
-         */
-        sectionHeading?: string | null;
-        /**
-         * মূল শিরোনামের উপরে ছোট লেবেল। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        sectionHeadingBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside the Section Heading. Max 40 characters.
-         */
-        sectionHeadingHighlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। অবশ্যই সেকশন হেডিং-এর মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        sectionHeadingHighlightedTextBN?: string | null;
-        /**
-         * 1–3 content sections, each with a main image, video link, and 3 cards.
-         */
-        sections: {
-          /**
-           * Primary headline for this section. Max 80 characters.
-           */
-          title?: string | null;
-          /**
-           * এই সেকশনের মূল শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-           */
-          titleBN?: string | null;
-          /**
-           * Optional. Must appear verbatim inside the Title. Max 40 characters.
-           */
-          titleHighlightedText?: string | null;
-          /**
-           * ঐচ্ছিক। অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-           */
-          titleHighlightedTextBN?: string | null;
-          /**
-           * Supporting line under the title. Max 120 characters.
-           */
-          subtitle?: string | null;
-          /**
-           * মূল শিরোনামের নিচে সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
-           */
-          subtitleBN?: string | null;
-          /**
-           * Use a YouTube URL (embed, watch, youtu.be, or youtube-nocookie). Max 200 characters.
-           */
-          mainVIdeoLink: string;
-          /**
-           * Large hero/thumbnail for this section. 660:320 recommended.
-           */
-          mainImage: string | Media;
-          mainImageOriginal?: (string | null) | Media;
-          pendingMainImageOriginal?: string | null;
-          pendingMainImageCrop?: string | null;
-          mainImageBlurDataURL?: string | null;
-          /**
-           * Exactly 3 cards per section.
-           */
-          insuranceCardData?:
-            | {
-                /**
-                 * Primary thumbnail for the card. 4:3 recommended.
-                 */
-                image: string | Media;
-                imageOriginal?: (string | null) | Media;
-                pendingImageOriginal?: string | null;
-                pendingImageCrop?: string | null;
-                imageBlurDataURL?: string | null;
-                /**
-                 * Short heading for the card. Max 60 characters.
-                 */
-                title?: string | null;
-                /**
-                 * কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
-                 */
-                titleBN?: string | null;
-                /**
-                 * Short supporting copy. Max 200 characters.
-                 */
-                description?: string | null;
-                /**
-                 * সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ২০০ অক্ষর।
-                 */
-                descriptionBN?: string | null;
-                /**
-                 * Use a YouTube URL (embed, watch, youtu.be, or youtube-nocookie). Max 200 characters.
-                 */
-                videoLink?: string | null;
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'life-insurance-simplified';
-      }
-    | {
-        /**
          * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
          */
         backgroundColor?: string | null;
@@ -941,59 +1068,6 @@ export interface Page {
         blockType: 'life-at-shanta';
       }
     | {
-        uploadSessionId?: string | null;
-        /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Short, strong opener. Max 20 characters.
-         */
-        heading: string;
-        /**
-         * সংক্ষিপ্ত, শক্তিশালী সূচনা। সর্বোচ্চ ২০ অক্ষর।
-         */
-        headingBN: string;
-        /**
-         * Secondary line below the heading. Max 35 characters.
-         */
-        subheading: string;
-        /**
-         * শিরোনামের নিচে দ্বিতীয় লাইন। সর্বোচ্চ ৩৫ অক্ষর।
-         */
-        subheadingBN: string;
-        /**
-         * Lead-in title above the paragraph. Max 80 characters.
-         */
-        paragraphTitle: string;
-        /**
-         * অনুচ্ছেদের উপরে লিড-ইন শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        paragraphTitleBN: string;
-        /**
-         * Main descriptive text. Max 400 characters.
-         */
-        paragraph: string;
-        /**
-         * মূল বর্ণনামূলক টেক্সট। সর্বোচ্চ ৪০০ অক্ষর।
-         */
-        paragraphBN: string;
-        /**
-         * Primary visual for the intro section. Use tranparent image. 2.15:1 recommended.
-         */
-        image: string | Media;
-        imageOriginal?: (string | null) | Media;
-        pendingImageOriginal?: string | null;
-        pendingImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageBlurDataURL?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'shanta-intro';
-      }
-    | {
         /**
          * Large background visual for the section. 2.5:1 recommended.
          */
@@ -1044,80 +1118,6 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'shanta-vision';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Base title (e.g., “Values That”). Max 40 characters.
-         */
-        title: string;
-        /**
-         * মূল শিরোনাম (যেমন, “আমাদের মূল্যবোধ”). সর্বোচ্চ ৪০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Highlighted tail of the heading (e.g., “Shape Us”). Must appear inside Title exactly. Max 40 characters.
-         */
-        highlightedText?: string | null;
-        /**
-         * শিরোনামের রঙিন অংশ (যেমন, “আমাদের পরিচয়”). এটি অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Large background image for the section. 2:3 recommended.
-         */
-        image: string | Media;
-        imageOriginal?: (string | null) | Media;
-        pendingImageOriginal?: string | null;
-        pendingImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageBlurDataURL?: string | null;
-        /**
-         * Add value items with icon + hover icon, a short title, and a brief description.
-         */
-        values: {
-          /**
-           * Icon shown normally. (Colored version, transparent bg). Ratio 1:1.
-           */
-          image: string | Media;
-          imageOriginal?: (string | null) | Media;
-          pendingImageOriginal?: string | null;
-          pendingImageCrop?: string | null;
-          imageBlurDataURL?: string | null;
-          /**
-           * Hover icon (white version, transparent bg). Ratio 1:1.
-           */
-          hoverImage: string | Media;
-          hoverImageOriginal?: (string | null) | Media;
-          pendingHoverImageOriginal?: string | null;
-          pendingHoverImageCrop?: string | null;
-          hoverImageBlurDataURL?: string | null;
-          /**
-           * Short card title (e.g., “Trust”). Max 40 characters.
-           */
-          title: string;
-          /**
-           * সংক্ষিপ্ত কার্ড শিরোনাম (যেমন, “বিশ্বাস”). সর্বোচ্চ ৪০ অক্ষর।
-           */
-          titleBN: string;
-          /**
-           * Brief one-liner or two-liner. Max 150 characters.
-           */
-          description: string;
-          /**
-           * সংক্ষিপ্ত এক/দুই লাইনের বিবরণ। সর্বোচ্চ ১৫০ অক্ষর।
-           */
-          descriptionBN: string;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'values-that-shape-us';
       }
     | {
         /**
@@ -1228,7 +1228,7 @@ export interface Page {
            */
           subtitleBN: string;
           /**
-           * Up to 1500 characters.
+           * Up to 2000 characters.
            */
           description?: {
             root: {
@@ -1246,7 +1246,7 @@ export interface Page {
             [k: string]: unknown;
           } | null;
           /**
-           * সর্বোচ্চ ~১৫০০ অক্ষর।
+           * সর্বোচ্চ ~২০০০ অক্ষর।
            */
           descriptionBN?: {
             root: {
@@ -1263,6 +1263,22 @@ export interface Page {
             };
             [k: string]: unknown;
           } | null;
+          /**
+           * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
+           */
+          readMoreText: string;
+          /**
+           * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
+           */
+          readMoreTextBN: string;
+          /**
+           * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
+           */
+          readLessText: string;
+          /**
+           * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
+           */
+          readLessTextBN: string;
           id?: string | null;
         }[];
         id?: string | null;
@@ -1743,6 +1759,22 @@ export interface Page {
          */
         evenBackgroundColor?: string | null;
         /**
+         * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
+         */
+        readMoreText: string;
+        /**
+         * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
+         */
+        readMoreTextBN: string;
+        /**
+         * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
+         */
+        readLessText: string;
+        /**
+         * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
+         */
+        readLessTextBN: string;
+        /**
          * When ON, this block renders data from **Global → Board of Directors**.
          *
          * **Before enabling:** fill up the Global → Board of Directors data.
@@ -1765,6 +1797,22 @@ export interface Page {
          * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         evenBackgroundColor?: string | null;
+        /**
+         * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
+         */
+        readMoreText: string;
+        /**
+         * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
+         */
+        readMoreTextBN: string;
+        /**
+         * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
+         */
+        readLessText: string;
+        /**
+         * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
+         */
+        readLessTextBN: string;
         /**
          * When ON, this block renders data from **Global → Leadership Team**.
          *
@@ -6276,6 +6324,106 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'life-insurance-simplified'?:
+          | T
+          | {
+              backgroundColor?: T;
+              backgroundColor2?: T;
+              sectionHeading?: T;
+              sectionHeadingBN?: T;
+              sectionHeadingHighlightedText?: T;
+              sectionHeadingHighlightedTextBN?: T;
+              sections?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    titleHighlightedText?: T;
+                    titleHighlightedTextBN?: T;
+                    subtitle?: T;
+                    subtitleBN?: T;
+                    mainVIdeoLink?: T;
+                    mainImage?: T;
+                    mainImageOriginal?: T;
+                    pendingMainImageOriginal?: T;
+                    pendingMainImageCrop?: T;
+                    mainImageBlurDataURL?: T;
+                    insuranceCardData?:
+                      | T
+                      | {
+                          image?: T;
+                          imageOriginal?: T;
+                          pendingImageOriginal?: T;
+                          pendingImageCrop?: T;
+                          imageBlurDataURL?: T;
+                          title?: T;
+                          titleBN?: T;
+                          description?: T;
+                          descriptionBN?: T;
+                          videoLink?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'shanta-intro'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              heading?: T;
+              headingBN?: T;
+              subheading?: T;
+              subheadingBN?: T;
+              paragraphTitle?: T;
+              paragraphTitleBN?: T;
+              paragraph?: T;
+              paragraphBN?: T;
+              image?: T;
+              imageOriginal?: T;
+              pendingImageOriginal?: T;
+              pendingImageCrop?: T;
+              imageBlurDataURL?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'values-that-shape-us'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              image?: T;
+              imageOriginal?: T;
+              pendingImageOriginal?: T;
+              pendingImageCrop?: T;
+              imageBlurDataURL?: T;
+              values?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    hoverImage?: T;
+                    hoverImageOriginal?: T;
+                    pendingHoverImageOriginal?: T;
+                    pendingHoverImageCrop?: T;
+                    hoverImageBlurDataURL?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'why-choose-us'?:
           | T
           | {
@@ -6393,50 +6541,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'life-insurance-simplified'?:
-          | T
-          | {
-              backgroundColor?: T;
-              backgroundColor2?: T;
-              sectionHeading?: T;
-              sectionHeadingBN?: T;
-              sectionHeadingHighlightedText?: T;
-              sectionHeadingHighlightedTextBN?: T;
-              sections?:
-                | T
-                | {
-                    title?: T;
-                    titleBN?: T;
-                    titleHighlightedText?: T;
-                    titleHighlightedTextBN?: T;
-                    subtitle?: T;
-                    subtitleBN?: T;
-                    mainVIdeoLink?: T;
-                    mainImage?: T;
-                    mainImageOriginal?: T;
-                    pendingMainImageOriginal?: T;
-                    pendingMainImageCrop?: T;
-                    mainImageBlurDataURL?: T;
-                    insuranceCardData?:
-                      | T
-                      | {
-                          image?: T;
-                          imageOriginal?: T;
-                          pendingImageOriginal?: T;
-                          pendingImageCrop?: T;
-                          imageBlurDataURL?: T;
-                          title?: T;
-                          titleBN?: T;
-                          description?: T;
-                          descriptionBN?: T;
-                          videoLink?: T;
-                          id?: T;
-                        };
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
         'home-video'?:
           | T
           | {
@@ -6490,27 +6594,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'shanta-intro'?:
-          | T
-          | {
-              uploadSessionId?: T;
-              backgroundColor?: T;
-              heading?: T;
-              headingBN?: T;
-              subheading?: T;
-              subheadingBN?: T;
-              paragraphTitle?: T;
-              paragraphTitleBN?: T;
-              paragraph?: T;
-              paragraphBN?: T;
-              image?: T;
-              imageOriginal?: T;
-              pendingImageOriginal?: T;
-              pendingImageCrop?: T;
-              imageBlurDataURL?: T;
-              id?: T;
-              blockName?: T;
-            };
         'shanta-vision'?:
           | T
           | {
@@ -6531,41 +6614,6 @@ export interface PagesSelect<T extends boolean = true> {
               missionHighlightedTextBN?: T;
               missionDescription?: T;
               missionDescriptionBN?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'values-that-shape-us'?:
-          | T
-          | {
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              image?: T;
-              imageOriginal?: T;
-              pendingImageOriginal?: T;
-              pendingImageCrop?: T;
-              imageBlurDataURL?: T;
-              values?:
-                | T
-                | {
-                    image?: T;
-                    imageOriginal?: T;
-                    pendingImageOriginal?: T;
-                    pendingImageCrop?: T;
-                    imageBlurDataURL?: T;
-                    hoverImage?: T;
-                    hoverImageOriginal?: T;
-                    pendingHoverImageOriginal?: T;
-                    pendingHoverImageCrop?: T;
-                    hoverImageBlurDataURL?: T;
-                    title?: T;
-                    titleBN?: T;
-                    description?: T;
-                    descriptionBN?: T;
-                    id?: T;
-                  };
               id?: T;
               blockName?: T;
             };
@@ -6615,6 +6663,10 @@ export interface PagesSelect<T extends boolean = true> {
                     subtitleBN?: T;
                     description?: T;
                     descriptionBN?: T;
+                    readMoreText?: T;
+                    readMoreTextBN?: T;
+                    readLessText?: T;
+                    readLessTextBN?: T;
                     id?: T;
                   };
               id?: T;
@@ -6828,6 +6880,10 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               oddBackgroundColor?: T;
               evenBackgroundColor?: T;
+              readMoreText?: T;
+              readMoreTextBN?: T;
+              readLessText?: T;
+              readLessTextBN?: T;
               useSharedData?: T;
               id?: T;
               blockName?: T;
@@ -6837,6 +6893,10 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               oddBackgroundColor?: T;
               evenBackgroundColor?: T;
+              readMoreText?: T;
+              readMoreTextBN?: T;
+              readLessText?: T;
+              readLessTextBN?: T;
               useSharedData?: T;
               id?: T;
               blockName?: T;

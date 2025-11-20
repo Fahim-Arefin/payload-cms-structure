@@ -20,7 +20,12 @@ function AllDirectorListSectionClient({ directorProfileData, blockData }: Props)
               (i % 2 === 0 ? blockData?.oddBackgroundColor : blockData?.evenBackgroundColor) || '',
           }}
         >
-          <ProfileSection titleColor="#ED7125" data={director} reverse={i % 2 === 1} />
+          <ProfileSection
+            titleColor="#ED7125"
+            data={director}
+            reverse={i % 2 === 1}
+            block={blockData}
+          />
         </div>
       ))}
     </div>

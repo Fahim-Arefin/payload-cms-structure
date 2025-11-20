@@ -74,7 +74,7 @@ export default function NotFound() {
           <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
             <div className="flex items-center justify-center p-10">
               <Image
-                src="/assets/logo/notFound.png"
+                src="/assets/images/notFound.png"
                 alt="Not Found"
                 width={220}
                 height={220}

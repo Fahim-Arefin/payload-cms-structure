@@ -1,5 +1,6 @@
 import { getGlobalCached } from '@/lib/cachedGlobals'
 import {
+  GLOBAL_LEADERSHIP_TEAM_BLOCK_LABEL,
   GLOBAL_LEADERSHIP_TEAM_SLUG_AND_TAG,
   LEADERSHIP_TEAM_PAGE_LEADERSHIP_TEAM_LIST_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -21,12 +22,12 @@ async function AllLeadershipTeamListSection({ blockData }: Props) {
   )
   return (
     <div>
-      {data ? (
+      {data && data?.leaders && data?.leaders?.length > 0 ? (
         <AllLeadershipTeamListSectionClient leadersData={data} blockData={blockData} />
       ) : (
         <NoDataFound
           message="No Data Found"
-          description="Please fill up Global 'Leadership Team' collection data"
+          description={`Please fill up Global '${GLOBAL_LEADERSHIP_TEAM_BLOCK_LABEL}' collection data`}
           bgColor={blockData?.oddBackgroundColor || ''}
         />
       )}

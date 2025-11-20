@@ -341,6 +341,7 @@ import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 
 import {
+  ABOUT_US_PAGE,
   ABOUT_US_PAGE_DIRECTORS_MESSAGES_BLOCK_LABEL,
   ABOUT_US_PAGE_DIRECTORS_MESSAGES_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_DIRECTORS_MESSAGES_SLUG_AND_TAG,
@@ -353,7 +354,8 @@ const NAME_MAX = 40
 const DESIGNATION_MAX = 40
 const TITLE_MAX = 100
 const SUBTITLE_MAX = 100
-const DESC_MAX = 1500 // long messages from Chairman/CEO
+const CTA_TEXT_MAX = 50
+const DESC_MAX = 2000 // long messages from Chairman/CEO
 
 /* ---------------- validators ---------------- */
 
@@ -447,6 +449,9 @@ const DirectorsMessagesSchema: Block = {
   labels: {
     singular: ABOUT_US_PAGE_DIRECTORS_MESSAGES_BLOCK_LABEL,
     plural: ABOUT_US_PAGE_DIRECTORS_MESSAGES_BLOCK_LABEL,
+  },
+  admin: {
+    group: ABOUT_US_PAGE,
   },
 
   imageURL: ABOUT_US_PAGE_DIRECTORS_MESSAGES_BLOCK_THUMBNAIL_URL,
@@ -624,7 +629,6 @@ const DirectorsMessagesSchema: Block = {
             },
           ],
         },
-
         // Description (EN/BN) → RICHTEXT with length validator
         {
           type: 'row',
@@ -644,6 +648,68 @@ const DirectorsMessagesSchema: Block = {
               label: 'বর্ণনা (বাংলা)',
               validate: validateRichText('Description (BN)', { required: true, max: DESC_MAX }),
               admin: { width: '50%', description: `সর্বোচ্চ ~${bnNum(DESC_MAX)} অক্ষর।` },
+            },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'readMoreText',
+              type: 'text',
+              label: 'Read More Button Text',
+              required: true,
+              defaultValue: 'Read More',
+              maxLength: CTA_TEXT_MAX,
+              validate: validateShortText('Read More Button Text', CTA_TEXT_MAX, true),
+              admin: {
+                width: '50%',
+                description: `Label for the per-section CTA (e.g., “Read More”). Max ${CTA_TEXT_MAX} characters.`,
+              },
+            },
+            {
+              name: 'readMoreTextBN',
+              type: 'text',
+              label: 'বাটনের টেক্সট (বাংলা) — Read More',
+              required: true,
+              defaultValue: 'বিস্তারিত পড়ুন',
+              maxLength: CTA_TEXT_MAX,
+              validate: validateShortText('Read More Button Text (BN)', CTA_TEXT_MAX, true),
+              admin: {
+                width: '50%',
+                description: `CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর।`,
+              },
+            },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'readLessText',
+              type: 'text',
+              label: 'Read Less Button Text',
+              required: true,
+              defaultValue: 'Read Less',
+              maxLength: CTA_TEXT_MAX,
+              validate: validateShortText('Read Less Button Text', CTA_TEXT_MAX, true),
+              admin: {
+                width: '50%',
+                description: `Label for collapsing long content (e.g., “Read Less”). Max ${CTA_TEXT_MAX} characters.`,
+              },
+            },
+            {
+              name: 'readLessTextBN',
+              type: 'text',
+              label: 'বাটনের টেক্সট (বাংলা) — Read Less',
+              required: true,
+              defaultValue: 'কম পড়ুন',
+              maxLength: CTA_TEXT_MAX,
+              validate: validateShortText('Read Less Button Text (BN)', CTA_TEXT_MAX, true),
+              admin: {
+                width: '50%',
+                description: `দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর।`,
+              },
             },
           ],
         },

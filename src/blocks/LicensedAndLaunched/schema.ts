@@ -162,6 +162,7 @@ import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 
 import {
+  ABOUT_US_PAGE,
   ABOUT_US_PAGE_LICENSED_LAUNCHED_BLOCK_LABEL,
   ABOUT_US_PAGE_LICENSED_LAUNCHED_BLOCK_THUMBNAIL_URL,
   ABOUT_US_PAGE_LICENSED_LAUNCHED_SLUG_AND_TAG,
@@ -190,7 +191,9 @@ const LicensedLaunchedSchema: Block = {
     singular: ABOUT_US_PAGE_LICENSED_LAUNCHED_BLOCK_LABEL,
     plural: ABOUT_US_PAGE_LICENSED_LAUNCHED_BLOCK_LABEL,
   },
-
+  admin: {
+    group: ABOUT_US_PAGE,
+  },
   imageURL: ABOUT_US_PAGE_LICENSED_LAUNCHED_BLOCK_THUMBNAIL_URL,
   imageAltText: `${ABOUT_US_PAGE_LICENSED_LAUNCHED_BLOCK_LABEL} preview`,
 

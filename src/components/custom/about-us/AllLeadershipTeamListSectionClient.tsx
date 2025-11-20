@@ -20,7 +20,12 @@ function AllLeadershipTeamListSectionClient({ leadersData, blockData }: Props) {
               (i % 2 === 0 ? blockData?.oddBackgroundColor : blockData?.evenBackgroundColor) || '',
           }}
         >
-          <ProfileSection titleColor="#ED7125" data={leader} reverse={i % 2 === 1} />
+          <ProfileSection
+            titleColor="#ED7125"
+            data={leader}
+            reverse={i % 2 === 1}
+            block={blockData}
+          />
         </div>
       ))}
     </div>
