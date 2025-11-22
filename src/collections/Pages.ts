@@ -224,9 +224,9 @@ export const Pages: CollectionConfig = {
     group: 'Dynamic Pages',
     description: 'Dynamic pages assembled from blocks',
     useAsTitle: 'name',
-    defaultColumns: ['name', 'slug', 'publish', 'updatedAt'],
+    defaultColumns: ['name', 'slug', '_status', 'updatedAt'],
   },
-  // versions: { drafts: true },
+  versions: { drafts: true },
   fields: [
     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false, readOnly: true } },
     { name: 'name', label: 'Name', type: 'text', required: true },
@@ -248,13 +248,13 @@ export const Pages: CollectionConfig = {
         return true
       },
     },
-    {
-      name: 'publish',
-      type: 'checkbox',
-      label: 'Publish this page',
-      defaultValue: true,
-      admin: { position: 'sidebar', description: 'Uncheck to hide this page (404).' },
-    },
+    // {
+    //   name: 'publish',
+    //   type: 'checkbox',
+    //   label: 'Publish this page',
+    //   defaultValue: true,
+    //   admin: { position: 'sidebar', description: 'Uncheck to hide this page (404).' },
+    // },
     {
       name: 'layout',
       label: 'Layout',
@@ -354,16 +354,17 @@ export const Pages: CollectionConfig = {
     ],
 
     // append your revalidation on top
-    afterChange: [
+afterChange: [
       ...baseAfterChange,
       async ({ req, doc, previousDoc, operation }) => {
+        // revalidate
         try {
           const slug = (doc as any)?.slug ?? (previousDoc as any)?.slug
           if (slug) revalidateTag(pageTag(slug))
           revalidateTag(pagesListTag)
         } catch {}
 
-        // audit
+        // audit (compute publish from _status)
         try {
           const becamePublished =
             (doc as any)?._status === 'published' && (previousDoc as any)?._status !== 'published'
@@ -383,6 +384,7 @@ export const Pages: CollectionConfig = {
         } catch (e) {
           req.payload.logger.error('Audit log (pages) failed', e)
         }
+
         return doc
       },
     ],

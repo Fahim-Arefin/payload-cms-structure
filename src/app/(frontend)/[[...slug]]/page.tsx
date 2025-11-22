@@ -390,6 +390,7 @@ const getPageBySlugCached = (slug: string) =>
         collection: 'pages',
         limit: 1,
         depth: 2,
+        draft: false,
         where: { slug: { equals: slug } },
       })
       return docs?.[0] || null
@@ -403,7 +404,12 @@ const getPatternPagesCached = unstableCache(
   async () => {
     logCacheMiss('pages:patterns')
     const payload = await payloadClient()
-    const { docs } = await payload.find({ collection: 'pages', limit: 1000, depth: 2 })
+    const { docs } = await payload.find({
+      collection: 'pages',
+      limit: 1000,
+      depth: 2,
+      draft: false,
+    })
     return (docs ?? []).filter((p: any) => typeof p.slug === 'string' && p.slug.includes(':'))
   },
   ['pages:patterns'],
@@ -521,13 +527,12 @@ export default async function CatchAll(props: PageProps) {
   const exact = await getPageBySlugCached(path)
 
   if (exact) {
-    if (exact.publish !== false) {
-      return (
-        <div>
-          <RenderBlocks layout={exact.layout} params={{}} />
-        </div>
-      )
-    }
+    return (
+      <div>
+        <RenderBlocks layout={exact.layout} params={{}} />
+      </div>
+    )
+
     return notFound()
   }
 
@@ -543,8 +548,8 @@ export default async function CatchAll(props: PageProps) {
     if (!params) continue
 
     const concrete = await getPageBySlugCached(page.slug)
-    const canShow = (concrete ?? page)?.publish !== false
-    if (!canShow) break
+    // const canShow = (concrete ?? page)?.publish !== false
+    // if (!canShow) break
 
     return (
       <div>
