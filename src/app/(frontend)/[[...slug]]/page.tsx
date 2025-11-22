@@ -390,7 +390,6 @@ const getPageBySlugCached = (slug: string) =>
         collection: 'pages',
         limit: 1,
         depth: 2,
-        draft: false,
         where: { slug: { equals: slug } },
       })
       return docs?.[0] || null
@@ -408,7 +407,6 @@ const getPatternPagesCached = unstableCache(
       collection: 'pages',
       limit: 1000,
       depth: 2,
-      draft: false,
     })
     return (docs ?? []).filter((p: any) => typeof p.slug === 'string' && p.slug.includes(':'))
   },
@@ -523,17 +521,15 @@ export default async function CatchAll(props: PageProps) {
   // notFound()
   // // =============================================================================================
   // // =============================================================================================
-  // 1) try exact
+  // 1) exact page (published only by default)
   const exact = await getPageBySlugCached(path)
-
   if (exact) {
+    if ((exact as any)?._status === 'draft') return notFound() // defensive
     return (
       <div>
-        <RenderBlocks layout={exact.layout} params={{}} />
+        <RenderBlocks layout={exact.layout as PayloadPage['layout']} params={{}} />
       </div>
     )
-
-    return notFound()
   }
 
   // 2) try pattern pages (only when no exact match)
