@@ -338,7 +338,7 @@ export const Pages: CollectionConfig = {
   ],
   access: {
     read: () => true, // public read
-    create: ({ req }) => roleAtLeast(req.user, 'editor'),
+    create: ({ req }) => roleAtLeast(req.user, 'admin'),
     update: ({ req }) => roleAtLeast(req.user, 'editor'),
     delete: ({ req }) => roleAtLeast(req.user, 'admin'),
   },
