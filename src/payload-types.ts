@@ -73,6 +73,7 @@ export interface Config {
     'career-application': CareerApplication;
     'agent-career-application': AgentCareerApplication;
     pages: Page;
+    'audit-logs': AuditLog;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -85,6 +86,7 @@ export interface Config {
     'career-application': CareerApplicationSelect<false> | CareerApplicationSelect<true>;
     'agent-career-application': AgentCareerApplicationSelect<false> | AgentCareerApplicationSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    'audit-logs': AuditLogsSelect<false> | AuditLogsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -145,6 +147,13 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  name?: string | null;
+  /**
+   * Only Super Admin can set or change this.
+   */
+  role?: ('super-admin' | 'admin' | 'editor' | 'viewer') | null;
+  lastLoginAt?: string | null;
+  lastLogoutAt?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -245,10 +254,6 @@ export interface Page {
    * for home page use `index`, for dynamic page use `:slug`
    */
   slug: string;
-  /**
-   * Uncheck to hide this page (404).
-   */
-  publish?: boolean | null;
   layout: (
     | {
         uploadSessionId?: string | null;
@@ -6105,6 +6110,41 @@ export interface Page {
   )[];
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "audit-logs".
+ */
+export interface AuditLog {
+  id: string;
+  action:
+    | 'login'
+    | 'logout'
+    | 'create'
+    | 'update'
+    | 'delete'
+    | 'publish'
+    | 'approve'
+    | 'reject'
+    | 'settings-update'
+    | 'role-assign';
+  targetCollection?: string | null;
+  docId?: string | null;
+  actor?: (string | null) | User;
+  ip?: string | null;
+  notes?: string | null;
+  diff?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -6136,6 +6176,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: string | Page;
+      } | null)
+    | ({
+        relationTo: 'audit-logs';
+        value: string | AuditLog;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -6184,6 +6228,10 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  lastLoginAt?: T;
+  lastLogoutAt?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -6270,7 +6318,6 @@ export interface PagesSelect<T extends boolean = true> {
   uploadSessionId?: T;
   name?: T;
   slug?: T;
-  publish?: T;
   layout?:
     | T
     | {
@@ -8382,6 +8429,22 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "audit-logs_select".
+ */
+export interface AuditLogsSelect<T extends boolean = true> {
+  action?: T;
+  targetCollection?: T;
+  docId?: T;
+  actor?: T;
+  ip?: T;
+  notes?: T;
+  diff?: T;
   updatedAt?: T;
   createdAt?: T;
 }

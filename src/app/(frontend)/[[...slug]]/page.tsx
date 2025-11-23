@@ -554,18 +554,15 @@ export default async function CatchAll(props: PageProps) {
   // notFound()
   // // =============================================================================================
   // // =============================================================================================
-  // 1) try exact
+  // 1) exact page (published only by default)
   const exact = await getPageBySlugCached(path)
-
   if (exact) {
-    if (exact.publish !== false) {
-      return (
-        <div>
-          <RenderBlocks layout={exact.layout} params={{}} />
-        </div>
-      )
-    }
-    return notFound()
+    if ((exact as any)?._status === 'draft') return notFound() // defensive
+    return (
+      <div>
+        <RenderBlocks layout={exact.layout as PayloadPage['layout']} params={{}} />
+      </div>
+    )
   }
 
   // 2) try pattern pages (only when no exact match)
@@ -580,7 +577,9 @@ export default async function CatchAll(props: PageProps) {
     if (!params) continue
 
     const concrete = await getPageBySlugCached(page.slug)
-    const canShow = (concrete ?? page)?.publish !== false
+    // const canShow = (concrete ?? page)?.publish !== false
+    // if (!canShow) break
+    const canShow = ((concrete ?? page) as any)?._status !== 'draft'
     if (!canShow) break
 
     return (

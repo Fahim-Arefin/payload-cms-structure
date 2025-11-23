@@ -192,6 +192,8 @@ import { mediaHooks } from '@/utils/media/mediaHooks'
 import { revalidateTag } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 import CustomTabSchema from '@/blocks/customTab/schema'
+import { roleAtLeast } from '@/lib/rbac'
+import { getClientIP } from '@/lib/http'
 
 // const mediaHooks = withMediaLifecycle({
 //   collectionSlug: 'pages',
@@ -223,8 +225,9 @@ export const Pages: CollectionConfig = {
     group: 'Dynamic Pages',
     description: 'Dynamic pages assembled from blocks',
     useAsTitle: 'name',
-    defaultColumns: ['name', 'slug', 'publish', 'updatedAt'],
+    defaultColumns: ['name', 'slug', '_status', 'updatedAt'],
   },
+  versions: { drafts: true },
   fields: [
     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false, readOnly: true } },
     { name: 'name', label: 'Name', type: 'text', required: true },
@@ -246,13 +249,13 @@ export const Pages: CollectionConfig = {
         return true
       },
     },
-    {
-      name: 'publish',
-      type: 'checkbox',
-      label: 'Publish this page',
-      defaultValue: true,
-      admin: { position: 'sidebar', description: 'Uncheck to hide this page (404).' },
-    },
+    // {
+    //   name: 'publish',
+    //   type: 'checkbox',
+    //   label: 'Publish this page',
+    //   defaultValue: true,
+    //   admin: { position: 'sidebar', description: 'Uncheck to hide this page (404).' },
+    // },
     {
       name: 'layout',
       label: 'Layout',
@@ -333,21 +336,58 @@ export const Pages: CollectionConfig = {
       ],
     },
   ],
-  access: { read: () => true, create: () => true, update: () => true, delete: () => true },
+  access: {
+    read: () => true, // public read
+    create: ({ req }) => roleAtLeast(req.user, 'editor'),
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
+    delete: ({ req }) => roleAtLeast(req.user, 'admin'),
+  },
   timestamps: true,
   hooks: {
     // spread whatever withMediaLifecycle gave us (or nothing)
     ...safeMediaHooks,
 
+    beforeChange: [
+      ({ req, data, operation }) => {
+        if (operation !== 'update') return
+        if (data?._status === 'published' && !roleAtLeast(req.user, 'admin')) {
+          throw new Error('Only Admin or Super Admin can publish.')
+        }
+      },
+    ],
+
     // append your revalidation on top
     afterChange: [
       ...baseAfterChange,
-      async ({ doc, previousDoc }) => {
+      async ({ req, doc, previousDoc, operation }) => {
+        // revalidate
         try {
           const slug = (doc as any)?.slug ?? (previousDoc as any)?.slug
           if (slug) revalidateTag(pageTag(slug))
           revalidateTag(pagesListTag)
         } catch {}
+
+        // audit (compute publish from _status)
+        try {
+          const becamePublished =
+            (doc as any)?._status === 'published' && (previousDoc as any)?._status !== 'published'
+          const action = becamePublished ? 'publish' : operation
+
+          await req.payload.create({
+            collection: 'audit-logs',
+            data: {
+              action,
+              targetCollection: 'pages',
+              docId: String((doc as any).id),
+              actor: req.user?.id ?? null,
+              ip: getClientIP(req),
+              diff: { before: previousDoc ?? null, after: doc ?? null },
+            },
+          })
+        } catch (e) {
+          req.payload.logger.error('Audit log (pages) failed', e)
+        }
+
         return doc
       },
     ],
