@@ -546,6 +546,8 @@ export default async function CatchAll(props: PageProps) {
     const concrete = await getPageBySlugCached(page.slug)
     // const canShow = (concrete ?? page)?.publish !== false
     // if (!canShow) break
+    const canShow = ((concrete ?? page) as any)?._status !== 'draft'
+    if (!canShow) break
 
     return (
       <div>
