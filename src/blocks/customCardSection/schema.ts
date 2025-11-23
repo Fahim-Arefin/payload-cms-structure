@@ -1,5 +1,6 @@
 // src/payload/blocks/Plan.ts
 import {
+  CUSTOM,
   CUSTOM_CARD_SECTION_BLOCK_LABEL,
   CUSTOM_CARD_SECTION_BLOCK_THUMBNAIL_URL,
   CUSTOM_CARD_SECTION_SLUG_AND_TAG,
@@ -129,6 +130,10 @@ const CustomCardSectionSchema: Block = {
   labels: {
     singular: CUSTOM_CARD_SECTION_BLOCK_LABEL,
     plural: CUSTOM_CARD_SECTION_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: CUSTOM,
   },
 
   imageURL: CUSTOM_CARD_SECTION_BLOCK_THUMBNAIL_URL,

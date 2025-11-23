@@ -53,6 +53,7 @@ const folder = '/assets/block-icons'
 // Group
 export const HERO = 'Hero Blocks'
 export const COMMON = 'Common Blocks'
+export const CUSTOM = 'Custom Blocks'
 export const HOME_PAGE = 'Home Page'
 export const ABOUT_US_PAGE = 'About Us Page'
 export const BOD_PAGE = 'BOD Page'

@@ -735,6 +735,411 @@ export interface Page {
       }
     | {
         /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 100 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Title. Max 100 chars.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 100 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Subtitle. Max 100 chars.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~500 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৫০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * If checked, render cards in a horizontal carousel on desktop & mobile. If unchecked, render as a responsive grid. / চেক করা থাকলে কার্ডগুলো ক্যারোসেলে দেখাবে, না হলে গ্রিডে দেখাবে।
+         */
+        displayAsCarousel?: boolean | null;
+        /**
+         * Adds padding on the left/right of the card container (padding-x). / কার্ড কন্টেইনারের বাম/ডানে প্যাডিং যোগ করবে।
+         */
+        addHorizontalPadding?: boolean | null;
+        /**
+         * How many cards should be visible on a small phone screen at once? Type a number from 1 to 4. Example: 1 shows one big card; 2 shows two smaller cards side-by-side.
+         */
+        mobileCardsPerView?: number | null;
+        /**
+         * How many cards should be visible on tablet screens? Type 1–4. Example: 2 shows two cards across; 3 shows three smaller cards.
+         */
+        tabletCardsPerView?: number | null;
+        /**
+         * How many cards should be visible on laptop screens? Type 1–4. Example: 3 fits three cards neatly in a row.
+         */
+        laptopCardsPerView?: number | null;
+        /**
+         * How many cards should be visible on large desktop screens? Type 1–4. Example: 3 shows three balanced cards; 4 makes them smaller but fits more.
+         */
+        desktopCardsPerView?: number | null;
+        /**
+         * Please add a card
+         */
+        card: (
+          | {
+              /**
+               * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
+               */
+              corporateCards: {
+                /**
+                 * Main background of the card. Recommended 1:1.
+                 */
+                bgImage: string | Media;
+                bgImageOriginal?: (string | null) | Media;
+                pendingBgImageOriginal?: string | null;
+                pendingBgImageCrop?: string | null;
+                bgImageBlurDataURL?: string | null;
+                /**
+                 * Square icon. Recommended 1:1.
+                 */
+                icon: string | Media;
+                iconOriginal?: (string | null) | Media;
+                pendingIconOriginal?: string | null;
+                pendingIconCrop?: string | null;
+                iconBlurDataURL?: string | null;
+                /**
+                 * Add short bullet/lines to describe the card. Each line must have EN & BN. Max 180 (১৮০) chars per field.
+                 */
+                descriptions: {
+                  /**
+                   * One short line. Max 180 characters.
+                   */
+                  text: string;
+                  /**
+                   * একটি ছোট লাইন। সর্বোচ্চ ১৮০ অক্ষর।
+                   */
+                  textBN: string;
+                  /**
+                   * Optional. Max 24 characters.
+                   */
+                  buttonText?: string | null;
+                  /**
+                   * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+                   */
+                  buttonTextBN?: string | null;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                   */
+                  buttonLink?: (string | null) | Page;
+                  id?: string | null;
+                }[];
+                id?: string | null;
+              }[];
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'corporate-cards';
+            }
+          | {
+              /**
+               * Add at least 1 card.
+               */
+              planCards: {
+                /**
+                 * Upload & crop a 13:12 image.
+                 */
+                bgImage: string | Media;
+                bgImageOriginal?: (string | null) | Media;
+                pendingBgImageOriginal?: string | null;
+                pendingBgImageCrop?: string | null;
+                bgImageBlurDataURL?: string | null;
+                /**
+                 * Max 100 characters.
+                 */
+                title: string;
+                /**
+                 * সর্বোচ্চ ১০০ অক্ষর।
+                 */
+                titleBN: string;
+                /**
+                 * Max 100 characters.
+                 */
+                subTitle?: string | null;
+                /**
+                 * সর্বোচ্চ ১০০ অক্ষর।
+                 */
+                subTitleBN?: string | null;
+                /**
+                 * Max 200 characters.
+                 */
+                description: string;
+                /**
+                 * সর্বোচ্চ ২০০ অক্ষর।
+                 */
+                descriptionBN: string;
+                /**
+                 * Pick whether this card shows a CTA button or opens a modal with items.
+                 */
+                actionType?: ('cta' | 'modal') | null;
+                /**
+                 * Optional. Max 24 characters.
+                 */
+                buttonText: string;
+                /**
+                 * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+                 */
+                buttonTextBN: string;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. Visible only for CTA.
+                 */
+                buttonLink?: (string | null) | Page;
+                /**
+                 * Optional. Max 24 characters.
+                 */
+                modalButtonText: string;
+                /**
+                 * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+                 */
+                modalButtonTextBN: string;
+                /**
+                 * Upload/select the brochure PDF.
+                 */
+                brochurePDF?: (string | null) | Media;
+                /**
+                 * Max 100 characters.
+                 */
+                label?: string | null;
+                /**
+                 * সর্বোচ্চ ১০০ অক্ষর।
+                 */
+                labelBN?: string | null;
+                style?: ('primary' | 'secondary') | null;
+                /**
+                 * Required. Max 100 characters.
+                 */
+                modalTitle?: string | null;
+                /**
+                 * আবশ্যক। সর্বোচ্চ ১০০ অক্ষর।
+                 */
+                modalTitleBN?: string | null;
+                /**
+                 * Add one or more items shown inside the modal.
+                 */
+                modalItems?:
+                  | {
+                      /**
+                       * Square icon (1:1). PNG/SVG recommended.
+                       */
+                      icon: string | Media;
+                      iconOriginal?: (string | null) | Media;
+                      pendingIconOriginal?: string | null;
+                      pendingIconCrop?: string | null;
+                      iconBlurDataURL?: string | null;
+                      /**
+                       * Required. Max 100 characters.
+                       */
+                      title?: string | null;
+                      /**
+                       * আবশ্যক। সর্বোচ্চ ১০০ অক্ষর।
+                       */
+                      titleBN?: string | null;
+                      /**
+                       * Up to ~500 characters.
+                       */
+                      description?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      /**
+                       * সর্বোচ্চ ~৫০০ অক্ষর।
+                       */
+                      descriptionBN?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[];
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'plan-card';
+            }
+          | {
+              /**
+               * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
+               */
+              offerCards: {
+                /**
+                 * Main background of the card. Recommended 1:1.
+                 */
+                bgImage: string | Media;
+                bgImageOriginal?: (string | null) | Media;
+                pendingBgImageOriginal?: string | null;
+                pendingBgImageCrop?: string | null;
+                bgImageBlurDataURL?: string | null;
+                /**
+                 * Square icon. Recommended 1:1.
+                 */
+                icon: string | Media;
+                iconOriginal?: (string | null) | Media;
+                pendingIconOriginal?: string | null;
+                pendingIconCrop?: string | null;
+                iconBlurDataURL?: string | null;
+                /**
+                 * Max 40 characters.
+                 */
+                title: string;
+                /**
+                 * সর্বোচ্চ ৪০ অক্ষর।
+                 */
+                titleBN: string;
+                /**
+                 * Max 40 characters.
+                 */
+                subTitle?: string | null;
+                /**
+                 * সর্বোচ্চ ৪০ অক্ষর।
+                 */
+                subTitleBN?: string | null;
+                /**
+                 * One short line. Max 250 characters.
+                 */
+                text: string;
+                /**
+                 * একটি ছোট লাইন। সর্বোচ্চ ২৫০ অক্ষর।
+                 */
+                textBN: string;
+                /**
+                 * Optional. Max 24 characters.
+                 */
+                buttonText?: string | null;
+                /**
+                 * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+                 */
+                buttonTextBN?: string | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                 */
+                buttonLink?: (string | null) | Page;
+                id?: string | null;
+              }[];
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'offer-card';
+            }
+          | {
+              /**
+               * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
+               */
+              hashLinkCards: {
+                /**
+                 * Main background of the card. Recommended 1:1.
+                 */
+                bgImage: string | Media;
+                bgImageOriginal?: (string | null) | Media;
+                pendingBgImageOriginal?: string | null;
+                pendingBgImageCrop?: string | null;
+                bgImageBlurDataURL?: string | null;
+                /**
+                 * Max 100 characters.
+                 */
+                title: string;
+                /**
+                 * সর্বোচ্চ ১০০ অক্ষর।
+                 */
+                titleBN: string;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId: string;
+                id?: string | null;
+              }[];
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'hash-link-card';
+            }
+        )[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'custom-card';
+      }
+    | {
+        /**
          * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
          */
         backgroundColor?: string | null;
@@ -2175,411 +2580,6 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'corporate-partners';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Primary heading. Max 100 characters.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ১০০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Optional. Must appear verbatim inside Title. Max 100 chars.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Supporting line. Max 100 characters.
-         */
-        subtitle?: string | null;
-        /**
-         * সহায়ক লাইন। সর্বোচ্চ ১০০ অক্ষর।
-         */
-        subtitleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside Subtitle. Max 100 chars.
-         */
-        highlightedSubtitle?: string | null;
-        /**
-         * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
-         */
-        highlightedSubtitleBN?: string | null;
-        /**
-         * Up to ~500 characters.
-         */
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * সর্বোচ্চ ~৫০০ অক্ষর।
-         */
-        descriptionBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * If checked, render cards in a horizontal carousel on desktop & mobile. If unchecked, render as a responsive grid. / চেক করা থাকলে কার্ডগুলো ক্যারোসেলে দেখাবে, না হলে গ্রিডে দেখাবে।
-         */
-        displayAsCarousel?: boolean | null;
-        /**
-         * Adds padding on the left/right of the card container (padding-x). / কার্ড কন্টেইনারের বাম/ডানে প্যাডিং যোগ করবে।
-         */
-        addHorizontalPadding?: boolean | null;
-        /**
-         * How many cards should be visible on a small phone screen at once? Type a number from 1 to 4. Example: 1 shows one big card; 2 shows two smaller cards side-by-side.
-         */
-        mobileCardsPerView?: number | null;
-        /**
-         * How many cards should be visible on tablet screens? Type 1–4. Example: 2 shows two cards across; 3 shows three smaller cards.
-         */
-        tabletCardsPerView?: number | null;
-        /**
-         * How many cards should be visible on laptop screens? Type 1–4. Example: 3 fits three cards neatly in a row.
-         */
-        laptopCardsPerView?: number | null;
-        /**
-         * How many cards should be visible on large desktop screens? Type 1–4. Example: 3 shows three balanced cards; 4 makes them smaller but fits more.
-         */
-        desktopCardsPerView?: number | null;
-        /**
-         * Please add a card
-         */
-        card: (
-          | {
-              /**
-               * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
-               */
-              corporateCards: {
-                /**
-                 * Main background of the card. Recommended 1:1.
-                 */
-                bgImage: string | Media;
-                bgImageOriginal?: (string | null) | Media;
-                pendingBgImageOriginal?: string | null;
-                pendingBgImageCrop?: string | null;
-                bgImageBlurDataURL?: string | null;
-                /**
-                 * Square icon. Recommended 1:1.
-                 */
-                icon: string | Media;
-                iconOriginal?: (string | null) | Media;
-                pendingIconOriginal?: string | null;
-                pendingIconCrop?: string | null;
-                iconBlurDataURL?: string | null;
-                /**
-                 * Add short bullet/lines to describe the card. Each line must have EN & BN. Max 180 (১৮০) chars per field.
-                 */
-                descriptions: {
-                  /**
-                   * One short line. Max 180 characters.
-                   */
-                  text: string;
-                  /**
-                   * একটি ছোট লাইন। সর্বোচ্চ ১৮০ অক্ষর।
-                   */
-                  textBN: string;
-                  /**
-                   * Optional. Max 24 characters.
-                   */
-                  buttonText?: string | null;
-                  /**
-                   * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
-                   */
-                  buttonTextBN?: string | null;
-                  /**
-                   * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
-                   */
-                  buttonLink?: (string | null) | Page;
-                  id?: string | null;
-                }[];
-                id?: string | null;
-              }[];
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'corporate-cards';
-            }
-          | {
-              /**
-               * Add at least 1 card.
-               */
-              planCards: {
-                /**
-                 * Upload & crop a 13:12 image.
-                 */
-                bgImage: string | Media;
-                bgImageOriginal?: (string | null) | Media;
-                pendingBgImageOriginal?: string | null;
-                pendingBgImageCrop?: string | null;
-                bgImageBlurDataURL?: string | null;
-                /**
-                 * Max 100 characters.
-                 */
-                title: string;
-                /**
-                 * সর্বোচ্চ ১০০ অক্ষর।
-                 */
-                titleBN: string;
-                /**
-                 * Max 100 characters.
-                 */
-                subTitle?: string | null;
-                /**
-                 * সর্বোচ্চ ১০০ অক্ষর।
-                 */
-                subTitleBN?: string | null;
-                /**
-                 * Max 200 characters.
-                 */
-                description: string;
-                /**
-                 * সর্বোচ্চ ২০০ অক্ষর।
-                 */
-                descriptionBN: string;
-                /**
-                 * Pick whether this card shows a CTA button or opens a modal with items.
-                 */
-                actionType?: ('cta' | 'modal') | null;
-                /**
-                 * Optional. Max 24 characters.
-                 */
-                buttonText: string;
-                /**
-                 * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
-                 */
-                buttonTextBN: string;
-                /**
-                 * Pick an internal Page to link to. External URLs are not allowed. Visible only for CTA.
-                 */
-                buttonLink?: (string | null) | Page;
-                /**
-                 * Optional. Max 24 characters.
-                 */
-                modalButtonText: string;
-                /**
-                 * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
-                 */
-                modalButtonTextBN: string;
-                /**
-                 * Upload/select the brochure PDF.
-                 */
-                brochurePDF?: (string | null) | Media;
-                /**
-                 * Max 100 characters.
-                 */
-                label?: string | null;
-                /**
-                 * সর্বোচ্চ ১০০ অক্ষর।
-                 */
-                labelBN?: string | null;
-                style?: ('primary' | 'secondary') | null;
-                /**
-                 * Required. Max 100 characters.
-                 */
-                modalTitle?: string | null;
-                /**
-                 * আবশ্যক। সর্বোচ্চ ১০০ অক্ষর।
-                 */
-                modalTitleBN?: string | null;
-                /**
-                 * Add one or more items shown inside the modal.
-                 */
-                modalItems?:
-                  | {
-                      /**
-                       * Square icon (1:1). PNG/SVG recommended.
-                       */
-                      icon: string | Media;
-                      iconOriginal?: (string | null) | Media;
-                      pendingIconOriginal?: string | null;
-                      pendingIconCrop?: string | null;
-                      iconBlurDataURL?: string | null;
-                      /**
-                       * Required. Max 100 characters.
-                       */
-                      title?: string | null;
-                      /**
-                       * আবশ্যক। সর্বোচ্চ ১০০ অক্ষর।
-                       */
-                      titleBN?: string | null;
-                      /**
-                       * Up to ~500 characters.
-                       */
-                      description?: {
-                        root: {
-                          type: string;
-                          children: {
-                            type: string;
-                            version: number;
-                            [k: string]: unknown;
-                          }[];
-                          direction: ('ltr' | 'rtl') | null;
-                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                          indent: number;
-                          version: number;
-                        };
-                        [k: string]: unknown;
-                      } | null;
-                      /**
-                       * সর্বোচ্চ ~৫০০ অক্ষর।
-                       */
-                      descriptionBN?: {
-                        root: {
-                          type: string;
-                          children: {
-                            type: string;
-                            version: number;
-                            [k: string]: unknown;
-                          }[];
-                          direction: ('ltr' | 'rtl') | null;
-                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                          indent: number;
-                          version: number;
-                        };
-                        [k: string]: unknown;
-                      } | null;
-                      id?: string | null;
-                    }[]
-                  | null;
-                id?: string | null;
-              }[];
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'plan-card';
-            }
-          | {
-              /**
-               * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
-               */
-              offerCards: {
-                /**
-                 * Main background of the card. Recommended 1:1.
-                 */
-                bgImage: string | Media;
-                bgImageOriginal?: (string | null) | Media;
-                pendingBgImageOriginal?: string | null;
-                pendingBgImageCrop?: string | null;
-                bgImageBlurDataURL?: string | null;
-                /**
-                 * Square icon. Recommended 1:1.
-                 */
-                icon: string | Media;
-                iconOriginal?: (string | null) | Media;
-                pendingIconOriginal?: string | null;
-                pendingIconCrop?: string | null;
-                iconBlurDataURL?: string | null;
-                /**
-                 * Max 40 characters.
-                 */
-                title: string;
-                /**
-                 * সর্বোচ্চ ৪০ অক্ষর।
-                 */
-                titleBN: string;
-                /**
-                 * Max 40 characters.
-                 */
-                subTitle?: string | null;
-                /**
-                 * সর্বোচ্চ ৪০ অক্ষর।
-                 */
-                subTitleBN?: string | null;
-                /**
-                 * One short line. Max 250 characters.
-                 */
-                text: string;
-                /**
-                 * একটি ছোট লাইন। সর্বোচ্চ ২৫০ অক্ষর।
-                 */
-                textBN: string;
-                /**
-                 * Optional. Max 24 characters.
-                 */
-                buttonText?: string | null;
-                /**
-                 * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
-                 */
-                buttonTextBN?: string | null;
-                /**
-                 * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
-                 */
-                buttonLink?: (string | null) | Page;
-                id?: string | null;
-              }[];
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'offer-card';
-            }
-          | {
-              /**
-               * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
-               */
-              hashLinkCards: {
-                /**
-                 * Main background of the card. Recommended 1:1.
-                 */
-                bgImage: string | Media;
-                bgImageOriginal?: (string | null) | Media;
-                pendingBgImageOriginal?: string | null;
-                pendingBgImageCrop?: string | null;
-                bgImageBlurDataURL?: string | null;
-                /**
-                 * Max 100 characters.
-                 */
-                title: string;
-                /**
-                 * সর্বোচ্চ ১০০ অক্ষর।
-                 */
-                titleBN: string;
-                /**
-                 * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
-                 */
-                buttonLink: string | Page;
-                /**
-                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
-                 */
-                sectionId: string;
-                id?: string | null;
-              }[];
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'hash-link-card';
-            }
-        )[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'custom-card';
       }
     | {
         uploadSessionId?: string | null;
@@ -6471,6 +6471,162 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'custom-card'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              displayAsCarousel?: T;
+              addHorizontalPadding?: T;
+              mobileCardsPerView?: T;
+              tabletCardsPerView?: T;
+              laptopCardsPerView?: T;
+              desktopCardsPerView?: T;
+              card?:
+                | T
+                | {
+                    'corporate-cards'?:
+                      | T
+                      | {
+                          corporateCards?:
+                            | T
+                            | {
+                                bgImage?: T;
+                                bgImageOriginal?: T;
+                                pendingBgImageOriginal?: T;
+                                pendingBgImageCrop?: T;
+                                bgImageBlurDataURL?: T;
+                                icon?: T;
+                                iconOriginal?: T;
+                                pendingIconOriginal?: T;
+                                pendingIconCrop?: T;
+                                iconBlurDataURL?: T;
+                                descriptions?:
+                                  | T
+                                  | {
+                                      text?: T;
+                                      textBN?: T;
+                                      buttonText?: T;
+                                      buttonTextBN?: T;
+                                      buttonLink?: T;
+                                      id?: T;
+                                    };
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'plan-card'?:
+                      | T
+                      | {
+                          planCards?:
+                            | T
+                            | {
+                                bgImage?: T;
+                                bgImageOriginal?: T;
+                                pendingBgImageOriginal?: T;
+                                pendingBgImageCrop?: T;
+                                bgImageBlurDataURL?: T;
+                                title?: T;
+                                titleBN?: T;
+                                subTitle?: T;
+                                subTitleBN?: T;
+                                description?: T;
+                                descriptionBN?: T;
+                                actionType?: T;
+                                buttonText?: T;
+                                buttonTextBN?: T;
+                                buttonLink?: T;
+                                modalButtonText?: T;
+                                modalButtonTextBN?: T;
+                                brochurePDF?: T;
+                                label?: T;
+                                labelBN?: T;
+                                style?: T;
+                                modalTitle?: T;
+                                modalTitleBN?: T;
+                                modalItems?:
+                                  | T
+                                  | {
+                                      icon?: T;
+                                      iconOriginal?: T;
+                                      pendingIconOriginal?: T;
+                                      pendingIconCrop?: T;
+                                      iconBlurDataURL?: T;
+                                      title?: T;
+                                      titleBN?: T;
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      id?: T;
+                                    };
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'offer-card'?:
+                      | T
+                      | {
+                          offerCards?:
+                            | T
+                            | {
+                                bgImage?: T;
+                                bgImageOriginal?: T;
+                                pendingBgImageOriginal?: T;
+                                pendingBgImageCrop?: T;
+                                bgImageBlurDataURL?: T;
+                                icon?: T;
+                                iconOriginal?: T;
+                                pendingIconOriginal?: T;
+                                pendingIconCrop?: T;
+                                iconBlurDataURL?: T;
+                                title?: T;
+                                titleBN?: T;
+                                subTitle?: T;
+                                subTitleBN?: T;
+                                text?: T;
+                                textBN?: T;
+                                buttonText?: T;
+                                buttonTextBN?: T;
+                                buttonLink?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'hash-link-card'?:
+                      | T
+                      | {
+                          hashLinkCards?:
+                            | T
+                            | {
+                                bgImage?: T;
+                                bgImageOriginal?: T;
+                                pendingBgImageOriginal?: T;
+                                pendingBgImageCrop?: T;
+                                bgImageBlurDataURL?: T;
+                                title?: T;
+                                titleBN?: T;
+                                buttonLink?: T;
+                                sectionId?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'why-choose-us'?:
           | T
           | {
@@ -7031,162 +7187,6 @@ export interface PagesSelect<T extends boolean = true> {
                     name?: T;
                     nameBN?: T;
                     id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'custom-card'?:
-          | T
-          | {
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              highlightedSubtitle?: T;
-              highlightedSubtitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              displayAsCarousel?: T;
-              addHorizontalPadding?: T;
-              mobileCardsPerView?: T;
-              tabletCardsPerView?: T;
-              laptopCardsPerView?: T;
-              desktopCardsPerView?: T;
-              card?:
-                | T
-                | {
-                    'corporate-cards'?:
-                      | T
-                      | {
-                          corporateCards?:
-                            | T
-                            | {
-                                bgImage?: T;
-                                bgImageOriginal?: T;
-                                pendingBgImageOriginal?: T;
-                                pendingBgImageCrop?: T;
-                                bgImageBlurDataURL?: T;
-                                icon?: T;
-                                iconOriginal?: T;
-                                pendingIconOriginal?: T;
-                                pendingIconCrop?: T;
-                                iconBlurDataURL?: T;
-                                descriptions?:
-                                  | T
-                                  | {
-                                      text?: T;
-                                      textBN?: T;
-                                      buttonText?: T;
-                                      buttonTextBN?: T;
-                                      buttonLink?: T;
-                                      id?: T;
-                                    };
-                                id?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                    'plan-card'?:
-                      | T
-                      | {
-                          planCards?:
-                            | T
-                            | {
-                                bgImage?: T;
-                                bgImageOriginal?: T;
-                                pendingBgImageOriginal?: T;
-                                pendingBgImageCrop?: T;
-                                bgImageBlurDataURL?: T;
-                                title?: T;
-                                titleBN?: T;
-                                subTitle?: T;
-                                subTitleBN?: T;
-                                description?: T;
-                                descriptionBN?: T;
-                                actionType?: T;
-                                buttonText?: T;
-                                buttonTextBN?: T;
-                                buttonLink?: T;
-                                modalButtonText?: T;
-                                modalButtonTextBN?: T;
-                                brochurePDF?: T;
-                                label?: T;
-                                labelBN?: T;
-                                style?: T;
-                                modalTitle?: T;
-                                modalTitleBN?: T;
-                                modalItems?:
-                                  | T
-                                  | {
-                                      icon?: T;
-                                      iconOriginal?: T;
-                                      pendingIconOriginal?: T;
-                                      pendingIconCrop?: T;
-                                      iconBlurDataURL?: T;
-                                      title?: T;
-                                      titleBN?: T;
-                                      description?: T;
-                                      descriptionBN?: T;
-                                      id?: T;
-                                    };
-                                id?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                    'offer-card'?:
-                      | T
-                      | {
-                          offerCards?:
-                            | T
-                            | {
-                                bgImage?: T;
-                                bgImageOriginal?: T;
-                                pendingBgImageOriginal?: T;
-                                pendingBgImageCrop?: T;
-                                bgImageBlurDataURL?: T;
-                                icon?: T;
-                                iconOriginal?: T;
-                                pendingIconOriginal?: T;
-                                pendingIconCrop?: T;
-                                iconBlurDataURL?: T;
-                                title?: T;
-                                titleBN?: T;
-                                subTitle?: T;
-                                subTitleBN?: T;
-                                text?: T;
-                                textBN?: T;
-                                buttonText?: T;
-                                buttonTextBN?: T;
-                                buttonLink?: T;
-                                id?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
-                    'hash-link-card'?:
-                      | T
-                      | {
-                          hashLinkCards?:
-                            | T
-                            | {
-                                bgImage?: T;
-                                bgImageOriginal?: T;
-                                pendingBgImageOriginal?: T;
-                                pendingBgImageCrop?: T;
-                                bgImageBlurDataURL?: T;
-                                title?: T;
-                                titleBN?: T;
-                                buttonLink?: T;
-                                sectionId?: T;
-                                id?: T;
-                              };
-                          id?: T;
-                          blockName?: T;
-                        };
                   };
               id?: T;
               blockName?: T;

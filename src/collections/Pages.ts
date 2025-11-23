@@ -266,6 +266,8 @@ export const Pages: CollectionConfig = {
         ShantaIntroSchema,
         ValuesThatShapeUsSchema,
         AgentVisionSchema,
+        // custom card
+        CustomCardSectionSchema,
         // home page unique
         WhyChooseUsSchema,
         FeaturedPlansSchema,
@@ -294,8 +296,6 @@ export const Pages: CollectionConfig = {
         CorporateIntroSchema,
         CorporateInfoSchema,
         CorporatePartnersSchema,
-        // custom card
-        CustomCardSectionSchema,
         // add on info
         AddonsInfoSchema,
         PlanInfoDesignSchema,
