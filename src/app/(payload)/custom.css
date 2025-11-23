@@ -28,4 +28,10 @@ button.popup-button-list__button.array-actions__action:has(.icon--copy) {
   display: flex !important; /* or whatever display value it originally had */
 }
 
-/* cropper */
+/* ───────────────────────────── */
+/* Hide the "Versions" top tab   */
+/* ───────────────────────────── */
+
+.doc-tabs__tabs .doc-tab[aria-label='Versions'] {
+  display: none !important;
+}

@@ -171,17 +171,23 @@ export interface User {
  */
 export interface Media {
   id: string;
-  alt?: string | null;
-  /**
-   * Temporary until the owning document publishes successfully
-   */
-  temporary?: boolean | null;
   ownerCollection?: string | null;
   ownerDocId?: string | null;
+  ownerDocSlug?: string | null;
+  ownerDocName?: string | null;
+  ownerBlockType?: string | null;
   ownerField?: string | null;
-  ownerSessionId?: string | null;
-  derivedFrom?: string | null;
+  uploadSessionId?: string | null;
+  /**
+   * Temporary file; will be purged if not finalized.
+   */
+  temporary?: boolean | null;
+  temporaryExpiresAt?: string | null;
   blurDataURL?: string | null;
+  /**
+   * Internal marker: whether this file belongs to the published version or last saved draft.
+   */
+  versionStage?: ('publish' | 'lastDraft') | null;
   prefix?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -6247,14 +6253,17 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  temporary?: T;
   ownerCollection?: T;
   ownerDocId?: T;
+  ownerDocSlug?: T;
+  ownerDocName?: T;
+  ownerBlockType?: T;
   ownerField?: T;
-  ownerSessionId?: T;
-  derivedFrom?: T;
+  uploadSessionId?: T;
+  temporary?: T;
+  temporaryExpiresAt?: T;
   blurDataURL?: T;
+  versionStage?: T;
   prefix?: T;
   updatedAt?: T;
   createdAt?: T;

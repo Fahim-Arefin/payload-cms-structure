@@ -201,14 +201,14 @@ export const mediaHooks = withMediaLifecycle({
       blockType: HOME_PAGE_WHY_CHOOSE_US_SLUG_AND_TAG,
       arrayKey: 'stats',
       mediaFields: ['icon'],
-      itemLabelField: 'label', // optional, helps with alt naming
+      // itemLabelField: 'label', // optional, helps with alt naming
     },
     {
       layoutKey: 'layout',
       blockType: HOME_PAGE_FEATURED_PLANS_SLUG_AND_TAG,
       arrayKey: 'plans',
       mediaFields: ['icon', 'image'],
-      itemLabelField: 'title', // (optional) better alt names
+      // itemLabelField: 'title', // (optional) better alt names
     },
     {
       layoutKey: 'layout',
@@ -245,21 +245,21 @@ export const mediaHooks = withMediaLifecycle({
       blockType: ABOUT_US_PAGE_SHANTA_MILESTONES_UNLOCKED_SLUG_AND_TAG,
       arrayKey: 'stats',
       mediaFields: ['icon'], // icon inside stats[]
-      itemLabelField: 'label',
+      // itemLabelField: 'label',
     },
     {
       layoutKey: 'layout',
       blockType: ABOUT_US_PAGE_SHANTA_FOOTPRINT_SLUG_AND_TAG,
       arrayKey: 'cards',
       mediaFields: ['image'],
-      itemLabelField: 'title',
+      // itemLabelField: 'title',
     },
     {
       layoutKey: 'layout',
       blockType: AGENT_ONBOARDING_PAGE_AGENT_VISION_SLUG_AND_TAG,
       arrayKey: 'items',
       mediaFields: ['icon'],
-      itemLabelField: 'title',
+      // itemLabelField: 'title',
     },
     {
       layoutKey: 'layout',
@@ -278,7 +278,7 @@ export const mediaHooks = withMediaLifecycle({
       blockType: CORPORATE_INFO_SLUG_AND_TAG,
       arrayKey: 'infos',
       mediaFields: ['icon'],
-      itemLabelField: 'title',
+      // itemLabelField: 'title',
     },
     // ⬇️ ADD THIS to blockArrayFields resource img
     // -------------------------------------------------------------------------------------------
@@ -288,28 +288,28 @@ export const mediaHooks = withMediaLifecycle({
       blockType: CORPORATE_INFO_SLUG_AND_TAG, // the parent block row
       arrayKey: 'resourceButtons', // the blocks[] inside CorporateInfo
       mediaFields: ['brochurePDF'], // the upload field on the BrochureButton block
-      itemLabelField: 'label', // optional, helps alt naming
+      // itemLabelField: 'label', // optional, helps alt naming
     },
     {
       layoutKey: 'layout',
       blockType: PLAN_INFO_DESIGN_03_SLUG_AND_TAG, // the parent block row
       arrayKey: 'resourceButtons', // the blocks[] inside CorporateInfo
       mediaFields: ['brochurePDF'], // the upload field on the BrochureButton block
-      itemLabelField: 'label', // optional, helps alt naming
+      // itemLabelField: 'label', // optional, helps alt naming
     },
     {
       layoutKey: 'layout',
       blockType: PLAN_INFO_DESIGN_04_SLUG_AND_TAG, // the parent block row
       arrayKey: 'resourceButtons', // the blocks[] inside CorporateInfo
       mediaFields: ['brochurePDF'], // the upload field on the BrochureButton block
-      itemLabelField: 'label', // optional, helps alt naming
+      // itemLabelField: 'label', // optional, helps alt naming
     },
     {
       layoutKey: 'layout',
       blockType: PLAN_INFO_DESIGN_05_SLUG_AND_TAG, // the parent block row
       arrayKey: 'resourceButtons', // the blocks[] inside CorporateInfo
       mediaFields: ['brochurePDF'], // the upload field on the BrochureButton block
-      itemLabelField: 'label', // optional, helps alt naming
+      // itemLabelField: 'label', // optional, helps alt naming
     },
 
     {
@@ -317,7 +317,7 @@ export const mediaHooks = withMediaLifecycle({
       blockType: CUSTOM_TAB_SLUG_AND_TAG, // the parent block row
       arrayKey: 'resourceButtons', // the blocks[] inside CorporateInfo
       mediaFields: ['brochurePDF'], // the upload field on the BrochureButton block
-      itemLabelField: 'label', // optional, helps alt naming
+      // itemLabelField: 'label', // optional, helps alt naming
     },
     // -------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------
@@ -326,21 +326,21 @@ export const mediaHooks = withMediaLifecycle({
       blockType: CORPORATE_PARTNERS_SLUG_AND_TAG,
       arrayKey: 'partners',
       mediaFields: ['image'], // generated array image field
-      itemLabelField: 'name', // optional, improves alt/ownerField naming
+      // itemLabelField: 'name', // optional, improves alt/ownerField naming
     },
     {
       layoutKey: 'layout',
       blockType: EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
       arrayKey: 'keyFeatures',
       mediaFields: ['icon'],
-      itemLabelField: 'name',
+      // itemLabelField: 'name',
     },
     {
       layoutKey: 'layout',
       blockType: PLAN_INFO_DESIGN_SLUG_AND_TAG,
       arrayKey: 'features',
       mediaFields: ['icon'],
-      itemLabelField: 'name',
+      // itemLabelField: 'name',
     },
     {
       layoutKey: 'layout',

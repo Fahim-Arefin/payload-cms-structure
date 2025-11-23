@@ -15,7 +15,6 @@ type Props = {
 
 export default function HeroItem({ slide, top, position }: Props) {
   const stableAlt = slide?.title || 'Hero image' // SSR-stable alt
-
   return (
     <>
       {/* Background image */}

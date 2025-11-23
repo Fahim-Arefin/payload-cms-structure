@@ -10,7 +10,6 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import sharp from 'sharp'
 
 import { Users } from './collections/Users'
-import { Media } from './collections/Media'
 import { Resume } from './collections/Resume'
 import { CareerApplication } from './collections/CareerApplication'
 import { AgentCareerApplication } from './collections/AgentCareerApplication'
@@ -25,6 +24,7 @@ import GlobalBlogs from './collections/globals/Blogs'
 import GlobalVlogs from './collections/globals/Vlogs'
 import AuditLogs from './collections/AuditLogs'
 import { getClientIP } from './lib/http'
+import Media from './collections/Media'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
