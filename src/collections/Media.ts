@@ -71,6 +71,7 @@ const Media: CollectionConfig = {
       'ownerBlockType',
       // 'ownerField',
     ],
+    listSearchableFields: ['filename', 'versionStage', 'ownerDocName', 'ownerBlockType'],
   },
 
   access: {

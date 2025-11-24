@@ -92,6 +92,22 @@ export const Pages: CollectionConfig = {
     description: 'Dynamic pages assembled from blocks',
     useAsTitle: 'name',
     defaultColumns: ['name', 'slug', '_status', 'updatedAt'],
+    // below code is on also on the main page.tsx below comment code
+    // preview: (doc) => {
+    //   const base =
+    //     process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'http://localhost:3000'
+
+    //   const slug = (doc?.slug as string) || 'index'
+    //   const path = slug === 'index' ? '/' : `/${slug}`
+
+    //   const params = new URLSearchParams()
+    //   params.set('preview', 'true')
+    //   params.set('draft', 'true')
+    //   if (doc?.id) params.set('id', String(doc.id))
+
+    //   const qs = params.toString()
+    //   return `${base}${path}${qs ? `?${qs}` : ''}`
+    // },
   },
   versions: { drafts: true },
   fields: [

@@ -35,7 +35,23 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    // livePreview: {
+    //   url: 'http://localhost:3000',
+    //   collections: ['pages'],
+    // },
+
+    // below code on and also on the preview route
+    livePreview: {
+      collections: ['pages'],
+      url: ({ data }) => {
+        const raw = typeof data?.slug === 'string' ? data.slug.trim() : ''
+        const slug = raw || 'index'
+        // 👉 this hits the dynamic preview route
+        return `http://localhost:3000/preview/${slug}`
+      },
+    },
   },
+
   upload: {
     limits: {
       fileSize: 50 * 1024 * 1024, // 50 MB per file
