@@ -225,6 +225,68 @@ export const Pages: CollectionConfig = {
     delete: ({ req }) => roleAtLeast(req.user, 'admin'),
   },
   timestamps: true,
+  // hooks: {
+  //   ...safeMediaHooks,
+
+  //   beforeChange: [
+  //     ({ req, data, operation }) => {
+  //       if (operation !== 'update') return
+  //       if (data?._status === 'published' && !roleAtLeast(req.user, 'admin')) {
+  //         throw new Error('Only Admin or Super Admin can publish.')
+  //       }
+  //     },
+  //   ],
+
+  //   // append your revalidation on top
+  //   afterChange: [
+  //     ...baseAfterChange,
+  //     async ({ req, doc, previousDoc, operation }) => {
+  //       // revalidate
+  //       try {
+  //         const slug = (doc as any)?.slug ?? (previousDoc as any)?.slug
+  //         if (slug) revalidateTag(pageTag(slug))
+  //         revalidateTag(pagesListTag)
+  //       } catch {}
+
+  //       // audit (compute publish from _status)
+  //       try {
+  //         const becamePublished =
+  //           (doc as any)?._status === 'published' && (previousDoc as any)?._status !== 'published'
+  //         const action = becamePublished ? 'publish' : operation
+
+  //         await req.payload.create({
+  //           collection: 'audit-logs',
+  //           data: {
+  //             action,
+  //             targetCollection: 'pages',
+  //             docId: String((doc as any).id),
+  //             actor: req.user?.id ?? null,
+  //             ip: getClientIP(req),
+  //             diff: { before: previousDoc ?? null, after: doc ?? null },
+  //           },
+  //         })
+  //       } catch (e) {
+  //         req.payload.logger.error('Audit log (pages) failed', e)
+  //       }
+
+  //       return doc
+  //     },
+  //   ],
+
+  //   afterDelete: [
+  //     ...baseAfterDelete,
+  //     async ({ doc, result }: any) => {
+  //       try {
+  //         const docs: any[] = Array.isArray(result?.docs) ? result.docs : doc ? [doc] : []
+  //         const slugs = docs.map((d) => String(d?.slug ?? '')).filter(Boolean)
+  //         for (const s of slugs) revalidateTag(pageTag(s))
+  //         revalidateTag(pagesListTag)
+  //       } catch {}
+  //     },
+  //   ],
+
+  //   afterError: [...baseAfterError],
+  // },
   hooks: {
     // spread whatever withMediaLifecycle gave us (or nothing)
     ...safeMediaHooks,
@@ -238,21 +300,28 @@ export const Pages: CollectionConfig = {
       },
     ],
 
-    // append your revalidation on top
     afterChange: [
       ...baseAfterChange,
       async ({ req, doc, previousDoc, operation }) => {
-        // revalidate
-        try {
-          const slug = (doc as any)?.slug ?? (previousDoc as any)?.slug
-          if (slug) revalidateTag(pageTag(slug))
-          revalidateTag(pagesListTag)
-        } catch {}
+        // 👀 Only treat calls with ?draft=true as "draft-only" saves
+        const hasDraftFlag = !!req?.query && (req.query as any).draft === 'true'
 
-        // audit (compute publish from _status)
+        // ✅ Revalidate live routes for:
+        //   - normal saves / publishes (no ?draft=true)
+        //   - Unpublish (published -> draft, also no ?draft=true)
+        if (!hasDraftFlag) {
+          try {
+            const slug = (doc as any)?.slug ?? (previousDoc as any)?.slug
+            if (slug) revalidateTag(pageTag(slug))
+            revalidateTag(pagesListTag)
+          } catch {}
+        }
+
+        // 📝 audit log still records all operations (draft + publish + unpublish)
         try {
           const becamePublished =
             (doc as any)?._status === 'published' && (previousDoc as any)?._status !== 'published'
+
           const action = becamePublished ? 'publish' : operation
 
           await req.payload.create({
@@ -286,11 +355,8 @@ export const Pages: CollectionConfig = {
       },
     ],
 
-    // (optional) if you also want to keep lifecycle’s afterError:
     afterError: [...baseAfterError],
   },
 }
-
-// Merge our own afterChange/afterDelete with media hooks
 
 export default Pages
