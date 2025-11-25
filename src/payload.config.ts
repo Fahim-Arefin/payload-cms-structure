@@ -47,7 +47,8 @@ export default buildConfig({
         const raw = typeof data?.slug === 'string' ? data.slug.trim() : ''
         const slug = raw || 'index'
         // 👉 this hits the dynamic preview route
-        return `http://localhost:3000/preview/${slug}`
+        // return `http://localhost:3000/preview/${slug}`
+        return `${process?.env?.API_URL}/preview/${slug}`
       },
     },
   },
