@@ -10,17 +10,17 @@ import AgentOnboardingOpportunitySchema from '@/blocks/agentOnboadringOpportunit
 import AgentVisionSchema from '@/blocks/agentVision/schema'
 import BLogDetailsSectionSchema from '@/blocks/blogDetails/schema'
 import AllBLogsSectionSchema from '@/blocks/blogs/schema'
-import ContactUsSchema from '@/blocks/contactUs/schema'
-import CorporateInfoSchema from '@/blocks/corporateInfo/schema'
-import CorporateIntroSchema from '@/blocks/corporateIntro/schema'
-import CorporatePartnersSchema from '@/blocks/corporatePartners/schema'
-import CustomCardSectionSchema from '@/blocks/customCardSection/schema'
 import CareerIntroSchema from '@/blocks/careerIntro/schema'
 import CareerOpeningSchema from '@/blocks/careerOpening/schema'
 import CareerProcessingSchema from '@/blocks/careerProcessingFlow/schema'
 import CareerResourcesSchema from '@/blocks/careerResources/schema'
 import CareerSwiperSchema from '@/blocks/careerSwiper/schema'
+import ContactUsSchema from '@/blocks/contactUs/schema'
+import CorporateInfoSchema from '@/blocks/corporateInfo/schema'
+import CorporateIntroSchema from '@/blocks/corporateIntro/schema'
+import CorporatePartnersSchema from '@/blocks/corporatePartners/schema'
 import CustomAccordionSchema from '@/blocks/customAccordion/schema'
+import CustomCardSectionSchema from '@/blocks/customCardSection/schema'
 import DirectorsMessagesSchema from '@/blocks/directorsMessage/schema'
 import FeaturedBlogVlogNewsSchema from '@/blocks/featuredBlogVlogNews/schema'
 import FeaturedPlansSchema from '@/blocks/featuredPlan/schema'
@@ -31,14 +31,15 @@ import LifeAtShantaSchema from '@/blocks/lifeAtShanta/schema'
 import LifeInsuranceSimplifiedSchema from '@/blocks/lifeInsuranceSimplified/schema'
 import LifeInsuranceVideoSchema from '@/blocks/lifeInsuranceVideo/schema'
 import MoreThanAWorkplaceSchema from '@/blocks/moreThanAWorkplace/schema'
+import MultiStagePlanSchema from '@/blocks/multiStagePlan/schema'
+import MultiStageIntroSchema from '@/blocks/multiStageTitle/schema'
 import AllNewsSectionSchema from '@/blocks/news/schema'
 import PlanInfoDesignSchema from '@/blocks/planInfoDesign/schema'
 import PlanInfoDesign03Schema from '@/blocks/planInfoDesign03/schema'
 import PlanInfoDesign04Schema from '@/blocks/planInfoDesign04/schema'
 import PlanInfoDesign05Schema from '@/blocks/planInfoDesign05/schema'
-import MultiStagePlanSchema from '@/blocks/multiStagePlan/schema'
-import MultiStageIntroSchema from '@/blocks/multiStageTitle/schema'
 // import PlanCardSchema from '@/blocks/planCard/schema'
+import CustomTabSchema from '@/blocks/customTab/schema'
 import PremCalculatorPageSchema from '@/blocks/premCalculatorPage/schema'
 import PremiumCalculatorSchema from '@/blocks/premiumCalculator/schema'
 import PurchaseFormSchema from '@/blocks/purchaseFormBlock/schema'
@@ -54,12 +55,12 @@ import ValuesThatShapeUsSchema from '@/blocks/valuesThatShapeUs/schema'
 import AllVLogsSectionSchema from '@/blocks/vlogs/schema'
 import WhyChooseUsSchema from '@/blocks/whyChooseUs/schema'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
+import { getClientIP } from '@/lib/http'
+import { roleAtLeast } from '@/lib/rbac'
 import { mediaHooks } from '@/utils/media/mediaHooks'
 import { revalidateTag } from 'next/cache'
-import type { CollectionConfig } from 'payload'
-import CustomTabSchema from '@/blocks/customTab/schema'
-import { roleAtLeast } from '@/lib/rbac'
-import { getClientIP } from '@/lib/http'
+import { type CollectionConfig } from 'payload'
+import { APIError } from '@/lib/apiError'
 
 // const mediaHooks = withMediaLifecycle({
 //   collectionSlug: 'pages',
@@ -92,24 +93,9 @@ export const Pages: CollectionConfig = {
     description: 'Dynamic pages assembled from blocks',
     useAsTitle: 'name',
     defaultColumns: ['name', 'slug', '_status', 'updatedAt'],
-    // below code is on also on the main page.tsx below comment code
-    // preview: (doc) => {
-    //   const base =
-    //     process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'http://localhost:3000'
-
-    //   const slug = (doc?.slug as string) || 'index'
-    //   const path = slug === 'index' ? '/' : `/${slug}`
-
-    //   const params = new URLSearchParams()
-    //   params.set('preview', 'true')
-    //   params.set('draft', 'true')
-    //   if (doc?.id) params.set('id', String(doc.id))
-
-    //   const qs = params.toString()
-    //   return `${base}${path}${qs ? `?${qs}` : ''}`
-    // },
   },
   versions: { drafts: true },
+
   fields: [
     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false, readOnly: true } },
     { name: 'name', label: 'Name', type: 'text', required: true },
@@ -223,6 +209,10 @@ export const Pages: CollectionConfig = {
     create: ({ req }) => roleAtLeast(req.user, 'admin'),
     update: ({ req }) => roleAtLeast(req.user, 'editor'),
     delete: ({ req }) => roleAtLeast(req.user, 'admin'),
+    // // Version-enabled Collections only
+    // readVersions: ({ req }) => {
+    //   return roleAtLeast(req.user, 'admin')
+    // },
   },
   timestamps: true,
   // hooks: {
@@ -291,11 +281,42 @@ export const Pages: CollectionConfig = {
     // spread whatever withMediaLifecycle gave us (or nothing)
     ...safeMediaHooks,
 
-    beforeChange: [
-      ({ req, data, operation }) => {
-        if (operation !== 'update') return
-        if (data?._status === 'published' && !roleAtLeast(req.user, 'admin')) {
-          throw new Error('Only Admin or Super Admin can publish.')
+    // stop editor to publish
+    // beforeChange: [
+    //   ({ req, data, operation }) => {
+    //     if (operation !== 'update') return
+    //     if (data?._status === 'published' && !roleAtLeast(req.user, 'admin')) {
+    //       throw new APIError('Only Admin or Super Admin can publish.', 403)
+    //     }
+    //   },
+    // ],
+
+    // ✅ Only rule: Editors may *only* perform "draft" saves.
+    beforeValidate: [
+      ({ req, operation }) => {
+        if (operation !== 'create' && operation !== 'update') return
+
+        // Admin / Super Admin → full power
+        if (roleAtLeast(req.user, 'admin')) return
+
+        // Detect if this request is a "Save draft" action
+        const body = (req.body || {}) as any
+        const query = (req.query || {}) as any
+        const rawDraft = body?.draft ?? query?.draft
+
+        const isDraftSave =
+          rawDraft === true || rawDraft === 'true' || rawDraft === 1 || rawDraft === '1'
+
+        // Editors are allowed to do ONLY draft saves.
+        // Any non-draft write = publish / unpublish / revert / change live doc.
+        if (!isDraftSave) {
+          throw new APIError(
+            [
+              'Only Admin or Super Admin can publish, unpublish, or revert pages.',
+              'Draft was not saved. Please click "Save draft" instead.',
+            ].join('\n'),
+            403,
+          )
         }
       },
     ],
