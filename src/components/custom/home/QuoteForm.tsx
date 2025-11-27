@@ -41,6 +41,7 @@ import useSSRLanguage from '@/hooks/useSSRLanguage'
 import LocalizedString from '../shared/LocalizedString'
 import LocalizedRichText from '../shared/LocalizedRichText'
 import { PremiumCalculatorBlockType } from '@/types/payloadCustomTypes'
+import LocalizedText from '../shared/LocalizedText'
 
 interface FormData {
   PlanCode: number

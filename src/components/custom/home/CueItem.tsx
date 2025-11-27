@@ -97,12 +97,8 @@ function CueItem({ card, index }: Props) {
       </div>
 
       {/* overlay background: #0000005E;*/}
-      {!showMore && (
-        <>
-          <div className="lg:hidden absolute inset-0 bg-black/50 rounded-2xl z-10" />
-          <div className="hidden lg:block absolute inset-0 bg-black/10 rounded-2xl z-10" />
-        </>
-      )}
+      <div className="lg:hidden absolute inset-0 bg-black/50 rounded-2xl z-10" />
+      <div className="hidden lg:block absolute inset-0 bg-black/10 rounded-2xl z-10" />
     </div>
   )
 }
