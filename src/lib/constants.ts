@@ -59,6 +59,7 @@ export const ABOUT_US_PAGE = 'About Us Page'
 export const BOD_PAGE = 'BOD Page'
 export const LEARERS_PAGE = 'Leaders Page'
 export const AGENT_ONBOARDING_PAGE = 'Agent Onboarding Page'
+export const CORPORATE_PLAN_PAGE = 'Corporate Plan Page'
 
 // home page constants
 // ----------------------------------------------------------------------------------------------

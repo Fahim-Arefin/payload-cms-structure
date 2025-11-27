@@ -2,6 +2,7 @@
 import type { Block } from 'payload'
 import { bnNum } from '@/lib/utils'
 import {
+  COMMON,
   CORPORATE_PARTNERS_BLOCK_LABEL,
   CORPORATE_PARTNERS_BLOCK_THUMBNAIL_URL,
   CORPORATE_PARTNERS_SLUG_AND_TAG,
@@ -53,6 +54,9 @@ const CorporatePartnersSchema: Block = {
   labels: {
     singular: CORPORATE_PARTNERS_BLOCK_LABEL,
     plural: CORPORATE_PARTNERS_BLOCK_LABEL,
+  },
+  admin: {
+    group: COMMON,
   },
 
   imageURL: CORPORATE_PARTNERS_BLOCK_THUMBNAIL_URL,

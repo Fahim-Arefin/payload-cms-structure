@@ -486,6 +486,7 @@ import {
   CUSTOM_TAB_PAGE_BLOCK_LABEL,
   CUSTOM_TAB_BLOCK_THUMBNAIL_URL,
   CUSTOM_TAB_SLUG_AND_TAG,
+  CUSTOM,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
@@ -722,6 +723,10 @@ const CustomTabSchema: Block = {
   labels: {
     singular: CUSTOM_TAB_PAGE_BLOCK_LABEL,
     plural: CUSTOM_TAB_PAGE_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: CUSTOM,
   },
 
   imageURL: CUSTOM_TAB_BLOCK_THUMBNAIL_URL,

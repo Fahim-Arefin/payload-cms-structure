@@ -62,21 +62,6 @@ import { revalidateTag } from 'next/cache'
 import { type CollectionConfig } from 'payload'
 import { APIError } from '@/lib/apiError'
 
-// const mediaHooks = withMediaLifecycle({
-//   collectionSlug: 'pages',
-//   blockArrayFields: [
-//     {
-//       layoutKey: 'layout',
-//       blockType: HOME_PAGE_HERO_SLUG_AND_TAG,
-//       arrayKey: 'heroes',
-//       mediaFields: ['image'],
-//     },
-//   ],
-//   onAfterChange: async ({ req }) => {
-//     triggerMediaTemporaryPurge(req)
-//   },
-// })
-
 // ✅ always spread a safe object
 const safeMediaHooks: NonNullable<CollectionConfig['hooks']> = mediaHooks ?? {}
 
@@ -137,8 +122,17 @@ export const Pages: CollectionConfig = {
         ShantaIntroSchema,
         ValuesThatShapeUsSchema,
         AgentVisionSchema,
+        ContactUsSchema,
+        CorporateIntroSchema,
+        CorporatePartnersSchema,
+        AddonsInfoSchema,
+        PlanInfoDesignSchema,
+        PlanInfoDesign03Schema,
+        PlanInfoDesign04Schema,
+        PlanInfoDesign05Schema,
         // custom card
         CustomCardSectionSchema,
+        CustomTabSchema,
         // home page unique
         WhyChooseUsSchema,
         FeaturedPlansSchema,
@@ -161,18 +155,9 @@ export const Pages: CollectionConfig = {
         AgentOnboardingOpportunitySchema,
         MoreThanAWorkplaceSchema,
         AgentOnboardingFormSchema,
-        // contact us block
-        ContactUsSchema,
         // corporate page
-        CorporateIntroSchema,
         CorporateInfoSchema,
-        CorporatePartnersSchema,
-        // add on info
-        AddonsInfoSchema,
-        PlanInfoDesignSchema,
-        PlanInfoDesign03Schema,
-        PlanInfoDesign04Schema,
-        PlanInfoDesign05Schema,
+        //
         APPDSchema,
         AllBLogsSectionSchema,
         BLogDetailsSectionSchema,
@@ -200,7 +185,6 @@ export const Pages: CollectionConfig = {
         SupportFeedbackSchema,
         PremCalculatorPageSchema,
         PurchaseFormSchema,
-        CustomTabSchema,
       ],
     },
   ],

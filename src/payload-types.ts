@@ -750,6 +750,1084 @@ export interface Page {
          */
         backgroundColor?: string | null;
         /**
+         * When ON, this block renders data from **Global → Contact Us**.
+         *
+         * **Before enabling:** fill up the Global → Contact Us data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contact-us-form';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #9A4E46). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Rich text (about 1–3 short paragraphs). Up to ~400 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * রিচ টেক্সট (১–৩টি সংক্ষিপ্ত অনুচ্ছেদ)। সর্বোচ্চ প্রায় ৪০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Heading above the stats section. Max 80 characters.
+         */
+        statsTitle?: string | null;
+        /**
+         * স্ট্যাটস সেকশনের শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        statsTitleBN?: string | null;
+        /**
+         * Add key metrics. Each item has a value and a short label (both EN/BN).
+         */
+        stats?:
+          | {
+              /**
+               * Displayed metric value (e.g., “1.2M” or “25+”). Max 50 characters.
+               */
+              value: string;
+              /**
+               * প্রদর্শিত মান (যেমন “১.২M” বা “২৫+”). সর্বোচ্চ ৫০ অক্ষর।
+               */
+              valueBN: string;
+              /**
+               * Short label (e.g., “Policies Issued”). Max 50 characters.
+               */
+              label: string;
+              /**
+               * সংক্ষিপ্ত লেবেল। সর্বোচ্চ ৫০ অক্ষর।
+               */
+              labelBN: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'corporate-intro';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Add partners with a logo and name (EN/BN).
+         */
+        partners: {
+          /**
+           * Upload the partner logo (square logo recommended 340:250).
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Display name. Max 60 characters.
+           */
+          name: string;
+          /**
+           * প্রদর্শিত নাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          nameBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'corporate-partners';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must be inside Title. Max 40.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must be inside Subtitle. Max 40.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের মধ্যে থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~800 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৮০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Select which image to display on the UI.
+         */
+        imageVariant?: ('square' | 'wide') | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Square image (optional). Recommended 1:1.
+         */
+        imageSquare: string | Media;
+        imageSquareOriginal?: (string | null) | Media;
+        pendingImageSquareOriginal?: string | null;
+        pendingImageSquareCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageSquareBlurDataURL?: string | null;
+        /**
+         * Wide image (optional). Recommended 16:9.
+         */
+        imageWide: string | Media;
+        imageWideOriginal?: (string | null) | Media;
+        pendingImageWideOriginal?: string | null;
+        pendingImageWideCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageWideBlurDataURL?: string | null;
+        /**
+         * Max 80 characters.
+         */
+        infoTitle?: string | null;
+        /**
+         * সর্বোচ্চ ৮০ অক্ষর।
+         */
+        infoTitleBN?: string | null;
+        /**
+         * Optional, must appear inside Info Title.
+         */
+        infoTitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক, ইনফো শিরোনামের মধ্যে থাকতে হবে।
+         */
+        infoTitleHighlightedBN?: string | null;
+        /**
+         * Max 120 characters.
+         */
+        infoSubtitle?: string | null;
+        /**
+         * সর্বোচ্চ ১২০ অক্ষর।
+         */
+        infoSubtitleBN?: string | null;
+        /**
+         * Optional, must appear inside Info Subtitle.
+         */
+        infoSubtitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক, ইনফো উপশিরোনামের মধ্যে থাকতে হবে।
+         */
+        infoSubtitleHighlightedBN?: string | null;
+        /**
+         * Up to ~800 characters.
+         */
+        infoDescription?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৮০০ অক্ষর।
+         */
+        infoDescriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Each feature needs an icon (required) and a name (EN/BN, required).
+         */
+        keyFeatures?:
+          | {
+              /**
+               * Square icon (1:1).
+               */
+              icon: string | Media;
+              iconOriginal?: (string | null) | Media;
+              pendingIconOriginal?: string | null;
+              pendingIconCrop?: string | null;
+              iconBlurDataURL?: string | null;
+              /**
+               * Max 60 characters.
+               */
+              name: string;
+              /**
+               * সর্বোচ্চ ৬০ অক্ষর।
+               */
+              nameBN: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'add-on-info';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN: string;
+        /**
+         * Short text. Max 400 characters.
+         */
+        description: string;
+        /**
+         * সংক্ষিপ্ত টেক্সট। সর্বোচ্চ ৪০০ অক্ষর।
+         */
+        descriptionBN: string;
+        /**
+         * Main background image. 516:705 recommended.
+         */
+        bgImageDesktop: string | Media;
+        bgImageDesktopOriginal?: (string | null) | Media;
+        pendingBgImageDesktopOriginal?: string | null;
+        pendingBgImageDesktopCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        bgImageDesktopBlurDataURL?: string | null;
+        /**
+         * Main background image. 300:200 recommended.
+         */
+        bgImageMobile: string | Media;
+        bgImageMobileOriginal?: (string | null) | Media;
+        pendingBgImageMobileOriginal?: string | null;
+        pendingBgImageMobileCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        bgImageMobileBlurDataURL?: string | null;
+        /**
+         * Heading above features. Max 80 chars.
+         */
+        featuresTitle: string;
+        /**
+         * ফিচার শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        featuresTitleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Key Features Title. Max 80 characters.
+         */
+        featuresTitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক। কী ফিচার শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        featuresTitleHighlightedBN?: string | null;
+        /**
+         * Each feature needs an icon and a short name (EN/BN).
+         */
+        features: {
+          /**
+           * Square icon. 1:1 recommended.
+           */
+          icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
+          /**
+           * Max 60 characters.
+           */
+          name: string;
+          /**
+           * সর্বোচ্চ ৬০ অক্ষর।
+           */
+          nameBN: string;
+          id?: string | null;
+        }[];
+        /**
+         * Text shown on the button. Max 24 characters.
+         */
+        buttonText?: string | null;
+        /**
+         * বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        buttonTextBN?: string | null;
+        /**
+         * Pick an internal Page to navigate to when the CTA button is clicked (required if CTA text is set).
+         */
+        buttonLink?: (string | null) | Page;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-info-design';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 80 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Subtitle. Max 80 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~600 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Tall image (630×700, aspect ≈ 0.9). Required.
+         */
+        imageTall: string | Media;
+        imageTallOriginal?: (string | null) | Media;
+        pendingImageTallOriginal?: string | null;
+        pendingImageTallCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageTallBlurDataURL?: string | null;
+        /**
+         * Wide image (500×370, aspect ≈ 1.351). Required.
+         */
+        imageWide: string | Media;
+        imageWideOriginal?: (string | null) | Media;
+        pendingImageWideOriginal?: string | null;
+        pendingImageWideCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageWideBlurDataURL?: string | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Which image to display on desktop layouts.
+         */
+        desktopImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Which image to display on mobile layouts.
+         */
+        mobileImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Max 60 characters.
+         */
+        cardTitle?: string | null;
+        /**
+         * সর্বোচ্চ ৬০ অক্ষর।
+         */
+        cardTitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Card Title. Max 80 characters.
+         */
+        cardTitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক। কার্ড শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        cardTitleHighlightedBN?: string | null;
+        /**
+         * Max 120 characters.
+         */
+        cardSubtitle?: string | null;
+        /**
+         * সর্বোচ্চ ১২০ অক্ষর।
+         */
+        cardSubtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Card Subtitle. Max 80 characters.
+         */
+        cardSubtitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক। কার্ড সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        cardSubtitleHighlightedBN?: string | null;
+        /**
+         * Choose whether individual card items should render with a border.
+         */
+        cardItemBorder?: ('border' | 'no-border') | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #9C8639).
+         */
+        cardItemBorderColor?: string | null;
+        /**
+         * Hex color with optional alpha: #RRGGBB or #RRGGBBAA (e.g., #FFFFFF or #FFFFFF80).
+         */
+        cardItemBorderBgColor?: string | null;
+        /**
+         * Each item has an icon (1:1) and a short description (EN/BN).
+         */
+        cardItems?:
+          | {
+              /**
+               * Square icon (1:1).
+               */
+              icon?: (string | null) | Media;
+              iconOriginal?: (string | null) | Media;
+              pendingIconOriginal?: string | null;
+              pendingIconCrop?: string | null;
+              iconBlurDataURL?: string | null;
+              /**
+               * Short line. Max 200 characters.
+               */
+              description?: string | null;
+              /**
+               * সংক্ষিপ্ত লাইন। সর্বোচ্চ ২০০ অক্ষর।
+               */
+              descriptionBN?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Add resource buttons that appear below the content (maximum 3 buttons)
+         */
+        resourceButtons?:
+          | (
+              | {
+                  /**
+                   * Upload/select the brochure PDF.
+                   */
+                  brochurePDF?: (string | null) | Media;
+                  /**
+                   * Max 60 characters.
+                   */
+                  label?: string | null;
+                  /**
+                   * সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  labelBN?: string | null;
+                  style?: ('primary' | 'secondary') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'brochure-button';
+                }
+              | {
+                  /**
+                   * Text shown on the call-to-action button. Max 60 characters.
+                   */
+                  buttonText: string;
+                  /**
+                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  buttonTextBN: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. When clicking the button it will navigate to this page.
+                   */
+                  buttonLink: string | Page;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'link-button';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-info-design-03';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 80 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Subtitle. Max 80 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~600 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Tall image (630×700, aspect ≈ 0.9). Required.
+         */
+        imageTall: string | Media;
+        imageTallOriginal?: (string | null) | Media;
+        pendingImageTallOriginal?: string | null;
+        pendingImageTallCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageTallBlurDataURL?: string | null;
+        /**
+         * Wide image (500×370, aspect ≈ 1.351). Required.
+         */
+        imageWide: string | Media;
+        imageWideOriginal?: (string | null) | Media;
+        pendingImageWideOriginal?: string | null;
+        pendingImageWideCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageWideBlurDataURL?: string | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Which image to display on desktop layouts.
+         */
+        desktopImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Which image to display on mobile layouts.
+         */
+        mobileImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Texts shown around the orange circle and in the center.
+         */
+        circleInfo?: {
+          /**
+           * e.g., “Minimum Coverage” (max 80).
+           */
+          centerTitle?: string | null;
+          /**
+           * যেমন: “ন্যূনতম কভারেজ” (সর্বোচ্চ ৮০).
+           */
+          centerTitleBN?: string | null;
+          /**
+           * e.g., “BDT 100,000” (max 120).
+           */
+          centerValue?: string | null;
+          /**
+           * যেমন: “বিডিটি ১,০০,০০০” (সর্বোচ্চ ১২০).
+           */
+          centerValueBN?: string | null;
+          /**
+           * e.g., “Age At Entry” (max 80).
+           */
+          topLeftLabel?: string | null;
+          /**
+           * যেমন: “ভর্তির বয়স” (সর্বোচ্চ ৮০).
+           */
+          topLeftLabelBN?: string | null;
+          /**
+           * e.g., “18 - 60 Years” (max 120).
+           */
+          topLeftValue?: string | null;
+          /**
+           * যেমন: “১৮ - ৬০ বছর” (সর্বোচ্চ ১২০).
+           */
+          topLeftValueBN?: string | null;
+          /**
+           * e.g., “Policy Term” (max 80).
+           */
+          topRightLabel?: string | null;
+          /**
+           * যেমন: “পলিসির মেয়াদ” (সর্বোচ্চ ৮০).
+           */
+          topRightLabelBN?: string | null;
+          /**
+           * e.g., “Same As Your Basic Plan” (max 120).
+           */
+          topRightValue?: string | null;
+          /**
+           * যেমন: “আপনার বেসিক প্ল্যানের সমান” (সর্বোচ্চ ১২০).
+           */
+          topRightValueBN?: string | null;
+          /**
+           * e.g., “Maximum Coverage” (max 80).
+           */
+          bottomLeftLabel?: string | null;
+          /**
+           * যেমন: “সর্বোচ্চ কভারেজ” (সর্বোচ্চ ৮০).
+           */
+          bottomLeftLabelBN?: string | null;
+          /**
+           * e.g., “BDT 5,000,000” (max 120).
+           */
+          bottomLefValue?: string | null;
+          /**
+           * যেমন: “বিডিটি ৫০,০০,০০০” (সর্বোচ্চ ১২০).
+           */
+          bottomLefValueBN?: string | null;
+          /**
+           * e.g., “Premium Rate” (max 80).
+           */
+          bottomRightLabel?: string | null;
+          /**
+           * যেমন: “প্রিমিয়াম হার” (সর্বোচ্চ ৮০).
+           */
+          bottomRightLabelBN?: string | null;
+          /**
+           * e.g., “Affordable Extensive Protection!” (max 120).
+           */
+          bottomRightValue?: string | null;
+          /**
+           * যেমন: “সাশ্রয়ী, বিস্তৃত সুরক্ষা!” (সর্বোচ্চ ১২০).
+           */
+          bottomRightValueBN?: string | null;
+        };
+        /**
+         * Add resource buttons that appear below the content (maximum 3 buttons)
+         */
+        resourceButtons?:
+          | (
+              | {
+                  /**
+                   * Upload/select the brochure PDF.
+                   */
+                  brochurePDF?: (string | null) | Media;
+                  /**
+                   * Max 60 characters.
+                   */
+                  label?: string | null;
+                  /**
+                   * সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  labelBN?: string | null;
+                  style?: ('primary' | 'secondary') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'brochure-button';
+                }
+              | {
+                  /**
+                   * Text shown on the call-to-action button. Max 60 characters.
+                   */
+                  buttonText: string;
+                  /**
+                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  buttonTextBN: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. When clicking the button it will navigate to this page.
+                   */
+                  buttonLink: string | Page;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'link-button';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-info-design-04';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 80 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Subtitle. Max 80 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~600 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Tall image (630×700, aspect ≈ 0.9). Required.
+         */
+        imageTall: string | Media;
+        imageTallOriginal?: (string | null) | Media;
+        pendingImageTallOriginal?: string | null;
+        pendingImageTallCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageTallBlurDataURL?: string | null;
+        /**
+         * Wide image (500×370, aspect ≈ 1.351). Required.
+         */
+        imageWide: string | Media;
+        imageWideOriginal?: (string | null) | Media;
+        pendingImageWideOriginal?: string | null;
+        pendingImageWideCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageWideBlurDataURL?: string | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Which image to display on desktop layouts.
+         */
+        desktopImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Which image to display on mobile layouts.
+         */
+        mobileImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Add one or more extra description blocks. Each supports EN/BN Rich Text (same validator + ~600 chars).
+         */
+        descriptions?:
+          | {
+              /**
+               * Up to ~1600 characters.
+               */
+              description?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              /**
+               * সর্বোচ্চ ~১৬০০ অক্ষর।
+               */
+              descriptionBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-info-design-05';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
          * Primary heading. Max 100 characters.
          */
         title: string;
@@ -1148,6 +2226,952 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'custom-card';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Keep this setting checked unless you are creating content for the 'Learn More' page.
+         */
+        addPadding?: boolean | null;
+        /**
+         * Primary heading. Max 100 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Title. Max 100 chars.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 100 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Subtitle. Max 100 chars.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~500 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৫০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Checked the check box only for `step content`. If Half Width is true it will take half width, and you can display image on the other half. If unchecked, image options are hidden.
+         */
+        halfWidth?: boolean | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Which image to display on desktop layouts.
+         */
+        desktopImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Which image to display on mobile layouts.
+         */
+        mobileImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Tall image (630×650). Required when Half Width is enabled.
+         */
+        imageTall?: (string | null) | Media;
+        imageTallOriginal?: (string | null) | Media;
+        pendingImageTallOriginal?: string | null;
+        pendingImageTallCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageTallBlurDataURL?: string | null;
+        /**
+         * Wide image (500×370, aspect ≈ 1.351). Required when Half Width is enabled.
+         */
+        imageWide?: (string | null) | Media;
+        imageWideOriginal?: (string | null) | Media;
+        pendingImageWideOriginal?: string | null;
+        pendingImageWideCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageWideBlurDataURL?: string | null;
+        /**
+         * Add each tab header with a one-word “value” key, then choose exactly one content block.
+         */
+        tabs: {
+          /**
+           * e.g., features, eligibility, benefits
+           */
+          value: string;
+          label: string;
+          labelBN?: string | null;
+          /**
+           * Pick one content block for this tab.
+           */
+          content: (
+            | {
+                /**
+                 * If enabled, this item will be rendered using full-width layout.
+                 */
+                fullWidth?: boolean | null;
+                /**
+                 * If enabled, there will be a hover effect.
+                 */
+                hoverVisibility?: boolean | null;
+                /**
+                 * If not enabled, the description will be shown only on hover. If enabled description will be shown always
+                 */
+                desVisibility?: boolean | null;
+                /**
+                 * Add one or more items (icon 1:1, EN/BN title + description).
+                 */
+                items: {
+                  /**
+                   * Square icon, PNG/SVG preferred. Blur placeholder generated automatically.
+                   */
+                  icon: string | Media;
+                  iconOriginal?: (string | null) | Media;
+                  pendingIconOriginal?: string | null;
+                  pendingIconCrop?: string | null;
+                  iconBlurDataURL?: string | null;
+                  /**
+                   * Max 100 characters.
+                   */
+                  title: string;
+                  /**
+                   * সর্বোচ্চ ১০০ অক্ষর।
+                   */
+                  titleBN: string;
+                  /**
+                   * Up to ~5000 characters.
+                   */
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                   */
+                  descriptionBN?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                }[];
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'descriptive-content';
+              }
+            | {
+                uploadSessionId?: string | null;
+                /**
+                 * Each item may carry its own icon and age/condition fields.
+                 */
+                eligibilityData: {
+                  /**
+                   * Hex color in #FCF4EB. Length ৭.
+                   */
+                  backGroundColor?: string | null;
+                  /**
+                   * Hex color in #FFFFFF. Length ৭.
+                   */
+                  borderColor?: string | null;
+                  /**
+                   * Square icon (PNG/SVG). Blur placeholder generated automatically. Aspect 1:1.
+                   */
+                  icon: string | Media;
+                  iconOriginal?: (string | null) | Media;
+                  pendingIconOriginal?: string | null;
+                  pendingIconCrop?: string | null;
+                  iconBlurDataURL?: string | null;
+                  iconTitle?: string | null;
+                  iconTitleBN?: string | null;
+                  age?: {
+                    title?: string | null;
+                    titleBN?: string | null;
+                    minAgeLabel?: string | null;
+                    minAgeLabelBN?: string | null;
+                    minAgeValue?: string | null;
+                    minAgeValueBN?: string | null;
+                    minAgeValuePeriod?: string | null;
+                    minAgeValuePeriodBN?: string | null;
+                    maxAgeLabel?: string | null;
+                    maxAgeLabelBN?: string | null;
+                    maxAgeValue?: string | null;
+                    maxAgeValueBN?: string | null;
+                    maxAgeValuePeriod?: string | null;
+                    maxAgeValuePeriodBN?: string | null;
+                  };
+                  /**
+                   * Optional. Example: value = "10-20 Years".
+                   */
+                  policyTerm?: {
+                    title?: string | null;
+                    titleBN?: string | null;
+                    value?: string | null;
+                    valueBN?: string | null;
+                  };
+                  /**
+                   * Optional. Example: value = "25 Years".
+                   */
+                  maturityAge?: {
+                    title?: string | null;
+                    titleBN?: string | null;
+                    value?: string | null;
+                    valueBN?: string | null;
+                  };
+                  physicalCondition?: {
+                    title?: string | null;
+                    titleBN?: string | null;
+                    value?: string | null;
+                    valueBN?: string | null;
+                  };
+                  id?: string | null;
+                }[];
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'eligibility-content';
+              }
+            | {
+                uploadSessionId?: string | null;
+                /**
+                 * Add one or more items (icon 1:1, EN/BN title + description).
+                 */
+                additionalBenefits: {
+                  /**
+                   * Square image for mobile view. Aspect 4:3. Ideal PNG/JPG. Blur placeholder generated automatically.
+                   */
+                  mobileImage: string | Media;
+                  mobileImageOriginal?: (string | null) | Media;
+                  pendingMobileImageOriginal?: string | null;
+                  pendingMobileImageCrop?: string | null;
+                  /**
+                   * Auto-generated Base64 blur
+                   */
+                  mobileImageBlurDataURL?: string | null;
+                  /**
+                   * Portrait image for desktop view. Aspect ≈ 500:700 (~0.714). Blur placeholder generated automatically.
+                   */
+                  desktopImage: string | Media;
+                  desktopImageOriginal?: (string | null) | Media;
+                  pendingDesktopImageOriginal?: string | null;
+                  pendingDesktopImageCrop?: string | null;
+                  /**
+                   * Auto-generated Base64 blur
+                   */
+                  desktopImageBlurDataURL?: string | null;
+                  /**
+                   * Max 120 characters.
+                   */
+                  title?: string | null;
+                  /**
+                   * সর্বোচ্চ ১২০ অক্ষর।
+                   */
+                  titleBN?: string | null;
+                  /**
+                   * Optional. Must appear verbatim inside Title. Max 120 chars.
+                   */
+                  highlightedText?: string | null;
+                  /**
+                   * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+                   */
+                  highlightedTextBN?: string | null;
+                  /**
+                   * Max 120 characters.
+                   */
+                  subtitle?: string | null;
+                  /**
+                   * সর্বোচ্চ ১২০ অক্ষর।
+                   */
+                  subtitleBN?: string | null;
+                  /**
+                   * Optional. Must appear verbatim inside Subtitle. Max 120 chars.
+                   */
+                  highlightedSubtitle?: string | null;
+                  /**
+                   * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+                   */
+                  highlightedSubtitleBN?: string | null;
+                  benefits?:
+                    | {
+                        benefit: string;
+                        benefitBN?: string | null;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  /**
+                   * Text shown on the plan’s call-to-action button. Max 100 characters.
+                   */
+                  plansButtonText?: string | null;
+                  /**
+                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ১০০ অক্ষর।
+                   */
+                  plansButtonTextBN?: string | null;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                   */
+                  plansButtonLink?: (string | null) | Page;
+                  /**
+                   * Up to ~5000 characters.
+                   */
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                   */
+                  descriptionBN?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                }[];
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'additional-benefit-content';
+              }
+            | {
+                /**
+                 * Add one or more items (description).
+                 */
+                items: {
+                  /**
+                   * Up to ~5000 characters.
+                   */
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                   */
+                  descriptionBN?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                }[];
+                /**
+                 * if true then font and content gap will be increased
+                 */
+                LargeFont?: boolean | null;
+                /**
+                 * Up to ~5000 characters.
+                 */
+                additionalDescription?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+                /**
+                 * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                 */
+                additionalDescriptionBN?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'step-content';
+              }
+            | {
+                /**
+                 * Up to ~5000 characters.
+                 */
+                description?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+                /**
+                 * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                 */
+                descriptionBN?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+                /**
+                 * Text shown on the call-to-action button. Max 24 characters.
+                 */
+                buttonText?: string | null;
+                /**
+                 * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+                 */
+                buttonTextBN?: string | null;
+                /**
+                 * Pick an internal Page to link to. If you prefer an external link instead, leave this empty and fill the External URL below.
+                 */
+                buttonLink?: (string | null) | Page;
+                /**
+                 * Absolute URL starting with http:// or https://. If provided, this will be used instead of the internal Page link.
+                 */
+                buttonExternalUrl?: string | null;
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'details-benefit-content';
+              }
+            | {
+                /**
+                 * Each group has Title/Subtitle (+ optional highlighted parts), a Description, and an array of Blogs.
+                 */
+                groups: {
+                  /**
+                   * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+                   */
+                  backgroundColor?: string | null;
+                  /**
+                   * Max 100 characters.
+                   */
+                  title?: string | null;
+                  /**
+                   * সর্বোচ্চ ১০০ অক্ষর।
+                   */
+                  titleBN?: string | null;
+                  /**
+                   * Optional. Must appear inside Title.
+                   */
+                  highlightedTitle?: string | null;
+                  /**
+                   * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে।
+                   */
+                  highlightedTitleBN?: string | null;
+                  /**
+                   * Max 140 characters.
+                   */
+                  subtitle?: string | null;
+                  /**
+                   * সর্বোচ্চ ১৪০ অক্ষর।
+                   */
+                  subtitleBN?: string | null;
+                  /**
+                   * Optional. Must appear inside Subtitle.
+                   */
+                  highlightedSubtitle?: string | null;
+                  /**
+                   * ঐচ্ছিক। উপশিরোনামের ভিতরে হুবহু থাকতে হবে।
+                   */
+                  highlightedSubtitleBN?: string | null;
+                  /**
+                   * Up to ~5000 characters.
+                   */
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                   */
+                  descriptionBN?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * Label for the list “Load More” button. Max 50 characters.
+                   */
+                  loadMoreText: string;
+                  /**
+                   * লিস্টের “Load More” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
+                   */
+                  loadMoreTextBN: string;
+                  /**
+                   * Label for the list “Load Less” button. Max 50 characters.
+                   */
+                  loadLessText: string;
+                  /**
+                   * লিস্টের “Load Less” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
+                   */
+                  loadLessTextBN: string;
+                  style?: ('primary' | 'secendary' | 'outline') | null;
+                  /**
+                   * Per-blog Title/Description with an image.
+                   */
+                  blogs: {
+                    /**
+                     * 525:278 image for the blog card. Blur placeholder generated automatically.
+                     */
+                    image: string | Media;
+                    imageOriginal?: (string | null) | Media;
+                    pendingImageOriginal?: string | null;
+                    pendingImageCrop?: string | null;
+                    imageBlurDataURL?: string | null;
+                    /**
+                     * Max 100 characters.
+                     */
+                    title: string;
+                    /**
+                     * সর্বোচ্চ ১০০ অক্ষর।
+                     */
+                    titleBN: string;
+                    /**
+                     * Up to ~5000 characters.
+                     */
+                    description?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                    /**
+                     * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                     */
+                    descriptionBN?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                    /**
+                     * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
+                     */
+                    readMoreText: string;
+                    /**
+                     * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
+                     */
+                    readMoreTextBN: string;
+                    /**
+                     * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
+                     */
+                    readLessText: string;
+                    /**
+                     * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
+                     */
+                    readLessTextBN: string;
+                    id?: string | null;
+                  }[];
+                  id?: string | null;
+                }[];
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'learn-more-blog-content';
+              }
+            | {
+                /**
+                 * Each group has Title/Subtitle (+ optional highlighted parts), a Description, and an array of Blogs.
+                 */
+                groups: {
+                  /**
+                   * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+                   */
+                  backgroundColor?: string | null;
+                  /**
+                   * Max 100 characters.
+                   */
+                  title?: string | null;
+                  /**
+                   * সর্বোচ্চ ১০০ অক্ষর।
+                   */
+                  titleBN?: string | null;
+                  /**
+                   * Optional. Must appear inside Title.
+                   */
+                  highlightedTitle?: string | null;
+                  /**
+                   * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে।
+                   */
+                  highlightedTitleBN?: string | null;
+                  /**
+                   * Max 140 characters.
+                   */
+                  subtitle?: string | null;
+                  /**
+                   * সর্বোচ্চ ১৪০ অক্ষর।
+                   */
+                  subtitleBN?: string | null;
+                  /**
+                   * Optional. Must appear inside Subtitle.
+                   */
+                  highlightedSubtitle?: string | null;
+                  /**
+                   * ঐচ্ছিক। উপশিরোনামের ভিতরে হুবহু থাকতে হবে।
+                   */
+                  highlightedSubtitleBN?: string | null;
+                  /**
+                   * Up to ~5000 characters.
+                   */
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                   */
+                  descriptionBN?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  /**
+                   * Label for the list “Load More” button. Max 50 characters.
+                   */
+                  loadMoreText: string;
+                  /**
+                   * লিস্টের “Load More” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
+                   */
+                  loadMoreTextBN: string;
+                  /**
+                   * Label for the list “Load Less” button. Max 50 characters.
+                   */
+                  loadLessText: string;
+                  /**
+                   * লিস্টের “Load Less” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
+                   */
+                  loadLessTextBN: string;
+                  style?: ('primary' | 'secendary' | 'outline') | null;
+                  /**
+                   * Per-blog Title/Description with an image.
+                   */
+                  blogs: {
+                    /**
+                     * 525:278 image for the blog card. Blur placeholder generated automatically.
+                     */
+                    image: string | Media;
+                    imageOriginal?: (string | null) | Media;
+                    pendingImageOriginal?: string | null;
+                    pendingImageCrop?: string | null;
+                    imageBlurDataURL?: string | null;
+                    /**
+                     * Optional. YouTube video link for this blog. Max 200 characters.
+                     */
+                    videoUrl: string;
+                    /**
+                     * Max 100 characters.
+                     */
+                    title: string;
+                    /**
+                     * সর্বোচ্চ ১০০ অক্ষর।
+                     */
+                    titleBN: string;
+                    /**
+                     * Up to ~5000 characters.
+                     */
+                    description?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                    /**
+                     * প্রায় ৫০০০ অক্ষর পর্যন্ত।
+                     */
+                    descriptionBN?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                    /**
+                     * Max 100 characters.
+                     */
+                    caption: string;
+                    /**
+                     * সর্বোচ্চ ১০০ অক্ষর।
+                     */
+                    captionBN: string;
+                    id?: string | null;
+                  }[];
+                  id?: string | null;
+                }[];
+                id?: string | null;
+                blockName?: string | null;
+                blockType: 'learn-more-video-content';
+              }
+          )[];
+          id?: string | null;
+        }[];
+        /**
+         * Add resource buttons that appear below the content (maximum 3 buttons)
+         */
+        resourceButtons?:
+          | (
+              | {
+                  /**
+                   * Upload/select the brochure PDF.
+                   */
+                  brochurePDF?: (string | null) | Media;
+                  /**
+                   * Max 60 characters.
+                   */
+                  label?: string | null;
+                  /**
+                   * সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  labelBN?: string | null;
+                  style?: ('primary' | 'secondary') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'brochure-button';
+                }
+              | {
+                  /**
+                   * Max 60 characters.
+                   */
+                  label?: string | null;
+                  /**
+                   * সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  labelBN?: string | null;
+                  style?: ('primary' | 'secondary' | 'outline') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'calculator-modal';
+                }
+              | {
+                  /**
+                   * Text shown on the call-to-action button. Max 60 characters.
+                   */
+                  buttonText: string;
+                  /**
+                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ৬০ অক্ষর।
+                   */
+                  buttonTextBN: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. When clicking the button it will navigate to this page.
+                   */
+                  buttonLink: string | Page;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'link-button';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'custom-tab';
       }
     | {
         /**
@@ -2332,110 +4356,6 @@ export interface Page {
         blockType: 'agent-form';
       }
     | {
-        /**
-         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * When ON, this block renders data from **Global → Contact Us**.
-         *
-         * **Before enabling:** fill up the Global → Contact Us data.
-         *
-         * **Notes:**
-         * • This block only stores presentation options (e.g., background color).
-         * • All content comes from the single shared Global to keep pages in sync.
-         */
-        useSharedData: boolean;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'contact-us-form';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #9A4E46). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Primary heading. Max 80 characters.
-         */
-        title?: string | null;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN?: string | null;
-        /**
-         * Rich text (about 1–3 short paragraphs). Up to ~400 characters.
-         */
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * রিচ টেক্সট (১–৩টি সংক্ষিপ্ত অনুচ্ছেদ)। সর্বোচ্চ প্রায় ৪০০ অক্ষর।
-         */
-        descriptionBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * Heading above the stats section. Max 80 characters.
-         */
-        statsTitle?: string | null;
-        /**
-         * স্ট্যাটস সেকশনের শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        statsTitleBN?: string | null;
-        /**
-         * Add key metrics. Each item has a value and a short label (both EN/BN).
-         */
-        stats?:
-          | {
-              /**
-               * Displayed metric value (e.g., “1.2M” or “25+”). Max 50 characters.
-               */
-              value: string;
-              /**
-               * প্রদর্শিত মান (যেমন “১.২M” বা “২৫+”). সর্বোচ্চ ৫০ অক্ষর।
-               */
-              valueBN: string;
-              /**
-               * Short label (e.g., “Policies Issued”). Max 50 characters.
-               */
-              label: string;
-              /**
-               * সংক্ষিপ্ত লেবেল। সর্বোচ্চ ৫০ অক্ষর।
-               */
-              labelBN: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'corporate-intro';
-      }
-    | {
         uploadSessionId?: string | null;
         /**
          * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
@@ -2543,980 +4463,6 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'corporate-info';
-      }
-    | {
-        uploadSessionId?: string | null;
-        /**
-         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Primary heading. Max 80 characters.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Optional. Must appear verbatim inside the Title. Max 40 characters.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Add partners with a logo and name (EN/BN).
-         */
-        partners: {
-          /**
-           * Upload the partner logo (square logo recommended 340:250).
-           */
-          image: string | Media;
-          imageOriginal?: (string | null) | Media;
-          pendingImageOriginal?: string | null;
-          pendingImageCrop?: string | null;
-          imageBlurDataURL?: string | null;
-          /**
-           * Display name. Max 60 characters.
-           */
-          name: string;
-          /**
-           * প্রদর্শিত নাম। সর্বোচ্চ ৬০ অক্ষর।
-           */
-          nameBN: string;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'corporate-partners';
-      }
-    | {
-        uploadSessionId?: string | null;
-        /**
-         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Primary heading. Max 80 characters.
-         */
-        title?: string | null;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN?: string | null;
-        /**
-         * Optional. Must be inside Title. Max 40.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Supporting line. Max 120 characters.
-         */
-        subtitle?: string | null;
-        /**
-         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
-         */
-        subtitleBN?: string | null;
-        /**
-         * Optional. Must be inside Subtitle. Max 40.
-         */
-        highlightedSubtitle?: string | null;
-        /**
-         * ঐচ্ছিক। সাবটাইটেলের মধ্যে থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedSubtitleBN?: string | null;
-        /**
-         * Up to ~800 characters.
-         */
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * সর্বোচ্চ ~৮০০ অক্ষর।
-         */
-        descriptionBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * Select which image to display on the UI.
-         */
-        imageVariant?: ('square' | 'wide') | null;
-        /**
-         * Select where the image align
-         */
-        imageOrder?: ('left' | 'right') | null;
-        /**
-         * Square image (optional). Recommended 1:1.
-         */
-        imageSquare: string | Media;
-        imageSquareOriginal?: (string | null) | Media;
-        pendingImageSquareOriginal?: string | null;
-        pendingImageSquareCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageSquareBlurDataURL?: string | null;
-        /**
-         * Wide image (optional). Recommended 16:9.
-         */
-        imageWide: string | Media;
-        imageWideOriginal?: (string | null) | Media;
-        pendingImageWideOriginal?: string | null;
-        pendingImageWideCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageWideBlurDataURL?: string | null;
-        /**
-         * Max 80 characters.
-         */
-        infoTitle?: string | null;
-        /**
-         * সর্বোচ্চ ৮০ অক্ষর।
-         */
-        infoTitleBN?: string | null;
-        /**
-         * Optional, must appear inside Info Title.
-         */
-        infoTitleHighlighted?: string | null;
-        /**
-         * ঐচ্ছিক, ইনফো শিরোনামের মধ্যে থাকতে হবে।
-         */
-        infoTitleHighlightedBN?: string | null;
-        /**
-         * Max 120 characters.
-         */
-        infoSubtitle?: string | null;
-        /**
-         * সর্বোচ্চ ১২০ অক্ষর।
-         */
-        infoSubtitleBN?: string | null;
-        /**
-         * Optional, must appear inside Info Subtitle.
-         */
-        infoSubtitleHighlighted?: string | null;
-        /**
-         * ঐচ্ছিক, ইনফো উপশিরোনামের মধ্যে থাকতে হবে।
-         */
-        infoSubtitleHighlightedBN?: string | null;
-        /**
-         * Up to ~800 characters.
-         */
-        infoDescription?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * সর্বোচ্চ ~৮০০ অক্ষর।
-         */
-        infoDescriptionBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * Each feature needs an icon (required) and a name (EN/BN, required).
-         */
-        keyFeatures?:
-          | {
-              /**
-               * Square icon (1:1).
-               */
-              icon: string | Media;
-              iconOriginal?: (string | null) | Media;
-              pendingIconOriginal?: string | null;
-              pendingIconCrop?: string | null;
-              iconBlurDataURL?: string | null;
-              /**
-               * Max 60 characters.
-               */
-              name: string;
-              /**
-               * সর্বোচ্চ ৬০ অক্ষর।
-               */
-              nameBN: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'add-on-info';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Select where the image align
-         */
-        imageOrder?: ('left' | 'right') | null;
-        /**
-         * Primary heading. Max 80 characters.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Supporting line. Max 120 characters.
-         */
-        subtitle: string;
-        /**
-         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
-         */
-        subtitleBN: string;
-        /**
-         * Short text. Max 400 characters.
-         */
-        description: string;
-        /**
-         * সংক্ষিপ্ত টেক্সট। সর্বোচ্চ ৪০০ অক্ষর।
-         */
-        descriptionBN: string;
-        /**
-         * Main background image. 516:705 recommended.
-         */
-        bgImageDesktop: string | Media;
-        bgImageDesktopOriginal?: (string | null) | Media;
-        pendingBgImageDesktopOriginal?: string | null;
-        pendingBgImageDesktopCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        bgImageDesktopBlurDataURL?: string | null;
-        /**
-         * Main background image. 300:200 recommended.
-         */
-        bgImageMobile: string | Media;
-        bgImageMobileOriginal?: (string | null) | Media;
-        pendingBgImageMobileOriginal?: string | null;
-        pendingBgImageMobileCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        bgImageMobileBlurDataURL?: string | null;
-        /**
-         * Heading above features. Max 80 chars.
-         */
-        featuresTitle: string;
-        /**
-         * ফিচার শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        featuresTitleBN: string;
-        /**
-         * Optional. Must appear verbatim inside Key Features Title. Max 80 characters.
-         */
-        featuresTitleHighlighted?: string | null;
-        /**
-         * ঐচ্ছিক। কী ফিচার শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        featuresTitleHighlightedBN?: string | null;
-        /**
-         * Each feature needs an icon and a short name (EN/BN).
-         */
-        features: {
-          /**
-           * Square icon. 1:1 recommended.
-           */
-          icon: string | Media;
-          iconOriginal?: (string | null) | Media;
-          pendingIconOriginal?: string | null;
-          pendingIconCrop?: string | null;
-          iconBlurDataURL?: string | null;
-          /**
-           * Max 60 characters.
-           */
-          name: string;
-          /**
-           * সর্বোচ্চ ৬০ অক্ষর।
-           */
-          nameBN: string;
-          id?: string | null;
-        }[];
-        /**
-         * Text shown on the button. Max 24 characters.
-         */
-        buttonText?: string | null;
-        /**
-         * বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
-         */
-        buttonTextBN?: string | null;
-        /**
-         * Pick an internal Page to navigate to when the CTA button is clicked (required if CTA text is set).
-         */
-        buttonLink?: (string | null) | Page;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'plan-info-design';
-      }
-    | {
-        uploadSessionId?: string | null;
-        /**
-         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Primary heading. Max 80 characters.
-         */
-        title?: string | null;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside the Title. Max 80 characters.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Supporting line. Max 120 characters.
-         */
-        subtitle?: string | null;
-        /**
-         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
-         */
-        subtitleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside the Subtitle. Max 80 characters.
-         */
-        highlightedSubtitle?: string | null;
-        /**
-         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        highlightedSubtitleBN?: string | null;
-        /**
-         * Up to ~600 characters.
-         */
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * সর্বোচ্চ ~৬০০ অক্ষর।
-         */
-        descriptionBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * Tall image (630×700, aspect ≈ 0.9). Required.
-         */
-        imageTall: string | Media;
-        imageTallOriginal?: (string | null) | Media;
-        pendingImageTallOriginal?: string | null;
-        pendingImageTallCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageTallBlurDataURL?: string | null;
-        /**
-         * Wide image (500×370, aspect ≈ 1.351). Required.
-         */
-        imageWide: string | Media;
-        imageWideOriginal?: (string | null) | Media;
-        pendingImageWideOriginal?: string | null;
-        pendingImageWideCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageWideBlurDataURL?: string | null;
-        /**
-         * Select where the image align
-         */
-        imageOrder?: ('left' | 'right') | null;
-        /**
-         * Which image to display on desktop layouts.
-         */
-        desktopImageChoice?: ('tall' | 'wide') | null;
-        /**
-         * Which image to display on mobile layouts.
-         */
-        mobileImageChoice?: ('tall' | 'wide') | null;
-        /**
-         * Max 60 characters.
-         */
-        cardTitle?: string | null;
-        /**
-         * সর্বোচ্চ ৬০ অক্ষর।
-         */
-        cardTitleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside Card Title. Max 80 characters.
-         */
-        cardTitleHighlighted?: string | null;
-        /**
-         * ঐচ্ছিক। কার্ড শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        cardTitleHighlightedBN?: string | null;
-        /**
-         * Max 120 characters.
-         */
-        cardSubtitle?: string | null;
-        /**
-         * সর্বোচ্চ ১২০ অক্ষর।
-         */
-        cardSubtitleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside Card Subtitle. Max 80 characters.
-         */
-        cardSubtitleHighlighted?: string | null;
-        /**
-         * ঐচ্ছিক। কার্ড সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        cardSubtitleHighlightedBN?: string | null;
-        /**
-         * Choose whether individual card items should render with a border.
-         */
-        cardItemBorder?: ('border' | 'no-border') | null;
-        /**
-         * Hex color in #RRGGBB (e.g., #9C8639).
-         */
-        cardItemBorderColor?: string | null;
-        /**
-         * Hex color with optional alpha: #RRGGBB or #RRGGBBAA (e.g., #FFFFFF or #FFFFFF80).
-         */
-        cardItemBorderBgColor?: string | null;
-        /**
-         * Each item has an icon (1:1) and a short description (EN/BN).
-         */
-        cardItems?:
-          | {
-              /**
-               * Square icon (1:1).
-               */
-              icon?: (string | null) | Media;
-              iconOriginal?: (string | null) | Media;
-              pendingIconOriginal?: string | null;
-              pendingIconCrop?: string | null;
-              iconBlurDataURL?: string | null;
-              /**
-               * Short line. Max 200 characters.
-               */
-              description?: string | null;
-              /**
-               * সংক্ষিপ্ত লাইন। সর্বোচ্চ ২০০ অক্ষর।
-               */
-              descriptionBN?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        /**
-         * Add resource buttons that appear below the content (maximum 3 buttons)
-         */
-        resourceButtons?:
-          | (
-              | {
-                  /**
-                   * Upload/select the brochure PDF.
-                   */
-                  brochurePDF?: (string | null) | Media;
-                  /**
-                   * Max 60 characters.
-                   */
-                  label?: string | null;
-                  /**
-                   * সর্বোচ্চ ৬০ অক্ষর।
-                   */
-                  labelBN?: string | null;
-                  style?: ('primary' | 'secondary') | null;
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'brochure-button';
-                }
-              | {
-                  /**
-                   * Text shown on the call-to-action button. Max 60 characters.
-                   */
-                  buttonText: string;
-                  /**
-                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ৬০ অক্ষর।
-                   */
-                  buttonTextBN: string;
-                  /**
-                   * Pick an internal Page to link to. External URLs are not allowed. When clicking the button it will navigate to this page.
-                   */
-                  buttonLink: string | Page;
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'link-button';
-                }
-            )[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'plan-info-design-03';
-      }
-    | {
-        uploadSessionId?: string | null;
-        /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Primary heading. Max 80 characters.
-         */
-        title?: string | null;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside the Title. Max 80 characters.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Supporting line. Max 120 characters.
-         */
-        subtitle?: string | null;
-        /**
-         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
-         */
-        subtitleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside the Subtitle. Max 80 characters.
-         */
-        highlightedSubtitle?: string | null;
-        /**
-         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        highlightedSubtitleBN?: string | null;
-        /**
-         * Up to ~600 characters.
-         */
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * সর্বোচ্চ ~৬০০ অক্ষর।
-         */
-        descriptionBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * Tall image (630×700, aspect ≈ 0.9). Required.
-         */
-        imageTall: string | Media;
-        imageTallOriginal?: (string | null) | Media;
-        pendingImageTallOriginal?: string | null;
-        pendingImageTallCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageTallBlurDataURL?: string | null;
-        /**
-         * Wide image (500×370, aspect ≈ 1.351). Required.
-         */
-        imageWide: string | Media;
-        imageWideOriginal?: (string | null) | Media;
-        pendingImageWideOriginal?: string | null;
-        pendingImageWideCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageWideBlurDataURL?: string | null;
-        /**
-         * Select where the image align
-         */
-        imageOrder?: ('left' | 'right') | null;
-        /**
-         * Which image to display on desktop layouts.
-         */
-        desktopImageChoice?: ('tall' | 'wide') | null;
-        /**
-         * Which image to display on mobile layouts.
-         */
-        mobileImageChoice?: ('tall' | 'wide') | null;
-        /**
-         * Texts shown around the orange circle and in the center.
-         */
-        circleInfo?: {
-          /**
-           * e.g., “Minimum Coverage” (max 80).
-           */
-          centerTitle?: string | null;
-          /**
-           * যেমন: “ন্যূনতম কভারেজ” (সর্বোচ্চ ৮০).
-           */
-          centerTitleBN?: string | null;
-          /**
-           * e.g., “BDT 100,000” (max 120).
-           */
-          centerValue?: string | null;
-          /**
-           * যেমন: “বিডিটি ১,০০,০০০” (সর্বোচ্চ ১২০).
-           */
-          centerValueBN?: string | null;
-          /**
-           * e.g., “Age At Entry” (max 80).
-           */
-          topLeftLabel?: string | null;
-          /**
-           * যেমন: “ভর্তির বয়স” (সর্বোচ্চ ৮০).
-           */
-          topLeftLabelBN?: string | null;
-          /**
-           * e.g., “18 - 60 Years” (max 120).
-           */
-          topLeftValue?: string | null;
-          /**
-           * যেমন: “১৮ - ৬০ বছর” (সর্বোচ্চ ১২০).
-           */
-          topLeftValueBN?: string | null;
-          /**
-           * e.g., “Policy Term” (max 80).
-           */
-          topRightLabel?: string | null;
-          /**
-           * যেমন: “পলিসির মেয়াদ” (সর্বোচ্চ ৮০).
-           */
-          topRightLabelBN?: string | null;
-          /**
-           * e.g., “Same As Your Basic Plan” (max 120).
-           */
-          topRightValue?: string | null;
-          /**
-           * যেমন: “আপনার বেসিক প্ল্যানের সমান” (সর্বোচ্চ ১২০).
-           */
-          topRightValueBN?: string | null;
-          /**
-           * e.g., “Maximum Coverage” (max 80).
-           */
-          bottomLeftLabel?: string | null;
-          /**
-           * যেমন: “সর্বোচ্চ কভারেজ” (সর্বোচ্চ ৮০).
-           */
-          bottomLeftLabelBN?: string | null;
-          /**
-           * e.g., “BDT 5,000,000” (max 120).
-           */
-          bottomLefValue?: string | null;
-          /**
-           * যেমন: “বিডিটি ৫০,০০,০০০” (সর্বোচ্চ ১২০).
-           */
-          bottomLefValueBN?: string | null;
-          /**
-           * e.g., “Premium Rate” (max 80).
-           */
-          bottomRightLabel?: string | null;
-          /**
-           * যেমন: “প্রিমিয়াম হার” (সর্বোচ্চ ৮০).
-           */
-          bottomRightLabelBN?: string | null;
-          /**
-           * e.g., “Affordable Extensive Protection!” (max 120).
-           */
-          bottomRightValue?: string | null;
-          /**
-           * যেমন: “সাশ্রয়ী, বিস্তৃত সুরক্ষা!” (সর্বোচ্চ ১২০).
-           */
-          bottomRightValueBN?: string | null;
-        };
-        /**
-         * Add resource buttons that appear below the content (maximum 3 buttons)
-         */
-        resourceButtons?:
-          | (
-              | {
-                  /**
-                   * Upload/select the brochure PDF.
-                   */
-                  brochurePDF?: (string | null) | Media;
-                  /**
-                   * Max 60 characters.
-                   */
-                  label?: string | null;
-                  /**
-                   * সর্বোচ্চ ৬০ অক্ষর।
-                   */
-                  labelBN?: string | null;
-                  style?: ('primary' | 'secondary') | null;
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'brochure-button';
-                }
-              | {
-                  /**
-                   * Text shown on the call-to-action button. Max 60 characters.
-                   */
-                  buttonText: string;
-                  /**
-                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ৬০ অক্ষর।
-                   */
-                  buttonTextBN: string;
-                  /**
-                   * Pick an internal Page to link to. External URLs are not allowed. When clicking the button it will navigate to this page.
-                   */
-                  buttonLink: string | Page;
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'link-button';
-                }
-            )[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'plan-info-design-04';
-      }
-    | {
-        uploadSessionId?: string | null;
-        /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Primary heading. Max 80 characters.
-         */
-        title?: string | null;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside the Title. Max 80 characters.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Supporting line. Max 120 characters.
-         */
-        subtitle?: string | null;
-        /**
-         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
-         */
-        subtitleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside the Subtitle. Max 80 characters.
-         */
-        highlightedSubtitle?: string | null;
-        /**
-         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        highlightedSubtitleBN?: string | null;
-        /**
-         * Up to ~600 characters.
-         */
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * সর্বোচ্চ ~৬০০ অক্ষর।
-         */
-        descriptionBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * Tall image (630×700, aspect ≈ 0.9). Required.
-         */
-        imageTall: string | Media;
-        imageTallOriginal?: (string | null) | Media;
-        pendingImageTallOriginal?: string | null;
-        pendingImageTallCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageTallBlurDataURL?: string | null;
-        /**
-         * Wide image (500×370, aspect ≈ 1.351). Required.
-         */
-        imageWide: string | Media;
-        imageWideOriginal?: (string | null) | Media;
-        pendingImageWideOriginal?: string | null;
-        pendingImageWideCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageWideBlurDataURL?: string | null;
-        /**
-         * Select where the image align
-         */
-        imageOrder?: ('left' | 'right') | null;
-        /**
-         * Which image to display on desktop layouts.
-         */
-        desktopImageChoice?: ('tall' | 'wide') | null;
-        /**
-         * Which image to display on mobile layouts.
-         */
-        mobileImageChoice?: ('tall' | 'wide') | null;
-        /**
-         * Add one or more extra description blocks. Each supports EN/BN Rich Text (same validator + ~600 chars).
-         */
-        descriptions?:
-          | {
-              /**
-               * Up to ~1600 characters.
-               */
-              description?: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              /**
-               * সর্বোচ্চ ~১৬০০ অক্ষর।
-               */
-              descriptionBN?: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'plan-info-design-05';
       }
     | {
         /**
@@ -5167,952 +6113,6 @@ export interface Page {
         blockName?: string | null;
         blockType: 'purchase-form';
       }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Keep this setting checked unless you are creating content for the 'Learn More' page.
-         */
-        addPadding?: boolean | null;
-        /**
-         * Primary heading. Max 100 characters.
-         */
-        title?: string | null;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ১০০ অক্ষর।
-         */
-        titleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside Title. Max 100 chars.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Supporting line. Max 100 characters.
-         */
-        subtitle?: string | null;
-        /**
-         * সহায়ক লাইন। সর্বোচ্চ ১০০ অক্ষর।
-         */
-        subtitleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside Subtitle. Max 100 chars.
-         */
-        highlightedSubtitle?: string | null;
-        /**
-         * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১০০ অক্ষর।
-         */
-        highlightedSubtitleBN?: string | null;
-        /**
-         * Up to ~500 characters.
-         */
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * সর্বোচ্চ ~৫০০ অক্ষর।
-         */
-        descriptionBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * Checked the check box only for `step content`. If Half Width is true it will take half width, and you can display image on the other half. If unchecked, image options are hidden.
-         */
-        halfWidth?: boolean | null;
-        /**
-         * Select where the image align
-         */
-        imageOrder?: ('left' | 'right') | null;
-        /**
-         * Which image to display on desktop layouts.
-         */
-        desktopImageChoice?: ('tall' | 'wide') | null;
-        /**
-         * Which image to display on mobile layouts.
-         */
-        mobileImageChoice?: ('tall' | 'wide') | null;
-        /**
-         * Tall image (630×650). Required when Half Width is enabled.
-         */
-        imageTall?: (string | null) | Media;
-        imageTallOriginal?: (string | null) | Media;
-        pendingImageTallOriginal?: string | null;
-        pendingImageTallCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageTallBlurDataURL?: string | null;
-        /**
-         * Wide image (500×370, aspect ≈ 1.351). Required when Half Width is enabled.
-         */
-        imageWide?: (string | null) | Media;
-        imageWideOriginal?: (string | null) | Media;
-        pendingImageWideOriginal?: string | null;
-        pendingImageWideCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageWideBlurDataURL?: string | null;
-        /**
-         * Add each tab header with a one-word “value” key, then choose exactly one content block.
-         */
-        tabs: {
-          /**
-           * e.g., features, eligibility, benefits
-           */
-          value: string;
-          label: string;
-          labelBN?: string | null;
-          /**
-           * Pick one content block for this tab.
-           */
-          content: (
-            | {
-                /**
-                 * If enabled, this item will be rendered using full-width layout.
-                 */
-                fullWidth?: boolean | null;
-                /**
-                 * If enabled, there will be a hover effect.
-                 */
-                hoverVisibility?: boolean | null;
-                /**
-                 * If not enabled, the description will be shown only on hover. If enabled description will be shown always
-                 */
-                desVisibility?: boolean | null;
-                /**
-                 * Add one or more items (icon 1:1, EN/BN title + description).
-                 */
-                items: {
-                  /**
-                   * Square icon, PNG/SVG preferred. Blur placeholder generated automatically.
-                   */
-                  icon: string | Media;
-                  iconOriginal?: (string | null) | Media;
-                  pendingIconOriginal?: string | null;
-                  pendingIconCrop?: string | null;
-                  iconBlurDataURL?: string | null;
-                  /**
-                   * Max 100 characters.
-                   */
-                  title: string;
-                  /**
-                   * সর্বোচ্চ ১০০ অক্ষর।
-                   */
-                  titleBN: string;
-                  /**
-                   * Up to ~5000 characters.
-                   */
-                  description?: {
-                    root: {
-                      type: string;
-                      children: {
-                        type: string;
-                        version: number;
-                        [k: string]: unknown;
-                      }[];
-                      direction: ('ltr' | 'rtl') | null;
-                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                      indent: number;
-                      version: number;
-                    };
-                    [k: string]: unknown;
-                  } | null;
-                  /**
-                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
-                   */
-                  descriptionBN?: {
-                    root: {
-                      type: string;
-                      children: {
-                        type: string;
-                        version: number;
-                        [k: string]: unknown;
-                      }[];
-                      direction: ('ltr' | 'rtl') | null;
-                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                      indent: number;
-                      version: number;
-                    };
-                    [k: string]: unknown;
-                  } | null;
-                  id?: string | null;
-                }[];
-                id?: string | null;
-                blockName?: string | null;
-                blockType: 'descriptive-content';
-              }
-            | {
-                uploadSessionId?: string | null;
-                /**
-                 * Each item may carry its own icon and age/condition fields.
-                 */
-                eligibilityData: {
-                  /**
-                   * Hex color in #FCF4EB. Length ৭.
-                   */
-                  backGroundColor?: string | null;
-                  /**
-                   * Hex color in #FFFFFF. Length ৭.
-                   */
-                  borderColor?: string | null;
-                  /**
-                   * Square icon (PNG/SVG). Blur placeholder generated automatically. Aspect 1:1.
-                   */
-                  icon: string | Media;
-                  iconOriginal?: (string | null) | Media;
-                  pendingIconOriginal?: string | null;
-                  pendingIconCrop?: string | null;
-                  iconBlurDataURL?: string | null;
-                  iconTitle?: string | null;
-                  iconTitleBN?: string | null;
-                  age?: {
-                    title?: string | null;
-                    titleBN?: string | null;
-                    minAgeLabel?: string | null;
-                    minAgeLabelBN?: string | null;
-                    minAgeValue?: string | null;
-                    minAgeValueBN?: string | null;
-                    minAgeValuePeriod?: string | null;
-                    minAgeValuePeriodBN?: string | null;
-                    maxAgeLabel?: string | null;
-                    maxAgeLabelBN?: string | null;
-                    maxAgeValue?: string | null;
-                    maxAgeValueBN?: string | null;
-                    maxAgeValuePeriod?: string | null;
-                    maxAgeValuePeriodBN?: string | null;
-                  };
-                  /**
-                   * Optional. Example: value = "10-20 Years".
-                   */
-                  policyTerm?: {
-                    title?: string | null;
-                    titleBN?: string | null;
-                    value?: string | null;
-                    valueBN?: string | null;
-                  };
-                  /**
-                   * Optional. Example: value = "25 Years".
-                   */
-                  maturityAge?: {
-                    title?: string | null;
-                    titleBN?: string | null;
-                    value?: string | null;
-                    valueBN?: string | null;
-                  };
-                  physicalCondition?: {
-                    title?: string | null;
-                    titleBN?: string | null;
-                    value?: string | null;
-                    valueBN?: string | null;
-                  };
-                  id?: string | null;
-                }[];
-                id?: string | null;
-                blockName?: string | null;
-                blockType: 'eligibility-content';
-              }
-            | {
-                uploadSessionId?: string | null;
-                /**
-                 * Add one or more items (icon 1:1, EN/BN title + description).
-                 */
-                additionalBenefits: {
-                  /**
-                   * Square image for mobile view. Aspect 4:3. Ideal PNG/JPG. Blur placeholder generated automatically.
-                   */
-                  mobileImage: string | Media;
-                  mobileImageOriginal?: (string | null) | Media;
-                  pendingMobileImageOriginal?: string | null;
-                  pendingMobileImageCrop?: string | null;
-                  /**
-                   * Auto-generated Base64 blur
-                   */
-                  mobileImageBlurDataURL?: string | null;
-                  /**
-                   * Portrait image for desktop view. Aspect ≈ 500:700 (~0.714). Blur placeholder generated automatically.
-                   */
-                  desktopImage: string | Media;
-                  desktopImageOriginal?: (string | null) | Media;
-                  pendingDesktopImageOriginal?: string | null;
-                  pendingDesktopImageCrop?: string | null;
-                  /**
-                   * Auto-generated Base64 blur
-                   */
-                  desktopImageBlurDataURL?: string | null;
-                  /**
-                   * Max 120 characters.
-                   */
-                  title?: string | null;
-                  /**
-                   * সর্বোচ্চ ১২০ অক্ষর।
-                   */
-                  titleBN?: string | null;
-                  /**
-                   * Optional. Must appear verbatim inside Title. Max 120 chars.
-                   */
-                  highlightedText?: string | null;
-                  /**
-                   * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
-                   */
-                  highlightedTextBN?: string | null;
-                  /**
-                   * Max 120 characters.
-                   */
-                  subtitle?: string | null;
-                  /**
-                   * সর্বোচ্চ ১২০ অক্ষর।
-                   */
-                  subtitleBN?: string | null;
-                  /**
-                   * Optional. Must appear verbatim inside Subtitle. Max 120 chars.
-                   */
-                  highlightedSubtitle?: string | null;
-                  /**
-                   * ঐচ্ছিক। সাবটাইটেলের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
-                   */
-                  highlightedSubtitleBN?: string | null;
-                  benefits?:
-                    | {
-                        benefit: string;
-                        benefitBN?: string | null;
-                        id?: string | null;
-                      }[]
-                    | null;
-                  /**
-                   * Text shown on the plan’s call-to-action button. Max 100 characters.
-                   */
-                  plansButtonText?: string | null;
-                  /**
-                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ১০০ অক্ষর।
-                   */
-                  plansButtonTextBN?: string | null;
-                  /**
-                   * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
-                   */
-                  plansButtonLink?: (string | null) | Page;
-                  /**
-                   * Up to ~5000 characters.
-                   */
-                  description?: {
-                    root: {
-                      type: string;
-                      children: {
-                        type: string;
-                        version: number;
-                        [k: string]: unknown;
-                      }[];
-                      direction: ('ltr' | 'rtl') | null;
-                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                      indent: number;
-                      version: number;
-                    };
-                    [k: string]: unknown;
-                  } | null;
-                  /**
-                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
-                   */
-                  descriptionBN?: {
-                    root: {
-                      type: string;
-                      children: {
-                        type: string;
-                        version: number;
-                        [k: string]: unknown;
-                      }[];
-                      direction: ('ltr' | 'rtl') | null;
-                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                      indent: number;
-                      version: number;
-                    };
-                    [k: string]: unknown;
-                  } | null;
-                  id?: string | null;
-                }[];
-                id?: string | null;
-                blockName?: string | null;
-                blockType: 'additional-benefit-content';
-              }
-            | {
-                /**
-                 * Add one or more items (description).
-                 */
-                items: {
-                  /**
-                   * Up to ~5000 characters.
-                   */
-                  description?: {
-                    root: {
-                      type: string;
-                      children: {
-                        type: string;
-                        version: number;
-                        [k: string]: unknown;
-                      }[];
-                      direction: ('ltr' | 'rtl') | null;
-                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                      indent: number;
-                      version: number;
-                    };
-                    [k: string]: unknown;
-                  } | null;
-                  /**
-                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
-                   */
-                  descriptionBN?: {
-                    root: {
-                      type: string;
-                      children: {
-                        type: string;
-                        version: number;
-                        [k: string]: unknown;
-                      }[];
-                      direction: ('ltr' | 'rtl') | null;
-                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                      indent: number;
-                      version: number;
-                    };
-                    [k: string]: unknown;
-                  } | null;
-                  id?: string | null;
-                }[];
-                /**
-                 * if true then font and content gap will be increased
-                 */
-                LargeFont?: boolean | null;
-                /**
-                 * Up to ~5000 characters.
-                 */
-                additionalDescription?: {
-                  root: {
-                    type: string;
-                    children: {
-                      type: string;
-                      version: number;
-                      [k: string]: unknown;
-                    }[];
-                    direction: ('ltr' | 'rtl') | null;
-                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                    indent: number;
-                    version: number;
-                  };
-                  [k: string]: unknown;
-                } | null;
-                /**
-                 * প্রায় ৫০০০ অক্ষর পর্যন্ত।
-                 */
-                additionalDescriptionBN?: {
-                  root: {
-                    type: string;
-                    children: {
-                      type: string;
-                      version: number;
-                      [k: string]: unknown;
-                    }[];
-                    direction: ('ltr' | 'rtl') | null;
-                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                    indent: number;
-                    version: number;
-                  };
-                  [k: string]: unknown;
-                } | null;
-                id?: string | null;
-                blockName?: string | null;
-                blockType: 'step-content';
-              }
-            | {
-                /**
-                 * Up to ~5000 characters.
-                 */
-                description?: {
-                  root: {
-                    type: string;
-                    children: {
-                      type: string;
-                      version: number;
-                      [k: string]: unknown;
-                    }[];
-                    direction: ('ltr' | 'rtl') | null;
-                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                    indent: number;
-                    version: number;
-                  };
-                  [k: string]: unknown;
-                } | null;
-                /**
-                 * প্রায় ৫০০০ অক্ষর পর্যন্ত।
-                 */
-                descriptionBN?: {
-                  root: {
-                    type: string;
-                    children: {
-                      type: string;
-                      version: number;
-                      [k: string]: unknown;
-                    }[];
-                    direction: ('ltr' | 'rtl') | null;
-                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                    indent: number;
-                    version: number;
-                  };
-                  [k: string]: unknown;
-                } | null;
-                /**
-                 * Text shown on the call-to-action button. Max 24 characters.
-                 */
-                buttonText?: string | null;
-                /**
-                 * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
-                 */
-                buttonTextBN?: string | null;
-                /**
-                 * Pick an internal Page to link to. If you prefer an external link instead, leave this empty and fill the External URL below.
-                 */
-                buttonLink?: (string | null) | Page;
-                /**
-                 * Absolute URL starting with http:// or https://. If provided, this will be used instead of the internal Page link.
-                 */
-                buttonExternalUrl?: string | null;
-                id?: string | null;
-                blockName?: string | null;
-                blockType: 'details-benefit-content';
-              }
-            | {
-                /**
-                 * Each group has Title/Subtitle (+ optional highlighted parts), a Description, and an array of Blogs.
-                 */
-                groups: {
-                  /**
-                   * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
-                   */
-                  backgroundColor?: string | null;
-                  /**
-                   * Max 100 characters.
-                   */
-                  title?: string | null;
-                  /**
-                   * সর্বোচ্চ ১০০ অক্ষর।
-                   */
-                  titleBN?: string | null;
-                  /**
-                   * Optional. Must appear inside Title.
-                   */
-                  highlightedTitle?: string | null;
-                  /**
-                   * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে।
-                   */
-                  highlightedTitleBN?: string | null;
-                  /**
-                   * Max 140 characters.
-                   */
-                  subtitle?: string | null;
-                  /**
-                   * সর্বোচ্চ ১৪০ অক্ষর।
-                   */
-                  subtitleBN?: string | null;
-                  /**
-                   * Optional. Must appear inside Subtitle.
-                   */
-                  highlightedSubtitle?: string | null;
-                  /**
-                   * ঐচ্ছিক। উপশিরোনামের ভিতরে হুবহু থাকতে হবে।
-                   */
-                  highlightedSubtitleBN?: string | null;
-                  /**
-                   * Up to ~5000 characters.
-                   */
-                  description?: {
-                    root: {
-                      type: string;
-                      children: {
-                        type: string;
-                        version: number;
-                        [k: string]: unknown;
-                      }[];
-                      direction: ('ltr' | 'rtl') | null;
-                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                      indent: number;
-                      version: number;
-                    };
-                    [k: string]: unknown;
-                  } | null;
-                  /**
-                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
-                   */
-                  descriptionBN?: {
-                    root: {
-                      type: string;
-                      children: {
-                        type: string;
-                        version: number;
-                        [k: string]: unknown;
-                      }[];
-                      direction: ('ltr' | 'rtl') | null;
-                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                      indent: number;
-                      version: number;
-                    };
-                    [k: string]: unknown;
-                  } | null;
-                  /**
-                   * Label for the list “Load More” button. Max 50 characters.
-                   */
-                  loadMoreText: string;
-                  /**
-                   * লিস্টের “Load More” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
-                   */
-                  loadMoreTextBN: string;
-                  /**
-                   * Label for the list “Load Less” button. Max 50 characters.
-                   */
-                  loadLessText: string;
-                  /**
-                   * লিস্টের “Load Less” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
-                   */
-                  loadLessTextBN: string;
-                  style?: ('primary' | 'secendary' | 'outline') | null;
-                  /**
-                   * Per-blog Title/Description with an image.
-                   */
-                  blogs: {
-                    /**
-                     * 525:278 image for the blog card. Blur placeholder generated automatically.
-                     */
-                    image: string | Media;
-                    imageOriginal?: (string | null) | Media;
-                    pendingImageOriginal?: string | null;
-                    pendingImageCrop?: string | null;
-                    imageBlurDataURL?: string | null;
-                    /**
-                     * Max 100 characters.
-                     */
-                    title: string;
-                    /**
-                     * সর্বোচ্চ ১০০ অক্ষর।
-                     */
-                    titleBN: string;
-                    /**
-                     * Up to ~5000 characters.
-                     */
-                    description?: {
-                      root: {
-                        type: string;
-                        children: {
-                          type: string;
-                          version: number;
-                          [k: string]: unknown;
-                        }[];
-                        direction: ('ltr' | 'rtl') | null;
-                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                        indent: number;
-                        version: number;
-                      };
-                      [k: string]: unknown;
-                    } | null;
-                    /**
-                     * প্রায় ৫০০০ অক্ষর পর্যন্ত।
-                     */
-                    descriptionBN?: {
-                      root: {
-                        type: string;
-                        children: {
-                          type: string;
-                          version: number;
-                          [k: string]: unknown;
-                        }[];
-                        direction: ('ltr' | 'rtl') | null;
-                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                        indent: number;
-                        version: number;
-                      };
-                      [k: string]: unknown;
-                    } | null;
-                    /**
-                     * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
-                     */
-                    readMoreText: string;
-                    /**
-                     * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
-                     */
-                    readMoreTextBN: string;
-                    /**
-                     * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
-                     */
-                    readLessText: string;
-                    /**
-                     * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
-                     */
-                    readLessTextBN: string;
-                    id?: string | null;
-                  }[];
-                  id?: string | null;
-                }[];
-                id?: string | null;
-                blockName?: string | null;
-                blockType: 'learn-more-blog-content';
-              }
-            | {
-                /**
-                 * Each group has Title/Subtitle (+ optional highlighted parts), a Description, and an array of Blogs.
-                 */
-                groups: {
-                  /**
-                   * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
-                   */
-                  backgroundColor?: string | null;
-                  /**
-                   * Max 100 characters.
-                   */
-                  title?: string | null;
-                  /**
-                   * সর্বোচ্চ ১০০ অক্ষর।
-                   */
-                  titleBN?: string | null;
-                  /**
-                   * Optional. Must appear inside Title.
-                   */
-                  highlightedTitle?: string | null;
-                  /**
-                   * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে।
-                   */
-                  highlightedTitleBN?: string | null;
-                  /**
-                   * Max 140 characters.
-                   */
-                  subtitle?: string | null;
-                  /**
-                   * সর্বোচ্চ ১৪০ অক্ষর।
-                   */
-                  subtitleBN?: string | null;
-                  /**
-                   * Optional. Must appear inside Subtitle.
-                   */
-                  highlightedSubtitle?: string | null;
-                  /**
-                   * ঐচ্ছিক। উপশিরোনামের ভিতরে হুবহু থাকতে হবে।
-                   */
-                  highlightedSubtitleBN?: string | null;
-                  /**
-                   * Up to ~5000 characters.
-                   */
-                  description?: {
-                    root: {
-                      type: string;
-                      children: {
-                        type: string;
-                        version: number;
-                        [k: string]: unknown;
-                      }[];
-                      direction: ('ltr' | 'rtl') | null;
-                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                      indent: number;
-                      version: number;
-                    };
-                    [k: string]: unknown;
-                  } | null;
-                  /**
-                   * প্রায় ৫০০০ অক্ষর পর্যন্ত।
-                   */
-                  descriptionBN?: {
-                    root: {
-                      type: string;
-                      children: {
-                        type: string;
-                        version: number;
-                        [k: string]: unknown;
-                      }[];
-                      direction: ('ltr' | 'rtl') | null;
-                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                      indent: number;
-                      version: number;
-                    };
-                    [k: string]: unknown;
-                  } | null;
-                  /**
-                   * Label for the list “Load More” button. Max 50 characters.
-                   */
-                  loadMoreText: string;
-                  /**
-                   * লিস্টের “Load More” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
-                   */
-                  loadMoreTextBN: string;
-                  /**
-                   * Label for the list “Load Less” button. Max 50 characters.
-                   */
-                  loadLessText: string;
-                  /**
-                   * লিস্টের “Load Less” বাটনের লেখা। সর্বোচ্চ ৫০ অক্ষর।
-                   */
-                  loadLessTextBN: string;
-                  style?: ('primary' | 'secendary' | 'outline') | null;
-                  /**
-                   * Per-blog Title/Description with an image.
-                   */
-                  blogs: {
-                    /**
-                     * 525:278 image for the blog card. Blur placeholder generated automatically.
-                     */
-                    image: string | Media;
-                    imageOriginal?: (string | null) | Media;
-                    pendingImageOriginal?: string | null;
-                    pendingImageCrop?: string | null;
-                    imageBlurDataURL?: string | null;
-                    /**
-                     * Optional. YouTube video link for this blog. Max 200 characters.
-                     */
-                    videoUrl: string;
-                    /**
-                     * Max 100 characters.
-                     */
-                    title: string;
-                    /**
-                     * সর্বোচ্চ ১০০ অক্ষর।
-                     */
-                    titleBN: string;
-                    /**
-                     * Up to ~5000 characters.
-                     */
-                    description?: {
-                      root: {
-                        type: string;
-                        children: {
-                          type: string;
-                          version: number;
-                          [k: string]: unknown;
-                        }[];
-                        direction: ('ltr' | 'rtl') | null;
-                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                        indent: number;
-                        version: number;
-                      };
-                      [k: string]: unknown;
-                    } | null;
-                    /**
-                     * প্রায় ৫০০০ অক্ষর পর্যন্ত।
-                     */
-                    descriptionBN?: {
-                      root: {
-                        type: string;
-                        children: {
-                          type: string;
-                          version: number;
-                          [k: string]: unknown;
-                        }[];
-                        direction: ('ltr' | 'rtl') | null;
-                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                        indent: number;
-                        version: number;
-                      };
-                      [k: string]: unknown;
-                    } | null;
-                    /**
-                     * Max 100 characters.
-                     */
-                    caption: string;
-                    /**
-                     * সর্বোচ্চ ১০০ অক্ষর।
-                     */
-                    captionBN: string;
-                    id?: string | null;
-                  }[];
-                  id?: string | null;
-                }[];
-                id?: string | null;
-                blockName?: string | null;
-                blockType: 'learn-more-video-content';
-              }
-          )[];
-          id?: string | null;
-        }[];
-        /**
-         * Add resource buttons that appear below the content (maximum 3 buttons)
-         */
-        resourceButtons?:
-          | (
-              | {
-                  /**
-                   * Upload/select the brochure PDF.
-                   */
-                  brochurePDF?: (string | null) | Media;
-                  /**
-                   * Max 60 characters.
-                   */
-                  label?: string | null;
-                  /**
-                   * সর্বোচ্চ ৬০ অক্ষর।
-                   */
-                  labelBN?: string | null;
-                  style?: ('primary' | 'secondary') | null;
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'brochure-button';
-                }
-              | {
-                  /**
-                   * Max 60 characters.
-                   */
-                  label?: string | null;
-                  /**
-                   * সর্বোচ্চ ৬০ অক্ষর।
-                   */
-                  labelBN?: string | null;
-                  style?: ('primary' | 'secondary' | 'outline') | null;
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'calculator-modal';
-                }
-              | {
-                  /**
-                   * Text shown on the call-to-action button. Max 60 characters.
-                   */
-                  buttonText: string;
-                  /**
-                   * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ৬০ অক্ষর।
-                   */
-                  buttonTextBN: string;
-                  /**
-                   * Pick an internal Page to link to. External URLs are not allowed. When clicking the button it will navigate to this page.
-                   */
-                  buttonLink: string | Page;
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'link-button';
-                }
-            )[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'custom-tab';
-      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -6527,6 +6527,348 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'contact-us-form'?:
+          | T
+          | {
+              backgroundColor?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'corporate-intro'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              statsTitle?: T;
+              statsTitleBN?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    valueBN?: T;
+                    label?: T;
+                    labelBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'corporate-partners'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              partners?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'add-on-info'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              imageVariant?: T;
+              imageOrder?: T;
+              imageSquare?: T;
+              imageSquareOriginal?: T;
+              pendingImageSquareOriginal?: T;
+              pendingImageSquareCrop?: T;
+              imageSquareBlurDataURL?: T;
+              imageWide?: T;
+              imageWideOriginal?: T;
+              pendingImageWideOriginal?: T;
+              pendingImageWideCrop?: T;
+              imageWideBlurDataURL?: T;
+              infoTitle?: T;
+              infoTitleBN?: T;
+              infoTitleHighlighted?: T;
+              infoTitleHighlightedBN?: T;
+              infoSubtitle?: T;
+              infoSubtitleBN?: T;
+              infoSubtitleHighlighted?: T;
+              infoSubtitleHighlightedBN?: T;
+              infoDescription?: T;
+              infoDescriptionBN?: T;
+              keyFeatures?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'plan-info-design'?:
+          | T
+          | {
+              backgroundColor?: T;
+              imageOrder?: T;
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              bgImageDesktop?: T;
+              bgImageDesktopOriginal?: T;
+              pendingBgImageDesktopOriginal?: T;
+              pendingBgImageDesktopCrop?: T;
+              bgImageDesktopBlurDataURL?: T;
+              bgImageMobile?: T;
+              bgImageMobileOriginal?: T;
+              pendingBgImageMobileOriginal?: T;
+              pendingBgImageMobileCrop?: T;
+              bgImageMobileBlurDataURL?: T;
+              featuresTitle?: T;
+              featuresTitleBN?: T;
+              featuresTitleHighlighted?: T;
+              featuresTitleHighlightedBN?: T;
+              features?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    id?: T;
+                  };
+              buttonText?: T;
+              buttonTextBN?: T;
+              buttonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'plan-info-design-03'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              imageTall?: T;
+              imageTallOriginal?: T;
+              pendingImageTallOriginal?: T;
+              pendingImageTallCrop?: T;
+              imageTallBlurDataURL?: T;
+              imageWide?: T;
+              imageWideOriginal?: T;
+              pendingImageWideOriginal?: T;
+              pendingImageWideCrop?: T;
+              imageWideBlurDataURL?: T;
+              imageOrder?: T;
+              desktopImageChoice?: T;
+              mobileImageChoice?: T;
+              cardTitle?: T;
+              cardTitleBN?: T;
+              cardTitleHighlighted?: T;
+              cardTitleHighlightedBN?: T;
+              cardSubtitle?: T;
+              cardSubtitleBN?: T;
+              cardSubtitleHighlighted?: T;
+              cardSubtitleHighlightedBN?: T;
+              cardItemBorder?: T;
+              cardItemBorderColor?: T;
+              cardItemBorderBgColor?: T;
+              cardItems?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              resourceButtons?:
+                | T
+                | {
+                    'brochure-button'?:
+                      | T
+                      | {
+                          brochurePDF?: T;
+                          label?: T;
+                          labelBN?: T;
+                          style?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'link-button'?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          buttonTextBN?: T;
+                          buttonLink?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'plan-info-design-04'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              imageTall?: T;
+              imageTallOriginal?: T;
+              pendingImageTallOriginal?: T;
+              pendingImageTallCrop?: T;
+              imageTallBlurDataURL?: T;
+              imageWide?: T;
+              imageWideOriginal?: T;
+              pendingImageWideOriginal?: T;
+              pendingImageWideCrop?: T;
+              imageWideBlurDataURL?: T;
+              imageOrder?: T;
+              desktopImageChoice?: T;
+              mobileImageChoice?: T;
+              circleInfo?:
+                | T
+                | {
+                    centerTitle?: T;
+                    centerTitleBN?: T;
+                    centerValue?: T;
+                    centerValueBN?: T;
+                    topLeftLabel?: T;
+                    topLeftLabelBN?: T;
+                    topLeftValue?: T;
+                    topLeftValueBN?: T;
+                    topRightLabel?: T;
+                    topRightLabelBN?: T;
+                    topRightValue?: T;
+                    topRightValueBN?: T;
+                    bottomLeftLabel?: T;
+                    bottomLeftLabelBN?: T;
+                    bottomLefValue?: T;
+                    bottomLefValueBN?: T;
+                    bottomRightLabel?: T;
+                    bottomRightLabelBN?: T;
+                    bottomRightValue?: T;
+                    bottomRightValueBN?: T;
+                  };
+              resourceButtons?:
+                | T
+                | {
+                    'brochure-button'?:
+                      | T
+                      | {
+                          brochurePDF?: T;
+                          label?: T;
+                          labelBN?: T;
+                          style?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'link-button'?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          buttonTextBN?: T;
+                          buttonLink?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'plan-info-design-05'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              imageTall?: T;
+              imageTallOriginal?: T;
+              pendingImageTallOriginal?: T;
+              pendingImageTallCrop?: T;
+              imageTallBlurDataURL?: T;
+              imageWide?: T;
+              imageWideOriginal?: T;
+              pendingImageWideOriginal?: T;
+              pendingImageWideCrop?: T;
+              imageWideBlurDataURL?: T;
+              imageOrder?: T;
+              desktopImageChoice?: T;
+              mobileImageChoice?: T;
+              descriptions?:
+                | T
+                | {
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'custom-card'?:
           | T
           | {
@@ -6676,6 +7018,327 @@ export interface PagesSelect<T extends boolean = true> {
                                 sectionId?: T;
                                 id?: T;
                               };
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'custom-tab'?:
+          | T
+          | {
+              backgroundColor?: T;
+              addPadding?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              halfWidth?: T;
+              imageOrder?: T;
+              desktopImageChoice?: T;
+              mobileImageChoice?: T;
+              imageTall?: T;
+              imageTallOriginal?: T;
+              pendingImageTallOriginal?: T;
+              pendingImageTallCrop?: T;
+              imageTallBlurDataURL?: T;
+              imageWide?: T;
+              imageWideOriginal?: T;
+              pendingImageWideOriginal?: T;
+              pendingImageWideCrop?: T;
+              imageWideBlurDataURL?: T;
+              tabs?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    labelBN?: T;
+                    content?:
+                      | T
+                      | {
+                          'descriptive-content'?:
+                            | T
+                            | {
+                                fullWidth?: T;
+                                hoverVisibility?: T;
+                                desVisibility?: T;
+                                items?:
+                                  | T
+                                  | {
+                                      icon?: T;
+                                      iconOriginal?: T;
+                                      pendingIconOriginal?: T;
+                                      pendingIconCrop?: T;
+                                      iconBlurDataURL?: T;
+                                      title?: T;
+                                      titleBN?: T;
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
+                          'eligibility-content'?:
+                            | T
+                            | {
+                                uploadSessionId?: T;
+                                eligibilityData?:
+                                  | T
+                                  | {
+                                      backGroundColor?: T;
+                                      borderColor?: T;
+                                      icon?: T;
+                                      iconOriginal?: T;
+                                      pendingIconOriginal?: T;
+                                      pendingIconCrop?: T;
+                                      iconBlurDataURL?: T;
+                                      iconTitle?: T;
+                                      iconTitleBN?: T;
+                                      age?:
+                                        | T
+                                        | {
+                                            title?: T;
+                                            titleBN?: T;
+                                            minAgeLabel?: T;
+                                            minAgeLabelBN?: T;
+                                            minAgeValue?: T;
+                                            minAgeValueBN?: T;
+                                            minAgeValuePeriod?: T;
+                                            minAgeValuePeriodBN?: T;
+                                            maxAgeLabel?: T;
+                                            maxAgeLabelBN?: T;
+                                            maxAgeValue?: T;
+                                            maxAgeValueBN?: T;
+                                            maxAgeValuePeriod?: T;
+                                            maxAgeValuePeriodBN?: T;
+                                          };
+                                      policyTerm?:
+                                        | T
+                                        | {
+                                            title?: T;
+                                            titleBN?: T;
+                                            value?: T;
+                                            valueBN?: T;
+                                          };
+                                      maturityAge?:
+                                        | T
+                                        | {
+                                            title?: T;
+                                            titleBN?: T;
+                                            value?: T;
+                                            valueBN?: T;
+                                          };
+                                      physicalCondition?:
+                                        | T
+                                        | {
+                                            title?: T;
+                                            titleBN?: T;
+                                            value?: T;
+                                            valueBN?: T;
+                                          };
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
+                          'additional-benefit-content'?:
+                            | T
+                            | {
+                                uploadSessionId?: T;
+                                additionalBenefits?:
+                                  | T
+                                  | {
+                                      mobileImage?: T;
+                                      mobileImageOriginal?: T;
+                                      pendingMobileImageOriginal?: T;
+                                      pendingMobileImageCrop?: T;
+                                      mobileImageBlurDataURL?: T;
+                                      desktopImage?: T;
+                                      desktopImageOriginal?: T;
+                                      pendingDesktopImageOriginal?: T;
+                                      pendingDesktopImageCrop?: T;
+                                      desktopImageBlurDataURL?: T;
+                                      title?: T;
+                                      titleBN?: T;
+                                      highlightedText?: T;
+                                      highlightedTextBN?: T;
+                                      subtitle?: T;
+                                      subtitleBN?: T;
+                                      highlightedSubtitle?: T;
+                                      highlightedSubtitleBN?: T;
+                                      benefits?:
+                                        | T
+                                        | {
+                                            benefit?: T;
+                                            benefitBN?: T;
+                                            id?: T;
+                                          };
+                                      plansButtonText?: T;
+                                      plansButtonTextBN?: T;
+                                      plansButtonLink?: T;
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
+                          'step-content'?:
+                            | T
+                            | {
+                                items?:
+                                  | T
+                                  | {
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      id?: T;
+                                    };
+                                LargeFont?: T;
+                                additionalDescription?: T;
+                                additionalDescriptionBN?: T;
+                                id?: T;
+                                blockName?: T;
+                              };
+                          'details-benefit-content'?:
+                            | T
+                            | {
+                                description?: T;
+                                descriptionBN?: T;
+                                buttonText?: T;
+                                buttonTextBN?: T;
+                                buttonLink?: T;
+                                buttonExternalUrl?: T;
+                                id?: T;
+                                blockName?: T;
+                              };
+                          'learn-more-blog-content'?:
+                            | T
+                            | {
+                                groups?:
+                                  | T
+                                  | {
+                                      backgroundColor?: T;
+                                      title?: T;
+                                      titleBN?: T;
+                                      highlightedTitle?: T;
+                                      highlightedTitleBN?: T;
+                                      subtitle?: T;
+                                      subtitleBN?: T;
+                                      highlightedSubtitle?: T;
+                                      highlightedSubtitleBN?: T;
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      loadMoreText?: T;
+                                      loadMoreTextBN?: T;
+                                      loadLessText?: T;
+                                      loadLessTextBN?: T;
+                                      style?: T;
+                                      blogs?:
+                                        | T
+                                        | {
+                                            image?: T;
+                                            imageOriginal?: T;
+                                            pendingImageOriginal?: T;
+                                            pendingImageCrop?: T;
+                                            imageBlurDataURL?: T;
+                                            title?: T;
+                                            titleBN?: T;
+                                            description?: T;
+                                            descriptionBN?: T;
+                                            readMoreText?: T;
+                                            readMoreTextBN?: T;
+                                            readLessText?: T;
+                                            readLessTextBN?: T;
+                                            id?: T;
+                                          };
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
+                          'learn-more-video-content'?:
+                            | T
+                            | {
+                                groups?:
+                                  | T
+                                  | {
+                                      backgroundColor?: T;
+                                      title?: T;
+                                      titleBN?: T;
+                                      highlightedTitle?: T;
+                                      highlightedTitleBN?: T;
+                                      subtitle?: T;
+                                      subtitleBN?: T;
+                                      highlightedSubtitle?: T;
+                                      highlightedSubtitleBN?: T;
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      loadMoreText?: T;
+                                      loadMoreTextBN?: T;
+                                      loadLessText?: T;
+                                      loadLessTextBN?: T;
+                                      style?: T;
+                                      blogs?:
+                                        | T
+                                        | {
+                                            image?: T;
+                                            imageOriginal?: T;
+                                            pendingImageOriginal?: T;
+                                            pendingImageCrop?: T;
+                                            imageBlurDataURL?: T;
+                                            videoUrl?: T;
+                                            title?: T;
+                                            titleBN?: T;
+                                            description?: T;
+                                            descriptionBN?: T;
+                                            caption?: T;
+                                            captionBN?: T;
+                                            id?: T;
+                                          };
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
+                        };
+                    id?: T;
+                  };
+              resourceButtons?:
+                | T
+                | {
+                    'brochure-button'?:
+                      | T
+                      | {
+                          brochurePDF?: T;
+                          label?: T;
+                          labelBN?: T;
+                          style?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'calculator-modal'?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          style?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'link-button'?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          buttonTextBN?: T;
+                          buttonLink?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -7139,36 +7802,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'contact-us-form'?:
-          | T
-          | {
-              backgroundColor?: T;
-              useSharedData?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'corporate-intro'?:
-          | T
-          | {
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              statsTitle?: T;
-              statsTitleBN?: T;
-              stats?:
-                | T
-                | {
-                    value?: T;
-                    valueBN?: T;
-                    label?: T;
-                    labelBN?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
         'corporate-info'?:
           | T
           | {
@@ -7219,318 +7852,6 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'corporate-partners'?:
-          | T
-          | {
-              uploadSessionId?: T;
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              partners?:
-                | T
-                | {
-                    image?: T;
-                    imageOriginal?: T;
-                    pendingImageOriginal?: T;
-                    pendingImageCrop?: T;
-                    imageBlurDataURL?: T;
-                    name?: T;
-                    nameBN?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'add-on-info'?:
-          | T
-          | {
-              uploadSessionId?: T;
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              highlightedSubtitle?: T;
-              highlightedSubtitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              imageVariant?: T;
-              imageOrder?: T;
-              imageSquare?: T;
-              imageSquareOriginal?: T;
-              pendingImageSquareOriginal?: T;
-              pendingImageSquareCrop?: T;
-              imageSquareBlurDataURL?: T;
-              imageWide?: T;
-              imageWideOriginal?: T;
-              pendingImageWideOriginal?: T;
-              pendingImageWideCrop?: T;
-              imageWideBlurDataURL?: T;
-              infoTitle?: T;
-              infoTitleBN?: T;
-              infoTitleHighlighted?: T;
-              infoTitleHighlightedBN?: T;
-              infoSubtitle?: T;
-              infoSubtitleBN?: T;
-              infoSubtitleHighlighted?: T;
-              infoSubtitleHighlightedBN?: T;
-              infoDescription?: T;
-              infoDescriptionBN?: T;
-              keyFeatures?:
-                | T
-                | {
-                    icon?: T;
-                    iconOriginal?: T;
-                    pendingIconOriginal?: T;
-                    pendingIconCrop?: T;
-                    iconBlurDataURL?: T;
-                    name?: T;
-                    nameBN?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'plan-info-design'?:
-          | T
-          | {
-              backgroundColor?: T;
-              imageOrder?: T;
-              title?: T;
-              titleBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              bgImageDesktop?: T;
-              bgImageDesktopOriginal?: T;
-              pendingBgImageDesktopOriginal?: T;
-              pendingBgImageDesktopCrop?: T;
-              bgImageDesktopBlurDataURL?: T;
-              bgImageMobile?: T;
-              bgImageMobileOriginal?: T;
-              pendingBgImageMobileOriginal?: T;
-              pendingBgImageMobileCrop?: T;
-              bgImageMobileBlurDataURL?: T;
-              featuresTitle?: T;
-              featuresTitleBN?: T;
-              featuresTitleHighlighted?: T;
-              featuresTitleHighlightedBN?: T;
-              features?:
-                | T
-                | {
-                    icon?: T;
-                    iconOriginal?: T;
-                    pendingIconOriginal?: T;
-                    pendingIconCrop?: T;
-                    iconBlurDataURL?: T;
-                    name?: T;
-                    nameBN?: T;
-                    id?: T;
-                  };
-              buttonText?: T;
-              buttonTextBN?: T;
-              buttonLink?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'plan-info-design-03'?:
-          | T
-          | {
-              uploadSessionId?: T;
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              highlightedSubtitle?: T;
-              highlightedSubtitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              imageTall?: T;
-              imageTallOriginal?: T;
-              pendingImageTallOriginal?: T;
-              pendingImageTallCrop?: T;
-              imageTallBlurDataURL?: T;
-              imageWide?: T;
-              imageWideOriginal?: T;
-              pendingImageWideOriginal?: T;
-              pendingImageWideCrop?: T;
-              imageWideBlurDataURL?: T;
-              imageOrder?: T;
-              desktopImageChoice?: T;
-              mobileImageChoice?: T;
-              cardTitle?: T;
-              cardTitleBN?: T;
-              cardTitleHighlighted?: T;
-              cardTitleHighlightedBN?: T;
-              cardSubtitle?: T;
-              cardSubtitleBN?: T;
-              cardSubtitleHighlighted?: T;
-              cardSubtitleHighlightedBN?: T;
-              cardItemBorder?: T;
-              cardItemBorderColor?: T;
-              cardItemBorderBgColor?: T;
-              cardItems?:
-                | T
-                | {
-                    icon?: T;
-                    iconOriginal?: T;
-                    pendingIconOriginal?: T;
-                    pendingIconCrop?: T;
-                    iconBlurDataURL?: T;
-                    description?: T;
-                    descriptionBN?: T;
-                    id?: T;
-                  };
-              resourceButtons?:
-                | T
-                | {
-                    'brochure-button'?:
-                      | T
-                      | {
-                          brochurePDF?: T;
-                          label?: T;
-                          labelBN?: T;
-                          style?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    'link-button'?:
-                      | T
-                      | {
-                          buttonText?: T;
-                          buttonTextBN?: T;
-                          buttonLink?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'plan-info-design-04'?:
-          | T
-          | {
-              uploadSessionId?: T;
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              highlightedSubtitle?: T;
-              highlightedSubtitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              imageTall?: T;
-              imageTallOriginal?: T;
-              pendingImageTallOriginal?: T;
-              pendingImageTallCrop?: T;
-              imageTallBlurDataURL?: T;
-              imageWide?: T;
-              imageWideOriginal?: T;
-              pendingImageWideOriginal?: T;
-              pendingImageWideCrop?: T;
-              imageWideBlurDataURL?: T;
-              imageOrder?: T;
-              desktopImageChoice?: T;
-              mobileImageChoice?: T;
-              circleInfo?:
-                | T
-                | {
-                    centerTitle?: T;
-                    centerTitleBN?: T;
-                    centerValue?: T;
-                    centerValueBN?: T;
-                    topLeftLabel?: T;
-                    topLeftLabelBN?: T;
-                    topLeftValue?: T;
-                    topLeftValueBN?: T;
-                    topRightLabel?: T;
-                    topRightLabelBN?: T;
-                    topRightValue?: T;
-                    topRightValueBN?: T;
-                    bottomLeftLabel?: T;
-                    bottomLeftLabelBN?: T;
-                    bottomLefValue?: T;
-                    bottomLefValueBN?: T;
-                    bottomRightLabel?: T;
-                    bottomRightLabelBN?: T;
-                    bottomRightValue?: T;
-                    bottomRightValueBN?: T;
-                  };
-              resourceButtons?:
-                | T
-                | {
-                    'brochure-button'?:
-                      | T
-                      | {
-                          brochurePDF?: T;
-                          label?: T;
-                          labelBN?: T;
-                          style?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    'link-button'?:
-                      | T
-                      | {
-                          buttonText?: T;
-                          buttonTextBN?: T;
-                          buttonLink?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'plan-info-design-05'?:
-          | T
-          | {
-              uploadSessionId?: T;
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              highlightedSubtitle?: T;
-              highlightedSubtitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              imageTall?: T;
-              imageTallOriginal?: T;
-              pendingImageTallOriginal?: T;
-              pendingImageTallCrop?: T;
-              imageTallBlurDataURL?: T;
-              imageWide?: T;
-              imageWideOriginal?: T;
-              pendingImageWideOriginal?: T;
-              pendingImageWideCrop?: T;
-              imageWideBlurDataURL?: T;
-              imageOrder?: T;
-              desktopImageChoice?: T;
-              mobileImageChoice?: T;
-              descriptions?:
-                | T
-                | {
-                    description?: T;
-                    descriptionBN?: T;
-                    id?: T;
                   };
               id?: T;
               blockName?: T;
@@ -8112,327 +8433,6 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     consentText?: T;
                     consentTextBN?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'custom-tab'?:
-          | T
-          | {
-              backgroundColor?: T;
-              addPadding?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              highlightedSubtitle?: T;
-              highlightedSubtitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              halfWidth?: T;
-              imageOrder?: T;
-              desktopImageChoice?: T;
-              mobileImageChoice?: T;
-              imageTall?: T;
-              imageTallOriginal?: T;
-              pendingImageTallOriginal?: T;
-              pendingImageTallCrop?: T;
-              imageTallBlurDataURL?: T;
-              imageWide?: T;
-              imageWideOriginal?: T;
-              pendingImageWideOriginal?: T;
-              pendingImageWideCrop?: T;
-              imageWideBlurDataURL?: T;
-              tabs?:
-                | T
-                | {
-                    value?: T;
-                    label?: T;
-                    labelBN?: T;
-                    content?:
-                      | T
-                      | {
-                          'descriptive-content'?:
-                            | T
-                            | {
-                                fullWidth?: T;
-                                hoverVisibility?: T;
-                                desVisibility?: T;
-                                items?:
-                                  | T
-                                  | {
-                                      icon?: T;
-                                      iconOriginal?: T;
-                                      pendingIconOriginal?: T;
-                                      pendingIconCrop?: T;
-                                      iconBlurDataURL?: T;
-                                      title?: T;
-                                      titleBN?: T;
-                                      description?: T;
-                                      descriptionBN?: T;
-                                      id?: T;
-                                    };
-                                id?: T;
-                                blockName?: T;
-                              };
-                          'eligibility-content'?:
-                            | T
-                            | {
-                                uploadSessionId?: T;
-                                eligibilityData?:
-                                  | T
-                                  | {
-                                      backGroundColor?: T;
-                                      borderColor?: T;
-                                      icon?: T;
-                                      iconOriginal?: T;
-                                      pendingIconOriginal?: T;
-                                      pendingIconCrop?: T;
-                                      iconBlurDataURL?: T;
-                                      iconTitle?: T;
-                                      iconTitleBN?: T;
-                                      age?:
-                                        | T
-                                        | {
-                                            title?: T;
-                                            titleBN?: T;
-                                            minAgeLabel?: T;
-                                            minAgeLabelBN?: T;
-                                            minAgeValue?: T;
-                                            minAgeValueBN?: T;
-                                            minAgeValuePeriod?: T;
-                                            minAgeValuePeriodBN?: T;
-                                            maxAgeLabel?: T;
-                                            maxAgeLabelBN?: T;
-                                            maxAgeValue?: T;
-                                            maxAgeValueBN?: T;
-                                            maxAgeValuePeriod?: T;
-                                            maxAgeValuePeriodBN?: T;
-                                          };
-                                      policyTerm?:
-                                        | T
-                                        | {
-                                            title?: T;
-                                            titleBN?: T;
-                                            value?: T;
-                                            valueBN?: T;
-                                          };
-                                      maturityAge?:
-                                        | T
-                                        | {
-                                            title?: T;
-                                            titleBN?: T;
-                                            value?: T;
-                                            valueBN?: T;
-                                          };
-                                      physicalCondition?:
-                                        | T
-                                        | {
-                                            title?: T;
-                                            titleBN?: T;
-                                            value?: T;
-                                            valueBN?: T;
-                                          };
-                                      id?: T;
-                                    };
-                                id?: T;
-                                blockName?: T;
-                              };
-                          'additional-benefit-content'?:
-                            | T
-                            | {
-                                uploadSessionId?: T;
-                                additionalBenefits?:
-                                  | T
-                                  | {
-                                      mobileImage?: T;
-                                      mobileImageOriginal?: T;
-                                      pendingMobileImageOriginal?: T;
-                                      pendingMobileImageCrop?: T;
-                                      mobileImageBlurDataURL?: T;
-                                      desktopImage?: T;
-                                      desktopImageOriginal?: T;
-                                      pendingDesktopImageOriginal?: T;
-                                      pendingDesktopImageCrop?: T;
-                                      desktopImageBlurDataURL?: T;
-                                      title?: T;
-                                      titleBN?: T;
-                                      highlightedText?: T;
-                                      highlightedTextBN?: T;
-                                      subtitle?: T;
-                                      subtitleBN?: T;
-                                      highlightedSubtitle?: T;
-                                      highlightedSubtitleBN?: T;
-                                      benefits?:
-                                        | T
-                                        | {
-                                            benefit?: T;
-                                            benefitBN?: T;
-                                            id?: T;
-                                          };
-                                      plansButtonText?: T;
-                                      plansButtonTextBN?: T;
-                                      plansButtonLink?: T;
-                                      description?: T;
-                                      descriptionBN?: T;
-                                      id?: T;
-                                    };
-                                id?: T;
-                                blockName?: T;
-                              };
-                          'step-content'?:
-                            | T
-                            | {
-                                items?:
-                                  | T
-                                  | {
-                                      description?: T;
-                                      descriptionBN?: T;
-                                      id?: T;
-                                    };
-                                LargeFont?: T;
-                                additionalDescription?: T;
-                                additionalDescriptionBN?: T;
-                                id?: T;
-                                blockName?: T;
-                              };
-                          'details-benefit-content'?:
-                            | T
-                            | {
-                                description?: T;
-                                descriptionBN?: T;
-                                buttonText?: T;
-                                buttonTextBN?: T;
-                                buttonLink?: T;
-                                buttonExternalUrl?: T;
-                                id?: T;
-                                blockName?: T;
-                              };
-                          'learn-more-blog-content'?:
-                            | T
-                            | {
-                                groups?:
-                                  | T
-                                  | {
-                                      backgroundColor?: T;
-                                      title?: T;
-                                      titleBN?: T;
-                                      highlightedTitle?: T;
-                                      highlightedTitleBN?: T;
-                                      subtitle?: T;
-                                      subtitleBN?: T;
-                                      highlightedSubtitle?: T;
-                                      highlightedSubtitleBN?: T;
-                                      description?: T;
-                                      descriptionBN?: T;
-                                      loadMoreText?: T;
-                                      loadMoreTextBN?: T;
-                                      loadLessText?: T;
-                                      loadLessTextBN?: T;
-                                      style?: T;
-                                      blogs?:
-                                        | T
-                                        | {
-                                            image?: T;
-                                            imageOriginal?: T;
-                                            pendingImageOriginal?: T;
-                                            pendingImageCrop?: T;
-                                            imageBlurDataURL?: T;
-                                            title?: T;
-                                            titleBN?: T;
-                                            description?: T;
-                                            descriptionBN?: T;
-                                            readMoreText?: T;
-                                            readMoreTextBN?: T;
-                                            readLessText?: T;
-                                            readLessTextBN?: T;
-                                            id?: T;
-                                          };
-                                      id?: T;
-                                    };
-                                id?: T;
-                                blockName?: T;
-                              };
-                          'learn-more-video-content'?:
-                            | T
-                            | {
-                                groups?:
-                                  | T
-                                  | {
-                                      backgroundColor?: T;
-                                      title?: T;
-                                      titleBN?: T;
-                                      highlightedTitle?: T;
-                                      highlightedTitleBN?: T;
-                                      subtitle?: T;
-                                      subtitleBN?: T;
-                                      highlightedSubtitle?: T;
-                                      highlightedSubtitleBN?: T;
-                                      description?: T;
-                                      descriptionBN?: T;
-                                      loadMoreText?: T;
-                                      loadMoreTextBN?: T;
-                                      loadLessText?: T;
-                                      loadLessTextBN?: T;
-                                      style?: T;
-                                      blogs?:
-                                        | T
-                                        | {
-                                            image?: T;
-                                            imageOriginal?: T;
-                                            pendingImageOriginal?: T;
-                                            pendingImageCrop?: T;
-                                            imageBlurDataURL?: T;
-                                            videoUrl?: T;
-                                            title?: T;
-                                            titleBN?: T;
-                                            description?: T;
-                                            descriptionBN?: T;
-                                            caption?: T;
-                                            captionBN?: T;
-                                            id?: T;
-                                          };
-                                      id?: T;
-                                    };
-                                id?: T;
-                                blockName?: T;
-                              };
-                        };
-                    id?: T;
-                  };
-              resourceButtons?:
-                | T
-                | {
-                    'brochure-button'?:
-                      | T
-                      | {
-                          brochurePDF?: T;
-                          label?: T;
-                          labelBN?: T;
-                          style?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    'calculator-modal'?:
-                      | T
-                      | {
-                          label?: T;
-                          labelBN?: T;
-                          style?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    'link-button'?:
-                      | T
-                      | {
-                          buttonText?: T;
-                          buttonTextBN?: T;
-                          buttonLink?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
                   };
               id?: T;
               blockName?: T;
@@ -9246,13 +9246,40 @@ export interface GlobalContactUsForm {
     fromEmail?: string | null;
   };
   /**
-   * Pick an internal Page to link to. External URLs are not allowed. Click navigates to the linked page.
+   * Consent line shown under the premium calculator form submit/CTA.
    */
-  termsAndConditionButtonLink: string | Page;
-  /**
-   * Pick an internal Page to link to. External URLs are not allowed. Click navigates to the linked page.
-   */
-  privacyPolicyButtonLink: string | Page;
+  premiumCalculatorForm?: {
+    consentText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    consentTextBN?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -9745,8 +9772,12 @@ export interface GlobalContactUsFormSelect<T extends boolean = true> {
         fromName?: T;
         fromEmail?: T;
       };
-  termsAndConditionButtonLink?: T;
-  privacyPolicyButtonLink?: T;
+  premiumCalculatorForm?:
+    | T
+    | {
+        consentText?: T;
+        consentTextBN?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

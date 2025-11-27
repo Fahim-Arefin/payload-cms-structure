@@ -16,10 +16,15 @@ async function ContactUsSectionServer({ block }: Props) {
     2,
     CONTACT_US_BLOCK_SLUG_AND_TAG,
   )
-
   return (
     <div>
-      {data ? (
+      {data &&
+      data?.recipientEmails &&
+      (data?.recipientEmails?.email1 ||
+        data?.recipientEmails?.email2 ||
+        data?.recipientEmails?.email3 ||
+        data?.recipientEmails?.email4 ||
+        data?.recipientEmails?.email5) ? (
         <ContactUsSection data={data} block={block} />
       ) : (
         <NoDataFound

@@ -594,16 +594,15 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { pageHref } from '@/lib/utils'
 import { GlobalContactUsForm } from '@/payload-types'
+import { ContactUsFormBlockType } from '@/types/payloadCustomTypes'
 import { Loader, MailCheck, SendHorizontal } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useState } from 'react'
 import GlobalButton from '../GlobalButton'
+import LocalizedRichText from '../LocalizedRichText'
 import LocalizedString from '../LocalizedString'
 import LocalizedText from '../LocalizedText'
-import { ContactUsFormBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
   // data: ContactUsFormBlockType
@@ -716,16 +715,10 @@ function ContactUsSection({ data, block }: Props) {
       w-[60%] lg:w-[50%]
       aspect-[891/489]"
       >
-        {/* <img
-          src="/assets/solutions/individual/saving-and-investment/web/askUsImage.png"
-          alt=""
-          className=" h-full w-full"
-        /> */}
         <div className="relative h-full w-full">
           {typeof data?.image === 'object' && data?.image?.url && (
             <Image
               fill
-              // src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/askUsImage.png`}
               src={data?.image?.url}
               alt="Contant us image"
               sizes="50vw"
@@ -744,11 +737,7 @@ function ContactUsSection({ data, block }: Props) {
              rotate-[20.397deg] z-10 aspect-[730/300]"
       >
         <div className="w-full h-full relative">
-          <Image
-            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/contactUs3.png`}
-            alt=""
-            fill
-          />
+          <Image src={`/assets/images/contactUs3.png`} alt="" fill />
         </div>
       </div>
 
@@ -758,11 +747,7 @@ function ContactUsSection({ data, block }: Props) {
                     h-1/3 aspect-[80/310]"
       >
         <div className="relative w-full h-full">
-          <Image
-            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/contactUs4.png`}
-            alt="hanging phone"
-            fill
-          />
+          <Image src={`/assets/images/contactUs4.png`} alt="hanging phone" fill />
         </div>
       </div>
       {/* hanging phone  */}
@@ -771,11 +756,7 @@ function ContactUsSection({ data, block }: Props) {
                     h-[40%] aspect-[70/310]"
       >
         <div className="relative w-full h-full">
-          <Image
-            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/contactUs5.png`}
-            alt="hanging phone"
-            fill
-          />
+          <Image src={`/assets/images/contactUs5.png`} alt="hanging phone" fill />
         </div>
       </div>
       {/* hanging phone  */}
@@ -784,11 +765,7 @@ function ContactUsSection({ data, block }: Props) {
                     h-1/3 aspect-[80/310]"
       >
         <div className="relative w-full h-full">
-          <Image
-            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/contactUs4.png`}
-            alt="hanging phone"
-            fill
-          />
+          <Image src={`/assets/images/contactUs4.png`} alt="hanging phone" fill />
         </div>
       </div>
       {/* hanging phone  */}
@@ -797,11 +774,7 @@ function ContactUsSection({ data, block }: Props) {
                     h-1/3 aspect-[80/310]"
       >
         <div className="relative w-full h-full">
-          <Image
-            src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/saving-and-investment/web/contactUs5.png`}
-            alt="hanging phone"
-            fill
-          />
+          <Image src={`/assets/images/contactUs5.png`} alt="hanging phone" fill />
         </div>
       </div>
 
@@ -947,7 +920,7 @@ function ContactUsSection({ data, block }: Props) {
             </div>
 
             {/* CONSENT (desktop) */}
-            <div className="">
+            {/* <div className="">
               <label className="flex items-start gap-3 text-black">
                 <Checkbox
                   id="agree-terms-desktop"
@@ -955,37 +928,47 @@ function ContactUsSection({ data, block }: Props) {
                   onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
                 />
                 <span className="text-xs md:text-sm leading-relaxed">
-                  {/* By clicking <span className="font-semibold">Send Message</span>, you agree to our{' '} */}
                   <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
                   <span className="font-semibold">
                     <LocalizedText en="Send Message" bn="আপনি আমাদের " />
                   </span>
                   <LocalizedText en=", you agree to our " bn="" />
                   <Link
-                    // href="/terms-condition"
                     href={pageHref(data?.termsAndConditionButtonLink)}
                     className="underline text-[#FF6600] hover:opacity-90"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {/* terms and conditions */}
                     <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
                   </Link>{' '}
-                  {/* and Shanta Life{' '} */}
                   <LocalizedText en="and " bn=", ও " />
                   <Link
-                    // href="/privacy-policy"
                     href={pageHref(data?.privacyPolicyButtonLink)}
                     className="underline text-[#FF6600] hover:opacity-90"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {/* privacy policy */}
                     <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
                   </Link>
                   <LocalizedText en="." bn="সম্মত করছেন।" />
                 </span>
               </label>
+            </div> */}
+            {/* Consent (left as-is per your instruction; feel free to localize similarly if needed) */}
+            <div className="col-span-2 w-full">
+              <div className="flex gap-3">
+                <Checkbox
+                  id="agree-terms"
+                  checked={agreeTerms}
+                  onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+                />
+                <div className="text-xs md:text-sm leading-relaxed ">
+                  <LocalizedRichText
+                    en={data?.premiumCalculatorForm?.consentText}
+                    bn={data?.premiumCalculatorForm?.consentTextBN}
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Button */}
@@ -1169,7 +1152,7 @@ function ContactUsSection({ data, block }: Props) {
                   </div>
 
                   {/* CONSENT (mobile) */}
-                  <div className="pt-2">
+                  {/* <div className="pt-2">
                     <label className="flex items-start gap-3 text-black">
                       <Checkbox
                         id="agree-terms-mobile"
@@ -1177,38 +1160,47 @@ function ContactUsSection({ data, block }: Props) {
                         onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
                       />
                       <span className="text-xs leading-relaxed">
-                        {/* By clicking <span className="font-semibold">Send Message</span>, you agree
-                        to our{' '} */}
                         <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
                         <span className="font-semibold">
                           <LocalizedText en="Send Message" bn="আপনি আমাদের " />
                         </span>
                         <LocalizedText en=", you agree to our " bn="" />
                         <Link
-                          // href="/terms-condition"
                           href={pageHref(data?.termsAndConditionButtonLink)}
                           className="underline text-[#000] font-semibold hover:opacity-90"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {/* terms and conditions */}
                           <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
                         </Link>{' '}
-                        {/* and{' '} */}
                         <LocalizedText en="and " bn=", ও " />
                         <Link
-                          // href="/privacy-policy"
                           href={pageHref(data?.privacyPolicyButtonLink)}
                           className="underline text-[#000] font-semibold hover:opacity-90"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {/* privacy policy */}
                           <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
                         </Link>
                         <LocalizedText en="." bn="সম্মত করছেন।" />
                       </span>
                     </label>
+                  </div> */}
+                  {/* Consent (left as-is per your instruction; feel free to localize similarly if needed) */}
+                  <div className="col-span-2 w-full">
+                    <div className="flex gap-3">
+                      <Checkbox
+                        id="agree-terms"
+                        checked={agreeTerms}
+                        onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+                      />
+                      <div className="text-xs md:text-sm leading-relaxed ">
+                        <LocalizedRichText
+                          en={data?.premiumCalculatorForm?.consentText}
+                          bn={data?.premiumCalculatorForm?.consentTextBN}
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Submit */}

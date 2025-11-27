@@ -5,6 +5,7 @@ import {
   CORPORATE_INFO_BLOCK_LABEL,
   CORPORATE_INFO_BLOCK_THUMBNAIL_URL,
   CORPORATE_INFO_SLUG_AND_TAG,
+  CORPORATE_PLAN_PAGE,
 } from '@/lib/constants'
 import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
 import BrochureButtonSchema from '../resourcesButton/BrochureButton/schema'
@@ -56,6 +57,10 @@ const CorporateInfoSchema: Block = {
   labels: {
     singular: CORPORATE_INFO_BLOCK_LABEL,
     plural: CORPORATE_INFO_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: CORPORATE_PLAN_PAGE,
   },
 
   imageURL: CORPORATE_INFO_BLOCK_THUMBNAIL_URL,

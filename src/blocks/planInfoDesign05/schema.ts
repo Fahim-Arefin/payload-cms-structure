@@ -1,5 +1,6 @@
 // src/payload/blocks/PlanInfoDesign03.ts
 import {
+  COMMON,
   PLAN_INFO_DESIGN_05_BLOCK_LABEL,
   PLAN_INFO_DESIGN_05_BLOCK_THUMBNAIL_URL,
   PLAN_INFO_DESIGN_05_SLUG_AND_TAG,
@@ -99,6 +100,7 @@ const PlanInfoDesign05Schema: Block = {
     singular: PLAN_INFO_DESIGN_05_BLOCK_LABEL,
     plural: PLAN_INFO_DESIGN_05_BLOCK_LABEL,
   },
+  admin: { group: COMMON },
   imageURL: PLAN_INFO_DESIGN_05_BLOCK_THUMBNAIL_URL,
   imageAltText: `${PLAN_INFO_DESIGN_05_BLOCK_LABEL} preview`,
 

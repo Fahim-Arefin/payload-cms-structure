@@ -2,6 +2,7 @@
 import type { Block } from 'payload'
 import { bnNum } from '@/lib/utils'
 import {
+  COMMON,
   EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_LABEL,
   EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_THUMBNAIL_URL,
   EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG,
@@ -100,6 +101,9 @@ const AddonsInfoSchema: Block = {
     singular: EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_LABEL,
     plural: EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_LABEL,
   },
+
+  admin: { group: COMMON },
+
   imageURL: EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_THUMBNAIL_URL,
   imageAltText: `${EMPLOYEE_WELLNESS_ADDONS_INFO_BLOCK_LABEL} preview`,
 

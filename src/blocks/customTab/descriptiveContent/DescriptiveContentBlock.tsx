@@ -75,7 +75,7 @@ function DescriptiveContentBlock({ data }: Props) {
           <div
             key={i}
             className={cn(
-              `group flex flex-col items-center md:items-start justify-center md:justify-start w-[90%] md:w-full ${!data?.fullWidth && ' xl:w-[80%] '} mx-auto lg:mx-0 md:flex-row md:space-x-2 2xl:space-x-4 p-2 lg:p-3 xl:p-4`,
+              `group flex flex-col items-center md:items-start justify-center md:justify-start w-[85%] md:w-full mx-auto lg:mx-0 md:flex-row md:space-x-2 2xl:space-x-4 p-2 lg:p-3 xl:p-4`,
               i % 2 === 0 ? '' : ' lg:ml-auto',
               ' h-fit ',
               data?.hoverVisibility &&
@@ -95,7 +95,7 @@ function DescriptiveContentBlock({ data }: Props) {
                 />
               </div>
             )}
-            <div className="text-[#434342] 2xl:max-w-[400px]">
+            <div className={`text-[#434342]`}>
               <h3 className="global-h4 font-semibold uppercase text-center md:text-start">
                 <LocalizedText en={content?.title} bn={content?.titleBN} />
               </h3>

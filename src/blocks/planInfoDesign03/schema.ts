@@ -2,6 +2,7 @@
 import type { Block } from 'payload'
 import { bnNum } from '@/lib/utils'
 import {
+  COMMON,
   PLAN_INFO_DESIGN_03_BLOCK_LABEL,
   PLAN_INFO_DESIGN_03_BLOCK_THUMBNAIL_URL,
   PLAN_INFO_DESIGN_03_SLUG_AND_TAG,
@@ -111,6 +112,8 @@ const PlanInfoDesign03Schema: Block = {
     singular: PLAN_INFO_DESIGN_03_BLOCK_LABEL,
     plural: PLAN_INFO_DESIGN_03_BLOCK_LABEL,
   },
+
+  admin: { group: COMMON },
   imageURL: PLAN_INFO_DESIGN_03_BLOCK_THUMBNAIL_URL,
   imageAltText: `${PLAN_INFO_DESIGN_03_BLOCK_LABEL} preview`,
 

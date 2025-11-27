@@ -2,6 +2,7 @@ import {
   CONTACT_US_BLOCK_LABEL,
   CONTACT_US_BLOCK_THUMBNAIL_URL,
   CONTACT_US_BLOCK_SLUG_AND_TAG,
+  COMMON,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
@@ -22,6 +23,10 @@ const ContactUsSchema: Block = {
   labels: {
     singular: CONTACT_US_BLOCK_LABEL,
     plural: CONTACT_US_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: COMMON,
   },
 
   imageURL: CONTACT_US_BLOCK_THUMBNAIL_URL,
