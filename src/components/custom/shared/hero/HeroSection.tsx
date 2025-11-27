@@ -7,21 +7,20 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import { HeroContentType } from '@/types'
+import { sliderDelay } from '@/lib/data'
+import { HeroBlockType } from '@/types/payloadCustomTypes'
 import Autoplay from 'embla-carousel-autoplay'
 import HeroItem from './HeroItem'
-import { sliderDelay } from '@/lib/data'
 
 type Props = {
-  heroSlides: HeroContentType[]
+  heroSlides: HeroBlockType
   children?: React.ReactNode
   height?: string
   top?: string
   position?: string
-  isHome?: boolean
 }
 
-function HeroSection({ heroSlides, children, height, top, position, isHome }: Props) {
+function HeroSection({ heroSlides, children, height, top, position }: Props) {
   return (
     <>
       <Carousel
@@ -38,18 +37,18 @@ function HeroSection({ heroSlides, children, height, top, position, isHome }: Pr
       >
         {/* Carousel Content */}
         <CarouselContent>
-          {heroSlides.map((slide, index) => (
+          {heroSlides?.heroes?.map((slide, index) => (
             <CarouselItem
               key={index}
-              className={`relative w-full ${height ? height : ' h-[352px] md:h-[452px] lg:h-[628px] 2xl:h-[950px] '}`}
-              // className="relative w-full h-[352px] md:h-[452px] lg:h-[628px] xl:h-[950px] 2xl:min-h-screen"
+              // className={`relative w-full ${height ? height : ' h-[352px] md:h-[452px] lg:h-[628px] 2xl:h-[950px] '}`}
+              className={`relative w-full ${height ? height : 'aspect-[16/9] h-[352px] md:h-auto 2xl:h-[958px] w-full'}`}
             >
-              <HeroItem slide={slide} top={top} position={position} isHome={isHome} />
+              <HeroItem slide={slide} top={top} position={position} />
             </CarouselItem>
           ))}
         </CarouselContent>
         {/* Carousel Navigation */}
-        {heroSlides?.length > 1 && (
+        {heroSlides?.heroes?.length && heroSlides?.heroes?.length > 1 && (
           <div className="hidden lg:flex absolute bottom-5 inset-x-0 justify-center z-30 gap-3 ">
             <CarouselPrevious className="static w-8 h-8 border border-white rounded-md bg-transparent text-white hover:bg-white/20 transition-colors flex items-center justify-center" />
             <CarouselNext className="static w-8 h-8 border border-white rounded-md bg-transparent text-white hover:bg-white/20 transition-colors flex items-center justify-center" />

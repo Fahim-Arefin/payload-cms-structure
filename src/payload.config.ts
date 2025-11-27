@@ -10,12 +10,21 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import sharp from 'sharp'
 
 import { Users } from './collections/Users'
-import { Media } from './collections/Media'
 import { Resume } from './collections/Resume'
 import { CareerApplication } from './collections/CareerApplication'
 import { AgentCareerApplication } from './collections/AgentCareerApplication'
-import { HomePage } from './collections/globals/HomePage'
-import { AboutUsPage } from './collections/globals/AboutUsPage'
+import { Pages } from './collections/Pages'
+import Footer from './collections/globals/Footer'
+import Navbar from './collections/globals/Navbar'
+import Header from './collections/globals/Header'
+import BoardOfDirectors from './collections/globals/BoardOfDirectors'
+import LeadershipTeam from './collections/globals/LeadershipTeam'
+import ContactUsGlobal from './collections/globals/GlobalContactUs'
+import GlobalBlogs from './collections/globals/Blogs'
+import GlobalVlogs from './collections/globals/Vlogs'
+import AuditLogs from './collections/AuditLogs'
+import { getClientIP } from './lib/http'
+import Media from './collections/Media'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -26,9 +35,43 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    // livePreview: {
+    //   url: 'http://localhost:3000',
+    //   collections: ['pages'],
+    // },
+
+    // below code on and also on the preview route
+    livePreview: {
+      collections: ['pages'],
+      url: ({ data }) => {
+        const raw = typeof data?.slug === 'string' ? data.slug.trim() : ''
+        const slug = raw || 'index'
+        // 👉 this hits the dynamic preview route
+        // return `http://localhost:3000/preview/${slug}`
+        return `${process?.env?.API_URL}/preview/${slug}`
+      },
+    },
   },
-  collections: [Users, Media, Resume, CareerApplication, AgentCareerApplication],
-  globals: [HomePage, AboutUsPage],
+
+  upload: {
+    limits: {
+      fileSize: 50 * 1024 * 1024, // 50 MB per file
+      fieldSize: 50 * 1024 * 1024, // buffer for form fields
+      files: 50,
+    },
+    abortOnLimit: true,
+  },
+  globals: [
+    Header,
+    Navbar,
+    Footer,
+    BoardOfDirectors,
+    LeadershipTeam,
+    ContactUsGlobal,
+    GlobalBlogs,
+    GlobalVlogs,
+  ],
+  collections: [Users, Media, Resume, CareerApplication, AgentCareerApplication, Pages, AuditLogs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -37,8 +80,46 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
+  onInit: async (payload) => {
+    try {
+      const countResult = (await payload.count({ collection: 'users' })) as
+        | number
+        | { totalDocs: number }
+      const totalUsers = typeof countResult === 'number' ? countResult : countResult.totalDocs
 
-  sharp,
+      if (totalUsers > 0) {
+        payload.logger.info('Bootstrap skipped: users already exist.')
+        return
+      }
+
+      const email = (process.env.BOOTSTRAP_SUPER_EMAIL || '').trim()
+      const password = (process.env.BOOTSTRAP_SUPER_PASSWORD || '').trim()
+
+      if (!email || !password) {
+        payload.logger.warn(
+          'Bootstrap skipped: set BOOTSTRAP_SUPER_EMAIL and BOOTSTRAP_SUPER_PASSWORD for first-run.',
+        )
+        return
+      }
+
+      await payload.create({
+        collection: 'users',
+        data: {
+          email,
+          password,
+          role: 'super-admin', // ← your RBAC role
+          name: 'Super Admin',
+        },
+        overrideAccess: true, // ← bypass access since no super exists yet
+      })
+
+      payload.logger.info(`✅ Bootstrap Super Admin created: ${email}`)
+    } catch (e) {
+      payload.logger.error('Bootstrap failed:', e)
+    }
+  },
+
+  // sharp,
   email: nodemailerAdapter({
     defaultFromAddress: process?.env?.SMTP_MAIL_FROM ?? 'uchchhash@xynolab.com',
     defaultFromName: 'Shanta Life',
@@ -73,14 +154,23 @@ export default buildConfig({
     //     region: process.env.S3_BUCKET_NAME ?? '',
     //   },
     // }),
+    s3Storage({
+      collections: {
+        media: {
+          prefix: 'media',
+        },
+      },
+      bucket: process.env.S3_BUCKET_NAME || '',
+      config: {
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY || '',
+          secretAccessKey: process.env.S3_SECRET_KEY || '',
+        },
+        region: process.env.S3_REGION,
+        endpoint: process.env.S3_ENDPOINT,
+        forcePathStyle: true,
+        // ... Other S3 configuration
+      },
+    }),
   ],
-  // endpoints: [
-  //   {
-  //     path: '/yolo/hello',
-  //     method: 'get',
-  //     handler: (_req) => {
-  //       return Response.json({ message: 'world' })
-  //     },
-  //   },
-  // ],
 })

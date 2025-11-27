@@ -1,41 +1,44 @@
+'use client'
 import { Button } from '@/components/ui/button'
-import { AllPlantDataType } from '@/types'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
+import { pageHref } from '@/lib/utils'
+import { PlanBlock } from '@/types/payloadCustomTypes'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 import LocalizedText from '../LocalizedText'
+import PlanModal from './PlanModal'
 
 type Props = {
-  data: AllPlantDataType
+  data: PlanBlock['planCards'][number]
   blur?: boolean
 }
 
-function AllPlanCard({ data, blur }: Props) {
+function AllPlanCard({ data, blur = true }: Props) {
+  const [open, setOpen] = useState(false)
+
   return (
-    <Link
-      href={data?.link}
-      className="group relative overflow-hidden w-full mx-auto md:w-full 
-    h-[250px] md:h-[250px] lg:h-[250px] xl:h-[300px] 2xl:h-[360px] 
-    cursor-pointer
+    <div
+      // h-[250px] md:h-[250px] lg:h-[250px] xl:h-[300px] 2xl:h-[360px]
+      className="group relative overflow-hidden
+       w-full mx-auto 
+       h-[250px] md:h-[250px] lg:h-[250px] xl:h-[300px] 2xl:h-[360px]
     rounded-[6px] xl:rounded-[10px] 2xl:rounded-[10px] "
     >
       {/* Background image only */}
-      {/* web */}
-      {/* <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 scale-100 group-hover:scale-105"
-        style={{
-          backgroundImage: `url('${data?.image}')`,
-          backgroundColor: 'lightgray',
-        }}
-      /> */}
-
-      <Image
-        src={data?.image}
-        alt={data?.title}
-        fill
-        className="object-cover object-center transition-transform duration-500 scale-100 group-hover:scale-105"
-        sizes="(max-width:639px) 400px, (max-width:1023px) 300px, 500px"
-      />
+      {typeof data?.bgImage === 'object' && data?.bgImage?.url && (
+        <Image
+          src={data?.bgImage?.url}
+          alt={data?.title}
+          fill
+          className="object-cover object-center transition-transform duration-500 scale-100 group-hover:scale-105"
+          sizes="(max-width:639px) 400px, (max-width:1023px) 300px, 500px"
+          placeholder="blur"
+          blurDataURL={data?.bgImageBlurDataURL || ''}
+          quality={85}
+        />
+      )}
 
       {/* Gradient overlay with hover effect */}
       <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-300 z-10" />
@@ -48,18 +51,11 @@ function AllPlanCard({ data, blur }: Props) {
       >
         <div className="h-[50%] flex items-start">
           <div
-            className={`text-[20px] xl:text-[28px] 2xl:text-[32px]  uppercase mx-auto lg:mx-0 text-center lg:text-start ${data?.biggerTitle ? 'font-light' : 'font-medium'}`}
+            className={`text-[20px] xl:text-[24px] 2xl:text-[28px]  uppercase mx-auto lg:mx-0 text-center lg:text-start`}
           >
             <LocalizedText en={data?.title} bn={data?.titleBN} />
             <br></br>
-            {data?.biggerTitle && (
-              <p className="text-[18px] lg:text-[17px] xl:text-[20px] 2xl:text-[28px] font-medium uppercase mx-auto lg:mx-0 text-center lg:text-start">
-                <LocalizedText
-                  en={data?.biggerTitle}
-                  bn={data?.biggerTitleBN ? data?.biggerTitleBN : data?.biggerTitle}
-                />
-              </p>
-            )}
+            <LocalizedText en={data?.subTitle} bn={data?.subTitleBN} />
           </div>
         </div>
         {/* blur section */}
@@ -68,28 +64,50 @@ function AllPlanCard({ data, blur }: Props) {
         h-[60%] flex flex-col justify-between`}
         >
           <p className="global-p2 text-center lg:text-start">
-            {/* {data?.description &&
-              (data.description.split(' ').length > 12
-                ? data.description.split(' ').slice(0, 12).join(' ') + '...'
-                : data.description)} */}
-
             <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
-          <Button
-            variant="link"
-            className="text-[#ED7125] hover:underline w-fit mx-auto lg:mx-0
-           global-p2 p-0 "
-          >
-            <div className="flex space-x-1 items-center ">
-              <span>
-                <LocalizedText en="Explore" bn="এক্সপ্লোর" />
-              </span>
-              <ArrowUpRight />
+          {data?.actionType === 'cta' &&
+            (data?.buttonLink || data?.buttonText || data?.buttonTextBN) && (
+              <Link
+                href={pageHref(data?.buttonLink)}
+                className="flex justify-center lg:justify-start  "
+              >
+                <Button
+                  variant="link"
+                  className="text-[#ED7125] hover:underline w-fit mx-auto lg:mx-0
+            global-p2 p-0"
+                >
+                  <div className="flex space-x-1 items-center cursor-pointer ">
+                    <LocalizedText en={data?.buttonText} bn={data?.buttonTextBN} />
+                    <ArrowUpRight />
+                  </div>
+                </Button>
+              </Link>
+            )}
+          {/* modal logic */}
+          {data?.actionType === 'modal' && (
+            <div>
+              <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="link"
+                    className="text-[#ED7125] hover:underline w-fit mx-auto lg:mx-0
+            global-p2 p-0 flex justify-center lg:justify-start"
+                  >
+                    <div className="flex space-x-1 items-center cursor-pointer ">
+                      <LocalizedText en={data?.modalButtonText} bn={data?.modalButtonTextBN} />
+                      <ArrowUpRight />
+                    </div>
+                  </Button>
+                </DialogTrigger>
+
+                <PlanModal data={data} items={data?.modalItems || []} />
+              </Dialog>
             </div>
-          </Button>
+          )}
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
 

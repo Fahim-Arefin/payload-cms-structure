@@ -4,48 +4,53 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/componen
 import { useEffect, useState } from 'react'
 import CarouselNavButtons from '../shared/CarousalNavButtons'
 import LocalizedText from '../shared/LocalizedText'
-import useSSRLanguage from '@/hooks/useSSRLanguage'
+import { CareerPageProcessingBlockType } from '@/types/payloadCustomTypes'
 import { formatLocalizedNumber } from '@/utils/numberLocalization'
+import useSSRLanguage from '@/hooks/useSSRLanguage'
+// import your navigation buttons if you have
 
-const processData = [
-  {
-    img: '/assets/career/web/process1.png',
-    mobileImg: '/assets/career/mobile/process1.png',
-    title: 'INITIAL SCREENING',
-    titleBN: 'প্রারম্ভিক বাছাই',
-  },
-  {
-    img: '/assets/career/web/process2.png',
-    mobileImg: '/assets/career/mobile/process2.png',
-    title: 'PRELIMINARY DISCUSSION',
-    titleBN: 'প্রাথমিক আলোচনা',
-  },
-  {
-    img: '/assets/career/web/process3.png',
-    mobileImg: '/assets/career/mobile/process3.png',
-    title: 'ASSESSMENT CENTER',
-    titleBN: 'মূল্যায়ন কেন্দ্র',
-  },
-  {
-    img: '/assets/career/web/process4.png',
-    mobileImg: '/assets/career/mobile/process4.png',
-    title: 'FINAL INTERVIEW',
-    titleBN: 'সাক্ষাৎকার',
-  },
-  {
-    img: '/assets/career/web/process5.png',
-    mobileImg: '/assets/career/mobile/process5.png',
-    title: 'ON BOARDING',
-    titleBN: 'যোগদান',
-  },
-]
+// const processData = [
+//   {
+//     img: '/assets/career/web/process1.png',
+//     mobileImg: '/assets/career/mobile/process1.png',
+//     title: 'INITIAL SCREENING',
+//     titleBN: 'প্রারম্ভিক বাছাই',
+//   },
+//   {
+//     img: '/assets/career/web/process2.png',
+//     mobileImg: '/assets/career/mobile/process2.png',
+//     title: 'PRELIMINARY DISCUSSION',
+//     titleBN: 'প্রাথমিক আলোচনা',
+//   },
+//   {
+//     img: '/assets/career/web/process3.png',
+//     mobileImg: '/assets/career/mobile/process3.png',
+//     title: 'ASSESSMENT CENTER',
+//     titleBN: 'মূল্যায়ন কেন্দ্র',
+//   },
+//   {
+//     img: '/assets/career/web/process4.png',
+//     mobileImg: '/assets/career/mobile/process4.png',
+//     title: 'FINAL INTERVIEW',
+//     titleBN: 'সাক্ষাৎকার',
+//   },
+//   {
+//     img: '/assets/career/web/process5.png',
+//     mobileImg: '/assets/career/mobile/process5.png',
+//     title: 'ON BOARDING',
+//     titleBN: 'যোগদান',
+//   },
+// ]
 
-export default function CareerProcessingFlow() {
+type Props = {
+  processData: CareerPageProcessingBlockType
+}
+
+export default function CareerProcessingFlow({ processData }: Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
   const lang = useSSRLanguage()
-
   useEffect(() => {
     if (!carouselApi) return
 
@@ -65,22 +70,23 @@ export default function CareerProcessingFlow() {
   return (
     <section className="container-padding w-full py-12 flex flex-col bg-white">
       {/* Header */}
-      <div className="mb-10">
+      <div className="mb-10 uppercase">
         <span className="global-h3 text-[#343434] font-light block mb-0">
-          <LocalizedText en="OUR SELECTION" bn="সিলেকশন" />
+          <LocalizedText en={processData?.title} bn={processData?.titleBN} />
         </span>
         <h2 className="global-h1 font-bold">
           <span className="text-[#ED7125]">
-            <LocalizedText en="PROCESS" bn="প্রক্রিয়া" />
+            <LocalizedText en={processData?.subtitle} bn={processData?.subtitleBN} />
           </span>
         </h2>
       </div>
 
       {/* Always Carousel: For ALL screens! */}
+
       <div className="w-full relative overflow-hidden">
         <Carousel opts={{ align: 'start', loop: false }} setApi={setCarouselApi}>
           <CarouselContent className="flex items-stretch">
-            {processData.map((item, i) => (
+            {processData?.processingCards.map((item, i) => (
               <CarouselItem
                 key={i}
                 className="
@@ -93,9 +99,7 @@ export default function CareerProcessingFlow() {
                 <div className="relative w-full flex items-center mb-6" style={{ height: 44 }}>
                   {/* Line */}
                   <div
-                    className={`absolute top-1/2 right-0 h-1 border-t border-[#000000] z-0 ${
-                      i == processData.length - 1 ? 'right-1/2' : 'right-0'
-                    } ${i == 0 ? 'left-1/2' : 'left-0'}`}
+                    className={`absolute top-1/2 right-0 h-1 border-t border-[#000000] z-0 ${i == processData?.processingCards.length - 1 ? 'right-1/2' : 'right-0'} ${i == 0 ? 'left-1/2' : 'left-0'}`}
                   />
                   <div className="relative flex flex-row items-center justify-center w-full z-10">
                     {/* Step number (localized) */}
@@ -106,7 +110,7 @@ export default function CareerProcessingFlow() {
                       {formatLocalizedNumber(i + 1, lang)}
                     </div>
                     {/* Arrow if not last */}
-                    {i < processData.length - 1 && (
+                    {i < processData?.processingCards.length - 1 && (
                       <div className="absolute right-[-26px] top-1/2 -translate-y-1/2 z-10">
                         <img
                           src="/assets/career/web/process-arrow.png"
@@ -119,23 +123,40 @@ export default function CareerProcessingFlow() {
                 </div>
 
                 {/* Card */}
-                <div className="flex flex-col items-center text-center w-full">
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="rounded-[12px] hidden md:block mb-2 w-[186px] h-[157px] object-contain"
-                    draggable={false}
-                  />
-                  <img
-                    src={item.mobileImg}
-                    alt={item.title}
-                    className="rounded-[12px] block md:hidden mb-2 w+[186px] h-[157px] object-contain"
-                    draggable={false}
-                  />
-                  <span className="mt-2 text-[#343434] text-center text-[12px] font-medium uppercase max-w-[145px] mx-auto leading-tight break-words">
-                    <LocalizedText en={item.title} bn={item.titleBN} />
-                  </span>
-                </div>
+                <>
+                  {typeof item?.image === 'object' && item?.image?.url && (
+                    <div className="flex flex-col items-center text-center w-full">
+                      <div className="hidden md:block mb-2">
+                        <Image
+                          src={item?.image?.url}
+                          alt={item?.title || 'process image'}
+                          width={186}
+                          height={157}
+                          className="rounded-[12px] w-[186px] h-[157px] object-contain"
+                          placeholder="blur"
+                          blurDataURL={item?.imageBlurDataURL || ''}
+                          quality={80}
+                        />
+                      </div>
+                      {/* Mobile */}
+                      <div className="block md:hidden mb-2">
+                        <Image
+                          src={item?.image?.url}
+                          alt={item?.title || 'process image'}
+                          width={186}
+                          height={157}
+                          className="rounded-[12px] w-[186px] h-[157px] object-contain"
+                          placeholder="blur"
+                          blurDataURL={item?.imageBlurDataURL || ''}
+                          quality={80}
+                        />
+                      </div>
+                      <span className="mt-2 text-[#343434] text-center text-[12px] font-medium uppercase max-w-[145px] mx-auto leading-tight break-words">
+                        <LocalizedText en={item?.title} bn={item?.titleBN} />
+                      </span>
+                    </div>
+                  )}
+                </>
               </CarouselItem>
             ))}
           </CarouselContent>

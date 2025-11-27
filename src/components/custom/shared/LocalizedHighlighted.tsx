@@ -27,7 +27,8 @@ export default function LocalizedHighlighted({
   all = false,
 }: Props) {
   const lang = useSSRLanguage()
-  const base = lang === 'en' ? (textEn ?? textBn ?? '') : (textBn ?? textEn ?? '')
+  // const base = lang === 'en' ? (textEn ?? textBn ?? '') : (textBn ?? textEn ?? '')
+  const base = lang === 'en' ? (textEn ?? '') : (textBn ?? '')
   const marker = lang === 'en' ? (highlightEn ?? '') : (highlightBn ?? '')
 
   return <Tag className={className}>{highlightText(base, marker, { highlightClassName, all })}</Tag>

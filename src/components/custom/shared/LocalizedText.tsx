@@ -22,7 +22,8 @@ export default function LocalizedText({
   childrenSuffix,
 }: Props) {
   const lang = useSSRLanguage()
-  const text = lang === 'en' ? (en ?? bn ?? '') : (bn ?? en ?? '')
+  // const text = lang === 'en' ? (en ?? bn ?? '') : (bn ?? en ?? '')
+  const text = lang === 'en' ? (en ?? '') : (bn ?? '')
   return (
     <Tag className={className}>
       {childrenPrefix}

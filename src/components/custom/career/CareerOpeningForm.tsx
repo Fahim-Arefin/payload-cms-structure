@@ -1,3 +1,4 @@
+// src/components/custom/career/CareerOpeningForm.tsx
 'use client'
 import React, { useState } from 'react'
 import { Input } from '@/components/ui/input'
@@ -18,41 +19,34 @@ import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import LocalizedText from '../shared/LocalizedText'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
+import LocalizedRichText from '../shared/LocalizedRichText' // ✅
 
-const positions = [
-  // 'Junior IT Executive',
-  'IT Project Manager',
-  'Head of Agency Business',
-  'Full Stack Engineer',
-  // 'Mid IT Executive',
-  // 'Senior IT Executive',
-  // 'Management Trainee',
-  // 'Relationship Officer (Internship)',
-  // 'Relationship Officer (Full time)',
-  // 'Campus Ambassador (Part-time)',
-  // 'Campus Ambassador (Full time)',
-]
+type PositionOption = { value: string; labelEn: string; labelBn?: string }
 
-function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) => void }) {
+function CareerOpeningForm({
+  pos,
+  setPos,
+  positions = [],
+  consentEN,
+  consentBN,
+}: {
+  pos: string
+  setPos: (p: string) => void
+  positions?: PositionOption[]
+  consentEN?: any
+  consentBN?: any
+}) {
   const lang = useSSRLanguage()
   const L = (en: string, bn: string) => (lang === 'en' ? en : bn)
 
   const [agreeTerms, setAgreeTerms] = useState(false)
-  // Validation functions
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
-  }
 
-  const validatePhoneNumber = (phone: string) => {
-    // Bangladesh mobile number format: 11 digits starting with 01
-    const phoneRegex = /^01[0-9]{9}$/
-    return phoneRegex.test(phone)
-  }
+  // Validation helpers
+  const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  const validatePhoneNumber = (phone: string) => /^01[0-9]{9}$/.test(phone) // BD: 11 digits, starts 01
 
   const validateForm = () => {
     const errors: string[] = []
-
     if (!name.trim()) errors.push('Name is required')
     if (!email.trim()) errors.push('Email is required')
     else if (!validateEmail(email)) errors.push('Please enter a valid email address')
@@ -70,8 +64,6 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-
-    // Validate form
     const validationErrors = validateForm()
     if (validationErrors.length > 0) {
       setValidationErrors(validationErrors)
@@ -81,7 +73,6 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
     setValidationErrors([])
     setIsLoading(true)
     setShowSuccessAlert(false)
-    console.log({ name, email, phone, position, message })
 
     try {
       const resumeFormData = new FormData()
@@ -90,22 +81,15 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
       if (file) {
         resumeFormData.append('file', file)
       }
-      console.log(resumeFormData)
-      const resumeId = await fetch('/api/resume', {
-        method: 'POST',
-        body: resumeFormData,
-      })
+
+      const resumeId = await fetch('/api/resume', { method: 'POST', body: resumeFormData })
         .then((rs) => rs.json())
         .then((resume) => resume.doc.id)
-      console.log({ resumeId })
 
       await fetch('/api/career-application', {
         method: 'POST',
         credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name,
           email,
@@ -114,20 +98,19 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
           message: message.trim() || 'No additional message provided.',
           resume: resumeId,
         }),
-      })
-        .then((rs) => rs.json())
-        .then((rs) => console.log(rs))
+      }).then((rs) => rs.json())
 
       setIsLoading(false)
       setShowSuccessAlert(true)
 
-      // Reset form after successful submission
       setTimeout(() => {
         setName('')
         setEmail('')
         setPhone('')
         setMessage('')
-        setResumeUploadFieldText('Upload your resume')
+        setResumeUploadFieldText(
+          L('Upload your resume (Pdf format & maximum 12mb)', 'আপনার রেজুমে আপলোড করুন (পিডিএফ ফরম্যাট, সর্বোচ্চ ১২এমবি)'),
+        )
         setShowSuccessAlert(false)
       }, 3000)
     } catch (error) {
@@ -142,21 +125,14 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [position, setPosition] = useState(positions[0] ?? '')
   const [message, setMessage] = useState('')
   const [resumeUploadFieldText, setResumeUploadFieldText] = useState(
-    L(
-      'Upload your resume (Pdf format & maximum 12mb)',
-      'আপনার রেজুমে আপলোড করুন (পিডিএফ ফরম্যাট, সর্বোচ্চ ১২এমবি)',
-    ),
+    L('Upload your resume (Pdf format & maximum 12mb)', 'আপনার রেজুমে আপলোড করুন (পিডিএফ ফরম্যাট, সর্বোচ্চ ১২এমবি)'),
   )
 
-  // Handle phone input - only allow numbers and limit to 11 digits
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, '') // Remove non-digits
-    if (value.length <= 11) {
-      setPhone(value)
-    }
+    const value = e.target.value.replace(/\D/g, '')
+    if (value.length <= 11) setPhone(value)
   }
 
   return (
@@ -191,6 +167,7 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
           </span>
         </div>
       )}
+
       <Input
         value={name}
         onChange={(e) => setName(e.target.value)}
@@ -218,6 +195,8 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
         disabled={isLoading}
         type="email"
       />
+
+      {/* ✅ Dynamic positions from props (no UI change) */}
       <Select required value={pos} onValueChange={setPos} disabled={isLoading}>
         <SelectTrigger className="bg-[#FCF4EB] md:bg-white rounded-md px-4 py-2 border-none text-[15px]">
           <SelectValue placeholder={L('Select Job Position', 'জব পজিশন সিলেক্ট করুন')} />
@@ -225,9 +204,9 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
         <SelectContent>
           <SelectGroup>
             <SelectLabel>{L('Position', 'পদ')}</SelectLabel>
-            {positions.map((position) => (
-              <SelectItem value={position} key={position}>
-                {position}
+            {positions.map((p) => (
+              <SelectItem value={p.value} key={p.value}>
+                {lang === 'en' ? p.labelEn : (p.labelBn ?? p.labelEn)}
               </SelectItem>
             ))}
           </SelectGroup>
@@ -273,13 +252,8 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
         rows={2}
         disabled={isLoading}
       />
-      {/* <Button
-        type="submit"
-        className="mt-2 bg-[#ED7125] text-white text-[15px] font-semibold py-2 px-5 rounded-[5px] w-full md:w-auto md:self-end hover:bg-[#d15d15] transition-colors"
-      >
-        Send Application
-      </Button> */}
-      {/* CONSENT CHECKBOX */}
+
+      {/* ✅ Consent from rich text (keeps same wrapper + classes) */}
       <div className="mt-1">
         <label className="flex items-start gap-3">
           <Checkbox
@@ -287,40 +261,15 @@ function CareerOpeningForm({ pos, setPos }: { pos: string; setPos: (p: string) =
             checked={agreeTerms}
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
-
-          <span className="text-xs md:text-sm leading-relaxed">
-            <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
-            <span className="font-semibold">
-              <LocalizedText en="Submit" bn="আপনি আমাদের " />
-            </span>
-            <LocalizedText en=", you agree to our " bn="" />
-            <Link
-              href="/terms-condition"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
-            </Link>{' '}
-            <LocalizedText en="and " bn=", ও " />
-            <Link
-              href="/privacy-policy"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
-            </Link>
-            <LocalizedText en="." bn="সম্মত করছেন।" />
+          <span className="text-xs leading-relaxed">
+            <LocalizedRichText en={consentEN} bn={consentBN} />
           </span>
         </label>
       </div>
 
       <GlobalButton
         size="small"
-        className={`font-semibold w-full md:w-auto md:self-end ${
-          isLoading || !agreeTerms ? 'opacity-60 cursor-not-allowed' : ''
-        }`}
+        className={`font-semibold w-full md:w-auto md:self-end ${isLoading || !agreeTerms ? 'opacity-60 cursor-not-allowed' : ''}`}
         text={
           isLoading
             ? L('Sending...', 'পাঠানো হচ্ছে...')

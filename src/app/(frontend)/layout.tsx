@@ -12,6 +12,8 @@ import Script from 'next/script'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Providers from '@/context/providers'
 import { Noto_Sans_Bengali, Noto_Serif_Bengali } from 'next/font/google'
+import ServerNavbar from '@/components/custom/shared/Navbar/ServerNavbar'
+import ServerTopHeader from '@/components/custom/shared/ServerTopHeader'
 
 // const notoBengali = Noto_Sans_Bengali({
 //   subsets: ['bengali'],
@@ -198,11 +200,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       </head>
       <body className={`${notoSerifBengali.variable}`}>
         <Providers initialLang="en">
-          <main className="bg-[#F6EDDD] min-h-screen relative font-avenir 3xl:max-w-[1925px] 3xl:mx-auto">
-            <TopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" />
-            {/* <Navbar className="absolute top-0 lg:top-[80px] 2xl:top-[115px] left-0 right-0 z-50 " /> */}
-            {/* <Navbar className="top-[0px] lg:top-[80px] 2xl:top-[115px] left-0 right-0 z-50" /> */}
-            <Navbar />
+          {/* bg-[#F6EDDD] */}
+          <main className="min-h-screen relative font-avenir 3xl:max-w-[1925px] 3xl:mx-auto">
+            {/* <TopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" /> */}
+            <ServerTopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" />
+            {/* <Navbar /> */}
+            <ServerNavbar />
             <div className="min-h-screen">{children}</div>
             <CookieConsentBanner />
             <div className="hidden lg:block">

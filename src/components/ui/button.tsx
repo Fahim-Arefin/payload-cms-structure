@@ -11,7 +11,8 @@ const buttonVariants = cva(
       variant: {
         // get back the previous button primary color
         primary: 'bg-[#ED7125] text-white shadow hover:bg-[#ED7125]/90',
-        glass: 'bg-[#ED7125] text-white shadow hover:bg-[#ED7125]/90',
+        glass:
+          'border border-white text-white bg-white/20 backdrop-blur-md hover:bg-white/30 hover:border-white transition-colors duration-300',
         default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
         destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
         outline:

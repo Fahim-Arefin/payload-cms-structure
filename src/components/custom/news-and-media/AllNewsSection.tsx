@@ -1,18 +1,19 @@
 'use client'
-import { AllNewsAndBlogDataType } from '@/types'
-import React, { useState } from 'react'
-import AllNewsCard from './AllNewsCard'
+import { GlobalBlog } from '@/payload-types'
+import { useState } from 'react'
 import GlobalButton from '../shared/GlobalButton'
+import AllNewsCard from './AllNewsCard'
+import { AllBlogsSectionType } from '@/types/payloadCustomTypes'
+import LocalizedString from '../shared/LocalizedString'
 
 type Props = {
-  allNewsData: AllNewsAndBlogDataType[]
+  allNewsData: GlobalBlog['blogs']
+  block: AllBlogsSectionType
 }
 
-function AllNewsSection({ allNewsData }: Props) {
+function AllNewsSection({ allNewsData, block }: Props) {
   const [showAll, setShowAll] = useState(false)
 
-  // Show only first 3 posts initially, all posts when showAll is true
-  const displayedPosts = showAll ? allNewsData : allNewsData.slice(0, 3)
   const hasMorePosts = allNewsData.length > 3
 
   const handleToggle = () => {
@@ -21,12 +22,7 @@ function AllNewsSection({ allNewsData }: Props) {
 
   return (
     <div
-      className={`px-5 
-           md:px-24 
-           lg:px-[130px]   
-           xl:px-[200px]  
-           2xl:px-[300px]
-            pt-[30px] md:pt-[40px] lg:pt-[50px] xl:pt-[60px] 2xl:pt-[70px]
+      className={`container-padding 
             ${
               showAll
                 ? 'pb-12 md:pb-24 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]'
@@ -37,13 +33,15 @@ function AllNewsSection({ allNewsData }: Props) {
       <div className="space-y-12 lg:space-y-24">
         {/* First 3 blogs - always visible */}
         {allNewsData.slice(0, 3).map((data, i) => (
-          <AllNewsCard data={data} key={i} index={i} length={allNewsData?.length} />
+          <AllNewsCard block={block} data={data} key={i} index={i} length={allNewsData?.length} />
         ))}
 
         {/* Button after 3rd blog when showing less */}
         {hasMorePosts && !showAll && (
-          <div className="flex justify-center pt-12 lg:pt-24">
-            <GlobalButton variant="primary" text="Load More" size="small" onClick={handleToggle} />
+          <div className="flex justify-center ">
+            <GlobalButton variant="primary" size="small" onClick={handleToggle}>
+              <LocalizedString en={block?.loadMoreText} bn={block?.loadMoreTextBN} />
+            </GlobalButton>
           </div>
         )}
 
@@ -65,14 +63,16 @@ function AllNewsSection({ allNewsData }: Props) {
                 }
               }}
             >
-              <AllNewsCard data={data} index={i + 3} length={allNewsData?.length} />
+              <AllNewsCard block={block} data={data} index={i + 3} length={allNewsData?.length} />
             </div>
           ))}
 
         {/* Button after 4th blog when showing all */}
         {hasMorePosts && showAll && (
-          <div className="flex justify-center pt-12 lg:pt-24">
-            <GlobalButton variant="primary" text="Show Less" size="small" onClick={handleToggle} />
+          <div className="flex justify-center ">
+            <GlobalButton variant="primary" size="small" onClick={handleToggle}>
+              <LocalizedString en={block?.seeLessText} bn={block?.seeLessTextBN} />
+            </GlobalButton>
           </div>
         )}
       </div>

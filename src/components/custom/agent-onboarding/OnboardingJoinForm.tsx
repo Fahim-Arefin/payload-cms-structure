@@ -17,8 +17,14 @@ import { Loader, MailCheck, SendHorizontal, CheckCircle } from 'lucide-react'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
+import LocalizedRichText from '../shared/LocalizedRichText'
 
-function OnboardingJoinForm() {
+type Props = {
+  consentEn?: any | null
+  consentBn?: any | null
+}
+
+function OnboardingJoinForm({ consentEn, consentBn }: Props) {
   const plans = [
     'Child Education Plan',
     'Retirement Plan',
@@ -311,7 +317,7 @@ function OnboardingJoinForm() {
         </div>
       </div>
 
-      {/* CONSENT CHECKBOX */}
+      {/* CONSENT CHECKBOX with RichText (no fallback) */}
       <div className="col-span-2">
         <label className="flex items-start gap-3">
           <Checkbox
@@ -319,27 +325,9 @@ function OnboardingJoinForm() {
             checked={agreeTerms}
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
-          <span className="text-xs md:text-sm leading-relaxed">
-            By clicking <span className="font-semibold">Submit</span>, you agree to our{' '}
-            <Link
-              href="/terms-condition"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              terms and conditions
-            </Link>{' '}
-            and{' '}
-            <Link
-              href="/privacy-policy"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              privacy policy
-            </Link>
-            .
-          </span>
+          <div className="text-xs md:text-sm leading-relaxed">
+            <LocalizedRichText en={consentEn} bn={consentBn} />
+          </div>
         </label>
       </div>
 

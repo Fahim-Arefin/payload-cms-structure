@@ -1,34 +1,33 @@
 'use client'
 
-import React from 'react'
-// import { Button } from '@/components/ui/button'
-// import GlobalButton from '../GlobalButton'
-// import Link from 'next/link'
-// import { ArrowUpRight } from 'lucide-react'
-import GlobalTabButtons from '../GlobalTabButtons'
-import Link from 'next/link'
-import GlobalButton from '../GlobalButton'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
+import GlobalButton from '../GlobalButton'
 import LocalizedHighlighted from '../LocalizedHighlighted'
-import LocalizedText from '../LocalizedText'
 import LocalizedString from '../LocalizedString'
+import LocalizedText from '../LocalizedText'
+import { PlanInfoDesign04BlockType } from '@/types/payloadCustomTypes'
+import BrochureButtonBlock from '@/blocks/resourcesButton/BrochureButton/BrochureButtonBlock'
+import LinkButtonBlock from '@/blocks/resourcesButton/LinkButton/LinkButtonBlock'
+import { BROCHURE_BUTTON_SLUG_AND_TAG, LINK_BUTTON_SLUG_AND_TAG } from '@/lib/constants'
+import LocalizedRichText from '../LocalizedRichText'
 
-type Props = {}
+type Props = {
+  data: PlanInfoDesign04BlockType
+}
 
-function MatricsSection({}: Props) {
+function MatricsSection({ data }: Props) {
+  const cols = (data?.resourceButtons?.length && data?.resourceButtons?.length - 1) ?? 1
+
   return (
     <div
-      className="px-5 py-12 
-           md:p-24 
-           lg:px-[100px]  lg:py-[100px] 
-           xl:px-[200px]  xl:py-[100px] 
-           2xl:px-[300px] 2xl:py-[150px]
+      className="container-padding
            space-y-4 md:space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12"
     >
       <div className="space-y-4 md:space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12">
         {/* Heading */}
-        <h1 className="global-h1 font-medium uppercase">
+        {/* <h1 className="global-h1 font-medium uppercase">
           <LocalizedHighlighted
             textEn={`Metrics That Matter`}
             textBn={`গুরুত্বপূর্ণ তথ্য`}
@@ -36,44 +35,142 @@ function MatricsSection({}: Props) {
             highlightBn={`গুরুত্বপূর্ণ`}
             highlightClassName="text-[#ED7125]"
           />
-        </h1>
-
+        </h1> */}
+        {(data?.title ||
+          data?.subtitle ||
+          data?.description ||
+          data?.titleBN ||
+          data?.subtitleBN ||
+          data?.descriptionBN) && (
+          <div className={` text-[#434343] text-start `}>
+            <div className="uppercase global-h2 font-semibold">
+              <div>
+                <LocalizedHighlighted
+                  textEn={data?.title}
+                  highlightEn={data?.highlightedText}
+                  textBn={data?.titleBN}
+                  highlightBn={data?.highlightedTextBN}
+                  highlightClassName="text-[#ED7125]"
+                />
+              </div>
+              {(data?.subtitle || data?.subtitleBN) && (
+                <div>
+                  <LocalizedHighlighted
+                    textEn={data?.subtitle}
+                    highlightEn={data?.highlightedSubtitle}
+                    textBn={data?.subtitleBN}
+                    highlightBn={data?.highlightedSubtitleBN}
+                  />
+                </div>
+              )}
+            </div>
+            {(data?.description || data?.descriptionBN) && (
+              <div
+                className={`global-span text-[#3A3A3A] font-[350] 
+                          ${(data?.title || data?.titleBN) && (data?.subtitle || data?.subtitleBN) ? `mt-2 md:mt-4 xl:mt-6 2xl:mt-8` : ''}`}
+              >
+                <LocalizedRichText en={data?.description} bn={data?.descriptionBN} />
+              </div>
+            )}
+          </div>
+        )}
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-5 md:gap-12 lg:gap-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-5 md:gap-12 lg:gap-0 ">
           {/* Left image block */}
-          {/* <div
-            className="bg-[url('/assets/solutions/individual/health-and-protection/accidental-coverage/web/matrics.jpg')] bg-[lightgray] bg-center bg-cover bg-no-repeat 
-            rounded-[10px] lg:rounded-[12px] xl:rounded-[14px] 2xl:rounded-[16px]
-            h-[250px]
-            w-full md:h-[350px]
-            lg:w-[350px] lg:h-[350px]
-            xl:w-[400px] xl:h-[400px]
-            2xl:w-[460px] 2xl:h-[460px]"
-            role="img"
-            aria-label="Surgery room"
-          /> */}
-          <div
-            className="relative
+          {/* desktop img */}
+          <div className={`order-1 lg:${data?.imageOrder === 'left' ? 'order-1' : 'order-2'} `}>
+            {data?.desktopImageChoice === 'tall' ? (
+              <div
+                className="hidden lg:block relative 
            rounded-md lg:rounded-lg xl:rounded-xl 
-           w-full aspect-[350/250] lg:aspect-auto
-            lg:w-[350px] lg:h-[350px]
-            xl:w-[400px] xl:h-[400px]
-            2xl:w-[460px] 2xl:h-[460px]"
-          >
-            <Image
-              fill
-              src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/accidental-coverage/web/matrics.jpg`}
-              alt="Surgery room"
-              className="object-cover object-center rounded-md lg:rounded-lg xl:rounded-xl "
-              sizes="(max-width: 1023px) 350px, 700px"
-            />
+           w-full h-auto aspect-[630/700]"
+              >
+                {typeof data?.imageTall === 'object' && data?.imageTall?.url && (
+                  <Image
+                    fill
+                    // src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/accidental-coverage/web/matrics.jpg`}
+                    src={data?.imageTall?.url}
+                    alt="Surgery room"
+                    className="object-cover object-center rounded-md lg:rounded-lg xl:rounded-xl "
+                    sizes="(max-width: 1023px) 350px, 700px"
+                    placeholder="blur"
+                    blurDataURL={data?.imageTallBlurDataURL || ''}
+                    quality={80}
+                  />
+                )}
+              </div>
+            ) : (
+              <div
+                className="hidden lg:block relative 
+           rounded-md lg:rounded-lg xl:rounded-xl 
+           w-full h-auto aspect-[500/370]"
+              >
+                {typeof data?.imageWide === 'object' && data?.imageWide?.url && (
+                  <Image
+                    fill
+                    // src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/accidental-coverage/web/matrics.jpg`}
+                    src={data?.imageWide?.url}
+                    alt="Surgery room"
+                    className="object-cover object-center rounded-md lg:rounded-lg xl:rounded-xl "
+                    sizes="(max-width: 1023px) 350px, 700px"
+                    placeholder="blur"
+                    blurDataURL={data?.imageWideBlurDataURL || ''}
+                    quality={80}
+                  />
+                )}
+              </div>
+            )}
+
+            {/* mobile img */}
+            {data?.mobileImageChoice === 'tall' ? (
+              <div
+                className="lg:hidden relative 
+           rounded-md lg:rounded-lg xl:rounded-xl 
+           w-full h-auto aspect-[630/700]"
+              >
+                {typeof data?.imageTall === 'object' && data?.imageTall?.url && (
+                  <Image
+                    fill
+                    // src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/accidental-coverage/web/matrics.jpg`}
+                    src={data?.imageTall?.url}
+                    alt="Surgery room"
+                    className="object-cover object-center rounded-md lg:rounded-lg xl:rounded-xl "
+                    sizes="(max-width: 1023px) 350px, 700px"
+                    placeholder="blur"
+                    blurDataURL={data?.imageTallBlurDataURL || ''}
+                    quality={80}
+                  />
+                )}
+              </div>
+            ) : (
+              <div
+                className="lg:hidden relative
+           rounded-md lg:rounded-lg xl:rounded-xl 
+           w-full h-auto aspect-[500/370]"
+              >
+                {typeof data?.imageWide === 'object' && data?.imageWide?.url && (
+                  <Image
+                    fill
+                    // src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/solutions/individual/health-and-protection/accidental-coverage/web/matrics.jpg`}
+                    src={data?.imageWide?.url}
+                    alt="Surgery room"
+                    className="object-cover object-center rounded-md lg:rounded-lg xl:rounded-xl "
+                    sizes="(max-width: 1023px) 350px, 700px"
+                    placeholder="blur"
+                    blurDataURL={data?.imageWideBlurDataURL || ''}
+                    quality={80}
+                  />
+                )}
+              </div>
+            )}
           </div>
 
           {/* Right visual layout with image arcs */}
           <div
-            className=" relative mx-auto  
-           h-[250px] md:h-[350px] lg:h-full
-           w-[330px] md:w-[580px] lg:w-[380px] xl:w-[500px] 2xl:w-[645px] "
+            className={`order-2 lg:${data?.imageOrder === 'left' ? 'order-2' : 'order-1'}  
+            relative mx-auto 
+           h-[250px] md:h-[350px] lg:h-[350px] xl:h-[400px] 2xl:h-[460px]
+           w-[330px] md:w-[580px] lg:w-[380px] xl:w-[500px] 2xl:w-[645px]`}
           >
             {/* Background semi-circle */}
             <div className="absolute inset-0 flex left-[28%] items-center">
@@ -105,86 +202,110 @@ function MatricsSection({}: Props) {
 
             {/* Center text */}
             <div
-              className="absolute inset-0 flex items-center  text-center z-10
-             left-[32%] md:left-[34%] lg:left-[32%] 2xl:left-[36%]"
+              className=" w-[33%] h-[33%] absolute inset-0 flex items-center  text-center z-10
+             left-[32%] md:left-[34%] lg:left-[32%] 2xl:left-[36%] top-1/3"
             >
               <div>
                 <p className="text-[10px] md:text-[16px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-[#ED7125] font-medium">
-                  <LocalizedText en={`Minimum Coverage`} bn={`সর্বনিম্ন কভারেজ`} />
+                  <LocalizedText
+                    en={data?.circleInfo?.centerTitle}
+                    bn={data?.circleInfo?.centerTitleBN}
+                  />
                 </p>
                 <p className="global-span font-semibold text-[#ED7125]">
-                  <LocalizedText en={`BDT 100,000`} bn={`১০০,০০০ টাকা`} />
+                  <LocalizedText
+                    en={data?.circleInfo?.centerValue}
+                    bn={data?.circleInfo?.centerValueBN}
+                  />
                 </p>
               </div>
             </div>
 
             {/* Top Left */}
             <div
-              className=" absolute text-center p-4 z-10
-              top-4 md:left-8 lg:top-4 lg:left-3 xl:top-4 xl:left-4 2xl:top-4 2xl:left-7"
+              className=" absolute text-center p-4 z-10 
+              top-4 md:left-8 lg:top-4 lg:left-3 xl:top-4 xl:left-4 2xl:top-4 2xl:left-7 max-w-[45%]"
             >
               <p className="global-p2 font-light capitalize">
-                <LocalizedText en={`Age At Entry`} bn={`আবেদন করার বয়স`} />
+                <LocalizedText
+                  en={data?.circleInfo?.topLeftLabel}
+                  bn={data?.circleInfo?.topLeftLabelBN}
+                />
               </p>
               <p className="global-p1 font-semibold">
-                <LocalizedText en={`18 - 60 Years`} bn={`১৮ - ৬০ বছর`} />
+                <LocalizedText
+                  en={data?.circleInfo?.topLeftValue}
+                  bn={data?.circleInfo?.topLeftValueBN}
+                />
               </p>
             </div>
 
             {/* Top Right */}
             <div
-              className=" absolute text-center p-4 z-10
-              top-4
-            right-7 md:right-16 lg:right-8 2xl:right-12 "
+              //   className=" absolute text-center p-4 z-10 border border-black top-4
+              // right-0 md:right-8 lg:right-0 2xl:right-12 max-w-[45%]"
+              className=" absolute top-4 right-0 md:right-8 lg:right-0 text-center p-4 z-10 max-w-[45%]"
             >
               <p className="global-p2 font-light capitalize">
-                <LocalizedText en={`Policy Term`} bn={`বীমার মেয়াদ`} />
+                <LocalizedText
+                  en={data?.circleInfo?.topRightLabel}
+                  bn={data?.circleInfo?.topRightLabelBN}
+                />
               </p>
               <p className="global-p1 font-semibold">
-                <LocalizedText en={`Same As`} bn={`মূল লাইফ`} />
+                <LocalizedText
+                  en={data?.circleInfo?.topRightValue}
+                  bn={data?.circleInfo?.topRightValueBN}
+                />
               </p>
-              <p className="global-p1 leading-3 font-semibold">
+              {/* <p className="global-p1 leading-3 font-semibold">
                 <LocalizedText en={`Your Basic Plan`} bn={`পলিসির অনুরূপ`} />
-              </p>
+              </p> */}
             </div>
 
             {/* Bottom Left */}
             <div
-              className=" absolute text-center p-4 z-10
+              className=" absolute text-center p-4 z-10  max-w-[45%]
               bottom-4 md:left-8 lg:bottom-4 lg:left-3  xl:bottom-4 xl:left-4 2xl:bottom-4 2xl:left-7"
             >
               <p className="global-p2 font-light capitalize">
-                <LocalizedText en={`Maximum Coverage`} bn={`সর্বোচ্চ কভারেজ`} />
+                <LocalizedText
+                  en={data?.circleInfo?.bottomLeftLabel}
+                  bn={data?.circleInfo?.bottomLeftLabelBN}
+                />
               </p>
               <p className="global-p1 font-semibold">
-                <LocalizedText en={`BDT 5,000,000`} bn={`৫০,০০,০০০ টাকা`} />
+                <LocalizedText
+                  en={data?.circleInfo?.bottomLefValue}
+                  bn={data?.circleInfo?.bottomLefValueBN}
+                />
               </p>
             </div>
 
             {/* Bottom Right */}
-            <div className=" absolute bottom-4 right-0 md:right-8 lg:right-0 text-center p-4 z-10">
+            <div className=" absolute bottom-4 right-0 md:right-8 lg:right-0 text-center p-4 z-10 max-w-[45%]">
               <p className="global-p2 font-light capitalize">
-                <LocalizedText en={`Premium Rate`} bn={`প্রিমিয়াম`} />
+                <LocalizedText
+                  en={data?.circleInfo?.bottomRightLabel}
+                  bn={data?.circleInfo?.bottomRightLabelBN}
+                />
               </p>
               <p className="global-p1 font-semibold">
-                <LocalizedText en={`Affordable`} bn={`জীবনযাত্রারার`} />
+                <LocalizedText
+                  en={data?.circleInfo?.bottomRightValue}
+                  bn={data?.circleInfo?.bottomRightValueBN}
+                />
               </p>
-              <p className="global-p1 leading-3 font-semibold">
+              {/* <p className="global-p1 leading-3 font-semibold">
                 <LocalizedText en={`Extensive Protection!`} bn={`মানের সাথে সামঞ্জস্যপূর্ণ`} />
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
       </div>
       {/* Buttons */}
-      {/* <GlobalTabButtons
-        brochureLink="/assets/pdf/Required Brochures/Health & Protection/Shanta Accidental Coverage/Shanta Life Rider Brochure.pdf"
-        explorePlansLink="/plans/individual"
-        calculateLink="#"
-        showCalculatePremium={false}
-      /> */}
-      {/* button */}
-      <div className="flex gap-4 lg:gap-6 justify-center">
+
+      {/* <div className="flex gap-4 lg:gap-6 justify-center">
         <Link
           href="/assets/pdf/Required Brochures/Health Protection/Shanta Accidental Coverage/Shanta-Life-Rider-Brochure.pdf"
           target="_blank"
@@ -204,7 +325,34 @@ function MatricsSection({}: Props) {
             <ArrowUpRight size={14} className="inline-block" />
           </Link>
         </div>
-      </div>
+      </div> */}
+      {/* btn */}
+      {data?.resourceButtons && data?.resourceButtons?.length > 0 && (
+        <>
+          <div
+            className="mt-[30px] lg:mt-[50px] xl:mt-[80px] w-[40%] mx-auto
+              flex flex-row flex-wrap gap-y-2 gap-x-4 justify-center items-center  "
+            style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+          >
+            {data?.resourceButtons?.map((item, i) => (
+              <div key={i} className="basis-[46%]">
+                {item?.blockType === BROCHURE_BUTTON_SLUG_AND_TAG && (
+                  <div className={`flex ${i % 2 === 0 ? `justify-end ` : 'justify-start '} `}>
+                    <BrochureButtonBlock data={item} />
+                  </div>
+                )}
+                {item?.blockType === LINK_BUTTON_SLUG_AND_TAG && (
+                  <div
+                    className={`flex gap-x-2  ${data?.resourceButtons?.length === 2 ? `justify-start` : 'justify-center'}`}
+                  >
+                    <LinkButtonBlock data={item} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   )
 }

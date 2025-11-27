@@ -39,79 +39,8 @@ import Link from 'next/link'
 import { Checkbox } from '@/components/ui/checkbox'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
 import LocalizedString from '../shared/LocalizedString'
-import LocalizedText from '../shared/LocalizedText'
-
-/* ---------------- helpers JUST for select option localization ---------------- */
-
-const bnNum = (s: string | number) => String(s).replace(/[0-9]/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)])
-
-const PLAN_LABELS: Record<string, { en: string; bn: string }> = {
-  'Shanta Endowment Plan': { en: 'Shanta Endowment Plan', bn: 'শান্তা এনডাওমেন্ট প্ল্যান' },
-  'Shanta 3 Stage Plan': { en: 'Shanta 3 Stage Plan', bn: 'শান্তা থ্রি পেমেন্ট প্ল্যান' },
-  'Shanta 4 Stage Plan': { en: 'Shanta 4 Stage Plan', bn: 'শান্তা ফোর পেমেন্ট প্ল্যান' },
-  'Shanta Child Education Plan (1%)': {
-    en: 'Shanta Child Education Plan (1%)',
-    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (১%)',
-  },
-  'Shanta Child Education Plan (2%)': {
-    en: 'Shanta Child Education Plan (2%)',
-    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (২%)',
-  },
-  'Shanta Child Education Plan (3%)': {
-    en: 'Shanta Child Education Plan (3%)',
-    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (৩%)',
-  },
-  'Shanta Child Education Plan Single Payment (1%)': {
-    en: 'Shanta Child Education Plan Single Payment (1%)',
-    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (১%)',
-  },
-  'Shanta Child Education Plan Single Payment (2%)': {
-    en: 'Shanta Child Education Plan Single Payment (2%)',
-    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (২%)',
-  },
-  'Shanta Child Education Plan Single Payment (3%)': {
-    en: 'Shanta Child Education Plan Single Payment (3%)',
-    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (৩%)',
-  },
-}
-// API → canonical EN
-const API_PLAN_NAME_MAP: Record<string, string> = {
-  'Shanta Endowment': 'Shanta Endowment Plan',
-  'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
-  'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
-  'Shanta Child Education Plan (1%)': 'Shanta Child Education Plan (1%)',
-  'Shanta Child Education Plan (2%)': 'Shanta Child Education Plan (2%)',
-  'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
-  'Shanta Child Education Plan Single Payment (1%)':
-    'Shanta Child Education Plan Single Payment (1%)',
-  'Shanta Child Education Plan Single Payment (2%)':
-    'Shanta Child Education Plan Single Payment (2%)',
-  'Shanta Child Education Plan Single Payment (3%)':
-    'Shanta Child Education Plan Single Payment (3%)',
-}
-const planLabel = (name: string, lang: 'en' | 'bn') => PLAN_LABELS[name]?.[lang] ?? name
-
-const localizeTenure = (label: string, lang: 'en' | 'bn') => {
-  if (lang === 'en') return label
-  // "10 years" -> "১০ বছর"
-  return label.replace(/(\d+)/, (m) => bnNum(m)).replace(/years?/, 'বছর')
-}
-
-const localizePaymode = (name: string, lang: 'en' | 'bn') => {
-  const map: Record<string, { en: string; bn: string }> = {
-    Yearly: { en: 'Yearly', bn: 'বার্ষিক' },
-    'Half Yearly': { en: 'Half Yearly', bn: 'অর্ধ-বার্ষিক' },
-    HalfYearly: { en: 'Half Yearly', bn: 'অর্ধ-বার্ষিক' },
-    Quarterly: { en: 'Quarterly', bn: 'ত্রৈমাসিক' },
-    Monthly: { en: 'Monthly', bn: 'মাসিক' },
-    Single: { en: 'Single Payment', bn: 'এককালীন' },
-    'Single Payment': { en: 'Single Payment', bn: 'এককালীন' },
-  }
-  const key = map[name] ? name : name.replace(/\s+/g, '')
-  return map[key] ? map[key][lang] : name
-}
-
-/* --------------------------------------------------------------------------- */
+import LocalizedRichText from '../shared/LocalizedRichText'
+import { PremiumCalculatorBlockType } from '@/types/payloadCustomTypes'
 
 interface FormData {
   PlanCode: number
@@ -129,9 +58,11 @@ interface FormData {
 
 interface QuoteFormProps {
   onApiResponse?: (response: ApiResponse, paymentMode: string) => void
+  payloadData: PremiumCalculatorBlockType
 }
 
-function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
+// function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
+function QuoteForm({ onApiResponse, payloadData }: QuoteFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [isHoveringPlanSelect, setIsHoveringPlanSelect] = useState(false)
   const [isHoveringTenureSelect, setIsHoveringTenureSelect] = useState(false)
@@ -1198,8 +1129,8 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
         />
       </div>
 
-      {/* CONSENT CHECKBOX (unchanged text) */}
-      <div className="col-span-2">
+      {/* CONSENT CHECKBOX */}
+      {/* <div className="col-span-2">
         <label className="flex items-start gap-3">
           <Checkbox
             id="agree-terms"
@@ -1248,6 +1179,22 @@ function QuoteForm({ onApiResponse }: QuoteFormProps = {}) {
             {getFieldErrorMessage('agreeTerms')}
           </p>
         )}
+      </div> */}
+      {/* Consent (left as-is per your instruction; feel free to localize similarly if needed) */}
+      <div className="col-span-2 w-full">
+        <div className="flex gap-3">
+          <Checkbox
+            id="agree-terms"
+            checked={agreeTerms}
+            onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
+          />
+          <div className="text-xs md:text-sm leading-relaxed ">
+            <LocalizedRichText
+              en={payloadData?.premiumCalculatorForm?.consentText}
+              bn={payloadData?.premiumCalculatorForm?.consentTextBN}
+            />
+          </div>
+        </div>
       </div>
 
       {/* SUBMIT */}

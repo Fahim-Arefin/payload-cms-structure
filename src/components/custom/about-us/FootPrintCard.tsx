@@ -83,12 +83,14 @@
 // export default FootPrintCard
 
 // v1 modifing
-import { FootPrintDataType } from '@/types'
+import { ShantaFootprintBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import Link from 'next/link'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
-  data: FootPrintDataType
+  data: ShantaFootprintBlockType['cards'][number]
   isActive?: boolean
 }
 // w-[180px] md:w-[220px] lg:w-[250px] xl:w-[270px] 2xl:w-[320px]
@@ -96,19 +98,33 @@ function FootPrintCard({ data, isActive = false }: Props) {
   return (
     <Link target="_blank" href={data?.link}>
       <div
+        //   className={`
+        //   mx-auto relative p-4 md:p-6 overflow-hidden text-white
+        //   transition-all duration-500 ease-in-out
+        //   rounded-md lg:rounded-xl
+        //   w-[85%] md:w-[85%] lg:w-[85%] xl:w-[83%] 2xl:w-[80%]
+        //   h-[180px] md:h-[220px] lg:h-[280px] xl:h-[280px] 2xl:h-[350px]
+        //   hover:w-full
+        //   hover:h-[200px]
+        //   hover:md:h-[300px]
+        //   hover:lg:h-[350px]
+        //   hover:xl:h-[400px]
+        //   hover:2xl:h-[480px]
+
+        // `}
+        // h-[180px] md:h-[220px] lg:h-[280px] xl:h-[280px] 2xl:h-[350px]
+        //  hover:h-[200px]
+        // hover:md:h-[300px]
+        // hover:lg:h-[350px]
+        // hover:xl:h-[400px]
+        // hover:2xl:h-[480px]
         className={`
         mx-auto relative p-4 md:p-6 overflow-hidden text-white
         transition-all duration-500 ease-in-out
         rounded-md lg:rounded-xl
         w-[85%] md:w-[85%] lg:w-[85%] xl:w-[83%] 2xl:w-[80%]
-        h-[180px] md:h-[220px] lg:h-[280px] xl:h-[280px] 2xl:h-[350px]
+        aspect-[1/1]
         hover:w-full 
-        hover:h-[200px]
-        hover:md:h-[300px]
-        hover:lg:h-[350px]
-        hover:xl:h-[400px]
-        hover:2xl:h-[480px]
-        
       `}
       >
         {/* Background image */}
@@ -119,22 +135,34 @@ function FootPrintCard({ data, isActive = false }: Props) {
             backgroundImage: `url('${data.image}')`,
           }}
         /> */}
-        <Image
-          src={data.image}
-          alt={data.title}
-          fill
-          className="object-cover object-center  "
-          sizes="(max-width: 767px) 50vw, (max-width: 1349px) 33vw, 400px"
-        />
+        {typeof data?.image === 'object' && data?.image?.url && (
+          <Image
+            src={data.image?.url}
+            alt={data.title}
+            fill
+            className="object-cover object-center  "
+            sizes="(max-width: 767px) 50vw, (max-width: 1349px) 33vw, 400px"
+            placeholder="blur"
+            blurDataURL={data?.imageBlurDataURL || ''}
+            quality={80}
+          />
+        )}
 
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-black/60 cursor-pointer" />
 
         {/* Foreground content */}
         <div className="cursor-pointer relative z-10 text-white space-y-2 flex flex-col justify-between h-full">
-          <p className="global-p2 line-clamp-5 lg:line-clamp-7 text-justify">{data?.description}</p>
+          <p className="global-p2 line-clamp-5 lg:line-clamp-7 text-justify">
+            <LocalizedText en={data?.description} bn={data?.descriptionBN} />
+          </p>
           <h1 className="text-[10px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] tracking-wide">
-            {data?.title}
+            <LocalizedHighlighted
+              textEn={data?.title}
+              textBn={data?.titleBN}
+              highlightEn={data?.highlightedText}
+              highlightBn={data?.highlightedTextBN}
+            />
           </h1>
         </div>
       </div>

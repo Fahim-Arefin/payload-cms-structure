@@ -1,147 +1,86 @@
+// src/components/custom/shared/hero/HeroItem.tsx
+import { HeroBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
-import Link from 'next/link'
+import LocalizedRichText from '../LocalizedRichText'
+import LocalizedString from '../LocalizedString'
 
-import { HeroContentType } from '@/types'
-import CallNowButton from '../CallNowButton'
-import GlobalButton from '../GlobalButton'
-import LocalizedText from '../LocalizedText'
+type HeroBlock = HeroBlockType
+type HeroSlide = NonNullable<HeroBlock['heroes']>[number]
 
 type Props = {
-  slide: HeroContentType
+  slide: HeroSlide
   top?: string
   position?: string
-  isHome?: boolean
 }
 
-const HeroItem = ({ slide, top, position, isHome }: Props) => {
-  const descWidthLg = isHome ? 'lg:w-[40%] xl:w-[45%]' : 'lg:w-[65%] xl:w-[65%]'
-
+export default function HeroItem({ slide, top, position }: Props) {
+  const stableAlt = slide?.title || 'Hero image' // SSR-stable alt
   return (
     <>
       {/* Background image */}
-      <Image
-        src={slide.image}
-        alt={slide.title}
-        fill
-        className={`object-cover object-center ${position}`}
-        sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
-        priority
-      />
+      {typeof slide.image === 'object' && slide.image?.url && (
+        <Image
+          src={slide.image?.url || ''}
+          alt={stableAlt}
+          fill
+          className={`object-cover object-center ${position || ''}`}
+          sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
+          priority
+          quality={85}
+          placeholder="blur"
+          blurDataURL={slide?.imageBlurDataURL || ''}
+        />
+      )}
+
       {/* Overlay */}
       <div className="absolute inset-0 z-10 bg-black/35" />
 
       {/* Content */}
       <div
-        className={`absolute
-        inset-x-0 lg:left-[120px] xl:left-[200px] 2xl:left-[270px] lg:right-auto
-       space-y-4 md:space-y-6 xl:space-y-10 2xl:space-y-20
-       z-20
-       lg:w-[920px] xl:w-[1205px] 2xl:w-[1405px]
-        ${top ? top : ' top-[100px] md:top-[150px] lg:top-[35%] '}`}
+        // lg:w-[920px] xl:w-[1205px] 2xl:w-[1405px]
+        className={`absolute inset-x-0 lg:left-[120px] xl:left-[200px] 2xl:left-[270px] lg:right-auto
+          space-y-4 md:space-y-6 xl:space-y-10 2xl:space-y-20 z-20 lg:w-[80%]
+          ${top ? top : ' top-[100px] md:top-[150px] lg:top-[35%] '}`}
       >
-        {/* Title & subtitle */}
-        <div
-          className="text-left
-        hero-content-width
-        tracking-[3%] lg:tracking-[0%]
-        font-semibold text-white
-        hero-h1 uppercase"
-        >
-          <h1>
-            {/* {slide.title ? slide.title : ''} */}
-            <LocalizedText
-              en={slide?.title ? slide.title : ''}
-              bn={slide?.titleBN ? slide?.titleBN : slide?.title}
-            />
-          </h1>
-
-          <h1 className="lg:mt-2">
-            {/* {slide.subtitle ? slide.subtitle : ''} */}
-            <LocalizedText
-              en={slide?.subtitle ? slide.subtitle : ''}
-              bn={slide?.subtitleBN ? slide.subtitleBN : ''}
-            />
-          </h1>
+        {/* Titles */}
+        <div className="text-left hero-content-width tracking-[3%] lg:tracking-[0%] font-semibold text-white hero-h1 uppercase">
+          {(slide?.title || slide?.titleBN) && (
+            <h1>
+              <LocalizedString en={slide?.title} bn={slide?.titleBN} />
+            </h1>
+          )}
+          {(slide?.subtitle || slide?.subtitleBN) && (
+            <h1 className="lg:mt-2">
+              <LocalizedString en={slide?.subtitle} bn={slide?.subtitleBN} />
+            </h1>
+          )}
         </div>
 
-        {/* description */}
-        {slide?.description && slide?.descriptionBN && (
+        {/* Description */}
+        {(slide?.description || slide?.descriptionBN) && (
           <>
-            <div
-              className="
-              block lg:hidden
-          hero-description-bg-sm
-          font-[350]
-         hero-content-width
-          p-2 md:p-3 lg:p-4
-          hero-h5"
-            >
+            {/* mobile */}
+            <div className="block lg:hidden hero-description-bg-sm font-[350] hero-content-width p-2 md:p-3 lg:p-4 hero-h5">
               <div className="text-white">
-                {/* {slide?.description?.split('.. ')?.map((line, i) => (
-                  <h5 key={i}>{line.trim()}</h5>
-                ))} */}
-                <LocalizedText
-                  en={slide?.description ? slide.description : ''}
-                  bn={slide?.descriptionBN ? slide?.descriptionBN : ''}
+                <LocalizedRichText
+                  en={slide?.description as any}
+                  bn={slide?.descriptionBN as any}
                 />
               </div>
             </div>
 
-            {/* description style after lg screen */}
-
-            <div
-              className={`hidden lg:block hero-description-bg-lg font-[350] ${descWidthLg}
-                          p-2 md:p-3 lg:p-4 hero-h5`}
-            >
+            {/* lg+ */}
+            <div className="hidden lg:block hero-description-bg-lg font-[350] w-fit lg:mr-12 xl:mr-0 p-2 md:p-3 lg:p-4 hero-h5 ">
               <div className="text-white">
-                <LocalizedText
-                  en={slide?.description ? slide.description : ''}
-                  bn={slide?.descriptionBN ? slide?.descriptionBN : slide?.description}
+                <LocalizedRichText
+                  en={slide?.description as any}
+                  bn={slide?.descriptionBN as any}
                 />
               </div>
             </div>
           </>
         )}
-
-        {/* Action Buttons */}
-        {(slide?.showPurchaseButton || slide?.showCallButton) && (
-          <div className="hero-content-width mt-4 lg:mt-6 flex flex-col md:flex-row gap-2 w-fit">
-            {slide?.showPurchaseButton && (
-              <Link href="/purchase" target="_blank">
-                <GlobalButton text="Purchase" variant="primary" size="large" />
-              </Link>
-            )}
-            {slide?.showCallButton && <CallNowButton />}
-          </div>
-        )}
-
-        {/* Button */}
-        {/* <div
-          className="
-       hero-content-width
-        flex justify-left space-x-4 md:space-x-6 lg:justify-start
-        "
-        >
-          <Button
-            variant="primary"
-            className="px-4 md:px-6 py-1 md:py-2 2xl:px-10 2xl:py-6 rounded-[4px] lg:rounded-[8px]
-            w-[100px] md:w-[150px] lg:w-[208.41px] 2xl:w-[258.41px]
-            text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[18px] font-normal"
-          >
-            Explore Now
-          </Button>
-          <div className="flex items-center space-x-2 text-white 2xl:space-x-4">
-            <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
-              <BsPlay />
-            </div>
-            <div className="text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[18px] font-normal">
-              From the Expert
-            </div>
-          </div>
-        </div> */}
       </div>
     </>
   )
 }
-
-export default HeroItem

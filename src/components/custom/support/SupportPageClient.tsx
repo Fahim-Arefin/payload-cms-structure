@@ -108,11 +108,7 @@ export default function SupportPageClient({ mapTabData }: Props) {
   // You can default the active tab to 'hospitals' if desired; keeping your original default 'branches'
   return (
     <div className="font-avenir bg-white">
-      <HeroSection
-        heroSlides={heroSlides}
-        top=" top-[220px] md:top-[150px] lg:top-[50%]"
-        position="[object-position:50%_50px] md:[object-position:50%_-10%]"
-      />
+      
 
       <div id="map-section">
         <MapTabSection
@@ -131,7 +127,7 @@ export default function SupportPageClient({ mapTabData }: Props) {
 
       <CatchTheBuzzSection />
       <FeedBackSection />
-      <LevelUpSection
+      {/* <LevelUpSection
         data={[
           {
             title: 'Vlog',
@@ -155,7 +151,7 @@ export default function SupportPageClient({ mapTabData }: Props) {
             link: '/news-and-media#news',
           },
         ]}
-      />
+      /> */}
     </div>
   )
 }
