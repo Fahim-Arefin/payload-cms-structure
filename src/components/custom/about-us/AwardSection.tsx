@@ -5,10 +5,21 @@ import award3 from '/public/assets/homepage/web/award3.png'
 import award4 from '/public/assets/homepage/web/award4.png'
 import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 import LocalizedText from '../shared/LocalizedText'
+import { ShantaMilestoneUnlockedBlockType } from '@/types/payloadCustomTypes'
 
-function AwardSection() {
+type Props = {
+  data: ShantaMilestoneUnlockedBlockType
+}
+
+function AwardSection({ data }: Props) {
   return (
-    <div className="bg-white pb-24 pt-12 md:py-24 lg:py-[110px] 2xl:py-[150px]">
+    // <div className="bg-white pb-24 pt-12 md:py-24 lg:py-[110px] 2xl:py-[150px]">
+    <div
+      className="pb-24 pt-12 md:py-24  lg:container-padding-y"
+      style={{
+        backgroundColor: data?.backgroundColor || '',
+      }}
+    >
       <div className="relative">
         {/* linear linear-gradient */}
         <div className="md:hidden absolute top-[135px] w-full h-[4px]">
@@ -21,10 +32,10 @@ function AwardSection() {
         mb-5 md:mb-8 lg:mb-16  2xl:mb-24"
         >
           <LocalizedHighlighted
-            textBn="সফলতার প্রতিটি ধাপ"
-            textEn="Milestones Unlocked"
-            highlightBn="ধাপ"
-            highlightEn="Unlocked"
+            textEn={data?.sectionTitle}
+            textBn={data?.sectionTitleBN}
+            highlightEn={data?.highlightedText}
+            highlightBn={data?.highlightedTextBN}
             highlightClassName="text-[#ED7125]"
           />
         </h1>
@@ -37,13 +48,19 @@ function AwardSection() {
             h-[200px] md:h-[300px] lg:h-[600px] xl:h-[650px] 2xl:h-[700px]"
             >
               {/* web */}
-              <Image
-                fill
-                className="rounded-2xl object-cover"
-                src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/about_milestone_2.jpg`}
-                alt="why choose us"
-                sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , (max-width: 1349px) 600px , 100vw"
-              />
+              {typeof data?.image === 'object' && data?.image?.url && (
+                <Image
+                  fill
+                  className="rounded-2xl object-cover object-center"
+                  // src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/about-us/web/about_milestone_2.jpg`}
+                  src={data?.image?.url}
+                  alt="why choose us"
+                  sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , (max-width: 1349px) 100vw , 100vw "
+                  placeholder="blur"
+                  blurDataURL={data?.imageBlurDataURL || ''}
+                  quality={80}
+                />
+              )}
             </div>
           </div>
 
@@ -52,112 +69,54 @@ function AwardSection() {
             {/* top section */}
             <div className="hidden lg:flex h-[250px] 2xl:h-[300px] justify-center lg:justify-end items-center rounded-tl-2xl">
               <div className="flex justify-center lg:justify-end items-center flex-wrap w-full">
-                {/* each info section */}
-                <div className="w-[48%] md:w-[40%] lg:w-[45%] flex">
-                  {/* img */}
-                  <div className="p-2 2xl:p-4 border-2 rounded-t-xl border-[#9A4E46] ">
-                    <div className="">
-                      {/* <img src="/assets/homepage/web/award1.png" alt="" /> */}
-                      <Image
-                        unoptimized={false}
-                        src={award1}
-                        alt="award1"
-                        placeholder="blur"
-                        sizes="30vw"
+                {data?.stats?.map((stat, index) => (
+                  <div className="w-[48%] md:w-[40%] lg:w-[45%] grid grid-cols-3" key={index}>
+                    {/* icon */}
+                    <div
+                      className={`col-span-1 p-2 2xl:p-4 border-2 border-white lg:border-[#9A4E46] bg-white lg:bg-none 
+                                      ${index === 0 || index === 1 ? 'rounded-t-sm md:rounded-t-md lg:rounded-t-lg xl:rounded-t-xl' : 'rounded-b-sm md:rounded-b-md lg:rounded-b-lg xl:rounded-b-xl '}`}
+                    >
+                      {typeof stat?.icon === 'object' && stat?.icon?.url && (
+                        <div className="relative w-full aspect-square">
+                          <Image
+                            fill
+                            src={stat?.icon?.url || ''}
+                            alt="stat-icon"
+                            className="object-cover object-center"
+                            sizes="30vw"
+                            placeholder="blur"
+                            blurDataURL={stat?.iconBlurDataURL || ''}
+                            quality={85}
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* value + label */}
+                    <div
+                      className={`col-span-2 text-white lg:text-[#434343] p-2 2xl:p-4 ${index === 0 || index === 1 ? 'border-b-2' : 'border-t-2'} border-white lg:border-[#9A4E46] w-full`}
+                    >
+                      <LocalizedText
+                        as="div"
+                        className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px] font-bold"
+                        en={stat?.value}
+                        bn={stat?.valueBN}
+                      />
+                      <LocalizedText
+                        as="div"
+                        className="text-white lg:text-[#9A4E46] text-[10px] md:text-[13px] lg:text-[11px] 2xl:text-[15px] font-light"
+                        en={stat?.label}
+                        bn={stat?.labelBN}
                       />
                     </div>
                   </div>
-                  {/* info */}
-                  <div className="text-[#434343] p-2 2xl:p-4 border-b-2 border-[#9A4E46] w-full">
-                    <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px] font-bold">
-                      <LocalizedText en="98%" bn="৯৮%" />
-                    </div>
-                    <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      <LocalizedText en="Settlement Rate" bn="সেটেলমেন্ট রেট" />
-                    </div>
-                  </div>
-                </div>
-                {/* each info section */}
-                <div className="w-[48%] md:w-[40%] lg:w-[45%] flex">
-                  {/* svg */}
-                  <div className="p-2 2xl:p-4 border-2 rounded-t-xl border-[#9A4E46]">
-                    <div className="">
-                      {/* <img src="/assets/homepage/web/award2.png" alt="" /> */}
-                      <Image
-                        unoptimized={false}
-                        src={award2}
-                        alt=" award2"
-                        placeholder="blur"
-                        sizes="30vw"
-                      />
-                    </div>
-                  </div>
-                  {/* info */}
-                  <div className="text-[#434343] p-2 2xl:p-4 border-b-2 border-[#9A4E46] w-full">
-                    <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      <LocalizedText en="1299" bn="১২৯৯" />
-                    </div>
-                    <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      <LocalizedText en="Claim Settled" bn="ক্লেইম সেটেল্ড" />
-                    </div>
-                  </div>
-                </div>
-                {/* each info section */}
-                <div className="w-[48%] md:w-[40%] lg:w-[45%] flex">
-                  {/* svg */}
-                  <div className="p-2 2xl:p-4 border-2 rounded-b-xl border-[#9A4E46]">
-                    <div className="">
-                      {/* <img src="/assets/homepage/web/award3.png" alt="" /> */}
-                      <Image
-                        unoptimized={false}
-                        src={award3}
-                        alt=" award3"
-                        placeholder="blur"
-                        sizes="30vw"
-                      />
-                    </div>
-                  </div>
-                  {/* info */}
-                  <div className="text-[#434343] p-2 2xl:p-4 border-t-2 border-[#9A4E46] w-full">
-                    <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      <LocalizedText en="7322" bn="৭৩২২" />
-                    </div>
-                    <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      <LocalizedText en="Satisfied Customers" bn="স্যাটিসফাইড কাস্টমার" />
-                    </div>
-                  </div>
-                </div>
-                {/* each info section */}
-                <div className="w-[48%] md:w-[40%] lg:w-[45%] flex">
-                  {/* svg */}
-                  <div className="p-2 2xl:p-4 border-2 rounded-b-xl border-[#9A4E46]">
-                    <div className="">
-                      {/* <img src="/assets/homepage/web/award4.png" alt="" /> */}
-                      <Image
-                        unoptimized={false}
-                        src={award4}
-                        alt=" award4"
-                        placeholder="blur"
-                        sizes="30vw"
-                      />
-                    </div>
-                  </div>
-                  {/* info */}
-                  <div className="text-[#434343] p-2 2xl:p-4 border-t-2 border-[#9A4E46] w-full">
-                    <div className="text-[30px] lg:text-[18px] 2xl:text-[38px] lg:h-[25px] 2xl:h-[50px]  font-bold">
-                      <LocalizedText en="3.5K +" bn="৩,৫০০+" />
-                    </div>
-                    <div className="text-[#9A4E46] text-[10px] md:text-[13px] 2xl:text-[15px] font-light">
-                      <LocalizedText en="Families Insured" bn="সুরক্ষিত পরিবার" />
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
             {/* bottom section */}
             <div
-              className=" lg:h-[50%] absolute
+              className=" lg:h-[50%] absolute 
               inset-x-0 mx-auto top-[60%] 
               lg:bottom-0 lg:top-auto lg:right-0 lg:left-auto
             w-[90%] lg:w-[70%] xl:w-[67%] 2xl:w-[900px]"
@@ -170,18 +129,16 @@ function AwardSection() {
               >
                 <div>
                   <h1 className="global-h2 font-bold">
-                    <LocalizedText en="Grand Launch Announcement" bn="শান্তা লাইফের শুভযাত্রা" />
+                    <LocalizedText en={data?.milestoneTitle} bn={data?.milestoneTitleBN} />
                   </h1>
                   <h5 className="global-h4 font-light">
-                    <LocalizedText en="December 1, 2024" bn="ডিসেম্বর ১, ২০২৪" />
+                    <LocalizedText en={data?.milestoneDate} bn={data?.milestoneDateBN} />
                   </h5>
                 </div>
                 <p className="global-p2 font-light">
                   <LocalizedText
-                    en={`The ceremony was graced by key leaders including CEO Nafis A. Ahmed and directors
-                  Saif Khondoker, Arif Khan, Raiven Hasan, Anisul Haque, along with other senior
-                  officials.`}
-                    bn={`উদ্বোধনী অনুষ্ঠানে সিইও নাফিস আকতার আহমেদ, পরিচালক সাইফ খন্দকার, আরিফ খান, রাইভেন হাসান, আনিসুল হক ও অন্যান্য সিনিয়র কর্মকর্তারা উপস্থিত ছিলেন।`}
+                    en={data?.milestoneDescription}
+                    bn={data?.milestoneDescriptionBN}
                   />
                 </p>
               </div>

@@ -1,0 +1,48 @@
+/* richtext.css */
+.rt a {
+  color: #ed7125; /* primary */
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.rt a:hover,
+.rt a:focus {
+  color: #ed7125; /* secondary */
+}
+.rt a:visited {
+  color: #ed7125;
+}
+
+.rt ul {
+  list-style: disc;
+  padding-left: var(--rt-list-pl, 1.5rem);
+  margin: 0.5rem 0 0.75rem;
+}
+.rt ol {
+  list-style: decimal;
+  padding-left: var(--rt-list-pl, 1.5rem);
+  margin: 0.5rem 0 0.75rem;
+}
+
+/* Make gap configurable via CSS variable */
+.rt li {
+  margin-top: var(--rt-li-gap-y, 0.25rem);
+  margin-bottom: var(--rt-li-gap-y, 0.25rem);
+}
+
+/* Ensure rich text inherits alignment from parent container */
+.rt {
+  text-align: inherit;
+}
+
+/* Override Lexical's inline text-align with inherited value */
+.rt p,
+.rt div,
+.rt h1,
+.rt h2,
+.rt h3,
+.rt h4,
+.rt h5,
+.rt h6,
+.rt li {
+  text-align: inherit !important;
+}

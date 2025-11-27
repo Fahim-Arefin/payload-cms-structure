@@ -30,7 +30,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/types/global.d.ts"
+    "src/types/global.d.ts",
+    "src/types/payload-errors.d.ts"
   ],
   "exclude": ["node_modules"]
 }

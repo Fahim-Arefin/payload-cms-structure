@@ -1,60 +1,52 @@
+import { resolvePageSlug } from '@/lib/utils'
+import { HashlinkBlock } from '@/types/payloadCustomTypes'
+import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
-  item: {
-    image: string
-    mobileImage: string
-    title: string
-    titleBN?: string
-    link?: string
-  }
+  item: HashlinkBlock['hashLinkCards'][number]
 }
 
 function LevelUpCard({ item }: Props) {
-  const CardContent = (
-    <div
-      className="relative flex justify-center items-center cursor-pointer text-white 
+  return (
+    <Link href={`/${resolvePageSlug(item?.buttonLink)}/#${item?.sectionId}`}>
+      <div
+        // h-[400px] md:h-[450px] lg:h-[500px]  xl:h-[700px]  2xl:h-[800px]
+        className="relative flex justify-center items-center cursor-pointer text-white 
         transition-all duration-300 group overflow-hidden 
-        h-[400px] md:h-[450px] lg:h-[500px]  xl:h-[700px]  2xl:h-[800px] "
-      // style={{
-      //   backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${item.image}')`,
-      //   backgroundPosition: '50%',
-      //   backgroundSize: 'cover',
-      // }}
-    >
-      {/* Desktop bg */}
-      <div
-        className="absolute inset-0 bg-no-repeat bg-cover bg-center z-0 hidden lg:block"
-        style={{
-          backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${item.image}')`,
-        }}
-      />
-      {/* Mobile bg */}
-      <div
-        className="absolute inset-0 bg-no-repeat bg-cover bg-center z-0 lg:hidden"
-        style={{
-          backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${item.mobileImage}')`,
-        }}
-      />
-      {/* Hover overlay */}
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 z-0" />
+        w-full
+        aspect-[1/1]
+        rounded-[4px] lg:rounded-[6px]"
+      >
+        {/* Desktop bg */}
+        <div className="absolute inset-0 z-0">
+          {typeof item?.bgImage === 'object' && item?.bgImage?.url && (
+            <Image
+              fill
+              className="inset-0 object-cover object-center rounded-[4px] lg:rounded-[6px]"
+              src={item?.bgImage?.url}
+              alt={item?.title}
+              aria-hidden="true"
+              sizes="(max-width: 767px) 150px,(max-width: 1349px) 350px, 600px"
+              placeholder="blur"
+              blurDataURL={item?.bgImageBlurDataURL || ''}
+              quality={80}
+            />
+          )}
+        </div>
 
-      {/* Content */}
-      <div className="relative z-10 global-h1 font-semibold">
-        <LocalizedText en={item?.title} bn={item?.titleBN}/>
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-black/30 z-10" />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 z-20" />
+
+        {/* Content */}
+        <div className="relative z-10 global-h1 font-semibold">
+          <LocalizedText en={item?.title} bn={item?.titleBN} />
+        </div>
       </div>
-    </div>
+    </Link>
   )
-
-  // If there's a link and it's not just a placeholder, wrap with Link
-  if (item?.link && item.link !== '#') {
-    return <Link href={item.link}>{CardContent}</Link>
-  }
-
-  // Otherwise return the card without navigation
-  return CardContent
 }
 
 export default LevelUpCard

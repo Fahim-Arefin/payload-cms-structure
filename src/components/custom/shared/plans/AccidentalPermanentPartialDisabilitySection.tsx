@@ -1,6 +1,6 @@
 // 'use client'
 
-// import React from 'react'
+// import React, { useEffect, useRef } from 'react'
 // import {
 //   Table,
 //   TableBody,
@@ -10,6 +10,7 @@
 //   TableRow,
 // } from '@/components/ui/table'
 // import LocalizedText from '../LocalizedText'
+// import { APPDBlockType } from '@/types/payloadCustomTypes'
 
 // type Row = {
 //   loss: { en: string; bn: string }
@@ -19,8 +20,9 @@
 // const ORANGE = '#ED7125'
 // const TEXT = '#1E1E1E'
 // const GOLD = '#BFA869'
-// const HEADER_LINE_THICKNESS = 3 // px — uniform everywhere
-// const LINE_THICKNESS = 2 // px — uniform everywhere
+// const HEADER_LINE_THICKNESS = 3
+// const LINE_THICKNESS = 2
+// const HEADER_OFFSET_PX = 96 // adjust for your sticky navbar height
 
 // const rows: Row[] = [
 //   {
@@ -51,41 +53,64 @@
 //   },
 // ]
 
-// export default function AccidentalPermanentPartialDisabilitySection() {
+// type Props = {
+//   data: APPDBlockType
+// }
+
+// export default function AccidentalPermanentPartialDisabilitySection({ data }: Props) {
+//   const sectionRef = useRef<HTMLElement>(null)
+
+//   useEffect(() => {
+//     const scrollIfHashMatches = () => {
+//       if (window.location.hash === '#ptd-schedule' && sectionRef.current) {
+//         sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+//       }
+//     }
+
+//     // initial load
+//     scrollIfHashMatches()
+
+//     // respond to subsequent hash changes
+//     window.addEventListener('hashchange', scrollIfHashMatches)
+//     return () => window.removeEventListener('hashchange', scrollIfHashMatches)
+//   }, [])
+
 //   return (
-//     <section className="container-padding bg-white">
+//     <section
+//       id="ptd-schedule"
+//       ref={sectionRef}
+//       className="container-padding bg-white"
+//       style={{ scrollMarginTop: HEADER_OFFSET_PX }}
+//     >
 //       {/* Titles */}
 //       <div className="mb-6 md:mb-8">
 //         <h1 className="global-h1 font-medium uppercase">
-//           <LocalizedText en="Coverage Under" bn="বীমার কভারেজের অধীনে" />
+//           <LocalizedText en={data?.titleLine1} bn={data?.titleLine1BN} />
 //         </h1>
 //         <h1 className="global-h1 font-medium uppercase text-[#ED7125]">
-//           <LocalizedText
-//             en="Accidental Permanent Partial Disability"
-//             bn="দুর্ঘটনাজনিত স্থায়ী আংশিক অক্ষমতা।"
-//           />
+//           <LocalizedText en={data?.titleLine2} bn={data?.titleLine2BN} />
 //         </h1>
 //       </div>
 
 //       {/* Table */}
 //       <div className="mx-auto w-full max-w-[980px]">
 //         <Table>
-//           {/* Header stays full width. Remove default borders; keep our gold bar only */}
+//           {/* Header (full width) */}
 //           <TableHeader className="[&_tr]:border-0 global-p1">
 //             <TableRow className="border-0">
 //               <TableHead
 //                 className="w-[68%] text-center align-bottom font-semibold"
 //                 style={{ color: ORANGE }}
 //               >
-//                 <LocalizedText en="Loss of" bn="ক্ষতি" />
+//                 <LocalizedText en={data?.lossHeader} bn={data?.lossHeaderBN} />
 //               </TableHead>
 //               <TableHead className="w-[32%] text-center align-bottom" style={{ color: ORANGE }}>
 //                 <div className="flex flex-col items-center leading-tight">
 //                   <span className="font-semibold">
-//                     <LocalizedText en="Benefits" bn="সুবিধা" />
+//                     <LocalizedText en={data?.benefitsHeader} bn={data?.benefitsHeaderBN} />
 //                   </span>
 //                   <span className="global-p2 font-semibold" style={{ color: ORANGE }}>
-//                     <LocalizedText en="(As % of Coverage Amount)" bn="(বিমা অঙ্কের শতাংশ হিসেবে)" />
+//                     <LocalizedText en={data?.benefitsSubHeader} bn={data?.benefitsSubHeaderBN} />
 //                   </span>
 //                 </div>
 //               </TableHead>
@@ -103,31 +128,28 @@
 //           </TableHeader>
 
 //           <TableBody>
-//             {rows.map((r, idx) => (
+//             {data?.rows.map((r, idx) => (
 //               <React.Fragment key={idx}>
-//                 {/* data row — body content constrained to 70% of header width */}
-//                 <TableRow className="border-0 global-p1 hover:bg-white ">
-//                   {/* LEFT cell: add px-0 */}
+//                 {/* Row content constrained to 70% (centered) */}
+//                 <TableRow className="border-0 global-p1 hover:bg-white">
 //                   <TableCell className="w-[68%] px-0 text-center align-middle py-4 sm:py-5 md:py-6">
 //                     <div className="w-[70%] mx-auto">
 //                       <p className="leading-snug" style={{ color: TEXT }}>
-//                         <LocalizedText en={r.loss.en} bn={r.loss.bn} />
+//                         <LocalizedText en={r.lossEN} bn={r.lossBN} />
 //                       </p>
 //                     </div>
 //                   </TableCell>
-
-//                   {/* RIGHT cell: add px-0 */}
 //                   <TableCell className="w-[32%] px-0 text-center align-middle py-4 sm:py-5 md:py-6">
 //                     <div className="w-[70%] mx-auto">
 //                       <span className="tracking-wide" style={{ color: TEXT }}>
-//                         <LocalizedText en={r.benefit.en} bn={r.benefit.bn} />
+//                         <LocalizedText en={r.benefitEN} bn={r.benefitBN} />
 //                       </span>
 //                     </div>
 //                   </TableCell>
 //                 </TableRow>
 
-//                 {/* separator BETWEEN rows — 70% total, centered */}
-//                 {idx < rows.length - 1 && (
+//                 {/* 70% separator between rows */}
+//                 {idx < data?.rows.length - 1 && (
 //                   <TableRow className="border-0">
 //                     <TableCell colSpan={2} className="p-0">
 //                       <div
@@ -140,7 +162,7 @@
 //               </React.Fragment>
 //             ))}
 
-//             {/* final bottom gold bar — 70% total, centered */}
+//             {/* final bottom 70% separator */}
 //             <TableRow className="border-0">
 //               <TableCell colSpan={2} className="p-0">
 //                 <div
@@ -156,10 +178,9 @@
 //   )
 // }
 
-//==========================================================================================
-//==========================================================================================
-//==========================================================================================
-
+// ======================================================================
+// ======================================================================
+// ======================================================================
 'use client'
 
 import React, { useEffect, useRef } from 'react'
@@ -172,6 +193,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import LocalizedText from '../LocalizedText'
+import { APPDBlockType } from '@/types/payloadCustomTypes'
 
 type Row = {
   loss: { en: string; bn: string }
@@ -214,12 +236,18 @@ const rows: Row[] = [
   },
 ]
 
-export default function AccidentalPermanentPartialDisabilitySection() {
+type Props = {
+  data: APPDBlockType
+}
+
+export default function AccidentalPermanentPartialDisabilitySection({ data }: Props) {
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const scrollIfHashMatches = () => {
-      if (window.location.hash === '#ptd-schedule' && sectionRef.current) {
+      const targetHash = `#${data?.sectionId?.trim() || 'ptd-schedule'}`
+
+      if (window.location.hash === targetHash && sectionRef.current) {
         sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     }
@@ -234,7 +262,7 @@ export default function AccidentalPermanentPartialDisabilitySection() {
 
   return (
     <section
-      id="ptd-schedule"
+      id={data?.sectionId?.trim() || 'ptd-schedule'}
       ref={sectionRef}
       className="container-padding bg-white"
       style={{ scrollMarginTop: HEADER_OFFSET_PX }}
@@ -242,13 +270,10 @@ export default function AccidentalPermanentPartialDisabilitySection() {
       {/* Titles */}
       <div className="mb-6 md:mb-8">
         <h1 className="global-h1 font-medium uppercase">
-          <LocalizedText en="Coverage Under" bn="বীমার কভারেজের অধীনে" />
+          <LocalizedText en={data?.titleLine1} bn={data?.titleLine1BN} />
         </h1>
         <h1 className="global-h1 font-medium uppercase text-[#ED7125]">
-          <LocalizedText
-            en="Accidental Permanent Partial Disability"
-            bn="দুর্ঘটনাজনিত স্থায়ী আংশিক অক্ষমতা।"
-          />
+          <LocalizedText en={data?.titleLine2} bn={data?.titleLine2BN} />
         </h1>
       </div>
 
@@ -262,15 +287,15 @@ export default function AccidentalPermanentPartialDisabilitySection() {
                 className="w-[68%] text-center align-bottom font-semibold"
                 style={{ color: ORANGE }}
               >
-                <LocalizedText en="Loss of" bn="ক্ষতি" />
+                <LocalizedText en={data?.lossHeader} bn={data?.lossHeaderBN} />
               </TableHead>
               <TableHead className="w-[32%] text-center align-bottom" style={{ color: ORANGE }}>
                 <div className="flex flex-col items-center leading-tight">
                   <span className="font-semibold">
-                    <LocalizedText en="Benefits" bn="সুবিধা" />
+                    <LocalizedText en={data?.benefitsHeader} bn={data?.benefitsHeaderBN} />
                   </span>
                   <span className="global-p2 font-semibold" style={{ color: ORANGE }}>
-                    <LocalizedText en="(As % of Coverage Amount)" bn="(বিমা অঙ্কের শতাংশ হিসেবে)" />
+                    <LocalizedText en={data?.benefitsSubHeader} bn={data?.benefitsSubHeaderBN} />
                   </span>
                 </div>
               </TableHead>
@@ -288,28 +313,28 @@ export default function AccidentalPermanentPartialDisabilitySection() {
           </TableHeader>
 
           <TableBody>
-            {rows.map((r, idx) => (
+            {data?.rows.map((r, idx) => (
               <React.Fragment key={idx}>
                 {/* Row content constrained to 70% (centered) */}
                 <TableRow className="border-0 global-p1 hover:bg-white">
                   <TableCell className="w-[68%] px-0 text-center align-middle py-4 sm:py-5 md:py-6">
                     <div className="w-[70%] mx-auto">
                       <p className="leading-snug" style={{ color: TEXT }}>
-                        <LocalizedText en={r.loss.en} bn={r.loss.bn} />
+                        <LocalizedText en={r.lossEN} bn={r.lossBN} />
                       </p>
                     </div>
                   </TableCell>
                   <TableCell className="w-[32%] px-0 text-center align-middle py-4 sm:py-5 md:py-6">
                     <div className="w-[70%] mx-auto">
                       <span className="tracking-wide" style={{ color: TEXT }}>
-                        <LocalizedText en={r.benefit.en} bn={r.benefit.bn} />
+                        <LocalizedText en={r.benefitEN} bn={r.benefitBN} />
                       </span>
                     </div>
                   </TableCell>
                 </TableRow>
 
                 {/* 70% separator between rows */}
-                {idx < rows.length - 1 && (
+                {idx < data?.rows.length - 1 && (
                   <TableRow className="border-0">
                     <TableCell colSpan={2} className="p-0">
                       <div

@@ -1,17 +1,20 @@
-import React from 'react'
+import { pageHrefWithAnchor } from '@/lib/utils'
+import { LeadershipTeam } from '@/payload-types'
+import { LeadershipTeamCardBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
-import { AllOfThemDataType } from '@/types'
 import Link from 'next/link'
 import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
-  data: AllOfThemDataType
+  data: LeadershipTeam['leaders'][number]
+  pageLink: LeadershipTeamCardBlockType['linkTarget']
 }
 
-function AllOfThemCard({ data }: Props) {
+function AllOfThemCard({ data, pageLink }: Props) {
   return (
     <Link
-      href={`/all-leaders#id-${data?.id}`}
+      // href={`/all-leaders#id-${data?.id}`}
+      href={pageHrefWithAnchor(pageLink, `id-${data?.id}`)}
       className="w-full mx-auto flex flex-col items-center group 
     max-w-[200px] md:max-w-[250px] lg:max-w-[200px] xl:max-w-[250px] 2xl:max-w-[300px] "
     >
@@ -78,23 +81,28 @@ function AllOfThemCard({ data }: Props) {
 
         {/* Profile Image */}
         <div className="absolute z-10 w-full h-full bottom-0 ">
-          <Image
-            src={data?.image}
-            alt={data?.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , 33vw"
-          />
+          {typeof data?.aboutImage === 'object' && data?.aboutImage?.url && (
+            <Image
+              src={data?.aboutImage?.url}
+              alt={data?.title}
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 767px) 300px, (max-width: 1023px) 50vw , 33vw"
+              placeholder="blur"
+              blurDataURL={data?.aboutImageBlurDataURL || ''}
+              quality={85}
+            />
+          )}
         </div>
       </div>
 
       {/* Name & Title */}
       <div className="mt-6 text-center">
         <p className="text-[#434342] font-medium text-[14px] xl:text-[16px] 2xl:text-[18px] capitalize">
-          <LocalizedText en={data?.name} bn={data?.nameBN} />
+          <LocalizedText en={data?.title} bn={data?.titleBN} />
         </p>
         <p className="text-[#9C8639] font-medium text-[12px] xl:text-[14px] 2xl:text-[16px] uppercase ">
-          <LocalizedText en={data?.title} bn={data?.titleBN} />
+          <LocalizedText en={data?.designation} bn={data?.designationBN} />
         </p>
       </div>
     </Link>

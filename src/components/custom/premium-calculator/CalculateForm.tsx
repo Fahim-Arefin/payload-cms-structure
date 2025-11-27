@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import DatePicker from 'react-datepicker'
+// @ts-ignore: side-effect import of CSS without type declarations
 import 'react-datepicker/dist/react-datepicker.css'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { format } from 'date-fns'
@@ -33,7 +34,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
-import LocalizedText from '../shared/LocalizedText'
+import LocalizedRichText from '../shared/LocalizedRichText'
 
 type FormData = {
   PlanCode: number
@@ -53,114 +54,11 @@ type Props = {
   onApiResponse?: (response: ApiResponse, paymentMode: string, planName?: string) => void
   formData: FormData
   setFormData: React.Dispatch<React.SetStateAction<FormData>>
+  consentEn?: any | null
+  consentBn?: any | null
 }
 
-/* -----------------------------
-   Helpers for localization
------------------------------- */
-
-// Convert 0-9 to Bengali numerals
-const bnNum = (s: string | number) =>
-  String(s).replace(/[0-9]/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)])
-
-// Localize payment mode labels; keep paymode_id as value
-const localizePaymode = (name: string, lang: 'en' | 'bn') => {
-  const map: Record<string, { en: string; bn: string }> = {
-    Yearly: { en: 'Yearly', bn: 'বার্ষিক' },
-    HalfYearly: { en: 'Half Yearly', bn: 'অর্ধ-বার্ষিক' },
-    Quarterly: { en: 'Quarterly', bn: 'ত্রৈমাসিক' },
-    Monthly: { en: 'Monthly', bn: 'মাসিক' },
-    Single: { en: 'Single Payment', bn: 'এককালীন' },
-    // fallback handled below
-  }
-  // Try direct, space-less, and space-kept keys
-  const key = name.replace(/\s+/g, '')
-  if (map[key]) return lang === 'en' ? map[key].en : map[key].bn
-  if (map[name]) return lang === 'en' ? map[name].en : map[name].bn
-  return name // default
-}
-
-/** Canonical EN keys -> labels (EN/BN) */
-const PLAN_LABELS = {
-  'Shanta Endowment Plan': {
-    en: 'Shanta Endowment Plan',
-    bn: 'শান্তা এনডাওমেন্ট প্ল্যান',
-  },
-  'Shanta 3 Stage Plan': {
-    en: 'Shanta 3 Stage Plan',
-    bn: 'শান্তা থ্রি পেমেন্ট প্ল্যান',
-  },
-  'Shanta 4 Stage Plan': {
-    en: 'Shanta 4 Stage Plan',
-    bn: 'শান্তা ফোর পেমেন্ট প্ল্যান',
-  },
-  'Shanta Child Education Plan (1%)': {
-    en: 'Shanta Child Education Plan (1%)',
-    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (১%)',
-  },
-  'Shanta Child Education Plan (2%)': {
-    en: 'Shanta Child Education Plan (2%)',
-    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (২%)',
-  },
-  'Shanta Child Education Plan (3%)': {
-    en: 'Shanta Child Education Plan (3%)',
-    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (৩%)',
-  },
-  'Shanta Child Education Plan Single Payment (1%)': {
-    en: 'Shanta Child Education Plan Single Payment (1%)',
-    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (১%)',
-  },
-  'Shanta Child Education Plan Single Payment (2%)': {
-    en: 'Shanta Child Education Plan Single Payment (2%)',
-    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (২%)',
-  },
-  'Shanta Child Education Plan Single Payment (3%)': {
-    en: 'Shanta Child Education Plan Single Payment (3%)',
-    bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (৩%)',
-  },
-} as const
-
-type CanonicalKey = keyof typeof PLAN_LABELS
-
-/** API → Canonical EN mapping */
-const API_TO_CANONICAL: Record<string, CanonicalKey> = {
-  'Shanta Endowment': 'Shanta Endowment Plan',
-  'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
-  'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
-  'Shanta Child Education Plan (1%)': 'Shanta Child Education Plan (1%)',
-  'Shanta Child Education Plan (2%)': 'Shanta Child Education Plan (2%)',
-  'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
-  'Shanta Child Education Plan Single Payment (1%)':
-    'Shanta Child Education Plan Single Payment (1%)',
-  'Shanta Child Education Plan Single Payment (2%)':
-    'Shanta Child Education Plan Single Payment (2%)',
-  'Shanta Child Education Plan Single Payment (3%)':
-    'Shanta Child Education Plan Single Payment (3%)',
-}
-
-/** Canonical EN -> video URL */
-const VIDEO_LINKS: Record<CanonicalKey, string> = {
-  'Shanta Child Education Plan (1%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-  'Shanta Child Education Plan (2%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-  'Shanta Child Education Plan (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-  'Shanta Child Education Plan Single Payment (1%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-  'Shanta Child Education Plan Single Payment (2%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-  'Shanta Child Education Plan Single Payment (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-  'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g',
-  'Shanta 3 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
-  'Shanta 4 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
-}
-
-type AvailablePlan = {
-  plan_code: number
-  key: CanonicalKey
-  labelEn: string
-  labelBn: string
-  videoLink: string
-}
-type ChildVariant = AvailablePlan
-
-function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
+function CalculateForm({ onApiResponse, formData, setFormData, consentBn, consentEn }: Props) {
   // ===== Localization helper =====
   const lang = useSSRLanguage()
   const L = (en: string, bn?: string) => (lang === 'en' ? en : (bn ?? en))
@@ -1086,31 +984,9 @@ function CalculateForm({ onApiResponse, formData, setFormData }: Props) {
             checked={agreeTerms}
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
-          <span className="text-xs md:text-sm leading-relaxed">
-            <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
-            <span className="font-semibold">
-              <LocalizedText en="Calculate Now" bn="আপনি আমাদের " />
-            </span>
-            <LocalizedText en=", you agree to our " bn="" />
-            <Link
-              href="/terms-condition"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
-            </Link>{' '}
-            <LocalizedText en="and " bn=", ও " />
-            <Link
-              href="/privacy-policy"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
-            </Link>
-            <LocalizedText en="." bn="সম্মত করছেন।" />
-          </span>
+          <div className="text-xs md:text-sm leading-relaxed">
+            <LocalizedRichText en={consentEn} bn={consentBn} />
+          </div>
         </label>
       </div>
 

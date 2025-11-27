@@ -1,11 +1,12 @@
 'use client'
 
+import { MultistagePlanBlockType } from '@/types/payloadCustomTypes'
 import React, { FC } from 'react'
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 
 type CirclePieChartProps = {
-  data?: any[]
+  data: MultistagePlanBlockType['stageData'] 
 }
 
 const COLORS = ['transparent', 'transparent', 'transparent', 'transparent', 'transparent']
@@ -31,7 +32,7 @@ const CirclePieChart: FC<CirclePieChartProps> = ({ data = [] }) => {
       <ResponsiveContainer width={200} height={200}>
         <PieChart>
           <Pie
-            data={data}
+            data={data as any}
             dataKey="value"
             cx="50%"
             cy="50%"
@@ -43,7 +44,7 @@ const CirclePieChart: FC<CirclePieChartProps> = ({ data = [] }) => {
             paddingAngle={1}
             label={renderLabel}
           >
-            {data.map((_, index) => (
+            {data?.map((_, index) => (
               <Cell key={index} fill={COLORS[index]} stroke={GOLD} strokeWidth={2} />
             ))}
           </Pie>

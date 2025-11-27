@@ -18,6 +18,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
 import LocalizedText from '../shared/LocalizedText'
+import LocalizedRichText from '../shared/LocalizedRichText'
 
 type FormData = {
   PlanCode: number
@@ -35,60 +36,13 @@ type Props = {
   formData: FormData
   setFormData: React.Dispatch<React.SetStateAction<FormData>>
   onPlanSelect?: (planCode: number, planName: string) => void
+  consentEn?: any
+  consentBn?: any
 }
 
-/** Canonical EN plan keys -> both labels (EN/BN). */
-const PLAN_LABELS: Record<
-  string,
-  { en: string; bn: string }
-> = {
-  'Shanta Endowment Plan': {
-    en: 'Shanta Endowment Plan',
-    bn: 'শান্তা এনডাওমেন্ট প্ল্যান',
-  },
-  'Shanta 3 Stage Plan': {
-    en: 'Shanta 3 Stage Plan',
-    bn: 'শান্তা থ্রি পেমেন্ট প্ল্যান',
-  },
-  'Shanta 4 Stage Plan': {
-    en: 'Shanta 4 Stage Plan',
-    bn: 'শান্তা ফোর পেমেন্ট প্ল্যান',
-  },
-  'Shanta Child Education Plan (3%)': {
-    en: 'Shanta Child Education Plan (3%)',
-    bn: 'শান্তা চাইল্ড এডুকেশন প্ল্যান (৩%)',
-  },
-}
-
-/** API → Canonical EN mapping (normalize external names). */
-const API_NAME_TO_CANONICAL: Record<string, keyof typeof PLAN_LABELS> = {
-  'Shanta Endowment': 'Shanta Endowment Plan',
-  'Shanta Three Payment Plan': 'Shanta 3 Stage Plan',
-  'Shanta Four Payment Plan': 'Shanta 4 Stage Plan',
-  'Shanta Child Education Plan (3%)': 'Shanta Child Education Plan (3%)',
-}
-
-/** Canonical EN -> video URL */
-const VIDEO_LINKS: Record<keyof typeof PLAN_LABELS, string> = {
-  'Shanta Child Education Plan (3%)': 'https://www.youtube.com/embed/Fj_BE9D64W4',
-  'Shanta Endowment Plan': 'https://www.youtube.com/embed/CkKkdNkBk9g',
-  'Shanta 3 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
-  'Shanta 4 Stage Plan': 'https://www.youtube.com/embed/h11sOPnfnhw',
-}
-
-type AvailablePlan = {
-  plan_code: number
-  /** Canonical EN key used for logic (stable) */
-  key: keyof typeof PLAN_LABELS
-  /** Display labels */
-  labelEn: string
-  labelBn: string
-  videoLink?: string
-}
-
-function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
+function PurchaseForm({ formData, setFormData, onPlanSelect, consentEn, consentBn }: Props) {
   const lang = useSSRLanguage()
-  const L = (en: string, bn?: string) => (lang === 'en' ? en : bn ?? en)
+  const L = (en: string, bn?: string) => (lang === 'en' ? en : (bn ?? en))
 
   const [selectedPlan, setSelectedPlan] = useState<AvailablePlan | null>(null)
   const [availablePlans, setAvailablePlans] = useState<AvailablePlan[]>([])
@@ -322,16 +276,20 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
         <Select
           value={formData.PlanCode ? String(formData.PlanCode) : ''}
           disabled={isLoadingPlans || !formData.Age || availablePlans.length === 0}
-          onValueChange={(value) => {
-            const code = parseInt(value, 10)
-            const plan = availablePlans.find((p) => p.plan_code === code) || null
-            setSelectedPlan(plan ?? null)
-            setFormData((prev) => ({ ...prev, PlanCode: code }))
-            setFieldErrors((prev) => ({ ...prev, PlanCode: false }))
-
-            // IMPORTANT: pass canonical EN key to parent so your
-            // getPlanDetailsCode() mapping in PurchaseSection keeps working.
-            if (plan) onPlanSelect?.(plan.plan_code, plan.key)
+          onValueChange={(v) => {
+            const plan = availablePlans.find((p) => p.plan_name === v)
+            const planWithVideo = plan
+              ? {
+                  ...plan,
+                  videoLink: videoLinkMappings[plan.plan_name as keyof typeof videoLinkMappings],
+                }
+              : null
+            setSelectedPlan(planWithVideo)
+            if (plan) {
+              setFormData((prev) => ({ ...prev, PlanCode: plan.plan_code }))
+              setFieldErrors((prev) => ({ ...prev, PlanCode: false }))
+              onPlanSelect?.(plan.plan_code, plan.plan_name)
+            }
           }}
         >
           <SelectTrigger
@@ -505,6 +463,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
       </div>
 
       {/* Consent */}
+      {/* Consent (from CMS via LocalizedRichText; no fallback) */}
       <div className="col-span-2">
         <label className="flex items-start gap-3">
           <Checkbox
@@ -513,29 +472,7 @@ function PurchaseForm({ formData, setFormData, onPlanSelect }: Props) {
             onCheckedChange={(v) => setAgreeTerms(Boolean(v))}
           />
           <span className="text-xs md:text-sm leading-relaxed">
-            <LocalizedText en="By clicking " bn="এখানে ক্লিক করার মাধ্যমে, " />
-            <span className="font-semibold">
-              <LocalizedText en="Request for purchase" bn="আপনি আমাদের " />
-            </span>
-            <LocalizedText en=", you agree to our " bn="" />
-            <Link
-              href="/terms-condition"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LocalizedText en="terms and conditions" bn="টার্মস এন্ড কন্ডিশনস " />
-            </Link>{' '}
-            <LocalizedText en="and " bn=", ও " />
-            <Link
-              href="/privacy-policy"
-              className="underline text-[#FF6600] hover:opacity-90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LocalizedText en="privacy policy" bn="প্রাইভেসি পলিসিতে " />
-            </Link>
-            <LocalizedText en="." bn="সম্মত করছেন।" />
+            <LocalizedRichText en={consentEn} bn={consentBn} />
           </span>
         </label>
       </div>

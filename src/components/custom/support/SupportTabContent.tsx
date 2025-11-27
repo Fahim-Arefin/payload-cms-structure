@@ -107,17 +107,37 @@ import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { TabDataType } from '@/types'
 import { Check, ChevronDown } from 'lucide-react'
-import LocalizedText from '../shared/LocalizedText'
+import LocalizedRichText from '../shared/LocalizedRichText'
 
-type Props = {
-  data: TabDataType[]
-  activeTab: 'hospitals' | 'branches'
-  bgColor?: string
+type TabItemFromBlock = {
+  value: 'hospitals' | 'branches'
+  label: string
+  labelBN?: string
+  highlightedLabel?: string | null
+  highlightedLabelBN?: string | null
+  description?: any
+  descriptionBN?: any
+  primaryLabelColor?: string
+  secondaryLabelColor?: string
 }
 
-function SupportTabContent({ data, activeTab, bgColor }: Props) {
+type Props = {
+  data: TabDataType[]                 // unchanged: your existing dataset shape
+  activeTab: 'hospitals' | 'branches' // driven by parent
+  bgColor?: string
+  tabItems: TabItemFromBlock[]        // from schema (2 items: branches, hospitals) in your order
+}
+
+function SupportTabContent({ data, activeTab, bgColor, tabItems }: Props) {
   const isHospital = activeTab === 'hospitals'
+  // keep your original mapping logic for entries
   const entries = isHospital ? data[1]?.content || [] : data[0]?.content || []
+
+  // find active tab meta from schema (for description)
+  const activeTabMeta = useMemo(
+    () => tabItems?.find((t) => t.value === activeTab),
+    [tabItems, activeTab],
+  )
 
   const [selectedIndex, setSelectedIndex] = useState(isHospital ? -1 : 0) // Hospitals: no selection, Branches: first item
   const [selectedItemKey, setSelectedItemKey] = useState(isHospital ? -1 : 0) // for memo map
@@ -139,7 +159,9 @@ function SupportTabContent({ data, activeTab, bgColor }: Props) {
   const filteredItems = useMemo(() => {
     if (!isHospital) return entries
     const keyword = searchTerm.toLowerCase().trim()
-    return entries.filter((item) => item.office_location_Label?.toLowerCase().includes(keyword))
+    return entries.filter((item: any) =>
+      item?.office_location_Label?.toLowerCase?.().includes(keyword),
+    )
   }, [searchTerm, entries, isHospital])
 
   const handleHospitalSelect = (index: number) => {
@@ -161,28 +183,18 @@ function SupportTabContent({ data, activeTab, bgColor }: Props) {
     return selectedItem ? (
       <MapSection key={selectedItemKey} data={{ content: [selectedItem] }} bgColor={bgColor} />
     ) : null
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItemKey]) // Only change on actual selection, not typing
 
   return (
     <div>
       <div className="px-5 pt-0 pb-[8px] md:px-24 md:pt-0 md:pb-0 lg:px-[130px] lg:pt-0 lg:pb-[20px] xl:px-[200px] xl:pt-0 xl:pb-[20px] 2xl:px-[300px] 2xl:pt-0 2xl:pb-[20px] mb-3 lg:mb-0">
-        {isHospital ? (
-          <h1 className="global-h3 w-full font-semibold lg:font-normal mb-[8px] md:mb-[10px] lg:mb-[12px] xl:mb-[16px]">
-            <LocalizedText
-              en="Search and find our panel hospitals by district."
-              bn="জেলা ভিত্তিক হাসপাতাল খুঁজে নিন সহজেই।"
-            />
-          </h1>
-        ) : (
-          <h1 className="global-h3 w-full font-semibold lg:font-normal mb-[8px] md:mb-[10px] lg:mb-[12px] xl:mb-[16px]">
-            <LocalizedText
-              en="Come and visit us at any of our branches."
-              bn="আপনার যেকোনো প্রয়োজনে চলে আসুন আমাদের শাখায় —"
-            />
-            <br />
-            <LocalizedText en="We are here to assist you." bn="আমরা সর্বদা আপনার পাশে আছি।" />
-          </h1>
-        )}
+        {/* Header text now comes from schema's rich text for the active tab */}
+        <h1 className="global-h3 w-full font-semibold lg:font-normal mb-[8px] md:mb-[10px] lg:mb-[12px] xl:mb-[16px]">
+          <div className="text-justify global-span font-extralight">
+            <LocalizedRichText en={activeTabMeta?.description} bn={activeTabMeta?.descriptionBN} />
+          </div>
+        </h1>
 
         {isHospital ? (
           <div className="mb-2 mt-1">
@@ -214,7 +226,7 @@ function SupportTabContent({ data, activeTab, bgColor }: Props) {
                 </div>
                 <div className="max-h-60 overflow-auto">
                   {filteredItems.length > 0 ? (
-                    filteredItems.map((item, index) => {
+                    filteredItems.map((item: any) => {
                       const realIndex = entries.indexOf(item)
                       return (
                         <div
@@ -226,10 +238,10 @@ function SupportTabContent({ data, activeTab, bgColor }: Props) {
                               'bg-muted text-muted-foreground hover:bg-muted hover:text-muted-foreground',
                           )}
                         >
-                          <span className="">{item.office_location_Label}</span>{' '}
+                          <span>{item?.office_location_Label}</span>
                           <Check
                             className={cn(
-                              'mr-2 h-4 w-4 ',
+                              'mr-2 h-4 w-4',
                               realIndex === selectedIndex ? 'opacity-100' : 'opacity-0',
                             )}
                           />
@@ -252,7 +264,7 @@ function SupportTabContent({ data, activeTab, bgColor }: Props) {
               <SelectValue placeholder="Select a Branch Location" />
             </SelectTrigger>
             <SelectContent>
-              {entries.map((item, idx) => (
+              {entries.map((item: any, idx: number) => (
                 <SelectItem
                   key={idx}
                   value={String(idx)}
@@ -260,10 +272,7 @@ function SupportTabContent({ data, activeTab, bgColor }: Props) {
     data-[state=checked]:bg-muted data-[state=checked]:text-muted-foreground rounded-md transition-colors
     border my-2"
                 >
-                  <span className="">
-
-                    <LocalizedText en={item.office_location_Label || item.office_location} bn={item.office_location_LabelBN ? item.office_location_LabelBN : item.office_location_Label}/>
-                  </span>
+                  <span>{item?.office_location_Label || item?.office_location}</span>
                 </SelectItem>
               ))}
             </SelectContent>
@@ -271,34 +280,13 @@ function SupportTabContent({ data, activeTab, bgColor }: Props) {
         )}
       </div>
 
-      {/* ✅ Map shows for branches (always) and hospitals (when selected) */}
+      {/* Map shows for branches (always) and hospitals (when selected) */}
       {(!isHospital || selectedIndex >= 0) && memoizedMap}
-
-      {/* <div className="lg:hidden pl-5 md:pl-24 space-y-5 pb-12">
-        <div className="flex space-x-2">
-          <ToolTip>
-            <Button
-              variant="secondary"
-              className="cursor-not-allowed font-normal w-[130px] md:w-[150px] h-[34px] md:h-[40px] text-[11px] md:text-[13px]"
-            >
-              Download Brochure
-            </Button>
-          </ToolTip>
-          <ToolTip>
-            <Button
-              variant="outline"
-              className="cursor-not-allowed font-normal w-[130px] md:w-[150px] h-[34px] md:h-[40px] text-[11px] md:text-[13px]"
-            >
-              Calculate Premium
-            </Button>
-          </ToolTip>
-        </div>
-        <div className="cursor-not-allowed text-[#434343] text-[11px] md:text-[13px] border-b w-fit px-2 border-b-[#434343]">
-          Have a Question? Ask Us!
-        </div>
-      </div> */}
     </div>
   )
 }
 
 export default SupportTabContent
+
+
+

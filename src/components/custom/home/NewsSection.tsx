@@ -8,60 +8,94 @@ import GlobalButton from '../shared/GlobalButton'
 import LocalizedText from '../shared/LocalizedText'
 import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 import LocalizedString from '../shared/LocalizedString'
+import { GlobalBlog, GlobalVlog } from '@/payload-types'
+import { FeaturedBlogVlogNewsBlockType } from '@/types/payloadCustomTypes'
+import { formatLocalDhaka, formatMonDYYYYBN, pageHref } from '@/lib/utils'
+import LocalizedRichText from '../shared/LocalizedRichText'
 
-function NewsSection() {
+type Props = {
+  featuredBlogAndNews: GlobalBlog['blogs']
+  trendingBlogAndNews: GlobalBlog['blogs']
+  featuredVlog: GlobalVlog['vlogs']
+  block: FeaturedBlogVlogNewsBlockType
+}
+
+function NewsSection({ featuredBlogAndNews, trendingBlogAndNews, featuredVlog, block }: Props) {
   const [open, setOpen] = useState(false)
+
+  const featuredBlogAndNewsItem1 =
+    featuredBlogAndNews && featuredBlogAndNews.length > 0 ? featuredBlogAndNews[0] : null
+  const featuredBlogAndNewsItem2 =
+    featuredBlogAndNews && featuredBlogAndNews.length > 1 ? featuredBlogAndNews[1] : null
+
+  const trendingBlogAndNewsItem1 =
+    trendingBlogAndNews && trendingBlogAndNews.length > 0 ? trendingBlogAndNews[0] : null
+  const trendingBlogAndNewsItem2 =
+    trendingBlogAndNews && trendingBlogAndNews.length > 1 ? trendingBlogAndNews[1] : null
+
+  const featuredVlogItem1 = featuredVlog && featuredVlog.length > 0 ? featuredVlog[0] : null
+
   return (
     <div
-      className="w-full xl:w-[90%] mx-auto px-2 md:px-3 2xl:px-16 
-    my-12 md:my-24 lg:my-[80px] xl:my-[100px] font-avenir 
+      className="w-full xl:w-[90%] mx-auto px-2 md:px-3 2xl:px-16  font-avenir 
     space-y-6  lg:space-y-8  xl:space-y-12 2xl:space-y-16"
     >
       {/* News Section Title */}
       <div className="text-center uppercase">
         <h1 className="global-h4 font-light lg:font-medium">
-          <LocalizedText bn="নিউজ এন্ড মিডিয়া" en="News & Media" />
+          <LocalizedText en={block?.heading} bn={block?.headingBN} />
         </h1>
         <h1 className="global-h1 font-bold">
           {/* Explore what's making <span className="md:text-[#ED7125]">headlines</span> */}
           <LocalizedHighlighted
-            textBn="খবরের শিরোনামে শান্তা লাইফ"
-            textEn={`Explore what's making headlines`}
-            highlightBn="লাইফ"
-            highlightEn="headlines"
-            highlightClassName="text-[#ED7125]"
+            textEn={block?.title}
+            textBn={block?.titleBN}
+            highlightEn={block?.highlightedText}
+            highlightBn={block?.highlightedTextBN}
           />
         </h1>
       </div>
       {/* News Section Grid */}
       <div className="grid grid-cols-1 md:grid-cols-7 gap-2 2xl:gap-4 ">
-        {/* First grid */}
+        {/* First grid featuredBlogAndNews*/}
         <div className="flex flex-col gap-4  col-span-1 md:col-span-2 ">
-          {/* First News Item */}
+          {/* First News Item featuredBlogAndNewsItem1*/}
           <div
             onClick={() =>
-              window.open('https://www.thedailystar.net/tags/shanta-life-insurance-plc')
+              // window.open('https://www.thedailystar.net/tags/shanta-life-insurance-plc')
+
+              featuredBlogAndNewsItem1?.newsLink && window.open(featuredBlogAndNewsItem1?.newsLink)
             }
-            className="relative h-[140px] xl:h-[225px] 2xl:h-[350px] w-full rounded-sm lg:rounded-md 2xl:rounded-xl cursor-pointer"
+            className={`relative h-[140px] xl:h-[225px] 2xl:h-[350px] w-full rounded-sm lg:rounded-md 2xl:rounded-xl ${featuredBlogAndNewsItem1?.newsLink && ' cursor-pointer '}`}
           >
             {/* main img */}
-            <Image
-              src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/news11.jpg`}
-              alt="news-1"
-              fill
-              className="object-cover rounded-sm lg:rounded-md 2xl:rounded-xl"
-              sizes="(max-width: 767px) 100vw, 33vw"
-            />
+            {typeof featuredBlogAndNewsItem1?.image === 'object' &&
+              featuredBlogAndNewsItem1?.image?.url && (
+                <Image
+                  // src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/news11.jpg`}
+                  src={featuredBlogAndNewsItem1?.image?.url}
+                  alt="news-1"
+                  fill
+                  className="object-cover object-center rounded-sm lg:rounded-md 2xl:rounded-xl"
+                  sizes="(max-width: 767px) 100vw, 33vw"
+                  placeholder="blur"
+                  blurDataURL={featuredBlogAndNewsItem1?.imageBlurDataURL || ''}
+                  quality={80}
+                />
+              )}
 
             {/* overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/30 rounded-sm lg:rounded-md 2xl:rounded-xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/40 rounded-sm lg:rounded-md 2xl:rounded-xl"></div>
 
             {/* text */}
             <div className="absolute inset-x-0 bottom-0 2xl:bottom-2 gap-1 2xl:gap-2 mx-1 2xl:mx-7 p-2 ">
               <div className="flex flex-col gap-x-2 justify-center text-white ">
-                <p className="font-light text-xs xl:text-sm 2xl:text-lg">
-                  Shanta Life Insurance begins its journey
-                </p>
+                <div className="font-light text-xs xl:text-sm 2xl:text-lg">
+                  <LocalizedText
+                    en={featuredBlogAndNewsItem1?.title}
+                    bn={featuredBlogAndNewsItem1?.titleBN}
+                  />
+                </div>
                 <div className="flex items-center lg:space-x-1 2xl:space-x-2 ">
                   <div className="hidden lg:block">
                     <svg
@@ -84,62 +118,85 @@ function NewsSection() {
                     </svg>
                   </div>
                   <div className="text-white font-light text-[9px] xl:text-[11px] 2xl:text-[12px] mt-1">
-                    1st Dec, 2024
+                    {featuredBlogAndNewsItem1?.importantDate &&
+                    featuredBlogAndNewsItem1?.importantDateBN ? (
+                      <LocalizedText
+                        en={featuredBlogAndNewsItem1?.importantDate}
+                        bn={featuredBlogAndNewsItem1?.importantDateBN}
+                      />
+                    ) : (
+                      <LocalizedText
+                        en={formatLocalDhaka(
+                          featuredBlogAndNewsItem1?.updatedAt
+                            ? featuredBlogAndNewsItem1?.updatedAt
+                            : '',
+                        )}
+                        bn={formatMonDYYYYBN(
+                          featuredBlogAndNewsItem1?.updatedAt
+                            ? featuredBlogAndNewsItem1?.updatedAt
+                            : '',
+                        )}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* second News Item */}
+          {/* second News Item featuredBlogAndNewsItem2*/}
           <div
             onClick={() =>
-              window.open(
-                'https://www.thedailystar.net/business/organisation-news/press-releases/news/shanta-life-insurance-and-dhaka-bank-sign-mou-jointly-prepare-bancassurance-3843041',
-              )
+              // window.open(
+              //   'https://www.thedailystar.net/business/organisation-news/press-releases/news/shanta-life-insurance-and-dhaka-bank-sign-mou-jointly-prepare-bancassurance-3843041',
+              // )
+              featuredBlogAndNewsItem2?.newsLink && window.open(featuredBlogAndNewsItem2?.newsLink)
             }
-            className="w-full rounded-sm lg:rounded-md 2xl:rounded-xl cursor-pointer"
+            className={`w-full rounded-sm lg:rounded-md 2xl:rounded-xl cursor-pointer ${featuredBlogAndNewsItem2?.newsLink && ' cursor-pointer '}`}
           >
             <div className="relative w-full h-[110px] xl:h-[200px] 2xl:h-[280px]">
               {/* img */}
-              <Image
-                fill
-                src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/newsSingleBanner.jpg`}
-                alt="news-2"
-                className=" object-cover rounded-t-sm lg:rounded-t-md 2xl:!rounded-t-xl"
-                sizes="(max-width: 767px) 100vw, 33vw"
-              />
+              {typeof featuredBlogAndNewsItem2?.image === 'object' &&
+                featuredBlogAndNewsItem2?.image?.url && (
+                  <Image
+                    fill
+                    // src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/newsSingleBanner.jpg`}
+                    src={featuredBlogAndNewsItem2?.image?.url}
+                    alt="news-2"
+                    className=" object-cover object-center rounded-t-sm lg:rounded-t-md 2xl:!rounded-t-xl"
+                    sizes="(max-width: 767px) 100vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL={featuredBlogAndNewsItem2?.imageBlurDataURL || ''}
+                    quality={80}
+                  />
+                )}
               {/* overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/30 rounded-t-sm lg:rounded-t-md 2xl:!rounded-t-xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/40 rounded-t-sm lg:rounded-t-md 2xl:!rounded-t-xl"></div>
             </div>
             {/* text content */}
             <div className="bg-white py-1 2xl:py-3 rounded-b-sm lg:rounded-b-md 2xl:rounded-b-xl">
               <div className="flex flex-col gap-1 2xl:gap-2 mx-1 2xl:mx-7 p-2">
                 <div className="text-xs xl:text-sm 2xl:text-sm font-light text-[#00000040]">
-                  NEWS
+                  {featuredBlogAndNewsItem2?.category === 'blog' ? (
+                    <LocalizedText en="BLOG" bn="ব্লগ" />
+                  ) : (
+                    <LocalizedText en="NEWS" bn="নিউজ" />
+                  )}
                 </div>
                 <div className="flex items-center ">
-                  <div className="text-[9px] xl:text-[11px] 2xl:text-[16px] font-light text-[#000000]">
-                    Shanta Life Insurance and Dhaka Bank sign MoU to jointly prepare for
-                    Bancassurance
+                  <div className="text-[9px] xl:text-[11px] 2xl:text-[16px] font-light text-[#000000] line-clamp-2">
+                    <LocalizedText
+                      en={featuredBlogAndNewsItem2?.title}
+                      bn={featuredBlogAndNewsItem2?.titleBN}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* second grid */}
+        {/* second grid featuredVlogItem1*/}
         <div className="col-span-1 md:col-span-3 group relative overflow-hidden rounded-sm lg:rounded-md 2xl:!rounded-xl">
           {/* Background Image */}
-          {/* lg */}
-          {/* <div
-            className={`
-          w-full 
-    h-[220px] md:h-full lg:h-[100%] 
-    rounded-sm lg:rounded-md 2xl:!rounded-xl transition-transform duration-500 
-    bg-[url('/assets/homepage/web/thumbnails/yt-thumbnail-10.jpg')] bg-cover bg-center bg-no-repeat
-    group-hover:scale-110
-        `}
-          /> */}
           <div
             className={`
           relative w-full 
@@ -148,13 +205,19 @@ function NewsSection() {
     group-hover:scale-110
         `}
           >
-            <Image
-              src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/thumbnails/yt-thumbnail-10.jpg`}
-              alt="News Thumbnail"
-              fill
-              className="inset-0 object-cover rounded-sm lg:rounded-md 2xl:!rounded-xl"
-              sizes="(max-width: 767px) 100vw, 50vw"
-            />
+            {typeof featuredVlogItem1?.image === 'object' && featuredVlogItem1?.image?.url && (
+              <Image
+                // src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/thumbnails/yt-thumbnail-10.jpg`}
+                src={featuredVlogItem1?.image?.url}
+                alt="News Thumbnail"
+                fill
+                className="inset-0 object-cover object-center rounded-sm lg:rounded-md 2xl:!rounded-xl"
+                sizes="(max-width: 767px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL={featuredVlogItem1?.imageBlurDataURL || ''}
+                quality={80}
+              />
+            )}
           </div>
 
           {/* Overlay (semi-transparent) */}
@@ -189,7 +252,11 @@ function NewsSection() {
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/Dwr1V4cgZ0o"
+                // src="https://www.youtube.com/embed/Dwr1V4cgZ0o"
+                src={
+                  (featuredVlogItem1?.videoLink && featuredVlogItem1?.videoLink) ||
+                  'https://www.youtube.com/embed/Dwr1V4cgZ0o'
+                }
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -204,38 +271,62 @@ function NewsSection() {
             {/* <h1 className="text-[12px] xl:text-[16px] 2xl:text-2xl font-bold">
               Shanta Life Insurance gets license to launch
             </h1> */}
-            <p className="text-[10px] xl:text-[14px] 2xl:text-[16px] font-light">
-              Bangladesh's insurance sector is set to expand through the launch of a new venture,
-              "Shanta Life Insurance PLC".
-            </p>
+            <div className="text-[10px] xl:text-[14px] 2xl:text-[16px] font-light line-clamp-2 md:line-clamp-5">
+              <LocalizedText
+                en={featuredVlogItem1?.description}
+                bn={featuredVlogItem1?.descriptionBN}
+              />
+            </div>
             <div className="flex items-center space-x-2">
               <img
                 src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/calender.png`}
                 alt=""
                 className="w-4 h-4 md:w-6 md:h-6"
               />
-              <span className="text-xs xl:text-sm">1st Dec, 2024</span>
+              <span className="text-xs xl:text-sm">
+                {featuredVlogItem1?.importantDate && featuredVlogItem1?.importantDateBN ? (
+                  <LocalizedText
+                    en={featuredVlogItem1?.importantDate}
+                    bn={featuredVlogItem1?.importantDateBN}
+                  />
+                ) : (
+                  <LocalizedText
+                    en={formatLocalDhaka(
+                      featuredVlogItem1?.updatedAt ? featuredVlogItem1?.updatedAt : '',
+                    )}
+                    bn={formatMonDYYYYBN(
+                      featuredVlogItem1?.updatedAt ? featuredVlogItem1?.updatedAt : '',
+                    )}
+                  />
+                )}
+              </span>
             </div>
           </div>
         </div>
         {/* third grid */}
         <div className="rounded-sm lg:rounded-md 2xl:!rounded-xl col-span-1 md:col-span-2 bg-white flex flex-col space-y-6 md:space-y-2  2xl:space-y-10 pb-2 2xl:pb-12">
           <h1 className="text-xs xl:text-lg 2xl:text-2xl font-bold mx-6 my-2 2xl:mt-6 2xl:mx-12">
-            <LocalizedText en="TRENDING POST" bn="ট্রেন্ডিং পোষ্ট" />
+            <LocalizedText en={block?.trendingTitle} bn={block?.trendingTitleBN} />
           </h1>
           {/* img */}
           <div className="relative h-[140px] xl:h-[200px] 2xl:h-[250px] w-full">
             {/* main img */}
-            <Image
-              fill
-              src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/news5.jpg`}
-              alt="news-1"
-              className="object-cover"
-              sizes="(max-width: 767px) 100vw, 33vw"
-            />
+            {typeof block?.trendingBanner === 'object' && block?.trendingBanner?.url && (
+              <Image
+                fill
+                // src={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/homepage/web/news5.jpg`}
+                src={block?.trendingBanner?.url}
+                alt="news-1"
+                className="object-cover object-center"
+                sizes="(max-width: 767px) 100vw, 33vw"
+                placeholder="blur"
+                blurDataURL={block?.trendingBannerBlurDataURL || ''}
+                quality={80}
+              />
+            )}
 
             {/* overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/30"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/40"></div>
 
             {/* text */}
             <div className="absolute inset-x-0 bottom-1 2xl:bottom-2 gap-1 2xl:gap-2 mx-1 2xl:mx-7 p-2 ">
@@ -283,10 +374,18 @@ function NewsSection() {
               />
             </div>
             <div className="">
-              <h1 className="text-xs xl:text-lg 2xl:text-lg text-[#00000040]">NEWS</h1>
-              <div className="text-[9px] xl:text-[12px] 2xl:text-[16px] font-light">
-                Shanta Life Insurance and Pulse Healthcare have partnered to make life insurance and
-                healthcare more accessible across Bangladesh
+              <h1 className="text-xs xl:text-lg 2xl:text-lg text-[#00000040]">
+                {trendingBlogAndNewsItem1?.category === 'blog' ? (
+                  <LocalizedText en="BLOG" bn="ব্লগ" />
+                ) : (
+                  <LocalizedText en="NEWS" bn="নিউজ" />
+                )}
+              </h1>
+              <div className="text-[9px] xl:text-[12px] 2xl:text-[16px] font-light line-clamp-3">
+                <LocalizedRichText
+                  en={trendingBlogAndNewsItem1?.description}
+                  bn={trendingBlogAndNewsItem1?.descriptionBN}
+                />
               </div>
             </div>
           </div>
@@ -303,18 +402,27 @@ function NewsSection() {
               />
             </div>
             <div>
-              <h1 className="text-xs 2xl:text-lg text-[#00000040]">NEWS</h1>
-              <div className="text-[9px] 2xl:text-[16px] font-light">
-                Shanta Life Insurance gets license to launch
+              <h1 className="text-xs 2xl:text-lg text-[#00000040] ">
+                {trendingBlogAndNewsItem2?.category === 'blog' ? (
+                  <LocalizedText en="BLOG" bn="ব্লগ" />
+                ) : (
+                  <LocalizedText en="NEWS" bn="নিউজ" />
+                )}
+              </h1>
+              <div className="text-[9px] 2xl:text-[16px] font-light line-clamp-3">
+                <LocalizedRichText
+                  en={trendingBlogAndNewsItem2?.description}
+                  bn={trendingBlogAndNewsItem2?.descriptionBN}
+                />
               </div>
             </div>
           </div>
           <div className="flex-1 flex flex-col space-y-1 2xl:space-y-6 justify-end">
             <hr />
-            <Link href="/news-and-media">
+            <Link href={pageHref(block?.seeAllLink)}>
               <div className="mx-4 xl:mx-8 2xl:mx-10 flex items-center space-x-3 cursor-pointer">
                 <div className="text-[10px] md:text-xs xl:text-[16px] 2xl:text-[16px] text-[#00000040]">
-                  See all post
+                  <LocalizedText en={block?.seeAllText} bn={block?.seeAllTextBN} />
                 </div>
                 <div>
                   <svg
@@ -340,7 +448,7 @@ function NewsSection() {
       </div>
       {/* Let’s Find More button */}
       <div className="flex justify-center font-avenir">
-        <Link href="/news-and-media">
+        <Link href={pageHref(block?.buttonLink)}>
           {/* <Button
             variant="primary"
             className="
@@ -354,8 +462,8 @@ function NewsSection() {
           >
             Explore
           </Button> */}
-          <GlobalButton variant="primary" className="" text="Explore">
-            <LocalizedString bn="এক্সপ্লোর" en="Explore" />
+          <GlobalButton variant="primary" className="">
+            <LocalizedString bn={block?.buttonTextBN} en={block?.buttonText} />
           </GlobalButton>
         </Link>
       </div>

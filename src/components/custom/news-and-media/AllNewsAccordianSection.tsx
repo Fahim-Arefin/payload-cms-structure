@@ -6,21 +6,27 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import Image from 'next/image'
-import { ArrowUpRight, ChevronRight } from 'lucide-react'
-import GlobalButton from '../shared/GlobalButton'
-import { AllNewsAndBlogDataType } from '@/types'
-import SearchNews from './SearchNews'
 import { Button } from '@/components/ui/button'
+import { GlobalBlog } from '@/payload-types'
+import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import GlobalButton from '../shared/GlobalButton'
+import SearchNews from './SearchNews'
+import { AllNewsSectionType } from '@/types/payloadCustomTypes'
+import LocalizedText from '../shared/LocalizedText'
+import { formatLocalDhaka, formatMonDYYYYBN } from '@/lib/utils'
+import LocalizedRichText from '../shared/LocalizedRichText'
+import LocalizedString from '../shared/LocalizedString'
 
 type Props = {
-  allNewsData: AllNewsAndBlogDataType[]
-  allContent: AllNewsAndBlogDataType[]
+  allNewsData: GlobalBlog['blogs']
+  allContent: GlobalBlog['blogs']
+  block: AllNewsSectionType
 }
 
-export default function AllNewsAccordionSection({ allNewsData, allContent }: Props) {
+export default function AllNewsAccordionSection({ allNewsData, allContent, block }: Props) {
   const [showAll, setShowAll] = useState(false)
 
   const hasMoreNews = allNewsData.length > 3
@@ -31,7 +37,7 @@ export default function AllNewsAccordionSection({ allNewsData, allContent }: Pro
 
   return (
     <div
-      className={`container-padding bg-[#FCF4EB] 
+      className={`container-padding
       ${
         showAll
           ? 'pb-12 md:pb-24 lg:pb-[110px] xl:pb-[100px] 2xl:pb-[150px]'
@@ -39,7 +45,7 @@ export default function AllNewsAccordionSection({ allNewsData, allContent }: Pro
       }
       transition-all duration-700 ease-in-out`}
     >
-      <SearchNews bgColor="#FCF4EB" text="News" allContent={allContent} />
+      <SearchNews block={block} allContent={allContent} />
       <Accordion
         type="single"
         collapsible
@@ -57,52 +63,88 @@ export default function AllNewsAccordionSection({ allNewsData, allContent }: Pro
                 className="flex flex-col items-start 
               space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5 "
               >
-                <p className="text-[#6E6E6E] global-p2 uppercase tracking-[2px] ">{news.date}</p>
-                <p className="global-p1 font-normal">{news.title}</p>
+                <p className="text-[#6E6E6E] global-p2 uppercase tracking-[2px] ">
+                  {news?.importantDate && news?.importantDateBN ? (
+                    <LocalizedText en={news?.importantDate} bn={news?.importantDateBN} />
+                  ) : (
+                    <LocalizedText
+                      en={formatLocalDhaka(news?.updatedAt ? news?.updatedAt : '')}
+                      bn={formatMonDYYYYBN(news?.updatedAt ? news?.updatedAt : '')}
+                    />
+                  )}
+                </p>
+                <div className="global-p1 font-normal">
+                  <LocalizedText en={news?.title} bn={news?.titleBN} />
+                </div>
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-1 lg:pt-2 xl:pt-3.5 2xl:pt-4 ">
-              <div className="flex flex-col md:flex-row gap-8 ">
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 ">
                 <div
-                  className="relative rounded-md lg:rounded-lg xl:rounded-xl
-                  w-full md:min-w-[200px] lg:min-w-[230px] xl:min-w-[300px] 2xl:min-w-[350px] 
-                  md:h-[150px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px]
-                  aspect-[350/220] md:aspect-auto 
+                  // md:h-[150px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px]
+                  className="col-span-1 relative rounded-md lg:rounded-lg xl:rounded-xl 
+                  w-full h-fit
+                  aspect-[600/375] 
                   "
                 >
-                  <Image
-                    fill
-                    src={news.image}
-                    alt={news.title}
-                    className="rounded-md lg:rounded-lg xl:rounded-xl"
-                    sizes="(max-width: 767px) 300px, 500px"
-                  />
+                  {typeof news?.image === 'object' && news?.image?.url && (
+                    <Image
+                      fill
+                      src={news.image?.url}
+                      alt={news.title}
+                      className="rounded-md lg:rounded-lg xl:rounded-xl"
+                      sizes="(max-width: 767px) 300px, 500px"
+                      placeholder="blur"
+                      blurDataURL={news?.imageBlurDataURL || ''}
+                      quality={80}
+                    />
+                  )}
                 </div>
-                <div className="flex flex-col justify-between text-[#3C3C3C]">
-                  <p
-                    className="global-p2 leading-6"
-                    style={{
-                      alignSelf: 'stretch',
-                    }}
-                  >
-                    {news.description}
-                  </p>
+                <div className="col-span-1 lg:col-span-3 flex flex-col justify-between text-[#3C3C3C]">
+                  <div className="global-p2 leading-6">
+                    <LocalizedRichText en={news?.description} bn={news?.descriptionBN} />
+                  </div>
                   <div>
-                    <Link
-                      href={news?.externalLink || `/news-and-media/${news?.id}`}
-                      target={news?.externalLink ? '_blank' : '_self'}
-                      rel={news?.externalLink ? 'noopener noreferrer' : undefined}
-                    >
+                    {/* <Link href={news?.newsLink ?? ''} target="_blank">
                       <Button
                         variant="link"
                         className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0 "
                       >
                         <div className="flex space-x-1 items-center uppercase ">
-                          <span>Read More</span>
+                          <span>
+                            <LocalizedText
+                              en={news?.newsLinkBtnText}
+                              bn={news?.newsLinkBtnTextBN}
+                            />
+                          </span>
                           <ArrowUpRight />
                         </div>
                       </Button>
-                    </Link>
+                    </Link> */}
+                    {news?.newsLinkBtnText && news?.newsLinkBtnTextBN && news?.newsLink && (
+                      <Button
+                        variant="link"
+                        asChild
+                        className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0"
+                      >
+                        <Link
+                          href={news?.newsLink ?? ''}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          prefetch={false}
+                        >
+                          <span className="flex space-x-1 items-center uppercase">
+                            <span>
+                              <LocalizedText
+                                en={news?.newsLinkBtnText}
+                                bn={news?.newsLinkBtnTextBN}
+                              />
+                            </span>
+                            <ArrowUpRight />
+                          </span>
+                        </Link>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -115,11 +157,13 @@ export default function AllNewsAccordionSection({ allNewsData, allContent }: Pro
           <div className="flex justify-center pt-2">
             <GlobalButton
               variant="primary"
-              text="Load More"
+              // text="Load More"
               size="small"
-              className="w-[120px] md:w-[140px] lg:w-[150px] xl:w-[160px] 2xl:w-[180px]"
+              // className="w-[120px] md:w-[140px] lg:w-[150px] xl:w-[160px] 2xl:w-[180px]"
               onClick={handleToggle}
-            />
+            >
+              <LocalizedString en={block?.loadMoreText} bn={block?.loadMoreTextBN} />
+            </GlobalButton>
           </div>
         )}
 
@@ -147,54 +191,88 @@ export default function AllNewsAccordionSection({ allNewsData, allContent }: Pro
                   className="flex flex-col items-start 
               space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5 "
                 >
-                  <p className="text-[#6E6E6E] global-p2 uppercase tracking-[2px] ">{news.date}</p>
+                  <p className="text-[#6E6E6E] global-p2 uppercase tracking-[2px] ">
+                    {news?.importantDate && news?.importantDateBN ? (
+                      <LocalizedText en={news?.importantDate} bn={news?.importantDateBN} />
+                    ) : (
+                      <LocalizedText
+                        en={formatLocalDhaka(news?.updatedAt ? news?.updatedAt : '')}
+                        bn={formatMonDYYYYBN(news?.updatedAt ? news?.updatedAt : '')}
+                      />
+                    )}
+                  </p>
                   <p className="text-[16px] md:text-[18px] lg:text-[20px] xl:text-[24px] 2xl:text-[24px] font-normal">
-                    {news.title}
+                    <LocalizedText en={news?.title} bn={news?.titleBN} />
                   </p>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="pt-1 lg:pt-2 xl:pt-3.5 2xl:pt-4 ">
-                <div className="flex flex-col md:flex-row gap-8 ">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 ">
                   <div
-                    className="relative rounded-md lg:rounded-lg xl:rounded-xl
-                  w-full md:min-w-[200px] lg:min-w-[230px] xl:min-w-[300px] 2xl:min-w-[350px] 
-                  md:h-[150px] lg:h-[160px] xl:h-[200px] 2xl:h-[220px]
-                  aspect-[350/220] md:aspect-auto 
+                    className="col-span-1 relative rounded-md lg:rounded-lg xl:rounded-xl
+                  w-full h-fit
+                  aspect-[600/375] 
                   "
                   >
-                    <Image
-                      fill
-                      src={news.image}
-                      alt={news.title}
-                      className="rounded-md lg:rounded-lg xl:rounded-xl"
-                      sizes="(max-width: 767px) 300px, 500px"
-                    />
+                    {typeof news?.image === 'object' && news?.image?.url && (
+                      <Image
+                        fill
+                        src={news.image?.url}
+                        alt={news.title}
+                        className="rounded-md lg:rounded-lg xl:rounded-xl"
+                        sizes="(max-width: 767px) 300px, 500px"
+                        placeholder="blur"
+                        blurDataURL={news?.imageBlurDataURL || ''}
+                        quality={80}
+                      />
+                    )}
                   </div>
-                  <div className="flex flex-col justify-between text-[#3C3C3C]">
-                    <p
+                  <div className="col-span-1 lg:col-span-3 flex flex-col justify-between text-[#3C3C3C]">
+                    <div
                       className="global-p2 leading-6"
                       style={{
                         alignSelf: 'stretch',
                       }}
                     >
-                      {news.description}
-                    </p>
+                      <LocalizedRichText en={news?.description} bn={news?.descriptionBN} />
+                    </div>
                     <div>
-                      <Link
-                        href={news?.externalLink || `/news-and-media/${news?.id}`}
-                        target={news?.externalLink ? '_blank' : '_self'}
-                        rel={news?.externalLink ? 'noopener noreferrer' : undefined}
-                      >
+                      {/* <Link href={news?.newsLink ?? ''} target="_blank">
                         <Button
                           variant="link"
                           className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0 "
                         >
                           <div className="flex space-x-1 items-center uppercase ">
-                            <span>Read More</span>
+                            <LocalizedText
+                              en={news?.newsLinkBtnText}
+                              bn={news?.newsLinkBtnTextBN}
+                            />
                             <ArrowUpRight />
                           </div>
                         </Button>
-                      </Link>
+                      </Link> */}
+                      <Button
+                        variant="link"
+                        asChild
+                        className="text-[#ED7125] hover:underline hover:underline-offset-8 w-fit global-p2 p-0"
+                      >
+                        <Link
+                          href={news?.newsLink ?? '#'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          prefetch={false}
+                        >
+                          <span className="flex space-x-1 items-center uppercase">
+                            <span>
+                              <LocalizedText
+                                en={news?.newsLinkBtnText}
+                                bn={news?.newsLinkBtnTextBN}
+                              />
+                            </span>
+                            <ArrowUpRight />
+                          </span>
+                        </Link>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -207,11 +285,13 @@ export default function AllNewsAccordionSection({ allNewsData, allContent }: Pro
           <div className="flex justify-center pt-2">
             <GlobalButton
               variant="primary"
-              text="Show Less"
+              // text="Show Less"
               size="small"
-              className="w-[120px] md:w-[140px] lg:w-[150px] xl:w-[160px] 2xl:w-[180px]"
+              // className="w-[120px] md:w-[140px] lg:w-[150px] xl:w-[160px] 2xl:w-[180px]"
               onClick={handleToggle}
-            />
+            >
+              <LocalizedString en={block?.seeLessText} bn={block?.seeLessTextBN} />
+            </GlobalButton>
           </div>
         )}
       </Accordion>

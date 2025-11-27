@@ -119,11 +119,19 @@
       border-[#9C8639];
   }
   .margin-bottom {
-    @apply mb-[150px];
+    @apply mb-12 md:mb-[70px] lg:mb-[90px] xl:mb-[100px] 2xl:mb-[150px];
   }
   .margin-top {
-    @apply mt-[150px];
+    @apply mt-12 md:mt-[70px] lg:mt-[90px] xl:mt-[100px] 2xl:mt-[150px];
   }
+
+  .padding-bottom {
+    @apply pb-12 md:pb-[70px] lg:pb-[90px] xl:pb-[100px] 2xl:pb-[150px];
+  }
+  .padding-top {
+    @apply pt-12 md:pt-[70px] lg:pt-[90px] xl:pt-[100px] 2xl:pt-[150px];
+  }
+
   .margin-y {
     @apply my-[150px];
   }
@@ -144,20 +152,20 @@
   }
 
   /* generalizing common terms */
-  .container-padding {
+  /* .container-padding {
     @apply px-5 py-12 
            md:p-24
            lg:px-[130px]  lg:py-[110px] 
            xl:px-[200px]  xl:py-[100px] 
            2xl:px-[300px] 2xl:py-[150px];
-  }
-  /* .container-padding {
+  } */
+  .container-padding {
     @apply px-5 py-12 
            md:px-[80px]  md:py-[70px] 
            lg:px-[130px]  lg:py-[90px] 
            xl:px-[200px]  xl:py-[100px] 
            2xl:px-[300px] 2xl:py-[150px];
-  } */
+  }
 
   .container-padding-t {
     @apply pt-12 
@@ -189,6 +197,21 @@
            2xl:px-[300px];
   }
 
+  .container-margin-l {
+    @apply px-5 
+           md:ml-[80px]
+           lg:ml-[130px]  
+           xl:ml-[200px]  
+           2xl:ml-[300px];
+  }
+  .container-margin-r {
+    @apply px-5 
+           md:mr-[80px]
+           lg:mr-[130px]  
+           xl:mr-[200px]  
+           2xl:mr-[300px];
+  }
+
   .container-margin-y {
     @apply my-12 
            md:my-[70px] 
@@ -203,6 +226,7 @@
            xl:mb-[100px] 
            2xl:mb-[150px];
   }
+
   .container-width {
     @apply w-full lg:w-[78%] xl:w-[72%] mx-auto;
   }
@@ -240,6 +264,10 @@
   .global-span {
     /* @apply text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]; */
     @apply text-[14px] md:text-[18px] lg:text-[20px] xl:text-[24px] 2xl:text-[26px];
+  }
+  .global-span2 {
+    /* @apply text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]; */
+    @apply text-[14px] md:text-[18px] lg:text-[20px] xl:text-[22px] 2xl:text-[24px];
   }
 
   /* premium calculator result text size (monthly yearly ....)*/

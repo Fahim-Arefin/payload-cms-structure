@@ -1,77 +1,66 @@
-'use client'
-
-import React, { FC, useState } from 'react'
+import CTAButtonBlock from '@/blocks/hero/CTAButtonBlock'
 import HeroSection from '@/components/custom/shared/hero/HeroSection'
-import GlobalButton from '../shared/GlobalButton'
-import { BsPlay } from 'react-icons/bs'
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import Link from 'next/link'
-import LocalizedString from '../shared/LocalizedString'
-import LocalizedText from '../shared/LocalizedText'
+import { HeroBlockType } from '@/types/payloadCustomTypes'
+// import CTAButtonBlock from '../shared/hero/CTAButtonBlock'
 
-type HeroSectionWrapperProps = {
-  heroSlides: any
-  isHome?: boolean
+type Props = {
+  data: HeroBlockType
 }
 
-const HeroSectionWrapper: FC<HeroSectionWrapperProps> = ({ heroSlides, isHome }) => {
-  const [open, setOpen] = useState(false)
+const HeroSectionWrapper = async ({ data }: Props) => {
+  const heroSlides = [
+    {
+      title: 'Empower yourself',
+      titleBN: 'নিজেকে ক্ষমতায়িত করুন',
+      subtitle: 'to live on your terms',
+      subtitleBN: 'নিজের শর্তে বাঁচার জন্য',
+      description:
+        'Your life evolves, and so should your protection... Shanta Life Insurance ensures you stay ahead.',
+      descriptionBN:
+        'আপনার জীবন বদলায়, তাই আপনার সুরক্ষাও বদলানো উচিত । শান্তা জীবন বীমা আপনাকে সবসময় এক ধাপ এগিয়ে রাখে।',
+      // image: '/assets/banners/banner3.jpg',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/banner3.jpg`,
+    },
+    {
+      title: 'Empower yourself',
+      subtitle: 'to live on your terms',
+      description:
+        'Your life evolves, and so should your protection... Shanta Life Insurance ensures you stay ahead.',
+      // image: '/assets/banners/banner22.jpg',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/banner22.jpg`,
+    },
+    {
+      title: 'Empower yourself',
+      subtitle: 'to live on your terms',
+      description:
+        'Your life evolves, and so should your protection... Shanta Life Insurance ensures you stay ahead.',
+      // image: '/assets/banners/banner1.jpg',
+      image: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/banners/banner1.jpg`,
+    },
+  ]
 
   return (
-    <HeroSection heroSlides={heroSlides} isHome={isHome}>
-      <div
-        className="absolute top-[245px] md:top-[355px] lg:top-[470px] xl:top-[490px]  2xl:top-[730px] 
-          inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
-       hero-content-width flex justify-left space-x-4 md:space-x-6 lg:justify-start 
-        "
-      >
-        <Link href="/plans">
-          <GlobalButton size="large" variant="primary" text="Explore Now" className="">
-            <LocalizedString en="Explore Now" bn="এক্সপ্লোর" />
-          </GlobalButton>
-        </Link>
-
-        {/* <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
-              <BsPlay />
-            </div>
-            <div className="global-h4 font-normal ">From the Expert</div> */}
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <GlobalButton className="flex items-center self-center space-x-2 px-4 py-2 bg-transparent hover:bg-transparent">
-              <div className="p-1 rounded-full border-2 border-white 2xl:p-2">
-                <BsPlay />
-              </div>
-              <div className="global-h4 font-normal">
-                <LocalizedText en="From the Expert" bn="আরো জানুন" />
-              </div>
-            </GlobalButton>
-          </DialogTrigger>
-
-          <DialogContent
-            className="max-w-5xl w-full aspect-video p-0 bg-black 
-                  [&>button.absolute]:top-3 [&>button.absolute]:right-3 
-                  [&>button.absolute]:bg-black/50 
-                  [&>button.absolute]:text-white 
-                  [&>button.absolute]:hover:bg-black/80"
-          >
-            <VisuallyHidden>
-              <DialogTitle>Expert Video</DialogTitle>
-            </VisuallyHidden>
-            <iframe
-              width="100%"
-              height="100%"
-              src="https://www.youtube.com/embed/YbnlDrexiGE"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
-          </DialogContent>
-        </Dialog>
-      </div>
-    </HeroSection>
+    <>
+      {/* {data && data?.heroes && data?.heroes?.length > 0 ? (
+        <HeroSection heroSlides={data?.heroes || []}>
+          {data?.ctaButtons && data?.ctaButtons?.length > 0 && (
+            <CTAButtonBlock ctaButtons={data?.ctaButtons} />
+          )}
+        </HeroSection>
+      ) : (
+        <NoDataFound
+          widthHeight="aspect-[16/9] h-[352px] md:h-auto 2xl:h-[958px] w-full"
+          bgColor="#FFFFFF"
+          message="No Hero Data Found"
+          description="Please add data from the admin panel."
+        />
+      )} */}
+      <HeroSection heroSlides={data || []}>
+        {data?.ctaButtons && data?.ctaButtons?.length > 0 && (
+          <CTAButtonBlock ctaButtons={data?.ctaButtons} />
+        )}
+      </HeroSection>
+    </>
   )
 }
 

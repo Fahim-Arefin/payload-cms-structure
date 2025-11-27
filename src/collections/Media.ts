@@ -1,66 +1,167 @@
+// // currently working code
 // import type { CollectionConfig } from 'payload'
 
 // export const Media: CollectionConfig = {
 //   slug: 'media',
+//   upload: true,
+
+//   admin: {
+//     useAsTitle: 'filename',
+//     defaultColumns: ['filename', 'temporary', 'ownerCollection', 'derivedFrom'],
+//     listSearchableFields: ['filename', 'ownerCollection', 'derivedFrom'],
+//   },
+
+//   fields: [
+//     // alt text kept for type-safe create/update
+//     { name: 'alt', type: 'text', required: false },
+
+//     {
+//       name: 'temporary',
+//       type: 'checkbox',
+//       defaultValue: true,
+//       index: true,
+//       admin: { description: 'Temporary until the owning document publishes successfully' },
+//     },
+
+//     { name: 'ownerCollection', type: 'text', index: true, admin: { readOnly: true } },
+//     { name: 'ownerDocId', type: 'text', index: true, admin: { readOnly: true } },
+//     { name: 'ownerField', type: 'text', index: true, admin: { readOnly: true } },
+//     { name: 'ownerSessionId', type: 'text', index: true, admin: { readOnly: true } },
+
+//     // 🔁 JUST TEXT — we will write the BLOCK SLUG here (e.g., "hero", "why-choose-us")
+//     { name: 'derivedFrom', type: 'text', index: true, admin: { readOnly: true } },
+
+//     // Optional tiny blur data URL (useful for previews)
+//     { name: 'blurDataURL', type: 'text', admin: { readOnly: true } },
+//   ],
+
 //   access: {
 //     read: () => true,
+//     create: () => true,
+//     update: () => true,
+//     delete: () => true,
 //   },
-//   fields: [
-//     {
-//       name: 'alt',
-//       type: 'text',
-//       required: true,
-//     },
-//   ],
-//   upload: true,
 // }
+
+// export default Media
+
+//==================================================================
+//==================================================================
+//==================================================================
+//==================================================================
 
 // src/collections/Media.ts
 import type { CollectionConfig } from 'payload'
 
-const MAX_BYTES = 100 * 1024 // 100 KB
+export const MEDIA_SLUG = 'media'
 
-export const Media: CollectionConfig = {
-  slug: 'media',
-  labels: { singular: 'Media', plural: 'Media' },
-
-  upload: {
-    // ✅ WebP only (blocks jpg/png/svg, etc.)
-    mimeTypes: ['image/webp'],
-
-    // ✅ Generate fixed 1.29 ratio variants (Sharp crops to fit)
-    // 1.29 ≈ 129:100 — pick widths you actually need
-    imageSizes: [
-      { name: 'pc_1290x1000', width: 1290, height: 1000, position: 'centre' },
-      { name: 'tab_774x600', width: 774, height: 600, position: 'centre' },
-      { name: 'mob_387x300', width: 387, height: 300, position: 'centre' },
+const Media: CollectionConfig = {
+  slug: MEDIA_SLUG,
+  upload: true,
+  admin: {
+    useAsTitle: 'filename',
+    defaultColumns: [
+      'filename',
+      'versionStage',
+      'temporary',
+      'ownerCollection',
+      // 'ownerDocId',
+      // 'ownerDocSlug',
+      'ownerDocName',
+      'ownerBlockType',
+      // 'ownerField',
     ],
-
-    // (optional) storage location for originals + sizes
-    // staticURL: '/media',
-    staticDir: 'media',
-
-    // (optional) tune encoder
-    // formatOptions: { webp: { quality: 82 } },
+    listSearchableFields: [
+      'filename',
+      'versionStage',
+      'ownerCollection',
+      'ownerDocName',
+      'ownerBlockType',
+    ],
   },
 
-  hooks: {
-    // You can use beforeValidate or beforeChange; beforeValidate fails earlier.
-    beforeValidate: [
-      async ({ req }) => {
-        // Multer attaches the uploaded file on req
-        const r = req as any
-        const size: number | undefined =
-          r?.file?.size ??
-          r?.files?.file?.size ??
-          (Array.isArray(r?.files?.file) ? r.files.file[0]?.size : undefined)
-
-        if (typeof size === 'number' && size > MAX_BYTES) {
-          throw new Error(`File too large: ${(size / 1024).toFixed(0)} KB. Max is 100 KB.`)
-        }
+  access: {
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  },
+  fields: [
+    // who owns this file (for cleanup / grouping)
+    {
+      name: 'ownerCollection',
+      label: 'Collection Name',
+      type: 'text',
+      admin: { readOnly: true },
+    },
+    {
+      // 🔥 NEW: which doc this media belongs to (page id, etc.)
+      name: 'ownerDocId',
+      label: 'Page Id',
+      type: 'text',
+      admin: { readOnly: true },
+    },
+    {
+      name: 'ownerDocSlug',
+      label: 'Page Slug',
+      type: 'text',
+      admin: { readOnly: true },
+    },
+    {
+      name: 'ownerDocName', // 👈 NEW
+      label: 'Page Name',
+      type: 'text',
+      admin: { readOnly: true },
+    },
+    {
+      name: 'ownerBlockType',
+      label: 'Block Name',
+      type: 'text',
+      admin: { readOnly: true },
+    },
+    {
+      name: 'ownerField',
+      type: 'text',
+      admin: { readOnly: true },
+    },
+    {
+      name: 'uploadSessionId',
+      type: 'text',
+      admin: { readOnly: true },
+    },
+    {
+      name: 'temporary',
+      type: 'checkbox',
+      defaultValue: true,
+      admin: { description: 'Temporary file; will be purged if not finalized.' },
+    },
+    {
+      name: 'temporaryExpiresAt',
+      type: 'date',
+      admin: { readOnly: true },
+    },
+    {
+      name: 'blurDataURL',
+      type: 'text',
+      admin: { readOnly: true },
+    },
+    // 🔥 version stage flag for draft vs published
+    {
+      name: 'versionStage',
+      type: 'select',
+      options: [
+        { label: 'Publish', value: 'publish' },
+        { label: 'Last Draft', value: 'lastDraft' },
+      ],
+      defaultValue: undefined,
+      required: false,
+      admin: {
+        position: 'sidebar',
+        description:
+          'Internal marker: whether this file belongs to the published version or last saved draft.',
       },
-    ],
-  },
-
-  fields: [{ name: 'alt', type: 'text', required: true }],
+    },
+  ],
 }
+
+export default Media
