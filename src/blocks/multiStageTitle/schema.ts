@@ -5,11 +5,13 @@ import {
   MULTI_STAGE_INTRO_SLUG_AND_TAG,
   MULTI_STAGE_INTRO_BLOCK_LABEL,
   MULTI_STAGE_INTRO_BLOCK_THUMBNAIL_URL,
+  COMMON,
 } from '@/lib/constants'
 
 /* ------------ limits ------------ */
-const TEXT_MAX = 160
-const HILITE_MAX = 40
+const TEXT_MAX = 500
+const SUBTITLE_MAX = 500
+const HILITE_MAX = 500
 
 /* ------------ validators ------------ */
 const validateShortText =
@@ -22,7 +24,7 @@ const validateShortText =
   }
 
 const validateHighlightedInField =
-  (label: string, targetField: 'text' | 'textBN', max = HILITE_MAX) =>
+  (label: string, targetField: any, max = HILITE_MAX) =>
   (val: unknown, { siblingData }: any) => {
     const hl = (val ?? '').toString().trim()
     if (!hl) return true // optional
@@ -46,6 +48,9 @@ const MultiStageIntroSchema: Block = {
   labels: {
     singular: MULTI_STAGE_INTRO_BLOCK_LABEL,
     plural: MULTI_STAGE_INTRO_BLOCK_LABEL,
+  },
+  admin: {
+    group: COMMON,
   },
 
   imageURL: MULTI_STAGE_INTRO_BLOCK_THUMBNAIL_URL,
@@ -117,6 +122,69 @@ const MultiStageIntroSchema: Block = {
           admin: {
             width: '50%',
             description: `ঐচ্ছিক। “টেক্সট (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ${bnNum(
+              HILITE_MAX,
+            )} অক্ষর।`,
+          },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'subtitle',
+          type: 'text',
+          label: 'Subtitle',
+          required: false,
+          maxLength: SUBTITLE_MAX,
+          validate: validateShortText('Subtitle', SUBTITLE_MAX, false),
+          admin: {
+            width: '50%',
+            description: `Secondary line. Max ${SUBTITLE_MAX} characters.`,
+          },
+        },
+        {
+          name: 'subtitleBN',
+          type: 'text',
+          label: 'সাবটাইটেল (বাংলা)',
+          required: false,
+          maxLength: SUBTITLE_MAX,
+          validate: validateShortText('Subtitle (BN)', SUBTITLE_MAX, false),
+          admin: {
+            width: '50%',
+            description: `সেকেন্ডারি লাইন। সর্বোচ্চ ${bnNum(SUBTITLE_MAX)} অক্ষর।`,
+          },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'highlightedSubtitle',
+          type: 'text',
+          label: 'Highlighted Subtitle (within Subtitle)',
+          maxLength: HILITE_MAX,
+          // validate: validateHighlightedInField('Highlighted Subtitle', 'subtitle', HILITE_MAX),
+          validate: validateHighlightedInField('Highlighted Subtitle', 'subtitle', HILITE_MAX),
+          admin: {
+            width: '50%',
+            description: `Optional. Must appear verbatim inside “Subtitle”. Max ${HILITE_MAX} characters.`,
+          },
+        },
+        {
+          name: 'highlightedSubtitleBN',
+          type: 'text',
+          label: 'হাইলাইটেড সাবটাইটেল (সাবটাইটেলের মধ্যে)',
+          maxLength: HILITE_MAX,
+          validate: validateHighlightedInField(
+            'Highlighted Subtitle (BN)',
+            'subtitleBN',
+            HILITE_MAX,
+          ),
+          admin: {
+            width: '50%',
+            description: `ঐচ্ছিক। “সাবটাইটেল (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ${bnNum(
               HILITE_MAX,
             )} অক্ষর।`,
           },

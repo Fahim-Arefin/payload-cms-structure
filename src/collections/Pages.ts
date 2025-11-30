@@ -130,6 +130,7 @@ export const Pages: CollectionConfig = {
         PlanInfoDesign03Schema,
         PlanInfoDesign04Schema,
         PlanInfoDesign05Schema,
+        MultiStageIntroSchema,
         // custom card
         CustomCardSectionSchema,
         CustomTabSchema,
@@ -157,6 +158,8 @@ export const Pages: CollectionConfig = {
         AgentOnboardingFormSchema,
         // corporate page
         CorporateInfoSchema,
+        //multistage page
+        MultiStagePlanSchema,
         //
         APPDSchema,
         AllBLogsSectionSchema,
@@ -165,17 +168,12 @@ export const Pages: CollectionConfig = {
         AllNewsSectionSchema,
         AllVLogsSectionSchema,
         FeaturedBlogVlogNewsSchema,
-        // plan page
-        // PlanCardSchema,
         //careerpage
         CareerIntroSchema,
         CareerSwiperSchema,
         CareerResourcesSchema,
         CareerOpeningSchema,
         CareerProcessingSchema,
-        //multistage page
-        MultiStageIntroSchema,
-        MultiStagePlanSchema,
         //custom blocks
         CustomAccordionSchema,
         //support page

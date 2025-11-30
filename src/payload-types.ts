@@ -1828,6 +1828,47 @@ export interface Page {
          */
         backgroundColor?: string | null;
         /**
+         * Main line. Max 500 characters.
+         */
+        text: string;
+        /**
+         * মূল লাইন। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        textBN: string;
+        /**
+         * Optional. Must appear verbatim inside “Text”. Max 500 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। “টেক্সট (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Secondary line. Max 500 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সেকেন্ডারি লাইন। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside “Subtitle”. Max 500 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। “সাবটাইটেল (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'multistage-intro';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
          * Primary heading. Max 100 characters.
          */
         title: string;
@@ -4501,6 +4542,124 @@ export interface Page {
       }
     | {
         /**
+         * Main heading. Max 80 chars.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Title. Max 40 chars.
+         */
+        highlightedTitle?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTitleBN?: string | null;
+        /**
+         * Short description. Max 300 chars.
+         */
+        description?: string | null;
+        /**
+         * সংক্ষিপ্ত বর্ণনা। সর্বোচ্চ ৩০০ অক্ষর।
+         */
+        descriptionBN?: string | null;
+        /**
+         * Section label above stages.
+         */
+        mainTitle: string;
+        /**
+         * ঐচ্ছিক বাংলা শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        mainTitleBN?: string | null;
+        secondaryTitle?: string | null;
+        secondaryTitleBN?: string | null;
+        planIcon: string | Media;
+        planIconOriginal?: (string | null) | Media;
+        pendingPlanIconOriginal?: string | null;
+        pendingPlanIconCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        planIconBlurDataURL?: string | null;
+        /**
+         * Controls which side the pie chart appears on desktop (mobile is stacked automatically).
+         */
+        chartSide: 'left' | 'right';
+        /**
+         * Define each stage and its percentage. The sum of all stage “value” fields must equal 100.
+         */
+        stageData?:
+          | {
+              name: string;
+              nameBN?: string | null;
+              /**
+               * Percentage for this stage. Overall total across stages must be 100.
+               */
+              value: number;
+              id?: string | null;
+            }[]
+          | null;
+        planData?:
+          | {
+              /**
+               * e.g., “12 YEARS”.
+               */
+              timeline: string;
+              /**
+               * যেমন: “১২ বছর”.
+               */
+              timelineBN?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Populates the “Entry Age” and “Maturity Age” cards. Defaults are provided for minimal input.
+         */
+        eligibility: {
+          entryAge: {
+            label?: string | null;
+            labelBN?: string | null;
+            minLabel?: string | null;
+            minLabelBN?: string | null;
+            minValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            minValueBN?: string | null;
+            minUnit?: string | null;
+            minUnitBN?: string | null;
+            maxLabel?: string | null;
+            maxLabelBN?: string | null;
+            maxValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            maxValueBN?: string | null;
+            maxUnit?: string | null;
+            maxUnitBN?: string | null;
+          };
+          maturityAge: {
+            label?: string | null;
+            labelBN?: string | null;
+            uptoLabel?: string | null;
+            uptoLabelBN?: string | null;
+            uptoValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            uptoValueBN?: string | null;
+            uptoUnit?: string | null;
+            uptoUnitBN?: string | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'multistage-plan';
+      }
+    | {
+        /**
          * Hex color in #RRGGBB. Length 7 (৭).
          */
         backgroundColor: string;
@@ -5395,149 +5554,6 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'career-processing';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Main line. Max 160 characters.
-         */
-        text: string;
-        /**
-         * মূল লাইন। সর্বোচ্চ ১৬০ অক্ষর।
-         */
-        textBN: string;
-        /**
-         * Optional. Must appear verbatim inside “Text”. Max 40 characters.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। “টেক্সট (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'multistage-intro';
-      }
-    | {
-        /**
-         * Main heading. Max 80 chars.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Optional. Must appear verbatim inside Title. Max 40 chars.
-         */
-        highlightedTitle?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTitleBN?: string | null;
-        /**
-         * Short description. Max 300 chars.
-         */
-        description?: string | null;
-        /**
-         * সংক্ষিপ্ত বর্ণনা। সর্বোচ্চ ৩০০ অক্ষর।
-         */
-        descriptionBN?: string | null;
-        /**
-         * Section label above stages.
-         */
-        mainTitle: string;
-        /**
-         * ঐচ্ছিক বাংলা শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        mainTitleBN?: string | null;
-        secondaryTitle?: string | null;
-        secondaryTitleBN?: string | null;
-        planIcon: string | Media;
-        planIconOriginal?: (string | null) | Media;
-        pendingPlanIconOriginal?: string | null;
-        pendingPlanIconCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        planIconBlurDataURL?: string | null;
-        /**
-         * Controls which side the pie chart appears on desktop (mobile is stacked automatically).
-         */
-        chartSide: 'left' | 'right';
-        /**
-         * Define each stage and its percentage. The sum of all stage “value” fields must equal 100.
-         */
-        stageData?:
-          | {
-              name: string;
-              nameBN?: string | null;
-              /**
-               * Percentage for this stage. Overall total across stages must be 100.
-               */
-              value: number;
-              id?: string | null;
-            }[]
-          | null;
-        planData?:
-          | {
-              /**
-               * e.g., “12 YEARS”.
-               */
-              timeline: string;
-              /**
-               * যেমন: “১২ বছর”.
-               */
-              timelineBN?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        /**
-         * Populates the “Entry Age” and “Maturity Age” cards. Defaults are provided for minimal input.
-         */
-        eligibility: {
-          entryAge: {
-            label?: string | null;
-            labelBN?: string | null;
-            minLabel?: string | null;
-            minLabelBN?: string | null;
-            minValue: number;
-            /**
-             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
-             */
-            minValueBN?: string | null;
-            minUnit?: string | null;
-            minUnitBN?: string | null;
-            maxLabel?: string | null;
-            maxLabelBN?: string | null;
-            maxValue: number;
-            /**
-             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
-             */
-            maxValueBN?: string | null;
-            maxUnit?: string | null;
-            maxUnitBN?: string | null;
-          };
-          maturityAge: {
-            label?: string | null;
-            labelBN?: string | null;
-            uptoLabel?: string | null;
-            uptoLabelBN?: string | null;
-            uptoValue: number;
-            /**
-             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
-             */
-            uptoValueBN?: string | null;
-            uptoUnit?: string | null;
-            uptoUnitBN?: string | null;
-          };
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'multistage-plan';
       }
     | {
         /**
@@ -6904,6 +6920,21 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'multistage-intro'?:
+          | T
+          | {
+              backgroundColor?: T;
+              text?: T;
+              textBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              id?: T;
+              blockName?: T;
+            };
         'custom-card'?:
           | T
           | {
@@ -7897,6 +7928,77 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'multistage-plan'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              mainTitle?: T;
+              mainTitleBN?: T;
+              secondaryTitle?: T;
+              secondaryTitleBN?: T;
+              planIcon?: T;
+              planIconOriginal?: T;
+              pendingPlanIconOriginal?: T;
+              pendingPlanIconCrop?: T;
+              planIconBlurDataURL?: T;
+              chartSide?: T;
+              stageData?:
+                | T
+                | {
+                    name?: T;
+                    nameBN?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              planData?:
+                | T
+                | {
+                    timeline?: T;
+                    timelineBN?: T;
+                    id?: T;
+                  };
+              eligibility?:
+                | T
+                | {
+                    entryAge?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          minLabel?: T;
+                          minLabelBN?: T;
+                          minValue?: T;
+                          minValueBN?: T;
+                          minUnit?: T;
+                          minUnitBN?: T;
+                          maxLabel?: T;
+                          maxLabelBN?: T;
+                          maxValue?: T;
+                          maxValueBN?: T;
+                          maxUnit?: T;
+                          maxUnitBN?: T;
+                        };
+                    maturityAge?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          uptoLabel?: T;
+                          uptoLabelBN?: T;
+                          uptoValue?: T;
+                          uptoValueBN?: T;
+                          uptoUnit?: T;
+                          uptoUnitBN?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'accidental-permanent-partial-disability'?:
           | T
           | {
@@ -8159,88 +8261,6 @@ export interface PagesSelect<T extends boolean = true> {
                     pendingImageCrop?: T;
                     imageBlurDataURL?: T;
                     id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'multistage-intro'?:
-          | T
-          | {
-              backgroundColor?: T;
-              text?: T;
-              textBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'multistage-plan'?:
-          | T
-          | {
-              title?: T;
-              titleBN?: T;
-              highlightedTitle?: T;
-              highlightedTitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              mainTitle?: T;
-              mainTitleBN?: T;
-              secondaryTitle?: T;
-              secondaryTitleBN?: T;
-              planIcon?: T;
-              planIconOriginal?: T;
-              pendingPlanIconOriginal?: T;
-              pendingPlanIconCrop?: T;
-              planIconBlurDataURL?: T;
-              chartSide?: T;
-              stageData?:
-                | T
-                | {
-                    name?: T;
-                    nameBN?: T;
-                    value?: T;
-                    id?: T;
-                  };
-              planData?:
-                | T
-                | {
-                    timeline?: T;
-                    timelineBN?: T;
-                    id?: T;
-                  };
-              eligibility?:
-                | T
-                | {
-                    entryAge?:
-                      | T
-                      | {
-                          label?: T;
-                          labelBN?: T;
-                          minLabel?: T;
-                          minLabelBN?: T;
-                          minValue?: T;
-                          minValueBN?: T;
-                          minUnit?: T;
-                          minUnitBN?: T;
-                          maxLabel?: T;
-                          maxLabelBN?: T;
-                          maxValue?: T;
-                          maxValueBN?: T;
-                          maxUnit?: T;
-                          maxUnitBN?: T;
-                        };
-                    maturityAge?:
-                      | T
-                      | {
-                          label?: T;
-                          labelBN?: T;
-                          uptoLabel?: T;
-                          uptoLabelBN?: T;
-                          uptoValue?: T;
-                          uptoValueBN?: T;
-                          uptoUnit?: T;
-                          uptoUnitBN?: T;
-                        };
                   };
               id?: T;
               blockName?: T;
