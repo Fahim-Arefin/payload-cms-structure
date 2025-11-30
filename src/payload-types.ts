@@ -979,7 +979,7 @@ export interface Page {
          */
         imageOrder?: ('left' | 'right') | null;
         /**
-         * Square image (optional). Recommended 1:1.
+         * Square image. Recommended 1:1.
          */
         imageSquare: string | Media;
         imageSquareOriginal?: (string | null) | Media;
@@ -990,7 +990,7 @@ export interface Page {
          */
         imageSquareBlurDataURL?: string | null;
         /**
-         * Wide image (optional). Recommended 16:9.
+         * Wide image. Recommended 16:9.
          */
         imageWide: string | Media;
         imageWideOriginal?: (string | null) | Media;
@@ -3146,6 +3146,41 @@ export interface Page {
                    */
                   labelBN?: string | null;
                   style?: ('primary' | 'secondary' | 'outline') | null;
+                  /**
+                   * Consent line shown under the premium calculator form submit/CTA.
+                   */
+                  premiumCalculatorForm?: {
+                    consentText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                    consentTextBN?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                  };
                   id?: string | null;
                   blockName?: string | null;
                   blockType: 'calculator-modal';
@@ -7330,6 +7365,12 @@ export interface PagesSelect<T extends boolean = true> {
                           label?: T;
                           labelBN?: T;
                           style?: T;
+                          premiumCalculatorForm?:
+                            | T
+                            | {
+                                consentText?: T;
+                                consentTextBN?: T;
+                              };
                           id?: T;
                           blockName?: T;
                         };

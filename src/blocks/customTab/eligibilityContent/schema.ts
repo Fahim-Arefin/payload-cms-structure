@@ -2,6 +2,7 @@ import {
   ELIGIBILITY_CONTENT_BLOCK_THUMBNAIL_URL,
   ELIGIBILITY_CONTENT_PAGE_BLOCK_LABEL,
   ELIGIBILITY_CONTENT_SLUG_AND_TAG,
+  NORMAL_TAB,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
@@ -37,7 +38,9 @@ const EligibilityContentSchema: Block = {
     singular: ELIGIBILITY_CONTENT_PAGE_BLOCK_LABEL,
     plural: ELIGIBILITY_CONTENT_PAGE_BLOCK_LABEL,
   },
-
+  admin: {
+    group: NORMAL_TAB,
+  },
   imageURL: ELIGIBILITY_CONTENT_BLOCK_THUMBNAIL_URL,
   imageAltText: `${ELIGIBILITY_CONTENT_PAGE_BLOCK_LABEL} preview`,
 

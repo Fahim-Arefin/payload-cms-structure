@@ -5,6 +5,7 @@ import {
   LEARN_MORE_BLOG_CONTENT_BLOCK_THUMBNAIL_URL,
   LEARN_MORE_BLOG_CONTENT_PAGE_BLOCK_LABEL,
   LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG,
+  LEARN_MORE_TAB,
 } from '@/lib/constants'
 
 /* ---- limits ---- */
@@ -97,6 +98,9 @@ const LearnMoreBlogContent: Block = {
   labels: {
     singular: LEARN_MORE_BLOG_CONTENT_PAGE_BLOCK_LABEL,
     plural: LEARN_MORE_BLOG_CONTENT_PAGE_BLOCK_LABEL,
+  },
+  admin: {
+    group: LEARN_MORE_TAB,
   },
 
   imageURL: LEARN_MORE_BLOG_CONTENT_BLOCK_THUMBNAIL_URL,

@@ -1,4 +1,5 @@
 import {
+  NORMAL_TAB,
   STEP_CONTENT_BLOCK_THUMBNAIL_URL,
   STEP_CONTENT_PAGE_BLOCK_LABEL,
   STEP_CONTENT_SLUG_AND_TAG,
@@ -58,6 +59,9 @@ const StepContent: Block = {
   labels: {
     singular: STEP_CONTENT_PAGE_BLOCK_LABEL,
     plural: STEP_CONTENT_PAGE_BLOCK_LABEL,
+  },
+  admin: {
+    group: NORMAL_TAB,
   },
 
   imageURL: STEP_CONTENT_BLOCK_THUMBNAIL_URL,
