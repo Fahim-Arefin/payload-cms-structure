@@ -338,11 +338,11 @@ async function Footer() {
               md:gap-2 md:px-12 lg:px-0 lg:gap-0"
                   >
                     {footer?.exploreSection?.explore?.map((link, index) => (
-                      <li
-                        key={index}
-                        className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100"
-                      >
-                        <Link href={pageHref(link?.buttonLink)}>
+                      <li key={index}>
+                        <Link
+                          href={pageHref(link?.buttonLink)}
+                          className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100"
+                        >
                           <LocalizedText en={link?.buttonText} bn={link?.buttonTextBN} />
                         </Link>
                       </li>
@@ -394,11 +394,11 @@ async function Footer() {
                 <div>
                   <ul className="flex flex-col space-y-2 text-xs 2xl:text-lg">
                     {footer?.legalSection?.legal?.map((link, index) => (
-                      <li
-                        key={index}
-                        className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100"
-                      >
-                        <Link href={pageHref(link?.buttonLink)}>
+                      <li key={index}>
+                        <Link
+                          href={pageHref(link?.buttonLink)}
+                          className="hover:text-[#FF6600] cursor-pointer hover:underline transition-all duration-100"
+                        >
                           <LocalizedText en={link?.buttonText} bn={link?.buttonTextBN} />
                         </Link>
                       </li>

@@ -4,6 +4,7 @@ import {
   CAREER_PAGE_OPENINGS_SLUG_AND_TAG,
   CAREER_PAGE_OPENINGS_BLOCK_LABEL,
   CAREER_PAGE_OPENINGS_BLOCK_THUMBNAIL_URL,
+  CAREER_PAGE,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 
@@ -60,8 +61,7 @@ const CONSENT_EN_DEFAULT: any = {
             format: 0,
             mode: 'normal',
             style: '',
-            text:
-              'By clicking Send Feedback, you agree to our terms and conditions and privacy policy.',
+            text: 'By clicking Send Feedback, you agree to our terms and conditions and privacy policy.',
             version: 1,
           },
         ],
@@ -91,8 +91,7 @@ const CONSENT_BN_DEFAULT: any = {
             format: 0,
             mode: 'normal',
             style: '',
-            text:
-              'এখানে ক্লিক করার মাধ্যমে, আপনি আমাদের টার্মস এন্ড কন্ডিশনস , ও প্রাইভেসি পলিসিতে সম্মত করছেন।',
+            text: 'এখানে ক্লিক করার মাধ্যমে, আপনি আমাদের টার্মস এন্ড কন্ডিশনস , ও প্রাইভেসি পলিসিতে সম্মত করছেন।',
             version: 1,
           },
         ],
@@ -108,6 +107,9 @@ const CareerOpeningSchema: Block = {
   labels: {
     singular: CAREER_PAGE_OPENINGS_BLOCK_LABEL,
     plural: CAREER_PAGE_OPENINGS_BLOCK_LABEL,
+  },
+  admin: {
+    group: CAREER_PAGE,
   },
 
   imageURL: CAREER_PAGE_OPENINGS_BLOCK_THUMBNAIL_URL,
@@ -591,8 +593,7 @@ const CareerOpeningSchema: Block = {
               defaultValue: CONSENT_EN_DEFAULT,
               admin: {
                 width: '50%',
-                description:
-                  'Default can be edited. Appears near the Apply/Submit action.',
+                description: 'Default can be edited. Appears near the Apply/Submit action.',
               },
             },
             {

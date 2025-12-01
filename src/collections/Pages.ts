@@ -131,15 +131,17 @@ export const Pages: CollectionConfig = {
         PlanInfoDesign04Schema,
         PlanInfoDesign05Schema,
         MultiStageIntroSchema,
-        // custom card
+        // custom blocks
         CustomCardSectionSchema,
         CustomTabSchema,
+        CustomAccordionSchema,
         // home page unique
         WhyChooseUsSchema,
         FeaturedPlansSchema,
         PremiumCalculatorSchema,
         LifeInsuranceVideoSchema,
         LifeAtShantaSchema,
+        FeaturedBlogVlogNewsSchema,
         // about us page
         ShantaVisionSchema,
         LicensedLaunchedSchema,
@@ -160,29 +162,32 @@ export const Pages: CollectionConfig = {
         CorporateInfoSchema,
         //multistage page
         MultiStagePlanSchema,
-        //
+        // purchase now page
+        PurchaseFormSchema,
+        // premium cal page,
+        PremCalculatorPageSchema,
+        // Accidental coverage page
         APPDSchema,
+
+        //support page
+        SupportMapTabSchema,
+        SupportFaqTabSchema,
+        SupportBuzzSchema,
+        SupportFeedbackSchema,
+
+        // news and media
         AllBLogsSectionSchema,
         BLogDetailsSectionSchema,
         AllBLogsCardSchema,
         AllNewsSectionSchema,
         AllVLogsSectionSchema,
-        FeaturedBlogVlogNewsSchema,
+
         //careerpage
         CareerIntroSchema,
         CareerSwiperSchema,
         CareerResourcesSchema,
         CareerOpeningSchema,
         CareerProcessingSchema,
-        //custom blocks
-        CustomAccordionSchema,
-        //support page
-        SupportMapTabSchema,
-        SupportFaqTabSchema,
-        SupportBuzzSchema,
-        SupportFeedbackSchema,
-        PremCalculatorPageSchema,
-        PurchaseFormSchema,
       ],
     },
   ],

@@ -4,6 +4,7 @@ import {
   CAREER_PAGE_SWIPER_SLUG_AND_TAG,
   CAREER_PAGE_SWIPER_BLOCK_LABEL,
   CAREER_PAGE_SWIPER_BLOCK_THUMBNAIL_URL,
+  CAREER_PAGE,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import { generateImageFields, generateArrayImageFields } from '@/utils/media/fieldGenerators'
@@ -33,6 +34,9 @@ const CareerSwiperSchema: Block = {
   labels: {
     singular: CAREER_PAGE_SWIPER_BLOCK_LABEL,
     plural: CAREER_PAGE_SWIPER_BLOCK_LABEL,
+  },
+  admin: {
+    group: CAREER_PAGE,
   },
 
   imageURL: CAREER_PAGE_SWIPER_BLOCK_THUMBNAIL_URL,
@@ -149,7 +153,7 @@ const CareerSwiperSchema: Block = {
     //   ownerCollection: CAREER_PAGE_SWIPER_SLUG_AND_TAG as any,
     // } as any),
 
-        /* --------- Background GIF (https only) --------- */
+    /* --------- Background GIF (https only) --------- */
     {
       name: 'backgroundGifUrl',
       type: 'text',

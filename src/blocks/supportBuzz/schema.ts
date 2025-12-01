@@ -5,6 +5,7 @@ import {
   SUPPORT_BUZZ_SLUG_AND_TAG,
   SUPPORT_BUZZ_BLOCK_LABEL,
   SUPPORT_BUZZ_BLOCK_THUMBNAIL_URL,
+  SUPPORT_PAGE,
 } from '@/lib/constants'
 
 import { generateImageFields, generateArrayImageFields } from '@/utils/media/fieldGenerators'
@@ -69,6 +70,9 @@ const SupportBuzzSchema: Block = {
   labels: {
     singular: SUPPORT_BUZZ_BLOCK_LABEL,
     plural: SUPPORT_BUZZ_BLOCK_LABEL,
+  },
+  admin: {
+    group: SUPPORT_PAGE,
   },
   imageURL: SUPPORT_BUZZ_BLOCK_THUMBNAIL_URL,
   imageAltText: `${SUPPORT_BUZZ_BLOCK_LABEL} preview`,

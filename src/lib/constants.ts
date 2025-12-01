@@ -63,6 +63,12 @@ export const LEARERS_PAGE = 'Leaders Page'
 export const AGENT_ONBOARDING_PAGE = 'Agent Onboarding Page'
 export const CORPORATE_PLAN_PAGE = 'Corporate Plan Page'
 export const MUTLI_STAGE_PLAN_PAGE = 'Multi Stage Maturity Plan Page'
+export const ACCIDENTAL_COVERAGE_PLAN_PAGE = 'Accidental Coverage Plan Page'
+export const PREMIUM_CALCULATOR_PAGE = 'Premium Calculator Page'
+export const PURCHASE_NOW_PAGE = 'Purchase Now Page'
+export const SUPPORT_PAGE = 'Support Page'
+export const NEWS_AND_BLOG_PAGE = 'News And Blogs Page'
+export const CAREER_PAGE = 'Career Page'
 
 // home page constants
 // ----------------------------------------------------------------------------------------------
@@ -340,10 +346,10 @@ export const PLAN_INFO_DESIGN_05_CACHE_KEY = 'plan-info-design-05-data'
 export const PLAN_INFO_DESIGN_05_BLOCK_LABEL = 'Plan Info Design 05'
 export const PLAN_INFO_DESIGN_05_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-05-block-thumbnail.png`
 
-//
+// accidental coverage page
 export const APPD_BLOCK_SLUG_AND_TAG = 'accidental-permanent-partial-disability'
 export const APPD_BLOCK_SLUG_AND_TAG_CACHE_KEY = 'accidental-permanent-partial-disability-data'
-export const APPD_BLOCK_LABEL = 'Accidental Permanent Partial DisabilitySection'
+export const APPD_BLOCK_LABEL = 'APPD Table'
 export const APPD_BLOCK_THUMBNAIL_URL = `${folder}/accidental-permanent-partial-disability-block-thumbnail.png`
 
 // news and media page

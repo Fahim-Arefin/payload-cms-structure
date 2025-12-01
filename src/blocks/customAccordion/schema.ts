@@ -2,6 +2,7 @@
 import type { Block } from 'payload'
 import { bnNum } from '@/lib/utils' // optional; remove if you don't show BN counts in admin
 import {
+  CUSTOM,
   CUSTOM_ACCORDION_BLOCK_LABEL,
   CUSTOM_ACCORDION_BLOCK_THUMBNAIL_URL,
   CUSTOM_ACCORDION_SLUG_AND_TAG,
@@ -100,6 +101,10 @@ const CustomAccordionSchema: Block = {
   labels: {
     singular: CUSTOM_ACCORDION_BLOCK_LABEL,
     plural: CUSTOM_ACCORDION_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: CUSTOM,
   },
 
   imageURL: CUSTOM_ACCORDION_BLOCK_THUMBNAIL_URL,

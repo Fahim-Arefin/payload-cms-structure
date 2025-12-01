@@ -3,6 +3,7 @@ import {
   SUPPORT_MAP_TAB_SLUG_AND_TAG,
   SUPPORT_MAP_TAB_BLOCK_LABEL,
   SUPPORT_MAP_TAB_BLOCK_THUMBNAIL_URL,
+  SUPPORT_PAGE,
 } from '@/lib/constants'
 import type { Block } from 'payload'
 import { bnNum } from '@/lib/utils'
@@ -95,6 +96,11 @@ const SupportMapTabSchema: Block = {
     singular: SUPPORT_MAP_TAB_BLOCK_LABEL,
     plural: SUPPORT_MAP_TAB_BLOCK_LABEL,
   },
+
+  admin: {
+    group: SUPPORT_PAGE,
+  },
+
   imageURL: SUPPORT_MAP_TAB_BLOCK_THUMBNAIL_URL,
   imageAltText: `${SUPPORT_MAP_TAB_BLOCK_LABEL} preview`,
 

@@ -2,6 +2,7 @@
 import type { Block } from 'payload'
 import { bnNum } from '@/lib/utils'
 import {
+  ACCIDENTAL_COVERAGE_PLAN_PAGE,
   APPD_BLOCK_LABEL,
   APPD_BLOCK_SLUG_AND_TAG,
   APPD_BLOCK_THUMBNAIL_URL,
@@ -51,6 +52,11 @@ const APPDSchema: Block = {
     singular: APPD_BLOCK_LABEL,
     plural: APPD_BLOCK_LABEL,
   },
+
+  admin: {
+    group: ACCIDENTAL_COVERAGE_PLAN_PAGE,
+  },
+
   imageURL: APPD_BLOCK_THUMBNAIL_URL,
   imageAltText: `${APPD_BLOCK_LABEL} preview`,
 

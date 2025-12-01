@@ -5,6 +5,7 @@ import {
   SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
   SUPPORT_FEEDBACK_FORM_BLOCK_LABEL,
   SUPPORT_FEEDBACK_FORM_BLOCK_THUMBNAIL_URL,
+  SUPPORT_PAGE,
 } from '@/lib/constants'
 
 import { generateImageFields } from '@/utils/media/fieldGenerators'
@@ -73,6 +74,9 @@ const SupportFeedbackSchema: Block = {
   labels: {
     singular: SUPPORT_FEEDBACK_FORM_BLOCK_LABEL,
     plural: SUPPORT_FEEDBACK_FORM_BLOCK_LABEL,
+  },
+  admin: {
+    group: SUPPORT_PAGE,
   },
   imageURL: SUPPORT_FEEDBACK_FORM_BLOCK_THUMBNAIL_URL,
   imageAltText: `${SUPPORT_FEEDBACK_FORM_BLOCK_LABEL} preview`,
@@ -290,7 +294,7 @@ const SupportFeedbackSchema: Block = {
           label: 'Consent Text',
           required: true,
           defaultValue: makeLexicalDoc(
-            'By clicking Send Feedback, you agree to our terms and conditions and privacy policy.'
+            'By clicking Send Feedback, you agree to our terms and conditions and privacy policy.',
           ),
           admin: {
             description:
@@ -304,7 +308,7 @@ const SupportFeedbackSchema: Block = {
           label: 'সম্মতি টেক্সট (বাংলা)',
           required: true,
           defaultValue: makeLexicalDoc(
-            'এখানে ক্লিক করার মাধ্যমে, আপনি আমাদের টার্মস এন্ড কন্ডিশনস , ও প্রাইভেসি পলিসিতে সম্মত করছেন।'
+            'এখানে ক্লিক করার মাধ্যমে, আপনি আমাদের টার্মস এন্ড কন্ডিশনস , ও প্রাইভেসি পলিসিতে সম্মত করছেন।',
           ),
           admin: {
             description:
