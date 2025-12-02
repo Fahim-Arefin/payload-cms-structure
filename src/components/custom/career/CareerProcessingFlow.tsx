@@ -113,7 +113,7 @@ export default function CareerProcessingFlow({ processData }: Props) {
                     {i < processData?.processingCards.length - 1 && (
                       <div className="absolute right-[-26px] top-1/2 -translate-y-1/2 z-10">
                         <img
-                          src="/assets/career/web/process-arrow.png"
+                          src="/assets/icons/process-arrow.png"
                           alt="Arrow"
                           className="w-[26px] h-[16px] select-none"
                         />

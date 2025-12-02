@@ -158,9 +158,9 @@ const CareerResourcesSchema: Block = {
     ...generateImageFields({
       fieldName: 'backgroundImage',
       label: 'Background Image',
-      description: 'Background image for the section (16:9 recommended).',
-      aspectRatio: 16 / 9,
-      quality: 0.93,
+      description: 'Background image for the section (585:390 recommended).',
+      aspectRatio: 585 / 390,
+      quality: 0.92,
       maxKB: 500,
       ownerCollection: CAREER_PAGE_RESOURCES_SLUG_AND_TAG as any,
     } as any),

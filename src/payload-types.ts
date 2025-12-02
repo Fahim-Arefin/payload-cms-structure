@@ -5687,7 +5687,7 @@ export interface Page {
          */
         descriptionBN: string;
         /**
-         * Absolute https URL to your GIF asset. Internal paths are not allowed. Max 400 characters.
+         * Either an internal path starting with “/assets” or an absolute http(s) video URL (MP4/WebM/HLS). Max 400. (/assets/videos/footprint.mp4)
          */
         backgroundGifUrl: string;
         /**
@@ -5742,7 +5742,7 @@ export interface Page {
          */
         highlightedSubTitleBN?: string | null;
         /**
-         * Background image for the section (16:9 recommended).
+         * Background image for the section (585:390 recommended).
          */
         backgroundImage: string | Media;
         backgroundImageOriginal?: (string | null) | Media;
@@ -5871,6 +5871,10 @@ export interface Page {
            * সেকেন্ডারি CTA (যেমন, বিস্তারিত দেখুন)। সর্বোচ্চ ২৪ অক্ষর।
            */
           detailsBtnTextBN?: string | null;
+          /**
+           * Upload/select the Download PDF.
+           */
+          filename?: (string | null) | Media;
           /**
            * Single details object for this opening (overview text, responsibilities, requirements, etc.).
            */
@@ -6048,10 +6052,6 @@ export interface Page {
              * Optional closing note. Max 200 characters.
              */
             footer?: string | null;
-            /**
-             * Optional. Example: it-project-manager.pdf — this should match the name of the PDF users will download.
-             */
-            filename?: string | null;
           };
           id?: string | null;
         }[];
@@ -8413,6 +8413,7 @@ export interface PagesSelect<T extends boolean = true> {
                     btnTextBN?: T;
                     detailsBtnText?: T;
                     detailsBtnTextBN?: T;
+                    filename?: T;
                     details?:
                       | T
                       | {
@@ -8432,7 +8433,6 @@ export interface PagesSelect<T extends boolean = true> {
                           applyEmail?: T;
                           subjectLine?: T;
                           footer?: T;
-                          filename?: T;
                         };
                     id?: T;
                   };

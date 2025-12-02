@@ -290,6 +290,7 @@ const CareerOpeningSchema: Block = {
               type: 'text',
               label: 'Apply Button Text',
               maxLength: BTN_TEXT_MAX,
+              defaultValue: 'Apply Now',
               validate: validateShortText('Apply Button Text', BTN_TEXT_MAX, true),
               admin: {
                 width: '50%',
@@ -301,6 +302,7 @@ const CareerOpeningSchema: Block = {
               type: 'text',
               label: 'বাটন টেক্সট (বাংলা)',
               maxLength: BTN_TEXT_MAX,
+              defaultValue: 'আবেদন করুন',
               validate: validateShortText('Apply Button Text (BN)', BTN_TEXT_MAX, true),
               admin: {
                 width: '50%',
@@ -319,6 +321,7 @@ const CareerOpeningSchema: Block = {
               type: 'text',
               label: 'Details Button Text',
               maxLength: BTN_TEXT_MAX,
+              defaultValue: 'View Details',
               validate: validateShortText('Details Button Text', BTN_TEXT_MAX, true),
               admin: {
                 width: '50%',
@@ -330,6 +333,7 @@ const CareerOpeningSchema: Block = {
               type: 'text',
               label: 'ডিটেইলস বাটন টেক্সট (বাংলা)',
               maxLength: BTN_TEXT_MAX,
+              defaultValue: 'বিস্তারিত দেখুন',
               validate: validateShortText('Details Button Text (BN)', BTN_TEXT_MAX, true),
               admin: {
                 width: '50%',
@@ -339,6 +343,14 @@ const CareerOpeningSchema: Block = {
               },
             },
           ],
+        },
+        // Download Pdf
+        {
+          name: 'filename',
+          label: 'Attachment Filename',
+          type: 'upload',
+          relationTo: 'media',
+          admin: { description: 'Upload/select the Download PDF.' },
         },
 
         /* ---- Details (single group instead of array) ---- */
@@ -558,17 +570,17 @@ const CareerOpeningSchema: Block = {
                 description: `Optional closing note. Max ${FOOTER_MAX} characters.`,
               },
             },
-            {
-              name: 'filename',
-              type: 'text',
-              label: 'Attachment Filename',
-              maxLength: FILENAME_MAX,
-              validate: validateShortText('Attachment Filename', FILENAME_MAX, false),
-              admin: {
-                description:
-                  'Optional. Example: it-project-manager.pdf — this should match the name of the PDF users will download.',
-              },
-            },
+            // {
+            //   name: 'filename',
+            //   type: 'text',
+            //   label: 'Attachment Filename',
+            //   maxLength: FILENAME_MAX,
+            //   validate: validateShortText('Attachment Filename', FILENAME_MAX, false),
+            //   admin: {
+            //     description:
+            //       'Optional. Example: it-project-manager.pdf — this should match the name of the PDF users will download.',
+            //   },
+            // },
           ],
         },
       ],
