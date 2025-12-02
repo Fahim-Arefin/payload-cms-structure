@@ -119,18 +119,18 @@ export const Pages: CollectionConfig = {
         HeroSchema,
         // common section
         LifeInsuranceSimplifiedSchema,
-        ShantaIntroSchema,
+        ContactUsSchema,
         ValuesThatShapeUsSchema,
         AgentVisionSchema,
-        ContactUsSchema,
-        CorporateIntroSchema,
         CorporatePartnersSchema,
+        MultiStageIntroSchema,
+        ShantaIntroSchema,
+        CorporateIntroSchema,
         AddonsInfoSchema,
         PlanInfoDesignSchema,
         PlanInfoDesign03Schema,
         PlanInfoDesign04Schema,
         PlanInfoDesign05Schema,
-        MultiStageIntroSchema,
         // custom blocks
         CustomCardSectionSchema,
         CustomTabSchema,
@@ -183,7 +183,7 @@ export const Pages: CollectionConfig = {
         AllVLogsSectionSchema,
 
         //careerpage
-        CareerIntroSchema,
+        // CareerIntroSchema,
         CareerSwiperSchema,
         CareerResourcesSchema,
         CareerOpeningSchema,

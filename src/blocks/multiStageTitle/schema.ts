@@ -12,6 +12,8 @@ import {
 const TEXT_MAX = 500
 const SUBTITLE_MAX = 500
 const HILITE_MAX = 500
+const COLOR_HEX_LEN = 7
+const DESC_MAX = 500
 
 /* ------------ validators ------------ */
 const validateShortText =
@@ -32,7 +34,6 @@ const validateHighlightedInField =
     const base = (siblingData?.[targetField] ?? '').toString()
     return base.includes(hl) ? true : `${label} must exist within ${targetField} exactly.`
   }
-const COLOR_HEX_LEN = 7
 
 const validateHexColor = (val: unknown) => {
   if (val == null || val === '') return true
@@ -41,6 +42,71 @@ const validateHexColor = (val: unknown) => {
     ? true
     : 'Must be a valid hex color in #RRGGBB (e.g., #FFFFFF).'
 }
+
+/** True if there is ANY real (non-zero-width, non-whitespace) text node in the Lexical tree */
+function lexicalHasRealText(root: any): boolean {
+  if (!root) return false
+  const stack = [root]
+  while (stack.length) {
+    const node = stack.pop()
+    if (!node) continue
+
+    // Text node with real characters?
+    if (node.type === 'text' && typeof node.text === 'string') {
+      const stripped = node.text.replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/\s+/g, '')
+      if (stripped.length > 0) return true
+    }
+
+    // Traverse children/fields
+    if (Array.isArray(node)) {
+      for (const child of node) stack.push(child)
+    } else if (typeof node === 'object') {
+      for (const k of Object.keys(node)) {
+        if (k === 'text') continue
+        stack.push(node[k])
+      }
+    }
+  }
+  return false
+}
+
+/** Count characters in Lexical tree (ignores zero-width chars but keeps normal spaces) */
+function lexicalCharCount(root: any): number {
+  let count = 0
+  const stack = [root]
+  while (stack.length) {
+    const node = stack.pop()
+    if (!node) continue
+    if (node.type === 'text' && typeof node.text === 'string') {
+      count += node.text.replace(/[\u200B-\u200D\uFEFF]/g, '').length
+    }
+    if (Array.isArray(node)) {
+      for (const child of node) stack.push(child)
+    } else if (typeof node === 'object') {
+      for (const k of Object.keys(node)) {
+        if (k === 'text') continue
+        stack.push(node[k])
+      }
+    }
+  }
+  return count
+}
+
+/** Single source of truth validator for richText fields */
+const validateRichText =
+  (label: string, { required, max }: { required: boolean; max: number }) =>
+  (val: unknown) => {
+    const root = (val as any)?.root ?? val
+    if (required && !lexicalHasRealText(root)) {
+      return `${label} is required.`
+    }
+    if (!root) return true
+    const chars = lexicalCharCount(root)
+    if (max && chars > max) {
+      return `${label} must be at most ${max} characters.`
+    }
+    return true
+  }
 
 /* ------------ block ------------ */
 const MultiStageIntroSchema: Block = {
@@ -188,6 +254,25 @@ const MultiStageIntroSchema: Block = {
               HILITE_MAX,
             )} অক্ষর।`,
           },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'description',
+          type: 'richText',
+          label: 'Description',
+          validate: validateRichText('Description', { required: false, max: DESC_MAX }),
+          admin: { width: '50%', description: `Up to ~${DESC_MAX} characters.` },
+        },
+        {
+          name: 'descriptionBN',
+          type: 'richText',
+          label: 'বর্ণনা (বাংলা)',
+          validate: validateRichText('Description (BN)', { required: false, max: DESC_MAX }),
+          admin: { width: '50%', description: `সর্বোচ্চ ~${bnNum(DESC_MAX)} অক্ষর।` },
         },
       ],
     },

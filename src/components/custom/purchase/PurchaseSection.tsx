@@ -362,13 +362,14 @@ const PurchaseSection = ({ block }: Props) => {
 
   return (
     <div
-      className="px-5 pt-12 py-4
-           md:px-24 md:pt-24
-           lg:px-[130px]  lg:pt-[110px] 
-           xl:px-[200px]  xl:pt-[100px] 
-           2xl:px-[300px] 2xl:pt-[150px] lg:py-10 mb-4 lg:mb-10 xl:mb-20"
+      // className="px-5 pt-12 py-4
+      //      md:px-24 md:pt-24
+      //      lg:px-[130px]  lg:pt-[110px]
+      //      xl:px-[200px]  xl:pt-[100px]
+      //      2xl:px-[300px] 2xl:pt-[150px] lg:py-10 mb-4 lg:mb-10 xl:mb-20"
+      className="container-padding"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.3fr,1fr] gap-4 lg:gap-10 justify-center mt-6 lg:mt-10 xl:mt-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[1.3fr,1fr] gap-4 lg:gap-10 justify-center">
         {/* left side box */}
         {/* <div className=" w-full order-2 lg:order-1">
           {apiResponse ? (

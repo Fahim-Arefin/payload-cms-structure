@@ -510,57 +510,23 @@ export interface Page {
         blockType: 'life-insurance-simplified';
       }
     | {
-        uploadSessionId?: string | null;
         /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         backgroundColor?: string | null;
         /**
-         * Short, strong opener. Max 20 characters.
+         * When ON, this block renders data from **Global → Contact Us**.
+         *
+         * **Before enabling:** fill up the Global → Contact Us data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
          */
-        heading: string;
-        /**
-         * সংক্ষিপ্ত, শক্তিশালী সূচনা। সর্বোচ্চ ২০ অক্ষর।
-         */
-        headingBN: string;
-        /**
-         * Secondary line below the heading. Max 35 characters.
-         */
-        subheading: string;
-        /**
-         * শিরোনামের নিচে দ্বিতীয় লাইন। সর্বোচ্চ ৩৫ অক্ষর।
-         */
-        subheadingBN: string;
-        /**
-         * Lead-in title above the paragraph. Max 80 characters.
-         */
-        paragraphTitle: string;
-        /**
-         * অনুচ্ছেদের উপরে লিড-ইন শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        paragraphTitleBN: string;
-        /**
-         * Main descriptive text. Max 400 characters.
-         */
-        paragraph: string;
-        /**
-         * মূল বর্ণনামূলক টেক্সট। সর্বোচ্চ ৪০০ অক্ষর।
-         */
-        paragraphBN: string;
-        /**
-         * Primary visual for the intro section. Use tranparent image. 2.15:1 recommended.
-         */
-        image: string | Media;
-        imageOriginal?: (string | null) | Media;
-        pendingImageOriginal?: string | null;
-        pendingImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageBlurDataURL?: string | null;
+        useSharedData: boolean;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'shanta-intro';
+        blockType: 'contact-us-form';
       }
     | {
         /**
@@ -745,23 +711,182 @@ export interface Page {
         blockType: 'agent-vision';
       }
     | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Add partners with a logo and name (EN/BN).
+         */
+        partners: {
+          /**
+           * Upload the partner logo (square logo recommended 340:250).
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Display name. Max 60 characters.
+           */
+          name: string;
+          /**
+           * প্রদর্শিত নাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          nameBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'corporate-partners';
+      }
+    | {
         /**
          * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         backgroundColor?: string | null;
         /**
-         * When ON, this block renders data from **Global → Contact Us**.
-         *
-         * **Before enabling:** fill up the Global → Contact Us data.
-         *
-         * **Notes:**
-         * • This block only stores presentation options (e.g., background color).
-         * • All content comes from the single shared Global to keep pages in sync.
+         * Main line. Max 500 characters.
          */
-        useSharedData: boolean;
+        text: string;
+        /**
+         * মূল লাইন। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        textBN: string;
+        /**
+         * Optional. Must appear verbatim inside “Text”. Max 500 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। “টেক্সট (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Secondary line. Max 500 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সেকেন্ডারি লাইন। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside “Subtitle”. Max 500 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। “সাবটাইটেল (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~500 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৫০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'contact-us-form';
+        blockType: 'multistage-intro';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Short, strong opener. Max 20 characters.
+         */
+        heading: string;
+        /**
+         * সংক্ষিপ্ত, শক্তিশালী সূচনা। সর্বোচ্চ ২০ অক্ষর।
+         */
+        headingBN: string;
+        /**
+         * Secondary line below the heading. Max 35 characters.
+         */
+        subheading: string;
+        /**
+         * শিরোনামের নিচে দ্বিতীয় লাইন। সর্বোচ্চ ৩৫ অক্ষর।
+         */
+        subheadingBN: string;
+        /**
+         * Lead-in title above the paragraph. Max 80 characters.
+         */
+        paragraphTitle: string;
+        /**
+         * অনুচ্ছেদের উপরে লিড-ইন শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        paragraphTitleBN: string;
+        /**
+         * Main descriptive text. Max 400 characters.
+         */
+        paragraph: string;
+        /**
+         * মূল বর্ণনামূলক টেক্সট। সর্বোচ্চ ৪০০ অক্ষর।
+         */
+        paragraphBN: string;
+        /**
+         * Primary visual for the intro section. Use tranparent image. 2.15:1 recommended.
+         */
+        image: string | Media;
+        imageOriginal?: (string | null) | Media;
+        pendingImageOriginal?: string | null;
+        pendingImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageBlurDataURL?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'shanta-intro';
       }
     | {
         /**
@@ -847,54 +972,6 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'corporate-intro';
-      }
-    | {
-        uploadSessionId?: string | null;
-        /**
-         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Primary heading. Max 80 characters.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Optional. Must appear verbatim inside the Title. Max 40 characters.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Add partners with a logo and name (EN/BN).
-         */
-        partners: {
-          /**
-           * Upload the partner logo (square logo recommended 340:250).
-           */
-          image: string | Media;
-          imageOriginal?: (string | null) | Media;
-          pendingImageOriginal?: string | null;
-          pendingImageCrop?: string | null;
-          imageBlurDataURL?: string | null;
-          /**
-           * Display name. Max 60 characters.
-           */
-          name: string;
-          /**
-           * প্রদর্শিত নাম। সর্বোচ্চ ৬০ অক্ষর।
-           */
-          nameBN: string;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'corporate-partners';
       }
     | {
         uploadSessionId?: string | null;
@@ -1821,47 +1898,6 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'plan-info-design-05';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Main line. Max 500 characters.
-         */
-        text: string;
-        /**
-         * মূল লাইন। সর্বোচ্চ ৫০০ অক্ষর।
-         */
-        textBN: string;
-        /**
-         * Optional. Must appear verbatim inside “Text”. Max 500 characters.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। “টেক্সট (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৫০০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Secondary line. Max 500 characters.
-         */
-        subtitle?: string | null;
-        /**
-         * সেকেন্ডারি লাইন। সর্বোচ্চ ৫০০ অক্ষর।
-         */
-        subtitleBN?: string | null;
-        /**
-         * Optional. Must appear verbatim inside “Subtitle”. Max 500 characters.
-         */
-        highlightedSubtitle?: string | null;
-        /**
-         * ঐচ্ছিক। “সাবটাইটেল (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৫০০ অক্ষর।
-         */
-        highlightedSubtitleBN?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'multistage-intro';
       }
     | {
         /**
@@ -5627,63 +5663,6 @@ export interface Page {
       }
     | {
         /**
-         * Primary headline. Max 80 characters.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Optional. Must appear verbatim inside the Title. Max 40 characters.
-         */
-        highlightedTitle?: string | null;
-        /**
-         * ঐচ্ছিক। অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTitleBN?: string | null;
-        /**
-         * 1–2 short sentences. Max 300 characters (guideline).
-         */
-        description: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        /**
-         * ১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ৩০০ অক্ষরের মধ্যে রাখার পরামর্শ।
-         */
-        descriptionBN: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'career-intro';
-      }
-    | {
-        /**
          * Primary headline. Max 30 characters.
          */
         title: string;
@@ -6484,24 +6463,11 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'shanta-intro'?:
+        'contact-us-form'?:
           | T
           | {
-              uploadSessionId?: T;
               backgroundColor?: T;
-              heading?: T;
-              headingBN?: T;
-              subheading?: T;
-              subheadingBN?: T;
-              paragraphTitle?: T;
-              paragraphTitleBN?: T;
-              paragraph?: T;
-              paragraphBN?: T;
-              image?: T;
-              imageOriginal?: T;
-              pendingImageOriginal?: T;
-              pendingImageCrop?: T;
-              imageBlurDataURL?: T;
+              useSharedData?: T;
               id?: T;
               blockName?: T;
             };
@@ -6578,11 +6544,65 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'contact-us-form'?:
+        'corporate-partners'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              partners?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'multistage-intro'?:
           | T
           | {
               backgroundColor?: T;
-              useSharedData?: T;
+              text?: T;
+              textBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'shanta-intro'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              heading?: T;
+              headingBN?: T;
+              subheading?: T;
+              subheadingBN?: T;
+              paragraphTitle?: T;
+              paragraphTitleBN?: T;
+              paragraph?: T;
+              paragraphBN?: T;
+              image?: T;
+              imageOriginal?: T;
+              pendingImageOriginal?: T;
+              pendingImageCrop?: T;
+              imageBlurDataURL?: T;
               id?: T;
               blockName?: T;
             };
@@ -6603,30 +6623,6 @@ export interface PagesSelect<T extends boolean = true> {
                     valueBN?: T;
                     label?: T;
                     labelBN?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'corporate-partners'?:
-          | T
-          | {
-              uploadSessionId?: T;
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              partners?:
-                | T
-                | {
-                    image?: T;
-                    imageOriginal?: T;
-                    pendingImageOriginal?: T;
-                    pendingImageCrop?: T;
-                    imageBlurDataURL?: T;
-                    name?: T;
-                    nameBN?: T;
                     id?: T;
                   };
               id?: T;
@@ -6917,21 +6913,6 @@ export interface PagesSelect<T extends boolean = true> {
                     descriptionBN?: T;
                     id?: T;
                   };
-              id?: T;
-              blockName?: T;
-            };
-        'multistage-intro'?:
-          | T
-          | {
-              backgroundColor?: T;
-              text?: T;
-              textBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              highlightedSubtitle?: T;
-              highlightedSubtitleBN?: T;
               id?: T;
               blockName?: T;
             };
@@ -8350,18 +8331,6 @@ export interface PagesSelect<T extends boolean = true> {
               titleBN?: T;
               sectionId?: T;
               useSharedData?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'career-intro'?:
-          | T
-          | {
-              title?: T;
-              titleBN?: T;
-              highlightedTitle?: T;
-              highlightedTitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
               id?: T;
               blockName?: T;
             };

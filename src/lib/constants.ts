@@ -415,7 +415,7 @@ export const CAREER_PAGE_PROCESSING_BLOCK_THUMBNAIL_URL = `${folder}/career-page
 // multistage page
 //  --------------------------------------------------------------------------------------------------
 export const MULTI_STAGE_INTRO_SLUG_AND_TAG = 'multistage-intro'
-export const MULTI_STAGE_INTRO_BLOCK_LABEL = 'Multistage Intro'
+export const MULTI_STAGE_INTRO_BLOCK_LABEL = 'Plan Intro'
 export const MULTI_STAGE_INTRO_CACHE_KEY = 'multistage-intro-data'
 export const MULTI_STAGE_INTRO_BLOCK_THUMBNAIL_URL = `${folder}/multistage-page-intro-thumbnail.png`
 
