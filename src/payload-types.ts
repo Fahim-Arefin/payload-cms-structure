@@ -5404,7 +5404,11 @@ export interface Page {
         rightTitle: string;
         rightTitleBN?: string | null;
         rightButtonText: string;
-        rightButtonTextBN?: string | null;
+        rightButtonTextBN: string;
+        /**
+         * Example: +88 09610889900
+         */
+        phoneNumber: string;
         /**
          * Provide at least one email address. All valid ones will receive the feedback submission.
          */
@@ -8248,6 +8252,7 @@ export interface PagesSelect<T extends boolean = true> {
               rightTitleBN?: T;
               rightButtonText?: T;
               rightButtonTextBN?: T;
+              phoneNumber?: T;
               recipientEmails?:
                 | T
                 | {

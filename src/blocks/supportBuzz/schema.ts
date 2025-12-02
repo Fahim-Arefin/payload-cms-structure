@@ -387,6 +387,7 @@ const SupportBuzzSchema: Block = {
           name: 'videoLink',
           type: 'text',
           label: 'YouTube Video Link',
+          defaultValue: 'https://www.youtube.com/embed/Dwr1V4cgZ0o',
           required: false,
           maxLength: URL_MAX,
           validate: validateYouTubeUrl('YouTube Video Link'),

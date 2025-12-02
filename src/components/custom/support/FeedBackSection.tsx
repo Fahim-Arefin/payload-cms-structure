@@ -312,16 +312,18 @@ function FeedBackSection({ block }: Props) {
                   <LocalizedText en={rightTitleEn} bn={rightTitleBn} />
                 </p>
                 <div>
-                  <Button
-                    variant="outline"
-                    className=" h-[45px] lg:h-[50px] xl:h-[60px] 
+                  <a href={`tel:${block?.phoneNumber}`} className="w-fit">
+                    <Button
+                      variant="outline"
+                      className=" h-[45px] lg:h-[50px] xl:h-[60px] 
                       lg:w-[180px] xl:w-[240px]
                       lg:rounded-[6px] xl:rounded-[8px]
                       font-normal
                       lg:text-[16px] xl:text-[18px]"
-                  >
-                    <LocalizedString en={rightBtnEn || 'Contact'} bn={rightBtnBn || 'যোগাযোগ'} />
-                  </Button>
+                    >
+                      <LocalizedString en={rightBtnEn || 'Contact'} bn={rightBtnBn || 'যোগাযোগ'} />
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>
