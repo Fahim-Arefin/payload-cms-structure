@@ -68,7 +68,7 @@ export default function CustomAccordionSection({ block, className }: Props) {
                 </AccordionTrigger>
 
                 <AccordionContent
-                  className="px-5 md:px-6
+                  className="px-10 md:px-12 2xl:px-14
                              border border-white border-t-0 rounded-b-xl
                              bg-white"
                 >
