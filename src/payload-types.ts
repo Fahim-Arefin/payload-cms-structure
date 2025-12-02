@@ -5299,7 +5299,7 @@ export interface Page {
         highlightedTitle?: string | null;
         highlightedTitleBN?: string | null;
         /**
-         * Large section background visual for ALL tab. 16:9 recommended.
+         * All Tab Left Side Video Thumbnail, 16:9 recommended.
          */
         mainImage: string | Media;
         mainImageOriginal?: (string | null) | Media;
@@ -5332,7 +5332,7 @@ export interface Page {
            * ডিফল্ট: “সকল”.
            */
           valueBN: string;
-          mainImageSrcLink?: string | null;
+          mainImageSrcLink: string;
           /**
            * Exactly 3 items. Each uses a single 16:9 image, real date, EN/BN title/description, and optional YouTube link.
            */
@@ -5379,6 +5379,10 @@ export interface Page {
           highlightedTitle?: string | null;
           highlightedTitleBN?: string | null;
           videoLink?: string | null;
+          /**
+           * Either an internal path starting with “/assets” or an absolute http(s) video URL (MP4/WebM/HLS). Max 300. (/assets/videos/bg.mp4)
+           */
+          backgroundGIF: string;
         };
         id?: string | null;
         blockName?: string | null;
@@ -8231,6 +8235,7 @@ export interface PagesSelect<T extends boolean = true> {
                     highlightedTitle?: T;
                     highlightedTitleBN?: T;
                     videoLink?: T;
+                    backgroundGIF?: T;
                   };
               id?: T;
               blockName?: T;

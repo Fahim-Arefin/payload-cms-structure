@@ -5,6 +5,8 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useMemo, useState } from 'react'
 import { BsPlay } from 'react-icons/bs'
 import { useLanguage } from '@/context/LanguageContext'
+import Image from 'next/image'
+import { SupportBuzzBlockType } from '@/types/payloadCustomTypes'
 
 type MediaLike =
   | string
@@ -12,20 +14,23 @@ type MediaLike =
   | null
   | undefined
 
-type NewsItem = {
-  image?: MediaLike
-  date: string
-  title: string
-  titleBN?: string | null
-  description?: string | null
-  descriptionBN?: string | null
-  videoLink?: string | null
-}
+// type NewsItem = {
+//   image?: MediaLike
+//   date: string
+//   title: string
+//   titleBN?: string | null
+//   description?: string | null
+//   descriptionBN?: string | null
+//   videoLink?: string | null
+// }
+
+// block?.allTab?.newsItems
 
 type Props = {
   mainImage?: MediaLike
   mainImageSrcLink?: string
-  newsItems?: NewsItem[] | null
+  newsItems?: SupportBuzzBlockType['allTab']['newsItems'] | null
+  block: SupportBuzzBlockType
 }
 
 /** Extract URL from string or Payload media. */
@@ -50,8 +55,7 @@ const bnMonths = [
   'নভেম্বর',
   'ডিসেম্বর',
 ]
-const toBnDigits = (s: string) =>
-  s.replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)])
+const toBnDigits = (s: string) => s.replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)])
 
 /** Examples:
  * EN -> "15 Jan 2024 | 10.00am"
@@ -88,7 +92,7 @@ const formatDateTimeLocalized = (iso: string, lang: 'en' | 'bn' | string) => {
   }
 }
 
-function AllNewsContainer({ mainImage, mainImageSrcLink = '', newsItems }: Props) {
+function AllNewsContainer({ mainImage, mainImageSrcLink = '', newsItems, block }: Props) {
   const { language } = useLanguage()
 
   const items = useMemo(() => (Array.isArray(newsItems) ? newsItems.slice(0, 3) : []), [newsItems])
@@ -119,19 +123,27 @@ function AllNewsContainer({ mainImage, mainImageSrcLink = '', newsItems }: Props
           }}
         >
           {heroSrc ? (
-            <img
-              src={heroSrc}
-              alt="Main news"
-              className="w-full rounded-[6px] object-cover 
-                h-[250px] md:h-[350px] lg:h-full"
-            />
+            <div className="w-full h-[250px] md:h-[450px] lg:h-full flex flex-col justify-center bg-black/30 rounded-[6px]">
+              <div className="absolute w-full aspect-[16/9] ">
+                <Image
+                  fill
+                  src={heroSrc}
+                  alt="Main news"
+                  className="object-cover object-center"
+                  sizes="50vw"
+                  quality={80}
+                  placeholder="blur"
+                  blurDataURL={block?.mainImageBlurDataURL || ''}
+                />
+              </div>
+            </div>
           ) : (
             <div className="w-full h-[250px] md:h-[350px] lg:h-full rounded-[6px] bg-black/20 grid place-items-center">
               <span className="opacity-70 text-sm">No main image</span>
             </div>
           )}
 
-          {mainImageSrcLink ? (
+          {/* {mainImageSrcLink ? (
             <a
               href={mainImageSrcLink}
               target="_blank"
@@ -140,13 +152,13 @@ function AllNewsContainer({ mainImage, mainImageSrcLink = '', newsItems }: Props
             >
               {language === 'bn' ? 'সূত্র' : 'Source'}
             </a>
-          ) : null}
+          ) : null} */}
 
           {(items[0]?.videoLink || '') && (
             <div className="opacity-0 hover:opacity-100 flex transition-all duration-300 absolute inset-0 items-center bg-black/50 justify-center rounded-[6px]">
               <img
                 className="w-12 h-12 md:w-16 md:h-16"
-                src="/assets/supportpage/web/play2.png"
+                src="/assets/images/play2.png"
                 alt="play"
               />
             </div>
@@ -163,11 +175,11 @@ function AllNewsContainer({ mainImage, mainImageSrcLink = '', newsItems }: Props
           <VisuallyHidden>
             <DialogTitle>Expert Video</DialogTitle>
           </VisuallyHidden>
-          {selectedVideo ? (
+          {mainImageSrcLink ? (
             <iframe
               width="100%"
               height="100%"
-              src={selectedVideo}
+              src={mainImageSrcLink}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -196,7 +208,8 @@ function AllNewsContainer({ mainImage, mainImageSrcLink = '', newsItems }: Props
               <div
                 className="relative rounded-[6px] cursor-pointer
                   min-w-[110px] max-w-[110px] xl:min-w-[140px] xl:max-w-[140px] 
-                  h-[110px] xl:h-[140px]"
+                  h-[110px] xl:h-[140px]
+                  flex flex-col justify-center"
                 onClick={() => {
                   if (item.videoLink) {
                     setSelectedVideo(item.videoLink)
@@ -205,7 +218,18 @@ function AllNewsContainer({ mainImage, mainImageSrcLink = '', newsItems }: Props
                 }}
               >
                 {img ? (
-                  <img src={img} alt={title} className="object-cover rounded-md h-full w-full" />
+                  <div className="absolute w-full aspect-[16/9]">
+                    <Image
+                      fill
+                      src={img}
+                      alt={title}
+                      className="object-cover object-center rounded-md h-full w-full"
+                      placeholder="blur"
+                      blurDataURL={item?.imageBlurDataURL || ''}
+                      quality={80}
+                      sizes="40vw"
+                    />
+                  </div>
                 ) : (
                   <div className="object-cover rounded-md h-full w-full bg-black/20 grid place-items-center">
                     <span className="text-[10px] opacity-70">No image</span>
@@ -221,7 +245,7 @@ function AllNewsContainer({ mainImage, mainImageSrcLink = '', newsItems }: Props
 
               <div className="space-y-2 xl:space-y-3">
                 <div className="flex items-center">
-                  <img src="/assets/supportpage/web/calender2.png" alt="calendar" />
+                  <img src="/assets/images/calender2.png" alt="calendar" />
                   <p className="text-[11px] ml-2">{dateStr}</p>
                 </div>
 

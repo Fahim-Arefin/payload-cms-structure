@@ -12,7 +12,7 @@ import { generateImageFields, generateArrayImageFields } from '@/utils/media/fie
 
 /* ---------------- limits ---------------- */
 const TITLE_MAX = 120
-const HILITE_MAX = 80
+const HILITE_MAX = 120
 const DESC_MAX = 700 // textarea
 const URL_MAX = 300
 
@@ -64,6 +64,32 @@ const requireLiteral =
     return s === literal ? true : `${label} must be "${literal}".`
   }
 
+/** Background video URL: allow absolute http(s) OR internal /assets path. */
+const validateBackgroundVideoUrl =
+  (max = URL_MAX, required = true) =>
+  (val: unknown) => {
+    const link = (val ?? '').toString().trim()
+    if (required && !link) return 'URL is required.'
+    if (!link) return true
+    if (link.length > max) return `URL must be at most ${max} characters.`
+
+    // Allow internal asset paths like "/assets/bg.mp4"
+    if (link.startsWith('/assets')) {
+      return true
+    }
+
+    // Otherwise, require absolute http(s) URL
+    try {
+      const u = new URL(link)
+      const ok = u.protocol === 'http:' || u.protocol === 'https:'
+      if (!ok) {
+        return 'URL must be an absolute http(s) URL or start with /assets.'
+      }
+      return true
+    } catch {
+      return 'Provide a valid URL that is either an absolute http(s) URL or starts with /assets.'
+    }
+  }
 /* ---------------- block ---------------- */
 const SupportBuzzSchema: Block = {
   slug: SUPPORT_BUZZ_SLUG_AND_TAG,
@@ -133,8 +159,8 @@ const SupportBuzzSchema: Block = {
     ...generateImageFields({
       ownerCollection: SUPPORT_BUZZ_SLUG_AND_TAG,
       fieldName: 'mainImage',
-      label: 'Main Image (Hero) — 16:9',
-      description: 'Large section background visual for ALL tab. 16:9 recommended.',
+      label: 'All Tab Main Video Thumbnail',
+      description: 'All Tab Left Side Video Thumbnail, 16:9 recommended.',
       aspectRatio: 16 / 9,
       quality: 0.85,
       maxKB: 600,
@@ -142,7 +168,7 @@ const SupportBuzzSchema: Block = {
     ...generateImageFields({
       ownerCollection: SUPPORT_BUZZ_SLUG_AND_TAG,
       fieldName: 'backgroundImage',
-      label: 'Background Image — 16:9',
+      label: 'OVC Tab Video Thumbnail',
       description: 'Background visual for the OVC/TVC tab. 16:9 recommended.',
       aspectRatio: 16 / 9,
       quality: 0.85,
@@ -170,7 +196,7 @@ const SupportBuzzSchema: Block = {
               required: true,
               defaultValue: 'all',
               validate: requireLiteral('all', 'Tab Value'),
-              admin: { width: '25%', description: 'Fixed: "all" (string).' },
+              admin: { width: '50%', description: 'Fixed: "all" (string).' },
             },
             {
               name: 'valueBN',
@@ -179,7 +205,7 @@ const SupportBuzzSchema: Block = {
               required: true,
               defaultValue: 'সকল',
               validate: validateShort('Tab Value (BN)', 40, true),
-              admin: { width: '25%', description: 'ডিফল্ট: “সকল”.' },
+              admin: { width: '50%', description: 'ডিফল্ট: “সকল”.' },
             },
           ],
         },
@@ -189,7 +215,8 @@ const SupportBuzzSchema: Block = {
           name: 'mainImageSrcLink',
           type: 'text',
           label: 'Main Image Source Link',
-          required: false,
+          required: true,
+          defaultValue: 'https://www.youtube.com/embed/YbnlDrexiGE',
           maxLength: URL_MAX,
           validate: validateAbsoluteHttpUrl('Main Image Source Link'),
         },
@@ -324,7 +351,7 @@ const SupportBuzzSchema: Block = {
               required: true,
               defaultValue: 'ovc',
               validate: requireLiteral('ovc', 'Tab Value'),
-              admin: { width: '25%', description: 'Fixed: "OVC" (string).' },
+              admin: { width: '50%', description: 'Fixed: "OVC" (string).' },
             },
             {
               name: 'valueBN',
@@ -333,7 +360,7 @@ const SupportBuzzSchema: Block = {
               required: true,
               defaultValue: 'অভিসি/টিভিসি',
               validate: validateShort('Tab Value (BN)', 40, true),
-              admin: { width: '25%', description: 'ডিফল্ট: “অভিসি/টিভিসি”.' },
+              admin: { width: '50%', description: 'ডিফল্ট: “অভিসি/টিভিসি”.' },
             },
           ],
         },
@@ -384,13 +411,32 @@ const SupportBuzzSchema: Block = {
           ],
         },
         {
-          name: 'videoLink',
-          type: 'text',
-          label: 'YouTube Video Link',
-          defaultValue: 'https://www.youtube.com/embed/Dwr1V4cgZ0o',
-          required: false,
-          maxLength: URL_MAX,
-          validate: validateYouTubeUrl('YouTube Video Link'),
+          type: 'row',
+          fields: [
+            {
+              name: 'videoLink',
+              type: 'text',
+              label: 'YouTube Video Link',
+              defaultValue: 'https://www.youtube.com/embed/Dwr1V4cgZ0o',
+              required: false,
+              maxLength: URL_MAX,
+              validate: validateYouTubeUrl('YouTube Video Link'),
+            },
+            {
+              name: 'backgroundGIF',
+              type: 'text',
+              label: 'Background Video URL (GIF)',
+              required: true,
+              maxLength: URL_MAX,
+              // validate: validateAbsoluteHTTPUrl(URL_MAX, true),
+              validate: validateBackgroundVideoUrl(URL_MAX, true),
+              defaultValue: '/assets/videos/bg.mp4',
+              admin: {
+                width: '50%',
+                description: `Either an internal path starting with “/assets” or an absolute http(s) video URL (MP4/WebM/HLS). Max ${URL_MAX}. (/assets/videos/bg.mp4)`,
+              },
+            },
+          ],
         },
       ],
     },
