@@ -4,6 +4,7 @@ import {
   PURCHASE_FORM_SLUG_AND_TAG,
   PURCHASE_FORM_PAGE_BLOCK_LABEL,
   PURCHASE_FORM_BLOCK_THUMBNAIL_URL,
+  PURCHASE_NOW_PAGE,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 
@@ -37,6 +38,11 @@ const PurchaseFormSchema: Block = {
     singular: PURCHASE_FORM_PAGE_BLOCK_LABEL,
     plural: PURCHASE_FORM_PAGE_BLOCK_LABEL,
   },
+
+  admin: {
+    group: PURCHASE_NOW_PAGE,
+  },
+
   imageURL: PURCHASE_FORM_BLOCK_THUMBNAIL_URL,
   imageAltText: `${PURCHASE_FORM_PAGE_BLOCK_LABEL} preview`,
 

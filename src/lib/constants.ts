@@ -54,12 +54,21 @@ const folder = '/assets/block-icons'
 export const HERO = 'Hero Blocks'
 export const COMMON = 'Common Blocks'
 export const CUSTOM = 'Custom Blocks'
+export const NORMAL_TAB = 'Normal Tab'
+export const LEARN_MORE_TAB = 'Learn More Tab'
 export const HOME_PAGE = 'Home Page'
 export const ABOUT_US_PAGE = 'About Us Page'
 export const BOD_PAGE = 'BOD Page'
 export const LEARERS_PAGE = 'Leaders Page'
 export const AGENT_ONBOARDING_PAGE = 'Agent Onboarding Page'
 export const CORPORATE_PLAN_PAGE = 'Corporate Plan Page'
+export const MUTLI_STAGE_PLAN_PAGE = 'Multi Stage Maturity Plan Page'
+export const ACCIDENTAL_COVERAGE_PLAN_PAGE = 'Accidental Coverage Plan Page'
+export const PREMIUM_CALCULATOR_PAGE = 'Premium Calculator Page'
+export const PURCHASE_NOW_PAGE = 'Purchase Now Page'
+export const SUPPORT_PAGE = 'Support Page'
+export const NEWS_AND_BLOG_PAGE = 'News And Blogs Page'
+export const CAREER_PAGE = 'Career Page'
 
 // home page constants
 // ----------------------------------------------------------------------------------------------
@@ -337,10 +346,10 @@ export const PLAN_INFO_DESIGN_05_CACHE_KEY = 'plan-info-design-05-data'
 export const PLAN_INFO_DESIGN_05_BLOCK_LABEL = 'Plan Info Design 05'
 export const PLAN_INFO_DESIGN_05_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-05-block-thumbnail.png`
 
-//
+// accidental coverage page
 export const APPD_BLOCK_SLUG_AND_TAG = 'accidental-permanent-partial-disability'
 export const APPD_BLOCK_SLUG_AND_TAG_CACHE_KEY = 'accidental-permanent-partial-disability-data'
-export const APPD_BLOCK_LABEL = 'Accidental Permanent Partial DisabilitySection'
+export const APPD_BLOCK_LABEL = 'APPD Table'
 export const APPD_BLOCK_THUMBNAIL_URL = `${folder}/accidental-permanent-partial-disability-block-thumbnail.png`
 
 // news and media page
@@ -406,7 +415,7 @@ export const CAREER_PAGE_PROCESSING_BLOCK_THUMBNAIL_URL = `${folder}/career-page
 // multistage page
 //  --------------------------------------------------------------------------------------------------
 export const MULTI_STAGE_INTRO_SLUG_AND_TAG = 'multistage-intro'
-export const MULTI_STAGE_INTRO_BLOCK_LABEL = 'Multistage Intro'
+export const MULTI_STAGE_INTRO_BLOCK_LABEL = 'Plan Intro'
 export const MULTI_STAGE_INTRO_CACHE_KEY = 'multistage-intro-data'
 export const MULTI_STAGE_INTRO_BLOCK_THUMBNAIL_URL = `${folder}/multistage-page-intro-thumbnail.png`
 

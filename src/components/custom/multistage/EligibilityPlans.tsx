@@ -14,7 +14,7 @@ const EligibilityPlans: FC<EligibilityPlansProps> = ({ data }: EligibilityPlansP
       {/* ENTRY AGE CARD */}
       <div className="w-full md:max-w-[280px] border border-[#a88b36] rounded-lg px-4 pt-4 flex flex-col gap-4 ">
         <div className="flex items-center justify-center md:justify-start gap-2">
-          <img src="/assets/iconfeet.svg" alt="icon" className="w-4 h-4" />
+          <img src="/assets/icons/iconfeet.svg" alt="icon" className="w-4 h-4" />
           <h3 className="text-[10px] md:text-sm tracking-wide font-semibold text-[#000] uppercase">
             <LocalizedText en={entryAge?.label} bn={entryAge?.labelBN} />
           </h3>
@@ -48,7 +48,7 @@ const EligibilityPlans: FC<EligibilityPlansProps> = ({ data }: EligibilityPlansP
       {/* MATURITY AGE CARD */}
       <div className="w-full md:max-w-[280px] border border-[#a88b36] rounded-lg px-4 pt-4 flex flex-col gap-4">
         <div className="flex items-center justify-center md:justify-start gap-2">
-          <img src="/assets/iconfeet.svg" alt="icon" className="w-4 h-4" />
+          <img src="/assets/icons/iconfeet.svg" alt="icon" className="w-4 h-4" />
           <h3 className="text-[10px] md:text-sm tracking-wide font-semibold text-[#000] uppercase">
             <LocalizedText en={maturityAge?.label} bn={maturityAge?.labelBN} />
           </h3>

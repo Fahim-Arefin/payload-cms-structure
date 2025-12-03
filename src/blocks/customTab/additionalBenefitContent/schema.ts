@@ -2,6 +2,7 @@ import {
   ADDITIONAL_BENEFIT_CONTENT_BLOCK_THUMBNAIL_URL,
   ADDITIONAL_BENEFIT_CONTENT_PAGE_BLOCK_LABEL,
   ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG,
+  NORMAL_TAB,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import { generateImageFields } from '@/utils/media/fieldGenerators'
@@ -134,6 +135,9 @@ const AdditionalBenfitContent: Block = {
   labels: {
     singular: ADDITIONAL_BENEFIT_CONTENT_PAGE_BLOCK_LABEL,
     plural: ADDITIONAL_BENEFIT_CONTENT_PAGE_BLOCK_LABEL,
+  },
+  admin: {
+    group: NORMAL_TAB,
   },
 
   imageURL: ADDITIONAL_BENEFIT_CONTENT_BLOCK_THUMBNAIL_URL,

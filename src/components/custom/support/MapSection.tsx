@@ -69,16 +69,8 @@ function MapSection({ data, bgColor }: Props) {
 
           <div className="flex items-center space-x-1 lg:space-x-2 text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#434343]">
             <div className="w-4 h-4 flex items-center justify-center">
-              <img
-                className="lg:hidden w-4 h-4"
-                src="/assets/supportpage/mobile/phone.png"
-                alt=""
-              />
-              <img
-                className="hidden lg:block w-4 h-4"
-                src="/assets/supportpage/web/phone.png"
-                alt=""
-              />
+              <img className="lg:hidden w-4 h-4" src="/assets/images/phone.png" alt="" />
+              <img className="hidden lg:block w-4 h-4" src="/assets/images/phone.png" alt="" />
             </div>
             <p>
               <LocalizedText
@@ -148,14 +140,12 @@ function MapSection({ data, bgColor }: Props) {
                 aria-hidden="true"
               />
             )}
-            <p className="font-bold text-[12px] xl:text-[13px] 2xl:text-[16px]">
-              {data?.content[0]?.cashless_status && (
-                <>
-                  {/* <span className="font-bold">Cashless Status: </span> */}
-                  <span className="text-[#434343]">{data?.content[0]?.cashless_status}</span>
-                </>
-              )}
-            </p>
+
+            {data?.content[0]?.cashless_status && (
+              <p className="font-bold text-[12px] xl:text-[13px] 2xl:text-[16px]">
+                <span className="text-[#434343]">{data?.content[0]?.cashless_status}</span>
+              </p>
+            )}
           </div>
         </div>
 

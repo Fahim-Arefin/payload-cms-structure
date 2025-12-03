@@ -21,6 +21,7 @@ type MediaField =
 
 type SupportOVCSectionProps = {
   /** Schema → block.backgroundImage (moved outside the group in schema) */
+  backgroundGif: string
   backgroundImage?: MediaField
   /** Schema → block.ovcTab.videoLink */
   videoLink?: string | null
@@ -44,6 +45,7 @@ const mediaUrl = (m?: MediaField): string => {
 /* Component                                                          */
 /* ------------------------------------------------------------------ */
 const SupportOVCSection: FC<SupportOVCSectionProps> = ({
+  backgroundGif,
   backgroundImage,
   videoLink,
   title,
@@ -64,16 +66,29 @@ const SupportOVCSection: FC<SupportOVCSectionProps> = ({
                    rounded-[6px] md:rounded-[8px] lg:rounded-[11px] xl:rounded-[13px] 2xl:rounded-[15px]"
       >
         {/* ───────────────── Background GIF (unchanged) ───────────────── */}
-        <img
-          src="/assets/bg.gif"
+        {/* <img
+          src={`${backgroundGif}`}
           alt="background gif"
-          className="absolute inset-0 w-full h-full object-cover z-0
+          className="absolute inset-0 w-full h-full object-cover z-10
                      rounded-[6px] md:rounded-[8px] lg:rounded-[11px] xl:rounded-[13px] 2xl:rounded-[15px]"
-        />
+        /> */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0 rounded-[6px] md:rounded-[8px] lg:rounded-[11px] xl:rounded-[13px] 2xl:rounded-[15px]"
+        >
+          <source
+            // src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/bg.mp4`}
+            src={backgroundGif}
+            type="video/mp4"
+          />
+        </video>
 
         {/* Dim overlay on top of the GIF */}
         <div
-          className="absolute inset-0 bg-black/60 z-10
+          className="absolute inset-0 bg-black/60 z-20
                      rounded-[6px] md:rounded-[8px] lg:rounded-[11px] xl:rounded-[13px] 2xl:rounded-[15px]"
         />
 

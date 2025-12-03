@@ -175,7 +175,7 @@ function MatricsSection({ data }: Props) {
             {/* Background semi-circle */}
             <div className="absolute inset-0 flex left-[28%] items-center">
               <img
-                src="/assets/ellipse.png"
+                src="/assets/images/ellipse.png"
                 alt="Metric Arc"
                 className="object-contain pointer-events-none select-none
                 h-[122px] md:h-[216px] lg:h-[150px] xl:h-[198px] 2xl:h-[265px]"
@@ -184,7 +184,7 @@ function MatricsSection({ data }: Props) {
 
             {/* Top vertical line */}
             <img
-              src="/assets/line2.png"
+              src="/assets/images/line2.png"
               alt="Top Line"
               className="absolute top-0 left-[47%] md:left-[47%] lg:left-[48%] xl:left-[48%] 2xl:left-[49%] -translate-x-1/2 
               w-[4px] md:w-[7px] lg:w-[5px] xl:w-fit
@@ -193,7 +193,7 @@ function MatricsSection({ data }: Props) {
 
             {/* Bottom vertical line */}
             <img
-              src="/assets/line2.png"
+              src="/assets/images/line2.png"
               alt="Bottom Line"
               className="absolute bottom-0 left-[47%] md:left-[47%] lg:left-[48%] xl:left-[48%] 2xl:left-[49%] -translate-x-1/2 
              w-[4px] md:w-[7px] lg:w-[5px] xl:w-fit

@@ -510,57 +510,23 @@ export interface Page {
         blockType: 'life-insurance-simplified';
       }
     | {
-        uploadSessionId?: string | null;
         /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         backgroundColor?: string | null;
         /**
-         * Short, strong opener. Max 20 characters.
+         * When ON, this block renders data from **Global → Contact Us**.
+         *
+         * **Before enabling:** fill up the Global → Contact Us data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
          */
-        heading: string;
-        /**
-         * সংক্ষিপ্ত, শক্তিশালী সূচনা। সর্বোচ্চ ২০ অক্ষর।
-         */
-        headingBN: string;
-        /**
-         * Secondary line below the heading. Max 35 characters.
-         */
-        subheading: string;
-        /**
-         * শিরোনামের নিচে দ্বিতীয় লাইন। সর্বোচ্চ ৩৫ অক্ষর।
-         */
-        subheadingBN: string;
-        /**
-         * Lead-in title above the paragraph. Max 80 characters.
-         */
-        paragraphTitle: string;
-        /**
-         * অনুচ্ছেদের উপরে লিড-ইন শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        paragraphTitleBN: string;
-        /**
-         * Main descriptive text. Max 400 characters.
-         */
-        paragraph: string;
-        /**
-         * মূল বর্ণনামূলক টেক্সট। সর্বোচ্চ ৪০০ অক্ষর।
-         */
-        paragraphBN: string;
-        /**
-         * Primary visual for the intro section. Use tranparent image. 2.15:1 recommended.
-         */
-        image: string | Media;
-        imageOriginal?: (string | null) | Media;
-        pendingImageOriginal?: string | null;
-        pendingImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        imageBlurDataURL?: string | null;
+        useSharedData: boolean;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'shanta-intro';
+        blockType: 'contact-us-form';
       }
     | {
         /**
@@ -745,23 +711,182 @@ export interface Page {
         blockType: 'agent-vision';
       }
     | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Add partners with a logo and name (EN/BN).
+         */
+        partners: {
+          /**
+           * Upload the partner logo (square logo recommended 340:250).
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Display name. Max 60 characters.
+           */
+          name: string;
+          /**
+           * প্রদর্শিত নাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          nameBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'corporate-partners';
+      }
+    | {
         /**
          * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         backgroundColor?: string | null;
         /**
-         * When ON, this block renders data from **Global → Contact Us**.
-         *
-         * **Before enabling:** fill up the Global → Contact Us data.
-         *
-         * **Notes:**
-         * • This block only stores presentation options (e.g., background color).
-         * • All content comes from the single shared Global to keep pages in sync.
+         * Main line. Max 500 characters.
          */
-        useSharedData: boolean;
+        text: string;
+        /**
+         * মূল লাইন। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        textBN: string;
+        /**
+         * Optional. Must appear verbatim inside “Text”. Max 500 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। “টেক্সট (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Secondary line. Max 500 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সেকেন্ডারি লাইন। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside “Subtitle”. Max 500 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। “সাবটাইটেল (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৫০০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~500 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৫০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'contact-us-form';
+        blockType: 'multistage-intro';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Short, strong opener. Max 20 characters.
+         */
+        heading: string;
+        /**
+         * সংক্ষিপ্ত, শক্তিশালী সূচনা। সর্বোচ্চ ২০ অক্ষর।
+         */
+        headingBN: string;
+        /**
+         * Secondary line below the heading. Max 35 characters.
+         */
+        subheading: string;
+        /**
+         * শিরোনামের নিচে দ্বিতীয় লাইন। সর্বোচ্চ ৩৫ অক্ষর।
+         */
+        subheadingBN: string;
+        /**
+         * Lead-in title above the paragraph. Max 80 characters.
+         */
+        paragraphTitle: string;
+        /**
+         * অনুচ্ছেদের উপরে লিড-ইন শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        paragraphTitleBN: string;
+        /**
+         * Main descriptive text. Max 400 characters.
+         */
+        paragraph: string;
+        /**
+         * মূল বর্ণনামূলক টেক্সট। সর্বোচ্চ ৪০০ অক্ষর।
+         */
+        paragraphBN: string;
+        /**
+         * Primary visual for the intro section. Use tranparent image. 2.15:1 recommended.
+         */
+        image: string | Media;
+        imageOriginal?: (string | null) | Media;
+        pendingImageOriginal?: string | null;
+        pendingImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageBlurDataURL?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'shanta-intro';
       }
     | {
         /**
@@ -851,54 +976,6 @@ export interface Page {
     | {
         uploadSessionId?: string | null;
         /**
-         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Primary heading. Max 80 characters.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Optional. Must appear verbatim inside the Title. Max 40 characters.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Add partners with a logo and name (EN/BN).
-         */
-        partners: {
-          /**
-           * Upload the partner logo (square logo recommended 340:250).
-           */
-          image: string | Media;
-          imageOriginal?: (string | null) | Media;
-          pendingImageOriginal?: string | null;
-          pendingImageCrop?: string | null;
-          imageBlurDataURL?: string | null;
-          /**
-           * Display name. Max 60 characters.
-           */
-          name: string;
-          /**
-           * প্রদর্শিত নাম। সর্বোচ্চ ৬০ অক্ষর।
-           */
-          nameBN: string;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'corporate-partners';
-      }
-    | {
-        uploadSessionId?: string | null;
-        /**
          * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         backgroundColor?: string | null;
@@ -979,7 +1056,7 @@ export interface Page {
          */
         imageOrder?: ('left' | 'right') | null;
         /**
-         * Square image (optional). Recommended 1:1.
+         * Square image. Recommended 1:1.
          */
         imageSquare: string | Media;
         imageSquareOriginal?: (string | null) | Media;
@@ -990,7 +1067,7 @@ export interface Page {
          */
         imageSquareBlurDataURL?: string | null;
         /**
-         * Wide image (optional). Recommended 16:9.
+         * Wide image. Recommended 16:9.
          */
         imageWide: string | Media;
         imageWideOriginal?: (string | null) | Media;
@@ -3146,6 +3223,41 @@ export interface Page {
                    */
                   labelBN?: string | null;
                   style?: ('primary' | 'secondary' | 'outline') | null;
+                  /**
+                   * Consent line shown under the premium calculator form submit/CTA.
+                   */
+                  premiumCalculatorForm?: {
+                    consentText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                    consentTextBN?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                  };
                   id?: string | null;
                   blockName?: string | null;
                   blockType: 'calculator-modal';
@@ -3172,6 +3284,65 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'custom-tab';
+      }
+    | {
+        /**
+         * Plain text. Maximum 800 words.
+         */
+        description?: string | null;
+        /**
+         * প্লেইন টেক্সট। সর্বোচ্চ ৮০০ শব্দ।
+         */
+        descriptionBN?: string | null;
+        /**
+         * Each item has EN/BN main titles and EN/BN rich-text “points”.
+         */
+        data?:
+          | {
+              mainTitle: string;
+              mainTitleBN?: string | null;
+              /**
+               * Add paragraphs / bullet points.
+               */
+              points: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              /**
+               * অনুচ্ছেদ / বুলেট পয়েন্ট যোগ করুন।
+               */
+              pointsBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'custom-accordion';
       }
     | {
         /**
@@ -3618,6 +3789,90 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'life-at-shanta';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * heading. Max 120 chars.
+         */
+        heading?: string | null;
+        /**
+         * হেডিং সর্বোচ্চ ১২০ অক্ষর।
+         */
+        headingBN?: string | null;
+        /**
+         * Primary heading. Max 120 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 120 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই শিরোনামের ভিতর হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Optional sub-heading. Max 120 chars.
+         */
+        trendingTitle?: string | null;
+        /**
+         * ঐচ্ছিক উপ-শিরোনাম। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        trendingTitleBN?: string | null;
+        /**
+         * 16:9 recommended (e.g., 1600×900). Blur placeholder generated automatically.
+         */
+        trendingBanner: string | Media;
+        trendingBannerOriginal?: (string | null) | Media;
+        pendingTrendingBannerOriginal?: string | null;
+        pendingTrendingBannerCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        trendingBannerBlurDataURL?: string | null;
+        /**
+         * Text shown on the call-to-action button. Max 24 characters.
+         */
+        buttonText?: string | null;
+        /**
+         * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        buttonTextBN?: string | null;
+        /**
+         * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+         */
+        buttonLink?: (string | null) | Page;
+        /**
+         * Optional "See all posts" button text. Max 24 characters.
+         */
+        seeAllText?: string | null;
+        /**
+         * ঐচ্ছিক "সব দেখুন" বাটন টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        seeAllTextBN?: string | null;
+        /**
+         * Pick an internal Page to link to. Required if any See All button text is provided.
+         */
+        seeAllLink?: (string | null) | Page;
+        /**
+         * When ON, this section reads **global Blog And News** items from global sources.
+         */
+        useSharedBlogAndNewsData: boolean;
+        /**
+         * When ON, this section reads **global Vlog** items from global sources.
+         */
+        useSharedVlogData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featured-blog-vlog-and-news';
       }
     | {
         /**
@@ -4466,6 +4721,341 @@ export interface Page {
       }
     | {
         /**
+         * Main heading. Max 80 chars.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Title. Max 40 chars.
+         */
+        highlightedTitle?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTitleBN?: string | null;
+        /**
+         * Short description. Max 300 chars.
+         */
+        description?: string | null;
+        /**
+         * সংক্ষিপ্ত বর্ণনা। সর্বোচ্চ ৩০০ অক্ষর।
+         */
+        descriptionBN?: string | null;
+        /**
+         * Section label above stages.
+         */
+        mainTitle: string;
+        /**
+         * ঐচ্ছিক বাংলা শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        mainTitleBN?: string | null;
+        secondaryTitle?: string | null;
+        secondaryTitleBN?: string | null;
+        planIcon: string | Media;
+        planIconOriginal?: (string | null) | Media;
+        pendingPlanIconOriginal?: string | null;
+        pendingPlanIconCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        planIconBlurDataURL?: string | null;
+        /**
+         * Controls which side the pie chart appears on desktop (mobile is stacked automatically).
+         */
+        chartSide: 'left' | 'right';
+        /**
+         * Define each stage and its percentage. The sum of all stage “value” fields must equal 100.
+         */
+        stageData?:
+          | {
+              name: string;
+              nameBN?: string | null;
+              /**
+               * Percentage for this stage. Overall total across stages must be 100.
+               */
+              value: number;
+              id?: string | null;
+            }[]
+          | null;
+        planData?:
+          | {
+              /**
+               * e.g., “12 YEARS”.
+               */
+              timeline: string;
+              /**
+               * যেমন: “১২ বছর”.
+               */
+              timelineBN?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Populates the “Entry Age” and “Maturity Age” cards. Defaults are provided for minimal input.
+         */
+        eligibility: {
+          entryAge: {
+            label?: string | null;
+            labelBN?: string | null;
+            minLabel?: string | null;
+            minLabelBN?: string | null;
+            minValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            minValueBN?: string | null;
+            minUnit?: string | null;
+            minUnitBN?: string | null;
+            maxLabel?: string | null;
+            maxLabelBN?: string | null;
+            maxValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            maxValueBN?: string | null;
+            maxUnit?: string | null;
+            maxUnitBN?: string | null;
+          };
+          maturityAge: {
+            label?: string | null;
+            labelBN?: string | null;
+            uptoLabel?: string | null;
+            uptoLabelBN?: string | null;
+            uptoValue: number;
+            /**
+             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
+             */
+            uptoValueBN?: string | null;
+            uptoUnit?: string | null;
+            uptoUnitBN?: string | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'multistage-plan';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Add 1–4 cards. Each card has text (EN/BN), rich text description (EN/BN), and a background color.
+         */
+        cards?:
+          | {
+              cardText: string;
+              cardTextBN?: string | null;
+              cardDesc?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              cardDescBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              /**
+               * Example: #9C863940 (with alpha) or #CCBF95 (solid).
+               */
+              cardBg?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Consent text shown under the Purchase form submit button (localized EN/BN).
+         */
+        purchaseNowForm?: {
+          /**
+           * Rich text consent displayed in English under the form submit area.
+           */
+          consentText?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * বাংলা কনসেন্ট টেক্সট (ফর্ম সাবমিট অংশে দেখানো হবে)।
+           */
+          consentTextBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'purchase-form';
+      }
+    | {
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+         */
+        sectionId: string;
+        title: string;
+        titleBN?: string | null;
+        highlightedTitle?: string | null;
+        highlightedTitleBN?: string | null;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Cards shown under the hero copy. Each card has a title, rich description, and a hex background color.
+         */
+        cards?:
+          | {
+              cardTitle: string;
+              cardTitleBN?: string | null;
+              cardDesc?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              cardDescBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              /**
+               * Hex color (#RRGGBB or #RRGGBBAA). Example: #9C8639 or #9C8639B2
+               */
+              cardBg?: string | null;
+              /**
+               * Hex color (#RRGGBB or #RRGGBBAA). Example: #9C8639 or #9C8639B2
+               */
+              cardTextColor?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Consent line shown under the premium calculator form submit/CTA.
+         */
+        premiumCalculatorForm?: {
+          consentText?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          consentTextBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'prem-calculator-card';
+      }
+    | {
+        /**
          * Hex color in #RRGGBB. Length 7 (৭).
          */
         backgroundColor: string;
@@ -4538,6 +5128,347 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'accidental-permanent-partial-disability';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (default #ED7125). Length 7 (৭).
+         */
+        primaryLabelColor?: string | null;
+        /**
+         * Hex color in #RRGGBB (default #9C8639). Length 7 (৭).
+         */
+        secondaryLabelColor?: string | null;
+        /**
+         * Exactly 2 tabs are required.
+         */
+        tabItems?:
+          | {
+              /**
+               * Unique key for this tab item (e.g., "branches", "hospitals"). Must match usage in code. Also for navigation.
+               */
+              value: string;
+              label: string;
+              labelBN: string;
+              /**
+               * Optional. Must appear verbatim inside the corresponding Label.
+               */
+              highlightedLabel?: string | null;
+              /**
+               * ঐচ্ছিক। সংশ্লিষ্ট বাংলা লেবেলের ভিতরে হুবহু থাকতে হবে।
+               */
+              highlightedLabelBN?: string | null;
+              description?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              descriptionBN?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-map-tab';
+      }
+    | {
+        faqTab: {
+          /**
+           * Internal key used by frontend routing. Typically "general" for this FAQ tab.
+           */
+          value: string;
+          label: string;
+          labelBN: string;
+          /**
+           * Hex color in #RRGGBB (e.g., #F6EDDD).
+           */
+          backgroundColor?: string | null;
+          title?: string | null;
+          titleBN?: string | null;
+          /**
+           * Pick each category once. Then add many Q&A items under each category.
+           */
+          categories?:
+            | {
+                key: 'general' | 'claims' | 'policy' | 'customer' | 'product' | 'insurance';
+                title: string;
+                titleBN?: string | null;
+                /**
+                 * Add as many questions as needed for this category.
+                 */
+                items?:
+                  | {
+                      title: string;
+                      titleBN?: string | null;
+                      desc?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      descBN?: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: string;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      } | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        formsTab: {
+          /**
+           * Internal key used by frontend routing. Typically "form" for this Download Forms tab.
+           */
+          value: string;
+          label: string;
+          labelBN: string;
+          /**
+           * Hex color in #RRGGBB (e.g., #F6EDDD).
+           */
+          backgroundColor?: string | null;
+          /**
+           * Hex color in #RRGGBB (e.g., #a08d2c).
+           */
+          tableHeaderBgColor?: string | null;
+          /**
+           * Used for all rows. No links/IDs stored here.
+           */
+          buttonText?: string | null;
+          buttonTextBN?: string | null;
+          forms?:
+            | {
+                title: string;
+                titleBN?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-faq-tab';
+      }
+    | {
+        uploadSessionId?: string | null;
+        title: string;
+        titleBN?: string | null;
+        highlightedTitle?: string | null;
+        highlightedTitleBN?: string | null;
+        /**
+         * All Tab Left Side Video Thumbnail, 16:9 recommended.
+         */
+        mainImage: string | Media;
+        mainImageOriginal?: (string | null) | Media;
+        pendingMainImageOriginal?: string | null;
+        pendingMainImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        mainImageBlurDataURL?: string | null;
+        /**
+         * Background visual for the OVC/TVC tab. 16:9 recommended.
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        /**
+         * Main “ALL” feed. Uses the top-level Main Image. Contains a source link and exactly 3 news cards.
+         */
+        allTab: {
+          /**
+           * Fixed: "all" (string).
+           */
+          value: string;
+          /**
+           * ডিফল্ট: “সকল”.
+           */
+          valueBN: string;
+          mainImageSrcLink: string;
+          /**
+           * Exactly 3 items. Each uses a single 16:9 image, real date, EN/BN title/description, and optional YouTube link.
+           */
+          newsItems?:
+            | {
+                /**
+                 * Single image per item. 16:9 recommended.
+                 */
+                image: string | Media;
+                imageOriginal?: (string | null) | Media;
+                pendingImageOriginal?: string | null;
+                pendingImageCrop?: string | null;
+                imageBlurDataURL?: string | null;
+                date: string;
+                title: string;
+                titleBN?: string | null;
+                /**
+                 * Max 700 chars.
+                 */
+                description?: string | null;
+                descriptionBN?: string | null;
+                /**
+                 * Ex: https://www.youtube.com/watch?v=...
+                 */
+                videoLink?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        /**
+         * Uses the top-level Background Image. Add headline (EN/BN) and optional YouTube link for the modal.
+         */
+        ovcTab: {
+          /**
+           * Fixed: "OVC" (string).
+           */
+          value: string;
+          /**
+           * ডিফল্ট: “অভিসি/টিভিসি”.
+           */
+          valueBN: string;
+          title?: string | null;
+          titleBN?: string | null;
+          highlightedTitle?: string | null;
+          highlightedTitleBN?: string | null;
+          videoLink?: string | null;
+          /**
+           * Either an internal path starting with “/assets” or an absolute http(s) video URL (MP4/WebM/HLS). Max 300. (/assets/videos/bg.mp4)
+           */
+          backgroundGIF: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-buzz';
+      }
+    | {
+        uploadSessionId?: string | null;
+        title: string;
+        titleBN?: string | null;
+        highlightedTitle?: string | null;
+        highlightedTitleBN?: string | null;
+        /**
+         * Hero/section background. Recommended 16:9.
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        rightTitle: string;
+        rightTitleBN?: string | null;
+        rightButtonText: string;
+        rightButtonTextBN: string;
+        /**
+         * Example: +88 09610889900
+         */
+        phoneNumber: string;
+        /**
+         * Provide at least one email address. All valid ones will receive the feedback submission.
+         */
+        recipientEmails?: {
+          email1?: string | null;
+          email2?: string | null;
+          email3?: string | null;
+          email4?: string | null;
+          email5?: string | null;
+        };
+        /**
+         * If set, feedback emails will use this Sender Name / Reply Email instead of the default SMTP sender.
+         */
+        senderOverride?: {
+          fromName?: string | null;
+          fromEmail?: string | null;
+        };
+        /**
+         * Shown near the submit button. You can bold or link “terms and conditions” and “privacy policy”.
+         */
+        consentText: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * সাবমিট বাটনের কাছে দেখানো হবে। “টার্মস এন্ড কন্ডিশনস” ও “প্রাইভেসি পলিসি”তে লিংক যোগ করতে পারেন।
+         */
+        consentTextBN: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'support-feedback-form';
       }
     | {
         /**
@@ -4740,147 +5671,6 @@ export interface Page {
       }
     | {
         /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * heading. Max 120 chars.
-         */
-        heading?: string | null;
-        /**
-         * হেডিং সর্বোচ্চ ১২০ অক্ষর।
-         */
-        headingBN?: string | null;
-        /**
-         * Primary heading. Max 120 characters.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ১২০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Optional. Must appear verbatim inside the Title. Max 120 characters.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। অবশ্যই শিরোনামের ভিতর হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        /**
-         * Optional sub-heading. Max 120 chars.
-         */
-        trendingTitle?: string | null;
-        /**
-         * ঐচ্ছিক উপ-শিরোনাম। সর্বোচ্চ ১২০ অক্ষর।
-         */
-        trendingTitleBN?: string | null;
-        /**
-         * 16:9 recommended (e.g., 1600×900). Blur placeholder generated automatically.
-         */
-        trendingBanner: string | Media;
-        trendingBannerOriginal?: (string | null) | Media;
-        pendingTrendingBannerOriginal?: string | null;
-        pendingTrendingBannerCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        trendingBannerBlurDataURL?: string | null;
-        /**
-         * Text shown on the call-to-action button. Max 24 characters.
-         */
-        buttonText?: string | null;
-        /**
-         * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
-         */
-        buttonTextBN?: string | null;
-        /**
-         * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
-         */
-        buttonLink?: (string | null) | Page;
-        /**
-         * Optional "See all posts" button text. Max 24 characters.
-         */
-        seeAllText?: string | null;
-        /**
-         * ঐচ্ছিক "সব দেখুন" বাটন টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
-         */
-        seeAllTextBN?: string | null;
-        /**
-         * Pick an internal Page to link to. Required if any See All button text is provided.
-         */
-        seeAllLink?: (string | null) | Page;
-        /**
-         * When ON, this section reads **global Blog And News** items from global sources.
-         */
-        useSharedBlogAndNewsData: boolean;
-        /**
-         * When ON, this section reads **global Vlog** items from global sources.
-         */
-        useSharedVlogData: boolean;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'featured-blog-vlog-and-news';
-      }
-    | {
-        /**
-         * Primary headline. Max 80 characters.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Optional. Must appear verbatim inside the Title. Max 40 characters.
-         */
-        highlightedTitle?: string | null;
-        /**
-         * ঐচ্ছিক। অবশ্যই শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTitleBN?: string | null;
-        /**
-         * 1–2 short sentences. Max 300 characters (guideline).
-         */
-        description: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        /**
-         * ১–২টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ৩০০ অক্ষরের মধ্যে রাখার পরামর্শ।
-         */
-        descriptionBN: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'career-intro';
-      }
-    | {
-        /**
          * Primary headline. Max 30 characters.
          */
         title: string;
@@ -4905,7 +5695,7 @@ export interface Page {
          */
         descriptionBN: string;
         /**
-         * Absolute https URL to your GIF asset. Internal paths are not allowed. Max 400 characters.
+         * Either an internal path starting with “/assets” or an absolute http(s) video URL (MP4/WebM/HLS). Max 400. (/assets/videos/footprint.mp4)
          */
         backgroundGifUrl: string;
         /**
@@ -4960,7 +5750,7 @@ export interface Page {
          */
         highlightedSubTitleBN?: string | null;
         /**
-         * Background image for the section (16:9 recommended).
+         * Background image for the section (585:390 recommended).
          */
         backgroundImage: string | Media;
         backgroundImageOriginal?: (string | null) | Media;
@@ -5089,6 +5879,10 @@ export interface Page {
            * সেকেন্ডারি CTA (যেমন, বিস্তারিত দেখুন)। সর্বোচ্চ ২৪ অক্ষর।
            */
           detailsBtnTextBN?: string | null;
+          /**
+           * Upload/select the Download PDF.
+           */
+          filename?: (string | null) | Media;
           /**
            * Single details object for this opening (overview text, responsibilities, requirements, etc.).
            */
@@ -5266,10 +6060,6 @@ export interface Page {
              * Optional closing note. Max 200 characters.
              */
             footer?: string | null;
-            /**
-             * Optional. Example: it-project-manager.pdf — this should match the name of the PDF users will download.
-             */
-            filename?: string | null;
           };
           id?: string | null;
         }[];
@@ -5360,758 +6150,6 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'career-processing';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * Main line. Max 160 characters.
-         */
-        text: string;
-        /**
-         * মূল লাইন। সর্বোচ্চ ১৬০ অক্ষর।
-         */
-        textBN: string;
-        /**
-         * Optional. Must appear verbatim inside “Text”. Max 40 characters.
-         */
-        highlightedText?: string | null;
-        /**
-         * ঐচ্ছিক। “টেক্সট (বাংলা)” এর ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTextBN?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'multistage-intro';
-      }
-    | {
-        /**
-         * Main heading. Max 80 chars.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Optional. Must appear verbatim inside Title. Max 40 chars.
-         */
-        highlightedTitle?: string | null;
-        /**
-         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedTitleBN?: string | null;
-        /**
-         * Short description. Max 300 chars.
-         */
-        description?: string | null;
-        /**
-         * সংক্ষিপ্ত বর্ণনা। সর্বোচ্চ ৩০০ অক্ষর।
-         */
-        descriptionBN?: string | null;
-        /**
-         * Section label above stages.
-         */
-        mainTitle: string;
-        /**
-         * ঐচ্ছিক বাংলা শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        mainTitleBN?: string | null;
-        secondaryTitle?: string | null;
-        secondaryTitleBN?: string | null;
-        planIcon: string | Media;
-        planIconOriginal?: (string | null) | Media;
-        pendingPlanIconOriginal?: string | null;
-        pendingPlanIconCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        planIconBlurDataURL?: string | null;
-        /**
-         * Controls which side the pie chart appears on desktop (mobile is stacked automatically).
-         */
-        chartSide: 'left' | 'right';
-        /**
-         * Define each stage and its percentage. The sum of all stage “value” fields must equal 100.
-         */
-        stageData?:
-          | {
-              name: string;
-              nameBN?: string | null;
-              /**
-               * Percentage for this stage. Overall total across stages must be 100.
-               */
-              value: number;
-              id?: string | null;
-            }[]
-          | null;
-        planData?:
-          | {
-              /**
-               * e.g., “12 YEARS”.
-               */
-              timeline: string;
-              /**
-               * যেমন: “১২ বছর”.
-               */
-              timelineBN?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        /**
-         * Populates the “Entry Age” and “Maturity Age” cards. Defaults are provided for minimal input.
-         */
-        eligibility: {
-          entryAge: {
-            label?: string | null;
-            labelBN?: string | null;
-            minLabel?: string | null;
-            minLabelBN?: string | null;
-            minValue: number;
-            /**
-             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
-             */
-            minValueBN?: string | null;
-            minUnit?: string | null;
-            minUnitBN?: string | null;
-            maxLabel?: string | null;
-            maxLabelBN?: string | null;
-            maxValue: number;
-            /**
-             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
-             */
-            maxValueBN?: string | null;
-            maxUnit?: string | null;
-            maxUnitBN?: string | null;
-          };
-          maturityAge: {
-            label?: string | null;
-            labelBN?: string | null;
-            uptoLabel?: string | null;
-            uptoLabelBN?: string | null;
-            uptoValue: number;
-            /**
-             * বাংলা অংকে প্রদর্শন (UI-তে দেখানোর জন্য)।
-             */
-            uptoValueBN?: string | null;
-            uptoUnit?: string | null;
-            uptoUnitBN?: string | null;
-          };
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'multistage-plan';
-      }
-    | {
-        /**
-         * Plain text. Maximum 800 words.
-         */
-        description?: string | null;
-        /**
-         * প্লেইন টেক্সট। সর্বোচ্চ ৮০০ শব্দ।
-         */
-        descriptionBN?: string | null;
-        /**
-         * Each item has EN/BN main titles and EN/BN rich-text “points”.
-         */
-        data?:
-          | {
-              mainTitle: string;
-              mainTitleBN?: string | null;
-              /**
-               * Add paragraphs / bullet points.
-               */
-              points: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
-              /**
-               * অনুচ্ছেদ / বুলেট পয়েন্ট যোগ করুন।
-               */
-              pointsBN?: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'custom-accordion';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (default #ED7125). Length 7 (৭).
-         */
-        primaryLabelColor?: string | null;
-        /**
-         * Hex color in #RRGGBB (default #9C8639). Length 7 (৭).
-         */
-        secondaryLabelColor?: string | null;
-        /**
-         * Exactly 2 tabs are required.
-         */
-        tabItems?:
-          | {
-              /**
-               * Unique key for this tab item (e.g., "branches", "hospitals"). Must match usage in code. Also for navigation.
-               */
-              value: string;
-              label: string;
-              labelBN: string;
-              /**
-               * Optional. Must appear verbatim inside the corresponding Label.
-               */
-              highlightedLabel?: string | null;
-              /**
-               * ঐচ্ছিক। সংশ্লিষ্ট বাংলা লেবেলের ভিতরে হুবহু থাকতে হবে।
-               */
-              highlightedLabelBN?: string | null;
-              description?: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              descriptionBN?: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'support-map-tab';
-      }
-    | {
-        faqTab: {
-          /**
-           * Internal key used by frontend routing. Typically "general" for this FAQ tab.
-           */
-          value: string;
-          label: string;
-          labelBN: string;
-          /**
-           * Hex color in #RRGGBB (e.g., #F6EDDD).
-           */
-          backgroundColor?: string | null;
-          title?: string | null;
-          titleBN?: string | null;
-          /**
-           * Pick each category once. Then add many Q&A items under each category.
-           */
-          categories?:
-            | {
-                key: 'general' | 'claims' | 'policy' | 'customer' | 'product' | 'insurance';
-                title: string;
-                titleBN?: string | null;
-                /**
-                 * Add as many questions as needed for this category.
-                 */
-                items?:
-                  | {
-                      title: string;
-                      titleBN?: string | null;
-                      desc?: {
-                        root: {
-                          type: string;
-                          children: {
-                            type: string;
-                            version: number;
-                            [k: string]: unknown;
-                          }[];
-                          direction: ('ltr' | 'rtl') | null;
-                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                          indent: number;
-                          version: number;
-                        };
-                        [k: string]: unknown;
-                      } | null;
-                      descBN?: {
-                        root: {
-                          type: string;
-                          children: {
-                            type: string;
-                            version: number;
-                            [k: string]: unknown;
-                          }[];
-                          direction: ('ltr' | 'rtl') | null;
-                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                          indent: number;
-                          version: number;
-                        };
-                        [k: string]: unknown;
-                      } | null;
-                      id?: string | null;
-                    }[]
-                  | null;
-                id?: string | null;
-              }[]
-            | null;
-        };
-        formsTab: {
-          /**
-           * Internal key used by frontend routing. Typically "form" for this Download Forms tab.
-           */
-          value: string;
-          label: string;
-          labelBN: string;
-          /**
-           * Hex color in #RRGGBB (e.g., #F6EDDD).
-           */
-          backgroundColor?: string | null;
-          /**
-           * Hex color in #RRGGBB (e.g., #a08d2c).
-           */
-          tableHeaderBgColor?: string | null;
-          /**
-           * Used for all rows. No links/IDs stored here.
-           */
-          buttonText?: string | null;
-          buttonTextBN?: string | null;
-          forms?:
-            | {
-                title: string;
-                titleBN?: string | null;
-                id?: string | null;
-              }[]
-            | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'support-faq-tab';
-      }
-    | {
-        uploadSessionId?: string | null;
-        title: string;
-        titleBN?: string | null;
-        highlightedTitle?: string | null;
-        highlightedTitleBN?: string | null;
-        /**
-         * Large section background visual for ALL tab. 16:9 recommended.
-         */
-        mainImage: string | Media;
-        mainImageOriginal?: (string | null) | Media;
-        pendingMainImageOriginal?: string | null;
-        pendingMainImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        mainImageBlurDataURL?: string | null;
-        /**
-         * Background visual for the OVC/TVC tab. 16:9 recommended.
-         */
-        backgroundImage: string | Media;
-        backgroundImageOriginal?: (string | null) | Media;
-        pendingBackgroundImageOriginal?: string | null;
-        pendingBackgroundImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        backgroundImageBlurDataURL?: string | null;
-        /**
-         * Main “ALL” feed. Uses the top-level Main Image. Contains a source link and exactly 3 news cards.
-         */
-        allTab: {
-          /**
-           * Fixed: "all" (string).
-           */
-          value: string;
-          /**
-           * ডিফল্ট: “সকল”.
-           */
-          valueBN: string;
-          mainImageSrcLink?: string | null;
-          /**
-           * Exactly 3 items. Each uses a single 16:9 image, real date, EN/BN title/description, and optional YouTube link.
-           */
-          newsItems?:
-            | {
-                /**
-                 * Single image per item. 16:9 recommended.
-                 */
-                image: string | Media;
-                imageOriginal?: (string | null) | Media;
-                pendingImageOriginal?: string | null;
-                pendingImageCrop?: string | null;
-                imageBlurDataURL?: string | null;
-                date: string;
-                title: string;
-                titleBN?: string | null;
-                /**
-                 * Max 700 chars.
-                 */
-                description?: string | null;
-                descriptionBN?: string | null;
-                /**
-                 * Ex: https://www.youtube.com/watch?v=...
-                 */
-                videoLink?: string | null;
-                id?: string | null;
-              }[]
-            | null;
-        };
-        /**
-         * Uses the top-level Background Image. Add headline (EN/BN) and optional YouTube link for the modal.
-         */
-        ovcTab: {
-          /**
-           * Fixed: "OVC" (string).
-           */
-          value: string;
-          /**
-           * ডিফল্ট: “অভিসি/টিভিসি”.
-           */
-          valueBN: string;
-          title?: string | null;
-          titleBN?: string | null;
-          highlightedTitle?: string | null;
-          highlightedTitleBN?: string | null;
-          videoLink?: string | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'support-buzz';
-      }
-    | {
-        uploadSessionId?: string | null;
-        title: string;
-        titleBN?: string | null;
-        highlightedTitle?: string | null;
-        highlightedTitleBN?: string | null;
-        /**
-         * Hero/section background. Recommended 16:9.
-         */
-        backgroundImage: string | Media;
-        backgroundImageOriginal?: (string | null) | Media;
-        pendingBackgroundImageOriginal?: string | null;
-        pendingBackgroundImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        backgroundImageBlurDataURL?: string | null;
-        rightTitle: string;
-        rightTitleBN?: string | null;
-        rightButtonText: string;
-        rightButtonTextBN?: string | null;
-        /**
-         * Provide at least one email address. All valid ones will receive the feedback submission.
-         */
-        recipientEmails?: {
-          email1?: string | null;
-          email2?: string | null;
-          email3?: string | null;
-          email4?: string | null;
-          email5?: string | null;
-        };
-        /**
-         * If set, feedback emails will use this Sender Name / Reply Email instead of the default SMTP sender.
-         */
-        senderOverride?: {
-          fromName?: string | null;
-          fromEmail?: string | null;
-        };
-        /**
-         * Shown near the submit button. You can bold or link “terms and conditions” and “privacy policy”.
-         */
-        consentText: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        /**
-         * সাবমিট বাটনের কাছে দেখানো হবে। “টার্মস এন্ড কন্ডিশনস” ও “প্রাইভেসি পলিসি”তে লিংক যোগ করতে পারেন।
-         */
-        consentTextBN: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'support-feedback-form';
-      }
-    | {
-        /**
-         * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
-         */
-        sectionId: string;
-        title: string;
-        titleBN?: string | null;
-        highlightedTitle?: string | null;
-        highlightedTitleBN?: string | null;
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        descriptionBN?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        /**
-         * Cards shown under the hero copy. Each card has a title, rich description, and a hex background color.
-         */
-        cards?:
-          | {
-              cardTitle: string;
-              cardTitleBN?: string | null;
-              cardDesc?: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              cardDescBN?: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              /**
-               * Hex color (#RRGGBB or #RRGGBBAA). Example: #9C8639 or #9C8639B2
-               */
-              cardBg?: string | null;
-              /**
-               * Hex color (#RRGGBB or #RRGGBBAA). Example: #9C8639 or #9C8639B2
-               */
-              cardTextColor?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        /**
-         * Consent line shown under the premium calculator form submit/CTA.
-         */
-        premiumCalculatorForm?: {
-          consentText?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-          consentTextBN?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'prem-calculator-card';
-      }
-    | {
-        uploadSessionId?: string | null;
-        /**
-         * Add 1–4 cards. Each card has text (EN/BN), rich text description (EN/BN), and a background color.
-         */
-        cards?:
-          | {
-              cardText: string;
-              cardTextBN?: string | null;
-              cardDesc?: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              cardDescBN?: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              /**
-               * Example: #9C863940 (with alpha) or #CCBF95 (solid).
-               */
-              cardBg?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        /**
-         * Consent text shown under the Purchase form submit button (localized EN/BN).
-         */
-        purchaseNowForm?: {
-          /**
-           * Rich text consent displayed in English under the form submit area.
-           */
-          consentText?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-          /**
-           * বাংলা কনসেন্ট টেক্সট (ফর্ম সাবমিট অংশে দেখানো হবে)।
-           */
-          consentTextBN?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'purchase-form';
       }
   )[];
   updatedAt: string;
@@ -6433,24 +6471,11 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'shanta-intro'?:
+        'contact-us-form'?:
           | T
           | {
-              uploadSessionId?: T;
               backgroundColor?: T;
-              heading?: T;
-              headingBN?: T;
-              subheading?: T;
-              subheadingBN?: T;
-              paragraphTitle?: T;
-              paragraphTitleBN?: T;
-              paragraph?: T;
-              paragraphBN?: T;
-              image?: T;
-              imageOriginal?: T;
-              pendingImageOriginal?: T;
-              pendingImageCrop?: T;
-              imageBlurDataURL?: T;
+              useSharedData?: T;
               id?: T;
               blockName?: T;
             };
@@ -6527,11 +6552,65 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'contact-us-form'?:
+        'corporate-partners'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              partners?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'multistage-intro'?:
           | T
           | {
               backgroundColor?: T;
-              useSharedData?: T;
+              text?: T;
+              textBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'shanta-intro'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              heading?: T;
+              headingBN?: T;
+              subheading?: T;
+              subheadingBN?: T;
+              paragraphTitle?: T;
+              paragraphTitleBN?: T;
+              paragraph?: T;
+              paragraphBN?: T;
+              image?: T;
+              imageOriginal?: T;
+              pendingImageOriginal?: T;
+              pendingImageCrop?: T;
+              imageBlurDataURL?: T;
               id?: T;
               blockName?: T;
             };
@@ -6552,30 +6631,6 @@ export interface PagesSelect<T extends boolean = true> {
                     valueBN?: T;
                     label?: T;
                     labelBN?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'corporate-partners'?:
-          | T
-          | {
-              uploadSessionId?: T;
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              partners?:
-                | T
-                | {
-                    image?: T;
-                    imageOriginal?: T;
-                    pendingImageOriginal?: T;
-                    pendingImageCrop?: T;
-                    imageBlurDataURL?: T;
-                    name?: T;
-                    nameBN?: T;
                     id?: T;
                   };
               id?: T;
@@ -7330,6 +7385,12 @@ export interface PagesSelect<T extends boolean = true> {
                           label?: T;
                           labelBN?: T;
                           style?: T;
+                          premiumCalculatorForm?:
+                            | T
+                            | {
+                                consentText?: T;
+                                consentTextBN?: T;
+                              };
                           id?: T;
                           blockName?: T;
                         };
@@ -7342,6 +7403,23 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'custom-accordion'?:
+          | T
+          | {
+              description?: T;
+              descriptionBN?: T;
+              data?:
+                | T
+                | {
+                    mainTitle?: T;
+                    mainTitleBN?: T;
+                    points?: T;
+                    pointsBN?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;
@@ -7513,6 +7591,34 @@ export interface PagesSelect<T extends boolean = true> {
                     imageBlurDataURL?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'featured-blog-vlog-and-news'?:
+          | T
+          | {
+              backgroundColor?: T;
+              heading?: T;
+              headingBN?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              trendingTitle?: T;
+              trendingTitleBN?: T;
+              trendingBanner?: T;
+              trendingBannerOriginal?: T;
+              pendingTrendingBannerOriginal?: T;
+              pendingTrendingBannerCrop?: T;
+              trendingBannerBlurDataURL?: T;
+              buttonText?: T;
+              buttonTextBN?: T;
+              buttonLink?: T;
+              seeAllText?: T;
+              seeAllTextBN?: T;
+              seeAllLink?: T;
+              useSharedBlogAndNewsData?: T;
+              useSharedVlogData?: T;
               id?: T;
               blockName?: T;
             };
@@ -7856,283 +7962,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'accidental-permanent-partial-disability'?:
-          | T
-          | {
-              backgroundColor?: T;
-              sectionId?: T;
-              titleLine1?: T;
-              titleLine1BN?: T;
-              titleLine2?: T;
-              titleLine2BN?: T;
-              lossHeader?: T;
-              lossHeaderBN?: T;
-              benefitsHeader?: T;
-              benefitsHeaderBN?: T;
-              benefitsSubHeader?: T;
-              benefitsSubHeaderBN?: T;
-              rows?:
-                | T
-                | {
-                    lossEN?: T;
-                    lossBN?: T;
-                    benefitEN?: T;
-                    benefitBN?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        blogs?:
-          | T
-          | {
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              sectionId?: T;
-              showSearchBar?: T;
-              useSharedData?: T;
-              readMoreText?: T;
-              readMoreTextBN?: T;
-              loadMoreText?: T;
-              loadMoreTextBN?: T;
-              seeLessText?: T;
-              seeLessTextBN?: T;
-              linkTarget?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'blogs-details'?:
-          | T
-          | {
-              backgroundColor?: T;
-              useSharedData?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'all-blogs-card'?:
-          | T
-          | {
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              useSharedData?: T;
-              linkTarget?: T;
-              id?: T;
-              blockName?: T;
-            };
-        news?:
-          | T
-          | {
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              sectionId?: T;
-              showSearchBar?: T;
-              useSharedData?: T;
-              loadMoreText?: T;
-              loadMoreTextBN?: T;
-              seeLessText?: T;
-              seeLessTextBN?: T;
-              linkTarget?: T;
-              id?: T;
-              blockName?: T;
-            };
-        vlogs?:
-          | T
-          | {
-              backgroundColor?: T;
-              title?: T;
-              titleBN?: T;
-              sectionId?: T;
-              useSharedData?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'featured-blog-vlog-and-news'?:
-          | T
-          | {
-              backgroundColor?: T;
-              heading?: T;
-              headingBN?: T;
-              title?: T;
-              titleBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              trendingTitle?: T;
-              trendingTitleBN?: T;
-              trendingBanner?: T;
-              trendingBannerOriginal?: T;
-              pendingTrendingBannerOriginal?: T;
-              pendingTrendingBannerCrop?: T;
-              trendingBannerBlurDataURL?: T;
-              buttonText?: T;
-              buttonTextBN?: T;
-              buttonLink?: T;
-              seeAllText?: T;
-              seeAllTextBN?: T;
-              seeAllLink?: T;
-              useSharedBlogAndNewsData?: T;
-              useSharedVlogData?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'career-intro'?:
-          | T
-          | {
-              title?: T;
-              titleBN?: T;
-              highlightedTitle?: T;
-              highlightedTitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'career-swiper'?:
-          | T
-          | {
-              title?: T;
-              titleBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              description?: T;
-              descriptionBN?: T;
-              backgroundGifUrl?: T;
-              cards?:
-                | T
-                | {
-                    title?: T;
-                    titleBN?: T;
-                    description?: T;
-                    descriptionBN?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'career-resources'?:
-          | T
-          | {
-              title?: T;
-              titleBN?: T;
-              subTitle?: T;
-              subTitleBN?: T;
-              highlightedSubTitle?: T;
-              highlightedSubTitleBN?: T;
-              backgroundImage?: T;
-              backgroundImageOriginal?: T;
-              pendingBackgroundImageOriginal?: T;
-              pendingBackgroundImageCrop?: T;
-              backgroundImageBlurDataURL?: T;
-              readMoreButtonText?: T;
-              readMoreButtonTextBN?: T;
-              readLessButtonText?: T;
-              readLessButtonTextBN?: T;
-              cards?:
-                | T
-                | {
-                    title?: T;
-                    titleBN?: T;
-                    image?: T;
-                    imageOriginal?: T;
-                    pendingImageOriginal?: T;
-                    pendingImageCrop?: T;
-                    imageBlurDataURL?: T;
-                    description?: T;
-                    descriptionBN?: T;
-                    designation?: T;
-                    designationBN?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'career-opening'?:
-          | T
-          | {
-              title?: T;
-              titleBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              cards?:
-                | T
-                | {
-                    type?: T;
-                    typeBN?: T;
-                    title?: T;
-                    titleBN?: T;
-                    description?: T;
-                    descriptionBN?: T;
-                    btnText?: T;
-                    btnTextBN?: T;
-                    detailsBtnText?: T;
-                    detailsBtnTextBN?: T;
-                    details?:
-                      | T
-                      | {
-                          topTitle?: T;
-                          topTitleBN?: T;
-                          topDescription?: T;
-                          topDescriptionBN?: T;
-                          title?: T;
-                          titleBN?: T;
-                          responsibilities?: T;
-                          responsibilitiesBN?: T;
-                          requirements?: T;
-                          requirementsBN?: T;
-                          location?: T;
-                          locationBN?: T;
-                          deadline?: T;
-                          applyEmail?: T;
-                          subjectLine?: T;
-                          footer?: T;
-                          filename?: T;
-                        };
-                    id?: T;
-                  };
-              careerOpeningForm?:
-                | T
-                | {
-                    consentText?: T;
-                    consentTextBN?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'career-processing'?:
-          | T
-          | {
-              title?: T;
-              titleBN?: T;
-              subtitle?: T;
-              subtitleBN?: T;
-              processingCards?:
-                | T
-                | {
-                    title?: T;
-                    titleBN?: T;
-                    image?: T;
-                    imageOriginal?: T;
-                    pendingImageOriginal?: T;
-                    pendingImageCrop?: T;
-                    imageBlurDataURL?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'multistage-intro'?:
-          | T
-          | {
-              backgroundColor?: T;
-              text?: T;
-              textBN?: T;
-              highlightedText?: T;
-              highlightedTextBN?: T;
-              id?: T;
-              blockName?: T;
-            };
         'multistage-plan'?:
           | T
           | {
@@ -8204,18 +8033,81 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'custom-accordion'?:
+        'purchase-form'?:
           | T
           | {
-              description?: T;
-              descriptionBN?: T;
-              data?:
+              uploadSessionId?: T;
+              cards?:
                 | T
                 | {
-                    mainTitle?: T;
-                    mainTitleBN?: T;
-                    points?: T;
-                    pointsBN?: T;
+                    cardText?: T;
+                    cardTextBN?: T;
+                    cardDesc?: T;
+                    cardDescBN?: T;
+                    cardBg?: T;
+                    id?: T;
+                  };
+              purchaseNowForm?:
+                | T
+                | {
+                    consentText?: T;
+                    consentTextBN?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'prem-calculator-card'?:
+          | T
+          | {
+              sectionId?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              cards?:
+                | T
+                | {
+                    cardTitle?: T;
+                    cardTitleBN?: T;
+                    cardDesc?: T;
+                    cardDescBN?: T;
+                    cardBg?: T;
+                    cardTextColor?: T;
+                    id?: T;
+                  };
+              premiumCalculatorForm?:
+                | T
+                | {
+                    consentText?: T;
+                    consentTextBN?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'accidental-permanent-partial-disability'?:
+          | T
+          | {
+              backgroundColor?: T;
+              sectionId?: T;
+              titleLine1?: T;
+              titleLine1BN?: T;
+              titleLine2?: T;
+              titleLine2BN?: T;
+              lossHeader?: T;
+              lossHeaderBN?: T;
+              benefitsHeader?: T;
+              benefitsHeaderBN?: T;
+              benefitsSubHeader?: T;
+              benefitsSubHeaderBN?: T;
+              rows?:
+                | T
+                | {
+                    lossEN?: T;
+                    lossBN?: T;
+                    benefitEN?: T;
+                    benefitBN?: T;
                     id?: T;
                   };
               id?: T;
@@ -8343,6 +8235,7 @@ export interface PagesSelect<T extends boolean = true> {
                     highlightedTitle?: T;
                     highlightedTitleBN?: T;
                     videoLink?: T;
+                    backgroundGIF?: T;
                   };
               id?: T;
               blockName?: T;
@@ -8364,6 +8257,7 @@ export interface PagesSelect<T extends boolean = true> {
               rightTitleBN?: T;
               rightButtonText?: T;
               rightButtonTextBN?: T;
+              phoneNumber?: T;
               recipientEmails?:
                 | T
                 | {
@@ -8384,28 +8278,175 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'prem-calculator-card'?:
+        blogs?:
           | T
           | {
-              sectionId?: T;
+              backgroundColor?: T;
               title?: T;
               titleBN?: T;
-              highlightedTitle?: T;
-              highlightedTitleBN?: T;
+              sectionId?: T;
+              showSearchBar?: T;
+              useSharedData?: T;
+              readMoreText?: T;
+              readMoreTextBN?: T;
+              loadMoreText?: T;
+              loadMoreTextBN?: T;
+              seeLessText?: T;
+              seeLessTextBN?: T;
+              linkTarget?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'blogs-details'?:
+          | T
+          | {
+              backgroundColor?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'all-blogs-card'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              useSharedData?: T;
+              linkTarget?: T;
+              id?: T;
+              blockName?: T;
+            };
+        news?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              sectionId?: T;
+              showSearchBar?: T;
+              useSharedData?: T;
+              loadMoreText?: T;
+              loadMoreTextBN?: T;
+              seeLessText?: T;
+              seeLessTextBN?: T;
+              linkTarget?: T;
+              id?: T;
+              blockName?: T;
+            };
+        vlogs?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              sectionId?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'career-swiper'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
               description?: T;
               descriptionBN?: T;
+              backgroundGifUrl?: T;
               cards?:
                 | T
                 | {
-                    cardTitle?: T;
-                    cardTitleBN?: T;
-                    cardDesc?: T;
-                    cardDescBN?: T;
-                    cardBg?: T;
-                    cardTextColor?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
                     id?: T;
                   };
-              premiumCalculatorForm?:
+              id?: T;
+              blockName?: T;
+            };
+        'career-resources'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subTitle?: T;
+              subTitleBN?: T;
+              highlightedSubTitle?: T;
+              highlightedSubTitleBN?: T;
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
+              readMoreButtonText?: T;
+              readMoreButtonTextBN?: T;
+              readLessButtonText?: T;
+              readLessButtonTextBN?: T;
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    designation?: T;
+                    designationBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'career-opening'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              cards?:
+                | T
+                | {
+                    type?: T;
+                    typeBN?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    btnText?: T;
+                    btnTextBN?: T;
+                    detailsBtnText?: T;
+                    detailsBtnTextBN?: T;
+                    filename?: T;
+                    details?:
+                      | T
+                      | {
+                          topTitle?: T;
+                          topTitleBN?: T;
+                          topDescription?: T;
+                          topDescriptionBN?: T;
+                          title?: T;
+                          titleBN?: T;
+                          responsibilities?: T;
+                          responsibilitiesBN?: T;
+                          requirements?: T;
+                          requirementsBN?: T;
+                          location?: T;
+                          locationBN?: T;
+                          deadline?: T;
+                          applyEmail?: T;
+                          subjectLine?: T;
+                          footer?: T;
+                        };
+                    id?: T;
+                  };
+              careerOpeningForm?:
                 | T
                 | {
                     consentText?: T;
@@ -8414,25 +8455,24 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'purchase-form'?:
+        'career-processing'?:
           | T
           | {
-              uploadSessionId?: T;
-              cards?:
+              title?: T;
+              titleBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              processingCards?:
                 | T
                 | {
-                    cardText?: T;
-                    cardTextBN?: T;
-                    cardDesc?: T;
-                    cardDescBN?: T;
-                    cardBg?: T;
+                    title?: T;
+                    titleBN?: T;
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
                     id?: T;
-                  };
-              purchaseNowForm?:
-                | T
-                | {
-                    consentText?: T;
-                    consentTextBN?: T;
                   };
               id?: T;
               blockName?: T;

@@ -77,6 +77,7 @@ const LinkButtonSchema: Block = {
           maxLength: CTA_BUTTON_TEXT_MAX,
           //   validate: validateCTAEnglishText,
           required: true,
+          defaultValue: 'Explore All Plans',
           admin: {
             width: '50%',
             description: `Text shown on the call-to-action button. Max ${CTA_BUTTON_TEXT_MAX} characters.`,
@@ -88,6 +89,7 @@ const LinkButtonSchema: Block = {
           label: 'বাটনের টেক্সট (বাংলা)',
           maxLength: CTA_BUTTON_TEXT_MAX,
           //   validate: validateCTABanglaText,
+          defaultValue: 'সকল প্ল্যান ঘুরে দেখুন',
           required: true,
           admin: {
             width: '50%',

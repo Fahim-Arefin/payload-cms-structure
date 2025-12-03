@@ -1,4 +1,9 @@
-import { BLOGS_BLOCK_LABEL, BLOGS_BLOCK_THUMBNAIL_URL, BLOGS_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  BLOGS_BLOCK_LABEL,
+  BLOGS_BLOCK_THUMBNAIL_URL,
+  BLOGS_SLUG_AND_TAG,
+  NEWS_AND_BLOG_PAGE,
+} from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 
@@ -73,6 +78,9 @@ const AllBLogsSectionSchema: Block = {
   labels: {
     singular: BLOGS_BLOCK_LABEL,
     plural: BLOGS_BLOCK_LABEL,
+  },
+  admin: {
+    group: NEWS_AND_BLOG_PAGE,
   },
 
   imageURL: BLOGS_BLOCK_THUMBNAIL_URL,

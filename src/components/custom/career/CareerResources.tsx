@@ -9,6 +9,8 @@ import Autoplay from 'embla-carousel-autoplay'
 import LocalizedText from '../shared/LocalizedText'
 import { CareerPageResourcesBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
+import { sliderDelay } from '@/lib/data'
 
 type CareerResourceSectionProps = {
   data: CareerPageResourcesBlockType
@@ -59,7 +61,11 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
       {typeof data?.backgroundImage === 'object' && data?.backgroundImage?.url && (
         <div className="relative w-full flex flex-col items-center container-padding bg-white overflow-hidden">
           {/* Absolute Human Resource Image - Top Right */}
-          <div className="hidden lg:block absolute right-4 md:right-8 xl:right-60 top-8 z-0 pointer-events-none select-none md:w-[400px] md:h-[250px] xl:w-[584px] xl:h-[336px]">
+          <div
+            className="hidden lg:block absolute right-4 md:right-8 xl:right-60 top-8 z-0 pointer-events-none select-none 
+          md:w-[400px] xl:w-[585px]
+          aspect-[585/390]"
+          >
             <Image
               src={data?.backgroundImage?.url || ''}
               alt="Human Resource"
@@ -75,7 +81,7 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
           {/* Mobile: Human resource image background */}
           <div className="block lg:hidden absolute -right-5 top-8 w-[88vw] max-w-[370px] z-0 pointer-events-none select-none">
             <Image
-              src="/assets/career/mobile/humanresource.png"
+              src={data?.backgroundImage?.url || ''}
               alt="Human Resource"
               width={350}
               height={220}
@@ -90,15 +96,15 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
           {/* Section Title */}
           <div className="mb-7 sm:mb-10 relative z-10 w-full max-w-[1250px]">
             <h3 className="text-[#434342] font-light text-[16px] md:text-[20px] xl:text-[24px]">
-              <LocalizedText en="HEAR FROM" bn="তাদের গল্পে" />
+              <LocalizedText en={data?.title} bn={data?.titleBN} />
             </h3>
-            <div className="flex items-center gap-2 mt-[-4px]">
-              <span className="text-[#434342] font-semibold global-h1">
-                <LocalizedText en="OUR" bn="আমাদের" />
-              </span>
-              <span className="text-[#ED7125] font-semibold global-h1">
-                <LocalizedText en="RESOURCES" bn="যাত্রা" />
-              </span>
+            <div className="flex items-center gap-2 mt-[-4px] font-semibold global-h1">
+              <LocalizedHighlighted
+                textEn={data?.subTitle}
+                textBn={data?.subTitleBN}
+                highlightEn={data?.highlightedSubTitle}
+                highlightBn={data?.highlightedSubTitleBN}
+              />
             </div>
           </div>
 
@@ -111,7 +117,7 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
                 setApi={setDesktopCarouselApi}
                 plugins={[
                   Autoplay({
-                    delay: 5000,
+                    delay: sliderDelay,
                   }),
                 ]}
               >
@@ -129,7 +135,6 @@ export function CareerResourceSection({ data }: CareerResourceSectionProps) {
                     >
                       <ResourceCard
                         data={item}
-                        
                         readMoreButtonText={data.readMoreButtonText ?? 'Read More'}
                         readMoreButtonTextBN={data.readMoreButtonTextBN ?? 'আরও পড়ুন'}
                         readLessButtonText={data.readLessButtonText ?? 'Read Less'}

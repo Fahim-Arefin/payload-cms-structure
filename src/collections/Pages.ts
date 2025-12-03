@@ -119,26 +119,29 @@ export const Pages: CollectionConfig = {
         HeroSchema,
         // common section
         LifeInsuranceSimplifiedSchema,
-        ShantaIntroSchema,
+        ContactUsSchema,
         ValuesThatShapeUsSchema,
         AgentVisionSchema,
-        ContactUsSchema,
-        CorporateIntroSchema,
         CorporatePartnersSchema,
+        MultiStageIntroSchema,
+        ShantaIntroSchema,
+        CorporateIntroSchema,
         AddonsInfoSchema,
         PlanInfoDesignSchema,
         PlanInfoDesign03Schema,
         PlanInfoDesign04Schema,
         PlanInfoDesign05Schema,
-        // custom card
+        // custom blocks
         CustomCardSectionSchema,
         CustomTabSchema,
+        CustomAccordionSchema,
         // home page unique
         WhyChooseUsSchema,
         FeaturedPlansSchema,
         PremiumCalculatorSchema,
         LifeInsuranceVideoSchema,
         LifeAtShantaSchema,
+        FeaturedBlogVlogNewsSchema,
         // about us page
         ShantaVisionSchema,
         LicensedLaunchedSchema,
@@ -157,34 +160,34 @@ export const Pages: CollectionConfig = {
         AgentOnboardingFormSchema,
         // corporate page
         CorporateInfoSchema,
-        //
-        APPDSchema,
-        AllBLogsSectionSchema,
-        BLogDetailsSectionSchema,
-        AllBLogsCardSchema,
-        AllNewsSectionSchema,
-        AllVLogsSectionSchema,
-        FeaturedBlogVlogNewsSchema,
-        // plan page
-        // PlanCardSchema,
-        //careerpage
-        CareerIntroSchema,
-        CareerSwiperSchema,
-        CareerResourcesSchema,
-        CareerOpeningSchema,
-        CareerProcessingSchema,
         //multistage page
-        MultiStageIntroSchema,
         MultiStagePlanSchema,
-        //custom blocks
-        CustomAccordionSchema,
+        // purchase now page
+        PurchaseFormSchema,
+        // premium cal page,
+        PremCalculatorPageSchema,
+        // Accidental coverage page
+        APPDSchema,
+
         //support page
         SupportMapTabSchema,
         SupportFaqTabSchema,
         SupportBuzzSchema,
         SupportFeedbackSchema,
-        PremCalculatorPageSchema,
-        PurchaseFormSchema,
+
+        // news and media
+        AllBLogsSectionSchema,
+        BLogDetailsSectionSchema,
+        AllBLogsCardSchema,
+        AllNewsSectionSchema,
+        AllVLogsSectionSchema,
+
+        //careerpage
+        // CareerIntroSchema,
+        CareerSwiperSchema,
+        CareerResourcesSchema,
+        CareerOpeningSchema,
+        CareerProcessingSchema,
       ],
     },
   ],

@@ -4,6 +4,7 @@ import {
   CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
   CAREER_PAGE_RESOURCES_BLOCK_LABEL,
   CAREER_PAGE_RESOURCES_BLOCK_THUMBNAIL_URL,
+  CAREER_PAGE,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
@@ -42,9 +43,7 @@ const validateHighlightedInSubtitleBN = (val: unknown, { siblingData }: any) => 
     return `হাইলাইটেড টেক্সট সর্বোচ্চ ${bnNum(HILITE_MAX)} অক্ষর হতে পারবে।`
   }
   const target = (siblingData?.subTitleBN ?? '').toString()
-  return target.includes(s)
-    ? true
-    : 'হাইলাইটেড টেক্সটটি উপশিরোনামের ভেতরে হুবহু থাকতে হবে।'
+  return target.includes(s) ? true : 'হাইলাইটেড টেক্সটটি উপশিরোনামের ভেতরে হুবহু থাকতে হবে।'
 }
 
 /* ---------------- block ---------------- */
@@ -53,6 +52,9 @@ const CareerResourcesSchema: Block = {
   labels: {
     singular: CAREER_PAGE_RESOURCES_BLOCK_LABEL,
     plural: CAREER_PAGE_RESOURCES_BLOCK_LABEL,
+  },
+  admin: {
+    group: CAREER_PAGE,
   },
 
   imageURL: CAREER_PAGE_RESOURCES_BLOCK_THUMBNAIL_URL,
@@ -156,9 +158,9 @@ const CareerResourcesSchema: Block = {
     ...generateImageFields({
       fieldName: 'backgroundImage',
       label: 'Background Image',
-      description: 'Background image for the section (16:9 recommended).',
-      aspectRatio: 16 / 9,
-      quality: 0.93,
+      description: 'Background image for the section (585:390 recommended).',
+      aspectRatio: 585 / 390,
+      quality: 0.92,
       maxKB: 500,
       ownerCollection: CAREER_PAGE_RESOURCES_SLUG_AND_TAG as any,
     } as any),
@@ -262,9 +264,7 @@ const CareerResourcesSchema: Block = {
               validate: validateShortText('Card Title (BN)', CARD_TITLE_MAX, true),
               admin: {
                 width: '50%',
-                description: `কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ${bnNum(
-                  CARD_TITLE_MAX,
-                )} অক্ষর।`,
+                description: `কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ${bnNum(CARD_TITLE_MAX)} অক্ষর।`,
               },
             },
           ],
@@ -306,9 +306,7 @@ const CareerResourcesSchema: Block = {
               validate: validateShortText('Card Description (BN)', CARD_DESC_MAX, true),
               admin: {
                 width: '50%',
-                description: `সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ${bnNum(
-                  CARD_DESC_MAX,
-                )} অক্ষর।`,
+                description: `সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ${bnNum(CARD_DESC_MAX)} অক্ষর।`,
               },
             },
           ],
@@ -339,9 +337,7 @@ const CareerResourcesSchema: Block = {
               validate: validateShortText('Designation (BN)', DESIGNATION_MAX, true),
               admin: {
                 width: '50%',
-                description: `যেমন: সিনিয়র অ্যাডভাইজার। সর্বোচ্চ ${bnNum(
-                  DESIGNATION_MAX,
-                )} অক্ষর।`,
+                description: `যেমন: সিনিয়র অ্যাডভাইজার। সর্বোচ্চ ${bnNum(DESIGNATION_MAX)} অক্ষর।`,
               },
             },
           ],

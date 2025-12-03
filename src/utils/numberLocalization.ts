@@ -14,7 +14,7 @@ export function convertToBengaliNumerals(text: string): string {
     '6': '৬',
     '7': '৭',
     '8': '৮',
-    '9': '৯'
+    '9': '৯',
   }
 
   return text.replace(/[0-9]/g, (digit) => englishToBengali[digit] || digit)
@@ -23,20 +23,17 @@ export function convertToBengaliNumerals(text: string): string {
 /**
  * Formats a number with locale-specific formatting and numerals
  */
-export function formatLocalizedNumber(
-  value: number, 
-  language: 'en' | 'bn'
-): string {
+export function formatLocalizedNumber(value: number, language: 'en' | 'bn'): string {
   const formattedNumber = value.toLocaleString()
-  
+
   // Debug logging
-  console.log('formatLocalizedNumber debug:', { value, language, formattedNumber })
-  
+  // console.log('formatLocalizedNumber debug:', { value, language, formattedNumber })
+
   if (language === 'bn') {
     const bengaliNumber = convertToBengaliNumerals(formattedNumber)
     console.log('Bengali conversion:', { formattedNumber, bengaliNumber })
     return bengaliNumber
   }
-  
+
   return formattedNumber
 }

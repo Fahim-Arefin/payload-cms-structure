@@ -17,7 +17,10 @@ type Props = {
 
 function CalculatorModalBlock({ data }: Props) {
   return (
-    <PremiumCalculatorModal>
+    <PremiumCalculatorModal
+      consentEn={data?.premiumCalculatorForm?.consentText}
+      consentBn={data?.premiumCalculatorForm?.consentTextBN}
+    >
       <GlobalButton
         variant={data?.style ?? 'primary'}
         text=""

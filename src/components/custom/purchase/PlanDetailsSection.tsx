@@ -72,7 +72,11 @@ const PlanDetailsSection: FC<PlanDetailsSectionProps> = ({ planCode }) => {
             </div>
             <div className="flex items-center gap-2 mt-6 md:mt-0">
               <div>
-                <img src="/assets/line.png" alt="line1" className="h-[150px] md:h-[180px] mt-1" />
+                <img
+                  src="/assets/icons/line.png"
+                  alt="line1"
+                  className="h-[150px] md:h-[180px] mt-1"
+                />
               </div>
               <div className="flex flex-col justify-center items-start gap-6 text-[12px] md:global-p2">
                 <div className="flex gap-2 items-center">
@@ -142,7 +146,11 @@ const PlanDetailsSection: FC<PlanDetailsSectionProps> = ({ planCode }) => {
             </div>
             <div className="flex items-center gap-2 mt-6 md:mt-0">
               <div>
-                <img src="/assets/line.png" alt="line" className="h-[150px] md:h-[180px] mt-1" />
+                <img
+                  src="/assets/icons/line.png"
+                  alt="line"
+                  className="h-[150px] md:h-[180px] mt-1"
+                />
               </div>
               <div className="flex flex-col justify-center items-start gap-6 text-[12px] md:global-p2">
                 <div className="flex gap-2 items-center">

@@ -2,6 +2,7 @@ import {
   DETAILS_CONTENT_BLOCK_THUMBNAIL_URL,
   DETAILS_CONTENT_PAGE_BLOCK_LABEL,
   DETAILS_CONTENT_SLUG_AND_TAG,
+  NORMAL_TAB,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
@@ -127,6 +128,9 @@ const DetailsContent: Block = {
   labels: {
     singular: DETAILS_CONTENT_PAGE_BLOCK_LABEL,
     plural: DETAILS_CONTENT_PAGE_BLOCK_LABEL,
+  },
+  admin: {
+    group: NORMAL_TAB,
   },
 
   imageURL: DETAILS_CONTENT_BLOCK_THUMBNAIL_URL,

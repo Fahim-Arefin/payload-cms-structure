@@ -2,6 +2,7 @@ import type { Block } from 'payload'
 import { bnNum } from '@/lib/utils'
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 import {
+  LEARN_MORE_TAB,
   LEARN_MORE_VIDEO_CONTENT_BLOCK_THUMBNAIL_URL,
   LEARN_MORE_VIDEO_CONTENT_PAGE_BLOCK_LABEL,
   LEARN_MORE_VIDEO_CONTENT_SLUG_AND_TAG,
@@ -109,6 +110,9 @@ const LearnMoreVideoContentSchema: Block = {
   labels: {
     singular: LEARN_MORE_VIDEO_CONTENT_PAGE_BLOCK_LABEL,
     plural: LEARN_MORE_VIDEO_CONTENT_PAGE_BLOCK_LABEL,
+  },
+  admin: {
+    group: LEARN_MORE_TAB,
   },
 
   imageURL: LEARN_MORE_VIDEO_CONTENT_BLOCK_THUMBNAIL_URL,

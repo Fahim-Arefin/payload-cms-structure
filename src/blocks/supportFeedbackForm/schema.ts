@@ -5,6 +5,7 @@ import {
   SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
   SUPPORT_FEEDBACK_FORM_BLOCK_LABEL,
   SUPPORT_FEEDBACK_FORM_BLOCK_THUMBNAIL_URL,
+  SUPPORT_PAGE,
 } from '@/lib/constants'
 
 import { generateImageFields } from '@/utils/media/fieldGenerators'
@@ -15,6 +16,7 @@ const HILITE_MAX = 80
 const BTN_TEXT_MAX = 40
 const EMAIL_MAX = 120
 const FROM_NAME_MAX = 80
+const PHONE_MAX = 40
 
 /* ---------------- validators ---------------- */
 const validateShort =
@@ -35,6 +37,31 @@ const validateEmail =
     if (s.length > EMAIL_MAX) return `${label} must be at most ${EMAIL_MAX} characters.`
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) ? true : `Provide a valid email for ${label}.`
   }
+
+const validatePhone =
+  (max = PHONE_MAX, required = true) =>
+  (val: unknown) => {
+    const s = (val ?? '').toString().trim()
+    if (required && !s) return 'Phone number is required.'
+    if (!s) return true
+    if (s.length > max) return `Phone number must be at most ${max} characters.`
+    // allow +, digits, spaces, dashes, parentheses; 6–20 chars; at least 6 digits overall
+    if (!/^\+?[0-9 ()-]{6,20}$/.test(s)) return 'Please enter a valid phone number.'
+    const digits = s.replace(/\D/g, '')
+    if (digits.length < 6) return 'Phone number must contain at least 6 digits.'
+    return true
+  }
+
+const validateAtLeastOneRecipientEmail = (val: unknown) => {
+  const g = (val ?? {}) as Record<string, unknown>
+
+  const hasAny = ['email1', 'email2', 'email3', 'email4', 'email5'].some((key) => {
+    const v = g?.[key]
+    return typeof v === 'string' && v.trim().length > 0
+  })
+
+  return hasAny ? true : 'Provide at least one recipient email.'
+}
 
 /** Minimal helper to seed a Lexical rich text default with a single paragraph. */
 const makeLexicalDoc = (text: string) => ({
@@ -73,6 +100,9 @@ const SupportFeedbackSchema: Block = {
   labels: {
     singular: SUPPORT_FEEDBACK_FORM_BLOCK_LABEL,
     plural: SUPPORT_FEEDBACK_FORM_BLOCK_LABEL,
+  },
+  admin: {
+    group: SUPPORT_PAGE,
   },
   imageURL: SUPPORT_FEEDBACK_FORM_BLOCK_THUMBNAIL_URL,
   imageAltText: `${SUPPORT_FEEDBACK_FORM_BLOCK_LABEL} preview`,
@@ -170,20 +200,32 @@ const SupportFeedbackSchema: Block = {
         {
           name: 'rightButtonText',
           type: 'text',
-          label: 'Right Button Text',
+          label: 'Call Button Text',
           required: true,
+          defaultValue: 'Call Now',
           maxLength: BTN_TEXT_MAX,
           validate: validateShort('Right Button Text', BTN_TEXT_MAX, true),
-          admin: { width: '50%' },
+          admin: { width: '33%' },
         },
         {
           name: 'rightButtonTextBN',
           type: 'text',
-          label: 'ডান পাশের বাটন টেক্সট (বাংলা)',
-          required: false,
+          label: 'কল বোতামের লেখা। (বাংলা)',
+          required: true,
+          defaultValue: 'ফোন করুন',
           maxLength: BTN_TEXT_MAX,
-          validate: validateShort('Right Button Text (BN)', BTN_TEXT_MAX, false),
-          admin: { width: '50%' },
+          validate: validateShort('Right Button Text (BN)', BTN_TEXT_MAX, true),
+          admin: { width: '33%' },
+        },
+        {
+          name: 'phoneNumber',
+          type: 'text',
+          required: true,
+          label: 'Phone Number',
+          maxLength: PHONE_MAX,
+          validate: validatePhone(PHONE_MAX, true),
+          defaultValue: '09610889900',
+          admin: { width: '33%', description: 'Example: +88 09610889900' },
         },
       ],
     },
@@ -197,23 +239,24 @@ const SupportFeedbackSchema: Block = {
         description:
           'Provide at least one email address. All valid ones will receive the feedback submission.',
       },
-      validate: (_val, { siblingData }: any) => {
-        const g = siblingData?.recipientEmails ?? {}
-        const any =
-          !!(g.email1 && String(g.email1).trim()) ||
-          !!(g.email2 && String(g.email2).trim()) ||
-          !!(g.email3 && String(g.email3).trim()) ||
-          !!(g.email4 && String(g.email4).trim()) ||
-          !!(g.email5 && String(g.email5).trim())
-        return any ? true : 'Provide at least one recipient email.'
-      },
+      // validate: (_val, { siblingData }: any) => {
+      //   const g = siblingData?.recipientEmails ?? {}
+      //   const any =
+      //     !!(g.email1 && String(g.email1).trim()) ||
+      //     !!(g.email2 && String(g.email2).trim()) ||
+      //     !!(g.email3 && String(g.email3).trim()) ||
+      //     !!(g.email4 && String(g.email4).trim()) ||
+      //     !!(g.email5 && String(g.email5).trim())
+      //   return any ? true : 'Provide at least one recipient email.'
+      // },
+      validate: validateAtLeastOneRecipientEmail,
       fields: [
         {
           name: 'email1',
           type: 'text',
           label: 'Recipient Email 1',
           maxLength: EMAIL_MAX,
-          validate: validateEmail('Recipient Email 1', false),
+          validate: validateEmail('Recipient Email 1', true),
           admin: { width: '33%' },
         },
         {
@@ -290,7 +333,7 @@ const SupportFeedbackSchema: Block = {
           label: 'Consent Text',
           required: true,
           defaultValue: makeLexicalDoc(
-            'By clicking Send Feedback, you agree to our terms and conditions and privacy policy.'
+            'By clicking Send Feedback, you agree to our terms and conditions and privacy policy.',
           ),
           admin: {
             description:
@@ -304,7 +347,7 @@ const SupportFeedbackSchema: Block = {
           label: 'সম্মতি টেক্সট (বাংলা)',
           required: true,
           defaultValue: makeLexicalDoc(
-            'এখানে ক্লিক করার মাধ্যমে, আপনি আমাদের টার্মস এন্ড কন্ডিশনস , ও প্রাইভেসি পলিসিতে সম্মত করছেন।'
+            'এখানে ক্লিক করার মাধ্যমে, আপনি আমাদের টার্মস এন্ড কন্ডিশনস , ও প্রাইভেসি পলিসিতে সম্মত করছেন।',
           ),
           admin: {
             description:

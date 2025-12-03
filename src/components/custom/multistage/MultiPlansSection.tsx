@@ -22,10 +22,7 @@ const MultiPlansSection = ({ data, bgColor }: Props) => {
           />
         </h3>
         <p className="global-p1 w-full lg:w-[70%] xl:w-[60%] 2xl:w-[50%]">
-          <LocalizedText
-            en={data?.description || ''}
-            bn={data?.descriptionBN || ''}
-          />
+          <LocalizedText en={data?.description || ''} bn={data?.descriptionBN || ''} />
         </p>
       </div>
       {/* Chart section */}
@@ -65,7 +62,7 @@ const MultiPlansSection = ({ data, bgColor }: Props) => {
                   >
                     {/* Dotted line image */}
                     <img
-                      src="/assets/line.png"
+                      src="/assets/icons/line.png"
                       alt="connector"
                       className="h-[180px] select-none"
                       draggable={false}
@@ -100,7 +97,7 @@ const MultiPlansSection = ({ data, bgColor }: Props) => {
           <div className="flex w-fit mx-auto gap-4 md:gap-4 lg:gap-[60px] relative">
             <div className="absolute inset-0 hidden md:block top-[20px] w-[88%] lg:w-[90%] md:left-[6%] lg:left-[4%]">
               <img
-                src="/assets/lineStraight.svg"
+                src="/assets/icons/lineStraight.svg"
                 alt="timeline connector"
                 className="w-full h-auto"
               />
@@ -132,7 +129,7 @@ const MultiPlansSection = ({ data, bgColor }: Props) => {
 
       {/* finishing touch */}
       <div>
-        <EligibilityPlans data={data}/>
+        <EligibilityPlans data={data} />
       </div>
     </div>
   )
