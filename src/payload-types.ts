@@ -5131,6 +5131,58 @@ export interface Page {
       }
     | {
         /**
+         * Optional heading above the tabs.
+         */
+        topTitle?: string | null;
+        /**
+         * ঐচ্ছিক শিরোনাম (ট্যাবগুলোর উপরে)।
+         */
+        topTitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Top Title.
+         */
+        highlightedTopTitle?: string | null;
+        /**
+         * ঐচ্ছিক। সংশ্লিষ্ট বাংলা Top Title-এর ভিতরে হুবহু থাকতে হবে।
+         */
+        highlightedTopTitleBN?: string | null;
+        /**
+         * Optional rich text paragraph above the tabs.
+         */
+        topDescription?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * ঐচ্ছিক বাংলা বর্ণনা (ট্যাবগুলোর উপরে)।
+         */
+        topDescriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
          * Hex color in #RRGGBB (default #ED7125). Length 7 (৭).
          */
         primaryLabelColor?: string | null;
@@ -5139,14 +5191,14 @@ export interface Page {
          */
         secondaryLabelColor?: string | null;
         /**
-         * Exactly 2 tabs are required.
+         * At least 1 and at most 2 tabs. Values must be either "branches" or "hospitals", each used at most once.
          */
         tabItems?:
           | {
               /**
-               * Unique key for this tab item (e.g., "branches", "hospitals"). Must match usage in code. Also for navigation.
+               * Fixed key used by frontend logic and navigation. Must be either "branches" or "hospitals".
                */
-              value: string;
+              value: 'branches' | 'hospitals';
               label: string;
               labelBN: string;
               /**
@@ -5260,34 +5312,36 @@ export interface Page {
               }[]
             | null;
         };
-        formsTab: {
-          /**
-           * Internal key used by frontend routing. Typically "form" for this Download Forms tab.
-           */
-          value: string;
-          label: string;
-          labelBN: string;
-          /**
-           * Hex color in #RRGGBB (e.g., #F6EDDD).
-           */
-          backgroundColor?: string | null;
-          /**
-           * Hex color in #RRGGBB (e.g., #a08d2c).
-           */
-          tableHeaderBgColor?: string | null;
-          /**
-           * Used for all rows. No links/IDs stored here.
-           */
-          buttonText?: string | null;
-          buttonTextBN?: string | null;
-          forms?:
-            | {
-                title: string;
-                titleBN?: string | null;
-                id?: string | null;
-              }[]
-            | null;
-        };
+        /**
+         * Purely for editor clarity. Not used on frontend.
+         */
+        formsTabSectionLabel?: string | null;
+        /**
+         * Internal key used by frontend routing. Typically "form" for this Download Forms tab.
+         */
+        formsTabValue: string;
+        formsTabLabel: string;
+        formsTabLabelBN: string;
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD).
+         */
+        formsBackgroundColor?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #a08d2c).
+         */
+        formsTableHeaderBgColor?: string | null;
+        /**
+         * Used for all rows. No links/IDs stored here.
+         */
+        formsButtonText?: string | null;
+        formsButtonTextBN?: string | null;
+        forms?:
+          | {
+              title: string;
+              titleBN?: string | null;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'support-faq-tab';
@@ -8116,6 +8170,12 @@ export interface PagesSelect<T extends boolean = true> {
         'support-map-tab'?:
           | T
           | {
+              topTitle?: T;
+              topTitleBN?: T;
+              highlightedTopTitle?: T;
+              highlightedTopTitleBN?: T;
+              topDescription?: T;
+              topDescriptionBN?: T;
               primaryLabelColor?: T;
               secondaryLabelColor?: T;
               tabItems?:
@@ -8163,23 +8223,20 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                         };
                   };
-              formsTab?:
+              formsTabSectionLabel?: T;
+              formsTabValue?: T;
+              formsTabLabel?: T;
+              formsTabLabelBN?: T;
+              formsBackgroundColor?: T;
+              formsTableHeaderBgColor?: T;
+              formsButtonText?: T;
+              formsButtonTextBN?: T;
+              forms?:
                 | T
                 | {
-                    value?: T;
-                    label?: T;
-                    labelBN?: T;
-                    backgroundColor?: T;
-                    tableHeaderBgColor?: T;
-                    buttonText?: T;
-                    buttonTextBN?: T;
-                    forms?:
-                      | T
-                      | {
-                          title?: T;
-                          titleBN?: T;
-                          id?: T;
-                        };
+                    title?: T;
+                    titleBN?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;

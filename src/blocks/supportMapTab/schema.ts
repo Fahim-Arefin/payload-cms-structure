@@ -25,8 +25,9 @@ const validateShortText =
     return s.length <= max ? true : `${label} must be at most ${max} characters.`
   }
 
-const validateHighlightedInLabel =
-  (label: string, targetField: 'label' | 'labelBN', max = HIGHLIGHT_MAX) =>
+// generalized so we can use it for topTitle / label / etc.
+const validateHighlightedInField =
+  (label: string, targetField: string, max = HIGHLIGHT_MAX) =>
   (val: unknown, { siblingData }: any) => {
     const hl = (val ?? '').toString().trim()
     if (!hl) return true
@@ -105,7 +106,100 @@ const SupportMapTabSchema: Block = {
   imageAltText: `${SUPPORT_MAP_TAB_BLOCK_LABEL} preview`,
 
   fields: [
-    // Appearance
+    /* ---------------- Top section (optional) ---------------- */
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'topTitle',
+          type: 'text',
+          label: 'Top Title',
+          required: false,
+          maxLength: LABEL_MAX,
+          validate: validateShortText('Top Title', LABEL_MAX, false),
+          admin: {
+            width: '50%',
+            description: `Optional heading above the tabs.`,
+          },
+        },
+        {
+          name: 'topTitleBN',
+          type: 'text',
+          label: 'Top Title (BN)',
+          required: false,
+          maxLength: LABEL_MAX,
+          validate: validateShortText('Top Title (BN)', LABEL_MAX, false),
+          admin: {
+            width: '50%',
+            description: `ঐচ্ছিক শিরোনাম (ট্যাবগুলোর উপরে)।`,
+          },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'highlightedTopTitle',
+          type: 'text',
+          label: 'Highlighted Top Title (within Top Title)',
+          maxLength: HIGHLIGHT_MAX,
+          validate: validateHighlightedInField('Highlighted Top Title', 'topTitle', HIGHLIGHT_MAX),
+          admin: {
+            width: '50%',
+            description: `Optional. Must appear verbatim inside Top Title.`,
+          },
+        },
+        {
+          name: 'highlightedTopTitleBN',
+          type: 'text',
+          label: 'রঙিন টেক্সট (Top Title-এর মধ্যে)',
+          maxLength: HIGHLIGHT_MAX,
+          validate: validateHighlightedInField(
+            'Highlighted Top Title (BN)',
+            'topTitleBN',
+            HIGHLIGHT_MAX,
+          ),
+          admin: {
+            width: '50%',
+            description: `ঐচ্ছিক। সংশ্লিষ্ট বাংলা Top Title-এর ভিতরে হুবহু থাকতে হবে।`,
+          },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'topDescription',
+          type: 'richText',
+          label: 'Top Description',
+          validate: validateRichText('Top Description', {
+            required: false,
+            max: RICHTEXT_CHAR_MAX,
+          }),
+          admin: {
+            width: '50%',
+            description: `Optional rich text paragraph above the tabs.`,
+          },
+        },
+        {
+          name: 'topDescriptionBN',
+          type: 'richText',
+          label: 'Top Description (BN)',
+          validate: validateRichText('Top Description (BN)', {
+            required: false,
+            max: RICHTEXT_CHAR_MAX,
+          }),
+          admin: {
+            width: '50%',
+            description: `ঐচ্ছিক বাংলা বর্ণনা (ট্যাবগুলোর উপরে)।`,
+          },
+        },
+      ],
+    },
+
+    /* ---------------- Appearance ---------------- */
     {
       type: 'row',
       fields: [
@@ -140,22 +234,29 @@ const SupportMapTabSchema: Block = {
       ],
     },
 
-    // ✅ EXACTLY TWO TAB ITEMS
+    /* ---------------- Tab Items (min 1, max 2; branches/hospitals only) ---------------- */
     {
       name: 'tabItems',
       type: 'array',
       label: 'Tab Items',
-      minRows: 2, // CHANGED
-      maxRows: 2, // CHANGED
+      minRows: 1,
+      maxRows: 2,
       labels: { singular: 'Tab', plural: 'Tabs' },
       admin: {
-        description: 'Exactly 2 tabs are required.',
+        description:
+          'At least 1 and at most 2 tabs. Values must be either "branches" or "hospitals", each used at most once.',
       },
       validate: (val: unknown) => {
         const arr = Array.isArray(val) ? val : []
-        return arr.length === 2
-          ? true
-          : `You must provide exactly 2 Tab Items (currently ${arr.length}).`
+        if (arr.length < 1) return 'You must provide at least 1 Tab Item.'
+        if (arr.length > 2) return 'You can provide at most 2 Tab Items.'
+
+        const values = arr.map((r: any) => r?.value).filter(Boolean)
+        const set = new Set(values)
+        if (values.length !== set.size)
+          return 'Each tab value must be unique (use "branches" and/or "hospitals" once each).'
+
+        return true
       },
       fields: [
         {
@@ -163,15 +264,18 @@ const SupportMapTabSchema: Block = {
           fields: [
             {
               name: 'value',
-              type: 'text',
+              type: 'select',
               label: 'Value (key)',
               required: true,
-              maxLength: VALUE_MAX,
-              validate: validateShortText('Value', VALUE_MAX, true),
+              options: [
+                { label: 'Branches', value: 'branches' },
+                { label: 'Hospitals', value: 'hospitals' },
+              ],
+              defaultValue: 'branches',
               admin: {
                 width: '33%',
                 description:
-                  'Unique key for this tab item (e.g., "branches", "hospitals"). Must match usage in code. Also for navigation.',
+                  'Fixed key used by frontend logic and navigation. Must be either "branches" or "hospitals".',
               },
             },
             {
@@ -197,7 +301,7 @@ const SupportMapTabSchema: Block = {
               type: 'text',
               label: 'Highlighted Text (within label)',
               maxLength: HIGHLIGHT_MAX,
-              validate: validateHighlightedInLabel('Highlighted Text', 'label', HIGHLIGHT_MAX),
+              validate: validateHighlightedInField('Highlighted Text', 'label', HIGHLIGHT_MAX),
               admin: {
                 width: '50%',
                 description: `Optional. Must appear verbatim inside the corresponding Label.`,
@@ -208,11 +312,7 @@ const SupportMapTabSchema: Block = {
               type: 'text',
               label: 'রঙিন টেক্সট (লেবেলের মধ্যে)',
               maxLength: HIGHLIGHT_MAX,
-              validate: validateHighlightedInLabel(
-                'Highlighted Text (BN)',
-                'labelBN',
-                HIGHLIGHT_MAX,
-              ),
+              validate: validateHighlightedInField('Highlighted Text (BN)', 'labelBN', HIGHLIGHT_MAX),
               admin: {
                 width: '50%',
                 description: `ঐচ্ছিক। সংশ্লিষ্ট বাংলা লেবেলের ভিতরে হুবহু থাকতে হবে।`,
