@@ -2950,6 +2950,10 @@ export interface Page {
                     pendingImageCrop?: string | null;
                     imageBlurDataURL?: string | null;
                     /**
+                     * Optional. YouTube video link for this blog. Max 200 characters.
+                     */
+                    videoUrl: string;
+                    /**
                      * Max 100 characters.
                      */
                     title: string;
@@ -2994,28 +2998,20 @@ export interface Page {
                       [k: string]: unknown;
                     } | null;
                     /**
-                     * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
+                     * Max 100 characters.
                      */
-                    readMoreText: string;
+                    caption: string;
                     /**
-                     * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
+                     * সর্বোচ্চ ১০০ অক্ষর।
                      */
-                    readMoreTextBN: string;
-                    /**
-                     * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
-                     */
-                    readLessText: string;
-                    /**
-                     * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
-                     */
-                    readLessTextBN: string;
+                    captionBN: string;
                     id?: string | null;
                   }[];
                   id?: string | null;
                 }[];
                 id?: string | null;
                 blockName?: string | null;
-                blockType: 'learn-more-blog-content';
+                blockType: 'learn-more-video-content';
               }
             | {
                 /**
@@ -3124,10 +3120,6 @@ export interface Page {
                     pendingImageCrop?: string | null;
                     imageBlurDataURL?: string | null;
                     /**
-                     * Optional. YouTube video link for this blog. Max 200 characters.
-                     */
-                    videoUrl: string;
-                    /**
                      * Max 100 characters.
                      */
                     title: string;
@@ -3172,20 +3164,28 @@ export interface Page {
                       [k: string]: unknown;
                     } | null;
                     /**
-                     * Max 100 characters.
+                     * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
                      */
-                    caption: string;
+                    readMoreText: string;
                     /**
-                     * সর্বোচ্চ ১০০ অক্ষর।
+                     * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
                      */
-                    captionBN: string;
+                    readMoreTextBN: string;
+                    /**
+                     * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
+                     */
+                    readLessText: string;
+                    /**
+                     * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
+                     */
+                    readLessTextBN: string;
                     id?: string | null;
                   }[];
                   id?: string | null;
                 }[];
                 id?: string | null;
                 blockName?: string | null;
-                blockType: 'learn-more-video-content';
+                blockType: 'learn-more-blog-content';
               }
           )[];
           id?: string | null;
@@ -7274,6 +7274,50 @@ export interface PagesSelect<T extends boolean = true> {
                                 id?: T;
                                 blockName?: T;
                               };
+                          'learn-more-video-content'?:
+                            | T
+                            | {
+                                groups?:
+                                  | T
+                                  | {
+                                      backgroundColor?: T;
+                                      title?: T;
+                                      titleBN?: T;
+                                      highlightedTitle?: T;
+                                      highlightedTitleBN?: T;
+                                      subtitle?: T;
+                                      subtitleBN?: T;
+                                      highlightedSubtitle?: T;
+                                      highlightedSubtitleBN?: T;
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      loadMoreText?: T;
+                                      loadMoreTextBN?: T;
+                                      loadLessText?: T;
+                                      loadLessTextBN?: T;
+                                      style?: T;
+                                      blogs?:
+                                        | T
+                                        | {
+                                            image?: T;
+                                            imageOriginal?: T;
+                                            pendingImageOriginal?: T;
+                                            pendingImageCrop?: T;
+                                            imageBlurDataURL?: T;
+                                            videoUrl?: T;
+                                            title?: T;
+                                            titleBN?: T;
+                                            description?: T;
+                                            descriptionBN?: T;
+                                            caption?: T;
+                                            captionBN?: T;
+                                            id?: T;
+                                          };
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
                           'learn-more-blog-content'?:
                             | T
                             | {
@@ -7312,50 +7356,6 @@ export interface PagesSelect<T extends boolean = true> {
                                             readMoreTextBN?: T;
                                             readLessText?: T;
                                             readLessTextBN?: T;
-                                            id?: T;
-                                          };
-                                      id?: T;
-                                    };
-                                id?: T;
-                                blockName?: T;
-                              };
-                          'learn-more-video-content'?:
-                            | T
-                            | {
-                                groups?:
-                                  | T
-                                  | {
-                                      backgroundColor?: T;
-                                      title?: T;
-                                      titleBN?: T;
-                                      highlightedTitle?: T;
-                                      highlightedTitleBN?: T;
-                                      subtitle?: T;
-                                      subtitleBN?: T;
-                                      highlightedSubtitle?: T;
-                                      highlightedSubtitleBN?: T;
-                                      description?: T;
-                                      descriptionBN?: T;
-                                      loadMoreText?: T;
-                                      loadMoreTextBN?: T;
-                                      loadLessText?: T;
-                                      loadLessTextBN?: T;
-                                      style?: T;
-                                      blogs?:
-                                        | T
-                                        | {
-                                            image?: T;
-                                            imageOriginal?: T;
-                                            pendingImageOriginal?: T;
-                                            pendingImageCrop?: T;
-                                            imageBlurDataURL?: T;
-                                            videoUrl?: T;
-                                            title?: T;
-                                            titleBN?: T;
-                                            description?: T;
-                                            descriptionBN?: T;
-                                            caption?: T;
-                                            captionBN?: T;
                                             id?: T;
                                           };
                                       id?: T;
