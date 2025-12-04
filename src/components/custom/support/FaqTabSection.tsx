@@ -31,10 +31,10 @@ export function FaqTabSection({ block, initialTab, onTabChange }: Props) {
           label: block.faqTab.label ?? 'General FAQ',
           labelBN: block.faqTab.labelBN ?? 'সাধারণ জিজ্ঞাসা',
         },
-        block?.formsTab && {
+        block?.forms && {
           value: TAB_FORM as TabValue,
-          label: block.formsTab.label ?? 'Download Forms',
-          labelBN: block.formsTab.labelBN ?? 'ডাউনলোড ফরম',
+          label: block.formsTabLabel ?? 'Download Forms',
+          labelBN: block.formsTabLabelBN ?? 'ডাউনলোড ফরম',
         },
       ].filter(Boolean) as { value: TabValue; label: string; labelBN?: string | null }[],
     [block]
@@ -154,14 +154,14 @@ export function FaqTabSection({ block, initialTab, onTabChange }: Props) {
         />
       ) : (
         <FormsTable
-          forms={(block?.formsTab?.forms ?? []).map((f: any) => ({
+          forms={(block?.forms ?? []).map((f: any) => ({
             title: f?.title ?? '',
             titleBN: f?.titleBN ?? null,
           }))}
-          buttonTextEn={block?.formsTab?.buttonText || 'Download'}
-          buttonTextBn={block?.formsTab?.buttonTextBN || 'ডাউনলোড'}
-          containerBg={block?.formsTab?.backgroundColor || '#F6EDDD'}
-          headerBg={block?.formsTab?.tableHeaderBgColor || '#a08d2c'}
+          buttonTextEn={block?.formsButtonText || 'Download'}
+          buttonTextBn={block?.formsButtonTextBN || 'ডাউনলোড'}
+          containerBg={block?.formsBackgroundColor || '#F6EDDD'}
+          headerBg={block?.formsTableHeaderBgColor || '#a08d2c'}
         />
       )}
     </>
