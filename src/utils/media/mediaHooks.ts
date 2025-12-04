@@ -270,6 +270,19 @@ export const mediaHooks = withMediaLifecycle({
     },
     {
       layoutKey: 'layout',
+      blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
+      arrayKey: 'expectationsLeft',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
+      arrayKey: 'expectationsRight',
+      mediaFields: ['avatar'],
+    },
+
+    {
+      layoutKey: 'layout',
       blockType: AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
       arrayKey: 'gallery',
       mediaFields: ['image'],
@@ -380,20 +393,20 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'insuranceCardData',
       mediaFields: ['image'],
     },
-    {
-      layoutKey: 'layout',
-      blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
-      groupKey: 'expectations',
-      arrayKey: 'left',
-      mediaFields: ['icon'],
-    },
-    {
-      layoutKey: 'layout',
-      blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
-      groupKey: 'expectations',
-      arrayKey: 'right',
-      mediaFields: ['avatar'],
-    },
+    // {
+    //   layoutKey: 'layout',
+    //   blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
+    //   groupKey: 'expectations',
+    //   arrayKey: 'left',
+    //   mediaFields: ['icon'],
+    // },
+    // {
+    //   layoutKey: 'layout',
+    //   blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
+    //   groupKey: 'expectations',
+    //   arrayKey: 'right',
+    //   mediaFields: ['avatar'],
+    // },
     {
       layoutKey: 'layout',
       blockType: CUSTOM_CARD_SECTION_SLUG_AND_TAG,

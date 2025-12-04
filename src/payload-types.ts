@@ -733,6 +733,10 @@ export interface Page {
          */
         highlightedTextBN?: string | null;
         /**
+         * Adds padding on the left/right of the carousel container (padding-x).
+         */
+        addHorizontalPadding?: boolean | null;
+        /**
          * Add partners with a logo and name (EN/BN).
          */
         partners: {
@@ -4418,60 +4422,58 @@ export interface Page {
           imageBlurDataURL?: string | null;
           id?: string | null;
         }[];
-        expectations: {
+        /**
+         * Bullets with icon + EN/BN short text.
+         */
+        expectationsLeft: {
           /**
-           * Bullets with icon + EN/BN short text.
+           * Square icon (1:1). PNG with transparent background preferred.
            */
-          left: {
-            /**
-             * Square icon (1:1). PNG with transparent background preferred.
-             */
-            icon: string | Media;
-            iconOriginal?: (string | null) | Media;
-            pendingIconOriginal?: string | null;
-            pendingIconCrop?: string | null;
-            iconBlurDataURL?: string | null;
-            /**
-             * Short line. Max 100 characters.
-             */
-            text: string;
-            /**
-             * সংক্ষিপ্ত লাইন। সর্বোচ্চ ১০০ অক্ষর।
-             */
-            textBN: string;
-            id?: string | null;
-          }[];
+          icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
           /**
-           * Single agent testimonial: avatar + EN/BN name + EN/BN quote.
+           * Short line. Max 100 characters.
            */
-          right: {
-            /**
-             * Agent photo (1:1 portrait preferred and also prefered transparent img).
-             */
-            avatar: string | Media;
-            avatarOriginal?: (string | null) | Media;
-            pendingAvatarOriginal?: string | null;
-            pendingAvatarCrop?: string | null;
-            avatarBlurDataURL?: string | null;
-            /**
-             * Agent’s name. Max 60 characters.
-             */
-            name: string;
-            /**
-             * এজেন্টের নাম। সর্বোচ্চ ৬০ অক্ষর।
-             */
-            nameBN: string;
-            /**
-             * Short testimonial sentence. Max 240 characters.
-             */
-            quote: string;
-            /**
-             * সংক্ষিপ্ত উক্তি। সর্বোচ্চ ২৪০ অক্ষর।
-             */
-            quoteBN: string;
-            id?: string | null;
-          }[];
-        };
+          text: string;
+          /**
+           * সংক্ষিপ্ত লাইন। সর্বোচ্চ ১০০ অক্ষর।
+           */
+          textBN: string;
+          id?: string | null;
+        }[];
+        /**
+         * Single agent testimonial: avatar + EN/BN name + EN/BN quote.
+         */
+        expectationsRight: {
+          /**
+           * Agent photo (1:1 portrait preferred and also prefer transparent img).
+           */
+          avatar: string | Media;
+          avatarOriginal?: (string | null) | Media;
+          pendingAvatarOriginal?: string | null;
+          pendingAvatarCrop?: string | null;
+          avatarBlurDataURL?: string | null;
+          /**
+           * Agent’s name. Max 60 characters.
+           */
+          name: string;
+          /**
+           * এজেন্টের নাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          nameBN: string;
+          /**
+           * Short testimonial sentence. Max 240 characters.
+           */
+          quote: string;
+          /**
+           * সংক্ষিপ্ত উক্তি। সর্বোচ্চ ২৪০ অক্ষর।
+           */
+          quoteBN: string;
+          id?: string | null;
+        }[];
         id?: string | null;
         blockName?: string | null;
         blockType: 'agent-onboarding-opportunity';
@@ -6561,6 +6563,7 @@ export interface PagesSelect<T extends boolean = true> {
               titleBN?: T;
               highlightedText?: T;
               highlightedTextBN?: T;
+              addHorizontalPadding?: T;
               partners?:
                 | T
                 | {
@@ -7832,35 +7835,31 @@ export interface PagesSelect<T extends boolean = true> {
                     imageBlurDataURL?: T;
                     id?: T;
                   };
-              expectations?:
+              expectationsLeft?:
                 | T
                 | {
-                    left?:
-                      | T
-                      | {
-                          icon?: T;
-                          iconOriginal?: T;
-                          pendingIconOriginal?: T;
-                          pendingIconCrop?: T;
-                          iconBlurDataURL?: T;
-                          text?: T;
-                          textBN?: T;
-                          id?: T;
-                        };
-                    right?:
-                      | T
-                      | {
-                          avatar?: T;
-                          avatarOriginal?: T;
-                          pendingAvatarOriginal?: T;
-                          pendingAvatarCrop?: T;
-                          avatarBlurDataURL?: T;
-                          name?: T;
-                          nameBN?: T;
-                          quote?: T;
-                          quoteBN?: T;
-                          id?: T;
-                        };
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    text?: T;
+                    textBN?: T;
+                    id?: T;
+                  };
+              expectationsRight?:
+                | T
+                | {
+                    avatar?: T;
+                    avatarOriginal?: T;
+                    pendingAvatarOriginal?: T;
+                    pendingAvatarCrop?: T;
+                    avatarBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    quote?: T;
+                    quoteBN?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;
