@@ -39,6 +39,7 @@ import {
   ADDITIONAL_BENEFIT_CONTENT_SLUG_AND_TAG,
   LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG,
   LEARN_MORE_VIDEO_CONTENT_SLUG_AND_TAG,
+  CAREER_PAGE_OPENINGS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -359,6 +360,13 @@ export const mediaHooks = withMediaLifecycle({
       blockType: CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
       arrayKey: 'processingCards',
       mediaFields: ['image'],
+    },
+
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_PAGE_OPENINGS_SLUG_AND_TAG,
+      arrayKey: 'cards',
+      mediaFields: ['filename'],
     },
   ],
 

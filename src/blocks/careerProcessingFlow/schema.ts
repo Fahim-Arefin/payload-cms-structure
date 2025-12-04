@@ -2,6 +2,7 @@ import type { Block } from 'payload'
 import { bnNum } from '@/lib/utils'
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 import {
+  CAREER_PAGE,
   CAREER_PAGE_PROCESSING_BLOCK_LABEL,
   CAREER_PAGE_PROCESSING_BLOCK_THUMBNAIL_URL,
   CAREER_PAGE_PROCESSING_SLUG_AND_TAG,
@@ -31,6 +32,9 @@ const CareerProcessingSchema: Block = {
   labels: {
     singular: CAREER_PAGE_PROCESSING_BLOCK_LABEL,
     plural: CAREER_PAGE_PROCESSING_BLOCK_LABEL,
+  },
+  admin: {
+    group: CAREER_PAGE,
   },
 
   imageURL: CAREER_PAGE_PROCESSING_BLOCK_THUMBNAIL_URL,

@@ -8,7 +8,7 @@ type Props = {
 
 function StepContentBlock({ data }: Props) {
   return (
-    <div>
+    <div className="">
       <div>
         <div
           className={`flex flex-col ${data?.LargeFont ? 'space-y-4 lg:space-y-4 xl:space-y-7 ' : 'space-y-4 lg:space-y-2 xl:space-y-4 2xl:space-y-6'} `}
@@ -33,7 +33,8 @@ function StepContentBlock({ data }: Props) {
         </div>
       </div>
 
-      {(data?.additionalDescription || data?.additionalDescriptionBN) && (
+      {(data?.additionalDescription?.root?.direction ||
+        data?.additionalDescriptionBN?.root?.direction) && (
         <div className="mt-[30px] lg:mt-[50px] xl:mt-[80px] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
           <LocalizedRichText en={data?.additionalDescription} bn={data?.additionalDescriptionBN} />
         </div>

@@ -311,8 +311,8 @@ const AddonsInfoSchema: Block = {
     /* ---------- Optional images (your generator, stamped by lifecycle) ---------- */
     ...generateImageFields({
       fieldName: 'imageSquare',
-      label: 'Optional Image (1:1)',
-      description: 'Square image (optional). Recommended 1:1.',
+      label: 'Image (1:1)',
+      description: 'Square image. Recommended 1:1.',
       aspectRatio: 1 / 1,
       quality: 0.92,
       maxKB: 400,
@@ -320,8 +320,8 @@ const AddonsInfoSchema: Block = {
     } as any),
     ...generateImageFields({
       fieldName: 'imageWide',
-      label: 'Optional Image (16:9)',
-      description: 'Wide image (optional). Recommended 16:9.',
+      label: 'Image (16:9)',
+      description: 'Wide image. Recommended 16:9.',
       aspectRatio: 16 / 9,
       quality: 0.92,
       maxKB: 600,

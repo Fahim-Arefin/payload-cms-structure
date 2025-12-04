@@ -5,6 +5,7 @@ import {
   PREM_CALC_PAGE_SLUG_AND_TAG,
   PREM_CALC_PAGE_BLOCK_LABEL,
   PREM_CALC_PAGE_BLOCK_THUMBNAIL_URL,
+  PREMIUM_CALCULATOR_PAGE,
 } from '@/lib/constants'
 
 /* ---------------- limits ---------------- */
@@ -138,6 +139,11 @@ const PremCalculatorPageSchema: Block = {
     singular: PREM_CALC_PAGE_BLOCK_LABEL,
     plural: PREM_CALC_PAGE_BLOCK_LABEL,
   },
+
+  admin: {
+    group: PREMIUM_CALCULATOR_PAGE,
+  },
+
   imageURL: PREM_CALC_PAGE_BLOCK_THUMBNAIL_URL,
   imageAltText: `${PREM_CALC_PAGE_BLOCK_LABEL} preview`,
 

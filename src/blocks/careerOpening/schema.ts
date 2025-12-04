@@ -4,6 +4,7 @@ import {
   CAREER_PAGE_OPENINGS_SLUG_AND_TAG,
   CAREER_PAGE_OPENINGS_BLOCK_LABEL,
   CAREER_PAGE_OPENINGS_BLOCK_THUMBNAIL_URL,
+  CAREER_PAGE,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 
@@ -60,8 +61,7 @@ const CONSENT_EN_DEFAULT: any = {
             format: 0,
             mode: 'normal',
             style: '',
-            text:
-              'By clicking Send Feedback, you agree to our terms and conditions and privacy policy.',
+            text: 'By clicking Send Feedback, you agree to our terms and conditions and privacy policy.',
             version: 1,
           },
         ],
@@ -91,8 +91,7 @@ const CONSENT_BN_DEFAULT: any = {
             format: 0,
             mode: 'normal',
             style: '',
-            text:
-              'এখানে ক্লিক করার মাধ্যমে, আপনি আমাদের টার্মস এন্ড কন্ডিশনস , ও প্রাইভেসি পলিসিতে সম্মত করছেন।',
+            text: 'এখানে ক্লিক করার মাধ্যমে, আপনি আমাদের টার্মস এন্ড কন্ডিশনস , ও প্রাইভেসি পলিসিতে সম্মত করছেন।',
             version: 1,
           },
         ],
@@ -108,6 +107,9 @@ const CareerOpeningSchema: Block = {
   labels: {
     singular: CAREER_PAGE_OPENINGS_BLOCK_LABEL,
     plural: CAREER_PAGE_OPENINGS_BLOCK_LABEL,
+  },
+  admin: {
+    group: CAREER_PAGE,
   },
 
   imageURL: CAREER_PAGE_OPENINGS_BLOCK_THUMBNAIL_URL,
@@ -288,6 +290,7 @@ const CareerOpeningSchema: Block = {
               type: 'text',
               label: 'Apply Button Text',
               maxLength: BTN_TEXT_MAX,
+              defaultValue: 'Apply Now',
               validate: validateShortText('Apply Button Text', BTN_TEXT_MAX, true),
               admin: {
                 width: '50%',
@@ -299,6 +302,7 @@ const CareerOpeningSchema: Block = {
               type: 'text',
               label: 'বাটন টেক্সট (বাংলা)',
               maxLength: BTN_TEXT_MAX,
+              defaultValue: 'আবেদন করুন',
               validate: validateShortText('Apply Button Text (BN)', BTN_TEXT_MAX, true),
               admin: {
                 width: '50%',
@@ -317,6 +321,7 @@ const CareerOpeningSchema: Block = {
               type: 'text',
               label: 'Details Button Text',
               maxLength: BTN_TEXT_MAX,
+              defaultValue: 'View Details',
               validate: validateShortText('Details Button Text', BTN_TEXT_MAX, true),
               admin: {
                 width: '50%',
@@ -328,6 +333,7 @@ const CareerOpeningSchema: Block = {
               type: 'text',
               label: 'ডিটেইলস বাটন টেক্সট (বাংলা)',
               maxLength: BTN_TEXT_MAX,
+              defaultValue: 'বিস্তারিত দেখুন',
               validate: validateShortText('Details Button Text (BN)', BTN_TEXT_MAX, true),
               admin: {
                 width: '50%',
@@ -337,6 +343,14 @@ const CareerOpeningSchema: Block = {
               },
             },
           ],
+        },
+        // Download Pdf
+        {
+          name: 'filename',
+          label: 'Attachment Filename',
+          type: 'upload',
+          relationTo: 'media',
+          admin: { description: 'Upload/select the Download PDF.' },
         },
 
         /* ---- Details (single group instead of array) ---- */
@@ -556,17 +570,17 @@ const CareerOpeningSchema: Block = {
                 description: `Optional closing note. Max ${FOOTER_MAX} characters.`,
               },
             },
-            {
-              name: 'filename',
-              type: 'text',
-              label: 'Attachment Filename',
-              maxLength: FILENAME_MAX,
-              validate: validateShortText('Attachment Filename', FILENAME_MAX, false),
-              admin: {
-                description:
-                  'Optional. Example: it-project-manager.pdf — this should match the name of the PDF users will download.',
-              },
-            },
+            // {
+            //   name: 'filename',
+            //   type: 'text',
+            //   label: 'Attachment Filename',
+            //   maxLength: FILENAME_MAX,
+            //   validate: validateShortText('Attachment Filename', FILENAME_MAX, false),
+            //   admin: {
+            //     description:
+            //       'Optional. Example: it-project-manager.pdf — this should match the name of the PDF users will download.',
+            //   },
+            // },
           ],
         },
       ],
@@ -591,8 +605,7 @@ const CareerOpeningSchema: Block = {
               defaultValue: CONSENT_EN_DEFAULT,
               admin: {
                 width: '50%',
-                description:
-                  'Default can be edited. Appears near the Apply/Submit action.',
+                description: 'Default can be edited. Appears near the Apply/Submit action.',
               },
             },
             {

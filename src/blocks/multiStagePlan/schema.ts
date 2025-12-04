@@ -3,6 +3,7 @@ import {
   MULTI_STAGE_PLAN_SLUG_AND_TAG,
   MULTI_STAGE_PLAN_BLOCK_LABEL,
   MULTI_STAGE_PLAN_BLOCK_THUMBNAIL_URL,
+  MUTLI_STAGE_PLAN_PAGE,
 } from '@/lib/constants'
 import type { Block } from 'payload'
 import { bnNum } from '@/lib/utils'
@@ -51,6 +52,9 @@ const MultiStagePlanSchema: Block = {
   labels: {
     singular: MULTI_STAGE_PLAN_BLOCK_LABEL,
     plural: MULTI_STAGE_PLAN_BLOCK_LABEL,
+  },
+  admin: {
+    group: MUTLI_STAGE_PLAN_PAGE,
   },
 
   imageURL: MULTI_STAGE_PLAN_BLOCK_THUMBNAIL_URL,

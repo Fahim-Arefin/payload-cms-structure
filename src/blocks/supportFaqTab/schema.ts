@@ -4,6 +4,7 @@ import {
   SUPPORT_FAQ_TAB_SLUG_AND_TAG,
   SUPPORT_FAQ_TAB_BLOCK_LABEL,
   SUPPORT_FAQ_TAB_BLOCK_THUMBNAIL_URL,
+  SUPPORT_PAGE,
 } from '@/lib/constants'
 
 const TITLE_MAX = 120
@@ -38,6 +39,9 @@ const VALID_FAQ_KEYS = [
 
 const FaqTabsSchema: Block = {
   slug: SUPPORT_FAQ_TAB_SLUG_AND_TAG,
+  admin: {
+    group: SUPPORT_PAGE,
+  },
   labels: { singular: SUPPORT_FAQ_TAB_BLOCK_LABEL, plural: SUPPORT_FAQ_TAB_BLOCK_LABEL },
   imageURL: SUPPORT_FAQ_TAB_BLOCK_THUMBNAIL_URL,
   imageAltText: `${SUPPORT_FAQ_TAB_BLOCK_LABEL} preview`,
@@ -89,7 +93,6 @@ const FaqTabsSchema: Block = {
             },
           ],
         },
-
 
         // FAQ section background color
         {

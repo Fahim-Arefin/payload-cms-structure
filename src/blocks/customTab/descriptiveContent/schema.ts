@@ -5,6 +5,7 @@ import {
   DESCRIPTIVE_CONTENT_BLOCK_THUMBNAIL_URL,
   DESCRIPTIVE_CONTENT_PAGE_BLOCK_LABEL,
   DESCRIPTIVE_CONTENT_SLUG_AND_TAG,
+  NORMAL_TAB,
 } from '@/lib/constants'
 
 /* ---- limits ---- */
@@ -70,6 +71,10 @@ const DescriptiveContent: Block = {
   labels: {
     singular: DESCRIPTIVE_CONTENT_PAGE_BLOCK_LABEL,
     plural: DESCRIPTIVE_CONTENT_PAGE_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: NORMAL_TAB,
   },
 
   imageURL: DESCRIPTIVE_CONTENT_BLOCK_THUMBNAIL_URL,

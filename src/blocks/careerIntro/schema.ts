@@ -1,6 +1,7 @@
 // src/payload/blocks/CareerIntro.ts
 import type { Block } from 'payload'
 import {
+  CAREER_PAGE,
   CAREER_PAGE_INTRO_BLOCK_LABEL,
   CAREER_PAGE_INTRO_BLOCK_THUMBNAIL_URL,
   CAREER_PAGE_INTRO_SLUG_AND_TAG,
@@ -43,6 +44,10 @@ const CareerIntroSchema: Block = {
   labels: {
     singular: CAREER_PAGE_INTRO_BLOCK_LABEL,
     plural: CAREER_PAGE_INTRO_BLOCK_LABEL,
+  },
+
+  admin: {
+    group: CAREER_PAGE,
   },
 
   imageURL: CAREER_PAGE_INTRO_BLOCK_THUMBNAIL_URL,

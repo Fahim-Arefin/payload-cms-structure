@@ -4,6 +4,7 @@ import {
   CAREER_PAGE_SWIPER_SLUG_AND_TAG,
   CAREER_PAGE_SWIPER_BLOCK_LABEL,
   CAREER_PAGE_SWIPER_BLOCK_THUMBNAIL_URL,
+  CAREER_PAGE,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import { generateImageFields, generateArrayImageFields } from '@/utils/media/fieldGenerators'
@@ -27,12 +28,42 @@ const validateShortText =
     return s.length <= max ? true : `${label} must be at most ${max} characters.`
   }
 
+/** Background video URL: allow absolute http(s) OR internal /assets path. */
+const validateBackgroundVideoUrl =
+  (max = URL_MAX, required = true) =>
+  (val: unknown) => {
+    const link = (val ?? '').toString().trim()
+    if (required && !link) return 'URL is required.'
+    if (!link) return true
+    if (link.length > max) return `URL must be at most ${max} characters.`
+
+    // Allow internal asset paths like "/assets/bg.mp4"
+    if (link.startsWith('/assets')) {
+      return true
+    }
+
+    // Otherwise, require absolute http(s) URL
+    try {
+      const u = new URL(link)
+      const ok = u.protocol === 'http:' || u.protocol === 'https:'
+      if (!ok) {
+        return 'URL must be an absolute http(s) URL or start with /assets.'
+      }
+      return true
+    } catch {
+      return 'Provide a valid URL that is either an absolute http(s) URL or starts with /assets.'
+    }
+  }
+
 /* ---------------- block ---------------- */
 const CareerSwiperSchema: Block = {
   slug: CAREER_PAGE_SWIPER_SLUG_AND_TAG,
   labels: {
     singular: CAREER_PAGE_SWIPER_BLOCK_LABEL,
     plural: CAREER_PAGE_SWIPER_BLOCK_LABEL,
+  },
+  admin: {
+    group: CAREER_PAGE,
   },
 
   imageURL: CAREER_PAGE_SWIPER_BLOCK_THUMBNAIL_URL,
@@ -149,18 +180,17 @@ const CareerSwiperSchema: Block = {
     //   ownerCollection: CAREER_PAGE_SWIPER_SLUG_AND_TAG as any,
     // } as any),
 
-        /* --------- Background GIF (https only) --------- */
+    /* --------- Background GIF (https only) --------- */
     {
       name: 'backgroundGifUrl',
       type: 'text',
       required: true,
       label: 'Background GIF URL (https)',
       maxLength: URL_MAX,
-      // validate: validateHTTPSOnlyUrl('Background GIF URL', URL_MAX, true),
-      defaultValue: '/assets/career/web/careerSwiperBanner.gif',
+      validate: validateBackgroundVideoUrl(URL_MAX, true),
+      defaultValue: '/assets/videos/careerSwiperBanner.gif',
       admin: {
-        description:
-          'Absolute https URL to your GIF asset. Internal paths are not allowed. Max 400 characters.',
+        description: `Either an internal path starting with “/assets” or an absolute http(s) video URL (MP4/WebM/HLS). Max ${URL_MAX}. (/assets/videos/footprint.mp4)`,
       },
     },
 

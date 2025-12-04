@@ -1,4 +1,9 @@
-import { NEWS_BLOCK_LABEL, NEWS_BLOCK_THUMBNAIL_URL, NEWS_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  NEWS_AND_BLOG_PAGE,
+  NEWS_BLOCK_LABEL,
+  NEWS_BLOCK_THUMBNAIL_URL,
+  NEWS_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
 
@@ -74,7 +79,9 @@ const AllNewsSectionSchema: Block = {
     singular: NEWS_BLOCK_LABEL,
     plural: NEWS_BLOCK_LABEL,
   },
-
+  admin: {
+    group: NEWS_AND_BLOG_PAGE,
+  },
   imageURL: NEWS_BLOCK_THUMBNAIL_URL,
   imageAltText: `${NEWS_BLOCK_LABEL} preview`,
 

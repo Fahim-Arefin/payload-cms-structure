@@ -101,11 +101,13 @@ function CatchTheBuzzSection({ block }: Props) {
               mainImage={block?.mainImage}
               mainImageSrcLink={block?.allTab?.mainImageSrcLink || ''}
               newsItems={block?.allTab?.newsItems || []}
+              block={block}
             />
           )}
 
           {activeTab === 'ovc' && (
             <SupportOVCSection
+              backgroundGif={block?.ovcTab?.backgroundGIF}
               backgroundImage={block?.backgroundImage} // ← schema media (outside group)
               videoLink={block?.ovcTab?.videoLink || null} // ← YouTube URL
               title={block?.ovcTab?.title || null}

@@ -132,7 +132,6 @@ const FeaturedBlogVlogNewsSchema: Block = {
     singular: HOME_FEATURED_BLOG_VLOG_AND_NEWS_BLOCK_LABEL,
     plural: HOME_FEATURED_BLOG_VLOG_AND_NEWS_BLOCK_LABEL,
   },
-
   admin: {
     group: HOME_PAGE,
   },
