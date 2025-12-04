@@ -257,7 +257,7 @@ export interface Page {
   uploadSessionId?: string | null;
   name: string;
   /**
-   * for home page use `index`, for dynamic page use `:slug`
+   * for home page use `index`, for dynamic page use `:slug`, (e.g. index , plans, plans/individual , news-and-blogs , news-and-blogs/:slug)
    */
   slug: string;
   layout: (
@@ -3792,7 +3792,7 @@ export interface Page {
       }
     | {
         /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         backgroundColor?: string | null;
         /**
@@ -3863,7 +3863,7 @@ export interface Page {
          */
         seeAllLink?: (string | null) | Page;
         /**
-         * When ON, this section reads **global Blog And News** items from global sources.
+         * When ON, this section reads **global News And Blog** items from global sources.
          */
         useSharedBlogAndNewsData: boolean;
         /**
@@ -5526,31 +5526,12 @@ export interface Page {
          */
         seeLessTextBN: string;
         /**
-         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
+         * Pick an internal dynamic page to link to. External URLs are not allowed. When click on read more button it will navigate to its details page, specify that page here
          */
         linkTarget: string | Page;
         id?: string | null;
         blockName?: string | null;
         blockType: 'blogs';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * When ON, this block renders data from **Global → Blogs**.
-         *
-         * **Before enabling:** fill up the Global → Blogs data.
-         *
-         * **Notes:**
-         * • This block only stores presentation options (e.g., background color).
-         * • All content comes from the single shared Global to keep pages in sync.
-         */
-        useSharedData: boolean;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'blogs-details';
       }
     | {
         /**
@@ -5566,22 +5547,22 @@ export interface Page {
          */
         titleBN: string;
         /**
-         * When ON, this block renders data from **Global → Blogs**.
+         * Used for direct jump links to this section (e.g., "vlog-section"). Required. No spaces. Use "-" to separate words (e.g., "vlog-section", not "vlog section").
+         */
+        sectionId: string;
+        /**
+         * When ON, this block renders data from **Global → Vlogs**.
          *
-         * **Before enabling:** fill up the Global → Blogs data.
+         * **Before enabling:** fill up the Global → Vlogs data.
          *
          * **Notes:**
          * • This block only stores presentation options (e.g., background color).
          * • All content comes from the single shared Global to keep pages in sync.
          */
         useSharedData: boolean;
-        /**
-         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
-         */
-        linkTarget: string | Page;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'all-blogs-card';
+        blockType: 'vlogs';
       }
     | {
         /**
@@ -5631,12 +5612,31 @@ export interface Page {
          */
         seeLessTextBN: string;
         /**
-         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
+         * Pick an internal dynamic page to link to. External URLs are not allowed. When click on read more button it will navigate to its details page, specify that page here
          */
         linkTarget: string | Page;
         id?: string | null;
         blockName?: string | null;
         blockType: 'news';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * When ON, this block renders data from **Global → News and Blogs**.
+         *
+         * **Before enabling:** fill up the Global → News and Blogs data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'blogs-details';
       }
     | {
         /**
@@ -5652,22 +5652,22 @@ export interface Page {
          */
         titleBN: string;
         /**
-         * Used for direct jump links to this section (e.g., "vlog-section"). Required. No spaces. Use "-" to separate words (e.g., "vlog-section", not "vlog section").
-         */
-        sectionId: string;
-        /**
-         * When ON, this block renders data from **Global → Vlogs**.
+         * When ON, this block renders data from **Global → News and Blogs**.
          *
-         * **Before enabling:** fill up the Global → Vlogs data.
+         * **Before enabling:** fill up the Global → News and Blogs data.
          *
          * **Notes:**
          * • This block only stores presentation options (e.g., background color).
          * • All content comes from the single shared Global to keep pages in sync.
          */
         useSharedData: boolean;
+        /**
+         * Pick an internal dynamic page to link to. External URLs are not allowed. When click on a card it will navigate to its details page, specify that page here
+         */
+        linkTarget: string | Page;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'vlogs';
+        blockType: 'all-blogs-card';
       }
     | {
         /**
@@ -8297,22 +8297,14 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'blogs-details'?:
-          | T
-          | {
-              backgroundColor?: T;
-              useSharedData?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'all-blogs-card'?:
+        vlogs?:
           | T
           | {
               backgroundColor?: T;
               title?: T;
               titleBN?: T;
+              sectionId?: T;
               useSharedData?: T;
-              linkTarget?: T;
               id?: T;
               blockName?: T;
             };
@@ -8333,14 +8325,22 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        vlogs?:
+        'blogs-details'?:
+          | T
+          | {
+              backgroundColor?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'all-blogs-card'?:
           | T
           | {
               backgroundColor?: T;
               title?: T;
               titleBN?: T;
-              sectionId?: T;
               useSharedData?: T;
+              linkTarget?: T;
               id?: T;
               blockName?: T;
             };
@@ -9413,11 +9413,11 @@ export interface GlobalBlog {
      */
     newsLink?: string | null;
     /**
-     * If you featured a blog that means it will show on the homepage news and blog section. (exactly 2 must be selected)
+     * If you featured a blog that means it will show on the homepage news and blog section's `Left Side Grid`. (Exactly 2 items across the list must be selected as featured.)
      */
     isFeatured?: boolean | null;
     /**
-     * Use for the “Trending” area. Exactly 2 items across the list must be selected as trending.
+     * If you Trending a news that means it will show on the homepage news and blog section's `Right Side Trending Post`. (Exactly 2 items across the list must be selected as trending.)
      */
     isTrending?: boolean | null;
     createdAt?: string | null;
@@ -9485,7 +9485,7 @@ export interface GlobalVlog {
      */
     importantDateBN?: string | null;
     /**
-     * If you featured a blog that means it will show on the homepage news and blog section. (exactly 1 must be selected)
+     * If you featured a Vlog that means it will show on the homepage news and blog section's `Middle Video Grid`. (exactly 1 must be selected)
      */
     isFeatured?: boolean | null;
     /**

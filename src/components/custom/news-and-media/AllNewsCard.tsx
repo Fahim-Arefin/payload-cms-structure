@@ -96,7 +96,7 @@ function AllNewsCard({ data, index, length, block }: Props) {
       {/* index !== length - 1 */}
       {index !== length - 1 && (
         <div className="hidden lg:block absolute inset-x-0 -bottom-12 mx-auto w-full lg:w-[60%] xl:w-fit">
-          <img src="/assets/verticalline.png" alt="" className="w-full h-full" />
+          <img src="/assets/images/verticalline.png" alt="" className="w-full h-full" />
         </div>
       )}
     </div>

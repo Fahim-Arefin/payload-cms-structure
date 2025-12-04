@@ -98,7 +98,7 @@ function SearchNews({ bgColor, paddingOn = false, allContent, block }: Props) {
                 onClick={() => handleSearch(searchQuery)}
               >
                 <div className="w-[18px] md:w-5 lg:w-6 xl:w-7">
-                  <img src="/assets/icons/web/searchbar2.png" alt="" className="w-full h-full" />
+                  <img src="/assets/icons/searchbar2.png" alt="" className="w-full h-full" />
                 </div>
               </Button>
             </div>

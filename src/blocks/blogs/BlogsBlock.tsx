@@ -17,7 +17,7 @@ function BlogsBlock({ block }: Props) {
       ) : (
         <NoDataFound
           message="Please Turn On The Checkbox"
-          description={`In the admin panel, open the “${BLOGS_BLOCK_LABEL}” block and check the “Use shared Board of Directors (Global)” checkbox.`}
+          description={`In the admin panel, open the “${BLOGS_BLOCK_LABEL}” block and check the “Use shared News and Blogs (Global)” checkbox.`}
           bgColor={block?.backgroundColor || ''}
         />
       )}

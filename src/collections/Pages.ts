@@ -86,22 +86,82 @@ export const Pages: CollectionConfig = {
     { name: 'name', label: 'Name', type: 'text', required: true },
     {
       name: 'slug',
-      label: 'Slug (e.g. index , plans/individual , news-and-blogs , news-and-blogs/:slug)',
+      label: 'Slug',
       type: 'text',
       required: true,
       unique: true,
       admin: {
         position: 'sidebar',
-        description: 'for home page use `index`, for dynamic page use `:slug`',
+        description:
+          'for home page use `index`, for dynamic page use `:slug`, (e.g. index , plans, plans/individual , news-and-blogs , news-and-blogs/:slug)',
       },
+      // validate: (val: unknown) => {
+      //   const s = String(val ?? '').trim()
+      //   if (!s) return 'Slug is required'
+      //   if (s.startsWith('/') || s.endsWith('/')) return 'No leading/trailing slash'
+      //   if (s.includes('//')) return 'No double slashes'
+      //   return true
+      // },
       validate: (val: unknown) => {
-        const s = String(val ?? '').trim()
-        if (!s) return 'Slug is required'
-        if (s.startsWith('/') || s.endsWith('/')) return 'No leading/trailing slash'
-        if (s.includes('//')) return 'No double slashes'
+        const raw = String(val ?? '')
+        const trimmed = raw.trim()
+
+        // 1. Slug is required
+        if (!trimmed) return 'Slug is required'
+
+        // 4. No spaces leading or tailing
+        if (raw !== trimmed) {
+          return 'No leading or trailing spaces'
+        }
+
+        const s = trimmed
+
+        // 2. No leading/trailing slash
+        if (s.startsWith('/') || s.endsWith('/')) {
+          return 'No leading/trailing slash'
+        }
+
+        // 3. No double slashes
+        if (s.includes('//')) {
+          return 'No double slashes'
+        }
+
+        // 5. No spaces between words (use "-" instead)
+        if (/\s/.test(s)) {
+          return 'No spaces allowed. Use "-" to separate words.'
+        }
+
+        // 6. Dynamic route rules for ":slug"
+        // - ":" only at start or right after "/"
+        // - each dynamic segment must be exactly ":slug"
+        // - ":slug" must be followed by "/" or end
+        for (let i = 0; i < s.length; i++) {
+          if (s[i] === ':') {
+            // ":" must be at start or immediately after "/"
+            if (i > 0 && s[i - 1] !== '/') {
+              return '":" is only allowed immediately after "/". Example: "news/:slug".'
+            }
+
+            // Must be exactly ":slug"
+            if (s.slice(i, i + 5) !== ':slug') {
+              return 'Dynamic segments must use ":slug" exactly.'
+            }
+
+            // After "slug" must be "/" or end of string
+            const after = s[i + 5]
+            if (after && after !== '/') {
+              return '":slug" must be followed by "/" or end of slug.'
+            }
+
+            // Skip over "slug" (for-loop will add +1 more)
+            i += 4
+          }
+        }
+
         return true
       },
     },
+
     // {
     //   name: 'publish',
     //   type: 'checkbox',
@@ -177,10 +237,11 @@ export const Pages: CollectionConfig = {
 
         // news and media
         AllBLogsSectionSchema,
+        AllVLogsSectionSchema,
+        AllNewsSectionSchema,
+        // news and media details page
         BLogDetailsSectionSchema,
         AllBLogsCardSchema,
-        AllNewsSectionSchema,
-        AllVLogsSectionSchema,
 
         //careerpage
         // CareerIntroSchema,

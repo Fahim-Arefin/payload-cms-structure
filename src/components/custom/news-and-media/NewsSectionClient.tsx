@@ -1,11 +1,10 @@
 'use client'
+import AllNewsAccordianSection from '@/components/custom/news-and-media/AllNewsAccordianSection'
+import { GLOBAL_BLOGS_BLOCK_LABEL } from '@/lib/constants'
 import { GlobalBlog } from '@/payload-types'
 import { AllNewsSectionType } from '@/types/payloadCustomTypes'
-import AllNewsAccordianSection from '@/components/custom/news-and-media/AllNewsAccordianSection'
-import React from 'react'
-import HashScroller from './HashScroller'
 import NoDataFound from '../shared/NoDataFound'
-import { BLOGS_BLOCK_LABEL } from '@/lib/constants'
+import HashScroller from './HashScroller'
 
 type Props = {
   data: GlobalBlog
@@ -28,8 +27,8 @@ function NewsSectionClient({ data, block }: Props) {
         </div>
       ) : (
         <NoDataFound
-          message="No News Data Found"
-          description={`In the admin panel, open the “${BLOGS_BLOCK_LABEL}” block and give some News data.`}
+          message="No News Category Found"
+          description={`In the admin panel, open the Global “${GLOBAL_BLOGS_BLOCK_LABEL}” collection and give some News data.`}
           bgColor={block?.backgroundColor || ''}
         />
       )}

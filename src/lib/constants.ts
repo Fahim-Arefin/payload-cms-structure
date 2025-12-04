@@ -68,6 +68,7 @@ export const PREMIUM_CALCULATOR_PAGE = 'Premium Calculator Page'
 export const PURCHASE_NOW_PAGE = 'Purchase Now Page'
 export const SUPPORT_PAGE = 'Support Page'
 export const NEWS_AND_BLOG_PAGE = 'News And Blogs Page'
+export const NEWS_AND_BLOG_DETAILS_PAGE = 'News And Blogs Details Page'
 export const CAREER_PAGE = 'Career Page'
 
 // home page constants

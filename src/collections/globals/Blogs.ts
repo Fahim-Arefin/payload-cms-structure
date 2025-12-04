@@ -525,7 +525,7 @@ const GlobalBlogs: GlobalConfig = {
 
         const trendingCount = list.reduce((n, it) => n + (it && (it as any).isTrending ? 1 : 0), 0)
         if (trendingCount !== 2) {
-          return 'Exactly 2 blogs must be marked as trending. Please adjust to exactly 2.'
+          return 'Exactly 2 News must be marked as trending. Please adjust to exactly 2.'
         }
 
         return true
@@ -639,7 +639,7 @@ const GlobalBlogs: GlobalConfig = {
             {
               name: 'newsLinkBtnText',
               type: 'text',
-              label: 'Button Text',
+              label: 'News Link Button Text',
               maxLength: CTA_TEXT_MAX,
               validate: validateCTAEnglishText,
               admin: { width: '50%', description: `Max ${CTA_TEXT_MAX} chars.` },
@@ -647,7 +647,7 @@ const GlobalBlogs: GlobalConfig = {
             {
               name: 'newsLinkBtnTextBN',
               type: 'text',
-              label: 'বাটনের টেক্সট (বাংলা)',
+              label: 'নিউজের লিঙ্ক বাটনের টেক্সট (বাংলা)',
               maxLength: CTA_TEXT_MAX,
               validate: validateCTABanglaText,
               admin: { width: '50%', description: `সর্বোচ্চ ${bnNum(CTA_TEXT_MAX)} অক্ষর।` },
@@ -668,29 +668,28 @@ const GlobalBlogs: GlobalConfig = {
             {
               name: 'isFeatured',
               type: 'checkbox',
-              label: 'Feature this blog',
+              label: 'Mark as Featured (For Blogs)',
               defaultValue: false,
               admin: {
                 width: '50%',
                 description:
-                  'If you featured a blog that means it will show on the homepage news and blog section. (exactly 2 must be selected)',
+                  "If you featured a blog that means it will show on the homepage news and blog section's `Left Side Grid`. (Exactly 2 items across the list must be selected as featured.)",
               },
             },
             // trending
             {
               name: 'isTrending',
               type: 'checkbox',
-              label: 'Mark as Trending',
+              label: 'Mark as Trending (For News)',
               defaultValue: false,
               admin: {
                 width: '50%',
                 description:
-                  'Use for the “Trending” area. Exactly 2 items across the list must be selected as trending.',
+                  "If you Trending a news that means it will show on the homepage news and blog section's `Right Side Trending Post`. (Exactly 2 items across the list must be selected as trending.)",
               },
             },
           ],
         },
-
         // Per-item timestamps (maintained via hooks below)
         { name: 'createdAt', type: 'date', admin: { readOnly: true } },
         { name: 'updatedAt', type: 'date', admin: { readOnly: true } },

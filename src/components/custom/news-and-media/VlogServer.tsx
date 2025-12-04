@@ -18,7 +18,7 @@ async function VlogServer({ block }: Props) {
   const data = await getGlobalCached<GlobalVlog>(GLOBAL_VLOGS_SLUG_AND_TAG, 2, VLOGS_SLUG_AND_TAG)
   return (
     <div>
-      {data ? (
+      {data && data?.vlogs && data?.vlogs?.length > 0 ? (
         <VlogClient data={data} block={block} />
       ) : (
         <NoDataFound

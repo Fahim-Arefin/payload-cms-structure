@@ -22,7 +22,7 @@ async function AllBlogsCardServer({ block }: Props) {
   )
   return (
     <div>
-      {data ? (
+      {data && data?.blogs && data?.blogs?.length > 0 ? (
         <AllBlogsCardClient data={data} block={block} />
       ) : (
         <NoDataFound
