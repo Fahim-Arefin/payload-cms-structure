@@ -65,6 +65,10 @@ import {
   DETAILS_CONTENT_SLUG_AND_TAG,
   LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG,
   LEARN_MORE_VIDEO_CONTENT_SLUG_AND_TAG,
+  LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
+  MICROINSURANCE_SERVICE_SLUG_AND_TAG,
+  MICRO_INSURANCE_MATTERS_SLUG_AND_TAG,
+  MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -411,4 +415,26 @@ export type LearnMoreBlogContentBlockType = Extract<
 export type LearnMoreVideoContentBlockType = Extract<
   CustomTabBlockType['tabs'][number]['content'][number],
   { blockType: typeof LEARN_MORE_VIDEO_CONTENT_SLUG_AND_TAG }
+>
+
+//learning media section
+export type LearningMediaSectionBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof LEARNING_MEDIA_SECTION_SLUG_AND_TAG }
+>
+
+// microinsurance service page
+export type MicroinsuranceServiceBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof MICROINSURANCE_SERVICE_SLUG_AND_TAG }
+>
+
+export type MicroinsuranceMattersBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof MICRO_INSURANCE_MATTERS_SLUG_AND_TAG }
+>
+
+export type StrategicPartnersBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG }
 >

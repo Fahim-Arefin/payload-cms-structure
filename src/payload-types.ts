@@ -511,6 +511,105 @@ export interface Page {
       }
     | {
         /**
+         * Hex color for individual cards in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        cardBg?: string | null;
+        /**
+         * Main heading. Max 40 characters.
+         */
+        heading: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        headingBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Heading. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই হেডিং-এর ভিতর হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Optional. Max 24 characters.
+         */
+        plansButtonText?: string | null;
+        /**
+         * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        plansButtonTextBN?: string | null;
+        /**
+         * Optional. Max 24 characters.
+         */
+        plansSecondaryButtonText?: string | null;
+        /**
+         * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        plansSecondaryButtonTextBN?: string | null;
+        /**
+         * Add 3–5 plans to feature.
+         */
+        plans: {
+          /**
+           * Plan icon. Upload & crop a square (1:1).
+           */
+          icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
+          /**
+           * Plan image. Upload & crop to ~451:350 (≈1.2886). Keep subject centered.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Plan title. Max 20 characters.
+           */
+          title: string;
+          /**
+           * প্ল্যানের শিরোনাম। সর্বোচ্চ ২০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Brief description of the plan. Max 300 characters.
+           */
+          description: string;
+          /**
+           * প্ল্যানের সংক্ষিপ্ত বর্ণনা। সর্বোচ্চ ৩০০ অক্ষর।
+           */
+          descriptionBN: string;
+          /**
+           * Add 2–8 bullet items describing the plan.
+           */
+          listItems: {
+            listItemText: string;
+            listItemTextBN: string;
+            id?: string | null;
+          }[];
+          /**
+           * Text shown on the call-to-action button. Max 24 characters.
+           */
+          buttonText?: string | null;
+          /**
+           * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+           */
+          buttonTextBN?: string | null;
+          /**
+           * Pick an internal Page to link to. External URLs are not allowed. When clicking this button it will navigate to that page.
+           */
+          buttonLink?: (string | null) | Page;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'microinsurance-service';
+      }
+    | {
+        /**
          * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         backgroundColor?: string | null;
@@ -4840,6 +4939,156 @@ export interface Page {
         blockType: 'multistage-plan';
       }
     | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Main heading (e.g., "Why Microinsurance Matters?"). Max 80 characters.
+         */
+        sectionTitle: string;
+        /**
+         * প্রধান শিরোনাম (যেমন, "কেন মাইক্রোইন্স্যুরেন্স গুরুত্বপূর্ণ ?")। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        sectionTitleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Section Title (e.g., "Microinsurance"). Max 40 characters.
+         */
+        highlightedSectionTitle?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই সেকশন শিরোনামের ভেতরে হুবহু থাকতে হবে (যেমন, "মাইক্রোইন্স্যুরেন্স")। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedSectionTitleBN?: string | null;
+        /**
+         * Main explanatory copy under the heading (EN). Use short paragraphs and bullet points if needed.
+         */
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * শিরোনামের নিচে মূল বর্ণনা (বাংলা)। প্রয়োজন হলে ছোট প্যারাগ্রাফ ও বুলেট পয়েন্ট ব্যবহার করতে পারেন।
+         */
+        descriptionBN: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * Add 1–6 benefit items (e.g., Coverage for sudden loss of life, Permanent Disability, Health Care Support).
+         */
+        items: {
+          /**
+           * Use this to combine title + description (e.g., bold heading then paragraph).
+           */
+          itemDescription: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          /**
+           * শিরোনাম + বর্ণনা একসাথে লিখুন (যেমন, শিরোনাম bold + নিচে বাংলা বর্ণনা)।
+           */
+          itemDescriptionBN: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'microinsurance-matters';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Main heading (e.g., "Our Strategic Partners"). Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম (যেমন, "আমাদের স্ট্রাটেজিক পার্টনারস")। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title (e.g., "Strategic Partners"). Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই শিরোনামের ভেতরে হুবহু থাকতে হবে (যেমন, "স্ট্রাটেজিক পার্টনারস")। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Add 3–12 partners (e.g., NGOs, Cooperative Society, Banks, Multipurpose, NBFIs).
+         */
+        partners: {
+          /**
+           * Upload & crop the partner logo (square 1:1 recommended).
+           */
+          logo: string | Media;
+          logoOriginal?: (string | null) | Media;
+          pendingLogoOriginal?: string | null;
+          pendingLogoCrop?: string | null;
+          logoBlurDataURL?: string | null;
+          /**
+           * Short label (e.g., "NGOs", "Banks"). Max 60 characters.
+           */
+          name: string;
+          /**
+           * সংক্ষিপ্ত নাম (যেমন, "এনজিও", "ব্যাংক"). সর্বোচ্চ ৬০ অক্ষর।
+           */
+          nameBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'microinsurance-strategic-partners';
+      }
+    | {
         uploadSessionId?: string | null;
         /**
          * Add 1–4 cards. Each card has text (EN/BN), rich text description (EN/BN), and a background color.
@@ -6153,6 +6402,145 @@ export interface Page {
         blockName?: string | null;
         blockType: 'career-processing';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        bgColor?: string | null;
+        /**
+         * Text under each social grid (Instagram/Facebook/LinkedIn). Default "Follow". Max 24 characters.
+         */
+        buttonText?: string | null;
+        /**
+         * প্রতি সোশ্যাল গ্রিডের নিচে দেখানো টেক্সট। ডিফল্ট "ফলো করুন"। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        buttonTextBN?: string | null;
+        /**
+         * Instagram logo/icon. Upload & crop a square (1:1).
+         */
+        instagramIcon: string | Media;
+        instagramIconOriginal?: (string | null) | Media;
+        pendingInstagramIconOriginal?: string | null;
+        pendingInstagramIconCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        instagramIconBlurDataURL?: string | null;
+        /**
+         * Add 3–9 images to show in the Instagram grid.
+         */
+        instagramImages: {
+          /**
+           * Grid image. Square / 1:1 works best.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          id?: string | null;
+        }[];
+        /**
+         * Optional. Full Instagram profile URL (e.g., https://instagram.com/yourpage). Max 200 characters.
+         */
+        instagramLinkText?: string | null;
+        /**
+         * Facebook logo/icon. Upload & crop a square (1:1).
+         */
+        facebookIcon: string | Media;
+        facebookIconOriginal?: (string | null) | Media;
+        pendingFacebookIconOriginal?: string | null;
+        pendingFacebookIconCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        facebookIconBlurDataURL?: string | null;
+        /**
+         * Add 3–9 images to show in the Facebook grid.
+         */
+        facebookImages: {
+          /**
+           * Grid image. Square / 1:1 works best.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          id?: string | null;
+        }[];
+        /**
+         * Optional. Full Facebook page URL (e.g., https://facebook.com/yourpage). Max 200 characters.
+         */
+        facebookLinkText?: string | null;
+        /**
+         * LinkedIn logo/icon. Upload & crop a square (1:1).
+         */
+        linkedinIcon: string | Media;
+        linkedinIconOriginal?: (string | null) | Media;
+        pendingLinkedinIconOriginal?: string | null;
+        pendingLinkedinIconCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        linkedinIconBlurDataURL?: string | null;
+        /**
+         * Add 3–9 images to show in the LinkedIn grid.
+         */
+        linkedinImages: {
+          /**
+           * Grid image. Square / 1:1 works best.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          id?: string | null;
+        }[];
+        /**
+         * Optional. Full LinkedIn page URL (e.g., https://linkedin.com/company/yourpage). Max 200 characters.
+         */
+        linkedinLinkText?: string | null;
+        /**
+         * YouTube logo/icon. Upload & crop to a wide rectangle (e.g., 16:9).
+         */
+        youtubeIcon: string | Media;
+        youtubeIconOriginal?: (string | null) | Media;
+        pendingYoutubeIconOriginal?: string | null;
+        pendingYoutubeIconCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        youtubeIconBlurDataURL?: string | null;
+        /**
+         * Short copy above the input (e.g., "Lorem ipsum dolor sit amet"). Max 120 characters.
+         */
+        youtubeLeadingText: string;
+        /**
+         * ইনপুটের উপরে ছোট বাক্য। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        youtubeLeadingTextBN: string;
+        /**
+         * Placeholder inside the email/input field (e.g., "Lorem ipsum"). Max 80 characters.
+         */
+        youtubeInputPlaceholder: string;
+        /**
+         * ইনপুট ফিল্ডের ভেতরের প্লেসহোল্ডার টেক্সট। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        youtubeInputPlaceholderBN: string;
+        /**
+         * Button label under the input. Default "Subscribe". Max 24 characters.
+         */
+        youtubeButtonText?: string | null;
+        /**
+         * ইনপুটের নিচে থাকা বাটনের লেখা। সর্বোচ্চ ২৪ অক্ষর; ডিফল্ট "সাবস্ক্রাইব করুন"।
+         */
+        youtubeButtonTextBN?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'learning-media-section';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -6468,6 +6856,50 @@ export interface PagesSelect<T extends boolean = true> {
                           videoLink?: T;
                           id?: T;
                         };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'microinsurance-service'?:
+          | T
+          | {
+              cardBg?: T;
+              heading?: T;
+              headingBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              plansButtonText?: T;
+              plansButtonTextBN?: T;
+              plansSecondaryButtonText?: T;
+              plansSecondaryButtonTextBN?: T;
+              plans?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    listItems?:
+                      | T
+                      | {
+                          listItemText?: T;
+                          listItemTextBN?: T;
+                          id?: T;
+                        };
+                    buttonText?: T;
+                    buttonTextBN?: T;
+                    buttonLink?: T;
                     id?: T;
                   };
               id?: T;
@@ -8032,6 +8464,49 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'microinsurance-matters'?:
+          | T
+          | {
+              backgroundColor?: T;
+              sectionTitle?: T;
+              sectionTitleBN?: T;
+              highlightedSectionTitle?: T;
+              highlightedSectionTitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              items?:
+                | T
+                | {
+                    itemDescription?: T;
+                    itemDescriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'microinsurance-strategic-partners'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              partners?:
+                | T
+                | {
+                    logo?: T;
+                    logoOriginal?: T;
+                    pendingLogoOriginal?: T;
+                    pendingLogoCrop?: T;
+                    logoBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'purchase-form'?:
           | T
           | {
@@ -8473,6 +8948,74 @@ export interface PagesSelect<T extends boolean = true> {
                     imageBlurDataURL?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'learning-media-section'?:
+          | T
+          | {
+              bgColor?: T;
+              buttonText?: T;
+              buttonTextBN?: T;
+              instagramIcon?: T;
+              instagramIconOriginal?: T;
+              pendingInstagramIconOriginal?: T;
+              pendingInstagramIconCrop?: T;
+              instagramIconBlurDataURL?: T;
+              instagramImages?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    id?: T;
+                  };
+              instagramLinkText?: T;
+              facebookIcon?: T;
+              facebookIconOriginal?: T;
+              pendingFacebookIconOriginal?: T;
+              pendingFacebookIconCrop?: T;
+              facebookIconBlurDataURL?: T;
+              facebookImages?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    id?: T;
+                  };
+              facebookLinkText?: T;
+              linkedinIcon?: T;
+              linkedinIconOriginal?: T;
+              pendingLinkedinIconOriginal?: T;
+              pendingLinkedinIconCrop?: T;
+              linkedinIconBlurDataURL?: T;
+              linkedinImages?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    id?: T;
+                  };
+              linkedinLinkText?: T;
+              youtubeIcon?: T;
+              youtubeIconOriginal?: T;
+              pendingYoutubeIconOriginal?: T;
+              pendingYoutubeIconCrop?: T;
+              youtubeIconBlurDataURL?: T;
+              youtubeLeadingText?: T;
+              youtubeLeadingTextBN?: T;
+              youtubeInputPlaceholder?: T;
+              youtubeInputPlaceholderBN?: T;
+              youtubeButtonText?: T;
+              youtubeButtonTextBN?: T;
               id?: T;
               blockName?: T;
             };

@@ -61,6 +61,10 @@ import { mediaHooks } from '@/utils/media/mediaHooks'
 import { revalidateTag } from 'next/cache'
 import { type CollectionConfig } from 'payload'
 import { APIError } from '@/lib/apiError'
+import MicroinsuranceServiceSchema from '@/blocks/microinsuranceService/schema'
+import WhyMicroInsuranceMattersSchema from '@/blocks/microinsuranceMatters/schema'
+import MicroInsuranceStrategicPartnersSchema from '@/blocks/strategicPartners/schema'
+import LearningMediaSectionSchema from '@/blocks/learningPlatform/schema'
 
 // ✅ always spread a safe object
 const safeMediaHooks: NonNullable<CollectionConfig['hooks']> = mediaHooks ?? {}
@@ -179,6 +183,7 @@ export const Pages: CollectionConfig = {
         HeroSchema,
         // common section
         LifeInsuranceSimplifiedSchema,
+        MicroinsuranceServiceSchema,
         ContactUsSchema,
         ValuesThatShapeUsSchema,
         AgentVisionSchema,
@@ -222,6 +227,9 @@ export const Pages: CollectionConfig = {
         CorporateInfoSchema,
         //multistage page
         MultiStagePlanSchema,
+        // micro insurance
+        WhyMicroInsuranceMattersSchema,
+        MicroInsuranceStrategicPartnersSchema,
         // purchase now page
         PurchaseFormSchema,
         // premium cal page,
@@ -244,11 +252,13 @@ export const Pages: CollectionConfig = {
         AllBLogsCardSchema,
 
         //careerpage
-        // CareerIntroSchema,
         CareerSwiperSchema,
         CareerResourcesSchema,
         CareerOpeningSchema,
         CareerProcessingSchema,
+
+        // Learn more page
+        LearningMediaSectionSchema,
       ],
     },
   ],
