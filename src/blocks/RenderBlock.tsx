@@ -68,6 +68,7 @@ import {
   MICROINSURANCE_SERVICE_SLUG_AND_TAG,
   MICRO_INSURANCE_MATTERS_SLUG_AND_TAG,
   MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG,
+  HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -123,6 +124,7 @@ import MicroinsuranceServiceBlock from './microinsuranceService/MicroinsuranceSe
 import MicroinsuranceMattersBlock from './microinsuranceMatters/MicroinsuranceMattersBlock'
 import StrategicPartnersBlock from './strategicPartners/StrategicPartnersBlock'
 import LearningPlatformBlock from './learningPlatform/LearningPlatformBlock'
+import SearchBarBlock from './SearchBar/SearchBarBlock'
 
 type Params = Record<string, string>
 
@@ -286,6 +288,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <MicroinsuranceMattersBlock key={block.id} block={block} params={params} />
     case MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG:
       return <StrategicPartnersBlock key={block.id} block={block} params={params} />
+    case HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG:
+      return <SearchBarBlock key={block.id} block={block} params={params} />
 
     default:
       return null

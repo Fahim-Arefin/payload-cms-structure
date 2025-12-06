@@ -3452,6 +3452,15 @@ export interface Page {
          * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
          */
         backgroundColor?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'search-bar';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
         /**
          * Short label above the main title. Max 40 characters.
          */
@@ -7856,6 +7865,13 @@ export interface PagesSelect<T extends boolean = true> {
                     pointsBN?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'search-bar'?:
+          | T
+          | {
+              backgroundColor?: T;
               id?: T;
               blockName?: T;
             };

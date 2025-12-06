@@ -69,6 +69,7 @@ import {
   MICROINSURANCE_SERVICE_SLUG_AND_TAG,
   MICRO_INSURANCE_MATTERS_SLUG_AND_TAG,
   MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG,
+  HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -437,4 +438,9 @@ export type MicroinsuranceMattersBlockType = Extract<
 export type StrategicPartnersBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG }
+>
+
+export type SearchBarBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG }
 >

@@ -65,6 +65,7 @@ import MicroinsuranceServiceSchema from '@/blocks/microinsuranceService/schema'
 import WhyMicroInsuranceMattersSchema from '@/blocks/microinsuranceMatters/schema'
 import MicroInsuranceStrategicPartnersSchema from '@/blocks/strategicPartners/schema'
 import LearningMediaSectionSchema from '@/blocks/learningPlatform/schema'
+import SearchBarSchema from '@/blocks/SearchBar/schema'
 
 // ✅ always spread a safe object
 const safeMediaHooks: NonNullable<CollectionConfig['hooks']> = mediaHooks ?? {}
@@ -201,6 +202,7 @@ export const Pages: CollectionConfig = {
         CustomTabSchema,
         CustomAccordionSchema,
         // home page unique
+        SearchBarSchema,
         WhyChooseUsSchema,
         FeaturedPlansSchema,
         PremiumCalculatorSchema,

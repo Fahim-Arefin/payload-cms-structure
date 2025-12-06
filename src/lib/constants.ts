@@ -80,6 +80,11 @@ export const HOME_PAGE_HERO_BLOCK_LABEL = 'Hero (Large)'
 export const HOME_PAGE_HERO_CACHE_KEY = 'hero-data'
 export const HOME_PAGE_HERO_BLOCK_THUMBNAIL_URL = `${folder}/hero-block-thumbnail.png`
 
+export const HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG = 'search-bar'
+export const HOME_PAGE_SEARCH_BAR_BLOCK_LABEL = 'Search Bar'
+export const HOME_PAGE_SEARCH_BAR_CACHE_KEY = 'search-bar-data'
+export const HOME_PAGE_SEARCH_BAR_BLOCK_THUMBNAIL_URL = `${folder}/search-bar-block-thumbnail.png`
+
 // Link Button
 export const HERO_LINK_BUTTON_SLUG_AND_TAG = 'pageLink'
 export const HERO_LINK_BUTTON_BLOCK_LABEL = 'Link Button'
