@@ -7,6 +7,8 @@ import { useEffect, useMemo, useState } from 'react'
 import SupportTabContent from './SupportTabContent'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
 import { SupportMapTabBlockType } from '@/types/payloadCustomTypes'
+import LocalizedRichText from '../shared/LocalizedRichText'
+import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 
 type Props = {
   config: SupportMapTabBlockType // full block from Payload
@@ -29,7 +31,8 @@ type TabItemFromBlock = {
   secondaryLabelColor?: string
 }
 
-export function MapTabSection({ config, data, initialTab, bgColor, onTabChange }: Props) { // NEW (accept onTabChange)
+export function MapTabSection({ config, data, initialTab, bgColor, onTabChange }: Props) {
+  // NEW (accept onTabChange)
   const lang = useSSRLanguage()
 
   // Normalize & narrow the tabItems to the strict union
@@ -48,7 +51,7 @@ export function MapTabSection({ config, data, initialTab, bgColor, onTabChange }
 
   const allowedValues = useMemo<('hospitals' | 'branches')[]>(
     () => tabs.map((t) => t.value),
-    [tabs]
+    [tabs],
   ) // NEW
 
   const firstValue = tabs[0]?.value
@@ -74,8 +77,9 @@ export function MapTabSection({ config, data, initialTab, bgColor, onTabChange }
   }, [allowedValues]) // NEW
 
   // When user switches tabs, update hash + bubble up
-  const handleTabChange = (val: string) => { // NEW
-    const v = (val as 'hospitals' | 'branches')
+  const handleTabChange = (val: string) => {
+    // NEW
+    const v = val as 'hospitals' | 'branches'
     setActiveTab(v)
     if (typeof window !== 'undefined' && window.location.hash !== `#${v}`) {
       history.replaceState(null, '', `#${v}`)
@@ -86,6 +90,17 @@ export function MapTabSection({ config, data, initialTab, bgColor, onTabChange }
   // Colors from schema (fallbacks preserved)
   const primaryColor = config?.primaryLabelColor || '#ED7125'
   const secondaryColor = config?.secondaryLabelColor || '#9C8639'
+
+  // ---------- Top content presence checks ----------
+  const hasTopTitleLike =
+    (config?.topTitle ?? '').trim().length > 0 ||
+    (config?.topTitleBN ?? '').trim().length > 0 ||
+    (config?.highlightedTopTitle ?? '').trim().length > 0 ||
+    (config?.highlightedTopTitleBN ?? '').trim().length > 0
+
+  const hasTopDescription = config?.topDescription != null || config?.topDescriptionBN != null
+
+  const showTopSection = hasTopTitleLike || hasTopDescription
 
   return (
     <>
@@ -99,7 +114,34 @@ export function MapTabSection({ config, data, initialTab, bgColor, onTabChange }
         )}
         style={bgColor ? { backgroundColor: bgColor } : undefined}
       >
-        <Tabs value={activeTab} onValueChange={handleTabChange}> {/* NEW */}
+        {/* --------- Top Title + Description (optional) ---------- */}
+        {showTopSection && (
+          <div className="mb-6 md:mb-8 lg:mb-10">
+            {hasTopTitleLike && (
+              <h3 className="global-h2 uppercase font-bold text-[#434343]">
+                <LocalizedHighlighted
+                  textEn={config?.topTitle ?? ''}
+                  textBn={config?.topTitleBN ?? ''}
+                  highlightEn={config?.highlightedTopTitle ?? ''}
+                  highlightBn={config?.highlightedTopTitleBN ?? ''}
+                  highlightClassName="text-[#ED7125]"
+                />
+              </h3>
+            )}
+
+            {hasTopDescription && (
+              <div
+                className={`global-span text-[#3A3A3A] font-[350] 
+                       ${(config?.topTitle || config?.topTitleBN) && (config?.highlightedTopTitle || config?.highlightedTopTitleBN) ? `mt-2 xl:mt-4` : ''}`}
+              >
+                <LocalizedRichText en={config?.topDescription} bn={config?.topDescriptionBN} />
+              </div>
+            )}
+          </div>
+        )}
+        <Tabs value={activeTab} onValueChange={handleTabChange}>
+          {' '}
+          {/* NEW */}
           <div
             className={cn(
               'relative w-full border-b border-[#434343] md:py-[12px] bg-white',
