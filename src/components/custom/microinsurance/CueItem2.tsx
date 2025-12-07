@@ -49,11 +49,10 @@ export default function CueItem2({ card, data, index, bg }: Props) {
   const TopHeader = (
     <div
       style={{ backgroundColor: data?.cardBg || '#f6eddd' }}
-      className={`z-20  text-white lg:text-[#404041] 
+      className={`z-20 text-[#404041] 
         p-6 sm:p-8 md:p-10 lg:p-4 xl:p-8 
         ${index % 2 === 0 ? 'order-1 rounded-t-2xl' : 'order-2 rounded-b-2xl '}
         `}
-
     >
       <div className="relative h-[80px] w-[80px] lg:h-[50px] lg:w-[50px] xl:h-[60px] xl:w-[60px] 2xl:h-[80px] 2xl:w-[80px]">
         {typeof card.icon === 'object' && (card.icon?.url as string) && (

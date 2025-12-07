@@ -4,7 +4,7 @@
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useRef } from 'react'
 import GeneralFaq from './GeneralFaq'
 import FormsTable from './FormsTable'
 import type { SupportFaqTabBlockType } from '@/types/payloadCustomTypes'
@@ -15,12 +15,13 @@ type Props = {
   onTabChange?: (val: 'general' | 'form') => void
 }
 
-const TAB_GENERAL = 'general' as const
-const TAB_FORM = 'form' as const
+const TAB_GENERAL = 'general'
+const TAB_FORM = 'form'
 type TabValue = typeof TAB_GENERAL | typeof TAB_FORM
 
 export function FaqTabSection({ block, initialTab, onTabChange }: Props) {
   const lang = useSSRLanguage()
+  const sectionRef = useRef<HTMLDivElement>(null)
 
   // tabs from schema, values are guaranteed: 'general' | 'form'
   const tabs = useMemo(
@@ -42,39 +43,95 @@ export function FaqTabSection({ block, initialTab, onTabChange }: Props) {
 
   const allowedValues = useMemo<TabValue[]>(() => tabs.map((t) => t.value), [tabs])
 
-  // choose default: hash ➜ initialTab ➜ first tab ➜ 'general'
-  const deriveDefault = (): TabValue => {
-    const hash = (typeof window !== 'undefined' ? window.location.hash.replace(/^#/, '') : '') as
-      | TabValue
-      | ''
-    if (hash && (allowedValues as string[]).includes(hash)) return hash
-    if (initialTab && (allowedValues as string[]).includes(initialTab)) return initialTab
-    return (tabs[0]?.value ?? TAB_GENERAL) as TabValue
+  // Get hash from URL
+  const getHashFromUrl = (): TabValue | null => {
+    if (typeof window === 'undefined') return null
+    const hash = window.location.hash.replace(/^#/, '').toLowerCase()
+    if (hash === TAB_GENERAL || hash === TAB_FORM) {
+      return hash as TabValue
+    }
+    return null
   }
 
-  const [activeTab, setActiveTab] = useState<TabValue>(deriveDefault)
+  // Determine initial tab value
+  const getInitialTab = (): TabValue => {
+    const hashValue = getHashFromUrl()
+    if (hashValue && allowedValues.includes(hashValue)) {
+      return hashValue
+    }
+    
+    if (initialTab && allowedValues.includes(initialTab)) {
+      return initialTab
+    }
+    
+    if (tabs.length > 0 && tabs[0]?.value) {
+      return tabs[0].value
+    }
+    
+    return TAB_GENERAL
+  }
 
+  const [activeTab, setActiveTab] = useState<TabValue>(getInitialTab)
+
+  // Scroll to section
+  const scrollToSection = () => {
+    if (sectionRef.current) {
+      const offset = 80 // Adjust this value based on your header height
+      const elementPosition = sectionRef.current.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
+  // Handle initial load with hash
   useEffect(() => {
-    // react to external hash changes
-    const applyHash = () => {
-      const raw = window.location.hash.replace(/^#/, '') as TabValue | ''
-      if (raw && (allowedValues as string[]).includes(raw) && raw !== activeTab) {
-        setActiveTab(raw as TabValue)
-        onTabChange?.(raw as TabValue)
+    const hashValue = getHashFromUrl()
+    if (hashValue && allowedValues.includes(hashValue)) {
+      setActiveTab(hashValue)
+      onTabChange?.(hashValue)
+      
+      // Scroll after a short delay to ensure content is rendered
+      setTimeout(() => {
+        scrollToSection()
+      }, 100)
+    }
+  }, []) // Run only on mount
+
+  // Handle hash changes from browser navigation
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hashValue = getHashFromUrl()
+      if (hashValue && allowedValues.includes(hashValue)) {
+        setActiveTab(hashValue)
+        onTabChange?.(hashValue)
+        scrollToSection()
       }
     }
-    window.addEventListener('hashchange', applyHash)
-    return () => window.removeEventListener('hashchange', applyHash)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allowedValues, activeTab, onTabChange])
 
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [allowedValues, onTabChange])
+
+  // Handle user clicking tabs
   const handleTabChange = (val: string) => {
-    const v = (val === TAB_FORM ? TAB_FORM : TAB_GENERAL) as TabValue
-    setActiveTab(v)
-    if (typeof window !== 'undefined' && window.location.hash !== `#${v}`) {
-      history.replaceState(null, '', `#${v}`)
+    const newTab = val as TabValue
+    
+    if (!allowedValues.includes(newTab)) return
+    
+    setActiveTab(newTab)
+    
+    if (typeof window !== 'undefined') {
+      const currentHash = window.location.hash.replace(/^#/, '')
+      if (currentHash !== newTab) {
+        window.history.replaceState(null, '', `#${newTab}`)
+      }
     }
-    onTabChange?.(v)
+    
+    onTabChange?.(newTab)
   }
 
   const renderLabel = (t: { label: string; labelBN?: string | null }) =>
@@ -83,6 +140,7 @@ export function FaqTabSection({ block, initialTab, onTabChange }: Props) {
   return (
     <>
       <div
+        ref={sectionRef}
         className="px-5 pt-12 
            md:px-24 md:pt-[40px] 
            lg:px-[130px]  lg:pt-[50px] 
@@ -154,10 +212,6 @@ export function FaqTabSection({ block, initialTab, onTabChange }: Props) {
         />
       ) : (
         <FormsTable
-          // forms={(block?.forms ?? []).map((f: any) => ({
-          //   title: f?.title ?? '',
-          //   titleBN: f?.titleBN ?? null,
-          // }))}
           forms={block?.forms}
           buttonTextEn={block?.formsButtonText || 'Download'}
           buttonTextBn={block?.formsButtonTextBN || 'ডাউনলোড'}
