@@ -4,6 +4,7 @@ import {
   LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
   LEARNING_MEDIA_SECTION_BLOCK_LABEL,
   LEARNING_MEDIA_SECTION_BLOCK_THUMBNAIL_URL,
+  LEARN_MORE_PAGE,
   // HOME_PAGE, // if you want to group it later, uncomment
 } from '@/lib/constants'
 import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
@@ -66,7 +67,7 @@ const LearningMediaSectionSchema: Block = {
     plural: LEARNING_MEDIA_SECTION_BLOCK_LABEL,
   },
   admin: {
-    // group: HOME_PAGE,
+    group: LEARN_MORE_PAGE,
   },
   imageURL: LEARNING_MEDIA_SECTION_BLOCK_THUMBNAIL_URL,
   imageAltText: `${LEARNING_MEDIA_SECTION_BLOCK_LABEL} preview`,
@@ -282,7 +283,7 @@ const LearningMediaSectionSchema: Block = {
       fieldName: 'youtubeIcon',
       label: 'YouTube Icon',
       description: 'YouTube logo/icon. Upload & crop to a wide rectangle (e.g., 16:9).',
-      aspectRatio: 1.42/1,
+      aspectRatio: 1.42 / 1,
       quality: 0.95,
       maxKB: 120,
       ownerCollection: LEARNING_MEDIA_SECTION_SLUG_AND_TAG as any,
