@@ -43,6 +43,7 @@ import {
   MICROINSURANCE_SERVICE_SLUG_AND_TAG,
   MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG,
   LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
+  SUPPORT_FAQ_TAB_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -419,6 +420,12 @@ export const mediaHooks = withMediaLifecycle({
       blockType: LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
       arrayKey: 'linkedinImages',
       mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SUPPORT_FAQ_TAB_SLUG_AND_TAG,
+      arrayKey: 'forms',
+      mediaFields: ['formPDF'],
     },
   ],
 

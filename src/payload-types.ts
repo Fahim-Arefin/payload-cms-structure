@@ -5599,6 +5599,10 @@ export interface Page {
           | {
               title: string;
               titleBN?: string | null;
+              /**
+               * Upload/select the brochure PDF.
+               */
+              formPDF: string | Media;
               id?: string | null;
             }[]
           | null;
@@ -8726,6 +8730,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     title?: T;
                     titleBN?: T;
+                    formPDF?: T;
                     id?: T;
                   };
               id?: T;
