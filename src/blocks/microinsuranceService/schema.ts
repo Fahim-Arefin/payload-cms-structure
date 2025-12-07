@@ -14,6 +14,7 @@ const COLOR_HEX_LEN = 7
 const HEADING_MAX = 40
 const HIGHLIGHTED_TEXT_MAX = 40
 const DESCRIPTION_MAX = 300
+const TITLE_MAX = 80
 
 const PLAN_TITLE_MAX = 20
 const PLANS_MIN = 3
@@ -62,6 +63,24 @@ const validatePlanButtonTextBN = (val: unknown) => {
   return t.length <= CTA_BUTTON_TEXT_MAX
     ? true
     : `প্ল্যান CTA টেক্সট সর্বোচ্চ ${bnNum(CTA_BUTTON_TEXT_MAX)} অক্ষর হতে পারবে।`
+}
+
+const validateHighlightedInTitle = (val: unknown, { siblingData }: any) => {
+  if (!val) return true
+  if (typeof val !== 'string') return 'Highlighted Text must be text.'
+  if (typeof siblingData?.title === 'string' && !siblingData.title.includes(val)) {
+    return 'Highlighted Text must exist within the Title exactly.'
+  }
+  return true
+}
+
+const validateHighlightedInTitleBN = (val: unknown, { siblingData }: any) => {
+  if (!val) return true
+  if (typeof val !== 'string') return 'রঙিন টেক্সট অবশ্যই টেক্সট হতে হবে।'
+  if (typeof siblingData?.titleBN === 'string' && !siblingData.titleBN.includes(val)) {
+    return 'রঙিন টেক্সট অবশ্যই শিরোনামের ভিতর হুবহু থাকতে হবে।'
+  }
+  return true
 }
 
 /* ---------- shared ---------- */
@@ -140,90 +159,147 @@ const MicroinsuranceServiceSchema: Block = {
 
   fields: [
     /* -------- Section appearance -------- */
-    // {
-    //   name: 'backgroundColor',
-    //   type: 'text',
-    //   label: 'Section Background Color',
-    //   maxLength: COLOR_HEX_LEN,
-    //   validate: validateHexColor,
-    //   defaultValue: '#F6EDDD',
-    //   admin: {
-    //     width: '33%',
-    //     description: `Hex color in #RRGGBB (e.g., #FFFFFF). Length ${COLOR_HEX_LEN} (${bnNum(
-    //       COLOR_HEX_LEN,
-    //     )}).`,
-    //   },
-    // },
+    {
+      name: 'backgroundColor',
+      type: 'text',
+      label: 'Section Background Color',
+      maxLength: COLOR_HEX_LEN,
+      validate: validateHexColor,
+      defaultValue: '#FFFFFF',
+      admin: {
+        width: '33%',
+        description: `Hex color in #RRGGBB (e.g., #FFFFFF). Length ${COLOR_HEX_LEN} (${bnNum(
+          COLOR_HEX_LEN,
+        )}).`,
+      },
+    },
     {
       name: 'cardBg',
       type: 'text',
       label: 'Card Background Color',
       maxLength: COLOR_HEX_LEN,
       validate: validateHexColor,
-      defaultValue: '#FFFFFF',
+      defaultValue: '#F6EDDD',
       admin: {
         width: '33%',
-        description: `Hex color for individual cards in #RRGGBB (e.g., #FFFFFF). Length ${COLOR_HEX_LEN} (${bnNum(
+        description: `Hex color for individual cards in #RRGGBB (e.g., #F6EDDD). Length ${COLOR_HEX_LEN} (${bnNum(
           COLOR_HEX_LEN,
         )}).`,
       },
     },
 
-    /* -------- Heading (EN/BN pairs) -------- */
+    /* -------- Header (EN/BN pairs) -------- */
+    // Heading + HeadingBN
     {
       type: 'row',
       fields: [
         {
           name: 'heading',
           type: 'text',
-          required: true,
+          required: false,
           label: 'Heading',
           maxLength: HEADING_MAX,
           admin: {
             width: '50%',
-            description: `Main heading. Max ${HEADING_MAX} characters.`,
+            description: `Short label above the main title. Max ${HEADING_MAX} characters.`,
           },
         },
         {
           name: 'headingBN',
           type: 'text',
-          required: true,
+          required: false,
           label: 'হেডিং (বাংলা)',
           maxLength: HEADING_MAX,
           admin: {
             width: '50%',
-            description: `প্রধান শিরোনাম। সর্বোচ্চ ${bnNum(HEADING_MAX)} অক্ষর।`,
+            description: `মূল শিরোনামের উপরে ছোট লেবেল। সর্বোচ্চ ${bnNum(HEADING_MAX)} অক্ষর।`,
           },
         },
       ],
     },
 
-    /* -------- Highlighted text (must exist inside heading) -------- */
+    // Title + TitleBN
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: false,
+          label: 'Title',
+          maxLength: TITLE_MAX,
+          admin: {
+            width: '50%',
+            description: `Primary headline for the section. Max ${TITLE_MAX} characters.`,
+          },
+        },
+        {
+          name: 'titleBN',
+          type: 'text',
+          required: false,
+          label: 'শিরোনাম (বাংলা)',
+          maxLength: TITLE_MAX,
+          admin: {
+            width: '50%',
+            description: `সেকশনের প্রধান শিরোনাম। সর্বোচ্চ ${bnNum(TITLE_MAX)} অক্ষর।`,
+          },
+        },
+      ],
+    },
+
+    // HighlightedText + HighlightedTextBN
     {
       type: 'row',
       fields: [
         {
           name: 'highlightedText',
           type: 'text',
-          label: 'Highlighted Text (within heading)',
+          label: 'Highlighted Text (within title)',
           maxLength: HIGHLIGHTED_TEXT_MAX,
-          validate: validateHighlightedInHeading,
+          validate: validateHighlightedInTitle,
           admin: {
             width: '50%',
-            description: `Optional. Must appear verbatim inside the Heading. Max ${HIGHLIGHTED_TEXT_MAX} characters.`,
+            description: `Optional. Must appear verbatim inside the Title. Max ${HIGHLIGHTED_TEXT_MAX} characters.`,
           },
         },
         {
           name: 'highlightedTextBN',
           type: 'text',
-          label: 'রঙিন টেক্সট (হেডিং-এর মধ্যে)',
+          label: 'রঙিন টেক্সট (শিরোনামের মধ্যে)',
           maxLength: HIGHLIGHTED_TEXT_MAX,
-          validate: validateHighlightedInHeadingBN,
+          validate: validateHighlightedInTitleBN,
           admin: {
             width: '50%',
-            description: `ঐচ্ছিক। অবশ্যই হেডিং-এর ভিতর হুবহু থাকতে হবে। সর্বোচ্চ ${bnNum(
-              HIGHLIGHTED_TEXT_MAX,
-            )} অক্ষর।`,
+            description: `ঐচ্ছিক। অবশ্যই শিরোনামের ভিতর হুবহু থাকতে হবে। সর্বোচ্চ ${bnNum(HIGHLIGHTED_TEXT_MAX)} অক্ষর।`,
+          },
+        },
+      ],
+    },
+
+    // Description + DescriptionBN
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'description',
+          type: 'textarea',
+          required: false,
+          label: 'Short Description',
+          maxLength: DESCRIPTION_MAX,
+          admin: {
+            width: '50%',
+            description: `2–3 short sentences about plans. Max ${DESCRIPTION_MAX} characters.`,
+          },
+        },
+        {
+          name: 'descriptionBN',
+          type: 'textarea',
+          required: false,
+          label: 'সংক্ষিপ্ত বর্ণনা (বাংলা)',
+          maxLength: DESCRIPTION_MAX,
+          admin: {
+            width: '50%',
+            description: `প্ল্যান সম্পর্কে ২–৩টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ${bnNum(DESCRIPTION_MAX)} অক্ষর।`,
           },
         },
       ],

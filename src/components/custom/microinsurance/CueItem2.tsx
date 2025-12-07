@@ -49,7 +49,7 @@ export default function CueItem2({ card, data, index, bg }: Props) {
   const TopHeader = (
     <div
       style={{ backgroundColor: data?.cardBg || '#f6eddd' }}
-      className={`z-20 text-[#404041] 
+      className={`h-[300px] lg:h-[280px] xl:h-[330px] 2xl:h-[350px] z-20 flex flex-col justify-end relative inset-0 bottom-0 text-[#404041] 
         p-6 sm:p-8 md:p-10 lg:p-4 xl:p-8 
         ${index % 2 === 0 ? 'order-1 rounded-t-2xl' : 'order-2 rounded-b-2xl '}
         `}
@@ -88,7 +88,7 @@ export default function CueItem2({ card, data, index, bg }: Props) {
       )}
 
       <LocalizedText
-        className="global-p2 mt-2 text-white lg:text-[#404041] font-light"
+        className="global-p2 mt-2 text-[#404041] font-light"
         as="p"
         en={card?.description}
         bn={card?.descriptionBN}
@@ -122,14 +122,17 @@ export default function CueItem2({ card, data, index, bg }: Props) {
           onClick={() => setIsFlipped((v) => !v)}
           variant="link"
           className={`transition-all duration-300 ease-linear ${
-            isFlipped ? 'text-[#ED7125]' : 'text-white'
+            isFlipped ? 'text-[#ED7125]' : 'text-[#ED7125]'
           } mt-2 px-0  lg:text-[#ED7125] 
             lg:text-sm xl:text-[16px] flex justify-start items-center gap-2 underline lg:no-underline`}
         >
           {isFlipped ? (
-            <LocalizedText en="Show Less" bn="কম দেখান" />
+            <LocalizedText
+              en={data?.plansSecondaryButtonText}
+              bn={data?.plansSecondaryButtonTextBN}
+            />
           ) : (
-            <LocalizedText en="Show More" bn="আরও দেখান" />
+            <LocalizedText en={data?.plansButtonText} bn={data?.plansButtonTextBN} />
           )}
           <LuChevronDown
             className={`text-[18px] sm:text-[20px] md:text-[22px] transition-transform duration-300 ${
@@ -161,10 +164,10 @@ export default function CueItem2({ card, data, index, bg }: Props) {
             {typeof card.image === 'object' && (card.image?.url as string) && (
               <Image
                 fill
-                className={`z-0 object-cover object-center rounded-2xl ${
+                className={`z-0 object-cover object-center ${
                   index % 2 === 0
-                    ? 'lg:rounded-b-2xl lg:rounded-t-none'
-                    : 'lg:rounded-t-2xl lg:rounded-b-none'
+                    ? 'rounded-b-2xl rounded-t-none'
+                    : 'rounded-t-2xl rounded-b-none'
                 }`}
                 src={(card.image as any)?.url || ''}
                 alt={`${card.title} visual`}
