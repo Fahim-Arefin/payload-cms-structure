@@ -146,11 +146,11 @@ const FeaturedBlogVlogNewsSchema: Block = {
       type: 'text',
       label: 'Section Background Color',
       maxLength: COLOR_HEX_LEN,
-      defaultValue: '#FFFFFF',
+      defaultValue: '#F6EDDD',
       validate: validateHexColor,
       admin: {
         width: '50%',
-        description: `Hex color in #RRGGBB (e.g., #FFFFFF). Length ${COLOR_HEX_LEN} (${bnNum(
+        description: `Hex color in #RRGGBB (e.g., #F6EDDD). Length ${COLOR_HEX_LEN} (${bnNum(
           COLOR_HEX_LEN,
         )}).`,
       },
@@ -371,7 +371,7 @@ const FeaturedBlogVlogNewsSchema: Block = {
           required: true,
           admin: {
             width: '50%',
-            description: `When ON, this section reads **global Blog And News** items from global sources.`,
+            description: `When ON, this section reads **global News And Blog** items from global sources.`,
           },
         },
         {

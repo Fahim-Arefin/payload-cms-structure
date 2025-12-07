@@ -64,6 +64,11 @@ import {
   SUPPORT_FEEDBACK_FORM_SLUG_AND_TAG,
   SUPPORT_MAP_TAB_SLUG_AND_TAG,
   CUSTOM_TAB_SLUG_AND_TAG,
+  LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
+  MICROINSURANCE_SERVICE_SLUG_AND_TAG,
+  MICRO_INSURANCE_MATTERS_SLUG_AND_TAG,
+  MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG,
+  HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -115,6 +120,11 @@ import PurchaseFormBlock from './purchaseFormBlock/PurchaseFormBlock'
 import AgentFormBlock from './agentForm/AgentFormBlock'
 import SupportBuzzBlock from './supportBuzz/supportBuzzBlock'
 import CustomTabBlock from './customTab/CustomTabBlock'
+import MicroinsuranceServiceBlock from './microinsuranceService/MicroinsuranceServiceBlock'
+import MicroinsuranceMattersBlock from './microinsuranceMatters/MicroinsuranceMattersBlock'
+import StrategicPartnersBlock from './strategicPartners/StrategicPartnersBlock'
+import LearningPlatformBlock from './learningPlatform/LearningPlatformBlock'
+import SearchBarBlock from './SearchBar/SearchBarBlock'
 
 type Params = Record<string, string>
 
@@ -229,8 +239,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <FeaturedBlogVloNewsBlock key={block.id} block={block} params={params} />
 
     //career page
-    case CAREER_PAGE_INTRO_SLUG_AND_TAG:
-      return <CareerIntroBlock key={block.id} block={block} params={params} />
+    // case CAREER_PAGE_INTRO_SLUG_AND_TAG:
+    //   return <CareerIntroBlock key={block.id} block={block} params={params} />
     case CAREER_PAGE_SWIPER_SLUG_AND_TAG:
       return <CareerSwiperBlock key={block.id} block={block} params={params} />
     case CAREER_PAGE_RESOURCES_SLUG_AND_TAG:
@@ -267,6 +277,19 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     // custom tab
     case CUSTOM_TAB_SLUG_AND_TAG:
       return <CustomTabBlock key={block.id} block={block} params={params} />
+
+    // learning page media
+    case LEARNING_MEDIA_SECTION_SLUG_AND_TAG:
+      return <LearningPlatformBlock key={block.id} block={block} params={params} />
+    // microinsurance service page
+    case MICROINSURANCE_SERVICE_SLUG_AND_TAG:
+      return <MicroinsuranceServiceBlock key={block.id} block={block} params={params} />
+    case MICRO_INSURANCE_MATTERS_SLUG_AND_TAG:
+      return <MicroinsuranceMattersBlock key={block.id} block={block} params={params} />
+    case MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG:
+      return <StrategicPartnersBlock key={block.id} block={block} params={params} />
+    case HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG:
+      return <SearchBarBlock key={block.id} block={block} params={params} />
 
     default:
       return null

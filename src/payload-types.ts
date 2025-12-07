@@ -257,7 +257,7 @@ export interface Page {
   uploadSessionId?: string | null;
   name: string;
   /**
-   * for home page use `index`, for dynamic page use `:slug`
+   * for home page use `index`, for dynamic page use `:slug`, (e.g. index , plans, plans/individual , news-and-blogs , news-and-blogs/:slug)
    */
   slug: string;
   layout: (
@@ -511,6 +511,105 @@ export interface Page {
       }
     | {
         /**
+         * Hex color for individual cards in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        cardBg?: string | null;
+        /**
+         * Main heading. Max 40 characters.
+         */
+        heading: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        headingBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Heading. Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই হেডিং-এর ভিতর হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Optional. Max 24 characters.
+         */
+        plansButtonText?: string | null;
+        /**
+         * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        plansButtonTextBN?: string | null;
+        /**
+         * Optional. Max 24 characters.
+         */
+        plansSecondaryButtonText?: string | null;
+        /**
+         * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        plansSecondaryButtonTextBN?: string | null;
+        /**
+         * Add 3–5 plans to feature.
+         */
+        plans: {
+          /**
+           * Plan icon. Upload & crop a square (1:1).
+           */
+          icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
+          /**
+           * Plan image. Upload & crop to ~451:350 (≈1.2886). Keep subject centered.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Plan title. Max 20 characters.
+           */
+          title: string;
+          /**
+           * প্ল্যানের শিরোনাম। সর্বোচ্চ ২০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Brief description of the plan. Max 300 characters.
+           */
+          description: string;
+          /**
+           * প্ল্যানের সংক্ষিপ্ত বর্ণনা। সর্বোচ্চ ৩০০ অক্ষর।
+           */
+          descriptionBN: string;
+          /**
+           * Add 2–8 bullet items describing the plan.
+           */
+          listItems: {
+            listItemText: string;
+            listItemTextBN: string;
+            id?: string | null;
+          }[];
+          /**
+           * Text shown on the call-to-action button. Max 24 characters.
+           */
+          buttonText?: string | null;
+          /**
+           * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+           */
+          buttonTextBN?: string | null;
+          /**
+           * Pick an internal Page to link to. External URLs are not allowed. When clicking this button it will navigate to that page.
+           */
+          buttonLink?: (string | null) | Page;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'microinsurance-service';
+      }
+    | {
+        /**
          * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         backgroundColor?: string | null;
@@ -732,6 +831,10 @@ export interface Page {
          * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
          */
         highlightedTextBN?: string | null;
+        /**
+         * Adds padding on the left/right of the carousel container (padding-x).
+         */
+        addHorizontalPadding?: boolean | null;
         /**
          * Add partners with a logo and name (EN/BN).
          */
@@ -2950,6 +3053,10 @@ export interface Page {
                     pendingImageCrop?: string | null;
                     imageBlurDataURL?: string | null;
                     /**
+                     * Optional. YouTube video link for this blog. Max 200 characters.
+                     */
+                    videoUrl: string;
+                    /**
                      * Max 100 characters.
                      */
                     title: string;
@@ -2994,28 +3101,20 @@ export interface Page {
                       [k: string]: unknown;
                     } | null;
                     /**
-                     * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
+                     * Max 100 characters.
                      */
-                    readMoreText: string;
+                    caption: string;
                     /**
-                     * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
+                     * সর্বোচ্চ ১০০ অক্ষর।
                      */
-                    readMoreTextBN: string;
-                    /**
-                     * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
-                     */
-                    readLessText: string;
-                    /**
-                     * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
-                     */
-                    readLessTextBN: string;
+                    captionBN: string;
                     id?: string | null;
                   }[];
                   id?: string | null;
                 }[];
                 id?: string | null;
                 blockName?: string | null;
-                blockType: 'learn-more-blog-content';
+                blockType: 'learn-more-video-content';
               }
             | {
                 /**
@@ -3124,10 +3223,6 @@ export interface Page {
                     pendingImageCrop?: string | null;
                     imageBlurDataURL?: string | null;
                     /**
-                     * Optional. YouTube video link for this blog. Max 200 characters.
-                     */
-                    videoUrl: string;
-                    /**
                      * Max 100 characters.
                      */
                     title: string;
@@ -3172,20 +3267,28 @@ export interface Page {
                       [k: string]: unknown;
                     } | null;
                     /**
-                     * Max 100 characters.
+                     * Label for the per-section CTA (e.g., “Read More”). Max 50 characters.
                      */
-                    caption: string;
+                    readMoreText: string;
                     /**
-                     * সর্বোচ্চ ১০০ অক্ষর।
+                     * CTA বাটনের লেখা (যেমন, “বিস্তারিত পড়ুন”). সর্বোচ্চ ৫০ অক্ষর।
                      */
-                    captionBN: string;
+                    readMoreTextBN: string;
+                    /**
+                     * Label for collapsing long content (e.g., “Read Less”). Max 50 characters.
+                     */
+                    readLessText: string;
+                    /**
+                     * দীর্ঘ কনটেন্ট সংকুচিত করার বাটনের লেখা (যেমন, “কম পড়ুন”)। সর্বোচ্চ ৫০ অক্ষর।
+                     */
+                    readLessTextBN: string;
                     id?: string | null;
                   }[];
                   id?: string | null;
                 }[];
                 id?: string | null;
                 blockName?: string | null;
-                blockType: 'learn-more-video-content';
+                blockType: 'learn-more-blog-content';
               }
           )[];
           id?: string | null;
@@ -3343,6 +3446,15 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'custom-accordion';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'search-bar';
       }
     | {
         /**
@@ -3792,7 +3904,7 @@ export interface Page {
       }
     | {
         /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         backgroundColor?: string | null;
         /**
@@ -3863,7 +3975,7 @@ export interface Page {
          */
         seeAllLink?: (string | null) | Page;
         /**
-         * When ON, this section reads **global Blog And News** items from global sources.
+         * When ON, this section reads **global News And Blog** items from global sources.
          */
         useSharedBlogAndNewsData: boolean;
         /**
@@ -4418,60 +4530,58 @@ export interface Page {
           imageBlurDataURL?: string | null;
           id?: string | null;
         }[];
-        expectations: {
+        /**
+         * Bullets with icon + EN/BN short text.
+         */
+        expectationsLeft: {
           /**
-           * Bullets with icon + EN/BN short text.
+           * Square icon (1:1). PNG with transparent background preferred.
            */
-          left: {
-            /**
-             * Square icon (1:1). PNG with transparent background preferred.
-             */
-            icon: string | Media;
-            iconOriginal?: (string | null) | Media;
-            pendingIconOriginal?: string | null;
-            pendingIconCrop?: string | null;
-            iconBlurDataURL?: string | null;
-            /**
-             * Short line. Max 100 characters.
-             */
-            text: string;
-            /**
-             * সংক্ষিপ্ত লাইন। সর্বোচ্চ ১০০ অক্ষর।
-             */
-            textBN: string;
-            id?: string | null;
-          }[];
+          icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
           /**
-           * Single agent testimonial: avatar + EN/BN name + EN/BN quote.
+           * Short line. Max 100 characters.
            */
-          right: {
-            /**
-             * Agent photo (1:1 portrait preferred and also prefered transparent img).
-             */
-            avatar: string | Media;
-            avatarOriginal?: (string | null) | Media;
-            pendingAvatarOriginal?: string | null;
-            pendingAvatarCrop?: string | null;
-            avatarBlurDataURL?: string | null;
-            /**
-             * Agent’s name. Max 60 characters.
-             */
-            name: string;
-            /**
-             * এজেন্টের নাম। সর্বোচ্চ ৬০ অক্ষর।
-             */
-            nameBN: string;
-            /**
-             * Short testimonial sentence. Max 240 characters.
-             */
-            quote: string;
-            /**
-             * সংক্ষিপ্ত উক্তি। সর্বোচ্চ ২৪০ অক্ষর।
-             */
-            quoteBN: string;
-            id?: string | null;
-          }[];
-        };
+          text: string;
+          /**
+           * সংক্ষিপ্ত লাইন। সর্বোচ্চ ১০০ অক্ষর।
+           */
+          textBN: string;
+          id?: string | null;
+        }[];
+        /**
+         * Single agent testimonial: avatar + EN/BN name + EN/BN quote.
+         */
+        expectationsRight: {
+          /**
+           * Agent photo (1:1 portrait preferred and also prefer transparent img).
+           */
+          avatar: string | Media;
+          avatarOriginal?: (string | null) | Media;
+          pendingAvatarOriginal?: string | null;
+          pendingAvatarCrop?: string | null;
+          avatarBlurDataURL?: string | null;
+          /**
+           * Agent’s name. Max 60 characters.
+           */
+          name: string;
+          /**
+           * এজেন্টের নাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          nameBN: string;
+          /**
+           * Short testimonial sentence. Max 240 characters.
+           */
+          quote: string;
+          /**
+           * সংক্ষিপ্ত উক্তি। সর্বোচ্চ ২৪০ অক্ষর।
+           */
+          quoteBN: string;
+          id?: string | null;
+        }[];
         id?: string | null;
         blockName?: string | null;
         blockType: 'agent-onboarding-opportunity';
@@ -4836,6 +4946,156 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'multistage-plan';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Main heading (e.g., "Why Microinsurance Matters?"). Max 80 characters.
+         */
+        sectionTitle: string;
+        /**
+         * প্রধান শিরোনাম (যেমন, "কেন মাইক্রোইন্স্যুরেন্স গুরুত্বপূর্ণ ?")। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        sectionTitleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Section Title (e.g., "Microinsurance"). Max 40 characters.
+         */
+        highlightedSectionTitle?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই সেকশন শিরোনামের ভেতরে হুবহু থাকতে হবে (যেমন, "মাইক্রোইন্স্যুরেন্স")। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedSectionTitleBN?: string | null;
+        /**
+         * Main explanatory copy under the heading (EN). Use short paragraphs and bullet points if needed.
+         */
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * শিরোনামের নিচে মূল বর্ণনা (বাংলা)। প্রয়োজন হলে ছোট প্যারাগ্রাফ ও বুলেট পয়েন্ট ব্যবহার করতে পারেন।
+         */
+        descriptionBN: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * Add 1–6 benefit items (e.g., Coverage for sudden loss of life, Permanent Disability, Health Care Support).
+         */
+        items: {
+          /**
+           * Use this to combine title + description (e.g., bold heading then paragraph).
+           */
+          itemDescription: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          /**
+           * শিরোনাম + বর্ণনা একসাথে লিখুন (যেমন, শিরোনাম bold + নিচে বাংলা বর্ণনা)।
+           */
+          itemDescriptionBN: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'microinsurance-matters';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Main heading (e.g., "Our Strategic Partners"). Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম (যেমন, "আমাদের স্ট্রাটেজিক পার্টনারস")। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside the Title (e.g., "Strategic Partners"). Max 40 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। অবশ্যই শিরোনামের ভেতরে হুবহু থাকতে হবে (যেমন, "স্ট্রাটেজিক পার্টনারস")। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Add 3–12 partners (e.g., NGOs, Cooperative Society, Banks, Multipurpose, NBFIs).
+         */
+        partners: {
+          /**
+           * Upload & crop the partner logo (square 1:1 recommended).
+           */
+          logo: string | Media;
+          logoOriginal?: (string | null) | Media;
+          pendingLogoOriginal?: string | null;
+          pendingLogoCrop?: string | null;
+          logoBlurDataURL?: string | null;
+          /**
+           * Short label (e.g., "NGOs", "Banks"). Max 60 characters.
+           */
+          name: string;
+          /**
+           * সংক্ষিপ্ত নাম (যেমন, "এনজিও", "ব্যাংক"). সর্বোচ্চ ৬০ অক্ষর।
+           */
+          nameBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'microinsurance-strategic-partners';
       }
     | {
         uploadSessionId?: string | null;
@@ -5339,6 +5599,10 @@ export interface Page {
           | {
               title: string;
               titleBN?: string | null;
+              /**
+               * Upload/select the brochure PDF.
+               */
+              formPDF: string | Media;
               id?: string | null;
             }[]
           | null;
@@ -5580,31 +5844,12 @@ export interface Page {
          */
         seeLessTextBN: string;
         /**
-         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
+         * Pick an internal dynamic page to link to. External URLs are not allowed. When click on read more button it will navigate to its details page, specify that page here
          */
         linkTarget: string | Page;
         id?: string | null;
         blockName?: string | null;
         blockType: 'blogs';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
-        /**
-         * When ON, this block renders data from **Global → Blogs**.
-         *
-         * **Before enabling:** fill up the Global → Blogs data.
-         *
-         * **Notes:**
-         * • This block only stores presentation options (e.g., background color).
-         * • All content comes from the single shared Global to keep pages in sync.
-         */
-        useSharedData: boolean;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'blogs-details';
       }
     | {
         /**
@@ -5620,22 +5865,22 @@ export interface Page {
          */
         titleBN: string;
         /**
-         * When ON, this block renders data from **Global → Blogs**.
+         * Used for direct jump links to this section (e.g., "vlog-section"). Required. No spaces. Use "-" to separate words (e.g., "vlog-section", not "vlog section").
+         */
+        sectionId: string;
+        /**
+         * When ON, this block renders data from **Global → Vlogs**.
          *
-         * **Before enabling:** fill up the Global → Blogs data.
+         * **Before enabling:** fill up the Global → Vlogs data.
          *
          * **Notes:**
          * • This block only stores presentation options (e.g., background color).
          * • All content comes from the single shared Global to keep pages in sync.
          */
         useSharedData: boolean;
-        /**
-         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
-         */
-        linkTarget: string | Page;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'all-blogs-card';
+        blockType: 'vlogs';
       }
     | {
         /**
@@ -5685,12 +5930,31 @@ export interface Page {
          */
         seeLessTextBN: string;
         /**
-         * Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here
+         * Pick an internal dynamic page to link to. External URLs are not allowed. When click on read more button it will navigate to its details page, specify that page here
          */
         linkTarget: string | Page;
         id?: string | null;
         blockName?: string | null;
         blockType: 'news';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * When ON, this block renders data from **Global → News and Blogs**.
+         *
+         * **Before enabling:** fill up the Global → News and Blogs data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color).
+         * • All content comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'blogs-details';
       }
     | {
         /**
@@ -5706,22 +5970,22 @@ export interface Page {
          */
         titleBN: string;
         /**
-         * Used for direct jump links to this section (e.g., "vlog-section"). Required. No spaces. Use "-" to separate words (e.g., "vlog-section", not "vlog section").
-         */
-        sectionId: string;
-        /**
-         * When ON, this block renders data from **Global → Vlogs**.
+         * When ON, this block renders data from **Global → News and Blogs**.
          *
-         * **Before enabling:** fill up the Global → Vlogs data.
+         * **Before enabling:** fill up the Global → News and Blogs data.
          *
          * **Notes:**
          * • This block only stores presentation options (e.g., background color).
          * • All content comes from the single shared Global to keep pages in sync.
          */
         useSharedData: boolean;
+        /**
+         * Pick an internal dynamic page to link to. External URLs are not allowed. When click on a card it will navigate to its details page, specify that page here
+         */
+        linkTarget: string | Page;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'vlogs';
+        blockType: 'all-blogs-card';
       }
     | {
         /**
@@ -6205,6 +6469,145 @@ export interface Page {
         blockName?: string | null;
         blockType: 'career-processing';
       }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        bgColor?: string | null;
+        /**
+         * Text under each social grid (Instagram/Facebook/LinkedIn). Default "Follow". Max 24 characters.
+         */
+        buttonText?: string | null;
+        /**
+         * প্রতি সোশ্যাল গ্রিডের নিচে দেখানো টেক্সট। ডিফল্ট "ফলো করুন"। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        buttonTextBN?: string | null;
+        /**
+         * Instagram logo/icon. Upload & crop a square (1:1).
+         */
+        instagramIcon: string | Media;
+        instagramIconOriginal?: (string | null) | Media;
+        pendingInstagramIconOriginal?: string | null;
+        pendingInstagramIconCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        instagramIconBlurDataURL?: string | null;
+        /**
+         * Add 3–9 images to show in the Instagram grid.
+         */
+        instagramImages: {
+          /**
+           * Grid image. Square / 1:1 works best.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          id?: string | null;
+        }[];
+        /**
+         * Optional. Full Instagram profile URL (e.g., https://instagram.com/yourpage). Max 200 characters.
+         */
+        instagramLinkText?: string | null;
+        /**
+         * Facebook logo/icon. Upload & crop a square (1:1).
+         */
+        facebookIcon: string | Media;
+        facebookIconOriginal?: (string | null) | Media;
+        pendingFacebookIconOriginal?: string | null;
+        pendingFacebookIconCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        facebookIconBlurDataURL?: string | null;
+        /**
+         * Add 3–9 images to show in the Facebook grid.
+         */
+        facebookImages: {
+          /**
+           * Grid image. Square / 1:1 works best.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          id?: string | null;
+        }[];
+        /**
+         * Optional. Full Facebook page URL (e.g., https://facebook.com/yourpage). Max 200 characters.
+         */
+        facebookLinkText?: string | null;
+        /**
+         * LinkedIn logo/icon. Upload & crop a square (1:1).
+         */
+        linkedinIcon: string | Media;
+        linkedinIconOriginal?: (string | null) | Media;
+        pendingLinkedinIconOriginal?: string | null;
+        pendingLinkedinIconCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        linkedinIconBlurDataURL?: string | null;
+        /**
+         * Add 3–9 images to show in the LinkedIn grid.
+         */
+        linkedinImages: {
+          /**
+           * Grid image. Square / 1:1 works best.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          id?: string | null;
+        }[];
+        /**
+         * Optional. Full LinkedIn page URL (e.g., https://linkedin.com/company/yourpage). Max 200 characters.
+         */
+        linkedinLinkText?: string | null;
+        /**
+         * YouTube logo/icon. Upload & crop to a wide rectangle (e.g., 16:9).
+         */
+        youtubeIcon: string | Media;
+        youtubeIconOriginal?: (string | null) | Media;
+        pendingYoutubeIconOriginal?: string | null;
+        pendingYoutubeIconCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        youtubeIconBlurDataURL?: string | null;
+        /**
+         * Short copy above the input (e.g., "Lorem ipsum dolor sit amet"). Max 120 characters.
+         */
+        youtubeLeadingText: string;
+        /**
+         * ইনপুটের উপরে ছোট বাক্য। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        youtubeLeadingTextBN: string;
+        /**
+         * Placeholder inside the email/input field (e.g., "Lorem ipsum"). Max 80 characters.
+         */
+        youtubeInputPlaceholder: string;
+        /**
+         * ইনপুট ফিল্ডের ভেতরের প্লেসহোল্ডার টেক্সট। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        youtubeInputPlaceholderBN: string;
+        /**
+         * Button label under the input. Default "Subscribe". Max 24 characters.
+         */
+        youtubeButtonText?: string | null;
+        /**
+         * ইনপুটের নিচে থাকা বাটনের লেখা। সর্বোচ্চ ২৪ অক্ষর; ডিফল্ট "সাবস্ক্রাইব করুন"।
+         */
+        youtubeButtonTextBN?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'learning-media-section';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -6525,6 +6928,50 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'microinsurance-service'?:
+          | T
+          | {
+              cardBg?: T;
+              heading?: T;
+              headingBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              plansButtonText?: T;
+              plansButtonTextBN?: T;
+              plansSecondaryButtonText?: T;
+              plansSecondaryButtonTextBN?: T;
+              plans?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    listItems?:
+                      | T
+                      | {
+                          listItemText?: T;
+                          listItemTextBN?: T;
+                          id?: T;
+                        };
+                    buttonText?: T;
+                    buttonTextBN?: T;
+                    buttonLink?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'contact-us-form'?:
           | T
           | {
@@ -6615,6 +7062,7 @@ export interface PagesSelect<T extends boolean = true> {
               titleBN?: T;
               highlightedText?: T;
               highlightedTextBN?: T;
+              addHorizontalPadding?: T;
               partners?:
                 | T
                 | {
@@ -7328,6 +7776,50 @@ export interface PagesSelect<T extends boolean = true> {
                                 id?: T;
                                 blockName?: T;
                               };
+                          'learn-more-video-content'?:
+                            | T
+                            | {
+                                groups?:
+                                  | T
+                                  | {
+                                      backgroundColor?: T;
+                                      title?: T;
+                                      titleBN?: T;
+                                      highlightedTitle?: T;
+                                      highlightedTitleBN?: T;
+                                      subtitle?: T;
+                                      subtitleBN?: T;
+                                      highlightedSubtitle?: T;
+                                      highlightedSubtitleBN?: T;
+                                      description?: T;
+                                      descriptionBN?: T;
+                                      loadMoreText?: T;
+                                      loadMoreTextBN?: T;
+                                      loadLessText?: T;
+                                      loadLessTextBN?: T;
+                                      style?: T;
+                                      blogs?:
+                                        | T
+                                        | {
+                                            image?: T;
+                                            imageOriginal?: T;
+                                            pendingImageOriginal?: T;
+                                            pendingImageCrop?: T;
+                                            imageBlurDataURL?: T;
+                                            videoUrl?: T;
+                                            title?: T;
+                                            titleBN?: T;
+                                            description?: T;
+                                            descriptionBN?: T;
+                                            caption?: T;
+                                            captionBN?: T;
+                                            id?: T;
+                                          };
+                                      id?: T;
+                                    };
+                                id?: T;
+                                blockName?: T;
+                              };
                           'learn-more-blog-content'?:
                             | T
                             | {
@@ -7366,50 +7858,6 @@ export interface PagesSelect<T extends boolean = true> {
                                             readMoreTextBN?: T;
                                             readLessText?: T;
                                             readLessTextBN?: T;
-                                            id?: T;
-                                          };
-                                      id?: T;
-                                    };
-                                id?: T;
-                                blockName?: T;
-                              };
-                          'learn-more-video-content'?:
-                            | T
-                            | {
-                                groups?:
-                                  | T
-                                  | {
-                                      backgroundColor?: T;
-                                      title?: T;
-                                      titleBN?: T;
-                                      highlightedTitle?: T;
-                                      highlightedTitleBN?: T;
-                                      subtitle?: T;
-                                      subtitleBN?: T;
-                                      highlightedSubtitle?: T;
-                                      highlightedSubtitleBN?: T;
-                                      description?: T;
-                                      descriptionBN?: T;
-                                      loadMoreText?: T;
-                                      loadMoreTextBN?: T;
-                                      loadLessText?: T;
-                                      loadLessTextBN?: T;
-                                      style?: T;
-                                      blogs?:
-                                        | T
-                                        | {
-                                            image?: T;
-                                            imageOriginal?: T;
-                                            pendingImageOriginal?: T;
-                                            pendingImageCrop?: T;
-                                            imageBlurDataURL?: T;
-                                            videoUrl?: T;
-                                            title?: T;
-                                            titleBN?: T;
-                                            description?: T;
-                                            descriptionBN?: T;
-                                            caption?: T;
-                                            captionBN?: T;
                                             id?: T;
                                           };
                                       id?: T;
@@ -7475,6 +7923,13 @@ export interface PagesSelect<T extends boolean = true> {
                     pointsBN?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'search-bar'?:
+          | T
+          | {
+              backgroundColor?: T;
               id?: T;
               blockName?: T;
             };
@@ -7886,35 +8341,31 @@ export interface PagesSelect<T extends boolean = true> {
                     imageBlurDataURL?: T;
                     id?: T;
                   };
-              expectations?:
+              expectationsLeft?:
                 | T
                 | {
-                    left?:
-                      | T
-                      | {
-                          icon?: T;
-                          iconOriginal?: T;
-                          pendingIconOriginal?: T;
-                          pendingIconCrop?: T;
-                          iconBlurDataURL?: T;
-                          text?: T;
-                          textBN?: T;
-                          id?: T;
-                        };
-                    right?:
-                      | T
-                      | {
-                          avatar?: T;
-                          avatarOriginal?: T;
-                          pendingAvatarOriginal?: T;
-                          pendingAvatarCrop?: T;
-                          avatarBlurDataURL?: T;
-                          name?: T;
-                          nameBN?: T;
-                          quote?: T;
-                          quoteBN?: T;
-                          id?: T;
-                        };
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    text?: T;
+                    textBN?: T;
+                    id?: T;
+                  };
+              expectationsRight?:
+                | T
+                | {
+                    avatar?: T;
+                    avatarOriginal?: T;
+                    pendingAvatarOriginal?: T;
+                    pendingAvatarCrop?: T;
+                    avatarBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    quote?: T;
+                    quoteBN?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;
@@ -8087,6 +8538,49 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'microinsurance-matters'?:
+          | T
+          | {
+              backgroundColor?: T;
+              sectionTitle?: T;
+              sectionTitleBN?: T;
+              highlightedSectionTitle?: T;
+              highlightedSectionTitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              items?:
+                | T
+                | {
+                    itemDescription?: T;
+                    itemDescriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'microinsurance-strategic-partners'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              partners?:
+                | T
+                | {
+                    logo?: T;
+                    logoOriginal?: T;
+                    pendingLogoOriginal?: T;
+                    pendingLogoCrop?: T;
+                    logoBlurDataURL?: T;
+                    name?: T;
+                    nameBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'purchase-form'?:
           | T
           | {
@@ -8236,6 +8730,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     title?: T;
                     titleBN?: T;
+                    formPDF?: T;
                     id?: T;
                   };
               id?: T;
@@ -8354,22 +8849,14 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'blogs-details'?:
-          | T
-          | {
-              backgroundColor?: T;
-              useSharedData?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'all-blogs-card'?:
+        vlogs?:
           | T
           | {
               backgroundColor?: T;
               title?: T;
               titleBN?: T;
+              sectionId?: T;
               useSharedData?: T;
-              linkTarget?: T;
               id?: T;
               blockName?: T;
             };
@@ -8390,14 +8877,22 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        vlogs?:
+        'blogs-details'?:
+          | T
+          | {
+              backgroundColor?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'all-blogs-card'?:
           | T
           | {
               backgroundColor?: T;
               title?: T;
               titleBN?: T;
-              sectionId?: T;
               useSharedData?: T;
+              linkTarget?: T;
               id?: T;
               blockName?: T;
             };
@@ -8531,6 +9026,74 @@ export interface PagesSelect<T extends boolean = true> {
                     imageBlurDataURL?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'learning-media-section'?:
+          | T
+          | {
+              bgColor?: T;
+              buttonText?: T;
+              buttonTextBN?: T;
+              instagramIcon?: T;
+              instagramIconOriginal?: T;
+              pendingInstagramIconOriginal?: T;
+              pendingInstagramIconCrop?: T;
+              instagramIconBlurDataURL?: T;
+              instagramImages?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    id?: T;
+                  };
+              instagramLinkText?: T;
+              facebookIcon?: T;
+              facebookIconOriginal?: T;
+              pendingFacebookIconOriginal?: T;
+              pendingFacebookIconCrop?: T;
+              facebookIconBlurDataURL?: T;
+              facebookImages?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    id?: T;
+                  };
+              facebookLinkText?: T;
+              linkedinIcon?: T;
+              linkedinIconOriginal?: T;
+              pendingLinkedinIconOriginal?: T;
+              pendingLinkedinIconCrop?: T;
+              linkedinIconBlurDataURL?: T;
+              linkedinImages?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    id?: T;
+                  };
+              linkedinLinkText?: T;
+              youtubeIcon?: T;
+              youtubeIconOriginal?: T;
+              pendingYoutubeIconOriginal?: T;
+              pendingYoutubeIconCrop?: T;
+              youtubeIconBlurDataURL?: T;
+              youtubeLeadingText?: T;
+              youtubeLeadingTextBN?: T;
+              youtubeInputPlaceholder?: T;
+              youtubeInputPlaceholderBN?: T;
+              youtubeButtonText?: T;
+              youtubeButtonTextBN?: T;
               id?: T;
               blockName?: T;
             };
@@ -9470,11 +10033,11 @@ export interface GlobalBlog {
      */
     newsLink?: string | null;
     /**
-     * If you featured a blog that means it will show on the homepage news and blog section. (exactly 2 must be selected)
+     * If you featured a blog that means it will show on the homepage news and blog section's `Left Side Grid`. (Exactly 2 items across the list must be selected as featured.)
      */
     isFeatured?: boolean | null;
     /**
-     * Use for the “Trending” area. Exactly 2 items across the list must be selected as trending.
+     * If you Trending a news that means it will show on the homepage news and blog section's `Right Side Trending Post`. (Exactly 2 items across the list must be selected as trending.)
      */
     isTrending?: boolean | null;
     createdAt?: string | null;
@@ -9542,7 +10105,7 @@ export interface GlobalVlog {
      */
     importantDateBN?: string | null;
     /**
-     * If you featured a blog that means it will show on the homepage news and blog section. (exactly 1 must be selected)
+     * If you featured a Vlog that means it will show on the homepage news and blog section's `Middle Video Grid`. (exactly 1 must be selected)
      */
     isFeatured?: boolean | null;
     /**

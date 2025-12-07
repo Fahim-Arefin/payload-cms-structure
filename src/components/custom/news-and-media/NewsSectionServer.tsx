@@ -18,7 +18,7 @@ async function NewsSectionServer({ block }: Props) {
   const data = await getGlobalCached<GlobalBlog>(GLOBAL_BLOGS_SLUG_AND_TAG, 2, NEWS_SLUG_AND_TAG)
   return (
     <div>
-      {data ? (
+      {data && data?.blogs && data?.blogs?.length > 0 ? (
         <NewsSectionClient data={data} block={block} />
       ) : (
         <NoDataFound

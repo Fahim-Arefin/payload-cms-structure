@@ -11,6 +11,9 @@ import {
 import GlobalButton from '../shared/GlobalButton'
 import useSSRLanguage from '@/hooks/useSSRLanguage'
 import LocalizedText from '../shared/LocalizedText'
+import { FileText } from 'lucide-react'
+import Link from 'next/link'
+import { SupportFaqTabBlockType } from '@/types/payloadCustomTypes'
 
 // Each form row from schema
 type FormRow = {
@@ -19,7 +22,7 @@ type FormRow = {
 }
 
 type Props = {
-  forms: FormRow[]
+  forms: SupportFaqTabBlockType['forms']
   buttonTextEn: string
   buttonTextBn?: string | null
   containerBg?: string
@@ -62,28 +65,53 @@ function FormsTable({
         </TableHeader>
 
         <TableBody>
-          {(forms || []).map((form, idx) => (
-            <TableRow key={`form-${idx}`} className="text-center border border-[#42424242]">
-              <TableCell className="p-4 text-center border border-[#42424242]">
-                {idx + 1}
-              </TableCell>
-              <TableCell className="p-4 text-center border border-[#42424242]">
-                <LocalizedText en={form.title} bn={form.titleBN || undefined} />
-              </TableCell>
-              <TableCell className="p-4 text-center border border-[#42424242]">
-                {/* No URL for now → just a button that does nothing */}
-                <GlobalButton
-                  variant="outline"
-                  size="small"
-                  className="hover:opacity-90"
-                  // keep visual contrast: outline on light background
-                  style={{ borderColor: headerBg }}
-                >
-                  {btnText}
-                </GlobalButton>
-              </TableCell>
-            </TableRow>
-          ))}
+          {(forms || []).map((form, idx) => {
+            // build href like BrochureButtonBlock
+            const href =
+              (form.formPDF &&
+                typeof form.formPDF === 'object' &&
+                'url' in form.formPDF &&
+                form.formPDF.url) ||
+              (typeof form.formPDF === 'string' ? `/media/${form.formPDF}` : '#')
+
+            const hasPdf = href && href !== '#'
+            return (
+              <TableRow key={`form-${idx}`} className="text-center border border-[#42424242]">
+                <TableCell className="p-4 text-center border border-[#42424242]">
+                  {idx + 1}
+                </TableCell>
+                <TableCell className="p-4 text-center border border-[#42424242]">
+                  <LocalizedText en={form.title} bn={form.titleBN || undefined} />
+                </TableCell>
+                <TableCell className="p-4 text-center border border-[#42424242]">
+                  {hasPdf ? (
+                    <Link href={href} target="_blank" prefetch={false}>
+                      <GlobalButton
+                        variant="outline"
+                        size="small"
+                        className="hover:bg-[#a08d2c] hover:text-white"
+                        style={{ borderColor: headerBg }}
+                      >
+                        <FileText className="h-4 w-4" />
+                        {btnText}
+                      </GlobalButton>
+                    </Link>
+                  ) : (
+                    <GlobalButton
+                      variant="outline"
+                      size="small"
+                      className="opacity-60 cursor-not-allowed"
+                      style={{ borderColor: headerBg }}
+                      disabled
+                    >
+                      <FileText className="h-4 w-4" />
+                      {btnText}
+                    </GlobalButton>
+                  )}
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
     </div>

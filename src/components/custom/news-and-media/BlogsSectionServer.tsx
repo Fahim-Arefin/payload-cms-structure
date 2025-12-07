@@ -18,7 +18,7 @@ async function BlogsSectionServer({ block }: Props) {
   const data = await getGlobalCached<GlobalBlog>(GLOBAL_BLOGS_SLUG_AND_TAG, 2, BLOGS_SLUG_AND_TAG)
   return (
     <div>
-      {data ? (
+      {data && data?.blogs && data?.blogs?.length > 0 ? (
         <BlogsSectionClient data={data} block={block} />
       ) : (
         <NoDataFound

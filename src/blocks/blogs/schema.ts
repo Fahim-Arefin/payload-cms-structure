@@ -275,7 +275,7 @@ const AllBLogsSectionSchema: Block = {
       required: true,
       admin: {
         description:
-          'Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here',
+          'Pick an internal dynamic page to link to. External URLs are not allowed. When click on read more button it will navigate to its details page, specify that page here',
       },
     },
   ],

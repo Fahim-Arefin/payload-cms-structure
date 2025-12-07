@@ -499,13 +499,10 @@ async function Footer() {
                   </div>
                 </div>
                 {/* powered by section */}
-                <div className="mt-7 2xl:mt-9 flex space-x-2 xl:space-x-3">
+                {/* <div className="mt-7 2xl:mt-9 flex space-x-2 xl:space-x-3">
                   <h1 className="lg:pt-[5px] xl:pt-[6px] 2xl:pt-[9px] text-sm lg:text-[16px] xl:text-xl 2xl:text-2xl font-medium text-white/50">
                     Powered By -
                   </h1>
-                  {/* <div className=" lg:h-[26px] xl:h-[32px] 2xl:h-[40px]">
-                <img src="/assets/fotter-logos/shurjo.png" alt="" className="h-full" />
-              </div> */}
                   <div className="lg:h-[26px] xl:h-[32px] 2xl:h-[40px]">
                     <Image
                       src={`${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/fotter-logos/shurjo.png`} // better: /assets/footer-logos/shurjo.png
@@ -516,9 +513,9 @@ async function Footer() {
                       sizes="85px"
                     />
                   </div>
-                </div>
+                </div> */}
                 {/* photos */}
-                <div className="flex md:gap-[3px] flex-wrap mt-3 2xl:mt-4">
+                {/* <div className="flex md:gap-[3px] flex-wrap mt-3 2xl:mt-4">
                   {shurjoPayData?.map((img, i) => (
                     <div
                       key={i}
@@ -542,7 +539,7 @@ async function Footer() {
                       </div>
                     </div>
                   ))}
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

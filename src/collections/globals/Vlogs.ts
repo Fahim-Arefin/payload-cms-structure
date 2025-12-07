@@ -245,7 +245,7 @@ const GlobalVlogs: GlobalConfig = {
               admin: {
                 width: '50%',
                 description:
-                  'If you featured a blog that means it will show on the homepage news and blog section. (exactly 1 must be selected)',
+                  "If you featured a Vlog that means it will show on the homepage news and blog section's `Middle Video Grid`. (exactly 1 must be selected)",
               },
             },
             // trending

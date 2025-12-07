@@ -24,7 +24,7 @@ async function BlogDetailsServerSection({ block, params }: Props) {
   const findItem = data?.blogs?.find((item, _) => item?.id === params)
   return (
     <div>
-      {data ? (
+      {data && data?.blogs && data?.blogs?.length > 0 ? (
         findItem ? (
           <BlogDetailsClientSection data={findItem} block={block} />
         ) : (

@@ -2,7 +2,8 @@ import {
   BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_BLOCK_LABEL,
   BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_BLOCK_THUMBNAIL_URL,
   BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_SLUG_AND_TAG,
-  NEWS_AND_BLOG_PAGE,
+  GLOBAL_BLOGS_BLOCK_LABEL,
+  NEWS_AND_BLOG_DETAILS_PAGE,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import type { Block } from 'payload'
@@ -33,7 +34,7 @@ const AllBLogsCardSchema: Block = {
     plural: BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_BLOCK_LABEL,
   },
   admin: {
-    group: NEWS_AND_BLOG_PAGE,
+    group: NEWS_AND_BLOG_DETAILS_PAGE,
   },
 
   imageURL: BLOGS_DETAILS_PAGE_ALL_NEWS_CARD_BLOCK_THUMBNAIL_URL,
@@ -92,9 +93,9 @@ const AllBLogsCardSchema: Block = {
         // description:
         //   'When ON, this block renders from the Global “BoardOfDirectors”. Turn OFF to hide.',
         width: '50%',
-        description: `When ON, this block renders data from **Global → Blogs**.
+        description: `When ON, this block renders data from **Global → ${GLOBAL_BLOGS_BLOCK_LABEL}**.
 
-**Before enabling:** fill up the Global → Blogs data.
+**Before enabling:** fill up the Global → ${GLOBAL_BLOGS_BLOCK_LABEL} data.
 
 **Notes:**
 • This block only stores presentation options (e.g., background color).
@@ -109,7 +110,7 @@ const AllBLogsCardSchema: Block = {
       required: true,
       admin: {
         description:
-          'Pick an internal Page to link to. External URLs are not allowed. When click on a card it will navigate to all leadership team page, specify that page here',
+          'Pick an internal dynamic page to link to. External URLs are not allowed. When click on a card it will navigate to its details page, specify that page here',
       },
     },
   ],

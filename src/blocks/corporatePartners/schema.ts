@@ -146,6 +146,16 @@ const CorporatePartnersSchema: Block = {
         },
       ],
     },
+    {
+      name: 'addHorizontalPadding',
+      type: 'checkbox',
+      label: 'Add horizontal padding around cards?',
+      defaultValue: true,
+      admin: {
+        width: '50%',
+        description: 'Adds padding on the left/right of the carousel container (padding-x).',
+      },
+    },
 
     /* ---------- Partners (array) ---------- */
     {

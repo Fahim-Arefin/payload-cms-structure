@@ -53,12 +53,7 @@ function NewsDetailsSection({ data, block }: Props) {
             )}
           </div>
 
-          <div
-            className="global-p2 leading-6 text-justify"
-            style={{
-              alignSelf: 'stretch',
-            }}
-          >
+          <div className="global-p2">
             <LocalizedRichText en={data?.description} bn={data?.descriptionBN} />
 
             {/* External News Link */}

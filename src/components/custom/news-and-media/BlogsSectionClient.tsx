@@ -1,12 +1,11 @@
 'use client'
+import { GLOBAL_BLOGS_BLOCK_LABEL } from '@/lib/constants'
 import { GlobalBlog } from '@/payload-types'
 import { AllBlogsSectionType } from '@/types/payloadCustomTypes'
-import React from 'react'
-import HashScroller from './HashScroller'
-import AllNewsSection from './AllNewsSection'
-import SearchNews from './SearchNews'
 import NoDataFound from '../shared/NoDataFound'
-import { BLOGS_BLOCK_LABEL } from '@/lib/constants'
+import AllNewsSection from './AllNewsSection'
+import HashScroller from './HashScroller'
+import SearchNews from './SearchNews'
 
 type Props = {
   data: GlobalBlog
@@ -30,8 +29,8 @@ function BlogsSectionClient({ data, block }: Props) {
         </div>
       ) : (
         <NoDataFound
-          message="No Blog Data Found"
-          description={`In the admin panel, open the “${BLOGS_BLOCK_LABEL}” block and give some blog data.`}
+          message="No Blog Category Found"
+          description={`In the admin panel, open the Global “${GLOBAL_BLOGS_BLOCK_LABEL}” collection and give some Blogs data.`}
           bgColor={block?.backgroundColor || ''}
         />
       )}

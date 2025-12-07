@@ -55,6 +55,7 @@
     "nodemailer": "^7.0.5",
     "payload": "3.33.0",
     "react": "19.1.0",
+    "react-card-flip": "^1.2.3",
     "react-datepicker": "^8.4.0",
     "react-dom": "19.1.0",
     "react-easy-crop": "^5.5.0",

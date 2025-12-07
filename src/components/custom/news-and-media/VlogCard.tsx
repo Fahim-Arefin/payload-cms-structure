@@ -3,6 +3,7 @@ import { GlobalVlog } from '@/payload-types'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Image from 'next/image'
 import LocalizedText from '../shared/LocalizedText'
+import { formatLocalDhaka, formatMonDYYYYBN } from '@/lib/utils'
 
 type Props = {
   data: GlobalVlog['vlogs'][number]
@@ -41,6 +42,14 @@ const content = (data: GlobalVlog['vlogs'][number]) => (
         >
           <div className="absolute inset-0 bg-[#343A40]/50 rounded-[4.167px] z-20"></div>
           <div className="h-fit space-y-2 lg:space-y-3 xl:space-y-4 z-30">
+            {data?.importantDate && data?.importantDateBN && (
+              <div className="flex items-center text-white">
+                <img src="/assets/images/calender2.png" alt="calendar" />
+                <div className="text-[11px] ml-2">
+                  <LocalizedText en={data?.importantDate} bn={data?.importantDateBN} />
+                </div>
+              </div>
+            )}
             <h4 className="text-white text-[12px] lg:text-[15px] font-bold line-clamp-1 md:line-clamp-none">
               <LocalizedText en={data?.title} bn={data?.titleBN} />
             </h4>
@@ -56,7 +65,7 @@ const content = (data: GlobalVlog['vlogs'][number]) => (
        h-[20px] lg:h-[30px] xl:h-[40px] 2xl:h-[50px]"
       >
         <img
-          src={data?.videoLink ? '/assets/icons/web/play3.svg' : '/assets/icons/web/circle.svg'}
+          src={data?.videoLink ? '/assets/icons/play3.svg' : '/assets/icons/circle.svg'}
           alt=""
         />
       </div>

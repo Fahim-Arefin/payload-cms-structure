@@ -40,6 +40,10 @@ import {
   LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG,
   LEARN_MORE_VIDEO_CONTENT_SLUG_AND_TAG,
   CAREER_PAGE_OPENINGS_SLUG_AND_TAG,
+  MICROINSURANCE_SERVICE_SLUG_AND_TAG,
+  MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG,
+  LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
+  SUPPORT_FAQ_TAB_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -187,6 +191,11 @@ export const mediaHooks = withMediaLifecycle({
       blockType: CUSTOM_TAB_SLUG_AND_TAG,
       mediaFields: ['imageWide'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
+      mediaFields: ['instagramIcon', 'facebookIcon', 'linkedinIcon', 'youtubeIcon'],
+    },
   ],
 
   // Blocks with arrays that contain media fields:
@@ -210,6 +219,12 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'plans',
       mediaFields: ['icon', 'image'],
       // itemLabelField: 'title', // (optional) better alt names
+    },
+    {
+      layoutKey: 'layout',
+      blockType: MICROINSURANCE_SERVICE_SLUG_AND_TAG,
+      arrayKey: 'plans',
+      mediaFields: ['icon', 'image'],
     },
     {
       layoutKey: 'layout',
@@ -268,6 +283,19 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'audienceCards',
       mediaFields: ['image'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
+      arrayKey: 'expectationsLeft',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
+      arrayKey: 'expectationsRight',
+      mediaFields: ['avatar'],
+    },
+
     {
       layoutKey: 'layout',
       blockType: AGENT_ONBOARDING_PAGE_MORE_THAN_A_WORKPLACE_SLUG_AND_TAG,
@@ -368,6 +396,37 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'cards',
       mediaFields: ['filename'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG,
+      arrayKey: 'partners',
+      mediaFields: ['logo'],
+      itemLabelField: 'name',
+    },
+    {
+      layoutKey: 'layout',
+      blockType: LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
+      arrayKey: 'instagramImages',
+      mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
+      arrayKey: 'facebookImages',
+      mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
+      arrayKey: 'linkedinImages',
+      mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SUPPORT_FAQ_TAB_SLUG_AND_TAG,
+      arrayKey: 'forms',
+      mediaFields: ['formPDF'],
+    },
   ],
 
   // Blocks with nested array (media that inside another array) that contain media fields
@@ -380,20 +439,20 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'insuranceCardData',
       mediaFields: ['image'],
     },
-    {
-      layoutKey: 'layout',
-      blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
-      groupKey: 'expectations',
-      arrayKey: 'left',
-      mediaFields: ['icon'],
-    },
-    {
-      layoutKey: 'layout',
-      blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
-      groupKey: 'expectations',
-      arrayKey: 'right',
-      mediaFields: ['avatar'],
-    },
+    // {
+    //   layoutKey: 'layout',
+    //   blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
+    //   groupKey: 'expectations',
+    //   arrayKey: 'left',
+    //   mediaFields: ['icon'],
+    // },
+    // {
+    //   layoutKey: 'layout',
+    //   blockType: AGENT_ONBOARDING_PAGE_AGENT_ONBOARDING_OPPORTUNITY_SLUG_AND_TAG,
+    //   groupKey: 'expectations',
+    //   arrayKey: 'right',
+    //   mediaFields: ['avatar'],
+    // },
     {
       layoutKey: 'layout',
       blockType: CUSTOM_CARD_SECTION_SLUG_AND_TAG,

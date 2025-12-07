@@ -49,7 +49,6 @@ function AllNewsCard({ data, index, length, block }: Props) {
       <div
         className={` lg:col-span-5 
         space-y-3 xl:space-y-6 
-        text-center lg:text-start
         max-w-[90%] lg:max-w-full mx-auto lg:mx-0 ${index % 2 !== 0 ? ' lg:order-1 ' : ' lg:order-2 '}`}
       >
         <h5 className="text-[#6E6E6E] global-p2 uppercase tracking-[2px]">
@@ -66,10 +65,10 @@ function AllNewsCard({ data, index, length, block }: Props) {
           <LocalizedText en={data?.title} bn={data?.titleBN} />
         </h3>
         <div
-          className="global-p2 leading-6 line-clamp-4 lg:line-clamp-3 xl:line-clamp-4 2xl:line-clamp-[6] text-justify"
-          style={{
-            alignSelf: 'stretch',
-          }}
+          className="global-p2 line-clamp-4 lg:line-clamp-3 xl:line-clamp-4 2xl:line-clamp-[6] "
+          // style={{
+          //   alignSelf: 'stretch',
+          // }}
         >
           {/* {data?.description} */}
           <LocalizedRichText en={data?.description} bn={data?.descriptionBN} />
@@ -96,7 +95,7 @@ function AllNewsCard({ data, index, length, block }: Props) {
       {/* index !== length - 1 */}
       {index !== length - 1 && (
         <div className="hidden lg:block absolute inset-x-0 -bottom-12 mx-auto w-full lg:w-[60%] xl:w-fit">
-          <img src="/assets/verticalline.png" alt="" className="w-full h-full" />
+          <img src="/assets/images/verticalline.png" alt="" className="w-full h-full" />
         </div>
       )}
     </div>

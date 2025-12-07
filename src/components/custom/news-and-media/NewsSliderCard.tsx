@@ -130,7 +130,7 @@ function NewsSliderCard({ data, block }: Props) {
           )}
         </div>
 
-        <div className="global-p2 leading-6 text-justify line-clamp-3">
+        <div className="global-p2 line-clamp-3">
           {/* RichText may include <a>; safe now because wrapper is a div, not a <Link> */}
           <LocalizedRichText en={data.description} bn={data.descriptionBN} />
         </div>

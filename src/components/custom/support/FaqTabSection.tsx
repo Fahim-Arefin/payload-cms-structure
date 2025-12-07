@@ -37,7 +37,7 @@ export function FaqTabSection({ block, initialTab, onTabChange }: Props) {
           labelBN: block.formsTabLabelBN ?? 'ডাউনলোড ফরম',
         },
       ].filter(Boolean) as { value: TabValue; label: string; labelBN?: string | null }[],
-    [block]
+    [block],
   )
 
   const allowedValues = useMemo<TabValue[]>(() => tabs.map((t) => t.value), [tabs])
@@ -99,7 +99,7 @@ export function FaqTabSection({ block, initialTab, onTabChange }: Props) {
                 'w-full flex md:overflow-x-visible bg-transparent border-none p-0',
                 tabs.length === 2
                   ? 'justify-start space-x-[5%] md:space-x-[15%] lg:space-x-[25%]'
-                  : 'justify-between'
+                  : 'justify-between',
               )}
             >
               {tabs.map((tab, index) => {
@@ -115,14 +115,14 @@ export function FaqTabSection({ block, initialTab, onTabChange }: Props) {
                       index === 0 ? 'text-left pl-0' : 'text-left',
                       activeTab === tab.value
                         ? 'text-[#434343] after:content-[""] after:absolute shadow-none data-[state=active]:shadow-none after:border-none after:inset-x-0 after:bottom-0 after:h-[4px] after:md:h-[8px] after:w-full after:bg-orange-500 after:rounded-full'
-                        : 'text-[#434343]'
+                        : 'text-[#434343]',
                     )}
                   >
                     {words.join(' ')}{' '}
                     <span
                       className={cn(
                         activeTab === tab.value ? 'text-[#ED7125]' : 'text-[#9C8639]',
-                        'ml-1 md:ml-2'
+                        'ml-1 md:ml-2',
                       )}
                     >
                       {last}
@@ -154,10 +154,11 @@ export function FaqTabSection({ block, initialTab, onTabChange }: Props) {
         />
       ) : (
         <FormsTable
-          forms={(block?.forms ?? []).map((f: any) => ({
-            title: f?.title ?? '',
-            titleBN: f?.titleBN ?? null,
-          }))}
+          // forms={(block?.forms ?? []).map((f: any) => ({
+          //   title: f?.title ?? '',
+          //   titleBN: f?.titleBN ?? null,
+          // }))}
+          forms={block?.forms}
           buttonTextEn={block?.formsButtonText || 'Download'}
           buttonTextBn={block?.formsButtonTextBN || 'ডাউনলোড'}
           containerBg={block?.formsBackgroundColor || '#F6EDDD'}

@@ -230,9 +230,9 @@ export default function AllNewsAccordionSection({ allNewsData, allContent, block
                   <div className="col-span-1 lg:col-span-3 flex flex-col justify-between text-[#3C3C3C]">
                     <div
                       className="global-p2 leading-6"
-                      style={{
-                        alignSelf: 'stretch',
-                      }}
+                      // style={{
+                      //   alignSelf: 'stretch',
+                      // }}
                     >
                       <LocalizedRichText en={news?.description} bn={news?.descriptionBN} />
                     </div>

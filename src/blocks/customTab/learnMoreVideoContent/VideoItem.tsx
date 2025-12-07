@@ -148,7 +148,7 @@ function VideoItem({ blog, bg, index }: BlogItemProps) {
          w-[30px] lg:w-[40px] xl:w-[50px] 2xl:w-[60px]  
           h-[30px] lg:h-[40px] xl:h-[50px] 2xl:h-[60px]"
             >
-              <Image src="/assets/icons/web/play.svg" alt="Play video" fill className="" />
+              <Image src="/assets/icons/play.svg" alt="Play video" fill className="" />
             </div>
             {/* </div> */}
           </button>

@@ -68,6 +68,7 @@ export const PREMIUM_CALCULATOR_PAGE = 'Premium Calculator Page'
 export const PURCHASE_NOW_PAGE = 'Purchase Now Page'
 export const SUPPORT_PAGE = 'Support Page'
 export const NEWS_AND_BLOG_PAGE = 'News And Blogs Page'
+export const NEWS_AND_BLOG_DETAILS_PAGE = 'News And Blogs Details Page'
 export const CAREER_PAGE = 'Career Page'
 
 // home page constants
@@ -78,6 +79,11 @@ export const HOME_PAGE_HERO_SLUG_AND_TAG = 'hero'
 export const HOME_PAGE_HERO_BLOCK_LABEL = 'Hero (Large)'
 export const HOME_PAGE_HERO_CACHE_KEY = 'hero-data'
 export const HOME_PAGE_HERO_BLOCK_THUMBNAIL_URL = `${folder}/hero-block-thumbnail.png`
+
+export const HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG = 'search-bar'
+export const HOME_PAGE_SEARCH_BAR_BLOCK_LABEL = 'Search Bar'
+export const HOME_PAGE_SEARCH_BAR_CACHE_KEY = 'search-bar-data'
+export const HOME_PAGE_SEARCH_BAR_BLOCK_THUMBNAIL_URL = `${folder}/search-bar-block-thumbnail.png`
 
 // Link Button
 export const HERO_LINK_BUTTON_SLUG_AND_TAG = 'pageLink'
@@ -518,3 +524,25 @@ export const LEARN_MORE_BLOG_CONTENT_SLUG_AND_TAG = 'learn-more-blog-content'
 export const LEARN_MORE_BLOG_CONTENT_PAGE_BLOCK_LABEL = 'Learn More Blog Content'
 export const LEARN_MORE_BLOG_CONTENT_CACHE_KEY = 'learn-more-blog-content-data'
 export const LEARN_MORE_BLOG_CONTENT_BLOCK_THUMBNAIL_URL = `${folder}/learn-more-blog-content-block-thumbnail.png`
+
+// learning media section content
+export const LEARNING_MEDIA_SECTION_SLUG_AND_TAG = 'learning-media-section'
+export const LEARNING_MEDIA_SECTION_BLOCK_LABEL = 'Learning Media Section'
+export const LEARNING_MEDIA_SECTION_CACHE_KEY = 'learning-media-section-data'
+export const LEARNING_MEDIA_SECTION_BLOCK_THUMBNAIL_URL = `${folder}/learning-media-section-block-thumbnail.png`
+
+//Microinsurance page
+export const MICROINSURANCE_SERVICE_SLUG_AND_TAG = 'microinsurance-service'
+export const MICROINSURANCE_SERVICE_BLOCK_LABEL = 'Microinsurance Service'
+export const MICROINSURANCE_SERVICE_CACHE_KEY = 'microinsurance-service-data'
+export const MICROINSURANCE_SERVICE_BLOCK_THUMBNAIL_URL = `${folder}/microinsurance-service-block-thumbnail.png`
+
+export const MICRO_INSURANCE_MATTERS_SLUG_AND_TAG = 'microinsurance-matters'
+export const MICRO_INSURANCE_MATTERS_BLOCK_LABEL = 'Microinsurance Matters'
+export const MICRO_INSURANCE_MATTERS_CACHE_KEY = 'microinsurance-matters-data'
+export const MICRO_INSURANCE_MATTERS_BLOCK_THUMBNAIL_URL = `${folder}/microinsurance-matters-block-thumbnail.png`
+
+export const MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG = 'microinsurance-strategic-partners'
+export const MICRO_INSURANCE_STRATEGIC_PARTNERS_BLOCK_LABEL = 'Microinsurance Strategic Partners'
+export const MICRO_INSURANCE_STRATEGIC_PARTNERS_CACHE_KEY = 'microinsurance-strategic-partners-data'
+export const MICRO_INSURANCE_STRATEGIC_PARTNERS_BLOCK_THUMBNAIL_URL = `${folder}/microinsurance-strategic-partners-block-thumbnail.png`
