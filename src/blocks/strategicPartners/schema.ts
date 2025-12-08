@@ -5,6 +5,7 @@ import {
   MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG,
   MICRO_INSURANCE_STRATEGIC_PARTNERS_BLOCK_LABEL,
   MICRO_INSURANCE_STRATEGIC_PARTNERS_BLOCK_THUMBNAIL_URL,
+  MICRO_INSURANCE_PLAN_PAGE,
 } from '@/lib/constants'
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 
@@ -56,6 +57,9 @@ const MicroInsuranceStrategicPartnersSchema: Block = {
   labels: {
     singular: MICRO_INSURANCE_STRATEGIC_PARTNERS_BLOCK_LABEL,
     plural: MICRO_INSURANCE_STRATEGIC_PARTNERS_BLOCK_LABEL,
+  },
+  admin: {
+    group: MICRO_INSURANCE_PLAN_PAGE,
   },
 
   imageURL: MICRO_INSURANCE_STRATEGIC_PARTNERS_BLOCK_THUMBNAIL_URL,

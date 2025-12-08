@@ -38,6 +38,42 @@ const validateEmail = (val: unknown) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) ? true : 'Provide a valid email address.'
 }
 
+const validateHexColor =
+  (label = 'Background Color') =>
+  (val: unknown) => {
+    const s = (val ?? '').toString().trim()
+    if (!s) return true
+    return /^#[0-9A-Fa-f]{6}$/.test(s)
+      ? true
+      : `${label} must be a valid hex color in #RRGGBB (e.g., #FFFFFF).`
+  }
+const validateSectionId = (val: unknown) => {
+  const raw = String(val ?? '')
+
+  // required
+  if (!raw.trim()) {
+    return 'Section ID is required.'
+  }
+
+  // no leading/trailing spaces
+  if (raw !== raw.trim()) {
+    return 'Section ID must not have leading or trailing spaces.'
+  }
+
+  const s = raw.trim()
+
+  // no spaces at all
+  if (/\s/.test(s)) {
+    return 'No spaces allowed. Use "-" to separate words (e.g., "blog-section", not "blog section").'
+  }
+
+  // allowed chars: letters, numbers, hyphen
+  if (!/^[A-Za-z0-9-]+$/.test(s)) {
+    return 'Section ID can only contain letters, numbers, and hyphens (e.g., "blog-section").'
+  }
+
+  return true
+}
 /* ---------------- rich text defaults (Lexical) ---------------- */
 
 const CONSENT_EN_DEFAULT: any = {
@@ -116,6 +152,36 @@ const CareerOpeningSchema: Block = {
   imageAltText: `${CAREER_PAGE_OPENINGS_BLOCK_LABEL} preview`,
 
   fields: [
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'bgColor',
+          type: 'text',
+          label: 'Background Color',
+          defaultValue: '#F6EDDD',
+          required: false,
+          validate: validateHexColor('Background Color'),
+          admin: {
+            description: 'Hex color in #RRGGBB. Default: #F6EDDD',
+            width: '50%',
+          },
+        },
+        {
+          name: 'sectionId',
+          type: 'text',
+          label: 'Section ID (anchor)',
+          required: true,
+          defaultValue: 'career-opening',
+          admin: {
+            width: '50%',
+            description:
+              'Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").',
+          },
+          validate: validateSectionId,
+        },
+      ],
+    },
     // Header (EN/BN)
     {
       type: 'row',

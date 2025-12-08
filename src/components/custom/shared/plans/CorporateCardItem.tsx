@@ -38,7 +38,7 @@ function CorporateCardItem({ data }: Props) {
         flex flex-col items-center justify-center
         space-y-2 lg:space-y-4 xl:space-y-6 2xl:space-y-6
         group transition-all duration-300 ease-linear
-        hover:shadow-lg border border-black
+        hover:shadow-lg 
         "
       >
         {/* hover:bg-[#9C8639]/60 */}
