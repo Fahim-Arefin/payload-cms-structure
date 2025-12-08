@@ -6158,6 +6158,14 @@ export interface Page {
       }
     | {
         /**
+         * Hex color in #RRGGBB. Default: #F6EDDD
+         */
+        bgColor?: string | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+         */
+        sectionId: string;
+        /**
          * Primary heading. Max 80 (৮০) characters.
          */
         title: string;
@@ -8983,6 +8991,8 @@ export interface PagesSelect<T extends boolean = true> {
         'career-opening'?:
           | T
           | {
+              bgColor?: T;
+              sectionId?: T;
               title?: T;
               titleBN?: T;
               subtitle?: T;
