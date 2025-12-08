@@ -63,6 +63,7 @@ export const LEARERS_PAGE = 'Leaders Page'
 export const AGENT_ONBOARDING_PAGE = 'Agent Onboarding Page'
 export const CORPORATE_PLAN_PAGE = 'Corporate Plan Page'
 export const MUTLI_STAGE_PLAN_PAGE = 'Multi Stage Maturity Plan Page'
+export const MICRO_INSURANCE_PLAN_PAGE = 'Micro Insurance Plan Page'
 export const ACCIDENTAL_COVERAGE_PLAN_PAGE = 'Accidental Coverage Plan Page'
 export const PREMIUM_CALCULATOR_PAGE = 'Premium Calculator Page'
 export const PURCHASE_NOW_PAGE = 'Purchase Now Page'
@@ -70,6 +71,7 @@ export const SUPPORT_PAGE = 'Support Page'
 export const NEWS_AND_BLOG_PAGE = 'News And Blogs Page'
 export const NEWS_AND_BLOG_DETAILS_PAGE = 'News And Blogs Details Page'
 export const CAREER_PAGE = 'Career Page'
+export const LEARN_MORE_PAGE = 'Learn More Page'
 
 // home page constants
 // ----------------------------------------------------------------------------------------------
@@ -533,7 +535,7 @@ export const LEARNING_MEDIA_SECTION_BLOCK_THUMBNAIL_URL = `${folder}/learning-me
 
 //Microinsurance page
 export const MICROINSURANCE_SERVICE_SLUG_AND_TAG = 'microinsurance-service'
-export const MICROINSURANCE_SERVICE_BLOCK_LABEL = 'Microinsurance Service'
+export const MICROINSURANCE_SERVICE_BLOCK_LABEL = 'Featured Services'
 export const MICROINSURANCE_SERVICE_CACHE_KEY = 'microinsurance-service-data'
 export const MICROINSURANCE_SERVICE_BLOCK_THUMBNAIL_URL = `${folder}/microinsurance-service-block-thumbnail.png`
 

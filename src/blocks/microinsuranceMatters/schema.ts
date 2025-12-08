@@ -5,6 +5,7 @@ import {
   MICRO_INSURANCE_MATTERS_SLUG_AND_TAG,
   MICRO_INSURANCE_MATTERS_BLOCK_LABEL,
   MICRO_INSURANCE_MATTERS_BLOCK_THUMBNAIL_URL,
+  MICRO_INSURANCE_PLAN_PAGE,
 } from '@/lib/constants'
 
 /* ------------ limits ------------ */
@@ -54,6 +55,9 @@ const WhyMicroInsuranceMattersSchema: Block = {
   labels: {
     singular: MICRO_INSURANCE_MATTERS_BLOCK_LABEL,
     plural: MICRO_INSURANCE_MATTERS_BLOCK_LABEL,
+  },
+  admin: {
+    group: MICRO_INSURANCE_PLAN_PAGE,
   },
 
   imageURL: MICRO_INSURANCE_MATTERS_BLOCK_THUMBNAIL_URL,
