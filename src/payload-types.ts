@@ -511,25 +511,45 @@ export interface Page {
       }
     | {
         /**
-         * Hex color for individual cards in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Hex color for individual cards in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
         cardBg?: string | null;
         /**
-         * Main heading. Max 40 characters.
+         * Short label above the main title. Max 40 characters.
          */
-        heading: string;
+        heading?: string | null;
         /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৪০ অক্ষর।
+         * মূল শিরোনামের উপরে ছোট লেবেল। সর্বোচ্চ ৪০ অক্ষর।
          */
-        headingBN: string;
+        headingBN?: string | null;
         /**
-         * Optional. Must appear verbatim inside the Heading. Max 40 characters.
+         * Primary headline for the section. Max 80 characters.
+         */
+        title?: string | null;
+        /**
+         * সেকশনের প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 40 characters.
          */
         highlightedText?: string | null;
         /**
-         * ঐচ্ছিক। অবশ্যই হেডিং-এর ভিতর হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         * ঐচ্ছিক। অবশ্যই শিরোনামের ভিতর হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
          */
         highlightedTextBN?: string | null;
+        /**
+         * 2–3 short sentences about plans. Max 300 characters.
+         */
+        description?: string | null;
+        /**
+         * প্ল্যান সম্পর্কে ২–৩টি সংক্ষিপ্ত বাক্য। সর্বোচ্চ ৩০০ অক্ষর।
+         */
+        descriptionBN?: string | null;
         /**
          * Optional. Max 24 characters.
          */
@@ -6931,11 +6951,16 @@ export interface PagesSelect<T extends boolean = true> {
         'microinsurance-service'?:
           | T
           | {
+              backgroundColor?: T;
               cardBg?: T;
               heading?: T;
               headingBN?: T;
+              title?: T;
+              titleBN?: T;
               highlightedText?: T;
               highlightedTextBN?: T;
+              description?: T;
+              descriptionBN?: T;
               plansButtonText?: T;
               plansButtonTextBN?: T;
               plansSecondaryButtonText?: T;

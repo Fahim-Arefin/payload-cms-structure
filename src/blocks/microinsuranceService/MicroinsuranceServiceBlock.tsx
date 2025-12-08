@@ -10,11 +10,8 @@ type Props = {
 
 function MicroinsuranceServiceBlock({ block, params }: Props) {
   return (
-    <div>
-      <OSAP data={block} />
-      <div>
-        <OnYourCueSection3 data={block} bg="#f6eddd" />
-      </div>
+    <div style={{ backgroundColor: block?.backgroundColor || '' }}>
+      <OnYourCueSection3 data={block} bg="#f6eddd" />
     </div>
   )
 }
