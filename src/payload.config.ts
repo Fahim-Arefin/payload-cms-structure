@@ -29,6 +29,35 @@ import Media from './collections/Media'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+// ✨ toggle S3 via env
+const enableS3 = process.env.USE_S3_STORAGE === 'true'
+
+const s3Plugin =
+  enableS3 &&
+  process.env.S3_BUCKET_NAME &&
+  process.env.S3_ENDPOINT &&
+  process.env.S3_REGION &&
+  process.env.S3_ACCESS_KEY &&
+  process.env.S3_SECRET_KEY
+    ? s3Storage({
+        collections: {
+          media: {
+            prefix: 'media',
+          },
+        },
+        bucket: process.env.S3_BUCKET_NAME || '',
+        config: {
+          credentials: {
+            accessKeyId: process.env.S3_ACCESS_KEY || '',
+            secretAccessKey: process.env.S3_SECRET_KEY || '',
+          },
+          region: process.env.S3_REGION,
+          endpoint: process.env.S3_ENDPOINT,
+          forcePathStyle: true,
+        },
+      })
+    : null
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -154,23 +183,24 @@ export default buildConfig({
     //     region: process.env.S3_BUCKET_NAME ?? '',
     //   },
     // }),
-    s3Storage({
-      collections: {
-        media: {
-          prefix: 'media',
-        },
-      },
-      bucket: process.env.S3_BUCKET_NAME || '',
-      config: {
-        credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY || '',
-          secretAccessKey: process.env.S3_SECRET_KEY || '',
-        },
-        region: process.env.S3_REGION,
-        endpoint: process.env.S3_ENDPOINT,
-        forcePathStyle: true,
-        // ... Other S3 configuration
-      },
-    }),
+    // s3Storage({
+    //   collections: {
+    //     media: {
+    //       prefix: 'media',
+    //     },
+    //   },
+    //   bucket: process.env.S3_BUCKET_NAME || '',
+    //   config: {
+    //     credentials: {
+    //       accessKeyId: process.env.S3_ACCESS_KEY || '',
+    //       secretAccessKey: process.env.S3_SECRET_KEY || '',
+    //     },
+    //     region: process.env.S3_REGION,
+    //     endpoint: process.env.S3_ENDPOINT,
+    //     forcePathStyle: true,
+    //     // ... Other S3 configuration
+    //   },
+    // }),
+    ...(s3Plugin ? [s3Plugin] : []),
   ],
 })
