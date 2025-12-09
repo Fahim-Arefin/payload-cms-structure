@@ -44,6 +44,9 @@ const s3Plugin =
           media: {
             prefix: 'media',
           },
+          // resume: {
+          //   prefix: 'resumes',
+          // },
         },
         bucket: process.env.S3_BUCKET_NAME || '',
         config: {
