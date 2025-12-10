@@ -488,46 +488,46 @@ const MicroinsuranceServiceSchema: Block = {
           ],
         },
 
-        {
-          type: 'row',
-          fields: [
-            {
-              name: 'buttonText',
-              type: 'text',
-              label: 'CTA Button Text',
-              maxLength: CTA_BUTTON_TEXT_MAX,
-              validate: validateRootCTAEnglishText,
-              admin: {
-                width: '50%',
-                description: `Text shown on the call-to-action button. Max ${CTA_BUTTON_TEXT_MAX} characters.`,
-              },
-            },
-            {
-              name: 'buttonTextBN',
-              type: 'text',
-              label: 'CTA বাটনের টেক্সট (বাংলা)',
-              maxLength: CTA_BUTTON_TEXT_MAX,
-              validate: validateRootCTABanglaText,
-              admin: {
-                width: '50%',
-                description: `কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ${bnNum(
-                  CTA_BUTTON_TEXT_MAX,
-                )} অক্ষর।`,
-              },
-            },
-          ],
-        },
-        {
-          name: 'buttonLink',
-          label: 'Link to (internal page)',
-          type: 'relationship',
-          relationTo: 'pages',
-          validate: validateRootCTALinkRequiredIfAnyText,
-          admin: {
-            description:
-              'Pick an internal Page to link to. External URLs are not allowed. When clicking this button it will navigate to that page.',
-          },
-        },
+        // {
+        //   type: 'row',
+        //   fields: [
+        //     {
+        //       name: 'buttonText',
+        //       type: 'text',
+        //       label: 'CTA Button Text',
+        //       maxLength: CTA_BUTTON_TEXT_MAX,
+        //       validate: validateRootCTAEnglishText,
+        //       admin: {
+        //         width: '50%',
+        //         description: `Text shown on the call-to-action button. Max ${CTA_BUTTON_TEXT_MAX} characters.`,
+        //       },
+        //     },
+        //     {
+        //       name: 'buttonTextBN',
+        //       type: 'text',
+        //       label: 'CTA বাটনের টেক্সট (বাংলা)',
+        //       maxLength: CTA_BUTTON_TEXT_MAX,
+        //       validate: validateRootCTABanglaText,
+        //       admin: {
+        //         width: '50%',
+        //         description: `কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ${bnNum(
+        //           CTA_BUTTON_TEXT_MAX,
+        //         )} অক্ষর।`,
+        //       },
+        //     },
+        //   ],
+        // },
+        // {
+        //   name: 'buttonLink',
+        //   label: 'Link to (internal page)',
+        //   type: 'relationship',
+        //   relationTo: 'pages',
+        //   validate: validateRootCTALinkRequiredIfAnyText,
+        //   admin: {
+        //     description:
+        //       'Pick an internal Page to link to. External URLs are not allowed. When clicking this button it will navigate to that page.',
+        //   },
+        // },
       ],
     },
   ],

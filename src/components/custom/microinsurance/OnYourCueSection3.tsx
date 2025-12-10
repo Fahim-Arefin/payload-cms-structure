@@ -1,6 +1,7 @@
 'use client'
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -14,6 +15,8 @@ import CueItem from '../home/CueItem'
 import { MicroinsuranceServiceBlockType } from '@/types/payloadCustomTypes'
 import CueItem2 from './CueItem2'
 import CueHeaderTwo from '../home/CueHeaderTwo'
+import CarouselNavButtons from '../shared/CarousalNavButtons'
+import { useEffect, useRef, useState } from 'react'
 // import GlobalButton from '../GlobalButton'
 // import LocalizedString from '../LocalizedString'
 
@@ -24,21 +27,51 @@ type Props = {
 
 function OnYourCueSection3({ data, bg }: Props) {
   const cards = (Array.isArray(data?.plans) ? data?.plans : (data?.plans as any)?.cards) ?? []
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
+  const hoverIntervalRef = useRef<number | null>(null)
+  useEffect(() => {
+    if (!carouselApi) return
+
+    const updateScrollButtons = () => {
+      setCanScrollPrev(carouselApi.canScrollPrev())
+      setCanScrollNext(carouselApi.canScrollNext())
+    }
+
+    updateScrollButtons()
+    carouselApi.on('select', updateScrollButtons)
+
+    return () => {
+      carouselApi.off('select', updateScrollButtons)
+    }
+  }, [carouselApi])
+
+  // cleanup interval on unmount, just in case
+  useEffect(() => {
+    return () => {
+      if (hoverIntervalRef.current) {
+        window.clearInterval(hoverIntervalRef.current)
+        hoverIntervalRef.current = null
+      }
+    }
+  }, [])
   return (
     // <div className="container-width md:container-padding-y">
     <div className="container-width container-padding-y px-2 lg:px-0">
       <CueHeaderTwo data={data} />
       {/* Mobile View: Grid */}
-      <div className="block md:hidden space-y-4">
+      {/* <div className="block md:hidden space-y-4">
         {cards.map((card: any, index: number) => (
           <CueItem2 key={index} data={data} card={card as any} index={index} bg={bg} />
         ))}
-      </div>
+      </div> */}
 
       {/* Desktop View: Carousel */}
-      <div className="hidden md:block">
+      <div className="">
         <Carousel
           className="w-full"
+          setApi={setCarouselApi}
           opts={{
             align: 'start',
             // loop: true,
@@ -54,12 +87,13 @@ function OnYourCueSection3({ data, bg }: Props) {
           </CarouselContent>
           {/* Top Center Controls */}
           {cards.length > 3 && (
-            <div
-              className="absolute hidden lg:flex justify-center z-20 gap-2 w-full
-               lg:-top-7 xl:-top-9 2xl:-top-10"
-            >
-              <CarouselPrevious className="static bg-transparent border-2 border-[#1E1E1E80] rounded-md" />
-              <CarouselNext className="static bg-transparent border-2 border-[#1E1E1E80] rounded-md" />
+            <div className="flex gap-2 justify-center mt-6">
+              <CarouselNavButtons
+                onPrev={() => carouselApi?.scrollPrev()}
+                onNext={() => carouselApi?.scrollNext()}
+                hasPrev={canScrollPrev}
+                hasNext={canScrollNext}
+              />
             </div>
           )}
         </Carousel>
