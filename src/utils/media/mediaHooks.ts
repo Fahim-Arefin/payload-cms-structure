@@ -427,6 +427,12 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'forms',
       mediaFields: ['formPDF'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_SLUG_AND_TAG,
+      arrayKey: 'eligibilityData',
+      mediaFields: ['icon'],
+    },
   ],
 
   // Blocks with nested array (media that inside another array) that contain media fields

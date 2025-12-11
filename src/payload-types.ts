@@ -188,7 +188,6 @@ export interface Media {
    * Internal marker: whether this file belongs to the published version or last saved draft.
    */
   versionStage?: ('publish' | 'lastDraft') | null;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -1390,6 +1389,10 @@ export interface Page {
           id?: string | null;
         }[];
         /**
+         * Choose between a simple CTA button or a detailed eligibility card section.
+         */
+        ctaVariant?: ('link' | 'eligibility') | null;
+        /**
          * Text shown on the button. Max 24 characters.
          */
         buttonText?: string | null;
@@ -1401,6 +1404,104 @@ export interface Page {
          * Pick an internal Page to navigate to when the CTA button is clicked (required if CTA text is set).
          */
         buttonLink?: (string | null) | Page;
+        /**
+         * Text shown on the details button. Max 24 characters.
+         */
+        detailsText?: string | null;
+        /**
+         * বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        detailsTextBN?: string | null;
+        /**
+         * Text shown on the see less button. Max 24 characters.
+         */
+        seeLessText?: string | null;
+        /**
+         * কম দেখুন বোতামের টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        seeLessTextBN?: string | null;
+        /**
+         * eligibility cards Title. Max 80 characters.
+         */
+        eligibilityTitle?: string | null;
+        /**
+         * যোগ্যতার কার্ডগুলির শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        eligibilityTitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Eligibility Cards Title. Max 80 characters.
+         */
+        eligibilityTitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক। যোগ্যতার কার্ডগুলির শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        eligibilityTitleHighlightedBN?: string | null;
+        /**
+         * Each item may carry its own icon and age/condition fields.
+         */
+        eligibilityData?:
+          | {
+              /**
+               * Hex color in #FCF4EB. Length ৭.
+               */
+              backGroundColor?: string | null;
+              /**
+               * Hex color in #FFFFFF. Length ৭.
+               */
+              borderColor?: string | null;
+              /**
+               * Square icon (PNG/SVG). Blur placeholder generated automatically. Aspect 1:1.
+               */
+              icon: string | Media;
+              iconOriginal?: (string | null) | Media;
+              pendingIconOriginal?: string | null;
+              pendingIconCrop?: string | null;
+              iconBlurDataURL?: string | null;
+              iconTitle?: string | null;
+              iconTitleBN?: string | null;
+              age?: {
+                title?: string | null;
+                titleBN?: string | null;
+                minAgeLabel?: string | null;
+                minAgeLabelBN?: string | null;
+                minAgeValue?: string | null;
+                minAgeValueBN?: string | null;
+                minAgeValuePeriod?: string | null;
+                minAgeValuePeriodBN?: string | null;
+                maxAgeLabel?: string | null;
+                maxAgeLabelBN?: string | null;
+                maxAgeValue?: string | null;
+                maxAgeValueBN?: string | null;
+                maxAgeValuePeriod?: string | null;
+                maxAgeValuePeriodBN?: string | null;
+              };
+              /**
+               * Optional. Example: value = "10-20 Years".
+               */
+              policyTerm?: {
+                title?: string | null;
+                titleBN?: string | null;
+                value?: string | null;
+                valueBN?: string | null;
+              };
+              /**
+               * Optional. Example: value = "25 Years".
+               */
+              maturityAge?: {
+                title?: string | null;
+                titleBN?: string | null;
+                value?: string | null;
+                valueBN?: string | null;
+              };
+              physicalCondition?: {
+                title?: string | null;
+                titleBN?: string | null;
+                value?: string | null;
+                valueBN?: string | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'plan-info-design';
@@ -6787,7 +6888,6 @@ export interface MediaSelect<T extends boolean = true> {
   temporaryExpiresAt?: T;
   blurDataURL?: T;
   versionStage?: T;
-  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -7260,9 +7360,74 @@ export interface PagesSelect<T extends boolean = true> {
                     nameBN?: T;
                     id?: T;
                   };
+              ctaVariant?: T;
               buttonText?: T;
               buttonTextBN?: T;
               buttonLink?: T;
+              detailsText?: T;
+              detailsTextBN?: T;
+              seeLessText?: T;
+              seeLessTextBN?: T;
+              eligibilityTitle?: T;
+              eligibilityTitleBN?: T;
+              eligibilityTitleHighlighted?: T;
+              eligibilityTitleHighlightedBN?: T;
+              eligibilityData?:
+                | T
+                | {
+                    backGroundColor?: T;
+                    borderColor?: T;
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    iconTitle?: T;
+                    iconTitleBN?: T;
+                    age?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          minAgeLabel?: T;
+                          minAgeLabelBN?: T;
+                          minAgeValue?: T;
+                          minAgeValueBN?: T;
+                          minAgeValuePeriod?: T;
+                          minAgeValuePeriodBN?: T;
+                          maxAgeLabel?: T;
+                          maxAgeLabelBN?: T;
+                          maxAgeValue?: T;
+                          maxAgeValueBN?: T;
+                          maxAgeValuePeriod?: T;
+                          maxAgeValuePeriodBN?: T;
+                        };
+                    policyTerm?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
+                    maturityAge?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
+                    physicalCondition?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
