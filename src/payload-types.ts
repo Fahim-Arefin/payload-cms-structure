@@ -746,18 +746,6 @@ export interface Page {
             listItemTextBN: string;
             id?: string | null;
           }[];
-          /**
-           * Text shown on the call-to-action button. Max 24 characters.
-           */
-          buttonText?: string | null;
-          /**
-           * কলে-টু-অ্যাকশন বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
-           */
-          buttonTextBN?: string | null;
-          /**
-           * Pick an internal Page to link to. External URLs are not allowed. When clicking this button it will navigate to that page.
-           */
-          buttonLink?: (string | null) | Page;
           id?: string | null;
         }[];
         id?: string | null;
@@ -7270,9 +7258,6 @@ export interface PagesSelect<T extends boolean = true> {
                           listItemTextBN?: T;
                           id?: T;
                         };
-                    buttonText?: T;
-                    buttonTextBN?: T;
-                    buttonLink?: T;
                     id?: T;
                   };
               id?: T;

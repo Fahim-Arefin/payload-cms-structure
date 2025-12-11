@@ -149,7 +149,12 @@ export default function CueItem2({ card, data, index, bg }: Props) {
       className="relative flex flex-col w-full mx-auto shadow-md font-avenir rounded-2xl"
       style={{ backgroundColor: data?.cardBg || '' }}
     >
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+      <ReactCardFlip
+        isFlipped={isFlipped}
+        flipDirection="horizontal"
+        flipSpeedFrontToBack={1}
+        flipSpeedBackToFront={1}
+      >
         {/* FRONT */}
         <div className="flex flex-col">
           {/* top header */}
@@ -165,9 +170,7 @@ export default function CueItem2({ card, data, index, bg }: Props) {
               <Image
                 fill
                 className={`z-0 object-cover object-center ${
-                  index % 2 === 0
-                    ? 'rounded-b-2xl rounded-t-none'
-                    : 'rounded-t-2xl rounded-b-none'
+                  index % 2 === 0 ? 'rounded-b-2xl rounded-t-none' : 'rounded-t-2xl rounded-b-none'
                 }`}
                 src={(card.image as any)?.url || ''}
                 alt={`${card.title} visual`}
@@ -195,8 +198,8 @@ export default function CueItem2({ card, data, index, bg }: Props) {
               flex flex-col 
               ${
                 index % 2 === 0
-                  ? 'order-2 rounded-2xl lg:rounded-b-2xl lg:rounded-t-none'
-                  : 'order-1 rounded-2xl lg:rounded-t-2xl lg:rounded-b-none lg:justify-end'
+                  ? 'order-1 rounded-2xl lg:rounded-b-2xl lg:rounded-t-none'
+                  : 'order-2 rounded-2xl lg:rounded-t-2xl lg:rounded-b-none'
               }`}
           >
             {listItems.map((item: PlanType['listItems'][number], idx: number) => (
