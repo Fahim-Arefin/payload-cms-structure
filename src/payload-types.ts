@@ -436,6 +436,109 @@ export interface Page {
         blockType: 'hero';
       }
     | {
+        uploadSessionId?: string | null;
+        heroes: {
+          /**
+           * Upload & crop a 16:5 hero image.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Title (English). Max 120 characters.
+           */
+          title: string;
+          /**
+           * শিরোনাম (বাংলা)। সর্বোচ্চ ১২০ অক্ষর।
+           */
+          titleBN: string;
+          id?: string | null;
+        }[];
+        /**
+         * Add call-to-action buttons that appear below the hero content (maximum 2 buttons)
+         */
+        ctaButtons?:
+          | (
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                   */
+                  buttonLink: string | Page;
+                  /**
+                   * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                   */
+                  sectionId?: string | null;
+                  /**
+                   * Select the button style
+                   */
+                  style?: ('primary' | 'secondary' | 'glass') | null;
+                  /**
+                   * Select the button size
+                   */
+                  size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'pageLink';
+                }
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
+                   */
+                  youtubeUrl: string;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'youtubeVideo';
+                }
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Example: +88 09610889900
+                   */
+                  phoneNumber: string;
+                  /**
+                   * Select the button style
+                   */
+                  style?: ('primary' | 'secondary' | 'glass') | null;
+                  /**
+                   * Select the button size
+                   */
+                  size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'callNow';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero-small';
+      }
+    | {
         /**
          * Hex color in #RRGGBB (e.g., #FBFFD3). Length 7 (৭).
          */
@@ -6986,6 +7089,61 @@ export interface PagesSelect<T extends boolean = true> {
                     subtitleBN?: T;
                     description?: T;
                     descriptionBN?: T;
+                    id?: T;
+                  };
+              ctaButtons?:
+                | T
+                | {
+                    pageLink?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          style?: T;
+                          size?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    youtubeVideo?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          youtubeUrl?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    callNow?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          phoneNumber?: T;
+                          style?: T;
+                          size?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'hero-small'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              heroes?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    title?: T;
+                    titleBN?: T;
                     id?: T;
                   };
               ctaButtons?:

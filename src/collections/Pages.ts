@@ -66,6 +66,7 @@ import WhyMicroInsuranceMattersSchema from '@/blocks/microinsuranceMatters/schem
 import MicroInsuranceStrategicPartnersSchema from '@/blocks/strategicPartners/schema'
 import LearningMediaSectionSchema from '@/blocks/learningPlatform/schema'
 import SearchBarSchema from '@/blocks/SearchBar/schema'
+import HeroSmallSchema from '@/blocks/heroSmall/schema'
 
 // ✅ always spread a safe object
 const safeMediaHooks: NonNullable<CollectionConfig['hooks']> = mediaHooks ?? {}
@@ -182,6 +183,7 @@ export const Pages: CollectionConfig = {
       blocks: [
         // hero page
         HeroSchema,
+        HeroSmallSchema,
         // common section
         LifeInsuranceSimplifiedSchema,
         MicroinsuranceServiceSchema,

@@ -85,6 +85,11 @@ export const HOME_PAGE_HERO_BLOCK_LABEL = 'Hero (Large)'
 export const HOME_PAGE_HERO_CACHE_KEY = 'hero-data'
 export const HOME_PAGE_HERO_BLOCK_THUMBNAIL_URL = `${folder}/hero-block-thumbnail.png`
 
+export const HERO_SMALL_SLUG_AND_TAG = 'hero-small'
+export const HERO_SMALL_BLOCK_LABEL = 'Hero (Small)'
+export const HERO_SMALL_CACHE_KEY = 'hero-small-data'
+export const HERO_SMALL_BLOCK_THUMBNAIL_URL = `${folder}/hero-small-block-thumbnail.jpg`
+
 export const HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG = 'search-bar'
 export const HOME_PAGE_SEARCH_BAR_BLOCK_LABEL = 'Search Bar'
 export const HOME_PAGE_SEARCH_BAR_CACHE_KEY = 'search-bar-data'

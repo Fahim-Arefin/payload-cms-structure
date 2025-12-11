@@ -16,17 +16,18 @@ type ctaButtons = NonNullable<HeroBlock['ctaButtons']>
 
 type Props = {
   ctaButtons: ctaButtons
+  top?: string
 }
 
-export default function CTAButtonBlock({ ctaButtons }: Props) {
+export default function CTAButtonBlock({ ctaButtons, top }: Props) {
   const [open, setOpen] = useState(false)
   // href={`/${resolvePageSlug(item?.buttonLink)}/#${item?.sectionId}`}
 
   return (
     <div
-      className="absolute top-[245px] md:top-[355px] lg:top-[75%] xl:top-[70%]  2xl:top-[730px] 
+      className={`absolute ${top ? top : 'top-[245px] md:top-[355px] lg:top-[75%] xl:top-[70%]  2xl:top-[730px] '}
         inset-x-0 -left-[24px] lg:left-[105px] xl:left-[185px] 2xl:left-[258px] lg:right-auto 
-        hero-content-width flex items-center justify-left space-x-2 lg:space-x-3 xl:space-x-5 lg:justify-start"
+        hero-content-width flex items-center justify-left space-x-2 lg:space-x-3 xl:space-x-5 lg:justify-start`}
     >
       {ctaButtons?.map((block, index) => {
         if (block?.blockType === 'pageLink') {

@@ -44,6 +44,7 @@ import {
   MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG,
   LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
   SUPPORT_FAQ_TAB_SLUG_AND_TAG,
+  HERO_SMALL_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -203,6 +204,12 @@ export const mediaHooks = withMediaLifecycle({
     {
       layoutKey: 'layout',
       blockType: HOME_PAGE_HERO_SLUG_AND_TAG,
+      arrayKey: 'heroes',
+      mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: HERO_SMALL_SLUG_AND_TAG,
       arrayKey: 'heroes',
       mediaFields: ['image'],
     },
