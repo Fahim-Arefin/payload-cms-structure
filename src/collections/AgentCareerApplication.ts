@@ -1,11 +1,15 @@
 import type { CollectionConfig } from 'payload'
 import axios from 'axios'
+import { FORM_DATA } from '@/lib/constants'
 
 export const AgentCareerApplication: CollectionConfig = {
   slug: 'agent-career-application',
   access: {
     read: () => true,
     create: () => true,
+  },
+  admin: {
+    group: FORM_DATA,
   },
   fields: [
     {

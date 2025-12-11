@@ -72,6 +72,9 @@ export const NEWS_AND_BLOG_PAGE = 'News And Blogs Page'
 export const NEWS_AND_BLOG_DETAILS_PAGE = 'News And Blogs Details Page'
 export const CAREER_PAGE = 'Career Page'
 export const LEARN_MORE_PAGE = 'Learn More Page'
+export const MEDIA = 'Media Library'
+export const FORM_DATA = 'User Submitted Form Data'
+export const AUDIT_LOG = 'Audit'
 
 // home page constants
 // ----------------------------------------------------------------------------------------------

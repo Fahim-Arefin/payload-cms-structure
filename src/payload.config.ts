@@ -93,6 +93,7 @@ export default buildConfig({
     },
     abortOnLimit: true,
   },
+  collections: [Users, Media, Resume, AuditLogs, CareerApplication, AgentCareerApplication, Pages],
   globals: [
     Header,
     Navbar,
@@ -103,7 +104,6 @@ export default buildConfig({
     GlobalBlogs,
     GlobalVlogs,
   ],
-  collections: [Users, Media, Resume, CareerApplication, AgentCareerApplication, Pages, AuditLogs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

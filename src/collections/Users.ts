@@ -1,15 +1,8 @@
-import type {
-  CollectionAfterLoginHook,
-  CollectionAfterLogoutHook,
-  CollectionConfig,
-} from 'payload'
+import type { CollectionAfterLoginHook, CollectionAfterLogoutHook, CollectionConfig } from 'payload'
 import { ROLES, hasRole } from '@/lib/rbac'
 import { getClientIP } from '@/lib/http'
-import {
-  sanitizeUserSnapshot,
-  onlyBenignUserUpdate,
-  recentAuthAuditExists,
-} from '@/lib/audit'
+import { sanitizeUserSnapshot, onlyBenignUserUpdate, recentAuthAuditExists } from '@/lib/audit'
+import { AUDIT_LOG } from '@/lib/constants'
 
 const afterLogin: CollectionAfterLoginHook = async ({ req, user }) => {
   try {
@@ -85,15 +78,14 @@ export const Users: CollectionConfig = {
 
   admin: {
     useAsTitle: 'email',
+    group: AUDIT_LOG,
     defaultColumns: ['email', 'role', 'lastLoginAt', 'lastLogoutAt', 'updatedAt'],
   },
 
   access: {
     read: ({ req }) => {
       if (!req.user) return false
-      return hasRole(req.user, ['super-admin', 'admin'])
-        ? true
-        : { id: { equals: req.user.id } }
+      return hasRole(req.user, ['super-admin', 'admin']) ? true : { id: { equals: req.user.id } }
     },
     create: ({ req }) => hasRole(req.user, ['super-admin']),
     update: ({ req }) =>

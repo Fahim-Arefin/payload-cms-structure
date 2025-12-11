@@ -1,11 +1,15 @@
 import type { CollectionConfig } from 'payload'
 import axios from 'axios'
+import { FORM_DATA } from '@/lib/constants'
 
 export const CareerApplication: CollectionConfig = {
   slug: 'career-application',
   access: {
     read: () => true,
     create: () => true,
+  },
+  admin: {
+    group: FORM_DATA,
   },
   fields: [
     {
@@ -52,7 +56,7 @@ export const CareerApplication: CollectionConfig = {
           const response = await axios.get(fileUrl, {
             responseType: 'stream',
           })
-                    // Get the additional email from the environment variable
+          // Get the additional email from the environment variable
           const additionalEmail = process?.env?.SHANTA_ADDITIONAL_EMAIL
 
           // Construct the "to" field with both the career email and the additional email
