@@ -55,7 +55,7 @@ jobs:
             SERVER_IP_LIST=${{ secrets.SERVER_IP_LIST_STAGING }}
             printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY_STAGING }}" > ~/.ssh/shanta-life/id_rsa
           fi
-          $mediaVolumeDir="/home/ubuntu/dockerVolumes/shantalife_$BRANCH/media"
+          mediaVolumeDir="/home/ubuntu/dockerVolumes/shantalife_$BRANCH/media"
 
           chmod 600 ~/.ssh/shanta-life/id_rsa
 
