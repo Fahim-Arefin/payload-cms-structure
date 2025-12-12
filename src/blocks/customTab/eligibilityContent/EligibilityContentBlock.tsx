@@ -19,13 +19,14 @@ function EligibilityContentBlock({ data, showmore }: Props) {
         : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
 
   const showmoreGridCols = 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3'
+  const isAnySubtile = items.some((item) => item?.iconSubtitle || item?.iconSubtitleBN)
 
   return (
     <div
       className={`grid ${showmore ? showmoreGridCols : gridCols} gap-4 md:gap-6 lg:gap-2 xl:gap-8 `}
     >
       {items?.map((item, index) => (
-        <EligibilityCommonCard key={index} data={item} />
+        <EligibilityCommonCard key={index} data={item} isAnySubtile={isAnySubtile} />
       ))}
     </div>
   )

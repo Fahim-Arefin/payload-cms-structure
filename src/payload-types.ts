@@ -731,6 +731,14 @@ export interface Page {
            */
           titleBN: string;
           /**
+           * Secondary plan title. Max 80 characters.
+           */
+          subtitle?: string | null;
+          /**
+           * দ্বিতীয় প্ল্যান টাইটেল। সর্বোচ্চ ৮০ অক্ষর।
+           */
+          subtitleBN?: string | null;
+          /**
            * Brief description of the plan. Max 300 characters.
            */
           description: string;
@@ -1221,6 +1229,81 @@ export interface Page {
         blockType: 'corporate-intro';
       }
     | {
+        /**
+         * Hex color in #RRGGBB. Length 7 (৭).
+         */
+        backgroundColor: string;
+        /**
+         * Used in the page URL hash (e.g., #ptd-schedule) and as the <section id="…"> value.
+         */
+        sectionId: string;
+        /**
+         * First line of section heading. Max 80 chars.
+         */
+        titleLine1: string;
+        /**
+         * শিরোনামের প্রথম লাইন। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleLine1BN: string;
+        /**
+         * Second line of section heading (accent color). Max 80 chars.
+         */
+        titleLine2: string;
+        /**
+         * শিরোনামের দ্বিতীয় লাইন (অ্যাকসেন্ট রঙ)। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleLine2BN: string;
+        /**
+         * Left column header. Max 60 chars.
+         */
+        lossHeader: string;
+        /**
+         * বাম কলামের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+         */
+        lossHeaderBN: string;
+        /**
+         * Right column header. Max 60 chars.
+         */
+        benefitsHeader: string;
+        /**
+         * ডান কলামের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+         */
+        benefitsHeaderBN: string;
+        /**
+         * Small line under Benefits header. Max 100 chars.
+         */
+        benefitsSubHeader: string;
+        /**
+         * সুবিধা হেডারের নিচের ছোট লাইন। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        benefitsSubHeaderBN: string;
+        /**
+         * Each row contains the “Loss of …” text and the “Benefit” value/label. Min 1, Max 50.
+         */
+        rows: {
+          /**
+           * Loss description. Max 120 chars.
+           */
+          lossEN: string;
+          /**
+           * ক্ষতির বিবরণ। সর্বোচ্চ ১২০ অক্ষর।
+           */
+          lossBN: string;
+          /**
+           * e.g., "100%" or "50%". Max 20 chars.
+           */
+          benefitEN: string;
+          /**
+           * যেমন, "১০০%" বা "৫০%". সর্বোচ্চ ২০ অক্ষর।
+           */
+          benefitBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'accidental-permanent-partial-disability';
+      }
+    | {
         uploadSessionId?: string | null;
         /**
          * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
@@ -1584,6 +1667,8 @@ export interface Page {
               iconBlurDataURL?: string | null;
               iconTitle?: string | null;
               iconTitleBN?: string | null;
+              iconSubtitle?: string | null;
+              iconSubtitleBN?: string | null;
               age?: {
                 title?: string | null;
                 titleBN?: string | null;
@@ -1816,7 +1901,7 @@ export interface Page {
                   /**
                    * Upload/select the brochure PDF.
                    */
-                  brochurePDF?: (string | null) | Media;
+                  brochurePDF: string | Media;
                   /**
                    * Max 60 characters.
                    */
@@ -2055,7 +2140,7 @@ export interface Page {
                   /**
                    * Upload/select the brochure PDF.
                    */
-                  brochurePDF?: (string | null) | Media;
+                  brochurePDF: string | Media;
                   /**
                    * Max 60 characters.
                    */
@@ -2881,6 +2966,8 @@ export interface Page {
                   iconBlurDataURL?: string | null;
                   iconTitle?: string | null;
                   iconTitleBN?: string | null;
+                  iconSubtitle?: string | null;
+                  iconSubtitleBN?: string | null;
                   age?: {
                     title?: string | null;
                     titleBN?: string | null;
@@ -3548,7 +3635,7 @@ export interface Page {
                   /**
                    * Upload/select the brochure PDF.
                    */
-                  brochurePDF?: (string | null) | Media;
+                  brochurePDF: string | Media;
                   /**
                    * Max 60 characters.
                    */
@@ -5038,7 +5125,7 @@ export interface Page {
                   /**
                    * Upload/select the brochure PDF.
                    */
-                  brochurePDF?: (string | null) | Media;
+                  brochurePDF: string | Media;
                   /**
                    * Max 60 characters.
                    */
@@ -5559,81 +5646,6 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'prem-calculator-card';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB. Length 7 (৭).
-         */
-        backgroundColor: string;
-        /**
-         * Used in the page URL hash (e.g., #ptd-schedule) and as the <section id="…"> value.
-         */
-        sectionId: string;
-        /**
-         * First line of section heading. Max 80 chars.
-         */
-        titleLine1: string;
-        /**
-         * শিরোনামের প্রথম লাইন। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleLine1BN: string;
-        /**
-         * Second line of section heading (accent color). Max 80 chars.
-         */
-        titleLine2: string;
-        /**
-         * শিরোনামের দ্বিতীয় লাইন (অ্যাকসেন্ট রঙ)। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleLine2BN: string;
-        /**
-         * Left column header. Max 60 chars.
-         */
-        lossHeader: string;
-        /**
-         * বাম কলামের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
-         */
-        lossHeaderBN: string;
-        /**
-         * Right column header. Max 60 chars.
-         */
-        benefitsHeader: string;
-        /**
-         * ডান কলামের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
-         */
-        benefitsHeaderBN: string;
-        /**
-         * Small line under Benefits header. Max 100 chars.
-         */
-        benefitsSubHeader: string;
-        /**
-         * সুবিধা হেডারের নিচের ছোট লাইন। সর্বোচ্চ ১০০ অক্ষর।
-         */
-        benefitsSubHeaderBN: string;
-        /**
-         * Each row contains the “Loss of …” text and the “Benefit” value/label. Min 1, Max 50.
-         */
-        rows: {
-          /**
-           * Loss description. Max 120 chars.
-           */
-          lossEN: string;
-          /**
-           * ক্ষতির বিবরণ। সর্বোচ্চ ১২০ অক্ষর।
-           */
-          lossBN: string;
-          /**
-           * e.g., "100%" or "50%". Max 20 chars.
-           */
-          benefitEN: string;
-          /**
-           * যেমন, "১০০%" বা "৫০%". সর্বোচ্চ ২০ অক্ষর।
-           */
-          benefitBN: string;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'accidental-permanent-partial-disability';
       }
     | {
         /**
@@ -7249,6 +7261,8 @@ export interface PagesSelect<T extends boolean = true> {
                     imageBlurDataURL?: T;
                     title?: T;
                     titleBN?: T;
+                    subtitle?: T;
+                    subtitleBN?: T;
                     description?: T;
                     descriptionBN?: T;
                     listItems?:
@@ -7429,6 +7443,33 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'accidental-permanent-partial-disability'?:
+          | T
+          | {
+              backgroundColor?: T;
+              sectionId?: T;
+              titleLine1?: T;
+              titleLine1BN?: T;
+              titleLine2?: T;
+              titleLine2BN?: T;
+              lossHeader?: T;
+              lossHeaderBN?: T;
+              benefitsHeader?: T;
+              benefitsHeaderBN?: T;
+              benefitsSubHeader?: T;
+              benefitsSubHeaderBN?: T;
+              rows?:
+                | T
+                | {
+                    lossEN?: T;
+                    lossBN?: T;
+                    benefitEN?: T;
+                    benefitBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'add-on-info'?:
           | T
           | {
@@ -7542,6 +7583,8 @@ export interface PagesSelect<T extends boolean = true> {
                     iconBlurDataURL?: T;
                     iconTitle?: T;
                     iconTitleBN?: T;
+                    iconSubtitle?: T;
+                    iconSubtitleBN?: T;
                     age?:
                       | T
                       | {
@@ -8015,6 +8058,8 @@ export interface PagesSelect<T extends boolean = true> {
                                       iconBlurDataURL?: T;
                                       iconTitle?: T;
                                       iconTitleBN?: T;
+                                      iconSubtitle?: T;
+                                      iconSubtitleBN?: T;
                                       age?:
                                         | T
                                         | {
@@ -8986,33 +9031,6 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     consentText?: T;
                     consentTextBN?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'accidental-permanent-partial-disability'?:
-          | T
-          | {
-              backgroundColor?: T;
-              sectionId?: T;
-              titleLine1?: T;
-              titleLine1BN?: T;
-              titleLine2?: T;
-              titleLine2BN?: T;
-              lossHeader?: T;
-              lossHeaderBN?: T;
-              benefitsHeader?: T;
-              benefitsHeaderBN?: T;
-              benefitsSubHeader?: T;
-              benefitsSubHeaderBN?: T;
-              rows?:
-                | T
-                | {
-                    lossEN?: T;
-                    lossBN?: T;
-                    benefitEN?: T;
-                    benefitBN?: T;
-                    id?: T;
                   };
               id?: T;
               blockName?: T;

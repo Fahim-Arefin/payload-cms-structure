@@ -80,9 +80,7 @@ export default function CueItem2({ card, data, index, bg }: Props) {
         <LocalizedText
           as="h2"
           className="text-lg lg:text-lg xl:text-2xl font-semibold"
-          // @ts-expect-error tolerate legacy shape
           en={card?.subtitle}
-          // @ts-expect-error tolerate legacy shape
           bn={card?.subtitleBN}
         />
       )}

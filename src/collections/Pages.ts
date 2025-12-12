@@ -194,6 +194,7 @@ export const Pages: CollectionConfig = {
         MultiStageIntroSchema,
         ShantaIntroSchema,
         CorporateIntroSchema,
+        APPDSchema,
         AddonsInfoSchema,
         PlanInfoDesignSchema,
         PlanInfoDesign03Schema,
@@ -238,9 +239,6 @@ export const Pages: CollectionConfig = {
         PurchaseFormSchema,
         // premium cal page,
         PremCalculatorPageSchema,
-        // Accidental coverage page
-        APPDSchema,
-
         //support page
         SupportMapTabSchema,
         SupportFaqTabSchema,

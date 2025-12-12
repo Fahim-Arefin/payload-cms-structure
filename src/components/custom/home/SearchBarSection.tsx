@@ -365,8 +365,13 @@ function SearchBarSection({ suggestions, backgroundColor }: Props) {
 
   return (
     <div
-      className="z-40 flex justify-center items-center px-10 py-12 sm:p-8 md:p-16 lg:p-24"
-      style={{ backgroundColor: backgroundColor || '#FFFFFF' }}
+      // lg:pt-24 lg:pb-0
+      className="z-40 flex justify-center items-center px-10
+       py-12 
+       sm:p-8
+       md:p-16 
+       lg:p-24 "
+      style={{ backgroundColor: backgroundColor }}
     >
       <div
         className="w-full md:max-w-sm lg:max-w-xl bg-[#F6EDDD] rounded-lg md:rounded-md 

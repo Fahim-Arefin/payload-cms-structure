@@ -1,12 +1,12 @@
 // src/payload/blocks/APPDSchema.ts
-import type { Block } from 'payload'
-import { bnNum } from '@/lib/utils'
 import {
-  ACCIDENTAL_COVERAGE_PLAN_PAGE,
   APPD_BLOCK_LABEL,
   APPD_BLOCK_SLUG_AND_TAG,
   APPD_BLOCK_THUMBNAIL_URL,
+  COMMON,
 } from '@/lib/constants'
+import { bnNum } from '@/lib/utils'
+import type { Block } from 'payload'
 
 /* ---------------- limits ---------------- */
 const COLOR_HEX_LEN = 7 // #RRGGBB
@@ -54,7 +54,7 @@ const APPDSchema: Block = {
   },
 
   admin: {
-    group: ACCIDENTAL_COVERAGE_PLAN_PAGE,
+    group: COMMON,
   },
 
   imageURL: APPD_BLOCK_THUMBNAIL_URL,

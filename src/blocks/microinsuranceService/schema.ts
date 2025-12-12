@@ -15,8 +15,8 @@ const HEADING_MAX = 40
 const HIGHLIGHTED_TEXT_MAX = 40
 const DESCRIPTION_MAX = 300
 const TITLE_MAX = 80
-
 const PLAN_TITLE_MAX = 20
+const PLAN_SUBTITLE_MAX = 80
 const PLANS_MIN = 3
 const PLANS_MAX = 5
 
@@ -160,32 +160,37 @@ const MicroinsuranceServiceSchema: Block = {
   fields: [
     /* -------- Section appearance -------- */
     {
-      name: 'backgroundColor',
-      type: 'text',
-      label: 'Section Background Color',
-      maxLength: COLOR_HEX_LEN,
-      validate: validateHexColor,
-      defaultValue: '#FFFFFF',
-      admin: {
-        width: '33%',
-        description: `Hex color in #RRGGBB (e.g., #FFFFFF). Length ${COLOR_HEX_LEN} (${bnNum(
-          COLOR_HEX_LEN,
-        )}).`,
-      },
-    },
-    {
-      name: 'cardBg',
-      type: 'text',
-      label: 'Card Background Color',
-      maxLength: COLOR_HEX_LEN,
-      validate: validateHexColor,
-      defaultValue: '#F6EDDD',
-      admin: {
-        width: '33%',
-        description: `Hex color for individual cards in #RRGGBB (e.g., #F6EDDD). Length ${COLOR_HEX_LEN} (${bnNum(
-          COLOR_HEX_LEN,
-        )}).`,
-      },
+      type: 'row',
+      fields: [
+        {
+          name: 'backgroundColor',
+          type: 'text',
+          label: 'Section Background Color',
+          maxLength: COLOR_HEX_LEN,
+          validate: validateHexColor,
+          defaultValue: '#FFFFFF',
+          admin: {
+            width: '50%',
+            description: `Hex color in #RRGGBB (e.g., #FFFFFF). Length ${COLOR_HEX_LEN} (${bnNum(
+              COLOR_HEX_LEN,
+            )}).`,
+          },
+        },
+        {
+          name: 'cardBg',
+          type: 'text',
+          label: 'Card Background Color',
+          maxLength: COLOR_HEX_LEN,
+          validate: validateHexColor,
+          defaultValue: '#F6EDDD',
+          admin: {
+            width: '50%',
+            description: `Hex color for individual cards in #RRGGBB (e.g., #F6EDDD). Length ${COLOR_HEX_LEN} (${bnNum(
+              COLOR_HEX_LEN,
+            )}).`,
+          },
+        },
+      ],
     },
 
     /* -------- Header (EN/BN pairs) -------- */
@@ -423,6 +428,34 @@ const MicroinsuranceServiceSchema: Block = {
           ],
         },
 
+        // Plan Subtitle + SubtitleBN
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'subtitle',
+              type: 'text',
+              required: false,
+              label: 'Plan Subtitle',
+              maxLength: PLAN_SUBTITLE_MAX,
+              admin: {
+                width: '50%',
+                description: `Secondary plan title. Max ${PLAN_SUBTITLE_MAX} characters.`,
+              },
+            },
+            {
+              name: 'subtitleBN',
+              type: 'text',
+              required: false,
+              label: 'প্ল্যান উপশিরোনাম (বাংলা)',
+              maxLength: PLAN_SUBTITLE_MAX,
+              admin: {
+                width: '50%',
+                description: `দ্বিতীয় প্ল্যান টাইটেল। সর্বোচ্চ ${bnNum(PLAN_SUBTITLE_MAX)} অক্ষর।`,
+              },
+            },
+          ],
+        },
         // Plan Description (EN/BN)
         {
           type: 'row',

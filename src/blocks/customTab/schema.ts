@@ -1049,7 +1049,7 @@ const CustomTabSchema: Block = {
         singular: 'Button',
         plural: 'Buttons',
       },
-      minRows: 1,
+      minRows: 0,
       maxRows: 3,
       blocks: [BrochureButtonSchema, CalculatorModalSchema, LinkButtonSchema],
     },

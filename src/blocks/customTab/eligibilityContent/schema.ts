@@ -99,6 +99,7 @@ const EligibilityContentSchema: Block = {
           ownerCollection: ELIGIBILITY_CONTENT_SLUG_AND_TAG as any,
         } as any),
 
+        // title
         {
           type: 'row',
           fields: [
@@ -118,6 +119,30 @@ const EligibilityContentSchema: Block = {
               required: false,
               maxLength: TITLE_MAX,
               validate: validateShortText('Icon Title (BN)', TITLE_MAX, false),
+              admin: { width: '50%' },
+            },
+          ],
+        },
+        // subtitle
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'iconSubtitle',
+              type: 'text',
+              label: 'Icon Subtitle (EN)',
+              required: false,
+              maxLength: TITLE_MAX,
+              validate: validateShortText('Icon Subtitle', TITLE_MAX, false),
+              admin: { width: '50%' },
+            },
+            {
+              name: 'iconSubtitleBN',
+              type: 'text',
+              label: 'আইকন সাবটাইটেল (বাংলা)',
+              required: false,
+              maxLength: TITLE_MAX,
+              validate: validateShortText('Icon Subtitle (BN)', TITLE_MAX, false),
               admin: { width: '50%' },
             },
           ],
