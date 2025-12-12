@@ -45,6 +45,7 @@ import {
   LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
   SUPPORT_FAQ_TAB_SLUG_AND_TAG,
   HERO_SMALL_SLUG_AND_TAG,
+  PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -196,6 +197,11 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
       mediaFields: ['instagramIcon', 'facebookIcon', 'linkedinIcon', 'youtubeIcon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
+      mediaFields: ['image'],
     },
   ],
 
@@ -437,6 +443,12 @@ export const mediaHooks = withMediaLifecycle({
     {
       layoutKey: 'layout',
       blockType: PLAN_INFO_DESIGN_SLUG_AND_TAG,
+      arrayKey: 'eligibilityData',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
       arrayKey: 'eligibilityData',
       mediaFields: ['icon'],
     },

@@ -2334,6 +2334,165 @@ export interface Page {
         blockType: 'plan-info-design-05';
       }
     | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Primary heading. Max 120 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 120 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Subtitle. Max 120 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~600 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * image (640×500). Required.
+         */
+        image: string | Media;
+        imageOriginal?: (string | null) | Media;
+        pendingImageOriginal?: string | null;
+        pendingImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageBlurDataURL?: string | null;
+        /**
+         * Each item may carry its own icon and age/condition fields.
+         */
+        eligibilityData: {
+          /**
+           * Hex color in #FCF4EB. Length ৭.
+           */
+          backGroundColor?: string | null;
+          /**
+           * Hex color in #FFFFFF. Length ৭.
+           */
+          borderColor?: string | null;
+          /**
+           * Square icon (PNG/SVG). Blur placeholder generated automatically. Aspect 1:1.
+           */
+          icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
+          iconTitle?: string | null;
+          iconTitleBN?: string | null;
+          iconSubtitle?: string | null;
+          iconSubtitleBN?: string | null;
+          age?: {
+            title?: string | null;
+            titleBN?: string | null;
+            minAgeLabel?: string | null;
+            minAgeLabelBN?: string | null;
+            minAgeValue?: string | null;
+            minAgeValueBN?: string | null;
+            minAgeValuePeriod?: string | null;
+            minAgeValuePeriodBN?: string | null;
+            maxAgeLabel?: string | null;
+            maxAgeLabelBN?: string | null;
+            maxAgeValue?: string | null;
+            maxAgeValueBN?: string | null;
+            maxAgeValuePeriod?: string | null;
+            maxAgeValuePeriodBN?: string | null;
+          };
+          /**
+           * Optional. Example: value = "10-20 Years".
+           */
+          policyTerm?: {
+            title?: string | null;
+            titleBN?: string | null;
+            value?: string | null;
+            valueBN?: string | null;
+          };
+          /**
+           * Optional. Example: value = "25 Years".
+           */
+          maturityAge?: {
+            title?: string | null;
+            titleBN?: string | null;
+            value?: string | null;
+            valueBN?: string | null;
+          };
+          physicalCondition?: {
+            title?: string | null;
+            titleBN?: string | null;
+            value?: string | null;
+            valueBN?: string | null;
+          };
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-info-design-07';
+      }
+    | {
         /**
          * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
          */
@@ -7820,6 +7979,88 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     description?: T;
                     descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'plan-info-design-07'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              imageOrder?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              image?: T;
+              imageOriginal?: T;
+              pendingImageOriginal?: T;
+              pendingImageCrop?: T;
+              imageBlurDataURL?: T;
+              eligibilityData?:
+                | T
+                | {
+                    backGroundColor?: T;
+                    borderColor?: T;
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    iconTitle?: T;
+                    iconTitleBN?: T;
+                    iconSubtitle?: T;
+                    iconSubtitleBN?: T;
+                    age?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          minAgeLabel?: T;
+                          minAgeLabelBN?: T;
+                          minAgeValue?: T;
+                          minAgeValueBN?: T;
+                          minAgeValuePeriod?: T;
+                          minAgeValuePeriodBN?: T;
+                          maxAgeLabel?: T;
+                          maxAgeLabelBN?: T;
+                          maxAgeValue?: T;
+                          maxAgeValueBN?: T;
+                          maxAgeValuePeriod?: T;
+                          maxAgeValuePeriodBN?: T;
+                        };
+                    policyTerm?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
+                    maturityAge?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
+                    physicalCondition?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
                     id?: T;
                   };
               id?: T;

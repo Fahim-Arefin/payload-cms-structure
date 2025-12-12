@@ -30,7 +30,6 @@ type Props = {
 
 export default function CueItem2({ card, data, index, bg }: Props) {
   const [isFlipped, setIsFlipped] = useState(false)
-  console.log(data?.cardBg, 'Card bg:')
 
   const listItems = useMemo(
     () => (Array.isArray((card as any)?.listItems) ? (card as any).listItems : []),

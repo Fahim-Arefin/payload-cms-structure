@@ -1,52 +1,13 @@
-import { EligibilityCardProps } from '@/types'
+import { PlanInfoDesign07BlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
-import React from 'react'
 import LocalizedText from '../shared/LocalizedText'
 
 type Props = {
-  data: {
-    backGroundColor: string
-    icon: string
-    iconTitle: string
-    iconTitleBN: string
-    age?: {
-      title: string
-      titleBN: string
-      minAgeLabel: string
-      minAgeLabelBN: string
-      minAgeValue: string
-      minAgeValueBN: string
-      minAgeValuePeriod: string
-      minAgeValuePeriodBN: string
-      maxAgeLabel: string
-      maxAgeLabelBN: string
-      maxAgeValue: string
-      maxAgeValueBN: string
-      maxAgeValuePeriod: string
-      maxAgeValuePeriodBN: string
-    }
-    policyTerm?: {
-      title: string
-      titleBN: string
-      value: string
-      valueBN: string
-    }
-    maturityAge?: {
-      title: string
-      titleBN: string
-      value: string
-      valueBN: string
-    }
-    physicalCondition?: {
-      title: string
-      titleBN: string
-      value: string
-      valueBN: string
-    }
-  }
+  data: PlanInfoDesign07BlockType['eligibilityData'][number]
+  isAnySubtile: boolean
 }
 
-export const EligibilityCommonCard = ({ data }: Props) => {
+export const EligibilityCommonCard = ({ data, isAnySubtile }: Props) => {
   return (
     <div
       // xl:h-[535px] xl:w-[347px]
@@ -57,21 +18,46 @@ export const EligibilityCommonCard = ({ data }: Props) => {
       shadow-lg bg-cover bg-center 
       flex flex-col 
       "
-      style={{ backgroundColor: data?.backGroundColor }}
+      style={{
+        backgroundColor: data?.backGroundColor || '',
+        border: `3px solid ${data?.borderColor}`,
+      }}
     >
       <div className="flex flex-col gap-2 items-center">
         <div className="relative w-14 aspect-[1/1]">
-          <Image fill src={data?.icon} alt={data?.iconTitle} className="" />
+          {typeof data?.icon === 'object' && data?.icon?.url && (
+            <Image
+              fill
+              src={data?.icon?.url}
+              alt={data?.iconTitle || 'Icon'}
+              className="object-cover object-center"
+              quality={90}
+              placeholder="blur"
+              blurDataURL={data?.iconBlurDataURL || ''}
+            />
+          )}
         </div>
-        <p className="uppercase text-[#434343] font-bold global-p1 mt-2">
-          <LocalizedText en={data?.iconTitle} bn={data?.iconTitleBN} />
-        </p>
+        <div className="text-center">
+          <div className="uppercase text-[#434343] font-bold global-p1 mt-2">
+            <LocalizedText en={data?.iconTitle} bn={data?.iconTitleBN} />
+          </div>
+          {isAnySubtile && (
+            <div
+              className={`uppercase text-[#434343] font-bold global-p1 ${isAnySubtile && data?.iconSubtitle ? 'opacity-100' : 'opacity-0'}`}
+            >
+              <LocalizedText
+                en={data?.iconSubtitle ?? 'No Data'}
+                bn={data?.iconSubtitleBN ?? 'No Data'}
+              />
+            </div>
+          )}
+        </div>
       </div>
-      <div className="flex flex-col justify-center items-center space-y-2 my-4">
+      <div className="flex flex-col justify-center items-center space-y-2 mt-4 ">
         {/* Entry Age */}
         {data?.age && (
           <div
-            className="px-2 py-4 w-full md:w-[245px] lg:w-64 flex flex-col items-center shadow-md"
+            className=" px-2 2xl:px-6 py-4 w-full flex flex-col items-center shadow-md"
             style={{
               borderRadius: '6.667px',
               // background: 'rgba(156, 134, 57, 0.10)',
@@ -116,9 +102,9 @@ export const EligibilityCommonCard = ({ data }: Props) => {
           </div>
         )}
         {/* Policy Term */}
-        {data?.policyTerm && (
+        {data?.policyTerm && data?.policyTerm?.title && data?.policyTerm?.value && (
           <div
-            className="px-2 py-4 w-full md:w-[245px] lg:w-64 flex flex-col items-center shadow-md"
+            className=" px-2 2xl:px-6 py-4 w-full flex flex-col items-center shadow-md"
             style={{
               borderRadius: '6.667px',
               // background: 'rgba(156, 134, 57, 0.10)',
@@ -135,9 +121,9 @@ export const EligibilityCommonCard = ({ data }: Props) => {
           </div>
         )}
         {/* Maturity Age */}
-        {data?.maturityAge && (
+        {data?.maturityAge && data?.maturityAge?.title && data?.maturityAge?.value && (
           <div
-            className="px-2 py-4 w-full md:w-[245px] lg:w-64 flex flex-col items-center shadow-md"
+            className=" px-2 2xl:px-6 py-4 w-full flex flex-col items-center shadow-md"
             style={{
               borderRadius: '6.667px',
               // background: 'rgba(156, 134, 57, 0.10)',
@@ -154,30 +140,32 @@ export const EligibilityCommonCard = ({ data }: Props) => {
           </div>
         )}
         {/* Physical Condition */}
-        {data?.physicalCondition && (
-          <div
-            className="px-2 py-4 w-full md:w-[245px] lg:w-64 flex flex-col items-center shadow-md"
-            style={{
-              borderRadius: '6.667px',
-              // background: 'rgba(156, 134, 57, 0.10)',
-              background: '#434343',
-              backdropFilter: 'blur(20px)',
-            }}
-          >
-            <div className="global-p2 uppercase mb-1 font-light text-[#FCF4EB]/70">
-              <LocalizedText
-                en={data?.physicalCondition?.title}
-                bn={data?.physicalCondition?.titleBN}
-              />
+        {data?.physicalCondition &&
+          data?.physicalCondition?.title &&
+          data?.physicalCondition?.value && (
+            <div
+              className=" px-2 2xl:px-6 py-4 w-full flex flex-col items-center shadow-md"
+              style={{
+                borderRadius: '6.667px',
+                // background: 'rgba(156, 134, 57, 0.10)',
+                background: '#434343',
+                backdropFilter: 'blur(20px)',
+              }}
+            >
+              <div className="global-p2 uppercase mb-1 font-light text-[#FCF4EB]/70">
+                <LocalizedText
+                  en={data?.physicalCondition?.title}
+                  bn={data?.physicalCondition?.titleBN}
+                />
+              </div>
+              <div className="text-white font-medium global-p1">
+                <LocalizedText
+                  en={data?.physicalCondition?.value}
+                  bn={data?.physicalCondition?.valueBN}
+                />
+              </div>
             </div>
-            <div className="text-white font-medium global-p1">
-              <LocalizedText
-                en={data?.physicalCondition?.value}
-                bn={data?.physicalCondition?.valueBN}
-              />
-            </div>
-          </div>
-        )}
+          )}
       </div>
     </div>
   )

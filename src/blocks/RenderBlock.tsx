@@ -70,6 +70,7 @@ import {
   MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG,
   HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG,
   HERO_SMALL_SLUG_AND_TAG,
+  PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -127,6 +128,7 @@ import StrategicPartnersBlock from './strategicPartners/StrategicPartnersBlock'
 import LearningPlatformBlock from './learningPlatform/LearningPlatformBlock'
 import SearchBarBlock from './SearchBar/SearchBarBlock'
 import HeroSmallBlock from './heroSmall/HeroSmallBlock'
+import PlanInfoDesign07Block from './planInfoDesign07/PlanInfoDesign07Block'
 
 type Params = Record<string, string>
 
@@ -294,6 +296,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <SearchBarBlock key={block.id} block={block} params={params} />
     case HERO_SMALL_SLUG_AND_TAG:
       return <HeroSmallBlock key={block.id} block={block} params={params} />
+    case PLAN_INFO_DESIGN_07_SLUG_AND_TAG:
+      return <PlanInfoDesign07Block key={block.id} block={block} params={params} />
 
     default:
       return null
