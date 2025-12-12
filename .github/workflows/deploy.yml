@@ -56,6 +56,7 @@ jobs:
             SERVER_IP_LIST=${{ secrets.SERVER_IP_LIST_STAGING }}
             printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY_STAGING }}" > ~/.ssh/shanta-life/id_rsa
           fi
+          $mediaVolumeDir=/home/ubuntu/dockerVolumes/shantalife_$BRANCH/media
 
           chmod 600 ~/.ssh/shanta-life/id_rsa
 
@@ -70,12 +71,14 @@ jobs:
 
             ssh -i ~/.ssh/shanta-life/id_rsa ubuntu@$SERVER_IP <<EOF
 
+              [ ! -d $mediaVolumeDir ] && mkdir -p $mediaVolumeDir
+
               docker images -q --filter "reference=shantalife" | xargs -r docker rmi -f
               docker load -i /tmp/shantalife.tar
               docker ps -q --filter name=shantalife-$BRANCH | xargs -r docker stop
               docker ps -a -q --filter "name=shantalife-$BRANCH" | xargs -r docker rm
 
-              docker run -d --restart=always -p $PORT:3000 --name shantalife-$BRANCH shantalife:$BRANCH-latest
+              docker run -d --restart=always -v $mediaVolumeDir:/app/media -p $PORT:3000 --name shantalife-$BRANCH shantalife:$BRANCH-latest
 
               docker image prune -a -f
 
