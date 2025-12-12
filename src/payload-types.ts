@@ -70,10 +70,10 @@ export interface Config {
     users: User;
     media: Media;
     resume: Resume;
+    'audit-logs': AuditLog;
     'career-application': CareerApplication;
     'agent-career-application': AgentCareerApplication;
     pages: Page;
-    'audit-logs': AuditLog;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,10 +83,10 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     resume: ResumeSelect<false> | ResumeSelect<true>;
+    'audit-logs': AuditLogsSelect<false> | AuditLogsSelect<true>;
     'career-application': CareerApplicationSelect<false> | CareerApplicationSelect<true>;
     'agent-career-application': AgentCareerApplicationSelect<false> | AgentCareerApplicationSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
-    'audit-logs': AuditLogsSelect<false> | AuditLogsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -188,7 +188,6 @@ export interface Media {
    * Internal marker: whether this file belongs to the published version or last saved draft.
    */
   versionStage?: ('publish' | 'lastDraft') | null;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -218,6 +217,40 @@ export interface Resume {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "audit-logs".
+ */
+export interface AuditLog {
+  id: string;
+  action:
+    | 'login'
+    | 'logout'
+    | 'create'
+    | 'update'
+    | 'delete'
+    | 'publish'
+    | 'approve'
+    | 'reject'
+    | 'settings-update'
+    | 'role-assign';
+  targetCollection?: string | null;
+  docId?: string | null;
+  actor?: (string | null) | User;
+  ip?: string | null;
+  notes?: string | null;
+  diff?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -401,6 +434,109 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'hero';
+      }
+    | {
+        uploadSessionId?: string | null;
+        heroes: {
+          /**
+           * Upload & crop a 16:5 hero image.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Title (English). Max 120 characters.
+           */
+          title: string;
+          /**
+           * শিরোনাম (বাংলা)। সর্বোচ্চ ১২০ অক্ষর।
+           */
+          titleBN: string;
+          id?: string | null;
+        }[];
+        /**
+         * Add call-to-action buttons that appear below the hero content (maximum 2 buttons)
+         */
+        ctaButtons?:
+          | (
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                   */
+                  buttonLink: string | Page;
+                  /**
+                   * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                   */
+                  sectionId?: string | null;
+                  /**
+                   * Select the button style
+                   */
+                  style?: ('primary' | 'secondary' | 'glass') | null;
+                  /**
+                   * Select the button size
+                   */
+                  size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'pageLink';
+                }
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
+                   */
+                  youtubeUrl: string;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'youtubeVideo';
+                }
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Example: +88 09610889900
+                   */
+                  phoneNumber: string;
+                  /**
+                   * Select the button style
+                   */
+                  style?: ('primary' | 'secondary' | 'glass') | null;
+                  /**
+                   * Select the button size
+                   */
+                  size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'callNow';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero-small';
       }
     | {
         /**
@@ -594,6 +730,14 @@ export interface Page {
            * প্ল্যানের শিরোনাম। সর্বোচ্চ ২০ অক্ষর।
            */
           titleBN: string;
+          /**
+           * Secondary plan title. Max 80 characters.
+           */
+          subtitle?: string | null;
+          /**
+           * দ্বিতীয় প্ল্যান টাইটেল। সর্বোচ্চ ৮০ অক্ষর।
+           */
+          subtitleBN?: string | null;
           /**
            * Brief description of the plan. Max 300 characters.
            */
@@ -1085,6 +1229,81 @@ export interface Page {
         blockType: 'corporate-intro';
       }
     | {
+        /**
+         * Hex color in #RRGGBB. Length 7 (৭).
+         */
+        backgroundColor: string;
+        /**
+         * Used in the page URL hash (e.g., #ptd-schedule) and as the <section id="…"> value.
+         */
+        sectionId: string;
+        /**
+         * First line of section heading. Max 80 chars.
+         */
+        titleLine1: string;
+        /**
+         * শিরোনামের প্রথম লাইন। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleLine1BN: string;
+        /**
+         * Second line of section heading (accent color). Max 80 chars.
+         */
+        titleLine2: string;
+        /**
+         * শিরোনামের দ্বিতীয় লাইন (অ্যাকসেন্ট রঙ)। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleLine2BN: string;
+        /**
+         * Left column header. Max 60 chars.
+         */
+        lossHeader: string;
+        /**
+         * বাম কলামের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+         */
+        lossHeaderBN: string;
+        /**
+         * Right column header. Max 60 chars.
+         */
+        benefitsHeader: string;
+        /**
+         * ডান কলামের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+         */
+        benefitsHeaderBN: string;
+        /**
+         * Small line under Benefits header. Max 100 chars.
+         */
+        benefitsSubHeader: string;
+        /**
+         * সুবিধা হেডারের নিচের ছোট লাইন। সর্বোচ্চ ১০০ অক্ষর।
+         */
+        benefitsSubHeaderBN: string;
+        /**
+         * Each row contains the “Loss of …” text and the “Benefit” value/label. Min 1, Max 50.
+         */
+        rows: {
+          /**
+           * Loss description. Max 120 chars.
+           */
+          lossEN: string;
+          /**
+           * ক্ষতির বিবরণ। সর্বোচ্চ ১২০ অক্ষর।
+           */
+          lossBN: string;
+          /**
+           * e.g., "100%" or "50%". Max 20 chars.
+           */
+          benefitEN: string;
+          /**
+           * যেমন, "১০০%" বা "৫০%". সর্বোচ্চ ২০ অক্ষর।
+           */
+          benefitBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'accidental-permanent-partial-disability';
+      }
+    | {
         uploadSessionId?: string | null;
         /**
          * Hex color in #RRGGBB (e.g., #F6EDDD). Length 7 (৭).
@@ -1378,6 +1597,10 @@ export interface Page {
           id?: string | null;
         }[];
         /**
+         * Choose between a simple CTA button or a detailed eligibility card section.
+         */
+        ctaVariant?: ('link' | 'eligibility') | null;
+        /**
          * Text shown on the button. Max 24 characters.
          */
         buttonText?: string | null;
@@ -1389,6 +1612,106 @@ export interface Page {
          * Pick an internal Page to navigate to when the CTA button is clicked (required if CTA text is set).
          */
         buttonLink?: (string | null) | Page;
+        /**
+         * Text shown on the details button. Max 24 characters.
+         */
+        detailsText?: string | null;
+        /**
+         * বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        detailsTextBN?: string | null;
+        /**
+         * Text shown on the see less button. Max 24 characters.
+         */
+        seeLessText?: string | null;
+        /**
+         * কম দেখুন বোতামের টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        seeLessTextBN?: string | null;
+        /**
+         * eligibility cards Title. Max 80 characters.
+         */
+        eligibilityTitle?: string | null;
+        /**
+         * যোগ্যতার কার্ডগুলির শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        eligibilityTitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside Eligibility Cards Title. Max 80 characters.
+         */
+        eligibilityTitleHighlighted?: string | null;
+        /**
+         * ঐচ্ছিক। যোগ্যতার কার্ডগুলির শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        eligibilityTitleHighlightedBN?: string | null;
+        /**
+         * Each item may carry its own icon and age/condition fields.
+         */
+        eligibilityData?:
+          | {
+              /**
+               * Hex color in #FCF4EB. Length ৭.
+               */
+              backGroundColor?: string | null;
+              /**
+               * Hex color in #FFFFFF. Length ৭.
+               */
+              borderColor?: string | null;
+              /**
+               * Square icon (PNG/SVG). Blur placeholder generated automatically. Aspect 1:1.
+               */
+              icon: string | Media;
+              iconOriginal?: (string | null) | Media;
+              pendingIconOriginal?: string | null;
+              pendingIconCrop?: string | null;
+              iconBlurDataURL?: string | null;
+              iconTitle?: string | null;
+              iconTitleBN?: string | null;
+              iconSubtitle?: string | null;
+              iconSubtitleBN?: string | null;
+              age?: {
+                title?: string | null;
+                titleBN?: string | null;
+                minAgeLabel?: string | null;
+                minAgeLabelBN?: string | null;
+                minAgeValue?: string | null;
+                minAgeValueBN?: string | null;
+                minAgeValuePeriod?: string | null;
+                minAgeValuePeriodBN?: string | null;
+                maxAgeLabel?: string | null;
+                maxAgeLabelBN?: string | null;
+                maxAgeValue?: string | null;
+                maxAgeValueBN?: string | null;
+                maxAgeValuePeriod?: string | null;
+                maxAgeValuePeriodBN?: string | null;
+              };
+              /**
+               * Optional. Example: value = "10-20 Years".
+               */
+              policyTerm?: {
+                title?: string | null;
+                titleBN?: string | null;
+                value?: string | null;
+                valueBN?: string | null;
+              };
+              /**
+               * Optional. Example: value = "25 Years".
+               */
+              maturityAge?: {
+                title?: string | null;
+                titleBN?: string | null;
+                value?: string | null;
+                valueBN?: string | null;
+              };
+              physicalCondition?: {
+                title?: string | null;
+                titleBN?: string | null;
+                value?: string | null;
+                valueBN?: string | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'plan-info-design';
@@ -1578,7 +1901,7 @@ export interface Page {
                   /**
                    * Upload/select the brochure PDF.
                    */
-                  brochurePDF?: (string | null) | Media;
+                  brochurePDF: string | Media;
                   /**
                    * Max 60 characters.
                    */
@@ -1817,7 +2140,7 @@ export interface Page {
                   /**
                    * Upload/select the brochure PDF.
                    */
-                  brochurePDF?: (string | null) | Media;
+                  brochurePDF: string | Media;
                   /**
                    * Max 60 characters.
                    */
@@ -2009,6 +2332,165 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'plan-info-design-05';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Primary heading. Max 120 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 120 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Subtitle. Max 120 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~600 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * image (640×500). Required.
+         */
+        image: string | Media;
+        imageOriginal?: (string | null) | Media;
+        pendingImageOriginal?: string | null;
+        pendingImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageBlurDataURL?: string | null;
+        /**
+         * Each item may carry its own icon and age/condition fields.
+         */
+        eligibilityData: {
+          /**
+           * Hex color in #FCF4EB. Length ৭.
+           */
+          backGroundColor?: string | null;
+          /**
+           * Hex color in #FFFFFF. Length ৭.
+           */
+          borderColor?: string | null;
+          /**
+           * Square icon (PNG/SVG). Blur placeholder generated automatically. Aspect 1:1.
+           */
+          icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
+          iconTitle?: string | null;
+          iconTitleBN?: string | null;
+          iconSubtitle?: string | null;
+          iconSubtitleBN?: string | null;
+          age?: {
+            title?: string | null;
+            titleBN?: string | null;
+            minAgeLabel?: string | null;
+            minAgeLabelBN?: string | null;
+            minAgeValue?: string | null;
+            minAgeValueBN?: string | null;
+            minAgeValuePeriod?: string | null;
+            minAgeValuePeriodBN?: string | null;
+            maxAgeLabel?: string | null;
+            maxAgeLabelBN?: string | null;
+            maxAgeValue?: string | null;
+            maxAgeValueBN?: string | null;
+            maxAgeValuePeriod?: string | null;
+            maxAgeValuePeriodBN?: string | null;
+          };
+          /**
+           * Optional. Example: value = "10-20 Years".
+           */
+          policyTerm?: {
+            title?: string | null;
+            titleBN?: string | null;
+            value?: string | null;
+            valueBN?: string | null;
+          };
+          /**
+           * Optional. Example: value = "25 Years".
+           */
+          maturityAge?: {
+            title?: string | null;
+            titleBN?: string | null;
+            value?: string | null;
+            valueBN?: string | null;
+          };
+          physicalCondition?: {
+            title?: string | null;
+            titleBN?: string | null;
+            value?: string | null;
+            valueBN?: string | null;
+          };
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-info-design-07';
       }
     | {
         /**
@@ -2643,6 +3125,8 @@ export interface Page {
                   iconBlurDataURL?: string | null;
                   iconTitle?: string | null;
                   iconTitleBN?: string | null;
+                  iconSubtitle?: string | null;
+                  iconSubtitleBN?: string | null;
                   age?: {
                     title?: string | null;
                     titleBN?: string | null;
@@ -3310,7 +3794,7 @@ export interface Page {
                   /**
                    * Upload/select the brochure PDF.
                    */
-                  brochurePDF?: (string | null) | Media;
+                  brochurePDF: string | Media;
                   /**
                    * Max 60 characters.
                    */
@@ -4800,7 +5284,7 @@ export interface Page {
                   /**
                    * Upload/select the brochure PDF.
                    */
-                  brochurePDF?: (string | null) | Media;
+                  brochurePDF: string | Media;
                   /**
                    * Max 60 characters.
                    */
@@ -5321,81 +5805,6 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'prem-calculator-card';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB. Length 7 (৭).
-         */
-        backgroundColor: string;
-        /**
-         * Used in the page URL hash (e.g., #ptd-schedule) and as the <section id="…"> value.
-         */
-        sectionId: string;
-        /**
-         * First line of section heading. Max 80 chars.
-         */
-        titleLine1: string;
-        /**
-         * শিরোনামের প্রথম লাইন। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleLine1BN: string;
-        /**
-         * Second line of section heading (accent color). Max 80 chars.
-         */
-        titleLine2: string;
-        /**
-         * শিরোনামের দ্বিতীয় লাইন (অ্যাকসেন্ট রঙ)। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleLine2BN: string;
-        /**
-         * Left column header. Max 60 chars.
-         */
-        lossHeader: string;
-        /**
-         * বাম কলামের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
-         */
-        lossHeaderBN: string;
-        /**
-         * Right column header. Max 60 chars.
-         */
-        benefitsHeader: string;
-        /**
-         * ডান কলামের শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
-         */
-        benefitsHeaderBN: string;
-        /**
-         * Small line under Benefits header. Max 100 chars.
-         */
-        benefitsSubHeader: string;
-        /**
-         * সুবিধা হেডারের নিচের ছোট লাইন। সর্বোচ্চ ১০০ অক্ষর।
-         */
-        benefitsSubHeaderBN: string;
-        /**
-         * Each row contains the “Loss of …” text and the “Benefit” value/label. Min 1, Max 50.
-         */
-        rows: {
-          /**
-           * Loss description. Max 120 chars.
-           */
-          lossEN: string;
-          /**
-           * ক্ষতির বিবরণ। সর্বোচ্চ ১২০ অক্ষর।
-           */
-          lossBN: string;
-          /**
-           * e.g., "100%" or "50%". Max 20 chars.
-           */
-          benefitEN: string;
-          /**
-           * যেমন, "১০০%" বা "৫০%". সর্বোচ্চ ২০ অক্ষর।
-           */
-          benefitBN: string;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'accidental-permanent-partial-disability';
       }
     | {
         /**
@@ -6631,40 +7040,6 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "audit-logs".
- */
-export interface AuditLog {
-  id: string;
-  action:
-    | 'login'
-    | 'logout'
-    | 'create'
-    | 'update'
-    | 'delete'
-    | 'publish'
-    | 'approve'
-    | 'reject'
-    | 'settings-update'
-    | 'role-assign';
-  targetCollection?: string | null;
-  docId?: string | null;
-  actor?: (string | null) | User;
-  ip?: string | null;
-  notes?: string | null;
-  diff?:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -6683,6 +7058,10 @@ export interface PayloadLockedDocument {
         value: string | Resume;
       } | null)
     | ({
+        relationTo: 'audit-logs';
+        value: string | AuditLog;
+      } | null)
+    | ({
         relationTo: 'career-application';
         value: string | CareerApplication;
       } | null)
@@ -6693,10 +7072,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: string | Page;
-      } | null)
-    | ({
-        relationTo: 'audit-logs';
-        value: string | AuditLog;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -6775,7 +7150,6 @@ export interface MediaSelect<T extends boolean = true> {
   temporaryExpiresAt?: T;
   blurDataURL?: T;
   versionStage?: T;
-  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -6804,6 +7178,21 @@ export interface ResumeSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "audit-logs_select".
+ */
+export interface AuditLogsSelect<T extends boolean = true> {
+  action?: T;
+  targetCollection?: T;
+  docId?: T;
+  actor?: T;
+  ip?: T;
+  notes?: T;
+  diff?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -6859,6 +7248,61 @@ export interface PagesSelect<T extends boolean = true> {
                     subtitleBN?: T;
                     description?: T;
                     descriptionBN?: T;
+                    id?: T;
+                  };
+              ctaButtons?:
+                | T
+                | {
+                    pageLink?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          style?: T;
+                          size?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    youtubeVideo?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          youtubeUrl?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    callNow?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          phoneNumber?: T;
+                          style?: T;
+                          size?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'hero-small'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              heroes?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    title?: T;
+                    titleBN?: T;
                     id?: T;
                   };
               ctaButtons?:
@@ -6976,6 +7420,8 @@ export interface PagesSelect<T extends boolean = true> {
                     imageBlurDataURL?: T;
                     title?: T;
                     titleBN?: T;
+                    subtitle?: T;
+                    subtitleBN?: T;
                     description?: T;
                     descriptionBN?: T;
                     listItems?:
@@ -7156,6 +7602,33 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'accidental-permanent-partial-disability'?:
+          | T
+          | {
+              backgroundColor?: T;
+              sectionId?: T;
+              titleLine1?: T;
+              titleLine1BN?: T;
+              titleLine2?: T;
+              titleLine2BN?: T;
+              lossHeader?: T;
+              lossHeaderBN?: T;
+              benefitsHeader?: T;
+              benefitsHeaderBN?: T;
+              benefitsSubHeader?: T;
+              benefitsSubHeaderBN?: T;
+              rows?:
+                | T
+                | {
+                    lossEN?: T;
+                    lossBN?: T;
+                    benefitEN?: T;
+                    benefitBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'add-on-info'?:
           | T
           | {
@@ -7245,9 +7718,76 @@ export interface PagesSelect<T extends boolean = true> {
                     nameBN?: T;
                     id?: T;
                   };
+              ctaVariant?: T;
               buttonText?: T;
               buttonTextBN?: T;
               buttonLink?: T;
+              detailsText?: T;
+              detailsTextBN?: T;
+              seeLessText?: T;
+              seeLessTextBN?: T;
+              eligibilityTitle?: T;
+              eligibilityTitleBN?: T;
+              eligibilityTitleHighlighted?: T;
+              eligibilityTitleHighlightedBN?: T;
+              eligibilityData?:
+                | T
+                | {
+                    backGroundColor?: T;
+                    borderColor?: T;
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    iconTitle?: T;
+                    iconTitleBN?: T;
+                    iconSubtitle?: T;
+                    iconSubtitleBN?: T;
+                    age?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          minAgeLabel?: T;
+                          minAgeLabelBN?: T;
+                          minAgeValue?: T;
+                          minAgeValueBN?: T;
+                          minAgeValuePeriod?: T;
+                          minAgeValuePeriodBN?: T;
+                          maxAgeLabel?: T;
+                          maxAgeLabelBN?: T;
+                          maxAgeValue?: T;
+                          maxAgeValueBN?: T;
+                          maxAgeValuePeriod?: T;
+                          maxAgeValuePeriodBN?: T;
+                        };
+                    policyTerm?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
+                    maturityAge?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
+                    physicalCondition?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -7439,6 +7979,88 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     description?: T;
                     descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'plan-info-design-07'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              imageOrder?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              image?: T;
+              imageOriginal?: T;
+              pendingImageOriginal?: T;
+              pendingImageCrop?: T;
+              imageBlurDataURL?: T;
+              eligibilityData?:
+                | T
+                | {
+                    backGroundColor?: T;
+                    borderColor?: T;
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    iconTitle?: T;
+                    iconTitleBN?: T;
+                    iconSubtitle?: T;
+                    iconSubtitleBN?: T;
+                    age?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          minAgeLabel?: T;
+                          minAgeLabelBN?: T;
+                          minAgeValue?: T;
+                          minAgeValueBN?: T;
+                          minAgeValuePeriod?: T;
+                          minAgeValuePeriodBN?: T;
+                          maxAgeLabel?: T;
+                          maxAgeLabelBN?: T;
+                          maxAgeValue?: T;
+                          maxAgeValueBN?: T;
+                          maxAgeValuePeriod?: T;
+                          maxAgeValuePeriodBN?: T;
+                        };
+                    policyTerm?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
+                    maturityAge?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
+                    physicalCondition?:
+                      | T
+                      | {
+                          title?: T;
+                          titleBN?: T;
+                          value?: T;
+                          valueBN?: T;
+                        };
                     id?: T;
                   };
               id?: T;
@@ -7677,6 +8299,8 @@ export interface PagesSelect<T extends boolean = true> {
                                       iconBlurDataURL?: T;
                                       iconTitle?: T;
                                       iconTitleBN?: T;
+                                      iconSubtitle?: T;
+                                      iconSubtitleBN?: T;
                                       age?:
                                         | T
                                         | {
@@ -8652,33 +9276,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'accidental-permanent-partial-disability'?:
-          | T
-          | {
-              backgroundColor?: T;
-              sectionId?: T;
-              titleLine1?: T;
-              titleLine1BN?: T;
-              titleLine2?: T;
-              titleLine2BN?: T;
-              lossHeader?: T;
-              lossHeaderBN?: T;
-              benefitsHeader?: T;
-              benefitsHeaderBN?: T;
-              benefitsSubHeader?: T;
-              benefitsSubHeaderBN?: T;
-              rows?:
-                | T
-                | {
-                    lossEN?: T;
-                    lossBN?: T;
-                    benefitEN?: T;
-                    benefitBN?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
         'support-map-tab'?:
           | T
           | {
@@ -9121,21 +9718,6 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "audit-logs_select".
- */
-export interface AuditLogsSelect<T extends boolean = true> {
-  action?: T;
-  targetCollection?: T;
-  docId?: T;
-  actor?: T;
-  ip?: T;
-  notes?: T;
-  diff?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

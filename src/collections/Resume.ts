@@ -1,3 +1,4 @@
+import { MEDIA } from '@/lib/constants'
 import type { CollectionConfig } from 'payload'
 
 export const Resume: CollectionConfig = {
@@ -6,6 +7,9 @@ export const Resume: CollectionConfig = {
     read: () => true,
     create: () => true,
   },
+  // admin: {
+  //   group: MEDIA,
+  // },
   fields: [],
   upload: {
     staticDir: 'resumes',

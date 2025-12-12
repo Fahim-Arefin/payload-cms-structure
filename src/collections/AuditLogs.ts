@@ -1,10 +1,12 @@
 import type { CollectionConfig } from 'payload'
 import { hasRole } from '@/lib/rbac'
+import { AUDIT_LOG } from '@/lib/constants'
 
 const AuditLogs: CollectionConfig = {
   slug: 'audit-logs',
   timestamps: true,
   admin: {
+    group: AUDIT_LOG,
     useAsTitle: 'action',
     hidden: ({ user }) => !hasRole(user, ['super-admin', 'admin', 'editor']),
     defaultColumns: ['action', 'targetCollection', 'docId', 'actor', 'createdAt'],
@@ -28,10 +30,16 @@ const AuditLogs: CollectionConfig = {
       required: true,
       options: [
         // auth
-        'login', 'logout',
+        'login',
+        'logout',
         // content/user ops
-        'create', 'update', 'delete', 'publish',
-        'approve', 'reject', 'settings-update',
+        'create',
+        'update',
+        'delete',
+        'publish',
+        'approve',
+        'reject',
+        'settings-update',
         'role-assign',
       ],
     },

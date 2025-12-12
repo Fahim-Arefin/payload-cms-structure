@@ -28,6 +28,7 @@ const BrochureButtonSchema: Block = {
       label: 'Brochure PDF',
       type: 'upload',
       relationTo: 'media',
+      required: true,
       admin: { description: 'Upload/select the brochure PDF.' },
     },
 

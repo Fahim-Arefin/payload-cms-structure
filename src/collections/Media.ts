@@ -51,6 +51,7 @@
 //==================================================================
 
 // src/collections/Media.ts
+import { MEDIA } from '@/lib/constants'
 import type { CollectionConfig } from 'payload'
 
 export const MEDIA_SLUG = 'media'
@@ -59,6 +60,7 @@ const Media: CollectionConfig = {
   slug: MEDIA_SLUG,
   upload: true,
   admin: {
+    // group: MEDIA,
     useAsTitle: 'filename',
     defaultColumns: [
       'filename',

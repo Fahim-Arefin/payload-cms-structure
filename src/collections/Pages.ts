@@ -66,6 +66,8 @@ import WhyMicroInsuranceMattersSchema from '@/blocks/microinsuranceMatters/schem
 import MicroInsuranceStrategicPartnersSchema from '@/blocks/strategicPartners/schema'
 import LearningMediaSectionSchema from '@/blocks/learningPlatform/schema'
 import SearchBarSchema from '@/blocks/SearchBar/schema'
+import HeroSmallSchema from '@/blocks/heroSmall/schema'
+import PlanInfoDesign07Schema from '@/blocks/planInfoDesign07/schema'
 
 // ✅ always spread a safe object
 const safeMediaHooks: NonNullable<CollectionConfig['hooks']> = mediaHooks ?? {}
@@ -182,6 +184,7 @@ export const Pages: CollectionConfig = {
       blocks: [
         // hero page
         HeroSchema,
+        HeroSmallSchema,
         // common section
         LifeInsuranceSimplifiedSchema,
         MicroinsuranceServiceSchema,
@@ -192,11 +195,13 @@ export const Pages: CollectionConfig = {
         MultiStageIntroSchema,
         ShantaIntroSchema,
         CorporateIntroSchema,
+        APPDSchema,
         AddonsInfoSchema,
         PlanInfoDesignSchema,
         PlanInfoDesign03Schema,
         PlanInfoDesign04Schema,
         PlanInfoDesign05Schema,
+        PlanInfoDesign07Schema,
         // custom blocks
         CustomCardSectionSchema,
         CustomTabSchema,
@@ -236,9 +241,6 @@ export const Pages: CollectionConfig = {
         PurchaseFormSchema,
         // premium cal page,
         PremCalculatorPageSchema,
-        // Accidental coverage page
-        APPDSchema,
-
         //support page
         SupportMapTabSchema,
         SupportFaqTabSchema,

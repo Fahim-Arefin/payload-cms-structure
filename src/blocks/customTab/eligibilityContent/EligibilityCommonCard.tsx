@@ -4,9 +4,10 @@ import Image from 'next/image'
 
 type Props = {
   data: EligibilityContentBlockType['eligibilityData'][number]
+  isAnySubtile?: boolean
 }
 
-export const EligibilityCommonCard = ({ data }: Props) => {
+export const EligibilityCommonCard = ({ data, isAnySubtile }: Props) => {
   return (
     <div
       // xl:h-[535px] xl:w-[347px]
@@ -37,9 +38,21 @@ export const EligibilityCommonCard = ({ data }: Props) => {
             />
           )}
         </div>
-        <p className="uppercase text-[#434343] font-bold global-p1 mt-2">
-          <LocalizedText en={data?.iconTitle} bn={data?.iconTitleBN} />
-        </p>
+        <div className="text-center">
+          <div className="uppercase text-[#434343] font-bold global-p1 mt-2">
+            <LocalizedText en={data?.iconTitle} bn={data?.iconTitleBN} />
+          </div>
+          {isAnySubtile && (
+            <div
+              className={`uppercase text-[#434343] font-bold global-p1 ${isAnySubtile && data?.iconSubtitle ? 'opacity-100' : 'opacity-0'}`}
+            >
+              <LocalizedText
+                en={data?.iconSubtitle ?? 'No Data'}
+                bn={data?.iconSubtitleBN ?? 'No Data'}
+              />
+            </div>
+          )}
+        </div>
       </div>
       <div className="flex flex-col justify-center items-center space-y-2 mt-4 ">
         {/* Entry Age */}

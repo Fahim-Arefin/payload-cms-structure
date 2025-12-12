@@ -72,6 +72,9 @@ export const NEWS_AND_BLOG_PAGE = 'News And Blogs Page'
 export const NEWS_AND_BLOG_DETAILS_PAGE = 'News And Blogs Details Page'
 export const CAREER_PAGE = 'Career Page'
 export const LEARN_MORE_PAGE = 'Learn More Page'
+export const MEDIA = 'Media Library'
+export const FORM_DATA = 'User Submitted Form Data'
+export const AUDIT_LOG = 'Audit'
 
 // home page constants
 // ----------------------------------------------------------------------------------------------
@@ -81,6 +84,11 @@ export const HOME_PAGE_HERO_SLUG_AND_TAG = 'hero'
 export const HOME_PAGE_HERO_BLOCK_LABEL = 'Hero (Large)'
 export const HOME_PAGE_HERO_CACHE_KEY = 'hero-data'
 export const HOME_PAGE_HERO_BLOCK_THUMBNAIL_URL = `${folder}/hero-block-thumbnail.png`
+
+export const HERO_SMALL_SLUG_AND_TAG = 'hero-small'
+export const HERO_SMALL_BLOCK_LABEL = 'Hero (Small)'
+export const HERO_SMALL_CACHE_KEY = 'hero-small-data'
+export const HERO_SMALL_BLOCK_THUMBNAIL_URL = `${folder}/hero-small-block-thumbnail.jpg`
 
 export const HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG = 'search-bar'
 export const HOME_PAGE_SEARCH_BAR_BLOCK_LABEL = 'Search Bar'
@@ -353,6 +361,12 @@ export const PLAN_INFO_DESIGN_05_SLUG_AND_TAG = 'plan-info-design-05'
 export const PLAN_INFO_DESIGN_05_CACHE_KEY = 'plan-info-design-05-data'
 export const PLAN_INFO_DESIGN_05_BLOCK_LABEL = 'Plan Info Design 05'
 export const PLAN_INFO_DESIGN_05_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-05-block-thumbnail.png`
+
+// plan info design
+export const PLAN_INFO_DESIGN_07_SLUG_AND_TAG = 'plan-info-design-07'
+export const PLAN_INFO_DESIGN_07_CACHE_KEY = 'plan-info-design-07-data'
+export const PLAN_INFO_DESIGN_07_BLOCK_LABEL = 'Plan Info Design 07'
+export const PLAN_INFO_DESIGN_07_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-07-block-thumbnail.png`
 
 // accidental coverage page
 export const APPD_BLOCK_SLUG_AND_TAG = 'accidental-permanent-partial-disability'

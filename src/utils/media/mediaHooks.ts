@@ -44,6 +44,8 @@ import {
   MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG,
   LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
   SUPPORT_FAQ_TAB_SLUG_AND_TAG,
+  HERO_SMALL_SLUG_AND_TAG,
+  PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -196,6 +198,11 @@ export const mediaHooks = withMediaLifecycle({
       blockType: LEARNING_MEDIA_SECTION_SLUG_AND_TAG,
       mediaFields: ['instagramIcon', 'facebookIcon', 'linkedinIcon', 'youtubeIcon'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
+      mediaFields: ['image'],
+    },
   ],
 
   // Blocks with arrays that contain media fields:
@@ -203,6 +210,12 @@ export const mediaHooks = withMediaLifecycle({
     {
       layoutKey: 'layout',
       blockType: HOME_PAGE_HERO_SLUG_AND_TAG,
+      arrayKey: 'heroes',
+      mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: HERO_SMALL_SLUG_AND_TAG,
       arrayKey: 'heroes',
       mediaFields: ['image'],
     },
@@ -426,6 +439,18 @@ export const mediaHooks = withMediaLifecycle({
       blockType: SUPPORT_FAQ_TAB_SLUG_AND_TAG,
       arrayKey: 'forms',
       mediaFields: ['formPDF'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_SLUG_AND_TAG,
+      arrayKey: 'eligibilityData',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
+      arrayKey: 'eligibilityData',
+      mediaFields: ['icon'],
     },
   ],
 

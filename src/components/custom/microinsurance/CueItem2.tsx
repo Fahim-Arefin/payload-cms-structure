@@ -30,7 +30,6 @@ type Props = {
 
 export default function CueItem2({ card, data, index, bg }: Props) {
   const [isFlipped, setIsFlipped] = useState(false)
-  console.log(data?.cardBg, 'Card bg:')
 
   const listItems = useMemo(
     () => (Array.isArray((card as any)?.listItems) ? (card as any).listItems : []),
@@ -80,9 +79,7 @@ export default function CueItem2({ card, data, index, bg }: Props) {
         <LocalizedText
           as="h2"
           className="text-lg lg:text-lg xl:text-2xl font-semibold"
-          // @ts-expect-error tolerate legacy shape
           en={card?.subtitle}
-          // @ts-expect-error tolerate legacy shape
           bn={card?.subtitleBN}
         />
       )}
