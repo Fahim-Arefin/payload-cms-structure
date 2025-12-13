@@ -48,6 +48,7 @@ ENV NODE_ENV=production
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+USER nextjs
 
 # Remove this line if you do not have this folder
 COPY --from=builder /app/public ./public
