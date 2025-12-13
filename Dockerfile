@@ -66,7 +66,7 @@ RUN mkdir .next
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# RUN chown -R nextjs:nodejs /app
+RUN chown -R node:node /app
 # USER nextjs
 
 EXPOSE 3000
