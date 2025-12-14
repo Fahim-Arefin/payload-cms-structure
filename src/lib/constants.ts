@@ -88,7 +88,12 @@ export const HOME_PAGE_HERO_BLOCK_THUMBNAIL_URL = `${folder}/hero-block-thumbnai
 export const HERO_SMALL_SLUG_AND_TAG = 'hero-small'
 export const HERO_SMALL_BLOCK_LABEL = 'Hero (Small)'
 export const HERO_SMALL_CACHE_KEY = 'hero-small-data'
-export const HERO_SMALL_BLOCK_THUMBNAIL_URL = `${folder}/hero-small-block-thumbnail.jpg`
+export const HERO_SMALL_BLOCK_THUMBNAIL_URL = `${folder}/hero-small-block-thumbnail.png`
+
+export const HERO_DYNAMIC_SLUG_AND_TAG = 'hero-dynamic'
+export const HERO_DYNAMIC_BLOCK_LABEL = 'Hero (Dynamic)'
+export const HERO_DYNAMIC_CACHE_KEY = 'hero-dynamic-data'
+export const HERO_DYNAMIC_BLOCK_THUMBNAIL_URL = `${folder}/hero-dynamic-block-thumbnail.png`
 
 export const HOME_PAGE_SEARCH_BAR_SLUG_AND_TAG = 'search-bar'
 export const HOME_PAGE_SEARCH_BAR_BLOCK_LABEL = 'Search Bar'

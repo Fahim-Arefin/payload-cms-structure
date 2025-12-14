@@ -73,6 +73,7 @@ import {
   HERO_SMALL_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
+  HERO_DYNAMIC_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -451,6 +452,11 @@ export type SearchBarBlockType = Extract<
 export type HeroSmallBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof HERO_SMALL_SLUG_AND_TAG }
+>
+
+export type HeroDynamicBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof HERO_DYNAMIC_SLUG_AND_TAG }
 >
 
 export type PlanInfoDesign07BlockType = Extract<

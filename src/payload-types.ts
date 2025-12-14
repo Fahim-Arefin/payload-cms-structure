@@ -539,6 +539,110 @@ export interface Page {
         blockType: 'hero-small';
       }
     | {
+        uploadSessionId?: string | null;
+        heroes: {
+          /**
+           * Title (English). Max 120 characters.
+           */
+          title: string;
+          /**
+           * শিরোনাম (বাংলা)। সর্বোচ্চ ১২০ অক্ষর।
+           */
+          titleBN: string;
+          id?: string | null;
+        }[];
+        /**
+         * Add call-to-action buttons that appear below the hero content (maximum 2 buttons)
+         */
+        ctaButtons?:
+          | (
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                   */
+                  buttonLink: string | Page;
+                  /**
+                   * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                   */
+                  sectionId?: string | null;
+                  /**
+                   * Select the button style
+                   */
+                  style?: ('primary' | 'secondary' | 'glass') | null;
+                  /**
+                   * Select the button size
+                   */
+                  size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'pageLink';
+                }
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
+                   */
+                  youtubeUrl: string;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'youtubeVideo';
+                }
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Example: +88 09610889900
+                   */
+                  phoneNumber: string;
+                  /**
+                   * Select the button style
+                   */
+                  style?: ('primary' | 'secondary' | 'glass') | null;
+                  /**
+                   * Select the button size
+                   */
+                  size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'callNow';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero-dynamic';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'search-bar';
+      }
+    | {
         /**
          * Hex color in #RRGGBB (e.g., #FBFFD3). Length 7 (৭).
          */
@@ -4119,15 +4223,6 @@ export interface Page {
          * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
          */
         backgroundColor?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'search-bar';
-      }
-    | {
-        /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
-         */
-        backgroundColor?: string | null;
         /**
          * If checked, the search bar will be displayed.
          */
@@ -7523,6 +7618,63 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'hero-dynamic'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              heroes?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    id?: T;
+                  };
+              ctaButtons?:
+                | T
+                | {
+                    pageLink?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          style?: T;
+                          size?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    youtubeVideo?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          youtubeUrl?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    callNow?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          phoneNumber?: T;
+                          style?: T;
+                          size?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'search-bar'?:
+          | T
+          | {
+              backgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
         'life-insurance-simplified'?:
           | T
           | {
@@ -8794,13 +8946,6 @@ export interface PagesSelect<T extends boolean = true> {
                     pointsBN?: T;
                     id?: T;
                   };
-              id?: T;
-              blockName?: T;
-            };
-        'search-bar'?:
-          | T
-          | {
-              backgroundColor?: T;
               id?: T;
               blockName?: T;
             };
