@@ -363,6 +363,12 @@ export const PLAN_INFO_DESIGN_05_BLOCK_LABEL = 'Plan Info Design 05'
 export const PLAN_INFO_DESIGN_05_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-05-block-thumbnail.png`
 
 // plan info design
+export const PLAN_INFO_DESIGN_06_SLUG_AND_TAG = 'plan-info-design-06'
+export const PLAN_INFO_DESIGN_06_CACHE_KEY = 'plan-info-design-06-data'
+export const PLAN_INFO_DESIGN_06_BLOCK_LABEL = 'Plan Info Design 06'
+export const PLAN_INFO_DESIGN_06_BLOCK_THUMBNAIL_URL = `${folder}/plan-info-design-06-block-thumbnail.png`
+
+// plan info design
 export const PLAN_INFO_DESIGN_07_SLUG_AND_TAG = 'plan-info-design-07'
 export const PLAN_INFO_DESIGN_07_CACHE_KEY = 'plan-info-design-07-data'
 export const PLAN_INFO_DESIGN_07_BLOCK_LABEL = 'Plan Info Design 07'

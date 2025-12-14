@@ -553,6 +553,16 @@ const WhyChooseUsSchema: Block = {
         description: `Hex color in #RRGGBB (e.g., #FFFFFF). Length ${COLOR_HEX_LEN} (${bnNum(COLOR_HEX_LEN)}).`,
       },
     },
+    {
+      name: 'useSearchBar',
+      type: 'checkbox',
+      label: 'Use Search Bar',
+      defaultValue: true,
+      required: true,
+      admin: {
+        description: 'If checked, the search bar will be displayed.',
+      },
+    },
 
     // Heading / HeadingBN
     {
