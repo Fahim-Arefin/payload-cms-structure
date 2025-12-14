@@ -3,7 +3,9 @@ name: Build Docker Image on PR
 on:
   pull_request:
     branches:
-      - '*'
+      - 'main'
+      - 'staging'
+      - 'develop'
 
 jobs:
   pr-build:
