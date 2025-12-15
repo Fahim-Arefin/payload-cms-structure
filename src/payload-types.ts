@@ -539,6 +539,110 @@ export interface Page {
         blockType: 'hero-small';
       }
     | {
+        uploadSessionId?: string | null;
+        heroes: {
+          /**
+           * Title (English). Max 120 characters.
+           */
+          title: string;
+          /**
+           * শিরোনাম (বাংলা)। সর্বোচ্চ ১২০ অক্ষর।
+           */
+          titleBN: string;
+          id?: string | null;
+        }[];
+        /**
+         * Add call-to-action buttons that appear below the hero content (maximum 2 buttons)
+         */
+        ctaButtons?:
+          | (
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                   */
+                  buttonLink: string | Page;
+                  /**
+                   * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                   */
+                  sectionId?: string | null;
+                  /**
+                   * Select the button style
+                   */
+                  style?: ('primary' | 'secondary' | 'glass') | null;
+                  /**
+                   * Select the button size
+                   */
+                  size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'pageLink';
+                }
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
+                   */
+                  youtubeUrl: string;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'youtubeVideo';
+                }
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * সর্বোচ্চ ৪০ অক্ষর।
+                   */
+                  labelBN: string;
+                  /**
+                   * Example: +88 09610889900
+                   */
+                  phoneNumber: string;
+                  /**
+                   * Select the button style
+                   */
+                  style?: ('primary' | 'secondary' | 'glass') | null;
+                  /**
+                   * Select the button size
+                   */
+                  size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'callNow';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero-dynamic';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'search-bar';
+      }
+    | {
         /**
          * Hex color in #RRGGBB (e.g., #FBFFD3). Length 7 (৭).
          */
@@ -2340,6 +2444,181 @@ export interface Page {
          */
         backgroundColor?: string | null;
         /**
+         * Primary heading. Max 120 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Title. Max 120 characters.
+         */
+        highlightedText?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        highlightedTextBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subtitle?: string | null;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subtitleBN?: string | null;
+        /**
+         * Optional. Must appear verbatim inside the Subtitle. Max 120 characters.
+         */
+        highlightedSubtitle?: string | null;
+        /**
+         * ঐচ্ছিক। সাবটাইটেলের মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        highlightedSubtitleBN?: string | null;
+        /**
+         * Up to ~600 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Select where the image align
+         */
+        imageOrder?: ('left' | 'right') | null;
+        /**
+         * Which image to display on desktop layouts.
+         */
+        desktopImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Which image to display on mobile layouts.
+         */
+        mobileImageChoice?: ('tall' | 'wide') | null;
+        /**
+         * Tall image. Required.
+         */
+        imageTall: string | Media;
+        imageTallOriginal?: (string | null) | Media;
+        pendingImageTallOriginal?: string | null;
+        pendingImageTallCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageTallBlurDataURL?: string | null;
+        /**
+         * Wide image (530x340). Required.
+         */
+        imageWide: string | Media;
+        imageWideOriginal?: (string | null) | Media;
+        pendingImageWideOriginal?: string | null;
+        pendingImageWideCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        imageWideBlurDataURL?: string | null;
+        /**
+         * Stamp image (1:1). Required.
+         */
+        stampImage: string | Media;
+        stampImageOriginal?: (string | null) | Media;
+        pendingStampImageOriginal?: string | null;
+        pendingStampImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        stampImageBlurDataURL?: string | null;
+        /**
+         * Each feature has an icon, title, and rich description (EN/BN).
+         */
+        features: {
+          /**
+           * Square icon (PNG/SVG). Blur placeholder generated automatically. Aspect 1:1.
+           */
+          icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
+          title?: string | null;
+          titleBN?: string | null;
+          /**
+           * Optional description. Up to ~600 characters.
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * ঐচ্ছিক বর্ণনা। সর্বোচ্চ ~৬০০ অক্ষর।
+           */
+          descriptionBN?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'plan-info-design-06';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
          * Select where the image align
          */
         imageOrder?: ('left' | 'right') | null;
@@ -3944,15 +4223,10 @@ export interface Page {
          * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
          */
         backgroundColor?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'search-bar';
-      }
-    | {
         /**
-         * Hex color in #RRGGBB (e.g., #FFFFFF). Length 7 (৭).
+         * If checked, the search bar will be displayed.
          */
-        backgroundColor?: string | null;
+        useSearchBar: boolean;
         /**
          * Short label above the main title. Max 40 characters.
          */
@@ -7344,6 +7618,63 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'hero-dynamic'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              heroes?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    id?: T;
+                  };
+              ctaButtons?:
+                | T
+                | {
+                    pageLink?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          style?: T;
+                          size?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    youtubeVideo?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          youtubeUrl?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    callNow?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          phoneNumber?: T;
+                          style?: T;
+                          size?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'search-bar'?:
+          | T
+          | {
+              backgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
         'life-insurance-simplified'?:
           | T
           | {
@@ -7984,6 +8315,56 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'plan-info-design-06'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedText?: T;
+              highlightedTextBN?: T;
+              subtitle?: T;
+              subtitleBN?: T;
+              highlightedSubtitle?: T;
+              highlightedSubtitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              imageOrder?: T;
+              desktopImageChoice?: T;
+              mobileImageChoice?: T;
+              imageTall?: T;
+              imageTallOriginal?: T;
+              pendingImageTallOriginal?: T;
+              pendingImageTallCrop?: T;
+              imageTallBlurDataURL?: T;
+              imageWide?: T;
+              imageWideOriginal?: T;
+              pendingImageWideOriginal?: T;
+              pendingImageWideCrop?: T;
+              imageWideBlurDataURL?: T;
+              stampImage?: T;
+              stampImageOriginal?: T;
+              pendingStampImageOriginal?: T;
+              pendingStampImageCrop?: T;
+              stampImageBlurDataURL?: T;
+              features?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    title?: T;
+                    titleBN?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'plan-info-design-07'?:
           | T
           | {
@@ -8568,17 +8949,11 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'search-bar'?:
-          | T
-          | {
-              backgroundColor?: T;
-              id?: T;
-              blockName?: T;
-            };
         'why-choose-us'?:
           | T
           | {
               backgroundColor?: T;
+              useSearchBar?: T;
               heading?: T;
               headingBN?: T;
               title?: T;

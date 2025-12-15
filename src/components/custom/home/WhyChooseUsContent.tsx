@@ -18,7 +18,7 @@ function WhyChooseUsContent({ whyChooseUsData }: Props) {
   return (
     // bg-white lg:pb-[200px]
     <div
-      className={`relative lg:container-padding-y `}
+      className={`relative ${whyChooseUsData?.useSearchBar ? 'lg:container-padding-b' : 'lg:container-padding-y'} `}
       style={{
         backgroundColor: whyChooseUsData?.backgroundColor || '',
       }}

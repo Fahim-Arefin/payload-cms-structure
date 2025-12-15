@@ -1,5 +1,6 @@
 import WhyChooseUsContent from '@/components/custom/home/WhyChooseUsContent'
 import { WhyChooseUsBlockType } from '@/types/payloadCustomTypes'
+import InnerSearchbar from './InnerSearchbar'
 
 type Props = {
   block: WhyChooseUsBlockType
@@ -7,7 +8,12 @@ type Props = {
 }
 
 function WhyChooseUsBlock({ block }: Props) {
-  return <WhyChooseUsContent whyChooseUsData={block} />
+  return (
+    <>
+      {block?.useSearchBar && <InnerSearchbar bgColor={block?.backgroundColor || ''} />}
+      <WhyChooseUsContent whyChooseUsData={block} />
+    </>
+  )
 }
 
 export default WhyChooseUsBlock

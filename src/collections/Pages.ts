@@ -68,6 +68,8 @@ import LearningMediaSectionSchema from '@/blocks/learningPlatform/schema'
 import SearchBarSchema from '@/blocks/SearchBar/schema'
 import HeroSmallSchema from '@/blocks/heroSmall/schema'
 import PlanInfoDesign07Schema from '@/blocks/planInfoDesign07/schema'
+import PlanInfoDesign06Schema from '@/blocks/planInfoDesign06/schema'
+import HeroDynamicSchema from '@/blocks/heroDynamic/schema'
 
 // ✅ always spread a safe object
 const safeMediaHooks: NonNullable<CollectionConfig['hooks']> = mediaHooks ?? {}
@@ -185,7 +187,9 @@ export const Pages: CollectionConfig = {
         // hero page
         HeroSchema,
         HeroSmallSchema,
+        HeroDynamicSchema,
         // common section
+        SearchBarSchema,
         LifeInsuranceSimplifiedSchema,
         MicroinsuranceServiceSchema,
         ContactUsSchema,
@@ -201,13 +205,13 @@ export const Pages: CollectionConfig = {
         PlanInfoDesign03Schema,
         PlanInfoDesign04Schema,
         PlanInfoDesign05Schema,
+        PlanInfoDesign06Schema,
         PlanInfoDesign07Schema,
         // custom blocks
         CustomCardSectionSchema,
         CustomTabSchema,
         CustomAccordionSchema,
         // home page unique
-        SearchBarSchema,
         WhyChooseUsSchema,
         FeaturedPlansSchema,
         PremiumCalculatorSchema,

@@ -46,6 +46,7 @@ import {
   SUPPORT_FAQ_TAB_SLUG_AND_TAG,
   HERO_SMALL_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
+  PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -202,6 +203,16 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
       mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
+      mediaFields: ['imageTall', 'imageWide'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
+      mediaFields: ['stampImage'],
     },
   ],
 
@@ -450,6 +461,12 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
       arrayKey: 'eligibilityData',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
+      arrayKey: 'features',
       mediaFields: ['icon'],
     },
   ],
