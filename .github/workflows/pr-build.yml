@@ -1,34 +1,37 @@
-name: Docker PR Build
+name: Build Docker Image on PR
 
 on:
   pull_request:
     branches:
-      - main
-      - staging
-      - develop
-    types:
-      - opened
-      - synchronize
-      - reopened
+      - 'main'
+      - 'staging'
+      - 'develop'
 
 jobs:
-  build:
+  pr-build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        # Recommended for advanced features like multi-platform builds and caching
-        uses: docker/setup-buildx-action@v3
+      - name: Create .env from ENV_FILE secret
+        run: |
+          if ${{ github.ref == 'refs/heads/main' }}; then
+            cat > .env << 'EOF'
+          ${{ secrets.ENV_FILE_MAIN }}
+          EOF
+          else
+            cat > .env << 'EOF'
+          ${{ secrets.ENV_FILE_STAGING }}
+          EOF
+          fi
 
-      - name: Build Docker image for PR
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          # Load the image to the local Docker daemon for subsequent testing steps (optional)
-          load: true
-          tags: shantalife:pr-${{ github.event.pull_request.number }}
-          # Do NOT push to a registry on a PR event
-          push: false
+      - name: Build Docker image
+        run: |
+          docker build --progress=plain \
+            -f Dockerfile \
+            -t shantalife .
+          docker images -q --filter "dangling=true" | xargs -r docker rmi -f
+          docker images -q --filter "reference=shantalife" | xargs -r docker rmi -f
+          docker container prune -f
+          docker volume ls -q --filter dangling=true | xargs -r docker volume rm -f
