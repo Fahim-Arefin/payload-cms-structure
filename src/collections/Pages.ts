@@ -417,6 +417,8 @@ export const Pages: CollectionConfig = {
               action,
               targetCollection: 'pages',
               docId: String((doc as any).id),
+              // ✅ add this
+              docName: String((doc as any)?.name ?? (previousDoc as any)?.name ?? ''),
               actor: req.user?.id ?? null,
               ip: getClientIP(req),
               diff: { before: previousDoc ?? null, after: doc ?? null },
