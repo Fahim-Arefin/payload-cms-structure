@@ -3,14 +3,13 @@ name: Build Docker Image on PR
 on:
   pull_request:
     branches:
-      - 'main-xyz'
-      # - 'main'
-      # - 'staging'
-      # - 'develop'
+      - 'main'
+      - 'staging'
+      - 'develop'
 
 jobs:
   pr-build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
