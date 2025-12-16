@@ -1,0 +1,38 @@
+name: Build Docker Image on PR
+
+on:
+  pull_request:
+    branches:
+      - 'main-xyz'
+      # - 'main'
+      # - 'staging'
+      # - 'develop'
+
+jobs:
+  pr-build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create .env from ENV_FILE secret
+        run: |
+          if ${{ github.ref == 'refs/heads/main' }}; then
+            cat > .env << 'EOF'
+          ${{ secrets.ENV_FILE_MAIN }}
+          EOF
+          else
+            cat > .env << 'EOF'
+          ${{ secrets.ENV_FILE_STAGING }}
+          EOF
+          fi
+
+      - name: Build Docker image
+        run: |
+          docker build --progress=plain \
+            -f Dockerfile \
+            -t shantalife .
+          docker images -q --filter "dangling=true" | xargs -r docker rmi -f
+          docker images -q --filter "reference=shantalife" | xargs -r docker rmi -f
+          docker container prune -f
+          docker volume ls -q --filter dangling=true | xargs -r docker volume rm -f
