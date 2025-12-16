@@ -28,4 +28,4 @@ jobs:
 
             echo "Deploying environment: $ENV (branch: ${GITHUB_REF_NAME})"
 
-            deploy-shantalife "$ENV"
+            ./.bin/deploy-shantalife "$ENV"
