@@ -83,6 +83,10 @@ export default buildConfig({
         return `${process?.env?.API_URL}/preview/${slug}`
       },
     },
+    // ✅ add this
+    components: {
+      providers: ['/components/payload/AdminRoleStylesProvider#AdminRoleStylesProvider'],
+    },
   },
 
   upload: {
