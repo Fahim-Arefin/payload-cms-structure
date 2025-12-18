@@ -3,7 +3,7 @@ name: Deploy ShantaLife (SSH)
 on:
   push:
     branches:
-      - main
+      # - main
       - staging
 
 jobs:

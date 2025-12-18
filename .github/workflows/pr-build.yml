@@ -5,8 +5,8 @@ on:
     branches:
       # - 'main-xyz'
       - 'main'
-      - 'staging'
-      - 'develop'
+      # - 'staging'
+      # - 'develop'
 
 jobs:
   pr-build:
