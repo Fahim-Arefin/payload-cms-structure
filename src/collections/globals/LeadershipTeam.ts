@@ -15,6 +15,7 @@ import { revalidateTag } from 'next/cache'
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
 import { triggerMediaTemporaryPurge } from '@/utils/media/triggerMediaTemporaryPurge'
+import { roleAtLeast } from '@/lib/rbac'
 
 const TITLE_MAX = 60
 const NAME_MAX = 100
@@ -98,6 +99,11 @@ const LeadershipTeam: GlobalConfig = {
   admin: {
     description:
       'Powers About Us + Leaders. About Us reads Section Title + aboutImage; Leaders page reads leaders[] (portrait, name, designation, bios).',
+  },
+
+  access: {
+    read: () => true, // public read
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
   },
 
   fields: [

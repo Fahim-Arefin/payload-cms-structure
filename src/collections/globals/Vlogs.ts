@@ -17,6 +17,7 @@ import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
 
 // ✅ cropper generator
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
+import { roleAtLeast } from '@/lib/rbac'
 
 /* ---------------- limits ---------------- */
 const TITLE_MAX = 500
@@ -82,6 +83,11 @@ const GlobalVlogs: GlobalConfig = {
   admin: {
     description:
       'Global list of Vlog cards. Each item has EN/BN title, image (cropper), rich descriptions, important date, Bangla date label',
+  },
+
+  access: {
+    read: () => true, // public read
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
   },
 
   fields: [

@@ -801,6 +801,7 @@ import { globalTag } from '@/lib/cacheTags'
 import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
 import { triggerMediaTemporaryPurge } from '@/utils/media/triggerMediaTemporaryPurge'
 import { generateImageFields } from '@/utils/media/fieldGenerators'
+import { roleAtLeast } from '@/lib/rbac'
 
 /* ---------------- max length constants ---------------- */
 const EMAIL_MAX = 120
@@ -1032,6 +1033,11 @@ const Footer: GlobalConfig = {
   admin: {
     description:
       'Site-wide footer: logo & contact, Explore & Legal links, Social URLs, and Copyright.',
+  },
+
+  access: {
+    read: () => true, // public read
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
   },
 
   fields: [

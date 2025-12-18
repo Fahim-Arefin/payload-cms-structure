@@ -331,6 +331,7 @@ import { generateImageFields } from '@/utils/media/fieldGenerators'
 import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
 import { revalidateTag } from 'next/cache'
 import { triggerMediaTemporaryPurge } from '@/utils/media/triggerMediaTemporaryPurge'
+import { roleAtLeast } from '@/lib/rbac'
 
 const CTA_TEXT_MAX = 100
 const LABEL_MAX = 40
@@ -545,6 +546,12 @@ const Navbar: GlobalConfig = {
     description:
       'Global navbar: logo and multi-level navigation (desktop & mobile), plus an optional portal link.',
   },
+
+  access: {
+    read: () => true, // public read
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
+  },
+
   fields: [
     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false, readOnly: true } },
 

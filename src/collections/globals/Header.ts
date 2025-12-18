@@ -4,9 +4,8 @@ import { bnNum } from '@/lib/utils'
 import { GLOBAL_HEADER_SLUG_AND_TAG } from '@/lib/constants'
 import { revalidateTag } from 'next/cache'
 import { globalTag } from '@/lib/cacheTags'
-import { hasRole } from '@/lib/rbac';
+import { hasRole, roleAtLeast } from '@/lib/rbac'
 import { getClientIP } from '@/lib/http'
-
 
 const LABEL_MAX = 60
 const URL_MAX = 300
@@ -88,10 +87,16 @@ const validateSectionIdOptional = (val: unknown) => {
 /* ---------------- global ---------------- */
 const Header: GlobalConfig = {
   slug: GLOBAL_HEADER_SLUG_AND_TAG,
+  // access: {
+  //   read: () => true, // site needs to read it
+  //   update: ({ req }) => hasRole(req.user, ['admin', 'super-admin']),
+  // },
+
   access: {
-  read: () => true, // site needs to read it
-  update: ({ req }) => hasRole(req.user, ['admin', 'super-admin']),
-},
+    read: () => true, // public read
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
+  },
+
   label: 'Header',
   admin: {
     description:
@@ -191,29 +196,29 @@ const Header: GlobalConfig = {
   ],
 
   hooks: {
-  afterChange: [
-    async ({ req, doc, previousDoc }) => {
-      // revalidate existing tag (yours)
-      revalidateTag(globalTag(GLOBAL_HEADER_SLUG_AND_TAG));
+    afterChange: [
+      async ({ req, doc, previousDoc }) => {
+        // revalidate existing tag (yours)
+        revalidateTag(globalTag(GLOBAL_HEADER_SLUG_AND_TAG))
 
-      // NEW: audit
-      try {
-        await req.payload.create({
-          collection: 'audit-logs',
-          data: {
-            action: 'settings-update',
-            targetCollection: 'globals',
-            docId: GLOBAL_HEADER_SLUG_AND_TAG,
-            actor: req.user?.id ?? null,
-            ip: getClientIP(req),
-            diff: { before: previousDoc ?? null, after: doc ?? null },
-          },
-        });
-      } catch (e) {
-        req.payload.logger.error('Audit log (header) failed', e);
-      }
-    },
-  ],
+        // NEW: audit
+        try {
+          await req.payload.create({
+            collection: 'audit-logs',
+            data: {
+              action: 'settings-update',
+              targetCollection: 'globals',
+              docId: GLOBAL_HEADER_SLUG_AND_TAG,
+              actor: req.user?.id ?? null,
+              ip: getClientIP(req),
+              diff: { before: previousDoc ?? null, after: doc ?? null },
+            },
+          })
+        } catch (e) {
+          req.payload.logger.error('Audit log (header) failed', e)
+        }
+      },
+    ],
   },
 }
 
