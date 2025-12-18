@@ -446,6 +446,7 @@ import { triggerMediaTemporaryPurge } from '@/utils/media/triggerMediaTemporaryP
 
 // ✅ generator (cropper + original handling)
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
+import { roleAtLeast } from '@/lib/rbac'
 
 /* ---------------- limits ---------------- */
 const TITLE_MAX = 60
@@ -581,6 +582,10 @@ const BoardOfDirectors: GlobalConfig = {
   admin: {
     description:
       'This collection powers BOTH pages: About Us + BOD. About Us uses ROOT fields (Section Title, Section Subtitle, Section Description) and the aboutImage (transparent, BG-removed, 4:5 PNG). BOD page uses directors[] items (portrait image 4:5, EN/BN name, EN/BN designation, rich bio). Note: aboutImage must be background-removed (transparent PNG) for About Us overlays.',
+  },
+  access: {
+    read: () => true, // public read
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
   },
 
   fields: [

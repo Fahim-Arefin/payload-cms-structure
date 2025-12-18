@@ -303,6 +303,7 @@ import {
   GLOBAL_CONTACT_US_BLOCK_LABEL,
   CONTACT_US_BLOCK_SLUG_AND_TAG,
 } from '@/lib/constants'
+import { roleAtLeast } from '@/lib/rbac'
 
 /* ---------------- limits ---------------- */
 const TITLE_MAX = 80
@@ -431,6 +432,11 @@ const ContactUsGlobal: GlobalConfig = {
   label: GLOBAL_CONTACT_US_BLOCK_LABEL,
   admin: {
     description: 'Global Contact Us configuration (title, copy, recipients, image, links).',
+  },
+
+  access: {
+    read: () => true, // public read
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
   },
   fields: [
     // hidden session id (cooperates with media lifecycle)

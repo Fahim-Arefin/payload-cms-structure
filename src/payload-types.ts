@@ -236,6 +236,7 @@ export interface AuditLog {
     | 'settings-update'
     | 'role-assign';
   targetCollection?: string | null;
+  docName?: string | null;
   docId?: string | null;
   actor?: (string | null) | User;
   ip?: string | null;
@@ -7460,6 +7461,7 @@ export interface ResumeSelect<T extends boolean = true> {
 export interface AuditLogsSelect<T extends boolean = true> {
   action?: T;
   targetCollection?: T;
+  docName?: T;
   docId?: T;
   actor?: T;
   ip?: T;

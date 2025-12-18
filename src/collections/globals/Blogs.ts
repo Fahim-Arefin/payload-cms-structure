@@ -375,6 +375,7 @@ import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
 
 // ✅ cropper generator
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
+import { roleAtLeast } from '@/lib/rbac'
 
 /* ---------------- limits ---------------- */
 const TITLE_MAX = 500
@@ -502,6 +503,11 @@ const base = pickGlobalHooks(mediaHooks)
 const GlobalBlogs: GlobalConfig = {
   slug: GLOBAL_BLOGS_SLUG_AND_TAG,
   label: GLOBAL_BLOGS_BLOCK_LABEL,
+
+  access: {
+    read: () => true, // public read
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
+  },
 
   admin: {
     description:

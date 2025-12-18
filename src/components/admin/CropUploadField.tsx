@@ -2000,6 +2000,14 @@ const CropUploadField: React.FC<AdminFieldProps> = ({
     const f = e.target.files?.[0]
     if (!f) return
 
+    // 🔴 HARD LIMIT: 1 MB (prevents 413 in production)
+    const MAX_BYTES_1MB = 1024 * 1024
+    if (f.size > MAX_BYTES_1MB) {
+      setError('Image cannot be larger than 1 MB. Please choose a smaller image.')
+      e.target.value = ''
+      return
+    }
+
     const allows = Array.isArray(acceptCfg) ? acceptCfg : [acceptCfg]
     const okType = allows.some((a) =>
       a.endsWith('/*') ? f.type.startsWith(a.slice(0, a.indexOf('/')) + '/') : f.type === a,

@@ -9,7 +9,7 @@ const AuditLogs: CollectionConfig = {
     group: AUDIT_LOG,
     useAsTitle: 'action',
     hidden: ({ user }) => !hasRole(user, ['super-admin', 'admin', 'editor']),
-    defaultColumns: ['action', 'targetCollection', 'docId', 'actor', 'createdAt'],
+    defaultColumns: ['action', 'targetCollection', 'docId', 'docName', 'actor', 'createdAt'],
   },
   access: {
     read: ({ req }) => {
@@ -44,6 +44,8 @@ const AuditLogs: CollectionConfig = {
       ],
     },
     { name: 'targetCollection', type: 'text' }, // avoid reserved 'collection'
+    // ✅ NEW: store doc "name" (user friendly)
+    { name: 'docName', type: 'text' },
     { name: 'docId', type: 'text' },
     { name: 'actor', type: 'relationship', relationTo: 'users' },
     { name: 'ip', type: 'text' },
