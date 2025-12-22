@@ -5,12 +5,13 @@ on:
     branches:
       # - 'main-xyz'
       - 'main'
-      # - 'staging'
-      # - 'develop'
+      - 'staging'
+      - 'develop'
 
 jobs:
   pr-build:
-    runs-on: self-hosted
+    # runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
