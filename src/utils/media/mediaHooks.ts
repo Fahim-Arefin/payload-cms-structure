@@ -47,6 +47,8 @@ import {
   HERO_SMALL_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
+  CAREER_SHAPE_SLUG_AND_TAG,
+  CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -213,6 +215,11 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
       mediaFields: ['stampImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_SHAPE_SLUG_AND_TAG,
+      mediaFields: ['backgroundImage'],
     },
   ],
 
@@ -468,6 +475,12 @@ export const mediaHooks = withMediaLifecycle({
       blockType: PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
       arrayKey: 'features',
       mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG,
+      arrayKey: 'images',
+      mediaFields: ['image'],
     },
   ],
 
