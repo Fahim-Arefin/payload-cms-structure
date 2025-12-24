@@ -3374,6 +3374,61 @@ export interface Page {
               blockName?: string | null;
               blockType: 'hash-link-card';
             }
+          | {
+              /**
+               * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
+               */
+              careerCards: {
+                /**
+                 * Main background of the card. Recommended 1:1.
+                 */
+                bgImage: string | Media;
+                bgImageOriginal?: (string | null) | Media;
+                pendingBgImageOriginal?: string | null;
+                pendingBgImageCrop?: string | null;
+                bgImageBlurDataURL?: string | null;
+                /**
+                 * Square icon. Recommended 1:1.
+                 */
+                icon: string | Media;
+                iconOriginal?: (string | null) | Media;
+                pendingIconOriginal?: string | null;
+                pendingIconCrop?: string | null;
+                iconBlurDataURL?: string | null;
+                /**
+                 * One short line. Max 180 characters.
+                 */
+                title: string;
+                /**
+                 * একটি ছোট শিরোনাম। সর্বোচ্চ ১৮০ অক্ষর।
+                 */
+                titleBN: string;
+                /**
+                 * One short line. Max 180 characters.
+                 */
+                description: string;
+                /**
+                 * একটি ছোট লাইন। সর্বোচ্চ ১৮০ অক্ষর।
+                 */
+                descriptionBN: string;
+                /**
+                 * Optional. Max 24 characters.
+                 */
+                buttonText?: string | null;
+                /**
+                 * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+                 */
+                buttonTextBN?: string | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                 */
+                buttonLink?: (string | null) | Page;
+                id?: string | null;
+              }[];
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'career-card';
+            }
         )[];
         id?: string | null;
         blockName?: string | null;
@@ -8800,6 +8855,34 @@ export interface PagesSelect<T extends boolean = true> {
                                 titleBN?: T;
                                 buttonLink?: T;
                                 sectionId?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'career-card'?:
+                      | T
+                      | {
+                          careerCards?:
+                            | T
+                            | {
+                                bgImage?: T;
+                                bgImageOriginal?: T;
+                                pendingBgImageOriginal?: T;
+                                pendingBgImageCrop?: T;
+                                bgImageBlurDataURL?: T;
+                                icon?: T;
+                                iconOriginal?: T;
+                                pendingIconOriginal?: T;
+                                pendingIconCrop?: T;
+                                iconBlurDataURL?: T;
+                                title?: T;
+                                titleBN?: T;
+                                description?: T;
+                                descriptionBN?: T;
+                                buttonText?: T;
+                                buttonTextBN?: T;
+                                buttonLink?: T;
                                 id?: T;
                               };
                           id?: T;

@@ -1,12 +1,14 @@
 import LocalizedHighlighted from '@/components/custom/shared/LocalizedHighlighted'
 import LocalizedRichText from '@/components/custom/shared/LocalizedRichText'
 import {
+  CAREER_CARDS_SLUG_AND_TAG,
   CORPORATE_PAGE_CARDS_SLUG_AND_TAG,
   HASHLINK_CARDS_SLUG_AND_TAG,
   OFFER_CARDS_SLUG_AND_TAG,
   PLAN_PAGE_PLAN_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
 import {
+  CareerCardBlockType,
   CorporateBlock,
   CustomCardSectionBlockType,
   HashlinkBlock,
@@ -18,6 +20,7 @@ import CorporateCardBlock from './corporateCard/CorporateCardBlock'
 import PlanCardBlock from './planCard/PlanCardBlock'
 import OfferCardBlock from './offerCard/OfferCardBlock'
 import HashCardBlock from './hashLinkCard/HashCardBlock'
+import CareerCardBlock from './careerCard/CareerCardBlock'
 
 type Props = {
   block: CustomCardSectionBlockType
@@ -120,6 +123,19 @@ function CustomCardSectionBlock({ block }: Props) {
                 <HashCardBlock
                   block={block}
                   data={hashLinkData}
+                  displayAsCarousel={block?.displayAsCarousel}
+                />
+              </div>
+            )
+          }
+
+          case CAREER_CARDS_SLUG_AND_TAG: {
+            const careerData = eachCard as CareerCardBlockType
+            return (
+              <div key={key}>
+                <CareerCardBlock
+                  block={block}
+                  data={careerData}
                   displayAsCarousel={block?.displayAsCarousel}
                 />
               </div>

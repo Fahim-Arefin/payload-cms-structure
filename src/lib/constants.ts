@@ -337,6 +337,12 @@ export const HASHLINK_CARDS_BLOCK_LABEL = 'Hash Link Cards'
 export const HASHLINK_CARDS_CACHE_KEY = 'hash-link-card-data'
 export const HASHLINK_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/hash-link-card-block-thumbnail.png`
 
+// card 05 -> Career card
+export const CAREER_CARDS_SLUG_AND_TAG = 'career-card'
+export const CAREER_CARDS_BLOCK_LABEL = 'Career Cards'
+export const CAREER_CARDS_CACHE_KEY = 'career-card-data'
+export const CAREER_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/career-card-block-thumbnail.png`
+
 // corporate Add on info
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG = 'add-on-info'
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_CACHE_KEY = 'add-on-info-data'

@@ -546,6 +546,13 @@ export const mediaHooks = withMediaLifecycle({
     },
     {
       layoutKey: 'layout',
+      blockType: CUSTOM_CARD_SECTION_SLUG_AND_TAG,
+      groupKey: 'card', // the nested "blocks" field inside the outer block
+      arrayKey: 'careerCards', // array inside the nested CorporateCards block
+      mediaFields: ['bgImage', 'icon'],
+    },
+    {
+      layoutKey: 'layout',
       blockType: SUPPORT_BUZZ_SLUG_AND_TAG,
       groupKey: 'allTab',
       arrayKey: 'newsItems',

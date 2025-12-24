@@ -11,6 +11,7 @@ import CorporateCardsSchema from './corporateCard/schema'
 import OfferCardsSchema from './offerCard/schema'
 import PlanCardSchema from './planCard/schema'
 import HashLinkCardsSchema from './hashLinkCard/schema'
+import CareerCardsSchema from './careerCard/schema'
 
 /* ------------ limits ------------ */
 const TITLE_MAX = 100
@@ -430,7 +431,13 @@ const CustomCardSectionSchema: Block = {
       admin: {
         description: 'Please add a card',
       },
-      blocks: [CorporateCardsSchema, PlanCardSchema, OfferCardsSchema, HashLinkCardsSchema],
+      blocks: [
+        CorporateCardsSchema,
+        PlanCardSchema,
+        OfferCardsSchema,
+        HashLinkCardsSchema,
+        CareerCardsSchema,
+      ],
     },
   ],
 }
