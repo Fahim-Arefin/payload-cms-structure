@@ -20,6 +20,7 @@ jobs:
           script: |
             set -e
 
+            echo "${GITHUB_REF_NAME}"
             if [ "${GITHUB_REF_NAME}" = "main" ]; then
               ENV="main"
             else
