@@ -23,7 +23,7 @@ jobs:
             set -e
 
             echo "${{ github.ref_name }}"
-            echo "${BRANCH}"
+            echo "$BRANCH"
             echo "${{ github.ref_name }}"
             # if [ "${BRANCH}" = "main" ]; then
             #   ENV="main"
