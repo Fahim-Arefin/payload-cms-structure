@@ -9,6 +9,8 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    env:
+      BRANCH: ${{ github.ref_name }}
 
     steps:
       - name: Deploy via SSH
@@ -20,13 +22,13 @@ jobs:
           script: |
             set -e
 
-            echo "${GITHUB_REF_NAME}"
-            if [ "${GITHUB_REF_NAME}" = "main" ]; then
-              ENV="main"
-            else
-              ENV="staging"
-            fi
+            # echo "${BRANCH}"
+            # if [ "${BRANCH}" = "main" ]; then
+            #   ENV="main"
+            # else
+            #   ENV="staging"
+            # fi
 
-            echo "Deploying environment: $ENV (branch: ${GITHUB_REF_NAME})"
+            echo "Deploying environment: $ENV (branch: ${BRANCH})"
 
             ./.bin/deploy-shantalife "$ENV"
