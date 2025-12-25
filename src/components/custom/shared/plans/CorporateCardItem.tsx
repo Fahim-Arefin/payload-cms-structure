@@ -82,7 +82,7 @@ function CorporateCardItem({ data }: Props) {
               >
                 <Link href={pageHref(desc?.buttonLink)} className="flex space-x-1 items-center ">
                   <div>
-                    <LocalizedText en="Explore Now" bn="এখনই দেখুন" />
+                    <LocalizedText en={desc?.buttonText} bn={desc?.buttonTextBN} />
                   </div>
                   <ArrowUpRight />
                 </Link>

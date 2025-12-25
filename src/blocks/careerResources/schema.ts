@@ -5,6 +5,7 @@ import {
   CAREER_PAGE_RESOURCES_BLOCK_LABEL,
   CAREER_PAGE_RESOURCES_BLOCK_THUMBNAIL_URL,
   CAREER_PAGE,
+  COMMON,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
@@ -17,6 +18,7 @@ const CARD_TITLE_MAX = 60
 const CARD_DESC_MAX = 1000
 const DESIGNATION_MAX = 60
 const CTA_TEXT_MAX = 24 // root-level CTA text limit
+const DESC_MAX = 500
 
 /* ---------------- validators ---------------- */
 const validateShortText =
@@ -46,6 +48,71 @@ const validateHighlightedInSubtitleBN = (val: unknown, { siblingData }: any) => 
   return target.includes(s) ? true : 'হাইলাইটেড টেক্সটটি উপশিরোনামের ভেতরে হুবহু থাকতে হবে।'
 }
 
+/** True if there is ANY real (non-zero-width, non-whitespace) text node in the Lexical tree */
+function lexicalHasRealText(root: any): boolean {
+  if (!root) return false
+  const stack = [root]
+  while (stack.length) {
+    const node = stack.pop()
+    if (!node) continue
+
+    // Text node with real characters?
+    if (node.type === 'text' && typeof node.text === 'string') {
+      const stripped = node.text.replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/\s+/g, '')
+      if (stripped.length > 0) return true
+    }
+
+    // Traverse children/fields
+    if (Array.isArray(node)) {
+      for (const child of node) stack.push(child)
+    } else if (typeof node === 'object') {
+      for (const k of Object.keys(node)) {
+        if (k === 'text') continue
+        stack.push(node[k])
+      }
+    }
+  }
+  return false
+}
+
+/** Count characters in Lexical tree (ignores zero-width chars but keeps normal spaces) */
+function lexicalCharCount(root: any): number {
+  let count = 0
+  const stack = [root]
+  while (stack.length) {
+    const node = stack.pop()
+    if (!node) continue
+    if (node.type === 'text' && typeof node.text === 'string') {
+      count += node.text.replace(/[\u200B-\u200D\uFEFF]/g, '').length
+    }
+    if (Array.isArray(node)) {
+      for (const child of node) stack.push(child)
+    } else if (typeof node === 'object') {
+      for (const k of Object.keys(node)) {
+        if (k === 'text') continue
+        stack.push(node[k])
+      }
+    }
+  }
+  return count
+}
+
+/** Single source of truth validator for richText fields */
+const validateRichText =
+  (label: string, { required, max }: { required: boolean; max: number }) =>
+  (val: unknown) => {
+    const root = (val as any)?.root ?? val
+    if (required && !lexicalHasRealText(root)) {
+      return `${label} is required.`
+    }
+    if (!root) return true
+    const chars = lexicalCharCount(root)
+    if (max && chars > max) {
+      return `${label} must be at most ${max} characters.`
+    }
+    return true
+  }
+
 /* ---------------- block ---------------- */
 const CareerResourcesSchema: Block = {
   slug: CAREER_PAGE_RESOURCES_SLUG_AND_TAG,
@@ -54,7 +121,7 @@ const CareerResourcesSchema: Block = {
     plural: CAREER_PAGE_RESOURCES_BLOCK_LABEL,
   },
   admin: {
-    group: CAREER_PAGE,
+    group: COMMON,
   },
 
   imageURL: CAREER_PAGE_RESOURCES_BLOCK_THUMBNAIL_URL,
@@ -68,10 +135,10 @@ const CareerResourcesSchema: Block = {
         {
           name: 'title',
           type: 'text',
-          required: true,
+          required: false,
           label: 'Title',
           maxLength: TITLE_MAX,
-          validate: validateShortText('Title', TITLE_MAX, true),
+          validate: validateShortText('Title', TITLE_MAX, false),
           admin: {
             width: '50%',
             description: `Primary headline. Max ${TITLE_MAX} characters.`,
@@ -80,10 +147,10 @@ const CareerResourcesSchema: Block = {
         {
           name: 'titleBN',
           type: 'text',
-          required: true,
+          required: false,
           label: 'শিরোনাম (বাংলা)',
           maxLength: TITLE_MAX,
-          validate: validateShortText('Title (BN)', TITLE_MAX, true),
+          validate: validateShortText('Title (BN)', TITLE_MAX, false),
           admin: {
             width: '50%',
             description: `প্রধান শিরোনাম। সর্বোচ্চ ${bnNum(TITLE_MAX)} অক্ষর।`,
@@ -154,6 +221,26 @@ const CareerResourcesSchema: Block = {
       ],
     },
 
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'description',
+          type: 'richText',
+          label: 'Description',
+          validate: validateRichText('Description', { required: false, max: DESC_MAX }),
+          admin: { width: '50%', description: `Up to ~${DESC_MAX} characters.` },
+        },
+        {
+          name: 'descriptionBN',
+          type: 'richText',
+          label: 'বর্ণনা (বাংলা)',
+          validate: validateRichText('Description (BN)', { required: false, max: DESC_MAX }),
+          admin: { width: '50%', description: `সর্বোচ্চ ~${bnNum(DESC_MAX)} অক্ষর।` },
+        },
+      ],
+    },
+
     // Background Image (main-level, not in cards)
     ...generateImageFields({
       fieldName: 'backgroundImage',
@@ -163,6 +250,7 @@ const CareerResourcesSchema: Block = {
       quality: 0.92,
       maxKB: 500,
       ownerCollection: CAREER_PAGE_RESOURCES_SLUG_AND_TAG as any,
+      required: false,
     } as any),
 
     // Root-level CTA button texts (Read More / Read Less) EN / BN

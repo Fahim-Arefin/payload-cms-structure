@@ -47,6 +47,8 @@ import {
   HERO_SMALL_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
+  CAREER_SHAPE_SLUG_AND_TAG,
+  CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -213,6 +215,11 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
       mediaFields: ['stampImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_SHAPE_SLUG_AND_TAG,
+      mediaFields: ['backgroundImage'],
     },
   ],
 
@@ -469,6 +476,12 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'features',
       mediaFields: ['icon'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG,
+      arrayKey: 'images',
+      mediaFields: ['image'],
+    },
   ],
 
   // Blocks with nested array (media that inside another array) that contain media fields
@@ -530,6 +543,13 @@ export const mediaHooks = withMediaLifecycle({
       groupKey: 'card', // the nested "blocks" field inside the outer block
       arrayKey: 'hashLinkCards', // array inside the nested CorporateCards block
       mediaFields: ['bgImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CUSTOM_CARD_SECTION_SLUG_AND_TAG,
+      groupKey: 'card', // the nested "blocks" field inside the outer block
+      arrayKey: 'careerCards', // array inside the nested CorporateCards block
+      mediaFields: ['bgImage', 'icon'],
     },
     {
       layoutKey: 'layout',

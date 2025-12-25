@@ -1610,6 +1610,208 @@ export interface Page {
       }
     | {
         /**
+         * Primary headline. Max 80 characters.
+         */
+        title?: string | null;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN?: string | null;
+        /**
+         * Supporting line. Max 120 characters.
+         */
+        subTitle: string;
+        /**
+         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
+         */
+        subTitleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Subtitle. Max 40 characters.
+         */
+        highlightedSubTitle?: string | null;
+        /**
+         * ঐচ্ছিক। উপশিরোনামের ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
+         */
+        highlightedSubTitleBN?: string | null;
+        /**
+         * Up to ~500 characters.
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * সর্বোচ্চ ~৫০০ অক্ষর।
+         */
+        descriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Background image for the section (585:390 recommended).
+         */
+        backgroundImage?: (string | null) | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        /**
+         * Label for the "Read More" button. Optional. Max 24 characters.
+         */
+        readMoreButtonText?: string | null;
+        /**
+         * “Read More” বাটনের জন্য বাংলা টেক্সট। ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        readMoreButtonTextBN?: string | null;
+        /**
+         * Label for the "Read Less" button (collapse). Optional. Max 24 characters.
+         */
+        readLessButtonText?: string | null;
+        /**
+         * “Read Less” (কম দেখানোর) বাটনের জন্য বাংলা টেক্সট। ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        readLessButtonTextBN?: string | null;
+        /**
+         * Add one or more resource cards.
+         */
+        cards: {
+          /**
+           * Short heading for the card. Max 60 characters.
+           */
+          title: string;
+          /**
+           * কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          titleBN: string;
+          /**
+           * Thumbnail for the resource card. 4:3 recommended.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          /**
+           * Brief supporting copy. Max 1000 characters.
+           */
+          description: string;
+          /**
+           * সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ১০০০ অক্ষর।
+           */
+          descriptionBN: string;
+          /**
+           * e.g., Senior Advisor. Max 60 characters.
+           */
+          designation: string;
+          /**
+           * যেমন: সিনিয়র অ্যাডভাইজার। সর্বোচ্চ ৬০ অক্ষর।
+           */
+          designationBN: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-resources';
+      }
+    | {
+        /**
+         * Full-width background image behind the overlay content. 16:9 recommended.
+         */
+        backgroundImage: string | Media;
+        backgroundImageOriginal?: (string | null) | Media;
+        pendingBackgroundImageOriginal?: string | null;
+        pendingBackgroundImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        backgroundImageBlurDataURL?: string | null;
+        /**
+         * Main heading (e.g., "READY TO SHAPE YOUR FUTURE?"). Max 80 characters.
+         */
+        leadingTitle: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        leadingTitleBN: string;
+        /**
+         * Main paragraph under the title. Up to ~600 characters.
+         */
+        leadingDescription?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * প্রধান বর্ণনা। সর্বোচ্চ ~৬০০ অক্ষর।
+         */
+        leadingDescriptionBN?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Optional. Text shown on the button (e.g., "Apply Now"). Max 24 characters.
+         */
+        buttonText?: string | null;
+        /**
+         * ঐচ্ছিক। বাটনে দেখানো টেক্সট। সর্বোচ্চ ২৪ অক্ষর।
+         */
+        buttonTextBN?: string | null;
+        /**
+         * Pick an internal Page to navigate to when the CTA button is clicked (required only if CTA text is set).
+         */
+        buttonLink?: (string | null) | Page;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-shape';
+      }
+    | {
+        /**
          * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
          */
         backgroundColor?: string | null;
@@ -3171,6 +3373,61 @@ export interface Page {
               id?: string | null;
               blockName?: string | null;
               blockType: 'hash-link-card';
+            }
+          | {
+              /**
+               * Add 1–12 cards. Each card needs a background image, an icon, and description lines (EN/BN).
+               */
+              careerCards: {
+                /**
+                 * Main background of the card. Recommended 1:1.
+                 */
+                bgImage: string | Media;
+                bgImageOriginal?: (string | null) | Media;
+                pendingBgImageOriginal?: string | null;
+                pendingBgImageCrop?: string | null;
+                bgImageBlurDataURL?: string | null;
+                /**
+                 * Square icon. Recommended 1:1.
+                 */
+                icon: string | Media;
+                iconOriginal?: (string | null) | Media;
+                pendingIconOriginal?: string | null;
+                pendingIconCrop?: string | null;
+                iconBlurDataURL?: string | null;
+                /**
+                 * One short line. Max 180 characters.
+                 */
+                title: string;
+                /**
+                 * একটি ছোট শিরোনাম। সর্বোচ্চ ১৮০ অক্ষর।
+                 */
+                titleBN: string;
+                /**
+                 * One short line. Max 180 characters.
+                 */
+                description: string;
+                /**
+                 * একটি ছোট লাইন। সর্বোচ্চ ১৮০ অক্ষর।
+                 */
+                descriptionBN: string;
+                /**
+                 * Optional. Max 24 characters.
+                 */
+                buttonText?: string | null;
+                /**
+                 * ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
+                 */
+                buttonTextBN?: string | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. When click on this button it will navigate to linked page, specify that page here
+                 */
+                buttonLink?: (string | null) | Page;
+                id?: string | null;
+              }[];
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'career-card';
             }
         )[];
         id?: string | null;
@@ -6736,100 +6993,6 @@ export interface Page {
       }
     | {
         /**
-         * Primary headline. Max 80 characters.
-         */
-        title: string;
-        /**
-         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
-         */
-        titleBN: string;
-        /**
-         * Supporting line. Max 120 characters.
-         */
-        subTitle: string;
-        /**
-         * সহায়ক লাইন। সর্বোচ্চ ১২০ অক্ষর।
-         */
-        subTitleBN: string;
-        /**
-         * Optional. Must appear verbatim inside Subtitle. Max 40 characters.
-         */
-        highlightedSubTitle?: string | null;
-        /**
-         * ঐচ্ছিক। উপশিরোনামের ভেতরে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-         */
-        highlightedSubTitleBN?: string | null;
-        /**
-         * Background image for the section (585:390 recommended).
-         */
-        backgroundImage: string | Media;
-        backgroundImageOriginal?: (string | null) | Media;
-        pendingBackgroundImageOriginal?: string | null;
-        pendingBackgroundImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        backgroundImageBlurDataURL?: string | null;
-        /**
-         * Label for the "Read More" button. Optional. Max 24 characters.
-         */
-        readMoreButtonText?: string | null;
-        /**
-         * “Read More” বাটনের জন্য বাংলা টেক্সট। ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
-         */
-        readMoreButtonTextBN?: string | null;
-        /**
-         * Label for the "Read Less" button (collapse). Optional. Max 24 characters.
-         */
-        readLessButtonText?: string | null;
-        /**
-         * “Read Less” (কম দেখানোর) বাটনের জন্য বাংলা টেক্সট। ঐচ্ছিক। সর্বোচ্চ ২৪ অক্ষর।
-         */
-        readLessButtonTextBN?: string | null;
-        /**
-         * Add one or more resource cards.
-         */
-        cards: {
-          /**
-           * Short heading for the card. Max 60 characters.
-           */
-          title: string;
-          /**
-           * কার্ডের সংক্ষিপ্ত শিরোনাম। সর্বোচ্চ ৬০ অক্ষর।
-           */
-          titleBN: string;
-          /**
-           * Thumbnail for the resource card. 4:3 recommended.
-           */
-          image: string | Media;
-          imageOriginal?: (string | null) | Media;
-          pendingImageOriginal?: string | null;
-          pendingImageCrop?: string | null;
-          imageBlurDataURL?: string | null;
-          /**
-           * Brief supporting copy. Max 1000 characters.
-           */
-          description: string;
-          /**
-           * সংক্ষিপ্ত সহায়ক বর্ণনা। সর্বোচ্চ ১০০০ অক্ষর।
-           */
-          descriptionBN: string;
-          /**
-           * e.g., Senior Advisor. Max 60 characters.
-           */
-          designation: string;
-          /**
-           * যেমন: সিনিয়র অ্যাডভাইজার। সর্বোচ্চ ৬০ অক্ষর।
-           */
-          designationBN: string;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'career-resources';
-      }
-    | {
-        /**
          * Hex color in #RRGGBB. Default: #F6EDDD
          */
         bgColor?: string | null;
@@ -7168,6 +7331,45 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'career-processing';
+      }
+    | {
+        /**
+         * Hex color in #RRGGBB (e.g., #FCF4EB). Length 7 (৭).
+         */
+        backgroundColor?: string | null;
+        /**
+         * Primary heading. Max 80 characters.
+         */
+        title: string;
+        /**
+         * প্রধান শিরোনাম। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        titleBN: string;
+        /**
+         * Optional. Must appear verbatim inside Title. Max 80 characters.
+         */
+        highlightedTitle?: string | null;
+        /**
+         * ঐচ্ছিক। শিরোনামের ভিতরে হুবহু থাকতে হবে। সর্বোচ্চ ৮০ অক্ষর।
+         */
+        highlightedTitleBN?: string | null;
+        /**
+         * Upload the collage images shown in the Program Insiders section (landscape photos recommended). Max images should be 8.
+         */
+        images: {
+          /**
+           * Program photo. 4:3 landscape recommended.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'career-aura-program-insiders';
       }
     | {
         /**
@@ -8014,6 +8216,63 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'career-resources'?:
+          | T
+          | {
+              title?: T;
+              titleBN?: T;
+              subTitle?: T;
+              subTitleBN?: T;
+              highlightedSubTitle?: T;
+              highlightedSubTitleBN?: T;
+              description?: T;
+              descriptionBN?: T;
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
+              readMoreButtonText?: T;
+              readMoreButtonTextBN?: T;
+              readLessButtonText?: T;
+              readLessButtonTextBN?: T;
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    titleBN?: T;
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    description?: T;
+                    descriptionBN?: T;
+                    designation?: T;
+                    designationBN?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'career-shape'?:
+          | T
+          | {
+              backgroundImage?: T;
+              backgroundImageOriginal?: T;
+              pendingBackgroundImageOriginal?: T;
+              pendingBackgroundImageCrop?: T;
+              backgroundImageBlurDataURL?: T;
+              leadingTitle?: T;
+              leadingTitleBN?: T;
+              leadingDescription?: T;
+              leadingDescriptionBN?: T;
+              buttonText?: T;
+              buttonTextBN?: T;
+              buttonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
         'plan-info-design'?:
           | T
           | {
@@ -8596,6 +8855,34 @@ export interface PagesSelect<T extends boolean = true> {
                                 titleBN?: T;
                                 buttonLink?: T;
                                 sectionId?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    'career-card'?:
+                      | T
+                      | {
+                          careerCards?:
+                            | T
+                            | {
+                                bgImage?: T;
+                                bgImageOriginal?: T;
+                                pendingBgImageOriginal?: T;
+                                pendingBgImageCrop?: T;
+                                bgImageBlurDataURL?: T;
+                                icon?: T;
+                                iconOriginal?: T;
+                                pendingIconOriginal?: T;
+                                pendingIconCrop?: T;
+                                iconBlurDataURL?: T;
+                                title?: T;
+                                titleBN?: T;
+                                description?: T;
+                                descriptionBN?: T;
+                                buttonText?: T;
+                                buttonTextBN?: T;
+                                buttonLink?: T;
                                 id?: T;
                               };
                           id?: T;
@@ -9910,43 +10197,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'career-resources'?:
-          | T
-          | {
-              title?: T;
-              titleBN?: T;
-              subTitle?: T;
-              subTitleBN?: T;
-              highlightedSubTitle?: T;
-              highlightedSubTitleBN?: T;
-              backgroundImage?: T;
-              backgroundImageOriginal?: T;
-              pendingBackgroundImageOriginal?: T;
-              pendingBackgroundImageCrop?: T;
-              backgroundImageBlurDataURL?: T;
-              readMoreButtonText?: T;
-              readMoreButtonTextBN?: T;
-              readLessButtonText?: T;
-              readLessButtonTextBN?: T;
-              cards?:
-                | T
-                | {
-                    title?: T;
-                    titleBN?: T;
-                    image?: T;
-                    imageOriginal?: T;
-                    pendingImageOriginal?: T;
-                    pendingImageCrop?: T;
-                    imageBlurDataURL?: T;
-                    description?: T;
-                    descriptionBN?: T;
-                    designation?: T;
-                    designationBN?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
         'career-opening'?:
           | T
           | {
@@ -10013,6 +10263,27 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     title?: T;
                     titleBN?: T;
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'career-aura-program-insiders'?:
+          | T
+          | {
+              backgroundColor?: T;
+              title?: T;
+              titleBN?: T;
+              highlightedTitle?: T;
+              highlightedTitleBN?: T;
+              images?:
+                | T
+                | {
                     image?: T;
                     imageOriginal?: T;
                     pendingImageOriginal?: T;

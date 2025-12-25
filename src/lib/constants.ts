@@ -337,6 +337,12 @@ export const HASHLINK_CARDS_BLOCK_LABEL = 'Hash Link Cards'
 export const HASHLINK_CARDS_CACHE_KEY = 'hash-link-card-data'
 export const HASHLINK_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/hash-link-card-block-thumbnail.png`
 
+// card 05 -> Career card
+export const CAREER_CARDS_SLUG_AND_TAG = 'career-card'
+export const CAREER_CARDS_BLOCK_LABEL = 'Career Cards'
+export const CAREER_CARDS_CACHE_KEY = 'career-card-data'
+export const CAREER_CARDS_BLOCK_THUMBNAIL_URL = `${folder}/career-card-block-thumbnail.png`
+
 // corporate Add on info
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_SLUG_AND_TAG = 'add-on-info'
 export const EMPLOYEE_WELLNESS_ADDONS_INFO_CACHE_KEY = 'add-on-info-data'
@@ -573,3 +579,15 @@ export const MICRO_INSURANCE_STRATEGIC_PARTNERS_SLUG_AND_TAG = 'microinsurance-s
 export const MICRO_INSURANCE_STRATEGIC_PARTNERS_BLOCK_LABEL = 'Microinsurance Strategic Partners'
 export const MICRO_INSURANCE_STRATEGIC_PARTNERS_CACHE_KEY = 'microinsurance-strategic-partners-data'
 export const MICRO_INSURANCE_STRATEGIC_PARTNERS_BLOCK_THUMBNAIL_URL = `${folder}/microinsurance-strategic-partners-block-thumbnail.png`
+
+// career common
+export const CAREER_SHAPE_SLUG_AND_TAG = 'career-shape'
+export const CAREER_SHAPE_BLOCK_LABEL = 'Career Shape'
+export const CAREER_SHAPE_CACHE_KEY = 'career-shape-data'
+export const CAREER_SHAPE_BLOCK_THUMBNAIL_URL = `${folder}/career-shape-block-thumbnail.png`
+
+// Career Aura Page Block
+export const CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG = 'career-aura-program-insiders'
+export const CAREER_AURA_PROGRAM_INSIDERS_BLOCK_LABEL = 'Career Aura Program Insiders'
+export const CAREER_AURA_PROGRAM_INSIDERS_CACHE_KEY = 'career-aura-program-insiders-data'
+export const CAREER_AURA_PROGRAM_INSIDERS_BLOCK_THUMBNAIL_URL = `${folder}/career-aura-program-insiders-block-thumbnail.png`

@@ -244,7 +244,7 @@ function ResourceCard({
   return (
     <>
       {typeof data?.image === 'object' && data?.image?.url && (
-        <div className="relative bg-[#F9F4EE] rounded-[18px] px-4 py-6 md:py-8 md:px-7 xl:px-8 w-[300px] md:w-[500px] flex flex-col justify-between shadow-[0_2px_8px_0_rgba(51,51,51,0.04)] overflow-visible">
+        <div className="relative bg-[#FCF4EB] rounded-[18px] px-4 py-6 md:py-8 md:px-7 xl:px-8 w-[300px] md:w-[500px] flex flex-col justify-between shadow-[0_2px_8px_0_rgba(51,51,51,0.04)] overflow-visible">
           <EllipseDecoration />
 
           {/* Description */}

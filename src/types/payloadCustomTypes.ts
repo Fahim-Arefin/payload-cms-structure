@@ -74,6 +74,9 @@ import {
   PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
   HERO_DYNAMIC_SLUG_AND_TAG,
+  CAREER_SHAPE_SLUG_AND_TAG,
+  CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG,
+  CAREER_CARDS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -244,6 +247,13 @@ export type OfferBlock = Extract<AnyCard, { blockType: typeof OFFER_CARDS_SLUG_A
 
 export type HashlinkBlock = Extract<AnyCard, { blockType: typeof HASHLINK_CARDS_SLUG_AND_TAG }> & {
   hashLinkCards: unknown[]
+}
+
+export type CareerCardBlockType = Extract<
+  AnyCard,
+  { blockType: typeof CAREER_CARDS_SLUG_AND_TAG }
+> & {
+  careerCards: unknown[]
 }
 
 export type PlanInfoDesignBlockType = Extract<
@@ -467,4 +477,15 @@ export type PlanInfoDesign07BlockType = Extract<
 export type PlanInfoDesign06BlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PLAN_INFO_DESIGN_06_SLUG_AND_TAG }
+>
+
+export type CareerShapeBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CAREER_SHAPE_SLUG_AND_TAG }
+>
+
+//career aura page
+export type CareerAuraProgramInsidersBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG }
 >

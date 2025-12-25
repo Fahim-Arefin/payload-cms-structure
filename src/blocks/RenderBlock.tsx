@@ -73,6 +73,8 @@ import {
   PLAN_INFO_DESIGN_07_SLUG_AND_TAG,
   PLAN_INFO_DESIGN_06_SLUG_AND_TAG,
   HERO_DYNAMIC_SLUG_AND_TAG,
+  CAREER_SHAPE_SLUG_AND_TAG,
+  CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -133,6 +135,8 @@ import HeroSmallBlock from './heroSmall/HeroSmallBlock'
 import PlanInfoDesign07Block from './planInfoDesign07/PlanInfoDesign07Block'
 import PlanInfoDesign06Block from './planInfoDesign06/PlanInfoDesign06Block'
 import HeroDynamicBlock from './heroDynamic/HeroDynamicBlock'
+import CareerShapeBlock from './careerShape/CareerShapeBlock'
+import CareerAuraProgramInsidersBlock from './careerAuraProgramInsiders/CareerAuraProgramInsidersBlock'
 
 type Params = Record<string, string>
 
@@ -306,6 +310,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <PlanInfoDesign07Block key={block.id} block={block} params={params} />
     case PLAN_INFO_DESIGN_06_SLUG_AND_TAG:
       return <PlanInfoDesign06Block key={block.id} block={block} params={params} />
+    case CAREER_SHAPE_SLUG_AND_TAG:
+      return <CareerShapeBlock key={block.id} block={block} params={params} />
+    case CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG:
+      return <CareerAuraProgramInsidersBlock key={block.id} block={block} params={params} />
 
     default:
       return null

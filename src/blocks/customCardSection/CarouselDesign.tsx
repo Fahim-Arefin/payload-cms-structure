@@ -96,15 +96,17 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/componen
 import { sliderDelay } from '@/lib/data'
 import { CustomCardSectionBlockType } from '@/types/payloadCustomTypes'
 
+// add this arm to the conditional
 // type ItemOf<T> = T extends { corporateCards: infer A extends any[] }
 //   ? A[number]
 //   : T extends { planCards: infer B extends any[] }
 //     ? B[number]
 //     : T extends { offerCards: infer C extends any[] }
 //       ? C[number]
-//       : never
+//       : T extends { hashLinkCards: infer D extends any[] } // ⬅️ add
+//         ? D[number]
+//         : never
 
-// add this arm to the conditional
 type ItemOf<T> = T extends { corporateCards: infer A extends any[] }
   ? A[number]
   : T extends { planCards: infer B extends any[] }
@@ -113,7 +115,9 @@ type ItemOf<T> = T extends { corporateCards: infer A extends any[] }
       ? C[number]
       : T extends { hashLinkCards: infer D extends any[] } // ⬅️ add
         ? D[number]
-        : never
+        : T extends { careerCards: infer E extends any[] } // ⬅️ add
+          ? E[number]
+          : never
 
 type Props<T extends CustomCardSectionBlockType['card'][number]> = {
   block: CustomCardSectionBlockType
@@ -152,6 +156,7 @@ export default function CarouselDesign<T extends CustomCardSectionBlockType['car
   const laptopBasis = toBasis(block?.laptopCardsPerView ?? 3)
   const desktopBasis = toBasis(block?.desktopCardsPerView ?? 3)
 
+  // pick the array from the union, now including hashLinkCards
   // const items = (
   //   'corporateCards' in data
   //     ? data.corporateCards
@@ -159,10 +164,11 @@ export default function CarouselDesign<T extends CustomCardSectionBlockType['car
   //       ? data.planCards
   //       : 'offerCards' in data
   //         ? data.offerCards
-  //         : []
+  //         : 'hashLinkCards' in data // ⬅️ add
+  //           ? data.hashLinkCards
+  //           : []
   // ) as ItemOf<T>[]
 
-  // pick the array from the union, now including hashLinkCards
   const items = (
     'corporateCards' in data
       ? data.corporateCards
@@ -172,7 +178,9 @@ export default function CarouselDesign<T extends CustomCardSectionBlockType['car
           ? data.offerCards
           : 'hashLinkCards' in data // ⬅️ add
             ? data.hashLinkCards
-            : []
+            : 'careerCards' in data // ⬅️ add
+              ? data.careerCards
+              : []
   ) as ItemOf<T>[]
 
   useEffect(() => {

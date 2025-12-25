@@ -526,6 +526,8 @@ import HeroSmallSchema from '@/blocks/heroSmall/schema'
 import PlanInfoDesign07Schema from '@/blocks/planInfoDesign07/schema'
 import PlanInfoDesign06Schema from '@/blocks/planInfoDesign06/schema'
 import HeroDynamicSchema from '@/blocks/heroDynamic/schema'
+import CareerShapeSchema from '@/blocks/careerShape/schema'
+import CareerAuraProgramInsidersSchema from '@/blocks/careerAuraProgramInsiders/schema'
 
 // ✅ always spread a safe object
 const safeMediaHooks: NonNullable<CollectionConfig['hooks']> = mediaHooks ?? {}
@@ -656,6 +658,8 @@ export const Pages: CollectionConfig = {
         CorporateIntroSchema,
         APPDSchema,
         AddonsInfoSchema,
+        CareerResourcesSchema,
+        CareerShapeSchema,
         PlanInfoDesignSchema,
         PlanInfoDesign03Schema,
         PlanInfoDesign04Schema,
@@ -716,9 +720,9 @@ export const Pages: CollectionConfig = {
 
         //careerpage
         CareerSwiperSchema,
-        CareerResourcesSchema,
         CareerOpeningSchema,
         CareerProcessingSchema,
+        CareerAuraProgramInsidersSchema,
 
         // Learn more page
         LearningMediaSectionSchema,
