@@ -129,14 +129,32 @@ interface FormData {
   email: string
 }
 
+type QuoteMeta = {
+  lang?: 'en' | 'bn'
+  plan?: { code: number; name: string; displayName?: string }
+  payment?: { id: number; name: string; displayName?: string }
+  gender?: { id: number; name: string; displayName?: string }
+  term?: { value: number; label: string }
+}
+
 interface QuoteFormProps {
   formData: FormData
   setFormData: React.Dispatch<React.SetStateAction<FormData>>
   onApiResponse?: (response: ApiResponse, paymentMode: string) => void
   payloadData: PremiumCalculatorBlockType
+  // ✅ new
+  onMetaChange?: (patch: Partial<QuoteMeta>) => void
+  onMetaReset?: () => void
 }
 
-function QuoteForm({ formData, setFormData, onApiResponse, payloadData }: QuoteFormProps) {
+function QuoteForm({
+  formData,
+  setFormData,
+  onApiResponse,
+  payloadData,
+  onMetaChange,
+  onMetaReset,
+}: QuoteFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [isHoveringPlanSelect, setIsHoveringPlanSelect] = useState(false)
   const [isHoveringTenureSelect, setIsHoveringTenureSelect] = useState(false)
@@ -411,6 +429,9 @@ function QuoteForm({ formData, setFormData, onApiResponse, payloadData }: QuoteF
       setFormData((prev) => ({ ...prev, PlanCode: 0, Term: 0 }))
       setSelectedPlan(null)
       setAvailableTenures([])
+      // ✅ reset extracted meta
+      onMetaReset?.()
+      onMetaChange?.({ lang: lang as 'en' | 'bn' })
     } else {
       setAvailablePlans([])
       setChildEducationVariants([])
@@ -750,6 +771,19 @@ function QuoteForm({ formData, setFormData, onApiResponse, payloadData }: QuoteF
                           Term: 0,
                           PaymentMode: 0,
                         }))
+
+                        // ✅ emit meta
+                        onMetaChange?.({
+                          lang: lang as 'en' | 'bn',
+                          plan: {
+                            code: plan.plan_code,
+                            name: plan.plan_name,
+                            displayName: planLabel(plan.plan_name, lang as 'en' | 'bn'),
+                          },
+                          term: undefined,
+                          payment: undefined,
+                        })
+
                         setAvailableTenures([])
                         setAvailablePaymentModes([])
                         setFieldErrors((prev) => ({ ...prev, PlanCode: false, Term: false }) as any)
@@ -808,6 +842,19 @@ function QuoteForm({ formData, setFormData, onApiResponse, payloadData }: QuoteF
                                 Term: 0,
                                 PaymentMode: 0,
                               }))
+
+                              // ✅ emit meta
+                              onMetaChange?.({
+                                lang: lang as 'en' | 'bn',
+                                plan: {
+                                  code: variant.plan_code,
+                                  name: variant.plan_name,
+                                  displayName: planLabel(variant.plan_name, lang as 'en' | 'bn'),
+                                },
+                                term: undefined,
+                                payment: undefined,
+                              })
+
                               setAvailableTenures([])
                               setAvailablePaymentModes([])
                               setFieldErrors(
@@ -903,7 +950,17 @@ function QuoteForm({ formData, setFormData, onApiResponse, payloadData }: QuoteF
           }
           onValueChange={(v) => {
             const num = parseInt(v, 10)
-            if (!isNaN(num)) handleInputChange('Term', num)
+            if (!isNaN(num)) {
+              handleInputChange('Term', num)
+
+              const picked = availableTenures.find((t) => t.value === num)
+              onMetaChange?.({
+                term: {
+                  value: num,
+                  label: picked ? localizeTenure(picked.text, lang as 'en' | 'bn') : '',
+                },
+              })
+            }
           }}
         >
           <SelectTrigger
@@ -977,7 +1034,16 @@ function QuoteForm({ formData, setFormData, onApiResponse, payloadData }: QuoteF
           }
           onValueChange={(v) => {
             const num = parseInt(v, 10)
-            if (!isNaN(num)) handleInputChange('Gender', num)
+            if (!isNaN(num)) {
+              handleInputChange('Gender', num)
+
+              const name = num === 1 ? 'Male' : 'Female'
+              const displayName = L(name, num === 1 ? 'পুরুষ' : 'মহিলা')
+
+              onMetaChange?.({
+                gender: { id: num, name, displayName },
+              })
+            }
           }}
         >
           <SelectTrigger
@@ -1100,6 +1166,14 @@ function QuoteForm({ formData, setFormData, onApiResponse, payloadData }: QuoteF
             if (method) {
               handleInputChange('PaymentMode', method.paymode_id)
               setCurrentPaymentMode(method.paymode_name)
+
+              onMetaChange?.({
+                payment: {
+                  id: method.paymode_id,
+                  name: method.paymode_name,
+                  displayName: localizePaymode(method.paymode_name, lang as 'en' | 'bn'),
+                },
+              })
             }
           }}
         >

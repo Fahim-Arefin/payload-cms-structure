@@ -528,6 +528,14 @@ interface FormData {
   email: string
 }
 
+type QuoteMeta = {
+  lang?: 'en' | 'bn'
+  plan?: { code: number; name: string; displayName?: string }
+  payment?: { id: number; name: string; displayName?: string }
+  gender?: { id: number; name: string; displayName?: string }
+  term?: { value: number; label: string }
+}
+
 function QuoteSection({ data }: Props) {
   const [formData, setFormData] = useState<FormData>({
     PlanCode: 0,
@@ -541,6 +549,16 @@ function QuoteSection({ data }: Props) {
     annualIncome: 0,
     name: '',
     email: '',
+  })
+  const [quoteMeta, setQuoteMeta] = useState<QuoteMeta>({})
+  const mergeQuoteMeta = (prev: QuoteMeta, patch: Partial<QuoteMeta>): QuoteMeta => ({
+    ...prev,
+    ...patch,
+    // keep previous nested objects unless explicitly overwritten
+    plan: patch.plan ?? prev.plan,
+    payment: patch.payment ?? prev.payment,
+    gender: patch.gender ?? prev.gender,
+    term: patch.term ?? prev.term,
   })
 
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
@@ -561,6 +579,7 @@ function QuoteSection({ data }: Props) {
         confirmedPaymentMode,
         ciSelection,
         isAccidentSelected,
+        meta: quoteMeta, // ✅ new
       }
     : null
 
@@ -637,6 +656,7 @@ function QuoteSection({ data }: Props) {
   }
 
   console.log('formData inside parent', formData)
+  console.log('quoteMeta', quoteMeta)
 
   return (
     // mb-12 md:mb-24 lg:mb-32 xl:mb-[150px]
@@ -978,6 +998,8 @@ function QuoteSection({ data }: Props) {
             setFormData={setFormData}
             onApiResponse={handleApiResponse}
             payloadData={data}
+            onMetaChange={(patch) => setQuoteMeta((prev) => mergeQuoteMeta(prev, patch))} // ✅ ADD THIS
+            onMetaReset={() => setQuoteMeta({})} // ✅ keep/reset meta here
           />
         </div>
       </div>
