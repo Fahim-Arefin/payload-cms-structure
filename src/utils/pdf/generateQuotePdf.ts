@@ -2,6 +2,9 @@ import { PDFDocument, rgb, StandardFonts, PDFFont } from 'pdf-lib'
 import fontkit from '@pdf-lib/fontkit'
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import QRCode from 'qrcode'
+import { GlobalFooter } from '@/payload-types'
+import { PDFName, PDFArray, PDFString } from 'pdf-lib'
 
 function safeLatin(text: any) {
   return String(text ?? '').replace(/[^\x20-\x7E]/g, '')
@@ -32,6 +35,7 @@ export type IllustrationData = {
     term?: { value: number; label: string }
     lang?: 'en' | 'bn'
   }
+  footerData: GlobalFooter
 
   benefits: Array<{ type: string; description: string; amount: string }>
   riders: Array<{ name: string; description: string; coverageAmount: string; premium: string }>
@@ -318,8 +322,158 @@ function formatDOB_DDMMYYYY(dob: Date | string | number) {
   return `${dd}-${mm}-${yyyy}`
 }
 
+function drawFakeBoldText(
+  page: any,
+  text: string,
+  x: number,
+  y: number,
+  opts: { size: number; font: PDFFont; color: ReturnType<typeof rgb>; strength?: number },
+) {
+  const s = opts.strength ?? 0.6 // increase => bolder
+  const offsets: Array<[number, number]> = [
+    [0, 0],
+    [-s, 0],
+    [s, 0],
+    [0, -s],
+    [0, s],
+  ]
+  for (const [dx, dy] of offsets) {
+    page.drawText(text, {
+      x: x + dx,
+      y: y + dy,
+      size: opts.size,
+      font: opts.font,
+      color: opts.color,
+    })
+  }
+}
+
+function drawWrappedFromTop(
+  page: any,
+  textRaw: any,
+  x: number,
+  topYFromTop: number,
+  maxWidth: number,
+  height: number,
+  opts: {
+    font: PDFFont
+    size: number
+    color: ReturnType<typeof rgb>
+    lineHeight?: number
+  },
+) {
+  const text = safeLatin(textRaw ?? '')
+  const lineHeight = opts.lineHeight ?? opts.size * 1.25
+  const lines = wrapByWidth(text, opts.font, opts.size, maxWidth)
+
+  // topYFromTop = top edge of first line box (like your image measurement)
+  let y = height - topYFromTop - opts.size
+
+  for (const line of lines) {
+    page.drawText(line, { x, y, size: opts.size, font: opts.font, color: opts.color })
+    y -= lineHeight
+  }
+
+  return y // returns the next y (pdf coord) after drawing
+}
+
+function drawTextSegments(
+  page: any,
+  x: number,
+  y: number,
+  segments: Array<{ text: string; font: PDFFont; size: number; color: ReturnType<typeof rgb> }>,
+) {
+  let cursorX = x
+  for (const seg of segments) {
+    const t = safeLatin(seg.text)
+    page.drawText(t, { x: cursorX, y, size: seg.size, font: seg.font, color: seg.color })
+    cursorX += seg.font.widthOfTextAtSize(t, seg.size)
+  }
+}
+
+function addLinkAnnotation(
+  pdfDoc: PDFDocument,
+  page: any,
+  rect: { x: number; y: number; w: number; h: number },
+  url: string,
+) {
+  const { x, y, w, h } = rect
+  const ctx = pdfDoc.context
+
+  const linkAnnot = ctx.obj({
+    Type: PDFName.of('Annot'),
+    Subtype: PDFName.of('Link'),
+    Rect: [x, y, x + w, y + h],
+    Border: [0, 0, 0],
+    A: ctx.obj({
+      Type: PDFName.of('Action'),
+      S: PDFName.of('URI'),
+      URI: PDFString.of(url),
+    }),
+  })
+
+  const linkRef = ctx.register(linkAnnot)
+
+  // append to existing Annots (or create)
+  const existing = page.node.get(PDFName.of('Annots'))
+  const annots = existing ? ctx.lookup(existing, PDFArray) : ctx.obj([])
+
+  annots.push(linkRef)
+  page.node.set(PDFName.of('Annots'), annots)
+}
+
+function drawLabelValueLine(
+  pdfDoc: PDFDocument,
+  page: any,
+  args: {
+    x: number
+    y: number
+    label: string
+    value: string
+    font: PDFFont
+    size: number
+    labelColor: ReturnType<typeof rgb>
+    valueColor: ReturnType<typeof rgb>
+    linkUrl?: string
+  },
+) {
+  const label = safeLatin(args.label)
+  const value = safeLatin(args.value)
+
+  // draw label
+  page.drawText(label, {
+    x: args.x,
+    y: args.y,
+    size: args.size,
+    font: args.font,
+    color: args.labelColor,
+  })
+
+  const labelW = args.font.widthOfTextAtSize(label, args.size)
+  const valueX = args.x + labelW
+
+  // draw value (olive)
+  page.drawText(value, {
+    x: valueX,
+    y: args.y,
+    size: args.size,
+    font: args.font,
+    color: args.valueColor,
+  })
+
+  // clickable area ONLY on value part
+  if (args.linkUrl) {
+    const valueW = args.font.widthOfTextAtSize(value, args.size)
+    addLinkAnnotation(
+      pdfDoc,
+      page,
+      { x: valueX, y: args.y, w: valueW, h: args.size * 1.2 },
+      args.linkUrl,
+    )
+  }
+}
+
 export async function generateQuotePdf(data: IllustrationData) {
-  console.log('data', data)
   const pdfDoc = await PDFDocument.create()
   pdfDoc.registerFontkit(fontkit)
 
@@ -331,12 +485,6 @@ export async function generateQuotePdf(data: IllustrationData) {
   const fonts: Fonts = {
     regular: await loadFontOrFallback(pdfDoc, path.join(fontDir, 'Avenir Regular.ttf'), fallback),
     bold: await loadFontOrFallback(pdfDoc, path.join(fontDir, 'Avenir Heavy.ttf'), fallback),
-    // italic: await loadFontOrFallback(pdfDoc, path.join(fontDir, 'Avenir Italic.ttf'), fallback),
-    // boldItalic: await loadFontOrFallback(
-    //   pdfDoc,
-    //   path.join(fontDir, 'Avenir Bold Italic.ttf'),
-    //   fallback,
-    // ),
   }
 
   // Colors (0..1)
@@ -634,6 +782,229 @@ export async function generateQuotePdf(data: IllustrationData) {
         })
         draw(page, clip(r.paidUpValue, 12), colX.paidUpValue, y, { size: 9, font: fonts.regular })
       })
+    }
+
+    // -------- Page 6: QR code generation and other data --------
+    if (i === 5) {
+      // -------------------------------------------------------
+      // Fake dynamic data (replace later with real data)
+      // -------------------------------------------------------
+      const page6Data = {
+        customerName: safeLatin(data.formData?.name || '-'),
+        gender: safeLatin(data.meta?.gender?.displayName || '-'), // or 'Female'
+        brochureUrl:
+          'https://shantalife.com/api/media/file/Child%20Education%20Security%20Plan-compressed-1.pdf', // QR will point here
+      }
+
+      const salutation = page6Data.gender.toLowerCase().startsWith('f') ? 'MS' : 'MR'
+      const nameText = safeLatin(`${salutation} ${page6Data.customerName}`)
+
+      // -------------------------------------------------------
+      // Coordinates measured from page-6_old.png
+      // Image size is ~1415 x 2000 (same as your template PNG)
+      // We use "from TOP" coordinates then convert to PDF coords.
+      // -------------------------------------------------------
+
+      // --- Name (top-left) ---
+      const NAME = {
+        x: 154, // left
+        yBottomFromTop: 316, // bottom of text bbox (from top)
+        fontSize: 28,
+        color: hexToRgb01('#989433'), // sampled from old image (olive)
+      }
+
+      const nameY = height - NAME.yBottomFromTop - NAME.fontSize * 0.25
+      drawFakeBoldText(page, nameText, NAME.x, nameY, {
+        size: NAME.fontSize,
+        font: fonts.regular, // heavy
+        color: NAME.color,
+        strength: 0.5, // increase if you want even bolder
+      })
+
+      // --- QR (top-right) ---
+      // bbox from old image roughly: x=1029..1256, y=243..472
+      const QR = {
+        x: 1029,
+        yTopFromTop: 243,
+        w: 227,
+        h: 229,
+      }
+
+      // Generate QR PNG dynamically (best way)
+      const qrPng = await QRCode.toBuffer(page6Data.brochureUrl, {
+        type: 'png',
+        width: 300, // generate larger then we scale down => sharper
+        margin: 1,
+        errorCorrectionLevel: 'M',
+      })
+
+      const qrImg = await pdfDoc.embedPng(qrPng)
+
+      const qrY = height - QR.yTopFromTop - QR.h
+      page.drawImage(qrImg, {
+        x: QR.x,
+        y: qrY,
+        width: QR.w,
+        height: QR.h,
+      })
+
+      // ------------------------------
+      // Page 6: Bottom Contact Block
+      // ------------------------------
+
+      // ------------------------------
+      // Page 6: Bottom Contact Block
+      // ------------------------------
+
+      const OLIVE = hexToRgb01('#989433')
+      const ORANGE = hexToRgb01('#ff751f')
+      const BLACK = COLORS.black
+
+      const phoneRaw = safeLatin(data?.footerData?.branding?.phone || '')
+      const emailRaw = safeLatin(data?.footerData?.branding?.email || '')
+      const addressRaw = safeLatin(data?.footerData?.branding?.address || '')
+
+      // build links
+      const telDigits = phoneRaw.replace(/[^\d+]/g, '') // keep + and digits
+      const telHref = telDigits ? `tel:${telDigits}` : undefined
+      const mailHref = emailRaw ? `mailto:${emailRaw}` : undefined
+      const siteHref = 'https://shantalife.com/'
+
+      // positions (tune only topFromTop if needed)
+      const CONTACT = {
+        x: 110,
+        topFromTop: 1250,
+        maxW: 1250, // ✅ width for wrapping
+        titleSize: 30,
+        bodySize: 28,
+        lineGap: 40,
+      }
+
+      // Title
+      drawWrappedFromTop(
+        page,
+        'For Any Clarifications, Please Contact :',
+        CONTACT.x,
+        CONTACT.topFromTop,
+        CONTACT.maxW,
+        height,
+        {
+          font: fonts.regular,
+          size: CONTACT.titleSize,
+          color: BLACK,
+          lineHeight: CONTACT.titleSize * 1.25,
+        },
+      )
+
+      // "Shanta Life Insurance PLC Customer Service"
+      const line1Y = height - (CONTACT.topFromTop + 60) - CONTACT.bodySize
+      drawTextSegments(page, CONTACT.x, line1Y, [
+        {
+          text: 'Shanta Life Insurance PLC ',
+          font: fonts.regular,
+          size: CONTACT.bodySize,
+          color: BLACK,
+        },
+        { text: 'Customer Service', font: fonts.regular, size: CONTACT.bodySize, color: OLIVE },
+      ])
+
+      // Next lines base Y (pdf coords)
+      const baseTop = CONTACT.topFromTop + 110
+      const yPhone = height - baseTop - CONTACT.bodySize
+      const yEmail = yPhone - CONTACT.lineGap
+      const yWeb = yEmail - CONTACT.lineGap
+      const yAddr = yWeb - CONTACT.lineGap
+
+      // Phone: <olive value clickable>
+      drawLabelValueLine(pdfDoc, page, {
+        x: CONTACT.x,
+        y: yPhone,
+        label: 'Phone : ',
+        value: phoneRaw || '—',
+        font: fonts.regular,
+        size: CONTACT.bodySize,
+        labelColor: BLACK,
+        valueColor: OLIVE,
+        linkUrl: telHref,
+      })
+
+      // Email: <olive value clickable>
+      drawLabelValueLine(pdfDoc, page, {
+        x: CONTACT.x,
+        y: yEmail,
+        label: 'Email : ',
+        value: emailRaw || '—',
+        font: fonts.regular,
+        size: CONTACT.bodySize,
+        labelColor: BLACK,
+        valueColor: OLIVE,
+        linkUrl: mailHref,
+      })
+
+      // Website: Shanta Life (olive + clickable)
+      drawLabelValueLine(pdfDoc, page, {
+        x: CONTACT.x,
+        y: yWeb,
+        label: 'Website : ',
+        value: 'Shanta Life',
+        font: fonts.regular,
+        size: CONTACT.bodySize,
+        labelColor: BLACK,
+        valueColor: OLIVE,
+        linkUrl: siteHref,
+      })
+
+      /**
+       * ✅ Office Address: WRAP the VALUE to next line(s)
+       * - Label stays on first line
+       * - Value starts right after label, then continues on next lines aligned with value start
+       */
+      {
+        const label = 'Office Address : '
+        const value = addressRaw || '—'
+
+        const labelW = fonts.regular.widthOfTextAtSize(label, CONTACT.bodySize)
+        const valueX = CONTACT.x + labelW
+
+        // available width for the value portion on the first line
+        const firstLineMaxW = Math.max(1, CONTACT.maxW - labelW)
+
+        // wrap based on first-line available width
+        const lines = wrapByWidth(value, fonts.regular, CONTACT.bodySize, firstLineMaxW)
+
+        // draw label (black)
+        page.drawText(label, {
+          x: CONTACT.x,
+          y: yAddr,
+          size: CONTACT.bodySize,
+          font: fonts.regular,
+          color: BLACK,
+        })
+
+        // draw first line (olive) right after label
+        if (lines.length) {
+          page.drawText(lines[0], {
+            x: valueX,
+            y: yAddr,
+            size: CONTACT.bodySize,
+            font: fonts.regular,
+            color: OLIVE,
+          })
+        }
+
+        // draw remaining lines under the value start (same x as valueX)
+        let yy = yAddr - CONTACT.lineGap
+        for (let i = 1; i < lines.length; i++) {
+          page.drawText(lines[i], {
+            x: valueX,
+            y: yy,
+            size: CONTACT.bodySize,
+            font: fonts.regular,
+            color: OLIVE,
+          })
+          yy -= CONTACT.lineGap
+        }
+      }
     }
   }
 

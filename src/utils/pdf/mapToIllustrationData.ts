@@ -1,4 +1,5 @@
 // src/utils/pdf/mapToIllustrationData.ts
+import { GlobalFooter } from '@/payload-types'
 import type { IllustrationData } from './generateQuotePdf'
 import { getTotalPremium } from '@/utils/premiumCalculator'
 
@@ -9,6 +10,7 @@ type Payload = {
   ciSelection: 'ci19' | 'ci25' | null
   isAccidentSelected: boolean
   meta?: any // ✅ new
+  footerData: GlobalFooter
 }
 
 export function mapToIllustrationData(p: Payload): IllustrationData {
@@ -18,6 +20,7 @@ export function mapToIllustrationData(p: Payload): IllustrationData {
   return {
     formData: p.formData, // ✅ add this
     meta: p.meta,
+    footerData: p.footerData,
     benefits: [
       { type: 'Death Benefit', description: 'As per plan rules', amount: 'Tk …' },
       { type: 'Maturity Benefit', description: 'As per plan rules', amount: 'Tk …' },

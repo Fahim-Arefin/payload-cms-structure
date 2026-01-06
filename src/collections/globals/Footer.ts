@@ -794,7 +794,10 @@
 
 // src/globals/Footer.ts
 import type { GlobalConfig } from 'payload'
-import { GLOBAL_FOOTER_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  GLOBAL_FOOTER_SLUG_AND_TAG,
+  HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import { revalidateTag } from 'next/cache'
 import { globalTag } from '@/lib/cacheTags'
@@ -1581,6 +1584,7 @@ const Footer: GlobalConfig = {
       ...(footerBase.afterChange ?? []),
       async () => {
         revalidateTag(globalTag(GLOBAL_FOOTER_SLUG_AND_TAG))
+        revalidateTag(HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG)
       },
     ],
   },

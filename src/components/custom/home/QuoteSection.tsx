@@ -499,7 +499,7 @@
 'use client'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
 import { ApiResponse, ApiResToShow, getTotalPremium } from '@/utils/premiumCalculator'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import GlobalButton from '../shared/GlobalButton'
 import QuoteForm from './QuoteForm'
 import Image from 'next/image'
@@ -509,9 +509,11 @@ import LocalizedHighlighted from '../shared/LocalizedHighlighted'
 import { PremiumCalculatorBlockType } from '@/types/payloadCustomTypes'
 import LocalizedString from '../shared/LocalizedString'
 import QuotePdfModal from './QuotePdfModal'
+import { GlobalFooter } from '@/payload-types'
 
 type Props = {
   data: PremiumCalculatorBlockType
+  footerData: GlobalFooter
 }
 
 interface FormData {
@@ -536,7 +538,7 @@ type QuoteMeta = {
   term?: { value: number; label: string }
 }
 
-function QuoteSection({ data }: Props) {
+function QuoteSection({ data, footerData }: Props) {
   const [formData, setFormData] = useState<FormData>({
     PlanCode: 0,
     Age: 0,
@@ -561,6 +563,7 @@ function QuoteSection({ data }: Props) {
     term: patch.term ?? prev.term,
   })
 
+  const [showApiResponse, setShowApiResponse] = useState<boolean>(false)
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
   const [ciSelection, setCiSelection] = useState<'ci19' | 'ci25' | null>(null)
@@ -580,6 +583,7 @@ function QuoteSection({ data }: Props) {
         ciSelection,
         isAccidentSelected,
         meta: quoteMeta, // ✅ new
+        footerData,
       }
     : null
 
@@ -655,8 +659,13 @@ function QuoteSection({ data }: Props) {
     return life + ci + accident
   }
 
-  console.log('formData inside parent', formData)
-  console.log('quoteMeta', quoteMeta)
+  useEffect(() => {
+    setShowApiResponse(false)
+  }, [formData])
+
+  // console.log('formData inside parent', formData)
+  // console.log('quoteMeta', quoteMeta)
+  // console.log('apiResponse', apiResponse)
 
   return (
     // mb-12 md:mb-24 lg:mb-32 xl:mb-[150px]
@@ -998,23 +1007,15 @@ function QuoteSection({ data }: Props) {
             setFormData={setFormData}
             onApiResponse={handleApiResponse}
             payloadData={data}
+            setShowApiResponse={setShowApiResponse}
             onMetaChange={(patch) => setQuoteMeta((prev) => mergeQuoteMeta(prev, patch))} // ✅ ADD THIS
             onMetaReset={() => setQuoteMeta({})} // ✅ keep/reset meta here
           />
         </div>
       </div>
-      {/* {apiResponse && (
-        <div className="">
-          <div className="flex justify-center items-center">
-            <GlobalButton className="" variant="outline" text="Get A Quote Now">
-              <LocalizedString en={'Get A Quote Now'} bn={'আপনার প্রিমিয়াম ক্যালকুলেট করুন'} />
-            </GlobalButton>
-          </div>
-        </div>
-      )} */}
 
-      {apiResponse && (
-        <div className="flex justify-center items-center">
+      {apiResponse && showApiResponse && (
+        <div className="flex justify-center items-center mt-4">
           <GlobalButton variant="outline" onClick={() => setPdfOpen(true)}>
             <LocalizedString en="Get A Quote Now" bn="আপনার প্রিমিয়াম ক্যালকুলেট করুন" />
           </GlobalButton>

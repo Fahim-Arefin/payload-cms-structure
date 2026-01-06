@@ -70,26 +70,40 @@ export default function QuotePdfModal({ open, onOpenChange, requestBody }: Props
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-5xl w-[95vw] h-[90vh] p-0 overflow-hidden">
-        <DialogHeader className="p-4 border-b">
-          <DialogTitle>Quote Illustration (PDF)</DialogTitle>
-          <div className="flex gap-2">
-            {pdfUrl && (
-              <a href={pdfUrl} download="quote-illustration.pdf">
-                <Button>Download</Button>
-              </a>
-            )}
-            <Button variant="outline" onClick={() => onOpenChange(false)}>
-              Close
-            </Button>
+        <DialogHeader className="p-4  border-b ">
+          <div className="flex items-center gap-4 ">
+            <DialogTitle>Quote Illustration (PDF)</DialogTitle>
+            <div className="flex">
+              {pdfUrl && (
+                <a href={pdfUrl} download="quote-illustration.pdf">
+                  <Button variant="default" size="sm">
+                    Download
+                  </Button>
+                </a>
+              )}
+            </div>
           </div>
         </DialogHeader>
 
         <div className="h-[calc(90vh-72px)]">
-          {loading && <div className="p-6">Generating PDF…</div>}
+          {loading && (
+            <div className="p-6 flex justify-center items-center w-full h-full">
+              Generating PDF …
+            </div>
+          )}
           {err && <div className="p-6 text-red-600">{err}</div>}
 
-          {pdfUrl && !loading && (
+          {/* {pdfUrl && !loading && (
             <iframe title="pdf-preview" src={pdfUrl} className="w-full h-full" />
+          )} */}
+          {pdfUrl && !loading && (
+            <iframe
+              title="pdf-preview"
+              // try to hide built-in viewer UI
+              src={`${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+              className="w-full h-full"
+              style={{ border: 'none' }}
+            />
           )}
         </div>
       </DialogContent>

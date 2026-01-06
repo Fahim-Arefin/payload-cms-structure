@@ -23,7 +23,7 @@ import GlobalButton from '../shared/GlobalButton'
 
 // NEW: icons & dropdown-menu pieces for the plan selector
 import { Check, ChevronDown } from 'lucide-react'
-import { format } from 'date-fns'
+import { format, set } from 'date-fns'
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -145,6 +145,7 @@ interface QuoteFormProps {
   // ✅ new
   onMetaChange?: (patch: Partial<QuoteMeta>) => void
   onMetaReset?: () => void
+  setShowApiResponse: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function QuoteForm({
@@ -154,6 +155,7 @@ function QuoteForm({
   payloadData,
   onMetaChange,
   onMetaReset,
+  setShowApiResponse,
 }: QuoteFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [isHoveringPlanSelect, setIsHoveringPlanSelect] = useState(false)
@@ -474,6 +476,7 @@ function QuoteForm({
       if (data && data.length > 0) {
         setApiResponse(data[0])
         onApiResponse?.(data[0], currentPaymentMode)
+        setShowApiResponse(true)
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
