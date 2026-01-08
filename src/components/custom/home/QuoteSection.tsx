@@ -530,6 +530,25 @@ interface FormData {
   email: string
 }
 
+type AddOnKey = 'ci19' | 'ci25' | 'accident'
+
+type AddOnInfo = {
+  key: AddOnKey
+  label: string
+  amount: number
+}
+
+type PremiumBreakdown = {
+  paymentMode: string
+  paymentKey: keyof ApiResToShow['lifePremium'] // monthly | quarterly | half_yearly | yearly | single
+  basicPremium: number // life only
+  addOns: AddOnInfo[] // selected add-ons only
+  totalPremium: number // basic + addOns sum
+}
+
+// Optional: store for every mode (Monthly/Quarterly/...)
+type PremiumBreakdownMap = Record<string, PremiumBreakdown>
+
 type QuoteMeta = {
   lang?: 'en' | 'bn'
   plan?: { code: number; name: string; displayName?: string }
@@ -563,6 +582,10 @@ function QuoteSection({ data, footerData }: Props) {
     term: patch.term ?? prev.term,
   })
 
+  const [premiumBreakdownByMode, setPremiumBreakdownByMode] = useState<PremiumBreakdownMap | null>(
+    null,
+  )
+
   const [showApiResponse, setShowApiResponse] = useState<boolean>(false)
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
@@ -584,6 +607,9 @@ function QuoteSection({ data, footerData }: Props) {
         isAccidentSelected,
         meta: quoteMeta, // ✅ new
         footerData,
+        // ✅ NEW
+        premiumBreakdown: premiumBreakdownByMode?.[confirmedPaymentMode] ?? null, // for the chosen mode
+        premiumBreakdownAllModes: premiumBreakdownByMode, // if you want all modes in PDF
       }
     : null
 
@@ -629,6 +655,45 @@ function QuoteSection({ data, footerData }: Props) {
     }
   }
 
+  const getBreakdownForMode = (mode: string): PremiumBreakdown | null => {
+    if (!apiResponse) return null
+
+    const premiums = getTotalPremium(apiResponse, mode)
+    const paymentKey = getPaymentModeKey(mode)
+
+    const basic = premiums.lifePremium[paymentKey] || 0
+
+    const addOns: AddOnInfo[] = []
+
+    // CI-19
+    if (ciSelection === 'ci19') {
+      const amt = premiums.ciPremium[paymentKey] || 0
+      if (amt > 0) addOns.push({ key: 'ci19', label: 'Critical Illness (19)', amount: amt })
+    }
+
+    // CI-25
+    if (ciSelection === 'ci25') {
+      const amt = premiums.ci25Premium[paymentKey] || 0
+      if (amt > 0) addOns.push({ key: 'ci25', label: 'Critical Illness (25)', amount: amt })
+    }
+
+    // Accident
+    if (isAccidentSelected) {
+      const amt = premiums.accidentPremium[paymentKey] || 0
+      if (amt > 0) addOns.push({ key: 'accident', label: 'Accident Coverage', amount: amt })
+    }
+
+    const total = basic + addOns.reduce((s, a) => s + a.amount, 0)
+
+    return {
+      paymentMode: mode,
+      paymentKey,
+      basicPremium: basic,
+      addOns,
+      totalPremium: total,
+    }
+  }
+
   const handleCriticalIllness19Toggle = () => {
     setCiSelection((prev) => (prev === 'ci19' ? null : 'ci19')) // mutually exclusive within CI
   }
@@ -663,9 +728,27 @@ function QuoteSection({ data, footerData }: Props) {
     setShowApiResponse(false)
   }, [formData])
 
-  // console.log('formData inside parent', formData)
-  // console.log('quoteMeta', quoteMeta)
-  // console.log('apiResponse', apiResponse)
+  useEffect(() => {
+    if (!apiResponse) {
+      setPremiumBreakdownByMode(null)
+      return
+    }
+
+    const modes = ['Monthly', 'Quarterly', 'Half Yearly', 'Yearly', 'Single']
+    const map: PremiumBreakdownMap = {}
+
+    for (const m of modes) {
+      const b = getBreakdownForMode(m)
+      if (b) map[m] = b
+    }
+
+    setPremiumBreakdownByMode(map)
+  }, [apiResponse, ciSelection, isAccidentSelected])
+
+  console.log('formData inside parent', formData)
+  console.log('quoteMeta', quoteMeta)
+  console.log('apiResponse', apiResponse)
+  console.log('premiumBreakdownByMode', premiumBreakdownByMode)
 
   return (
     // mb-12 md:mb-24 lg:mb-32 xl:mb-[150px]

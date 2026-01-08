@@ -36,17 +36,19 @@ export type IllustrationData = {
     lang?: 'en' | 'bn'
   }
   footerData: GlobalFooter
-
-  benefits: Array<{ type: string; description: string; amount: string }>
-  riders: Array<{ name: string; description: string; coverageAmount: string; premium: string }>
-  projectedValues: Array<{
-    year: number
-    annualPremium: string
-    deathBenefit: string
-    surrenderValue: string
-    maturityValue: string
-    paidUpValue: string
-  }>
+  premiumBreakdown: any
+  premiumBreakdownAllModes: Record<string, any>
+  apiResponse: any
+  // benefits: Array<{ type: string; description: string; amount: string }>
+  // riders: Array<{ name: string; description: string; coverageAmount: string; premium: string }>
+  // projectedValues: Array<{
+  //   year: number
+  //   annualPremium: string
+  //   deathBenefit: string
+  //   surrenderValue: string
+  //   maturityValue: string
+  //   paidUpValue: string
+  // }>
 }
 
 function clip(text: any, max = 30) {
@@ -473,6 +475,643 @@ function drawLabelValueLine(
   }
 }
 
+type ProjectedRow = {
+  year: string
+  annualPremium: string
+  deathBenefit: string
+  surrenderValue: string
+  maturityValue: string
+  paidUpValue: string
+}
+
+function drawCellText(
+  page: any,
+  textRaw: any,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  font: PDFFont,
+  size: number,
+  color: ReturnType<typeof rgb>,
+  align: 'left' | 'center' | 'right' = 'center',
+  paddingX = 10,
+) {
+  const text = safeLatin(textRaw ?? '')
+  const textW = font.widthOfTextAtSize(text, size)
+
+  let tx = x + paddingX
+  if (align === 'center') tx = x + (w - textW) / 2
+  if (align === 'right') tx = x + w - paddingX - textW
+
+  // vertically center
+  const ty = y + (h - size) / 2 - 1
+
+  page.drawText(text, { x: tx, y: ty, size, font, color })
+}
+
+function drawHeaderMultiline(
+  page: any,
+  text: string,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  font: PDFFont,
+  size: number,
+  color: ReturnType<typeof rgb>,
+) {
+  const lines = String(text).split('\n')
+  const lineH = size * 1.1
+  const totalH = lines.length * lineH
+
+  // vertically center all lines
+  let yy = y + (h + totalH) / 2 - lineH
+
+  for (const line of lines) {
+    const t = safeLatin(line)
+    const tw = font.widthOfTextAtSize(t, size)
+    const tx = x + (w - tw) / 2
+
+    page.drawText(t, { x: tx, y: yy, size, font, color })
+    yy -= lineH
+  }
+}
+
+function drawProjectedValuesTableFromTop(
+  page: any,
+  args: {
+    height: number // page height
+    x: number
+    topFromTop: number // top of table measured from top
+    width: number
+    headerH: number
+    rowH: number
+    rows: ProjectedRow[] // already padded to max rows
+    fonts: Fonts
+  },
+) {
+  const { height, x, topFromTop, width, headerH, rowH, rows, fonts } = args
+
+  // colors tuned like your sample
+  const C = {
+    headerBg: hexToRgb01('#8E9A83'),
+    yearColBg: hexToRgb01('#8A957C'),
+    rowA: hexToRgb01('#EEF0ED'),
+    rowB: hexToRgb01('#F7F8F6'),
+    grid: hexToRgb01('#FFFFFF'),
+    headerText: hexToRgb01('#FFFFFF'),
+    bodyText: hexToRgb01('#2B2B2B'),
+  }
+
+  // column widths (sum=1)
+  const colPerc = [0.16, 0.17, 0.17, 0.19, 0.17, 0.14]
+  const colW = colPerc.map((p) => width * p)
+
+  const headers = [
+    'Year',
+    'Annual\nPremium',
+    'Death\nbenefit',
+    'Surrender\nValue',
+    'Maturity\nValue',
+    'Paid up\nvalue',
+  ]
+
+  // table top in PDF coords
+  const tableTopY = height - topFromTop
+  const tableTotalH = headerH + rows.length * rowH
+  const tableBottomY = tableTopY - tableTotalH
+
+  // ---- header background + text ----
+  {
+    let cx = x
+    const y = tableTopY - headerH
+
+    for (let c = 0; c < colW.length; c++) {
+      page.drawRectangle({
+        x: cx,
+        y,
+        width: colW[c],
+        height: headerH,
+        color: C.headerBg,
+      })
+
+      // drawHeaderMultiline(page, headers[c], cx, y, colW[c], headerH, fonts.bold, 20, C.headerText)
+      drawHeaderMultilineFakeBold(
+        page,
+        headers[c],
+        cx,
+        y,
+        colW[c],
+        headerH,
+        fonts.bold,
+        20,
+        C.headerText,
+        0.85, // <- boldness (tweak 0.8 ~ 1.2)
+      )
+
+      cx += colW[c]
+    }
+  }
+
+  // ---- body rows backgrounds + text ----
+  for (let r = 0; r < rows.length; r++) {
+    const y = tableTopY - headerH - (r + 1) * rowH
+    const bg = r % 2 === 0 ? C.rowA : C.rowB
+
+    const row = rows[r]
+    const cells = [
+      row.year,
+      row.annualPremium,
+      row.deathBenefit,
+      row.surrenderValue,
+      row.maturityValue,
+      row.paidUpValue,
+    ]
+
+    let cx = x
+    for (let c = 0; c < colW.length; c++) {
+      const cellBg = c === 0 ? C.yearColBg : bg
+      page.drawRectangle({
+        x: cx,
+        y,
+        width: colW[c],
+        height: rowH,
+        color: cellBg,
+      })
+
+      // drawCellText(
+      //   page,
+      //   cells[c],
+      //   cx,
+      //   y,
+      //   colW[c],
+      //   rowH,
+      //   fonts.bold,
+      //   16,
+      //   c === 0 ? C.headerText : C.bodyText,
+      //   'center',
+      //   8,
+      // )
+      if (c === 0) {
+        // ✅ Year column = white text, make it visually bolder
+        drawCellTextFakeBold(
+          page,
+          cells[c],
+          cx,
+          y,
+          colW[c],
+          rowH,
+          fonts.bold,
+          16,
+          C.headerText,
+          'center',
+          8,
+          0.85, // <- boldness (tweak 0.7 ~ 1.2)
+        )
+      } else {
+        drawCellText(page, cells[c], cx, y, colW[c], rowH, fonts.bold, 16, C.bodyText, 'center', 8)
+      }
+
+      cx += colW[c]
+    }
+  }
+
+  // ---- white grid lines (rectangle strips) ----
+  const gridW = 2
+
+  // outer border
+  page.drawRectangle({
+    x,
+    y: tableBottomY,
+    width,
+    height: tableTotalH,
+    borderColor: C.grid,
+    borderWidth: gridW,
+  })
+
+  // vertical lines
+  {
+    let cx = x
+    for (let c = 0; c < colW.length - 1; c++) {
+      cx += colW[c]
+      page.drawRectangle({
+        x: cx - gridW / 2,
+        y: tableBottomY,
+        width: gridW,
+        height: tableTotalH,
+        color: C.grid,
+      })
+    }
+  }
+
+  // horizontal lines (header bottom + every row)
+  {
+    const yHeaderBottom = tableTopY - headerH
+    page.drawRectangle({
+      x,
+      y: yHeaderBottom - gridW / 2,
+      width,
+      height: gridW,
+      color: C.grid,
+    })
+
+    for (let i = 1; i <= rows.length; i++) {
+      const yy = tableTopY - headerH - i * rowH
+      page.drawRectangle({
+        x,
+        y: yy - gridW / 2,
+        width,
+        height: gridW,
+        color: C.grid,
+      })
+    }
+  }
+
+  return { tableTopY, tableBottomY }
+}
+
+function makeFakeProjectedRows(maxRows = 28): ProjectedRow[] {
+  // simple fake numbers (you can swap format later)
+  const fmt = (n: number) => `BDT ${n.toLocaleString('en-US')}`
+
+  const rows: ProjectedRow[] = []
+  for (let i = 1; i <= maxRows; i++) {
+    const annual = 120000 + i * 4500
+    const death = 1000000 + i * 25000
+    const surrender = 50000 + i * 18000
+    const maturity = 900000 + i * 22000
+    const paidup = 200000 + i * 9000
+
+    rows.push({
+      year: String(i),
+      annualPremium: fmt(annual),
+      deathBenefit: fmt(death),
+      surrenderValue: fmt(surrender),
+      maturityValue: fmt(maturity),
+      paidUpValue: fmt(paidup),
+    })
+  }
+  return rows
+}
+
+function formatBDT(value: any) {
+  const n =
+    typeof value === 'number'
+      ? value
+      : typeof value === 'string'
+        ? Number(String(value).replace(/[^\d.-]/g, ''))
+        : NaN
+
+  if (!Number.isFinite(n)) return '-'
+  return `BDT ${Math.ceil(n).toLocaleString('en-US')}`
+}
+
+function drawCellTextFakeBold(
+  page: any,
+  textRaw: any,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  font: PDFFont,
+  size: number,
+  color: ReturnType<typeof rgb>,
+  align: 'left' | 'center' | 'right' = 'center',
+  paddingX = 10,
+  strength = 0.8,
+) {
+  const text = safeLatin(textRaw ?? '')
+  const textW = font.widthOfTextAtSize(text, size)
+
+  let tx = x + paddingX
+  if (align === 'center') tx = x + (w - textW) / 2
+  if (align === 'right') tx = x + w - paddingX - textW
+
+  // vertically center (same as your drawCellText)
+  const ty = y + (h - size) / 2 - 1
+
+  drawFakeBoldText(page, text, tx, ty, { size, font, color, strength })
+}
+
+function drawHeaderMultilineFakeBold(
+  page: any,
+  text: string,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  font: PDFFont,
+  size: number,
+  color: ReturnType<typeof rgb>,
+  strength = 0.9,
+) {
+  const lines = String(text).split('\n')
+  const lineH = size * 1.1
+  const totalH = lines.length * lineH
+
+  // vertically center all lines
+  let yy = y + (h + totalH) / 2 - lineH
+
+  for (const line of lines) {
+    const t = safeLatin(line)
+    const tw = font.widthOfTextAtSize(t, size)
+    const tx = x + (w - tw) / 2
+
+    drawFakeBoldText(page, t, tx, yy, { size, font, color, strength })
+    yy -= lineH
+  }
+}
+
+function yFromTop(height: number, topFromTop: number, fontSize: number) {
+  // baseline y (pdf coords) from "top distance"
+  return height - topFromTop - fontSize
+}
+
+function drawTextFromTop(
+  page: any,
+  height: number,
+  textRaw: any,
+  x: number,
+  topFromTop: number,
+  opts: { font: PDFFont; size: number; color: ReturnType<typeof rgb> },
+) {
+  const text = safeLatin(textRaw ?? '')
+  page.drawText(text, {
+    x,
+    y: yFromTop(height, topFromTop, opts.size),
+    size: opts.size,
+    font: opts.font,
+    color: opts.color,
+  })
+}
+
+function drawDashListFromTop(
+  page: any,
+  height: number,
+  items: string[],
+  args: {
+    x: number
+    topFromTop: number
+    maxW: number
+    font: PDFFont
+    size: number
+    color: ReturnType<typeof rgb>
+    lineHeight?: number
+    itemGap?: number
+    dashIndent?: number // indent for wrapped lines after dash
+  },
+) {
+  const lineH = args.lineHeight ?? args.size * 1.35
+  const gap = args.itemGap ?? args.size * 0.65
+  const indent = args.dashIndent ?? 18
+
+  let t = args.topFromTop
+
+  for (const it of items) {
+    const raw = safeLatin(it ?? '').trim()
+    if (!raw) continue
+
+    // wrap without dash first, then prepend dash to first line
+    const lines = wrapByWidth(raw, args.font, args.size, args.maxW - indent)
+
+    if (lines.length === 0) continue
+
+    // first line with dash
+    const first = `- ${lines[0]}`
+    drawTextFromTop(page, height, first, args.x, t, {
+      font: args.font,
+      size: args.size,
+      color: args.color,
+    })
+    t += lineH
+
+    // wrapped continuation lines aligned after dash
+    for (let i = 1; i < lines.length; i++) {
+      drawTextFromTop(page, height, lines[i], args.x + indent, t, {
+        font: args.font,
+        size: args.size,
+        color: args.color,
+      })
+      t += lineH
+    }
+
+    t += gap
+  }
+
+  return t
+}
+
+type AutoTableCol = {
+  key: string
+  header: string
+  width: number
+  align?: 'left' | 'center' | 'right'
+}
+
+function drawAutoTableFromTop(
+  page: any,
+  height: number,
+  args: {
+    x: number
+    topFromTop: number
+    cols: AutoTableCol[]
+    headerH: number
+    minRowH: number
+    paddingX?: number
+    paddingY?: number
+    font: PDFFont
+    fontBold: PDFFont
+    size: number
+    headerSize?: number
+    lineHeight?: number
+    gridW?: number
+    headerBg: ReturnType<typeof rgb>
+    headerText: ReturnType<typeof rgb>
+    bodyText: ReturnType<typeof rgb>
+    rowBgA: ReturnType<typeof rgb>
+    rowBgB: ReturnType<typeof rgb>
+    grid: ReturnType<typeof rgb>
+    rows: Array<Record<string, any>> // 0..2 rows
+    renderEmptyRow?: boolean // if rows=0 => still show one empty row
+  },
+) {
+  const padX = args.paddingX ?? 14
+  const padY = args.paddingY ?? 10
+  const headerSize = args.headerSize ?? args.size
+  const lineH = args.lineHeight ?? args.size * 1.25
+  const gridW = args.gridW ?? 2
+
+  const totalW = args.cols.reduce((s, c) => s + c.width, 0)
+
+  let t = args.topFromTop
+
+  // header row
+  {
+    let cx = args.x
+    const headerTop = t
+    const y = height - (headerTop + args.headerH)
+
+    for (const c of args.cols) {
+      page.drawRectangle({ x: cx, y, width: c.width, height: args.headerH, color: args.headerBg })
+
+      // "fake-bold" header text (white)
+      const lines = String(c.header).split('\n')
+      const lh = headerSize * 1.1
+      const blockH = lines.length * lh
+      let yy = y + (args.headerH + blockH) / 2 - lh
+
+      for (const line of lines) {
+        const tx = cx + padX
+        // center header text within each col
+        const tClean = safeLatin(line)
+        const tw = args.fontBold.widthOfTextAtSize(tClean, headerSize)
+        const centeredX = cx + (c.width - tw) / 2
+
+        drawFakeBoldText(page, tClean, centeredX, yy, {
+          size: headerSize,
+          font: args.fontBold,
+          color: args.headerText,
+          strength: 0.7,
+        })
+        yy -= lh
+      }
+
+      cx += c.width
+    }
+
+    t += args.headerH
+  }
+
+  const rowsToDraw =
+    args.rows.length > 0 ? args.rows : args.renderEmptyRow ? [{ __empty: true }] : []
+
+  // body rows (dynamic heights with wrapping)
+  for (let r = 0; r < rowsToDraw.length; r++) {
+    const row = rowsToDraw[r]
+    const bg = r % 2 === 0 ? args.rowBgA : args.rowBgB
+
+    // measure row height by max wrapped lines among cells
+    let maxLines = 1
+    for (const col of args.cols) {
+      const val = row.__empty ? '' : safeLatin(row[col.key] ?? '')
+      const maxW = Math.max(1, col.width - padX * 2)
+      const lines = wrapByWidth(val, args.font, args.size, maxW)
+      maxLines = Math.max(maxLines, Math.max(1, lines.length))
+    }
+    const neededH = padY * 2 + maxLines * lineH
+    const rowH = Math.max(args.minRowH, neededH)
+
+    // draw cells
+    let cx = args.x
+    const rowTop = t
+    const rowBottomY = height - (rowTop + rowH)
+
+    for (const col of args.cols) {
+      // cell bg
+      page.drawRectangle({ x: cx, y: rowBottomY, width: col.width, height: rowH, color: bg })
+
+      // cell text (wrapped)
+      const val = row.__empty ? '' : safeLatin(row[col.key] ?? '')
+      drawWrappedTextInCell(page, val, cx, rowBottomY, col.width, rowH, {
+        font: args.font,
+        size: args.size,
+        color: args.bodyText,
+        padding: padX,
+        lineHeight: lineH,
+        minSize: args.size, // keep same
+        ellipsis: true,
+      })
+
+      cx += col.width
+    }
+
+    t += rowH
+  }
+
+  // grid lines (outer + inner)
+  {
+    const topY = height - args.topFromTop
+    const bottomY = height - t
+
+    // outer border
+    page.drawRectangle({
+      x: args.x,
+      y: bottomY,
+      width: totalW,
+      height: topY - bottomY,
+      borderColor: args.grid,
+      borderWidth: gridW,
+    })
+
+    // verticals
+    let cx = args.x
+    for (let i = 0; i < args.cols.length - 1; i++) {
+      cx += args.cols[i].width
+      page.drawRectangle({
+        x: cx - gridW / 2,
+        y: bottomY,
+        width: gridW,
+        height: topY - bottomY,
+        color: args.grid,
+      })
+    }
+
+    // header bottom line
+    const headerBottomY = height - (args.topFromTop + args.headerH)
+    page.drawRectangle({
+      x: args.x,
+      y: headerBottomY - gridW / 2,
+      width: totalW,
+      height: gridW,
+      color: args.grid,
+    })
+  }
+
+  return t // next topFromTop cursor
+}
+
+function drawSemiBoldFromTop(
+  page: any,
+  height: number,
+  textRaw: any,
+  x: number,
+  topFromTop: number,
+  opts: {
+    font: PDFFont
+    size: number
+    color: ReturnType<typeof rgb>
+    strength?: number // 0.25 ~ 0.7 (tune)
+  },
+) {
+  const text = safeLatin(textRaw ?? '')
+  const y = height - topFromTop - opts.size
+  drawFakeBoldText(page, text, x, y, {
+    size: opts.size,
+    font: opts.font,
+    color: opts.color,
+    strength: opts.strength ?? 0.35, // ✅ semibold default
+  })
+}
+
+function generateDeathBenefitAmount(planCode: number, amount: number): number {
+  if (planCode === 5 || planCode === 6 || planCode === 7) {
+    return amount
+  }
+  if (planCode === 8 || planCode === 11) {
+    return Math.ceil(amount / 100)
+  }
+
+  if (planCode === 9 || planCode === 12) {
+    return Math.ceil((amount * 2) / 100)
+  }
+  if (planCode === 10 || planCode === 13) {
+    return Math.ceil((amount * 3) / 100)
+  }
+
+  return 0
+}
+
 export async function generateQuotePdf(data: IllustrationData) {
   const pdfDoc = await PDFDocument.create()
   pdfDoc.registerFontkit(fontkit)
@@ -490,7 +1129,8 @@ export async function generateQuotePdf(data: IllustrationData) {
   // Colors (0..1)
   const COLORS = {
     gold: rgb(156 / 255, 134 / 255, 57 / 255),
-    black: rgb(0, 0, 0),
+    // black: rgb(0, 0, 0),
+    black: rgb(38 / 255, 38 / 255, 38 / 255), // #262626
     gray: rgb(0.35, 0.35, 0.35),
     white: rgb(1, 1, 1),
     brown: rgb(129 / 255, 87 / 255, 62 / 255), // #81573e ✅
@@ -590,72 +1230,14 @@ export async function generateQuotePdf(data: IllustrationData) {
     }
 
     // -------- Page 3: table dummy fill --------
-    // if (i === 2) {
-    //   // table geometry (from your screenshot)
-    //   const TABLE = {
-    //     left: 143,
-    //     mid: 815,
-    //     right: 1233,
-    //   }
 
-    //   const paddingX = 24
-    //   const valueX = TABLE.mid + paddingX
-
-    //   const font = fonts.regular
-    //   const fontSize = 22
-
-    //   const rowCentersImg = [
-    //     322.0, 388.0, 456.5, 535.5, 618.5, 697.0, 772.5, 853.0, 925.0, 992.5, 1072.0,
-    //   ]
-
-    //   // const values = [
-    //   //   'Md. Arif Hossain', // Proposed Insured Name
-    //   //   'Md. Arif Hossain', // Proposed Policy Owner Name
-    //   //   '30 / 15-08-1995', // Age / Date of Birth
-    //   //   'Male', // Gender
-    //   //   'Shanta Multi-Stage Maturity Plan',
-    //   //   'BDT 10,00,000', // Sum Assured
-    //   //   '20 Years', // Policy Term
-    //   //   'Monthly', // Premium Mode
-    //   //   'BDT 4,500', // Basic Premium
-    //   //   'BDT 500', // Rider Premium
-    //   //   'BDT 5,000', // Total Modal Premium
-    //   // ]
-
-    //   const values = [
-    //     safeLatin(data.formData?.name || '-'), // Proposed Insured Name
-    //     safeLatin(data.formData?.name || '-'), // Proposed Policy Owner Name
-    //     `${data.formData?.Age || '-'} / ${formatDOB_DDMMYYYY(data.formData?.dateOfBirth) || '-'}`, // Age / Date of Birth
-    //     safeLatin(data.meta?.gender?.displayName || '-'), // Gender
-    //     safeLatin(data.meta?.plan?.displayName || data.meta?.plan?.name || '-'), // Plan Name
-    //     safeLatin(data.formData?.SumAssured || '-'), // Sum Assured
-    //     safeLatin(data.meta?.term?.label || '-'), // Policy Term
-    //     safeLatin(data.meta?.payment?.displayName || '-'), // Premium Mode
-    //     // safeLatin(data.formData?.basicPremium || '-'), // Basic Premium
-    //     // safeLatin(data.formData?.riderPremium || '-'), // Rider Premium
-    //     // safeLatin(data.formData?.totalModalPremium || '-'), // Total Modal Premium
-    //   ]
-
-    //   for (let r = 0; r < values.length; r++) {
-    //     const yImg = rowCentersImg[r]
-    //     const y = height - yImg - fontSize * 0.35
-
-    //     page.drawText(values[r], {
-    //       x: valueX,
-    //       y,
-    //       size: fontSize,
-    //       font,
-    //       color: COLORS.black,
-    //     })
-    //   }
-    // }
     if (i === 2) {
       const TABLE = { left: 143, mid: 815, right: 1233 }
       const paddingX = 24
       const valueX = TABLE.mid + paddingX
 
       const font = fonts.bold
-      const fontSize = 24
+      const fontSize = 27
 
       const rowCentersImg = [
         322.0, 388.0, 456.5, 535.5, 618.5, 697.0, 772.5, 853.0, 925.0, 992.5, 1072.0,
@@ -667,9 +1249,28 @@ export async function generateQuotePdf(data: IllustrationData) {
         `${data.formData?.Age || '-'} / ${formatDOB_DDMMYYYY(data.formData?.dateOfBirth) || '-'}`, // 2 Age / DOB
         safeLatin(data.meta?.gender?.displayName || '-'), // 3 Gender
         safeLatin(data.meta?.plan?.displayName || data.meta?.plan?.name || '-'), // 4 Product Name (WRAP ONLY THIS)
-        safeLatin(data.formData?.SumAssured || '-'), // 5 Sum Assured
+        safeLatin(formatBDT(data.formData?.SumAssured)), // 5 Sum Assured
         safeLatin(data.meta?.term?.label || '-'), // 6 Policy Term
         safeLatin(data.meta?.payment?.displayName || '-'), // 7 Premium Mode
+        // safeLatin(Math.ceil(data.premiumBreakdown.basicPremium) || '-'), // Basic Premium
+        // safeLatin(
+        //   data.premiumBreakdown.addOns.reduce(
+        //     (acc: any, addon: any) => acc + Math.ceil(addon.amount),
+        //     0,
+        //   ) || '-',
+        // ), // Rider Premium
+        // safeLatin(Math.ceil(data.premiumBreakdown.totalPremium) || '-'), // Total Modal Premium
+        // ✅ last 3 rows with BDT
+        safeLatin(formatBDT(data.premiumBreakdown?.basicPremium)), // 8 Basic Premium
+        safeLatin(
+          formatBDT(
+            (data.premiumBreakdown?.addOns || []).reduce(
+              (acc: number, addon: any) => acc + (Number(addon?.amount) || 0),
+              0,
+            ),
+          ),
+        ), // 9 Rider Premium
+        safeLatin(formatBDT(data.premiumBreakdown?.totalPremium)), // 10 Total Modal Premium
       ]
 
       // right column cell width
@@ -687,9 +1288,46 @@ export async function generateQuotePdf(data: IllustrationData) {
         const y = height - yImg - fontSize * 0.35
 
         // ✅ ONLY Product Name wraps (row index 4)
+        // if (r === 4) {
+        //   const rowH = getRowHeightImg(r)
+        //   const cellTopY = height - yImg + rowH / 2
+
+        //   const lineHeight = fontSize * 1.15
+        //   const maxLines = Math.max(1, Math.floor((rowH - 12) / lineHeight)) // 12px breathing room
+
+        //   let lines = wrapByWidth(values[r], font, fontSize, wrapMaxWidth)
+
+        //   // clamp lines + add ellipsis if still too long
+        //   if (lines.length > maxLines) {
+        //     lines = lines.slice(0, maxLines)
+        //     let last = lines[lines.length - 1]
+        //     while (last.length > 0 && font.widthOfTextAtSize(last + '…', fontSize) > wrapMaxWidth) {
+        //       last = last.slice(0, -1)
+        //     }
+        //     lines[lines.length - 1] = (last || '').trimEnd() + '…'
+        //   }
+
+        //   // draw from top inside the cell
+        //   let yy = cellTopY - fontSize - 6 // 6 = top padding
+        //   for (const line of lines) {
+        //     page.drawText(line, {
+        //       x: valueX,
+        //       y: yy,
+        //       size: fontSize,
+        //       font,
+        //       color: COLORS.black,
+        //     })
+        //     yy -= lineHeight
+        //   }
+
+        //   continue
+        // }
         if (r === 4) {
           const rowH = getRowHeightImg(r)
+
+          // cell top/bottom (PDF coords)
           const cellTopY = height - yImg + rowH / 2
+          const cellBottomY = height - yImg - rowH / 2
 
           const lineHeight = fontSize * 1.15
           const maxLines = Math.max(1, Math.floor((rowH - 12) / lineHeight)) // 12px breathing room
@@ -706,8 +1344,13 @@ export async function generateQuotePdf(data: IllustrationData) {
             lines[lines.length - 1] = (last || '').trimEnd() + '…'
           }
 
-          // draw from top inside the cell
-          let yy = cellTopY - fontSize - 6 // 6 = top padding
+          // ✅ vertical center: compute total text block height
+          const blockH = lines.length * lineHeight
+
+          // start baseline for first line so the whole block is centered
+          // (baseline approx one fontSize below the "top" of the line)
+          let yy = cellBottomY + (rowH - blockH) / 2 + (blockH - fontSize)
+
           for (const line of lines) {
             page.drawText(line, {
               x: valueX,
@@ -733,54 +1376,568 @@ export async function generateQuotePdf(data: IllustrationData) {
       }
     }
 
-    // -------- Page 4 tables: regular black (or mix) --------
+    // -------- Page 4: dynamic content (Key Product Features + 2 dynamic tables + Important Terms) --------
     if (i === 3) {
-      const benefitRowY = [430, 405]
-      const benefitX = { type: 85, desc: 220, amount: 450 }
+      /**
+       * ✅ FAKE DATA (replace later with your props)
+       * - coreBenefitItems: string[]
+       * - additionalFeatureItems: string[]
+       * - baseProductCoverageRows: 0..2 rows
+       * - riderCoverageRows: 0..2 rows
+       * - importantTerms: string[]
+       */
+      const coreBenefitItems = [
+        'Life coverage for the full policy term',
+        'Premium accumulation & interest crediting (if applicable)',
+        'Benefit payable on death or maturity',
+      ]
 
-      data.benefits.slice(0, 2).forEach((b, idx) => {
-        draw(page, clip(b.type, 16), benefitX.type, benefitRowY[idx], { size: 9, font: fonts.bold })
-        draw(page, clip(b.description, 45), benefitX.desc, benefitRowY[idx], {
-          size: 9,
-          font: fonts.regular,
+      const additionalFeatureItems = [
+        'Policy loans / withdrawals (if applicable)',
+        'Rider add-ons',
+        'Flexible premium payment options',
+        'Grace period benefits (as per policy rules)',
+        'Auto premium loan (if applicable)',
+      ]
+
+      // 0..2 rows
+      const baseProductCoverageRows: Array<{ type: string; description: string; amount: string }> =
+        [
+          {
+            type: 'Death Benefit',
+            description: 'Sum Assured or Account Value, whichever is higher',
+            amount: `BDT ${generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0) === 0 ? '-' : generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0)}`,
+          },
+          {
+            type: 'Maturity Benefit',
+            description: 'Account Value at maturity (incl. bonuses if applicable)',
+            amount: `BDT ${data?.formData?.SumAssured || '-'}`,
+          },
+        ].slice(0, 2)
+
+      // 0..2 rows
+      // const riderCoverageRows: Array<{
+      //   name: string
+      //   description: string
+      //   coverageAmount: string
+      //   premium: string
+      // }> = [
+      //   {
+      //     name: 'Critical Illness (19)',
+      //     description: 'Coverage for 19 critical illnesses',
+      //     coverageAmount: 'BDT 2,00,000',
+      //     premium: 'BDT 450',
+      //   },
+      //   {
+      //     name: 'Accidental Benefit',
+      //     description: 'Additional payout on accidental death',
+      //     coverageAmount: 'BDT 3,00,000',
+      //     premium: 'BDT 300',
+      //   },
+      // ].slice(0, 2)
+
+      const generateCoverageAmount = (key: string): number => {
+        if (key === 'ci19') {
+          return Math.ceil(data?.apiResponse?.ci_coverage) || 0
+        }
+        if (key === 'ci25') {
+          return Math.ceil(data?.apiResponse?.ci_coverage) || 0
+        }
+        if (key === 'accident') {
+          return Math.ceil(data?.apiResponse?.accidental_coverage) || 0
+        }
+        return 0
+      }
+
+      const generateRiderArray = () => {
+        const riders = data?.premiumBreakdown?.addOns || []
+        const arr: Array<{
+          name: string
+          description: string
+          coverageAmount: string
+          premium: string
+        }> = []
+
+        for (let i = 0; i < riders.length; i++) {
+          const rider = riders[i]
+          arr.push({
+            name: 'Dummy Rider',
+            description: `Dummy description for ${rider.key || '-'}`,
+            coverageAmount: `BDT ${generateCoverageAmount(rider.key || '-')}`,
+            premium: `BDT ${Math.ceil(rider.amount)}`,
+          })
+        }
+        return arr
+      }
+
+      const riderCoverageRows: Array<{
+        name: string
+        description: string
+        coverageAmount: string
+        premium: string
+      }> = generateRiderArray()
+
+      const importantTerms = [
+        'Illustration based on disclosed age ,',
+        'Early surrender may result in lower value',
+        'Exclusions apply',
+      ]
+
+      // ------------------------------
+      // Styling (match your template)
+      // ------------------------------
+      const C = {
+        orange: hexToRgb01('#FF751F'),
+        olive: hexToRgb01('#989433'),
+        // ✅ your requested "black" replacement: #262626
+        ink: hexToRgb01('#262626'),
+        white: hexToRgb01('#FFFFFF'),
+
+        // table palette like your page-5 table but adapted to page-4 sample
+        tableHeaderBg: hexToRgb01('#8E9A83'),
+        tableYearColBg: hexToRgb01('#8A957C'),
+        tableRowA: hexToRgb01('#EEF0ED'),
+        tableRowB: hexToRgb01('#F7F8F6'),
+        tableGrid: hexToRgb01('#FFFFFF'),
+        disclaimerRed: hexToRgb01('#8B2D2D'),
+      }
+
+      // ------------------------------
+      // Helpers (local to i===3 block)
+      // ------------------------------
+
+      // fake "semi-bold" (like your bottom right static text)
+      const drawSemiBold = (textRaw: any, x: number, y: number, size: number, color = C.ink) => {
+        const text = safeLatin(textRaw ?? '')
+        // slightly stronger than regular, less than heavy
+        drawFakeBoldText(page, text, x, y, { size, font: fonts.regular, color, strength: 0.35 })
+      }
+
+      const drawSemiBoldFromTop = (
+        textRaw: any,
+        x: number,
+        topFromTop: number,
+        size: number,
+        color = C.ink,
+      ) => {
+        const y = height - topFromTop - size * 0.25
+        drawSemiBold(textRaw, x, y, size, color)
+        return y
+      }
+
+      const drawNormalFromTop = (
+        textRaw: any,
+        x: number,
+        topFromTop: number,
+        size: number,
+        color = C.ink,
+        font: PDFFont = fonts.regular,
+      ) => {
+        const text = safeLatin(textRaw ?? '')
+        const y = height - topFromTop - size * 0.25
+        page.drawText(text, { x, y, size, font, color })
+        return y
+      }
+
+      const drawBulletsFromTop = (
+        items: string[],
+        x: number,
+        topFromTop: number,
+        opts: { size: number; maxW: number },
+      ) => {
+        const bullet = '- '
+        const lineH = opts.size * 1.35
+
+        // current top baseline (pdf y)
+        let y = height - topFromTop - opts.size * 0.25
+
+        for (const item of items) {
+          const text = safeLatin(item)
+          const lines = wrapByWidth(text, fonts.regular, opts.size, opts.maxW - 16) // leave for bullet
+          for (let iLine = 0; iLine < lines.length; iLine++) {
+            const prefix = iLine === 0 ? bullet : '  '
+            page.drawText(prefix + lines[iLine], {
+              x,
+              y,
+              size: opts.size,
+              font: fonts.regular,
+              color: C.ink,
+            })
+            y -= lineH
+          }
+          // small gap between bullet items
+          y -= opts.size * 0.15
+        }
+
+        // return next topFromTop (converted) position for chaining
+        const consumed = height - (y + opts.size * 0.25)
+        return consumed
+      }
+
+      /**
+       * ✅ Dynamic table drawer (0..2 rows, wrapped cells, bigger cell height than page-6)
+       * Uses "from TOP" for placement. Returns new topFromTop after table.
+       */
+      const drawDynamicTableFromTop = (args: {
+        x: number
+        topFromTop: number
+        width: number
+        columns: Array<{ key: string; title: string; perc: number }>
+        rows: Array<Record<string, any>>
+        headerH?: number
+        rowH?: number // minimum row height
+        fontSize?: number
+        padding?: number
+      }) => {
+        const headerH = args.headerH ?? 52
+        const minRowH = args.rowH ?? 56
+        const fontSize = args.fontSize ?? 18
+        const padding = args.padding ?? 14
+        const lineHeight = fontSize * 1.25
+
+        const colW = args.columns.map((c) => args.width * c.perc)
+
+        // ✅ compute dynamic row heights based on description wrap needs
+        const rowHeights = args.rows.map((row) => {
+          const descCol = args.columns.find((c) => c.key === 'description')
+          if (!descCol) return minRowH
+
+          const descText = safeLatin(row?.description ?? '')
+          const descIndex = args.columns.findIndex((c) => c.key === 'description')
+          const maxW = Math.max(1, colW[descIndex] - padding * 2)
+
+          const lines =
+            descText && fonts.regular.widthOfTextAtSize(descText, fontSize) > maxW
+              ? wrapByWidth(descText, fonts.regular, fontSize, maxW)
+              : [descText]
+
+          const neededH = padding * 2 + lines.length * lineHeight
+          return Math.max(minRowH, neededH)
         })
-        draw(page, clip(b.amount, 18), benefitX.amount, benefitRowY[idx], {
-          size: 9,
-          font: fonts.regular,
+
+        const tableTopY = height - args.topFromTop
+        const bodyH = rowHeights.reduce((a, b) => a + b, 0)
+        const tableTotalH = headerH + bodyH
+        const tableBottomY = tableTopY - tableTotalH
+
+        // ---------------- header ----------------
+        {
+          let cx = args.x
+          const y = tableTopY - headerH
+
+          for (let c = 0; c < args.columns.length; c++) {
+            page.drawRectangle({
+              x: cx,
+              y,
+              width: colW[c],
+              height: headerH,
+              color: C.tableHeaderBg,
+            })
+
+            const title = safeLatin(args.columns[c].title)
+            const tw = fonts.bold.widthOfTextAtSize(title, fontSize)
+            const tx = cx + (colW[c] - tw) / 2
+            const ty = y + (headerH - fontSize) / 2 - 1
+
+            // ✅ stronger header "bold"
+            drawFakeBoldText(page, title, tx, ty, {
+              size: fontSize,
+              font: fonts.bold,
+              color: C.white,
+              strength: 0.9,
+            })
+
+            cx += colW[c]
+          }
+        }
+
+        // ---------------- body (dynamic row heights) ----------------
+        let yCursorTop = tableTopY - headerH // top edge of body
+
+        for (let r = 0; r < args.rows.length; r++) {
+          const rowH = rowHeights[r]
+          const y = yCursorTop - rowH
+          const bg = r % 2 === 0 ? C.tableRowA : C.tableRowB
+
+          let cx = args.x
+
+          for (let c = 0; c < args.columns.length; c++) {
+            page.drawRectangle({ x: cx, y, width: colW[c], height: rowH, color: bg })
+
+            const col = args.columns[c]
+            const key = col.key
+            const text = safeLatin(args.rows[r]?.[key] ?? '')
+            const maxW = Math.max(1, colW[c] - padding * 2)
+
+            if (key === 'description') {
+              // ✅ wrap only when needed, otherwise single line
+              if (fonts.regular.widthOfTextAtSize(text, fontSize) <= maxW) {
+                drawCellText(
+                  page,
+                  text,
+                  cx,
+                  y,
+                  colW[c],
+                  rowH,
+                  fonts.regular,
+                  fontSize,
+                  C.ink,
+                  'left',
+                  padding,
+                )
+              } else {
+                // ✅ NO ellipsis now because rowH grows to fit
+                drawWrappedTextInCell(page, text, cx, y, colW[c], rowH, {
+                  font: fonts.regular,
+                  size: fontSize,
+                  color: C.ink,
+                  padding,
+                  lineHeight,
+                  minSize: 13,
+                  ellipsis: false,
+                })
+              }
+            } else {
+              // other columns single line centered
+              drawCellText(
+                page,
+                text,
+                cx,
+                y,
+                colW[c],
+                rowH,
+                fonts.regular,
+                fontSize,
+                C.ink,
+                'center',
+                padding,
+              )
+            }
+
+            cx += colW[c]
+          }
+
+          yCursorTop = y // next row starts below this one
+        }
+
+        // ---------------- grid lines ----------------
+        const gridW = 2
+        page.drawRectangle({
+          x: args.x,
+          y: tableBottomY,
+          width: args.width,
+          height: tableTotalH,
+          borderColor: C.tableGrid,
+          borderWidth: gridW,
         })
-      })
+
+        // vertical
+        {
+          let cx = args.x
+          for (let c = 0; c < colW.length - 1; c++) {
+            cx += colW[c]
+            page.drawRectangle({
+              x: cx - gridW / 2,
+              y: tableBottomY,
+              width: gridW,
+              height: tableTotalH,
+              color: C.tableGrid,
+            })
+          }
+        }
+
+        // horizontal: header bottom + each dynamic row boundary
+        {
+          const yHeaderBottom = tableTopY - headerH
+          page.drawRectangle({
+            x: args.x,
+            y: yHeaderBottom - gridW / 2,
+            width: args.width,
+            height: gridW,
+            color: C.tableGrid,
+          })
+
+          let yy = yHeaderBottom
+          for (let r = 0; r < rowHeights.length; r++) {
+            yy -= rowHeights[r]
+            page.drawRectangle({
+              x: args.x,
+              y: yy - gridW / 2,
+              width: args.width,
+              height: gridW,
+              color: C.tableGrid,
+            })
+          }
+        }
+
+        // ✅ return next cursor (table height is dynamic now)
+        return args.topFromTop + tableTotalH + 34
+      }
+
+      // ------------------------------
+      // Layout (from TOP, dynamic stacking)
+      // Tune ONLY the base X/top if needed
+      // ------------------------------
+      const L = {
+        x: 150,
+        maxW: 1100,
+        top: 340, // starting block under the orange ribbon (tune if needed)
+        titleSize: 30,
+        subTitleSize: 26,
+        bodySize: 22,
+        gapBig: 26,
+        gapSmall: 14,
+      }
+
+      let cursorTop = L.top
+
+      // ✅ Key Product Features (semi-bold olive)
+      drawSemiBoldFromTop('Key Product Features', L.x, cursorTop, L.titleSize, C.olive)
+      cursorTop += L.titleSize + L.gapSmall
+
+      // ✅ Core Benefit Structure (orange)
+      drawSemiBoldFromTop('Core Benefit Structure', L.x, cursorTop, L.subTitleSize, C.orange)
+      cursorTop += L.subTitleSize + 10
+
+      // bullets (core)
+      cursorTop =
+        drawBulletsFromTop(coreBenefitItems, L.x, cursorTop, {
+          size: L.bodySize,
+          maxW: L.maxW,
+        }) + 8
+
+      cursorTop += L.gapSmall
+
+      // ✅ Additional Features (orange)
+      drawSemiBoldFromTop('Additional Features:', L.x, cursorTop, L.subTitleSize, C.orange)
+      cursorTop += L.subTitleSize + 10
+
+      // bullets (additional)
+      cursorTop =
+        drawBulletsFromTop(additionalFeatureItems, L.x, cursorTop, {
+          size: L.bodySize,
+          maxW: L.maxW,
+        }) + 10
+
+      cursorTop += L.gapBig
+
+      // ✅ Coverage & Benefit Details (semi-bold olive)
+      drawSemiBoldFromTop('Coverage & Benefit Details', L.x, cursorTop, L.titleSize, C.olive)
+      cursorTop += L.titleSize + L.gapSmall
+
+      // ✅ Base Product Coverage (orange)
+      drawSemiBoldFromTop('Base Product Coverage', L.x, cursorTop, L.subTitleSize, C.orange)
+      cursorTop += L.subTitleSize + 14
+
+      // Table 1 (0..2 rows) - only draw if any rows
+      if (baseProductCoverageRows.length) {
+        cursorTop = drawDynamicTableFromTop({
+          x: L.x,
+          topFromTop: cursorTop,
+          width: L.maxW,
+          columns: [
+            { key: 'type', title: 'Benefit Type', perc: 0.34 },
+            { key: 'description', title: 'Description', perc: 0.42 },
+            { key: 'amount', title: 'Amount', perc: 0.24 },
+          ],
+          rows: baseProductCoverageRows,
+          headerH: 50,
+          rowH: 64, // ✅ larger cell area
+          fontSize: 20,
+          padding: 16,
+        })
+      } else {
+        // if no rows, still keep a small gap
+        cursorTop += 22
+      }
+
+      cursorTop += 8
+
+      // ✅ Rider Coverage (orange + note line)
+      generateRiderArray()?.length > 0 &&
+        drawSemiBoldFromTop('Rider Coverage', L.x, cursorTop, L.subTitleSize, C.orange)
+      cursorTop += L.subTitleSize + 10
+
+      // note line (regular)
+      generateRiderArray()?.length > 0 &&
+        drawNormalFromTop(
+          'The following coverage is applicable only on Owner',
+          L.x,
+          cursorTop,
+          L.bodySize,
+          C.ink,
+          fonts.regular,
+        )
+      cursorTop += L.bodySize + 18
+
+      // Table 2 (0..2 rows)
+      if (riderCoverageRows.length) {
+        cursorTop = drawDynamicTableFromTop({
+          x: L.x,
+          topFromTop: cursorTop,
+          width: L.maxW,
+          columns: [
+            { key: 'name', title: 'Rider Name', perc: 0.25 },
+            { key: 'description', title: 'Description', perc: 0.35 },
+            { key: 'coverageAmount', title: 'Coverage Amount', perc: 0.2 },
+            { key: 'premium', title: 'Premium', perc: 0.2 },
+          ],
+          rows: riderCoverageRows,
+          headerH: 50,
+          rowH: 64,
+          fontSize: 20,
+          padding: 16,
+        })
+      } else {
+        cursorTop += 22
+      }
+
+      cursorTop += L.gapBig
+
+      // ✅ Important Terms & Disclaimers (semi-bold like template)
+      drawSemiBoldFromTop(
+        'Important Terms & Disclaimers',
+        L.x,
+        cursorTop,
+        L.titleSize,
+        C.disclaimerRed,
+      )
+      cursorTop += L.titleSize + 10
+
+      // bullet list (important terms)
+      cursorTop =
+        drawBulletsFromTop(
+          importantTerms.map((t) => `• ${t}`), // render as dot bullets (like sample)
+          L.x + 20,
+          cursorTop,
+          { size: L.bodySize, maxW: L.maxW - 20 },
+        ) + 0
     }
 
-    // -------- Page 5: projected values --------
+    // -------- Page 5: projected values (DYNAMIC TABLE DESIGN) --------
     if (i === 4) {
-      const colX = {
-        year: 60,
-        annualPremium: 145,
-        deathBenefit: 245,
-        surrenderValue: 345,
-        maturityValue: 440,
-        paidUpValue: 520,
-      }
-      const startY = 650
-      const rowH = 28
+      // max rows = 28 (fake data)
+      const rows = makeFakeProjectedRows(15)
 
-      data.projectedValues.slice(0, 12).forEach((r, idx) => {
-        const y = startY - idx * rowH
-        draw(page, String(r.year), colX.year, y, { size: 9, font: fonts.regular })
-        draw(page, clip(r.annualPremium, 12), colX.annualPremium, y, {
-          size: 9,
-          font: fonts.regular,
-        })
-        draw(page, clip(r.deathBenefit, 12), colX.deathBenefit, y, { size: 9, font: fonts.regular })
-        draw(page, clip(r.surrenderValue, 12), colX.surrenderValue, y, {
-          size: 9,
-          font: fonts.regular,
-        })
-        draw(page, clip(r.maturityValue, 12), colX.maturityValue, y, {
-          size: 9,
-          font: fonts.regular,
-        })
-        draw(page, clip(r.paidUpValue, 12), colX.paidUpValue, y, { size: 9, font: fonts.regular })
+      // ✅ table placement (measured like your other blocks)
+      // You will tune ONLY these 4 numbers to match the PNG layout:
+      const TABLE = {
+        x: 160,
+        topFromTop: 350, // where the table starts from the TOP of page
+        width: 1100,
+        headerH: 60,
+        rowH: 44,
+      }
+
+      drawProjectedValuesTableFromTop(page, {
+        height,
+        x: TABLE.x,
+        topFromTop: TABLE.topFromTop,
+        width: TABLE.width,
+        headerH: TABLE.headerH,
+        rowH: TABLE.rowH,
+        rows,
+        fonts,
       })
     }
 
