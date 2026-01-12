@@ -39,16 +39,14 @@ export type IllustrationData = {
   premiumBreakdown: any
   premiumBreakdownAllModes: Record<string, any>
   apiResponse: any
-  // benefits: Array<{ type: string; description: string; amount: string }>
-  // riders: Array<{ name: string; description: string; coverageAmount: string; premium: string }>
-  // projectedValues: Array<{
-  //   year: number
-  //   annualPremium: string
-  //   deathBenefit: string
-  //   surrenderValue: string
-  //   maturityValue: string
-  //   paidUpValue: string
-  // }>
+  // ✅ ADD THIS
+  page4?: {
+    coreBenefitItems?: string[]
+    additionalFeatureItems?: string[]
+    importantTerms?: string[]
+    maturityBenefit?: string[]
+    deathBenefit?: string[]
+  }
 }
 
 function clip(text: any, max = 30) {
@@ -1386,31 +1384,50 @@ export async function generateQuotePdf(data: IllustrationData) {
        * - riderCoverageRows: 0..2 rows
        * - importantTerms: string[]
        */
-      const coreBenefitItems = [
-        'Life coverage for the full policy term',
-        'Premium accumulation & interest crediting (if applicable)',
-        'Benefit payable on death or maturity',
-      ]
 
-      const additionalFeatureItems = [
-        'Policy loans / withdrawals (if applicable)',
-        'Rider add-ons',
-        'Flexible premium payment options',
-        'Grace period benefits (as per policy rules)',
-        'Auto premium loan (if applicable)',
-      ]
+      // const coreBenefitItems = [
+      //   'Life coverage for the full policy term',
+      //   'Premium accumulation & interest crediting (if applicable)',
+      //   'Benefit payable on death or maturity',
+      // ]
+
+      // const additionalFeatureItems = [
+      //   'Policy loans / withdrawals (if applicable)',
+      //   'Rider add-ons',
+      //   'Flexible premium payment options',
+      //   'Grace period benefits (as per policy rules)',
+      //   'Auto premium loan (if applicable)',
+      // ]
+
+      // const importantTerms = [
+      //   'Illustration based on disclosed age ,',
+      //   'Early surrender may result in lower value',
+      //   'Exclusions apply',
+      // ]
+
+      const coreBenefitItems = data.page4?.coreBenefitItems ?? []
+      const additionalFeatureItems = data.page4?.additionalFeatureItems ?? []
+      const importantTerms = data.page4?.importantTerms ?? []
+      const maturityBenefit = data.page4?.maturityBenefit || []
+      const deathBenefit = data.page4?.deathBenefit || []
+
+      // console.log('coreBenefitItems', coreBenefitItems)
+      // console.log('additionalFeatureItems', additionalFeatureItems)
+      // console.log('importantTerms', importantTerms)
+      // console.log('maturityBenefit', maturityBenefit)
+      // console.log('deathBenefit', deathBenefit)
 
       // 0..2 rows
       const baseProductCoverageRows: Array<{ type: string; description: string; amount: string }> =
         [
           {
             type: 'Death Benefit',
-            description: 'Sum Assured or Account Value, whichever is higher',
+            description: `${deathBenefit.join(' ') || 'No Description Available'}`,
             amount: `BDT ${generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0) === 0 ? '-' : generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0)}`,
           },
           {
             type: 'Maturity Benefit',
-            description: 'Account Value at maturity (incl. bonuses if applicable)',
+            description: `${maturityBenefit.join(' ') || 'No Description Available'}`,
             amount: `BDT ${data?.formData?.SumAssured || '-'}`,
           },
         ].slice(0, 2)
@@ -1451,6 +1468,11 @@ export async function generateQuotePdf(data: IllustrationData) {
 
       const generateRiderArray = () => {
         const riders = data?.premiumBreakdown?.addOns || []
+        const ridersFromAPI = JSON?.parse(data?.apiResponse?.rider_info || [])
+
+        console.log('riders', riders)
+        console.log('ridersFromAPI', ridersFromAPI)
+
         const arr: Array<{
           name: string
           description: string
@@ -1461,8 +1483,8 @@ export async function generateQuotePdf(data: IllustrationData) {
         for (let i = 0; i < riders.length; i++) {
           const rider = riders[i]
           arr.push({
-            name: 'Dummy Rider',
-            description: `Dummy description for ${rider.key || '-'}`,
+            name: `Dummy Label `,
+            description: `${rider.key || '-'}`,
             coverageAmount: `BDT ${generateCoverageAmount(rider.key || '-')}`,
             premium: `BDT ${Math.ceil(rider.amount)}`,
           })
@@ -1476,12 +1498,6 @@ export async function generateQuotePdf(data: IllustrationData) {
         coverageAmount: string
         premium: string
       }> = generateRiderArray()
-
-      const importantTerms = [
-        'Illustration based on disclosed age ,',
-        'Early surrender may result in lower value',
-        'Exclusions apply',
-      ]
 
       // ------------------------------
       // Styling (match your template)
