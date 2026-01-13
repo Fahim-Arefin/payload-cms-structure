@@ -1097,17 +1097,26 @@ function QuoteSection({ data, footerData }: Props) {
         </div>
       </div>
 
-      {apiResponse && showApiResponse && (
-        <div className="flex justify-center items-center mt-4">
-          <GlobalButton variant="outline" onClick={() => setPdfOpen(true)}>
-            <LocalizedString en="Get A Quote Now" bn="আপনার প্রিমিয়াম ক্যালকুলেট করুন" />
-          </GlobalButton>
+      {apiResponse &&
+        showApiResponse &&
+        (formData?.PlanCode === 6 ||
+          formData?.PlanCode === 8 ||
+          formData?.PlanCode === 9 ||
+          formData?.PlanCode === 10) && (
+          <div className="flex justify-center items-center mt-4">
+            <GlobalButton variant="outline" onClick={() => setPdfOpen(true)}>
+              <LocalizedString en="Get A Quote Now" bn="আপনার প্রিমিয়াম ক্যালকুলেট করুন" />
+            </GlobalButton>
 
-          {pdfRequestBody && (
-            <QuotePdfModal open={pdfOpen} onOpenChange={setPdfOpen} requestBody={pdfRequestBody} />
-          )}
-        </div>
-      )}
+            {pdfRequestBody && (
+              <QuotePdfModal
+                open={pdfOpen}
+                onOpenChange={setPdfOpen}
+                requestBody={pdfRequestBody}
+              />
+            )}
+          </div>
+        )}
 
       {/* bg image */}
       {/* left rotate image */}

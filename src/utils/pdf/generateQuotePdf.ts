@@ -1,4 +1,4 @@
-import { PDFDocument, rgb, StandardFonts, PDFFont } from 'pdf-lib'
+import { PDFDocument, rgb, StandardFonts, PDFFont, sum } from 'pdf-lib'
 import fontkit from '@pdf-lib/fontkit'
 import fs from 'node:fs/promises'
 import path from 'node:path'
@@ -26,6 +26,15 @@ async function loadFontOrFallback(pdfDoc: PDFDocument, filePath: string, fallbac
   }
 }
 
+type SurrenderPaidUpType = {
+  plan_code: number
+  policy_year: number
+  rate: number
+  surrender_amount: number
+  paid_up_factor: number
+  reduced_paid_up_benefit: number
+}
+
 export type IllustrationData = {
   formData: any
   meta?: {
@@ -46,7 +55,9 @@ export type IllustrationData = {
     importantTerms?: string[]
     maturityBenefit?: string[]
     deathBenefit?: string[]
+    brocheureLink?: string | null
   }
+  surrenderPaidup?: SurrenderPaidUpType[]
 }
 
 function clip(text: any, max = 30) {
@@ -729,20 +740,25 @@ function drawProjectedValuesTableFromTop(
   return { tableTopY, tableBottomY }
 }
 
-function makeFakeProjectedRows(maxRows = 28): ProjectedRow[] {
+function makeFakeProjectedRows(
+  data: SurrenderPaidUpType[],
+  sumAssured: number,
+  annualValue: number,
+): ProjectedRow[] {
   // simple fake numbers (you can swap format later)
   const fmt = (n: number) => `BDT ${n.toLocaleString('en-US')}`
 
   const rows: ProjectedRow[] = []
-  for (let i = 1; i <= maxRows; i++) {
-    const annual = 120000 + i * 4500
-    const death = 1000000 + i * 25000
-    const surrender = 50000 + i * 18000
-    const maturity = 900000 + i * 22000
-    const paidup = 200000 + i * 9000
+  for (let i = 0; i < data?.length; i++) {
+    const year = data[i]?.policy_year
+    const annual = Math.ceil(annualValue)
+    const death = sumAssured
+    const surrender = data[i]?.surrender_amount
+    const maturity = sumAssured
+    const paidup = data[i]?.reduced_paid_up_benefit
 
     rows.push({
-      year: String(i),
+      year: String(year),
       annualPremium: fmt(annual),
       deathBenefit: fmt(death),
       surrenderValue: fmt(surrender),
@@ -1470,8 +1486,8 @@ export async function generateQuotePdf(data: IllustrationData) {
         const riders = data?.premiumBreakdown?.addOns || []
         const ridersFromAPI = JSON?.parse(data?.apiResponse?.rider_info || [])
 
-        console.log('riders', riders)
-        console.log('ridersFromAPI', ridersFromAPI)
+        // console.log('riders', riders)
+        // console.log('ridersFromAPI', ridersFromAPI)
 
         const arr: Array<{
           name: string
@@ -1483,8 +1499,8 @@ export async function generateQuotePdf(data: IllustrationData) {
         for (let i = 0; i < riders.length; i++) {
           const rider = riders[i]
           arr.push({
-            name: `Dummy Label `,
-            description: `${rider.key || '-'}`,
+            name: `${ridersFromAPI?.find((r: any) => r.rider_code === rider?.key)?.rider_name || '-'}`,
+            description: `${ridersFromAPI?.find((r: any) => r.rider_code === rider?.key)?.rider_description || '-'}`,
             coverageAmount: `BDT ${generateCoverageAmount(rider.key || '-')}`,
             premium: `BDT ${Math.ceil(rider.amount)}`,
           })
@@ -1808,11 +1824,16 @@ export async function generateQuotePdf(data: IllustrationData) {
       let cursorTop = L.top
 
       // ✅ Key Product Features (semi-bold olive)
-      drawSemiBoldFromTop('Key Product Features', L.x, cursorTop, L.titleSize, C.olive)
+
+      if (coreBenefitItems.length > 0 || additionalFeatureItems.length > 0) {
+        drawSemiBoldFromTop('Key Product Features', L.x, cursorTop, L.titleSize, C.olive)
+      }
       cursorTop += L.titleSize + L.gapSmall
 
       // ✅ Core Benefit Structure (orange)
-      drawSemiBoldFromTop('Core Benefit Structure', L.x, cursorTop, L.subTitleSize, C.orange)
+      if (coreBenefitItems?.length > 0) {
+        drawSemiBoldFromTop('Core Benefit Structure', L.x, cursorTop, L.subTitleSize, C.orange)
+      }
       cursorTop += L.subTitleSize + 10
 
       // bullets (core)
@@ -1825,7 +1846,9 @@ export async function generateQuotePdf(data: IllustrationData) {
       cursorTop += L.gapSmall
 
       // ✅ Additional Features (orange)
-      drawSemiBoldFromTop('Additional Features:', L.x, cursorTop, L.subTitleSize, C.orange)
+      if (additionalFeatureItems?.length > 0) {
+        drawSemiBoldFromTop('Additional Features:', L.x, cursorTop, L.subTitleSize, C.orange)
+      }
       cursorTop += L.subTitleSize + 10
 
       // bullets (additional)
@@ -1911,13 +1934,16 @@ export async function generateQuotePdf(data: IllustrationData) {
       cursorTop += L.gapBig
 
       // ✅ Important Terms & Disclaimers (semi-bold like template)
-      drawSemiBoldFromTop(
-        'Important Terms & Disclaimers',
-        L.x,
-        cursorTop,
-        L.titleSize,
-        C.disclaimerRed,
-      )
+      if (importantTerms?.length > 0) {
+        drawSemiBoldFromTop(
+          'Important Terms & Disclaimers',
+          L.x,
+          cursorTop,
+          L.titleSize,
+          C.disclaimerRed,
+        )
+      }
+
       cursorTop += L.titleSize + 10
 
       // bullet list (important terms)
@@ -1932,8 +1958,29 @@ export async function generateQuotePdf(data: IllustrationData) {
 
     // -------- Page 5: projected values (DYNAMIC TABLE DESIGN) --------
     if (i === 4) {
-      // max rows = 28 (fake data)
-      const rows = makeFakeProjectedRows(15)
+      let rows: ProjectedRow[] = []
+      let value: number = 0
+
+      const totalValue = data.premiumBreakdown?.totalPremium
+      const paymentId = data.meta?.payment?.id
+
+      if (paymentId === 1) {
+        value = totalValue
+      } else if (paymentId === 2) {
+        value = totalValue * 2
+      } else if (paymentId === 3) {
+        value = totalValue * 3
+      } else if (paymentId === 4) {
+        value = totalValue * 12
+      }
+      const apiRows = data.surrenderPaidup
+      // console.log('Surrender values', apiRows)
+
+      if (apiRows) {
+        rows = makeFakeProjectedRows(apiRows, data?.formData?.SumAssured, value)
+      } else {
+        rows = makeFakeProjectedRows([], data?.formData?.SumAssured, value)
+      }
 
       // ✅ table placement (measured like your other blocks)
       // You will tune ONLY these 4 numbers to match the PNG layout:
@@ -1943,6 +1990,18 @@ export async function generateQuotePdf(data: IllustrationData) {
         width: 1100,
         headerH: 60,
         rowH: 44,
+      }
+
+      if (!apiRows) {
+        // If no API data, show a placeholder text
+        const placeholderText = 'Projected values data is not available at the moment.'
+        const placeholderY = height - TABLE.topFromTop - 200
+        const placeholderX = TABLE.x + TABLE.width / 2
+        drawCenteredText(page, placeholderText, placeholderX, placeholderY, {
+          size: 24,
+          font: fonts.regular,
+          color: COLORS.black,
+        })
       }
 
       drawProjectedValuesTableFromTop(page, {
@@ -1962,11 +2021,13 @@ export async function generateQuotePdf(data: IllustrationData) {
       // -------------------------------------------------------
       // Fake dynamic data (replace later with real data)
       // -------------------------------------------------------
+      console.log('brocheureLink', data.page4?.brocheureLink)
       const page6Data = {
         customerName: safeLatin(data.formData?.name || '-'),
         gender: safeLatin(data.meta?.gender?.displayName || '-'), // or 'Female'
-        brochureUrl:
-          'https://shantalife.com/api/media/file/Child%20Education%20Security%20Plan-compressed-1.pdf', // QR will point here
+        // brochureUrl:
+        //   'https://shantalife.com/api/media/file/Child%20Education%20Security%20Plan-compressed-1.pdf', // QR will point here
+        brochureUrl: data.page4?.brocheureLink === null ? '' : data.page4?.brocheureLink || '',
       }
 
       const salutation = page6Data.gender.toLowerCase().startsWith('f') ? 'MS' : 'MR'
@@ -2004,22 +2065,24 @@ export async function generateQuotePdf(data: IllustrationData) {
       }
 
       // Generate QR PNG dynamically (best way)
-      const qrPng = await QRCode.toBuffer(page6Data.brochureUrl, {
-        type: 'png',
-        width: 300, // generate larger then we scale down => sharper
-        margin: 1,
-        errorCorrectionLevel: 'M',
-      })
+      if (data.page4?.brocheureLink) {
+        const qrPng = await QRCode.toBuffer(page6Data.brochureUrl, {
+          type: 'png',
+          width: 300, // generate larger then we scale down => sharper
+          margin: 1,
+          errorCorrectionLevel: 'M',
+        })
 
-      const qrImg = await pdfDoc.embedPng(qrPng)
+        const qrImg = await pdfDoc.embedPng(qrPng)
 
-      const qrY = height - QR.yTopFromTop - QR.h
-      page.drawImage(qrImg, {
-        x: QR.x,
-        y: qrY,
-        width: QR.w,
-        height: QR.h,
-      })
+        const qrY = height - QR.yTopFromTop - QR.h
+        page.drawImage(qrImg, {
+          x: QR.x,
+          y: qrY,
+          width: QR.w,
+          height: QR.h,
+        })
+      }
 
       // ------------------------------
       // Page 6: Bottom Contact Block
