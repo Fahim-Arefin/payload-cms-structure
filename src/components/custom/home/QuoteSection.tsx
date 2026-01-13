@@ -745,10 +745,10 @@ function QuoteSection({ data, footerData }: Props) {
     setPremiumBreakdownByMode(map)
   }, [apiResponse, ciSelection, isAccidentSelected])
 
-  console.log('formData inside parent', formData)
-  console.log('quoteMeta', quoteMeta)
-  console.log('apiResponse', apiResponse)
-  console.log('premiumBreakdownByMode', premiumBreakdownByMode)
+  // console.log('formData inside parent', formData)
+  // console.log('quoteMeta', quoteMeta)
+  // console.log('apiResponse', apiResponse)
+  // console.log('premiumBreakdownByMode', premiumBreakdownByMode)
 
   return (
     // mb-12 md:mb-24 lg:mb-32 xl:mb-[150px]
