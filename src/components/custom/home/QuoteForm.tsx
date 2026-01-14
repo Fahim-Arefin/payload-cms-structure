@@ -1137,7 +1137,8 @@ function QuoteForm({
         </label>
         <Input
           id="phoneNumber"
-          type="tel"
+          // type="tel"
+          type="number"
           placeholder={L('Phone Number', 'ফোন নম্বর')}
           value={formData.phoneNumber}
           onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
