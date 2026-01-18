@@ -5,6 +5,8 @@ import path from 'node:path'
 import QRCode from 'qrcode'
 import { GlobalFooter } from '@/payload-types'
 import { PDFName, PDFArray, PDFString } from 'pdf-lib'
+// import { format } from 'date-fns/format'
+import { format } from 'date-fns'
 
 function safeLatin(text: any) {
   return String(text ?? '').replace(/[^\x20-\x7E]/g, '')
@@ -20,7 +22,7 @@ type Fonts = {
 async function loadFontOrFallback(pdfDoc: PDFDocument, filePath: string, fallback: PDFFont) {
   try {
     const bytes = await fs.readFile(filePath)
-    return await pdfDoc.embedFont(bytes, { subset: true })
+    return await pdfDoc.embedFont(bytes, { subset: false })
   } catch {
     return fallback
   }
@@ -323,16 +325,6 @@ function formatDDMMYYYY(d = new Date()) {
   return `${dd}/${mm}/${yyyy}`
 }
 
-function formatDOB_DDMMYYYY(dob: Date | string | number) {
-  const d = dob instanceof Date ? dob : new Date(dob)
-  if (Number.isNaN(d.getTime())) return '' // invalid date
-
-  const dd = String(d.getDate()).padStart(2, '0')
-  const mm = String(d.getMonth() + 1).padStart(2, '0')
-  const yyyy = String(d.getFullYear())
-  return `${dd}-${mm}-${yyyy}`
-}
-
 function drawFakeBoldText(
   page: any,
   text: string,
@@ -578,7 +570,7 @@ function drawProjectedValuesTableFromTop(
   const colW = colPerc.map((p) => width * p)
 
   const headers = [
-    'Year',
+    'End Of\nYear',
     'Annual\nPremium',
     'Death\nbenefit',
     'Surrender\nValue',
@@ -614,9 +606,9 @@ function drawProjectedValuesTableFromTop(
         colW[c],
         headerH,
         fonts.bold,
-        20,
+        18,
         C.headerText,
-        0.85, // <- boldness (tweak 0.8 ~ 1.2)
+        0.8, // <- boldness (tweak 0.8 ~ 1.2)
       )
 
       cx += colW[c]
@@ -1168,18 +1160,23 @@ export async function generateQuotePdf(data: IllustrationData) {
   }
 
   const baseDir = path.join(process.cwd(), 'public', 'pdf-templates')
-  const bgPaths = [
-    'page-1.png',
-    'page-2.png',
-    'page-3.png',
-    'page-4.png',
-    'page-5.png',
-    'page-6.png',
-  ].map((p) => path.join(baseDir, p))
+  // const bgPaths = [
+  //   'page-1.png',
+  //   'page-2.png',
+  //   'page-3.png',
+  //   'page-4.png',
+  //   'page-5.png',
+  //   'page-6.png',
+  // ].map((p) => path.join(baseDir, p))
+  const bgPaths = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg'].map((p) =>
+    path.join(baseDir, p),
+  )
+
   const bgs = await Promise.all(bgPaths.map((p) => fs.readFile(p)))
 
   for (let i = 0; i < 6; i++) {
-    const img = await pdfDoc.embedPng(bgs[i])
+    // const img = await pdfDoc.embedPng(bgs[i])
+    const img = await pdfDoc.embedJpg(bgs[i])
     const { width, height } = img.scale(1)
 
     const page = pdfDoc.addPage([width, height])
@@ -1260,7 +1257,7 @@ export async function generateQuotePdf(data: IllustrationData) {
       const values = [
         safeLatin(data.formData?.name || '-'), // 0 Proposed Insured Name
         safeLatin(data.formData?.name || '-'), // 1 Proposed Policy Owner Name
-        `${data.formData?.Age || '-'} / ${formatDOB_DDMMYYYY(data.formData?.dateOfBirth) || '-'}`, // 2 Age / DOB
+        `${data.formData?.Age || '-'} / ${format(new Date(data?.formData.dateOfBirth), 'dd-MM-yyyy') || '-'}`, // 2 Age / DOB
         safeLatin(data.meta?.gender?.displayName || '-'), // 3 Gender
         safeLatin(data.meta?.plan?.displayName || data.meta?.plan?.name || '-'), // 4 Product Name (WRAP ONLY THIS)
         safeLatin(formatBDT(data.formData?.SumAssured)), // 5 Sum Assured
@@ -2021,7 +2018,7 @@ export async function generateQuotePdf(data: IllustrationData) {
       // -------------------------------------------------------
       // Fake dynamic data (replace later with real data)
       // -------------------------------------------------------
-      console.log('brocheureLink', data.page4?.brocheureLink)
+      // console.log('brocheureLink', data.page4?.brocheureLink)
       const page6Data = {
         customerName: safeLatin(data.formData?.name || '-'),
         gender: safeLatin(data.meta?.gender?.displayName || '-'), // or 'Female'
@@ -2084,9 +2081,42 @@ export async function generateQuotePdf(data: IllustrationData) {
         })
       }
 
-      // ------------------------------
-      // Page 6: Bottom Contact Block
-      // ------------------------------
+      // -------------------------------------------------------
+      // ✅ Dynamic plan line (olive paragraph) - Page 6
+      // Put this AFTER QR draw block and BEFORE bottom contact block
+      // -------------------------------------------------------
+      {
+        const planName = safeLatin(data?.meta?.plan?.displayName || data?.meta?.plan?.name || '-')
+
+        // full sentence (wrap if needed)
+        const sentence = `This illustration was prepared to help you understand the potential value of the "${planName}".`
+
+        // ✅ coordinates tuned to your template (FROM TOP)
+        // adjust ONLY these if needed
+        const PLAN_LINE = {
+          x: 115, // left margin similar to other text
+          topFromTop: 650, // 🔥 this matches the paragraph area in your image
+          maxW: 1180, // wrap width
+          size: 32, // similar to template paragraph size
+          color: hexToRgb01('#989433'), // olive like template
+          lineHeight: 45,
+        }
+
+        drawWrappedFromTop(
+          page,
+          sentence,
+          PLAN_LINE.x,
+          PLAN_LINE.topFromTop,
+          PLAN_LINE.maxW,
+          height,
+          {
+            font: fonts.regular,
+            size: PLAN_LINE.size,
+            color: PLAN_LINE.color,
+            lineHeight: PLAN_LINE.lineHeight,
+          },
+        )
+      }
 
       // ------------------------------
       // Page 6: Bottom Contact Block
@@ -2104,7 +2134,7 @@ export async function generateQuotePdf(data: IllustrationData) {
       const telDigits = phoneRaw.replace(/[^\d+]/g, '') // keep + and digits
       const telHref = telDigits ? `tel:${telDigits}` : undefined
       const mailHref = emailRaw ? `mailto:${emailRaw}` : undefined
-      const siteHref = 'https://shantalife.com/'
+      const siteHref = 'https://shantalife.com'
 
       // positions (tune only topFromTop if needed)
       const CONTACT = {
@@ -2182,7 +2212,7 @@ export async function generateQuotePdf(data: IllustrationData) {
         x: CONTACT.x,
         y: yWeb,
         label: 'Website : ',
-        value: 'Shanta Life',
+        value: 'https://shantalife.com',
         font: fonts.regular,
         size: CONTACT.bodySize,
         labelColor: BLACK,

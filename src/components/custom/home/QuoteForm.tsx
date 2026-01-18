@@ -432,7 +432,7 @@ function QuoteForm({
       setSelectedPlan(null)
       setAvailableTenures([])
       // ✅ reset extracted meta
-      onMetaReset?.()
+      // onMetaReset?.()
       onMetaChange?.({ lang: lang as 'en' | 'bn' })
     } else {
       setAvailablePlans([])
