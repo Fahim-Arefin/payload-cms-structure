@@ -75,6 +75,22 @@ const PLAN_LABELS: Record<string, { en: string; bn: string }> = {
     en: 'Shanta Child Education Plan Single Payment (3%)',
     bn: 'চাইল্ড এডুকেশন সিঙ্গেল পেমেন্ট (৩%)',
   },
+  'Shanta Single Premium Endowment': {
+    en: 'Shanta Single Premium Endowment',
+    bn: 'শান্তা সিঙ্গেল প্রিমিয়াম এনডাওমেন্ট',
+  },
+  'Shanta Depositor’s Protection Plan - Signature': {
+    en: 'Shanta Depositor’s Protection Plan - Signature',
+    bn: 'শান্তা ডিপোজিটরস প্রোটেকশন প্ল্যান - সিগনেচার',
+  },
+  'Shanta Depositor’s Protection Plan - Elite': {
+    en: 'Shanta Depositor’s Protection Plan - Elite',
+    bn: 'শান্তা ডিপোজিটরস প্রোটেকশন প্ল্যান - এলিট',
+  },
+  'Shanta Depositor’s Protection Plan - Prime': {
+    en: 'Shanta Depositor’s Protection Plan - Prime',
+    bn: 'শান্তা ডিপোজিটরস প্রোটেকশন প্ল্যান - প্রাইম',
+  },
 }
 // API → canonical EN
 const API_PLAN_NAME_MAP: Record<string, string> = {
@@ -90,6 +106,11 @@ const API_PLAN_NAME_MAP: Record<string, string> = {
     'Shanta Child Education Plan Single Payment (2%)',
   'Shanta Child Education Plan Single Payment (3%)':
     'Shanta Child Education Plan Single Payment (3%)',
+  'Shanta Single Premium Endowment': 'Shanta Single Premium Endowment',
+  'Shanta Depositor’s Protection Plan - Signature':
+    'Shanta Depositor’s Protection Plan - Signature',
+  'Shanta Depositor’s Protection Plan - Elite': 'Shanta Depositor’s Protection Plan - Elite',
+  'Shanta Depositor’s Protection Plan - Prime': 'Shanta Depositor’s Protection Plan - Prime',
 }
 const planLabel = (name: string, lang: 'en' | 'bn') => PLAN_LABELS[name]?.[lang] ?? name
 
@@ -145,7 +166,10 @@ interface QuoteFormProps {
   // ✅ new
   onMetaChange?: (patch: Partial<QuoteMeta>) => void
   onMetaReset?: () => void
+  setIsPlanChanged: React.Dispatch<React.SetStateAction<boolean>>
   setShowApiResponse: React.Dispatch<React.SetStateAction<boolean>>
+  error: string | null
+  setError: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 function QuoteForm({
@@ -156,6 +180,9 @@ function QuoteForm({
   onMetaChange,
   onMetaReset,
   setShowApiResponse,
+  setIsPlanChanged,
+  error,
+  setError,
 }: QuoteFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [isHoveringPlanSelect, setIsHoveringPlanSelect] = useState(false)
@@ -176,11 +203,23 @@ function QuoteForm({
   //   email: '',
   // })
 
+  const [openChildGroup, setOpenChildGroup] = useState(false)
+  const [openDepositorGroup, setOpenDepositorGroup] = useState(false)
+
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)') // sm breakpoint
+    const onChange = () => setIsMobile(mq.matches)
+    onChange()
+    mq.addEventListener?.('change', onChange)
+    return () => mq.removeEventListener?.('change', onChange)
+  }, [])
+
   const lang = useSSRLanguage()
   const L = (en: string, bn: string) => (lang === 'en' ? en : bn)
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  // const [error, setError] = useState<string | null>(null)
 
   const [availableTenures, setAvailableTenures] = useState<{ text: string; value: number }[]>([])
   const [isLoadingTenures, setIsLoadingTenures] = useState(false)
@@ -220,11 +259,25 @@ function QuoteForm({
   const [childEducationVariants, setChildEducationVariants] = useState<
     { plan_name: string; plan_code: number }[]
   >([])
+
+  // NEW: depositor variants (Signature/Elite/Prime)
+  const [depositorVariants, setDepositorVariants] = useState<
+    { plan_name: string; plan_code: number }[]
+  >([])
+
   const [planMenuOpen, setPlanMenuOpen] = useState(false)
+  // const isPlanDisabled =
+  //   isLoadingPlans ||
+  //   !formData.Age ||
+  //   (availablePlans.length === 0 && childEducationVariants.length === 0)
+
   const isPlanDisabled =
     isLoadingPlans ||
     !formData.Age ||
-    (availablePlans.length === 0 && childEducationVariants.length === 0)
+    (availablePlans.length === 0 &&
+      childEducationVariants.length === 0 &&
+      depositorVariants.length === 0)
+
   const planDisabledMsg = !formData.Age
     ? L('Enter age first', 'আগে বয়স লিখুন')
     : isLoadingPlans
@@ -323,16 +376,45 @@ function QuoteForm({
         const childPlans = normalized.filter((p: any) =>
           p.plan_name.includes('Shanta Child Education Plan'),
         )
+
+        const depositorPlans = normalized.filter((p: any) =>
+          p.plan_name.includes('Shanta Depositor’s Protection Plan'),
+        )
+
+        // const otherPlans = normalized.filter(
+        //   (p: any) => !p.plan_name.includes('Shanta Child Education Plan'),
+        // )
+
         const otherPlans = normalized.filter(
-          (p: any) => !p.plan_name.includes('Shanta Child Education Plan'),
+          (p: any) =>
+            !p.plan_name.includes('Shanta Child Education Plan') &&
+            !p.plan_name.includes('Shanta Depositor’s Protection Plan'),
         )
 
         setChildEducationVariants(childPlans)
+        setDepositorVariants(depositorPlans)
 
+        // const groupedPlans = [
+        //   ...otherPlans,
+        //   ...(childPlans.length > 0
+        //     ? [{ plan_name: 'Shanta Child Education Plan', plan_code: 0, isGroup: true as const }]
+        //     : []),
+        // ]
         const groupedPlans = [
           ...otherPlans,
+
           ...(childPlans.length > 0
             ? [{ plan_name: 'Shanta Child Education Plan', plan_code: 0, isGroup: true as const }]
+            : []),
+
+          ...(depositorPlans.length > 0
+            ? [
+                {
+                  plan_name: 'Shanta Depositor’s Protection Plan',
+                  plan_code: 0,
+                  isDepositorGroup: true as const,
+                },
+              ]
             : []),
         ]
 
@@ -340,11 +422,13 @@ function QuoteForm({
       } else {
         setAvailablePlans([])
         setChildEducationVariants([])
+        setDepositorVariants([])
       }
     } catch (err) {
       setPlanError(err instanceof Error ? err.message : 'Failed to fetch plans')
       setAvailablePlans([])
       setChildEducationVariants([])
+      setDepositorVariants([])
     } finally {
       setIsLoadingPlans(false)
     }
@@ -434,6 +518,8 @@ function QuoteForm({
       // ✅ reset extracted meta
       // onMetaReset?.()
       onMetaChange?.({ lang: lang as 'en' | 'bn' })
+      setOpenChildGroup(false)
+      setOpenDepositorGroup(false)
     } else {
       setAvailablePlans([])
       setChildEducationVariants([])
@@ -446,6 +532,8 @@ function QuoteForm({
       fetchTenureOptions(formData.PlanCode, formData.Age)
       setFormData((prev) => ({ ...prev, Term: 0, PaymentMode: 0 }))
       setCurrentPaymentMode('')
+      setOpenChildGroup(false)
+      setOpenDepositorGroup(false)
     } else {
       setAvailablePaymentModes([])
       setIsLoadingPaymentModes(false)
@@ -477,6 +565,7 @@ function QuoteForm({
         setApiResponse(data[0])
         onApiResponse?.(data[0], currentPaymentMode)
         setShowApiResponse(true)
+        setIsPlanChanged(false)
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
@@ -716,18 +805,35 @@ function QuoteForm({
                 {(() => {
                   const regular = availablePlans.filter(
                     (p: any) =>
-                      p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup,
+                      p.plan_name !== 'Shanta Child Education Plan' &&
+                      !(p as any).isGroup &&
+                      p.plan_name !== 'Shanta Depositor’s Protection Plan' &&
+                      !(p as any).isDepositorGroup,
                   )
+
                   const pickedRegular = regular.find((p) => p.plan_code === formData.PlanCode)
+
                   const pickedChild = childEducationVariants.find(
                     (p) => p.plan_code === formData.PlanCode,
                   )
-                  const raw = pickedRegular?.plan_name ?? pickedChild?.plan_name ?? ''
+                  // const raw = pickedRegular?.plan_name ?? pickedChild?.plan_name ?? ''
+                  const pickedDepositor = depositorVariants.find(
+                    (p) => p.plan_code === formData.PlanCode,
+                  )
+                  const raw =
+                    pickedRegular?.plan_name ??
+                    pickedChild?.plan_name ??
+                    pickedDepositor?.plan_name ??
+                    ''
 
                   if (raw) return planLabel(raw, lang as 'en' | 'bn')
                   if (isLoadingPlans) return 'Loading plans...'
                   if (!formData.Age) return L('Enter age to load plans', 'প্ল্যান দেখতে বয়স দিন')
-                  if (availablePlans.length === 0 && childEducationVariants.length === 0)
+                  if (
+                    availablePlans.length === 0 &&
+                    childEducationVariants.length === 0 &&
+                    depositorVariants.length === 0
+                  )
                     return 'No plans available'
                   return L('Select Plan', 'প্ল্যান নির্বাচন করুন')
                 })()}
@@ -753,8 +859,13 @@ function QuoteForm({
               {/* Regular plans (localized label) */}
               {availablePlans
                 .filter(
-                  (p: any) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup,
+                  (p: any) =>
+                    p.plan_name !== 'Shanta Child Education Plan' &&
+                    !(p as any).isGroup &&
+                    p.plan_name !== 'Shanta Depositor’s Protection Plan' &&
+                    !(p as any).isDepositorGroup,
                 )
+
                 .map((plan) => {
                   const selected = formData.PlanCode === plan.plan_code
                   const label = planLabel(plan.plan_name, lang as 'en' | 'bn')
@@ -803,7 +914,11 @@ function QuoteForm({
               {!isLoadingPlans &&
                 formData.Age &&
                 availablePlans.filter(
-                  (p: any) => p.plan_name !== 'Shanta Child Education Plan' && !(p as any).isGroup,
+                  (p: any) =>
+                    p.plan_name !== 'Shanta Child Education Plan' &&
+                    !(p as any).isGroup &&
+                    p.plan_name !== 'Shanta Depositor’s Protection Plan' &&
+                    !(p as any).isDepositorGroup,
                 ).length === 0 && (
                   <DropdownMenuItem disabled className="px-3 py-2">
                     No regular plans available
@@ -811,7 +926,7 @@ function QuoteForm({
                 )}
 
               {/* Child Education submenu (localized titles + items) */}
-              {childEducationVariants.length > 0 && (
+              {/* {childEducationVariants.length > 0 && (
                 <>
                   <DropdownMenuSeparator />
                   <DropdownMenuSub>
@@ -875,6 +990,395 @@ function QuoteForm({
                       })}
                     </DropdownMenuSubContent>
                   </DropdownMenuSub>
+                </>
+              )} */}
+              {/* Child Education group */}
+              {childEducationVariants.length > 0 && (
+                <>
+                  <DropdownMenuSeparator />
+
+                  {isMobile ? (
+                    <>
+                      {/* Mobile: open BELOW, inside same menu */}
+                      <DropdownMenuItem
+                        onSelect={(e) => {
+                          e.preventDefault() // keep dropdown open
+                          setOpenChildGroup((v) => !v)
+                        }}
+                        className="px-3 py-2 cursor-pointer flex items-center justify-between"
+                      >
+                        <span>
+                          {planLabel(
+                            'Shanta Child Education Plan (3%)',
+                            lang as 'en' | 'bn',
+                          ).replace(/\s*\(৩%\)|\s*\(3%\)/, '')}
+                        </span>
+                        <span className="text-xs opacity-70">{openChildGroup ? '▲' : '▼'}</span>
+                      </DropdownMenuItem>
+
+                      {openChildGroup && (
+                        <div className="py-1">
+                          {childEducationVariants.map((variant) => {
+                            const selected = formData.PlanCode === variant.plan_code
+                            const label = planLabel(variant.plan_name, lang as 'en' | 'bn')
+
+                            return (
+                              <DropdownMenuItem
+                                key={variant.plan_code}
+                                onClick={() => {
+                                  const planWithVideo = {
+                                    ...variant,
+                                    videoLink:
+                                      videoLinkMappings[
+                                        variant.plan_name as keyof typeof videoLinkMappings
+                                      ],
+                                  }
+                                  setSelectedPlan(planWithVideo)
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    PlanCode: variant.plan_code,
+                                    Term: 0,
+                                    PaymentMode: 0,
+                                  }))
+
+                                  onMetaChange?.({
+                                    lang: lang as 'en' | 'bn',
+                                    plan: {
+                                      code: variant.plan_code,
+                                      name: variant.plan_name,
+                                      displayName: planLabel(
+                                        variant.plan_name,
+                                        lang as 'en' | 'bn',
+                                      ),
+                                    },
+                                    term: undefined,
+                                    payment: undefined,
+                                  })
+
+                                  setAvailableTenures([])
+                                  setAvailablePaymentModes([])
+                                  setFieldErrors(
+                                    (prev) => ({ ...prev, PlanCode: false, Term: false }) as any,
+                                  )
+                                }}
+                                className={`px-3 py-2 cursor-pointer flex items-center gap-2 pl-6 ${
+                                  selected ? 'bg-accent text-accent-foreground' : ''
+                                }`}
+                              >
+                                <Check
+                                  className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`}
+                                />
+                                <span className="truncate">{label}</span>
+                              </DropdownMenuItem>
+                            )
+                          })}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {/* Desktop: keep your submenu */}
+                      <DropdownMenuSub>
+                        <DropdownMenuSubTrigger className="px-3 py-2 cursor-pointer flex items-center justify-between">
+                          <span>
+                            {planLabel(
+                              'Shanta Child Education Plan (3%)',
+                              lang as 'en' | 'bn',
+                            ).replace(/\s*\(৩%\)|\s*\(3%\)/, '')}
+                          </span>
+                        </DropdownMenuSubTrigger>
+
+                        <DropdownMenuSubContent className="z-[1100] min-w-[280px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden">
+                          {childEducationVariants.map((variant) => {
+                            const selected = formData.PlanCode === variant.plan_code
+                            const label = planLabel(variant.plan_name, lang as 'en' | 'bn')
+
+                            return (
+                              <DropdownMenuItem
+                                key={variant.plan_code}
+                                onClick={() => {
+                                  const planWithVideo = {
+                                    ...variant,
+                                    videoLink:
+                                      videoLinkMappings[
+                                        variant.plan_name as keyof typeof videoLinkMappings
+                                      ],
+                                  }
+                                  setSelectedPlan(planWithVideo)
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    PlanCode: variant.plan_code,
+                                    Term: 0,
+                                    PaymentMode: 0,
+                                  }))
+
+                                  onMetaChange?.({
+                                    lang: lang as 'en' | 'bn',
+                                    plan: {
+                                      code: variant.plan_code,
+                                      name: variant.plan_name,
+                                      displayName: planLabel(
+                                        variant.plan_name,
+                                        lang as 'en' | 'bn',
+                                      ),
+                                    },
+                                    term: undefined,
+                                    payment: undefined,
+                                  })
+
+                                  setAvailableTenures([])
+                                  setAvailablePaymentModes([])
+                                  setFieldErrors(
+                                    (prev) => ({ ...prev, PlanCode: false, Term: false }) as any,
+                                  )
+                                }}
+                                className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${
+                                  selected ? 'bg-accent text-accent-foreground' : ''
+                                }`}
+                              >
+                                <Check
+                                  className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`}
+                                />
+                                <span className="truncate">{label}</span>
+                              </DropdownMenuItem>
+                            )
+                          })}
+                        </DropdownMenuSubContent>
+                      </DropdownMenuSub>
+                    </>
+                  )}
+                </>
+              )}
+
+              {/* Depositor submenu */}
+              {/* {depositorVariants.length > 0 && (
+                <>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuSub>
+                    <DropdownMenuSubTrigger className="px-3 py-2 cursor-pointer flex items-center justify-between">
+                      <span>
+                        {planLabel(
+                          'Shanta Depositor’s Protection Plan - Signature',
+                          lang as 'en' | 'bn',
+                        ).replace(/\s*-\s*Signature|\s*-\s*Elite|\s*-\s*Prime/g, '')}
+                      </span>
+                    </DropdownMenuSubTrigger>
+
+                    <DropdownMenuSubContent className="z-[1100] min-w-[280px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden">
+                      {depositorVariants.map((variant) => {
+                        const selected = formData.PlanCode === variant.plan_code
+                        const label = planLabel(variant.plan_name, lang as 'en' | 'bn')
+
+                        return (
+                          <DropdownMenuItem
+                            key={variant.plan_code}
+                            onClick={() => {
+                              const planWithVideo = {
+                                ...variant,
+                                videoLink:
+                                  videoLinkMappings[
+                                    variant.plan_name as keyof typeof videoLinkMappings
+                                  ],
+                              }
+
+                              setSelectedPlan(planWithVideo)
+                              setFormData((prev) => ({
+                                ...prev,
+                                PlanCode: variant.plan_code,
+                                Term: 0,
+                                PaymentMode: 0,
+                              }))
+
+                              onMetaChange?.({
+                                lang: lang as 'en' | 'bn',
+                                plan: {
+                                  code: variant.plan_code,
+                                  name: variant.plan_name,
+                                  displayName: planLabel(variant.plan_name, lang as 'en' | 'bn'),
+                                },
+                                term: undefined,
+                                payment: undefined,
+                              })
+
+                              setAvailableTenures([])
+                              setAvailablePaymentModes([])
+                              setFieldErrors(
+                                (prev) => ({ ...prev, PlanCode: false, Term: false }) as any,
+                              )
+                            }}
+                            className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${
+                              selected ? 'bg-accent text-accent-foreground' : ''
+                            }`}
+                          >
+                            <Check
+                              className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`}
+                            />
+                            <span className="truncate">{label}</span>
+                          </DropdownMenuItem>
+                        )
+                      })}
+                    </DropdownMenuSubContent>
+                  </DropdownMenuSub>
+                </>
+              )} */}
+
+              {/* Depositor group */}
+              {depositorVariants.length > 0 && (
+                <>
+                  <DropdownMenuSeparator />
+
+                  {isMobile ? (
+                    <>
+                      {/* Mobile: open BELOW, inside same menu */}
+                      <DropdownMenuItem
+                        onSelect={(e) => {
+                          e.preventDefault() // keep dropdown open
+                          setOpenDepositorGroup((v) => !v)
+                        }}
+                        className="px-3 py-2 cursor-pointer flex items-center justify-between"
+                      >
+                        <span>
+                          {planLabel(
+                            'Shanta Depositor’s Protection Plan - Signature',
+                            lang as 'en' | 'bn',
+                          ).replace(/\s*-\s*Signature|\s*-\s*Elite|\s*-\s*Prime/g, '')}
+                        </span>
+                        <span className="text-xs opacity-70">{openDepositorGroup ? '▲' : '▼'}</span>
+                      </DropdownMenuItem>
+
+                      {openDepositorGroup && (
+                        <div className="py-1">
+                          {depositorVariants.map((variant) => {
+                            const selected = formData.PlanCode === variant.plan_code
+                            const label = planLabel(variant.plan_name, lang as 'en' | 'bn')
+
+                            return (
+                              <DropdownMenuItem
+                                key={variant.plan_code}
+                                onClick={() => {
+                                  const planWithVideo = {
+                                    ...variant,
+                                    videoLink:
+                                      videoLinkMappings[
+                                        variant.plan_name as keyof typeof videoLinkMappings
+                                      ],
+                                  }
+
+                                  setSelectedPlan(planWithVideo)
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    PlanCode: variant.plan_code,
+                                    Term: 0,
+                                    PaymentMode: 0,
+                                  }))
+
+                                  onMetaChange?.({
+                                    lang: lang as 'en' | 'bn',
+                                    plan: {
+                                      code: variant.plan_code,
+                                      name: variant.plan_name,
+                                      displayName: planLabel(
+                                        variant.plan_name,
+                                        lang as 'en' | 'bn',
+                                      ),
+                                    },
+                                    term: undefined,
+                                    payment: undefined,
+                                  })
+
+                                  setAvailableTenures([])
+                                  setAvailablePaymentModes([])
+                                  setFieldErrors(
+                                    (prev) => ({ ...prev, PlanCode: false, Term: false }) as any,
+                                  )
+                                }}
+                                className={`px-3 py-2 cursor-pointer flex items-center gap-2 pl-6 ${
+                                  selected ? 'bg-accent text-accent-foreground' : ''
+                                }`}
+                              >
+                                <Check
+                                  className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`}
+                                />
+                                <span className="truncate">{label}</span>
+                              </DropdownMenuItem>
+                            )
+                          })}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {/* Desktop: keep your submenu */}
+                      <DropdownMenuSub>
+                        <DropdownMenuSubTrigger className="px-3 py-2 cursor-pointer flex items-center justify-between">
+                          <span>
+                            {planLabel(
+                              'Shanta Depositor’s Protection Plan - Signature',
+                              lang as 'en' | 'bn',
+                            ).replace(/\s*-\s*Signature|\s*-\s*Elite|\s*-\s*Prime/g, '')}
+                          </span>
+                        </DropdownMenuSubTrigger>
+
+                        <DropdownMenuSubContent className="z-[1100] min-w-[280px] rounded-md border bg-popover text-popover-foreground shadow-md p-0 overflow-hidden">
+                          {depositorVariants.map((variant) => {
+                            const selected = formData.PlanCode === variant.plan_code
+                            const label = planLabel(variant.plan_name, lang as 'en' | 'bn')
+
+                            return (
+                              <DropdownMenuItem
+                                key={variant.plan_code}
+                                onClick={() => {
+                                  const planWithVideo = {
+                                    ...variant,
+                                    videoLink:
+                                      videoLinkMappings[
+                                        variant.plan_name as keyof typeof videoLinkMappings
+                                      ],
+                                  }
+
+                                  setSelectedPlan(planWithVideo)
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    PlanCode: variant.plan_code,
+                                    Term: 0,
+                                    PaymentMode: 0,
+                                  }))
+
+                                  onMetaChange?.({
+                                    lang: lang as 'en' | 'bn',
+                                    plan: {
+                                      code: variant.plan_code,
+                                      name: variant.plan_name,
+                                      displayName: planLabel(
+                                        variant.plan_name,
+                                        lang as 'en' | 'bn',
+                                      ),
+                                    },
+                                    term: undefined,
+                                    payment: undefined,
+                                  })
+
+                                  setAvailableTenures([])
+                                  setAvailablePaymentModes([])
+                                  setFieldErrors(
+                                    (prev) => ({ ...prev, PlanCode: false, Term: false }) as any,
+                                  )
+                                }}
+                                className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${
+                                  selected ? 'bg-accent text-accent-foreground' : ''
+                                }`}
+                              >
+                                <Check
+                                  className={`h-4 w-4 ${selected ? 'opacity-100' : 'opacity-0'}`}
+                                />
+                                <span className="truncate">{label}</span>
+                              </DropdownMenuItem>
+                            )
+                          })}
+                        </DropdownMenuSubContent>
+                      </DropdownMenuSub>
+                    </>
+                  )}
                 </>
               )}
 
@@ -1110,7 +1614,14 @@ function QuoteForm({
           id="sumAssured"
           min={100000}
           type="number"
-          placeholder={L('Sum Assured *', 'বীমা অঙ্ক *')}
+          placeholder={
+            formData?.PlanCode === 14 ||
+            formData?.PlanCode === 15 ||
+            formData?.PlanCode === 16 ||
+            formData?.PlanCode === 17
+              ? L('Premium *', 'প্রিমিয়াম *')
+              : L('Sum Assured *', 'বীমা অঙ্ক *')
+          }
           value={formData.SumAssured || ''}
           onChange={(e) => handleInputChange('SumAssured', parseInt(e.target.value) || 0)}
           className={`!text-[12px] md:!text-[14px] 2xl:!text-[16px]
