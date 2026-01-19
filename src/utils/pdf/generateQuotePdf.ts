@@ -539,6 +539,26 @@ function drawHeaderMultiline(
   }
 }
 
+function formatDOBInDhaka(dob: any) {
+  if (!dob) return '-'
+  const d = new Date(dob)
+  if (isNaN(d.getTime())) return '-'
+
+  // Force Asia/Dhaka so server/local behave the same
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Dhaka',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }).formatToParts(d)
+
+  const dd = parts.find((p) => p.type === 'day')?.value
+  const mm = parts.find((p) => p.type === 'month')?.value
+  const yyyy = parts.find((p) => p.type === 'year')?.value
+
+  return dd && mm && yyyy ? `${dd}-${mm}-${yyyy}` : '-'
+}
+
 function drawProjectedValuesTableFromTop(
   page: any,
   args: {
@@ -1253,11 +1273,10 @@ export async function generateQuotePdf(data: IllustrationData) {
       const rowCentersImg = [
         322.0, 388.0, 456.5, 535.5, 618.5, 697.0, 772.5, 853.0, 925.0, 992.5, 1072.0,
       ]
-
       const values = [
         safeLatin(data.formData?.name || '-'), // 0 Proposed Insured Name
         safeLatin(data.formData?.name || '-'), // 1 Proposed Policy Owner Name
-        `${data.formData?.Age || '-'} / ${format(new Date(data?.formData.dateOfBirth), 'dd-MM-yyyy') || '-'}`, // 2 Age / DOB
+        `${data.formData?.Age || '-'} / ${formatDOBInDhaka(data?.formData.dateOfBirth) || '-'}`, // 2 Age / DOB
         safeLatin(data.meta?.gender?.displayName || '-'), // 3 Gender
         safeLatin(data.meta?.plan?.displayName || data.meta?.plan?.name || '-'), // 4 Product Name (WRAP ONLY THIS)
         safeLatin(formatBDT(data.formData?.SumAssured)), // 5 Sum Assured
