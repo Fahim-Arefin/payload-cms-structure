@@ -166,7 +166,10 @@ interface QuoteFormProps {
   // ✅ new
   onMetaChange?: (patch: Partial<QuoteMeta>) => void
   onMetaReset?: () => void
+  setIsPlanChanged: React.Dispatch<React.SetStateAction<boolean>>
   setShowApiResponse: React.Dispatch<React.SetStateAction<boolean>>
+  error: string | null
+  setError: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 function QuoteForm({
@@ -177,6 +180,9 @@ function QuoteForm({
   onMetaChange,
   onMetaReset,
   setShowApiResponse,
+  setIsPlanChanged,
+  error,
+  setError,
 }: QuoteFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [isHoveringPlanSelect, setIsHoveringPlanSelect] = useState(false)
@@ -213,7 +219,7 @@ function QuoteForm({
   const L = (en: string, bn: string) => (lang === 'en' ? en : bn)
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  // const [error, setError] = useState<string | null>(null)
 
   const [availableTenures, setAvailableTenures] = useState<{ text: string; value: number }[]>([])
   const [isLoadingTenures, setIsLoadingTenures] = useState(false)
@@ -559,6 +565,7 @@ function QuoteForm({
         setApiResponse(data[0])
         onApiResponse?.(data[0], currentPaymentMode)
         setShowApiResponse(true)
+        setIsPlanChanged(false)
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')

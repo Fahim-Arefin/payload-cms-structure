@@ -585,8 +585,9 @@ function QuoteSection({ data, footerData }: Props) {
   const [premiumBreakdownByMode, setPremiumBreakdownByMode] = useState<PremiumBreakdownMap | null>(
     null,
   )
-
+  const [error, setError] = useState<string | null>(null)
   const [showApiResponse, setShowApiResponse] = useState<boolean>(false)
+  const [isPlanChanged, setIsPlanChanged] = useState<boolean>(false)
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null)
   const [confirmedPaymentMode, setConfirmedPaymentMode] = useState<string>('')
   const [ciSelection, setCiSelection] = useState<'ci19' | 'ci25' | null>(null)
@@ -729,6 +730,10 @@ function QuoteSection({ data, footerData }: Props) {
   }, [formData])
 
   useEffect(() => {
+    setIsPlanChanged(true)
+  }, [formData.PlanCode])
+
+  useEffect(() => {
     if (!apiResponse) {
       setPremiumBreakdownByMode(null)
       return
@@ -801,7 +806,7 @@ function QuoteSection({ data, footerData }: Props) {
             </p>
           </div>
           {/* Info Container - Show on all screens when API response is available */}
-          {apiResponse && (
+          {!error && apiResponse && !isPlanChanged && (
             <div className="bg-[#FFFFFFCC] rounded-b-lg border-t-2 border-[#FF6600] py-2">
               <h2
                 className="text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-normal mb-6 p-2
@@ -1078,12 +1083,12 @@ function QuoteSection({ data, footerData }: Props) {
                   formData?.PlanCode === 17) &&
                   showApiResponse && (
                     <div className="bg-[#F6EDDD] px-2 md:px-4 lg:px-1 py-1.5 lg:py-1 xl:px-4 xl:py-1.5 w-full 2xl:w-[80%] mx-auto rounded-full flex justify-center items-center space-x-2">
-                      <div className="text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-medium">
+                      <div className="text-[14px] lg:text-[16px] xl:text-[16px] 2xl:text-[18px] font-medium">
                         <div className="flex space-x-3">
                           <div className="text-[#434342]">Sum Assured: </div>
                           <div className="text-[#FF6600]">
                             {' '}
-                            ৳{' '}
+                            <span>৳</span>{' '}
                             {Math.ceil(
                               apiResponse?.dps_or_single_payment_sum_assured,
                             ).toLocaleString()}
@@ -1095,6 +1100,15 @@ function QuoteSection({ data, footerData }: Props) {
               </div>
             </div>
           )}
+
+          {error && (
+            <div className="bg-[#FFEDED] border border-[#FFB8B8] rounded-lg p-4">
+              <p className="text-[#D8000C] text-center font-medium">
+                {error || apiResponse?.message || 'No Result Found'}
+              </p>
+            </div>
+          )}
+
           {/* Calculate Again Button - Only show on mobile when results are available */}
           {apiResponse && (
             <div className="flex justify-center items-center lg:hidden ">
@@ -1115,8 +1129,11 @@ function QuoteSection({ data, footerData }: Props) {
             onApiResponse={handleApiResponse}
             payloadData={data}
             setShowApiResponse={setShowApiResponse}
+            setIsPlanChanged={setIsPlanChanged}
             onMetaChange={(patch) => setQuoteMeta((prev) => mergeQuoteMeta(prev, patch))} // ✅ ADD THIS
             onMetaReset={() => setQuoteMeta({})} // ✅ keep/reset meta here
+            error={error}
+            setError={setError}
           />
         </div>
       </div>
