@@ -19,6 +19,7 @@ export interface ApiResponse {
   ci_premium_quarterly_25: number
   ci_premium_monthly_25: number
   ci_premium_single_25: number
+  dps_or_single_payment_sum_assured: number
   life_rate: number
   accident_rate: number
   ci_rate: number

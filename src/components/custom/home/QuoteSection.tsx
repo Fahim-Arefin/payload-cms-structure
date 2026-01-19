@@ -745,9 +745,9 @@ function QuoteSection({ data, footerData }: Props) {
     setPremiumBreakdownByMode(map)
   }, [apiResponse, ciSelection, isAccidentSelected])
 
-  // console.log('formData inside parent', formData)
+  console.log('formData inside parent', formData)
   // console.log('quoteMeta', quoteMeta)
-  // console.log('apiResponse', apiResponse)
+  console.log('apiResponse', apiResponse)
   // console.log('premiumBreakdownByMode', premiumBreakdownByMode)
 
   return (
@@ -938,11 +938,15 @@ function QuoteSection({ data, footerData }: Props) {
                 <div className="p-6 py-8 bg-gradient-to-br from-[#ED7125]/10 to-[#ED7125]/20 rounded-lg border border-[#ED7125]/30 mx-4">
                   <div className="text-center">
                     <div className="text-[#ED7125] text-[18px] lg:text-[24px] xl:text-[28px] font-bold mb-3">
-                      Single Payment
+                      {formData?.PlanCode === 14 ? 'Sum Assured' : 'Single Payment'}
                     </div>
                     <div className="text-[#ED7125] text-[24px] lg:text-[32px] xl:text-[36px] 2xl:text-[40px] font-bold">
                       <AnimatedCounter
-                        value={Math.ceil(getTotalPremiumWithCoverage('Single'))}
+                        value={
+                          formData?.PlanCode === 14
+                            ? Math.ceil(apiResponse?.dps_or_single_payment_sum_assured)
+                            : Math.ceil(getTotalPremiumWithCoverage('Single'))
+                        }
                         prefix="৳"
                         showAnimation={true}
                         duration={800}
@@ -1068,6 +1072,26 @@ function QuoteSection({ data, footerData }: Props) {
                     </div>
                   </div>
                 )}
+
+                {(formData?.PlanCode === 15 ||
+                  formData?.PlanCode === 16 ||
+                  formData?.PlanCode === 17) &&
+                  showApiResponse && (
+                    <div className="bg-[#F6EDDD] px-2 md:px-4 lg:px-1 py-1.5 lg:py-1 xl:px-4 xl:py-1.5 w-full 2xl:w-[80%] mx-auto rounded-full flex justify-center items-center space-x-2">
+                      <div className="text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-medium">
+                        <div className="flex space-x-3">
+                          <div className="text-[#434342]">Sum Assured: </div>
+                          <div className="text-[#FF6600]">
+                            {' '}
+                            ৳{' '}
+                            {Math.ceil(
+                              apiResponse?.dps_or_single_payment_sum_assured,
+                            ).toLocaleString()}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
               </div>
             </div>
           )}
