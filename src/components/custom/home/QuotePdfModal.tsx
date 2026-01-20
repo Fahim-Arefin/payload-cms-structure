@@ -453,7 +453,12 @@ export default function QuotePdfModal({ open, onOpenChange, requestBody }: Props
         fd.append('phone', String(requestBody.formData?.phoneNumber))
       fd.append('file', pdfBlob, 'quote-illustration.pdf') // must be "file"
 
-      const res = await fetch('/api/emails/quote', {
+      const endpoint =
+        process.env.NEXT_PUBLIC_EMAIL_PROVIDER === 'outlook'
+          ? '/api/emails/quote-outlook'
+          : '/api/emails/quote'
+
+      const res = await fetch(endpoint, {
         method: 'POST',
         body: fd,
       })
