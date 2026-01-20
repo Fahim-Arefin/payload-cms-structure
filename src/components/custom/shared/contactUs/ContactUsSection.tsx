@@ -648,7 +648,12 @@ function ContactUsSection({ data, block }: Props) {
     setSendButtonText('Sending...')
     console.log({ firstName, lastName, email, phone, message })
 
-    await fetch('/api/emails/ask-us', {
+    const endpoint =
+  process.env.NEXT_PUBLIC_EMAIL_PROVIDER === 'outlook'
+    ? '/api/emails/ask-us-outlook'
+    : '/api/emails/ask-us'
+
+    await fetch(endpoint, {
       method: 'POST',
       // credentials: 'include',
       headers: {

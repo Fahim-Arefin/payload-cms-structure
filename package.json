@@ -17,6 +17,7 @@
     "sastart": "cross-env NODE_OPTIONS=--no-deprecation node .next/standalone/server.js"
   },
   "dependencies": {
+    "@azure/msal-node": "^5.0.2",
     "@lottiefiles/dotlottie-react": "^0.14.4",
     "@next/third-parties": "^15.5.3",
     "@payloadcms/db-mongodb": "3.33.0",
