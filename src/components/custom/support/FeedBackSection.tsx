@@ -85,6 +85,11 @@ function FeedBackSection({ block }: Props) {
         ? t('Feedback Sent', 'ফিডব্যাক পাঠানো হয়েছে')
         : t('Send Feedback', 'সেন্ড ফিডব্যাক')
 
+  const endpoint =
+    process.env.NEXT_PUBLIC_EMAIL_PROVIDER === 'outlook'
+      ? '/api/emails/feedback-outlook'
+      : '/api/emails/feedback'
+
   const sendFeedbackHandler = async () => {
     if (!name || !email || !phone || !address || !feedback) {
       setRequiredError(true)
@@ -93,7 +98,7 @@ function FeedBackSection({ block }: Props) {
     }
     setSendButtonText('Sending...')
     try {
-      await fetch('/api/emails/feedback', {
+      await fetch(endpoint, {
         method: 'POST',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
