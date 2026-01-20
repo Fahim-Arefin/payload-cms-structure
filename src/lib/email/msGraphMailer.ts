@@ -1,5 +1,11 @@
 import { ConfidentialClientApplication } from '@azure/msal-node'
 
+type GraphAttachment = {
+  filename: string
+  contentBase64: string
+  contentType?: string
+}
+
 type SendViaGraphInput = {
   subject: string
   html?: string
@@ -9,6 +15,7 @@ type SendViaGraphInput = {
   bcc?: string[]
   replyTo?: string
   saveToSentItems?: boolean
+  attachments?: GraphAttachment[] // ✅ NEW
 }
 
 const msalClient = new ConfidentialClientApplication({
@@ -51,8 +58,16 @@ export async function sendEmailViaMsGraph(input: SendViaGraphInput) {
       toRecipients: mapRecipients(input.to),
       ...(input.cc?.length ? { ccRecipients: mapRecipients(input.cc) } : {}),
       ...(input.bcc?.length ? { bccRecipients: mapRecipients(input.bcc) } : {}),
-      ...(input.replyTo
-        ? { replyTo: [{ emailAddress: { address: input.replyTo } }] }
+      ...(input.replyTo ? { replyTo: [{ emailAddress: { address: input.replyTo } }] } : {}),
+      ...(input.attachments?.length
+        ? {
+            attachments: input.attachments.map((a) => ({
+              '@odata.type': '#microsoft.graph.fileAttachment',
+              name: a.filename,
+              contentType: a.contentType || 'application/octet-stream',
+              contentBytes: a.contentBase64,
+            })),
+          }
         : {}),
     },
     saveToSentItems: input.saveToSentItems ?? true,
@@ -67,7 +82,7 @@ export async function sendEmailViaMsGraph(input: SendViaGraphInput) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
-    }
+    },
   )
 
   if (!res.ok) {
