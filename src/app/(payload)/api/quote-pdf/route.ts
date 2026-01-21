@@ -105,6 +105,7 @@ type ProductFeatureRow = {
   maturity_benefit?: string | null
   death_benefit?: string | null
   brocheure_link?: string | null
+  note?: string | null
 }
 
 export type Page4Data = {
@@ -113,6 +114,7 @@ export type Page4Data = {
   importantTerms: string[]
   maturityBenefit: string[]
   deathBenefit: string[]
+  note?: string[]
   brocheureLink: string | null
 }
 
@@ -122,6 +124,7 @@ const emptyPage4 = (): Page4Data => ({
   importantTerms: [],
   maturityBenefit: [],
   deathBenefit: [],
+  note: [],
   brocheureLink: null,
 })
 
@@ -147,6 +150,7 @@ async function fetchPlanFeatures(planCode: number): Promise<Page4Data> {
       importantTerms: cleanStrings(rows?.map((r) => r?.td)),
       maturityBenefit: cleanStrings(rows?.map((r) => r?.maturity_benefit)),
       deathBenefit: cleanStrings(rows?.map((r) => r?.death_benefit)),
+      note: cleanStrings(rows?.map((r) => r?.note)),
       brocheureLink: rows?.find((r) => r?.brocheure_link)?.brocheure_link || null,
     }
   } catch {

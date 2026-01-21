@@ -510,6 +510,7 @@ import { PremiumCalculatorBlockType } from '@/types/payloadCustomTypes'
 import LocalizedString from '../shared/LocalizedString'
 import QuotePdfModal from './QuotePdfModal'
 import { GlobalFooter } from '@/payload-types'
+import AgentVerifyModal from './AgentVerifyModal'
 
 type Props = {
   data: PremiumCalculatorBlockType
@@ -594,10 +595,11 @@ function QuoteSection({ data, footerData }: Props) {
   const [isAccidentSelected, setIsAccidentSelected] = useState<boolean>(false)
   const resultRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLDivElement>(null)
+  const [pdfOpen, setPdfOpen] = useState(false)
+  const [verifyOpen, setVerifyOpen] = useState(false)
+
   const brandCheckbox =
     'w-4 h-4 md:w-5 md:h-5 rounded-sm border-[#ED7125] data-[state=checked]:bg-[#ED7125] data-[state=checked]:border-[#ED7125] focus-visible:ring-0 focus-visible:ring-offset-0'
-
-  const [pdfOpen, setPdfOpen] = useState(false)
 
   const pdfRequestBody = apiResponse
     ? {
@@ -750,10 +752,11 @@ function QuoteSection({ data, footerData }: Props) {
     setPremiumBreakdownByMode(map)
   }, [apiResponse, ciSelection, isAccidentSelected])
 
-  console.log('formData inside parent', formData)
+  // console.log('formData inside parent', formData)
   // console.log('quoteMeta', quoteMeta)
   // console.log('apiResponse', apiResponse)
   // console.log('premiumBreakdownByMode', premiumBreakdownByMode)
+  // console.log('premiumBreakdown', premiumBreakdownByMode?.[confirmedPaymentMode])
 
   return (
     // mb-12 md:mb-24 lg:mb-32 xl:mb-[150px]
@@ -1098,6 +1101,39 @@ function QuoteSection({ data, footerData }: Props) {
                     </div>
                   )}
               </div>
+
+              {/* modal btn */}
+              {apiResponse &&
+                showApiResponse &&
+                (formData?.PlanCode === 6 ||
+                  formData?.PlanCode === 8 ||
+                  formData?.PlanCode === 9 ||
+                  formData?.PlanCode === 10) && (
+                  <div className="flex justify-center items-center mb-2">
+                    <GlobalButton
+                      variant="secondary"
+                      size="extraSmall"
+                      // onClick={() => setPdfOpen(true)}
+                      onClick={() => setVerifyOpen(true)}
+                    >
+                      <LocalizedString en="Get A Quote Now" bn="আপনার প্রিমিয়াম ক্যালকুলেট করুন" />
+                    </GlobalButton>
+
+                    <AgentVerifyModal
+                      open={verifyOpen}
+                      onOpenChange={setVerifyOpen}
+                      onVerified={() => setPdfOpen(true)} // 🔥 THIS LINE OPENS PDF ONLY AFTER SUCCESS
+                    />
+
+                    {pdfRequestBody && (
+                      <QuotePdfModal
+                        open={pdfOpen}
+                        onOpenChange={setPdfOpen}
+                        requestBody={pdfRequestBody}
+                      />
+                    )}
+                  </div>
+                )}
             </div>
           )}
 
@@ -1137,27 +1173,6 @@ function QuoteSection({ data, footerData }: Props) {
           />
         </div>
       </div>
-
-      {apiResponse &&
-        showApiResponse &&
-        (formData?.PlanCode === 6 ||
-          formData?.PlanCode === 8 ||
-          formData?.PlanCode === 9 ||
-          formData?.PlanCode === 10) && (
-          <div className="flex justify-center items-center mt-4">
-            <GlobalButton variant="outline" onClick={() => setPdfOpen(true)}>
-              <LocalizedString en="Get A Quote Now" bn="আপনার প্রিমিয়াম ক্যালকুলেট করুন" />
-            </GlobalButton>
-
-            {pdfRequestBody && (
-              <QuotePdfModal
-                open={pdfOpen}
-                onOpenChange={setPdfOpen}
-                requestBody={pdfRequestBody}
-              />
-            )}
-          </div>
-        )}
 
       {/* bg image */}
       {/* left rotate image */}

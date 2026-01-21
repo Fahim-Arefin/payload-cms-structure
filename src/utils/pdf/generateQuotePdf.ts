@@ -57,6 +57,7 @@ export type IllustrationData = {
     importantTerms?: string[]
     maturityBenefit?: string[]
     deathBenefit?: string[]
+    note?: string[]
     brocheureLink?: string | null
   }
   surrenderPaidup?: SurrenderPaidUpType[]
@@ -758,7 +759,13 @@ function makeFakeProjectedRows(
   annualValue: number,
 ): ProjectedRow[] {
   // simple fake numbers (you can swap format later)
-  const fmt = (n: number) => `BDT ${n.toLocaleString('en-US')}`
+  const fmt = (n: number) => {
+    if (n !== 0) {
+      return `BDT ${Math.ceil(n).toLocaleString('en-US')}`
+    } else {
+      return `-`
+    }
+  }
 
   const rows: ProjectedRow[] = []
   for (let i = 0; i < data?.length; i++) {
@@ -766,7 +773,7 @@ function makeFakeProjectedRows(
     const annual = Math.ceil(annualValue)
     const death = sumAssured
     const surrender = data[i]?.surrender_amount
-    const maturity = sumAssured
+    const maturity = i === data?.length - 1 ? sumAssured : 0
     const paidup = data[i]?.reduced_paid_up_benefit
 
     rows.push({
@@ -1138,6 +1145,69 @@ function generateDeathBenefitAmount(planCode: number, amount: number): number {
   return 0
 }
 
+function drawNumberedListFromTop(
+  page: any,
+  height: number,
+  items: string[],
+  args: {
+    x: number
+    topFromTop: number
+    maxW: number
+    font: PDFFont
+    size: number
+    color: ReturnType<typeof rgb>
+    lineHeight?: number
+    itemGap?: number
+    indent?: number // fallback indent for wrapped lines
+  },
+) {
+  const lineH = args.lineHeight ?? args.size * 1.35
+  const gap = args.itemGap ?? args.size * 0.35
+
+  let t = args.topFromTop
+
+  for (const rawItem of items) {
+    const raw = safeLatin(rawItem ?? '').trim()
+    if (!raw) continue
+
+    // ✅ detect "1." / "2)" / "3," etc.
+    const m = raw.match(/^(\d+[\.\),])\s*(.*)$/)
+    const prefix = m ? m[1] + ' ' : ''
+    const body = m ? m[2] : raw
+
+    // measure prefix width, so wrapped lines align after it
+    const prefixW = args.font.widthOfTextAtSize(prefix, args.size)
+    const hangingX = args.x + (prefixW || args.indent || 18)
+    const firstLineMaxW = Math.max(1, args.maxW - (prefixW || args.indent || 18))
+    const nextLineMaxW = Math.max(1, args.maxW - (prefixW || args.indent || 18))
+
+    // wrap body (not including prefix)
+    const lines = wrapByWidth(body, args.font, args.size, firstLineMaxW)
+
+    // first line: draw prefix + first body line
+    drawTextFromTop(page, height, prefix + (lines[0] ?? ''), args.x, t, {
+      font: args.font,
+      size: args.size,
+      color: args.color,
+    })
+    t += lineH
+
+    // continuation lines aligned after prefix
+    for (let i = 1; i < lines.length; i++) {
+      drawTextFromTop(page, height, lines[i], hangingX, t, {
+        font: args.font,
+        size: args.size,
+        color: args.color,
+      })
+      t += lineH
+    }
+
+    t += gap
+  }
+
+  return t
+}
+
 export async function generateQuotePdf(data: IllustrationData) {
   const pdfDoc = await PDFDocument.create()
   pdfDoc.registerFontkit(fontkit)
@@ -1160,6 +1230,7 @@ export async function generateQuotePdf(data: IllustrationData) {
     gray: rgb(0.35, 0.35, 0.35),
     white: rgb(1, 1, 1),
     brown: rgb(129 / 255, 87 / 255, 62 / 255), // #81573e ✅
+    ink: hexToRgb01('#8B2D2D'),
   }
 
   // Unified draw helper (choose font + color per call)
@@ -1977,7 +2048,7 @@ export async function generateQuotePdf(data: IllustrationData) {
       let rows: ProjectedRow[] = []
       let value: number = 0
 
-      const totalValue = data.premiumBreakdown?.totalPremium
+      const totalValue = data.premiumBreakdown?.basicPremium
       const paymentId = data.meta?.payment?.id
 
       if (paymentId === 1) {
@@ -2030,6 +2101,47 @@ export async function generateQuotePdf(data: IllustrationData) {
         rows,
         fonts,
       })
+
+      // -------------------------------------------------------
+      // ✅ NOTE block (below table, bottom-left) - Page 5
+      // -------------------------------------------------------
+      {
+        const noteItems: string[] = data.page4?.note ?? []
+
+        if (noteItems.length > 0) {
+          const NOTE = {
+            x: 160, // aligns with table left
+            topFromTop: 1680, // ✅ tuned for the screenshot (adjust if needed)
+            maxW: 1100, // note block width (left side)
+            titleSize: 26,
+            bodySize: 22,
+            color: COLORS.black, // same ink color
+            lineHeight: 26,
+          }
+
+          // "Note:" title
+          drawTextFromTop(page, height, 'Note:', NOTE.x, NOTE.topFromTop, {
+            font: fonts.bold,
+            size: NOTE.titleSize,
+            color: COLORS.ink,
+          })
+
+          // list starts under title
+          const listTop = NOTE.topFromTop + 32
+
+          drawNumberedListFromTop(page, height, noteItems, {
+            x: NOTE.x,
+            topFromTop: listTop,
+            maxW: NOTE.maxW,
+            font: fonts.regular,
+            size: NOTE.bodySize,
+            color: NOTE.color,
+            lineHeight: NOTE.lineHeight,
+            itemGap: 6,
+            indent: 26,
+          })
+        }
+      }
     }
 
     // -------- Page 6: QR code generation and other data --------
