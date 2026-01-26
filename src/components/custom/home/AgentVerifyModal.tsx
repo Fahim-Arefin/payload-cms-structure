@@ -166,7 +166,7 @@ export default function AgentVerifyModal({ open, onOpenChange, onVerified }: Pro
             <Input
               value={agentCode}
               onChange={(e) => setAgentCode(e.target.value)}
-              placeholder="Agent code (e.g. 1110101004)"
+              placeholder="Agent code"
               inputMode="numeric"
             />
 
