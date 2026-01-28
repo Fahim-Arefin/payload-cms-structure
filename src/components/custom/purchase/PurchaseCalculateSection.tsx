@@ -13,6 +13,11 @@ type PurchaseCalculateSectionProps = {
   apiResponse: any
   scrollSignal?: number
   onCalculateAgain?: () => void
+
+  ciSelection: 'ci19' | 'ci25' | null
+  setCiSelection: React.Dispatch<React.SetStateAction<'ci19' | 'ci25' | null>>
+  isAccidentSelected: boolean
+  setIsAccidentSelected: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
@@ -21,9 +26,11 @@ const PurchaseCalculateSection: FC<PurchaseCalculateSectionProps> = ({
   apiResponse,
   scrollSignal,
   onCalculateAgain,
+  ciSelection,
+  setCiSelection,
+  isAccidentSelected,
+  setIsAccidentSelected,
 }) => {
-  const [ciSelection, setCiSelection] = useState<'ci19' | 'ci25' | null>(null)
-  const [isAccidentSelected, setIsAccidentSelected] = useState<boolean>(false)
   const sectionRef = useRef<HTMLDivElement>(null)
   const brandCheckbox =
     'w-4 h-4 md:w-5 md:h-5 rounded-sm border-[#ED7125] data-[state=checked]:bg-[#ED7125] data-[state=checked]:border-[#ED7125] focus-visible:ring-0 focus-visible:ring-offset-0'
