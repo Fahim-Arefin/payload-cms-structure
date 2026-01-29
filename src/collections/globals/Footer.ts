@@ -797,6 +797,7 @@ import type { GlobalConfig } from 'payload'
 import {
   GLOBAL_FOOTER_SLUG_AND_TAG,
   HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG,
+  PREM_CALC_PAGE_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { bnNum } from '@/lib/utils'
 import { revalidateTag } from 'next/cache'
@@ -1585,6 +1586,7 @@ const Footer: GlobalConfig = {
       async () => {
         revalidateTag(globalTag(GLOBAL_FOOTER_SLUG_AND_TAG))
         revalidateTag(HOME_PAGE_PREMIUM_CALCULATOR_SLUG_AND_TAG)
+        revalidateTag(PREM_CALC_PAGE_SLUG_AND_TAG)
       },
     ],
   },

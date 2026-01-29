@@ -22,7 +22,7 @@ async function PremiumCalculatorBlock({ block }: Props) {
 
   return (
     <div style={{ backgroundColor: block?.backgroundColor || '' }}>
-      <QuoteSection data={block} footerData={footer} />
+      <QuoteSection data={block} footerData={footer} homepage />
     </div>
   )
 }
