@@ -759,9 +759,16 @@ function makeFakeProjectedRows(
   annualValue: number,
 ): ProjectedRow[] {
   // simple fake numbers (you can swap format later)
+  // const fmt = (n: number) => {
+  //   if (n !== 0) {
+  //     return `BDT ${Math.ceil(n).toLocaleString('en-US')}`
+  //   } else {
+  //     return `-`
+  //   }
+  // }
   const fmt = (n: number) => {
     if (n !== 0) {
-      return `BDT ${Math.ceil(n).toLocaleString('en-US')}`
+      return `BDT ${Math.ceil(n).toLocaleString('en-IN')}`
     } else {
       return `-`
     }
@@ -788,6 +795,18 @@ function makeFakeProjectedRows(
   return rows
 }
 
+// function formatBDT(value: any) {
+//   const n =
+//     typeof value === 'number'
+//       ? value
+//       : typeof value === 'string'
+//         ? Number(String(value).replace(/[^\d.-]/g, ''))
+//         : NaN
+
+//   if (!Number.isFinite(n)) return '-'
+//   return `BDT ${Math.ceil(n).toLocaleString('en-US')}`
+// }
+
 function formatBDT(value: any) {
   const n =
     typeof value === 'number'
@@ -797,7 +816,7 @@ function formatBDT(value: any) {
         : NaN
 
   if (!Number.isFinite(n)) return '-'
-  return `BDT ${Math.ceil(n).toLocaleString('en-US')}`
+  return `BDT ${Math.ceil(n).toLocaleString('en-IN')}`
 }
 
 function drawCellTextFakeBold(
@@ -1208,6 +1227,37 @@ function drawNumberedListFromTop(
   return t
 }
 
+function formatNumberIN(value: any) {
+  const n =
+    typeof value === 'number'
+      ? value
+      : typeof value === 'string'
+        ? Number(String(value).replace(/[^\d.-]/g, ''))
+        : NaN
+
+  if (!Number.isFinite(n)) return '-'
+  return Math.ceil(n).toLocaleString('en-IN')
+}
+
+/**
+ * Returns:
+ * - "BDT -" if dashIfZero && value is 0/invalid
+ * - "BDT 1,23,456" otherwise
+ */
+function formatBDTIN(value: any, dashIfZero = true) {
+  const n =
+    typeof value === 'number'
+      ? value
+      : typeof value === 'string'
+        ? Number(String(value).replace(/[^\d.-]/g, ''))
+        : NaN
+
+  if (!Number.isFinite(n)) return dashIfZero ? 'BDT -' : 'BDT 0'
+  if (dashIfZero && Math.ceil(n) === 0) return 'BDT -'
+
+  return `BDT ${Math.ceil(n).toLocaleString('en-IN')}`
+}
+
 export async function generateQuotePdf(data: IllustrationData) {
   const pdfDoc = await PDFDocument.create()
   pdfDoc.registerFontkit(fontkit)
@@ -1521,17 +1571,30 @@ export async function generateQuotePdf(data: IllustrationData) {
       // console.log('deathBenefit', deathBenefit)
 
       // 0..2 rows
+
+      const deathBenefitAmount =
+        generateDeathBenefitAmount(
+          data?.meta?.plan?.code || 0,
+          Number(data?.formData?.SumAssured) || 0,
+        ) === 0
+          ? '-'
+          : generateDeathBenefitAmount(
+              data?.meta?.plan?.code || 0,
+              Number(data?.formData?.SumAssured) || 0,
+            )
+
       const baseProductCoverageRows: Array<{ type: string; description: string; amount: string }> =
         [
           {
             type: 'Death Benefit',
             description: `${deathBenefit.join(' ') || 'No Description Available'}`,
-            amount: `BDT ${generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0) === 0 ? '-' : generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0)}`,
+            // amount: `BDT ${generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0) === 0 ? '-' : generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0)}`,
+            amount: formatBDTIN(deathBenefitAmount, true),
           },
           {
             type: 'Maturity Benefit',
             description: `${maturityBenefit.join(' ') || 'No Description Available'}`,
-            amount: `BDT ${data?.formData?.SumAssured || '-'}`,
+            amount: `BDT ${formatBDTIN(data?.formData?.SumAssured || '-', true)}`,
           },
         ].slice(0, 2)
 
@@ -1588,8 +1651,10 @@ export async function generateQuotePdf(data: IllustrationData) {
           arr.push({
             name: `${ridersFromAPI?.find((r: any) => r.rider_code === rider?.key)?.rider_name || '-'}`,
             description: `${ridersFromAPI?.find((r: any) => r.rider_code === rider?.key)?.rider_description || '-'}`,
-            coverageAmount: `BDT ${generateCoverageAmount(rider.key || '-')}`,
-            premium: `BDT ${Math.ceil(rider.amount)}`,
+            // coverageAmount: `BDT ${generateCoverageAmount(rider.key || '-')}`,
+            // premium: `BDT ${Math.ceil(rider.amount)}`,
+            coverageAmount: formatBDTIN(generateCoverageAmount(rider.key || '-'), true),
+            premium: formatBDTIN(rider.amount, true),
           })
         }
         return arr
@@ -1934,7 +1999,7 @@ export async function generateQuotePdf(data: IllustrationData) {
 
       // ✅ Additional Features (orange)
       if (additionalFeatureItems?.length > 0) {
-        drawSemiBoldFromTop('Additional Features:', L.x, cursorTop, L.subTitleSize, C.orange)
+        drawSemiBoldFromTop('Additional Features', L.x, cursorTop, L.subTitleSize, C.orange)
       }
       cursorTop += L.subTitleSize + 10
 
@@ -2145,16 +2210,271 @@ export async function generateQuotePdf(data: IllustrationData) {
     }
 
     // -------- Page 6: QR code generation and other data --------
+    // if (i === 5) {
+    //   // -------------------------------------------------------
+    //   // Fake dynamic data (replace later with real data)
+    //   // -------------------------------------------------------
+    //   // console.log('brocheureLink', data.page4?.brocheureLink)
+    //   const page6Data = {
+    //     customerName: safeLatin(data.formData?.name || '-'),
+    //     gender: safeLatin(data.meta?.gender?.displayName || '-'), // or 'Female'
+    //     // brochureUrl:
+    //     //   'https://shantalife.com/api/media/file/Child%20Education%20Security%20Plan-compressed-1.pdf', // QR will point here
+    //     brochureUrl: data.page4?.brocheureLink === null ? '' : data.page4?.brocheureLink || '',
+    //   }
+
+    //   const salutation = page6Data.gender.toLowerCase().startsWith('f') ? 'MS' : 'MR'
+    //   const nameText = safeLatin(`${salutation} ${page6Data.customerName}`)
+
+    //   // -------------------------------------------------------
+    //   // Coordinates measured from page-6_old.png
+    //   // Image size is ~1415 x 2000 (same as your template PNG)
+    //   // We use "from TOP" coordinates then convert to PDF coords.
+    //   // -------------------------------------------------------
+
+    //   // --- Name (top-left) ---
+    //   const NAME = {
+    //     x: 154, // left
+    //     yBottomFromTop: 316, // bottom of text bbox (from top)
+    //     fontSize: 28,
+    //     color: hexToRgb01('#989433'), // sampled from old image (olive)
+    //   }
+
+    //   const nameY = height - NAME.yBottomFromTop - NAME.fontSize * 0.25
+    //   drawFakeBoldText(page, nameText, NAME.x, nameY, {
+    //     size: NAME.fontSize,
+    //     font: fonts.regular, // heavy
+    //     color: NAME.color,
+    //     strength: 0.5, // increase if you want even bolder
+    //   })
+
+    //   // --- QR (top-right) ---
+    //   // bbox from old image roughly: x=1029..1256, y=243..472
+    //   const QR = {
+    //     x: 1029,
+    //     yTopFromTop: 243,
+    //     w: 227,
+    //     h: 229,
+    //   }
+
+    //   // Generate QR PNG dynamically (best way)
+    //   if (data.page4?.brocheureLink) {
+    //     const qrPng = await QRCode.toBuffer(page6Data.brochureUrl, {
+    //       type: 'png',
+    //       width: 300, // generate larger then we scale down => sharper
+    //       margin: 1,
+    //       errorCorrectionLevel: 'M',
+    //     })
+
+    //     const qrImg = await pdfDoc.embedPng(qrPng)
+
+    //     const qrY = height - QR.yTopFromTop - QR.h
+    //     page.drawImage(qrImg, {
+    //       x: QR.x,
+    //       y: qrY,
+    //       width: QR.w,
+    //       height: QR.h,
+    //     })
+    //   }
+
+    //   // -------------------------------------------------------
+    //   // ✅ Dynamic plan line (olive paragraph) - Page 6
+    //   // Put this AFTER QR draw block and BEFORE bottom contact block
+    //   // -------------------------------------------------------
+    //   {
+    //     const planName = safeLatin(data?.meta?.plan?.displayName || data?.meta?.plan?.name || '-')
+
+    //     // full sentence (wrap if needed)
+    //     const sentence = `This illustration was prepared to help you understand the potential value of the "${planName}".`
+
+    //     // ✅ coordinates tuned to your template (FROM TOP)
+    //     // adjust ONLY these if needed
+    //     const PLAN_LINE = {
+    //       x: 115, // left margin similar to other text
+    //       topFromTop: 650, // 🔥 this matches the paragraph area in your image
+    //       maxW: 1180, // wrap width
+    //       size: 32, // similar to template paragraph size
+    //       color: hexToRgb01('#989433'), // olive like template
+    //       lineHeight: 45,
+    //     }
+
+    //     drawWrappedFromTop(
+    //       page,
+    //       sentence,
+    //       PLAN_LINE.x,
+    //       PLAN_LINE.topFromTop,
+    //       PLAN_LINE.maxW,
+    //       height,
+    //       {
+    //         font: fonts.regular,
+    //         size: PLAN_LINE.size,
+    //         color: PLAN_LINE.color,
+    //         lineHeight: PLAN_LINE.lineHeight,
+    //       },
+    //     )
+    //   }
+
+    //   // ------------------------------
+    //   // Page 6: Bottom Contact Block
+    //   // ------------------------------
+
+    //   const OLIVE = hexToRgb01('#989433')
+    //   const ORANGE = hexToRgb01('#ff751f')
+    //   const BLACK = COLORS.black
+
+    //   const phoneRaw = safeLatin(data?.footerData?.branding?.phone || '')
+    //   const emailRaw = safeLatin(data?.footerData?.branding?.email || '')
+    //   const addressRaw = safeLatin(data?.footerData?.branding?.address || '')
+
+    //   // build links
+    //   const telDigits = phoneRaw.replace(/[^\d+]/g, '') // keep + and digits
+    //   const telHref = telDigits ? `tel:${telDigits}` : undefined
+    //   const mailHref = emailRaw ? `mailto:${emailRaw}` : undefined
+    //   const siteHref = 'https://shantalife.com'
+
+    //   // positions (tune only topFromTop if needed)
+    //   const CONTACT = {
+    //     x: 110,
+    //     topFromTop: 1250,
+    //     maxW: 1250, // ✅ width for wrapping
+    //     titleSize: 30,
+    //     bodySize: 28,
+    //     lineGap: 40,
+    //   }
+
+    //   // Title
+    //   drawWrappedFromTop(
+    //     page,
+    //     'For Any Clarifications, Please Contact :',
+    //     CONTACT.x,
+    //     CONTACT.topFromTop,
+    //     CONTACT.maxW,
+    //     height,
+    //     {
+    //       font: fonts.regular,
+    //       size: CONTACT.titleSize,
+    //       color: BLACK,
+    //       lineHeight: CONTACT.titleSize * 1.25,
+    //     },
+    //   )
+
+    //   // "Shanta Life Insurance PLC Customer Service"
+    //   const line1Y = height - (CONTACT.topFromTop + 60) - CONTACT.bodySize
+    //   drawTextSegments(page, CONTACT.x, line1Y, [
+    //     {
+    //       text: 'Shanta Life Insurance PLC ',
+    //       font: fonts.regular,
+    //       size: CONTACT.bodySize,
+    //       color: BLACK,
+    //     },
+    //     // { text: 'Customer Service', font: fonts.regular, size: CONTACT.bodySize, color: OLIVE },
+    //   ])
+
+    //   // Next lines base Y (pdf coords)
+    //   const baseTop = CONTACT.topFromTop + 110
+    //   const yPhone = height - baseTop - CONTACT.bodySize
+    //   const yEmail = yPhone - CONTACT.lineGap
+    //   const yWeb = yEmail - CONTACT.lineGap
+    //   const yAddr = yWeb - CONTACT.lineGap
+
+    //   // Phone: <olive value clickable>
+    //   drawLabelValueLine(pdfDoc, page, {
+    //     x: CONTACT.x,
+    //     y: yPhone,
+    //     label: 'Phone : ',
+    //     value: phoneRaw || '—',
+    //     font: fonts.regular,
+    //     size: CONTACT.bodySize,
+    //     labelColor: BLACK,
+    //     valueColor: OLIVE,
+    //     linkUrl: telHref,
+    //   })
+
+    //   // Email: <olive value clickable>
+    //   drawLabelValueLine(pdfDoc, page, {
+    //     x: CONTACT.x,
+    //     y: yEmail,
+    //     label: 'Email : ',
+    //     value: emailRaw || '—',
+    //     font: fonts.regular,
+    //     size: CONTACT.bodySize,
+    //     labelColor: BLACK,
+    //     valueColor: OLIVE,
+    //     linkUrl: mailHref,
+    //   })
+
+    //   // Website: Shanta Life (olive + clickable)
+    //   drawLabelValueLine(pdfDoc, page, {
+    //     x: CONTACT.x,
+    //     y: yWeb,
+    //     label: 'Website : ',
+    //     value: 'https://shantalife.com',
+    //     font: fonts.regular,
+    //     size: CONTACT.bodySize,
+    //     labelColor: BLACK,
+    //     valueColor: OLIVE,
+    //     linkUrl: siteHref,
+    //   })
+
+    //   /**
+    //    * ✅ Office Address: WRAP the VALUE to next line(s)
+    //    * - Label stays on first line
+    //    * - Value starts right after label, then continues on next lines aligned with value start
+    //    */
+    //   {
+    //     const label = 'Office Address : '
+    //     const value = addressRaw || '—'
+
+    //     const labelW = fonts.regular.widthOfTextAtSize(label, CONTACT.bodySize)
+    //     const valueX = CONTACT.x + labelW
+
+    //     // available width for the value portion on the first line
+    //     const firstLineMaxW = Math.max(1, CONTACT.maxW - labelW)
+
+    //     // wrap based on first-line available width
+    //     const lines = wrapByWidth(value, fonts.regular, CONTACT.bodySize, firstLineMaxW)
+
+    //     // draw label (black)
+    //     page.drawText(label, {
+    //       x: CONTACT.x,
+    //       y: yAddr,
+    //       size: CONTACT.bodySize,
+    //       font: fonts.regular,
+    //       color: BLACK,
+    //     })
+
+    //     // draw first line (olive) right after label
+    //     if (lines.length) {
+    //       page.drawText(lines[0], {
+    //         x: valueX,
+    //         y: yAddr,
+    //         size: CONTACT.bodySize,
+    //         font: fonts.regular,
+    //         color: OLIVE,
+    //       })
+    //     }
+
+    //     // draw remaining lines under the value start (same x as valueX)
+    //     let yy = yAddr - CONTACT.lineGap
+    //     for (let i = 1; i < lines.length; i++) {
+    //       page.drawText(lines[i], {
+    //         x: valueX,
+    //         y: yy,
+    //         size: CONTACT.bodySize,
+    //         font: fonts.regular,
+    //         color: OLIVE,
+    //       })
+    //       yy -= CONTACT.lineGap
+    //     }
+    //   }
+    // }
     if (i === 5) {
       // -------------------------------------------------------
       // Fake dynamic data (replace later with real data)
       // -------------------------------------------------------
-      // console.log('brocheureLink', data.page4?.brocheureLink)
       const page6Data = {
         customerName: safeLatin(data.formData?.name || '-'),
         gender: safeLatin(data.meta?.gender?.displayName || '-'), // or 'Female'
-        // brochureUrl:
-        //   'https://shantalife.com/api/media/file/Child%20Education%20Security%20Plan-compressed-1.pdf', // QR will point here
         brochureUrl: data.page4?.brocheureLink === null ? '' : data.page4?.brocheureLink || '',
       }
 
@@ -2254,7 +2574,6 @@ export async function generateQuotePdf(data: IllustrationData) {
       // ------------------------------
 
       const OLIVE = hexToRgb01('#989433')
-      const ORANGE = hexToRgb01('#ff751f')
       const BLACK = COLORS.black
 
       const phoneRaw = safeLatin(data?.footerData?.branding?.phone || '')
@@ -2302,7 +2621,7 @@ export async function generateQuotePdf(data: IllustrationData) {
           size: CONTACT.bodySize,
           color: BLACK,
         },
-        { text: 'Customer Service', font: fonts.regular, size: CONTACT.bodySize, color: OLIVE },
+        // { text: 'Customer Service', font: fonts.regular, size: CONTACT.bodySize, color: OLIVE },
       ])
 
       // Next lines base Y (pdf coords)
@@ -2312,64 +2631,93 @@ export async function generateQuotePdf(data: IllustrationData) {
       const yWeb = yEmail - CONTACT.lineGap
       const yAddr = yWeb - CONTACT.lineGap
 
-      // Phone: <olive value clickable>
-      drawLabelValueLine(pdfDoc, page, {
-        x: CONTACT.x,
+      // ✅ ":" column aligned to "Office Address :"
+      const COLON_X =
+        CONTACT.x + fonts.regular.widthOfTextAtSize('Office Address ', CONTACT.bodySize) // note trailing space
+      const COLON_AND_SPACE_W = fonts.regular.widthOfTextAtSize(': ', CONTACT.bodySize)
+      const valueX = COLON_X + COLON_AND_SPACE_W
+
+      const drawAlignedLabelValue = (args: {
+        y: number
+        label: string
+        value: string
+        linkUrl?: string
+      }) => {
+        const label = safeLatin(args.label)
+        const value = safeLatin(args.value)
+
+        // label
+        page.drawText(label, {
+          x: CONTACT.x,
+          y: args.y,
+          size: CONTACT.bodySize,
+          font: fonts.regular,
+          color: BLACK,
+        })
+
+        // ":" aligned
+        page.drawText(':', {
+          x: COLON_X,
+          y: args.y,
+          size: CONTACT.bodySize,
+          font: fonts.regular,
+          color: BLACK,
+        })
+
+        // value
+        page.drawText(value, {
+          x: valueX,
+          y: args.y,
+          size: CONTACT.bodySize,
+          font: fonts.regular,
+          color: OLIVE,
+        })
+
+        // clickable ONLY on value
+        if (args.linkUrl) {
+          const valueW = fonts.regular.widthOfTextAtSize(value, CONTACT.bodySize)
+          addLinkAnnotation(
+            pdfDoc,
+            page,
+            { x: valueX, y: args.y, w: valueW, h: CONTACT.bodySize * 1.2 },
+            args.linkUrl,
+          )
+        }
+      }
+
+      // Phone / Email / Website with aligned ":"
+      drawAlignedLabelValue({
         y: yPhone,
-        label: 'Phone : ',
+        label: 'Phone',
         value: phoneRaw || '—',
-        font: fonts.regular,
-        size: CONTACT.bodySize,
-        labelColor: BLACK,
-        valueColor: OLIVE,
         linkUrl: telHref,
       })
 
-      // Email: <olive value clickable>
-      drawLabelValueLine(pdfDoc, page, {
-        x: CONTACT.x,
+      drawAlignedLabelValue({
         y: yEmail,
-        label: 'Email : ',
+        label: 'Email',
         value: emailRaw || '—',
-        font: fonts.regular,
-        size: CONTACT.bodySize,
-        labelColor: BLACK,
-        valueColor: OLIVE,
         linkUrl: mailHref,
       })
 
-      // Website: Shanta Life (olive + clickable)
-      drawLabelValueLine(pdfDoc, page, {
-        x: CONTACT.x,
+      drawAlignedLabelValue({
         y: yWeb,
-        label: 'Website : ',
+        label: 'Website',
         value: 'https://shantalife.com',
-        font: fonts.regular,
-        size: CONTACT.bodySize,
-        labelColor: BLACK,
-        valueColor: OLIVE,
         linkUrl: siteHref,
       })
 
       /**
        * ✅ Office Address: WRAP the VALUE to next line(s)
        * - Label stays on first line
-       * - Value starts right after label, then continues on next lines aligned with value start
+       * - ":" aligned with Phone/Email/Website
+       * - Value starts at the same valueX and continues aligned
        */
       {
-        const label = 'Office Address : '
+        const label = 'Office Address'
         const value = addressRaw || '—'
 
-        const labelW = fonts.regular.widthOfTextAtSize(label, CONTACT.bodySize)
-        const valueX = CONTACT.x + labelW
-
-        // available width for the value portion on the first line
-        const firstLineMaxW = Math.max(1, CONTACT.maxW - labelW)
-
-        // wrap based on first-line available width
-        const lines = wrapByWidth(value, fonts.regular, CONTACT.bodySize, firstLineMaxW)
-
-        // draw label (black)
+        // draw label
         page.drawText(label, {
           x: CONTACT.x,
           y: yAddr,
@@ -2378,7 +2726,20 @@ export async function generateQuotePdf(data: IllustrationData) {
           color: BLACK,
         })
 
-        // draw first line (olive) right after label
+        // draw ":" aligned
+        page.drawText(':', {
+          x: COLON_X,
+          y: yAddr,
+          size: CONTACT.bodySize,
+          font: fonts.regular,
+          color: BLACK,
+        })
+
+        // wrap value within remaining width
+        const maxW = Math.max(1, CONTACT.maxW - (valueX - CONTACT.x))
+        const lines = wrapByWidth(value, fonts.regular, CONTACT.bodySize, maxW)
+
+        // first line
         if (lines.length) {
           page.drawText(lines[0], {
             x: valueX,
@@ -2389,7 +2750,7 @@ export async function generateQuotePdf(data: IllustrationData) {
           })
         }
 
-        // draw remaining lines under the value start (same x as valueX)
+        // remaining lines
         let yy = yAddr - CONTACT.lineGap
         for (let i = 1; i < lines.length; i++) {
           page.drawText(lines[i], {
