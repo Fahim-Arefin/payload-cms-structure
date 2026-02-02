@@ -149,14 +149,15 @@ function FootPrintCard({ data, isActive = false }: Props) {
         )}
 
         {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-black/60 cursor-pointer" />
+        <div className="absolute inset-0 bg-black/60 cursor-pointer z-0" />
 
         {/* Foreground content */}
-        <div className="cursor-pointer relative z-10 text-white space-y-2 flex flex-col justify-between h-full">
-          <p className="global-p2 line-clamp-5 lg:line-clamp-7 text-justify">
+        <div className="absolute inset-0 z-10 p-4 md:p-6 text-white flex flex-col min-h-0">
+          <p className="global-p2 line-clamp-5 lg:line-clamp-7 text-justify flex-1 min-h-0">
             <LocalizedText en={data?.description} bn={data?.descriptionBN} />
           </p>
-          <h1 className="text-[10px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] tracking-wide">
+
+          <h1 className="mt-2 shrink-0 text-[10px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] tracking-wide">
             <LocalizedHighlighted
               textEn={data?.title}
               textBn={data?.titleBN}
