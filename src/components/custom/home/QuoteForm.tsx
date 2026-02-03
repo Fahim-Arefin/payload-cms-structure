@@ -1921,18 +1921,18 @@ const PLAN_LABELS: Record<string, { en: string; bn: string }> = {
     en: 'Shanta Single Premium Endowment',
     bn: 'শান্তা সিঙ্গেল প্রিমিয়াম এনডাওমেন্ট',
   },
-  'Shanta Depositor’s Protection Plan - Signature': {
-    en: 'Shanta Depositor’s Protection Plan - Signature',
-    bn: 'শান্তা ডিপোজিটরস প্রোটেকশন প্ল্যান - সিগনেচার',
-  },
-  'Shanta Depositor’s Protection Plan - Elite': {
-    en: 'Shanta Depositor’s Protection Plan - Elite',
-    bn: 'শান্তা ডিপোজিটরস প্রোটেকশন প্ল্যান - এলিট',
-  },
-  'Shanta Depositor’s Protection Plan - Prime': {
-    en: 'Shanta Depositor’s Protection Plan - Prime',
-    bn: 'শান্তা ডিপোজিটরস প্রোটেকশন প্ল্যান - প্রাইম',
-  },
+  // 'Shanta Depositor’s Protection Plan - Signature': {
+  //   en: 'Shanta Depositor’s Protection Plan - Signature',
+  //   bn: 'শান্তা ডিপোজিটরস প্রোটেকশন প্ল্যান - সিগনেচার',
+  // },
+  // 'Shanta Depositor’s Protection Plan - Elite': {
+  //   en: 'Shanta Depositor’s Protection Plan - Elite',
+  //   bn: 'শান্তা ডিপোজিটরস প্রোটেকশন প্ল্যান - এলিট',
+  // },
+  // 'Shanta Depositor’s Protection Plan - Prime': {
+  //   en: 'Shanta Depositor’s Protection Plan - Prime',
+  //   bn: 'শান্তা ডিপোজিটরস প্রোটেকশন প্ল্যান - প্রাইম',
+  // },
 }
 // API → canonical EN
 const API_PLAN_NAME_MAP: Record<string, string> = {
@@ -1949,10 +1949,10 @@ const API_PLAN_NAME_MAP: Record<string, string> = {
   'Shanta Child Education Plan Single Payment (3%)':
     'Shanta Child Education Plan Single Payment (3%)',
   'Shanta Single Premium Endowment': 'Shanta Single Premium Endowment',
-  'Shanta Depositor’s Protection Plan - Signature':
-    'Shanta Depositor’s Protection Plan - Signature',
-  'Shanta Depositor’s Protection Plan - Elite': 'Shanta Depositor’s Protection Plan - Elite',
-  'Shanta Depositor’s Protection Plan - Prime': 'Shanta Depositor’s Protection Plan - Prime',
+  // 'Shanta Depositor’s Protection Plan - Signature':
+  //   'Shanta Depositor’s Protection Plan - Signature',
+  // 'Shanta Depositor’s Protection Plan - Elite': 'Shanta Depositor’s Protection Plan - Elite',
+  // 'Shanta Depositor’s Protection Plan - Prime': 'Shanta Depositor’s Protection Plan - Prime',
 }
 const planLabel = (name: string, lang: 'en' | 'bn') => PLAN_LABELS[name]?.[lang] ?? name
 
