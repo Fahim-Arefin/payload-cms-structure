@@ -1196,7 +1196,7 @@ function QuoteSection(props: QuoteSectionProps) {
                   className="text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-normal mb-6 p-2
               xl:py-3 lg:my-3 xl:my-4 text-center"
                 >
-                  Your Desired Premium is Highlighted
+                  {formData?.PlanCode !== 14 && 'Your Desired Premium is Highlighted'}
                 </h2>
 
                 {/* Regular 4-column grid for non-Single payment modes */}
@@ -1345,6 +1345,18 @@ function QuoteSection(props: QuoteSectionProps) {
                     </div>
                   </div>
                 )}
+
+                {formData?.PlanCode === 14 &&
+                  apiResponse?.dps_or_single_payment_sum_assured !== 0 && (
+                    <h2
+                      className="text-[12px] lg:text-[14px] xl:text-[14px] 2xl:text-[16px] font-medium mb-6 p-2
+              xl:py-3 lg:my-3 xl:my-4 text-center text-[#434342]"
+                    >
+                      {Math.ceil(apiResponse?.dps_or_single_payment_sum_assured) <= 10000000
+                        ? 'Incase of accidental death , double of this sum assured will be payable'
+                        : 'Incase of accidental death , 1 crore BDT will be payable in addition to this sum assured'}
+                    </h2>
+                  )}
 
                 <div className="p-2 md:py-3 md:px-6 xl:py-4 xl:px-8 space-y-2 mt-2 xl:mt-6">
                   {getTotalPremium(apiResponse, confirmedPaymentMode).ciPremium[
