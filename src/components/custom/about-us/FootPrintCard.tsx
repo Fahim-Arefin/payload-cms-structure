@@ -119,12 +119,13 @@ function FootPrintCard({ data, isActive = false }: Props) {
         // hover:xl:h-[400px]
         // hover:2xl:h-[480px]
         className={`
-        mx-auto relative p-4 md:p-6 overflow-hidden text-white
+        mx-auto relative p-4 md:p-6  text-white
         transition-all duration-500 ease-in-out
         rounded-md lg:rounded-xl
         w-[85%] md:w-[85%] lg:w-[85%] xl:w-[83%] 2xl:w-[80%]
         aspect-[1/1]
         hover:w-full 
+        group
       `}
       >
         {/* Background image */}
@@ -152,10 +153,16 @@ function FootPrintCard({ data, isActive = false }: Props) {
         <div className="absolute inset-0 bg-black/60 cursor-pointer z-0" />
 
         {/* Foreground content */}
-        <div className="absolute inset-0 z-10 p-4 md:p-6 text-white flex flex-col min-h-0">
-          <p className="global-p2 line-clamp-5 lg:line-clamp-7 text-justify flex-1 min-h-0">
+        <div className="absolute inset-0 z-10 p-4 md:p-6 text-white flex flex-col justify-between">
+          <div
+            className="global-p2 
+          transition-all duration-150 ease-in-out
+          line-clamp-5 lg:line-clamp-none lg:text-justify 
+          group-hover:line-clamp-none
+          "
+          >
             <LocalizedText en={data?.description} bn={data?.descriptionBN} />
-          </p>
+          </div>
 
           <h1 className="mt-2 shrink-0 text-[10px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] tracking-wide">
             <LocalizedHighlighted
