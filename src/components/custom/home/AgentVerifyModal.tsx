@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useEffect, useMemo, useState } from 'react'
+import { GlobalFooter } from '@/payload-types'
 
 /* =========================
    TYPES
@@ -23,6 +24,7 @@ type Props = {
   open: boolean
   onOpenChange: (v: boolean) => void
   onVerified: () => void // called when phone matches -> open PDF
+  footerData: GlobalFooter
 }
 
 /* =========================
@@ -38,7 +40,7 @@ function normalizePhone(s: string) {
    COMPONENT
 ========================= */
 
-export default function AgentVerifyModal({ open, onOpenChange, onVerified }: Props) {
+export default function AgentVerifyModal({ open, onOpenChange, onVerified, footerData }: Props) {
   const [step, setStep] = useState<1 | 2>(1)
 
   const [agentCode, setAgentCode] = useState('')
@@ -141,6 +143,9 @@ export default function AgentVerifyModal({ open, onOpenChange, onVerified }: Pro
     onVerified() // open PDF modal
   }
 
+  const hotlineRaw = footerData?.branding?.phone || '+88 09610889900'
+  const hotlineTel = hotlineRaw.replace(/[^\d+]/g, '') // keep + and digits only
+
   /* =========================
      UI
   ========================= */
@@ -169,6 +174,25 @@ export default function AgentVerifyModal({ open, onOpenChange, onVerified }: Pro
               placeholder="Agent code"
               inputMode="numeric"
             />
+
+            {/* <div className="text-xs text-muted-foreground leading-relaxed">
+              To obtain a quotation, please contact your nearest agent or call Shanta Life Insurance
+              Hotline at{' '}
+              <span className="font-medium">
+                {' '}
+                {footerData?.branding?.phone ? footerData?.branding?.phone : '+88 09610889900'}
+              </span>
+            </div> */}
+            <div className="text-xs text-muted-foreground leading-relaxed">
+              To obtain a quotation, please contact your nearest agent or call Shanta Life Insurance
+              Hotline at{' '}
+              <a
+                href={`tel:${hotlineTel}`}
+                className="font-medium underline underline-offset-2 hover:opacity-80"
+              >
+                {hotlineRaw}
+              </a>
+            </div>
 
             <div className="flex gap-2 justify-end">
               <Button variant="outline" onClick={() => onOpenChange(false)}>

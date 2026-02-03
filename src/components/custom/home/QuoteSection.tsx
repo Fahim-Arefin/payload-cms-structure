@@ -1508,6 +1508,7 @@ function QuoteSection(props: QuoteSectionProps) {
                         open={verifyOpen}
                         onOpenChange={setVerifyOpen}
                         onVerified={() => setPdfOpen(true)} // 🔥 THIS LINE OPENS PDF ONLY AFTER SUCCESS
+                        footerData={footerData}
                       />
 
                       {pdfRequestBody && (
