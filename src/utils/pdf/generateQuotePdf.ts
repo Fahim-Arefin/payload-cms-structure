@@ -1258,6 +1258,62 @@ function formatBDTIN(value: any, dashIfZero = true) {
   return `BDT ${Math.ceil(n).toLocaleString('en-IN')}`
 }
 
+function drawCenteredWrappedInBox(
+  page: any,
+  height: number,
+  textRaw: any,
+  box: { x: number; topFromTop: number; w: number; h: number },
+  opts: {
+    font: PDFFont
+    size: number
+    color: ReturnType<typeof rgb>
+    lineHeight?: number
+    maxLines?: number
+  },
+) {
+  const text = safeLatin(textRaw ?? '').trim()
+  const lineHeight = opts.lineHeight ?? opts.size * 1.15
+  const maxLines = opts.maxLines ?? 3
+
+  const maxW = Math.max(1, box.w - 24) // small inner padding (12*2)
+  let lines = wrapByWidth(text, opts.font, opts.size, maxW)
+
+  // clamp lines + ellipsis if needed
+  if (lines.length > maxLines) {
+    lines = lines.slice(0, maxLines)
+    let last = lines[lines.length - 1] || ''
+    while (last.length > 0 && opts.font.widthOfTextAtSize(last + '…', opts.size) > maxW) {
+      last = last.slice(0, -1)
+    }
+    lines[lines.length - 1] = (last || '').trimEnd() + '…'
+  }
+
+  // Convert box to PDF coords
+  const boxTopY = height - box.topFromTop
+  const boxBottomY = boxTopY - box.h
+
+  // Center block vertically: compute total text block height
+  const blockH = lines.length * lineHeight
+
+  // baseline for first line so the full block is vertically centered
+  let y = boxBottomY + (box.h - blockH) / 2 + (blockH - opts.size)
+
+  for (const line of lines) {
+    const w = opts.font.widthOfTextAtSize(line, opts.size)
+    const x = box.x + (box.w - w) / 2 // horizontal center per line
+
+    page.drawText(line, {
+      x,
+      y,
+      size: opts.size,
+      font: opts.font,
+      color: opts.color,
+    })
+
+    y -= lineHeight
+  }
+}
+
 export async function generateQuotePdf(data: IllustrationData) {
   const pdfDoc = await PDFDocument.create()
   pdfDoc.registerFontkit(fontkit)
@@ -1324,94 +1380,256 @@ export async function generateQuotePdf(data: IllustrationData) {
     page.drawImage(img, { x: 0, y: 0, width, height })
 
     // -------- Page 1: customer name (gold + bold) --------
+    // if (i === 0) {
+    //   // ✅ PLAN NAME (Avenir + outline effect)
+    //   const planTitleRaw = safeLatin(data?.meta?.plan?.displayName || data?.meta?.plan?.name || '—')
+
+    //   // Adjust these to match the template exactly
+    //   const titleCenterX = 530 // ← move left/right
+    //   const titleTopY = 1450 // ← move up/down
+    //   const titleSize = 60
+    //   const maxWidth = 650 // wrap width for 2 lines (tune)
+
+    //   const lines = wrapByWidth(planTitleRaw, fonts.bold, titleSize, maxWidth).slice(0, 3)
+
+    //   // drawOutlinedCenteredLines(page, lines, titleCenterX, titleTopY, {
+    //   //   size: titleSize,
+    //   //   font: fonts.bold,
+    //   //   fill: hexToRgb01('#FFFFFF'),
+    //   //   outline: hexToRgb01('#7F8E4A'),
+
+    //   //   outlineWidth: 4.15, // thin border
+    //   //   outlinePasses: 8, // thinner look than 8
+
+    //   //   fillWidth: 1.55, // makes white heavier
+    //   //   fillPasses: 9, // strong fill dominance
+
+    //   //   shadow: { dx: 1.2, dy: -1.2, color: hexToRgb01('#2F2F2F') },
+    //   // })
+
+    //   // draw centered lines (normal)
+    //   const lineHeight = titleSize * 1.15
+    //   lines.forEach((line, idx) => {
+    //     const w = fonts.regular.widthOfTextAtSize(line, titleSize)
+    //     const x = titleCenterX - w / 2
+    //     const y = titleTopY - idx * lineHeight
+
+    //     page.drawText(line, {
+    //       x,
+    //       y,
+    //       size: titleSize,
+    //       font: fonts.regular,
+    //       color: COLORS.black, // ✅ black
+    //     })
+    //   })
+
+    //   // ✅ DATE (always today)
+    //   const dateText = formatDDMMYYYY(new Date())
+
+    //   const dateY = 1150
+
+    //   drawCenteredBoldTextFake(page, dateText, titleCenterX, dateY, {
+    //     size: 40,
+    //     font: fonts.regular,
+    //     color: hexToRgb01('#FFFFFF'),
+    //     strength: 0.5,
+    //   })
+
+    //   // ✅ customer name
+    //   const text = safeLatin(data.formData?.name || '-')
+    //   const size = 28
+    //   const y = 590
+    //   const x = 258
+
+    //   // const textWidth = fonts.bold.widthOfTextAtSize(text, size)
+    //   const centerX = 342
+
+    //   draw(page, text, x, y, { size, font: fonts.bold, color: COLORS.brown })
+    // }
+
     if (i === 0) {
-      // ✅ PLAN NAME (Avenir + outline effect)
-      const planTitleRaw = safeLatin(data?.meta?.plan?.displayName || data?.meta?.plan?.name || '—')
+      // ✅ PLAN NAME (NORMAL TEXT, CENTERED IN THE GRAY BOX)
+      const planTitleRaw = safeLatin(
+        data?.meta?.plan?.displayName || data?.meta?.plan?.name || '—',
+      ).toUpperCase()
 
-      // Adjust these to match the template exactly
-      const titleCenterX = 530 // ← move left/right
-      const titleTopY = 1450 // ← move up/down
-      const titleSize = 60
-      const maxWidth = 650 // wrap width for 2 lines (tune)
+      // measured from /public/pdf-templates/1.jpg
+      const TITLE_BOX = {
+        x: 180,
+        topFromTop: 450, // box top edge from TOP
+        w: 655,
+        h: 249,
+      }
 
-      const lines = wrapByWidth(planTitleRaw, fonts.bold, titleSize, maxWidth).slice(0, 3)
-
-      drawOutlinedCenteredLines(page, lines, titleCenterX, titleTopY, {
-        size: titleSize,
-        font: fonts.bold,
-        fill: hexToRgb01('#FFFFFF'),
-        outline: hexToRgb01('#7F8E4A'),
-
-        outlineWidth: 4.15, // thin border
-        outlinePasses: 8, // thinner look than 8
-
-        fillWidth: 1.55, // makes white heavier
-        fillPasses: 9, // strong fill dominance
-
-        shadow: { dx: 1.2, dy: -1.2, color: hexToRgb01('#2F2F2F') },
+      drawCenteredWrappedInBox(page, height, planTitleRaw, TITLE_BOX, {
+        font: fonts.regular,
+        size: 50, // keep your old size (fits 1–3 lines in this box)
+        color: COLORS.black, // normal black
+        lineHeight: 68, // tuned for this box
+        maxLines: 3,
       })
 
-      // ✅ DATE (always today)
+      // ✅ DATE (always today) - keep as-is
       const dateText = formatDDMMYYYY(new Date())
+      const dateY = 1150
 
-      const dateY = 1000
-
-      // drawCenteredText(page, dateText, titleCenterX, dateY, {
-      //   size: 40,
-      //   font: fonts.bold, // or fonts.regular if you want thinner
-      //   color: hexToRgb01('#FFFFFF'),
-      // })
-
-      drawCenteredBoldTextFake(page, dateText, titleCenterX, dateY, {
+      drawCenteredBoldTextFake(page, dateText, 530, dateY, {
         size: 40,
-        font: fonts.bold,
+        font: fonts.regular,
         color: hexToRgb01('#FFFFFF'),
-        strength: 0.7,
+        strength: 0.5,
       })
 
-      // ✅ customer name
+      // ✅ customer name - keep as-is
       const text = safeLatin(data.formData?.name || '-')
       const size = 28
       const y = 590
       const x = 258
-
-      // const textWidth = fonts.bold.widthOfTextAtSize(text, size)
-      const centerX = 342
 
       draw(page, text, x, y, { size, font: fonts.bold, color: COLORS.brown })
     }
 
     // -------- Page 3: table dummy fill --------
 
+    // if (i === 2) {
+    //   const TABLE = { left: 143, mid: 815, right: 1233 }
+    //   const paddingX = 24
+    //   const valueX = TABLE.mid + paddingX
+
+    //   const font = fonts.bold
+    //   const fontSize = 27
+
+    //   const rowCentersImg = [
+    //     322.0, 388.0, 456.5, 535.5, 618.5, 697.0, 772.5, 853.0, 925.0, 992.5, 1072.0,
+    //   ]
+    //   const values = [
+    //     safeLatin(data.formData?.name || '-'), // 0 Proposed Insured Name
+    //     safeLatin(data.formData?.name || '-'), // 1 Proposed Policy Owner Name
+    //     `${data.formData?.Age || '-'} / ${formatDOBInDhaka(data?.formData.dateOfBirth) || '-'}`, // 2 Age / DOB
+    //     safeLatin(data.meta?.gender?.displayName || '-'), // 3 Gender
+    //     safeLatin(data.meta?.plan?.displayName || data.meta?.plan?.name || '-'), // 4 Product Name (WRAP ONLY THIS)
+    //     safeLatin(formatBDT(data.formData?.SumAssured)), // 5 Sum Assured
+    //     safeLatin(data.meta?.term?.label || '-'), // 6 Policy Term
+    //     safeLatin(data.meta?.payment?.displayName || '-'), // 7 Premium Mode
+
+    //     // ✅ last 3 rows with BDT
+    //     safeLatin(formatBDT(data.premiumBreakdown?.basicPremium)), // 8 Basic Premium
+    //     safeLatin(
+    //       formatBDT(
+    //         (data.premiumBreakdown?.addOns || []).reduce(
+    //           (acc: number, addon: any) => acc + (Number(addon?.amount) || 0),
+    //           0,
+    //         ),
+    //       ),
+    //     ), // 9 Rider Premium
+    //     safeLatin(formatBDT(data.premiumBreakdown?.totalPremium)), // 10 Total Modal Premium
+    //   ]
+
+    //   // right column cell width
+    //   const cellW = TABLE.right - TABLE.mid
+    //   const wrapMaxWidth = cellW - paddingX * 2
+
+    //   // estimate row height from centers (image coords)
+    //   const getRowHeightImg = (idx: number) => {
+    //     if (idx < rowCentersImg.length - 1) return rowCentersImg[idx + 1] - rowCentersImg[idx]
+    //     return rowCentersImg[idx] - rowCentersImg[idx - 1]
+    //   }
+
+    //   for (let r = 0; r < values.length; r++) {
+    //     const yImg = rowCentersImg[r]
+    //     const y = height - yImg - fontSize * 0.35
+
+    //     if (r === 4) {
+    //       const rowH = getRowHeightImg(r)
+
+    //       // cell top/bottom (PDF coords)
+    //       const cellTopY = height - yImg + rowH / 2
+    //       const cellBottomY = height - yImg - rowH / 2
+
+    //       const lineHeight = fontSize * 1.15
+    //       const maxLines = Math.max(1, Math.floor((rowH - 12) / lineHeight)) // 12px breathing room
+
+    //       let lines = wrapByWidth(values[r], font, fontSize, wrapMaxWidth)
+
+    //       // clamp lines + add ellipsis if still too long
+    //       if (lines.length > maxLines) {
+    //         lines = lines.slice(0, maxLines)
+    //         let last = lines[lines.length - 1]
+    //         while (last.length > 0 && font.widthOfTextAtSize(last + '…', fontSize) > wrapMaxWidth) {
+    //           last = last.slice(0, -1)
+    //         }
+    //         lines[lines.length - 1] = (last || '').trimEnd() + '…'
+    //       }
+
+    //       // ✅ vertical center: compute total text block height
+    //       const blockH = lines.length * lineHeight
+
+    //       // start baseline for first line so the whole block is centered
+    //       // (baseline approx one fontSize below the "top" of the line)
+    //       let yy = cellBottomY + (rowH - blockH) / 2 + (blockH - fontSize)
+
+    //       for (const line of lines) {
+    //         page.drawText(line, {
+    //           x: valueX,
+    //           y: yy,
+    //           size: fontSize,
+    //           font,
+    //           color: COLORS.black,
+    //         })
+    //         yy -= lineHeight
+    //       }
+
+    //       continue
+    //     }
+
+    //     // ✅ all other cells: same as before (single line)
+    //     page.drawText(values[r], {
+    //       x: valueX,
+    //       y,
+    //       size: fontSize,
+    //       font,
+    //       color: COLORS.black,
+    //     })
+    //   }
+    // }
+
+    // -------- Page 3: table dynamic fill (NEW LAYOUT for 3new.jpg) --------
     if (i === 2) {
-      const TABLE = { left: 143, mid: 815, right: 1233 }
-      const paddingX = 24
-      const valueX = TABLE.mid + paddingX
+      // ✅ These are measured from 3new.jpg (from TOP, in image px)
+      // Right-side gray value boxes (x-range)
+      const VALUE_BOX = {
+        x: 746,
+        w: 1272 - 746,
+      }
+
+      // Each row's gray-box vertical bounds (top/bottom from TOP)
+      const ROWS: Array<{ top: number; bottom: number }> = [
+        { top: 268, bottom: 373 }, // Proposed Insured Name
+        { top: 380, bottom: 485 }, // Proposed Policy Owner Name
+        { top: 492, bottom: 598 }, // Age / Date of Birth
+        { top: 604, bottom: 710 }, // Gender
+        { top: 717, bottom: 822 }, // Product Name
+        { top: 829, bottom: 934 }, // Sum Assured
+        { top: 941, bottom: 1047 }, // Policy Term
+        { top: 1054, bottom: 1159 }, // Premium Mode
+        { top: 1166, bottom: 1271 }, // Basic Premium
+        { top: 1278, bottom: 1384 }, // Rider Premium
+        { top: 1390, bottom: 1501 }, // Total Modal Premium
+      ]
 
       const font = fonts.bold
-      const fontSize = 27
+      const fontSize = 26
+      const lineHeight = fontSize * 1.15
 
-      const rowCentersImg = [
-        322.0, 388.0, 456.5, 535.5, 618.5, 697.0, 772.5, 853.0, 925.0, 992.5, 1072.0,
-      ]
       const values = [
         safeLatin(data.formData?.name || '-'), // 0 Proposed Insured Name
         safeLatin(data.formData?.name || '-'), // 1 Proposed Policy Owner Name
         `${data.formData?.Age || '-'} / ${formatDOBInDhaka(data?.formData.dateOfBirth) || '-'}`, // 2 Age / DOB
         safeLatin(data.meta?.gender?.displayName || '-'), // 3 Gender
-        safeLatin(data.meta?.plan?.displayName || data.meta?.plan?.name || '-'), // 4 Product Name (WRAP ONLY THIS)
+        safeLatin(data.meta?.plan?.displayName || data.meta?.plan?.name || '-'), // 4 Product Name (WRAP)
         safeLatin(formatBDT(data.formData?.SumAssured)), // 5 Sum Assured
         safeLatin(data.meta?.term?.label || '-'), // 6 Policy Term
         safeLatin(data.meta?.payment?.displayName || '-'), // 7 Premium Mode
-        // safeLatin(Math.ceil(data.premiumBreakdown.basicPremium) || '-'), // Basic Premium
-        // safeLatin(
-        //   data.premiumBreakdown.addOns.reduce(
-        //     (acc: any, addon: any) => acc + Math.ceil(addon.amount),
-        //     0,
-        //   ) || '-',
-        // ), // Rider Premium
-        // safeLatin(Math.ceil(data.premiumBreakdown.totalPremium) || '-'), // Total Modal Premium
-        // ✅ last 3 rows with BDT
         safeLatin(formatBDT(data.premiumBreakdown?.basicPremium)), // 8 Basic Premium
         safeLatin(
           formatBDT(
@@ -1424,153 +1642,625 @@ export async function generateQuotePdf(data: IllustrationData) {
         safeLatin(formatBDT(data.premiumBreakdown?.totalPremium)), // 10 Total Modal Premium
       ]
 
-      // right column cell width
-      const cellW = TABLE.right - TABLE.mid
-      const wrapMaxWidth = cellW - paddingX * 2
+      // ✅ center helper inside the right gray box
+      const drawCenteredInBox = (textRaw: any, rowIdx: number) => {
+        const text = safeLatin(textRaw ?? '')
+        const row = ROWS[rowIdx]
+        if (!row) return
 
-      // estimate row height from centers (image coords)
-      const getRowHeightImg = (idx: number) => {
-        if (idx < rowCentersImg.length - 1) return rowCentersImg[idx + 1] - rowCentersImg[idx]
-        return rowCentersImg[idx] - rowCentersImg[idx - 1]
-      }
+        const boxH = row.bottom - row.top
+        const boxBottomY = height - row.bottom // pdf coords (bottom of box)
 
-      for (let r = 0; r < values.length; r++) {
-        const yImg = rowCentersImg[r]
-        const y = height - yImg - fontSize * 0.35
+        const textW = font.widthOfTextAtSize(text, fontSize)
+        const x = VALUE_BOX.x + (VALUE_BOX.w - textW) / 2
 
-        // ✅ ONLY Product Name wraps (row index 4)
-        // if (r === 4) {
-        //   const rowH = getRowHeightImg(r)
-        //   const cellTopY = height - yImg + rowH / 2
+        // baseline y (vertical center)
+        const y = boxBottomY + (boxH - fontSize) / 2 - 1
 
-        //   const lineHeight = fontSize * 1.15
-        //   const maxLines = Math.max(1, Math.floor((rowH - 12) / lineHeight)) // 12px breathing room
-
-        //   let lines = wrapByWidth(values[r], font, fontSize, wrapMaxWidth)
-
-        //   // clamp lines + add ellipsis if still too long
-        //   if (lines.length > maxLines) {
-        //     lines = lines.slice(0, maxLines)
-        //     let last = lines[lines.length - 1]
-        //     while (last.length > 0 && font.widthOfTextAtSize(last + '…', fontSize) > wrapMaxWidth) {
-        //       last = last.slice(0, -1)
-        //     }
-        //     lines[lines.length - 1] = (last || '').trimEnd() + '…'
-        //   }
-
-        //   // draw from top inside the cell
-        //   let yy = cellTopY - fontSize - 6 // 6 = top padding
-        //   for (const line of lines) {
-        //     page.drawText(line, {
-        //       x: valueX,
-        //       y: yy,
-        //       size: fontSize,
-        //       font,
-        //       color: COLORS.black,
-        //     })
-        //     yy -= lineHeight
-        //   }
-
-        //   continue
-        // }
-        if (r === 4) {
-          const rowH = getRowHeightImg(r)
-
-          // cell top/bottom (PDF coords)
-          const cellTopY = height - yImg + rowH / 2
-          const cellBottomY = height - yImg - rowH / 2
-
-          const lineHeight = fontSize * 1.15
-          const maxLines = Math.max(1, Math.floor((rowH - 12) / lineHeight)) // 12px breathing room
-
-          let lines = wrapByWidth(values[r], font, fontSize, wrapMaxWidth)
-
-          // clamp lines + add ellipsis if still too long
-          if (lines.length > maxLines) {
-            lines = lines.slice(0, maxLines)
-            let last = lines[lines.length - 1]
-            while (last.length > 0 && font.widthOfTextAtSize(last + '…', fontSize) > wrapMaxWidth) {
-              last = last.slice(0, -1)
-            }
-            lines[lines.length - 1] = (last || '').trimEnd() + '…'
-          }
-
-          // ✅ vertical center: compute total text block height
-          const blockH = lines.length * lineHeight
-
-          // start baseline for first line so the whole block is centered
-          // (baseline approx one fontSize below the "top" of the line)
-          let yy = cellBottomY + (rowH - blockH) / 2 + (blockH - fontSize)
-
-          for (const line of lines) {
-            page.drawText(line, {
-              x: valueX,
-              y: yy,
-              size: fontSize,
-              font,
-              color: COLORS.black,
-            })
-            yy -= lineHeight
-          }
-
-          continue
-        }
-
-        // ✅ all other cells: same as before (single line)
-        page.drawText(values[r], {
-          x: valueX,
+        page.drawText(text, {
+          x,
           y,
           size: fontSize,
           font,
           color: COLORS.black,
         })
       }
+
+      // ✅ Product Name row: wrap + vertically/horizontally centered
+      const drawWrappedCenteredInBox = (textRaw: any, rowIdx: number) => {
+        const text = safeLatin(textRaw ?? '')
+        const row = ROWS[rowIdx]
+        if (!row) return
+
+        const boxH = row.bottom - row.top
+        const boxBottomY = height - row.bottom // pdf coords
+
+        const paddingX = 18
+        const maxW = Math.max(1, VALUE_BOX.w - paddingX * 2)
+
+        let lines = wrapByWidth(text, font, fontSize, maxW)
+
+        // keep it neat (no crazy overflow)
+        const maxLines = Math.max(1, Math.floor((boxH - 12) / lineHeight))
+        if (lines.length > maxLines) {
+          lines = lines.slice(0, maxLines)
+          let last = lines[lines.length - 1]
+          while (last.length > 0 && font.widthOfTextAtSize(last + '…', fontSize) > maxW) {
+            last = last.slice(0, -1)
+          }
+          lines[lines.length - 1] = (last || '').trimEnd() + '…'
+        }
+
+        const blockH = lines.length * lineHeight
+
+        // top of block centered inside the box
+        const blockTopY = boxBottomY + (boxH + blockH) / 2
+
+        let yy = blockTopY - fontSize // first line baseline
+        for (const line of lines) {
+          const lineW = font.widthOfTextAtSize(line, fontSize)
+          const xx = VALUE_BOX.x + (VALUE_BOX.w - lineW) / 2
+
+          page.drawText(line, {
+            x: xx,
+            y: yy,
+            size: fontSize,
+            font,
+            color: COLORS.black,
+          })
+          yy -= lineHeight
+        }
+      }
+
+      for (let r = 0; r < values.length; r++) {
+        if (r === 4) {
+          // Product Name (wrap + centered)
+          drawWrappedCenteredInBox(values[r], r)
+        } else {
+          // single line centered (flex justify-center items-center)
+          drawCenteredInBox(values[r], r)
+        }
+      }
     }
 
     // -------- Page 4: dynamic content (Key Product Features + 2 dynamic tables + Important Terms) --------
+    // if (i === 3) {
+    //   const coreBenefitItems = data.page4?.coreBenefitItems ?? []
+    //   const additionalFeatureItems = data.page4?.additionalFeatureItems ?? []
+    //   const importantTerms = data.page4?.importantTerms ?? []
+    //   const maturityBenefit = data.page4?.maturityBenefit || []
+    //   const deathBenefit = data.page4?.deathBenefit || []
+
+    //   // console.log('coreBenefitItems', coreBenefitItems)
+    //   // console.log('additionalFeatureItems', additionalFeatureItems)
+    //   // console.log('importantTerms', importantTerms)
+    //   // console.log('maturityBenefit', maturityBenefit)
+    //   // console.log('deathBenefit', deathBenefit)
+
+    //   // 0..2 rows
+
+    //   const deathBenefitAmount =
+    //     generateDeathBenefitAmount(
+    //       data?.meta?.plan?.code || 0,
+    //       Number(data?.formData?.SumAssured) || 0,
+    //     ) === 0
+    //       ? '-'
+    //       : generateDeathBenefitAmount(
+    //           data?.meta?.plan?.code || 0,
+    //           Number(data?.formData?.SumAssured) || 0,
+    //         )
+
+    //   const baseProductCoverageRows: Array<{ type: string; description: string; amount: string }> =
+    //     [
+    //       {
+    //         type: 'Death Benefit',
+    //         description: `${deathBenefit.join(' ') || 'No Description Available'}`,
+    //         // amount: `BDT ${generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0) === 0 ? '-' : generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0)}`,
+    //         amount: formatBDTIN(deathBenefitAmount, true),
+    //       },
+    //       {
+    //         type: 'Maturity Benefit',
+    //         description: `${maturityBenefit.join(' ') || 'No Description Available'}`,
+    //         amount: `BDT ${formatBDTIN(data?.formData?.SumAssured || '-', true)}`,
+    //       },
+    //     ].slice(0, 2)
+
+    //   const generateCoverageAmount = (key: string): number => {
+    //     if (key === 'ci19') {
+    //       return Math.ceil(data?.apiResponse?.ci_coverage) || 0
+    //     }
+    //     if (key === 'ci25') {
+    //       return Math.ceil(data?.apiResponse?.ci_coverage) || 0
+    //     }
+    //     if (key === 'accident') {
+    //       return Math.ceil(data?.apiResponse?.accidental_coverage) || 0
+    //     }
+    //     return 0
+    //   }
+
+    //   const generateRiderArray = () => {
+    //     const riders = data?.premiumBreakdown?.addOns || []
+    //     const ridersFromAPI = JSON?.parse(data?.apiResponse?.rider_info || [])
+
+    //     // console.log('riders', riders)
+    //     // console.log('ridersFromAPI', ridersFromAPI)
+
+    //     const arr: Array<{
+    //       name: string
+    //       description: string
+    //       coverageAmount: string
+    //       premium: string
+    //     }> = []
+
+    //     for (let i = 0; i < riders.length; i++) {
+    //       const rider = riders[i]
+    //       arr.push({
+    //         name: `${ridersFromAPI?.find((r: any) => r.rider_code === rider?.key)?.rider_name || '-'}`,
+    //         description: `${ridersFromAPI?.find((r: any) => r.rider_code === rider?.key)?.rider_description || '-'}`,
+    //         // coverageAmount: `BDT ${generateCoverageAmount(rider.key || '-')}`,
+    //         // premium: `BDT ${Math.ceil(rider.amount)}`,
+    //         coverageAmount: formatBDTIN(generateCoverageAmount(rider.key || '-'), true),
+    //         premium: formatBDTIN(rider.amount, true),
+    //       })
+    //     }
+    //     return arr
+    //   }
+
+    //   const riderCoverageRows: Array<{
+    //     name: string
+    //     description: string
+    //     coverageAmount: string
+    //     premium: string
+    //   }> = generateRiderArray()
+
+    //   // ------------------------------
+    //   // Styling (match your template)
+    //   // ------------------------------
+    //   const C = {
+    //     orange: hexToRgb01('#FF751F'),
+    //     olive: hexToRgb01('#989433'),
+    //     // ✅ your requested "black" replacement: #262626
+    //     ink: hexToRgb01('#262626'),
+    //     white: hexToRgb01('#FFFFFF'),
+
+    //     // table palette like your page-5 table but adapted to page-4 sample
+    //     tableHeaderBg: hexToRgb01('#8E9A83'),
+    //     tableYearColBg: hexToRgb01('#8A957C'),
+    //     tableRowA: hexToRgb01('#EEF0ED'),
+    //     tableRowB: hexToRgb01('#F7F8F6'),
+    //     tableGrid: hexToRgb01('#FFFFFF'),
+    //     disclaimerRed: hexToRgb01('#8B2D2D'),
+    //   }
+
+    //   // ------------------------------
+    //   // Helpers (local to i===3 block)
+    //   // ------------------------------
+
+    //   // fake "semi-bold" (like your bottom right static text)
+    //   const drawSemiBold = (textRaw: any, x: number, y: number, size: number, color = C.ink) => {
+    //     const text = safeLatin(textRaw ?? '')
+    //     // slightly stronger than regular, less than heavy
+    //     drawFakeBoldText(page, text, x, y, { size, font: fonts.regular, color, strength: 0.35 })
+    //   }
+
+    //   const drawSemiBoldFromTop = (
+    //     textRaw: any,
+    //     x: number,
+    //     topFromTop: number,
+    //     size: number,
+    //     color = C.ink,
+    //   ) => {
+    //     const y = height - topFromTop - size * 0.25
+    //     drawSemiBold(textRaw, x, y, size, color)
+    //     return y
+    //   }
+
+    //   const drawNormalFromTop = (
+    //     textRaw: any,
+    //     x: number,
+    //     topFromTop: number,
+    //     size: number,
+    //     color = C.ink,
+    //     font: PDFFont = fonts.regular,
+    //   ) => {
+    //     const text = safeLatin(textRaw ?? '')
+    //     const y = height - topFromTop - size * 0.25
+    //     page.drawText(text, { x, y, size, font, color })
+    //     return y
+    //   }
+
+    //   const drawBulletsFromTop = (
+    //     items: string[],
+    //     x: number,
+    //     topFromTop: number,
+    //     opts: { size: number; maxW: number },
+    //   ) => {
+    //     const bullet = '- '
+    //     const lineH = opts.size * 1.35
+
+    //     // current top baseline (pdf y)
+    //     let y = height - topFromTop - opts.size * 0.25
+
+    //     for (const item of items) {
+    //       const text = safeLatin(item)
+    //       const lines = wrapByWidth(text, fonts.regular, opts.size, opts.maxW - 16) // leave for bullet
+    //       for (let iLine = 0; iLine < lines.length; iLine++) {
+    //         const prefix = iLine === 0 ? bullet : '  '
+    //         page.drawText(prefix + lines[iLine], {
+    //           x,
+    //           y,
+    //           size: opts.size,
+    //           font: fonts.regular,
+    //           color: C.ink,
+    //         })
+    //         y -= lineH
+    //       }
+    //       // small gap between bullet items
+    //       y -= opts.size * 0.15
+    //     }
+
+    //     // return next topFromTop (converted) position for chaining
+    //     const consumed = height - (y + opts.size * 0.25)
+    //     return consumed
+    //   }
+
+    //   /**
+    //    * ✅ Dynamic table drawer (0..2 rows, wrapped cells, bigger cell height than page-6)
+    //    * Uses "from TOP" for placement. Returns new topFromTop after table.
+    //    */
+    //   const drawDynamicTableFromTop = (args: {
+    //     x: number
+    //     topFromTop: number
+    //     width: number
+    //     columns: Array<{ key: string; title: string; perc: number }>
+    //     rows: Array<Record<string, any>>
+    //     headerH?: number
+    //     rowH?: number // minimum row height
+    //     fontSize?: number
+    //     padding?: number
+    //   }) => {
+    //     const headerH = args.headerH ?? 52
+    //     const minRowH = args.rowH ?? 56
+    //     const fontSize = args.fontSize ?? 18
+    //     const padding = args.padding ?? 14
+    //     const lineHeight = fontSize * 1.25
+
+    //     const colW = args.columns.map((c) => args.width * c.perc)
+
+    //     // ✅ compute dynamic row heights based on description wrap needs
+    //     const rowHeights = args.rows.map((row) => {
+    //       const descCol = args.columns.find((c) => c.key === 'description')
+    //       if (!descCol) return minRowH
+
+    //       const descText = safeLatin(row?.description ?? '')
+    //       const descIndex = args.columns.findIndex((c) => c.key === 'description')
+    //       const maxW = Math.max(1, colW[descIndex] - padding * 2)
+
+    //       const lines =
+    //         descText && fonts.regular.widthOfTextAtSize(descText, fontSize) > maxW
+    //           ? wrapByWidth(descText, fonts.regular, fontSize, maxW)
+    //           : [descText]
+
+    //       const neededH = padding * 2 + lines.length * lineHeight
+    //       return Math.max(minRowH, neededH)
+    //     })
+
+    //     const tableTopY = height - args.topFromTop
+    //     const bodyH = rowHeights.reduce((a, b) => a + b, 0)
+    //     const tableTotalH = headerH + bodyH
+    //     const tableBottomY = tableTopY - tableTotalH
+
+    //     // ---------------- header ----------------
+    //     {
+    //       let cx = args.x
+    //       const y = tableTopY - headerH
+
+    //       for (let c = 0; c < args.columns.length; c++) {
+    //         page.drawRectangle({
+    //           x: cx,
+    //           y,
+    //           width: colW[c],
+    //           height: headerH,
+    //           color: C.tableHeaderBg,
+    //         })
+
+    //         const title = safeLatin(args.columns[c].title)
+    //         const tw = fonts.bold.widthOfTextAtSize(title, fontSize)
+    //         const tx = cx + (colW[c] - tw) / 2
+    //         const ty = y + (headerH - fontSize) / 2 - 1
+
+    //         // ✅ stronger header "bold"
+    //         drawFakeBoldText(page, title, tx, ty, {
+    //           size: fontSize,
+    //           font: fonts.bold,
+    //           color: C.white,
+    //           strength: 0.9,
+    //         })
+
+    //         cx += colW[c]
+    //       }
+    //     }
+
+    //     // ---------------- body (dynamic row heights) ----------------
+    //     let yCursorTop = tableTopY - headerH // top edge of body
+
+    //     for (let r = 0; r < args.rows.length; r++) {
+    //       const rowH = rowHeights[r]
+    //       const y = yCursorTop - rowH
+    //       const bg = r % 2 === 0 ? C.tableRowA : C.tableRowB
+
+    //       let cx = args.x
+
+    //       for (let c = 0; c < args.columns.length; c++) {
+    //         page.drawRectangle({ x: cx, y, width: colW[c], height: rowH, color: bg })
+
+    //         const col = args.columns[c]
+    //         const key = col.key
+    //         const text = safeLatin(args.rows[r]?.[key] ?? '')
+    //         const maxW = Math.max(1, colW[c] - padding * 2)
+
+    //         if (key === 'description') {
+    //           // ✅ wrap only when needed, otherwise single line
+    //           if (fonts.regular.widthOfTextAtSize(text, fontSize) <= maxW) {
+    //             drawCellText(
+    //               page,
+    //               text,
+    //               cx,
+    //               y,
+    //               colW[c],
+    //               rowH,
+    //               fonts.regular,
+    //               fontSize,
+    //               C.ink,
+    //               'left',
+    //               padding,
+    //             )
+    //           } else {
+    //             // ✅ NO ellipsis now because rowH grows to fit
+    //             drawWrappedTextInCell(page, text, cx, y, colW[c], rowH, {
+    //               font: fonts.regular,
+    //               size: fontSize,
+    //               color: C.ink,
+    //               padding,
+    //               lineHeight,
+    //               minSize: 13,
+    //               ellipsis: false,
+    //             })
+    //           }
+    //         } else {
+    //           // other columns single line centered
+    //           drawCellText(
+    //             page,
+    //             text,
+    //             cx,
+    //             y,
+    //             colW[c],
+    //             rowH,
+    //             fonts.regular,
+    //             fontSize,
+    //             C.ink,
+    //             'center',
+    //             padding,
+    //           )
+    //         }
+
+    //         cx += colW[c]
+    //       }
+
+    //       yCursorTop = y // next row starts below this one
+    //     }
+
+    //     // ---------------- grid lines ----------------
+    //     const gridW = 2
+    //     page.drawRectangle({
+    //       x: args.x,
+    //       y: tableBottomY,
+    //       width: args.width,
+    //       height: tableTotalH,
+    //       borderColor: C.tableGrid,
+    //       borderWidth: gridW,
+    //     })
+
+    //     // vertical
+    //     {
+    //       let cx = args.x
+    //       for (let c = 0; c < colW.length - 1; c++) {
+    //         cx += colW[c]
+    //         page.drawRectangle({
+    //           x: cx - gridW / 2,
+    //           y: tableBottomY,
+    //           width: gridW,
+    //           height: tableTotalH,
+    //           color: C.tableGrid,
+    //         })
+    //       }
+    //     }
+
+    //     // horizontal: header bottom + each dynamic row boundary
+    //     {
+    //       const yHeaderBottom = tableTopY - headerH
+    //       page.drawRectangle({
+    //         x: args.x,
+    //         y: yHeaderBottom - gridW / 2,
+    //         width: args.width,
+    //         height: gridW,
+    //         color: C.tableGrid,
+    //       })
+
+    //       let yy = yHeaderBottom
+    //       for (let r = 0; r < rowHeights.length; r++) {
+    //         yy -= rowHeights[r]
+    //         page.drawRectangle({
+    //           x: args.x,
+    //           y: yy - gridW / 2,
+    //           width: args.width,
+    //           height: gridW,
+    //           color: C.tableGrid,
+    //         })
+    //       }
+    //     }
+
+    //     // ✅ return next cursor (table height is dynamic now)
+    //     return args.topFromTop + tableTotalH + 34
+    //   }
+
+    //   // ------------------------------
+    //   // Layout (from TOP, dynamic stacking)
+    //   // Tune ONLY the base X/top if needed
+    //   // ------------------------------
+    //   const L = {
+    //     x: 150,
+    //     maxW: 1100,
+    //     top: 340, // starting block under the orange ribbon (tune if needed)
+    //     titleSize: 30,
+    //     subTitleSize: 26,
+    //     bodySize: 22,
+    //     gapBig: 26,
+    //     gapSmall: 14,
+    //   }
+
+    //   let cursorTop = L.top
+
+    //   // ✅ Key Product Features (semi-bold olive)
+
+    //   if (coreBenefitItems.length > 0 || additionalFeatureItems.length > 0) {
+    //     drawSemiBoldFromTop('Key Product Features', L.x, cursorTop, L.titleSize, C.olive)
+    //   }
+    //   cursorTop += L.titleSize + L.gapSmall
+
+    //   // ✅ Core Benefit Structure (orange)
+    //   if (coreBenefitItems?.length > 0) {
+    //     drawSemiBoldFromTop('Core Benefit Structure', L.x, cursorTop, L.subTitleSize, C.orange)
+    //   }
+    //   cursorTop += L.subTitleSize + 10
+
+    //   // bullets (core)
+    //   cursorTop =
+    //     drawBulletsFromTop(coreBenefitItems, L.x, cursorTop, {
+    //       size: L.bodySize,
+    //       maxW: L.maxW,
+    //     }) + 8
+
+    //   cursorTop += L.gapSmall
+
+    //   // ✅ Additional Features (orange)
+    //   if (additionalFeatureItems?.length > 0) {
+    //     drawSemiBoldFromTop('Additional Features', L.x, cursorTop, L.subTitleSize, C.orange)
+    //   }
+    //   cursorTop += L.subTitleSize + 10
+
+    //   // bullets (additional)
+    //   cursorTop =
+    //     drawBulletsFromTop(additionalFeatureItems, L.x, cursorTop, {
+    //       size: L.bodySize,
+    //       maxW: L.maxW,
+    //     }) + 10
+
+    //   cursorTop += L.gapBig
+
+    //   // ✅ Coverage & Benefit Details (semi-bold olive)
+    //   drawSemiBoldFromTop('Coverage & Benefit Details', L.x, cursorTop, L.titleSize, C.olive)
+    //   cursorTop += L.titleSize + L.gapSmall
+
+    //   // ✅ Base Product Coverage (orange)
+    //   drawSemiBoldFromTop('Base Product Coverage', L.x, cursorTop, L.subTitleSize, C.orange)
+    //   cursorTop += L.subTitleSize + 14
+
+    //   // Table 1 (0..2 rows) - only draw if any rows
+    //   if (baseProductCoverageRows.length) {
+    //     cursorTop = drawDynamicTableFromTop({
+    //       x: L.x,
+    //       topFromTop: cursorTop,
+    //       width: L.maxW,
+    //       columns: [
+    //         { key: 'type', title: 'Benefit Type', perc: 0.34 },
+    //         { key: 'description', title: 'Description', perc: 0.42 },
+    //         { key: 'amount', title: 'Amount', perc: 0.24 },
+    //       ],
+    //       rows: baseProductCoverageRows,
+    //       headerH: 50,
+    //       rowH: 64, // ✅ larger cell area
+    //       fontSize: 20,
+    //       padding: 16,
+    //     })
+    //   } else {
+    //     // if no rows, still keep a small gap
+    //     cursorTop += 22
+    //   }
+
+    //   cursorTop += 8
+
+    //   // ✅ Rider Coverage (orange + note line)
+    //   generateRiderArray()?.length > 0 &&
+    //     drawSemiBoldFromTop('Rider Coverage', L.x, cursorTop, L.subTitleSize, C.orange)
+    //   cursorTop += L.subTitleSize + 10
+
+    //   // note line (regular)
+    //   generateRiderArray()?.length > 0 &&
+    //     drawNormalFromTop(
+    //       'The following coverage is applicable only on Owner',
+    //       L.x,
+    //       cursorTop,
+    //       L.bodySize,
+    //       C.ink,
+    //       fonts.regular,
+    //     )
+    //   cursorTop += L.bodySize + 18
+
+    //   // Table 2 (0..2 rows)
+    //   if (riderCoverageRows.length) {
+    //     cursorTop = drawDynamicTableFromTop({
+    //       x: L.x,
+    //       topFromTop: cursorTop,
+    //       width: L.maxW,
+    //       columns: [
+    //         { key: 'name', title: 'Rider Name', perc: 0.25 },
+    //         { key: 'description', title: 'Description', perc: 0.35 },
+    //         { key: 'coverageAmount', title: 'Coverage Amount', perc: 0.2 },
+    //         { key: 'premium', title: 'Premium', perc: 0.2 },
+    //       ],
+    //       rows: riderCoverageRows,
+    //       headerH: 50,
+    //       rowH: 64,
+    //       fontSize: 20,
+    //       padding: 16,
+    //     })
+    //   } else {
+    //     cursorTop += 22
+    //   }
+
+    //   cursorTop += L.gapBig
+
+    //   // ✅ Important Terms & Disclaimers (semi-bold like template)
+    //   if (importantTerms?.length > 0) {
+    //     drawSemiBoldFromTop(
+    //       'Important Terms & Disclaimers',
+    //       L.x,
+    //       cursorTop,
+    //       L.titleSize,
+    //       C.disclaimerRed,
+    //     )
+    //   }
+
+    //   cursorTop += L.titleSize + 10
+
+    //   // bullet list (important terms)
+    //   cursorTop =
+    //     drawBulletsFromTop(
+    //       importantTerms.map((t) => `• ${t}`), // render as dot bullets (like sample)
+    //       L.x + 20,
+    //       cursorTop,
+    //       { size: L.bodySize, maxW: L.maxW - 20 },
+    //     ) + 0
+    // }
+
+    // -------- Page 4: dynamic content (Key Product Features + 2 dynamic tables + Important Terms) --------
     if (i === 3) {
-      /**
-       * ✅ FAKE DATA (replace later with your props)
-       * - coreBenefitItems: string[]
-       * - additionalFeatureItems: string[]
-       * - baseProductCoverageRows: 0..2 rows
-       * - riderCoverageRows: 0..2 rows
-       * - importantTerms: string[]
-       */
-
-      // const coreBenefitItems = [
-      //   'Life coverage for the full policy term',
-      //   'Premium accumulation & interest crediting (if applicable)',
-      //   'Benefit payable on death or maturity',
-      // ]
-
-      // const additionalFeatureItems = [
-      //   'Policy loans / withdrawals (if applicable)',
-      //   'Rider add-ons',
-      //   'Flexible premium payment options',
-      //   'Grace period benefits (as per policy rules)',
-      //   'Auto premium loan (if applicable)',
-      // ]
-
-      // const importantTerms = [
-      //   'Illustration based on disclosed age ,',
-      //   'Early surrender may result in lower value',
-      //   'Exclusions apply',
-      // ]
-
       const coreBenefitItems = data.page4?.coreBenefitItems ?? []
       const additionalFeatureItems = data.page4?.additionalFeatureItems ?? []
       const importantTerms = data.page4?.importantTerms ?? []
       const maturityBenefit = data.page4?.maturityBenefit || []
       const deathBenefit = data.page4?.deathBenefit || []
-
-      // console.log('coreBenefitItems', coreBenefitItems)
-      // console.log('additionalFeatureItems', additionalFeatureItems)
-      // console.log('importantTerms', importantTerms)
-      // console.log('maturityBenefit', maturityBenefit)
-      // console.log('deathBenefit', deathBenefit)
-
-      // 0..2 rows
 
       const deathBenefitAmount =
         generateDeathBenefitAmount(
@@ -1588,56 +2278,25 @@ export async function generateQuotePdf(data: IllustrationData) {
           {
             type: 'Death Benefit',
             description: `${deathBenefit.join(' ') || 'No Description Available'}`,
-            // amount: `BDT ${generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0) === 0 ? '-' : generateDeathBenefitAmount(data?.meta?.plan?.code || 0, Number(data?.formData?.SumAssured) || 0)}`,
             amount: formatBDTIN(deathBenefitAmount, true),
           },
           {
             type: 'Maturity Benefit',
             description: `${maturityBenefit.join(' ') || 'No Description Available'}`,
-            amount: `BDT ${formatBDTIN(data?.formData?.SumAssured || '-', true)}`,
+            amount: `${formatBDTIN(data?.formData?.SumAssured || '-', true)}`,
           },
         ].slice(0, 2)
 
-      // 0..2 rows
-      // const riderCoverageRows: Array<{
-      //   name: string
-      //   description: string
-      //   coverageAmount: string
-      //   premium: string
-      // }> = [
-      //   {
-      //     name: 'Critical Illness (19)',
-      //     description: 'Coverage for 19 critical illnesses',
-      //     coverageAmount: 'BDT 2,00,000',
-      //     premium: 'BDT 450',
-      //   },
-      //   {
-      //     name: 'Accidental Benefit',
-      //     description: 'Additional payout on accidental death',
-      //     coverageAmount: 'BDT 3,00,000',
-      //     premium: 'BDT 300',
-      //   },
-      // ].slice(0, 2)
-
       const generateCoverageAmount = (key: string): number => {
-        if (key === 'ci19') {
-          return Math.ceil(data?.apiResponse?.ci_coverage) || 0
-        }
-        if (key === 'ci25') {
-          return Math.ceil(data?.apiResponse?.ci_coverage) || 0
-        }
-        if (key === 'accident') {
-          return Math.ceil(data?.apiResponse?.accidental_coverage) || 0
-        }
+        if (key === 'ci19') return Math.ceil(data?.apiResponse?.ci_coverage) || 0
+        if (key === 'ci25') return Math.ceil(data?.apiResponse?.ci_coverage) || 0
+        if (key === 'accident') return Math.ceil(data?.apiResponse?.accidental_coverage) || 0
         return 0
       }
 
       const generateRiderArray = () => {
         const riders = data?.premiumBreakdown?.addOns || []
         const ridersFromAPI = JSON?.parse(data?.apiResponse?.rider_info || [])
-
-        // console.log('riders', riders)
-        // console.log('ridersFromAPI', ridersFromAPI)
 
         const arr: Array<{
           name: string
@@ -1650,9 +2309,9 @@ export async function generateQuotePdf(data: IllustrationData) {
           const rider = riders[i]
           arr.push({
             name: `${ridersFromAPI?.find((r: any) => r.rider_code === rider?.key)?.rider_name || '-'}`,
-            description: `${ridersFromAPI?.find((r: any) => r.rider_code === rider?.key)?.rider_description || '-'}`,
-            // coverageAmount: `BDT ${generateCoverageAmount(rider.key || '-')}`,
-            // premium: `BDT ${Math.ceil(rider.amount)}`,
+            description: `${
+              ridersFromAPI?.find((r: any) => r.rider_code === rider?.key)?.rider_description || '-'
+            }`,
             coverageAmount: formatBDTIN(generateCoverageAmount(rider.key || '-'), true),
             premium: formatBDTIN(rider.amount, true),
           })
@@ -1673,16 +2332,12 @@ export async function generateQuotePdf(data: IllustrationData) {
       const C = {
         orange: hexToRgb01('#FF751F'),
         olive: hexToRgb01('#989433'),
-        // ✅ your requested "black" replacement: #262626
         ink: hexToRgb01('#262626'),
         white: hexToRgb01('#FFFFFF'),
 
-        // table palette like your page-5 table but adapted to page-4 sample
-        tableHeaderBg: hexToRgb01('#8E9A83'),
-        tableYearColBg: hexToRgb01('#8A957C'),
-        tableRowA: hexToRgb01('#EEF0ED'),
-        tableRowB: hexToRgb01('#F7F8F6'),
-        tableGrid: hexToRgb01('#FFFFFF'),
+        // ✅ NEW TABLE DESIGN COLORS (like 4new)
+        teal: hexToRgb01('#6E8F8D'), // heading + first column
+        cellGray: hexToRgb01('#E9E9E9'), // other cells
         disclaimerRed: hexToRgb01('#8B2D2D'),
       }
 
@@ -1690,10 +2345,8 @@ export async function generateQuotePdf(data: IllustrationData) {
       // Helpers (local to i===3 block)
       // ------------------------------
 
-      // fake "semi-bold" (like your bottom right static text)
       const drawSemiBold = (textRaw: any, x: number, y: number, size: number, color = C.ink) => {
         const text = safeLatin(textRaw ?? '')
-        // slightly stronger than regular, less than heavy
         drawFakeBoldText(page, text, x, y, { size, font: fonts.regular, color, strength: 0.35 })
       }
 
@@ -1732,12 +2385,11 @@ export async function generateQuotePdf(data: IllustrationData) {
         const bullet = '- '
         const lineH = opts.size * 1.35
 
-        // current top baseline (pdf y)
         let y = height - topFromTop - opts.size * 0.25
 
         for (const item of items) {
           const text = safeLatin(item)
-          const lines = wrapByWidth(text, fonts.regular, opts.size, opts.maxW - 16) // leave for bullet
+          const lines = wrapByWidth(text, fonts.regular, opts.size, opts.maxW - 16)
           for (let iLine = 0; iLine < lines.length; iLine++) {
             const prefix = iLine === 0 ? bullet : '  '
             page.drawText(prefix + lines[iLine], {
@@ -1749,18 +2401,23 @@ export async function generateQuotePdf(data: IllustrationData) {
             })
             y -= lineH
           }
-          // small gap between bullet items
           y -= opts.size * 0.15
         }
 
-        // return next topFromTop (converted) position for chaining
         const consumed = height - (y + opts.size * 0.25)
         return consumed
       }
 
       /**
-       * ✅ Dynamic table drawer (0..2 rows, wrapped cells, bigger cell height than page-6)
-       * Uses "from TOP" for placement. Returns new topFromTop after table.
+       * ✅ UPDATED TABLE DESIGN ONLY (like 4new image)
+       * - No grid lines
+       * - Header bg teal
+       * - First column bg teal
+       * - Other cells light gray
+       * - White gutters between cells (boxy look)
+       * - Text: header white, first-col white, others ink
+       *
+       * Keeps your dynamic row height + wrapping logic.
        */
       const drawDynamicTableFromTop = (args: {
         x: number
@@ -1769,42 +2426,52 @@ export async function generateQuotePdf(data: IllustrationData) {
         columns: Array<{ key: string; title: string; perc: number }>
         rows: Array<Record<string, any>>
         headerH?: number
-        rowH?: number // minimum row height
+        rowH?: number
         fontSize?: number
         padding?: number
       }) => {
-        const headerH = args.headerH ?? 52
-        const minRowH = args.rowH ?? 56
-        const fontSize = args.fontSize ?? 18
-        const padding = args.padding ?? 14
-        const lineHeight = fontSize * 1.25
+        const headerH = args.headerH ?? 56 // was bigger
+        const minRowH = args.rowH ?? 64 // was bigger
+        const fontSize = args.fontSize ?? 19 // slightly smaller
+        const padding = args.padding ?? 12 // was bigger
+        const lineHeight = fontSize * 1.22
+
+        // ✅ tighter gutters so it fits inside the page
+        const gap = 12 // was 22
+        const rowGap = 10 // was 20
 
         const colW = args.columns.map((c) => args.width * c.perc)
 
-        // ✅ compute dynamic row heights based on description wrap needs
+        // dynamic row heights (same logic)
         const rowHeights = args.rows.map((row) => {
-          const descCol = args.columns.find((c) => c.key === 'description')
-          if (!descCol) return minRowH
+          const getLinesCount = (key: string) => {
+            const idx = args.columns.findIndex((c) => c.key === key)
+            if (idx === -1) return 1
 
-          const descText = safeLatin(row?.description ?? '')
-          const descIndex = args.columns.findIndex((c) => c.key === 'description')
-          const maxW = Math.max(1, colW[descIndex] - padding * 2)
+            const text = safeLatin(row?.[key] ?? '')
+            const maxW = Math.max(1, colW[idx] - padding * 2)
 
-          const lines =
-            descText && fonts.regular.widthOfTextAtSize(descText, fontSize) > maxW
-              ? wrapByWidth(descText, fonts.regular, fontSize, maxW)
-              : [descText]
+            const lines =
+              text && fonts.regular.widthOfTextAtSize(text, fontSize) > maxW
+                ? wrapByWidth(text, fonts.regular, fontSize, maxW)
+                : [text]
 
-          const neededH = padding * 2 + lines.length * lineHeight
+            return Math.max(1, lines.length)
+          }
+
+          // ✅ make row height respect BOTH description + name
+          const descLines = getLinesCount('description')
+          const nameLines = getLinesCount('name')
+
+          const maxLines = Math.max(descLines, nameLines)
+
+          const neededH = padding * 2 + maxLines * lineHeight
           return Math.max(minRowH, neededH)
         })
 
         const tableTopY = height - args.topFromTop
-        const bodyH = rowHeights.reduce((a, b) => a + b, 0)
-        const tableTotalH = headerH + bodyH
-        const tableBottomY = tableTopY - tableTotalH
 
-        // ---------------- header ----------------
+        // HEADER
         {
           let cx = args.x
           const y = tableTopY - headerH
@@ -1815,74 +2482,198 @@ export async function generateQuotePdf(data: IllustrationData) {
               y,
               width: colW[c],
               height: headerH,
-              color: C.tableHeaderBg,
+              color: C.teal,
             })
 
             const title = safeLatin(args.columns[c].title)
-            const tw = fonts.bold.widthOfTextAtSize(title, fontSize)
-            const tx = cx + (colW[c] - tw) / 2
-            const ty = y + (headerH - fontSize) / 2 - 1
+            drawCellText(
+              page,
+              title,
+              cx,
+              y,
+              colW[c],
+              headerH,
+              fonts.regular,
+              fontSize,
+              C.white,
+              'center',
+              padding,
+            )
 
-            // ✅ stronger header "bold"
-            drawFakeBoldText(page, title, tx, ty, {
-              size: fontSize,
-              font: fonts.bold,
-              color: C.white,
-              strength: 0.9,
+            cx += colW[c] + gap
+          }
+        }
+        const drawWrappedCenteredInCell = (
+          textRaw: string,
+          x: number,
+          y: number,
+          w: number,
+          h: number,
+          opts: {
+            font: PDFFont
+            size: number
+            color: any
+            padding: number
+            lineHeight: number
+            align?: 'left' | 'center' | 'right'
+          },
+        ) => {
+          const text = safeLatin(textRaw ?? '')
+          const maxW = Math.max(1, w - opts.padding * 2)
+
+          const lines =
+            text && opts.font.widthOfTextAtSize(text, opts.size) > maxW
+              ? wrapByWidth(text, opts.font, opts.size, maxW)
+              : [text]
+
+          const totalTextH = lines.length * opts.lineHeight
+
+          // ✅ vertically center the block of lines
+          // let startY = y + (h - totalTextH) / 2 + (opts.lineHeight - opts.size) / 2
+
+          const fontH = opts.font.heightAtSize(opts.size)
+          const ascent = fontH * 0.8 // baseline-to-top approximation (fixes "too low" look)
+
+          // real visual block height (NOT lines * lineHeight)
+          const blockH = (lines.length - 1) * opts.lineHeight + fontH
+
+          // baseline for first line so whole block is centered vertically
+          let startY = y + (h + blockH) / 2 - ascent
+
+          for (let i = 0; i < lines.length; i++) {
+            const line = lines[i]
+            const lineW = opts.font.widthOfTextAtSize(line, opts.size)
+
+            let tx = x + opts.padding
+            if (opts.align === 'center') tx = x + (w - lineW) / 2
+            if (opts.align === 'right') tx = x + w - opts.padding - lineW
+
+            page.drawText(line, {
+              x: tx,
+              y: startY,
+              size: opts.size,
+              font: opts.font,
+              color: opts.color,
             })
 
-            cx += colW[c]
+            startY -= opts.lineHeight
           }
         }
 
-        // ---------------- body (dynamic row heights) ----------------
-        let yCursorTop = tableTopY - headerH // top edge of body
+        // BODY
+        let yCursorTop = tableTopY - headerH - rowGap // tighter start
 
         for (let r = 0; r < args.rows.length; r++) {
           const rowH = rowHeights[r]
           const y = yCursorTop - rowH
-          const bg = r % 2 === 0 ? C.tableRowA : C.tableRowB
 
           let cx = args.x
 
           for (let c = 0; c < args.columns.length; c++) {
-            page.drawRectangle({ x: cx, y, width: colW[c], height: rowH, color: bg })
-
             const col = args.columns[c]
             const key = col.key
             const text = safeLatin(args.rows[r]?.[key] ?? '')
-            const maxW = Math.max(1, colW[c] - padding * 2)
+            const isFirstCol = c === 0
 
-            if (key === 'description') {
-              // ✅ wrap only when needed, otherwise single line
-              if (fonts.regular.widthOfTextAtSize(text, fontSize) <= maxW) {
-                drawCellText(
-                  page,
-                  text,
-                  cx,
-                  y,
-                  colW[c],
-                  rowH,
-                  fonts.regular,
-                  fontSize,
-                  C.ink,
-                  'left',
-                  padding,
-                )
-              } else {
-                // ✅ NO ellipsis now because rowH grows to fit
-                drawWrappedTextInCell(page, text, cx, y, colW[c], rowH, {
+            page.drawRectangle({
+              x: cx,
+              y,
+              width: colW[c],
+              height: rowH,
+              color: isFirstCol ? C.teal : C.cellGray,
+            })
+
+            const textColor = isFirstCol ? C.white : C.ink
+
+            // if (key === 'description') {
+            //   const maxW = Math.max(1, colW[c] - padding * 2)
+
+            //   if (fonts.regular.widthOfTextAtSize(text, fontSize) <= maxW) {
+            //     drawCellText(
+            //       page,
+            //       text,
+            //       cx,
+            //       y,
+            //       colW[c],
+            //       rowH,
+            //       fonts.regular,
+            //       fontSize,
+            //       textColor,
+            //       'left',
+            //       padding,
+            //     )
+            //   } else {
+            //     drawWrappedTextInCell(page, text, cx, y, colW[c], rowH, {
+            //       font: fonts.regular,
+            //       size: fontSize,
+            //       color: textColor,
+            //       padding,
+            //       lineHeight,
+            //       minSize: 12,
+            //       ellipsis: false,
+            //     })
+            //   }
+            // } else {
+            //   drawCellText(
+            //     page,
+            //     text,
+            //     cx,
+            //     y,
+            //     colW[c],
+            //     rowH,
+            //     fonts.regular,
+            //     fontSize,
+            //     textColor,
+            //     'center',
+            //     padding,
+            //   )
+            // }
+
+            const shouldWrap = key === 'description' || key === 'name'
+
+            if (shouldWrap) {
+              const maxW = Math.max(1, colW[c] - padding * 2)
+
+              // ✅ NAME column: horizontally + vertically centered (like flex justify-center items-center)
+              if (key === 'name') {
+                drawWrappedCenteredInCell(text, cx, y, colW[c], rowH, {
                   font: fonts.regular,
                   size: fontSize,
-                  color: C.ink,
+                  color: textColor,
                   padding,
                   lineHeight,
-                  minSize: 13,
-                  ellipsis: false,
+                  align: 'center',
                 })
               }
+              // ✅ DESCRIPTION column: keep your current “readable” left wrap
+              else {
+                if (fonts.regular.widthOfTextAtSize(text, fontSize) <= maxW) {
+                  drawCellText(
+                    page,
+                    text,
+                    cx,
+                    y,
+                    colW[c],
+                    rowH,
+                    fonts.regular,
+                    fontSize,
+                    textColor,
+                    'left',
+                    padding,
+                  )
+                } else {
+                  drawWrappedTextInCell(page, text, cx, y, colW[c], rowH, {
+                    font: fonts.regular,
+                    size: fontSize,
+                    color: textColor,
+                    padding,
+                    lineHeight,
+                    minSize: 12,
+                    ellipsis: false,
+                  })
+                }
+              }
             } else {
-              // other columns single line centered
               drawCellText(
                 page,
                 text,
@@ -1892,80 +2683,31 @@ export async function generateQuotePdf(data: IllustrationData) {
                 rowH,
                 fonts.regular,
                 fontSize,
-                C.ink,
+                textColor,
                 'center',
                 padding,
               )
             }
 
-            cx += colW[c]
+            cx += colW[c] + gap
           }
 
-          yCursorTop = y // next row starts below this one
+          yCursorTop = y - rowGap
         }
 
-        // ---------------- grid lines ----------------
-        const gridW = 2
-        page.drawRectangle({
-          x: args.x,
-          y: tableBottomY,
-          width: args.width,
-          height: tableTotalH,
-          borderColor: C.tableGrid,
-          borderWidth: gridW,
-        })
+        const totalH =
+          headerH + rowGap + rowHeights.reduce((a, b) => a + b, 0) + rowGap * args.rows.length
 
-        // vertical
-        {
-          let cx = args.x
-          for (let c = 0; c < colW.length - 1; c++) {
-            cx += colW[c]
-            page.drawRectangle({
-              x: cx - gridW / 2,
-              y: tableBottomY,
-              width: gridW,
-              height: tableTotalH,
-              color: C.tableGrid,
-            })
-          }
-        }
-
-        // horizontal: header bottom + each dynamic row boundary
-        {
-          const yHeaderBottom = tableTopY - headerH
-          page.drawRectangle({
-            x: args.x,
-            y: yHeaderBottom - gridW / 2,
-            width: args.width,
-            height: gridW,
-            color: C.tableGrid,
-          })
-
-          let yy = yHeaderBottom
-          for (let r = 0; r < rowHeights.length; r++) {
-            yy -= rowHeights[r]
-            page.drawRectangle({
-              x: args.x,
-              y: yy - gridW / 2,
-              width: args.width,
-              height: gridW,
-              color: C.tableGrid,
-            })
-          }
-        }
-
-        // ✅ return next cursor (table height is dynamic now)
-        return args.topFromTop + tableTotalH + 34
+        return args.topFromTop + totalH + 10 // tighter bottom spacing
       }
 
       // ------------------------------
       // Layout (from TOP, dynamic stacking)
-      // Tune ONLY the base X/top if needed
       // ------------------------------
       const L = {
         x: 150,
         maxW: 1100,
-        top: 340, // starting block under the orange ribbon (tune if needed)
+        top: 310,
         titleSize: 30,
         subTitleSize: 26,
         bodySize: 22,
@@ -1975,20 +2717,16 @@ export async function generateQuotePdf(data: IllustrationData) {
 
       let cursorTop = L.top
 
-      // ✅ Key Product Features (semi-bold olive)
-
       if (coreBenefitItems.length > 0 || additionalFeatureItems.length > 0) {
         drawSemiBoldFromTop('Key Product Features', L.x, cursorTop, L.titleSize, C.olive)
       }
       cursorTop += L.titleSize + L.gapSmall
 
-      // ✅ Core Benefit Structure (orange)
       if (coreBenefitItems?.length > 0) {
         drawSemiBoldFromTop('Core Benefit Structure', L.x, cursorTop, L.subTitleSize, C.orange)
       }
       cursorTop += L.subTitleSize + 10
 
-      // bullets (core)
       cursorTop =
         drawBulletsFromTop(coreBenefitItems, L.x, cursorTop, {
           size: L.bodySize,
@@ -1997,13 +2735,11 @@ export async function generateQuotePdf(data: IllustrationData) {
 
       cursorTop += L.gapSmall
 
-      // ✅ Additional Features (orange)
       if (additionalFeatureItems?.length > 0) {
         drawSemiBoldFromTop('Additional Features', L.x, cursorTop, L.subTitleSize, C.orange)
       }
       cursorTop += L.subTitleSize + 10
 
-      // bullets (additional)
       cursorTop =
         drawBulletsFromTop(additionalFeatureItems, L.x, cursorTop, {
           size: L.bodySize,
@@ -2012,44 +2748,38 @@ export async function generateQuotePdf(data: IllustrationData) {
 
       cursorTop += L.gapBig
 
-      // ✅ Coverage & Benefit Details (semi-bold olive)
       drawSemiBoldFromTop('Coverage & Benefit Details', L.x, cursorTop, L.titleSize, C.olive)
       cursorTop += L.titleSize + L.gapSmall
 
-      // ✅ Base Product Coverage (orange)
       drawSemiBoldFromTop('Base Product Coverage', L.x, cursorTop, L.subTitleSize, C.orange)
       cursorTop += L.subTitleSize + 14
 
-      // Table 1 (0..2 rows) - only draw if any rows
       if (baseProductCoverageRows.length) {
         cursorTop = drawDynamicTableFromTop({
           x: L.x,
           topFromTop: cursorTop,
           width: L.maxW,
           columns: [
-            { key: 'type', title: 'Benefit Type', perc: 0.34 },
-            { key: 'description', title: 'Description', perc: 0.42 },
-            { key: 'amount', title: 'Amount', perc: 0.24 },
+            { key: 'type', title: 'Benefit Type', perc: 0.3 },
+            { key: 'description', title: 'Description', perc: 0.52 },
+            { key: 'amount', title: 'Amount', perc: 0.18 },
           ],
           rows: baseProductCoverageRows,
-          headerH: 50,
-          rowH: 64, // ✅ larger cell area
-          fontSize: 20,
-          padding: 16,
+          headerH: 56, // ✅ a bit taller like new design
+          rowH: 64, // ✅ boxy rows like new design
+          fontSize: 22,
+          padding: 12,
         })
       } else {
-        // if no rows, still keep a small gap
         cursorTop += 22
       }
 
-      cursorTop += 8
+      cursorTop += 22
 
-      // ✅ Rider Coverage (orange + note line)
       generateRiderArray()?.length > 0 &&
         drawSemiBoldFromTop('Rider Coverage', L.x, cursorTop, L.subTitleSize, C.orange)
       cursorTop += L.subTitleSize + 10
 
-      // note line (regular)
       generateRiderArray()?.length > 0 &&
         drawNormalFromTop(
           'The following coverage is applicable only on Owner',
@@ -2061,23 +2791,22 @@ export async function generateQuotePdf(data: IllustrationData) {
         )
       cursorTop += L.bodySize + 18
 
-      // Table 2 (0..2 rows)
       if (riderCoverageRows.length) {
         cursorTop = drawDynamicTableFromTop({
           x: L.x,
           topFromTop: cursorTop,
           width: L.maxW,
           columns: [
-            { key: 'name', title: 'Rider Name', perc: 0.25 },
-            { key: 'description', title: 'Description', perc: 0.35 },
+            { key: 'name', title: 'Rider Name', perc: 0.22 },
+            { key: 'description', title: 'Description', perc: 0.42 },
             { key: 'coverageAmount', title: 'Coverage Amount', perc: 0.2 },
-            { key: 'premium', title: 'Premium', perc: 0.2 },
+            { key: 'premium', title: 'Premium', perc: 0.16 },
           ],
           rows: riderCoverageRows,
-          headerH: 50,
+          headerH: 56,
           rowH: 64,
-          fontSize: 20,
-          padding: 16,
+          fontSize: 22,
+          padding: 12,
         })
       } else {
         cursorTop += 22
@@ -2085,7 +2814,6 @@ export async function generateQuotePdf(data: IllustrationData) {
 
       cursorTop += L.gapBig
 
-      // ✅ Important Terms & Disclaimers (semi-bold like template)
       if (importantTerms?.length > 0) {
         drawSemiBoldFromTop(
           'Important Terms & Disclaimers',
@@ -2098,10 +2826,9 @@ export async function generateQuotePdf(data: IllustrationData) {
 
       cursorTop += L.titleSize + 10
 
-      // bullet list (important terms)
       cursorTop =
         drawBulletsFromTop(
-          importantTerms.map((t) => `• ${t}`), // render as dot bullets (like sample)
+          importantTerms.map((t) => `• ${t}`),
           L.x + 20,
           cursorTop,
           { size: L.bodySize, maxW: L.maxW - 20 },
@@ -2109,6 +2836,107 @@ export async function generateQuotePdf(data: IllustrationData) {
     }
 
     // -------- Page 5: projected values (DYNAMIC TABLE DESIGN) --------
+    // if (i === 4) {
+    //   let rows: ProjectedRow[] = []
+    //   let value: number = 0
+
+    //   const totalValue = data.premiumBreakdown?.basicPremium
+    //   const paymentId = data.meta?.payment?.id
+
+    //   if (paymentId === 1) {
+    //     value = totalValue
+    //   } else if (paymentId === 2) {
+    //     value = totalValue * 2
+    //   } else if (paymentId === 3) {
+    //     value = totalValue * 3
+    //   } else if (paymentId === 4) {
+    //     value = totalValue * 12
+    //   }
+    //   const apiRows = data.surrenderPaidup
+    //   // console.log('Surrender values', apiRows)
+
+    //   if (apiRows) {
+    //     rows = makeFakeProjectedRows(apiRows, data?.formData?.SumAssured, value)
+    //   } else {
+    //     rows = makeFakeProjectedRows([], data?.formData?.SumAssured, value)
+    //   }
+
+    //   // ✅ table placement (measured like your other blocks)
+    //   // You will tune ONLY these 4 numbers to match the PNG layout:
+    //   const TABLE = {
+    //     x: 160,
+    //     topFromTop: 350, // where the table starts from the TOP of page
+    //     width: 1100,
+    //     headerH: 60,
+    //     rowH: 44,
+    //   }
+
+    //   if (!apiRows) {
+    //     // If no API data, show a placeholder text
+    //     const placeholderText = 'Projected values data is not available at the moment.'
+    //     const placeholderY = height - TABLE.topFromTop - 200
+    //     const placeholderX = TABLE.x + TABLE.width / 2
+    //     drawCenteredText(page, placeholderText, placeholderX, placeholderY, {
+    //       size: 24,
+    //       font: fonts.regular,
+    //       color: COLORS.black,
+    //     })
+    //   }
+
+    //   drawProjectedValuesTableFromTop(page, {
+    //     height,
+    //     x: TABLE.x,
+    //     topFromTop: TABLE.topFromTop,
+    //     width: TABLE.width,
+    //     headerH: TABLE.headerH,
+    //     rowH: TABLE.rowH,
+    //     rows,
+    //     fonts,
+    //   })
+
+    //   // -------------------------------------------------------
+    //   // ✅ NOTE block (below table, bottom-left) - Page 5
+    //   // -------------------------------------------------------
+    //   {
+    //     const noteItems: string[] = data.page4?.note ?? []
+
+    //     if (noteItems.length > 0) {
+    //       const NOTE = {
+    //         x: 160, // aligns with table left
+    //         topFromTop: 1680, // ✅ tuned for the screenshot (adjust if needed)
+    //         maxW: 1100, // note block width (left side)
+    //         titleSize: 26,
+    //         bodySize: 22,
+    //         color: COLORS.black, // same ink color
+    //         lineHeight: 26,
+    //       }
+
+    //       // "Note:" title
+    //       drawTextFromTop(page, height, 'Note:', NOTE.x, NOTE.topFromTop, {
+    //         font: fonts.bold,
+    //         size: NOTE.titleSize,
+    //         color: COLORS.ink,
+    //       })
+
+    //       // list starts under title
+    //       const listTop = NOTE.topFromTop + 32
+
+    //       drawNumberedListFromTop(page, height, noteItems, {
+    //         x: NOTE.x,
+    //         topFromTop: listTop,
+    //         maxW: NOTE.maxW,
+    //         font: fonts.regular,
+    //         size: NOTE.bodySize,
+    //         color: NOTE.color,
+    //         lineHeight: NOTE.lineHeight,
+    //         itemGap: 6,
+    //         indent: 26,
+    //       })
+    //     }
+    //   }
+    // }
+
+    // -------- Page 5: projected values (UPDATED: fits max 28 rows + i==3 header/year text) --------
     if (i === 4) {
       let rows: ProjectedRow[] = []
       let value: number = 0
@@ -2125,8 +2953,8 @@ export async function generateQuotePdf(data: IllustrationData) {
       } else if (paymentId === 4) {
         value = totalValue * 12
       }
+
       const apiRows = data.surrenderPaidup
-      // console.log('Surrender values', apiRows)
 
       if (apiRows) {
         rows = makeFakeProjectedRows(apiRows, data?.formData?.SumAssured, value)
@@ -2134,18 +2962,24 @@ export async function generateQuotePdf(data: IllustrationData) {
         rows = makeFakeProjectedRows([], data?.formData?.SumAssured, value)
       }
 
-      // ✅ table placement (measured like your other blocks)
-      // You will tune ONLY these 4 numbers to match the PNG layout:
+      // ✅ hard cap so it never overlaps note area
+      const MAX_ROWS = 40
+      const rowsToRender = rows.slice(0, MAX_ROWS)
+
+      // ✅ table placement (unchanged)
       const TABLE = {
         x: 160,
-        topFromTop: 350, // where the table starts from the TOP of page
+        topFromTop: 320,
         width: 1100,
-        headerH: 60,
-        rowH: 44,
+
+        // ⬆️ slightly taller header
+        headerH: 58,
+
+        // ⬆️ bigger row height (main fix)
+        rowH: 40,
       }
 
       if (!apiRows) {
-        // If no API data, show a placeholder text
         const placeholderText = 'Projected values data is not available at the moment.'
         const placeholderY = height - TABLE.topFromTop - 200
         const placeholderX = TABLE.x + TABLE.width / 2
@@ -2156,42 +2990,165 @@ export async function generateQuotePdf(data: IllustrationData) {
         })
       }
 
-      drawProjectedValuesTableFromTop(page, {
-        height,
-        x: TABLE.x,
-        topFromTop: TABLE.topFromTop,
-        width: TABLE.width,
-        headerH: TABLE.headerH,
-        rowH: TABLE.rowH,
-        rows,
-        fonts,
-      })
+      // ✅ colors (same palette)
+      const C = {
+        teal: hexToRgb01('#6E8F8D'),
+        cellGray: hexToRgb01('#E9E9E9'),
+        ink: hexToRgb01('#262626'),
+        white: hexToRgb01('#FFFFFF'),
+      }
+
+      // ✅ SAME columns (6)
+      const headers = [
+        'End Of\nYear',
+        'Annual\nPremium',
+        'Death\nbenefit',
+        'Surrender\nValue',
+        'Maturity\nValue',
+        'Paid up\nvalue',
+      ]
+
+      // ✅ SAME widths as before (sum=1)
+      const colPerc = [0.16, 0.17, 0.17, 0.19, 0.17, 0.14]
+      const colW = colPerc.map((p) => TABLE.width * p)
+
+      // ✅ horizontal spacing kept (as you said it's OK)
+      const gapX = 12
+
+      // ✅ vertical spacing tightened (this was causing overlap)
+      const gapY = 6
+
+      const tableTopY = height - TABLE.topFromTop
+
+      // ---------------- HEADER (match i==3 header text feel) ----------------
+      {
+        let cx = TABLE.x
+        const y = tableTopY - TABLE.headerH
+
+        for (let c = 0; c < colW.length; c++) {
+          page.drawRectangle({
+            x: cx,
+            y,
+            width: colW[c],
+            height: TABLE.headerH,
+            color: C.teal,
+          })
+
+          // ✅ header typography tuned to match i==3
+          drawHeaderMultilineFakeBold(
+            page,
+            headers[c],
+            cx,
+            y,
+            colW[c],
+            TABLE.headerH,
+            fonts.bold,
+            16, // smaller to fit tighter header
+            C.white,
+            0.9, // stronger fake-bold like i==3
+          )
+
+          cx += colW[c] + gapX
+        }
+      }
+
+      // ---------------- BODY (first col teal, others gray, tightened vertically) ----------------
+      let yCursorTop = tableTopY - TABLE.headerH - gapY
+
+      for (let r = 0; r < rowsToRender.length; r++) {
+        const y = yCursorTop - TABLE.rowH
+        const row = rowsToRender[r]
+
+        const cells = [
+          row.year,
+          row.annualPremium,
+          row.deathBenefit,
+          row.surrenderValue,
+          row.maturityValue,
+          row.paidUpValue,
+        ]
+
+        let cx = TABLE.x
+
+        for (let c = 0; c < colW.length; c++) {
+          const isFirstCol = c === 0
+
+          page.drawRectangle({
+            x: cx,
+            y,
+            width: colW[c],
+            height: TABLE.rowH,
+            color: isFirstCol ? C.teal : C.cellGray,
+          })
+
+          const textColor = isFirstCol ? C.white : C.ink
+
+          // ✅ Year text updated to match i==3 style (fake-bold + centered)
+          if (isFirstCol) {
+            drawCellTextFakeBold(
+              page,
+              cells[c],
+              cx,
+              y,
+              colW[c],
+              TABLE.rowH,
+              fonts.bold,
+              15,
+              textColor,
+              'center',
+              6, // tighter padding for smaller row height
+              0.9,
+            )
+          } else {
+            drawCellText(
+              page,
+              cells[c],
+              cx,
+              y,
+              colW[c],
+              TABLE.rowH,
+              fonts.bold,
+              15,
+              textColor,
+              'center',
+              6,
+            )
+          }
+
+          cx += colW[c] + gapX
+        }
+
+        yCursorTop = y - gapY
+      }
+
+      // ✅ compute note position dynamically from where the table ended (prevents overlap)
+      // yCursorTop is already below the last row by gapY
+      const noteStartY = yCursorTop - 40 // a little breathing space under the table
+      const noteTopFromTop = height - noteStartY
 
       // -------------------------------------------------------
-      // ✅ NOTE block (below table, bottom-left) - Page 5
+      // ✅ NOTE block (same content/logic, now positioned under table)
       // -------------------------------------------------------
       {
         const noteItems: string[] = data.page4?.note ?? []
 
         if (noteItems.length > 0) {
           const NOTE = {
-            x: 160, // aligns with table left
-            topFromTop: 1680, // ✅ tuned for the screenshot (adjust if needed)
-            maxW: 1100, // note block width (left side)
+            x: 160,
+            topFromTop: noteTopFromTop,
+            maxW: 1100,
             titleSize: 26,
             bodySize: 22,
-            color: COLORS.black, // same ink color
+            color: COLORS.black,
             lineHeight: 26,
           }
 
-          // "Note:" title
           drawTextFromTop(page, height, 'Note:', NOTE.x, NOTE.topFromTop, {
             font: fonts.bold,
             size: NOTE.titleSize,
             color: COLORS.ink,
           })
 
-          // list starts under title
           const listTop = NOTE.topFromTop + 32
 
           drawNumberedListFromTop(page, height, noteItems, {
@@ -2209,265 +3166,6 @@ export async function generateQuotePdf(data: IllustrationData) {
       }
     }
 
-    // -------- Page 6: QR code generation and other data --------
-    // if (i === 5) {
-    //   // -------------------------------------------------------
-    //   // Fake dynamic data (replace later with real data)
-    //   // -------------------------------------------------------
-    //   // console.log('brocheureLink', data.page4?.brocheureLink)
-    //   const page6Data = {
-    //     customerName: safeLatin(data.formData?.name || '-'),
-    //     gender: safeLatin(data.meta?.gender?.displayName || '-'), // or 'Female'
-    //     // brochureUrl:
-    //     //   'https://shantalife.com/api/media/file/Child%20Education%20Security%20Plan-compressed-1.pdf', // QR will point here
-    //     brochureUrl: data.page4?.brocheureLink === null ? '' : data.page4?.brocheureLink || '',
-    //   }
-
-    //   const salutation = page6Data.gender.toLowerCase().startsWith('f') ? 'MS' : 'MR'
-    //   const nameText = safeLatin(`${salutation} ${page6Data.customerName}`)
-
-    //   // -------------------------------------------------------
-    //   // Coordinates measured from page-6_old.png
-    //   // Image size is ~1415 x 2000 (same as your template PNG)
-    //   // We use "from TOP" coordinates then convert to PDF coords.
-    //   // -------------------------------------------------------
-
-    //   // --- Name (top-left) ---
-    //   const NAME = {
-    //     x: 154, // left
-    //     yBottomFromTop: 316, // bottom of text bbox (from top)
-    //     fontSize: 28,
-    //     color: hexToRgb01('#989433'), // sampled from old image (olive)
-    //   }
-
-    //   const nameY = height - NAME.yBottomFromTop - NAME.fontSize * 0.25
-    //   drawFakeBoldText(page, nameText, NAME.x, nameY, {
-    //     size: NAME.fontSize,
-    //     font: fonts.regular, // heavy
-    //     color: NAME.color,
-    //     strength: 0.5, // increase if you want even bolder
-    //   })
-
-    //   // --- QR (top-right) ---
-    //   // bbox from old image roughly: x=1029..1256, y=243..472
-    //   const QR = {
-    //     x: 1029,
-    //     yTopFromTop: 243,
-    //     w: 227,
-    //     h: 229,
-    //   }
-
-    //   // Generate QR PNG dynamically (best way)
-    //   if (data.page4?.brocheureLink) {
-    //     const qrPng = await QRCode.toBuffer(page6Data.brochureUrl, {
-    //       type: 'png',
-    //       width: 300, // generate larger then we scale down => sharper
-    //       margin: 1,
-    //       errorCorrectionLevel: 'M',
-    //     })
-
-    //     const qrImg = await pdfDoc.embedPng(qrPng)
-
-    //     const qrY = height - QR.yTopFromTop - QR.h
-    //     page.drawImage(qrImg, {
-    //       x: QR.x,
-    //       y: qrY,
-    //       width: QR.w,
-    //       height: QR.h,
-    //     })
-    //   }
-
-    //   // -------------------------------------------------------
-    //   // ✅ Dynamic plan line (olive paragraph) - Page 6
-    //   // Put this AFTER QR draw block and BEFORE bottom contact block
-    //   // -------------------------------------------------------
-    //   {
-    //     const planName = safeLatin(data?.meta?.plan?.displayName || data?.meta?.plan?.name || '-')
-
-    //     // full sentence (wrap if needed)
-    //     const sentence = `This illustration was prepared to help you understand the potential value of the "${planName}".`
-
-    //     // ✅ coordinates tuned to your template (FROM TOP)
-    //     // adjust ONLY these if needed
-    //     const PLAN_LINE = {
-    //       x: 115, // left margin similar to other text
-    //       topFromTop: 650, // 🔥 this matches the paragraph area in your image
-    //       maxW: 1180, // wrap width
-    //       size: 32, // similar to template paragraph size
-    //       color: hexToRgb01('#989433'), // olive like template
-    //       lineHeight: 45,
-    //     }
-
-    //     drawWrappedFromTop(
-    //       page,
-    //       sentence,
-    //       PLAN_LINE.x,
-    //       PLAN_LINE.topFromTop,
-    //       PLAN_LINE.maxW,
-    //       height,
-    //       {
-    //         font: fonts.regular,
-    //         size: PLAN_LINE.size,
-    //         color: PLAN_LINE.color,
-    //         lineHeight: PLAN_LINE.lineHeight,
-    //       },
-    //     )
-    //   }
-
-    //   // ------------------------------
-    //   // Page 6: Bottom Contact Block
-    //   // ------------------------------
-
-    //   const OLIVE = hexToRgb01('#989433')
-    //   const ORANGE = hexToRgb01('#ff751f')
-    //   const BLACK = COLORS.black
-
-    //   const phoneRaw = safeLatin(data?.footerData?.branding?.phone || '')
-    //   const emailRaw = safeLatin(data?.footerData?.branding?.email || '')
-    //   const addressRaw = safeLatin(data?.footerData?.branding?.address || '')
-
-    //   // build links
-    //   const telDigits = phoneRaw.replace(/[^\d+]/g, '') // keep + and digits
-    //   const telHref = telDigits ? `tel:${telDigits}` : undefined
-    //   const mailHref = emailRaw ? `mailto:${emailRaw}` : undefined
-    //   const siteHref = 'https://shantalife.com'
-
-    //   // positions (tune only topFromTop if needed)
-    //   const CONTACT = {
-    //     x: 110,
-    //     topFromTop: 1250,
-    //     maxW: 1250, // ✅ width for wrapping
-    //     titleSize: 30,
-    //     bodySize: 28,
-    //     lineGap: 40,
-    //   }
-
-    //   // Title
-    //   drawWrappedFromTop(
-    //     page,
-    //     'For Any Clarifications, Please Contact :',
-    //     CONTACT.x,
-    //     CONTACT.topFromTop,
-    //     CONTACT.maxW,
-    //     height,
-    //     {
-    //       font: fonts.regular,
-    //       size: CONTACT.titleSize,
-    //       color: BLACK,
-    //       lineHeight: CONTACT.titleSize * 1.25,
-    //     },
-    //   )
-
-    //   // "Shanta Life Insurance PLC Customer Service"
-    //   const line1Y = height - (CONTACT.topFromTop + 60) - CONTACT.bodySize
-    //   drawTextSegments(page, CONTACT.x, line1Y, [
-    //     {
-    //       text: 'Shanta Life Insurance PLC ',
-    //       font: fonts.regular,
-    //       size: CONTACT.bodySize,
-    //       color: BLACK,
-    //     },
-    //     // { text: 'Customer Service', font: fonts.regular, size: CONTACT.bodySize, color: OLIVE },
-    //   ])
-
-    //   // Next lines base Y (pdf coords)
-    //   const baseTop = CONTACT.topFromTop + 110
-    //   const yPhone = height - baseTop - CONTACT.bodySize
-    //   const yEmail = yPhone - CONTACT.lineGap
-    //   const yWeb = yEmail - CONTACT.lineGap
-    //   const yAddr = yWeb - CONTACT.lineGap
-
-    //   // Phone: <olive value clickable>
-    //   drawLabelValueLine(pdfDoc, page, {
-    //     x: CONTACT.x,
-    //     y: yPhone,
-    //     label: 'Phone : ',
-    //     value: phoneRaw || '—',
-    //     font: fonts.regular,
-    //     size: CONTACT.bodySize,
-    //     labelColor: BLACK,
-    //     valueColor: OLIVE,
-    //     linkUrl: telHref,
-    //   })
-
-    //   // Email: <olive value clickable>
-    //   drawLabelValueLine(pdfDoc, page, {
-    //     x: CONTACT.x,
-    //     y: yEmail,
-    //     label: 'Email : ',
-    //     value: emailRaw || '—',
-    //     font: fonts.regular,
-    //     size: CONTACT.bodySize,
-    //     labelColor: BLACK,
-    //     valueColor: OLIVE,
-    //     linkUrl: mailHref,
-    //   })
-
-    //   // Website: Shanta Life (olive + clickable)
-    //   drawLabelValueLine(pdfDoc, page, {
-    //     x: CONTACT.x,
-    //     y: yWeb,
-    //     label: 'Website : ',
-    //     value: 'https://shantalife.com',
-    //     font: fonts.regular,
-    //     size: CONTACT.bodySize,
-    //     labelColor: BLACK,
-    //     valueColor: OLIVE,
-    //     linkUrl: siteHref,
-    //   })
-
-    //   /**
-    //    * ✅ Office Address: WRAP the VALUE to next line(s)
-    //    * - Label stays on first line
-    //    * - Value starts right after label, then continues on next lines aligned with value start
-    //    */
-    //   {
-    //     const label = 'Office Address : '
-    //     const value = addressRaw || '—'
-
-    //     const labelW = fonts.regular.widthOfTextAtSize(label, CONTACT.bodySize)
-    //     const valueX = CONTACT.x + labelW
-
-    //     // available width for the value portion on the first line
-    //     const firstLineMaxW = Math.max(1, CONTACT.maxW - labelW)
-
-    //     // wrap based on first-line available width
-    //     const lines = wrapByWidth(value, fonts.regular, CONTACT.bodySize, firstLineMaxW)
-
-    //     // draw label (black)
-    //     page.drawText(label, {
-    //       x: CONTACT.x,
-    //       y: yAddr,
-    //       size: CONTACT.bodySize,
-    //       font: fonts.regular,
-    //       color: BLACK,
-    //     })
-
-    //     // draw first line (olive) right after label
-    //     if (lines.length) {
-    //       page.drawText(lines[0], {
-    //         x: valueX,
-    //         y: yAddr,
-    //         size: CONTACT.bodySize,
-    //         font: fonts.regular,
-    //         color: OLIVE,
-    //       })
-    //     }
-
-    //     // draw remaining lines under the value start (same x as valueX)
-    //     let yy = yAddr - CONTACT.lineGap
-    //     for (let i = 1; i < lines.length; i++) {
-    //       page.drawText(lines[i], {
-    //         x: valueX,
-    //         y: yy,
-    //         size: CONTACT.bodySize,
-    //         font: fonts.regular,
-    //         color: OLIVE,
-    //       })
-    //       yy -= CONTACT.lineGap
-    //     }
-    //   }
-    // }
     if (i === 5) {
       // -------------------------------------------------------
       // Fake dynamic data (replace later with real data)
@@ -2489,7 +3187,7 @@ export async function generateQuotePdf(data: IllustrationData) {
 
       // --- Name (top-left) ---
       const NAME = {
-        x: 154, // left
+        x: 105, // left
         yBottomFromTop: 316, // bottom of text bbox (from top)
         fontSize: 28,
         color: hexToRgb01('#989433'), // sampled from old image (olive)
@@ -2545,7 +3243,7 @@ export async function generateQuotePdf(data: IllustrationData) {
         // ✅ coordinates tuned to your template (FROM TOP)
         // adjust ONLY these if needed
         const PLAN_LINE = {
-          x: 115, // left margin similar to other text
+          x: 105, // left margin similar to other text
           topFromTop: 650, // 🔥 this matches the paragraph area in your image
           maxW: 1180, // wrap width
           size: 32, // similar to template paragraph size
