@@ -713,6 +713,7 @@ const CalculatorSection = ({ block, footerData }: Props) => {
                 open={verifyOpen}
                 onOpenChange={setVerifyOpen}
                 onVerified={onVerified}
+                footerData={footerData}
               />
 
               {/* PDF modal */}

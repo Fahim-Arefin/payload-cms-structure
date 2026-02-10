@@ -1353,8 +1353,8 @@ function QuoteSection(props: QuoteSectionProps) {
               xl:py-3 lg:my-3 xl:my-4 text-center text-[#434342]"
                     >
                       {Math.ceil(apiResponse?.dps_or_single_payment_sum_assured) <= 10000000
-                        ? 'Incase of accidental death , double of this sum assured will be payable'
-                        : 'Incase of accidental death , 1 crore BDT will be payable in addition to this sum assured'}
+                        ? 'Incase of accidental death , double of this sum assured will be payable.'
+                        : 'Incase of accidental death , 1 crore BDT will be payable in addition to this sum assured.'}
                     </h2>
                   )}
 

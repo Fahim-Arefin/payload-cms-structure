@@ -2218,11 +2218,16 @@ function QuoteForm({
   }
 
   const calculateSuggestedAmount = () => {
-    if (formData.Term && formData.annualIncome) {
+    if (formData.Term && formData.annualIncome && formData.PlanCode) {
       const calculated = formData.Term * formData.annualIncome * 0.1
-      return Math.max(calculated, 100000)
+      // return Math.max(calculated, 100000)
+      if (formData.PlanCode === 14) {
+        return Math.max(calculated, 50000)
+      } else {
+        return Math.max(calculated, 100000)
+      }
     }
-    return 100000
+    return 50000
   }
   const suggestedAmount = calculateSuggestedAmount()
 
@@ -2463,7 +2468,12 @@ function QuoteForm({
         return 'Please enter your annual income'
       case 'SumAssured':
         if (!formData.SumAssured) return 'Please enter sum assured amount'
-        if (formData.SumAssured < 100000) return 'Sum assured must be at least ৳1,00,000'
+        if (formData?.PlanCode === 14 && formData.SumAssured < 50000) {
+          return 'Sum assured / premium must be at least ৳50,000'
+        }
+        if (formData?.PlanCode !== 14 && formData.SumAssured < 100000) {
+          return 'Sum assured / premium must be at least ৳1,00,000'
+        }
         return ''
       case 'Term':
         return 'Please select a tenure'
@@ -2495,7 +2505,10 @@ function QuoteForm({
       PlanCode: !formData.PlanCode,
       Age: !formData.dateOfBirth || formData.Age < 18 || formData.Age > 65,
       annualIncome: !formData.annualIncome,
-      SumAssured: !formData.SumAssured || formData.SumAssured < 100000,
+      SumAssured:
+        !formData.SumAssured ||
+        (formData.PlanCode === 14 && formData.SumAssured < 50000) ||
+        (formData.PlanCode !== 14 && formData.SumAssured < 100000),
       Term: !formData.Term,
       PaymentMode: !formData.PaymentMode,
       Gender: formData.Gender === undefined || formData.Gender === null,
@@ -3488,7 +3501,7 @@ function QuoteForm({
           aria-invalid={fieldErrors.SumAssured || undefined}
           aria-describedby={fieldErrors.SumAssured ? 'sumAssured-error' : undefined}
           id="sumAssured"
-          min={100000}
+          // min={formData?.PlanCode === 14 ? 50000 : 100000}
           type="number"
           placeholder={
             formData?.PlanCode === 14 ||

@@ -24,7 +24,7 @@ type Props = {
   open: boolean
   onOpenChange: (v: boolean) => void
   onVerified: () => void // called when phone matches -> open PDF
-  footerData: GlobalFooter
+  footerData?: GlobalFooter | null
 }
 
 /* =========================
