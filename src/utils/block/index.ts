@@ -1,0 +1,49 @@
+export const validateSectionIdOptional = (val: unknown) => {
+  const raw = String(val ?? '')
+
+  // required
+  if (!raw.trim()) {
+    return true // optional
+  }
+
+  // no leading/trailing spaces
+  if (raw !== raw.trim()) {
+    return 'Section ID must not have leading or trailing spaces.'
+  }
+
+  const s = raw.trim()
+
+  // no spaces at all
+  if (/\s/.test(s)) {
+    return 'No spaces allowed. Use "-" to separate words (e.g., "blog-section", not "blog section").'
+  }
+
+  // allowed chars: letters, numbers, hyphen
+  if (!/^[A-Za-z0-9-]+$/.test(s)) {
+    return 'Section ID can only contain letters, numbers, and hyphens (e.g., "blog-section").'
+  }
+
+  return true
+}
+
+export const validateShortText =
+  (label: string, max: number, required = false) =>
+  (val: unknown) => {
+    const s = (val ?? '').toString().trim()
+    if (required && !s) return `${label} is required.`
+    if (!s) return true
+    if (s.length > max) return `${label} must be at most ${max} characters.`
+    return true
+  }
+
+/** require highlight text to be a substring of a sibling text field */
+export const validateHighlightedInField =
+  (label: string, targetField: string, max: number, required = false) =>
+  (val: unknown, { siblingData }: any) => {
+    const s = (val ?? '').toString().trim()
+    if (required && !s) return `${label} is required.`
+    if (!s) return true
+    if (s.length > max) return `${label} must be at most ${max} characters.`
+    const target = (siblingData?.[targetField] ?? '').toString()
+    return target.includes(s) ? true : `${label} must exist within ${targetField} exactly.`
+  }

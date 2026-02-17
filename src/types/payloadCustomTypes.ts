@@ -77,6 +77,7 @@ import {
   CAREER_SHAPE_SLUG_AND_TAG,
   CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG,
   CAREER_CARDS_SLUG_AND_TAG,
+  BASIC_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -488,4 +489,12 @@ export type CareerShapeBlockType = Extract<
 export type CareerAuraProgramInsidersBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG }
+>
+
+// ===========================================================
+// ===========================================================
+// new project sagar rope block types
+export type BasicHeroBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof BASIC_HERO_SLUG_AND_TAG }
 >

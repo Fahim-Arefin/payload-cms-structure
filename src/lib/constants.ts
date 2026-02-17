@@ -591,3 +591,20 @@ export const CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG = 'career-aura-program-in
 export const CAREER_AURA_PROGRAM_INSIDERS_BLOCK_LABEL = 'Career Aura Program Insiders'
 export const CAREER_AURA_PROGRAM_INSIDERS_CACHE_KEY = 'career-aura-program-insiders-data'
 export const CAREER_AURA_PROGRAM_INSIDERS_BLOCK_THUMBNAIL_URL = `${folder}/career-aura-program-insiders-block-thumbnail.png`
+
+// =============================================================================================
+// =============================================================================================
+// =============================================================================================
+
+// new project sagar rope block constants
+
+// thumbnail folder name
+const thumbnailFolder = '/assets/block-thumbnails'
+
+// Group
+export const HERO_BLOCKS = 'Hero Blocks'
+
+export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
+export const BASIC_HERO_BLOCK_LABEL = 'Hero (Basic)'
+export const BASIC_HERO_CACHE_KEY = 'basic-hero-data'
+export const BASIC_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/basic-hero-block-thumbnail.jpg`
