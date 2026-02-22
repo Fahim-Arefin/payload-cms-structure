@@ -75,6 +75,7 @@ import {
   HERO_DYNAMIC_SLUG_AND_TAG,
   CAREER_SHAPE_SLUG_AND_TAG,
   CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG,
+  BASIC_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -137,6 +138,7 @@ import PlanInfoDesign06Block from './planInfoDesign06/PlanInfoDesign06Block'
 import HeroDynamicBlock from './heroDynamic/HeroDynamicBlock'
 import CareerShapeBlock from './careerShape/CareerShapeBlock'
 import CareerAuraProgramInsidersBlock from './careerAuraProgramInsiders/CareerAuraProgramInsidersBlock'
+import BasicHeroBlock from './BasicHero/BasicHeroBlock'
 
 type Params = Record<string, string>
 
@@ -314,6 +316,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CareerShapeBlock key={block.id} block={block} params={params} />
     case CAREER_AURA_PROGRAM_INSIDERS_SLUG_AND_TAG:
       return <CareerAuraProgramInsidersBlock key={block.id} block={block} params={params} />
+
+    // sagar-rope specific blocks
+    case BASIC_HERO_SLUG_AND_TAG:
+      return <BasicHeroBlock key={block.id} block={block} params={params} />
 
     default:
       return null

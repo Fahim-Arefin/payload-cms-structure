@@ -2,33 +2,130 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =========================
+   Proxima Nova
+========================= */
 @font-face {
-  font-family: 'Avenir LT Std';
-  src: url('/fonts/AvenirLTProLight.otf') format('opentype');
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proxima-nova/proximanova_light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'Avenir LT Std';
-  src: url('/fonts/AvenirLTProBook.otf') format('opentype');
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proxima-nova/proximanova_regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Avenir LT Std';
-  src: url('/fonts/AvenirLTProMedium.otf') format('opentype');
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proxima-nova/proximanova_bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proxima-nova/proximanova_boldit.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proxima-nova/proximanova_extrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proxima-nova/proximanova_black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* If you keep the black .ttf instead of .otf, use this instead:
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proxima-nova/proximanova-black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('/fonts/proxima-nova/proximanova-blackit.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* =========================
+   Manrope
+========================= */
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/manrope/manrope-thin.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/manrope/manrope-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/manrope/manrope-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/manrope/manrope-medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Avenir LT Std';
-  src: url('/fonts/AvenirLTProHeavy.otf') format('opentype');
+  font-family: 'Manrope';
+  src: url('/fonts/manrope/manrope-semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/manrope/manrope-bold.otf') format('opentype');
   font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/manrope/manrope-extrabold.otf') format('opentype');
+  font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
@@ -94,7 +191,25 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-avenir;
+    @apply bg-background text-foreground font-proxima;
+  }
+}
+
+@layer base {
+  :root {
+    /* ===== Figma Color Library ===== */
+    --cyan: 51 204 204; /* #33CCCC */
+
+    --bg-1: 242 242 243; /* #F2F2F3 */
+
+    --white-1: 255 255 255; /* #FFFFFF */
+    --white-2: 231 231 238; /* #E7E7EE */
+    --white-3: 104 104 147; /* #686893 */
+
+    --dark-1: 7 7 37; /* #070725 */
+    --dark-2: 14 14 71; /* #0E0E47 */
+    --dark-2b: 9 9 47; /* #09092F */
+    --dark-3: 11 11 59; /* #0B0B3B */
   }
 }
 
@@ -159,12 +274,13 @@
            xl:px-[200px]  xl:py-[100px] 
            2xl:px-[300px] 2xl:py-[150px];
   } */
+
   .container-padding {
-    @apply px-5 py-12 
-           md:px-[80px]  md:py-[70px] 
-           lg:px-[130px]  lg:py-[90px] 
-           xl:px-[200px]  xl:py-[100px] 
-           2xl:px-[300px] 2xl:py-[150px];
+    @apply px-[50px] py-9 
+           md:px-[120px] md:py-[48px]
+           lg:px-[170px] lg:py-[68px]
+           xl:px-[225px] xl:py-[90px]
+           2xl:px-[280px] 2xl:py-[112px];
   }
 
   .container-padding-t {

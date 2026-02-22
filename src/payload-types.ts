@@ -654,11 +654,11 @@ export interface Page {
           pendingLogoCrop?: string | null;
           logoBlurDataURL?: string | null;
           /**
-           * Heading 1 (English). Max 120 characters.
+           * Heading 1 (English). Max 40 characters.
            */
           heading1: string;
           /**
-           * শিরোনাম ১ (বাংলা)। সর্বোচ্চ ১২০ অক্ষর।
+           * শিরোনাম ১ (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
            */
           heading1BN: string;
           /**
@@ -670,11 +670,11 @@ export interface Page {
            */
           heading1HighlightedBN?: string | null;
           /**
-           * Heading 2 (English). Max 160 characters.
+           * Heading 2 (English). Max 40 characters.
            */
           heading2?: string | null;
           /**
-           * শিরোনাম ২ (বাংলা)। সর্বোচ্চ ১৬০ অক্ষর।
+           * শিরোনাম ২ (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
            */
           heading2BN?: string | null;
           /**
@@ -686,11 +686,11 @@ export interface Page {
            */
           heading2HighlightedBN?: string | null;
           /**
-           * Heading 3 (English). Max 160 characters.
+           * Heading 3 (English). Max 40 characters.
            */
           heading3?: string | null;
           /**
-           * শিরোনাম ৩ (বাংলা)। সর্বোচ্চ ১৬০ অক্ষর।
+           * শিরোনাম ৩ (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
            */
           heading3BN?: string | null;
           /**
@@ -731,37 +731,37 @@ export interface Page {
             };
             [k: string]: unknown;
           } | null;
+          ctaButtons?:
+            | {
+                /**
+                 * Max 40 characters.
+                 */
+                label: string;
+                /**
+                 * সর্বোচ্চ ৪০ অক্ষর।
+                 */
+                labelBN: string;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
+                /**
+                 * Select the button style
+                 */
+                style?: ('primary' | 'secondary' | 'glass') | null;
+                /**
+                 * Select the button size
+                 */
+                size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
+                id?: string | null;
+              }[]
+            | null;
           id?: string | null;
         }[];
-        ctaButtons?:
-          | {
-              /**
-               * Max 40 characters.
-               */
-              label: string;
-              /**
-               * সর্বোচ্চ ৪০ অক্ষর।
-               */
-              labelBN: string;
-              /**
-               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
-               */
-              buttonLink: string | Page;
-              /**
-               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
-               */
-              sectionId?: string | null;
-              /**
-               * Select the button style
-               */
-              style?: ('primary' | 'secondary' | 'glass') | null;
-              /**
-               * Select the button size
-               */
-              size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
-              id?: string | null;
-            }[]
-          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'basic-hero';
@@ -8035,17 +8035,17 @@ export interface PagesSelect<T extends boolean = true> {
                     heading3HighlightedBN?: T;
                     description?: T;
                     descriptionBN?: T;
-                    id?: T;
-                  };
-              ctaButtons?:
-                | T
-                | {
-                    label?: T;
-                    labelBN?: T;
-                    buttonLink?: T;
-                    sectionId?: T;
-                    style?: T;
-                    size?: T;
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          labelBN?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          style?: T;
+                          size?: T;
+                          id?: T;
+                        };
                     id?: T;
                   };
               id?: T;

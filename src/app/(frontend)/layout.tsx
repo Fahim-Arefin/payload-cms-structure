@@ -201,11 +201,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <body className={`${notoSerifBengali.variable}`}>
         <Providers initialLang="en">
           {/* bg-[#F6EDDD] */}
-          <main className="min-h-screen relative font-avenir 3xl:max-w-[1925px] 3xl:mx-auto">
-            {/* <TopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" /> */}
+          <main className="min-h-screen relative 3xl:max-w-[1925px] 3xl:mx-auto font-proxima">
             <ServerTopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" />
-            {/* <Navbar /> */}
-            <ServerNavbar />
+            {/* <ServerNavbar /> */}
             <div className="min-h-screen">{children}</div>
             <CookieConsentBanner />
             <div className="hidden lg:block">

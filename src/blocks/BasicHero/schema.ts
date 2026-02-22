@@ -344,8 +344,8 @@ import {
   validateShortText,
 } from '@/utils/block'
 
-const TITLE_MAX = 120
-const SUB_TITLE_MAX = 160
+const TITLE_MAX = 40
+const SUB_TITLE_MAX = 40
 const HIGHLIGHT_MAX = 40
 const BUTTON_LABEL_MAX = 40
 
@@ -637,113 +637,116 @@ const BasicHeroSchema: Block = {
             },
           ],
         },
-      ],
-    },
 
-    // ===== CTA Buttons (array format, exactly like the block fields) =====
-    {
-      name: 'ctaButtons',
-      type: 'array',
-      required: false,
-      minRows: 0,
-      maxRows: 2,
-      labels: { singular: 'CTA Button', plural: 'CTA Buttons' },
-      fields: [
+        // ===== CTA Buttons (array format, exactly like the block fields) =====
         {
-          type: 'row',
-          fields: [
-            // EN
-            {
-              name: 'label',
-              type: 'text',
-              required: true,
-              label: 'Button Text',
-              maxLength: BUTTON_LABEL_MAX,
-              validate: validateShortText('Button Text', BUTTON_LABEL_MAX, true),
-              admin: { width: '50%', description: `Max ${BUTTON_LABEL_MAX} characters.` },
-            },
-            // BN
-            {
-              name: 'labelBN',
-              type: 'text',
-              required: true,
-              label: 'বাটনের টেক্সট (বাংলা)',
-              maxLength: BUTTON_LABEL_MAX,
-              validate: validateShortText('Button Text (BN)', BUTTON_LABEL_MAX, true),
-              admin: { width: '50%', description: `সর্বোচ্চ ${bnNum(BUTTON_LABEL_MAX)} অক্ষর।` },
-            },
-          ],
-        },
-
-        {
-          type: 'row',
+          name: 'ctaButtons',
+          type: 'array',
+          required: false,
+          minRows: 0,
+          maxRows: 2,
+          labels: { singular: 'CTA Button', plural: 'CTA Buttons' },
           fields: [
             {
               type: 'row',
               fields: [
+                // EN
                 {
-                  name: 'buttonLink',
-                  label: 'Link to (internal page)',
-                  type: 'relationship',
-                  relationTo: 'pages',
-                  required: true,
-                  admin: {
-                    width: '50%',
-                    description:
-                      'Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.',
-                  },
-                },
-                {
-                  name: 'sectionId',
+                  name: 'label',
                   type: 'text',
-                  label: 'Section ID (anchor)',
-                  required: false,
+                  required: true,
+                  label: 'Button Text',
+                  maxLength: BUTTON_LABEL_MAX,
+                  validate: validateShortText('Button Text', BUTTON_LABEL_MAX, true),
+                  admin: { width: '50%', description: `Max ${BUTTON_LABEL_MAX} characters.` },
+                },
+                // BN
+                {
+                  name: 'labelBN',
+                  type: 'text',
+                  required: true,
+                  label: 'বাটনের টেক্সট (বাংলা)',
+                  maxLength: BUTTON_LABEL_MAX,
+                  validate: validateShortText('Button Text (BN)', BUTTON_LABEL_MAX, true),
                   admin: {
                     width: '50%',
-                    description:
-                      'Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").',
+                    description: `সর্বোচ্চ ${bnNum(BUTTON_LABEL_MAX)} অক্ষর।`,
                   },
-                  validate: validateSectionIdOptional,
                 },
               ],
             },
-          ],
-        },
-        {
-          type: 'row',
-          fields: [
-            // Non-localized control (not user-facing text)
+
             {
-              name: 'style',
-              type: 'select',
-              label: 'Button Style',
-              options: [
-                { label: 'Primary', value: 'primary' },
-                { label: 'Secondary', value: 'secondary' },
-                { label: 'Glass', value: 'glass' },
+              type: 'row',
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'buttonLink',
+                      label: 'Link to (internal page)',
+                      type: 'relationship',
+                      relationTo: 'pages',
+                      required: true,
+                      admin: {
+                        width: '50%',
+                        description:
+                          'Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.',
+                      },
+                    },
+                    {
+                      name: 'sectionId',
+                      type: 'text',
+                      label: 'Section ID (anchor)',
+                      required: false,
+                      admin: {
+                        width: '50%',
+                        description:
+                          'Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").',
+                      },
+                      validate: validateSectionIdOptional,
+                    },
+                  ],
+                },
               ],
-              defaultValue: 'primary',
-              admin: {
-                width: '50%',
-                description: 'Select the button style',
-              },
             },
-            // size?: 'small' | 'medium' | 'large' | 'extraLarge'
             {
-              name: 'size',
-              type: 'select',
-              label: 'Button Size',
-              options: [
-                { label: 'Small', value: 'small' },
-                { label: 'Medium', value: 'medium' },
-                { label: 'Large', value: 'large' },
-                { label: 'ExtraLarge', value: 'extraLarge' },
+              type: 'row',
+              fields: [
+                // Non-localized control (not user-facing text)
+                {
+                  name: 'style',
+                  type: 'select',
+                  label: 'Button Style',
+                  options: [
+                    { label: 'Primary', value: 'primary' },
+                    { label: 'Secondary', value: 'secondary' },
+                    { label: 'Glass', value: 'glass' },
+                  ],
+                  defaultValue: 'primary',
+                  admin: {
+                    width: '50%',
+                    description: 'Select the button style',
+                  },
+                },
+                // size?: 'small' | 'medium' | 'large' | 'extraLarge'
+                {
+                  name: 'size',
+                  type: 'select',
+                  label: 'Button Size',
+                  options: [
+                    { label: 'Small', value: 'small' },
+                    { label: 'Medium', value: 'medium' },
+                    { label: 'Large', value: 'large' },
+                    { label: 'ExtraLarge', value: 'extraLarge' },
+                  ],
+                  defaultValue: 'extraLarge',
+                  admin: {
+                    width: '50%',
+                    description: 'Select the button size',
+                  },
+                },
               ],
-              defaultValue: 'extraLarge',
-              admin: {
-                width: '50%',
-                description: 'Select the button size',
-              },
             },
           ],
         },

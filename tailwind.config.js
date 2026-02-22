@@ -12,9 +12,15 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        avenir: ['Avenir LT Std', 'Noto Serif Bengali', 'sans-serif'],
-        // Force Noto when you explicitly need it
-        noto: ['Noto Serif Bengali', 'Avenir LT Std', 'sans-serif'],
+        // avenir: ['Avenir LT Std', 'Noto Serif Bengali', 'sans-serif'],
+        // // Force Noto when you explicitly need it
+        // noto: ['Noto Serif Bengali', 'Avenir LT Std', 'sans-serif'],
+
+        proxima: ['Proxima Nova', 'Noto Serif Bengali', 'sans-serif'],
+        manrope: ['Manrope', 'Noto Serif Bengali', 'sans-serif'],
+
+        // keep your bn override
+        noto: ['Noto Serif Bengali', 'Proxima Nova', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -62,6 +68,20 @@ export default {
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))',
         },
+
+        // Add your custom colors here
+        cyan: 'rgb(var(--cyan) / <alpha-value>)',
+
+        'bg-1': 'rgb(var(--bg-1) / <alpha-value>)',
+
+        'white-1': 'rgb(var(--white-1) / <alpha-value>)',
+        'white-2': 'rgb(var(--white-2) / <alpha-value>)',
+        'white-3': 'rgb(var(--white-3) / <alpha-value>)',
+
+        'dark-1': 'rgb(var(--dark-1) / <alpha-value>)',
+        'dark-2': 'rgb(var(--dark-2) / <alpha-value>)',
+        'dark-2b': 'rgb(var(--dark-2b) / <alpha-value>)',
+        'dark-3': 'rgb(var(--dark-3) / <alpha-value>)',
       },
       boxShadow: {
         'custom-black': '0px 0px 10px 0px #00000082',
