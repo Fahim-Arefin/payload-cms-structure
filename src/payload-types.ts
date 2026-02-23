@@ -749,14 +749,6 @@ export interface Page {
                  * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
                  */
                 sectionId?: string | null;
-                /**
-                 * Select the button style
-                 */
-                style?: ('primary' | 'secondary' | 'glass') | null;
-                /**
-                 * Select the button size
-                 */
-                size?: ('small' | 'medium' | 'large' | 'extraLarge') | null;
                 id?: string | null;
               }[]
             | null;
@@ -8042,8 +8034,6 @@ export interface PagesSelect<T extends boolean = true> {
                           labelBN?: T;
                           buttonLink?: T;
                           sectionId?: T;
-                          style?: T;
-                          size?: T;
                           id?: T;
                         };
                     id?: T;

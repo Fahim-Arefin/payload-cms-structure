@@ -1,3 +1,4 @@
+import Button01 from '@/components/custom/sagar-ropes-shared/buttons/Button01'
 import GlobalButton from '@/components/custom/shared/GlobalButton'
 import LocalizedHighlighted from '@/components/custom/shared/LocalizedHighlighted'
 import LocalizedRichText from '@/components/custom/shared/LocalizedRichText'
@@ -17,8 +18,8 @@ function BasicHeroItem({ item }: Props) {
 
   return (
     <div
-      className="relative w-full md:aspect-[16/9] h-screen md:h-auto"
-      // className="relative w-full h-screen"
+      // className="relative w-full md:aspect-[16/9] h-screen md:h-auto"
+      className="relative w-full h-screen"
     >
       {/* background image */}
       {typeof item.image === 'object' && item.image?.url && (
@@ -46,7 +47,10 @@ function BasicHeroItem({ item }: Props) {
 
       {/* main content */}
       <div className="absolute inset-0 z-20 flex items-center">
-        <div className="container-padding border-2 border-black w-full">
+        <div
+          className="container-padding border-2 border-black w-full
+        space-y-4 lg:space-y-6 xl:space-y-8 2xl:space-y-10"
+        >
           {/* 3 heading */}
           <div
             className={`font-proxima text-white uppercase font-bold 
@@ -87,7 +91,7 @@ function BasicHeroItem({ item }: Props) {
           {/* description */}
           <div
             className={`font-manrope text-white-1 font-light text-opacity-90
-          text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] 2xl:text-[24px]
+          global-p1
           leading-[154.545%]
           `}
           >
@@ -107,22 +111,9 @@ function BasicHeroItem({ item }: Props) {
                 <div key={`pageLink-${index}`}>
                   {/* <Link href={pageHref(block.buttonLink)}> */}
                   <Link href={href}>
-                    <GlobalButton
-                      // size="large"
-                      size={block?.size ?? 'small'}
-                      variant={
-                        block.style as
-                          | 'link'
-                          | 'primary'
-                          | 'glass'
-                          | 'default'
-                          | 'destructive'
-                          | 'outline'
-                          | 'secondary'
-                      }
-                    >
+                    <Button01>
                       <LocalizedText en={block.label} bn={block.labelBN} />
-                    </GlobalButton>
+                    </Button01>
                   </Link>
                 </div>
               )

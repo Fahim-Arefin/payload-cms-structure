@@ -710,44 +710,43 @@ const BasicHeroSchema: Block = {
                 },
               ],
             },
-            {
-              type: 'row',
-              fields: [
-                // Non-localized control (not user-facing text)
-                {
-                  name: 'style',
-                  type: 'select',
-                  label: 'Button Style',
-                  options: [
-                    { label: 'Primary', value: 'primary' },
-                    { label: 'Secondary', value: 'secondary' },
-                    { label: 'Glass', value: 'glass' },
-                  ],
-                  defaultValue: 'primary',
-                  admin: {
-                    width: '50%',
-                    description: 'Select the button style',
-                  },
-                },
-                // size?: 'small' | 'medium' | 'large' | 'extraLarge'
-                {
-                  name: 'size',
-                  type: 'select',
-                  label: 'Button Size',
-                  options: [
-                    { label: 'Small', value: 'small' },
-                    { label: 'Medium', value: 'medium' },
-                    { label: 'Large', value: 'large' },
-                    { label: 'ExtraLarge', value: 'extraLarge' },
-                  ],
-                  defaultValue: 'extraLarge',
-                  admin: {
-                    width: '50%',
-                    description: 'Select the button size',
-                  },
-                },
-              ],
-            },
+            // {
+            //   type: 'row',
+            //   fields: [
+            //     // Non-localized control (not user-facing text)
+            //     {
+            //       name: 'style',
+            //       type: 'select',
+            //       label: 'Button Style',
+            //       options: [
+            //         { label: 'Button 01', value: 'btn01' },
+            //         { label: 'Button 02', value: 'btn02' },
+            //         { label: 'Button 03', value: 'btn03' },
+            //       ],
+            //       defaultValue: 'btn01',
+            //       admin: {
+            //         width: '50%',
+            //         description: 'Select the button style',
+            //       },
+            //     },
+            //     {
+            //       name: 'size',
+            //       type: 'select',
+            //       label: 'Button Size',
+            //       options: [
+            //         { label: 'Small', value: 'small' },
+            //         { label: 'Medium', value: 'medium' },
+            //         { label: 'Large', value: 'large' },
+            //         { label: 'ExtraLarge', value: 'extraLarge' },
+            //       ],
+            //       defaultValue: 'extraLarge',
+            //       admin: {
+            //         width: '50%',
+            //         description: 'Select the button size',
+            //       },
+            //     },
+            //   ],
+            // },
           ],
         },
       ],
