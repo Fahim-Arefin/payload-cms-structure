@@ -1,5 +1,4 @@
 import Button01 from '@/components/custom/sagar-ropes-shared/buttons/Button01'
-import GlobalButton from '@/components/custom/shared/GlobalButton'
 import LocalizedHighlighted from '@/components/custom/shared/LocalizedHighlighted'
 import LocalizedRichText from '@/components/custom/shared/LocalizedRichText'
 import LocalizedText from '@/components/custom/shared/LocalizedText'
@@ -8,6 +7,8 @@ import { pageHref, resolvePageSlug } from '@/lib/utils'
 import { BasicHeroBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import Link from 'next/link'
+import union from '/public/assets/icons/union.png'
+import explore from '/public/assets/icons/explore.png'
 
 type Props = {
   item: BasicHeroBlockType['heroes'][number]
@@ -27,7 +28,7 @@ function BasicHeroItem({ item }: Props) {
           src={item.image?.url || ''}
           alt={'hero banner image'}
           fill
-          className={`object-cover object-center `}
+          className={`object-cover object-center`}
           sizes="(max-width: 767px) 300px, (max-width: 1349px) 50vw, 100vw"
           priority
           quality={85}
@@ -48,13 +49,15 @@ function BasicHeroItem({ item }: Props) {
       {/* main content */}
       <div className="absolute inset-0 z-20 flex items-center">
         <div
-          className="container-padding border-2 border-black w-full
-        space-y-4 lg:space-y-6 xl:space-y-8 2xl:space-y-10"
+          // border-2 border-black
+          className="container-padding w-full
+        space-y-10 lg:space-y-6 xl:space-y-8 2xl:space-y-10"
         >
           {/* 3 heading */}
           <div
             className={`font-proxima text-white uppercase font-bold 
              text-[38px] md:text-[48px] lg:text-[72px] xl:text-[96px] 2xl:text-[120px]
+             text-center md:text-start
               ${lang === 'bn' ? 'leading-[110%]' : `leading-[95.833%]`}
             `}
           >
@@ -91,7 +94,7 @@ function BasicHeroItem({ item }: Props) {
           {/* description */}
           <div
             className={`font-manrope text-white-1 font-light text-opacity-90
-          global-p1
+          global-p1 text-center md:text-start
           leading-[154.545%]
           `}
           >
@@ -101,23 +104,46 @@ function BasicHeroItem({ item }: Props) {
           </div>
 
           {/* cta btns */}
-          {item?.ctaButtons &&
-            item?.ctaButtons.map((block, index) => {
-              // If GlobalButton supports children (you already do in the YT button), render label as child:
-              const href = block?.sectionId
-                ? `/${resolvePageSlug(block?.buttonLink)}/#${block?.sectionId}`
-                : pageHref(block.buttonLink)
-              return (
-                <div key={`pageLink-${index}`}>
-                  {/* <Link href={pageHref(block.buttonLink)}> */}
-                  <Link href={href}>
-                    <Button01>
-                      <LocalizedText en={block.label} bn={block.labelBN} />
-                    </Button01>
-                  </Link>
-                </div>
-              )
-            })}
+          {item?.ctaButtons && item?.ctaButtons?.length > 0 && (
+            <div className="flex flex-wrap justify-center md:justify-start gap-4">
+              {item?.ctaButtons.map((block, index) => {
+                // If GlobalButton supports children (you already do in the YT button), render label as child:
+                const href = block?.sectionId
+                  ? `/${resolvePageSlug(block?.buttonLink)}/#${block?.sectionId}`
+                  : pageHref(block.buttonLink)
+                return (
+                  <div key={`pageLink-${index}`}>
+                    {/* <Link href={pageHref(block.buttonLink)}> */}
+                    <Link href={href}>
+                      {block?.style === 'btn01' && (
+                        <Button01>
+                          <LocalizedText en={block.label} bn={block.labelBN} />
+                        </Button01>
+                      )}
+                    </Link>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+
+          {/* explore more bedge */}
+          {item?.exploreMoreBadge && (
+            <div
+              className="absolute z-30 
+            bottom-16 md:bottom-[70px] xl:bottom-32  
+             right-1/2 translate-x-1/2 md:translate-x-0 md:right-8 lg:right-12 xl:right-32 2xl:right-52 "
+            >
+              <div className="relative h-[95px] w-[95px] rounded-full bg-white-1/10 flex justify-center items-center">
+                <Image src={union} alt="Explore More Badge" className="w-[24px] h-[30px]" />
+                <Image
+                  src={explore}
+                  alt="Explore More Badge"
+                  className="absolute w-[85%] h-[85%]"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

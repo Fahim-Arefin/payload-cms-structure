@@ -386,16 +386,16 @@ const BasicHeroSchema: Block = {
           ownerCollection: BASIC_HERO_SLUG_AND_TAG as any, // pass through to cropper
         } as any),
 
-        ...generateArrayImageFields({
-          fieldName: 'logo',
-          label: 'Logo Image',
-          description: 'Upload & crop a 1:1 logo image.',
-          aspectRatio: 1 / 1,
-          quality: 0.9,
-          maxKB: 400, // UI hint only; server accepts big files now
-          required: false,
-          ownerCollection: BASIC_HERO_SLUG_AND_TAG as any, // pass through to cropper
-        } as any),
+        // ...generateArrayImageFields({
+        //   fieldName: 'logo',
+        //   label: 'Logo Image',
+        //   description: 'Upload & crop a 1:1 logo image.',
+        //   aspectRatio: 1 / 1,
+        //   quality: 0.9,
+        //   maxKB: 400, // UI hint only; server accepts big files now
+        //   required: false,
+        //   ownerCollection: BASIC_HERO_SLUG_AND_TAG as any, // pass through to cropper
+        // } as any),
 
         // ===== Heading 1 (EN + BN) =====
         {
@@ -638,6 +638,17 @@ const BasicHeroSchema: Block = {
           ],
         },
 
+        {
+          name: 'exploreMoreBadge',
+          type: 'checkbox',
+          label: 'Show Explore More Badge',
+          defaultValue: false,
+          admin: {
+            width: '50%',
+            description: 'Show or hide the Explore More Badge',
+          },
+        },
+
         // ===== CTA Buttons (array format, exactly like the block fields) =====
         {
           name: 'ctaButtons',
@@ -710,43 +721,43 @@ const BasicHeroSchema: Block = {
                 },
               ],
             },
-            // {
-            //   type: 'row',
-            //   fields: [
-            //     // Non-localized control (not user-facing text)
-            //     {
-            //       name: 'style',
-            //       type: 'select',
-            //       label: 'Button Style',
-            //       options: [
-            //         { label: 'Button 01', value: 'btn01' },
-            //         { label: 'Button 02', value: 'btn02' },
-            //         { label: 'Button 03', value: 'btn03' },
-            //       ],
-            //       defaultValue: 'btn01',
-            //       admin: {
-            //         width: '50%',
-            //         description: 'Select the button style',
-            //       },
-            //     },
-            //     {
-            //       name: 'size',
-            //       type: 'select',
-            //       label: 'Button Size',
-            //       options: [
-            //         { label: 'Small', value: 'small' },
-            //         { label: 'Medium', value: 'medium' },
-            //         { label: 'Large', value: 'large' },
-            //         { label: 'ExtraLarge', value: 'extraLarge' },
-            //       ],
-            //       defaultValue: 'extraLarge',
-            //       admin: {
-            //         width: '50%',
-            //         description: 'Select the button size',
-            //       },
-            //     },
-            //   ],
-            // },
+            {
+              type: 'row',
+              fields: [
+                // Non-localized control (not user-facing text)
+                {
+                  name: 'style',
+                  type: 'select',
+                  label: 'Button Style',
+                  options: [
+                    { label: 'Button 01', value: 'btn01' },
+                    { label: 'Button 02', value: 'btn02' },
+                    { label: 'Button 03', value: 'btn03' },
+                  ],
+                  defaultValue: 'btn01',
+                  admin: {
+                    width: '50%',
+                    description: 'Select the button style',
+                  },
+                },
+                // {
+                //   name: 'size',
+                //   type: 'select',
+                //   label: 'Button Size',
+                //   options: [
+                //     { label: 'Small', value: 'small' },
+                //     { label: 'Medium', value: 'medium' },
+                //     { label: 'Large', value: 'large' },
+                //     { label: 'ExtraLarge', value: 'extraLarge' },
+                //   ],
+                //   defaultValue: 'extraLarge',
+                //   admin: {
+                //     width: '50%',
+                //     description: 'Select the button size',
+                //   },
+                // },
+              ],
+            },
           ],
         },
       ],

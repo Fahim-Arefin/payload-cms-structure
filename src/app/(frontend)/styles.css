@@ -221,6 +221,13 @@
            xl:px-[225px] xl:py-[90px]
            2xl:px-[280px] 2xl:py-[112px];
   }
+  .container-padding-left {
+    @apply pl-[50px]  
+           md:pl-[120px] 
+           lg:pl-[170px] 
+           xl:pl-[225px] 
+           2xl:pl-[280px];
+  }
 
   .global-link {
     @apply text-[12px] md:text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[14px];

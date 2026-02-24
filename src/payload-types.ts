@@ -646,14 +646,6 @@ export interface Page {
           pendingImageCrop?: string | null;
           imageBlurDataURL?: string | null;
           /**
-           * Upload & crop a 1:1 logo image.
-           */
-          logo?: (string | null) | Media;
-          logoOriginal?: (string | null) | Media;
-          pendingLogoOriginal?: string | null;
-          pendingLogoCrop?: string | null;
-          logoBlurDataURL?: string | null;
-          /**
            * Heading 1 (English). Max 40 characters.
            */
           heading1: string;
@@ -731,6 +723,10 @@ export interface Page {
             };
             [k: string]: unknown;
           } | null;
+          /**
+           * Show or hide the Explore More Badge
+           */
+          exploreMoreBadge?: boolean | null;
           ctaButtons?:
             | {
                 /**
@@ -749,6 +745,10 @@ export interface Page {
                  * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
                  */
                 sectionId?: string | null;
+                /**
+                 * Select the button style
+                 */
+                style?: ('btn01' | 'btn02' | 'btn03') | null;
                 id?: string | null;
               }[]
             | null;
@@ -8008,11 +8008,6 @@ export interface PagesSelect<T extends boolean = true> {
                     pendingImageOriginal?: T;
                     pendingImageCrop?: T;
                     imageBlurDataURL?: T;
-                    logo?: T;
-                    logoOriginal?: T;
-                    pendingLogoOriginal?: T;
-                    pendingLogoCrop?: T;
-                    logoBlurDataURL?: T;
                     heading1?: T;
                     heading1BN?: T;
                     heading1Highlighted?: T;
@@ -8027,6 +8022,7 @@ export interface PagesSelect<T extends boolean = true> {
                     heading3HighlightedBN?: T;
                     description?: T;
                     descriptionBN?: T;
+                    exploreMoreBadge?: T;
                     ctaButtons?:
                       | T
                       | {
@@ -8034,6 +8030,7 @@ export interface PagesSelect<T extends boolean = true> {
                           labelBN?: T;
                           buttonLink?: T;
                           sectionId?: T;
+                          style?: T;
                           id?: T;
                         };
                     id?: T;

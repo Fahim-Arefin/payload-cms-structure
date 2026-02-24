@@ -163,10 +163,17 @@ function BasicHeroSection({ block }: Props) {
           </div>
         )}
 
+        {/* left-1/2 -translate-x-1/2 */}
         {/* ✅ Pagination bars (like screenshot) */}
         {hasMultiple && (
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30">
-            <div className="flex items-center gap-3">
+          <div
+            className="absolute z-30
+            left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0
+           md:inset-x-0 md:container-padding-left
+          bottom-10 md:bottom-[70px] xl:bottom-32 
+          "
+          >
+            <div className="flex items-center gap-1 md:gap-2 md:pl-1">
               {Array.from({ length: count || block.heroes.length }).map((_, idx) => {
                 const isActive = idx === activeIndex
 
@@ -177,29 +184,19 @@ function BasicHeroSection({ block }: Props) {
                     aria-label={`Go to slide ${idx + 1}`}
                     onClick={() => api?.scrollTo(idx)}
                     className={[
-                      'relative h-[6px] rounded-full transition-all duration-500 ease-out',
+                      'relative h-[8px] transition-all duration-500 ease-out ',
                       // width animation
-                      isActive ? 'w-[140px]' : 'w-[26px]',
+                      isActive ? 'w-[50px] md:w-[80px]' : 'w-[13px] md:w-[26px]',
                       // color + visibility
                       isActive ? 'bg-[#2FC6C6]' : 'bg-[#2FC6C6]/40 hover:bg-[#2FC6C6]/70',
                     ].join(' ')}
-                  >
-                    {/* optional "cap" dot like the left tiny dot in screenshot */}
-                    {/* {isActive && (
-                      <span className="absolute -left-[10px] top-1/2 h-[6px] w-[6px] -translate-y-1/2 rounded-full bg-[#2FC6C6]" />
-                    )} */}
-                  </button>
+                  ></button>
                 )
               })}
             </div>
           </div>
         )}
       </Carousel>
-
-      {/* optional debug text - remove if not needed */}
-      {/* <div className="text-muted-foreground py-2 text-center text-sm">
-        Slide {activeIndex + 1} of {count}
-      </div> */}
     </div>
   )
 }
