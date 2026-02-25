@@ -23,7 +23,14 @@ export const AUDIT_LOG = 'Audit'
 // Group
 export const HERO_BLOCKS = 'Hero Blocks'
 
+// Basic Hero Block
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
 export const BASIC_HERO_BLOCK_LABEL = 'Hero (Basic)'
 export const BASIC_HERO_CACHE_KEY = 'basic-hero-data'
 export const BASIC_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/basic-hero-block-thumbnail.jpg`
+
+// Product Hero Block
+export const PRODUCT_HERO_SLUG_AND_TAG = 'product-hero'
+export const PRODUCT_HERO_BLOCK_LABEL = 'Hero (Product)'
+export const PRODUCT_HERO_CACHE_KEY = 'product-hero-data'
+export const PRODUCT_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-hero-block-thumbnail.jpg`

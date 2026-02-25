@@ -1,7 +1,8 @@
-import { BASIC_HERO_SLUG_AND_TAG } from '@/lib/constants'
+import { BASIC_HERO_SLUG_AND_TAG, PRODUCT_HERO_SLUG_AND_TAG } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
 import BasicHeroBlock from './BasicHero/BasicHeroBlock'
+import ProductHeroBlock from './ProductHero/ProductHeroBlock'
 
 type Params = Record<string, string>
 
@@ -10,6 +11,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
     // home page
     case BASIC_HERO_SLUG_AND_TAG:
       return <BasicHeroBlock key={block.id} block={block} params={params} />
+    case PRODUCT_HERO_SLUG_AND_TAG:
+      return <ProductHeroBlock key={block.id} block={block} params={params} />
 
     default:
       return null

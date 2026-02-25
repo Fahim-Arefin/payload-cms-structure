@@ -652,7 +652,7 @@
 // ==================================================================================
 // ==================================================================================
 
-import { BASIC_HERO_SLUG_AND_TAG } from '@/lib/constants'
+import { BASIC_HERO_SLUG_AND_TAG, PRODUCT_HERO_SLUG_AND_TAG } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
 
@@ -668,7 +668,13 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: BASIC_HERO_SLUG_AND_TAG,
       arrayKey: 'heroes',
-      mediaFields: ['image', 'logo'],
+      mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PRODUCT_HERO_SLUG_AND_TAG,
+      arrayKey: 'heroes',
+      mediaFields: ['image'],
     },
   ],
 

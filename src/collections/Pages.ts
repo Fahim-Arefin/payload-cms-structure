@@ -1,5 +1,6 @@
 // currently working code
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
+import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -122,6 +123,7 @@ export const Pages: CollectionConfig = {
       blocks: [
         // hero page
         BasicHeroSchema,
+        ProductHeroSchema,
         // common section
 
         // custom blocks
