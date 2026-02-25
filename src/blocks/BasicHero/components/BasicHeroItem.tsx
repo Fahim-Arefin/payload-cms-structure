@@ -2,21 +2,18 @@ import Button01 from '@/components/custom/sagar-ropes-shared/buttons/Button01'
 import LocalizedHighlighted from '@/components/custom/shared/LocalizedHighlighted'
 import LocalizedRichText from '@/components/custom/shared/LocalizedRichText'
 import LocalizedText from '@/components/custom/shared/LocalizedText'
-import useSSRLanguage from '@/hooks/useSSRLanguage'
 import { pageHref, resolvePageSlug } from '@/lib/utils'
 import { BasicHeroBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import Link from 'next/link'
-import union from '/public/assets/icons/union.png'
 import explore from '/public/assets/icons/explore.png'
+import union from '/public/assets/icons/union.png'
 
 type Props = {
   item: BasicHeroBlockType['heroes'][number]
 }
 
 function BasicHeroItem({ item }: Props) {
-  const lang = useSSRLanguage()
-
   return (
     <div
       // className="relative w-full md:aspect-[16/9] h-screen md:h-auto"
@@ -57,35 +54,34 @@ function BasicHeroItem({ item }: Props) {
           <div
             className={`font-proxima text-white uppercase font-bold 
              text-[38px] md:text-[48px] lg:text-[72px] xl:text-[96px] 2xl:text-[120px]
-             text-center md:text-start
-              ${lang === 'bn' ? 'leading-[110%]' : `leading-[95.833%]`}
+             text-center md:text-start leading-[95.833%]
             `}
           >
             <div>
               <LocalizedHighlighted
                 textEn={item?.heading1}
-                textBn={item?.heading1BN}
+                textBn={item?.heading1}
                 highlightEn={item?.heading1Highlighted}
-                highlightBn={item?.heading1HighlightedBN}
+                highlightBn={item?.heading1Highlighted}
               />
             </div>
             <div>
-              {(item?.heading2 || item?.heading2BN) && (
+              {item?.heading2 && (
                 <LocalizedHighlighted
-                  textEn={item?.heading2 || item?.heading2BN}
-                  textBn={item?.heading2BN || item?.heading2}
+                  textEn={item?.heading2}
+                  textBn={item?.heading2}
                   highlightEn={item?.heading2Highlighted}
-                  highlightBn={item?.heading2HighlightedBN}
+                  highlightBn={item?.heading2Highlighted}
                 />
               )}
             </div>
             <div>
-              {(item?.heading3 || item?.heading3BN) && (
+              {item?.heading3 && (
                 <LocalizedHighlighted
-                  textEn={item?.heading3 || item?.heading3BN}
-                  textBn={item?.heading3BN || item?.heading3}
+                  textEn={item?.heading3}
+                  textBn={item?.heading3}
                   highlightEn={item?.heading3Highlighted}
-                  highlightBn={item?.heading3HighlightedBN}
+                  highlightBn={item?.heading3Highlighted}
                 />
               )}
             </div>
@@ -98,8 +94,8 @@ function BasicHeroItem({ item }: Props) {
           leading-[154.545%]
           `}
           >
-            {(item?.description || item?.descriptionBN) && (
-              <LocalizedRichText en={item?.description} bn={item?.descriptionBN} />
+            {item?.description && (
+              <LocalizedRichText en={item?.description} bn={item?.description} />
             )}
           </div>
 
@@ -117,7 +113,7 @@ function BasicHeroItem({ item }: Props) {
                     <Link href={href}>
                       {block?.style === 'btn01' && (
                         <Button01>
-                          <LocalizedText en={block.label} bn={block.labelBN} />
+                          <LocalizedText en={block.label} bn={block.label} />
                         </Button01>
                       )}
                     </Link>

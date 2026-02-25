@@ -650,65 +650,26 @@ export interface Page {
            */
           heading1: string;
           /**
-           * শিরোনাম ১ (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
-           */
-          heading1BN: string;
-          /**
            * Optional. Must be inside Heading 1. Max 40.
            */
           heading1Highlighted?: string | null;
-          /**
-           * ঐচ্ছিক। শিরোনাম ১-এর মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-           */
-          heading1HighlightedBN?: string | null;
           /**
            * Heading 2 (English). Max 40 characters.
            */
           heading2?: string | null;
           /**
-           * শিরোনাম ২ (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
-           */
-          heading2BN?: string | null;
-          /**
            * Optional. Must be inside Heading 2. Max 40.
            */
           heading2Highlighted?: string | null;
-          /**
-           * ঐচ্ছিক। শিরোনাম ২-এর মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-           */
-          heading2HighlightedBN?: string | null;
           /**
            * Heading 3 (English). Max 40 characters.
            */
           heading3?: string | null;
           /**
-           * শিরোনাম ৩ (বাংলা)। সর্বোচ্চ ৪০ অক্ষর।
-           */
-          heading3BN?: string | null;
-          /**
            * Optional. Must be inside Heading 3. Max 40.
            */
           heading3Highlighted?: string | null;
-          /**
-           * ঐচ্ছিক। শিরোনাম ৩-এর মধ্যে হুবহু থাকতে হবে। সর্বোচ্চ ৪০ অক্ষর।
-           */
-          heading3HighlightedBN?: string | null;
           description?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-          descriptionBN?: {
             root: {
               type: string;
               children: {
@@ -734,9 +695,9 @@ export interface Page {
                  */
                 label: string;
                 /**
-                 * সর্বোচ্চ ৪০ অক্ষর।
+                 * Select the button style
                  */
-                labelBN: string;
+                style?: ('btn01' | 'btn02' | 'btn03') | null;
                 /**
                  * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
                  */
@@ -745,10 +706,6 @@ export interface Page {
                  * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
                  */
                 sectionId?: string | null;
-                /**
-                 * Select the button style
-                 */
-                style?: ('btn01' | 'btn02' | 'btn03') | null;
                 id?: string | null;
               }[]
             | null;
@@ -8009,28 +7966,20 @@ export interface PagesSelect<T extends boolean = true> {
                     pendingImageCrop?: T;
                     imageBlurDataURL?: T;
                     heading1?: T;
-                    heading1BN?: T;
                     heading1Highlighted?: T;
-                    heading1HighlightedBN?: T;
                     heading2?: T;
-                    heading2BN?: T;
                     heading2Highlighted?: T;
-                    heading2HighlightedBN?: T;
                     heading3?: T;
-                    heading3BN?: T;
                     heading3Highlighted?: T;
-                    heading3HighlightedBN?: T;
                     description?: T;
-                    descriptionBN?: T;
                     exploreMoreBadge?: T;
                     ctaButtons?:
                       | T
                       | {
                           label?: T;
-                          labelBN?: T;
+                          style?: T;
                           buttonLink?: T;
                           sectionId?: T;
-                          style?: T;
                           id?: T;
                         };
                     id?: T;
