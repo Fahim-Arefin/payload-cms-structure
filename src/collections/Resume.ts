@@ -1,4 +1,3 @@
-import { MEDIA } from '@/lib/constants'
 import type { CollectionConfig } from 'payload'
 
 export const Resume: CollectionConfig = {

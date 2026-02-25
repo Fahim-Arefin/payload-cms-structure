@@ -1,19 +1,12 @@
-import Footer from '@/components/custom/shared/Footer'
-import TopHeader from '@/components/custom/shared/TopHeader'
 import React from 'react'
 // import './fonts.css'
-import './styles.css'
-import GlobalContactButtons from '@/components/custom/shared/GlobalContactButtons'
-import Navbar from '@/components/custom/shared/Navbar/Navbar'
-import FooterMobile from '@/components/custom/shared/FooterMobile'
 import CookieConsentBanner from '@/components/custom/shared/CookieConsentModal'
-import { Metadata } from 'next'
-import Script from 'next/script'
-import { GoogleAnalytics } from '@next/third-parties/google'
+import GlobalContactButtons from '@/components/custom/shared/GlobalContactButtons'
 import Providers from '@/context/providers'
-import { Noto_Sans_Bengali, Noto_Serif_Bengali } from 'next/font/google'
-import ServerNavbar from '@/components/custom/shared/Navbar/ServerNavbar'
-import ServerTopHeader from '@/components/custom/shared/ServerTopHeader'
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { Metadata } from 'next'
+import { Noto_Serif_Bengali } from 'next/font/google'
+import './styles.css'
 
 // const notoBengali = Noto_Sans_Bengali({
 //   subsets: ['bengali'],
@@ -202,16 +195,16 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <Providers initialLang="en">
           {/* bg-[#F6EDDD] */}
           <main className="min-h-screen relative 3xl:max-w-[1925px] 3xl:mx-auto font-proxima">
-            <ServerTopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" />
+            {/* <ServerTopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" /> */}
             {/* <ServerNavbar /> */}
             <div className="min-h-screen">{children}</div>
             <CookieConsentBanner />
-            <div className="hidden lg:block">
+            {/* <div className="hidden lg:block">
               <Footer />
             </div>
             <div className="lg:hidden">
               <FooterMobile />
-            </div>
+            </div> */}
             <GlobalContactButtons />
           </main>
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />

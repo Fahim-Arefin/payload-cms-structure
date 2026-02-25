@@ -51,7 +51,6 @@
 //==================================================================
 
 // src/collections/Media.ts
-import { MEDIA } from '@/lib/constants'
 import type { CollectionConfig } from 'payload'
 
 export const MEDIA_SLUG = 'media'
