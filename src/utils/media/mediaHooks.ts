@@ -652,7 +652,11 @@
 // ==================================================================================
 // ==================================================================================
 
-import { BASIC_HERO_SLUG_AND_TAG, PRODUCT_HERO_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  BASIC_HERO_SLUG_AND_TAG,
+  GET_TO_KNOW_SLUG_AND_TAG,
+  PRODUCT_HERO_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
 
@@ -660,7 +664,13 @@ export const mediaHooks = withMediaLifecycle({
   collectionSlug: 'pages',
 
   // Blocks with a media field on the block row itself:
-  blockSimpleFields: [],
+  blockSimpleFields: [
+    {
+      layoutKey: 'layout',
+      blockType: GET_TO_KNOW_SLUG_AND_TAG,
+      mediaFields: ['mainImage'],
+    },
+  ],
 
   // Blocks with arrays that contain media fields:
   blockArrayFields: [
@@ -676,10 +686,25 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'heroes',
       mediaFields: ['image'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: GET_TO_KNOW_SLUG_AND_TAG,
+      arrayKey: 'cards',
+      mediaFields: ['bgImage'],
+    },
   ],
 
   // Blocks with nested array (media that inside another array) that contain media fields
-  blockGroupFields: [],
+  blockGroupFields: [
+    // sections[].insuranceCardData[] has a media field: image
+    {
+      layoutKey: 'layout',
+      blockType: GET_TO_KNOW_SLUG_AND_TAG,
+      groupKey: 'cards',
+      arrayKey: 'icons',
+      mediaFields: ['icon'],
+    },
+  ],
 
   // otherUploadFields: [
   //   'brochurePDF', // 👈 top-level upload fields to Media (PDFs)

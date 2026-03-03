@@ -403,6 +403,73 @@ export interface Page {
         blockName?: string | null;
         blockType: 'product-hero';
       }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Upload the main (right-side) image.
+         */
+        mainImage: string | Media;
+        mainImageOriginal?: (string | null) | Media;
+        pendingMainImageOriginal?: string | null;
+        pendingMainImageCrop?: string | null;
+        mainImageBlurDataURL?: string | null;
+        /**
+         * Small label above heading (e.g., "GET TO KNOW SAGAR"). Max 40.
+         */
+        tag?: string | null;
+        /**
+         * Main heading text. Max 160 characters.
+         */
+        heading: string;
+        /**
+         * Optional. Must be inside Heading. Max 80.
+         */
+        headingHighlighted?: string | null;
+        cards: {
+          icons?:
+            | {
+                /**
+                 * Square icon (1:1).
+                 */
+                icon?: (string | null) | Media;
+                iconOriginal?: (string | null) | Media;
+                pendingIconOriginal?: string | null;
+                pendingIconCrop?: string | null;
+                iconBlurDataURL?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          title: string;
+          subtitle?: string | null;
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          /**
+           * Optional background image for the card.
+           */
+          bgImage?: (string | null) | Media;
+          bgImageOriginal?: (string | null) | Media;
+          pendingBgImageOriginal?: string | null;
+          pendingBgImageCrop?: string | null;
+          bgImageBlurDataURL?: string | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'get-to-know-hero';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -629,6 +696,44 @@ export interface PagesSelect<T extends boolean = true> {
                           label?: T;
                           id?: T;
                         };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'get-to-know-hero'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              mainImage?: T;
+              mainImageOriginal?: T;
+              pendingMainImageOriginal?: T;
+              pendingMainImageCrop?: T;
+              mainImageBlurDataURL?: T;
+              tag?: T;
+              heading?: T;
+              headingHighlighted?: T;
+              cards?:
+                | T
+                | {
+                    icons?:
+                      | T
+                      | {
+                          icon?: T;
+                          iconOriginal?: T;
+                          pendingIconOriginal?: T;
+                          pendingIconCrop?: T;
+                          iconBlurDataURL?: T;
+                          id?: T;
+                        };
+                    title?: T;
+                    subtitle?: T;
+                    description?: T;
+                    bgImage?: T;
+                    bgImageOriginal?: T;
+                    pendingBgImageOriginal?: T;
+                    pendingBgImageCrop?: T;
+                    bgImageBlurDataURL?: T;
                     id?: T;
                   };
               id?: T;

@@ -1,5 +1,6 @@
 // currently working code
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
+import GetToKnowSchema from '@/blocks/GetToKnow/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
@@ -124,12 +125,13 @@ export const Pages: CollectionConfig = {
         // hero page
         BasicHeroSchema,
         ProductHeroSchema,
+
         // common section
 
         // custom blocks
 
         // home page unique
-
+        GetToKnowSchema,
         // about us page
       ],
     },
