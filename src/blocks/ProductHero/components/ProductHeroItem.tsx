@@ -92,8 +92,13 @@ function ProductHeroItem({ item }: Props) {
           leading-[154.545%]
           `}
             >
-              {item?.description && (
+              {/* {item?.description && (
                 <LocalizedRichText en={item?.description} bn={item?.description} />
+              )} */}
+              {item?.description && item?.description?.root?.direction && (
+                <div className="px-8 sm:px-0">
+                  <LocalizedRichText en={item?.description} bn={item?.description} />
+                </div>
               )}
             </div>
           </div>

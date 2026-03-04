@@ -429,6 +429,27 @@ export interface Page {
          * Optional. Must be inside Heading. Max 80.
          */
         headingHighlighted?: string | null;
+        ctaButtons?:
+          | {
+              /**
+               * Max 40 characters.
+               */
+              label: string;
+              /**
+               * Select the button style
+               */
+              style?: ('btn01' | 'btn02' | 'btn03') | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink: string | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
         cards: {
           icons?:
             | {
@@ -721,6 +742,15 @@ export interface PagesSelect<T extends boolean = true> {
               tag?: T;
               heading?: T;
               headingHighlighted?: T;
+              ctaButtons?:
+                | T
+                | {
+                    label?: T;
+                    style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
               cards?:
                 | T
                 | {

@@ -48,7 +48,9 @@ function Card01({ data, index, className }: Props) {
           sizes="(max-width: 767px) 100vw, 50vw"
           className="absolute inset-0 left-1/2 top-[45%] z-30 
           group-hover:scale-125 group-hover:translate-x-8 group-hover:-translate-y-4 transition-all duration-300 ease-in
-          w-[50px] h-[50px]"
+          w-[30px] md::w-[40px] xl:w-[50px] 
+          h-[30px] md:h-[40px] xl:h-[50px]
+          "
           quality={85}
           placeholder="blur"
           blurDataURL={SparkImage?.blurDataURL}
@@ -69,7 +71,7 @@ function Card01({ data, index, className }: Props) {
                 <div
                   key={index}
                   className={`relative 
-                ${moreThanOneIcon ? 'w-[44px] h-[44px]' : 'w-[60px] h-[60px]'}`}
+                ${moreThanOneIcon ? 'w-[23px] md:w-[28px] lg:w-[38px] xl:w-[44px]   h-[23px] md:h-[28px] lg:h-[38px] xl:h-[44px]' : 'w-[30px] md:w-[40px] lg:w-[50px] xl:w-[60px] h-[30px] md:h-[40px] lg:h-[50px] xl:h-[60px]'}`}
                 >
                   <Image
                     key={media.id ?? index}
@@ -95,7 +97,7 @@ function Card01({ data, index, className }: Props) {
         </div>
       )}
       {/* titles */}
-      {(data?.title || data?.subtitle) && (
+      {(data?.title || data?.subtitle || data?.tertiaryTitle) && (
         <div
           className={`z-30 font-proxima global-h4 font-bold ${hasBgImage ? 'text-white-1' : 'text-dark-1'} leading-[133.333%] tracking-[-0.72px]`}
         >
@@ -105,7 +107,7 @@ function Card01({ data, index, className }: Props) {
         </div>
       )}
       {/* description */}
-      {data?.description && (
+      {data?.description && data?.description?.root?.direction && (
         <div
           className={`z-30 font-manrope global-p4 ${hasBgImage ? 'text-white-1' : 'text-dark-3'}`}
         >

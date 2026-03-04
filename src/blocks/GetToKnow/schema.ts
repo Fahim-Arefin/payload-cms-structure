@@ -7,8 +7,15 @@ import {
   HOME_PAGE,
 } from '@/lib/constants'
 
-import { validateHighlightedInField, validateShortText, validateYouTubeUrl } from '@/utils/block'
+import {
+  validateHighlightedInField,
+  validateShortText,
+  validateYouTubeUrl,
+} from '@/utils/block/fields-validation'
+
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
+import { Card01Field } from '@/utils/block/fields/Card01Field'
+import { CtaButtonsField } from '@/utils/block/fields/CtaButtonsField'
 
 /* ---------- limits ---------- */
 const TAG_MAX = 40
@@ -55,7 +62,7 @@ const GetToKnowSchema: Block = {
         description:
           'Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX',
       },
-      defaultValue: 'https://www.youtube.com/embed/YbnlDrexiGE',
+      defaultValue: 'https://www.youtube.com/embed/nOI5Hzb8bMI?si=OUiIVpGF91LJG-qL',
     },
 
     // ===== Tag =====
@@ -107,102 +114,113 @@ const GetToKnowSchema: Block = {
       ],
     },
 
+    // ===== CTA Buttons (array format, exactly like the block fields) =====
+    CtaButtonsField({ maxRows: 1 }),
+
     // ===== Cards =====
-    {
-      name: 'cards',
-      type: 'array',
-      required: true,
+    // {
+    //   name: 'cards',
+    //   type: 'array',
+    //   required: true,
+    //   minRows: 1,
+    //   maxRows: 8,
+    //   label: 'Cards',
+    //   labels: { singular: 'Card', plural: 'Cards' },
+    //   fields: [
+    //     // ✅ icons array (multiple icons)
+    //     {
+    //       name: 'icons',
+    //       type: 'array',
+    //       required: false,
+    //       minRows: 0,
+    //       maxRows: 4,
+    //       label: 'Icons (optional)',
+    //       labels: { singular: 'Icon', plural: 'Icons' },
+    //       fields: [
+    //         ...generateArrayImageFields({
+    //           fieldName: 'icon',
+    //           label: 'Icon',
+    //           description: 'Square icon (1:1).',
+    //           aspectRatio: 1 / 1,
+    //           quality: 0.9,
+    //           maxKB: 200,
+    //           required: false,
+    //           ownerCollection: GET_TO_KNOW_SLUG_AND_TAG as any,
+    //         } as any),
+    //       ],
+    //     },
+
+    //     {
+    //       name: 'showCardNumber',
+    //       type: 'checkbox',
+    //       defaultValue: true,
+    //     },
+
+    //     // title (required)
+    //     {
+    //       name: 'title',
+    //       type: 'text',
+    //       required: true,
+    //       label: 'Title',
+    //       maxLength: CARD_TEXT_MAX,
+    //       validate: validateShortText('Title', CARD_TEXT_MAX, true),
+    //     },
+
+    //     // subtitle (optional)
+    //     {
+    //       name: 'subtitle',
+    //       type: 'text',
+    //       required: false,
+    //       label: 'Subtitle',
+    //       maxLength: CARD_TEXT_MAX,
+    //       validate: validateShortText('Subtitle', CARD_TEXT_MAX, false),
+    //     },
+
+    //     // tertiary title (optional)
+    //     {
+    //       name: 'tertiaryTitle',
+    //       type: 'text',
+    //       required: false,
+    //       label: 'Tertiary Title',
+    //       maxLength: CARD_TEXT_MAX,
+    //       validate: validateShortText('tertiaryTitle', CARD_TEXT_MAX, false),
+    //     },
+
+    //     // description (optional)
+    //     {
+    //       name: 'description',
+    //       type: 'richText',
+    //       label: 'Description',
+    //     },
+
+    //     // bg image (optional)
+    //     ...generateArrayImageFields({
+    //       fieldName: 'bgImage',
+    //       label: 'Background Image (optional)',
+    //       description: 'Optional background image for the card.',
+    //       aspectRatio: 16 / 9,
+    //       quality: 0.9,
+    //       maxKB: 700,
+    //       required: false,
+    //       ownerCollection: GET_TO_KNOW_SLUG_AND_TAG as any,
+    //     } as any),
+
+    //     // spark image
+    //     {
+    //       name: 'showSparkImage',
+    //       type: 'checkbox',
+    //       defaultValue: false,
+    //     },
+    //   ],
+    // },
+    // ===== Cards =====
+    Card01Field({
+      ownerCollection: GET_TO_KNOW_SLUG_AND_TAG as any,
       minRows: 1,
       maxRows: 8,
-      label: 'Cards',
-      labels: { singular: 'Card', plural: 'Cards' },
-      fields: [
-        // ✅ icons array (multiple icons)
-        {
-          name: 'icons',
-          type: 'array',
-          required: false,
-          minRows: 0,
-          maxRows: 4,
-          label: 'Icons (optional)',
-          labels: { singular: 'Icon', plural: 'Icons' },
-          fields: [
-            ...generateArrayImageFields({
-              fieldName: 'icon',
-              label: 'Icon',
-              description: 'Square icon (1:1).',
-              aspectRatio: 1 / 1,
-              quality: 0.9,
-              maxKB: 200,
-              required: false,
-              ownerCollection: GET_TO_KNOW_SLUG_AND_TAG as any,
-            } as any),
-          ],
-        },
-
-        {
-          name: 'showCardNumber',
-          type: 'checkbox',
-          defaultValue: true,
-        },
-
-        // title (required)
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-          label: 'Title',
-          maxLength: CARD_TEXT_MAX,
-          validate: validateShortText('Title', CARD_TEXT_MAX, true),
-        },
-
-        // subtitle (optional)
-        {
-          name: 'subtitle',
-          type: 'text',
-          required: false,
-          label: 'Subtitle',
-          maxLength: CARD_TEXT_MAX,
-          validate: validateShortText('Subtitle', CARD_TEXT_MAX, false),
-        },
-
-        // tertiary title (optional)
-        {
-          name: 'tertiaryTitle',
-          type: 'text',
-          required: false,
-          label: 'Tertiary Title',
-          maxLength: CARD_TEXT_MAX,
-          validate: validateShortText('tertiaryTitle', CARD_TEXT_MAX, false),
-        },
-
-        // description (optional)
-        {
-          name: 'description',
-          type: 'richText',
-          label: 'Description',
-        },
-
-        // bg image (optional)
-        ...generateArrayImageFields({
-          fieldName: 'bgImage',
-          label: 'Background Image (optional)',
-          description: 'Optional background image for the card.',
-          aspectRatio: 16 / 9,
-          quality: 0.9,
-          maxKB: 700,
-          required: false,
-          ownerCollection: GET_TO_KNOW_SLUG_AND_TAG as any,
-        } as any),
-
-        // spark image
-        {
-          name: 'showSparkImage',
-          type: 'checkbox',
-          defaultValue: true,
-        },
-      ],
-    },
+      cardTextMax: CARD_TEXT_MAX,
+      maxIcons: 4,
+    }),
   ],
 }
 

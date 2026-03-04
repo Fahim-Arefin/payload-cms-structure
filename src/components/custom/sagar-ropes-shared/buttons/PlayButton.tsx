@@ -50,7 +50,8 @@ function PlayButton({ className }: Props) {
     <div
       onClick={() => setBurst(true)}
       className={`group rounded-full flex justify-center items-center cursor-pointer  
-        w-[50px] h-[50px] 
+        w-[30px] lg:w-[40px] xl:w-[50px] 
+        h-[30px] lg:h-[40px] xl:h-[50px] 
         bg-white-1/10 backdrop-blur-[5.625px] hover:backdrop-blur-[7.625px]
         border-2 border-white/10 hover:border-[3px] hover:border-cyan
         text-white hover:text-cyan

@@ -8,6 +8,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import explore from '/public/assets/icons/explore.png'
 import union from '/public/assets/icons/union.png'
+import Button02 from '@/components/custom/sagar-ropes-shared/buttons/Button02'
+import CtaButtons from '@/components/custom/sagar-ropes-shared/buttons/CtaButtons'
 
 type Props = {
   item: BasicHeroBlockType['heroes'][number]
@@ -94,32 +96,38 @@ function BasicHeroItem({ item }: Props) {
           leading-[154.545%]
           `}
           >
-            {item?.description && (
-              <LocalizedRichText en={item?.description} bn={item?.description} />
+            {item?.description && item?.description?.root?.direction && (
+              <div className="px-8 sm:px-0">
+                <LocalizedRichText en={item?.description} bn={item?.description} />
+              </div>
             )}
           </div>
 
           {/* cta btns */}
           {item?.ctaButtons && item?.ctaButtons?.length > 0 && (
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              {item?.ctaButtons.map((block, index) => {
-                // If GlobalButton supports children (you already do in the YT button), render label as child:
+              {/* {item?.ctaButtons.map((block, index) => {
                 const href = block?.sectionId
                   ? `/${resolvePageSlug(block?.buttonLink)}/#${block?.sectionId}`
                   : pageHref(block.buttonLink)
                 return (
                   <div key={`pageLink-${index}`}>
-                    {/* <Link href={pageHref(block.buttonLink)}> */}
                     <Link href={href}>
                       {block?.style === 'btn01' && (
                         <Button01>
                           <LocalizedText en={block.label} bn={block.label} />
                         </Button01>
                       )}
+                      {block?.style === 'btn02' && (
+                        <Button02>
+                          <LocalizedText en={block.label} bn={block.label} />
+                        </Button02>
+                      )}
                     </Link>
                   </div>
                 )
-              })}
+              })} */}
+              <CtaButtons item={item?.ctaButtons} />
             </div>
           )}
 

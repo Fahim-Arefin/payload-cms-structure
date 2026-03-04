@@ -6,8 +6,9 @@ import {
   PRODUCT_HERO_BLOCK_THUMBNAIL_URL,
   PRODUCT_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
-import { validateHighlightedInField, validateShortText } from '@/utils/block'
+
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
+import { validateHighlightedInField, validateShortText } from '@/utils/block/fields-validation'
 
 const TITLE_MAX = 40
 const SUB_TITLE_MAX = 40
