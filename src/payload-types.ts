@@ -406,13 +406,17 @@ export interface Page {
     | {
         uploadSessionId?: string | null;
         /**
-         * Upload the main (right-side) image.
+         * Upload the thumbnail (right-side) image.
          */
         mainImage: string | Media;
         mainImageOriginal?: (string | null) | Media;
         pendingMainImageOriginal?: string | null;
         pendingMainImageCrop?: string | null;
         mainImageBlurDataURL?: string | null;
+        /**
+         * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
+         */
+        youtubeUrl: string;
         /**
          * Small label above heading (e.g., "GET TO KNOW SAGAR"). Max 40.
          */
@@ -439,8 +443,10 @@ export interface Page {
                 id?: string | null;
               }[]
             | null;
+          showCardNumber?: boolean | null;
           title: string;
           subtitle?: string | null;
+          tertiaryTitle?: string | null;
           description?: {
             root: {
               type: string;
@@ -464,6 +470,7 @@ export interface Page {
           pendingBgImageOriginal?: string | null;
           pendingBgImageCrop?: string | null;
           bgImageBlurDataURL?: string | null;
+          showSparkImage?: boolean | null;
           id?: string | null;
         }[];
         id?: string | null;
@@ -710,6 +717,7 @@ export interface PagesSelect<T extends boolean = true> {
               pendingMainImageOriginal?: T;
               pendingMainImageCrop?: T;
               mainImageBlurDataURL?: T;
+              youtubeUrl?: T;
               tag?: T;
               heading?: T;
               headingHighlighted?: T;
@@ -726,14 +734,17 @@ export interface PagesSelect<T extends boolean = true> {
                           iconBlurDataURL?: T;
                           id?: T;
                         };
+                    showCardNumber?: T;
                     title?: T;
                     subtitle?: T;
+                    tertiaryTitle?: T;
                     description?: T;
                     bgImage?: T;
                     bgImageOriginal?: T;
                     pendingBgImageOriginal?: T;
                     pendingBgImageCrop?: T;
                     bgImageBlurDataURL?: T;
+                    showSparkImage?: T;
                     id?: T;
                   };
               id?: T;

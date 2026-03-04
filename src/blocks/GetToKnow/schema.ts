@@ -7,16 +7,15 @@ import {
   HOME_PAGE,
 } from '@/lib/constants'
 
-import { validateHighlightedInField, validateShortText } from '@/utils/block'
+import { validateHighlightedInField, validateShortText, validateYouTubeUrl } from '@/utils/block'
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 
 /* ---------- limits ---------- */
 const TAG_MAX = 40
 const HEADING_MAX = 160
 const HIGHLIGHT_MAX = 80
-
-// ✅ one constant to control card text max lengths
 const CARD_TEXT_MAX = 120
+const URL_MAX = 300
 
 const GetToKnowSchema: Block = {
   slug: GET_TO_KNOW_SLUG_AND_TAG,
@@ -37,13 +36,27 @@ const GetToKnowSchema: Block = {
     // ===== Main Image (right media) =====
     ...generateArrayImageFields({
       fieldName: 'mainImage',
-      label: 'Main Image',
-      description: 'Upload the main (right-side) image.',
+      label: 'Thumbnail Image',
+      description: 'Upload the thumbnail (right-side) image.',
       aspectRatio: 316 / 543,
       quality: 0.9,
       maxKB: 500,
       ownerCollection: GET_TO_KNOW_SLUG_AND_TAG as any,
     } as any),
+
+    {
+      name: 'youtubeUrl',
+      type: 'text',
+      required: true,
+      label: 'YouTube URL',
+      maxLength: URL_MAX,
+      validate: validateYouTubeUrl(URL_MAX, true),
+      admin: {
+        description:
+          'Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX',
+      },
+      defaultValue: 'https://www.youtube.com/embed/YbnlDrexiGE',
+    },
 
     // ===== Tag =====
     {
@@ -127,6 +140,12 @@ const GetToKnowSchema: Block = {
           ],
         },
 
+        {
+          name: 'showCardNumber',
+          type: 'checkbox',
+          defaultValue: true,
+        },
+
         // title (required)
         {
           name: 'title',
@@ -147,6 +166,16 @@ const GetToKnowSchema: Block = {
           validate: validateShortText('Subtitle', CARD_TEXT_MAX, false),
         },
 
+        // tertiary title (optional)
+        {
+          name: 'tertiaryTitle',
+          type: 'text',
+          required: false,
+          label: 'Tertiary Title',
+          maxLength: CARD_TEXT_MAX,
+          validate: validateShortText('tertiaryTitle', CARD_TEXT_MAX, false),
+        },
+
         // description (optional)
         {
           name: 'description',
@@ -165,6 +194,13 @@ const GetToKnowSchema: Block = {
           required: false,
           ownerCollection: GET_TO_KNOW_SLUG_AND_TAG as any,
         } as any),
+
+        // spark image
+        {
+          name: 'showSparkImage',
+          type: 'checkbox',
+          defaultValue: true,
+        },
       ],
     },
   ],

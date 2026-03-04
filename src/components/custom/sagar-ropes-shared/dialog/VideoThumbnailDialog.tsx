@@ -1,0 +1,76 @@
+'use client'
+
+import React from 'react'
+import Image from 'next/image'
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import PlayButton from '@/components/custom/sagar-ropes-shared/buttons/PlayButton'
+
+type Props = {
+  /** Thumbnail image url (Payload media url) */
+  thumbnailUrl: string
+  /** Optional blur placeholder data url */
+  blurDataURL?: string
+  /** YouTube embed url */
+  videoUrl: string
+  /** Aspect/size + extra classes for container */
+  className?: string
+  /** Image quality */
+  quality?: number
+}
+
+export default function VideoThumbnailDialog({
+  thumbnailUrl,
+  blurDataURL,
+  videoUrl,
+  className,
+  quality = 80,
+}: Props) {
+  return (
+    <div className={`bg-white-2 overflow-hidden group ${className ?? ''}`}>
+      <Dialog>
+        <DialogTrigger asChild>
+          <button type="button" className="relative w-full h-full text-left">
+            <Image
+              src={thumbnailUrl}
+              alt="video thumbnail"
+              fill
+              className="object-center object-cover z-10 group-hover:scale-110 transition-all duration-300 ease-in"
+              sizes="(min-width:1024px) 100vw, 50vw"
+              quality={quality}
+              placeholder={blurDataURL ? 'blur' : 'empty'}
+              blurDataURL={blurDataURL || undefined}
+            />
+
+            <div className="absolute inset-0 z-30 bg-transparent flex justify-center items-center">
+              <PlayButton />
+            </div>
+
+            {/* overlay */}
+            <div
+              className="absolute inset-0 z-20 pointer-events-none"
+              style={{ background: '#00000020' }}
+            />
+          </button>
+        </DialogTrigger>
+
+        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black border-none">
+          <VisuallyHidden>
+            <DialogTitle>Play video</DialogTitle>
+          </VisuallyHidden>
+
+          <div className="relative w-full aspect-video">
+            <iframe
+              className="absolute inset-0 h-full w-full"
+              src={videoUrl}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}

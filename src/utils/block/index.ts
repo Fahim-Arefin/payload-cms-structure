@@ -47,3 +47,25 @@ export const validateHighlightedInField =
     const target = (siblingData?.[targetField] ?? '').toString()
     return target.includes(s) ? true : `${label} must exist within ${targetField} exactly.`
   }
+
+/** Absolute http(s) URL and must be a YouTube host. */
+export const validateYouTubeUrl =
+  (max: number, required = true) =>
+  (val: unknown) => {
+    const link = (val ?? '').toString().trim()
+    if (required && !link) return 'YouTube URL is required.'
+    if (!link) return true
+    if (link.length > max) return `YouTube URL must be at most ${max} characters.`
+    try {
+      const u = new URL(link)
+      const host = u.hostname.toLowerCase()
+      const isHttp = u.protocol === 'http:' || u.protocol === 'https:'
+      const isYouTube =
+        host === 'youtu.be' || host.endsWith('youtube.com') || host.endsWith('youtube-nocookie.com')
+      if (!isHttp) return 'URL must be http(s).'
+      if (!isYouTube) return 'Please enter a valid YouTube URL.'
+      return true
+    } catch {
+      return 'Provide a valid absolute http(s) YouTube URL.'
+    }
+  }

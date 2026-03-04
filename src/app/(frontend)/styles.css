@@ -233,6 +233,10 @@
     @apply text-[12px] md:text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[14px];
   }
 
+  .global-h2 {
+    @apply text-[30px] md:text-[30px] lg:text-[38px] xl:text-[48px] 2xl:text-[54px];
+  }
+
   .global-h3 {
     @apply text-[20px] md:text-[20px] lg:text-[26px] xl:text-[32px] 2xl:text-[34px];
   }
@@ -255,14 +259,14 @@
 }
 
 /* FORCE REMOVE SHADCn MODAL OVERLAY BACKGROUND */
-body > div[data-state='open'].fixed.inset-0.z-50 {
+/* body > div[data-state='open'].fixed.inset-0.z-50 {
   background-color: transparent !important;
   backdrop-filter: none !important;
   box-shadow: none !important;
-}
+} */
 
 /* ---- Add to your CSS ---- */
-body[data-dialog-open='true'] {
+/* body[data-dialog-open='true'] {
   overflow: hidden !important;
   touch-action: none;
 }
@@ -273,7 +277,7 @@ body[data-dialog-open='true'] {
   height: 100% !important;
   display: block !important;
   object-fit: fill !important;
-}
+} */
 
 html {
   scroll-behavior: smooth;

@@ -1,9 +1,8 @@
-'use client'
-
 import Card01 from '@/components/custom/sagar-ropes-shared/cards/Card01'
+import VideoThumbnailDialog from '@/components/custom/sagar-ropes-shared/dialog/VideoThumbnailDialog'
+import LocalizedHighlighted from '@/components/custom/shared/LocalizedHighlighted'
 import { GetToKnowBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
-import React from 'react'
 
 type Props = {
   data: GetToKnowBlockType
@@ -27,65 +26,90 @@ function GetToKnowSection({ data }: Props) {
     <section className="bg-bg-1">
       <div className="container-padding">
         {/* ===== DESKTOP (lg+) : 12-col, 3-row grid ===== */}
-        <div className="hidden lg:grid grid-cols-12 gap-6 auto-rows-[260px]">
+        <div className="hidden lg:grid grid-cols-12 gap-6 auto-rows-[280px]">
           {/* Card 01 */}
           <div className="col-span-4 row-span-1 order-1 bg-white-1">
-            <div className="">
-              <Card01 data={card1} index={0} />
-            </div>
+            <Card01 data={card1} index={0} className="p-5 h-full" />
           </div>
 
           {/* Heading */}
-          <div className="col-span-4 row-span-2 order-2 bg-white-1 h-full">
-            <div className="p-2">
-              <div className="">
-                <div className="text-cyan text-xs tracking-widest">{data?.tag}</div>
-                <h2 className="text-dark-1 text-4xl font-bold leading-tight">{data?.heading}</h2>
+          <div className="col-span-4 row-span-2 order-2 h-full">
+            <div className="p-3 flex flex-col justify-between h-full">
+              <div
+                className="font-manrope text-cyan text-xs lg:text-[14px] leading-[157.143%] tracking-[1.4px]
+              px-2 py-1 bg-white-1 w-fit"
+              >
+                {data?.tag}
+              </div>
+              <div className="global-h2 font-proxima font-bold text-dark-1 leading-[112.5%] tracking-[-1.44px]">
+                <LocalizedHighlighted
+                  textEn={data?.heading}
+                  textBn={data?.heading}
+                  highlightEn={data?.headingHighlighted}
+                  highlightBn={data?.headingHighlighted}
+                  highlightClassName="text-white-3"
+                />
               </div>
             </div>
           </div>
 
           {/* Main Image (spans 2 rows) */}
-          <div className="col-span-4 row-span-2 order-3 bg-white-2 overflow-hidden">
+          {/* <div className="col-span-4 row-span-2 order-3 bg-white-2 overflow-hidden group">
             <div className="relative w-full h-full">
-              {mainImage?.url ? (
+              {typeof data?.mainImage === 'object' && data?.mainImage?.url && (
                 <Image
                   src={mainImage.url}
-                  alt="main"
+                  alt="thumbneil Image"
                   fill
-                  className="object-cover"
-                  sizes="(min-width:1024px) 33vw, 100vw"
+                  className="object-center object-cover z-10 group-hover:scale-110 transition-all duration-300 ease-in"
+                  sizes="(min-width:1024px) 100vw, 50vw"
+                  quality={80}
+                  placeholder="blur"
+                  blurDataURL={data?.mainImageBlurDataURL || ''}
                 />
-              ) : null}
+              )}
+              <div className="absolute inset-0 z-30 bg-transparent flex justify-center items-center">
+                <PlayButton className="" />
+              </div>
+              <div
+                className="absolute inset-0 z-20 pointer-events-none"
+                style={{
+                  background: '#00000020',
+                }}
+              />
             </div>
+          </div> */}
+
+          {/* Main Image (spans 2 rows) + Dialog */}
+          <div className="col-span-4 row-span-2 order-3 ">
+            {typeof data?.mainImage === 'object' && data?.mainImage?.url && (
+              <VideoThumbnailDialog
+                className="w-full h-full"
+                thumbnailUrl={mainImage.url}
+                blurDataURL={data?.mainImageBlurDataURL || ''}
+                videoUrl={data?.youtubeUrl}
+              />
+            )}
           </div>
 
           {/* Card 02 */}
           <div className="col-span-4 row-span-1 order-4 bg-white-1">
-            <div className="">
-              <Card01 data={card2} index={1} />
-            </div>
+            <Card01 data={card2} index={1} className="p-5 h-full" />
           </div>
 
           {/* BG card (cyan tile) */}
           <div className="col-span-4 row-span-1 order-5 bg-cyan/30 overflow-hidden">
-            <div className="">
-              <Card01 data={bgCard} index={2} />
-            </div>
+            <Card01 data={bgCard} index={2} className="p-5 h-full" />
           </div>
 
           {/* Card 03 */}
           <div className="col-span-4 row-span-1 order-6 bg-white-1">
-            <div className="">
-              <Card01 data={card3} index={3} />
-            </div>
+            <Card01 data={card3} index={3} className="p-5 h-full" />
           </div>
 
           {/* Card 04 */}
           <div className="col-span-4 row-span-1 order-7 bg-white-1">
-            <div className="">
-              <Card01 data={card3} index={4} />
-            </div>
+            <Card01 data={card4} index={4} className="p-5 h-full" />
           </div>
         </div>
 
