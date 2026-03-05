@@ -22,6 +22,7 @@ export const AUDIT_LOG = 'Audit'
 
 // Group
 export const HERO_BLOCKS = 'Hero Blocks'
+export const COMMON = 'Common Blocks (used different pages)'
 export const HOME_PAGE = 'Home Page'
 
 // Basic Hero Block
@@ -41,3 +42,9 @@ export const GET_TO_KNOW_SLUG_AND_TAG = 'get-to-know-hero'
 export const GET_TO_KNOW_BLOCK_LABEL = 'Get To Know'
 export const GET_TO_KNOW_CACHE_KEY = 'get-to-know-hero-data'
 export const GET_TO_KNOW_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/get-to-know-hero-block-thumbnail.jpg`
+
+// Product Intro
+export const PRODUCT_INTRO_SLUG_AND_TAG = 'product-intro-hero'
+export const PRODUCT_INTRO_BLOCK_LABEL = 'Product Intro'
+export const PRODUCT_INTRO_CACHE_KEY = 'product-intro-hero-data'
+export const PRODUCT_INTRO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-intro-hero-block-thumbnail.jpg`

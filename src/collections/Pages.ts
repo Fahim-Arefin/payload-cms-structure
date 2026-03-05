@@ -2,6 +2,7 @@
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import GetToKnowSchema from '@/blocks/GetToKnow/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
+import ProductIntroSchema from '@/blocks/ProductIntro/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -127,12 +128,12 @@ export const Pages: CollectionConfig = {
         ProductHeroSchema,
 
         // common section
+        ProductIntroSchema,
 
         // custom blocks
 
         // home page unique
         GetToKnowSchema,
-        // about us page
       ],
     },
   ],

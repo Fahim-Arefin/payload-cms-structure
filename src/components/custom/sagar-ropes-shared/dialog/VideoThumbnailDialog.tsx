@@ -24,7 +24,7 @@ export default function VideoThumbnailDialog({
   blurDataURL,
   videoUrl,
   className,
-  quality = 80,
+  quality = 90,
 }: Props) {
   return (
     <div className={`bg-white-2 overflow-hidden group ${className ?? ''}`}>
@@ -35,8 +35,8 @@ export default function VideoThumbnailDialog({
               src={thumbnailUrl}
               alt="video thumbnail"
               fill
-              className="object-center object-cover z-10 group-hover:scale-110 transition-all duration-300 ease-in"
-              sizes="(min-width:1024px) 100vw, 50vw"
+              className="object-center object-cover z-10 group-hover:scale-125 transition-all duration-300 ease-in"
+              sizes="100vw"
               quality={quality}
               placeholder={blurDataURL ? 'blur' : 'empty'}
               blurDataURL={blurDataURL || undefined}

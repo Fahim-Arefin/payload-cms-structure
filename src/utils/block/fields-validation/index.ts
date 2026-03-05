@@ -69,3 +69,11 @@ export const validateYouTubeUrl =
       return 'Provide a valid absolute http(s) YouTube URL.'
     }
   }
+
+export const validateHexColor = (val: unknown) => {
+  if (val == null || val === '') return true
+  const s = String(val).trim()
+  return /^#[0-9A-Fa-f]{6}$/.test(s)
+    ? true
+    : 'Must be a valid hex color in #RRGGBB (e.g., #FFFFFF).'
+}
