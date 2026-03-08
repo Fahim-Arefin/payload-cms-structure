@@ -77,45 +77,49 @@ function ProductIntroBlock({ block }: Props) {
         </div>
 
         {/* pattern 1 */}
-        <div
-          className="invisible md:visible absolute left-0 bottom-0 z-30 h-[50%]
+        {block?.showPatternDesign && (
+          <div
+            className="invisible md:visible absolute left-0 bottom-0 z-30 h-[50%]
            md:w-[120px] 
            lg:w-[170px] 
            xl:w-[225px] 
            2xl:w-[280px]
         "
-        >
-          <Image
-            fill
-            src={Pattern01}
-            alt="pattern image 02"
-            quality={90}
-            sizes="100vw"
-            className="object-cover -rotate-180"
-            placeholder="blur"
-            blurDataURL={Pattern01?.blurDataURL}
-          />
-        </div>
+          >
+            <Image
+              fill
+              src={Pattern01}
+              alt="pattern image 02"
+              quality={90}
+              sizes="100vw"
+              className="object-cover -rotate-180"
+              placeholder="blur"
+              blurDataURL={Pattern01?.blurDataURL}
+            />
+          </div>
+        )}
         {/* pattern 2 */}
-        <div
-          className="invisible md:visible absolute right-0 top-0 z-30 h-[50%]
+        {block?.showPatternDesign && (
+          <div
+            className="invisible md:visible absolute right-0 top-0 z-30 h-[50%]
            md:w-[120px] 
            lg:w-[170px] 
            xl:w-[225px] 
            2xl:w-[280px]
         "
-        >
-          <Image
-            fill
-            src={Pattern02}
-            alt="pattern image 02"
-            quality={90}
-            sizes="100vw"
-            className="object-cover"
-            placeholder="blur"
-            blurDataURL={Pattern02?.blurDataURL}
-          />
-        </div>
+          >
+            <Image
+              fill
+              src={Pattern02}
+              alt="pattern image 02"
+              quality={90}
+              sizes="100vw"
+              className="object-cover"
+              placeholder="blur"
+              blurDataURL={Pattern02?.blurDataURL}
+            />
+          </div>
+        )}
       </div>
     </WithHashScroller>
   )

@@ -69,7 +69,7 @@ function Button01({ children, className, ...props }: Props) {
         triggerNudge()
         props.onMouseLeave?.(e)
       }}
-      className={`rounded-none font-manrope text-white-1 bg-cyan hover:bg-cyan group global-link 
+      className={`rounded-none font-manrope text-white-1 bg-cyan hover:bg-cyan group global-link font-bold
         h-7 xl:h-9
         px-2 xl:px-4
         ${className ?? ''}`}

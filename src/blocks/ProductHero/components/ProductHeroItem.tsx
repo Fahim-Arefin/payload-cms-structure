@@ -89,7 +89,6 @@ function ProductHeroItem({ item }: Props) {
             <div
               className={`font-manrope text-white-1 font-light text-opacity-90
           global-p1 text-center md:text-start
-          leading-[154.545%]
           `}
             >
               {/* {item?.description && (
@@ -119,10 +118,10 @@ function ProductHeroItem({ item }: Props) {
                     border-l-cyan 
                      pl-2 lg:pl-4 xl:pl-6"
                     >
-                      <div className="font-proxima global-h3 text-cyan font-bold leading-[125%]">
+                      <div className="font-proxima global-h3 text-cyan font-bold">
                         <LocalizedText en={prod?.value} bn={prod?.value} />
                       </div>
-                      <div className="font-manrope global-p2 text-white-1 uppercase font-light text-opacity-80 leading-[144.444%]">
+                      <div className="font-manrope global-p2 text-white-1 uppercase font-light text-opacity-80">
                         <LocalizedText en={prod?.label} bn={prod?.label} />
                       </div>
                     </div>

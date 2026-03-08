@@ -89,7 +89,7 @@ function Card01({ data, index, className }: Props) {
           </div>
           {data?.showCardNumber && (
             <div
-              className={`font-proxima global-h5 font-bold ${hasBgImage ? 'text-white-1' : 'text-dark-1'} leading-[140%] tracking-[-0.6px]`}
+              className={`font-proxima global-h5 font-bold ${hasBgImage ? 'text-white-1' : 'text-dark-1'} `}
             >
               0{index + 1}.
             </div>
@@ -99,7 +99,7 @@ function Card01({ data, index, className }: Props) {
       {/* titles */}
       {(data?.title || data?.subtitle || data?.tertiaryTitle) && (
         <div
-          className={`z-30 font-proxima global-h4 font-bold ${hasBgImage ? 'text-white-1' : 'text-dark-1'} leading-[133.333%] tracking-[-0.72px]`}
+          className={`z-30 font-proxima global-h4 font-bold ${hasBgImage ? 'text-white-1' : 'text-dark-1'} `}
         >
           {data?.title && <div>{data?.title}</div>}
           {data?.subtitle && <div>{data?.subtitle}</div>}

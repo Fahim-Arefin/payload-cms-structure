@@ -34,7 +34,7 @@ function Button02({ children, className, ...props }: Props) {
         props.onMouseLeave?.(e)
       }}
       className={`rounded-none font-manrope text-dark-1 
-        shadow-none bg-transparent hover:bg-transparent group global-link 
+        shadow-none bg-transparent hover:bg-transparent group global-link font-bold
         h-7 xl:h-9
         px-0.5 md:px-1
         ${className ?? ''}`}

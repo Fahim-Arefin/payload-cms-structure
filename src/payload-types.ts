@@ -426,6 +426,10 @@ export interface Page {
          */
         heading1Highlighted?: string | null;
         /**
+         * Choose the highlight color style for this heading.
+         */
+        heading1HighlightColor?: ('primary' | 'secondary') | null;
+        /**
          * Secondary heading line. Max 90 characters.
          */
         heading2?: string | null;
@@ -433,6 +437,26 @@ export interface Page {
          * Optional. Must be inside Heading 2. Max 90.
          */
         heading2Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading2HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Optional heading line 3. Max 90 characters.
+         */
+        heading3?: string | null;
+        /**
+         * Optional. Must be inside Heading 3. Max 90.
+         */
+        heading3Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for Heading 3.
+         */
+        heading3HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Controls whether Heading 3 is shown alone or aligned beside the description.
+         */
+        heading3Layout?: ('solo' | 'besideDescription') | null;
         /**
          * Write the paragraph text (you can add multiple paragraphs).
          */
@@ -472,6 +496,7 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        showPatternDesign?: boolean | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'product-intro-hero';
@@ -811,8 +836,14 @@ export interface PagesSelect<T extends boolean = true> {
               tag?: T;
               heading1?: T;
               heading1Highlighted?: T;
+              heading1HighlightColor?: T;
               heading2?: T;
               heading2Highlighted?: T;
+              heading2HighlightColor?: T;
+              heading3?: T;
+              heading3Highlighted?: T;
+              heading3HighlightColor?: T;
+              heading3Layout?: T;
               description?: T;
               ctaButtons?:
                 | T
@@ -823,6 +854,7 @@ export interface PagesSelect<T extends boolean = true> {
                     sectionId?: T;
                     id?: T;
                   };
+              showPatternDesign?: T;
               id?: T;
               blockName?: T;
             };

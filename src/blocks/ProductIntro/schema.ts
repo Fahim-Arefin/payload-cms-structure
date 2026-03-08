@@ -213,8 +213,17 @@ const ProductIntroSchema: Block = {
       heading1HighlightMax: HEADING_MAX,
       heading2Max: HEADING_MAX,
       heading2HighlightMax: HEADING_MAX,
+      heading3Max: HEADING_MAX,
+      heading3HighlightMax: HEADING_MAX,
       ctaMaxRows: 1,
+      // noCTA: true,
     }),
+
+    {
+      name: 'showPatternDesign',
+      type: 'checkbox',
+      defaultValue: true,
+    },
   ],
 }
 

@@ -93,7 +93,6 @@ function BasicHeroItem({ item }: Props) {
           <div
             className={`font-manrope text-white-1 font-light text-opacity-90
           global-p1 text-center md:text-start
-          leading-[154.545%]
           `}
           >
             {item?.description && item?.description?.root?.direction && (
