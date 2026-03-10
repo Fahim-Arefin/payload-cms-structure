@@ -90,8 +90,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    navbar: Navbar;
+  };
+  globalsSelect: {
+    navbar: NavbarSelect<false> | NavbarSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -1138,6 +1142,116 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Global navbar: logo and multi-level navigation (desktop & mobile), plus an optional portal link.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navbar".
+ */
+export interface Navbar {
+  id: string;
+  uploadSessionId?: string | null;
+  /**
+   * Primary navbar logo. Transparent PNG/SVG preferred. Square-ish crop recommended.
+   */
+  logo: string | Media;
+  logoOriginal?: (string | null) | Media;
+  pendingLogoOriginal?: string | null;
+  pendingLogoCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  logoBlurDataURL?: string | null;
+  desktop?: {
+    /**
+     * Top-level nav items for desktop. Each item can optionally have nested children.
+     */
+    items?:
+      | {
+          /**
+           * Optional. Max 100 characters.
+           */
+          label: string;
+          /**
+           * Select "Yes" to make it appear in the top bar row.
+           */
+          isTop: 'no' | 'yes';
+          /**
+           * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
+           */
+          href: string | Page;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+           */
+          sectionId?: string | null;
+          /**
+           * Optional submenu items. You can nest up to 2 levels.
+           */
+          children?:
+            | {
+                /**
+                 * Optional. Max 100 characters.
+                 */
+                label: string;
+                /**
+                 * Select "Yes" to make it appear in the top bar row.
+                 */
+                isTop: 'no' | 'yes';
+                /**
+                 * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
+                 */
+                href: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navbar_select".
+ */
+export interface NavbarSelect<T extends boolean = true> {
+  uploadSessionId?: T;
+  logo?: T;
+  logoOriginal?: T;
+  pendingLogoOriginal?: T;
+  pendingLogoCrop?: T;
+  logoBlurDataURL?: T;
+  desktop?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              label?: T;
+              isTop?: T;
+              href?: T;
+              sectionId?: T;
+              children?:
+                | T
+                | {
+                    label?: T;
+                    isTop?: T;
+                    href?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -18,6 +18,10 @@ export const toKB = (n: number) => Math.round(n / 1024)
 const thumbnailFolder = '/assets/block-thumbnails'
 
 // GLOBAL API
+
+export const GLOBAL_NAVBAR_SLUG_AND_TAG = 'navbar' as const
+export const GLOBAL_NAVBAR_CACHE_KEY = 'navbar-data'
+
 export const AUDIT_LOG = 'Audit'
 
 // Group
