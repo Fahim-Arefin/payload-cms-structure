@@ -1,6 +1,7 @@
 // currently working code
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import GetToKnowSchema from '@/blocks/GetToKnow/schema'
+import MissionVisionSchema from '@/blocks/MissionVision/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductIntroSchema from '@/blocks/ProductIntro/schema'
 import { APIError } from '@/lib/apiError'
@@ -134,6 +135,9 @@ export const Pages: CollectionConfig = {
 
         // home page unique
         GetToKnowSchema,
+
+        // about us page unique
+        MissionVisionSchema,
       ],
     },
   ],

@@ -24,6 +24,7 @@ export const AUDIT_LOG = 'Audit'
 export const HERO_BLOCKS = 'Hero Blocks'
 export const COMMON = 'Common Blocks (used different pages)'
 export const HOME_PAGE = 'Home Page'
+export const ABOUT_US = 'About Us Page'
 
 // Basic Hero Block
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
@@ -48,3 +49,9 @@ export const PRODUCT_INTRO_SLUG_AND_TAG = 'product-intro-hero'
 export const PRODUCT_INTRO_BLOCK_LABEL = 'Product Intro'
 export const PRODUCT_INTRO_CACHE_KEY = 'product-intro-hero-data'
 export const PRODUCT_INTRO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-intro-hero-block-thumbnail.jpg`
+
+// Vision and mission
+export const MISSION_VISION_SLUG_AND_TAG = 'mission-vision'
+export const MISSION_VISION_BLOCK_LABEL = 'Mission And Vision Section'
+export const MISSION_VISION_CACHE_KEY = 'mission-vision-data'
+export const MISSION_VISION_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/mission-vision-block-thumbnail.jpg`

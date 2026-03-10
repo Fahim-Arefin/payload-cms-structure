@@ -9,6 +9,17 @@ export default {
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'bg-cyan',
+    'bg-bg-1',
+    'bg-white-1',
+    'bg-white-2',
+    'bg-white-3',
+    'bg-dark-1',
+    'bg-dark-2',
+    'bg-dark-2b',
+    'bg-dark-3',
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -126,6 +137,7 @@ export default {
       backdropBlur: {
         15: '15px',
       },
+
       // typography: {
       //   DEFAULT: {
       //     css: {

@@ -354,7 +354,7 @@ export const SectionHeadingFields = ({
     {
       name: 'description',
       type: 'richText',
-      label: 'Description',
+      label: 'Section Description',
       admin: {
         description: 'Write the paragraph text (you can add multiple paragraphs).',
       },
