@@ -1,6 +1,7 @@
 import CtaButtons from '@/components/custom/sagar-ropes-shared/buttons/CtaButtons'
 import Card01 from '@/components/custom/sagar-ropes-shared/cards/Card01'
 import VideoThumbnailDialog from '@/components/custom/sagar-ropes-shared/dialog/VideoThumbnailDialog'
+import WithHashScroller from '@/components/custom/sagar-ropes-shared/others/WithHashScroller'
 import LocalizedHighlighted from '@/components/custom/shared/LocalizedHighlighted'
 import { GetToKnowBlockType } from '@/types/payloadCustomTypes'
 
@@ -23,7 +24,7 @@ function GetToKnowSection({ data }: Props) {
       : (data as any)?.mainImage?.[0]
 
   return (
-    <section className="bg-bg-1">
+    <WithHashScroller id={data?.sectionId} bgColor={data?.backgroundColor}>
       <div className="container-padding">
         {/* ===== DESKTOP (lg+) : 12-col, 3-row grid ===== */}
         <div
@@ -123,7 +124,7 @@ function GetToKnowSection({ data }: Props) {
           </div>
         </div>
       </div>
-    </section>
+    </WithHashScroller>
   )
 }
 

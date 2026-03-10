@@ -16,6 +16,7 @@ import {
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 import { Card01Field } from '@/utils/block/fields/Card01Field'
 import { CtaButtonsField } from '@/utils/block/fields/CtaButtonsField'
+import { BgColorAndSectionIdField } from '@/utils/block/fields/BgColorAndSectionIdField'
 
 /* ---------- limits ---------- */
 const TAG_MAX = 40
@@ -39,6 +40,8 @@ const GetToKnowSchema: Block = {
   fields: [
     // 🔐 Hidden per-doc session id for temp upload lifecycle
     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false } },
+
+    BgColorAndSectionIdField({ defaultBackground: '#E7E7EE' }),
 
     // ===== Main Image (right media) =====
     ...generateArrayImageFields({

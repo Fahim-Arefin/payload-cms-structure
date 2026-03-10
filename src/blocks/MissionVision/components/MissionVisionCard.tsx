@@ -65,23 +65,16 @@ function MissionVisionCard({ label, desc, className }: Props) {
   after:content-['']
   after:absolute after:left-1/2 after:-translate-x-1/2
   after:-bottom-[0px]
-  after:h-[2px] after:w-[105%]
+  after:h-[1px] after:w-[105%]
   after:origin-center after:scale-x-0
   after:bg-white
-  after:transition-transform after:duration-300 after:ease-in after:delay-100
+  after:transition-transform after:duration-150 after:ease-linear after:delay-100
   group-hover:after:scale-x-100"
       >
         <LocalizedText en={label} bn={label} />
       </div>
 
       {/* desc */}
-      {/* <div
-        className="font-manrope global-p3 text-justify
-      transition-all duration-300 ease-in
-      group-hover:global-p2 group-hover:text-white"
-      >
-        <LocalizedRichText en={desc} bn={desc} />
-      </div> */}
       <div className="relative">
         {/* p3 (initial) */}
         <div

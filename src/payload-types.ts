@@ -506,6 +506,16 @@ export interface Page {
     | {
         uploadSessionId?: string | null;
         /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        /**
          * Upload the thumbnail (right-side) image.
          */
         mainImage: string | Media;
@@ -1008,6 +1018,8 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
               mainImage?: T;
               mainImageOriginal?: T;
               pendingMainImageOriginal?: T;

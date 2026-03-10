@@ -60,7 +60,7 @@ function MissionVisionBlock({ block }: Props) {
               label={block?.missionLabel}
               desc={block?.missionDescription}
               className="w-[100%] md:w-[50%] 
-              h-fit md:h-[300px] lg:h-[350px] xl:h-[400px] 
+              h-fit md:h-[300px] lg:h-[330px] xl:h-[400px]
               hover:h-[105%] md:hover:h-[350px] lg:hover:h-[400px] xl:hover:h-[450px]
               overflow-hidden hover:overflow-y-auto overflow-x-hidden"
             />
@@ -69,7 +69,7 @@ function MissionVisionBlock({ block }: Props) {
               label={block?.visionLabel}
               desc={block?.visionDescription}
               className="w-[100%] md:w-[50%] 
-              h-fit md:h-[300px] lg:h-[350px] xl:h-[400px] 
+              h-fit md:h-[300px] lg:h-[330px] xl:h-[400px]
               hover:h-[105%] md:hover:h-[350px] lg:hover:h-[400px] xl:hover:h-[450px]
               overflow-hidden hover:overflow-y-auto overflow-x-hidden"
             />
