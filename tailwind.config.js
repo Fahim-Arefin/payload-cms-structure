@@ -93,6 +93,7 @@ export default {
         'dark-2': 'rgb(var(--dark-2) / <alpha-value>)',
         'dark-2b': 'rgb(var(--dark-2b) / <alpha-value>)',
         'dark-3': 'rgb(var(--dark-3) / <alpha-value>)',
+        'border-2': 'rgb(var(--border-2) / <alpha-value>)',
       },
       boxShadow: {
         'custom-black': '0px 0px 10px 0px #00000082',

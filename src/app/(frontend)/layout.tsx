@@ -7,6 +7,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { Metadata } from 'next'
 import { Noto_Serif_Bengali } from 'next/font/google'
 import './styles.css'
+import ServerNavbar from '@/components/custom/sagar-ropes-shared/navbar/ServerNavbar'
 
 // const notoBengali = Noto_Sans_Bengali({
 //   subsets: ['bengali'],
@@ -167,11 +168,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        {/* <link rel="icon" type="image/png" href="/assets/logo/mainlogo_2.png" /> */}
         <link
           rel="icon"
           type="image/png"
-          href={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/mainlogo_2.png`}
+          href={`${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/logo.png`}
         />
         {/* Google Tag (gtag.js) */}
         {/* <Script
@@ -193,10 +193,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       </head>
       <body className={`${notoSerifBengali.variable}`}>
         <Providers initialLang="en">
-          {/* bg-[#F6EDDD] */}
           <main className="min-h-screen relative 3xl:max-w-[1925px] 3xl:mx-auto font-proxima">
-            {/* <ServerTopHeader className="hidden fixed top-0 right-0 left-0 z-50 lg:flex" /> */}
-            {/* <ServerNavbar /> */}
+            <ServerNavbar />
             <div className="min-h-screen">{children}</div>
             <CookieConsentBanner />
             {/* <div className="hidden lg:block">
