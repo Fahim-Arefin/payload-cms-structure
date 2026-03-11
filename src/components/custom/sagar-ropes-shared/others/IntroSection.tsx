@@ -26,7 +26,7 @@ function IntroSection({ block, className }: Props) {
           {/* tag */}
           {block?.tag && (
             <div
-              className="font-manrope text-cyan text-xs xl:text-[14px] leading-[157.143%] tracking-[1.4px]
+              className="font-manrope text-cyan text-xs xl:text-[14px] 2xl:text-[15px]  leading-[157.143%] tracking-[1.4px]
               px-2 py-1 bg-white-1 w-fit uppercase
               mb-2 lg:mb-3 xl:mb-4"
             >

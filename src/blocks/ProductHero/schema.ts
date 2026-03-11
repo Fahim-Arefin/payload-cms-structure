@@ -37,7 +37,7 @@ const ProductHeroSchema: Block = {
       type: 'array',
       required: true,
       minRows: 1,
-      maxRows: 1,
+      maxRows: 6,
       labels: { singular: 'Hero Item', plural: 'Hero Items' },
 
       fields: [

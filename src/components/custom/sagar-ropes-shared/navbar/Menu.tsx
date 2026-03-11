@@ -361,11 +361,12 @@ function Menu({ data }: Props) {
   `
 
   return (
-    <div className="h-full font-proxima font-bold text-dark-3 uppercase global-p3">
+    <div className="h-full font-proxima font-bold text-dark-3 uppercase ">
       {/* top */}
       <div
         className="h-[50%] flex flex-row justify-end items-center gap-6
-        pr-4 lg:pr-6 xl:pr-10 2xl:pr-12"
+        pr-4 lg:pr-[35px] xl:pr-12 2xl:pr-[61px] 
+        text-[10px] xl:text-[12px] 2xl:text-[14px]"
       >
         {topItems?.map((item, index) => {
           const parentActive = isParentActive(item)
@@ -391,7 +392,7 @@ function Menu({ data }: Props) {
                       group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
                     "
                   >
-                    <div className="min-w-[220px] overflow-hidden border border-dark-3 bg-white/95 backdrop-blur-md shadow-lg">
+                    <div className="min-w-[220px] overflow-hidden border-b-[3px] border-b-dark-3 bg-white/95 backdrop-blur-[15px] shadow-lg">
                       {item.children?.map((child, childIndex) => (
                         <Link
                           key={childIndex}
@@ -406,22 +407,22 @@ function Menu({ data }: Props) {
                 )}
               </div>
 
-              {index + 1 !== topItems.length && <div className="h-[60%] w-[2px] bg-dark-3" />}
+              {index + 1 !== topItems.length && <div className="h-[35%] w-[2px] bg-dark-3" />}
             </React.Fragment>
           )
         })}
       </div>
 
       {/* main */}
-      <div className="h-[50%] flex items-center justify-end">
-        <div className="w-[95%] xl:w-[90%]">
-          <div className="flex flex-row items-center justify-between w-full h-full">
+      <div className="h-[50%] flex items-center justify-end global-p3">
+        <div className="w-[95%] xl:w-[90%] 2xl:w-[85%]">
+          <div className="flex flex-row items-center justify-between w-full h-full ">
             {mainItems?.map((item, index) => {
               const parentActive = isParentActive(item)
               const itemHasChildren = hasChildren(item)
 
               return (
-                <div key={index} className="relative group">
+                <div key={index} className="relative group ">
                   <Link href={item?.href} className={navLinkClass(parentActive)}>
                     <LocalizedText en={item?.label} bn={item?.label} />
 
@@ -433,13 +434,21 @@ function Menu({ data }: Props) {
                   {itemHasChildren && (
                     <div
                       className="
-                        absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3
+                        absolute -left-4 top-full z-50  pt-3
                         opacity-0 invisible translate-y-2
                         transition-all duration-300 ease-out
                         group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
                       "
                     >
-                      <div className="min-w-[220px] overflow-hidden border border-dark-3 bg-white/95 backdrop-blur-md shadow-lg">
+                      <div
+                        className="min-w-[220px] overflow-hidden 
+                        border-b-[3px] border-b-dark-3 shadow-lg
+                        backdrop-blur-15 bg-[#E8EFF4]"
+                        // style={{
+                        //   background:
+                        //     'linear-gradient(0deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.20) 100%), rgba(255,255,255,0.20)',
+                        // }}
+                      >
                         {item.children?.map((child, childIndex) => (
                           <Link
                             key={childIndex}
@@ -457,9 +466,10 @@ function Menu({ data }: Props) {
             })}
 
             {/* search icon and contact us btn */}
-            <div
+            {/* <div
               className="flex items-center justify-between
-              w-[200px] xl:w-[250px] 2xl:w-[300px]"
+              w-[200px] xl:w-[250px] 2xl:w-[300px]
+              "
             >
               <div className="w-[20%] flex items-center justify-center">
                 <svg
@@ -514,6 +524,60 @@ function Menu({ data }: Props) {
                   Contact Us
                 </Button>
               </div>
+            </div> */}
+
+            <div className="flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M11.7849 10.9712C11.6082 11.1479 11.4314 11.3247 11.2546 11.5015C11.329 11.6938 11.4093 11.8801 11.4955 12.0606C11.8403 12.7825 12.2793 13.4101 12.8127 13.9434C14.6793 15.8101 16.6743 17.5484 18.7976 19.1585C18.9493 19.2735 19.1016 19.3878 19.2546 19.5015C19.4314 19.3247 19.6082 19.1479 19.7849 18.9712C19.6712 18.8182 19.5569 18.6659 19.4419 18.5142C17.8319 16.3909 16.0935 14.3959 14.2269 12.5292C13.6935 11.9959 13.0659 11.5568 12.344 11.2121C12.1636 11.1259 11.9772 11.0456 11.7849 10.9712Z"
+                  fill="#0E0E47"
+                />
+                <path
+                  d="M11.7849 10.9712C11.6082 11.1479 11.4314 11.3247 11.2546 11.5015C11.329 11.6938 11.4093 11.8801 11.4955 12.0606C11.8403 12.7825 12.2793 13.4101 12.8127 13.9434C14.6793 15.8101 16.6743 17.5484 18.7976 19.1585C18.9493 19.2735 19.1016 19.3878 19.2546 19.5015C19.4314 19.3247 19.6082 19.1479 19.7849 18.9712C19.6712 18.8182 19.5569 18.6659 19.4419 18.5142C17.8319 16.3909 16.0935 14.3959 14.2269 12.5292C13.6935 11.9959 13.0659 11.5568 12.344 11.2121C12.1636 11.1259 11.9772 11.0456 11.7849 10.9712Z"
+                  fill="black"
+                  fillOpacity="0.2"
+                />
+                <path
+                  d="M11.7849 10.9712C11.6082 11.1479 11.4314 11.3247 11.2546 11.5015C11.329 11.6938 11.4093 11.8801 11.4955 12.0606C11.8403 12.7825 12.2793 13.4101 12.8127 13.9434C14.6793 15.8101 16.6743 17.5484 18.7976 19.1585C18.9493 19.2735 19.1016 19.3878 19.2546 19.5015C19.4314 19.3247 19.6082 19.1479 19.7849 18.9712C19.6712 18.8182 19.5569 18.6659 19.4419 18.5142C17.8319 16.3909 16.0935 14.3959 14.2269 12.5292C13.6935 11.9959 13.0659 11.5568 12.344 11.2121C12.1636 11.1259 11.9772 11.0456 11.7849 10.9712Z"
+                  fill="black"
+                  fillOpacity="0.2"
+                />
+                <circle cx="7.5" cy="7.5" r="6.5" stroke="#0E0E47" strokeWidth="2" />
+                <circle
+                  cx="7.5"
+                  cy="7.5"
+                  r="6.5"
+                  stroke="black"
+                  strokeOpacity="0.2"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="7.5"
+                  cy="7.5"
+                  r="6.5"
+                  stroke="black"
+                  strokeOpacity="0.2"
+                  strokeWidth="2"
+                />
+              </svg>
+            </div>
+
+            <div className="w-[160px] xl:w-[200px] 2xl:w-[240px]">
+              <Button
+                variant="outline"
+                className="transition-all duration-300 ease-in
+                  rounded-none font-proxima font-bold uppercase global-p3
+                  bg-transparent hover:bg-dark-3 text-dark-3 hover:text-white-1
+                  border-[2px] border-dark-3 w-full"
+              >
+                Contact Us
+              </Button>
             </div>
           </div>
         </div>
