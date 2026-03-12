@@ -82,7 +82,7 @@ function MissionVisionBlock({ block }: Props) {
         {/* pattern 1 */}
         {block?.showPatternDesign && (
           <div
-            className="invisible md:visible absolute left-0 top-0 z-30 h-[50%]
+            className="invisible md:visible absolute left-0 top-0 z-30 h-[70%]
                    md:w-[120px] 
                    lg:w-[170px] 
                    xl:w-[225px] 

@@ -2,6 +2,7 @@ import {
   BASIC_HERO_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
   MISSION_VISION_SLUG_AND_TAG,
+  PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -12,6 +13,7 @@ import ProductHeroBlock from './ProductHero/ProductHeroBlock'
 import GetToKnowBlock from './GetToKnow/GetToKnowBlock'
 import ProductIntroBlock from './ProductIntro/ProductIntroBlock'
 import MissionVisionBlock from './MissionVision/MissionVisionBlock'
+import ProductAdvantageCardBlock from './ProductAdvantageCard/ProductAdvantageCardBlock'
 
 type Params = Record<string, string>
 
@@ -27,6 +29,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <ProductIntroBlock key={block.id} block={block} params={params} />
     case MISSION_VISION_SLUG_AND_TAG:
       return <MissionVisionBlock key={block.id} block={block} params={params} />
+    case PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG:
+      return <ProductAdvantageCardBlock key={block.id} block={block} params={params} />
 
     default:
       return null

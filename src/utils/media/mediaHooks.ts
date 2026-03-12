@@ -655,6 +655,7 @@
 import {
   BASIC_HERO_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
+  PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
@@ -692,6 +693,12 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'cards',
       mediaFields: ['bgImage'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
+      arrayKey: 'cards',
+      mediaFields: ['bgImage'],
+    },
   ],
 
   // Blocks with nested array (media that inside another array) that contain media fields
@@ -700,6 +707,13 @@ export const mediaHooks = withMediaLifecycle({
     {
       layoutKey: 'layout',
       blockType: GET_TO_KNOW_SLUG_AND_TAG,
+      groupKey: 'cards',
+      arrayKey: 'icons',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
       groupKey: 'cards',
       arrayKey: 'icons',
       mediaFields: ['icon'],

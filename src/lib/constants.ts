@@ -26,7 +26,7 @@ export const AUDIT_LOG = 'Audit'
 
 // Group
 export const HERO_BLOCKS = 'Hero Blocks'
-export const COMMON = 'Common Blocks (used different pages)'
+export const COMMON = 'Common Blocks'
 export const HOME_PAGE = 'Home Page'
 export const ABOUT_US = 'About Us Page'
 
@@ -59,3 +59,9 @@ export const MISSION_VISION_SLUG_AND_TAG = 'mission-vision'
 export const MISSION_VISION_BLOCK_LABEL = 'Mission And Vision Section'
 export const MISSION_VISION_CACHE_KEY = 'mission-vision-data'
 export const MISSION_VISION_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/mission-vision-block-thumbnail.jpg`
+
+// Product Advantage Card
+export const PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG = 'product-advantage-card'
+export const PRODUCT_ADVANTAGE_CARD_BLOCK_LABEL = 'Product Advantage Card'
+export const PRODUCT_ADVANTAGE_CARD_CACHE_KEY = 'product-advantage-card-data'
+export const PRODUCT_ADVANTAGE_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-advantage-card-block-thumbnail.jpg`

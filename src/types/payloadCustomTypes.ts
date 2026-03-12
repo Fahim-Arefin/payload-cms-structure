@@ -2,6 +2,7 @@ import {
   BASIC_HERO_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
   MISSION_VISION_SLUG_AND_TAG,
+  PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -30,4 +31,9 @@ export type ProductIntroBlockType = Extract<
 export type MissionVisionBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof MISSION_VISION_SLUG_AND_TAG }
+>
+
+export type ProductAdvantageCardBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG }
 >

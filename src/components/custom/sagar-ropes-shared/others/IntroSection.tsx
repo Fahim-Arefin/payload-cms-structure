@@ -1,4 +1,8 @@
-import { MissionVisionBlockType, ProductIntroBlockType } from '@/types/payloadCustomTypes'
+import {
+  MissionVisionBlockType,
+  ProductAdvantageCardBlockType,
+  ProductIntroBlockType,
+} from '@/types/payloadCustomTypes'
 import React from 'react'
 import LocalizedText from '../../shared/LocalizedText'
 import LocalizedHighlighted from '../../shared/LocalizedHighlighted'
@@ -6,7 +10,7 @@ import CtaButtons from '../buttons/CtaButtons'
 import LocalizedRichText from '../../shared/LocalizedRichText'
 
 type Props = {
-  block: ProductIntroBlockType | MissionVisionBlockType
+  block: ProductIntroBlockType | MissionVisionBlockType | ProductAdvantageCardBlockType
   className?: React.ReactNode
 }
 
