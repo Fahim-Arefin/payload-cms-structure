@@ -109,7 +109,7 @@ function GetToKnowSection({ data }: Props) {
           </div>
 
           {/* BG card (cyan tile) */}
-          <div className="col-span-12 lg:col-span-4 row-span-1 order-5 bg-cyan/30 overflow-hidden">
+          <div className="col-span-12 lg:col-span-4 row-span-1 order-5">
             <Card01 data={bgCard} index={2} className="p-2 md:p-3 xl:p-5 h-full" />
           </div>
 

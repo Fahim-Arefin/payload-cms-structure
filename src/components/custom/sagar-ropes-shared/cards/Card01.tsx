@@ -125,6 +125,8 @@ import Image from 'next/image'
 import React from 'react'
 import LocalizedRichText from '../../shared/LocalizedRichText'
 import SparkImage from '/public/assets/images/spark.png'
+import Link from 'next/link'
+import { pageHref, resolvePageSlug } from '@/lib/utils'
 
 type Props = {
   data: GetToKnowBlockType['cards'][number]
@@ -134,19 +136,28 @@ type Props = {
 
 function Card01({ data, index, className }: Props) {
   const hasBgImage = data?.bgImage
-  return (
+  const isActiveAnimation = data?.showAnimation
+
+  // If GlobalButton supports children (you already do in the YT button), render label as child:
+  const href =
+    data?.sectionId && data?.buttonLink && data?.sectionId
+      ? `/${resolvePageSlug(data?.buttonLink)}/#${data?.sectionId}`
+      : pageHref(data.buttonLink)
+
+  const link = href !== '#' ? href : ''
+
+  const cardContent = (
     <div
-      className={`group/card relative flex flex-col justify-between ${hasBgImage && 'cursor-pointer group'}
-      transition-all duration-300 ease-in
-      hover:bg-transparent
+      className={`group/card relative flex flex-col justify-between ${hasBgImage && 'group bg-cyan/30 overflow-hidden'}
+      transition-all duration-300 ease-in 
+      ${isActiveAnimation && ` hover:bg-transparent`} 
       ${className}`}
     >
       {/* border effect */}
-
-      {!hasBgImage && (
+      {!hasBgImage && isActiveAnimation && (
         <div
           className="opacity-0 group-hover/card:opacity-100 transition-all delay-150 duration-150 ease-in 
-      absolute inset-0 w-[5px] z-20 pointer-events-none bg-cyan"
+      absolute inset-0 w-[2px] md:w-[3px] lg:w-[4px] xl:w-[5px] z-20 pointer-events-none bg-cyan"
         />
       )}
 
@@ -195,38 +206,74 @@ function Card01({ data, index, className }: Props) {
       {data?.icons && data?.icons?.length > 0 && (
         <div className="z-30 flex justify-between">
           <div className={`flex`}>
-            {data?.icons?.map((item, index) => {
-              const media = item?.icon
-              const moreThanOneIcon = data?.icons && data?.icons?.length > 1
+            {/* multiple icons */}
+            {data?.icons?.length > 1 &&
+              data?.icons?.map((item, index) => {
+                const media = item?.icon
+                const moreThanOneIcon = data?.icons && data?.icons?.length > 1
 
-              if (typeof media !== 'object' || !media?.url) return null
+                if (typeof media !== 'object' || !media?.url) return null
 
-              return (
-                <div
-                  key={index}
-                  className={`relative 
+                return (
+                  <div
+                    key={index}
+                    className={`relative 
                 ${moreThanOneIcon ? 'w-[23px] md:w-[28px] lg:w-[38px] xl:w-[44px]   h-[23px] md:h-[28px] lg:h-[38px] xl:h-[44px]' : 'w-[30px] md:w-[40px] lg:w-[50px] xl:w-[60px] h-[30px] md:h-[40px] lg:h-[50px] xl:h-[60px]'}`}
-                >
-                  <Image
-                    key={media.id ?? index}
-                    src={media.url}
-                    alt="icon"
-                    fill
-                    sizes="100vw"
-                    className={`object-cover object-center w-full h-full ${moreThanOneIcon && index === 1 && '-ml-2'} ${moreThanOneIcon && index === 2 && '-ml-4'} ${moreThanOneIcon && index === 3 && '-ml-6'}`}
-                    placeholder={item?.iconBlurDataURL ? 'blur' : 'empty'}
-                    blurDataURL={item?.iconBlurDataURL || undefined}
-                  />
-                </div>
-              )
-            })}
+                  >
+                    <Image
+                      key={media.id ?? index}
+                      src={media.url}
+                      alt="icon"
+                      fill
+                      sizes="100vw"
+                      className={`object-cover object-center w-full h-full ${moreThanOneIcon && index === 1 && '-ml-2'} ${moreThanOneIcon && index === 2 && '-ml-4'} ${moreThanOneIcon && index === 3 && '-ml-6'}`}
+                      placeholder={item?.iconBlurDataURL ? 'blur' : 'empty'}
+                      blurDataURL={item?.iconBlurDataURL || undefined}
+                    />
+                  </div>
+                )
+              })}
+
+            {/* single icon */}
+            {data?.icons?.length === 1 &&
+              data?.icons?.map((item, index) => {
+                const media = item?.icon
+                if (typeof media !== 'object' || !media?.url) return null
+                return (
+                  <div
+                    key={index}
+                    className={`rounded-full flex items-center justify-center 
+                      transition-all duration-300 ease-in
+                      bg-bg-1 ${isActiveAnimation && ` group-hover/card:bg-white group-hover/card:border group-hover/card:border-cyan`}
+                      w-[30px] md:w-[40px] lg:w-[50px] xl:w-[60px] 
+                      h-[30px] md:h-[40px] lg:h-[50px] xl:h-[60px]`}
+                  >
+                    <div
+                      className="relative 
+                      w-[20px] md:w-[25px] lg:w-[30px] xl:w-[40px] 
+                      h-[20px] md:h-[25px] lg:h-[30px] xl:h-[40px]
+                    "
+                    >
+                      <Image
+                        key={media.id ?? index}
+                        src={media.url}
+                        alt="icon"
+                        fill
+                        sizes="100vw"
+                        className={`object-cover object-center w-full h-full`}
+                        placeholder={item?.iconBlurDataURL ? 'blur' : 'empty'}
+                        blurDataURL={item?.iconBlurDataURL || undefined}
+                      />
+                    </div>
+                  </div>
+                )
+              })}
           </div>
           {data?.showCardNumber && (
             <div
               className={`font-proxima global-h5 font-bold ${hasBgImage ? 'text-white-1' : 'text-dark-1'} 
-              transition-all duration-100 ease-in 
-              group-hover/card:scale-110 xl:group-hover/card:scale-125 
-              group-hover/card:-translate-x-1 xl:group-hover/card:-translate-x-1.5  
+              transition-all duration-150 ease-in 
+              ${isActiveAnimation && ` group-hover/card:scale-110 xl:group-hover/card:scale-125 group-hover/card:-translate-x-1 xl:group-hover/card:-translate-x-1.5`} 
               `}
             >
               0{index + 1}.
@@ -253,6 +300,15 @@ function Card01({ data, index, className }: Props) {
         </div>
       )}
     </div>
+  )
+
+  // return <Link className={`${link ? 'cursor-pointer' : 'cursor-default'}`} href={link}></Link>
+  return link ? (
+    <Link className="cursor-pointer" href={link}>
+      {cardContent}
+    </Link>
+  ) : (
+    <React.Fragment>{cardContent}</React.Fragment>
   )
 }
 

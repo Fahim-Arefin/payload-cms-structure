@@ -1,5 +1,5 @@
 import type { Field } from 'payload'
-import { validateShortText } from '@/utils/block/fields-validation'
+import { validateSectionIdOptional, validateShortText } from '@/utils/block/fields-validation'
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 
 type BuildCardsFieldArgs = {
@@ -54,39 +54,78 @@ export const Card01Field = ({
       },
 
       {
-        name: 'showCardNumber',
-        type: 'checkbox',
-        defaultValue: true,
+        type: 'row',
+        fields: [
+          {
+            name: 'showCardNumber',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+              width: '33.33%',
+            },
+          },
+          {
+            name: 'showAnimation',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+              width: '33.33%',
+            },
+          },
+          // spark image
+          {
+            name: 'showSparkImage',
+            type: 'checkbox',
+            defaultValue: false,
+            admin: {
+              width: '33.33%',
+            },
+          },
+        ],
       },
 
-      // title (required)
       {
-        name: 'title',
-        type: 'text',
-        required: true,
-        label: 'Title',
-        maxLength: cardTextMax,
-        validate: validateShortText('Title', cardTextMax, true),
-      },
+        type: 'row',
+        fields: [
+          // title (required)
+          {
+            name: 'title',
+            type: 'text',
+            required: true,
+            label: 'Title',
+            maxLength: cardTextMax,
+            validate: validateShortText('Title', cardTextMax, true),
+            admin: {
+              width: '33.33%',
+            },
+          },
 
-      // subtitle (optional)
-      {
-        name: 'subtitle',
-        type: 'text',
-        required: false,
-        label: 'Subtitle',
-        maxLength: cardTextMax,
-        validate: validateShortText('Subtitle', cardTextMax, false),
-      },
+          // subtitle (optional)
+          {
+            name: 'subtitle',
+            type: 'text',
+            required: false,
+            label: 'Subtitle',
+            maxLength: cardTextMax,
+            validate: validateShortText('Subtitle', cardTextMax, false),
+            admin: {
+              width: '33.33%',
+            },
+          },
 
-      // tertiary title (optional)
-      {
-        name: 'tertiaryTitle',
-        type: 'text',
-        required: false,
-        label: 'Tertiary Title',
-        maxLength: cardTextMax,
-        validate: validateShortText('tertiaryTitle', cardTextMax, false),
+          // tertiary title (optional)
+          {
+            name: 'tertiaryTitle',
+            type: 'text',
+            required: false,
+            label: 'Tertiary Title',
+            maxLength: cardTextMax,
+            validate: validateShortText('tertiaryTitle', cardTextMax, false),
+            admin: {
+              width: '33.33%',
+            },
+          },
+        ],
       },
 
       // description (optional)
@@ -94,6 +133,36 @@ export const Card01Field = ({
         name: 'description',
         type: 'richText',
         label: 'Description',
+      },
+
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'buttonLink',
+            label: 'Link to (internal page)',
+            type: 'relationship',
+            relationTo: 'pages',
+            required: false,
+            admin: {
+              width: '50%',
+              description:
+                'Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.',
+            },
+          },
+          {
+            name: 'sectionId',
+            type: 'text',
+            label: 'Section ID (anchor)',
+            required: false,
+            admin: {
+              width: '50%',
+              description:
+                'Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").',
+            },
+            validate: validateSectionIdOptional,
+          },
+        ],
       },
 
       // bg image (optional)
@@ -107,13 +176,6 @@ export const Card01Field = ({
         required: false,
         ownerCollection,
       } as any),
-
-      // spark image
-      {
-        name: 'showSparkImage',
-        type: 'checkbox',
-        defaultValue: false,
-      },
     ],
   }
 }

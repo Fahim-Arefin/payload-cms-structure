@@ -19,7 +19,7 @@ function ProductAdvantageCardBlock({ block }: Props) {
         <div
           className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 
           mt-4 lg:mt-6 xl:mt-8 2xl:mt-10 
-         gap-3 lg:gap-2.5 xl:gap-4 2xl:gap-6 "
+         gap-3 lg:gap-2.5 xl:gap-4 2xl:gap-10 "
         >
           {block?.cards?.map((item, index) => (
             <Card01

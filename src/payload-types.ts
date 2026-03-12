@@ -617,6 +617,8 @@ export interface Page {
               }[]
             | null;
           showCardNumber?: boolean | null;
+          showAnimation?: boolean | null;
+          showSparkImage?: boolean | null;
           title: string;
           subtitle?: string | null;
           tertiaryTitle?: string | null;
@@ -636,6 +638,14 @@ export interface Page {
             [k: string]: unknown;
           } | null;
           /**
+           * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+           */
+          buttonLink?: (string | null) | Page;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+           */
+          sectionId?: string | null;
+          /**
            * Optional background image for the card.
            */
           bgImage?: (string | null) | Media;
@@ -643,7 +653,6 @@ export interface Page {
           pendingBgImageOriginal?: string | null;
           pendingBgImageCrop?: string | null;
           bgImageBlurDataURL?: string | null;
-          showSparkImage?: boolean | null;
           id?: string | null;
         }[];
         id?: string | null;
@@ -722,6 +731,8 @@ export interface Page {
               }[]
             | null;
           showCardNumber?: boolean | null;
+          showAnimation?: boolean | null;
+          showSparkImage?: boolean | null;
           title: string;
           subtitle?: string | null;
           tertiaryTitle?: string | null;
@@ -741,6 +752,14 @@ export interface Page {
             [k: string]: unknown;
           } | null;
           /**
+           * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+           */
+          buttonLink?: (string | null) | Page;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+           */
+          sectionId?: string | null;
+          /**
            * Optional background image for the card.
            */
           bgImage?: (string | null) | Media;
@@ -748,7 +767,6 @@ export interface Page {
           pendingBgImageOriginal?: string | null;
           pendingBgImageCrop?: string | null;
           bgImageBlurDataURL?: string | null;
-          showSparkImage?: boolean | null;
           id?: string | null;
         }[];
         id?: string | null;
@@ -1202,16 +1220,19 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                         };
                     showCardNumber?: T;
+                    showAnimation?: T;
+                    showSparkImage?: T;
                     title?: T;
                     subtitle?: T;
                     tertiaryTitle?: T;
                     description?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
                     bgImage?: T;
                     bgImageOriginal?: T;
                     pendingBgImageOriginal?: T;
                     pendingBgImageCrop?: T;
                     bgImageBlurDataURL?: T;
-                    showSparkImage?: T;
                     id?: T;
                   };
               id?: T;
@@ -1255,16 +1276,19 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                         };
                     showCardNumber?: T;
+                    showAnimation?: T;
+                    showSparkImage?: T;
                     title?: T;
                     subtitle?: T;
                     tertiaryTitle?: T;
                     description?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
                     bgImage?: T;
                     bgImageOriginal?: T;
                     pendingBgImageOriginal?: T;
                     pendingBgImageCrop?: T;
                     bgImageBlurDataURL?: T;
-                    showSparkImage?: T;
                     id?: T;
                   };
               id?: T;
