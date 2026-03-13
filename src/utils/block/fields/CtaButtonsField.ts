@@ -7,18 +7,22 @@ type Options = {
   name?: string
   label?: string
   maxRows?: number
+  minRows?: number
+  required?: boolean
 }
 
 export const CtaButtonsField = ({
   name = 'ctaButtons',
   label = 'CTA Buttons',
+  minRows = 0,
   maxRows = 2,
+  required = false,
 }: Options = {}): Field => {
   return {
     name,
     type: 'array',
-    required: false,
-    minRows: 0,
+    required,
+    minRows,
     maxRows,
     label,
     labels: { singular: 'CTA Button', plural: 'CTA Buttons' },
@@ -42,7 +46,6 @@ export const CtaButtonsField = ({
             options: [
               { label: 'Button 01', value: 'btn01' },
               { label: 'Button 02', value: 'btn02' },
-              { label: 'Button 03', value: 'btn03' },
             ],
             defaultValue: 'btn01',
             admin: {

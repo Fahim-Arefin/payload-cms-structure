@@ -7,10 +7,10 @@ import {
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
 } from '@/lib/constants'
 
-import { validateShortText } from '@/utils/block/fields-validation'
 import { BgColorAndSectionIdField } from '@/utils/block/fields/BgColorAndSectionIdField'
-import { SectionHeadingFields } from '@/utils/block/fields/SectionHeading'
 import { Card01Field } from '@/utils/block/fields/Card01Field'
+import { SectionHeadingFields } from '@/utils/block/fields/SectionHeading'
+import { TestLabCardField } from '@/utils/block/fields/TestLabCard'
 
 /* ---------- limits ---------- */
 const TAG_MAX = 40
@@ -54,6 +54,14 @@ const ProductAdvantageCardSchema: Block = {
       maxRows: 8,
       cardTextMax: CARD_TEXT_MAX,
       maxIcons: 1,
+    }),
+
+    // ===== Test Lab Cards =====
+    TestLabCardField({
+      ownerCollection: PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG as any,
+      minRows: 0,
+      maxRows: 1,
+      titleMax: CARD_TEXT_MAX,
     }),
   ],
 }

@@ -313,7 +313,7 @@ export interface Page {
                 /**
                  * Select the button style
                  */
-                style?: ('btn01' | 'btn02' | 'btn03') | null;
+                style?: ('btn01' | 'btn02') | null;
                 /**
                  * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
                  */
@@ -490,7 +490,7 @@ export interface Page {
               /**
                * Select the button style
                */
-              style?: ('btn01' | 'btn02' | 'btn03') | null;
+              style?: ('btn01' | 'btn02') | null;
               /**
                * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
                */
@@ -590,7 +590,7 @@ export interface Page {
               /**
                * Select the button style
                */
-              style?: ('btn01' | 'btn02' | 'btn03') | null;
+              style?: ('btn01' | 'btn02') | null;
               /**
                * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
                */
@@ -606,7 +606,7 @@ export interface Page {
           icons?:
             | {
                 /**
-                 * Square icon (1:1).
+                 * Required. Upload a colored icon (PNG/SVG) with transparent background (no background). 1:1.
                  */
                 icon?: (string | null) | Media;
                 iconOriginal?: (string | null) | Media;
@@ -655,6 +655,57 @@ export interface Page {
           bgImageBlurDataURL?: string | null;
           id?: string | null;
         }[];
+        /**
+         * Simple card for link to test lab result page.
+         */
+        testLabCards?:
+          | {
+              /**
+               * Required. Upload a colored icon (PNG/SVG) with transparent background (no background). 1:1.
+               */
+              icon: string | Media;
+              iconOriginal?: (string | null) | Media;
+              pendingIconOriginal?: string | null;
+              pendingIconCrop?: string | null;
+              iconBlurDataURL?: string | null;
+              /**
+               * Required. Upload a white icon (PNG/SVG) with transparent background (no background). Used for dark/hover UI. 1:1.
+               */
+              iconWhite: string | Media;
+              iconWhiteOriginal?: (string | null) | Media;
+              pendingIconWhiteOriginal?: string | null;
+              pendingIconWhiteCrop?: string | null;
+              iconWhiteBlurDataURL?: string | null;
+              /**
+               * Max 120 characters.
+               */
+              title: string;
+              /**
+               * Max 120 characters.
+               */
+              subtitle?: string | null;
+              ctaButtons: {
+                /**
+                 * Max 40 characters.
+                 */
+                label: string;
+                /**
+                 * Select the button style
+                 */
+                style?: ('btn01' | 'btn02') | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
+                id?: string | null;
+              }[];
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'product-advantage-card';
@@ -704,7 +755,7 @@ export interface Page {
               /**
                * Select the button style
                */
-              style?: ('btn01' | 'btn02' | 'btn03') | null;
+              style?: ('btn01' | 'btn02') | null;
               /**
                * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
                */
@@ -720,7 +771,7 @@ export interface Page {
           icons?:
             | {
                 /**
-                 * Square icon (1:1).
+                 * Required. Upload a colored icon (PNG/SVG) with transparent background (no background). 1:1.
                  */
                 icon?: (string | null) | Media;
                 iconOriginal?: (string | null) | Media;
@@ -856,7 +907,7 @@ export interface Page {
               /**
                * Select the button style
                */
-              style?: ('btn01' | 'btn02' | 'btn03') | null;
+              style?: ('btn01' | 'btn02') | null;
               /**
                * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
                */
@@ -1233,6 +1284,32 @@ export interface PagesSelect<T extends boolean = true> {
                     pendingBgImageOriginal?: T;
                     pendingBgImageCrop?: T;
                     bgImageBlurDataURL?: T;
+                    id?: T;
+                  };
+              testLabCards?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    iconWhite?: T;
+                    iconWhiteOriginal?: T;
+                    pendingIconWhiteOriginal?: T;
+                    pendingIconWhiteCrop?: T;
+                    iconWhiteBlurDataURL?: T;
+                    title?: T;
+                    subtitle?: T;
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
                     id?: T;
                   };
               id?: T;

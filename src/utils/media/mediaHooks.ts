@@ -699,6 +699,18 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'cards',
       mediaFields: ['bgImage'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
+      arrayKey: 'testLabCards',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
+      arrayKey: 'testLabCards',
+      mediaFields: ['iconWhite'],
+    },
   ],
 
   // Blocks with nested array (media that inside another array) that contain media fields

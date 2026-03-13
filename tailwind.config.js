@@ -19,6 +19,12 @@ export default {
     'bg-dark-2',
     'bg-dark-2b',
     'bg-dark-3',
+    'group/testCard',
+    'group-hover/testCard:text-white',
+    'group-hover/testCard:bg-white-1',
+    'group-hover/testCard:opacity-0',
+    'group-hover/testCard:opacity-100',
+    'group-hover/testCard:scale-150',
   ],
   theme: {
     extend: {

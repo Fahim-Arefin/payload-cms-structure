@@ -232,7 +232,7 @@
   }
 
   .global-link {
-    @apply text-[12px] md:text-[12px] lg:text-[12px] xl:text-[14px] 2xl:text-[14px];
+    @apply text-[10px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[14px];
   }
 
   .global-h2 {

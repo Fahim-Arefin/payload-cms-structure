@@ -1,4 +1,5 @@
 import Card01 from '@/components/custom/sagar-ropes-shared/cards/Card01'
+import TestLabCard from '@/components/custom/sagar-ropes-shared/cards/TestLabCard'
 import IntroSection from '@/components/custom/sagar-ropes-shared/others/IntroSection'
 import WithHashScroller from '@/components/custom/sagar-ropes-shared/others/WithHashScroller'
 import { ProductAdvantageCardBlockType } from '@/types/payloadCustomTypes'
@@ -31,6 +32,18 @@ function ProductAdvantageCardBlock({ block }: Props) {
               min-h-[170px] md:min-h-[160px] lg:min-h-[210px] xl:min-h-[275px] 2xl:min-h-[300px]"
             />
           ))}
+
+          {block?.testLabCards &&
+            block?.testLabCards?.length > 0 &&
+            block?.testLabCards?.map((item, index) => (
+              <TestLabCard
+                key={index}
+                data={item}
+                className="bg-white-1
+              p-2.5 md:p-3.5 xl:p-5 2xl:p-6 
+              min-h-[170px] md:min-h-[160px] lg:min-h-[210px] xl:min-h-[275px] 2xl:min-h-[300px]"
+              />
+            ))}
         </div>
       </div>
     </WithHashScroller>

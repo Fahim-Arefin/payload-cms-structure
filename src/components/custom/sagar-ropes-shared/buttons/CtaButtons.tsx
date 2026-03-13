@@ -8,9 +8,10 @@ import { BasicHeroBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
   item: BasicHeroBlockType['heroes'][number]['ctaButtons']
+  groupName?: string
 }
 
-function CtaButtons({ item }: Props) {
+function CtaButtons({ item, groupName }: Props) {
   return (
     <>
       {item?.map((block, index) => {
@@ -28,7 +29,7 @@ function CtaButtons({ item }: Props) {
                 </Button01>
               )}
               {block?.style === 'btn02' && (
-                <Button02>
+                <Button02 groupName={groupName}>
                   <LocalizedText en={block.label} bn={block.label} />
                 </Button02>
               )}

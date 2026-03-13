@@ -43,7 +43,8 @@ export const Card01Field = ({
           ...generateArrayImageFields({
             fieldName: 'icon',
             label: 'Icon',
-            description: 'Square icon (1:1).',
+            description:
+              'Required. Upload a colored icon (PNG/SVG) with transparent background (no background). 1:1.',
             aspectRatio: 1 / 1,
             quality: 0.9,
             maxKB: 200,
