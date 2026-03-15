@@ -11,7 +11,7 @@ import LocalizedRichText from '../../shared/LocalizedRichText'
 
 type Props = {
   block: ProductIntroBlockType | MissionVisionBlockType | ProductAdvantageCardBlockType
-  className?: React.ReactNode
+  className?: string
 }
 
 function IntroSection({ block, className }: Props) {

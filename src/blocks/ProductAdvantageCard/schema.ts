@@ -63,6 +63,16 @@ const ProductAdvantageCardSchema: Block = {
       maxRows: 1,
       titleMax: CARD_TEXT_MAX,
     }),
+
+    {
+      name: 'layout',
+      type: 'select',
+      defaultValue: 'grid',
+      options: [
+        { label: 'Grid', value: 'grid' },
+        { label: 'Carousel', value: 'carousel' },
+      ],
+    },
   ],
 }
 

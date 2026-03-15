@@ -706,6 +706,7 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        layout?: ('grid' | 'carousel') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'product-advantage-card';
@@ -1312,6 +1313,7 @@ export interface PagesSelect<T extends boolean = true> {
                         };
                     id?: T;
                   };
+              layout?: T;
               id?: T;
               blockName?: T;
             };
