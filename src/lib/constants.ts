@@ -65,3 +65,9 @@ export const PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG = 'product-advantage-card'
 export const PRODUCT_ADVANTAGE_CARD_BLOCK_LABEL = 'Product Advantage Card'
 export const PRODUCT_ADVANTAGE_CARD_CACHE_KEY = 'product-advantage-card-data'
 export const PRODUCT_ADVANTAGE_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-advantage-card-block-thumbnail.jpg`
+
+// Product Advantage Card
+export const TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG = 'technical-specifications'
+export const TECHNICAL_SPECIFICATIONS_BLOCK_LABEL = 'Technical Specifications'
+export const TECHNICAL_SPECIFICATIONS_CACHE_KEY = 'technical-specifications-data'
+export const TECHNICAL_SPECIFICATIONS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/technical-specifications-block-thumbnail.jpg`

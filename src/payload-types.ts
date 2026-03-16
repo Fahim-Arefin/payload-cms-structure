@@ -724,6 +724,115 @@ export interface Page {
          */
         sectionId?: string | null;
         /**
+         * Small label above heading. Max 40 characters.
+         */
+        tag?: string | null;
+        /**
+         * Main heading line 1. Max 90 characters.
+         */
+        heading1: string;
+        /**
+         * Optional. Must be inside Heading 1. Max 90.
+         */
+        heading1Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading1HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Secondary heading line. Max 90 characters.
+         */
+        heading2?: string | null;
+        /**
+         * Optional. Must be inside Heading 2. Max 90.
+         */
+        heading2Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading2HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Optional heading line 3. Max 90 characters.
+         */
+        heading3?: string | null;
+        /**
+         * Optional. Must be inside Heading 3. Max 90.
+         */
+        heading3Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for Heading 3.
+         */
+        heading3HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Controls whether Heading 3 is shown alone or aligned beside the description.
+         */
+        heading3Layout?: ('solo' | 'besideDescription') | null;
+        /**
+         * Write the paragraph text (you can add multiple paragraphs).
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Left column heading. Example: "Specification".
+         */
+        specNameHeader?: string | null;
+        /**
+         * Right column heading. Example: "Details".
+         */
+        detailsHeader?: string | null;
+        /**
+         * Add technical specifications (icon optional).
+         */
+        specifications: {
+          /**
+           * Optional icon (1:1). Transparent PNG/SVG recommended.
+           */
+          icon?: (string | null) | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
+          /**
+           * Example: "Diameter Range"
+           */
+          name: string;
+          /**
+           * Example: "2.5 mm to 40 mm , 3 Strand / 4 Strand Twisted etc ..."
+           */
+          details: string;
+          id?: string | null;
+        }[];
+        showPatternDesign?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'technical-specifications';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        /**
          * Upload the thumbnail (right-side) image.
          */
         mainImage: string | Media;
@@ -1314,6 +1423,42 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                   };
               layout?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'technical-specifications'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              tag?: T;
+              heading1?: T;
+              heading1Highlighted?: T;
+              heading1HighlightColor?: T;
+              heading2?: T;
+              heading2Highlighted?: T;
+              heading2HighlightColor?: T;
+              heading3?: T;
+              heading3Highlighted?: T;
+              heading3HighlightColor?: T;
+              heading3Layout?: T;
+              description?: T;
+              specNameHeader?: T;
+              detailsHeader?: T;
+              specifications?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    name?: T;
+                    details?: T;
+                    id?: T;
+                  };
+              showPatternDesign?: T;
               id?: T;
               blockName?: T;
             };

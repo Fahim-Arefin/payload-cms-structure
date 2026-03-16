@@ -657,6 +657,7 @@ import {
   GET_TO_KNOW_SLUG_AND_TAG,
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
+  TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -710,6 +711,12 @@ export const mediaHooks = withMediaLifecycle({
       blockType: PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
       arrayKey: 'testLabCards',
       mediaFields: ['iconWhite'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
+      arrayKey: 'specifications',
+      mediaFields: ['icon'],
     },
   ],
 

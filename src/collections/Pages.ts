@@ -5,6 +5,7 @@ import MissionVisionSchema from '@/blocks/MissionVision/schema'
 import ProductAdvantageCardSchema from '@/blocks/ProductAdvantageCard/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductIntroSchema from '@/blocks/ProductIntro/schema'
+import TechnicalSpecificationsSchema from '@/blocks/TechnicalSpecification/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -132,6 +133,7 @@ export const Pages: CollectionConfig = {
         // common section
         ProductIntroSchema,
         ProductAdvantageCardSchema,
+        TechnicalSpecificationsSchema,
 
         // custom blocks
 

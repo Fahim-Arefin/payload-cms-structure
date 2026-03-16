@@ -2,6 +2,7 @@ import {
   MissionVisionBlockType,
   ProductAdvantageCardBlockType,
   ProductIntroBlockType,
+  TechnicalSpecificationBlockType,
 } from '@/types/payloadCustomTypes'
 import React from 'react'
 import LocalizedText from '../../shared/LocalizedText'
@@ -10,7 +11,8 @@ import CtaButtons from '../buttons/CtaButtons'
 import LocalizedRichText from '../../shared/LocalizedRichText'
 
 type Props = {
-  block: ProductIntroBlockType | MissionVisionBlockType | ProductAdvantageCardBlockType
+  // block: ProductIntroBlockType | MissionVisionBlockType | ProductAdvantageCardBlockType
+  block: any
   className?: string
 }
 

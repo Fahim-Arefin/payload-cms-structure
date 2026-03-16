@@ -5,6 +5,7 @@ import {
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
+  TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -14,6 +15,7 @@ import GetToKnowBlock from './GetToKnow/GetToKnowBlock'
 import ProductIntroBlock from './ProductIntro/ProductIntroBlock'
 import MissionVisionBlock from './MissionVision/MissionVisionBlock'
 import ProductAdvantageCardBlock from './ProductAdvantageCard/ProductAdvantageCardBlock'
+import TechnicalSpecificationBlock from './TechnicalSpecification/TechnicalSpecificationBlock'
 
 type Params = Record<string, string>
 
@@ -31,6 +33,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <MissionVisionBlock key={block.id} block={block} params={params} />
     case PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG:
       return <ProductAdvantageCardBlock key={block.id} block={block} params={params} />
+    case TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG:
+      return <TechnicalSpecificationBlock key={block.id} block={block} params={params} />
 
     default:
       return null
