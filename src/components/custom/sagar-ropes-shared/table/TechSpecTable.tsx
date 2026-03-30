@@ -110,7 +110,9 @@ function TechSpecTable({ className, data, specNameHeader, detailsHeader }: Props
               className="w-[63%] md:w-[73%] xl:w-[73%] 2xl:w-[73%] 
               flex items-center gap-4 overflow-x-hidden "
             >
-              <div className="font-manrope global-p1 flex flex-wrap ">{item?.details}</div>
+              <div className="font-manrope global-p1 flex flex-wrap text-[#364153]">
+                {item?.details}
+              </div>
               <div className="relative min-w-[17px] lg:min-w-[20px] xl:min-w-[25px] 2xl:min-w-[30px] aspect-square">
                 {typeof item?.icon === 'object' && item?.icon?.url && (
                   <Image
