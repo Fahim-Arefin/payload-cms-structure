@@ -5,6 +5,7 @@ import {
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
+  QUERIES_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
@@ -42,4 +43,9 @@ export type ProductAdvantageCardBlockType = Extract<
 export type TechnicalSpecificationBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG }
+>
+
+export type QueriesBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof QUERIES_SLUG_AND_TAG }
 >

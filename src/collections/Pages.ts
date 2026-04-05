@@ -5,6 +5,7 @@ import MissionVisionSchema from '@/blocks/MissionVision/schema'
 import ProductAdvantageCardSchema from '@/blocks/ProductAdvantageCard/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductIntroSchema from '@/blocks/ProductIntro/schema'
+import QueriesSchema from '@/blocks/Queries/schema'
 import TechnicalSpecificationsSchema from '@/blocks/TechnicalSpecification/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
@@ -134,6 +135,7 @@ export const Pages: CollectionConfig = {
         ProductIntroSchema,
         ProductAdvantageCardSchema,
         TechnicalSpecificationsSchema,
+        QueriesSchema,
 
         // custom blocks
 

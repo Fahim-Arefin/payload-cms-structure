@@ -71,3 +71,9 @@ export const TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG = 'technical-specifications'
 export const TECHNICAL_SPECIFICATIONS_BLOCK_LABEL = 'Technical Specifications'
 export const TECHNICAL_SPECIFICATIONS_CACHE_KEY = 'technical-specifications-data'
 export const TECHNICAL_SPECIFICATIONS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/technical-specifications-block-thumbnail.jpg`
+
+// Queries
+export const QUERIES_SLUG_AND_TAG = 'queries'
+export const QUERIES_BLOCK_LABEL = 'Queries'
+export const QUERIES_CACHE_KEY = 'queries-data'
+export const QUERIES_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/queries-block-thumbnail.jpg`
