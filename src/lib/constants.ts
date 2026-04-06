@@ -77,3 +77,9 @@ export const QUERIES_SLUG_AND_TAG = 'queries'
 export const QUERIES_BLOCK_LABEL = 'Queries'
 export const QUERIES_CACHE_KEY = 'queries-data'
 export const QUERIES_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/queries-block-thumbnail.jpg`
+
+// Product info 01
+export const PRODUCT_INFO_01_SLUG_AND_TAG = 'product-info-01'
+export const PRODUCT_INFO_01_BLOCK_LABEL = 'Product Info 01'
+export const PRODUCT_INFO_01_CACHE_KEY = 'product-info-01-data'
+export const PRODUCT_INFO_01_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info-01-block-thumbnail.jpg`

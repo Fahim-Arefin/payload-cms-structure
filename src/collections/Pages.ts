@@ -4,6 +4,7 @@ import GetToKnowSchema from '@/blocks/GetToKnow/schema'
 import MissionVisionSchema from '@/blocks/MissionVision/schema'
 import ProductAdvantageCardSchema from '@/blocks/ProductAdvantageCard/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
+import ProductInfo01Schema from '@/blocks/ProductInfo01/schema'
 import ProductIntroSchema from '@/blocks/ProductIntro/schema'
 import QueriesSchema from '@/blocks/Queries/schema'
 import TechnicalSpecificationsSchema from '@/blocks/TechnicalSpecification/schema'
@@ -136,6 +137,7 @@ export const Pages: CollectionConfig = {
         ProductAdvantageCardSchema,
         TechnicalSpecificationsSchema,
         QueriesSchema,
+        ProductInfo01Schema,
 
         // custom blocks
 

@@ -4,6 +4,7 @@ import {
   MISSION_VISION_SLUG_AND_TAG,
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
+  PRODUCT_INFO_01_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
@@ -18,6 +19,7 @@ import MissionVisionBlock from './MissionVision/MissionVisionBlock'
 import ProductAdvantageCardBlock from './ProductAdvantageCard/ProductAdvantageCardBlock'
 import TechnicalSpecificationBlock from './TechnicalSpecification/TechnicalSpecificationBlock'
 import QueriesBlock from './Queries/QueriesBlock'
+import ProductInfo01Block from './ProductInfo01/ProductInfo01Block'
 
 type Params = Record<string, string>
 
@@ -39,6 +41,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <TechnicalSpecificationBlock key={block.id} block={block} params={params} />
     case QUERIES_SLUG_AND_TAG:
       return <QueriesBlock key={block.id} block={block} params={params} />
+    case PRODUCT_INFO_01_SLUG_AND_TAG:
+      return <ProductInfo01Block key={block.id} block={block} params={params} />
 
     default:
       return null

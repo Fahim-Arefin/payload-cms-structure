@@ -79,7 +79,7 @@ function IntroSection({ block, className }: Props) {
           )}
         </div>
         {/* right */}
-        {block?.ctaButtons && (
+        {block?.ctaButtons && block?.ctaButtons?.length > 0 && (
           <div>
             <CtaButtons item={block?.ctaButtons} />
           </div>

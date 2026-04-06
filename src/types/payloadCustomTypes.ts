@@ -4,6 +4,7 @@ import {
   MISSION_VISION_SLUG_AND_TAG,
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
+  PRODUCT_INFO_01_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
@@ -48,4 +49,9 @@ export type TechnicalSpecificationBlockType = Extract<
 export type QueriesBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof QUERIES_SLUG_AND_TAG }
+>
+
+export type ProductInfo01BlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PRODUCT_INFO_01_SLUG_AND_TAG }
 >
