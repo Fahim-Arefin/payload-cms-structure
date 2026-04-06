@@ -19,16 +19,21 @@ function ProductInfo01Block({ block }: Props) {
         >
           {/* content */}
           <div
-            className="col-span-1 bg-white 
+            className={`col-span-1 bg-white 
           px-3 lg:px-5 xl:px-11 2xl:px-14
           py-2 lg:py-4 xl:py-9 2xl:py-11
           flex flex-col justify-center
-          "
+          ${block?.imageAlignment === 'left' ? 'order-2' : 'order-1'}
+          `}
           >
             <IntroSectionDesign02 block={block} />
           </div>
           {/* image */}
-          <div className="col-span-1 flex flex-col justify-center overflow-hidden">
+          <div
+            className={`col-span-1 flex flex-col justify-center overflow-hidden
+            ${block?.imageAlignment === 'left' ? 'order-1' : 'order-2'}
+            `}
+          >
             <div className="relative w-full aspect-[477/487] hover:scale-[1.2] transition-all duration-300 ease-in">
               {typeof block?.image === 'object' && block?.image?.url && (
                 <Image

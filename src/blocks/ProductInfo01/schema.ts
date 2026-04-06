@@ -50,6 +50,30 @@ const ProductInfo01Schema: Block = {
       name: 'showPatternDesign',
       type: 'checkbox',
       defaultValue: true,
+      admin: {
+        description: 'Toggle to show/hide pattern design on the right side of the block',
+        width: '100%',
+      },
+    },
+
+    {
+      type: 'row',
+      fields: [
+        // image alignment field
+        {
+          name: 'imageAlignment',
+          type: 'select',
+          options: [
+            { label: 'Left', value: 'left' },
+            { label: 'Right', value: 'right' },
+          ],
+          defaultValue: 'right',
+          admin: {
+            description: 'Select the alignment of the image',
+            width: '50%',
+          },
+        },
+      ],
     },
 
     ...generateImageFields({

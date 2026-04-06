@@ -1027,7 +1027,14 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        /**
+         * Toggle to show/hide pattern design on the right side of the block
+         */
         showPatternDesign?: boolean | null;
+        /**
+         * Select the alignment of the image
+         */
+        imageAlignment?: ('left' | 'right') | null;
         /**
          * Aspect ratio 477:487 recommended.
          */
@@ -1747,6 +1754,7 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                   };
               showPatternDesign?: T;
+              imageAlignment?: T;
               image?: T;
               imageOriginal?: T;
               pendingImageOriginal?: T;
