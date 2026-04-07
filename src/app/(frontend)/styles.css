@@ -314,3 +314,30 @@
 html {
   scroll-behavior: smooth;
 }
+
+.card02-dash-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.card02-dash-hover::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 60;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Crect x='0.5' y='0.5' width='99' height='99' rx='0' ry='0' fill='none' stroke='%23141487' stroke-width='1' stroke-dasharray='8 6' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+}
+
+.card02-dash-hover:hover {
+  border-color: transparent;
+}
+
+.card02-dash-hover:hover::after {
+  opacity: 1;
+}

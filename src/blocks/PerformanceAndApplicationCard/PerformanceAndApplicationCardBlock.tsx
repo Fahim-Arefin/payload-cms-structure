@@ -3,6 +3,7 @@ import WithHashScroller from '@/components/custom/sagar-ropes-shared/others/With
 import { PerformanceAndApplicationCardBlockType } from '@/types/payloadCustomTypes'
 import Pattern01 from '/public/assets/images/BOpattern2.png'
 import Pattern02 from '/public/assets/images/BOpattern2.png'
+import Blur from '/public/assets/images/Blur.png'
 import Image from 'next/image'
 import PerformanceAndApplicationCardCarousel from './components/PerformanceAndApplicationCardCarousel'
 
@@ -18,7 +19,7 @@ function PerformanceAndApplicationCardBlock({ block }: Props) {
         {/* content */}
         <div className={`container-padding`}>
           {/* section intro */}
-          <IntroSectionDesign03 block={block} className={``} />
+          <IntroSectionDesign03 block={block} className={`relative z-20`} />
 
           {/* CAROUSEL */}
           <div className="mt-4 lg:mt-6 xl:mt-8 2xl:mt-10 ">
@@ -28,7 +29,7 @@ function PerformanceAndApplicationCardBlock({ block }: Props) {
         {/* pattern 1 */}
         {block?.showPatternDesign && (
           <div
-            className="invisible md:visible absolute left-0 top-0 z-30 h-[70%]
+            className="invisible md:visible absolute left-0 top-0 z-30 h-[50%]
                    md:w-[120px] 
                    lg:w-[170px] 
                    xl:w-[225px] 
@@ -69,6 +70,19 @@ function PerformanceAndApplicationCardBlock({ block }: Props) {
             />
           </div>
         )}
+
+        <div className="invisible md:visible absolute left-0 bottom-0 z-10 h-[70%] w-[50%]">
+          <Image
+            fill
+            src={Blur}
+            alt="blur image "
+            quality={90}
+            sizes="100vw"
+            className="object-fill object-center"
+            placeholder="blur"
+            blurDataURL={Blur?.blurDataURL}
+          />
+        </div>
       </div>
     </WithHashScroller>
   )

@@ -25,8 +25,8 @@ function TestLabCard02({ className, data }: Props) {
       (typeof white === 'object' && white?.url) ? (
         <div
           className="relative rounded-full transition-all delay-150 duration-150 ease-in-out
-            w-[30px] md:w-[40px] lg:w-[50px] xl:w-[60px]
-            h-[30px] md:h-[40px] lg:h-[50px] xl:h-[60px]"
+               w-[20px] md:w-[25px] lg:w-[30px] xl:w-[40px] 2xl:w-[55px]
+               h-[20px] md:h-[25px] lg:h-[30px] xl:h-[40px] 2xl:h-[55px]"
         >
           {/* colored (default) */}
           {typeof colored === 'object' && colored?.url && (
@@ -49,7 +49,7 @@ function TestLabCard02({ className, data }: Props) {
               fill
               sizes="100vw"
               className="object-contain opacity-0 transition-all delay-150 duration-150 ease-in-out
-                group-hover/testCard:opacity-100 group-hover/testCard:scale-150"
+                group-hover/testCard:opacity-100 group-hover/testCard:scale-125"
               placeholder={data?.iconWhiteBlurDataURL ? 'blur' : 'empty'}
               blurDataURL={data?.iconWhiteBlurDataURL || undefined}
             />
@@ -63,7 +63,7 @@ function TestLabCard02({ className, data }: Props) {
       >
         {/* title and subtitle */}
         {(data?.title || data?.subtitle) && (
-          <div className="font-proxima global-h4 font-bold text-dark-1 transition-all delay-150 duration-150 ease-in-out group-hover/testCard:text-white">
+          <div className="font-proxima global-h5 font-bold text-cyan transition-all delay-150 duration-150 ease-in-out group-hover/testCard:text-white">
             {data?.title && <div>{data?.title}</div>}
             {data?.subtitle && <div>{data?.subtitle}</div>}
           </div>
