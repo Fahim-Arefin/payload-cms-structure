@@ -1,17 +1,114 @@
+// import { pageHref, resolvePageSlug } from '@/lib/utils'
+// import { PerformanceAndApplicationCardBlockType } from '@/types/payloadCustomTypes'
+// import Image from 'next/image'
+// import Link from 'next/link'
+// import React from 'react'
+// import LocalizedRichText from '../../shared/LocalizedRichText'
+// import CardMask from 'public/assets/images/cyanCardMask.png'
+
+// type Props = {
+//   data: PerformanceAndApplicationCardBlockType['cards02'][number]
+//   index: number
+//   className?: React.ReactNode
+// }
+
+// function Card02({ data, index, className }: Props) {
+//   // If GlobalButton supports children (you already do in the YT button), render label as child:
+//   const href =
+//     data?.sectionId && data?.buttonLink && data?.sectionId
+//       ? `/${resolvePageSlug(data?.buttonLink)}/#${data?.sectionId}`
+//       : pageHref(data.buttonLink)
+
+//   const link = href !== '#' ? href : ''
+
+//   const cardContent = (
+//     <div
+//       className={`z-10 group relative flex flex-col justify-between
+//       transition-all duration-300 ease-in
+//       ${className}`}
+//     >
+//       {/* mask image */}
+//       <div className="absolute z-20">
+//         <Image
+//           src={CardMask}
+//           alt="card mask"
+//           width={CardMask.width}
+//           height={CardMask.height}
+//           sizes="100vw"
+//           className="object-cover object-center w-full h-full"
+//           placeholder="blur"
+//           blurDataURL={CardMask?.blurDataURL}
+//         />
+//       </div>
+
+//       {/* icons */}
+//       {typeof data?.icon === 'object' && data?.icon?.url && (
+//         <div
+//           className="border-[1.125px] border-[rgba(16,16,83,0.15)] bg-[linear-gradient(135deg,rgba(16,16,83,0.30)_0%,rgba(16,16,83,0)_50%,rgba(16,16,83,0.30)_100%)]
+//                       w-[30px] md:w-[35px] lg:w-[40px] xl:w-[50px] 2xl:w-[65px]
+//                       h-[30px] md:h-[35px] lg:h-[40px] xl:h-[50px] 2xl:h-[65px]
+//                       flex items-center justify-center
+//                       p-1 xl:p-1.5 2xl:p-2
+//         "
+//         >
+//           <div className="relative w-full aspect-[1/1] group-hover:scale-90 transition-all delay-150 duration-300 ease-out">
+//             <Image
+//               key={index}
+//               src={data?.icon?.url}
+//               alt="icon"
+//               fill
+//               sizes="100vw"
+//               className={`object-cover object-center w-full h-full`}
+//               placeholder={data?.iconBlurDataURL ? 'blur' : 'empty'}
+//               blurDataURL={data?.iconBlurDataURL || undefined}
+//             />
+//           </div>
+//         </div>
+//       )}
+
+//       {/* titles */}
+//       {data?.title && (
+//         <div className={`z-30 font-proxima global-h5 font-bold text-white-2`}>
+//           {data?.title && <div>{data?.title}</div>}
+//         </div>
+//       )}
+//       {/* description */}
+//       {data?.description && data?.description?.root?.direction && (
+//         <div className={`z-30 font-manrope global-p5 text-white-3`}>
+//           <LocalizedRichText en={data?.description} bn={data?.description} />
+//         </div>
+//       )}
+//     </div>
+//   )
+
+//   // return <Link className={`${link ? 'cursor-pointer' : 'cursor-default'}`} href={link}></Link>
+//   return link ? (
+//     <Link className="cursor-pointer" href={link}>
+//       {cardContent}
+//     </Link>
+//   ) : (
+//     <React.Fragment>{cardContent}</React.Fragment>
+//   )
+// }
+
+// export default Card02
 import { pageHref, resolvePageSlug } from '@/lib/utils'
 import { PerformanceAndApplicationCardBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import LocalizedRichText from '../../shared/LocalizedRichText'
+import CardMask from 'public/assets/images/cyanCardMask.png'
 
 type Props = {
   data: PerformanceAndApplicationCardBlockType['cards02'][number]
   index: number
   className?: React.ReactNode
+  height?: string
+  padding?: string
 }
 
-function Card02({ data, index, className }: Props) {
+function Card02({ data, index, className, height, padding }: Props) {
   // If GlobalButton supports children (you already do in the YT button), render label as child:
   const href =
     data?.sectionId && data?.buttonLink && data?.sectionId
@@ -22,51 +119,67 @@ function Card02({ data, index, className }: Props) {
 
   const cardContent = (
     <div
-      className={`group/card relative flex flex-col justify-between 
-      transition-all duration-300 ease-in 
-      ${className}`}
+      className={`relative z-10 
+              bg-transparent border border-border-2 
+              hover:border-dashed
+              transition-all duration-300 ease-in
+              group ${height}`}
     >
-      {/* border effect */}
-      {/* {!hasBgImage && isActiveAnimation && (
-        <div
-          className="opacity-0 group-hover/card:opacity-100 transition-all delay-150 duration-150 ease-in 
-      absolute inset-0 w-[2px] md:w-[3px] lg:w-[4px] xl:w-[5px] z-20 pointer-events-none bg-cyan"
-        />
-      )} */}
+      <div
+        className={`z-10 flex flex-col justify-between 
+      transition-all duration-300 ease-in 
+      ${padding}
+      ${height}`}
+      >
+        {/* icons */}
+        {typeof data?.icon === 'object' && data?.icon?.url && (
+          <div
+            className="border-[1.125px] border-[rgba(16,16,83,0.15)] bg-[linear-gradient(135deg,rgba(16,16,83,0.30)_0%,rgba(16,16,83,0)_50%,rgba(16,16,83,0.30)_100%)]
+                      w-[30px] md:w-[35px] lg:w-[40px] xl:w-[50px] 2xl:w-[65px]  
+                      h-[30px] md:h-[35px] lg:h-[40px] xl:h-[50px] 2xl:h-[65px]
+                      flex items-center justify-center
+                      p-1 xl:p-1.5 2xl:p-2
+        "
+          >
+            <div className="relative w-full aspect-[1/1] group-hover:scale-90 transition-all delay-150 duration-300 ease-out">
+              <Image
+                key={index}
+                src={data?.icon?.url}
+                alt="icon"
+                fill
+                sizes="100vw"
+                className={`object-cover object-center w-full h-full`}
+                placeholder={data?.iconBlurDataURL ? 'blur' : 'empty'}
+                blurDataURL={data?.iconBlurDataURL || undefined}
+              />
+            </div>
+          </div>
+        )}
 
-      {/* icons */}
-      {typeof data?.icon === 'object' && data?.icon?.url && (
-        <div
-          className="relative 
-                      w-[20px] md:w-[25px] lg:w-[30px] xl:w-[40px] 2xl:w-[45px]  
-                      h-[20px] md:h-[25px] lg:h-[30px] xl:h-[40px] 2xl:h-[45px]
-                    "
-        >
-          <Image
-            key={index}
-            src={data?.icon?.url}
-            alt="icon"
-            fill
-            sizes="100vw"
-            className={`object-cover object-center w-full h-full`}
-            placeholder={data?.iconBlurDataURL ? 'blur' : 'empty'}
-            blurDataURL={data?.iconBlurDataURL || undefined}
-          />
-        </div>
-      )}
-
-      {/* titles */}
-      {data?.title && (
-        <div className={`z-30 font-proxima global-h5 font-bold text-white-2`}>
-          {data?.title && <div>{data?.title}</div>}
-        </div>
-      )}
-      {/* description */}
-      {data?.description && data?.description?.root?.direction && (
-        <div className={`z-30 font-manrope global-p5 text-white-3`}>
-          <LocalizedRichText en={data?.description} bn={data?.description} />
-        </div>
-      )}
+        {/* titles */}
+        {data?.title && (
+          <div className={`z-30 font-proxima global-h5 font-bold text-white-2`}>
+            {data?.title && <div>{data?.title}</div>}
+          </div>
+        )}
+        {/* description */}
+        {data?.description && data?.description?.root?.direction && (
+          <div className={`z-30 font-manrope global-p5 text-white-3`}>
+            <LocalizedRichText en={data?.description} bn={data?.description} />
+          </div>
+        )}
+      </div>
+      {/* mask image */}
+      <Image
+        src={CardMask}
+        alt="card mask"
+        width={CardMask.width}
+        height={CardMask.height}
+        sizes="100vw"
+        className="object-cover object-center w-full h-full absolute inset-0 z-20 -top-[2px]"
+        placeholder="blur"
+        blurDataURL={CardMask?.blurDataURL}
+      />
     </div>
   )
 

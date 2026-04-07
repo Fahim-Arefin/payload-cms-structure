@@ -28,14 +28,13 @@ export default function PerformanceAndApplicationCardCarousel({ block }: Props) 
     >
       {(item, idx) =>
         item.type === 'card01' ? (
+          // p-2.5 md:p-3 lg:p-[18px] xl:p-[22px] 2xl:p-8
           <Card02
             data={item.data}
             index={idx}
-            className="bg-transparent border border-border-2 
-              hover:border-dashed
-              transition-all duration-300 ease-in
-              p-2.5 md:p-3 lg:p-[18px] xl:p-[22px] 2xl:p-8
-              min-h-[150px] md:min-h-[160px] lg:min-h-[180px] xl:min-h-[230px] 2xl:min-h-[300px]"
+            className=""
+            height="min-h-[150px] md:min-h-[160px] lg:min-h-[180px] xl:min-h-[230px] 2xl:min-h-[300px]"
+            padding="p-2.5 md:p-3 lg:p-[18px] xl:p-[22px] 2xl:p-8 "
           />
         ) : (
           <TestLabCard02
