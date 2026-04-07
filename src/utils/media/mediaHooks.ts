@@ -655,6 +655,7 @@
 import {
   BASIC_HERO_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
+  PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG,
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_01_SLUG_AND_TAG,
@@ -720,8 +721,26 @@ export const mediaHooks = withMediaLifecycle({
     },
     {
       layoutKey: 'layout',
+      blockType: PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG,
+      arrayKey: 'testLabCards',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG,
+      arrayKey: 'testLabCards',
+      mediaFields: ['iconWhite'],
+    },
+    {
+      layoutKey: 'layout',
       blockType: TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
       arrayKey: 'specifications',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG,
+      arrayKey: 'cards02',
       mediaFields: ['icon'],
     },
   ],

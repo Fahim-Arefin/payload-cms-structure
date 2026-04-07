@@ -2,6 +2,7 @@ import {
   BASIC_HERO_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
   MISSION_VISION_SLUG_AND_TAG,
+  PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG,
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_01_SLUG_AND_TAG,
@@ -54,4 +55,9 @@ export type QueriesBlockType = Extract<
 export type ProductInfo01BlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PRODUCT_INFO_01_SLUG_AND_TAG }
+>
+
+export type PerformanceAndApplicationCardBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG }
 >

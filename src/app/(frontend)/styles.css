@@ -285,6 +285,9 @@
   .global-p4 {
     @apply text-[10px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] leading-[142.857%];
   }
+  .global-p5 {
+    @apply text-[10px] md:text-[10px] lg:text-[11px] xl:text-[12px] 2xl:text-[14px] leading-[133.333%];
+  }
 }
 
 /* FORCE REMOVE SHADCn MODAL OVERLAY BACKGROUND */

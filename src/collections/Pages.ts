@@ -2,6 +2,7 @@
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import GetToKnowSchema from '@/blocks/GetToKnow/schema'
 import MissionVisionSchema from '@/blocks/MissionVision/schema'
+import PerformanceAndApplicationCardSchema from '@/blocks/PerformanceAndApplicationCard/schema'
 import ProductAdvantageCardSchema from '@/blocks/ProductAdvantageCard/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfo01Schema from '@/blocks/ProductInfo01/schema'
@@ -135,6 +136,7 @@ export const Pages: CollectionConfig = {
         // common section
         ProductIntroSchema,
         ProductAdvantageCardSchema,
+        PerformanceAndApplicationCardSchema,
         TechnicalSpecificationsSchema,
         QueriesSchema,
         ProductInfo01Schema,

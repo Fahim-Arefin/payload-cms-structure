@@ -76,7 +76,7 @@ export const TestLabCardField = ({
               description: `Max ${titleMax} characters.`,
             },
           },
-          // title (required)
+          // subtitle (optional)
           {
             name: 'subtitle',
             type: 'text',
