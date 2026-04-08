@@ -89,3 +89,9 @@ export const PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG = 'performance-and-ap
 export const PERFORMANCE_AND_APPLICATION_CARD_BLOCK_LABEL = 'Performance and Application Card'
 export const PERFORMANCE_AND_APPLICATION_CARD_CACHE_KEY = 'performance-and-application-card-data'
 export const PERFORMANCE_AND_APPLICATION_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/performance-and-application-card-block-thumbnail.jpg`
+
+// Performance and Application Card
+export const TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG = 'technical-datasheet-card'
+export const TECHNICAL_DATASHHEET_CARD_BLOCK_LABEL = 'Technical Datasheet Card'
+export const TECHNICAL_DATASHHEET_CARD_CACHE_KEY = 'technical-datasheet-card-data'
+export const TECHNICAL_DATASHHEET_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/technical-datasheet-card-block-thumbnail.jpg`

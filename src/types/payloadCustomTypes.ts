@@ -8,6 +8,7 @@ import {
   PRODUCT_INFO_01_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
+  TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
@@ -60,4 +61,9 @@ export type ProductInfo01BlockType = Extract<
 export type PerformanceAndApplicationCardBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG }
+>
+
+export type TechnicalDatasheetCardBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG }
 >

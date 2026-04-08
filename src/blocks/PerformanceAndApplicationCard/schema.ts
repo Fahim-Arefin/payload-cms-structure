@@ -37,7 +37,7 @@ const PerformanceAndApplicationCardSchema: Block = {
     {
       name: 'showPatternDesign',
       type: 'checkbox',
-      defaultValue: true,
+      defaultValue: false,
     },
 
     ...SectionHeadingFields({

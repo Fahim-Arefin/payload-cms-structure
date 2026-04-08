@@ -659,6 +659,7 @@ import {
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_01_SLUG_AND_TAG,
+  TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
@@ -678,6 +679,11 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: PRODUCT_INFO_01_SLUG_AND_TAG,
       mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
+      mediaFields: ['datasheetFile'],
     },
   ],
 

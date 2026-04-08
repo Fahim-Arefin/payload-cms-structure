@@ -8,6 +8,7 @@ import {
   PRODUCT_INFO_01_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
+  TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
 
@@ -22,6 +23,7 @@ import TechnicalSpecificationBlock from './TechnicalSpecification/TechnicalSpeci
 import QueriesBlock from './Queries/QueriesBlock'
 import ProductInfo01Block from './ProductInfo01/ProductInfo01Block'
 import PerformanceAndApplicationCardBlock from './PerformanceAndApplicationCard/PerformanceAndApplicationCardBlock'
+import TechnicalDatashheetBlock from './TechnicalDatashheet/TechnicalDatashheetBlock'
 
 type Params = Record<string, string>
 
@@ -47,6 +49,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <ProductInfo01Block key={block.id} block={block} params={params} />
     case PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG:
       return <PerformanceAndApplicationCardBlock key={block.id} block={block} params={params} />
+    case TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG:
+      return <TechnicalDatashheetBlock key={block.id} block={block} params={params} />
 
     default:
       return null
