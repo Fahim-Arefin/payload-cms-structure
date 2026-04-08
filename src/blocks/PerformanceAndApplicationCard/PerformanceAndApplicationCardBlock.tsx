@@ -29,7 +29,7 @@ function PerformanceAndApplicationCardBlock({ block }: Props) {
         {/* pattern 1 */}
         {block?.showPatternDesign && (
           <div
-            className="invisible md:visible absolute left-0 top-0 z-30 h-[50%]
+            className="invisible md:visible absolute left-0 top-0 z-30 h-[50%] opacity-50
                    md:w-[120px] 
                    lg:w-[170px] 
                    xl:w-[225px] 
@@ -51,7 +51,7 @@ function PerformanceAndApplicationCardBlock({ block }: Props) {
         {/* pattern 2 */}
         {block?.showPatternDesign && (
           <div
-            className="invisible md:visible absolute right-0 bottom-0 z-30 h-[50%]
+            className="invisible md:visible absolute right-0 bottom-0 z-30 h-[50%] opacity-50
                    md:w-[120px] 
                    lg:w-[170px] 
                    xl:w-[225px] 

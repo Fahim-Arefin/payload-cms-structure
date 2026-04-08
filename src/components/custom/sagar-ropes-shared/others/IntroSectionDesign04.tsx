@@ -6,20 +6,22 @@ import CtaButtons from '../buttons/CtaButtons'
 type Props = {
   block: any
   className?: string
+  position?: 'left' | 'right' | 'center'
 }
-// supports dark color
-function IntroSectionDesign03({ block, className }: Props) {
+
+// support alignment and light color
+function IntroSectionDesign04({ block, className, position = 'left' }: Props) {
   const hasDesc = !!block?.description && !!block?.description?.root?.direction // or lexicalHasRealText(block.description?.root)
   return (
     <div
       className={` ${className} 
-    flex flex-col items-center justify-between 
+    flex flex-col ${position === 'left' ? 'items-start' : position === 'right' ? 'items-end' : 'items-center'} justify-between 
     gap-[12px] md:gap-[14px] lg:gap-[16px] xl:gap-[18px] 2xl:gap-[20px]`}
     >
       {/* tag */}
       <div
-        className="font-manrope text-cyan text-xs xl:text-[14px] 2xl:text-[15px] leading-[157.143%] tracking-[1.4px]
-              px-2 py-1 w-fit uppercase text-center"
+        className="font-manrope text-cyan text-xs xl:text-[14px] 2xl:text-[15px]  leading-[157.143%] tracking-[1.4px]
+                    px-2 py-1 bg-white-1 w-fit uppercase"
       >
         <LocalizedText en={block?.tag} bn={block?.tag} />
       </div>
@@ -28,7 +30,9 @@ function IntroSectionDesign03({ block, className }: Props) {
       <div>
         {/* heading 1 */}
         {block?.heading1 && (
-          <div className="font-proxima font-bold global-h2 text-white-1 text-center">
+          <div
+            className={`font-proxima font-bold global-h2 text-dark-1 ${position === 'left' ? 'text-left' : position === 'right' ? 'text-right' : 'text-center'}`}
+          >
             <LocalizedHighlighted
               textBn={block?.heading1}
               textEn={block?.heading1}
@@ -41,7 +45,9 @@ function IntroSectionDesign03({ block, className }: Props) {
 
         {/* heading 2 */}
         {block?.heading2 && (
-          <div className="font-proxima font-bold global-h2 text-white-1 text-center">
+          <div
+            className={`font-proxima font-bold global-h2 text-dark-1 ${position === 'left' ? 'text-left' : position === 'right' ? 'text-right' : 'text-center'}`}
+          >
             <LocalizedHighlighted
               textBn={block?.heading2}
               textEn={block?.heading2}
@@ -56,7 +62,7 @@ function IntroSectionDesign03({ block, className }: Props) {
       {/* Description section */}
       {hasDesc && (
         <div className={``}>
-          <div className={`font-manrope text-white-1 global-p3 text-justify`}>
+          <div className={`font-manrope text-dark-1 global-p3 text-justify`}>
             <LocalizedRichText en={block.description} bn={block.description} />
           </div>
         </div>
@@ -71,4 +77,4 @@ function IntroSectionDesign03({ block, className }: Props) {
   )
 }
 
-export default IntroSectionDesign03
+export default IntroSectionDesign04

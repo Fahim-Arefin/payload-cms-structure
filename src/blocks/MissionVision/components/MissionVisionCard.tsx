@@ -49,12 +49,12 @@ type Props = {
 function MissionVisionCard({ label, desc, className }: Props) {
   return (
     <div
-      className={`border-2 border-dashed border-white-3 text-center
+      className={`text-center
               px-4 md:px-3 lg:px-4 xl:px-12 2xl:px-14
               py-2 md:py-1.5 lg:py-2 xl:py-8 2xl:py-10
               space-y-4 md:space-y-3 lg:space-y-4 xl:space-y-12 2xl:space-y-14 group
               transition-all duration-300 ease-in
-              bg-white-2 hover:bg-white-3 ${className}`}
+              ${className}`}
     >
       {/* label */}
       <div

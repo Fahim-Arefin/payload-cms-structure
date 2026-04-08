@@ -1,14 +1,7 @@
-import {
-  MissionVisionBlockType,
-  ProductAdvantageCardBlockType,
-  ProductIntroBlockType,
-  TechnicalSpecificationBlockType,
-} from '@/types/payloadCustomTypes'
-import React from 'react'
-import LocalizedText from '../../shared/LocalizedText'
 import LocalizedHighlighted from '../../shared/LocalizedHighlighted'
-import CtaButtons from '../buttons/CtaButtons'
 import LocalizedRichText from '../../shared/LocalizedRichText'
+import LocalizedText from '../../shared/LocalizedText'
+import CtaButtons from '../buttons/CtaButtons'
 
 type Props = {
   // block: ProductIntroBlockType | MissionVisionBlockType | ProductAdvantageCardBlockType
@@ -16,6 +9,7 @@ type Props = {
   className?: string
 }
 
+// global supports h3 variation
 function IntroSection({ block, className }: Props) {
   const h3Layout = (block?.heading3Layout ?? 'solo') as 'solo' | 'besideDescription'
 

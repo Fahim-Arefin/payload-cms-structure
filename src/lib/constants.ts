@@ -95,3 +95,9 @@ export const TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG = 'technical-datasheet-card'
 export const TECHNICAL_DATASHHEET_CARD_BLOCK_LABEL = 'Technical Datasheet Card'
 export const TECHNICAL_DATASHHEET_CARD_CACHE_KEY = 'technical-datasheet-card-data'
 export const TECHNICAL_DATASHHEET_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/technical-datasheet-card-block-thumbnail.jpg`
+
+// Quality Benchmark Card
+export const QUALITY_BENCHMARK_CARD_SLUG_AND_TAG = 'quality-benchmark-card'
+export const QUALITY_BENCHMARK_CARD_BLOCK_LABEL = 'Quality Benchmark Card'
+export const QUALITY_BENCHMARK_CARD_CACHE_KEY = 'quality-benchmark-card-data'
+export const QUALITY_BENCHMARK_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/quality-benchmark-card-block-thumbnail.jpg`

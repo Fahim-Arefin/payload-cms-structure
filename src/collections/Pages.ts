@@ -7,6 +7,7 @@ import ProductAdvantageCardSchema from '@/blocks/ProductAdvantageCard/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfo01Schema from '@/blocks/ProductInfo01/schema'
 import ProductIntroSchema from '@/blocks/ProductIntro/schema'
+import QualityBenchhmarkSchema from '@/blocks/QualityBenchmarkCard/schema'
 import QueriesSchema from '@/blocks/Queries/schema'
 import TechnicalDatasheetSchema from '@/blocks/TechnicalDatashheet/schema'
 import TechnicalSpecificationsSchema from '@/blocks/TechnicalSpecification/schema'
@@ -142,6 +143,7 @@ export const Pages: CollectionConfig = {
         QueriesSchema,
         ProductInfo01Schema,
         TechnicalDatasheetSchema,
+        QualityBenchhmarkSchema,
 
         // custom blocks
 

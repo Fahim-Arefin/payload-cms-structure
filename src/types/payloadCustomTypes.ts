@@ -7,6 +7,7 @@ import {
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_01_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
+  QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
@@ -66,4 +67,9 @@ export type PerformanceAndApplicationCardBlockType = Extract<
 export type TechnicalDatasheetCardBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG }
+>
+
+export type QualityBenchmarkCardBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof QUALITY_BENCHMARK_CARD_SLUG_AND_TAG }
 >

@@ -7,7 +7,7 @@ type Props = {
   block: any
   className?: string
 }
-
+// support tag variation
 function IntroSectionDesign02({ block, className }: Props) {
   const hasDesc = !!block?.description && !!block?.description?.root?.direction // or lexicalHasRealText(block.description?.root)
   return (
