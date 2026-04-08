@@ -101,3 +101,9 @@ export const QUALITY_BENCHMARK_CARD_SLUG_AND_TAG = 'quality-benchmark-card'
 export const QUALITY_BENCHMARK_CARD_BLOCK_LABEL = 'Quality Benchmark Card'
 export const QUALITY_BENCHMARK_CARD_CACHE_KEY = 'quality-benchmark-card-data'
 export const QUALITY_BENCHMARK_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/quality-benchmark-card-block-thumbnail.jpg`
+
+// Quality Benchmark Card
+export const CONTACT_INFO_CARD_SLUG_AND_TAG = 'contact-info-card'
+export const CONTACT_INFO_CARD_BLOCK_LABEL = 'Contact Info Card'
+export const CONTACT_INFO_CARD_CACHE_KEY = 'contact-info-card-data'
+export const CONTACT_INFO_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/contact-info-card-block-thumbnail.jpg`

@@ -122,7 +122,7 @@ import useMounted from '@/hooks/useMounted'
 import { useLanguage } from '@/context/LanguageContext'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import './richtext.css'
+// import './richtext.css'
 
 type Props = {
   en?: any | null

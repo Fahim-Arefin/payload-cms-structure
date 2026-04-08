@@ -1,5 +1,6 @@
 // currently working code
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
+import ContactInfoCardSchema from '@/blocks/ContactInfoCard/schema'
 import GetToKnowSchema from '@/blocks/GetToKnow/schema'
 import MissionVisionSchema from '@/blocks/MissionVision/schema'
 import PerformanceAndApplicationCardSchema from '@/blocks/PerformanceAndApplicationCard/schema'
@@ -144,6 +145,7 @@ export const Pages: CollectionConfig = {
         ProductInfo01Schema,
         TechnicalDatasheetSchema,
         QualityBenchhmarkSchema,
+        ContactInfoCardSchema,
 
         // custom blocks
 
