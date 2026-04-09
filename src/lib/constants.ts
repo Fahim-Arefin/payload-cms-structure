@@ -107,3 +107,9 @@ export const CONTACT_INFO_CARD_SLUG_AND_TAG = 'contact-info-card'
 export const CONTACT_INFO_CARD_BLOCK_LABEL = 'Contact Info Card'
 export const CONTACT_INFO_CARD_CACHE_KEY = 'contact-info-card-data'
 export const CONTACT_INFO_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/contact-info-card-block-thumbnail.jpg`
+
+// Founder Quote
+export const FOUNDER_QUOTE_SLUG_AND_TAG = 'founder-quote'
+export const FOUNDER_QUOTE_BLOCK_LABEL = 'Founder Quote'
+export const FOUNDER_QUOTE_CACHE_KEY = 'founder-quote-data'
+export const FOUNDER_QUOTE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/founder-quote-block-thumbnail.jpg`

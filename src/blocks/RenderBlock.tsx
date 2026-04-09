@@ -1,6 +1,7 @@
 import {
   BASIC_HERO_SLUG_AND_TAG,
   CONTACT_INFO_CARD_SLUG_AND_TAG,
+  FOUNDER_QUOTE_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
   MISSION_VISION_SLUG_AND_TAG,
   PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG,
@@ -28,6 +29,7 @@ import PerformanceAndApplicationCardBlock from './PerformanceAndApplicationCard/
 import TechnicalDatashheetBlock from './TechnicalDatashheet/TechnicalDatashheetBlock'
 import QualityBenchmarkCardBlock from './QualityBenchmarkCard/QualityBenchmarkCardBlock'
 import ContactInfoCardBlock from './ContactInfoCard/ContactInfoCardBlock'
+import FounderQuoteBlock from './FounderQuote/FounderQuoteBlock'
 
 type Params = Record<string, string>
 
@@ -59,6 +61,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <QualityBenchmarkCardBlock key={block.id} block={block} params={params} />
     case CONTACT_INFO_CARD_SLUG_AND_TAG:
       return <ContactInfoCardBlock key={block.id} block={block} params={params} />
+    case FOUNDER_QUOTE_SLUG_AND_TAG:
+      return <FounderQuoteBlock key={block.id} block={block} params={params} />
 
     default:
       return null
