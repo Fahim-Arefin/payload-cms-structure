@@ -1701,6 +1701,137 @@ export interface Page {
          * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
          */
         sectionId?: string | null;
+        showPatternDesign?: boolean | null;
+        /**
+         * Small label above heading. Max 40 characters.
+         */
+        tag?: string | null;
+        /**
+         * Main heading line 1. Max 90 characters.
+         */
+        heading1: string;
+        /**
+         * Optional. Must be inside Heading 1. Max 90.
+         */
+        heading1Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading1HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Secondary heading line. Max 90 characters.
+         */
+        heading2?: string | null;
+        /**
+         * Optional. Must be inside Heading 2. Max 90.
+         */
+        heading2Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading2HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Optional heading line 3. Max 90 characters.
+         */
+        heading3?: string | null;
+        /**
+         * Optional. Must be inside Heading 3. Max 90.
+         */
+        heading3Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for Heading 3.
+         */
+        heading3HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Controls whether Heading 3 is shown alone or aligned beside the description.
+         */
+        heading3Layout?: ('solo' | 'besideDescription') | null;
+        /**
+         * Write the paragraph text (you can add multiple paragraphs).
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        ctaButtons?:
+          | {
+              /**
+               * Max 40 characters.
+               */
+              label: string;
+              /**
+               * Select the button style
+               */
+              style?: ('btn01' | 'btn02') | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink: string | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        cards: {
+          title: string;
+          subtitle?: string | null;
+          /**
+           * Write the card description.
+           */
+          cardDescription: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          /**
+           * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+           */
+          buttonLink?: (string | null) | Page;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          buttonSectionId?: string | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'result-card';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
         /**
          * Small label above heading. Max 40 characters.
          */
@@ -2637,6 +2768,47 @@ export interface PagesSelect<T extends boolean = true> {
                     pendingBgImageOriginal?: T;
                     pendingBgImageCrop?: T;
                     bgImageBlurDataURL?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'result-card'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              showPatternDesign?: T;
+              tag?: T;
+              heading1?: T;
+              heading1Highlighted?: T;
+              heading1HighlightColor?: T;
+              heading2?: T;
+              heading2Highlighted?: T;
+              heading2HighlightColor?: T;
+              heading3?: T;
+              heading3Highlighted?: T;
+              heading3HighlightColor?: T;
+              heading3Layout?: T;
+              description?: T;
+              ctaButtons?:
+                | T
+                | {
+                    label?: T;
+                    style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    subtitle?: T;
+                    cardDescription?: T;
+                    buttonLink?: T;
+                    buttonSectionId?: T;
                     id?: T;
                   };
               id?: T;

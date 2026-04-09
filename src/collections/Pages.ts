@@ -11,6 +11,7 @@ import ProductInfo01Schema from '@/blocks/ProductInfo01/schema'
 import ProductIntroSchema from '@/blocks/ProductIntro/schema'
 import QualityBenchhmarkSchema from '@/blocks/QualityBenchmarkCard/schema'
 import QueriesSchema from '@/blocks/Queries/schema'
+import ResultCardSchema from '@/blocks/ResultCard/schema'
 import TechnicalDatasheetSchema from '@/blocks/TechnicalDatashheet/schema'
 import TechnicalSpecificationsSchema from '@/blocks/TechnicalSpecification/schema'
 import { APIError } from '@/lib/apiError'
@@ -152,6 +153,7 @@ export const Pages: CollectionConfig = {
 
         // home page unique
         GetToKnowSchema,
+        ResultCardSchema,
         FounderQuoteSchema,
 
         // about us page unique

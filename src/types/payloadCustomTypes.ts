@@ -11,6 +11,7 @@ import {
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
+  RESULT_CARD_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -84,4 +85,9 @@ export type ContactInfoCardBlockType = Extract<
 export type FounderQuoteBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof FOUNDER_QUOTE_SLUG_AND_TAG }
+>
+
+export type ResultCardBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof RESULT_CARD_SLUG_AND_TAG }
 >

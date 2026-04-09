@@ -113,3 +113,9 @@ export const FOUNDER_QUOTE_SLUG_AND_TAG = 'founder-quote'
 export const FOUNDER_QUOTE_BLOCK_LABEL = 'Founder Quote'
 export const FOUNDER_QUOTE_CACHE_KEY = 'founder-quote-data'
 export const FOUNDER_QUOTE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/founder-quote-block-thumbnail.jpg`
+
+// Founder Quote
+export const RESULT_CARD_SLUG_AND_TAG = 'result-card'
+export const RESULT_CARD_BLOCK_LABEL = 'Result Card'
+export const RESULT_CARD_CACHE_KEY = 'result-card-data'
+export const RESULT_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/result-card-block-thumbnail.jpg`

@@ -11,6 +11,7 @@ import {
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
+  RESULT_CARD_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -30,6 +31,7 @@ import TechnicalDatashheetBlock from './TechnicalDatashheet/TechnicalDatashheetB
 import QualityBenchmarkCardBlock from './QualityBenchmarkCard/QualityBenchmarkCardBlock'
 import ContactInfoCardBlock from './ContactInfoCard/ContactInfoCardBlock'
 import FounderQuoteBlock from './FounderQuote/FounderQuoteBlock'
+import ResultCardBlock from './ResultCard/ResultCardBlock'
 
 type Params = Record<string, string>
 
@@ -63,6 +65,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <ContactInfoCardBlock key={block.id} block={block} params={params} />
     case FOUNDER_QUOTE_SLUG_AND_TAG:
       return <FounderQuoteBlock key={block.id} block={block} params={params} />
+    case RESULT_CARD_SLUG_AND_TAG:
+      return <ResultCardBlock key={block.id} block={block} params={params} />
 
     default:
       return null
