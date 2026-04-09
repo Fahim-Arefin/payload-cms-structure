@@ -22,7 +22,7 @@ function ContactInfoCardBlock({ block }: Props) {
           <div
             className="mt-4 lg:mt-6 xl:mt-8 2xl:mt-10 
           grid grid-cols-1 md:grid-cols-3 
-          gap-3 lg:gap-4 xl:gap-8 2xl:gap-9"
+          gap-3 lg:gap-4 xl:gap-8 2xl:gap-10"
           >
             {block?.contactInfo?.map((info, index) => (
               <Card03
@@ -31,7 +31,9 @@ function ContactInfoCardBlock({ block }: Props) {
                 index={index}
                 height="min-h-[120px] md:min-h-[165px] lg:min-h-[200px] xl:min-h-[277px] 2xl:min-h-[340px]"
                 padding="p-4 md:p-5 lg:p-6 xl:p-10 2xl:p-12"
-                className="bg-white-1"
+                className="bg-white-1 
+                transition-all duration-300 ease-out
+                hover:p-5 hover:md:p-6 hover:lg:p-7 hover:xl:p-12 hover:2xl:p-14 "
               />
             ))}
           </div>
