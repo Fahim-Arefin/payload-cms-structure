@@ -14,6 +14,7 @@ import { Pages } from './collections/Pages'
 import { Resume } from './collections/Resume'
 import { Users } from './collections/Users'
 import Navbar from './collections/globals/Navbar'
+import Footer from './collections/globals/Footer'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -89,7 +90,7 @@ export default buildConfig({
   collections: [Users, Media, Resume, AuditLogs, Pages],
   globals: [
     Navbar,
-    // Footer,
+    Footer,
     // BoardOfDirectors,
     // LeadershipTeam,
     // ContactUsGlobal,

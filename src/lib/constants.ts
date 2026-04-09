@@ -22,6 +22,9 @@ const thumbnailFolder = '/assets/block-thumbnails'
 export const GLOBAL_NAVBAR_SLUG_AND_TAG = 'navbar' as const
 export const GLOBAL_NAVBAR_CACHE_KEY = 'navbar-data'
 
+export const GLOBAL_FOOTER_SLUG_AND_TAG = 'footer' as const
+export const GLOBAL_FOOTER_CACHE_KEY = 'footer-data'
+
 export const AUDIT_LOG = 'Audit'
 
 // Group

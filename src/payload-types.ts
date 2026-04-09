@@ -92,9 +92,11 @@ export interface Config {
   };
   globals: {
     navbar: Navbar;
+    footer: Footer;
   };
   globalsSelect: {
     navbar: NavbarSelect<false> | NavbarSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: null;
   user: User & {
@@ -2994,6 +2996,92 @@ export interface Navbar {
   createdAt?: string | null;
 }
 /**
+ * Site-wide footer for Sagor Ropes.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  uploadSessionId?: string | null;
+  /**
+   * Primary footer logo.
+   */
+  logo: string | Media;
+  logoOriginal?: (string | null) | Media;
+  pendingLogoOriginal?: string | null;
+  pendingLogoCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  logoBlurDataURL?: string | null;
+  /**
+   * Certification / trust badge shown under the intro text.
+   */
+  isoBadgeImage?: (string | null) | Media;
+  isoBadgeImageOriginal?: (string | null) | Media;
+  pendingIsoBadgeImageOriginal?: string | null;
+  pendingIsoBadgeImageCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  isoBadgeImageBlurDataURL?: string | null;
+  branding: {
+    introText: string;
+  };
+  quickLinksSection: {
+    header: string;
+    links?:
+      | {
+          buttonText: string;
+          buttonLink?: (string | null) | Page;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  productsSection: {
+    header: string;
+    products?:
+      | {
+          buttonText: string;
+          buttonLink?: (string | null) | Page;
+          showNewBadge?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  factorySection: {
+    header: string;
+    address: string;
+    mapUrl?: string | null;
+    phone: string;
+    email: string;
+  };
+  social: {
+    facebookUrl: string;
+    youtubeUrl: string;
+    linkedinUrl: string;
+    instagramUrl: string;
+  };
+  legalSection?: {
+    legal?:
+      | {
+          buttonText: string;
+          buttonLink?: (string | null) | Page;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  marqueeSection: {
+    text: string;
+  };
+  copyrightSection: {
+    copyright: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navbar_select".
  */
@@ -3025,6 +3113,94 @@ export interface NavbarSelect<T extends boolean = true> {
                   };
               id?: T;
             };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  uploadSessionId?: T;
+  logo?: T;
+  logoOriginal?: T;
+  pendingLogoOriginal?: T;
+  pendingLogoCrop?: T;
+  logoBlurDataURL?: T;
+  isoBadgeImage?: T;
+  isoBadgeImageOriginal?: T;
+  pendingIsoBadgeImageOriginal?: T;
+  pendingIsoBadgeImageCrop?: T;
+  isoBadgeImageBlurDataURL?: T;
+  branding?:
+    | T
+    | {
+        introText?: T;
+      };
+  quickLinksSection?:
+    | T
+    | {
+        header?: T;
+        links?:
+          | T
+          | {
+              buttonText?: T;
+              buttonLink?: T;
+              id?: T;
+            };
+      };
+  productsSection?:
+    | T
+    | {
+        header?: T;
+        products?:
+          | T
+          | {
+              buttonText?: T;
+              buttonLink?: T;
+              showNewBadge?: T;
+              id?: T;
+            };
+      };
+  factorySection?:
+    | T
+    | {
+        header?: T;
+        address?: T;
+        mapUrl?: T;
+        phone?: T;
+        email?: T;
+      };
+  social?:
+    | T
+    | {
+        facebookUrl?: T;
+        youtubeUrl?: T;
+        linkedinUrl?: T;
+        instagramUrl?: T;
+      };
+  legalSection?:
+    | T
+    | {
+        legal?:
+          | T
+          | {
+              buttonText?: T;
+              buttonLink?: T;
+              id?: T;
+            };
+      };
+  marqueeSection?:
+    | T
+    | {
+        text?: T;
+      };
+  copyrightSection?:
+    | T
+    | {
+        copyright?: T;
       };
   updatedAt?: T;
   createdAt?: T;
