@@ -162,6 +162,12 @@ const Footer: GlobalConfig = {
     } as any),
 
     {
+      name: 'showPatternDesign',
+      type: 'checkbox',
+      defaultValue: true,
+    },
+
+    {
       name: 'branding',
       type: 'group',
       label: 'Branding & Intro',
@@ -352,6 +358,14 @@ const Footer: GlobalConfig = {
       label: 'Social',
       fields: [
         {
+          name: 'header',
+          type: 'text',
+          label: 'Header',
+          required: true,
+          defaultValue: 'Stay In Touch',
+          validate: validateShortText('Social Header', LABEL_MAX, true),
+        },
+        {
           type: 'row',
           fields: [
             {
@@ -364,9 +378,9 @@ const Footer: GlobalConfig = {
               admin: { width: '50%' },
             },
             {
-              name: 'youtubeUrl',
+              name: 'whatsApp',
               type: 'text',
-              label: 'YouTube URL',
+              label: 'Whats App URL',
               required: true,
               maxLength: URL_MAX,
               validate: validateAbsoluteHTTPUrl(URL_MAX, true),
@@ -386,60 +400,60 @@ const Footer: GlobalConfig = {
               validate: validateAbsoluteHTTPUrl(URL_MAX, true),
               admin: { width: '50%' },
             },
-            {
-              name: 'instagramUrl',
-              type: 'text',
-              label: 'Instagram URL',
-              required: true,
-              maxLength: URL_MAX,
-              validate: validateAbsoluteHTTPUrl(URL_MAX, true),
-              admin: { width: '50%' },
-            },
+            // {
+            //   name: 'instagram',
+            //   type: 'text',
+            //   label: 'instagram URL',
+            //   required: true,
+            //   maxLength: URL_MAX,
+            //   validate: validateAbsoluteHTTPUrl(URL_MAX, true),
+            //   admin: { width: '50%' },
+            // },
           ],
         },
       ],
     },
 
-    {
-      name: 'legalSection',
-      type: 'group',
-      label: 'Legal Section',
-      fields: [
-        {
-          name: 'legal',
-          type: 'array',
-          label: 'Legal Links',
-          minRows: 0,
-          maxRows: 3,
-          validate: validateMaxItems('Legal links', 6),
-          labels: { singular: 'Legal Link', plural: 'Legal Links' },
-          fields: [
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'buttonText',
-                  type: 'text',
-                  label: 'Label',
-                  required: true,
-                  maxLength: CTA_TEXT_MAX,
-                  validate: validateShortText('Label', CTA_TEXT_MAX, true),
-                  admin: { width: '50%' },
-                },
-                {
-                  name: 'buttonLink',
-                  label: 'Link to (internal page)',
-                  type: 'relationship',
-                  relationTo: 'pages',
-                  required: false,
-                  admin: { width: '50%' },
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
+    // {
+    //   name: 'legalSection',
+    //   type: 'group',
+    //   label: 'Legal Section',
+    //   fields: [
+    //     {
+    //       name: 'legal',
+    //       type: 'array',
+    //       label: 'Legal Links',
+    //       minRows: 0,
+    //       maxRows: 3,
+    //       validate: validateMaxItems('Legal links', 6),
+    //       labels: { singular: 'Legal Link', plural: 'Legal Links' },
+    //       fields: [
+    //         {
+    //           type: 'row',
+    //           fields: [
+    //             {
+    //               name: 'buttonText',
+    //               type: 'text',
+    //               label: 'Label',
+    //               required: true,
+    //               maxLength: CTA_TEXT_MAX,
+    //               validate: validateShortText('Label', CTA_TEXT_MAX, true),
+    //               admin: { width: '50%' },
+    //             },
+    //             {
+    //               name: 'buttonLink',
+    //               label: 'Link to (internal page)',
+    //               type: 'relationship',
+    //               relationTo: 'pages',
+    //               required: false,
+    //               admin: { width: '50%' },
+    //             },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
 
     {
       type: 'row',
@@ -455,10 +469,20 @@ const Footer: GlobalConfig = {
               label: 'Marquee Text',
               required: true,
               validate: validateShortText('Marquee Text', MARQUEE_MAX, true),
-              defaultValue: 'CRAFTING EXCELLENCE SINCE 1995',
+              defaultValue: 'CRAFTING EXCELLENCE SINCE',
+              admin: { width: '50%' },
+            },
+            {
+              name: 'year',
+              type: 'text',
+              label: 'Marquee Year',
+              required: false,
+              validate: validateShortText('Marquee Text', MARQUEE_MAX, true),
+              defaultValue: '1995',
+              admin: { width: '50%' },
             },
           ],
-          admin: { width: '50%' },
+          admin: { width: '100%' },
         },
         {
           name: 'copyrightSection',
@@ -473,6 +497,20 @@ const Footer: GlobalConfig = {
               maxLength: COPYRIGHT_MAX,
               validate: validateShortText('Copyright', COPYRIGHT_MAX, true),
               defaultValue: '© 2025 | SAGAR',
+            },
+          ],
+          admin: { width: '50%' },
+        },
+        {
+          name: 'legalSection',
+          type: 'group',
+          label: 'Legal Links',
+          fields: [
+            {
+              name: 'legalValue',
+              type: 'richText',
+              label: 'Legal Text',
+              required: true,
             },
           ],
           admin: { width: '50%' },

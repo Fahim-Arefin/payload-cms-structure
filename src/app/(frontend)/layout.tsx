@@ -1,5 +1,7 @@
 import React from 'react'
 // import './fonts.css'
+import ServerFooter from '@/components/custom/sagar-ropes-shared/footer/ServerFooter'
+import ServerNavbar from '@/components/custom/sagar-ropes-shared/navbar/ServerNavbar'
 import CookieConsentBanner from '@/components/custom/shared/CookieConsentModal'
 import GlobalContactButtons from '@/components/custom/shared/GlobalContactButtons'
 import Providers from '@/context/providers'
@@ -7,7 +9,6 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { Metadata } from 'next'
 import { Noto_Serif_Bengali } from 'next/font/google'
 import './styles.css'
-import ServerNavbar from '@/components/custom/sagar-ropes-shared/navbar/ServerNavbar'
 
 // const notoBengali = Noto_Sans_Bengali({
 //   subsets: ['bengali'],
@@ -197,12 +198,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             <ServerNavbar />
             <div className="min-h-screen">{children}</div>
             <CookieConsentBanner />
-            {/* <div className="hidden lg:block">
-              <Footer />
+            <div className="">
+              <ServerFooter />
             </div>
-            <div className="lg:hidden">
-              <FooterMobile />
-            </div> */}
             <GlobalContactButtons />
           </main>
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />

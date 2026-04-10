@@ -3026,6 +3026,7 @@ export interface Footer {
    * Auto-generated Base64 blur
    */
   isoBadgeImageBlurDataURL?: string | null;
+  showPatternDesign?: boolean | null;
   branding: {
     introText: string;
   };
@@ -3058,25 +3059,34 @@ export interface Footer {
     email: string;
   };
   social: {
+    header: string;
     facebookUrl: string;
-    youtubeUrl: string;
+    whatsApp: string;
     linkedinUrl: string;
-    instagramUrl: string;
-  };
-  legalSection?: {
-    legal?:
-      | {
-          buttonText: string;
-          buttonLink?: (string | null) | Page;
-          id?: string | null;
-        }[]
-      | null;
   };
   marqueeSection: {
     text: string;
+    year?: string | null;
   };
   copyrightSection: {
     copyright: string;
+  };
+  legalSection: {
+    legalValue: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -3134,6 +3144,7 @@ export interface FooterSelect<T extends boolean = true> {
   pendingIsoBadgeImageOriginal?: T;
   pendingIsoBadgeImageCrop?: T;
   isoBadgeImageBlurDataURL?: T;
+  showPatternDesign?: T;
   branding?:
     | T
     | {
@@ -3176,31 +3187,26 @@ export interface FooterSelect<T extends boolean = true> {
   social?:
     | T
     | {
+        header?: T;
         facebookUrl?: T;
-        youtubeUrl?: T;
+        whatsApp?: T;
         linkedinUrl?: T;
-        instagramUrl?: T;
-      };
-  legalSection?:
-    | T
-    | {
-        legal?:
-          | T
-          | {
-              buttonText?: T;
-              buttonLink?: T;
-              id?: T;
-            };
       };
   marqueeSection?:
     | T
     | {
         text?: T;
+        year?: T;
       };
   copyrightSection?:
     | T
     | {
         copyright?: T;
+      };
+  legalSection?:
+    | T
+    | {
+        legalValue?: T;
       };
   updatedAt?: T;
   createdAt?: T;
