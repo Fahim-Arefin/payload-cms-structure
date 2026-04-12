@@ -661,6 +661,7 @@ import {
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_01_SLUG_AND_TAG,
+  SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -761,6 +762,12 @@ export const mediaHooks = withMediaLifecycle({
       blockType: CONTACT_INFO_CARD_SLUG_AND_TAG,
       arrayKey: 'contactInfo',
       mediaFields: ['icon', 'iconWhite'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SAGAR_VIDEOS_SLUG_AND_TAG,
+      arrayKey: 'videos',
+      mediaFields: ['thumbnail'],
     },
   ],
 

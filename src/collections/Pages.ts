@@ -12,6 +12,7 @@ import ProductIntroSchema from '@/blocks/ProductIntro/schema'
 import QualityBenchhmarkSchema from '@/blocks/QualityBenchmarkCard/schema'
 import QueriesSchema from '@/blocks/Queries/schema'
 import ResultCardSchema from '@/blocks/ResultCard/schema'
+import SagarVideosSchema from '@/blocks/SagarVideos/schema'
 import TechnicalDatasheetSchema from '@/blocks/TechnicalDatashheet/schema'
 import TechnicalSpecificationsSchema from '@/blocks/TechnicalSpecification/schema'
 import { APIError } from '@/lib/apiError'
@@ -158,6 +159,7 @@ export const Pages: CollectionConfig = {
 
         // about us page unique
         MissionVisionSchema,
+        SagarVideosSchema,
       ],
     },
   ],

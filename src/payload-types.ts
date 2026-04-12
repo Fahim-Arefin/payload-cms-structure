@@ -2086,6 +2086,108 @@ export interface Page {
         blockName?: string | null;
         blockType: 'mission-vision';
       }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        /**
+         * Small label above heading. Max 40 characters.
+         */
+        tag?: string | null;
+        /**
+         * Main heading line 1. Max 90 characters.
+         */
+        heading1: string;
+        /**
+         * Optional. Must be inside Heading 1. Max 90.
+         */
+        heading1Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading1HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Secondary heading line. Max 90 characters.
+         */
+        heading2?: string | null;
+        /**
+         * Optional. Must be inside Heading 2. Max 90.
+         */
+        heading2Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading2HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Write the paragraph text (you can add multiple paragraphs).
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        ctaButtons?:
+          | {
+              /**
+               * Max 40 characters.
+               */
+              label: string;
+              /**
+               * Select the button style
+               */
+              style?: ('btn01' | 'btn02') | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink: string | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Select the alignment of the video
+         */
+        videoAlignment?: ('left' | 'right') | null;
+        videos: {
+          /**
+           * Upload the video thumbnail image.
+           */
+          thumbnail: string | Media;
+          thumbnailOriginal?: (string | null) | Media;
+          pendingThumbnailOriginal?: string | null;
+          pendingThumbnailCrop?: string | null;
+          thumbnailBlurDataURL?: string | null;
+          /**
+           * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
+           */
+          videoUrl: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'sagar-videos';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2882,6 +2984,44 @@ export interface PagesSelect<T extends boolean = true> {
               missionDescription?: T;
               visionDescription?: T;
               showPatternDesign?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'sagar-videos'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              tag?: T;
+              heading1?: T;
+              heading1Highlighted?: T;
+              heading1HighlightColor?: T;
+              heading2?: T;
+              heading2Highlighted?: T;
+              heading2HighlightColor?: T;
+              description?: T;
+              ctaButtons?:
+                | T
+                | {
+                    label?: T;
+                    style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              videoAlignment?: T;
+              videos?:
+                | T
+                | {
+                    thumbnail?: T;
+                    thumbnailOriginal?: T;
+                    pendingThumbnailOriginal?: T;
+                    pendingThumbnailCrop?: T;
+                    thumbnailBlurDataURL?: T;
+                    videoUrl?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

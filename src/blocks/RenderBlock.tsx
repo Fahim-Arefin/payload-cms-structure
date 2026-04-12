@@ -12,6 +12,7 @@ import {
   QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
   RESULT_CARD_SLUG_AND_TAG,
+  SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -32,6 +33,7 @@ import QualityBenchmarkCardBlock from './QualityBenchmarkCard/QualityBenchmarkCa
 import ContactInfoCardBlock from './ContactInfoCard/ContactInfoCardBlock'
 import FounderQuoteBlock from './FounderQuote/FounderQuoteBlock'
 import ResultCardBlock from './ResultCard/ResultCardBlock'
+import SagarVideosBlock from './SagarVideos/SagarVideosBlock'
 
 type Params = Record<string, string>
 
@@ -67,6 +69,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <FounderQuoteBlock key={block.id} block={block} params={params} />
     case RESULT_CARD_SLUG_AND_TAG:
       return <ResultCardBlock key={block.id} block={block} params={params} />
+    case SAGAR_VIDEOS_SLUG_AND_TAG:
+      return <SagarVideosBlock key={block.id} block={block} params={params} />
 
     default:
       return null

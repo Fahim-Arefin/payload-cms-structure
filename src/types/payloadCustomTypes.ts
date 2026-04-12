@@ -12,6 +12,7 @@ import {
   QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
   RESULT_CARD_SLUG_AND_TAG,
+  SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -90,4 +91,9 @@ export type FounderQuoteBlockType = Extract<
 export type ResultCardBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof RESULT_CARD_SLUG_AND_TAG }
+>
+
+export type SagarVideosBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SAGAR_VIDEOS_SLUG_AND_TAG }
 >

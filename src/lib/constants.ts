@@ -122,3 +122,9 @@ export const RESULT_CARD_SLUG_AND_TAG = 'result-card'
 export const RESULT_CARD_BLOCK_LABEL = 'Result Card'
 export const RESULT_CARD_CACHE_KEY = 'result-card-data'
 export const RESULT_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/result-card-block-thumbnail.jpg`
+
+// Founder Quote
+export const SAGAR_VIDEOS_SLUG_AND_TAG = 'sagar-videos'
+export const SAGAR_VIDEOS_BLOCK_LABEL = 'Sagar Videos'
+export const SAGAR_VIDEOS_CACHE_KEY = 'sagar-videos-data'
+export const SAGAR_VIDEOS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/sagar-videos-block-thumbnail.jpg`
