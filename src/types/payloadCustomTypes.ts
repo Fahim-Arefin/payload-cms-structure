@@ -8,6 +8,7 @@ import {
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_01_SLUG_AND_TAG,
+  PRODUCT_INFO_02_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
@@ -96,4 +97,9 @@ export type ResultCardBlockType = Extract<
 export type SagarVideosBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof SAGAR_VIDEOS_SLUG_AND_TAG }
+>
+
+export type ProductInfo02BlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PRODUCT_INFO_02_SLUG_AND_TAG }
 >

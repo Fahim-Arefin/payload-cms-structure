@@ -128,3 +128,9 @@ export const SAGAR_VIDEOS_SLUG_AND_TAG = 'sagar-videos'
 export const SAGAR_VIDEOS_BLOCK_LABEL = 'Sagar Videos'
 export const SAGAR_VIDEOS_CACHE_KEY = 'sagar-videos-data'
 export const SAGAR_VIDEOS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/sagar-videos-block-thumbnail.jpg`
+
+// Product info 02
+export const PRODUCT_INFO_02_SLUG_AND_TAG = 'product-info-02'
+export const PRODUCT_INFO_02_BLOCK_LABEL = 'Product Info 02'
+export const PRODUCT_INFO_02_CACHE_KEY = 'product-info-02-data'
+export const PRODUCT_INFO_02_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info-02-block-thumbnail.jpg`
