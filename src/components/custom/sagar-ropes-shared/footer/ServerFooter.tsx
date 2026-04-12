@@ -37,13 +37,13 @@ async function ServerFooter() {
       >
         {/* content */}
         <div
-          className="grid grid-cols-1 gap-3 lg:gap-0 lg:grid-cols-4 
+          className="grid grid-cols-1 gap-3 lg:gap-0 lg:grid-cols-12 
       lg:mt-[30px] xl:mt-[60px] 2xl:mt-[70px]
       relative z-20"
         >
           {/* grid 1 */}
           <div
-            className="border border-white
+            className="col-span-1 lg:col-span-3
         space-y-[12px] lg:space-y-[15px] xl:space-y-[20px] 2xl:space-y-[25px]
         relative 
         flex flex-col items-center lg:items-start
@@ -51,8 +51,10 @@ async function ServerFooter() {
           >
             {/* logo */}
             {typeof footer?.logo === 'object' && footer?.logo?.url && (
-              <div
+              <Link
+                href={`/`}
                 className="relative z-20
+            hover:scale-110 transition-all duration-300 ease-in
             w-[150px] xl:w-[240px] 2xl:w-[260px]
             aspect-[701/179]"
               >
@@ -65,7 +67,7 @@ async function ServerFooter() {
                   sizes="100vw"
                   blurDataURL={footer?.logoBlurDataURL || ''}
                 />
-              </div>
+              </Link>
             )}
             {/* brand text */}
             <div className="font-manrope text-white-3 global-p4 z-20 w-[80%] text-center lg:text-start">
@@ -99,20 +101,20 @@ async function ServerFooter() {
               sizes="100vw"
               placeholder="blur"
               blurDataURL={FooterBlur01?.blurDataURL}
-              className="absolute -z-10  border border-white-1
+              className="absolute -z-10  
               lg:scale-125 xl:scale-150
               w-[80%] md:w-[60%] lg:w-full h-fit 
               lg:-left-[4%] 
-              -bottom-[120%] md:-bottom-[150%] lg:-bottom-[70%] 
-              "
+              -bottom-[120%] md:-bottom-[150%] lg:-bottom-[70%] opacity-80"
             />
           </div>
 
           {/* grid 2 */}
           <div
-            className="border border-white
+            className="col-span-1 lg:col-span-3
         space-y-[8px] lg:space-y-[15px] xl:space-y-[20px] 2xl:space-y-[25px]
-        flex flex-col items-center lg:items-start"
+        flex flex-col items-center lg:items-start 
+        lg:pl-9 xl:pl-10 2xl:pl-12"
           >
             <div className="text-white-3 font-proxima font-bold global-h5">
               {footer?.quickLinksSection?.header}
@@ -125,7 +127,20 @@ async function ServerFooter() {
                 <Link
                   key={index}
                   href={pageHref(item?.buttonLink)}
-                  className="text-white-2 global-p4 font-manrope text-center lg:text-start"
+                  className="w-fit mx-auto lg:mx-0
+    relative inline-block
+    text-white-2 global-p4 font-manrope text-center lg:text-start
+    hover:text-cyan transition-all duration-300 ease-in
+    
+    after:content-['']
+    after:absolute after:left-0 after:-bottom-[2px]
+    after:h-[2px] after:w-full
+    after:origin-left after:scale-x-0
+    after:bg-cyan
+    after:transition-transform after:duration-300 after:ease-in
+
+    hover:after:scale-x-100
+  "
                 >
                   {item?.buttonText}
                 </Link>
@@ -135,7 +150,8 @@ async function ServerFooter() {
 
           {/* grid 3 */}
           <div
-            className="hidden lg:flex  lg:flex-col items-center lg:items-start border border-white
+            className="col-span-1 lg:col-span-3
+            hidden lg:flex lg:flex-col items-center lg:items-start
         space-y-[8px] lg:space-y-[15px] xl:space-y-[20px] 2xl:space-y-[25px]"
           >
             <div className="text-white-3 font-proxima font-bold global-h5">
@@ -151,8 +167,22 @@ async function ServerFooter() {
                   key={index}
                 >
                   <Link
+                    key={index}
                     href={pageHref(item?.buttonLink)}
-                    className="text-white-2 global-p4 font-manrope flex  text-center lg:text-start"
+                    className="w-fit
+    relative inline-block
+    text-white-2 global-p4 font-manrope text-center lg:text-start
+    hover:text-cyan transition-all duration-300 ease-in
+    
+    after:content-['']
+    after:absolute after:left-0 after:-bottom-[2px]
+    after:h-[2px] after:w-full
+    after:origin-left after:scale-x-0
+    after:bg-cyan
+    after:transition-transform after:duration-300 after:ease-in
+
+    hover:after:scale-x-100
+  "
                   >
                     {item?.buttonText}
                   </Link>
@@ -174,7 +204,7 @@ async function ServerFooter() {
 
           {/* grid 4 */}
           <div
-            className="border border-white
+            className="col-span-1 lg:col-span-3
         space-y-[8px] lg:space-y-[15px] xl:space-y-[20px] 2xl:space-y-[25px]
         flex flex-col items-center lg:items-start
         relative "
@@ -293,11 +323,12 @@ async function ServerFooter() {
                 sizes="100vw"
                 placeholder="blur"
                 blurDataURL={FooterBlur02?.blurDataURL}
-                className="absolute h-fit -z-10  border border-white-1
-                w-[50%] lg:w-full 
-                 md:left-[220px] lg:-left-[20%] 
-                top-[190px] lg:-top-[20px] xl:-top-[30px]
-                lg:scale-125 xl:scale-150
+                className="absolute -z-10
+                w-[50%] h-[90%] md:h-[96%] lg:w-full lg:h-fit
+                 left-[100px] md:left-[250px] lg:-left-[30%] 
+                top-[170px] lg:-top-[100px] xl:-top-[140px] 
+                xl:scale-110 2xl:scale-125 
+                opacity-80
                 "
               />
             </div>
