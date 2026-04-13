@@ -3,7 +3,9 @@ import { ProductInfo02BlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import CardMask from 'public/assets/images/cyanCardMask.png'
+// import CardMask from 'public/assets/images/cyanCardMask.png'
+// import CardMask from 'public/assets/images/cyanCardBlur2.png'
+import CardMask from 'public/assets/images/Blur2.png'
 import Arrow2 from '/public/assets/icons/arrow2.png'
 
 type Props = {
@@ -14,7 +16,7 @@ type Props = {
   padding?: string
 }
 
-function Card03({ data, index, height, padding, className }: Props) {
+function InfoCard02({ data, index, height, padding, className }: Props) {
   // If GlobalButton supports children (you already do in the YT button), render label as child:
   const href =
     data?.sectionId && data?.buttonLink && data?.sectionId
@@ -35,9 +37,9 @@ function Card03({ data, index, height, padding, className }: Props) {
     >
       {/* left */}
       <div
-        className={`z-10 flex flex-col justify-between
+        className={`z-10 flex md:flex-col md:justify-between items-center md:items-start
         transition-all duration-300 ease-in
-        col-span-4
+        col-span-4 space-x-2 md:space-x-0
       `}
       >
         {/* icons */}
@@ -47,7 +49,7 @@ function Card03({ data, index, height, padding, className }: Props) {
                         w-[30px] md:w-[35px] lg:w-[40px] xl:w-[50px] 2xl:w-[65px]
                         h-[30px] md:h-[35px] lg:h-[40px] xl:h-[50px] 2xl:h-[65px]
                         flex items-center justify-center
-                        p-1 xl:p-1.5 2xl:p-2
+                        p-1 xl:p-1.5 2xl:p-2 
           "
           >
             <div className="relative w-full aspect-[1/1] group-hover:scale-90 transition-all delay-150 duration-300 ease-out">
@@ -65,7 +67,7 @@ function Card03({ data, index, height, padding, className }: Props) {
           </div>
         )}
 
-        <div>
+        <div className="flex flex-row md:flex-col">
           {/* titles */}
           {data?.title && (
             <div className={`z-30 font-proxima global-h5 font-bold text-white-2`}>
@@ -110,16 +112,26 @@ function Card03({ data, index, height, padding, className }: Props) {
         </div>
       </div>
       {/* mask image */}
-      <Image
-        src={CardMask}
-        alt="card mask"
-        width={CardMask.width}
-        height={CardMask.height}
-        sizes="100vw"
-        className="object-cover object-center w-full h-full absolute z-40 left-0 top-0"
-        placeholder="blur"
-        blurDataURL={CardMask?.blurDataURL}
-      />
+      {/* border border-white-1  */}
+      <div
+        className="w-[40%] md:w-[30%] xl:w-[200px] h-[70%] xl:h-[200px] absolute 
+        -left-8 md:-left-4 -top-10 md:-top-6 rounded-r-full z-20
+        transition-all duration-500 ease-in-out
+      translate-x-0 group-hover:translate-x-[200%] md:group-hover:translate-x-[240%] 2xl:group-hover:translate-x-[340%]
+      translate-y-0 group-hover:translate-y-[80%] md:group-hover:translate-y-[50%]  xl:group-hover:translate-y-[40%] 
+      "
+      >
+        <Image
+          src={CardMask}
+          alt="card mask"
+          width={CardMask.width}
+          height={CardMask.height}
+          sizes="100vw"
+          className="object-cover object-center w-full h-full scale-[150%] md:scale-[200%] "
+          placeholder="blur"
+          blurDataURL={CardMask?.blurDataURL}
+        />
+      </div>
     </div>
   )
 
@@ -132,4 +144,4 @@ function Card03({ data, index, height, padding, className }: Props) {
   )
 }
 
-export default Card03
+export default InfoCard02

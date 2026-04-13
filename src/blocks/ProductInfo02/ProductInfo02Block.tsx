@@ -6,7 +6,7 @@ import Blur from '/public/assets/images/Blur.png'
 import Image from 'next/image'
 import WithHashScroller from '@/components/custom/sagar-ropes-shared/others/WithHashScroller'
 import IntroSectionDesign03 from '@/components/custom/sagar-ropes-shared/others/IntroSectionDesign03'
-import Card03 from './components/Card03'
+import InfoCard02 from './components/InfoCard02'
 
 type Props = {
   block: ProductInfo02BlockType
@@ -20,36 +20,43 @@ function ProductInfo02Block({ block }: Props) {
         {/* content */}
         <div
           className={`container-padding grid grid-cols-1 md:grid-cols-12 
-          xl:gap-8 2xl:gap-20`}
+          gap-4 md:gap-3 lg:gap-5 xl:gap-8 2xl:gap-20`}
         >
           {/* section intro */}
+
           <IntroSectionDesign03
             block={block}
-            className={`relative z-20 md:col-span-4`}
+            className={`hidden md:flex relative z-20 md:col-span-4`}
             position="left"
             justify="justify-start"
+          />
+          <IntroSectionDesign03
+            block={block}
+            className={`flex md:hidden relative z-20 md:col-span-4`}
+            position="center"
+            justify="justify-center"
           />
 
           <div
             className="md:col-span-8 flex flex-col 
-           xl:gap-3 2xl:gap-4"
+           gap-2 xl:gap-3 2xl:gap-4"
           >
             {block?.cards03?.map((item, index) => (
-              <Card03
+              <InfoCard02
                 key={index}
                 data={item}
                 index={index}
                 padding="
+                px-[14px] py-[16px]
+                md:px-[10px] md:py-[16px]
+                lg:px-[12px] lg:py-[18px]
                 xl:px-[20px] xl:py-[30px]
-                xl:px-[20px] xl:py-[30px]
-                2xl:px-[24px] 2xl:py-[34px]
-                
-                "
+                2xl:px-[24px] 2xl:py-[34px]"
                 height="
-                xl:min-h-[200px] xl:min-h-[240px] 2xl:min-h-[250px] 
-                hover:xl:min-h-[250px] hover:2xl:min-h-[260px]
+                min-h-[200px] md:min-h-[160px] lg:min-h-[180px] xl:min-h-[240px] 2xl:min-h-[250px] 
+                hover:md:min-h-[170px] hover:lg:min-h-[200px] hover:xl:min-h-[250px] hover:2xl:min-h-[260px]
                 "
-                className="w-[95%] hover:w-full transition-all duration-300 ease-in"
+                className="w-full md:w-[97%] lg:w-[95%] hover:w-full transition-all duration-300 ease-in"
               />
             ))}
           </div>
