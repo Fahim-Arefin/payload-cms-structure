@@ -37,7 +37,7 @@ function InfoCard03({ data, index, height, padding, className }: Props) {
       {/* left */}
       <div
         className={`z-10 flex flex-col justify-evenly
-        transition-all duration-500 ease-in-out items-center
+        transition-all duration-700 ease-in-out items-center
         col-span-5 md:translate-x-[65%]
         group-hover:translate-x-0 
       `}
@@ -67,7 +67,7 @@ function InfoCard03({ data, index, height, padding, className }: Props) {
       {/* right */}
       <div
         className={`col-span-7 global-p5 text-white-2 font-manrope text-justify
-        transition-all delay-150 duration-500 ease-in-out
+        transition-all delay-150 duration-300 ease-in-out
         opacity-100 md:opacity-0 md:scale-90 md:translate-x-[20%] group-hover:translate-x-0 group-hover:opacity-100 group-hover:scale-100 flex flex-col justify-center `}
       >
         {data?.description}
