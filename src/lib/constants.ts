@@ -134,3 +134,9 @@ export const PRODUCT_INFO_02_SLUG_AND_TAG = 'product-info-02'
 export const PRODUCT_INFO_02_BLOCK_LABEL = 'Product Info 02'
 export const PRODUCT_INFO_02_CACHE_KEY = 'product-info-02-data'
 export const PRODUCT_INFO_02_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info-02-block-thumbnail.jpg`
+
+// Product info 03
+export const PRODUCT_INFO_03_SLUG_AND_TAG = 'product-info-03'
+export const PRODUCT_INFO_03_BLOCK_LABEL = 'Product Info 03'
+export const PRODUCT_INFO_03_CACHE_KEY = 'product-info-03-data'
+export const PRODUCT_INFO_03_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info-03-block-thumbnail.jpg`

@@ -1,14 +1,14 @@
 import type { Block } from 'payload'
 
 import {
-  HOME_PAGE,
-  PRODUCT_INFO_02_BLOCK_LABEL,
-  PRODUCT_INFO_02_BLOCK_THUMBNAIL_URL,
-  PRODUCT_INFO_02_SLUG_AND_TAG,
+  ABOUT_US,
+  PRODUCT_INFO_03_BLOCK_LABEL,
+  PRODUCT_INFO_03_BLOCK_THUMBNAIL_URL,
+  PRODUCT_INFO_03_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import { BgColorAndSectionIdField } from '@/utils/block/fields/BgColorAndSectionIdField'
-import { Card03Field } from '@/utils/block/fields/Card03Field'
+import { Card04Field } from '@/utils/block/fields/Card04Field'
 import { SectionHeadingFields } from '@/utils/block/fields/SectionHeading'
 
 /* ---------- limits ---------- */
@@ -16,17 +16,17 @@ const TAG_MAX = 40
 const HEADING_MAX = 90
 const CARD_TEXT_MAX = 120
 
-const ProductInfo02Schema: Block = {
-  slug: PRODUCT_INFO_02_SLUG_AND_TAG,
+const ProductInfo03Schema: Block = {
+  slug: PRODUCT_INFO_03_SLUG_AND_TAG,
   labels: {
-    singular: PRODUCT_INFO_02_BLOCK_LABEL,
-    plural: PRODUCT_INFO_02_BLOCK_LABEL,
+    singular: PRODUCT_INFO_03_BLOCK_LABEL,
+    plural: PRODUCT_INFO_03_BLOCK_LABEL,
   },
 
-  admin: { group: HOME_PAGE },
+  admin: { group: ABOUT_US },
 
-  imageURL: PRODUCT_INFO_02_BLOCK_THUMBNAIL_URL,
-  imageAltText: `${PRODUCT_INFO_02_BLOCK_LABEL} preview`,
+  imageURL: PRODUCT_INFO_03_BLOCK_THUMBNAIL_URL,
+  imageAltText: `${PRODUCT_INFO_03_BLOCK_LABEL} preview`,
 
   fields: [
     // 🔐 Hidden per-doc session id for temp upload lifecycle
@@ -53,8 +53,8 @@ const ProductInfo02Schema: Block = {
     }),
 
     // ===== Cards =====
-    Card03Field({
-      ownerCollection: PRODUCT_INFO_02_SLUG_AND_TAG as any,
+    Card04Field({
+      ownerCollection: PRODUCT_INFO_03_SLUG_AND_TAG as any,
       minRows: 1,
       maxRows: 8,
       titleMax: CARD_TEXT_MAX,
@@ -62,4 +62,4 @@ const ProductInfo02Schema: Block = {
   ],
 }
 
-export default ProductInfo02Schema
+export default ProductInfo03Schema
