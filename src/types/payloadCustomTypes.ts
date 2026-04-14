@@ -10,6 +10,7 @@ import {
   PRODUCT_INFO_01_SLUG_AND_TAG,
   PRODUCT_INFO_02_SLUG_AND_TAG,
   PRODUCT_INFO_03_SLUG_AND_TAG,
+  PRODUCT_INFO_04_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
@@ -108,4 +109,9 @@ export type ProductInfo02BlockType = Extract<
 export type ProductInfo03BlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PRODUCT_INFO_03_SLUG_AND_TAG }
+>
+
+export type ProductInfo04BlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PRODUCT_INFO_04_SLUG_AND_TAG }
 >

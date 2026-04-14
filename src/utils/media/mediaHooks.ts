@@ -662,6 +662,7 @@ import {
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_01_SLUG_AND_TAG,
   PRODUCT_INFO_02_SLUG_AND_TAG,
+  PRODUCT_INFO_04_SLUG_AND_TAG,
   SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
@@ -750,6 +751,12 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
       arrayKey: 'specifications',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PRODUCT_INFO_04_SLUG_AND_TAG,
+      arrayKey: 'cards05',
       mediaFields: ['icon'],
     },
     {
