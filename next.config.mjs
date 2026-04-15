@@ -17,12 +17,22 @@ const nextConfig = {
     formats: ['image/webp'],
     // unoptimized: true, // ✅ disables Next.js/Vercel optimization
     // ✅ Remote image patterns
+    // remotePatterns: [
+    //   {
+    //     protocol: 'https',
+    //     hostname: 's3.ap-southeast-1.wasabisys.com',
+    //     port: '', // leave empty unless you need a specific port
+    //     pathname: '/shantalife-static/**', // allow all under shantalife-static
+    //   },
+    // ],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 's3.ap-southeast-1.wasabisys.com',
-        port: '', // leave empty unless you need a specific port
-        pathname: '/shantalife-static/**', // allow all under shantalife-static
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
       },
     ],
   },
