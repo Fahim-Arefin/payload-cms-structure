@@ -17,9 +17,9 @@ function Loading({ loadingText, widthHeight, bgColor }: Props) {
     >
       <div className="text-center">
         <div className="relative inline-block">
-          <div className="animate-ping absolute inset-0 rounded-full bg-amber-500 opacity-20"></div>
+          <div className="animate-ping absolute inset-0 rounded-full bg-dark-1 opacity-20"></div>
           <div
-            className="animate-spin rounded-full border-4 border-[#ED7125] border-t-transparent relative
+            className="animate-spin rounded-full border-4 border-cyan border-t-transparent relative
            w-8 md:w-10 lg:w-12 xl:w-14 
            h-8 md:h-10 lg:h-12 xl:h-14 "
           ></div>
