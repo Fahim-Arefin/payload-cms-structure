@@ -661,6 +661,9 @@ import {
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_01_SLUG_AND_TAG,
+  PRODUCT_INFO_02_SLUG_AND_TAG,
+  PRODUCT_INFO_04_SLUG_AND_TAG,
+  SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -752,8 +755,20 @@ export const mediaHooks = withMediaLifecycle({
     },
     {
       layoutKey: 'layout',
+      blockType: PRODUCT_INFO_04_SLUG_AND_TAG,
+      arrayKey: 'cards05',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
       blockType: PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG,
       arrayKey: 'cards02',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PRODUCT_INFO_02_SLUG_AND_TAG,
+      arrayKey: 'cards03',
       mediaFields: ['icon'],
     },
     {
@@ -761,6 +776,12 @@ export const mediaHooks = withMediaLifecycle({
       blockType: CONTACT_INFO_CARD_SLUG_AND_TAG,
       arrayKey: 'contactInfo',
       mediaFields: ['icon', 'iconWhite'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: SAGAR_VIDEOS_SLUG_AND_TAG,
+      arrayKey: 'videos',
+      mediaFields: ['thumbnail'],
     },
   ],
 

@@ -85,9 +85,27 @@ type Props = {
   children?: React.ReactNode
   className?: string
   groupName?: string
+  groupColor?: string
+  groupBg?:
+    | 'bg-cyan'
+    | 'bg-bg-1'
+    | 'bg-white-1'
+    | 'bg-white-2'
+    | 'bg-white-3'
+    | 'bg-dark-1'
+    | 'bg-dark-2'
+    | 'bg-dark-2b'
+    | 'bg-dark-3'
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-function Button02({ children, className, groupName, ...props }: Props) {
+function Button02({
+  children,
+  className,
+  groupName,
+  groupColor = 'text-cyan',
+  groupBg = 'bg-cyan',
+  ...props
+}: Props) {
   const btnRef = useRef<HTMLButtonElement | null>(null)
 
   const triggerNudge = () => {
@@ -112,7 +130,7 @@ function Button02({ children, className, groupName, ...props }: Props) {
         props.onMouseLeave?.(e)
       }}
       className={`transition-all duration-300 ease-in
-        rounded-none font-manrope ${groupName ? `text-cyan group-hover/${groupName}:text-white` : 'text-dark-1'}
+        rounded-none font-manrope ${groupName ? `${groupColor} group-hover/${groupName}:text-white` : 'text-dark-1'}
         shadow-none bg-transparent hover:bg-transparent group global-link font-bold
         
         h-7 xl:h-9
@@ -136,28 +154,12 @@ function Button02({ children, className, groupName, ...props }: Props) {
           {children}
         </span>
       </div>
-      {/* icon */}
-      {/* <div
-        className={`flex justify-center items-center
-          transition-all duration-300 ease-in 
-          ${groupName ? 'bg-cyan' : 'bg-dark-1'}  
-          ${groupName && `group-hover/${groupName}:bg-white-1`}
-          w-[20px] xl:w-[25px] 
-          h-[20px] xl:h-[25px]`}
-      >
-        <Image
-          src={Btn02Icon}
-          alt="btn icon"
-          className="group-hover:rotate-[43deg] transition-all duration-300 ease-in
-          w-[12px] xl:w-[16px] 
-          h-[12px] xl:h-[16px]"
-        />
-      </div> */}
+
       {/* icon */}
       <div
         className={`flex justify-center items-center
     transition-all duration-300 ease-in
-    ${groupName ? 'bg-cyan' : 'bg-dark-1'}
+    ${groupName ? groupBg : 'bg-dark-1'}
     ${groupName ? `group-hover/${groupName}:bg-white-1` : ''}
     w-[20px] xl:w-[25px]
     h-[20px] xl:h-[25px]`}

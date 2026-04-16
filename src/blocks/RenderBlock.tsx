@@ -8,10 +8,14 @@ import {
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_01_SLUG_AND_TAG,
+  PRODUCT_INFO_02_SLUG_AND_TAG,
+  PRODUCT_INFO_03_SLUG_AND_TAG,
+  PRODUCT_INFO_04_SLUG_AND_TAG,
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
   RESULT_CARD_SLUG_AND_TAG,
+  SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -32,6 +36,10 @@ import QualityBenchmarkCardBlock from './QualityBenchmarkCard/QualityBenchmarkCa
 import ContactInfoCardBlock from './ContactInfoCard/ContactInfoCardBlock'
 import FounderQuoteBlock from './FounderQuote/FounderQuoteBlock'
 import ResultCardBlock from './ResultCard/ResultCardBlock'
+import SagarVideosBlock from './SagarVideos/SagarVideosBlock'
+import ProductInfo02Block from './ProductInfo02/ProductInfo02Block'
+import ProductInfo03Block from './ProductInfo03/ProductInfo03Block'
+import ProductInfo04Block from './ProductInfo04/ProductInfo04Block'
 
 type Params = Record<string, string>
 
@@ -67,6 +75,14 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <FounderQuoteBlock key={block.id} block={block} params={params} />
     case RESULT_CARD_SLUG_AND_TAG:
       return <ResultCardBlock key={block.id} block={block} params={params} />
+    case SAGAR_VIDEOS_SLUG_AND_TAG:
+      return <SagarVideosBlock key={block.id} block={block} params={params} />
+    case PRODUCT_INFO_02_SLUG_AND_TAG:
+      return <ProductInfo02Block key={block.id} block={block} params={params} />
+    case PRODUCT_INFO_03_SLUG_AND_TAG:
+      return <ProductInfo03Block key={block.id} block={block} params={params} />
+    case PRODUCT_INFO_04_SLUG_AND_TAG:
+      return <ProductInfo04Block key={block.id} block={block} params={params} />
 
     default:
       return null

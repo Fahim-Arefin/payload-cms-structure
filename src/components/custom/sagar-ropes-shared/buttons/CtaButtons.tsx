@@ -9,9 +9,20 @@ import { BasicHeroBlockType } from '@/types/payloadCustomTypes'
 type Props = {
   item: BasicHeroBlockType['heroes'][number]['ctaButtons']
   groupName?: string
+  groupColor?: string
+  groupBg?:
+    | 'bg-cyan'
+    | 'bg-bg-1'
+    | 'bg-white-1'
+    | 'bg-white-2'
+    | 'bg-white-3'
+    | 'bg-dark-1'
+    | 'bg-dark-2'
+    | 'bg-dark-2b'
+    | 'bg-dark-3'
 }
 
-function CtaButtons({ item, groupName }: Props) {
+function CtaButtons({ item, groupName, groupColor = 'text-cyan', groupBg = 'bg-cyan' }: Props) {
   return (
     <>
       {item?.map((block, index) => {
@@ -29,7 +40,7 @@ function CtaButtons({ item, groupName }: Props) {
                 </Button01>
               )}
               {block?.style === 'btn02' && (
-                <Button02 groupName={groupName}>
+                <Button02 groupName={groupName} groupBg={groupBg} groupColor={groupColor}>
                   <LocalizedText en={block.label} bn={block.label} />
                 </Button02>
               )}

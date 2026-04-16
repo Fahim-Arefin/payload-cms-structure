@@ -107,7 +107,7 @@ function ClientNavbar({ data, blur }: Props) {
                   priority
                   placeholder="blur"
                   blurDataURL={blur || ''}
-                  quality={80}
+                  quality={90}
                 />
               )}
             </Link>

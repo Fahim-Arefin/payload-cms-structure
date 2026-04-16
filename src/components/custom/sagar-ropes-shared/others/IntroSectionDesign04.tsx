@@ -7,15 +7,21 @@ type Props = {
   block: any
   className?: string
   position?: 'left' | 'right' | 'center'
+  justify?: string
 }
 
 // support alignment and light color
-function IntroSectionDesign04({ block, className, position = 'left' }: Props) {
+function IntroSectionDesign04({
+  block,
+  className,
+  position = 'left',
+  justify = 'justify-between',
+}: Props) {
   const hasDesc = !!block?.description && !!block?.description?.root?.direction // or lexicalHasRealText(block.description?.root)
   return (
     <div
       className={` ${className} 
-    flex flex-col ${position === 'left' ? 'items-start' : position === 'right' ? 'items-end' : 'items-center'} justify-between 
+    flex flex-col ${position === 'left' ? 'items-start' : position === 'right' ? 'items-end' : 'items-center'} ${justify}
     gap-[12px] md:gap-[14px] lg:gap-[16px] xl:gap-[18px] 2xl:gap-[20px]`}
     >
       {/* tag */}
@@ -61,10 +67,10 @@ function IntroSectionDesign04({ block, className, position = 'left' }: Props) {
 
       {/* Description section */}
       {hasDesc && (
-        <div className={``}>
-          <div className={`font-manrope text-dark-1 global-p3 text-justify`}>
-            <LocalizedRichText en={block.description} bn={block.description} />
-          </div>
+        <div
+          className={`font-manrope text-dark-1 global-p3 ${position === 'left' ? 'text-justify' : position === 'right' ? 'text-justify' : 'text-center'}`}
+        >
+          <LocalizedRichText en={block.description} bn={block.description} />
         </div>
       )}
       {/* right */}

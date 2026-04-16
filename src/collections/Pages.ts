@@ -8,10 +8,14 @@ import PerformanceAndApplicationCardSchema from '@/blocks/PerformanceAndApplicat
 import ProductAdvantageCardSchema from '@/blocks/ProductAdvantageCard/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfo01Schema from '@/blocks/ProductInfo01/schema'
+import ProductInfo02Schema from '@/blocks/ProductInfo02/schema'
+import ProductInfo03Schema from '@/blocks/ProductInfo03/schema'
+import ProductInfo04Schema from '@/blocks/ProductInfo04/schema'
 import ProductIntroSchema from '@/blocks/ProductIntro/schema'
 import QualityBenchhmarkSchema from '@/blocks/QualityBenchmarkCard/schema'
 import QueriesSchema from '@/blocks/Queries/schema'
 import ResultCardSchema from '@/blocks/ResultCard/schema'
+import SagarVideosSchema from '@/blocks/SagarVideos/schema'
 import TechnicalDatasheetSchema from '@/blocks/TechnicalDatashheet/schema'
 import TechnicalSpecificationsSchema from '@/blocks/TechnicalSpecification/schema'
 import { APIError } from '@/lib/apiError'
@@ -153,11 +157,17 @@ export const Pages: CollectionConfig = {
 
         // home page unique
         GetToKnowSchema,
+        ProductInfo02Schema,
         ResultCardSchema,
         FounderQuoteSchema,
 
         // about us page unique
         MissionVisionSchema,
+        ProductInfo03Schema,
+        SagarVideosSchema,
+
+        // Product Page
+        ProductInfo04Schema,
       ],
     },
   ],

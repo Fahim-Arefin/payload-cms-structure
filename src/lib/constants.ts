@@ -32,6 +32,7 @@ export const HERO_BLOCKS = 'Hero Blocks'
 export const COMMON = 'Common Blocks'
 export const HOME_PAGE = 'Home Page'
 export const ABOUT_US = 'About Us Page'
+export const PRODUCT_PAGE = 'Product Page'
 
 // Basic Hero Block
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
@@ -122,3 +123,27 @@ export const RESULT_CARD_SLUG_AND_TAG = 'result-card'
 export const RESULT_CARD_BLOCK_LABEL = 'Result Card'
 export const RESULT_CARD_CACHE_KEY = 'result-card-data'
 export const RESULT_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/result-card-block-thumbnail.jpg`
+
+// Founder Quote
+export const SAGAR_VIDEOS_SLUG_AND_TAG = 'sagar-videos'
+export const SAGAR_VIDEOS_BLOCK_LABEL = 'Sagar Videos'
+export const SAGAR_VIDEOS_CACHE_KEY = 'sagar-videos-data'
+export const SAGAR_VIDEOS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/sagar-videos-block-thumbnail.jpg`
+
+// Product info 02
+export const PRODUCT_INFO_02_SLUG_AND_TAG = 'product-info-02'
+export const PRODUCT_INFO_02_BLOCK_LABEL = 'Product Info 02'
+export const PRODUCT_INFO_02_CACHE_KEY = 'product-info-02-data'
+export const PRODUCT_INFO_02_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info-02-block-thumbnail.jpg`
+
+// Product info 03
+export const PRODUCT_INFO_03_SLUG_AND_TAG = 'product-info-03'
+export const PRODUCT_INFO_03_BLOCK_LABEL = 'Product Info 03'
+export const PRODUCT_INFO_03_CACHE_KEY = 'product-info-03-data'
+export const PRODUCT_INFO_03_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info-03-block-thumbnail.jpg`
+
+// Product info 03
+export const PRODUCT_INFO_04_SLUG_AND_TAG = 'product-info-04'
+export const PRODUCT_INFO_04_BLOCK_LABEL = 'Product Info 04'
+export const PRODUCT_INFO_04_CACHE_KEY = 'product-info-04-data'
+export const PRODUCT_INFO_04_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info-04-block-thumbnail.jpg`
