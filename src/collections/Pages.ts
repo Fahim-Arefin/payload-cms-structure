@@ -4,6 +4,7 @@ import ContactInfoCardSchema from '@/blocks/ContactInfoCard/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import GetToKnowSchema from '@/blocks/GetToKnow/schema'
 import MissionVisionSchema from '@/blocks/MissionVision/schema'
+import OfficeAddressSchema from '@/blocks/OfficeAddress/schema'
 import PerformanceAndApplicationCardSchema from '@/blocks/PerformanceAndApplicationCard/schema'
 import ProductAdvantageCardSchema from '@/blocks/ProductAdvantageCard/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
@@ -151,7 +152,6 @@ export const Pages: CollectionConfig = {
         ProductInfo01Schema,
         TechnicalDatasheetSchema,
         QualityBenchhmarkSchema,
-        ContactInfoCardSchema,
 
         // custom blocks
 
@@ -168,6 +168,10 @@ export const Pages: CollectionConfig = {
 
         // Product Page
         ProductInfo04Schema,
+
+        // Get In Touch
+        ContactInfoCardSchema,
+        OfficeAddressSchema,
       ],
     },
   ],

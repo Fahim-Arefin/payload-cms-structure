@@ -4,6 +4,7 @@ import {
   FOUNDER_QUOTE_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
   MISSION_VISION_SLUG_AND_TAG,
+  OFFICE_ADDRESS_SLUG_AND_TAG,
   PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG,
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
@@ -40,6 +41,7 @@ import SagarVideosBlock from './SagarVideos/SagarVideosBlock'
 import ProductInfo02Block from './ProductInfo02/ProductInfo02Block'
 import ProductInfo03Block from './ProductInfo03/ProductInfo03Block'
 import ProductInfo04Block from './ProductInfo04/ProductInfo04Block'
+import OfficeAddressBlock from './OfficeAddress/OfficeAddressBlock'
 
 type Params = Record<string, string>
 
@@ -83,6 +85,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <ProductInfo03Block key={block.id} block={block} params={params} />
     case PRODUCT_INFO_04_SLUG_AND_TAG:
       return <ProductInfo04Block key={block.id} block={block} params={params} />
+    case OFFICE_ADDRESS_SLUG_AND_TAG:
+      return <OfficeAddressBlock key={block.id} block={block} params={params} />
 
     default:
       return null

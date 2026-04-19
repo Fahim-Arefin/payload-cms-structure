@@ -1,7 +1,7 @@
 import type { Block } from 'payload'
 
 import {
-  COMMON,
+  GET_IN_TOUCH,
   CONTACT_INFO_CARD_BLOCK_LABEL,
   CONTACT_INFO_CARD_BLOCK_THUMBNAIL_URL,
   CONTACT_INFO_CARD_SLUG_AND_TAG,
@@ -23,7 +23,7 @@ const ContactInfoCardSchema: Block = {
     plural: CONTACT_INFO_CARD_BLOCK_LABEL,
   },
 
-  admin: { group: COMMON },
+  admin: { group: GET_IN_TOUCH },
 
   imageURL: CONTACT_INFO_CARD_BLOCK_THUMBNAIL_URL,
   imageAltText: `${CONTACT_INFO_CARD_BLOCK_LABEL} preview`,

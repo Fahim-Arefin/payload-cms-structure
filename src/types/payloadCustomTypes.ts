@@ -4,6 +4,7 @@ import {
   FOUNDER_QUOTE_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
   MISSION_VISION_SLUG_AND_TAG,
+  OFFICE_ADDRESS_SLUG_AND_TAG,
   PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG,
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
@@ -114,4 +115,9 @@ export type ProductInfo03BlockType = Extract<
 export type ProductInfo04BlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PRODUCT_INFO_04_SLUG_AND_TAG }
+>
+
+export type OfficeAddressBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof OFFICE_ADDRESS_SLUG_AND_TAG }
 >

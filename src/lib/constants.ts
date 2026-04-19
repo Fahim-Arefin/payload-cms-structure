@@ -33,6 +33,7 @@ export const COMMON = 'Common Blocks'
 export const HOME_PAGE = 'Home Page'
 export const ABOUT_US = 'About Us Page'
 export const PRODUCT_PAGE = 'Product Page'
+export const GET_IN_TOUCH = 'Get In Page'
 
 // Basic Hero Block
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
@@ -147,3 +148,9 @@ export const PRODUCT_INFO_04_SLUG_AND_TAG = 'product-info-04'
 export const PRODUCT_INFO_04_BLOCK_LABEL = 'Product Info 04'
 export const PRODUCT_INFO_04_CACHE_KEY = 'product-info-04-data'
 export const PRODUCT_INFO_04_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info-04-block-thumbnail.jpg`
+
+// Product info 03
+export const OFFICE_ADDRESS_SLUG_AND_TAG = 'office-address'
+export const OFFICE_ADDRESS_BLOCK_LABEL = 'Office Address'
+export const OFFICE_ADDRESS_CACHE_KEY = 'office-address-data'
+export const OFFICE_ADDRESS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/office-address-block-thumbnail.jpg`
