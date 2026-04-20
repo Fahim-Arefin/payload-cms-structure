@@ -16,6 +16,7 @@ import ProductInfo04Schema from '@/blocks/ProductInfo04/schema'
 import ProductIntroSchema from '@/blocks/ProductIntro/schema'
 import QualityBenchhmarkSchema from '@/blocks/QualityBenchmarkCard/schema'
 import QueriesSchema from '@/blocks/Queries/schema'
+import QueryFormSchema from '@/blocks/QueryForm/schema'
 import ResultCardSchema from '@/blocks/ResultCard/schema'
 import SagarVideosSchema from '@/blocks/SagarVideos/schema'
 import TechnicalDatasheetSchema from '@/blocks/TechnicalDatashheet/schema'
@@ -153,6 +154,7 @@ export const Pages: CollectionConfig = {
         ProductInfo01Schema,
         TechnicalDatasheetSchema,
         QualityBenchhmarkSchema,
+        QueryFormSchema,
 
         // custom blocks
 

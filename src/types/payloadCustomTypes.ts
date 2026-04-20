@@ -16,6 +16,7 @@ import {
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
+  QUERY_FORM_SLUG_AND_TAG,
   RESULT_CARD_SLUG_AND_TAG,
   SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
@@ -126,4 +127,9 @@ export type OfficeAddressBlockType = Extract<
 export type FeedbackFormBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof FEEDBACK_FORM_SLUG_AND_TAG }
+>
+
+export type QueryFormBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof QUERY_FORM_SLUG_AND_TAG }
 >

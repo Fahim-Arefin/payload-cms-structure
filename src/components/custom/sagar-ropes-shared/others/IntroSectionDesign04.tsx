@@ -25,12 +25,14 @@ function IntroSectionDesign04({
     gap-[12px] md:gap-[14px] lg:gap-[16px] xl:gap-[18px] 2xl:gap-[20px]`}
     >
       {/* tag */}
-      <div
-        className="font-manrope text-cyan text-xs xl:text-[14px] 2xl:text-[15px]  leading-[157.143%] tracking-[1.4px]
+      {block?.tag && (
+        <div
+          className="font-manrope text-cyan text-xs xl:text-[14px] 2xl:text-[15px]  leading-[157.143%] tracking-[1.4px]
                     px-2 py-1 bg-white-1 w-fit uppercase"
-      >
-        <LocalizedText en={block?.tag} bn={block?.tag} />
-      </div>
+        >
+          <LocalizedText en={block?.tag} bn={block?.tag} />
+        </div>
+      )}
 
       {/* heading */}
       <div>

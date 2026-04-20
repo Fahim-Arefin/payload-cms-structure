@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     resume: Resume;
     review: Review;
+    query: Query;
     'audit-logs': AuditLog;
     pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
@@ -83,6 +84,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     resume: ResumeSelect<false> | ResumeSelect<true>;
     review: ReviewSelect<false> | ReviewSelect<true>;
+    query: QuerySelect<false> | QuerySelect<true>;
     'audit-logs': AuditLogsSelect<false> | AuditLogsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -219,6 +221,24 @@ export interface Review {
   phone: string;
   rating: number;
   review: string;
+  status?: ('new' | 'reviewed' | 'published') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "query".
+ */
+export interface Query {
+  id: string;
+  name: string;
+  email: string;
+  companyName?: string | null;
+  position?: string | null;
+  query: string;
+  country: string;
+  countryDialCode?: string | null;
+  phone: string;
   status?: ('new' | 'reviewed' | 'published') | null;
   updatedAt: string;
   createdAt: string;
@@ -1462,6 +1482,91 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'quality-benchmark-card';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        /**
+         * Small label above heading. Max 40 characters.
+         */
+        tag?: string | null;
+        /**
+         * Main heading line 1. Max 90 characters.
+         */
+        heading1: string;
+        /**
+         * Optional. Must be inside Heading 1. Max 90.
+         */
+        heading1Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading1HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Secondary heading line. Max 90 characters.
+         */
+        heading2?: string | null;
+        /**
+         * Optional. Must be inside Heading 2. Max 90.
+         */
+        heading2Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading2HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Write the paragraph text (you can add multiple paragraphs).
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        ctaButtons?:
+          | {
+              /**
+               * Max 40 characters.
+               */
+              label: string;
+              /**
+               * Select the button style
+               */
+              style?: ('btn01' | 'btn02') | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink: string | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        showPatternDesign?: boolean | null;
+        showQueryForm?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'query-form';
       }
     | {
         uploadSessionId?: string | null;
@@ -2751,7 +2856,7 @@ export interface Page {
             }[]
           | null;
         showPatternDesign?: boolean | null;
-        showForm?: boolean | null;
+        showReviewForm?: boolean | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'feedback-form';
@@ -2783,6 +2888,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'review';
         value: string | Review;
+      } | null)
+    | ({
+        relationTo: 'query';
+        value: string | Query;
       } | null)
     | ({
         relationTo: 'audit-logs';
@@ -2912,6 +3021,23 @@ export interface ReviewSelect<T extends boolean = true> {
   phone?: T;
   rating?: T;
   review?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "query_select".
+ */
+export interface QuerySelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  companyName?: T;
+  position?: T;
+  query?: T;
+  country?: T;
+  countryDialCode?: T;
+  phone?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -3365,6 +3491,34 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'query-form'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              tag?: T;
+              heading1?: T;
+              heading1Highlighted?: T;
+              heading1HighlightColor?: T;
+              heading2?: T;
+              heading2Highlighted?: T;
+              heading2HighlightColor?: T;
+              description?: T;
+              ctaButtons?:
+                | T
+                | {
+                    label?: T;
+                    style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              showPatternDesign?: T;
+              showQueryForm?: T;
+              id?: T;
+              blockName?: T;
+            };
         'get-to-know-hero'?:
           | T
           | {
@@ -3805,7 +3959,7 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                   };
               showPatternDesign?: T;
-              showForm?: T;
+              showReviewForm?: T;
               id?: T;
               blockName?: T;
             };

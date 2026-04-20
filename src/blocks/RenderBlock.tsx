@@ -16,6 +16,7 @@ import {
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
+  QUERY_FORM_SLUG_AND_TAG,
   RESULT_CARD_SLUG_AND_TAG,
   SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
@@ -44,6 +45,7 @@ import ProductInfo03Block from './ProductInfo03/ProductInfo03Block'
 import ProductInfo04Block from './ProductInfo04/ProductInfo04Block'
 import OfficeAddressBlock from './OfficeAddress/OfficeAddressBlock'
 import FeedbackFormBlock from './FeedbackForm/FeedbackFormBlock'
+import QueryFormBlock from './QueryForm/QueryFormBlock'
 
 type Params = Record<string, string>
 
@@ -91,6 +93,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <OfficeAddressBlock key={block.id} block={block} params={params} />
     case FEEDBACK_FORM_SLUG_AND_TAG:
       return <FeedbackFormBlock key={block.id} block={block} params={params} />
+    case QUERY_FORM_SLUG_AND_TAG:
+      return <QueryFormBlock key={block.id} block={block} params={params} />
 
     default:
       return null

@@ -40,12 +40,12 @@ export function RatingField({
               key={ratingValue}
               type="button"
               onClick={() => onChange(ratingValue)}
-              className="transition hover:scale-105"
+              className="transition hover:scale-110"
               aria-label={`Rate ${ratingValue} out of ${max}`}
             >
               <Star
                 className={`h-6 w-6 md:h-7 md:w-7 xl:h-8 xl:w-8 2xl:h-10 2xl:w-10 ${
-                  active ? 'fill-cyan text-cyan' : 'fill-transparent text-gray-300'
+                  active ? 'fill-cyan text-cyan' : 'fill-white text-gray-300 '
                 }`}
               />
             </button>
