@@ -79,7 +79,15 @@ function OfficeAddressBlock({ block }: Props) {
           <IntroSectionDesign04
             block={block}
             position="left"
-            className={`md:col-span-4 ${
+            className={`hidden md:flex md:col-span-4 ${
+              block?.addressAlignment === 'left' ? 'order-2' : 'order-1'
+            }`}
+            justify="justify-start"
+          />
+          <IntroSectionDesign04
+            block={block}
+            position="center"
+            className={`flex md:hidden md:col-span-4 ${
               block?.addressAlignment === 'left' ? 'order-2' : 'order-1'
             }`}
             justify="justify-center"

@@ -30,10 +30,11 @@ export const AUDIT_LOG = 'Audit'
 // Group
 export const HERO_BLOCKS = 'Hero Blocks'
 export const COMMON = 'Common Blocks'
+export const FORMS = 'Forms'
 export const HOME_PAGE = 'Home Page'
 export const ABOUT_US = 'About Us Page'
 export const PRODUCT_PAGE = 'Product Page'
-export const GET_IN_TOUCH = 'Get In Page'
+export const GET_IN_TOUCH = 'Get In Touch Page'
 
 // Basic Hero Block
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
@@ -154,3 +155,9 @@ export const OFFICE_ADDRESS_SLUG_AND_TAG = 'office-address'
 export const OFFICE_ADDRESS_BLOCK_LABEL = 'Office Address'
 export const OFFICE_ADDRESS_CACHE_KEY = 'office-address-data'
 export const OFFICE_ADDRESS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/office-address-block-thumbnail.jpg`
+
+// Product info 03
+export const FEEDBACK_FORM_SLUG_AND_TAG = 'feedback-form'
+export const FEEDBACK_FORM_BLOCK_LABEL = 'Feedback Form'
+export const FEEDBACK_FORM_CACHE_KEY = 'feedback-form-data'
+export const FEEDBACK_FORM_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/feedback-form-block-thumbnail.jpg`

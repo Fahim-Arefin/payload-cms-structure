@@ -1,6 +1,7 @@
 import {
   BASIC_HERO_SLUG_AND_TAG,
   CONTACT_INFO_CARD_SLUG_AND_TAG,
+  FEEDBACK_FORM_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
   MISSION_VISION_SLUG_AND_TAG,
@@ -42,6 +43,7 @@ import ProductInfo02Block from './ProductInfo02/ProductInfo02Block'
 import ProductInfo03Block from './ProductInfo03/ProductInfo03Block'
 import ProductInfo04Block from './ProductInfo04/ProductInfo04Block'
 import OfficeAddressBlock from './OfficeAddress/OfficeAddressBlock'
+import FeedbackFormBlock from './FeedbackForm/FeedbackFormBlock'
 
 type Params = Record<string, string>
 
@@ -87,6 +89,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <ProductInfo04Block key={block.id} block={block} params={params} />
     case OFFICE_ADDRESS_SLUG_AND_TAG:
       return <OfficeAddressBlock key={block.id} block={block} params={params} />
+    case FEEDBACK_FORM_SLUG_AND_TAG:
+      return <FeedbackFormBlock key={block.id} block={block} params={params} />
 
     default:
       return null

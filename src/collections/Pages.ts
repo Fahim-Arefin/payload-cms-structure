@@ -1,6 +1,7 @@
 // currently working code
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import ContactInfoCardSchema from '@/blocks/ContactInfoCard/schema'
+import FeedbackFormSchema from '@/blocks/FeedbackForm/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import GetToKnowSchema from '@/blocks/GetToKnow/schema'
 import MissionVisionSchema from '@/blocks/MissionVision/schema'
@@ -172,6 +173,7 @@ export const Pages: CollectionConfig = {
         // Get In Touch
         ContactInfoCardSchema,
         OfficeAddressSchema,
+        FeedbackFormSchema,
       ],
     },
   ],

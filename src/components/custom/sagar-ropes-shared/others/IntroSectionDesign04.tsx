@@ -68,7 +68,7 @@ function IntroSectionDesign04({
       {/* Description section */}
       {hasDesc && (
         <div
-          className={`font-manrope text-dark-1 global-p3 ${position === 'left' ? 'text-justify' : position === 'right' ? 'text-justify' : 'text-center'}`}
+          className={`font-manrope text-dark-1 global-p3 ${position === 'left' ? 'text-justify' : position === 'right' ? 'text-justify' : 'text-center max-w-2xl'}`}
         >
           <LocalizedRichText en={block.description} bn={block.description} />
         </div>

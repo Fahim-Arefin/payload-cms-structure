@@ -1,6 +1,7 @@
 import {
   BASIC_HERO_SLUG_AND_TAG,
   CONTACT_INFO_CARD_SLUG_AND_TAG,
+  FEEDBACK_FORM_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
   MISSION_VISION_SLUG_AND_TAG,
@@ -120,4 +121,9 @@ export type ProductInfo04BlockType = Extract<
 export type OfficeAddressBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof OFFICE_ADDRESS_SLUG_AND_TAG }
+>
+
+export type FeedbackFormBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof FEEDBACK_FORM_SLUG_AND_TAG }
 >
