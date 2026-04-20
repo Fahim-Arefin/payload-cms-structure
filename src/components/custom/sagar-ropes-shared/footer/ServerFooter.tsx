@@ -349,7 +349,7 @@ async function ServerFooter() {
         >
           {/* facebook */}
           <Link
-            href={footer?.social?.facebookUrl}
+            href={footer?.social?.facebookUrl || ''}
             target="_blank"
             className="flex items-center justify-center group
           w-[30px] xl:w-[35px] 2xl:w-[40px] 
@@ -374,7 +374,7 @@ async function ServerFooter() {
           </Link>
           {/* whats app */}
           <Link
-            href={footer?.social?.whatsApp}
+            href={footer?.social?.whatsApp || ''}
             target="_blank"
             className="flex items-center justify-center group
           w-[30px] xl:w-[35px] 2xl:w-[40px] 
@@ -399,7 +399,7 @@ async function ServerFooter() {
           </Link>
           {/* At the rate app */}
           <Link
-            href={`mailto:${footer?.factorySection?.email}`}
+            href={`mailto:${footer?.factorySection?.email}` || ''}
             className="flex items-center justify-center group
           w-[30px] xl:w-[35px] 2xl:w-[40px] 
           h-[30px] xl:h-[35px] 2xl:h-[40px] 
@@ -423,7 +423,7 @@ async function ServerFooter() {
           </Link>
           {/* Linkdin */}
           <Link
-            href={footer?.social?.linkedinUrl}
+            href={footer?.social?.linkedinUrl || ''}
             target="_blank"
             className="flex items-center justify-center group
           w-[30px] xl:w-[35px] 2xl:w-[40px] 
@@ -498,7 +498,7 @@ async function ServerFooter() {
           >
             {/* facebook */}
             <Link
-              href={footer?.social?.facebookUrl}
+              href={footer?.social?.facebookUrl || ''}
               target="_blank"
               className="flex items-center justify-center group
           w-[30px] xl:w-[35px] 2xl:w-[40px] 
@@ -523,7 +523,7 @@ async function ServerFooter() {
             </Link>
             {/* whats app */}
             <Link
-              href={footer?.social?.whatsApp}
+              href={footer?.social?.whatsApp || ''}
               target="_blank"
               className="flex items-center justify-center group
           w-[30px] xl:w-[35px] 2xl:w-[40px] 
@@ -548,7 +548,7 @@ async function ServerFooter() {
             </Link>
             {/* At the rate app */}
             <Link
-              href={`mailto:${footer?.factorySection?.email}`}
+              href={`mailto:${footer?.factorySection?.email}` || ''}
               className="flex items-center justify-center group
           w-[30px] xl:w-[35px] 2xl:w-[40px] 
           h-[30px] xl:h-[35px] 2xl:h-[40px] 
@@ -572,7 +572,7 @@ async function ServerFooter() {
             </Link>
             {/* Linkdin */}
             <Link
-              href={footer?.social?.linkedinUrl}
+              href={footer?.social?.linkedinUrl || ''}
               target="_blank"
               className="flex items-center justify-center group
           w-[30px] xl:w-[35px] 2xl:w-[40px] 

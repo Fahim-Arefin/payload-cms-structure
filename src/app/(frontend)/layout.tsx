@@ -9,6 +9,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { Metadata } from 'next'
 import { Noto_Serif_Bengali } from 'next/font/google'
 import './styles.css'
+import { Toaster } from '@/components/ui/sonner'
 
 // const notoBengali = Noto_Sans_Bengali({
 //   subsets: ['bengali'],
@@ -195,7 +196,26 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <Providers initialLang="en">
           <main className="min-h-screen relative 3xl:max-w-[1925px] 3xl:mx-auto font-proxima">
             <ServerNavbar />
-            <div className="min-h-screen">{children}</div>
+            <div className="min-h-screen">
+              {children}
+              {/* <Toaster position="bottom-right" richColors closeButton /> */}
+              <Toaster
+                position="bottom-right"
+                richColors
+                closeButton
+                toastOptions={{
+                  classNames: {
+                    toast:
+                      'group rounded-xl border border-white/10 bg-[#0F172A]/95 text-white shadow-2xl backdrop-blur-md',
+                    title: 'font-manrope text-sm font-semibold text-white',
+                    description: 'font-manrope text-xs text-white/70',
+                    actionButton: 'bg-cyan text-white hover:bg-cyan/90 font-manrope',
+                    cancelButton: 'bg-white/10 text-white hover:bg-white/20 font-manrope',
+                    closeButton: 'border-white/10 bg-white/5 text-white hover:bg-white/10',
+                  },
+                }}
+              />
+            </div>
             {/* <CookieConsentBanner /> */}
             <div className="">
               <ServerFooter />

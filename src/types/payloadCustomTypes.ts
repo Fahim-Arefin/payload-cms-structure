@@ -1,9 +1,11 @@
 import {
   BASIC_HERO_SLUG_AND_TAG,
   CONTACT_INFO_CARD_SLUG_AND_TAG,
+  FEEDBACK_FORM_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
   MISSION_VISION_SLUG_AND_TAG,
+  OFFICE_ADDRESS_SLUG_AND_TAG,
   PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG,
   PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
@@ -14,6 +16,7 @@ import {
   PRODUCT_INTRO_SLUG_AND_TAG,
   QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
   QUERIES_SLUG_AND_TAG,
+  QUERY_FORM_SLUG_AND_TAG,
   RESULT_CARD_SLUG_AND_TAG,
   SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
@@ -114,4 +117,19 @@ export type ProductInfo03BlockType = Extract<
 export type ProductInfo04BlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PRODUCT_INFO_04_SLUG_AND_TAG }
+>
+
+export type OfficeAddressBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof OFFICE_ADDRESS_SLUG_AND_TAG }
+>
+
+export type FeedbackFormBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof FEEDBACK_FORM_SLUG_AND_TAG }
+>
+
+export type QueryFormBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof QUERY_FORM_SLUG_AND_TAG }
 >

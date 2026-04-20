@@ -70,6 +70,8 @@ export interface Config {
     users: User;
     media: Media;
     resume: Resume;
+    review: Review;
+    query: Query;
     'audit-logs': AuditLog;
     pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
@@ -81,6 +83,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     resume: ResumeSelect<false> | ResumeSelect<true>;
+    review: ReviewSelect<false> | ReviewSelect<true>;
+    query: QuerySelect<false> | QuerySelect<true>;
     'audit-logs': AuditLogsSelect<false> | AuditLogsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -201,6 +205,43 @@ export interface Resume {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "review".
+ */
+export interface Review {
+  id: string;
+  name: string;
+  email: string;
+  companyName?: string | null;
+  position?: string | null;
+  country: string;
+  countryDialCode?: string | null;
+  phone: string;
+  rating: number;
+  review: string;
+  status?: ('new' | 'reviewed' | 'published') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "query".
+ */
+export interface Query {
+  id: string;
+  name: string;
+  email: string;
+  companyName?: string | null;
+  position?: string | null;
+  query: string;
+  country: string;
+  countryDialCode?: string | null;
+  phone: string;
+  status?: ('new' | 'reviewed' | 'published') | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1454,7 +1495,6 @@ export interface Page {
          * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
          */
         sectionId?: string | null;
-        showPatternDesign?: boolean | null;
         /**
          * Small label above heading. Max 40 characters.
          */
@@ -1522,60 +1562,11 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
-        contactInfo?:
-          | {
-              /**
-               * Required. Upload a colored icon (PNG/SVG) with transparent background (no background). 1:1.
-               */
-              icon: string | Media;
-              iconOriginal?: (string | null) | Media;
-              pendingIconOriginal?: string | null;
-              pendingIconCrop?: string | null;
-              iconBlurDataURL?: string | null;
-              /**
-               * Required. Upload a white icon (PNG/SVG) with transparent background (no background). Used for dark/hover UI. 1:1.
-               */
-              iconWhite: string | Media;
-              iconWhiteOriginal?: (string | null) | Media;
-              pendingIconWhiteOriginal?: string | null;
-              pendingIconWhiteCrop?: string | null;
-              iconWhiteBlurDataURL?: string | null;
-              /**
-               * Visible text, such as phone number, email, office address, or page label.
-               */
-              displayText: string;
-              /**
-               * description (you can add multiple paragraphs).
-               */
-              description: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
-              /**
-               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
-               */
-              buttonLink?: (string | null) | Page;
-              /**
-               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
-               */
-              sectionId?: string | null;
-              id?: string | null;
-            }[]
-          | null;
+        showPatternDesign?: boolean | null;
+        showQueryForm?: boolean | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'contact-info-card';
+        blockType: 'query-form';
       }
     | {
         uploadSessionId?: string | null;
@@ -2558,6 +2549,318 @@ export interface Page {
         blockName?: string | null;
         blockType: 'product-info-04';
       }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        showPatternDesign?: boolean | null;
+        /**
+         * Small label above heading. Max 40 characters.
+         */
+        tag?: string | null;
+        /**
+         * Main heading line 1. Max 90 characters.
+         */
+        heading1: string;
+        /**
+         * Optional. Must be inside Heading 1. Max 90.
+         */
+        heading1Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading1HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Secondary heading line. Max 90 characters.
+         */
+        heading2?: string | null;
+        /**
+         * Optional. Must be inside Heading 2. Max 90.
+         */
+        heading2Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading2HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Write the paragraph text (you can add multiple paragraphs).
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        ctaButtons?:
+          | {
+              /**
+               * Max 40 characters.
+               */
+              label: string;
+              /**
+               * Select the button style
+               */
+              style?: ('btn01' | 'btn02') | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink: string | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        contactInfo?:
+          | {
+              /**
+               * Required. Upload a colored icon (PNG/SVG) with transparent background (no background). 1:1.
+               */
+              icon: string | Media;
+              iconOriginal?: (string | null) | Media;
+              pendingIconOriginal?: string | null;
+              pendingIconCrop?: string | null;
+              iconBlurDataURL?: string | null;
+              /**
+               * Required. Upload a white icon (PNG/SVG) with transparent background (no background). Used for dark/hover UI. 1:1.
+               */
+              iconWhite: string | Media;
+              iconWhiteOriginal?: (string | null) | Media;
+              pendingIconWhiteOriginal?: string | null;
+              pendingIconWhiteCrop?: string | null;
+              iconWhiteBlurDataURL?: string | null;
+              /**
+               * Visible text, such as phone number, email, office address, or page label.
+               */
+              displayText: string;
+              /**
+               * description (you can add multiple paragraphs).
+               */
+              description: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink?: (string | null) | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contact-info-card';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        /**
+         * Small label above heading. Max 40 characters.
+         */
+        tag?: string | null;
+        /**
+         * Main heading line 1. Max 90 characters.
+         */
+        heading1: string;
+        /**
+         * Optional. Must be inside Heading 1. Max 90.
+         */
+        heading1Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading1HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Secondary heading line. Max 90 characters.
+         */
+        heading2?: string | null;
+        /**
+         * Optional. Must be inside Heading 2. Max 90.
+         */
+        heading2Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading2HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Write the paragraph text (you can add multiple paragraphs).
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        ctaButtons?:
+          | {
+              /**
+               * Max 40 characters.
+               */
+              label: string;
+              /**
+               * Select the button style
+               */
+              style?: ('btn01' | 'btn02') | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink: string | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        showPatternDesign?: boolean | null;
+        /**
+         * Select the alignment of the map
+         */
+        addressAlignment?: ('left' | 'right') | null;
+        /**
+         * Paste Google Maps embed iframe code or only the embed src link
+         */
+        mapLink: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'office-address';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        /**
+         * Small label above heading. Max 40 characters.
+         */
+        tag?: string | null;
+        /**
+         * Main heading line 1. Max 90 characters.
+         */
+        heading1: string;
+        /**
+         * Optional. Must be inside Heading 1. Max 90.
+         */
+        heading1Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading1HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Secondary heading line. Max 90 characters.
+         */
+        heading2?: string | null;
+        /**
+         * Optional. Must be inside Heading 2. Max 90.
+         */
+        heading2Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading2HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Write the paragraph text (you can add multiple paragraphs).
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        ctaButtons?:
+          | {
+              /**
+               * Max 40 characters.
+               */
+              label: string;
+              /**
+               * Select the button style
+               */
+              style?: ('btn01' | 'btn02') | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink: string | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        showPatternDesign?: boolean | null;
+        showReviewForm?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'feedback-form';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2581,6 +2884,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'resume';
         value: string | Resume;
+      } | null)
+    | ({
+        relationTo: 'review';
+        value: string | Review;
+      } | null)
+    | ({
+        relationTo: 'query';
+        value: string | Query;
       } | null)
     | ({
         relationTo: 'audit-logs';
@@ -2695,6 +3006,41 @@ export interface ResumeSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "review_select".
+ */
+export interface ReviewSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  companyName?: T;
+  position?: T;
+  country?: T;
+  countryDialCode?: T;
+  phone?: T;
+  rating?: T;
+  review?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "query_select".
+ */
+export interface QuerySelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  companyName?: T;
+  position?: T;
+  query?: T;
+  country?: T;
+  countryDialCode?: T;
+  phone?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3145,13 +3491,12 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'contact-info-card'?:
+        'query-form'?:
           | T
           | {
               uploadSessionId?: T;
               backgroundColor?: T;
               sectionId?: T;
-              showPatternDesign?: T;
               tag?: T;
               heading1?: T;
               heading1Highlighted?: T;
@@ -3169,25 +3514,8 @@ export interface PagesSelect<T extends boolean = true> {
                     sectionId?: T;
                     id?: T;
                   };
-              contactInfo?:
-                | T
-                | {
-                    icon?: T;
-                    iconOriginal?: T;
-                    pendingIconOriginal?: T;
-                    pendingIconCrop?: T;
-                    iconBlurDataURL?: T;
-                    iconWhite?: T;
-                    iconWhiteOriginal?: T;
-                    pendingIconWhiteOriginal?: T;
-                    pendingIconWhiteCrop?: T;
-                    iconWhiteBlurDataURL?: T;
-                    displayText?: T;
-                    description?: T;
-                    buttonLink?: T;
-                    sectionId?: T;
-                    id?: T;
-                  };
+              showPatternDesign?: T;
+              showQueryForm?: T;
               id?: T;
               blockName?: T;
             };
@@ -3529,6 +3857,109 @@ export interface PagesSelect<T extends boolean = true> {
                         };
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'contact-info-card'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              showPatternDesign?: T;
+              tag?: T;
+              heading1?: T;
+              heading1Highlighted?: T;
+              heading1HighlightColor?: T;
+              heading2?: T;
+              heading2Highlighted?: T;
+              heading2HighlightColor?: T;
+              description?: T;
+              ctaButtons?:
+                | T
+                | {
+                    label?: T;
+                    style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              contactInfo?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    iconWhite?: T;
+                    iconWhiteOriginal?: T;
+                    pendingIconWhiteOriginal?: T;
+                    pendingIconWhiteCrop?: T;
+                    iconWhiteBlurDataURL?: T;
+                    displayText?: T;
+                    description?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'office-address'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              tag?: T;
+              heading1?: T;
+              heading1Highlighted?: T;
+              heading1HighlightColor?: T;
+              heading2?: T;
+              heading2Highlighted?: T;
+              heading2HighlightColor?: T;
+              description?: T;
+              ctaButtons?:
+                | T
+                | {
+                    label?: T;
+                    style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              showPatternDesign?: T;
+              addressAlignment?: T;
+              mapLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'feedback-form'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              tag?: T;
+              heading1?: T;
+              heading1Highlighted?: T;
+              heading1HighlightColor?: T;
+              heading2?: T;
+              heading2Highlighted?: T;
+              heading2HighlightColor?: T;
+              description?: T;
+              ctaButtons?:
+                | T
+                | {
+                    label?: T;
+                    style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              showPatternDesign?: T;
+              showReviewForm?: T;
               id?: T;
               blockName?: T;
             };

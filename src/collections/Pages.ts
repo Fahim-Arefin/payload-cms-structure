@@ -1,9 +1,11 @@
 // currently working code
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import ContactInfoCardSchema from '@/blocks/ContactInfoCard/schema'
+import FeedbackFormSchema from '@/blocks/FeedbackForm/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import GetToKnowSchema from '@/blocks/GetToKnow/schema'
 import MissionVisionSchema from '@/blocks/MissionVision/schema'
+import OfficeAddressSchema from '@/blocks/OfficeAddress/schema'
 import PerformanceAndApplicationCardSchema from '@/blocks/PerformanceAndApplicationCard/schema'
 import ProductAdvantageCardSchema from '@/blocks/ProductAdvantageCard/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
@@ -14,6 +16,7 @@ import ProductInfo04Schema from '@/blocks/ProductInfo04/schema'
 import ProductIntroSchema from '@/blocks/ProductIntro/schema'
 import QualityBenchhmarkSchema from '@/blocks/QualityBenchmarkCard/schema'
 import QueriesSchema from '@/blocks/Queries/schema'
+import QueryFormSchema from '@/blocks/QueryForm/schema'
 import ResultCardSchema from '@/blocks/ResultCard/schema'
 import SagarVideosSchema from '@/blocks/SagarVideos/schema'
 import TechnicalDatasheetSchema from '@/blocks/TechnicalDatashheet/schema'
@@ -151,7 +154,7 @@ export const Pages: CollectionConfig = {
         ProductInfo01Schema,
         TechnicalDatasheetSchema,
         QualityBenchhmarkSchema,
-        ContactInfoCardSchema,
+        QueryFormSchema,
 
         // custom blocks
 
@@ -168,6 +171,11 @@ export const Pages: CollectionConfig = {
 
         // Product Page
         ProductInfo04Schema,
+
+        // Get In Touch
+        ContactInfoCardSchema,
+        OfficeAddressSchema,
+        FeedbackFormSchema,
       ],
     },
   ],
