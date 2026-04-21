@@ -27,11 +27,14 @@ jobs:
               ENV="staging"
             fi
 
+            PNPM_BIN="/home/sagarrope/.nvm/versions/node/v24.11.0/bin/pnpm"
+            [ -x "$PNPM_BIN" ] || { echo "pnpm not executable at $PNPM_BIN"; exit 1; }
+
             echo "Deploying environment: $ENV (branch: ${{ github.ref_name }})"
 
             cd "$HOME/projects/sagarrope-$ENV" && \
             git pull origin "$ENV" && \
-            pnpm i --frozen-lockfile && \
-            pnpm build && \
+            "$PNPM_BIN" i --frozen-lockfile && \
+            "$PNPM_BIN" build && \
             pm2 reload "sagarrope-$ENV" && \
             pm2 status
