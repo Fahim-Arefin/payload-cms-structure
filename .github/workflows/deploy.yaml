@@ -17,6 +17,7 @@ jobs:
           host: ${{ secrets.SAGARROPE_SERVER_IP }}
           username: ${{ secrets.SAGARROPE_SERVER_USERNAME }}
           password: ${{ secrets.SAGARROPE_SERVER_PASSWORD }}
+          port: ${{ secrets.SAGARROPE_SERVER_PORT }}
           script: |
             set -e
 
