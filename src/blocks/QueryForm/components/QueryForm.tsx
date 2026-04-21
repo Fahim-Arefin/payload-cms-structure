@@ -179,7 +179,7 @@ function QueryForm() {
     try {
       setIsSubmitting(true)
 
-      const res = await fetch('/api/query', {
+      const res = await fetch('/api/query-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
