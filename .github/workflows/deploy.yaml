@@ -1,9 +1,9 @@
-name: Deploy ShantaLife (SSH)
+name: Deploy SagarRope (SSH)
 
 on:
   push:
     branches:
-      - main
+      # - main
       - staging
 
 jobs:
@@ -14,9 +14,9 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.SHANTA_SERVER_IP }}
-          username: ${{ secrets.SHANTA_SERVER_USERNAME }}
-          password: ${{ secrets.SHANTA_SERVER_PASSWORD }}
+          host: ${{ secrets.SAGARROPE_SERVER_IP }}
+          username: ${{ secrets.SAGARROPE_SERVER_USERNAME }}
+          password: ${{ secrets.SAGARROPE_SERVER_PASSWORD }}
           script: |
             set -e
 
@@ -28,4 +28,9 @@ jobs:
 
             echo "Deploying environment: $ENV (branch: ${{ github.ref_name }})"
 
-            ./.bin/deploy-shantalife "$ENV"
+            cd "$HOME/projects/sagarrope-$ENV" && \
+            git pull origin "$ENV" && \
+            pnpm i --frozen-lockfile && \
+            pnpm build && \
+            pm2 reload "sagarrope-$ENV" && \
+            pm2 status
