@@ -56,6 +56,10 @@ export function CountrySelectField({
         const response = await fetch(
           'https://restcountries.com/v3.1/all?fields=name,cca2,idd,flag,flags',
         )
+
+        if (!response.ok) {
+          throw new Error(`Country API failed: ${response.status}`)
+        }
         const data = await response.json()
 
         const mapped: CountryOption[] = data

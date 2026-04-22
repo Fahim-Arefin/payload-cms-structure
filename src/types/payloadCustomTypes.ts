@@ -22,6 +22,7 @@ import {
   SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
+  TESTING_PILLARS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -138,4 +139,9 @@ export type QueryFormBlockType = Extract<
 export type CustomerfeedbackBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CUSTOMER_FEEDBACK_SLUG_AND_TAG }
+>
+
+export type TestingPillarsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof TESTING_PILLARS_SLUG_AND_TAG }
 >

@@ -667,6 +667,7 @@ import {
   SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
+  TESTING_PILLARS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -789,6 +790,12 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'videos',
       mediaFields: ['thumbnail'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: TESTING_PILLARS_SLUG_AND_TAG,
+      arrayKey: 'testingPillars',
+      mediaFields: ['icon', 'image'],
+    },
   ],
 
   // Blocks with nested array (media that inside another array) that contain media fields
@@ -806,6 +813,13 @@ export const mediaHooks = withMediaLifecycle({
       blockType: PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
       groupKey: 'cards',
       arrayKey: 'icons',
+      mediaFields: ['icon'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: TESTING_PILLARS_SLUG_AND_TAG,
+      groupKey: 'testingPillars',
+      arrayKey: 'items',
       mediaFields: ['icon'],
     },
   ],

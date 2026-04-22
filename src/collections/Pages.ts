@@ -22,6 +22,7 @@ import ResultCardSchema from '@/blocks/ResultCard/schema'
 import SagarVideosSchema from '@/blocks/SagarVideos/schema'
 import TechnicalDatasheetSchema from '@/blocks/TechnicalDatashheet/schema'
 import TechnicalSpecificationsSchema from '@/blocks/TechnicalSpecification/schema'
+import TestingPillarsSchema from '@/blocks/TestingPillars/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -156,6 +157,7 @@ export const Pages: CollectionConfig = {
         TechnicalDatasheetSchema,
         QualityBenchhmarkSchema,
         QueryFormSchema,
+        TestingPillarsSchema,
 
         // custom blocks
 

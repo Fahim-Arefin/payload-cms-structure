@@ -168,8 +168,14 @@ export const QUERY_FORM_BLOCK_LABEL = 'Query Form'
 export const QUERY_FORM_CACHE_KEY = 'query-form-data'
 export const QUERY_FORM_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/query-form-block-thumbnail.jpg`
 
-// Product info 03
+// customer-feedback
 export const CUSTOMER_FEEDBACK_SLUG_AND_TAG = 'customer-feedback'
 export const CUSTOMER_FEEDBACK_BLOCK_LABEL = 'Customer Review'
 export const CUSTOMER_FEEDBACK_CACHE_KEY = 'customer-feedback-data'
 export const CUSTOMER_FEEDBACK_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/customer-feedback-block-thumbnail.jpg`
+
+// testing-pillars
+export const TESTING_PILLARS_SLUG_AND_TAG = 'testing-pillars'
+export const TESTING_PILLARS_BLOCK_LABEL = 'Testing Pillars'
+export const TESTING_PILLARS_CACHE_KEY = 'testing-pillars-data'
+export const TESTING_PILLARS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/testing-pillars-block-thumbnail.jpg`

@@ -77,7 +77,11 @@ function IntroSectionDesign04({
       )}
       {/* right */}
       {block?.ctaButtons && block?.ctaButtons?.length > 0 && (
-        <div>
+        <div
+          className={`flex flex-wrap w-full
+         gap-1.5 lg:gap-2 xl:gap-3 2xl:gap-4 ${position === 'left' ? 'justify-start' : position === 'center' ? 'justify-center' : 'justify-end'} items-center
+        `}
+        >
           <CtaButtons item={block?.ctaButtons} />
         </div>
       )}
