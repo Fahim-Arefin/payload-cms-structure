@@ -25,6 +25,7 @@ function TestingPillarsBlock({ block }: Props) {
               <TestingPilarCard
                 key={index}
                 data={item}
+                index={index}
                 //   className="
                 //   border-2 border-dashed border-cyan bg-white-2 hover:bg-cyan
                 //   h-fit md:h-[130px] lg:h-[160px] xl:h-[230px] 2xl:h-[250px]
