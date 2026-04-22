@@ -1,6 +1,7 @@
 // currently working code
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import ContactInfoCardSchema from '@/blocks/ContactInfoCard/schema'
+import CustomerFeedbackSchema from '@/blocks/CustomerFeedback/schema'
 import FeedbackFormSchema from '@/blocks/FeedbackForm/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import GetToKnowSchema from '@/blocks/GetToKnow/schema'
@@ -162,6 +163,7 @@ export const Pages: CollectionConfig = {
         GetToKnowSchema,
         ProductInfo02Schema,
         ResultCardSchema,
+        CustomerFeedbackSchema,
         FounderQuoteSchema,
 
         // about us page unique
