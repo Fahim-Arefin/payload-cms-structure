@@ -139,6 +139,7 @@ type Props<T> = {
   className?: string
   contentClassName?: string
   itemClassName?: string
+  carousalClassName?: string
   paginationClassName?: string
 
   // ✅ new optional navigation props
@@ -158,8 +159,8 @@ export default function CardsCarousel<T>({
   className,
   contentClassName,
   itemClassName,
+  carousalClassName,
   paginationClassName,
-
   showNavigation = false,
   navigationWrapperClassName,
   prevButtonClassName,
@@ -202,7 +203,7 @@ export default function CardsCarousel<T>({
         setApi={setApi}
         opts={{ align, loop }}
         plugins={autoplayPlugin ? [autoplayPlugin] : []}
-        className="relative w-full"
+        className={`relative w-full ${carousalClassName}`}
       >
         <CarouselContent className={contentClassName}>
           {items.map((item, idx) => (
@@ -243,7 +244,7 @@ export default function CardsCarousel<T>({
               paginationClassName ?? 'bottom-0',
             ].join(' ')}
           >
-            <div className="flex items-center gap-1 lg:gap-1.5 xl:gap-2">
+            <div className="flex items-center gap-0.5 xl:gap-1">
               {Array.from({ length: count || items.length }).map((_, idx) => {
                 const isActive = idx === activeIndex
                 return (
@@ -255,8 +256,8 @@ export default function CardsCarousel<T>({
                     className={[
                       'relative h-[4px] transition-all duration-500 ease-out md:h-[5px] lg:h-[6px] xl:h-[7px] 2xl:h-[8px]',
                       isActive
-                        ? 'w-[30px] md:w-[40px] lg:w-[50px] xl:w-[60px] 2xl:w-[80px]'
-                        : 'w-[13px] md:w-[16px] lg:w-[20px] xl:w-[26px]',
+                        ? 'w-[15px] md:w-[20px] lg:w-[30px] xl:w-[40px] 2xl:w-[50px]'
+                        : 'w-[8px] md:w-[10px] lg:w-[12px] xl:w-[14x] 2xl:w-[16px]',
                       isActive ? 'bg-cyan' : 'bg-cyan/40 hover:bg-cyan/70',
                     ].join(' ')}
                   />

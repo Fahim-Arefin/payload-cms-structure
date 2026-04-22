@@ -20,7 +20,7 @@ function ImageBanner({ block, reviews }: Props) {
     : 0
 
   return (
-    <div className="relative w-full aspect-[954/860]">
+    <div className="relative w-full aspect-[954/860] group overflow-hidden">
       {/* image */}
       {typeof block?.bannerImage === 'object' && block?.bannerImage?.url && (
         <Image
@@ -31,30 +31,29 @@ function ImageBanner({ block, reviews }: Props) {
           placeholder="blur"
           blurDataURL={block?.bannerImageBlurDataURL || ''}
           quality={90}
-          className="object-cover object-center inset-0 w-full h-full z-10"
+          className="object-cover object-center inset-0 w-full h-full z-10 group-hover:scale-[115%] transition-all duration-300 ease-in-out"
         />
       )}
 
       {/* title */}
       <div
         className="absolute inset-x-0 top-0 z-20 global-h2 font-proxima font-bold text-white-1 text-center
-          xl:px-[22px] 2xl:px-[35px]
-          xl:py-[38px] 2xl:py-[50px]"
+          px-[12px] lg:px-[16px] xl:px-[22px] 2xl:px-[35px]
+          py-[16px] lg:py-[22px] xl:py-[38px] 2xl:py-[50px]"
       >
         {block?.bannerTitle}
       </div>
       {/* subtitle */}
       <div
         className="absolute bottom-0 right-0 bg-white-2 z-20
-          xl:pl-3 2xl:pl-4 
-          xl:pt-3 2xl:pt-4"
+          pl-1.5 lg:pl-2 xl:pl-3 2xl:pl-4 
+          pt-1.5 lg:pt-2 xl:pt-3 2xl:pt-4"
       >
         <div
           className="bg-cyan 
-            xl:p-3 
-            2xl:p-4 
-            xl:w-[165px] 2xl:w-[200px]
-            xl:h-[165px] 2xl:h-[200px]"
+            p-1.5 lg:p-2 xl:p-3 2xl:p-4 
+            w-[130px] lg:w-[150px] xl:w-[165px] 2xl:w-[200px]
+            h-[100px] lg:h-[130px] xl:h-[165px] 2xl:h-[200px]"
         >
           <div className="flex flex-col justify-around h-full">
             <div className="font-proxima font-bold global-h2 text-white-1">
@@ -72,7 +71,7 @@ function ImageBanner({ block, reviews }: Props) {
                   sizes="100vw"
                   placeholder="blur"
                   blurDataURL={Stars?.blurDataURL}
-                  className="w-fit h-fit"
+                  className="w-fit h-fit "
                 />
               </div>
               <div className="font-manrope font-light global-p5 text-white-1">
