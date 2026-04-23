@@ -6,17 +6,17 @@ import React from 'react'
 type Props = {
   data: NonNullable<TestingPillarsBlockType['testingPillars']>[number]
   className?: string
-  index?: number
 }
 
-function TestingPilarCard({ data, className, index }: Props) {
+function TestingPilarCard({ data, className }: Props) {
   return (
     <div
-      className="group/testCard w-full bg-white-2
+      className={`group/testCard w-full bg-white-2 md:hover:scale-105 lg:hover:scale-110 transition-all duration-500 ease-in-out 
     px-4 lg:px-7 xl:px-9 2xl:px-11
     py-6 lg:py-10 xl:py-12 2xl:py-16
     space-y-3 md:space-y-5 lg:space-y-7 xl:space-y-9 2xl:space-y-11
-    "
+    hover:border-2 hover:border-dashed hover:border-[#686893] 
+    ${className} `}
     >
       {/* top */}
       <div
@@ -52,7 +52,6 @@ function TestingPilarCard({ data, className, index }: Props) {
 
               <div className="relative z-10 w-full aspect-[5/4] group-hover/testCard:scale-90 transition-all delay-150 duration-300 ease-out">
                 <Image
-                  key={index}
                   src={data?.icon?.url}
                   alt="icon"
                   fill
@@ -80,22 +79,60 @@ function TestingPilarCard({ data, className, index }: Props) {
       </div>
 
       {/* below*/}
-      <div>
-        <div>image</div>
+      <div
+        className="grid grid-cols-1 md:grid-cols-12 xl:grid-cols-2 
+        md:pr-[20px] lg:pr-[20px] xl:pr-[34px] 2xl:pr-[50px]
+        md:pl-[68px] lg:pl-[82px] xl:pl-[101px] 2xl:pl-[113px]
+        gap-3 lg:gap-5 xl:gap-6 2xl:gap-8"
+      >
+        {typeof data?.image === 'object' && data?.image?.url && (
+          <div className="col-span-1 md:col-span-4 xl:col-span-1 relative w-full aspect-[327/211]">
+            <Image
+              src={data?.image?.url}
+              alt="image"
+              fill
+              sizes="100vw"
+              className="object-cover object-center w-full h-full"
+              placeholder={data?.imageBlurDataURL ? 'blur' : 'empty'}
+              blurDataURL={data?.imageBlurDataURL || undefined}
+            />
+          </div>
+        )}
         {/* arrays */}
-        {data?.items &&
-          data?.items?.length > 0 &&
-          data?.items?.map((item, index) => (
-            <div>
-              <div>icon</div>
-              <div>
-                <div>{item?.title}</div>
-                <div>
-                  <LocalizedRichText en={item?.description} bn={item?.description} />
+        <div className="col-span-1 md:col-span-8 xl:col-span-1 space-y-2 md:space-y-1 lg:space-y-2 xl:space-y-3 2xl:space-y-4">
+          {data?.items &&
+            data?.items?.length > 0 &&
+            data?.items?.map((item, index) => (
+              <div
+                key={index}
+                className="flex space-x-2 md:space-x-1 lg:space-x-2 xl:space-x-3 2xl:space-x-4
+                "
+              >
+                {typeof item?.icon === 'object' && item?.icon?.url && (
+                  <div className="min-w-[20px] md:min-w-[15px] lg:min-w-[20px] xl:min-w-[25px] 2xl:min-w-[30px] mt-0.5 lg:mt-1">
+                    <div className="relative  w-full aspect-square">
+                      <Image
+                        key={index}
+                        src={item?.icon?.url}
+                        alt="image"
+                        fill
+                        sizes="100vw"
+                        className="object-cover object-center w-full h-full"
+                        placeholder={item?.iconBlurDataURL ? 'blur' : 'empty'}
+                        blurDataURL={item?.iconBlurDataURL || undefined}
+                      />
+                    </div>
+                  </div>
+                )}
+                <div className="space-y-0.5 2xl:space-y-1">
+                  <div className="font-proxima font-bold global-h6 text-dark-1">{item?.title}</div>
+                  <div className="font-manrope global-p4 text-dark-3 text-justify">
+                    <LocalizedRichText en={item?.description} bn={item?.description} />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
     </div>
   )
