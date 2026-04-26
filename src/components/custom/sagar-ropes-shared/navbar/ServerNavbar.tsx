@@ -1,9 +1,9 @@
 // src/components/navbar/ServerNavbar.tsx
 import React from 'react'
 
-import { GLOBAL_NAVBAR_SLUG_AND_TAG } from '@/lib/constants'
+import { GLOBAL_FOOTER_SLUG_AND_TAG, GLOBAL_NAVBAR_SLUG_AND_TAG } from '@/lib/constants'
 import { getGlobalCached } from '@/lib/cachedGlobals'
-import type { Navbar } from '@/payload-types'
+import type { Footer, Navbar } from '@/payload-types'
 import ClientNavbar from './ClientNavbar'
 
 // ----- Plain, serializable types -----
@@ -117,6 +117,7 @@ function mapItems(items: any[] | undefined | null): NavItem[] {
 export default async function ServerNavbar() {
   // 🔒 Tag-cached global fetches (depth 2 to hydrate relationships)
   const navbarRes = await getGlobalCached<Navbar>(GLOBAL_NAVBAR_SLUG_AND_TAG, 1)
+  const footer = await getGlobalCached<Footer>(GLOBAL_FOOTER_SLUG_AND_TAG, 1)
 
   const navbarData: NavbarData = {
     branding: {
@@ -127,5 +128,7 @@ export default async function ServerNavbar() {
     },
   }
 
-  return <ClientNavbar data={navbarData} blur={navbarRes?.logoBlurDataURL || ''} />
+  return (
+    <ClientNavbar data={navbarData} blur={navbarRes?.logoBlurDataURL || ''} footerData={footer} />
+  )
 }

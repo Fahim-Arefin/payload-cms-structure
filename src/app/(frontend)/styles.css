@@ -341,3 +341,25 @@ html {
 .card02-dash-hover:hover::after {
   opacity: 1;
 }
+
+@keyframes askBtnIconDropLeft {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+
+  38% {
+    transform: translate(-120%, 120%);
+    opacity: 0;
+  }
+
+  39% {
+    transform: translate(-120%, 120%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}

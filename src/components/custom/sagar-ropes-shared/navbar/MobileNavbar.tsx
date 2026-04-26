@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import type { NavbarData, NavItem } from './ServerNavbar'
 import LocalizedText from '../../shared/LocalizedText'
+import NavbarDialog from './NavbarDialog'
 
 type Props = {
   data: NavbarData
@@ -230,6 +231,30 @@ function MobileNavbar({ data, blur }: Props) {
                 </div>
               )
             })}
+
+            {/* demo dialog button */}
+            <div className="mt-6">
+              <NavbarDialog
+                trigger={
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="
+                    w-full
+                    border-[2px] border-dark-3
+                    bg-transparent
+                    px-4 py-3
+                    font-proxima text-sm font-bold uppercase
+                    text-dark-3
+                    transition-all duration-300
+                    hover:bg-dark-3 hover:text-white-1
+                  "
+                  >
+                    Open Demo Dialog
+                  </button>
+                }
+              />
+            </div>
           </nav>
         </div>
       </div>
