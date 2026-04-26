@@ -238,7 +238,7 @@
 'use client'
 
 import React from 'react'
-import { NavbarData } from './ServerNavbar'
+import { NavbarData, SearchSuggestion } from './ServerNavbar'
 import Link from 'next/link'
 import LocalizedText from '../../shared/LocalizedText'
 import { Button } from '@/components/ui/button'
@@ -246,7 +246,7 @@ import { usePathname } from 'next/navigation'
 import NavbarActions from './NavbarActions'
 import { Footer } from '@/payload-types'
 
-type Props = { data: NavbarData; footerData: Footer }
+type Props = { data: NavbarData; footerData: Footer; suggestions: SearchSuggestion[] }
 
 const ChevronDown = ({ className = '' }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" className={className}>
@@ -260,7 +260,7 @@ const ChevronDown = ({ className = '' }: { className?: string }) => (
   </svg>
 )
 
-function Menu({ data, footerData }: Props) {
+function Menu({ data, footerData, suggestions }: Props) {
   const allItems = data?.desktop?.items
   const topItems = allItems.filter((item) => item.isTop === 'yes')
   const mainItems = allItems.filter((item) => item.isTop !== 'yes')
@@ -413,7 +413,7 @@ function Menu({ data, footerData }: Props) {
               )
             })}
 
-            <NavbarActions footerData={footerData} />
+            <NavbarActions footerData={footerData} suggestions={suggestions} />
           </div>
         </div>
       </div>

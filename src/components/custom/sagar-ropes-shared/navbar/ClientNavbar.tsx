@@ -65,16 +65,16 @@
 
 // export default ClientNavbar
 import React from 'react'
-import { NavbarData } from './ServerNavbar'
+import { NavbarData, SearchSuggestion } from './ServerNavbar'
 import Image from 'next/image'
 import Link from 'next/link'
 import Menu from './Menu'
 import MobileNavbar from './MobileNavbar'
 import { Footer } from '@/payload-types'
 
-type Props = { data: NavbarData; blur: string; footerData: Footer }
+type Props = { data: NavbarData; blur: string; footerData: Footer; suggestions: SearchSuggestion[] }
 
-function ClientNavbar({ data, blur, footerData }: Props) {
+function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
   const logoUrl =
     data.branding.logo?.url ?? `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/logo.png`
 
@@ -123,7 +123,7 @@ function ClientNavbar({ data, blur, footerData }: Props) {
         </div>
         {/* border border-black */}
         <div className=" grow ">
-          <Menu data={data} footerData={footerData} />
+          <Menu data={data} footerData={footerData} suggestions={suggestions} />
         </div>
       </div>
     </>

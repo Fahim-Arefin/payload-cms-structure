@@ -23,9 +23,11 @@ import NavbarDialog from './NavbarDialog'
 import SearchBarSection from './SearchBarSection'
 import { default as Pattern02 } from '/public/assets/images/BOpattern.png'
 import Blur4 from '/public/assets/images/Blur4.png'
+import { SearchSuggestion } from './ServerNavbar'
 
 type Props = {
   footerData: Footer
+  suggestions: SearchSuggestion[]
 }
 
 function SearchIcon() {
@@ -52,7 +54,7 @@ function SearchIcon() {
   )
 }
 
-function NavbarActions({ footerData }: Props) {
+function NavbarActions({ footerData, suggestions }: Props) {
   const footer = footerData
   return (
     <Sheet>
@@ -166,8 +168,8 @@ function NavbarActions({ footerData }: Props) {
           </div>
 
           {/* searchbar */}
-          <div>
-            <SearchBarSection />
+          <div className="relative z-[9999]">
+            <SearchBarSection suggestions={suggestions} />
           </div>
           {/* Query Dialog */}
           <div className="relative z-30 flex items-center space-x-7">

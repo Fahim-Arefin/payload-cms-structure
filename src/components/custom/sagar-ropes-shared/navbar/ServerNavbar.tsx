@@ -5,6 +5,7 @@ import { GLOBAL_FOOTER_SLUG_AND_TAG, GLOBAL_NAVBAR_SLUG_AND_TAG } from '@/lib/co
 import { getGlobalCached } from '@/lib/cachedGlobals'
 import type { Footer, Navbar } from '@/payload-types'
 import ClientNavbar from './ClientNavbar'
+import { pagesListTag } from '@/lib/cacheTags'
 
 // ----- Plain, serializable types -----
 export type NavItem = {
@@ -114,10 +115,76 @@ function mapItems(items: any[] | undefined | null): NavItem[] {
   })
 }
 
+// all page searching logic below
+// =====================================================================
+// =====================================================================
+export type SearchSuggestion = {
+  label: string
+  url: string
+}
+
+const slugToUrl = (slug: string): string => {
+  if (!slug || slug === 'index') return '/'
+  return `/${slug.replace(/^\/+/, '')}`
+}
+
+async function fetchSearchSuggestions(): Promise<SearchSuggestion[]> {
+  const baseURL = process.env.API_URL ?? 'http://localhost:3000'
+
+  const url = new URL('/api/pages', baseURL)
+
+  // only published pages
+  url.searchParams.set('where[_status][equals]', 'published')
+
+  // no relational populate
+  url.searchParams.set('depth', '0')
+
+  // limit number of pages
+  url.searchParams.set('limit', '200')
+
+  // ✅ CORRECT WAY: tell Payload to include only `name` and `slug`
+  url.searchParams.set('select[name]', 'true')
+  url.searchParams.set('select[slug]', 'true')
+
+  const res = await fetch(url.toString(), {
+    next: { tags: [pagesListTag] },
+  })
+
+  if (!res.ok) {
+    console.error('Failed to fetch pages for search bar', res.status, await res.text())
+    return []
+  }
+
+  const json = (await res.json()) as { docs?: any[] }
+
+  const out: SearchSuggestion[] = []
+
+  for (const page of json.docs ?? []) {
+    const rawSlug = page?.slug
+    const rawName = page?.name
+
+    const slug = (rawSlug ?? '').toString().trim()
+    const name = (rawName ?? '').toString().trim()
+
+    if (!slug || !name) continue
+
+    out.push({
+      label: name, // what user sees & searches
+      url: slugToUrl(slug), // actual route
+    })
+  }
+
+  return out
+}
+
+// =====================================================================
+// =====================================================================
+
 export default async function ServerNavbar() {
   // 🔒 Tag-cached global fetches (depth 2 to hydrate relationships)
   const navbarRes = await getGlobalCached<Navbar>(GLOBAL_NAVBAR_SLUG_AND_TAG, 1)
   const footer = await getGlobalCached<Footer>(GLOBAL_FOOTER_SLUG_AND_TAG, 1)
+  const suggestions = await fetchSearchSuggestions()
 
   const navbarData: NavbarData = {
     branding: {
@@ -129,6 +196,11 @@ export default async function ServerNavbar() {
   }
 
   return (
-    <ClientNavbar data={navbarData} blur={navbarRes?.logoBlurDataURL || ''} footerData={footer} />
+    <ClientNavbar
+      data={navbarData}
+      blur={navbarRes?.logoBlurDataURL || ''}
+      footerData={footer}
+      suggestions={suggestions}
+    />
   )
 }
