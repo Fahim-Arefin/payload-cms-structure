@@ -393,7 +393,7 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
           )}
         </Link>
 
-        <button
+        {/* <button
           type="button"
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={() => setOpen((prev) => !prev)}
@@ -413,6 +413,29 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
             className={`absolute h-[2px] w-6 bg-current transition-all duration-300 ${
               open ? '-rotate-45' : 'translate-y-[7px]'
             }`}
+          />
+        </button> */}
+        <button
+          type="button"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          onClick={() => setOpen((prev) => !prev)}
+          className="
+    relative flex h-10 w-10 items-center justify-center
+    transition-transform duration-300 ease-out
+    hover:scale-110
+  "
+        >
+          <Image
+            src="/assets/icons/burger.png"
+            alt=""
+            aria-hidden="true"
+            width={28}
+            height={28}
+            quality={90}
+            className="
+      h-7 w-7 object-contain
+      transition-transform duration-300 ease-out
+    "
           />
         </button>
       </div>
