@@ -151,7 +151,7 @@ export function CountrySelectField({
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent className="w-[var(--radix-popover-trigger-width)] rounded-none p-0">
+        <PopoverContent className="w-[var(--radix-popover-trigger-width)] rounded-none p-0 relative z-[10001]">
           <Command>
             <CommandInput placeholder="Search country..." className="font-manrope" />
             <CommandList>

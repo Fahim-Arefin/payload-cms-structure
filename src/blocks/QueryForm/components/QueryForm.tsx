@@ -50,7 +50,11 @@ export function validatePhoneNumber(phone: string, countryCode: string) {
   return undefined
 }
 
-function QueryForm() {
+type Props = {
+  className?: string
+}
+
+function QueryForm({ className }: Props) {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -244,11 +248,12 @@ function QueryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="grid grid-cols-2 gap-4 md:gap-3 xl:gap-4 2xl:gap-5 
+      className={`grid grid-cols-2 gap-4 md:gap-3 xl:gap-4 2xl:gap-5 
     bg-white border-2 border-cyan 
     px-4 lg:px-5 xl:px-7 2xl:px-8 
     py-4 lg:py-7 xl:py-11 2xl:py-12
-    "
+        ${className}
+    `}
     >
       <div className="col-span-2">
         <InputField

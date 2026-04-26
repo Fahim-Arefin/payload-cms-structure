@@ -38,9 +38,8 @@ const NoOverlayFullScreenDialogContent = React.forwardRef<
       ref={ref}
       className={cn(
         `
-         fixed inset-x-0 top-24 bottom-0 z-[10001]
-w-screen
-h-[calc(100vh-6rem)]
+         fixed inset-x-0 top-[60px] lg:top-[75px] xl:top-[80px] 2xl:top-[85px] bottom-0 z-[10001] w-screen
+          h-[calc(100vh-60px)] lg:h-[calc(100vh-75px)] xl:h-[calc(100vh-80px)] 2xl:h-[calc(100vh-85px)]
           translate-x-0 translate-y-0
           rounded-none border-none
           bg-white
@@ -55,7 +54,7 @@ h-[calc(100vh-6rem)]
     >
       {children}
 
-      <DialogPrimitive.Close
+      {/* <DialogPrimitive.Close
         className="
           absolute right-4 top-4
           rounded-sm opacity-70
@@ -66,7 +65,7 @@ h-[calc(100vh-6rem)]
       >
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
+      </DialogPrimitive.Close> */}
     </DialogPrimitive.Content>
   </DialogPrimitive.Portal>
 ))
@@ -90,8 +89,53 @@ function NavbarDialog({ trigger }: NavbarDialogProps) {
           </DialogHeader>
         </VisuallyHidden>
 
-        <div className="flex h-full items-center justify-center w-[30%] mx-auto">
-          <QueryForm />
+        {/* <div className="flex h-full items-center justify-center w-full md:w-[70%] lg:w-[50%] xl:w-[40%] 2xl:w-[35%] mx-auto">
+          <QueryForm className="relative z-[10001]" />
+        </div> */}
+        {/* <div className="relative flex h-full items-center justify-center w-full md:w-[70%] lg:w-[50%] xl:w-[40%] 2xl:w-[35%] mx-auto">
+          <DialogPrimitive.Close
+            className="
+        absolute right-2 xl:right-4 top-[60px] lg:top-[100px] xl:top-[70px] 2xl:top-[78px] z-[10002]
+        flex  items-center justify-center
+        rounded-sm
+        w-5 xl:w-6
+        h-5 xl:h-6
+        focus:outline-none
+        disabled:pointer-events-none
+        border border-white-3
+        transition-all duration-300 ease-in-out
+        hover:bg-cyan hover:text-white-1 hover:border-cyan
+      "
+          >
+            <X className="h-3 w-3 xl:h-4 xl:w-4" />
+            <span className="sr-only">Close</span>
+          </DialogPrimitive.Close>
+
+          <QueryForm className="relative z-[10001] " />
+        </div> */}
+        <div className="flex h-full w-full items-center justify-center overflow-y-auto">
+          <div className="relative w-full md:w-[70%] lg:w-[50%] xl:w-[40%] 2xl:w-[35%]">
+            <DialogPrimitive.Close
+              className="
+        absolute right-2 lg:right-3 top-2 lg:top-3 z-[10002]
+        flex items-center justify-center
+        rounded-sm
+        w-4 md:w-5 xl:w-6
+        h-4 md:h-5 xl:h-6
+        focus:outline-none
+        disabled:pointer-events-none
+        border border-white-3
+        text-dark-1
+        transition-all duration-300 ease-in-out
+        hover:bg-cyan hover:text-white-1 hover:border-cyan
+      "
+            >
+              <X className="h-2 w-2 md:h-3 md:w-3 xl:h-4 xl:w-4" />
+              <span className="sr-only">Close</span>
+            </DialogPrimitive.Close>
+
+            <QueryForm className="relative z-[10001] w-full" />
+          </div>
         </div>
       </NoOverlayFullScreenDialogContent>
     </Dialog>
