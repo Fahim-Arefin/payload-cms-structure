@@ -48,9 +48,10 @@ import { SearchSuggestion } from './ServerNavbar'
 
 type Props = {
   suggestions?: SearchSuggestion[]
+  center?: boolean
 }
 
-function SearchBarSection({ suggestions = [] }: Props) {
+function SearchBarSection({ suggestions = [], center }: Props) {
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredSuggestions, setFilteredSuggestions] = useState<SearchSuggestion[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
@@ -152,12 +153,11 @@ function SearchBarSection({ suggestions = [] }: Props) {
       "
     >
       <div
-        className="
+        className={`
           font-proxima font-bold
-          text-[12px] md:text-[12px] lg:text-[14px] xl:text-[20px] 2xl:text-[22px]
           leading-[140%] tracking-[-0.6px]
           text-white-1
-        "
+            ${center ? ` text-center text-[16px]` : ` text-[12px] md:text-[12px] lg:text-[14px] xl:text-[20px] 2xl:text-[22px] `} `}
       >
         SEARCH NOW!
       </div>

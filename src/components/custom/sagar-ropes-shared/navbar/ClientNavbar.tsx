@@ -81,7 +81,7 @@ function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
   return (
     <>
       {/* mobile */}
-      <MobileNavbar data={data} blur={blur} />
+      <MobileNavbar data={data} blur={blur} suggestions={suggestions} footerData={footerData} />
 
       <div
         className="fixed inset-x-0 z-50 w-full hidden lg:flex 
