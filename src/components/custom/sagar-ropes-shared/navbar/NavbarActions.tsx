@@ -416,7 +416,11 @@ function NavbarActions({ footerData, suggestions }: Props) {
 
           {/* pattern 2 */}
           {footer?.showPatternDesign && (
-            <div className="invisible md:visible absolute right-0 top-0 z-10 opacity-60 w-[40%] h-[40%]">
+            <div
+              className="invisible md:visible absolute right-0 top-0 z-10 opacity-60 
+            w-[40%] 
+            h-[35%] 2xl:h-[30%]"
+            >
               <Image
                 fill
                 src={Pattern02}
