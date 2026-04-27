@@ -71,16 +71,16 @@ function NoDataFound({
 }: Props) {
   return (
     <div
-      className={`container-padding flex items-center justify-center ${widthHeight}`}
+      className={`font-proxima container-padding flex items-center justify-center ${widthHeight}`}
       style={{ backgroundColor: bgColor }}
     >
-      <div className="text-center max-w-lg mx-auto">
+      <div className="text-center max-w-lg mx-auto ">
         {showIllustration && (
           <div className="relative mb-8">
             {/* Main container for all animations */}
             <div className="relative w-32 h-32 mx-auto">
               {/* Outer pulsing circle */}
-              <div className="absolute inset-0 rounded-full bg-blue-100/40 animate-ping-slow"></div>
+              <div className="absolute inset-0 rounded-full bg-dark-2 animate-ping-slow"></div>
 
               {/* Animated document with shaking effect */}
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-20 bg-white rounded-md shadow-lg border border-gray-200 animate-float">
@@ -131,11 +131,11 @@ function NoDataFound({
           </div>
         )}
 
-        <h3 className="global-p1 font-semibold text-[#424242] mb-2 opacity-0 animate-fadeIn">
+        <h3 className="font-proxima global-h4 font-bold text-dark-2 mb-2 opacity-0 animate-fadeIn">
           {message}
         </h3>
 
-        <p className="global-p2 text-[#424242] mb-6 opacity-0 animate-fadeIn animate-delay-300">
+        <p className="font-manrope global-p4 text-[#424242] mb-6 opacity-0 animate-fadeIn animate-delay-300">
           {description}
         </p>
       </div>

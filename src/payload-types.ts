@@ -2594,21 +2594,16 @@ export interface Page {
          * Select the alignment of the video
          */
         videoAlignment?: ('left' | 'right') | null;
-        videos: {
-          /**
-           * Upload the video thumbnail image.
-           */
-          thumbnail: string | Media;
-          thumbnailOriginal?: (string | null) | Media;
-          pendingThumbnailOriginal?: string | null;
-          pendingThumbnailCrop?: string | null;
-          thumbnailBlurDataURL?: string | null;
-          /**
-           * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
-           */
-          videoUrl: string;
-          id?: string | null;
-        }[];
+        /**
+         * When ON, this block renders data from **Global → News**.
+         *
+         * **Before enabling:** fill up the Global → News data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color , section heading etc.).
+         * • News Videos comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
         id?: string | null;
         blockName?: string | null;
         blockType: 'sagar-videos';
@@ -4090,17 +4085,7 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                   };
               videoAlignment?: T;
-              videos?:
-                | T
-                | {
-                    thumbnail?: T;
-                    thumbnailOriginal?: T;
-                    pendingThumbnailOriginal?: T;
-                    pendingThumbnailCrop?: T;
-                    thumbnailBlurDataURL?: T;
-                    videoUrl?: T;
-                    id?: T;
-                  };
+              useSharedData?: T;
               id?: T;
               blockName?: T;
             };
