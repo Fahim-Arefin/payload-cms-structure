@@ -85,10 +85,11 @@
 //   ],
 // }
 
-import { FORMS } from '@/lib/constants'
+import { CUSTOMER_FEEDBACK_SLUG_AND_TAG, FORMS } from '@/lib/constants'
 import { roleAtLeast } from '@/lib/rbac'
-import { ValidationError } from 'payload'
+import { revalidateTag } from 'next/cache'
 import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
+import { ValidationError } from 'payload'
 
 const limitPublishedReviews: CollectionBeforeChangeHook = async ({
   data,
@@ -157,8 +158,24 @@ export const Review: CollectionConfig = {
     delete: ({ req }) => roleAtLeast(req.user, 'admin'),
   },
 
+  // hooks: {
+  //   beforeChange: [limitPublishedReviews],
+  // },
+
   hooks: {
     beforeChange: [limitPublishedReviews],
+
+    afterChange: [
+      async () => {
+        revalidateTag(CUSTOMER_FEEDBACK_SLUG_AND_TAG)
+      },
+    ],
+
+    afterDelete: [
+      async () => {
+        revalidateTag(CUSTOMER_FEEDBACK_SLUG_AND_TAG)
+      },
+    ],
   },
 
   fields: [

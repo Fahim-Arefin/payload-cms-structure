@@ -202,7 +202,7 @@ function FeedbackForm() {
     try {
       setIsSubmitting(true)
 
-      const res = await fetch('/api/review', {
+      const res = await fetch('/api/review-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -158,12 +158,24 @@ export const OFFICE_ADDRESS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/office-add
 
 // feedback-form
 export const FEEDBACK_FORM_SLUG_AND_TAG = 'feedback-form'
-export const FEEDBACK_FORM_BLOCK_LABEL = 'Feedback Form'
+export const FEEDBACK_FORM_BLOCK_LABEL = 'Review Form'
 export const FEEDBACK_FORM_CACHE_KEY = 'feedback-form-data'
 export const FEEDBACK_FORM_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/feedback-form-block-thumbnail.jpg`
 
-// Product info 03
+// query-form
 export const QUERY_FORM_SLUG_AND_TAG = 'query-form'
 export const QUERY_FORM_BLOCK_LABEL = 'Query Form'
 export const QUERY_FORM_CACHE_KEY = 'query-form-data'
 export const QUERY_FORM_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/query-form-block-thumbnail.jpg`
+
+// customer-feedback
+export const CUSTOMER_FEEDBACK_SLUG_AND_TAG = 'customer-feedback'
+export const CUSTOMER_FEEDBACK_BLOCK_LABEL = 'Customer Review'
+export const CUSTOMER_FEEDBACK_CACHE_KEY = 'customer-feedback-data'
+export const CUSTOMER_FEEDBACK_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/customer-feedback-block-thumbnail.jpg`
+
+// testing-pillars
+export const TESTING_PILLARS_SLUG_AND_TAG = 'testing-pillars'
+export const TESTING_PILLARS_BLOCK_LABEL = 'Testing Pillars'
+export const TESTING_PILLARS_CACHE_KEY = 'testing-pillars-data'
+export const TESTING_PILLARS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/testing-pillars-block-thumbnail.jpg`

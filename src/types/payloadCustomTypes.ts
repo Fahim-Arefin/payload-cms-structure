@@ -1,6 +1,7 @@
 import {
   BASIC_HERO_SLUG_AND_TAG,
   CONTACT_INFO_CARD_SLUG_AND_TAG,
+  CUSTOMER_FEEDBACK_SLUG_AND_TAG,
   FEEDBACK_FORM_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
@@ -21,6 +22,7 @@ import {
   SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
+  TESTING_PILLARS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -132,4 +134,14 @@ export type FeedbackFormBlockType = Extract<
 export type QueryFormBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof QUERY_FORM_SLUG_AND_TAG }
+>
+
+export type CustomerfeedbackBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CUSTOMER_FEEDBACK_SLUG_AND_TAG }
+>
+
+export type TestingPillarsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof TESTING_PILLARS_SLUG_AND_TAG }
 >

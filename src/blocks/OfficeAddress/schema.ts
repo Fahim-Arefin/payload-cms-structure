@@ -140,7 +140,7 @@ const OfficeAddressSchema: Block = {
         },
         {
           name: 'mapLink',
-          type: 'textarea',
+          type: 'text',
           required: true,
           admin: {
             width: '50%',

@@ -1,6 +1,7 @@
 // currently working code
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import ContactInfoCardSchema from '@/blocks/ContactInfoCard/schema'
+import CustomerFeedbackSchema from '@/blocks/CustomerFeedback/schema'
 import FeedbackFormSchema from '@/blocks/FeedbackForm/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import GetToKnowSchema from '@/blocks/GetToKnow/schema'
@@ -21,6 +22,7 @@ import ResultCardSchema from '@/blocks/ResultCard/schema'
 import SagarVideosSchema from '@/blocks/SagarVideos/schema'
 import TechnicalDatasheetSchema from '@/blocks/TechnicalDatashheet/schema'
 import TechnicalSpecificationsSchema from '@/blocks/TechnicalSpecification/schema'
+import TestingPillarsSchema from '@/blocks/TestingPillars/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -155,6 +157,7 @@ export const Pages: CollectionConfig = {
         TechnicalDatasheetSchema,
         QualityBenchhmarkSchema,
         QueryFormSchema,
+        TestingPillarsSchema,
 
         // custom blocks
 
@@ -162,6 +165,7 @@ export const Pages: CollectionConfig = {
         GetToKnowSchema,
         ProductInfo02Schema,
         ResultCardSchema,
+        CustomerFeedbackSchema,
         FounderQuoteSchema,
 
         // about us page unique

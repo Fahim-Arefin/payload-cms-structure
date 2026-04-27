@@ -56,6 +56,10 @@ export function CountrySelectField({
         const response = await fetch(
           'https://restcountries.com/v3.1/all?fields=name,cca2,idd,flag,flags',
         )
+
+        if (!response.ok) {
+          throw new Error(`Country API failed: ${response.status}`)
+        }
         const data = await response.json()
 
         const mapped: CountryOption[] = data
@@ -147,7 +151,7 @@ export function CountrySelectField({
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent className="w-[var(--radix-popover-trigger-width)] rounded-none p-0">
+        <PopoverContent className="w-[var(--radix-popover-trigger-width)] rounded-none p-0 relative z-[10001]">
           <Command>
             <CommandInput placeholder="Search country..." className="font-manrope" />
             <CommandList>

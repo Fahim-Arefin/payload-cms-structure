@@ -1,6 +1,7 @@
 import {
   BASIC_HERO_SLUG_AND_TAG,
   CONTACT_INFO_CARD_SLUG_AND_TAG,
+  CUSTOMER_FEEDBACK_SLUG_AND_TAG,
   FEEDBACK_FORM_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   GET_TO_KNOW_SLUG_AND_TAG,
@@ -21,6 +22,7 @@ import {
   SAGAR_VIDEOS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
+  TESTING_PILLARS_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -46,6 +48,8 @@ import ProductInfo04Block from './ProductInfo04/ProductInfo04Block'
 import OfficeAddressBlock from './OfficeAddress/OfficeAddressBlock'
 import FeedbackFormBlock from './FeedbackForm/FeedbackFormBlock'
 import QueryFormBlock from './QueryForm/QueryFormBlock'
+import CustomerFeedbackBlock from './CustomerFeedback/CustomerFeedbackBlock'
+import TestingPillarsBlock from './TestingPillars/TestingPillarsBlock'
 
 type Params = Record<string, string>
 
@@ -95,6 +99,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <FeedbackFormBlock key={block.id} block={block} params={params} />
     case QUERY_FORM_SLUG_AND_TAG:
       return <QueryFormBlock key={block.id} block={block} params={params} />
+    case CUSTOMER_FEEDBACK_SLUG_AND_TAG:
+      return <CustomerFeedbackBlock key={block.id} block={block} params={params} />
+    case TESTING_PILLARS_SLUG_AND_TAG:
+      return <TestingPillarsBlock key={block.id} block={block} params={params} />
 
     default:
       return null
