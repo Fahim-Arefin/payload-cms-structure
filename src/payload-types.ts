@@ -97,10 +97,16 @@ export interface Config {
   globals: {
     navbar: Navbar;
     footer: Footer;
+    'news-categories': NewsCategory;
+    'news-tags': NewsTag;
+    news: News;
   };
   globalsSelect: {
     navbar: NavbarSelect<false> | NavbarSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'news-categories': NewsCategoriesSelect<false> | NewsCategoriesSelect<true>;
+    'news-tags': NewsTagsSelect<false> | NewsTagsSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -4460,6 +4466,137 @@ export interface Footer {
   createdAt?: string | null;
 }
 /**
+ * Global list of news categories.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-categories".
+ */
+export interface NewsCategory {
+  id: string;
+  categories?:
+    | {
+        label: string;
+        /**
+         * Unique key like company-news, awards, events.
+         */
+        key: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Global list of news tags.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-tags".
+ */
+export interface NewsTag {
+  id: string;
+  tags?:
+    | {
+        label: string;
+        /**
+         * Unique key like rope, export, quality-control.
+         */
+        key: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Global news manager using category and tag selectors.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: string;
+  uploadSessionId?: string | null;
+  newsItems?:
+    | {
+        /**
+         * Upload thumbnail image. Recommended aspect ratio 16:9.
+         */
+        thumbnailImage: string | Media;
+        thumbnailImageOriginal?: (string | null) | Media;
+        pendingThumbnailImageOriginal?: string | null;
+        pendingThumbnailImageCrop?: string | null;
+        thumbnailImageBlurDataURL?: string | null;
+        /**
+         * Upload product image. Recommended aspect ratio 1:1.
+         */
+        productImage: string | Media;
+        productImageOriginal?: (string | null) | Media;
+        pendingProductImageOriginal?: string | null;
+        pendingProductImageCrop?: string | null;
+        productImageBlurDataURL?: string | null;
+        title1: string;
+        title2?: string | null;
+        eventType: 'blog' | 'vlog';
+        /**
+         * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
+         */
+        videoUrl?: string | null;
+        categoryKey: string;
+        tagKey: string;
+        /**
+         * Independent category display name.
+         */
+        categoryName: string;
+        releaseDate: string;
+        /**
+         * Main description.
+         */
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * Quotation / highlighted quote content.
+         */
+        quotationDescription?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        quotationDate?: string | null;
+        quotationOwnerName?: string | null;
+        /**
+         * If you featured a news that means it will show on the homepage news section
+         */
+        isFeatured?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navbar_select".
  */
@@ -4575,6 +4712,76 @@ export interface FooterSelect<T extends boolean = true> {
     | T
     | {
         legalValue?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-categories_select".
+ */
+export interface NewsCategoriesSelect<T extends boolean = true> {
+  categories?:
+    | T
+    | {
+        label?: T;
+        key?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-tags_select".
+ */
+export interface NewsTagsSelect<T extends boolean = true> {
+  tags?:
+    | T
+    | {
+        label?: T;
+        key?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  uploadSessionId?: T;
+  newsItems?:
+    | T
+    | {
+        thumbnailImage?: T;
+        thumbnailImageOriginal?: T;
+        pendingThumbnailImageOriginal?: T;
+        pendingThumbnailImageCrop?: T;
+        thumbnailImageBlurDataURL?: T;
+        productImage?: T;
+        productImageOriginal?: T;
+        pendingProductImageOriginal?: T;
+        pendingProductImageCrop?: T;
+        productImageBlurDataURL?: T;
+        title1?: T;
+        title2?: T;
+        eventType?: T;
+        videoUrl?: T;
+        categoryKey?: T;
+        tagKey?: T;
+        categoryName?: T;
+        releaseDate?: T;
+        description?: T;
+        quotationDescription?: T;
+        quotationDate?: T;
+        quotationOwnerName?: T;
+        isFeatured?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

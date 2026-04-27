@@ -19,12 +19,25 @@ const thumbnailFolder = '/assets/block-thumbnails'
 
 // GLOBAL API
 
+// Global Navbar
 export const GLOBAL_NAVBAR_SLUG_AND_TAG = 'navbar' as const
 export const GLOBAL_NAVBAR_CACHE_KEY = 'navbar-data'
 
+// Global Footer
 export const GLOBAL_FOOTER_SLUG_AND_TAG = 'footer' as const
 export const GLOBAL_FOOTER_CACHE_KEY = 'footer-data'
 
+// News Categories Global
+export const GLOBAL_NEWS_CATEGORIES_SLUG_AND_TAG = 'news-categories'
+export const GLOBAL_NEWS_CATEGORIES_CACHE_KEY = 'news-categories-data'
+
+// News Tags Global
+export const GLOBAL_NEWS_TAGS_SLUG_AND_TAG = 'news-tags'
+export const GLOBAL_NEWS_TAGS_CACHE_KEY = 'news-tags-data'
+
+// News Global
+export const GLOBAL_NEWS_SLUG_AND_TAG = 'news'
+export const GLOBAL_NEWS_CACHE_KEY = 'news-data'
 export const AUDIT_LOG = 'Audit'
 
 // Group
