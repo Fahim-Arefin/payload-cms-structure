@@ -21,7 +21,6 @@ type Props = {
 }
 
 function SingleNewsClient({ block, data }: Props) {
-  console.log(block)
   return (
     <WithHashScroller id={block?.sectionId} bgColor={block?.backgroundColor}>
       <div className="container-padding w-full lg:w-[70%] mx-auto">
