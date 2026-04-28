@@ -1,7 +1,11 @@
 import type { GlobalConfig } from 'payload'
 import { revalidateTag } from 'next/cache'
 
-import { GLOBAL_NEWS_SLUG_AND_TAG, GLOBAL_NEWS_TAGS_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  ALL_NEWS_SLUG_AND_TAG,
+  GLOBAL_NEWS_SLUG_AND_TAG,
+  GLOBAL_NEWS_TAGS_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { globalTag } from '@/lib/cacheTags'
 import { roleAtLeast } from '@/lib/rbac'
 
@@ -104,6 +108,7 @@ const NewsTags: GlobalConfig = {
 
         // Also revalidate News because news cards may display tag labels.
         revalidateTag(globalTag(GLOBAL_NEWS_SLUG_AND_TAG))
+        revalidateTag(ALL_NEWS_SLUG_AND_TAG)
       },
     ],
   },
