@@ -137,6 +137,10 @@ export function buildDetailHref(pattern: string, id: string | number): string {
   return '/' + (withSlash + encodeURIComponent(String(id))).replace(/^\/+/, '')
 }
 
+// new helpers
+// ====================================================================================
+// ====================================================================================
+// ====================================================================================
 export const withSectionHash = (href: string, sectionId?: string | null) => {
   const id = String(sectionId ?? '').trim()
   if (!id) return href
@@ -144,6 +148,48 @@ export const withSectionHash = (href: string, sectionId?: string | null) => {
   const cleanHref = href.replace(/#.*$/, '')
   return `${cleanHref}#${id}`
 }
+
+export const buildDetailHrefNew = (pattern: string, itemId: string) => {
+  const cleanPattern = String(pattern || '').replace(/^\/+|\/+$/g, '')
+  const cleanId = String(itemId || '').trim()
+
+  if (!cleanPattern) return '#'
+  if (!cleanId) return `/${cleanPattern}`
+
+  const replaced = cleanPattern
+    .replace(':slug', cleanId)
+    .replace('[slug]', cleanId)
+    .replace(':id', cleanId)
+    .replace('[id]', cleanId)
+
+  return `/${replaced}`
+}
+
+type BuildNewsHrefArgs = {
+  buttonLink: any
+  sectionId?: string | null
+  itemId?: string | null
+  detail?: boolean
+}
+
+export const buildNewsHref = ({
+  buttonLink,
+  sectionId,
+  itemId,
+  detail = false,
+}: BuildNewsHrefArgs) => {
+  if (!buttonLink) return '#'
+
+  const pattern = resolvePageSlug(buttonLink) ?? ''
+
+  const baseHref = detail ? buildDetailHrefNew(pattern, itemId || '') : pageHref(buttonLink)
+
+  return withSectionHash(baseHref, sectionId)
+}
+
+// ====================================================================================
+// ====================================================================================
+// ====================================================================================
 
 type MaybeRel<T> = string | T | null | undefined
 

@@ -3,20 +3,14 @@ import Button02 from '@/components/custom/sagar-ropes-shared/buttons/Button02'
 import VideoThumbnailDialog from '@/components/custom/sagar-ropes-shared/dialog/VideoThumbnailDialog'
 import LocalizedRichText from '@/components/custom/shared/LocalizedRichText'
 import LocalizedText from '@/components/custom/shared/LocalizedText'
-import {
-  buildDetailHref,
-  formatPayloadDate,
-  formatPayloadDateShort,
-  resolvePageSlug,
-  withSectionHash,
-} from '@/lib/utils'
+import { buildNewsHref, formatPayloadDate, formatPayloadDateShort } from '@/lib/utils'
 import { News } from '@/payload-types'
-import { AllNewsBlockType } from '@/types/payloadCustomTypes'
+import { AllNewsBlockType, SingleNewsBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import Date from 'public/assets/icons/date.png'
 import Tag from 'public/assets/icons/tag.png'
+import QuoteIcon from 'public/assets/images/QuoteIcon.png'
 
 type NewsItem = NonNullable<News['newsItems']>[number]
 
@@ -38,11 +32,12 @@ export type EnrichedNewsItem = NewsItem & {
 }
 
 type Props = {
-  block: AllNewsBlockType
+  block: AllNewsBlockType | SingleNewsBlockType
   item: EnrichedNewsItem
+  detailsPage?: boolean
 }
 
-function AllNewsClientCard({ item, block }: Props) {
+function AllNewsClientCard({ item, block, detailsPage }: Props) {
   return (
     <div className="space-y-2 xl:space-y-3 2xl:space-y-4">
       <div>
@@ -183,21 +178,66 @@ function AllNewsClientCard({ item, block }: Props) {
 
       {/* description */}
       <div
-        className="text-dark-3 font-manrope global-p4 text-justify 
-                  line-clamp-3
-                  "
+        className={`text-dark-3 font-manrope global-p4 text-justify 
+                   ${detailsPage ? '' : 'line-clamp-3'} 
+                  `}
       >
         <LocalizedRichText en={item?.description} bn={item?.description} />
       </div>
 
+      {detailsPage && (
+        <div
+          className="space-y-1.5
+           border-2 border-cyan 
+        xl:px-6 2xl:px-7
+        xl:py-4 2xl:py-5
+        "
+        >
+          <div className="flex justify-between items-center">
+            <div className="min-w-[20px] lg:min-w-[25px] xl:min-w-[30px] 2xl:min-w-[40px]">
+              <div className="relative w-full aspect-square">
+                <Image
+                  src={QuoteIcon}
+                  alt="QuoteIcon Image"
+                  fill
+                  quality={90}
+                  sizes="100vw"
+                  className="object-center object-cover w-full h-full"
+                  placeholder="blur"
+                  blurDataURL={QuoteIcon?.blurDataURL || ''}
+                />
+              </div>
+            </div>
+            <div className="text-[#0B0B3B] font-manrope text-[9px] md:text-[10px] xl:text-[12px] opacity-80 ">
+              {formatPayloadDate(item?.quotationDate)}
+            </div>
+          </div>
+          <div className="text-dark-1 font-proxima font-bold global-h6 text-justify">
+            <LocalizedRichText en={item?.quotationDescription} bn={item?.quotationDescription} />
+          </div>
+          <div className="flex justify-end">
+            <div className="flex items-center space-x-2 xl:space-x-4">
+              <div className="h-[1px] xl:h-[2px] w-[25px] xl:w-[40px] bg-cyan">
+                <div className="invisible">a</div>
+              </div>
+              <div className="text-[#0B0B3B] font-manrope text-[9px] md:text-[10px] xl:text-[12px] opacity-80">
+                {item?.quotationOwnerName}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* CTA buttons */}
       <div className="flex justify-center items-center">
         {block?.ctaButtons?.map((block, index) => {
-          const pattern = resolvePageSlug(block?.buttonLink) ?? ''
-          const href = withSectionHash(
-            buildDetailHref(pattern, item.id ? item.id : ''),
-            block?.sectionId,
-          )
+          const href = buildNewsHref({
+            buttonLink: block?.buttonLink,
+            sectionId: block?.sectionId,
+            itemId: item?.id || '',
+            detail: !detailsPage,
+          })
+
           return (
             <div key={`pageLink-${index}`}>
               <Link href={href} passHref>

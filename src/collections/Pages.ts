@@ -21,6 +21,7 @@ import QueriesSchema from '@/blocks/Queries/schema'
 import QueryFormSchema from '@/blocks/QueryForm/schema'
 import ResultCardSchema from '@/blocks/ResultCard/schema'
 import SagarVideosSchema from '@/blocks/SagarVideos/schema'
+import SignleNewsSchema from '@/blocks/SingleNews/schema'
 import TechnicalDatasheetSchema from '@/blocks/TechnicalDatashheet/schema'
 import TechnicalSpecificationsSchema from '@/blocks/TechnicalSpecification/schema'
 import TestingPillarsSchema from '@/blocks/TestingPillars/schema'
@@ -184,6 +185,7 @@ export const Pages: CollectionConfig = {
 
         // News
         AllNewsSchema,
+        SignleNewsSchema,
       ],
     },
   ],

@@ -8,6 +8,7 @@ import {
   GLOBAL_NEWS_TAGS_SLUG_AND_TAG,
   NEWS,
   SAGAR_VIDEOS_SLUG_AND_TAG,
+  SINGLE_NEWS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { globalTag } from '@/lib/cacheTags'
 import { roleAtLeast } from '@/lib/rbac'
@@ -390,6 +391,7 @@ const News: GlobalConfig = {
       async () => {
         revalidateTag(globalTag(GLOBAL_NEWS_SLUG_AND_TAG))
         revalidateTag(ALL_NEWS_SLUG_AND_TAG)
+        revalidateTag(SINGLE_NEWS_SLUG_AND_TAG)
         revalidateTag(SAGAR_VIDEOS_SLUG_AND_TAG)
       },
     ],

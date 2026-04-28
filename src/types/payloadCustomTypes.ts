@@ -21,6 +21,7 @@ import {
   QUERY_FORM_SLUG_AND_TAG,
   RESULT_CARD_SLUG_AND_TAG,
   SAGAR_VIDEOS_SLUG_AND_TAG,
+  SINGLE_NEWS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
   TESTING_PILLARS_SLUG_AND_TAG,
@@ -150,4 +151,9 @@ export type TestingPillarsBlockType = Extract<
 export type AllNewsBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof ALL_NEWS_SLUG_AND_TAG }
+>
+
+export type SingleNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SINGLE_NEWS_SLUG_AND_TAG }
 >

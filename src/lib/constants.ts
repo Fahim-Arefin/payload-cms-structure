@@ -199,3 +199,9 @@ export const ALL_NEWS_SLUG_AND_TAG = 'all-news'
 export const ALL_NEWS_BLOCK_LABEL = 'All News'
 export const ALL_NEWS_CACHE_KEY = 'all-news-data'
 export const ALL_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-news-block-thumbnail.jpg`
+
+// All news page
+export const SINGLE_NEWS_SLUG_AND_TAG = 'single-news'
+export const SINGLE_NEWS_BLOCK_LABEL = 'Signle News'
+export const SINGLE_NEWS_CACHE_KEY = 'single-news-data'
+export const SINGLE_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-news-block-thumbnail.jpg`
