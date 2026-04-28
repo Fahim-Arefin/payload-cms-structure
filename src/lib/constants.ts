@@ -142,7 +142,7 @@ export const RESULT_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/result-card-b
 
 // Founder Quote
 export const SAGAR_VIDEOS_SLUG_AND_TAG = 'sagar-videos'
-export const SAGAR_VIDEOS_BLOCK_LABEL = 'Sagar Videos'
+export const SAGAR_VIDEOS_BLOCK_LABEL = 'Sagar Vlogs'
 export const SAGAR_VIDEOS_CACHE_KEY = 'sagar-videos-data'
 export const SAGAR_VIDEOS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/sagar-videos-block-thumbnail.jpg`
 
@@ -205,3 +205,9 @@ export const SINGLE_NEWS_SLUG_AND_TAG = 'single-news'
 export const SINGLE_NEWS_BLOCK_LABEL = 'Signle News'
 export const SINGLE_NEWS_CACHE_KEY = 'single-news-data'
 export const SINGLE_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-news-block-thumbnail.jpg`
+
+// All news page
+export const SAGAR_BLOGS_SLUG_AND_TAG = 'sagar-blogs'
+export const SAGAR_BLOGS_BLOCK_LABEL = 'Sagar Blogs'
+export const SAGAR_BLOGS_CACHE_KEY = 'sagar-blogs-data'
+export const SAGAR_BLOGS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/sagar-blogs-block-thumbnail.jpg`

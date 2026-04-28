@@ -20,6 +20,7 @@ import QualityBenchhmarkSchema from '@/blocks/QualityBenchmarkCard/schema'
 import QueriesSchema from '@/blocks/Queries/schema'
 import QueryFormSchema from '@/blocks/QueryForm/schema'
 import ResultCardSchema from '@/blocks/ResultCard/schema'
+import SagarBlogsSchema from '@/blocks/SagarBlog/schema'
 import SagarVideosSchema from '@/blocks/SagarVideos/schema'
 import SignleNewsSchema from '@/blocks/SingleNews/schema'
 import TechnicalDatasheetSchema from '@/blocks/TechnicalDatashheet/schema'
@@ -169,6 +170,7 @@ export const Pages: CollectionConfig = {
         ResultCardSchema,
         CustomerFeedbackSchema,
         FounderQuoteSchema,
+        SagarBlogsSchema,
 
         // about us page unique
         MissionVisionSchema,

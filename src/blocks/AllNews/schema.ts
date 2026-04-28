@@ -29,7 +29,7 @@ const AllNewsSchema: Block = {
     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false } },
 
     BgColorAndSectionIdField({ defaultBackground: 'white-2' }),
-    CtaButtonsField({ minRows: 1, maxRows: 1 }),
+    CtaButtonsField({ label: 'News Details Page Link', minRows: 1, maxRows: 1 }),
 
     {
       name: 'useSharedData',

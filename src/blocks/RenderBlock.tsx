@@ -20,6 +20,7 @@ import {
   QUERIES_SLUG_AND_TAG,
   QUERY_FORM_SLUG_AND_TAG,
   RESULT_CARD_SLUG_AND_TAG,
+  SAGAR_BLOGS_SLUG_AND_TAG,
   SAGAR_VIDEOS_SLUG_AND_TAG,
   SINGLE_NEWS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
@@ -54,6 +55,7 @@ import CustomerFeedbackBlock from './CustomerFeedback/CustomerFeedbackBlock'
 import TestingPillarsBlock from './TestingPillars/TestingPillarsBlock'
 import AllNewsBlock from './AllNews/AllNewsBlock'
 import SignleNewsBlock from './SingleNews/SignleNewsBlock'
+import SagarBlogBlock from './SagarBlog/SagarBlogBlock'
 
 type Params = Record<string, string>
 
@@ -111,6 +113,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <AllNewsBlock key={block.id} block={block} params={params} />
     case SINGLE_NEWS_SLUG_AND_TAG:
       return <SignleNewsBlock key={block.id} block={block} params={params} />
+    case SAGAR_BLOGS_SLUG_AND_TAG:
+      return <SagarBlogBlock key={block.id} block={block} params={params} />
 
     default:
       return null

@@ -7,6 +7,7 @@ import {
   GLOBAL_NEWS_SLUG_AND_TAG,
   GLOBAL_NEWS_TAGS_SLUG_AND_TAG,
   NEWS,
+  SAGAR_BLOGS_SLUG_AND_TAG,
   SAGAR_VIDEOS_SLUG_AND_TAG,
   SINGLE_NEWS_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -393,6 +394,7 @@ const News: GlobalConfig = {
         revalidateTag(ALL_NEWS_SLUG_AND_TAG)
         revalidateTag(SINGLE_NEWS_SLUG_AND_TAG)
         revalidateTag(SAGAR_VIDEOS_SLUG_AND_TAG)
+        revalidateTag(SAGAR_BLOGS_SLUG_AND_TAG)
       },
     ],
   },
