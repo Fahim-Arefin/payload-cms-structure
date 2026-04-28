@@ -137,6 +137,14 @@ export function buildDetailHref(pattern: string, id: string | number): string {
   return '/' + (withSlash + encodeURIComponent(String(id))).replace(/^\/+/, '')
 }
 
+export const withSectionHash = (href: string, sectionId?: string | null) => {
+  const id = String(sectionId ?? '').trim()
+  if (!id) return href
+
+  const cleanHref = href.replace(/#.*$/, '')
+  return `${cleanHref}#${id}`
+}
+
 type MaybeRel<T> = string | T | null | undefined
 
 export function resolvePageSlug(target: MaybeRel<{ slug?: string }>): string | null {
@@ -211,6 +219,33 @@ export function formatMonDYYYYBN(input: string | Date, opts: FormatOpts = {}): s
 
   // Compose as "Mon D, YYYY" in BN
   return `${month} ${day}, ${year}`
+}
+
+export function formatPayloadDate(date?: string | null) {
+  if (!date) return ''
+
+  const d = new Date(date)
+
+  if (Number.isNaN(d.getTime())) return ''
+
+  return d.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+}
+export function formatPayloadDateShort(date?: string | null) {
+  if (!date) return ''
+
+  const d = new Date(date)
+
+  if (Number.isNaN(d.getTime())) return ''
+
+  return d.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  })
 }
 
 /* Examples:

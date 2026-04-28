@@ -48,6 +48,7 @@ export const HOME_PAGE = 'Home Page'
 export const ABOUT_US = 'About Us Page'
 export const PRODUCT_PAGE = 'Product Page'
 export const GET_IN_TOUCH = 'Get In Touch Page'
+export const NEWS = 'News And Events'
 
 // Basic Hero Block
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
@@ -192,3 +193,9 @@ export const TESTING_PILLARS_SLUG_AND_TAG = 'testing-pillars'
 export const TESTING_PILLARS_BLOCK_LABEL = 'Testing Pillars'
 export const TESTING_PILLARS_CACHE_KEY = 'testing-pillars-data'
 export const TESTING_PILLARS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/testing-pillars-block-thumbnail.jpg`
+
+// All news page
+export const ALL_NEWS_SLUG_AND_TAG = 'all-news'
+export const ALL_NEWS_BLOCK_LABEL = 'All News'
+export const ALL_NEWS_CACHE_KEY = 'all-news-data'
+export const ALL_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-news-block-thumbnail.jpg`

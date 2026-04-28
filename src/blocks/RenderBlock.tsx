@@ -1,4 +1,5 @@
 import {
+  ALL_NEWS_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   CONTACT_INFO_CARD_SLUG_AND_TAG,
   CUSTOMER_FEEDBACK_SLUG_AND_TAG,
@@ -50,6 +51,7 @@ import FeedbackFormBlock from './FeedbackForm/FeedbackFormBlock'
 import QueryFormBlock from './QueryForm/QueryFormBlock'
 import CustomerFeedbackBlock from './CustomerFeedback/CustomerFeedbackBlock'
 import TestingPillarsBlock from './TestingPillars/TestingPillarsBlock'
+import AllNewsBlock from './AllNews/AllNewsBlock'
 
 type Params = Record<string, string>
 
@@ -103,6 +105,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CustomerFeedbackBlock key={block.id} block={block} params={params} />
     case TESTING_PILLARS_SLUG_AND_TAG:
       return <TestingPillarsBlock key={block.id} block={block} params={params} />
+    case ALL_NEWS_SLUG_AND_TAG:
+      return <AllNewsBlock key={block.id} block={block} params={params} />
 
     default:
       return null

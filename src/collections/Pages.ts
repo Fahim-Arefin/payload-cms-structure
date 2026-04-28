@@ -1,4 +1,5 @@
 // currently working code
+import AllNewsSchema from '@/blocks/AllNews/schema'
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import ContactInfoCardSchema from '@/blocks/ContactInfoCard/schema'
 import CustomerFeedbackSchema from '@/blocks/CustomerFeedback/schema'
@@ -180,6 +181,9 @@ export const Pages: CollectionConfig = {
         ContactInfoCardSchema,
         OfficeAddressSchema,
         FeedbackFormSchema,
+
+        // News
+        AllNewsSchema,
       ],
     },
   ],

@@ -1,4 +1,5 @@
 import {
+  ALL_NEWS_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   CONTACT_INFO_CARD_SLUG_AND_TAG,
   CUSTOMER_FEEDBACK_SLUG_AND_TAG,
@@ -144,4 +145,9 @@ export type CustomerfeedbackBlockType = Extract<
 export type TestingPillarsBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof TESTING_PILLARS_SLUG_AND_TAG }
+>
+
+export type AllNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ALL_NEWS_SLUG_AND_TAG }
 >

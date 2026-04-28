@@ -3071,6 +3071,53 @@ export interface Page {
         blockName?: string | null;
         blockType: 'feedback-form';
       }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        ctaButtons?:
+          | {
+              /**
+               * Max 40 characters.
+               */
+              label: string;
+              /**
+               * Select the button style
+               */
+              style?: ('btn01' | 'btn02') | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink: string | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * When ON, this block renders data from **Global → News**.
+         *
+         * **Before enabling:** fill up the Global → News data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color , CTA btn etc.).
+         * • News comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'all-news';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -4241,6 +4288,25 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               showPatternDesign?: T;
               showReviewForm?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'all-news'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              ctaButtons?:
+                | T
+                | {
+                    label?: T;
+                    style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              useSharedData?: T;
               id?: T;
               blockName?: T;
             };

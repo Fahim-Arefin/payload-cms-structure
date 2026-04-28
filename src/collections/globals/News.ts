@@ -2,9 +2,11 @@ import type { GlobalConfig } from 'payload'
 import { revalidateTag } from 'next/cache'
 
 import {
+  ALL_NEWS_SLUG_AND_TAG,
   GLOBAL_NEWS_CATEGORIES_SLUG_AND_TAG,
   GLOBAL_NEWS_SLUG_AND_TAG,
   GLOBAL_NEWS_TAGS_SLUG_AND_TAG,
+  NEWS,
   SAGAR_VIDEOS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { globalTag } from '@/lib/cacheTags'
@@ -127,7 +129,7 @@ const newsBase = pickGlobalHooks(newsMediaHooks)
 
 const News: GlobalConfig = {
   slug: GLOBAL_NEWS_SLUG_AND_TAG,
-  label: 'News',
+  label: NEWS,
 
   admin: {
     description: 'Global news manager using category and tag selectors.',
@@ -387,6 +389,7 @@ const News: GlobalConfig = {
       ...newsBase.afterChange,
       async () => {
         revalidateTag(globalTag(GLOBAL_NEWS_SLUG_AND_TAG))
+        revalidateTag(ALL_NEWS_SLUG_AND_TAG)
         revalidateTag(SAGAR_VIDEOS_SLUG_AND_TAG)
       },
     ],
