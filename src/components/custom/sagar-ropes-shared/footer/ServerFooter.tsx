@@ -29,15 +29,15 @@ async function ServerFooter() {
     <div className="relative z-0">
       <div
         className="
-      bg-dark-1 container-padding 
-    min-h-[450px] lg:min-h-[380px] xl:min-h-[585px] 2xl:min-h-[600px] 
+      bg-dark-1 container-padding
+    min-h-[450px] lg:min-h-[380px] xl:min-h-[585px] 2xl:min-h-[600px]
     lg:space-y-[30px] xl:space-y-[60px] 2xl:space-y-[65px]
     px-4 md:px-[120px] lg:px-[50px] xl:px-[110px] 2xl:px-[140px]
     py-9 md:py-[48px] lg:py-5 xl:py-8 2xl:py-10 "
       >
         {/* content */}
         <div
-          className="grid grid-cols-1 gap-3 lg:gap-0 lg:grid-cols-12 
+          className="grid grid-cols-1 gap-3 lg:gap-0 lg:grid-cols-12
       lg:mt-[30px] xl:mt-[60px] 2xl:mt-[70px]
       relative z-20"
         >
@@ -45,7 +45,7 @@ async function ServerFooter() {
           <div
             className="col-span-1 lg:col-span-3
         space-y-[12px] lg:space-y-[15px] xl:space-y-[20px] 2xl:space-y-[25px]
-        relative 
+        relative
         flex flex-col items-center lg:items-start
         "
           >
@@ -101,10 +101,10 @@ async function ServerFooter() {
               sizes="100vw"
               placeholder="blur"
               blurDataURL={FooterBlur01?.blurDataURL}
-              className="absolute -z-10  
+              className="absolute -z-10
               lg:scale-125 xl:scale-150
-              w-[80%] md:w-[60%] lg:w-full h-fit 
-              lg:-left-[4%] 
+              w-[80%] md:w-[60%] lg:w-full h-fit
+              lg:-left-[4%]
               -bottom-[120%] md:-bottom-[150%] lg:-bottom-[70%] opacity-80"
             />
           </div>
@@ -113,14 +113,14 @@ async function ServerFooter() {
           <div
             className="col-span-1 lg:col-span-3
         space-y-[8px] lg:space-y-[15px] xl:space-y-[20px] 2xl:space-y-[25px]
-        flex flex-col items-center lg:items-start 
+        flex flex-col items-center lg:items-start
         lg:pl-9 xl:pl-10 2xl:pl-12"
           >
             <div className="text-white-3 font-proxima font-bold global-h5">
               {footer?.quickLinksSection?.header}
             </div>
             <div
-              className="flex flex-col 
+              className="flex flex-col
           space-y-1 xl:space-y-1.5 2xl:space-y-2.5"
             >
               {footer?.quickLinksSection?.links?.map((item, index) => (
@@ -131,7 +131,7 @@ async function ServerFooter() {
     relative inline-block
     text-white-2 global-p4 font-manrope text-center lg:text-start
     hover:text-cyan transition-all duration-300 ease-in
-    
+
     after:content-['']
     after:absolute after:left-0 after:-bottom-[2px]
     after:h-[2px] after:w-full
@@ -158,7 +158,7 @@ async function ServerFooter() {
               {footer?.productsSection?.header}
             </div>
             <div
-              className="flex flex-col 
+              className="flex flex-col
           space-y-1 xl:space-y-1.5 2xl:space-y-2.5"
             >
               {footer?.productsSection?.products?.map((item, index) => (
@@ -173,7 +173,7 @@ async function ServerFooter() {
     relative inline-block
     text-white-2 global-p4 font-manrope text-center lg:text-start
     hover:text-cyan transition-all duration-300 ease-in
-    
+
     after:content-['']
     after:absolute after:left-0 after:-bottom-[2px]
     after:h-[2px] after:w-full
@@ -190,7 +190,7 @@ async function ServerFooter() {
                     <div
                       className="text-white-1 font-proxima font-extrabold bg-cyan w-fit
                 text-[9px] xl:text-[10px] 2xl:text-[12px] tracking-wide  uppercase
-                px-[3px] xl:px-[6px] 2xl:px-[5px] 
+                px-[3px] xl:px-[6px] 2xl:px-[5px]
                 py-[2px] xl:py-[5px] 2xl:py-[2px]
                 "
                     >
@@ -218,7 +218,7 @@ async function ServerFooter() {
             >
               {/* address */}
               <div
-                className="flex items-start 
+                className="flex items-start
               space-x-1 xl:space-x-2 w-[80%] lg:w-full text-center lg:text-start"
               >
                 {/* icon */}
@@ -253,7 +253,7 @@ async function ServerFooter() {
               </div>
               {/* phone */}
               <div
-                className="flex items-start 
+                className="flex items-start
               space-x-1 xl:space-x-2"
               >
                 {/* icon */}
@@ -284,7 +284,7 @@ async function ServerFooter() {
               </div>
               {/* mail */}
               <div
-                className="flex items-start 
+                className="flex items-start
               space-x-1 xl:space-x-2"
               >
                 {/* icon */}
@@ -325,9 +325,9 @@ async function ServerFooter() {
                 blurDataURL={FooterBlur02?.blurDataURL}
                 className="absolute -z-10
                 w-[50%] h-[90%] md:h-[96%] lg:w-full lg:h-fit
-                 left-[100px] md:left-[250px] lg:-left-[30%] 
-                top-[170px] lg:-top-[100px] xl:-top-[140px] 
-                xl:scale-110 2xl:scale-125 
+                 left-[100px] md:left-[250px] lg:-left-[30%]
+                top-[170px] lg:-top-[100px] xl:-top-[140px]
+                xl:scale-110 2xl:scale-125
                 opacity-80
                 "
               />
@@ -344,7 +344,7 @@ async function ServerFooter() {
         </div>
         {/* social */}
         <div
-          className="flex justify-center lg:hidden mb-[12px] lg:mb-0 
+          className="flex justify-center lg:hidden mb-[12px] lg:mb-0
           space-x-1 lg:space-x-2 xl:space-x-2.5 2xl:space-x-3"
         >
           {/* facebook */}
@@ -352,8 +352,8 @@ async function ServerFooter() {
             href={footer?.social?.facebookUrl || ''}
             target="_blank"
             className="flex items-center justify-center group
-          w-[30px] xl:w-[35px] 2xl:w-[40px] 
-          h-[30px] xl:h-[35px] 2xl:h-[40px] 
+          w-[30px] xl:w-[35px] 2xl:w-[40px]
+          h-[30px] xl:h-[35px] 2xl:h-[40px]
           bg-[#33CCCC33] hover:bg-cyan transition-all duration-300 ease-in
           "
           >
@@ -366,9 +366,9 @@ async function ServerFooter() {
               sizes="100vw"
               placeholder="blur"
               blurDataURL={Facebook?.blurDataURL}
-              className="aspect-auto 
-                w-[10px] xl:w-[13px] 
-                group-hover:w-[13px]  xl:group-hover:w-[16px] 
+              className="aspect-auto
+                w-[10px] xl:w-[13px]
+                group-hover:w-[13px]  xl:group-hover:w-[16px]
               transition-all duration-300 ease-in"
             />
           </Link>
@@ -377,8 +377,8 @@ async function ServerFooter() {
             href={footer?.social?.whatsApp || ''}
             target="_blank"
             className="flex items-center justify-center group
-          w-[30px] xl:w-[35px] 2xl:w-[40px] 
-          h-[30px] xl:h-[35px] 2xl:h-[40px] 
+          w-[30px] xl:w-[35px] 2xl:w-[40px]
+          h-[30px] xl:h-[35px] 2xl:h-[40px]
           bg-[#33CCCC33] hover:bg-cyan transition-all duration-300 ease-in
           "
           >
@@ -391,9 +391,9 @@ async function ServerFooter() {
               sizes="100vw"
               placeholder="blur"
               blurDataURL={WhatsApp?.blurDataURL}
-              className="aspect-auto 
-                w-[18px] xl:w-[23px] 
-                group-hover:w-[20px] xl:group-hover:w-[26px] 
+              className="aspect-auto
+                w-[18px] xl:w-[23px]
+                group-hover:w-[20px] xl:group-hover:w-[26px]
               transition-all duration-300 ease-in"
             />
           </Link>
@@ -401,8 +401,8 @@ async function ServerFooter() {
           <Link
             href={`mailto:${footer?.factorySection?.email}` || ''}
             className="flex items-center justify-center group
-          w-[30px] xl:w-[35px] 2xl:w-[40px] 
-          h-[30px] xl:h-[35px] 2xl:h-[40px] 
+          w-[30px] xl:w-[35px] 2xl:w-[40px]
+          h-[30px] xl:h-[35px] 2xl:h-[40px]
           bg-[#33CCCC33] hover:bg-cyan transition-all duration-300 ease-in
           "
           >
@@ -415,9 +415,9 @@ async function ServerFooter() {
               sizes="100vw"
               placeholder="blur"
               blurDataURL={At?.blurDataURL}
-              className="aspect-auto 
-                w-[18px] xl:w-[23px] 
-                group-hover:w-[20px] xl:group-hover:w-[26px] 
+              className="aspect-auto
+                w-[18px] xl:w-[23px]
+                group-hover:w-[20px] xl:group-hover:w-[26px]
               transition-all duration-300 ease-in"
             />
           </Link>
@@ -426,8 +426,8 @@ async function ServerFooter() {
             href={footer?.social?.linkedinUrl || ''}
             target="_blank"
             className="flex items-center justify-center group
-          w-[30px] xl:w-[35px] 2xl:w-[40px] 
-          h-[30px] xl:h-[35px] 2xl:h-[40px] 
+          w-[30px] xl:w-[35px] 2xl:w-[40px]
+          h-[30px] xl:h-[35px] 2xl:h-[40px]
           bg-[#33CCCC33] hover:bg-cyan transition-all duration-300 ease-in
           "
           >
@@ -440,9 +440,9 @@ async function ServerFooter() {
               sizes="100vw"
               placeholder="blur"
               blurDataURL={Linkdin?.blurDataURL}
-              className="aspect-auto 
-                w-[18px] xl:w-[22px] 
-                group-hover:w-[20px] xl:group-hover:w-[25px] 
+              className="aspect-auto
+                w-[18px] xl:w-[22px]
+                group-hover:w-[20px] xl:group-hover:w-[25px]
               transition-all duration-300 ease-in"
             />
           </Link>
@@ -451,20 +451,20 @@ async function ServerFooter() {
         {/* marqury */}
         <Marquee autoFill className="relative z-20 my-[12px] lg:my-0">
           <div
-            className="flex items-center overflow-hidden 
-          space-x-4 lg:space-x-6 xl:space-x-7 2xl:space-x-8 
+            className="flex items-center overflow-hidden
+          space-x-4 lg:space-x-6 xl:space-x-7 2xl:space-x-8
           ml-4 lg:ml-6 xl:ml-7 2xl:ml-8"
           >
             {/* text */}
             <div
-              className="text-[var(--Dark-Dark-1,#070725)] [-webkit-text-stroke-width:1.52px] [-webkit-text-stroke-color:var(--White-White-2,#E7E7EE)] 
+              className="text-[var(--Dark-Dark-1,#070725)] [-webkit-text-stroke-width:1.52px] [-webkit-text-stroke-color:var(--White-White-2,#E7E7EE)]
       font-manrope not-italic font-bold uppercase leading-[125%] tracking-[5.4px]  opacity-20
        text-[25px] lg:text-[35px] xl:text-[60px] 2xl:text-[70px]"
             >
               <div>{footer?.marqueeSection?.text}</div>
             </div>
             <div
-              className="text-[var(--White-White-2,#E7E7EE)] [-webkit-text-stroke-width:1.52px] [-webkit-text-stroke-color:var(--White-White-2,#E7E7EE)] 
+              className="text-[var(--White-White-2,#E7E7EE)] [-webkit-text-stroke-width:1.52px] [-webkit-text-stroke-color:var(--White-White-2,#E7E7EE)]
         font-[Manrope] not-italic font-bold leading-[125%] tracking-[5.4px] uppercase opacity-20
         text-[25px] lg:text-[35px] xl:text-[60px] 2xl:text-[70px]"
             >
@@ -493,7 +493,7 @@ async function ServerFooter() {
 
           {/* social */}
           <div
-            className="hidden lg:flex 
+            className="hidden lg:flex
           space-x-1 lg:space-x-2 xl:space-x-2.5 2xl:space-x-3"
           >
             {/* facebook */}
@@ -501,8 +501,8 @@ async function ServerFooter() {
               href={footer?.social?.facebookUrl || ''}
               target="_blank"
               className="flex items-center justify-center group
-          w-[30px] xl:w-[35px] 2xl:w-[40px] 
-          h-[30px] xl:h-[35px] 2xl:h-[40px] 
+          w-[30px] xl:w-[35px] 2xl:w-[40px]
+          h-[30px] xl:h-[35px] 2xl:h-[40px]
           bg-[#33CCCC33] hover:bg-cyan transition-all duration-300 ease-in
           "
             >
@@ -515,9 +515,9 @@ async function ServerFooter() {
                 sizes="100vw"
                 placeholder="blur"
                 blurDataURL={Facebook?.blurDataURL}
-                className="aspect-auto 
-                w-[10px] xl:w-[13px] 
-                group-hover:w-[13px]  xl:group-hover:w-[16px] 
+                className="aspect-auto
+                w-[10px] xl:w-[13px]
+                group-hover:w-[13px]  xl:group-hover:w-[16px]
               transition-all duration-300 ease-in"
               />
             </Link>
@@ -526,8 +526,8 @@ async function ServerFooter() {
               href={footer?.social?.whatsApp || ''}
               target="_blank"
               className="flex items-center justify-center group
-          w-[30px] xl:w-[35px] 2xl:w-[40px] 
-          h-[30px] xl:h-[35px] 2xl:h-[40px] 
+          w-[30px] xl:w-[35px] 2xl:w-[40px]
+          h-[30px] xl:h-[35px] 2xl:h-[40px]
           bg-[#33CCCC33] hover:bg-cyan transition-all duration-300 ease-in
           "
             >
@@ -540,9 +540,9 @@ async function ServerFooter() {
                 sizes="100vw"
                 placeholder="blur"
                 blurDataURL={WhatsApp?.blurDataURL}
-                className="aspect-auto 
-                w-[18px] xl:w-[23px] 
-                group-hover:w-[20px] xl:group-hover:w-[26px] 
+                className="aspect-auto
+                w-[18px] xl:w-[23px]
+                group-hover:w-[20px] xl:group-hover:w-[26px]
               transition-all duration-300 ease-in"
               />
             </Link>
@@ -550,8 +550,8 @@ async function ServerFooter() {
             <Link
               href={`mailto:${footer?.factorySection?.email}` || ''}
               className="flex items-center justify-center group
-          w-[30px] xl:w-[35px] 2xl:w-[40px] 
-          h-[30px] xl:h-[35px] 2xl:h-[40px] 
+          w-[30px] xl:w-[35px] 2xl:w-[40px]
+          h-[30px] xl:h-[35px] 2xl:h-[40px]
           bg-[#33CCCC33] hover:bg-cyan transition-all duration-300 ease-in
           "
             >
@@ -564,9 +564,9 @@ async function ServerFooter() {
                 sizes="100vw"
                 placeholder="blur"
                 blurDataURL={At?.blurDataURL}
-                className="aspect-auto 
-                w-[18px] xl:w-[23px] 
-                group-hover:w-[20px] xl:group-hover:w-[26px] 
+                className="aspect-auto
+                w-[18px] xl:w-[23px]
+                group-hover:w-[20px] xl:group-hover:w-[26px]
               transition-all duration-300 ease-in"
               />
             </Link>
@@ -575,8 +575,8 @@ async function ServerFooter() {
               href={footer?.social?.linkedinUrl || ''}
               target="_blank"
               className="flex items-center justify-center group
-          w-[30px] xl:w-[35px] 2xl:w-[40px] 
-          h-[30px] xl:h-[35px] 2xl:h-[40px] 
+          w-[30px] xl:w-[35px] 2xl:w-[40px]
+          h-[30px] xl:h-[35px] 2xl:h-[40px]
           bg-[#33CCCC33] hover:bg-cyan transition-all duration-300 ease-in
           "
             >
@@ -589,9 +589,9 @@ async function ServerFooter() {
                 sizes="100vw"
                 placeholder="blur"
                 blurDataURL={Linkdin?.blurDataURL}
-                className="aspect-auto 
-                w-[18px] xl:w-[22px] 
-                group-hover:w-[20px] xl:group-hover:w-[25px] 
+                className="aspect-auto
+                w-[18px] xl:w-[22px]
+                group-hover:w-[20px] xl:group-hover:w-[25px]
               transition-all duration-300 ease-in"
               />
             </Link>
@@ -604,29 +604,15 @@ async function ServerFooter() {
               bn={footer?.legalSection?.legalValue}
             />
           </div>
-          {/* <div className="flex">
-          {footer?.legalSection?.legal?.map((legal, index) => (
-            <div key={index} className="flex space-x-2">
-              <Link
-                href={pageHref(legal?.buttonLink)}
-                // ${index + 1 !== footer?.legalSection?.legal?.length && 'border-r border-white-3'} px-4 py-0
-                className={`text-white-3 global-p3 font-manrope `}
-              >
-                {legal?.buttonText}
-              </Link>
-              <div className="text-white-3">|</div>
-            </div>
-          ))}
-        </div> */}
         </div>
       </div>
       {/* pattern 1 */}
       {footer?.showPatternDesign && (
         <div
           className="invisible md:visible absolute left-0 bottom-0 z-10 opacity-30 h-[50%]
-                 md:w-[120px] 
-                 lg:w-[170px] 
-                 xl:w-[225px] 
+                 md:w-[120px]
+                 lg:w-[170px]
+                 xl:w-[225px]
                  2xl:w-[280px]
               "
         >
@@ -646,9 +632,9 @@ async function ServerFooter() {
       {footer?.showPatternDesign && (
         <div
           className="invisible md:visible absolute right-0 top-0 z-10 opacity-30 h-[50%]
-                 md:w-[120px] 
-                 lg:w-[170px] 
-                 xl:w-[225px] 
+                 md:w-[120px]
+                 lg:w-[170px]
+                 xl:w-[225px]
                  2xl:w-[280px]
               "
         >
