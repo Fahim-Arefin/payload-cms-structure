@@ -6,6 +6,8 @@ import React from 'react'
 import { default as Pattern01, default as Pattern02 } from '/public/assets/images/BOpattern.png'
 import IntroSection from '@/components/custom/sagar-ropes-shared/others/IntroSection'
 import SagarBlogCarousal from './SagarBlogCarousal'
+import NoDataFound from '@/components/custom/shared/NoDataFound'
+import { GLOBAL_NEWS_SLUG_AND_TAG } from '@/lib/constants'
 
 type Props = {
   block: SagarBlogBlockType
@@ -19,7 +21,15 @@ function SagarBlogClient({ block, blogsData }: Props) {
         <div className="container-padding">
           <IntroSection block={block} />
           <div className="mt-4 lg:mt-6 xl:mt-8 2xl:mt-10 ">
-            <SagarBlogCarousal block={block} blogsData={blogsData} />
+            {blogsData && blogsData?.length > 0 ? (
+              <SagarBlogCarousal block={block} blogsData={blogsData} />
+            ) : (
+              <NoDataFound
+                message="No Featured Blog Found"
+                description={`Please feature some blog from Global '${GLOBAL_NEWS_SLUG_AND_TAG}' collection data`}
+                bgColor={block?.backgroundColor || ''}
+              />
+            )}
           </div>
         </div>
 
