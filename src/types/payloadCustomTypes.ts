@@ -1,4 +1,5 @@
 import {
+  ALL_NEWS_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   CONTACT_INFO_CARD_SLUG_AND_TAG,
   CUSTOMER_FEEDBACK_SLUG_AND_TAG,
@@ -19,7 +20,9 @@ import {
   QUERIES_SLUG_AND_TAG,
   QUERY_FORM_SLUG_AND_TAG,
   RESULT_CARD_SLUG_AND_TAG,
+  SAGAR_BLOGS_SLUG_AND_TAG,
   SAGAR_VIDEOS_SLUG_AND_TAG,
+  SINGLE_NEWS_SLUG_AND_TAG,
   TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
   TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
   TESTING_PILLARS_SLUG_AND_TAG,
@@ -144,4 +147,19 @@ export type CustomerfeedbackBlockType = Extract<
 export type TestingPillarsBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof TESTING_PILLARS_SLUG_AND_TAG }
+>
+
+export type AllNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ALL_NEWS_SLUG_AND_TAG }
+>
+
+export type SingleNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SINGLE_NEWS_SLUG_AND_TAG }
+>
+
+export type SagarBlogBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SAGAR_BLOGS_SLUG_AND_TAG }
 >

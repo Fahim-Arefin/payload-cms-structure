@@ -17,6 +17,9 @@ import Navbar from './collections/globals/Navbar'
 import Footer from './collections/globals/Footer'
 import { Review } from './collections/Review'
 import { Query } from './collections/Query'
+import NewsCategories from './collections/globals/NewsCategories'
+import NewsTags from './collections/globals/NewsTags'
+import News from './collections/globals/News'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -90,15 +93,7 @@ export default buildConfig({
     abortOnLimit: true,
   },
   collections: [Users, Media, Resume, Review, Query, AuditLogs, Pages],
-  globals: [
-    Navbar,
-    Footer,
-    // BoardOfDirectors,
-    // LeadershipTeam,
-    // ContactUsGlobal,
-    // GlobalBlogs,
-    // GlobalVlogs,
-  ],
+  globals: [Navbar, Footer, NewsCategories, NewsTags, News],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

@@ -179,7 +179,7 @@ function QueryForm({ className }: Props) {
     const hasAnyError = Object.values(newErrors).some(Boolean)
     if (hasAnyError) return
 
-    console.log('Submitted data:', formData)
+    // console.log('Submitted data:', formData)
     try {
       setIsSubmitting(true)
 

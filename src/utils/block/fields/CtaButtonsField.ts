@@ -13,7 +13,7 @@ type Options = {
 
 export const CtaButtonsField = ({
   name = 'ctaButtons',
-  label = 'CTA Buttons',
+  label = 'Section CTA Buttons',
   minRows = 0,
   maxRows = 2,
   required = false,

@@ -1,17 +1,17 @@
 'use client'
 
-import ResultCard from '@/components/custom/sagar-ropes-shared/cards/ResultCard'
 import CardsCarousel from '@/components/custom/sagar-ropes-shared/carousal/CardsCarousel'
 import VideoThumbnailDialog from '@/components/custom/sagar-ropes-shared/dialog/VideoThumbnailDialog'
+import { News } from '@/payload-types'
 
-import { SagarVideosBlockType } from '@/types/payloadCustomTypes'
+type NewsItem = NonNullable<News['newsItems']>[number]
 
 type Props = {
-  block: SagarVideosBlockType
+  publishedVlogs: NewsItem[]
 }
 
-export default function VideoCarousal({ block }: Props) {
-  const cards = block?.videos ?? []
+export default function VideoCarousal({ publishedVlogs }: Props) {
+  const cards = publishedVlogs ?? []
 
   const items = [...cards.map((c) => ({ type: 'card01' as const, data: c }))]
 
@@ -39,14 +39,14 @@ export default function VideoCarousal({ block }: Props) {
     >
       {(item, idx) =>
         item.type === 'card01' &&
-        typeof item?.data?.thumbnail === 'object' &&
-        item?.data?.thumbnail?.url && (
+        typeof item?.data?.thumbnailImage === 'object' &&
+        item?.data?.thumbnailImage?.url && (
           <div className="w-full">
             <VideoThumbnailDialog
               className="relative w-full aspect-[16/9]  my-auto "
-              thumbnailUrl={item?.data.thumbnail?.url}
-              blurDataURL={item?.data.thumbnailBlurDataURL || ''}
-              videoUrl={item?.data.videoUrl}
+              thumbnailUrl={item?.data.thumbnailImage?.url}
+              blurDataURL={item?.data.thumbnailImageBlurDataURL || ''}
+              videoUrl={item?.data.videoUrl ?? ''}
             />
           </div>
         )

@@ -137,6 +137,60 @@ export function buildDetailHref(pattern: string, id: string | number): string {
   return '/' + (withSlash + encodeURIComponent(String(id))).replace(/^\/+/, '')
 }
 
+// new helpers
+// ====================================================================================
+// ====================================================================================
+// ====================================================================================
+export const withSectionHash = (href: string, sectionId?: string | null) => {
+  const id = String(sectionId ?? '').trim()
+  if (!id) return href
+
+  const cleanHref = href.replace(/#.*$/, '')
+  return `${cleanHref}#${id}`
+}
+
+export const buildDetailHrefNew = (pattern: string, itemId: string) => {
+  const cleanPattern = String(pattern || '').replace(/^\/+|\/+$/g, '')
+  const cleanId = String(itemId || '').trim()
+
+  if (!cleanPattern) return '#'
+  if (!cleanId) return `/${cleanPattern}`
+
+  const replaced = cleanPattern
+    .replace(':slug', cleanId)
+    .replace('[slug]', cleanId)
+    .replace(':id', cleanId)
+    .replace('[id]', cleanId)
+
+  return `/${replaced}`
+}
+
+type BuildNewsHrefArgs = {
+  buttonLink: any
+  sectionId?: string | null
+  itemId?: string | null
+  detail?: boolean
+}
+
+export const buildNewsHref = ({
+  buttonLink,
+  sectionId,
+  itemId,
+  detail = false,
+}: BuildNewsHrefArgs) => {
+  if (!buttonLink) return '#'
+
+  const pattern = resolvePageSlug(buttonLink) ?? ''
+
+  const baseHref = detail ? buildDetailHrefNew(pattern, itemId || '') : pageHref(buttonLink)
+
+  return withSectionHash(baseHref, sectionId)
+}
+
+// ====================================================================================
+// ====================================================================================
+// ====================================================================================
+
 type MaybeRel<T> = string | T | null | undefined
 
 export function resolvePageSlug(target: MaybeRel<{ slug?: string }>): string | null {
@@ -211,6 +265,33 @@ export function formatMonDYYYYBN(input: string | Date, opts: FormatOpts = {}): s
 
   // Compose as "Mon D, YYYY" in BN
   return `${month} ${day}, ${year}`
+}
+
+export function formatPayloadDate(date?: string | null) {
+  if (!date) return ''
+
+  const d = new Date(date)
+
+  if (Number.isNaN(d.getTime())) return ''
+
+  return d.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+}
+export function formatPayloadDateShort(date?: string | null) {
+  if (!date) return ''
+
+  const d = new Date(date)
+
+  if (Number.isNaN(d.getTime())) return ''
+
+  return d.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  })
 }
 
 /* Examples:

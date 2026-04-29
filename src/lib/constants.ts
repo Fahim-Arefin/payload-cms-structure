@@ -19,12 +19,25 @@ const thumbnailFolder = '/assets/block-thumbnails'
 
 // GLOBAL API
 
+// Global Navbar
 export const GLOBAL_NAVBAR_SLUG_AND_TAG = 'navbar' as const
 export const GLOBAL_NAVBAR_CACHE_KEY = 'navbar-data'
 
+// Global Footer
 export const GLOBAL_FOOTER_SLUG_AND_TAG = 'footer' as const
 export const GLOBAL_FOOTER_CACHE_KEY = 'footer-data'
 
+// News Categories Global
+export const GLOBAL_NEWS_CATEGORIES_SLUG_AND_TAG = 'news-categories'
+export const GLOBAL_NEWS_CATEGORIES_CACHE_KEY = 'news-categories-data'
+
+// News Tags Global
+export const GLOBAL_NEWS_TAGS_SLUG_AND_TAG = 'news-tags'
+export const GLOBAL_NEWS_TAGS_CACHE_KEY = 'news-tags-data'
+
+// News Global
+export const GLOBAL_NEWS_SLUG_AND_TAG = 'news'
+export const GLOBAL_NEWS_CACHE_KEY = 'news-data'
 export const AUDIT_LOG = 'Audit'
 
 // Group
@@ -35,6 +48,7 @@ export const HOME_PAGE = 'Home Page'
 export const ABOUT_US = 'About Us Page'
 export const PRODUCT_PAGE = 'Product Page'
 export const GET_IN_TOUCH = 'Get In Touch Page'
+export const NEWS = 'News And Events'
 
 // Basic Hero Block
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
@@ -128,7 +142,7 @@ export const RESULT_CARD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/result-card-b
 
 // Founder Quote
 export const SAGAR_VIDEOS_SLUG_AND_TAG = 'sagar-videos'
-export const SAGAR_VIDEOS_BLOCK_LABEL = 'Sagar Videos'
+export const SAGAR_VIDEOS_BLOCK_LABEL = 'Sagar Vlogs'
 export const SAGAR_VIDEOS_CACHE_KEY = 'sagar-videos-data'
 export const SAGAR_VIDEOS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/sagar-videos-block-thumbnail.jpg`
 
@@ -179,3 +193,21 @@ export const TESTING_PILLARS_SLUG_AND_TAG = 'testing-pillars'
 export const TESTING_PILLARS_BLOCK_LABEL = 'Testing Pillars'
 export const TESTING_PILLARS_CACHE_KEY = 'testing-pillars-data'
 export const TESTING_PILLARS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/testing-pillars-block-thumbnail.jpg`
+
+// All news page
+export const ALL_NEWS_SLUG_AND_TAG = 'all-news'
+export const ALL_NEWS_BLOCK_LABEL = 'All News'
+export const ALL_NEWS_CACHE_KEY = 'all-news-data'
+export const ALL_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-news-block-thumbnail.jpg`
+
+// All news page
+export const SINGLE_NEWS_SLUG_AND_TAG = 'single-news'
+export const SINGLE_NEWS_BLOCK_LABEL = 'Signle News'
+export const SINGLE_NEWS_CACHE_KEY = 'single-news-data'
+export const SINGLE_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-news-block-thumbnail.jpg`
+
+// All news page
+export const SAGAR_BLOGS_SLUG_AND_TAG = 'sagar-blogs'
+export const SAGAR_BLOGS_BLOCK_LABEL = 'Sagar Blogs'
+export const SAGAR_BLOGS_CACHE_KEY = 'sagar-blogs-data'
+export const SAGAR_BLOGS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/sagar-blogs-block-thumbnail.jpg`

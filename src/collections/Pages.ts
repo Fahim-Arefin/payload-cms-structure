@@ -1,4 +1,5 @@
 // currently working code
+import AllNewsSchema from '@/blocks/AllNews/schema'
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import ContactInfoCardSchema from '@/blocks/ContactInfoCard/schema'
 import CustomerFeedbackSchema from '@/blocks/CustomerFeedback/schema'
@@ -19,7 +20,9 @@ import QualityBenchhmarkSchema from '@/blocks/QualityBenchmarkCard/schema'
 import QueriesSchema from '@/blocks/Queries/schema'
 import QueryFormSchema from '@/blocks/QueryForm/schema'
 import ResultCardSchema from '@/blocks/ResultCard/schema'
+import SagarBlogsSchema from '@/blocks/SagarBlog/schema'
 import SagarVideosSchema from '@/blocks/SagarVideos/schema'
+import SignleNewsSchema from '@/blocks/SingleNews/schema'
 import TechnicalDatasheetSchema from '@/blocks/TechnicalDatashheet/schema'
 import TechnicalSpecificationsSchema from '@/blocks/TechnicalSpecification/schema'
 import TestingPillarsSchema from '@/blocks/TestingPillars/schema'
@@ -167,6 +170,7 @@ export const Pages: CollectionConfig = {
         ResultCardSchema,
         CustomerFeedbackSchema,
         FounderQuoteSchema,
+        SagarBlogsSchema,
 
         // about us page unique
         MissionVisionSchema,
@@ -180,6 +184,10 @@ export const Pages: CollectionConfig = {
         ContactInfoCardSchema,
         OfficeAddressSchema,
         FeedbackFormSchema,
+
+        // News
+        AllNewsSchema,
+        SignleNewsSchema,
       ],
     },
   ],

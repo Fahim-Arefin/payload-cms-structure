@@ -97,10 +97,16 @@ export interface Config {
   globals: {
     navbar: Navbar;
     footer: Footer;
+    'news-categories': NewsCategory;
+    'news-tags': NewsTag;
+    news: News;
   };
   globalsSelect: {
     navbar: NavbarSelect<false> | NavbarSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'news-categories': NewsCategoriesSelect<false> | NewsCategoriesSelect<true>;
+    'news-tags': NewsTagsSelect<false> | NewsTagsSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -2301,6 +2307,103 @@ export interface Page {
          */
         heading2HighlightColor?: ('primary' | 'secondary') | null;
         /**
+         * Write the paragraph text (you can add multiple paragraphs).
+         */
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        detailsPageLink?:
+          | {
+              /**
+               * Max 40 characters.
+               */
+              label: string;
+              /**
+               * Select the button style
+               */
+              style?: ('btn01' | 'btn02') | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink: string | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Toggle to show/hide pattern design on the right side of the block
+         */
+        showPatternDesign?: boolean | null;
+        /**
+         * When ON, this block renders data from **Global → News**.
+         *
+         * **Before enabling:** fill up the Global → News data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color , section heading etc.).
+         * • News Videos comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'sagar-blogs';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        /**
+         * Small label above heading. Max 40 characters.
+         */
+        tag?: string | null;
+        /**
+         * Main heading line 1. Max 90 characters.
+         */
+        heading1: string;
+        /**
+         * Optional. Must be inside Heading 1. Max 90.
+         */
+        heading1Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading1HighlightColor?: ('primary' | 'secondary') | null;
+        /**
+         * Secondary heading line. Max 90 characters.
+         */
+        heading2?: string | null;
+        /**
+         * Optional. Must be inside Heading 2. Max 90.
+         */
+        heading2Highlighted?: string | null;
+        /**
+         * Choose the highlight color style for this heading.
+         */
+        heading2HighlightColor?: ('primary' | 'secondary') | null;
+        /**
          * Optional heading line 3. Max 90 characters.
          */
         heading3?: string | null;
@@ -2588,21 +2691,16 @@ export interface Page {
          * Select the alignment of the video
          */
         videoAlignment?: ('left' | 'right') | null;
-        videos: {
-          /**
-           * Upload the video thumbnail image.
-           */
-          thumbnail: string | Media;
-          thumbnailOriginal?: (string | null) | Media;
-          pendingThumbnailOriginal?: string | null;
-          pendingThumbnailCrop?: string | null;
-          thumbnailBlurDataURL?: string | null;
-          /**
-           * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
-           */
-          videoUrl: string;
-          id?: string | null;
-        }[];
+        /**
+         * When ON, this block renders data from **Global → News**.
+         *
+         * **Before enabling:** fill up the Global → News data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color , section heading etc.).
+         * • News Videos comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
         id?: string | null;
         blockName?: string | null;
         blockType: 'sagar-videos';
@@ -3069,6 +3167,100 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'feedback-form';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        ctaButtons?:
+          | {
+              /**
+               * Max 40 characters.
+               */
+              label: string;
+              /**
+               * Select the button style
+               */
+              style?: ('btn01' | 'btn02') | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink: string | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * When ON, this block renders data from **Global → News**.
+         *
+         * **Before enabling:** fill up the Global → News data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color , CTA btn etc.).
+         * • News comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'all-news';
+      }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?:
+          | ('cyan' | 'bg-1' | 'white-1' | 'white-2' | 'white-3' | 'dark-1' | 'dark-2' | 'dark-2b' | 'dark-3')
+          | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        ctaButtons?:
+          | {
+              /**
+               * Max 40 characters.
+               */
+              label: string;
+              /**
+               * Select the button style
+               */
+              style?: ('btn01' | 'btn02') | null;
+              /**
+               * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+               */
+              buttonLink: string | Page;
+              /**
+               * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+               */
+              sectionId?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * When ON, this block renders data from **Global → News**.
+         *
+         * **Before enabling:** fill up the Global → News data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color , CTA btn etc.).
+         * • News comes from the single shared Global to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'single-news';
       }
   )[];
   updatedAt: string;
@@ -3988,6 +4180,34 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'sagar-blogs'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              tag?: T;
+              heading1?: T;
+              heading1Highlighted?: T;
+              heading1HighlightColor?: T;
+              heading2?: T;
+              heading2Highlighted?: T;
+              heading2HighlightColor?: T;
+              description?: T;
+              detailsPageLink?:
+                | T
+                | {
+                    label?: T;
+                    style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              showPatternDesign?: T;
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
         'mission-vision'?:
           | T
           | {
@@ -4084,17 +4304,7 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                   };
               videoAlignment?: T;
-              videos?:
-                | T
-                | {
-                    thumbnail?: T;
-                    thumbnailOriginal?: T;
-                    pendingThumbnailOriginal?: T;
-                    pendingThumbnailCrop?: T;
-                    thumbnailBlurDataURL?: T;
-                    videoUrl?: T;
-                    id?: T;
-                  };
+              useSharedData?: T;
               id?: T;
               blockName?: T;
             };
@@ -4250,6 +4460,44 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               showPatternDesign?: T;
               showReviewForm?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'all-news'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              ctaButtons?:
+                | T
+                | {
+                    label?: T;
+                    style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'single-news'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              ctaButtons?:
+                | T
+                | {
+                    label?: T;
+                    style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              useSharedData?: T;
               id?: T;
               blockName?: T;
             };
@@ -4460,6 +4708,137 @@ export interface Footer {
   createdAt?: string | null;
 }
 /**
+ * Global list of news categories.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-categories".
+ */
+export interface NewsCategory {
+  id: string;
+  categories?:
+    | {
+        label: string;
+        /**
+         * Unique key like company-news, awards, events.
+         */
+        key: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Global list of news tags.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-tags".
+ */
+export interface NewsTag {
+  id: string;
+  tags?:
+    | {
+        label: string;
+        /**
+         * Unique key like rope, export, quality-control.
+         */
+        key: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Global news manager using category and tag selectors.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: string;
+  uploadSessionId?: string | null;
+  newsItems?:
+    | {
+        /**
+         * Upload thumbnail image. Recommended aspect ratio 16:9.
+         */
+        thumbnailImage: string | Media;
+        thumbnailImageOriginal?: (string | null) | Media;
+        pendingThumbnailImageOriginal?: string | null;
+        pendingThumbnailImageCrop?: string | null;
+        thumbnailImageBlurDataURL?: string | null;
+        /**
+         * Upload product image. Recommended aspect ratio 1:1.
+         */
+        productImage: string | Media;
+        productImageOriginal?: (string | null) | Media;
+        pendingProductImageOriginal?: string | null;
+        pendingProductImageCrop?: string | null;
+        productImageBlurDataURL?: string | null;
+        title1: string;
+        title2?: string | null;
+        eventType: 'blog' | 'vlog';
+        /**
+         * Paste a YouTube link (watch, share, or embed). Example: https://www.youtube.com/watch?v=XXXX or https://youtu.be/XXXX
+         */
+        videoUrl?: string | null;
+        categoryKey: string;
+        tagKey: string;
+        /**
+         * Independent category display name.
+         */
+        categoryName: string;
+        releaseDate: string;
+        /**
+         * Main description.
+         */
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * Quotation / highlighted quote content.
+         */
+        quotationDescription?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        quotationDate?: string | null;
+        quotationOwnerName?: string | null;
+        /**
+         * If you featured a news that means it will show on the homepage news section
+         */
+        isFeatured?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navbar_select".
  */
@@ -4575,6 +4954,76 @@ export interface FooterSelect<T extends boolean = true> {
     | T
     | {
         legalValue?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-categories_select".
+ */
+export interface NewsCategoriesSelect<T extends boolean = true> {
+  categories?:
+    | T
+    | {
+        label?: T;
+        key?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-tags_select".
+ */
+export interface NewsTagsSelect<T extends boolean = true> {
+  tags?:
+    | T
+    | {
+        label?: T;
+        key?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  uploadSessionId?: T;
+  newsItems?:
+    | T
+    | {
+        thumbnailImage?: T;
+        thumbnailImageOriginal?: T;
+        pendingThumbnailImageOriginal?: T;
+        pendingThumbnailImageCrop?: T;
+        thumbnailImageBlurDataURL?: T;
+        productImage?: T;
+        productImageOriginal?: T;
+        pendingProductImageOriginal?: T;
+        pendingProductImageCrop?: T;
+        productImageBlurDataURL?: T;
+        title1?: T;
+        title2?: T;
+        eventType?: T;
+        videoUrl?: T;
+        categoryKey?: T;
+        tagKey?: T;
+        categoryName?: T;
+        releaseDate?: T;
+        description?: T;
+        quotationDescription?: T;
+        quotationDate?: T;
+        quotationOwnerName?: T;
+        isFeatured?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

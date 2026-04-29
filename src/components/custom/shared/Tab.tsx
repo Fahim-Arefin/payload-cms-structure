@@ -35,7 +35,7 @@ type Props = {
 
 export function Tab({ config, data }: Props) {
   const [activeTab, setActiveTab] = useState(config[0].value)
-  console.log(activeTab)
+  // console.log(activeTab)
   return (
     <div className="container-padding">
       <Tabs
