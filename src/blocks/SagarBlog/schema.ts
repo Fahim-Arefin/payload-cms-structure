@@ -41,13 +41,13 @@ const SagarBlogsSchema: Block = {
       heading2HighlightMax: HEADING_MAX,
       heading3Max: HEADING_MAX,
       heading3HighlightMax: HEADING_MAX,
-      ctaMaxRows: 1,
-      // noCTA: true,
+      // ctaMaxRows: 1,
+      noCTA: true,
       includeHeading3: false, // ✅ disables heading 3 fields in admin
     }),
 
     CtaButtonsField({
-      name: 'newsDetailsPageLink',
+      name: 'detailsPageLink',
       label: 'News Details Page Link',
       minRows: 1,
       maxRows: 1,
