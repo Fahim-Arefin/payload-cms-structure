@@ -2118,9 +2118,18 @@ export interface Page {
          * Auto-generated Base64 blur
          */
         bannerImageBlurDataURL?: string | null;
+        /**
+         * The primary heading that appears prominently over the banner image
+         */
         bannerTitle: string;
+        /**
+         * A secondary line of text displayed directly beneath the rating section for additional context
+         */
         bannerSubtitle: string;
-        showPublishedReviews?: boolean | null;
+        /**
+         * The fallback job title or role displayed under a reviewer's name if they leave the position field blank.
+         */
+        defaultPosition: string;
         ctaButtons?:
           | {
               /**
@@ -4148,7 +4157,7 @@ export interface PagesSelect<T extends boolean = true> {
               bannerImageBlurDataURL?: T;
               bannerTitle?: T;
               bannerSubtitle?: T;
-              showPublishedReviews?: T;
+              defaultPosition?: T;
               ctaButtons?:
                 | T
                 | {

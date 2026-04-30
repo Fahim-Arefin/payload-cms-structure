@@ -3,13 +3,15 @@
 import CardsCarousel from '@/components/custom/sagar-ropes-shared/carousal/CardsCarousel'
 import { Review } from '@/payload-types'
 import ReviewItem from './ReviewItem'
+import { CustomerfeedbackBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
-  block: Review[]
+  reviews: Review[]
+  block: CustomerfeedbackBlockType
 }
 
-export default function ReviewCarousal({ block }: Props) {
-  const cards = block ?? []
+export default function ReviewCarousal({ reviews, block }: Props) {
+  const cards = reviews ?? []
 
   const items = [...cards.map((c) => ({ type: 'card01' as const, data: c }))]
 
@@ -38,7 +40,7 @@ export default function ReviewCarousal({ block }: Props) {
       //   prevButtonClassName="pointer-events-auto absolute left-2 md:left-3 xl:left-4 h-8 w-8 rounded-none border border-[#7B7BA8] bg-transparent text-white hover:bg-[#7B7BA8]"
       //   nextButtonClassName="pointer-events-auto absolute right-2 md:right-3 xl:right-4 h-8 w-8 rounded-none border border-[#7B7BA8] bg-transparent text-white hover:bg-[#7B7BA8]"
     >
-      {(item, idx) => item.type === 'card01' && <ReviewItem data={item?.data} />}
+      {(item, idx) => item.type === 'card01' && <ReviewItem data={item?.data} block={block} />}
     </CardsCarousel>
   )
 }

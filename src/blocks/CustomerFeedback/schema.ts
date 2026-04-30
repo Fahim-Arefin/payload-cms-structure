@@ -54,7 +54,8 @@ const CustomerFeedbackSchema: Block = {
           label: 'Banner Title',
           validate: validateShortText('Banner Title', 180, true),
           admin: {
-            width: '50%',
+            width: '33%',
+            description: 'The primary heading that appears prominently over the banner image',
           },
         },
         {
@@ -64,15 +65,24 @@ const CustomerFeedbackSchema: Block = {
           label: 'Banner Subtitle',
           validate: validateShortText('Banner Subtitle', 180, true),
           admin: {
-            width: '50%',
+            width: '33%',
+            description:
+              'A secondary line of text displayed directly beneath the rating section for additional context',
+          },
+        },
+        {
+          name: 'defaultPosition',
+          type: 'text',
+          required: true,
+          label: 'Default Customer Form Position',
+          validate: validateShortText('Default Customer Form Position', 180, true),
+          defaultValue: 'Rope Professional',
+          admin: {
+            width: '33%',
+            description: `The fallback job title or role displayed under a reviewer's name if they leave the position field blank.`,
           },
         },
       ],
-    },
-    {
-      name: 'showPublishedReviews',
-      type: 'checkbox',
-      defaultValue: true,
     },
 
     CtaButtonsField({ maxRows: 1 }),
