@@ -31,12 +31,23 @@ function ResultCard({ data, index, className, height, padding }: Props) {
       ${className}
       `}
     >
+      {/* bg-[linear-gradient(180deg,#101053_0%,#101053_10%,rgba(16,16,83,0.78)_32%,rgba(16,16,83,0.42)_58%,rgba(255,255,255,0.88)_82%,#ffffff_100%)] */}
       <div
-        className="font-proxima font-bold leading-[100%] tracking-[-2.7px] 
-        bg-[linear-gradient(180deg,#101053_0%,rgba(255,255,255,0)_116.09%)] bg-clip-text text-transparent
-      text-[50px] lg:text-[70px] xl:text-[90px]"
+        className="
+    font-proxima
+    font-bold
+    text-[50px] lg:text-[70px] xl:text-[90px]
+    leading-[1]
+    tracking-[-2.7px]
+    inline-block
+    bg-[linear-gradient(180deg,#101053_0%,#101053_5%,rgba(16,16,83,0.78)_30%,rgba(16,16,83,0.42)_55%,rgba(255,255,255,0.88)_82%,#ffffff_100%)]
+    bg-clip-text
+    text-transparent
+    [-webkit-background-clip:text]
+    [-webkit-text-fill-color:transparent]
+  "
       >
-        0{index + 1}
+        {String(index + 1).padStart(2, '0')}
       </div>
       <div>
         {/* titles */}
