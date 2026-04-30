@@ -211,15 +211,14 @@ function FounderQuoteSection({ block }: Props) {
         mt-1 lg:mt-2 xl:mt-3 2xl:mt-4"
         >
           <div
-            className="font-manrope font-bold text-[10px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]
-                tracking-[-0.42px] text-dark-1 leading-[185.714%]
+            className="font-proxima font-bold global-h6 text-dark-1 
                 "
           >
             {block?.name}
           </div>
           <div
-            className="font-manrope text-[10px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]
-                text-[#0B0B3B] leading-[142.857%]
+            className="font-manrope global-p5
+                text-[#0B0B3B] 
               "
           >
             {block?.designation}
@@ -251,17 +250,22 @@ function FounderQuoteSection({ block }: Props) {
         </div>
         {/* description */}
         <div
-          className={`overflow-hidden font-manrope text-[16px] md:text-[16px] lg:text-[18px] xl:text-[22px] 2xl:text-[24px]
-    tracking-[1.1px] leading-[181.818%] text-dark-3 text-justify
+          //         className={`overflow-hidden font-manrope text-[16px] md:text-[16px] lg:text-[18px] xl:text-[22px] 2xl:text-[24px]
+          //   tracking-[1.1px] leading-[181.818%] text-dark-3 text-justify
+          //   transition-all duration-500 ease-in-out opacity-90
+          //   ${expand ? 'max-h-[1200px]' : 'max-h-[200px] lg:max-h-[200px] xl:max-h-[350px] '}
+          // `}
+          className={`overflow-hidden font-manrope global-p2
+     text-dark-3 text-justify
     transition-all duration-500 ease-in-out opacity-90
-    ${expand ? 'max-h-[1200px]' : 'max-h-[200px] lg:max-h-[200px] xl:max-h-[350px] '}
+    ${expand ? 'max-h-[1200px]' : 'max-h-[160px] lg:max-h-[185px] xl:max-h-[260px] 2xl:max-h-[330px] '}
   `}
         >
           <LocalizedRichText en={block?.quote} bn={block?.quote} />
         </div>
 
         {/* link */}
-        <div className="-ml-1 ">
+        <div className="-ml-0.5 md:-ml-1 ">
           <Button02 onClick={handleClick}>{expand ? 'Read Less' : 'Read More'}</Button02>
         </div>
       </div>
