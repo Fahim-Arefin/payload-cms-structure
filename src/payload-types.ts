@@ -2687,6 +2687,21 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        detailsPageLink: {
+          /**
+           * Max 40 characters.
+           */
+          label: string;
+          /**
+           * Pick the internal News Details page. External URLs are not allowed.
+           */
+          buttonLink: string | Page;
+          /**
+           * Optional. Used for direct jump links to a section. No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+          id?: string | null;
+        }[];
         /**
          * Select the alignment of the video
          */
@@ -4299,6 +4314,14 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     label?: T;
                     style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              detailsPageLink?:
+                | T
+                | {
+                    label?: T;
                     buttonLink?: T;
                     sectionId?: T;
                     id?: T;
