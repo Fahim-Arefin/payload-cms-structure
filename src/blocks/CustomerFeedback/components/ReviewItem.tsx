@@ -40,9 +40,9 @@ function ReviewItem({ data, block }: Props) {
 
       <div
         className="flex items-center 
-      space-x-2 xl:space-x-4 2xl:space-x-6"
+      space-x-2 xl:space-x-3 2xl:space-x-4"
       >
-        <div className="w-[35px] lg:w-[40px] xl:w-[55px] 2xl:w-[60px] aspect-square">
+        <div className="w-[35px] lg:w-[40px] xl:w-[55px] 2xl:w-[60px] aspect-square ">
           <Image
             src={Profile}
             alt="Profile Icon"
@@ -61,7 +61,7 @@ function ReviewItem({ data, block }: Props) {
             {data?.name}
           </div>
 
-          <div className="font-manrope global-p5 2xl:global-p4 text-dark-3">
+          <div className="font-manrope global-p5 2xl:global-p4 text-dark-3 ml-[1px]">
             {data?.position ? data?.position : block?.defaultPosition}
           </div>
         </div>
