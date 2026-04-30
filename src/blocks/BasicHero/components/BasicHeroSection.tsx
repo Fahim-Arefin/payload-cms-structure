@@ -1,88 +1,7 @@
-// 'use client'
-
-// import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
-// import { sliderDelay } from '@/lib/data'
-// import { BasicHeroBlockType } from '@/types/payloadCustomTypes'
-// import Autoplay from 'embla-carousel-autoplay'
-// import { useEffect, useState } from 'react'
-// import BasicHeroItem from './BasicHeroItem'
-
-// // ✅ any icons you want (lucide examples)
-// import { ChevronLeft, ChevronRight } from 'lucide-react'
-
-// type Props = {
-//   block: BasicHeroBlockType
-// }
-
-// function BasicHeroSection({ block }: Props) {
-//   const [api, setApi] = useState<CarouselApi>()
-//   const [current, setCurrent] = useState(0)
-//   const [count, setCount] = useState(0)
-
-//   useEffect(() => {
-//     if (!api) return
-//     setCount(api.scrollSnapList().length)
-//     setCurrent(api.selectedScrollSnap() + 1)
-//     api.on('select', () => setCurrent(api.selectedScrollSnap() + 1))
-//   }, [api])
-
-//   return (
-//     <div className="">
-//       <Carousel
-//         setApi={setApi}
-//         opts={{ align: 'start', loop: true }}
-//         plugins={[Autoplay({ delay: sliderDelay })]}
-//         className="relative w-full"
-//       >
-//         <CarouselContent>
-//           {block?.heroes?.map((item, index) => (
-//             <CarouselItem key={index}>
-//               <BasicHeroItem item={item} />
-//             </CarouselItem>
-//           ))}
-//         </CarouselContent>
-
-//         {/* Custom Navigation */}
-//         {block?.heroes?.length > 1 && (
-//           <div className="hidden lg:flex absolute top-1/2 inset-x-0 -translate-y-1/2 justify-between z-30 2xl:px-12">
-//             <button
-//               type="button"
-//               aria-label="Previous slide"
-//               onClick={() => api?.scrollPrev()}
-//               className="w-9 h-9 border border-white rounded-[2px] bg-transparent text-white hover:bg-white/30 transition-colors flex items-center justify-center"
-//             >
-//               <ChevronLeft className="h-5 w-5" />
-//             </button>
-
-//             <button
-//               type="button"
-//               aria-label="Next slide"
-//               onClick={() => api?.scrollNext()}
-//               className="w-9 h-9 border border-white rounded-[2px] bg-transparent text-white hover:bg-white/30 transition-colors flex items-center justify-center"
-//             >
-//               <ChevronRight className="h-5 w-5" />
-//             </button>
-//           </div>
-//         )}
-//       </Carousel>
-
-//       <div className="text-muted-foreground py-2 text-center text-sm">
-//         Slide {current} of {count}
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default BasicHeroSection
-
-// ==============================================================================
-// ==============================================================================
-// ==============================================================================
-
 'use client'
 
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
-import { sliderDelay } from '@/lib/data'
+import { homeSliderDelay } from '@/lib/data'
 import { BasicHeroBlockType } from '@/types/payloadCustomTypes'
 import Autoplay from 'embla-carousel-autoplay'
 import { useEffect, useMemo, useState } from 'react'
@@ -104,7 +23,7 @@ function BasicHeroSection({ block }: Props) {
   const autoplay = useMemo(
     () =>
       Autoplay({
-        delay: sliderDelay,
+        delay: homeSliderDelay,
         stopOnInteraction: true,
       }),
     [],

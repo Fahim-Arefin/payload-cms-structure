@@ -1,7 +1,7 @@
 'use client'
 
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
-import { sliderDelay } from '@/lib/data'
+import { homeSliderDelay } from '@/lib/data'
 import { ProductHeroBlockType } from '@/types/payloadCustomTypes'
 import Autoplay from 'embla-carousel-autoplay'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -23,7 +23,7 @@ function ProductHeroSection({ block }: Props) {
   const autoplay = useMemo(
     () =>
       Autoplay({
-        delay: sliderDelay,
+        delay: homeSliderDelay,
         stopOnInteraction: true,
       }),
     [],
