@@ -50,9 +50,9 @@ function MissionVisionCard({ label, desc, className }: Props) {
   return (
     <div
       className={`text-center
-              px-4 md:px-3 lg:px-4 xl:px-12 2xl:px-14
+              px-4 md:px-3 lg:px-4 xl:px-10 2xl:px-12
               py-2 md:py-1.5 lg:py-2 xl:py-8 2xl:py-10
-              space-y-4 md:space-y-3 lg:space-y-4 xl:space-y-12 2xl:space-y-14 group
+              space-y-4 md:space-y-3 lg:space-y-4 xl:space-y-8 2xl:space-y-10 group
               transition-all duration-300 ease-in
               ${className}`}
     >
@@ -79,15 +79,13 @@ function MissionVisionCard({ label, desc, className }: Props) {
         {/* p3 (initial) */}
         <div
           className="font-manrope global-p3 text-justify
-    transition-all duration-300 ease-in
-    opacity-100 scale-100
-    group-hover:opacity-0 group-hover:scale-125"
+    transition-all duration-300 ease-in group-hover:text-white-1"
         >
           <LocalizedRichText en={desc} bn={desc} />
         </div>
 
         {/* p2 (hover version) */}
-        <div
+        {/* <div
           className="font-manrope global-p2 text-justify text-white
     absolute inset-0
     transition-all duration-300 ease-in delay-150
@@ -95,7 +93,7 @@ function MissionVisionCard({ label, desc, className }: Props) {
     group-hover:opacity-100 group-hover:scale-100"
         >
           <LocalizedRichText en={desc} bn={desc} />
-        </div>
+        </div> */}
       </div>
     </div>
   )
