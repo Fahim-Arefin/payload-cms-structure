@@ -146,11 +146,13 @@ function Card01({ data, index, className }: Props) {
 
   const link = href !== '#' ? href : ''
 
+  //  ${isActiveAnimation && ` hover:bg-transparent`}
   const cardContent = (
     <div
       className={`group/card relative flex flex-col justify-between ${hasBgImage && 'group bg-cyan/30 overflow-hidden'}
       transition-all duration-300 ease-in 
-      ${isActiveAnimation && ` hover:bg-transparent`} 
+      
+      ${isActiveAnimation && ` `} 
       ${className}`}
     >
       {/* border effect */}
@@ -240,11 +242,12 @@ function Card01({ data, index, className }: Props) {
                 const media = item?.icon
                 if (typeof media !== 'object' || !media?.url) return null
                 return (
+                  // ${isActiveAnimation && ` group-hover/card:bg-white group-hover/card:border group-hover/card:border-cyan`}
                   <div
                     key={index}
                     className={`rounded-full flex items-center justify-center 
                       transition-all duration-300 ease-in
-                      bg-bg-1 ${isActiveAnimation && ` group-hover/card:bg-white group-hover/card:border group-hover/card:border-cyan`}
+                      bg-bg-1 ${isActiveAnimation && ` group-hover/card:border group-hover/card:border-cyan`}
                       w-[30px] md:w-[40px] lg:w-[50px] xl:w-[60px] 
                       h-[30px] md:h-[40px] lg:h-[50px] xl:h-[60px]`}
                   >
