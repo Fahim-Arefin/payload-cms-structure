@@ -4701,7 +4701,21 @@ export interface Footer {
   };
   factorySection: {
     header: string;
-    address: string;
+    facAddress: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
     mapUrl?: string | null;
     phone: string;
     email: string;
@@ -4958,7 +4972,7 @@ export interface FooterSelect<T extends boolean = true> {
     | T
     | {
         header?: T;
-        address?: T;
+        facAddress?: T;
         mapUrl?: T;
         phone?: T;
         email?: T;
