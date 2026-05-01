@@ -23,7 +23,7 @@ type Props = {
 function SingleNewsClient({ block, data }: Props) {
   return (
     <WithHashScroller id={block?.sectionId} bgColor={block?.backgroundColor}>
-      <div className="container-padding w-full lg:w-[70%] mx-auto">
+      <div className="container-padding w-full lg:w-[85%] xl:w-[80%] 2xl:w-[70%] mx-auto">
         <AllNewsClientCard key={data?.id} item={data} block={block} detailsPage />
       </div>
     </WithHashScroller>

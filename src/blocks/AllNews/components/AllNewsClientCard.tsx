@@ -189,8 +189,8 @@ function AllNewsClientCard({ item, block, detailsPage }: Props) {
         <div
           className="space-y-1.5
            border-2 border-cyan 
-        xl:px-6 2xl:px-7
-        xl:py-4 2xl:py-5
+        px-3 lg:px-4 xl:px-6 2xl:px-7
+        py-2 lg:py-3 xl:py-4 2xl:py-5
         "
         >
           <div className="flex justify-between items-center">
@@ -229,7 +229,7 @@ function AllNewsClientCard({ item, block, detailsPage }: Props) {
       )}
 
       {/* CTA buttons */}
-      <div className="flex justify-center items-center">
+      <div className="">
         {block?.ctaButtons?.map((block, index) => {
           const href = buildNewsHref({
             buttonLink: block?.buttonLink,
@@ -239,7 +239,10 @@ function AllNewsClientCard({ item, block, detailsPage }: Props) {
           })
 
           return (
-            <div key={`pageLink-${index}`}>
+            <div
+              key={`pageLink-${index}`}
+              className={`${block?.style === 'btn02' && '-ml-0.5 md:-ml-1'}`}
+            >
               <Link href={href} passHref>
                 {block?.style === 'btn01' && (
                   <Button01>
