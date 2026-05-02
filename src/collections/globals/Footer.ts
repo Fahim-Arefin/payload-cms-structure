@@ -306,14 +306,24 @@ const Footer: GlobalConfig = {
         {
           type: 'row',
           fields: [
+            // {
+            //   name: 'address',
+            //   type: 'text',
+            //   label: 'Factory Address',
+            //   required: true,
+            //   validate: validateShortText('Factory Address', ADDRESS_MAX, true),
+            //   defaultValue: 'Shakhari Bazar, Rampal, Munshiganj - 1501, Bangladesh',
+            //   admin: { width: '50%' },
+            // },
             {
-              name: 'address',
-              type: 'text',
+              name: 'facAddress',
+              type: 'richText',
               label: 'Factory Address',
+              admin: {
+                width: '50%',
+                description: ``,
+              },
               required: true,
-              validate: validateShortText('Factory Address', ADDRESS_MAX, true),
-              defaultValue: 'Shakhari Bazar, Rampal, Munshiganj - 1501, Bangladesh',
-              admin: { width: '50%' },
             },
             {
               name: 'mapUrl',

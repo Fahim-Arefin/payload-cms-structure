@@ -230,6 +230,13 @@
            xl:px-[225px] 
            2xl:px-[280px];
   }
+  .container-padding-t {
+    @apply pt-9 
+           md:pt-[48px]
+           lg:pt-[68px]
+           xl:pt-[90px]
+           2xl:pt-[112px];
+  }
   .container-padding-y {
     @apply py-9 
            md:py-[48px]

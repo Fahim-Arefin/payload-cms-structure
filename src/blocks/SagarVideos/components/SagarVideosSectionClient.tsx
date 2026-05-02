@@ -35,7 +35,7 @@ function SagarVideosSectionClient({ block, newsData }: Props) {
             className={`md:col-span-8 w-full h-full flex items-center justify-center ${block?.videoAlignment === 'left' ? 'order-1' : 'order-2'}`}
           >
             {publishedVlogs?.length > 0 ? (
-              <VideoCarousal publishedVlogs={publishedVlogs} />
+              <VideoCarousal publishedVlogs={publishedVlogs} block={block} />
             ) : (
               <NoDataFound
                 message="No Featured Vlog Found"

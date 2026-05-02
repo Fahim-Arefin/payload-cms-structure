@@ -19,14 +19,14 @@ function QualityBenchmarkCardBlock({ block }: Props) {
           gap-4 lg:gap-6 xl:gap-8 2xl:gap-10 "
         >
           {block?.benchmarks?.map((benchmark, index) => (
+            // hover:h-[110%] md:hover:h-[150px] lg:hover:h-[180px] xl:hover:h-[250px]  2xl:hover:h-[270px]
             <MissionVisionCard
               key={index}
               label={benchmark.title}
               desc={benchmark.description}
               className="
               border-2 border-dashed border-cyan bg-white-2 hover:bg-cyan
-              h-fit md:h-[130px] lg:h-[160px] xl:h-[230px] 2xl:h-[250px]
-              hover:h-[110%] md:hover:h-[150px] lg:hover:h-[180px] xl:hover:h-[250px]  2xl:hover:h-[270px] 
+              h-fit md:h-[110px] lg:h-[130px] xl:h-[200px] 2xl:h-[230px]
               overflow-hidden hover:overflow-y-auto overflow-x-hidden"
             />
           ))}

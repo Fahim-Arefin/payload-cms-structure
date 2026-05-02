@@ -2,13 +2,15 @@ import { Review } from '@/payload-types'
 import Image from 'next/image'
 import React from 'react'
 import Quote from 'public/assets/images/QuoteIcon.png'
-import Profile from 'public/assets/images/avatar.jpg'
+import Profile from 'public/assets/images/avatar.png'
+import { CustomerfeedbackBlockType } from '@/types/payloadCustomTypes'
 
 type Props = {
   data: Review
+  block: CustomerfeedbackBlockType
 }
 
-function ReviewItem({ data }: Props) {
+function ReviewItem({ data, block }: Props) {
   return (
     <div
       className="flex flex-col justify-between 
@@ -38,9 +40,9 @@ function ReviewItem({ data }: Props) {
 
       <div
         className="flex items-center 
-      space-x-2 xl:space-x-4 2xl:space-x-6"
+      space-x-2 xl:space-x-3 2xl:space-x-4"
       >
-        <div className="w-[35px] lg:w-[40px] xl:w-[55px] 2xl:w-[60px] aspect-square">
+        <div className="w-[35px] lg:w-[40px] xl:w-[55px] 2xl:w-[60px] aspect-square ">
           <Image
             src={Profile}
             alt="Profile Icon"
@@ -58,9 +60,10 @@ function ReviewItem({ data }: Props) {
             {' '}
             {data?.name}
           </div>
-          {data?.position && (
-            <div className="font-manrope global-p5 2xl:global-p4 text-dark-3">{data?.position}</div>
-          )}
+
+          <div className="font-manrope global-p5 2xl:global-p4 text-dark-3 ml-[1px]">
+            {data?.position ? data?.position : block?.defaultPosition}
+          </div>
         </div>
       </div>
     </div>

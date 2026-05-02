@@ -53,7 +53,7 @@ function ReviewSection({ block, reviews }: Props) {
       px-4 lg:px-6 2xl:px-11 2xl:py-9"
     >
       <div className="min-h-0 flex-1 ">
-        <ReviewCarousal block={reviews} />
+        <ReviewCarousal reviews={reviews} block={block} />
       </div>
 
       <div className="flex justify-end">

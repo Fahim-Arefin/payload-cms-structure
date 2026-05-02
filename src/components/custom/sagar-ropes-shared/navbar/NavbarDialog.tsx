@@ -36,10 +36,15 @@ const NoOverlayFullScreenDialogContent = React.forwardRef<
         backgroundSize: 'contain',
       }}
       ref={ref}
+      //   fixed inset-x-0
+      //  top-[60px] lg:top-[75px] xl:top-[80px] 2xl:top-[85px] bottom-0 z-[10001]
+      //  w-screen
+      //  h-[calc(100vh-60px)] lg:h-[calc(100vh-75px)] xl:h-[calc(100vh-80px)] 2xl:h-[calc(100vh-85px)]
       className={cn(
         `
-         fixed inset-x-0 top-[60px] lg:top-[75px] xl:top-[80px] 2xl:top-[85px] bottom-0 z-[10001] w-screen
-          h-[calc(100vh-60px)] lg:h-[calc(100vh-75px)] xl:h-[calc(100vh-80px)] 2xl:h-[calc(100vh-85px)]
+         fixed inset-0 
+         z-[10001] 
+         w-screen h-screen
           translate-x-0 translate-y-0
           rounded-none border-none
           bg-white

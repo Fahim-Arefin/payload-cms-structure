@@ -2118,9 +2118,18 @@ export interface Page {
          * Auto-generated Base64 blur
          */
         bannerImageBlurDataURL?: string | null;
+        /**
+         * The primary heading that appears prominently over the banner image
+         */
         bannerTitle: string;
+        /**
+         * A secondary line of text displayed directly beneath the rating section for additional context
+         */
         bannerSubtitle: string;
-        showPublishedReviews?: boolean | null;
+        /**
+         * The fallback job title or role displayed under a reviewer's name if they leave the position field blank.
+         */
+        defaultPosition: string;
         ctaButtons?:
           | {
               /**
@@ -2687,6 +2696,21 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        detailsPageLink: {
+          /**
+           * Max 40 characters.
+           */
+          label: string;
+          /**
+           * Pick the internal News Details page. External URLs are not allowed.
+           */
+          buttonLink: string | Page;
+          /**
+           * Optional. Used for direct jump links to a section. No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+          id?: string | null;
+        }[];
         /**
          * Select the alignment of the video
          */
@@ -4133,7 +4157,7 @@ export interface PagesSelect<T extends boolean = true> {
               bannerImageBlurDataURL?: T;
               bannerTitle?: T;
               bannerSubtitle?: T;
-              showPublishedReviews?: T;
+              defaultPosition?: T;
               ctaButtons?:
                 | T
                 | {
@@ -4299,6 +4323,14 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     label?: T;
                     style?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                    id?: T;
+                  };
+              detailsPageLink?:
+                | T
+                | {
+                    label?: T;
                     buttonLink?: T;
                     sectionId?: T;
                     id?: T;
@@ -4669,7 +4701,21 @@ export interface Footer {
   };
   factorySection: {
     header: string;
-    address: string;
+    facAddress: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
     mapUrl?: string | null;
     phone: string;
     email: string;
@@ -4926,7 +4972,7 @@ export interface FooterSelect<T extends boolean = true> {
     | T
     | {
         header?: T;
-        address?: T;
+        facAddress?: T;
         mapUrl?: T;
         phone?: T;
         email?: T;
