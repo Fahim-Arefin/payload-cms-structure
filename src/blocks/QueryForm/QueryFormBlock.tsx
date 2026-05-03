@@ -35,7 +35,7 @@ function QueryFormBlock({ block }: Props) {
                 className="relative z-30 mt-4 lg:mt-0 
               col-span-1 lg:col-span-2 xl:col-span-1"
               >
-                <QueryForm />
+                <QueryForm formId="query-form" />
               </div>
             )}
 

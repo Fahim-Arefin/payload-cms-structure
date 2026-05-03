@@ -4,6 +4,7 @@ import React from 'react'
 
 type InputFieldProps = {
   id: string
+  name?: string
   label: string
   placeholder?: string
   type?: React.HTMLInputTypeAttribute
@@ -13,10 +14,12 @@ type InputFieldProps = {
   description?: string
   required?: boolean
   className?: string
+  maxLength?: number
 }
 
 export function InputField({
   id,
+  name,
   label,
   placeholder,
   type = 'text',
@@ -25,6 +28,7 @@ export function InputField({
   error,
   description,
   required = false,
+  maxLength,
   className = '',
 }: InputFieldProps) {
   const isInvalid = Boolean(error)
@@ -38,11 +42,12 @@ export function InputField({
 
       <Input
         id={id}
-        name={id}
+        name={name ?? id}
         type={type}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        maxLength={maxLength}
         aria-invalid={isInvalid || undefined}
         className={`font-manrope global-p5 rounded-none border-[1.5px] border-cyan
         placeholder:font-manrope placeholder:global-p5 placeholder:text-[#07072550] placeholder:font-bold
@@ -52,9 +57,22 @@ export function InputField({
         p-2 lg:p-3 xl:p-4 2xl:p-5 ${className}`}
       />
 
-      {(error || description) && (
+      {/* {(error || description) && (
         <FieldDescription className="font-manrope text-red-500 global-p5 min-h-5">
           {isInvalid ? error : description}
+        </FieldDescription>
+      )} */}
+      {(error || description || maxLength) && (
+        <FieldDescription className="font-manrope text-red-500 global-p5 min-h-5">
+          {isInvalid ? (
+            error
+          ) : maxLength ? (
+            <span className="text-[#07072580]">
+              {value.length}/{maxLength}
+            </span>
+          ) : (
+            description
+          )}
         </FieldDescription>
       )}
     </Field>
