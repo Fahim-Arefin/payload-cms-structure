@@ -1,4 +1,4 @@
-import { pageHref, resolvePageSlug } from '@/lib/utils'
+import { pageHref, pageHrefWithAnchor, resolvePageSlug } from '@/lib/utils'
 import { ResultCardBlockType } from '@/types/payloadCustomTypes'
 import Link from 'next/link'
 import React from 'react'
@@ -14,11 +14,12 @@ type Props = {
 
 function ResultCard({ data, index, className, height, padding }: Props) {
   // If GlobalButton supports children (you already do in the YT button), render label as child:
-  const href =
-    data?.buttonSectionId && data?.buttonLink && data?.buttonSectionId
-      ? `/${resolvePageSlug(data?.buttonLink)}/#${data?.buttonSectionId}`
-      : pageHref(data.buttonLink)
+  // const href =
+  //   data?.buttonSectionId && data?.buttonLink && data?.buttonSectionId
+  //     ? `/${resolvePageSlug(data?.buttonLink)}/#${data?.buttonSectionId}`
+  //     : pageHref(data.buttonLink)
 
+  const href = pageHrefWithAnchor(data?.buttonLink, data?.buttonSectionId)
   const link = href !== '#' ? href : ''
 
   const cardContent = (

@@ -1,4 +1,4 @@
-import { pageHref, resolvePageSlug } from '@/lib/utils'
+import { pageHref, pageHrefWithAnchor, resolvePageSlug } from '@/lib/utils'
 import { ProductInfo02BlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,10 +18,12 @@ type Props = {
 
 function InfoCard02({ data, index, height, padding, className }: Props) {
   // If GlobalButton supports children (you already do in the YT button), render label as child:
-  const href =
-    data?.sectionId && data?.buttonLink && data?.sectionId
-      ? `/${resolvePageSlug(data?.buttonLink)}/#${data?.sectionId}`
-      : pageHref(data.buttonLink)
+  // const href =
+  //   data?.sectionId && data?.buttonLink && data?.sectionId
+  //     ? `/${resolvePageSlug(data?.buttonLink)}/#${data?.sectionId}`
+  //     : pageHref(data.buttonLink)
+
+  const href = pageHrefWithAnchor(data?.buttonLink, data?.sectionId)
 
   const link = href !== '#' ? href : ''
 
