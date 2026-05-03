@@ -24,6 +24,7 @@ import SearchBarSection from './SearchBarSection'
 import { default as Pattern02 } from '/public/assets/images/BOpattern.png'
 import Blur4 from '/public/assets/images/Blur4.png'
 import { SearchSuggestion } from './ServerNavbar'
+import LocalizedRichText from '../../shared/LocalizedRichText'
 
 type Props = {
   footerData: Footer
@@ -274,7 +275,10 @@ function NavbarActions({ footerData, suggestions }: Props) {
                 href={footer?.factorySection?.mapUrl || ''}
               >
                 <div className="text-white-2 font-manrope global-p4">
-                  {footer?.factorySection?.address}
+                  <LocalizedRichText
+                    en={footer?.factorySection?.facAddress}
+                    bn={footer?.factorySection?.facAddress}
+                  />
                 </div>
               </Link>
             </div>
