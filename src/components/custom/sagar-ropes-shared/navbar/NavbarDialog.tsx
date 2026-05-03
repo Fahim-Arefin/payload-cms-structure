@@ -139,7 +139,7 @@ function NavbarDialog({ trigger }: NavbarDialogProps) {
               <span className="sr-only">Close</span>
             </DialogPrimitive.Close>
 
-            <QueryForm className="relative z-[10001] w-full" />
+            <QueryForm className="relative z-[10001] w-full" formId="contact-us-query-form" />
           </div>
         </div>
       </NoOverlayFullScreenDialogContent>

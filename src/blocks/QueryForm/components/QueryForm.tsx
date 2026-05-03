@@ -5,6 +5,7 @@ import {
   CountryOption,
   CountrySelectField,
 } from '@/components/custom/sagar-ropes-shared/Form/CountrySelectField'
+import FormSuccessDialog from '@/components/custom/sagar-ropes-shared/Form/FormSuccessDialog'
 import { InputField } from '@/components/custom/sagar-ropes-shared/Form/InputField'
 import { parsePhoneNumberFromString, type CountryCode } from 'libphonenumber-js'
 import { AlertCircle, CheckCircle2 } from 'lucide-react'
@@ -21,6 +22,8 @@ type FormData = {
   query: string
   countryDialCode: string
 }
+
+const QUERY_MAX_LENGTH = 500
 
 type FormErrors = Partial<Record<keyof FormData, string>>
 
@@ -52,9 +55,10 @@ export function validatePhoneNumber(phone: string, countryCode: string) {
 
 type Props = {
   className?: string
+  formId?: string
 }
 
-function QueryForm({ className }: Props) {
+function QueryForm({ className, formId }: Props) {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -69,7 +73,22 @@ function QueryForm({ className }: Props) {
   const [errors, setErrors] = useState<FormErrors>({})
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [successDialogOpen, setSuccessDialogOpen] = React.useState(false)
   //   const [submitMessage, setSubmitMessage] = useState('')
+
+  const handlePhoneChange = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      phone: value,
+    }))
+
+    if (hasSubmitted) {
+      setErrors((prev) => ({
+        ...prev,
+        phone: validateField('phone', value),
+      }))
+    }
+  }
 
   const validateField = (field: keyof FormData, value: string | number) => {
     switch (field) {
@@ -98,6 +117,7 @@ function QueryForm({ className }: Props) {
         const raw = String(value).trim()
 
         if (!raw) return 'Contact number is required.'
+        if (!/^\d+$/.test(raw)) return 'Contact number can contain numbers only.'
         if (!formData.country) return 'Please select a country first.'
 
         const phoneNumber = parsePhoneNumberFromString(raw, formData.country as CountryCode)
@@ -117,11 +137,21 @@ function QueryForm({ className }: Props) {
         return undefined
       }
 
-      case 'query':
-        if (!String(value).trim()) return 'Query is required.'
-        if (String(value).trim().length < 40) return 'Query must be at least 40 characters.'
-        return undefined
+      // case 'query':
+      //   if (!String(value).trim()) return 'Query is required.'
+      //   if (String(value).trim().length < 40) return 'Query must be at least 40 characters.'
+      //   return undefined
 
+      case 'query': {
+        const raw = String(value).trim()
+
+        if (!raw) return 'Query is required.'
+        if (raw.length > QUERY_MAX_LENGTH) {
+          return `Query must be ${QUERY_MAX_LENGTH} characters or less.`
+        }
+
+        return undefined
+      }
       default:
         return undefined
     }
@@ -194,10 +224,6 @@ function QueryForm({ className }: Props) {
       const result = await res.json()
 
       if (!res.ok) {
-        // setSubmitMessage(result?.message || 'Submission failed.')
-        // toast.error(result?.message || 'Submission failed.', {
-        //   duration: 4000,
-        // })
         toast.error('Submission failed', {
           description: result?.message || 'Please try again in a moment.',
           duration: 5000,
@@ -206,16 +232,13 @@ function QueryForm({ className }: Props) {
         return
       }
 
-      //   setSubmitMessage('Thank you! Your review has been submitted.')
-      //   toast.success('Thank you! Your review has been submitted.', {
-      //     duration: 4000,
-      //   })
-      toast.success('Query submitted', {
-        description: 'Thank you for sharing your query with us.',
-        duration: 4000,
-        icon: <CheckCircle2 className="h-5 w-5 text-cyan" />,
-      })
+      // toast.success('Query submitted', {
+      //   description: 'Thank you for sharing your query with us.',
+      //   duration: 4000,
+      //   icon: <CheckCircle2 className="h-5 w-5 text-cyan" />,
+      // })
 
+      setSuccessDialogOpen(true)
       setFormData({
         name: '',
         email: '',
@@ -231,10 +254,7 @@ function QueryForm({ className }: Props) {
       setHasSubmitted(false)
     } catch (error) {
       console.error(error)
-      //   setSubmitMessage('Something went wrong while submitting the form.')
-      //   toast.error('Something went wrong while submitting the form.', {
-      //     duration: 4000,
-      //   })
+
       toast.error('Something went wrong', {
         description: 'Your review could not be submitted right now.',
         duration: 5000,
@@ -257,7 +277,9 @@ function QueryForm({ className }: Props) {
     >
       <div className="col-span-2">
         <InputField
-          id="name"
+          // id="name"
+          id={`${formId}-name`}
+          name="name"
           label="Full Name"
           placeholder="Your Full Name"
           value={formData.name}
@@ -269,7 +291,9 @@ function QueryForm({ className }: Props) {
 
       <div className="col-span-2">
         <InputField
-          id="email"
+          // id="email"
+          id={`${formId}-email`}
+          name="email"
           label="Email Address"
           type="email"
           placeholder="We'll use this to reply to your query"
@@ -282,7 +306,9 @@ function QueryForm({ className }: Props) {
 
       <div className="col-span-2">
         <InputField
-          id="companyName"
+          // id="companyName"
+          id={`${formId}-companyName`}
+          name="companyName"
           label="Company Name"
           placeholder="The organization you represent (optional)"
           value={formData.companyName}
@@ -293,7 +319,9 @@ function QueryForm({ className }: Props) {
 
       <div className="col-span-2">
         <InputField
-          id="position"
+          // id="position"
+          id={`${formId}-position`}
+          name="position"
           label="Position"
           placeholder="Your role or designation (optional)"
           value={formData.position}
@@ -303,9 +331,12 @@ function QueryForm({ className }: Props) {
       </div>
       <div className="col-span-2">
         <InputField
-          id="query"
+          // id="query"
+          id={`${formId}-query`}
+          name="query"
           label="Your Query"
           placeholder="Ask Us Anything"
+          maxLength={QUERY_MAX_LENGTH}
           value={formData.query}
           onChange={handleInputChange('query')}
           error={errors.query}
@@ -314,7 +345,9 @@ function QueryForm({ className }: Props) {
 
       <div className="col-span-2 md:col-span-1">
         <CountrySelectField
-          id="country"
+          // id="country"
+          id={`${formId}-country`}
+          name="country"
           label="Country"
           value={formData.country}
           onChange={handleCountryChange}
@@ -325,11 +358,12 @@ function QueryForm({ className }: Props) {
 
       <div className="col-span-2 md:col-span-1">
         <ContactNumberField
-          id="phone"
+          id={`${formId}-phone`}
+          name="phone"
           label="Contact No."
           countryDialCode={formData.countryDialCode}
           phoneValue={formData.phone}
-          onPhoneChange={handleInputChange('phone')}
+          onPhoneChange={handlePhoneChange}
           error={errors.phone}
           required
         />
@@ -346,6 +380,13 @@ function QueryForm({ className }: Props) {
           {isSubmitting ? 'Submitting...' : 'Submit Your Query'}
         </button>
       </div>
+      <FormSuccessDialog
+        open={successDialogOpen}
+        onOpenChange={setSuccessDialogOpen}
+        heading="Inquiry Received"
+        description="Thank you for reaching out to us. Your requirements have been shared with our technical team, and we are already reviewing the details of your project. At SAGAR, we believe every challenge deserves a precision-engineered solution—expect a response from our specialists shortly."
+        ctaLabel="Back to the Legacy"
+      />
     </form>
   )
 }

@@ -11,7 +11,7 @@ type Props = {
 function TestingPilarCard({ data, className }: Props) {
   return (
     <div
-      className={`group/testCard w-full bg-white-2 md:hover:scale-105 lg:hover:scale-110 transition-all duration-500 ease-in-out 
+      className={`group/testCard w-full bg-white-2 transition-all duration-75 ease-in-out 
     px-4 lg:px-7 xl:px-9 2xl:px-11
     py-6 lg:py-10 xl:py-12 2xl:py-16
     space-y-3 md:space-y-5 lg:space-y-7 xl:space-y-9 2xl:space-y-11
