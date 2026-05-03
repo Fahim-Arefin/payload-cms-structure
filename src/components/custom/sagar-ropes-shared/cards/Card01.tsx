@@ -4,7 +4,7 @@ import React from 'react'
 import LocalizedRichText from '../../shared/LocalizedRichText'
 import SparkImage from '/public/assets/images/spark.png'
 import Link from 'next/link'
-import { pageHref, resolvePageSlug } from '@/lib/utils'
+import { pageHref, pageHrefWithAnchor, resolvePageSlug } from '@/lib/utils'
 
 type Props = {
   data: GetToKnowBlockType['cards'][number]
@@ -17,10 +17,12 @@ function Card01({ data, index, className }: Props) {
   const isActiveAnimation = data?.showAnimation
 
   // If GlobalButton supports children (you already do in the YT button), render label as child:
-  const href =
-    data?.sectionId && data?.buttonLink && data?.sectionId
-      ? `/${resolvePageSlug(data?.buttonLink)}/#${data?.sectionId}`
-      : pageHref(data.buttonLink)
+  // const href =
+  //   data?.sectionId && data?.buttonLink && data?.sectionId
+  //     ? `/${resolvePageSlug(data?.buttonLink)}/#${data?.sectionId}`
+  //     : pageHref(data.buttonLink)
+
+  const href = pageHrefWithAnchor(data?.buttonLink, data?.sectionId)
 
   const link = href !== '#' ? href : ''
 
