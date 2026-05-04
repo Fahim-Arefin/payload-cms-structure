@@ -20,7 +20,7 @@ function FeedbackFormBlock({ block }: Props) {
           <IntroSectionDesign04 block={block} position="center" justify="justify-center" />
           {block?.showReviewForm && (
             <div className="mt-4 lg:mt-6 xl:mt-8 2xl:mt-10 ">
-              <FeedbackForm formId="feedback-form" />
+              <FeedbackForm formId="feedback-form" recipientEmails={block?.recipientEmails} />
             </div>
           )}
         </div>
