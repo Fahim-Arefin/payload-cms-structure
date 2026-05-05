@@ -35,6 +35,15 @@ export type NavbarData = {
     logo: SafeMedia
   }
   desktop: { items: NavItem[] }
+  queryFormRecipientEmails:
+    | {
+        email1?: string | null | undefined
+        email2?: string | null | undefined
+        email3?: string | null | undefined
+        email4?: string | null | undefined
+        email5?: string | null | undefined
+      }
+    | undefined
 }
 
 // ----- helpers to build safe/serializable props -----
@@ -193,6 +202,7 @@ export default async function ServerNavbar() {
     desktop: {
       items: mapItems(navbarRes?.desktop?.items),
     },
+    queryFormRecipientEmails: navbarRes?.queryFormRecipientEmails,
   }
 
   return (
@@ -201,6 +211,7 @@ export default async function ServerNavbar() {
       blur={navbarRes?.logoBlurDataURL || ''}
       footerData={footer}
       suggestions={suggestions}
+      queryFormRecipientEmails={navbarData.queryFormRecipientEmails}
     />
   )
 }

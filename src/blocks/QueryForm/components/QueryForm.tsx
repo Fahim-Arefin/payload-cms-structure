@@ -12,6 +12,14 @@ import { AlertCircle, CheckCircle2 } from 'lucide-react'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
 
+type RecipientEmails = {
+  email1?: string | null
+  email2?: string | null
+  email3?: string | null
+  email4?: string | null
+  email5?: string | null
+}
+
 type FormData = {
   name: string
   email: string
@@ -26,6 +34,12 @@ type FormData = {
 const QUERY_MAX_LENGTH = 500
 
 type FormErrors = Partial<Record<keyof FormData, string>>
+
+type Props = {
+  className?: string
+  formId?: string
+  recipientEmails?: RecipientEmails
+}
 
 export function validatePhoneNumber(phone: string, countryCode: string) {
   const raw = phone.trim()
@@ -53,12 +67,18 @@ export function validatePhoneNumber(phone: string, countryCode: string) {
   return undefined
 }
 
-type Props = {
-  className?: string
-  formId?: string
-}
+const getRecipientList = (recipientEmails?: RecipientEmails) =>
+  [
+    recipientEmails?.email1,
+    recipientEmails?.email2,
+    recipientEmails?.email3,
+    recipientEmails?.email4,
+    recipientEmails?.email5,
+  ]
+    .map((email) => String(email || '').trim())
+    .filter(Boolean)
 
-function QueryForm({ className, formId }: Props) {
+function QueryForm({ className, formId, recipientEmails }: Props) {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -218,7 +238,11 @@ function QueryForm({ className, formId }: Props) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        // body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          recipients: getRecipientList(recipientEmails),
+        }),
       })
 
       const result = await res.json()

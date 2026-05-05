@@ -14,9 +14,11 @@ import {
 } from '@/components/ui/dialog'
 import QueryForm from '@/blocks/QueryForm/components/QueryForm'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { NavbarData } from './ServerNavbar'
 
 type NavbarDialogProps = {
   trigger: React.ReactNode
+  queryFormRecipientEmails: NavbarData['queryFormRecipientEmails']
 }
 
 const NoOverlayFullScreenDialogContent = React.forwardRef<
@@ -77,7 +79,7 @@ const NoOverlayFullScreenDialogContent = React.forwardRef<
 
 NoOverlayFullScreenDialogContent.displayName = 'NoOverlayFullScreenDialogContent'
 
-function NavbarDialog({ trigger }: NavbarDialogProps) {
+function NavbarDialog({ trigger, queryFormRecipientEmails }: NavbarDialogProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
@@ -139,7 +141,11 @@ function NavbarDialog({ trigger }: NavbarDialogProps) {
               <span className="sr-only">Close</span>
             </DialogPrimitive.Close>
 
-            <QueryForm className="relative z-[10001] w-full" formId="contact-us-query-form" />
+            <QueryForm
+              className="relative z-[10001] w-full"
+              formId="contact-us-query-form"
+              recipientEmails={queryFormRecipientEmails}
+            />
           </div>
         </div>
       </NoOverlayFullScreenDialogContent>

@@ -24,6 +24,7 @@ type Props = {
   blur: string
   suggestions: SearchSuggestion[]
   footerData: Footer
+  queryFormRecipientEmails: NavbarData['queryFormRecipientEmails']
 }
 
 const ChevronDown = ({ className = '' }: { className?: string }) => (
@@ -38,7 +39,7 @@ const ChevronDown = ({ className = '' }: { className?: string }) => (
   </svg>
 )
 
-function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
+function MobileNavbar({ data, blur, suggestions, footerData, queryFormRecipientEmails }: Props) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [expanded, setExpanded] = useState<string[]>([])
@@ -349,6 +350,7 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
 
             <div className="mt-3 flex justify-center">
               <NavbarDialog
+                queryFormRecipientEmails={queryFormRecipientEmails}
                 trigger={
                   <button
                     type="button"

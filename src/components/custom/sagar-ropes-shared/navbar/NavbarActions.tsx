@@ -23,12 +23,13 @@ import NavbarDialog from './NavbarDialog'
 import SearchBarSection from './SearchBarSection'
 import { default as Pattern02 } from '/public/assets/images/BOpattern.png'
 import Blur4 from '/public/assets/images/Blur4.png'
-import { SearchSuggestion } from './ServerNavbar'
+import { NavbarData, SearchSuggestion } from './ServerNavbar'
 import LocalizedRichText from '../../shared/LocalizedRichText'
 
 type Props = {
   footerData: Footer
   suggestions: SearchSuggestion[]
+  queryFormRecipientEmails: NavbarData['queryFormRecipientEmails']
 }
 
 function SearchIcon() {
@@ -55,7 +56,7 @@ function SearchIcon() {
   )
 }
 
-function NavbarActions({ footerData, suggestions }: Props) {
+function NavbarActions({ footerData, suggestions, queryFormRecipientEmails }: Props) {
   const footer = footerData
   return (
     <Sheet>
@@ -179,6 +180,7 @@ function NavbarActions({ footerData, suggestions }: Props) {
             </div>
             <div className="">
               <NavbarDialog
+                queryFormRecipientEmails={queryFormRecipientEmails}
                 trigger={
                   <Button
                     variant="link"

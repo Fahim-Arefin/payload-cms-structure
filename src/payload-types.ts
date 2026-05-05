@@ -1570,6 +1570,16 @@ export interface Page {
           | null;
         showPatternDesign?: boolean | null;
         showQueryForm?: boolean | null;
+        /**
+         * Provide at least one email address. All valid ones will receive the query message through email.
+         */
+        recipientEmails?: {
+          email1?: string | null;
+          email2?: string | null;
+          email3?: string | null;
+          email4?: string | null;
+          email5?: string | null;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'query-form';
@@ -3951,6 +3961,15 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               showPatternDesign?: T;
               showQueryForm?: T;
+              recipientEmails?:
+                | T
+                | {
+                    email1?: T;
+                    email2?: T;
+                    email3?: T;
+                    email4?: T;
+                    email5?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -4659,6 +4678,31 @@ export interface Navbar {
         }[]
       | null;
   };
+  /**
+   * Add the email addresses that should receive query form submissions from the website side panel/navbar query form. At least one recipient is required. These emails are only used for the side panel form, not the page query form block.
+   */
+  queryFormRecipientEmails?: {
+    /**
+     * Primary email address that will receive side panel query submissions.
+     */
+    email1?: string | null;
+    /**
+     * Optional additional recipient.
+     */
+    email2?: string | null;
+    /**
+     * Optional additional recipient.
+     */
+    email3?: string | null;
+    /**
+     * Optional additional recipient.
+     */
+    email4?: string | null;
+    /**
+     * Optional additional recipient.
+     */
+    email5?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -4935,6 +4979,15 @@ export interface NavbarSelect<T extends boolean = true> {
                   };
               id?: T;
             };
+      };
+  queryFormRecipientEmails?:
+    | T
+    | {
+        email1?: T;
+        email2?: T;
+        email3?: T;
+        email4?: T;
+        email5?: T;
       };
   updatedAt?: T;
   createdAt?: T;
