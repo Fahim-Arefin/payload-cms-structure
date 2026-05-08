@@ -184,7 +184,7 @@ const Navbar: GlobalConfig = {
     {
       name: 'desktop',
       type: 'group',
-      label: 'Desktop Navigation',
+      label: 'Navigation',
       fields: [
         {
           name: 'items',
