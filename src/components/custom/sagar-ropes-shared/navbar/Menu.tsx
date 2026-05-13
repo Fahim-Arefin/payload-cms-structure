@@ -9,7 +9,12 @@ import { usePathname } from 'next/navigation'
 import NavbarActions from './NavbarActions'
 import { Footer } from '@/payload-types'
 
-type Props = { data: NavbarData; footerData: Footer; suggestions: SearchSuggestion[] }
+type Props = {
+  data: NavbarData
+  footerData: Footer
+  suggestions: SearchSuggestion[]
+  queryFormRecipientEmails: NavbarData['queryFormRecipientEmails']
+}
 
 const ChevronDown = ({ className = '' }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" className={className}>
@@ -23,7 +28,7 @@ const ChevronDown = ({ className = '' }: { className?: string }) => (
   </svg>
 )
 
-function Menu({ data, footerData, suggestions }: Props) {
+function Menu({ data, footerData, suggestions, queryFormRecipientEmails }: Props) {
   const allItems = data?.desktop?.items
   const topItems = allItems.filter((item) => item.isTop === 'yes')
   const mainItems = allItems.filter((item) => item.isTop !== 'yes')
@@ -176,7 +181,11 @@ function Menu({ data, footerData, suggestions }: Props) {
               )
             })}
 
-            <NavbarActions footerData={footerData} suggestions={suggestions} />
+            <NavbarActions
+              footerData={footerData}
+              suggestions={suggestions}
+              queryFormRecipientEmails={queryFormRecipientEmails}
+            />
           </div>
         </div>
       </div>

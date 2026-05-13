@@ -77,3 +77,25 @@ export const validateHexColor = (val: unknown) => {
     ? true
     : 'Must be a valid hex color in #RRGGBB (e.g., #FFFFFF).'
 }
+
+export const validateAtLeastOneRecipientEmail = (val: unknown) => {
+  const g = (val ?? {}) as Record<string, unknown>
+
+  const hasAny = ['email1', 'email2', 'email3', 'email4', 'email5'].some((key) => {
+    const v = g?.[key]
+    return typeof v === 'string' && v.trim().length > 0
+  })
+
+  return hasAny ? true : 'Provide at least one recipient email.'
+}
+
+export const EMAIL_MAX = 120
+export const validateEmail =
+  (label = 'Email', required = false) =>
+  (val: unknown) => {
+    const s = (val ?? '').toString().trim()
+    if (required && !s) return `${label} is required.`
+    if (!s) return true
+    if (s.length > EMAIL_MAX) return `${label} must be at most ${EMAIL_MAX} characters.`
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) ? true : `Provide a valid email for ${label}.`
+  }

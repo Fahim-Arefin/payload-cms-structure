@@ -31,7 +31,7 @@ const MissionVisionSchema: Block = {
     // 🔐 Hidden per-doc session id for temp upload lifecycle
     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false } },
 
-    BgColorAndSectionIdField({ defaultBackground: '#E7E7EE' }),
+    BgColorAndSectionIdField({ defaultBackground: 'white-2' }),
 
     ...SectionHeadingFields({
       tagMax: TAG_MAX,
