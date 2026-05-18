@@ -298,6 +298,26 @@ export interface Page {
    * for home page use `index`, for dynamic page use `:slug`, (e.g. index , plans, plans/individual , news-and-blogs , news-and-blogs/:slug)
    */
   slug: string;
+  /**
+   * Recommended: 50–60 characters. Example: Raffia Rope | Sagar Ropes
+   */
+  metaTitle?: string | null;
+  /**
+   * Recommended: 140–160 characters.
+   */
+  metaDescription?: string | null;
+  /**
+   * Optional. Comma separated. Example: raffia rope, rope supplier Bangladesh
+   */
+  metaKeywords?: string | null;
+  /**
+   * Optional. Leave empty to auto-generate from page slug.
+   */
+  canonicalUrl?: string | null;
+  /**
+   * Enable only for pages you do not want Google to index.
+   */
+  noIndex?: boolean | null;
   layout: (
     | {
         uploadSessionId?: string | null;
@@ -3511,6 +3531,11 @@ export interface PagesSelect<T extends boolean = true> {
   uploadSessionId?: T;
   name?: T;
   slug?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  metaKeywords?: T;
+  canonicalUrl?: T;
+  noIndex?: T;
   layout?:
     | T
     | {
