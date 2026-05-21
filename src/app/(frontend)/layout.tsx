@@ -170,6 +170,16 @@ export const metadata: Metadata = {
   },
   description:
     'Sagar Ropes manufactures high-quality ropes and twines for marine, fishing, industrial, agricultural, and commercial use.',
+
+  keywords: [
+    'Sagar Ropes',
+    'Rope Manufacturer',
+    'Twine Manufacturer',
+    'Marine Ropes',
+    'Fishing Ropes',
+    'Industrial Ropes',
+  ],
+
   icons: {
     icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/logo.png`,
   },
@@ -181,6 +191,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        {/* <meta name="facebook-domain-verification" content="5zfjmpany80ph0dq1j8hirmw95jtod" /> */}
         {/* Google Tag (gtag.js) */}
         {/* <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-CP1L2ZN6G5"
