@@ -71,7 +71,7 @@ function NoDataFound({
 }: Props) {
   return (
     <div
-      className={`font-proxima container-padding flex items-center justify-center ${widthHeight}`}
+      className={`font-grift container-padding flex items-center justify-center ${widthHeight}`}
       style={{ backgroundColor: bgColor }}
     >
       <div className="text-center max-w-lg mx-auto ">
@@ -131,7 +131,7 @@ function NoDataFound({
           </div>
         )}
 
-        <h3 className="font-proxima global-h4 font-bold text-dark-2 mb-2 opacity-0 animate-fadeIn">
+        <h3 className="font-grift global-h4 font-bold text-dark-2 mb-2 opacity-0 animate-fadeIn">
           {message}
         </h3>
 

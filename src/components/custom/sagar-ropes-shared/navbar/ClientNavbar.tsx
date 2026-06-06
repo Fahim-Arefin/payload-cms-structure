@@ -5,34 +5,30 @@ import Link from 'next/link'
 import Menu from './Menu'
 import MobileNavbar from './MobileNavbar'
 import { Footer } from '@/payload-types'
+import SearchIcon from '/public/assets/icons/search-icon.png'
 
 type Props = {
   data: NavbarData
   blur: string
   footerData: Footer
   suggestions: SearchSuggestion[]
-  queryFormRecipientEmails: NavbarData['queryFormRecipientEmails']
 }
 
-function ClientNavbar({ data, blur, footerData, suggestions, queryFormRecipientEmails }: Props) {
+function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
   const logoUrl =
     data.branding.logo?.url ?? `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/logo.png`
 
   return (
     <>
       {/* mobile */}
-      <MobileNavbar
-        data={data}
-        blur={blur}
-        suggestions={suggestions}
-        footerData={footerData}
-        queryFormRecipientEmails={data?.queryFormRecipientEmails}
-      />
+      {/* <MobileNavbar data={data} blur={blur} suggestions={suggestions} footerData={footerData} /> */}
 
       <div
-        className="fixed inset-x-0 z-50 w-full hidden lg:flex 
-     h-[60px] lg:h-[75px] xl:h-[80px] 2xl:h-[85px]
-    border-b-[3px] border-b-dark-3 backdrop-blur-[15px]
+        className="hidden lg:flex justify-between 
+        fixed inset-x-0 top-6
+        z-50 
+        xl:max-w-[80%] mx-auto
+        h-[60px] lg:h-[65px]
     "
         style={{
           background:
@@ -42,14 +38,14 @@ function ClientNavbar({ data, blur, footerData, suggestions, queryFormRecipientE
         {/* logo */}
         <div
           className="flex items-center justify-center
-                pl-4 lg:pl-6 xl:pl-10 2xl:pl-12
-                w-[200px] lg:w-[220px] xl:w-[300px] 2xl:w-[400px]
+          bg-red-200
+          w-[15%]
        "
         >
           <div
             className="relative aspect-[90/70]
         hover:scale-110 transition-all duration-300 ease-in
-        w-[100px] lg:w-[140px] xl:w-[180px] 2xl:w-[200px] "
+        w-full h-full"
           >
             <Link href="/" aria-label="Home">
               {typeof data.branding.logo === 'object' && data.branding.logo?.url && (
@@ -68,13 +64,22 @@ function ClientNavbar({ data, blur, footerData, suggestions, queryFormRecipientE
           </div>
         </div>
         {/* border border-black */}
-        <div className=" grow ">
-          <Menu
-            data={data}
-            footerData={footerData}
-            suggestions={suggestions}
-            queryFormRecipientEmails={data?.queryFormRecipientEmails}
-          />
+        <div className=" grow bg-red-400">
+          <Menu data={data} footerData={footerData} suggestions={suggestions} />
+        </div>
+        <div className="w-[15%] bg-red-200 flex items-center justify-center">
+          <div className="p-[9px] w-[36px] h-[36px] flex justify-center items-center bg-[#006C67] rounded-md">
+            <Image
+              src={SearchIcon}
+              alt="Search"
+              width={36}
+              height={36}
+              className="object-contain w-full h-full"
+              placeholder="blur"
+              blurDataURL={SearchIcon.blurDataURL}
+              quality={90}
+            />
+          </div>
         </div>
       </div>
     </>

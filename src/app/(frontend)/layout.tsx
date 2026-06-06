@@ -212,7 +212,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       </head>
       <body className={`${notoSerifBengali.variable}`}>
         <Providers initialLang="en">
-          <main className="min-h-screen relative 3xl:max-w-[1925px] 3xl:mx-auto font-proxima">
+          <main className="min-h-screen relative 3xl:max-w-[1925px] 3xl:mx-auto font-grift">
             <ServerNavbar />
             <div className="min-h-screen">
               {children}

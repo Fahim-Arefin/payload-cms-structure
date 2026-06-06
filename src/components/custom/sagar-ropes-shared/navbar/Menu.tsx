@@ -13,7 +13,6 @@ type Props = {
   data: NavbarData
   footerData: Footer
   suggestions: SearchSuggestion[]
-  queryFormRecipientEmails: NavbarData['queryFormRecipientEmails']
 }
 
 const ChevronDown = ({ className = '' }: { className?: string }) => (
@@ -28,10 +27,11 @@ const ChevronDown = ({ className = '' }: { className?: string }) => (
   </svg>
 )
 
-function Menu({ data, footerData, suggestions, queryFormRecipientEmails }: Props) {
+function Menu({ data, footerData, suggestions }: Props) {
   const allItems = data?.desktop?.items
-  const topItems = allItems.filter((item) => item.isTop === 'yes')
-  const mainItems = allItems.filter((item) => item.isTop !== 'yes')
+  // const topItems = allItems.filter((item) => item.isTop === 'yes')
+  // const mainItems = allItems.filter((item) => item.isTop !== 'yes')
+  const mainItems = allItems || []
   const pathname = usePathname()
 
   const isItemActive = (href: string) => {
@@ -77,117 +77,56 @@ function Menu({ data, footerData, suggestions, queryFormRecipientEmails }: Props
   `
 
   return (
-    <div className="h-full font-proxima font-bold text-dark-3 uppercase ">
-      {/* top */}
-      <div
-        className="h-[50%] flex flex-row justify-end items-center gap-6
-        pr-4 lg:pr-[35px] xl:pr-12 2xl:pr-[61px] 
-        text-[10px] xl:text-[12px] 2xl:text-[14px]"
-      >
-        {topItems?.map((item, index) => {
+    <div className="h-full font-grift font-bold text-dark-3 uppercase ">
+      {/* main */}
+      <div className="flex flex-row items-center justify-between w-full h-full ">
+        {mainItems?.map((item, index) => {
           const parentActive = isParentActive(item)
           const itemHasChildren = hasChildren(item)
 
           return (
-            <React.Fragment key={index}>
-              <div className="relative group">
-                <Link href={item?.href} className={navLinkClass(parentActive)}>
-                  <LocalizedText en={item?.label} bn={item?.label} />
-
-                  {itemHasChildren && (
-                    <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
-                  )}
-                </Link>
+            <div key={index} className="relative group ">
+              <Link href={item?.href} className={navLinkClass(parentActive)}>
+                <LocalizedText en={item?.label} bn={item?.label} />
 
                 {itemHasChildren && (
-                  <div
-                    className="
-                      absolute right-0 top-full z-50 pt-3
-                      opacity-0 invisible translate-y-2
-                      transition-all duration-300 ease-out
-                      group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
-                    "
-                  >
-                    <div className="min-w-[220px] overflow-hidden border-b-[3px] border-b-dark-3 bg-white/95 backdrop-blur-[15px] shadow-lg">
-                      {item.children?.map((child, childIndex) => (
-                        <Link
-                          key={childIndex}
-                          href={child.href}
-                          className={childLinkClass(isItemActive(child.href))}
-                        >
-                          <LocalizedText en={child.label} bn={child.label} />
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                  <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
                 )}
-              </div>
+              </Link>
 
-              {index + 1 !== topItems.length && <div className="h-[35%] w-[2px] bg-dark-3" />}
-            </React.Fragment>
-          )
-        })}
-      </div>
-
-      {/* main */}
-      <div className="h-[50%] flex items-center justify-end global-p3">
-        <div className="w-[95%] xl:w-[90%] 2xl:w-[85%]">
-          <div className="flex flex-row items-center justify-between w-full h-full ">
-            {mainItems?.map((item, index) => {
-              const parentActive = isParentActive(item)
-              const itemHasChildren = hasChildren(item)
-
-              return (
-                <div key={index} className="relative group ">
-                  <Link href={item?.href} className={navLinkClass(parentActive)}>
-                    <LocalizedText en={item?.label} bn={item?.label} />
-
-                    {itemHasChildren && (
-                      <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
-                    )}
-                  </Link>
-
-                  {itemHasChildren && (
-                    <div
-                      className="
+              {itemHasChildren && (
+                <div
+                  className="
                         absolute -left-4 top-full z-50  pt-3
                         opacity-0 invisible translate-y-2
                         transition-all duration-300 ease-out
                         group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
                       "
-                    >
-                      <div
-                        className="min-w-[220px] overflow-hidden 
+                >
+                  <div
+                    className="min-w-[220px] overflow-hidden 
                         border-b-[3px] border-b-dark-3 shadow-lg
                         backdrop-blur-15 bg-[#E8EFF4]"
-                        // style={{
-                        //   background:
-                        //     'linear-gradient(0deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.20) 100%), rgba(255,255,255,0.20)',
-                        // }}
+                    // style={{
+                    //   background:
+                    //     'linear-gradient(0deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.20) 100%), rgba(255,255,255,0.20)',
+                    // }}
+                  >
+                    {item.children?.map((child, childIndex) => (
+                      <Link
+                        key={childIndex}
+                        href={child.href}
+                        className={childLinkClass(isItemActive(child.href))}
                       >
-                        {item.children?.map((child, childIndex) => (
-                          <Link
-                            key={childIndex}
-                            href={child.href}
-                            className={childLinkClass(isItemActive(child.href))}
-                          >
-                            <LocalizedText en={child.label} bn={child.label} />
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                        <LocalizedText en={child.label} bn={child.label} />
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              )
-            })}
-
-            <NavbarActions
-              footerData={footerData}
-              suggestions={suggestions}
-              queryFormRecipientEmails={queryFormRecipientEmails}
-            />
-          </div>
-        </div>
+              )}
+            </div>
+          )
+        })}
       </div>
     </div>
   )

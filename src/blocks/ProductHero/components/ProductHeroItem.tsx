@@ -50,7 +50,7 @@ function ProductHeroItem({ item }: Props) {
           <div className="space-y-10 lg:space-y-6 xl:space-y-8 2xl:space-y-10">
             {/* 3 heading */}
             <div
-              className={`font-proxima text-white uppercase font-bold 
+              className={`font-grift text-white uppercase font-bold 
              text-[38px] md:text-[48px] lg:text-[72px] xl:text-[96px] 2xl:text-[120px]
              text-center md:text-start leading-[95.833%]
             `}
@@ -118,7 +118,7 @@ function ProductHeroItem({ item }: Props) {
                     border-l-cyan 
                      pl-2 lg:pl-4 xl:pl-6"
                     >
-                      <div className="font-proxima global-h3 text-cyan font-bold">
+                      <div className="font-grift global-h3 text-cyan font-bold">
                         <LocalizedText en={prod?.value} bn={prod?.value} />
                       </div>
                       <div className="font-manrope global-p2 text-white-1 uppercase font-light text-opacity-80">

@@ -34,8 +34,9 @@ export default {
         // // Force Noto when you explicitly need it
         // noto: ['Noto Serif Bengali', 'Avenir LT Std', 'sans-serif'],
 
-        proxima: ['Proxima Nova', 'Noto Serif Bengali', 'sans-serif'],
-        manrope: ['Manrope', 'Noto Serif Bengali', 'sans-serif'],
+        // proxima: ['Proxima Nova', 'Noto Serif Bengali', 'sans-serif'],
+        // manrope: ['Manrope', 'Noto Serif Bengali', 'sans-serif'],
+        grift: ['Grift', 'sans-serif'],
 
         // keep your bn override
         noto: ['Noto Serif Bengali', 'Proxima Nova', 'sans-serif'],

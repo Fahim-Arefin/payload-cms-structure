@@ -54,7 +54,7 @@ function BasicHeroItem({ item }: Props) {
         >
           {/* 3 heading */}
           <div
-            className={`font-proxima text-white uppercase font-bold 
+            className={`font-grift text-white uppercase font-bold
              text-[38px] md:text-[48px] lg:text-[72px] xl:text-[96px] 2xl:text-[120px]
              text-center md:text-start leading-[95.833%]
             `}
