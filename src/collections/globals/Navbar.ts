@@ -30,7 +30,7 @@ const mediaHooks = withMediaLifecycle({
   imageConfigs: [
     {
       fieldName: 'logo', // <— moved out of branding group
-      aspectRatio: 1.48, // 1.48 / 1
+      aspectRatio: 1, // 1.48 / 1
       quality: 0.92,
       maxKB: 500,
       required: true,
@@ -73,27 +73,6 @@ const navItemFields = (
           admin: {
             width: '50%',
             description: `Optional. Max ${CTA_TEXT_MAX} characters.`,
-          },
-        },
-        {
-          name: 'isTop',
-          type: 'select',
-          label: 'Show In Top Bar Row',
-          required: true,
-          defaultValue: 'no',
-          options: [
-            {
-              label: 'No',
-              value: 'no',
-            },
-            {
-              label: 'Yes',
-              value: 'yes',
-            },
-          ],
-          admin: {
-            width: '50%',
-            description: 'Select "Yes" to make it appear in the top bar row.',
           },
         },
       ],
@@ -173,7 +152,8 @@ const Navbar: GlobalConfig = {
       label: 'Navbar Logo',
       description:
         'Primary navbar logo. Transparent PNG/SVG preferred. Square-ish crop recommended.',
-      aspectRatio: 701 / 179,
+      // aspectRatio: 701 / 179,
+      aspectRatio: 80 / 46,
       quality: 0.92,
       maxKB: 500,
       required: true,
@@ -198,73 +178,6 @@ const Navbar: GlobalConfig = {
               'Top-level nav items for desktop. Each item can optionally have nested children.',
           },
           fields: navItemFields('Item', 0, DEPTH_MAX),
-        },
-      ],
-    },
-    {
-      type: 'group',
-      name: 'queryFormRecipientEmails',
-      label: 'Side Panel Query Form Recipients',
-      admin: {
-        description:
-          'Add the email addresses that should receive query form submissions from the website side panel/navbar query form. At least one recipient is required. These emails are only used for the side panel form, not the page query form block.',
-      },
-      validate: validateAtLeastOneRecipientEmail,
-      fields: [
-        {
-          name: 'email1',
-          type: 'text',
-          label: 'Recipient Email 1',
-          maxLength: EMAIL_MAX,
-          validate: validateEmail('Recipient Email 1', true),
-          admin: {
-            width: '33%',
-            description: 'Primary email address that will receive side panel query submissions.',
-          },
-        },
-        {
-          name: 'email2',
-          type: 'text',
-          label: 'Recipient Email 2',
-          maxLength: EMAIL_MAX,
-          validate: validateEmail('Recipient Email 2', false),
-          admin: {
-            width: '33%',
-            description: 'Optional additional recipient.',
-          },
-        },
-        {
-          name: 'email3',
-          type: 'text',
-          label: 'Recipient Email 3',
-          maxLength: EMAIL_MAX,
-          validate: validateEmail('Recipient Email 3', false),
-          admin: {
-            width: '33%',
-            description: 'Optional additional recipient.',
-          },
-        },
-        {
-          name: 'email4',
-          type: 'text',
-          label: 'Recipient Email 4',
-          maxLength: EMAIL_MAX,
-          validate: validateEmail('Recipient Email 4', false),
-          admin: {
-            width: '33%',
-            description: 'Optional additional recipient.',
-          },
-        },
-        {
-          name: 'email5',
-          type: 'text',
-          label: 'Recipient Email 5',
-          maxLength: EMAIL_MAX,
-          validate: validateEmail('Recipient Email 5', false),
-          admin: {
-            width: '33%',
-            description: 'Optional additional recipient.',
-          },
         },
       ],
     },

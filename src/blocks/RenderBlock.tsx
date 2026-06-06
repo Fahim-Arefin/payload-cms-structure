@@ -1,61 +1,8 @@
-import {
-  ALL_NEWS_SLUG_AND_TAG,
-  BASIC_HERO_SLUG_AND_TAG,
-  CONTACT_INFO_CARD_SLUG_AND_TAG,
-  CUSTOMER_FEEDBACK_SLUG_AND_TAG,
-  FEEDBACK_FORM_SLUG_AND_TAG,
-  FOUNDER_QUOTE_SLUG_AND_TAG,
-  GET_TO_KNOW_SLUG_AND_TAG,
-  MISSION_VISION_SLUG_AND_TAG,
-  OFFICE_ADDRESS_SLUG_AND_TAG,
-  PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG,
-  PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG,
-  PRODUCT_HERO_SLUG_AND_TAG,
-  PRODUCT_INFO_01_SLUG_AND_TAG,
-  PRODUCT_INFO_02_SLUG_AND_TAG,
-  PRODUCT_INFO_03_SLUG_AND_TAG,
-  PRODUCT_INFO_04_SLUG_AND_TAG,
-  PRODUCT_INTRO_SLUG_AND_TAG,
-  QUALITY_BENCHMARK_CARD_SLUG_AND_TAG,
-  QUERIES_SLUG_AND_TAG,
-  QUERY_FORM_SLUG_AND_TAG,
-  RESULT_CARD_SLUG_AND_TAG,
-  SAGAR_BLOGS_SLUG_AND_TAG,
-  SAGAR_VIDEOS_SLUG_AND_TAG,
-  SINGLE_NEWS_SLUG_AND_TAG,
-  TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG,
-  TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG,
-  TESTING_PILLARS_SLUG_AND_TAG,
-} from '@/lib/constants'
+import { BASIC_HERO_SLUG_AND_TAG, PRODUCT_HERO_SLUG_AND_TAG } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
 import BasicHeroBlock from './BasicHero/BasicHeroBlock'
 import ProductHeroBlock from './ProductHero/ProductHeroBlock'
-import GetToKnowBlock from './GetToKnow/GetToKnowBlock'
-import ProductIntroBlock from './ProductIntro/ProductIntroBlock'
-import MissionVisionBlock from './MissionVision/MissionVisionBlock'
-import ProductAdvantageCardBlock from './ProductAdvantageCard/ProductAdvantageCardBlock'
-import TechnicalSpecificationBlock from './TechnicalSpecification/TechnicalSpecificationBlock'
-import QueriesBlock from './Queries/QueriesBlock'
-import ProductInfo01Block from './ProductInfo01/ProductInfo01Block'
-import PerformanceAndApplicationCardBlock from './PerformanceAndApplicationCard/PerformanceAndApplicationCardBlock'
-import TechnicalDatashheetBlock from './TechnicalDatashheet/TechnicalDatashheetBlock'
-import QualityBenchmarkCardBlock from './QualityBenchmarkCard/QualityBenchmarkCardBlock'
-import ContactInfoCardBlock from './ContactInfoCard/ContactInfoCardBlock'
-import FounderQuoteBlock from './FounderQuote/FounderQuoteBlock'
-import ResultCardBlock from './ResultCard/ResultCardBlock'
-import SagarVideosBlock from './SagarVideos/SagarVideosBlock'
-import ProductInfo02Block from './ProductInfo02/ProductInfo02Block'
-import ProductInfo03Block from './ProductInfo03/ProductInfo03Block'
-import ProductInfo04Block from './ProductInfo04/ProductInfo04Block'
-import OfficeAddressBlock from './OfficeAddress/OfficeAddressBlock'
-import FeedbackFormBlock from './FeedbackForm/FeedbackFormBlock'
-import QueryFormBlock from './QueryForm/QueryFormBlock'
-import CustomerFeedbackBlock from './CustomerFeedback/CustomerFeedbackBlock'
-import TestingPillarsBlock from './TestingPillars/TestingPillarsBlock'
-import AllNewsBlock from './AllNews/AllNewsBlock'
-import SignleNewsBlock from './SingleNews/SignleNewsBlock'
-import SagarBlogBlock from './SagarBlog/SagarBlogBlock'
 
 type Params = Record<string, string>
 
@@ -65,56 +12,6 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <BasicHeroBlock key={block.id} block={block} params={params} />
     case PRODUCT_HERO_SLUG_AND_TAG:
       return <ProductHeroBlock key={block.id} block={block} params={params} />
-    case GET_TO_KNOW_SLUG_AND_TAG:
-      return <GetToKnowBlock key={block.id} block={block} params={params} />
-    case PRODUCT_INTRO_SLUG_AND_TAG:
-      return <ProductIntroBlock key={block.id} block={block} params={params} />
-    case MISSION_VISION_SLUG_AND_TAG:
-      return <MissionVisionBlock key={block.id} block={block} params={params} />
-    case PRODUCT_ADVANTAGE_CARD_SLUG_AND_TAG:
-      return <ProductAdvantageCardBlock key={block.id} block={block} params={params} />
-    case TECHNICAL_SPECIFICATIONS_SLUG_AND_TAG:
-      return <TechnicalSpecificationBlock key={block.id} block={block} params={params} />
-    case QUERIES_SLUG_AND_TAG:
-      return <QueriesBlock key={block.id} block={block} params={params} />
-    case PRODUCT_INFO_01_SLUG_AND_TAG:
-      return <ProductInfo01Block key={block.id} block={block} params={params} />
-    case PERFORMANCE_AND_APPLICATION_CARD_SLUG_AND_TAG:
-      return <PerformanceAndApplicationCardBlock key={block.id} block={block} params={params} />
-    case TECHNICAL_DATASHHEET_CARD_SLUG_AND_TAG:
-      return <TechnicalDatashheetBlock key={block.id} block={block} params={params} />
-    case QUALITY_BENCHMARK_CARD_SLUG_AND_TAG:
-      return <QualityBenchmarkCardBlock key={block.id} block={block} params={params} />
-    case CONTACT_INFO_CARD_SLUG_AND_TAG:
-      return <ContactInfoCardBlock key={block.id} block={block} params={params} />
-    case FOUNDER_QUOTE_SLUG_AND_TAG:
-      return <FounderQuoteBlock key={block.id} block={block} params={params} />
-    case RESULT_CARD_SLUG_AND_TAG:
-      return <ResultCardBlock key={block.id} block={block} params={params} />
-    case SAGAR_VIDEOS_SLUG_AND_TAG:
-      return <SagarVideosBlock key={block.id} block={block} params={params} />
-    case PRODUCT_INFO_02_SLUG_AND_TAG:
-      return <ProductInfo02Block key={block.id} block={block} params={params} />
-    case PRODUCT_INFO_03_SLUG_AND_TAG:
-      return <ProductInfo03Block key={block.id} block={block} params={params} />
-    case PRODUCT_INFO_04_SLUG_AND_TAG:
-      return <ProductInfo04Block key={block.id} block={block} params={params} />
-    case OFFICE_ADDRESS_SLUG_AND_TAG:
-      return <OfficeAddressBlock key={block.id} block={block} params={params} />
-    case FEEDBACK_FORM_SLUG_AND_TAG:
-      return <FeedbackFormBlock key={block.id} block={block} params={params} />
-    case QUERY_FORM_SLUG_AND_TAG:
-      return <QueryFormBlock key={block.id} block={block} params={params} />
-    case CUSTOMER_FEEDBACK_SLUG_AND_TAG:
-      return <CustomerFeedbackBlock key={block.id} block={block} params={params} />
-    case TESTING_PILLARS_SLUG_AND_TAG:
-      return <TestingPillarsBlock key={block.id} block={block} params={params} />
-    case ALL_NEWS_SLUG_AND_TAG:
-      return <AllNewsBlock key={block.id} block={block} params={params} />
-    case SINGLE_NEWS_SLUG_AND_TAG:
-      return <SignleNewsBlock key={block.id} block={block} params={params} />
-    case SAGAR_BLOGS_SLUG_AND_TAG:
-      return <SagarBlogBlock key={block.id} block={block} params={params} />
 
     default:
       return null

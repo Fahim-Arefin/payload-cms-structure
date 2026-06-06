@@ -47,7 +47,7 @@ function ClientNavbar({ data, blur, footerData, suggestions, queryFormRecipientE
        "
         >
           <div
-            className="relative aspect-[701/179]
+            className="relative aspect-[90/70]
         hover:scale-110 transition-all duration-300 ease-in
         w-[100px] lg:w-[140px] xl:w-[180px] 2xl:w-[200px] "
           >

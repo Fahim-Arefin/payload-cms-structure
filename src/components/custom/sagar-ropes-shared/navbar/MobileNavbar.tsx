@@ -9,7 +9,7 @@ import type { NavbarData, NavItem, SearchSuggestion } from './ServerNavbar'
 import type { Footer } from '@/payload-types'
 
 import LocalizedText from '../../shared/LocalizedText'
-import NavbarDialog from './NavbarDialog'
+// import NavbarDialog from './NavbarDialog'
 import SearchBarSection from './SearchBarSection'
 
 import Facebook from 'public/assets/icons/facebook.png'
@@ -348,7 +348,7 @@ function MobileNavbar({ data, blur, suggestions, footerData, queryFormRecipientE
               Make an Inquiry ?
             </div>
 
-            <div className="mt-3 flex justify-center">
+            {/* <div className="mt-3 flex justify-center">
               <NavbarDialog
                 queryFormRecipientEmails={queryFormRecipientEmails}
                 trigger={
@@ -404,7 +404,7 @@ function MobileNavbar({ data, blur, suggestions, footerData, queryFormRecipientE
                   </button>
                 }
               />
-            </div>
+            </div> */}
           </div>
 
           {/* social */}

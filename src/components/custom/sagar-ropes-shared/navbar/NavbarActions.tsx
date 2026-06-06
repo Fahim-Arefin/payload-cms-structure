@@ -19,7 +19,7 @@ import Facebook from 'public/assets/icons/facebook.png'
 import Linkdin from 'public/assets/icons/linkdin.png'
 import Phone from 'public/assets/icons/phone.png'
 import WhatsApp from 'public/assets/icons/whatsapp.png'
-import NavbarDialog from './NavbarDialog'
+// import NavbarDialog from './NavbarDialog'
 import SearchBarSection from './SearchBarSection'
 import { default as Pattern02 } from '/public/assets/images/BOpattern.png'
 import Blur4 from '/public/assets/images/Blur4.png'
@@ -178,7 +178,7 @@ function NavbarActions({ footerData, suggestions, queryFormRecipientEmails }: Pr
             <div className="font-manrope font-bold text-[12px] md:text-[12px] lg:text-[14px] xl:text-[20px] 2xl:text-[22px] leading-[140%] tracking-[-0.6px] text-white-1">
               Make an Inquiry ?
             </div>
-            <div className="">
+            {/* <div className="">
               <NavbarDialog
                 queryFormRecipientEmails={queryFormRecipientEmails}
                 trigger={
@@ -237,7 +237,7 @@ function NavbarActions({ footerData, suggestions, queryFormRecipientEmails }: Pr
                   </Button>
                 }
               />
-            </div>
+            </div> */}
           </div>
 
           {/* footer grid-4 data */}
