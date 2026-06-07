@@ -15,6 +15,7 @@ import { CtaButtonsField } from '@/utils/block/fields/CtaButtonsField'
 const TITLE_MAX = 40
 const SUB_TITLE_MAX = 40
 const HIGHLIGHT_MAX = 40
+const WEB_SOLUTION_MAX = 40
 
 const BasicHeroSchema: Block = {
   slug: BASIC_HERO_SLUG_AND_TAG,
@@ -175,95 +176,37 @@ const BasicHeroSchema: Block = {
             },
           ],
         },
-
+        // ===== Web Solutions We Provide =====
         {
-          name: 'exploreMoreBadge',
-          type: 'checkbox',
-          label: 'Show Explore More Badge',
-          defaultValue: false,
-          admin: {
-            width: '50%',
-            description: 'Show or hide the Explore More Badge',
+          name: 'webSolutionsWeProvide',
+          type: 'array',
+          required: false,
+          minRows: 0,
+          maxRows: 10,
+          label: 'Web Solutions We Provide',
+          labels: {
+            singular: 'Web Solution',
+            plural: 'Web Solutions',
           },
+          admin: {
+            description:
+              'Add short service/solution labels that will appear in the hero section, such as Web Design, Web Development, E-Commerce, SEO Optimization, CMS Development, UI/UX Design, or Maintenance Support. Keep each item short and clear.',
+          },
+          fields: [
+            {
+              name: 'solution',
+              type: 'text',
+              required: true,
+              label: 'Solution Name',
+              maxLength: WEB_SOLUTION_MAX,
+              validate: validateShortText('Solution Name', WEB_SOLUTION_MAX, true),
+              admin: {
+                description: `Enter one short web solution/service name. Max ${WEB_SOLUTION_MAX} characters.`,
+              },
+            },
+          ],
         },
 
-        // ===== CTA Buttons (array format, exactly like the block fields) =====
-        // {
-        //   name: 'ctaButtons',
-        //   type: 'array',
-        //   required: false,
-        //   minRows: 0,
-        //   maxRows: 2,
-        //   labels: { singular: 'CTA Button', plural: 'CTA Buttons' },
-        //   fields: [
-        //     {
-        //       type: 'row',
-        //       fields: [
-        //         // EN
-        //         {
-        //           name: 'label',
-        //           type: 'text',
-        //           required: true,
-        //           label: 'Button Text',
-        //           maxLength: BUTTON_LABEL_MAX,
-        //           validate: validateShortText('Button Text', BUTTON_LABEL_MAX, true),
-        //           admin: { width: '50%', description: `Max ${BUTTON_LABEL_MAX} characters.` },
-        //         },
-        //         {
-        //           name: 'style',
-        //           type: 'select',
-        //           label: 'Button Style',
-        //           options: [
-        //             { label: 'Button 01', value: 'btn01' },
-        //             { label: 'Button 02', value: 'btn02' },
-        //             { label: 'Button 03', value: 'btn03' },
-        //           ],
-        //           defaultValue: 'btn01',
-        //           admin: {
-        //             width: '50%',
-        //             description: 'Select the button style',
-        //           },
-        //         },
-        //       ],
-        //     },
-
-        //     {
-        //       type: 'row',
-        //       fields: [
-        //         {
-        //           type: 'row',
-        //           fields: [
-        //             {
-        //               name: 'buttonLink',
-        //               label: 'Link to (internal page)',
-        //               type: 'relationship',
-        //               relationTo: 'pages',
-        //               required: true,
-        //               admin: {
-        //                 width: '50%',
-        //                 description:
-        //                   'Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.',
-        //               },
-        //             },
-        //             {
-        //               name: 'sectionId',
-        //               type: 'text',
-        //               label: 'Section ID (anchor)',
-        //               required: false,
-        //               admin: {
-        //                 width: '50%',
-        //                 description:
-        //                   'Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").',
-        //               },
-        //               validate: validateSectionIdOptional,
-        //             },
-        //           ],
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // },
-        // ===== CTA Buttons (array format, exactly like the block fields) =====
         CtaButtonsField({ maxRows: 2 }),
       ],
     },
