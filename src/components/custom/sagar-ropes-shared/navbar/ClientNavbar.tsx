@@ -19,7 +19,7 @@ function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
     data.branding.logo?.url ?? `${process?.env?.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/logo.png`
 
   return (
-    <>
+    <div>
       {/* mobile */}
       <MobileNavbar data={data} blur={blur} suggestions={suggestions} footerData={footerData} />
 
@@ -36,6 +36,7 @@ function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
           background: `
       linear-gradient(0deg, #006C67 0%, rgba(0, 210, 200, 0) 180%),
       linear-gradient(180deg, rgba(255, 251, 252, 0) 0%, #006C67 80%)
+          
     `,
         }}
       >
@@ -85,7 +86,20 @@ function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
           </div>
         </div>
       </div>
-    </>
+      {/* white overlay */}
+      <div
+        className="
+    pointer-events-none
+    fixed inset-x-0 top-0 z-40
+    hidden lg:block
+    h-[95px] w-full
+  "
+        style={{
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+        }}
+      />
+    </div>
   )
 }
 
