@@ -36,6 +36,7 @@ export default {
 
         // proxima: ['Proxima Nova', 'Noto Serif Bengali', 'sans-serif'],
         // manrope: ['Manrope', 'Noto Serif Bengali', 'sans-serif'],
+        agency: ['Agency', 'sans-serif'],
         grift: ['Grift', 'sans-serif'],
 
         // keep your bn override
@@ -89,19 +90,17 @@ export default {
         },
 
         // Add your custom colors here
-        cyan: 'rgb(var(--cyan) / <alpha-value>)',
 
-        'bg-1': 'rgb(var(--bg-1) / <alpha-value>)',
+        // New brand colors
+        'primary-1': 'rgb(var(--primary-1) / <alpha-value>)',
+        'primary-2': 'rgb(var(--primary-2) / <alpha-value>)',
+
+        'secondary-1': 'rgb(var(--secondary-1) / <alpha-value>)',
+        'secondary-2': 'rgb(var(--secondary-2) / <alpha-value>)',
 
         'white-1': 'rgb(var(--white-1) / <alpha-value>)',
         'white-2': 'rgb(var(--white-2) / <alpha-value>)',
         'white-3': 'rgb(var(--white-3) / <alpha-value>)',
-
-        'dark-1': 'rgb(var(--dark-1) / <alpha-value>)',
-        'dark-2': 'rgb(var(--dark-2) / <alpha-value>)',
-        'dark-2b': 'rgb(var(--dark-2b) / <alpha-value>)',
-        'dark-3': 'rgb(var(--dark-3) / <alpha-value>)',
-        'border-2': 'rgb(var(--border-2) / <alpha-value>)',
       },
       boxShadow: {
         'custom-black': '0px 0px 10px 0px #00000082',

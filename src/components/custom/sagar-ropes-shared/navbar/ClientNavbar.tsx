@@ -21,24 +21,27 @@ function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
   return (
     <>
       {/* mobile */}
-      {/* <MobileNavbar data={data} blur={blur} suggestions={suggestions} footerData={footerData} /> */}
+      <MobileNavbar data={data} blur={blur} suggestions={suggestions} footerData={footerData} />
 
       <div
         className="hidden lg:flex justify-between 
         fixed inset-x-0 top-6
         z-50 
-        xl:max-w-[80%] mx-auto
+        w-[80%] mx-auto
         h-[60px] lg:h-[65px]
+        rounded-[20px]
     "
         style={{
-          background:
-            'linear-gradient(0deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.20) 100%), rgba(255,255,255,0.20)',
+          // background: 'linear-gradient(180deg, rgba(255, 251, 252, 0) 0%, #006C67 80%)',
+          background: `
+      linear-gradient(0deg, #006C67 0%, rgba(0, 210, 200, 0) 180%),
+      linear-gradient(180deg, rgba(255, 251, 252, 0) 0%, #006C67 80%)
+    `,
         }}
       >
         {/* logo */}
         <div
           className="flex items-center justify-center
-          bg-red-200
           w-[15%]
        "
         >
@@ -64,10 +67,10 @@ function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
           </div>
         </div>
         {/* border border-black */}
-        <div className=" grow bg-red-400">
+        <div className=" grow ">
           <Menu data={data} footerData={footerData} suggestions={suggestions} />
         </div>
-        <div className="w-[15%] bg-red-200 flex items-center justify-center">
+        <div className="w-[15%]  flex items-center justify-center">
           <div className="p-[9px] w-[36px] h-[36px] flex justify-center items-center bg-[#006C67] rounded-md">
             <Image
               src={SearchIcon}

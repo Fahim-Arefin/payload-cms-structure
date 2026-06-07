@@ -41,7 +41,7 @@ function IntroSectionDesign03({
         {/* heading 1 */}
         {block?.heading1 && (
           <div
-            className={`font-proxima font-bold global-h2 text-white-1 ${position === 'left' ? 'text-start' : position === 'right' ? 'text-right' : 'text-center'}`}
+            className={`font-grift font-semibold global-h2 text-white-1 ${position === 'left' ? 'text-start' : position === 'right' ? 'text-right' : 'text-center'}`}
           >
             <LocalizedHighlighted
               textBn={block?.heading1}
@@ -56,7 +56,7 @@ function IntroSectionDesign03({
         {/* heading 2 */}
         {block?.heading2 && (
           <div
-            className={`font-proxima font-bold global-h2 text-white-1 ${position === 'left' ? 'text-start' : position === 'right' ? 'text-right' : 'text-center'}`}
+            className={`font-grift font-bold global-h2 text-white-1 ${position === 'left' ? 'text-start' : position === 'right' ? 'text-right' : 'text-center'}`}
           >
             <LocalizedHighlighted
               textBn={block?.heading2}

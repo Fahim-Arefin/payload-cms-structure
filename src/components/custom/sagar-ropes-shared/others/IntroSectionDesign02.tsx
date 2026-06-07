@@ -16,7 +16,7 @@ function IntroSectionDesign02({ block, className }: Props) {
       <div>
         {/* heading 1 */}
         {block?.heading1 && (
-          <div className="font-proxima font-bold global-h2 text-dark-1">
+          <div className="font-grift font-bold global-h2 text-dark-1">
             <LocalizedHighlighted
               textBn={block?.heading1}
               textEn={block?.heading1}
@@ -29,7 +29,7 @@ function IntroSectionDesign02({ block, className }: Props) {
 
         {/* heading 2 */}
         {block?.heading2 && (
-          <div className="font-proxima font-bold global-h2 text-dark-1">
+          <div className="font-grift font-bold global-h2 text-dark-1">
             <LocalizedHighlighted
               textBn={block?.heading2}
               textEn={block?.heading2}

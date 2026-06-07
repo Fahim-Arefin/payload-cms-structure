@@ -116,7 +116,7 @@
 //         flex flex-col items-center lg:items-start
 //         lg:pl-9 xl:pl-10 2xl:pl-12"
 //           >
-//             <div className="text-white-3 font-proxima font-bold global-h5">
+//             <div className="text-white-3 font-grift font-bold global-h5">
 //               {footer?.quickLinksSection?.header}
 //             </div>
 //             <div
@@ -154,7 +154,7 @@
 //             hidden lg:flex lg:flex-col items-center lg:items-start
 //         space-y-[8px] lg:space-y-[15px] xl:space-y-[20px] 2xl:space-y-[25px]"
 //           >
-//             <div className="text-white-3 font-proxima font-bold global-h5">
+//             <div className="text-white-3 font-grift font-bold global-h5">
 //               {footer?.productsSection?.header}
 //             </div>
 //             <div
@@ -188,7 +188,7 @@
 //                   </Link>
 //                   {item?.showNewBadge && (
 //                     <div
-//                       className="text-white-1 font-proxima font-extrabold bg-cyan w-fit
+//                       className="text-white-1 font-grift font-extrabold bg-cyan w-fit
 //                 text-[9px] xl:text-[10px] 2xl:text-[12px] tracking-wide  uppercase
 //                 px-[3px] xl:px-[6px] 2xl:px-[5px]
 //                 py-[2px] xl:py-[5px] 2xl:py-[2px]
@@ -209,7 +209,7 @@
 //         flex flex-col items-center lg:items-start
 //         relative "
 //           >
-//             <div className="text-white-3 font-proxima font-bold global-h5">
+//             <div className="text-white-3 font-grift font-bold global-h5">
 //               {footer?.factorySection?.header}
 //             </div>
 //             <div
@@ -778,7 +778,7 @@ async function ServerFooter() {
         flex flex-col items-center lg:items-start
         lg:pl-9 xl:pl-10 2xl:pl-12"
           >
-            <div className="text-white-3 font-proxima font-bold global-h5">
+            <div className="text-white-3 font-grift font-bold global-h5">
               {footer?.quickLinksSection?.header}
             </div>
             <div
@@ -816,7 +816,7 @@ async function ServerFooter() {
             hidden lg:flex lg:flex-col items-center lg:items-start
         space-y-[8px] lg:space-y-[15px] xl:space-y-[20px] 2xl:space-y-[25px]"
           >
-            <div className="text-white-3 font-proxima font-bold global-h5">
+            <div className="text-white-3 font-grift font-bold global-h5">
               {footer?.productsSection?.header}
             </div>
             <div
@@ -850,7 +850,7 @@ async function ServerFooter() {
                   </Link>
                   {item?.showNewBadge && (
                     <div
-                      className="text-white-1 font-proxima font-extrabold bg-cyan w-fit
+                      className="text-white-1 font-grift font-extrabold bg-cyan w-fit
                 text-[9px] xl:text-[10px] 2xl:text-[12px] tracking-wide  uppercase
                 px-[3px] xl:px-[6px] 2xl:px-[5px]
                 py-[2px] xl:py-[5px] 2xl:py-[2px]
@@ -871,7 +871,7 @@ async function ServerFooter() {
         flex flex-col items-center lg:items-start
         relative "
           >
-            <div className="text-white-3 font-proxima font-bold global-h5">
+            <div className="text-white-3 font-grift font-bold global-h5">
               {footer?.factorySection?.header}
             </div>
             <div

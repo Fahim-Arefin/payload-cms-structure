@@ -201,7 +201,6 @@ export default async function ServerNavbar() {
       blur={navbarRes?.logoBlurDataURL || ''}
       footerData={footer}
       suggestions={suggestions}
-      // queryFormRecipientEmails={navbarData.queryFormRecipientEmails}
     />
   )
 }

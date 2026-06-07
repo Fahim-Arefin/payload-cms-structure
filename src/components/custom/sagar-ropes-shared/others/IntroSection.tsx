@@ -36,7 +36,7 @@ function IntroSection({ block, className }: Props) {
 
           {/* heading 1 */}
           {block?.heading1 && (
-            <div className="font-proxima font-bold global-h2 text-dark-1">
+            <div className="font-grift font-bold global-h2 text-dark-1">
               <LocalizedHighlighted
                 textBn={block?.heading1}
                 textEn={block?.heading1}
@@ -49,7 +49,7 @@ function IntroSection({ block, className }: Props) {
 
           {/* heading 2 */}
           {block?.heading2 && (
-            <div className="font-proxima font-bold global-h2 text-dark-1">
+            <div className="font-grift font-bold global-h2 text-dark-1">
               <LocalizedHighlighted
                 textBn={block?.heading2}
                 textEn={block?.heading2}
@@ -61,7 +61,7 @@ function IntroSection({ block, className }: Props) {
           )}
 
           {hasH3 && !useBeside && (
-            <div className="font-proxima font-bold global-h2 text-dark-1">
+            <div className="font-grift font-bold global-h2 text-dark-1">
               <LocalizedHighlighted
                 textBn={block?.heading3}
                 textEn={block?.heading3}
@@ -84,7 +84,7 @@ function IntroSection({ block, className }: Props) {
       {(hasDesc || useBeside) && (
         <div className={useBeside ? 'grid gap-2 lg:gap-1 xl:gap-3 lg:grid-cols-12' : ''}>
           {useBeside && (
-            <div className="lg:col-span-6 xl:col-span-5 font-proxima font-bold global-h3 text-dark-1">
+            <div className="lg:col-span-6 xl:col-span-5 font-grift font-bold global-h3 text-dark-1">
               <LocalizedHighlighted
                 textBn={block.heading3}
                 textEn={block.heading3}

@@ -78,7 +78,7 @@ function NavbarActions({ footerData, suggestions, queryFormRecipientEmails }: Pr
               variant="outline"
               className="
                 transition-all duration-300 ease-in
-                rounded-none font-proxima font-bold uppercase global-p3
+                rounded-none font-grift font-bold uppercase global-p3
                 bg-transparent hover:bg-dark-3
                 text-dark-3 hover:text-white-1
                 border-[2px] border-dark-3 w-full
@@ -105,7 +105,7 @@ function NavbarActions({ footerData, suggestions, queryFormRecipientEmails }: Pr
       >
         <VisuallyHidden>
           <SheetHeader>
-            <SheetTitle className="font-proxima uppercase text-dark-3">Contact Us</SheetTitle>
+            <SheetTitle className="font-grift uppercase text-dark-3">Contact Us</SheetTitle>
             <SheetDescription>
               Dummy sheet text. Search/contact content will be designed later.
             </SheetDescription>
@@ -242,7 +242,7 @@ function NavbarActions({ footerData, suggestions, queryFormRecipientEmails }: Pr
 
           {/* footer grid-4 data */}
           <div className="relative z-30 space-y-4 xl:space-y-5">
-            <div className="font-proxima font-bold text-[12px] md:text-[12px] lg:text-[14px] xl:text-[20px] 2xl:text-[22px] leading-[140%] tracking-[-0.6px] text-white-1">
+            <div className="font-grift font-bold text-[12px] md:text-[12px] lg:text-[14px] xl:text-[20px] 2xl:text-[22px] leading-[140%] tracking-[-0.6px] text-white-1">
               CONTACT US
             </div>
 
