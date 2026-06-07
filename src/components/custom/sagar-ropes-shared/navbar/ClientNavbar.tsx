@@ -46,8 +46,8 @@ function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
        "
         >
           <div
-            className="relative aspect-[90/70]
-        hover:scale-110 transition-all duration-300 ease-in
+            className="relative aspect-[80/46]
+        scale-110 hover:scale-100 transition-all duration-300 ease-in
         w-full h-full"
           >
             <Link href="/" aria-label="Home">

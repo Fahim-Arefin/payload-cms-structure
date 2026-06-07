@@ -474,8 +474,8 @@ function Menu({ data, footerData, suggestions }: Props) {
   const navLinkClass = (isActive: boolean) => `
     relative z-10 inline-flex items-center justify-center gap-1
     rounded-[16px]
-    px-[14px] xl:px-[16px] 2xl:px-[20px]
-    py-[4px] xl:py-[4px] 2xl:py-[6px]
+    px-[14px] xl:px-[16px] 2xl:px-[18px]
+    py-[4px] xl:py-[4px] 2xl:py-[4px]
     transition-colors duration-300 ease-in
 
     ${
