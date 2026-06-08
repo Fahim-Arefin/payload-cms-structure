@@ -11,13 +11,6 @@ import { Noto_Serif_Bengali } from 'next/font/google'
 import './styles.css'
 import { Toaster } from '@/components/ui/sonner'
 
-// const notoBengali = Noto_Sans_Bengali({
-//   subsets: ['bengali'],
-//   weight: ['400', '500', '700'],
-//   display: 'swap',
-//   variable: '--font-bn', // expose a CSS variable for Tailwind/use anywhere
-// })
-
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ['bengali'],
   weight: ['400', '500', '700'],
