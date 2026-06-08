@@ -38,12 +38,12 @@ function WithHashScroller({ bgColor, id, children }: Props) {
   const bgClass = bgColor ? `bg-${bgColor}` : ''
 
   return (
-    <>
+    <div className="relative z-20">
       <HashScroller />
       <section id={id ?? undefined} className={bgClass}>
         {children}
       </section>
-    </>
+    </div>
   )
 }
 
