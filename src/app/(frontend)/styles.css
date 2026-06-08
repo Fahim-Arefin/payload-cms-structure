@@ -280,8 +280,9 @@
            2xl:pb-[112px];
   }
 
-  .global-link {
-    @apply text-[10px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[14px];
+  /* modified */
+  .global-info {
+    @apply text-[10px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] leading-[229%] tracking-[3.5px];
   }
   /* modified */
   .global-btn {

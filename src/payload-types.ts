@@ -453,6 +453,38 @@ export interface Page {
         blockName?: string | null;
         blockType: 'product-hero';
       }
+    | {
+        uploadSessionId?: string | null;
+        /**
+         * Select a background color from the design system.
+         */
+        backgroundColor?: ('white-1' | 'white-2' | 'white-3') | null;
+        /**
+         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+         */
+        sectionId?: string | null;
+        /**
+         * Add small company info items like Heart Winning Agency, IT Solution Agency, Located at Dhaka, Bangladesh.
+         */
+        companyInfoItems: {
+          /**
+           * Upload & crop a square icon. Recommended 1:1 ratio.
+           */
+          icon: string | Media;
+          iconOriginal?: (string | null) | Media;
+          pendingIconOriginal?: string | null;
+          pendingIconCrop?: string | null;
+          iconBlurDataURL?: string | null;
+          /**
+           * Info text. Max 80 characters.
+           */
+          text: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'company-info';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -693,6 +725,26 @@ export interface PagesSelect<T extends boolean = true> {
                           label?: T;
                           id?: T;
                         };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'company-info'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              backgroundColor?: T;
+              sectionId?: T;
+              companyInfoItems?:
+                | T
+                | {
+                    icon?: T;
+                    iconOriginal?: T;
+                    pendingIconOriginal?: T;
+                    pendingIconCrop?: T;
+                    iconBlurDataURL?: T;
+                    text?: T;
                     id?: T;
                   };
               id?: T;

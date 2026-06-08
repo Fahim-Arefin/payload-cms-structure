@@ -1,4 +1,5 @@
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
+import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
@@ -180,6 +181,7 @@ export const Pages: CollectionConfig = {
         // custom blocks
 
         // home page unique
+        CompanyInfoSchema,
 
         // about us page unique
 

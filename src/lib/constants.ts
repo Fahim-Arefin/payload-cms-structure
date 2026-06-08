@@ -61,3 +61,7 @@ export const PRODUCT_HERO_SLUG_AND_TAG = 'product-hero'
 export const PRODUCT_HERO_BLOCK_LABEL = 'Hero (Product)'
 export const PRODUCT_HERO_CACHE_KEY = 'product-hero-data'
 export const PRODUCT_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-hero-block-thumbnail.jpg`
+
+export const COMPANY_INFO_SLUG_AND_TAG = 'company-info'
+export const COMPANY_INFO_BLOCK_LABEL = 'Company Info'
+export const COMPANY_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/company-info-block-thumbnail.jpg`

@@ -1,4 +1,8 @@
-import { BASIC_HERO_SLUG_AND_TAG, PRODUCT_HERO_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  BASIC_HERO_SLUG_AND_TAG,
+  COMPANY_INFO_SLUG_AND_TAG,
+  PRODUCT_HERO_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
 
@@ -27,6 +31,12 @@ export const mediaHooks = withMediaLifecycle({
       blockType: PRODUCT_HERO_SLUG_AND_TAG,
       arrayKey: 'heroes',
       mediaFields: ['image'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: COMPANY_INFO_SLUG_AND_TAG,
+      arrayKey: 'companyInfoItems',
+      mediaFields: ['icon'],
     },
   ],
 
