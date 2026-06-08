@@ -241,7 +241,7 @@ function BasicHeroSection({ block }: Props) {
             </div>
           )}
 
-          {hasMultiple && (
+          {/* {hasMultiple && (
             <div
               className="absolute z-30
               left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0
@@ -268,7 +268,7 @@ function BasicHeroSection({ block }: Props) {
                 })}
               </div>
             </div>
-          )}
+          )} */}
         </Carousel>
       </div>
     </section>
