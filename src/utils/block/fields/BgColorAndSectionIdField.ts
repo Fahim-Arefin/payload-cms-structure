@@ -93,17 +93,9 @@ export const BgColorAndSectionIdField = ({
         required: false,
         defaultValue: defaultBackground,
         options: [
-          { label: 'Cyan (#33CCCC)', value: 'cyan' },
-          { label: 'BG 1 (#F2F2F3)', value: 'bg-1' },
-
-          { label: 'White 1 (#FFFFFF)', value: 'white-1' },
-          { label: 'White 2 (#E7E7EE)', value: 'white-2' },
-          { label: 'White 3 (#686893)', value: 'white-3' },
-
-          { label: 'Dark 1 (#070725)', value: 'dark-1' },
-          { label: 'Dark 2 (#0E0E47)', value: 'dark-2' },
-          { label: 'Dark 2b (#09092F)', value: 'dark-2b' },
-          { label: 'Dark 3 (#0B0B3B)', value: 'dark-3' },
+          { label: 'White 1 (#FFFBFC)', value: 'white-1' },
+          { label: 'White 2 (#F3F8F6)', value: 'white-2' },
+          { label: 'White 3 (#F1F4EB)', value: 'white-3' },
         ],
         admin: {
           width: '50%',

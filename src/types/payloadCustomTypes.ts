@@ -1,4 +1,8 @@
-import { BASIC_HERO_SLUG_AND_TAG, PRODUCT_HERO_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  BASIC_HERO_SLUG_AND_TAG,
+  COMPANY_INFO_SLUG_AND_TAG,
+  PRODUCT_HERO_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { Page } from '@/payload-types'
 
 export type BasicHeroBlockType = Extract<
@@ -9,4 +13,9 @@ export type BasicHeroBlockType = Extract<
 export type ProductHeroBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PRODUCT_HERO_SLUG_AND_TAG }
+>
+
+export type CompanyInfoBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof COMPANY_INFO_SLUG_AND_TAG }
 >

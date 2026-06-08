@@ -9,24 +9,7 @@ export default {
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  safelist: [
-    'bg-cyan',
-    'bg-bg-1',
-    'bg-white-1',
-    'bg-white-2',
-    'bg-white-3',
-    'bg-dark-1',
-    'bg-dark-2',
-    'bg-dark-2b',
-    'bg-dark-3',
-    'border-2',
-    'group/testCard',
-    'group-hover/testCard:text-white',
-    'group-hover/testCard:bg-white-1',
-    'group-hover/testCard:opacity-0',
-    'group-hover/testCard:opacity-100',
-    'group-hover/testCard:scale-150',
-  ],
+  safelist: ['bg-white-1', 'bg-white-2', 'bg-white-3'],
   theme: {
     extend: {
       fontFamily: {
