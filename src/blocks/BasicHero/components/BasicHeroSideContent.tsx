@@ -68,7 +68,7 @@ function BasicHeroSideContent({ item }: Props) {
         <div className="absolute inset-x-0 bottom-24 z-40 h-auto flex justify-end container-padding-r">
           <div
             className="w-full lg:w-[90%] xl:w-[70%] 2xl:w-[60%] flex flex-wrap 
-            gap-3 xl:gap-4 2xl:gap-6"
+            gap-[8px] 2xl:gap-[10px]"
           >
             {item?.webSolutionsWeProvide?.map((sol, i) => {
               const href = pageHrefWithAnchor(sol?.buttonLink, sol?.sectionId)
@@ -80,7 +80,7 @@ function BasicHeroSideContent({ item }: Props) {
                 rounded-[99px]
                 border border-primary-2
                 transition-all duration-300 ease-in
-                ${link ? 'hover:bg-primary-2 hover:text-white-1 cursor-pointer' : ''}`
+                ${link ? 'hover:bg-primary-1/30 hover:text-white-1 cursor-pointer' : ''}`
 
               if (link) {
                 return (
