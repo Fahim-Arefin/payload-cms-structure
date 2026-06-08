@@ -169,16 +169,9 @@ export const metadata: Metadata = {
     template: '%s | Xynolab',
   },
   description:
-    'Sagar Ropes manufactures high-quality ropes and twines for marine, fishing, industrial, agricultural, and commercial use.',
+    'Xynolab manufactures high-quality ropes and twines for marine, fishing, industrial, agricultural, and commercial use.',
 
-  keywords: [
-    'Sagar Ropes',
-    'Rope Manufacturer',
-    'Twine Manufacturer',
-    'Marine Ropes',
-    'Fishing Ropes',
-    'Industrial Ropes',
-  ],
+  keywords: ['Xynolab'],
 
   icons: {
     icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/DPXynolabRounder.png`,
