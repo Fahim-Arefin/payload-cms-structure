@@ -24,7 +24,6 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { PagesPublishButton as PagesPublishButton_588be745568dfcd87bae50a0b533b67e } from '../../../components/payload/PagesPublishButton'
 import { PagesSaveButton as PagesSaveButton_842e843d0f60718a0471909f9d0c276d } from '../../../components/payload/PagesSaveButton'
-import { NewsCategoryTagSelectorField as NewsCategoryTagSelectorField_00137075ad64fbb971503f21d210db8a } from '@/components/payload/NewsCategoryTagSelectorField'
 import { AdminRoleStylesProvider as AdminRoleStylesProvider_30dcb85b1e22a8cbdbfcd71ce5b01ed7 } from '../../../components/payload/AdminRoleStylesProvider'
 
 export const importMap = {
@@ -54,6 +53,5 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "/components/payload/PagesPublishButton#PagesPublishButton": PagesPublishButton_588be745568dfcd87bae50a0b533b67e,
   "/components/payload/PagesSaveButton#PagesSaveButton": PagesSaveButton_842e843d0f60718a0471909f9d0c276d,
-  "@/components/payload/NewsCategoryTagSelectorField#NewsCategoryTagSelectorField": NewsCategoryTagSelectorField_00137075ad64fbb971503f21d210db8a,
   "/components/payload/AdminRoleStylesProvider#AdminRoleStylesProvider": AdminRoleStylesProvider_30dcb85b1e22a8cbdbfcd71ce5b01ed7
 }

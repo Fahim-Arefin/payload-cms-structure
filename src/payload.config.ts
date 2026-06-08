@@ -13,13 +13,8 @@ import Media from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Resume } from './collections/Resume'
 import { Users } from './collections/Users'
-import Navbar from './collections/globals/Navbar'
 import Footer from './collections/globals/Footer'
-import { Review } from './collections/Review'
-import { Query } from './collections/Query'
-import NewsCategories from './collections/globals/NewsCategories'
-import NewsTags from './collections/globals/NewsTags'
-import News from './collections/globals/News'
+import Navbar from './collections/globals/Navbar'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -92,8 +87,8 @@ export default buildConfig({
     },
     abortOnLimit: true,
   },
-  collections: [Users, Media, Resume, Review, Query, AuditLogs, Pages],
-  globals: [Navbar, Footer, NewsCategories, NewsTags, News],
+  collections: [Users, Media, Resume, AuditLogs, Pages],
+  globals: [Navbar, Footer],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

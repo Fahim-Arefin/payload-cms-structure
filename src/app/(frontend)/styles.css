@@ -256,6 +256,13 @@
            xl:pl-[150px] 
            2xl:pl-[200px];
   }
+  .container-padding-r {
+    @apply px-4 
+           md:pr-[100px] 
+           lg:pr-[110px] 
+           xl:pr-[150px] 
+           2xl:pr-[200px];
+  }
 
   .container-padding-t {
     @apply pt-9 
@@ -313,9 +320,9 @@
   .global-p4 {
     @apply text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] leading-[150%] tracking-[5%];
   }
-
+  /* modified */
   .global-p5 {
-    @apply text-[10px] md:text-[10px] lg:text-[11px] xl:text-[12px] 2xl:text-[14px] leading-[133.333%];
+    @apply text-[10x] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] leading-[125%] tracking-[0.8px];
   }
 }
 

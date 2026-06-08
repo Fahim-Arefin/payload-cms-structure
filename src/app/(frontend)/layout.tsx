@@ -165,8 +165,8 @@ const notoSerifBengali = Noto_Serif_Bengali({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Sagar Ropes',
-    template: '%s | Sagar Ropes',
+    default: 'Xynolab',
+    template: '%s | Xynolab',
   },
   description:
     'Sagar Ropes manufactures high-quality ropes and twines for marine, fishing, industrial, agricultural, and commercial use.',
@@ -181,7 +181,8 @@ export const metadata: Metadata = {
   ],
 
   icons: {
-    icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/logo.png`,
+    icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/DPXynolabRounder.png`,
+    // icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/DPXynolab.png`,
   },
 }
 
