@@ -528,7 +528,7 @@ const heroImageFields = generateArrayImageFields({
   admin: {
     ...(field?.admin || {}),
     condition: (_data: any, siblingData: any) => {
-      return !siblingData?.heroMediaType || siblingData?.heroMediaType === 'image'
+      return siblingData?.heroMediaType === 'image'
     },
   },
 }))
@@ -568,9 +568,14 @@ const BasicHeroSchema: Block = {
           label: 'Hero Media Type',
           options: [
             {
+              label: 'none',
+              value: 'none',
+            },
+            {
               label: 'Image',
               value: 'image',
             },
+
             {
               label: 'Video / Animation Asset',
               value: 'video',

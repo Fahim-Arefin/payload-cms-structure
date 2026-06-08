@@ -278,7 +278,7 @@ export interface Page {
           /**
            * Choose Image to upload a cropped hero image. Choose Video / Animation Asset to use a file from public/assets/videos by entering the file name below.
            */
-          heroMediaType: 'image' | 'video';
+          heroMediaType: 'none' | 'image' | 'video';
           /**
            * Upload & crop a 20:18 hero image. This field is used only when Hero Media Type is set to Image.
            */

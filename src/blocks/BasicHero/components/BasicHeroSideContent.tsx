@@ -28,7 +28,7 @@ function getPublicVideoAssetPath(fileName?: string | null) {
 }
 
 function BasicHeroSideContent({ item }: Props) {
-  const heroMediaType = item?.heroMediaType || 'image'
+  const heroMediaType = item?.heroMediaType || 'none'
   const videoAssetSrc = getPublicVideoAssetPath(item?.videoAssetName)
 
   return (
