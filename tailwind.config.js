@@ -9,12 +9,38 @@ export default {
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'bg-cyan',
+    'bg-bg-1',
+    'bg-white-1',
+    'bg-white-2',
+    'bg-white-3',
+    'bg-dark-1',
+    'bg-dark-2',
+    'bg-dark-2b',
+    'bg-dark-3',
+    'border-2',
+    'group/testCard',
+    'group-hover/testCard:text-white',
+    'group-hover/testCard:bg-white-1',
+    'group-hover/testCard:opacity-0',
+    'group-hover/testCard:opacity-100',
+    'group-hover/testCard:scale-150',
+  ],
   theme: {
     extend: {
       fontFamily: {
-        avenir: ['Avenir LT Std', 'Noto Serif Bengali', 'sans-serif'],
-        // Force Noto when you explicitly need it
-        noto: ['Noto Serif Bengali', 'Avenir LT Std', 'sans-serif'],
+        // avenir: ['Avenir LT Std', 'Noto Serif Bengali', 'sans-serif'],
+        // // Force Noto when you explicitly need it
+        // noto: ['Noto Serif Bengali', 'Avenir LT Std', 'sans-serif'],
+
+        // proxima: ['Proxima Nova', 'Noto Serif Bengali', 'sans-serif'],
+        // manrope: ['Manrope', 'Noto Serif Bengali', 'sans-serif'],
+        agency: ['Agency', 'sans-serif'],
+        grift: ['Grift', 'sans-serif'],
+
+        // keep your bn override
+        noto: ['Noto Serif Bengali', 'Proxima Nova', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -62,6 +88,19 @@ export default {
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))',
         },
+
+        // Add your custom colors here
+
+        // New brand colors
+        'primary-1': 'rgb(var(--primary-1) / <alpha-value>)',
+        'primary-2': 'rgb(var(--primary-2) / <alpha-value>)',
+
+        'secondary-1': 'rgb(var(--secondary-1) / <alpha-value>)',
+        'secondary-2': 'rgb(var(--secondary-2) / <alpha-value>)',
+
+        'white-1': 'rgb(var(--white-1) / <alpha-value>)',
+        'white-2': 'rgb(var(--white-2) / <alpha-value>)',
+        'white-3': 'rgb(var(--white-3) / <alpha-value>)',
       },
       boxShadow: {
         'custom-black': '0px 0px 10px 0px #00000082',
@@ -91,16 +130,22 @@ export default {
           '0%': { opacity: 0, transform: 'translateX(120px)' },
           '100%': { opacity: 0.2, transform: 'translateX(0)' },
         },
+        hoverNudge: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-1px)' }, // ~0.5 * 4px = 2px
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         fadeSlideLeft: 'fadeSlideLeft 1.2s cubic-bezier(.4,0,.2,1) both',
         fadeSlideRight: 'fadeSlideRight 1.2s cubic-bezier(.4,0,.2,1) both',
+        hoverNudge: 'hoverNudge 300ms ease-in-out',
       },
       backdropBlur: {
         15: '15px',
       },
+
       // typography: {
       //   DEFAULT: {
       //     css: {

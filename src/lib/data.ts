@@ -409,6 +409,7 @@ export const NAV_ITEMS_MOBILE = [
 ]
 
 export const sliderDelay = 5000
+export const homeSliderDelay = 10000
 
 export const supportTabContent = [
   {

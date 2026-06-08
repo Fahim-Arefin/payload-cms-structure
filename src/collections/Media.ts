@@ -51,7 +51,7 @@
 //==================================================================
 
 // src/collections/Media.ts
-import { MEDIA } from '@/lib/constants'
+import { roleAtLeast } from '@/lib/rbac'
 import type { CollectionConfig } from 'payload'
 
 export const MEDIA_SLUG = 'media'
@@ -82,11 +82,18 @@ const Media: CollectionConfig = {
     ],
   },
 
+  // access: {
+  //   read: () => true,
+  //   create: () => true,
+  //   update: () => true,
+  //   delete: () => true,
+  // },
+
   access: {
-    read: () => true,
-    create: () => true,
-    update: () => true,
-    delete: () => true,
+    read: () => true, // public read
+    create: ({ req }) => roleAtLeast(req.user, 'editor'),
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
+    delete: ({ req }) => roleAtLeast(req.user, 'editor'),
   },
   fields: [
     // who owns this file (for cleanup / grouping)

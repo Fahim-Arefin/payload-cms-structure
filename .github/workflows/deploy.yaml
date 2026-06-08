@@ -1,0 +1,45 @@
+name: Deploy SagarRope (SSH)
+
+on:
+  push:
+    branches:
+      # - main
+      - staging
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SAGARROPE_SERVER_IP }}
+          username: ${{ secrets.SAGARROPE_SERVER_USERNAME }}
+          password: ${{ secrets.SAGARROPE_SERVER_PASSWORD }}
+          port: ${{ secrets.SAGARROPE_SERVER_PORT }}
+          script: |
+            set -e
+
+            if [ "${{ github.ref_name }}" = "main" ]; then
+              ENV="main"
+            else
+              ENV="staging"
+            fi
+
+            NODE_PNPM_BIN="/home/sagarrope/.nvm/versions/node/v24.11.0/bin"
+            export PATH="$NODE_PNPM_BIN:$PATH"
+
+            command -v node || { echo "node not found"; exit 1; }
+            command -v pnpm || { echo "pnpm not found"; exit 1; }
+            node -v
+            pnpm -v
+
+            echo "Deploying environment: $ENV (branch: ${{ github.ref_name }})"
+
+            cd "$HOME/projects/sagarrope-$ENV" && \
+            git pull origin "$ENV" && \
+            pnpm i --frozen-lockfile && \
+            pnpm build && \
+            pm2 reload "sagarrope-$ENV" && \
+            pm2 status

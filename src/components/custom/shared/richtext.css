@@ -1,16 +1,16 @@
 /* richtext.css */
-.rt a {
-  color: #ed7125; /* primary */
+/* .rt a {
+  color: #ed7125; 
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 .rt a:hover,
 .rt a:focus {
-  color: #ed7125; /* secondary */
+  color: #ed7125; 
 }
 .rt a:visited {
   color: #ed7125;
-}
+} */
 
 .rt ul {
   list-style: disc;
