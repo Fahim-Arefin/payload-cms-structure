@@ -1,6 +1,9 @@
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
+import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
+import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
+import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -182,6 +185,9 @@ export const Pages: CollectionConfig = {
 
         // home page unique
         CompanyInfoSchema,
+        CompanyIntroSchema,
+        ProjectApproachSchema,
+        CodingLanguageSchema,
 
         // about us page unique
 

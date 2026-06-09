@@ -9,7 +9,7 @@ export default {
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  safelist: ['bg-white-1', 'bg-white-2', 'bg-white-3'],
+  safelist: ['bg-white-1', 'bg-white-2', 'bg-white-3', 'bg-secondary-1', 'bg-secondary-2'],
   theme: {
     extend: {
       fontFamily: {
@@ -157,7 +157,7 @@ export default {
       md: '768px',
       lg: '1024px',
       //   xl: '1280px',
-      xl: '1350px',
+      xl: '1439px',
       // '2xl': '1532px',
       '2xl': '1700px',
       '3xl': '1925px',

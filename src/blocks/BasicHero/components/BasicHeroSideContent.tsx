@@ -41,7 +41,8 @@ function BasicHeroSideContent({ item }: Props) {
               src={item?.image?.url}
               alt="hero image"
               fill
-              className="object-fill object-top xl:object-contain xl:origin-center z-0"
+              // className="object-fill object-top xl:object-contain xl:origin-center z-0"
+              className="object-fill object-top lg:object-contain lg:origin-center z-0"
               sizes="100vw"
               priority
               quality={100}
@@ -52,7 +53,8 @@ function BasicHeroSideContent({ item }: Props) {
 
           {heroMediaType === 'video' && videoAssetSrc && (
             <video
-              className="absolute inset-0 z-0 h-full w-full object-fill object-top xl:object-contain bg-transparent"
+              // className="absolute inset-0 z-0 h-full w-full object-fill object-top xl:object-contain bg-transparent"
+              className="absolute inset-0 z-0 h-full w-full object-fill object-top lg:object-contain lg:origin-center bg-transparent"
               autoPlay
               muted
               loop
