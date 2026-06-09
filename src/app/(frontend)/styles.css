@@ -301,8 +301,10 @@
   .global-h4 {
     @apply text-[16px] md:text-[16px] lg:text-[20px] xl:text-[24px] 2xl:text-[28px] leading-[133.333%] tracking-[-0.72px];
   }
+
+  /* modified */
   .global-h5 {
-    @apply text-[12px] md:text-[12px] lg:text-[14px] xl:text-[20px] 2xl:text-[24px] leading-[140%] tracking-[-0.6px];
+    @apply text-[18px] md:text-[23px] lg:text-[30px] xl:text-[47px] 2xl:text-[60px] leading-[112.5%];
   }
   .global-h6 {
     @apply text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] leading-[144%] tracking-[-0.54px];
