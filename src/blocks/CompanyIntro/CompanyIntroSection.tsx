@@ -12,7 +12,7 @@ function CompanyIntroSection({ block }: Props) {
     !!block?.companyIntroDescription?.description &&
     !!block?.companyIntroDescription?.description?.root?.direction // or lexicalHasRealText(block.description?.root)
   return (
-    <div className="container-padding space-y-4 lg:space-y-6 xl:space-y-8 2xl:space-y-10">
+    <div className="container-padding space-y-[20px] lg:space-y-[40px] xl:space-y-[56px] 2xl:space-y-[60px]">
       <SectionHeading01 data={block?.sectionHeading} align="middle" />
       {hasDesc && (
         <div className="font-grift text-justify text-secondary-1 global-p2">
