@@ -457,14 +457,16 @@ export interface Page {
       }
     | {
         uploadSessionId?: string | null;
-        /**
-         * Select a background color from the design system.
-         */
-        backgroundColor?: ('white-1' | 'white-2' | 'white-3') | null;
-        /**
-         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
-         */
-        sectionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
         /**
          * Add small company info items like Heart Winning Agency, IT Solution Agency, Located at Dhaka, Bangladesh.
          */
@@ -486,6 +488,96 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'company-info';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Main intro heading, highlighted text, description and optional CTA.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Additional company intro description content.
+         */
+        companyIntroDescription?: {
+          /**
+           * Write the company intro description text.
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'company-intro';
       }
   )[];
   updatedAt: string;
@@ -738,8 +830,12 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               uploadSessionId?: T;
-              backgroundColor?: T;
-              sectionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
               companyInfoItems?:
                 | T
                 | {
@@ -750,6 +846,36 @@ export interface PagesSelect<T extends boolean = true> {
                     iconBlurDataURL?: T;
                     text?: T;
                     id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'company-intro'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              companyIntroDescription?:
+                | T
+                | {
+                    description?: T;
                   };
               id?: T;
               blockName?: T;

@@ -9,7 +9,7 @@ export default {
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  safelist: ['bg-white-1', 'bg-white-2', 'bg-white-3'],
+  safelist: ['bg-white-1', 'bg-white-2', 'bg-white-3', 'bg-secondary-1', 'bg-secondary-2'],
   theme: {
     extend: {
       fontFamily: {

@@ -65,3 +65,7 @@ export const PRODUCT_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-hero
 export const COMPANY_INFO_SLUG_AND_TAG = 'company-info'
 export const COMPANY_INFO_BLOCK_LABEL = 'Company Info'
 export const COMPANY_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/company-info-block-thumbnail.jpg`
+
+export const COMPANY_INTRO_SLUG_AND_TAG = 'company-intro'
+export const COMPANY_INTRO_BLOCK_LABEL = 'Company Introduction'
+export const COMPANY_INTRO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/company-intro-block-thumbnail.webp`

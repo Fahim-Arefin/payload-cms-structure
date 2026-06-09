@@ -96,6 +96,8 @@ export const BgColorAndSectionIdField = ({
           { label: 'White 1 (#FFFBFC)', value: 'white-1' },
           { label: 'White 2 (#F3F8F6)', value: 'white-2' },
           { label: 'White 3 (#F1F4EB)', value: 'white-3' },
+          { label: 'Secondary 1 (#0A1128)', value: 'secondary-1' },
+          { label: 'Secondary 2 (#0B0537)', value: 'secondary-2' },
         ],
         admin: {
           width: '50%',
