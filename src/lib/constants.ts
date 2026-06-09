@@ -50,13 +50,11 @@ export const PRODUCT_PAGE = 'Product Page'
 export const GET_IN_TOUCH = 'Get In Touch Page'
 export const NEWS = 'News And Events'
 
-// Basic Hero Block
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
 export const BASIC_HERO_BLOCK_LABEL = 'Hero (Basic)'
 export const BASIC_HERO_CACHE_KEY = 'basic-hero-data'
 export const BASIC_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/basic-hero-block-thumbnail.jpg`
 
-// Product Hero Block
 export const PRODUCT_HERO_SLUG_AND_TAG = 'product-hero'
 export const PRODUCT_HERO_BLOCK_LABEL = 'Hero (Product)'
 export const PRODUCT_HERO_CACHE_KEY = 'product-hero-data'
@@ -73,3 +71,7 @@ export const COMPANY_INTRO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/company-int
 export const PROJECT_APPROACH_SLUG_AND_TAG = 'project-approach'
 export const PROJECT_APPROACH_BLOCK_LABEL = 'Project Approach'
 export const PROJECT_APPROACH_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/project-approach-block-thumbnail.webp`
+
+export const CODING_LANGUAGE_SLUG_AND_TAG = 'coding-language'
+export const CODING_LANGUAGE_BLOCK_LABEL = 'Coding Language'
+export const CODING_LANGUAGE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/coding-language-block-thumbnail.webp`
