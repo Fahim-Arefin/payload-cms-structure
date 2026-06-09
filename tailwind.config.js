@@ -157,7 +157,7 @@ export default {
       md: '768px',
       lg: '1024px',
       //   xl: '1280px',
-      xl: '1350px',
+      xl: '1439px',
       // '2xl': '1532px',
       '2xl': '1700px',
       '3xl': '1925px',
