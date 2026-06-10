@@ -191,8 +191,8 @@ function CompanyIntroSection({ block }: Props) {
 
             // Below your custom xl 1439px: starts at top 25%
             // xl and above: starts at top top
-            start: () => (window.innerWidth < XL_BREAKPOINT ? 'top 25%' : 'top top'),
-
+            // start: () => (window.innerWidth < XL_BREAKPOINT ? 'top 25%' : 'top top'),
+            start: 'top top',
             end: '+=150%',
             pin: true,
             scrub: true,
@@ -230,22 +230,23 @@ function CompanyIntroSection({ block }: Props) {
   )
 
   return (
-    <div
+    <section
       ref={containerRef}
-      className="relative container-padding space-y-[20px] lg:space-y-[40px] xl:space-y-[56px] 2xl:space-y-[60px]"
+      className="relative min-h-screen flex flex-col justify-center items-center w-full h-full"
     >
-      <SectionHeading01 data={block?.sectionHeading} align="middle" />
+      <div className=" container-padding space-y-[20px] lg:space-y-[40px] xl:space-y-[56px] 2xl:space-y-[60px]">
+        <SectionHeading01 data={block?.sectionHeading} align="middle" />
 
-      {hasDesc && (
-        <div ref={paragraphRef} className="font-grift text-justify text-secondary-1 global-p2">
-          <LocalizedRichText
-            en={block?.companyIntroDescription?.description}
-            bn={block?.companyIntroDescription?.description}
-          />
-        </div>
-      )}
-
-      <div className="absolute bottom-0 left-0 right-0 h-[80%]">
+        {hasDesc && (
+          <div ref={paragraphRef} className="font-grift text-justify text-secondary-1 global-p2">
+            <LocalizedRichText
+              en={block?.companyIntroDescription?.description}
+              bn={block?.companyIntroDescription?.description}
+            />
+          </div>
+        )}
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 h-[100%] lg:h-[80%]">
         <Image
           src={Eclipse}
           alt="Eclipse"
@@ -257,7 +258,7 @@ function CompanyIntroSection({ block }: Props) {
           className="w-full h-full"
         />
       </div>
-    </div>
+    </section>
   )
 }
 
