@@ -77,7 +77,7 @@ const ProjectApproachSchema: Block = {
           label: 'Project Approach Items',
           required: true,
           minRows: 1,
-          maxRows: 8,
+          maxRows: 6,
           labels: {
             singular: 'Approach Item',
             plural: 'Approach Items',

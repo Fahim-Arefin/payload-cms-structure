@@ -27,7 +27,7 @@ function SectionHeading01({ data, align }: Props) {
       <div>
         {data?.heading1 && (
           <div
-            className={`font-agency global-h3 global-h2 text-secondary-1 
+            className={`font-agency global-h3 text-secondary-1 
           ${align === 'left' ? 'text-start' : align === 'right' ? 'text-end' : 'text-center'}`}
           >
             <LocalizedHighlighted
@@ -41,7 +41,7 @@ function SectionHeading01({ data, align }: Props) {
         )}
         {data?.heading2 && (
           <div
-            className={`font-agency global-h3 global-h2 text-secondary-1 
+            className={`font-agency global-h3 text-secondary-1 
           ${align === 'left' ? 'text-start' : align === 'right' ? 'text-end' : 'text-center'}`}
           >
             <LocalizedHighlighted

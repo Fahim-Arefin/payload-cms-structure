@@ -1266,7 +1266,7 @@ export interface Footer {
   id: string;
   uploadSessionId?: string | null;
   /**
-   * Primary footer logo.
+   * Primary footer logo. Aspect ratio (922:512)
    */
   logo: string | Media;
   logoOriginal?: (string | null) | Media;
@@ -1277,33 +1277,26 @@ export interface Footer {
    */
   logoBlurDataURL?: string | null;
   /**
-   * Certification / trust badge shown under the intro text.
+   * Optional background image shown behind/below the footer logo. Aspect ratio (922:512)
    */
-  isoBadgeImage?: (string | null) | Media;
-  isoBadgeImageOriginal?: (string | null) | Media;
-  pendingIsoBadgeImageOriginal?: string | null;
-  pendingIsoBadgeImageCrop?: string | null;
+  logoBackgroundImage?: (string | null) | Media;
+  logoBackgroundImageOriginal?: (string | null) | Media;
+  pendingLogoBackgroundImageOriginal?: string | null;
+  pendingLogoBackgroundImageCrop?: string | null;
   /**
    * Auto-generated Base64 blur
    */
-  isoBadgeImageBlurDataURL?: string | null;
-  showPatternDesign?: boolean | null;
+  logoBackgroundImageBlurDataURL?: string | null;
   branding: {
     introText: string;
+    /**
+     * Optional terms and condition text shown in footer.
+     */
+    termsConditionText?: string | null;
   };
-  quickLinksSection: {
+  resourses: {
     header: string;
     links?:
-      | {
-          buttonText: string;
-          buttonLink?: (string | null) | Page;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  productsSection: {
-    header: string;
-    products?:
       | {
           buttonText: string;
           buttonLink?: (string | null) | Page;
@@ -1312,9 +1305,19 @@ export interface Footer {
         }[]
       | null;
   };
-  factorySection: {
+  serviceSection: {
     header: string;
-    facAddress: {
+    services?:
+      | {
+          buttonText: string;
+          buttonLink?: (string | null) | Page;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  contactInfoSection: {
+    header: string;
+    companyAddress: {
       root: {
         type: string;
         children: {
@@ -1330,6 +1333,10 @@ export interface Footer {
       [k: string]: unknown;
     };
     mapUrl?: string | null;
+    /**
+     * Example: Sat - Thu, 9:00 AM - 6:00 PM
+     */
+    officeTime: string;
     phone: string;
     email: string;
   };
@@ -1339,12 +1346,12 @@ export interface Footer {
     whatsApp: string;
     linkedinUrl: string;
   };
-  marqueeSection: {
-    text: string;
-    year?: string | null;
-  };
-  copyrightSection: {
-    copyright: string;
+  copyright: {
+    copyrightText: string;
+    /**
+     * Write the exact part of the copyright text that should be highlighted. It must exist inside Copyright Text exactly.
+     */
+    copyrightHighlightedText?: string | null;
   };
   legalSection: {
     legalValue: {
@@ -1412,18 +1419,18 @@ export interface FooterSelect<T extends boolean = true> {
   pendingLogoOriginal?: T;
   pendingLogoCrop?: T;
   logoBlurDataURL?: T;
-  isoBadgeImage?: T;
-  isoBadgeImageOriginal?: T;
-  pendingIsoBadgeImageOriginal?: T;
-  pendingIsoBadgeImageCrop?: T;
-  isoBadgeImageBlurDataURL?: T;
-  showPatternDesign?: T;
+  logoBackgroundImage?: T;
+  logoBackgroundImageOriginal?: T;
+  pendingLogoBackgroundImageOriginal?: T;
+  pendingLogoBackgroundImageCrop?: T;
+  logoBackgroundImageBlurDataURL?: T;
   branding?:
     | T
     | {
         introText?: T;
+        termsConditionText?: T;
       };
-  quickLinksSection?:
+  resourses?:
     | T
     | {
         header?: T;
@@ -1432,28 +1439,29 @@ export interface FooterSelect<T extends boolean = true> {
           | {
               buttonText?: T;
               buttonLink?: T;
-              id?: T;
-            };
-      };
-  productsSection?:
-    | T
-    | {
-        header?: T;
-        products?:
-          | T
-          | {
-              buttonText?: T;
-              buttonLink?: T;
               showNewBadge?: T;
               id?: T;
             };
       };
-  factorySection?:
+  serviceSection?:
     | T
     | {
         header?: T;
-        facAddress?: T;
+        services?:
+          | T
+          | {
+              buttonText?: T;
+              buttonLink?: T;
+              id?: T;
+            };
+      };
+  contactInfoSection?:
+    | T
+    | {
+        header?: T;
+        companyAddress?: T;
         mapUrl?: T;
+        officeTime?: T;
         phone?: T;
         email?: T;
       };
@@ -1465,16 +1473,11 @@ export interface FooterSelect<T extends boolean = true> {
         whatsApp?: T;
         linkedinUrl?: T;
       };
-  marqueeSection?:
+  copyright?:
     | T
     | {
-        text?: T;
-        year?: T;
-      };
-  copyrightSection?:
-    | T
-    | {
-        copyright?: T;
+        copyrightText?: T;
+        copyrightHighlightedText?: T;
       };
   legalSection?:
     | T
