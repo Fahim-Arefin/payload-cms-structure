@@ -42,8 +42,8 @@ function ProjectApproachCardSection({ data, cardsRef }: Props) {
       className="
         relative w-full
         [--card-offset:42px]
-        lg:[--card-offset:52px]
-        xl:[--card-offset:58px]
+        lg:[--card-offset:60px]
+        xl:[--card-offset:90px]
         2xl:[--card-offset:100px]
 
         [--card-height:220px]

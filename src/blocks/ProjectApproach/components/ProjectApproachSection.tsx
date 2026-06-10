@@ -14,6 +14,17 @@ function ProjectApproachSection({ block }: Props) {
   const projectApproachContainerRef = useRef<HTMLDivElement | null>(null)
   const cardsRef = useRef<HTMLDivElement | null>(null)
 
+  const getProjectApproachStart = () => {
+    // below lg: < 1024px
+    if (window.innerWidth < 1024) return 'top 10%'
+
+    // above lg but below xl: 1024px - 1438px
+    if (window.innerWidth < 1439) return 'top -15%'
+
+    // above xl: >= 1439px
+    return 'top -27%'
+  }
+
   useGSAP(
     () => {
       const container = projectApproachContainerRef.current
@@ -35,10 +46,9 @@ function ProjectApproachSection({ block }: Props) {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          // trigger: container,
-          // start: 'top top',
           trigger: container,
-          start: 'top -27%',
+          // start: 'top -27%',
+          start: getProjectApproachStart,
           end: '+=220%',
           scrub: true,
           pin: true,
