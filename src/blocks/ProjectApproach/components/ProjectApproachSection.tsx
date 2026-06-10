@@ -29,21 +29,22 @@ function ProjectApproachSection({ block }: Props) {
 
       // Initial state: all cards stay below original position
       gsap.set(cards, {
-        y: 220,
+        y: 1000,
         opacity: 0,
       })
 
       const tl = gsap.timeline({
         scrollTrigger: {
+          // trigger: container,
+          // start: 'top top',
           trigger: container,
-          start: 'top top',
+          start: 'top -27%',
           end: '+=220%',
           scrub: true,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          markers: true,
-
+          // markers: true,
           // lower than CompanyIntro
           refreshPriority: 1,
         },
@@ -58,7 +59,8 @@ function ProjectApproachSection({ block }: Props) {
           y: 0,
           opacity: 1,
           duration: 1,
-          ease: 'none',
+          // ease: 'none',
+          ease: 'power2.out',
         })
       })
 
