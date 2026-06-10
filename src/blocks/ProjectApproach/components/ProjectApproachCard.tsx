@@ -15,6 +15,7 @@ function ProjectApproachCard({ data, index }: Props) {
   return (
     <div
       className={`${index % 2 === 0 ? 'bg-secondary-1' : 'bg-primary-1'}
+      project-approach-card
     relative overflow-hidden
     px-[20px] lg:px-[30px] xl:px-[56px] 2xl:px-[58px]   
     py-[16px] lg:py-[20px] xl:py-[32px] 2xl:py-[34px]
@@ -22,9 +23,9 @@ function ProjectApproachCard({ data, index }: Props) {
     rounded-[10px] lg:rounded-[12px] xl:rounded-[16px] 
     `}
     >
-      <div className={`font-agency text-white-1 global-h5 `}>{data?.title}</div>
+      <div className={`relative z-10 font-agency text-white-1 global-h5 `}>{data?.title}</div>
       {hasDesc && (
-        <div className="font-grift text-justify global-p4 text-white-1 max-w-full md:max-w-[85%]">
+        <div className="relative z-10 font-grift text-justify global-p4 text-white-1 max-w-full md:max-w-[85%]">
           <LocalizedRichText bn={data?.description} en={data?.description} />
         </div>
       )}

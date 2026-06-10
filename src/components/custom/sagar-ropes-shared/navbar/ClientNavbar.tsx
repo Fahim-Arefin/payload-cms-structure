@@ -166,7 +166,7 @@ function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
       end: 'max',
 
       onUpdate: (self) => {
-        if (self.scroll() < 80) {
+        if (self.scroll() < 850) {
           showNavbar()
           return
         }

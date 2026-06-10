@@ -199,6 +199,7 @@ function CompanyIntroSection({ block }: Props) {
             anticipatePin: 1,
             invalidateOnRefresh: true,
             // markers: true,
+            refreshPriority: 2,
           },
         })
 
