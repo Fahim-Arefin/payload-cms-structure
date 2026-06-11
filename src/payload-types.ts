@@ -1277,7 +1277,7 @@ export interface Footer {
    */
   logoBlurDataURL?: string | null;
   /**
-   * Optional background image shown behind/below the footer logo. Aspect ratio (922:512)
+   * Optional background image shown behind/below the footer logo. Aspect ratio (1437:280)
    */
   logoBackgroundImage?: (string | null) | Media;
   logoBackgroundImageOriginal?: (string | null) | Media;
@@ -1311,6 +1311,7 @@ export interface Footer {
       | {
           buttonText: string;
           buttonLink?: (string | null) | Page;
+          showNewBadge?: boolean | null;
           id?: string | null;
         }[]
       | null;
@@ -1452,6 +1453,7 @@ export interface FooterSelect<T extends boolean = true> {
           | {
               buttonText?: T;
               buttonLink?: T;
+              showNewBadge?: T;
               id?: T;
             };
       };

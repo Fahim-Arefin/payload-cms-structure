@@ -307,8 +307,14 @@
   .global-h5 {
     @apply text-[18px] md:text-[23px] lg:text-[30px] xl:text-[47px] 2xl:text-[60px] leading-[112.5%];
   }
+
+  /* modified */
   .global-h6 {
-    @apply text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] leading-[144%] tracking-[-0.54px];
+    @apply text-[15px] md:text-[19px] lg:text-[25px] xl:text-[38px] 2xl:text-[45px] leading-[144%] tracking-[-0.54px];
+  }
+  /* modiied */
+  .global-h7 {
+    @apply text-[13px] md:text-[15px] lg:text-[20px] xl:text-[30px] 2xl:text-[35px] leading-[112%];
   }
 
   .global-p1 {
@@ -328,7 +334,7 @@
   }
   /* modified */
   .global-p5 {
-    @apply text-[10x] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] leading-[125%] tracking-[0.8px];
+    @apply text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] leading-[125%] tracking-[0.8px];
   }
 }
 
