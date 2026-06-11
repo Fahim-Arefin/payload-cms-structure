@@ -1233,7 +1233,7 @@ export interface Navbar {
   id: string;
   uploadSessionId?: string | null;
   /**
-   * Primary navbar logo. Transparent PNG/SVG preferred. Square-ish crop recommended.
+   * Primary navbar logo. Transparent PNG/SVG preferred. (919:512) recommended.
    */
   logo: string | Media;
   logoOriginal?: (string | null) | Media;
