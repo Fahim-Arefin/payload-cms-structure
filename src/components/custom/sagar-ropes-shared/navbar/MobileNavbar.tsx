@@ -16,7 +16,6 @@ import Facebook from 'public/assets/icons/facebook.png'
 import Linkdin from 'public/assets/icons/linkdin.png'
 import At from 'public/assets/icons/attherate.png'
 import WhatsApp from 'public/assets/icons/whatsapp.png'
-import Burger from '/public/assets/icons/burger.png'
 
 type Props = {
   data: NavbarData
@@ -263,35 +262,32 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
   `
 
   const BurgerIcon = ({ open }: { open: boolean }) => (
-    <span className="relative block h-[20px] w-[24px] text-white-1">
-      {/* Top line */}
+    <span className="relative block h-[16px] w-[20px] text-white-1">
       <span
         className={`
-        absolute left-0 top-0 h-[2px] w-[24px]
-        origin-center rounded-full bg-current
-        transition-all duration-300 ease-out
-        ${open ? 'translate-y-[9px] rotate-45' : 'translate-y-0 rotate-0'}
-      `}
+          absolute left-0 top-0 h-[2px] w-[20px]
+          origin-center rounded-full bg-current
+          transition-all duration-300 ease-out
+          ${open ? 'translate-y-[7px] rotate-45' : 'translate-y-0 rotate-0'}
+        `}
       />
 
-      {/* Middle line */}
       <span
         className={`
-        absolute left-0 top-[9px] h-[2px] w-[24px]
-        origin-center rounded-full bg-current
-        transition-all duration-300 ease-out
-        ${open ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'}
-      `}
+          absolute left-0 top-[7px] h-[2px] w-[20px]
+          origin-center rounded-full bg-current
+          transition-all duration-300 ease-out
+          ${open ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'}
+        `}
       />
 
-      {/* Bottom line */}
       <span
         className={`
-        absolute left-0 top-[18px] h-[2px] w-[24px]
-        origin-center rounded-full bg-current
-        transition-all duration-300 ease-out
-        ${open ? '-translate-y-[9px] -rotate-45' : 'translate-y-0 rotate-0'}
-      `}
+          absolute left-0 top-[14px] h-[2px] w-[20px]
+          origin-center rounded-full bg-current
+          transition-all duration-300 ease-out
+          ${open ? '-translate-y-[7px] -rotate-45' : 'translate-y-0 rotate-0'}
+        `}
       />
     </span>
   )
@@ -302,81 +298,52 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
       <div
         className="
           fixed inset-x-0 top-4 z-50 mx-auto
-          flex h-[58px] w-[92%] items-center justify-between
-          rounded-[20px]
-          px-4 lg:hidden
+          flex h-[52px] w-[92%] items-center justify-between
+          overflow-hidden
+          rounded-[12px]
+          bg-secondary-1
+          px-3 lg:hidden
           shadow-[0_18px_45px_rgba(10,17,40,0.16)]
-          backdrop-blur-[15px]
         "
-        style={{
-          background: `
-            linear-gradient(0deg, #006C67 0%, rgba(0, 210, 200, 0) 100%),
-            linear-gradient(180deg, rgba(255, 251, 252, 0) 0%, rgba(0, 108, 103, 0.5) 79.81%)
-          `,
-        }}
       >
-        <Link href="/" aria-label="Home" className="relative block h-full w-[120px]">
-          {typeof data.branding.logo === 'object' && data.branding.logo?.url && (
-            <Image
-              src={logoUrl}
-              alt="Company logo"
-              fill
-              className="object-contain"
-              priority
-              placeholder="blur"
-              blurDataURL={blur || ''}
-              quality={90}
-            />
-          )}
-        </Link>{' '}
-        {/* <button
-          type="button"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          onClick={() => setOpen((prev) => !prev)}
-          className="
-            relative flex h-10 w-10 items-center justify-center
-            rounded-[12px] bg-primary-1 text-white-1
-            transition-transform duration-300 ease-out
-            hover:scale-105
-          "
-        >
-          {open ? (
-            <span className="relative h-5 w-5">
-              <span className="absolute left-0 top-1/2 h-[2px] w-5 -translate-y-1/2 rotate-45 bg-current" />
-              <span className="absolute left-0 top-1/2 h-[2px] w-5 -translate-y-1/2 -rotate-45 bg-current" />
-            </span>
-          ) : (
-            <Image
-              src={Burger}
-              alt=""
-              aria-hidden="true"
-              width={28}
-              height={28}
-              quality={80}
-              placeholder="blur"
-              blurDataURL={Burger?.blurDataURL}
-              className="h-6 w-6 object-contain"
-            />
-          )}
-        </button> */}
-        <button
-          type="button"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          onClick={() => setOpen((prev) => !prev)}
-          className="
-    relative flex h-10 w-10 items-center justify-center
-    rounded-[12px]
-    bg-primary-1
-    text-white-1
-    shadow-[0_8px_24px_rgba(0,108,103,0.28)]
-    transition-all duration-300 ease-out
-    hover:scale-105
-    active:scale-95
-  "
-        >
-          <BurgerIcon open={open} />
-        </button>
+        {/* logo */}
+        <div className="relative z-10 flex h-full w-[38%] items-center justify-start overflow-hidden">
+          <Link href="/" aria-label="Home" className="block h-[68%]">
+            {typeof data.branding.logo === 'object' && data.branding.logo?.url && (
+              <Image
+                src={logoUrl}
+                alt="Company logo"
+                width={240}
+                height={110}
+                className="h-full w-auto object-contain object-center"
+                priority
+                placeholder="blur"
+                blurDataURL={blur || ''}
+                quality={90}
+              />
+            )}
+          </Link>
+        </div>
+
+        {/* burger */}
+        <div className="relative z-10 flex h-full w-[38%] items-center justify-end overflow-hidden">
+          <button
+            type="button"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            onClick={() => setOpen((prev) => !prev)}
+            className="
+              relative flex h-8 w-8 items-center justify-center
+              rounded-[7px]
+              text-white-1
+              transition-transform duration-300 ease-out
+              hover:scale-105
+              active:scale-95
+            "
+          >
+            <BurgerIcon open={open} />
+          </button>
+        </div>
       </div>
 
       {/* Overlay */}
@@ -398,7 +365,7 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
           invisible fixed right-0 top-0 z-[70]
           h-screen w-[88%] max-w-[390px]
           overflow-hidden
-          
+
           border-l border-primary-2/30
           bg-white-1
           opacity-0
@@ -406,20 +373,19 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
           lg:hidden
         "
       >
-        {/* Header gradient */}
+        {/* Header darker gradient */}
         <div
           className="
             pointer-events-none absolute inset-x-0 top-0 h-[150px]
           "
           style={{
             background: `
-              linear-gradient(0deg, rgba(0,108,103,0.92) 0%, rgba(0,210,200,0.02) 100%),
-              linear-gradient(180deg, rgba(255,251,252,0.85) 0%, rgba(0,108,103,0.45) 79.81%)
+              linear-gradient(180deg, rgba(10,17,40,0.98) 0%, rgba(0,108,103,0.94) 100%)
             `,
           }}
         />
 
-        <div className="relative z-10 flex h-full flex-col overflow-y-auto overflow-x-hidden px-5 pb-8 pt-8">
+        <div className="relative z-10 flex h-full flex-col overflow-y-auto overflow-x-hidden px-5 pb-8 pt-7">
           {/* Header */}
           <div className="flex items-center justify-between">
             {typeof data.branding.logo === 'object' && data.branding.logo?.url && (
@@ -427,7 +393,7 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
                 href="/"
                 aria-label="Home"
                 onClick={() => setOpen(false)}
-                className="relative block w-[160px] aspect-[80/46]"
+                className="relative block w-[115px] sm:w-[125px] aspect-[80/46]"
               >
                 <Image
                   src={logoUrl}
@@ -447,14 +413,14 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
               aria-label="Close menu"
               onClick={() => setOpen(false)}
               className="
-                flex h-10 w-10 items-center justify-center
-                rounded-[12px] bg-primary-1 text-white-1
+                flex h-8 w-8 items-center justify-center
+                rounded-[10px] bg-primary-1 text-white-1
                 shadow-[0_10px_30px_rgba(0,108,103,0.25)]
               "
             >
-              <span className="relative h-5 w-5">
-                <span className="absolute left-0 top-1/2 h-[2px] w-5 -translate-y-1/2 rotate-45 bg-current" />
-                <span className="absolute left-0 top-1/2 h-[2px] w-5 -translate-y-1/2 -rotate-45 bg-current" />
+              <span className="relative h-4 w-4">
+                <span className="absolute left-0 top-1/2 h-[2px] w-4 -translate-y-1/2 rotate-45 bg-current" />
+                <span className="absolute left-0 top-1/2 h-[2px] w-4 -translate-y-1/2 -rotate-45 bg-current" />
               </span>
             </button>
           </div>
@@ -671,8 +637,8 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
 
               <Link
                 href={
-                  footerData?.factorySection?.email
-                    ? `mailto:${footerData.factorySection.email}`
+                  footerData?.contactInfoSection?.email
+                    ? `mailto:${footerData.contactInfoSection.email}`
                     : '#'
                 }
                 className="flex h-10 w-10 items-center justify-center rounded-[12px] bg-primary-1 text-white-1"

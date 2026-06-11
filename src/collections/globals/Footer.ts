@@ -155,7 +155,7 @@ const Footer: GlobalConfig = {
       fieldName: 'logoBackgroundImage',
       label: 'Logo Background Image',
       description:
-        'Optional background image shown behind/below the footer logo. Aspect ratio (922:512)',
+        'Optional background image shown behind/below the footer logo. Aspect ratio (1437:280)',
       aspectRatio: 1437 / 280,
       quality: 0.92,
       maxKB: 600,
@@ -292,6 +292,13 @@ const Footer: GlobalConfig = {
                   required: false,
                   admin: { width: '50%' },
                 },
+                {
+                  name: 'showNewBadge',
+                  type: 'checkbox',
+                  label: 'Show NEW Badge',
+                  defaultValue: false,
+                  admin: { width: '50%' },
+                },
               ],
             },
           ],
@@ -348,6 +355,7 @@ const Footer: GlobalConfig = {
               required: true,
               validate: validateShortText('Office Time', OFFICE_TIME_MAX, false),
               admin: {
+                width: '33%',
                 description: 'Example: Sat - Thu, 9:00 AM - 6:00 PM',
               },
             },
@@ -357,7 +365,7 @@ const Footer: GlobalConfig = {
               label: 'Company Phone',
               required: true,
               validate: validatePhone(PHONE_MAX, true),
-              admin: { width: '50%' },
+              admin: { width: '33%' },
               defaultValue: '+880 1777 189611',
             },
             {
@@ -366,7 +374,7 @@ const Footer: GlobalConfig = {
               label: 'Company Email',
               required: true,
               validate: validateEmail(EMAIL_MAX, true),
-              admin: { width: '50%' },
+              admin: { width: '33%' },
               defaultValue: 'contact@xynolab.com',
             },
           ],

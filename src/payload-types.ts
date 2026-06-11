@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     resume: Resume;
     'audit-logs': AuditLog;
+    'newsletter-subscribers': NewsletterSubscriber;
     pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     resume: ResumeSelect<false> | ResumeSelect<true>;
     'audit-logs': AuditLogsSelect<false> | AuditLogsSelect<true>;
+    'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -236,6 +238,21 @@ export interface AuditLog {
     | number
     | boolean
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers".
+ */
+export interface NewsletterSubscriber {
+  id: string;
+  email: string;
+  status: 'active' | 'unsubscribed';
+  /**
+   * Where this subscriber came from.
+   */
+  source?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -768,6 +785,28 @@ export interface Page {
             transparentColoredImageBlurDataURL?: string | null;
             id?: string | null;
           }[];
+          /**
+           * Add second set of language logo pairs. Upload both transparent normal and colored images for each language.
+           */
+          languagesTwo: {
+            /**
+             * Upload the normal version of the language logo. Recommended square/SVG-like transparent PNG.
+             */
+            transparentNormalImage: string | Media;
+            transparentNormalImageOriginal?: (string | null) | Media;
+            pendingTransparentNormalImageOriginal?: string | null;
+            pendingTransparentNormalImageCrop?: string | null;
+            transparentNormalImageBlurDataURL?: string | null;
+            /**
+             * Upload the transparent colored version of the language logo. Recommended square/SVG-like transparent PNG.
+             */
+            transparentColoredImage: string | Media;
+            transparentColoredImageOriginal?: (string | null) | Media;
+            pendingTransparentColoredImageOriginal?: string | null;
+            pendingTransparentColoredImageCrop?: string | null;
+            transparentColoredImageBlurDataURL?: string | null;
+            id?: string | null;
+          }[];
         };
         id?: string | null;
         blockName?: string | null;
@@ -800,6 +839,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'audit-logs';
         value: string | AuditLog;
+      } | null)
+    | ({
+        relationTo: 'newsletter-subscribers';
+        value: string | NewsletterSubscriber;
       } | null)
     | ({
         relationTo: 'pages';
@@ -926,6 +969,17 @@ export interface AuditLogsSelect<T extends boolean = true> {
   ip?: T;
   notes?: T;
   diff?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers_select".
+ */
+export interface NewsletterSubscribersSelect<T extends boolean = true> {
+  email?: T;
+  status?: T;
+  source?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1150,6 +1204,21 @@ export interface PagesSelect<T extends boolean = true> {
                           transparentColoredImageBlurDataURL?: T;
                           id?: T;
                         };
+                    languagesTwo?:
+                      | T
+                      | {
+                          transparentNormalImage?: T;
+                          transparentNormalImageOriginal?: T;
+                          pendingTransparentNormalImageOriginal?: T;
+                          pendingTransparentNormalImageCrop?: T;
+                          transparentNormalImageBlurDataURL?: T;
+                          transparentColoredImage?: T;
+                          transparentColoredImageOriginal?: T;
+                          pendingTransparentColoredImageOriginal?: T;
+                          pendingTransparentColoredImageCrop?: T;
+                          transparentColoredImageBlurDataURL?: T;
+                          id?: T;
+                        };
                   };
               id?: T;
               blockName?: T;
@@ -1201,7 +1270,7 @@ export interface Navbar {
   id: string;
   uploadSessionId?: string | null;
   /**
-   * Primary navbar logo. Transparent PNG/SVG preferred. Square-ish crop recommended.
+   * Primary navbar logo. Transparent PNG/SVG preferred. (919:512) recommended.
    */
   logo: string | Media;
   logoOriginal?: (string | null) | Media;
@@ -1277,7 +1346,7 @@ export interface Footer {
    */
   logoBlurDataURL?: string | null;
   /**
-   * Optional background image shown behind/below the footer logo. Aspect ratio (922:512)
+   * Optional background image shown behind/below the footer logo. Aspect ratio (1437:280)
    */
   logoBackgroundImage?: (string | null) | Media;
   logoBackgroundImageOriginal?: (string | null) | Media;
@@ -1311,6 +1380,7 @@ export interface Footer {
       | {
           buttonText: string;
           buttonLink?: (string | null) | Page;
+          showNewBadge?: boolean | null;
           id?: string | null;
         }[]
       | null;
@@ -1452,6 +1522,7 @@ export interface FooterSelect<T extends boolean = true> {
           | {
               buttonText?: T;
               buttonLink?: T;
+              showNewBadge?: T;
               id?: T;
             };
       };

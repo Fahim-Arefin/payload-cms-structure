@@ -238,7 +238,7 @@ function CompanyIntroSection({ block }: Props) {
         <SectionHeading01 data={block?.sectionHeading} align="middle" />
 
         {hasDesc && (
-          <div ref={paragraphRef} className="font-grift text-justify text-secondary-1 global-p2">
+          <div ref={paragraphRef} className="font-grift text-justify text-secondary-1 global-p1">
             <LocalizedRichText
               en={block?.companyIntroDescription?.description}
               bn={block?.companyIntroDescription?.description}

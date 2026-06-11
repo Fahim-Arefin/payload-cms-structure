@@ -60,6 +60,13 @@ export const mediaHooks = withMediaLifecycle({
       arrayKey: 'languages',
       mediaFields: ['transparentColoredImage', 'transparentNormalImage'],
     },
+    {
+      layoutKey: 'layout',
+      blockType: CODING_LANGUAGE_SLUG_AND_TAG,
+      groupKey: 'languageImages',
+      arrayKey: 'languagesTwo',
+      mediaFields: ['transparentNormalImage', 'transparentColoredImage'],
+    },
   ],
 
   // otherUploadFields: [

@@ -2,6 +2,7 @@ import { CompanyIntroBlockType } from '@/types/payloadCustomTypes'
 import React from 'react'
 import LocalizedHighlighted from '../../shared/LocalizedHighlighted'
 import LocalizedRichText from '../../shared/LocalizedRichText'
+import Tags from './Tags'
 
 type Props = {
   data: CompanyIntroBlockType['sectionHeading']
@@ -21,9 +22,7 @@ function SectionHeading01({ data, align }: Props) {
       space-y-1 lg:space-y-2 xl:space-y-3 2xl:space-y-4
       `}
     >
-      {data?.tag && (
-        <div className="font-grift global-p5 font-semibold text-primary-1">{data?.tag}</div>
-      )}
+      {data?.tag && <Tags tag={data?.tag} />}
       <div>
         {data?.heading1 && (
           <div

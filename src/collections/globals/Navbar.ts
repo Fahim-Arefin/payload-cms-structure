@@ -150,10 +150,9 @@ const Navbar: GlobalConfig = {
     ...generateImageFields({
       fieldName: 'logo',
       label: 'Navbar Logo',
-      description:
-        'Primary navbar logo. Transparent PNG/SVG preferred. Square-ish crop recommended.',
+      description: 'Primary navbar logo. Transparent PNG/SVG preferred. (919:512) recommended.',
       // aspectRatio: 701 / 179,
-      aspectRatio: 80 / 46,
+      aspectRatio: 919 / 512,
       quality: 0.92,
       maxKB: 500,
       required: true,
