@@ -17,6 +17,7 @@ import WhatsApp from 'public/assets/icons/whatsapp.png'
 
 import LocalizedHighlighted from '../../shared/LocalizedHighlighted'
 import LocalizedRichText from '../../shared/LocalizedRichText'
+import NewsLetter from './NewsLetter'
 
 async function ServerFooter() {
   const footer = await getGlobalCached<Footer>(GLOBAL_FOOTER_SLUG_AND_TAG, 1)
@@ -76,6 +77,7 @@ async function ServerFooter() {
             <div className="font-agency text-white-1 global-h7 z-20 w-[80%] text-center lg:text-start">
               {footer?.branding?.introText}
             </div>
+            <NewsLetter />
           </div>
 
           {/* grid 2 */}
@@ -601,7 +603,7 @@ async function ServerFooter() {
       </div>
 
       {/* background image */}
-      <div className="absolute inset-x-0 bottom-0 z-10 ">
+      <div className="absolute inset-x-0 bottom-28 lg:bottom-0 z-10 ">
         {/*  */}
         {typeof footer?.logoBackgroundImage === 'object' && footer?.logoBackgroundImage?.url && (
           <div className="relative z-10 w-full aspect-[1437/280] ">

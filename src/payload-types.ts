@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     resume: Resume;
     'audit-logs': AuditLog;
+    'newsletter-subscribers': NewsletterSubscriber;
     pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     resume: ResumeSelect<false> | ResumeSelect<true>;
     'audit-logs': AuditLogsSelect<false> | AuditLogsSelect<true>;
+    'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -236,6 +238,21 @@ export interface AuditLog {
     | number
     | boolean
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers".
+ */
+export interface NewsletterSubscriber {
+  id: string;
+  email: string;
+  status: 'active' | 'unsubscribed';
+  /**
+   * Where this subscriber came from.
+   */
+  source?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -802,6 +819,10 @@ export interface PayloadLockedDocument {
         value: string | AuditLog;
       } | null)
     | ({
+        relationTo: 'newsletter-subscribers';
+        value: string | NewsletterSubscriber;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: string | Page;
       } | null);
@@ -926,6 +947,17 @@ export interface AuditLogsSelect<T extends boolean = true> {
   ip?: T;
   notes?: T;
   diff?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers_select".
+ */
+export interface NewsletterSubscribersSelect<T extends boolean = true> {
+  email?: T;
+  status?: T;
+  source?: T;
   updatedAt?: T;
   createdAt?: T;
 }
