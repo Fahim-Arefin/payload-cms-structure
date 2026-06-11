@@ -214,14 +214,19 @@ function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
         <div ref={searchBoxRef} className="w-[10%] xl:w-[15%] flex items-center justify-end">
           <div
             ref={searchInnerRef}
-            className="p-[9px] w-[36px] h-[36px] flex justify-center items-center bg-[#006C67] rounded-md will-change-transform"
+            // bg-[#006C67]
+            className="group hover:bg-[#006C67] transition-all duration-300 ease-in
+             p-[7px] xl:p-[9px] 
+             w-[30px] xl:w-[36px]
+             h-[30px] xl:h-[36px] 
+             flex justify-center items-center rounded-md will-change-transform"
           >
             <Image
               src={SearchIcon}
               alt="Search"
               width={36}
               height={36}
-              className="object-contain w-full h-full"
+              className="object-contain w-full h-full lg:scale-110 2xl:scale-125 group-hover:scale-100 transition-all duration-300 ease-in"
               placeholder="blur"
               blurDataURL={SearchIcon.blurDataURL}
               quality={90}
@@ -231,18 +236,6 @@ function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
       </div>
 
       {/* white overlay */}
-      {/* <div
-        className="
-          pointer-events-none
-          fixed inset-x-0 top-0 z-40
-          hidden lg:block
-          h-[95px] w-full
-        "
-        style={{
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
-        }}
-      /> */}
       <div
         className="
     pointer-events-none

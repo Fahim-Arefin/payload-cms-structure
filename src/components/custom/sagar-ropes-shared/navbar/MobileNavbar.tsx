@@ -300,14 +300,14 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
           fixed inset-x-0 top-4 z-50 mx-auto
           flex h-[52px] w-[92%] items-center justify-between
           overflow-hidden
-          rounded-[18px]
+          rounded-[12px]
           bg-secondary-1
           px-3 lg:hidden
           shadow-[0_18px_45px_rgba(10,17,40,0.16)]
         "
       >
         {/* logo */}
-        <div className="relative z-10 flex h-full w-[38%] items-center justify-center overflow-hidden">
+        <div className="relative z-10 flex h-full w-[38%] items-center justify-start overflow-hidden">
           <Link href="/" aria-label="Home" className="block h-[68%]">
             {typeof data.branding.logo === 'object' && data.branding.logo?.url && (
               <Image
@@ -326,7 +326,7 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
         </div>
 
         {/* burger */}
-        <div className="relative z-10 flex h-full w-[38%] items-center justify-center overflow-hidden">
+        <div className="relative z-10 flex h-full w-[38%] items-center justify-end overflow-hidden">
           <button
             type="button"
             aria-label={open ? 'Close menu' : 'Open menu'}
@@ -334,10 +334,8 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
             onClick={() => setOpen((prev) => !prev)}
             className="
               relative flex h-8 w-8 items-center justify-center
-              rounded-[10px]
-              bg-primary-1
+              rounded-[7px]
               text-white-1
-              shadow-[0_8px_24px_rgba(0,108,103,0.28)]
               transition-transform duration-300 ease-out
               hover:scale-105
               active:scale-95
