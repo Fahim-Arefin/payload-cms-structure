@@ -317,8 +317,9 @@
     @apply text-[13px] md:text-[15px] lg:text-[20px] xl:text-[30px] 2xl:text-[35px] leading-[112%];
   }
 
+  /* modified */
   .global-p1 {
-    @apply text-[16px] md:text-[16px] lg:text-[18px] xl:text-[22px] 2xl:text-[24px] leading-[154.545%];
+    @apply text-[18px] md:text-[22px] lg:text-[28px] xl:text-[40px] 2xl:text-[44px] leading-[125%] tracking-[2px];
   }
   /* modified */
   .global-p2 {
