@@ -34,12 +34,16 @@ import { gsap, useGSAP } from '@/lib/gsap'
 import Image from 'next/image'
 import React, { useRef } from 'react'
 
-type LanguageImage = NonNullable<
+type LanguageImage1 = NonNullable<
   NonNullable<CodingLanguageBlockType['languageImages']>['languages']
 >[number]
 
+type LanguageImage2 = NonNullable<
+  NonNullable<CodingLanguageBlockType['languageImages']>['languagesTwo']
+>[number]
+
 type Props = {
-  data: LanguageImage
+  data: LanguageImage1 | LanguageImage2
 }
 
 function CodingLanguageImage({ data }: Props) {

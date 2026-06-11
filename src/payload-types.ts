@@ -785,6 +785,28 @@ export interface Page {
             transparentColoredImageBlurDataURL?: string | null;
             id?: string | null;
           }[];
+          /**
+           * Add second set of language logo pairs. Upload both transparent normal and colored images for each language.
+           */
+          languagesTwo: {
+            /**
+             * Upload the normal version of the language logo. Recommended square/SVG-like transparent PNG.
+             */
+            transparentNormalImage: string | Media;
+            transparentNormalImageOriginal?: (string | null) | Media;
+            pendingTransparentNormalImageOriginal?: string | null;
+            pendingTransparentNormalImageCrop?: string | null;
+            transparentNormalImageBlurDataURL?: string | null;
+            /**
+             * Upload the transparent colored version of the language logo. Recommended square/SVG-like transparent PNG.
+             */
+            transparentColoredImage: string | Media;
+            transparentColoredImageOriginal?: (string | null) | Media;
+            pendingTransparentColoredImageOriginal?: string | null;
+            pendingTransparentColoredImageCrop?: string | null;
+            transparentColoredImageBlurDataURL?: string | null;
+            id?: string | null;
+          }[];
         };
         id?: string | null;
         blockName?: string | null;
@@ -1168,6 +1190,21 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     languages?:
+                      | T
+                      | {
+                          transparentNormalImage?: T;
+                          transparentNormalImageOriginal?: T;
+                          pendingTransparentNormalImageOriginal?: T;
+                          pendingTransparentNormalImageCrop?: T;
+                          transparentNormalImageBlurDataURL?: T;
+                          transparentColoredImage?: T;
+                          transparentColoredImageOriginal?: T;
+                          pendingTransparentColoredImageOriginal?: T;
+                          pendingTransparentColoredImageCrop?: T;
+                          transparentColoredImageBlurDataURL?: T;
+                          id?: T;
+                        };
+                    languagesTwo?:
                       | T
                       | {
                           transparentNormalImage?: T;
