@@ -222,7 +222,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
               />
             </div>
             {/* <CookieConsentBanner /> */}
-            <div className="">{/* <ServerFooter /> */}</div>
+            <div className="">
+              <ServerFooter />
+            </div>
             {/* <GlobalContactButtons /> */}
           </main>
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />

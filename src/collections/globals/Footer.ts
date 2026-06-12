@@ -11,15 +11,16 @@ import { roleAtLeast } from '@/lib/rbac'
 /* ---------------- max length constants ---------------- */
 const EMAIL_MAX = 120
 const PHONE_MAX = 40
-const ADDRESS_MAX = 220
 const LABEL_MAX = 40
 const URL_MAX = 300
 const COPYRIGHT_MAX = 200
 const COPYRIGHT_HILITE_MAX = 120
 const CTA_TEXT_MAX = 60
 const INTRO_MAX = 180
-const MARQUEE_MAX = 120
 const PRODUCT_MAX = 100
+const OFFICE_TIME_MAX = 120
+const BRANDING_TEXT_MAX = 160
+const TERMS_CONDITION_MAX = 180
 
 /* ---------------- validators ---------------- */
 const validateShortText =
@@ -101,13 +102,13 @@ const footerMediaHooks = withMediaLifecycle({
       description: 'Primary footer logo.',
     },
     {
-      fieldName: 'isoBadgeImage',
-      aspectRatio: 308 / 130,
+      fieldName: 'logoBackgroundImage',
+      aspectRatio: 1437 / 280,
       quality: 0.92,
-      maxKB: 400,
+      maxKB: 600,
       required: false,
-      label: 'ISO Badge Image',
-      description: 'Certification / trust badge shown under the intro text.',
+      label: 'Logo Background Image',
+      description: 'Optional background image shown behind/below the footer logo.',
     },
   ],
   onAfterChange: async ({ req }) => {
@@ -142,8 +143,8 @@ const Footer: GlobalConfig = {
     ...generateImageFields({
       fieldName: 'logo',
       label: 'Footer Logo',
-      description: 'Primary footer logo.',
-      aspectRatio: 701 / 179,
+      description: 'Primary footer logo. Aspect ratio (922:512)',
+      aspectRatio: 922 / 512,
       quality: 0.92,
       maxKB: 500,
       required: true,
@@ -151,22 +152,18 @@ const Footer: GlobalConfig = {
     } as any),
 
     ...generateImageFields({
-      fieldName: 'isoBadgeImage',
-      label: 'ISO Badge Image',
-      description: 'Certification / trust badge shown under the intro text.',
-      aspectRatio: 544 / 204,
+      fieldName: 'logoBackgroundImage',
+      label: 'Logo Background Image',
+      description:
+        'Optional background image shown behind/below the footer logo. Aspect ratio (1437:280)',
+      aspectRatio: 1437 / 280,
       quality: 0.92,
-      maxKB: 400,
+      maxKB: 600,
       required: false,
       ownerCollection: GLOBAL_FOOTER_SLUG_AND_TAG as any,
     } as any),
 
-    {
-      name: 'showPatternDesign',
-      type: 'checkbox',
-      defaultValue: true,
-    },
-
+    // branding
     {
       name: 'branding',
       type: 'group',
@@ -178,32 +175,43 @@ const Footer: GlobalConfig = {
           label: 'Intro Text',
           required: true,
           validate: validateShortText('Intro Text', INTRO_MAX, true),
-          defaultValue: 'A legacy of trust since 1984, pioneering rope manufacturing since 1995',
+          defaultValue: 'Subscribe to Our Newsletter',
+        },
+        {
+          name: 'termsConditionText',
+          type: 'textarea',
+          label: 'Terms & Condition Text',
+          required: false,
+          validate: validateShortText('Terms & Condition Text', TERMS_CONDITION_MAX, false),
+          admin: {
+            description: 'Optional terms and condition text shown in footer.',
+          },
         },
       ],
     },
 
+    // resourses
     {
-      name: 'quickLinksSection',
+      name: 'resourses',
       type: 'group',
-      label: 'Quick Links Section',
+      label: 'Resourse Section',
       fields: [
         {
           name: 'header',
           type: 'text',
-          label: 'Header',
+          label: 'Resourse Header',
           required: true,
-          defaultValue: 'Quick Links',
-          validate: validateShortText('Quick Links Header', LABEL_MAX, true),
+          defaultValue: '<Resourses>',
+          validate: validateShortText('Resourse Header', LABEL_MAX, true),
         },
         {
           name: 'links',
           type: 'array',
-          label: 'Quick Links',
+          label: 'Resourse Links',
           minRows: 0,
           maxRows: 8,
-          validate: validateMaxItems('Quick links', 8),
-          labels: { singular: 'Quick Link', plural: 'Quick Links' },
+          validate: validateMaxItems('Resourse links', 8),
+          labels: { singular: 'Resourse Link', plural: 'Resourse Links' },
           fields: [
             {
               type: 'row',
@@ -228,6 +236,13 @@ const Footer: GlobalConfig = {
                     width: '50%',
                   },
                 },
+                {
+                  name: 'showNewBadge',
+                  type: 'checkbox',
+                  label: 'Show NEW Badge',
+                  defaultValue: false,
+                  admin: { width: '50%' },
+                },
               ],
             },
           ],
@@ -235,27 +250,28 @@ const Footer: GlobalConfig = {
       ],
     },
 
+    // services
     {
-      name: 'productsSection',
+      name: 'serviceSection',
       type: 'group',
-      label: 'Products Section',
+      label: 'Services Section',
       fields: [
         {
           name: 'header',
           type: 'text',
-          label: 'Header',
+          label: 'Services Header',
           required: true,
-          defaultValue: 'Our Products',
-          validate: validateShortText('Products Header', LABEL_MAX, true),
+          defaultValue: '<Services>',
+          validate: validateShortText('Services Header', LABEL_MAX, true),
         },
         {
-          name: 'products',
+          name: 'services',
           type: 'array',
-          label: 'Product Links',
+          label: 'Service Links',
           minRows: 0,
           maxRows: 8,
-          validate: validateMaxItems('Product links', 8),
-          labels: { singular: 'Product Link', plural: 'Product Links' },
+          validate: validateMaxItems('Service links', 8),
+          labels: { singular: 'Service Link', plural: 'Service Links' },
           fields: [
             {
               type: 'row',
@@ -290,35 +306,27 @@ const Footer: GlobalConfig = {
       ],
     },
 
+    // contact info
     {
-      name: 'factorySection',
+      name: 'contactInfoSection',
       type: 'group',
-      label: 'Factory Section',
+      label: 'Contact Info Section',
       fields: [
         {
           name: 'header',
           type: 'text',
           label: 'Header',
           required: true,
-          defaultValue: 'Our Factory',
-          validate: validateShortText('Factory Header', LABEL_MAX, true),
+          defaultValue: '<Contact Info>',
+          validate: validateShortText('Contact Info', LABEL_MAX, true),
         },
         {
           type: 'row',
           fields: [
-            // {
-            //   name: 'address',
-            //   type: 'text',
-            //   label: 'Factory Address',
-            //   required: true,
-            //   validate: validateShortText('Factory Address', ADDRESS_MAX, true),
-            //   defaultValue: 'Shakhari Bazar, Rampal, Munshiganj - 1501, Bangladesh',
-            //   admin: { width: '50%' },
-            // },
             {
-              name: 'facAddress',
+              name: 'companyAddress',
               type: 'richText',
-              label: 'Factory Address',
+              label: 'Company Address',
               admin: {
                 width: '50%',
                 description: ``,
@@ -328,7 +336,7 @@ const Footer: GlobalConfig = {
             {
               name: 'mapUrl',
               type: 'text',
-              label: 'Factory Google Maps URL',
+              label: 'Company Google Maps Location URL',
               required: false,
               maxLength: URL_MAX,
               validate: validateAbsoluteHTTPUrl(URL_MAX, false),
@@ -340,28 +348,41 @@ const Footer: GlobalConfig = {
           type: 'row',
           fields: [
             {
+              name: 'officeTime',
+              type: 'text',
+              label: 'Office Time',
+              defaultValue: 'Mon-Fri 09am-06pm',
+              required: true,
+              validate: validateShortText('Office Time', OFFICE_TIME_MAX, false),
+              admin: {
+                width: '33%',
+                description: 'Example: Sat - Thu, 9:00 AM - 6:00 PM',
+              },
+            },
+            {
               name: 'phone',
               type: 'text',
-              label: 'Factory Phone',
+              label: 'Company Phone',
               required: true,
               validate: validatePhone(PHONE_MAX, true),
-              admin: { width: '50%' },
-              defaultValue: '+88 01753 268040',
+              admin: { width: '33%' },
+              defaultValue: '+880 1777 189611',
             },
             {
               name: 'email',
               type: 'text',
-              label: 'Factory Email',
+              label: 'Company Email',
               required: true,
               validate: validateEmail(EMAIL_MAX, true),
-              admin: { width: '50%' },
-              defaultValue: 'njenterprise@sagarfishing.com',
+              admin: { width: '33%' },
+              defaultValue: 'contact@xynolab.com',
             },
           ],
         },
       ],
     },
 
+    // social
     {
       name: 'social',
       type: 'group',
@@ -410,106 +431,46 @@ const Footer: GlobalConfig = {
               validate: validateAbsoluteHTTPUrl(URL_MAX, true),
               admin: { width: '50%' },
             },
-            // {
-            //   name: 'instagram',
-            //   type: 'text',
-            //   label: 'instagram URL',
-            //   required: true,
-            //   maxLength: URL_MAX,
-            //   validate: validateAbsoluteHTTPUrl(URL_MAX, true),
-            //   admin: { width: '50%' },
-            // },
           ],
         },
       ],
     },
 
-    // {
-    //   name: 'legalSection',
-    //   type: 'group',
-    //   label: 'Legal Section',
-    //   fields: [
-    //     {
-    //       name: 'legal',
-    //       type: 'array',
-    //       label: 'Legal Links',
-    //       minRows: 0,
-    //       maxRows: 3,
-    //       validate: validateMaxItems('Legal links', 6),
-    //       labels: { singular: 'Legal Link', plural: 'Legal Links' },
-    //       fields: [
-    //         {
-    //           type: 'row',
-    //           fields: [
-    //             {
-    //               name: 'buttonText',
-    //               type: 'text',
-    //               label: 'Label',
-    //               required: true,
-    //               maxLength: CTA_TEXT_MAX,
-    //               validate: validateShortText('Label', CTA_TEXT_MAX, true),
-    //               admin: { width: '50%' },
-    //             },
-    //             {
-    //               name: 'buttonLink',
-    //               label: 'Link to (internal page)',
-    //               type: 'relationship',
-    //               relationTo: 'pages',
-    //               required: false,
-    //               admin: { width: '50%' },
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
-
+    // copyright and legal
     {
       type: 'row',
       fields: [
         {
-          name: 'marqueeSection',
+          name: 'copyright',
           type: 'group',
-          label: 'Marquee Section',
+          label: 'Copyright',
           fields: [
             {
-              name: 'text',
-              type: 'text',
-              label: 'Marquee Text',
-              required: true,
-              validate: validateShortText('Marquee Text', MARQUEE_MAX, true),
-              defaultValue: 'CRAFTING EXCELLENCE SINCE',
-              admin: { width: '50%' },
-            },
-            {
-              name: 'year',
-              type: 'text',
-              label: 'Marquee Year',
-              required: false,
-              validate: validateShortText('Marquee Text', MARQUEE_MAX, true),
-              defaultValue: '1995',
-              admin: { width: '50%' },
-            },
-          ],
-          admin: { width: '100%' },
-        },
-        {
-          name: 'copyrightSection',
-          type: 'group',
-          label: 'Copyright Section',
-          fields: [
-            {
-              name: 'copyright',
+              name: 'copyrightText',
               type: 'text',
               label: 'Copyright Text',
               required: true,
-              maxLength: COPYRIGHT_MAX,
-              validate: validateShortText('Copyright', COPYRIGHT_MAX, true),
-              defaultValue: '© 2025 | SAGAR',
+              validate: validateShortText('Copyright Text', COPYRIGHT_MAX, true),
+              defaultValue: '© 2025 Sagor Ropes. All rights reserved.',
+            },
+            {
+              name: 'copyrightHighlightedText',
+              type: 'text',
+              label: 'Copyright Highlighted Text',
+              required: false,
+              validate: validateHighlightedInField(
+                'Copyright Highlighted Text',
+                'copyrightText',
+                COPYRIGHT_HILITE_MAX,
+                false,
+              ),
+              admin: {
+                description:
+                  'Write the exact part of the copyright text that should be highlighted. It must exist inside Copyright Text exactly.',
+                width: '50%',
+              },
             },
           ],
-          admin: { width: '50%' },
         },
         {
           name: 'legalSection',

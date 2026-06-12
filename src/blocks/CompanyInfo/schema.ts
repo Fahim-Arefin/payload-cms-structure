@@ -32,9 +32,19 @@ const CompanyInfoSchema: Block = {
     // 🔐 Hidden per-doc session id for temp upload lifecycle
     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false } },
 
-    BgColorAndSectionIdField({
-      defaultBackground: 'white-1',
-    }),
+    // BgColorAndSectionIdField({
+    //   defaultBackground: 'white-1',
+    // }),
+    {
+      name: 'sectionSettings',
+      type: 'group',
+      label: 'Section Settings',
+      fields: [
+        BgColorAndSectionIdField({
+          defaultBackground: 'white-1',
+        }),
+      ],
+    },
 
     {
       name: 'companyInfoItems',

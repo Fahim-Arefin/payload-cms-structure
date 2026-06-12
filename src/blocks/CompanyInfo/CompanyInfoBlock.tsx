@@ -11,7 +11,11 @@ type Props = {
 
 function CompanyInfoBlock({ block }: Props) {
   return (
-    <WithHashScroller id={block?.sectionId} bgColor={block?.backgroundColor}>
+    <WithHashScroller
+      id={block?.sectionSettings?.sectionId}
+      bgColor={block?.sectionSettings?.backgroundColor}
+      className="overflow-hidden rounded-t-[18px] lg:rounded-t-[25px] xl:rounded-t-[30px]"
+    >
       <Marquee autoFill>
         <div className="pr-[12px] xl:pr-[24px] py-[10px] lg:py-[14px] xl:py-[16px] flex items-center justify-center gap-3 xl:gap-6 ">
           {block?.companyInfoItems?.map((info, i) => (

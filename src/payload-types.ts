@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     resume: Resume;
     'audit-logs': AuditLog;
+    'newsletter-subscribers': NewsletterSubscriber;
     pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     resume: ResumeSelect<false> | ResumeSelect<true>;
     'audit-logs': AuditLogsSelect<false> | AuditLogsSelect<true>;
+    'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -236,6 +238,21 @@ export interface AuditLog {
     | number
     | boolean
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers".
+ */
+export interface NewsletterSubscriber {
+  id: string;
+  email: string;
+  status: 'active' | 'unsubscribed';
+  /**
+   * Where this subscriber came from.
+   */
+  source?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -457,14 +474,16 @@ export interface Page {
       }
     | {
         uploadSessionId?: string | null;
-        /**
-         * Select a background color from the design system.
-         */
-        backgroundColor?: ('white-1' | 'white-2' | 'white-3') | null;
-        /**
-         * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
-         */
-        sectionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
         /**
          * Add small company info items like Heart Winning Agency, IT Solution Agency, Located at Dhaka, Bangladesh.
          */
@@ -486,6 +505,312 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'company-info';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Main intro heading, highlighted text, description and optional CTA.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Additional company intro description content.
+         */
+        companyIntroDescription?: {
+          /**
+           * Write the company intro description text.
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'company-intro';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Main intro heading, highlighted text, description and optional CTA.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Add the project approach steps/items shown in this section.
+         */
+        projectApproach: {
+          /**
+           * Add project approach items. Each item has a title and description.
+           */
+          approachItems: {
+            /**
+             * Approach item title. Max 80 characters.
+             */
+            title: string;
+            /**
+             * Write the approach item description.
+             */
+            description?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'project-approach';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Main intro heading, highlighted text, description and optional CTA.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Add coding language logo images. Each item has a transparent colored version and a white-2 version.
+         */
+        languageImages: {
+          /**
+           * Add language logo pairs. Upload both transparent normal and colored images for each language.
+           */
+          languages: {
+            /**
+             * Upload the normal version of the language logo. Recommended square/SVG-like transparent PNG.
+             */
+            transparentNormalImage: string | Media;
+            transparentNormalImageOriginal?: (string | null) | Media;
+            pendingTransparentNormalImageOriginal?: string | null;
+            pendingTransparentNormalImageCrop?: string | null;
+            transparentNormalImageBlurDataURL?: string | null;
+            /**
+             * Upload the transparent colored version of the language logo. Recommended square/SVG-like transparent PNG.
+             */
+            transparentColoredImage: string | Media;
+            transparentColoredImageOriginal?: (string | null) | Media;
+            pendingTransparentColoredImageOriginal?: string | null;
+            pendingTransparentColoredImageCrop?: string | null;
+            transparentColoredImageBlurDataURL?: string | null;
+            id?: string | null;
+          }[];
+          /**
+           * Add second set of language logo pairs. Upload both transparent normal and colored images for each language.
+           */
+          languagesTwo: {
+            /**
+             * Upload the normal version of the language logo. Recommended square/SVG-like transparent PNG.
+             */
+            transparentNormalImage: string | Media;
+            transparentNormalImageOriginal?: (string | null) | Media;
+            pendingTransparentNormalImageOriginal?: string | null;
+            pendingTransparentNormalImageCrop?: string | null;
+            transparentNormalImageBlurDataURL?: string | null;
+            /**
+             * Upload the transparent colored version of the language logo. Recommended square/SVG-like transparent PNG.
+             */
+            transparentColoredImage: string | Media;
+            transparentColoredImageOriginal?: (string | null) | Media;
+            pendingTransparentColoredImageOriginal?: string | null;
+            pendingTransparentColoredImageCrop?: string | null;
+            transparentColoredImageBlurDataURL?: string | null;
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'coding-language';
       }
   )[];
   updatedAt: string;
@@ -514,6 +839,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'audit-logs';
         value: string | AuditLog;
+      } | null)
+    | ({
+        relationTo: 'newsletter-subscribers';
+        value: string | NewsletterSubscriber;
       } | null)
     | ({
         relationTo: 'pages';
@@ -645,6 +974,17 @@ export interface AuditLogsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers_select".
+ */
+export interface NewsletterSubscribersSelect<T extends boolean = true> {
+  email?: T;
+  status?: T;
+  source?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
@@ -738,8 +1078,12 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               uploadSessionId?: T;
-              backgroundColor?: T;
-              sectionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
               companyInfoItems?:
                 | T
                 | {
@@ -750,6 +1094,131 @@ export interface PagesSelect<T extends boolean = true> {
                     iconBlurDataURL?: T;
                     text?: T;
                     id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'company-intro'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              companyIntroDescription?:
+                | T
+                | {
+                    description?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'project-approach'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              projectApproach?:
+                | T
+                | {
+                    approachItems?:
+                      | T
+                      | {
+                          title?: T;
+                          description?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'coding-language'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              languageImages?:
+                | T
+                | {
+                    languages?:
+                      | T
+                      | {
+                          transparentNormalImage?: T;
+                          transparentNormalImageOriginal?: T;
+                          pendingTransparentNormalImageOriginal?: T;
+                          pendingTransparentNormalImageCrop?: T;
+                          transparentNormalImageBlurDataURL?: T;
+                          transparentColoredImage?: T;
+                          transparentColoredImageOriginal?: T;
+                          pendingTransparentColoredImageOriginal?: T;
+                          pendingTransparentColoredImageCrop?: T;
+                          transparentColoredImageBlurDataURL?: T;
+                          id?: T;
+                        };
+                    languagesTwo?:
+                      | T
+                      | {
+                          transparentNormalImage?: T;
+                          transparentNormalImageOriginal?: T;
+                          pendingTransparentNormalImageOriginal?: T;
+                          pendingTransparentNormalImageCrop?: T;
+                          transparentNormalImageBlurDataURL?: T;
+                          transparentColoredImage?: T;
+                          transparentColoredImageOriginal?: T;
+                          pendingTransparentColoredImageOriginal?: T;
+                          pendingTransparentColoredImageCrop?: T;
+                          transparentColoredImageBlurDataURL?: T;
+                          id?: T;
+                        };
                   };
               id?: T;
               blockName?: T;
@@ -801,7 +1270,7 @@ export interface Navbar {
   id: string;
   uploadSessionId?: string | null;
   /**
-   * Primary navbar logo. Transparent PNG/SVG preferred. Square-ish crop recommended.
+   * Primary navbar logo. Transparent PNG/SVG preferred. (919:512) recommended.
    */
   logo: string | Media;
   logoOriginal?: (string | null) | Media;
@@ -866,7 +1335,7 @@ export interface Footer {
   id: string;
   uploadSessionId?: string | null;
   /**
-   * Primary footer logo.
+   * Primary footer logo. Aspect ratio (922:512)
    */
   logo: string | Media;
   logoOriginal?: (string | null) | Media;
@@ -877,33 +1346,26 @@ export interface Footer {
    */
   logoBlurDataURL?: string | null;
   /**
-   * Certification / trust badge shown under the intro text.
+   * Optional background image shown behind/below the footer logo. Aspect ratio (1437:280)
    */
-  isoBadgeImage?: (string | null) | Media;
-  isoBadgeImageOriginal?: (string | null) | Media;
-  pendingIsoBadgeImageOriginal?: string | null;
-  pendingIsoBadgeImageCrop?: string | null;
+  logoBackgroundImage?: (string | null) | Media;
+  logoBackgroundImageOriginal?: (string | null) | Media;
+  pendingLogoBackgroundImageOriginal?: string | null;
+  pendingLogoBackgroundImageCrop?: string | null;
   /**
    * Auto-generated Base64 blur
    */
-  isoBadgeImageBlurDataURL?: string | null;
-  showPatternDesign?: boolean | null;
+  logoBackgroundImageBlurDataURL?: string | null;
   branding: {
     introText: string;
+    /**
+     * Optional terms and condition text shown in footer.
+     */
+    termsConditionText?: string | null;
   };
-  quickLinksSection: {
+  resourses: {
     header: string;
     links?:
-      | {
-          buttonText: string;
-          buttonLink?: (string | null) | Page;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  productsSection: {
-    header: string;
-    products?:
       | {
           buttonText: string;
           buttonLink?: (string | null) | Page;
@@ -912,9 +1374,20 @@ export interface Footer {
         }[]
       | null;
   };
-  factorySection: {
+  serviceSection: {
     header: string;
-    facAddress: {
+    services?:
+      | {
+          buttonText: string;
+          buttonLink?: (string | null) | Page;
+          showNewBadge?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  contactInfoSection: {
+    header: string;
+    companyAddress: {
       root: {
         type: string;
         children: {
@@ -930,6 +1403,10 @@ export interface Footer {
       [k: string]: unknown;
     };
     mapUrl?: string | null;
+    /**
+     * Example: Sat - Thu, 9:00 AM - 6:00 PM
+     */
+    officeTime: string;
     phone: string;
     email: string;
   };
@@ -939,12 +1416,12 @@ export interface Footer {
     whatsApp: string;
     linkedinUrl: string;
   };
-  marqueeSection: {
-    text: string;
-    year?: string | null;
-  };
-  copyrightSection: {
-    copyright: string;
+  copyright: {
+    copyrightText: string;
+    /**
+     * Write the exact part of the copyright text that should be highlighted. It must exist inside Copyright Text exactly.
+     */
+    copyrightHighlightedText?: string | null;
   };
   legalSection: {
     legalValue: {
@@ -1012,18 +1489,18 @@ export interface FooterSelect<T extends boolean = true> {
   pendingLogoOriginal?: T;
   pendingLogoCrop?: T;
   logoBlurDataURL?: T;
-  isoBadgeImage?: T;
-  isoBadgeImageOriginal?: T;
-  pendingIsoBadgeImageOriginal?: T;
-  pendingIsoBadgeImageCrop?: T;
-  isoBadgeImageBlurDataURL?: T;
-  showPatternDesign?: T;
+  logoBackgroundImage?: T;
+  logoBackgroundImageOriginal?: T;
+  pendingLogoBackgroundImageOriginal?: T;
+  pendingLogoBackgroundImageCrop?: T;
+  logoBackgroundImageBlurDataURL?: T;
   branding?:
     | T
     | {
         introText?: T;
+        termsConditionText?: T;
       };
-  quickLinksSection?:
+  resourses?:
     | T
     | {
         header?: T;
@@ -1032,14 +1509,15 @@ export interface FooterSelect<T extends boolean = true> {
           | {
               buttonText?: T;
               buttonLink?: T;
+              showNewBadge?: T;
               id?: T;
             };
       };
-  productsSection?:
+  serviceSection?:
     | T
     | {
         header?: T;
-        products?:
+        services?:
           | T
           | {
               buttonText?: T;
@@ -1048,12 +1526,13 @@ export interface FooterSelect<T extends boolean = true> {
               id?: T;
             };
       };
-  factorySection?:
+  contactInfoSection?:
     | T
     | {
         header?: T;
-        facAddress?: T;
+        companyAddress?: T;
         mapUrl?: T;
+        officeTime?: T;
         phone?: T;
         email?: T;
       };
@@ -1065,16 +1544,11 @@ export interface FooterSelect<T extends boolean = true> {
         whatsApp?: T;
         linkedinUrl?: T;
       };
-  marqueeSection?:
+  copyright?:
     | T
     | {
-        text?: T;
-        year?: T;
-      };
-  copyrightSection?:
-    | T
-    | {
-        copyright?: T;
+        copyrightText?: T;
+        copyrightHighlightedText?: T;
       };
   legalSection?:
     | T

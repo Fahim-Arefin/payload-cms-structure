@@ -32,15 +32,16 @@ type Props = {
   bgColor: string | null | undefined
   id: string | null | undefined
   children: React.ReactNode
+  className?: string
 }
 
-function WithHashScroller({ bgColor, id, children }: Props) {
+function WithHashScroller({ bgColor, id, children, className }: Props) {
   const bgClass = bgColor ? `bg-${bgColor}` : ''
 
   return (
     <div className="relative z-20">
       <HashScroller />
-      <section id={id ?? undefined} className={bgClass}>
+      <section id={id ?? undefined} className={`${bgClass} ${className}`}>
         {children}
       </section>
     </div>

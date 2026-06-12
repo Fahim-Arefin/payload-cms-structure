@@ -1,5 +1,6 @@
 import {
   BASIC_HERO_SLUG_AND_TAG,
+  CODING_LANGUAGE_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -42,7 +43,7 @@ export const mediaHooks = withMediaLifecycle({
 
   // Blocks with nested array (media that inside another array) that contain media fields
   blockGroupFields: [
-    // sections[].insuranceCardData[] has a media field: image
+    // sections[].insuranceCardData[] has a media field: image (without group)
     // {
     //   layoutKey: 'layout',
     //   blockType: GET_TO_KNOW_SLUG_AND_TAG,
@@ -50,6 +51,22 @@ export const mediaHooks = withMediaLifecycle({
     //   arrayKey: 'icons',
     //   mediaFields: ['icon'],
     // },
+
+    // block → group → array → image fields
+    {
+      layoutKey: 'layout',
+      blockType: CODING_LANGUAGE_SLUG_AND_TAG,
+      groupKey: 'languageImages',
+      arrayKey: 'languages',
+      mediaFields: ['transparentColoredImage', 'transparentNormalImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CODING_LANGUAGE_SLUG_AND_TAG,
+      groupKey: 'languageImages',
+      arrayKey: 'languagesTwo',
+      mediaFields: ['transparentNormalImage', 'transparentColoredImage'],
+    },
   ],
 
   // otherUploadFields: [
