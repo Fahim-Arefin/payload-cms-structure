@@ -2,6 +2,7 @@ import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
+import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import { APIError } from '@/lib/apiError'
@@ -188,6 +189,7 @@ export const Pages: CollectionConfig = {
         CompanyIntroSchema,
         ProjectApproachSchema,
         CodingLanguageSchema,
+        FounderQuoteSchema,
 
         // about us page unique
 

@@ -3,6 +3,7 @@ import {
   CODING_LANGUAGE_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   COMPANY_INTRO_SLUG_AND_TAG,
+  FOUNDER_QUOTE_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -36,4 +37,9 @@ export type ProjectApproachBlockType = Extract<
 export type CodingLanguageBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CODING_LANGUAGE_SLUG_AND_TAG }
+>
+
+export type FounderQuoteBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof FOUNDER_QUOTE_SLUG_AND_TAG }
 >

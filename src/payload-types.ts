@@ -812,6 +812,113 @@ export interface Page {
         blockName?: string | null;
         blockType: 'coding-language';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Founder quote section content: tag, heading 1, heading 2 and quote.
+         */
+        founderQuote: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Founder quote text.
+           */
+          quote: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+        };
+        /**
+         * Founder image, name, designation and social/contact links.
+         */
+        founderInfo: {
+          /**
+           * Upload founder image. Recommended transparent image. Aspect Ratio (800:1110)
+           */
+          founderImage: string | Media;
+          founderImageOriginal?: (string | null) | Media;
+          pendingFounderImageOriginal?: string | null;
+          pendingFounderImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          founderImageBlurDataURL?: string | null;
+          /**
+           * Founder name. Max 80 characters.
+           */
+          name: string;
+          /**
+           * Founder designation. Max 120 characters.
+           */
+          designation: string;
+          /**
+           * Founder LinkedIn profile URL. Max 200 characters.
+           */
+          linkedinUrl: string;
+          /**
+           * Founder Facebook profile URL. Max 200 characters.
+           */
+          facebookUrl: string;
+          /**
+           * Founder WhatsApp number or link. Max 50 characters.
+           */
+          whatsApp: string;
+          /**
+           * Founder email address.
+           */
+          emailAddress: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'founder-quote';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1219,6 +1326,46 @@ export interface PagesSelect<T extends boolean = true> {
                           transparentColoredImageBlurDataURL?: T;
                           id?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'founder-quote'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              founderQuote?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    quote?: T;
+                  };
+              founderInfo?:
+                | T
+                | {
+                    founderImage?: T;
+                    founderImageOriginal?: T;
+                    pendingFounderImageOriginal?: T;
+                    pendingFounderImageCrop?: T;
+                    founderImageBlurDataURL?: T;
+                    name?: T;
+                    designation?: T;
+                    linkedinUrl?: T;
+                    facebookUrl?: T;
+                    whatsApp?: T;
+                    emailAddress?: T;
                   };
               id?: T;
               blockName?: T;

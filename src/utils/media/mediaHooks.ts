@@ -2,6 +2,7 @@ import {
   BASIC_HERO_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
+  FOUNDER_QUOTE_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
@@ -17,6 +18,14 @@ export const mediaHooks = withMediaLifecycle({
     //   blockType: GET_TO_KNOW_SLUG_AND_TAG,
     //   mediaFields: ['mainImage'],
     // },
+    {
+      layoutKey: 'layout',
+      blockType: FOUNDER_QUOTE_SLUG_AND_TAG,
+      mediaFields: ['founderInfo.founderImage'],
+      mediaFieldLabels: {
+        'founderInfo.founderImage': 'Founder Image',
+      },
+    },
   ],
 
   // Blocks with arrays that contain media fields:

@@ -75,3 +75,7 @@ export const PROJECT_APPROACH_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/project-
 export const CODING_LANGUAGE_SLUG_AND_TAG = 'coding-language'
 export const CODING_LANGUAGE_BLOCK_LABEL = 'Coding Language'
 export const CODING_LANGUAGE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/coding-language-block-thumbnail.webp`
+
+export const FOUNDER_QUOTE_SLUG_AND_TAG = 'founder-quote'
+export const FOUNDER_QUOTE_BLOCK_LABEL = 'Founder Quote'
+export const FOUNDER_QUOTE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/founder-quote-block-thumbnail.webp`
