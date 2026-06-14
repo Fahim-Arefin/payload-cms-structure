@@ -99,3 +99,19 @@ export const validateEmail =
     if (s.length > EMAIL_MAX) return `${label} must be at most ${EMAIL_MAX} characters.`
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) ? true : `Provide a valid email for ${label}.`
   }
+
+const URL_MAX = 300
+export const validateAbsoluteHTTPUrl =
+  (max = URL_MAX, required = true) =>
+  (val: unknown) => {
+    const link = (val ?? '').toString().trim()
+    if (required && !link) return 'URL is required.'
+    if (!link) return true
+    if (link.length > max) return `URL must be at most ${max} characters.`
+    try {
+      const u = new URL(link)
+      return u.protocol === 'http:' || u.protocol === 'https:' ? true : 'URL must be http(s).'
+    } catch {
+      return 'Provide a valid absolute http(s) URL.'
+    }
+  }

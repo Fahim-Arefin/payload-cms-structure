@@ -108,9 +108,7 @@ function SocialSection({ data, className }: Props) {
     data?.whatsApp
       ? {
           label: 'WhatsApp',
-          href: data.whatsApp.startsWith('http')
-            ? data.whatsApp
-            : `https://wa.me/${data.whatsApp.replace(/\D/g, '')}`,
+          href: data.whatsApp,
           normalIcon: WhatsApp,
           coloredIcon: WhatsAppColored,
           external: true,

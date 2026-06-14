@@ -907,7 +907,7 @@ export interface Page {
            */
           facebookUrl: string;
           /**
-           * Founder WhatsApp number. Max 50 characters.
+           * Full WhatsApp URL. Example: https://api.whatsapp.com/send?phone=%2B8801777189611&brid=YQYMKgmDKn-ZQ3Gbr7U7AA
            */
           whatsApp: string;
           /**

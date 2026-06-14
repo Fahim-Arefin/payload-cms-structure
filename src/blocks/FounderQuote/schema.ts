@@ -9,7 +9,11 @@ import {
 
 import { BgColorAndSectionIdField } from '@/utils/block/fields/BgColorAndSectionIdField'
 import { generateImageFields } from '@/utils/media/fieldGenerators'
-import { validateHighlightedInField, validateShortText } from '@/utils/block/fields-validation'
+import {
+  validateAbsoluteHTTPUrl,
+  validateHighlightedInField,
+  validateShortText,
+} from '@/utils/block/fields-validation'
 
 /* ---------- limits ---------- */
 const TAG_MAX = 40
@@ -17,7 +21,7 @@ const HEADING_MAX = 90
 const FOUNDER_NAME_MAX = 80
 const FOUNDER_DESIGNATION_MAX = 120
 const SOCIAL_URL_MAX = 200
-const WHATSAPP_MAX = 50
+const URL_MAX = 300
 
 const FounderQuoteSchema: Block = {
   slug: FOUNDER_QUOTE_SLUG_AND_TAG,
@@ -244,7 +248,7 @@ const FounderQuoteSchema: Block = {
               label: 'LinkedIn URL',
               required: true,
               maxLength: SOCIAL_URL_MAX,
-              validate: validateShortText('LinkedIn URL', SOCIAL_URL_MAX, true),
+              validate: validateAbsoluteHTTPUrl(URL_MAX, true),
               admin: {
                 width: '50%',
                 description: `Founder LinkedIn profile URL. Max ${SOCIAL_URL_MAX} characters.`,
@@ -256,7 +260,7 @@ const FounderQuoteSchema: Block = {
               label: 'Facebook URL',
               required: true,
               maxLength: SOCIAL_URL_MAX,
-              validate: validateShortText('Facebook URL', SOCIAL_URL_MAX, true),
+              validate: validateAbsoluteHTTPUrl(URL_MAX, true),
               admin: {
                 width: '50%',
                 description: `Founder Facebook profile URL. Max ${SOCIAL_URL_MAX} characters.`,
@@ -271,13 +275,14 @@ const FounderQuoteSchema: Block = {
             {
               name: 'whatsApp',
               type: 'text',
-              label: 'WhatsApp',
+              label: 'WhatsApp URL',
               required: true,
-              maxLength: WHATSAPP_MAX,
-              validate: validateShortText('WhatsApp', WHATSAPP_MAX, true),
+              maxLength: SOCIAL_URL_MAX,
+              validate: validateAbsoluteHTTPUrl(URL_MAX, true),
               admin: {
                 width: '50%',
-                description: `Founder WhatsApp number. Max ${WHATSAPP_MAX} characters.`,
+                description:
+                  'Full WhatsApp URL. Example: https://api.whatsapp.com/send?phone=%2B8801777189611&brid=YQYMKgmDKn-ZQ3Gbr7U7AA',
               },
             },
             {
