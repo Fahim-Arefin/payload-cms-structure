@@ -880,7 +880,7 @@ export interface Page {
          */
         founderInfo: {
           /**
-           * Upload founder image. Recommended transparent image. Aspect Ratio (800:1110)
+           * Upload founder image. Recommended transparent image. Aspect Ratio (525:512)
            */
           founderImage: string | Media;
           founderImageOriginal?: (string | null) | Media;
@@ -907,7 +907,7 @@ export interface Page {
            */
           facebookUrl: string;
           /**
-           * Founder WhatsApp number or link. Max 50 characters.
+           * Founder WhatsApp number. Max 50 characters.
            */
           whatsApp: string;
           /**

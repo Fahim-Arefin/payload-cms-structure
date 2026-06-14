@@ -198,34 +198,41 @@ const FounderQuoteSchema: Block = {
           fieldName: 'founderImage',
           label: 'Founder Image',
           description:
-            'Upload founder image. Recommended transparent image. Aspect Ratio (800:1110)',
-          aspectRatio: 800 / 1110,
-          quality: 0.9,
+            'Upload founder image. Recommended transparent image. Aspect Ratio (525:512)',
+          aspectRatio: 525 / 512,
+          quality: 0.95,
           maxKB: 500,
           required: true,
           ownerCollection: FOUNDER_QUOTE_SLUG_AND_TAG as any,
         } as any),
 
         {
-          name: 'name',
-          type: 'text',
-          label: 'Founder Name',
-          required: true,
-          validate: validateShortText('Founder Name', FOUNDER_NAME_MAX, true),
-          admin: {
-            description: `Founder name. Max ${FOUNDER_NAME_MAX} characters.`,
-          },
-        },
+          type: 'row',
+          fields: [
+            {
+              name: 'name',
+              type: 'text',
+              label: 'Founder Name',
+              required: true,
+              validate: validateShortText('Founder Name', FOUNDER_NAME_MAX, true),
+              admin: {
+                description: `Founder name. Max ${FOUNDER_NAME_MAX} characters.`,
+                width: '50%',
+              },
+            },
 
-        {
-          name: 'designation',
-          type: 'text',
-          label: 'Founder Designation',
-          required: true,
-          validate: validateShortText('Founder Designation', FOUNDER_DESIGNATION_MAX, true),
-          admin: {
-            description: `Founder designation. Max ${FOUNDER_DESIGNATION_MAX} characters.`,
-          },
+            {
+              name: 'designation',
+              type: 'text',
+              label: 'Founder Designation',
+              required: true,
+              validate: validateShortText('Founder Designation', FOUNDER_DESIGNATION_MAX, true),
+              admin: {
+                description: `Founder designation. Max ${FOUNDER_DESIGNATION_MAX} characters.`,
+                width: '50%',
+              },
+            },
+          ],
         },
 
         {
@@ -270,7 +277,7 @@ const FounderQuoteSchema: Block = {
               validate: validateShortText('WhatsApp', WHATSAPP_MAX, true),
               admin: {
                 width: '50%',
-                description: `Founder WhatsApp number or link. Max ${WHATSAPP_MAX} characters.`,
+                description: `Founder WhatsApp number. Max ${WHATSAPP_MAX} characters.`,
               },
             },
             {
