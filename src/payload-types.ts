@@ -1560,6 +1560,9 @@ export interface Footer {
   social: {
     header: string;
     facebookUrl: string;
+    /**
+     * Full WhatsApp URL. Example: https://api.whatsapp.com/send?phone=%2B8801777189611&brid=YQYMKgmDKn-ZQ3Gbr7U7AA
+     */
     whatsApp: string;
     linkedinUrl: string;
   };
