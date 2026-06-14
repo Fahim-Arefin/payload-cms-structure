@@ -10,6 +10,8 @@ import { Metadata } from 'next'
 import { Noto_Serif_Bengali } from 'next/font/google'
 import './styles.css'
 import { Toaster } from '@/components/ui/sonner'
+import GlobalSocialLinks from '@/components/custom/shared/GlobalSocialLinks'
+import GlobalScrollButton from '@/components/custom/shared/GlobalScrollButton'
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ['bengali'],
@@ -225,7 +227,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             <div className="">
               <ServerFooter />
             </div>
-            {/* <GlobalContactButtons /> */}
+            <GlobalSocialLinks />
+            <GlobalScrollButton />
           </main>
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
         </Providers>
