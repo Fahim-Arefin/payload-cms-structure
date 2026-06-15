@@ -5,6 +5,7 @@ import {
   COMPANY_INTRO_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
+  PRODUCT_INFO_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
 } from '@/lib/constants'
 
@@ -16,6 +17,7 @@ import CompanyIntroBlock from './CompanyIntro/CompanyIntroBlock'
 import ProjectApproachBlock from './ProjectApproach/ProjectApproachBlock'
 import CodingLanguageBlock from './CodingLanguage/CodingLanguageBlock'
 import FounderQuoteBlock from './FounderQuote/FounderQuoteBlock'
+import ProductInfoBlock from './ProductInfo/ProductInfoBlock'
 
 type Params = Record<string, string>
 
@@ -35,6 +37,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CodingLanguageBlock key={block.id} block={block} params={params} />
     case FOUNDER_QUOTE_SLUG_AND_TAG:
       return <FounderQuoteBlock key={block.id} block={block} params={params} />
+    case PRODUCT_INFO_SLUG_AND_TAG:
+      return <ProductInfoBlock key={block.id} block={block} params={params} />
 
     default:
       return null

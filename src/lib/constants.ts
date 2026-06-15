@@ -79,3 +79,7 @@ export const CODING_LANGUAGE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/coding-la
 export const FOUNDER_QUOTE_SLUG_AND_TAG = 'founder-quote'
 export const FOUNDER_QUOTE_BLOCK_LABEL = 'Founder Quote'
 export const FOUNDER_QUOTE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/founder-quote-block-thumbnail.webp`
+
+export const PRODUCT_INFO_SLUG_AND_TAG = 'product-info'
+export const PRODUCT_INFO_BLOCK_LABEL = 'Product Info'
+export const PRODUCT_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info-block-thumbnail.webp`

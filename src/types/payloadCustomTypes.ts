@@ -5,6 +5,7 @@ import {
   COMPANY_INTRO_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
+  PRODUCT_INFO_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
@@ -42,4 +43,9 @@ export type CodingLanguageBlockType = Extract<
 export type FounderQuoteBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof FOUNDER_QUOTE_SLUG_AND_TAG }
+>
+
+export type ProductInfoBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PRODUCT_INFO_SLUG_AND_TAG }
 >
