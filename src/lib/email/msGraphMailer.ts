@@ -116,16 +116,26 @@ type SendViaGraphInput = {
   attachments?: GraphAttachment[]
 }
 
-const msalClient = new ConfidentialClientApplication({
-  auth: {
-    clientId: process.env.MS_CLIENT_ID!,
-    authority: `https://login.microsoftonline.com/${process.env.MS_TENANT_ID!}`,
-    clientSecret: process.env.MS_CLIENT_SECRET!,
-  },
-})
+function getMsalClient() {
+  const clientId = process.env.MS_CLIENT_ID
+  const tenantId = process.env.MS_TENANT_ID
+  const clientSecret = process.env.MS_CLIENT_SECRET
+
+  if (!clientId || !tenantId || !clientSecret) {
+    throw new Error('Missing Microsoft Graph mail credentials')
+  }
+
+  return new ConfidentialClientApplication({
+    auth: {
+      clientId,
+      authority: `https://login.microsoftonline.com/${tenantId}`,
+      clientSecret,
+    },
+  })
+}
 
 async function getAccessToken() {
-  const result = await msalClient.acquireTokenByClientCredential({
+  const result = await getMsalClient().acquireTokenByClientCredential({
     scopes: ['https://graph.microsoft.com/.default'],
   })
 
