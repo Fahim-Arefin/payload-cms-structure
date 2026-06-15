@@ -4,6 +4,9 @@ import Link from 'next/link'
 import React from 'react'
 import ProductInfoTag from './ProductInfoTag'
 import ProductInfoArrow from './ProductInfoArrow'
+import Image from 'next/image'
+import Ellipse from 'public/assets/images/EllipseRound.png'
+import ProductInfoPlusIcon from './ProductInfoPlusIcon'
 
 type Props = {
   data: NonNullable<ProductInfoBlockType['productInfo']>['products'][number]
@@ -30,21 +33,44 @@ function ProductInfoCard({ data }: Props) {
         <div className="text-white-1 font-agency global-h7">
           {productLink ? <Link href={productLink}>{data?.title}</Link> : <div>{data?.title}</div>}
         </div>
-        <div
+        {/* <div
           className="flex flex-wrap 
          gap-1.5 lg:gap-2"
         >
           {data?.productTags &&
             data?.productTags?.length > 0 &&
             data?.productTags?.map((item, i) => <ProductInfoTag key={i} item={item} />)}
+        </div> */}
+        <div className="flex flex-wrap gap-1.5 lg:gap-2">
+          {data?.productTags &&
+            data?.productTags?.length > 0 &&
+            data?.productTags?.map((item, i) => <ProductInfoTag key={i} item={item} />)}
+
+          <ProductInfoPlusIcon data={data} />
         </div>
       </div>
       {/* right */}
       <div
-        className="text-white-1 border-l-2 border-primary-1/30 
+        className="relative text-white-1 border-l-2 border-primary-1/30 
       col-span-2 lg:col-span-2 2xl:col-span-3"
       >
         <ProductInfoArrow productLink={productLink} />
+        <div
+          className="absolute z-0 inset-0 mx-auto my-auto
+        w-full
+        aspect-square
+        rounded-full"
+        >
+          <Image
+            fill
+            src={Ellipse}
+            alt="Ellipse Image"
+            placeholder="blur"
+            blurDataURL={Ellipse?.blurDataURL}
+            quality={90}
+            sizes="100vw"
+          />
+        </div>
       </div>
     </div>
   )

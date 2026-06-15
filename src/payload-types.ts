@@ -699,6 +699,14 @@ export interface Page {
                   id?: string | null;
                 }[]
               | null;
+            /**
+             * Pick an internal Page for the plus icon link. External URLs are not allowed.
+             */
+            plusButtonLink?: (string | null) | Page;
+            /**
+             * Used for plus icon direct jump links. No spaces. Use "-" to separate words.
+             */
+            plusSectionId?: string | null;
             id?: string | null;
           }[];
         };
@@ -1384,6 +1392,8 @@ export interface PagesSelect<T extends boolean = true> {
                                 sectionId?: T;
                                 id?: T;
                               };
+                          plusButtonLink?: T;
+                          plusSectionId?: T;
                           id?: T;
                         };
                   };

@@ -13,7 +13,7 @@ type Props = {
 function ProductInfoArrow({ productLink }: Props) {
   const arrowRef = useRef<ButtonArrowAnimatedRef | null>(null)
 
-  const className = `
+  const className = `relative z-10
     group flex items-center justify-center
     h-full w-full
     min-h-[60px] lg:min-h-[80px] xl:min-h-[100px] 2xl:min-h-[120px] 

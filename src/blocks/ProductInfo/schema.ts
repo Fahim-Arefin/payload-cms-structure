@@ -47,6 +47,37 @@ const internalLinkFields = [
     ],
   },
 ]
+const plusIconLinkFields = [
+  {
+    type: 'row' as const,
+    fields: [
+      {
+        name: 'plusButtonLink',
+        label: 'Plus Icon Link to (internal page)',
+        type: 'relationship' as const,
+        relationTo: 'pages' as const,
+        required: false,
+        admin: {
+          width: '50%',
+          description:
+            'Pick an internal Page for the plus icon link. External URLs are not allowed.',
+        },
+      },
+      {
+        name: 'plusSectionId',
+        type: 'text' as const,
+        label: 'Plus Icon Section ID (anchor)',
+        required: false,
+        admin: {
+          width: '50%',
+          description:
+            'Used for plus icon direct jump links. No spaces. Use "-" to separate words.',
+        },
+        validate: validateSectionIdOptional,
+      },
+    ],
+  },
+]
 
 const ProductInfoSchema: Block = {
   slug: PRODUCT_INFO_SLUG_AND_TAG,
@@ -172,6 +203,7 @@ const ProductInfoSchema: Block = {
                 ...internalLinkFields,
               ],
             },
+            ...plusIconLinkFields,
           ],
         },
       ],
