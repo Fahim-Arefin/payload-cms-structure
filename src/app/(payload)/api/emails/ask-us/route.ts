@@ -8,10 +8,10 @@
 
 //   const { firstName, lastName, email, phone, address, message } = req.data
 
-//     const additionalEmail = process?.env?.SHANTA_ADDITIONAL_EMAIL
+//     const additionalEmail = process?.env?.ADDITIONAL_EMAIL
 
 //   // Construct the "to" field with both the original and additional email
-//   const toEmails = `${process?.env?.SHANTA_SUPPORT_MAIL}, ${additionalEmail}`
+//   const toEmails = `${process?.env?.SUPPORT_MAIL}, ${additionalEmail}`
 //   // console.log({ name, email, phone, address, message })
 //   // console.log(payload)
 //   await payload?.sendEmail({
@@ -50,8 +50,8 @@
 //       : []
 
 //     // env fallbacks
-//     const fallback1 = process?.env?.SHANTA_SUPPORT_MAIL
-//     const fallback2 = process?.env?.SHANTA_ADDITIONAL_EMAIL
+//     const fallback1 = process?.env?.SUPPORT_MAIL
+//     const fallback2 = process?.env?.ADDITIONAL_EMAIL
 //     const envEmails = [fallback1, fallback2].filter(validEmail) as string[]
 
 //     // final list (prefer block emails if present; otherwise use env)

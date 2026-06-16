@@ -1,4 +1,4 @@
-name: Deploy SagarRope (SSH)
+name: Deploy via SSH
 
 on:
   push:
@@ -14,10 +14,11 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.SAGARROPE_SERVER_IP }}
-          username: ${{ secrets.SAGARROPE_SERVER_USERNAME }}
-          password: ${{ secrets.SAGARROPE_SERVER_PASSWORD }}
-          port: ${{ secrets.SAGARROPE_SERVER_PORT }}
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          timeout: 120m
+          command_timeout: 60m
           script: |
             set -e
 
@@ -27,19 +28,6 @@ jobs:
               ENV="staging"
             fi
 
-            NODE_PNPM_BIN="/home/sagarrope/.nvm/versions/node/v24.11.0/bin"
-            export PATH="$NODE_PNPM_BIN:$PATH"
-
-            command -v node || { echo "node not found"; exit 1; }
-            command -v pnpm || { echo "pnpm not found"; exit 1; }
-            node -v
-            pnpm -v
-
             echo "Deploying environment: $ENV (branch: ${{ github.ref_name }})"
 
-            cd "$HOME/projects/sagarrope-$ENV" && \
-            git pull origin "$ENV" && \
-            pnpm i --frozen-lockfile && \
-            pnpm build && \
-            pm2 reload "sagarrope-$ENV" && \
-            pm2 status
+            ./.bin/deploy-shantalife "$ENV"
