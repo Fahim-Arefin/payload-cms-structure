@@ -2,6 +2,7 @@ import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
+import ContactUsSchema from '@/blocks/ContactUs/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
@@ -182,7 +183,7 @@ export const Pages: CollectionConfig = {
         ProductHeroSchema,
 
         // common section
-
+        ContactUsSchema,
         // custom blocks
 
         // home page unique
