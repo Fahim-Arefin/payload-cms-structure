@@ -9,7 +9,7 @@ export const POST = async (req: PayloadRequest) => {
   // console.log({ name, email, phone, address, message })
   // console.log(payload)
   await payload?.sendEmail({
-    to: process?.env?.SHANTA_SUPPORT_MAIL,
+    to: process?.env?.SUPPORT_MAIL,
     subject: 'Corporate mail',
     text: `phone: ${phone}`,
   })
