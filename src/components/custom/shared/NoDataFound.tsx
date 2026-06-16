@@ -1,56 +1,3 @@
-// import React from 'react'
-
-// type Props = {
-//   widthHeight?: string
-//   bgColor?: string
-//   message?: string
-//   description?: string
-//   showIllustration?: boolean
-// }
-
-// function NoDataFound({
-//   widthHeight = 'min-h-[400px]',
-//   bgColor = 'bg-white',
-//   message = 'No data found',
-//   description = "We couldn't find any data to display here.",
-//   showIllustration = true,
-// }: Props) {
-//   return (
-//     <div
-//       className={`flex items-center justify-center ${widthHeight} rounded-lg p-6`}
-//       style={{ backgroundColor: bgColor || '#F6EDDD' }}
-//     >
-//       <div className="text-center max-w-md mx-auto">
-//         {showIllustration && (
-//           <div className="relative mb-6">
-//             {/* Animated magnifying glass */}
-//             <div className="animate-bounce w-16 h-16 border-4 border-gray-300 rounded-full mx-auto mb-2"></div>
-//             <div className="absolute top-1/2 left-1/2 transform -translate-x-3 -translate-y-3 w-6 h-1 bg-gray-400 rotate-45 opacity-0 animate-fadeIn"></div>
-
-//             {/* Floating particles */}
-//             <div className="absolute -top-2 -left-2 w-3 h-3 rounded-full bg-blue-200 animate-ping opacity-75"></div>
-//             <div className="absolute -bottom-2 -right-2 w-2 h-2 rounded-full bg-amber-200 animate-ping opacity-75 animation-delay-1000"></div>
-//             <div className="absolute -top-2 -right-2 w-2 h-2 rounded-full bg-purple-200 animate-ping opacity-75 animation-delay-2000"></div>
-//           </div>
-//         )}
-
-//         <h3 className="global-p1 font-semibold text-[#424242] mb-2 opacity-0 animate-fadeIn">
-//           {message}
-//         </h3>
-
-//         <p className="global-p2 text-[#424242] mb-6 opacity-0 animate-fadeIn animate-delay-300">
-//           {description}
-//         </p>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default NoDataFound
-
-// ===============================================================================================
-// ===============================================================================================
-// ===============================================================================================
 'use client'
 import React from 'react'
 
@@ -131,11 +78,11 @@ function NoDataFound({
           </div>
         )}
 
-        <h3 className="font-grift global-h4 font-bold text-dark-2 mb-2 opacity-0 animate-fadeIn">
+        <h3 className="font-agency global-h4 text-dark-2 mb-2 opacity-0 animate-fadeIn">
           {message}
         </h3>
 
-        <p className="font-manrope global-p4 text-[#424242] mb-6 opacity-0 animate-fadeIn animate-delay-300">
+        <p className="font-grift global-p4 text-[#424242] mb-6 opacity-0 animate-fadeIn animate-delay-300">
           {description}
         </p>
       </div>

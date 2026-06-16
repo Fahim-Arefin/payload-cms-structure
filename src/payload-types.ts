@@ -72,6 +72,7 @@ export interface Config {
     resume: Resume;
     'audit-logs': AuditLog;
     'newsletter-subscribers': NewsletterSubscriber;
+    'contact-form-submissions': ContactFormSubmission;
     pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     resume: ResumeSelect<false> | ResumeSelect<true>;
     'audit-logs': AuditLogsSelect<false> | AuditLogsSelect<true>;
     'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
+    'contact-form-submissions': ContactFormSubmissionsSelect<false> | ContactFormSubmissionsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -95,10 +97,12 @@ export interface Config {
   globals: {
     navbar: Navbar;
     footer: Footer;
+    'global-contact-us': GlobalContactUs;
   };
   globalsSelect: {
     navbar: NavbarSelect<false> | NavbarSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'global-contact-us': GlobalContactUsSelect<false> | GlobalContactUsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -253,6 +257,26 @@ export interface NewsletterSubscriber {
    * Where this subscriber came from.
    */
   source?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Submitted data from the frontend Contact Us form.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-form-submissions".
+ */
+export interface ContactFormSubmission {
+  id: string;
+  name: string;
+  phone: string;
+  email: string;
+  selectedSolutions: {
+    text: string;
+    id?: string | null;
+  }[];
+  selectedBudget: string;
+  status?: ('new' | 'contacted' | 'closed') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -485,6 +509,83 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
+         * Main intro heading, highlighted text, description and optional CTA.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * When ON, this block renders data from **Global Contact Us**.
+         *
+         * **Before enabling:** fill up the **Global Contact Us** data.
+         *
+         * **Notes:**
+         * • This block only stores presentation options (e.g., background color , section headings etc.).
+         * • Contact Us data comes from the single shared **Global Contact Us** to keep pages in sync.
+         */
+        useSharedData: boolean;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contact-us';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
          * Add small company info items like Heart Winning Agency, IT Solution Agency, Located at Dhaka, Bangladesh.
          */
         companyInfoItems: {
@@ -595,6 +696,124 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'company-intro';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Main intro heading, highlighted text, description.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Add product info cards with product-level and tag-level internal links.
+         */
+        productInfo: {
+          /**
+           * Maximum 6 products.
+           */
+          products: {
+            /**
+             * Product title. Max 80 characters.
+             */
+            title: string;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink?: (string | null) | Page;
+            /**
+             * Used for direct jump links to this section. No spaces. Use "-" to separate words.
+             */
+            sectionId?: string | null;
+            /**
+             * Add tags for this product. Each tag can also link to an internal page/section.
+             */
+            productTags?:
+              | {
+                  /**
+                   * Product tag text. Max 40 characters.
+                   */
+                  tag: string;
+                  /**
+                   * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                   */
+                  buttonLink?: (string | null) | Page;
+                  /**
+                   * Used for direct jump links to this section. No spaces. Use "-" to separate words.
+                   */
+                  sectionId?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Pick an internal Page for the plus icon link. External URLs are not allowed.
+             */
+            plusButtonLink?: (string | null) | Page;
+            /**
+             * Used for plus icon direct jump links. No spaces. Use "-" to separate words.
+             */
+            plusSectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'product-info';
       }
     | {
         uploadSessionId?: string | null;
@@ -812,6 +1031,233 @@ export interface Page {
         blockName?: string | null;
         blockType: 'coding-language';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Founder quote section content: tag, heading 1, heading 2 and quote.
+         */
+        founderQuote: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Founder quote text.
+           */
+          quote: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+        };
+        /**
+         * Founder image, name, designation and social/contact links.
+         */
+        founderInfo: {
+          /**
+           * Upload founder image. Recommended transparent image. Aspect Ratio (525:512)
+           */
+          founderImage: string | Media;
+          founderImageOriginal?: (string | null) | Media;
+          pendingFounderImageOriginal?: string | null;
+          pendingFounderImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          founderImageBlurDataURL?: string | null;
+          /**
+           * Founder name. Max 80 characters.
+           */
+          name: string;
+          /**
+           * Founder designation. Max 120 characters.
+           */
+          designation: string;
+          /**
+           * Founder LinkedIn profile URL. Max 200 characters.
+           */
+          linkedinUrl: string;
+          /**
+           * Founder Facebook profile URL. Max 200 characters.
+           */
+          facebookUrl: string;
+          /**
+           * Full WhatsApp URL. Example: https://api.whatsapp.com/send?phone=%2B8801777189611&brid=YQYMKgmDKn-ZQ3Gbr7U7AA
+           */
+          whatsApp: string;
+          /**
+           * Founder email address.
+           */
+          emailAddress: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'founder-quote';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Main intro heading, highlighted text, description and optional CTA.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Company-wise client success reviews.
+         */
+        clientReviews: {
+          companies: {
+            /**
+             * Example: AltSource. Max 80 characters.
+             */
+            companyName: string;
+            /**
+             * Upload company logo. Transparent PNG/SVG preferred. Aspect ratio 3:1.
+             */
+            companyLogo: string | Media;
+            companyLogoOriginal?: (string | null) | Media;
+            pendingCompanyLogoOriginal?: string | null;
+            pendingCompanyLogoCrop?: string | null;
+            /**
+             * Auto-generated Base64 blur
+             */
+            companyLogoBlurDataURL?: string | null;
+            reviews: {
+              /**
+               * Example: Dianne Russell. Max 80 characters.
+               */
+              clientName: string;
+              /**
+               * Client designation. Max 120 characters.
+               */
+              clientDesignation: string;
+              /**
+               * Rating from 1 to 5.
+               */
+              rating: number;
+              /**
+               * Client review text. Max 500 characters.
+               */
+              review: string;
+              /**
+               * Upload client image. Aspect ratio 240:301.
+               */
+              image: string | Media;
+              imageOriginal?: (string | null) | Media;
+              pendingImageOriginal?: string | null;
+              pendingImageCrop?: string | null;
+              /**
+               * Auto-generated Base64 blur
+               */
+              imageBlurDataURL?: string | null;
+              id?: string | null;
+            }[];
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'client-success-stories';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -843,6 +1289,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'newsletter-subscribers';
         value: string | NewsletterSubscriber;
+      } | null)
+    | ({
+        relationTo: 'contact-form-submissions';
+        value: string | ContactFormSubmission;
       } | null)
     | ({
         relationTo: 'pages';
@@ -985,6 +1435,25 @@ export interface NewsletterSubscribersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-form-submissions_select".
+ */
+export interface ContactFormSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  phone?: T;
+  email?: T;
+  selectedSolutions?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  selectedBudget?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
@@ -1074,6 +1543,32 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'contact-us'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              useSharedData?: T;
+              id?: T;
+              blockName?: T;
+            };
         'company-info'?:
           | T
           | {
@@ -1124,6 +1619,53 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     description?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'product-info'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              productInfo?:
+                | T
+                | {
+                    products?:
+                      | T
+                      | {
+                          title?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          productTags?:
+                            | T
+                            | {
+                                tag?: T;
+                                buttonLink?: T;
+                                sectionId?: T;
+                                id?: T;
+                              };
+                          plusButtonLink?: T;
+                          plusSectionId?: T;
+                          id?: T;
+                        };
                   };
               id?: T;
               blockName?: T;
@@ -1217,6 +1759,100 @@ export interface PagesSelect<T extends boolean = true> {
                           pendingTransparentColoredImageOriginal?: T;
                           pendingTransparentColoredImageCrop?: T;
                           transparentColoredImageBlurDataURL?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'founder-quote'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              founderQuote?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    quote?: T;
+                  };
+              founderInfo?:
+                | T
+                | {
+                    founderImage?: T;
+                    founderImageOriginal?: T;
+                    pendingFounderImageOriginal?: T;
+                    pendingFounderImageCrop?: T;
+                    founderImageBlurDataURL?: T;
+                    name?: T;
+                    designation?: T;
+                    linkedinUrl?: T;
+                    facebookUrl?: T;
+                    whatsApp?: T;
+                    emailAddress?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'client-success-stories'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              clientReviews?:
+                | T
+                | {
+                    companies?:
+                      | T
+                      | {
+                          companyName?: T;
+                          companyLogo?: T;
+                          companyLogoOriginal?: T;
+                          pendingCompanyLogoOriginal?: T;
+                          pendingCompanyLogoCrop?: T;
+                          companyLogoBlurDataURL?: T;
+                          reviews?:
+                            | T
+                            | {
+                                clientName?: T;
+                                clientDesignation?: T;
+                                rating?: T;
+                                review?: T;
+                                image?: T;
+                                imageOriginal?: T;
+                                pendingImageOriginal?: T;
+                                pendingImageCrop?: T;
+                                imageBlurDataURL?: T;
+                                id?: T;
+                              };
                           id?: T;
                         };
                   };
@@ -1413,6 +2049,9 @@ export interface Footer {
   social: {
     header: string;
     facebookUrl: string;
+    /**
+     * Full WhatsApp URL. Example: https://api.whatsapp.com/send?phone=%2B8801777189611&brid=YQYMKgmDKn-ZQ3Gbr7U7AA
+     */
     whatsApp: string;
     linkedinUrl: string;
   };
@@ -1440,6 +2079,41 @@ export interface Footer {
       [k: string]: unknown;
     };
   };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Global Contact Us options: our solutions and budget ranges.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-contact-us".
+ */
+export interface GlobalContactUs {
+  id: string;
+  /**
+   * Examples: Software as a Service (SaaS), Web App Development, Mobile App Development.
+   */
+  ourSolutions?:
+    | {
+        /**
+         * Solution name. Max 100 characters.
+         */
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Examples: BELOW 1K USD, 1K-3K USD, 3K-5K USD.
+   */
+  budgets?:
+    | {
+        /**
+         * Budget range text. Max 100 characters.
+         */
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1554,6 +2228,27 @@ export interface FooterSelect<T extends boolean = true> {
     | T
     | {
         legalValue?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-contact-us_select".
+ */
+export interface GlobalContactUsSelect<T extends boolean = true> {
+  ourSolutions?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  budgets?:
+    | T
+    | {
+        text?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

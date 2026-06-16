@@ -1,8 +1,12 @@
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
+import ClientSuccessStoriesSchema from '@/blocks/ClientSuccessStories/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
+import ContactUsSchema from '@/blocks/ContactUs/schema'
+import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
+import ProductInfoSchema from '@/blocks/ProductInfo/schema'
 import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
@@ -180,14 +184,17 @@ export const Pages: CollectionConfig = {
         ProductHeroSchema,
 
         // common section
-
+        ContactUsSchema,
         // custom blocks
 
         // home page unique
         CompanyInfoSchema,
         CompanyIntroSchema,
+        ProductInfoSchema,
         ProjectApproachSchema,
         CodingLanguageSchema,
+        FounderQuoteSchema,
+        ClientSuccessStoriesSchema,
 
         // about us page unique
 
