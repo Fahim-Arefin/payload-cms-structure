@@ -1,0 +1,204 @@
+name: Build, Push, and Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy ${{ github.ref_name }}
+    runs-on: self-hosted
+    environment: ${{ github.ref_name }}
+
+    env:
+      REGISTRY: docker-registry.xynolab.com
+      IMAGE_NAME: ${{ vars.IMAGE_NAME || 'xynolab-website' }}
+      CONTAINER_NAME: ${{ vars.CONTAINER_NAME || format('xynolab-website-{0}', github.ref_name) }}
+      HOST_PORT: ${{ vars.HOST_PORT || '3000' }}
+      VOLUME_ROOT: ${{ vars.VOLUME_ROOT || format('/home/ubuntu/dockerVolumes/xynolab-website-{0}', github.ref_name) }}
+      DEPLOY_SERVER_PORT: ${{ vars.DEPLOY_SERVER_PORT || '22' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compute image tags
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          short_sha="${GITHUB_SHA::12}"
+          image="${REGISTRY}/${IMAGE_NAME}"
+
+          {
+            echo "short_sha=${short_sha}"
+            echo "image=${image}"
+            echo "sha_tag=${image}:${short_sha}"
+            echo "branch_sha_tag=${image}:${GITHUB_REF_NAME}-${short_sha}"
+            echo "branch_latest_tag=${image}:${GITHUB_REF_NAME}-latest"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Login to Docker registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build Docker image
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          docker build --progress=plain \
+            --build-arg API_URL='${{ vars.API_URL }}' \
+            --build-arg NEXT_PUBLIC_STATIC_IMG_DOMAIN='${{ vars.NEXT_PUBLIC_STATIC_IMG_DOMAIN }}' \
+            --build-arg NEXT_PUBLIC_EMAIL_PROVIDER='${{ vars.NEXT_PUBLIC_EMAIL_PROVIDER }}' \
+            -t '${{ steps.meta.outputs.sha_tag }}' \
+            -t '${{ steps.meta.outputs.branch_sha_tag }}' \
+            -t '${{ steps.meta.outputs.branch_latest_tag }}' \
+            .
+
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+            docker tag '${{ steps.meta.outputs.sha_tag }}' '${{ steps.meta.outputs.image }}:latest'
+          fi
+
+      - name: Push Docker image
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          docker push '${{ steps.meta.outputs.sha_tag }}'
+          docker push '${{ steps.meta.outputs.branch_sha_tag }}'
+          docker push '${{ steps.meta.outputs.branch_latest_tag }}'
+
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+            docker push '${{ steps.meta.outputs.image }}:latest'
+          fi
+
+      - name: Prepare SSH key
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p ~/.ssh
+          install -m 600 /dev/null ~/.ssh/xynolab_deploy_key
+          cat > ~/.ssh/xynolab_deploy_key <<'EOF'
+          ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          EOF
+          sed -i 's/^          //' ~/.ssh/xynolab_deploy_key
+
+          ssh-keyscan -p "${DEPLOY_SERVER_PORT}" -H '${{ secrets.DEPLOY_SERVER_HOST }}' >> ~/.ssh/known_hosts
+
+      - name: Write runtime env file
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p .deploy
+          env_file=".deploy/runtime.env"
+
+          cat > "$env_file" <<'EOF'
+          API_URL=${{ vars.API_URL }}
+          NEXT_PUBLIC_STATIC_IMG_DOMAIN=${{ vars.NEXT_PUBLIC_STATIC_IMG_DOMAIN }}
+          NEXT_PUBLIC_EMAIL_PROVIDER=${{ vars.NEXT_PUBLIC_EMAIL_PROVIDER }}
+          PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}
+          DATABASE_URI=${{ secrets.DATABASE_URI }}
+          USE_S3_STORAGE=${{ vars.USE_S3_STORAGE }}
+          S3_BUCKET_NAME=${{ vars.S3_BUCKET_NAME }}
+          S3_ENDPOINT=${{ vars.S3_ENDPOINT }}
+          S3_REGION=${{ vars.S3_REGION }}
+          S3_ACCESS_KEY=${{ secrets.S3_ACCESS_KEY }}
+          S3_SECRET_KEY=${{ secrets.S3_SECRET_KEY }}
+          SMTP_HOST=${{ vars.SMTP_HOST }}
+          SMTP_PORT=${{ vars.SMTP_PORT }}
+          SMTP_SECURE=${{ vars.SMTP_SECURE }}
+          SMTP_USER=${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
+          SMTP_MAIL_FROM=${{ vars.SMTP_MAIL_FROM }}
+          CAREER_MAIL=${{ vars.CAREER_MAIL }}
+          AGENT_CAREER_MAIL=${{ vars.AGENT_CAREER_MAIL }}
+          SUPPORT_MAIL=${{ vars.SUPPORT_MAIL }}
+          PURCHASE_MAIL=${{ vars.PURCHASE_MAIL }}
+          ADDITIONAL_EMAIL=${{ vars.ADDITIONAL_EMAIL }}
+          MS_TENANT_ID=${{ vars.MS_TENANT_ID }}
+          MS_CLIENT_ID=${{ vars.MS_CLIENT_ID }}
+          MS_CLIENT_SECRET=${{ secrets.MS_CLIENT_SECRET }}
+          MS_SENDER_EMAIL=${{ vars.MS_SENDER_EMAIL }}
+          EOF
+
+          sed -i 's/^          //' "$env_file"
+          chmod 600 "$env_file"
+
+          cat > .deploy/registry-username <<'EOF'
+          ${{ secrets.REGISTRY_USERNAME }}
+          EOF
+          cat > .deploy/registry-password <<'EOF'
+          ${{ secrets.REGISTRY_PASSWORD }}
+          EOF
+          sed -i 's/^          //' .deploy/registry-username .deploy/registry-password
+          chmod 600 .deploy/registry-username .deploy/registry-password
+
+      - name: Upload runtime env file
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ssh -i ~/.ssh/xynolab_deploy_key \
+            -p "${DEPLOY_SERVER_PORT}" \
+            '${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}' \
+            "mkdir -p '${VOLUME_ROOT}'"
+
+          scp -i ~/.ssh/xynolab_deploy_key \
+            -P "${DEPLOY_SERVER_PORT}" \
+            .deploy/runtime.env .deploy/registry-username .deploy/registry-password \
+            '${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}':"${VOLUME_ROOT}/"
+
+      - name: Deploy container over SSH
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ssh -i ~/.ssh/xynolab_deploy_key \
+            -p "${DEPLOY_SERVER_PORT}" \
+            '${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}' \
+            REGISTRY='${{ env.REGISTRY }}' \
+            IMAGE_TAG='${{ steps.meta.outputs.branch_latest_tag }}' \
+            CONTAINER_NAME="${CONTAINER_NAME}" \
+            HOST_PORT="${HOST_PORT}" \
+            VOLUME_ROOT="${VOLUME_ROOT}" \
+            'bash -s' <<'REMOTE_SCRIPT'
+          set -euo pipefail
+
+          mkdir -p "${VOLUME_ROOT}/media" "${VOLUME_ROOT}/resumes"
+          mv "${VOLUME_ROOT}/runtime.env" "${VOLUME_ROOT}/.env"
+          chmod 600 "${VOLUME_ROOT}/.env"
+
+          docker login "${REGISTRY}" -u "$(cat "${VOLUME_ROOT}/registry-username")" --password-stdin < "${VOLUME_ROOT}/registry-password"
+          rm -f "${VOLUME_ROOT}/registry-username" "${VOLUME_ROOT}/registry-password"
+          docker pull "${IMAGE_TAG}"
+
+          docker rm -f "${CONTAINER_NAME}" 2>/dev/null || true
+
+          docker run -d \
+            --name "${CONTAINER_NAME}" \
+            --restart unless-stopped \
+            --env-file "${VOLUME_ROOT}/.env" \
+            -p "${HOST_PORT}:3000" \
+            -v "${VOLUME_ROOT}/media:/app/media" \
+            -v "${VOLUME_ROOT}/resumes:/app/resumes" \
+            "${IMAGE_TAG}"
+          REMOTE_SCRIPT
+
+      - name: Cleanup local Docker cache
+        if: always()
+        shell: bash
+        run: |
+          rm -rf .deploy ~/.ssh/xynolab_deploy_key
+          docker image prune -f

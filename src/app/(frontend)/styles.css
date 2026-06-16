@@ -296,7 +296,7 @@
 
   /* modified */
   .global-h3 {
-    @apply text-[30px] md:text-[35px] lg:text-[50px] xl:text-[73px] 2xl:text-[90px] leading-[112.5%];
+    @apply text-[30px] md:text-[35px] lg:text-[50px] xl:text-[73px] 2xl:text-[82px] leading-[112.5%];
   }
   /* modified */
   .global-h4 {

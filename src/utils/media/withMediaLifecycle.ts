@@ -1159,6 +1159,8 @@
 //       : {}),
 //   }
 // }
+
+// new blockGroupArrayFields added here
 import type { CollectionConfig } from 'payload'
 import { createBeforeChangeHook } from './createBeforeChangeHook'
 import { deleteRemovedMedia } from './deleteRemovedMedia'
