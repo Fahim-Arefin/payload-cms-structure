@@ -1,33 +1,155 @@
-name: Deploy via SSH
+name: Build, Push, and Deploy
 
 on:
   push:
     branches:
-      # - main
+      - main
       - staging
 
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: true
+
 jobs:
-  build_and_deploy:
-    runs-on: ubuntu-latest
+  deploy:
+    name: Deploy ${{ github.ref_name }}
+    runs-on: self-hosted
+    environment: ${{ github.ref_name }}
+
+    env:
+      REGISTRY: docker-registry.xynolab.com
+      IMAGE_NAME: ${{ vars.IMAGE_NAME || 'xynolab-website' }}
+      CONTAINER_NAME: ${{ vars.CONTAINER_NAME || format('xynolab-website-{0}', github.ref_name) }}
+      HOST_PORT: ${{ vars.HOST_PORT || '3000' }}
+      VOLUME_ROOT: ${{ vars.VOLUME_ROOT || format('/home/ubuntu/dockerVolumes/xynolab-website-{0}', github.ref_name) }}
 
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.2.0
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compute image tags
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          short_sha="${GITHUB_SHA::12}"
+          image="${REGISTRY}/${IMAGE_NAME}"
+
+          {
+            echo "short_sha=${short_sha}"
+            echo "image=${image}"
+            echo "sha_tag=${image}:${short_sha}"
+            echo "branch_sha_tag=${image}:${GITHUB_REF_NAME}-${short_sha}"
+            echo "branch_latest_tag=${image}:${GITHUB_REF_NAME}-latest"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Login to Docker registry
+        uses: docker/login-action@v3
         with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          timeout: 120m
-          command_timeout: 60m
-          script: |
-            set -e
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
 
-            if [ "${{ github.ref_name }}" = "main" ]; then
-              ENV="main"
-            else
-              ENV="staging"
-            fi
+      - name: Build Docker image
+        shell: bash
+        run: |
+          set -euo pipefail
 
-            echo "Deploying environment: $ENV (branch: ${{ github.ref_name }})"
+          docker build --progress=plain \
+            --build-arg API_URL='${{ vars.API_URL }}' \
+            --build-arg NEXT_PUBLIC_SITE_URL='${{ vars.NEXT_PUBLIC_SITE_URL }}' \
+            --build-arg NEXT_PUBLIC_STATIC_IMG_DOMAIN='${{ vars.NEXT_PUBLIC_STATIC_IMG_DOMAIN }}' \
+            --build-arg NEXT_PUBLIC_GA_ID='${{ vars.NEXT_PUBLIC_GA_ID }}' \
+            --build-arg NEXT_PUBLIC_EMAIL_PROVIDER='${{ vars.NEXT_PUBLIC_EMAIL_PROVIDER }}' \
+            -t '${{ steps.meta.outputs.sha_tag }}' \
+            -t '${{ steps.meta.outputs.branch_sha_tag }}' \
+            -t '${{ steps.meta.outputs.branch_latest_tag }}' \
+            .
 
-            ./.bin/deploy-shantalife "$ENV"
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+            docker tag '${{ steps.meta.outputs.sha_tag }}' '${{ steps.meta.outputs.image }}:latest'
+          fi
+
+      - name: Push Docker image
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          docker push '${{ steps.meta.outputs.sha_tag }}'
+          docker push '${{ steps.meta.outputs.branch_sha_tag }}'
+          docker push '${{ steps.meta.outputs.branch_latest_tag }}'
+
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+            docker push '${{ steps.meta.outputs.image }}:latest'
+          fi
+
+      - name: Write runtime env file
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p "${VOLUME_ROOT}"
+          env_file="${VOLUME_ROOT}/.env"
+
+          cat > "$env_file" <<'EOF'
+          API_URL=${{ vars.API_URL }}
+          NEXT_PUBLIC_SITE_URL=${{ vars.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_STATIC_IMG_DOMAIN=${{ vars.NEXT_PUBLIC_STATIC_IMG_DOMAIN }}
+          NEXT_PUBLIC_GA_ID=${{ vars.NEXT_PUBLIC_GA_ID }}
+          NEXT_PUBLIC_EMAIL_PROVIDER=${{ vars.NEXT_PUBLIC_EMAIL_PROVIDER }}
+          CACHE_DEBUG=${{ vars.CACHE_DEBUG }}
+          PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}
+          DATABASE_URI=${{ secrets.DATABASE_URI }}
+          USE_S3_STORAGE=${{ vars.USE_S3_STORAGE }}
+          S3_BUCKET_NAME=${{ vars.S3_BUCKET_NAME }}
+          S3_ENDPOINT=${{ vars.S3_ENDPOINT }}
+          S3_REGION=${{ vars.S3_REGION }}
+          S3_ACCESS_KEY=${{ secrets.S3_ACCESS_KEY }}
+          S3_SECRET_KEY=${{ secrets.S3_SECRET_KEY }}
+          SMTP_HOST=${{ vars.SMTP_HOST }}
+          SMTP_PORT=${{ vars.SMTP_PORT }}
+          SMTP_SECURE=${{ vars.SMTP_SECURE }}
+          SMTP_USER=${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
+          SMTP_MAIL_FROM=${{ vars.SMTP_MAIL_FROM }}
+          SHANTA_CAREER_MAIL=${{ vars.SHANTA_CAREER_MAIL }}
+          SHANTA_AGENT_CAREER_MAIL=${{ vars.SHANTA_AGENT_CAREER_MAIL }}
+          SHANTA_SUPPORT_MAIL=${{ vars.SHANTA_SUPPORT_MAIL }}
+          SHANTA_PURCHASE_MAIL=${{ vars.SHANTA_PURCHASE_MAIL }}
+          SHANTA_ADDITIONAL_EMAIL=${{ vars.SHANTA_ADDITIONAL_EMAIL }}
+          MS_TENANT_ID=${{ vars.MS_TENANT_ID }}
+          MS_CLIENT_ID=${{ vars.MS_CLIENT_ID }}
+          MS_CLIENT_SECRET=${{ secrets.MS_CLIENT_SECRET }}
+          MS_SENDER_EMAIL=${{ vars.MS_SENDER_EMAIL }}
+          BOOTSTRAP_SUPER_EMAIL=${{ vars.BOOTSTRAP_SUPER_EMAIL }}
+          BOOTSTRAP_SUPER_PASSWORD=${{ secrets.BOOTSTRAP_SUPER_PASSWORD }}
+          EOF
+
+          sed -i 's/^          //' "$env_file"
+          chmod 600 "$env_file"
+
+      - name: Deploy container
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p "${VOLUME_ROOT}/media" "${VOLUME_ROOT}/resumes"
+
+          docker pull '${{ steps.meta.outputs.branch_latest_tag }}'
+
+          docker rm -f "${CONTAINER_NAME}" 2>/dev/null || true
+
+          docker run -d \
+            --name "${CONTAINER_NAME}" \
+            --restart unless-stopped \
+            --env-file "${VOLUME_ROOT}/.env" \
+            -p "${HOST_PORT}:3000" \
+            -v "${VOLUME_ROOT}/media:/app/media" \
+            -v "${VOLUME_ROOT}/resumes:/app/resumes" \
+            '${{ steps.meta.outputs.branch_latest_tag }}'
+
+      - name: Cleanup local Docker cache
+        if: always()
+        shell: bash
+        run: |
+          docker image prune -f
