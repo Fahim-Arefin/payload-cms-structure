@@ -16,10 +16,10 @@ export const POST = async (req: PayloadRequest) => {
     occupation: string
   }
 
-  const additionalEmail = process?.env?.SHANTA_ADDITIONAL_EMAIL
+  const additionalEmail = process?.env?.ADDITIONAL_EMAIL
 
   // Construct the "to" field with both the original and additional email
-  const toEmails = `${process?.env?.SHANTA_PURCHASE_MAIL}, ${additionalEmail}`
+  const toEmails = `${process?.env?.PURCHASE_MAIL}, ${additionalEmail}`
 
   await payload?.sendEmail({
     to: toEmails,
