@@ -1138,6 +1138,126 @@ export interface Page {
         blockName?: string | null;
         blockType: 'founder-quote';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Main intro heading, highlighted text, description and optional CTA.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Company-wise client success reviews.
+         */
+        clientReviews: {
+          companies: {
+            /**
+             * Example: AltSource. Max 80 characters.
+             */
+            companyName: string;
+            /**
+             * Upload company logo. Transparent PNG/SVG preferred. Aspect ratio 3:1.
+             */
+            companyLogo: string | Media;
+            companyLogoOriginal?: (string | null) | Media;
+            pendingCompanyLogoOriginal?: string | null;
+            pendingCompanyLogoCrop?: string | null;
+            /**
+             * Auto-generated Base64 blur
+             */
+            companyLogoBlurDataURL?: string | null;
+            reviews: {
+              /**
+               * Example: Dianne Russell. Max 80 characters.
+               */
+              clientName: string;
+              /**
+               * Client designation. Max 120 characters.
+               */
+              clientDesignation: string;
+              /**
+               * Rating from 1 to 5.
+               */
+              rating: number;
+              /**
+               * Client review text. Max 500 characters.
+               */
+              review: string;
+              /**
+               * Upload client image. Aspect ratio 240:301.
+               */
+              image: string | Media;
+              imageOriginal?: (string | null) | Media;
+              pendingImageOriginal?: string | null;
+              pendingImageCrop?: string | null;
+              /**
+               * Auto-generated Base64 blur
+               */
+              imageBlurDataURL?: string | null;
+              id?: string | null;
+            }[];
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'client-success-stories';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1681,6 +1801,60 @@ export interface PagesSelect<T extends boolean = true> {
                     facebookUrl?: T;
                     whatsApp?: T;
                     emailAddress?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'client-success-stories'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              clientReviews?:
+                | T
+                | {
+                    companies?:
+                      | T
+                      | {
+                          companyName?: T;
+                          companyLogo?: T;
+                          companyLogoOriginal?: T;
+                          pendingCompanyLogoOriginal?: T;
+                          pendingCompanyLogoCrop?: T;
+                          companyLogoBlurDataURL?: T;
+                          reviews?:
+                            | T
+                            | {
+                                clientName?: T;
+                                clientDesignation?: T;
+                                rating?: T;
+                                review?: T;
+                                image?: T;
+                                imageOriginal?: T;
+                                pendingImageOriginal?: T;
+                                pendingImageCrop?: T;
+                                imageBlurDataURL?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                        };
                   };
               id?: T;
               blockName?: T;

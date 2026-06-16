@@ -95,3 +95,7 @@ export const PRODUCT_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info
 export const CONTACT_US_SLUG_AND_TAG = 'contact-us'
 export const CONTACT_US_BLOCK_LABEL = 'Contact Us'
 export const CONTACT_US_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/contact-us-block-thumbnail.webp`
+
+export const CLIENT_SUCCESS_STORIES_SLUG_AND_TAG = 'client-success-stories'
+export const CLIENT_SUCCESS_STORIES_BLOCK_LABEL = 'Client Success Stories'
+export const CLIENT_SUCCESS_STORIES_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/client-success-stories-block-thumbnail.webp`

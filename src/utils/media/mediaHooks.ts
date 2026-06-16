@@ -1,5 +1,6 @@
 import {
   BASIC_HERO_SLUG_AND_TAG,
+  CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
@@ -75,6 +76,30 @@ export const mediaHooks = withMediaLifecycle({
       groupKey: 'languageImages',
       arrayKey: 'languagesTwo',
       mediaFields: ['transparentNormalImage', 'transparentColoredImage'],
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
+      groupKey: 'clientReviews',
+      arrayKey: 'companies',
+      mediaFields: ['companyLogo'],
+      mediaFieldLabels: {
+        companyLogo: 'Company Logo',
+      },
+    },
+  ],
+
+  blockGroupArrayFields: [
+    {
+      layoutKey: 'layout',
+      blockType: CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
+      groupKey: 'clientReviews',
+      firstArrayKey: 'companies',
+      secondArrayKey: 'reviews',
+      mediaFields: ['image'],
+      mediaFieldLabels: {
+        image: 'Client Image',
+      },
     },
   ],
 
