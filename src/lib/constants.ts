@@ -27,6 +27,10 @@ export const GLOBAL_NAVBAR_CACHE_KEY = 'navbar-data'
 export const GLOBAL_FOOTER_SLUG_AND_TAG = 'footer' as const
 export const GLOBAL_FOOTER_CACHE_KEY = 'footer-data'
 
+// GLobal Contact Us
+export const GLOBAL_CONTACT_US_SLUG_AND_TAG = 'global-contact-us'
+export const GLOBAL_CONTACT_US_LABEL = 'Global Contact Us'
+
 // News Categories Global
 export const GLOBAL_NEWS_CATEGORIES_SLUG_AND_TAG = 'news-categories'
 export const GLOBAL_NEWS_CATEGORIES_CACHE_KEY = 'news-categories-data'
@@ -40,10 +44,14 @@ export const GLOBAL_NEWS_SLUG_AND_TAG = 'news'
 export const GLOBAL_NEWS_CACHE_KEY = 'news-data'
 export const AUDIT_LOG = 'Audit'
 
+// form submission
+
+export const CONTACT_FORM_SUBMISSIONS_SLUG = 'contact-form-submissions'
+
 // Group
 export const HERO_BLOCKS = 'Hero Blocks'
 export const COMMON = 'Common Blocks'
-export const FORMS = 'Forms'
+export const FORMS = 'Form Submissions'
 export const HOME_PAGE = 'Home Page'
 export const ABOUT_US = 'About Us Page'
 export const PRODUCT_PAGE = 'Product Page'
@@ -75,3 +83,19 @@ export const PROJECT_APPROACH_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/project-
 export const CODING_LANGUAGE_SLUG_AND_TAG = 'coding-language'
 export const CODING_LANGUAGE_BLOCK_LABEL = 'Coding Language'
 export const CODING_LANGUAGE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/coding-language-block-thumbnail.webp`
+
+export const FOUNDER_QUOTE_SLUG_AND_TAG = 'founder-quote'
+export const FOUNDER_QUOTE_BLOCK_LABEL = 'Founder Quote'
+export const FOUNDER_QUOTE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/founder-quote-block-thumbnail.webp`
+
+export const PRODUCT_INFO_SLUG_AND_TAG = 'product-info'
+export const PRODUCT_INFO_BLOCK_LABEL = 'Product Info'
+export const PRODUCT_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info-block-thumbnail.webp`
+
+export const CONTACT_US_SLUG_AND_TAG = 'contact-us'
+export const CONTACT_US_BLOCK_LABEL = 'Contact Us'
+export const CONTACT_US_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/contact-us-block-thumbnail.webp`
+
+export const CLIENT_SUCCESS_STORIES_SLUG_AND_TAG = 'client-success-stories'
+export const CLIENT_SUCCESS_STORIES_BLOCK_LABEL = 'Client Success Stories'
+export const CLIENT_SUCCESS_STORIES_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/client-success-stories-block-thumbnail.webp`

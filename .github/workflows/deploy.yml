@@ -194,6 +194,8 @@ jobs:
             -v "${VOLUME_ROOT}/media:/app/media" \
             -v "${VOLUME_ROOT}/resumes:/app/resumes" \
             "${IMAGE_TAG}"
+
+          docker image prune -f
           REMOTE_SCRIPT
 
       - name: Cleanup local Docker cache

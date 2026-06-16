@@ -16,6 +16,8 @@ import { Users } from './collections/Users'
 import Footer from './collections/globals/Footer'
 import Navbar from './collections/globals/Navbar'
 import NewsletterSubscribers from './collections/NewsletterSubscribers'
+import GlobalContactUs from './collections/globals/GlobalContactUs'
+import ContactFormSubmissions from './collections/ContactFormSubmissions'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -88,8 +90,16 @@ export default buildConfig({
     },
     abortOnLimit: true,
   },
-  collections: [Users, Media, Resume, AuditLogs, NewsletterSubscribers, Pages],
-  globals: [Navbar, Footer],
+  collections: [
+    Users,
+    Media,
+    Resume,
+    AuditLogs,
+    NewsletterSubscribers,
+    ContactFormSubmissions,
+    Pages,
+  ],
+  globals: [Navbar, Footer, GlobalContactUs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

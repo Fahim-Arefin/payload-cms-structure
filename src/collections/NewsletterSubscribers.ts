@@ -1,3 +1,4 @@
+import { FORMS } from '@/lib/constants'
 import type { CollectionConfig } from 'payload'
 
 export const NewsletterSubscribers: CollectionConfig = {
@@ -11,7 +12,7 @@ export const NewsletterSubscribers: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'status', 'createdAt'],
-    group: 'Form Submissions',
+    group: FORMS,
   },
 
   access: {

@@ -6,9 +6,10 @@ import React, { useRef } from 'react'
 
 type Props = {
   tag: CompanyIntroBlockType['sectionHeading']['tag']
+  dark?: boolean
 }
 
-function Tags({ tag }: Props) {
+function Tags({ tag, dark = false }: Props) {
   const wrapperRef = useRef<HTMLDivElement | null>(null)
   const leftArrowRef = useRef<HTMLSpanElement | null>(null)
   const rightArrowRef = useRef<HTMLSpanElement | null>(null)
@@ -68,10 +69,10 @@ function Tags({ tag }: Props) {
   return (
     <div
       ref={wrapperRef}
-      className="
+      className={`
         group inline-flex w-fit cursor-default items-center gap-2
-        font-grift global-p5 font-semibold text-primary-1
-      "
+        font-grift global-p5 font-semibold ${dark ? 'text-primary-2' : 'text-primary-1 '} 
+      `}
     >
       <span ref={leftArrowRef} className="inline-block will-change-transform">
         &lt;

@@ -19,7 +19,7 @@ const CTA_TEXT_MAX = 60
 const INTRO_MAX = 180
 const PRODUCT_MAX = 100
 const OFFICE_TIME_MAX = 120
-const BRANDING_TEXT_MAX = 160
+const WHATSAPP_MAX = 50
 const TERMS_CONDITION_MAX = 180
 
 /* ---------------- validators ---------------- */
@@ -408,14 +408,27 @@ const Footer: GlobalConfig = {
               validate: validateAbsoluteHTTPUrl(URL_MAX, true),
               admin: { width: '50%' },
             },
+            // {
+            //   name: 'whatsApp',
+            //   type: 'text',
+            //   label: 'Whats App URL',
+            //   required: true,
+            //   maxLength: URL_MAX,
+            //   validate: validateAbsoluteHTTPUrl(URL_MAX, true),
+            //   admin: { width: '50%' },
+            // },
             {
               name: 'whatsApp',
               type: 'text',
-              label: 'Whats App URL',
+              label: 'WhatsApp URL',
               required: true,
               maxLength: URL_MAX,
               validate: validateAbsoluteHTTPUrl(URL_MAX, true),
-              admin: { width: '50%' },
+              admin: {
+                width: '50%',
+                description:
+                  'Full WhatsApp URL. Example: https://api.whatsapp.com/send?phone=%2B8801777189611&brid=YQYMKgmDKn-ZQ3Gbr7U7AA',
+              },
             },
           ],
         },

@@ -7,13 +7,14 @@ import Tags from './Tags'
 type Props = {
   data: CompanyIntroBlockType['sectionHeading']
   align: 'left' | 'right' | 'middle'
+  dark?: boolean
 }
 
-// Light version
+// Light And Dark version
 // 2 heading
 // No CTA
 // LefT Right Middle by props
-function SectionHeading01({ data, align }: Props) {
+function SectionHeading01({ data, align, dark = false }: Props) {
   const hasDesc = !!data?.description && !!data?.description?.root?.direction // or lexicalHasRealText(block.description?.root)
 
   return (
@@ -22,11 +23,11 @@ function SectionHeading01({ data, align }: Props) {
       space-y-1 lg:space-y-2 xl:space-y-3 2xl:space-y-4
       `}
     >
-      {data?.tag && <Tags tag={data?.tag} />}
+      {data?.tag && <Tags tag={data?.tag} dark={dark} />}
       <div>
         {data?.heading1 && (
           <div
-            className={`font-agency global-h3 text-secondary-1 
+            className={`font-agency global-h3 ${dark ? 'text-white-2' : 'text-secondary-1 '} 
           ${align === 'left' ? 'text-start' : align === 'right' ? 'text-end' : 'text-center'}`}
           >
             <LocalizedHighlighted
@@ -40,7 +41,7 @@ function SectionHeading01({ data, align }: Props) {
         )}
         {data?.heading2 && (
           <div
-            className={`font-agency global-h3 text-secondary-1 
+            className={`font-agency global-h3 ${dark ? 'text-white-2' : 'text-secondary-1 '}
           ${align === 'left' ? 'text-start' : align === 'right' ? 'text-end' : 'text-center'}`}
           >
             <LocalizedHighlighted
@@ -56,7 +57,7 @@ function SectionHeading01({ data, align }: Props) {
 
       {hasDesc && (
         <div
-          className={`font-grift global-p4 text-secondary-2 
+          className={`font-grift global-p4 ${dark ? 'text-white-1' : 'text-secondary-2 '}
           ${align === 'left' ? 'text-start' : align === 'right' ? 'text-end' : 'text-center'}`}
         >
           <LocalizedRichText en={data.description} bn={data.description} />

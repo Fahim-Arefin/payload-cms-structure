@@ -10,6 +10,8 @@ import { Metadata } from 'next'
 import { Noto_Serif_Bengali } from 'next/font/google'
 import './styles.css'
 import { Toaster } from '@/components/ui/sonner'
+import GlobalSocialLinks from '@/components/custom/shared/GlobalSocialLinks'
+import GlobalScrollButton from '@/components/custom/shared/GlobalScrollButton'
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ['bengali'],
@@ -212,10 +214,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                   classNames: {
                     toast:
                       'group rounded-xl border border-white/10 bg-[#0F172A]/95 text-white shadow-2xl backdrop-blur-md',
-                    title: 'font-manrope text-sm font-semibold text-white',
-                    description: 'font-manrope text-xs text-white/70',
-                    actionButton: 'bg-cyan text-white hover:bg-cyan/90 font-manrope',
-                    cancelButton: 'bg-white/10 text-white hover:bg-white/20 font-manrope',
+                    title: 'font-grift text-[14px] font-semibold text-white',
+                    description: 'font-grift text-[12px] text-white/70',
+                    actionButton: 'bg-cyan text-white hover:bg-cyan/90 font-grift',
+                    cancelButton: 'bg-white/10 text-white hover:bg-white/20 font-grift',
                     closeButton: 'border-white/10 bg-white/5 text-white hover:bg-white/10',
                   },
                 }}
@@ -225,7 +227,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             <div className="">
               <ServerFooter />
             </div>
-            {/* <GlobalContactButtons /> */}
+            <GlobalSocialLinks />
+            <GlobalScrollButton />
           </main>
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
         </Providers>
