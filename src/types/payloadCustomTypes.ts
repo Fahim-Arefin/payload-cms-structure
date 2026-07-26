@@ -4,6 +4,7 @@ import {
   CODING_LANGUAGE_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   COMPANY_INTRO_SLUG_AND_TAG,
+  COMPANY_STATS_SLUG_AND_TAG,
   CONTACT_US_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
@@ -59,4 +60,9 @@ export type ContactUsBlockType = Extract<
 export type ClientSuccessStoriesBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CLIENT_SUCCESS_STORIES_SLUG_AND_TAG }
+>
+
+export type CompanyStatsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof COMPANY_STATS_SLUG_AND_TAG }
 >
