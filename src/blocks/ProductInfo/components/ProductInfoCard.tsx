@@ -18,7 +18,7 @@ function ProductInfoCard({ data }: Props) {
 
   return (
     <div
-      className="border-b-2 border-primary-1/30
+      className="border-b-2 border-primary-1/30 hover:bg-primary-1/30 hover:rounded-[12px] transition-all duration-300
      grid grid-cols-12
     
     pl-[10px] lg:pl-[12px] xl:pl-[34px] 2xl:pl-[56px]
