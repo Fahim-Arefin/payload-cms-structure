@@ -671,27 +671,13 @@ export interface Page {
           } | null;
         };
         /**
-         * Additional company intro description content.
+         * Additional company intro paragraph content.
          */
-        companyIntroDescription?: {
+        companyIntroDescription: {
           /**
-           * Write the company intro description text.
+           * Write the company intro paragraph. Max 1200 characters.
            */
-          description?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
+          paragraph: string;
         };
         id?: string | null;
         blockName?: string | null;
@@ -1618,7 +1604,7 @@ export interface PagesSelect<T extends boolean = true> {
               companyIntroDescription?:
                 | T
                 | {
-                    description?: T;
+                    paragraph?: T;
                   };
               id?: T;
               blockName?: T;
