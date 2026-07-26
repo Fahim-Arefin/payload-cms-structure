@@ -1,21 +1,22 @@
 import WithHashScroller from '@/components/custom/sagar-ropes-shared/others/WithHashScroller'
-import { CompanyIntroBlockType } from '@/types/payloadCustomTypes'
-import CompanyIntroSection from './CompanyIntroSection'
+import { CompanyStatsBlockType } from '@/types/payloadCustomTypes'
+import React from 'react'
+import CompanyStatsSection from './components/CompanyStatsSection'
 
 type Props = {
-  block: CompanyIntroBlockType
+  block: CompanyStatsBlockType
   params: Record<string, string>
 }
 
-function CompanyIntroBlock({ block }: Props) {
+function CompanyStatsBlock({ block }: Props) {
   return (
     <WithHashScroller
       id={block?.sectionSettings?.sectionId}
       bgColor={block?.sectionSettings?.backgroundColor}
     >
-      <CompanyIntroSection block={block} />
+      <CompanyStatsSection block={block} />
     </WithHashScroller>
   )
 }
 
-export default CompanyIntroBlock
+export default CompanyStatsBlock

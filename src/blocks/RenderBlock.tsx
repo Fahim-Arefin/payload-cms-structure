@@ -3,6 +3,7 @@ import {
   CODING_LANGUAGE_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   COMPANY_INTRO_SLUG_AND_TAG,
+  COMPANY_STATS_SLUG_AND_TAG,
   CONTACT_US_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
@@ -20,6 +21,7 @@ import CodingLanguageBlock from './CodingLanguage/CodingLanguageBlock'
 import FounderQuoteBlock from './FounderQuote/FounderQuoteBlock'
 import ProductInfoBlock from './ProductInfo/ProductInfoBlock'
 import ContactUsBlock from './ContactUs/ContactUsBlock'
+import CompanyStatsBlock from './CompanyStats/CompanyStatsBlock'
 
 type Params = Record<string, string>
 
@@ -43,6 +45,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <ProductInfoBlock key={block.id} block={block} params={params} />
     case CONTACT_US_SLUG_AND_TAG:
       return <ContactUsBlock key={block.id} block={block} params={params} />
+    case COMPANY_STATS_SLUG_AND_TAG:
+      return <CompanyStatsBlock key={block.id} block={block} params={params} />
 
     default:
       return null

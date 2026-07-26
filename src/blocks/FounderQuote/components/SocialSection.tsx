@@ -46,8 +46,7 @@ function SocialIcon({ item }: { item: SocialItem }) {
         src={item.normalIcon}
         alt={item.label}
         fill
-        sizes="80px"
-        quality={90}
+        quality={100}
         placeholder="blur"
         blurDataURL={item.normalIcon.blurDataURL}
         className="
@@ -62,8 +61,7 @@ function SocialIcon({ item }: { item: SocialItem }) {
         src={item.coloredIcon}
         alt=""
         fill
-        sizes="80px"
-        quality={90}
+        quality={100}
         placeholder="blur"
         blurDataURL={item.coloredIcon.blurDataURL}
         className="
