@@ -85,6 +85,15 @@ async function GlobalSocialLinks() {
     footerAny?.contactInfo?.email
 
   const items: SocialItem[] = [
+    footer?.social?.facebookUrl
+      ? {
+          label: 'Facebook',
+          href: footer.social.facebookUrl,
+          normalIcon: Facebook,
+          coloredIcon: FacebookColored,
+          external: true,
+        }
+      : null,
     footer?.social?.linkedinUrl
       ? {
           label: 'LinkedIn',
@@ -95,16 +104,14 @@ async function GlobalSocialLinks() {
         }
       : null,
 
-    footer?.social?.facebookUrl
+    email
       ? {
-          label: 'Facebook',
-          href: footer.social.facebookUrl,
-          normalIcon: Facebook,
-          coloredIcon: FacebookColored,
-          external: true,
+          label: 'Email',
+          href: `mailto:${email}`,
+          normalIcon: At,
+          coloredIcon: AtColored,
         }
       : null,
-
     footer?.social?.whatsApp
       ? {
           label: 'WhatsApp',
@@ -112,15 +119,6 @@ async function GlobalSocialLinks() {
           normalIcon: WhatsApp,
           coloredIcon: WhatsAppColored,
           external: true,
-        }
-      : null,
-
-    email
-      ? {
-          label: 'Email',
-          href: `mailto:${email}`,
-          normalIcon: At,
-          coloredIcon: AtColored,
         }
       : null,
   ].filter(Boolean) as SocialItem[]

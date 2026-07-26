@@ -9,7 +9,15 @@ export default {
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  safelist: ['bg-white-1', 'bg-white-2', 'bg-white-3', 'bg-secondary-1', 'bg-secondary-2'],
+  safelist: [
+    'bg-white-1',
+    'bg-white-2',
+    'bg-white-3',
+    'bg-secondary-1',
+    'bg-secondary-2',
+    'bg-primary-1/30',
+    'bg-primary-1/50',
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -84,6 +92,7 @@ export default {
         'white-1': 'rgb(var(--white-1) / <alpha-value>)',
         'white-2': 'rgb(var(--white-2) / <alpha-value>)',
         'white-3': 'rgb(var(--white-3) / <alpha-value>)',
+        'primary-1': 'rgb(var(--primary-1) / <alpha-value>)',
       },
       boxShadow: {
         'custom-black': '0px 0px 10px 0px #00000082',

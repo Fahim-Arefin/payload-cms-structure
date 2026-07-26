@@ -99,3 +99,7 @@ export const CONTACT_US_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/contact-us-blo
 export const CLIENT_SUCCESS_STORIES_SLUG_AND_TAG = 'client-success-stories'
 export const CLIENT_SUCCESS_STORIES_BLOCK_LABEL = 'Client Success Stories'
 export const CLIENT_SUCCESS_STORIES_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/client-success-stories-block-thumbnail.webp`
+
+export const COMPANY_STATS_SLUG_AND_TAG = 'company-stats'
+export const COMPANY_STATS_BLOCK_LABEL = 'Company Stats'
+export const COMPANY_STATS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/company-stats-block-thumbnail.webp`

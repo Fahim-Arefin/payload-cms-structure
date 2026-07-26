@@ -240,35 +240,6 @@ function BasicHeroSection({ block }: Props) {
               </button>
             </div>
           )}
-
-          {/* {hasMultiple && (
-            <div
-              className="absolute z-30
-              left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0
-              md:inset-x-0 md:container-padding-left
-              bottom-10 md:bottom-[70px] xl:bottom-32"
-            >
-              <div className="flex items-center gap-1 md:gap-2 md:pl-1">
-                {Array.from({ length: count || block.heroes.length }).map((_, idx) => {
-                  const isActive = idx === activeIndex
-
-                  return (
-                    <button
-                      key={idx}
-                      type="button"
-                      aria-label={`Go to slide ${idx + 1}`}
-                      onClick={() => api?.scrollTo(idx)}
-                      className={[
-                        'relative h-[8px] transition-all duration-500 ease-out',
-                        isActive ? 'w-[50px] md:w-[80px]' : 'w-[13px] md:w-[26px]',
-                        isActive ? 'bg-[#2FC6C6]' : 'bg-[#2FC6C6]/40 hover:bg-[#2FC6C6]/70',
-                      ].join(' ')}
-                    />
-                  )
-                })}
-              </div>
-            </div>
-          )} */}
         </Carousel>
       </div>
     </section>

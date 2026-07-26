@@ -3,6 +3,7 @@ import ClientSuccessStoriesSchema from '@/blocks/ClientSuccessStories/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
+import CompanyStatsSchema from '@/blocks/CompanyStats/schema'
 import ContactUsSchema from '@/blocks/ContactUs/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
@@ -195,6 +196,7 @@ export const Pages: CollectionConfig = {
         CodingLanguageSchema,
         FounderQuoteSchema,
         ClientSuccessStoriesSchema,
+        CompanyStatsSchema,
 
         // about us page unique
 

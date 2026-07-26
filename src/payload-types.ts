@@ -502,7 +502,9 @@ export interface Page {
           /**
            * Select a background color from the design system.
            */
-          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
           /**
            * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
            */
@@ -579,7 +581,9 @@ export interface Page {
           /**
            * Select a background color from the design system.
            */
-          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
           /**
            * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
            */
@@ -613,7 +617,9 @@ export interface Page {
           /**
            * Select a background color from the design system.
            */
-          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
           /**
            * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
            */
@@ -671,27 +677,13 @@ export interface Page {
           } | null;
         };
         /**
-         * Additional company intro description content.
+         * Additional company intro paragraph content.
          */
-        companyIntroDescription?: {
+        companyIntroDescription: {
           /**
-           * Write the company intro description text.
+           * Write the company intro paragraph. Max 1200 characters.
            */
-          description?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
+          paragraph: string;
         };
         id?: string | null;
         blockName?: string | null;
@@ -703,7 +695,9 @@ export interface Page {
           /**
            * Select a background color from the design system.
            */
-          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
           /**
            * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
            */
@@ -821,7 +815,9 @@ export interface Page {
           /**
            * Select a background color from the design system.
            */
-          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
           /**
            * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
            */
@@ -921,7 +917,9 @@ export interface Page {
           /**
            * Select a background color from the design system.
            */
-          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
           /**
            * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
            */
@@ -1037,7 +1035,9 @@ export interface Page {
           /**
            * Select a background color from the design system.
            */
-          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
           /**
            * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
            */
@@ -1144,7 +1144,9 @@ export interface Page {
           /**
            * Select a background color from the design system.
            */
-          backgroundColor?: ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2') | null;
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
           /**
            * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
            */
@@ -1257,6 +1259,43 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'client-success-stories';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Add company achievement/stat items shown in the stats strip.
+         */
+        companyStats: {
+          /**
+           * Recommended 4 items. Example: 8+ Years, 19+ Projects, +62%, 24/7.
+           */
+          stats: {
+            /**
+             * Main stat value. Example: 8+ Years. Max 30 characters.
+             */
+            value: string;
+            /**
+             * Small text below the value. Example: Average Engineer Tenure. Max 80 characters.
+             */
+            label: string;
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'company-stats';
       }
   )[];
   updatedAt: string;
@@ -1618,7 +1657,7 @@ export interface PagesSelect<T extends boolean = true> {
               companyIntroDescription?:
                 | T
                 | {
-                    description?: T;
+                    paragraph?: T;
                   };
               id?: T;
               blockName?: T;
@@ -1853,6 +1892,30 @@ export interface PagesSelect<T extends boolean = true> {
                                 imageBlurDataURL?: T;
                                 id?: T;
                               };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'company-stats'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              companyStats?:
+                | T
+                | {
+                    stats?:
+                      | T
+                      | {
+                          value?: T;
+                          label?: T;
                           id?: T;
                         };
                   };
