@@ -275,7 +275,11 @@ export interface ContactFormSubmission {
     text: string;
     id?: string | null;
   }[];
-  selectedBudget: string;
+  selectedBudgetLabel: string;
+  selectedCurrencySign: string;
+  selectedCurrencyCode: string;
+  budgetMin: number;
+  budgetMax: number;
   status?: ('new' | 'contacted' | 'closed') | null;
   updatedAt: string;
   createdAt: string;
@@ -1460,7 +1464,11 @@ export interface ContactFormSubmissionsSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
-  selectedBudget?: T;
+  selectedBudgetLabel?: T;
+  selectedCurrencySign?: T;
+  selectedCurrencyCode?: T;
+  budgetMin?: T;
+  budgetMax?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -2101,7 +2109,7 @@ export interface Footer {
   createdAt?: string | null;
 }
 /**
- * Global Contact Us options: our solutions and budget ranges.
+ * Global Contact Us options: our solutions, currencies and budget range.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-contact-us".
@@ -2121,17 +2129,40 @@ export interface GlobalContactUs {
       }[]
     | null;
   /**
-   * Examples: BELOW 1K USD, 1K-3K USD, 3K-5K USD.
+   * Examples: $, USD / ৳, BDT / ¥, JPY.
    */
-  budgets?:
-    | {
-        /**
-         * Budget range text. Max 100 characters.
-         */
-        text: string;
-        id?: string | null;
-      }[]
-    | null;
+  currencies: {
+    /**
+     * Example: $, ৳, ¥.
+     */
+    currencySign: string;
+    /**
+     * Example: USD, BDT, JPY.
+     */
+    currencyCode: string;
+    id?: string | null;
+  }[];
+  /**
+   * Controls the frontend budget range selector.
+   */
+  budgetRange: {
+    /**
+     * Example: 0.
+     */
+    minValue: number;
+    /**
+     * Example: 10000000.
+     */
+    maxValue: number;
+    /**
+     * Example: 100000.
+     */
+    defaultMinValue?: number | null;
+    /**
+     * Example: 10000000.
+     */
+    defaultMaxValue?: number | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2262,11 +2293,20 @@ export interface GlobalContactUsSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
-  budgets?:
+  currencies?:
     | T
     | {
-        text?: T;
+        currencySign?: T;
+        currencyCode?: T;
         id?: T;
+      };
+  budgetRange?:
+    | T
+    | {
+        minValue?: T;
+        maxValue?: T;
+        defaultMinValue?: T;
+        defaultMaxValue?: T;
       };
   updatedAt?: T;
   createdAt?: T;
