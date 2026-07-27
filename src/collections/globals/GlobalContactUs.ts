@@ -11,13 +11,15 @@ import { validateShortText } from '@/utils/block/fields-validation'
 import { revalidateTag } from 'next/cache'
 
 const OPTION_TEXT_MAX = 100
+const CURRENCY_SIGN_MAX = 10
+const CURRENCY_CODE_MAX = 10
 
 const GlobalContactUs: GlobalConfig = {
   slug: GLOBAL_CONTACT_US_SLUG_AND_TAG,
   label: GLOBAL_CONTACT_US_LABEL,
 
   admin: {
-    description: 'Global Contact Us options: our solutions and budget ranges.',
+    description: 'Global Contact Us options: our solutions, currencies and budget range.',
   },
 
   access: {
@@ -56,29 +58,118 @@ const GlobalContactUs: GlobalConfig = {
     },
 
     {
-      name: 'budgets',
+      name: 'currencies',
       type: 'array',
-      label: 'Budget Options',
+      label: 'Currencies',
+      required: true,
       minRows: 1,
-      maxRows: 30,
+      maxRows: 20,
       labels: {
-        singular: 'Budget',
-        plural: 'Budgets',
+        singular: 'Currency',
+        plural: 'Currencies',
       },
       admin: {
-        description: 'Examples: BELOW 1K USD, 1K-3K USD, 3K-5K USD.',
+        description: 'Examples: $, USD / ৳, BDT / ¥, JPY.',
       },
       fields: [
         {
-          name: 'text',
-          type: 'text',
-          label: 'Budget Text',
-          required: true,
-          maxLength: OPTION_TEXT_MAX,
-          validate: validateShortText('Budget Text', OPTION_TEXT_MAX, true),
-          admin: {
-            description: `Budget range text. Max ${OPTION_TEXT_MAX} characters.`,
-          },
+          type: 'row',
+          fields: [
+            {
+              name: 'currencySign',
+              type: 'text',
+              label: 'Currency Sign',
+              required: true,
+              maxLength: CURRENCY_SIGN_MAX,
+              validate: validateShortText('Currency Sign', CURRENCY_SIGN_MAX, true),
+              admin: {
+                width: '50%',
+                description: 'Example: $, ৳, ¥.',
+              },
+            },
+            {
+              name: 'currencyCode',
+              type: 'text',
+              label: 'Currency Code',
+              required: true,
+              maxLength: CURRENCY_CODE_MAX,
+              validate: validateShortText('Currency Code', CURRENCY_CODE_MAX, true),
+              admin: {
+                width: '50%',
+                description: 'Example: USD, BDT, JPY.',
+              },
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      name: 'budgetRange',
+      type: 'group',
+      label: 'Budget Range',
+      admin: {
+        description: 'Controls the frontend budget range selector.',
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'minValue',
+              type: 'number',
+              label: 'Minimum Budget Value',
+              required: true,
+              defaultValue: 100000,
+              min: 0,
+              admin: {
+                width: '50%',
+                description: 'Example: 0.',
+              },
+            },
+            {
+              name: 'maxValue',
+              type: 'number',
+              label: 'Maximum Budget Value',
+              required: true,
+              defaultValue: 10000000,
+              min: 1,
+              admin: {
+                width: '50%',
+                description: 'Example: 10000000.',
+              },
+            },
+          ],
+        },
+
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'defaultMinValue',
+              type: 'number',
+              label: 'Default Selected Minimum',
+              required: false,
+              defaultValue: 100000,
+              min: 0,
+              admin: {
+                width: '50%',
+                description: 'Example: 100000.',
+              },
+            },
+            {
+              name: 'defaultMaxValue',
+              type: 'number',
+              label: 'Default Selected Maximum',
+              required: false,
+              defaultValue: 10000000,
+              min: 1,
+              admin: {
+                width: '50%',
+                description: 'Example: 10000000.',
+              },
+            },
+          ],
         },
       ],
     },

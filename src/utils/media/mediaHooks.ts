@@ -68,15 +68,15 @@ export const mediaHooks = withMediaLifecycle({
       blockType: CODING_LANGUAGE_SLUG_AND_TAG,
       groupKey: 'languageImages',
       arrayKey: 'languages',
-      mediaFields: ['transparentColoredImage', 'transparentNormalImage'],
+      mediaFields: ['transparentColoredImage'],
     },
-    {
-      layoutKey: 'layout',
-      blockType: CODING_LANGUAGE_SLUG_AND_TAG,
-      groupKey: 'languageImages',
-      arrayKey: 'languagesTwo',
-      mediaFields: ['transparentNormalImage', 'transparentColoredImage'],
-    },
+    // {
+    //   layoutKey: 'layout',
+    //   blockType: CODING_LANGUAGE_SLUG_AND_TAG,
+    //   groupKey: 'languageImages',
+    //   arrayKey: 'languagesTwo',
+    //   mediaFields: ['transparentNormalImage', 'transparentColoredImage'],
+    // },
     {
       layoutKey: 'layout',
       blockType: CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,

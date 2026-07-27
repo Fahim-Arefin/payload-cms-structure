@@ -5,7 +5,6 @@ import { roleAtLeast } from '@/lib/rbac'
 
 const TEXT_MAX = 120
 const PHONE_MAX = 40
-const EMAIL_MAX = 120
 
 const ContactFormSubmissions: CollectionConfig = {
   slug: CONTACT_FORM_SUBMISSIONS_SLUG,
@@ -17,7 +16,7 @@ const ContactFormSubmissions: CollectionConfig = {
 
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'email', 'phone', 'selectedBudget', 'createdAt'],
+    defaultColumns: ['name', 'email', 'phone', 'selectedBudgetLabel', 'createdAt'],
     description: 'Submitted data from the frontend Contact Us form.',
     group: FORMS,
   },
@@ -66,13 +65,59 @@ const ContactFormSubmissions: CollectionConfig = {
         },
       ],
     },
+
     {
-      name: 'selectedBudget',
+      name: 'selectedBudgetLabel',
       type: 'text',
       label: 'Selected Budget',
       required: true,
       maxLength: TEXT_MAX,
     },
+
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'selectedCurrencySign',
+          type: 'text',
+          label: 'Currency Sign',
+          required: true,
+          maxLength: 10,
+          admin: {
+            width: '25%',
+          },
+        },
+        {
+          name: 'selectedCurrencyCode',
+          type: 'text',
+          label: 'Currency Code',
+          required: true,
+          maxLength: 10,
+          admin: {
+            width: '25%',
+          },
+        },
+        {
+          name: 'budgetMin',
+          type: 'number',
+          label: 'Budget Min',
+          required: true,
+          admin: {
+            width: '25%',
+          },
+        },
+        {
+          name: 'budgetMax',
+          type: 'number',
+          label: 'Budget Max',
+          required: true,
+          admin: {
+            width: '25%',
+          },
+        },
+      ],
+    },
+
     {
       name: 'status',
       type: 'select',

@@ -1,160 +1,159 @@
-// import { CodingLanguageBlockType } from '@/types/payloadCustomTypes'
-// import Image from 'next/image'
-// import React from 'react'
-
-// type Props = {
-//   data: CodingLanguageBlockType['languageImages']['languages'][number]
-// }
-
-// function CodingLanguageImage({ data }: Props) {
-//   return (
-//     <div className="relative w-[160px] aspect-[1/1] ">
-//       {typeof data?.transparentNormalImage === 'object' && data?.transparentNormalImage?.url && (
-//         <Image
-//           src={data?.transparentNormalImage?.url}
-//           alt="Normal language image"
-//           fill
-//           sizes="100vw"
-//           quality={90}
-//           placeholder="blur"
-//           blurDataURL={data?.transparentNormalImageBlurDataURL || ''}
-//           className="w-full h-full"
-//         />
-//       )}
-//     </div>
-//   )
-// }
-
-// export default CodingLanguageImage
-
 'use client'
 
-import { CodingLanguageBlockType } from '@/types/payloadCustomTypes'
 import { gsap, useGSAP } from '@/lib/gsap'
+import { CodingLanguageBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import React, { useRef } from 'react'
 
-type LanguageImage1 = NonNullable<
+type LanguageImage = NonNullable<
   NonNullable<CodingLanguageBlockType['languageImages']>['languages']
 >[number]
 
-type LanguageImage2 = NonNullable<
-  NonNullable<CodingLanguageBlockType['languageImages']>['languagesTwo']
->[number]
-
 type Props = {
-  data: LanguageImage1 | LanguageImage2
+  data: LanguageImage
+  index: number
+  position: {
+    x: number
+    y: number
+  }
 }
 
-function CodingLanguageImage({ data }: Props) {
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
-  const normalRef = useRef<HTMLDivElement | null>(null)
-  const coloredRef = useRef<HTMLDivElement | null>(null)
+function CodingLanguageImage({ data, index, position }: Props) {
+  const imageRef = useRef<HTMLImageElement | null>(null)
+  const labelRef = useRef<HTMLDivElement | null>(null)
+  const itemRef = useRef<HTMLDivElement | null>(null)
 
-  const normalImage =
-    typeof data?.transparentNormalImage === 'object' ? data.transparentNormalImage : null
-
-  const coloredImage =
+  const stackImage =
     typeof data?.transparentColoredImage === 'object' ? data.transparentColoredImage : null
 
-  useGSAP(
-    () => {
-      const wrapper = wrapperRef.current
-      const normal = normalRef.current
-      const colored = coloredRef.current
+  useGSAP(() => {
+    gsap.set(imageRef.current, {
+      scale: 1,
+      transformOrigin: 'center center',
+    })
 
-      if (!wrapper || !normal || !colored) return
+    gsap.set(labelRef.current, {
+      autoAlpha: 0,
+      y: 8,
+      scale: 0.96,
+    })
+  }, [])
 
-      gsap.set(normal, {
-        opacity: 1,
-      })
+  const handleMouseEnter = () => {
+    gsap.killTweensOf([imageRef.current, labelRef.current])
 
-      gsap.set(colored, {
-        opacity: 0,
-      })
+    if (itemRef.current) {
+      itemRef.current.style.zIndex = '80'
+    }
 
-      const enter = () => {
-        gsap.to(normal, {
-          opacity: 0,
-          duration: 0.32,
-          ease: 'power1.out',
-          overwrite: 'auto',
-        })
+    gsap.to(imageRef.current, {
+      scale: 1.5,
+      duration: 0.35,
+      ease: 'power3.out',
+      overwrite: 'auto',
+    })
 
-        gsap.to(colored, {
-          opacity: 1,
-          duration: 0.32,
-          ease: 'power1.out',
-          overwrite: 'auto',
-        })
-      }
+    gsap.to(labelRef.current, {
+      autoAlpha: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.25,
+      ease: 'power3.out',
+      overwrite: 'auto',
+    })
+  }
 
-      const leave = () => {
-        gsap.to(normal, {
-          opacity: 1,
-          duration: 0.32,
-          ease: 'power1.out',
-          overwrite: 'auto',
-        })
+  const handleMouseLeave = () => {
+    gsap.killTweensOf([imageRef.current, labelRef.current])
 
-        gsap.to(colored, {
-          opacity: 0,
-          duration: 0.32,
-          ease: 'power1.out',
-          overwrite: 'auto',
-        })
-      }
+    gsap.to(imageRef.current, {
+      scale: 1,
+      duration: 0.3,
+      ease: 'power3.out',
+      overwrite: 'auto',
+    })
 
-      wrapper.addEventListener('mouseenter', enter)
-      wrapper.addEventListener('mouseleave', leave)
+    gsap.to(labelRef.current, {
+      autoAlpha: 0,
+      y: 8,
+      scale: 0.96,
+      duration: 0.2,
+      ease: 'power2.out',
+      overwrite: 'auto',
+      onComplete: () => {
+        if (itemRef.current) {
+          itemRef.current.style.zIndex = String(index + 1)
+        }
+      },
+    })
+  }
 
-      return () => {
-        wrapper.removeEventListener('mouseenter', enter)
-        wrapper.removeEventListener('mouseleave', leave)
-      }
-    },
-    { scope: wrapperRef },
-  )
-
-  if (!normalImage?.url && !coloredImage?.url) return null
+  if (!stackImage?.url) return null
 
   return (
     <div
-      ref={wrapperRef}
+      ref={itemRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className="
-        relative shrink-0 
-        w-[100px] lg:w-[135px] xl:w-[165px] 2xl:w-[170px] aspect-[1/1] 
+        absolute isolate flex cursor-pointer flex-col items-center justify-center
+        -translate-x-1/2 -translate-y-1/2
+        w-[78px] h-[78px]
+        sm:w-[88px] sm:h-[88px]
+        lg:w-[108px] lg:h-[108px]
+        xl:w-[122px] xl:h-[122px]
+        2xl:w-[136px] 2xl:h-[136px]
       "
+      style={{
+        left: `${position.x}%`,
+        top: `${position.y}%`,
+        zIndex: index + 1,
+      }}
     >
-      {normalImage?.url && (
-        <div ref={normalRef} className="absolute inset-0 will-change-[opacity]">
-          <Image
-            src={normalImage.url}
-            alt={'Normal language image'}
-            fill
-            sizes="(max-width: 640px) 130px, (max-width: 1024px) 145px, (max-width: 1439px) 155px, (max-width: 1700px) 165px, 175px"
-            quality={90}
-            placeholder={data?.transparentNormalImageBlurDataURL ? 'blur' : 'empty'}
-            blurDataURL={data?.transparentNormalImageBlurDataURL || undefined}
-            className="object-contain"
-          />
-        </div>
-      )}
+      <div
+        className="
+          relative z-10
+          size-[32px]
+          sm:size-[38px]
+          md:size-[42px]
+          lg:size-[48px]
+          xl:size-[54px]
+          2xl:size-[60px]
+        "
+      >
+        <Image
+          ref={imageRef}
+          src={stackImage.url}
+          alt={data?.stackName || 'Stack logo'}
+          fill
+          sizes="130px"
+          quality={100}
+          placeholder={data?.transparentColoredImageBlurDataURL ? 'blur' : 'empty'}
+          blurDataURL={data?.transparentColoredImageBlurDataURL || undefined}
+          className="
+            object-contain
+            will-change-transform
+          "
+        />
+      </div>
 
-      {coloredImage?.url && (
-        <div ref={coloredRef} className="absolute inset-0 will-change-[opacity]">
-          <Image
-            src={coloredImage.url}
-            alt={'Colored language image'}
-            fill
-            sizes="(max-width: 640px) 130px, (max-width: 1024px) 145px, (max-width: 1439px) 155px, (max-width: 1700px) 165px, 175px"
-            quality={90}
-            placeholder={data?.transparentColoredImageBlurDataURL ? 'blur' : 'empty'}
-            blurDataURL={data?.transparentColoredImageBlurDataURL || undefined}
-            className="object-contain"
-          />
-        </div>
-      )}
+      <div
+        ref={labelRef}
+        className="
+          pointer-events-none absolute left-1/2 top-[74%] z-20
+          -translate-x-1/2 whitespace-nowrap
+          rounded-full
+          border border-primary-1/20
+          bg-white-1/95
+          px-3 py-1
+          font-grift text-[10px] font-semibold text-secondary-1
+          shadow-[0_10px_24px_rgba(10,17,40,0.10)]
+          lg:text-[11px]
+          xl:text-[12px]
+        "
+      >
+        {data?.stackName}
+      </div>
     </div>
   )
 }

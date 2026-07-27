@@ -1,59 +1,76 @@
-// import { CodingLanguageBlockType } from '@/types/payloadCustomTypes'
-// import React from 'react'
-// import CodingLanguageImage from './CodingLanguageImage'
-// import Marquee from 'react-fast-marquee'
-
-// type Props = {
-//   data: CodingLanguageBlockType
-// }
-
-// function CodingLanguageImageSection({ data }: Props) {
-//   const languages = data?.languageImages?.languages ?? []
-
-//   if (!languages.length) return null
-
-//   return (
-//     <Marquee autoFill pauseOnHover speed={35} gradient={false}>
-//       <div className="flex items-center gap-[28px] sm:gap-[36px] lg:gap-[48px] xl:gap-[56px] 2xl:gap-[64px] pr-[28px] sm:pr-[36px] lg:pr-[48px] xl:pr-[56px] 2xl:pr-[64px]">
-//         {languages.map((image, i) => (
-//           <CodingLanguageImage key={i} data={image} />
-//         ))}
-//       </div>
-//     </Marquee>
-//   )
-// }
-
-// export default CodingLanguageImageSection
-import React from 'react'
-import Marquee from 'react-fast-marquee'
-import CodingLanguageImage from './CodingLanguageImage'
 import { CodingLanguageBlockType } from '@/types/payloadCustomTypes'
+import React from 'react'
+import CodingLanguageImage from './CodingLanguageImage'
 
-type LanguageImage1 = NonNullable<
+type LanguageImage = NonNullable<
   NonNullable<CodingLanguageBlockType['languageImages']>['languages']
 >[number]
 
-type LanguageImage2 = NonNullable<
-  NonNullable<CodingLanguageBlockType['languageImages']>['languagesTwo']
->[number]
-
 type Props = {
-  languages?: LanguageImage1[] | LanguageImage2[]
-  direction?: 'left' | 'right'
-  speed?: number
+  languages?: LanguageImage[]
 }
 
-function CodingLanguageImageSection({ languages = [], direction = 'left', speed = 35 }: Props) {
+const stackPositions = [
+  { x: 9, y: 34 },
+  { x: 20, y: 16 },
+  { x: 31, y: 31 },
+  { x: 42, y: 12 },
+  { x: 53, y: 18 },
+  { x: 66, y: 17 },
+  { x: 82, y: 18 },
+
+  { x: 22, y: 46 },
+  { x: 40, y: 42 },
+  { x: 53, y: 44 },
+  { x: 66, y: 39 },
+  { x: 77, y: 39 },
+  { x: 90, y: 38 },
+
+  { x: 14, y: 60 },
+  { x: 34, y: 59 },
+  { x: 45, y: 63 },
+  { x: 62, y: 60 },
+  { x: 76, y: 61 },
+  { x: 88, y: 60 },
+
+  { x: 9, y: 77 },
+  { x: 19, y: 89 },
+  { x: 32, y: 83 },
+  { x: 47, y: 87 },
+  { x: 60, y: 82 },
+  { x: 72, y: 85 },
+  { x: 83, y: 82 },
+
+  { x: 28, y: 18 },
+  { x: 49, y: 72 },
+  { x: 69, y: 72 },
+  { x: 92, y: 76 },
+]
+
+function CodingLanguageImageSection({ languages = [] }: Props) {
   if (!languages.length) return null
 
   return (
-    <Marquee autoFill pauseOnHover speed={speed} gradient={false} direction={direction}>
-      <div className="flex items-center gap-[28px] pr-[28px] sm:gap-[36px] sm:pr-[36px] lg:gap-[48px] lg:pr-[48px] xl:gap-[56px] xl:pr-[56px] 2xl:gap-[64px] 2xl:pr-[64px]">
-        {languages.map((image, i) => (
-          <CodingLanguageImage key={i} data={image} />
-        ))}
-      </div>
-    </Marquee>
+    <div
+      className="
+        relative mx-auto w-full max-w-[1280px]
+        h-[430px]
+        sm:h-[480px]
+        md:h-[470px]
+        lg:h-[500px]
+        xl:h-[540px]
+        2xl:h-[590px]
+      "
+    >
+      {languages.slice(0, 30).map((language, index) => (
+        <CodingLanguageImage
+          key={index}
+          data={language}
+          index={index}
+          position={stackPositions[index % stackPositions.length]}
+        />
+      ))}
+    </div>
   )
 }
 
