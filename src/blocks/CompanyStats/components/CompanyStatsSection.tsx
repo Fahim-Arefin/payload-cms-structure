@@ -101,6 +101,8 @@ function CompanyStatsSection({ block }: Props) {
 
       const trigger = ScrollTrigger.create({
         trigger: section,
+        // start: 'top 80%',
+        // start: 'center center',
         start: 'top 80%',
         once: true,
         onEnter: () => {
