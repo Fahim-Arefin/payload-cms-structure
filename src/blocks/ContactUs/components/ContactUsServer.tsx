@@ -21,15 +21,16 @@ async function ContactUsServer({ block }: Props) {
 
   return (
     <div>
-      {globalContactData?.budgets &&
+      {globalContactData?.currencies &&
       globalContactData?.ourSolutions &&
-      globalContactData?.budgets?.length > 0 &&
+      globalContactData?.budgetRange &&
+      globalContactData?.currencies?.length > 0 &&
       globalContactData?.ourSolutions?.length > 0 ? (
         <ContactUsClient globalContactData={globalContactData} block={block} />
       ) : (
         <NoDataFound
           message="No Data Found"
-          description={`Please fill up ${GLOBAL_CONTACT_US_LABEL} collection data (Both Solution and Budget array)`}
+          description={`Please fill up ${GLOBAL_CONTACT_US_LABEL} collection data (Solutions, Currencies and Budget Range)`}
           bgColor={block?.sectionSettings?.backgroundColor || ''}
         />
       )}
