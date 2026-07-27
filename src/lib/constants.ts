@@ -61,7 +61,7 @@ export const NEWS = 'News And Events'
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
 export const BASIC_HERO_BLOCK_LABEL = 'Hero (Basic)'
 export const BASIC_HERO_CACHE_KEY = 'basic-hero-data'
-export const BASIC_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/basic-hero-block-thumbnail.jpg`
+export const BASIC_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/basic-hero-block-thumbnail.webp`
 
 export const PRODUCT_HERO_SLUG_AND_TAG = 'product-hero'
 export const PRODUCT_HERO_BLOCK_LABEL = 'Hero (Product)'

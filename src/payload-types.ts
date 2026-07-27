@@ -977,45 +977,19 @@ export interface Page {
           } | null;
         };
         /**
-         * Add coding language logo images. Each item has a transparent colored version and a white-2 version.
+         * Add coding stack logo images with stack name.
          */
         languageImages: {
           /**
-           * Add language logo pairs. Upload both transparent normal and colored images for each language.
+           * Add up to 30 coding stack logos.
            */
           languages: {
             /**
-             * Upload the normal version of the language logo. Recommended square/SVG-like transparent PNG.
+             * Example: React, Next.js, Laravel. Max 40 characters.
              */
-            transparentNormalImage: string | Media;
-            transparentNormalImageOriginal?: (string | null) | Media;
-            pendingTransparentNormalImageOriginal?: string | null;
-            pendingTransparentNormalImageCrop?: string | null;
-            transparentNormalImageBlurDataURL?: string | null;
+            stackName: string;
             /**
-             * Upload the transparent colored version of the language logo. Recommended square/SVG-like transparent PNG.
-             */
-            transparentColoredImage: string | Media;
-            transparentColoredImageOriginal?: (string | null) | Media;
-            pendingTransparentColoredImageOriginal?: string | null;
-            pendingTransparentColoredImageCrop?: string | null;
-            transparentColoredImageBlurDataURL?: string | null;
-            id?: string | null;
-          }[];
-          /**
-           * Add second set of language logo pairs. Upload both transparent normal and colored images for each language.
-           */
-          languagesTwo: {
-            /**
-             * Upload the normal version of the language logo. Recommended square/SVG-like transparent PNG.
-             */
-            transparentNormalImage: string | Media;
-            transparentNormalImageOriginal?: (string | null) | Media;
-            pendingTransparentNormalImageOriginal?: string | null;
-            pendingTransparentNormalImageCrop?: string | null;
-            transparentNormalImageBlurDataURL?: string | null;
-            /**
-             * Upload the transparent colored version of the language logo. Recommended square/SVG-like transparent PNG.
+             * Upload the colored version of the stack logo. Recommended square transparent PNG/SVG-like image.
              */
             transparentColoredImage: string | Media;
             transparentColoredImageOriginal?: (string | null) | Media;
@@ -1773,26 +1747,7 @@ export interface PagesSelect<T extends boolean = true> {
                     languages?:
                       | T
                       | {
-                          transparentNormalImage?: T;
-                          transparentNormalImageOriginal?: T;
-                          pendingTransparentNormalImageOriginal?: T;
-                          pendingTransparentNormalImageCrop?: T;
-                          transparentNormalImageBlurDataURL?: T;
-                          transparentColoredImage?: T;
-                          transparentColoredImageOriginal?: T;
-                          pendingTransparentColoredImageOriginal?: T;
-                          pendingTransparentColoredImageCrop?: T;
-                          transparentColoredImageBlurDataURL?: T;
-                          id?: T;
-                        };
-                    languagesTwo?:
-                      | T
-                      | {
-                          transparentNormalImage?: T;
-                          transparentNormalImageOriginal?: T;
-                          pendingTransparentNormalImageOriginal?: T;
-                          pendingTransparentNormalImageCrop?: T;
-                          transparentNormalImageBlurDataURL?: T;
+                          stackName?: T;
                           transparentColoredImage?: T;
                           transparentColoredImageOriginal?: T;
                           pendingTransparentColoredImageOriginal?: T;
