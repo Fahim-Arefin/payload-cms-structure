@@ -91,6 +91,67 @@ function CompanyStatsSection({ block }: Props) {
 
   const stats = block?.companyStats?.stats ?? []
 
+  // useGSAP(
+  //   () => {
+  //     const section = sectionRef.current
+
+  //     if (!section || !stats.length || hasAnimatedRef.current) return
+
+  //     gsap.registerPlugin(ScrollTrigger)
+
+  //     const trigger = ScrollTrigger.create({
+  //       trigger: section,
+  //       // start: 'top 80%',
+  //       // start: 'center center',
+  //       start: 'top 80%',
+  //       once: true,
+  //       onEnter: () => {
+  //         hasAnimatedRef.current = true
+
+  //         stats.forEach((stat, index) => {
+  //           const element = valueRefs.current[index]
+  //           const parsed = parseStatValue(stat?.value)
+
+  //           if (!element) return
+
+  //           if (!parsed.hasNumber) {
+  //             element.textContent = parsed.original
+  //             return
+  //           }
+
+  //           const counter = {
+  //             value: 0,
+  //           }
+
+  //           gsap.to(counter, {
+  //             value: parsed.number,
+  //             duration: 2,
+  //             ease: 'power2.out',
+  //             delay: index * 0.08,
+  //             onUpdate: () => {
+  //               element.textContent = `${parsed.prefix}${formatValue(
+  //                 counter.value,
+  //                 parsed.decimals,
+  //               )}${parsed.suffix}`
+  //             },
+  //             onComplete: () => {
+  //               element.textContent = parsed.original
+  //             },
+  //           })
+  //         })
+  //       },
+  //     })
+
+  //     return () => {
+  //       trigger.kill()
+  //     }
+  //   },
+  //   {
+  //     scope: sectionRef,
+  //     dependencies: [stats.length],
+  //   },
+  // )
+
   useGSAP(
     () => {
       const section = sectionRef.current
@@ -101,11 +162,14 @@ function CompanyStatsSection({ block }: Props) {
 
       const trigger = ScrollTrigger.create({
         trigger: section,
-        // start: 'top 80%',
-        // start: 'center center',
-        start: 'top 80%',
+
+        // starts as soon as the section becomes visible
+        start: 'top bottom',
+
         once: true,
         onEnter: () => {
+          if (hasAnimatedRef.current) return
+
           hasAnimatedRef.current = true
 
           stats.forEach((stat, index) => {
@@ -140,6 +204,10 @@ function CompanyStatsSection({ block }: Props) {
             })
           })
         },
+      })
+
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh()
       })
 
       return () => {
