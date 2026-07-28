@@ -300,7 +300,7 @@
   }
   /* modified */
   .global-h4 {
-    @apply text-[20px] md:text-[26px] lg:text-[40px] xl:text-[59px] 2xl:text-[65px] leading-[112.5%];
+    @apply text-[20px] md:text-[26px] lg:text-[37px] xl:text-[55px] 2xl:text-[65px] leading-[112.5%];
   }
 
   /* modified */

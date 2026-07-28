@@ -985,7 +985,7 @@ export interface Page {
          */
         languageImages: {
           /**
-           * Add up to 30 coding stack logos.
+           * Add up to 25 coding stack logos.
            */
           languages: {
             /**

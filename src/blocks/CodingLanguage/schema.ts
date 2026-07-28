@@ -88,13 +88,13 @@ const CodingLanguageSchema: Block = {
           label: 'Coding Stack Images',
           required: true,
           minRows: 1,
-          maxRows: 30,
+          maxRows: 25,
           labels: {
             singular: 'Coding Stack',
             plural: 'Coding Stacks',
           },
           admin: {
-            description: 'Add up to 30 coding stack logos.',
+            description: 'Add up to 25 coding stack logos.',
           },
           fields: [
             {
