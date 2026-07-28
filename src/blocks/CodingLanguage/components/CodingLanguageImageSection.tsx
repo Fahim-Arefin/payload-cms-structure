@@ -146,21 +146,39 @@ function CodingLanguageImageSection({ languages = [] }: Props) {
 
   return (
     <div
+      // className="
+      //   relative mx-auto w-full
+      //   max-w-[560px]
+      //   sm:max-w-[640px]
+      //   md:max-w-[760px]
+      //   lg:max-w-[860px]
+      //   xl:max-w-[960px]
+      //   2xl:max-w-[1040px]
+      //   h-[250px]
+      //   sm:h-[285px]
+      //   md:h-[320px]
+      //   lg:h-[355px]
+      //   xl:h-[390px]
+      //   2xl:h-[420px]
+      //   overflow-visible
+      //   border border-black
+      // "
       className="
         relative mx-auto w-full
         max-w-[560px]
         sm:max-w-[640px]
         md:max-w-[760px]
         lg:max-w-[860px]
-        xl:max-w-[960px]
-        2xl:max-w-[1040px]
+        xl:max-w-[95%]
+        2xl:max-w-[88%]
         h-[250px]
         sm:h-[285px]
         md:h-[320px]
         lg:h-[355px]
-        xl:h-[390px]
-        2xl:h-[420px]
+        xl:h-[410px]
+        2xl:h-[470px]
         overflow-visible
+        
       "
     >
       {validLanguages.map((language, index) => (
