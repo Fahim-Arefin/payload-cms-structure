@@ -142,7 +142,7 @@ function Menu({ data, footerData, suggestions }: Props) {
           opacity-100
         `
         : `
-          text-secondary-1/80
+          text-primary-1
           hover:bg-primary-1
           hover:text-white-1
           hover:pl-6
@@ -201,7 +201,7 @@ function Menu({ data, footerData, suggestions }: Props) {
                 >
                   <div
                     className="
-                      overflow-hidden rounded-[18px]
+                      overflow-hidden rounded-[8px]
                       border border-primary-2/30
                       bg-white-1/95
                       shadow-[0_20px_50px_rgba(10,17,40,0.18)]
@@ -214,7 +214,7 @@ function Menu({ data, footerData, suggestions }: Props) {
                         href={child.href}
                         className={childLinkClass(isItemActive(child.href))}
                       >
-                        <span className="relative z-10">
+                        <span className="relative z-10 ">
                           <LocalizedText en={child.label} bn={child.label} />
                         </span>
                       </Link>
