@@ -5,6 +5,7 @@ import {
   COMPANY_INTRO_SLUG_AND_TAG,
   COMPANY_STATS_SLUG_AND_TAG,
   CONTACT_US_SLUG_AND_TAG,
+  EMPLOYEE_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
@@ -22,6 +23,7 @@ import FounderQuoteBlock from './FounderQuote/FounderQuoteBlock'
 import ProductInfoBlock from './ProductInfo/ProductInfoBlock'
 import ContactUsBlock from './ContactUs/ContactUsBlock'
 import CompanyStatsBlock from './CompanyStats/CompanyStatsBlock'
+import EmplyeeBlock from './Employee/EmplyeeBlock'
 
 type Params = Record<string, string>
 
@@ -47,6 +49,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <ContactUsBlock key={block.id} block={block} params={params} />
     case COMPANY_STATS_SLUG_AND_TAG:
       return <CompanyStatsBlock key={block.id} block={block} params={params} />
+    case EMPLOYEE_SLUG_AND_TAG:
+      return <EmplyeeBlock key={block.id} block={block} params={params} />
 
     default:
       return null

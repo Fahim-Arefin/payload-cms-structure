@@ -5,6 +5,7 @@ import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
 import CompanyStatsSchema from '@/blocks/CompanyStats/schema'
 import ContactUsSchema from '@/blocks/ContactUs/schema'
+import EmployeeSchema from '@/blocks/Employee/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
@@ -199,7 +200,7 @@ export const Pages: CollectionConfig = {
         CompanyStatsSchema,
 
         // about us page unique
-
+        EmployeeSchema,
         // Product Page
 
         // Get In Touch
