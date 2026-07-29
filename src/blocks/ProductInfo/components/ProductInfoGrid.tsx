@@ -15,8 +15,11 @@ function ProductInfoGrid({ block }: Props) {
       className="container-padding grid grid-cols-1 md:grid-cols-3 
     gap-4 lg:gap-12 xl:gap-14 2xl:gap-16"
     >
-      <div className="col-span-1">
+      <div className="hidden md:block col-span-1">
         <SectionHeading01 data={block?.sectionHeading} align="left" dark />
+      </div>
+      <div className="md:hidden col-span-1">
+        <SectionHeading01 data={block?.sectionHeading} align="middle" dark />
       </div>
       <div className="col-span-1 md:col-span-2">
         <ProductInfoSection data={block?.productInfo} />
