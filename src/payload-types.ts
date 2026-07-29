@@ -1275,6 +1275,102 @@ export interface Page {
         blockName?: string | null;
         blockType: 'company-stats';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Main intro heading, highlighted text, description and optional CTA.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Add employee profile cards with name, designation and image.
+         */
+        employeeGroup: {
+          /**
+           * Add up to 12 employees.
+           */
+          employees: {
+            /**
+             * Upload employee image. Recommended portrait image. Aspect ratio 1:1.
+             */
+            employeeImage: string | Media;
+            employeeImageOriginal?: (string | null) | Media;
+            pendingEmployeeImageOriginal?: string | null;
+            pendingEmployeeImageCrop?: string | null;
+            employeeImageBlurDataURL?: string | null;
+            /**
+             * Employee name. Max 80 characters.
+             */
+            employeeName: string;
+            /**
+             * Employee designation. Max 120 characters.
+             */
+            designation: string;
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'employee';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1879,6 +1975,47 @@ export interface PagesSelect<T extends boolean = true> {
                       | {
                           value?: T;
                           label?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        employee?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              employeeGroup?:
+                | T
+                | {
+                    employees?:
+                      | T
+                      | {
+                          employeeImage?: T;
+                          employeeImageOriginal?: T;
+                          pendingEmployeeImageOriginal?: T;
+                          pendingEmployeeImageCrop?: T;
+                          employeeImageBlurDataURL?: T;
+                          employeeName?: T;
+                          designation?: T;
                           id?: T;
                         };
                   };

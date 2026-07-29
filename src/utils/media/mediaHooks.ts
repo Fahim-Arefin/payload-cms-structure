@@ -3,6 +3,7 @@ import {
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
+  EMPLOYEE_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -85,6 +86,16 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['companyLogo'],
       mediaFieldLabels: {
         companyLogo: 'Company Logo',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: EMPLOYEE_SLUG_AND_TAG,
+      groupKey: 'employeeGroup',
+      arrayKey: 'employees',
+      mediaFields: ['employeeImage'],
+      mediaFieldLabels: {
+        employeeImage: 'Employee Image',
       },
     },
   ],

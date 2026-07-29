@@ -97,7 +97,7 @@ const MAX_STACK_IMAGES = 25
 
 const stackPositions: Position[] = [
   // Row 1 — 7 images
-  { x: 4, y: 28 },
+  { x: 5, y: 32 },
   { x: 18, y: 15 },
   { x: 31, y: 24 },
   { x: 43, y: 11 },
