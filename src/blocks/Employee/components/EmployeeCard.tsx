@@ -359,8 +359,13 @@ function EmployeeCard({ employee }: Props) {
         </div>
       </div>
 
-      <div ref={textRef} className="-mt-[15%] text-center will-change-transform">
-        <div className="font-agency global-h7 leading-[33.75px] text-secondary-1">
+      <div
+        ref={textRef}
+        className="-mt-[15%] text-center will-change-transform 
+      
+      lg:space-y-0.5 xl:space-y-1"
+      >
+        <div className="font-agency global-h6 lg:global-h7 leading-[33.75px] text-secondary-1">
           {employee.employeeName}
         </div>
 
