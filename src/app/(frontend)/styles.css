@@ -314,7 +314,7 @@
   }
   /* modiied */
   .global-h7 {
-    @apply text-[13px] md:text-[15px] lg:text-[20px] xl:text-[30px] 2xl:text-[35px] leading-[112%];
+    @apply text-[13px] md:text-[15px] lg:text-[20px] xl:text-[28px] 2xl:text-[35px] leading-[112%];
   }
 
   /* modified */

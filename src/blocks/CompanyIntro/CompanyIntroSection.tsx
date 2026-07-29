@@ -173,7 +173,7 @@ function CompanyIntroSection({ block }: Props) {
           <p
             ref={descriptionRef}
             className="
-              font-grift text-justify text-secondary-1 global-p2
+              font-grift text-justify text-secondary-1 global-p3
               whitespace-pre-line
             "
           >
