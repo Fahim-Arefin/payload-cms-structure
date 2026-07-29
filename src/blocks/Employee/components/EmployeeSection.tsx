@@ -9,7 +9,7 @@ type Props = {
 
 function EmployeeSection({ block }: Props) {
   return (
-    <div className="container-padding space-y-[20px] lg:space-y-[40px] xl:space-y-[56px] 2xl:space-y-[60px]">
+    <div className="container-padding ">
       <SectionHeading01 data={block?.sectionHeading} align="middle" />
       <EmployeeGrid block={block} />
     </div>
