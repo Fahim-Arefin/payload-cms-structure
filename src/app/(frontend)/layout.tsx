@@ -12,6 +12,7 @@ import './styles.css'
 import { Toaster } from '@/components/ui/sonner'
 import GlobalSocialLinks from '@/components/custom/shared/GlobalSocialLinks'
 import GlobalScrollButton from '@/components/custom/shared/GlobalScrollButton'
+import SmoothScrollProvider from '@/context/SmoothScrollProvider'
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ['bengali'],
@@ -201,36 +202,38 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       </head>
       <body className={`${notoSerifBengali.variable}`}>
         <Providers initialLang="en">
-          <main className="min-h-screen relative 3xl:max-w-[1925px] 3xl:mx-auto font-grift">
-            <ServerNavbar />
-            <div className="min-h-screen">
-              {children}
-              {/* <Toaster position="bottom-right" richColors closeButton /> */}
-              <Toaster
-                position="bottom-right"
-                richColors
-                closeButton
-                toastOptions={{
-                  classNames: {
-                    toast:
-                      'group rounded-xl border border-white/10 bg-[#0F172A]/95 text-white shadow-2xl backdrop-blur-md',
-                    title: 'font-grift text-[14px] font-semibold text-white',
-                    description: 'font-grift text-[12px] text-white/70',
-                    actionButton: 'bg-cyan text-white hover:bg-cyan/90 font-grift',
-                    cancelButton: 'bg-white/10 text-white hover:bg-white/20 font-grift',
-                    closeButton: 'border-white/10 bg-white/5 text-white hover:bg-white/10',
-                  },
-                }}
-              />
-            </div>
-            {/* <CookieConsentBanner /> */}
-            <div className="">
-              <ServerFooter />
-            </div>
-            <GlobalSocialLinks />
-            <GlobalScrollButton />
-          </main>
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+          <SmoothScrollProvider>
+            <main className="min-h-screen relative 3xl:max-w-[1925px] 3xl:mx-auto font-grift">
+              <ServerNavbar />
+              <div className="min-h-screen">
+                {children}
+                {/* <Toaster position="bottom-right" richColors closeButton /> */}
+                <Toaster
+                  position="bottom-right"
+                  richColors
+                  closeButton
+                  toastOptions={{
+                    classNames: {
+                      toast:
+                        'group rounded-xl border border-white/10 bg-[#0F172A]/95 text-white shadow-2xl backdrop-blur-md',
+                      title: 'font-grift text-[14px] font-semibold text-white',
+                      description: 'font-grift text-[12px] text-white/70',
+                      actionButton: 'bg-cyan text-white hover:bg-cyan/90 font-grift',
+                      cancelButton: 'bg-white/10 text-white hover:bg-white/20 font-grift',
+                      closeButton: 'border-white/10 bg-white/5 text-white hover:bg-white/10',
+                    },
+                  }}
+                />
+              </div>
+              {/* <CookieConsentBanner /> */}
+              <div className="">
+                <ServerFooter />
+              </div>
+              <GlobalSocialLinks />
+              <GlobalScrollButton />
+            </main>
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+          </SmoothScrollProvider>
         </Providers>
       </body>
     </html>
