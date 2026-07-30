@@ -38,8 +38,11 @@ function FAQSection({ block }: Props) {
         "
       >
         {/* heading */}
-        <div className="lg:col-span-7 xl:col-span-8 2xl:col-span-7  my-auto">
+        <div className="hidden lg:block lg:col-span-7 xl:col-span-8 2xl:col-span-7  my-auto">
           <SectionHeading01 data={block?.sectionHeading as any} align="left" />
+        </div>
+        <div className="lg:hidden lg:col-span-7 xl:col-span-8 2xl:col-span-7  my-auto">
+          <SectionHeading01 data={block?.sectionHeading as any} align="middle" />
         </div>
 
         {/* cto card */}
