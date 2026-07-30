@@ -1,3 +1,4 @@
+import AboutUsIntroSchema from '@/blocks/AboutUsIntro/schema'
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import ClientSuccessStoriesSchema from '@/blocks/ClientSuccessStories/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
@@ -202,6 +203,7 @@ export const Pages: CollectionConfig = {
         CompanyStatsSchema,
 
         // about us page unique
+        AboutUsIntroSchema,
         EmployeeSchema,
         // Product Page
 

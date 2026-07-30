@@ -1,4 +1,5 @@
 import {
+  ABOUT_US_INTRO_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
@@ -35,6 +36,14 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['ctoInfo.image'],
       mediaFieldLabels: {
         'ctoInfo.image': 'CTO Image',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: ABOUT_US_INTRO_SLUG_AND_TAG,
+      mediaFields: ['companyInfo.thumbnailImage'],
+      mediaFieldLabels: {
+        'companyInfo.thumbnailImage': 'Thumbnail Image',
       },
     },
   ],

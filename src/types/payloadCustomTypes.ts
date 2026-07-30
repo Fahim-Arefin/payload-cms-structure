@@ -1,4 +1,5 @@
 import {
+  ABOUT_US_INTRO_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
@@ -75,3 +76,8 @@ export type EmployeeBlockType = Extract<
 >
 
 export type FAQBlockType = Extract<Page['layout'][number], { blockType: typeof FAQ_SLUG_AND_TAG }>
+
+export type AboutUsIntroBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ABOUT_US_INTRO_SLUG_AND_TAG }
+>

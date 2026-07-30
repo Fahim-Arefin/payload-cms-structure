@@ -1418,6 +1418,56 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
+         * About Us intro content with tag, main description, secondary description, thumbnail image and optional YouTube embed link.
+         */
+        companyInfo: {
+          /**
+           * Example: About Our Studio. Max 40 characters.
+           */
+          tag: string;
+          /**
+           * Large intro description shown on the left. Max 700 characters.
+           */
+          mainDescription: string;
+          /**
+           * Smaller supporting description shown on the right. Max 500 characters.
+           */
+          secondaryDescription: string;
+          /**
+           * Upload About Us intro thumbnail image. Recommended wide image. Aspect ratio 1200:425.
+           */
+          thumbnailImage: string | Media;
+          thumbnailImageOriginal?: (string | null) | Media;
+          pendingThumbnailImageOriginal?: string | null;
+          pendingThumbnailImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          thumbnailImageBlurDataURL?: string | null;
+          /**
+           * Optional YouTube embed URL. Example: https://www.youtube.com/embed/VIDEO_ID
+           */
+          youtubeEmbedLink?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'about-us-intro';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
          * Main intro heading, highlighted text, description and optional CTA.
          */
         sectionHeading: {
@@ -2156,6 +2206,32 @@ export interface PagesSelect<T extends boolean = true> {
                           label?: T;
                           id?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'about-us-intro'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              companyInfo?:
+                | T
+                | {
+                    tag?: T;
+                    mainDescription?: T;
+                    secondaryDescription?: T;
+                    thumbnailImage?: T;
+                    thumbnailImageOriginal?: T;
+                    pendingThumbnailImageOriginal?: T;
+                    pendingThumbnailImageCrop?: T;
+                    thumbnailImageBlurDataURL?: T;
+                    youtubeEmbedLink?: T;
                   };
               id?: T;
               blockName?: T;
