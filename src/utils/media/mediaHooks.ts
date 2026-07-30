@@ -1,9 +1,11 @@
 import {
+  ABOUT_US_INTRO_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
+  FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -26,6 +28,22 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['founderInfo.founderImage'],
       mediaFieldLabels: {
         'founderInfo.founderImage': 'Founder Image',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: FAQ_SLUG_AND_TAG,
+      mediaFields: ['ctoInfo.image'],
+      mediaFieldLabels: {
+        'ctoInfo.image': 'CTO Image',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: ABOUT_US_INTRO_SLUG_AND_TAG,
+      mediaFields: ['companyInfo.thumbnailImage'],
+      mediaFieldLabels: {
+        'companyInfo.thumbnailImage': 'Thumbnail Image',
       },
     },
   ],
