@@ -242,7 +242,7 @@ function Button01({ children, className, onMouseEnter, onMouseLeave, ...props }:
         className="
           pointer-events-none
           absolute left-0 top-0 z-0
-          rounded-r-[15px]
+          rounded-[15px]
           h-full
           bg-[#6EC9C71A]
           backdrop-blur-[10px]

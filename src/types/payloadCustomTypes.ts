@@ -7,6 +7,7 @@ import {
   COMPANY_STATS_SLUG_AND_TAG,
   CONTACT_US_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
+  FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
@@ -72,3 +73,5 @@ export type EmployeeBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof EMPLOYEE_SLUG_AND_TAG }
 >
+
+export type FAQBlockType = Extract<Page['layout'][number], { blockType: typeof FAQ_SLUG_AND_TAG }>

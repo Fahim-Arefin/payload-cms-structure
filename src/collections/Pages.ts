@@ -6,6 +6,7 @@ import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
 import CompanyStatsSchema from '@/blocks/CompanyStats/schema'
 import ContactUsSchema from '@/blocks/ContactUs/schema'
 import EmployeeSchema from '@/blocks/Employee/schema'
+import FAQSchema from '@/blocks/FAQ/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
@@ -187,6 +188,7 @@ export const Pages: CollectionConfig = {
 
         // common section
         ContactUsSchema,
+        FAQSchema,
         // custom blocks
 
         // home page unique
