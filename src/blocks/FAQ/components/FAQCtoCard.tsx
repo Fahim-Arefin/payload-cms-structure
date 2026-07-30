@@ -125,6 +125,11 @@ function FAQCtoCard({ data }: Props) {
   const ctaHref = pageHrefWithAnchor(data?.buttonLink, data?.sectionId)
   const ctaLink = ctaHref !== '#' ? ctaHref : ''
 
+  // px-[20px] py-[18px]
+  // lg:px-[24px] lg:py-[24px]
+  // xl:px-[28px] xl:py-[28px]
+  // 2xl:px-[32px] 2xl:py-[30px]
+
   return (
     <div
       className="
@@ -132,12 +137,8 @@ function FAQCtoCard({ data }: Props) {
         rounded-[14px]
         border border-primary-1/35
         bg-white-1/30
-        px-[20px] py-[18px]
         shadow-[0_18px_45px_rgba(10,17,40,0.04)]
-        lg:px-[24px] lg:py-[24px]
         xl:rounded-[18px]
-        xl:px-[28px] xl:py-[28px]
-        2xl:px-[32px] 2xl:py-[30px]
       "
     >
       {/* soft background glow */}
@@ -153,15 +154,20 @@ function FAQCtoCard({ data }: Props) {
       />
 
       <div className="relative z-10">
-        <div className="flex items-center gap-[14px] xl:gap-[18px]">
+        <div className="flex items-center">
           {/* image frame */}
           <div
             className="
               relative shrink-0
-              size-[78px]
+              size-[88px]
               lg:size-[88px]
-              xl:size-[96px]
-              2xl:size-[104px]
+              xl:size-[120px]
+              2xl:size-[154px]
+              px-[20px]
+              lg:px-[24px] 
+              xl:px-[28px]
+              2xl:px-[32px]
+              
             "
           >
             <Image
@@ -169,7 +175,6 @@ function FAQCtoCard({ data }: Props) {
               alt="Image frame"
               fill
               className="z-0 object-cover object-center"
-              sizes="120px"
               priority
               quality={100}
               placeholder="blur"
@@ -190,7 +195,6 @@ function FAQCtoCard({ data }: Props) {
                   alt={data?.name || 'CTO image'}
                   fill
                   className="object-cover object-center"
-                  sizes="90px"
                   quality={100}
                   placeholder={data?.imageBlurDataURL ? 'blur' : 'empty'}
                   blurDataURL={data?.imageBlurDataURL || undefined}
@@ -200,7 +204,9 @@ function FAQCtoCard({ data }: Props) {
           </div>
 
           <div>
-            <div className="font-grift global-p2 font-bold text-secondary-1">{data?.name}</div>
+            <div className="font-grift global-p2 lg:global-p3 2xl:global-p2 font-bold text-secondary-1">
+              {data?.name}
+            </div>
 
             <div className="font-grift global-p5 text-secondary-1">{data?.designation}</div>
           </div>
@@ -209,11 +215,13 @@ function FAQCtoCard({ data }: Props) {
         {data?.description && (
           <p
             className="
-              mt-[18px]
               font-grift global-p5
-              leading-[1.55]
+              leading-[24px]
               text-secondary-1
-              xl:mt-[24px]
+              px-[20px] 
+        lg:px-[24px] 
+        xl:px-[28px] 
+        2xl:px-[32px] 
             "
           >
             {data.description}
@@ -221,7 +229,14 @@ function FAQCtoCard({ data }: Props) {
         )}
 
         {data?.buttonLabel && ctaLink && (
-          <div className="mt-[22px] xl:mt-[30px]">
+          <div
+            className="mt-[22px] xl:mt-[30px]
+           px-[20px] pb-[18px]
+        lg:px-[24px] lg:pb-[24px]
+        xl:px-[28px] xl:pb-[28px]
+        2xl:px-[32px] 2xl:pb-[30px]
+          "
+          >
             <Link
               href={ctaLink}
               className="
