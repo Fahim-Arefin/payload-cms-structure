@@ -107,3 +107,11 @@ export const COMPANY_STATS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/company-sta
 export const EMPLOYEE_SLUG_AND_TAG = 'employee'
 export const EMPLOYEE_BLOCK_LABEL = 'Employee'
 export const EMPLOYEE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/employee-block-thumbnail.webp`
+
+export const FAQ_SLUG_AND_TAG = 'faq'
+export const FAQ_BLOCK_LABEL = 'FAQ'
+export const FAQ_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/faq-block-thumbnail.webp`
+
+export const ABOUT_US_INTRO_SLUG_AND_TAG = 'about-us-intro'
+export const ABOUT_US_INTRO_BLOCK_LABEL = 'About Us Intro'
+export const ABOUT_US_INTRO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/about-us-intro-block-thumbnail.webp`

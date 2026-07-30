@@ -594,6 +594,134 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
+         * Main FAQ intro heading, highlighted text and description.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Right side CTO/help card with image, name, designation, description and CTA.
+         */
+        ctoInfo: {
+          /**
+           * Upload CTO/person image. Recommended transparent PNG or square portrait.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          imageBlurDataURL?: string | null;
+          /**
+           * Example: Fahim Islam Mohip. Max 80 characters.
+           */
+          name: string;
+          /**
+           * Example: CTO & Managing Director. Max 120 characters.
+           */
+          designation: string;
+          /**
+           * Short help card description. Max 300 characters.
+           */
+          description: string;
+          /**
+           * Example: Contact Us. Max 40 characters.
+           */
+          buttonLabel: string;
+          /**
+           * Pick an internal Page for the button. External URLs are not allowed.
+           */
+          buttonLink?: (string | null) | Page;
+          /**
+           * Optional direct jump section ID. No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Add FAQ questions and answers shown in accordion list.
+         */
+        qaGroup: {
+          /**
+           * Add FAQ question and answer items.
+           */
+          items: {
+            /**
+             * Example: What Does XynoLab Do? Max 160 characters.
+             */
+            question: string;
+            /**
+             * FAQ answer text. Max 800 characters.
+             */
+            answer: string;
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'faq';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
          * Add small company info items like Heart Winning Agency, IT Solution Agency, Located at Dhaka, Bangladesh.
          */
         companyInfoItems: {
@@ -1290,6 +1418,56 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
+         * About Us intro content with tag, main description, secondary description, thumbnail image and optional YouTube embed link.
+         */
+        companyInfo: {
+          /**
+           * Example: About Our Studio. Max 40 characters.
+           */
+          tag: string;
+          /**
+           * Large intro description shown on the left. Max 700 characters.
+           */
+          mainDescription: string;
+          /**
+           * Smaller supporting description shown on the right. Max 500 characters.
+           */
+          secondaryDescription: string;
+          /**
+           * Upload About Us intro thumbnail image. Recommended wide image. Aspect ratio 1200:425.
+           */
+          thumbnailImage: string | Media;
+          thumbnailImageOriginal?: (string | null) | Media;
+          pendingThumbnailImageOriginal?: string | null;
+          pendingThumbnailImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          thumbnailImageBlurDataURL?: string | null;
+          /**
+           * Optional YouTube embed URL. Example: https://www.youtube.com/embed/VIDEO_ID
+           */
+          youtubeEmbedLink?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'about-us-intro';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
          * Main intro heading, highlighted text, description and optional CTA.
          */
         sectionHeading: {
@@ -1686,6 +1864,57 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        faq?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              ctoInfo?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    name?: T;
+                    designation?: T;
+                    description?: T;
+                    buttonLabel?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
+                  };
+              qaGroup?:
+                | T
+                | {
+                    items?:
+                      | T
+                      | {
+                          question?: T;
+                          answer?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'company-info'?:
           | T
           | {
@@ -1977,6 +2206,32 @@ export interface PagesSelect<T extends boolean = true> {
                           label?: T;
                           id?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'about-us-intro'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              companyInfo?:
+                | T
+                | {
+                    tag?: T;
+                    mainDescription?: T;
+                    secondaryDescription?: T;
+                    thumbnailImage?: T;
+                    thumbnailImageOriginal?: T;
+                    pendingThumbnailImageOriginal?: T;
+                    pendingThumbnailImageCrop?: T;
+                    thumbnailImageBlurDataURL?: T;
+                    youtubeEmbedLink?: T;
                   };
               id?: T;
               blockName?: T;
