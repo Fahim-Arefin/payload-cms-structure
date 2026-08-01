@@ -115,3 +115,7 @@ export const FAQ_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/faq-block-thumbnail.w
 export const ABOUT_US_INTRO_SLUG_AND_TAG = 'about-us-intro'
 export const ABOUT_US_INTRO_BLOCK_LABEL = 'About Us Intro'
 export const ABOUT_US_INTRO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/about-us-intro-block-thumbnail.webp`
+
+export const OUR_PROJECT_SLUG_AND_TAG = 'our-project'
+export const OUR_PROJECT_BLOCK_LABEL = 'Our Project'
+export const OUR_PROJECT_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/our-project-block-thumbnail.webp`
