@@ -1418,6 +1418,139 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
+         * Main section heading, highlighted text and description.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Add project showcase items with project name, description, site link and device screenshots.
+         */
+        projectGroup: {
+          /**
+           * Add project showcase items.
+           */
+          projects: {
+            /**
+             * Example: XynoLab Collabs With SAGAR Rope. Max 120 characters.
+             */
+            projectName: string;
+            /**
+             * Project description. Max 500 characters.
+             */
+            description: string;
+            /**
+             * Example: View Site. Max 40 characters.
+             */
+            siteLinkButtonLabel: string;
+            /**
+             * External project/site URL. Example: https://example.com
+             */
+            siteLink: string;
+            /**
+             * Upload desktop/laptop project screenshot. Transparent PNG preferred if using device mockup. Recommended aspect ratio 16:10.
+             */
+            desktopSiteImage: string | Media;
+            desktopSiteImageOriginal?: (string | null) | Media;
+            pendingDesktopSiteImageOriginal?: string | null;
+            pendingDesktopSiteImageCrop?: string | null;
+            desktopSiteImageBlurDataURL?: string | null;
+            /**
+             * Upload mobile project screenshot. Transparent PNG preferred if using phone mockup. Recommended aspect ratio 174:368.
+             */
+            mobileSiteImage: string | Media;
+            mobileSiteImageOriginal?: (string | null) | Media;
+            pendingMobileSiteImageOriginal?: string | null;
+            pendingMobileSiteImageCrop?: string | null;
+            mobileSiteImageBlurDataURL?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Extra project section info such as site name heading and shared Contact Us button.
+         */
+        otherInfo: {
+          /**
+           * Example: Sagar Rope. Max 80 characters.
+           */
+          siteNameHeading: string;
+          /**
+           * Example: Contact Us. Max 40 characters.
+           */
+          contactUsButtonLabel: string;
+          /**
+           * Pick an internal page for the Contact Us button.
+           */
+          buttonLink: string | Page;
+          /**
+           * Optional direct jump section ID. No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'our-project';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
          * About Us intro content with tag, main description, secondary description, thumbnail image and optional YouTube embed link.
          */
         companyInfo: {
@@ -2206,6 +2339,62 @@ export interface PagesSelect<T extends boolean = true> {
                           label?: T;
                           id?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'our-project'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              projectGroup?:
+                | T
+                | {
+                    projects?:
+                      | T
+                      | {
+                          projectName?: T;
+                          description?: T;
+                          siteLinkButtonLabel?: T;
+                          siteLink?: T;
+                          desktopSiteImage?: T;
+                          desktopSiteImageOriginal?: T;
+                          pendingDesktopSiteImageOriginal?: T;
+                          pendingDesktopSiteImageCrop?: T;
+                          desktopSiteImageBlurDataURL?: T;
+                          mobileSiteImage?: T;
+                          mobileSiteImageOriginal?: T;
+                          pendingMobileSiteImageOriginal?: T;
+                          pendingMobileSiteImageCrop?: T;
+                          mobileSiteImageBlurDataURL?: T;
+                          id?: T;
+                        };
+                  };
+              otherInfo?:
+                | T
+                | {
+                    siteNameHeading?: T;
+                    contactUsButtonLabel?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
                   };
               id?: T;
               blockName?: T;

@@ -10,6 +10,7 @@ import {
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
+  OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
@@ -80,4 +81,9 @@ export type FAQBlockType = Extract<Page['layout'][number], { blockType: typeof F
 export type AboutUsIntroBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof ABOUT_US_INTRO_SLUG_AND_TAG }
+>
+
+export type OurProjectBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof OUR_PROJECT_SLUG_AND_TAG }
 >
