@@ -7,6 +7,7 @@ import {
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
+  OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
@@ -114,6 +115,17 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['employeeImage'],
       mediaFieldLabels: {
         employeeImage: 'Employee Image',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: OUR_PROJECT_SLUG_AND_TAG,
+      groupKey: 'projectGroup',
+      arrayKey: 'projects',
+      mediaFields: ['desktopSiteImage', 'mobileSiteImage'],
+      mediaFieldLabels: {
+        desktopSiteImage: 'Desktop Site Image',
+        mobileSiteImage: 'Mobile Site Image',
       },
     },
   ],
