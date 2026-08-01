@@ -20,7 +20,7 @@ function SectionHeading01({ data, align, dark = false }: Props) {
   return (
     <div
       className={`flex flex-col justify-center ${align === 'left' ? 'items-start' : align === 'right' ? 'items-end' : 'items-center'}
-      space-y-1 lg:space-y-2 xl:space-y-3 2xl:space-y-4
+      space-y-1 lg:space-y-2 xl:space-y-3 2xl:space-y-4 
       `}
     >
       {data?.tag && <Tags tag={data?.tag} dark={dark} />}

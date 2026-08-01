@@ -8,7 +8,7 @@ type Props = { block: OurProjectBlockType }
 function OurProjectSection({ block }: Props) {
   return (
     <div className="space-y-[20px] lg:space-y-[40px] xl:space-y-[56px] 2xl:space-y-[60px]">
-      <div className="container-padding ">
+      <div className="container-padding-x container-padding-t">
         <SectionHeading01 align="middle" dark data={block?.sectionHeading} />
       </div>
       <ProjectContainer block={block} />
