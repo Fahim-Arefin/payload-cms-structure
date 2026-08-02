@@ -4,6 +4,7 @@ import {
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
+  CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
@@ -62,6 +63,14 @@ export const mediaHooks = withMediaLifecycle({
         'otherInfo.feature.icon': 'Feature Icon',
         'otherInfo.roles.navigatorIcon': 'Navigator Icon',
         'otherInfo.roles.driverIcon': 'Driver Icon',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
+      mediaFields: ['protocolInfo.image'],
+      mediaFieldLabels: {
+        'protocolInfo.image': 'Main Image',
       },
     },
   ],

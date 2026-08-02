@@ -6,6 +6,7 @@ import {
   COMPANY_INTRO_SLUG_AND_TAG,
   COMPANY_STATS_SLUG_AND_TAG,
   CONTACT_US_SLUG_AND_TAG,
+  CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
@@ -32,6 +33,7 @@ import FAQBlock from './FAQ/FAQBlock'
 import AboutUsIntroBlock from './AboutUsIntro/AboutUsIntroBlock'
 import OurProjectBlock from './OurProject/OurProjectBlock'
 import CS_Collaborative_MobbingBlock from './CS_Collaborative_Mobbing/CS_Collaborative_MobbingBlock'
+import CS_CollaborationProtocalBlock from './CS_CollaborationProtocal/CS_CollaborationProtocalBlock'
 
 type Params = Record<string, string>
 
@@ -67,6 +69,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <OurProjectBlock key={block.id} block={block} params={params} />
     case CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG:
       return <CS_Collaborative_MobbingBlock key={block.id} block={block} params={params} />
+    case CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG:
+      return <CS_CollaborationProtocalBlock key={block.id} block={block} params={params} />
 
     default:
       return null

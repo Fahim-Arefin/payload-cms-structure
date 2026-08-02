@@ -123,3 +123,7 @@ export const OUR_PROJECT_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/our-project-b
 export const CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG = 'cs-collaborative-mobbing'
 export const CS_COLLABORATIVE_MOBBING_BLOCK_LABEL = 'CS Collaborative Mobbing'
 export const CS_COLLABORATIVE_MOBBING_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-collaborative-mobbing-block-thumbnail.webp`
+
+export const CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG = 'cs-collaboration-protocal'
+export const CS_COLLABORATION_PROTOCAL_BLOCK_LABEL = 'CS Collaboration Protocal'
+export const CS_COLLABORATION_PROTOCAL_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-collaboration-protocal-block-thumbnail.webp`

@@ -6,6 +6,7 @@ import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
 import CompanyStatsSchema from '@/blocks/CompanyStats/schema'
 import ContactUsSchema from '@/blocks/ContactUs/schema'
+import CSCollaborationProtocalSchema from '@/blocks/CS_CollaborationProtocal/schema'
 import CSCollaborativeMobbingSchema from '@/blocks/CS_Collaborative_Mobbing/schema'
 import EmployeeSchema from '@/blocks/Employee/schema'
 import FAQSchema from '@/blocks/FAQ/schema'
@@ -211,6 +212,7 @@ export const Pages: CollectionConfig = {
 
         // Case StudyPage
         CSCollaborativeMobbingSchema,
+        CSCollaborationProtocalSchema,
         // Get In Touch
 
         // News
