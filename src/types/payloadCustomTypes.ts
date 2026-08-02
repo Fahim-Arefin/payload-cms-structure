@@ -7,6 +7,7 @@ import {
   COMPANY_INTRO_SLUG_AND_TAG,
   COMPANY_STATS_SLUG_AND_TAG,
   CONTACT_US_SLUG_AND_TAG,
+  CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
@@ -86,4 +87,9 @@ export type AboutUsIntroBlockType = Extract<
 export type OurProjectBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof OUR_PROJECT_SLUG_AND_TAG }
+>
+
+export type CS_Collaborative_MobbingBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG }
 >

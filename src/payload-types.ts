@@ -1682,6 +1682,158 @@ export interface Page {
         blockName?: string | null;
         blockType: 'employee';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Top section heading. Example: tag, "01. Collaborative Mobbing", and short description.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 120 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 120.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 120 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 120.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Main image, feature information, navigator/driver role data and icons.
+         */
+        otherInfo: {
+          /**
+           * Upload the main collaborative mobbing image. Recommended wide image. Aspect ratio 902:540.
+           */
+          mainImage: string | Media;
+          mainImageOriginal?: (string | null) | Media;
+          pendingMainImageOriginal?: string | null;
+          pendingMainImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          mainImageBlurDataURL?: string | null;
+          /**
+           * Right side feature content. Example: 90-Minute Daily Focus.
+           */
+          feature: {
+            /**
+             * Upload feature icon. Example: timer/clock icon. Recommended square icon.
+             */
+            icon: string | Media;
+            iconOriginal?: (string | null) | Media;
+            pendingIconOriginal?: string | null;
+            pendingIconCrop?: string | null;
+            /**
+             * Auto-generated Base64 blur
+             */
+            iconBlurDataURL?: string | null;
+            /**
+             * Example: 90-Minute Daily Focus. Max 80 characters.
+             */
+            title: string;
+            /**
+             * Feature description. Max 300 characters.
+             */
+            description: string;
+          };
+          /**
+           * Small bottom role section. Example: Navigator → Driver.
+           */
+          roles: {
+            /**
+             * Example: Navigator. Max 40 characters.
+             */
+            navigatorLabel: string;
+            /**
+             * Example: Strategic Intent. Max 120 characters.
+             */
+            navigatorDescription: string;
+            /**
+             * Example: Driver. Max 40 characters.
+             */
+            driverLabel: string;
+            /**
+             * Example: Tactical Input. Max 120 characters.
+             */
+            driverDescription: string;
+            /**
+             * Upload navigator icon. Recommended square icon.
+             */
+            navigatorIcon: string | Media;
+            navigatorIconOriginal?: (string | null) | Media;
+            pendingNavigatorIconOriginal?: string | null;
+            pendingNavigatorIconCrop?: string | null;
+            /**
+             * Auto-generated Base64 blur
+             */
+            navigatorIconBlurDataURL?: string | null;
+            /**
+             * Upload driver icon. Recommended square icon.
+             */
+            driverIcon: string | Media;
+            driverIconOriginal?: (string | null) | Media;
+            pendingDriverIconOriginal?: string | null;
+            pendingDriverIconCrop?: string | null;
+            /**
+             * Auto-generated Base64 blur
+             */
+            driverIconBlurDataURL?: string | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cs-collaborative-mobbing';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2461,6 +2613,69 @@ export interface PagesSelect<T extends boolean = true> {
                           employeeName?: T;
                           designation?: T;
                           id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'cs-collaborative-mobbing'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              otherInfo?:
+                | T
+                | {
+                    mainImage?: T;
+                    mainImageOriginal?: T;
+                    pendingMainImageOriginal?: T;
+                    pendingMainImageCrop?: T;
+                    mainImageBlurDataURL?: T;
+                    feature?:
+                      | T
+                      | {
+                          icon?: T;
+                          iconOriginal?: T;
+                          pendingIconOriginal?: T;
+                          pendingIconCrop?: T;
+                          iconBlurDataURL?: T;
+                          title?: T;
+                          description?: T;
+                        };
+                    roles?:
+                      | T
+                      | {
+                          navigatorLabel?: T;
+                          navigatorDescription?: T;
+                          driverLabel?: T;
+                          driverDescription?: T;
+                          navigatorIcon?: T;
+                          navigatorIconOriginal?: T;
+                          pendingNavigatorIconOriginal?: T;
+                          pendingNavigatorIconCrop?: T;
+                          navigatorIconBlurDataURL?: T;
+                          driverIcon?: T;
+                          driverIconOriginal?: T;
+                          pendingDriverIconOriginal?: T;
+                          pendingDriverIconCrop?: T;
+                          driverIconBlurDataURL?: T;
                         };
                   };
               id?: T;

@@ -54,7 +54,7 @@ export const COMMON = 'Common Blocks'
 export const FORMS = 'Form Submissions'
 export const HOME_PAGE = 'Home Page'
 export const ABOUT_US = 'About Us Page'
-export const PRODUCT_PAGE = 'Product Page'
+export const CASE_STUDY = 'Case Study Page'
 export const GET_IN_TOUCH = 'Get In Touch Page'
 export const NEWS = 'News And Events'
 
@@ -119,3 +119,7 @@ export const ABOUT_US_INTRO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/about-us-i
 export const OUR_PROJECT_SLUG_AND_TAG = 'our-project'
 export const OUR_PROJECT_BLOCK_LABEL = 'Our Project'
 export const OUR_PROJECT_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/our-project-block-thumbnail.webp`
+
+export const CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG = 'cs-collaborative-mobbing'
+export const CS_COLLABORATIVE_MOBBING_BLOCK_LABEL = 'CS Collaborative Mobbing'
+export const CS_COLLABORATIVE_MOBBING_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-collaborative-mobbing-block-thumbnail.webp`
