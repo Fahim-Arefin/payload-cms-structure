@@ -13,6 +13,7 @@ function CS_Collaborative_MobbingBlock({ block }: Props) {
     <WithHashScroller
       id={block?.sectionSettings?.sectionId}
       bgColor={block?.sectionSettings?.backgroundColor}
+      className="rounded-t-[18px] lg:rounded-t-[25px] xl:rounded-t-[30px]"
     >
       <CS_CollaborativeMobbingSection block={block} />
     </WithHashScroller>
