@@ -327,7 +327,7 @@ export interface Page {
            */
           heroMediaType: 'none' | 'image' | 'video';
           /**
-           * Upload & crop a 20:18 hero image. This field is used only when Hero Media Type is set to Image.
+           * Upload & crop an 1:1 hero image. This field is used only when Hero Media Type is set to Image.
            */
           image?: (string | null) | Media;
           imageOriginal?: (string | null) | Media;
@@ -377,26 +377,6 @@ export interface Page {
             };
             [k: string]: unknown;
           } | null;
-          /**
-           * Add short service/solution labels that will appear in the hero section, such as Web Design, Web Development, E-Commerce, SEO Optimization, CMS Development, UI/UX Design, or Maintenance Support. You can optionally link each solution to an internal page or a specific section on that page.
-           */
-          webSolutionsWeProvide?:
-            | {
-                /**
-                 * Enter one short web solution/service name. Max 40 characters.
-                 */
-                solution: string;
-                /**
-                 * Optional. Pick an internal page to link this web solution chip to. External URLs are not allowed.
-                 */
-                buttonLink?: (string | null) | Page;
-                /**
-                 * Optional. Used for direct jump links to a section on the selected page. Example: "service-section". No spaces. Use "-" to separate words.
-                 */
-                sectionId?: string | null;
-                id?: string | null;
-              }[]
-            | null;
           ctaButtons?:
             | {
                 /**
@@ -423,82 +403,6 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'basic-hero';
-      }
-    | {
-        uploadSessionId?: string | null;
-        heroes: {
-          /**
-           * Upload & crop a 16:9 hero image.
-           */
-          image: string | Media;
-          imageOriginal?: (string | null) | Media;
-          pendingImageOriginal?: string | null;
-          pendingImageCrop?: string | null;
-          imageBlurDataURL?: string | null;
-          /**
-           * Heading 1 (English). Max 40 characters.
-           */
-          heading1: string;
-          /**
-           * Optional. Must be inside Heading 1. Max 40.
-           */
-          heading1Highlighted?: string | null;
-          /**
-           * Heading 2 (English). Max 40 characters.
-           */
-          heading2?: string | null;
-          /**
-           * Optional. Must be inside Heading 2. Max 40.
-           */
-          heading2Highlighted?: string | null;
-          /**
-           * Heading 3 (English). Max 40 characters.
-           */
-          heading3?: string | null;
-          /**
-           * Optional. Must be inside Heading 3. Max 40.
-           */
-          heading3Highlighted?: string | null;
-          description?: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-          /**
-           * Show or hide the Explore More Badge
-           */
-          exploreMoreBadge?: boolean | null;
-          /**
-           * Shown as small spec items below the hero (e.g., DIAMETER RANGE, DENSITY, ISO).
-           */
-          productHighlights?:
-            | {
-                /**
-                 * Main value text (e.g., "0.8-2.0 mm", "~0.924 g/cm³", "ISO").
-                 */
-                value: string;
-                /**
-                 * Supporting label (e.g., "DIAMETER RANGE", "DENSITY (FULLY BUOYANT)", "9001:2015 CERTIFIED").
-                 */
-                label: string;
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'product-hero';
       }
     | {
         uploadSessionId?: string | null;
@@ -2372,14 +2276,6 @@ export interface PagesSelect<T extends boolean = true> {
                     heading3?: T;
                     heading3Highlighted?: T;
                     description?: T;
-                    webSolutionsWeProvide?:
-                      | T
-                      | {
-                          solution?: T;
-                          buttonLink?: T;
-                          sectionId?: T;
-                          id?: T;
-                        };
                     ctaButtons?:
                       | T
                       | {
@@ -2387,38 +2283,6 @@ export interface PagesSelect<T extends boolean = true> {
                           style?: T;
                           buttonLink?: T;
                           sectionId?: T;
-                          id?: T;
-                        };
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'product-hero'?:
-          | T
-          | {
-              uploadSessionId?: T;
-              heroes?:
-                | T
-                | {
-                    image?: T;
-                    imageOriginal?: T;
-                    pendingImageOriginal?: T;
-                    pendingImageCrop?: T;
-                    imageBlurDataURL?: T;
-                    heading1?: T;
-                    heading1Highlighted?: T;
-                    heading2?: T;
-                    heading2Highlighted?: T;
-                    heading3?: T;
-                    heading3Highlighted?: T;
-                    description?: T;
-                    exploreMoreBadge?: T;
-                    productHighlights?:
-                      | T
-                      | {
-                          value?: T;
-                          label?: T;
                           id?: T;
                         };
                     id?: T;
