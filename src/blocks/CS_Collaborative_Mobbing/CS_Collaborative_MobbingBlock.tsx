@@ -1,22 +1,23 @@
 import WithHashScroller from '@/components/custom/sagar-ropes-shared/others/WithHashScroller'
-import { AboutUsIntroBlockType } from '@/types/payloadCustomTypes'
+import { CS_Collaborative_MobbingBlockType } from '@/types/payloadCustomTypes'
 import React from 'react'
-import AboutUsIntroSection from './components/AboutUsIntroSection'
+import CS_CollaborativeMobbingSection from './components/CS_CollaborativeMobbingSection'
+
 type Props = {
-  block: AboutUsIntroBlockType
+  block: CS_Collaborative_MobbingBlockType
   params: Record<string, string>
 }
 
-function AboutUsIntroBlock({ block }: Props) {
+function CS_Collaborative_MobbingBlock({ block }: Props) {
   return (
     <WithHashScroller
       id={block?.sectionSettings?.sectionId}
       bgColor={block?.sectionSettings?.backgroundColor}
       className="rounded-t-[18px] lg:rounded-t-[25px] xl:rounded-t-[30px]"
     >
-      <AboutUsIntroSection block={block} />
+      <CS_CollaborativeMobbingSection block={block} />
     </WithHashScroller>
   )
 }
 
-export default AboutUsIntroBlock
+export default CS_Collaborative_MobbingBlock

@@ -1,12 +1,16 @@
 import {
   ABOUT_US_INTRO_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
+  BOOK_A_CALL_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   COMPANY_INTRO_SLUG_AND_TAG,
   COMPANY_STATS_SLUG_AND_TAG,
   CONTACT_US_SLUG_AND_TAG,
+  CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
+  CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
+  CS_DELIVERY_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
@@ -86,4 +90,24 @@ export type AboutUsIntroBlockType = Extract<
 export type OurProjectBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof OUR_PROJECT_SLUG_AND_TAG }
+>
+
+export type CS_Collaborative_MobbingBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG }
+>
+
+export type CS_CollaborationProtocalBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG }
+>
+
+export type CS_DeliveryBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CS_DELIVERY_SLUG_AND_TAG }
+>
+
+export type BookACallBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof BOOK_A_CALL_SLUG_AND_TAG }
 >

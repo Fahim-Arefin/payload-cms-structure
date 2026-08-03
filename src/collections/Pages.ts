@@ -1,11 +1,15 @@
 import AboutUsIntroSchema from '@/blocks/AboutUsIntro/schema'
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
+import BookACallSchema from '@/blocks/BookACall/schema'
 import ClientSuccessStoriesSchema from '@/blocks/ClientSuccessStories/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
 import CompanyStatsSchema from '@/blocks/CompanyStats/schema'
 import ContactUsSchema from '@/blocks/ContactUs/schema'
+import CSCollaborationProtocalSchema from '@/blocks/CS_CollaborationProtocal/schema'
+import CSCollaborativeMobbingSchema from '@/blocks/CS_Collaborative_Mobbing/schema'
+import CSDeliverySchema from '@/blocks/CS_Delivery/schema'
 import EmployeeSchema from '@/blocks/Employee/schema'
 import FAQSchema from '@/blocks/FAQ/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
@@ -191,6 +195,7 @@ export const Pages: CollectionConfig = {
         // common section
         ContactUsSchema,
         FAQSchema,
+        BookACallSchema,
         // custom blocks
 
         // home page unique
@@ -207,8 +212,11 @@ export const Pages: CollectionConfig = {
         OurProjectSchema,
         AboutUsIntroSchema,
         EmployeeSchema,
-        // Product Page
 
+        // Case StudyPage
+        CSCollaborativeMobbingSchema,
+        CSCollaborationProtocalSchema,
+        CSDeliverySchema,
         // Get In Touch
 
         // News
