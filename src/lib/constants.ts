@@ -131,3 +131,7 @@ export const CS_COLLABORATION_PROTOCAL_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}
 export const CS_DELIVERY_SLUG_AND_TAG = 'cs-delivery'
 export const CS_DELIVERY_BLOCK_LABEL = 'CS Delivery'
 export const CS_DELIVERY_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-delivery-block-thumbnail.webp`
+
+export const BOOK_A_CALL_SLUG_AND_TAG = 'book-a-call'
+export const BOOK_A_CALL_BLOCK_LABEL = 'Book A Call'
+export const BOOK_A_CALL_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/book-a-call-block-thumbnail.webp`

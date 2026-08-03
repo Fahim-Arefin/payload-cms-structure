@@ -1,5 +1,6 @@
 import AboutUsIntroSchema from '@/blocks/AboutUsIntro/schema'
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
+import BookACallSchema from '@/blocks/BookACall/schema'
 import ClientSuccessStoriesSchema from '@/blocks/ClientSuccessStories/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
@@ -194,6 +195,7 @@ export const Pages: CollectionConfig = {
         // common section
         ContactUsSchema,
         FAQSchema,
+        BookACallSchema,
         // custom blocks
 
         // home page unique

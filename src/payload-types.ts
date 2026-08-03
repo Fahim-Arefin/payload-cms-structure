@@ -709,6 +709,82 @@ export interface Page {
       }
     | {
         uploadSessionId?: string | null;
+        /**
+         * Controls section ID and the two background colors. Top-to-mid color applies to the upper half, mid-to-bottom color applies to the lower half.
+         */
+        sectionSettings: {
+          /**
+           * Optional section ID for anchor scrolling. No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+          /**
+           * Background color from top to middle of the section.
+           */
+          topToMidBackgroundColor:
+            | 'white-1'
+            | 'white-2'
+            | 'white-3'
+            | 'secondary-1'
+            | 'secondary-2'
+            | 'primary-1-30'
+            | 'primary-1-50';
+          /**
+           * Background color from middle to bottom of the section.
+           */
+          midToBottomBackgroundColor:
+            | 'white-1'
+            | 'white-2'
+            | 'white-3'
+            | 'secondary-1'
+            | 'secondary-2'
+            | 'primary-1-30'
+            | 'primary-1-50';
+        };
+        /**
+         * Title, description and internal CTA button information.
+         */
+        bookCallInfo: {
+          /**
+           * Example: Ready To Optimize Your Business? Max 90 characters.
+           */
+          title: string;
+          /**
+           * Short supporting description.
+           */
+          description: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          /**
+           * Example: Book A Free Call. Max 40 characters.
+           */
+          buttonLabel: string;
+          /**
+           * Pick an internal page for the button.
+           */
+          buttonLink: string | Page;
+          /**
+           * Optional direct jump section ID. No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'book-a-call';
+      }
+    | {
+        uploadSessionId?: string | null;
         sectionSettings?: {
           /**
            * Select a background color from the design system.
@@ -2423,6 +2499,29 @@ export interface PagesSelect<T extends boolean = true> {
                           answer?: T;
                           id?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'book-a-call'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    sectionId?: T;
+                    topToMidBackgroundColor?: T;
+                    midToBottomBackgroundColor?: T;
+                  };
+              bookCallInfo?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    buttonLabel?: T;
+                    buttonLink?: T;
+                    sectionId?: T;
                   };
               id?: T;
               blockName?: T;

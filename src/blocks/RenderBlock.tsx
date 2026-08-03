@@ -1,6 +1,7 @@
 import {
   ABOUT_US_INTRO_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
+  BOOK_A_CALL_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   COMPANY_INTRO_SLUG_AND_TAG,
@@ -36,6 +37,7 @@ import OurProjectBlock from './OurProject/OurProjectBlock'
 import CS_Collaborative_MobbingBlock from './CS_Collaborative_Mobbing/CS_Collaborative_MobbingBlock'
 import CS_CollaborationProtocalBlock from './CS_CollaborationProtocal/CS_CollaborationProtocalBlock'
 import CS_DeliveryBlock from './CS_Delivery/CS_DeliveryBlock'
+import BookACallBlock from './BookACall/BookACallBlock'
 
 type Params = Record<string, string>
 
@@ -75,7 +77,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CS_CollaborationProtocalBlock key={block.id} block={block} params={params} />
     case CS_DELIVERY_SLUG_AND_TAG:
       return <CS_DeliveryBlock key={block.id} block={block} params={params} />
-
+    case BOOK_A_CALL_SLUG_AND_TAG:
+      return <BookACallBlock key={block.id} block={block} params={params} />
     default:
       return null
   }
