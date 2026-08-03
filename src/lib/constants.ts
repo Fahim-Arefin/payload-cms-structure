@@ -127,3 +127,7 @@ export const CS_COLLABORATIVE_MOBBING_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/
 export const CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG = 'cs-collaboration-protocal'
 export const CS_COLLABORATION_PROTOCAL_BLOCK_LABEL = 'CS Collaboration Protocal'
 export const CS_COLLABORATION_PROTOCAL_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-collaboration-protocal-block-thumbnail.webp`
+
+export const CS_DELIVERY_SLUG_AND_TAG = 'cs-delivery'
+export const CS_DELIVERY_BLOCK_LABEL = 'CS Delivery'
+export const CS_DELIVERY_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-delivery-block-thumbnail.webp`

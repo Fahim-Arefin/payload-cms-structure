@@ -1947,6 +1947,120 @@ export interface Page {
         blockName?: string | null;
         blockType: 'cs-collaboration-protocal';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Top section heading. Example: tag, "04. How We Deliver", and short description.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 120 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 120.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 120 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 120.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Feature list and two delivery images.
+         */
+        deliveryInfo: {
+          /**
+           * Add delivery feature titles. Example: 4a. Test-Driven Development (TDD).
+           */
+          features: {
+            /**
+             * Example: 4a.
+             */
+            title: string;
+            /**
+             * Example: Test-Driven Development (TDD). Max 120 characters.
+             */
+            subtitle: string;
+            id?: string | null;
+          }[];
+          imageOneWrapper: {
+            /**
+             * Upload first delivery image. Recommended landscape image. Aspect ratio 571:386.
+             */
+            imageOne: string | Media;
+            imageOneOriginal?: (string | null) | Media;
+            pendingImageOneOriginal?: string | null;
+            pendingImageOneCrop?: string | null;
+            /**
+             * Auto-generated Base64 blur
+             */
+            imageOneBlurDataURL?: string | null;
+          };
+          imageTwoWrapper: {
+            /**
+             * Upload second delivery image. Recommended landscape image. Aspect ratio 571:386.
+             */
+            imageTwo: string | Media;
+            imageTwoOriginal?: (string | null) | Media;
+            pendingImageTwoOriginal?: string | null;
+            pendingImageTwoCrop?: string | null;
+            /**
+             * Auto-generated Base64 blur
+             */
+            imageTwoBlurDataURL?: string | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cs-delivery';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2831,6 +2945,60 @@ export interface PagesSelect<T extends boolean = true> {
                     pendingImageOriginal?: T;
                     pendingImageCrop?: T;
                     imageBlurDataURL?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'cs-delivery'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              deliveryInfo?:
+                | T
+                | {
+                    features?:
+                      | T
+                      | {
+                          title?: T;
+                          subtitle?: T;
+                          id?: T;
+                        };
+                    imageOneWrapper?:
+                      | T
+                      | {
+                          imageOne?: T;
+                          imageOneOriginal?: T;
+                          pendingImageOneOriginal?: T;
+                          pendingImageOneCrop?: T;
+                          imageOneBlurDataURL?: T;
+                        };
+                    imageTwoWrapper?:
+                      | T
+                      | {
+                          imageTwo?: T;
+                          imageTwoOriginal?: T;
+                          pendingImageTwoOriginal?: T;
+                          pendingImageTwoCrop?: T;
+                          imageTwoBlurDataURL?: T;
+                        };
                   };
               id?: T;
               blockName?: T;

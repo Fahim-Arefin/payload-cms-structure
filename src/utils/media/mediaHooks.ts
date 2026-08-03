@@ -6,6 +6,7 @@ import {
   COMPANY_INFO_SLUG_AND_TAG,
   CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
+  CS_DELIVERY_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
@@ -71,6 +72,18 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['protocolInfo.image'],
       mediaFieldLabels: {
         'protocolInfo.image': 'Main Image',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CS_DELIVERY_SLUG_AND_TAG,
+      mediaFields: [
+        'deliveryInfo.imageOneWrapper.imageOne',
+        'deliveryInfo.imageTwoWrapper.imageTwo',
+      ],
+      mediaFieldLabels: {
+        'deliveryInfo.imageOneWrapper.imageOne': 'Image One',
+        'deliveryInfo.imageTwoWrapper.imageTwo': 'Image Two',
       },
     },
   ],
