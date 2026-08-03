@@ -69,40 +69,96 @@ type DeliveryImageItem = {
   alt: string
 }
 
-function AnimatedDeliveryImage({ image, index }: { image: DeliveryImageItem; index: number }) {
+function AnimatedDeliveryImage({ image }: { image: DeliveryImageItem }) {
+  const sectionRef = useRef<HTMLDivElement | null>(null)
+  const maskRef = useRef<HTMLDivElement | null>(null)
+
+  useGSAP(
+    () => {
+      const section = sectionRef.current
+      const mask = maskRef.current
+
+      if (!section || !mask) return
+
+      gsap.registerPlugin(ScrollTrigger)
+
+      const maxInset = 12
+
+      const getRoundedValue = () => {
+        const radius = window.getComputedStyle(mask).borderTopLeftRadius
+
+        return radius || '8px'
+      }
+
+      gsap.set(mask, {
+        clipPath: `inset(0% ${maxInset}% 0% ${maxInset}% round ${getRoundedValue()})`,
+        willChange: 'clip-path',
+      })
+
+      const setClip = gsap.quickSetter(mask, 'clipPath')
+
+      const trigger = ScrollTrigger.create({
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.15,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const rounded = getRoundedValue()
+
+          /**
+           * progress:
+           * 0   = entering screen, narrow
+           * 0.5 = middle of screen, full width
+           * 1   = leaving screen, narrow
+           */
+          const visibleStrength = Math.sin(self.progress * Math.PI)
+          const easedStrength = gsap.parseEase('power2.inOut')(visibleStrength)
+          const inset = maxInset * (1 - easedStrength)
+
+          setClip(`inset(0% ${inset}% 0% ${inset}% round ${rounded})`)
+        },
+      })
+
+      return () => {
+        trigger.kill()
+      }
+    },
+    {
+      scope: sectionRef,
+      dependencies: [image.url],
+    },
+  )
+
   return (
-    <div
-      className="
-        delivery-image-mask
-        relative w-full aspect-[571/386]
-        overflow-hidden
-        rounded-sm lg:rounded-[6px] xl:rounded-[8px]
-        will-change-[clip-path]
-      "
-      data-index={index}
-    >
-      <Image
-        fill
-        src={image.url}
-        alt={image.alt}
+    <div ref={sectionRef}>
+      <div
+        ref={maskRef}
         className="
-          delivery-image-inner
-          object-cover object-center
+          relative w-full aspect-[571/386]
+          overflow-hidden
           rounded-sm lg:rounded-[6px] xl:rounded-[8px]
-          will-change-transform
         "
-        quality={100}
-        placeholder={image.blurDataURL ? 'blur' : 'empty'}
-        blurDataURL={image.blurDataURL || undefined}
-        sizes="(max-width: 767px) 100vw, 50vw"
-      />
+      >
+        <Image
+          fill
+          src={image.url}
+          alt={image.alt}
+          className="
+            object-cover object-center
+            rounded-sm lg:rounded-[6px] xl:rounded-[8px]
+          "
+          quality={100}
+          placeholder={image.blurDataURL ? 'blur' : 'empty'}
+          blurDataURL={image.blurDataURL || undefined}
+          sizes="(max-width: 767px) 100vw, 50vw"
+        />
+      </div>
     </div>
   )
 }
 
 function CS_DeliveryImage({ block }: Props) {
-  const sectionRef = useRef<HTMLDivElement | null>(null)
-
   const imageOne =
     typeof block?.deliveryInfo?.imageOneWrapper?.imageOne === 'object'
       ? block.deliveryInfo.imageOneWrapper.imageOne
@@ -130,83 +186,17 @@ function CS_DeliveryImage({ block }: Props) {
       : null,
   ].filter(Boolean) as DeliveryImageItem[]
 
-  useGSAP(
-    () => {
-      const section = sectionRef.current
-      if (!section || !images.length) return
-
-      gsap.registerPlugin(ScrollTrigger)
-
-      const masks = gsap.utils.toArray<HTMLElement>('.delivery-image-mask')
-      const innerImages = gsap.utils.toArray<HTMLElement>('.delivery-image-inner')
-
-      const maxInset = 10
-      const rounded = 8
-
-      masks.forEach((mask, index) => {
-        gsap.set(mask, {
-          clipPath: `inset(0% ${maxInset}% 0% ${maxInset}% round ${rounded}px)`,
-          willChange: 'clip-path',
-        })
-
-        gsap.set(innerImages[index], {
-          scale: 1.035,
-          y: 10,
-          transformOrigin: 'center center',
-          willChange: 'transform',
-        })
-      })
-
-      const setClips = masks.map((mask) => gsap.quickSetter(mask, 'clipPath'))
-      const setScales = innerImages.map((image) => gsap.quickSetter(image, 'scale'))
-      const setY = innerImages.map((image) => gsap.quickSetter(image, 'y'))
-
-      const trigger = ScrollTrigger.create({
-        trigger: section,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 1.15,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          const visibleStrength = Math.sin(self.progress * Math.PI)
-          const easedStrength = gsap.parseEase('power2.inOut')(visibleStrength)
-
-          masks.forEach((_mask, index) => {
-            const staggerOffset = index * 0.08
-            const staggeredStrength = Math.min(1, Math.max(0, easedStrength - staggerOffset))
-            const inset = maxInset * (1 - staggeredStrength)
-            const scale = 1 + 0.035 * (1 - staggeredStrength)
-            const y = 10 * (1 - staggeredStrength)
-
-            setClips[index]?.(`inset(0% ${inset}% 0% ${inset}% round ${rounded}px)`)
-            setScales[index]?.(scale)
-            setY[index]?.(y)
-          })
-        },
-      })
-
-      return () => {
-        trigger.kill()
-      }
-    },
-    {
-      scope: sectionRef,
-      dependencies: [images.length],
-    },
-  )
-
   if (!images.length) return null
 
   return (
     <div
-      ref={sectionRef}
       className="
         grid grid-cols-2
         gap-4 md:gap-6 lg:gap-10 xl:gap-12 2xl:gap-16
       "
     >
       {images.map((image, index) => (
-        <AnimatedDeliveryImage key={index} image={image} index={index} />
+        <AnimatedDeliveryImage key={index} image={image} />
       ))}
     </div>
   )
