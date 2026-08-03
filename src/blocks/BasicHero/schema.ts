@@ -6,11 +6,7 @@ import {
   BASIC_HERO_SLUG_AND_TAG,
   HERO_BLOCKS,
 } from '@/lib/constants'
-import {
-  validateHighlightedInField,
-  validateSectionIdOptional,
-  validateShortText,
-} from '@/utils/block/fields-validation'
+import { validateHighlightedInField, validateShortText } from '@/utils/block/fields-validation'
 
 import { CtaButtonsField } from '@/utils/block/fields/CtaButtonsField'
 import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
@@ -18,7 +14,6 @@ import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 const TITLE_MAX = 40
 const SUB_TITLE_MAX = 40
 const HIGHLIGHT_MAX = 40
-const WEB_SOLUTION_MAX = 40
 const VIDEO_ASSET_NAME_MAX = 120
 
 const heroImageFields = generateArrayImageFields({
@@ -26,8 +21,8 @@ const heroImageFields = generateArrayImageFields({
   fieldName: 'image',
   label: 'Hero Image',
   description:
-    'Upload & crop a 20:18 hero image. This field is used only when Hero Media Type is set to Image.',
-  aspectRatio: 20 / 18,
+    'Upload & crop an 1:1 hero image. This field is used only when Hero Media Type is set to Image.',
+  aspectRatio: 1 / 1,
   quality: 0.9,
   maxKB: 700,
   ownerCollection: BASIC_HERO_SLUG_AND_TAG as any,
@@ -56,8 +51,13 @@ const BasicHeroSchema: Block = {
   imageAltText: `${BASIC_HERO_BLOCK_LABEL} preview`,
 
   fields: [
-    // 🔐 Hidden per-doc session id for temp upload lifecycle (used by the cropper + hooks)
-    { name: 'uploadSessionId', type: 'text', admin: { condition: () => false } },
+    {
+      name: 'uploadSessionId',
+      type: 'text',
+      admin: {
+        condition: () => false,
+      },
+    },
 
     {
       name: 'heroes',
@@ -65,7 +65,10 @@ const BasicHeroSchema: Block = {
       required: true,
       minRows: 1,
       maxRows: 5,
-      labels: { singular: 'Hero Item', plural: 'Hero Items' },
+      labels: {
+        singular: 'Hero Item',
+        plural: 'Hero Items',
+      },
 
       fields: [
         {
@@ -83,7 +86,6 @@ const BasicHeroSchema: Block = {
               label: 'Image',
               value: 'image',
             },
-
             {
               label: 'Video / Animation Asset',
               value: 'video',
@@ -115,7 +117,6 @@ const BasicHeroSchema: Block = {
           },
         },
 
-        // ===== Heading 1 (EN + BN) =====
         {
           type: 'row',
           fields: [
@@ -151,7 +152,6 @@ const BasicHeroSchema: Block = {
           ],
         },
 
-        // ===== Heading 2 (EN + BN) =====
         {
           type: 'row',
           fields: [
@@ -187,7 +187,6 @@ const BasicHeroSchema: Block = {
           ],
         },
 
-        // ===== Heading 3 (EN + BN) =====
         {
           type: 'row',
           fields: [
@@ -223,7 +222,6 @@ const BasicHeroSchema: Block = {
           ],
         },
 
-        // ===== Description (EN + BN) =====
         {
           type: 'row',
           fields: [
@@ -233,69 +231,8 @@ const BasicHeroSchema: Block = {
               label: 'Description',
               admin: {
                 width: '100%',
-                description: ``,
+                description: '',
               },
-            },
-          ],
-        },
-
-        // ===== Web Solutions We Provide =====
-        {
-          name: 'webSolutionsWeProvide',
-          type: 'array',
-          required: false,
-          minRows: 0,
-          maxRows: 10,
-          label: 'Web Solutions We Provide',
-          labels: {
-            singular: 'Web Solution',
-            plural: 'Web Solutions',
-          },
-          admin: {
-            description:
-              'Add short service/solution labels that will appear in the hero section, such as Web Design, Web Development, E-Commerce, SEO Optimization, CMS Development, UI/UX Design, or Maintenance Support. You can optionally link each solution to an internal page or a specific section on that page.',
-          },
-          fields: [
-            {
-              name: 'solution',
-              type: 'text',
-              required: true,
-              label: 'Solution Name',
-              maxLength: WEB_SOLUTION_MAX,
-              validate: validateShortText('Solution Name', WEB_SOLUTION_MAX, true),
-              admin: {
-                description: `Enter one short web solution/service name. Max ${WEB_SOLUTION_MAX} characters.`,
-              },
-            },
-
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'buttonLink',
-                  label: 'Link to (internal page)',
-                  type: 'relationship',
-                  relationTo: 'pages',
-                  required: false,
-                  admin: {
-                    width: '50%',
-                    description:
-                      'Optional. Pick an internal page to link this web solution chip to. External URLs are not allowed.',
-                  },
-                },
-                {
-                  name: 'sectionId',
-                  type: 'text',
-                  label: 'Section ID (anchor)',
-                  required: false,
-                  admin: {
-                    width: '50%',
-                    description:
-                      'Optional. Used for direct jump links to a section on the selected page. Example: "service-section". No spaces. Use "-" to separate words.',
-                  },
-                  validate: validateSectionIdOptional,
-                },
-              ],
             },
           ],
         },
