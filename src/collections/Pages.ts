@@ -190,7 +190,7 @@ export const Pages: CollectionConfig = {
       blocks: [
         // hero page
         BasicHeroSchema,
-        ProductHeroSchema,
+        // ProductHeroSchema,
 
         // common section
         ContactUsSchema,
