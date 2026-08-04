@@ -6,6 +6,7 @@ import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
 import CompanyStatsSchema from '@/blocks/CompanyStats/schema'
+import ContactInfoSchema from '@/blocks/ContactInfo/schema'
 import ContactUsSchema from '@/blocks/ContactUs/schema'
 import CSCollaborationProtocalSchema from '@/blocks/CS_CollaborationProtocal/schema'
 import CSCollaborativeMobbingSchema from '@/blocks/CS_Collaborative_Mobbing/schema'
@@ -218,6 +219,7 @@ export const Pages: CollectionConfig = {
         CSCollaborationProtocalSchema,
         CSDeliverySchema,
         // Get In Touch
+        ContactInfoSchema,
 
         // News
       ],
