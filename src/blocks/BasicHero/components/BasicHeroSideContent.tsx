@@ -299,25 +299,60 @@ const imageMediaMaskStyle = {
   maskMode: 'alpha',
 }
 
+// const videoMediaMaskStyle = {
+//   WebkitMaskImage: `
+//     linear-gradient(
+//       90deg,
+//       rgba(0, 0, 0, 0.45) 0%,
+//       rgba(0, 0, 0, 0.62) 24%,
+//       rgba(0, 0, 0, 0.88) 54%,
+//       rgba(0, 0, 0, 1) 86%,
+//       rgba(0, 0, 0, 0.18) 100%
+//     )
+//   `,
+//   maskImage: `
+//     linear-gradient(
+//       90deg,
+//       rgba(0, 0, 0, 0.45) 0%,
+//       rgba(0, 0, 0, 0.62) 24%,
+//       rgba(0, 0, 0, 0.88) 54%,
+//       rgba(0, 0, 0, 1) 86%,
+//       rgba(0, 0, 0, 0.18) 100%
+//     )
+//   `,
+//   WebkitMaskSize: '100% 100%',
+//   maskSize: '100% 100%',
+//   WebkitMaskRepeat: 'no-repeat',
+//   maskRepeat: 'no-repeat',
+//   WebkitMaskMode: 'alpha',
+//   maskMode: 'alpha',
+// }
+
 const videoMediaMaskStyle = {
   WebkitMaskImage: `
     linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.45) 0%,
-      rgba(0, 0, 0, 0.62) 24%,
-      rgba(0, 0, 0, 0.88) 54%,
-      rgba(0, 0, 0, 1) 86%,
-      rgba(0, 0, 0, 0.18) 100%
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.15) 8%,
+      rgba(0, 0, 0, 0.72) 22%,
+      rgba(0, 0, 0, 1) 42%,
+      rgba(0, 0, 0, 1) 68%,
+      rgba(0, 0, 0, 0.72) 84%,
+      rgba(0, 0, 0, 0.08) 94%,
+      rgba(0, 0, 0, 0.08) 100%
     )
   `,
   maskImage: `
     linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.45) 0%,
-      rgba(0, 0, 0, 0.62) 24%,
-      rgba(0, 0, 0, 0.88) 54%,
-      rgba(0, 0, 0, 1) 86%,
-      rgba(0, 0, 0, 0.18) 100%
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.15) 8%,
+      rgba(0, 0, 0, 0.72) 22%,
+      rgba(0, 0, 0, 1) 42%,
+      rgba(0, 0, 0, 1) 68%,
+      rgba(0, 0, 0, 0.72) 84%,
+      rgba(0, 0, 0, 0.08) 94%,
+      rgba(0, 0, 0, 0.08) 100%
     )
   `,
   WebkitMaskSize: '100% 100%',
@@ -392,6 +427,7 @@ function BasicHeroSideContent({ item }: Props) {
       <div
         className="relative z-10 h-full w-full"
         style={isImageMedia ? imageMediaMaskStyle : videoMediaMaskStyle}
+        // style={isVideoMedia ? videoMediaMaskStyle : undefined}
       >
         {/* image only shown as side media from lg and up */}
         {isImageMedia && typeof item.image === 'object' && item.image?.url && (
@@ -433,7 +469,7 @@ function BasicHeroSideContent({ item }: Props) {
             <div
               className="
                 pointer-events-none absolute inset-x-0 bottom-0 z-10
-                h-[42%]
+                h-[18%]
                 lg:hidden
               "
               style={{

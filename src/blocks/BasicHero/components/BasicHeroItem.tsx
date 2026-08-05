@@ -283,7 +283,7 @@ function BasicHeroItem({ item }: Props) {
                 mx-auto max-w-[285px]
                 font-grift font-semibold text-white-1 capitalize
                 text-center global-p4
-                lg:mx-0 lg:max-w-[520px] lg:text-start lg:global-p3
+                lg:mx-0 lg:max-w-[70%] 2xl:max-w-[60%] lg:text-start lg:global-p3
               "
             >
               <LocalizedRichText en={item?.description} bn={item?.description} />

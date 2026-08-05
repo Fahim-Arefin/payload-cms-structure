@@ -135,3 +135,7 @@ export const CS_DELIVERY_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-delivery-b
 export const BOOK_A_CALL_SLUG_AND_TAG = 'book-a-call'
 export const BOOK_A_CALL_BLOCK_LABEL = 'Book A Call'
 export const BOOK_A_CALL_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/book-a-call-block-thumbnail.webp`
+
+export const CONTACT_INFO_SLUG_AND_TAG = 'contact-info'
+export const CONTACT_INFO_BLOCK_LABEL = 'Contact Info'
+export const CONTACT_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/contact-info-block-thumbnail.webp`
