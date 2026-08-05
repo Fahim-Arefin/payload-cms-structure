@@ -2041,6 +2041,130 @@ export interface Page {
         blockName?: string | null;
         blockType: 'cs-delivery';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Contact info section tag, heading and highlighted heading text.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage contact cards for phone, email, WhatsApp, LinkedIn and Facebook.
+         */
+        contacts: {
+          callUs: {
+            /**
+             * Example: Call Us. Max 40 characters.
+             */
+            label: string;
+            /**
+             * Example: +880 1777-189611. Max 40 characters.
+             */
+            phoneNumber: string;
+          };
+          emailUs: {
+            /**
+             * Example: Email Us. Max 40 characters.
+             */
+            label: string;
+            /**
+             * Example: contact@xynolab.com. Max 100 characters.
+             */
+            email: string;
+          };
+          whatsApp: {
+            /**
+             * Example: Live Chat. Max 40 characters.
+             */
+            label: string;
+            /**
+             * Example: https://api.whatsapp.com/send?phone=%2B8801777189611&brid=YQYMKgmDKn-ZQ3Gbr7U7AA. Max 300 characters.
+             */
+            link: string;
+          };
+          linkedIn: {
+            /**
+             * Example: LinkedIn. Max 40 characters.
+             */
+            label: string;
+            /**
+             * Example: https://www.linkedin.com/company/101714006/admin/dashboard/. Max 300 characters.
+             */
+            link: string;
+          };
+          facebook: {
+            /**
+             * Example: Facebook. Max 40 characters.
+             */
+            label: string;
+            /**
+             * Example: https://www.facebook.com/share/17mQMjauXM/. Max 300 characters.
+             */
+            link: string;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contact-info';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2961,6 +3085,65 @@ export interface PagesSelect<T extends boolean = true> {
                           pendingImageTwoOriginal?: T;
                           pendingImageTwoCrop?: T;
                           imageTwoBlurDataURL?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'contact-info'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              contacts?:
+                | T
+                | {
+                    callUs?:
+                      | T
+                      | {
+                          label?: T;
+                          phoneNumber?: T;
+                        };
+                    emailUs?:
+                      | T
+                      | {
+                          label?: T;
+                          email?: T;
+                        };
+                    whatsApp?:
+                      | T
+                      | {
+                          label?: T;
+                          link?: T;
+                        };
+                    linkedIn?:
+                      | T
+                      | {
+                          label?: T;
+                          link?: T;
+                        };
+                    facebook?:
+                      | T
+                      | {
+                          label?: T;
+                          link?: T;
                         };
                   };
               id?: T;

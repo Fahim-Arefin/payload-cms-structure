@@ -7,6 +7,7 @@ import {
   COMPANY_INFO_SLUG_AND_TAG,
   COMPANY_INTRO_SLUG_AND_TAG,
   COMPANY_STATS_SLUG_AND_TAG,
+  CONTACT_INFO_SLUG_AND_TAG,
   CONTACT_US_SLUG_AND_TAG,
   CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
@@ -110,4 +111,9 @@ export type CS_DeliveryBlockType = Extract<
 export type BookACallBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof BOOK_A_CALL_SLUG_AND_TAG }
+>
+
+export type ContactInfoBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CONTACT_INFO_SLUG_AND_TAG }
 >
