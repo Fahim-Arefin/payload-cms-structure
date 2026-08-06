@@ -5,6 +5,7 @@ import ClientSuccessStoriesSchema from '@/blocks/ClientSuccessStories/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
+import LocationSchema from '@/blocks/CompanyLocation/schema'
 import CompanyStatsSchema from '@/blocks/CompanyStats/schema'
 import ContactInfoSchema from '@/blocks/ContactInfo/schema'
 import ContactUsSchema from '@/blocks/ContactUs/schema'
@@ -220,6 +221,7 @@ export const Pages: CollectionConfig = {
         CSDeliverySchema,
         // Get In Touch
         ContactInfoSchema,
+        LocationSchema,
 
         // News
       ],

@@ -2165,6 +2165,107 @@ export interface Page {
         blockName?: string | null;
         blockType: 'contact-info';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Location section tag, heading and highlighted heading text.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage office location text, Google Map link and map image.
+         */
+        locationInfo: {
+          /**
+           * Example: XynoLab HQ. Max 60 characters.
+           */
+          label: string;
+          /**
+           * Example: Wakil Tower, 131 Gulshan Avenue, Dhaka 1212. Max 180 characters.
+           */
+          location: string;
+          /**
+           * Example: Get Directions. Max 40 characters.
+           */
+          googleMapButtonLabel: string;
+          /**
+           * Paste the Google Maps direction/location URL. Max 500 characters.
+           */
+          googleMapLink: string;
+          /**
+           * Upload & crop the map preview image. Aspect Ratio: 902 / 540
+           */
+          mapImage: string | Media;
+          mapImageOriginal?: (string | null) | Media;
+          pendingMapImageOriginal?: string | null;
+          pendingMapImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          mapImageBlurDataURL?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'location';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -3145,6 +3246,44 @@ export interface PagesSelect<T extends boolean = true> {
                           label?: T;
                           link?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        location?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              locationInfo?:
+                | T
+                | {
+                    label?: T;
+                    location?: T;
+                    googleMapButtonLabel?: T;
+                    googleMapLink?: T;
+                    mapImage?: T;
+                    mapImageOriginal?: T;
+                    pendingMapImageOriginal?: T;
+                    pendingMapImageCrop?: T;
+                    mapImageBlurDataURL?: T;
                   };
               id?: T;
               blockName?: T;

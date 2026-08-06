@@ -14,6 +14,7 @@ import {
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
+  LOCATION_SLUG_AND_TAG,
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
@@ -40,6 +41,7 @@ import CS_CollaborationProtocalBlock from './CS_CollaborationProtocal/CS_Collabo
 import CS_DeliveryBlock from './CS_Delivery/CS_DeliveryBlock'
 import BookACallBlock from './BookACall/BookACallBlock'
 import ContactInfoBlock from './ContactInfo/ContactInfoBlock'
+import CompanyLocationBlock from './CompanyLocation/CompanyLocationBlock'
 
 type Params = Record<string, string>
 
@@ -83,6 +85,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <BookACallBlock key={block.id} block={block} params={params} />
     case CONTACT_INFO_SLUG_AND_TAG:
       return <ContactInfoBlock key={block.id} block={block} params={params} />
+    case LOCATION_SLUG_AND_TAG:
+      return <CompanyLocationBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

@@ -15,6 +15,7 @@ import {
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
+  LOCATION_SLUG_AND_TAG,
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
@@ -116,4 +117,9 @@ export type BookACallBlockType = Extract<
 export type ContactInfoBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CONTACT_INFO_SLUG_AND_TAG }
+>
+
+export type LocationBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof LOCATION_SLUG_AND_TAG }
 >
