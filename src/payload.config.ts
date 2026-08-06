@@ -18,6 +18,7 @@ import Navbar from './collections/globals/Navbar'
 import NewsletterSubscribers from './collections/NewsletterSubscribers'
 import GlobalContactUs from './collections/globals/GlobalContactUs'
 import ContactFormSubmissions from './collections/ContactFormSubmissions'
+import ReviewFormSubmissions from './collections/ReviewFormSubmissions'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -97,6 +98,7 @@ export default buildConfig({
     AuditLogs,
     NewsletterSubscribers,
     ContactFormSubmissions,
+    ReviewFormSubmissions,
     Pages,
   ],
   globals: [Navbar, Footer, GlobalContactUs],

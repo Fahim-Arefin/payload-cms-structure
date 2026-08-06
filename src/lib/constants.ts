@@ -139,3 +139,11 @@ export const BOOK_A_CALL_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/book-a-call-b
 export const CONTACT_INFO_SLUG_AND_TAG = 'contact-info'
 export const CONTACT_INFO_BLOCK_LABEL = 'Contact Info'
 export const CONTACT_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/contact-info-block-thumbnail.webp`
+
+export const LOCATION_SLUG_AND_TAG = 'location'
+export const LOCATION_BLOCK_LABEL = 'Location'
+export const LOCATION_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/location-block-thumbnail.webp`
+
+export const RATING_SLUG_AND_TAG = 'rating'
+export const RATING_BLOCK_LABEL = 'Rating'
+export const RATING_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/rating-block-thumbnail.webp`

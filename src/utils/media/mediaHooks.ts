@@ -10,6 +10,7 @@ import {
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
+  LOCATION_SLUG_AND_TAG,
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -84,6 +85,14 @@ export const mediaHooks = withMediaLifecycle({
       mediaFieldLabels: {
         'deliveryInfo.imageOneWrapper.imageOne': 'Image One',
         'deliveryInfo.imageTwoWrapper.imageTwo': 'Image Two',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: LOCATION_SLUG_AND_TAG,
+      mediaFields: ['locationInfo.mapImage'],
+      mediaFieldLabels: {
+        'locationInfo.mapImage': 'Map Image',
       },
     },
   ],

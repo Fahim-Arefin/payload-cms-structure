@@ -5,6 +5,7 @@ import ClientSuccessStoriesSchema from '@/blocks/ClientSuccessStories/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
+import LocationSchema from '@/blocks/CompanyLocation/schema'
 import CompanyStatsSchema from '@/blocks/CompanyStats/schema'
 import ContactInfoSchema from '@/blocks/ContactInfo/schema'
 import ContactUsSchema from '@/blocks/ContactUs/schema'
@@ -18,6 +19,7 @@ import OurProjectSchema from '@/blocks/OurProject/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
 import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
+import RatingSchema from '@/blocks/Rating/scheam'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -220,6 +222,8 @@ export const Pages: CollectionConfig = {
         CSDeliverySchema,
         // Get In Touch
         ContactInfoSchema,
+        LocationSchema,
+        RatingSchema,
 
         // News
       ],

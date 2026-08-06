@@ -18,7 +18,7 @@ function BookACallSection({ block }: Props) {
   const hasDescription = !!info?.description && !!info?.description?.root?.direction
 
   return (
-    <div className="container-padding">
+    <div className="container-padding-x">
       <div
         className="
           relative overflow-hidden
