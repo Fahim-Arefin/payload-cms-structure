@@ -143,3 +143,7 @@ export const CONTACT_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/contact-info
 export const LOCATION_SLUG_AND_TAG = 'location'
 export const LOCATION_BLOCK_LABEL = 'Location'
 export const LOCATION_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/location-block-thumbnail.webp`
+
+export const RATING_SLUG_AND_TAG = 'rating'
+export const RATING_BLOCK_LABEL = 'Rating'
+export const RATING_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/rating-block-thumbnail.webp`

@@ -19,6 +19,7 @@ import {
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
+  RATING_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -42,6 +43,7 @@ import CS_DeliveryBlock from './CS_Delivery/CS_DeliveryBlock'
 import BookACallBlock from './BookACall/BookACallBlock'
 import ContactInfoBlock from './ContactInfo/ContactInfoBlock'
 import CompanyLocationBlock from './CompanyLocation/CompanyLocationBlock'
+import RatingBlock from './Rating/RatingBlock'
 
 type Params = Record<string, string>
 
@@ -87,6 +89,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <ContactInfoBlock key={block.id} block={block} params={params} />
     case LOCATION_SLUG_AND_TAG:
       return <CompanyLocationBlock key={block.id} block={block} params={params} />
+    case RATING_SLUG_AND_TAG:
+      return <RatingBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

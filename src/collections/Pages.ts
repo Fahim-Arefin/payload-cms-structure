@@ -19,6 +19,7 @@ import OurProjectSchema from '@/blocks/OurProject/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
 import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
+import RatingSchema from '@/blocks/Rating/scheam'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -222,6 +223,7 @@ export const Pages: CollectionConfig = {
         // Get In Touch
         ContactInfoSchema,
         LocationSchema,
+        RatingSchema,
 
         // News
       ],

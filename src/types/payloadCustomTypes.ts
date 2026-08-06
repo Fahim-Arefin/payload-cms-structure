@@ -20,6 +20,7 @@ import {
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
+  RATING_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -122,4 +123,8 @@ export type ContactInfoBlockType = Extract<
 export type LocationBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof LOCATION_SLUG_AND_TAG }
+>
+export type RatingBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof RATING_SLUG_AND_TAG }
 >
