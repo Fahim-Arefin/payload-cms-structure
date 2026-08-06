@@ -6,6 +6,7 @@ import {
   COMPANY_INFO_SLUG_AND_TAG,
   COMPANY_INTRO_SLUG_AND_TAG,
   COMPANY_STATS_SLUG_AND_TAG,
+  CONTACT_INFO_SLUG_AND_TAG,
   CONTACT_US_SLUG_AND_TAG,
   CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
@@ -38,6 +39,7 @@ import CS_Collaborative_MobbingBlock from './CS_Collaborative_Mobbing/CS_Collabo
 import CS_CollaborationProtocalBlock from './CS_CollaborationProtocal/CS_CollaborationProtocalBlock'
 import CS_DeliveryBlock from './CS_Delivery/CS_DeliveryBlock'
 import BookACallBlock from './BookACall/BookACallBlock'
+import ContactInfoBlock from './ContactInfo/ContactInfoBlock'
 
 type Params = Record<string, string>
 
@@ -45,8 +47,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
   switch (block.blockType) {
     case BASIC_HERO_SLUG_AND_TAG:
       return <BasicHeroBlock key={block.id} block={block} params={params} />
-    case PRODUCT_HERO_SLUG_AND_TAG:
-      return <ProductHeroBlock key={block.id} block={block} params={params} />
+    // case PRODUCT_HERO_SLUG_AND_TAG:
+    //   return <ProductHeroBlock key={block.id} block={block} params={params} />
     case COMPANY_INFO_SLUG_AND_TAG:
       return <CompanyInfoBlock key={block.id} block={block} params={params} />
     case COMPANY_INTRO_SLUG_AND_TAG:
@@ -79,6 +81,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CS_DeliveryBlock key={block.id} block={block} params={params} />
     case BOOK_A_CALL_SLUG_AND_TAG:
       return <BookACallBlock key={block.id} block={block} params={params} />
+    case CONTACT_INFO_SLUG_AND_TAG:
+      return <ContactInfoBlock key={block.id} block={block} params={params} />
     default:
       return null
   }
