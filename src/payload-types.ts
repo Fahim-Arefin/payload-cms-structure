@@ -73,6 +73,7 @@ export interface Config {
     'audit-logs': AuditLog;
     'newsletter-subscribers': NewsletterSubscriber;
     'contact-form-submissions': ContactFormSubmission;
+    'review-form-submissions': ReviewFormSubmission;
     pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     'audit-logs': AuditLogsSelect<false> | AuditLogsSelect<true>;
     'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
     'contact-form-submissions': ContactFormSubmissionsSelect<false> | ContactFormSubmissionsSelect<true>;
+    'review-form-submissions': ReviewFormSubmissionsSelect<false> | ReviewFormSubmissionsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -281,6 +283,52 @@ export interface ContactFormSubmission {
   budgetMin: number;
   budgetMax: number;
   status?: ('new' | 'contacted' | 'closed') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "review-form-submissions".
+ */
+export interface ReviewFormSubmission {
+  id: string;
+  uploadSessionId?: string | null;
+  buyersFullName: string;
+  linkedIn?: string | null;
+  companyName: string;
+  position: string;
+  country: string;
+  countryDialCode?: string | null;
+  phone: string;
+  rating: number;
+  review: string;
+  /**
+   * These images are uploaded only from this collection in the admin panel. They are not submitted from the frontend form.
+   */
+  adminImages?: {
+    /**
+     * Upload & crop the company icon. This can be uploaded from this collection only. Ratio 200:80
+     */
+    companyIcon?: (string | null) | Media;
+    companyIconOriginal?: (string | null) | Media;
+    pendingCompanyIconOriginal?: string | null;
+    pendingCompanyIconCrop?: string | null;
+    /**
+     * Auto-generated Base64 blur
+     */
+    companyIconBlurDataURL?: string | null;
+    /**
+     * Upload & crop the user profile image. This can be uploaded from this collection only. Ratio 325:385
+     */
+    userProfileImage?: (string | null) | Media;
+    userProfileImageOriginal?: (string | null) | Media;
+    pendingUserProfileImageOriginal?: string | null;
+    pendingUserProfileImageCrop?: string | null;
+    /**
+     * Auto-generated Base64 blur
+     */
+    userProfileImageBlurDataURL?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -2165,6 +2213,185 @@ export interface Page {
         blockName?: string | null;
         blockType: 'contact-info';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Location section tag, heading and highlighted heading text.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage office location text, Google Map link and map image.
+         */
+        locationInfo: {
+          /**
+           * Example: XynoLab HQ. Max 60 characters.
+           */
+          label: string;
+          /**
+           * Example: Wakil Tower, 131 Gulshan Avenue, Dhaka 1212. Max 180 characters.
+           */
+          location: string;
+          /**
+           * Example: Get Directions. Max 40 characters.
+           */
+          googleMapButtonLabel: string;
+          /**
+           * Paste the Google Maps direction/location URL. Max 500 characters.
+           */
+          googleMapLink: string;
+          /**
+           * Upload & crop the map preview image. Aspect Ratio: 902 / 540
+           */
+          mapImage: string | Media;
+          mapImageOriginal?: (string | null) | Media;
+          pendingMapImageOriginal?: string | null;
+          pendingMapImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          mapImageBlurDataURL?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'location';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Rating section tag, heading and highlighted heading text.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Control whether the rating form should be shown on the frontend.
+         */
+        ratingSettings?: {
+          /**
+           * Enable this to show the rating form section.
+           */
+          showRatingForm?: boolean | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'rating';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2200,6 +2427,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-form-submissions';
         value: string | ContactFormSubmission;
+      } | null)
+    | ({
+        relationTo: 'review-form-submissions';
+        value: string | ReviewFormSubmission;
       } | null)
     | ({
         relationTo: 'pages';
@@ -2360,6 +2591,38 @@ export interface ContactFormSubmissionsSelect<T extends boolean = true> {
   budgetMin?: T;
   budgetMax?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "review-form-submissions_select".
+ */
+export interface ReviewFormSubmissionsSelect<T extends boolean = true> {
+  uploadSessionId?: T;
+  buyersFullName?: T;
+  linkedIn?: T;
+  companyName?: T;
+  position?: T;
+  country?: T;
+  countryDialCode?: T;
+  phone?: T;
+  rating?: T;
+  review?: T;
+  adminImages?:
+    | T
+    | {
+        companyIcon?: T;
+        companyIconOriginal?: T;
+        pendingCompanyIconOriginal?: T;
+        pendingCompanyIconCrop?: T;
+        companyIconBlurDataURL?: T;
+        userProfileImage?: T;
+        userProfileImageOriginal?: T;
+        pendingUserProfileImageOriginal?: T;
+        pendingUserProfileImageCrop?: T;
+        userProfileImageBlurDataURL?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -3145,6 +3408,74 @@ export interface PagesSelect<T extends boolean = true> {
                           label?: T;
                           link?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        location?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              locationInfo?:
+                | T
+                | {
+                    label?: T;
+                    location?: T;
+                    googleMapButtonLabel?: T;
+                    googleMapLink?: T;
+                    mapImage?: T;
+                    mapImageOriginal?: T;
+                    pendingMapImageOriginal?: T;
+                    pendingMapImageCrop?: T;
+                    mapImageBlurDataURL?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        rating?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              ratingSettings?:
+                | T
+                | {
+                    showRatingForm?: T;
                   };
               id?: T;
               blockName?: T;
