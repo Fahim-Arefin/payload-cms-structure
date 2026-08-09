@@ -104,69 +104,108 @@ const GlobalContactUs: GlobalConfig = {
       ],
     },
 
+    // {
+    //   name: 'budgetRange',
+    //   type: 'group',
+    //   label: 'Budget Range',
+    //   admin: {
+    //     description: 'Controls the frontend budget range selector.',
+    //   },
+    //   fields: [
+    //     {
+    //       type: 'row',
+    //       fields: [
+    //         {
+    //           name: 'minValue',
+    //           type: 'number',
+    //           label: 'Minimum Budget Value',
+    //           required: true,
+    //           defaultValue: 100000,
+    //           min: 0,
+    //           admin: {
+    //             width: '50%',
+    //             description: 'Example: 0.',
+    //           },
+    //         },
+    //         {
+    //           name: 'maxValue',
+    //           type: 'number',
+    //           label: 'Maximum Budget Value',
+    //           required: true,
+    //           defaultValue: 10000000,
+    //           min: 1,
+    //           admin: {
+    //             width: '50%',
+    //             description: 'Example: 10000000.',
+    //           },
+    //         },
+    //       ],
+    //     },
+
+    //     {
+    //       type: 'row',
+    //       fields: [
+    //         {
+    //           name: 'defaultMinValue',
+    //           type: 'number',
+    //           label: 'Default Selected Minimum',
+    //           required: false,
+    //           defaultValue: 100000,
+    //           min: 0,
+    //           admin: {
+    //             width: '50%',
+    //             description: 'Example: 100000.',
+    //           },
+    //         },
+    //         {
+    //           name: 'defaultMaxValue',
+    //           type: 'number',
+    //           label: 'Default Selected Maximum',
+    //           required: false,
+    //           defaultValue: 10000000,
+    //           min: 1,
+    //           admin: {
+    //             width: '50%',
+    //             description: 'Example: 10000000.',
+    //           },
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
     {
       name: 'budgetRange',
       type: 'group',
       label: 'Budget Range',
       admin: {
-        description: 'Controls the frontend budget range selector.',
+        description: 'Controls the default frontend budget range values.',
       },
       fields: [
         {
           type: 'row',
           fields: [
             {
-              name: 'minValue',
-              type: 'number',
-              label: 'Minimum Budget Value',
-              required: true,
-              defaultValue: 100000,
-              min: 0,
-              admin: {
-                width: '50%',
-                description: 'Example: 0.',
-              },
-            },
-            {
-              name: 'maxValue',
-              type: 'number',
-              label: 'Maximum Budget Value',
-              required: true,
-              defaultValue: 10000000,
-              min: 1,
-              admin: {
-                width: '50%',
-                description: 'Example: 10000000.',
-              },
-            },
-          ],
-        },
-
-        {
-          type: 'row',
-          fields: [
-            {
               name: 'defaultMinValue',
               type: 'number',
-              label: 'Default Selected Minimum',
-              required: false,
-              defaultValue: 100000,
+              label: 'Default Minimum Budget',
+              required: true,
+              defaultValue: 1000,
               min: 0,
               admin: {
                 width: '50%',
-                description: 'Example: 100000.',
+                description: 'Example: 1000.',
               },
             },
             {
               name: 'defaultMaxValue',
               type: 'number',
-              label: 'Default Selected Maximum',
-              required: false,
-              defaultValue: 10000000,
+              label: 'Default Maximum Budget',
+              required: true,
+              defaultValue: 10000,
               min: 1,
               admin: {
                 width: '50%',
-                description: 'Example: 10000000.',
+                description: 'Example: 10000.',
               },
             },
           ],

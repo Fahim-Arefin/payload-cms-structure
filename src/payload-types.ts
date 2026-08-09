@@ -302,6 +302,7 @@ export interface ReviewFormSubmission {
   phone: string;
   rating: number;
   review: string;
+  status?: ('new' | 'reviewed' | 'published') | null;
   /**
    * These images are uploaded only from this collection in the admin panel. They are not submitted from the frontend form.
    */
@@ -734,6 +735,73 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'book-a-call';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the maintenance image, title, subtitle, description and CTA buttons.
+         */
+        maintenanceInfo: {
+          /**
+           * Upload the maintenance illustration image. Recommended transparent PNG/WebP. Ratio 1600:1144
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          imageBlurDataURL?: string | null;
+          /**
+           * Example: Assembling the pieces all together. Max 100 characters.
+           */
+          title: string;
+          /**
+           * Optional short subtitle. Max 160 characters.
+           */
+          subtitle?: string | null;
+          /**
+           * Write the maintenance message. Max 420 characters.
+           */
+          description: string;
+          ctaButtons?:
+            | {
+                /**
+                 * Max 40 characters.
+                 */
+                label: string;
+                /**
+                 * Select the button style
+                 */
+                style?: ('btn01' | 'btn02') | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'maintenance';
       }
     | {
         uploadSessionId?: string | null;
@@ -1990,6 +2058,191 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
+         * Development framework section heading, description, CTA button and downloadable case study button.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          ctaButtons?:
+            | {
+                /**
+                 * Max 40 characters.
+                 */
+                label: string;
+                /**
+                 * Select the button style
+                 */
+                style?: ('btn01' | 'btn02') | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          /**
+           * Optional PDF download button. Use this when the section needs 1 CTA + 1 downloadable case study file.
+           */
+          downloadButton?: {
+            /**
+             * Example: Download Case Study. Max 40 characters.
+             */
+            label?: string | null;
+            /**
+             * Upload the downloadable PDF file here.
+             */
+            file?: (string | null) | Media;
+          };
+        };
+        /**
+         * Controls the lifecycle menu and connected rope/timeline items. Each lifecycle item contains its menu label, main content, related info card and icons.
+         */
+        lifecycle: {
+          /**
+           * Example: Lifecycle. Max 40 characters.
+           */
+          title: string;
+          /**
+           * Example: Process Tracking. Max 80 characters.
+           */
+          subtitle?: string | null;
+          /**
+           * Each row is one connected lifecycle step. Example: Ideation → Functional Ideation → Innovation & Discovery.
+           */
+          items?:
+            | {
+                menu: {
+                  /**
+                   * Example: Ideation, Strategy, Development, Deployment. Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * Optional. If enabled, this item can be used as the initially active lifecycle item.
+                   */
+                  defaultActive?: boolean | null;
+                };
+                /**
+                 * This is the large title and paragraph connected to the selected lifecycle menu item.
+                 */
+                mainContent: {
+                  /**
+                   * Example: Functional Ideation. Max 80 characters.
+                   */
+                  title: string;
+                  /**
+                   * Short paragraph under the main title. Max 260 characters.
+                   */
+                  description: string;
+                };
+                /**
+                 * This card belongs to the same lifecycle item. Example: Innovation & Discovery card belongs to Functional Ideation.
+                 */
+                infoCard: {
+                  /**
+                   * Example: Innovation & Discovery. Max 80 characters.
+                   */
+                  title: string;
+                  /**
+                   * Controls whether this related card appears on the left or right side of the rope/timeline.
+                   */
+                  position: 'left' | 'right';
+                  /**
+                   * Short paragraph inside the related info card. Max 360 characters.
+                   */
+                  description: string;
+                };
+                /**
+                 * Single icon set for this lifecycle item. Frontend will use this icon for both lifecycle menu and timeline marker.
+                 */
+                mainIcon?: {
+                  /**
+                   * Upload the colored icon for this lifecycle item. This icon is used in the menu and the timeline marker.
+                   */
+                  mainIconColored?: (string | null) | Media;
+                  mainIconColoredOriginal?: (string | null) | Media;
+                  pendingMainIconColoredOriginal?: string | null;
+                  pendingMainIconColoredCrop?: string | null;
+                  mainIconColoredBlurDataURL?: string | null;
+                  /**
+                   * Upload the white icon for this lifecycle item active/hover state. This icon is used in the menu and the active timeline marker.
+                   */
+                  mainIconWhite?: (string | null) | Media;
+                  mainIconWhiteOriginal?: (string | null) | Media;
+                  pendingMainIconWhiteOriginal?: string | null;
+                  pendingMainIconWhiteCrop?: string | null;
+                  mainIconWhiteBlurDataURL?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cs-development-framework';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
          * Top section heading. Example: tag, "04. How We Deliver", and short description.
          */
         sectionHeading: {
@@ -2609,6 +2862,7 @@ export interface ReviewFormSubmissionsSelect<T extends boolean = true> {
   phone?: T;
   rating?: T;
   review?: T;
+  status?: T;
   adminImages?:
     | T
     | {
@@ -2773,6 +3027,40 @@ export interface PagesSelect<T extends boolean = true> {
                     buttonLabel?: T;
                     buttonLink?: T;
                     sectionId?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        maintenance?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              maintenanceInfo?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    title?: T;
+                    subtitle?: T;
+                    description?: T;
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
                   };
               id?: T;
               blockName?: T;
@@ -3299,6 +3587,90 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'cs-development-framework'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                    downloadButton?:
+                      | T
+                      | {
+                          label?: T;
+                          file?: T;
+                        };
+                  };
+              lifecycle?:
+                | T
+                | {
+                    title?: T;
+                    subtitle?: T;
+                    items?:
+                      | T
+                      | {
+                          menu?:
+                            | T
+                            | {
+                                label?: T;
+                                defaultActive?: T;
+                              };
+                          mainContent?:
+                            | T
+                            | {
+                                title?: T;
+                                description?: T;
+                              };
+                          infoCard?:
+                            | T
+                            | {
+                                title?: T;
+                                position?: T;
+                                description?: T;
+                              };
+                          mainIcon?:
+                            | T
+                            | {
+                                mainIconColored?: T;
+                                mainIconColoredOriginal?: T;
+                                pendingMainIconColoredOriginal?: T;
+                                pendingMainIconColoredCrop?: T;
+                                mainIconColoredBlurDataURL?: T;
+                                mainIconWhite?: T;
+                                mainIconWhiteOriginal?: T;
+                                pendingMainIconWhiteOriginal?: T;
+                                pendingMainIconWhiteCrop?: T;
+                                mainIconWhiteBlurDataURL?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
         'cs-delivery'?:
           | T
           | {
@@ -3738,25 +4110,17 @@ export interface GlobalContactUs {
     id?: string | null;
   }[];
   /**
-   * Controls the frontend budget range selector.
+   * Controls the default frontend budget range values.
    */
   budgetRange: {
     /**
-     * Example: 0.
+     * Example: 1000.
      */
-    minValue: number;
+    defaultMinValue: number;
     /**
-     * Example: 10000000.
+     * Example: 10000.
      */
-    maxValue: number;
-    /**
-     * Example: 100000.
-     */
-    defaultMinValue?: number | null;
-    /**
-     * Example: 10000000.
-     */
-    defaultMaxValue?: number | null;
+    defaultMaxValue: number;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -3898,8 +4262,6 @@ export interface GlobalContactUsSelect<T extends boolean = true> {
   budgetRange?:
     | T
     | {
-        minValue?: T;
-        maxValue?: T;
         defaultMinValue?: T;
         defaultMaxValue?: T;
       };
