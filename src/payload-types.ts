@@ -302,6 +302,7 @@ export interface ReviewFormSubmission {
   phone: string;
   rating: number;
   review: string;
+  status?: ('new' | 'reviewed' | 'published') | null;
   /**
    * These images are uploaded only from this collection in the admin panel. They are not submitted from the frontend form.
    */
@@ -2609,6 +2610,7 @@ export interface ReviewFormSubmissionsSelect<T extends boolean = true> {
   phone?: T;
   rating?: T;
   review?: T;
+  status?: T;
   adminImages?:
     | T
     | {
@@ -3738,25 +3740,17 @@ export interface GlobalContactUs {
     id?: string | null;
   }[];
   /**
-   * Controls the frontend budget range selector.
+   * Controls the default frontend budget range values.
    */
   budgetRange: {
     /**
-     * Example: 0.
+     * Example: 1000.
      */
-    minValue: number;
+    defaultMinValue: number;
     /**
-     * Example: 10000000.
+     * Example: 10000.
      */
-    maxValue: number;
-    /**
-     * Example: 100000.
-     */
-    defaultMinValue?: number | null;
-    /**
-     * Example: 10000000.
-     */
-    defaultMaxValue?: number | null;
+    defaultMaxValue: number;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -3898,8 +3892,6 @@ export interface GlobalContactUsSelect<T extends boolean = true> {
   budgetRange?:
     | T
     | {
-        minValue?: T;
-        maxValue?: T;
         defaultMinValue?: T;
         defaultMaxValue?: T;
       };
