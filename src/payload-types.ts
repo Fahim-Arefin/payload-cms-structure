@@ -751,6 +751,73 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
+         * Manage the maintenance image, title, subtitle, description and CTA buttons.
+         */
+        maintenanceInfo: {
+          /**
+           * Upload the maintenance illustration image. Recommended transparent PNG/WebP. Ratio 1600:1144
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          imageBlurDataURL?: string | null;
+          /**
+           * Example: Assembling the pieces all together. Max 100 characters.
+           */
+          title: string;
+          /**
+           * Optional short subtitle. Max 160 characters.
+           */
+          subtitle?: string | null;
+          /**
+           * Write the maintenance message. Max 420 characters.
+           */
+          description: string;
+          ctaButtons?:
+            | {
+                /**
+                 * Max 40 characters.
+                 */
+                label: string;
+                /**
+                 * Select the button style
+                 */
+                style?: ('btn01' | 'btn02') | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'maintenance';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
          * Add small company info items like Heart Winning Agency, IT Solution Agency, Located at Dhaka, Bangladesh.
          */
         companyInfoItems: {
@@ -2960,6 +3027,40 @@ export interface PagesSelect<T extends boolean = true> {
                     buttonLabel?: T;
                     buttonLink?: T;
                     sectionId?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        maintenance?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              maintenanceInfo?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    title?: T;
+                    subtitle?: T;
+                    description?: T;
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
                   };
               id?: T;
               blockName?: T;

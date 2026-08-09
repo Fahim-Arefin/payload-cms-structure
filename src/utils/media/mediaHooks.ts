@@ -12,6 +12,7 @@ import {
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   LOCATION_SLUG_AND_TAG,
+  MAINTENANCE_SLUG_AND_TAG,
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -102,6 +103,14 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['sectionHeading.downloadButton.file'],
       mediaFieldLabels: {
         'sectionHeading.downloadButton.file': 'Downloadable Case Study PDF',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: MAINTENANCE_SLUG_AND_TAG,
+      mediaFields: ['maintenanceInfo.image'],
+      mediaFieldLabels: {
+        'maintenanceInfo.image': 'Maintenance Image',
       },
     },
   ],

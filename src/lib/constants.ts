@@ -151,3 +151,7 @@ export const RATING_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/rating-block-thumb
 export const CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG = 'cs-development-framework'
 export const CS_DEVELOPMENT_FRAMEWORK_BLOCK_LABEL = 'CS Development Framework'
 export const CS_DEVELOPMENT_FRAMEWORK_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-development-framework-block-thumbnail.webp`
+
+export const MAINTENANCE_SLUG_AND_TAG = 'maintenance'
+export const MAINTENANCE_BLOCK_LABEL = 'Maintenance'
+export const MAINTENANCE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/maintenance-block-thumbnail.webp`

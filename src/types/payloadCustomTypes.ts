@@ -17,6 +17,7 @@ import {
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   LOCATION_SLUG_AND_TAG,
+  MAINTENANCE_SLUG_AND_TAG,
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
@@ -132,4 +133,8 @@ export type RatingBlockType = Extract<
 export type CS_DevelopmentFrameworkBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG }
+>
+export type MaintainanceBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof MAINTENANCE_SLUG_AND_TAG }
 >

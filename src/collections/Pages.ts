@@ -16,6 +16,7 @@ import CSDevelopmentFrameworkSchema from '@/blocks/CS_DevelopmentFramework/schem
 import EmployeeSchema from '@/blocks/Employee/schema'
 import FAQSchema from '@/blocks/FAQ/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
+import MaintenanceSchema from '@/blocks/Maintainance/schema'
 import OurProjectSchema from '@/blocks/OurProject/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
@@ -200,7 +201,7 @@ export const Pages: CollectionConfig = {
         ContactUsSchema,
         FAQSchema,
         BookACallSchema,
-        // custom blocks
+        MaintenanceSchema,
 
         // home page unique
         CompanyInfoSchema,
