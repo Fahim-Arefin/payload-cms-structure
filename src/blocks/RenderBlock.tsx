@@ -11,10 +11,12 @@ import {
   CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   CS_DELIVERY_SLUG_AND_TAG,
+  CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   LOCATION_SLUG_AND_TAG,
+  MAINTENANCE_SLUG_AND_TAG,
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
@@ -44,6 +46,8 @@ import BookACallBlock from './BookACall/BookACallBlock'
 import ContactInfoBlock from './ContactInfo/ContactInfoBlock'
 import CompanyLocationBlock from './CompanyLocation/CompanyLocationBlock'
 import RatingBlock from './Rating/RatingBlock'
+import CS_DevelopmentFrameworkBlock from './CS_DevelopmentFramework/CS_DevelopmentFrameworkBlock'
+import MaintainanceBlock from './Maintainance/MaintainanceBlock'
 
 type Params = Record<string, string>
 
@@ -91,6 +95,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CompanyLocationBlock key={block.id} block={block} params={params} />
     case RATING_SLUG_AND_TAG:
       return <RatingBlock key={block.id} block={block} params={params} />
+    case CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG:
+      return <CS_DevelopmentFrameworkBlock key={block.id} block={block} params={params} />
+    case MAINTENANCE_SLUG_AND_TAG:
+      return <MaintainanceBlock key={block.id} block={block} params={params} />
     default:
       return null
   }
