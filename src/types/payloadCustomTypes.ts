@@ -12,6 +12,7 @@ import {
   CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   CS_DELIVERY_SLUG_AND_TAG,
+  CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
@@ -127,4 +128,8 @@ export type LocationBlockType = Extract<
 export type RatingBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof RATING_SLUG_AND_TAG }
+>
+export type CS_DevelopmentFrameworkBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG }
 >

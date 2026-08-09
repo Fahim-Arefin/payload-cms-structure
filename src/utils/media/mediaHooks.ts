@@ -7,6 +7,7 @@ import {
   CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   CS_DELIVERY_SLUG_AND_TAG,
+  CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
@@ -95,6 +96,14 @@ export const mediaHooks = withMediaLifecycle({
         'locationInfo.mapImage': 'Map Image',
       },
     },
+    {
+      layoutKey: 'layout',
+      blockType: CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG,
+      mediaFields: ['sectionHeading.downloadButton.file'],
+      mediaFieldLabels: {
+        'sectionHeading.downloadButton.file': 'Downloadable Case Study PDF',
+      },
+    },
   ],
 
   // Blocks with arrays that contain media fields:
@@ -174,6 +183,17 @@ export const mediaHooks = withMediaLifecycle({
       mediaFieldLabels: {
         desktopSiteImage: 'Desktop Site Image',
         mobileSiteImage: 'Mobile Site Image',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG,
+      groupKey: 'lifecycle',
+      arrayKey: 'items',
+      mediaFields: ['mainIcon.mainIconColored', 'mainIcon.mainIconWhite'],
+      mediaFieldLabels: {
+        'mainIcon.mainIconColored': 'Main Icon Colored',
+        'mainIcon.mainIconWhite': 'Main Icon White',
       },
     },
   ],

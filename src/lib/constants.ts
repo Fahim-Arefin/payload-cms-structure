@@ -147,3 +147,7 @@ export const LOCATION_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/location-block-t
 export const RATING_SLUG_AND_TAG = 'rating'
 export const RATING_BLOCK_LABEL = 'Rating'
 export const RATING_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/rating-block-thumbnail.webp`
+
+export const CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG = 'cs-development-framework'
+export const CS_DEVELOPMENT_FRAMEWORK_BLOCK_LABEL = 'CS Development Framework'
+export const CS_DEVELOPMENT_FRAMEWORK_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-development-framework-block-thumbnail.webp`

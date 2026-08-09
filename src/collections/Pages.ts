@@ -12,6 +12,7 @@ import ContactUsSchema from '@/blocks/ContactUs/schema'
 import CSCollaborationProtocalSchema from '@/blocks/CS_CollaborationProtocal/schema'
 import CSCollaborativeMobbingSchema from '@/blocks/CS_Collaborative_Mobbing/schema'
 import CSDeliverySchema from '@/blocks/CS_Delivery/schema'
+import CSDevelopmentFrameworkSchema from '@/blocks/CS_DevelopmentFramework/schema'
 import EmployeeSchema from '@/blocks/Employee/schema'
 import FAQSchema from '@/blocks/FAQ/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
@@ -219,6 +220,7 @@ export const Pages: CollectionConfig = {
         // Case StudyPage
         CSCollaborativeMobbingSchema,
         CSCollaborationProtocalSchema,
+        CSDevelopmentFrameworkSchema,
         CSDeliverySchema,
         // Get In Touch
         ContactInfoSchema,

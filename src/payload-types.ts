@@ -1991,6 +1991,191 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
+         * Development framework section heading, description, CTA button and downloadable case study button.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          ctaButtons?:
+            | {
+                /**
+                 * Max 40 characters.
+                 */
+                label: string;
+                /**
+                 * Select the button style
+                 */
+                style?: ('btn01' | 'btn02') | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          /**
+           * Optional PDF download button. Use this when the section needs 1 CTA + 1 downloadable case study file.
+           */
+          downloadButton?: {
+            /**
+             * Example: Download Case Study. Max 40 characters.
+             */
+            label?: string | null;
+            /**
+             * Upload the downloadable PDF file here.
+             */
+            file?: (string | null) | Media;
+          };
+        };
+        /**
+         * Controls the lifecycle menu and connected rope/timeline items. Each lifecycle item contains its menu label, main content, related info card and icons.
+         */
+        lifecycle: {
+          /**
+           * Example: Lifecycle. Max 40 characters.
+           */
+          title: string;
+          /**
+           * Example: Process Tracking. Max 80 characters.
+           */
+          subtitle?: string | null;
+          /**
+           * Each row is one connected lifecycle step. Example: Ideation → Functional Ideation → Innovation & Discovery.
+           */
+          items?:
+            | {
+                menu: {
+                  /**
+                   * Example: Ideation, Strategy, Development, Deployment. Max 40 characters.
+                   */
+                  label: string;
+                  /**
+                   * Optional. If enabled, this item can be used as the initially active lifecycle item.
+                   */
+                  defaultActive?: boolean | null;
+                };
+                /**
+                 * This is the large title and paragraph connected to the selected lifecycle menu item.
+                 */
+                mainContent: {
+                  /**
+                   * Example: Functional Ideation. Max 80 characters.
+                   */
+                  title: string;
+                  /**
+                   * Short paragraph under the main title. Max 260 characters.
+                   */
+                  description: string;
+                };
+                /**
+                 * This card belongs to the same lifecycle item. Example: Innovation & Discovery card belongs to Functional Ideation.
+                 */
+                infoCard: {
+                  /**
+                   * Example: Innovation & Discovery. Max 80 characters.
+                   */
+                  title: string;
+                  /**
+                   * Controls whether this related card appears on the left or right side of the rope/timeline.
+                   */
+                  position: 'left' | 'right';
+                  /**
+                   * Short paragraph inside the related info card. Max 360 characters.
+                   */
+                  description: string;
+                };
+                /**
+                 * Single icon set for this lifecycle item. Frontend will use this icon for both lifecycle menu and timeline marker.
+                 */
+                mainIcon?: {
+                  /**
+                   * Upload the colored icon for this lifecycle item. This icon is used in the menu and the timeline marker.
+                   */
+                  mainIconColored?: (string | null) | Media;
+                  mainIconColoredOriginal?: (string | null) | Media;
+                  pendingMainIconColoredOriginal?: string | null;
+                  pendingMainIconColoredCrop?: string | null;
+                  mainIconColoredBlurDataURL?: string | null;
+                  /**
+                   * Upload the white icon for this lifecycle item active/hover state. This icon is used in the menu and the active timeline marker.
+                   */
+                  mainIconWhite?: (string | null) | Media;
+                  mainIconWhiteOriginal?: (string | null) | Media;
+                  pendingMainIconWhiteOriginal?: string | null;
+                  pendingMainIconWhiteCrop?: string | null;
+                  mainIconWhiteBlurDataURL?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cs-development-framework';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
          * Top section heading. Example: tag, "04. How We Deliver", and short description.
          */
         sectionHeading: {
@@ -3297,6 +3482,90 @@ export interface PagesSelect<T extends boolean = true> {
                     pendingImageOriginal?: T;
                     pendingImageCrop?: T;
                     imageBlurDataURL?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'cs-development-framework'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                    downloadButton?:
+                      | T
+                      | {
+                          label?: T;
+                          file?: T;
+                        };
+                  };
+              lifecycle?:
+                | T
+                | {
+                    title?: T;
+                    subtitle?: T;
+                    items?:
+                      | T
+                      | {
+                          menu?:
+                            | T
+                            | {
+                                label?: T;
+                                defaultActive?: T;
+                              };
+                          mainContent?:
+                            | T
+                            | {
+                                title?: T;
+                                description?: T;
+                              };
+                          infoCard?:
+                            | T
+                            | {
+                                title?: T;
+                                position?: T;
+                                description?: T;
+                              };
+                          mainIcon?:
+                            | T
+                            | {
+                                mainIconColored?: T;
+                                mainIconColoredOriginal?: T;
+                                pendingMainIconColoredOriginal?: T;
+                                pendingMainIconColoredCrop?: T;
+                                mainIconColoredBlurDataURL?: T;
+                                mainIconWhite?: T;
+                                mainIconWhiteOriginal?: T;
+                                pendingMainIconWhiteOriginal?: T;
+                                pendingMainIconWhiteCrop?: T;
+                                mainIconWhiteBlurDataURL?: T;
+                              };
+                          id?: T;
+                        };
                   };
               id?: T;
               blockName?: T;
