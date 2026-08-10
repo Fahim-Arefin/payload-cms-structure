@@ -160,3 +160,7 @@ export const MAINTENANCE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/maintenance-b
 export const COLLABORATIVE_METHOD_SLUG_AND_TAG = 'collaborative-method'
 export const COLLABORATIVE_METHOD_BLOCK_LABEL = 'Collaborative Method'
 export const COLLABORATIVE_METHOD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/collaborative-method-block-thumbnail.webp`
+
+export const WHY_CHOOSE_US_SLUG_AND_TAG = 'why-choose-us'
+export const WHY_CHOOSE_US_BLOCK_LABEL = 'Why Choose Us'
+export const WHY_CHOOSE_US_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/why-choose-us-block-thumbnail.webp`

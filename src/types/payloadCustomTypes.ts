@@ -24,6 +24,7 @@ import {
   PRODUCT_INFO_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
+  WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -142,4 +143,8 @@ export type MaintainanceBlockType = Extract<
 export type CollaborativeMethodBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof COLLABORATIVE_METHOD_SLUG_AND_TAG }
+>
+export type WCUBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof WHY_CHOOSE_US_SLUG_AND_TAG }
 >

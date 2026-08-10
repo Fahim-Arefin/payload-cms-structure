@@ -23,6 +23,7 @@ import {
   PRODUCT_INFO_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
+  WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -50,6 +51,7 @@ import RatingBlock from './Rating/RatingBlock'
 import CS_DevelopmentFrameworkBlock from './CS_DevelopmentFramework/CS_DevelopmentFrameworkBlock'
 import MaintainanceBlock from './Maintainance/MaintainanceBlock'
 import CollaborativeMethodBlock from './CollaborativeMethod/CollaborativeMethodBlock'
+import WhyChooseUsBlock from './WhyChooseUs/WhyChooseUsBlock'
 
 type Params = Record<string, string>
 
@@ -103,6 +105,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <MaintainanceBlock key={block.id} block={block} params={params} />
     case COLLABORATIVE_METHOD_SLUG_AND_TAG:
       return <CollaborativeMethodBlock key={block.id} block={block} params={params} />
+    case WHY_CHOOSE_US_SLUG_AND_TAG:
+      return <WhyChooseUsBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

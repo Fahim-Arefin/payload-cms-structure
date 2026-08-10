@@ -23,6 +23,7 @@ import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
 import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import RatingSchema from '@/blocks/Rating/scheam'
+import WhyChooseUsSchema from '@/blocks/WhyChooseUs/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -231,6 +232,7 @@ export const Pages: CollectionConfig = {
 
         // solution
         CollaborativeMethodSchema,
+        WhyChooseUsSchema,
         // News
       ],
     },
