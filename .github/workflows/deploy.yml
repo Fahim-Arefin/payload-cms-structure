@@ -28,6 +28,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Write application env file
+        shell: bash
+        env:
+          APP_ENV_FILE: ${{ secrets.ENV_FILE }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${APP_ENV_FILE}" ]; then
+            echo "ENV_FILE secret is empty or unavailable" >&2
+            exit 1
+          fi
+
+          mkdir -p .deploy
+          printf '%s\n' "${APP_ENV_FILE}" > .deploy/runtime.env
+          chmod 600 .deploy/runtime.env
+
       - name: Compute image tags
         id: meta
         shell: bash
@@ -56,10 +72,11 @@ jobs:
         run: |
           set -euo pipefail
 
+          env_digest="$(sha256sum .deploy/runtime.env)"
+
           docker build --progress=plain \
-            --build-arg API_URL='${{ vars.API_URL }}' \
-            --build-arg NEXT_PUBLIC_STATIC_IMG_DOMAIN='${{ vars.NEXT_PUBLIC_STATIC_IMG_DOMAIN }}' \
-            --build-arg NEXT_PUBLIC_EMAIL_PROVIDER='${{ vars.NEXT_PUBLIC_EMAIL_PROVIDER }}' \
+            --build-arg APP_ENV_DIGEST="${env_digest%% *}" \
+            --secret id=app_env,src=.deploy/runtime.env \
             -t '${{ steps.meta.outputs.sha_tag }}' \
             -t '${{ steps.meta.outputs.branch_sha_tag }}' \
             -t '${{ steps.meta.outputs.branch_latest_tag }}' \
@@ -96,45 +113,10 @@ jobs:
 
           ssh-keyscan -p "${DEPLOY_SERVER_PORT}" -H '${{ secrets.DEPLOY_SERVER_HOST }}' >> ~/.ssh/known_hosts
 
-      - name: Write runtime env file
+      - name: Prepare registry credentials
         shell: bash
         run: |
           set -euo pipefail
-
-          mkdir -p .deploy
-          env_file=".deploy/runtime.env"
-
-          cat > "$env_file" <<'EOF'
-          API_URL=${{ vars.API_URL }}
-          NEXT_PUBLIC_STATIC_IMG_DOMAIN=${{ vars.NEXT_PUBLIC_STATIC_IMG_DOMAIN }}
-          NEXT_PUBLIC_EMAIL_PROVIDER=${{ vars.NEXT_PUBLIC_EMAIL_PROVIDER }}
-          PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}
-          DATABASE_URI=${{ secrets.DATABASE_URI }}
-          USE_S3_STORAGE=${{ vars.USE_S3_STORAGE }}
-          S3_BUCKET_NAME=${{ vars.S3_BUCKET_NAME }}
-          S3_ENDPOINT=${{ vars.S3_ENDPOINT }}
-          S3_REGION=${{ vars.S3_REGION }}
-          S3_ACCESS_KEY=${{ secrets.S3_ACCESS_KEY }}
-          S3_SECRET_KEY=${{ secrets.S3_SECRET_KEY }}
-          SMTP_HOST=${{ vars.SMTP_HOST }}
-          SMTP_PORT=${{ vars.SMTP_PORT }}
-          SMTP_SECURE=${{ vars.SMTP_SECURE }}
-          SMTP_USER=${{ secrets.SMTP_USER }}
-          SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
-          SMTP_MAIL_FROM=${{ vars.SMTP_MAIL_FROM }}
-          CAREER_MAIL=${{ vars.CAREER_MAIL }}
-          AGENT_CAREER_MAIL=${{ vars.AGENT_CAREER_MAIL }}
-          SUPPORT_MAIL=${{ vars.SUPPORT_MAIL }}
-          PURCHASE_MAIL=${{ vars.PURCHASE_MAIL }}
-          ADDITIONAL_EMAIL=${{ vars.ADDITIONAL_EMAIL }}
-          MS_TENANT_ID=${{ vars.MS_TENANT_ID }}
-          MS_CLIENT_ID=${{ vars.MS_CLIENT_ID }}
-          MS_CLIENT_SECRET=${{ secrets.MS_CLIENT_SECRET }}
-          MS_SENDER_EMAIL=${{ vars.MS_SENDER_EMAIL }}
-          EOF
-
-          sed -i 's/^          //' "$env_file"
-          chmod 600 "$env_file"
 
           cat > .deploy/registry-username <<'EOF'
           ${{ secrets.REGISTRY_USERNAME }}

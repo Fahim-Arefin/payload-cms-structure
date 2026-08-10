@@ -5,10 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        API_URL: ${API_URL:-http://localhost:3000}
-        NEXT_PUBLIC_STATIC_IMG_DOMAIN: ${NEXT_PUBLIC_STATIC_IMG_DOMAIN:-/assets}
-        NEXT_PUBLIC_EMAIL_PROVIDER: ${NEXT_PUBLIC_EMAIL_PROVIDER:-outlook}
+      secrets:
+        - app_env
     env_file:
       - .env
     environment:
@@ -21,6 +19,10 @@ services:
       - ./media:/app/media
       - ./resumes:/app/resumes
     restart: unless-stopped
+
+secrets:
+  app_env:
+    file: .env
 
 # Pre-push/pre-PR production image test commands:
 # Build and run: docker compose -f compose.prepush.yml up --build
