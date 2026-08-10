@@ -168,3 +168,7 @@ export const WHY_CHOOSE_US_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/why-choose-
 export const PRODUCTION_PIPELINE_SLUG_AND_TAG = 'production-pipeline'
 export const PRODUCTION_PIPELINE_BLOCK_LABEL = 'Production Pipeline'
 export const PRODUCTION_PIPELINE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/production-pipeline-block-thumbnail.webp`
+
+export const WHAT_WE_BUILD_SLUG_AND_TAG = 'what-we-build'
+export const WHAT_WE_BUILD_BLOCK_LABEL = 'What We Build'
+export const WHAT_WE_BUILD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/what-we-build-block-thumbnail.webp`

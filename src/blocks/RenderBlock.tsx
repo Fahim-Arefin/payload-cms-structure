@@ -24,6 +24,7 @@ import {
   PRODUCTION_PIPELINE_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
+  WHAT_WE_BUILD_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 
@@ -54,6 +55,7 @@ import MaintainanceBlock from './Maintainance/MaintainanceBlock'
 import CollaborativeMethodBlock from './CollaborativeMethod/CollaborativeMethodBlock'
 import WhyChooseUsBlock from './WhyChooseUs/WhyChooseUsBlock'
 import ProductionPipelineBlock from './ProductionPipeline/ProductionPipelineBlock'
+import WhatWeBuildBlock from './WhatWeBuild/WhatWeBuildBlock'
 
 type Params = Record<string, string>
 
@@ -111,6 +113,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <WhyChooseUsBlock key={block.id} block={block} params={params} />
     case PRODUCTION_PIPELINE_SLUG_AND_TAG:
       return <ProductionPipelineBlock key={block.id} block={block} params={params} />
+    case WHAT_WE_BUILD_SLUG_AND_TAG:
+      return <WhatWeBuildBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

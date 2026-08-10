@@ -25,6 +25,7 @@ import {
   PRODUCTION_PIPELINE_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
+  WHAT_WE_BUILD_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
@@ -152,4 +153,8 @@ export type WCUBlockType = Extract<
 export type ProductionPipelineBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof PRODUCTION_PIPELINE_SLUG_AND_TAG }
+>
+export type WhatWeBuildBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof WHAT_WE_BUILD_SLUG_AND_TAG }
 >

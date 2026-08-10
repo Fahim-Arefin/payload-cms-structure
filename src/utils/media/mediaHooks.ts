@@ -17,6 +17,7 @@ import {
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCTION_PIPELINE_SLUG_AND_TAG,
+  WHAT_WE_BUILD_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -238,6 +239,16 @@ export const mediaHooks = withMediaLifecycle({
       mediaFieldLabels: {
         'icon.iconColored': 'Icon Colored',
         'icon.iconWhite': 'Icon White',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: WHAT_WE_BUILD_SLUG_AND_TAG,
+      groupKey: 'whatWeBuild',
+      arrayKey: 'items',
+      mediaFields: ['image'],
+      mediaFieldLabels: {
+        image: 'Item Image',
       },
     },
   ],

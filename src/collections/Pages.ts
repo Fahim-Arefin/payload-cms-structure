@@ -24,6 +24,7 @@ import ProductInfoSchema from '@/blocks/ProductInfo/schema'
 import ProductionPipelineSchema from '@/blocks/ProductionPipeline/schema'
 import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import RatingSchema from '@/blocks/Rating/scheam'
+import WhatWeBuildSchema from '@/blocks/WhatWeBuild/schema'
 import WhyChooseUsSchema from '@/blocks/WhyChooseUs/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
@@ -233,6 +234,7 @@ export const Pages: CollectionConfig = {
 
         // solution
         CollaborativeMethodSchema,
+        WhatWeBuildSchema,
         WhyChooseUsSchema,
         ProductionPipelineSchema,
         // News
