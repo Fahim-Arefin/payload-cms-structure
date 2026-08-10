@@ -21,6 +21,7 @@ import MaintenanceSchema from '@/blocks/Maintainance/schema'
 import OurProjectSchema from '@/blocks/OurProject/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
+import ProductionPipelineSchema from '@/blocks/ProductionPipeline/schema'
 import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import RatingSchema from '@/blocks/Rating/scheam'
 import WhyChooseUsSchema from '@/blocks/WhyChooseUs/schema'
@@ -233,6 +234,7 @@ export const Pages: CollectionConfig = {
         // solution
         CollaborativeMethodSchema,
         WhyChooseUsSchema,
+        ProductionPipelineSchema,
         // News
       ],
     },

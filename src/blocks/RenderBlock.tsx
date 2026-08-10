@@ -21,6 +21,7 @@ import {
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
+  PRODUCTION_PIPELINE_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
@@ -52,6 +53,7 @@ import CS_DevelopmentFrameworkBlock from './CS_DevelopmentFramework/CS_Developme
 import MaintainanceBlock from './Maintainance/MaintainanceBlock'
 import CollaborativeMethodBlock from './CollaborativeMethod/CollaborativeMethodBlock'
 import WhyChooseUsBlock from './WhyChooseUs/WhyChooseUsBlock'
+import ProductionPipelineBlock from './ProductionPipeline/ProductionPipelineBlock'
 
 type Params = Record<string, string>
 
@@ -107,6 +109,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CollaborativeMethodBlock key={block.id} block={block} params={params} />
     case WHY_CHOOSE_US_SLUG_AND_TAG:
       return <WhyChooseUsBlock key={block.id} block={block} params={params} />
+    case PRODUCTION_PIPELINE_SLUG_AND_TAG:
+      return <ProductionPipelineBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

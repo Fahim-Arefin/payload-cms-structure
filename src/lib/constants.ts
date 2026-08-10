@@ -164,3 +164,7 @@ export const COLLABORATIVE_METHOD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/coll
 export const WHY_CHOOSE_US_SLUG_AND_TAG = 'why-choose-us'
 export const WHY_CHOOSE_US_BLOCK_LABEL = 'Why Choose Us'
 export const WHY_CHOOSE_US_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/why-choose-us-block-thumbnail.webp`
+
+export const PRODUCTION_PIPELINE_SLUG_AND_TAG = 'production-pipeline'
+export const PRODUCTION_PIPELINE_BLOCK_LABEL = 'Production Pipeline'
+export const PRODUCTION_PIPELINE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/production-pipeline-block-thumbnail.webp`
