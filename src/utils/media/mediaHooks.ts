@@ -3,6 +3,7 @@ import {
   BASIC_HERO_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
+  COLLABORATIVE_METHOD_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
@@ -111,6 +112,20 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['maintenanceInfo.image'],
       mediaFieldLabels: {
         'maintenanceInfo.image': 'Maintenance Image',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: COLLABORATIVE_METHOD_SLUG_AND_TAG,
+      mediaFields: [
+        'collaborativeMethodInfo.image',
+        'collaborativeMethodInfo.designer.designerIcon',
+        'collaborativeMethodInfo.builder.builderIcon',
+      ],
+      mediaFieldLabels: {
+        'collaborativeMethodInfo.image': 'Main Image',
+        'collaborativeMethodInfo.designer.designerIcon': 'Designer Icon',
+        'collaborativeMethodInfo.builder.builderIcon': 'Builder Icon',
       },
     },
   ],

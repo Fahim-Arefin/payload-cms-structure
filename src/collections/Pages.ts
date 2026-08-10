@@ -3,6 +3,7 @@ import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import BookACallSchema from '@/blocks/BookACall/schema'
 import ClientSuccessStoriesSchema from '@/blocks/ClientSuccessStories/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
+import CollaborativeMethodSchema from '@/blocks/CollaborativeMethod/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
 import LocationSchema from '@/blocks/CompanyLocation/schema'
@@ -228,6 +229,8 @@ export const Pages: CollectionConfig = {
         LocationSchema,
         RatingSchema,
 
+        // solution
+        CollaborativeMethodSchema,
         // News
       ],
     },

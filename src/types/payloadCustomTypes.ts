@@ -4,6 +4,7 @@ import {
   BOOK_A_CALL_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
+  COLLABORATIVE_METHOD_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   COMPANY_INTRO_SLUG_AND_TAG,
   COMPANY_STATS_SLUG_AND_TAG,
@@ -137,4 +138,8 @@ export type CS_DevelopmentFrameworkBlockType = Extract<
 export type MaintainanceBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof MAINTENANCE_SLUG_AND_TAG }
+>
+export type CollaborativeMethodBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof COLLABORATIVE_METHOD_SLUG_AND_TAG }
 >

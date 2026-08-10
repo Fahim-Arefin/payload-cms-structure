@@ -3,6 +3,7 @@ import {
   BASIC_HERO_SLUG_AND_TAG,
   BOOK_A_CALL_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
+  COLLABORATIVE_METHOD_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   COMPANY_INTRO_SLUG_AND_TAG,
   COMPANY_STATS_SLUG_AND_TAG,
@@ -48,6 +49,7 @@ import CompanyLocationBlock from './CompanyLocation/CompanyLocationBlock'
 import RatingBlock from './Rating/RatingBlock'
 import CS_DevelopmentFrameworkBlock from './CS_DevelopmentFramework/CS_DevelopmentFrameworkBlock'
 import MaintainanceBlock from './Maintainance/MaintainanceBlock'
+import CollaborativeMethodBlock from './CollaborativeMethod/CollaborativeMethodBlock'
 
 type Params = Record<string, string>
 
@@ -99,6 +101,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CS_DevelopmentFrameworkBlock key={block.id} block={block} params={params} />
     case MAINTENANCE_SLUG_AND_TAG:
       return <MaintainanceBlock key={block.id} block={block} params={params} />
+    case COLLABORATIVE_METHOD_SLUG_AND_TAG:
+      return <CollaborativeMethodBlock key={block.id} block={block} params={params} />
     default:
       return null
   }
