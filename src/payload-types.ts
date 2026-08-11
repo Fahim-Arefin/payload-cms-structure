@@ -2645,6 +2645,477 @@ export interface Page {
         blockName?: string | null;
         blockType: 'rating';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the section tag and heading text. CTA is disabled for this block.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the main image, description, designer information and builder information.
+         */
+        collaborativeMethodInfo: {
+          /**
+           * Upload the collaborative method main image. Recommended ratio 500:360.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          imageBlurDataURL?: string | null;
+          /**
+           * Write the collaborative method description shown on the left side of the section.
+           */
+          description: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          designer: {
+            /**
+             * Upload the designer icon. Recommended transparent PNG/WebP.
+             */
+            designerIcon: string | Media;
+            designerIconOriginal?: (string | null) | Media;
+            pendingDesignerIconOriginal?: string | null;
+            pendingDesignerIconCrop?: string | null;
+            /**
+             * Auto-generated Base64 blur
+             */
+            designerIconBlurDataURL?: string | null;
+            /**
+             * Example: DESIGNER. Max 40 characters.
+             */
+            title: string;
+            /**
+             * Example: Visual Storytelling. Max 80 characters.
+             */
+            subtitle: string;
+          };
+          builder: {
+            /**
+             * Upload the builder icon. Recommended transparent PNG/WebP.
+             */
+            builderIcon: string | Media;
+            builderIconOriginal?: (string | null) | Media;
+            pendingBuilderIconOriginal?: string | null;
+            pendingBuilderIconCrop?: string | null;
+            /**
+             * Auto-generated Base64 blur
+             */
+            builderIconBlurDataURL?: string | null;
+            /**
+             * Example: BUILDER. Max 40 characters.
+             */
+            title: string;
+            /**
+             * Example: Rapid Prototyping. Max 80 characters.
+             */
+            subtitle: string;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'collaborative-method';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the section tag, heading and description. CTA is disabled for this block.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the solution cards/tabs and their preview images.
+         */
+        whatWeBuild?: {
+          /**
+           * Add items like Corporate Websites, E-Commerce Platforms, Business Websites and Customer Portals.
+           */
+          items?:
+            | {
+                /**
+                 * Example: E-Commerce Platforms. Max 60 characters.
+                 */
+                title: string;
+                /**
+                 * Short description for this solution item. Max 180 characters.
+                 */
+                description: string;
+                /**
+                 * Upload the image for this what we build item. Recommended wide ratio 1200:340.
+                 */
+                image: string | Media;
+                imageOriginal?: (string | null) | Media;
+                pendingImageOriginal?: string | null;
+                pendingImageCrop?: string | null;
+                imageBlurDataURL?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'what-we-build';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the section tag and heading text. CTA is disabled for this block.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the why choose us criteria list.
+         */
+        choosingCriteria?: {
+          /**
+           * Add criteria items like Custom Design, Fast Loading Performance, etc.
+           */
+          criteria?:
+            | {
+                /**
+                 * Example: Custom Design – No Generic Templates. Max 90 characters.
+                 */
+                text: string;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'why-choose-us';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the production pipeline tag, heading, description, CTA button and downloadable case study.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          ctaButtons?:
+            | {
+                /**
+                 * Max 40 characters.
+                 */
+                label: string;
+                /**
+                 * Select the button style
+                 */
+                style?: ('btn01' | 'btn02') | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          /**
+           * Optional PDF download button. Use this when the section needs 1 CTA + 1 downloadable case study file.
+           */
+          downloadButton?: {
+            /**
+             * Example: Download Case Study. Max 40 characters.
+             */
+            label?: string | null;
+            /**
+             * Upload the downloadable PDF file here.
+             */
+            file?: (string | null) | Media;
+          };
+        };
+        /**
+         * Manage the implementation pathway timeline items. Items will alternate left and right on the frontend based on their order.
+         */
+        pipeline?: {
+          /**
+           * Add pipeline steps like Discovery, Strategy & Planning, UI/UX Design, Development, Testing & QA, Launch & Support.
+           */
+          items?:
+            | {
+                /**
+                 * Example: Discovery. Max 60 characters.
+                 */
+                title: string;
+                /**
+                 * Short description for this pipeline step. Max 220 characters.
+                 */
+                description: string;
+                icon?: {
+                  /**
+                   * Upload the colored pipeline icon. Recommended transparent PNG/WebP.
+                   */
+                  iconColored?: (string | null) | Media;
+                  iconColoredOriginal?: (string | null) | Media;
+                  pendingIconColoredOriginal?: string | null;
+                  pendingIconColoredCrop?: string | null;
+                  iconColoredBlurDataURL?: string | null;
+                  /**
+                   * Upload the white pipeline icon for active/hover state.
+                   */
+                  iconWhite?: (string | null) | Media;
+                  iconWhiteOriginal?: (string | null) | Media;
+                  pendingIconWhiteOriginal?: string | null;
+                  pendingIconWhiteCrop?: string | null;
+                  iconWhiteBlurDataURL?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'production-pipeline';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -3848,6 +4319,204 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     showRatingForm?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'collaborative-method'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              collaborativeMethodInfo?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    description?: T;
+                    designer?:
+                      | T
+                      | {
+                          designerIcon?: T;
+                          designerIconOriginal?: T;
+                          pendingDesignerIconOriginal?: T;
+                          pendingDesignerIconCrop?: T;
+                          designerIconBlurDataURL?: T;
+                          title?: T;
+                          subtitle?: T;
+                        };
+                    builder?:
+                      | T
+                      | {
+                          builderIcon?: T;
+                          builderIconOriginal?: T;
+                          pendingBuilderIconOriginal?: T;
+                          pendingBuilderIconCrop?: T;
+                          builderIconBlurDataURL?: T;
+                          title?: T;
+                          subtitle?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'what-we-build'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              whatWeBuild?:
+                | T
+                | {
+                    items?:
+                      | T
+                      | {
+                          title?: T;
+                          description?: T;
+                          image?: T;
+                          imageOriginal?: T;
+                          pendingImageOriginal?: T;
+                          pendingImageCrop?: T;
+                          imageBlurDataURL?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'why-choose-us'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              choosingCriteria?:
+                | T
+                | {
+                    criteria?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'production-pipeline'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                    downloadButton?:
+                      | T
+                      | {
+                          label?: T;
+                          file?: T;
+                        };
+                  };
+              pipeline?:
+                | T
+                | {
+                    items?:
+                      | T
+                      | {
+                          title?: T;
+                          description?: T;
+                          icon?:
+                            | T
+                            | {
+                                iconColored?: T;
+                                iconColoredOriginal?: T;
+                                pendingIconColoredOriginal?: T;
+                                pendingIconColoredCrop?: T;
+                                iconColoredBlurDataURL?: T;
+                                iconWhite?: T;
+                                iconWhiteOriginal?: T;
+                                pendingIconWhiteOriginal?: T;
+                                pendingIconWhiteCrop?: T;
+                                iconWhiteBlurDataURL?: T;
+                              };
+                          id?: T;
+                        };
                   };
               id?: T;
               blockName?: T;

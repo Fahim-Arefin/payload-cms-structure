@@ -4,6 +4,7 @@ import {
   BOOK_A_CALL_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
+  COLLABORATIVE_METHOD_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   COMPANY_INTRO_SLUG_AND_TAG,
   COMPANY_STATS_SLUG_AND_TAG,
@@ -21,8 +22,11 @@ import {
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
+  PRODUCTION_PIPELINE_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
+  WHAT_WE_BUILD_SLUG_AND_TAG,
+  WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
 
@@ -137,4 +141,20 @@ export type CS_DevelopmentFrameworkBlockType = Extract<
 export type MaintainanceBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof MAINTENANCE_SLUG_AND_TAG }
+>
+export type CollaborativeMethodBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof COLLABORATIVE_METHOD_SLUG_AND_TAG }
+>
+export type WCUBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof WHY_CHOOSE_US_SLUG_AND_TAG }
+>
+export type ProductionPipelineBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof PRODUCTION_PIPELINE_SLUG_AND_TAG }
+>
+export type WhatWeBuildBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof WHAT_WE_BUILD_SLUG_AND_TAG }
 >

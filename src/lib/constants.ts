@@ -56,6 +56,7 @@ export const HOME_PAGE = 'Home Page'
 export const ABOUT_US = 'About Us Page'
 export const CASE_STUDY = 'Case Study Page'
 export const GET_IN_TOUCH = 'Get In Touch Page'
+export const SOLUTION = 'Solution'
 export const NEWS = 'News And Events'
 
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
@@ -155,3 +156,19 @@ export const CS_DEVELOPMENT_FRAMEWORK_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/
 export const MAINTENANCE_SLUG_AND_TAG = 'maintenance'
 export const MAINTENANCE_BLOCK_LABEL = 'Maintenance'
 export const MAINTENANCE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/maintenance-block-thumbnail.webp`
+
+export const COLLABORATIVE_METHOD_SLUG_AND_TAG = 'collaborative-method'
+export const COLLABORATIVE_METHOD_BLOCK_LABEL = 'Collaborative Method'
+export const COLLABORATIVE_METHOD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/collaborative-method-block-thumbnail.webp`
+
+export const WHY_CHOOSE_US_SLUG_AND_TAG = 'why-choose-us'
+export const WHY_CHOOSE_US_BLOCK_LABEL = 'Why Choose Us'
+export const WHY_CHOOSE_US_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/why-choose-us-block-thumbnail.webp`
+
+export const PRODUCTION_PIPELINE_SLUG_AND_TAG = 'production-pipeline'
+export const PRODUCTION_PIPELINE_BLOCK_LABEL = 'Production Pipeline'
+export const PRODUCTION_PIPELINE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/production-pipeline-block-thumbnail.webp`
+
+export const WHAT_WE_BUILD_SLUG_AND_TAG = 'what-we-build'
+export const WHAT_WE_BUILD_BLOCK_LABEL = 'What We Build'
+export const WHAT_WE_BUILD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/what-we-build-block-thumbnail.webp`

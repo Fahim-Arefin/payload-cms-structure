@@ -3,6 +3,7 @@ import {
   BASIC_HERO_SLUG_AND_TAG,
   BOOK_A_CALL_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
+  COLLABORATIVE_METHOD_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   COMPANY_INTRO_SLUG_AND_TAG,
   COMPANY_STATS_SLUG_AND_TAG,
@@ -20,8 +21,11 @@ import {
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCT_INFO_SLUG_AND_TAG,
+  PRODUCTION_PIPELINE_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
+  WHAT_WE_BUILD_SLUG_AND_TAG,
+  WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 
 import type { Page as PayloadPage } from '@/payload-types'
@@ -48,6 +52,10 @@ import CompanyLocationBlock from './CompanyLocation/CompanyLocationBlock'
 import RatingBlock from './Rating/RatingBlock'
 import CS_DevelopmentFrameworkBlock from './CS_DevelopmentFramework/CS_DevelopmentFrameworkBlock'
 import MaintainanceBlock from './Maintainance/MaintainanceBlock'
+import CollaborativeMethodBlock from './CollaborativeMethod/CollaborativeMethodBlock'
+import WhyChooseUsBlock from './WhyChooseUs/WhyChooseUsBlock'
+import ProductionPipelineBlock from './ProductionPipeline/ProductionPipelineBlock'
+import WhatWeBuildBlock from './WhatWeBuild/WhatWeBuildBlock'
 
 type Params = Record<string, string>
 
@@ -99,6 +107,14 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CS_DevelopmentFrameworkBlock key={block.id} block={block} params={params} />
     case MAINTENANCE_SLUG_AND_TAG:
       return <MaintainanceBlock key={block.id} block={block} params={params} />
+    case COLLABORATIVE_METHOD_SLUG_AND_TAG:
+      return <CollaborativeMethodBlock key={block.id} block={block} params={params} />
+    case WHY_CHOOSE_US_SLUG_AND_TAG:
+      return <WhyChooseUsBlock key={block.id} block={block} params={params} />
+    case PRODUCTION_PIPELINE_SLUG_AND_TAG:
+      return <ProductionPipelineBlock key={block.id} block={block} params={params} />
+    case WHAT_WE_BUILD_SLUG_AND_TAG:
+      return <WhatWeBuildBlock key={block.id} block={block} params={params} />
     default:
       return null
   }
