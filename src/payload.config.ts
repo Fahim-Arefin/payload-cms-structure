@@ -1,30 +1,24 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
-import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
-import { s3Storage } from '@payloadcms/storage-s3'
-import sharp from 'sharp'
 
-import { Users } from './collections/Users'
-import { Resume } from './collections/Resume'
-import { CareerApplication } from './collections/CareerApplication'
-import { AgentCareerApplication } from './collections/AgentCareerApplication'
+import AuditLogs from './collections/AuditLogs'
+import Media from './collections/Media'
 import { Pages } from './collections/Pages'
+import { Resume } from './collections/Resume'
+import { Users } from './collections/Users'
 import Footer from './collections/globals/Footer'
 import Navbar from './collections/globals/Navbar'
-import Header from './collections/globals/Header'
-import BoardOfDirectors from './collections/globals/BoardOfDirectors'
-import LeadershipTeam from './collections/globals/LeadershipTeam'
-import ContactUsGlobal from './collections/globals/GlobalContactUs'
-import GlobalBlogs from './collections/globals/Blogs'
-import GlobalVlogs from './collections/globals/Vlogs'
-import AuditLogs from './collections/AuditLogs'
-import { getClientIP } from './lib/http'
-import Media from './collections/Media'
+import NewsletterSubscribers from './collections/NewsletterSubscribers'
+import GlobalContactUs from './collections/globals/GlobalContactUs'
+import ContactFormSubmissions from './collections/ContactFormSubmissions'
+import ReviewFormSubmissions from './collections/ReviewFormSubmissions'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -97,17 +91,17 @@ export default buildConfig({
     },
     abortOnLimit: true,
   },
-  collections: [Users, Media, Resume, AuditLogs, CareerApplication, AgentCareerApplication, Pages],
-  globals: [
-    Header,
-    Navbar,
-    Footer,
-    BoardOfDirectors,
-    LeadershipTeam,
-    ContactUsGlobal,
-    GlobalBlogs,
-    GlobalVlogs,
+  collections: [
+    Users,
+    Media,
+    Resume,
+    AuditLogs,
+    NewsletterSubscribers,
+    ContactFormSubmissions,
+    ReviewFormSubmissions,
+    Pages,
   ],
+  globals: [Navbar, Footer, GlobalContactUs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

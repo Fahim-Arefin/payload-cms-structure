@@ -1,0 +1,32 @@
+services:
+  app:
+    image: xynolab-website:local
+    container_name: xynolab-website-local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - app_env
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+    volumes:
+      - ./media:/app/media
+      - ./resumes:/app/resumes
+    restart: unless-stopped
+
+secrets:
+  app_env:
+    file: .env
+
+# Pre-push/pre-PR production image test commands:
+# Build and run: docker compose -f compose.prepush.yml up --build
+# Build and run in background: docker compose -f compose.prepush.yml up --build -d
+# View logs: docker compose -f compose.prepush.yml logs -f app
+# Stop test container: docker compose -f compose.prepush.yml down
+# Run on a different host port: HOST_PORT=3001 docker compose -f compose.prepush.yml up --build

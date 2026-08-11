@@ -23,7 +23,7 @@ export default function LocalizedHighlighted({
   highlightBn,
   as: Tag = 'span',
   className,
-  highlightClassName = 'text-[#ED7125]',
+  highlightClassName = 'text-primary-2',
   all = false,
 }: Props) {
   const lang = useSSRLanguage()
