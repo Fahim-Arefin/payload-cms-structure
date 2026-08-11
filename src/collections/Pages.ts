@@ -3,6 +3,7 @@ import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import BookACallSchema from '@/blocks/BookACall/schema'
 import ClientSuccessStoriesSchema from '@/blocks/ClientSuccessStories/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
+import CollaborativeMethodSchema from '@/blocks/CollaborativeMethod/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
 import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
 import LocationSchema from '@/blocks/CompanyLocation/schema'
@@ -20,8 +21,11 @@ import MaintenanceSchema from '@/blocks/Maintainance/schema'
 import OurProjectSchema from '@/blocks/OurProject/schema'
 import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
+import ProductionPipelineSchema from '@/blocks/ProductionPipeline/schema'
 import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import RatingSchema from '@/blocks/Rating/scheam'
+import WhatWeBuildSchema from '@/blocks/WhatWeBuild/schema'
+import WhyChooseUsSchema from '@/blocks/WhyChooseUs/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -228,6 +232,11 @@ export const Pages: CollectionConfig = {
         LocationSchema,
         RatingSchema,
 
+        // solution
+        CollaborativeMethodSchema,
+        WhatWeBuildSchema,
+        WhyChooseUsSchema,
+        ProductionPipelineSchema,
         // News
       ],
     },
