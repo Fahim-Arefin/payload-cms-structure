@@ -17,15 +17,11 @@ RUN corepack enable pnpm && pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
-ARG API_URL
-ARG NEXT_PUBLIC_STATIC_IMG_DOMAIN
-ARG NEXT_PUBLIC_EMAIL_PROVIDER
-ENV API_URL=$API_URL
-ENV NEXT_PUBLIC_STATIC_IMG_DOMAIN=$NEXT_PUBLIC_STATIC_IMG_DOMAIN
-ENV NEXT_PUBLIC_EMAIL_PROVIDER=$NEXT_PUBLIC_EMAIL_PROVIDER
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN corepack enable pnpm && pnpm run build
+ARG APP_ENV_DIGEST=local
+RUN --mount=type=secret,id=app_env,target=/app/.env,required=true \
+    test -n "$APP_ENV_DIGEST" && corepack enable pnpm && pnpm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
