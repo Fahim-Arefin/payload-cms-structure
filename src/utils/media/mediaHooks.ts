@@ -3,6 +3,7 @@ import {
   BASIC_HERO_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
+  COLLABORATIVE_METHOD_SLUG_AND_TAG,
   COMPANY_INFO_SLUG_AND_TAG,
   CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG,
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
@@ -15,6 +16,8 @@ import {
   MAINTENANCE_SLUG_AND_TAG,
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
+  PRODUCTION_PIPELINE_SLUG_AND_TAG,
+  WHAT_WE_BUILD_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -113,6 +116,28 @@ export const mediaHooks = withMediaLifecycle({
         'maintenanceInfo.image': 'Maintenance Image',
       },
     },
+    {
+      layoutKey: 'layout',
+      blockType: COLLABORATIVE_METHOD_SLUG_AND_TAG,
+      mediaFields: [
+        'collaborativeMethodInfo.image',
+        'collaborativeMethodInfo.designer.designerIcon',
+        'collaborativeMethodInfo.builder.builderIcon',
+      ],
+      mediaFieldLabels: {
+        'collaborativeMethodInfo.image': 'Main Image',
+        'collaborativeMethodInfo.designer.designerIcon': 'Designer Icon',
+        'collaborativeMethodInfo.builder.builderIcon': 'Builder Icon',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PRODUCTION_PIPELINE_SLUG_AND_TAG,
+      mediaFields: ['sectionHeading.downloadButton.file'],
+      mediaFieldLabels: {
+        'sectionHeading.downloadButton.file': 'Downloadable Case Study PDF',
+      },
+    },
   ],
 
   // Blocks with arrays that contain media fields:
@@ -203,6 +228,27 @@ export const mediaHooks = withMediaLifecycle({
       mediaFieldLabels: {
         'mainIcon.mainIconColored': 'Main Icon Colored',
         'mainIcon.mainIconWhite': 'Main Icon White',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: PRODUCTION_PIPELINE_SLUG_AND_TAG,
+      groupKey: 'pipeline',
+      arrayKey: 'items',
+      mediaFields: ['icon.iconColored', 'icon.iconWhite'],
+      mediaFieldLabels: {
+        'icon.iconColored': 'Icon Colored',
+        'icon.iconWhite': 'Icon White',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: WHAT_WE_BUILD_SLUG_AND_TAG,
+      groupKey: 'whatWeBuild',
+      arrayKey: 'items',
+      mediaFields: ['image'],
+      mediaFieldLabels: {
+        image: 'Item Image',
       },
     },
   ],
