@@ -1,12 +1,40 @@
-// import { FORMS } from '@/lib/constants'
+// import { CUSTOMER_REVIEW_SLUG_AND_TAG, FORMS } from '@/lib/constants'
+// import { roleAtLeast } from '@/lib/rbac'
+// import { generateImageFields } from '@/utils/media/fieldGenerators'
+// import { revalidateTag } from 'next/cache'
 // import type { CollectionConfig } from 'payload'
 
 // const REVIEW_MAX_LENGTH = 500
+// const REVIEW_FORM_SUBMISSIONS_SLUG = 'review-form-submissions'
 
 // const isAuthenticated = ({ req }: any) => Boolean(req.user)
 
+// const companyIconFields = generateImageFields({
+//   required: false,
+//   fieldName: 'companyIcon',
+//   label: 'Company Icon',
+//   description:
+//     'Upload & crop the company icon. This can be uploaded from this collection only. Ratio 140:50',
+//   aspectRatio: 140 / 50,
+//   quality: 0.9,
+//   maxKB: 350,
+//   ownerCollection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
+// } as any)
+
+// const userProfileImageFields = generateImageFields({
+//   required: false,
+//   fieldName: 'userProfileImage',
+//   label: 'User Profile Image',
+//   description:
+//     'Upload & crop the user profile image. This can be uploaded from this collection only. Ratio 240:301',
+//   aspectRatio: 240 / 301,
+//   quality: 0.9,
+//   maxKB: 350,
+//   ownerCollection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
+// } as any)
+
 // export const ReviewFormSubmissions: CollectionConfig = {
-//   slug: 'review-form-submissions',
+//   slug: REVIEW_FORM_SUBMISSIONS_SLUG,
 
 //   labels: {
 //     singular: 'Review Form Submission',
@@ -19,16 +47,44 @@
 //     group: FORMS,
 //   },
 
+//   // access: {
+//   //   read: isAuthenticated,
+//   //   create: isAuthenticated,
+//   //   update: isAuthenticated,
+//   //   delete: isAuthenticated,
+//   // },
+
 //   access: {
-//     read: isAuthenticated,
-//     create: isAuthenticated,
-//     update: isAuthenticated,
-//     delete: isAuthenticated,
+//     read: ({ req }) => roleAtLeast(req.user, 'editor'),
+//     create: () => false,
+//     update: ({ req }) => roleAtLeast(req.user, 'editor'),
+//     delete: ({ req }) => roleAtLeast(req.user, 'admin'),
+//   },
+
+//   hooks: {
+//     afterChange: [
+//       async () => {
+//         revalidateTag(CUSTOMER_REVIEW_SLUG_AND_TAG)
+//       },
+//     ],
+
+//     afterDelete: [
+//       async () => {
+//         revalidateTag(CUSTOMER_REVIEW_SLUG_AND_TAG)
+//       },
+//     ],
 //   },
 
 //   timestamps: true,
 
 //   fields: [
+//     {
+//       name: 'uploadSessionId',
+//       type: 'text',
+//       admin: {
+//         condition: () => false,
+//       },
+//     },
 //     {
 //       name: 'buyersFullName',
 //       type: 'text',
@@ -84,6 +140,16 @@
 //       required: true,
 //       maxLength: REVIEW_MAX_LENGTH,
 //     },
+//     {
+//       name: 'status',
+//       type: 'select',
+//       defaultValue: 'new',
+//       options: [
+//         { label: 'New', value: 'new' },
+//         { label: 'Reviewed', value: 'reviewed' },
+//         { label: 'Published', value: 'published' },
+//       ],
+//     },
 
 //     {
 //       name: 'adminImages',
@@ -93,48 +159,29 @@
 //         description:
 //           'These images are uploaded only from this collection in the admin panel. They are not submitted from the frontend form.',
 //       },
-//       fields: [
-//         {
-//           name: 'companyIcon',
-//           type: 'upload',
-//           relationTo: 'media',
-//           label: 'Company Icon',
-//           admin: {
-//             description: 'Optional. Upload company logo/icon from admin only.',
-//           },
-//         },
-//         {
-//           name: 'userProfileImage',
-//           type: 'upload',
-//           relationTo: 'media',
-//           label: 'User Profile Image',
-//           admin: {
-//             description: 'Optional. Upload user profile image from admin only.',
-//           },
-//         },
-//       ],
+//       fields: [...companyIconFields, ...userProfileImageFields],
 //     },
 //   ],
 // }
 
 // export default ReviewFormSubmissions
 
-import { FORMS } from '@/lib/constants'
+import { CUSTOMER_REVIEW_SLUG_AND_TAG, FORMS } from '@/lib/constants'
+import { roleAtLeast } from '@/lib/rbac'
 import { generateImageFields } from '@/utils/media/fieldGenerators'
+import { revalidateTag } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 const REVIEW_MAX_LENGTH = 500
 const REVIEW_FORM_SUBMISSIONS_SLUG = 'review-form-submissions'
-
-const isAuthenticated = ({ req }: any) => Boolean(req.user)
 
 const companyIconFields = generateImageFields({
   required: false,
   fieldName: 'companyIcon',
   label: 'Company Icon',
   description:
-    'Upload & crop the company icon. This can be uploaded from this collection only. Ratio 200:80',
-  aspectRatio: 200 / 80,
+    'Upload & crop the company icon. This can be uploaded from this collection only. Ratio 140:50',
+  aspectRatio: 140 / 50,
   quality: 0.9,
   maxKB: 350,
   ownerCollection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
@@ -145,12 +192,17 @@ const userProfileImageFields = generateImageFields({
   fieldName: 'userProfileImage',
   label: 'User Profile Image',
   description:
-    'Upload & crop the user profile image. This can be uploaded from this collection only. Ratio 325:385',
-  aspectRatio: 325 / 385,
+    'Upload & crop the user profile image. This can be uploaded from this collection only. Ratio 240:301',
+  aspectRatio: 240 / 301,
   quality: 0.9,
   maxKB: 350,
   ownerCollection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
 } as any)
+
+const revalidateCustomerReview = () => {
+  revalidateTag(CUSTOMER_REVIEW_SLUG_AND_TAG)
+  revalidateTag(REVIEW_FORM_SUBMISSIONS_SLUG)
+}
 
 export const ReviewFormSubmissions: CollectionConfig = {
   slug: REVIEW_FORM_SUBMISSIONS_SLUG,
@@ -162,15 +214,29 @@ export const ReviewFormSubmissions: CollectionConfig = {
 
   admin: {
     useAsTitle: 'buyersFullName',
-    defaultColumns: ['buyersFullName', 'companyName', 'position', 'rating', 'createdAt'],
+    defaultColumns: ['buyersFullName', 'companyName', 'position', 'rating', 'status', 'createdAt'],
     group: FORMS,
   },
 
   access: {
-    read: isAuthenticated,
-    create: isAuthenticated,
-    update: isAuthenticated,
-    delete: isAuthenticated,
+    read: ({ req }) => roleAtLeast(req.user, 'editor'),
+    create: () => false,
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
+    delete: ({ req }) => roleAtLeast(req.user, 'admin'),
+  },
+
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidateCustomerReview()
+      },
+    ],
+
+    afterDelete: [
+      async () => {
+        revalidateCustomerReview()
+      },
+    ],
   },
 
   timestamps: true,
@@ -241,6 +307,8 @@ export const ReviewFormSubmissions: CollectionConfig = {
     {
       name: 'status',
       type: 'select',
+      label: 'Status',
+      required: true,
       defaultValue: 'new',
       options: [
         { label: 'New', value: 'new' },
@@ -248,7 +316,6 @@ export const ReviewFormSubmissions: CollectionConfig = {
         { label: 'Published', value: 'published' },
       ],
     },
-
     {
       name: 'adminImages',
       type: 'group',

@@ -13,6 +13,7 @@ import {
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   CS_DELIVERY_SLUG_AND_TAG,
   CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG,
+  CUSTOMER_REVIEW_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
@@ -56,6 +57,7 @@ import CollaborativeMethodBlock from './CollaborativeMethod/CollaborativeMethodB
 import WhyChooseUsBlock from './WhyChooseUs/WhyChooseUsBlock'
 import ProductionPipelineBlock from './ProductionPipeline/ProductionPipelineBlock'
 import WhatWeBuildBlock from './WhatWeBuild/WhatWeBuildBlock'
+import CustomerReviewBlock from './CustomerReview/CustomerReviewBlock'
 
 type Params = Record<string, string>
 
@@ -115,6 +117,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <ProductionPipelineBlock key={block.id} block={block} params={params} />
     case WHAT_WE_BUILD_SLUG_AND_TAG:
       return <WhatWeBuildBlock key={block.id} block={block} params={params} />
+    case CUSTOMER_REVIEW_SLUG_AND_TAG:
+      return <CustomerReviewBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

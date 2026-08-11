@@ -90,7 +90,7 @@ function SectionHeading02({ data, align, dark = false }: Props) {
       {hasDesc && (
         <div
           className={`
-            max-w-[760px] font-grift global-p4
+            font-grift global-p4
             ${dark ? 'text-white-1' : 'text-secondary-2'}
             ${align === 'left' ? 'text-start' : align === 'right' ? 'text-end' : 'text-center'}
           `}

@@ -1,7 +1,6 @@
 import AboutUsIntroSchema from '@/blocks/AboutUsIntro/schema'
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import BookACallSchema from '@/blocks/BookACall/schema'
-import ClientSuccessStoriesSchema from '@/blocks/ClientSuccessStories/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CollaborativeMethodSchema from '@/blocks/CollaborativeMethod/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
@@ -14,12 +13,12 @@ import CSCollaborationProtocalSchema from '@/blocks/CS_CollaborationProtocal/sch
 import CSCollaborativeMobbingSchema from '@/blocks/CS_Collaborative_Mobbing/schema'
 import CSDeliverySchema from '@/blocks/CS_Delivery/schema'
 import CSDevelopmentFrameworkSchema from '@/blocks/CS_DevelopmentFramework/schema'
+import CustomerReviewSchema from '@/blocks/CustomerReview/schema'
 import EmployeeSchema from '@/blocks/Employee/schema'
 import FAQSchema from '@/blocks/FAQ/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import MaintenanceSchema from '@/blocks/Maintainance/schema'
 import OurProjectSchema from '@/blocks/OurProject/schema'
-import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
 import ProductionPipelineSchema from '@/blocks/ProductionPipeline/schema'
 import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
@@ -214,7 +213,7 @@ export const Pages: CollectionConfig = {
         ProjectApproachSchema,
         CodingLanguageSchema,
         FounderQuoteSchema,
-        ClientSuccessStoriesSchema,
+        CustomerReviewSchema,
         CompanyStatsSchema,
 
         // about us page unique
