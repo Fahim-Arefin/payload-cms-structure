@@ -172,3 +172,7 @@ export const PRODUCTION_PIPELINE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/produ
 export const WHAT_WE_BUILD_SLUG_AND_TAG = 'what-we-build'
 export const WHAT_WE_BUILD_BLOCK_LABEL = 'What We Build'
 export const WHAT_WE_BUILD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/what-we-build-block-thumbnail.webp`
+
+export const CUSTOMER_REVIEW_SLUG_AND_TAG = 'customer-review'
+export const CUSTOMER_REVIEW_BLOCK_LABEL = 'Customer Review'
+export const CUSTOMER_REVIEW_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/customer-review-block-thumbnail.webp`

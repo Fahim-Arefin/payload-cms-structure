@@ -302,13 +302,13 @@ export interface ReviewFormSubmission {
   phone: string;
   rating: number;
   review: string;
-  status?: ('new' | 'reviewed' | 'published') | null;
+  status: 'new' | 'reviewed' | 'published';
   /**
    * These images are uploaded only from this collection in the admin panel. They are not submitted from the frontend form.
    */
   adminImages?: {
     /**
-     * Upload & crop the company icon. This can be uploaded from this collection only. Ratio 200:80
+     * Upload & crop the company icon. This can be uploaded from this collection only. Ratio 140:50
      */
     companyIcon?: (string | null) | Media;
     companyIconOriginal?: (string | null) | Media;
@@ -319,7 +319,7 @@ export interface ReviewFormSubmission {
      */
     companyIconBlurDataURL?: string | null;
     /**
-     * Upload & crop the user profile image. This can be uploaded from this collection only. Ratio 325:385
+     * Upload & crop the user profile image. This can be uploaded from this collection only. Ratio 240:301
      */
     userProfileImage?: (string | null) | Media;
     userProfileImageOriginal?: (string | null) | Media;
@@ -1355,7 +1355,7 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
-         * Main intro heading, highlighted text, description and optional CTA.
+         * Manage the section tag, heading, description and two CTA buttons for the customer review section.
          */
         sectionHeading: {
           /**
@@ -1404,63 +1404,40 @@ export interface Page {
             };
             [k: string]: unknown;
           } | null;
+          ctaButtons?:
+            | {
+                /**
+                 * Max 40 characters.
+                 */
+                label: string;
+                /**
+                 * Select the button style
+                 */
+                style?: ('btn01' | 'btn02') | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
+                id?: string | null;
+              }[]
+            | null;
         };
         /**
-         * Company-wise client success reviews.
+         * Control where the customer review section gets its reviews from.
          */
-        clientReviews: {
-          companies: {
-            /**
-             * Example: AltSource. Max 80 characters.
-             */
-            companyName: string;
-            /**
-             * Upload company logo. Transparent PNG/SVG preferred. Aspect ratio 3:1.
-             */
-            companyLogo: string | Media;
-            companyLogoOriginal?: (string | null) | Media;
-            pendingCompanyLogoOriginal?: string | null;
-            pendingCompanyLogoCrop?: string | null;
-            /**
-             * Auto-generated Base64 blur
-             */
-            companyLogoBlurDataURL?: string | null;
-            reviews: {
-              /**
-               * Example: Dianne Russell. Max 80 characters.
-               */
-              clientName: string;
-              /**
-               * Client designation. Max 120 characters.
-               */
-              clientDesignation: string;
-              /**
-               * Rating from 1 to 5.
-               */
-              rating: number;
-              /**
-               * Client review text. Max 500 characters.
-               */
-              review: string;
-              /**
-               * Upload client image. Aspect ratio 240:301.
-               */
-              image: string | Media;
-              imageOriginal?: (string | null) | Media;
-              pendingImageOriginal?: string | null;
-              pendingImageCrop?: string | null;
-              /**
-               * Auto-generated Base64 blur
-               */
-              imageBlurDataURL?: string | null;
-              id?: string | null;
-            }[];
-            id?: string | null;
-          }[];
+        reviewSettings?: {
+          /**
+           * Enable this to show published reviews submitted through the review form.
+           */
+          useReviewFormPublishedReviews?: boolean | null;
         };
         id?: string | null;
         blockName?: string | null;
-        blockType: 'client-success-stories';
+        blockType: 'customer-review';
       }
     | {
         uploadSessionId?: string | null;
@@ -3753,7 +3730,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'client-success-stories'?:
+        'customer-review'?:
           | T
           | {
               uploadSessionId?: T;
@@ -3774,35 +3751,20 @@ export interface PagesSelect<T extends boolean = true> {
                     heading2Highlighted?: T;
                     heading2HighlightColor?: T;
                     description?: T;
-                  };
-              clientReviews?:
-                | T
-                | {
-                    companies?:
+                    ctaButtons?:
                       | T
                       | {
-                          companyName?: T;
-                          companyLogo?: T;
-                          companyLogoOriginal?: T;
-                          pendingCompanyLogoOriginal?: T;
-                          pendingCompanyLogoCrop?: T;
-                          companyLogoBlurDataURL?: T;
-                          reviews?:
-                            | T
-                            | {
-                                clientName?: T;
-                                clientDesignation?: T;
-                                rating?: T;
-                                review?: T;
-                                image?: T;
-                                imageOriginal?: T;
-                                pendingImageOriginal?: T;
-                                pendingImageCrop?: T;
-                                imageBlurDataURL?: T;
-                                id?: T;
-                              };
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
                           id?: T;
                         };
+                  };
+              reviewSettings?:
+                | T
+                | {
+                    useReviewFormPublishedReviews?: T;
                   };
               id?: T;
               blockName?: T;
