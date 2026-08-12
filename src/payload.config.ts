@@ -19,6 +19,8 @@ import NewsletterSubscribers from './collections/NewsletterSubscribers'
 import GlobalContactUs from './collections/globals/GlobalContactUs'
 import ContactFormSubmissions from './collections/ContactFormSubmissions'
 import ReviewFormSubmissions from './collections/ReviewFormSubmissions'
+import ArticleTags from './collections/globals/ArticleTags'
+import Article from './collections/globals/Article'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -101,7 +103,7 @@ export default buildConfig({
     ReviewFormSubmissions,
     Pages,
   ],
-  globals: [Navbar, Footer, GlobalContactUs],
+  globals: [Navbar, Footer, ArticleTags, Article, GlobalContactUs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

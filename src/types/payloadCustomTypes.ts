@@ -1,5 +1,6 @@
 import {
   ABOUT_US_INTRO_SLUG_AND_TAG,
+  ALL_ARTICLE_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   BOOK_A_CALL_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
@@ -162,4 +163,8 @@ export type WhatWeBuildBlockType = Extract<
 export type CustomerReviewBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CUSTOMER_REVIEW_SLUG_AND_TAG }
+>
+export type AllArticlesBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ALL_ARTICLE_SLUG_AND_TAG }
 >
