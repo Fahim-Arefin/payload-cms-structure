@@ -296,7 +296,6 @@ export interface ContactFormSubmission {
  */
 export interface ReviewFormSubmission {
   id: string;
-  uploadSessionId?: string | null;
   buyersFullName: string;
   linkedIn?: string | null;
   companyName: string;
@@ -312,27 +311,13 @@ export interface ReviewFormSubmission {
    */
   adminImages?: {
     /**
-     * Upload & crop the company icon. This can be uploaded from this collection only. Ratio 140:50
+     * Optional. Upload company logo/icon from admin only. Recommended ratio 140:50.
      */
     companyIcon?: (string | null) | Media;
-    companyIconOriginal?: (string | null) | Media;
-    pendingCompanyIconOriginal?: string | null;
-    pendingCompanyIconCrop?: string | null;
     /**
-     * Auto-generated Base64 blur
-     */
-    companyIconBlurDataURL?: string | null;
-    /**
-     * Upload & crop the user profile image. This can be uploaded from this collection only. Ratio 240:301
+     * Optional. Upload user profile image from admin only. Recommended ratio 240:301.
      */
     userProfileImage?: (string | null) | Media;
-    userProfileImageOriginal?: (string | null) | Media;
-    pendingUserProfileImageOriginal?: string | null;
-    pendingUserProfileImageCrop?: string | null;
-    /**
-     * Auto-generated Base64 blur
-     */
-    userProfileImageBlurDataURL?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -3412,7 +3397,6 @@ export interface ContactFormSubmissionsSelect<T extends boolean = true> {
  * via the `definition` "review-form-submissions_select".
  */
 export interface ReviewFormSubmissionsSelect<T extends boolean = true> {
-  uploadSessionId?: T;
   buyersFullName?: T;
   linkedIn?: T;
   companyName?: T;
@@ -3427,15 +3411,7 @@ export interface ReviewFormSubmissionsSelect<T extends boolean = true> {
     | T
     | {
         companyIcon?: T;
-        companyIconOriginal?: T;
-        pendingCompanyIconOriginal?: T;
-        pendingCompanyIconCrop?: T;
-        companyIconBlurDataURL?: T;
         userProfileImage?: T;
-        userProfileImageOriginal?: T;
-        pendingUserProfileImageOriginal?: T;
-        pendingUserProfileImageCrop?: T;
-        userProfileImageBlurDataURL?: T;
       };
   updatedAt?: T;
   createdAt?: T;
