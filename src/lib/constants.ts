@@ -31,17 +31,34 @@ export const GLOBAL_FOOTER_CACHE_KEY = 'footer-data'
 export const GLOBAL_CONTACT_US_SLUG_AND_TAG = 'global-contact-us'
 export const GLOBAL_CONTACT_US_LABEL = 'Global Contact Us'
 
-// News Categories Global
-export const GLOBAL_NEWS_CATEGORIES_SLUG_AND_TAG = 'news-categories'
-export const GLOBAL_NEWS_CATEGORIES_CACHE_KEY = 'news-categories-data'
-
 // News Tags Global
-export const GLOBAL_NEWS_TAGS_SLUG_AND_TAG = 'news-tags'
-export const GLOBAL_NEWS_TAGS_CACHE_KEY = 'news-tags-data'
+// export const GLOBAL_NEWS_TAGS_SLUG_AND_TAG = 'news-tags'
+// export const GLOBAL_NEWS_TAGS_CACHE_KEY = 'news-tags-data'
 
 // News Global
 export const GLOBAL_NEWS_SLUG_AND_TAG = 'news'
 export const GLOBAL_NEWS_CACHE_KEY = 'news-data'
+
+// articles
+// export const GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG = 'article-tags'
+// export const GLOBAL_ARTICLE_SLUG_AND_TAG = 'article'
+
+// articles
+// ================================================================================
+// ================================================================================
+export const ARTICLES = 'Articles'
+export const GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG = 'article-tags'
+export const GLOBAL_ARTICLE_SLUG_AND_TAG = 'articles'
+// export const ALL_ARTICLES_SLUG_AND_TAG = 'all-articles'
+
+export const ALL_ARTICLE_SLUG_AND_TAG = 'all-article'
+export const ALL_ARTICLE_BLOCK_LABEL = 'All Article'
+export const ALL_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-article-block-thumbnail.webp`
+
+export const SINGLE_ARTICLE_SLUG_AND_TAG = 'single-article'
+// ================================================================================
+// ================================================================================
+// audit
 export const AUDIT_LOG = 'Audit'
 
 // form submission

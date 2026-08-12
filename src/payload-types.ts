@@ -99,11 +99,15 @@ export interface Config {
   globals: {
     navbar: Navbar;
     footer: Footer;
+    'article-tags': ArticleTag;
+    articles: Article;
     'global-contact-us': GlobalContactUs;
   };
   globalsSelect: {
     navbar: NavbarSelect<false> | NavbarSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'article-tags': ArticleTagsSelect<false> | ArticleTagsSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     'global-contact-us': GlobalContactUsSelect<false> | GlobalContactUsSelect<true>;
   };
   locale: null;
@@ -3093,6 +3097,114 @@ export interface Page {
         blockName?: string | null;
         blockType: 'production-pipeline';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the article listing section tag, heading and description. CTA is disabled here because the article card CTA is controlled separately.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 120 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 120.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 120 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 120.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the article card/details page CTA. This link is used for the article details page button.
+         */
+        articleCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch article data from the global Articles collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders data from **Global → Articles**.
+           *
+           * **Before enabling:** fill up the Global → Articles data.
+           *
+           * **Notes:**
+           * • This block only stores presentation options (e.g., background color , CTA btn etc.).
+           * • Articles comes from the single shared Global to keep pages in sync.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'all-article';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -4483,6 +4595,49 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'all-article'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              articleCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -4707,6 +4862,103 @@ export interface Footer {
   createdAt?: string | null;
 }
 /**
+ * Global list of article tags.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "article-tags".
+ */
+export interface ArticleTag {
+  id: string;
+  tags?:
+    | {
+        label: string;
+        /**
+         * Unique key like web-design, ecommerce, automation.
+         */
+        key: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Global article manager using article tag selector.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: string;
+  uploadSessionId?: string | null;
+  articles?:
+    | {
+        /**
+         * Upload card image. Recommended aspect ratio 310:182.
+         */
+        cardImage: string | Media;
+        cardImageOriginal?: (string | null) | Media;
+        pendingCardImageOriginal?: string | null;
+        pendingCardImageCrop?: string | null;
+        cardImageBlurDataURL?: string | null;
+        /**
+         * Upload detail page image. Recommended aspect ratio 500:700.
+         */
+        detailPageImage: string | Media;
+        detailPageImageOriginal?: (string | null) | Media;
+        pendingDetailPageImageOriginal?: string | null;
+        pendingDetailPageImageCrop?: string | null;
+        detailPageImageBlurDataURL?: string | null;
+        publishDate: string;
+        /**
+         * Example: 5 min read.
+         */
+        estimatedReadingTime: string;
+        /**
+         * Article title. Max 140 characters.
+         */
+        title: string;
+        /**
+         * Article detail content / description.
+         */
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * Stores selected article tag keys from the Article Tags global.
+         */
+        tagKeys:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        /**
+         * If enabled, this article can be shown in featured article sections.
+         */
+        isFeatured?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * Global Contact Us options: our solutions, currencies and budget range.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4867,6 +5119,53 @@ export interface FooterSelect<T extends boolean = true> {
     | T
     | {
         legalValue?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "article-tags_select".
+ */
+export interface ArticleTagsSelect<T extends boolean = true> {
+  tags?:
+    | T
+    | {
+        label?: T;
+        key?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles_select".
+ */
+export interface ArticlesSelect<T extends boolean = true> {
+  uploadSessionId?: T;
+  articles?:
+    | T
+    | {
+        cardImage?: T;
+        cardImageOriginal?: T;
+        pendingCardImageOriginal?: T;
+        pendingCardImageCrop?: T;
+        cardImageBlurDataURL?: T;
+        detailPageImage?: T;
+        detailPageImageOriginal?: T;
+        pendingDetailPageImageOriginal?: T;
+        pendingDetailPageImageCrop?: T;
+        detailPageImageBlurDataURL?: T;
+        publishDate?: T;
+        estimatedReadingTime?: T;
+        title?: T;
+        description?: T;
+        tagKeys?: T;
+        isFeatured?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

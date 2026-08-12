@@ -1,4 +1,5 @@
 import AboutUsIntroSchema from '@/blocks/AboutUsIntro/schema'
+import AllArticleSchema from '@/blocks/AllArticles/schema'
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import BookACallSchema from '@/blocks/BookACall/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
@@ -236,7 +237,9 @@ export const Pages: CollectionConfig = {
         WhatWeBuildSchema,
         WhyChooseUsSchema,
         ProductionPipelineSchema,
-        // News
+
+        //Articles
+        AllArticleSchema,
       ],
     },
   ],
