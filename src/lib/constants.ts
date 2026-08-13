@@ -49,7 +49,6 @@ export const GLOBAL_NEWS_CACHE_KEY = 'news-data'
 export const ARTICLES = 'Articles'
 export const GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG = 'article-tags'
 export const GLOBAL_ARTICLE_SLUG_AND_TAG = 'articles'
-// export const ALL_ARTICLES_SLUG_AND_TAG = 'all-articles'
 
 export const ALL_ARTICLE_SLUG_AND_TAG = 'all-article'
 export const ALL_ARTICLE_BLOCK_LABEL = 'All Article'
@@ -58,6 +57,10 @@ export const ALL_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-article-b
 export const SINGLE_ARTICLE_SLUG_AND_TAG = 'single-article'
 export const SINGLE_ARTICLE_BLOCK_LABEL = 'Single Article'
 export const SINGLE_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-article-block-thumbnail.webp`
+
+export const RELATED_ARTICLE_SLUG_AND_TAG = 'related-article'
+export const RELATED_ARTICLE_BLOCK_LABEL = 'Related Article'
+export const RELATED_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/related-article-block-thumbnail.webp`
 // ================================================================================
 // ================================================================================
 // audit
