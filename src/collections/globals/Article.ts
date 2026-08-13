@@ -6,6 +6,7 @@ import {
   ARTICLES,
   GLOBAL_ARTICLE_SLUG_AND_TAG,
   GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG,
+  RELATED_ARTICLE_SLUG_AND_TAG,
   SINGLE_ARTICLE_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { globalTag } from '@/lib/cacheTags'
@@ -298,6 +299,7 @@ const Article: GlobalConfig = {
         revalidateTag(globalTag(GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG))
         revalidateTag(ALL_ARTICLE_SLUG_AND_TAG)
         revalidateTag(SINGLE_ARTICLE_SLUG_AND_TAG)
+        revalidateTag(RELATED_ARTICLE_SLUG_AND_TAG)
       },
     ],
   },

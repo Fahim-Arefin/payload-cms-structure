@@ -25,6 +25,8 @@ import {
   PRODUCTION_PIPELINE_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
+  RELATED_ARTICLE_SLUG_AND_TAG,
+  SINGLE_ARTICLE_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -58,6 +60,8 @@ import RatingBlock from './Rating/RatingBlock'
 import WhatWeBuildBlock from './WhatWeBuild/WhatWeBuildBlock'
 import WhyChooseUsBlock from './WhyChooseUs/WhyChooseUsBlock'
 import AllArticlesBlock from './AllArticles/AllArticlesBlock'
+import SingleArticleBlock from './SingleArticle/SingleArticleBlock'
+import RelatedArticlesBlock from './RelatedArticles/RelatedArticlesBlock'
 
 type Params = Record<string, string>
 
@@ -121,6 +125,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <CustomerReviewBlock key={block.id} block={block} params={params} />
     case ALL_ARTICLE_SLUG_AND_TAG:
       return <AllArticlesBlock key={block.id} block={block} params={params} />
+    case SINGLE_ARTICLE_SLUG_AND_TAG:
+      return <SingleArticleBlock key={block.id} block={block} params={params} />
+    case RELATED_ARTICLE_SLUG_AND_TAG:
+      return <RelatedArticlesBlock key={block.id} block={block} params={params} />
     default:
       return null
   }
