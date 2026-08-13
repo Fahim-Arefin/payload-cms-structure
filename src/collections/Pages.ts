@@ -24,6 +24,7 @@ import ProductInfoSchema from '@/blocks/ProductInfo/schema'
 import ProductionPipelineSchema from '@/blocks/ProductionPipeline/schema'
 import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import RatingSchema from '@/blocks/Rating/scheam'
+import SingleArticleSchema from '@/blocks/SingleArticle/schema'
 import WhatWeBuildSchema from '@/blocks/WhatWeBuild/schema'
 import WhyChooseUsSchema from '@/blocks/WhyChooseUs/schema'
 import { APIError } from '@/lib/apiError'
@@ -240,6 +241,7 @@ export const Pages: CollectionConfig = {
 
         //Articles
         AllArticleSchema,
+        SingleArticleSchema,
       ],
     },
   ],

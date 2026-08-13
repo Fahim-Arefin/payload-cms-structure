@@ -56,6 +56,8 @@ export const ALL_ARTICLE_BLOCK_LABEL = 'All Article'
 export const ALL_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-article-block-thumbnail.webp`
 
 export const SINGLE_ARTICLE_SLUG_AND_TAG = 'single-article'
+export const SINGLE_ARTICLE_BLOCK_LABEL = 'Single Article'
+export const SINGLE_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-article-block-thumbnail.webp`
 // ================================================================================
 // ================================================================================
 // audit

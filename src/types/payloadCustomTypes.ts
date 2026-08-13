@@ -27,6 +27,7 @@ import {
   PRODUCTION_PIPELINE_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
+  SINGLE_ARTICLE_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -167,4 +168,8 @@ export type CustomerReviewBlockType = Extract<
 export type AllArticlesBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof ALL_ARTICLE_SLUG_AND_TAG }
+>
+export type SingleArticlesBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SINGLE_ARTICLE_SLUG_AND_TAG }
 >
