@@ -12,6 +12,7 @@ type Props = {
   data: NonNullable<Article['articles']>[number]
   tagsData: ArticleTag
   detailsPage?: boolean
+  hideDescription?: boolean
 }
 
 type TagItem = {
@@ -35,7 +36,13 @@ function formatPublishDate(dateValue?: string | Date | null) {
   })
 }
 
-function ArticleCard({ block, data, tagsData, detailsPage = false }: Props) {
+function ArticleCard({
+  block,
+  data,
+  tagsData,
+  detailsPage = false,
+  hideDescription = false,
+}: Props) {
   const selectedTags = useMemo<TagItem[]>(() => {
     const dataAny = data as any
 
@@ -135,7 +142,7 @@ function ArticleCard({ block, data, tagsData, detailsPage = false }: Props) {
       )}
 
       {/* description */}
-      {data?.description && (
+      {!hideDescription && data?.description && (
         <div className="mt-[12px] font-grift text-secondary-2 line-clamp-3 global-p5">
           <LocalizedRichText bn={data.description} en={data.description} />
         </div>

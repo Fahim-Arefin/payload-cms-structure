@@ -217,7 +217,7 @@ type Props = {
 const bgColorMap: Record<string, string> = {
   'white-1': '#FFFFFF',
   'white-2': '#F8F8F8',
-  'white-3': '#FFFBFC',
+  'white-3': '#F1F4EB',
   'secondary-1': '#0A1128',
   'secondary-2': '#202B4C',
   'primary-1': '#006C67',
