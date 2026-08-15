@@ -16,7 +16,7 @@ function SingleArticleBlock({ block, params }: Props) {
     <WithHashScroller
       id={block?.sectionSettings?.sectionId}
       bgColor={bgColor}
-      className="rounded-t-[18px] lg:rounded-t-[25px] xl:rounded-t-[30px]"
+      className="rounded-t-[18px] lg:rounded-t-[25px] xl:rounded-t-[30px] overflow-hidden"
     >
       {block?.sharedDataSettings?.useSharedData ? (
         <SingleArticleServer block={block} id={params?.slug} />

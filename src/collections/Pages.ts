@@ -17,6 +17,7 @@ import CSDevelopmentFrameworkSchema from '@/blocks/CS_DevelopmentFramework/schem
 import CustomerReviewSchema from '@/blocks/CustomerReview/schema'
 import EmployeeSchema from '@/blocks/Employee/schema'
 import FAQSchema from '@/blocks/FAQ/schema'
+import FeaturedArticleSchema from '@/blocks/FeaturedArticle/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import MaintenanceSchema from '@/blocks/Maintainance/schema'
 import OurProjectSchema from '@/blocks/OurProject/schema'
@@ -244,6 +245,7 @@ export const Pages: CollectionConfig = {
         AllArticleSchema,
         SingleArticleSchema,
         RelatedArticleSchema,
+        FeaturedArticleSchema,
       ],
     },
   ],

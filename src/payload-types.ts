@@ -3356,6 +3356,120 @@ export interface Page {
         blockName?: string | null;
         blockType: 'related-article';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Turn this ON if this Featured Article block is the first visible content section After Hero Section of the page. Frontend can use this to adjust top Roundness.
+         */
+        isFirstContentOfPage?: boolean | null;
+        /**
+         * Manage the featured article section tag, heading and description. CTA is disabled for the section heading.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 120 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 120.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 120 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 120.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the featured article card CTA. This link is used to build the article details page URL using the selected page + article item ID.
+         */
+        articleCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch featured articles from the global Articles collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders featured articles from **Global → Articles**.
+           *
+           * **Before enabling:** fill up the Global → Articles data.
+           *
+           * **Notes:**
+           * • This block stores presentation options like background color, first content setting, section heading and article CTA.
+           * • Featured article data comes from the shared Global → Articles collection.
+           * • The frontend should render articles where “Featured Article” is enabled in the global article item.
+           * • The article CTA works like the All Article block CTA: selected page + section ID + article item ID.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featured-article';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -4821,6 +4935,50 @@ export interface PagesSelect<T extends boolean = true> {
                     backgroundColor?: T;
                     sectionId?: T;
                   };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              articleCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'featured-article'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              isFirstContentOfPage?: T;
               sectionHeading?:
                 | T
                 | {

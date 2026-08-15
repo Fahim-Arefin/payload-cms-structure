@@ -18,6 +18,7 @@ import {
   CUSTOMER_REVIEW_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
+  FEATURED_ARTICLE_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   LOCATION_SLUG_AND_TAG,
   MAINTENANCE_SLUG_AND_TAG,
@@ -177,4 +178,8 @@ export type SingleArticlesBlockType = Extract<
 export type RelatedArticlesBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof RELATED_ARTICLE_SLUG_AND_TAG }
+>
+export type FeaturedArticleBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof FEATURED_ARTICLE_SLUG_AND_TAG }
 >

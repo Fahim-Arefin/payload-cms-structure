@@ -17,6 +17,7 @@ import {
   CUSTOMER_REVIEW_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
+  FEATURED_ARTICLE_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   LOCATION_SLUG_AND_TAG,
   MAINTENANCE_SLUG_AND_TAG,
@@ -62,6 +63,7 @@ import WhyChooseUsBlock from './WhyChooseUs/WhyChooseUsBlock'
 import AllArticlesBlock from './AllArticles/AllArticlesBlock'
 import SingleArticleBlock from './SingleArticle/SingleArticleBlock'
 import RelatedArticlesBlock from './RelatedArticles/RelatedArticlesBlock'
+import FeaturedArticleBlock from './FeaturedArticle/FeaturedArticleBlock'
 
 type Params = Record<string, string>
 
@@ -129,6 +131,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <SingleArticleBlock key={block.id} block={block} params={params} />
     case RELATED_ARTICLE_SLUG_AND_TAG:
       return <RelatedArticlesBlock key={block.id} block={block} params={params} />
+    case FEATURED_ARTICLE_SLUG_AND_TAG:
+      return <FeaturedArticleBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

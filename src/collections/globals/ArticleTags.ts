@@ -4,6 +4,7 @@ import type { GlobalConfig } from 'payload'
 import { globalTag } from '@/lib/cacheTags'
 import {
   ALL_ARTICLE_SLUG_AND_TAG,
+  FEATURED_ARTICLE_SLUG_AND_TAG,
   GLOBAL_ARTICLE_SLUG_AND_TAG,
   GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG,
   RELATED_ARTICLE_SLUG_AND_TAG,
@@ -114,6 +115,7 @@ const ArticleTags: GlobalConfig = {
         revalidateTag(ALL_ARTICLE_SLUG_AND_TAG)
         revalidateTag(SINGLE_ARTICLE_SLUG_AND_TAG)
         revalidateTag(RELATED_ARTICLE_SLUG_AND_TAG)
+        revalidateTag(FEATURED_ARTICLE_SLUG_AND_TAG)
       },
     ],
   },

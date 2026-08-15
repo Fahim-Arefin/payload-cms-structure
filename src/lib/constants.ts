@@ -61,6 +61,10 @@ export const SINGLE_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-art
 export const RELATED_ARTICLE_SLUG_AND_TAG = 'related-article'
 export const RELATED_ARTICLE_BLOCK_LABEL = 'Related Article'
 export const RELATED_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/related-article-block-thumbnail.webp`
+
+export const FEATURED_ARTICLE_SLUG_AND_TAG = 'featured-article'
+export const FEATURED_ARTICLE_BLOCK_LABEL = 'Featured Article'
+export const FEATURED_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/featured-article-block-thumbnail.webp`
 // ================================================================================
 // ================================================================================
 // audit
