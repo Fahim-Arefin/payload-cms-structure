@@ -5,8 +5,10 @@ import { Article } from '@/payload-types'
 import { FeaturedArticleBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import ArrowRight from 'public/assets/icons/arrowright.png'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import FeaturedCard from './FeaturedCard'
+import { sliderDelay } from '@/lib/data'
+import Autoplay from 'embla-carousel-autoplay'
 
 type Props = {
   block: FeaturedArticleBlockType
@@ -14,6 +16,13 @@ type Props = {
 }
 
 function FeaturedArticleCarousal({ block, feturedArticles }: Props) {
+  const autoplayPlugin = useRef(
+    Autoplay({
+      delay: sliderDelay,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    }),
+  )
   const [api, setApi] = useState<CarouselApi>()
 
   const carouselItems = useMemo(() => {
@@ -48,6 +57,7 @@ function FeaturedArticleCarousal({ block, feturedArticles }: Props) {
           loop: shouldLoop,
         }}
         className="relative z-10 w-full"
+        plugins={[autoplayPlugin.current]}
       >
         <CarouselContent>
           {carouselItems.map((article, index) => (
