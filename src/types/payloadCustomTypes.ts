@@ -1,6 +1,7 @@
 import {
   ABOUT_US_INTRO_SLUG_AND_TAG,
   ALL_ARTICLE_SLUG_AND_TAG,
+  ALL_NEWS_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   BOOK_A_CALL_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
@@ -182,4 +183,8 @@ export type RelatedArticlesBlockType = Extract<
 export type FeaturedArticleBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof FEATURED_ARTICLE_SLUG_AND_TAG }
+>
+export type AllNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ALL_NEWS_SLUG_AND_TAG }
 >

@@ -1,16 +1,13 @@
 import type { GlobalConfig } from 'payload'
 import { revalidateTag } from 'next/cache'
 
-import {
-  ALL_ARTICLE_SLUG_AND_TAG,
-  ARTICLES,
-  FEATURED_ARTICLE_SLUG_AND_TAG,
-  GLOBAL_ARTICLE_SLUG_AND_TAG,
-  GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG,
-  RELATED_ARTICLE_SLUG_AND_TAG,
-  SINGLE_ARTICLE_SLUG_AND_TAG,
-} from '@/lib/constants'
 import { globalTag } from '@/lib/cacheTags'
+import {
+  ALL_NEWS_SLUG_AND_TAG,
+  GLOBAL_NEWS_SLUG_AND_TAG,
+  GLOBAL_NEWS_TAGS_SLUG_AND_TAG,
+  NEWS,
+} from '@/lib/constants'
 import { roleAtLeast } from '@/lib/rbac'
 
 import { validateShortText } from '@/utils/block/fields-validation'
@@ -21,6 +18,8 @@ import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
 const TITLE_MAX = 140
 const ESTIMATED_READING_TIME_MAX = 40
 const KEY_MAX = 60
+
+type EventStatus = 'upcoming-events' | 'past-events' | 'todays-events'
 
 const validateKey =
   (label: string, max: number, required = true) =>
@@ -66,54 +65,118 @@ const makeMapByKey = (items: any[]) => {
   return new Map<string, any>(entries)
 }
 
-const enrichArticleItemsWithTagsAfterRead = async ({ doc, req }: any) => {
+const getDhakaTodayKey = () => {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Dhaka',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date())
+
+  const year = parts.find((part) => part.type === 'year')?.value
+  const month = parts.find((part) => part.type === 'month')?.value
+  const day = parts.find((part) => part.type === 'day')?.value
+
+  if (!year || !month || !day) return ''
+
+  return `${year}-${month}-${day}`
+}
+
+const getDateKeyFromPublishDate = (dateValue?: string | Date | null) => {
+  if (!dateValue) return ''
+
+  if (typeof dateValue === 'string') {
+    const match = dateValue.match(/^(\d{4})-(\d{2})-(\d{2})/)
+
+    if (match) {
+      return `${match[1]}-${match[2]}-${match[3]}`
+    }
+  }
+
+  const date = new Date(dateValue)
+
+  if (Number.isNaN(date.getTime())) return ''
+
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Dhaka',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date)
+
+  const year = parts.find((part) => part.type === 'year')?.value
+  const month = parts.find((part) => part.type === 'month')?.value
+  const day = parts.find((part) => part.type === 'day')?.value
+
+  if (!year || !month || !day) return ''
+
+  return `${year}-${month}-${day}`
+}
+
+const getEventStatusFromPublishDate = (publishDate?: string | Date | null): EventStatus => {
+  const publishDateKey = getDateKeyFromPublishDate(publishDate)
+  const todayKey = getDhakaTodayKey()
+
+  if (!publishDateKey || !todayKey) return 'todays-events'
+
+  if (publishDateKey > todayKey) return 'upcoming-events'
+  if (publishDateKey < todayKey) return 'past-events'
+
+  return 'todays-events'
+}
+
+const applyEventStatus = async ({ data }: any) => {
+  const newsItems = Array.isArray(data?.news) ? data.news : []
+
+  return {
+    ...data,
+    news: newsItems.map((item: any) => ({
+      ...item,
+      eventStatus: getEventStatusFromPublishDate(item?.publishDate),
+    })),
+  }
+}
+
+const enrichNewsItemsAfterRead = async ({ doc, req }: any) => {
   try {
     const tagsGlobal = await req.payload.findGlobal({
-      slug: GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG,
+      slug: GLOBAL_NEWS_TAGS_SLUG_AND_TAG,
       depth: 0,
     })
 
     const tags = Array.isArray(tagsGlobal?.tags) ? tagsGlobal.tags : []
     const tagMap = makeMapByKey(tags)
 
-    const articles = Array.isArray(doc?.articles) ? doc.articles : []
+    const newsItems = Array.isArray(doc?.news) ? doc.news : []
 
     return {
       ...doc,
-      articles: articles.map((item: any) => {
+      news: newsItems.map((item: any) => {
         const tagKeys = Array.isArray(item?.tagKeys)
           ? item.tagKeys.map((key: unknown) => String(key ?? '').trim()).filter(Boolean)
           : []
 
         return {
           ...item,
-
-          // Virtual enriched data for frontend/API reads
+          eventStatus: getEventStatusFromPublishDate(item?.publishDate),
           tags: tagKeys.map((key: string) => tagMap.get(key)).filter(Boolean),
         }
       }),
     }
   } catch (error) {
     req?.payload?.logger?.warn?.(
-      `Article afterRead tag enrichment failed: ${(error as Error).message}`,
+      `News afterRead tag enrichment failed: ${(error as Error).message}`,
     )
 
     return doc
   }
 }
 
-/**
- * Article global media lifecycle
- *
- * Handles:
- * - articles[].cardImage
- * - articles[].detailPageImage
- */
-const articleMediaHooks = withMediaLifecycle({
-  collectionSlug: GLOBAL_ARTICLE_SLUG_AND_TAG,
+const newsMediaHooks = withMediaLifecycle({
+  collectionSlug: GLOBAL_NEWS_SLUG_AND_TAG,
   arrayFields: [
     {
-      fieldName: 'articles',
+      fieldName: 'news',
       mediaFields: ['cardImage', 'detailPageImage'],
       itemLabelField: 'title',
       mediaFieldLabels: {
@@ -134,14 +197,14 @@ const pickGlobalHooks = (h: any) => ({
   afterRead: h?.afterRead ?? [],
 })
 
-const articleBase = pickGlobalHooks(articleMediaHooks)
+const newsBase = pickGlobalHooks(newsMediaHooks)
 
-const Article: GlobalConfig = {
-  slug: GLOBAL_ARTICLE_SLUG_AND_TAG,
-  label: ARTICLES,
+const News: GlobalConfig = {
+  slug: GLOBAL_NEWS_SLUG_AND_TAG,
+  label: NEWS,
 
   admin: {
-    description: 'Global article manager using article tag selector.',
+    description: 'Global news manager using news tag selector.',
   },
 
   access: {
@@ -160,36 +223,36 @@ const Article: GlobalConfig = {
     },
 
     {
-      name: 'articles',
+      name: 'news',
       type: 'array',
-      label: 'Articles',
+      label: 'News',
       minRows: 0,
       maxRows: 200,
       labels: {
-        singular: 'Article',
-        plural: 'Articles',
+        singular: 'News Item',
+        plural: 'News Items',
       },
       fields: [
         ...generateArrayImageFields({
           fieldName: 'cardImage',
           label: 'Card Image',
-          description: 'Upload card image. Recommended aspect ratio 310:182.',
-          aspectRatio: 310 / 182,
+          description: 'Upload card image. Recommended aspect ratio 265:302.',
+          aspectRatio: 265 / 302,
           quality: 0.92,
           maxKB: 700,
           required: true,
-          ownerCollection: GLOBAL_ARTICLE_SLUG_AND_TAG as any,
+          ownerCollection: GLOBAL_NEWS_SLUG_AND_TAG as any,
         } as any),
 
         ...generateArrayImageFields({
           fieldName: 'detailPageImage',
           label: 'Detail Page Image',
-          description: 'Upload detail page image. Recommended aspect ratio 500:700.',
-          aspectRatio: 500 / 700,
+          description: 'Upload detail page image. Recommended aspect ratio 1200:406.',
+          aspectRatio: 1200 / 406,
           quality: 0.92,
-          maxKB: 700,
+          maxKB: 900,
           required: true,
-          ownerCollection: GLOBAL_ARTICLE_SLUG_AND_TAG as any,
+          ownerCollection: GLOBAL_NEWS_SLUG_AND_TAG as any,
         } as any),
 
         {
@@ -205,6 +268,8 @@ const Article: GlobalConfig = {
                 date: {
                   pickerAppearance: 'dayOnly',
                 },
+                description:
+                  'Event status is automatically detected from this date: future = Upcoming Events, past = Past Events, today = Todays Events.',
               },
             },
             {
@@ -227,14 +292,41 @@ const Article: GlobalConfig = {
         },
 
         {
+          name: 'eventStatus',
+          type: 'select',
+          label: 'Event Status',
+          required: true,
+          defaultValue: 'todays-events',
+          options: [
+            {
+              label: 'Upcoming Events',
+              value: 'upcoming-events',
+            },
+            {
+              label: 'Past Events',
+              value: 'past-events',
+            },
+            {
+              label: 'Todays Events',
+              value: 'todays-events',
+            },
+          ],
+          admin: {
+            readOnly: true,
+            description:
+              'Automatically generated from Publish Date after save. Future = Upcoming Events, Past = Past Events, Today = Todays Events.',
+          },
+        },
+
+        {
           name: 'title',
           type: 'text',
           required: true,
           label: 'Title',
           maxLength: TITLE_MAX,
-          validate: validateShortText('Article Title', TITLE_MAX, true),
+          validate: validateShortText('News Title', TITLE_MAX, true),
           admin: {
-            description: `Article title. Max ${TITLE_MAX} characters.`,
+            description: `News title. Max ${TITLE_MAX} characters.`,
           },
         },
 
@@ -244,17 +336,17 @@ const Article: GlobalConfig = {
           required: true,
           label: 'Description',
           admin: {
-            description: 'Article detail content / description.',
+            description: 'News detail content / description.',
           },
         },
 
         {
-          name: 'articleTagSelector',
+          name: 'newsTagSelector',
           type: 'ui',
-          label: 'Article Tags',
+          label: 'News Tags',
           admin: {
             components: {
-              Field: '@/components/payload/ArticleTagSelectorField#ArticleTagSelectorField',
+              Field: '@/components/payload/NewsTagMultiSelectorField#NewsTagMultiSelectorField',
             },
           },
         },
@@ -267,17 +359,17 @@ const Article: GlobalConfig = {
           validate: validateTagKeys,
           admin: {
             hidden: true,
-            description: 'Stores selected article tag keys from the Article Tags global.',
+            description: 'Stores selected news tag keys from the News Tags global.',
           },
         },
 
         {
           name: 'isFeatured',
           type: 'checkbox',
-          label: 'Feature this article',
+          label: 'Feature this news',
           defaultValue: false,
           admin: {
-            description: 'If enabled, this article can be shown in featured article sections.',
+            description: 'If enabled, this news item can be shown in featured news sections.',
           },
         },
       ],
@@ -285,26 +377,21 @@ const Article: GlobalConfig = {
   ],
 
   hooks: {
-    beforeValidate: [...articleBase.beforeValidate],
+    beforeValidate: [...newsBase.beforeValidate, applyEventStatus],
 
-    beforeChange: [...articleBase.beforeChange],
+    beforeChange: [...newsBase.beforeChange, applyEventStatus],
 
-    afterRead: [...articleBase.afterRead, enrichArticleItemsWithTagsAfterRead],
+    afterRead: [...newsBase.afterRead, enrichNewsItemsAfterRead],
 
     afterChange: [
-      ...articleBase.afterChange,
+      ...newsBase.afterChange,
       async () => {
-        // own tag
-        revalidateTag(globalTag(GLOBAL_ARTICLE_SLUG_AND_TAG))
-        // related blocks tags
-        revalidateTag(globalTag(GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG))
-        revalidateTag(ALL_ARTICLE_SLUG_AND_TAG)
-        revalidateTag(SINGLE_ARTICLE_SLUG_AND_TAG)
-        revalidateTag(RELATED_ARTICLE_SLUG_AND_TAG)
-        revalidateTag(FEATURED_ARTICLE_SLUG_AND_TAG)
+        revalidateTag(globalTag(GLOBAL_NEWS_SLUG_AND_TAG))
+        revalidateTag(globalTag(GLOBAL_NEWS_TAGS_SLUG_AND_TAG))
+        revalidateTag(ALL_NEWS_SLUG_AND_TAG)
       },
     ],
   },
 }
 
-export default Article
+export default News

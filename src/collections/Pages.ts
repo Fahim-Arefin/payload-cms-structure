@@ -1,5 +1,6 @@
 import AboutUsIntroSchema from '@/blocks/AboutUsIntro/schema'
 import AllArticleSchema from '@/blocks/AllArticles/schema'
+import AllNewsSchema from '@/blocks/AllNews/scheam'
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import BookACallSchema from '@/blocks/BookACall/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
@@ -246,6 +247,9 @@ export const Pages: CollectionConfig = {
         SingleArticleSchema,
         RelatedArticleSchema,
         FeaturedArticleSchema,
+
+        // News
+        AllNewsSchema,
       ],
     },
   ],

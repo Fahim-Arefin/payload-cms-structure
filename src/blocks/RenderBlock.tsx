@@ -1,6 +1,7 @@
 import {
   ABOUT_US_INTRO_SLUG_AND_TAG,
   ALL_ARTICLE_SLUG_AND_TAG,
+  ALL_NEWS_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   BOOK_A_CALL_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
@@ -64,6 +65,7 @@ import AllArticlesBlock from './AllArticles/AllArticlesBlock'
 import SingleArticleBlock from './SingleArticle/SingleArticleBlock'
 import RelatedArticlesBlock from './RelatedArticles/RelatedArticlesBlock'
 import FeaturedArticleBlock from './FeaturedArticle/FeaturedArticleBlock'
+import AllNewsBlock from './AllNews/AllNewsBlock'
 
 type Params = Record<string, string>
 
@@ -133,6 +135,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <RelatedArticlesBlock key={block.id} block={block} params={params} />
     case FEATURED_ARTICLE_SLUG_AND_TAG:
       return <FeaturedArticleBlock key={block.id} block={block} params={params} />
+    case ALL_NEWS_SLUG_AND_TAG:
+      return <AllNewsBlock key={block.id} block={block} params={params} />
     default:
       return null
   }
