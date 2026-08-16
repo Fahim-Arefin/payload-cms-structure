@@ -1,5 +1,6 @@
 import AboutUsIntroSchema from '@/blocks/AboutUsIntro/schema'
 import AllArticleSchema from '@/blocks/AllArticles/schema'
+import AllNewsSchema from '@/blocks/AllNews/scheam'
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import BookACallSchema from '@/blocks/BookACall/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
@@ -17,6 +18,7 @@ import CSDevelopmentFrameworkSchema from '@/blocks/CS_DevelopmentFramework/schem
 import CustomerReviewSchema from '@/blocks/CustomerReview/schema'
 import EmployeeSchema from '@/blocks/Employee/schema'
 import FAQSchema from '@/blocks/FAQ/schema'
+import FeaturedArticleSchema from '@/blocks/FeaturedArticle/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import MaintenanceSchema from '@/blocks/Maintainance/schema'
 import OurProjectSchema from '@/blocks/OurProject/schema'
@@ -26,6 +28,7 @@ import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import RatingSchema from '@/blocks/Rating/scheam'
 import RelatedArticleSchema from '@/blocks/RelatedArticles/schema'
 import SingleArticleSchema from '@/blocks/SingleArticle/schema'
+import SingleNewsSchema from '@/blocks/SingleNews/schema'
 import WhatWeBuildSchema from '@/blocks/WhatWeBuild/schema'
 import WhyChooseUsSchema from '@/blocks/WhyChooseUs/schema'
 import { APIError } from '@/lib/apiError'
@@ -244,6 +247,11 @@ export const Pages: CollectionConfig = {
         AllArticleSchema,
         SingleArticleSchema,
         RelatedArticleSchema,
+        FeaturedArticleSchema,
+
+        // News
+        AllNewsSchema,
+        SingleNewsSchema,
       ],
     },
   ],

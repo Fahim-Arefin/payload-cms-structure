@@ -3,12 +3,10 @@ import type { GlobalConfig } from 'payload'
 
 import { globalTag } from '@/lib/cacheTags'
 import {
-  ALL_ARTICLE_SLUG_AND_TAG,
-  FEATURED_ARTICLE_SLUG_AND_TAG,
-  GLOBAL_ARTICLE_SLUG_AND_TAG,
-  GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG,
-  RELATED_ARTICLE_SLUG_AND_TAG,
-  SINGLE_ARTICLE_SLUG_AND_TAG,
+  ALL_NEWS_SLUG_AND_TAG,
+  GLOBAL_NEWS_SLUG_AND_TAG,
+  GLOBAL_NEWS_TAGS_SLUG_AND_TAG,
+  SINGLE_NEWS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { roleAtLeast } from '@/lib/rbac'
 
@@ -37,7 +35,6 @@ const validateUniqueTagKeys = (val: unknown) => {
   if (!Array.isArray(val)) return true
 
   const keys = val.map((item) => String(item?.key ?? '').trim()).filter(Boolean)
-
   const unique = new Set(keys)
 
   if (unique.size !== keys.length) {
@@ -47,12 +44,12 @@ const validateUniqueTagKeys = (val: unknown) => {
   return true
 }
 
-const ArticleTags: GlobalConfig = {
-  slug: GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG,
-  label: 'Article Tags',
+const NewsTags: GlobalConfig = {
+  slug: GLOBAL_NEWS_TAGS_SLUG_AND_TAG,
+  label: 'News Tags',
 
   admin: {
-    description: 'Global list of article tags.',
+    description: 'Global list of news tags.',
   },
 
   access: {
@@ -96,7 +93,7 @@ const ArticleTags: GlobalConfig = {
               validate: validateKey('Tag Key', KEY_MAX, true),
               admin: {
                 width: '50%',
-                description: 'Unique key like web-design, ecommerce, automation.',
+                description: 'Unique key like conference, product-launch, company-news.',
               },
             },
           ],
@@ -108,17 +105,13 @@ const ArticleTags: GlobalConfig = {
   hooks: {
     afterChange: [
       async () => {
-        revalidateTag(globalTag(GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG))
-
-        // Also revalidate article pages/lists if article cards display tag labels.
-        revalidateTag(globalTag(GLOBAL_ARTICLE_SLUG_AND_TAG))
-        revalidateTag(ALL_ARTICLE_SLUG_AND_TAG)
-        revalidateTag(SINGLE_ARTICLE_SLUG_AND_TAG)
-        revalidateTag(RELATED_ARTICLE_SLUG_AND_TAG)
-        revalidateTag(FEATURED_ARTICLE_SLUG_AND_TAG)
+        revalidateTag(globalTag(GLOBAL_NEWS_TAGS_SLUG_AND_TAG))
+        revalidateTag(globalTag(GLOBAL_NEWS_SLUG_AND_TAG))
+        revalidateTag(ALL_NEWS_SLUG_AND_TAG)
+        revalidateTag(SINGLE_NEWS_SLUG_AND_TAG)
       },
     ],
   },
 }
 
-export default ArticleTags
+export default NewsTags
