@@ -8,6 +8,7 @@
 // import ArticleCard from './ArticleCard'
 
 // import ArrowRightColored from 'public/assets/icons/arrowRightColored.png'
+// import DownArrowWhite from 'public/assets/icons/DownArrowWhite.png'
 // import LineImage from 'public/assets/images/Line.png'
 
 // type Props = {
@@ -27,8 +28,25 @@
 //   label: string
 // }
 
+// type SortMode = 'default' | 'latest' | 'oldest'
+
 // const ITEMS_PER_PAGE = 6
 // const ALL_TAB_KEY = 'all'
+
+// const sortOptions: { label: string; value: SortMode }[] = [
+//   {
+//     label: 'Default Order',
+//     value: 'default',
+//   },
+//   {
+//     label: 'Latest First',
+//     value: 'latest',
+//   },
+//   {
+//     label: 'Oldest First',
+//     value: 'oldest',
+//   },
+// ]
 
 // function getArticleTagKeys(article: NonNullable<Article['articles']>[number]) {
 //   const articleAny = article as any
@@ -42,6 +60,14 @@
 //   }
 
 //   return []
+// }
+
+// function getArticleSortTime(article: NonNullable<Article['articles']>[number]) {
+//   const date = new Date(article?.publishDate || '')
+
+//   if (Number.isNaN(date.getTime())) return 0
+
+//   return date.getTime()
 // }
 
 // function getPaginationItems(currentPage: number, totalPages: number) {
@@ -63,16 +89,44 @@
 // function ArticleTab({ data, block, tagsData }: Props) {
 //   const [activeTabKey, setActiveTabKey] = useState(ALL_TAB_KEY)
 //   const [currentPage, setCurrentPage] = useState(1)
+//   const [sortMode, setSortMode] = useState<SortMode>('latest')
+//   const [sortDropdownOpen, setSortDropdownOpen] = useState(false)
 
+//   const sortDropdownRef = useRef<HTMLDivElement | null>(null)
 //   const scrollRef = useRef<HTMLDivElement | null>(null)
 //   const rowRef = useRef<HTMLDivElement | null>(null)
 //   const indicatorRef = useRef<HTMLDivElement | null>(null)
 //   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
 //   const hasMountedRef = useRef(false)
 
-//   const articles = useMemo(() => {
+//   const baseArticles = useMemo(() => {
 //     return Array.isArray(data?.articles) ? data.articles : []
 //   }, [data?.articles])
+
+//   const articles = useMemo(() => {
+//     const articleItems = baseArticles.map((article, index) => ({ article, index }))
+
+//     if (sortMode === 'default') {
+//       return articleItems.map((item) => item.article)
+//     }
+
+//     return articleItems
+//       .sort((a, b) => {
+//         const aTime = getArticleSortTime(a.article)
+//         const bTime = getArticleSortTime(b.article)
+
+//         if (aTime !== bTime) {
+//           return sortMode === 'latest' ? bTime - aTime : aTime - bTime
+//         }
+
+//         if (sortMode === 'latest') {
+//           return b.index - a.index
+//         }
+
+//         return a.index - b.index
+//       })
+//       .map((item) => item.article)
+//   }, [baseArticles, sortMode])
 
 //   const articleTags = useMemo<TagItem[]>(() => {
 //     return Array.isArray(tagsData?.tags)
@@ -92,6 +146,10 @@
 //       })),
 //     ]
 //   }, [articleTags])
+
+//   const selectedSortOption = useMemo(() => {
+//     return sortOptions.find((option) => option.value === sortMode) || sortOptions[1]
+//   }, [sortMode])
 
 //   const activeTabIndex = Math.max(
 //     0,
@@ -183,7 +241,7 @@
 
 //   useEffect(() => {
 //     setCurrentPage(1)
-//   }, [activeTabKey])
+//   }, [activeTabKey, sortMode])
 
 //   useEffect(() => {
 //     if (currentPage > totalPages) {
@@ -199,8 +257,29 @@
 //     }
 //   }, [activeTabKey, tabs])
 
+//   useEffect(() => {
+//     const handleClickOutside = (event: MouseEvent) => {
+//       if (!sortDropdownRef.current) return
+
+//       if (!sortDropdownRef.current.contains(event.target as Node)) {
+//         setSortDropdownOpen(false)
+//       }
+//     }
+
+//     window.addEventListener('mousedown', handleClickOutside)
+
+//     return () => {
+//       window.removeEventListener('mousedown', handleClickOutside)
+//     }
+//   }, [])
+
 //   const handleTabClick = (tabKey: string) => {
 //     setActiveTabKey(tabKey)
+//   }
+
+//   const handleSortSelect = (value: SortMode) => {
+//     setSortMode(value)
+//     setSortDropdownOpen(false)
 //   }
 
 //   const goToPage = (page: number) => {
@@ -292,21 +371,113 @@
 //         </div>
 //       </div>
 
+//       {/* sort selector */}
+//       <div
+//         className="
+//           relative z-30  flex w-full justify-start
+//           mt-[10px]
+//           md:mt-[14px]
+//           lg:mt-[18px]
+//           xl:mt-[22px]
+//           2xl:mt-[32px]
+//         "
+//       >
+//         <div ref={sortDropdownRef} className="relative">
+//           <button
+//             type="button"
+//             onClick={() => setSortDropdownOpen((prev) => !prev)}
+//             className="
+//               flex items-center justify-between gap-[12px]
+//               rounded-[7px]
+//               bg-primary-1
+//               px-[16px] py-[10px]
+//               font-grift global-p5 font-bold
+//               text-white-1
+//               shadow-[0_10px_24px_rgba(0,108,103,0.18)]
+//               transition-all duration-300
+//               hover:bg-primary-1
+//               md:px-[18px] md:py-[11px]
+//               xl:px-[22px] xl:py-[12px]
+//             "
+//           >
+//             <span>{selectedSortOption.label}</span>
+
+//             <Image
+//               src={DownArrowWhite}
+//               alt=""
+//               width={14}
+//               height={14}
+//               className={`
+//                 h-[10px] w-[10px] object-contain transition-transform duration-300
+//                 md:h-[11px] md:w-[11px]
+//                 xl:h-[12px] xl:w-[12px]
+//                 ${sortDropdownOpen ? 'rotate-180' : ''}
+//               `}
+//               placeholder="blur"
+//               blurDataURL={DownArrowWhite.blurDataURL}
+//               quality={95}
+//             />
+//           </button>
+
+//           {sortDropdownOpen && (
+//             <div
+//               className="
+//                 absolute left-0 top-full z-50 mt-[8px]
+//                 min-w-[190px]
+//                 overflow-hidden rounded-[7px]
+//                 border border-primary-1/25
+//                 bg-white-1
+//                 shadow-[0_18px_44px_rgba(10,17,40,0.14)]
+//               "
+//             >
+//               {sortOptions.map((option) => {
+//                 const isSelected = option.value === sortMode
+
+//                 return (
+//                   <button
+//                     key={option.value}
+//                     type="button"
+//                     onClick={() => handleSortSelect(option.value)}
+//                     className={`
+//                       flex w-full items-center justify-between
+//                       px-[14px] py-[11px]
+//                       text-left font-grift global-p5 font-bold
+//                       transition-colors duration-300
+//                       ${
+//                         isSelected
+//                           ? 'bg-primary-1 text-white-1'
+//                           : 'bg-white-1 text-secondary-1 hover:bg-primary-1/10 hover:text-primary-1'
+//                       }
+//                     `}
+//                   >
+//                     {option.label}
+//                   </button>
+//                 )
+//               })}
+//             </div>
+//           )}
+//         </div>
+//       </div>
+
 //       {/* card grid */}
 //       <div
 //         className="
-//           mt-[28px]
+//           mt-[10px]
+//           md:mt-[14px]
+//           lg:mt-[18px]
+//           xl:mt-[22px]
+//           2xl:mt-[32px]
 //           grid grid-cols-1
 //           gap-4
-//           md:mt-[34px] md:grid-cols-2
+//           md:grid-cols-2
 //           lg:gap-7
-//           xl:mt-[44px] xl:grid-cols-3
+//           xl:grid-cols-3
 //           2xl:gap-9
 //         "
 //       >
 //         {paginatedArticles.map((article, index) => (
 //           <ArticleCard
-//             key={article?.id ?? `${activeTabKey}-${currentPage}-${index}`}
+//             key={article?.id ?? `${activeTabKey}-${sortMode}-${currentPage}-${index}`}
 //             data={article}
 //             tagsData={tagsData}
 //             block={block}
@@ -318,11 +489,11 @@
 //       {!paginatedArticles.length && (
 //         <div
 //           className="
-//             mt-[34px] rounded-[10px]
+//             rounded-[10px]
 //             border border-primary-1/25
 //             bg-white-1/45 px-[18px] py-[34px]
 //             text-center
-//             md:mt-[44px] md:px-[26px] md:py-[44px]
+//             md:px-[26px] md:py-[44px]
 //           "
 //         >
 //           <h3 className="font-agency global-h6 text-secondary-1">No Articles Found</h3>
@@ -335,9 +506,15 @@
 
 //       {/* pagination */}
 //       {totalPages > 1 && (
-//         <div className="mt-[34px] xl:mt-[44px]">
+//         <div
+//           className="mt-[10px]
+//           md:mt-[14px]
+//           lg:mt-[18px]
+//           xl:mt-[22px]
+//           2xl:mt-[32px]"
+//         >
 //           {/* pagination top line */}
-//           <div className="relative h-px w-full overflow-hidden">
+//           {/* <div className="relative h-px w-full overflow-hidden">
 //             <Image
 //               src={LineImage}
 //               alt=""
@@ -347,28 +524,52 @@
 //               blurDataURL={LineImage.blurDataURL}
 //               quality={95}
 //             />
-//           </div>
+//           </div> */}
 
-//           <div className="mt-[18px] flex items-center justify-center gap-[8px]">
+//           <div
+//             className="
+//               mt-[18px] flex items-center justify-center
+//               gap-[10px]
+//               md:gap-[12px]
+//               xl:gap-[16px]
+//             "
+//           >
 //             <button
 //               type="button"
 //               aria-label="Previous page"
 //               onClick={() => goToPage(currentPage - 1)}
 //               disabled={currentPage === 1}
 //               className="
-//                 flex size-[28px] items-center justify-center
-//                 rounded-[5px]
+//                 flex items-center justify-center
+//                 rounded-[8px]
+//                 border border-secondary-1/10
+//                 bg-white-1
+//                 shadow-[0_8px_22px_rgba(10,17,40,0.04)]
 //                 transition-all duration-300
-//                 hover:bg-primary-1/10
+//                 hover:border-secondary-1/25
+//                 hover:bg-white-2
 //                 disabled:pointer-events-none disabled:opacity-35
+
+//                 size-[36px]
+//                 md:size-[40px]
+//                 lg:size-[46px]
+//                 xl:size-[52px]
+//                 2xl:size-[58px]
 //               "
 //             >
 //               <Image
 //                 src={ArrowRightColored}
 //                 alt=""
-//                 width={10}
-//                 height={10}
-//                 className="h-[9px] w-[9px] rotate-180 object-contain"
+//                 width={14}
+//                 height={14}
+//                 className="
+//                   rotate-180 object-contain
+//                   brightness-0 saturate-100
+//                   h-[11px] w-[11px]
+//                   md:h-[12px] md:w-[12px]
+//                   lg:h-[14px] lg:w-[14px]
+//                   xl:h-[16px] xl:w-[16px]
+//                 "
 //                 placeholder="blur"
 //                 blurDataURL={ArrowRightColored.blurDataURL}
 //                 quality={95}
@@ -381,8 +582,15 @@
 //                   <span
 //                     key={`${item}-${index}`}
 //                     className="
-//                       flex size-[28px] items-center justify-center
-//                       font-grift text-[11px] font-bold text-secondary-2/55
+//                       flex items-center justify-center
+//                       font-grift font-bold text-secondary-1
+
+//                       size-[36px]
+//                       text-[13px]
+//                       md:size-[40px] md:text-[14px]
+//                       lg:size-[46px] lg:text-[16px]
+//                       xl:size-[52px] xl:text-[18px]
+//                       2xl:size-[58px] 2xl:text-[20px]
 //                     "
 //                   >
 //                     ...
@@ -398,14 +606,24 @@
 //                   type="button"
 //                   onClick={() => goToPage(item)}
 //                   className={`
-//                     flex size-[28px] items-center justify-center
-//                     rounded-[5px]
-//                     font-grift text-[11px] font-bold
+//                     flex items-center justify-center
+//                     rounded-[8px]
+//                     border
+//                     font-grift font-bold
+//                     shadow-[0_8px_22px_rgba(10,17,40,0.04)]
 //                     transition-all duration-300
+
+//                     size-[36px]
+//                     text-[13px]
+//                     md:size-[40px] md:text-[14px]
+//                     lg:size-[46px] lg:text-[16px]
+//                     xl:size-[52px] xl:text-[18px]
+//                     2xl:size-[58px] 2xl:text-[20px]
+
 //                     ${
 //                       isActive
-//                         ? 'bg-secondary-1 text-white-1'
-//                         : 'bg-transparent text-secondary-1 hover:bg-primary-1/10 hover:text-primary-1'
+//                         ? 'border-secondary-1 bg-secondary-1 text-white-1'
+//                         : 'border-secondary-1/10 bg-white-1 text-secondary-1 hover:border-secondary-1/25 hover:bg-white-2'
 //                     }
 //                   `}
 //                 >
@@ -420,19 +638,36 @@
 //               onClick={() => goToPage(currentPage + 1)}
 //               disabled={currentPage === totalPages}
 //               className="
-//                 flex size-[28px] items-center justify-center
-//                 rounded-[5px]
+//                 flex items-center justify-center
+//                 rounded-[8px]
+//                 border border-secondary-1/10
+//                 bg-white-1
+//                 shadow-[0_8px_22px_rgba(10,17,40,0.04)]
 //                 transition-all duration-300
-//                 hover:bg-primary-1/10
+//                 hover:border-secondary-1/25
+//                 hover:bg-white-2
 //                 disabled:pointer-events-none disabled:opacity-35
+
+//                 size-[36px]
+//                 md:size-[40px]
+//                 lg:size-[46px]
+//                 xl:size-[52px]
+//                 2xl:size-[58px]
 //               "
 //             >
 //               <Image
 //                 src={ArrowRightColored}
 //                 alt=""
-//                 width={10}
-//                 height={10}
-//                 className="h-[9px] w-[9px] object-contain"
+//                 width={14}
+//                 height={14}
+//                 className="
+//                   object-contain
+//                   brightness-0 saturate-100
+//                   h-[11px] w-[11px]
+//                   md:h-[12px] md:w-[12px]
+//                   lg:h-[14px] lg:w-[14px]
+//                   xl:h-[16px] xl:w-[16px]
+//                 "
 //                 placeholder="blur"
 //                 blurDataURL={ArrowRightColored.blurDataURL}
 //                 quality={95}
@@ -446,6 +681,7 @@
 // }
 
 // export default ArticleTab
+
 'use client'
 
 import { gsap, useGSAP } from '@/lib/gsap'
@@ -480,6 +716,8 @@ type SortMode = 'default' | 'latest' | 'oldest'
 
 const ITEMS_PER_PAGE = 6
 const ALL_TAB_KEY = 'all'
+const ARTICLE_CARD_ANCHOR_PREFIX = 'articlecardp'
+const ARTICLE_SCROLL_OFFSET = 130
 
 const sortOptions: { label: string; value: SortMode }[] = [
   {
@@ -495,6 +733,22 @@ const sortOptions: { label: string; value: SortMode }[] = [
     value: 'oldest',
   },
 ]
+
+function getArticleCardAnchorId(page: number) {
+  return `${ARTICLE_CARD_ANCHOR_PREFIX}${page}`
+}
+
+function removeArticleCardHashFromUrl() {
+  if (typeof window === 'undefined') return
+
+  const currentHash = window.location.hash.replace('#', '')
+
+  if (!currentHash.startsWith(ARTICLE_CARD_ANCHOR_PREFIX)) return
+
+  const baseUrl = `${window.location.pathname}${window.location.search}`
+
+  window.history.replaceState(null, '', baseUrl)
+}
 
 function getArticleTagKeys(article: NonNullable<Article['articles']>[number]) {
   const articleAny = article as any
@@ -534,6 +788,43 @@ function getPaginationItems(currentPage: number, totalPages: number) {
   return [1, 'ellipsis', currentPage, 'ellipsis-end', totalPages]
 }
 
+function scrollToArticlePageAnchor(page: number) {
+  if (typeof window === 'undefined') return
+
+  const anchorId = getArticleCardAnchorId(page)
+  const target = document.getElementById(anchorId)
+
+  if (!target) return
+
+  const baseUrl = `${window.location.pathname}${window.location.search}`
+  const nextUrl = `${baseUrl}#${anchorId}`
+
+  window.history.pushState(null, '', nextUrl)
+
+  const lenis = (window as any)?.lenis
+
+  if (lenis?.scrollTo) {
+    lenis.scrollTo(target, {
+      offset: -ARTICLE_SCROLL_OFFSET,
+      duration: 0.7,
+      force: true,
+    })
+
+    return
+  }
+
+  const targetY = Math.max(
+    0,
+    target.getBoundingClientRect().top + window.scrollY - ARTICLE_SCROLL_OFFSET,
+  )
+
+  window.scrollTo({
+    top: targetY,
+    left: 0,
+    behavior: 'smooth',
+  })
+}
+
 function ArticleTab({ data, block, tagsData }: Props) {
   const [activeTabKey, setActiveTabKey] = useState(ALL_TAB_KEY)
   const [currentPage, setCurrentPage] = useState(1)
@@ -546,6 +837,11 @@ function ArticleTab({ data, block, tagsData }: Props) {
   const indicatorRef = useRef<HTMLDivElement | null>(null)
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const hasMountedRef = useRef(false)
+
+  const pendingScrollPageRef = useRef<number | null>(null)
+  const scrollFrameOneRef = useRef<number | null>(null)
+  const scrollFrameTwoRef = useRef<number | null>(null)
+  const hasFilterMountedRef = useRef(false)
 
   const baseArticles = useMemo(() => {
     return Array.isArray(data?.articles) ? data.articles : []
@@ -688,6 +984,13 @@ function ArticleTab({ data, block, tagsData }: Props) {
   }, [activeTabIndex, activeTabKey])
 
   useEffect(() => {
+    if (!hasFilterMountedRef.current) {
+      hasFilterMountedRef.current = true
+      return
+    }
+
+    removeArticleCardHashFromUrl()
+    pendingScrollPageRef.current = null
     setCurrentPage(1)
   }, [activeTabKey, sortMode])
 
@@ -721,6 +1024,38 @@ function ArticleTab({ data, block, tagsData }: Props) {
     }
   }, [])
 
+  useEffect(() => {
+    const pendingPage = pendingScrollPageRef.current
+
+    if (!pendingPage || pendingPage !== currentPage) return
+
+    pendingScrollPageRef.current = null
+
+    if (scrollFrameOneRef.current !== null) {
+      cancelAnimationFrame(scrollFrameOneRef.current)
+    }
+
+    if (scrollFrameTwoRef.current !== null) {
+      cancelAnimationFrame(scrollFrameTwoRef.current)
+    }
+
+    scrollFrameOneRef.current = requestAnimationFrame(() => {
+      scrollFrameTwoRef.current = requestAnimationFrame(() => {
+        scrollToArticlePageAnchor(currentPage)
+      })
+    })
+
+    return () => {
+      if (scrollFrameOneRef.current !== null) {
+        cancelAnimationFrame(scrollFrameOneRef.current)
+      }
+
+      if (scrollFrameTwoRef.current !== null) {
+        cancelAnimationFrame(scrollFrameTwoRef.current)
+      }
+    }
+  }, [currentPage, paginatedArticles.length])
+
   const handleTabClick = (tabKey: string) => {
     setActiveTabKey(tabKey)
   }
@@ -733,8 +1068,13 @@ function ArticleTab({ data, block, tagsData }: Props) {
   const goToPage = (page: number) => {
     const nextPage = Math.max(1, Math.min(totalPages, page))
 
+    if (nextPage === currentPage) return
+
+    pendingScrollPageRef.current = nextPage
     setCurrentPage(nextPage)
   }
+
+  const currentAnchorId = getArticleCardAnchorId(currentPage)
 
   return (
     <div className="w-full">
@@ -759,7 +1099,6 @@ function ArticleTab({ data, block, tagsData }: Props) {
               xl:gap-[24px] xl:px-[28px]
             "
           >
-            {/* animated active pill */}
             <div
               ref={indicatorRef}
               className="
@@ -805,7 +1144,6 @@ function ArticleTab({ data, block, tagsData }: Props) {
           </div>
         </div>
 
-        {/* horizontal line */}
         <div className="relative mt-[12px] h-px w-full overflow-hidden">
           <Image
             src={LineImage}
@@ -822,7 +1160,7 @@ function ArticleTab({ data, block, tagsData }: Props) {
       {/* sort selector */}
       <div
         className="
-          relative z-30  flex w-full justify-start
+          relative z-30 flex w-full justify-start
           mt-[10px]
           md:mt-[14px]
           lg:mt-[18px]
@@ -907,6 +1245,16 @@ function ArticleTab({ data, block, tagsData }: Props) {
         </div>
       </div>
 
+      <div
+        id={currentAnchorId}
+        className="
+          scroll-mt-[105px]
+          md:scroll-mt-[115px]
+          lg:scroll-mt-[130px]
+          xl:scroll-mt-[145px]
+        "
+      />
+
       {/* card grid */}
       <div
         className="
@@ -933,7 +1281,6 @@ function ArticleTab({ data, block, tagsData }: Props) {
         ))}
       </div>
 
-      {/* empty filtered result */}
       {!paginatedArticles.length && (
         <div
           className="
@@ -955,25 +1302,14 @@ function ArticleTab({ data, block, tagsData }: Props) {
       {/* pagination */}
       {totalPages > 1 && (
         <div
-          className="mt-[10px]
-          md:mt-[14px]
-          lg:mt-[18px]
-          xl:mt-[22px]
-          2xl:mt-[32px]"
+          className="
+            mt-[10px]
+            md:mt-[14px]
+            lg:mt-[18px]
+            xl:mt-[22px]
+            2xl:mt-[32px]
+          "
         >
-          {/* pagination top line */}
-          {/* <div className="relative h-px w-full overflow-hidden">
-            <Image
-              src={LineImage}
-              alt=""
-              fill
-              className="object-fill object-center opacity-45"
-              placeholder="blur"
-              blurDataURL={LineImage.blurDataURL}
-              quality={95}
-            />
-          </div> */}
-
           <div
             className="
               mt-[18px] flex items-center justify-center
@@ -997,7 +1333,6 @@ function ArticleTab({ data, block, tagsData }: Props) {
                 hover:border-secondary-1/25
                 hover:bg-white-2
                 disabled:pointer-events-none disabled:opacity-35
-
                 size-[36px]
                 md:size-[40px]
                 lg:size-[46px]
@@ -1032,7 +1367,6 @@ function ArticleTab({ data, block, tagsData }: Props) {
                     className="
                       flex items-center justify-center
                       font-grift font-bold text-secondary-1
-
                       size-[36px]
                       text-[13px]
                       md:size-[40px] md:text-[14px]
@@ -1060,14 +1394,12 @@ function ArticleTab({ data, block, tagsData }: Props) {
                     font-grift font-bold
                     shadow-[0_8px_22px_rgba(10,17,40,0.04)]
                     transition-all duration-300
-
                     size-[36px]
                     text-[13px]
                     md:size-[40px] md:text-[14px]
                     lg:size-[46px] lg:text-[16px]
                     xl:size-[52px] xl:text-[18px]
                     2xl:size-[58px] 2xl:text-[20px]
-
                     ${
                       isActive
                         ? 'border-secondary-1 bg-secondary-1 text-white-1'
@@ -1095,7 +1427,6 @@ function ArticleTab({ data, block, tagsData }: Props) {
                 hover:border-secondary-1/25
                 hover:bg-white-2
                 disabled:pointer-events-none disabled:opacity-35
-
                 size-[36px]
                 md:size-[40px]
                 lg:size-[46px]
