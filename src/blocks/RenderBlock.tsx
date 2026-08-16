@@ -29,6 +29,7 @@ import {
   RATING_SLUG_AND_TAG,
   RELATED_ARTICLE_SLUG_AND_TAG,
   SINGLE_ARTICLE_SLUG_AND_TAG,
+  SINGLE_NEWS_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -66,6 +67,7 @@ import SingleArticleBlock from './SingleArticle/SingleArticleBlock'
 import RelatedArticlesBlock from './RelatedArticles/RelatedArticlesBlock'
 import FeaturedArticleBlock from './FeaturedArticle/FeaturedArticleBlock'
 import AllNewsBlock from './AllNews/AllNewsBlock'
+import SingleNewsBlock from './SingleNews/SingleNewsBlock'
 
 type Params = Record<string, string>
 
@@ -137,6 +139,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <FeaturedArticleBlock key={block.id} block={block} params={params} />
     case ALL_NEWS_SLUG_AND_TAG:
       return <AllNewsBlock key={block.id} block={block} params={params} />
+    case SINGLE_NEWS_SLUG_AND_TAG:
+      return <SingleNewsBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

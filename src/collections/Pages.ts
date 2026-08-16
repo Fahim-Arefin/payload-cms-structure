@@ -28,6 +28,7 @@ import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import RatingSchema from '@/blocks/Rating/scheam'
 import RelatedArticleSchema from '@/blocks/RelatedArticles/schema'
 import SingleArticleSchema from '@/blocks/SingleArticle/schema'
+import SingleNewsSchema from '@/blocks/SingleNews/schema'
 import WhatWeBuildSchema from '@/blocks/WhatWeBuild/schema'
 import WhyChooseUsSchema from '@/blocks/WhyChooseUs/schema'
 import { APIError } from '@/lib/apiError'
@@ -250,6 +251,7 @@ export const Pages: CollectionConfig = {
 
         // News
         AllNewsSchema,
+        SingleNewsSchema,
       ],
     },
   ],

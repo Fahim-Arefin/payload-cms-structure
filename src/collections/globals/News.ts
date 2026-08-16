@@ -7,6 +7,7 @@ import {
   GLOBAL_NEWS_SLUG_AND_TAG,
   GLOBAL_NEWS_TAGS_SLUG_AND_TAG,
   NEWS,
+  SINGLE_NEWS_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { roleAtLeast } from '@/lib/rbac'
 
@@ -389,6 +390,7 @@ const News: GlobalConfig = {
         revalidateTag(globalTag(GLOBAL_NEWS_SLUG_AND_TAG))
         revalidateTag(globalTag(GLOBAL_NEWS_TAGS_SLUG_AND_TAG))
         revalidateTag(ALL_NEWS_SLUG_AND_TAG)
+        revalidateTag(SINGLE_NEWS_SLUG_AND_TAG)
       },
     ],
   },

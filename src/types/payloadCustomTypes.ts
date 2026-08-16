@@ -31,6 +31,7 @@ import {
   RATING_SLUG_AND_TAG,
   RELATED_ARTICLE_SLUG_AND_TAG,
   SINGLE_ARTICLE_SLUG_AND_TAG,
+  SINGLE_NEWS_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -187,4 +188,8 @@ export type FeaturedArticleBlockType = Extract<
 export type AllNewsBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof ALL_NEWS_SLUG_AND_TAG }
+>
+export type SingleNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SINGLE_NEWS_SLUG_AND_TAG }
 >

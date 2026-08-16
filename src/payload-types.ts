@@ -3584,6 +3584,65 @@ export interface Page {
         blockName?: string | null;
         blockType: 'all-news';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the single news CTA button. This button can be used to link back to the news listing page or any internal page.
+         */
+        newsCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch single news data from the global News collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders data from **Global → News**.
+           *
+           * **Before enabling:** fill up the Global → News data.
+           *
+           * **Notes:**
+           * • This block only stores presentation options such as background color and CTA button.
+           * • News details come from the single shared Global to keep pages in sync.
+           * • Frontend should fetch from Global → news.
+           * • The route slug/id is used to find the matching news item from the global news array.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'single-news';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -5147,6 +5206,37 @@ export interface PagesSelect<T extends boolean = true> {
                     heading2Highlighted?: T;
                     heading2HighlightColor?: T;
                     description?: T;
+                  };
+              newsCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'single-news'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
                   };
               newsCta?:
                 | T

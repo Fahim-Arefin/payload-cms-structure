@@ -70,6 +70,10 @@ export const GLOBAL_NEWS_SLUG_AND_TAG = 'news'
 export const ALL_NEWS_SLUG_AND_TAG = 'all-news'
 export const ALL_NEWS_BLOCK_LABEL = 'All News'
 export const ALL_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-news-block-thumbnail.webp`
+
+export const SINGLE_NEWS_SLUG_AND_TAG = 'single-news'
+export const SINGLE_NEWS_BLOCK_LABEL = 'Single News'
+export const SINGLE_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-news-block-thumbnail.webp`
 // ================================================================================
 // ================================================================================
 
