@@ -21,8 +21,8 @@ import ContactFormSubmissions from './collections/ContactFormSubmissions'
 import ReviewFormSubmissions from './collections/ReviewFormSubmissions'
 import ArticleTags from './collections/globals/ArticleTags'
 import Article from './collections/globals/Article'
-import NewsTags from './collections/globals/newsTags'
 import News from './collections/globals/News'
+import NewsTags from './collections/globals/NewsTags'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
