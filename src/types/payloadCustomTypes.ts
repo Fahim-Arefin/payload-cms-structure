@@ -1,6 +1,7 @@
 import {
   ABOUT_US_INTRO_SLUG_AND_TAG,
   ALL_ARTICLE_SLUG_AND_TAG,
+  ALL_NEWS_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   BOOK_A_CALL_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
@@ -18,6 +19,7 @@ import {
   CUSTOMER_REVIEW_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
+  FEATURED_ARTICLE_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   LOCATION_SLUG_AND_TAG,
   MAINTENANCE_SLUG_AND_TAG,
@@ -29,6 +31,7 @@ import {
   RATING_SLUG_AND_TAG,
   RELATED_ARTICLE_SLUG_AND_TAG,
   SINGLE_ARTICLE_SLUG_AND_TAG,
+  SINGLE_NEWS_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -177,4 +180,16 @@ export type SingleArticlesBlockType = Extract<
 export type RelatedArticlesBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof RELATED_ARTICLE_SLUG_AND_TAG }
+>
+export type FeaturedArticleBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof FEATURED_ARTICLE_SLUG_AND_TAG }
+>
+export type AllNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ALL_NEWS_SLUG_AND_TAG }
+>
+export type SingleNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SINGLE_NEWS_SLUG_AND_TAG }
 >

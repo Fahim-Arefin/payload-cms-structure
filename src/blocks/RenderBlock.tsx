@@ -1,6 +1,7 @@
 import {
   ABOUT_US_INTRO_SLUG_AND_TAG,
   ALL_ARTICLE_SLUG_AND_TAG,
+  ALL_NEWS_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   BOOK_A_CALL_SLUG_AND_TAG,
   CODING_LANGUAGE_SLUG_AND_TAG,
@@ -17,6 +18,7 @@ import {
   CUSTOMER_REVIEW_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
+  FEATURED_ARTICLE_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   LOCATION_SLUG_AND_TAG,
   MAINTENANCE_SLUG_AND_TAG,
@@ -27,6 +29,7 @@ import {
   RATING_SLUG_AND_TAG,
   RELATED_ARTICLE_SLUG_AND_TAG,
   SINGLE_ARTICLE_SLUG_AND_TAG,
+  SINGLE_NEWS_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -62,6 +65,9 @@ import WhyChooseUsBlock from './WhyChooseUs/WhyChooseUsBlock'
 import AllArticlesBlock from './AllArticles/AllArticlesBlock'
 import SingleArticleBlock from './SingleArticle/SingleArticleBlock'
 import RelatedArticlesBlock from './RelatedArticles/RelatedArticlesBlock'
+import FeaturedArticleBlock from './FeaturedArticle/FeaturedArticleBlock'
+import AllNewsBlock from './AllNews/AllNewsBlock'
+import SingleNewsBlock from './SingleNews/SingleNewsBlock'
 
 type Params = Record<string, string>
 
@@ -129,6 +135,12 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <SingleArticleBlock key={block.id} block={block} params={params} />
     case RELATED_ARTICLE_SLUG_AND_TAG:
       return <RelatedArticlesBlock key={block.id} block={block} params={params} />
+    case FEATURED_ARTICLE_SLUG_AND_TAG:
+      return <FeaturedArticleBlock key={block.id} block={block} params={params} />
+    case ALL_NEWS_SLUG_AND_TAG:
+      return <AllNewsBlock key={block.id} block={block} params={params} />
+    case SINGLE_NEWS_SLUG_AND_TAG:
+      return <SingleNewsBlock key={block.id} block={block} params={params} />
     default:
       return null
   }

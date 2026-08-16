@@ -35,14 +35,6 @@ export const GLOBAL_CONTACT_US_LABEL = 'Global Contact Us'
 // export const GLOBAL_NEWS_TAGS_SLUG_AND_TAG = 'news-tags'
 // export const GLOBAL_NEWS_TAGS_CACHE_KEY = 'news-tags-data'
 
-// News Global
-export const GLOBAL_NEWS_SLUG_AND_TAG = 'news'
-export const GLOBAL_NEWS_CACHE_KEY = 'news-data'
-
-// articles
-// export const GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG = 'article-tags'
-// export const GLOBAL_ARTICLE_SLUG_AND_TAG = 'article'
-
 // articles
 // ================================================================================
 // ================================================================================
@@ -61,8 +53,30 @@ export const SINGLE_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-art
 export const RELATED_ARTICLE_SLUG_AND_TAG = 'related-article'
 export const RELATED_ARTICLE_BLOCK_LABEL = 'Related Article'
 export const RELATED_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/related-article-block-thumbnail.webp`
+
+export const FEATURED_ARTICLE_SLUG_AND_TAG = 'featured-article'
+export const FEATURED_ARTICLE_BLOCK_LABEL = 'Featured Article'
+export const FEATURED_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/featured-article-block-thumbnail.webp`
 // ================================================================================
 // ================================================================================
+
+// news
+// ================================================================================
+// ================================================================================
+export const NEWS = 'News'
+export const GLOBAL_NEWS_TAGS_SLUG_AND_TAG = 'news-tags'
+export const GLOBAL_NEWS_SLUG_AND_TAG = 'news'
+
+export const ALL_NEWS_SLUG_AND_TAG = 'all-news'
+export const ALL_NEWS_BLOCK_LABEL = 'All News'
+export const ALL_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-news-block-thumbnail.webp`
+
+export const SINGLE_NEWS_SLUG_AND_TAG = 'single-news'
+export const SINGLE_NEWS_BLOCK_LABEL = 'Single News'
+export const SINGLE_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-news-block-thumbnail.webp`
+// ================================================================================
+// ================================================================================
+
 // audit
 export const AUDIT_LOG = 'Audit'
 
@@ -79,7 +93,6 @@ export const ABOUT_US = 'About Us Page'
 export const CASE_STUDY = 'Case Study Page'
 export const GET_IN_TOUCH = 'Get In Touch Page'
 export const SOLUTION = 'Solution'
-export const NEWS = 'News And Events'
 
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
 export const BASIC_HERO_BLOCK_LABEL = 'Hero (Basic)'
