@@ -78,6 +78,10 @@ export const SINGLE_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-news-b
 export const RELATED_NEWS_SLUG_AND_TAG = 'related-news'
 export const RELATED_NEWS_BLOCK_LABEL = 'Related News'
 export const RELATED_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/related-news-block-thumbnail.webp`
+
+export const FEATURED_NEWS_SLUG_AND_TAG = 'featured-news'
+export const FEATURED_NEWS_BLOCK_LABEL = 'Featured News'
+export const FEATURED_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/featured-news-block-thumbnail.webp`
 // ================================================================================
 // ================================================================================
 

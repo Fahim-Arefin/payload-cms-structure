@@ -20,6 +20,7 @@ import {
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FEATURED_ARTICLE_SLUG_AND_TAG,
+  FEATURED_NEWS_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   LOCATION_SLUG_AND_TAG,
   MAINTENANCE_SLUG_AND_TAG,
@@ -197,4 +198,8 @@ export type SingleNewsBlockType = Extract<
 export type RelatedNewsBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof RELATED_NEWS_SLUG_AND_TAG }
+>
+export type FeaturedNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof FEATURED_NEWS_SLUG_AND_TAG }
 >

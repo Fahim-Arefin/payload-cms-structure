@@ -19,6 +19,7 @@ import CustomerReviewSchema from '@/blocks/CustomerReview/schema'
 import EmployeeSchema from '@/blocks/Employee/schema'
 import FAQSchema from '@/blocks/FAQ/schema'
 import FeaturedArticleSchema from '@/blocks/FeaturedArticle/schema'
+import FeaturedNewsSchema from '@/blocks/FeaturedNews/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import MaintenanceSchema from '@/blocks/Maintainance/schema'
 import OurProjectSchema from '@/blocks/OurProject/schema'
@@ -254,6 +255,7 @@ export const Pages: CollectionConfig = {
         AllNewsSchema,
         SingleNewsSchema,
         RelatedNewsSchema,
+        FeaturedNewsSchema,
       ],
     },
   ],

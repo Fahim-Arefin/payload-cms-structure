@@ -4,6 +4,7 @@ import { revalidateTag } from 'next/cache'
 import { globalTag } from '@/lib/cacheTags'
 import {
   ALL_NEWS_SLUG_AND_TAG,
+  FEATURED_NEWS_SLUG_AND_TAG,
   GLOBAL_NEWS_SLUG_AND_TAG,
   GLOBAL_NEWS_TAGS_SLUG_AND_TAG,
   NEWS,
@@ -393,6 +394,7 @@ const News: GlobalConfig = {
         revalidateTag(ALL_NEWS_SLUG_AND_TAG)
         revalidateTag(SINGLE_NEWS_SLUG_AND_TAG)
         revalidateTag(RELATED_NEWS_SLUG_AND_TAG)
+        revalidateTag(FEATURED_NEWS_SLUG_AND_TAG)
       },
     ],
   },
