@@ -3643,6 +3643,117 @@ export interface Page {
         blockName?: string | null;
         blockType: 'single-news';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the related news section tag, heading and description. CTA is disabled for the section heading.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 120 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 120.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 120 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 120.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the related news card CTA. This link is used to build each related news detail page URL using the selected page + news item ID.
+         */
+        newsCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch related news from the global News collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders related news from **Global → News**.
+           *
+           * **Before enabling:** fill up the Global → News data.
+           *
+           * **Notes:**
+           * • This block stores presentation options like background color, section heading and news CTA.
+           * • Related news data comes from the shared Global → News collection.
+           * • Frontend should fetch from Global → news.
+           * • The frontend can filter out the current news item and show other news items with matching tags.
+           * • The news CTA works like the All News block CTA: selected page + section ID + related news item ID.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'related-news';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -5237,6 +5348,49 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     backgroundColor?: T;
                     sectionId?: T;
+                  };
+              newsCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'related-news'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
                   };
               newsCta?:
                 | T

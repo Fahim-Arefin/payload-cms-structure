@@ -30,6 +30,7 @@ import {
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
   RELATED_ARTICLE_SLUG_AND_TAG,
+  RELATED_NEWS_SLUG_AND_TAG,
   SINGLE_ARTICLE_SLUG_AND_TAG,
   SINGLE_NEWS_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
@@ -192,4 +193,8 @@ export type AllNewsBlockType = Extract<
 export type SingleNewsBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof SINGLE_NEWS_SLUG_AND_TAG }
+>
+export type RelatedNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof RELATED_NEWS_SLUG_AND_TAG }
 >

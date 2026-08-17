@@ -28,6 +28,7 @@ import {
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
   RELATED_ARTICLE_SLUG_AND_TAG,
+  RELATED_NEWS_SLUG_AND_TAG,
   SINGLE_ARTICLE_SLUG_AND_TAG,
   SINGLE_NEWS_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
@@ -36,6 +37,8 @@ import {
 
 import type { Page as PayloadPage } from '@/payload-types'
 import AboutUsIntroBlock from './AboutUsIntro/AboutUsIntroBlock'
+import AllArticlesBlock from './AllArticles/AllArticlesBlock'
+import AllNewsBlock from './AllNews/AllNewsBlock'
 import BasicHeroBlock from './BasicHero/BasicHeroBlock'
 import BookACallBlock from './BookACall/BookACallBlock'
 import CodingLanguageBlock from './CodingLanguage/CodingLanguageBlock'
@@ -53,6 +56,7 @@ import CS_DevelopmentFrameworkBlock from './CS_DevelopmentFramework/CS_Developme
 import CustomerReviewBlock from './CustomerReview/CustomerReviewBlock'
 import EmplyeeBlock from './Employee/EmplyeeBlock'
 import FAQBlock from './FAQ/FAQBlock'
+import FeaturedArticleBlock from './FeaturedArticle/FeaturedArticleBlock'
 import FounderQuoteBlock from './FounderQuote/FounderQuoteBlock'
 import MaintainanceBlock from './Maintainance/MaintainanceBlock'
 import OurProjectBlock from './OurProject/OurProjectBlock'
@@ -60,14 +64,12 @@ import ProductInfoBlock from './ProductInfo/ProductInfoBlock'
 import ProductionPipelineBlock from './ProductionPipeline/ProductionPipelineBlock'
 import ProjectApproachBlock from './ProjectApproach/ProjectApproachBlock'
 import RatingBlock from './Rating/RatingBlock'
+import RelatedArticlesBlock from './RelatedArticles/RelatedArticlesBlock'
+import SingleArticleBlock from './SingleArticle/SingleArticleBlock'
+import SingleNewsBlock from './SingleNews/SingleNewsBlock'
 import WhatWeBuildBlock from './WhatWeBuild/WhatWeBuildBlock'
 import WhyChooseUsBlock from './WhyChooseUs/WhyChooseUsBlock'
-import AllArticlesBlock from './AllArticles/AllArticlesBlock'
-import SingleArticleBlock from './SingleArticle/SingleArticleBlock'
-import RelatedArticlesBlock from './RelatedArticles/RelatedArticlesBlock'
-import FeaturedArticleBlock from './FeaturedArticle/FeaturedArticleBlock'
-import AllNewsBlock from './AllNews/AllNewsBlock'
-import SingleNewsBlock from './SingleNews/SingleNewsBlock'
+import RelatedNewsBlock from './RelatedNews/RelatedNewsBlock'
 
 type Params = Record<string, string>
 
@@ -141,6 +143,9 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <AllNewsBlock key={block.id} block={block} params={params} />
     case SINGLE_NEWS_SLUG_AND_TAG:
       return <SingleNewsBlock key={block.id} block={block} params={params} />
+    case RELATED_NEWS_SLUG_AND_TAG:
+      return <RelatedNewsBlock key={block.id} block={block} params={params} />
+
     default:
       return null
   }
