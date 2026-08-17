@@ -74,6 +74,14 @@ export const ALL_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-news-block-t
 export const SINGLE_NEWS_SLUG_AND_TAG = 'single-news'
 export const SINGLE_NEWS_BLOCK_LABEL = 'Single News'
 export const SINGLE_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-news-block-thumbnail.webp`
+
+export const RELATED_NEWS_SLUG_AND_TAG = 'related-news'
+export const RELATED_NEWS_BLOCK_LABEL = 'Related News'
+export const RELATED_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/related-news-block-thumbnail.webp`
+
+export const FEATURED_NEWS_SLUG_AND_TAG = 'featured-news'
+export const FEATURED_NEWS_BLOCK_LABEL = 'Featured News'
+export const FEATURED_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/featured-news-block-thumbnail.webp`
 // ================================================================================
 // ================================================================================
 
