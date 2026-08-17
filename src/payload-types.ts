@@ -300,6 +300,7 @@ export interface ContactFormSubmission {
  */
 export interface ReviewFormSubmission {
   id: string;
+  uploadSessionId?: string | null;
   buyersFullName: string;
   linkedIn?: string | null;
   companyName: string;
@@ -4076,6 +4077,7 @@ export interface ContactFormSubmissionsSelect<T extends boolean = true> {
  * via the `definition` "review-form-submissions_select".
  */
 export interface ReviewFormSubmissionsSelect<T extends boolean = true> {
+  uploadSessionId?: T;
   buyersFullName?: T;
   linkedIn?: T;
   companyName?: T;
