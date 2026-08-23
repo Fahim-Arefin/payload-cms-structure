@@ -405,6 +405,35 @@ export interface Page {
            * Optional. Must be inside Heading 3. Max 40.
            */
           heading3Highlighted?: string | null;
+          /**
+           * Turn this ON to show a typewriter animated heading below the normal heading. Normal Heading 1 / Heading 2 / Heading 3 will always remain visible.
+           */
+          enableAnimatedHeading?: boolean | null;
+          /**
+           * This animated heading appears below the normal heading. The animated texts will type and delete one by one.
+           */
+          animatedHeading?: {
+            /**
+             * Optional. Example: with. This text stays visible before the animated typing text.
+             */
+            staticText?: string | null;
+            /**
+             * Choose whether the typewriter text appears beside the static text or on a new line.
+             */
+            animatedTextPlacement: 'same-line' | 'new-line';
+            /**
+             * Add words or short phrases that will type one by one. Example: Laravel, HTML5, CSS3, Bootstrap, Tailwind.
+             */
+            animatedTexts?:
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+          };
           description?: {
             root: {
               type: string;
@@ -4133,6 +4162,19 @@ export interface PagesSelect<T extends boolean = true> {
                     heading2Highlighted?: T;
                     heading3?: T;
                     heading3Highlighted?: T;
+                    enableAnimatedHeading?: T;
+                    animatedHeading?:
+                      | T
+                      | {
+                          staticText?: T;
+                          animatedTextPlacement?: T;
+                          animatedTexts?:
+                            | T
+                            | {
+                                text?: T;
+                                id?: T;
+                              };
+                        };
                     description?: T;
                     ctaButtons?:
                       | T

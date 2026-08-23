@@ -5,7 +5,7 @@ import { gsap, useGSAP } from '@/lib/gsap'
 import Link from 'next/link'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import type { SearchContentItem } from './ServerNavbar'
-import { sliderDelay } from '@/lib/data'
+import { homeSliderDelay, sliderDelay } from '@/lib/data'
 
 type Props = {
   items?: SearchContentItem[]
@@ -13,7 +13,7 @@ type Props = {
   onCallClick?: () => void
 }
 
-const ROTATION_DELAY = sliderDelay
+const ROTATION_DELAY = homeSliderDelay
 
 const fallbackItems: SearchContentItem[] = [
   {
