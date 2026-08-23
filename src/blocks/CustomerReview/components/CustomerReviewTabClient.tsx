@@ -161,28 +161,28 @@
 //   return (
 //     <div className="relative w-full max-w-full overflow-hidden">
 //       {/* tabs */}
-//       <div className="relative w-full overflow-hidden">
+//       {/* tabs */}
+//       <div className="relative w-full max-w-full overflow-hidden">
 //         <div
 //           ref={rowRef}
 //           className="
-//             relative mx-auto flex w-full max-w-[1180px] items-end
-//             justify-start gap-[18px]
-//             overflow-x-auto overflow-y-hidden
-//             px-[16px]
-//             [scrollbar-width:none]
-//             md:justify-center md:gap-[28px] md:px-[20px]
-//             lg:gap-[34px]
-//             xl:gap-[44px]
-//             [&::-webkit-scrollbar]:hidden
-//           "
+//       relative flex w-full items-end justify-start gap-[18px]
+//       overflow-x-auto overflow-y-hidden
+//       px-[16px]
+//       [scrollbar-width:none]
+//       md:gap-[28px] md:px-[20px]
+//       lg:gap-[34px] lg:px-[24px]
+//       xl:gap-[44px] xl:px-[28px]
+//       [&::-webkit-scrollbar]:hidden
+//     "
 //         >
 //           {/* animated active underline */}
 //           <div
 //             ref={indicatorRef}
 //             className="
-//               pointer-events-none absolute bottom-0 left-0 z-20
-//               h-px w-0 bg-primary-2 opacity-0
-//             "
+//         pointer-events-none absolute bottom-0 left-0 z-20
+//         h-px w-0 bg-primary-2 opacity-0
+//       "
 //           />
 
 //           {reviews.map((review, index) => {
@@ -197,27 +197,24 @@
 //                 type="button"
 //                 onClick={() => handleSelect(index)}
 //                 className="
-//                   group/review-tab
-//                   relative z-10 shrink-0
-//                   px-[20px] pb-[14px]
-//                   font-grift global-p4 font-bold
-//                   transition-colors duration-300
-//                   md:px-[42px]
-//                   lg:px-[56px]
-//                   xl:px-[70px]
-//                 "
+//             group/review-tab
+//             relative z-10 shrink-0
+//             px-[20px] pb-[14px]
+//             font-grift global-p4 font-bold
+//             transition-colors duration-300
+//             md:px-[34px]
+//             lg:px-[44px]
+//             xl:px-[56px]
+//           "
 //               >
 //                 <span
 //                   className={`
-//                     block max-w-[150px] truncate whitespace-nowrap
-//                     transition-colors duration-300
-//                     md:max-w-none
-//                     ${
-//                       isActive
-//                         ? 'text-white-1'
-//                         : 'text-white-1/30 group-hover/review-tab:text-white-1/70'
-//                     }
-//                   `}
+//               block whitespace-nowrap
+//               transition-colors duration-300
+//               ${
+//                 isActive ? 'text-white-1' : 'text-white-1/30 group-hover/review-tab:text-white-1/70'
+//               }
+//             `}
 //                 >
 //                   {review.companyName}
 //                 </span>
@@ -225,10 +222,10 @@
 //                 {/* inactive underline, same bottom position as active indicator */}
 //                 <span
 //                   className={`
-//                     pointer-events-none absolute bottom-0 left-0 h-px w-full
-//                     bg-primary-2/35 transition-opacity duration-300
-//                     ${isActive ? 'opacity-0' : 'opacity-100'}
-//                   `}
+//               pointer-events-none absolute bottom-0 left-0 h-px w-full
+//               bg-primary-2/35 transition-opacity duration-300
+//               ${isActive ? 'opacity-0' : 'opacity-100'}
+//             `}
 //                 />
 //               </button>
 //             )
@@ -546,13 +543,16 @@
 // }
 
 // export default CustomerReviewTabClient
+
 'use client'
 
 import { gsap, useGSAP } from '@/lib/gsap'
 import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 
-import ArrowRight from 'public/assets/icons/arrowright.png'
+import CarouselArrowButton from '@/components/custom/sagar-ropes-shared/buttons/CarouselArrowButton'
+import StarFilled from 'public/assets/icons/starFilled.png'
+import StarWithoutFilled from 'public/assets/icons/starWithoutFilled.png'
 import DummyProfile from 'public/assets/images/dummyProfile.jpg'
 
 export type CustomerReviewItem = {
@@ -562,6 +562,7 @@ export type CustomerReviewItem = {
   position: string
   rating: number
   review: string
+  companyLink?: string
   companyIcon: {
     url: string
     alt?: string | null
@@ -709,12 +710,11 @@ function CustomerReviewTabClient({ reviews }: Props) {
   return (
     <div className="relative w-full max-w-full overflow-hidden">
       {/* tabs */}
-      {/* tabs */}
-      <div className="relative w-full max-w-full overflow-hidden">
+      <div className="relative flex w-full max-w-full justify-center overflow-hidden">
         <div
           ref={rowRef}
           className="
-      relative flex w-full items-end justify-start gap-[18px]
+      relative mx-auto flex w-max max-w-full items-end justify-start gap-[18px]
       overflow-x-auto overflow-y-hidden
       px-[16px]
       [scrollbar-width:none]
@@ -724,7 +724,6 @@ function CustomerReviewTabClient({ reviews }: Props) {
       [&::-webkit-scrollbar]:hidden
     "
         >
-          {/* animated active underline */}
           <div
             ref={indicatorRef}
             className="
@@ -767,7 +766,6 @@ function CustomerReviewTabClient({ reviews }: Props) {
                   {review.companyName}
                 </span>
 
-                {/* inactive underline, same bottom position as active indicator */}
                 <span
                   className={`
               pointer-events-none absolute bottom-0 left-0 h-px w-full
@@ -794,74 +792,33 @@ function CustomerReviewTabClient({ reviews }: Props) {
           2xl:max-w-[1000px] 2xl:mt-[58px]
         "
       >
-        {/* previous - desktop/tablet side arrow */}
-        <button
-          type="button"
-          aria-label="Previous review"
+        <CarouselArrowButton
+          direction="prev"
+          ariaLabel="Previous review"
           onClick={handlePrevious}
-          className="
-            absolute left-0 top-1/2 z-20
-            hidden -translate-y-1/2 items-center justify-center
-            rounded-full bg-primary-1/35
-            shadow-[0_10px_24px_rgba(0,108,103,0.18)]
-            backdrop-blur-[10px]
-            transition-all duration-300 ease-out
-            hover:bg-primary-1
-            md:flex md:size-[30px]
-            lg:size-[34px]
-            xl:size-[38px]
-          "
-        >
-          <Image
-            src={ArrowRight}
-            alt=""
-            width={18}
-            height={18}
-            className="
-              h-[11px] w-[11px] rotate-180 object-contain
-              lg:h-[13px] lg:w-[13px]
-              xl:h-[15px] xl:w-[15px]
-            "
-            placeholder="blur"
-            blurDataURL={ArrowRight.blurDataURL}
-            quality={95}
-          />
-        </button>
+          wrapperClassName="
+    absolute top-1/2 z-20
+    hidden -translate-y-1/2
+    xl:left-[18px]
+    2xl:left-0
+    xl:flex
+  "
+          buttonClassName="xl:size-[36px] 2xl:size-[38px]"
+        />
 
-        {/* next - desktop/tablet side arrow */}
-        <button
-          type="button"
-          aria-label="Next review"
+        <CarouselArrowButton
+          direction="next"
+          ariaLabel="Next review"
           onClick={handleNext}
-          className="
-            absolute right-0 top-1/2 z-20
-            hidden -translate-y-1/2 items-center justify-center
-            rounded-full bg-primary-1/35
-            shadow-[0_10px_24px_rgba(0,108,103,0.18)]
-            backdrop-blur-[10px]
-            transition-all duration-300 ease-out
-            hover:bg-primary-1
-            md:flex md:size-[30px]
-            lg:size-[34px]
-            xl:size-[38px]
-          "
-        >
-          <Image
-            src={ArrowRight}
-            alt=""
-            width={18}
-            height={18}
-            className="
-              h-[11px] w-[11px] object-contain
-              lg:h-[13px] lg:w-[13px]
-              xl:h-[15px] xl:w-[15px]
-            "
-            placeholder="blur"
-            blurDataURL={ArrowRight.blurDataURL}
-            quality={95}
-          />
-        </button>
-
+          wrapperClassName="
+    absolute top-1/2 z-20
+    hidden -translate-y-1/2
+    xl:right-[18px]
+    2xl:right-0
+    xl:flex
+  "
+          buttonClassName="xl:size-[36px] 2xl:size-[38px]"
+        />
         {/* static card */}
         <div
           className="
@@ -916,28 +873,37 @@ function CustomerReviewTabClient({ reviews }: Props) {
                 md:py-[6px]
               "
             >
-              <div className="flex items-center gap-[8px] md:gap-[14px]">
-                <div className="flex items-center gap-[2px] md:gap-[3px]">
+              <div className="flex items-center gap-[8px] md:gap-[14px] ">
+                <div className="flex items-center gap-[2px] md:gap-[4px]">
                   {Array.from({ length: 5 }).map((_, index) => {
                     const isFilled = index < filledStarCount
+                    const starIcon = isFilled ? StarFilled : StarWithoutFilled
 
                     return (
                       <span
                         key={index}
-                        className={`
-                          font-grift leading-none
-                          text-[12px] md:text-[20px]
-                          ${isFilled ? 'text-primary-2' : 'text-white-1/25'}
-                        `}
+                        className="
+                          relative block shrink-0
+                          size-[12px]
+                          md:size-[20px]
+                        "
                       >
-                        ★
+                        <Image
+                          src={starIcon}
+                          alt={isFilled ? 'Filled star' : 'Empty star'}
+                          fill
+                          className="object-contain"
+                          placeholder="blur"
+                          blurDataURL={starIcon.blurDataURL}
+                          quality={100}
+                        />
                       </span>
                     )
                   })}
                 </div>
 
                 <div
-                  className="
+                  className="mt-[2px] md:mt-[4px] lg:mt-[2px] 2xl:mt-[3px]
                     font-grift font-medium
                     text-white-1
                     text-[8px] md:text-[11px]
@@ -953,13 +919,8 @@ function CustomerReviewTabClient({ reviews }: Props) {
                   font-grift font-semibold leading-[1.5]
                   text-white-1
                   md:mt-[18px] global-p6 md:global-p4
+                  line-clamp-5 md:line-clamp-6 lg:line-clamp-6 xl:line-clamp-[7]
                 "
-                style={{
-                  display: '-webkit-box',
-                  WebkitLineClamp: 6,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                }}
               >
                 &quot;{activeReview.review}&quot;
               </p>
@@ -992,7 +953,7 @@ function CustomerReviewTabClient({ reviews }: Props) {
                   )}
                 </div>
 
-                <div
+                {/* <div
                   className="
                     relative shrink-0
                     min-w-[62px]
@@ -1025,6 +986,76 @@ function CustomerReviewTabClient({ reviews }: Props) {
                       {activeReview.companyName}
                     </span>
                   )}
+                </div> */}
+                <div
+                  className="
+    relative shrink-0
+    min-w-[62px]
+    text-right
+    md:min-w-[90px]
+  "
+                >
+                  {companyIcon?.url ? (
+                    activeReview.companyLink ? (
+                      <a
+                        href={activeReview.companyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={activeReview.companyName}
+                        className="relative block h-[24px] w-[68px] md:h-[44px] md:w-[124px]"
+                      >
+                        <Image
+                          src={companyIcon.url}
+                          alt={companyIcon.alt || activeReview.companyName}
+                          fill
+                          className="object-contain object-right"
+                          placeholder={companyIcon.blurDataURL ? 'blur' : 'empty'}
+                          blurDataURL={companyIcon.blurDataURL || undefined}
+                          quality={100}
+                          sizes="124px"
+                        />
+                      </a>
+                    ) : (
+                      <div className="relative h-[24px] w-[68px] md:h-[44px] md:w-[124px]">
+                        <Image
+                          src={companyIcon.url}
+                          alt={companyIcon.alt || activeReview.companyName}
+                          fill
+                          className="object-contain object-right"
+                          placeholder={companyIcon.blurDataURL ? 'blur' : 'empty'}
+                          blurDataURL={companyIcon.blurDataURL || undefined}
+                          quality={100}
+                          sizes="124px"
+                        />
+                      </div>
+                    )
+                  ) : activeReview.companyLink ? (
+                    <a
+                      href={activeReview.companyLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="
+        block truncate font-agency text-[12px] leading-none
+        text-white-1 transition-colors duration-300
+        hover:text-primary-2
+        md:text-[18px]
+        lg:text-[20px]
+      "
+                    >
+                      {activeReview.companyName}
+                    </a>
+                  ) : (
+                    <span
+                      className="
+        block truncate font-agency text-[12px] leading-none
+        text-white-1
+        md:text-[18px]
+        lg:text-[20px]
+      "
+                    >
+                      {activeReview.companyName}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -1032,7 +1063,7 @@ function CustomerReviewTabClient({ reviews }: Props) {
         </div>
 
         {/* mobile arrows */}
-        <div className="relative z-20 mt-[18px] flex items-center justify-center gap-[12px] md:hidden">
+        {/* <div className="relative z-20 mt-[18px] flex items-center justify-center gap-[12px] md:hidden">
           <button
             type="button"
             aria-label="Previous review"
@@ -1084,6 +1115,21 @@ function CustomerReviewTabClient({ reviews }: Props) {
               quality={95}
             />
           </button>
+        </div> */}
+        <div className="relative z-20 mt-[18px] flex items-center justify-center gap-[12px] xl:hidden">
+          <CarouselArrowButton
+            direction="prev"
+            ariaLabel="Previous review"
+            onClick={handlePrevious}
+            buttonClassName="size-[30px] md:size-[32px] lg:size-[34px]"
+          />
+
+          <CarouselArrowButton
+            direction="next"
+            ariaLabel="Next review"
+            onClick={handleNext}
+            buttonClassName="size-[30px] md:size-[32px] lg:size-[34px]"
+          />
         </div>
       </div>
     </div>

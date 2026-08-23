@@ -170,7 +170,8 @@ export const metadata: Metadata = {
   keywords: ['Xynolab'],
 
   icons: {
-    icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/DPXynolabRounder.png`,
+    // icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/DPXynolabRounder.png`,
+    icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/favicon.png`,
     // icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/DPXynolab.png`,
   },
 }
