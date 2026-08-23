@@ -636,7 +636,7 @@ function ClientNavbar({ data, blur, footerData, suggestions }: Props) {
     footerAny?.contactInfo?.phone ||
     ''
 
-  const callHref = callPhone ? `tel:${String(callPhone).replace(/[^\d+]/g, '')}` : '/contact'
+  const callHref = callPhone ? `tel:${String(callPhone).replace(/[^\d+]/g, '')}` : '/get-in-touch'
 
   useEffect(() => {
     if (!searchPanelOpen) return
