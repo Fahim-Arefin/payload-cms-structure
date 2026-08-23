@@ -1,9 +1,8 @@
 // import NoDataFound from '@/components/custom/shared/NoDataFound'
 // import { CustomerReviewBlockType } from '@/types/payloadCustomTypes'
-// import config from '@payload-config'
-// import { getPayload } from 'payload'
 // import React from 'react'
 // import CustomerReviewTabClient, { CustomerReviewItem } from './CustomerReviewTabClient'
+// import { getPublishedReviews } from '@/lib/CollectionLocalApi/reviewsCache'
 
 // type Props = { block: CustomerReviewBlockType }
 
@@ -27,23 +26,10 @@
 //   }
 // }
 
-// async function getPublishedReviews(): Promise<CustomerReviewItem[]> {
-//   const payload = await getPayload({ config })
+// async function CustomerReviewTab({ block }: Props) {
+//   const docs = await getPublishedReviews()
 
-//   const result = await payload.find({
-//     collection: 'review-form-submissions' as any,
-//     where: {
-//       status: {
-//         equals: 'published',
-//       },
-//     },
-//     sort: '-createdAt',
-//     limit: 30,
-//     depth: 2,
-//     overrideAccess: true,
-//   })
-
-//   return result.docs.map((review: any) => {
+//   const reviews: CustomerReviewItem[] = docs.map((review: any) => {
 //     const adminImages = review?.adminImages || {}
 
 //     return {
@@ -60,10 +46,6 @@
 //       ),
 //     }
 //   })
-// }
-
-// async function CustomerReviewTab({ block }: Props) {
-//   const reviews = await getPublishedReviews()
 
 //   if (!reviews.length) {
 //     return (
@@ -81,12 +63,14 @@
 // export default CustomerReviewTab
 
 import NoDataFound from '@/components/custom/shared/NoDataFound'
+import { getPublishedReviews } from '@/lib/CollectionLocalApi/reviewsCache'
 import { CustomerReviewBlockType } from '@/types/payloadCustomTypes'
 import React from 'react'
 import CustomerReviewTabClient, { CustomerReviewItem } from './CustomerReviewTabClient'
-import { getPublishedReviews } from '@/lib/CollectionLocalApi/reviewsCache'
 
-type Props = { block: CustomerReviewBlockType }
+type Props = {
+  block: CustomerReviewBlockType
+}
 
 type PlainImage = {
   url: string
@@ -112,19 +96,20 @@ async function CustomerReviewTab({ block }: Props) {
   const docs = await getPublishedReviews()
 
   const reviews: CustomerReviewItem[] = docs.map((review: any) => {
-    const adminImages = review?.adminImages || {}
-
     return {
       id: String(review?.id || ''),
       buyersFullName: review?.buyersFullName || '',
       companyName: review?.companyName || '',
+      companyLink: review?.companyLink || '',
       position: review?.position || '',
       rating: Number(review?.rating || 5),
       review: review?.review || '',
-      companyIcon: getPlainImage(adminImages?.companyIcon, adminImages?.companyIconBlurDataURL),
+
+      companyIcon: getPlainImage(review?.companyIcon, review?.companyIconBlurDataURL),
+
       userProfileImage: getPlainImage(
-        adminImages?.userProfileImage,
-        adminImages?.userProfileImageBlurDataURL,
+        review?.userProfileImage,
+        review?.userProfileImageBlurDataURL,
       ),
     }
   })

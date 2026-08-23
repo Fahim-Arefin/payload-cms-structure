@@ -312,18 +312,31 @@ export interface ReviewFormSubmission {
   review: string;
   status: 'new' | 'reviewed' | 'published';
   /**
-   * These images are uploaded only from this collection in the admin panel. They are not submitted from the frontend form.
+   * Optional. Upload company logo/icon. Recommended ratio 140:50.
    */
-  adminImages?: {
-    /**
-     * Optional. Upload company logo/icon from admin only. Recommended ratio 140:50.
-     */
-    companyIcon?: (string | null) | Media;
-    /**
-     * Optional. Upload user profile image from admin only. Recommended ratio 240:301.
-     */
-    userProfileImage?: (string | null) | Media;
-  };
+  companyIcon?: (string | null) | Media;
+  companyIconOriginal?: (string | null) | Media;
+  pendingCompanyIconOriginal?: string | null;
+  pendingCompanyIconCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  companyIconBlurDataURL?: string | null;
+  /**
+   * Optional. Upload user profile image. Recommended ratio 240:301.
+   */
+  userProfileImage?: (string | null) | Media;
+  userProfileImageOriginal?: (string | null) | Media;
+  pendingUserProfileImageOriginal?: string | null;
+  pendingUserProfileImageCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  userProfileImageBlurDataURL?: string | null;
+  /**
+   * Optional. Company website / portfolio / social page URL. Must be a full http(s) URL.
+   */
+  companyLink?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -405,6 +418,35 @@ export interface Page {
            * Optional. Must be inside Heading 3. Max 40.
            */
           heading3Highlighted?: string | null;
+          /**
+           * Turn this ON to show a typewriter animated heading below the normal heading. Normal Heading 1 / Heading 2 / Heading 3 will always remain visible.
+           */
+          enableAnimatedHeading?: boolean | null;
+          /**
+           * This animated heading appears below the normal heading. The animated texts will type and delete one by one.
+           */
+          animatedHeading?: {
+            /**
+             * Optional. Example: with. This text stays visible before the animated typing text.
+             */
+            staticText?: string | null;
+            /**
+             * Choose whether the typewriter text appears beside the static text or on a new line.
+             */
+            animatedTextPlacement: 'same-line' | 'new-line';
+            /**
+             * Add words or short phrases that will type one by one. Example: Laravel, HTML5, CSS3, Bootstrap, Tailwind.
+             */
+            animatedTexts?:
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+          };
           description?: {
             root: {
               type: string;
@@ -4088,12 +4130,17 @@ export interface ReviewFormSubmissionsSelect<T extends boolean = true> {
   rating?: T;
   review?: T;
   status?: T;
-  adminImages?:
-    | T
-    | {
-        companyIcon?: T;
-        userProfileImage?: T;
-      };
+  companyIcon?: T;
+  companyIconOriginal?: T;
+  pendingCompanyIconOriginal?: T;
+  pendingCompanyIconCrop?: T;
+  companyIconBlurDataURL?: T;
+  userProfileImage?: T;
+  userProfileImageOriginal?: T;
+  pendingUserProfileImageOriginal?: T;
+  pendingUserProfileImageCrop?: T;
+  userProfileImageBlurDataURL?: T;
+  companyLink?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -4133,6 +4180,19 @@ export interface PagesSelect<T extends boolean = true> {
                     heading2Highlighted?: T;
                     heading3?: T;
                     heading3Highlighted?: T;
+                    enableAnimatedHeading?: T;
+                    animatedHeading?:
+                      | T
+                      | {
+                          staticText?: T;
+                          animatedTextPlacement?: T;
+                          animatedTexts?:
+                            | T
+                            | {
+                                text?: T;
+                                id?: T;
+                              };
+                        };
                     description?: T;
                     ctaButtons?:
                       | T
@@ -5612,7 +5672,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Global navbar: logo and multi-level navigation (desktop & mobile), plus an optional portal link.
+ * Global navbar: logo and multi-level navigation, plus search drawer rotating content.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navbar".
@@ -5633,20 +5693,20 @@ export interface Navbar {
   logoBlurDataURL?: string | null;
   desktop?: {
     /**
-     * Top-level nav items for desktop. Each item can optionally have nested children.
+     * Top-level nav items for desktop and mobile. Each item can optionally have children.
      */
     items?:
       | {
           /**
-           * Optional. Max 100 characters.
+           * Required. Max 100 characters.
            */
           label: string;
           /**
-           * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
+           * Pick an internal Page to link to.
            */
           href: string | Page;
           /**
-           * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+           * Used for direct jump links to this section. No spaces. Use "-" to separate words.
            */
           sectionId?: string | null;
           /**
@@ -5655,20 +5715,38 @@ export interface Navbar {
           children?:
             | {
                 /**
-                 * Optional. Max 100 characters.
+                 * Required. Max 100 characters.
                  */
                 label: string;
                 /**
-                 * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
+                 * Pick an internal Page to link to.
                  */
                 href: string | Page;
                 /**
-                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 * Used for direct jump links to this section. No spaces. Use "-" to separate words.
                  */
                 sectionId?: string | null;
                 id?: string | null;
               }[]
             | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Rotating title and description content shown at the bottom of the desktop search drawer.
+   */
+  searchContent?: {
+    items?:
+      | {
+          /**
+           * Max 140 characters.
+           */
+          title: string;
+          /**
+           * Max 260 characters.
+           */
+          description: string;
           id?: string | null;
         }[]
       | null;
@@ -6076,6 +6154,17 @@ export interface NavbarSelect<T extends boolean = true> {
                     sectionId?: T;
                     id?: T;
                   };
+              id?: T;
+            };
+      };
+  searchContent?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
               id?: T;
             };
       };

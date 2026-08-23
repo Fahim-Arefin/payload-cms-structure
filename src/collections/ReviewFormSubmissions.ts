@@ -1,5 +1,7 @@
 // import { CUSTOMER_REVIEW_SLUG_AND_TAG, FORMS } from '@/lib/constants'
 // import { roleAtLeast } from '@/lib/rbac'
+// import { triggerMediaTemporaryPurge } from '@/utils/media/triggerMediaTemporaryPurge'
+// import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
 // import { revalidateTag } from 'next/cache'
 // import type { CollectionConfig } from 'payload'
 
@@ -10,6 +12,23 @@
 //   revalidateTag(CUSTOMER_REVIEW_SLUG_AND_TAG)
 //   revalidateTag(REVIEW_FORM_SUBMISSIONS_SLUG)
 // }
+
+// const reviewMediaHooks = withMediaLifecycle({
+//   collectionSlug: REVIEW_FORM_SUBMISSIONS_SLUG,
+
+//   // These are normal Payload upload fields, not CropUploadField generated fields.
+//   // This makes uploaded admin images permanent by setting media.temporary = false.
+//   otherUploadFields: ['adminImages.companyIcon', 'adminImages.userProfileImage'],
+
+//   skipOnDraft: false,
+
+//   onAfterChange: async ({ req }) => {
+//     revalidateCustomerReview()
+//     triggerMediaTemporaryPurge(req)
+//   },
+// })
+
+// const safeReviewMediaHooks: NonNullable<CollectionConfig['hooks']> = reviewMediaHooks ?? {}
 
 // export const ReviewFormSubmissions: CollectionConfig = {
 //   slug: REVIEW_FORM_SUBMISSIONS_SLUG,
@@ -33,22 +52,34 @@
 //   },
 
 //   hooks: {
-//     afterChange: [
+//     beforeValidate: [...(safeReviewMediaHooks.beforeValidate ?? [])],
+
+//     beforeChange: [...(safeReviewMediaHooks.beforeChange ?? [])],
+
+//     afterChange: [...(safeReviewMediaHooks.afterChange ?? [])],
+
+//     afterDelete: [
+//       ...(safeReviewMediaHooks.afterDelete ?? []),
 //       async () => {
 //         revalidateCustomerReview()
 //       },
 //     ],
 
-//     afterDelete: [
-//       async () => {
-//         revalidateCustomerReview()
-//       },
-//     ],
+//     afterError: [...(safeReviewMediaHooks.afterError ?? [])],
 //   },
 
 //   timestamps: true,
 
 //   fields: [
+//     {
+//       name: 'uploadSessionId',
+//       type: 'text',
+//       admin: {
+//         condition: () => false,
+//         readOnly: true,
+//       },
+//     },
+
 //     {
 //       name: 'buyersFullName',
 //       type: 'text',
@@ -120,9 +151,18 @@
 //       required: true,
 //       defaultValue: 'new',
 //       options: [
-//         { label: 'New', value: 'new' },
-//         { label: 'Reviewed', value: 'reviewed' },
-//         { label: 'Published', value: 'published' },
+//         {
+//           label: 'New',
+//           value: 'new',
+//         },
+//         {
+//           label: 'Reviewed',
+//           value: 'reviewed',
+//         },
+//         {
+//           label: 'Published',
+//           value: 'published',
+//         },
 //       ],
 //     },
 
@@ -167,12 +207,15 @@
 
 import { CUSTOMER_REVIEW_SLUG_AND_TAG, FORMS } from '@/lib/constants'
 import { roleAtLeast } from '@/lib/rbac'
+import { validateAbsoluteHTTPUrl } from '@/utils/block/fields-validation'
+import { generateImageFields } from '@/utils/media/fieldGenerators'
 import { triggerMediaTemporaryPurge } from '@/utils/media/triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
 import { revalidateTag } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 const REVIEW_MAX_LENGTH = 500
+const COMPANY_LINK_MAX = 300
 const REVIEW_FORM_SUBMISSIONS_SLUG = 'review-form-submissions'
 
 const revalidateCustomerReview = () => {
@@ -183,9 +226,26 @@ const revalidateCustomerReview = () => {
 const reviewMediaHooks = withMediaLifecycle({
   collectionSlug: REVIEW_FORM_SUBMISSIONS_SLUG,
 
-  // These are normal Payload upload fields, not CropUploadField generated fields.
-  // This makes uploaded admin images permanent by setting media.temporary = false.
-  otherUploadFields: ['adminImages.companyIcon', 'adminImages.userProfileImage'],
+  imageConfigs: [
+    {
+      fieldName: 'companyIcon',
+      label: 'Company Icon',
+      description: 'Optional. Upload company logo/icon. Recommended ratio 140:50.',
+      aspectRatio: 140 / 50,
+      quality: 0.95,
+      maxKB: 250,
+      required: false,
+    },
+    {
+      fieldName: 'userProfileImage',
+      label: 'User Profile Image',
+      description: 'Optional. Upload user profile image. Recommended ratio 240:301.',
+      aspectRatio: 240 / 301,
+      quality: 0.95,
+      maxKB: 450,
+      required: false,
+    },
+  ],
 
   skipOnDraft: false,
 
@@ -333,39 +393,39 @@ export const ReviewFormSubmissions: CollectionConfig = {
       ],
     },
 
+    ...generateImageFields({
+      fieldName: 'companyIcon',
+      label: 'Company Icon',
+      description: 'Optional. Upload company logo/icon. Recommended ratio 140:50.',
+      aspectRatio: 140 / 50,
+      quality: 0.95,
+      maxKB: 250,
+      required: false,
+      ownerCollection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
+    } as any),
+
+    ...generateImageFields({
+      fieldName: 'userProfileImage',
+      label: 'User Profile Image',
+      description: 'Optional. Upload user profile image. Recommended ratio 240:301.',
+      aspectRatio: 240 / 301,
+      quality: 0.95,
+      maxKB: 450,
+      required: false,
+      ownerCollection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
+    } as any),
+
     {
-      name: 'adminImages',
-      type: 'group',
-      label: 'Admin Uploaded Images',
+      name: 'companyLink',
+      type: 'text',
+      label: 'Company Link',
+      required: false,
+      maxLength: COMPANY_LINK_MAX,
+      validate: validateAbsoluteHTTPUrl(COMPANY_LINK_MAX, false),
       admin: {
         description:
-          'These images are uploaded only from this collection in the admin panel. They are not submitted from the frontend form.',
+          'Optional. Company website / portfolio / social page URL. Must be a full http(s) URL.',
       },
-      fields: [
-        {
-          name: 'companyIcon',
-          type: 'upload',
-          relationTo: 'media',
-          label: 'Company Icon',
-          required: false,
-          admin: {
-            description:
-              'Optional. Upload company logo/icon from admin only. Recommended ratio 140:50.',
-          },
-        },
-
-        {
-          name: 'userProfileImage',
-          type: 'upload',
-          relationTo: 'media',
-          label: 'User Profile Image',
-          required: false,
-          admin: {
-            description:
-              'Optional. Upload user profile image from admin only. Recommended ratio 240:301.',
-          },
-        },
-      ],
     },
   ],
 }
