@@ -312,18 +312,31 @@ export interface ReviewFormSubmission {
   review: string;
   status: 'new' | 'reviewed' | 'published';
   /**
-   * These images are uploaded only from this collection in the admin panel. They are not submitted from the frontend form.
+   * Optional. Upload company logo/icon. Recommended ratio 140:50.
    */
-  adminImages?: {
-    /**
-     * Optional. Upload company logo/icon from admin only. Recommended ratio 140:50.
-     */
-    companyIcon?: (string | null) | Media;
-    /**
-     * Optional. Upload user profile image from admin only. Recommended ratio 240:301.
-     */
-    userProfileImage?: (string | null) | Media;
-  };
+  companyIcon?: (string | null) | Media;
+  companyIconOriginal?: (string | null) | Media;
+  pendingCompanyIconOriginal?: string | null;
+  pendingCompanyIconCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  companyIconBlurDataURL?: string | null;
+  /**
+   * Optional. Upload user profile image. Recommended ratio 240:301.
+   */
+  userProfileImage?: (string | null) | Media;
+  userProfileImageOriginal?: (string | null) | Media;
+  pendingUserProfileImageOriginal?: string | null;
+  pendingUserProfileImageCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  userProfileImageBlurDataURL?: string | null;
+  /**
+   * Optional. Company website / portfolio / social page URL. Must be a full http(s) URL.
+   */
+  companyLink?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -4117,12 +4130,17 @@ export interface ReviewFormSubmissionsSelect<T extends boolean = true> {
   rating?: T;
   review?: T;
   status?: T;
-  adminImages?:
-    | T
-    | {
-        companyIcon?: T;
-        userProfileImage?: T;
-      };
+  companyIcon?: T;
+  companyIconOriginal?: T;
+  pendingCompanyIconOriginal?: T;
+  pendingCompanyIconCrop?: T;
+  companyIconBlurDataURL?: T;
+  userProfileImage?: T;
+  userProfileImageOriginal?: T;
+  pendingUserProfileImageOriginal?: T;
+  pendingUserProfileImageCrop?: T;
+  userProfileImageBlurDataURL?: T;
+  companyLink?: T;
   updatedAt?: T;
   createdAt?: T;
 }
