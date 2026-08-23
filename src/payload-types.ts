@@ -5612,7 +5612,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Global navbar: logo and multi-level navigation (desktop & mobile), plus an optional portal link.
+ * Global navbar: logo and multi-level navigation, plus search drawer rotating content.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navbar".
@@ -5633,20 +5633,20 @@ export interface Navbar {
   logoBlurDataURL?: string | null;
   desktop?: {
     /**
-     * Top-level nav items for desktop. Each item can optionally have nested children.
+     * Top-level nav items for desktop and mobile. Each item can optionally have children.
      */
     items?:
       | {
           /**
-           * Optional. Max 100 characters.
+           * Required. Max 100 characters.
            */
           label: string;
           /**
-           * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
+           * Pick an internal Page to link to.
            */
           href: string | Page;
           /**
-           * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+           * Used for direct jump links to this section. No spaces. Use "-" to separate words.
            */
           sectionId?: string | null;
           /**
@@ -5655,20 +5655,38 @@ export interface Navbar {
           children?:
             | {
                 /**
-                 * Optional. Max 100 characters.
+                 * Required. Max 100 characters.
                  */
                 label: string;
                 /**
-                 * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
+                 * Pick an internal Page to link to.
                  */
                 href: string | Page;
                 /**
-                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 * Used for direct jump links to this section. No spaces. Use "-" to separate words.
                  */
                 sectionId?: string | null;
                 id?: string | null;
               }[]
             | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Rotating title and description content shown at the bottom of the desktop search drawer.
+   */
+  searchContent?: {
+    items?:
+      | {
+          /**
+           * Max 140 characters.
+           */
+          title: string;
+          /**
+           * Max 260 characters.
+           */
+          description: string;
           id?: string | null;
         }[]
       | null;
@@ -6076,6 +6094,17 @@ export interface NavbarSelect<T extends boolean = true> {
                     sectionId?: T;
                     id?: T;
                   };
+              id?: T;
+            };
+      };
+  searchContent?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
               id?: T;
             };
       };
