@@ -5676,7 +5676,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Global navbar: logo and multi-level navigation, plus search drawer rotating content.
+ * Global navbar: logo and multi-level navigation, mobile drawer CTA, plus search drawer rotating content.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navbar".
@@ -5736,6 +5736,28 @@ export interface Navbar {
           id?: string | null;
         }[]
       | null;
+  };
+  /**
+   * Controls mobile drawer extra CTA content.
+   */
+  mobileDrawer: {
+    /**
+     * Controls the mobile drawer “Drop Your Query” button label and internal page/section link.
+     */
+    dropQueryCta: {
+      /**
+       * Required. Max 100 characters.
+       */
+      label: string;
+      /**
+       * Pick an internal Page to link to.
+       */
+      href: string | Page;
+      /**
+       * Optional. Used for direct jump links to a section. Example: contact-form
+       */
+      sectionId?: string | null;
+    };
   };
   /**
    * Rotating title and description content shown at the bottom of the desktop search drawer.
@@ -6155,6 +6177,17 @@ export interface NavbarSelect<T extends boolean = true> {
                     id?: T;
                   };
               id?: T;
+            };
+      };
+  mobileDrawer?:
+    | T
+    | {
+        dropQueryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              sectionId?: T;
             };
       };
   searchContent?:
