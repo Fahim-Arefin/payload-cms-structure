@@ -6081,13 +6081,22 @@ export interface News {
   createdAt?: string | null;
 }
 /**
- * Global Contact Us options: our solutions and currencies.
+ * Global Contact Us options: form labels, solutions and currencies.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-contact-us".
  */
 export interface GlobalContactUs {
   id: string;
+  /**
+   * Controls the frontend Contact Us form section labels.
+   */
+  formLabels: {
+    contactInfoHeading: string;
+    descriptionHeading: string;
+    servicesHeading: string;
+    budgetHeading: string;
+  };
   /**
    * Examples: Software as a Service (SaaS), Web App Development, Mobile App Development.
    */
@@ -6344,6 +6353,14 @@ export interface NewsSelect<T extends boolean = true> {
  * via the `definition` "global-contact-us_select".
  */
 export interface GlobalContactUsSelect<T extends boolean = true> {
+  formLabels?:
+    | T
+    | {
+        contactInfoHeading?: T;
+        descriptionHeading?: T;
+        servicesHeading?: T;
+        budgetHeading?: T;
+      };
   ourSolutions?:
     | T
     | {
