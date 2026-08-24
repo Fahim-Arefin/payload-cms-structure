@@ -281,15 +281,18 @@ export interface ContactFormSubmission {
   name: string;
   phone: string;
   email: string;
-  selectedSolutions: {
-    text: string;
-    id?: string | null;
-  }[];
-  selectedBudgetLabel: string;
-  selectedCurrencySign: string;
-  selectedCurrencyCode: string;
-  budgetMin: number;
-  budgetMax: number;
+  city: string;
+  description?: string | null;
+  selectedSolutions?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  selectedBudgetLabel?: string | null;
+  selectedCurrencySign?: string | null;
+  selectedCurrencyCode?: string | null;
+  budget?: number | null;
   status?: ('new' | 'contacted' | 'closed') | null;
   updatedAt: string;
   createdAt: string;
@@ -4099,6 +4102,8 @@ export interface ContactFormSubmissionsSelect<T extends boolean = true> {
   name?: T;
   phone?: T;
   email?: T;
+  city?: T;
+  description?: T;
   selectedSolutions?:
     | T
     | {
@@ -4108,8 +4113,7 @@ export interface ContactFormSubmissionsSelect<T extends boolean = true> {
   selectedBudgetLabel?: T;
   selectedCurrencySign?: T;
   selectedCurrencyCode?: T;
-  budgetMin?: T;
-  budgetMax?: T;
+  budget?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -6077,7 +6081,7 @@ export interface News {
   createdAt?: string | null;
 }
 /**
- * Global Contact Us options: our solutions, currencies and budget range.
+ * Global Contact Us options: our solutions and currencies.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-contact-us".
@@ -6110,19 +6114,6 @@ export interface GlobalContactUs {
     currencyCode: string;
     id?: string | null;
   }[];
-  /**
-   * Controls the default frontend budget range values.
-   */
-  budgetRange: {
-    /**
-     * Example: 1000.
-     */
-    defaultMinValue: number;
-    /**
-     * Example: 10000.
-     */
-    defaultMaxValue: number;
-  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -6365,12 +6356,6 @@ export interface GlobalContactUsSelect<T extends boolean = true> {
         currencySign?: T;
         currencyCode?: T;
         id?: T;
-      };
-  budgetRange?:
-    | T
-    | {
-        defaultMinValue?: T;
-        defaultMaxValue?: T;
       };
   updatedAt?: T;
   createdAt?: T;
