@@ -281,15 +281,18 @@ export interface ContactFormSubmission {
   name: string;
   phone: string;
   email: string;
-  selectedSolutions: {
-    text: string;
-    id?: string | null;
-  }[];
-  selectedBudgetLabel: string;
-  selectedCurrencySign: string;
-  selectedCurrencyCode: string;
-  budgetMin: number;
-  budgetMax: number;
+  city: string;
+  description?: string | null;
+  selectedSolutions?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  selectedBudgetLabel?: string | null;
+  selectedCurrencySign?: string | null;
+  selectedCurrencyCode?: string | null;
+  budget?: number | null;
   status?: ('new' | 'contacted' | 'closed') | null;
   updatedAt: string;
   createdAt: string;
@@ -4099,6 +4102,8 @@ export interface ContactFormSubmissionsSelect<T extends boolean = true> {
   name?: T;
   phone?: T;
   email?: T;
+  city?: T;
+  description?: T;
   selectedSolutions?:
     | T
     | {
@@ -4108,8 +4113,7 @@ export interface ContactFormSubmissionsSelect<T extends boolean = true> {
   selectedBudgetLabel?: T;
   selectedCurrencySign?: T;
   selectedCurrencyCode?: T;
-  budgetMin?: T;
-  budgetMax?: T;
+  budget?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -5672,7 +5676,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Global navbar: logo and multi-level navigation, plus search drawer rotating content.
+ * Global navbar: logo and multi-level navigation, mobile drawer CTA, plus search drawer rotating content.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navbar".
@@ -5732,6 +5736,28 @@ export interface Navbar {
           id?: string | null;
         }[]
       | null;
+  };
+  /**
+   * Controls mobile drawer extra CTA content.
+   */
+  mobileDrawer: {
+    /**
+     * Controls the mobile drawer “Drop Your Query” button label and internal page/section link.
+     */
+    dropQueryCta: {
+      /**
+       * Required. Max 100 characters.
+       */
+      label: string;
+      /**
+       * Pick an internal Page to link to.
+       */
+      href: string | Page;
+      /**
+       * Optional. Used for direct jump links to a section. Example: contact-form
+       */
+      sectionId?: string | null;
+    };
   };
   /**
    * Rotating title and description content shown at the bottom of the desktop search drawer.
@@ -6077,13 +6103,22 @@ export interface News {
   createdAt?: string | null;
 }
 /**
- * Global Contact Us options: our solutions, currencies and budget range.
+ * Global Contact Us options: form labels, solutions and currencies.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-contact-us".
  */
 export interface GlobalContactUs {
   id: string;
+  /**
+   * Controls the frontend Contact Us form section labels.
+   */
+  formLabels: {
+    contactInfoHeading: string;
+    descriptionHeading: string;
+    servicesHeading: string;
+    budgetHeading: string;
+  };
   /**
    * Examples: Software as a Service (SaaS), Web App Development, Mobile App Development.
    */
@@ -6110,19 +6145,6 @@ export interface GlobalContactUs {
     currencyCode: string;
     id?: string | null;
   }[];
-  /**
-   * Controls the default frontend budget range values.
-   */
-  budgetRange: {
-    /**
-     * Example: 1000.
-     */
-    defaultMinValue: number;
-    /**
-     * Example: 10000.
-     */
-    defaultMaxValue: number;
-  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -6155,6 +6177,17 @@ export interface NavbarSelect<T extends boolean = true> {
                     id?: T;
                   };
               id?: T;
+            };
+      };
+  mobileDrawer?:
+    | T
+    | {
+        dropQueryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              sectionId?: T;
             };
       };
   searchContent?:
@@ -6353,6 +6386,14 @@ export interface NewsSelect<T extends boolean = true> {
  * via the `definition` "global-contact-us_select".
  */
 export interface GlobalContactUsSelect<T extends boolean = true> {
+  formLabels?:
+    | T
+    | {
+        contactInfoHeading?: T;
+        descriptionHeading?: T;
+        servicesHeading?: T;
+        budgetHeading?: T;
+      };
   ourSolutions?:
     | T
     | {
@@ -6365,12 +6406,6 @@ export interface GlobalContactUsSelect<T extends boolean = true> {
         currencySign?: T;
         currencyCode?: T;
         id?: T;
-      };
-  budgetRange?:
-    | T
-    | {
-        defaultMinValue?: T;
-        defaultMaxValue?: T;
       };
   updatedAt?: T;
   createdAt?: T;

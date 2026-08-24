@@ -38,18 +38,6 @@
 //   children?: NavChild[]
 // }
 
-// // const ChevronDown = ({ className = '' }: { className?: string }) => (
-// //   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" className={className}>
-// //     <path
-// //       d="M5 7.5L10 12.5L15 7.5"
-// //       stroke="currentColor"
-// //       strokeWidth="1.7"
-// //       strokeLinecap="round"
-// //       strokeLinejoin="round"
-// //     />
-// //   </svg>
-// // )
-
 // const ChevronDown = ({
 //   active = false,
 //   className = '',
@@ -276,37 +264,6 @@
 //     }
 //   `
 
-//   const BurgerIcon = ({ open }: { open: boolean }) => (
-//     <span className="relative block h-[16px] w-[20px] text-white-1">
-//       <span
-//         className={`
-//           absolute left-0 top-0 h-[2px] w-[20px]
-//           origin-center rounded-full bg-current
-//           transition-all duration-300 ease-out
-//           ${open ? 'translate-y-[7px] rotate-45' : 'translate-y-0 rotate-0'}
-//         `}
-//       />
-
-//       <span
-//         className={`
-//           absolute left-0 top-[7px] h-[2px] w-[20px]
-//           origin-center rounded-full bg-current
-//           transition-all duration-300 ease-out
-//           ${open ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'}
-//         `}
-//       />
-
-//       <span
-//         className={`
-//           absolute left-0 top-[14px] h-[2px] w-[20px]
-//           origin-center rounded-full bg-current
-//           transition-all duration-300 ease-out
-//           ${open ? '-translate-y-[7px] -rotate-45' : 'translate-y-0 rotate-0'}
-//         `}
-//       />
-//     </span>
-//   )
-
 //   const handleDropQueryClick = () => {
 //     setOpen(false)
 //     router.push('/contact')
@@ -317,79 +274,74 @@
 //       {/* Mobile top navbar */}
 //       <div
 //         className="
-//           fixed inset-x-0 top-4 z-50 mx-auto
-//           flex h-[52px] w-[92%] items-center justify-between
-//           overflow-hidden
-//           rounded-[12px]
-//           bg-secondary-1
-//           px-3 lg:hidden
-//           shadow-[0_18px_45px_rgba(10,17,40,0.16)]
+//           pointer-events-none
+//           fixed inset-x-0 top-4 z-50
+//           w-full
+//           lg:hidden
 //         "
 //       >
-//         {/* logo */}
-//         <div className="relative z-10 flex h-full w-[38%] items-center justify-start overflow-hidden">
-//           <Link href="/" aria-label="Home" className="block h-[72%]">
-//             {logoUrl && (
-//               <Image
-//                 src={logoUrl}
-//                 alt="Company logo"
-//                 width={260}
-//                 height={120}
-//                 className="h-full w-auto object-contain object-center"
-//                 priority
-//                 placeholder={blur ? 'blur' : 'empty'}
-//                 blurDataURL={blur || undefined}
-//                 quality={90}
-//               />
-//             )}
-//           </Link>
-//         </div>
-
-//         {/* burger */}
-//         <div className="relative z-10 flex h-full w-[38%] items-center justify-end overflow-hidden">
-//           {/* <button
-//             type="button"
-//             aria-label={open ? 'Close menu' : 'Open menu'}
-//             aria-expanded={open}
-//             onClick={() => setOpen((prev) => !prev)}
+//         <div className="container-padding-x w-full">
+//           <div
 //             className="
-//               relative flex h-8 w-8 items-center justify-center
-//               rounded-[7px]
-//               text-white-1
-//               transition-transform duration-300 ease-out
-//               hover:scale-105
-//               active:scale-95
+//               pointer-events-auto
+//               flex h-[52px] w-full items-center justify-between
+//               overflow-hidden
+//               rounded-[12px]
+//               bg-secondary-1
+//               px-3
+//               shadow-[0_18px_45px_rgba(10,17,40,0.16)]
 //             "
 //           >
-//             <BurgerIcon open={open} />
-//           </button> */}
-//           <button
-//             type="button"
-//             aria-label={open ? 'Close menu' : 'Open menu'}
-//             aria-expanded={open}
-//             onClick={() => setOpen((prev) => !prev)}
-//             className="
-//     relative flex h-8 w-8 items-center justify-center
-//     rounded-[7px]
-//     transition-transform duration-300 ease-out
-//     hover:scale-105
-//     active:scale-95
-//   "
-//           >
-//             <Image
-//               src={BurgerIconImg}
-//               alt=""
-//               width={24}
-//               height={24}
-//               placeholder="blur"
-//               blurDataURL={BurgerIconImg.blurDataURL}
-//               quality={95}
-//               className="
-//       h-[18px] w-[24px]
-//       object-contain
-//     "
-//             />
-//           </button>
+//             {/* logo */}
+//             <div className="relative z-10 flex h-full w-[38%] items-center justify-start overflow-hidden">
+//               <Link href="/" aria-label="Home" className="block h-[72%]">
+//                 {logoUrl && (
+//                   <Image
+//                     src={logoUrl}
+//                     alt="Company logo"
+//                     width={260}
+//                     height={120}
+//                     className="h-full w-auto object-contain object-center"
+//                     priority
+//                     placeholder={blur ? 'blur' : 'empty'}
+//                     blurDataURL={blur || undefined}
+//                     quality={90}
+//                   />
+//                 )}
+//               </Link>
+//             </div>
+
+//             {/* burger */}
+//             <div className="relative z-10 flex h-full w-[38%] items-center justify-end overflow-hidden">
+//               <button
+//                 type="button"
+//                 aria-label={open ? 'Close menu' : 'Open menu'}
+//                 aria-expanded={open}
+//                 onClick={() => setOpen((prev) => !prev)}
+//                 className="
+//                   relative flex h-8 w-8 items-center justify-center
+//                   rounded-[7px]
+//                   transition-transform duration-300 ease-out
+//                   hover:scale-105
+//                   active:scale-95
+//                 "
+//               >
+//                 <Image
+//                   src={BurgerIconImg}
+//                   alt=""
+//                   width={24}
+//                   height={24}
+//                   placeholder="blur"
+//                   blurDataURL={BurgerIconImg.blurDataURL}
+//                   quality={95}
+//                   className="
+//                     h-[18px] w-[24px]
+//                     object-contain
+//                   "
+//                 />
+//               </button>
+//             </div>
+//           </div>
 //         </div>
 //       </div>
 
@@ -408,10 +360,9 @@
 //       {/* Drawer */}
 //       <div
 //         ref={drawerRef}
-//         // max-w-[390px]
 //         className="
 //           invisible fixed right-0 top-0 z-[70]
-//           h-dvh w-[100%]
+//           h-dvh w-full
 //           overflow-hidden
 //           opacity-0
 //           shadow-[0_24px_90px_rgba(0,0,0,0.45)]
@@ -454,34 +405,18 @@
 //               </Link>
 //             )}
 
-//             {/* <button
-//               type="button"
-//               aria-label="Close menu"
-//               onClick={() => setOpen(false)}
-//               className="
-//                 flex size-[28px] items-center justify-center
-//                 text-white-1/90
-//                 transition-colors duration-300
-//                 hover:text-primary-2
-//               "
-//             >
-//               <span className="relative block size-[13px]">
-//                 <span className="absolute left-0 top-1/2 h-[1.5px] w-full -translate-y-1/2 rotate-45 bg-current" />
-//                 <span className="absolute left-0 top-1/2 h-[1.5px] w-full -translate-y-1/2 -rotate-45 bg-current" />
-//               </span>
-//             </button> */}
 //             <button
 //               type="button"
 //               aria-label="Close menu"
 //               onClick={() => setOpen(false)}
 //               className="
-//     flex size-[42px] items-center justify-center
-//     overflow-visible
-//     rounded-full
-//     transition-all duration-300 ease-out
-//     hover:rotate-90 hover:scale-105
-//     active:scale-95
-//   "
+//                 flex size-[42px] items-center justify-center
+//                 overflow-visible
+//                 rounded-full
+//                 transition-all duration-300 ease-out
+//                 hover:rotate-90 hover:scale-105
+//                 active:scale-95
+//               "
 //             >
 //               <Image
 //                 src={CloseIcon}
@@ -489,11 +424,11 @@
 //                 width={44}
 //                 height={44}
 //                 className="
-//       h-[34px] w-[34px]
-//       scale-[1.9]
-//       object-contain
-//       drop-shadow-[0_2px_8px_rgba(255,255,255,0.22)]
-//     "
+//                   h-[34px] w-[34px]
+//                   scale-[1.9]
+//                   object-contain
+//                   drop-shadow-[0_2px_8px_rgba(255,255,255,0.22)]
+//                 "
 //                 quality={100}
 //               />
 //             </button>
@@ -521,53 +456,31 @@
 //                     </Link>
 
 //                     {itemHasChildren && (
-//                       // <button
-//                       //   type="button"
-//                       //   aria-label="Toggle submenu"
-//                       //   onClick={() => toggleExpanded(key)}
-//                       //   className={`
-//                       //     absolute right-[8px] top-1/2 z-20
-//                       //     flex size-[28px] -translate-y-1/2 items-center justify-center
-//                       //     rounded-full
-//                       //     transition-colors duration-300
-//                       //     ${
-//                       //       itemActive
-//                       //         ? 'text-white-1'
-//                       //         : 'text-white-1 hover:bg-primary-1/20 hover:text-white-1'
-//                       //     }
-//                       //   `}
-//                       // >
-//                       //   <ChevronDown
-//                       //     className={`size-[14px] transition-transform duration-300 ${
-//                       //       itemExpanded ? 'rotate-180' : ''
-//                       //     }`}
-//                       //   />
-//                       // </button>
 //                       <button
 //                         type="button"
 //                         aria-label="Toggle submenu"
 //                         onClick={() => toggleExpanded(key)}
 //                         className={`
-//     group/mobile-dropdown
-//     absolute right-[8px] top-1/2 z-20
-//     flex size-[28px] -translate-y-1/2 items-center justify-center
-//     rounded-full
-//     transition-colors duration-300
-//     ${
-//       itemActive || itemExpanded
-//         ? 'text-white-1'
-//         : 'text-white-1 hover:bg-primary-1/20 hover:text-white-1'
-//     }
-//   `}
+//                           group/mobile-dropdown
+//                           absolute right-[8px] top-1/2 z-20
+//                           flex size-[28px] -translate-y-1/2 items-center justify-center
+//                           rounded-full
+//                           transition-colors duration-300
+//                           ${
+//                             itemActive || itemExpanded
+//                               ? 'text-white-1'
+//                               : 'text-white-1 hover:bg-primary-1/20 hover:text-white-1'
+//                           }
+//                         `}
 //                       >
 //                         <ChevronDown
 //                           active={itemActive || itemExpanded}
 //                           className={`
-//       w-[12px]
-//       aspect-[48/30]
-//       transition-transform duration-300
-//       ${itemExpanded ? 'rotate-180' : ''}
-//     `}
+//                             w-[12px]
+//                             aspect-[48/30]
+//                             transition-transform duration-300
+//                             ${itemExpanded ? 'rotate-180' : ''}
+//                           `}
 //                         />
 //                       </button>
 //                     )}
@@ -608,19 +521,19 @@
 //           <div className="mt-[28px] z-[999]">
 //             <div
 //               className="
-//       font-grift text-[13px] font-medium leading-none text-white-1/80
-//     "
+//                 font-grift text-[13px] font-medium leading-none text-white-1/80
+//               "
 //             >
 //               Search
 //             </div>
 
-//             <div className="mt-[12px]  z-[999]">
+//             <div className="mt-[12px] z-[999]">
 //               <SearchBarSection suggestions={suggestions} center variant="mobileDrawer" />
 //             </div>
 //           </div>
 
 //           {/* Drop query */}
-//           <div className="mt-[28px] relative z-[1]  flex justify-center">
+//           <div className="mt-[28px] relative z-[1] flex justify-center">
 //             <Button02
 //               type="button"
 //               onClick={handleDropQueryClick}
@@ -636,7 +549,7 @@
 //           </div>
 
 //           {/* Social */}
-//           <div className="relative z-[1]  mt-[22px] text-center">
+//           <div className="relative z-[1] mt-[22px] text-center">
 //             <div className="font-grift text-[13px] font-medium leading-none text-white-1/80">
 //               Contact Us
 //             </div>
@@ -732,23 +645,23 @@
 'use client'
 
 import Button02 from '@/components/custom/sagar-ropes-shared/buttons/Button02'
+import { gsap, useGSAP } from '@/lib/gsap'
 import type { Footer } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import At from 'public/assets/icons/atC.png'
 import BurgerIconImg from 'public/assets/icons/burger2.png'
-import { gsap, useGSAP } from '@/lib/gsap'
-import LocalizedText from '../../shared/LocalizedText'
-import SearchBarSection from './SearchBarSection'
-import type { NavbarData, SearchSuggestion } from './ServerNavbar'
 import CloseIcon from 'public/assets/icons/close.png'
 import DownArrowP2 from 'public/assets/icons/DownArrowWhite.png'
 import DownArrowWhite from 'public/assets/icons/DownArrowWhite.png'
-import At from 'public/assets/icons/atC.png'
 import Facebook from 'public/assets/icons/fbC.png'
 import Linkdin from 'public/assets/icons/lnC.png'
 import WhatsApp from 'public/assets/icons/waC.png'
+import React, { useEffect, useRef, useState } from 'react'
+import LocalizedText from '../../shared/LocalizedText'
+import SearchBarSection from './SearchBarSection'
+import type { NavbarData, SearchSuggestion } from './ServerNavbar'
 
 type Props = {
   data: NavbarData
@@ -809,7 +722,6 @@ const ChevronDown = ({
 
 function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
   const pathname = usePathname()
-  const router = useRouter()
 
   const [open, setOpen] = useState(false)
   const [expanded, setExpanded] = useState<string[]>([])
@@ -831,6 +743,10 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
     footerAny?.contactInfoSection?.email ||
     footerAny?.factorySection?.email ||
     footerAny?.contactInfo?.email
+
+  const dropQueryCta = data?.mobileDrawer?.dropQueryCta
+  const dropQueryLabel = dropQueryCta?.label || 'Drop Your Query'
+  const dropQueryHref = dropQueryCta?.href || '/contact'
 
   const allItems = (data?.desktop?.items ?? []) as NavItem[]
   const mainItems = allItems.filter((item) => item.isTop !== 'yes')
@@ -995,11 +911,6 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
     }
   `
 
-  const handleDropQueryClick = () => {
-    setOpen(false)
-    router.push('/contact')
-  }
-
   return (
     <>
       {/* Mobile top navbar */}
@@ -1111,7 +1022,7 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
           className="
             relative z-10 flex h-full flex-col
             overflow-y-auto overflow-x-hidden
-            px-[14px] pb-[30px] pt-[22px]
+            px-[40px] pb-[30px] pt-[40px]
           "
         >
           {/* Header */}
@@ -1264,19 +1175,20 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
           </div>
 
           {/* Drop query */}
-          <div className="mt-[28px] relative z-[1] flex justify-center">
-            <Button02
-              type="button"
-              onClick={handleDropQueryClick}
-              className="
-                !h-[56px]
-                !px-[36px]
-                !text-[16px]
-                !tracking-[0.02em]
-              "
-            >
-              Drop Your Query
-            </Button02>
+          <div className="relative z-[1] mt-[28px] flex justify-center">
+            <Link href={dropQueryHref} onClick={() => setOpen(false)} className="inline-flex">
+              <Button02
+                type="button"
+                className="
+                  !h-[56px]
+                  !px-[36px]
+                  !text-[16px]
+                  !tracking-[0.02em]
+                "
+              >
+                {dropQueryLabel}
+              </Button02>
+            </Link>
           </div>
 
           {/* Social */}
@@ -1292,7 +1204,7 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="relative block w-[30px] h-[30px]"
+                  className="relative block h-[30px] w-[30px]"
                 >
                   <Image
                     src={WhatsApp}
@@ -1310,7 +1222,7 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
                 <Link
                   href={`mailto:${email}`}
                   aria-label="Email"
-                  className="relative block w-[30px] h-[30px]"
+                  className="relative block h-[30px] w-[30px]"
                 >
                   <Image
                     src={At}
@@ -1330,7 +1242,7 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="relative block w-[30px] h-[30px]"
+                  className="relative block h-[30px] w-[30px]"
                 >
                   <Image
                     src={Linkdin}
@@ -1350,7 +1262,7 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
-                  className="relative block w-[30px] h-[30px]"
+                  className="relative block h-[30px] w-[30px]"
                 >
                   <Image
                     src={Facebook}

@@ -281,10 +281,10 @@ function CarouselArrowButton({
           `}
           style={{
             backgroundColor: IDLE_BG,
-            boxShadow: `
-              0 12px 18px rgba(0, 0, 0, 0.24),
-              0 3px 8px rgba(0, 0, 0, 0.14)
-            `,
+            // boxShadow: `
+            //   0 12px 18px rgba(0, 0, 0, 0.24),
+            //   0 3px 8px rgba(0, 0, 0, 0.14)
+            // `,
           }}
         >
           <span
