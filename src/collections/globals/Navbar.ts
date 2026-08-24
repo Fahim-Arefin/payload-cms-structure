@@ -1,36 +1,25 @@
-// // src/globals/Navbar.ts
 // import type { Field, GlobalConfig } from 'payload'
 
 // import { globalTag } from '@/lib/cacheTags'
-// import { GLOBAL_NAVBAR_SLUG_AND_TAG } from '@/lib/constants' // export const GLOBAL_NAVBAR_SLUG_AND_TAG = 'global-navbar';
-// import { bnNum } from '@/lib/utils'
+// import { GLOBAL_NAVBAR_SLUG_AND_TAG } from '@/lib/constants'
+// import { roleAtLeast } from '@/lib/rbac'
+// import { validateSectionIdOptional, validateShortText } from '@/utils/block/fields-validation'
 // import { generateImageFields } from '@/utils/media/fieldGenerators'
+// import { triggerMediaTemporaryPurge } from '@/utils/media/triggerMediaTemporaryPurge'
 // import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
 // import { revalidateTag } from 'next/cache'
-// import { triggerMediaTemporaryPurge } from '@/utils/media/triggerMediaTemporaryPurge'
-// import { roleAtLeast } from '@/lib/rbac'
-// import {
-//   EMAIL_MAX,
-//   validateAtLeastOneRecipientEmail,
-//   validateEmail,
-//   validateSectionIdOptional,
-// } from '@/utils/block/fields-validation'
 
 // const CTA_TEXT_MAX = 100
-// const DEPTH_MAX = 1 // max depth for nav items (0 = no children, 1 = one level of children, etc.)
+// const SEARCH_TITLE_MAX = 140
+// const SEARCH_DESCRIPTION_MAX = 260
+// const DEPTH_MAX = 1
 
-// /* -----------------------------------------------------------------------------
-//    MEDIA LIFECYCLE WIRING
-// ----------------------------------------------------------------------------- */
-
-// // ✅ Configure lifecycle for the Navbar global
-// // CHANGED: track top-level "logo" (not "branding.logo")
 // const mediaHooks = withMediaLifecycle({
-//   collectionSlug: GLOBAL_NAVBAR_SLUG_AND_TAG, // stamps ownerCollection during finalize
+//   collectionSlug: GLOBAL_NAVBAR_SLUG_AND_TAG,
 //   imageConfigs: [
 //     {
-//       fieldName: 'logo', // <— moved out of branding group
-//       aspectRatio: 1, // 1.48 / 1
+//       fieldName: 'logo',
+//       aspectRatio: 1,
 //       quality: 0.92,
 //       maxKB: 500,
 //       required: true,
@@ -43,7 +32,6 @@
 //   },
 // })
 
-// // Coerce hooks for GlobalConfig
 // const pickGlobalHooks = (h: any) => ({
 //   beforeValidate: h?.beforeValidate ?? [],
 //   beforeChange: h?.beforeChange ?? [],
@@ -51,8 +39,6 @@
 // })
 
 // const base = pickGlobalHooks(mediaHooks)
-
-// /* ------------------------------- nav item fields ------------------------------ */
 
 // const navItemFields = (
 //   levelLabel: string = 'Item',
@@ -69,16 +55,15 @@
 //           label: `${levelLabel} Label`,
 //           maxLength: CTA_TEXT_MAX,
 //           required: true,
-//           // validate: validateFooterCTAEnglishText,
+//           validate: validateShortText(`${levelLabel} Label`, CTA_TEXT_MAX, true),
 //           admin: {
 //             width: '50%',
-//             description: `Optional. Max ${CTA_TEXT_MAX} characters.`,
+//             description: `Required. Max ${CTA_TEXT_MAX} characters.`,
 //           },
 //         },
 //       ],
 //     },
 
-//     // Internal page relationship (preferred)
 //     {
 //       type: 'row',
 //       fields: [
@@ -87,11 +72,9 @@
 //           label: 'Link to (internal page)',
 //           type: 'relationship',
 //           relationTo: 'pages',
-//           // validate: validateFooterCTALinkRequiredIfAnyText,
 //           required: true,
 //           admin: {
-//             description:
-//               'Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.',
+//             description: 'Pick an internal Page to link to.',
 //           },
 //         },
 //         {
@@ -102,7 +85,7 @@
 //           admin: {
 //             width: '50%',
 //             description:
-//               'Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").',
+//               'Used for direct jump links to this section. No spaces. Use "-" to separate words.',
 //           },
 //           validate: validateSectionIdOptional,
 //         },
@@ -128,30 +111,34 @@
 //   return base
 // }
 
-// /* --------------------------------- config --------------------------------- */
-
 // const Navbar: GlobalConfig = {
 //   slug: GLOBAL_NAVBAR_SLUG_AND_TAG,
 //   label: 'Navbar',
+
 //   admin: {
 //     description:
-//       'Global navbar: logo and multi-level navigation (desktop & mobile), plus an optional portal link.',
+//       'Global navbar: logo and multi-level navigation, plus search drawer rotating content.',
 //   },
 
 //   access: {
-//     read: () => true, // public read
+//     read: () => true,
 //     update: ({ req }) => roleAtLeast(req.user, 'editor'),
 //   },
 
 //   fields: [
-//     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false, readOnly: true } },
+//     {
+//       name: 'uploadSessionId',
+//       type: 'text',
+//       admin: {
+//         condition: () => false,
+//         readOnly: true,
+//       },
+//     },
 
-//     // NEW: Top-level logo (not inside "branding")
 //     ...generateImageFields({
 //       fieldName: 'logo',
 //       label: 'Navbar Logo',
 //       description: 'Primary navbar logo. Transparent PNG/SVG preferred. (919:512) recommended.',
-//       // aspectRatio: 701 / 179,
 //       aspectRatio: 919 / 512,
 //       quality: 0.92,
 //       maxKB: 500,
@@ -159,7 +146,6 @@
 //       ownerCollection: GLOBAL_NAVBAR_SLUG_AND_TAG as any,
 //     } as any),
 
-//     /* Desktop navigation */
 //     {
 //       name: 'desktop',
 //       type: 'group',
@@ -171,25 +157,86 @@
 //           label: 'Menu Items',
 //           minRows: 1,
 //           maxRows: 20,
-//           labels: { singular: 'Menu Item', plural: 'Menu Items' },
+//           labels: {
+//             singular: 'Menu Item',
+//             plural: 'Menu Items',
+//           },
 //           admin: {
 //             description:
-//               'Top-level nav items for desktop. Each item can optionally have nested children.',
+//               'Top-level nav items for desktop and mobile. Each item can optionally have children.',
 //           },
 //           fields: navItemFields('Item', 0, DEPTH_MAX),
 //         },
 //       ],
 //     },
+
+//     {
+//       name: 'searchContent',
+//       type: 'group',
+//       label: 'Search Drawer Content',
+//       admin: {
+//         description:
+//           'Rotating title and description content shown at the bottom of the desktop search drawer.',
+//       },
+//       fields: [
+//         {
+//           name: 'items',
+//           type: 'array',
+//           label: 'Search Content Items',
+//           minRows: 1,
+//           maxRows: 10,
+//           defaultValue: [
+//             {
+//               title: '“Big growth steps often bring big challenges”',
+//               description:
+//                 'but our team is here to make the transition seamless. Reach out today so we can kickstart your success together.',
+//             },
+//           ],
+//           labels: {
+//             singular: 'Search Content Item',
+//             plural: 'Search Content Items',
+//           },
+//           fields: [
+//             {
+//               name: 'title',
+//               type: 'text',
+//               label: 'Title',
+//               required: true,
+//               maxLength: SEARCH_TITLE_MAX,
+//               validate: validateShortText('Search Content Title', SEARCH_TITLE_MAX, true),
+//               admin: {
+//                 description: `Max ${SEARCH_TITLE_MAX} characters.`,
+//               },
+//             },
+//             {
+//               name: 'description',
+//               type: 'textarea',
+//               label: 'Description',
+//               required: true,
+//               maxLength: SEARCH_DESCRIPTION_MAX,
+//               validate: validateShortText(
+//                 'Search Content Description',
+//                 SEARCH_DESCRIPTION_MAX,
+//                 true,
+//               ),
+//               admin: {
+//                 description: `Max ${SEARCH_DESCRIPTION_MAX} characters.`,
+//               },
+//             },
+//           ],
+//         },
+//       ],
+//     },
 //   ],
 
-//   // Merge in lifecycle hooks & keep your revalidateTag
 //   hooks: {
 //     beforeValidate: [...(base.beforeValidate ?? [])],
+
 //     beforeChange: [...(base.beforeChange ?? [])],
+
 //     afterChange: [
 //       ...(base.afterChange ?? []),
 //       async () => {
-//         // Keep your cache revalidation
 //         revalidateTag(globalTag(GLOBAL_NAVBAR_SLUG_AND_TAG))
 //       },
 //     ],
@@ -198,9 +245,6 @@
 
 // export default Navbar
 
-// ========================================================================================
-// ========================================================================================
-// ========================================================================================
 import type { Field, GlobalConfig } from 'payload'
 
 import { globalTag } from '@/lib/cacheTags'
@@ -320,7 +364,7 @@ const Navbar: GlobalConfig = {
 
   admin: {
     description:
-      'Global navbar: logo and multi-level navigation, plus search drawer rotating content.',
+      'Global navbar: logo and multi-level navigation, mobile drawer CTA, plus search drawer rotating content.',
   },
 
   access: {
@@ -369,6 +413,68 @@ const Navbar: GlobalConfig = {
               'Top-level nav items for desktop and mobile. Each item can optionally have children.',
           },
           fields: navItemFields('Item', 0, DEPTH_MAX),
+        },
+      ],
+    },
+
+    {
+      name: 'mobileDrawer',
+      type: 'group',
+      label: 'Mobile Drawer',
+      admin: {
+        description: 'Controls mobile drawer extra CTA content.',
+      },
+      fields: [
+        {
+          name: 'dropQueryCta',
+          type: 'group',
+          label: 'Drop Your Query CTA',
+          admin: {
+            description:
+              'Controls the mobile drawer “Drop Your Query” button label and internal page/section link.',
+          },
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'label',
+                  type: 'text',
+                  label: 'Button Label',
+                  required: true,
+                  defaultValue: 'Drop Your Query',
+                  maxLength: CTA_TEXT_MAX,
+                  validate: validateShortText('Drop Query Button Label', CTA_TEXT_MAX, true),
+                  admin: {
+                    width: '50%',
+                    description: `Required. Max ${CTA_TEXT_MAX} characters.`,
+                  },
+                },
+                {
+                  name: 'href',
+                  type: 'relationship',
+                  relationTo: 'pages',
+                  label: 'Link to (internal page)',
+                  required: true,
+                  admin: {
+                    width: '50%',
+                    description: 'Pick an internal Page to link to.',
+                  },
+                },
+              ],
+            },
+            {
+              name: 'sectionId',
+              type: 'text',
+              label: 'Section ID (anchor)',
+              required: false,
+              admin: {
+                description:
+                  'Optional. Used for direct jump links to a section. Example: contact-form',
+              },
+              validate: validateSectionIdOptional,
+            },
+          ],
         },
       ],
     },

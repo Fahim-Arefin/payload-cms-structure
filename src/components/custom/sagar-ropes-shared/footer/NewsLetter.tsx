@@ -3,6 +3,7 @@
 // import { Input } from '@/components/ui/input'
 // import React, { useRef, useState } from 'react'
 // import ButtonArrowAnimated, { ButtonArrowAnimatedRef } from '../buttons/ButtonArrowAnimated'
+// import { toast } from 'sonner'
 
 // type Props = {
 //   className?: string
@@ -10,10 +11,7 @@
 
 // function NewsLetter({ className }: Props) {
 //   const arrowRef = useRef<ButtonArrowAnimatedRef | null>(null)
-
 //   const [loading, setLoading] = useState(false)
-//   const [message, setMessage] = useState<string | null>(null)
-//   const [isSuccess, setIsSuccess] = useState(false)
 
 //   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 //     event.preventDefault()
@@ -25,14 +23,12 @@
 //     const email = String(formData.get('email') || '').trim()
 
 //     if (!email) {
-//       setIsSuccess(false)
-//       setMessage('Email is required.')
+//       toast.error('Email is required.')
 //       return
 //     }
 
 //     try {
 //       setLoading(true)
-//       setMessage(null)
 
 //       const res = await fetch('/api/newsletter-subscribe', {
 //         method: 'POST',
@@ -46,16 +42,16 @@
 
 //       const data = await res.json()
 
-//       setIsSuccess(Boolean(data?.success))
-//       setMessage(data?.message || 'Something went wrong.')
-
-//       if (data?.success) {
-//         form.reset()
+//       if (!res.ok || !data?.success) {
+//         toast.error(data?.message || 'Something went wrong.')
+//         return
 //       }
+
+//       toast.success(data?.message || 'Subscribed successfully.')
+//       form.reset()
 //     } catch (error) {
 //       console.error('Newsletter submit error:', error)
-//       setIsSuccess(false)
-//       setMessage('Something went wrong. Please try again later.')
+//       toast.error('Something went wrong. Please try again later.')
 //     } finally {
 //       setLoading(false)
 //     }
@@ -192,17 +188,6 @@
 //           }}
 //         />
 //       </form>
-
-//       {message && (
-//         <p
-//           className={`
-//             mt-2 font-grift text-[10px] lg:text-[11px] xl:text-[12px]
-//             ${isSuccess ? 'text-primary-1' : 'text-red-500'}
-//           `}
-//         >
-//           {message}
-//         </p>
-//       )}
 //     </div>
 //   )
 // }
@@ -213,12 +198,15 @@
 
 import { Input } from '@/components/ui/input'
 import React, { useRef, useState } from 'react'
-import ButtonArrowAnimated, { ButtonArrowAnimatedRef } from '../buttons/ButtonArrowAnimated'
 import { toast } from 'sonner'
+import ButtonArrowAnimated, { ButtonArrowAnimatedRef } from '../buttons/ButtonArrowAnimated'
 
 type Props = {
   className?: string
 }
+
+const EMAIL_MAX = 254
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function NewsLetter({ className }: Props) {
   const arrowRef = useRef<ButtonArrowAnimatedRef | null>(null)
@@ -231,10 +219,22 @@ function NewsLetter({ className }: Props) {
 
     const form = event.currentTarget
     const formData = new FormData(form)
-    const email = String(formData.get('email') || '').trim()
+    const email = String(formData.get('email') || '')
+      .trim()
+      .slice(0, EMAIL_MAX)
 
     if (!email) {
       toast.error('Email is required.')
+      return
+    }
+
+    if (!emailRegex.test(email)) {
+      toast.error('Please enter a valid email address.')
+      return
+    }
+
+    if (email.length > EMAIL_MAX) {
+      toast.error(`Email must be ${EMAIL_MAX} characters or less.`)
       return
     }
 
@@ -304,7 +304,11 @@ function NewsLetter({ className }: Props) {
           placeholder="Enter Your Email"
           required
           disabled={loading}
+          autoComplete="email"
+          maxLength={EMAIL_MAX}
           className="
+            footer-newsletter-input
+
             relative z-10
             h-full w-full
             border-0 bg-transparent
@@ -399,6 +403,30 @@ function NewsLetter({ className }: Props) {
           }}
         />
       </form>
+
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            .footer-newsletter-input:-webkit-autofill,
+            .footer-newsletter-input:-webkit-autofill:hover,
+            .footer-newsletter-input:-webkit-autofill:focus,
+            .footer-newsletter-input:-webkit-autofill:active {
+              -webkit-text-fill-color: #fffbfc !important;
+              caret-color: #fffbfc !important;
+              background-color: transparent !important;
+              box-shadow: 0 0 0 1000px rgba(0, 108, 103, 0.3) inset !important;
+              -webkit-box-shadow: 0 0 0 1000px rgba(0, 108, 103, 0.3) inset !important;
+              transition: background-color 999999s ease-in-out 0s !important;
+            }
+
+            .footer-newsletter-input:-webkit-autofill::first-line {
+              font-family: var(--font-grift), sans-serif !important;
+              font-weight: 700 !important;
+              color: #fffbfc !important;
+            }
+          `,
+        }}
+      />
     </div>
   )
 }

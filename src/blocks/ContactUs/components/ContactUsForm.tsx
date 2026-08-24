@@ -9,6 +9,7 @@
 // import React, { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
 // import { toast } from 'sonner'
 // import FormHeading from './FormHeading'
+// import DownArrow from 'public/assets/icons/DownArrow.png'
 
 // type Props = {
 //   globalContactData: GlobalContactUs
@@ -45,6 +46,18 @@
 //   return Number.isFinite(numberValue) ? numberValue : null
 // }
 
+// const sanitizeBudgetInputValue = (value: string) => {
+//   return value.replace(/[^\d]/g, '')
+// }
+
+// const formatBudgetInputValue = (value: string) => {
+//   const numberValue = toNumber(value)
+
+//   if (numberValue === null) return ''
+
+//   return formatNumber(numberValue)
+// }
+
 // const clamp = (value: number, min: number, max: number) => {
 //   return Math.min(max, Math.max(min, value))
 // }
@@ -53,23 +66,14 @@
 //   const solutions = globalContactData?.ourSolutions ?? []
 //   const currencies = globalContactData?.currencies ?? []
 
-//   const budgetMinBoundary = toNumber(globalContactData?.budgetRange?.minValue) ?? 0
-//   const budgetMaxBoundary = toNumber(globalContactData?.budgetRange?.maxValue) ?? 1000000
+//   const defaultBudgetMin = toNumber(globalContactData?.budgetRange?.defaultMinValue) ?? 1000
+//   const defaultBudgetMax = toNumber(globalContactData?.budgetRange?.defaultMaxValue) ?? 10000
 
 //   const initialCurrency = currencies?.[0]
 
 //   const getInitialForm = (): FormState => {
-//     const defaultMin = clamp(
-//       toNumber(globalContactData?.budgetRange?.defaultMinValue) ?? budgetMinBoundary,
-//       budgetMinBoundary,
-//       budgetMaxBoundary,
-//     )
-
-//     const defaultMax = clamp(
-//       toNumber(globalContactData?.budgetRange?.defaultMaxValue) ?? budgetMaxBoundary,
-//       defaultMin,
-//       budgetMaxBoundary,
-//     )
+//     const defaultMin = Math.max(0, defaultBudgetMin)
+//     const defaultMax = Math.max(defaultMin, defaultBudgetMax)
 
 //     return {
 //       name: '',
@@ -115,18 +119,8 @@
 //   const typedBudgetMin = toNumber(form.budgetMin)
 //   const typedBudgetMax = toNumber(form.budgetMax)
 
-//   const budgetMin = clamp(typedBudgetMin ?? budgetMinBoundary, budgetMinBoundary, budgetMaxBoundary)
-//   const budgetMax = clamp(typedBudgetMax ?? budgetMaxBoundary, budgetMin, budgetMaxBoundary)
-
-//   const budgetMinPercent =
-//     budgetMaxBoundary === budgetMinBoundary
-//       ? 0
-//       : ((budgetMin - budgetMinBoundary) / (budgetMaxBoundary - budgetMinBoundary)) * 100
-
-//   const budgetMaxPercent =
-//     budgetMaxBoundary === budgetMinBoundary
-//       ? 100
-//       : ((budgetMax - budgetMinBoundary) / (budgetMaxBoundary - budgetMinBoundary)) * 100
+//   const budgetMin = Math.max(0, typedBudgetMin ?? defaultBudgetMin)
+//   const budgetMax = Math.max(budgetMin, typedBudgetMax ?? defaultBudgetMax)
 
 //   const selectedBudgetLabel =
 //     showSelectedBudget &&
@@ -225,7 +219,7 @@
 //   }
 
 //   const normalizeBudgetMin = () => {
-//     const nextMin = clamp(typedBudgetMin ?? budgetMinBoundary, budgetMinBoundary, budgetMaxBoundary)
+//     const nextMin = Math.max(0, typedBudgetMin ?? defaultBudgetMin)
 //     const nextMax = budgetMax < nextMin ? nextMin : budgetMax
 
 //     setForm((prev) => ({
@@ -236,7 +230,7 @@
 //   }
 
 //   const normalizeBudgetMax = () => {
-//     const nextMax = clamp(typedBudgetMax ?? budgetMaxBoundary, budgetMin, budgetMaxBoundary)
+//     const nextMax = Math.max(budgetMin, typedBudgetMax ?? defaultBudgetMax)
 
 //     setForm((prev) => ({
 //       ...prev,
@@ -262,28 +256,6 @@
 //     }
 
 //     event.currentTarget.blur()
-//   }
-
-//   const handleBudgetMinRangeChange = (value: string) => {
-//     const nextMin = clamp(Number(value), budgetMinBoundary, budgetMax)
-
-//     setForm((prev) => ({
-//       ...prev,
-//       budgetMin: String(nextMin),
-//     }))
-
-//     markBudgetSelected()
-//   }
-
-//   const handleBudgetMaxRangeChange = (value: string) => {
-//     const nextMax = clamp(Number(value), budgetMin, budgetMaxBoundary)
-
-//     setForm((prev) => ({
-//       ...prev,
-//       budgetMax: String(nextMax),
-//     }))
-
-//     markBudgetSelected()
 //   }
 
 //   const validateForm = () => {
@@ -393,7 +365,7 @@
 //               onChange={(event) => updateField('name', event.target.value)}
 //               placeholder="NAME"
 //               className="
-//                 w-full border-b border-primary-1/50 bg-transparent
+//                 w-full border-b-2 border-primary-1/50 bg-transparent
 //                 px-3 py-2
 //                 font-grift global-p5 text-secondary-1
 //                 placeholder:text-secondary-1/35
@@ -412,7 +384,7 @@
 //               onChange={(event) => updateField('phone', event.target.value)}
 //               placeholder="PHONE NUMBER"
 //               className="
-//                 w-full border-b border-primary-1/50 bg-transparent
+//                 w-full border-b-2 border-primary-1/50 bg-transparent
 //                 px-3 py-2
 //                 font-grift global-p5 text-secondary-1
 //                 placeholder:text-secondary-1/35
@@ -431,7 +403,7 @@
 //               onChange={(event) => updateField('email', event.target.value)}
 //               placeholder="EMAIL ADDRESS"
 //               className="
-//                 w-full border-b border-primary-1/50 bg-transparent
+//                 w-full border-b-2 border-primary-1/50 bg-transparent
 //                 px-3 py-2
 //                 font-grift global-p5 text-secondary-1
 //                 placeholder:text-secondary-1/35
@@ -564,260 +536,188 @@
 //       <div className="space-y-4">
 //         <FormHeading text="YOUR BUDGET" required />
 
-//         <div className="grid grid-cols-1 gap-6 xl:grid-cols-2 lg:items-end xl:gap-10">
-//           {/* left 50% */}
-//           <div className="grid grid-cols-1 gap-5 md:grid-cols-12 xl:gap-8">
-//             {/* currency */}
-//             <div className="col-span-12 lg:col-span-4">
-//               <label className="font-grift global-p5 text-secondary-1 ">Choose A Currency</label>
-
-//               <div
-//                 ref={currencyDropdownRef}
-//                 className="
-//     relative mt-1
-//     border-b border-primary-1/50
-//     px-3 py-2
-//     focus-within:border-primary-1
-//   "
-//               >
-//                 <button
-//                   type="button"
-//                   onClick={() => setCurrencyDropdownOpen((prev) => !prev)}
-//                   className="
-//       flex w-full items-center
-//       bg-transparent
-//       font-grift global-p5 text-secondary-1
-//       outline-none
+//         <div
+//           className="
+//       flex flex-col gap-6
+//       md:flex-row md:items-end md:gap-10
+//       xl:gap-16
+//       2xl:gap-20
 //     "
-//                 >
-//                   <span className="flex w-[44px] items-center justify-start text-primary-1/70">
-//                     {selectedCurrency?.currencySign || form.selectedCurrencySign}
-//                   </span>
-
-//                   <span className="flex-1 text-left">{form.selectedCurrencyCode}</span>
-
-//                   <span
-//                     className={`
-//         text-primary-1 transition-transform duration-200
-//         ${currencyDropdownOpen ? 'rotate-180' : ''}
-//       `}
-//                   >
-//                     ▾
-//                   </span>
-//                 </button>
-
-//                 {currencyDropdownOpen && (
-//                   <div
-//                     className="
-//         absolute left-0 right-0 top-full z-50 mt-2
-//         overflow-hidden rounded-[8px]
-//         border border-primary-1/25
-//         bg-white-1
-//         shadow-[0_14px_34px_rgba(10,17,40,0.12)]
+//         >
+//           {/* currency */}
+//           <div
+//             className="
+//         w-full
+//         md:w-[180px]
+//         xl:w-[230px]
+//         2xl:w-[260px]
 //       "
-//                   >
-//                     {currencies.map((currency, index) => {
-//                       if (!currency?.currencyCode) return null
+//           >
+//             <label className="whitespace-nowrap font-grift global-p5 text-secondary-1">
+//               Choose A Currency
+//             </label>
 
-//                       const isActive = currency.currencyCode === form.selectedCurrencyCode
+//             <div
+//               ref={currencyDropdownRef}
+//               className="
+//           relative mt-1
+//           border-b-2 border-primary-1/50
+//           px-3 py-2
+//           focus-within:border-primary-1
+//         "
+//             >
+//               <button
+//                 type="button"
+//                 onClick={() => setCurrencyDropdownOpen((prev) => !prev)}
+//                 className="
+//             flex w-full items-center
+//             bg-transparent
+//             font-grift global-p5 text-secondary-1
+//             outline-none
+//           "
+//               >
+//                 <span className="flex w-[44px] items-center justify-start text-primary-1/70">
+//                   {selectedCurrency?.currencySign || form.selectedCurrencySign}
+//                 </span>
 
-//                       return (
-//                         <button
-//                           key={currency?.id ?? index}
-//                           type="button"
-//                           onClick={() => handleCurrencyChange(currency.currencyCode)}
-//                           className={`
-//               flex w-full items-center gap-3
-//               px-4 py-2.5
-//               font-grift global-p5
-//               transition-all duration-200
-//               ${
-//                 isActive
-//                   ? 'bg-primary-1 text-white-1'
-//                   : 'bg-white-1 text-secondary-1 hover:bg-primary-1/10 hover:text-primary-1'
-//               }
+//                 <span className="flex-1 text-left">{form.selectedCurrencyCode}</span>
+
+//                 <Image
+//                   src={DownArrow}
+//                   alt=""
+//                   width={14}
+//                   height={14}
+//                   className={`
+//               h-[12px] w-[12px] object-contain transition-transform duration-200
+//               ${currencyDropdownOpen ? 'rotate-180' : ''}
 //             `}
-//                         >
-//                           <span className="w-5 text-center">{currency.currencySign}</span>
-//                           <span>{currency.currencyCode}</span>
-//                         </button>
-//                       )
-//                     })}
-//                   </div>
-//                 )}
-//               </div>
+//                 />
+//               </button>
 
-//               {errors.selectedCurrencyCode && (
-//                 <p className="mt-1 font-grift text-xs text-red-500">
-//                   {errors.selectedCurrencyCode}
-//                 </p>
+//               {currencyDropdownOpen && (
+//                 <div
+//                   className="
+//               absolute left-0 right-0 top-full z-50 mt-2
+//               overflow-hidden rounded-[8px]
+//               border border-primary-1/25
+//               bg-white-1
+//               shadow-[0_14px_34px_rgba(10,17,40,0.12)]
+//             "
+//                 >
+//                   {currencies.map((currency, index) => {
+//                     if (!currency?.currencyCode) return null
+
+//                     const isActive = currency.currencyCode === form.selectedCurrencyCode
+
+//                     return (
+//                       <button
+//                         key={currency?.id ?? index}
+//                         type="button"
+//                         onClick={() => handleCurrencyChange(currency.currencyCode)}
+//                         className={`
+//                     flex w-full items-center gap-3
+//                     px-4 py-2.5
+//                     font-grift global-p5
+//                     transition-all duration-200
+//                     ${
+//                       isActive
+//                         ? 'bg-primary-1 text-white-1'
+//                         : 'bg-white-1 text-secondary-1 hover:bg-primary-1/10 hover:text-primary-1'
+//                     }
+//                   `}
+//                       >
+//                         <span className="w-5 text-center">{currency.currencySign}</span>
+//                         <span>{currency.currencyCode}</span>
+//                       </button>
+//                     )
+//                   })}
+//                 </div>
 //               )}
 //             </div>
 
-//             {/* manual inputs */}
-//             <div className="col-span-12 lg:col-span-8">
-//               <label className="font-grift global-p5 text-secondary-1 ">Budget Range</label>
+//             {errors.selectedCurrencyCode && (
+//               <p className="mt-1 font-grift text-xs text-red-500">{errors.selectedCurrencyCode}</p>
+//             )}
+//           </div>
 
+//           {/* budget min max */}
+//           <div
+//             className="
+//         w-full
+//         md:w-[360px]
+//         xl:w-[430px]
+//         2xl:w-[480px]
+//       "
+//           >
+//             <label className="font-grift global-p5 text-secondary-1">Budget Range</label>
+
+//             <div className="mt-1 flex items-end gap-4">
 //               <div
-//                 // className="
-//                 //   mt-3 flex h-[38px] items-center gap-2
-//                 //   border-b border-primary-1
-//                 //   font-grift global-p5 text-secondary-1
-//                 // "
 //                 className="
-//                  mt-1 flex items-center gap-2
-//     border-b border-primary-1/50
-//     px-3 py-2
-//     font-grift global-p5 text-secondary-1
-//     focus-within:border-primary-1
-//                 "
+//             flex min-w-0 flex-1 items-center justify-center gap-1
+//             border-b-2 border-primary-1/50
+//             px-3 py-2
+//             font-grift global-p5 text-secondary-1
+//             focus-within:border-primary-1
+//           "
 //               >
 //                 <input
-//                   type="number"
-//                   value={form.budgetMin}
-//                   min={budgetMinBoundary}
-//                   max={budgetMaxBoundary}
-//                   onChange={(event) => handleBudgetMinInputChange(event.target.value)}
+//                   type="text"
+//                   inputMode="numeric"
+//                   value={formatBudgetInputValue(form.budgetMin)}
+//                   onChange={(event) =>
+//                     handleBudgetMinInputChange(sanitizeBudgetInputValue(event.target.value))
+//                   }
 //                   onBlur={normalizeBudgetMin}
 //                   onKeyDown={(event) => handleBudgetInputKeyDown(event, 'min')}
 //                   className="
-//                     contact-budget-number-input
-//                     w-[30%] bg-transparent
-//                     font-grift global-p5 text-secondary-1
-//                     outline-none
-//                      placeholder:text-secondary-1/35
-//                   "
+//               contact-budget-number-input
+//               min-w-0 flex-1 bg-transparent text-center
+//               font-grift global-p5 text-secondary-1
+//               outline-none
+//               placeholder:text-secondary-1/35
+//             "
 //                 />
 
-//                 <span>-</span>
+//                 <span className="shrink-0 text-secondary-1">{form.selectedCurrencyCode}</span>
+//               </div>
 
+//               <span className="pb-2 font-grift global-p5 text-secondary-1">-</span>
+
+//               <div
+//                 className="
+//             flex min-w-0 flex-1 items-center justify-center gap-1
+//             border-b-2 border-primary-1/50
+//             px-3 py-2
+//             font-grift global-p5 text-secondary-1
+//             focus-within:border-primary-1
+//           "
+//               >
 //                 <input
-//                   type="number"
-//                   value={form.budgetMax}
-//                   min={budgetMinBoundary}
-//                   max={budgetMaxBoundary}
-//                   onChange={(event) => handleBudgetMaxInputChange(event.target.value)}
+//                   type="text"
+//                   inputMode="numeric"
+//                   value={formatBudgetInputValue(form.budgetMax)}
+//                   onChange={(event) =>
+//                     handleBudgetMaxInputChange(sanitizeBudgetInputValue(event.target.value))
+//                   }
 //                   onBlur={normalizeBudgetMax}
 //                   onKeyDown={(event) => handleBudgetInputKeyDown(event, 'max')}
 //                   className="
-//                     contact-budget-number-input
-//                     w-[30%] bg-transparent
-//                     font-grift global-p5 text-secondary-1
-//                     outline-none
-//                      placeholder:text-secondary-1/35
-//                   "
+//               contact-budget-number-input
+//               min-w-0 flex-1 bg-transparent text-center
+//               font-grift global-p5 text-secondary-1
+//               outline-none
+//               placeholder:text-secondary-1/35
+//             "
 //                 />
 
-//                 <span>{form.selectedCurrencyCode}</span>
-//               </div>
-
-//               {errors.budget && (
-//                 <p className="mt-1 font-grift text-xs text-red-500">{errors.budget}</p>
-//               )}
-//             </div>
-//           </div>
-
-//           {/* right 50% range selector */}
-//           <div className="relative pt-8 w-[70%] mx-auto md:w-full">
-//             <div className="relative h-[48px]">
-//               <div className="absolute left-0 right-0 top-1/2 h-[4px] -translate-y-1/2 rounded-full bg-primary-2/35" />
-
-//               <div
-//                 className="absolute top-1/2 h-[4px] -translate-y-1/2 rounded-full bg-primary-1"
-//                 style={{
-//                   left: `${budgetMinPercent}%`,
-//                   right: `${100 - budgetMaxPercent}%`,
-//                 }}
-//               />
-
-//               <input
-//                 type="range"
-//                 min={budgetMinBoundary}
-//                 max={budgetMaxBoundary}
-//                 value={budgetMin}
-//                 onChange={(event) => handleBudgetMinRangeChange(event.target.value)}
-//                 className="contact-budget-range-input contact-budget-range-input-min"
-//               />
-
-//               <input
-//                 type="range"
-//                 min={budgetMinBoundary}
-//                 max={budgetMaxBoundary}
-//                 value={budgetMax}
-//                 onChange={(event) => handleBudgetMaxRangeChange(event.target.value)}
-//                 className="contact-budget-range-input contact-budget-range-input-max"
-//               />
-
-//               {/* <div
-//                 className="
-//                   pointer-events-none absolute top-[-22px]
-//                   -translate-x-1/2 rounded-full bg-primary-2/70
-//                   px-3 py-1 font-grift text-[10px] text-primary-1
-//                 "
-//                 style={{
-//                   left: `${budgetMinPercent}%`,
-//                 }}
-//               >
-//                 {formatNumber(budgetMin)} {form.selectedCurrencyCode}
-//               </div>
-
-//               <div
-//                 className="
-//                   pointer-events-none absolute top-[-22px]
-//                   -translate-x-1/2 rounded-full bg-primary-2/70
-//                   px-3 py-1 font-grift text-[10px] text-primary-1
-//                 "
-//                 style={{
-//                   left: `${budgetMaxPercent}%`,
-//                 }}
-//               >
-//                 {formatNumber(budgetMax)} {form.selectedCurrencyCode}
-//               </div> */}
-
-//               <div
-//                 className="
-//     pointer-events-none absolute top-[-22px]
-//     -translate-x-1/2 rounded-full bg-primary-2/70
-//     px-3 py-1 font-grift text-[10px] text-primary-1
-//     whitespace-nowrap min-w-max leading-none
-//   "
-//                 style={{
-//                   left: `${budgetMinPercent}%`,
-//                 }}
-//               >
-//                 {formatNumber(budgetMin)}
-//                 {'\u00A0'}
-//                 {form.selectedCurrencyCode}
-//               </div>
-
-//               <div
-//                 className="
-//     pointer-events-none absolute top-[-22px]
-//     -translate-x-1/2 rounded-full bg-primary-2/70
-//     px-3 py-1 font-grift text-[10px] text-primary-1
-//     whitespace-nowrap min-w-max leading-none
-//   "
-//                 style={{
-//                   left: `${budgetMaxPercent}%`,
-//                 }}
-//               >
-//                 {formatNumber(budgetMax)}
-//                 {'\u00A0'}
-//                 {form.selectedCurrencyCode}
-//               </div>
-//               <div className="absolute left-0 top-[38px] font-grift text-[10px] text-secondary-1/50">
-//                 {formatNumber(budgetMinBoundary)} {form.selectedCurrencyCode}
-//               </div>
-
-//               <div className="absolute left-1/2 top-[38px] -translate-x-1/2 font-grift text-[10px] text-secondary-1/50">
-//                 {formatNumber(Math.round((budgetMinBoundary + budgetMaxBoundary) / 2))}{' '}
-//                 {form.selectedCurrencyCode}
-//               </div>
-
-//               <div className="absolute right-0 top-[38px] font-grift text-[10px] text-secondary-1/50">
-//                 {formatNumber(budgetMaxBoundary)} {form.selectedCurrencyCode}
+//                 <span className="shrink-0 text-secondary-1">{form.selectedCurrencyCode}</span>
 //               </div>
 //             </div>
+
+//             {errors.budget && (
+//               <p className="mt-1 font-grift text-xs text-red-500">{errors.budget}</p>
+//             )}
 //           </div>
 //         </div>
 //       </div>
@@ -870,6 +770,7 @@
 // }
 
 // export default ContactUsForm
+
 'use client'
 
 import ButtonArrowAnimated, {
@@ -878,35 +779,57 @@ import ButtonArrowAnimated, {
 import { GlobalContactUs } from '@/payload-types'
 import Image from 'next/image'
 import CrossIcon from 'public/assets/icons/cross.png'
+import DownArrow from 'public/assets/icons/DownArrow.png'
 import React, { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import FormHeading from './FormHeading'
-import DownArrow from 'public/assets/icons/DownArrow.png'
 
 type Props = {
   globalContactData: GlobalContactUs
+}
+
+type ContactFormLabels = {
+  contactInfoHeading?: string | null
+  descriptionHeading?: string | null
+  servicesHeading?: string | null
+  budgetHeading?: string | null
+}
+
+type GlobalContactUsWithLabels = GlobalContactUs & {
+  formLabels?: ContactFormLabels | null
 }
 
 type FormState = {
   name: string
   phone: string
   email: string
+  city: string
+  description: string
   selectedSolutions: string[]
   selectedCurrencyCode: string
   selectedCurrencySign: string
-  budgetMin: string
-  budgetMax: string
+  budget: string
 }
 
-type FormErrors = Partial<
-  Record<
-    'name' | 'phone' | 'email' | 'selectedSolutions' | 'selectedCurrencyCode' | 'budget',
-    string
-  >
->
+type FormErrors = Partial<Record<'name' | 'phone' | 'email' | 'city', string>>
+
+const NAME_MAX = 120
+const PHONE_MAX = 40
+const EMAIL_MAX = 254
+const CITY_MAX = 120
+const DESCRIPTION_MAX_CHARS = 1000
+const DESCRIPTION_MAX_WORDS = 160
+const BUDGET_MAX_DIGITS = 15
+const BUDGET_MAX_INPUT_LENGTH = 20
+
+const DEFAULT_CONTACT_INFO_HEADING = 'WHO ARE WE REACHING OUT TO?'
+const DEFAULT_DESCRIPTION_HEADING = 'WHATS ON YOUR MIND?'
+const DEFAULT_SERVICES_HEADING = 'WHAT SERVICES MATCH YOUR PROJECT?'
+const DEFAULT_BUDGET_HEADING = 'WHAT’S YOUR COMFORTABLE BUDGET?'
 
 const formatNumber = (value: number) => {
   if (!Number.isFinite(value)) return '0'
+
   return new Intl.NumberFormat('en-US').format(value)
 }
 
@@ -918,8 +841,49 @@ const toNumber = (value: string | number | null | undefined) => {
   return Number.isFinite(numberValue) ? numberValue : null
 }
 
+const countWords = (value: string) => {
+  const words = value.trim().match(/\S+/g)
+
+  return words ? words.length : 0
+}
+
+const limitDescriptionInputValue = (value: string) => {
+  const charLimitedValue = value.slice(0, DESCRIPTION_MAX_CHARS)
+  const wordMatches = Array.from(charLimitedValue.matchAll(/\S+/g))
+
+  if (wordMatches.length <= DESCRIPTION_MAX_WORDS) return charLimitedValue
+
+  const lastAllowedWord = wordMatches[DESCRIPTION_MAX_WORDS - 1]
+  const endIndex = (lastAllowedWord.index ?? 0) + lastAllowedWord[0].length
+
+  return charLimitedValue.slice(0, endIndex)
+}
+
+const sanitizePhoneInputValue = (value: string) => {
+  return value
+    .replace(/[^\d+\-\s()]/g, '')
+    .replace(/(?!^)\+/g, '')
+    .slice(0, PHONE_MAX)
+}
+
+const isValidPhoneNumber = (value: string) => {
+  const trimmedValue = value.trim()
+
+  if (!trimmedValue) return false
+
+  const plusCount = trimmedValue.match(/\+/g)?.length ?? 0
+
+  if (plusCount > 1) return false
+  if (trimmedValue.includes('+') && !trimmedValue.startsWith('+')) return false
+  if (!/^\+?[0-9\s()-]+$/.test(trimmedValue)) return false
+
+  const digitsOnly = trimmedValue.replace(/\D/g, '')
+
+  return digitsOnly.length >= 7 && digitsOnly.length <= 15
+}
+
 const sanitizeBudgetInputValue = (value: string) => {
-  return value.replace(/[^\d]/g, '')
+  return value.replace(/[^\d]/g, '').slice(0, BUDGET_MAX_DIGITS)
 }
 
 const formatBudgetInputValue = (value: string) => {
@@ -930,39 +894,40 @@ const formatBudgetInputValue = (value: string) => {
   return formatNumber(numberValue)
 }
 
-const clamp = (value: number, min: number, max: number) => {
-  return Math.min(max, Math.max(min, value))
-}
-
 function ContactUsForm({ globalContactData }: Props) {
+  const typedGlobalContactData = globalContactData as GlobalContactUsWithLabels
+
   const solutions = globalContactData?.ourSolutions ?? []
   const currencies = globalContactData?.currencies ?? []
-
-  const defaultBudgetMin = toNumber(globalContactData?.budgetRange?.defaultMinValue) ?? 1000
-  const defaultBudgetMax = toNumber(globalContactData?.budgetRange?.defaultMaxValue) ?? 10000
-
   const initialCurrency = currencies?.[0]
 
-  const getInitialForm = (): FormState => {
-    const defaultMin = Math.max(0, defaultBudgetMin)
-    const defaultMax = Math.max(defaultMin, defaultBudgetMax)
+  const formLabels = typedGlobalContactData?.formLabels
 
+  const contactInfoHeading = formLabels?.contactInfoHeading?.trim() || DEFAULT_CONTACT_INFO_HEADING
+
+  const descriptionHeading = formLabels?.descriptionHeading?.trim() || DEFAULT_DESCRIPTION_HEADING
+
+  const servicesHeading = formLabels?.servicesHeading?.trim() || DEFAULT_SERVICES_HEADING
+
+  const budgetHeading = formLabels?.budgetHeading?.trim() || DEFAULT_BUDGET_HEADING
+
+  const getInitialForm = (): FormState => {
     return {
       name: '',
       phone: '',
       email: '',
+      city: '',
+      description: '',
       selectedSolutions: [],
       selectedCurrencyCode: initialCurrency?.currencyCode || '',
       selectedCurrencySign: initialCurrency?.currencySign || '',
-      budgetMin: String(defaultMin),
-      budgetMax: String(defaultMax),
+      budget: '',
     }
   }
 
   const [form, setForm] = useState<FormState>(() => getInitialForm())
   const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showSelectedBudget, setShowSelectedBudget] = useState(true)
   const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false)
 
   const submitArrowRef = useRef<ButtonArrowAnimatedRef | null>(null)
@@ -988,25 +953,42 @@ function ContactUsForm({ globalContactData }: Props) {
     return currencies.find((currency) => currency?.currencyCode === form.selectedCurrencyCode)
   }, [currencies, form.selectedCurrencyCode])
 
-  const typedBudgetMin = toNumber(form.budgetMin)
-  const typedBudgetMax = toNumber(form.budgetMax)
-
-  const budgetMin = Math.max(0, typedBudgetMin ?? defaultBudgetMin)
-  const budgetMax = Math.max(budgetMin, typedBudgetMax ?? defaultBudgetMax)
+  const budgetNumber = toNumber(form.budget)
+  const descriptionWordCount = countWords(form.description)
+  const remainingDescriptionWords = Math.max(DESCRIPTION_MAX_WORDS - descriptionWordCount, 0)
 
   const selectedBudgetLabel =
-    showSelectedBudget &&
-    form.selectedCurrencyCode &&
-    form.budgetMin !== '' &&
-    form.budgetMax !== ''
-      ? `${formatNumber(budgetMin)} - ${formatNumber(budgetMax)} ${form.selectedCurrencyCode}`
+    form.budget !== '' && budgetNumber !== null
+      ? `${formatNumber(Math.max(0, budgetNumber))} ${form.selectedCurrencyCode}`
       : ''
 
-  const updateField = (field: 'name' | 'phone' | 'email', value: string) => {
+  const hasSelectedItems = form.selectedSolutions.length > 0 || selectedBudgetLabel
+
+  const getLimitedFieldValue = (
+    field: 'name' | 'phone' | 'email' | 'city' | 'description',
+    value: string,
+  ) => {
+    if (field === 'name') return value.slice(0, NAME_MAX)
+    if (field === 'phone') return value.slice(0, PHONE_MAX)
+    if (field === 'email') return value.slice(0, EMAIL_MAX)
+    if (field === 'city') return value.slice(0, CITY_MAX)
+    if (field === 'description') return limitDescriptionInputValue(value)
+
+    return value
+  }
+
+  const updateField = (
+    field: 'name' | 'phone' | 'email' | 'city' | 'description',
+    value: string,
+  ) => {
+    const limitedValue = getLimitedFieldValue(field, value)
+
     setForm((prev) => ({
       ...prev,
-      [field]: value,
+      [field]: limitedValue,
     }))
+
+    if (field === 'description') return
 
     setErrors((prev) => ({
       ...prev,
@@ -1025,11 +1007,6 @@ function ContactUsForm({ globalContactData }: Props) {
           : [...prev.selectedSolutions, value],
       }
     })
-
-    setErrors((prev) => ({
-      ...prev,
-      selectedSolutions: '',
-    }))
   }
 
   const removeSolution = (value: string) => {
@@ -1040,22 +1017,9 @@ function ContactUsForm({ globalContactData }: Props) {
   }
 
   const removeBudget = () => {
-    setShowSelectedBudget(false)
-
-    setErrors((prev) => ({
+    setForm((prev) => ({
       ...prev,
       budget: '',
-      selectedCurrencyCode: '',
-    }))
-  }
-
-  const markBudgetSelected = () => {
-    setShowSelectedBudget(true)
-
-    setErrors((prev) => ({
-      ...prev,
-      budget: '',
-      selectedCurrencyCode: '',
     }))
   }
 
@@ -1068,65 +1032,34 @@ function ContactUsForm({ globalContactData }: Props) {
       selectedCurrencySign: currency?.currencySign || '',
     }))
 
-    markBudgetSelected()
     setCurrencyDropdownOpen(false)
   }
 
-  const handleBudgetMinInputChange = (value: string) => {
+  const handleBudgetInputChange = (value: string) => {
     setForm((prev) => ({
       ...prev,
-      budgetMin: value,
-    }))
-
-    markBudgetSelected()
-  }
-
-  const handleBudgetMaxInputChange = (value: string) => {
-    setForm((prev) => ({
-      ...prev,
-      budgetMax: value,
-    }))
-
-    markBudgetSelected()
-  }
-
-  const normalizeBudgetMin = () => {
-    const nextMin = Math.max(0, typedBudgetMin ?? defaultBudgetMin)
-    const nextMax = budgetMax < nextMin ? nextMin : budgetMax
-
-    setForm((prev) => ({
-      ...prev,
-      budgetMin: String(nextMin),
-      budgetMax: String(nextMax),
+      budget: sanitizeBudgetInputValue(value),
     }))
   }
 
-  const normalizeBudgetMax = () => {
-    const nextMax = Math.max(budgetMin, typedBudgetMax ?? defaultBudgetMax)
+  const normalizeBudget = () => {
+    if (form.budget === '') return
+
+    const nextBudget = Math.max(0, budgetNumber ?? 0)
 
     setForm((prev) => ({
       ...prev,
-      budgetMax: String(nextMax),
+      budget: String(nextBudget).slice(0, BUDGET_MAX_DIGITS),
     }))
   }
 
-  const handleBudgetInputKeyDown = (
-    event: React.KeyboardEvent<HTMLInputElement>,
-    field: 'min' | 'max',
-  ) => {
+  const handleBudgetInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key !== 'Enter') return
 
     event.preventDefault()
     event.stopPropagation()
 
-    if (field === 'min') {
-      normalizeBudgetMin()
-    }
-
-    if (field === 'max') {
-      normalizeBudgetMax()
-    }
-
+    normalizeBudget()
     event.currentTarget.blur()
   }
 
@@ -1139,6 +1072,8 @@ function ContactUsForm({ globalContactData }: Props) {
 
     if (!form.phone.trim()) {
       nextErrors.phone = 'Phone number is required'
+    } else if (!isValidPhoneNumber(form.phone)) {
+      nextErrors.phone = 'Please enter a valid phone number'
     }
 
     if (!form.email.trim()) {
@@ -1147,22 +1082,8 @@ function ContactUsForm({ globalContactData }: Props) {
       nextErrors.email = 'Please enter a valid email address'
     }
 
-    if (form.selectedSolutions.length === 0) {
-      nextErrors.selectedSolutions = 'Please select at least one solution'
-    }
-
-    if (!form.selectedCurrencyCode) {
-      nextErrors.selectedCurrencyCode = 'Please select a currency'
-    }
-
-    if (!showSelectedBudget || form.budgetMin === '' || form.budgetMax === '') {
-      nextErrors.budget = 'Please enter your budget range'
-    } else if (
-      !Number.isFinite(budgetMin) ||
-      !Number.isFinite(budgetMax) ||
-      budgetMin > budgetMax
-    ) {
-      nextErrors.budget = 'Please enter a valid budget range'
+    if (!form.city.trim()) {
+      nextErrors.city = 'City is required'
     }
 
     setErrors(nextErrors)
@@ -1175,6 +1096,12 @@ function ContactUsForm({ globalContactData }: Props) {
 
     if (!validateForm()) return
 
+    const submittedBudget = budgetNumber !== null ? Math.max(0, budgetNumber) : null
+    const submittedBudgetLabel =
+      submittedBudget !== null
+        ? `${formatNumber(submittedBudget)} ${form.selectedCurrencyCode}`
+        : ''
+
     try {
       setIsSubmitting(true)
 
@@ -1184,14 +1111,20 @@ function ContactUsForm({ globalContactData }: Props) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: form.name,
-          phone: form.phone,
-          email: form.email,
+          name: form.name.trim(),
+          phone: form.phone.trim(),
+          email: form.email.trim(),
+          city: form.city.trim(),
+          description: form.description.trim(),
           selectedSolutions: form.selectedSolutions,
-          selectedCurrencyCode: form.selectedCurrencyCode,
-          selectedCurrencySign: form.selectedCurrencySign,
-          budgetMin,
-          budgetMax,
+          selectedCurrencyCode: submittedBudget !== null ? form.selectedCurrencyCode : '',
+          selectedCurrencySign: submittedBudget !== null ? form.selectedCurrencySign : '',
+          budget: submittedBudget,
+          selectedBudgetLabel: submittedBudgetLabel,
+
+          // Compatibility only. Remove these after updating /api/contact-form.
+          budgetMin: submittedBudget,
+          budgetMax: submittedBudget,
         }),
       })
 
@@ -1210,7 +1143,6 @@ function ContactUsForm({ globalContactData }: Props) {
       })
 
       setForm(getInitialForm())
-      setShowSelectedBudget(true)
       setErrors({})
     } catch (error) {
       console.error(error)
@@ -1227,13 +1159,14 @@ function ContactUsForm({ globalContactData }: Props) {
     <form onSubmit={handleSubmit} className="w-full space-y-8 lg:space-y-10">
       {/* contact info */}
       <div className="space-y-4 lg:space-y-5">
-        <FormHeading text="CONTACT INFO" required />
+        <FormHeading text={contactInfoHeading} required />
 
-        <div className="space-y-3 lg:space-y-4">
+        <div className="grid grid-cols-1 gap-x-4 gap-y-3 md:grid-cols-2 lg:gap-y-4">
           <div>
             <input
               type="text"
               value={form.name}
+              maxLength={NAME_MAX}
               onChange={(event) => updateField('name', event.target.value)}
               placeholder="NAME"
               className="
@@ -1251,9 +1184,12 @@ function ContactUsForm({ globalContactData }: Props) {
 
           <div>
             <input
-              type="number"
+              type="tel"
               value={form.phone}
-              onChange={(event) => updateField('phone', event.target.value)}
+              maxLength={PHONE_MAX}
+              onChange={(event) =>
+                updateField('phone', sanitizePhoneInputValue(event.target.value))
+              }
               placeholder="PHONE NUMBER"
               className="
                 w-full border-b-2 border-primary-1/50 bg-transparent
@@ -1270,8 +1206,9 @@ function ContactUsForm({ globalContactData }: Props) {
 
           <div>
             <input
-              type="text"
+              type="email"
               value={form.email}
+              maxLength={EMAIL_MAX}
               onChange={(event) => updateField('email', event.target.value)}
               placeholder="EMAIL ADDRESS"
               className="
@@ -1287,90 +1224,143 @@ function ContactUsForm({ globalContactData }: Props) {
             {errors.email && <p className="mt-1 font-grift text-xs text-red-500">{errors.email}</p>}
           </div>
 
-          {(form.selectedSolutions.length > 0 || selectedBudgetLabel) && (
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2">
-              {form.selectedSolutions.map((solution) => (
-                <button
-                  key={solution}
-                  type="button"
-                  onClick={() => removeSolution(solution)}
-                  className="
-                    inline-flex h-fit items-center gap-2
-                    font-grift global-p5 leading-none text-primary-1
-                  "
-                >
-                  <span
-                    className="
-                      inline-flex items-center justify-center
-                      size-[14px] lg:size-[16px] xl:size-[18px]
-                      rounded-[3px]
-                      bg-primary-1
-                      shrink-0
-                      translate-y-[-1px]
-                    "
-                  >
-                    <Image
-                      src={CrossIcon}
-                      alt=""
-                      width={8}
-                      height={8}
-                      quality={90}
-                      placeholder="blur"
-                      blurDataURL={CrossIcon.blurDataURL}
-                      className="block w-[7px] h-auto lg:w-[8px] xl:w-[9px]"
-                    />
-                  </span>
+          <div>
+            <input
+              type="text"
+              value={form.city}
+              maxLength={CITY_MAX}
+              onChange={(event) => updateField('city', event.target.value)}
+              placeholder="CITY"
+              className="
+                w-full border-b-2 border-primary-1/50 bg-transparent
+                px-3 py-2
+                font-grift global-p5 text-secondary-1
+                placeholder:text-secondary-1/35
+                outline-none
+                focus:border-primary-1
+              "
+            />
 
-                  <span className="block leading-none">{solution}</span>
-                </button>
-              ))}
-
-              {selectedBudgetLabel && (
-                <button
-                  type="button"
-                  onClick={removeBudget}
-                  className="
-                    inline-flex h-fit items-center gap-2
-                    font-grift global-p5 leading-none text-primary-1
-                  "
-                >
-                  <span
-                    className="
-                      inline-flex items-center justify-center
-                      size-[14px] lg:size-[16px] xl:size-[18px]
-                      rounded-[3px]
-                      bg-primary-1
-                      shrink-0
-                      translate-y-[-1px]
-                    "
-                  >
-                    <Image
-                      src={CrossIcon}
-                      alt=""
-                      width={8}
-                      height={8}
-                      quality={90}
-                      placeholder="blur"
-                      blurDataURL={CrossIcon.blurDataURL}
-                      className="block w-[7px] h-auto lg:w-[8px] xl:w-[9px]"
-                    />
-                  </span>
-
-                  <span className="block leading-none">{selectedBudgetLabel}</span>
-                </button>
-              )}
-            </div>
-          )}
+            {errors.city && <p className="mt-1 font-grift text-xs text-red-500">{errors.city}</p>}
+          </div>
         </div>
+      </div>
+
+      {/* description */}
+      <div className="space-y-4">
+        <FormHeading text={descriptionHeading} />
+
+        <div>
+          <textarea
+            value={form.description}
+            maxLength={DESCRIPTION_MAX_CHARS}
+            onChange={(event) => updateField('description', event.target.value)}
+            placeholder="DESCRIPTION"
+            rows={4}
+            className="
+              min-h-[96px] w-full resize-none border-b-2 border-primary-1/50 bg-transparent
+              px-3 py-2
+              font-grift global-p5 text-secondary-1
+              placeholder:text-secondary-1/35
+              outline-none
+              focus:border-primary-1
+            "
+          />
+
+          <p
+            className={`
+              mt-1 text-right font-grift text-xs
+              ${remainingDescriptionWords <= 0 ? 'text-red-500' : 'text-secondary-1/45'}
+            `}
+          >
+            {remainingDescriptionWords} words remaining
+          </p>
+        </div>
+
+        {hasSelectedItems && (
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1">
+            {form.selectedSolutions.map((solution) => (
+              <button
+                key={solution}
+                type="button"
+                onClick={() => removeSolution(solution)}
+                className="
+                  inline-flex h-fit items-center gap-2
+                  font-grift global-p5 leading-none text-primary-1
+                "
+              >
+                <span
+                  className="
+                    inline-flex shrink-0 items-center justify-center
+                    size-[14px] rounded-[3px]
+                    bg-primary-1
+                    translate-y-[-1px]
+                    lg:size-[16px]
+                    xl:size-[18px]
+                  "
+                >
+                  <Image
+                    src={CrossIcon}
+                    alt=""
+                    width={8}
+                    height={8}
+                    quality={90}
+                    placeholder="blur"
+                    blurDataURL={CrossIcon.blurDataURL}
+                    className="block h-auto w-[7px] lg:w-[8px] xl:w-[9px]"
+                  />
+                </span>
+
+                <span className="block leading-none">{solution}</span>
+              </button>
+            ))}
+
+            {selectedBudgetLabel && (
+              <button
+                type="button"
+                onClick={removeBudget}
+                className="
+                  inline-flex h-fit items-center gap-2
+                  font-grift global-p5 leading-none text-primary-1
+                "
+              >
+                <span
+                  className="
+                    inline-flex shrink-0 items-center justify-center
+                    size-[14px] rounded-[3px]
+                    bg-primary-1
+                    translate-y-[-1px]
+                    lg:size-[16px]
+                    xl:size-[18px]
+                  "
+                >
+                  <Image
+                    src={CrossIcon}
+                    alt=""
+                    width={8}
+                    height={8}
+                    quality={90}
+                    placeholder="blur"
+                    blurDataURL={CrossIcon.blurDataURL}
+                    className="block h-auto w-[7px] lg:w-[8px] xl:w-[9px]"
+                  />
+                </span>
+
+                <span className="block leading-none">{selectedBudgetLabel}</span>
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       {/* solutions */}
       <div className="space-y-4">
-        <FormHeading text="YOU ARE INTERESTED IN" required />
+        <FormHeading text={servicesHeading} />
 
         <div className="flex flex-wrap gap-1.5 lg:gap-2">
           {solutions.map((solution, index) => {
             const text = solution?.text
+
             if (!text) return null
 
             const isSelected = form.selectedSolutions.includes(text)
@@ -1381,11 +1371,12 @@ function ContactUsForm({ globalContactData }: Props) {
                 type="button"
                 onClick={() => toggleSolution(text)}
                 className={`
-                  font-grift global-p5 border border-primary-1
-                  px-3 lg:px-4 xl:px-5
-                  py-1.5 lg:py-2
-                  rounded-full
+                  rounded-full border border-primary-1
+                  px-3 py-1.5
+                  font-grift global-p5
                   transition-all duration-200 ease-in
+                  lg:px-4 lg:py-2
+                  xl:px-5
                   ${
                     isSelected
                       ? 'bg-primary-1 text-white-1'
@@ -1398,32 +1389,28 @@ function ContactUsForm({ globalContactData }: Props) {
             )
           })}
         </div>
-
-        {errors.selectedSolutions && (
-          <p className="font-grift text-xs text-red-500">{errors.selectedSolutions}</p>
-        )}
       </div>
 
       {/* budget */}
       <div className="space-y-4">
-        <FormHeading text="YOUR BUDGET" required />
+        <FormHeading text={budgetHeading} />
 
         <div
           className="
-      flex flex-col gap-6
-      md:flex-row md:items-end md:gap-10
-      xl:gap-16
-      2xl:gap-20
-    "
+            flex flex-col gap-6
+            md:flex-row md:items-end md:gap-10
+            xl:gap-16
+            2xl:gap-20
+          "
         >
           {/* currency */}
           <div
             className="
-        w-full
-        md:w-[180px]
-        xl:w-[230px]
-        2xl:w-[260px]
-      "
+              w-full
+              md:w-[180px]
+              xl:w-[230px]
+              2xl:w-[260px]
+            "
           >
             <label className="whitespace-nowrap font-grift global-p5 text-secondary-1">
               Choose A Currency
@@ -1432,21 +1419,21 @@ function ContactUsForm({ globalContactData }: Props) {
             <div
               ref={currencyDropdownRef}
               className="
-          relative mt-1
-          border-b-2 border-primary-1/50
-          px-3 py-2
-          focus-within:border-primary-1
-        "
+                relative mt-1
+                border-b-2 border-primary-1/50
+                px-3 py-2
+                focus-within:border-primary-1
+              "
             >
               <button
                 type="button"
                 onClick={() => setCurrencyDropdownOpen((prev) => !prev)}
                 className="
-            flex w-full items-center
-            bg-transparent
-            font-grift global-p5 text-secondary-1
-            outline-none
-          "
+                  flex w-full items-center
+                  bg-transparent
+                  font-grift global-p5 text-secondary-1
+                  outline-none
+                "
               >
                 <span className="flex w-[44px] items-center justify-start text-primary-1/70">
                   {selectedCurrency?.currencySign || form.selectedCurrencySign}
@@ -1460,21 +1447,21 @@ function ContactUsForm({ globalContactData }: Props) {
                   width={14}
                   height={14}
                   className={`
-              h-[12px] w-[12px] object-contain transition-transform duration-200
-              ${currencyDropdownOpen ? 'rotate-180' : ''}
-            `}
+                    h-[12px] w-[12px] object-contain transition-transform duration-200
+                    ${currencyDropdownOpen ? 'rotate-180' : ''}
+                  `}
                 />
               </button>
 
               {currencyDropdownOpen && (
                 <div
                   className="
-              absolute left-0 right-0 top-full z-50 mt-2
-              overflow-hidden rounded-[8px]
-              border border-primary-1/25
-              bg-white-1
-              shadow-[0_14px_34px_rgba(10,17,40,0.12)]
-            "
+                    absolute left-0 right-0 top-full z-50 mt-2
+                    overflow-hidden rounded-[8px]
+                    border border-primary-1/25
+                    bg-white-1
+                    shadow-[0_14px_34px_rgba(10,17,40,0.12)]
+                  "
                 >
                   {currencies.map((currency, index) => {
                     if (!currency?.currencyCode) return null
@@ -1487,16 +1474,16 @@ function ContactUsForm({ globalContactData }: Props) {
                         type="button"
                         onClick={() => handleCurrencyChange(currency.currencyCode)}
                         className={`
-                    flex w-full items-center gap-3
-                    px-4 py-2.5
-                    font-grift global-p5
-                    transition-all duration-200
-                    ${
-                      isActive
-                        ? 'bg-primary-1 text-white-1'
-                        : 'bg-white-1 text-secondary-1 hover:bg-primary-1/10 hover:text-primary-1'
-                    }
-                  `}
+                          flex w-full items-center gap-3
+                          px-4 py-2.5
+                          font-grift global-p5
+                          transition-all duration-200
+                          ${
+                            isActive
+                              ? 'bg-primary-1 text-white-1'
+                              : 'bg-white-1 text-secondary-1 hover:bg-primary-1/10 hover:text-primary-1'
+                          }
+                        `}
                       >
                         <span className="w-5 text-center">{currency.currencySign}</span>
                         <span>{currency.currencyCode}</span>
@@ -1506,121 +1493,83 @@ function ContactUsForm({ globalContactData }: Props) {
                 </div>
               )}
             </div>
-
-            {errors.selectedCurrencyCode && (
-              <p className="mt-1 font-grift text-xs text-red-500">{errors.selectedCurrencyCode}</p>
-            )}
           </div>
 
-          {/* budget min max */}
+          {/* single budget */}
           <div
             className="
-        w-full
-        md:w-[360px]
-        xl:w-[430px]
-        2xl:w-[480px]
-      "
+              w-full
+              md:w-[220px]
+              xl:w-[260px]
+              2xl:w-[300px]
+            "
           >
-            <label className="font-grift global-p5 text-secondary-1">Budget Range</label>
+            <label className="font-grift global-p5 text-secondary-1">Budget</label>
 
-            <div className="mt-1 flex items-end gap-4">
-              <div
+            <div
+              className="
+                mt-1 flex min-w-0 items-center justify-center gap-1
+                border-b-2 border-primary-1/50
+                px-3 py-2
+                font-grift global-p5 text-secondary-1
+                focus-within:border-primary-1
+              "
+            >
+              <input
+                type="text"
+                inputMode="numeric"
+                value={formatBudgetInputValue(form.budget)}
+                maxLength={BUDGET_MAX_INPUT_LENGTH}
+                onChange={(event) =>
+                  handleBudgetInputChange(sanitizeBudgetInputValue(event.target.value))
+                }
+                onBlur={normalizeBudget}
+                onKeyDown={handleBudgetInputKeyDown}
+                placeholder="10,000"
                 className="
-            flex min-w-0 flex-1 items-center justify-center gap-1
-            border-b-2 border-primary-1/50
-            px-3 py-2
-            font-grift global-p5 text-secondary-1
-            focus-within:border-primary-1
-          "
-              >
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  value={formatBudgetInputValue(form.budgetMin)}
-                  onChange={(event) =>
-                    handleBudgetMinInputChange(sanitizeBudgetInputValue(event.target.value))
-                  }
-                  onBlur={normalizeBudgetMin}
-                  onKeyDown={(event) => handleBudgetInputKeyDown(event, 'min')}
-                  className="
-              contact-budget-number-input
-              min-w-0 flex-1 bg-transparent text-center
-              font-grift global-p5 text-secondary-1
-              outline-none
-              placeholder:text-secondary-1/35
-            "
-                />
+                  contact-budget-number-input
+                  min-w-0 flex-1 bg-transparent
+                  font-grift global-p5 text-secondary-1
+                  outline-none
+                  placeholder:text-secondary-1/35
+                "
+              />
 
+              {form.selectedCurrencyCode && (
                 <span className="shrink-0 text-secondary-1">{form.selectedCurrencyCode}</span>
-              </div>
-
-              <span className="pb-2 font-grift global-p5 text-secondary-1">-</span>
-
-              <div
-                className="
-            flex min-w-0 flex-1 items-center justify-center gap-1
-            border-b-2 border-primary-1/50
-            px-3 py-2
-            font-grift global-p5 text-secondary-1
-            focus-within:border-primary-1
-          "
-              >
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  value={formatBudgetInputValue(form.budgetMax)}
-                  onChange={(event) =>
-                    handleBudgetMaxInputChange(sanitizeBudgetInputValue(event.target.value))
-                  }
-                  onBlur={normalizeBudgetMax}
-                  onKeyDown={(event) => handleBudgetInputKeyDown(event, 'max')}
-                  className="
-              contact-budget-number-input
-              min-w-0 flex-1 bg-transparent text-center
-              font-grift global-p5 text-secondary-1
-              outline-none
-              placeholder:text-secondary-1/35
-            "
-                />
-
-                <span className="shrink-0 text-secondary-1">{form.selectedCurrencyCode}</span>
-              </div>
+              )}
             </div>
-
-            {errors.budget && (
-              <p className="mt-1 font-grift text-xs text-red-500">{errors.budget}</p>
-            )}
           </div>
         </div>
       </div>
 
       {/* submit */}
-      <div className="mx-auto flex justify-center lg:justify-start items-center">
+      <div className="mx-auto flex items-center justify-center lg:justify-start">
         <button
           type="submit"
           disabled={isSubmitting}
           onMouseEnter={() => submitArrowRef.current?.enter()}
           onMouseLeave={() => submitArrowRef.current?.leave()}
           className="
-          inline-flex items-center justify-center gap-2
-          rounded-[8px] bg-primary-1 
-          px-5 py-3
-          font-grift global-p5 font-semibold text-white-1
-          hover:bg-primary-1/90
-          transition-all duration-200 ease-in
-          disabled:cursor-not-allowed disabled:opacity-70
-        "
+            inline-flex items-center justify-center gap-2
+            rounded-[8px] bg-primary-1
+            px-5 py-3
+            font-grift global-p5 font-semibold text-white-1
+            transition-all duration-200 ease-in
+            hover:bg-primary-1/90
+            disabled:cursor-not-allowed disabled:opacity-70
+          "
         >
           {isSubmitting ? (
             <>
               <span
                 className="
-                size-[15px]
-                animate-spin
-                rounded-full
-                border-2 border-white-1/40
-                border-t-white-1
-              "
+                  size-[15px]
+                  animate-spin
+                  rounded-full
+                  border-2 border-white-1/40
+                  border-t-white-1
+                "
               />
               <span>Submitting...</span>
             </>
