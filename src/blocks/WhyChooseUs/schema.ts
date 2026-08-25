@@ -10,10 +10,22 @@ import {
 import { BgColorAndSectionIdField } from '@/utils/block/fields/BgColorAndSectionIdField'
 import { SectionHeadingFields } from '@/utils/block/fields/SectionHeading'
 import { validateShortText } from '@/utils/block/fields-validation'
+import { generateArrayImageFields } from '@/utils/media/fieldGenerators'
 
 const TAG_MAX = 40
 const HEADING_MAX = 90
 const CRITERIA_TEXT_MAX = 90
+
+const criteriaIconFields = generateArrayImageFields({
+  required: true,
+  fieldName: 'icon',
+  label: 'Criteria Icon',
+  description: 'Upload the icon for this criteria item. Recommended square ratio 1:1.',
+  aspectRatio: 1,
+  quality: 0.9,
+  maxKB: 200,
+  ownerCollection: WHY_CHOOSE_US_SLUG_AND_TAG as any,
+} as any)
 
 const WhyChooseUsSchema: Block = {
   slug: WHY_CHOOSE_US_SLUG_AND_TAG,
@@ -82,6 +94,8 @@ const WhyChooseUsSchema: Block = {
             description: 'Add criteria items like Custom Design, Fast Loading Performance, etc.',
           },
           fields: [
+            ...criteriaIconFields,
+
             {
               name: 'text',
               type: 'text',

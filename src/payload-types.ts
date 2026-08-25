@@ -2979,6 +2979,14 @@ export interface Page {
           criteria?:
             | {
                 /**
+                 * Upload the icon for this criteria item. Recommended square ratio 1:1.
+                 */
+                icon: string | Media;
+                iconOriginal?: (string | null) | Media;
+                pendingIconOriginal?: string | null;
+                pendingIconCrop?: string | null;
+                iconBlurDataURL?: string | null;
+                /**
                  * Example: Custom Design – No Generic Templates. Max 90 characters.
                  */
                 text: string;
@@ -5244,6 +5252,11 @@ export interface PagesSelect<T extends boolean = true> {
                     criteria?:
                       | T
                       | {
+                          icon?: T;
+                          iconOriginal?: T;
+                          pendingIconOriginal?: T;
+                          pendingIconCrop?: T;
+                          iconBlurDataURL?: T;
                           text?: T;
                           id?: T;
                         };
