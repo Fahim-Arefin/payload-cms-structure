@@ -20,7 +20,7 @@ function FeaturedArticlesSection({ block, FeturedArticles }: Props) {
       "
     >
       <SectionHeading01 data={block?.sectionHeading} align="middle" />
-      <FeaturedArticleCarousal feturedArticles={FeturedArticles} block={block} />
+      <FeaturedArticleCarousal featuredArticle={FeturedArticles} block={block} />
     </div>
   )
 }

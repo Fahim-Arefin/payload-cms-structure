@@ -31,6 +31,8 @@
 
 // const ALL_TAGS_VALUE = 'all-tags'
 // const ITEMS_PER_PAGE = 4
+// const NEWS_CARD_ANCHOR_PREFIX = 'newscardp'
+// const NEWS_SCROLL_OFFSET = 130
 
 // const eventStatusOptions: SelectOption[] = [
 //   {
@@ -46,6 +48,22 @@
 //     value: 'past-events',
 //   },
 // ]
+
+// function getNewsCardAnchorId(page: number) {
+//   return `${NEWS_CARD_ANCHOR_PREFIX}${page}`
+// }
+
+// function removeNewsCardHashFromUrl() {
+//   if (typeof window === 'undefined') return
+
+//   const currentHash = window.location.hash.replace('#', '')
+
+//   if (!currentHash.startsWith(NEWS_CARD_ANCHOR_PREFIX)) return
+
+//   const baseUrl = `${window.location.pathname}${window.location.search}`
+
+//   window.history.replaceState(null, '', baseUrl)
+// }
 
 // function getNewsTagKeys(newsItem: NewsItem) {
 //   const itemAny = newsItem as any
@@ -83,6 +101,43 @@
 //   }
 
 //   return [1, 'ellipsis', currentPage, 'ellipsis-end', totalPages]
+// }
+
+// function scrollToNewsPageAnchor(page: number) {
+//   if (typeof window === 'undefined') return
+
+//   const anchorId = getNewsCardAnchorId(page)
+//   const target = document.getElementById(anchorId)
+
+//   if (!target) return
+
+//   const baseUrl = `${window.location.pathname}${window.location.search}`
+//   const nextUrl = `${baseUrl}#${anchorId}`
+
+//   window.history.pushState(null, '', nextUrl)
+
+//   const lenis = (window as any)?.lenis
+
+//   if (lenis?.scrollTo) {
+//     lenis.scrollTo(target, {
+//       offset: -NEWS_SCROLL_OFFSET,
+//       duration: 0.7,
+//       force: true,
+//     })
+
+//     return
+//   }
+
+//   const targetY = Math.max(
+//     0,
+//     target.getBoundingClientRect().top + window.scrollY - NEWS_SCROLL_OFFSET,
+//   )
+
+//   window.scrollTo({
+//     top: targetY,
+//     left: 0,
+//     behavior: 'smooth',
+//   })
 // }
 
 // function CustomSelector({
@@ -205,6 +260,11 @@
 //   const [activeTagKey, setActiveTagKey] = useState(ALL_TAGS_VALUE)
 //   const [currentPage, setCurrentPage] = useState(1)
 
+//   const pendingScrollPageRef = useRef<number | null>(null)
+//   const scrollFrameOneRef = useRef<number | null>(null)
+//   const scrollFrameTwoRef = useRef<number | null>(null)
+//   const hasFilterMountedRef = useRef(false)
+
 //   const allNews = useMemo<NewsItem[]>(() => {
 //     return Array.isArray(data?.news) ? data.news : []
 //   }, [data?.news])
@@ -273,6 +333,13 @@
 //   )
 
 //   useEffect(() => {
+//     if (!hasFilterMountedRef.current) {
+//       hasFilterMountedRef.current = true
+//       return
+//     }
+
+//     removeNewsCardHashFromUrl()
+//     pendingScrollPageRef.current = null
 //     setCurrentPage(1)
 //   }, [activeEventStatus, activeTagKey])
 
@@ -282,11 +349,48 @@
 //     }
 //   }, [currentPage, totalPages])
 
+//   useEffect(() => {
+//     const pendingPage = pendingScrollPageRef.current
+
+//     if (!pendingPage || pendingPage !== currentPage) return
+
+//     pendingScrollPageRef.current = null
+
+//     if (scrollFrameOneRef.current !== null) {
+//       cancelAnimationFrame(scrollFrameOneRef.current)
+//     }
+
+//     if (scrollFrameTwoRef.current !== null) {
+//       cancelAnimationFrame(scrollFrameTwoRef.current)
+//     }
+
+//     scrollFrameOneRef.current = requestAnimationFrame(() => {
+//       scrollFrameTwoRef.current = requestAnimationFrame(() => {
+//         scrollToNewsPageAnchor(currentPage)
+//       })
+//     })
+
+//     return () => {
+//       if (scrollFrameOneRef.current !== null) {
+//         cancelAnimationFrame(scrollFrameOneRef.current)
+//       }
+
+//       if (scrollFrameTwoRef.current !== null) {
+//         cancelAnimationFrame(scrollFrameTwoRef.current)
+//       }
+//     }
+//   }, [currentPage, paginatedNews.length])
+
 //   const goToPage = (page: number) => {
 //     const nextPage = Math.max(1, Math.min(totalPages, page))
 
+//     if (nextPage === currentPage) return
+
+//     pendingScrollPageRef.current = nextPage
 //     setCurrentPage(nextPage)
 //   }
+
+//   const currentAnchorId = getNewsCardAnchorId(currentPage)
 
 //   return (
 //     <div className="w-full">
@@ -294,8 +398,9 @@
 //       <div
 //         className="
 //           relative z-30
-//           flex flex-wrap items-center justify-center  lg:justify-start gap-[12px]
+//           flex flex-wrap items-center justify-center gap-[12px]
 //           md:gap-[14px]
+//           lg:justify-start
 //           xl:gap-[16px]
 //         "
 //       >
@@ -314,6 +419,17 @@
 //         />
 //       </div>
 
+//       {/* dynamic news cards anchor */}
+//       <div
+//         id={currentAnchorId}
+//         className="
+//           scroll-mt-[105px]
+//           md:scroll-mt-[115px]
+//           lg:scroll-mt-[130px]
+//           xl:scroll-mt-[145px]
+//         "
+//       />
+
 //       {/* news list */}
 //       {paginatedNews.length > 0 ? (
 //         <div
@@ -323,7 +439,6 @@
 //             md:mt-[14px]
 //             lg:mt-[20px]
 //             xl:mt-[30px]
-
 //           "
 //         >
 //           {paginatedNews.map((newsItem, index) => (
@@ -390,7 +505,6 @@
 //                 hover:border-secondary-1/25
 //                 hover:bg-white-2
 //                 disabled:pointer-events-none disabled:opacity-35
-
 //                 size-[36px]
 //                 md:size-[40px]
 //                 lg:size-[46px]
@@ -425,7 +539,6 @@
 //                     className="
 //                       flex items-center justify-center
 //                       font-grift font-bold text-secondary-1
-
 //                       size-[36px]
 //                       text-[13px]
 //                       md:size-[40px] md:text-[14px]
@@ -453,14 +566,12 @@
 //                     font-grift font-bold
 //                     shadow-[0_8px_22px_rgba(10,17,40,0.04)]
 //                     transition-all duration-300
-
 //                     size-[36px]
 //                     text-[13px]
 //                     md:size-[40px] md:text-[14px]
 //                     lg:size-[46px] lg:text-[16px]
 //                     xl:size-[52px] xl:text-[18px]
 //                     2xl:size-[58px] 2xl:text-[20px]
-
 //                     ${
 //                       isActive
 //                         ? 'border-secondary-1 bg-secondary-1 text-white-1'
@@ -488,7 +599,6 @@
 //                 hover:border-secondary-1/25
 //                 hover:bg-white-2
 //                 disabled:pointer-events-none disabled:opacity-35
-
 //                 size-[36px]
 //                 md:size-[40px]
 //                 lg:size-[46px]
@@ -547,7 +657,7 @@ type TagItem = {
   key?: string | null
 }
 
-type EventStatus = 'upcoming-events' | 'todays-events' | 'past-events'
+type EventStatus = 'all-events' | 'upcoming-events' | 'todays-events' | 'past-events'
 
 type SelectOption = {
   label: string
@@ -555,11 +665,16 @@ type SelectOption = {
 }
 
 const ALL_TAGS_VALUE = 'all-tags'
+const ALL_EVENTS_VALUE = 'all-events'
 const ITEMS_PER_PAGE = 4
 const NEWS_CARD_ANCHOR_PREFIX = 'newscardp'
 const NEWS_SCROLL_OFFSET = 130
 
 const eventStatusOptions: SelectOption[] = [
+  {
+    label: 'All Events',
+    value: ALL_EVENTS_VALUE,
+  },
   {
     label: 'Upcoming Events',
     value: 'upcoming-events',
@@ -781,7 +896,7 @@ function CustomSelector({
 }
 
 function NewsSection({ block, data, tagsData }: Props) {
-  const [activeEventStatus, setActiveEventStatus] = useState<EventStatus>('upcoming-events')
+  const [activeEventStatus, setActiveEventStatus] = useState<EventStatus>(ALL_EVENTS_VALUE)
   const [activeTagKey, setActiveTagKey] = useState(ALL_TAGS_VALUE)
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -815,7 +930,8 @@ function NewsSection({ block, data, tagsData }: Props) {
     return allNews
       .filter((newsItem) => {
         const itemAny = newsItem as any
-        const statusMatch = itemAny?.eventStatus === activeEventStatus
+        const statusMatch =
+          activeEventStatus === ALL_EVENTS_VALUE || itemAny?.eventStatus === activeEventStatus
 
         if (!statusMatch) return false
         if (activeTagKey === ALL_TAGS_VALUE) return true
@@ -829,6 +945,10 @@ function NewsSection({ block, data, tagsData }: Props) {
         index,
       }))
       .sort((a, b) => {
+        if (activeEventStatus === ALL_EVENTS_VALUE) {
+          return a.index - b.index
+        }
+
         const aTime = getNewsSortTime(a.newsItem)
         const bTime = getNewsSortTime(b.newsItem)
 

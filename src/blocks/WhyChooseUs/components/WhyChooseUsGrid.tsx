@@ -1,40 +1,75 @@
 import { WCUBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import React from 'react'
-import TickIcon from 'public/assets/icons/tick.png'
+
 type Props = { block: WCUBlockType }
 
+type ImageMedia = {
+  url: string
+  alt?: string | null
+  blurDataURL?: string | null
+}
+
+function getImageMedia(media: unknown): ImageMedia | null {
+  if (
+    media &&
+    typeof media === 'object' &&
+    'url' in media &&
+    typeof (media as ImageMedia).url === 'string'
+  ) {
+    return media as ImageMedia
+  }
+
+  return null
+}
+
 function WhyChooseUsGrid({ block }: Props) {
+  const criteriaItems = block?.choosingCriteria?.criteria || []
+
+  if (!criteriaItems.length) return null
+
   return (
     <div
-      className="grid grid-cols-1 md:grid-cols-2 
-    gap-2 ml-8
-    lg:gap-3 lg:ml-8
-    xl:gap-5 xl:ml-20
-    2xl:gap-6 2xl:ml-32"
+      className="
+        ml-8 grid grid-cols-1 gap-2
+        md:grid-cols-2
+        lg:ml-8 lg:gap-3
+        xl:ml-20 xl:gap-5
+        2xl:ml-32 2xl:gap-6
+      "
     >
-      {block?.choosingCriteria?.criteria?.map((item, i) => (
-        <div key={i} className="flex items-center gap-2 lg:gap-3">
-          <div
-            className="relative 
-          min-w-[15px] min-h-[15px]
-          lg:min-w-[20px] lg:min-h-[20px]
-          xl:min-w-[25px] xl:min-h-[25px]
-          "
-          >
-            <Image
-              src={TickIcon}
-              alt=""
-              fill
-              className="object-contain object-center"
-              placeholder="blur"
-              blurDataURL={TickIcon.blurDataURL}
-              quality={100}
-            />
+      {criteriaItems.map((item, i) => {
+        const icon = getImageMedia(item?.icon)
+        const iconBlurDataURL = icon?.blurDataURL || item?.iconBlurDataURL
+
+        return (
+          <div key={item?.id ?? i} className="flex items-center gap-2 lg:gap-3">
+            {icon?.url && (
+              <div
+                className="
+                  relative shrink-0
+                  size-[15px]
+                  lg:size-[20px]
+                  xl:size-[25px]
+                "
+              >
+                <Image
+                  src={icon.url}
+                  alt={icon.alt || item?.text || 'Criteria icon'}
+                  fill
+                  className="object-contain object-center"
+                  placeholder={iconBlurDataURL ? 'blur' : 'empty'}
+                  blurDataURL={iconBlurDataURL || undefined}
+                  quality={100}
+                  sizes="25px"
+                />
+              </div>
+            )}
+
+            <div className="font-grift global-p3 text-secondary-1">{item?.text}</div>
           </div>
-          <div className="text-secondary-1 font-grift global-p3">{item?.text}</div>
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }

@@ -13,13 +13,14 @@
 // const OPTION_TEXT_MAX = 100
 // const CURRENCY_SIGN_MAX = 10
 // const CURRENCY_CODE_MAX = 10
+// const FORM_LABEL_MAX = 100
 
 // const GlobalContactUs: GlobalConfig = {
 //   slug: GLOBAL_CONTACT_US_SLUG_AND_TAG,
 //   label: GLOBAL_CONTACT_US_LABEL,
 
 //   admin: {
-//     description: 'Global Contact Us options: our solutions, currencies and budget range.',
+//     description: 'Global Contact Us options: form labels, solutions and currencies.',
 //   },
 
 //   access: {
@@ -28,6 +29,53 @@
 //   },
 
 //   fields: [
+//     {
+//       name: 'formLabels',
+//       type: 'group',
+//       label: 'Form Labels',
+//       admin: {
+//         description: 'Controls the frontend Contact Us form section labels.',
+//       },
+//       fields: [
+//         {
+//           name: 'contactInfoHeading',
+//           type: 'text',
+//           label: 'Who Are We Reaching Out To Label',
+//           required: true,
+//           defaultValue: 'WHO ARE WE REACHING OUT TO?',
+//           maxLength: FORM_LABEL_MAX,
+//           validate: validateShortText('Who Are We Reaching Out To Label', FORM_LABEL_MAX, true),
+//         },
+//         {
+//           name: 'descriptionHeading',
+//           type: 'text',
+//           label: 'What’s On Your Mind Label',
+//           required: true,
+//           defaultValue: 'WHATS ON YOUR MIND?',
+//           maxLength: FORM_LABEL_MAX,
+//           validate: validateShortText('What’s On Your Mind Label', FORM_LABEL_MAX, true),
+//         },
+//         {
+//           name: 'servicesHeading',
+//           type: 'text',
+//           label: 'Services Label',
+//           required: true,
+//           defaultValue: 'WHAT SERVICES MATCH YOUR PROJECT?',
+//           maxLength: FORM_LABEL_MAX,
+//           validate: validateShortText('Services Label', FORM_LABEL_MAX, true),
+//         },
+//         {
+//           name: 'budgetHeading',
+//           type: 'text',
+//           label: 'Budget Label',
+//           required: true,
+//           defaultValue: 'WHAT’S YOUR COMFORTABLE BUDGET?',
+//           maxLength: FORM_LABEL_MAX,
+//           validate: validateShortText('Budget Label', FORM_LABEL_MAX, true),
+//         },
+//       ],
+//     },
+
 //     {
 //       name: 'ourSolutions',
 //       type: 'array',
@@ -103,46 +151,6 @@
 //         },
 //       ],
 //     },
-
-//     {
-//       name: 'budgetRange',
-//       type: 'group',
-//       label: 'Budget Range',
-//       admin: {
-//         description: 'Controls the default frontend budget range values.',
-//       },
-//       fields: [
-//         {
-//           type: 'row',
-//           fields: [
-//             {
-//               name: 'defaultMinValue',
-//               type: 'number',
-//               label: 'Default Minimum Budget',
-//               required: true,
-//               defaultValue: 1000,
-//               min: 0,
-//               admin: {
-//                 width: '50%',
-//                 description: 'Example: 1000.',
-//               },
-//             },
-//             {
-//               name: 'defaultMaxValue',
-//               type: 'number',
-//               label: 'Default Maximum Budget',
-//               required: true,
-//               defaultValue: 10000,
-//               min: 1,
-//               admin: {
-//                 width: '50%',
-//                 description: 'Example: 10000.',
-//               },
-//             },
-//           ],
-//         },
-//       ],
-//     },
 //   ],
 
 //   hooks: {
@@ -156,6 +164,7 @@
 // }
 
 // export default GlobalContactUs
+
 import type { GlobalConfig } from 'payload'
 
 import { globalTag } from '@/lib/cacheTags'
@@ -165,7 +174,12 @@ import {
   GLOBAL_CONTACT_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { roleAtLeast } from '@/lib/rbac'
-import { validateShortText } from '@/utils/block/fields-validation'
+import {
+  EMAIL_MAX,
+  validateAtLeastOneRecipientEmail,
+  validateEmail,
+  validateShortText,
+} from '@/utils/block/fields-validation'
 import { revalidateTag } from 'next/cache'
 
 const OPTION_TEXT_MAX = 100
@@ -178,7 +192,8 @@ const GlobalContactUs: GlobalConfig = {
   label: GLOBAL_CONTACT_US_LABEL,
 
   admin: {
-    description: 'Global Contact Us options: form labels, solutions and currencies.',
+    description:
+      'Global Contact Us options: recipient emails, form labels, solutions and currencies.',
   },
 
   access: {
@@ -187,6 +202,69 @@ const GlobalContactUs: GlobalConfig = {
   },
 
   fields: [
+    {
+      name: 'recipientEmails',
+      type: 'group',
+      label: 'Recipient Emails (1–5)',
+      admin: {
+        description:
+          'Provide at least one email address. All valid emails will receive Contact Us form submissions through SMTP.',
+      },
+      validate: validateAtLeastOneRecipientEmail,
+      fields: [
+        {
+          name: 'email1',
+          type: 'text',
+          label: 'Recipient Email 1',
+          maxLength: EMAIL_MAX,
+          validate: validateEmail('Recipient Email 1', true),
+          admin: {
+            width: '33%',
+          },
+        },
+        {
+          name: 'email2',
+          type: 'text',
+          label: 'Recipient Email 2',
+          maxLength: EMAIL_MAX,
+          validate: validateEmail('Recipient Email 2', false),
+          admin: {
+            width: '33%',
+          },
+        },
+        {
+          name: 'email3',
+          type: 'text',
+          label: 'Recipient Email 3',
+          maxLength: EMAIL_MAX,
+          validate: validateEmail('Recipient Email 3', false),
+          admin: {
+            width: '33%',
+          },
+        },
+        {
+          name: 'email4',
+          type: 'text',
+          label: 'Recipient Email 4',
+          maxLength: EMAIL_MAX,
+          validate: validateEmail('Recipient Email 4', false),
+          admin: {
+            width: '33%',
+          },
+        },
+        {
+          name: 'email5',
+          type: 'text',
+          label: 'Recipient Email 5',
+          maxLength: EMAIL_MAX,
+          validate: validateEmail('Recipient Email 5', false),
+          admin: {
+            width: '33%',
+          },
+        },
+      ],
+    },
+
     {
       name: 'formLabels',
       type: 'group',

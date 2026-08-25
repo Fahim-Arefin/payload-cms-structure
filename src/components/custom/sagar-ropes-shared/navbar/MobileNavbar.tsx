@@ -1,23 +1,23 @@
 // 'use client'
 
 // import Button02 from '@/components/custom/sagar-ropes-shared/buttons/Button02'
+// import { gsap, useGSAP } from '@/lib/gsap'
 // import type { Footer } from '@/payload-types'
 // import Image from 'next/image'
 // import Link from 'next/link'
-// import { usePathname, useRouter } from 'next/navigation'
-// import React, { useEffect, useRef, useState } from 'react'
+// import { usePathname } from 'next/navigation'
+// import At from 'public/assets/icons/atC.png'
 // import BurgerIconImg from 'public/assets/icons/burger2.png'
-// import { gsap, useGSAP } from '@/lib/gsap'
-// import LocalizedText from '../../shared/LocalizedText'
-// import SearchBarSection from './SearchBarSection'
-// import type { NavbarData, SearchSuggestion } from './ServerNavbar'
 // import CloseIcon from 'public/assets/icons/close.png'
 // import DownArrowP2 from 'public/assets/icons/DownArrowWhite.png'
 // import DownArrowWhite from 'public/assets/icons/DownArrowWhite.png'
-// import At from 'public/assets/icons/atC.png'
 // import Facebook from 'public/assets/icons/fbC.png'
 // import Linkdin from 'public/assets/icons/lnC.png'
 // import WhatsApp from 'public/assets/icons/waC.png'
+// import React, { useEffect, useRef, useState } from 'react'
+// import LocalizedText from '../../shared/LocalizedText'
+// import SearchBarSection from './SearchBarSection'
+// import type { NavbarData, SearchSuggestion } from './ServerNavbar'
 
 // type Props = {
 //   data: NavbarData
@@ -78,7 +78,6 @@
 
 // function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
 //   const pathname = usePathname()
-//   const router = useRouter()
 
 //   const [open, setOpen] = useState(false)
 //   const [expanded, setExpanded] = useState<string[]>([])
@@ -100,6 +99,10 @@
 //     footerAny?.contactInfoSection?.email ||
 //     footerAny?.factorySection?.email ||
 //     footerAny?.contactInfo?.email
+
+//   const dropQueryCta = data?.mobileDrawer?.dropQueryCta
+//   const dropQueryLabel = dropQueryCta?.label || 'Drop Your Query'
+//   const dropQueryHref = dropQueryCta?.href || '/contact'
 
 //   const allItems = (data?.desktop?.items ?? []) as NavItem[]
 //   const mainItems = allItems.filter((item) => item.isTop !== 'yes')
@@ -264,11 +267,6 @@
 //     }
 //   `
 
-//   const handleDropQueryClick = () => {
-//     setOpen(false)
-//     router.push('/contact')
-//   }
-
 //   return (
 //     <>
 //       {/* Mobile top navbar */}
@@ -380,7 +378,7 @@
 //           className="
 //             relative z-10 flex h-full flex-col
 //             overflow-y-auto overflow-x-hidden
-//             px-[14px] pb-[30px] pt-[22px]
+//             px-[40px] pb-[30px] pt-[40px]
 //           "
 //         >
 //           {/* Header */}
@@ -533,19 +531,20 @@
 //           </div>
 
 //           {/* Drop query */}
-//           <div className="mt-[28px] relative z-[1] flex justify-center">
-//             <Button02
-//               type="button"
-//               onClick={handleDropQueryClick}
-//               className="
-//                 !h-[56px]
-//                 !px-[36px]
-//                 !text-[16px]
-//                 !tracking-[0.02em]
-//               "
-//             >
-//               Drop Your Query
-//             </Button02>
+//           <div className="relative z-[1] mt-[28px] flex justify-center">
+//             <Link href={dropQueryHref} onClick={() => setOpen(false)} className="inline-flex">
+//               <Button02
+//                 type="button"
+//                 className="
+//                   !h-[56px]
+//                   !px-[36px]
+//                   !text-[16px]
+//                   !tracking-[0.02em]
+//                 "
+//               >
+//                 {dropQueryLabel}
+//               </Button02>
+//             </Link>
 //           </div>
 
 //           {/* Social */}
@@ -561,7 +560,7 @@
 //                   target="_blank"
 //                   rel="noopener noreferrer"
 //                   aria-label="WhatsApp"
-//                   className="relative block w-[30px] h-[30px]"
+//                   className="relative block h-[30px] w-[30px]"
 //                 >
 //                   <Image
 //                     src={WhatsApp}
@@ -579,7 +578,7 @@
 //                 <Link
 //                   href={`mailto:${email}`}
 //                   aria-label="Email"
-//                   className="relative block w-[30px] h-[30px]"
+//                   className="relative block h-[30px] w-[30px]"
 //                 >
 //                   <Image
 //                     src={At}
@@ -599,7 +598,7 @@
 //                   target="_blank"
 //                   rel="noopener noreferrer"
 //                   aria-label="LinkedIn"
-//                   className="relative block w-[30px] h-[30px]"
+//                   className="relative block h-[30px] w-[30px]"
 //                 >
 //                   <Image
 //                     src={Linkdin}
@@ -619,7 +618,7 @@
 //                   target="_blank"
 //                   rel="noopener noreferrer"
 //                   aria-label="Facebook"
-//                   className="relative block w-[30px] h-[30px]"
+//                   className="relative block h-[30px] w-[30px]"
 //                 >
 //                   <Image
 //                     src={Facebook}
@@ -641,7 +640,6 @@
 // }
 
 // export default MobileNavbar
-
 'use client'
 
 import Button02 from '@/components/custom/sagar-ropes-shared/buttons/Button02'
@@ -658,6 +656,7 @@ import DownArrowWhite from 'public/assets/icons/DownArrowWhite.png'
 import Facebook from 'public/assets/icons/fbC.png'
 import Linkdin from 'public/assets/icons/lnC.png'
 import WhatsApp from 'public/assets/icons/waC.png'
+import Phone from 'public/assets/icons/phoneC.png'
 import React, { useEffect, useRef, useState } from 'react'
 import LocalizedText from '../../shared/LocalizedText'
 import SearchBarSection from './SearchBarSection'
@@ -720,6 +719,14 @@ const ChevronDown = ({
   </span>
 )
 
+function cleanPhoneHref(phone?: string | null) {
+  if (!phone) return '#'
+
+  const cleaned = phone.replace(/[^\d+]/g, '')
+
+  return cleaned ? `tel:${cleaned}` : '#'
+}
+
 function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
   const pathname = usePathname()
 
@@ -743,6 +750,11 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
     footerAny?.contactInfoSection?.email ||
     footerAny?.factorySection?.email ||
     footerAny?.contactInfo?.email
+
+  const phone =
+    footerAny?.contactInfoSection?.phone ||
+    footerAny?.factorySection?.phone ||
+    footerAny?.contactInfo?.phone
 
   const dropQueryCta = data?.mobileDrawer?.dropQueryCta
   const dropQueryLabel = dropQueryCta?.label || 'Drop Your Query'
@@ -1270,6 +1282,24 @@ function MobileNavbar({ data, blur, suggestions, footerData }: Props) {
                     fill
                     placeholder="blur"
                     blurDataURL={Facebook?.blurDataURL}
+                    quality={95}
+                    className="object-contain"
+                  />
+                </Link>
+              )}
+
+              {phone && (
+                <Link
+                  href={cleanPhoneHref(phone)}
+                  aria-label="Phone"
+                  className="relative block h-[30px] w-[30px]"
+                >
+                  <Image
+                    src={Phone}
+                    alt="Phone icon"
+                    fill
+                    placeholder="blur"
+                    blurDataURL={Phone?.blurDataURL}
                     quality={95}
                     className="object-contain"
                   />

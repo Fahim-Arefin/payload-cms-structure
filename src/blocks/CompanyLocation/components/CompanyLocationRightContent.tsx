@@ -18,7 +18,7 @@ function CompanyLocationRightContent({ block }: Props) {
   return (
     <div
       className="
-        flex h-full flex-col justify-center
+        flex h-full flex-col
         text-center md:text-start
         md:pl-[10px]
         lg:pl-[0px]

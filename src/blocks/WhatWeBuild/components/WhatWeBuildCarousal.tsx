@@ -1,13 +1,14 @@
 'use client'
 
+import CarouselArrowButton from '@/components/custom/sagar-ropes-shared/buttons/CarouselArrowButton'
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
+import { sliderDelay } from '@/lib/data'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { WhatWeBuildBlockType } from '@/types/payloadCustomTypes'
+import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 
-// import ArrowRightColored from 'public/assets/icons/arrowRightColored.png'
-import ArrowRightWhite from 'public/assets/icons/arrowright.png'
 import LineImage from 'public/assets/images/Line.png'
 import VLineImage from 'public/assets/images/VLine.png'
 
@@ -37,10 +38,22 @@ function WhatWeBuildCarousal({ block }: Props) {
   const imageStageRef = useRef<HTMLDivElement | null>(null)
   const imageInnerRef = useRef<HTMLDivElement | null>(null)
 
+  const autoplayPlugin = useRef(
+    Autoplay({
+      delay: sliderDelay,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    }),
+  )
+
   const [api, setApi] = useState<CarouselApi>()
   const [activeIndex, setActiveIndex] = useState(0)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
 
   const items = block?.whatWeBuild?.items || []
+  const hasMultipleItems = items.length > 1
+  const shouldShowArrows = hasMultipleItems && (canScrollPrev || canScrollNext)
 
   useEffect(() => {
     if (!items.length) return
@@ -49,6 +62,26 @@ function WhatWeBuildCarousal({ block }: Props) {
       setActiveIndex(0)
     }
   }, [items.length, activeIndex])
+
+  useEffect(() => {
+    if (!api) return
+
+    const updateCarouselState = () => {
+      setCanScrollPrev(api.canScrollPrev())
+      setCanScrollNext(api.canScrollNext())
+      setActiveIndex(api.selectedScrollSnap())
+    }
+
+    updateCarouselState()
+
+    api.on('select', updateCarouselState)
+    api.on('reInit', updateCarouselState)
+
+    return () => {
+      api.off('select', updateCarouselState)
+      api.off('reInit', updateCarouselState)
+    }
+  }, [api])
 
   useGSAP(
     () => {
@@ -132,85 +165,58 @@ function WhatWeBuildCarousal({ block }: Props) {
       <div
         className="
           relative mt-[16px] w-full
-          px-[42px]
+          px-0
           md:px-[50px]
           lg:mt-[14px] lg:px-[54px]
           xl:px-[62px]
           2xl:px-[70px]
         "
       >
-        <button
-          type="button"
-          aria-label="Previous item"
-          onClick={handlePrevious}
-          className="
-            absolute left-0 top-1/2 z-20
-            flex size-[34px] -translate-y-1/2 items-center justify-center
-            rounded-full bg-primary-1/35
-            shadow-[0_10px_24px_rgba(0,108,103,0.18)]
-            backdrop-blur-[10px]
-            transition-all duration-300 ease-out
-            hover:scale-105
-            hover:bg-primary-1
-            active:scale-95
-            lg:size-[36px]
-            xl:size-[38px]
-          "
-        >
-          <Image
-            src={ArrowRightWhite}
-            alt=""
-            width={18}
-            height={18}
-            className="
-    h-[14px] w-[14px] rotate-180 object-contain
-    lg:h-[15px] lg:w-[15px]
-  "
-            placeholder="blur"
-            blurDataURL={ArrowRightWhite.blurDataURL}
-            quality={95}
-          />
-        </button>
+        {shouldShowArrows && (
+          <>
+            <CarouselArrowButton
+              direction="prev"
+              ariaLabel="Previous item"
+              onClick={handlePrevious}
+              disabled={!canScrollPrev}
+              wrapperClassName="
+                absolute left-0 top-1/2 z-20
+                hidden -translate-y-1/2
+                md:inline-flex
+              "
+              buttonClassName="
+                size-[34px]
+                lg:size-[36px]
+                xl:size-[38px]
+              "
+            />
 
-        <button
-          type="button"
-          aria-label="Next item"
-          onClick={handleNext}
-          className="
-            absolute right-0 top-1/2 z-20
-            flex size-[34px] -translate-y-1/2 items-center justify-center
-            rounded-full bg-primary-1/35
-            shadow-[0_10px_24px_rgba(0,108,103,0.18)]
-            backdrop-blur-[10px]
-            transition-all duration-300 ease-out
-            hover:scale-105
-            hover:bg-primary-1
-            active:scale-95
-            lg:size-[36px]
-            xl:size-[38px]
-          "
-        >
-          <Image
-            src={ArrowRightWhite}
-            alt=""
-            width={18}
-            height={18}
-            className="
-    h-[14px] w-[14px] object-contain
-    lg:h-[15px] lg:w-[15px]
-  "
-            placeholder="blur"
-            blurDataURL={ArrowRightWhite.blurDataURL}
-            quality={95}
-          />
-        </button>
+            <CarouselArrowButton
+              direction="next"
+              ariaLabel="Next item"
+              onClick={handleNext}
+              disabled={!canScrollNext}
+              wrapperClassName="
+                absolute right-0 top-1/2 z-20
+                hidden -translate-y-1/2
+                md:inline-flex
+              "
+              buttonClassName="
+                size-[34px]
+                lg:size-[36px]
+                xl:size-[38px]
+              "
+            />
+          </>
+        )}
 
         <Carousel
           setApi={setApi}
           opts={{
             align: 'start',
-            loop: true,
+            loop: false,
           }}
+          plugins={hasMultipleItems ? [autoplayPlugin.current] : []}
           className="w-full"
         >
           <CarouselContent className="-ml-[16px] md:-ml-[18px] xl:-ml-[22px]">
@@ -221,19 +227,13 @@ function WhatWeBuildCarousal({ block }: Props) {
               return (
                 <CarouselItem
                   key={item?.id ?? index}
-                  //   className="
-                  //     basis-full pl-[16px]
-                  //     md:basis-1/2 md:pl-[18px]
-                  //     lg:basis-1/4
-                  //     xl:pl-[22px]
-                  //   "
                   className="
-    basis-full pl-[16px]
-    md:basis-1/2 md:pl-[18px]
-    lg:basis-1/3
-    xl:basis-1/4 xl:pl-[22px]
-    2xl:basis-1/4
-  "
+                    basis-full pl-[16px]
+                    md:basis-1/2 md:pl-[18px]
+                    lg:basis-1/3
+                    xl:basis-1/4 xl:pl-[22px]
+                    2xl:basis-1/4
+                  "
                 >
                   <div className="relative h-full min-w-0">
                     <button
@@ -264,6 +264,7 @@ function WhatWeBuildCarousal({ block }: Props) {
                               bg-transparent
                               hover:border-primary-2
                               hover:bg-primary-1/30
+                              hover:shadow-[0_14px_34px_rgba(0,108,103,0.14)]
                             `
                         }
                       `}
@@ -297,32 +298,13 @@ function WhatWeBuildCarousal({ block }: Props) {
                       )}
                     </button>
 
-                    {/* {showSeparator && (
-                      <div
-                        className="
-                          pointer-events-none absolute right-[-8px] top-[12px]
-                          hidden h-[104px] w-px lg:block
-                          xl:right-[-11px] xl:h-[116px]
-                        "
-                      >
-                        <Image
-                          src={VLineImage}
-                          alt=""
-                          fill
-                          className="object-fill object-center opacity-55"
-                          placeholder="blur"
-                          blurDataURL={VLineImage.blurDataURL}
-                          quality={95}
-                        />
-                      </div>
-                    )} */}
                     {showSeparator && (
                       <div
                         className="
-      pointer-events-none absolute right-[-8px] top-1/2
-      hidden h-[80%] w-px -translate-y-1/2 md:block
-      xl:right-[-11px]
-    "
+                          pointer-events-none absolute right-[-8px] top-1/2
+                          hidden h-[80%] w-px -translate-y-1/2 md:block
+                          xl:right-[-11px]
+                        "
                       >
                         <Image
                           src={VLineImage}
@@ -341,6 +323,31 @@ function WhatWeBuildCarousal({ block }: Props) {
             })}
           </CarouselContent>
         </Carousel>
+
+        {shouldShowArrows && (
+          <div
+            className="
+              mt-[18px] flex items-center justify-center gap-[12px]
+              md:hidden
+            "
+          >
+            <CarouselArrowButton
+              direction="prev"
+              ariaLabel="Previous item"
+              onClick={handlePrevious}
+              disabled={!canScrollPrev}
+              buttonClassName="size-[34px]"
+            />
+
+            <CarouselArrowButton
+              direction="next"
+              ariaLabel="Next item"
+              onClick={handleNext}
+              disabled={!canScrollNext}
+              buttonClassName="size-[34px]"
+            />
+          </div>
+        )}
       </div>
 
       {/* active image */}

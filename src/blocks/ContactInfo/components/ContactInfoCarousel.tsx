@@ -1,25 +1,23 @@
 'use client'
 
+import CarouselArrowButton from '@/components/custom/sagar-ropes-shared/buttons/CarouselArrowButton'
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
+import { sliderDelay } from '@/lib/data'
 import { ContactInfoBlockType } from '@/types/payloadCustomTypes'
 import Autoplay from 'embla-carousel-autoplay'
 import Image, { StaticImageData } from 'next/image'
-import React, { useMemo, useRef, useState } from 'react'
-
-import WhiteArrowRight from 'public/assets/icons/carousal/WhiteArrowRight.png'
-import WhiteArrowLeft from 'public/assets/icons/carousal/whiteArrowLeft.png'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 import CallIcon from 'public/assets/icons/contactInfo/call.png'
 import CallWhiteIcon from 'public/assets/icons/contactInfo/callWhite.png'
+import FacebookIcon from 'public/assets/icons/contactInfo/facebook.png'
+import FacebookWhiteIcon from 'public/assets/icons/contactInfo/facebookWhite.png'
+import LinkedinIcon from 'public/assets/icons/contactInfo/linkedin.png'
+import LinkedinWhiteIcon from 'public/assets/icons/contactInfo/linkedinWhite.png'
 import MailIcon from 'public/assets/icons/contactInfo/mail.png'
 import MailWhiteIcon from 'public/assets/icons/contactInfo/mailWhite.png'
 import WhatsappIcon from 'public/assets/icons/contactInfo/whatsapp.png'
 import WhatsappWhiteIcon from 'public/assets/icons/contactInfo/whatsappWhite.png'
-import LinkedinIcon from 'public/assets/icons/contactInfo/linkedin.png'
-import LinkedinWhiteIcon from 'public/assets/icons/contactInfo/linkedinWhite.png'
-import FacebookIcon from 'public/assets/icons/contactInfo/facebook.png'
-import FacebookWhiteIcon from 'public/assets/icons/contactInfo/facebookWhite.png'
-import { sliderDelay } from '@/lib/data'
 
 type Props = { block: ContactInfoBlockType }
 
@@ -41,8 +39,6 @@ function cleanPhoneHref(phone?: string | null) {
 }
 
 function ContactInfoCarousel({ block }: Props) {
-  const [api, setApi] = useState<CarouselApi>()
-
   const autoplayPlugin = useRef(
     Autoplay({
       delay: sliderDelay,
@@ -50,6 +46,10 @@ function ContactInfoCarousel({ block }: Props) {
       stopOnMouseEnter: true,
     }),
   )
+
+  const [api, setApi] = useState<CarouselApi>()
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
 
   const items = useMemo<ContactCardItem[]>(() => {
     const contacts = block?.contacts
@@ -101,6 +101,28 @@ function ContactInfoCarousel({ block }: Props) {
     ].filter((item) => item.label && item.value)
   }, [block?.contacts])
 
+  const hasMultipleItems = items.length > 1
+  const shouldShowArrows = hasMultipleItems && (canScrollPrev || canScrollNext)
+
+  useEffect(() => {
+    if (!api) return
+
+    const updateArrowState = () => {
+      setCanScrollPrev(api.canScrollPrev())
+      setCanScrollNext(api.canScrollNext())
+    }
+
+    updateArrowState()
+
+    api.on('select', updateArrowState)
+    api.on('reInit', updateArrowState)
+
+    return () => {
+      api.off('select', updateArrowState)
+      api.off('reInit', updateArrowState)
+    }
+  }, [api])
+
   if (!items.length) return null
 
   return (
@@ -109,9 +131,9 @@ function ContactInfoCarousel({ block }: Props) {
         setApi={setApi}
         opts={{
           align: 'start',
-          loop: true,
+          loop: false,
         }}
-        plugins={[autoplayPlugin.current]}
+        plugins={hasMultipleItems ? [autoplayPlugin.current] : []}
         className="w-full"
       >
         <CarouselContent
@@ -125,14 +147,12 @@ function ContactInfoCarousel({ block }: Props) {
             <CarouselItem
               key={item.key}
               className="
-                 pl-[18px]
-                basis-1/2
+                basis-1/2 pl-[18px]
                 sm:basis-1/3
-                lg:basis-1/3
-                xl:basis-1/4 
-                2xl:basis-1/5 
-                xl:pl-[26px]
                 md:pl-[22px]
+                lg:basis-1/3
+                xl:basis-1/4 xl:pl-[26px]
+                2xl:basis-1/5
               "
             >
               <a
@@ -145,20 +165,15 @@ function ContactInfoCarousel({ block }: Props) {
                   rounded-[10px]
                   border border-primary-1/35
                   bg-white-1/35
-                  
+                  px-[18px] py-[20px]
                   text-start
                   backdrop-blur-[20px]
                   transition-colors duration-300 ease-out
-
                   hover:border-primary-1
-                  px-[18px] py-[20px]
-                  md:px-[16px] md:py-[18px]
-                  lg:px-[26px] lg:py-[28px]
-                  xl:px-[28px] xl:py-[30px]
-                  min-h-[150px] 
-                  md:min-h-[160px] 
-                  lg:min-h-[200px] 
-                  xl:min-h-[252px] 
+                  md:min-h-[160px] md:px-[16px] md:py-[18px]
+                  lg:min-h-[200px] lg:px-[26px] lg:py-[28px]
+                  xl:min-h-[252px] xl:px-[28px] xl:py-[30px]
+                  min-h-[150px]
                 "
               >
                 <span
@@ -171,11 +186,10 @@ function ContactInfoCarousel({ block }: Props) {
 
                 <span
                   className="
-                    relative flex  items-center justify-center
+                    relative flex items-center justify-center
                     rounded-full border border-primary-1
                     bg-transparent
                     transition-colors duration-300 ease-out
-
                     group-hover/contact-card:bg-primary-1
                     size-[50px]
                     md:size-[55px]
@@ -192,7 +206,7 @@ function ContactInfoCarousel({ block }: Props) {
                       absolute object-contain
                       opacity-100 transition-opacity duration-300
                       group-hover/contact-card:opacity-0
-                      h-[28px] w-[28px] 
+                      h-[28px] w-[28px]
                       md:h-[30px] md:w-[30px]
                       lg:h-[40px] lg:w-[40px]
                       xl:h-[42px] xl:w-[42px]
@@ -205,10 +219,10 @@ function ContactInfoCarousel({ block }: Props) {
                     width={42}
                     height={42}
                     className="
-                      absoluteobject-contain
+                      absolute object-contain
                       opacity-0 transition-opacity duration-300
                       group-hover/contact-card:opacity-100
-                      h-[28px] w-[28px] 
+                      h-[28px] w-[28px]
                       md:h-[30px] md:w-[30px]
                       lg:h-[40px] lg:w-[40px]
                       xl:h-[42px] xl:w-[42px]
@@ -237,61 +251,42 @@ function ContactInfoCarousel({ block }: Props) {
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        <div className="mt-[22px] flex items-center justify-center gap-[8px] md:mt-[26px]">
-          <button
-            type="button"
-            onClick={() => api?.scrollPrev()}
-            aria-label="Previous contact"
-            className="
-              flex items-center justify-center rounded-full
-              border-0 bg-primary-1/35 p-0
-              shadow-[0_10px_22px_rgba(0,108,103,0.18)]
-              backdrop-blur-[10px]
-              transition duration-300
-              hover:bg-primary-1
-              size-[26px] 
-              md:size-[28px]
-              lg:size-[32px]
-              xl:size-[34px]
-            "
-          >
-            <Image
-              src={WhiteArrowLeft}
-              alt=""
-              width={16}
-              height={16}
-              className="h-[14px] w-[14px] object-contain"
-            />
-          </button>
-
-          <button
-            type="button"
-            onClick={() => api?.scrollNext()}
-            aria-label="Next contact"
-            className="
-              flex items-center justify-center rounded-full
-              border-0 bg-primary-1/35 p-0
-              shadow-[0_10px_22px_rgba(0,108,103,0.18)]
-              backdrop-blur-[10px]
-              transition duration-300
-              hover:bg-primary-1
-              size-[26px] 
-              md:size-[28px]
-              lg:size-[32px]
-              xl:size-[34px]
-            "
-          >
-            <Image
-              src={WhiteArrowRight}
-              alt=""
-              width={16}
-              height={16}
-              className="h-[14px] w-[14px] object-contain"
-            />
-          </button>
-        </div>
       </Carousel>
+
+      {shouldShowArrows && (
+        <div
+          className="
+            mt-[22px] flex items-center justify-center gap-[12px]
+            md:mt-[26px]
+          "
+        >
+          <CarouselArrowButton
+            direction="prev"
+            ariaLabel="Previous contact"
+            onClick={() => api?.scrollPrev()}
+            disabled={!canScrollPrev}
+            buttonClassName="
+              size-[30px]
+              md:size-[32px]
+              lg:size-[36px]
+              xl:size-[38px]
+            "
+          />
+
+          <CarouselArrowButton
+            direction="next"
+            ariaLabel="Next contact"
+            onClick={() => api?.scrollNext()}
+            disabled={!canScrollNext}
+            buttonClassName="
+              size-[30px]
+              md:size-[32px]
+              lg:size-[36px]
+              xl:size-[38px]
+            "
+          />
+        </div>
+      )}
     </div>
   )
 }
