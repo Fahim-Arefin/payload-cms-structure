@@ -4,7 +4,8 @@ import { AllArticlesBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import React, { useMemo } from 'react'
 import ArticleCardCTA from './ArticleCardCTA'
-
+import { buildNewsHref } from '@/lib/utils'
+import Link from 'next/link'
 import LineImage from 'public/assets/images/Line.png'
 
 type Props = {
@@ -62,7 +63,12 @@ function ArticleCard({
   }, [data, tagsData?.tags])
 
   const ctaButton = block?.articleCta?.ctaButtons?.[0]
-
+  const articleHref = buildNewsHref({
+    buttonLink: ctaButton?.buttonLink,
+    sectionId: ctaButton?.sectionId,
+    itemId: data?.id || '',
+    detail: !detailsPage,
+  })
   return (
     <div
       className="
@@ -78,7 +84,7 @@ function ArticleCard({
       "
     >
       {/* card image */}
-      <div className="relative w-full aspect-[310/182] overflow-hidden rounded-sm lg:rounded-[6px] xl:rounded-[8px]">
+      {/* <div className="relative w-full aspect-[310/182] overflow-hidden rounded-sm lg:rounded-[6px] xl:rounded-[8px]">
         {typeof data?.cardImage === 'object' && data?.cardImage?.url && (
           <Image
             src={data.cardImage.url}
@@ -96,8 +102,36 @@ function ArticleCard({
             blurDataURL={data?.cardImageBlurDataURL || undefined}
           />
         )}
-      </div>
-
+      </div> */}
+      <Link
+        href={articleHref}
+        aria-label={data?.title ? `Read article: ${data.title}` : 'Read article'}
+        className="
+    relative block w-full aspect-[310/182]
+    overflow-hidden rounded-sm
+    outline-none
+    lg:rounded-[6px]
+    xl:rounded-[8px]
+  "
+      >
+        {typeof data?.cardImage === 'object' && data?.cardImage?.url && (
+          <Image
+            src={data.cardImage.url}
+            alt={data?.title || 'Article card image'}
+            fill
+            className="
+        h-full w-full object-cover object-center
+        rounded-sm lg:rounded-[6px] xl:rounded-[8px]
+        transition-transform duration-500 ease-out
+        group-hover/article-card:scale-[1.04]
+      "
+            quality={100}
+            sizes="(max-width: 767px) 100vw, (max-width: 1439px) 33vw, 420px"
+            placeholder={data?.cardImageBlurDataURL ? 'blur' : 'empty'}
+            blurDataURL={data?.cardImageBlurDataURL || undefined}
+          />
+        )}
+      </Link>
       {/* tags + date */}
       <div className="mt-[18px] flex items-center justify-between gap-4 xl:mt-[22px] 2xl:mt-[24px]">
         <div className="flex min-w-0 flex-wrap items-center gap-2">
@@ -112,8 +146,9 @@ function ArticleCard({
                 font-grift font-semibold global-p5
                 text-secondary-1
                 transition-all duration-300 ease-out
-                group-hover/article-card:bg-primary-2
-                group-hover/article-card:border-primary-2
+                group-hover/article-card:bg-primary-1
+                group-hover/article-card:border-primary-1
+                group-hover/article-card:text-white-1
               "
             >
               {tag.label}
@@ -127,7 +162,7 @@ function ArticleCard({
       </div>
 
       {/* title */}
-      {data?.title && (
+      {/* {data?.title && (
         <div
           className="
             mt-[18px]
@@ -139,8 +174,25 @@ function ArticleCard({
         >
           {data.title}
         </div>
-      )}
+      )} */}
 
+      {data?.title && (
+        <Link
+          href={articleHref}
+          className="
+      mt-[18px]
+      block
+      font-agency text-secondary-1 global-h7
+      transition-colors duration-300
+      outline-none
+      group-hover/article-card:text-primary-1
+      hover:text-primary-1
+      xl:mt-[22px]
+    "
+        >
+          {data.title}
+        </Link>
+      )}
       {/* description */}
       {!hideDescription && data?.description && (
         <div className="mt-[12px] font-grift text-secondary-2 line-clamp-3 global-p5">

@@ -118,10 +118,10 @@ function SingleArticleClient({ block, data }: Props) {
                   className="
                   inline-flex items-center justify-center
                   rounded-[4px]
-                  border border-primary-2 bg-primary-2
+                  bg-primary-1
                   px-[8px] py-[3px]
                   font-grift global-p5 font-semibold
-                  text-secondary-1
+                  text-white-1
                 "
                 >
                   {tag.label}

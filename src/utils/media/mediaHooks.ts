@@ -18,6 +18,7 @@ import {
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCTION_PIPELINE_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
+  WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
@@ -251,6 +252,17 @@ export const mediaHooks = withMediaLifecycle({
         image: 'Item Image',
       },
     },
+    {
+      layoutKey: 'layout',
+      blockType: WHY_CHOOSE_US_SLUG_AND_TAG,
+      groupKey: 'choosingCriteria',
+      arrayKey: 'criteria',
+      mediaFields: ['icon'],
+      itemLabelField: 'text',
+      mediaFieldLabels: {
+        icon: 'Criteria Icon',
+      },
+    } as any,
   ],
 
   blockGroupArrayFields: [
