@@ -2657,6 +2657,16 @@ export interface Page {
            */
           showRatingForm?: boolean | null;
         };
+        /**
+         * Provide at least one email address. All valid emails will receive rating/review form submissions through SMTP.
+         */
+        recipientEmails?: {
+          email1?: string | null;
+          email2?: string | null;
+          email3?: string | null;
+          email4?: string | null;
+          email5?: string | null;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'rating';
@@ -5122,6 +5132,15 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     showRatingForm?: T;
+                  };
+              recipientEmails?:
+                | T
+                | {
+                    email1?: T;
+                    email2?: T;
+                    email3?: T;
+                    email4?: T;
+                    email5?: T;
                   };
               id?: T;
               blockName?: T;
