@@ -6116,13 +6116,23 @@ export interface News {
   createdAt?: string | null;
 }
 /**
- * Global Contact Us options: form labels, solutions and currencies.
+ * Global Contact Us options: recipient emails, form labels, solutions and currencies.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-contact-us".
  */
 export interface GlobalContactUs {
   id: string;
+  /**
+   * Provide at least one email address. All valid emails will receive Contact Us form submissions through SMTP.
+   */
+  recipientEmails?: {
+    email1?: string | null;
+    email2?: string | null;
+    email3?: string | null;
+    email4?: string | null;
+    email5?: string | null;
+  };
   /**
    * Controls the frontend Contact Us form section labels.
    */
@@ -6399,6 +6409,15 @@ export interface NewsSelect<T extends boolean = true> {
  * via the `definition` "global-contact-us_select".
  */
 export interface GlobalContactUsSelect<T extends boolean = true> {
+  recipientEmails?:
+    | T
+    | {
+        email1?: T;
+        email2?: T;
+        email3?: T;
+        email4?: T;
+        email5?: T;
+      };
   formLabels?:
     | T
     | {
