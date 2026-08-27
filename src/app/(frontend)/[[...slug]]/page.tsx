@@ -400,6 +400,7 @@ export const dynamic = 'force-static'
 export const revalidate = false
 
 export default async function CatchAll(props: PageProps) {
+  // await new Promise((resolve) => setTimeout(resolve, 5000))
   const { slug } = await props.params
   const effective = slug?.length ? slug.join('/') : 'index'
   const path = norm(effective)
