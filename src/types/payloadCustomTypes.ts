@@ -1,5 +1,7 @@
 import {
   ABOUT_US_INTRO_SLUG_AND_TAG,
+  ALL_ARTICLE_SLUG_AND_TAG,
+  ALL_NEWS_SLUG_AND_TAG,
   BASIC_HERO_SLUG_AND_TAG,
   BOOK_A_CALL_SLUG_AND_TAG,
   CLIENT_SUCCESS_STORIES_SLUG_AND_TAG,
@@ -14,8 +16,11 @@ import {
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   CS_DELIVERY_SLUG_AND_TAG,
   CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG,
+  CUSTOMER_REVIEW_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
+  FEATURED_ARTICLE_SLUG_AND_TAG,
+  FEATURED_NEWS_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
   LOCATION_SLUG_AND_TAG,
   MAINTENANCE_SLUG_AND_TAG,
@@ -25,6 +30,10 @@ import {
   PRODUCTION_PIPELINE_SLUG_AND_TAG,
   PROJECT_APPROACH_SLUG_AND_TAG,
   RATING_SLUG_AND_TAG,
+  RELATED_ARTICLE_SLUG_AND_TAG,
+  RELATED_NEWS_SLUG_AND_TAG,
+  SINGLE_ARTICLE_SLUG_AND_TAG,
+  SINGLE_NEWS_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -157,4 +166,40 @@ export type ProductionPipelineBlockType = Extract<
 export type WhatWeBuildBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof WHAT_WE_BUILD_SLUG_AND_TAG }
+>
+export type CustomerReviewBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CUSTOMER_REVIEW_SLUG_AND_TAG }
+>
+export type AllArticlesBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ALL_ARTICLE_SLUG_AND_TAG }
+>
+export type SingleArticlesBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SINGLE_ARTICLE_SLUG_AND_TAG }
+>
+export type RelatedArticlesBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof RELATED_ARTICLE_SLUG_AND_TAG }
+>
+export type FeaturedArticleBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof FEATURED_ARTICLE_SLUG_AND_TAG }
+>
+export type AllNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof ALL_NEWS_SLUG_AND_TAG }
+>
+export type SingleNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof SINGLE_NEWS_SLUG_AND_TAG }
+>
+export type RelatedNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof RELATED_NEWS_SLUG_AND_TAG }
+>
+export type FeaturedNewsBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof FEATURED_NEWS_SLUG_AND_TAG }
 >

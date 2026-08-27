@@ -19,6 +19,10 @@ import NewsletterSubscribers from './collections/NewsletterSubscribers'
 import GlobalContactUs from './collections/globals/GlobalContactUs'
 import ContactFormSubmissions from './collections/ContactFormSubmissions'
 import ReviewFormSubmissions from './collections/ReviewFormSubmissions'
+import ArticleTags from './collections/globals/ArticleTags'
+import Article from './collections/globals/Article'
+import News from './collections/globals/News'
+import NewsTags from './collections/globals/NewsTags'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -101,7 +105,7 @@ export default buildConfig({
     ReviewFormSubmissions,
     Pages,
   ],
-  globals: [Navbar, Footer, GlobalContactUs],
+  globals: [Navbar, Footer, ArticleTags, Article, NewsTags, News, GlobalContactUs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -150,15 +154,28 @@ export default buildConfig({
   },
 
   // sharp,
+  // email: nodemailerAdapter({
+  //   defaultFromAddress: process?.env?.SMTP_MAIL_FROM ?? 'uchchhash@xynolab.com',
+  //   defaultFromName: 'Shanta Life',
+  //   transportOptions: {
+  //     host: process?.env?.SMTP_HOST,
+  //     port: parseInt(process?.env?.SMTP_PORT ?? '587'),
+  //     auth: {
+  //       user: process?.env?.SMTP_USER,
+  //       pass: process?.env?.SMTP_PASSWORD,
+  //     },
+  //   },
+  // }),
   email: nodemailerAdapter({
-    defaultFromAddress: process?.env?.SMTP_MAIL_FROM ?? 'uchchhash@xynolab.com',
-    defaultFromName: 'Shanta Life',
+    defaultFromAddress: process.env.SMTP_MAIL_FROM || '',
+    defaultFromName: process.env.SMTP_MAIL_FROM_NAME || 'XynoLab',
     transportOptions: {
-      host: process?.env?.SMTP_HOST,
-      port: parseInt(process?.env?.SMTP_PORT ?? '587'),
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT || 587),
+      secure: process.env.SMTP_SECURE === 'true',
       auth: {
-        user: process?.env?.SMTP_USER,
-        pass: process?.env?.SMTP_PASSWORD,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD,
       },
     },
   }),

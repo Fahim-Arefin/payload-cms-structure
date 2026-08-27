@@ -19,18 +19,20 @@ async function ContactUsServer({ block }: Props) {
     getGlobalCached<GlobalContactUs>(GLOBAL_CONTACT_US_SLUG_AND_TAG, 2, CONTACT_US_SLUG_AND_TAG),
   ])
 
+  const hasCurrencies =
+    Array.isArray(globalContactData?.currencies) && globalContactData.currencies.length > 0
+
+  const hasSolutions =
+    Array.isArray(globalContactData?.ourSolutions) && globalContactData.ourSolutions.length > 0
+
   return (
     <div>
-      {globalContactData?.currencies &&
-      globalContactData?.ourSolutions &&
-      globalContactData?.budgetRange &&
-      globalContactData?.currencies?.length > 0 &&
-      globalContactData?.ourSolutions?.length > 0 ? (
+      {hasCurrencies && hasSolutions ? (
         <ContactUsClient globalContactData={globalContactData} block={block} />
       ) : (
         <NoDataFound
           message="No Data Found"
-          description={`Please fill up ${GLOBAL_CONTACT_US_LABEL} collection data (Solutions, Currencies and Budget Range)`}
+          description={`Please fill up ${GLOBAL_CONTACT_US_LABEL} collection data (Solutions and Currencies)`}
           bgColor={block?.sectionSettings?.backgroundColor || ''}
         />
       )}

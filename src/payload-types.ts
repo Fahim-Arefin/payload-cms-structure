@@ -99,11 +99,19 @@ export interface Config {
   globals: {
     navbar: Navbar;
     footer: Footer;
+    'article-tags': ArticleTag;
+    articles: Article;
+    'news-tags': NewsTag;
+    news: News;
     'global-contact-us': GlobalContactUs;
   };
   globalsSelect: {
     navbar: NavbarSelect<false> | NavbarSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'article-tags': ArticleTagsSelect<false> | ArticleTagsSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    'news-tags': NewsTagsSelect<false> | NewsTagsSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
     'global-contact-us': GlobalContactUsSelect<false> | GlobalContactUsSelect<true>;
   };
   locale: null;
@@ -273,15 +281,18 @@ export interface ContactFormSubmission {
   name: string;
   phone: string;
   email: string;
-  selectedSolutions: {
-    text: string;
-    id?: string | null;
-  }[];
-  selectedBudgetLabel: string;
-  selectedCurrencySign: string;
-  selectedCurrencyCode: string;
-  budgetMin: number;
-  budgetMax: number;
+  city: string;
+  description?: string | null;
+  selectedSolutions?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  selectedBudgetLabel?: string | null;
+  selectedCurrencySign?: string | null;
+  selectedCurrencyCode?: string | null;
+  budget?: number | null;
   status?: ('new' | 'contacted' | 'closed') | null;
   updatedAt: string;
   createdAt: string;
@@ -302,34 +313,33 @@ export interface ReviewFormSubmission {
   phone: string;
   rating: number;
   review: string;
-  status?: ('new' | 'reviewed' | 'published') | null;
+  status: 'new' | 'reviewed' | 'published';
   /**
-   * These images are uploaded only from this collection in the admin panel. They are not submitted from the frontend form.
+   * Optional. Upload company logo/icon. Recommended ratio 140:50.
    */
-  adminImages?: {
-    /**
-     * Upload & crop the company icon. This can be uploaded from this collection only. Ratio 200:80
-     */
-    companyIcon?: (string | null) | Media;
-    companyIconOriginal?: (string | null) | Media;
-    pendingCompanyIconOriginal?: string | null;
-    pendingCompanyIconCrop?: string | null;
-    /**
-     * Auto-generated Base64 blur
-     */
-    companyIconBlurDataURL?: string | null;
-    /**
-     * Upload & crop the user profile image. This can be uploaded from this collection only. Ratio 325:385
-     */
-    userProfileImage?: (string | null) | Media;
-    userProfileImageOriginal?: (string | null) | Media;
-    pendingUserProfileImageOriginal?: string | null;
-    pendingUserProfileImageCrop?: string | null;
-    /**
-     * Auto-generated Base64 blur
-     */
-    userProfileImageBlurDataURL?: string | null;
-  };
+  companyIcon?: (string | null) | Media;
+  companyIconOriginal?: (string | null) | Media;
+  pendingCompanyIconOriginal?: string | null;
+  pendingCompanyIconCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  companyIconBlurDataURL?: string | null;
+  /**
+   * Optional. Upload user profile image. Recommended ratio 240:301.
+   */
+  userProfileImage?: (string | null) | Media;
+  userProfileImageOriginal?: (string | null) | Media;
+  pendingUserProfileImageOriginal?: string | null;
+  pendingUserProfileImageCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  userProfileImageBlurDataURL?: string | null;
+  /**
+   * Optional. Company website / portfolio / social page URL. Must be a full http(s) URL.
+   */
+  companyLink?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -411,6 +421,35 @@ export interface Page {
            * Optional. Must be inside Heading 3. Max 40.
            */
           heading3Highlighted?: string | null;
+          /**
+           * Turn this ON to show a typewriter animated heading below the normal heading. Normal Heading 1 / Heading 2 / Heading 3 will always remain visible.
+           */
+          enableAnimatedHeading?: boolean | null;
+          /**
+           * This animated heading appears below the normal heading. The animated texts will type and delete one by one.
+           */
+          animatedHeading?: {
+            /**
+             * Optional. Example: with. This text stays visible before the animated typing text.
+             */
+            staticText?: string | null;
+            /**
+             * Choose whether the typewriter text appears beside the static text or on a new line.
+             */
+            animatedTextPlacement: 'same-line' | 'new-line';
+            /**
+             * Add words or short phrases that will type one by one. Example: Laravel, HTML5, CSS3, Bootstrap, Tailwind.
+             */
+            animatedTexts?:
+              | {
+                  /**
+                   * Max 40 characters.
+                   */
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+          };
           description?: {
             root: {
               type: string;
@@ -1355,7 +1394,7 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
-         * Main intro heading, highlighted text, description and optional CTA.
+         * Manage the section tag, heading, description and two CTA buttons for the customer review section.
          */
         sectionHeading: {
           /**
@@ -1404,63 +1443,40 @@ export interface Page {
             };
             [k: string]: unknown;
           } | null;
+          ctaButtons?:
+            | {
+                /**
+                 * Max 40 characters.
+                 */
+                label: string;
+                /**
+                 * Select the button style
+                 */
+                style?: ('btn01' | 'btn02') | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
+                id?: string | null;
+              }[]
+            | null;
         };
         /**
-         * Company-wise client success reviews.
+         * Control where the customer review section gets its reviews from.
          */
-        clientReviews: {
-          companies: {
-            /**
-             * Example: AltSource. Max 80 characters.
-             */
-            companyName: string;
-            /**
-             * Upload company logo. Transparent PNG/SVG preferred. Aspect ratio 3:1.
-             */
-            companyLogo: string | Media;
-            companyLogoOriginal?: (string | null) | Media;
-            pendingCompanyLogoOriginal?: string | null;
-            pendingCompanyLogoCrop?: string | null;
-            /**
-             * Auto-generated Base64 blur
-             */
-            companyLogoBlurDataURL?: string | null;
-            reviews: {
-              /**
-               * Example: Dianne Russell. Max 80 characters.
-               */
-              clientName: string;
-              /**
-               * Client designation. Max 120 characters.
-               */
-              clientDesignation: string;
-              /**
-               * Rating from 1 to 5.
-               */
-              rating: number;
-              /**
-               * Client review text. Max 500 characters.
-               */
-              review: string;
-              /**
-               * Upload client image. Aspect ratio 240:301.
-               */
-              image: string | Media;
-              imageOriginal?: (string | null) | Media;
-              pendingImageOriginal?: string | null;
-              pendingImageCrop?: string | null;
-              /**
-               * Auto-generated Base64 blur
-               */
-              imageBlurDataURL?: string | null;
-              id?: string | null;
-            }[];
-            id?: string | null;
-          }[];
+        reviewSettings?: {
+          /**
+           * Enable this to show published reviews submitted through the review form.
+           */
+          useReviewFormPublishedReviews?: boolean | null;
         };
         id?: string | null;
         blockName?: string | null;
-        blockType: 'client-success-stories';
+        blockType: 'customer-review';
       }
     | {
         uploadSessionId?: string | null;
@@ -2641,6 +2657,16 @@ export interface Page {
            */
           showRatingForm?: boolean | null;
         };
+        /**
+         * Provide at least one email address. All valid emails will receive rating/review form submissions through SMTP.
+         */
+        recipientEmails?: {
+          email1?: string | null;
+          email2?: string | null;
+          email3?: string | null;
+          email4?: string | null;
+          email5?: string | null;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'rating';
@@ -2963,6 +2989,14 @@ export interface Page {
           criteria?:
             | {
                 /**
+                 * Upload the icon for this criteria item. Recommended square ratio 1:1.
+                 */
+                icon: string | Media;
+                iconOriginal?: (string | null) | Media;
+                pendingIconOriginal?: string | null;
+                pendingIconCrop?: string | null;
+                iconBlurDataURL?: string | null;
+                /**
                  * Example: Custom Design – No Generic Templates. Max 90 characters.
                  */
                 text: string;
@@ -3115,6 +3149,789 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'production-pipeline';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the article listing section tag, heading and description. CTA is disabled here because the article card CTA is controlled separately.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 120 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 120.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 120 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 120.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the article card/details page CTA. This link is used for the article details page button.
+         */
+        articleCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch article data from the global Articles collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders data from **Global → Articles**.
+           *
+           * **Before enabling:** fill up the Global → Articles data.
+           *
+           * **Notes:**
+           * • This block only stores presentation options (e.g., background color , CTA btn etc.).
+           * • Articles comes from the single shared Global to keep pages in sync.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'all-article';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the single article CTA button. This button can be used to link back to the article listing page or any internal page.
+         */
+        articleCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch single article data from the global Articles collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders data from **Global → Articles**.
+           *
+           * **Before enabling:** fill up the Global → Articles data.
+           *
+           * **Notes:**
+           * • This block only stores presentation options such as background color and CTA button.
+           * • Article details come from the single shared Global to keep pages in sync.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'single-article';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the related article section tag, heading and description. CTA is disabled for this block.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 120 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 120.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 120 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 120.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the related article card CTA. This link is used to build each related article detail page URL using the selected page + article item id.
+         */
+        articleCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch related articles from the global Articles collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders related articles from **Global → Articles**.
+           *
+           * **Before enabling:** fill up the Global → Articles data.
+           *
+           * **Notes:**
+           * • This block only stores presentation options like background color and section heading.
+           * • Related articles come from the shared Global → Articles collection.
+           * • The frontend can filter out the current article and show other articles from the same/global article data.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'related-article';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Turn this ON if this Featured Article block is the first visible content section After Hero Section of the page. Frontend can use this to adjust top Roundness.
+         */
+        isFirstContentOfPage?: boolean | null;
+        /**
+         * Manage the featured article section tag, heading and description. CTA is disabled for the section heading.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 120 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 120.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 120 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 120.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the featured article card CTA. This link is used to build the article details page URL using the selected page + article item ID.
+         */
+        articleCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch featured articles from the global Articles collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders featured articles from **Global → Articles**.
+           *
+           * **Before enabling:** fill up the Global → Articles data.
+           *
+           * **Notes:**
+           * • This block stores presentation options like background color, first content setting, section heading and article CTA.
+           * • Featured article data comes from the shared Global → Articles collection.
+           * • The frontend should render articles where “Featured Article” is enabled in the global article item.
+           * • The article CTA works like the All Article block CTA: selected page + section ID + article item ID.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featured-article';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the news listing section tag, heading and description. CTA is disabled here because the news card CTA is controlled separately.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 120 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 120.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 120 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 120.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the news card/details page CTA. This link is used for the news details page button.
+         */
+        newsCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch news data from the global News collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders data from **Global → News**.
+           *
+           * **Before enabling:** fill up the Global → News data.
+           *
+           * **Notes:**
+           * • This block only stores presentation options such as background color, section heading and CTA button.
+           * • News data comes from the single shared Global to keep pages in sync.
+           * • Frontend should fetch from Global → news.
+           * • The news CTA should work like the Article CTA: selected page + section ID + news item ID.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'all-news';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the single news CTA button. This button can be used to link back to the news listing page or any internal page.
+         */
+        newsCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch single news data from the global News collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders data from **Global → News**.
+           *
+           * **Before enabling:** fill up the Global → News data.
+           *
+           * **Notes:**
+           * • This block only stores presentation options such as background color and CTA button.
+           * • News details come from the single shared Global to keep pages in sync.
+           * • Frontend should fetch from Global → news.
+           * • The route slug/id is used to find the matching news item from the global news array.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'single-news';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Manage the related news section tag, heading and description. CTA is disabled for the section heading.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 120 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 120.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 120 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 120.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the related news card CTA. This link is used to build each related news detail page URL using the selected page + news item ID.
+         */
+        newsCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch related news from the global News collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders related news from **Global → News**.
+           *
+           * **Before enabling:** fill up the Global → News data.
+           *
+           * **Notes:**
+           * • This block stores presentation options like background color, section heading and news CTA.
+           * • Related news data comes from the shared Global → News collection.
+           * • Frontend should fetch from Global → news.
+           * • The frontend can filter out the current news item and show other news items with matching tags.
+           * • The news CTA works like the All News block CTA: selected page + section ID + related news item ID.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'related-news';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Turn this ON if this Featured News block is the first visible content section after Hero Section of the page. Frontend can use this to adjust top roundness.
+         */
+        isFirstContentOfPage?: boolean | null;
+        /**
+         * Manage the featured news section tag, heading and description. CTA is disabled for the section heading.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 120 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 120.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 120 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 120.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the featured news card CTA. This link is used to build the news details page URL using the selected page + news item ID.
+         */
+        newsCta: {
+          ctaButtons: {
+            /**
+             * Max 40 characters.
+             */
+            label: string;
+            /**
+             * Select the button style
+             */
+            style?: ('btn01' | 'btn02') | null;
+            /**
+             * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+             */
+            buttonLink: string | Page;
+            /**
+             * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+             */
+            sectionId?: string | null;
+            id?: string | null;
+          }[];
+        };
+        /**
+         * Control whether this block should fetch featured news from the global News collection.
+         */
+        sharedDataSettings: {
+          /**
+           * When ON, this block renders featured news from **Global → News**.
+           *
+           * **Before enabling:** fill up the Global → News data.
+           *
+           * **Notes:**
+           * • This block stores presentation options like background color, first content setting, section heading and news CTA.
+           * • Featured news data comes from the shared Global → News collection.
+           * • Frontend should fetch from Global → news.
+           * • The frontend should render news items where “Feature this news” is enabled in the global news item.
+           * • The news CTA works like the All News block CTA: selected page + section ID + news item ID.
+           */
+          useSharedData: boolean;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featured-news';
       }
   )[];
   updatedAt: string;
@@ -3303,6 +4120,8 @@ export interface ContactFormSubmissionsSelect<T extends boolean = true> {
   name?: T;
   phone?: T;
   email?: T;
+  city?: T;
+  description?: T;
   selectedSolutions?:
     | T
     | {
@@ -3312,8 +4131,7 @@ export interface ContactFormSubmissionsSelect<T extends boolean = true> {
   selectedBudgetLabel?: T;
   selectedCurrencySign?: T;
   selectedCurrencyCode?: T;
-  budgetMin?: T;
-  budgetMax?: T;
+  budget?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -3334,20 +4152,17 @@ export interface ReviewFormSubmissionsSelect<T extends boolean = true> {
   rating?: T;
   review?: T;
   status?: T;
-  adminImages?:
-    | T
-    | {
-        companyIcon?: T;
-        companyIconOriginal?: T;
-        pendingCompanyIconOriginal?: T;
-        pendingCompanyIconCrop?: T;
-        companyIconBlurDataURL?: T;
-        userProfileImage?: T;
-        userProfileImageOriginal?: T;
-        pendingUserProfileImageOriginal?: T;
-        pendingUserProfileImageCrop?: T;
-        userProfileImageBlurDataURL?: T;
-      };
+  companyIcon?: T;
+  companyIconOriginal?: T;
+  pendingCompanyIconOriginal?: T;
+  pendingCompanyIconCrop?: T;
+  companyIconBlurDataURL?: T;
+  userProfileImage?: T;
+  userProfileImageOriginal?: T;
+  pendingUserProfileImageOriginal?: T;
+  pendingUserProfileImageCrop?: T;
+  userProfileImageBlurDataURL?: T;
+  companyLink?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -3387,6 +4202,19 @@ export interface PagesSelect<T extends boolean = true> {
                     heading2Highlighted?: T;
                     heading3?: T;
                     heading3Highlighted?: T;
+                    enableAnimatedHeading?: T;
+                    animatedHeading?:
+                      | T
+                      | {
+                          staticText?: T;
+                          animatedTextPlacement?: T;
+                          animatedTexts?:
+                            | T
+                            | {
+                                text?: T;
+                                id?: T;
+                              };
+                        };
                     description?: T;
                     ctaButtons?:
                       | T
@@ -3753,7 +4581,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'client-success-stories'?:
+        'customer-review'?:
           | T
           | {
               uploadSessionId?: T;
@@ -3774,35 +4602,20 @@ export interface PagesSelect<T extends boolean = true> {
                     heading2Highlighted?: T;
                     heading2HighlightColor?: T;
                     description?: T;
-                  };
-              clientReviews?:
-                | T
-                | {
-                    companies?:
+                    ctaButtons?:
                       | T
                       | {
-                          companyName?: T;
-                          companyLogo?: T;
-                          companyLogoOriginal?: T;
-                          pendingCompanyLogoOriginal?: T;
-                          pendingCompanyLogoCrop?: T;
-                          companyLogoBlurDataURL?: T;
-                          reviews?:
-                            | T
-                            | {
-                                clientName?: T;
-                                clientDesignation?: T;
-                                rating?: T;
-                                review?: T;
-                                image?: T;
-                                imageOriginal?: T;
-                                pendingImageOriginal?: T;
-                                pendingImageCrop?: T;
-                                imageBlurDataURL?: T;
-                                id?: T;
-                              };
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
                           id?: T;
                         };
+                  };
+              reviewSettings?:
+                | T
+                | {
+                    useReviewFormPublishedReviews?: T;
                   };
               id?: T;
               blockName?: T;
@@ -4320,6 +5133,15 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     showRatingForm?: T;
                   };
+              recipientEmails?:
+                | T
+                | {
+                    email1?: T;
+                    email2?: T;
+                    email3?: T;
+                    email4?: T;
+                    email5?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -4449,6 +5271,11 @@ export interface PagesSelect<T extends boolean = true> {
                     criteria?:
                       | T
                       | {
+                          icon?: T;
+                          iconOriginal?: T;
+                          pendingIconOriginal?: T;
+                          pendingIconCrop?: T;
+                          iconBlurDataURL?: T;
                           text?: T;
                           id?: T;
                         };
@@ -4521,6 +5348,328 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'all-article'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              articleCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'single-article'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              articleCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'related-article'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              articleCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'featured-article'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              isFirstContentOfPage?: T;
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              articleCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'all-news'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              newsCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'single-news'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              newsCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'related-news'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              newsCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'featured-news'?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              isFirstContentOfPage?: T;
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              newsCta?:
+                | T
+                | {
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                  };
+              sharedDataSettings?:
+                | T
+                | {
+                    useSharedData?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -4559,7 +5708,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Global navbar: logo and multi-level navigation (desktop & mobile), plus an optional portal link.
+ * Global navbar: logo and multi-level navigation, mobile drawer CTA, plus search drawer rotating content.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navbar".
@@ -4580,20 +5729,20 @@ export interface Navbar {
   logoBlurDataURL?: string | null;
   desktop?: {
     /**
-     * Top-level nav items for desktop. Each item can optionally have nested children.
+     * Top-level nav items for desktop and mobile. Each item can optionally have children.
      */
     items?:
       | {
           /**
-           * Optional. Max 100 characters.
+           * Required. Max 100 characters.
            */
           label: string;
           /**
-           * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
+           * Pick an internal Page to link to.
            */
           href: string | Page;
           /**
-           * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+           * Used for direct jump links to this section. No spaces. Use "-" to separate words.
            */
           sectionId?: string | null;
           /**
@@ -4602,20 +5751,60 @@ export interface Navbar {
           children?:
             | {
                 /**
-                 * Optional. Max 100 characters.
+                 * Required. Max 100 characters.
                  */
                 label: string;
                 /**
-                 * Pick an internal Page to link to. If CTA text is provided, either this or URL (below) is required.
+                 * Pick an internal Page to link to.
                  */
                 href: string | Page;
                 /**
-                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 * Used for direct jump links to this section. No spaces. Use "-" to separate words.
                  */
                 sectionId?: string | null;
                 id?: string | null;
               }[]
             | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Controls mobile drawer extra CTA content.
+   */
+  mobileDrawer: {
+    /**
+     * Controls the mobile drawer “Drop Your Query” button label and internal page/section link.
+     */
+    dropQueryCta: {
+      /**
+       * Required. Max 100 characters.
+       */
+      label: string;
+      /**
+       * Pick an internal Page to link to.
+       */
+      href: string | Page;
+      /**
+       * Optional. Used for direct jump links to a section. Example: contact-form
+       */
+      sectionId?: string | null;
+    };
+  };
+  /**
+   * Rotating title and description content shown at the bottom of the desktop search drawer.
+   */
+  searchContent?: {
+    items?:
+      | {
+          /**
+           * Max 140 characters.
+           */
+          title: string;
+          /**
+           * Max 260 characters.
+           */
+          description: string;
           id?: string | null;
         }[]
       | null;
@@ -4745,13 +5934,233 @@ export interface Footer {
   createdAt?: string | null;
 }
 /**
- * Global Contact Us options: our solutions, currencies and budget range.
+ * Global list of article tags.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "article-tags".
+ */
+export interface ArticleTag {
+  id: string;
+  tags?:
+    | {
+        label: string;
+        /**
+         * Unique key like web-design, ecommerce, automation.
+         */
+        key: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Global article manager using article tag selector.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: string;
+  uploadSessionId?: string | null;
+  articles?:
+    | {
+        /**
+         * Upload card image. Recommended aspect ratio 310:182.
+         */
+        cardImage: string | Media;
+        cardImageOriginal?: (string | null) | Media;
+        pendingCardImageOriginal?: string | null;
+        pendingCardImageCrop?: string | null;
+        cardImageBlurDataURL?: string | null;
+        /**
+         * Upload detail page image. Recommended aspect ratio 500:700.
+         */
+        detailPageImage: string | Media;
+        detailPageImageOriginal?: (string | null) | Media;
+        pendingDetailPageImageOriginal?: string | null;
+        pendingDetailPageImageCrop?: string | null;
+        detailPageImageBlurDataURL?: string | null;
+        publishDate: string;
+        /**
+         * Example: 5 min read.
+         */
+        estimatedReadingTime: string;
+        /**
+         * Article title. Max 140 characters.
+         */
+        title: string;
+        /**
+         * Article detail content / description.
+         */
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * Stores selected article tag keys from the Article Tags global.
+         */
+        tagKeys:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        /**
+         * If enabled, this article can be shown in featured article sections.
+         */
+        isFeatured?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Global list of news tags.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-tags".
+ */
+export interface NewsTag {
+  id: string;
+  tags?:
+    | {
+        label: string;
+        /**
+         * Unique key like conference, product-launch, company-news.
+         */
+        key: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Global news manager using news tag selector.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: string;
+  uploadSessionId?: string | null;
+  news?:
+    | {
+        /**
+         * Upload card image. Recommended aspect ratio 265:302.
+         */
+        cardImage: string | Media;
+        cardImageOriginal?: (string | null) | Media;
+        pendingCardImageOriginal?: string | null;
+        pendingCardImageCrop?: string | null;
+        cardImageBlurDataURL?: string | null;
+        /**
+         * Upload detail page image. Recommended aspect ratio 1200:406.
+         */
+        detailPageImage: string | Media;
+        detailPageImageOriginal?: (string | null) | Media;
+        pendingDetailPageImageOriginal?: string | null;
+        pendingDetailPageImageCrop?: string | null;
+        detailPageImageBlurDataURL?: string | null;
+        /**
+         * Event status is automatically detected from this date: future = Upcoming Events, past = Past Events, today = Todays Events.
+         */
+        publishDate: string;
+        /**
+         * Example: 5 min read.
+         */
+        estimatedReadingTime: string;
+        /**
+         * Automatically generated from Publish Date after save. Future = Upcoming Events, Past = Past Events, Today = Todays Events.
+         */
+        eventStatus: 'upcoming-events' | 'past-events' | 'todays-events';
+        /**
+         * News title. Max 140 characters.
+         */
+        title: string;
+        /**
+         * News detail content / description.
+         */
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * Stores selected news tag keys from the News Tags global.
+         */
+        tagKeys:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        /**
+         * If enabled, this news item can be shown in featured news sections.
+         */
+        isFeatured?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Global Contact Us options: recipient emails, form labels, solutions and currencies.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-contact-us".
  */
 export interface GlobalContactUs {
   id: string;
+  /**
+   * Provide at least one email address. All valid emails will receive Contact Us form submissions through SMTP.
+   */
+  recipientEmails?: {
+    email1?: string | null;
+    email2?: string | null;
+    email3?: string | null;
+    email4?: string | null;
+    email5?: string | null;
+  };
+  /**
+   * Controls the frontend Contact Us form section labels.
+   */
+  formLabels: {
+    contactInfoHeading: string;
+    descriptionHeading: string;
+    servicesHeading: string;
+    budgetHeading: string;
+  };
   /**
    * Examples: Software as a Service (SaaS), Web App Development, Mobile App Development.
    */
@@ -4778,19 +6187,6 @@ export interface GlobalContactUs {
     currencyCode: string;
     id?: string | null;
   }[];
-  /**
-   * Controls the default frontend budget range values.
-   */
-  budgetRange: {
-    /**
-     * Example: 1000.
-     */
-    defaultMinValue: number;
-    /**
-     * Example: 10000.
-     */
-    defaultMaxValue: number;
-  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -4822,6 +6218,28 @@ export interface NavbarSelect<T extends boolean = true> {
                     sectionId?: T;
                     id?: T;
                   };
+              id?: T;
+            };
+      };
+  mobileDrawer?:
+    | T
+    | {
+        dropQueryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              sectionId?: T;
+            };
+      };
+  searchContent?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
               id?: T;
             };
       };
@@ -4912,9 +6330,121 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "article-tags_select".
+ */
+export interface ArticleTagsSelect<T extends boolean = true> {
+  tags?:
+    | T
+    | {
+        label?: T;
+        key?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles_select".
+ */
+export interface ArticlesSelect<T extends boolean = true> {
+  uploadSessionId?: T;
+  articles?:
+    | T
+    | {
+        cardImage?: T;
+        cardImageOriginal?: T;
+        pendingCardImageOriginal?: T;
+        pendingCardImageCrop?: T;
+        cardImageBlurDataURL?: T;
+        detailPageImage?: T;
+        detailPageImageOriginal?: T;
+        pendingDetailPageImageOriginal?: T;
+        pendingDetailPageImageCrop?: T;
+        detailPageImageBlurDataURL?: T;
+        publishDate?: T;
+        estimatedReadingTime?: T;
+        title?: T;
+        description?: T;
+        tagKeys?: T;
+        isFeatured?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-tags_select".
+ */
+export interface NewsTagsSelect<T extends boolean = true> {
+  tags?:
+    | T
+    | {
+        label?: T;
+        key?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  uploadSessionId?: T;
+  news?:
+    | T
+    | {
+        cardImage?: T;
+        cardImageOriginal?: T;
+        pendingCardImageOriginal?: T;
+        pendingCardImageCrop?: T;
+        cardImageBlurDataURL?: T;
+        detailPageImage?: T;
+        detailPageImageOriginal?: T;
+        pendingDetailPageImageOriginal?: T;
+        pendingDetailPageImageCrop?: T;
+        detailPageImageBlurDataURL?: T;
+        publishDate?: T;
+        estimatedReadingTime?: T;
+        eventStatus?: T;
+        title?: T;
+        description?: T;
+        tagKeys?: T;
+        isFeatured?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-contact-us_select".
  */
 export interface GlobalContactUsSelect<T extends boolean = true> {
+  recipientEmails?:
+    | T
+    | {
+        email1?: T;
+        email2?: T;
+        email3?: T;
+        email4?: T;
+        email5?: T;
+      };
+  formLabels?:
+    | T
+    | {
+        contactInfoHeading?: T;
+        descriptionHeading?: T;
+        servicesHeading?: T;
+        budgetHeading?: T;
+      };
   ourSolutions?:
     | T
     | {
@@ -4927,12 +6457,6 @@ export interface GlobalContactUsSelect<T extends boolean = true> {
         currencySign?: T;
         currencyCode?: T;
         id?: T;
-      };
-  budgetRange?:
-    | T
-    | {
-        defaultMinValue?: T;
-        defaultMaxValue?: T;
       };
   updatedAt?: T;
   createdAt?: T;

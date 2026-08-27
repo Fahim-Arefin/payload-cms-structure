@@ -1,156 +1,54 @@
-// import { FORMS } from '@/lib/constants'
-// import type { CollectionConfig } from 'payload'
-
-// const REVIEW_MAX_LENGTH = 500
-
-// const isAuthenticated = ({ req }: any) => Boolean(req.user)
-
-// export const ReviewFormSubmissions: CollectionConfig = {
-//   slug: 'review-form-submissions',
-
-//   labels: {
-//     singular: 'Review Form Submission',
-//     plural: 'Review Form Submissions',
-//   },
-
-//   admin: {
-//     useAsTitle: 'buyersFullName',
-//     defaultColumns: ['buyersFullName', 'companyName', 'position', 'rating', 'createdAt'],
-//     group: FORMS,
-//   },
-
-//   access: {
-//     read: isAuthenticated,
-//     create: isAuthenticated,
-//     update: isAuthenticated,
-//     delete: isAuthenticated,
-//   },
-
-//   timestamps: true,
-
-//   fields: [
-//     {
-//       name: 'buyersFullName',
-//       type: 'text',
-//       label: 'Buyer Full Name',
-//       required: true,
-//     },
-//     {
-//       name: 'linkedIn',
-//       type: 'text',
-//       label: 'LinkedIn',
-//     },
-//     {
-//       name: 'companyName',
-//       type: 'text',
-//       label: 'Company Name',
-//       required: true,
-//     },
-//     {
-//       name: 'position',
-//       type: 'text',
-//       label: 'Position',
-//       required: true,
-//     },
-//     {
-//       name: 'country',
-//       type: 'text',
-//       label: 'Country',
-//       required: true,
-//     },
-//     {
-//       name: 'countryDialCode',
-//       type: 'text',
-//       label: 'Country Dial Code',
-//     },
-//     {
-//       name: 'phone',
-//       type: 'text',
-//       label: 'Contact Number',
-//       required: true,
-//     },
-//     {
-//       name: 'rating',
-//       type: 'number',
-//       label: 'Rating',
-//       required: true,
-//       min: 1,
-//       max: 5,
-//     },
-//     {
-//       name: 'review',
-//       type: 'textarea',
-//       label: 'Review',
-//       required: true,
-//       maxLength: REVIEW_MAX_LENGTH,
-//     },
-
-//     {
-//       name: 'adminImages',
-//       type: 'group',
-//       label: 'Admin Uploaded Images',
-//       admin: {
-//         description:
-//           'These images are uploaded only from this collection in the admin panel. They are not submitted from the frontend form.',
-//       },
-//       fields: [
-//         {
-//           name: 'companyIcon',
-//           type: 'upload',
-//           relationTo: 'media',
-//           label: 'Company Icon',
-//           admin: {
-//             description: 'Optional. Upload company logo/icon from admin only.',
-//           },
-//         },
-//         {
-//           name: 'userProfileImage',
-//           type: 'upload',
-//           relationTo: 'media',
-//           label: 'User Profile Image',
-//           admin: {
-//             description: 'Optional. Upload user profile image from admin only.',
-//           },
-//         },
-//       ],
-//     },
-//   ],
-// }
-
-// export default ReviewFormSubmissions
-
-import { FORMS } from '@/lib/constants'
+import { CUSTOMER_REVIEW_SLUG_AND_TAG, FORMS } from '@/lib/constants'
+import { roleAtLeast } from '@/lib/rbac'
+import { validateAbsoluteHTTPUrl } from '@/utils/block/fields-validation'
 import { generateImageFields } from '@/utils/media/fieldGenerators'
+import { triggerMediaTemporaryPurge } from '@/utils/media/triggerMediaTemporaryPurge'
+import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
+import { revalidateTag } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 const REVIEW_MAX_LENGTH = 500
+const COMPANY_LINK_MAX = 300
 const REVIEW_FORM_SUBMISSIONS_SLUG = 'review-form-submissions'
 
-const isAuthenticated = ({ req }: any) => Boolean(req.user)
+const revalidateCustomerReview = () => {
+  revalidateTag(CUSTOMER_REVIEW_SLUG_AND_TAG)
+  revalidateTag(REVIEW_FORM_SUBMISSIONS_SLUG)
+}
 
-const companyIconFields = generateImageFields({
-  required: false,
-  fieldName: 'companyIcon',
-  label: 'Company Icon',
-  description:
-    'Upload & crop the company icon. This can be uploaded from this collection only. Ratio 200:80',
-  aspectRatio: 200 / 80,
-  quality: 0.9,
-  maxKB: 350,
-  ownerCollection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
-} as any)
+const reviewMediaHooks = withMediaLifecycle({
+  collectionSlug: REVIEW_FORM_SUBMISSIONS_SLUG,
 
-const userProfileImageFields = generateImageFields({
-  required: false,
-  fieldName: 'userProfileImage',
-  label: 'User Profile Image',
-  description:
-    'Upload & crop the user profile image. This can be uploaded from this collection only. Ratio 325:385',
-  aspectRatio: 325 / 385,
-  quality: 0.9,
-  maxKB: 350,
-  ownerCollection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
-} as any)
+  imageConfigs: [
+    {
+      fieldName: 'companyIcon',
+      label: 'Company Icon',
+      description: 'Optional. Upload company logo/icon. Recommended ratio 140:50.',
+      aspectRatio: 140 / 50,
+      quality: 0.95,
+      maxKB: 250,
+      required: false,
+    },
+    {
+      fieldName: 'userProfileImage',
+      label: 'User Profile Image',
+      description: 'Optional. Upload user profile image. Recommended ratio 240:301.',
+      aspectRatio: 240 / 301,
+      quality: 0.95,
+      maxKB: 450,
+      required: false,
+    },
+  ],
+
+  skipOnDraft: false,
+
+  onAfterChange: async ({ req }) => {
+    revalidateCustomerReview()
+    triggerMediaTemporaryPurge(req)
+  },
+})
+
+const safeReviewMediaHooks: NonNullable<CollectionConfig['hooks']> = reviewMediaHooks ?? {}
 
 export const ReviewFormSubmissions: CollectionConfig = {
   slug: REVIEW_FORM_SUBMISSIONS_SLUG,
@@ -162,15 +60,32 @@ export const ReviewFormSubmissions: CollectionConfig = {
 
   admin: {
     useAsTitle: 'buyersFullName',
-    defaultColumns: ['buyersFullName', 'companyName', 'position', 'rating', 'createdAt'],
+    defaultColumns: ['buyersFullName', 'companyName', 'position', 'rating', 'status', 'createdAt'],
     group: FORMS,
   },
 
   access: {
-    read: isAuthenticated,
-    create: isAuthenticated,
-    update: isAuthenticated,
-    delete: isAuthenticated,
+    read: ({ req }) => roleAtLeast(req.user, 'editor'),
+    create: () => false,
+    update: ({ req }) => roleAtLeast(req.user, 'editor'),
+    delete: ({ req }) => roleAtLeast(req.user, 'admin'),
+  },
+
+  hooks: {
+    beforeValidate: [...(safeReviewMediaHooks.beforeValidate ?? [])],
+
+    beforeChange: [...(safeReviewMediaHooks.beforeChange ?? [])],
+
+    afterChange: [...(safeReviewMediaHooks.afterChange ?? [])],
+
+    afterDelete: [
+      ...(safeReviewMediaHooks.afterDelete ?? []),
+      async () => {
+        revalidateCustomerReview()
+      },
+    ],
+
+    afterError: [...(safeReviewMediaHooks.afterError ?? [])],
   },
 
   timestamps: true,
@@ -181,48 +96,57 @@ export const ReviewFormSubmissions: CollectionConfig = {
       type: 'text',
       admin: {
         condition: () => false,
+        readOnly: true,
       },
     },
+
     {
       name: 'buyersFullName',
       type: 'text',
       label: 'Buyer Full Name',
       required: true,
     },
+
     {
       name: 'linkedIn',
       type: 'text',
       label: 'LinkedIn',
     },
+
     {
       name: 'companyName',
       type: 'text',
       label: 'Company Name',
       required: true,
     },
+
     {
       name: 'position',
       type: 'text',
       label: 'Position',
       required: true,
     },
+
     {
       name: 'country',
       type: 'text',
       label: 'Country',
       required: true,
     },
+
     {
       name: 'countryDialCode',
       type: 'text',
       label: 'Country Dial Code',
     },
+
     {
       name: 'phone',
       type: 'text',
       label: 'Contact Number',
       required: true,
     },
+
     {
       name: 'rating',
       type: 'number',
@@ -231,6 +155,7 @@ export const ReviewFormSubmissions: CollectionConfig = {
       min: 1,
       max: 5,
     },
+
     {
       name: 'review',
       type: 'textarea',
@@ -238,26 +163,62 @@ export const ReviewFormSubmissions: CollectionConfig = {
       required: true,
       maxLength: REVIEW_MAX_LENGTH,
     },
+
     {
       name: 'status',
       type: 'select',
+      label: 'Status',
+      required: true,
       defaultValue: 'new',
       options: [
-        { label: 'New', value: 'new' },
-        { label: 'Reviewed', value: 'reviewed' },
-        { label: 'Published', value: 'published' },
+        {
+          label: 'New',
+          value: 'new',
+        },
+        {
+          label: 'Reviewed',
+          value: 'reviewed',
+        },
+        {
+          label: 'Published',
+          value: 'published',
+        },
       ],
     },
 
+    ...generateImageFields({
+      fieldName: 'companyIcon',
+      label: 'Company Icon',
+      description: 'Optional. Upload company logo/icon. Recommended ratio 140:50.',
+      aspectRatio: 140 / 50,
+      quality: 0.95,
+      maxKB: 250,
+      required: false,
+      ownerCollection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
+    } as any),
+
+    ...generateImageFields({
+      fieldName: 'userProfileImage',
+      label: 'User Profile Image',
+      description: 'Optional. Upload user profile image. Recommended ratio 240:301.',
+      aspectRatio: 240 / 301,
+      quality: 0.95,
+      maxKB: 450,
+      required: false,
+      ownerCollection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
+    } as any),
+
     {
-      name: 'adminImages',
-      type: 'group',
-      label: 'Admin Uploaded Images',
+      name: 'companyLink',
+      type: 'text',
+      label: 'Company Link',
+      required: false,
+      maxLength: COMPANY_LINK_MAX,
+      validate: validateAbsoluteHTTPUrl(COMPANY_LINK_MAX, false),
       admin: {
         description:
-          'These images are uploaded only from this collection in the admin panel. They are not submitted from the frontend form.',
+          'Optional. Company website / portfolio / social page URL. Must be a full http(s) URL.',
       },
-      fields: [...companyIconFields, ...userProfileImageFields],
     },
   ],
 }

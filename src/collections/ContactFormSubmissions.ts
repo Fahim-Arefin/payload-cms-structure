@@ -5,6 +5,7 @@ import { roleAtLeast } from '@/lib/rbac'
 
 const TEXT_MAX = 120
 const PHONE_MAX = 40
+const DESCRIPTION_MAX = 1000
 
 const ContactFormSubmissions: CollectionConfig = {
   slug: CONTACT_FORM_SUBMISSIONS_SLUG,
@@ -16,7 +17,15 @@ const ContactFormSubmissions: CollectionConfig = {
 
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'email', 'phone', 'selectedBudgetLabel', 'createdAt'],
+    defaultColumns: [
+      'name',
+      'email',
+      'phone',
+      'city',
+      'selectedBudgetLabel',
+      'status',
+      'createdAt',
+    ],
     description: 'Submitted data from the frontend Contact Us form.',
     group: FORMS,
   },
@@ -36,6 +45,7 @@ const ContactFormSubmissions: CollectionConfig = {
       required: true,
       maxLength: TEXT_MAX,
     },
+
     {
       name: 'phone',
       type: 'text',
@@ -43,23 +53,40 @@ const ContactFormSubmissions: CollectionConfig = {
       required: true,
       maxLength: PHONE_MAX,
     },
+
     {
       name: 'email',
       type: 'email',
       label: 'Email Address',
       required: true,
     },
+
+    {
+      name: 'city',
+      type: 'text',
+      label: 'City',
+      required: true,
+      maxLength: TEXT_MAX,
+    },
+
+    {
+      name: 'description',
+      type: 'textarea',
+      label: "What's On Your Mind?",
+      required: false,
+      maxLength: DESCRIPTION_MAX,
+    },
+
     {
       name: 'selectedSolutions',
       type: 'array',
-      label: 'Selected Solutions',
-      required: true,
-      minRows: 1,
+      label: 'Selected Services',
+      required: false,
       fields: [
         {
           name: 'text',
           type: 'text',
-          label: 'Solution',
+          label: 'Service',
           required: true,
           maxLength: TEXT_MAX,
         },
@@ -70,7 +97,7 @@ const ContactFormSubmissions: CollectionConfig = {
       name: 'selectedBudgetLabel',
       type: 'text',
       label: 'Selected Budget',
-      required: true,
+      required: false,
       maxLength: TEXT_MAX,
     },
 
@@ -81,38 +108,32 @@ const ContactFormSubmissions: CollectionConfig = {
           name: 'selectedCurrencySign',
           type: 'text',
           label: 'Currency Sign',
-          required: true,
+          required: false,
           maxLength: 10,
           admin: {
-            width: '25%',
+            width: '33.33%',
           },
         },
+
         {
           name: 'selectedCurrencyCode',
           type: 'text',
           label: 'Currency Code',
-          required: true,
+          required: false,
           maxLength: 10,
           admin: {
-            width: '25%',
+            width: '33.33%',
           },
         },
+
         {
-          name: 'budgetMin',
+          name: 'budget',
           type: 'number',
-          label: 'Budget Min',
-          required: true,
+          label: 'Budget',
+          required: false,
+          min: 0,
           admin: {
-            width: '25%',
-          },
-        },
-        {
-          name: 'budgetMax',
-          type: 'number',
-          label: 'Budget Max',
-          required: true,
-          admin: {
-            width: '25%',
+            width: '33.33%',
           },
         },
       ],

@@ -1,7 +1,8 @@
 import AboutUsIntroSchema from '@/blocks/AboutUsIntro/schema'
+import AllArticleSchema from '@/blocks/AllArticles/schema'
+import AllNewsSchema from '@/blocks/AllNews/scheam'
 import BasicHeroSchema from '@/blocks/BasicHero/schema'
 import BookACallSchema from '@/blocks/BookACall/schema'
-import ClientSuccessStoriesSchema from '@/blocks/ClientSuccessStories/schema'
 import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
 import CollaborativeMethodSchema from '@/blocks/CollaborativeMethod/schema'
 import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
@@ -14,16 +15,22 @@ import CSCollaborationProtocalSchema from '@/blocks/CS_CollaborationProtocal/sch
 import CSCollaborativeMobbingSchema from '@/blocks/CS_Collaborative_Mobbing/schema'
 import CSDeliverySchema from '@/blocks/CS_Delivery/schema'
 import CSDevelopmentFrameworkSchema from '@/blocks/CS_DevelopmentFramework/schema'
+import CustomerReviewSchema from '@/blocks/CustomerReview/schema'
 import EmployeeSchema from '@/blocks/Employee/schema'
 import FAQSchema from '@/blocks/FAQ/schema'
+import FeaturedArticleSchema from '@/blocks/FeaturedArticle/schema'
+import FeaturedNewsSchema from '@/blocks/FeaturedNews/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
 import MaintenanceSchema from '@/blocks/Maintainance/schema'
 import OurProjectSchema from '@/blocks/OurProject/schema'
-import ProductHeroSchema from '@/blocks/ProductHero/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
 import ProductionPipelineSchema from '@/blocks/ProductionPipeline/schema'
 import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import RatingSchema from '@/blocks/Rating/scheam'
+import RelatedArticleSchema from '@/blocks/RelatedArticles/schema'
+import RelatedNewsSchema from '@/blocks/RelatedNews/schema'
+import SingleArticleSchema from '@/blocks/SingleArticle/schema'
+import SingleNewsSchema from '@/blocks/SingleNews/schema'
 import WhatWeBuildSchema from '@/blocks/WhatWeBuild/schema'
 import WhyChooseUsSchema from '@/blocks/WhyChooseUs/schema'
 import { APIError } from '@/lib/apiError'
@@ -214,7 +221,7 @@ export const Pages: CollectionConfig = {
         ProjectApproachSchema,
         CodingLanguageSchema,
         FounderQuoteSchema,
-        ClientSuccessStoriesSchema,
+        CustomerReviewSchema,
         CompanyStatsSchema,
 
         // about us page unique
@@ -237,7 +244,18 @@ export const Pages: CollectionConfig = {
         WhatWeBuildSchema,
         WhyChooseUsSchema,
         ProductionPipelineSchema,
+
+        //Articles
+        AllArticleSchema,
+        SingleArticleSchema,
+        RelatedArticleSchema,
+        FeaturedArticleSchema,
+
         // News
+        AllNewsSchema,
+        SingleNewsSchema,
+        RelatedNewsSchema,
+        FeaturedNewsSchema,
       ],
     },
   ],

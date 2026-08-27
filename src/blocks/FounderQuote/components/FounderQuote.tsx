@@ -192,7 +192,11 @@ function FounderQuote({ data }: Props) {
       </div>
 
       <div className="mx-auto md:mx-0">
-        <ReadMoreBtn onClick={handleClick} text={fullDesc ? 'Read Less' : 'Read More'} />
+        <ReadMoreBtn
+          onClick={handleClick}
+          text={fullDesc ? 'Read Less' : 'Read More'}
+          active={fullDesc}
+        />
       </div>
     </div>
   )
