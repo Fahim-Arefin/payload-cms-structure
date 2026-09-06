@@ -122,7 +122,7 @@ function BasicHeroAnimatedHeading({ data }: Props) {
         font-agency text-white-1 capitalize
         text-center lg:text-start
         leading-[112.5%]
-        text-[40px] md:text-[48px] lg:text-[62px] xl:text-[92px]
+        text-[40px] md:text-[48px] lg:text-[62px] xl:text-[80px] 2xl:text-[92px]
       "
     >
       {staticText && (

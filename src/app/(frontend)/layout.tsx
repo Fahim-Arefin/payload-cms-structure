@@ -214,7 +214,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <body className={`${notoSerifBengali.variable}`}>
         <Providers initialLang="en">
           <SmoothScrollProvider>
-            <main className="min-h-screen relative 3xl:max-w-[1925px] 3xl:mx-auto font-grift">
+            {/* 3xl:max-w-[1925px] 3xl:mx-auto */}
+            <main className="min-h-screen relative font-grift">
               <ServerNavbar />
               <div className="min-h-screen">
                 {children}
