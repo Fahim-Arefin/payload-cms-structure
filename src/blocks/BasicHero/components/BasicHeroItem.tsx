@@ -99,7 +99,7 @@ function BasicHeroItem({ item }: Props) {
         >
           {/* normal heading always visible */}
           <div
-            className="xl:mt-12 2xl:mt-0
+            className="lg:mt-8 xl:mt-12 2xl:mt-0
               font-agency text-white-1 capitalize
               text-center lg:text-start
               leading-[112.5%]
