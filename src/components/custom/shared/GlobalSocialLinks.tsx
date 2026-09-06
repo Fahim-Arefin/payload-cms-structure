@@ -32,6 +32,57 @@ function cleanPhoneHref(phone?: string | null) {
   return cleaned ? `tel:${cleaned}` : '#'
 }
 
+// function GlobalSocialIcon({ item }: { item: SocialItem }) {
+//   return (
+//     <Link
+//       href={item.href}
+//       target={item.external ? '_blank' : undefined}
+//       rel={item.external ? 'noopener noreferrer' : undefined}
+//       aria-label={item.label}
+//       className="
+//         group relative flex aspect-square w-full items-center justify-center
+//         overflow-hidden rounded-[4px]
+//         shadow-[0_8px_24px_rgba(10,17,40,0.12)]
+//         transition-transform duration-300 ease-out
+//         hover:scale-105
+//         active:scale-95
+//         md:rounded-[5px]
+//         lg:rounded-[6px]
+//         xl:rounded-[8px]
+//       "
+//     >
+//       <Image
+//         src={item.normalIcon}
+//         alt={item.label}
+//         fill
+//         sizes="80px"
+//         quality={90}
+//         placeholder="blur"
+//         blurDataURL={item.normalIcon.blurDataURL}
+//         className="
+//           object-contain
+//           transition-opacity duration-300 ease-out
+//           group-hover:opacity-0
+//         "
+//       />
+
+//       <Image
+//         src={item.coloredIcon}
+//         alt=""
+//         fill
+//         sizes="80px"
+//         quality={90}
+//         placeholder="blur"
+//         blurDataURL={item.coloredIcon.blurDataURL}
+//         className="
+//           object-contain opacity-0
+//           transition-opacity duration-300 ease-out
+//           group-hover:opacity-100
+//         "
+//       />
+//     </Link>
+//   )
+// }
 function GlobalSocialIcon({ item }: { item: SocialItem }) {
   return (
     <Link
@@ -43,8 +94,11 @@ function GlobalSocialIcon({ item }: { item: SocialItem }) {
         group relative flex aspect-square w-full items-center justify-center
         overflow-hidden rounded-[4px]
         shadow-[0_8px_24px_rgba(10,17,40,0.12)]
-        transition-transform duration-300 ease-out
-        hover:scale-105
+        transition-[transform,box-shadow] duration-[850ms]
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        will-change-transform
+        hover:scale-[1.08]
+        hover:shadow-[0_12px_32px_rgba(10,17,40,0.18)]
         active:scale-95
         md:rounded-[5px]
         lg:rounded-[6px]
@@ -60,9 +114,12 @@ function GlobalSocialIcon({ item }: { item: SocialItem }) {
         placeholder="blur"
         blurDataURL={item.normalIcon.blurDataURL}
         className="
-          object-contain
-          transition-opacity duration-300 ease-out
+          object-contain opacity-100 scale-100
+          transition-[opacity,transform] duration-[850ms]
+          ease-[cubic-bezier(0.22,1,0.36,1)]
+          will-change-[opacity,transform]
           group-hover:opacity-0
+          group-hover:scale-90
         "
       />
 
@@ -75,9 +132,12 @@ function GlobalSocialIcon({ item }: { item: SocialItem }) {
         placeholder="blur"
         blurDataURL={item.coloredIcon.blurDataURL}
         className="
-          object-contain opacity-0
-          transition-opacity duration-300 ease-out
+          object-contain opacity-0 scale-110
+          transition-[opacity,transform] duration-[850ms]
+          ease-[cubic-bezier(0.22,1,0.36,1)]
+          will-change-[opacity,transform]
           group-hover:opacity-100
+          group-hover:scale-100
         "
       />
     </Link>
