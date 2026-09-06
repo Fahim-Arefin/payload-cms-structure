@@ -25,6 +25,9 @@
 // import WhatsApp from 'public/assets/icons/wa.png'
 // import WhatsAppColored from 'public/assets/icons/waC.png'
 
+// import PhoneSocial from 'public/assets/icons/phone1.png'
+// import PhoneSocialColored from 'public/assets/icons/phoneC.png'
+
 // import LocalizedHighlighted from '../../shared/LocalizedHighlighted'
 // import LocalizedRichText from '../../shared/LocalizedRichText'
 // import NewsLetter from './NewsLetter'
@@ -35,6 +38,13 @@
 //   normalIcon: StaticImageData
 //   coloredIcon: StaticImageData
 //   external?: boolean
+// }
+// function cleanPhoneHref(phone?: string | null) {
+//   if (!phone) return '#'
+
+//   const cleaned = phone.replace(/[^\d+]/g, '')
+
+//   return cleaned ? `tel:${cleaned}` : '#'
 // }
 
 // function FooterSocialIcon({ item }: { item: FooterSocialItem }) {
@@ -121,6 +131,14 @@
 //           normalIcon: WhatsApp,
 //           coloredIcon: WhatsAppColored,
 //           external: true,
+//         }
+//       : null,
+//     footer?.contactInfoSection?.phone
+//       ? {
+//           label: 'Phone',
+//           href: cleanPhoneHref(footer.contactInfoSection.phone),
+//           normalIcon: PhoneSocial,
+//           coloredIcon: PhoneSocialColored,
 //         }
 //       : null,
 //   ].filter(Boolean) as FooterSocialItem[]
@@ -456,15 +474,14 @@
 //         </div>
 
 //         {/* brand text */}
-//         <div
+//         {/* <div
 //           className="flex justify-center lg:hidden font-agency global-h7 z-20 text-center lg:text-start
 //         mt-[24px] mb-[8px] lg:m-0 text-primary-2"
 //         >
 //           {footer?.social?.header}
-//         </div>
+//         </div> */}
 //         {/* social */}
-//         {/* social */}
-//         {footerSocialItems.length > 0 && (
+//         {/* {footerSocialItems.length > 0 && (
 //           <div
 //             className="
 //       flex justify-center lg:hidden
@@ -479,7 +496,7 @@
 //               </div>
 //             ))}
 //           </div>
-//         )}
+//         )} */}
 //       </div>
 
 //       {/* copuright and social links */}
@@ -498,7 +515,7 @@
 //         </div>
 //         {/* social */}
 //         {/* social */}
-//         {footerSocialItems.length > 0 && (
+//         {/* {footerSocialItems.length > 0 && (
 //           <div
 //             className="
 //       hidden lg:flex
@@ -514,7 +531,7 @@
 //               </div>
 //             ))}
 //           </div>
-//         )}
+//         )} */}
 //         {/* legal */}
 //         <div className="text-primary-2 global-p5 tracking-wider font-grift">
 //           <LocalizedRichText
@@ -1047,6 +1064,28 @@ async function ServerFooter() {
         )} */}
       </div>
 
+      {/* background image */}
+      <div
+        className="
+    relative z-10 w-full
+    lg:absolute lg:inset-x-0 lg:bottom-0 lg:my-0
+  "
+      >
+        {typeof footer?.logoBackgroundImage === 'object' && footer?.logoBackgroundImage?.url && (
+          <div className="relative z-10 w-full aspect-[1437/280]">
+            <Image
+              src={footer?.logoBackgroundImage?.url}
+              alt="Brand BG Logo"
+              fill
+              quality={90}
+              placeholder="blur"
+              sizes="100vw"
+              blurDataURL={footer?.logoBackgroundImageBlurDataURL || ''}
+            />
+          </div>
+        )}
+      </div>
+
       {/* copuright and social links */}
       <div
         className=" px-4 md:px-[120px] lg:px-[50px] xl:px-[110px] 2xl:px-[140px]
@@ -1090,8 +1129,7 @@ async function ServerFooter() {
       </div>
 
       {/* background image */}
-      <div className="absolute inset-x-0 bottom-28 lg:bottom-0 z-10 ">
-        {/*  */}
+      {/* <div className="absolute inset-x-0 bottom-28 lg:bottom-0 z-10 ">
         {typeof footer?.logoBackgroundImage === 'object' && footer?.logoBackgroundImage?.url && (
           <div className="relative z-10 w-full aspect-[1437/280] ">
             <Image
@@ -1105,7 +1143,7 @@ async function ServerFooter() {
             />
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   )
 }
