@@ -204,11 +204,25 @@ function RelatedNewsCarousel({ block, newsItems, tagsData }: Props) {
 
   return (
     <div className="relative w-full">
+      {/* bottom glow */}
+      <div
+        className={` ${!shouldShowArrows && 'hidden'}
+          pointer-events-none absolute left-1/2 z-0
+          bottom-[-70px]
+          h-[190px] w-[88%]
+          -translate-x-1/2
+          rounded-full bg-primary-1/50
+          blur-[70px]
+          md:bottom-[-86px] md:h-[230px] md:w-[78%] md:blur-[86px]
+          lg:bottom-[-96px] lg:h-[260px] lg:w-[70%] lg:blur-[100px]
+          xl:bottom-[-110px] xl:h-[300px] xl:w-[72%] xl:blur-[118px]
+        `}
+      />
       <Carousel
         setApi={setApi}
         opts={{
           align: 'start',
-          loop: false,
+          loop: true,
         }}
         className="w-full"
         plugins={hasMultiple ? [autoplayPlugin.current] : []}
