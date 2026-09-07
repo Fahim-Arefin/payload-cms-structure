@@ -343,12 +343,13 @@ function CodingLanguageImage({ data, index, position }: Props) {
 
         <div
           ref={labelRef}
+          // bg-secondary-1/95
           className="
             pointer-events-none absolute left-1/2 top-[100%] z-20
             -translate-x-1/2 whitespace-nowrap
             rounded-[4px] lg:rounded-[6px] xl:rounded-[7px]
-            border border-primary-1/30
-            bg-secondary-1/95
+            border border-primary-1
+            bg-primary-1
             px-1 lg:px-1.5 xl:px-2 2xl:px-2
             py-0.5 lg:py-1
             font-grift text-[10px] font-semibold text-white-1
