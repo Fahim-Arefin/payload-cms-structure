@@ -51,10 +51,14 @@ jobs:
           set -euo pipefail
           short_sha="${GITHUB_SHA::12}"
           image="${REGISTRY}/${IMAGE_NAME}"
+          env_digest="$(sha256sum .deploy/runtime.env)"
+          env_digest="${env_digest%% *}"
 
           {
             echo "short_sha=${short_sha}"
             echo "image=${image}"
+            echo "env_digest=${env_digest}"
+            echo "build_tag=${image}:${GITHUB_REF_NAME}-${GITHUB_SHA}-${env_digest}"
             echo "sha_tag=${image}:${short_sha}"
             echo "branch_sha_tag=${image}:${GITHUB_REF_NAME}-${short_sha}"
             echo "branch_latest_tag=${image}:${GITHUB_REF_NAME}-latest"
@@ -67,20 +71,26 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
-      - name: Build Docker image
+      - name: Build or reuse Docker image
         shell: bash
         run: |
           set -euo pipefail
 
-          env_digest="$(sha256sum .deploy/runtime.env)"
+          build_tag='${{ steps.meta.outputs.build_tag }}'
+          if docker manifest inspect "${build_tag}" > /dev/null; then
+            echo "Reusing ${build_tag}"
+            docker pull "${build_tag}"
+          else
+            docker build --progress=plain \
+              --build-arg APP_ENV_DIGEST='${{ steps.meta.outputs.env_digest }}' \
+              --secret id=app_env,src=.deploy/runtime.env \
+              -t "${build_tag}" \
+              .
+          fi
 
-          docker build --progress=plain \
-            --build-arg APP_ENV_DIGEST="${env_digest%% *}" \
-            --secret id=app_env,src=.deploy/runtime.env \
-            -t '${{ steps.meta.outputs.sha_tag }}' \
-            -t '${{ steps.meta.outputs.branch_sha_tag }}' \
-            -t '${{ steps.meta.outputs.branch_latest_tag }}' \
-            .
+          docker tag "${build_tag}" '${{ steps.meta.outputs.sha_tag }}'
+          docker tag "${build_tag}" '${{ steps.meta.outputs.branch_sha_tag }}'
+          docker tag "${build_tag}" '${{ steps.meta.outputs.branch_latest_tag }}'
 
           if [ "${GITHUB_REF_NAME}" = "main" ]; then
             docker tag '${{ steps.meta.outputs.sha_tag }}' '${{ steps.meta.outputs.image }}:latest'
@@ -98,6 +108,8 @@ jobs:
           if [ "${GITHUB_REF_NAME}" = "main" ]; then
             docker push '${{ steps.meta.outputs.image }}:latest'
           fi
+
+          docker push '${{ steps.meta.outputs.build_tag }}'
 
       - name: Prepare SSH key
         shell: bash
@@ -151,7 +163,7 @@ jobs:
             -p "${DEPLOY_SERVER_PORT}" \
             '${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}' \
             REGISTRY='${{ env.REGISTRY }}' \
-            IMAGE_TAG='${{ steps.meta.outputs.branch_latest_tag }}' \
+            IMAGE_TAG='${{ steps.meta.outputs.build_tag }}' \
             CONTAINER_NAME="${CONTAINER_NAME}" \
             HOST_PORT="${HOST_PORT}" \
             VOLUME_ROOT="${VOLUME_ROOT}" \
