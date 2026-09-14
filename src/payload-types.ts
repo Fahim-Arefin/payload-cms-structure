@@ -382,7 +382,7 @@ export interface Page {
         uploadSessionId?: string | null;
         heroes: {
           /**
-           * Choose Image to upload a cropped hero image. Choose Video / Animation Asset to use a file from public/assets/videos by entering the file name below.
+           * Choose Image to upload a cropped hero image, or Video to upload an MP4 or WebM video (maximum 10 MB; recommended ratio 1:1).
            */
           heroMediaType: 'none' | 'image' | 'video';
           /**
@@ -394,8 +394,9 @@ export interface Page {
           pendingImageCrop?: string | null;
           imageBlurDataURL?: string | null;
           /**
-           * Enter the exact file name from public/assets/videos, including extension. Example: hero-video.mp4, hero-animation.webm, hero-lottie.json, hero-animation.lottie. The frontend will load it from /assets/videos/{fileName}.
+           * Upload an MP4 or WebM video. Maximum file size: 10 MB. Recommended ratio: 1:1 (square), e.g. 1080 × 1080. Other ratios fit without cropping.
            */
+          video?: (string | null) | Media;
           videoAssetName?: string | null;
           /**
            * Heading 1 (English). Max 40 characters.
@@ -4204,6 +4205,7 @@ export interface PagesSelect<T extends boolean = true> {
                     pendingImageOriginal?: T;
                     pendingImageCrop?: T;
                     imageBlurDataURL?: T;
+                    video?: T;
                     videoAssetName?: T;
                     heading1?: T;
                     heading1Highlighted?: T;
