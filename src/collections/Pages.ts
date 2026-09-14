@@ -21,6 +21,7 @@ import FAQSchema from '@/blocks/FAQ/schema'
 import FeaturedArticleSchema from '@/blocks/FeaturedArticle/schema'
 import FeaturedNewsSchema from '@/blocks/FeaturedNews/schema'
 import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
+import HomeIntroLoaderSchema from '@/blocks/HomeIntroLoader/schema'
 import MaintenanceSchema from '@/blocks/Maintainance/schema'
 import OurProjectSchema from '@/blocks/OurProject/schema'
 import ProductInfoSchema from '@/blocks/ProductInfo/schema'
@@ -223,6 +224,7 @@ export const Pages: CollectionConfig = {
         FounderQuoteSchema,
         CustomerReviewSchema,
         CompanyStatsSchema,
+        HomeIntroLoaderSchema,
 
         // about us page unique
         OurProjectSchema,

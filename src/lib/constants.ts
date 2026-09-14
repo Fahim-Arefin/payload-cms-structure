@@ -219,3 +219,7 @@ export const WHAT_WE_BUILD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/what-we-bui
 export const CUSTOMER_REVIEW_SLUG_AND_TAG = 'customer-review'
 export const CUSTOMER_REVIEW_BLOCK_LABEL = 'Customer Review'
 export const CUSTOMER_REVIEW_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/customer-review-block-thumbnail.webp`
+
+export const HOME_INTRO_LOADER_SLUG_AND_TAG = 'homeIntroLoader'
+export const HOME_INTRO_LOADER_BLOCK_LABEL = 'Home Intro Loader'
+export const HOME_INTRO_LOADER_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/home-intro-loader-block-thumbnail.webp`
