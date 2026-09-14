@@ -542,3 +542,19 @@ html {
   overflow: hidden;
 }
 /* scroll animation */
+/* The initial head script controls this before the homepage hydrates. */
+#home-intro-overlay {
+  display: none;
+}
+
+html[data-home-intro] #home-intro-overlay {
+  display: flex;
+}
+
+html[data-home-intro='leaving'] #home-intro-overlay {
+  opacity: 0;
+}
+
+html[data-home-intro] {
+  overflow: hidden;
+}

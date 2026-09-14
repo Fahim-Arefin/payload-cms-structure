@@ -1516,6 +1516,15 @@ export interface Page {
         blockType: 'company-stats';
       }
     | {
+        /**
+         * Enable this checkbox to show the animated XynoLab intro once to first-time visitors.
+         */
+        showIntroLoader?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'homeIntroLoader';
+      }
+    | {
         uploadSessionId?: string | null;
         sectionSettings?: {
           /**
@@ -4641,6 +4650,13 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                         };
                   };
+              id?: T;
+              blockName?: T;
+            };
+        homeIntroLoader?:
+          | T
+          | {
+              showIntroLoader?: T;
               id?: T;
               blockName?: T;
             };

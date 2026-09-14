@@ -143,6 +143,7 @@ import { stripButtonLinksToSlug } from '@/lib/utils'
 import type { Page as PayloadPage } from '@/payload-types'
 import config from '@/payload.config'
 import type { Metadata } from 'next'
+import HomeIntroReady from '@/blocks/HomeIntroLoader/components/HomeIntroReady'
 import { unstable_cache as unstableCache } from 'next/cache'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
@@ -413,6 +414,7 @@ export default async function CatchAll(props: PageProps) {
     return (
       <div>
         <RenderBlocks layout={exact.layout as PayloadPage['layout']} params={{}} />
+        {path === 'index' && <HomeIntroReady />}
       </div>
     )
   }
