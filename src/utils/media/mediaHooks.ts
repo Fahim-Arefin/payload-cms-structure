@@ -147,7 +147,7 @@ export const mediaHooks = withMediaLifecycle({
       layoutKey: 'layout',
       blockType: BASIC_HERO_SLUG_AND_TAG,
       arrayKey: 'heroes',
-      mediaFields: ['image'],
+      mediaFields: ['image', 'video'],
     },
     {
       layoutKey: 'layout',
