@@ -21,6 +21,7 @@ import {
   FEATURED_ARTICLE_SLUG_AND_TAG,
   FEATURED_NEWS_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
+  HOME_INTRO_LOADER_SLUG_AND_TAG,
   LOCATION_SLUG_AND_TAG,
   MAINTENANCE_SLUG_AND_TAG,
   OUR_PROJECT_SLUG_AND_TAG,
@@ -72,6 +73,7 @@ import WhatWeBuildBlock from './WhatWeBuild/WhatWeBuildBlock'
 import WhyChooseUsBlock from './WhyChooseUs/WhyChooseUsBlock'
 import RelatedNewsBlock from './RelatedNews/RelatedNewsBlock'
 import FeaturedNewsBlock from './FeaturedNews/FeaturedNewsBlock'
+import HomeIntroLoaderBlock from './HomeIntroLoader/HomeIntroLoaderBlock'
 
 type Params = Record<string, string>
 
@@ -149,6 +151,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <RelatedNewsBlock key={block.id} block={block} params={params} />
     case FEATURED_NEWS_SLUG_AND_TAG:
       return <FeaturedNewsBlock key={block.id} block={block} params={params} />
+    case HOME_INTRO_LOADER_SLUG_AND_TAG:
+      return <HomeIntroLoaderBlock key={block.id} block={block} params={params} />
 
     default:
       return null

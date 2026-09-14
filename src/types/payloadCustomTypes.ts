@@ -22,6 +22,7 @@ import {
   FEATURED_ARTICLE_SLUG_AND_TAG,
   FEATURED_NEWS_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
+  HOME_INTRO_LOADER_SLUG_AND_TAG,
   LOCATION_SLUG_AND_TAG,
   MAINTENANCE_SLUG_AND_TAG,
   OUR_PROJECT_SLUG_AND_TAG,
@@ -202,4 +203,8 @@ export type RelatedNewsBlockType = Extract<
 export type FeaturedNewsBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof FEATURED_NEWS_SLUG_AND_TAG }
+>
+export type HomeIntroLoaderBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof HOME_INTRO_LOADER_SLUG_AND_TAG }
 >
