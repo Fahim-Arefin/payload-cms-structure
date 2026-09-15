@@ -9,6 +9,7 @@ import {
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   CS_DELIVERY_SLUG_AND_TAG,
   CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG,
+  CS_PRODUCT_SHOWCASE_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
@@ -139,6 +140,14 @@ export const mediaHooks = withMediaLifecycle({
         'sectionHeading.downloadButton.file': 'Downloadable Case Study PDF',
       },
     },
+    {
+      layoutKey: 'layout',
+      blockType: CS_PRODUCT_SHOWCASE_SLUG_AND_TAG,
+      mediaFields: ['sectionHeading.downloadButton.file'],
+      mediaFieldLabels: {
+        'sectionHeading.downloadButton.file': 'Downloadable Case Study PDF',
+      },
+    },
   ],
 
   // Blocks with arrays that contain media fields:
@@ -263,6 +272,24 @@ export const mediaHooks = withMediaLifecycle({
         icon: 'Criteria Icon',
       },
     } as any,
+    {
+      layoutKey: 'layout',
+      blockType: CS_PRODUCT_SHOWCASE_SLUG_AND_TAG,
+      groupKey: 'products',
+      arrayKey: 'items',
+      mediaFields: [
+        'mainIcon.mainIconColored',
+        'mainIcon.mainIconWhite',
+        'productLogo',
+        'productImage',
+      ],
+      mediaFieldLabels: {
+        'mainIcon.mainIconColored': 'Main Icon Colored',
+        'mainIcon.mainIconWhite': 'Main Icon White',
+        productLogo: 'Product Logo',
+        productImage: 'Product Showcase Image',
+      },
+    },
   ],
 
   blockGroupArrayFields: [

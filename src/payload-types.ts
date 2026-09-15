@@ -3175,6 +3175,188 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
+         * Product showcase heading, description, CTA and downloadable case study.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          ctaButtons?:
+            | {
+                /**
+                 * Max 40 characters.
+                 */
+                label: string;
+                /**
+                 * Select the button style
+                 */
+                style?: ('btn01' | 'btn02') | null;
+                /**
+                 * Pick an internal Page to link to. External URLs are not allowed. Do not select this same page.
+                 */
+                buttonLink: string | Page;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). Required. No spaces. Use "-" to separate words (e.g., "blog-section", not "blog section").
+                 */
+                sectionId?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          /**
+           * Optional PDF download button. Use this when the section needs 1 CTA + 1 downloadable case study file.
+           */
+          downloadButton?: {
+            /**
+             * Example: Download Case Study. Max 40 characters.
+             */
+            label?: string | null;
+            /**
+             * Upload the downloadable PDF file here.
+             */
+            file?: (string | null) | Media;
+          };
+        };
+        /**
+         * Controls the products menu and connected product showcase items.
+         */
+        products: {
+          /**
+           * Example: Our Products. Max 40 characters.
+           */
+          title: string;
+          /**
+           * Optional subtitle. Max 80 characters.
+           */
+          subtitle?: string | null;
+          /**
+           * Add products such as SellFast, MedCore and EduSphere.
+           */
+          items: {
+            menu: {
+              /**
+               * Example: SellFast, MedCore, EduSphere.
+               */
+              label: string;
+              /**
+               * If enabled, this product is initially selected.
+               */
+              defaultActive?: boolean | null;
+            };
+            /**
+             * Square icon used in the product menu and showcase.
+             */
+            mainIcon: {
+              /**
+               * Upload the colored product icon. Recommended size/ratio: 347 × 347 (1:1).
+               */
+              mainIconColored: string | Media;
+              mainIconColoredOriginal?: (string | null) | Media;
+              pendingMainIconColoredOriginal?: string | null;
+              pendingMainIconColoredCrop?: string | null;
+              mainIconColoredBlurDataURL?: string | null;
+              /**
+               * Upload the white product icon for active/hover states. Recommended size/ratio: 347 × 347 (1:1).
+               */
+              mainIconWhite: string | Media;
+              mainIconWhiteOriginal?: (string | null) | Media;
+              pendingMainIconWhiteOriginal?: string | null;
+              pendingMainIconWhiteCrop?: string | null;
+              mainIconWhiteBlurDataURL?: string | null;
+            };
+            /**
+             * Upload the full product wordmark/logo. Recommended ratio: 1216 × 320.
+             */
+            productLogo: string | Media;
+            productLogoOriginal?: (string | null) | Media;
+            pendingProductLogoOriginal?: string | null;
+            pendingProductLogoCrop?: string | null;
+            productLogoBlurDataURL?: string | null;
+            /**
+             * Upload the product UI/device mockup. Recommended ratio: 1473 × 965.
+             */
+            productImage: string | Media;
+            productImageOriginal?: (string | null) | Media;
+            pendingProductImageOriginal?: string | null;
+            pendingProductImageCrop?: string | null;
+            productImageBlurDataURL?: string | null;
+            mainContent: {
+              /**
+               * Example: CMS Website Builder, Hospital Management System, Learning Management System.
+               */
+              title: string;
+              /**
+               * Short labels displayed below the product title. Example: Build, Launch, Sell, Grow.
+               */
+              productHighlights: {
+                text: string;
+                id?: string | null;
+              }[];
+            };
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'csProductShowcase';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
          * Manage the article listing section tag, heading and description. CTA is disabled here because the article card CTA is controlled separately.
          */
         sectionHeading: {
@@ -5359,6 +5541,98 @@ export interface PagesSelect<T extends boolean = true> {
                                 pendingIconWhiteOriginal?: T;
                                 pendingIconWhiteCrop?: T;
                                 iconWhiteBlurDataURL?: T;
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        csProductShowcase?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                    ctaButtons?:
+                      | T
+                      | {
+                          label?: T;
+                          style?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                          id?: T;
+                        };
+                    downloadButton?:
+                      | T
+                      | {
+                          label?: T;
+                          file?: T;
+                        };
+                  };
+              products?:
+                | T
+                | {
+                    title?: T;
+                    subtitle?: T;
+                    items?:
+                      | T
+                      | {
+                          menu?:
+                            | T
+                            | {
+                                label?: T;
+                                defaultActive?: T;
+                              };
+                          mainIcon?:
+                            | T
+                            | {
+                                mainIconColored?: T;
+                                mainIconColoredOriginal?: T;
+                                pendingMainIconColoredOriginal?: T;
+                                pendingMainIconColoredCrop?: T;
+                                mainIconColoredBlurDataURL?: T;
+                                mainIconWhite?: T;
+                                mainIconWhiteOriginal?: T;
+                                pendingMainIconWhiteOriginal?: T;
+                                pendingMainIconWhiteCrop?: T;
+                                mainIconWhiteBlurDataURL?: T;
+                              };
+                          productLogo?: T;
+                          productLogoOriginal?: T;
+                          pendingProductLogoOriginal?: T;
+                          pendingProductLogoCrop?: T;
+                          productLogoBlurDataURL?: T;
+                          productImage?: T;
+                          productImageOriginal?: T;
+                          pendingProductImageOriginal?: T;
+                          pendingProductImageCrop?: T;
+                          productImageBlurDataURL?: T;
+                          mainContent?:
+                            | T
+                            | {
+                                title?: T;
+                                productHighlights?:
+                                  | T
+                                  | {
+                                      text?: T;
+                                      id?: T;
+                                    };
                               };
                           id?: T;
                         };
