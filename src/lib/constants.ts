@@ -102,6 +102,7 @@ export const CASE_STUDY = 'Case Study Page'
 export const GET_IN_TOUCH = 'Get In Touch Page'
 export const SOLUTION = 'Solution'
 export const PRODUCT = 'Product'
+export const SERVICE = 'Service'
 
 export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
 export const BASIC_HERO_BLOCK_LABEL = 'Hero (Basic)'
@@ -228,3 +229,7 @@ export const HOME_INTRO_LOADER_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/home-in
 export const CS_PRODUCT_SHOWCASE_SLUG_AND_TAG = 'csProductShowcase'
 export const CS_PRODUCT_SHOWCASE_BLOCK_LABEL = 'CS Product Showcase'
 export const CS_PRODUCT_SHOWCASE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-product-showcase-block-thumbnail.webp`
+
+export const SERVICE_SHOWCASE_SLUG_AND_TAG = 'serviceShowcase'
+export const SERVICE_SHOWCASE_BLOCK_LABEL = 'Service Showcase'
+export const SERVICE_SHOWCASE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/service-showcase-block-thumbnail.webp`

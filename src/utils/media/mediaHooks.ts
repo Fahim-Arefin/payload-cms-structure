@@ -18,6 +18,7 @@ import {
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCTION_PIPELINE_SLUG_AND_TAG,
+  SERVICE_SHOWCASE_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -290,6 +291,31 @@ export const mediaHooks = withMediaLifecycle({
         productImage: 'Product Showcase Image',
       },
     },
+    {
+      layoutKey: 'layout',
+
+      blockType: SERVICE_SHOWCASE_SLUG_AND_TAG,
+
+      groupKey: 'serviceShowcase',
+
+      arrayKey: 'tabs',
+
+      mediaFields: [
+        'collaborativeMethod.info.image',
+
+        'collaborativeMethod.info.designer.designerIcon',
+
+        'collaborativeMethod.info.builder.builderIcon',
+      ],
+
+      mediaFieldLabels: {
+        'collaborativeMethod.info.image': 'Collaborative Method Main Image',
+
+        'collaborativeMethod.info.designer.designerIcon': 'Designer Icon',
+
+        'collaborativeMethod.info.builder.builderIcon': 'Builder Icon',
+      },
+    },
   ],
 
   blockGroupArrayFields: [
@@ -302,6 +328,25 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['image'],
       mediaFieldLabels: {
         image: 'Client Image',
+      },
+    },
+    {
+      layoutKey: 'layout',
+
+      blockType: SERVICE_SHOWCASE_SLUG_AND_TAG,
+
+      groupKey: 'serviceShowcase',
+
+      firstArrayKey: 'tabs',
+
+      secondArrayKey: 'whatWeBuildItems',
+
+      mediaFields: ['image'],
+
+      itemLabelField: 'title',
+
+      mediaFieldLabels: {
+        image: 'What We Build Item Image',
       },
     },
   ],

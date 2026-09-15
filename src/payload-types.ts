@@ -3344,6 +3344,350 @@ export interface Page {
       }
     | {
         uploadSessionId?: string | null;
+        /**
+         * Background color and section ID for the complete Service Showcase block.
+         */
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Main heading displayed above the service tabs.
+         */
+        sectionHeading: {
+          /**
+           * Small label above heading. Max 40 characters.
+           */
+          tag?: string | null;
+          /**
+           * Main heading line 1. Max 90 characters.
+           */
+          heading1: string;
+          /**
+           * Optional. Must be inside Heading 1. Max 90.
+           */
+          heading1Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading1HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Secondary heading line. Max 90 characters.
+           */
+          heading2?: string | null;
+          /**
+           * Optional. Must be inside Heading 2. Max 90.
+           */
+          heading2Highlighted?: string | null;
+          /**
+           * Choose the highlight color style for this heading.
+           */
+          heading2HighlightColor?: ('primary' | 'secondary') | null;
+          /**
+           * Write the paragraph text (you can add multiple paragraphs).
+           */
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        /**
+         * Manage the service tabs. Every tab contains its own Collaborative Method and What We Build content.
+         */
+        serviceShowcase: {
+          /**
+           * Each tab represents one service category, such as Website Design & Development or Business Management Systems.
+           */
+          tabs: {
+            /**
+             * Example: Website Design & Development.
+             */
+            tabLabel: string;
+            /**
+             * Used by the URL hash to activate this tab. Example: website-design.
+             */
+            tabId: string;
+            /**
+             * Used when the URL does not contain a matching Tab ID or What We Build Item ID.
+             */
+            defaultActive?: boolean | null;
+            /**
+             * Independent Collaborative Method content for this service tab.
+             */
+            collaborativeMethod: {
+              /**
+               * Background color and section ID for this Collaborative Method section.
+               */
+              sectionSettings?: {
+                /**
+                 * Select a background color from the design system.
+                 */
+                backgroundColor?:
+                  | (
+                      | 'white-1'
+                      | 'white-2'
+                      | 'white-3'
+                      | 'secondary-1'
+                      | 'secondary-2'
+                      | 'primary-1-30'
+                      | 'primary-1-50'
+                    )
+                  | null;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+                 */
+                sectionId?: string | null;
+              };
+              sectionHeading: {
+                /**
+                 * Small label above heading. Max 40 characters.
+                 */
+                tag?: string | null;
+                /**
+                 * Main heading line 1. Max 90 characters.
+                 */
+                heading1: string;
+                /**
+                 * Optional. Must be inside Heading 1. Max 90.
+                 */
+                heading1Highlighted?: string | null;
+                /**
+                 * Choose the highlight color style for this heading.
+                 */
+                heading1HighlightColor?: ('primary' | 'secondary') | null;
+                /**
+                 * Secondary heading line. Max 90 characters.
+                 */
+                heading2?: string | null;
+                /**
+                 * Optional. Must be inside Heading 2. Max 90.
+                 */
+                heading2Highlighted?: string | null;
+                /**
+                 * Choose the highlight color style for this heading.
+                 */
+                heading2HighlightColor?: ('primary' | 'secondary') | null;
+                /**
+                 * Write the paragraph text (you can add multiple paragraphs).
+                 */
+                description?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+              };
+              /**
+               * Manage the image, description, designer and builder information.
+               */
+              info: {
+                /**
+                 * Upload the collaborative method main image. Recommended ratio 500:360.
+                 */
+                image: string | Media;
+                imageOriginal?: (string | null) | Media;
+                pendingImageOriginal?: string | null;
+                pendingImageCrop?: string | null;
+                imageBlurDataURL?: string | null;
+                /**
+                 * Collaborative method description displayed beside the main image.
+                 */
+                description: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                };
+                designer: {
+                  /**
+                   * Upload the designer icon. Recommended transparent PNG/WebP.
+                   */
+                  designerIcon: string | Media;
+                  designerIconOriginal?: (string | null) | Media;
+                  pendingDesignerIconOriginal?: string | null;
+                  pendingDesignerIconCrop?: string | null;
+                  designerIconBlurDataURL?: string | null;
+                  /**
+                   * Example: DESIGNER. Max 40 characters.
+                   */
+                  title: string;
+                  /**
+                   * Example: Visual Storytelling. Max 80 characters.
+                   */
+                  subtitle: string;
+                };
+                builder: {
+                  /**
+                   * Upload the builder icon. Recommended transparent PNG/WebP.
+                   */
+                  builderIcon: string | Media;
+                  builderIconOriginal?: (string | null) | Media;
+                  pendingBuilderIconOriginal?: string | null;
+                  pendingBuilderIconCrop?: string | null;
+                  builderIconBlurDataURL?: string | null;
+                  /**
+                   * Example: BUILDER. Max 40 characters.
+                   */
+                  title: string;
+                  /**
+                   * Example: Rapid Prototyping. Max 80 characters.
+                   */
+                  subtitle: string;
+                };
+              };
+            };
+            /**
+             * Independent What We Build content for this service tab.
+             */
+            whatWeBuild: {
+              /**
+               * Background color and section ID for this What We Build section.
+               */
+              sectionSettings?: {
+                /**
+                 * Select a background color from the design system.
+                 */
+                backgroundColor?:
+                  | (
+                      | 'white-1'
+                      | 'white-2'
+                      | 'white-3'
+                      | 'secondary-1'
+                      | 'secondary-2'
+                      | 'primary-1-30'
+                      | 'primary-1-50'
+                    )
+                  | null;
+                /**
+                 * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+                 */
+                sectionId?: string | null;
+              };
+              sectionHeading: {
+                /**
+                 * Small label above heading. Max 40 characters.
+                 */
+                tag?: string | null;
+                /**
+                 * Main heading line 1. Max 90 characters.
+                 */
+                heading1: string;
+                /**
+                 * Optional. Must be inside Heading 1. Max 90.
+                 */
+                heading1Highlighted?: string | null;
+                /**
+                 * Choose the highlight color style for this heading.
+                 */
+                heading1HighlightColor?: ('primary' | 'secondary') | null;
+                /**
+                 * Secondary heading line. Max 90 characters.
+                 */
+                heading2?: string | null;
+                /**
+                 * Optional. Must be inside Heading 2. Max 90.
+                 */
+                heading2Highlighted?: string | null;
+                /**
+                 * Choose the highlight color style for this heading.
+                 */
+                heading2HighlightColor?: ('primary' | 'secondary') | null;
+                /**
+                 * Write the paragraph text (you can add multiple paragraphs).
+                 */
+                description?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: string;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+              };
+            };
+            /**
+             * Carousel/service items belonging to this service tab. Every item can be targeted directly from the URL.
+             */
+            whatWeBuildItems: {
+              /**
+               * URL hash that activates this item and automatically opens its parent tab. Example: ecommerce-platforms.
+               */
+              itemId: string;
+              /**
+               * Used when the parent tab opens without a matching What We Build Item ID.
+               */
+              defaultActive?: boolean | null;
+              /**
+               * Example: E-Commerce Platforms. Max 60 characters.
+               */
+              title: string;
+              /**
+               * Short description for this service item. Max 180 characters.
+               */
+              description: string;
+              /**
+               * Upload the image for this What We Build item. Recommended wide ratio 1200:340.
+               */
+              image: string | Media;
+              imageOriginal?: (string | null) | Media;
+              pendingImageOriginal?: string | null;
+              pendingImageCrop?: string | null;
+              imageBlurDataURL?: string | null;
+              id?: string | null;
+            }[];
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'serviceShowcase';
+      }
+    | {
+        uploadSessionId?: string | null;
         sectionSettings?: {
           /**
            * Select a background color from the design system.
@@ -5633,6 +5977,133 @@ export interface PagesSelect<T extends boolean = true> {
                                       text?: T;
                                       id?: T;
                                     };
+                              };
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        serviceShowcase?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              sectionHeading?:
+                | T
+                | {
+                    tag?: T;
+                    heading1?: T;
+                    heading1Highlighted?: T;
+                    heading1HighlightColor?: T;
+                    heading2?: T;
+                    heading2Highlighted?: T;
+                    heading2HighlightColor?: T;
+                    description?: T;
+                  };
+              serviceShowcase?:
+                | T
+                | {
+                    tabs?:
+                      | T
+                      | {
+                          tabLabel?: T;
+                          tabId?: T;
+                          defaultActive?: T;
+                          collaborativeMethod?:
+                            | T
+                            | {
+                                sectionSettings?:
+                                  | T
+                                  | {
+                                      backgroundColor?: T;
+                                      sectionId?: T;
+                                    };
+                                sectionHeading?:
+                                  | T
+                                  | {
+                                      tag?: T;
+                                      heading1?: T;
+                                      heading1Highlighted?: T;
+                                      heading1HighlightColor?: T;
+                                      heading2?: T;
+                                      heading2Highlighted?: T;
+                                      heading2HighlightColor?: T;
+                                      description?: T;
+                                    };
+                                info?:
+                                  | T
+                                  | {
+                                      image?: T;
+                                      imageOriginal?: T;
+                                      pendingImageOriginal?: T;
+                                      pendingImageCrop?: T;
+                                      imageBlurDataURL?: T;
+                                      description?: T;
+                                      designer?:
+                                        | T
+                                        | {
+                                            designerIcon?: T;
+                                            designerIconOriginal?: T;
+                                            pendingDesignerIconOriginal?: T;
+                                            pendingDesignerIconCrop?: T;
+                                            designerIconBlurDataURL?: T;
+                                            title?: T;
+                                            subtitle?: T;
+                                          };
+                                      builder?:
+                                        | T
+                                        | {
+                                            builderIcon?: T;
+                                            builderIconOriginal?: T;
+                                            pendingBuilderIconOriginal?: T;
+                                            pendingBuilderIconCrop?: T;
+                                            builderIconBlurDataURL?: T;
+                                            title?: T;
+                                            subtitle?: T;
+                                          };
+                                    };
+                              };
+                          whatWeBuild?:
+                            | T
+                            | {
+                                sectionSettings?:
+                                  | T
+                                  | {
+                                      backgroundColor?: T;
+                                      sectionId?: T;
+                                    };
+                                sectionHeading?:
+                                  | T
+                                  | {
+                                      tag?: T;
+                                      heading1?: T;
+                                      heading1Highlighted?: T;
+                                      heading1HighlightColor?: T;
+                                      heading2?: T;
+                                      heading2Highlighted?: T;
+                                      heading2HighlightColor?: T;
+                                      description?: T;
+                                    };
+                              };
+                          whatWeBuildItems?:
+                            | T
+                            | {
+                                itemId?: T;
+                                defaultActive?: T;
+                                title?: T;
+                                description?: T;
+                                image?: T;
+                                imageOriginal?: T;
+                                pendingImageOriginal?: T;
+                                pendingImageCrop?: T;
+                                imageBlurDataURL?: T;
+                                id?: T;
                               };
                           id?: T;
                         };

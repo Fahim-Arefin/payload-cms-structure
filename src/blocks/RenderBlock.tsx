@@ -32,6 +32,7 @@ import {
   RATING_SLUG_AND_TAG,
   RELATED_ARTICLE_SLUG_AND_TAG,
   RELATED_NEWS_SLUG_AND_TAG,
+  SERVICE_SHOWCASE_SLUG_AND_TAG,
   SINGLE_ARTICLE_SLUG_AND_TAG,
   SINGLE_NEWS_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
@@ -76,6 +77,7 @@ import RelatedNewsBlock from './RelatedNews/RelatedNewsBlock'
 import FeaturedNewsBlock from './FeaturedNews/FeaturedNewsBlock'
 import HomeIntroLoaderBlock from './HomeIntroLoader/HomeIntroLoaderBlock'
 import ProductShowCaseBlock from './CS_ProductShowCase/ProductShowCaseBlock'
+import ServiceShowCaseBlock from './ServiceShowCase/ServiceShowCaseBlock'
 
 type Params = Record<string, string>
 
@@ -157,6 +159,8 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <HomeIntroLoaderBlock key={block.id} block={block} params={params} />
     case CS_PRODUCT_SHOWCASE_SLUG_AND_TAG:
       return <ProductShowCaseBlock key={block.id} block={block} params={params} />
+    case SERVICE_SHOWCASE_SLUG_AND_TAG:
+      return <ServiceShowCaseBlock key={block.id} block={block} params={params} />
 
     default:
       return null

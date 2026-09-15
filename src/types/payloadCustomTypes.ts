@@ -34,6 +34,7 @@ import {
   RATING_SLUG_AND_TAG,
   RELATED_ARTICLE_SLUG_AND_TAG,
   RELATED_NEWS_SLUG_AND_TAG,
+  SERVICE_SHOWCASE_SLUG_AND_TAG,
   SINGLE_ARTICLE_SLUG_AND_TAG,
   SINGLE_NEWS_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
@@ -212,4 +213,10 @@ export type HomeIntroLoaderBlockType = Extract<
 export type ProductShowcaseBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof CS_PRODUCT_SHOWCASE_SLUG_AND_TAG }
+>
+export type ServiceShowcaseBlockType = Extract<
+  Page['layout'][number],
+  {
+    blockType: typeof SERVICE_SHOWCASE_SLUG_AND_TAG
+  }
 >

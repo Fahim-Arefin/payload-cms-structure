@@ -31,6 +31,7 @@ import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
 import RatingSchema from '@/blocks/Rating/scheam'
 import RelatedArticleSchema from '@/blocks/RelatedArticles/schema'
 import RelatedNewsSchema from '@/blocks/RelatedNews/schema'
+import ServiceShowcaseSchema from '@/blocks/ServiceShowCase/schema'
 import SingleArticleSchema from '@/blocks/SingleArticle/schema'
 import SingleNewsSchema from '@/blocks/SingleNews/schema'
 import WhatWeBuildSchema from '@/blocks/WhatWeBuild/schema'
@@ -250,6 +251,9 @@ export const Pages: CollectionConfig = {
 
         // Product Showcase
         CSProductShowcaseSchema,
+
+        // service showcase
+        ServiceShowcaseSchema,
 
         //Articles
         AllArticleSchema,

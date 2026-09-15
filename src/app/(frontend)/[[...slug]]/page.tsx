@@ -151,7 +151,7 @@ import { getPayload } from 'payload'
 type PageParams = { slug?: string[] }
 type PageProps = { params: Promise<PageParams> }
 
-const SITE_NAME = 'Sagar Ropes'
+const SITE_NAME = 'Xynolab'
 
 const DEFAULT_DESCRIPTION =
   'Sagar Ropes manufactures high-quality ropes and twines for marine, fishing, industrial, agricultural, and commercial use.'
