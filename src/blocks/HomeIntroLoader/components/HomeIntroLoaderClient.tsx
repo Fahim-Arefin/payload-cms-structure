@@ -3,6 +3,7 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import {
+  INTRO_DISMISSED_EVENT,
   INTRO_MAX_DURATION,
   INTRO_READY_EVENT,
   INTRO_STORAGE_KEY,
@@ -53,6 +54,7 @@ function HomeIntroLoaderClient() {
 
     const dismiss = () => {
       root.removeAttribute('data-home-intro')
+      window.dispatchEvent(new Event(INTRO_DISMISSED_EVENT))
       video.pause()
       window.clearTimeout(window.__xynolabIntroTimer)
       window.__xynolabIntroTimer = undefined
@@ -98,7 +100,7 @@ function HomeIntroLoaderClient() {
       id="home-intro-overlay"
       data-lenis-prevent
       aria-hidden="true"
-      className="fixed inset-0 z-[99999] flex h-dvh w-screen items-center justify-center
+      className="fixed inset-0 z-[99999] flex h-dvh items-center justify-center
         overflow-hidden bg-black transition-opacity duration-500 ease-out"
     >
       <div

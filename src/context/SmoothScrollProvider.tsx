@@ -80,6 +80,7 @@
 
 'use client'
 
+import { INTRO_DISMISSED_EVENT } from '@/blocks/HomeIntroLoader/introState'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
 import Lenis from 'lenis'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -94,6 +95,25 @@ function SmoothScrollProvider({ children }: Props) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const previousPathnameRef = useRef<string | null>(null)
+
+  useEffect(() => {
+    let refreshFrame: number | undefined
+    const refreshAfterIntro = () => {
+      if (refreshFrame !== undefined) window.cancelAnimationFrame(refreshFrame)
+      // Re-measure pinned content after the intro releases the scrollbar lock.
+      refreshFrame = window.requestAnimationFrame(() => {
+        ScrollTrigger.refresh()
+        lenisRef.current?.resize()
+        refreshFrame = undefined
+      })
+    }
+
+    window.addEventListener(INTRO_DISMISSED_EVENT, refreshAfterIntro)
+    return () => {
+      window.removeEventListener(INTRO_DISMISSED_EVENT, refreshAfterIntro)
+      if (refreshFrame !== undefined) window.cancelAnimationFrame(refreshFrame)
+    }
+  }, [])
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
