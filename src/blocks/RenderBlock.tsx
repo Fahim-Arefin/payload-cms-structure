@@ -15,6 +15,7 @@ import {
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   CS_DELIVERY_SLUG_AND_TAG,
   CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG,
+  CS_PRODUCT_SHOWCASE_SLUG_AND_TAG,
   CUSTOMER_REVIEW_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
@@ -31,6 +32,7 @@ import {
   RATING_SLUG_AND_TAG,
   RELATED_ARTICLE_SLUG_AND_TAG,
   RELATED_NEWS_SLUG_AND_TAG,
+  SERVICE_SHOWCASE_SLUG_AND_TAG,
   SINGLE_ARTICLE_SLUG_AND_TAG,
   SINGLE_NEWS_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
@@ -74,6 +76,8 @@ import WhyChooseUsBlock from './WhyChooseUs/WhyChooseUsBlock'
 import RelatedNewsBlock from './RelatedNews/RelatedNewsBlock'
 import FeaturedNewsBlock from './FeaturedNews/FeaturedNewsBlock'
 import HomeIntroLoaderBlock from './HomeIntroLoader/HomeIntroLoaderBlock'
+import ProductShowCaseBlock from './CS_ProductShowCase/ProductShowCaseBlock'
+import ServiceShowCaseBlock from './ServiceShowCase/ServiceShowCaseBlock'
 
 type Params = Record<string, string>
 
@@ -153,6 +157,10 @@ export function renderBlock(block: PayloadPage['layout'][0], params: Params) {
       return <FeaturedNewsBlock key={block.id} block={block} params={params} />
     case HOME_INTRO_LOADER_SLUG_AND_TAG:
       return <HomeIntroLoaderBlock key={block.id} block={block} params={params} />
+    case CS_PRODUCT_SHOWCASE_SLUG_AND_TAG:
+      return <ProductShowCaseBlock key={block.id} block={block} params={params} />
+    case SERVICE_SHOWCASE_SLUG_AND_TAG:
+      return <ServiceShowCaseBlock key={block.id} block={block} params={params} />
 
     default:
       return null
