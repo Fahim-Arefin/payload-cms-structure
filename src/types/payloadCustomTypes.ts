@@ -16,6 +16,7 @@ import {
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   CS_DELIVERY_SLUG_AND_TAG,
   CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG,
+  CS_PRODUCT_SHOWCASE_SLUG_AND_TAG,
   CUSTOMER_REVIEW_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
@@ -33,6 +34,7 @@ import {
   RATING_SLUG_AND_TAG,
   RELATED_ARTICLE_SLUG_AND_TAG,
   RELATED_NEWS_SLUG_AND_TAG,
+  SERVICE_SHOWCASE_SLUG_AND_TAG,
   SINGLE_ARTICLE_SLUG_AND_TAG,
   SINGLE_NEWS_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
@@ -207,4 +209,14 @@ export type FeaturedNewsBlockType = Extract<
 export type HomeIntroLoaderBlockType = Extract<
   Page['layout'][number],
   { blockType: typeof HOME_INTRO_LOADER_SLUG_AND_TAG }
+>
+export type ProductShowcaseBlockType = Extract<
+  Page['layout'][number],
+  { blockType: typeof CS_PRODUCT_SHOWCASE_SLUG_AND_TAG }
+>
+export type ServiceShowcaseBlockType = Extract<
+  Page['layout'][number],
+  {
+    blockType: typeof SERVICE_SHOWCASE_SLUG_AND_TAG
+  }
 >

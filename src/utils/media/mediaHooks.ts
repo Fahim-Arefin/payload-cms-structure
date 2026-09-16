@@ -9,6 +9,7 @@ import {
   CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG,
   CS_DELIVERY_SLUG_AND_TAG,
   CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG,
+  CS_PRODUCT_SHOWCASE_SLUG_AND_TAG,
   EMPLOYEE_SLUG_AND_TAG,
   FAQ_SLUG_AND_TAG,
   FOUNDER_QUOTE_SLUG_AND_TAG,
@@ -17,6 +18,7 @@ import {
   OUR_PROJECT_SLUG_AND_TAG,
   PRODUCT_HERO_SLUG_AND_TAG,
   PRODUCTION_PIPELINE_SLUG_AND_TAG,
+  SERVICE_SHOWCASE_SLUG_AND_TAG,
   WHAT_WE_BUILD_SLUG_AND_TAG,
   WHY_CHOOSE_US_SLUG_AND_TAG,
 } from '@/lib/constants'
@@ -134,6 +136,14 @@ export const mediaHooks = withMediaLifecycle({
     {
       layoutKey: 'layout',
       blockType: PRODUCTION_PIPELINE_SLUG_AND_TAG,
+      mediaFields: ['sectionHeading.downloadButton.file'],
+      mediaFieldLabels: {
+        'sectionHeading.downloadButton.file': 'Downloadable Case Study PDF',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CS_PRODUCT_SHOWCASE_SLUG_AND_TAG,
       mediaFields: ['sectionHeading.downloadButton.file'],
       mediaFieldLabels: {
         'sectionHeading.downloadButton.file': 'Downloadable Case Study PDF',
@@ -263,6 +273,49 @@ export const mediaHooks = withMediaLifecycle({
         icon: 'Criteria Icon',
       },
     } as any,
+    {
+      layoutKey: 'layout',
+      blockType: CS_PRODUCT_SHOWCASE_SLUG_AND_TAG,
+      groupKey: 'products',
+      arrayKey: 'items',
+      mediaFields: [
+        'mainIcon.mainIconColored',
+        'mainIcon.mainIconWhite',
+        'productLogo',
+        'productImage',
+      ],
+      mediaFieldLabels: {
+        'mainIcon.mainIconColored': 'Main Icon Colored',
+        'mainIcon.mainIconWhite': 'Main Icon White',
+        productLogo: 'Product Logo',
+        productImage: 'Product Showcase Image',
+      },
+    },
+    {
+      layoutKey: 'layout',
+
+      blockType: SERVICE_SHOWCASE_SLUG_AND_TAG,
+
+      groupKey: 'serviceShowcase',
+
+      arrayKey: 'tabs',
+
+      mediaFields: [
+        'collaborativeMethod.info.image',
+
+        'collaborativeMethod.info.designer.designerIcon',
+
+        'collaborativeMethod.info.builder.builderIcon',
+      ],
+
+      mediaFieldLabels: {
+        'collaborativeMethod.info.image': 'Collaborative Method Main Image',
+
+        'collaborativeMethod.info.designer.designerIcon': 'Designer Icon',
+
+        'collaborativeMethod.info.builder.builderIcon': 'Builder Icon',
+      },
+    },
   ],
 
   blockGroupArrayFields: [
@@ -275,6 +328,25 @@ export const mediaHooks = withMediaLifecycle({
       mediaFields: ['image'],
       mediaFieldLabels: {
         image: 'Client Image',
+      },
+    },
+    {
+      layoutKey: 'layout',
+
+      blockType: SERVICE_SHOWCASE_SLUG_AND_TAG,
+
+      groupKey: 'serviceShowcase',
+
+      firstArrayKey: 'tabs',
+
+      secondArrayKey: 'whatWeBuildItems',
+
+      mediaFields: ['image'],
+
+      itemLabelField: 'title',
+
+      mediaFieldLabels: {
+        image: 'What We Build Item Image',
       },
     },
   ],

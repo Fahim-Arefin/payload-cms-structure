@@ -543,6 +543,11 @@ html {
 }
 /* scroll animation */
 /* The initial head script controls this before the homepage hydrates. */
+html {
+  /* Keep pinned content the same width while the intro hides scrollbars. */
+  scrollbar-gutter: stable;
+}
+
 #home-intro-overlay {
   display: none;
 }

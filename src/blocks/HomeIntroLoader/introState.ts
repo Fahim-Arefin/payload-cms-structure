@@ -1,5 +1,6 @@
 export const INTRO_STORAGE_KEY = 'xynolab-home-intro-loader-v1'
 export const INTRO_READY_EVENT = 'xynolab:home-ready'
+export const INTRO_DISMISSED_EVENT = 'xynolab:home-intro-dismissed'
 export const INTRO_VIDEO_SRC = '/assets/videos/xynolabLoader.webm'
 export const INTRO_MAX_DURATION = 15000
 
@@ -24,6 +25,7 @@ export const introBootstrap = `(() => {
   document.documentElement.setAttribute('data-home-intro', 'active');
   window.__xynolabIntroTimer = window.setTimeout(() => {
     document.documentElement.removeAttribute('data-home-intro');
+    window.dispatchEvent(new Event('${INTRO_DISMISSED_EVENT}'));
   }, ${INTRO_MAX_DURATION});
 })();`
 
