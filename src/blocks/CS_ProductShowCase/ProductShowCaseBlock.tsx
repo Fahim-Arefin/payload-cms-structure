@@ -12,6 +12,7 @@ function ProductShowCaseBlock({ block }: Props) {
     <WithHashScroller
       id={block?.sectionSettings?.sectionId}
       bgColor={block?.sectionSettings?.backgroundColor}
+      className="rounded-t-[18px] lg:rounded-t-[25px] xl:rounded-t-[30px]"
     >
       <CS_ProductShowcaseSection block={block} />
     </WithHashScroller>
