@@ -172,20 +172,25 @@ export const metadata: Metadata = {
 
   keywords: ['Xynolab'],
 
-  // icons: {
-  //   // icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/DPXynolabRounder.png`,
-  //   icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/favicon.png`,
-  //   // icon: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/DPXynolab.png`,
-  // },
   icons: {
     icon: [
       {
-        url: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/favicon.png`,
+        url: '/assets/images/favicon-large-16.png',
+        sizes: '16x16',
+        type: 'image/png',
+      },
+      {
+        url: '/assets/images/favicon-large-32.png',
         sizes: '32x32',
         type: 'image/png',
       },
+      {
+        url: '/assets/images/favicon-large-48.png',
+        sizes: '48x48',
+        type: 'image/png',
+      },
     ],
-    apple: `${process.env.NEXT_PUBLIC_STATIC_IMG_DOMAIN}/images/favicon.png`,
+    apple: [{ url: '/assets/images/favicon-large-180.png', sizes: '180x180', type: 'image/png' }],
   },
 }
 
