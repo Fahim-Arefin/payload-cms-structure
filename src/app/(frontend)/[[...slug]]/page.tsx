@@ -154,7 +154,7 @@ type PageProps = { params: Promise<PageParams> }
 const SITE_NAME = 'Xynolab'
 
 const DEFAULT_DESCRIPTION =
-  'Sagar Ropes manufactures high-quality ropes and twines for marine, fishing, industrial, agricultural, and commercial use.'
+  'XynoLab delivers custom software, websites, SaaS platforms, ERP systems, and digital solutions designed to help businesses operate smarter and grow faster.'
 
 const norm = (s: string) =>
   decodeURIComponent(s)
