@@ -1321,11 +1321,11 @@ export async function generateQuotePdf(data: IllustrationData) {
   // Fallback (if any of your font files missing)
   const fallback = await pdfDoc.embedFont(StandardFonts.Helvetica)
 
-  const fontDir = path.join(process.cwd(), 'public', 'pdfFont')
+  const fontDir = path.join(process.cwd(), 'public', 'fonts', 'roboto')
 
   const fonts: Fonts = {
-    regular: await loadFontOrFallback(pdfDoc, path.join(fontDir, 'Avenir Regular.ttf'), fallback),
-    bold: await loadFontOrFallback(pdfDoc, path.join(fontDir, 'Avenir Heavy.ttf'), fallback),
+    regular: await loadFontOrFallback(pdfDoc, path.join(fontDir, 'Roboto-Regular.ttf'), fallback),
+    bold: await loadFontOrFallback(pdfDoc, path.join(fontDir, 'Roboto-Bold.ttf'), fallback),
   }
 
   // Colors (0..1)
@@ -1381,7 +1381,7 @@ export async function generateQuotePdf(data: IllustrationData) {
 
     // -------- Page 1: customer name (gold + bold) --------
     // if (i === 0) {
-    //   // ✅ PLAN NAME (Avenir + outline effect)
+    //   // ✅ PLAN NAME (Roboto + outline effect)
     //   const planTitleRaw = safeLatin(data?.meta?.plan?.displayName || data?.meta?.plan?.name || '—')
 
     //   // Adjust these to match the template exactly

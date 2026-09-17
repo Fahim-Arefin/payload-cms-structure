@@ -536,7 +536,7 @@ export async function POST(req: Request) {
     ].join('\n')
 
     const html = `
-  <div style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;color:#070725;">
+  <div style="margin:0;padding:0;background:#f5f7fb;font-family:Roboto,sans-serif;color:#070725;">
     <div style="max-width:720px;margin:0 auto;padding:28px 16px;">
       <div style="background:#ffffff;border:1px solid #d8edf0;padding:28px;">
         <table

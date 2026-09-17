@@ -21,17 +21,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // avenir: ['Avenir LT Std', 'Noto Serif Bengali', 'sans-serif'],
-        // // Force Noto when you explicitly need it
-        // noto: ['Noto Serif Bengali', 'Avenir LT Std', 'sans-serif'],
-
-        // proxima: ['Proxima Nova', 'Noto Serif Bengali', 'sans-serif'],
-        // manrope: ['Manrope', 'Noto Serif Bengali', 'sans-serif'],
-        agency: ['Agency', 'sans-serif'],
-        grift: ['Grift', 'sans-serif'],
-
-        // keep your bn override
-        noto: ['Noto Serif Bengali', 'Proxima Nova', 'sans-serif'],
+        sans: ['var(--font-roboto)', 'sans-serif'],
+        roboto: ['var(--font-roboto)', 'sans-serif'],
+        'exo-2': ['var(--font-exo-2)', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',

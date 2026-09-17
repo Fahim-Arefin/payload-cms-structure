@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <main className="font-avenir flex justify-center items-center min-h-[100dvh] bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+    <main className="font-roboto flex justify-center items-center min-h-[100dvh] bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
       <section className="mx-auto grid max-w-5xl grid-cols-1 gap-10 px-6 py-20 md:grid-cols-2 md:items-center">
         {/* Left: Copy */}
         <div>
@@ -71,7 +71,7 @@ export default function NotFound() {
 //       className="
 //         relative min-h-[100dvh] overflow-hidden
 //         bg-[#EEF7F4] py-[54px]
-//         font-grift text-secondary-1
+//         font-roboto text-secondary-1
 //         md:py-[70px]
 //         lg:py-[80px]
 //       "
@@ -135,7 +135,7 @@ export default function NotFound() {
 //         <h1
 //           className="
 //             mt-[34px]
-//             font-agency text-[42px] leading-[1]
+//             font-roboto text-[42px] leading-[1]
 //             text-secondary-1
 //             md:mt-[42px] md:text-[62px]
 //             lg:text-[74px]
@@ -149,7 +149,7 @@ export default function NotFound() {
 //           className="
 //             mt-[14px]
 //             max-w-[720px]
-//             font-grift text-[12px] font-bold
+//             font-roboto text-[12px] font-bold
 //             uppercase leading-[1.65] tracking-[0.08em]
 //             text-secondary-1
 //             md:mt-[18px] md:text-[14px]

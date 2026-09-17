@@ -168,7 +168,7 @@ export default Loading
 //         <p
 //           className="
 //             mt-[18px]
-//             font-grift text-[12px] font-medium
+//             font-roboto text-[12px] font-medium
 //             tracking-[0.22em] text-white/70
 //             md:mt-[22px] md:text-[13px]
 //             xl:mt-[26px] xl:text-[14px]

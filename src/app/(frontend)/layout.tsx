@@ -1,19 +1,47 @@
+import ServerNavbar from '@/components/custom/navbar/ServerNavbar'
 import React from 'react'
-// import './fonts.css'
 
 import { Toaster } from '@/components/ui/sonner'
 import Providers from '@/context/providers'
 import SmoothScrollProvider from '@/context/SmoothScrollProvider'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Metadata } from 'next'
-import { Noto_Serif_Bengali } from 'next/font/google'
+import localFont from 'next/font/local'
 import './styles.css'
 
-const notoSerifBengali = Noto_Serif_Bengali({
-  subsets: ['bengali'],
-  weight: ['400', '500', '700'],
+const roboto = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/roboto/Roboto-Variable.ttf',
+      weight: '100 900',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/roboto/Roboto-Italic-Variable.ttf',
+      weight: '100 900',
+      style: 'italic',
+    },
+  ],
   display: 'swap',
-  variable: '--font-bn', // expose a CSS variable for Tailwind/use anywhere
+  variable: '--font-roboto',
+})
+
+const exo2 = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/exo-2/Exo2-Variable.ttf',
+      weight: '100 900',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/exo-2/Exo2-Italic-Variable.ttf',
+      weight: '100 900',
+      style: 'italic',
+    },
+  ],
+  display: 'swap',
+  variable: '--font-exo-2',
+  preload: false,
 })
 
 // export const metadata: Metadata = {
@@ -211,12 +239,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           strategy="beforeInteractive"
         /> */}
       </head>
-      <body className={`${notoSerifBengali.variable}`}>
+      <body className={`${roboto.variable} ${exo2.variable} font-roboto`}>
         <Providers initialLang="en">
           <SmoothScrollProvider>
+            <ServerNavbar />
             {/* 3xl:max-w-[1925px] 3xl:mx-auto */}
-            <main className="min-h-screen relative font-grift">
-              {/* <ServerNavbar /> */}
+            <main className="min-h-screen relative font-roboto">
               <div className="min-h-screen">
                 {children}
                 {/* <Toaster position="bottom-right" richColors closeButton /> */}
@@ -228,10 +256,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                     classNames: {
                       toast:
                         'group rounded-xl border border-white/10 bg-[#0F172A]/95 text-white shadow-2xl backdrop-blur-md',
-                      title: 'font-grift text-[14px] font-semibold text-white',
-                      description: 'font-grift text-[12px] text-white/70',
-                      actionButton: 'bg-cyan text-white hover:bg-cyan/90 font-grift',
-                      cancelButton: 'bg-white/10 text-white hover:bg-white/20 font-grift',
+                      title: 'font-roboto text-[14px] font-semibold text-white',
+                      description: 'font-roboto text-[12px] text-white/70',
+                      actionButton: 'bg-cyan text-white hover:bg-cyan/90 font-roboto',
+                      cancelButton: 'bg-white/10 text-white hover:bg-white/20 font-roboto',
                       closeButton: 'border-white/10 bg-white/5 text-white hover:bg-white/10',
                     },
                   }}

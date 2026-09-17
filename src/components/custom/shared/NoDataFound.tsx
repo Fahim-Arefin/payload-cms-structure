@@ -18,7 +18,7 @@
 // }: Props) {
 //   return (
 //     <div
-//       className={`font-grift container-padding flex items-center justify-center ${widthHeight}`}
+//       className={`font-roboto container-padding flex items-center justify-center ${widthHeight}`}
 //       style={{ backgroundColor: bgColor }}
 //     >
 //       <div className="text-center max-w-lg mx-auto ">
@@ -78,11 +78,11 @@
 //           </div>
 //         )}
 
-//         <h3 className="font-agency global-h4 text-dark-2 mb-2 opacity-0 animate-fadeIn">
+//         <h3 className="font-roboto global-h4 text-dark-2 mb-2 opacity-0 animate-fadeIn">
 //           {message}
 //         </h3>
 
-//         <p className="font-grift global-p4 text-[#424242] mb-6 opacity-0 animate-fadeIn animate-delay-300">
+//         <p className="font-roboto global-p4 text-[#424242] mb-6 opacity-0 animate-fadeIn animate-delay-300">
 //           {description}
 //         </p>
 //       </div>
@@ -323,7 +323,7 @@ function NoDataFound({
               <span
                 className="
                   relative z-10 mt-[20px]
-                  font-agency text-[28px] leading-none
+                  font-roboto text-[28px] leading-none
                   text-primary-1
                 "
               >
@@ -338,7 +338,7 @@ function NoDataFound({
             mb-[14px] inline-flex items-center gap-[8px]
             rounded-full border border-primary-1/25
             bg-primary-1/10 px-[12px] py-[6px]
-            font-grift text-[11px] font-bold uppercase tracking-[0.12em]
+            font-roboto text-[11px] font-bold uppercase tracking-[0.12em]
             text-primary-1
           "
         >
@@ -349,7 +349,7 @@ function NoDataFound({
         <h3
           className={`
             max-w-[520px]
-            font-agency text-[42px] leading-[0.95]
+            font-roboto text-[42px] leading-[0.95]
             md:text-[54px]
             lg:text-[62px]
             ${dark ? 'text-white-1' : 'text-secondary-1'}
@@ -361,7 +361,7 @@ function NoDataFound({
         <p
           className={`
             mt-[16px] max-w-[500px]
-            font-grift global-p4 leading-[1.65]
+            font-roboto global-p4 leading-[1.65]
             ${dark ? 'text-white-1/72' : 'text-secondary-2'}
           `}
         >
@@ -371,7 +371,7 @@ function NoDataFound({
         <div
           className={`
             mt-[28px] w-full rounded-[12px] border px-[16px] py-[14px]
-            text-left font-grift text-[12px] leading-[1.55]
+            text-left font-roboto text-[12px] leading-[1.55]
             md:px-[18px] md:py-[16px]
             ${
               dark
