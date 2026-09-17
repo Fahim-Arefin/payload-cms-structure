@@ -1,86 +1,5 @@
-// 'use client'
-
-// import { gsap, ScrollTrigger } from '@/lib/gsap'
-// import Lenis from 'lenis'
-// import { usePathname } from 'next/navigation'
-// import React, { useEffect, useRef } from 'react'
-
-// type Props = {
-//   children: React.ReactNode
-// }
-
-// function SmoothScrollProvider({ children }: Props) {
-//   const lenisRef = useRef<Lenis | null>(null)
-//   const pathname = usePathname()
-
-//   useEffect(() => {
-//     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-//     if (prefersReducedMotion) return
-
-//     const lenis = new Lenis({
-//       //   duration: 1.18,
-//       //   duration: 1.45,
-//       duration: 2,
-//       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-//       smoothWheel: true,
-//       //   wheelMultiplier: 0.85,
-//       wheelMultiplier: 0.7,
-//       touchMultiplier: 1.1,
-//       syncTouch: false,
-//     })
-
-//     lenisRef.current = lenis
-
-//     lenis.on('scroll', ScrollTrigger.update)
-
-//     const updateLenis = (time: number) => {
-//       lenis.raf(time * 1000)
-//     }
-
-//     gsap.ticker.add(updateLenis)
-//     gsap.ticker.lagSmoothing(0)
-
-//     const refreshTimer = window.setTimeout(() => {
-//       lenis.resize()
-//       ScrollTrigger.refresh()
-//     }, 400)
-
-//     return () => {
-//       window.clearTimeout(refreshTimer)
-//       lenis.off('scroll', ScrollTrigger.update)
-//       gsap.ticker.remove(updateLenis)
-//       lenis.destroy()
-//       lenisRef.current = null
-//     }
-//   }, [])
-
-//   useEffect(() => {
-//     const timer = window.setTimeout(() => {
-//       lenisRef.current?.resize()
-//       ScrollTrigger.refresh()
-
-//       if (window.location.hash && lenisRef.current) {
-//         lenisRef.current.scrollTo(window.location.hash, {
-//           offset: -120,
-//           duration: 1,
-//         })
-//       }
-//     }, 180)
-
-//     return () => {
-//       window.clearTimeout(timer)
-//     }
-//   }, [pathname])
-
-//   return <>{children}</>
-// }
-
-// export default SmoothScrollProvider
-
 'use client'
 
-import { INTRO_DISMISSED_EVENT } from '@/blocks/HomeIntroLoader/introState'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
 import Lenis from 'lenis'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -95,25 +14,6 @@ function SmoothScrollProvider({ children }: Props) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const previousPathnameRef = useRef<string | null>(null)
-
-  useEffect(() => {
-    let refreshFrame: number | undefined
-    const refreshAfterIntro = () => {
-      if (refreshFrame !== undefined) window.cancelAnimationFrame(refreshFrame)
-      // Re-measure pinned content after the intro releases the scrollbar lock.
-      refreshFrame = window.requestAnimationFrame(() => {
-        ScrollTrigger.refresh()
-        lenisRef.current?.resize()
-        refreshFrame = undefined
-      })
-    }
-
-    window.addEventListener(INTRO_DISMISSED_EVENT, refreshAfterIntro)
-    return () => {
-      window.removeEventListener(INTRO_DISMISSED_EVENT, refreshAfterIntro)
-      if (refreshFrame !== undefined) window.cancelAnimationFrame(refreshFrame)
-    }
-  }, [])
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches

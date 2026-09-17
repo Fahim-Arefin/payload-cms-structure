@@ -53,62 +53,67 @@
 //   },
 // )
 
-import { unstable_cache } from 'next/cache'
-import { getPayload } from 'payload'
+// ================================================================================
+// ================================================================================
+// ================================================================================
+// ================================================================================
 
-import config from '@/payload.config'
-import { CUSTOMER_REVIEW_SLUG_AND_TAG } from '../constants'
-import { logCacheMiss } from '../cacheDebug'
+// import { unstable_cache } from 'next/cache'
+// import { getPayload } from 'payload'
 
-const REVIEW_FORM_SUBMISSIONS_SLUG = 'review-form-submissions'
+// import config from '@/payload.config'
+// import { CUSTOMER_REVIEW_SLUG_AND_TAG } from '../constants'
+// import { logCacheMiss } from '../cacheDebug'
 
-const payloadClient = async () => getPayload({ config: await config })
+// const REVIEW_FORM_SUBMISSIONS_SLUG = 'review-form-submissions'
 
-export const getPublishedReviews = unstable_cache(
-  async () => {
-    logCacheMiss(`collection:${REVIEW_FORM_SUBMISSIONS_SLUG}:${CUSTOMER_REVIEW_SLUG_AND_TAG}`)
+// const payloadClient = async () => getPayload({ config: await config })
 
-    const payload = await payloadClient()
+// export const getPublishedReviews = unstable_cache(
+//   async () => {
+//     logCacheMiss(`collection:${REVIEW_FORM_SUBMISSIONS_SLUG}:${CUSTOMER_REVIEW_SLUG_AND_TAG}`)
 
-    const result = await payload.find({
-      collection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
-      depth: 2,
-      limit: 30,
-      where: {
-        status: {
-          equals: 'published',
-        },
-      },
-      sort: '-updatedAt',
-      overrideAccess: true,
-    })
+//     const payload = await payloadClient()
 
-    return result.docs
-  },
-  ['published-review-form-submissions-cache'],
-  {
-    tags: [CUSTOMER_REVIEW_SLUG_AND_TAG, REVIEW_FORM_SUBMISSIONS_SLUG],
-  },
-)
+//     const result = await payload.find({
+//       collection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
+//       depth: 2,
+//       limit: 30,
+//       where: {
+//         status: {
+//           equals: 'published',
+//         },
+//       },
+//       sort: '-updatedAt',
+//       overrideAccess: true,
+//     })
 
-export const getAllReviews = unstable_cache(
-  async () => {
-    logCacheMiss(`collection:${REVIEW_FORM_SUBMISSIONS_SLUG}:all`)
+//     return result.docs
+//   },
+//   ['published-review-form-submissions-cache'],
+//   {
+//     tags: [CUSTOMER_REVIEW_SLUG_AND_TAG, REVIEW_FORM_SUBMISSIONS_SLUG],
+//   },
+// )
 
-    const payload = await payloadClient()
+// export const getAllReviews = unstable_cache(
+//   async () => {
+//     logCacheMiss(`collection:${REVIEW_FORM_SUBMISSIONS_SLUG}:all`)
 
-    const result = await payload.find({
-      collection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
-      depth: 2,
-      limit: 1000,
-      sort: '-updatedAt',
-      overrideAccess: true,
-    })
+//     const payload = await payloadClient()
 
-    return result.docs
-  },
-  ['all-review-form-submissions-cache'],
-  {
-    tags: [CUSTOMER_REVIEW_SLUG_AND_TAG, REVIEW_FORM_SUBMISSIONS_SLUG],
-  },
-)
+//     const result = await payload.find({
+//       collection: REVIEW_FORM_SUBMISSIONS_SLUG as any,
+//       depth: 2,
+//       limit: 1000,
+//       sort: '-updatedAt',
+//       overrideAccess: true,
+//     })
+
+//     return result.docs
+//   },
+//   ['all-review-form-submissions-cache'],
+//   {
+//     tags: [CUSTOMER_REVIEW_SLUG_AND_TAG, REVIEW_FORM_SUBMISSIONS_SLUG],
+//   },
+// )

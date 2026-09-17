@@ -27,61 +27,53 @@ export const GLOBAL_NAVBAR_CACHE_KEY = 'navbar-data'
 export const GLOBAL_FOOTER_SLUG_AND_TAG = 'footer' as const
 export const GLOBAL_FOOTER_CACHE_KEY = 'footer-data'
 
-// GLobal Contact Us
-export const GLOBAL_CONTACT_US_SLUG_AND_TAG = 'global-contact-us'
-export const GLOBAL_CONTACT_US_LABEL = 'Global Contact Us'
-
-// News Tags Global
-// export const GLOBAL_NEWS_TAGS_SLUG_AND_TAG = 'news-tags'
-// export const GLOBAL_NEWS_TAGS_CACHE_KEY = 'news-tags-data'
-
 // articles
 // ================================================================================
 // ================================================================================
-export const ARTICLES = 'Articles'
-export const GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG = 'article-tags'
-export const GLOBAL_ARTICLE_SLUG_AND_TAG = 'articles'
+// export const ARTICLES = 'Articles'
+// export const GLOBAL_ARTICLE_TAGS_SLUG_AND_TAG = 'article-tags'
+// export const GLOBAL_ARTICLE_SLUG_AND_TAG = 'articles'
 
-export const ALL_ARTICLE_SLUG_AND_TAG = 'all-article'
-export const ALL_ARTICLE_BLOCK_LABEL = 'All Article'
-export const ALL_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-article-block-thumbnail.webp`
+// export const ALL_ARTICLE_SLUG_AND_TAG = 'all-article'
+// export const ALL_ARTICLE_BLOCK_LABEL = 'All Article'
+// export const ALL_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-article-block-thumbnail.webp`
 
-export const SINGLE_ARTICLE_SLUG_AND_TAG = 'single-article'
-export const SINGLE_ARTICLE_BLOCK_LABEL = 'Single Article'
-export const SINGLE_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-article-block-thumbnail.webp`
+// export const SINGLE_ARTICLE_SLUG_AND_TAG = 'single-article'
+// export const SINGLE_ARTICLE_BLOCK_LABEL = 'Single Article'
+// export const SINGLE_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-article-block-thumbnail.webp`
 
-export const RELATED_ARTICLE_SLUG_AND_TAG = 'related-article'
-export const RELATED_ARTICLE_BLOCK_LABEL = 'Related Article'
-export const RELATED_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/related-article-block-thumbnail.webp`
+// export const RELATED_ARTICLE_SLUG_AND_TAG = 'related-article'
+// export const RELATED_ARTICLE_BLOCK_LABEL = 'Related Article'
+// export const RELATED_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/related-article-block-thumbnail.webp`
 
-export const FEATURED_ARTICLE_SLUG_AND_TAG = 'featured-article'
-export const FEATURED_ARTICLE_BLOCK_LABEL = 'Featured Article'
-export const FEATURED_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/featured-article-block-thumbnail.webp`
+// export const FEATURED_ARTICLE_SLUG_AND_TAG = 'featured-article'
+// export const FEATURED_ARTICLE_BLOCK_LABEL = 'Featured Article'
+// export const FEATURED_ARTICLE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/featured-article-block-thumbnail.webp`
 // ================================================================================
 // ================================================================================
 
 // news
 // ================================================================================
 // ================================================================================
-export const NEWS = 'News'
-export const GLOBAL_NEWS_TAGS_SLUG_AND_TAG = 'news-tags'
-export const GLOBAL_NEWS_SLUG_AND_TAG = 'news'
+// export const NEWS = 'News'
+// export const GLOBAL_NEWS_TAGS_SLUG_AND_TAG = 'news-tags'
+// export const GLOBAL_NEWS_SLUG_AND_TAG = 'news'
 
-export const ALL_NEWS_SLUG_AND_TAG = 'all-news'
-export const ALL_NEWS_BLOCK_LABEL = 'All News'
-export const ALL_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-news-block-thumbnail.webp`
+// export const ALL_NEWS_SLUG_AND_TAG = 'all-news'
+// export const ALL_NEWS_BLOCK_LABEL = 'All News'
+// export const ALL_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/all-news-block-thumbnail.webp`
 
-export const SINGLE_NEWS_SLUG_AND_TAG = 'single-news'
-export const SINGLE_NEWS_BLOCK_LABEL = 'Single News'
-export const SINGLE_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-news-block-thumbnail.webp`
+// export const SINGLE_NEWS_SLUG_AND_TAG = 'single-news'
+// export const SINGLE_NEWS_BLOCK_LABEL = 'Single News'
+// export const SINGLE_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/single-news-block-thumbnail.webp`
 
-export const RELATED_NEWS_SLUG_AND_TAG = 'related-news'
-export const RELATED_NEWS_BLOCK_LABEL = 'Related News'
-export const RELATED_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/related-news-block-thumbnail.webp`
+// export const RELATED_NEWS_SLUG_AND_TAG = 'related-news'
+// export const RELATED_NEWS_BLOCK_LABEL = 'Related News'
+// export const RELATED_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/related-news-block-thumbnail.webp`
 
-export const FEATURED_NEWS_SLUG_AND_TAG = 'featured-news'
-export const FEATURED_NEWS_BLOCK_LABEL = 'Featured News'
-export const FEATURED_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/featured-news-block-thumbnail.webp`
+// export const FEATURED_NEWS_SLUG_AND_TAG = 'featured-news'
+// export const FEATURED_NEWS_BLOCK_LABEL = 'Featured News'
+// export const FEATURED_NEWS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/featured-news-block-thumbnail.webp`
 // ================================================================================
 // ================================================================================
 
@@ -104,132 +96,7 @@ export const SOLUTION = 'Solution'
 export const PRODUCT = 'Product'
 export const SERVICE = 'Service'
 
-export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
-export const BASIC_HERO_BLOCK_LABEL = 'Hero (Basic)'
-export const BASIC_HERO_CACHE_KEY = 'basic-hero-data'
-export const BASIC_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/basic-hero-block-thumbnail.webp`
-
-export const PRODUCT_HERO_SLUG_AND_TAG = 'product-hero'
-export const PRODUCT_HERO_BLOCK_LABEL = 'Hero (Product)'
-export const PRODUCT_HERO_CACHE_KEY = 'product-hero-data'
-export const PRODUCT_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-hero-block-thumbnail.jpg`
-
-export const COMPANY_INFO_SLUG_AND_TAG = 'company-info'
-export const COMPANY_INFO_BLOCK_LABEL = 'Company Info'
-export const COMPANY_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/company-info-block-thumbnail.jpg`
-
-export const COMPANY_INTRO_SLUG_AND_TAG = 'company-intro'
-export const COMPANY_INTRO_BLOCK_LABEL = 'Company Introduction'
-export const COMPANY_INTRO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/company-intro-block-thumbnail.webp`
-
-export const PROJECT_APPROACH_SLUG_AND_TAG = 'project-approach'
-export const PROJECT_APPROACH_BLOCK_LABEL = 'Project Approach'
-export const PROJECT_APPROACH_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/project-approach-block-thumbnail.webp`
-
-export const CODING_LANGUAGE_SLUG_AND_TAG = 'coding-language'
-export const CODING_LANGUAGE_BLOCK_LABEL = 'Coding Language'
-export const CODING_LANGUAGE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/coding-language-block-thumbnail.webp`
-
-export const FOUNDER_QUOTE_SLUG_AND_TAG = 'founder-quote'
-export const FOUNDER_QUOTE_BLOCK_LABEL = 'Founder Quote'
-export const FOUNDER_QUOTE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/founder-quote-block-thumbnail.webp`
-
-export const PRODUCT_INFO_SLUG_AND_TAG = 'product-info'
-export const PRODUCT_INFO_BLOCK_LABEL = 'Product Info'
-export const PRODUCT_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/product-info-block-thumbnail.webp`
-
-export const CONTACT_US_SLUG_AND_TAG = 'contact-us'
-export const CONTACT_US_BLOCK_LABEL = 'Contact Us'
-export const CONTACT_US_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/contact-us-block-thumbnail.webp`
-
-export const CLIENT_SUCCESS_STORIES_SLUG_AND_TAG = 'client-success-stories'
-export const CLIENT_SUCCESS_STORIES_BLOCK_LABEL = 'Client Success Stories'
-export const CLIENT_SUCCESS_STORIES_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/client-success-stories-block-thumbnail.webp`
-
-export const COMPANY_STATS_SLUG_AND_TAG = 'company-stats'
-export const COMPANY_STATS_BLOCK_LABEL = 'Company Stats'
-export const COMPANY_STATS_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/company-stats-block-thumbnail.webp`
-
-export const EMPLOYEE_SLUG_AND_TAG = 'employee'
-export const EMPLOYEE_BLOCK_LABEL = 'Employee'
-export const EMPLOYEE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/employee-block-thumbnail.webp`
-
-export const FAQ_SLUG_AND_TAG = 'faq'
-export const FAQ_BLOCK_LABEL = 'FAQ'
-export const FAQ_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/faq-block-thumbnail.webp`
-
-export const ABOUT_US_INTRO_SLUG_AND_TAG = 'about-us-intro'
-export const ABOUT_US_INTRO_BLOCK_LABEL = 'About Us Intro'
-export const ABOUT_US_INTRO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/about-us-intro-block-thumbnail.webp`
-
-export const OUR_PROJECT_SLUG_AND_TAG = 'our-project'
-export const OUR_PROJECT_BLOCK_LABEL = 'Our Project'
-export const OUR_PROJECT_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/our-project-block-thumbnail.webp`
-
-export const CS_COLLABORATIVE_MOBBING_SLUG_AND_TAG = 'cs-collaborative-mobbing'
-export const CS_COLLABORATIVE_MOBBING_BLOCK_LABEL = 'CS Collaborative Mobbing'
-export const CS_COLLABORATIVE_MOBBING_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-collaborative-mobbing-block-thumbnail.webp`
-
-export const CS_COLLABORATION_PROTOCAL_SLUG_AND_TAG = 'cs-collaboration-protocal'
-export const CS_COLLABORATION_PROTOCAL_BLOCK_LABEL = 'CS Collaboration Protocal'
-export const CS_COLLABORATION_PROTOCAL_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-collaboration-protocal-block-thumbnail.webp`
-
-export const CS_DELIVERY_SLUG_AND_TAG = 'cs-delivery'
-export const CS_DELIVERY_BLOCK_LABEL = 'CS Delivery'
-export const CS_DELIVERY_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-delivery-block-thumbnail.webp`
-
-export const BOOK_A_CALL_SLUG_AND_TAG = 'book-a-call'
-export const BOOK_A_CALL_BLOCK_LABEL = 'Book A Call'
-export const BOOK_A_CALL_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/book-a-call-block-thumbnail.webp`
-
-export const CONTACT_INFO_SLUG_AND_TAG = 'contact-info'
-export const CONTACT_INFO_BLOCK_LABEL = 'Contact Info'
-export const CONTACT_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/contact-info-block-thumbnail.webp`
-
-export const LOCATION_SLUG_AND_TAG = 'location'
-export const LOCATION_BLOCK_LABEL = 'Location'
-export const LOCATION_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/location-block-thumbnail.webp`
-
-export const RATING_SLUG_AND_TAG = 'rating'
-export const RATING_BLOCK_LABEL = 'Rating'
-export const RATING_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/rating-block-thumbnail.webp`
-
-export const CS_DEVELOPMENT_FRAMEWORK_SLUG_AND_TAG = 'cs-development-framework'
-export const CS_DEVELOPMENT_FRAMEWORK_BLOCK_LABEL = 'CS Development Framework'
-export const CS_DEVELOPMENT_FRAMEWORK_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-development-framework-block-thumbnail.webp`
-
-export const MAINTENANCE_SLUG_AND_TAG = 'maintenance'
-export const MAINTENANCE_BLOCK_LABEL = 'Maintenance'
-export const MAINTENANCE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/maintenance-block-thumbnail.webp`
-
-export const COLLABORATIVE_METHOD_SLUG_AND_TAG = 'collaborative-method'
-export const COLLABORATIVE_METHOD_BLOCK_LABEL = 'Collaborative Method'
-export const COLLABORATIVE_METHOD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/collaborative-method-block-thumbnail.webp`
-
-export const WHY_CHOOSE_US_SLUG_AND_TAG = 'why-choose-us'
-export const WHY_CHOOSE_US_BLOCK_LABEL = 'Why Choose Us'
-export const WHY_CHOOSE_US_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/why-choose-us-block-thumbnail.webp`
-
-export const PRODUCTION_PIPELINE_SLUG_AND_TAG = 'production-pipeline'
-export const PRODUCTION_PIPELINE_BLOCK_LABEL = 'Production Pipeline'
-export const PRODUCTION_PIPELINE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/production-pipeline-block-thumbnail.webp`
-
-export const WHAT_WE_BUILD_SLUG_AND_TAG = 'what-we-build'
-export const WHAT_WE_BUILD_BLOCK_LABEL = 'What We Build'
-export const WHAT_WE_BUILD_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/what-we-build-block-thumbnail.webp`
-
-export const CUSTOMER_REVIEW_SLUG_AND_TAG = 'customer-review'
-export const CUSTOMER_REVIEW_BLOCK_LABEL = 'Customer Review'
-export const CUSTOMER_REVIEW_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/customer-review-block-thumbnail.webp`
-
-export const HOME_INTRO_LOADER_SLUG_AND_TAG = 'homeIntroLoader'
-export const HOME_INTRO_LOADER_BLOCK_LABEL = 'Home Intro Loader'
-export const HOME_INTRO_LOADER_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/home-intro-loader-block-thumbnail.webp`
-
-export const CS_PRODUCT_SHOWCASE_SLUG_AND_TAG = 'csProductShowcase'
-export const CS_PRODUCT_SHOWCASE_BLOCK_LABEL = 'CS Product Showcase'
-export const CS_PRODUCT_SHOWCASE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/cs-product-showcase-block-thumbnail.webp`
-
-export const SERVICE_SHOWCASE_SLUG_AND_TAG = 'serviceShowcase'
-export const SERVICE_SHOWCASE_BLOCK_LABEL = 'Service Showcase'
-export const SERVICE_SHOWCASE_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/service-showcase-block-thumbnail.webp`
+// export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
+// export const BASIC_HERO_BLOCK_LABEL = 'Hero (Basic)'
+// export const BASIC_HERO_CACHE_KEY = 'basic-hero-data'
+// export const BASIC_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/basic-hero-block-thumbnail.webp`

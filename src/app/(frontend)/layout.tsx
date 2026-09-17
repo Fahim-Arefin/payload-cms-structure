@@ -1,21 +1,13 @@
 import React from 'react'
 // import './fonts.css'
-import ServerFooter from '@/components/custom/sagar-ropes-shared/footer/ServerFooter'
-import ServerNavbar from '@/components/custom/sagar-ropes-shared/navbar/ServerNavbar'
-import CookieConsentBanner from '@/components/custom/shared/CookieConsentModal'
-import GlobalContactButtons from '@/components/custom/shared/GlobalContactButtons'
+
+import { Toaster } from '@/components/ui/sonner'
 import Providers from '@/context/providers'
+import SmoothScrollProvider from '@/context/SmoothScrollProvider'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Metadata } from 'next'
 import { Noto_Serif_Bengali } from 'next/font/google'
 import './styles.css'
-import { Toaster } from '@/components/ui/sonner'
-import GlobalSocialLinks from '@/components/custom/shared/GlobalSocialLinks'
-import GlobalScrollButton from '@/components/custom/shared/GlobalScrollButton'
-import SmoothScrollProvider from '@/context/SmoothScrollProvider'
-import HomeIntroLoaderClient from '@/blocks/HomeIntroLoader/components/HomeIntroLoaderClient'
-import { introBootstrap, introVideoBootstrap } from '@/blocks/HomeIntroLoader/introState'
-import { getHomeIntroEnabled } from '@/lib/homeIntro'
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ['bengali'],
@@ -196,12 +188,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
-  const homeIntroEnabled = await getHomeIntroEnabled()
 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {homeIntroEnabled && <script dangerouslySetInnerHTML={{ __html: introBootstrap }} />}
         {/* <meta name="facebook-domain-verification" content="5zfjmpany80ph0dq1j8hirmw95jtod" /> */}
         {/* Google Tag (gtag.js) */}
         {/* <Script
@@ -222,17 +212,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         /> */}
       </head>
       <body className={`${notoSerifBengali.variable}`}>
-        {homeIntroEnabled && (
-          <>
-            <HomeIntroLoaderClient />
-            <script dangerouslySetInnerHTML={{ __html: introVideoBootstrap }} />
-          </>
-        )}
         <Providers initialLang="en">
           <SmoothScrollProvider>
             {/* 3xl:max-w-[1925px] 3xl:mx-auto */}
             <main className="min-h-screen relative font-grift">
-              <ServerNavbar />
+              {/* <ServerNavbar /> */}
               <div className="min-h-screen">
                 {children}
                 {/* <Toaster position="bottom-right" richColors closeButton /> */}
@@ -254,11 +238,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                 />
               </div>
               {/* <CookieConsentBanner /> */}
-              <div className="">
-                <ServerFooter />
-              </div>
-              <GlobalSocialLinks />
-              <GlobalScrollButton />
+              <div className="">{/* <ServerFooter /> */}</div>
+              {/* <GlobalSocialLinks /> */}
+              {/* <GlobalScrollButton /> */}
             </main>
             <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
           </SmoothScrollProvider>

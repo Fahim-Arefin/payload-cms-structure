@@ -15,14 +15,6 @@ import { Resume } from './collections/Resume'
 import { Users } from './collections/Users'
 import Footer from './collections/globals/Footer'
 import Navbar from './collections/globals/Navbar'
-import NewsletterSubscribers from './collections/NewsletterSubscribers'
-import GlobalContactUs from './collections/globals/GlobalContactUs'
-import ContactFormSubmissions from './collections/ContactFormSubmissions'
-import ReviewFormSubmissions from './collections/ReviewFormSubmissions'
-import ArticleTags from './collections/globals/ArticleTags'
-import Article from './collections/globals/Article'
-import News from './collections/globals/News'
-import NewsTags from './collections/globals/NewsTags'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -95,17 +87,8 @@ export default buildConfig({
     },
     abortOnLimit: true,
   },
-  collections: [
-    Users,
-    Media,
-    Resume,
-    AuditLogs,
-    NewsletterSubscribers,
-    ContactFormSubmissions,
-    ReviewFormSubmissions,
-    Pages,
-  ],
-  globals: [Navbar, Footer, ArticleTags, Article, NewsTags, News, GlobalContactUs],
+  collections: [Users, Media, Resume, AuditLogs, Pages],
+  globals: [Navbar, Footer],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

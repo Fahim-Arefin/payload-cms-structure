@@ -1,41 +1,3 @@
-import AboutUsIntroSchema from '@/blocks/AboutUsIntro/schema'
-import AllArticleSchema from '@/blocks/AllArticles/schema'
-import AllNewsSchema from '@/blocks/AllNews/scheam'
-import BasicHeroSchema from '@/blocks/BasicHero/schema'
-import BookACallSchema from '@/blocks/BookACall/schema'
-import CodingLanguageSchema from '@/blocks/CodingLanguage/schema'
-import CollaborativeMethodSchema from '@/blocks/CollaborativeMethod/schema'
-import CompanyInfoSchema from '@/blocks/CompanyInfo/schema'
-import CompanyIntroSchema from '@/blocks/CompanyIntro/schema'
-import LocationSchema from '@/blocks/CompanyLocation/schema'
-import CompanyStatsSchema from '@/blocks/CompanyStats/schema'
-import ContactInfoSchema from '@/blocks/ContactInfo/schema'
-import ContactUsSchema from '@/blocks/ContactUs/schema'
-import CSCollaborationProtocalSchema from '@/blocks/CS_CollaborationProtocal/schema'
-import CSCollaborativeMobbingSchema from '@/blocks/CS_Collaborative_Mobbing/schema'
-import CSDeliverySchema from '@/blocks/CS_Delivery/schema'
-import CSDevelopmentFrameworkSchema from '@/blocks/CS_DevelopmentFramework/schema'
-import CSProductShowcaseSchema from '@/blocks/CS_ProductShowCase/schema'
-import CustomerReviewSchema from '@/blocks/CustomerReview/schema'
-import EmployeeSchema from '@/blocks/Employee/schema'
-import FAQSchema from '@/blocks/FAQ/schema'
-import FeaturedArticleSchema from '@/blocks/FeaturedArticle/schema'
-import FeaturedNewsSchema from '@/blocks/FeaturedNews/schema'
-import FounderQuoteSchema from '@/blocks/FounderQuote/schema'
-import HomeIntroLoaderSchema from '@/blocks/HomeIntroLoader/schema'
-import MaintenanceSchema from '@/blocks/Maintainance/schema'
-import OurProjectSchema from '@/blocks/OurProject/schema'
-import ProductInfoSchema from '@/blocks/ProductInfo/schema'
-import ProductionPipelineSchema from '@/blocks/ProductionPipeline/schema'
-import ProjectApproachSchema from '@/blocks/ProjectApproach/schema'
-import RatingSchema from '@/blocks/Rating/scheam'
-import RelatedArticleSchema from '@/blocks/RelatedArticles/schema'
-import RelatedNewsSchema from '@/blocks/RelatedNews/schema'
-import ServiceShowcaseSchema from '@/blocks/ServiceShowCase/schema'
-import SingleArticleSchema from '@/blocks/SingleArticle/schema'
-import SingleNewsSchema from '@/blocks/SingleNews/schema'
-import WhatWeBuildSchema from '@/blocks/WhatWeBuild/schema'
-import WhyChooseUsSchema from '@/blocks/WhyChooseUs/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -206,67 +168,7 @@ export const Pages: CollectionConfig = {
       label: 'Layout',
       type: 'blocks',
       required: true,
-      blocks: [
-        // hero page
-        BasicHeroSchema,
-        // ProductHeroSchema,
-
-        // common section
-        ContactUsSchema,
-        FAQSchema,
-        BookACallSchema,
-        MaintenanceSchema,
-
-        // home page unique
-        CompanyInfoSchema,
-        CompanyIntroSchema,
-        ProductInfoSchema,
-        ProjectApproachSchema,
-        CodingLanguageSchema,
-        FounderQuoteSchema,
-        CustomerReviewSchema,
-        CompanyStatsSchema,
-        HomeIntroLoaderSchema,
-
-        // about us page unique
-        OurProjectSchema,
-        AboutUsIntroSchema,
-        EmployeeSchema,
-
-        // Case StudyPage
-        CSCollaborativeMobbingSchema,
-        CSCollaborationProtocalSchema,
-        CSDevelopmentFrameworkSchema,
-        CSDeliverySchema,
-        // Get In Touch
-        ContactInfoSchema,
-        LocationSchema,
-        RatingSchema,
-
-        // solution
-        CollaborativeMethodSchema,
-        WhatWeBuildSchema,
-        WhyChooseUsSchema,
-        ProductionPipelineSchema,
-
-        // Product Showcase
-        CSProductShowcaseSchema,
-
-        // service showcase
-        ServiceShowcaseSchema,
-
-        //Articles
-        AllArticleSchema,
-        SingleArticleSchema,
-        RelatedArticleSchema,
-        FeaturedArticleSchema,
-
-        // News
-        AllNewsSchema,
-        SingleNewsSchema,
-        RelatedNewsSchema,
-        FeaturedNewsSchema,
-      ],
+      blocks: [],
     },
   ],
   access: {
