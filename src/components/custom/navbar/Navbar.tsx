@@ -291,7 +291,7 @@ export default function Navbar({ data }: { data: NavbarData }) {
               onNavigate={navigate}
               key={item.id || index}
               item={item}
-              className={`${styles.quickLink} ${item.appearance === 'solid' ? styles.solid : styles.outline}`}
+              className={`${styles.quickLink} ${item.appearance === 'solid' ? styles.solid : styles.outline} sm:max-lg:!rounded-[10px] sm:max-lg:!px-2.5 sm:max-lg:!text-base`}
               active={active(item)}
             />
           ))}
