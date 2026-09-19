@@ -41,6 +41,18 @@ const thumbnailFields = generateImageFields({
   ownerCollection: INTRO_HERO_SLUG_AND_TAG as any,
 } as any)
 
+const groovyDesignFields = generateImageFields({
+  required: false,
+  fieldName: 'groovyDesign',
+  label: 'Groovy Design',
+  description:
+    'Optional decorative overlay above the Dora light. Crop ratio: 4:3 landscape. Recommended size: 1920 x 1440 px. Upload a transparent PNG or WebP. Covers the entire hero, including its padding, with centered cropping on different screen sizes. Keep important details away from the edges.',
+  aspectRatio: 4 / 3,
+  quality: 0.95,
+  maxKB: 1000,
+  ownerCollection: INTRO_HERO_SLUG_AND_TAG,
+})
+
 /* =========================================================
    VIDEO VALIDATION
 
@@ -266,6 +278,7 @@ const IntroHeroSchema: Block = {
     ===================================================== */
 
     ...thumbnailFields,
+    ...groovyDesignFields,
   ],
 }
 

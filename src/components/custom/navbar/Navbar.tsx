@@ -139,10 +139,11 @@ export default function Navbar({ data }: { data: NavbarData }) {
   }, [])
 
   return (
-    <header className={`${styles.header} ${'bg-[#1E1E1E]'}`}>
+    <header className={`${styles.header} sticky top-0 isolate`}>
       {background && (
         <div
-          className={styles.artwork}
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat mix-blend-screen"
           style={{ backgroundImage: `url(${JSON.stringify(background)})` }}
         />
       )}

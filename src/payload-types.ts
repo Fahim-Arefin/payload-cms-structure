@@ -302,6 +302,17 @@ export interface Page {
      * Auto-generated Base64 blur
      */
     thumbnailBlurDataURL?: string | null;
+    /**
+     * Optional decorative overlay above the Dora light. Crop ratio: 4:3 landscape. Recommended size: 1920 x 1440 px. Upload a transparent PNG or WebP. Covers the entire hero, including its padding, with centered cropping on different screen sizes. Keep important details away from the edges.
+     */
+    groovyDesign?: (string | null) | Media;
+    groovyDesignOriginal?: (string | null) | Media;
+    pendingGroovyDesignOriginal?: string | null;
+    pendingGroovyDesignCrop?: string | null;
+    /**
+     * Auto-generated Base64 blur
+     */
+    groovyDesignBlurDataURL?: string | null;
     id?: string | null;
     blockName?: string | null;
     blockType: 'introHero';
@@ -492,6 +503,11 @@ export interface PagesSelect<T extends boolean = true> {
               pendingThumbnailOriginal?: T;
               pendingThumbnailCrop?: T;
               thumbnailBlurDataURL?: T;
+              groovyDesign?: T;
+              groovyDesignOriginal?: T;
+              pendingGroovyDesignOriginal?: T;
+              pendingGroovyDesignCrop?: T;
+              groovyDesignBlurDataURL?: T;
               id?: T;
               blockName?: T;
             };
@@ -554,9 +570,16 @@ export interface Navbar {
   logoBlurDataURL?: string | null;
   logoAlt?: string | null;
   /**
-   * Transparent decorative artwork layered over the charcoal background.
+   * Optional decorative overlay above the navbar linear gradient. Crop ratio: 16:1 panoramic. Recommended size: 1920 x 120 px. Upload a transparent PNG or WebP. Covers the full navbar outside the content padding, with centered cropping on smaller screens. Keep important details near the center.
    */
   backgroundImage?: (string | null) | Media;
+  backgroundImageOriginal?: (string | null) | Media;
+  pendingBackgroundImageOriginal?: string | null;
+  pendingBackgroundImageCrop?: string | null;
+  /**
+   * Auto-generated Base64 blur
+   */
+  backgroundImageBlurDataURL?: string | null;
   desktop?: {
     /**
      * Shared desktop and sidebar links. Up to one level of child links.
@@ -745,6 +768,10 @@ export interface NavbarSelect<T extends boolean = true> {
   logoBlurDataURL?: T;
   logoAlt?: T;
   backgroundImage?: T;
+  backgroundImageOriginal?: T;
+  pendingBackgroundImageOriginal?: T;
+  pendingBackgroundImageCrop?: T;
+  backgroundImageBlurDataURL?: T;
   desktop?:
     | T
     | {

@@ -11,6 +11,7 @@ function IntroHeroSection({ block }: Props) {
   const video = typeof block?.video === 'object' ? block.video : null
 
   const thumbnail = typeof block?.thumbnail === 'object' ? block.thumbnail : null
+  const groovyDesign = typeof block?.groovyDesign === 'object' ? block.groovyDesign : null
 
   if (!video?.url) {
     return null
@@ -22,32 +23,27 @@ function IntroHeroSection({ block }: Props) {
         relative
         w-full
         overflow-hidden
-        container-padding
+        isolate
       "
     >
-      {/* =================================================
-          SUBTLE BACKGROUND LIGHTING
-
-          Keeps the background visually close to the Figma
-          without requiring another CMS media field.
-      ================================================= */}
-      {/* 
+      {/* Full-bleed Dora light, beneath the uploaded decorative design. */}
       <div
         aria-hidden="true"
-        className="
-          pointer-events-none
-
-          absolute
-          inset-0
-
-          bg-[radial-gradient(circle_at_70%_15%,rgba(255,255,255,0.055),transparent_38%),radial-gradient(circle_at_18%_66%,rgba(255,255,255,0.025),transparent_38%)]
-        "
-      /> */}
+        className="pointer-events-none absolute inset-0 bg-[url('/assets/images/dora.png')] bg-[length:100%_100%] bg-center bg-no-repeat"
+      />
+      {groovyDesign?.url && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat mix-blend-screen"
+          style={{ backgroundImage: `url(${JSON.stringify(groovyDesign.url)})` }}
+        />
+      )}
 
       <div
         className="
           relative
           z-10
+          container-padding
 
           mx-auto
 

@@ -8,6 +8,18 @@ import { generateImageFields } from '@/utils/media/fieldGenerators'
 import { triggerMediaTemporaryPurge } from '@/utils/media/triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from '@/utils/media/withMediaLifecycle'
 
+const backgroundImageConfig = {
+  fieldName: 'backgroundImage',
+  label: 'Groovy Design',
+  description:
+    'Optional decorative overlay above the navbar linear gradient. Crop ratio: 16:1 panoramic. Recommended size: 1920 x 120 px. Upload a transparent PNG or WebP. Covers the full navbar outside the content padding, with centered cropping on smaller screens. Keep important details near the center.',
+  aspectRatio: 16 / 1,
+  quality: 0.95,
+  maxKB: 500,
+  required: false,
+  ownerCollection: GLOBAL_NAVBAR_SLUG_AND_TAG,
+}
+
 const mediaHooks = withMediaLifecycle({
   collectionSlug: GLOBAL_NAVBAR_SLUG_AND_TAG,
   imageConfigs: [
@@ -20,6 +32,7 @@ const mediaHooks = withMediaLifecycle({
       label: 'Navbar Logo',
       description: 'Transparent UCB logo.',
     },
+    backgroundImageConfig,
   ],
   onAfterChange: async ({ req }) => {
     await triggerMediaTemporaryPurge(req)
@@ -95,16 +108,7 @@ const Navbar: GlobalConfig = {
       ownerCollection: GLOBAL_NAVBAR_SLUG_AND_TAG,
     }),
     { name: 'logoAlt', type: 'text', defaultValue: 'UCB', label: 'Logo alternative text' },
-    {
-      name: 'backgroundImage',
-      type: 'upload',
-      relationTo: 'media',
-      label: 'Optional background pattern',
-      filterOptions: { mimeType: { contains: 'image/' } },
-      admin: {
-        description: 'Transparent decorative artwork layered over the charcoal background.',
-      },
-    },
+    ...generateImageFields(backgroundImageConfig),
     {
       name: 'desktop',
       type: 'group',

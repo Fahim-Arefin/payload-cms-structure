@@ -23,10 +23,11 @@ export const mediaHooks = withMediaLifecycle({
     {
       layoutKey: 'layout',
       blockType: INTRO_HERO_SLUG_AND_TAG,
-      mediaFields: ['video', 'thumbnail'],
+      mediaFields: ['video', 'thumbnail', 'groovyDesign'],
       mediaFieldLabels: {
         video: 'Hero Video',
         thumbnail: 'Hero Video Thumbnail',
+        groovyDesign: 'Groovy Design',
       },
     },
   ],
