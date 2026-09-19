@@ -24,6 +24,7 @@ export default {
         sans: ['var(--font-roboto)', 'sans-serif'],
         roboto: ['var(--font-roboto)', 'sans-serif'],
         'exo-2': ['var(--font-exo-2)', 'sans-serif'],
+        baltiholm: ['var(--font-baltiholm)', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',

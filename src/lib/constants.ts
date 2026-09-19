@@ -96,7 +96,6 @@ export const SOLUTION = 'Solution'
 export const PRODUCT = 'Product'
 export const SERVICE = 'Service'
 
-// export const BASIC_HERO_SLUG_AND_TAG = 'basic-hero'
-// export const BASIC_HERO_BLOCK_LABEL = 'Hero (Basic)'
-// export const BASIC_HERO_CACHE_KEY = 'basic-hero-data'
-// export const BASIC_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/basic-hero-block-thumbnail.webp`
+export const INTRO_HERO_SLUG_AND_TAG = 'introHero'
+export const INTRO_HERO_BLOCK_LABEL = 'Intro Hero'
+export const INTRO_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/intro-hero-block-thumbnail.webp`

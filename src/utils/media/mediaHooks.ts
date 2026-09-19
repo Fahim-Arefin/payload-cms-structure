@@ -1,3 +1,4 @@
+import { INTRO_HERO_SLUG_AND_TAG } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
 
@@ -19,6 +20,15 @@ export const mediaHooks = withMediaLifecycle({
     //     'founderInfo.founderImage': 'Founder Image',
     //   },
     // },
+    {
+      layoutKey: 'layout',
+      blockType: INTRO_HERO_SLUG_AND_TAG,
+      mediaFields: ['video', 'thumbnail'],
+      mediaFieldLabels: {
+        video: 'Hero Video',
+        thumbnail: 'Hero Video Thumbnail',
+      },
+    },
   ],
 
   // Blocks with arrays that contain media fields:

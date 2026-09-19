@@ -86,17 +86,17 @@
 @layer utilities {
   .container-padding {
     @apply px-4 py-9 
-           md:px-[100px] md:py-[48px]
-           lg:px-[110px] lg:py-[68px]
-           xl:px-[150px] xl:py-[90px]
-           2xl:px-[200px] 2xl:py-[112px];
+           md:px-[40px] md:py-[48px]
+           lg:px-[70px] lg:py-[68px]
+           xl:px-[105px] xl:py-[90px]
+           2xl:px-[140px] 2xl:py-[112px];
   }
   .container-padding-x {
     @apply px-4 
-           md:px-[100px] 
-           lg:px-[110px] 
-           xl:px-[150px] 
-           2xl:px-[200px];
+           md:px-[40px] 
+           lg:px-[70px] 
+           xl:px-[105px] 
+           2xl:px-[140px];
   }
   .container-padding-y {
     @apply py-9 
@@ -108,17 +108,17 @@
 
   .container-padding-l {
     @apply pl-4  
-           md:pl-[100px] 
-           lg:pl-[110px] 
-           xl:pl-[150px] 
-           2xl:pl-[200px];
+           md:pl-[40px] 
+           lg:pl-[70px] 
+           xl:pl-[105px] 
+           2xl:pl-[140px];
   }
   .container-padding-r {
     @apply px-4 
-           md:pr-[100px] 
-           lg:pr-[110px] 
-           xl:pr-[150px] 
-           2xl:pr-[200px];
+           md:pr-[40px] 
+           lg:pr-[70px] 
+           xl:pr-[105px] 
+           2xl:pr-[140px];
   }
 
   .container-padding-t {
@@ -144,6 +144,10 @@
     @apply text-[12px] md:text-[12px] lg:text-[14px] xl:text-[16px] 3xl:text-[18px] leading-[125%] tracking-[0.9px];
   }
 
+  /* modified */
+  .global-h1 {
+    @apply text-[58px] md:text-[82px] lg:text-[92px] xl:text-[106px] 2xl:text-[120px] 3xl:text-[132px];
+  }
   .global-h2 {
     @apply text-[35px] md:text-[48px] lg:text-[62px] xl:text-[92px] 3xl:text-[100px] leading-[112.5%];
   }
@@ -166,8 +170,9 @@
     @apply text-[13px] md:text-[15px] lg:text-[20px] xl:text-[28px] 3xl:text-[35px] leading-[112%];
   }
 
+  /* modified */
   .global-p1 {
-    @apply text-[18px] md:text-[22px] lg:text-[28px] xl:text-[40px] 3xl:text-[44px] leading-[125%] tracking-[2px];
+    @apply text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px] 3xl:text-[26px];
   }
   .global-p2 {
     @apply text-[16px] md:text-[18px] lg:text-[24px] xl:text-[32px] 3xl:text-[34px] leading-[125%] tracking-[1.6px];

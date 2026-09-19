@@ -139,14 +139,14 @@ export default function Navbar({ data }: { data: NavbarData }) {
   }, [])
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${'bg-[#1E1E1E]'}`}>
       {background && (
         <div
           className={styles.artwork}
           style={{ backgroundImage: `url(${JSON.stringify(background)})` }}
         />
       )}
-      <div className={styles.inner}>
+      <div className={`${styles.inner} ${'container-padding-x'}`}>
         <div className={styles.mobile}>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>

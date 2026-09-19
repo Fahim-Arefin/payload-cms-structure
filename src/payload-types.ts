@@ -271,7 +271,41 @@ export interface Page {
    * Enable only for pages you do not want Google to index.
    */
   noIndex?: boolean | null;
-  layout: unknown[];
+  layout: {
+    uploadSessionId?: string | null;
+    sectionSettings?: {
+      /**
+       * Optional section ID for direct navigation. Example: introducing.
+       */
+      sectionId?: string | null;
+    };
+    /**
+     * Example: Introducing. Max 80 characters.
+     */
+    title: string;
+    /**
+     * Example: The Premiumness that beholds your class. Max 180 characters.
+     */
+    subtitle: string;
+    /**
+     * Upload an MP4 hero video. Ratio: 16:9. Recommended: 1920×1080, H.264/AVC encoding, no audio track, maximum 10 MB. H.264 MP4 provides the widest support including Safari and iPhone.
+     */
+    video: string | Media;
+    /**
+     * Upload the poster/thumbnail displayed before the hero video loads. Recommended ratio: 16:9. Recommended size: 1920×1080. WebP/JPEG preferred.
+     */
+    thumbnail: string | Media;
+    thumbnailOriginal?: (string | null) | Media;
+    pendingThumbnailOriginal?: string | null;
+    pendingThumbnailCrop?: string | null;
+    /**
+     * Auto-generated Base64 blur
+     */
+    thumbnailBlurDataURL?: string | null;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'introHero';
+  }[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -438,7 +472,30 @@ export interface PagesSelect<T extends boolean = true> {
   metaKeywords?: T;
   canonicalUrl?: T;
   noIndex?: T;
-  layout?: T | {};
+  layout?:
+    | T
+    | {
+        introHero?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    sectionId?: T;
+                  };
+              title?: T;
+              subtitle?: T;
+              video?: T;
+              thumbnail?: T;
+              thumbnailOriginal?: T;
+              pendingThumbnailOriginal?: T;
+              pendingThumbnailCrop?: T;
+              thumbnailBlurDataURL?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

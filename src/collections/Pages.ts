@@ -1,3 +1,4 @@
+import IntroHeroSchema from '@/blocks/IntroHeroBlock/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
 import { getClientIP } from '@/lib/http'
@@ -168,7 +169,7 @@ export const Pages: CollectionConfig = {
       label: 'Layout',
       type: 'blocks',
       required: true,
-      blocks: [],
+      blocks: [IntroHeroSchema],
     },
   ],
   access: {

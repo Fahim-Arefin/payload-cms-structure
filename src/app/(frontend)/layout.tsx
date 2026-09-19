@@ -26,6 +26,15 @@ const roboto = localFont({
   variable: '--font-roboto',
 })
 
+const baltiholm = localFont({
+  src: '../../../public/fonts/baltiholm/Baltiholm-lg2n0.ttf',
+  weight: '400',
+  style: 'normal',
+  display: 'swap',
+  variable: '--font-baltiholm',
+  preload: false,
+})
+
 const exo2 = localFont({
   src: [
     {
@@ -239,7 +248,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           strategy="beforeInteractive"
         /> */}
       </head>
-      <body className={`${roboto.variable} ${exo2.variable} font-roboto`}>
+      <body className={`${roboto.variable} ${exo2.variable} ${baltiholm.variable} font-roboto`}>
         <Providers initialLang="en">
           <SmoothScrollProvider>
             <ServerNavbar />
