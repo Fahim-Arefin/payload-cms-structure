@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useBrowserLocation } from '@/hooks/useBrowserLocation'
 import { useEffect, useState } from 'react'
 import { ArrowUpRight, ChevronDown, Menu } from 'lucide-react'
 import {
@@ -30,15 +31,7 @@ function destinationProps(item: NavbarLink) {
   return item.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {}
 }
 
-function Brand({
-  data,
-  onClick,
-  onNavigate,
-}: {
-  data: NavbarData
-  onClick?: () => void
-  onNavigate: (href: string) => void
-}) {
+function Brand({ data, onClick }: { data: NavbarData; onClick?: () => void }) {
   const logo = typeof data.logo === 'object' ? data.logo?.url : undefined
   return (
     <Link
@@ -46,7 +39,6 @@ function Brand({
       aria-label={`${data.logoAlt || 'UCB'} home`}
       className={styles.brand}
       onClick={onClick}
-      onNavigate={() => onNavigate('/')}
     >
       {/* CMS uploads can use external storage URLs. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -60,13 +52,11 @@ function NavLink({
   className,
   onClick,
   active,
-  onNavigate,
 }: {
   item: NavbarLink
   className?: string
   onClick?: () => void
   active?: boolean
-  onNavigate: (href: string) => void
 }) {
   const href = linkUrl(item)
   if (!href) return <span className={className}>{item.label}</span>
@@ -76,7 +66,6 @@ function NavLink({
       {...destinationProps(item)}
       className={className}
       onClick={onClick}
-      onNavigate={() => onNavigate(href)}
       aria-current={active ? (href.includes('#') ? 'location' : 'page') : undefined}
     >
       {item.label}
@@ -86,7 +75,7 @@ function NavLink({
 
 export default function Navbar({ data }: { data: NavbarData }) {
   const pathname = usePathname()
-  const [location, setLocation] = useState({ hash: '', origin: '' })
+  const location = useBrowserLocation()
   const [open, setOpen] = useState(false)
   const [expanded, setExpanded] = useState<string | null>(null)
   const items = data.desktop?.items ?? defaultNavbar.desktop!.items!
@@ -95,30 +84,12 @@ export default function Navbar({ data }: { data: NavbarData }) {
   const background =
     typeof data.backgroundImage === 'object' ? data.backgroundImage?.url : undefined
   const active = (item: NavbarLink): boolean =>
-    isNavbarLinkActive(item, pathname, location.hash, location.origin)
-
-  // Next Link uses pushState for same-page anchors, which does not emit hashchange.
-  const navigate = (href: string) => {
-    const target = new URL(href, window.location.origin)
-    if (target.origin === window.location.origin) {
-      setLocation({ hash: target.hash, origin: target.origin })
-    }
-  }
-
-  useEffect(() => {
-    const syncLocation = () =>
-      setLocation({
-        hash: window.location.hash,
-        origin: window.location.origin,
-      })
-    syncLocation()
-    window.addEventListener('hashchange', syncLocation)
-    window.addEventListener('popstate', syncLocation)
-    return () => {
-      window.removeEventListener('hashchange', syncLocation)
-      window.removeEventListener('popstate', syncLocation)
-    }
-  }, [pathname])
+    isNavbarLinkActive(
+      item,
+      location?.pathname ?? pathname,
+      location?.hash ?? '',
+      location?.origin ?? '',
+    )
 
   const close = () => {
     setOpen(false)
@@ -157,7 +128,7 @@ export default function Navbar({ data }: { data: NavbarData }) {
             </SheetTrigger>
             <SheetContent side="left" showOverlay className={styles.drawer} data-lenis-prevent>
               <div className={styles.drawerBrand}>
-                <Brand onNavigate={navigate} data={data} onClick={close} />
+                <Brand data={data} onClick={close} />
               </div>
               <SheetTitle className={styles.drawerTitle}>
                 {data.drawerTitle || 'Explore UCB'}
@@ -174,7 +145,6 @@ export default function Navbar({ data }: { data: NavbarData }) {
                     <div key={key} className={styles.drawerItem}>
                       <div className={styles.drawerRow}>
                         <NavLink
-                          onNavigate={navigate}
                           item={item}
                           active={active(item)}
                           onClick={close}
@@ -200,7 +170,6 @@ export default function Navbar({ data }: { data: NavbarData }) {
                         >
                           {children.map((child, childIndex) => (
                             <NavLink
-                              onNavigate={navigate}
                               key={child.id || childIndex}
                               item={child}
                               className={styles.childLink}
@@ -215,30 +184,20 @@ export default function Navbar({ data }: { data: NavbarData }) {
                 })}
               </nav>
               <div className={styles.drawerFooter}>
-                <NavLink
-                  onNavigate={navigate}
-                  item={apply}
-                  onClick={close}
-                  className={styles.drawerApply}
-                />
+                <NavLink item={apply} onClick={close} className={styles.drawerApply} />
                 <p>Discover a world of possibilities.</p>
               </div>
             </SheetContent>
           </Sheet>
         </div>
-        <Brand onNavigate={navigate} data={data} />
+        <Brand data={data} />
         <nav aria-label="Main navigation" className={styles.desktopNav}>
           {items.map((item, index) => {
             const children = item.children?.filter((child) => linkUrl(child)) ?? []
             const selected = active(item) || children.some(active)
             return (
               <div key={item.id || index} className={styles.desktopItem} data-active={selected}>
-                <NavLink
-                  onNavigate={navigate}
-                  item={item}
-                  className={styles.desktopLink}
-                  active={active(item)}
-                />
+                <NavLink item={item} className={styles.desktopLink} active={active(item)} />
                 {children.length > 0 && (
                   <DropdownMenu modal={false}>
                     <DropdownMenuTrigger asChild>
@@ -264,7 +223,6 @@ export default function Navbar({ data }: { data: NavbarData }) {
                           <Link
                             href={linkUrl(child)!}
                             {...destinationProps(child)}
-                            onNavigate={() => navigate(linkUrl(child)!)}
                             aria-current={
                               active(child)
                                 ? linkUrl(child)!.includes('#')
@@ -285,11 +243,10 @@ export default function Navbar({ data }: { data: NavbarData }) {
             )
           })}
         </nav>
-        <NavLink onNavigate={navigate} item={apply} className={styles.apply} />
+        <NavLink item={apply} className={styles.apply} />
         <nav aria-label="Featured cards" className={styles.quickLinks}>
           {quickLinks.slice(0, 2).map((item, index) => (
             <NavLink
-              onNavigate={navigate}
               key={item.id || index}
               item={item}
               className={`${styles.quickLink} ${item.appearance === 'solid' ? styles.solid : styles.outline} sm:max-lg:!rounded-[10px] sm:max-lg:!px-2.5 sm:max-lg:!text-base`}

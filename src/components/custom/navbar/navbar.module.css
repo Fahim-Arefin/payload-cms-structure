@@ -300,6 +300,10 @@
     text-align: center;
     overflow-wrap: anywhere;
   }
+  .quickLink:is([aria-current='page'], [aria-current='location']) {
+    outline: 2px solid #d8cebd;
+    outline-offset: 3px;
+  }
   .outline {
     border: 1.5px solid #d8cebd;
     color: #d8cebd;

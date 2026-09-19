@@ -2,16 +2,15 @@
 
 import LocalizedRichText from '@/components/custom/shared/LocalizedRichText'
 import { gsap, useGSAP } from '@/lib/gsap'
+import { useActiveCard, type CardKey } from '@/contexts/ActiveCardContext'
 import { CardInfoBlockType } from '@/types/payloadCustomTypes'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { MouseEvent, useMemo, useRef } from 'react'
 
 type Props = {
   block: CardInfoBlockType
 }
-
-type CardKey = 'worldElite' | 'visaInfinite'
 
 type MediaLike = {
   url?: string | null
@@ -88,6 +87,7 @@ function getMedia(media: unknown): MediaLike | null {
 
 function CardInfoSection({ block }: Props) {
   const rootRef = useRef<HTMLElement | null>(null)
+  const { activeCard, setActiveCard } = useActiveCard()
 
   /*
    * Desktop card refs
@@ -107,11 +107,6 @@ function CardInfoSection({ block }: Props) {
 
   const world = selector?.worldElite
   const visa = selector?.visaInfinite
-
-  const defaultCard: CardKey =
-    selector?.defaultCard === 'visaInfinite' ? 'visaInfinite' : 'worldElite'
-
-  const [activeCard, setActiveCard] = useState<CardKey>(defaultCard)
 
   /* =======================================================
      MEDIA
@@ -135,52 +130,6 @@ function CardInfoSection({ block }: Props) {
     () => buildHref(visa?.buttonLink, visa?.sectionId),
     [visa?.buttonLink, visa?.sectionId],
   )
-
-  /* =======================================================
-     URL HASH -> ACTIVE CARD
-  ======================================================= */
-
-  const resolveCardFromHash = useCallback((): CardKey | null => {
-    if (typeof window === 'undefined') {
-      return null
-    }
-
-    const hash = decodeURIComponent(window.location.hash.replace(/^#/, '').trim())
-
-    if (!hash) return null
-
-    if (hash === String(world?.sectionId ?? '').trim()) {
-      return 'worldElite'
-    }
-
-    if (hash === String(visa?.sectionId ?? '').trim()) {
-      return 'visaInfinite'
-    }
-
-    return null
-  }, [world?.sectionId, visa?.sectionId])
-
-  useEffect(() => {
-    const applyHash = () => {
-      const card = resolveCardFromHash()
-
-      if (card) {
-        setActiveCard(card)
-      }
-    }
-
-    applyHash()
-
-    window.addEventListener('hashchange', applyHash)
-
-    window.addEventListener('popstate', applyHash)
-
-    return () => {
-      window.removeEventListener('hashchange', applyHash)
-
-      window.removeEventListener('popstate', applyHash)
-    }
-  }, [resolveCardFromHash])
 
   /* =======================================================
      GSAP STACK ANIMATION
@@ -328,7 +277,9 @@ function CardInfoSection({ block }: Props) {
     const currentPath = normalizePath(window.location.pathname)
 
     if (targetPath === currentPath) {
-      window.history.pushState(null, '', href)
+      if (new URL(href, window.location.href).href !== window.location.href) {
+        window.history.pushState(window.history.state, '', href)
+      }
     }
   }
 
@@ -341,7 +292,14 @@ function CardInfoSection({ block }: Props) {
     card: CardKey,
     href: string,
   ) => {
-    if (typeof window === 'undefined') {
+    if (
+      typeof window === 'undefined' ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
       return
     }
 

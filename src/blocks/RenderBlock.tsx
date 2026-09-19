@@ -2,6 +2,7 @@ import { CARD_INFO_SLUG_AND_TAG, INTRO_HERO_SLUG_AND_TAG } from '@/lib/constants
 import type { Page as PayloadPage } from '@/payload-types'
 import IntroHeroBlock from './IntroHeroBlock/IntroHeroBlock'
 import CardInfoBlock from './CardInfo/CardInfoBlock'
+import { ActiveCardProvider } from '@/contexts/ActiveCardContext'
 
 type Params = Record<string, string>
 
@@ -24,5 +25,17 @@ export default function RenderBlocks({
   layout: PayloadPage['layout']
   params?: Params
 }) {
-  return <>{layout?.map((b) => renderBlock(b, params))}</>
+  const cardInfo = layout?.find((block) => block.blockType === CARD_INFO_SLUG_AND_TAG)
+  const selector = cardInfo?.cardSelector
+
+  return (
+    <ActiveCardProvider
+      key={cardInfo?.id ?? 'page-cards'}
+      worldSectionId={selector?.worldElite?.sectionId}
+      visaSectionId={selector?.visaInfinite?.sectionId}
+      defaultCard={selector?.defaultCard ?? 'worldElite'}
+    >
+      {layout?.map((b) => renderBlock(b, params))}
+    </ActiveCardProvider>
+  )
 }
