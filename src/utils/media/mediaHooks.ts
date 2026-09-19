@@ -1,4 +1,8 @@
-import { CARD_INFO_SLUG_AND_TAG, INTRO_HERO_SLUG_AND_TAG } from '@/lib/constants'
+import {
+  CARD_BENEFITS_SLUG_AND_TAG,
+  CARD_INFO_SLUG_AND_TAG,
+  INTRO_HERO_SLUG_AND_TAG,
+} from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
 
@@ -7,6 +11,16 @@ export const mediaHooks = withMediaLifecycle({
 
   // Blocks with a media field on the block row itself:
   blockSimpleFields: [
+    {
+      layoutKey: 'layout',
+      blockType: CARD_BENEFITS_SLUG_AND_TAG,
+      mediaFields: ['groovyDesign', 'metalCardImage', 'visaCardImage'],
+      mediaFieldLabels: {
+        groovyDesign: 'Groovy Background Image',
+        metalCardImage: 'Metal Card Image',
+        visaCardImage: 'Visa Infinite Card Image',
+      },
+    },
     // {
     //   layoutKey: 'layout',
     //   blockType: GET_TO_KNOW_SLUG_AND_TAG,
@@ -48,6 +62,14 @@ export const mediaHooks = withMediaLifecycle({
 
   // Blocks with arrays that contain media fields:
   blockArrayFields: [
+    ...['metalBenefits', 'visaBenefits'].map((arrayKey) => ({
+      layoutKey: 'layout',
+      blockType: CARD_BENEFITS_SLUG_AND_TAG,
+      arrayKey,
+      mediaFields: ['image'],
+      itemLabelField: 'title',
+      mediaFieldLabels: { image: 'Benefit Image' },
+    })),
     // {
     //   layoutKey: 'layout',
     //   blockType: BASIC_HERO_SLUG_AND_TAG,

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480">
+  <defs>
+    <radialGradient id="glow"><stop stop-color="#8a8374"/><stop offset="1" stop-color="#252523"/></radialGradient>
+    <linearGradient id="photo" x2="1" y2="1"><stop stop-color="#a48f69"/><stop offset="1" stop-color="#111"/></linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#glow)"/>
+  <text x="320" y="52" fill="#eee" font-family="sans-serif" font-size="24" text-anchor="middle">Explore a world of <tspan fill="#ef3038">METAL CARDS</tspan></text>
+  <text x="320" y="80" fill="#ddd" font-family="sans-serif" font-size="17" text-anchor="middle">benefits.</text>
+  <rect x="85" y="250" width="185" height="195" rx="18" fill="url(#photo)"/>
+  <rect x="370" y="250" width="185" height="195" rx="18" fill="url(#photo)"/>
+  <rect x="192" y="110" width="256" height="305" rx="22" fill="url(#photo)"/>
+  <path d="M215 171 317 128 423 195 302 259Z" fill="#ded2b3" opacity=".75"/>
+  <path d="m261 211 103-35" stroke="#392512" stroke-width="7"/>
+  <path d="M192 300h256v93q0 22-22 22H214q-22 0-22-22Z" fill="#0d0d0c"/>
+  <text x="320" y="340" text-anchor="middle" fill="white" font-family="sans-serif" font-size="20" font-weight="bold">Protect What Matters</text>
+  <text x="320" y="378" text-anchor="middle" fill="#bcbcbc" font-family="sans-serif" font-size="12">INSURANCE COVERAGE</text>
+  <rect x="309" y="457" width="22" height="5" rx="2" fill="#ef3038"/>
+  <circle cx="298" cy="459" r="3" fill="#aaa"/><circle cx="342" cy="459" r="3" fill="#aaa"/>
+</svg>

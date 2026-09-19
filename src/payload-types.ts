@@ -422,6 +422,89 @@ export interface Page {
         blockName?: string | null;
         blockType: 'cardInfo';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          sectionId?: string | null;
+        };
+        /**
+         * Optional transparent pattern over the Dora light. Crop ratio: 4:3.
+         */
+        groovyDesign?: (string | null) | Media;
+        groovyDesignOriginal?: (string | null) | Media;
+        pendingGroovyDesignOriginal?: string | null;
+        pendingGroovyDesignCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        groovyDesignBlurDataURL?: string | null;
+        /**
+         * The selected card name and the static word “benefits.” follow this text.
+         */
+        title: string;
+        description: string;
+        metalCardName: string;
+        /**
+         * Transparent card artwork. Crop ratio: 726:1146.
+         */
+        metalCardImage?: (string | null) | Media;
+        metalCardImageOriginal?: (string | null) | Media;
+        pendingMetalCardImageOriginal?: string | null;
+        pendingMetalCardImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        metalCardImageBlurDataURL?: string | null;
+        /**
+         * Initial order: 1 = front, 2 = lower right, 3 = lower left. Scrolling cycles through all benefits.
+         */
+        metalBenefits: {
+          /**
+           * Use the nearly square 2.png reference ratio, 967:975. Recommended size: 1934 x 1950 px. Keep the subject in the upper portion and the lower portion dark for readable text.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          title: string;
+          description: string;
+          infoText: string;
+          id?: string | null;
+        }[];
+        visaCardName: string;
+        /**
+         * Transparent card artwork. Crop ratio: 726:1146.
+         */
+        visaCardImage?: (string | null) | Media;
+        visaCardImageOriginal?: (string | null) | Media;
+        pendingVisaCardImageOriginal?: string | null;
+        pendingVisaCardImageCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        visaCardImageBlurDataURL?: string | null;
+        /**
+         * Initial order: 1 = front, 2 = lower right, 3 = lower left. Scrolling cycles through all benefits.
+         */
+        visaBenefits: {
+          /**
+           * Use the nearly square 2.png reference ratio, 967:975. Recommended size: 1934 x 1950 px. Keep the subject in the upper portion and the lower portion dark for readable text.
+           */
+          image: string | Media;
+          imageOriginal?: (string | null) | Media;
+          pendingImageOriginal?: string | null;
+          pendingImageCrop?: string | null;
+          imageBlurDataURL?: string | null;
+          title: string;
+          description: string;
+          infoText: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cardBenefits';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -669,6 +752,63 @@ export interface PagesSelect<T extends boolean = true> {
                           buttonLink?: T;
                           sectionId?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cardBenefits?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    sectionId?: T;
+                  };
+              groovyDesign?: T;
+              groovyDesignOriginal?: T;
+              pendingGroovyDesignOriginal?: T;
+              pendingGroovyDesignCrop?: T;
+              groovyDesignBlurDataURL?: T;
+              title?: T;
+              description?: T;
+              metalCardName?: T;
+              metalCardImage?: T;
+              metalCardImageOriginal?: T;
+              pendingMetalCardImageOriginal?: T;
+              pendingMetalCardImageCrop?: T;
+              metalCardImageBlurDataURL?: T;
+              metalBenefits?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    title?: T;
+                    description?: T;
+                    infoText?: T;
+                    id?: T;
+                  };
+              visaCardName?: T;
+              visaCardImage?: T;
+              visaCardImageOriginal?: T;
+              pendingVisaCardImageOriginal?: T;
+              pendingVisaCardImageCrop?: T;
+              visaCardImageBlurDataURL?: T;
+              visaBenefits?:
+                | T
+                | {
+                    image?: T;
+                    imageOriginal?: T;
+                    pendingImageOriginal?: T;
+                    pendingImageCrop?: T;
+                    imageBlurDataURL?: T;
+                    title?: T;
+                    description?: T;
+                    infoText?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;
