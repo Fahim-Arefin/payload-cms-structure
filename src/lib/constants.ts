@@ -99,3 +99,7 @@ export const SERVICE = 'Service'
 export const INTRO_HERO_SLUG_AND_TAG = 'introHero'
 export const INTRO_HERO_BLOCK_LABEL = 'Intro Hero'
 export const INTRO_HERO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/intro-hero-block-thumbnail.webp`
+
+export const CARD_INFO_SLUG_AND_TAG = 'cardInfo'
+export const CARD_INFO_BLOCK_LABEL = 'Card Info'
+export const CARD_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/card-info-block-thumbnail.webp`

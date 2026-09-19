@@ -1,3 +1,4 @@
+import CardInfoSchema from '@/blocks/CardInfo/schema'
 import IntroHeroSchema from '@/blocks/IntroHeroBlock/schema'
 import { APIError } from '@/lib/apiError'
 import { pageTag, pagesListTag } from '@/lib/cacheTags'
@@ -169,7 +170,7 @@ export const Pages: CollectionConfig = {
       label: 'Layout',
       type: 'blocks',
       required: true,
-      blocks: [IntroHeroSchema],
+      blocks: [IntroHeroSchema, CardInfoSchema],
     },
   ],
   access: {

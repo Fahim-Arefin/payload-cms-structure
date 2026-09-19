@@ -174,11 +174,13 @@
   .global-p1 {
     @apply text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px] 3xl:text-[26px];
   }
+  /* modified */
   .global-p2 {
-    @apply text-[16px] md:text-[18px] lg:text-[24px] xl:text-[32px] 3xl:text-[34px] leading-[125%] tracking-[1.6px];
+    @apply text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[22px] 3xl:text-[24px];
   }
+  /* modified */
   .global-p3 {
-    @apply text-[14px] md:text-[16px] lg:text-[20px] xl:text-[24px] 3xl:text-[26px] leading-[135%] tracking-[5%];
+    @apply text-[11px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px] 3xl:text-[22px];
   }
   .global-p4 {
     @apply text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 3xl:text-[20px] leading-[150%] tracking-[5%];

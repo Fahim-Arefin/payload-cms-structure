@@ -271,52 +271,153 @@ export interface Page {
    * Enable only for pages you do not want Google to index.
    */
   noIndex?: boolean | null;
-  layout: {
-    uploadSessionId?: string | null;
-    sectionSettings?: {
-      /**
-       * Optional section ID for direct navigation. Example: introducing.
-       */
-      sectionId?: string | null;
-    };
-    /**
-     * Example: Introducing. Max 80 characters.
-     */
-    title: string;
-    /**
-     * Example: The Premiumness that beholds your class. Max 180 characters.
-     */
-    subtitle: string;
-    /**
-     * Upload an MP4 hero video. Ratio: 16:9. Recommended: 1920×1080, H.264/AVC encoding, no audio track, maximum 10 MB. H.264 MP4 provides the widest support including Safari and iPhone.
-     */
-    video: string | Media;
-    /**
-     * Upload the poster/thumbnail displayed before the hero video loads. Recommended ratio: 16:9. Recommended size: 1920×1080. WebP/JPEG preferred.
-     */
-    thumbnail: string | Media;
-    thumbnailOriginal?: (string | null) | Media;
-    pendingThumbnailOriginal?: string | null;
-    pendingThumbnailCrop?: string | null;
-    /**
-     * Auto-generated Base64 blur
-     */
-    thumbnailBlurDataURL?: string | null;
-    /**
-     * Optional decorative overlay above the Dora light. Crop ratio: 4:3 landscape. Recommended size: 1920 x 1440 px. Upload a transparent PNG or WebP. Covers the entire hero, including its padding, with centered cropping on different screen sizes. Keep important details away from the edges.
-     */
-    groovyDesign?: (string | null) | Media;
-    groovyDesignOriginal?: (string | null) | Media;
-    pendingGroovyDesignOriginal?: string | null;
-    pendingGroovyDesignCrop?: string | null;
-    /**
-     * Auto-generated Base64 blur
-     */
-    groovyDesignBlurDataURL?: string | null;
-    id?: string | null;
-    blockName?: string | null;
-    blockType: 'introHero';
-  }[];
+  layout: (
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Optional section ID for direct navigation. Example: introducing.
+           */
+          sectionId?: string | null;
+        };
+        /**
+         * Example: Introducing. Max 80 characters.
+         */
+        title: string;
+        /**
+         * Example: The Premiumness that beholds your class. Max 180 characters.
+         */
+        subtitle: string;
+        /**
+         * Upload an MP4 hero video. Ratio: 16:9. Recommended: 1920×1080, H.264/AVC encoding, no audio track, maximum 10 MB. H.264 MP4 provides the widest support including Safari and iPhone.
+         */
+        video: string | Media;
+        /**
+         * Upload the poster/thumbnail displayed before the hero video loads. Recommended ratio: 16:9. Recommended size: 1920×1080. WebP/JPEG preferred.
+         */
+        thumbnail: string | Media;
+        thumbnailOriginal?: (string | null) | Media;
+        pendingThumbnailOriginal?: string | null;
+        pendingThumbnailCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        thumbnailBlurDataURL?: string | null;
+        /**
+         * Optional decorative overlay above the Dora light. Crop ratio: 4:3 landscape. Recommended size: 1920 x 1440 px. Upload a transparent PNG or WebP. Covers the entire hero, including its padding, with centered cropping on different screen sizes. Keep important details away from the edges.
+         */
+        groovyDesign?: (string | null) | Media;
+        groovyDesignOriginal?: (string | null) | Media;
+        pendingGroovyDesignOriginal?: string | null;
+        pendingGroovyDesignCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        groovyDesignBlurDataURL?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'introHero';
+      }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          /**
+           * Select a background color from the design system.
+           */
+          backgroundColor?:
+            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
+            | null;
+          /**
+           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           */
+          sectionId?: string | null;
+        };
+        content: {
+          /**
+           * Example: Welcome. Max 80 characters.
+           */
+          title: string;
+          /**
+           * Max 120 characters.
+           */
+          subtitle: string;
+          /**
+           * Main descriptive copy displayed under the title and subtitle.
+           */
+          description: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+        };
+        cardSelector: {
+          title: string;
+          /**
+           * Used when the URL does not contain either card section ID.
+           */
+          defaultCard: 'worldElite' | 'visaInfinite';
+          worldElite: {
+            cardName: string;
+            /**
+             * Upload the World Elite card image with transparent background. Recommended ratio: 579×841.
+             */
+            cardImage: string | Media;
+            cardImageOriginal?: (string | null) | Media;
+            pendingCardImageOriginal?: string | null;
+            pendingCardImageCrop?: string | null;
+            /**
+             * Auto-generated Base64 blur
+             */
+            cardImageBlurDataURL?: string | null;
+            buttonLabel: string;
+            /**
+             * For this design, select the same page containing this Card Info block.
+             */
+            buttonLink: string | Page;
+            /**
+             * Example: world-elite. This hash activates the World Elite card.
+             */
+            sectionId: string;
+          };
+          visaInfinite: {
+            cardName: string;
+            /**
+             * Upload the Visa Infinite card image with transparent background. Recommended ratio: 579×841.
+             */
+            cardImage: string | Media;
+            cardImageOriginal?: (string | null) | Media;
+            pendingCardImageOriginal?: string | null;
+            pendingCardImageCrop?: string | null;
+            /**
+             * Auto-generated Base64 blur
+             */
+            cardImageBlurDataURL?: string | null;
+            buttonLabel: string;
+            /**
+             * For this design, select the same page containing this Card Info block.
+             */
+            buttonLink: string | Page;
+            /**
+             * Example: visa-infinite. This hash activates the Visa Infinite card.
+             */
+            sectionId: string;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cardInfo';
+      }
+  )[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -508,6 +609,58 @@ export interface PagesSelect<T extends boolean = true> {
               pendingGroovyDesignOriginal?: T;
               pendingGroovyDesignCrop?: T;
               groovyDesignBlurDataURL?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cardInfo?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    sectionId?: T;
+                  };
+              content?:
+                | T
+                | {
+                    title?: T;
+                    subtitle?: T;
+                    description?: T;
+                  };
+              cardSelector?:
+                | T
+                | {
+                    title?: T;
+                    defaultCard?: T;
+                    worldElite?:
+                      | T
+                      | {
+                          cardName?: T;
+                          cardImage?: T;
+                          cardImageOriginal?: T;
+                          pendingCardImageOriginal?: T;
+                          pendingCardImageCrop?: T;
+                          cardImageBlurDataURL?: T;
+                          buttonLabel?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                        };
+                    visaInfinite?:
+                      | T
+                      | {
+                          cardName?: T;
+                          cardImage?: T;
+                          cardImageOriginal?: T;
+                          pendingCardImageOriginal?: T;
+                          pendingCardImageCrop?: T;
+                          cardImageBlurDataURL?: T;
+                          buttonLabel?: T;
+                          buttonLink?: T;
+                          sectionId?: T;
+                        };
+                  };
               id?: T;
               blockName?: T;
             };

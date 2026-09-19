@@ -1,4 +1,4 @@
-import { INTRO_HERO_SLUG_AND_TAG } from '@/lib/constants'
+import { CARD_INFO_SLUG_AND_TAG, INTRO_HERO_SLUG_AND_TAG } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
 import { withMediaLifecycle } from './withMediaLifecycle'
 
@@ -28,6 +28,15 @@ export const mediaHooks = withMediaLifecycle({
         video: 'Hero Video',
         thumbnail: 'Hero Video Thumbnail',
         groovyDesign: 'Groovy Design',
+      },
+    },
+    {
+      layoutKey: 'layout',
+      blockType: CARD_INFO_SLUG_AND_TAG,
+      mediaFields: ['cardSelector.worldElite.cardImage', 'cardSelector.visaInfinite.cardImage'],
+      mediaFieldLabels: {
+        'cardSelector.worldElite.cardImage': 'World Elite Card Image',
+        'cardSelector.visaInfinite.cardImage': 'Visa Infinite Card Image',
       },
     },
   ],
