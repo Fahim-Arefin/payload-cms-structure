@@ -6,7 +6,6 @@ import {
   CARD_INFO_SLUG_AND_TAG,
 } from '@/lib/constants'
 
-import { BgColorAndSectionIdField } from '@/utils/block/fields/BgColorAndSectionIdField'
 import { validateSectionIdOptional, validateShortText } from '@/utils/block/fields-validation'
 import { generateImageFields } from '@/utils/media/fieldGenerators'
 
@@ -19,7 +18,7 @@ const BUTTON_LABEL_MAX = 50
    WORLD ELITE CARD
 
    Uploaded reference:
-   579 × 841
+   3:4 (recommended 900 x 1200)
 ========================================================= */
 
 const worldEliteCardImageFields = generateImageFields({
@@ -30,9 +29,9 @@ const worldEliteCardImageFields = generateImageFields({
   label: 'World Elite Card Image',
 
   description:
-    'Upload the World Elite card image with transparent background. Recommended ratio: 579×841.',
+    'Upload the World Elite card image with transparent background. Crop ratio: 3:4. Recommended size: 900 x 1200 px. Use Zoom and drag to make the card fill the frame consistently for both cards.',
 
-  aspectRatio: 579 / 841,
+  aspectRatio: 3 / 4,
 
   quality: 0.95,
 
@@ -45,7 +44,7 @@ const worldEliteCardImageFields = generateImageFields({
    VISA INFINITE CARD
 
    Uploaded reference:
-   579 × 841
+   3:4 (recommended 900 x 1200)
 ========================================================= */
 
 const visaInfiniteCardImageFields = generateImageFields({
@@ -56,9 +55,9 @@ const visaInfiniteCardImageFields = generateImageFields({
   label: 'Visa Infinite Card Image',
 
   description:
-    'Upload the Visa Infinite card image with transparent background. Recommended ratio: 579×841.',
+    'Upload the Visa Infinite card image with transparent background. Crop ratio: 3:4. Recommended size: 900 x 1200 px. Use Zoom and drag to make the card fill the frame consistently for both cards.',
 
-  aspectRatio: 579 / 841,
+  aspectRatio: 3 / 4,
 
   quality: 0.95,
 
@@ -88,6 +87,17 @@ const CardInfoSchema: Block = {
   imageAltText: `${CARD_INFO_BLOCK_LABEL} preview`,
 
   fields: [
+    ...generateImageFields({
+      required: false,
+      fieldName: 'groovyDesign',
+      label: 'Groovy Background Image',
+      description:
+        'Optional decorative background behind the card information. Crop ratio: 4:3. Recommended size: 1920 x 1440 px. Upload a transparent PNG or WebP. The image covers the section with centered cropping on different screen sizes.',
+      aspectRatio: 4 / 3,
+      quality: 0.95,
+      maxKB: 1000,
+      ownerCollection: CARD_INFO_SLUG_AND_TAG,
+    }),
     /* =====================================================
        UPLOAD SESSION
     ===================================================== */
@@ -114,9 +124,21 @@ const CardInfoSchema: Block = {
       label: 'Section Settings',
 
       fields: [
-        BgColorAndSectionIdField({
-          defaultBackground: 'secondary-1',
-        }),
+        {
+          name: 'sectionId',
+
+          type: 'text',
+
+          label: 'Section ID (anchor)',
+
+          required: false,
+
+          validate: validateSectionIdOptional,
+
+          admin: {
+            description: 'Optional section ID for direct navigation. Example: card-info.',
+          },
+        },
       ],
     },
 

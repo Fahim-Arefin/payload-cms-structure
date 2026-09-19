@@ -319,16 +319,21 @@ export interface Page {
         blockType: 'introHero';
       }
     | {
+        /**
+         * Optional decorative background behind the card information. Crop ratio: 4:3. Recommended size: 1920 x 1440 px. Upload a transparent PNG or WebP. The image covers the section with centered cropping on different screen sizes.
+         */
+        groovyDesign?: (string | null) | Media;
+        groovyDesignOriginal?: (string | null) | Media;
+        pendingGroovyDesignOriginal?: string | null;
+        pendingGroovyDesignCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        groovyDesignBlurDataURL?: string | null;
         uploadSessionId?: string | null;
         sectionSettings?: {
           /**
-           * Select a background color from the design system.
-           */
-          backgroundColor?:
-            | ('white-1' | 'white-2' | 'white-3' | 'secondary-1' | 'secondary-2' | 'primary-1-30' | 'primary-1-50')
-            | null;
-          /**
-           * Used for direct jump links to this section (e.g., "blog-section"). No spaces. Use "-" to separate words.
+           * Optional section ID for direct navigation. Example: card-info.
            */
           sectionId?: string | null;
         };
@@ -369,7 +374,7 @@ export interface Page {
           worldElite: {
             cardName: string;
             /**
-             * Upload the World Elite card image with transparent background. Recommended ratio: 579×841.
+             * Upload the World Elite card image with transparent background. Crop ratio: 3:4. Recommended size: 900 x 1200 px. Use Zoom and drag to make the card fill the frame consistently for both cards.
              */
             cardImage: string | Media;
             cardImageOriginal?: (string | null) | Media;
@@ -392,7 +397,7 @@ export interface Page {
           visaInfinite: {
             cardName: string;
             /**
-             * Upload the Visa Infinite card image with transparent background. Recommended ratio: 579×841.
+             * Upload the Visa Infinite card image with transparent background. Crop ratio: 3:4. Recommended size: 900 x 1200 px. Use Zoom and drag to make the card fill the frame consistently for both cards.
              */
             cardImage: string | Media;
             cardImageOriginal?: (string | null) | Media;
@@ -615,11 +620,15 @@ export interface PagesSelect<T extends boolean = true> {
         cardInfo?:
           | T
           | {
+              groovyDesign?: T;
+              groovyDesignOriginal?: T;
+              pendingGroovyDesignOriginal?: T;
+              pendingGroovyDesignCrop?: T;
+              groovyDesignBlurDataURL?: T;
               uploadSessionId?: T;
               sectionSettings?:
                 | T
                 | {
-                    backgroundColor?: T;
                     sectionId?: T;
                   };
               content?:

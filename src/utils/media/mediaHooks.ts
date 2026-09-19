@@ -33,10 +33,15 @@ export const mediaHooks = withMediaLifecycle({
     {
       layoutKey: 'layout',
       blockType: CARD_INFO_SLUG_AND_TAG,
-      mediaFields: ['cardSelector.worldElite.cardImage', 'cardSelector.visaInfinite.cardImage'],
+      mediaFields: [
+        'cardSelector.worldElite.cardImage',
+        'cardSelector.visaInfinite.cardImage',
+        'groovyDesign',
+      ],
       mediaFieldLabels: {
         'cardSelector.worldElite.cardImage': 'World Elite Card Image',
         'cardSelector.visaInfinite.cardImage': 'Visa Infinite Card Image',
+        groovyDesign: 'Groovy Background Image',
       },
     },
   ],
