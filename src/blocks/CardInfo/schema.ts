@@ -18,7 +18,7 @@ const BUTTON_LABEL_MAX = 50
    WORLD ELITE CARD
 
    Uploaded reference:
-   3:4 (recommended 900 x 1200)
+   726:1146 (recommended 726 x 1146)
 ========================================================= */
 
 const worldEliteCardImageFields = generateImageFields({
@@ -29,9 +29,9 @@ const worldEliteCardImageFields = generateImageFields({
   label: 'World Elite Card Image',
 
   description:
-    'Upload the World Elite card image with transparent background. Crop ratio: 3:4. Recommended size: 900 x 1200 px. Use Zoom and drag to make the card fill the frame consistently for both cards.',
+    'Upload the World Elite card image with transparent background. Crop ratio: 726:1146. Recommended size: 726 x 1146 px. Use Zoom and drag to make the card fill the frame consistently for both cards.',
 
-  aspectRatio: 3 / 4,
+  aspectRatio: 726 / 1146,
 
   quality: 0.95,
 
@@ -44,7 +44,7 @@ const worldEliteCardImageFields = generateImageFields({
    VISA INFINITE CARD
 
    Uploaded reference:
-   3:4 (recommended 900 x 1200)
+   726:1146 (recommended 726 x 1146)
 ========================================================= */
 
 const visaInfiniteCardImageFields = generateImageFields({
@@ -55,9 +55,9 @@ const visaInfiniteCardImageFields = generateImageFields({
   label: 'Visa Infinite Card Image',
 
   description:
-    'Upload the Visa Infinite card image with transparent background. Crop ratio: 3:4. Recommended size: 900 x 1200 px. Use Zoom and drag to make the card fill the frame consistently for both cards.',
+    'Upload the Visa Infinite card image with transparent background. Crop ratio: 726:1146. Recommended size: 726 x 1146 px. Use Zoom and drag to make the card fill the frame consistently for both cards.',
 
-  aspectRatio: 3 / 4,
+  aspectRatio: 726 / 1146,
 
   quality: 0.95,
 

@@ -559,7 +559,7 @@ function CardInfoSection({ block }: Props) {
           className="
             relative
 
-            aspect-[3/4]
+            aspect-[726/1146]
 
             w-full
           "
@@ -640,7 +640,7 @@ function CardInfoSection({ block }: Props) {
           className="
             relative
 
-            aspect-[3/4]
+            aspect-[726/1146]
 
             w-full
           "
