@@ -6,7 +6,7 @@ The optional **Default Card Key** selects a card on first load without a matchin
 
 Two cards retain the original stack geometry and mobile button order. Larger lists show the selected card and the next two cards in a bounded stack. Every card remains selectable using wrapping buttons and numbered links. One card is centered.
 
-Card Benefits still uses its original two-card schema. A hidden `legacyCardType` preserves the migrated cards' connection to Benefits even if their keys change. Adding a new Card Info row does not create Benefits content.
+Card Benefits and Card Privileges also support dynamic cards. Add matching entries using the same key in each block; adding a Card Info row does not automatically create benefit or privilege content. The hidden `legacyCardType` is retained solely to map old data during migrations.
 
 ## Existing data
 

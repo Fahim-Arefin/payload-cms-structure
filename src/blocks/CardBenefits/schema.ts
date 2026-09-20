@@ -1,48 +1,25 @@
-import type { Block, Field } from 'payload'
+import type { Block } from 'payload'
 import { CARD_BENEFITS_SLUG_AND_TAG } from '@/lib/constants'
 import { validateSectionIdOptional } from '@/utils/block/fields-validation'
 import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
-
-const cardImageFields = (fieldName: string, label: string) =>
-  generateImageFields({
-    fieldName,
-    label,
-    description: 'Transparent card artwork. Crop ratio: 726:1146.',
-    aspectRatio: 726 / 1146,
-    quality: 0.95,
-    maxKB: 1000,
-    required: false,
-    ownerCollection: CARD_BENEFITS_SLUG_AND_TAG,
-  })
-
-const benefitFields = (): Field[] => [
-  ...generateArrayImageFields({
-    fieldName: 'image',
-    label: 'Benefit Image',
-    description:
-      'Use the nearly square 2.png reference ratio, 967:975. Recommended size: 1934 x 1950 px. Keep the subject in the upper portion and the lower portion dark for readable text.',
-    aspectRatio: 967 / 975,
-    quality: 0.95,
-    maxKB: 1500,
-    ownerCollection: CARD_BENEFITS_SLUG_AND_TAG,
-  }),
-  { name: 'title', label: 'Card Title', type: 'text', required: true, maxLength: 70 },
-  { name: 'description', type: 'textarea', required: true, maxLength: 220 },
-  { name: 'infoText', label: 'Below Info Text', type: 'text', required: true, maxLength: 70 },
-]
+import {
+  validateCardChoices,
+  validateCardKey,
+  validateDefaultCardKey,
+} from '../CardCardPrivileges/cardSelection'
 
 const CardBenefitsSchema: Block = {
   slug: CARD_BENEFITS_SLUG_AND_TAG,
   labels: { singular: 'Card Benefits', plural: 'Card Benefits' },
   admin: { group: 'Cards' },
   imageURL: '/assets/block-thumbnails/card-benefits-block-thumbnail.svg',
-  imageAltText: 'Card Benefits carousel preview',
+  imageAltText: 'Card Benefits stack preview',
   fields: [
     { name: 'uploadSessionId', type: 'text', admin: { condition: () => false } },
     {
       name: 'sectionSettings',
       type: 'group',
-      label: 'Site / Section Settings',
+      label: 'Section Settings',
       fields: [
         {
           name: 'sectionId',
@@ -55,7 +32,7 @@ const CardBenefitsSchema: Block = {
     ...generateImageFields({
       fieldName: 'groovyDesign',
       label: 'Groovy Background Image',
-      description: 'Optional transparent pattern over the Dora light. Crop ratio: 4:3.',
+      description: 'Optional transparent pattern covering the entire section. Crop ratio: 4:3.',
       aspectRatio: 4 / 3,
       quality: 0.95,
       maxKB: 1500,
@@ -64,12 +41,14 @@ const CardBenefitsSchema: Block = {
     }),
     {
       name: 'title',
+      label: 'Title 1',
       type: 'text',
       required: true,
       defaultValue: 'Explore a world of',
       maxLength: 80,
       admin: {
-        description: 'The selected card name and the static word “benefits.” follow this text.',
+        description:
+          'Heading: Title 1 + the selected Card Name (Title 2) + the fixed word benefits. (Title 3).',
       },
     },
     {
@@ -81,63 +60,87 @@ const CardBenefitsSchema: Block = {
         'Privileges, each negotiated with our hospitality partners, keeping you in mind.',
     },
     {
-      type: 'tabs',
-      tabs: [
+      name: 'cards',
+      label: 'Cards',
+      type: 'array',
+      required: true,
+      minRows: 1,
+      validate: validateCardChoices,
+      admin: {
+        description:
+          'Add any number of cards. Match Card Key to Card Info, Card Privileges and the navbar anchor.',
+      },
+      fields: [
         {
-          label: 'Metal Card',
-          fields: [
-            {
-              name: 'metalCardName',
-              type: 'text',
-              required: true,
-              defaultValue: 'METAL CARDS',
-              maxLength: 40,
-            },
-            ...cardImageFields('metalCardImage', 'Metal Card Image'),
-            {
-              name: 'metalBenefits',
-              label: 'Metal Card Benefits',
-              type: 'array',
-              required: true,
-              minRows: 3,
-              maxRows: 12,
-              admin: {
-                description:
-                  'Initial order: 1 = front, 2 = lower right, 3 = lower left. Scrolling cycles through all benefits.',
-              },
-              fields: benefitFields(),
-            },
-          ],
+          name: 'cardName',
+          label: 'Card Name / Title 2',
+          type: 'text',
+          required: true,
+          maxLength: 80,
         },
         {
-          label: 'Visa Infinite',
+          name: 'cardKey',
+          label: 'Card Key / Navbar Anchor',
+          type: 'text',
+          required: true,
+          maxLength: 80,
+          validate: validateCardKey,
+        },
+        ...generateImageFields({
+          fieldName: 'cardImage',
+          label: 'Card Image',
+          description: 'Artwork beside the heading. Crop ratio: 726:1146.',
+          aspectRatio: 726 / 1146,
+          quality: 0.95,
+          maxKB: 1000,
+          required: false,
+          ownerCollection: CARD_BENEFITS_SLUG_AND_TAG,
+        }),
+        {
+          name: 'items',
+          label: 'Benefits',
+          type: 'array',
+          required: true,
+          minRows: 1,
+          maxRows: 12,
+          admin: {
+            description:
+              'The first benefit starts at the front. Scrolling moves the front benefit to the back of the stack.',
+          },
           fields: [
+            ...generateArrayImageFields({
+              fieldName: 'image',
+              label: 'Benefit Image',
+              description:
+                'Crop ratio: 967:975. The image fills the upper part of the benefit card.',
+              aspectRatio: 967 / 975,
+              quality: 0.95,
+              maxKB: 1500,
+              ownerCollection: CARD_BENEFITS_SLUG_AND_TAG,
+            }),
+            { name: 'title', label: 'Benefit Title', type: 'text', required: true, maxLength: 70 },
+            { name: 'description', type: 'textarea', required: true, maxLength: 220 },
             {
-              name: 'visaCardName',
+              name: 'infoText',
+              label: 'Below Info Text',
               type: 'text',
               required: true,
-              defaultValue: 'VISA CARDS',
-              maxLength: 40,
-            },
-            ...cardImageFields('visaCardImage', 'Visa Infinite Card Image'),
-            {
-              name: 'visaBenefits',
-              label: 'Visa Infinite Benefits',
-              type: 'array',
-              required: true,
-              minRows: 3,
-              maxRows: 12,
-              admin: {
-                description:
-                  'Initial order: 1 = front, 2 = lower right, 3 = lower left. Scrolling cycles through all benefits.',
-              },
-              fields: benefitFields(),
+              maxLength: 70,
             },
           ],
         },
       ],
     },
+    {
+      name: 'defaultCardKey',
+      label: 'Default Card Key',
+      type: 'text',
+      validate: (value: unknown, { siblingData }: { siblingData?: { cards?: unknown } }) =>
+        validateDefaultCardKey(value, siblingData?.cards),
+      admin: {
+        description: 'Optional. Match a card key above, or leave empty to use the first card.',
+      },
+    },
   ],
 }
-
 export default CardBenefitsSchema

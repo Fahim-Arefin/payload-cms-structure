@@ -46,7 +46,7 @@ const getDefaultOgImage = () => {
 // --- Cached fetchers ---------------------------------------------------------
 
 // Invalidate layouts cached before Privileges switched to configurable card entries.
-const PAGE_LAYOUT_CACHE_VERSION = 'card-info-dynamic-cards-v4'
+const PAGE_LAYOUT_CACHE_VERSION = 'card-benefits-dynamic-stack-v5'
 
 const getPageBySlugCached = (slug: string) =>
   unstableCache(

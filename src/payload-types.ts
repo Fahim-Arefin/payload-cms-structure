@@ -398,7 +398,7 @@ export interface Page {
           sectionId?: string | null;
         };
         /**
-         * Optional transparent pattern over the Dora light. Crop ratio: 4:3.
+         * Optional transparent pattern covering the entire section. Crop ratio: 4:3.
          */
         groovyDesign?: (string | null) | Media;
         groovyDesignOriginal?: (string | null) | Media;
@@ -409,68 +409,50 @@ export interface Page {
          */
         groovyDesignBlurDataURL?: string | null;
         /**
-         * The selected card name and the static word “benefits.” follow this text.
+         * Heading: Title 1 + the selected Card Name (Title 2) + the fixed word benefits. (Title 3).
          */
         title: string;
         description: string;
-        metalCardName: string;
         /**
-         * Transparent card artwork. Crop ratio: 726:1146.
+         * Add any number of cards. Match Card Key to Card Info, Card Privileges and the navbar anchor.
          */
-        metalCardImage?: (string | null) | Media;
-        metalCardImageOriginal?: (string | null) | Media;
-        pendingMetalCardImageOriginal?: string | null;
-        pendingMetalCardImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        metalCardImageBlurDataURL?: string | null;
-        /**
-         * Initial order: 1 = front, 2 = lower right, 3 = lower left. Scrolling cycles through all benefits.
-         */
-        metalBenefits: {
+        cards: {
+          cardName: string;
+          cardKey: string;
           /**
-           * Use the nearly square 2.png reference ratio, 967:975. Recommended size: 1934 x 1950 px. Keep the subject in the upper portion and the lower portion dark for readable text.
+           * Artwork beside the heading. Crop ratio: 726:1146.
            */
-          image: string | Media;
-          imageOriginal?: (string | null) | Media;
-          pendingImageOriginal?: string | null;
-          pendingImageCrop?: string | null;
-          imageBlurDataURL?: string | null;
-          title: string;
-          description: string;
-          infoText: string;
+          cardImage?: (string | null) | Media;
+          cardImageOriginal?: (string | null) | Media;
+          pendingCardImageOriginal?: string | null;
+          pendingCardImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          cardImageBlurDataURL?: string | null;
+          /**
+           * The first benefit starts at the front. Scrolling moves the front benefit to the back of the stack.
+           */
+          items: {
+            /**
+             * Crop ratio: 967:975. The image fills the upper part of the benefit card.
+             */
+            image: string | Media;
+            imageOriginal?: (string | null) | Media;
+            pendingImageOriginal?: string | null;
+            pendingImageCrop?: string | null;
+            imageBlurDataURL?: string | null;
+            title: string;
+            description: string;
+            infoText: string;
+            id?: string | null;
+          }[];
           id?: string | null;
         }[];
-        visaCardName: string;
         /**
-         * Transparent card artwork. Crop ratio: 726:1146.
+         * Optional. Match a card key above, or leave empty to use the first card.
          */
-        visaCardImage?: (string | null) | Media;
-        visaCardImageOriginal?: (string | null) | Media;
-        pendingVisaCardImageOriginal?: string | null;
-        pendingVisaCardImageCrop?: string | null;
-        /**
-         * Auto-generated Base64 blur
-         */
-        visaCardImageBlurDataURL?: string | null;
-        /**
-         * Initial order: 1 = front, 2 = lower right, 3 = lower left. Scrolling cycles through all benefits.
-         */
-        visaBenefits: {
-          /**
-           * Use the nearly square 2.png reference ratio, 967:975. Recommended size: 1934 x 1950 px. Keep the subject in the upper portion and the lower portion dark for readable text.
-           */
-          image: string | Media;
-          imageOriginal?: (string | null) | Media;
-          pendingImageOriginal?: string | null;
-          pendingImageCrop?: string | null;
-          imageBlurDataURL?: string | null;
-          title: string;
-          description: string;
-          infoText: string;
-          id?: string | null;
-        }[];
+        defaultCardKey?: string | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'cardBenefits';
@@ -802,44 +784,32 @@ export interface PagesSelect<T extends boolean = true> {
               groovyDesignBlurDataURL?: T;
               title?: T;
               description?: T;
-              metalCardName?: T;
-              metalCardImage?: T;
-              metalCardImageOriginal?: T;
-              pendingMetalCardImageOriginal?: T;
-              pendingMetalCardImageCrop?: T;
-              metalCardImageBlurDataURL?: T;
-              metalBenefits?:
+              cards?:
                 | T
                 | {
-                    image?: T;
-                    imageOriginal?: T;
-                    pendingImageOriginal?: T;
-                    pendingImageCrop?: T;
-                    imageBlurDataURL?: T;
-                    title?: T;
-                    description?: T;
-                    infoText?: T;
+                    cardName?: T;
+                    cardKey?: T;
+                    cardImage?: T;
+                    cardImageOriginal?: T;
+                    pendingCardImageOriginal?: T;
+                    pendingCardImageCrop?: T;
+                    cardImageBlurDataURL?: T;
+                    items?:
+                      | T
+                      | {
+                          image?: T;
+                          imageOriginal?: T;
+                          pendingImageOriginal?: T;
+                          pendingImageCrop?: T;
+                          imageBlurDataURL?: T;
+                          title?: T;
+                          description?: T;
+                          infoText?: T;
+                          id?: T;
+                        };
                     id?: T;
                   };
-              visaCardName?: T;
-              visaCardImage?: T;
-              visaCardImageOriginal?: T;
-              pendingVisaCardImageOriginal?: T;
-              pendingVisaCardImageCrop?: T;
-              visaCardImageBlurDataURL?: T;
-              visaBenefits?:
-                | T
-                | {
-                    image?: T;
-                    imageOriginal?: T;
-                    pendingImageOriginal?: T;
-                    pendingImageCrop?: T;
-                    imageBlurDataURL?: T;
-                    title?: T;
-                    description?: T;
-                    infoText?: T;
-                    id?: T;
-                  };
+              defaultCardKey?: T;
               id?: T;
               blockName?: T;
             };

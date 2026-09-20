@@ -14,6 +14,7 @@
     "test:deploy": "python3 .github/scripts/test_deploy.py",
     "test:card-privileges": "node --test scripts/card-privileges.test.mjs",
     "test:card-info": "node --test scripts/card-info.test.mjs",
+    "test:card-benefits": "node --test scripts/card-benefits.test.mjs",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "sabuild": "pnpm install --frozen-lockfile && pnpm build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",

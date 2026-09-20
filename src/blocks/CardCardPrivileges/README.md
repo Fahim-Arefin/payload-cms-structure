@@ -14,7 +14,7 @@ Keys are case-sensitive. Keep them stable when changing a card's display name. F
 
 The frontend creates an anchor for each new key at the first Privileges block that uses it. Existing Card Info and section anchors are retained, so matching keys do not create duplicate IDs. A key shared across multiple Privileges blocks selects the matching entry in each block.
 
-Card Info also supports a configurable Cards list. Match its card keys to this block. Card Benefits retains its existing two-card configuration.
+Card Info and Card Benefits also support configurable Cards lists. Match their card keys to this block.
 
 ## Existing data and deployment
 

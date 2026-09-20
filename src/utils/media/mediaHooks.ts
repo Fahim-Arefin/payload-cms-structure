@@ -23,11 +23,9 @@ export const mediaHooks = withMediaLifecycle({
     {
       layoutKey: 'layout',
       blockType: CARD_BENEFITS_SLUG_AND_TAG,
-      mediaFields: ['groovyDesign', 'metalCardImage', 'visaCardImage'],
+      mediaFields: ['groovyDesign'],
       mediaFieldLabels: {
         groovyDesign: 'Groovy Background Image',
-        metalCardImage: 'Metal Card Image',
-        visaCardImage: 'Visa Infinite Card Image',
       },
     },
     // {
@@ -81,14 +79,14 @@ export const mediaHooks = withMediaLifecycle({
       itemLabelField: 'cardName',
       mediaFieldLabels: { cardImage: 'Card Image' },
     },
-    ...['metalBenefits', 'visaBenefits'].map((arrayKey) => ({
+    {
       layoutKey: 'layout',
       blockType: CARD_BENEFITS_SLUG_AND_TAG,
-      arrayKey,
-      mediaFields: ['image'],
-      itemLabelField: 'title',
-      mediaFieldLabels: { image: 'Benefit Image' },
-    })),
+      arrayKey: 'cards',
+      mediaFields: ['cardImage'],
+      itemLabelField: 'cardName',
+      mediaFieldLabels: { cardImage: 'Card Image' },
+    },
     // {
     //   layoutKey: 'layout',
     //   blockType: BASIC_HERO_SLUG_AND_TAG,
@@ -99,6 +97,16 @@ export const mediaHooks = withMediaLifecycle({
 
   // Blocks with nested array (media that inside another array) that contain media fields
   blockGroupFields: [
+    {
+      layoutKey: 'layout',
+      blockType: CARD_BENEFITS_SLUG_AND_TAG,
+      groupKey: 'cards',
+      arrayKey: 'items',
+      mediaFields: ['image'],
+      itemLabelField: 'title',
+      groupItemLabelField: 'cardName',
+      mediaFieldLabels: { image: 'Benefit Image' },
+    },
     {
       layoutKey: 'layout',
       blockType: CARD_PRIVILEGES_SLUG_AND_TAG,
