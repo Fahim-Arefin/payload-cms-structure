@@ -7,16 +7,17 @@ type Props = {
   block: CardInfoBlockType
 
   params: Record<string, string>
+  anchorKeys?: string[]
 }
 
-function CardInfoBlock({ block }: Props) {
+function CardInfoBlock({ block, anchorKeys }: Props) {
   return (
     <WithHashScroller
       id={block?.sectionSettings?.sectionId}
       bgColor={null}
       className="bg-[#1E1E1E] "
     >
-      <CardInfoSection block={block} />
+      <CardInfoSection block={block} anchorKeys={anchorKeys} />
     </WithHashScroller>
   )
 }

@@ -301,14 +301,14 @@ function PrivilegesCarousel({
             <div className="relative isolate mx-auto grid min-h-24 w-fit max-w-full items-center px-10 py-4 sm:min-h-28 lg:min-h-[clamp(5rem,14svh,9rem)] lg:px-16">
               {card?.url && (
                 <div
-                  className={`pointer-events-none absolute top-0 z-0 aspect-[726/1146] w-14 -rotate-[38deg] sm:w-20 lg:-top-2 lg:w-28 ${right ? 'left-2 lg:left-auto lg:right-12' : 'left-2 lg:left-12'}`}
+                  className={`pointer-events-none absolute top-0 z-0 aspect-[726/1146] w-16 -rotate-[38deg] sm:w-20 lg:-top-2 lg:w-20 xl:w-28 ${right ? 'left-6 sm:left-2 lg:left-auto lg:right-12' : 'left-6 sm:left-2 lg:left-12'}`}
                 >
                   <Image
                     src={card.url}
                     alt=""
                     fill
                     unoptimized
-                    sizes="(min-width: 1024px) 112px, 80px"
+                    sizes="(min-width: 1280px) 112px, (min-width: 640px) 80px, 64px"
                     className="object-contain"
                   />
                 </div>

@@ -56,14 +56,8 @@ export const mediaHooks = withMediaLifecycle({
     {
       layoutKey: 'layout',
       blockType: CARD_INFO_SLUG_AND_TAG,
-      mediaFields: [
-        'cardSelector.worldElite.cardImage',
-        'cardSelector.visaInfinite.cardImage',
-        'groovyDesign',
-      ],
+      mediaFields: ['groovyDesign'],
       mediaFieldLabels: {
-        'cardSelector.worldElite.cardImage': 'World Elite Card Image',
-        'cardSelector.visaInfinite.cardImage': 'Visa Infinite Card Image',
         groovyDesign: 'Groovy Background Image',
       },
     },
@@ -71,6 +65,14 @@ export const mediaHooks = withMediaLifecycle({
 
   // Blocks with arrays that contain media fields:
   blockArrayFields: [
+    {
+      layoutKey: 'layout',
+      blockType: CARD_INFO_SLUG_AND_TAG,
+      arrayKey: 'cards',
+      mediaFields: ['cardImage'],
+      itemLabelField: 'cardName',
+      mediaFieldLabels: { cardImage: 'Card Image' },
+    },
     {
       layoutKey: 'layout',
       blockType: CARD_PRIVILEGES_SLUG_AND_TAG,

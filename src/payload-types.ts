@@ -320,7 +320,7 @@ export interface Page {
       }
     | {
         /**
-         * Optional decorative background behind the card information. Crop ratio: 4:3. Recommended size: 1920 x 1440 px. Upload a transparent PNG or WebP. The image covers the section with centered cropping on different screen sizes.
+         * Optional transparent background pattern. Crop ratio: 4:3.
          */
         groovyDesign?: (string | null) | Media;
         groovyDesignOriginal?: (string | null) | Media;
@@ -332,23 +332,11 @@ export interface Page {
         groovyDesignBlurDataURL?: string | null;
         uploadSessionId?: string | null;
         sectionSettings?: {
-          /**
-           * Optional section ID for direct navigation. Example: card-info.
-           */
           sectionId?: string | null;
         };
         content: {
-          /**
-           * Example: Welcome. Max 80 characters.
-           */
           title: string;
-          /**
-           * Max 120 characters.
-           */
           subtitle: string;
-          /**
-           * Main descriptive copy displayed under the title and subtitle.
-           */
           description: {
             root: {
               type: string;
@@ -367,57 +355,39 @@ export interface Page {
         };
         cardSelector: {
           title: string;
-          /**
-           * Used when the URL does not contain either card section ID.
-           */
-          defaultCard: 'worldElite' | 'visaInfinite';
-          worldElite: {
-            cardName: string;
-            /**
-             * Upload the World Elite card image with transparent background. Crop ratio: 726:1146. Recommended size: 726 x 1146 px. Use Zoom and drag to make the card fill the frame consistently for both cards.
-             */
-            cardImage: string | Media;
-            cardImageOriginal?: (string | null) | Media;
-            pendingCardImageOriginal?: string | null;
-            pendingCardImageCrop?: string | null;
-            /**
-             * Auto-generated Base64 blur
-             */
-            cardImageBlurDataURL?: string | null;
-            buttonLabel: string;
-            /**
-             * For this design, select the same page containing this Card Info block.
-             */
-            buttonLink: string | Page;
-            /**
-             * Example: world-elite. This hash activates the World Elite card.
-             */
-            sectionId: string;
-          };
-          visaInfinite: {
-            cardName: string;
-            /**
-             * Upload the Visa Infinite card image with transparent background. Crop ratio: 726:1146. Recommended size: 726 x 1146 px. Use Zoom and drag to make the card fill the frame consistently for both cards.
-             */
-            cardImage: string | Media;
-            cardImageOriginal?: (string | null) | Media;
-            pendingCardImageOriginal?: string | null;
-            pendingCardImageCrop?: string | null;
-            /**
-             * Auto-generated Base64 blur
-             */
-            cardImageBlurDataURL?: string | null;
-            buttonLabel: string;
-            /**
-             * For this design, select the same page containing this Card Info block.
-             */
-            buttonLink: string | Page;
-            /**
-             * Example: visa-infinite. This hash activates the Visa Infinite card.
-             */
-            sectionId: string;
-          };
         };
+        /**
+         * Add any number of cards. Use the same card key in navbar anchors and Card Privileges.
+         */
+        cards: {
+          cardName: string;
+          /**
+           * Unique, case-sensitive key, for example platinum. Set the navbar link to #platinum.
+           */
+          cardKey: string;
+          /**
+           * Transparent card artwork. Crop ratio: 726:1146.
+           */
+          cardImage: string | Media;
+          cardImageOriginal?: (string | null) | Media;
+          pendingCardImageOriginal?: string | null;
+          pendingCardImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          cardImageBlurDataURL?: string | null;
+          buttonLabel: string;
+          /**
+           * Leave empty to select this card on the current page, or choose a destination page.
+           */
+          buttonLink?: (string | null) | Page;
+          legacyCardType?: ('worldElite' | 'visaInfinite') | null;
+          id?: string | null;
+        }[];
+        /**
+         * Optional. Must match a card key above. Leave empty to select the first card.
+         */
+        defaultCardKey?: string | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'cardInfo';
@@ -796,34 +766,23 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     title?: T;
-                    defaultCard?: T;
-                    worldElite?:
-                      | T
-                      | {
-                          cardName?: T;
-                          cardImage?: T;
-                          cardImageOriginal?: T;
-                          pendingCardImageOriginal?: T;
-                          pendingCardImageCrop?: T;
-                          cardImageBlurDataURL?: T;
-                          buttonLabel?: T;
-                          buttonLink?: T;
-                          sectionId?: T;
-                        };
-                    visaInfinite?:
-                      | T
-                      | {
-                          cardName?: T;
-                          cardImage?: T;
-                          cardImageOriginal?: T;
-                          pendingCardImageOriginal?: T;
-                          pendingCardImageCrop?: T;
-                          cardImageBlurDataURL?: T;
-                          buttonLabel?: T;
-                          buttonLink?: T;
-                          sectionId?: T;
-                        };
                   };
+              cards?:
+                | T
+                | {
+                    cardName?: T;
+                    cardKey?: T;
+                    cardImage?: T;
+                    cardImageOriginal?: T;
+                    pendingCardImageOriginal?: T;
+                    pendingCardImageCrop?: T;
+                    cardImageBlurDataURL?: T;
+                    buttonLabel?: T;
+                    buttonLink?: T;
+                    legacyCardType?: T;
+                    id?: T;
+                  };
+              defaultCardKey?: T;
               id?: T;
               blockName?: T;
             };
