@@ -521,7 +521,15 @@ export interface Page {
          * Auto-generated Base64 blur
          */
         groovyDesignBlurDataURL?: string | null;
-        metalCard: {
+        /**
+         * Add any number of cards. A navbar link ending in #card-key selects the matching card. The first card is the default unless a Default Card Key is set.
+         */
+        cards: {
+          cardName: string;
+          /**
+           * Example: platinum. Set the navbar link to #platinum on this page. Keys are case-sensitive and must be unique within this block. For existing cards, use their Card Info section IDs.
+           */
+          cardKey: string;
           /**
            * Desktop layout. Mobile and tablet always show the image above the text.
            */
@@ -554,41 +562,12 @@ export interface Page {
             privilegesImageBlurDataURL?: string | null;
             id?: string | null;
           }[];
-        };
-        visaInfinite: {
-          /**
-           * Desktop layout. Mobile and tablet always show the image above the text.
-           */
-          cardPreference: 'left' | 'right';
-          /**
-           * One card image beside the section title for this group. Crop ratio: 726:1146.
-           */
-          cardImage: string | Media;
-          cardImageOriginal?: (string | null) | Media;
-          pendingCardImageOriginal?: string | null;
-          pendingCardImageCrop?: string | null;
-          /**
-           * Auto-generated Base64 blur
-           */
-          cardImageBlurDataURL?: string | null;
-          items: {
-            sectionTitle: string;
-            sectionSubtitle: string;
-            cardTitle: string;
-            cardSubtitle: string;
-            privilegesName: string;
-            privilegesDescription: string;
-            /**
-             * Crop ratio: 841:412. Recommended size: 1682 x 824 px.
-             */
-            privilegesImage: string | Media;
-            privilegesImageOriginal?: (string | null) | Media;
-            pendingPrivilegesImageOriginal?: string | null;
-            pendingPrivilegesImageCrop?: string | null;
-            privilegesImageBlurDataURL?: string | null;
-            id?: string | null;
-          }[];
-        };
+          id?: string | null;
+        }[];
+        /**
+         * Optional. Must match a Card Key above. Leave empty to show the first card by default.
+         */
+        defaultCardKey?: string | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'cardPrivileges';
@@ -915,9 +894,11 @@ export interface PagesSelect<T extends boolean = true> {
               pendingGroovyDesignOriginal?: T;
               pendingGroovyDesignCrop?: T;
               groovyDesignBlurDataURL?: T;
-              metalCard?:
+              cards?:
                 | T
                 | {
+                    cardName?: T;
+                    cardKey?: T;
                     cardPreference?: T;
                     cardImage?: T;
                     cardImageOriginal?: T;
@@ -940,33 +921,9 @@ export interface PagesSelect<T extends boolean = true> {
                           privilegesImageBlurDataURL?: T;
                           id?: T;
                         };
+                    id?: T;
                   };
-              visaInfinite?:
-                | T
-                | {
-                    cardPreference?: T;
-                    cardImage?: T;
-                    cardImageOriginal?: T;
-                    pendingCardImageOriginal?: T;
-                    pendingCardImageCrop?: T;
-                    cardImageBlurDataURL?: T;
-                    items?:
-                      | T
-                      | {
-                          sectionTitle?: T;
-                          sectionSubtitle?: T;
-                          cardTitle?: T;
-                          cardSubtitle?: T;
-                          privilegesName?: T;
-                          privilegesDescription?: T;
-                          privilegesImage?: T;
-                          privilegesImageOriginal?: T;
-                          pendingPrivilegesImageOriginal?: T;
-                          pendingPrivilegesImageCrop?: T;
-                          privilegesImageBlurDataURL?: T;
-                          id?: T;
-                        };
-                  };
+              defaultCardKey?: T;
               id?: T;
               blockName?: T;
             };

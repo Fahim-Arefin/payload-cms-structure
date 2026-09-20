@@ -45,8 +45,8 @@ const getDefaultOgImage = () => {
 
 // --- Cached fetchers ---------------------------------------------------------
 
-// Invalidate layouts cached before card artwork moved from carousel items to groups.
-const PAGE_LAYOUT_CACHE_VERSION = 'card-privileges-group-image-v1'
+// Invalidate layouts cached before Privileges switched to configurable card entries.
+const PAGE_LAYOUT_CACHE_VERSION = 'card-privileges-dynamic-cards-v2'
 
 const getPageBySlugCached = (slug: string) =>
   unstableCache(

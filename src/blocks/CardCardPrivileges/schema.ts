@@ -6,12 +6,33 @@ import {
 } from '@/lib/constants'
 import { validateSectionIdOptional } from '@/utils/block/fields-validation'
 import { generateArrayImageFields, generateImageFields } from '@/utils/media/fieldGenerators'
+import { validateCardChoices, validateCardKey, validateDefaultCardKey } from './cardSelection'
 
-const cardGroup = (name: string, label: string): Field => ({
-  name,
-  label,
-  type: 'group',
+const cardsField: Field = {
+  name: 'cards',
+  label: 'Cards',
+  type: 'array',
+  required: true,
+  minRows: 1,
+  validate: validateCardChoices,
+  admin: {
+    description:
+      'Add any number of cards. A navbar link ending in #card-key selects the matching card. The first card is the default unless a Default Card Key is set.',
+  },
   fields: [
+    { name: 'cardName', label: 'Card Name', type: 'text', required: true, maxLength: 80 },
+    {
+      name: 'cardKey',
+      label: 'Card Key / Navbar Anchor',
+      type: 'text',
+      required: true,
+      maxLength: 80,
+      validate: validateCardKey,
+      admin: {
+        description:
+          'Example: platinum. Set the navbar link to #platinum on this page. Keys are case-sensitive and must be unique within this block. For existing cards, use their Card Info section IDs.',
+      },
+    },
     {
       name: 'cardPreference',
       label: 'Appearance',
@@ -61,7 +82,7 @@ const cardGroup = (name: string, label: string): Field => ({
       ],
     },
   ],
-})
+}
 
 const CardPrivilegesSchema: Block = {
   slug: CARD_PRIVILEGES_SLUG_AND_TAG,
@@ -94,8 +115,18 @@ const CardPrivilegesSchema: Block = {
       required: false,
       ownerCollection: CARD_PRIVILEGES_SLUG_AND_TAG,
     }),
-    cardGroup('metalCard', 'Metal World Elite Card'),
-    cardGroup('visaInfinite', 'Visa Infinite Card'),
+    cardsField,
+    {
+      name: 'defaultCardKey',
+      label: 'Default Card Key',
+      type: 'text',
+      validate: (value: unknown, { siblingData }: { siblingData?: { cards?: unknown } }) =>
+        validateDefaultCardKey(value, siblingData?.cards),
+      admin: {
+        description:
+          'Optional. Must match a Card Key above. Leave empty to show the first card by default.',
+      },
+    },
   ],
 }
 

@@ -1,18 +1,26 @@
 'use client'
 
 import Image from 'next/image'
-import { useId, useRef, useState } from 'react'
-import { useActiveCard } from '@/contexts/ActiveCardContext'
+import { useEffect, useId, useRef, useState } from 'react'
+import { useBrowserLocation } from '@/hooks/useBrowserLocation'
 import { usePageScroll } from '@/context/SmoothScrollProvider'
 import { gsap, ScrollTrigger, useGSAP } from '@/lib/gsap'
 import type { CardPrivilegesBlockType } from '@/types/payloadCustomTypes'
+import { resolveCardKey } from '../cardSelection'
 
-type CardGroup = CardPrivilegesBlockType['metalCard']
+type CardGroup = CardPrivilegesBlockType['cards'][number]
 
 export default function CardPrivilegesSection({ block }: { block: CardPrivilegesBlockType }) {
-  const { activeCard } = useActiveCard()
-  const group = activeCard === 'visaInfinite' ? block.visaInfinite : block.metalCard
-  return <PrivilegesCarousel key={activeCard} block={block} group={group} />
+  const location = useBrowserLocation()
+  const [previousKey, setPreviousKey] = useState<string | null>(null)
+  const cards = block.cards ?? []
+  const activeKey = resolveCardKey(cards, location?.hash, previousKey, block.defaultCardKey)
+  useEffect(() => {
+    setPreviousKey(activeKey)
+  }, [activeKey])
+  const group = cards.find((card) => card.cardKey === activeKey)
+  if (!group) return null
+  return <PrivilegesCarousel key={group.cardKey} block={block} group={group} />
 }
 
 function PrivilegesCarousel({
@@ -30,11 +38,9 @@ function PrivilegesCarousel({
   const stage = useRef<HTMLDivElement>(null)
   const imageFrame = useRef<HTMLDivElement>(null)
   const panel = useRef<HTMLDivElement>(null)
-  const timeline = useRef<gsap.core.Timeline | null>(null)
   const trigger = useRef<ScrollTrigger | null>(null)
   const controlTween = useRef<gsap.core.Tween | null>(null)
-  const reducedMotion = useRef(false)
-  const selectedIndex = useRef(0)
+  const transitionTo = useRef<((index: number) => void) | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const carouselId = useId()
   const items = group?.items ?? []
@@ -50,8 +56,9 @@ function PrivilegesCarousel({
       media.add(
         { all: '(min-width: 0px)', reduced: '(prefers-reduced-motion: reduce)' },
         (context) => {
+          const element = root.current
+          if (!element) return
           const reduced = Boolean(context.conditions?.reduced)
-          reducedMotion.current = reduced
           const headings = gsap.utils.toArray<HTMLElement>('[data-privilege-heading]', root.current)
           const subtitles = gsap.utils.toArray<HTMLElement>(
             '[data-privilege-card-title]',
@@ -59,16 +66,15 @@ function PrivilegesCarousel({
           )
           const images = gsap.utils.toArray<HTMLElement>('[data-privilege-image]', root.current)
           const copy = gsap.utils.toArray<HTMLElement>('[data-privilege-copy]', root.current)
-          const phase = { value: 0 }
-          // One playhead gives identical results when reversing scroll, jumping with
-          // a dot, or refreshing a pinned section. The red panel and card never move.
-          const render = () => {
-            const from = Math.min(count - 1, Math.floor(phase.value))
-            const progress = gsap.utils.clamp(0, 1, (phase.value - from - 0.2) / 0.8)
-            const mix = progress * progress * (3 - 2 * progress)
+          let settledIndex = 0
+          let isTransitioning = false
+          let synchronizingScroll = false
+          // Animate only the outgoing and incoming slide. Scroll never controls
+          // the playhead, and an in-flight transition cannot be interrupted.
+          const renderTransition = (from: number, to: number, mix: number) => {
             for (let index = 0; index < count; index++) {
-              const incoming = index === from + 1
-              const opacity = index === from ? 1 - mix : incoming ? mix : 0
+              const incoming = index === to
+              const opacity = incoming ? mix : index === from ? 1 - mix : 0
               const y = reduced ? 0 : incoming ? -36 * (1 - mix) : 24 * mix
               gsap.set([headings[index], subtitles[index], copy[index]], { autoAlpha: opacity, y })
               gsap.set(images[index], {
@@ -77,24 +83,43 @@ function PrivilegesCarousel({
                 y: reduced || !incoming ? 0 : -36 * (1 - mix),
               })
             }
-            const next = Math.min(count - 1, from + (mix >= 0.5 ? 1 : 0))
-            if (next !== selectedIndex.current) {
-              selectedIndex.current = next
-              setActiveIndex(next)
+          }
+          renderTransition(0, 0, 1)
+          const switchSlide = (index: number) => {
+            const target = gsap.utils.clamp(0, count - 1, Math.round(index))
+            if (isTransitioning || target === settledIndex) return
+            const from = settledIndex
+            isTransitioning = true
+            const complete = () => {
+              renderTransition(from, target, 1)
+              settledIndex = target
+              setActiveIndex(target)
+              const pinned = trigger.current
+              if (pinned && pinned.scroll() >= pinned.start && pinned.scroll() <= pinned.end) {
+                synchronizingScroll = true
+                // Stay inside the pin until the next gesture exits either end.
+                scrollTo(
+                  pinned.start + 1 + ((pinned.end - pinned.start - 2) * target) / (count - 1),
+                )
+                ScrollTrigger.update()
+                synchronizingScroll = false
+              }
+              isTransitioning = false
+            }
+            if (reduced) {
+              complete()
+            } else {
+              const transition = { mix: 0 }
+              controlTween.current = gsap.to(transition, {
+                mix: 1,
+                duration: 0.55,
+                ease: 'power2.inOut',
+                onUpdate: () => renderTransition(from, target, transition.mix),
+                onComplete: complete,
+              })
             }
           }
-          render()
-          const animation = gsap.timeline({ paused: true }).fromTo(
-            phase,
-            { value: 0 },
-            {
-              value: Math.max(0, count - 1),
-              duration: Math.max(1, count - 1),
-              ease: 'none',
-              onUpdate: render,
-            },
-          )
-          timeline.current = animation
+          transitionTo.current = switchSlide
           const navbarHeight = () =>
             document.querySelector('header.sticky')?.getBoundingClientRect().height ?? 0
           const measure = () => {
@@ -111,6 +136,11 @@ function PrivilegesCarousel({
                 parseFloat(padding.paddingTop) -
                 parseFloat(padding.paddingBottom),
             )
+            // Fill the visible screen below the desktop navbar without pushing
+            // pagination below it. The section background covers this entire area.
+            gsap.set(viewport.current, {
+              minHeight: fullWidth ? available : mobile ? '100vh' : 0,
+            })
             if (fullWidth && imageFrame.current && stage.current && panel.current) {
               // Reserve the actual heading, caption, and pagination heights first.
               // Constrain only the photo height so the layout retains its full width.
@@ -143,13 +173,61 @@ function PrivilegesCarousel({
                 (window.matchMedia('(max-width: 767px)').matches ? 0 : navbarHeight()) +
                 'px',
               end: () => '+=' + (count - 1) * Math.max(500, window.innerHeight * 0.85),
-              animation,
-              scrub: 0.6,
-              snap: { snapTo: 1 / (count - 1), delay: 0.2, duration: { min: 0.15, max: 0.4 } },
+              onUpdate: (self) => {
+                if (!synchronizingScroll) switchSlide(Math.round(self.progress * (count - 1)))
+              },
+              onRefresh: (self) => switchSlide(Math.round(self.progress * (count - 1))),
               anticipatePin: 1,
               invalidateOnRefresh: true,
             })
           }
+          let gestureLocked = false
+          let wheelTimer: ReturnType<typeof setTimeout> | undefined
+          let touchStartY = 0
+          const consumeGesture = (direction: number, event: WheelEvent | TouchEvent) => {
+            const pinned = trigger.current
+            if (!pinned || pinned.scroll() < pinned.start || pinned.scroll() > pinned.end) return
+            const next = settledIndex + direction
+            if (!isTransitioning && !gestureLocked && (next < 0 || next >= count)) return
+            event.preventDefault()
+            event.stopPropagation()
+            if (isTransitioning || gestureLocked) return
+            gestureLocked = true
+            // Stop any remaining smooth-scroll momentum before playing the full transition.
+            synchronizingScroll = true
+            scrollTo(pinned.scroll())
+            ScrollTrigger.update()
+            synchronizingScroll = false
+            switchSlide(next)
+          }
+          const onWheel = (event: WheelEvent) => {
+            if (event.ctrlKey || Math.abs(event.deltaY) < Math.abs(event.deltaX) || !event.deltaY)
+              return
+            consumeGesture(event.deltaY > 0 ? 1 : -1, event)
+            clearTimeout(wheelTimer)
+            wheelTimer = setTimeout(() => {
+              gestureLocked = false
+            }, 180)
+          }
+          const onTouchStart = (event: TouchEvent) => {
+            if (event.touches.length === 1) {
+              touchStartY = event.touches[0].clientY
+              gestureLocked = false
+            }
+          }
+          const onTouchMove = (event: TouchEvent) => {
+            if (event.touches.length !== 1) return
+            const delta = touchStartY - event.touches[0].clientY
+            if (Math.abs(delta) >= 10) consumeGesture(delta > 0 ? 1 : -1, event)
+          }
+          const onTouchEnd = () => {
+            gestureLocked = false
+          }
+          element.addEventListener('wheel', onWheel, { passive: false })
+          element.addEventListener('touchstart', onTouchStart, { passive: true })
+          element.addEventListener('touchmove', onTouchMove, { passive: false })
+          element.addEventListener('touchend', onTouchEnd)
+          element.addEventListener('touchcancel', onTouchEnd)
           let mounted = true
           const refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh())
           document.fonts.ready.then(() => {
@@ -170,30 +248,24 @@ function PrivilegesCarousel({
             controlTween.current?.kill()
             trigger.current?.kill()
             trigger.current = null
-            animation.kill()
-            timeline.current = null
+            clearTimeout(wheelTimer)
+            element.removeEventListener('wheel', onWheel)
+            element.removeEventListener('touchstart', onTouchStart)
+            element.removeEventListener('touchmove', onTouchMove)
+            element.removeEventListener('touchend', onTouchEnd)
+            element.removeEventListener('touchcancel', onTouchEnd)
+            transitionTo.current = null
           }
         },
       )
       return () => media.revert()
     },
-    { scope: root, dependencies: [items, right, count], revertOnUpdate: true },
+    { scope: root, dependencies: [items, right, count, scrollTo], revertOnUpdate: true },
   )
 
   const select = (index: number) => {
     const target = Math.max(0, Math.min(count - 1, index))
-    controlTween.current?.kill()
-    if (trigger.current) {
-      const scroll =
-        trigger.current.start +
-        ((trigger.current.end - trigger.current.start) * target) / (count - 1)
-      scrollTo(scroll)
-      ScrollTrigger.update()
-    } else if (reducedMotion.current) {
-      timeline.current?.time(target, false)
-    } else {
-      controlTween.current = timeline.current?.tweenTo(target, { duration: 0.55 }) ?? null
-    }
+    transitionTo.current?.(target)
   }
 
   if (!count) return null
@@ -223,7 +295,7 @@ function PrivilegesCarousel({
       )}
       <div
         ref={viewport}
-        className="relative flex min-h-screen w-full items-center md:block md:min-h-0"
+        className="relative flex min-h-screen w-full items-center md:block md:min-h-0 lg:flex lg:min-h-screen"
       >
         <div ref={frame} className="relative w-full">
           <div ref={content} id={carouselId} className="relative w-full">
