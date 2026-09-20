@@ -104,3 +104,7 @@ export const CARD_INFO_SLUG_AND_TAG = 'cardInfo'
 export const CARD_BENEFITS_SLUG_AND_TAG = 'cardBenefits'
 export const CARD_INFO_BLOCK_LABEL = 'Card Info'
 export const CARD_INFO_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/card-info-block-thumbnail.webp`
+
+export const CARD_PRIVILEGES_SLUG_AND_TAG = 'cardPrivileges'
+export const CARD_PRIVILEGES_BLOCK_LABEL = 'Card Privileges'
+export const CARD_PRIVILEGES_BLOCK_THUMBNAIL_URL = `${thumbnailFolder}/card-privileges-block-thumbnail.webp`

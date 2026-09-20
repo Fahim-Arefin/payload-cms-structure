@@ -1,6 +1,7 @@
 import {
   CARD_BENEFITS_SLUG_AND_TAG,
   CARD_INFO_SLUG_AND_TAG,
+  CARD_PRIVILEGES_SLUG_AND_TAG,
   INTRO_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { Page } from '@/payload-types'
@@ -20,5 +21,11 @@ export type CardInfoBlockType = Extract<
   Page['layout'][number],
   {
     blockType: typeof CARD_INFO_SLUG_AND_TAG
+  }
+>
+export type CardPrivilegesBlockType = Extract<
+  Page['layout'][number],
+  {
+    blockType: typeof CARD_PRIVILEGES_SLUG_AND_TAG
   }
 >

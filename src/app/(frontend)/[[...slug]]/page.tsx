@@ -45,6 +45,9 @@ const getDefaultOgImage = () => {
 
 // --- Cached fetchers ---------------------------------------------------------
 
+// Invalidate layouts cached before card artwork moved from carousel items to groups.
+const PAGE_LAYOUT_CACHE_VERSION = 'card-privileges-group-image-v1'
+
 const getPageBySlugCached = (slug: string) =>
   unstableCache(
     async () => {
@@ -67,7 +70,7 @@ const getPageBySlugCached = (slug: string) =>
 
       return page ? stripButtonLinksToSlug(page) : null
     },
-    [`page:${slug}`],
+    [`page:${slug}`, PAGE_LAYOUT_CACHE_VERSION],
     {
       tags: [pageTag(slug)],
     },
@@ -89,7 +92,7 @@ const getPatternPagesCached = unstableCache(
 
     return sanitized.filter((p: any) => typeof p.slug === 'string' && p.slug.includes(':'))
   },
-  ['pages:patterns'],
+  ['pages:patterns', PAGE_LAYOUT_CACHE_VERSION],
   {
     tags: [pagesListTag],
   },

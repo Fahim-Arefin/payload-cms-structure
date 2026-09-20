@@ -505,6 +505,94 @@ export interface Page {
         blockName?: string | null;
         blockType: 'cardBenefits';
       }
+    | {
+        uploadSessionId?: string | null;
+        sectionSettings?: {
+          sectionId?: string | null;
+        };
+        /**
+         * Optional transparent background pattern, like Card Info. Crop ratio: 4:3.
+         */
+        groovyDesign?: (string | null) | Media;
+        groovyDesignOriginal?: (string | null) | Media;
+        pendingGroovyDesignOriginal?: string | null;
+        pendingGroovyDesignCrop?: string | null;
+        /**
+         * Auto-generated Base64 blur
+         */
+        groovyDesignBlurDataURL?: string | null;
+        metalCard: {
+          /**
+           * Desktop layout. Mobile and tablet always show the image above the text.
+           */
+          cardPreference: 'left' | 'right';
+          /**
+           * One card image beside the section title for this group. Crop ratio: 726:1146.
+           */
+          cardImage: string | Media;
+          cardImageOriginal?: (string | null) | Media;
+          pendingCardImageOriginal?: string | null;
+          pendingCardImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          cardImageBlurDataURL?: string | null;
+          items: {
+            sectionTitle: string;
+            sectionSubtitle: string;
+            cardTitle: string;
+            cardSubtitle: string;
+            privilegesName: string;
+            privilegesDescription: string;
+            /**
+             * Crop ratio: 841:412. Recommended size: 1682 x 824 px.
+             */
+            privilegesImage: string | Media;
+            privilegesImageOriginal?: (string | null) | Media;
+            pendingPrivilegesImageOriginal?: string | null;
+            pendingPrivilegesImageCrop?: string | null;
+            privilegesImageBlurDataURL?: string | null;
+            id?: string | null;
+          }[];
+        };
+        visaInfinite: {
+          /**
+           * Desktop layout. Mobile and tablet always show the image above the text.
+           */
+          cardPreference: 'left' | 'right';
+          /**
+           * One card image beside the section title for this group. Crop ratio: 726:1146.
+           */
+          cardImage: string | Media;
+          cardImageOriginal?: (string | null) | Media;
+          pendingCardImageOriginal?: string | null;
+          pendingCardImageCrop?: string | null;
+          /**
+           * Auto-generated Base64 blur
+           */
+          cardImageBlurDataURL?: string | null;
+          items: {
+            sectionTitle: string;
+            sectionSubtitle: string;
+            cardTitle: string;
+            cardSubtitle: string;
+            privilegesName: string;
+            privilegesDescription: string;
+            /**
+             * Crop ratio: 841:412. Recommended size: 1682 x 824 px.
+             */
+            privilegesImage: string | Media;
+            privilegesImageOriginal?: (string | null) | Media;
+            pendingPrivilegesImageOriginal?: string | null;
+            pendingPrivilegesImageCrop?: string | null;
+            privilegesImageBlurDataURL?: string | null;
+            id?: string | null;
+          }[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cardPrivileges';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -809,6 +897,75 @@ export interface PagesSelect<T extends boolean = true> {
                     description?: T;
                     infoText?: T;
                     id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cardPrivileges?:
+          | T
+          | {
+              uploadSessionId?: T;
+              sectionSettings?:
+                | T
+                | {
+                    sectionId?: T;
+                  };
+              groovyDesign?: T;
+              groovyDesignOriginal?: T;
+              pendingGroovyDesignOriginal?: T;
+              pendingGroovyDesignCrop?: T;
+              groovyDesignBlurDataURL?: T;
+              metalCard?:
+                | T
+                | {
+                    cardPreference?: T;
+                    cardImage?: T;
+                    cardImageOriginal?: T;
+                    pendingCardImageOriginal?: T;
+                    pendingCardImageCrop?: T;
+                    cardImageBlurDataURL?: T;
+                    items?:
+                      | T
+                      | {
+                          sectionTitle?: T;
+                          sectionSubtitle?: T;
+                          cardTitle?: T;
+                          cardSubtitle?: T;
+                          privilegesName?: T;
+                          privilegesDescription?: T;
+                          privilegesImage?: T;
+                          privilegesImageOriginal?: T;
+                          pendingPrivilegesImageOriginal?: T;
+                          pendingPrivilegesImageCrop?: T;
+                          privilegesImageBlurDataURL?: T;
+                          id?: T;
+                        };
+                  };
+              visaInfinite?:
+                | T
+                | {
+                    cardPreference?: T;
+                    cardImage?: T;
+                    cardImageOriginal?: T;
+                    pendingCardImageOriginal?: T;
+                    pendingCardImageCrop?: T;
+                    cardImageBlurDataURL?: T;
+                    items?:
+                      | T
+                      | {
+                          sectionTitle?: T;
+                          sectionSubtitle?: T;
+                          cardTitle?: T;
+                          cardSubtitle?: T;
+                          privilegesName?: T;
+                          privilegesDescription?: T;
+                          privilegesImage?: T;
+                          privilegesImageOriginal?: T;
+                          pendingPrivilegesImageOriginal?: T;
+                          pendingPrivilegesImageCrop?: T;
+                          privilegesImageBlurDataURL?: T;
+                          id?: T;
+                        };
                   };
               id?: T;
               blockName?: T;

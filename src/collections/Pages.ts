@@ -1,4 +1,5 @@
 import CardInfoSchema from '@/blocks/CardInfo/schema'
+import CardPrivilegesSchema from '@/blocks/CardCardPrivileges/schema'
 import CardBenefitsSchema from '@/blocks/CardBenefits/schema'
 import IntroHeroSchema from '@/blocks/IntroHeroBlock/schema'
 import { APIError } from '@/lib/apiError'
@@ -171,7 +172,7 @@ export const Pages: CollectionConfig = {
       label: 'Layout',
       type: 'blocks',
       required: true,
-      blocks: [IntroHeroSchema, CardInfoSchema, CardBenefitsSchema],
+      blocks: [IntroHeroSchema, CardInfoSchema, CardBenefitsSchema, CardPrivilegesSchema],
     },
   ],
   access: {

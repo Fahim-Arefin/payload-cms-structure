@@ -1,6 +1,7 @@
 import {
   CARD_BENEFITS_SLUG_AND_TAG,
   CARD_INFO_SLUG_AND_TAG,
+  CARD_PRIVILEGES_SLUG_AND_TAG,
   INTRO_HERO_SLUG_AND_TAG,
 } from '@/lib/constants'
 import { triggerMediaTemporaryPurge } from './triggerMediaTemporaryPurge'
@@ -11,6 +12,16 @@ export const mediaHooks = withMediaLifecycle({
 
   // Blocks with a media field on the block row itself:
   blockSimpleFields: [
+    {
+      layoutKey: 'layout',
+      blockType: CARD_PRIVILEGES_SLUG_AND_TAG,
+      mediaFields: ['groovyDesign', 'metalCard.cardImage', 'visaInfinite.cardImage'],
+      mediaFieldLabels: {
+        groovyDesign: 'Groovy Background Image',
+        'metalCard.cardImage': 'Metal Card Image',
+        'visaInfinite.cardImage': 'Visa Infinite Card Image',
+      },
+    },
     {
       layoutKey: 'layout',
       blockType: CARD_BENEFITS_SLUG_AND_TAG,
@@ -80,6 +91,15 @@ export const mediaHooks = withMediaLifecycle({
 
   // Blocks with nested array (media that inside another array) that contain media fields
   blockGroupFields: [
+    ...['metalCard', 'visaInfinite'].map((groupKey) => ({
+      layoutKey: 'layout',
+      blockType: CARD_PRIVILEGES_SLUG_AND_TAG,
+      groupKey,
+      arrayKey: 'items',
+      mediaFields: ['privilegesImage'],
+      itemLabelField: 'privilegesName',
+      mediaFieldLabels: { privilegesImage: 'Privileges Image' },
+    })),
     // sections[].insuranceCardData[] has a media field: image (without group)
     // {
     //   layoutKey: 'layout',

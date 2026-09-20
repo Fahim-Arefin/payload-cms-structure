@@ -3,7 +3,15 @@
 import { gsap, ScrollTrigger } from '@/lib/gsap'
 import Lenis from 'lenis'
 import { usePathname, useSearchParams } from 'next/navigation'
-import React, { useEffect, useRef } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useRef } from 'react'
+
+const PageScrollContext = createContext<(top: number) => void>((top) => {
+  window.scrollTo({ top, behavior: 'instant' })
+})
+
+export function usePageScroll() {
+  return useContext(PageScrollContext)
+}
 
 type Props = {
   children: React.ReactNode
@@ -14,6 +22,15 @@ function SmoothScrollProvider({ children }: Props) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const previousPathnameRef = useRef<string | null>(null)
+  const scrollTo = useCallback((top: number) => {
+    const lenis = lenisRef.current
+    if (lenis) {
+      lenis.resize()
+      lenis.scrollTo(top, { immediate: true, force: true })
+    } else {
+      window.scrollTo({ top, behavior: 'instant' })
+    }
+  }, [])
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -107,7 +124,7 @@ function SmoothScrollProvider({ children }: Props) {
     }
   }, [pathname, searchParams])
 
-  return <>{children}</>
+  return <PageScrollContext.Provider value={scrollTo}>{children}</PageScrollContext.Provider>
 }
 
 export default SmoothScrollProvider
