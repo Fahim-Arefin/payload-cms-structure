@@ -34,6 +34,15 @@ const cardsField: Field = {
       },
     },
     {
+      name: 'showLight',
+      label: 'Show Light',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description: 'Show the decorative background light when this card is selected.',
+      },
+    },
+    {
       name: 'cardPreference',
       label: 'Appearance',
       type: 'select',
@@ -56,6 +65,8 @@ const cardsField: Field = {
       maxKB: 800,
       ownerCollection: CARD_PRIVILEGES_SLUG_AND_TAG,
     }),
+    { name: 'sectionTitle', type: 'text', required: true, maxLength: 80 },
+    { name: 'sectionSubtitle', type: 'text', required: true, maxLength: 60 },
     {
       name: 'items',
       label: 'Carousel Items',
@@ -64,8 +75,6 @@ const cardsField: Field = {
       minRows: 1,
       maxRows: 12,
       fields: [
-        { name: 'sectionTitle', type: 'text', required: true, maxLength: 80 },
-        { name: 'sectionSubtitle', type: 'text', required: true, maxLength: 60 },
         { name: 'cardTitle', type: 'text', required: true, maxLength: 80 },
         { name: 'cardSubtitle', type: 'text', required: true, maxLength: 120 },
         { name: 'privilegesName', type: 'text', required: true, maxLength: 90 },

@@ -59,7 +59,6 @@ function PrivilegesCarousel({
           const element = root.current
           if (!element) return
           const reduced = Boolean(context.conditions?.reduced)
-          const headings = gsap.utils.toArray<HTMLElement>('[data-privilege-heading]', root.current)
           const subtitles = gsap.utils.toArray<HTMLElement>(
             '[data-privilege-card-title]',
             root.current,
@@ -76,7 +75,7 @@ function PrivilegesCarousel({
               const incoming = index === to
               const opacity = incoming ? mix : index === from ? 1 - mix : 0
               const y = reduced ? 0 : incoming ? -36 * (1 - mix) : 24 * mix
-              gsap.set([headings[index], subtitles[index], copy[index]], { autoAlpha: opacity, y })
+              gsap.set([subtitles[index], copy[index]], { autoAlpha: opacity, y })
               gsap.set(images[index], {
                 autoAlpha: opacity,
                 xPercent: reduced || incoming ? 0 : (right ? -35 : 35) * mix,
@@ -281,7 +280,7 @@ function PrivilegesCarousel({
           select(activeIndex + (event.key === 'ArrowRight' ? 1 : -1))
         }
       }}
-      className="container-padding-x relative isolate overflow-hidden bg-[#1E1E1E] text-white md:container-padding lg:!py-6"
+      className={`container-padding-x relative isolate overflow-hidden bg-[#1E1E1E] text-white md:container-padding lg:!py-6 ${group.showLight ? "bg-[url('/assets/images/dora3.png')] bg-[length:100%_100%] bg-center bg-no-repeat bg-origin-border bg-blend-screen" : ''}`}
     >
       {background?.url && (
         <Image
@@ -314,21 +313,14 @@ function PrivilegesCarousel({
                   />
                 </div>
               )}
-              {items.map((item, index) => (
-                <div
-                  key={item.id ?? index}
-                  data-privilege-heading
-                  aria-hidden={index !== activeIndex}
-                  className={`relative z-10 col-start-1 row-start-1 text-center ${index ? 'invisible' : ''}`}
-                >
-                  <h2 className="font-exo-2 text-[clamp(1.5rem,2.8vw,3.25rem)] font-bold uppercase leading-tight text-[#F8F8F9]">
-                    {item.sectionTitle}{' '}
-                    <span className="inline-block font-baltiholm text-[1.35em] font-normal normal-case text-[#E5262D]">
-                      {item.sectionSubtitle}
-                    </span>
-                  </h2>
-                </div>
-              ))}
+              <div className="relative z-10 text-center">
+                <h2 className="font-exo-2 text-[clamp(1.5rem,2.8vw,3.25rem)] font-bold uppercase leading-tight text-[#F8F8F9]">
+                  {group.sectionTitle}{' '}
+                  <span className="inline-block font-baltiholm text-[1.35em] font-normal normal-case text-[#E5262D]">
+                    {group.sectionSubtitle}
+                  </span>
+                </h2>
+              </div>
             </div>
             <div
               className={`mb-5 mt-4 grid text-center lg:my-3 ${right ? 'lg:text-right' : 'lg:text-left'}`}

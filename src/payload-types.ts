@@ -531,6 +531,10 @@ export interface Page {
            */
           cardKey: string;
           /**
+           * Show the decorative background light when this card is selected.
+           */
+          showLight?: boolean | null;
+          /**
            * Desktop layout. Mobile and tablet always show the image above the text.
            */
           cardPreference: 'left' | 'right';
@@ -545,9 +549,9 @@ export interface Page {
            * Auto-generated Base64 blur
            */
           cardImageBlurDataURL?: string | null;
+          sectionTitle: string;
+          sectionSubtitle: string;
           items: {
-            sectionTitle: string;
-            sectionSubtitle: string;
             cardTitle: string;
             cardSubtitle: string;
             privilegesName: string;
@@ -899,17 +903,18 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     cardName?: T;
                     cardKey?: T;
+                    showLight?: T;
                     cardPreference?: T;
                     cardImage?: T;
                     cardImageOriginal?: T;
                     pendingCardImageOriginal?: T;
                     pendingCardImageCrop?: T;
                     cardImageBlurDataURL?: T;
+                    sectionTitle?: T;
+                    sectionSubtitle?: T;
                     items?:
                       | T
                       | {
-                          sectionTitle?: T;
-                          sectionSubtitle?: T;
                           cardTitle?: T;
                           cardSubtitle?: T;
                           privilegesName?: T;

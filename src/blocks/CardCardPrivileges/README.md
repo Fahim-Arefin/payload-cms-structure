@@ -4,7 +4,7 @@
 
 1. Open the page in Payload and expand its **Card Privileges** block.
 2. Add a row under **Cards**. Enter a **Card Name** and a unique **Card Key / Navbar Anchor**, such as `platinum`.
-3. Choose the card image and appearance, then add the carousel items.
+3. Choose the card image and appearance, and enter the section title and subtitle beside the card image fields. These stay static while scrolling and change only when selecting another card. Then add the carousel items.
 4. Set the navbar link to this page with the same anchor, for example `/#platinum`. Do not include `#` in the card key itself.
 5. Save and publish the page and navbar changes.
 
@@ -26,6 +26,15 @@ node scripts/migrate-card-privileges-cards.mjs --apply
 ```
 
 The first command previews the work. The second adds the Cards entries to pages and saved versions, preserving images, carousel items, Card Info anchor keys, and default selection. Original groups remain in the database for recovery. Re-running the migration leaves existing Cards arrays untouched.
+
+For existing Cards arrays, move the first item's section heading into the card-level fields:
+
+```sh
+node scripts/migrate-card-privileges-headings.mjs
+node scripts/migrate-card-privileges-headings.mjs --apply
+```
+
+This preserves existing card-level headings and retains legacy item headings in the database for recovery. Run it after the Cards migration above on other environments.
 
 ## Validation
 
